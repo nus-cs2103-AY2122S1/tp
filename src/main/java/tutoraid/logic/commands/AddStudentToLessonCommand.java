@@ -30,7 +30,7 @@ public class AddStudentToLessonCommand extends AddCommand {
                     + "\n%1$s %2$s %3$s1 %4$s2",
             COMMAND_WORD, COMMAND_FLAG, PREFIX_STUDENT, PREFIX_LESSON);
 
-    public static final String MESSAGE_SUCCESS = "Added student:\n%1$s\nTo this lesson:\n%2$s";
+    public static final String MESSAGE_SUCCESS = "Successfully removed %s to %s.";
 
     private final Index studentIndex;
     private final Index lessonIndex;
