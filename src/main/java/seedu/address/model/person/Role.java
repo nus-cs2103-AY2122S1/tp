@@ -38,7 +38,8 @@ public enum Role implements Field {
     public static Role translateStringToRole(String string) throws IllegalArgumentException {
         Role result = translateStringToRoleWithNoRole(string);
         if (result.equals(Role.NO_ROLE)) {
-            throw new IllegalArgumentException("String provided does not match any of the valid roles. " + MESSAGE_CONSTRAINTS);
+            throw new IllegalArgumentException("String provided does not match any of the valid roles. "
+                    + MESSAGE_CONSTRAINTS);
         }
         return result;
     }
