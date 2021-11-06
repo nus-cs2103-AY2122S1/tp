@@ -453,7 +453,13 @@ Format: `mark INDEX…​`
 * You cannot mark an applicant that has status "Done".
 
 Examples:
-* After using the command `list`, `mark 2` marks the 2nd applicant listed in RecruitIn as "Done".
+* After using the command `list`, `mark 1` marks the 1st applicant listed in RecruitIn as "Done".
+  
+
+  Before: ![images](images/MarkBefore.png)
+
+  After: 
+
 * After using the command `list`, `mark 2 4 6` marks the 2nd, 4th and 6th applicant listed in RecruitIn as "Done".
 * After using the command `find n/John`, `mark 1` marks the 1st applicant listed in RecruitIn's results of the `find` command.
 
@@ -475,7 +481,7 @@ Format: `unmark INDEX…​`
 * You cannot unmark an applicant that has status "Not Done".
 
 Examples:
-* After using the command `list`, `ummark 2` unmarks the 2nd applicant listed in RecruitIn to "Not Done".
+* After using the command `list`, `ummark 1` unmarks the 1st applicant listed in RecruitIn to "Not Done".
 * After using the command `list`, `unmark 2 4 6` unmarks the 2nd, 4th and 6th applicant listed in RecruitIn to "Not Done".
 * After using the command `find n/John`, `unmark 1` unmarks the 1st applicant listed in RecruitIn's results of the `find` command.
 
