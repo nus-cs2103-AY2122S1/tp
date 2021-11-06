@@ -37,7 +37,6 @@ public class RevenueCommandParser implements Parser<RevenueCommand> {
             try {
                 return ParserUtil.parseRevenue(s);
             } catch (ParseException e) {
-                e.printStackTrace();
                 return null;
             }
         }).orElseThrow(() -> new ParseException(ILLEGAL_REVENUE_MESSAGE));
