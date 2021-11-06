@@ -53,15 +53,15 @@ This User Guide is to be used by any AniList user. No technical background is re
 
 ---
 
-![](images/UG-images/base.png)
+![](images/UG-images/charlottetheme.JPG)
 
 ___
 
 ## GUI Breakdown
 
-![](images/UG-images/gui.PNG)
+![](images/UG-images/gui.JPG)
 
-1. **Menu Bar:** Here the user have the option to Exit the application or to change the application theme.
+1. **Menu Bar:** Here the user have the option to to change the application theme.
 
 2. **Tabs Bar:** Here the user can change the tabs to view their anime list filtered based on their watch status. (watching, towatch, finished)
 
@@ -82,11 +82,11 @@ AniList currently supports some hotkeys to allow for ease of use for CLI users.
 
 Charlotte Theme            |  Dark Theme
 :-------------------------:|:-------------------------:
-![](images/UG-images/charlottetheme.png)  |  ![](images/UG-images/darktheme.png)
+![](images/UG-images/charlottetheme.JPG)  |  ![](images/UG-images/darktheme.jpg)
 
 Squid Girl Theme           |  Wonder Egg Priority Theme
 :-------------------------:|:-------------------------:
-![](images/UG-images/squidtheme.png)  |  ![](images/UG-images/eggtheme.png)
+![](images/UG-images/squidtheme.JPG)  |  ![](images/UG-images/eggtheme.JPG)
 
 ___
 
@@ -95,11 +95,11 @@ ___
 
 All Tab  |  Watching Tab
 :-------------------------:|:-------------------------:
-![](images/UG-images/all.png)  |  ![](images/UG-images/watching.png)
+![](images/UG-images/all.JPG)  |  ![](images/UG-images/watching.jpg)
 
 To Watch Tab           |  Finished Tab
 :-------------------------:|:-------------------------:
-![](images/UG-images/towatch.png)  |  ![](images/UG-images/finished.png)
+![](images/UG-images/towatch.JPG)  |  ![](images/UG-images/finished.jpg)
 
 
 ___
@@ -158,7 +158,7 @@ Example usages:
 
 </div>
 
-![](images/UG-images/addcommand.png)
+![](images/UG-images/addcommand.JPG)
 
 1. Details of the added anime is shown in the Command Result Panel.
 2. The new added anime is added to the list in the Anime List Panel.
@@ -181,7 +181,7 @@ Example usages:
 
 </div>
 
-![](images/UG-images/delete.png)
+![](images/UG-images/delete.JPG)
 1. Details of the deleted anime is shown in the Command Results Panel.
 
 ___
@@ -206,7 +206,7 @@ Example usages:
 
 </div>
 
-![](images/UG-images/updatepisode.png)
+![](images/UG-images/updatepisode.JPG)
 1. Details of the updated anime is shown in the Command Results Panel.
 2. The episode number of the chosen anime is updated to the specified episode number.
 
@@ -233,7 +233,7 @@ Example usages:
 
 </div>
 
-![](images/UG-images/updatestatus.png)
+![](images/UG-images/updatestatus.JPG)
 1. Details of the updated anime is shown in the Command Results Panel.
 2. The watch status of the chosen anime is updated to the specified watch status.
 
@@ -258,7 +258,7 @@ Example usages:
 
 </div>
 
-![](images/UG-images/rename.png)
+![](images/UG-images/rename.JPG)
 1. Details of the updated anime is shown in the Command Results Panel.
 2. The name of the chosen anime is updated to the specified name.
 
@@ -289,7 +289,7 @@ Example usages:
 
 </div>
 
-![](images/UG-images/genreadd.png)
+![](images/UG-images/genreadd.JPG)
 1. Details of the updated anime is shown in the Command Results Panel.
 2. The genres tagged to the chosen anime is updated based on the addition or deletion of genre.
 
@@ -308,7 +308,7 @@ Example usages:
 
 </div>
 
-![](images/UG-images/genrelist.png)
+![](images/UG-images/genrelist.JPG)
 1. The list of all available genres is shown in the Command Results Panel.
 
 ___
@@ -336,7 +336,7 @@ Example usages:
 
 </div>
 
-![](images/UG-images/list.png)
+![](images/UG-images/list.JPG)
 1. The number of anime(s) listed in the current tab is shown in the Command Results Panel.
 2. The tab bar changes to show the current tab the user is on.
 
@@ -359,7 +359,7 @@ Example usages:
 
 </div>
 
-![](images/UG-images/clear.png)
+![](images/UG-images/clear.JPG)
 1. A success message showing all anime(s) has been cleared is shown on the Command Results Panel.
 2. The Anime List Panel is empty as all anime(s) have been cleared.
 
@@ -386,17 +386,20 @@ Example Usages:
 all anime with comedy genre.
 </div>
 
-**ADD IMAGE HERE**
+![](images/UG-images/find.JPG)
 
 ___
 
 ### Viewing user statistics: `stats`
 
-Displays a pop-up window that shows the statistical breakdown of anime(s) in AniList
+Displays a pop-up window that shows the statistical breakdown of anime(s) in AniList.
+User may exit the stats window by either clicking on the `X` button on the top right or by pressing 
+`CTRL-Q`
 
 Format: `stats`
 
-**ADD IMAGE HERE**
+![](images/UG-images/stats1.JPG)
+![](images/UG-images/stats2.JPG)
 
 ___
 
@@ -412,7 +415,7 @@ Example usages:
 
 </div>
 
-![](images/UG-images/help.png)
+![](images/UG-images/help.JPG)
 1. A list of all supported commands is shown in the Command Results Panel.
 2. A link to the User Guide is provided.
 ___

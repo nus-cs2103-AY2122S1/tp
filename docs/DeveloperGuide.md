@@ -181,6 +181,16 @@ The user can also use the hotkeys `CTRL-S` and `CTRL-D` to cycle between tabs.
     * Pros: User will not have to input a command or use hotkeys to switch back to his previous tab.
     * Cons: Hard to implement and test.
 
+**Aspect: Determining whether there should be a list maintained per tab or all tabs take reference from a single list**
+* **Alternative 1 (current choice):** All the tabs will take reference to the same `ObservableList`.
+  * Pros: Minimal complications to rendering lifecycle. Easy updating of list as there is no need to sync between lists as there is only one list.
+  * Cons: The ObservableList needs to be filtered with every tab switch. This may pose as a performance issue as tab switching is expected 
+to be instantaneous. With a large list of animes, filtering can take a significant amount of time.
+
+* **Alternative 2:** Each tab will have its own `ObservableList`.
+  * Pros: Switching through tabs will not require the list to be re-filtered and re-rendered. This will increase the performance
+for tab switching.
+  * Cons: Will cause complications due to changing anime watch status, adding and deleting anime, and keeping sync with the master list.
 
 ### Clear Feature
 
@@ -245,7 +255,50 @@ The proposed theme mechanism is simply done by completely altering the base css 
 If `preferences.json` is empty or the theme css file given is not valid, the default theme will be used instead and
 will replace the invalid css file specification in `preferences.json`.
 
-### \[Proposed\] Genre adding feature
+**Current Implementation**
+
+CSS files have been optimized for theme creation. Devs are only needed to edit the list of colors at the top of the CSS file
+and the source path for the background image.
+* Pros: More advanced users may be able to create their own CSS files by setting the color and changing the source of
+the background image.
+* Cons: There is a limited choice of color blocking. The bulk of the theming is made from a specified color shading.
+
+
+### [/Proposed] Theme adding feature
+#### Current Implementation
+
+Currently, users are allowed to switch between pre-defined and pre-made themes that are provided by the application. However, we 
+currently only support a limited number of themes which may not fit the user's preferences. Users are currently not allowed to 
+create their own themes even if they create their own CSS files. The only way to define their own theme would be to overwrite 
+current CSS files and replace the theme completely.
+
+#### Proposed Implementation
+We can create an interface to allow users to create their own themes and their own CSS files. The CSS files has been refactored
+for easy creation of new themes.
+<br/><br/>
+User only needs to provide the following:
+* Theme Name
+* Background image 
+* Primary color
+* Secondary color
+* Tertiary color
+
+With this information, it would be possible to create a new theme that is custom to the user's preference.
+
+Given below is an MSS of an example usage scenario of a user creating their own theme.
+
+**Use case: UCP1-Add user defined Theme**
+
+**MSS**
+
+1. User requests to add theme to the application
+2. User provides theme name, background image and color blocking
+3. New theme is created
+4. Application switches to the new theme Use case ends
+
+
+
+### [/Proposed] Genre adding feature
 
 #### Current Implementation
 
@@ -267,9 +320,9 @@ We can allow the user to modify the `GenreList` by adding both a add `Genre` com
 * Cons: `Genre` must be synced in multiple locations, and deletion of a `Genre` from the `GenreList` would require the system to remove the `Genre` from all tagged `Animes`.
 
 
-Given below is a MSS of an example usage scenario of a user adding a `Genre` to an `Anime`.
+Given below is an MSS of an example usage scenario of a user adding a `Genre` to an `Anime`.
 
-**Use case: UCP1 - Add Genre to the GenreList**
+**Use case: UCP2 - Add Genre to the GenreList**
 
 **MSS**
 1.  User requests to add a genre to the genre list
@@ -750,14 +803,14 @@ testers are expected to do more *exploratory* testing.
 
     1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
     1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+3. _{ more test cases …​ }_
 
 ### Deleting an anime
 
