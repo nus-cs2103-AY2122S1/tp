@@ -46,4 +46,5 @@ public class JsonSerializableTransactionListTest {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }
     }
+
 }
