@@ -5,12 +5,18 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_MEMBERS;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalEvents.ICEBREAKER;
+import static seedu.address.testutil.TypicalEvents.PERFORMANCE;
 import static seedu.address.testutil.TypicalMembers.ALICE;
 import static seedu.address.testutil.TypicalMembers.BENSON;
+import static seedu.address.testutil.TypicalMembers.CARL;
+import static seedu.address.testutil.TypicalTasks.PROJECT;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -81,12 +87,65 @@ public class ModelManagerTest {
     @Test
     public void hasMember_memberNotInAddressBook_returnsFalse() {
         assertFalse(modelManager.hasMember(ALICE));
+
+        modelManager.addMember(ALICE);
+        modelManager.deleteMember(ALICE);
+        assertFalse(modelManager.hasMember(ALICE));
     }
 
     @Test
     public void hasMember_memberInAddressBook_returnsTrue() {
         modelManager.addMember(ALICE);
         assertTrue(modelManager.hasMember(ALICE));
+    }
+
+    @Test
+    public void hasEvent_eventNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasEvent(ICEBREAKER));
+
+        modelManager.addEvent(ICEBREAKER);
+        modelManager.setCurrentEvent(ICEBREAKER);
+        modelManager.deleteEvent(ICEBREAKER);
+        assertFalse(modelManager.hasEvent(ICEBREAKER));
+    }
+
+    @Test
+    public void hasEvent_eventEditedInAddressBook() {
+        modelManager.addEvent(ICEBREAKER);
+        modelManager.setEvent(ICEBREAKER, PERFORMANCE);
+        assertFalse(modelManager.hasEvent(ICEBREAKER));
+        assertTrue(modelManager.hasEvent(PERFORMANCE));
+    }
+
+    @Test
+    public void hasEvent_eventInAddressBook_returnsTrue() {
+        modelManager.addEvent(ICEBREAKER);
+        assertTrue(modelManager.hasEvent(ICEBREAKER));
+    }
+
+    @Test
+    public void hasEventMember_eventMemberInAddressBook_returnsTrue() {
+        modelManager.addEvent(ICEBREAKER);
+        Set<Member> memberSet = new HashSet<>();
+        memberSet.add(ALICE);
+        modelManager.addEventMembers(ICEBREAKER, memberSet);
+        assertTrue(modelManager.hasEvent(ICEBREAKER));
+    }
+
+    @Test
+    public void hasTask_taskNotInAddressBook_returnsFalse() {
+        modelManager.addMember(CARL);
+        assertFalse(modelManager.hasTask(CARL, PROJECT));
+
+        modelManager.addTask(CARL, PROJECT);
+        modelManager.deleteTask(PROJECT);
+        assertFalse(modelManager.hasTask(CARL, PROJECT));
+    }
+
+    @Test
+    public void hasTask_taskInAddressBook_returnsTrue() {
+        modelManager.addMember(ALICE);
+        assertTrue(modelManager.hasTask(ALICE, PROJECT));
     }
 
     @Test
@@ -97,6 +156,12 @@ public class ModelManagerTest {
     @Test
     public void getFilteredTaskList_withoutSelectedMember_returnsEmptyList() {
         assertTrue(modelManager.getFilteredTaskList().isEmpty());
+    }
+
+    @Test
+    public void getFilteredTaskList_withSelectedMember_returnsTrue() {
+        modelManager.addMember(CARL);
+        assertTrue(modelManager.getFilteredTaskList(CARL).isEmpty());
     }
 
     @Test
@@ -112,6 +177,13 @@ public class ModelManagerTest {
 
         // same object -> returns true
         assertTrue(modelManager.equals(modelManager));
+
+        // check address book
+        ModelManager modelManagerWithAddressBook = new ModelManager(addressBook, userPrefs);
+        modelManagerWithAddressBook.setAddressBook(addressBook);
+        assertTrue(modelManager.equals(modelManagerWithAddressBook));
+        modelManagerWithAddressBook.setAddressBook(differentAddressBook);
+        assertFalse(modelManager.equals(modelManagerWithAddressBook));
 
         // null -> returns false
         assertFalse(modelManager.equals(null));

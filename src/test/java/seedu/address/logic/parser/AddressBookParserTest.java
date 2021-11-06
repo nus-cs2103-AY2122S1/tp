@@ -6,7 +6,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.MEMBER_INDEX_DESC_ONE;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MEMBER;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -70,8 +70,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         MdelCommand command = (MdelCommand) parser.parseCommand(
-                MdelCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_MEMBER_INDEX + INDEX_FIRST_MEMBER.getOneBased());
-        assertEquals(new MdelCommand(INDEX_FIRST_MEMBER), command);
+                MdelCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_MEMBER_INDEX + INDEX_FIRST.getOneBased());
+        assertEquals(new MdelCommand(INDEX_FIRST), command);
     }
 
     @Test
@@ -79,9 +79,9 @@ public class AddressBookParserTest {
         Member member = new MemberBuilder().build();
         EditMemberDescriptor descriptor = new EditMemberDescriptorBuilder(member).build();
         MeditCommand command = (MeditCommand) parser.parseCommand(MeditCommand.COMMAND_WORD + " "
-                + CliSyntax.PREFIX_MEMBER_INDEX + INDEX_FIRST_MEMBER.getOneBased() + " "
+                + CliSyntax.PREFIX_MEMBER_INDEX + INDEX_FIRST.getOneBased() + " "
                 + MemberUtil.getEditMemberDescriptorDetails(descriptor));
-        assertEquals(new MeditCommand(INDEX_FIRST_MEMBER, descriptor), command);
+        assertEquals(new MeditCommand(INDEX_FIRST, descriptor), command);
     }
 
     @Test

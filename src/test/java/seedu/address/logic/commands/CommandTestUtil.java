@@ -68,6 +68,10 @@ public class CommandTestUtil {
     public static final String TASK_INDEX_DESC_ONE = " " + PREFIX_TASK_INDEX + VALID_TASK_INDEX;
     public static final String MEMBER_INDEX_DESC_ONE = " " + PREFIX_MEMBER_INDEX + VALID_MEMBER_INDEX;
     public static final String MEMBER_INDEX_DEL_DESC_ONE = " " + PREFIX_MEMBER_INDEX_DEL + VALID_MEMBER_INDEX;
+    public static final String EVENT_NAME_DESC_CHESS = " " + PREFIX_NAME + VALID_EVENT_NAME_CHESS;
+    public static final String EVENT_NAME_DESC_BADMINTON = " " + PREFIX_NAME + VALID_EVENT_NAME_BADMINTON;
+    public static final String EVENT_DATE_DESC_CHESS = " " + PREFIX_DATE + VALID_EVENT_DATE_CHESS;
+    public static final String EVENT_DATE_DESC_BADMINTON = " " + PREFIX_DATE + VALID_EVENT_DATE_BADMINTON;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -82,6 +86,8 @@ public class CommandTestUtil {
             " " + PREFIX_MEMBER_INDEX + "abs"; // 'abs' not allowed in id
     public static final String INVALID_MEMBER_INDEX_DEL_DESC =
             " " + PREFIX_MEMBER_INDEX_DEL + "abs"; // 'abs' not allowed in id
+    public static final String INVALID_EVENT_NAME_DESC = " " + PREFIX_NAME + "B@DMINTON";
+    public static final String INVALID_EVENT_DATE_DESC = " " + PREFIX_DATE + "20/13/2021"; // There is no 13th month.
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
