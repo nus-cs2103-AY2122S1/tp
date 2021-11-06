@@ -73,9 +73,9 @@ public class SlotCard extends UiPart<Region> {
                 setText(null);
             } else {
                 setText(staff.getName().toString());
-//                if (staff.wasAbsent(date)) {
-//                    setStyle("-fx-strikethrough: true");
-//                }
+                if (staff.wasAbsent(date)) {
+                    setStyle("-fx-background-color: #FF7F7F; -fx-text-fill: black");
+                }
             }
         }
     }

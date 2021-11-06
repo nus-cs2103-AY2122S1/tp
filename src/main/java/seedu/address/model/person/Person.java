@@ -216,7 +216,6 @@ public class Person {
         schedule.addShift(dayOfWeek, slot, startDate, endDate);
     }
 
-
     public void setSchedule(Schedule schedule) {
         this.schedule = schedule;
     }
@@ -319,7 +318,4 @@ public class Person {
         }
         return builder.toString();
     }
-
-
-
 }

@@ -1,12 +1,18 @@
 package seedu.address.ui;
 
+import java.time.LocalDate;
 import java.util.Comparator;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.commons.util.DateTimeUtil;
+import seedu.address.model.person.Period;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Role;
 
@@ -37,6 +43,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label phone;
     @FXML
+    private ListView periodsList;
+    @FXML
     private Label email;
     @FXML
     private FlowPane roles;
@@ -60,7 +68,10 @@ public class PersonCard extends UiPart<Region> {
         email.setText(staff.getEmail().value);
         salary.setText(staff.getSalary().convertToDollars());
         status.setText(staff.getStatus().getValue());
-
+//        ObservableList<Period> absentPeriods = FXCollections.observableArrayList(staff.getAbsentDates());
+        ObservableList<Period> absentPeriods = new ObservableList<Period>() { DateTimeUtil.getDisplayedPeriod()
+        }
+        ObservableList() periodsList = new ListView<Period>(absentPeriods);
         staff.getRoles().stream()
                 .sorted(Comparator.comparing(Role::toString))
                 .forEach(role -> roles.getChildren().add(new Label(role.toString())));
