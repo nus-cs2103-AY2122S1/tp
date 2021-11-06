@@ -332,7 +332,8 @@ Format: `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMPLOYMEN
 ***Note:*** *As mentioned in [Basic Command Format](#basic-command-format), you can include one or more of the search terms.*
 
 * You can key in parameters in either UPPER CASE or small case. 
-* If you key in multiple of the same prefix (e.g. `find n/john n/mary`) , the program will only find you applicants based on **the last** prefix (i.e. `n/mary`).
+* If you key in multiple of the same prefix (e.g. `find n/alex n/bernice`) , the program will only find you applicants based on **the last** prefix (i.e. `n/bernice`).
+  ![FindInput](./images/features/Find.png)
 * You can key in each prefix with **multiple keywords** separated by whitespace, e.g. `n/John Mary`, `t/friend colleague`
 
 <div markdown="block" class="alert alert-warning">
@@ -343,7 +344,6 @@ Format: `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMPLOYMEN
 </div>
 
 * You should not find applicants by prefix with empty parameters. (i.e. `find d/` will show you all applicants **unfiltered** by their ***done*** status)
-
 
 Examples:
 * `find n/John Mary` finds you all applicants with either `John` or `Mary` as values for name prefix.
@@ -356,7 +356,7 @@ Examples:
 **:information_source: Prefix parameters for `find` command must follow the following input specifications:**<br>
 
 * You may
-    * refer to [**Find Parameter Specifications**](#find-inputs) for detailed parameter specifications, or
+    * refer to [**Find Parameter Specifications**](#find-parameters) for detailed parameter specifications, or
     * refer to find parameter specifications for a specific prefix by clicking on relevant link in the table below.
 
 | Parameter | Prefix | Specifications |
@@ -387,6 +387,8 @@ Format: `filter_interview past` or `filter_interview future`
 * `filter_interview future` shows you applicants with interviews that are coming up in the future (compared to the current date and time).
 * You should give either `past` or `future` as an input after `filter_interview`, but not both.
 * You can type in either UPPER CASE or small case for `past` and `future`.
+  
+![FindInput](./images/features/FilterInterviewPast.png)
 
 Examples:
 * Let's assume that the current time is [29th October 2021, 1600].
@@ -426,6 +428,7 @@ Format: `show [n/] [p/] [e/] [r/] [et/] [s/] [l/] [y/] [t/]`
 
 * You should type **only 1** prefix that you want the program to show.
     * If you type multiple prefixes after `show`, the program will only show you the unique search terms found for the **first** prefix input.
+      ![FindInput](./images/features/Show.png)
 
 Examples:
 
