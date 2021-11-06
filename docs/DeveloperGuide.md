@@ -242,7 +242,7 @@ The `addalloc` feature allows users to allocate a student into a group.
 
 #### How the `addalloc` command works
 
-1. The user specifies the group name, the name or ID of the student to be allocated into the group.
+1. The user specifies the group name, and the name or ID of the student to be allocated into the group.
 2. An `AllocDescriptor` containing info of the group and the student is created.
 3. The `AllocDescriptor` is used to find the group and the student(s) as specified.
    * If there is only one matched student, the student is added to the group.
