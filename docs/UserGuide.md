@@ -138,12 +138,14 @@ Format: `delete INDEX`
 
 Examples:
 
-* `list` followed by `delete 2` deletes the 2nd student in EdRecord.
+* `list` followed by `delete 2` deletes the 2nd student shown in the list.
 * `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find Betsy` command.
 
 #### Listing all students: `list`
 
-Shows a list of all students in the current module matching the specified tags or list of all students in the current module if no tags are specified.
+Shows a list of all students in the current module, or shows all students in all modules if no module is being selected.
+
+Format: `list`
 
 #### Locating students by name: `find`
 
@@ -166,8 +168,6 @@ Examples:
 
 
 ### Managing modules
-
-Format: `list [TAG]…​`
 
 #### Working within a specific module: `cd`
 
@@ -412,7 +412,7 @@ If your changes to the data file makes its format invalid, EdRecord will discard
 | **Add student**                         | `add n/NAME p/PHONE e/EMAIL m/MODULE c/CLASS [i/INFO] [t/TAG]…​` <br> e.g., `add n/James Ho p/85436543 e/jamesho@u.nus.edu i/Currently on SHN t/strong t/careless` |
 | **Edit student**                        | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [i/INFO] [t/TAG]…​`<br> e.g., `edit 2 n/James Lee e/jameslee@u.nus.edu`                                            |
 | **Delete student**                      | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
-| **List students**                       | `list [TAG]…​`                                                                                                                                                     |
+| **List students**                       | `list`                                                                                                                                                     |
 | **Find students**                       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find alex david`                                                                                                   |
 | **Change module working directory**     | `cd MODULE`<br> e.g.,`cd CS2103`, `cd *`                                                                                                                              |
 | **List modules**                        | `lsmod`                                                                                                                                                               |
