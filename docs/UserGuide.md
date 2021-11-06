@@ -65,7 +65,7 @@ Dangerous or potentially negative actions are displayed here
     - `addC`: Add a customer
     - Format: `addC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS lp/LOYALTYPOINTS [alg/ALLERGIES] [sr/SPECIAL_REQUESTS] [t/TAG]...`
     - Example: `addC n/John Doe p/87654321 e/e12345@u.nus.edu a/Clementi lp/1000`
-    - 
+ 
 <div>
   <br>
 </div>
