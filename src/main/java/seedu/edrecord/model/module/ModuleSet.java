@@ -25,12 +25,13 @@ public class ModuleSet {
      */
     public void add(Module mod, Group group) {
         if (!containsModule(mod)) {
-            modules.add(mod);
+            Module newModule = new Module(mod.getCode());
+            modules.add(newModule);
         }
 
         if (!containsGroupInModule(mod, group)) {
             for (Module module : modules) {
-                if (module.equals(mod)) {
+                if (module.isSameModule(mod)) {
                     module.addGroup(group);
                 }
             }
@@ -54,7 +55,7 @@ public class ModuleSet {
      */
     public void removeMod(Module mod) {
         for (Module module : this.getModules()) {
-            if (module.getCode().equals(mod.getCode())) {
+            if (module.isSameModule(mod)) {
                 modules.remove(module);
                 return;
             }
@@ -67,11 +68,9 @@ public class ModuleSet {
      */
     public void removeGroup(Module mod, Group grp) {
         for (Module module : this.getModules()) {
-            if (module.getCode().equals(mod.getCode())) {
-                if (module.hasGroup(grp)) {
-                    module.deleteGroup(grp);
-                    return;
-                }
+            if (module.isSameModule(mod) && module.hasGroup(grp)) {
+                module.deleteGroup(grp);
+                return;
             }
         }
     }
@@ -97,7 +96,7 @@ public class ModuleSet {
      */
     public boolean containsModule(Module mod) {
         for (Module module : this.getModules()) {
-            if (module.getCode().equals(mod.getCode())) {
+            if (module.isSameModule(mod)) {
                 return true;
             }
         }
@@ -110,10 +109,8 @@ public class ModuleSet {
      */
     public boolean containsGroupInModule(Module mod, Group grp) {
         for (Module module : this.getModules()) {
-            if (module.getCode().equals(mod.getCode())) {
-                if (module.hasGroup(grp)) {
-                    return true;
-                }
+            if (module.isSameModule(mod) && module.hasGroup(grp)) {
+                return true;
             }
         }
         return false;

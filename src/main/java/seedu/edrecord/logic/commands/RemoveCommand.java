@@ -34,8 +34,8 @@ public class RemoveCommand extends Command {
 
     public static final String MESSAGE_MODULE_DOES_NOT_EXIST_IN_PERSON = "%1$s is not under module %2$s!";
     public static final String MESSAGE_GROUP_DOES_NOT_EXIST_IN_PERSON = "%1$s's module %2$s does not have class %3$s!";
-    public static final String MESSAGE_MOVE_PERSON_SUCCESS = "Removed %1$s from %2$s/%3$s";
-    public static final String MESSAGE_MOVE_PERSON_FAILURE = "Removing %1$s from %2$s/%3$s was unsuccessful!";
+    public static final String MESSAGE_MOVE_PERSON_SUCCESS = "Removed %1$s from %2$s,%3$s";
+    public static final String MESSAGE_MOVE_PERSON_FAILURE = "Removing %1$s from %2$s,%3$s was unsuccessful!";
 
     private final Index index;
     private final Module module;
