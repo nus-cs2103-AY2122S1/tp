@@ -42,11 +42,11 @@ public class SetShiftTimeCommand extends Command {
             + "\n\n"
             + "Example:\n" + COMMAND_WORD + " "
             + PREFIX_DASH_INDEX + " 1 "
-            + PREFIX_DAY_SHIFT + "monday-1"
+            + PREFIX_DAY_SHIFT + "monday-1 "
             + PREFIX_SHIFT_TIME + "10:00-12:00\n"
             + COMMAND_WORD + " "
             + PREFIX_DASH_NAME + " JOE "
-            + PREFIX_DAY_SHIFT + "monday-1"
+            + PREFIX_DAY_SHIFT + "monday-1 "
             + PREFIX_SHIFT_TIME + "10:00-12:00 da/2021-11-01\n";
 
     public static final String MESSAGE_SET_SHIFT_TIME_SUCCESS = "%s's shift on %s %s from %s to %s is successfully "
