@@ -9,6 +9,7 @@ import seedu.address.logic.commands.AddGroupCommand;
 import seedu.address.logic.commands.AddStudentToGroupCommand;
 import seedu.address.logic.commands.DeleteGroupCommand;
 import seedu.address.logic.commands.DeleteStudentFromGroupCommand;
+import seedu.address.logic.commands.ViewGroupCommand;
 import seedu.address.model.tutorialgroup.TutorialGroup;
 
 public class TutorialGroupUtil {
@@ -41,6 +42,10 @@ public class TutorialGroupUtil {
     public static String getDeleteStudentFromGroupCommand(TutorialGroup tutorialGroup, Index index) {
         return DeleteStudentFromGroupCommand.COMMAND_WORD + " " + index.getOneBased() + " "
                 + getTutorialGroupDetails(tutorialGroup);
+    }
+
+    public static String getViewGroupCommand(TutorialGroup tutorialGroup) {
+        return ViewGroupCommand.COMMAND_WORD + " " + getTutorialGroupDetails(tutorialGroup);
     }
 
     public static String getTutorialGroupDetails(TutorialGroup tutorialGroup) {
