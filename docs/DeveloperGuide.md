@@ -27,7 +27,7 @@ Take note of some syntax we will frequently use throughout the Developer Guide:
         - [Storage Component](#storage) 
         - [Common classes](#common-classes)
     - [Implementation](#implementation)
-        - [Stateful PlannerMd](#stateful-plannermd)
+        - [Stateful PlannerMD](#stateful-plannermd)
         - [Toggle Command](#toggle-command)
         - [Remark](#remark)
         - [Propagating Person Changes to Appointment List](#propagating-person-changes-to-appointment-list)
@@ -45,16 +45,22 @@ Take note of some syntax we will frequently use throughout the Developer Guide:
         - [Glossary](#glossary)
     - [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
         - [Launch and shutdown](#launch-and-shutdown)
-        - [Adding a person](#add-patient-manual-testing)
+        - [Adding a patient](#add-patient-manual-testing)
+        - [Listing all patients](#find-patients-manual-testing)
+        - [Finding a patient](#list-patient-manual-testing)
         - [Deleting a patient](#delete-patient-manual-testing)
         - [Editing a patient](#edit-patient-manual-testing)
-        - [Finding a patient](#find-patient-manual-testing)
-        - [Listing all patients](#list-patients-manual-testing)
+        - [Editing a patient's remark](#remark-patient-manual-testing)
+        - [Adding a tag to a patient](#add-tag-patient-manual-testing)
+        - [Deleting a tag of a patient](#delete-tag-patient-manual-testing)
         - [Adding a doctor](#add-doctor-manual-testing)
+        - [Listing all doctors](#list-doctors-manual-testing)
+        - [Finding a doctor](#find-doctor-manual-testing)
         - [Deleting a doctor](#delete-doctor-manual-testing)
         - [Editing a doctor](#edit-doctor-manual-testing)
-        - [Finding a doctor](#find-doctor-manual-testing)
-        - [Listing all doctors](#list-doctors-manual-testing)
+        - [Editing a doctor's remark](#edit-patient-manual-testing)
+        - [Adding a tag to a patient](#add-tag-doctor-manual-testing)
+        - [Deleting a tag of a patient](#delete-tag-doctor-manual-testing)
         - [Adding an appointment](#add-appointment-manual-testing)
         - [Deleting an appointment](#deleting-appointment-manual-testing)
         - [Editing an appointment](#edit-appointment-manual-testing)
@@ -953,6 +959,18 @@ testers are expected to do more *exploratory* testing.
     8. Other incorrect add commands to try: `add`, `add n/Bob hp/`, `add n/` (not all fields, except tags and risk, are filled)<br>
        Expected: No Patient is added. Error message is shown in the response box: "Invalid command format!..."
 
+### Listing all patients <a name="list-patients-manual-testing"/>
+
+1. List all patients while none/some patients are being shown
+
+    1. Prerequisites: `toggle` to the `Patients` tab. Ensure that there are existing patients. If there is none, use the [add](#add-patient-manual-testing) command to add some patients. List some patients using `find XYZ` (XYZ is the name of an existing/non-existent patient).
+
+    2. Test case: `list`<br>
+       Expected: All existing patients are listed.
+
+    3. Test case: `list extra-parameters`<br>
+       Expected: All existing patients are listed.
+
 ### Finding a patient <a name="find-patient-manual-testing"/>
 
 Prerequisites: The tests for finding patients uses the sample data from `SampleDataUtil#getSamplePatients`. This is the sample data loaded at initial launch of the application, or in the absence of the `data/plannermd.json` file.
@@ -987,17 +1005,6 @@ Prerequisites: The tests for finding patients uses the sample data from `SampleD
 
     2. Test cases are similar to those above.
 
-### Listing all patients <a name="list-patients-manual-testing"/>
-
-1. List all patients while none/some patients are being shown
-
-    1. Prerequisites: `toggle` to the `Patients` tab. Ensure that there are existing patients. If there is none, use the [add](#add-patient-manual-testing) command to add some patients. List some patients using `find XYZ` (XYZ is the name of an existing/non-existent patient).
-
-    2. Test case: `list`<br>
-       Expected: All existing patients are listed.
-
-    3. Test case: `list extra-parameters`<br>
-       Expected: All existing patients are listed.
 
 ### Deleting a patient  <a name="delete-patient-manual-testing"/>
 1. Deleting a patient while all doctors are being shown
@@ -1069,7 +1076,7 @@ Prerequisites: The tests for finding patients uses the sample data from `SampleD
 
     2. Test cases are similar to those above.
     
-### Editing a patient's remark <a name="remark-patient"/>
+### Editing a patient's remark <a name="remark-patient-manual-testing"/>
 1. Editing a patient's remark while all patient are being shown
 
     1. Prerequisites: `toggle` to the `Patient` tab. List all patients using the `list` command.
@@ -1094,7 +1101,7 @@ Prerequisites: The tests for finding patients uses the sample data from `SampleD
 
     2. Test cases are similar to those above.
 
-### Adding a tag to a patient <a name="add-tag-patient"/>
+### Adding a tag to a patient <a name="add-tag-patient-manual-testing"/>
 1. Adding a tag to a patient while all patient are being shown
 
     1. Prerequisites: `toggle` to the `Patient` tab. List all patients using the `list` command.
@@ -1119,7 +1126,7 @@ Prerequisites: The tests for finding patients uses the sample data from `SampleD
    
     2. Test cases are similar to those above.
 
-### Deleting a tag of a patient <a name="delete-tag-patient"/>
+### Deleting a tag of a patient <a name="delete-tag-patient-manual-testing"/>
 1. Deleting a tag of a patient while all patient are being shown
 
     1. Prerequisites: `toggle` to the `Patient` tab. List all patients using the `list` command.<br>
@@ -1172,7 +1179,19 @@ Prerequisites: The tests for finding patients uses the sample data from `SampleD
     8. Other incorrect add commands to try: `add`, `add n/Bob hp/`, `add n/` (not all fields, except tags, are filled)<br>
         Expected: No doctor is added. Error message is shown in the response box: "Invalid command format!..."
 
-### Finding doctors <a name="find-doctor"/>
+### Listing all doctors <a name="list-doctors-manual-testing"/>
+
+1. List all doctors while none/some doctors are being shown
+
+    1. Prerequisites: `toggle` to the `Doctors` tab. Ensure that there are existing doctors. If there is none, use the [add](#add-doctor-manual-testing) command to add some doctors. List some doctors using `find XYZ` (XYZ is the name of an existing/non-existent doctor).
+
+    2. Test case: `list`<br>
+       Expected: All existing doctors are listed.
+
+    3. Test case: `list extra-parameters`<br>
+       Expected: All existing doctors are listed.
+
+### Finding doctors <a name="find-doctor-manual-testing"/>
 Prerequisites: The tests for finding doctors uses the sample data from `SampleDataUtil#getSampleDoctors`. This is the sample data loaded at initial launch of the application, or in the absence of the `data/plannermd.json` file.
 
 1. Finding doctors while all doctors are being shown
@@ -1204,19 +1223,7 @@ Prerequisites: The tests for finding doctors uses the sample data from `SampleDa
         2. List some doctors using `find xyz` (xyz is the name of an existing doctor).
 
     2. Test cases are similar to those above.
-
-### Listing all doctors <a name="list-doctors-manual-testing"/>
-
-1. List all doctors while none/some doctors are being shown
-
-    1. Prerequisites: `toggle` to the `Doctors` tab. Ensure that there are existing doctors. If there is none, use the [add](#add-doctor-manual-testing) command to add some doctors. List some doctors using `find XYZ` (XYZ is the name of an existing/non-existent doctor).
-
-    2. Test case: `list`<br>
-       Expected: All existing doctors are listed.
-
-    3. Test case: `list extra-parameters`<br>
-       Expected: All existing doctors are listed.
-
+    
 ### Deleting a doctor  <a name="delete-doctor-manual-testing"/>
 1. Deleting a doctor while all doctors are being shown
     1. Prerequisites: `toggle` to the `Doctors` tab. List all doctors using the `list` command. There must be multiple doctors. 
@@ -1280,8 +1287,7 @@ Prerequisites: The tests for finding doctors uses the sample data from `SampleDa
 
     2. Test cases are similar to those above.
     
-
-### Editing a doctor's remark <a name="remark-doctor"/>
+### Editing a doctor's remark <a name="remark-doctor-manual-testing"/>
 1. Editing a doctor's remark while all doctors are being shown
 
     1. Prerequisites: `toggle` to the `Doctors` tab. List all doctors using the `list` command.
@@ -1303,7 +1309,7 @@ Prerequisites: The tests for finding doctors uses the sample data from `SampleDa
 
     2. Test cases are similar to those above.
 
-### Adding a tag to a doctor <a name="add-tag-doctor"/>
+### Adding a tag to a doctor <a name="add-tag-doctor-manual-testing"/>
 1. Adding a tag to a doctor while all doctors are being shown
 
     1. Prerequisites: `toggle` to the `Doctor` tab. List all doctor using the `list` command.
@@ -1328,7 +1334,7 @@ Prerequisites: The tests for finding doctors uses the sample data from `SampleDa
       
     2. Test cases are similar to those above.
 
-### Deleting a tag of a doctor <a name="delete-tag-doctor"/>
+### Deleting a tag of a doctor <a name="delete-tag-doctor-manual-testing"/>
 1. Deleting a tag of a doctor while all doctors are being shown
 
     1. Prerequisites: `toggle` to the `Doctor` tab. List all doctors using the `list` command.<br>
