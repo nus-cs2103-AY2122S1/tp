@@ -3,6 +3,7 @@ package seedu.address.logic.commands.friends;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalFriends.getTypicalFriendsList;
 import static seedu.address.testutil.TypicalGames.getTypicalGamesList;
 
@@ -60,8 +61,7 @@ class ScheduleFriendCommandTest {
             new ScheduleFriendCommand(editedFriend.getFriendId(), day, startTime, endTime, isFree);
         String expectedMessage = String.format(ScheduleFriendCommand.MESSAGE_SCHEDULE_FRIEND_SUCCESS,
             editedFriend.getFriendId(), startTime, endTime, DayOfWeek.of(day).name(), isFree);
-        // TODO: Fix ScheduleFriendCommand logic before unlocking the below assertion
-        // assertCommandSuccess(scheduleFriendCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(scheduleFriendCommand, model, expectedMessage, expectedModel);
     }
 
     @Test

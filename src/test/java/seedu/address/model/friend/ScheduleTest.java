@@ -13,7 +13,7 @@ import seedu.address.model.friend.exceptions.InvalidDayTimeException;
 import seedu.address.model.time.exceptions.InvalidHourOfDayException;
 
 /**
- * Test-unreachable code present in isValidSchedule() and toString();
+ * Test-unreachable code present in Schedule(Schedule schedule), isValidSchedule() and toString();
  */
 class ScheduleTest {
 
