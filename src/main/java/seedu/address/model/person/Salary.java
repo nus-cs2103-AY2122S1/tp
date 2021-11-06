@@ -11,8 +11,7 @@ public class Salary implements Field {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Salaries have to be a non-negative integer representing the pay in dollars. Cents can be added by "
-            + "adding it after a \".\", but a non-negative integer is required after the period if it is "
-            + "included. The salary cannot exceed $9999999.99 per hour.";
+            + "adding one or two number digits after a \".\" The salary cannot exceed $9999999.99 per hour.";
 
     public final Integer value; //
 
@@ -82,10 +81,16 @@ public class Salary implements Field {
      */
     public static boolean isValidCents(String test) {
         test = test.trim();
-        if (!test.matches("\\d+") || test.equals("")) {
+        if (!test.matches("\\d+") || test.equals("") || test.length() > 2) {
             return false;
         }
-        int dollarInt = Integer.parseInt(test);
+        int dollarInt;
+        try {
+            dollarInt = Integer.parseInt(test);
+            // This exception will be caught if the integer exceeds max integer
+        } catch (NumberFormatException e) {
+            return false;
+        }
         return dollarInt >= 0;
     }
 
