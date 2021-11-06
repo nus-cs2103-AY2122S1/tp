@@ -68,7 +68,7 @@ public class DeleteEmployeeCommandTest {
         showEmployeeAtIndex(model, INDEX_FIRST_PERSON);
 
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
-        // ensures that outOfBoundIndex is still in bounds of address book list
+        // ensures that outOfBoundIndex is still in bounds of RHRH list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getRhrh().getEmployeeList().size());
 
         DeleteEmployeeCommand deleteEmployeeCommand = new DeleteEmployeeCommand(outOfBoundIndex);

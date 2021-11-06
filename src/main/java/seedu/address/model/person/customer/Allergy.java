@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents an Allergy in the address book.
+ * Represents an Allergy in RHRH.
  * Guarantees: immutable; name is valid as declared in {@link #isValidAllergyName(String)}
  */
 public class Allergy {
