@@ -169,7 +169,6 @@ are all sample data! Here are some commands you can try to see what they do:
 
 <div style="page-break-after: always"></div>
 
-
 ## **Features**
 
 ### **Command Format**
@@ -889,7 +888,6 @@ FAST will start with an empty data file on the next run!
 
 <div style="page-break-after: always"></div>
 
-
 ## **FAQs**
 
 **Q**: How do I transfer my data to another Computer?<br>
@@ -963,7 +961,6 @@ Action|Format, Examples
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always"></div>
-
 
 ## **Glossary**
 
