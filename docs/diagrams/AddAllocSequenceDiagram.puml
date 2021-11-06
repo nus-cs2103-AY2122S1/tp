@@ -3,7 +3,7 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":SourceControlParser" as SourceControlParser LOGIC_COLOR
 participant ":AddAllocCommandParser" as AddAllocCommandParser LOGIC_COLOR
 participant "allocDescriptor\n:AllocDescriptor" as AllocDescriptor LOGIC_COLOR
 participant "addAllocCommand\n:AddAllocCommand" as AddAllocCommand LOGIC_COLOR
@@ -18,17 +18,17 @@ end box
 [-> LogicManager : execute("addalloc \n-g T01A -n Zhiying")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("addalloc \n-g T01A -n Zhiying")
-activate AddressBookParser
+LogicManager -> SourceControlParser : parseCommand("addalloc \n-g T01A -n Zhiying")
+activate SourceControlParser
 
 create AddAllocCommandParser
-AddressBookParser -> AddAllocCommandParser
+SourceControlParser -> AddAllocCommandParser
 activate AddAllocCommandParser
 
-AddAllocCommandParser --> AddressBookParser
+AddAllocCommandParser --> SourceControlParser
 deactivate AddAllocCommandParser
 
-AddressBookParser -> AddAllocCommandParser : parse("-g T01A -n Zhiying")
+SourceControlParser -> AddAllocCommandParser : parse("-g T01A -n Zhiying")
 activate AddAllocCommandParser
 
 create AllocDescriptor
@@ -45,7 +45,7 @@ activate AddAllocCommand
 AddAllocCommand --> AddAllocCommandParser : addAllocCommand
 deactivate AddAllocCommand
 
-AddAllocCommandParser --> AddressBookParser : addAllocCommand
+AddAllocCommandParser --> SourceControlParser : addAllocCommand
 deactivate AddAllocCommandParser
 
 destroy AllocDescriptor
@@ -54,12 +54,12 @@ destroy AllocDescriptor
 Model -[hidden]->
 destroy AddAllocCommandParser
 
-AddressBookParser --> LogicManager : addAllocCommand
-deactivate AddressBookParser
+SourceControlParser --> LogicManager : addAllocCommand
+deactivate SourceControlParser
 
 'hidden arrow to position destroy marker
 Model -[hidden]->
-destroy AddressBookParser
+destroy SourceControlParser
 
 LogicManager -> AddAllocCommand : execute()
 activate AddAllocCommand

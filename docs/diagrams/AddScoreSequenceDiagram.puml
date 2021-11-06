@@ -3,7 +3,7 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":SourceControlParser" as SourceControlParser LOGIC_COLOR
 participant ":AddScoreCommandParser" as AddScoreCommandParser LOGIC_COLOR
 participant "scoreDescriptor\n:ScoreDescriptor" as ScoreDescriptor LOGIC_COLOR
 participant "addScoreCommand\n:AddScoreCommand" as AddScoreCommand LOGIC_COLOR
@@ -18,17 +18,17 @@ end box
 [-> LogicManager : execute("addscore \n-a Midterm -n Van Nhi -s 95")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("addscore \n-a Midterm -n Van Nhi -s 95")
-activate AddressBookParser
+LogicManager -> SourceControlParser : parseCommand("addscore \n-a Midterm -n Van Nhi -s 95")
+activate SourceControlParser
 
 create AddScoreCommandParser
-AddressBookParser -> AddScoreCommandParser
+SourceControlParser -> AddScoreCommandParser
 activate AddScoreCommandParser
 
-AddScoreCommandParser --> AddressBookParser
+AddScoreCommandParser --> SourceControlParser
 deactivate AddScoreCommandParser
 
-AddressBookParser -> AddScoreCommandParser : parse("-a Midterm \n-n Van Nhi -s 95")
+SourceControlParser -> AddScoreCommandParser : parse("-a Midterm \n-n Van Nhi -s 95")
 activate AddScoreCommandParser
 
 create ScoreDescriptor
@@ -46,7 +46,7 @@ activate AddScoreCommand
 AddScoreCommand --> AddScoreCommandParser : addScoreCommand
 deactivate AddScoreCommand
 
-AddScoreCommandParser --> AddressBookParser : addScoreCommand
+AddScoreCommandParser --> SourceControlParser : addScoreCommand
 deactivate AddScoreCommandParser
 
 destroy ScoreDescriptor
@@ -55,12 +55,12 @@ destroy ScoreDescriptor
 Model -[hidden]->
 destroy AddScoreCommandParser
 
-AddressBookParser --> LogicManager : addScoreCommand
-deactivate AddressBookParser
+SourceControlParser --> LogicManager : addScoreCommand
+deactivate SourceControlParser
 
 'hidden arrow to position destroy marker
 Model -[hidden]->
-destroy AddressBookParser
+destroy SourceControlParser
 
 LogicManager -> AddScoreCommand : execute()
 activate AddScoreCommand

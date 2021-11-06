@@ -3,7 +3,7 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":SourceControlParser" as SourceControlParser LOGIC_COLOR
 participant ":ShowCommandParser" as ShowCommandParser LOGIC_COLOR
 participant "showCommand\n:ShowCommand" as ShowCommand LOGIC_COLOR
 participant "info\n:Info" as Info LOGIC_COLOR
@@ -18,17 +18,17 @@ end box
 [-> LogicManager : execute("show \n-n Hong Fai")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand(\n"show -n Hong Fai")
-activate AddressBookParser
+LogicManager -> SourceControlParser : parseCommand(\n"show -n Hong Fai")
+activate SourceControlParser
 
 create ShowCommandParser
-AddressBookParser -> ShowCommandParser
+SourceControlParser -> ShowCommandParser
 activate ShowCommandParser
 
-ShowCommandParser --> AddressBookParser
+ShowCommandParser --> SourceControlParser
 deactivate ShowCommandParser
 
-AddressBookParser -> ShowCommandParser : parse("-n Hong Fai")
+SourceControlParser -> ShowCommandParser : parse("-n Hong Fai")
 activate ShowCommandParser
 
 ShowCommandParser -> ShowCommandParser : parseByPrefixes()
@@ -44,19 +44,19 @@ deactivate ShowCommand
 ShowCommandParser --> ShowCommandParser : showCommand
 deactivate ShowCommandParser
 
-ShowCommandParser --> AddressBookParser : showCommand
+ShowCommandParser --> SourceControlParser : showCommand
 deactivate ShowCommandParser
 
 'hidden arrow to position destroy marker
 Model -[hidden]->
 destroy ShowCommandParser
 
-AddressBookParser --> LogicManager : showCommand
-deactivate AddressBookParser
+SourceControlParser --> LogicManager : showCommand
+deactivate SourceControlParser
 
 'hidden arrow to position destroy marker
 Model -[hidden]->
-destroy AddressBookParser
+destroy SourceControlParser
 
 LogicManager -> ShowCommand : execute()
 activate ShowCommand
