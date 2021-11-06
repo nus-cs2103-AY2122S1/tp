@@ -45,7 +45,7 @@ Agents that aids their operations by:
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `listcontact`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `allcontact`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
@@ -100,7 +100,7 @@ Format: `deletecontact INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `listcontact` followed by `deletecontact 2` deletes the 2nd contact in the application.
+* `allcontact` followed by `deletecontact 2` deletes the 2nd contact in the application.
 * `findcontact Betsy` followed by `deletecontact 1` deletes the 1st contact in the results of the `find` command.
 
 ### Policy Management
@@ -292,12 +292,12 @@ Action | Format, Examples
 **Add Contact** | `addcontact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `addcontact n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Delete Contact** | `deletecontact INDEX`<br> e.g., `deletecontact 3`
 **Edit Contact** | `editcontact INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`editcontact 2 n/James Lee e/jameslee@example.com`
-**List Contacts** | `listcontact`
+**List Contacts** | `allcontact`
 **Find Contacts** | `findcontact KEYWORD`
 **Add Policy** | `addpolicy n/POLICY_NAME p/PMT_AMOUNT_CENTS [PMTS_PER_YR] [NUM_OF_PMTS] c/COMMISSION_% NUM_OF_COMM cl/CONTACT_INDEX [e/COVERAGE_EXPIRY_DATE] [t/TAG]…​`
 **Delete Policy** | `deletepolicy INDEX`
 **Edit Policy** | `editpolicy INDEX [n/POLICY_NAME] [p/PMT_AMOUNT_CENTS [PMTS_PER_YR] [NUM_OF_PMTs]] [c/COMMISSION_% NUM_OF_COMM] [cl/CONTACT_INDEX] [e/COVERAGE_EXPIRY_DATE] [t/TAG]…​`
-**List Policies** | `listpolicy`
+**List Policies** | `allpolicy`
 **List Contact's Policies** | `contactpolicy CONTACT_INDEX`
 **Clear Contact's Policies** | `clearpolicy CONTACT_INDEX`
 **Show Expiring Policies** | `expiringpolicy`
