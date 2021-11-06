@@ -1,6 +1,7 @@
 @startuml
+
 start
-:User executes Unmark Command;
+:User executes Mark Command;
 
 'Since the beta syntax does not support placing the condition outside the
 'diamond we place it as the true branch instead.
@@ -9,18 +10,19 @@ if () then ([command is valid with valid and
  non-duplicated index/indexes])
 
     if () then ([applicant(s) at all indexes
-  have been marked])
+  have not been marked])
+
     :Update specified applicant(s)
-              to be unmarked;
+                 to be marked;
 
     :GUI updated with specified applicant(s)
-          being unmarked with Not Done;
+               being marked with Done;
 
     else ([else])
-    : GUI display shows
-        error message
-       for unmarking an
-    unmarked  applicant;
+    :GUI display shows
+       error message
+         for marking a
+      marked applicant;
 
     endif
 
@@ -31,4 +33,5 @@ message for invalid format;
 
 endif
 stop
+
 @enduml
