@@ -240,18 +240,14 @@ The following sequence diagram summarizes what happens when the user inputs an a
 
 The `addalloc` feature allows users to allocate a student into a group.
 
-#### How the `AddAllocCommand` works
+#### How the `addalloc` command works
 
-Step 1. The user specifies the group name, the name or ID of the student to be allocated into the group.
-
-Step 2. An `AllocDescriptor` containing info of the group and the student is created.
-
-Step 3. The `AllocDescriptor` is used to find the group and the student(s) as specified.
-
-* If there is only one matched student, the student is added to the group.
-* If there are multiple matched students, the allocation is not made successfully, and the student list is updated with all matched students.
-
-Step 4. The student is allocated into the group.
+1. The user specifies the group name, the name or ID of the student to be allocated into the group.
+2. An `AllocDescriptor` containing info of the group and the student is created.
+3. The `AllocDescriptor` is used to find the group and the student(s) as specified.
+   * If there is only one matched student, the student is added to the group.
+   * If there are multiple matched students, the allocation is not made successfully, and the student list is updated with all matched students.
+4. The student is allocated into the group.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** In the case where there are more than one students matched because they share the same name, an error message will be displayed to the user. The user will then have to specify the student to be added using his/her student ID.
 </div>
@@ -268,18 +264,14 @@ The following sequence diagram summarises what happens when the user inputs an `
 
 The `addscore` feature allows users to add score for an assessment of a student.
 
-#### How the `AddScoreCommand` works
+#### How the `addscore` command works
 
-Step 1. The user specifies the assessment name, the name or ID of the student, and the score to be added.
-
-Step 2. An `ScoreDescriptor` containing info of the group, the student and the score is created.
-
-Step 3. The `ScoreDescriptor` is used to find the assessment and the student(s) as specified.
-
-* If there is only one matched student, the assessment of the student will be updated with the new score.
-* If there are multiple matched students, the update is not made successfully, and the student list is updated with all matched students.
-
-Step 4. The score is updated in the assessment of the student.
+1. The user specifies the assessment name, the name or ID of the student, and the score to be added.
+2. An `ScoreDescriptor` containing info of the group, the student and the score is created.
+3. The `ScoreDescriptor` is used to find the assessment and the student(s) as specified.
+   * If there is only one matched student, the assessment of the student will be updated with the new score.
+   * If there are multiple matched students, the update is not made successfully, and the student list is updated with all matched students.
+4. The score is updated in the assessment of the student.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** In the case where there are more than one students matched because they share the same name, an error message will be displayed to the user. The user will then have to specify the student to be added using his/her student ID.
 </div>
@@ -343,16 +335,14 @@ if command is valid. Command is invalid if user input is empty, or if user enter
 
 The `show` feature allows users to show the performance analysis of a student, a group or the cohort in an assessment.
 
-#### How the `ShowCommand` works
+#### How the `show` command works
 
-Step 1. The user specifies the student (by either name, ID or index), the group name or the assessment name.
-
-Step 2. An `ScoreDescriptor` containing info of the group, the student and the score is created.
-
-Step 3. The `ScoreDescriptor` is used to find the assessment and the student(s) as specified.
-
-* If there is only one matched student, the assessment of the student will be updated with the new score.
-* If there are multiple matched students, the update is not made successfully, and the student list is updated with all matched students.
+1. The user specifies the student (by either name, ID or index), the group name or the assessment name.
+2. An `ScoreDescriptor` containing info of the group, the student and the score is created.
+3. The `ScoreDescriptor` is used to find the assessment and the student(s) as specified.
+   * If there is only one matched student, the assessment of the student will be updated with the new score.
+   * If there are multiple matched students, the update is not made successfully, and the student list is updated with all matched students.
+4. The performance analysis of the student, the group or the cohort in an assessment is displayed.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** In the case where the performance analysis of a student is requested by identity and there are more than one students matched because they share the same name, an error message will be displayed to the user. The user will then have to specify the student to be added using his/her student ID.
 </div>
