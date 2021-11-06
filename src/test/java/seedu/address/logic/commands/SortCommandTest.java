@@ -14,7 +14,7 @@ public class SortCommandTest {
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_sortPersonList_reverse_success() {
+    public void execute_sortPersonListReverse_success() {
         SortCommand sortCommand = new SortCommand(true);
         String expectedMessage = "Sorted all persons in reverse order";
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());

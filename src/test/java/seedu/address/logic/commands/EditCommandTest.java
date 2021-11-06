@@ -10,8 +10,13 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalIndexes.*;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TASK;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,9 +34,6 @@ import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskName;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
@@ -160,7 +162,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_filteredList_task_success() {
+    public void execute_filteredListTask_success() {
         Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         model.displayPersonTaskList(personToEdit);
 
@@ -189,7 +191,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_filteredList_person_and_task_success() {
+    public void execute_filteredListPersonAndTask_success() {
         Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         model.displayPersonTaskList(personToEdit);
 
