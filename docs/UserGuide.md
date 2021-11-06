@@ -42,7 +42,7 @@ CONNECTIONS is a **desktop app for managing contacts, optimized for use via a Co
    ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will show a list of commands that CONNECTIONS supports.<br>
-   Click [here](#command-summary) for example commands you can try!
+   Click [here](#command-summary) for a summary of example commands you can try!
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -431,10 +431,10 @@ Action | Summary | Format, Examples
 **Add** | Adds a contact | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [b/BIRTHDAY] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 b/23062001 t/friend t/colleague`
 **List** | Lists all contacts | `list`
 **Edit** | Edits a contact | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com b/30012000`
-**Tag** | Tags a contact | `tag INDEX [t/TAG]…​`<br> e.g., `tag 2 t/friend t/NUS`
-**Untag** | Untags a contact | `untag INDEX [t/TAG]…​`<br> e.g., `untag 2 t/colleague`
-**Find** | Locates contacts by name and tags (Results fulfill all search terms)| `find [c/] [n/NAME] [t/TAG]`<br> e.g., `find n/James t/friends`
-**FindAny** | Locates contacts by name and tags (Results fulfill at least one search term)| `findAny [c/] [n/NAME] [t/TAG]`<br> e.g., `findAny n/James t/NUS`
+**Tag** | Tags a contact | `tag INDEX t/TAG [t/MORE_TAGS]…​`<br> e.g., `tag 2 t/friend t/NUS`
+**Untag** | Untags a contact | `untag INDEX t/TAG [t/MORE_TAGS]…​`<br> e.g., `untag 2 t/colleague`
+**Find** | Locates contacts by name and tags (Results fulfill all search terms)| `find [c/] [n/NAME]... [t/TAG]...` <br> e.g., `find n/James t/friends` <br> At least one argument must be present
+**FindAny** | Locates contacts by name and tags (Results fulfill at least one search term)| `findAny [c/] [n/NAME]... [t/TAG]...`<br> e.g., `findAny n/James t/NUS` <br> At least one argument must be present
 **Pin** | Pins a contact | `pin INDEX`<br> e.g., `pin 1`
 **Unpin** | Unpins a contact | `unpin INDEX`<br> e.g., `unpin 1`
 **Delete** | Deletes a contact | `delete INDEX`<br> e.g., `delete 3`
