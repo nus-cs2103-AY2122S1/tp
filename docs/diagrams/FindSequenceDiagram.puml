@@ -35,35 +35,30 @@ activate FindCommand
 
 
 
-FindCommand --> FindCommandParser : command
+FindCommand --> FindCommandParser : 
 deactivate FindCommand
 
-FindCommandParser --> AddressBookParser : command
+FindCommandParser --> AddressBookParser : 
 deactivate FindCommandParser
 
 
 destroy FindCommandParser
 
-AddressBookParser --> LogicManager : command
+AddressBookParser --> LogicManager : 
 deactivate AddressBookParser
 
 LogicManager -> FindCommand : execute()
 activate FindCommand
 
-alt Find by Name
-    FindCommand -> Model : executeNameSearch()
-    activate Model
-    Model --> FindCommand : result
-
-else  Find by Time
-    FindCommand -> Model : executeIndexSearch()
-    Model --> FindCommand : result
-end
-
-Model --> FindCommand : ObservableList<Person> Filtered_Staff
+FindCommand -> Model : updateFilteredPersonList()
+activate Model
+Model --> FindCommand
 deactivate Model
 
-FindCommand --> LogicManager : commandResult
+
+
+
+FindCommand --> LogicManager :
 deactivate FindCommand
 
 [<--LogicManager

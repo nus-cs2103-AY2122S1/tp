@@ -367,7 +367,7 @@ Notes:
 #### Implementation
 
 `Find` is a command for the app to search for staff by a specific index or name. When the command is called,
-whether it is a search by name or search by index should be indicated with the respective tags `-n` and `-i`.
+whether it is a search by name or search by index should be indicated with the respective tags `-n` and `-i` along with any additional fields.
 
 The Find functionality is facilitated by  `ModelManager`. It uses the following operation of `ModelManager`.
 
