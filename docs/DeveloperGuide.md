@@ -245,15 +245,14 @@ The following activity diagram summarises what happens when a Tour Guide execute
     * Pros: More accurate matches assuming Tour Guide searches for exact keywords.
     * Cons: Less likely to find contacts other than the intended one(s) that might be relevant for a themed or location-based tour itinerary.
 
-=======
 ### Filter feature
 
-#### Proposed Implementation
+#### Implementation
 
 The filter mechanism works by modifying the GUI of the application to display the contacts in that category without making any changes to the actual contacts stored. The filter implementation makes use of the following operations:
 
-* `Model#updateFilteredContactList(Predicate p)` - iterates through the addressBook `ContactList`. If a `Contact` returns true, the `Contact` is added to the `filteredContacts` list.
-* `IsInCategoryPredicate(Set<CategoryCode> categories)` - returns true if a contact’s `categoryCode` is in the Set
+* `Model#updateFilteredContactList()` - iterates through the addressBook. If a `Contact` returns true, the `Contact` is added to the `filteredContacts` list.
+* `IsFilterablePredicate()` - returns true if a contact’s `CategoryCode`, `Rating` and `Tag` matches the given filter criteria.
 
 Given below is an example usage scenario of the filter mechanism.
 
@@ -261,13 +260,13 @@ Step 1. The user launched the application for the first time. The `filteredConta
 
 Step 2. The user executes `filter c/att` command to filter all the attraction contacts in the address book. The `Parser` parses the user input and creates a `FilterCommand`.
 
-Step 3. The filter command creates an `IsInCategoryPredicate` instance with the `ATT` CategoryCode and calls `Model#updateFilteredContactList()` with the predicate as an argument, causing the `filteredContact` List to be modified to contain only attraction contacts in the address book.
+Step 3. The filter command creates an IsFilterablePredicate instance with the given CategoryCode, Tag and Rating parameters and calls Model#updateFilteredContactList() with the predicate as an argument, causing the filteredContact List to be modified to contain only attraction contacts in the address book.
 
 The following sequence diagram shows how the filter operation works:
 
 ![FilterSequenceDiagram](images/FilterSequenceDiagram.png)
 
-The following activity diagram summarizes what happens when a user executes a new filter command:
+The following activity diagram summarizes what happens when a user executes a new valid filter command:
 
 ![FilterActivityDiagram](images/FilterActivityDiagram.png)
 
@@ -275,13 +274,43 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Aspect: Functionality of Filter feature**
 
-* **Alternative 1 (current choice):** Filters one or multiple categories.
-    * Pros: More flexible usage as users can choose to enter one or more category codes.
-    * Cons: May need to use a more complex data structure such as a `Set` to store the category codes entered by user.
+* **Alternative 1 (current choice):** Filters by multiple parameters (`CategoryCode`, `Tag`, and `Rating`).
+    * Pros: More flexible usage as users can choose to enter one or more criteria.
+    * Cons: Parser and filtering logic implemented may be more complicated as there are more cases to handle (e.g. multiple tags and a rating entered, a category code and a tag entered, etc)
 
-* **Alternative 2:** Only handles filter by one category.
-    * Pros: More targeted results.
-    * Cons: Need to execute multiple filter commands to search for contacts in more than one category.
+* **Alternative 2:** Only handles filter by one parameter (e.g. `CategoryCode` only).
+    * Pros: Easier to implement.
+    * Cons: Does not allow user to get more specific filter results.
+
+### View feature
+
+#### Implementation
+
+The view mechanism works by modifying the GUI of the application to display the details of the selected contact in the Display Pane. The view implementation makes use of `Model#getFilteredContactList()` which returns the list of contacts currently displayed to the user.
+
+Given below is an example usage scenario of the view mechanism.
+
+Step 1. The user launched the application for the first time. The `filteredContact` List will be initialized with all contacts in the addressBook `UniqueContactList`.
+
+Step 2. The user executes `view n/Marina Bay Sands` command to display the contact details of Marina Bay Sands. The `Parser` parses user input and creates a `ViewCommandName`. 
+
+Step 3. The view command calls the `Model#getFilteredContactList()` and iterates through the list to check for a matching contact Name. If the contact is successfully retrieved, the Display Pane updates with details of Marina Bay Sands.
+
+The following sequence diagram shows how the view operation works:
+
+![ViewSequenceDiagram](images/ViewSequenceDiagram.png)
+
+#### Design considerations:
+
+**Aspect: Functionality of View feature**
+
+* **Alternative 1 (current choice):** Only allow users to view contacts in the currently displayed list.
+    * Pros: Easier to implement.
+    * Cons: Less flexibility for users as they are limited to contacts in the displayed list. They need to execute `list` to be able to view any contact in the address book.
+
+* **Alternative 2:** Allow users to view any contact in the address book even if it is not shown in the current list.
+    * Pros: More flexibility for users.
+    * Cons: More difficult to implement. Additionally, it is impossible to view a contact not displayed in the list by index. Hence, `ViewCommandIndex` will be limited to the displayed contacts, while `ViewCommandName` will allow users to view any contact in the address book.
 
 ### Ratings feature
 
@@ -330,41 +359,39 @@ The following activity diagram summarizes what happens when a user executes an `
     * Pros: Dedicated all-in-one feature for ratings, easy modification.
     * Cons: Duplicates functionality of `AddCommand` and `EditCommand`, not particularly essential.
 
-### \[Proposed\] Undo/redo feature
+### Undo/redo feature
 
-#### Proposed Implementation
+#### Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The undo/redo mechanism is facilitated by the `List<ReadOnlyAddressBook>` in Model Manager which stores a version of the address book every time changes are made and `current` which keeps track of the index of the current address book in the list. Additionally, it implements the following operations:
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+* `Model#commit()` — Saves the current address book state in its history.
+* `Model#undo()` — Restores the previous address book state from its history.
+* `Model#redo()` — Restores a previously undone address book state from its history.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The history list will be initialized with the initial address book state as its only element, and the `current` index set to zero.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th contact in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th contact in the address book. The `delete` command calls `Model#commit()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the history List, and `current` is incremented by 1 (to the index of newly inserted address book state).
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new contact. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/Marina Bay Sands …​` to add a new contact. The `add` command also calls `Model#commit()`, causing another modified address book to be saved into the his tory list amd `current` to be incremented by 1.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commit()`, so the address book state will not be saved into the history List.
 
 </div>
 
-Step 4. The user now decides that adding the contact was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the contact was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undo()`, which will decrement `current` index by one, to the index of the previous address book state, and restores the address book to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `current` index is 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#isUndoable()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
 </div>
@@ -377,22 +404,23 @@ The following sequence diagram shows how the undo operation works:
 
 </div>
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redo()`, which increments the `currentStatePointer` by 1 (to the previously undone state), and restores the address book to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `current` index is `history.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#isRedoable()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commit()`, `Model#undo()` or `Model#redo()`. Thus, the history List remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commit()`. Since `current` is not set to the index of the last element in the list, all address book states after the `current` index will be purged.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
-The following activity diagram summarizes what happens when a user executes a new command:
+The following activity diagram summarizes what happens when a user executes a command that changes the data stored in the address book:
 
+![img.png](images/CommitActivityDiagram.png)
 <img src="images/CommitActivityDiagram.png" width="250" />
 
 #### Design considerations:
@@ -407,8 +435,7 @@ The following activity diagram summarizes what happens when a user executes a ne
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the contact being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
+    
 
 ### Review Feature
 
@@ -699,3 +726,56 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+### Viewing a contact
+
+1. Viewing a contact while all contacts are being shown
+
+    1. Prerequisites: List all contacts using the `list` command, contact with name ‘Marina Bay Sands’ exists. Multiple contacts in the list.
+
+    1. Test case: `view 1`<br>
+       Expected: Details of first contact is displayed in the Display Pane. Details of the first contact shown in the status message.
+
+    1. Test case: `view n/Marina Bay Sands`<br>
+       Expected: Details of contact with name ‘Marina Bay Sands’ is displayed in Display Pane. Details of the displayed contact shown in the status message.
+
+    1. Test case: `view 0`<br>
+       Expected: No contact is displayed. Error details shown in the status message. Display Pane remains unchanged.
+
+    1. Other incorrect delete commands to try: view, view x (where x is larger than the list size, or negative), view 00001, view 1 n/, view n/INVALID_NAME(invalid name that does not exist in the addressBook)
+       Expected: Similar to previous.
+
+### Undoing operations
+1. Undoing changes consecutively
+
+    1. Prerequisites: Multiple contacts in the list, contact with name ‘Marina Bay Sands’ exists. Address book history set up by executing the following commands in order :
+       1. `delete n/Marina Bay Sands`
+       1. `add c/att n/Singapore Flyers p/92345678 e/123@example.com a/30 Raffles Ave, Singapore 039803 ra/4`
+
+    1. Test case: `undo`<br>
+       Expected: Previously added contact, `Singapore Flyers` is removed from address book. Undo success message shown in the status message.
+
+    1. Test case: `undo`<br>
+      Expected: Previously deleted contact, `Marina Bay Sands` is added back to address book. Undo success message shown in the status message.
+
+    1. Test case: `undo`<br>
+       Expected: No changes to address book or contact list. Error details shown in the status message.
+    
+### Redoing operations
+1. Redoing changes consecutively
+
+    1. Prerequisites: Multiple contacts in the list, contact with name ‘Marina Bay Sands’ and 'Singapore Flyer' exists, `Singapore Flyer` is the first contact in the list. Address book history set up by executing the following commands in order :
+        1. `delete n/Marina Bay Sands`
+        1. `edit 1 e/123@example.com`
+        1. `undo`
+        1. `undo`
+        
+     1. Test case: `redo`<br>
+       Expected: Previously restored contact, `Marina Bay Sands` is deleted from address book. Redo success message shown in the status message.
+
+    1. Test case: `redo`<br>
+       Expected: Previous edits made to `Singapore Flyers` is restored, email of `Singapore Flyers` changed back to `123@example.com`. Redo success message shown in the status message.
+
+    1. Test case: `redo`<br>
+       Expected: No changes to address book or contact list. Error details shown in the status message.
+    
