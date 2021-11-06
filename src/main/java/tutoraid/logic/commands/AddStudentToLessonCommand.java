@@ -5,6 +5,8 @@ import static tutoraid.logic.parser.CliSyntax.PREFIX_LESSON;
 import static tutoraid.logic.parser.CliSyntax.PREFIX_STUDENT;
 import static tutoraid.ui.DetailLevel.MED;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import tutoraid.commons.core.Messages;
@@ -25,65 +27,100 @@ public class AddStudentToLessonCommand extends AddCommand {
     public static final String MESSAGE_USAGE = String.format("%1$s %2$s: Adds a student to a lesson. "
                     + "\nParameters:"
                     + "\n%3$sSTUDENT INDEX (must be a positive integer)"
-                    + "  %4$sLESSON_INDEX (must be a positive integer)"
+                    + "  %4$sLESSON INDEX (must be a positive integer)"
                     + "\nExample:"
                     + "\n%1$s %2$s %3$s1 %4$s2",
             COMMAND_WORD, COMMAND_FLAG, PREFIX_STUDENT, PREFIX_LESSON);
 
-    public static final String MESSAGE_SUCCESS = "Successfully added %s to %s.";
+    public static final String MESSAGE_SUCCESS = "Successfully added %s to %s.\n";
+    public static final String MESSAGE_FAILURE_FULL = "%s does not have enough capacity.";
+    public static final String WARNING_STUDENT_ALREADY_ATTENDS_LESSON = "Warning: %s already attends %s.";
 
-    private final Index studentIndex;
-    private final Index lessonIndex;
+
+    private final ArrayList<Index> studentIndexes;
+    private final ArrayList<Index> lessonIndexes;
 
     /**
      * Constructs an AddStudentToLessonCommand.
      *
-     * @param studentIndex of the student in the filtered student list to add to the lesson
-     * @param lessonIndex  of the lesson in the filtered lesson list to add to the student
+     * @param studentIndexes of the student in the filtered student list to add to the lesson
+     * @param lessonIndexes  of the lesson in the filtered lesson list to add to the student
      */
-    public AddStudentToLessonCommand(Index studentIndex, Index lessonIndex) {
-        requireNonNull(studentIndex);
-        requireNonNull(lessonIndex);
-        this.studentIndex = studentIndex;
-        this.lessonIndex = lessonIndex;
+    public AddStudentToLessonCommand(ArrayList<Index> studentIndexes, ArrayList<Index> lessonIndexes) {
+        // Indexes are guaranteed to be distinct from ParserUtil
+        requireNonNull(studentIndexes);
+        requireNonNull(lessonIndexes);
+        this.studentIndexes = studentIndexes;
+        this.lessonIndexes = lessonIndexes;
     }
 
+    public String executeSingle(Model model, Index studentIndex, Index lessonIndex) throws CommandException {
+        List<Student> lastShownStudentList = model.getFilteredStudentList();
+        List<Lesson> lastShownLessonList = model.getFilteredLessonList();
+        if (studentIndex.getZeroBased() >= lastShownStudentList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        }
+        if (lessonIndex.getZeroBased() >= lastShownLessonList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
+        }
+        Student student = lastShownStudentList.get(studentIndex.getZeroBased());
+        Lesson lesson = lastShownLessonList.get(lessonIndex.getZeroBased());
+        if (student.hasLesson(lesson)) {
+            return String.format(WARNING_STUDENT_ALREADY_ATTENDS_LESSON,
+                    student.toNameString(), lesson.toNameString()) + "\n";
+        }
+        lesson.addStudent(student);
+        student.addLesson(lesson);
+        return String.format(MESSAGE_SUCCESS, student.toNameString(), lesson.toNameString());
+    }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
-        List<Student> lastShownStudentList = model.getFilteredStudentList();
-        List<Lesson> lastShownLessonList = model.getFilteredLessonList();
-
-        if (studentIndex.getZeroBased() >= lastShownStudentList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        StringBuilder result = new StringBuilder();
+        checkIndexesAreValid(model, lessonIndexes, studentIndexes);
+        checkLessonsHaveCapacity(model, lessonIndexes, studentIndexes);
+        for (Index lessonIndex : lessonIndexes) {
+            for (Index studentIndex : studentIndexes) {
+                result.append(executeSingle(model, studentIndex, lessonIndex));
+            }
         }
-
-        if (lessonIndex.getZeroBased() >= lastShownLessonList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
-        }
-
-        Student studentToAddToLesson = lastShownStudentList.get(studentIndex.getZeroBased());
-        Lesson lessonToAddToStudent = lastShownLessonList.get(lessonIndex.getZeroBased());
-
-        if (studentToAddToLesson.hasLesson(lessonToAddToStudent)) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_ALREADY_ATTEND_LESSON);
-        }
-
-        if (lessonToAddToStudent.isFull()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_LESSON_FULL);
-        }
-
-        lessonToAddToStudent.addStudent(studentToAddToLesson);
-        studentToAddToLesson.addLesson(lessonToAddToStudent);
-
         model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
         model.updateFilteredLessonList(Model.PREDICATE_SHOW_ALL_LESSONS);
         model.viewList(MED);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS,
-                studentToAddToLesson.toNameString(),
-                lessonToAddToStudent.toNameString()));
+        return new CommandResult(result.toString());
+    }
+
+    private void checkIndexesAreValid(Model model, ArrayList<Index> lessonIndexes, ArrayList<Index> studentIndexes)
+            throws CommandException {
+        List<Student> lastShownStudentList = model.getFilteredStudentList();
+        List<Lesson> lastShownLessonList = model.getFilteredLessonList();
+        int maxStudentIndex = studentIndexes.stream().max(
+                Comparator.comparingInt(Index::getZeroBased)).get().getZeroBased();
+        int maxLessonIndex = lessonIndexes.stream().max(
+                Comparator.comparingInt(Index::getZeroBased)).get().getZeroBased();
+        if (maxStudentIndex >= lastShownStudentList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        }
+        if (maxLessonIndex >= lastShownLessonList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
+        }
+    }
+
+    private void checkLessonsHaveCapacity(Model model, ArrayList<Index> lessonIndexes, ArrayList<Index> studentIndexes)
+            throws CommandException {
+        List<Lesson> lastShownLessonList = model.getFilteredLessonList();
+        List<Student> lastShownStudentList = model.getFilteredStudentList();
+        for (Index lessonIndex : lessonIndexes) {
+            Lesson lesson = lastShownLessonList.get(lessonIndex.getZeroBased());
+            long requiredCapacity = studentIndexes.stream()
+                    .map(index -> lastShownStudentList.get(index.getZeroBased()))
+                    .filter(student -> !student.hasLesson(lesson))
+                    .count();
+            if (lesson.getStudents().numberOfStudents() + requiredCapacity > lesson.getCapacityValue()) {
+                throw new CommandException(String.format(MESSAGE_FAILURE_FULL, lesson.toNameString()));
+            }
+        }
     }
 }

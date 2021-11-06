@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static tutoraid.logic.parser.CliSyntax.PREFIX_LESSON;
 import static tutoraid.logic.parser.CliSyntax.PREFIX_STUDENT;
 
+import java.util.ArrayList;
+
 import tutoraid.commons.core.Messages;
 import tutoraid.commons.core.index.Index;
 import tutoraid.logic.commands.DeleteStudentFromLessonCommand;
@@ -34,11 +36,11 @@ public class DeleteStudentFromLessonCommandParser implements Parser<DeleteStuden
                     Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteStudentFromLessonCommand.MESSAGE_USAGE));
         }
 
-        Index studentIndex = ParserUtil.parseIndex(
+        ArrayList<Index> studentIndexes = ParserUtil.parseMultipleIndexes(
                 argMultimap.getValue(PREFIX_STUDENT).get());
-        Index lessonIndex = ParserUtil.parseIndex(
+        ArrayList<Index> lessonIndexes = ParserUtil.parseMultipleIndexes(
                 argMultimap.getValue(PREFIX_LESSON).get());
 
-        return new DeleteStudentFromLessonCommand(studentIndex, lessonIndex);
+        return new DeleteStudentFromLessonCommand(studentIndexes, lessonIndexes);
     }
 }
