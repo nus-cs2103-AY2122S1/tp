@@ -15,7 +15,7 @@ Ailurus is catered for people that are familiar with [Command Line Interfaces](h
 ## Welcome to the Ailurus User Guide
 This User Guide aims to introduce new users to Ailurus, while also providing them with a comprehensive guide to all the commands in Ailurus.
 
-Texts highlighted in light-blue such as [this](https://en.wikipedia.org/wiki/This_(computer_programming)) will direct the user to areas where more information about the highlighted text can be found. This is useful especially when the user wants to navigate to a certain section via the Table of Contents.
+Texts highlighted in light-blue such as [this](https://en.wikipedia.org/wiki/This_(computer_programming)) will direct the user to areas where more information about the highlighted text can be found. This is useful especially when you want to navigate to a certain section via the Table of Contents.
 
 It is recommended to follow along and try out the commands listed in this User Guide. Ailurus is designed such that the commands will come as intuitive after a short period of use.
 
@@ -48,15 +48,29 @@ open the help window.<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Navigating the User Interface
+![NavigateUI](images/navigateUI.png)
+
+The User Interface consists of the following components, as shown in the numberings of the components in the image above, on the top left-hand corner of each component:
+1. The `File` button, when clicked, shows the `Exit` button which exits the application when clicked. Alternatively, the `X` cross at the top right-hand corner of the application can be used as well to exit.
+2. The `Help` button, which clicked, shows the `Help F1` button which pops up the [Help Window](#viewing-help--help). This can also be done using the `help` command or pressing the `F1` key on the keyboard.
+3. This is the **command input box**, which is the primary component that you will be working with. You can type in any of the commands found in the [Features](#features) section, as long as they have the valid parameters as well.
+4. This is the **result display box**, which will give you feedback on the success or failure in executing a command. 
+   1. If there is a mistake or error in your parameters, what you have typed in will turn red, and it will provide you with the expected format or constraints of the parameter that was invalid. ![InvalidInput](images/invalid_input.png)
+   2. Note that it _may not show all invalid parameters_, so you should change them one at a time to check their validity.
+5. This is the **Event List**, which will list events based on the [event commands used](#event). Each event has a date, and can have members participating in them who can be marked present or absent in the event.
+6. This is the **Member List**, which will list members based on the [member commands used](#member). Each member card also shows their relevant details and tasks.
+7. This is the **Task List**, which will list tasks based on the [task commands used](#task). Each task has a due date and time, and can be marked completed or incomplete.
+
 ## Features
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
 
-* Commands are usually abbreviated to facilitate faster typing for user convenience. As a general rule of thumb, `m`, `e` and `t` are used to represent `Member`, `Event` and `Task` respectively.
+* Commands are usually abbreviated to facilitate faster typing for your convenience. As a general rule of thumb, `m`, `e` and `t` are used to represent `Member`, `Event` and `Task` respectively.
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+* Words in `UPPER_CASE` are the parameters to be supplied.<br>
   e.g. in `madd /n NAME`, `NAME` is a parameter which can be used as `madd /n John Doe`.
 
 * Items in square brackets are optional.<br>
@@ -84,10 +98,10 @@ open the help window.<br>
 <span id="invalid_prefix" />
 * If an invalid prefix is used in a command, it will be seen as part of the previous parameter and may throw an error. <br> e.g. if you specify `madd /n John Tan /w Street 52 /ph 91234556`, the name of member added will be `John Tan /w Street 52` which is invalid as `/` is not an alphabet or number.
 
-* Some commands require the user to enter the `EVENT_INDEX`, `MEMBER_INDEX` or `TASK_INDEX`. The `INDEX` refers to the order on 
+* Some commands require you to enter the `EVENT_INDEX`, `MEMBER_INDEX` or `TASK_INDEX`. The `INDEX` refers to the order on 
   the display list.<br>
-  e.g. `Freshmen Orientation Camp Project` has a `EVENT_INDEX` of `1` and `Charlotte Oliveiro` has a `MEMBER_INDEX` 
-  of `3` according to the diagram below.
+  e.g. `Freshmen Orientation Camp Project` has a `EVENT_INDEX` of `1`, `Charlotte Tan` has a `MEMBER_INDEX` 
+  of `3`, and `submit indemnity forms` has a `TASK_INDEX` of `2` according to the diagram below.
   ![idNumberExample](images/idNumberExample.png)
 
 </div>
@@ -100,7 +114,7 @@ The member list is in the centre column of the application, which lists all memb
 * Phone number
 * Address
 * Email Address
-* Tasks of member - <font color = "#7c0236">red indicating undone</font>, <font color = "#3f7318">green indicating done</font>
+* Tasks belonging to member - <span style="color:#7c0236">red indicating undone</span>, <span style="color:#3f7318">green indicating done</span>. Note that the default is <span style="color:#7c0236">undone</span>.
 
 The member list and the members can be changed using the various commands listed below. Each command starts with `m` abbreviation of member. This is to indicate that the command is used for the manipulation of the member list or member data.
 
@@ -110,7 +124,7 @@ Parameter | Description, Constraints
 --------|------------------
 **NAME** | _Name of member_ <br> - Only alphabets, numbers and spaces allowed i.e. no special characters such as `.`, `'`, or `-`. <br> - No character limit. <br> - All names of members must be unique <br> - If there are 2 members of the same name, it is recommended to add a number behind to uniquely identify the member e.g. John Tan2.
 **POSITIONS** | _Positions of member_ <br> - Same as NAME. <br> - If `-` should be used, replace it with a space e.g. `Vice President`.
-**PHONE_NUMBER** | _Phone number of member_ <br> - Only numbers allowed. <br> - No number limit, but minimum 3 numbers.
+**PHONE_NUMBER** | _Phone number of member_ <br> - Only numbers allowed. <br> - Minimum 3 digits, maximum 15 digits. ([Reason for 15 digits](https://en.wikipedia.org/wiki/Telephone_number#Concept_and_methodology))
 **ADDRESS** | _Physical address of member_ <br> - All characters allowed with no character limit.
 **EMAIL** | _Email address of member_ <br> - Should be of format local-part@domain. e.g. johndoe@example.com
 **MEMBER_INDEX** | _Index of member in the displayed `Member List` column of the application_ <br> - **Must be a positive integer** 1, 2, 3, …​ <br> - Cannot exceed the number of members listed in the displayed `Member List`.
@@ -125,6 +139,8 @@ Format: `madd /n NAME /ph PHONE_NUMBER [/em EMAIL] [/a ADDRESS] [/p POSITION]…
 <div markdown="span" class="alert alert-primary"> 
 :bulb: **Tip:** A member can have any number of positions (including 0). A member MUST have a name and phone number, but email address, mailing address and positions are optional.
 </div>
+
+* After executing the command, the entire list of members will also appear in Member List (same as `mlist`) to show the added member.
 
 Examples:
 * `madd /n John Doe /ph 98765432`
@@ -154,13 +170,14 @@ Example:
 
 Edits an existing member in Ailurus. 
 
-Format: `medit /m MEMBER_INDEX [/n NAME] [/ph PHONE] [/em EMAIL] [/a ADDRESS] [/p POSITION]…​`
+Format: `medit /m MEMBER_INDEX [/n NAME] [/ph PHONE_NUMBER] [/em EMAIL] [/a ADDRESS] [/p POSITION]…​`
 
 * Edits the member at the specified `MEMBER_INDEX`.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing positions, the existing positions of the member will be removed i.e. adding of positions is not cumulative.
 * You can remove all the member’s positions by typing `/p` without specifying any positions after it. In such a case, only one `/p` prefix is allowed, otherwise the second `/p` prefix will be considered an [invalid prefix](#invalid_prefix) and will throw an error.
+* After executing the command, the entire list of members will also appear in Member List. (same as `mlist`)
 
 Examples:
 * `medit /m 1 /ph 91234567 /em johndoe@example.com` Edits the phone number and email address of the 1st member to be `91234567` and `johndoe@example.com` respectively.
@@ -188,7 +205,7 @@ Examples:
 
 Finds members whose tasks' names contain the given keyword.
 
-Format: `mtfind KEY_WORD`
+Format: `mtfind KEY_WORD [MORE_KEYWORDS]…​`
 
 * The search is case-insensitive. e.g. `form` will match `Form`
 * Only the name of the task is searched.
@@ -197,7 +214,7 @@ Format: `mtfind KEY_WORD`
   e.g. `submit meeting` will return `team meeting`, `submit form`
 
 Examples:
-* `mtfind form` returns `Alex Yeoh`, `Charlotte Oliveiro`, `David Li` and `Roy Balakrishnan` because task `submit form` was assigned to them.
+* `mtfind form` returns `Alex Yeoh`, `Charlotte Tan` and `David Li` because task `submit indemnity form` was assigned to them.
  ![result for 'mtfind form'](images/mtfind_example.png)
 
 #### Deleting a member : `mdel`
@@ -216,7 +233,7 @@ Examples:
 The task list is the in the right-most column of the application, which lists all tasks of a member and their details, and is scrollable. Each task has their own task card which consists of their relevant details, which include (from top to bottom):
 * Name of task
 * Task due date and time
-* Progress of task (Complete or Incomplete)
+* Progress of task: `Complete` or `Incomplete`. (Note that the default is `Incomplete`)
 
 The task list and the tasks can be changed using the various commands listed below. Each command starts with `t` abbreviation of task. This is to indicate that the command is used for the manipulation of the task list or task data.
 
@@ -229,7 +246,7 @@ The task list and the tasks can be changed using the various commands listed bel
 Parameter | Description, Constraints
 --------|------------------
 **NAME** | _Name of task_ <br> - Only alphabets, numbers and spaces allowed i.e. no special characters such as `.`, `'`, or `-`. <br> - No character limit.
-**DATE_TIME** | _Date and time of a task_ <br> - Must be of format: `dd/MM/yyyy HH:mm` <br> - `dd: date` is a 2 digit number from 1 to 31 <br> - `MM: month` is a 2 digit number from 1 to 12 <br> - `yyyy: year` is a 4 digit number from 0001 to 9999 <br> - `HH: hour(s)` is a 2 digit number from 00 to 24 <br> -`mm: minute(s)` is a 2 digit number from 00 to 59 <br> - **NOTE**: Invalid date and time that satisfy the above conditions will be rounded down to the nearest valid date and time. <br> 1. if you specify date as `31/11/2021`, Ailurus will round it to `30/11/2021`, while `32/11/2021` will be considered as invalid date. <br> 2. if you specify date as `29/02/2021`, Ailurus will round it to `28/02/2021` because 2021 is not a leap year. <br> 3. if you specify a date and time as `10/11/2021 24:00`, Ailurus will round it to `11/11/2021 00:00` as it sees it as the next day.
+**DATE_TIME** | _Date and time of a task_ <br> - Must be of format: `dd/MM/yyyy HH:mm` <br> - `dd: date` is a 2 digit number from 01 to 31 <br> - `MM: month` is a 2 digit number from 01 to 12 <br> - `yyyy: year` is a 4 digit number from 1970 to 3000 ([Reason for 1970](https://en.wikipedia.org/wiki/Unix_time)) <br> - `HH: hour(s)` is a 2 digit number from 00 to 24 <br> - `mm: minute(s)` is a 2 digit number from 00 to 59 <br> - **NOTE**: Invalid date and time that satisfy the above conditions will be rounded down to the nearest valid date and time. <br> 1. if you specify date as `31/11/2021`, Ailurus will round it to `30/11/2021`, while `32/11/2021` will be considered as invalid date. <br> 2. if you specify date as `29/02/2021`, Ailurus will round it to `28/02/2021` because 2021 is not a leap year. <br> 3. if you specify a date and time as `10/11/2021 24:00`, Ailurus will round it to `11/11/2021 00:00` as it sees it as the next day.
 **MEMBER_INDEX** | _Index of member in the displayed `Member List` column of the application_ <br> - **Must be a positive integer** 1, 2, 3, …​ <br> - Cannot exceed the number of members listed in the displayed `Member List`.
 **TASK_INDEX** | _Index of task in the displayed `Task List` column of the application_ <br> - **Must be a positive integer** 1, 2, 3, …​ <br> - Cannot exceed the number of tasks listed in the displayed `Task List`.
 **OPTION** | _Yes or No option_ <br> - **must be either `y` or `n`** to indicate yes or no respectively.
@@ -246,10 +263,30 @@ Format: `tadd /n NAME /d DATE_TIME /m MEMBER_INDEX [/m MORE_MEMBER_INDEX]…​`
 
 * Tasks can be added to multiple members if there is more than one `MEMBER_INDEX` provided.
 * The full task list of the member is shown after the command is executed.
+* Note that tasks that are overdue (i.e. dates in the past) can be added for accounting of tasks.
 
 Examples:
 * `tadd /n Collect payment from members /d 20/11/2021 11:30 /m 3` adds task `Collect payment from members` to the third member on the  member list.
 * `tadd /n Collect dogtag /d 20/11/2021 11:30 /m 1 /m 2 /m 3` adds task `Collect dogtag` to the first three members on the member list.
+
+#### Locating tasks by name: `tfind`
+
+Find tasks whose names contain any of the given keywords.
+
+Format: `tfind KEYWORD [MORE_KEYWORDS]...`
+
+* **It is recommended to use this command only when the task list has entries** (accessible via `tlist /m MEMBER_INDEX`)
+    * Otherwise, `0 task(s) listed!` will be shown as the task list is empty, therefore no task is found.
+* The search is case-insensitive. e.g `submit` will match `Submit`
+* The order of the keywords does not matter. e.g. `submit form` will match `form submit`
+* Only the name is searched.
+* Matching is not strict, and will find any name with word that contains `KEYWORD` e.g. `subm` keyword will match `Submit form`
+* Tasks matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Submit form` will return `Submit homework`, `Edit form`
+
+Examples:
+* `tfind form` returns `form` and `submit form`
+* `tfind Submit form` returns `Submit homework`, `Edit form`<br>
 
 #### Listing all tasks of a member : `tlist`
 
@@ -273,12 +310,12 @@ Marks the specified tasks of the specified member as done.
 Format: `tdone /t TASK_INDEX [/t MORE_TASK_INDEX]…​`
 
 * **Only can be used when the task list has entries** (accessible via `tlist /m MEMBER_INDEX`)
-  * Otherwise, an error message "Task X does not exist in the task list of the member" will be shown as the task list is empty.
+  * Otherwise, an error message `Task X does not exist in the task list of the member` will be shown as the task list is empty.
 * Multiple tasks can be marked as done when there is more than one `TASK_INDEX` provided.
 * Marks the task specified by `TASK_INDEX` as complete.
 
 Example:
-* `tdone /t 1 /t 2` marks the 1st and 2nd task on the displayed task list as done in Ailurus.
+* `tdone /t 1 /t 2` marks the 1st and 2nd task on the displayed task list as done in Ailurus. The task in the Member List will turn <span style="color:#3f7318">green</span>, and `Progress` will change to `Complete`. ![tdoneUI](images/tdoneUI.png)
 
 #### Mark a task as undone : `tundone`
 Marks the specified completed task of the specified member as undone. 
@@ -286,7 +323,7 @@ Marks the specified completed task of the specified member as undone.
 Format: `tundone /t TASK_INDEX [/t MORE_TASK_INDEX]…​`
 
 * **Only can be used when the task list has entries** (accessible via `tlist /m MEMBER_INDEX`).
-    * Otherwise, an error message "Task X does not exist in the task list of the member" will be shown as the task list is empty.
+    * Otherwise, an error message `Task X does not exist in the task list of the member` will be shown as the task list is empty.
 * Multiple completed tasks can be marked as undone when there is more than one `TASK_INDEX` provided.
 * Marks the task specified by `TASK_INDEX` as incomplete.
 
@@ -296,10 +333,10 @@ Example:
 #### Editing a task: `tedit`
 Edits an existing task within Ailurus.
 
-Format: `tedit /t TASK_INDEX [/n TASK_NAME] [/d DATE_TIME]`
+Format: `tedit /t TASK_INDEX [/n NAME] [/d DATE_TIME]`
 
 * **Only can be used when the task list has entries** (accessible via `tlist /m MEMBER_INDEX`).
-    * Otherwise, an error message "Task X does not exist in the task list of the member" will be shown as the task list is empty.
+    * Otherwise, an error message `Task X does not exist in the task list of the member` will be shown as the task list is empty.
 * Edits the task at the specified `TASK_INDEX`. 
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
@@ -315,35 +352,18 @@ Deletes the specified task of a specified member from Ailurus.
 Format: `tdel /t TASK_INDEX`
 
 * **Only can be used when the task list has entries** (accessible via `tlist /m MEMBER_INDEX`).
-    * Otherwise, an error message "Task X does not exist in the task list of the member" will be shown as the task list is empty.
+    * Otherwise, an error message `Task X does not exist in the task list of the member` will be shown as the task list is empty.
 * Deletes the task according to the specified `TASK_INDEX`.
 
 Examples:
 * `tdel /t 1` deletes the 1st task on the displayed task list in Ailurus.
-
-#### Locating tasks by name: `tfind`
-
-Find tasks whose names contain any of the given keywords.
-
-Format: `tfind KEYWORD [MORE_KEYWORDS]...`
-
-* The search is case-insensitive. e.g `submit` will match `Submit`
-* The order of the keywords does not matter. e.g. `submit form` will match `form submit`
-* Only the name is searched.
-* Matching is not strict, and will find any name with word that contains `KEYWORD` e.g. `subm` keyword will match `Submit form`
-* Tasks matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Submit form` will return `Submit homework`, `Edit form`
-
-Examples:
-* `tfind form` returns `form` and `submit form`
-* `tfind Submit form` returns `Submit homework`, `Edit form`<br>
 
 ### Event
 
 The event list is the in the left-most column of the application, which lists all events and their details, and is scrollable. Each event has a group of participating members. The events have their own event card which consists of their relevant details, which include (from top to bottom):
 * Name of event
 * Event date
-* All participating members in the event - <font color = "#7c0236">red indicating did not attend</font>, <font color = "#3f7318">green indicating attended event</font>
+* All participating members in the event - <span style="color:#7c0236">red indicating did not attend</span>, <span style="color:#3f7318">green indicating attended event</span>. Note that the default is <span style="color:#7c0236">not attend</span>.
 
 The event list and the events can be changed using the various commands listed below. Each command starts with `e` abbreviation of event. This is to indicate that the command is used for the manipulation of the event list or event data.
 
@@ -356,7 +376,7 @@ The event list and the events can be changed using the various commands listed b
 Parameter | Description, Constraints
 --------|------------------
 **NAME** | _Name of event_ <br> - Only alphabets, numbers and spaces allowed i.e. no special characters such as `.`, `'`, or `-`. <br> - No character limit.
-**DATE** | _Date of a task_ <br> - Must be of format: `dd/MM/yyyy` <br> - `dd: date` is a 2 digit number from 1 to 31 <br> - `MM: month` is a 2 digit number from 1 to 12 <br> - `yyyy: year` is a 4 digit number from 0001 to 9999 <br> - **NOTE**: Invalid date and time that satisfy the above conditions will be rounded down to the nearest valid date and time. <br> 1. if you specify date as `31/11/2021`, Ailurus will round it to `30/11/2021`, while `32/11/2021` will be considered as invalid date. <br> 2. if you specify date as `29/02/2021`, Ailurus will round it to `28/02/2021` because 2021 is not a leap year. <br>
+**DATE** | _Date of a task_ <br> - Must be of format: `dd/MM/yyyy` <br> - `dd: date` is a 2 digit number from 01 to 31 <br> - `MM: month` is a 2 digit number from 01 to 12 <br> - `yyyy: year` is a 4 digit number from 1970 to 3000 ([Reason for 1970](https://en.wikipedia.org/wiki/Unix_time)) <br> - **NOTE**: Invalid date and time that satisfy the above conditions will be rounded down to the nearest valid date and time. <br> 1. if you specify date as `31/11/2021`, Ailurus will round it to `30/11/2021`, while `32/11/2021` will be considered as invalid date. <br> 2. if you specify date as `29/02/2021`, Ailurus will round it to `28/02/2021` because 2021 is not a leap year. <br>
 **MEMBER_INDEX** | _Index of member in the displayed `Member List` column of the application_ <br> - **Must be a positive integer** 1, 2, 3, …​ <br> - Cannot exceed the number of members listed in the displayed `Member List`.
 **EVENT_INDEX** | _Index of event in the displayed `Event List` column of the application_ <br> - **Must be a positive integer** 1, 2, 3, …​ <br> - Cannot exceed the number of events listed in the displayed `Event List`.
 
@@ -371,6 +391,8 @@ You can add multiple members to an event e.g. /m 2 /m 3 /m 4...
 </div>
 
 * Multiple members can be added to an event when more than one `MEMBER_INDEX` is provided.
+* Note that events that are in the past can be added for accounting of events.
+* After executing the command, the entire list of events will also appear in Event List (same as elist) to show the added event.
 
 Examples:
 * `eadd /n Computing Freshmen Orientation Camp 2021 /d 22/11/2021 /m 4 /m 5 /m 6` adds a `Computing Freshmen Orientation Camp 2021` event dated `22/11/2021` and has the 4th, 5th and 6th members of the member list added to it.
@@ -406,7 +428,7 @@ Format: `emark /e EVENT_INDEX /m MEMBER_INDEX [/m MORE_MEMBER_INDEX]…​`
 * If any of the specified member is not participating in the event, an error is thrown to the user, specifying the first member that is not participating in the event.
 
 Examples:
-* `emark /e 1 /m 2 /m 3` marks the attendance of the 2nd and 3rd person in the member list in Event 1. 
+* `emark /e 1 /m 2 /m 3` marks the attendance of the 2nd and 3rd person in the member list in Event 1. The names of members marked in the event in `Event List` will turn <span style="color:#3f7318">green</span>. ![emarkUI](images/emarkUI.png)
 
 #### Marking all participants in the event as attended : `emarkall`
 
@@ -440,6 +462,7 @@ Format: `eedit /e EVENT_INDEX [/n EVENT_NAME] [/d EVENT_DATE] [/m MEMBER_INDEX]�
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * You can remove all the members by typing `/m` without specifying any members after it.
+* After executing the command, the entire list of events will also appear in Event List (same as elist).
 
 Examples:
 * `eedit /e 1 /n Freshman Orientation Project Discussion /d 22/11/2021` edits the event name of the 1st event on the event list to be `Freshman Orientation Project Discussion` and date to be `22/11/2021`.
@@ -483,7 +506,7 @@ Format: `emdel /e EVENT_INDEX /m MEMBER_INDEX [/m MORE_MEMBER_INDEX]…​`
 Examples:
 * `emdel /e 1 /m 2 /m 3` deletes the 2nd and 3rd person in the member list from Event 1.
 
-## Other Commands
+## Other Commands and Features
 
 ### Viewing help : `help`
 
@@ -508,7 +531,7 @@ Ailurus data are saved in the hard disk automatically after any command that cha
 Ailurus data are saved as a JSON file `[JAR file location]/data/Ailurus.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">
-:exclamation: **Caution:** If your changes to the data file makes its format invalid, Ailurus will discard all data and start with an empty data file at the next run.
+:exclamation: **Caution:** If your changes to the data file makes its format invalid, Ailurus will discard all data and start with an empty data file at the next run. If this happens, you can delete the data file and restart Ailurus app, and it will automatically create a new data file after new data is added.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -524,7 +547,6 @@ Ailurus data are saved as a JSON file `[JAR file location]/data/Ailurus.json`. A
 
 Action | Format, Examples
 --------|------------------
-**help** | `help`
 **madd** | `madd /n NAME /ph PHONE_NUMBER [/em EMAIL] [/a ADDRESS] [/p POSITION]…​` <br> e.g., `madd /n James Ho /ph 22224444 /em jamesho@example.com /a 123, Clementi Rd, 1234665 /p friend /p colleague`
 **mlist** | `mlist [/e EVENT_INDEX] [/att] [/abs]` <br> e.g., `mlist /e 3 /att`
 **medit** | `medit /m MEMBER_INDEX [/n NAME] [/ph PHONE_NUMBER] [/em EMAIL] [/a ADDRESS] [/p POSITION]…​`<br> e.g.,`medit /m 2 /n James Lee /em jameslee@example.com`
@@ -536,16 +558,17 @@ Action | Format, Examples
 **tlist** | `tlist /m MEMBER_INDEX [/dn OPTION] [/ovd]` <br> e.g., `tlist /m 2 /dn y`
 **tdone** | `tdone /t TASK_INDEX [/t MORE_TASK_INDEX]…​`<br> e.g. `tdone /t 3 /t 4`
 **tundone** | `tundone /t TASK_INDEX [/t MORE_TASK_INDEX]…​`<br> e.g. `tundone /t 3 /t 4`
-**tedit** | `tedit /t TASK_INDEX [/n TASK_NAME] [/d TASK_DEADLINE]` <br> e.g. `tedit /t 2 /n Do OSA Quiz /d 21/10/2021 23:59`
+**tedit** | `tedit /t TASK_INDEX [/n NAME] [/d DATE_TIME]` <br> e.g. `tedit /t 2 /n Do OSA Quiz /d 21/10/2021 23:59`
 **tdel** | `tdel /t TASK_INDEX` <br> e.g., `tdel /t 1`
-**eadd** | `eadd /n EVENTNAME [/m MEMBER_INDEX]…​` <br> e.g., `eadd /n Computing Freshmen Orientation Camp 2021 /m 4 /m 5 /m 6`
+**eadd** | `eadd /n NAME /d DATE [/m MEMBER_INDEX]…​` <br> e.g., `eadd /n Computing Freshmen Orientation Camp 2021 /d 22/11/2021 /m 4 /m 5 /m 6`
 **edel** | `edel /e EVENT_INDEX ` <br> e.g., `edel /e 7`
 **elist** | `elist`
 **emark** | `emark /e EVENT_INDEX /m MEMBER_INDEX [/m MORE_MEMBER_INDEX]…​` <br> e.g. `emark /e 1 /m 2 /m 3`
 **emarkall** | `emarkall /e EVENT_INDEX` <br> e.g. `emarkall /e 5`
-**eunmark** | `unmark /e EVENT_INDEX /m MEMBER_INDEX [/m MORE_MEMBER_INDEX]…​` <br> e.g. `eunmark /e 2 /m 2 /m 5`
-**eedit** | `eedit /e EVENT_INDEX [/n EVENT_NAME] [/d EVENT_DATE] [/m MEMBER_INDEX]…​` <br> e.g. `eedit /e 1 /n Freshman Orientation Project Discussion`
+**eunmark** | `eunmark /e EVENT_INDEX /m MEMBER_INDEX [/m MORE_MEMBER_INDEX]…​` <br> e.g. `eunmark /e 2 /m 2 /m 5`
+**eedit** | `eedit /e EVENT_INDEX [/n NAME] [/d DATE] [/m MEMBER_INDEX]…​` <br> e.g. `eedit /e 1 /n Freshman Orientation Project Discussion`
 **efind** | `efind KEYWORD [MORE_KEYWORDS]…​`<br> e.g., `efind competition`
 **emadd** | `emadd /e EVENT_INDEX /m MEMBER_INDEX [/m MORE_MEMBER_INDEX]…​` <br> e.g. `emadd /e 1 /m 2 /m 3`
 **emdel** | `emdel /e EVENT_INDEX /m MEMBER_INDEX [/m MORE_MEMBER_INDEX]…​` <br> e.g. `emdel /e 1 /m 2 /m 3`
+**help** | `help`
 **exit** | `exit`
