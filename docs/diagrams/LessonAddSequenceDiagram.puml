@@ -13,20 +13,20 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("ladd 1 date/...")
+[-> LogicManager : execute("ladd...")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("ladd 1 date/...)
+LogicManager -> AddressBookParser : parseCommand("ladd...)
 activate AddressBookParser
 
 create LessonAddCommandParser
 AddressBookParser -> LessonAddCommandParser
 activate LessonAddCommandParser
 
-LessonAddCommand --> AddressBookParser
+LessonAddCommandParser --> AddressBookParser
 deactivate LessonAddCommandParser
 
-AddressBookParser -> LessonAddCommandParser : parse("1 date/...")
+AddressBookParser -> LessonAddCommandParser : parse("...")
 activate LessonAddCommandParser
 
 create LessonAddCommand
@@ -48,7 +48,7 @@ deactivate AddressBookParser
 LogicManager -> LessonAddCommand : executeUndoableCommand()
 activate LessonAddCommand
 
-LessonAddCommand -> Model : handle Lesson Add logic
+LessonAddCommand -> Model : handle logic
 activate Model
 
 note bottom
