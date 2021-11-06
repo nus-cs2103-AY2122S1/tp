@@ -71,7 +71,7 @@ public class StorageManagerTest {
         try {
             assertNotEquals(storageManager.readUserProfile(), userProfileStorage.readUserProfile(expectedPath));
         } catch (Exception e) {
-            assertNotNull(e);
+            assertNull(e);
         }
     }
 
