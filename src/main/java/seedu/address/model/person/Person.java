@@ -185,6 +185,21 @@ public class Person {
     }
 
     /**
+     * Checks if this staff was absent on the date provided.
+     *
+     * @param checkDate The date of the shift to be checked.
+     *
+     */
+    public boolean wasAbsent(LocalDate checkDate) {
+        for (Period period : absentDates) {
+            if (period.contains(checkDate)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Add a shift to the staff's schedule.
      *
      * @param dayOfWeek The day of the shift.
