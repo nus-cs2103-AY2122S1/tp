@@ -48,6 +48,7 @@ Given below are my contributions to the project.
 
 #### Contribution to User Guide
 Given below is an excerpt from TAB's [User Guide](/UserGuide) detailing instructions on how to use the new `remind` feature I added.
+Due to page limits, some content is not included.
 
 ##### Viewing upcoming lessons: `remind`
 Displays a list of upcoming lessons that ends within the next 48 hours.
@@ -82,6 +83,7 @@ Example: Suppose the date today is 1 Nov 2021 and current time is 1500h,
 
 #### Contribution to Developer Guide
 Given below is an excerpt from TAB's [Developer Guide](/DeveloperGuide) detailing the implementation of the new `tag` and `remind` features I added.
+Due to page limits, some content is not included.
 
 ##### Implementation - Reminder Feature
 The reminder feature allows users to view a list of upcoming lessons that ends in the next 48 hours.
@@ -91,12 +93,7 @@ Viewing a list of upcoming lessons is facilitated by `CalendarEntryList`.
 - Whenever data modifications are made to lessons, `CalendarEntryList` will update the list of calendar entries accordingly.
 - At the same time, `CalendarEntryList#isUpcoming(Entry<Lesson>)` checks if the lesson modified ends within the next 48 hours and `CalendarEntryList` will make changes accordingly to the list of upcoming lessons.
     - e.g. if the user edits an upcoming lesson such that the date and time are no longer considered upcoming, the lesson will be removed from the reminder list.
-
-Given below is a simple illustration of how the reminder list might change with user inputs.
-<img src="images/ReminderActivityDiagram.png" /> <br>
-
-*Figure I.5.1: Reminder activity diagram for adding a lesson.*
-
+    
 <div markdown="span" class="alert alert-info">:information_source: **Note:** 
 Reminder does not refresh the list of upcoming lessons automatically if no data modifications were made to lessons. Users need to enter `remind`, click <kbd>Reminder</kbd> on the menu bar or press <kbd>F5</kbd> to update the list of upcoming lessons. </div>
 
