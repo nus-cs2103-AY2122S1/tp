@@ -40,7 +40,7 @@ title: Developer Guide
       - [Implementation Details](#implementation-details-3)
       - [Implementation Rationale](#implementation-rationale-3)
       - [Design Considerations](#design-considerations-2)
-        - [Aspect: Similar Event names:](#aspect-similar-event-names)
+        - [Aspect: Similar Event names](#aspect-similar-event-names)
     - [\[Proposed\] Undo/redo feature](#proposed-undoredo-feature)
       - [Proposed Implementation](#proposed-implementation)
       - [Design considerations](#design-considerations-3)
