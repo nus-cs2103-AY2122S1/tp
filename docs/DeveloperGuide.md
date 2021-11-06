@@ -200,11 +200,11 @@ Step 7. CONNECTIONS updates and removes the tag `student` from the contact.
 
 #### Design considerations:
 
-* **Alternative 1 (Current choice): Tags are saved within a `Set<Tag>` within `Person`**
+* **Option 1 (Current choice): Tags are saved within a `Set<Tag>` within `Person`**
   * Pros: Easy to implement and doesn't allow for duplicates. 
   * Cons: Searching for contacts by tags may be slow, especially if there are many contacts, with each contact having multiple tags.
   
-* **Alternative 2: Utilise a separate `HashMap` data structure to map contacts to tags.**
+* **Option 2: Utilise a separate `HashMap` data structure to map contacts to tags.**
   * Pros: Fast retrieval of tagged contacts.
   * Cons: Difficult to maintain a separate data structure.
 
@@ -256,21 +256,21 @@ The following sequence diagram shows how the pin operation works:
 
 **Aspect: How pin executes:**
 
-* **Alternative 1:** Contact has a boolean field isPinned to indicate if the contact is pinned or not.
+* **Option 1:** Contact has a boolean field isPinned to indicate if the contact is pinned or not.
     * Pros: Easy to implement, less memory usage
     * Cons: Less flexibility in expanding the usage of pin.
 
-* **Alternative 2 (current choice):** Contact has Pin object to indicate if the contact is pinned or not.
+* **Option 2 (current choice):** Contact has Pin object to indicate if the contact is pinned or not.
     * Pros: More flexible to expand, other methods can be added to Pin if needed.
     * Cons: Will use more memory.
 
 **Aspect: How each pinned contact is displayed:**
 
-* **Alternative 1 (current choice):** Have two seperate cards, `PersonCard` and `PinnedPersonCard`, for a pinned contact and unpinned contact respectively.
+* **Option 1 (current choice):** Have two seperate cards, `PersonCard` and `PinnedPersonCard`, for a pinned contact and unpinned contact respectively.
     * Pros: Easier to implement.
     * Cons: More code duplication. 
 
-* **Alternative 2:** Have one card that will add a pin if the contact is pinned.
+* **Option 2:** Have one card that will add a pin if the contact is pinned.
     * Pros: Harder to implement.
     * Cons: Less code duplication. 
 
@@ -300,11 +300,11 @@ Step 5. CONNECTIONS' `UI` observes the filtered list is updated and displayed th
 
 **Aspect: How Find executes:**
 
-* **Alternative 1:** Utilise `NameContainsKeywordsPredicate` and `PersonsTagsContainsCaseInsensitiveTags`
+* **Option 1:** Utilise `NameContainsKeywordsPredicate` and `PersonsTagsContainsCaseInsensitiveTags`
     * Pros: Straightforward.
     * Cons: Introduces additional and unnecessary complexities to ModelManager.
 
-* **Alternative 2 (current choice):** Create a `FindPredicate` to store Name(s) and Tag(s)
+* **Option 2 (current choice):** Create a `FindPredicate` to store Name(s) and Tag(s)
     * Pros: Cleaner implementation. Only need to modify a method to modify the functionality of `FindCommand`.
     * Cons: More code.
 
@@ -334,11 +334,11 @@ Step 5. CONNECTIONS' `UI` observes the filtered list is updated and displayed th
 
 **Aspect: How FindAny executes:**
 
-* **Alternative 1:** Utilise `NameContainsKeywordsPredicate` and `PersonsTagsContainsCaseInsensitiveTags`.
+* **Option 1:** Utilise `NameContainsKeywordsPredicate` and `PersonsTagsContainsCaseInsensitiveTags`.
     * Pros: Straightforward.
     * Cons: Introduces additional and unnecessary complexities to ModelManager.
 
-* **Alternative 2 (current choice):** Create a `FindAnyPredicate` to store Name(s) and Tag(s).
+* **Option 2 (current choice):** Create a `FindAnyPredicate` to store Name(s) and Tag(s).
     * Pros: Cleaner implementation. Only need to modify a method to modify the functionality of `FindAnyCommand`.
     * Cons: More code.
 
@@ -370,7 +370,7 @@ Step 5. CONNECTIONS will display a detailed help message on the usage of `add` c
 
 Shows a list of contacts with upcoming birthdays. This list of birthday reminders is displayed to the user though the `UI`, specifically in `BirthdayReminderListPanel`. Each birthday is displayed as a `BirthdayReminderCard`.
 The list of birthdays is generated in the `ModelManager`, which implements the following functions:
-* `ModelManager#getBirthdayReminderList` which returns an `ObservableList<Person>` that is ordered according to upcoming birthdays.
+* `ModelManager#getBirthdayReminderList` returns an `ObservableList<Person>` that is ordered according to upcoming birthdays.
 
 Given below is an example usage scenario and how the Help mechanism behaves at each step.
 
@@ -394,11 +394,11 @@ Step 7. CONNECTIONS `UI` will observe a change in the `ObservableList<Person>` a
 
 **Aspect: How will the `ObservableList<Person>` update with a new contact:**
 
-* **Alternative 1 (current choice):** Clear the birthday reminders and regenerate it.
+* **Option 1 (current choice):** Clear the birthday reminders and regenerate it.
     * Pros: Straightforward.
     * Cons: Will be slower as whole list is regenerated.
 
-* **Alternative 2:** Insert the contact into the list. 
+* **Option 2:** Insert the contact into the list. 
     * Pros: Faster than alternative.
     * Cons: Harder to implement and maintain.
     
@@ -571,7 +571,7 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 
 1.  User requests to list contacts
 2.  CONNECTIONS show a list of contacts
-3.  User provides his/her index of the contact that is to be edited in the list along with the replacement information
+3.  User provides his/her index of the contact that is to be edited in the list, along with the replacement information
 4.  CONNECTIONS reflect the edits that were made
 
     Use case ends.
@@ -890,7 +890,7 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 ### Glossary
 * **CONNECTIONS**: The name of our product
 * **Entry**: An item written or printed in a diary, list, account book, or reference book.
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
+* **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Search Term**: A search term is what users key in when they want to find something specific
 * **Tag**: A label attached to someone or something for the purpose of identification or to give other information.
 
