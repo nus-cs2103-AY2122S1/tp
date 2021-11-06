@@ -82,7 +82,6 @@ public class FindPersonCommandParser implements Parser<FindPersonCommand> {
         }
 
         List<String> moduleKeywordsList = Arrays.stream(modules.split("\\s+"))
-                .map(module -> '[' + module + ']')
                 .collect(Collectors.toList());
 
         return new FindPersonCommand(new ModuleCodesContainsKeywordsPredicate(moduleKeywordsList));
