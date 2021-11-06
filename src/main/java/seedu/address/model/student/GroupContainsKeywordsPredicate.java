@@ -10,6 +10,9 @@ import java.util.function.Predicate;
 public class GroupContainsKeywordsPredicate implements Predicate<Student> {
     private final List<String> keywords;
 
+    /**
+     * Creates a {@code GroupContainsKeywordsPredicate} with the given list of keywords.
+     */
     public GroupContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }

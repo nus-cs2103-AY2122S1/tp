@@ -10,6 +10,9 @@ import java.util.function.Predicate;
 public class IdContainsKeywordsPredicate implements Predicate<Student> {
     private final List<String> keywords;
 
+    /**
+     * Creates a {@code IdContainsKeywordsPredicate} with the given list of keywords.
+     */
     public IdContainsKeywordsPredicate(List<String> keyword) {
         this.keywords = keyword;
     }
