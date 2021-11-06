@@ -1,0 +1,77 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant "p:PaidCommand" as PaidCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+participant "paidPerson:Person" as Person LOGIC_COLOR
+participant "paidLesson:Lesson" as Lesson LOGIC_COLOR
+
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : ...
+activate LogicManager
+
+LogicManager -> PaidCommand : execute()
+activate PaidCommand
+
+note right
+Details simplified:
+UndoableCommand executing executeUndoableCommand()
+end note
+
+PaidCommand -> Model : getPerson(personList, index)
+activate Model
+
+Model --> PaidCommand : personBeforeLessonPaid
+deactivate Model
+
+create Lesson
+PaidCommand -> Lesson : createEditedLesson(toPay, payment)
+activate Lesson
+
+Lesson -> Model ++ : OutstandingFees.pay(payment)
+Model --> Lesson -- : paidOutstandingFees
+
+Lesson --> PaidCommand : paidLesson
+deactivate Lesson
+
+note right
+Details omitted:
+Get lessonToEdit for personToEdit
+end note
+
+Model --> PaidCommand
+deactivate Model
+
+create Person
+PaidCommand -> Person : createEditedPerson(...)
+activate Person
+
+Person --> PaidCommand : person
+deactivate Person
+
+PaidCommand -> Model : setPerson(person, editedPerson)
+activate Model
+
+Model --> PaidCommand
+deactivate Model
+
+create CommandResult
+PaidCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> PaidCommand
+deactivate CommandResult
+
+PaidCommand --> LogicManager : result
+deactivate PaidCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
