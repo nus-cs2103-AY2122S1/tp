@@ -520,7 +520,7 @@ Ailurus data are saved as a JSON file `[JAR file location]/data/Ailurus.json`. A
 Action | Format, Examples
 --------|------------------
 **help** | `help`
-**madd** | `madd /n NAME /ph PHONE_NUMBER /em EMAIL /a ADDRESS [/p POSITION]…​` <br> e.g., `madd /n James Ho /ph 22224444 /em jamesho@example.com /a 123, Clementi Rd, 1234665 /p friend /p colleague`
+**madd** | `madd /n NAME /ph PHONE_NUMBER [/em EMAIL] [/a ADDRESS] [/p POSITION]…​` <br> e.g., `madd /n James Ho /ph 22224444 /em jamesho@example.com /a 123, Clementi Rd, 1234665 /p friend /p colleague`
 **mlist** | `mlist [/e EVENT_INDEX] [/att] [/abs]` <br> e.g., `mlist /e 3 /att`
 **medit** | `medit /m MEMBER_INDEX [/n NAME] [/ph PHONE_NUMBER] [/em EMAIL] [/a ADDRESS] [/p POSITION]…​`<br> e.g.,`edit /m 2 /n James Lee /em jameslee@example.com`
 **mfind** | `mfind KEYWORD [MORE_KEYWORDS]…​`<br> e.g., `mfind James Jake`
