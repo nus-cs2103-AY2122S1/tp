@@ -3,10 +3,10 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant "le:LessonEditCommand" as LessonEditCommand LOGIC_COLOR
+participant "p:PaidCommand" as PaidCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
-participant "editedPerson:Person" as Person LOGIC_COLOR
-participant "editedLesson:Lesson" as Lesson LOGIC_COLOR
+participant "paidPerson:Person" as Person LOGIC_COLOR
+participant "paidLesson:Lesson" as Lesson LOGIC_COLOR
 
 end box
 
@@ -17,20 +17,28 @@ end box
 [-> LogicManager : ...
 activate LogicManager
 
-LogicManager -> LessonEditCommand : execute()
-activate LessonEditCommand
+LogicManager -> PaidCommand : execute()
+activate PaidCommand
 
-LessonEditCommand -> Model : getPerson(personList, index)
+note right
+Details simplified:
+UndoableCommand executing executeUndoableCommand()
+end note
+
+PaidCommand -> Model : getPerson(personList, index)
 activate Model
 
-Model --> LessonEditCommand : personToEdit
+Model --> PaidCommand : personBeforeLessonPaid
 deactivate Model
 
 create Lesson
-LessonEditCommand -> Lesson : createEditedLesson(eld)
+PaidCommand -> Lesson : createEditedLesson(toPay, payment)
 activate Lesson
 
-Lesson --> LessonEditCommand : editedLesson
+Lesson -> Model ++ : OutstandingFees.pay(payment)
+Model --> Lesson -- : paidOutstandingFees
+
+Lesson --> PaidCommand : paidLesson
 deactivate Lesson
 
 note right
@@ -38,34 +46,31 @@ Details omitted:
 Get lessonToEdit for personToEdit
 end note
 
-LessonEditCommand -> Model : hasClashingLesson(editedLesson, lessonToEdit)
-activate Model
-
-Model --> LessonEditCommand
+Model --> PaidCommand
 deactivate Model
 
 create Person
-LessonEditCommand -> Person : createEditedPerson(personToEdit, updatedLessons)
+PaidCommand -> Person : createEditedPerson(...)
 activate Person
 
-Person --> LessonEditCommand : person
+Person --> PaidCommand : person
 deactivate Person
 
-LessonEditCommand -> Model : setPerson(person, editedPerson)
+PaidCommand -> Model : setPerson(person, editedPerson)
 activate Model
 
-Model --> LessonEditCommand
+Model --> PaidCommand
 deactivate Model
 
 create CommandResult
-LessonEditCommand -> CommandResult
+PaidCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> LessonEditCommand
+CommandResult --> PaidCommand
 deactivate CommandResult
 
-LessonEditCommand --> LogicManager : result
-deactivate LessonEditCommand
+PaidCommand --> LogicManager : result
+deactivate PaidCommand
 
 [<--LogicManager
 deactivate LogicManager

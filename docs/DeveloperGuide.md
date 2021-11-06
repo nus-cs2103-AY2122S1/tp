@@ -642,7 +642,7 @@ The `PersonMatchesKeywordsPredicate#test()` method will compose all searched fie
 The predicate is then used to filter the list of person.
 
 
-**Design considerations**
+#### Design considerations
 
 **Aspect: Data structure of predicates**
 * **Alternative 1 (current choice):** Use a single `PersonMatchesKeywordsPredicate` class to represent all fields' predicates.
@@ -667,6 +667,11 @@ When the user launches TAB, in `MainApp#initModelManager()`, the `FeesCalculator
 
 In `initModelManager()`, after the `model` was built from storage, `FeesCalculator#UpdateAllLessonOutstanding()` is called to update the lesson fees. For each person in `addressBook`, a new `updatedPerson` would be created.
 When creating the new `updatedPerson`, for each lesson that the person has, `updateLessonOutstandingFeesField()` will update all the outstanding fees fields using `lastUpdatedDate` and the current local date time.  
+
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** 
+FeesCalculator do not refresh the outstanding fees immediately after the lesson ends if TAB is open. Users need to relaunch TAB to see the updated outstanding fees. </div>
+
 
 The following is the logic of `FeesCalculator` to decide whether to update the specific lesson:
 * To construct a `FeesCalculator` object, the `lastUpdatedDate` and `currentDateTime`, which is simply the `LocalDateTime.now()`, are required. 
@@ -706,10 +711,19 @@ Payment of outstanding fees is facilitated by `Money` and its subclasses as well
 The user can record payment of the lesson using the `PaidCommand`. Payment made must be greater than 0 and lesser than or equals to the current outstanding fees.
 The `OutstandingFees` field would then be deducted by the paid amount. The following is the sequence diagram of the `PaidCommand`.
 
+![PaidCommandSequenceDiagram](images/PaidCommandSequenceDiagram.png)
 
+*Figure I.6.4: Sequence diagram of executing paid command.*
 
+#### Design Consideration
 
-
+**Aspect: How to keep track of last updated date time**
+* **Alternative 1 (current choice):** Keep track of when the fees were last added.
+  * Pros: Simple implementation. Less information to store as all lessons share the same last added date and time.
+  * Cons: Less flexibility for edited lesson fields such that the past calculations are affected.
+* **Alternative 2:** Keep track of when the fees were last paid for each student.
+  * Pros: It offers greater flexibility for TAB to automate changes if lesson fields edited affect the past calculations.
+  * Cons: Complex implementation. Need to keep track of each lesson's last paid separately, more information to store.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -1351,6 +1365,10 @@ Incorrect `remind` command to try:
 1. `remind x` where x is any character.
 
 Expected: Error details will be shown in the status message.
+
+### Fees Calculator
+
+1. Add a recurring lesson to a student. <br>
 
 ### Saving data
 
