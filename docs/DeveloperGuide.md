@@ -231,26 +231,79 @@ The following sequence diagram summarizes what happens when the user inputs an a
 
 ![AddGroupSequenceDiagram](images/AddGroupSequenceDiagram.png)
 
-### Add Allocation feature
+### Add Allocation Feature
 
-The `addalloc` feature allocates an existing student into a group.
+The `addalloc` feature allows users to allocate a student into a group.
 
-Given below is an example usage case and how the `add alloc` command mechanism behaves at each step.
+#### How the `AddAllocCommand` works
 
-#### Implementation
+Step 1. The user specifies the group name, the name or ID of the student to be allocated into the group.
 
-Step 1. The user executes `add alloc -g T02 -n Alex Yeoh` command to add the student named `Alex Yeoh` to the group `T02`. The `add alloc` command creates an `AddAllocCommandParser` object to parse the user input into respective command arguments.
+Step 2. An `AllocDescriptor` containing info of the group and the student is created.
 
-Step 2. The `AddAllocCommandParser` checks for validity of the user input and creates an `AddAllocCommand.AllocDescriptor` object to store information of the allocation which is then used to create an `AddAllocCommand` object to execute the command.
+Step 3. The `AllocDescriptor` is used to find the group and the student(s) as specified.
 
-Step 3. `AddAllocCommand#execute()` checks for validity of the command arguments, i.e. the existence of group `T02` and student `Alex Yeoh` in the database, the existence of student `Alex Yeoh` in group `T02`.
+* If there is only one matched student, the student is added to the group.
+* If there are multiple matched students, the allocation is not made successfully, and the student list is updated with all matched students.
 
-Step 4. `AddAllocCommand#execute()` calls `AddAllocCommand#createEditedStudent()` to create an instance of student `Alex Yeoh` allocated to group `T02`, and modifies the current unallocated student `Alex Yeoh` in the database with the newly allocated instance through `ReadOnlyAddressBook#setStudent`.
+Step 4. The student is allocated into the group.
 
-Step 5. `AddAllocCommand#execute()` calls `Group#addStudent()` to add student `Alex Yeoh` into the group.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** In the case where there are more than one students matched because they share the same name, an error message will be displayed to the user. The user will then have to specify the student to be added using his/her student ID.
 
-Use case ends.
+</div>
 
+The following activity diagram summarises what happens when a user executes the `addalloc` command to allocate a student into a group. In the case where the allocation is not made successfully, an error message will be displayed with the reason.
+
+<div style="text-align:center">
+
+![AddAllocActivityDiagram](images/AddAllocActivityDiagram.png)
+
+</div>
+
+The following sequence diagram summarises what happens when the user inputs an `addalloc` command together with a group and a student, specified by name, to be allocated.
+
+<div style="text-align:center">
+
+![AddGroupSequenceDiagram](images/AddAllocSequenceDiagram.png)
+
+</div>
+
+### Add Score Feature
+
+The `addscore` feature allows users to add score for an assessment of a student.
+
+#### How the `AddScoreCommand` works
+
+Step 1. The user specifies the assessment name, the name or ID of the student, and the score to be added.
+
+Step 2. An `ScoreDescriptor` containing info of the group, the student and the score is created.
+
+Step 3. The `ScoreDescriptor` is used to find the assessment and the student(s) as specified.
+
+* If there is only one matched student, the assessment of the student will be updated with the new score.
+* If there are multiple matched students, the update is not made successfully, and the student list is updated with all matched students.
+
+Step 4. The score is updated in the assessment of the student.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** In the case where there are more than one students matched because they share the same name, an error message will be displayed to the user. The user will then have to specify the student to be added using his/her student ID.
+
+</div>
+
+<div style="text-align:center">
+
+The following activity diagram summarises what happens when a user executes the `addscore` command to add score for an assessment of a student. In the case where the update is not made successfully, an error message will be displayed with the reason.
+
+![AddScoreActivityDiagram](images/AddScoreActivityDiagram.png)
+
+</div>
+
+The following sequence diagram summarises what happens when the user inputs an `addscore` command together with an assessment, a student, specified by name, and a score to be added.
+
+<div style="text-align:center">
+
+![AddGroupSequenceDiagram](images/AddScoreSequenceDiagram.png)
+
+</div>
 
 ### Search feature
 
@@ -287,6 +340,42 @@ The following diagram summarizes what happens after user input search command:
 if command is valid. Command is invalid if user input is empty, or if user entered more or less than one flag.
 </div>
 
+### Show Feature
+
+The `show` feature allows users to show the performance analysis of a student, a group or the cohort in an assessment.
+
+#### How the `ShowCommand` works
+
+Step 1. The user specifies the student (by either name, ID or index), the group name or the assessment name.
+
+Step 2. An `ScoreDescriptor` containing info of the group, the student and the score is created.
+
+Step 3. The `ScoreDescriptor` is used to find the assessment and the student(s) as specified.
+
+* If there is only one matched student, the assessment of the student will be updated with the new score.
+* If there are multiple matched students, the update is not made successfully, and the student list is updated with all matched students.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** In the case where the performance analysis of a student is requested by identity and there are more than one students matched because they share the same name, an error message will be displayed to the user. The user will then have to specify the student to be added using his/her student ID.
+
+</div>
+
+The following activity diagrams summarise what happens when a user executes the `show` command to show the performance analysis of a student, a group or the cohort in an assessment. In the case where the display is not presented successfully, an error message will be displayed with the reason.
+
+<div style="text-align:center">
+
+![ShowActivityDiagram](images/ShowActivityDiagram.png)
+![ShowStudentDiagram](images/ShowStudentActivityDiagram.png)
+![ShowStudentsActivityDiagram](images/ShowStudentsActivityDiagram.png)
+
+</div>
+
+The following sequence diagram summarises what happens when the user inputs an `show` command together with a student specified by name.
+
+<div style="text-align:center">
+
+![AddGroupSequenceDiagram](images/ShowSequenceDiagram.png)
+
+</div>
 
 #### Design considerations
 
