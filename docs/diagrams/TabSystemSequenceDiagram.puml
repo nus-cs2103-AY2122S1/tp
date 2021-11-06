@@ -1,11 +1,24 @@
 @startuml
-participant MainWindow
+!include style.puml
+box Ui UI_COLOR_T1
+participant ":MainWindow" as MainWindow UI_COLOR
+participant ":TabMenu" as TabMenu UI_COLOR
+participant ":TabPane" as TabPane UI_COLOR
 
 activate MainWindow
+activate TabMenu
+activate TabPane
+end box
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ContactsTabParser" as ContactsTabParser LOGIC_COLOR
+participant ":SwitchTabContactsCommand" as SwitchTabContactsCommand LOGIC_COLOR
 MainWindow -> LogicManager: execute("task")
 activate LogicManager
 
-alt User is on Contacts Tab
+
+alt #pink User is on Contacts Tab
 	LogicManager -> ContactsTabParser: parseCommand("task")
 	activate ContactsTabParser
 	ContactsTabParser -> SwitchTabContactsCommand
@@ -22,15 +35,13 @@ else User is on Help Tab
 end
 LogicManager --> MainWindow
 
-alt User switches to Contacts Tab
+alt #lightcyan User switches to Contacts Tab
 	ref over MainWindow : Implementation hidden
 else User switches to Tasks tab
 	MainWindow -> MainWindow: handleSwitchTasksTab()
 	activate MainWindow
 	MainWindow -> TabMenu: switchTab(1)
-	activate TabMenu
 	TabMenu -> TabPane: getSelectionModel().select(1)
-	activate TabPane
 	TabPane --> TabMenu
 	destroy TabPane
 	TabMenu --> MainWindow

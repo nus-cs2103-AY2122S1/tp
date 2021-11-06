@@ -46,11 +46,11 @@ class EditTaskCommandParserTest {
     public void parse_invalidPreamble_failure() {
         // negative index
         assertParseFailureWithPersonList(parser, "-5" + CommandTestUtil.TASK_DESC_ASSIGNMENT, people,
-                MESSAGE_INVALID_FORMAT);
+                Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
 
         // zero index
         assertParseFailureWithPersonList(parser, "0" + CommandTestUtil.TASK_DESC_ASSIGNMENT, people,
-                MESSAGE_INVALID_FORMAT);
+                Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
 
         // invalid arguments being parsed as preamble
         assertParseFailureWithPersonList(parser, "1 some random string", people, MESSAGE_INVALID_FORMAT);
@@ -62,13 +62,9 @@ class EditTaskCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         assertParseFailureWithPersonList(parser, "1" + CommandTestUtil.INVALID_TASK_DESC, people,
-                TaskDescription.MESSAGE_CONSTRAINTS); // invalid name
+                TaskDescription.MESSAGE_CONSTRAINTS); // invalid task description
         assertParseFailureWithPersonList(parser, "1" + CommandTestUtil.INVALID_TAG_DESC, people,
                 Tag.MESSAGE_CONSTRAINTS); // invalid tag
-
-        // invalid task description
-        assertParseFailureWithPersonList(parser,
-                "1" + CommandTestUtil.INVALID_TASK_DESC, people, TaskDescription.MESSAGE_CONSTRAINTS);
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Person} being edited,
         // parsing it together with a valid tag results in error

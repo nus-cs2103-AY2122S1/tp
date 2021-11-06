@@ -12,6 +12,7 @@ import dash.logic.commands.SwitchTabHelpCommand;
 import dash.logic.commands.SwitchTabTasksCommand;
 import dash.logic.commands.taskcommand.AddTaskCommand;
 import dash.logic.commands.taskcommand.AssignPeopleCommand;
+import dash.logic.commands.taskcommand.ClearDoneTaskCommand;
 import dash.logic.commands.taskcommand.ClearTaskCommand;
 import dash.logic.commands.taskcommand.CompleteTaskCommand;
 import dash.logic.commands.taskcommand.DeleteTaskCommand;
@@ -77,13 +78,16 @@ public class TaskTabParser {
             return new ExitCommand();
 
         case FindTaskCommand.COMMAND_WORD:
-            return new FindTaskCommandParser().parse(arguments);
+            return new FindTaskCommandParser().parse(arguments, filteredPersonList);
 
         case ListTaskCommand.COMMAND_WORD:
             return new ListTaskCommand();
 
         case ClearTaskCommand.COMMAND_WORD:
             return new ClearTaskCommand();
+
+        case ClearDoneTaskCommand.COMMAND_WORD:
+            return new ClearDoneTaskCommand();
 
         case CompleteTaskCommand.COMMAND_WORD:
             return new CompleteTaskCommandParser().parse(arguments);
@@ -92,12 +96,18 @@ public class TaskTabParser {
             return new UpcomingTaskCommand();
 
         case SwitchTabContactsCommand.COMMAND_WORD:
+
+        case SwitchTabContactsCommand.COMMAND_WORD_ALTERNATE:
             return new SwitchTabContactsCommand(1);
 
         case SwitchTabTasksCommand.COMMAND_WORD:
+
+        case SwitchTabTasksCommand.COMMAND_WORD_ALTERNATE:
             return new SwitchTabTasksCommand(1);
 
         case SwitchTabHelpCommand.COMMAND_WORD:
+
+        case SwitchTabHelpCommand.COMMAND_WORD_ALTERNATE:
             return new SwitchTabHelpCommand(1);
 
         default:

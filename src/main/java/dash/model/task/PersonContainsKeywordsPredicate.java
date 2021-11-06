@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
-import dash.commons.util.StringUtil;
 import dash.model.person.Person;
 
 /**
@@ -25,7 +24,7 @@ public class PersonContainsKeywordsPredicate implements Predicate<Task> {
                     boolean condition = false;
                     for (Person p : personSet) {
                         String i = p.getName().fullName;
-                        condition = StringUtil.containsWordIgnoreCase(i, keyword);
+                        condition = keyword.equals(i);
                         if (condition) {
                             break;
                         }

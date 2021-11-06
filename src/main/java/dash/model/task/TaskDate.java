@@ -6,33 +6,27 @@ import static java.util.Objects.requireNonNull;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
 import java.util.Locale;
 import java.util.Optional;
 
 /**
  * Represents a Date of a Task, can have Date with optional Time or have neither.
- * Guarantees: immutable; is valid as declared in {@link #isValidTaskDate(String)}}
+ * Guarantees: immutable; is valid as declared in {@link #isValidArgument(String)}}
  */
 public class TaskDate {
     public static final String MESSAGE_CONSTRAINTS = "Date/Time should not be blank. "
-        + "They should also be valid and follow a format. (eg. Date: dd/MM/yyyy, Time: HHmm) "
-        + "If both Date and Time are included, Date should come first before Time and they should be separated "
-        + "by a comma. A full list of available formats can be seen under the Help tab.";
-    public static final String FORMAT_CONSTRAINTS = "Dates can be listed in these formats: \n"
-            + "dd/MM/yyyy\n"
-            + "dd-MM-yyyy\n"
-            + "yyyy/MM/dd\n"
-            + "yyyy-MM-dd\n"
-            + "dd MMM yyyy\n\n"
-            + "Times can be listed in these formats: \n"
-            + "HHmm\n"
-            + "hh:mm a\n";
+            + "They should also be valid (consider leap years) and follow a format."
+            + " (eg. Date: dd MMM yyyy -> 02 Dec 2021,"
+            + " Time: hh:mm a -> 12:00 PM) \n"
+            + "If both Date and Time are included, Date should come first before Time and they should be separated "
+            + "by a comma. A full list of available formats can be seen under the Help tab.";
     private static final String[] DATE_FORMATS = {
-        "dd/MM/yyyy",
-        "dd-MM-yyyy",
-        "yyyy/MM/dd",
-        "yyyy-MM-dd",
-        "dd MMM yyyy"
+        "dd/MM/uuuu",
+        "dd-MM-uuuu",
+        "uuuu/MM/dd",
+        "uuuu-MM-dd",
+        "dd MMM uuuu"
     };
     private static final String[] TIME_FORMATS = {
         "HHmm",
@@ -50,39 +44,22 @@ public class TaskDate {
      *
      * @param taskDate A valid taskDate.
      */
-    public TaskDate(String taskDate) {
-        requireNonNull(taskDate);
-        checkArgument(isValidArgument(taskDate), MESSAGE_CONSTRAINTS);
-
-        if (detectedDateFormat != null) {
-            DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern(detectedDateFormat);
-            this.date = Optional.of(LocalDate.parse(taskDateString, dateFormat));
-        } else {
-            this.date = Optional.of(LocalDate.now());
-        }
-
-        if (detectedTimeFormat != null) {
-            DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern(detectedTimeFormat, Locale.US);
-            this.time = Optional.of(LocalTime.parse(taskTimeString, timeFormat));
-        }
-    }
-
-    /**
-     * Constructs a {@code TaskDate} specialised for editing a taskDate.
-     *
-     * @param taskDate A valid taskDate.
-     */
     public TaskDate(String taskDate, boolean isForEditing) {
         requireNonNull(taskDate);
         checkArgument(isValidArgument(taskDate), MESSAGE_CONSTRAINTS);
 
         if (detectedDateFormat != null) {
             DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern(detectedDateFormat);
-            this.date = Optional.of(LocalDate.parse(taskDateString, dateFormat));
+            this.date = Optional.of(LocalDate.parse(taskDateString,
+                    dateFormat.withResolverStyle(ResolverStyle.STRICT)));
+        } else {
+            if (!isForEditing) {
+                this.date = Optional.of(LocalDate.now());
+            }
         }
 
         if (detectedTimeFormat != null) {
-            DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern(detectedTimeFormat);
+            DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern(detectedTimeFormat, Locale.US);
             this.time = Optional.of(LocalTime.parse(taskTimeString, timeFormat));
         }
     }
@@ -93,26 +70,9 @@ public class TaskDate {
     public TaskDate() {
     }
 
-    /**
-     * Returns true if a given string is a valid date/time.
-     *
-     * @param taskDate A valid formatted string of date/time
-     * @return boolean if valid format
-     */
-    public static boolean isValidTaskDate(String taskDate) {
-
-        if (!taskDate.contains(",")) {
-            return isThisDate(taskDate) || isThisTime(taskDate);
-        }
-
-        String maybeDate = taskDate.split(",", 2)[0].trim();
-        String maybeTime = taskDate.split(",", 2)[1].trim();
-
-        return isThisDate(maybeDate) && isThisTime(maybeTime);
-    }
 
     private boolean isValidArgument(String taskDate) {
-
+        requireNonNull(taskDate);
         if (!taskDate.contains(",")) {
             return isDate(taskDate) || isTime(taskDate);
         }
@@ -158,77 +118,41 @@ public class TaskDate {
         return time.isPresent();
     }
 
-    /**
-     * Returns true if given string is a Date.
-     *
-     * @param dateString A string in valid date format
-     * @return boolean
-     */
-    public static boolean isThisDate(String dateString) {
-        boolean isDate = false;
-
-        for (String dateFormat : DATE_FORMATS) {
-            try {
-                LocalDate.parse(dateString, DateTimeFormatter.ofPattern(dateFormat));
-                isDate = true;
-            } catch (Exception e) {
-                isDate = isDate || false;
-            }
-        }
-        return isDate;
-    }
-
     private boolean isDate(String dateString) {
+        requireNonNull(dateString);
         boolean isDate = false;
 
         for (String dateFormat : DATE_FORMATS) {
             try {
-                LocalDate.parse(dateString, DateTimeFormatter.ofPattern(dateFormat));
+                LocalDate.parse(dateString,
+                        DateTimeFormatter.ofPattern(dateFormat).withResolverStyle(ResolverStyle.STRICT));
                 detectedDateFormat = dateFormat;
-                isDate = true;
                 taskDateString = dateString;
+                isDate = true;
             } catch (Exception e) {
                 isDate = isDate || false;
             }
         }
         return isDate;
-    }
-
-    /**
-     * Returns true if given string is a Time.
-     *
-     * @param timeString A string in valid date format
-     * @return boolean
-     */
-    public static boolean isThisTime(String timeString) {
-        boolean isTime = false;
-
-        for (String timeFormat : TIME_FORMATS) {
-            try {
-                LocalTime.parse(timeString, DateTimeFormatter.ofPattern(timeFormat, Locale.US));
-                isTime = true;
-            } catch (Exception e) {
-                isTime = isTime || false;
-            }
-        }
-        return isTime;
     }
 
     private boolean isTime(String timeString) {
+        requireNonNull(timeString);
         boolean isTime = false;
 
         for (String timeFormat : TIME_FORMATS) {
             try {
                 LocalTime.parse(timeString, DateTimeFormatter.ofPattern(timeFormat, Locale.US));
                 detectedTimeFormat = timeFormat;
-                isTime = true;
                 taskTimeString = timeString;
+                isTime = true;
             } catch (Exception e) {
                 isTime = isTime || false;
             }
         }
         return isTime;
     }
+
 
     /**
      * Returns String of Date in given format, empty string if no date is present.
@@ -259,6 +183,10 @@ public class TaskDate {
                 return false;
             }
             isSameDate = date.equals(otherTaskDate.getDate());
+        } else {
+            if (this.hasDate()) {
+                return false;
+            }
         }
 
         if (otherTaskDate.hasTime()) {
@@ -266,6 +194,10 @@ public class TaskDate {
                 return false;
             }
             isSameTime = time.equals(otherTaskDate.getTime());
+        } else {
+            if (this.hasTime()) {
+                return false;
+            }
         }
 
         return other == this // short circuit if same object
@@ -286,5 +218,4 @@ public class TaskDate {
         }
         return "";
     }
-
 }

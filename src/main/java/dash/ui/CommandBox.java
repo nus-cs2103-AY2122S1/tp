@@ -45,8 +45,6 @@ public class CommandBox extends UiPart<Region> {
         this.commandExecutor = commandExecutor;
         this.userInputList = userInputList;
 
-        System.out.println(userInputList);
-
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
 

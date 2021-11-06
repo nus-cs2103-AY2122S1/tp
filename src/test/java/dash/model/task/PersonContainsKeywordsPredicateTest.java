@@ -51,15 +51,11 @@ public class PersonContainsKeywordsPredicateTest {
         Person testPerson01 = new PersonBuilder().withName("alex").build();
         assertTrue(predicate.test(new TaskBuilder().withPeople(testPerson01).build()));
 
-        // Multiple keywords
-        predicate = new PersonContainsKeywordsPredicate(Arrays.asList("alex", "yeoh"));
+        // full name
+        predicate = new PersonContainsKeywordsPredicate(Arrays.asList("alex yeoh"));
         Person testPerson02 = new PersonBuilder().withName("alex yeoh").build();
         assertTrue(predicate.test(new TaskBuilder().withPeople(testPerson02).build()));
 
-        // Mixed-case keywords
-        predicate = new PersonContainsKeywordsPredicate(Arrays.asList("aLeX", "yEoH"));
-        Person testPerson03 = new PersonBuilder().withName("alex yeoh").build();
-        assertTrue(predicate.test(new TaskBuilder().withPeople(testPerson03).build()));
     }
 
     @Test
@@ -78,5 +74,10 @@ public class PersonContainsKeywordsPredicateTest {
         predicate = new PersonContainsKeywordsPredicate(Arrays.asList("Homework", "Urgent"));
         assertFalse(predicate.test(new TaskBuilder().withTaskDescription("Homework Urgent")
                 .withPeople(testPerson02).build()));
+
+        // keyword given is only half of the full name
+        predicate = new PersonContainsKeywordsPredicate(Arrays.asList("Alex", "Tan"));
+        Person testPerson03 = new PersonBuilder().withName("Alex Tan").build();
+        assertFalse(predicate.test(new TaskBuilder().withPeople(testPerson02).build()));
     }
 }

@@ -24,7 +24,7 @@
                         <Region fx:constant="USE_PREF_SIZE"/>
                     </minWidth>
                 </Label>
-                <Label fx:id="name" text="\$first" styleClass="cell_big_label"/>
+                <Label fx:id="name" text="\$first" styleClass="cell_big_label" wrapText="true"/>
             </HBox>
             <HBox>
                 <padding>
@@ -38,21 +38,21 @@
                     <Insets top="2" bottom="2" />
                 </padding>
                 <Label fx:id="phoneImage"/>
-                <Label fx:id="phone" styleClass="cell_small_label" text="\$phone"/>
+                <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" wrapText="true"/>
             </HBox>
             <HBox>
                 <padding>
                     <Insets top="2" bottom="2" />
                 </padding>
                 <Label fx:id="addressImage"/>
-                <Label fx:id="address" styleClass="cell_small_label" text="\$address"/>
+                <Label fx:id="address" styleClass="cell_small_label" text="\$address" wrapText="true"/>
             </HBox>
             <HBox>
                 <padding>
                     <Insets top="2" bottom="2" />
                 </padding>
                 <Label fx:id="emailImage"/>
-                <Label fx:id="email" styleClass="cell_small_label" text="\$email"/>
+                <Label fx:id="email" styleClass="cell_small_label" text="\$email" wrapText="true"/>
             </HBox>
         </VBox>
     </GridPane>

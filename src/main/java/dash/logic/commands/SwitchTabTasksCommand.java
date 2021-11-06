@@ -9,6 +9,7 @@ import dash.model.Model;
 public class SwitchTabTasksCommand extends Command {
 
     public static final String COMMAND_WORD = "tasks";
+    public static final String COMMAND_WORD_ALTERNATE = "t";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Switches to the Tasks tab.\n"
             + "Example: " + COMMAND_WORD;

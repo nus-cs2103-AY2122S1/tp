@@ -6,21 +6,35 @@ skinparam classBackgroundColor STORAGE_COLOR
 
 package Storage{
 
+Interface Storage <<Interface>>
+Class StorageManager
+
 package "UserPrefs Storage" #F4F6F6{
 Interface UserPrefsStorage <<Interface>>
 Class JsonUserPrefsStorage
 }
 
-Interface Storage <<Interface>>
-Class StorageManager
+package "TaskList Storage" {
+Interface TaskListStorage <<Interface>>
+Class JsonTaskListStorage
+Class JsonSerializableTaskList
+Class JsonAdaptedTask
+}
 
 package "AddressBook Storage" #F4F6F6{
 Interface AddressBookStorage <<Interface>>
 Class JsonAddressBookStorage
 Class JsonSerializableAddressBook
 Class JsonAdaptedPerson
-Class JsonAdaptedTag
 }
+
+package "UserInputList Storage" {
+Interface UserInputListStorage <<Interface>>
+Class JsonUserInputListStorage
+Class JsonSerializableUserInputList
+}
+
+Class JsonAdaptedTag
 
 }
 
@@ -30,14 +44,30 @@ HiddenOutside ..> Storage
 StorageManager .up.|> Storage
 StorageManager -up-> "1" UserPrefsStorage
 StorageManager -up-> "1" AddressBookStorage
+StorageManager -up-> "1" TaskListStorage
+StorageManager -up-> "1" UserInputListStorage
 
-Storage -left-|> UserPrefsStorage
-Storage -right-|> AddressBookStorage
+Storage --|> UserPrefsStorage
+Storage --|> TaskListStorage
+Storage --|> AddressBookStorage
+Storage --|> UserInputListStorage
+UserPrefsStorage -right[hidden]- AddressBookStorage
+AddressBookStorage -right[hidden]- TaskListStorage
+TaskListStorage -right[hidden]- UserInputListStorage
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
+
 JsonAddressBookStorage .up.|> AddressBookStorage
 JsonAddressBookStorage ..> JsonSerializableAddressBook
 JsonSerializableAddressBook --> "*" JsonAdaptedPerson
 JsonAdaptedPerson --> "*" JsonAdaptedTag
+
+JsonTaskListStorage -up.|> TaskListStorage
+JsonTaskListStorage ..> JsonSerializableTaskList
+JsonSerializableTaskList --> "*" JsonAdaptedTask
+JsonAdaptedTask --> "*" JsonAdaptedTag
+
+JsonUserInputListStorage -up.|> UserInputListStorage
+JsonUserInputListStorage ..> JsonSerializableUserInputList
 
 @enduml

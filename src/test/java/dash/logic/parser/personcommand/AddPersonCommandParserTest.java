@@ -89,30 +89,6 @@ public class AddPersonCommandParserTest {
                 CommandTestUtil.VALID_NAME_BOB + CommandTestUtil.PHONE_DESC_BOB
                         + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.ADDRESS_DESC_BOB,
                 expectedMessage);
-
-        // missing phone prefix
-        CommandParserTestUtil.assertParseFailure(parser,
-                CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.VALID_PHONE_BOB
-                        + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.ADDRESS_DESC_BOB,
-                expectedMessage);
-
-        // missing email prefix
-        CommandParserTestUtil.assertParseFailure(parser,
-                CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.PHONE_DESC_BOB
-                        + CommandTestUtil.VALID_EMAIL_BOB + CommandTestUtil.ADDRESS_DESC_BOB,
-                expectedMessage);
-
-        // missing address prefix
-        CommandParserTestUtil.assertParseFailure(parser,
-                CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.PHONE_DESC_BOB
-                        + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.VALID_ADDRESS_BOB,
-                expectedMessage);
-
-        // all prefixes missing
-        CommandParserTestUtil.assertParseFailure(parser,
-                CommandTestUtil.VALID_NAME_BOB + CommandTestUtil.VALID_PHONE_BOB
-                        + CommandTestUtil.VALID_EMAIL_BOB + CommandTestUtil.VALID_ADDRESS_BOB,
-                expectedMessage);
     }
 
     @Test

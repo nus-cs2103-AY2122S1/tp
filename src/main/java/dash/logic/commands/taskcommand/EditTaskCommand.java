@@ -37,13 +37,16 @@ public class EditTaskCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_TASK_DESCRIPTION + "TASK_DESCRIPTION] "
+            + "[" + PREFIX_TASK_DATE + "DATE]\n"
+            + "[" + PREFIX_TASK_DATE + "TIME]\n"
+            + "[" + PREFIX_TASK_DATE + "DATE, TIME]\n"
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_TASK_DESCRIPTION + "Watch ST2334 Lecture 9"
-            + PREFIX_TASK_DATE + "10/10/2021, 1400"
+            + PREFIX_TASK_DESCRIPTION + "Watch ST2334 Lecture 9 "
+            + PREFIX_TASK_DATE + "10/10/2021, 1400 "
             + PREFIX_TAG + "lecture";
 
-    public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
+    public static final String MESSAGE_EDIT_TASK_SUCCESS = "Task is now: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
 
     private final Index index;
@@ -72,8 +75,9 @@ public class EditTaskCommand extends Command {
 
         Task taskToEdit = lastShownList.get(index.getZeroBased());
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+        int indexOfTaskToEdit = model.getIndexToEdit(index.getZeroBased(), taskToEdit, lastShownList);
 
-        model.setTask(index.getZeroBased(), editedTask);
+        model.setTask(indexOfTaskToEdit, editedTask);
         model.updateFilteredTaskList(Model.PREDICATE_SHOW_ALL_TASKS);
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, editedTask));
     }
@@ -106,16 +110,16 @@ public class EditTaskCommand extends Command {
         TaskDate editTaskDate = taskDate.get();
         if (!editTaskDate.hasDate()) {
             if (taskDateToEdit.hasDate()) {
-                return new TaskDate(taskDateToEdit.toDateString() + "," + editTaskDate.toTimeString());
+                return new TaskDate(taskDateToEdit.toDateString() + "," + editTaskDate.toTimeString(), false);
             }
         }
         if (!editTaskDate.hasTime()) {
             if (taskDateToEdit.hasDate() && taskDateToEdit.hasTime()) {
-                return new TaskDate(editTaskDate.toDateString() + "," + taskDateToEdit.toTimeString());
+                return new TaskDate(editTaskDate.toDateString() + "," + taskDateToEdit.toTimeString(), false);
             }
         }
 
-        return new TaskDate(editTaskDate.toString());
+        return new TaskDate(editTaskDate.toString(), false);
     }
 
     @Override

@@ -1,6 +1,8 @@
 package dash.logic.parser.personcommand;
 
+import static dash.commons.core.Messages.MESSAGE_ARGUMENT_EMPTY;
 import static dash.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static dash.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static dash.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static dash.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static dash.logic.parser.CliSyntax.PREFIX_NAME;
@@ -47,16 +49,27 @@ public class EditPersonCommandParser implements Parser<EditPersonCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     EditPersonCommand.MESSAGE_USAGE),
                     pe);
+        } catch (NumberFormatException nfe) {
+            throw new ParseException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            if (argMultimap.getValue(PREFIX_NAME).get().isEmpty()) {
+                throw new ParseException(MESSAGE_ARGUMENT_EMPTY);
+            }
             editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
+            if (argMultimap.getValue(PREFIX_PHONE).get().isEmpty()) {
+                throw new ParseException(MESSAGE_ARGUMENT_EMPTY);
+            }
             editPersonDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
         }
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
+            if (argMultimap.getValue(PREFIX_EMAIL).get().isEmpty()) {
+                throw new ParseException(MESSAGE_ARGUMENT_EMPTY);
+            }
             editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
         }
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {

@@ -25,4 +25,19 @@ public class StatusBarFooter extends UiPart<Region> {
         saveLocationStatus.setText(Paths.get(".").resolve(saveLocation).toString());
     }
 
+    /**
+     * Change the displayed path.
+     */
+    public void setFilePath(Path saveLocation) {
+        saveLocationStatus.setText(Paths.get(".").resolve(saveLocation).toString());
+    }
+
+    /**
+     * Hide the displayed path.
+     */
+    public void hideFilePath() {
+        saveLocationStatus.setText("");
+    }
+
+
 }

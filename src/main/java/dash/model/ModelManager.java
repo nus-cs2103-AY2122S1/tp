@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -168,6 +169,26 @@ public class ModelManager implements Model {
         taskList.setTask(index, editedTask);
     }
 
+    @Override
+    public void deleteDoneTasks() {
+        taskList.deleteDoneTasks();
+    }
+
+    @Override
+    public int getIndexToEdit(int userIndexZeroBase, Task taskToEdit, List<Task> filteredList) {
+        return taskList.getIndexToEdit(userIndexZeroBase, taskToEdit, filteredList);
+    }
+
+    @Override
+    public void replacePeopleInTasks(Person personToBeReplaced, Person newPerson) {
+        taskList.replacePeople(personToBeReplaced, newPerson);
+    }
+
+    @Override
+    public void deletePeopleFromTasks(Person personToBeDeleted) {
+        taskList.deletePeople(personToBeDeleted);
+    }
+
     //=========== UserInputList ==============================================================================
 
     @Override
@@ -233,6 +254,11 @@ public class ModelManager implements Model {
     public void updateFilteredTaskList(Predicate<Task> predicate) {
         requireNonNull(predicate);
         filteredTasks.setPredicate(predicate);
+    }
+
+    @Override
+    public void sortTaskList() {
+        taskList.sortTasks();
     }
 
     //=========== Observable User Input List Accessor =================================================================

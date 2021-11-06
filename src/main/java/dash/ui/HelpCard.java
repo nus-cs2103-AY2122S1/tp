@@ -45,9 +45,9 @@ public class HelpCard extends UiPart<Region> {
         name.setText(displayedIndex + ". " + helpCommand.getHeader());
         explanation.setText(helpCommand.getContent());
         if (displayedIndex % 2 == 0) {
-            this.cardPane.setStyle("-fx-background-color: #c7ab91;");
+            this.cardPane.setStyle("-fx-background-color: #91755a;");
         } else {
-            this.cardPane.setStyle("-fx-background-color: #e0c1a4;");
+            this.cardPane.setStyle("-fx-background-color: #c9a481;");
         }
 
     }
