@@ -80,10 +80,6 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
             throw new AssignmentNotFoundException();
         }
 
-        if (!target.isSameName(editedAssignment) && contains(editedAssignment)) {
-            throw new DuplicateAssignmentException();
-        }
-
         internalList.set(index, editedAssignment);
     }
 
@@ -131,6 +127,14 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
         } else {
             return Optional.of(internalUnmodifiableList.get(index));
         }
+    }
+
+    /**
+     * Returns true if there is another assignment with the same name in the list.
+     */
+    public boolean hasSameName(Assignment assignment) {
+        requireNonNull(assignment);
+        return internalList.stream().anyMatch(asg -> !(asg.equals(assignment)) && asg.isSameName(assignment));
     }
 
     /**

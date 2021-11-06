@@ -68,17 +68,18 @@ public class EditAssignmentCommand extends Command {
         }
         List<Assignment> assignmentList = model.getSelectedModule().getValue().getAssignmentList();
 
-        if (index.getZeroBased() >= assignmentList.size()) {
+        if (index.getOneBased() >= model.getAssignmentCounter()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ASSIGNMENT_DISPLAYED_INDEX);
         }
 
-        Assignment asgToEdit = assignmentList.get(index.getZeroBased());
+        Assignment asgToEdit = assignmentList.stream()
+                .filter(asg -> asg.getId() == index.getOneBased())
+                .findFirst()
+                .orElseThrow(() -> new CommandException(Messages.MESSAGE_INVALID_ASSIGNMENT_DISPLAYED_INDEX));
 
-        int id = model.getAssignmentCounter();
+        Assignment editedAsg = createEditedAssignment(asgToEdit, editDescriptor);
 
-        Assignment editedAsg = createEditedAssignment(asgToEdit, editDescriptor, id);
-
-        if (model.hasAssignmentInCurrentModule(editedAsg)) {
+        if (model.hasSameNameInCurrentModule(editedAsg)) {
             throw new CommandException(MESSAGE_DUPLICATE_ASSIGNMENT);
         }
 
@@ -94,7 +95,6 @@ public class EditAssignmentCommand extends Command {
         }
 
         model.setAssignment(asgToEdit, editedAsg);
-        model.setAssignmentCounter(id + 1);
         return new CommandResult(String.format(MESSAGE_EDIT_ASSIGNMENT_SUCCESS, editedAsg));
     }
 
@@ -103,12 +103,13 @@ public class EditAssignmentCommand extends Command {
      * edited with {@code editDescriptor}.
      */
     private static Assignment createEditedAssignment(Assignment toEdit,
-                                                     EditAssignmentDescriptor editDescriptor, int id) {
+                                                     EditAssignmentDescriptor editDescriptor) {
         requireNonNull(toEdit);
 
         Name updatedName = editDescriptor.getName().orElse(toEdit.getName());
         Weightage updatedWeightage = editDescriptor.getWeightage().orElse(toEdit.getWeightage());
         Score updatedMaxScore = editDescriptor.getMaxScore().orElse(toEdit.getMaxScore());
+        int id = toEdit.getId();
 
         return new Assignment(updatedName, updatedWeightage, updatedMaxScore, id);
     }

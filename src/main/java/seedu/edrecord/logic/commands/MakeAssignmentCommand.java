@@ -55,7 +55,7 @@ public class MakeAssignmentCommand extends Command {
         if (!model.hasSelectedModule()) {
             throw new CommandException(MESSAGE_NO_MODULE_SELECTED);
         }
-        if (model.hasAssignmentInCurrentModule(toAdd)) {
+        if (model.hasSameNameInCurrentModule(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_ASSIGNMENT);
         }
         if (model.isTotalWeightageExceeded(toAdd)) {

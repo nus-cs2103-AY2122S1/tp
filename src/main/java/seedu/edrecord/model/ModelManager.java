@@ -248,8 +248,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasAssignmentInCurrentModule(Assignment assignment) {
-        return hasSelectedModule() && selectedModule.get().hasAssignment(assignment);
+    public boolean hasSameNameInCurrentModule(Assignment assignment) {
+        return hasSelectedModule() && selectedModule.get().hasSameNameAssignment(assignment);
     }
 
     @Override

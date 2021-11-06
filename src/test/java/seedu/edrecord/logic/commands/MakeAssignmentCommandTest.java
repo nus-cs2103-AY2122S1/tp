@@ -256,7 +256,7 @@ public class MakeAssignmentCommandTest {
         }
 
         @Override
-        public boolean hasAssignmentInCurrentModule(Assignment assignment) {
+        public boolean hasSameNameInCurrentModule(Assignment assignment) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -332,7 +332,7 @@ public class MakeAssignmentCommandTest {
         }
 
         @Override
-        public boolean hasAssignmentInCurrentModule(Assignment assignment) {
+        public boolean hasSameNameInCurrentModule(Assignment assignment) {
             requireNonNull(assignment);
             return this.assignment.isSameName(assignment);
         }
@@ -350,7 +350,7 @@ public class MakeAssignmentCommandTest {
         }
 
         @Override
-        public boolean hasAssignmentInCurrentModule(Assignment assignment) {
+        public boolean hasSameNameInCurrentModule(Assignment assignment) {
             requireNonNull(assignment);
             return assignmentsAdded.stream().anyMatch(assignment::isSameName);
         }

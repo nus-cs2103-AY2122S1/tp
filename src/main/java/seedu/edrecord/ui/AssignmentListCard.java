@@ -41,9 +41,9 @@ public class AssignmentListCard extends UiPart<Region> {
     private static final double WIDTH_ID_COL = 0.05;
     private static final double WIDTH_STATUS_COL = 0.2;
     private static final double WIDTH_NAME_COL = 0.4;
-    private static final double WIDTH_WEIGHTAGE_COL = 0.2;
+    private static final double WIDTH_WEIGHTAGE_COL = 0.15;
     private static final double WIDTH_SCORE_COL =
-            1 - WIDTH_STATUS_COL - WIDTH_NAME_COL - WIDTH_WEIGHTAGE_COL - WIDTH_PADDING;
+            1 - WIDTH_ID_COL - WIDTH_STATUS_COL - WIDTH_NAME_COL - WIDTH_WEIGHTAGE_COL - WIDTH_PADDING;
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.

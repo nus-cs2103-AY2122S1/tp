@@ -160,7 +160,7 @@ public interface Model {
     /**
      * Returns true if the currently selected module contains the given assignment.
      */
-    boolean hasAssignmentInCurrentModule(Assignment assignment);
+    boolean hasSameNameInCurrentModule(Assignment assignment);
 
     /**
      * Returns true if adding the assignment {@code toAdd} will bring the total weightage

@@ -231,7 +231,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasAssignmentInCurrentModule(Assignment assignment) {
+        public boolean hasSameNameInCurrentModule(Assignment assignment) {
             throw new AssertionError("This method should not be called.");
         }
 

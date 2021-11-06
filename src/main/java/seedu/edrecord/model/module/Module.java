@@ -173,10 +173,10 @@ public class Module {
     }
 
     /**
-     * Returns true if the module contains an assignment that is equivalent to the given assignment.
+     * Returns true if the module contains an assignment that has the same name as the given assignment.
      */
-    public boolean hasAssignment(Assignment a) {
-        return assignmentList.contains(a);
+    public boolean hasSameNameAssignment(Assignment a) {
+        return assignmentList.hasSameName(a);
     }
 
     /**

@@ -96,7 +96,7 @@ class JsonAdaptedModule {
 
         for (JsonAdaptedAssignment jsonAdaptedAssignment : assignments) {
             Assignment asg = jsonAdaptedAssignment.toModelType();
-            if (module.hasAssignment(asg)) {
+            if (module.hasSameNameAssignment(asg)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_ASSIGNMENT);
             } else if (asg.getId() < 1 || asg.getId() > assignmentCounter) {
                 System.out.printf("asg id: %s, counter: %s", asg.getId(), assignmentCounter);
