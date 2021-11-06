@@ -360,6 +360,8 @@ The following activity diagrams summarise what happens when a user executes the 
 
 <div style="text-align:center">
 
+<img src="/images/ShowActivityDiagram.png" alt="ShowActivityDiagram">
+
 ![ShowActivityDiagram](images/ShowActivityDiagram.png)
 ![ShowStudentDiagram](images/ShowStudentActivityDiagram.png)
 ![ShowStudentsActivityDiagram](images/ShowStudentsActivityDiagram.png)
