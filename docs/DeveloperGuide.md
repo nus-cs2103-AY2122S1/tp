@@ -65,7 +65,7 @@ title: Developer Guide
 ## **Acknowledgements**
 
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
-* * `isValidDate` method of EventDate and BirthDate are adapted from stackoverflow [here](https://stackoverflow.com/a/29038060/13624758).
+* `isValidDate` method of EventDate and BirthDate are adapted from stackoverflow [here](https://stackoverflow.com/a/29038060/13624758).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -223,16 +223,10 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Participant` objects (which are contained in a `UniqueParticipantList` object).
-* stores the currently 'selected' `Participant` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Participant>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores Managera's data i.e., all `Participant` and `Event` objects (which are contained in `UniqueParticipantList` and `UniqueEventList` objects respectively).
+* stores the currently 'selected' `Participant` and `Event` objects (e.g., results of a search query) as separate _filtered_ lists which is exposed to outsiders as unmodifiable `ObservableList<Participant>` and `ObservableList<Event>` that can be 'observed' e.g. the UI can be bound to these lists so that the UI automatically updates when the data in the lists change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Participant` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Participant` needing their own `Tag` objects.<br>
-
-![BetterModelClassDiagram](images/DG-images/BetterModelClassDiagram.png)
-
-</div>
 
 
 ### Storage component
@@ -242,7 +236,7 @@ The `Model` component,
 <img src="images/DG-images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
+* can save both Managera data and user preference data in json format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
@@ -269,7 +263,7 @@ The `AddEventCommandParser` reads the user's input and passes it to `ParserUtil`
 date and time are valid. Then, an Event is created with the returned `EventName`, `EventDate` and `EventTime` objects. 
 This event will be supplied to the `addEventCommand` to be executed.
 
-Since Managera employs a UniqueEventList, it should not have more than one Event with the same name. The `addressBook` 
+Since Managera employs a UniqueEventList, it should not have more than one Event with the same name and same date. The `addressBook` 
 will check if the given event already exists. If not, it will be successfully added to the `addressBook` through the model.
 
 #### Implementation Rationale
@@ -301,15 +295,9 @@ When the command is executed, there is a check to ensure the index is within the
         1. The index of the event in the currently displayed list can be directly used.
         2. Faster and more intuitive for users.
     * Cons:
-        1. The index is independent of the Event, which may lead to an inconsistent user experience. 
-
-* **Alternative 2**: Remove by Event ID:
-    * Pros:
-        1. Every Event will have a unique ID, leading to a consistent user experience. 
-    * Cons:
-        1. The IDs will not be displayed in sequential order and may approach large numbers, which becomes less user-friendly.
+        1. The index is independent of the Event, which may lead to an inconsistent user experience.
          
-* **Alternative 3**: Remove by Event Name:
+* **Alternative 2**: Remove by Event Name:
     * Pros:
         1. User can be more sure of the event they are removing, since it is referencing the Event name.
     * Cons:
@@ -342,7 +330,7 @@ event list. When the command is executed, the `model` will filter the `FilteredL
 
 #### Implementation Rationale
 
-With considerations to how the `Event` class is implemented, some events do not have time associated to them.
+With considerations to how the `Event` class is implemented, some events do not have time associated with them.
 We feel that since all `Event` objects have a date associated through the `EventDate` class, filtering should be done primarily 
 through date i.e. `EventDate`. However, understanding that users might want to filter by time too, it is included as an 
 optional criteria for filtering.
