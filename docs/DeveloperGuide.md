@@ -46,7 +46,7 @@ title: Developer Guide
     - [\[Proposed\] Undone Event feature](#proposed-undone-event-feature)
       - [Proposed Implementation](#proposed-implementation)
     - [\[Proposed\] Enroll and Expel multiple Participants from multiple events](#proposed-enroll-and-expel-multiple-participants-from-multiple-events)
-      - [Proposed Implementation](#proposed-implementation)
+      - [Proposed Implementation](#proposed-implementation-1)
 - [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
 - [**Appendix: Requirements**](#appendix-requirements)
   - [Product scope](#product-scope)
