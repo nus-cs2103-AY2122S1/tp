@@ -48,6 +48,8 @@ public class TypicalMembers {
             .withPhone("8482131").withTodayAttendance(false).withTotalAttendance(0).build();
     public static final Member ALICE_DIFFERENT_PHONE = new MemberBuilder().withName("Alice Pauline")
             .withPhone("94839542").build();
+    public static final Member ALICE_DIFFERENT_NAME = new MemberBuilder().withName("Alice Smith")
+            .withPhone("94351253").build();
     public static final Member CHOO = new MemberBuilder().withName("Choo")
             .withPhone("90909090").build();
     public static final Member DOO = new MemberBuilder().withName("Doo")
