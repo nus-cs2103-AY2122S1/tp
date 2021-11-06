@@ -15,7 +15,7 @@ You can reach us at the email `AniList@comp.nus.edu.sg`
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/clyveycui)]
-[[portfolio](team/profile-picture/langyuan.md)]
+[[portfolio](team/profile-picture/clyveycui.md)]
 
 * Role: Team Lead
 * Responsibilities: Overall project coordination
@@ -34,7 +34,7 @@ You can reach us at the email `AniList@comp.nus.edu.sg`
 
 <img src="images/nekrozqliphort.png" width="200px">
 
-[[github](https://github.com/NekrozQliphort)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/NekrozQliphort)] [[portfolio](team/NekrozQliphort.md)]
 
 * Role: Documentation
 * Responsibilities: Ensuring quality of vartious project documents

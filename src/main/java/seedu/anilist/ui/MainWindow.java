@@ -39,6 +39,7 @@ public class MainWindow extends UiPart<Stage> {
         "WonderEggTheme.css"
     };
 
+    private String themeCss;
     private Stage primaryStage;
     private Logic logic;
 
@@ -48,7 +49,6 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private StatsDisplay statsDisplay;
     private ToggleGroup themeToggleGroup = new ToggleGroup();
-    private String themeCss;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -82,7 +82,7 @@ public class MainWindow extends UiPart<Stage> {
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
-        animeListPanel = new AnimeListPanel(logic.getFilteredAnimeList(),
+        this.animeListPanel = new AnimeListPanel(logic.getFilteredAnimeList(),
                 logic.getCurrentTab(), this::executeCommand);
 
         // Configure the UI
@@ -197,8 +197,11 @@ public class MainWindow extends UiPart<Stage> {
         }
         Scene scene = primaryStage.getScene();
         Scene statsScene = statsDisplay.getRoot().getScene();
+
+        // Sets MainWindow and StatsDisplay stylesheets
         ObservableList<String> styleSheets = scene.getStylesheets();
         ObservableList<String> statsStyleSheets = statsScene.getStylesheets();
+
         styleSheets.remove(0);
         statsStyleSheets.remove(0);
         styleSheets.add(cssFilePath + themeCss);
