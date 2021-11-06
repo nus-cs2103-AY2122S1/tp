@@ -127,9 +127,9 @@ Shows a list of all students matching the specified tags or list of all students
 
 Format: `list [TAG]…​`
 
-### Listing modules: `cd`
+### Listing module's students: `cd`
 
-Change the working directory to a specific module in EdRecord.
+Change the working directory to a specific module, showing the students, in EdRecord.
 
 Format: `cd MODULE`
 
@@ -290,10 +290,6 @@ Format: `exit`
 
 EdRecord data is saved in the hard disk automatically (as a JSON file `[JAR file location]/data/edrecord.json`) after any command that changes the data. There is no need to save manually.
 
-### Editing the data file
-
-EdRecord data is saved as a JSON file `[JAR file location]/data/edrecord.json`. Advanced users are welcome to update data directly by editing that data file.
-
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, EdRecord will discard all data and start with an empty data file at the next run.
 </div>
@@ -318,7 +314,7 @@ _Details coming soon ..._
 |**Add Student**| `add n/NAME p/PHONE e/EMAIL m/MODULE c/CLASS [i/INFO] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com i/Currently on SHN t/friend t/colleague`|
 | **Edit Student**| `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [i/INFO] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`|
 | **Delete Student**| `delete INDEX`<br> e.g., `delete 3`|
-| **List Module**| `cd MODULE`<br> e.g.,`cd CS2103`, `cd *`|
+| **List Module's Students**| `cd MODULE`<br> e.g.,`cd CS2103`, `cd *`|
 | **Create Module**| `mkmod MODULE`<br> e.g., `mkmod CS2103`|
 | **Delete Module**| `dlmod MODULE`<br> e.g., `dlmod CS2103`|
 | **List Class**| `lsclass`<br> e.g., `lsclass`|
