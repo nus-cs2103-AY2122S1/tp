@@ -1428,7 +1428,7 @@ A lot of effort was required to make this feature work as there was very a steep
 Integrating the interface into our app with JavaFX was also extremely difficult, as the learning curve was just as steep with JavaFX and FXML elements.
 It took two weeks (from v1.1 to v1.2b) of learning and trial-and-error to achieve a working prototype of a weekly calendar and the CenterPanel which houses it.
 Furthermore, additional complex calendar logic had to be added to customise behaviours to fit our target audience, such as allowing recurrence exceptions.
-Implementation of these features took ~4k Loc.
+Implementation of these features took ~4k LOC.
 
 **Undo/Redo feature**
 
@@ -1437,8 +1437,21 @@ Implementation of these features took ~4k Loc.
 The finding students feature required much consideration in designing the find constraints to ensure it is flexible and usable for users. It was challenging to implement a data structure to allow searching by multiple fields concurrently, which may each accept multiple keywords, and may have different search behaviours. In addition to student fields, lesson fields were also used in the find feature, increasing its complexity. The find feature also allows users to optionally customise the matching condition, which required more effort to implement. The large number of parameters and variations also meant that it was more susceptible to bugs, and it required intensive and careful testing. 
 
 **Lessons**
+Adding lesson required changes to the current model. AB3's implementation only involves a single entity `Person`, whereas TAB deals with an additional entity, `Lesson`. Handling interactions between the two different entities becomes more complicated due to their differing behaviours and interactions with the model. The difficulty came in ensuring the addition of `Lesson` can interact with the `Model` to produce the desired behaviour. For the fields in `Lesson`, we had to ensure the validity checks are accurate to prevent the application from misbehaving. This required in-depth analysis to how the commands should be parsed and is not trivial.
+
+Furthermore, we also factored in many considerations when implementing the GUI to allow users to visualise both lessons and students at the same time, conveniently. The final implementation involved a grid layout, where the list of lessons are displayed side-by-side the student's list. The displayed list of lessons are isolated to the specific student selected. Users can select a student to view the list of lessons of that student.
 
 **Clashing Lessons**
+
+Arguably, one of the toughest part about lessons was implementing the checks for lessons with overlapping timings. Clashing lessons mean that at one point of time, one of the lessons will be happening concurrently with another lesson or lessons.<br>
+
+There were many factors we had to take into consideration:
+
+* Makeup lesson vs recurring: Do the timings overlap? Does the makeup lesson fall on the same day of week as the recurring lesson? If so, is the date of the makeup lesson before the recurring lesson's start date? Is either of the lessons cancelled on the overlapping date?
+  
+* Recurring lesson vs recurring lesson: Do the date ranges overlap? Do the timings overlap? Do they fall on the same day of week? For the overlapping regions, are the overlapping dates cancelled for the lessons in a way that there are no clashes?
+
+Implementation of the `Lesson` features took ~6-7k LOC, including tests.
 
 **Fee Calculator**
 
