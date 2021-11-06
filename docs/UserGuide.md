@@ -63,6 +63,8 @@ EdRecord is a **desktop app for managing student contacts, optimized for use via
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+* Scope of commands: All commands work within the currently selected module. If no module is selected, then the commands will work on all students across all modules.
+
 </div>
 
 ### Viewing help : `help`
