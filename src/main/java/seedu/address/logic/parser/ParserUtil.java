@@ -227,13 +227,13 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String date} into a {@code Date}.
+     * Parses a {@code String date} into a {@code Optional}.
      * Leading and trailing whitespaces will be stripped.
      *
      * @throws ParseException if the given {@code date} is invalid.
      */
     public static Optional<Date> parseDate(String date) throws ParseException {
-
+        // if no date string given
         if (date == null || date.strip().isEmpty()) {
             return Optional.empty();
         }
@@ -322,7 +322,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String individualHomework} into a {@code Homework}.
+     * Parses an {@code String individualHomework} into a {@code Homework}.
      * Leading and trailing whitespaces will be stripped.
      *
      * @throws ParseException if the given {@code Homework} is invalid.
