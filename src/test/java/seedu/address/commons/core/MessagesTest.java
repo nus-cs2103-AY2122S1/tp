@@ -9,7 +9,7 @@ public class MessagesTest {
     @Test
     public void messageUnknownCommand() {
         String expectedMessage = "Unknown command";
-        assertEquals(expectedMessage, Messages.MESSAGE_UNKNOWN_COMMAND);
+        assertEquals(expectedMessage, new Messages().MESSAGE_UNKNOWN_COMMAND);
     }
 
     @Test
