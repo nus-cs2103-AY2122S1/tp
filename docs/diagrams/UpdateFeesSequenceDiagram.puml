@@ -1,0 +1,37 @@
+@startuml
+!include style.puml
+skinParam BoxPadding 50
+
+box MainApp MAINAPP_COLOR
+participant ":MainApp" as MainApp MAINAPP_COLOR_T1
+
+end box
+
+box Logic LOGIC_COLOR_T1
+participant ":FeesCalculator" as FeesCalculator LOGIC_COLOR
+
+end box
+
+[-> MainApp ++ : init()
+MainApp -> MainApp ++ : initModelManager()
+MainApp -> FeesCalculator ++ : updateAllLessonOutstandingFees(model)
+    loop all persons in model
+    FeesCalculator -> FeesCalculator ++ : createEditedPerson()
+        loop all lessons in person
+        FeesCalculator -> FeesCalculator ++ : updateLessonOutstandingFeesField(lesson)
+        FeesCalculator --> FeesCalculator -- : updatedLesson
+        |||
+        end
+    FeesCalculator --> FeesCalculator -- : updatedPerson
+    |||
+    end
+
+FeesCalculator --> MainApp -- : updatedModel
+MainApp --> MainApp --
+|||
+[<-- MainApp
+destroy FeesCalculator
+deactivate MainApp
+|||
+
+@enduml

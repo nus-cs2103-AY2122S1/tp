@@ -9,7 +9,7 @@ Package " "<<Rectangle>>{
     Class Logic LOGIC_COLOR
     Class Storage STORAGE_COLOR
     Class Model MODEL_COLOR
-    Class Main #grey
+    Class Main MAINAPP_COLOR
     Class Commons LOGIC_COLOR_T2
 }
 
