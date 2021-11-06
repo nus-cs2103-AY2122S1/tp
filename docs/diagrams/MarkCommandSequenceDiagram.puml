@@ -5,7 +5,7 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":MarkingCommandParser" as MarkingCommandParser LOGIC_COLOR
-participant ":UnmarkCommand" as UnmarkCommand LOGIC_COLOR
+participant ":MarkCommand" as MarkCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -13,32 +13,32 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("unmark 3")
+[-> LogicManager : execute("mark 1 2")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("unmark 3")
+LogicManager -> AddressBookParser : parseCommand("mark 1 2")
 activate AddressBookParser
 
 create MarkingCommandParser
 
 
 
-AddressBookParser -> MarkingCommandParser: MarkingCommandParser("unmark")
+AddressBookParser -> MarkingCommandParser: MarkingCommandParser("mark")
 activate MarkingCommandParser
 
 MarkingCommandParser --> AddressBookParser
 
 deactivate MarkingCommandParser
 
-AddressBookParser -> MarkingCommandParser : parse(" 3")
+AddressBookParser -> MarkingCommandParser : parse(" 1 2")
 activate MarkingCommandParser
 
-create UnmarkCommand
-MarkingCommandParser -> UnmarkCommand: UnmarkCommand([3])
-activate UnmarkCommand
+create MarkCommand
+MarkingCommandParser -> MarkCommand : MarkCommand([2,1])
+activate MarkCommand
 
-UnmarkCommand --> MarkingCommandParser :
-deactivate UnmarkCommand
+MarkCommand --> MarkingCommandParser :
+deactivate MarkCommand
 
 MarkingCommandParser --> AddressBookParser :
 deactivate MarkingCommandParser
@@ -49,36 +49,36 @@ destroy MarkingCommandParser
 AddressBookParser --> LogicManager :
 deactivate AddressBookParser
 
-LogicManager -> UnmarkCommand : execute()
-activate UnmarkCommand
+LogicManager -> MarkCommand : execute()
+activate MarkCommand
 
-UnmarkCommand -> Model : getFilteredPersonList()
+MarkCommand -> Model : getFilteredPersonList()
 activate Model
-Model --> UnmarkCommand
+Model --> MarkCommand
 deactivate Model
 
 loop until list of indices ends
-    UnmarkCommand -> Model: checkForUnmarkedPerson(personToCheck)
+    MarkCommand -> Model: checkForMarkedPerson(personToCheck)
     activate Model
-    Model --> UnmarkCommand:
+    Model --> MarkCommand:
     deactivate Model
 end
 
 loop until list of indices ends
-    UnmarkCommand -> Model: unmarkPerson(personToUnmark)
+    MarkCommand -> Model: markPerson(personToMark)
     activate Model
-    Model --> UnmarkCommand:
+    Model --> MarkCommand:
     deactivate Model
 end
 
 create CommandResult
-UnmarkCommand -> CommandResult
+MarkCommand -> CommandResult
 activate CommandResult
-CommandResult --> UnmarkCommand
+CommandResult --> MarkCommand
 deactivate CommandResult
 
-UnmarkCommand --> LogicManager: result
-deactivate UnmarkCommand
+MarkCommand --> LogicManager: result
+deactivate MarkCommand
 
 
 

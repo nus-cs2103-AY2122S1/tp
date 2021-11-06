@@ -1,0 +1,21 @@
+@startuml
+start
+:User executes Delete Marked Command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+:Retrieve filtered list of applicants
+marked done ;
+
+if () then ([filtered list is not empty])
+:Delete marked applicants from model;
+    :GUI updates to indicate that
+    marked applicants have been deleted;
+else ([else])
+    :GUI updates with error message
+    indicating there are no marked applicants;
+endif
+
+stop
+@enduml

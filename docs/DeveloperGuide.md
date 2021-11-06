@@ -162,6 +162,10 @@ This command then updates the ```model``` accordingly.
 The following activity diagram summarizes what happens when a user executes an ```add``` command:
 ![images](images/AddCommandActivityDiagram.png)
 
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** There should only be one arrowhead at the end of every line 
+in the Activity Diagram. This is a known limitation of PlantUML.</div>
+
 Given below is an example usage scenario and how the add operation behaves at each step.
 
 Step 1. A valid command `add n/Dylan p/97998581 e/dylan.eyyou@gmail.com r/Pilot et/Full time s/3500 l/PhD y/4`
@@ -189,6 +193,47 @@ The following sequence diagram shows how the add operation works.
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
+### Delete marked feature
+
+The ```delete_marked``` command is facilitated by creating an ```DeleteMarkedCommand```.
+This command then updates the ```model``` accordingly.
+
+The following activity diagram summarizes what happens when a user executes a ```delete_marked``` command:
+![images](images/DeleteMarkedCommandActivityDiagram.png)
+
+Given below is an example usage scenario illustrated by a sequence diagram for ```delete_marked``` command.
+
+Step 1. A valid command `delete_marked` is given as user input. This invokes `LogicManager#execute()`, which calls
+`AddressBookParser#parseCommand()` to parse `delete_marked`.
+
+Step 2. `AddreddBookParser#parseCommand()` initializes a `DeleteMarkedCommand`.
+
+Step 3. `DeleteMarkedCommand#execute()` is then called, which will in turn call `Model#updateFilteredList()` (not shown) to 
+update list for applicants marked then `Model#getFilteredList()` is then called to retrieve this list. 
+
+Step 4. `Model#deletePerson()` is called on applicants in the list to delete them.
+
+Step 5. Once the string of all applicant names that are marked is formed, `CommandResult` is initialized with this string as argument
+and returned.
+
+The following sequence diagram shows how the delete marked operation works.
+![images](images/DeleteMarkedCommandSequenceDiagram.png)
+
+#### Design considerations:
+
+**Aspect: User command to use in deleting marked applicants:**
+
+* **Alternative 1 (current choice):** Separate command for deleting marked applicants
+    * Pros: Command has single responsibility of deleting marked applicants based.
+    * Pros: Easy to use for user, does not take any additional input.
+    * Cons: User might be confused between `delete` command for general deletion and `delete_marked` command.
+
+* **Alternative 2:** Part of `delete` command functionality
+    * Pros: Intuitive for user to use `delete` command for all deletion purposes
+    * Cons: Breaks the single responsibility principle as deleting marked applicants does not delete applicants at specific indices
+    like the rest of the `delete` command, but rather a certain group of applicants at once. 
+
+
 ### Edit feature
 
 The ```edit``` command is facilitated by creating an ```EditCommand``` depending on the given input.
@@ -196,6 +241,10 @@ This command then updates the ```model``` accordingly.
 
 The following activity diagram summarizes what happens when a user executes an ```edit``` command:
 ![images](images/EditCommandActivityDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** There should only be one arrowhead at the end of every line 
+in the Activity Diagram. This is a known limitation of PlantUML.</div>
 
 Given below is an example usage scenario and how the edit operation behaves at each step.
 
@@ -226,6 +275,41 @@ The following sequence diagram shows how the edit operation works.
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `EditCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
+### Delete feature
+
+The ```delete``` command is facilitated by creating a ```DeleteCommand``` depending on the given input.
+This command then updates the ```model``` accordingly.
+
+The following activity diagram summarizes what happens when a user executes an ```delete``` command:
+![images](images/DeleteActivityDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** There should only be one arrowhead at the end of every line 
+in the Activity Diagram. This is a known limitation of PlantUML.</div>
+
+Given below is an example usage scenario illustrated by a sequence diagram for ```delete``` command.
+
+Step 1. A valid command `delete 1` is given as user input. This invokes `LogicManager#execute()`, which calls
+`AddressBookParser#parseCommand()` to parse `delete 1` into command word `delete` and command argument ` 1`.
+
+Step 2. `DeleteCommandParser` is initialized based on the parse results and `DeleteCommandParser#parse()` is called
+to identify the indices present in ` 1`. `DeleteCommandParser#parse()` then initializes a
+`DeleteCommand` with the indices present as arguments.
+
+Step 3. `DeleteCommand#execute()` is then called, which will check the validity of the given indices. 
+If there is no exception thrown, `Model#deletePerson()` is called to delete the applicants corresponding to the 
+given indices.
+
+Step 4. `CommandResult` is initialized with `String` containing the details of the deleted applicant.
+This `CommandResult` is then returned.
+
+The following sequence diagram shows how the delete operation works.
+![images](images/DeleteSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** The lifeline for `DeleteCommandParser`
+should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
+
 ### Show feature
 
 The ```show``` command is facilitated by creating an ```ObservableList``` of ```Person``` objects from the
@@ -234,6 +318,10 @@ the prefix provided by the user.
 
 The following activity diagram summarizes what happens when a user executes a ```show``` command:
 ![images](images/ShowCommandActivityDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** There should only be one arrowhead at the end of every line 
+in the Activity Diagram. This is a known limitation of PlantUML.</div>
 
 Given below is an example usage scenario and how the show operation behaves at each step.
 
@@ -265,6 +353,10 @@ The following activity diagram summarizes what happens when a user executes a ``
 
 ![images](images/FindCommandActivityDiagram.png)
 
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** There should only be one arrowhead at the end of every line 
+in the Activity Diagram. This is a known limitation of PlantUML.</div>
+
 Given below is an example usage scenario illustrated by a sequence diagram for ```find``` command.
 
 Step 1. A valid command `find n/Alex y/0` is given as user input. This invokes `LogicManager#execute()`, which calls
@@ -280,6 +372,7 @@ and filters for applicants that have `Alex` in their names and `0` year of exper
 Step 4. Once the string of all applicant names is formed, `CommandResult` is initialized with this string as argument
 and returned.
 
+The following sequence diagram shows how the find operation works.
 ![images](images/FindCommandSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source:
@@ -294,6 +387,9 @@ subclass depending on the given input. This command then updates the ```model```
 The following activity diagram summarizes what happens when a user executes a ```filter_interview``` command:
 ![images](images/FilterInterviewCommandActivityDiagram.png)
 
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** There should only be one arrowhead at the end of every line 
+in the Activity Diagram. This is a known limitation of PlantUML.</div>
 
 Given below is an example usage scenario and how the filter interview operation behaves at each step.
 
@@ -339,6 +435,40 @@ should not exceed the destroy marker X. This is a known limitation of PlantUML.<
     * Cons: Breaks the single responsibility principle as it does not find a specific input for a prefix, but rather
     types of inputs.
 
+### Mark feature
+The ```mark``` command is facilitated by creating a ```MarkCommand```, which is a subclass of ```MarkingCommand```.
+This command then updates the ```model``` accordingly, depending on the given input.
+
+The following activity diagram summarizes what happens when a user executes a ```mark``` command:
+![images](images/MarkCommandActivityDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** There should only be one arrowhead at the end of every line 
+in the Activity Diagram. This is a known limitation of PlantUML.</div>
+
+Given below is an example usage scenario illustrated by a sequence diagram for ```mark``` command.
+
+Step 1. A valid command `mark 1 2` is given as user input. This invokes `LogicManager#execute()`, which calls
+`AddressBookParser#parseCommand()` to parse `mark 1 2` into command word `mark` and command argument ` 1 2`.
+
+Step 2. `MarkingCommandParser` is initialized based on the parse results and `MarkingCommandParser#parse()` is called
+to identify the indices present in ` 1 2`. `MarkingCommandParser#parse()` then initializes a
+`MarkCommand` with the indices present as arguments.
+
+Step 3. `MarkCommand#execute()` is then called, which will in turn call `Model#checkForMarkedPerson()` on the applicants
+corresponding to the given indices. If there is no exception thrown, `Model#markPerson()` is called to mark the
+applicants corresponding to the given indices.
+
+Step 4. `CommandResult` is initialized with `String` containing the details of the newly marked applicants.
+This `CommandResult` is then returned.
+
+The following sequence diagram shows how the mark operation works.
+![images](images/MarkCommandSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** The lifeline for `MarkingCommandParser`
+should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
+
 ### Unmark feature
 
 The ```unmark``` command is facilitated by creating a ```UnmarkCommand```, which is a subclass of 
@@ -346,6 +476,10 @@ The ```unmark``` command is facilitated by creating a ```UnmarkCommand```, which
 
 The following activity diagram summarizes what happens when a user executes a ```unmark``` command:
 ![images](images/UnmarkCommandActivityDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** There should only be one arrowhead at the end of every line 
+in the Activity Diagram. This is a known limitation of PlantUML.</div>
 
 Given below is an example usage scenario illustrated by a sequence diagram for ```unmark``` command.
 
@@ -356,14 +490,18 @@ Step 2. `MarkingCommandParser` is initialized based on the parse results and `Ma
 to identify the indices present in ` 3`. `MarkingCommandParser#parse()` then initializes a
 `UnmarkCommand` with the indices present as arguments, which in this case is a single index 3.
 
-Step 3. `MarkCommand#execute()` is then called, which will in turn call `Model#checkForUnmarkedPerson()` on the applicants
+Step 3. `UnmarkCommand#execute()` is then called, which will in turn call `Model#checkForUnmarkedPerson()` on the applicants
 corresponding to the given indices. If there is no exception thrown, `Model#unmarkPerson()` is called to unmark the applicants corresponding to the given indices.
 
-Step 4. Once the string of all applicant names that are marked is formed, `CommandResult` is initialized with this string as argument
-and returned.
+Step 4. `CommandResult` is initialized with `String` containing the details of the newly unmarked applicants.
+This `CommandResult` is then returned.
 
+The following sequence diagram shows how the unmark operation works.
 ![images](images/UnmarkCommandSequenceDiagram.png)
 
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** The lifeline for `MarkingCommandParser`
+should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
 ### Datetime for interview 
 
