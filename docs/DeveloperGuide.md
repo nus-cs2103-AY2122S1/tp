@@ -484,6 +484,10 @@ The implementation is similar to `AttendanceCommand`, with the same sequence dia
 This command serves to display the summarised details of a single `Student` in the `AcademyDirectory`.
 
 `ViewCommand` displays the `Student` based on the relative `INDEX` in the `ObservableList` which is the list of `Student` viewed by the `Avenger`.
+Once the index and the student associated with the index is retrieved, it is set on the Additional View Model - with its associated type and info,
+to send to the UI for display.
+
+It extends the abstract class `Command` and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
 
 ![ViewCommandSequenceDiagram](images/dg/logic/commands/viewcommand/ViewCommandSequenceDiagram.png)
 
@@ -552,15 +556,25 @@ The reference frame for GetComparator can be found below. It details the selecti
 
 ### Others
 
+### ExitCommand
+
+This command allows user to exit the application after saving all operations and data
+It extends the `Command` class and will consequently `@Override` the `Command#execute()` method to serve this purpose.
+
+#### Implementation
+
+![GetComparatorSequenceDiagram](images/dg/logic/commands/exitcommand/ExitCommandSequenceDiagram.png)
+
 ### ListCommand
 
-This command restores the original, unfiltered view of `AcademyDirectory`.
+This command shows all students on the class, ordered by when the student is added to the Academy.
 
 #### Implementation
 
 `ListCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
+`ListCommand` retrieves the student list and display it on the student list panel on the left side. All students will be displayed.
 
-{Add more details on implementation}
+![GetComparatorSequenceDiagram](images/dg/logic/commands/listcommand/ListCommandSequenceDiagram.png)
 
 ### ClearCommand
 
@@ -568,10 +582,11 @@ This command clears all `Student` entries from `AcademyDirectory`.
 
 #### Implementation
 
-`ClearCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
+`ClearCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose 
+and is Version Controllable. A new Academy Directory is created to replace the current one, meaning that the student list is set to empty.
 The `ClearCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands)
 
-{Add more details on implementation}
+![GetComparatorSequenceDiagram](images/dg/logic/commands/clearcommand/ClearCommandSequenceDiagram.png)
 
 ### HistoryCommand
 This command shows the commit history. Each commit will be shown with its five character hash, 
@@ -1337,9 +1352,19 @@ testers are expected to do more *exploratory* testing.
          Expected: Background image also expanded, alongside other components of the internal controls (result display, student list, and status message)
          Expected: No other visual misbehavior of the User Interface (image is cropped or lacking in any visual design)
       3. Test case: Shrink Academy Directory to the smallest possible size
-         Expected: Academy Directory is not shrinked completely as there is a limit
+         Expected: Academy Directory is not minimized completely as there is a minimal size for users to still see the data
+      4. Test case: Enter keywords to the command bar.
          
 #### User Experience
+
+
+### System testing
+
+#### Performance testing
+#### Load testing
+#### Compatibility testing
+#### Usability testing
+#### Portability testing
 
 1. _{ more test cases to come …​ }_
 
