@@ -195,7 +195,7 @@ The following activity diagram shows what happens when a user executes the `edit
 * **Alternative 2:** Exclusive command to add Category field
   * Pros: Reduces the chance of Feature Overload for `add` and `edit` commands
   * Cons: Reduces usability due to the need to remember another command
-    
+
 ### Delete Feature
 
 #### Implementation
@@ -290,14 +290,15 @@ The following activity diagram summarises what happens when a Tour Guide execute
     * Pros: More accurate matches assuming Tour Guide searches for exact keywords.
     * Cons: Less likely to find contacts other than the intended one(s) that might be relevant for a themed or location-based tour itinerary.
 
+
 ### Filter feature
 
 #### Implementation
 
 The filter mechanism works by modifying the GUI of the application to display the contacts in that category without making any changes to the actual contacts stored. The filter implementation makes use of the following operations:
 
-* `Model#updateFilteredContactList(Predicate p)` - iterates through the addressBook `ContactList`. If a `Contact` returns true, the `Contact` is added to the `filteredContacts` list.
-* `IsInCategoryPredicate(Set<CategoryCode> categories)` - returns true if a contact’s `categoryCode` is in the Set
+* `Model#updateFilteredContactList()` - iterates through the addressBook. If a `Contact` returns true, the `Contact` is added to the `filteredContacts` list.
+* `IsFilterablePredicate()` - returns true if a contact’s `CategoryCode`, `Rating` and `Tag` matches the given filter criteria.
 
 Given below is an example usage scenario of the filter mechanism.
 
@@ -305,13 +306,13 @@ Step 1. The user launched the application for the first time. The `filteredConta
 
 Step 2. The user executes `filter c/att` command to filter all the attraction contacts in the address book. The `Parser` parses the user input and creates a `FilterCommand`.
 
-Step 3. The filter command creates an `IsInCategoryPredicate` instance with the `ATT` CategoryCode and calls `Model#updateFilteredContactList()` with the predicate as an argument, causing the `filteredContact` List to be modified to contain only attraction contacts in the address book.
+Step 3. The filter command creates an IsFilterablePredicate instance with the given CategoryCode, Tag and Rating parameters and calls Model#updateFilteredContactList() with the predicate as an argument, causing the filteredContact List to be modified to contain only attraction contacts in the address book.
 
 The following sequence diagram shows how the filter operation works:
 
 ![FilterSequenceDiagram](images/FilterSequenceDiagram.png)
 
-The following activity diagram summarizes what happens when a user executes a new filter command:
+The following activity diagram summarizes what happens when a user executes a new valid filter command:
 
 ![FilterActivityDiagram](images/FilterActivityDiagram.png)
 
@@ -319,13 +320,92 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Aspect: Functionality of Filter feature**
 
-* **Alternative 1 (current choice):** Filters one or multiple categories.
-    * Pros: More flexible usage as users can choose to enter one or more category codes.
-    * Cons: May need to use a more complex data structure such as a `Set` to store the category codes entered by user.
+* **Alternative 1 (current choice):** Filters by multiple parameters (`CategoryCode`, `Tag`, and `Rating`).
+    * Pros: More flexible usage as users can choose to enter one or more criteria.
+    * Cons: Parser and filtering logic implemented may be more complicated as there are more cases to handle (e.g. multiple tags and a rating entered, a category code and a tag entered, etc)
 
-* **Alternative 2:** Only handles filter by one category.
-    * Pros: More targeted results.
-    * Cons: Need to execute multiple filter commands to search for contacts in more than one category.
+* **Alternative 2:** Only handles filter by one parameter (e.g. `CategoryCode` only).
+    * Pros: Easier to implement.
+    * Cons: Does not allow user to get more specific filter results.
+
+### View feature
+
+#### Implementation
+
+The view mechanism works by modifying the GUI of the application to display the details of the selected contact in the Display Pane. The view implementation makes use of `Model#getFilteredContactList()` which returns the list of contacts currently displayed to the user.
+
+Given below is an example usage scenario of the view mechanism.
+
+Step 1. The user launched the application for the first time. The `filteredContact` List will be initialized with all contacts in the addressBook `UniqueContactList`.
+
+Step 2. The user executes `view n/Marina Bay Sands` command to display the contact details of Marina Bay Sands. The `Parser` parses user input and creates a `ViewCommandName`.
+
+Step 3. The view command calls the `Model#getFilteredContactList()` and iterates through the list to check for a matching contact Name. If the contact is successfully retrieved, the Display Pane updates with details of Marina Bay Sands.
+
+The following sequence diagram shows how the view operation works:
+
+![ViewSequenceDiagram](images/ViewSequenceDiagram.png)
+
+#### Design considerations:
+
+**Aspect: Functionality of View feature**
+
+* **Alternative 1 (current choice):** Only allow users to view contacts in the currently displayed list.
+    * Pros: Easier to implement.
+    * Cons: Less flexibility for users as they are limited to contacts in the displayed list. They need to execute `list` to be able to view any contact in the address book.
+
+* **Alternative 2:** Allow users to view any contact in the address book even if it is not shown in the current list.
+    * Pros: More flexibility for users.
+    * Cons: More difficult to implement. Additionally, it is impossible to view a contact not displayed in the list by index. Hence, `ViewCommandIndex` will be limited to the displayed contacts, while `ViewCommandName` will allow users to view any contact in the address book.
+
+### Sort feature
+
+#### Implementation
+
+The Sort feature modifies the internal contact list stored in the addressbook according to the preference of sorting.  
+It is implemented with the following operations:
+
+* `SortCommandName#execute()`  —  Sorts the contacts in the list based on name in lexicographical order, or
+* `SortCommandRating#execute()`  —  Sorts the contacts in the list based on rating in descending order
+
+These operations make use of the operation `Model#sortList(String sortBy)`, which calls `AddressBook#sortList(String sortBy)`
+to change the order of the contacts in the contact list. In this way, the user's sorting preference is saved.
+
+Given below is an example usage scenario and how the Sort feature behaves at each step:
+
+Step 1. The user executes the command `list` to look at all contacts.
+
+Step 2. The user executes the command `filter c/att` to filter all the attraction contacts in the addressbook.
+
+Step 3. The user executes the command `sort rating` to display the attraction contacts based on rating in descending order.
+Since user command is in the correct format, a `SortCommand` is created. Otherwise, no command is executed and a `ParseException` is thrown.
+
+Step 4. The `sort` command calls `Model#sortList()` with the String `"rating"` as an argument,
+causing the internal contact list to be sorted accordingly.
+
+
+The following sequence diagram shows how the Sort operation works to show the relevant contacts:
+
+![SortSequenceDiagram](images/SortSequenceDiagram.png)
+
+The following activity diagram summarises what happens when a user executes a new Sort command:
+
+![SortActivityDiagram](images/SortActivityDiagram.png)
+
+
+#### Design considerations:
+
+**Aspect: How Sort is implemented:**
+
+* **Alternative 1 (current choice):** Sorts the internal list of the addressbook.
+    * Pros: Sorting preference is saved internally, so any command linked to the ordering of the contact list is applicable.
+    * Cons: User is not able to display contacts based on recently added contacts once the contact list is sorted.
+
+* **Alternative 2:** Modifies the GUI to display the sorted contacts without making any changes to the actual list saved in the addressbook.
+    * Pros: No change to the data saved is required, therefore fewer method calls.
+    * Cons: Commands such as `edit INDEX` and `view INDEX` may not work in conjunction with `sort` as the sorting is only implemented in the UI
+    instead of the `filteredContacts`, which depends on the internal list of the addressbook.
+
 
 ### Ratings feature
 
@@ -374,41 +454,39 @@ The following activity diagram summarizes what happens when a user executes an `
     * Pros: Dedicated all-in-one feature for ratings, easy modification.
     * Cons: Duplicates functionality of `AddCommand` and `EditCommand`, not particularly essential.
 
-### \[Proposed\] Undo/redo feature
+### Undo/redo feature
 
-#### Proposed Implementation
+#### Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The undo/redo mechanism is facilitated by the `List<ReadOnlyAddressBook>` in Model Manager which stores a version of the address book every time changes are made and `current` which keeps track of the index of the current address book in the list. Additionally, it implements the following operations:
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+* `Model#commit()` — Saves the current address book state in its history.
+* `Model#undo()` — Restores the previous address book state from its history.
+* `Model#redo()` — Restores a previously undone address book state from its history.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The history list will be initialized with the initial address book state as its only element, and the `current` index set to zero.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th contact in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th contact in the address book. The `delete` command calls `Model#commit()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the history List, and `current` is incremented by 1 (to the index of newly inserted address book state).
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new contact. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/Marina Bay Sands …​` to add a new contact. The `add` command also calls `Model#commit()`, causing another modified address book to be saved into the his tory list amd `current` to be incremented by 1.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commit()`, so the address book state will not be saved into the history List.
 
 </div>
 
-Step 4. The user now decides that adding the contact was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the contact was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undo()`, which will decrement `current` index by one, to the index of the previous address book state, and restores the address book to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `current` index is 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#isUndoable()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
 </div>
@@ -421,22 +499,23 @@ The following sequence diagram shows how the undo operation works:
 
 </div>
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redo()`, which increments the `currentStatePointer` by 1 (to the previously undone state), and restores the address book to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `current` index is `history.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#isRedoable()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commit()`, `Model#undo()` or `Model#redo()`. Thus, the history List remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commit()`. Since `current` is not set to the index of the last element in the list, all address book states after the `current` index will be purged.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
-The following activity diagram summarizes what happens when a user executes a new command:
+The following activity diagram summarizes what happens when a user executes a command that changes the data stored in the address book:
 
+![img.png](images/CommitActivityDiagram.png)
 <img src="images/CommitActivityDiagram.png" width="250" />
 
 #### Design considerations:
@@ -451,8 +530,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the contact being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
 
 ### Review Feature
 
@@ -534,7 +611,7 @@ The following sequence diagram shows how `Summary` updates when these commands a
 ![Sequence Diagram for Summary Commands](images/SummarySequenceDiagramCommand.png)
 
 
-The above sequence diagrams describe how Summary pulls data from the `AddressBook` to summarise data.
+The above sequence diagrams describe how Summary pulls data from `AddressBook` to summarise data.
 `Summary` uses `JavaFx chart` to display data, on top of the text.
 
 #### Design considerations:
@@ -559,7 +636,7 @@ It is implemented with the following operation:
 * `ExportCommandIndex#execute()`  —  Exports the contacts at the specified index in the current list.
 * `ExportCommandAll#execute()`  —  Exports all the contacts in the current list.
 
-The feature makes use of an `ExportStorage` class, which handles the manipulation of the aforementioned exported text file. It is implemented inside the Storage component and is implemented using a singleton design pattern. This class has an `addToStorage` write method which is called by the `exportContact()` method in the read-only `AddressBook` model. 
+The feature makes use of an `ExportStorage` class, which handles the manipulation of the aforementioned exported text file. It is implemented inside the Storage component and is implemented using a singleton design pattern. This class has an `addToStorage` write method which is called by the `exportContact()` method in the read-only `AddressBook` model.
 
 Given below is an example usage scenario and how the Export feature behaves at each step:
 
@@ -739,6 +816,29 @@ Use case ends.
 
 **UC02 - Edit a Contact**
 
+**MSS**
+
+1. User decides to edit a contact
+
+2. User inputs the edit command to the interface
+
+3. WhereTourGo informs the user that the contact was edited
+
+4. WhereTourGo displays updated list of contacts and summary page
+   Use case ends.
+
+**Extensions**
+* 2a. The format is wrong
+
+  * 2a1. WhereTourGo shows an error message
+
+  Use case ends.
+
+* 2b.  Contact already exists in WhereTourGo
+
+  * 2b1. WhereTourGo shows an error message
+
+  Use case ends.
 
 **UC03 - Delete a Contact**
 
@@ -747,10 +847,9 @@ Use case ends.
 **MSS**
 
 1.  User requests to delete a specific contact in the list
-2.  AddressBook deletes the contact
+2.  WhereTourGo deletes the contact
 
-
-    Use case ends.
+  Use case ends.
 
 **Extensions**
 
@@ -758,18 +857,17 @@ Use case ends.
 
   * 1a1. WhereTourGo shows an error message, and instructions on how to use the command.
 
-
-      Use case ends.
+  Use case ends.
 
 * 1b. The given name is invalid.
 
-  * 1b1. AddressBook shows an error message, and instructions on how to use the command.
+  * 1b1. WhereTourGo shows an error message, and instructions on how to use the command.
 
     Use case ends.
 
 * 1c. The command format is invalid.
 
-  * 1c1. AddressBook shows an error message, and instructions on how to use the command.
+  * 1c1. WhereTourGo shows an error message, and instructions on how to use the command.
 
     Use case ends.
 
@@ -793,32 +891,59 @@ Use case ends.
 
 **MSS**
 
-1. User requests to find a contact
-2. WhereTourGo displays a list of all contacts with the given keywords
+1.  User requests to find a contact
+2.  User enters the find command with specific keywords
+3.  WhereTourGo displays a list of all contacts with the given keywords
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The keyword cannot be found
+* 2a. The keywords cannot be found. AddressBook displays no contacts.
 
   Use case ends.
 
-* 2b. No keywords are provided
+* 2b. No keywords are provided.
 
-  * 2b1. WhereTourGo shows an error message
+  * 2b1. WhereTourGo shows an error message.
 
-    Use case resumes at step 2.
+    Use case resumes at step 1.
+
+* 2c. The list is empty.
+  
+  Use case ends.
 
 **UC06 - Filter for Contacts**
+
+
 **UC07 - Sort all Contacts**
+
+**MSS**
+
+1.  User requests to sort the contacts
+2.  User enters the sort command
+3.  WhereTourGo displays a list of sorted contacts
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given sort command is in invalid format.
+
+  * 2a1. WhereTourGo shows an error message
+
+    Use case resumes at step 1.
+
+* 3a. The list is empty.
+
+  Use case ends.
 
 **UC08 - Summarising Contacts**
 
 **MSS**
 
-1.  User requests to view the summary of the AddressBook
-2.  The addressBook returns the summary on the GUI
+1.  User requests to view the summary of the WhereTourGo
+2.  WhereTourGo returns the summary on the GUI
 
     Use case ends.
 
@@ -826,19 +951,19 @@ Use case ends.
 
 * 1a. The command format is wrong (e.g. `sum 1`)
 
-  * 1a1. AddressBook shows an error message, and instructions on how to use the command.
+  * 1a1. WhereTourGo shows an error message, and instructions on how to use the command.
 
     Use case ends.
 
-* 2a. The addressBook is empty
+* 2a. WhereTourGo is empty
 
-  * 2a1. AddressBook will not display chart data and show total contacts as 0.
+  * 2a1. WhereTourGo will not display chart data and show total contacts as 0.
 
     Use case ends.
 
 **UC09 - View a Contact**
 
-**UC10 - Navigate Input History** 
+**UC10 - Navigate Input History**
 
 **MSS**
 1. User request for a previously entered command.
@@ -848,7 +973,7 @@ Use case ends
 **Extensions**
 * 1a. There is no previously entered command.
   * 1a1. The command is reset to the current command's original form.
-  
+
   Use case ends
 
 **UC11 - Undo an Operation**
@@ -880,8 +1005,6 @@ Use case ends
 1.  User requests to export all contacts in the current list.
 2.  WhereTourGo exports all contacts.
 
-    Use case ends.
-
 **Extensions**
 
 * 2a. The list is empty.
@@ -894,7 +1017,7 @@ Use case ends
 
 1. User requests to clear all contacts.
 2. WhereTourGo clears all contacts.
-
+   
 Use case ends.
 
 **Extensions**
@@ -924,7 +1047,7 @@ Use case ends.
 **Extensions**
 * 2a. User's default browser cannot be opened.
   * 2a1. WhereTourGo will display the in-built help window
-    
+ 
   Use case ends.
 
 **UC18 - Display Commands**
@@ -938,10 +1061,9 @@ Use case ends.
 **Extensions**
 * 2a. User's default browser cannot be opened.
   * 2a1. WhereTourGo will display the in-built help window
-  
+
   Use case ends.
 
-*{More to be added}*
 
 ### Non-Functional Requirements
 
@@ -1010,6 +1132,21 @@ testers are expected to do more *exploratory* testing.
        Expected: Similar to previous.
 
 ### Editing a contact
+1. Editing a contact
+
+    1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
+
+    1. Test case: `edit 1 n/Singapore Flyers` <br>
+       Expected: The first contact's name is changed to "Singapore Flyers". Details of the edited contact shown in the status message. Summary is updated and displayed.
+
+    1. Test case: `edit 0`<br>
+       Expected: No contact is deleted. Error details shown in the status message. Summary is displayed.
+
+    1. Test case: `123 edit n/VALID_NAME` (Valid names should not be blank, contains only alphanumeric characters and spaces and cannot be longer than 100 characters) <br>
+       Expected: No contact is added. Error details shown in the status message. Summary is displayed.
+
+    1. Other incorrect delete commands to try: `edit`, `edit x n/VALID_NAME` (where x is larger than the list size, or negative), `edit 00001 n/VALID_NAME`, `edit 1 n/`, `edit 1 n/INVALID_NAME`(invalid name that does not exist in WhereTourGo)<br>
+       Expected: Similar to previous.
 
 ### Deleting a contact
 
@@ -1026,52 +1163,8 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `delete 0`<br>
       Expected: No contact is deleted. Error details shown in the status message. Summary is displayed.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size, or negative), `delete 00001`, `delete 1 n/`, `delete n/INVALID_NAME`(invalid name that does not exist in the addressBook)<br>
+   1. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size, or negative), `delete 00001`, `delete 1 n/`, `delete n/INVALID_NAME`(invalid name that does not exist in WhereTourGo)<br>
       Expected: Similar to previous.
-
-### Displaying Summary
-
-1. Using the `sum` command
-
-    1. Prerequisites: AddressBook has at least 1 contact. Used any command that hides summary such as:  `edit`, `view`.
-    
-    1. Test case: `sum`<br>
-        Expected: Displays summary with the correct information.
-       
-    1. Test case: `sum 2`<br>
-        Expected: Error details shown in the status message, with instructions on how to use the `sum` command. No summary is displayed.
-
-1. Modifying AddressBook with commands that involve summary.
-
-    1. Prerequisites: List all contacts using the `list` command. First contact does not have a 'fnb' category code. Multiple contacts in the list.
-
-    1. Test case: `add c/att n/Singapore Flyers p/92345678 e/123@example.com a/30 Raffles Ave, Singapore 039803 ra/4`<br>
-       Expected: Contact with name 'Singapore Flyers', rating of 4 stars and category of attraction is added. Summary is updated and displayed (Total number of contacts, category and rating charts updated).
-
-    1. Test case: `edit 1 c/fnb`<br>
-       Expected: Category code of first contact in the list is updated to 'fnb'. Summary is updated and displayed (Number of contacts remains the same, category code chart updated with 1 more 'fnb', and one less of the original category code).
-       
-    1. Test case: `clear`<br>
-        Expected: Entire addressBook is deleted. Summary is updated and displayed (Charts are empty, total number of contacts equals 0).
-       
-    1. Test case: `delete 1`<br>
-        Expected: First contact in the addressBook is deleted. Summary is updated and displayed (Number of contacts decreases by 1, contact's category code and rating removed from pie chart segment).
-       
-    1. Test case: `find VALID_SEARCH_QUERY` (any keyword in the addressBook) <br>
-        Expected: Displays results of the `find` command. Summary is displayed.
-
-    1. Test case: `filter c/fnb` <br>
-       Expected: Displays results of the `filter` command. Summary is displayed.
-
-    1. Test case: `list` <br>
-       Expected: Displays results of the `list` command (Displays all contacts). Summary is displayed.
-
-    1. Test case: `undo` (A command affecting the addressBook must be ran first, such as `delete`) <br>
-        Expected: Undoes previous command. Summary is updated and displayed (i.e. summary reflects the undone command).
-       
-    1. Test case: `redo` (Previous test case, `undo`, must be executed first) <br>
-        Expected: Redoes the previous command that was undone. Summary is updated and displayed (i.e. summary reflects the redone command).
-      
 
 ### Listing all contacts
 
@@ -1082,16 +1175,141 @@ testers are expected to do more *exploratory* testing.
 
     1. Other incorrect list commands to try: `list abc`, `list 2`, `...` <br>
        Expected: All contacts will not be listed in Contact Pane, remains in its previous state. Error details shown in the status message.
-       
+    
 ### Locating contacts
+
+### Finding contacts
+
+1. Finding contacts by keywords
+
+  1. Prerequisites: There are 5 contacts in the contact list. The contact details are as follows:
+      * category: ATT, name: Marina Bay Sands, phone: 66888868, email: marinabaysands@example.com,
+      address: 10 Bayfront Ave, Singapore 018956, review: amazing
+      * category: COM, name: VivoCity, phone: 63776860, email: vivocity@example.com,
+      address: 1 HarbourFront Walk, Singapore 098585, review: meh
+      * category: ATT, name: Gardens By The Bay, phone: 64206848, email: gbtb@example.com,
+      address: 18 Marina Gardens Dr, Singapore 018953, review: - No Review -
+      * category: FNB, name: HANS IM GLUCK German Burgergrill, phone: 66112233, email: Hansburgergrill@example.com,
+      address: 362 Orchard Rd, International Building, Singapore 238887, review: Excellent burgers
+      * category: FNB, name: Prive Somerset, phone: 66334422, email: privesomerset@example.com,
+      address: 313 Orchard Rd, #01-28, Singapore 238895, review: its alright
+
+  2. Test case: `find sands`<br>
+     Expected: Contacts Pane shows the contact with the name "Marina Bay Sands".
+
+  3. Test case: `find marina`<br>
+     Expected: Contacts Pane shows 2 contacts  —  the contact with the name "Marina Bay Sands" and the contact with the address "18 Marina Gardens Dr, Singapore 018953".
+
+  4. Test case: `find bay`<br>
+     Expected: Contacts Pane shows 2 contacts  —  the contact with the name "Marina Bay Sands" and the contact with the name "Gardens By The Bay".
+
+  5. Test case: `find orchard`<br>
+     Expected: Contacts Pane shows 2 contacts  —  the cnotact with the address "362 Orchard Rd, International Building, Singapore 238887"
+     and the contact with the address "313 Orchard Rd, #01-28, Singapore 238895".
+
+  6. Test case: `find 66`<br>
+     Expected: Contacts Pane shows 3 contacts  —  the contacts with the phone numbers "66888868", "66112233" and "66334422" respectively.
+
+  7. Test case: `find amazing excellent`<br>
+     Expected: Contacts Pane shows 2 contacts  —  the contacts with the reviews "amazing" and "Excellent burgers" respectively.
+
+  8. Test case: `find example`<br>
+     Expected: Contacts Pane shows all 5 contacts  —  the contacts with their emails containing the word "example".
+
+  9. Test case: `find test`<br>
+     Expected: No contact is shown in the Contacts Pane.
+
+  10. Other incorrect find commands to try: `find`, `find x`, `...` (where x is any keyword that does match any contacts'
+      names, phones, emails, addresses or reviews)<br>
+      Expected: Error details shown in Results Pane.
+      
 
 ### Filtering contacts
 
 ### Sorting contacts
 
-### Summarizing contacts
+1. Sorting contacts by name
+
+  1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
+
+  2. Test case: `sort name`<br>
+     Expected: Contacts are sorted based on their names in lexicographical order and are shown in Contacts Pane.
+     Success message is shown in Results Pane.
+
+  3. Other incorrect sort commands to try: `sort`, `sort x`, `...` (where x is any word other than `name` and `rating`)<br>
+     Expected: Contacts are not sorted. Error details shown in Results Pane.
+
+2. Sorting contacts by rating
+
+  1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
+
+  2. Test case: `sort rating`<br>
+     Expected: Contacts are sorted based on their rating values in descending order and are shown in Contacts Pane.
+     Success message is shown in Results Pane.
+
+  3. Other incorrect sort commands to try: `sort`, `sort x`, `...` (where x is any word other than `name` and `rating`)<br>
+     Expected: Contacts are not sorted. Error details shown in Results Pane.
+     
+     
+### Displaying Summary
+
+1. Using the `sum` command
+
+    1. Prerequisites: WhereTourGo has at least 1 contact. Used any command that hides summary such as:  `edit`, `view`.
+
+    1. Test case: `sum`<br>
+       Expected: Displays summary with the correct information.
+
+    1. Test case: `sum 2`<br>
+       Expected: Error details shown in the status message, with instructions on how to use the `sum` command. No summary is displayed.
+
+1. Modifying WhereTourGo with commands that involve summary.
+
+    1. Prerequisites: List all contacts using the `list` command. First contact does not have a 'fnb' category code. Multiple contacts in the list.
+
+    1. Test case: `add c/att n/Singapore Flyers p/92345678 e/123@example.com a/30 Raffles Ave, Singapore 039803 ra/4`<br>
+       Expected: Contact with name 'Singapore Flyers', rating of 4 stars and category of attraction is added. Summary is updated and displayed (Total number of contacts, category and rating charts updated).
+
+    1. Test case: `edit 1 c/fnb`<br>
+       Expected: Category code of first contact in the list is updated to 'fnb'. Summary is updated and displayed (Number of contacts remains the same, category code chart updated with 1 more 'fnb', and one less of the original category code).
+  
+    1. Test case: `clear`<br>
+       Expected: Entire contact list is deleted. Summary is updated and displayed (Charts are empty, total number of contacts equals 0).
+
+    1. Test case: `delete 1`<br>
+       Expected: First contact in WhereTourGo is deleted. Summary is updated and displayed (Number of contacts decreases by 1, contact's category code and rating removed from pie chart segment).
+
+    1. Test case: `find VALID_SEARCH_QUERY` (any keyword in WhereTourGo) <br>
+       Expected: Displays results of the `find` command. Summary is displayed.
+
+    1. Test case: `filter c/fnb` <br>
+       Expected: Displays results of the `filter` command. Summary is displayed.
+
+    1. Test case: `list` <br>
+       Expected: Displays results of the `list` command (Displays all contacts). Summary is displayed.
+
+    1. Test case: `undo` (A command affecting WhereTourGo must be run first, such as `delete`) <br>
+       Expected: Undoes previous command. Summary is updated and displayed (i.e. summary reflects the undone command).
+
+    1. Test case: `redo` (Previous test case, `undo`, must be executed first) <br>
+       Expected: Redoes the previous command that was undone. Summary is updated and displayed (i.e. summary reflects the redone command).
 
 ### Viewing a contact
+1. Viewing a contact while all contacts are being shown
+
+    1. Prerequisites: List all contacts using the `list` command, contact with name ‘Marina Bay Sands’ exists. Multiple contacts in the list.
+
+    1. Test case: `view 1`<br>
+       Expected: Details of first contact is displayed in the Display Pane. Details of the first contact shown in the status message.
+
+    1. Test case: `view n/Marina Bay Sands`<br>
+       Expected: Details of contact with name ‘Marina Bay Sands’ is displayed in Display Pane. Details of the displayed contact shown in the status message.
+
+    1. Test case: `view 0`<br>
+       Expected: No contact is displayed. Error details shown in the status message. Display Pane remains unchanged.
+
+    1. Other incorrect delete commands to try: view, view x (where x is larger than the list size, or negative), view 00001, view 1 n/, view n/INVALID_NAME(invalid name that does not exist in the addressBook)
+       Expected: Similar to previous
 
 ### Navigating input history
 1. Navigating input history using the up arrow key
@@ -1113,14 +1331,44 @@ testers are expected to do more *exploratory* testing.
 ### Clicking on contacts
 1. Clicking on contacts shown in the contact list
 
-    1. Prerequisites: AddressBook has at least 1 contact shown in the contact list.
+    1. Prerequisites: WhereTourGo has at least 1 contact shown in the contact list.
 
     1. Test case: Click a contact within the Contact Pane.
-       Expected: Contact Card will light up for a short duration. Details will be displayed in both the display panel and the status message. 
+       Expected: Contact Card will light up for a short duration. Details will be displayed in both the display panel and the status message.
 
 ### Undoing operations
+1. Undoing changes consecutively
+
+    1. Prerequisites: Multiple contacts in the list, contact with name ‘Marina Bay Sands’ exists. Address book history set up by executing the following commands in order :
+       1. `delete n/Marina Bay Sands`
+       1. `add c/att n/Singapore Flyers p/92345678 e/123@example.com a/30 Raffles Ave, Singapore 039803 ra/4`
+
+    1. Test case: `undo`<br>
+       Expected: Previously added contact, `Singapore Flyers` is removed from address book. Undo success message shown in the status message.
+
+    1. Test case: `undo`<br>
+      Expected: Previously deleted contact, `Marina Bay Sands` is added back to address book. Undo success message shown in the status message.
+
+    1. Test case: `undo`<br>
+       Expected: No changes to address book or contact list. Error details shown in the status message.
 
 ### Redoing operations
+1. Redoing changes consecutively
+
+    1. Prerequisites: Multiple contacts in the list, contact with name ‘Marina Bay Sands’ and 'Singapore Flyer' exists, `Singapore Flyer` is the first contact in the list. Address book history set up by executing the following commands in order :
+        1. `delete n/Marina Bay Sands`
+        1. `edit 1 e/123@example.com`
+        1. `undo`
+        1. `undo`
+
+     1. Test case: `redo`<br>
+       Expected: Previously restored contact, `Marina Bay Sands` is deleted from address book. Redo success message shown in the status message.
+
+    1. Test case: `redo`<br>
+       Expected: Previous edits made to `Singapore Flyers` is restored, email of `Singapore Flyers` changed back to `123@example.com`. Redo success message shown in the status message.
+
+    1. Test case: `redo`<br>
+       Expected: No changes to address book or contact list. Error details shown in the status message.
 
 ### Exporting data
 
@@ -1150,7 +1398,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `clear`<br>
        Expected: All contacts are cleared from WhereTourGo. Success message shown in the status message. Contact Pane will be empty.
-       
+ 
     1. Test case: `clear`<br> and repeat `clear` again
        Expected: Cannot be cleared twice. Error message shown in the status message. Contact Pane will remain empty.
 
