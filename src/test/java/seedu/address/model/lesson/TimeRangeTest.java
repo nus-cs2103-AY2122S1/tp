@@ -62,18 +62,24 @@ public class TimeRangeTest {
     @Test
     public void compareTo() {
         TimeRange timeRange = new TimeRange("0900-1200");
+        TimeRange timeRangeCopy = new TimeRange("0900-1200");
         TimeRange laterNonClashingTimeRange = new TimeRange("1300-1500");
-        TimeRange startBeforeEndDuring = new TimeRange("0900-1000");
-        TimeRange startDuringEndAfter = new TimeRange("1030-1300");
+        TimeRange startSameEndBefore = new TimeRange("0900-1000");
+        TimeRange startAfterEndAfter = new TimeRange("1030-1300");
 
-        // clashing time ranges
-        assertEquals(0, timeRange.compareTo(startBeforeEndDuring));
-        assertEquals(0, timeRange.compareTo(startDuringEndAfter));
+        // later start time
+        assertEquals(1, startAfterEndAfter.compareTo(timeRange));
+
+        // same start time, earlier end time
+        assertEquals(-1, startSameEndBefore.compareTo(timeRange));
 
         // later time range
         assertEquals(-1, timeRange.compareTo(laterNonClashingTimeRange));
 
         // earlier time range
         assertEquals(1, laterNonClashingTimeRange.compareTo(timeRange));
+
+        // same time range
+        assertEquals(0, timeRange.compareTo(timeRangeCopy));
     }
 }

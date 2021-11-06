@@ -4,16 +4,19 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.commons.core.Messages.MESSAGE_DUPLICATE_STUDENT;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import com.calendarfx.model.Calendar;
+import com.calendarfx.model.Entry;
 
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
@@ -22,6 +25,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.UndoRedoStack;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
+import seedu.address.model.LastUpdatedDate;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
@@ -53,7 +57,7 @@ public class AddCommandTest {
         Person validPerson = new PersonBuilder().build();
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_STUDENT, () ->
+        assertThrows(CommandException.class, MESSAGE_DUPLICATE_STUDENT, () ->
                 prepareAddCommandForPerson(validPerson, modelStub).execute());
     }
 
@@ -132,6 +136,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Person> getUnfilteredPersonList() {
+            throw new AssertionError(MESSAGE_UNEXPECTED_METHOD_CALL);
+        }
+
+        @Override
         public void addPerson(Person person) {
             throw new AssertionError(MESSAGE_UNEXPECTED_METHOD_CALL);
         }
@@ -163,7 +172,17 @@ public class AddCommandTest {
 
         @Override
         public boolean hasClashingLesson(Lesson lesson, Lesson lessonToIgnore) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(MESSAGE_UNEXPECTED_METHOD_CALL);
+        }
+
+        @Override
+        public Set<String> getClashingLessonsString(Lesson lesson) {
+            throw new AssertionError(MESSAGE_UNEXPECTED_METHOD_CALL);
+        }
+
+        @Override
+        public Set<String> getClashingLessonsString(Lesson lesson, Lesson lessonToIgnore) {
+            throw new AssertionError(MESSAGE_UNEXPECTED_METHOD_CALL);
         }
 
         @Override
@@ -182,12 +201,37 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Entry<Lesson>> getUpcomingLessons() {
+            throw new AssertionError(MESSAGE_UNEXPECTED_METHOD_CALL);
+        }
+
+        @Override
+        public void updateUpcomingLessons() {
+            throw new AssertionError(MESSAGE_UNEXPECTED_METHOD_CALL);
+        }
+
+        @Override
         public ObservableList<Person> getFilteredPersonList() {
             throw new AssertionError(MESSAGE_UNEXPECTED_METHOD_CALL);
         }
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError(MESSAGE_UNEXPECTED_METHOD_CALL);
+        }
+
+        @Override
+        public boolean hasPersonFilteredList(Person person) {
+            throw new AssertionError(MESSAGE_UNEXPECTED_METHOD_CALL);
+        }
+
+        @Override
+        public LastUpdatedDate getLastUpdatedDate() {
+            throw new AssertionError(MESSAGE_UNEXPECTED_METHOD_CALL);
+        }
+
+        @Override
+        public void setLastUpdatedDate() {
             throw new AssertionError(MESSAGE_UNEXPECTED_METHOD_CALL);
         }
 

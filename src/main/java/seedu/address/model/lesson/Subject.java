@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Lesson's subject in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidSubject(String)}
  */
-public class Subject {
+public class Subject implements Comparable<Subject> {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Subject should only contain alphanumeric characters and spaces, and it should not be blank";
@@ -18,17 +18,17 @@ public class Subject {
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-    public final String subject;
+    public final String value;
 
     /**
      * Constructs a {@code Subject}.
      *
-     * @param subject A valid subject.
+     * @param value A valid subject.
      */
-    public Subject(String subject) {
-        requireNonNull(subject);
-        checkArgument(isValidSubject(subject), MESSAGE_CONSTRAINTS);
-        this.subject = subject;
+    public Subject(String value) {
+        requireNonNull(value);
+        checkArgument(isValidSubject(value), MESSAGE_CONSTRAINTS);
+        this.value = value;
     }
 
     /**
@@ -43,19 +43,24 @@ public class Subject {
 
     @Override
     public String toString() {
-        return subject;
+        return value;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Subject // instanceof handles nulls
-                && subject.equals(((Subject) other).subject)); // state check
+                && value.equals(((Subject) other).value)); // state check
     }
 
     @Override
     public int hashCode() {
-        return subject.hashCode();
+        return value.hashCode();
+    }
+
+    @Override
+    public int compareTo(Subject other) {
+        return value.compareTo(other.value);
     }
 
 }

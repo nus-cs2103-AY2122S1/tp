@@ -3,36 +3,39 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOMEWORK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_OUTSTANDING_FEES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RATES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.util.CommandUtil;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
 import seedu.address.model.util.PersonUtil;
 
-
+/**
+ * Adds a lesson to a person in the address book.
+ */
 public class LessonAddCommand extends UndoableCommand {
 
     public static final String COMMAND_ACTION = "Add Lesson";
 
     public static final String COMMAND_WORD = "ladd";
 
-    public static final String COMMAND_PARAMETERS = "INDEX (must be a positive integer) "
-            + "[" + PREFIX_RECURRING + "] "
+    public static final String COMMAND_PARAMETERS = "INDEX "
+            + "[" + PREFIX_RECURRING + "[END_DATE]] "
             + PREFIX_DATE + "dd MMM yyyy "
             + PREFIX_TIME + "HHmm-HHmm "
             + PREFIX_RATES + "RATES "
             + PREFIX_SUBJECT + "SUBJECT "
+            + "[" + PREFIX_OUTSTANDING_FEES + "OUTSTANDING_FEES] "
             + "[" + PREFIX_HOMEWORK + "HOMEWORK]...";
 
     public static final String COMMAND_FORMAT = COMMAND_WORD + " " + COMMAND_PARAMETERS;
@@ -68,8 +71,12 @@ public class LessonAddCommand extends UndoableCommand {
 
     public static final String MESSAGE_ADD_LESSON_SUCCESS = "Added new lesson for student %1$s:\n%2$s";
     public static final String MESSAGE_CLASHING_LESSON = "This lesson clashes with an existing lesson.";
+    public static final String MESSAGE_INVALID_DATE_RANGE = "The end date cannot be earlier than the start date. Please"
+            + " specify a valid date range.\n"
+            + "You can specify the start date with " + PREFIX_DATE + "DATE and the end date with "
+            + PREFIX_RECURRING + "END_DATE";
 
-    private final Index index;
+    private Index index;
     private final Lesson toAdd;
     private Person personBeforeLessonAdd;
     private Person personAfterLessonAdd;
@@ -78,21 +85,10 @@ public class LessonAddCommand extends UndoableCommand {
      * Creates a LessonAddCommand to add the specified {@code Lesson}
      */
     public LessonAddCommand(Index index, Lesson lesson) {
+        super(COMMAND_ACTION);
         requireNonNull(lesson);
         this.index = index;
         toAdd = lesson;
-    }
-
-    /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     */
-    private static Person createEditedPerson(Person personToEdit, Lesson toAdd) {
-        assert personToEdit != null;
-
-        Set<Lesson> lessons = new TreeSet<>(personToEdit.getLessons());
-        lessons.add(toAdd);
-
-        return PersonUtil.createdEditedPerson(personToEdit, lessons);
     }
 
     @Override
@@ -100,37 +96,61 @@ public class LessonAddCommand extends UndoableCommand {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
-        }
-        if (model.hasClashingLesson(toAdd)) {
-            throw new CommandException(MESSAGE_CLASHING_LESSON);
-        }
-        personBeforeLessonAdd = lastShownList.get(index.getZeroBased());
-        personAfterLessonAdd = createEditedPerson(personBeforeLessonAdd, toAdd);
+        personBeforeLessonAdd = CommandUtil.getPerson(lastShownList, index);
+
+        Set<Lesson> lessons = personBeforeLessonAdd.getLessons();
+        Set<Lesson> updatedLessons = createUpdatedLessons(lessons, toAdd);
+        personAfterLessonAdd = PersonUtil.createdEditedPerson(personBeforeLessonAdd, updatedLessons);
 
         model.setPerson(personBeforeLessonAdd, personAfterLessonAdd);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_ADD_LESSON_SUCCESS, personAfterLessonAdd.getName(), toAdd),
                 personAfterLessonAdd);
     }
 
-    @Override
-    protected void undo() {
-        requireNonNull(model);
+    /**
+     * Adds specified {@code Lesson} to the lessons for this person.
+     *
+     * @param lessons A list of lessons to update.
+     * @param toAdd The lesson to add.
+     * @return A set of updated lessons with the lesson added.
+     * @throws CommandException If the added lesson results in a clash.
+     */
+    private Set<Lesson> createUpdatedLessons(Set<Lesson> lessons, Lesson toAdd)
+            throws CommandException {
+        if (model.hasClashingLesson(toAdd)) {
+            Set<String> clashes = model.getClashingLessonsString(toAdd);
+            String clashingLessons = CommandUtil.lessonsToString(clashes);
+            throw new CommandException(MESSAGE_CLASHING_LESSON + clashingLessons);
+        }
 
-        model.setPerson(personAfterLessonAdd, personBeforeLessonAdd);
+        // Check date ranges
+        if (toAdd.getStartDate().isAfter(toAdd.getEndDate())) {
+            throw new CommandException(MESSAGE_INVALID_DATE_RANGE);
+        }
+
+        Set<Lesson> updatedLessons = new TreeSet<>(lessons);
+        updatedLessons.add(toAdd);
+        return updatedLessons;
     }
 
     @Override
-    protected void redo() {
+    protected Person undo() throws AssertionError {
         requireNonNull(model);
 
-        try {
-            executeUndoableCommand();
-        } catch (CommandException ce) {
-            throw new AssertionError(MESSAGE_REDO_FAILURE);
-        }
+        checkValidity(personAfterLessonAdd);
+
+        model.setPerson(personAfterLessonAdd, personBeforeLessonAdd);
+        return personBeforeLessonAdd;
+    }
+
+    @Override
+    protected Person redo() {
+        requireNonNull(model);
+
+        checkValidity(personBeforeLessonAdd);
+
+        model.setPerson(personBeforeLessonAdd, personAfterLessonAdd);
+        return personAfterLessonAdd;
     }
 
     @Override

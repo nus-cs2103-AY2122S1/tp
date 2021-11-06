@@ -25,10 +25,9 @@ public class CenterPanel extends UiPart<Region> {
     private static final String FXML = "CenterPanel.fxml";
     private static final Logger logger = LogsCenter.getLogger(CenterPanel.class);
 
+    // Independent Ui parts residing in this Ui container
     private SchedulePanel schedulePanel;
-
     private PersonGridPanel personGridPanel;
-
     private TagListPanel tagListPanel;
 
     @FXML
@@ -49,8 +48,60 @@ public class CenterPanel extends UiPart<Region> {
         displayPersonGridPanel(lessonList);
     }
 
-    public SchedulePanel getSchedulePanel() {
-        return schedulePanel;
+    /**
+     * Display the day page of the calendar interface
+     */
+    public void showDay() {
+        displaySchedulePanel();
+        schedulePanel.showDay();
+    }
+
+    /**
+     * Display the week page of the calendar interface
+     */
+    public void showWeek() {
+        displaySchedulePanel();
+        schedulePanel.showWeek();
+    }
+
+    /**
+     * Display the month page of the calendar interface
+     */
+    public void showMonth() {
+        displaySchedulePanel();
+        schedulePanel.showMonth();
+    }
+
+    /**
+     * Display the year page of the calendar interface
+     */
+    public void showYear() {
+        displaySchedulePanel();
+        schedulePanel.showYear();
+    }
+
+    /**
+     * Shows the next week of the calendar.
+     */
+    public void goNext() {
+        displaySchedulePanel();
+        schedulePanel.goNext();
+    }
+
+    /**
+     * Shows the current week of the calendar.
+     */
+    public void goToday() {
+        displaySchedulePanel();
+        schedulePanel.goToday();
+    }
+
+    /**
+     * Shows the previous week of the calendar.
+     */
+    public void goBack() {
+        displaySchedulePanel();
+        schedulePanel.goBack();
     }
 
     public ListView<Person> getPersonListView() {
@@ -64,6 +115,7 @@ public class CenterPanel extends UiPart<Region> {
         personGridPanel.fillListPanels(lessons);
         personGridPanel.setListPanels();
         centerPanelPlaceholder.getChildren().setAll(personGridPanel.getRoot());
+        personGridPanel.getPersonListView().getSelectionModel().clearSelection();
     }
 
     /**
@@ -76,14 +128,16 @@ public class CenterPanel extends UiPart<Region> {
         personGridPanel.fillListPanels(student, lessons);
         personGridPanel.setListPanels();
         centerPanelPlaceholder.getChildren().setAll(personGridPanel.getRoot());
+        personGridPanel.getPersonListView().getSelectionModel().select(student);
+        personGridPanel.getPersonListView().requestFocus();
     }
 
     /**
      * Brings SchedulePanel to top of the stack's child list.
      */
     public void displaySchedulePanel() {
-        logger.info("Showing the schedule calendar.");
         if (!centerPanelPlaceholder.getChildren().contains(schedulePanel.getRoot())) {
+            logger.info("Showing the schedule calendar.");
             centerPanelPlaceholder.getChildren().setAll(schedulePanel.getRoot());
         }
     }
@@ -92,8 +146,8 @@ public class CenterPanel extends UiPart<Region> {
      * Brings TagListPanel to top of the stack's child list.
      */
     public void displayTagListPanel() {
-        logger.info("Showing the list of tags.");
         if (!centerPanelPlaceholder.getChildren().contains(tagListPanel.getRoot())) {
+            logger.info("Showing the list of tags.");
             centerPanelPlaceholder.getChildren().setAll(tagListPanel.getRoot());
         }
     }

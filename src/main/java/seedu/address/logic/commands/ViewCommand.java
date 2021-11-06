@@ -14,7 +14,7 @@ public class ViewCommand extends Command {
 
     public static final String COMMAND_WORD = "view";
 
-    public static final String COMMAND_PARAMETERS = "INDEX (must be a positive integer) ";
+    public static final String COMMAND_PARAMETERS = "INDEX";
 
     public static final String COMMAND_FORMAT = COMMAND_WORD + " " + COMMAND_PARAMETERS;
 
@@ -52,5 +52,12 @@ public class ViewCommand extends Command {
 
         return new CommandResult(String.format(MESSAGE_SUCCESS,
                 studentToView.getName()), studentToView);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ViewCommand // instanceof handles nulls
+                && index.equals(((ViewCommand) other).index)); // state check
     }
 }

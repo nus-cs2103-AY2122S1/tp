@@ -5,6 +5,7 @@ import java.nio.file.Path;
 import java.util.logging.Logger;
 
 import com.calendarfx.model.Calendar;
+import com.calendarfx.model.Entry;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,6 +17,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.LastUpdatedDate;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.lesson.Lesson;
@@ -64,6 +66,7 @@ public class LogicManager implements Logic {
         return commandResult;
     }
 
+
     @Override
     public ReadOnlyAddressBook getAddressBook() {
         return model.getAddressBook();
@@ -102,6 +105,17 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ObservableList<Entry<Lesson>> getUpcomingLessons() {
+        return model.getUpcomingLessons();
+    }
+
+    @Override
+    public void updateUpcomingLessons() {
+        logger.info("Update upcoming lessons");
+        model.updateUpcomingLessons();
+    }
+
+    @Override
     public Path getAddressBookFilePath() {
         return model.getAddressBookFilePath();
     }
@@ -114,5 +128,10 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public LastUpdatedDate getLastUpdatedDate() {
+        return model.getLastUpdatedDate();
     }
 }

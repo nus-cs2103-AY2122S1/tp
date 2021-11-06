@@ -59,7 +59,7 @@ Lesson --> LessonDeleteCommand : lesson
 deactivate Lesson
 
 create Person
-LessonDeleteCommand -> Person : PersonUtil.createEditedPerson(personToEdit, updatedLessons)
+LessonDeleteCommand -> Person : createEditedPerson(personToEdit, updatedLessons)
 activate Person
 
 Person --> LessonDeleteCommand : person

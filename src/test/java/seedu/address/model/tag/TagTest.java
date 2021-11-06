@@ -15,27 +15,9 @@ public class TagTest {
     }
 
     @Test
-    public void constructor_invalidTagName_throwsIllegalArgumentException() {
-        String invalidTagName = "";
-        assertThrows(IllegalArgumentException.class, () -> new Tag(invalidTagName));
-    }
-
-    @Test
     public void isValidTagName() {
         // null tag name
         assertThrows(NullPointerException.class, () -> Tag.isValidTagName(null));
-    }
-
-    @Test
-    public void getTagName_success() {
-        // all upper case -> success
-        assertEquals("ZOOM", TAG_ZOOM.getTagName());
-
-        // all lower case -> failed
-        assertNotEquals("zoom", TAG_ZOOM.getTagName());
-
-        // partial lower case -> failed
-        assertNotEquals("zOom", TAG_ZOOM.getTagName());
     }
 
     @Test
@@ -50,6 +32,13 @@ public class TagTest {
 
     @Test
     public void testToString() {
-        assertEquals("[ZOOM]", TAG_ZOOM.toString());
+        // all upper case -> success
+        assertEquals("ZOOM", TAG_ZOOM.toString());
+
+        // all lower case -> failed
+        assertNotEquals("zoom", TAG_ZOOM.toString());
+
+        // partial lower case -> failed
+        assertNotEquals("zOom", TAG_ZOOM.toString());
     }
 }

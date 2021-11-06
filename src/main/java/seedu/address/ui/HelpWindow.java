@@ -24,17 +24,16 @@ import seedu.address.ui.util.TableUtil;
 /**
  * Controller for a help page
  */
-public class HelpWindow extends UiPart<Stage> {
-
+public class HelpWindow extends ExternalWindow {
     public static final String USERGUIDE_URL = "https://ay2122s1-cs2103t-f13-3.github.io/tp/UserGuide.html";
     public static final String HELP_MESSAGE = "Select the table cell(s) and press CTRL + C or CMD + C to copy.\n"
             + "You may sort the rows alphabetically by clicking the right end of each column header.\n"
             + "Refer to the user guide: " + USERGUIDE_URL;
-    public static final String TEXT_COLOR = "424874";
 
+    private static final String TEXT_COLOR = "424874";
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
-    private static final double ACTION_WIDTH = 0.22;
+    private static final double ACTION_WIDTH = 0.23;
     private static final double FORMAT_WIDTH = 0.4;
     private static final double EXAMPLE_WIDTH = 0.38;
 
@@ -72,17 +71,9 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
-        action.setCellFactory(getTableColumnTableCellCallback(format));
-        action.setCellValueFactory(new PropertyValueFactory<>("action"));
-        action.prefWidthProperty().bind(table.widthProperty().multiply(ACTION_WIDTH));
-
-        format.setCellFactory(getTableColumnTableCellCallback(format));
-        format.setCellValueFactory(new PropertyValueFactory<>("format"));
-        format.prefWidthProperty().bind(table.widthProperty().multiply(FORMAT_WIDTH));
-
-        example.setCellFactory(getTableColumnTableCellCallback(example));
-        example.setCellValueFactory(new PropertyValueFactory<>("example"));
-        example.prefWidthProperty().bind(table.widthProperty().multiply(EXAMPLE_WIDTH));
+        setColumnProperties(action, "action", ACTION_WIDTH);
+        setColumnProperties(format, "format", FORMAT_WIDTH);
+        setColumnProperties(example, "example", EXAMPLE_WIDTH);
         table.setItems(list);
         table.setColumnResizePolicy(p -> true);
 
@@ -93,7 +84,13 @@ public class HelpWindow extends UiPart<Stage> {
         // enable copy/paste
         TableUtil.installCopyPasteHandler(table);
         helpMessage.setText(HELP_MESSAGE);
-        root.getScene().setFill(Color.web(TEXT_COLOR));
+    }
+
+    private void setColumnProperties(TableColumn<CommandSummary, String> tableCol,
+            String colName, double colWidth) {
+        tableCol.setCellFactory(getTableColumnTableCellCallback(tableCol));
+        tableCol.setCellValueFactory(new PropertyValueFactory<>(colName));
+        tableCol.prefWidthProperty().bind(table.widthProperty().multiply(colWidth));
     }
 
     /**
@@ -122,47 +119,11 @@ public class HelpWindow extends UiPart<Stage> {
 
     /**
      * Shows the help window.
-     * @throws IllegalStateException
-     * <ul>
-     *     <li>
-     *         if this method is called on a thread other than the JavaFX Application Thread.
-     *     </li>
-     *     <li>
-     *         if this method is called during animation or layout processing.
-     *     </li>
-     *     <li>
-     *         if this method is called on the primary stage.
-     *     </li>
-     *     <li>
-     *         if {@code dialogStage} is already showing.
-     *     </li>
-     * </ul>
      */
+    @Override
     public void show() {
+        super.show();
         logger.fine("Showing help page about the application.");
-        getRoot().show();
-        getRoot().centerOnScreen();
-    }
-
-    /**
-     * Returns true if the help window is currently being shown.
-     */
-    public boolean isShowing() {
-        return getRoot().isShowing();
-    }
-
-    /**
-     * Hides the help window.
-     */
-    public void hide() {
-        getRoot().hide();
-    }
-
-    /**
-     * Focuses on the help window.
-     */
-    public void focus() {
-        getRoot().requestFocus();
     }
 
     /**

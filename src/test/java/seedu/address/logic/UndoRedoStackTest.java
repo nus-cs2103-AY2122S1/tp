@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.UndoableCommand;
+import seedu.address.model.person.Person;
 
 
 //Solution adapted from
@@ -201,13 +202,20 @@ class UndoRedoStackTest {
     }
 
     private class DummyUndoableCommand extends UndoableCommand {
+        private DummyUndoableCommand() {
+            super("Dummy");
+        }
         @Override
         public CommandResult executeUndoableCommand() {
             return new CommandResult("");
         }
         @Override
-        protected void undo() {}
+        protected Person undo() {
+            return null;
+        }
         @Override
-        protected void redo() {}
+        protected Person redo() {
+            return null;
+        }
     }
 }

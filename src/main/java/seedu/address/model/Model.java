@@ -2,9 +2,11 @@ package seedu.address.model;
 
 
 import java.nio.file.Path;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import com.calendarfx.model.Calendar;
+import com.calendarfx.model.Entry;
 
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
@@ -75,6 +77,21 @@ public interface Model {
     boolean hasClashingLesson(Lesson lesson, Lesson lessonToIgnore);
 
     /**
+     * Returns the set of clashing lessons for {@code lesson}in the address book.
+     */
+    Set<String> getClashingLessonsString(Lesson lesson);
+
+    /**
+     * Returns the set of clashing lessons for {@code lesson}in the address book.
+     */
+    Set<String> getClashingLessonsString(Lesson lesson, Lesson lessonToIgnore);
+
+    /**
+     * Returns the full unfiltered list of students in the address book.
+     */
+    ObservableList<Person> getUnfilteredPersonList();
+
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */
@@ -100,6 +117,18 @@ public interface Model {
      */
     Calendar getCalendar();
 
+    /**
+     * Returns a list of upcoming lessons within the next two days.
+     *
+     * @return List of upcoming lessons within the next two days.
+     */
+    ObservableList<Entry<Lesson>> getUpcomingLessons();
+
+    /**
+     * Updates the list of upcoming lessons.
+     */
+    void updateUpcomingLessons();
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
@@ -108,6 +137,20 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * If person is in the filtered list, return true.
+     * @param person Person to check for.
+     */
+    boolean hasPersonFilteredList(Person person);
+
+    /** Returns an immutable Last Updated Date object. */
+    LastUpdatedDate getLastUpdatedDate();
+
+    /**
+     * Sets the last updated date to today.
+     */
+    void setLastUpdatedDate();
 
     /** Returns an unmodifiable view of the observable tag list */
     ObservableList<Tag> getObservableTagList();

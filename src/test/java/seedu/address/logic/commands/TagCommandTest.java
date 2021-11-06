@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.commands.CommandResult.DisplayType.TAGS;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.TagCommand.MESSAGE_SUCCESS;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -25,7 +26,7 @@ class TagCommandTest {
     @Test
     public void execute_tag_success() {
         CommandResult expectedCommandResult =
-                new CommandResult(MESSAGE_SUCCESS, false, false, true, false, false);
+                new CommandResult(MESSAGE_SUCCESS, TAGS);
         assertCommandSuccess(prepareTagCommand(), model, expectedCommandResult, expectedModel);
     }
 

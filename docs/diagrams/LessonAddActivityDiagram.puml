@@ -1,0 +1,20 @@
+@startuml
+
+start
+:User adds a new lesson to a student;
+
+:TAB searches for the student in the application;
+
+:TAB creates a new lesson with given information;
+
+if () then ([TAB has clashing lessons with new lesson])
+  :TAB disallows lesson to be added;
+  :TAB displays clashing warning to user;
+else ([else])
+  :TAB adds the lesson to the student;
+  :TAB displays details of the lesson to the user;
+endif
+
+stop
+
+@enduml

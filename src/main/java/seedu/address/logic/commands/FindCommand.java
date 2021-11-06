@@ -4,14 +4,20 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ACAD_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ACAD_STREAM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CANCEL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FIND_CONDITION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HOMEWORK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RATES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHOOL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
 import java.util.function.Predicate;
 
@@ -28,25 +34,30 @@ public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
 
     public static final String COMMAND_PARAMETERS = "[" + PREFIX_FIND_CONDITION + "{all | any | none}] "
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_PARENT_PHONE + "PARENT_PHONE] "
-            + "[" + PREFIX_PARENT_EMAIL + "PARENT_EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_SCHOOL + "SCHOOL] "
-            + "[" + PREFIX_ACAD_STREAM + "ACAD_STREAM] "
-            + "[" + PREFIX_ACAD_LEVEL + "ACAD_LEVEL] "
-            + "[" + PREFIX_TAG + "TAG]...";
+            + "[" + PREFIX_TAG + "TAG_KEYWORD]... "
+            + "[" + PREFIX_NAME + "NAME_KEYWORDS] "
+            + "[" + PREFIX_PHONE + "PHONE_KEYWORDS] "
+            + "[" + PREFIX_EMAIL + "EMAIL_KEYWORDS] "
+            + "[" + PREFIX_PARENT_PHONE + "PARENT_PHONE_KEYWORDS] "
+            + "[" + PREFIX_PARENT_EMAIL + "PARENT_EMAIL_KEYWORDS] "
+            + "[" + PREFIX_ADDRESS + "ADDRESS_KEYWORDS] "
+            + "[" + PREFIX_SCHOOL + "SCHOOL_KEYWORDS] "
+            + "[" + PREFIX_ACAD_STREAM + "ACAD_STREAM_KEYWORDS] "
+            + "[" + PREFIX_ACAD_LEVEL + "ACAD_LEVEL_KEYWORDS] "
+            + "[" + PREFIX_SUBJECT + "SUBJECT_KEYWORDS] "
+            + "[" + PREFIX_TIME + "TIME_RANGE] "
+            + "[" + PREFIX_DATE + "START_DATE] "
+            + "[" + PREFIX_CANCEL + "CANCELLED_DATE] "
+            + "[" + PREFIX_RATES + "LESSON_RATES_KEYWORDS] "
+            + "[" + PREFIX_HOMEWORK + "HOMEWORK_KEYWORDS] ";
 
     public static final String COMMAND_FORMAT = COMMAND_WORD + " " + COMMAND_PARAMETERS;
 
     public static final String COMMAND_EXAMPLE = COMMAND_WORD + " "
             + PREFIX_FIND_CONDITION + "any "
             + PREFIX_NAME + "Alex Yeo "
-            + PREFIX_ADDRESS + "Aljunied "
-            + PREFIX_SCHOOL + "nyjc "
-            + PREFIX_TAG + "unpaid " + PREFIX_TAG + "zoom";
+            + PREFIX_TAG + "unpaid "
+            + PREFIX_TIME + "1500-1600";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all students whose fields contain any of the "
             + "specified keywords (case-insensitive).\n"
@@ -66,7 +77,7 @@ public class FindCommand extends Command {
             + "To search for multiple tags, use multiple %1$s \n"
             + "Example: find %1$sunpaid %1$szoom", PREFIX_TAG);
 
-    public static final String MESSAGE_FIND_RESULTS = "%1$d students found who %2$s";
+    public static final String MESSAGE_FIND_RESULTS = "%1$d student(s) found who %2$s";
 
     private final Predicate<Person> predicate;
 
@@ -83,7 +94,6 @@ public class FindCommand extends Command {
     public CommandResult execute() {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
-        predicate.toString();
         return new CommandResult(
                 String.format(MESSAGE_FIND_RESULTS, model.getFilteredPersonList().size(), predicate));
     }

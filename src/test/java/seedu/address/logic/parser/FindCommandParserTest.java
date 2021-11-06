@@ -22,8 +22,8 @@ import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.SCHOOL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.SCHOOL_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FORGETFUL;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_ZOOM;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ACAD_LEVEL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ACAD_STREAM_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ACAD_STREAM_BOB;
@@ -43,13 +43,19 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_ZOOM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ACAD_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ACAD_STREAM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CANCEL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FIND_CONDITION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HOMEWORK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RATES;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHOOL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -107,6 +113,21 @@ public class FindCommandParserTest {
         assertParseFailure(parser, " " + PREFIX_ACAD_STREAM + " ", FindCommand.MESSAGE_KEYWORD_CONSTRAINTS);
         // invalid empty academic level keyword
         assertParseFailure(parser, " " + PREFIX_ACAD_LEVEL + " ", FindCommand.MESSAGE_KEYWORD_CONSTRAINTS);
+        // invalid empty remarks keyword
+        assertParseFailure(parser, " " + PREFIX_REMARK + " ", FindCommand.MESSAGE_KEYWORD_CONSTRAINTS);
+
+        // Lesson Fields
+        // invalid empty lesson date keyword
+        assertParseFailure(parser, " " + PREFIX_DATE + " ", FindCommand.MESSAGE_KEYWORD_CONSTRAINTS);
+        // invalid empty cancelled date keyword
+        assertParseFailure(parser, " " + PREFIX_CANCEL + " ", FindCommand.MESSAGE_KEYWORD_CONSTRAINTS);
+        // invalid empty lesson homework keyword
+        assertParseFailure(parser, " " + PREFIX_HOMEWORK + " ", FindCommand.MESSAGE_KEYWORD_CONSTRAINTS);
+        // invalid empty lesson rates keyword
+        assertParseFailure(parser, " " + PREFIX_RATES + " ", FindCommand.MESSAGE_KEYWORD_CONSTRAINTS);
+        // invalid empty subjects keyword
+        assertParseFailure(parser, " " + PREFIX_SUBJECT + " ", FindCommand.MESSAGE_KEYWORD_CONSTRAINTS);
+
         // invalid empty tag keyword
         assertParseFailure(parser, " " + PREFIX_TAG + " ", FindCommand.MESSAGE_KEYWORD_CONSTRAINTS);
         // invalid multiple words tag keyword
@@ -132,8 +153,8 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        String userInput = PHONE_DESC_BOB + TAG_DESC_HUSBAND + PARENT_EMAIL_DESC_AMY + PARENT_PHONE_DESC_AMY
-                + EMAIL_DESC_AMY + SCHOOL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND
+        String userInput = PHONE_DESC_BOB + TAG_DESC_ZOOM + PARENT_EMAIL_DESC_AMY + PARENT_PHONE_DESC_AMY
+                + EMAIL_DESC_AMY + SCHOOL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FORGETFUL
                 + ACAD_LEVEL_DESC_AMY + ACAD_STREAM_DESC_AMY + FIND_COND_DESC_ALL;
 
         PersonMatchesKeywordsPredicate
@@ -153,7 +174,7 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_someFieldsSpecified_success() {
-        String userInput = PHONE_DESC_BOB + NAME_DESC_AMY + TAG_DESC_FRIEND;
+        String userInput = PHONE_DESC_BOB + NAME_DESC_AMY + TAG_DESC_FORGETFUL;
 
         PersonMatchesKeywordsPredicate predicate = new PersonMatchesKeywordsPredicateBuilder()
                 .withName(VALID_NAME_AMY).withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_FORGETFUL).build();
@@ -165,21 +186,21 @@ public class FindCommandParserTest {
     @Test
     public void parse_condition_success() {
         // Match all
-        String userInput = FIND_COND_DESC_ALL + NAME_DESC_AMY + TAG_DESC_FRIEND;
+        String userInput = FIND_COND_DESC_ALL + NAME_DESC_AMY + TAG_DESC_FORGETFUL;
         PersonMatchesKeywordsPredicate predicate = new PersonMatchesKeywordsPredicateBuilder()
                 .withCondition(FindCondition.ALL).withName(VALID_NAME_AMY).withTags(VALID_TAG_FORGETFUL).build();
         FindCommand expectedCommand = new FindCommand(predicate);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // Match any
-        userInput = FIND_COND_DESC_ANY + NAME_DESC_AMY + TAG_DESC_FRIEND;
+        userInput = FIND_COND_DESC_ANY + NAME_DESC_AMY + TAG_DESC_FORGETFUL;
         predicate = new PersonMatchesKeywordsPredicateBuilder().withCondition(FindCondition.ANY)
                 .withName(VALID_NAME_AMY).withTags(VALID_TAG_FORGETFUL).build();
         expectedCommand = new FindCommand(predicate);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // Match none
-        userInput = FIND_COND_DESC_NONE + NAME_DESC_AMY + TAG_DESC_FRIEND;
+        userInput = FIND_COND_DESC_NONE + NAME_DESC_AMY + TAG_DESC_FORGETFUL;
         predicate = new PersonMatchesKeywordsPredicateBuilder().withCondition(FindCondition.NONE)
                 .withName(VALID_NAME_AMY).withTags(VALID_TAG_FORGETFUL).build();
         expectedCommand = new FindCommand(predicate);
@@ -248,17 +269,17 @@ public class FindCommandParserTest {
         // tags
         predicate = new PersonMatchesKeywordsPredicateBuilder().withTags(VALID_TAG_FORGETFUL).build();
         expectedCommand = new FindCommand(predicate);
-        assertParseSuccess(parser, TAG_DESC_FRIEND, expectedCommand);
+        assertParseSuccess(parser, TAG_DESC_FORGETFUL, expectedCommand);
     }
 
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
         String userInput = PHONE_DESC_AMY + SCHOOL_DESC_AMY + ADDRESS_DESC_AMY + ACAD_STREAM_DESC_AMY + EMAIL_DESC_AMY
                 + ACAD_LEVEL_DESC_BOB + FIND_COND_DESC_NONE + PARENT_EMAIL_DESC_BOB + PARENT_PHONE_DESC_BOB
-                + TAG_DESC_FRIEND + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + TAG_DESC_FRIEND
+                + TAG_DESC_FORGETFUL + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + TAG_DESC_FORGETFUL
                 + SCHOOL_DESC_AMY + PARENT_EMAIL_DESC_AMY + PARENT_PHONE_DESC_AMY
                 + PHONE_DESC_BOB + ADDRESS_DESC_BOB + SCHOOL_DESC_BOB + ACAD_LEVEL_DESC_AMY + EMAIL_DESC_BOB
-                + ACAD_STREAM_DESC_BOB + FIND_COND_DESC_ANY + TAG_DESC_HUSBAND;
+                + ACAD_STREAM_DESC_BOB + FIND_COND_DESC_ANY + TAG_DESC_ZOOM;
 
         PersonMatchesKeywordsPredicate predicate = new PersonMatchesKeywordsPredicateBuilder()
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)

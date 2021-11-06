@@ -4,9 +4,9 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
-import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.util.CommandUtil;
 import seedu.address.model.person.Person;
 
 /**
@@ -18,7 +18,7 @@ public class DeleteCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "delete";
 
-    public static final String COMMAND_PARAMETERS = "INDEX (must be a positive integer)";
+    public static final String COMMAND_PARAMETERS = "INDEX";
 
     public static final String COMMAND_FORMAT = COMMAND_WORD + " " + COMMAND_PARAMETERS;
 
@@ -35,11 +35,15 @@ public class DeleteCommand extends UndoableCommand {
 
     public static final String MESSAGE_DELETE_STUDENT_SUCCESS = "Deleted student: %1$s";
 
-    private final Index targetIndex;
+    private Index targetIndex;
 
     private Person deletedPerson;
 
+    /**
+     * Constructs a Delete Command.
+     */
     public DeleteCommand(Index targetIndex) {
+        super(COMMAND_ACTION);
         this.targetIndex = targetIndex;
     }
 
@@ -48,32 +52,31 @@ public class DeleteCommand extends UndoableCommand {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
-        }
+        Person personToDelete = CommandUtil.getPerson(lastShownList, targetIndex);
 
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+        targetIndex = setToDefinitiveIndex(personToDelete);
+
         model.deletePerson(personToDelete);
         deletedPerson = personToDelete;
         return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, personToDelete));
     }
 
     @Override
-    protected void undo() {
+    protected Person undo() {
         requireNonNull(model);
 
         model.addPersonAtIndex(deletedPerson, targetIndex);
+        return deletedPerson;
     }
 
     @Override
-    protected void redo() {
+    protected Person redo() {
         requireNonNull(model);
 
-        try {
-            executeUndoableCommand();
-        } catch (CommandException ce) {
-            throw new AssertionError(MESSAGE_REDO_FAILURE);
-        }
+        checkValidity(deletedPerson);
+
+        model.deletePerson(deletedPerson);
+        return deletedPerson;
     }
 
     @Override

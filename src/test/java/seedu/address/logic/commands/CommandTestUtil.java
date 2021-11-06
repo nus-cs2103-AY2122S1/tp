@@ -5,12 +5,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ACAD_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ACAD_STREAM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CANCEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FEE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FIND_CONDITION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOMEWORK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_OUTSTANDING_FEES;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAID_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -20,7 +22,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHOOL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_UNCANCEL;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalLessons.MAKEUP_LESSON;
+import static seedu.address.testutil.TypicalLessons.RECURRING_LESSON;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,8 +35,9 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonMatchesKeywordsPredicate;
+import seedu.address.testutil.EditLessonDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -59,8 +65,6 @@ public class CommandTestUtil {
     public static final String VALID_ACAD_STREAM_BOB = "Bob stream";
     public static final String VALID_ACAD_LEVEL_AMY = "S1";
     public static final String VALID_ACAD_LEVEL_BOB = "P6";
-    public static final String VALID_FEE_AMY = "12345.67";
-    public static final String VALID_FEE_BOB = "0.50";
     public static final String VALID_REMARK_AMY = "Amy loves sushi!";
     public static final String VALID_REMARK_BOB = "Bob loves sashimi!";
     public static final String VALID_TAG_FORGETFUL = "forgetful";
@@ -85,12 +89,10 @@ public class CommandTestUtil {
     public static final String ACAD_STREAM_DESC_BOB = " " + PREFIX_ACAD_STREAM + VALID_ACAD_STREAM_BOB;
     public static final String ACAD_LEVEL_DESC_AMY = " " + PREFIX_ACAD_LEVEL + VALID_ACAD_LEVEL_AMY;
     public static final String ACAD_LEVEL_DESC_BOB = " " + PREFIX_ACAD_LEVEL + VALID_ACAD_LEVEL_BOB;
-    public static final String FEE_DESC_AMY = " " + PREFIX_FEE + VALID_FEE_AMY;
-    public static final String FEE_DESC_BOB = " " + PREFIX_FEE + VALID_FEE_BOB;
     public static final String REMARK_DESC_AMY = " " + PREFIX_REMARK + VALID_REMARK_AMY;
     public static final String REMARK_DESC_BOB = " " + PREFIX_REMARK + VALID_REMARK_BOB;
-    public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FORGETFUL;
-    public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_ZOOM;
+    public static final String TAG_DESC_FORGETFUL = " " + PREFIX_TAG + VALID_TAG_FORGETFUL;
+    public static final String TAG_DESC_ZOOM = " " + PREFIX_TAG + VALID_TAG_ZOOM;
     public static final String FIND_COND_DESC_ALL = " " + PREFIX_FIND_CONDITION + FindCommand.FindCondition.ALL;
     public static final String FIND_COND_DESC_ANY = " " + PREFIX_FIND_CONDITION + FindCommand.FindCondition.ANY;
     public static final String FIND_COND_DESC_NONE = " " + PREFIX_FIND_CONDITION + FindCommand.FindCondition.NONE;
@@ -105,43 +107,64 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_ACAD_LEVEL_DESC = " " + PREFIX_ACAD_LEVEL
             + "abcdefghijklmnopq"; // max 15 characters allowed for acad level
-    public static final String INVALID_FEE_DESC = " " + PREFIX_FEE + "$999.99"; // '$' not allowed in fees
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
+    public static final String VALID_DATE_MON = "4 OCT 2021";
+    public static final String VALID_DATE_TUE = "5 OCT 2021";
+    public static final String VALID_DATE_NEXT_MON = "11 OCT 2021";
+    public static final String VALID_DATE_PREV_MON = "27 SEP 2021";
     public static final String VALID_DATE_PAST = "15 May 1988";
-    public static final String VALID_DATE_FUTURE = "07 Apr 2103";
+    public static final String VALID_DATE_FUTURE = "7 Apr 2103";
     public static final String VALID_TIME_RANGE = "1234-1345";
     public static final String VALID_CLASHING_TIME_RANGE = "1300-1355";
     public static final String VALID_NON_CLASHING_TIME_RANGE = "1600-1855";
     public static final String VALID_LESSON_RATES = "50.50";
     public static final String VALID_SUBJECT = "Language Arts";
+    public static final String VALID_OUTSTANDING_FEES = "100.00";
+    public static final String VALID_OUTSTANDING_FEES_AFTER_PAYMENT = "80.00";
     public static final String VALID_HOMEWORK_TEXTBOOK = "Textbook pg 21-26";
     public static final String VALID_HOMEWORK_POETRY = "Poetry draft";
+    public static final String VALID_PAYMENT = "20.00";
 
     public static final String PAST_DATE_DESC = " " + PREFIX_DATE + VALID_DATE_PAST;
     public static final String FUTURE_DATE_DESC = " " + PREFIX_DATE + VALID_DATE_FUTURE;
     public static final String TIME_RANGE_DESC = " " + PREFIX_TIME + VALID_TIME_RANGE;
     public static final String CLASHING_TIME_RANGE_DESC = " " + PREFIX_TIME + VALID_CLASHING_TIME_RANGE;
     public static final String NON_CLASHING_TIME_RANGE_DESC = " " + PREFIX_TIME + VALID_NON_CLASHING_TIME_RANGE;
+    public static final String CANCEL_DATE_DESC_MON = " " + PREFIX_CANCEL + VALID_DATE_MON;
+    public static final String CANCEL_DATE_DESC_NEXT_MON = " " + PREFIX_CANCEL + VALID_DATE_NEXT_MON;
+    public static final String UNCANCEL_DATE_DESC_MON = " " + PREFIX_UNCANCEL + VALID_DATE_MON;
+    public static final String UNCANCEL_DATE_DESC_NEXT_MON = " " + PREFIX_UNCANCEL + VALID_DATE_NEXT_MON;
     public static final String LESSON_RATES_DESC = " " + PREFIX_RATES + VALID_LESSON_RATES;
+    public static final String OUTSTANDING_FEES_DESC = " " + PREFIX_OUTSTANDING_FEES + VALID_OUTSTANDING_FEES;
     public static final String SUBJECT_DESC = " " + PREFIX_SUBJECT + VALID_SUBJECT;
     public static final String HOMEWORK_DESC_TEXTBOOK = " " + PREFIX_HOMEWORK + VALID_HOMEWORK_TEXTBOOK;
     public static final String HOMEWORK_DESC_POETRY = " " + PREFIX_HOMEWORK + VALID_HOMEWORK_POETRY;
+    public static final String PAYMENT_DESC = " " + PREFIX_PAID_AMOUNT + VALID_PAYMENT;
 
     public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + "32 Dec 2001"; // No such date
+    public static final String INVALID_CANCEL_DATE_DESC = " " + PREFIX_CANCEL + "32 Dec 2001"; // No such date
+    public static final String INVALID_UNCANCEL_DATE_DESC = " " + PREFIX_UNCANCEL + "32 Dec 2001"; // No such date
     public static final String INVALID_TIME_RANGE_DESC = " " + PREFIX_TIME + "0100-0300"; // Not between 0000h - 0800h
     public static final String INVALID_LESSON_RATES_DESC =
             " " + PREFIX_RATES + "$50.50"; //'$' not allowed in lesson rates
+    public static final String INVALID_OUTSTANDING_FEES_DESC =
+            " " + PREFIX_OUTSTANDING_FEES + "$100.00"; //'$' not allowed in outstanding fees
     public static final String INVALID_SUBJECT_DESC = " " + PREFIX_SUBJECT + "-An+"; // Not alphanumeric
     public static final String INVALID_HOMEWORK_DESC =
             " " + PREFIX_HOMEWORK + "Homework cannot be more than fifty characters long,"
             + " including whitespaces";
+    public static final String INVALID_PAYMENT_DESC = " " + PREFIX_PAID_AMOUNT + "$20.00";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
+    public static final String PREAMBLE_INVALID_ARGS = "1 some random string";
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
+
+    public static final LessonEditCommand.EditLessonDescriptor DESC_RECURRING;
+    public static final LessonEditCommand.EditLessonDescriptor DESC_MAKEUP;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -151,7 +174,7 @@ public class CommandTestUtil {
                 .withSchool(VALID_SCHOOL_AMY)
                 .withAcadStream(VALID_ACAD_STREAM_AMY)
                 .withAcadLevel(VALID_ACAD_LEVEL_AMY)
-                .withFee(VALID_FEE_AMY).withRemark(VALID_REMARK_AMY)
+                .withRemark(VALID_REMARK_AMY)
                 .withTags(VALID_TAG_FORGETFUL).build();
 
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
@@ -161,8 +184,12 @@ public class CommandTestUtil {
                 .withSchool(VALID_SCHOOL_BOB)
                 .withAcadStream(VALID_ACAD_STREAM_BOB)
                 .withAcadLevel(VALID_ACAD_LEVEL_BOB)
-                .withFee(VALID_FEE_BOB).withRemark(VALID_REMARK_BOB)
+                .withRemark(VALID_REMARK_BOB)
                 .withTags(VALID_TAG_ZOOM, VALID_TAG_FORGETFUL).build();
+
+        DESC_RECURRING = new EditLessonDescriptorBuilder(RECURRING_LESSON).build();
+
+        DESC_MAKEUP = new EditLessonDescriptorBuilder(MAKEUP_LESSON).build();
     }
 
     /**
@@ -216,7 +243,9 @@ public class CommandTestUtil {
 
         Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
         final String[] splitName = person.getName().fullName.split("\\s+");
-        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        PersonMatchesKeywordsPredicate predicate = new PersonMatchesKeywordsPredicate();
+        predicate.setNameKeywords(Arrays.asList(splitName[0]));
+        model.updateFilteredPersonList(predicate);
 
         assertEquals(1, model.getFilteredPersonList().size());
     }
