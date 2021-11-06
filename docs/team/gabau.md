@@ -15,10 +15,9 @@ Given below are my contributions to the project.
   * Highlights: This enhancement used the start and endpoint to record the startdate and enddate to be marked, which meant that to remove and add such dates, some form of complement and union had to be implemented. 
 
 * **New Feature**: Added the ability to add a duration for which a shift is active.
- * What it does: Allows the user to select a group of dates where a staff is working a shift.
- * Justification: The mark and unmark command ignores the shift, but it will not display on the timetable, as the staff is marked absent, but the shift is still tracked. This way, shifts are assigned a length of time
-to work during.
- * Highlights: How these commands interacted with the `setShiftTIme` command had to be addressed. Delete and add ignored the setShiftTime and just delete by the range of dates. How the enhancement was stored also needed to be dealt with, as a list of all the assigned duration needed to be maintained for each shift.
+   * What it does: Allows the user to select a group of dates where a staff is working a shift.
+   * Justification: In order for obtaining the salary over a month, the shifts must be assigned to dates to make it clear for the user when the staff is working and when the staff is not.
+   * Highlights: How these commands interacted with the `setShiftTIme` command had to be addressed. Delete and add ignored the setShiftTime and just delete by the range of dates. How the enhancement was stored also needed to be dealt with, as a list of all the assigned duration needed to be maintained for each shift.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=Gabau&tabRepo=AY2122S1-CS2103T-W11-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false#:~:text=Click%20to%20view%20author%27s%20contribution.)
 
@@ -27,7 +26,7 @@ to work during.
   * Managed milestone tracking
 
 * **Enhancements to existing features**:
-  * Enhanced `find` command to take in tags. [#\233](https://github.com/AY2122S1-CS2103T-W11-2/tp/#233), [#\47](https://github.com/AY2122S1-CS2103T-W11-2/tp/#47)
+  * Enhanced `find` command to take in tags. [#233](https://github.com/AY2122S1-CS2103T-W11-2/tp/#233), [#47](https://github.com/AY2122S1-CS2103T-W11-2/tp/#47)
 
 [comment]: <> (  * Wrote additional tests for existing features to increase coverage from 88% to 92% &#40;Pull requests [\#36]&#40;&#41;, [\#38]&#40;&#41;&#41;)
 
@@ -39,7 +38,7 @@ to work during.
     * Added implementation details of the `mark` and `unmark` feature.
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#73](), [\#64](), [\#19](), [\#95](), [\#120]()
-  * Some parts of the history feature I added was adopted by several other class mates ([1](), [2]())
+  * PRs reviewed (with non-trivial review comments): [\#73](https://github.com/AY2122S1-CS2103T-W11-2/tp/pull/73), [\#64](https://github.com/AY2122S1-CS2103T-W11-2/tp/pull/64), [\#28](https://github.com/AY2122S1-CS2103T-W11-2/tp/pull/28), [\#95](https://github.com/AY2122S1-CS2103T-W11-2/tp/pull/95), [\#120](https://github.com/AY2122S1-CS2103T-W11-2/tp/pull/120)
+  
 
 
