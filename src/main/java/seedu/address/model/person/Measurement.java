@@ -3,6 +3,8 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.text.DecimalFormat;
+
 /**
  * Represents a Person's body measurements in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidMeasurement(String, GenderType)}
@@ -16,7 +18,8 @@ public class Measurement {
     public static final String FEMALE_MESSAGE_CONSTRAINTS =
             "A female's body measurements should be of the format height_waist_shoulder_bust in cm,"
                     + " and it should not be blank";
-    public static final String IS_NUMBER_REGEX = "\\d+";
+    public static final String RANGE_MESSAGE_CONSTRAINTS =
+            "The measurement of each dimension must be a positive value and not larger than 300cm";
     public final String value;
 
     /**
@@ -27,7 +30,22 @@ public class Measurement {
     public Measurement(String measurement) {
         requireNonNull(measurement);
         checkArgument(isValidMeasurement(measurement), GENERAL_MESSAGE_CONSTRAINTS);
+        checkArgument(isValidRange(measurement), RANGE_MESSAGE_CONSTRAINTS);
         value = measurement;
+    }
+
+    public String getValue() {
+        String[] measurements = value.split("_");
+        formatMeasurements(measurements);
+        return String.join("_", measurements);
+    }
+
+    private void formatMeasurements(String[] args) {
+        DecimalFormat df = new DecimalFormat("#.##");
+        for (int i = 0; i < args.length; i++) {
+            double value = Double.parseDouble(args[i]);
+            args[i] = df.format(value);
+        }
     }
 
     /**
@@ -51,6 +69,25 @@ public class Measurement {
     }
 
     /**
+     * Returns true if the measurements is within a valid range.
+     */
+    public static boolean isValidRange(String test) {
+        requireNonNull(test);
+        String[] args = test.split("_");
+        return isValidRange(args);
+    }
+
+    private static boolean isValidRange(String[] args) {
+        for (String i: args) {
+            double value = Double.parseDouble(i);
+            if (value <= 0 || value > 300) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
      * Returns message constraints based on gender type.
      */
     public static String getMessageConstraints(GenderType genderType) {
@@ -64,7 +101,9 @@ public class Measurement {
 
     private static boolean isNumber(String[] args) {
         for (String i: args) {
-            if (!i.matches(IS_NUMBER_REGEX)) {
+            try {
+                Double.parseDouble(i);
+            } catch (NumberFormatException e) {
                 return false;
             }
         }

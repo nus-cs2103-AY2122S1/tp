@@ -22,6 +22,21 @@ Class JsonAdaptedPerson
 Class JsonAdaptedTag
 }
 
+
+package "TaskBook Storage" #F4F6F6{
+Interface TaskBookStorage <<Interface>>
+Class JsonTaskBookStorage
+Class JsonSerializableTaskBook
+Class JsonAdaptedTask
+}
+
+package "OrderBook Storage" #F4F6F6{
+Interface OrderBookStorage <<Interface>>
+Class JsonOrderBookStorage
+Class JsonSerializableOrderBook
+Class JsonAdaptedOrder
+}
+
 }
 
 Class HiddenOutside #FFFFFF
@@ -30,9 +45,13 @@ HiddenOutside ..> Storage
 StorageManager .up.|> Storage
 StorageManager -up-> "1" UserPrefsStorage
 StorageManager -up-> "1" AddressBookStorage
+StorageManager -up-> "1" TaskBookStorage
+StorageManager -up-> "1" OrderBookStorage
 
 Storage -left-|> UserPrefsStorage
 Storage -right-|> AddressBookStorage
+Storage -left-|> TaskBookStorage
+Storage -right-|> OrderBookStorage
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
 JsonAddressBookStorage .up.|> AddressBookStorage
@@ -40,4 +59,14 @@ JsonAddressBookStorage ..> JsonSerializableAddressBook
 JsonSerializableAddressBook --> "*" JsonAdaptedPerson
 JsonAdaptedPerson --> "*" JsonAdaptedTag
 
+JsonTaskBookStorage .up.|> TaskBookStorage
+JsonTaskBookStorage ..> JsonSerializableTaskBook
+JsonSerializableTaskBook --> "*" JsonAdaptedTask
+
+JsonOrderBookStorage .up.|> OrderBookStorage
+JsonOrderBookStorage ..> JsonSerializableOrderBook
+JsonSerializableOrderBook --> "*" JsonAdaptedOrder
+
+
 @enduml
+

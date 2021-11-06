@@ -124,6 +124,9 @@ class JsonAdaptedPerson {
         if (!Measurement.isValidMeasurement(measurement, modelGender.value)) {
             throw new IllegalValueException(Measurement.GENERAL_MESSAGE_CONSTRAINTS);
         }
+        if (!Measurement.isValidRange(measurement)) {
+            throw new IllegalValueException(Measurement.RANGE_MESSAGE_CONSTRAINTS);
+        }
         final Measurement modelMeasurement = new Measurement(measurement);
 
         if (address == null) {

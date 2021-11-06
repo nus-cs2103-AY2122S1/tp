@@ -20,4 +20,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_CUSTOMER = new Prefix("c/");
     public static final Prefix PREFIX_AMOUNT = new Prefix("a/");
 
+    public static final Prefix PREFIX_SORT_ORDERING = new Prefix("o/");
+    public static final Prefix PREFIX_SORT_FIELD = new Prefix("f/");
+
 }

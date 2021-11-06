@@ -25,8 +25,12 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.order.Order;
+import seedu.address.model.order.OrderContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.EditTaskDescriptorBuilder;
 
@@ -54,8 +58,8 @@ public class CommandTestUtil {
 
     public static final String VALID_LABEL_ORDER = "Order Cloth";
     public static final String VALID_LABEL_SEW = "Sew buttons onto blazer";
-    public static final String VALID_DATE_SEPT = "19th September 2021";
-    public static final String VALID_DATE_OCT = "12th October 2021";
+    public static final String VALID_DATE_SEPT = "2021-09-19";
+    public static final String VALID_DATE_OCT = "2021-10-12";
     public static final String VALID_TASKTAG_ORDER = "SO1000";
     public static final String VALID_TASKTAG_SEW = "SO1";
 
@@ -80,6 +84,8 @@ public class CommandTestUtil {
     public static final String REMARK_DESC_BOB = " " + PREFIX_REMARK + VALID_REMARK_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String GENDER_MALE = "M";
+    public static final String GENDER_FEMALE = "F";
 
     public static final String LABEL_DESC_ORDER = " " + PREFIX_LABEL + VALID_LABEL_ORDER;
     public static final String LABEL_DESC_SEW = " " + PREFIX_LABEL + VALID_LABEL_SEW;
@@ -104,10 +110,11 @@ public class CommandTestUtil {
 
     public static final String INVALID_LABEL_DESC = " " + PREFIX_LABEL; // empty string not allowed for labels
     public static final String INVALID_DATE_DESC = " " + PREFIX_DATE; // empty string not allowed for date
+    //more invalid date formats to be added
     public static final String INVALID_TASKTAG_DESC = " " + PREFIX_TASK_TAG + "SOSO"; // wrong prefix and missing id
 
     public static final String INVALID_CUSTOMER_DESC = " " + PREFIX_CUSTOMER; // empty string not allowed for customers
-    public static final String INVALID_AMOUNT_DESC = " " + PREFIX_AMOUNT + "20."; // no digit after dot
+    public static final String INVALID_AMOUNT_DESC = " " + PREFIX_AMOUNT + "10000000000"; // too large
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -158,7 +165,8 @@ public class CommandTestUtil {
      */
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
             Model expectedModel) {
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage,
+                CommandResult.DisplayState.UNIMPORTANT);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
 
@@ -180,8 +188,8 @@ public class CommandTestUtil {
     }
 
     /**
-     * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
-     * {@code model}'s address book.
+     * Updates {@code model}'s filtered client list to show only the client at the given {@code targetIndex} in the
+     * {@code model}'s addressbook.
      */
     public static void showPersonAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
@@ -191,5 +199,33 @@ public class CommandTestUtil {
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered task list to show only the task at the given {@code targetIndex} in the
+     * {@code model}'s taskbook.
+     */
+    public static void showTaskAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredTaskList().size());
+
+        Task task = model.getFilteredTaskList().get(targetIndex.getZeroBased());
+        final String[] splitTaskLabel = task.getLabel().checkedLabel.split("\\s+");
+        model.updateFilteredTaskList(new TaskContainsKeywordsPredicate(Arrays.asList(splitTaskLabel[0])));
+
+        assertEquals(1, model.getFilteredTaskList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered order list to show only the order at the given {@code targetIndex} in the
+     * {@code model}'s orderbook.
+     */
+    public static void showOrderAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredOrderList().size());
+
+        Order order = model.getFilteredOrderList().get(targetIndex.getZeroBased());
+        final String[] splitOrderLabel = order.getLabel().checkedLabel.split("\\s+");
+        model.updateFilteredOrderList(new OrderContainsKeywordsPredicate(Arrays.asList(splitOrderLabel[0])));
+
+        assertEquals(1, model.getFilteredOrderList().size());
     }
 }

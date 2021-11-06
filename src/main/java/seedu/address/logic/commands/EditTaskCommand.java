@@ -14,9 +14,9 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Date;
+import seedu.address.model.Label;
 import seedu.address.model.Model;
 import seedu.address.model.tag.TaskTag;
-import seedu.address.model.task.Label;
 import seedu.address.model.task.Task;
 
 /**
@@ -32,16 +32,17 @@ public class EditTaskCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_LABEL + "LABEL] "
             + "[" + PREFIX_DATE + "DATE] "
-            + "[" + PREFIX_TASK_TAG + "TASKTAG]...\n"
+            + "[" + PREFIX_TASK_TAG + "TASKTAG]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_LABEL + "Order cloth "
-            + PREFIX_DATE + "19th September 2021"
+            + PREFIX_DATE + "19 September 2021"
             + PREFIX_TASK_TAG + "SO2100";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task list.";
     public static final String MESSAGE_NO_CHANGES_MADE = "You haven't made any changes to the task.";
+    public static final String MESSAGE_UNFOUND_ORDERID = "The sales order with the given Id cannot be found.";
 
     private final Index index;
     private final EditTaskDescriptor editTaskDescriptor;
@@ -74,13 +75,19 @@ public class EditTaskCommand extends Command {
             throw new CommandException(MESSAGE_NO_CHANGES_MADE);
         }
 
-        if (!taskToEdit.equals(editedTask) && model.hasTask(editedTask)) {
+        if (model.hasTask(editedTask)) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
+        }
+
+        long tagId = editedTask.getTagId();
+        if (tagId != -1 && !model.hasOrder(tagId)) {
+            throw new CommandException(MESSAGE_UNFOUND_ORDERID);
         }
 
         model.setTask(taskToEdit, editedTask);
         model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
-        return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, editedTask));
+        return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, editedTask),
+                CommandResult.DisplayState.TASK);
     }
 
     /**

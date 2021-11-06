@@ -13,14 +13,12 @@ import seedu.address.ModelStub;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Date;
-import seedu.address.model.order.Amount;
-import seedu.address.model.order.Customer;
 import seedu.address.model.order.Order;
+import seedu.address.testutil.OrderBuilder;
 
 class MarkOrderCommandTest {
-    private static final Order testOrder = new Order(new Customer("John"), new Date("20th august 2021"),
-            new Amount("100.25"));
+
+    private static final Order testOrder = new OrderBuilder().build();
 
     @Test
     public void execute_validIndexMarkOrder_success() throws Exception {
@@ -46,12 +44,25 @@ class MarkOrderCommandTest {
 
     }
 
+    @Test
+    public void execute_markAlreadyCompleted_notification() throws Exception {
+        Index targetIndex = Index.fromOneBased(1);
+        ModelStubWithOneOrder modelStub = new ModelStubWithOneOrder();
+
+        // mark the order twice, verify that notification is given.
+        new MarkOrderCommand(targetIndex).execute(modelStub);
+        CommandResult commandResult = new MarkOrderCommand(targetIndex).execute(modelStub);
+
+        assertEquals(String.format(MarkOrderCommand.MESSAGE_ORDER_ALREADY_MARKED, testOrder),
+                commandResult.getFeedbackToUser());
+    }
+
     private class ModelStubWithOneOrder extends ModelStub {
         private final ObservableList<Order> listWithOneOrder = FXCollections.observableArrayList(testOrder);
 
         @Override
-        public void markOrder(Order order) {
-            listWithOneOrder.get(0).setIsComplete(true);
+        public boolean markOrder(Order order) {
+            return listWithOneOrder.get(0).markCompleted();
         }
 
         @Override

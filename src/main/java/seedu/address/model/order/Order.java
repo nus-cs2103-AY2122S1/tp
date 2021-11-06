@@ -1,25 +1,29 @@
 package seedu.address.model.order;
 
 import seedu.address.model.Date;
+import seedu.address.model.Label;
 
 public class Order implements Comparable<Order> {
-    private static final String idPrefix = "SO";
-    private static int count = 1;
+
+    public static final String ID_PREFIX = "SO";
+    private static long count = 1;
 
     private final Customer customer;
     private long id;
     private Amount amount;
     private Date date;
+    private Label label;
     private boolean isComplete;
 
     /**
      * Constructor creates an Order related to the customer, due on the given date, with the given amount.
      * isComplete flag is set to False initially, and the id is automatically assigned.
      */
-    public Order(Customer customer, Date date, Amount amount) {
+    public Order(Label label, Customer customer, Date date, Amount amount) {
         this.customer = customer;
         this.date = date;
         this.amount = amount;
+        this.label = label;
         this.id = Order.count;
         this.isComplete = false;
 
@@ -30,8 +34,17 @@ public class Order implements Comparable<Order> {
         return this.isComplete;
     }
 
-    public void setIsComplete(boolean isComplete) {
-        this.isComplete = isComplete;
+    /**
+     * Mark an order as completed by setting isComplete to true.
+     * @return boolean indicating whether isComplete has been changed or not.
+     */
+    public boolean markCompleted() {
+        if (this.isComplete == true) {
+            return false;
+        } else {
+            this.isComplete = true;
+            return true;
+        }
     }
 
     public Amount getAmount() {
@@ -54,6 +67,14 @@ public class Order implements Comparable<Order> {
         return this.customer;
     }
 
+    public Label getLabel() {
+        return this.label;
+    }
+
+    public void setLabel(Label label) {
+        this.label = label;
+    }
+
     public long getId() {
         return this.id;
     }
@@ -62,13 +83,17 @@ public class Order implements Comparable<Order> {
         this.id = id;
     }
 
+    public static void setCount(long newCount) {
+        count = newCount;
+    }
+
     /**
      * Returns the prefixed order id as a String.
      *
      * @return Prefixed order id
      */
     public String getDisplayId() {
-        return idPrefix + this.id;
+        return ID_PREFIX + this.id;
     }
 
     /**
@@ -81,7 +106,7 @@ public class Order implements Comparable<Order> {
     }
 
     /**
-     * Returns true if both orders have the same customer, date and amount.
+     * Returns true if both orders have the same customer, label and amount.
      * This defines a weaker notion of equality between two orders.
      */
     public boolean isSameOrder(Order otherOrder) {
@@ -91,8 +116,8 @@ public class Order implements Comparable<Order> {
 
         return otherOrder != null
                 && otherOrder.getCustomer().equals(getCustomer())
-                && otherOrder.getDate().equals(getDate())
-                && otherOrder.getAmount().equals(getAmount());
+                && otherOrder.getAmount().equals(getAmount())
+                && otherOrder.getLabel().equals(getLabel());
     }
 
     // Order string representation is temporary, change as necessary for UI.
@@ -104,8 +129,10 @@ public class Order implements Comparable<Order> {
         } else {
             builder.append("[ ] ");
         }
-        builder.append("ID: " + idPrefix)
+        builder.append("ID: " + ID_PREFIX)
                 .append(getId())
+                .append("; Label: ")
+                .append(getLabel())
                 .append("; Customer: ")
                 .append(getCustomer())
                 .append("; Amount: ")
@@ -116,7 +143,7 @@ public class Order implements Comparable<Order> {
         return builder.toString();
     }
 
-    // Required for OrderList to check if an Order exists, before marking it.
+    // Required for UniqueOrderList to check if an Order exists, before marking it.
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -131,7 +158,8 @@ public class Order implements Comparable<Order> {
         return otherOrder.getCustomer().equals(getCustomer())
                 && otherOrder.getDate().equals(getDate())
                 && otherOrder.getAmount().equals(getAmount())
-                && otherOrder.getId() == getId();
+                && otherOrder.getId() == getId()
+                && otherOrder.getLabel().equals(getLabel());
 
     }
 

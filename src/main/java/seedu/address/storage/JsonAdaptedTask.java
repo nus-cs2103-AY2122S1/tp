@@ -5,10 +5,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.Date;
+import seedu.address.model.Label;
 import seedu.address.model.tag.TaskTag;
-import seedu.address.model.task.Label;
 import seedu.address.model.task.Task;
-
 
 /**
  * Jackson-friendly version of {@link Task}.
@@ -39,7 +38,7 @@ class JsonAdaptedTask {
      */
     public JsonAdaptedTask(Task source) {
         label = source.getLabel().toString();
-        date = source.getDate().toString();
+        date = source.getDate().dateString;
         taskTag = source.getTaskTag().toString();
         isDone = String.valueOf(source.getIsDone());
     }
@@ -62,7 +61,7 @@ class JsonAdaptedTask {
         if (date == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
         }
-        if (!Date.isValidDate(label)) {
+        if (!Date.isValidDate(date)) {
             throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
         }
         final Date modelDate = new Date(date);
@@ -78,12 +77,12 @@ class JsonAdaptedTask {
         Task newTask = new Task(modelLabel, modelDate, modelTaskTag);
 
         if (isDone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Isdone"));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "IsDone"));
         }
         if (isDone.equals("true")) {
-            newTask.setIsDone(true);
+            newTask.markDone();
         } else if (isDone.equals("false")) {
-            newTask.setIsDone(false);
+            // intentionally allow fall through
         } else {
             throw new IllegalValueException(Label.MESSAGE_CONSTRAINTS);
         }

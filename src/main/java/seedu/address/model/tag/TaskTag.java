@@ -7,7 +7,7 @@ public class TaskTag {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Task tags names should either be 'General' or "
-                    + "have prefix 'SO' followed by at least 1 digit.";
+                    + "have prefix 'SO' followed by at least 1 digit";
     public static final String VALIDATION_REGEX = "SO[\\d]+|General";
 
     public final String tagName;
@@ -28,6 +28,18 @@ public class TaskTag {
      */
     public static boolean isValidTagName(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns -1 if this is a general tag. Else, returns the order id in the tagname.
+     */
+    public long getTagId() {
+        if (tagName.equals("General")) {
+            return -1;
+        }
+        String idString = tagName.substring(2);
+
+        return Long.parseLong(idString);
     }
 
     @Override

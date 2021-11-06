@@ -20,10 +20,12 @@ public class AddTaskCommand extends Command {
             + "[" + PREFIX_TASK_TAG + "TASKTAG]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_LABEL + "Sew buttons onto black blazer "
-            + PREFIX_DATE + "20th August 2021 "
+            + PREFIX_DATE + "20 August 2021 "
             + PREFIX_TASK_TAG + "SO2103";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
+    public static final String MESSAGE_UNFOUND_ORDERID = "The sales order with the given id cannot be found.";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the taskbook";
 
     private final Task toAdd;
 
@@ -38,8 +40,17 @@ public class AddTaskCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        long tagId = toAdd.getTagId();
+        if (tagId != -1 && !model.hasOrder(tagId)) {
+            throw new CommandException(MESSAGE_UNFOUND_ORDERID);
+        }
+
+        if (model.hasTask(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_TASK);
+        }
+
         model.addTask(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), CommandResult.DisplayState.TASK);
     }
 
     @Override

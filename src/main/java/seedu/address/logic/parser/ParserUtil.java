@@ -10,6 +10,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Date;
+import seedu.address.model.Label;
 import seedu.address.model.order.Amount;
 import seedu.address.model.order.Customer;
 import seedu.address.model.person.Address;
@@ -19,9 +20,11 @@ import seedu.address.model.person.Measurement;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
+import seedu.address.model.sort.SortField;
+import seedu.address.model.sort.SortOrdering;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TaskTag;
-import seedu.address.model.task.Label;
+
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -100,6 +103,9 @@ public class ParserUtil {
         if (!Measurement.isValidMeasurement(trimmedMeasurement, gender.value)) {
             throw new ParseException(Measurement.getMessageConstraints(gender.value));
         }
+        if (!Measurement.isValidRange(trimmedMeasurement)) {
+            throw new ParseException(Measurement.RANGE_MESSAGE_CONSTRAINTS);
+        }
         return new Measurement(trimmedMeasurement);
     }
 
@@ -114,6 +120,9 @@ public class ParserUtil {
         String trimmedMeasurement = measurement.trim();
         if (!Measurement.isValidMeasurement(trimmedMeasurement)) {
             throw new ParseException(Measurement.GENERAL_MESSAGE_CONSTRAINTS);
+        }
+        if (!Measurement.isValidRange(trimmedMeasurement)) {
+            throw new ParseException(Measurement.RANGE_MESSAGE_CONSTRAINTS);
         }
         return new Measurement(trimmedMeasurement);
     }
@@ -257,5 +266,36 @@ public class ParserUtil {
             throw new ParseException(Amount.MESSAGE_CONSTRAINTS);
         }
         return new Amount(trimmedAmount);
+    }
+
+
+    /**
+     * Parses a {@code String sortOrder} into a {@code SortOrder}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code sortOrder} is invalid.
+     */
+    public static SortOrdering parseSortOrder(String sortOrder) throws ParseException {
+        requireNonNull(sortOrder);
+        String trimmedSortOrder = sortOrder.trim();
+        if (!SortOrdering.isValidSortOrder(trimmedSortOrder)) {
+            throw new ParseException(SortOrdering.MESSAGE_CONSTRAINTS);
+        }
+        return new SortOrdering(trimmedSortOrder);
+    }
+
+    /**
+     * Parses a {@code String sortField} into a {@code sortField}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code sortField} is invalid.
+     */
+    public static SortField parseSortField(String sortField) throws ParseException {
+        requireNonNull(sortField);
+        String trimmedSortField = sortField.trim();
+        if (!SortField.isValidSortField(trimmedSortField)) {
+            throw new ParseException(SortField.MESSAGE_CONSTRAINTS);
+        }
+        return new SortField(trimmedSortField);
     }
 }

@@ -19,7 +19,7 @@ public class DeleteOrderCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_ORDER_SUCCESS = "Deleted Sales Order: %1$s";
+    public static final String MESSAGE_DELETE_ORDER_SUCCESS = "Deleted Sales Order: %1$s, and removed related tasks";
 
     private final Index targetIndex;
 
@@ -37,8 +37,13 @@ public class DeleteOrderCommand extends Command {
         }
 
         Order orderToDelete = lastShownList.get(targetIndex.getZeroBased());
+
+        //delete related tasks, and then delete the order.
+        model.deleteRelatedTasks(orderToDelete);
         model.deleteOrder(orderToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_ORDER_SUCCESS, orderToDelete));
+
+        return new CommandResult(String.format(MESSAGE_DELETE_ORDER_SUCCESS, orderToDelete),
+                CommandResult.DisplayState.ORDER);
     }
 
     @Override

@@ -24,6 +24,8 @@ public class OrderCard extends UiPart<Region> {
     @FXML
     private CheckBox isComplete;
     @FXML
+    private Label orderLabel;
+    @FXML
     private Label date;
     @FXML
     private Label amount;
@@ -35,9 +37,10 @@ public class OrderCard extends UiPart<Region> {
         super(FXML);
         this.order = order;
         index.setText(displayedIndex + ". ");
-        orderId.setText("(" + order.getDisplayId() + ") ");
-        customer.setText(order.getCustomer().toString());
+        orderId.setText(order.getDisplayId());
+        customer.setText("Customer:  " + order.getCustomer().toString());
         isComplete.setSelected(order.getIsComplete());
+        orderLabel.setText(order.getLabel().toString());
         date.setText("Deadline:  " + order.getDate().toString());
         amount.setText("$" + order.getAmount().toString());
     }

@@ -18,8 +18,11 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditTaskCommand.EditTaskDescriptor;
 import seedu.address.model.AddressBook;
+import seedu.address.model.Label;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.OrderBook;
+import seedu.address.model.TaskBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.task.Task;
 import seedu.address.testutil.EditTaskDescriptorBuilder;
@@ -31,9 +34,10 @@ import seedu.address.testutil.TypicalTasks;
  */
 public class EditTaskCommandTest {
 
-    private AddressBook typicalPersonsAddressBookWithTask = TypicalTasks
-            .addTypicalTasksToAddressBook(new AddressBook());
-    private Model model = new ModelManager(typicalPersonsAddressBookWithTask, new UserPrefs());
+    private TaskBook typicalTaskList = TypicalTasks.getTypicalTaskBook();
+
+    private Model model = new ModelManager(new AddressBook(), typicalTaskList,
+            new OrderBook(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -43,7 +47,8 @@ public class EditTaskCommandTest {
 
         String expectedMessage = String.format(EditTaskCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask);
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), model.getTaskBook(),
+                model.getOrderBook(), new UserPrefs());
         expectedModel.setTask(model.getFilteredTaskList().get(0), editedTask);
 
         assertCommandSuccess(editTaskCommand, model, expectedMessage, expectedModel);
@@ -62,7 +67,8 @@ public class EditTaskCommandTest {
 
         String expectedMessage = String.format(EditTaskCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask);
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(),
+                model.getTaskBook(), model.getOrderBook(), new UserPrefs());
         expectedModel.setTask(lastTask, editedTask);
 
         assertCommandSuccess(editTaskCommand, model, expectedMessage, expectedModel);
@@ -84,6 +90,15 @@ public class EditTaskCommandTest {
         EditTaskCommand editTaskCommand = new EditTaskCommand(INDEX_FIRST_TASK, descriptor);
 
         assertCommandFailure(editTaskCommand, model, MESSAGE_NO_CHANGES_MADE);
+    }
+
+    @Test
+    public void execute_invalidId_failure() {
+        Task edittedTask = new TaskBuilder().withTaskTag("SO100").build();
+        EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder(edittedTask).build();
+        EditTaskCommand editTaskCommand = new EditTaskCommand(INDEX_SECOND_TASK, descriptor);
+
+        assertCommandFailure(editTaskCommand, model, EditTaskCommand.MESSAGE_UNFOUND_ORDERID);
     }
 
     @Test
@@ -118,5 +133,28 @@ public class EditTaskCommandTest {
 
         // different descriptor -> returns false
         assertFalse(standardCommand.equals(new EditTaskCommand(INDEX_FIRST_TASK, DESC_SEW)));
+    }
+
+    @Test
+    public void editTaskDescriptorEquals() {
+        final EditTaskDescriptor descriptor = new EditTaskDescriptor();
+        final EditTaskDescriptor otherEqual = new EditTaskDescriptor();
+        final EditTaskDescriptor otherNotEqual = new EditTaskDescriptor();
+        otherNotEqual.setLabel(new Label(VALID_LABEL_ORDER));
+
+        // same object is equal
+        assertTrue(descriptor.equals(descriptor));
+
+        // same fields is equal
+        assertTrue(descriptor.equals(otherEqual));
+
+        // not same fields is not equal
+        assertFalse(descriptor.equals(otherNotEqual));
+
+        // null is not equal
+        assertFalse(descriptor.equals(null));
+
+        // other objects are not equal
+        assertFalse(descriptor.equals(new TaskBuilder().build()));
     }
 }

@@ -8,10 +8,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Customer {
     public static final String MESSAGE_CONSTRAINTS =
-            "Customer name should be non-empty, and contain one or more blocks of alphanumeric characters, "
+            "Customer names should be non-empty, and contain one or more blocks of alphanumeric characters, "
             + "separated by at most one space";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+( \\p{Alnum}+)*";
-    public final String name;
+    private String name;
 
     /**
      * Constructs a {@code Customer}
@@ -26,6 +26,16 @@ public class Customer {
 
     public static boolean isValidCustomer(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String newName) {
+        // newName should be valid for this to be called; indicates serious error otherwise.
+        assert isValidCustomer(newName);
+        this.name = newName;
     }
 
     @Override

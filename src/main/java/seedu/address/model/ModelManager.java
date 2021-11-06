@@ -4,7 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -13,17 +16,25 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.StringUtil;
+import seedu.address.model.order.Customer;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Person;
+import seedu.address.model.sort.SortDescriptor;
 import seedu.address.model.task.Task;
 
 /**
  * Represents the in-memory model of the address book data.
  */
 public class ModelManager implements Model {
+
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
+    private final TaskBook taskBook;
+    private final OrderBook orderBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Task> filteredTasks;
@@ -32,20 +43,23 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyTaskBook taskBook,
+                        ReadOnlyOrderBook orderBook, ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(addressBook, taskBook, orderBook, userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
+        this.taskBook = new TaskBook(taskBook);
+        this.orderBook = new OrderBook(orderBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
-        filteredOrders = new FilteredList<>(this.addressBook.getOrderList());
+        filteredTasks = new FilteredList<>(this.taskBook.getTaskList());
+        filteredOrders = new FilteredList<>(this.orderBook.getOrderList());
 
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new TaskBook(), new OrderBook(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -72,6 +86,8 @@ public class ModelManager implements Model {
         userPrefs.setGuiSettings(guiSettings);
     }
 
+    //=========== AddressBook ================================================================================
+
     @Override
     public Path getAddressBookFilePath() {
         return userPrefs.getAddressBookFilePath();
@@ -83,7 +99,6 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
-    //=========== AddressBook ================================================================================
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
@@ -99,6 +114,12 @@ public class ModelManager implements Model {
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return addressBook.hasPerson(person);
+    }
+
+    @Override
+    public boolean hasPersonWithName(String name) {
+        requireNonNull(name);
+        return addressBook.hasPersonWithName(name);
     }
 
     @Override
@@ -121,34 +142,64 @@ public class ModelManager implements Model {
 
     //=========== Task Management ==================================================================================
 
+    @Override
+    public Path getTaskBookFilePath() {
+        return userPrefs.getTaskBookPath();
+    }
+
+    @Override
+    public void setTaskListFilePath(Path taskListFilePath) {
+        requireNonNull(taskListFilePath);
+        userPrefs.getTaskListFilePath(taskListFilePath);
+    }
+
+    @Override
+    public void setTaskBook(ReadOnlyTaskBook taskBook) {
+        this.taskBook.resetData(taskBook);
+    }
+
+    @Override
+    public ReadOnlyTaskBook getTaskBook() {
+        return taskBook;
+    }
+
     /**
-     * Checks if tasklist has this task.
+     * Checks if taskBook has this task.
      */
     @Override
     public boolean hasTask(Task task) {
         requireNonNull(task);
-        return addressBook.hasTask(task);
+        return taskBook.hasTask(task);
     }
 
     /**
-     * Adds a task to tasklist.
+     * Adds a task to taskBook.
      */
+    @Override
     public void addTask(Task toAdd) {
-        addressBook.addTask(toAdd);
+        taskBook.addTask(toAdd);
         updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
     }
 
     /**
-     * Deletes a task from tasklist.
+     * Deletes a task from taskBook.
      */
+    @Override
     public void deleteTask(Task toDelete) {
-        addressBook.deleteTask(toDelete);
+        taskBook.deleteTask(toDelete);
+    }
+
+    /**
+     * Deletes all tasks matching predicate from taskBook.
+     */
+    public void deleteTaskIf(Predicate<Task> pred) {
+        taskBook.deleteTaskIf(pred);
     }
 
     @Override
     public void setTask(Task target, Task editedTask) {
         requireAllNonNull(target, editedTask);
-        addressBook.setTask(target, editedTask);
+        taskBook.setTask(target, editedTask);
     }
 
     @Override
@@ -162,41 +213,72 @@ public class ModelManager implements Model {
         filteredTasks.setPredicate(predicate);
     }
 
-    public void markTask(Task task) {
-        addressBook.markTask(task);
+    @Override
+    public boolean markTask(Task toMark) {
+        return taskBook.markDone(toMark);
+
     }
 
 
     //=========== Order Management ==================================================================================
 
+    @Override
+    public Path getOrderBookFilePath() {
+        return userPrefs.getOrderBookFilePath();
+    }
+
+    @Override
+    public void setOrderBookFilePath(Path orderBookFilePath) {
+        requireNonNull(orderBookFilePath);
+        userPrefs.getOrderBookFilePath(orderBookFilePath);
+    }
+
+    @Override
+    public void setOrderBook(ReadOnlyOrderBook orderBook) {
+        this.orderBook.resetData(orderBook);
+    }
+
+    @Override
+    public ReadOnlyOrderBook getOrderBook() {
+        return orderBook;
+    }
+
     /**
-     * Checks if orderlist has this order.
+     * Checks if orderBook has this order.
      */
     @Override
     public boolean hasOrder(Order order) {
         requireNonNull(order);
-        return addressBook.hasOrder(order);
+        return orderBook.hasOrder(order);
+    }
+
+    /**
+     * Checks if orderlist has an order with this id.
+     */
+    @Override
+    public boolean hasOrder(long id) {
+        return orderBook.hasOrder(id);
     }
 
     @Override
     public void setOrder(Order target, Order editedOrder) {
         requireAllNonNull(target, editedOrder);
-        addressBook.setOrder(target, editedOrder);
+        orderBook.setOrder(target, editedOrder);
     }
 
     /**
-     * Adds an order to orderlist.
+     * Adds an order to orderBook.
      */
     public void addOrder(Order toAdd) {
-        addressBook.addOrder(toAdd);
-        resetOrderView();
+        orderBook.addOrder(toAdd);
+        updateFilteredOrderList(PREDICATE_SHOW_ALL_ORDERS);
     }
 
     /**
-     * Deletes an order from orderlist.
+     * Deletes an order from orderBook.
      */
     public void deleteOrder(Order toDelete) {
-        addressBook.deleteOrder(toDelete);
+        orderBook.deleteOrder(toDelete);
     }
 
     @Override
@@ -210,36 +292,70 @@ public class ModelManager implements Model {
         filteredOrders.setPredicate(predicate);
     }
 
-    /**
-     * Marks an order as completed
-     */
-    public void markOrder(Order order) {
-        addressBook.markOrder(order);
+    @Override
+    public void sortOrderList(SortDescriptor sortDescriptor) {
+        Comparator<Order> comparator = sortDescriptor.generateComparator();
+        orderBook.sortOrders(comparator);
+        filteredOrders.setPredicate(PREDICATE_SHOW_ALL_ORDERS);
     }
 
     /**
-     * For each person, finds orders associated with the person, and adds up the amount.
-     * Creates a ClientTotalOrder for each person.
+     * Marks an order as completed
+     */
+    @Override
+    public boolean markOrder(Order order) {
+        return orderBook.markOrder(order);
+    }
+
+    /**
+     * Delete tasks related to a given Order
+     */
+    @Override
+    public void deleteRelatedTasks(Order order) {
+        String keyword = Order.ID_PREFIX + String.valueOf(order.getId());
+        this.deleteTaskIf(task -> StringUtil.containsWordIgnoreCase(task.getTaskTag().tagName, keyword));
+    }
+
+    /**
+     * Deletes all tasks matching predicate from taskBook.
+     */
+    @Override
+    public void deleteOrderIf(Predicate<Order> pred) {
+        orderBook.deleteOrderIf(pred);
+    }
+
+    /**
+     * Groups and sums up all orders according to their {@code Customer}s.
+     * This method computes total orders based on the {@code Customer}s,
+     * but each {@code Customer} is supposed to map to an existing {@code Person} (Client),
+     * hence the naming of the method and local variables.
      *
      * @return an ObservableList of {@code ClientTotalOrder}.
      */
     @Override
     public ObservableList<ClientTotalOrder> getClientTotalOrders() {
+        HashMap<Customer, Double> customerTotalMap = getCustomerTotalMap();
         ObservableList<ClientTotalOrder> clientTotalOrders = FXCollections.observableArrayList();
-        for (Person client : addressBook.getPersonList()) {
-            clientTotalOrders.add(getClientTotalOrder(client));
-        }
+        customerTotalMap.forEach((customer, totalOrders)
+            -> clientTotalOrders.add(new ClientTotalOrder(customer.toString(), totalOrders)));
+        sortDescending(clientTotalOrders);
         return clientTotalOrders;
     }
 
-    private ClientTotalOrder getClientTotalOrder(Person client) {
-        String clientName = client.getName().toString();
-        Predicate<Order> correctClient = (order) -> order.getCustomer().toString().equals(clientName);
-        double totalOrder = addressBook.getOrderList().stream()
-                .filter(correctClient)
-                .mapToDouble(Order::getAmountAsDouble)
-                .sum();
-        return new ClientTotalOrder(clientName, totalOrder);
+    private HashMap<Customer, Double> getCustomerTotalMap() {
+        HashMap<Customer, Double> customerTotalMap = new HashMap<>();
+        orderBook.getOrderList().forEach(order -> {
+            Customer customer = order.getCustomer();
+            Double updatedTotal = customerTotalMap.getOrDefault(customer, 0.0) + order.getAmountAsDouble();
+            customerTotalMap.put(customer, updatedTotal);
+        });
+        return customerTotalMap;
+    }
+
+    private void sortDescending(List<ClientTotalOrder> clientTotalOrders) {
+        Comparator<? super ClientTotalOrder> comparator = Comparator.comparing(ClientTotalOrder::getTotalOrder);
+        clientTotalOrders.sort(comparator);
+        Collections.reverse(clientTotalOrders);
     }
 
 
@@ -275,21 +391,57 @@ public class ModelManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
+                && taskBook.equals(other.taskBook)
+                && orderBook.equals(other.orderBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
-    }
-
-    @Override
-    public void sortOrderList(Comparator<Order> comparator) {
-        addressBook.sortOrders(comparator);
-        filteredOrders.setPredicate(PREDICATE_SHOW_ALL_ORDERS);
+                && filteredPersons.equals(other.filteredPersons)
+                && filteredTasks.equals(other.filteredTasks)
+                && filteredOrders.equals(other.filteredOrders);
     }
 
     @Override
     public void resetOrderView() {
         Comparator<Order> defaultComparator = Order::compareTo;
-        addressBook.sortOrders(defaultComparator);
+        orderBook.sortOrders(defaultComparator);
         updateFilteredOrderList(PREDICATE_SHOW_ALL_ORDERS);
+    }
+
+    //=========== AddressBook & OrderBook Relation Check =======================================================
+
+    /**
+     * Checks if any order tagged to persons that don't exist.
+     */
+    public void checkClientAndOrderRelation() throws DataConversionException {
+        ObservableList<Order> orders = this.orderBook.getOrderList();
+        for (Order eachOrder : orders) {
+            String nameOfPerson = eachOrder.getCustomer().getName();
+            if (!this.addressBook.hasPersonWithName(nameOfPerson)) {
+                throw new DataConversionException(
+                        new IllegalValueException("Given customer name does not exist in Address Book"));
+            }
+        }
+    }
+
+    //=========== AddressBook & OrderBook Relation Check =======================================================
+
+    /**
+     * Checks if any tasks tagged to order that don't exist.
+     */
+    public void checkTaskAndOrderRelation() throws DataConversionException {
+        ObservableList<Task> tasks = this.taskBook.getTaskList();
+        for (Task eachTask : tasks) {
+            Long id = eachTask.getTaskTag().getTagId();
+            if (!this.orderBook.hasOrder(id)) {
+                throw new DataConversionException(
+                        new IllegalValueException("Given Sales ID does not exist in Order Book"));
+            }
+        }
+    }
+
+    //=========== AddressBook & OrderBook Relation Check =======================================================
+
+    public ModelManager resetModelManager() {
+        return new ModelManager(new AddressBook(), new TaskBook(), new OrderBook(), this.userPrefs);
     }
 
 }

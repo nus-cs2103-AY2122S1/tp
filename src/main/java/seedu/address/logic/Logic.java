@@ -48,6 +48,16 @@ public interface Logic {
     Path getAddressBookFilePath();
 
     /**
+     * Returns the user prefs' task book file path.
+     */
+    Path getTaskBookFilePath();
+
+    /**
+     * Returns the user prefs' order book file path.
+     */
+    Path getOrderBookFilePath();
+
+    /**
      * Returns the user prefs' GUI settings.
      */
     GuiSettings getGuiSettings();

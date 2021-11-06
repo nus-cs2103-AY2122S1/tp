@@ -370,7 +370,7 @@
     -fx-vgap: 3;
 }
 
-#tags .label, #taskTag {
+#tags .label, #taskTag, #orderId {
     -fx-text-fill: white;
     -fx-background-color: #3e7b91;
     -fx-padding: 1 3 1 3;

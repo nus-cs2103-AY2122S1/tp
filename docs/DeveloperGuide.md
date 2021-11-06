@@ -2,34 +2,36 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-    - [Acknowledgements](#acknowledgements)
-    - [Setting up, getting started](#setting-up-getting-started)
-    - [Design](#design)
-        - [Architecture](#architecture)
-        - [UI Component](#ui-component)
-        - [Logic Component](#logic-component)
-        - [Model Component](#model-component)
-        - [Storage Component](#storage-component)
-        - [Common classes](#common-classes)
-    - [Implementation](#implementation)
-    - [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
-    - [Appendix: Requirements](#appendix-requirements)
-        - [Product scope](#product-scope)
-        - [User stories](#user-stories)
-        - [Use cases](#use-cases)
-        - [Non-functional Requirements](#non-functional-requirements)
-        - [Glossary](#glossary)
-    - [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
-        - [Launch and shutdown](#launch-and-shutdown)
-        - [Deleting a person](#deleting-a-client)
-        - [Saving data](#saving-data)
+## Table of Contents
+
+- [Acknowledgements](#acknowledgements)
+- [Setting up, getting started](#setting-up-getting-started)
+- [Design](#design)
+    - [Architecture](#architecture)
+    - [UI Component](#ui-component)
+    - [Logic Component](#logic-component)
+    - [Model Component](#model-component)
+    - [Storage Component](#storage-component)
+    - [Common classes](#common-classes)
+- [Implementation](#implementation)
+- [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+- [Appendix: Requirements](#appendix-requirements)
+    - [Product scope](#product-scope)
+    - [User stories](#user-stories)
+    - [Use cases](#use-cases)
+    - [Non-functional Requirements](#non-functional-requirements)
+    - [Glossary](#glossary)
+- [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+    - [Launch and shutdown](#launch-and-shutdown)
+    - [Deleting a client](#deleting-a-client)
+    - [Saving data](#saving-data)
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* Application logo - Copyright by **[yupiramos](https://www.canva.com/media/MADeEQ5DO1Y)**
+* Adapted code - [`formatTotalColumn`](https://stackoverflow.com/a/34924734/13896417) and [`setCloseOnEsc`](https://stackoverflow.com/a/42104595/13896417)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -118,11 +120,11 @@ How the `Logic` component works:
 1. The command can communicate with the `Model` when it is executed (e.g. to add a client).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
-The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("deletetask 1")` API call.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+![Interactions Inside the Logic Component for the `deletetask 1` Command](images/DeleteTaskSequenceDiagram.png)
+    
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteTaskCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
@@ -136,37 +138,108 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-W08-3/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="550" />
 
+Class Diagram of the `Person`'s entity:
+
+<img src="images/PersonClassDiagram.png" />
+
+Class Diagram of the `Task`'s entity:
+
+<img src="images/TaskClassDiagram.png" />
+
+Class Diagram of the `Order`'s entity:
+
+<img src="images/OrderClassDiagram.png" />
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores these three types of data in SalesNote
+  * Address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+  * Task book data i.e., all `Task` objects (which are contained in a `UniqueTaskList` object).
+  * Order book data i.e., all `Order` objects (which are contained in a `UniqueOrderList` object).
+
+* stores the currently 'selected' `Person`, `Tasks`, and `Orders` objects (e.g., results of a search query) as separate _filtered_ lists which are exposed to outsiders as unmodifiable `ObservableList<Person>`, `ObservableList<Task>` and `ObservableList<Order>` respectively  that can be 'observed' e.g. the UI can be bound to these lists so that the UI automatically updates when the data in the lists change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `SalesNote`, which `Person` references. This allows `SalesNote` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
-
 
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-W08-3/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<img src="images/StorageClassDiagram.png" width="600" />
 
 The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
-* inherits from both `SalesNoteStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save address book data, task book data, sales order book data
+  and user preference data in json format, and read them back into corresponding objects.
+* inherits from all of `AddressBookStorage`, `TaskBookStorage`, `OrderBookStorage`,
+  and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.salesnote.commons` package.
+Classes used by multiple components are in the `seedu.address.commons` package.
+
+--------------------------------------------------------------------------------------------------------------------
+## **Implementation - Shawn **
+
+(this division and header is temporary; and is just to demarcate my part of the DG update for this week's requirement)
+
+###`task` and `order` package
+This section describes the implementation of the `task` and `order` packages in the application. These two packages are 
+similar in functionality to the `person` package, now allowing the user to track tasks and orders. Below is a diagram
+showing the partial implementation of these packages in the application:
+
+![`Updated Model Diagram`](images/UpdatedModelClassDiagram.png)
+
+`OrderList` and `TaskList` manage `Order` and `Task` objects, in the same way a `UniquePersonList` manages `Person`
+objects, and there are a few significant points about this implementation.
+
+The first is the distinction between the `Person` class, and the `Customer` class. Since every order is made by 
+a customer, and the `Person` class is used to track customers, we initially considered linking the two classes, and tying
+every `Order` to a `Person`. However, the issue with this is that we did not want deleting of a `Person` to affect 
+sales records, which should continue to show all completed orders. We thus decided instead to create the `Customer` 
+class which essentially serves as a field for the `Order` class, implementing validity checks for the input, similar to 
+how the `Name` field works for the `Person` class.
+
+The next note is that a `UniquePersonList` has a `AddressBook` wrapper that contains other functionalities needed in
+the application (e.g. storage related functions). Our Implementation intends to mirror this with a `TaskBook` and 
+`OrderBook` wrapper around `TaskList` and `OrderList` respectively, but this was not handled by me, and hence these 
+were omitted from the diagram above.
+
+Finally, as mentioned partially above, the `Amount` `Customer` `Date` and `Label` classes are what handle checking the 
+validity of fields, similar to the implementation in the associated classes for Person, and also respect a whole-part 
+relationship. The validity checking in all cases was implemented using regular expressions, and they respect the
+following guarantees:
+
+`Amount` Begins with 1 or more numbers, followed optionally by a block that consists of a '.' followed by 1 or 2 numbers.
+
+`Customer` Blocks of 1 or more alphanumeric characters, separated by at most one space.
+
+`Date` `Label` Nonempty block of alphanumeric characters of length at most 100 characters. We felt this was a reasonable
+length for both fields, and would guarantee the UI display worked the way we intended.'
+
+### Addressing feature flaws
+
+A small and related task I addressed was input validation for customers, and adjusting the way we treated equality 
+between person objects. The original AB3 treated two people as equal only if their names were spelt exactly the same, 
+with this being case-sensitive. When we discussed this as a group, we decided that multiple clients having the exact same name was rare
+enough that this notion of equality made sense. However, we felt it should apply regardless of case, i.e. john doe 
+should be recognised as the same person as JOHN DOE. I updated the implementation to take care of this, and also changed
+the input validation for `Name` to allow at most one space between blocks of characters.
+
+### Implementing commands
+
+Lastly, I implemented several commands related to the `Task` and `Order` classes. These are fairly self-explanatory, 
+and their implementation closely mirrors that of similar commands for the `Person` class. The exception is the marktask
+and markorder commands, which allow the user to mark tasks and orders as completed. The list of implemented commands
+is below:
+
+* addtask
+* deletetask
+* listtasks
+* marktask
+* markorder
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -174,95 +247,65 @@ Classes used by multiple components are in the `seedu.salesnote.commons` package
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Update Person Changes in Order List and Task List
+
+SalesNote's clients are directly referenced in orders. Any changes in the clients through user commands should be propagated to the Order list.
+
+* When a client is deleted, their orders and the tasks linked to the orders will be deleted as well.
+* When a client name is modified, this change will be updated in their existing orders.
+
+#### Execution
+
+The sequence diagram below shows the interaction within the Logic component for a delete command is executed.
+
+![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+
+1. `DeleteCommand::execute` is called and deletes the client from the list.
+2. Related orders are obtained by matching the client's name and the customer of the existing orders.
+3. Tasks linked to the orders and the orders themselves are deleted.
+
+![Interactions Inside the Logic Component for the `edit 1 n/[new name]` command ](images/EditSequenceDiagram.png)
+
+1. `EditCommand::execute` is called and the client's details are modified.
+2. Related orders are obtained by matching the client's **old** name and the customer of the existing orders.
+3. The related orders' customer's name are updated.
+
+#### Result
+The changes in person objects are updated in their order and task objects.
+
+### Sort orders by amount feature
+
+The feature sorts all the orders in the addressbook by their amount in descending order. 
+
+To ensure that the orders can be sorted, both `Order` and its attribute `Amount` implement the `Comparable` interface. 
+Order uses its `id` field to produce the default ordering of the `OrderList`. 
+
+{to be completed}
+
 ### Display client's total orders feature
 
-#### Implementation
+The feature displays the total orders for all clients except those without orders in a new window. 
+Its mechanism is a mix of the mechanisms for `MainWindow` and `HelpWindow`.
 
-The feature displays the total orders for each client in a new window. Its mechanism is a mix of the mechanisms for `MainWindow` and `HelpWindow`. 
+Similar to `help` and `exit`, `CommandResult` has a dedicated `boolean` field to indicate whether the command is a 
+`totalorders` command. There is also a dedicated method to handle `totalorders` command in `MainWindow` class.
+By calling this method, the data of total orders is reloaded similar to loading other data (`Client/Task/Order`) in the Main Window, i.e. 
+through the `Logic` component. After reloading data, that method shows or focuses the total orders window similar to that of the 
+help window.
 
-### \[Proposed\] Undo/redo feature
+#### Execution
 
-#### Proposed Implementation
+The sequence diagram below shows the interaction within the `UI` component when a `totalorders` command is executed.
 
-The proposed undo/redo mechanism is facilitated by `VersionedSalesNote`. It extends `SalesNote` with an undo/redo history, stored internally as an `salesNoteStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+![Interactions Inside the Logic and Model Component for the `totalorders` Command](images/TotalOrdersSequenceDiagram2.png)
 
-* `VersionedSalesNote#commit()` — Saves the current address book state in its history.
-* `VersionedSalesNote#undo()` — Restores the previous address book state from its history.
-* `VersionedSalesNote#redo()` — Restores a previously undone address book state from its history.
+The sequence diagram below shows the interaction within the `Logic` component when the `UI` component calls 
+`execute("totalorders")`. Note that there is no need to have a `TotalOrdersCommandParser`. This is because the 
+`SalesNoteParser` can directly create and return a `TotalOrdersCommand`, similar to that of `help` and `exit` commands.  
 
-These operations are exposed in the `Model` interface as `Model#commitSalesNote()`, `Model#undoSalesNote()` and `Model#redoSalesNote()` respectively.
+![Interactions Inside the Logic and Model Component for the `totalorders` Command](images/TotalOrdersSequenceDiagram1.png)
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedSalesNote` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th client in the address book. The `delete` command calls `Model#commitSalesNote()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `SalesNoteStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new client. The `add` command also calls `Model#commitSalesNote()`, causing another modified address book state to be saved into the `SalesNoteStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitSalesNote()`, so the address book state will not be saved into the `SalesNoteStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the client was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoSalesNote()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial SalesNote state, then there are no previous SalesNote states to restore. The `undo` command uses `Model#canUndoSalesNote()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoSalesNote()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `SalesNoteStateList.size() - 1`, pointing to the latest address book state, then there are no undone SalesNote states to restore. The `redo` command uses `Model#canRedoSalesNote()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitSalesNote()`, `Model#undoSalesNote()` or `Model#redoSalesNote()`. Thus, the `SalesNoteStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitSalesNote()`. Since the `currentStatePointer` is not pointing at the end of the `SalesNoteStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the client being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -474,7 +517,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Client**: A customer in the database, identified by their name. 
+* **Order**: A sales order from a customer scheduled for a target date.
+* **Task**: A task for the user that has a due date and a completion status.
 
 --------------------------------------------------------------------------------------------------------------------
 

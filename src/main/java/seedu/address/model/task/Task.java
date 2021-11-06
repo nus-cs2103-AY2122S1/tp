@@ -4,6 +4,7 @@ import java.util.Objects;
 
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.Date;
+import seedu.address.model.Label;
 import seedu.address.model.tag.TaskTag;
 
 /**
@@ -28,12 +29,16 @@ public class Task {
     }
 
     /**
-     * Method used to mark the task as done.
-     *
-     * @param isDone indicates whether the task is marked as done.
+     * Mark a task as done by setting isDone to true.
+     * @return a boolean indicating whether the value of isDone has been changed or not.
      */
-    public void setIsDone(boolean isDone) {
-        this.isDone = isDone;
+    public boolean markDone() {
+        if (isDone) {
+            return false;
+        } else {
+            isDone = true;
+            return true;
+        }
     }
 
     /**
@@ -68,6 +73,26 @@ public class Task {
      */
     public TaskTag getTaskTag() {
         return taskTag;
+    }
+
+    /**
+     * Return the task tag id of the task
+     */
+    public long getTagId() {
+        return taskTag.getTagId();
+    }
+
+    /**
+     * Returns true if both tasks have the same label and tag.
+     */
+    public boolean isSameTask(Task otherTask) {
+        if (otherTask == this) {
+            return true;
+        }
+
+        return otherTask != null
+                && otherTask.getLabel().equals(getLabel())
+                && otherTask.getTaskTag().equals(getTaskTag());
     }
 
     /**

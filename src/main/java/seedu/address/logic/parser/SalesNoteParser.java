@@ -18,8 +18,11 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditTaskCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindOrderCommand;
+import seedu.address.logic.commands.FindTaskCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListOrderCommand;
 import seedu.address.logic.commands.ListTaskCommand;
 import seedu.address.logic.commands.MarkOrderCommand;
 import seedu.address.logic.commands.MarkTaskCommand;
@@ -27,14 +30,14 @@ import seedu.address.logic.commands.ShowCompletedOrders;
 import seedu.address.logic.commands.ShowCompletedTasks;
 import seedu.address.logic.commands.ShowIncompleteOrders;
 import seedu.address.logic.commands.ShowIncompleteTasks;
-import seedu.address.logic.commands.SortOrdersByAmountCommand;
+import seedu.address.logic.commands.SortOrdersCommand;
 import seedu.address.logic.commands.TotalOrdersCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Parses user input.
  */
-public class AddressBookParser {
+public class SalesNoteParser {
 
     /**
      * Used for initial separation of command word and args.
@@ -58,6 +61,7 @@ public class AddressBookParser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
+        //======================================== PERSON COMMANDS ========================================
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
@@ -70,9 +74,6 @@ public class AddressBookParser {
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
-        case SortOrdersByAmountCommand.COMMAND_WORD:
-            return new SortOrdersByAmountCommand();
-
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
@@ -84,6 +85,8 @@ public class AddressBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        //======================================== TASK COMMANDS ========================================
 
         case AddTaskCommand.COMMAND_WORD:
             return new AddTaskCommandParser().parse(arguments);
@@ -106,6 +109,11 @@ public class AddressBookParser {
         case ShowIncompleteTasks.COMMAND_WORD:
             return new ShowIncompleteTasks();
 
+        case FindTaskCommand.COMMAND_WORD:
+            return new FindTaskCommandParser().parse(arguments);
+
+        //======================================== ORDER COMMANDS ========================================
+
         case MarkOrderCommand.COMMAND_WORD:
             return new MarkOrderCommandParser().parse(arguments);
 
@@ -123,6 +131,16 @@ public class AddressBookParser {
 
         case TotalOrdersCommand.COMMAND_WORD:
             return new TotalOrdersCommand();
+
+        case SortOrdersCommand.COMMAND_WORD:
+            return new SortOrdersCommandParser().parse(arguments);
+
+        case FindOrderCommand.COMMAND_WORD:
+            return new FindOrderCommandParser().parse(arguments);
+
+        case ListOrderCommand.COMMAND_WORD:
+            return new ListOrderCommand();
+
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
