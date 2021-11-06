@@ -1,6 +1,5 @@
 package seedu.academydirectory.model.student;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -135,13 +134,11 @@ public class AssessmentTest {
     @Test
     public void testVisualizeForView() {
         Assessment assessment = new Assessment();
-        assertAll(
-                () -> assertTrue(assessment.visualizeForView().contains(Assessment.PLACEHOLDER_RA1)),
-                () -> assertTrue(assessment.visualizeForView().contains(Assessment.PLACEHOLDER_MIDTERM)),
-                () -> assertTrue(assessment.visualizeForView().contains(Assessment.PLACEHOLDER_RA2)),
-                () -> assertTrue(assessment.visualizeForView().contains(Assessment.PLACEHOLDER_PE)),
-                () -> assertTrue(assessment.visualizeForView().contains(Assessment.PLACEHOLDER_FINAL)),
-                () -> assertTrue(assessment.visualizeForView().contains(Assessment.PLACEHOLDER_TOTAL))
-        );
+        assertTrue(assessment.visualizeForView().contains(Assessment.PLACEHOLDER_RA1));
+        assertTrue(assessment.visualizeForView().contains(Assessment.PLACEHOLDER_MIDTERM));
+        assertTrue(assessment.visualizeForView().contains(Assessment.PLACEHOLDER_RA2));
+        assertTrue(assessment.visualizeForView().contains(Assessment.PLACEHOLDER_PE));
+        assertTrue(assessment.visualizeForView().contains(Assessment.PLACEHOLDER_FINAL));
+        assertTrue(assessment.visualizeForView().contains(Assessment.PLACEHOLDER_TOTAL));
     }
 }

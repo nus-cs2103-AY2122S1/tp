@@ -1,6 +1,5 @@
 package seedu.academydirectory.model.student;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -39,17 +38,13 @@ public class StudioRecordTest {
         Attendance attendance = new Attendance(5);
         StudioRecord emptyRecord = new StudioRecord(attendance, participation);
 
-        assertAll(
-                () -> assertTrue(emptyRecord.visualizeForView().contains(StudioRecord.SESSION_PLACEHOLDER)),
-                () -> assertTrue(emptyRecord.visualizeForView().contains(StudioRecord.NOT_ATTENDED))
-        );
+        assertTrue(emptyRecord.visualizeForView().contains(StudioRecord.SESSION_PLACEHOLDER));
+        assertTrue(emptyRecord.visualizeForView().contains(StudioRecord.NOT_ATTENDED));
 
         attendance.setAttendance(new boolean[]{true, true, true, true, true});
         participation.setParticipation(new int[]{150, 150, 150, 150, 150});
         StudioRecord fullRecord = new StudioRecord(attendance, participation);
-        assertAll(
-                () -> assertTrue(fullRecord.visualizeForView().contains(StudioRecord.PARTICIPATION_PLACEHOLDER)),
-                () -> assertTrue(fullRecord.visualizeForView().contains(StudioRecord.ATTENDED))
-        );
+        assertTrue(fullRecord.visualizeForView().contains(StudioRecord.PARTICIPATION_PLACEHOLDER));
+        assertTrue(fullRecord.visualizeForView().contains(StudioRecord.ATTENDED));
     }
 }
