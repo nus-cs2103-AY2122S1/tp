@@ -39,11 +39,14 @@ public class PersonFindCommandParser extends PersonCommandParser {
         }
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(arguments, PREFIX_NAME, PREFIX_TAG);
-        nameQuery = argMultimap.getValue(PREFIX_NAME).map(String::trim);
+        nameQuery = argMultimap.getValue(PREFIX_NAME).map(String::trim).filter(s -> !s.isEmpty());
         tagQuery = argMultimap.getValue(PREFIX_TAG).map(String::trim).orElse("").equals("")
                     ? Optional.empty()
                     : Optional.ofNullable(ParserUtil.parseTags(argMultimap.getValue(PREFIX_TAG).get()));
-
+        if (nameQuery.isEmpty() && tagQuery.isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, PersonFindCommand.MESSAGE_USAGE));
+        }
         return new PersonFindCommand(new PersonContainsPredicate(nameQuery, tagQuery));
     }
 

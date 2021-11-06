@@ -112,7 +112,7 @@ public abstract class Group implements Notable {
      */
     public static boolean isValidGroupName(String test) {
         // TODO: Check if this is the only condition.
-        return !test.matches(".*[:/].*");
+        return !test.matches(".*[:/].*") && !test.isEmpty();
     }
 
     public void addPerson(Person p) {

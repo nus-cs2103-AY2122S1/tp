@@ -92,7 +92,6 @@ public class LogicManager implements Logic {
      * @throws CommandException If an error occurs during command execution.
      */
     public void executeSaveNote(Notor notor) throws CommandException {
-        // TODO: Update Group Display
         try {
             storage.saveNotor(notor);
         } catch (IOException ioe) {

@@ -103,7 +103,6 @@ public class ParserUtil {
      */
     public static SuperGroup parseSuperGroup(String sg) throws ParseException {
         requireNonNull(sg);
-        // TODO: Check if that edge cases is covered. Such as no colon etc
         String trimmedGroup = sg.trim();
         if (!SuperGroup.isValidGroupName(trimmedGroup)) {
             throw new ParseException(Group.MESSAGE_CONSTRAINTS);
