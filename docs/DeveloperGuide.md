@@ -305,7 +305,7 @@ missing fields imply that the user wants to edit or delete an existing claim. Th
 
 <img src="images/ClaimCommandExecuteActivityDiagram.png" width="500" />
 
-There are 3 possible outcomes from the execution of a ClaimCommand.
+There are 3 possible outcomes from the execution of a ClaimCommand (shown in blue above).
 1. Add a new claim to the client
 2. Edit an existing claim of the client
 3. Delete an existing claim of the client
