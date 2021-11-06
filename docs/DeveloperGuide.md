@@ -287,6 +287,50 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 This section describes some noteworthy details on how certain features are implemented.
 
 ### Task add command: `tadd`
+This feature allows Ailurus users to add a new task for multiple members identified by their `MEMBER_INDEX` displayed in the currently shown member list.
+
+This feature can be accessed by using `tadd` command with parameters of
+* `/n NAME`: the name of the task to add
+* `/d DATE_TIME`: the deadline of the task to add
+* multiple `/m MEMBER_INDEX`: multiple target members identified by the index displayed in the currently shown member list
+
+Given below is the sequence diagram when a user provides a valid `tadd` command: `tadd /n meeting /d 11/11/2021 20:00 /m 1 /m 2`
+to add a new task with its name and deadline to the first and second member displayed in the currently shown member list.
+
+<img src="images/task/TaskAddSequenceDiagram.png" width="450" />
+
+As seen in the diagram above, once the user entered the `tadd` command,
+the `Logic` component will parse the parameters and create a `Task` object based on the parameters and a `TaddCommand` object.
+
+<img src="images/task/TaskAddExecutionSequenceDiagram.png" width = 450 />
+
+After `LogicManager` receives the `TaddCommand` object, 
+1. `LogicManager` will call the `execute` method of `TaddCommand`.
+2. `TaddCommand` will call `Model#getFilteredMemberList` to get the last shown member list.
+3. `TaddCommand` will get the list of target members based on the `MEMBER_INDEX` list and the last shown member list.
+4. `TaddCommand` will call `Model#addTask(targetMember, taskToAdd)` to add the new task to each target member .
+5. `TaddCommand` will create a `CommandResult` object and return it to `LogicManager`.
+
+### Mark a task as done command: `tdone`
+This feature allows Ailurus users to mark multiple tasks as done. These tasks are identified by their `TASK_INDEX` displayed in the currently shown task list.
+
+This feature can be accessed by using `tdone` command with multiple `/t TASK_INDEX` parameters.
+
+Given below is the sequence diagram when a user provides a valid `tdone` command: `tdone /t 1 /t 2` to mark the first and second tasks in the task list as done.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The diagram below does not include the details of the construction of `TdoneCommand` object,
+because its implementation is similar to the construction of `TaddCommand` shown in the previous example.
+
+</div>
+
+<img src="images/task/TaskDoneSequenceDiagram.png" width = 450 />
+
+After `LogicManager` receives the `TdoneCommand` object,
+1. `LogicManager` will call the `execute` method of `TdonedCommand`.
+2. `TdoneCommand` will call `Model#getFilteredTaskList` to get the last shown task list.
+3. `TdoneCommand` will get the list of target tasks based on the `TASK_INDEX` list and the last shown task list.
+4. `TdoneCommand` will construct a completed `Task` object based on each target task.
+5. `TdoneCommand` will call `Model#setTask(targetTask, completedTask)` to set each original target task to a completed task.
+6. `TdoneCommand` will create a `CommandResult` object and return it to `LogicManager`.
 
 ### \[Proposed\] Undo/redo feature
 
