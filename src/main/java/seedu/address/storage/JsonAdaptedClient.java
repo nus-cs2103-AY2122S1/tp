@@ -191,4 +191,7 @@ class JsonAdaptedClient {
                 modelDisposableIncome, modelCurrentPlan, modelLastMet, modelNextMeeting, modelTags);
     }
 
+    public String getClientId() {
+        return clientId;
+    }
 }

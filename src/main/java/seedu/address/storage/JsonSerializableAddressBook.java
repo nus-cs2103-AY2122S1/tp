@@ -25,16 +25,13 @@ class JsonSerializableAddressBook {
 
     private final List<JsonAdaptedClient> clients = new ArrayList<>();
 
-    private String clientCounter;
-
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given clients.
+     * Gets the biggest ClientId from the clients and use that to initialise the clientCounter.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("clients") List<JsonAdaptedClient> clients,
-                                       @JsonProperty("clientCounter") String clientCounter) {
+    public JsonSerializableAddressBook(@JsonProperty("clients") List<JsonAdaptedClient> clients) {
         this.clients.addAll(clients);
-        this.clientCounter = clientCounter;
     }
 
     /**
@@ -44,18 +41,6 @@ class JsonSerializableAddressBook {
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         clients.addAll(source.getClientList().stream().map(JsonAdaptedClient::new).collect(Collectors.toList()));
-        this.clientCounter = source.getClientCounter();
-    }
-
-    /**
-     * Returns the clientCounter stored in the addressbook json
-     *
-     * @return String clientCounter that is stored in the addressbook json
-     */
-    public String getClientCounter() {
-
-        return this.clientCounter;
-
     }
 
     /**
@@ -80,7 +65,16 @@ class JsonSerializableAddressBook {
             }
             addressBook.addClient(client);
         }
-        addressBook.setClientCounter(getClientCounter());
+        if (clients.size() == 0) {
+            addressBook.setClientCounter("0");
+        } else {
+            int highestClientId = clients.stream()
+                .map(JsonAdaptedClient::getClientId)
+                .mapToInt(Integer::parseInt)
+                .max().getAsInt();
+            addressBook.setClientCounter(String.valueOf(highestClientId + 1));
+        }
+
         return addressBook;
     }
 
