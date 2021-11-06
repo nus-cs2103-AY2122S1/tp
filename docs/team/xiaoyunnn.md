@@ -11,7 +11,7 @@ Given below are my contributions to the project.
 
 * **New Feature**: Added a tag command that allows users to view all existing tags in TAB.
   * What it does: This feature allows users to view a list of all existing tags created for the students together with the number of students labelled with each tag.
-  * Justification: This feature improve s the user experience as users can add different tags to the students for better organization.
+  * Justification: This feature improves the user experience as users can add different tags to the students for better organization.
   * Highlights: This feature complements the Find feature. Filtering by tags require users to input the exact tag name(s). 
     If users are unsure of the exact existing tag names, they can first view the tag list then filter students by the tag names they are interested in. 
     There are multiple ways of implementing this enhancement. The current design is chosen due to the balance between ease of implementation, efficiency as well as space allocation.
