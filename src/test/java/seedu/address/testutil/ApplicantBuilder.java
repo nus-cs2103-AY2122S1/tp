@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import seedu.address.model.applicant.Address;
 import seedu.address.model.applicant.Applicant;
+import seedu.address.model.applicant.ApplicantParticulars;
 import seedu.address.model.applicant.Email;
 import seedu.address.model.applicant.Name;
 import seedu.address.model.applicant.Phone;
@@ -94,6 +95,10 @@ public class ApplicantBuilder {
     public ApplicantBuilder withGitHubProfile(String githubUrl) {
         this.gitHubProfile = ProfileUrl.ofNullable(githubUrl);
         return this;
+    }
+
+    public ApplicantParticulars getParticulars() {
+        return new ApplicantParticulars(name, phone, email, address, position.getTitle(), gitHubProfile);
     }
 
     public Applicant build() {

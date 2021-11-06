@@ -44,6 +44,7 @@ public class PositionPieChart extends PieChart {
         int applicantCount = applicantsUnderPosition.size();
         return Arrays.stream(ApplicationStatus.values())
                 .map(status -> createPieChartData(applicantsUnderPosition, applicantCount, status))
+                .filter(pieChartData -> pieChartData.getPieValue() != 0)
                 .collect(Collectors.toCollection(FXCollections::observableArrayList));
     }
 
@@ -71,7 +72,7 @@ public class PositionPieChart extends PieChart {
     private void installTooltips() {
         getData().forEach(data -> {
             Tooltip tooltip = new Tooltip();
-            tooltip.setText(data.getPieValue() + "%");
+            tooltip.setText(String.format("%.1f%%", data.getPieValue()));
             Tooltip.install(data.getNode(), tooltip);
         });
     }
