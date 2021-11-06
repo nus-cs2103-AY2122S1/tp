@@ -120,6 +120,9 @@ Refer to the [Features](#features) below for details of each command.
 <a name="command-format-info"></a>
 **:information_source: Notes about the command format:**<br>
 
+* Command words (like `add`, `find`, `help`, etc.) are always lowercase and are case-sensitive.
+  e.g. `Help` will not be understood by Dash, but `help` will. 
+
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
@@ -460,6 +463,7 @@ by 23:59".
 :scroll: Notes:
 
 * Assigns people, specified with `PERSON_INDEX`, to the task at the specified `INDEX`.
+  * At least one person must be provided.
   * You can assign multiple people to the same task at once.
   * The `INDEX` refers to the position of the task in the displayed task list as indicated by the number next to its 
     description.
