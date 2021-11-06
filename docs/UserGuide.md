@@ -111,7 +111,7 @@ Follow the getting started tutorial steps below to learn more about what SPAM pr
    set a password. Type in a password and press `enter` to continue.
    
    <figure class="figure">
-       <img src="images/setUpPassword.png" class="figure-img img-fluid rounded" alt="Set Password Prompt Display">
+       <img src="images/SetUpPassword.png" class="figure-img img-fluid rounded" alt="Set Password Prompt Display">
        <figcaption class="figure-caption">Figure 1: Set Password Prompt Display</figcaption>
    </figure>
 
