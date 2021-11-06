@@ -1298,14 +1298,20 @@ testers are expected to do more *exploratory* testing.
 
     * Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
     * Resize the window to an optimum size. Move the window to a different location. Close the window.
 
     * Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+3. _{ more test cases …​ }_
+
+#### Adding a lesson
+
+1. Successful addition of a lesson.
+
+    * Prerequisites: All parameters are entered correctly as according to the DG's [Add Lesson Feature](#add-lesson-feature) 
 
 #### Deleting a student
 
@@ -1346,7 +1352,7 @@ testers are expected to do more *exploratory* testing.
    
 #### Rostering
 
-1. Rostering by `LESSON_INDEX`
+1. Rostering a lesson by `LESSON_INDEX` while all students and lessons are being shown
 
     * Prerequisites: List all students and lessons using the `list` command. Multiple `Students` and `Lessons` in the 
 list with some `Students` already enrolled in some of the `Lessons`. For `LESSON_INDEX` used, it is within the number
@@ -1358,14 +1364,15 @@ the student list. The lesson list will be updated to show the lesson identified 
 or lesson shown if there is no student enrolled in the lesson identified by the lesson index of `2`. An update message
 showing the number and the name of the students who are enrolled in the lesson will also be shown in the message box.
 
-    * Test case: `roster a`, `roster -`, `roster LESSON_CODE`<br>
+    * Incorrect roster by passing in nothing or non-number as parameter: `roster`, `roster a`, `roster -`, 
+`roster LESSON_CODE`<br>
         Expected: No roster will be applied. An error message will be shown in the message box, warning the user to
 follow the command format by using `LESSON_INDEX`.
 
-    * Test case: `roster 100` (a `LESSON_INDEX` that is larger than the number of `LESSONS`)
+    * Incorrect roster by passing in a a `LESSON_INDEX` that is larger than the number of `LESSONS`: `roster 100`<br>
         Expected: No roster will be applied. An error message will be shown in the message box, warning the user to only
 use valid `LESSON_INDEX`.
-    
+
 #### Filtering
 
 1. Filtering by grade
