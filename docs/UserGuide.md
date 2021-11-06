@@ -323,15 +323,42 @@ Shows a list of all applicants in RecruitIn.
 
 Format: `list`
 
+
+### Deleting an applicant : `delete`
+
+Deletes applicants by their index from the applicants list in RecruitIn.
+
+Format: `delete INDEX...`
+
+***Note:*** *As mentioned in [Basic Command Format](#basic-command-format), you can delete multiple applicants by including one or more indexes here.*
+
+* The `INDEX` refers to the index number shown in the displayed applicants list.
+* `INDEX` **must be a positive integer** such as 1, 2, 3, …​
+* `INDEX` uses **1-based indexing**, which means the first applicant in the list has the `INDEX`  1.
+*  You should type at least one `INDEX`. (i.e. `delete ` is not a valid command)
+*  You should not type duplicate `INDEX`s. (i.e. `delete 2 2` is not a valid command)
+* You should not type`INDEX` which exceeds the total number of applicants in the displayed applicants list.
+
+Examples:
+* After you execute the command `list`, `delete 1` deletes the 1st applicant listed in RecruitIn.
+* After you execute the command `find n/John`, `delete 1` deletes the 1st applicant in the results of the `find` command.
+* After you execute the command `list`, `delete 2 4 7` deletes the 2nd, 4th and 7th applicants listed in RecruitIn.
+
+<p align="center"><a href="#table-of-contents">Click here to see the table of contents</a></p>
+
+
 ### Finding an applicant : `find`
 
 Finds applicants by specific prefixes.
 
 Format: `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMPLOYMENT_TYPE] [s/EXPECTED_SALARY] [l/LEVEL_OF_EDUCATION] [y/YEARS_OF_EXPERIENCE]  [t/TAG]  [i/INTERVIEW] [nt/NOTES] [d/DONE]`
 
-* Find command must take **at least 1** prefix input.
-* If you input multiple of the same prefix, **only the last** prefix will be used for the search of that category.
-* Input for each prefix can contain multiple **keywords** separated by whitespace, e.g. `n/John Mary`, `t/friend colleague`
+***Note:*** *As mentioned in [Basic Command Format](#basic-command-format), you can include one or more of the search terms.*
+
+* You can key in parameters in either UPPER CASE or small case. 
+* If you key in multiple of the same prefix (e.g. `find n/alex n/bernice`) , the program will only find you applicants based on **the last** prefix (i.e. `n/bernice`).
+  ![FindInput](./images/features/Find.png)
+* You can key in each prefix with **multiple keywords** separated by whitespace, e.g. `n/John Mary`, `t/friend colleague`
 
 <div markdown="block" class="alert alert-warning">
 
@@ -340,30 +367,23 @@ Format: `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMPLOYMEN
 
 </div>
 
-* Inputs for all prefixes are **case-insensitive**.
-
-<div markdown="block" class="alert alert-warning">
-
-* Applicants will not be filtered by prefixes that are not provided.
-* Applicants will also not be filtered by prefixes that are provided, yet have empty inputs. (i.e. `find d/` will return all applicants unfiltered by their ***done*** status)
-
-</div>
+* You should not find applicants by prefix with empty parameters. (i.e. `find d/` will show you all applicants **unfiltered** by their ***done*** status)
 
 Examples:
-* `find n/John Mary` finds all applicants with either `John` or `Mary` as values for name prefix.
-* `find n/John n/Mary` finds all applicants with only `Mary` as values for name prefix.
-* `find t/friend colleague` finds all applicants with `friend` or `colleague` as values for tag prefix.
+* `find n/John Mary` finds you all applicants with either `John` or `Mary` as values for name prefix.
+* `find n/John n/Mary` finds you all applicants with only `Mary` as values for name prefix.
+* `find t/friend colleague` finds you all applicants with `friend` or `colleague` as values for tag prefix.
 * `find n/John Mary t/friend colleague`
 * `find n/Bob p/87654321 e/bob@gmail.com r/Software Engineering et/Full time s/4000 l/High School y/2 nt/has the credentials d/Not Done`
 
 <div markdown="block" class="alert alert-success">
-**:information_source: Prefix inputs for `find` command must follow the following input specifications:**<br>
+**:information_source: Prefix parameters for `find` command must follow the following input specifications:**<br>
 
 * You may
-    * refer to [**Find Input Specifications**](#find-inputs) for detailed input specifications.
-    * refer to find input specifications for specific prefixes by clicking on relevant links in the table below.
+    * refer to [**Find Parameter Specifications**](#find-parameters) for detailed parameter specifications, or
+    * refer to find parameter specifications for a specific prefix by clicking on relevant link in the table below.
 
-| Input | Prefix | Specifications |
+| Parameter | Prefix | Specifications |
 | :---: | :---: | :---: |
 | NAME | `n/` | [**name**](#name-n-1) |
 | PHONE_NUMBER | `p/` | [**phone_number**](#phonenumber-p-1) |
@@ -379,61 +399,52 @@ Examples:
 | DONE | `d/` | [**done**](#done-d) |
 
 </div>
+
+<p align="center"><a href="#table-of-contents">Click here to see the table of contents</a></p>
         
 ### Filtering interviews : `filter_interview`
-Filters applicants by interview dates based on whether they are upcoming or in the past (based on current date and time).
-Differs from ```find i/``` as it is not returning all applicants with interviews matching a specific date but 
+Filters applicants by interview dates based on whether they are upcoming or have past current date and time.
+Differs from ```find i/``` as it is not returning you all applicants with a specific interview date but 
 rather all applicants with interviews that fall into the same group (`past` or `future`).
 
 Format: `filter_interview past` or `filter_interview future`
 
-* `filter_interview past` returns applicants with interviews that were in the past (compared to the current date and time).
-* `filter_interview future` returns applicants with interviews that are coming up in the future (compared to the current date and time).
-* Either `past` or `future` must be given as an input after `filter_interview`, and is case-insensitive.
-* Only one input must be given (`filter_interview past future` will not work).
+* `filter_interview past` shows you applicants with interviews that were in the past (compared to the current date and time).
+* `filter_interview future` shows you applicants with interviews that are coming up in the future (compared to the current date and time).
+* You should give either `past` or `future` as an input after `filter_interview`, but not both.
+* You can type in either UPPER CASE or small case for `past` and `future`.
+  
+![FindInput](./images/features/FilterInterviewPast.png)
 
 Examples:
-* If the current date and time is 29th October 2021, 1600, then `filter_interview past` or 
- `filter_interview pAsT` will return applicants with interviews that were before and including
-  29th October 2021, 1600.
+* Let's assume that the current time is [29th October 2021, 1600].
+* If you type`filter_interview past` or 
+ `filter_interview pAsT` in the command box, you are able to see applicants with interviews that were before and including
+  [29th October 2021, 1600].
+* If you type `filter_interview future` or 
+ `filter_interview fUTURE` in the command box, you are able to see applicants with interviews that are after [29th October 2021, 1600].
 
-* If the current date and time is 29th October 2021, 1600, then `filter_interview future` or 
- `filter_interview fUTURE` will return applicants with interviews that are after 29th October 2021, 1600.
-
-### Deleting an applicant : `delete`
-
-Deletes applicants by their index from the list in RecruitIn.
-
-Format: `delete INDEX...`
-
-* Deletes the applicant at the specified `INDEX`.
-* The `INDEX` refers to the index number shown in the displayed applicants list.
-* At least one `INDEX` must be given. (i.e. `delete ` is not a valid command)
-* `INDEX` **must be a positive integer** 1, 2, 3, …​
-* `INDEX` uses **1-based indexing**.
-* Duplicate `INDEX`s are not allowed. (i.e. `delete 2 2` is not a valid command)
-* `INDEX` should not exceed the total number of applicants in the displayed applicants list.
-
-Examples:
-* After using the command `list`, `delete 1` deletes the 1st applicant listed in RecruitIn.
-* After using the command `find n/John`, `delete 1` deletes the 1st applicant in the results of the `find` command.
-* After using the command `list`, `delete 2 4 7` deletes the 2nd, 4th and 7th applicants listed in RecruitIn.
+<p align="center"><a href="#table-of-contents">Click here to see the table of contents</a></p>
 
 ### Showing search terms : `show`
 
-Shows unique search terms available for a specific prefix.
+Shows you unique search terms which you can use for a specific prefix.
 
 Format: `show [n/] [p/] [e/] [r/] [et/] [s/] [l/] [y/] [t/]`
 
-* Finds and displays a list of unique search terms available for a specific prefix.
-* **At least 1** prefix must be given.
-* Unique search terms will only be found for the **first** prefix input.
+***Note:*** *As mentioned in [Basic Command Format](#basic-command-format), you can include any one of the prefixes in square brackets  here.*
+
+* You should type **only 1** prefix that you want the program to show.
+    * If you type multiple prefixes after `show`, the program will only show you the unique search terms found for the **first** prefix input.
+      ![FindInput](./images/features/Show.png)
 
 Examples:
 
-Suppose the applicant data includes 3 applicants with name and role `John, Software Developer`, `Mary, Cook` and `Mary, Cleaner`.
+Suppose the applicants list includes 3 applicants with name and role `John, Software Developer`, `Mary, Cook` and `Mary, Cleaner`.
 * `show n/` will display a list consisting of `John` and `Mary`.
 * `show r/ n/` will display a list consisting of `Software Developer`, `Cleaner` and `Cook`.
+
+<p align="center"><a href="#table-of-contents">Click here to see the table of contents</a></p>
 
 ### Marking an applicant : `mark`
 
