@@ -261,9 +261,18 @@ Next Meeting | IgnoreNullComparable
 
 ### 3.9 Prefix Mapper
 
-The PrefixMapper is a utility class which provides a mapping of a prefix to the relevant methods for the attribute of
-that prefix. This class can help to simplify segments of which require operations that are dependent on the . The PrefixMapper contains a HashMap which map a prefix to their respective PrefixMapperElement.
-A PrefixMapperElement contains getter & setter method and values relevant to an attribute.
+The PrefixMapper is a utility class which provides a mapping of a prefix to the relevant methods for the attribute of that prefix.
+This class help to simplify segments of code which require operations that are dependent on the prefix and its corresponding attribute.
+The PrefixMapper contains a HashMap which map a prefix to their respective PrefixMapperElement.
+A PrefixMapperElement contains getter & setter method and values that are relevant to an attribute.
+
+PrefixMapperElement contains the following:
+* Name of the Attribute
+* Default value of the Attribute
+* Client Attribute getter Function 
+* EditClientDescriptor Attribute setter BiConsumer 
+* EditClientDescriptor Attribute getter Function 
+* Attribute Parser Function
 
 --------------------------------------------------------------------------------------------------------------------
 
