@@ -1288,7 +1288,7 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-#### Launch and shutdown
+#### Launch and Preferences
 
 1. Initial launch
 
@@ -1304,19 +1304,35 @@ testers are expected to do more *exploratory* testing.
     * Re-launch the app by double-clicking the jar file.<br>
       Expected: The most recent window size and location is retained.
 
-3. Shutdown with exit command
+#### Adding a student
 
-    * Type exit into the input box. <br>
-      Expected: The application will close.
+1. Adding a new student with a unique name
 
-4. Shutdown with context menu
+    * Prerequisites: There is no student with the name "John Doe" in the TuitiONE application.
 
-    * Click on file at the top left of the application window.
+    * Test case: `add n/John Doe p/91234567 e/jd@gmail.com a/John street, block 123, #01-01 g/P2` <br>
+      Expected: New student with specified details is added to the student list. Details of the added student are shown in the status message.
 
-    * Click the exit option in the dropdown menu from file. <br>
-      Expected: The application will close.
+    * Test case: `add n/Peter Parker p/92345678 e/pp@gmail.com a/Peter street, block 123, #01-01` <br>
+      Expected: No student is added. Proper command format is shown in the status message.
 
-Note: Only the alert message corresponds to the first encountered incorrect parameter will be shown. User is expected to correct the input parameters one by one.
+    * Other incorrect add commands to try: use the `add` command while missing out one of the following required fields (`n/`, `p/`, `e/`, `a/` and `g/`). <br>
+      Expected: No student is added. Proper command format is shown in the status message.
+
+2. Adding a new student with a duplicate name
+
+    * Prerequisite: There is a student with the name "John Doe" in the TuitiONE application. Otherwise, replace the name "John Doe" in the test case with a name of a student that is already added to the TuitiONE application.
+
+    * Test case: `add n/John Doe p/93456789 e/jd@gmail.com a/John street, block 123, #01-01 g/P2` <br>
+      Expected: No student is added. Error message stating the student already exists is displayed in the status message.
+
+    * Test case: `add n/John Doe p/99999999 e/jd3000@gmail.com a/John street, block 500, #02-02 g/S5` <br>
+      Expected: No student is added. Error message stating the student already exists is displayed in the status message.
+
+3. Adding a new student with any incorrect input
+
+    * Expected: No student is added. An alert message corresponding to the wrongly entered parameter will be shown in the message box to remind the user of the correct command format. <br>
+      _Note: Only the alert message corresponds to the first encountered incorrect parameter will be shown. User is expected to correct the input parameters one by one._
 
 #### Deleting a student
 
@@ -1334,6 +1350,7 @@ Note: Only the alert message corresponds to the first encountered incorrect para
 
     * Other incorrect delete commands to try: `delete`, `delete x`, `delete y` (where x is larger than the list size, and y is a negative integer)<br>
       Expected: Similar to previous.
+
 
 #### Editing a student
 
