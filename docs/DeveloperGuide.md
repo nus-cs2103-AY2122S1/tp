@@ -142,6 +142,33 @@ The `Model` component,
 
 </div>
 
+### Applicant and Position
+
+The `Applicant` and `Position` classes are the two main entities in MrTechRecruiter.  
+`Applicant`s each apply to one `Position`; this relationship is described by the `Application` class.
+The following class diagram illustrates this:
+
+<img src="images/ApplicantPositionClassDiagram.png" width="750" />
+
+`Applicant`s are:
+
+- Uniquely identified by their `Name`, i.e. `UniqueApplicantList` maintains the uniqueness of its members by performing `Name` comparisons.
+  - Additionally, `Name` comparisons are performed on a case-insensitive basis.  
+    **Rationale**: `John Doe` is likely to be the same person as `john doe` or `JOHN DOE`; thus, case-insensitive `Name` comparison is more user-friendly (as users cannot be expected to be case-correct all the time).
+- Indirectly associated to `Position` via `Application`.
+
+`Position`s are:
+
+- Uniquely identified by their `Title`, in a similar fashion to `Applicant`.
+  - `Title` comparisons are also case-insensitive, for the same reasons as above.
+- Indirectly associated to `Applicant` via `Application`.
+
+The `Application` class:
+
+- Encapsulates the 'job application' relationship between `Applicant` and `Position`.
+- The `Position` field **must** exist; i.e. is non-null.
+  - If a `Position` is deleted, all `Application`s referencing it, as well as their corresponding `Applicant`s, are deleted as well.
+
 
 ### Storage component
 
