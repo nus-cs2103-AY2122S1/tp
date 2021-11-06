@@ -28,3 +28,9 @@ Academy Directory runs on all major operating systems! It is optimized for use v
   - [JavaFX](https://openjfx.io/) for the amazing GUI
   - [Jackson](https://github.com/FasterXML/jackson) to save your data
   - [JUnit5](https://github.com/junit-team/junit5) so that we can deliver to you bug-free!
+  - [MDFX](https://github.com/JPro-one/markdown-javafx-renderer) so that you can see User Guide in help without internet
+
+- Background image: 
+  - Taken from the Front End of Source Academy, which link is [here](https://github.com/source-academy/frontend/blob/master/src/assets/academy_background.jpg).
+  The image is released for commercial and distribution in condition of proper acknowledgement, [view license here](https://github.com/source-academy/frontend/blob/master/LICENSE)
+  - Taken from Slides Carnival, [link](https://www.slidescarnival.com), which has also been released for commercial use.
