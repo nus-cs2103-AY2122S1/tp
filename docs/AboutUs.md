@@ -41,10 +41,10 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/wanggljoseph.png" width="200px">
 
 [[github](https://github.com/WangGLJoseph)]
-[[portfolio](team/wangguanlinjoseph.md)]
+[[portfolio](team/wanggljoseph.md)]
 
 * Role: Developer
-* Responsibilities: Module
+* Responsibilities: Module, Task
 
 ### Felissa Faustine
 
