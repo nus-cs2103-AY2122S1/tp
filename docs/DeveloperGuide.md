@@ -21,7 +21,7 @@ Syntax | Meaning
 `text` | A command, or a code block
 <kbd>text</kbd> | A keyboard input, or a button to be clicked on.
 [text](#about-this-guide) | Links to other parts of the document, or links to be opened in the browser.
-_text_ | A _technical_ word with definitions provided in the [Glossary](#glossary), or a caption for images.
+_text_ | A _technical_ word with definitions provided in the [Glossary](#appendix-b-glossary), or a caption for images.
 <div markdown="block" class="alert alert-info"> :information_source: </div> | Indication that the following text is a note, which is useful in helping you understand how TAB works.
 <div markdown="block" class="alert alert-primary"> :bulb: </div> | Indication that the following text is a tip, which allows you to interact with TAB more effectively and quickly.
 <div markdown="block" class="alert alert-warning"> :exclamation: </div> | Indication that the following text is important. Missing it out may impair your user experience and may potentially cause TAB to misbehave!
