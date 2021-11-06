@@ -50,7 +50,7 @@ public class RecurringLesson extends Lesson {
     /**
      * Check if the Lesson object is recurring.
      *
-     * @return true.
+     * @return True.
      */
     @Override
     public boolean isRecurring() {
@@ -71,22 +71,32 @@ public class RecurringLesson extends Lesson {
      * Get the upcoming date of the lesson to display to user.
      *
      * @return The upcoming date on the same day of week if start date
-     * has passed or start date if it has yet to pass.
+     * has passed or start date if it has yet to pass or the date of the last lesson
+     * if end date has passed.
      */
     @Override
     public Date getDisplayDate() {
         Date updatedDate = getStartDate().updateDate(getCancelledDates());
+        // earliest date to display is start date
+        Date earliestDateToDisplay = Collections.max(Arrays.asList(getEndDate().getPreviousDate(getDayOfWeek()),
+            getStartDate()));
         return getEndDate().isBefore(updatedDate) // end date earlier than updated date
-                ? Collections.max(Arrays.asList(getEndDate().getPreviousDate(getDayOfWeek()),
-                getStartDate())) // earliest date to display is start date
+                ? earliestDateToDisplay
                 : updatedDate;
     }
 
+    /**
+     * Check if the two lessons have overlapping date ranges.
+     *
+     * @param other Other Lesson to compare to.
+     * @return True if the date ranges overlap; false if otherwise.
+     */
     private boolean checkOverlapping(Lesson other) {
         requireNonNull(other);
+        boolean isStartDateAfterOtherEnd = getStartDate().getLocalDate().isAfter(other.getEndDate().getLocalDate());
+        boolean isOtherStartAfterThisEnd = other.getStartDate().getLocalDate().isAfter(getEndDate().getLocalDate());;
 
-        return !getStartDate().getLocalDate().isAfter(other.getEndDate().getLocalDate()) // <=
-                && !other.getStartDate().getLocalDate().isAfter(getEndDate().getLocalDate()); // <=
+        return !isStartDateAfterOtherEnd && !isOtherStartAfterThisEnd;
     }
 
     /**
@@ -94,10 +104,11 @@ public class RecurringLesson extends Lesson {
      * cancelled dates as intersection.
      *
      * @param other Other lesson to check for intersection.
-     * @return True if they intersect
+     * @return True if they intersect.
      */
     private boolean checkIntersection(Lesson other) {
-        // Non-terminating recurrence
+        // This method is only called from lessons happening on the same day of the week.
+        // Non-terminating recurrence always intersect
         if (getEndDate().equals(other.getEndDate()) && getEndDate().equals(Date.MAX_DATE)) {
             return getDayOfWeek().equals(other.getDayOfWeek());
         }
@@ -106,7 +117,7 @@ public class RecurringLesson extends Lesson {
         Set<Date> otherCancelledDates = other.getCancelledDates();
 
         // get the intersection
-        // Code reuse from https://stackoverflow.com/questions/60785426/
+        // Code reuse from Ole V.V. from https://stackoverflow.com/questions/60785426/
         LocalDate laterStart = Collections.max(Arrays.asList(getLocalDate(), other.getLocalDate()));
         LocalDate earlierEnd = Collections.min(Arrays.asList(getEndDate().getLocalDate(),
                 other.getEndDate().getLocalDate()));
@@ -120,10 +131,11 @@ public class RecurringLesson extends Lesson {
         Set<Date> cancelledDatesWithinIntersection = cancelledDates.stream()
                 .filter(date -> !date.getLocalDate().isBefore(laterStart)
                         && !date.getLocalDate().isAfter(earlierEnd))
-                .filter(date -> !otherCancelledDates.contains(date))
+                .filter(date -> !otherCancelledDates.contains(date)) // Remove duplicates to get the unique dates
                 .collect(Collectors.toSet());
 
-        // get the number of cancelled dates fro mthe other lesson within this intersection
+        // get the number of cancelled dates from the other lesson within this intersection
+        // duplicate dates have already been removed earlier so no need to remove anymore
         Set<Date> otherCancelledDatesWithinIntersection = otherCancelledDates.stream()
                 .filter(date -> date.getLocalDate().compareTo(laterStart) >= 0
                         && date.getLocalDate().compareTo(earlierEnd) <= 0)
@@ -132,7 +144,8 @@ public class RecurringLesson extends Lesson {
         long numberOfUniqueCancelledDates = cancelledDatesWithinIntersection.size()
                 + otherCancelledDatesWithinIntersection.size();
 
-        return numberOfUniqueCancelledDates < numberOfOverlappingDates;
+        boolean isIntersectionNonNull = numberOfUniqueCancelledDates < numberOfOverlappingDates;
+        return isIntersectionNonNull;
     }
 
     /**
@@ -144,15 +157,15 @@ public class RecurringLesson extends Lesson {
     @Override
     public boolean isClashing(Lesson otherLesson) {
         if (otherLesson.isRecurring()) {
-            return !otherLesson.isCancelled() && !isCancelled()
-                    && checkOverlapping(otherLesson) // check if date range overlaps
-                    && getDayOfWeek().equals(otherLesson.getDayOfWeek()) // same day
-                    && getTimeRange().isClashing(otherLesson.getTimeRange())
-                    && checkIntersection(otherLesson); //check if cancelled dates number the size of intersection
+            return !otherLesson.isCancelled() && !isCancelled() // Check if either lesson is cancelled
+                    && checkOverlapping(otherLesson) // check if date ranges overlap
+                    && getDayOfWeek().equals(otherLesson.getDayOfWeek()) // check if on same day of week
+                    && getTimeRange().isClashing(otherLesson.getTimeRange()) // check if time ranges overlap
+                    && checkIntersection(otherLesson); //check if intersection is not empty
         } else {
             return !otherLesson.isCancelled() // other makeup lesson is not cancelled
-                    && hasLessonOnDate(otherLesson.getStartDate())
-                    && getTimeRange().isClashing(otherLesson.getTimeRange());
+                    && hasLessonOnDate(otherLesson.getStartDate()) // this lesson occurs on same date as other
+                    && getTimeRange().isClashing(otherLesson.getTimeRange()); // check if time ranges overlap
         }
     }
 

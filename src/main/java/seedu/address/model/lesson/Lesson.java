@@ -35,7 +35,8 @@ public abstract class Lesson implements Comparable<Lesson> {
     /**
      * Every field must be present and not null.
      *
-     * @param date Date of lesson.
+     * @param date Start date of the lesson.
+     * @param endDate End date of the lesson.
      * @param timeRange Time range of the lesson.
      * @param subject Subject of the lesson.
      * @param homework Homework for the lesson.
@@ -185,7 +186,7 @@ public abstract class Lesson implements Comparable<Lesson> {
      * Returns true both lessons clash.
      *
      * @param otherLesson The other lesson to be compared with.
-     * @return True if and only if lessons clash.
+     * @return True if and only if the lessons clash.
      */
     public abstract boolean isClashing(Lesson otherLesson);
 
