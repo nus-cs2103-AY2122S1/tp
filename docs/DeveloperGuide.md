@@ -694,6 +694,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Applicant**: Represents a person that is searching for a job
 * **Applied Role**: Represents the job a person is applying for
+* **Command**: Refers to a text input (which can be combined with user inputs) that executes certain features in RecruitIn
 * **Employment Type**: Represents the type of work contract, specifically Full time, Part time, Temporary & Internship
 * **Expected Salary**: Represents the minimum amount the applicant is willing to be paid for the job
 * **Level of Education**: Represents the highest/current level of education the applicant has, specifically Elementary, Middle School, High School, University, Bachelors, Masters, PhD
