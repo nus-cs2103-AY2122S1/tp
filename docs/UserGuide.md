@@ -624,16 +624,16 @@ Example Usage:
 
 ### Event Time period
 
-Currently, Events only have a start datetime and does not have an ending datetime. In v1.5, Events will be revamped to
-include have an additional ending datetime. This will allow Events to occupy a period of time instead of a specific date
+Currently, Events only have a start datetime and do not have an end datetime. In v1.5, Events will be revamped to
+include an end datetime. This will allow Events to occupy a period of time instead of only a specific date
 and time. More details of the revamp will be made available in v1.5 Patch notes when it is released.
 
 ### Detect clashes in schedule
 
-Currently, Participants can be enrolled to infinite number of Events regardless of whether there are schedule clashes.
+Currently, Participants can be enrolled into an infinite number of Events regardless of whether doing so would result in a clash in schedule.
 Enrolling Participants would require users to be aware of possible clashes. With the implementation of Event Time period,
 updates will also include a mechanism to check for schedule clashes in v1.5. This will reduce the hassle for users to
-check for possible schedule clashes.
+check for possible schedule clashes manually when enrolling a participant.
 
 --------------------------------------------------------------------------------------------------------------------
 

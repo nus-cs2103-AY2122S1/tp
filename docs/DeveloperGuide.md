@@ -303,7 +303,7 @@ event list. When the command is executed, the `model` will filter the `FilteredL
 #### Implementation Rationale
 
 With considerations to how the `Event` class is implemented, some events do not have time associated to them.
-We feel that since all `Events` have a date associated through the `EventDate` class, filtering should be done primarily 
+We feel that since all `Event` objects have a date associated through the `EventDate` class, filtering should be done primarily 
 through date i.e. `EventDate`. However, understanding that users might want to filter by time too, it is included as an 
 optional criteria for filtering.
 
