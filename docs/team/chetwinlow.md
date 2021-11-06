@@ -43,8 +43,7 @@ restaurants.
 * Implemented logic for earlier iterations of [`Find`](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/98) command.
     
 #### Review and Mentoring contributions
-* PRs reviewed with comments(non-exhaustive): PRs [\#227](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/227), [\#191](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/191), 
-      [\#99](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/99), [\#92](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/92)
+* PRs reviewed with comments(non-exhaustive): PRs [\#227](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/227), [\#191](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/191), [\#99](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/99), [\#92](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/92)
 
 #### Contributions beyond the team project
 * Evidence of helping others: 
