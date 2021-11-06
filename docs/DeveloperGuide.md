@@ -195,6 +195,7 @@ The `VersionedModel` component,
 * does not depend on any of the other three components (as the `VersionedModel` represents data entities of the domain, they should make sense on their own without depending on other components)
 * interfaces with `VersionControl` via the `VersionControlController`, which implements the `Version` API
 and thus gives the `VersionedModel` component the ability to interface with version control entities such as `Commit`.
+* stores a `AddtionalViewModel` that stores additional information required by the UI's `VisualizerDisplay` such as number statistic for the `Visualize` command.
 
 The above implementation is chosen because it makes _turning off_ version control relatively simple; a stub `VersionControlController`
 can be used instead.
