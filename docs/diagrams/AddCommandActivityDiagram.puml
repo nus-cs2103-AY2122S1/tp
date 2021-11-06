@@ -13,6 +13,9 @@ valid])
     if () then ([new Person already
     exists in the AddressBook])
 
+        :GUI Result Display shows error message
+        containing existing Person(s);
+
         stop
 
     else ([else])
@@ -20,8 +23,7 @@ valid])
 
     :Add the new Person into the AddressBook;
 
-    :GUI Result Display updated with
-    new correct list of applicants;
+    :GUI is updated with new correct list of applicants;
 else ([else])
 endif
 stop
