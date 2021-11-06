@@ -1,5 +1,7 @@
 ---
-layout: page title: Wang Pei's Project Portfolio Page parent: The Team
+layout: page 
+title: Wang Pei's Project Portfolio Page 
+parent: The Team
 ---
 
 ### Project: BogoBogo
