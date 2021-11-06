@@ -54,18 +54,19 @@ Access my [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?s
   * Justification:  As users need to check their tuiton classes they have created, the class information need to be stored. We choose to store
     the data into json file because it is easy to export and import.
   * Highlights:
-
   
 * **Testing**: Create tests for the `ClassLimit`, `Timeslot`, `ClassName`, `UniqueTuitionList` to increase coverage. (Pull request)
+  
+  
+<div style="page-break-after: always;"></div>
 
-  <div style="page-break-after: always;"></div>
 #### Contributions to the User Guide
-  * Added documentation for the features `addclass` and `today` (Pull Request [\#109](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/109))
-#### Contributions to the Developer Guide
-  * Added the implementation details of time conflict management (Pull Request [\#108](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/108))
-  * Added the UML diagram for time conflict management (Pull Request [\#203](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/203))
-  * Added Use cases for **TutAssistor**.
+* Added documentation for the features `addclass` and `today` (Pull Request [\#109](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/109))
 
+#### Contributions to the Developer Guide
+* Added the implementation details of time conflict management (Pull Request [\#108](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/108))
+* Added the UML diagram for time conflict management (Pull Request [\#203](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/203))
+* Added Use cases for **TutAssistor**.
 
 #### Contributions to the team-based tasks
 * Proposed the attributes of a tuition class
