@@ -81,8 +81,8 @@ Some example commands you can try:
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
-Here are some general notes about how to understand the documentation of the commands below. It includes examples 
-to help you better understand how the documentation translates to actual commands you might feed into SalesNote.
+Here are some general notes for you to aid in understanding the documentation below. It includes examples 
+to help you better understand how the documentation translates to actual commands you can key into SalesNote.
 
 * In the documentation, words in `UPPER_CASE` are the parameters you should supply. Some examples include:
     * In `addclient n/NAME ...`, `NAME` should be replaced by a name of your choice. e.g. `addclient n/Jacob Tan ...`
@@ -109,23 +109,8 @@ to help you better understand how the documentation translates to actual command
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-  
-
-
-
-
-
-* Amount accepts a real number for its input, with an upper limit of 1 billion, and no negative amounts allowed. Note 
-  that it supports accuracy of up to 15-17 decimal places, and accuracy may be lost beyond that point.
-
-
 
 </div>
-
-
-
-
-
 
 ### Viewing help : `help`
 
@@ -141,14 +126,11 @@ These commands relate to helping you record and manage client information using 
 information into the application, there are several fields of information you can store, such as the client's gender,
 or their body measurements for clothing.
 
-The following are some notes on the purpose and requirements of these fields:
-
 <div markdown="block" class="alert alert-info">
 **:information_source: Notes about the client commands:**<br>
 
 * SalesNote allows you to record the gender of the client. The gender field takes accepts "M" or "Male" to
-  indicate male gender, and "F" or "Female" to indicate female gender. </br>
-  Note that this ignores case, thus "male" or "FEMALE" will also be accepted.
+  indicate male gender, and "F" or "Female" to indicate female gender. Note that this ignores case, thus "male" or "FEMALE" will also be accepted.
 * A related point, is that SalesNote also allows you to store their measurements for easy reference. This field
   is **different depending on their gender**. Take note of the following points:
     * A male's body measurements should be of the format height_waist_shoulder in cm, and it should not be blank.
@@ -218,7 +200,7 @@ Format: `editclient INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [m/MEA
 <div markdown="span" class="alert alert-primary">:information_source: **Note:**
 Editing the gender of a customer is something we expect to be quite rare. Nevertheless, if you find yourself needing to
 do so, do not forget to also edit their body measurements when you change their gender! As a reminder, the measurements
-field is different based on whether the client's gender is male or female.
+SalesNote requires are different depending on the gender of the client.
 </div>
 
 * Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
@@ -226,10 +208,9 @@ field is different based on whether the client's gender is male or female.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the client will be removed i.e adding of tags is not cumulative. In particular, this means
   </br> that if you want to keep all existing tags, and add a new one, you should re-type all the tags in the command.
-    * e.g. Suppose the first displayed client already has the tag friend, and you wish to add the tag regular. The 
+    * e.g. Suppose the first displayed client already has the tag `friend`, and you wish to add the tag `regular`. The 
       command is then: </br> `editclient 1 t/friend t/regular`
-* You can remove all the client’s tags by typing `t/` without
-    specifying any tags after it.
+* You can remove all the client’s tags by typing `t/` without specifying any tags after it.
 
 Examples:
 *  `editclient 1 p/91234567 e/jacobtan@example.com` Edits the phone number and email address of the 1st client to be `91234567` and `jaconbtan@example.com` respectively.
@@ -245,20 +226,18 @@ Format: `findclient KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g. `Jane Lim` will match `Lim Jane`
 * Only the name is searched.
 * Only full words will be matched e.g. `Jan` will not match `Jane`
-* Clients matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Jane Tay` will return `Jane Tan`, `Alice Tay`
+* Clients matching at least one keyword will be returned, for instance searching `Jane Tay` will return `Jane Tan`, `Alice Tay`
 
 Examples:
-* `findclient jacob` returns `Jacob Chua` and `Jacob Tan`
-* `findclient alex david` returns `Alex Yeoh`, `David Li`<br>
+* `findclient jacob` can return `Jacob Chua` and `Jacob Tan`
+* `findclient alex david` can return `Alex Yeoh` and `David Li`
 
 ### Listing all clients : `listclients`
 
 Displays a list of all clients in SalesNote to you. 
 
-One common use of this command is to remove a filter; 
-for example you might have used `findclient tan` to display only clients whose names contain "Tan". 
-</br> Following with the command `listclients` allows you to refresh the client list to display all clients currently in SalesNote.
+One common use of this command is to remove a filter. For instance you might have used `findclient tan` to display only clients
+whose names contain "Tan". Following with the command `listclients` allows you to refresh the client list to display all clients currently in SalesNote.
 
 Format: `listclients`
 
@@ -266,16 +245,15 @@ Format: `listclients`
 
 ## Order Commands
 These commands are for helping you to manage your incoming orders and manage accounts with SalesNote. Orders are created
-with a label describing them, a client, an amount, and a date. <br> The following are a few points to take note of:
+with a label describing them, a client, an amount, and a date. The following are a few points to take note of:
 
-* The amount field is any number from 0 to 1 billion. 
-* The date field should follow one of the following formats:
+* The amount field is any number from 0 to 1 billion.
 * The client for the order **must exist in SalesNote** to create the order. For instance <br>
 `addorder l/blue blouse c/Jane a/22.50 d/20 August 2021` will fail if the client with name "Jane" is not in SalesNote.
 * Editing a client, will also edit all the orders tied to the client. For instance, if a client's name is changed from
-"Alice" to "Alice Lin", all orders addressed to "Alice" will now be addressed to "Alice Lin".
-* Note that the name is matched regardless of capitalisation! So if you have a client named "James", your order can 
-be addressed to "james", "JAMES", "James" and so on.
+"Alice" to "Alice Lin", all orders addressed to "Alice" will now be addressed to "Alice Lin". Note that the name is matched 
+**regardless of capitalisation!** So if you have a client named "James", your order can be addressed to "james", "JAMES", "James" and so on.
+* The date field should follow one of the following formats:
 
   Format | Example
       --------|------------------
@@ -357,7 +335,8 @@ Format: `markorder INDEX`
 
 This command can be combined with others for ease of use. Some examples:
 * Using `findorder Alice` to find all orders addressed to clients named Alice, followed by `markorder 1` to mark the first such order as complete.
-* Using `incompleteorders` to filter the list to show only the orders where payment is outstanding first, to quickly mark the correct one as complete a client is making payment.
+* Using `incompleteorders` to filter the list to show only the orders where payment is outstanding first, to quickly find the 
+  correct one to mark as complete when a client is making payment.
 
 ### Sorting orders : `sortorders`
 
@@ -391,24 +370,23 @@ Examples:
 
 ### Viewing total orders : `totalorders`
 
-This displays the total dollar amount for each client in SalesNote to you.
+This opens a new window, displaying the total dollar amount of all orders from each client in SalesNote to you.
+
+Format: `totalorders`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Press the ESCAPE key to close the total orders window
+</div>
 
 <div markdown="block" class="alert alert-info">
 :information_source: The total orders displayed are based on the clients in the application. However, if a client in
 SalesNote does not have any orders keyed in yet, they will not be shown.
 </div>
 
-Format: `totalorders`
-
 ![TotalOrdersWindow](images/TotalOrdersWindow.png)
 <figcaption align = "center">e.g. In the figure above, the application has three clients Ng Chin Gan, Alice Seah,
 and Jacob Tan, but Jacob Tan is not shown as there are no orders from him in SalesNote yet</figcaption>
 
-
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-Press the ESCAPE key to close the total orders window
-</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -427,6 +405,9 @@ as completed, and also provides you with an ability to tag tasks to sales orders
         * `addtask sew buttons t/general`
         * `addtask sew buttons t/SO1`
         * `addtask sew buttons` (for convenience, if the tag is omitted, SalesNote will classify the task as "general")
+* This gives you a convenient way to tag tasks to orders. For instance, if an order of interest has id 4, you can tag all
+  relevant tasks `SO4` and later type `findtask SO4` to find all these related tasks. As a reminder, if the order
+  should be deleted, SalesNote will automatically remove the tasks tagged to that order for you.
 * The number after the 'SO' prefix **must correspond to the id of an existing order**. 
 * The date that accompanies tasks should be keyed in one of the following formats:
   
