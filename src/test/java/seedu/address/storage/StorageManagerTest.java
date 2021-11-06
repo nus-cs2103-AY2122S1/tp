@@ -41,11 +41,11 @@ public class StorageManagerTest {
     }
 
     private Path getFilePath(String fileName) {
-        return TEST_DATA_FOLDER.resolve(fileName);
+        return testFolder.resolve(fileName);
     }
 
     @Test
-    public void getUserProfilePath_samePath_success() throws IOException {
+    public void getUserProfilePath_samePath_success() {
         Path expectedPath = getFilePath("userprofile.json");
         assertEquals(expectedPath, storageManager.getUserProfilePath());
     }
@@ -69,7 +69,7 @@ public class StorageManagerTest {
 
     @Test
     public void saveUserProfile_correctPath_success() {
-        Path profileFilePath = getFilePath("userprofilesave.json");
+        Path profileFilePath = TEST_DATA_FOLDER.resolve("userprofilesave.json");
         JsonUserProfileStorage userProfileStorage = new JsonUserProfileStorage(profileFilePath);
         Optional<JsonSerializableUserProfile> userProfile;
         try {
