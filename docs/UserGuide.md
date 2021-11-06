@@ -597,6 +597,8 @@ A lesson can be categorised into 2 types:
 A lesson can be identified by the index number shown in the lesson list of the student. The lesson index specified for commands must be a valid index number shown in the lesson list of the student.
 </div>
 
+<div style="page-break-after: always;"></div>
+
 #### Lesson parameters
 
 <table id="lesson-param-table">
@@ -721,10 +723,11 @@ Examples:
 * `find n/john` followed by `ladd 1 date/30 MAR 2021 time/1630-1745 subject/Physics hw/Worksheet 1 rates/25.00`
   adds the makeup lesson to the 1st student in the results of the `find` command.
 
+<div style="page-break-after: always;"></div>
+
 #### Editing a lesson: `ledit`
 
 Edits the specified lesson of the specified student in TAB with the indicated changes for specified fields.
-
 
 Format: `ledit INDEX LESSON_INDEX [recurring/END_DATE] [date/START_DATE] [time/TIME_RANGE] [subject/SUBJECT] [rates/LESSON_RATES] [f/OUTSTANDING_FEES] [hw/HOMEWORK]… [cancel/CANCEL_DATE]… [uncancel/UNCANCEL_DATE]…​`
 
@@ -937,7 +940,8 @@ Brings you to TAB's calendar interface for you to see all your scheduled lessons
 Format: `calendar`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-All the other commands in this [Viewing your Calendar](#viewing-your-calendar) section act as a shortcut that opens the calendar as well!
+
+All the other commands in this [Managing Your Schedule](#managing-your-schedule) section act as a shortcut that opens the calendar as well!
 For example, the `day` command below opens the calendar, **and** goes to the day page. You can skip typing `calendar`! 
 </div>
 
