@@ -358,7 +358,7 @@ Step 3. The `ScoreDescriptor` is used to find the assessment and the student(s) 
 
 The following activity diagrams summarise what happens when a user executes the `show` command to show the performance analysis of a student, a group or the cohort in an assessment. In the case where the display is not presented successfully, an error message will be displayed with the reason.
 
-<div style="text-align:center">
+<div style="center">
 
 <img src="/images/ShowActivityDiagram.png" alt="ShowActivityDiagram">
 
