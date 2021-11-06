@@ -185,6 +185,7 @@ Examples:
 * `friend --edit Draco -n Kevin` Sets the name of existing friend with the `FRIEND_ID` "Draco" to "Kevin".
 
 Screenshot: 
+
 ![Friend edit Screenshot](images/ui-screenshots/friend-edit.png)
 <br><center><ins>Image: Command feedback box after editing an existing friend `kevcool`'s name to `Kevin Foong`</ins></center>
 
@@ -238,8 +239,12 @@ Examples:
 
 Screenshot:
 
+![Friend link Screenshot](images/ui-screenshots/link-feedback.png)
+<br><center><ins>Image: Command feedback box after linking a friend `marcustxk` to a game `RocketLeague`</ins></center>
+
 ![Friend link Screenshot](images/ui-screenshots/friend-link.png)
-<br><center><ins>Image: gitGud after linking a friend to a game</ins></center>
+<br><center><ins>Image: gitGud after running `friend --get marcustxk`, after linking a friend `marcustxk` 
+to a game `RocketLeague`</ins></center>
 
 #### Unlinking a game from a friend: `friend --unlink`
 
@@ -257,8 +262,13 @@ Examples:
 
 Screenshot:
 
+![Friend unlink Screenshot](images/ui-screenshots/unlink-feedback.png)
+<br><center><ins>Image: Command feedback box after unlinking a friend `marcustxk` from a game 
+`RocketLeague`</ins></center>
+
 ![Friend unlink screenshot](images/ui-screenshots/friend-unlink.png)
-<br><center><ins>Image: gitGud after unlinking a game `DOTA` from friend `Draco`</ins></center>
+<br><center><ins>Image: gitGud after running `friend --get marcustxk`, after unlinking a game `DOTA` from a friend 
+`marcustxk`</ins></center>
 
 #### Assigning a skill value for a linked game : `friend --skill`
 
@@ -280,7 +290,12 @@ Examples:
 Screenshot:
 
 ![Ui after assigning skill value](images/ui-screenshots/friend-skill-success.png)
-<br><center><ins>Image: Command feedback box after assigning skill value to game linked to friend</ins></center>
+<br><center><ins>Image: Command feedback box after assigning skill value `7` to a game `Valorant` linked to a
+friend `Draco`</ins></center>
+
+![Friend skill screenshot](images/ui-screenshots/friend-skill-then-get.png)
+<br><center><ins>Image: gitGud after running `friend --get Draco`, after adding a skill value `7` for a 
+friend `Draco` for a game `Valorant`</ins></center>
 
 #### Scheduling a friend: `friend --schedule`
 
@@ -316,8 +331,12 @@ Examples:
 
 Screenshot:
 
+![Ui after adding schedule](images/ui-screenshots/schedule-feedback.png)
+<br><center><ins>Image: Command feedback box after scheduling a friend's `Draco` availability</ins></center>
+
 ![Ui](images/ui-screenshots/friend-schedule.png)
-<br><center><ins>Image: Friend's schedule table updated after scheduling a friend's availability</ins></center>
+<br><center><ins>Image: gitGud after running `friend --get Draco`, after scheduling a friend's `Draco` 
+availability</ins></center>
 
 #### Recommending friends available to play with - `recommend`
 
