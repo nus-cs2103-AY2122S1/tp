@@ -308,8 +308,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | delete a folder                                       | remove folders when they become irrelevant                 |
 | `* * *`  | user                                       | add a user to a folder                                | folder related contacts together and find them efficiently |
 | `* * *`  | experienced computing student              | use my knowledge of Unix commands to navigate the app | use the app without learning a new set of commands         |
+| `* * *`  | student                                    | write to a JSON file                                  | achieve data persistence between the application and local storage |
 | `* *`    | user                                       | remove a contact from a folder                        | update contacts in folders easily                          |
 | `* *`    | user                                       | clear all folders                                     | reset my folders easily                                    |
+| `* *`    | student                                    | add several contacts into a folder at one go          | reduce time wastage adding them 1 by 1                     |
+| `* *`    | user                                       | update my folder name                                 | efficiently manage outdated groups                         |
+| `* *`    | user                                       | find a specific folder                                | minimize time spent on looking for my folder               |
 
 ### Use cases
 
