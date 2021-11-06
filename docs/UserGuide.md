@@ -68,7 +68,7 @@ Can't wait to get started? Check out the [Quick Start](#quick-start) to get goin
 1. Ensure you have Java 11 or above installed in your Computer. You may install it
    [here](https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html)
    
-2. Download the latest `wheretourgo.jar` from [here](update on final)
+2. Download the latest `WhereTourGo.jar` from [here](update on final)
    
 3. Copy the file to the folder you want to use as the _home folder_ for your WhereTourGo
 
@@ -526,6 +526,7 @@ Usage scenario:
 Format: `export`
 * Exports the specified contact from the contact list.
 * The text file will be written with the path `data/export.txt`.
+
 -------------
 Format: `export INDEX`
 
@@ -644,7 +645,7 @@ This folder contains a file called `addressbook.json` which contains all of your
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add c/CATEGORY_CODE n/CONTACT_NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add c/att n/Singapore Flyers p/92345678 e/123@example.com a/30 Raffles Ave, Singapore 039803 t/friend t/colleague`
+**Add** | `add c/CATEGORY_CODE n/CONTACT_NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG] [rv/REVIEW] [ra/RATING]…​` <br> e.g., `add c/att n/Singapore Flyers p/92345678 e/123@example.com a/30 Raffles Ave, Singapore 039803 t/friend t/colleague rv/Great place ra/4`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`<br><br> `delete n/CONTACT_NAME`<br> e.g., `delete n/Marina Bay Sands`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/Adventure Cove e/adventurecove@example.com`
