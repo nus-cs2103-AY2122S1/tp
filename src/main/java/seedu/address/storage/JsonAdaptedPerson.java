@@ -114,9 +114,12 @@ class JsonAdaptedPerson {
         }
 
 
-        final List<Role> personRoles = new ArrayList<>();
+        final Set<Role> personRoles = new HashSet<>();
         for (JsonAdaptedRole role : roles) {
             personRoles.add(role.toModelType());
+        }
+        if (personRoles.contains(Role.NO_ROLE) && personRoles.size() != 1) {
+            throw new IllegalValueException(Role.MESSAGE_CONSTRAINTS);
         }
 
         if (name == null) {
