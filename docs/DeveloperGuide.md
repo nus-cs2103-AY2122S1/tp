@@ -692,6 +692,35 @@ Step 5. Any command the user executes next simply refreshes the current state to
 The following activity diagram summarizes the actions taken when LogicManager executes the RejectionRateCommand:
 ![ActivityDiagram](images/rejection-rates/ActivityDiagram.png)
 
+### Visualize Positions feature
+
+#### Implementation
+
+This feature makes use of JavaFX's built-in `PieChart` component, as well as the `Tooltip` component to display the percentages of each pie chart slice.  
+  
+The following activity diagram describes the execution flow of the command:
+
+![VisualizeActivityDiagram](images/VisualizeActivityDiagram.png)
+
+Additionally, the following classes are responsible for generating and displaying the pie chart to the user:
+- `PositionPieChart`: A JavaFX `PieChart` representing a `Position`, and the statuses its `Applicants`. Contains logic to process a specified `Position` and list of `Applicants` into a `PositionPieChart`.
+- `PieChartDisplayer`: Takes in a JavaFX `PieChart` and displays it to the user in a new window.
+
+The following sequence diagram demonstrates the process:
+
+![VisualizeSequenceDiagram](images/VisualizeSequenceDiagram.png)
+
+#### Design Considerations
+
+**Aspect: Displaying of pie chart to user** 
+
+* **Alternative 1 (current choice):** `PieChartDisplayer` class.
+    * Pros: Quick and easy to use, reusable.
+    * Cons: Lack of flexibility, limited choice in UI design.
+
+* **Alternative 2:** Full, `UiPart` class with FXML 
+    * Pros: Greater customizability, styling options.
+    * Cons: More complex, harder to maintain.
 
 ### Undo feature
 

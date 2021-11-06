@@ -1,0 +1,27 @@
+@startuml
+!include style.puml
+
+autoactivate on
+
+box Logic LOGIC_COLOR_T1
+participant ":VisualizePositionCommand" as VisualizePositionCommand LOGIC_COLOR
+end box
+
+box UI UI_COLOR_T1
+participant "p:PositionPieChart" as PositionPieChart UI_COLOR
+participant "d:PieChartDisplayer" as PieChartDisplayer UI_COLOR
+end box
+
+activate VisualizePositionCommand
+
+VisualizePositionCommand -> PositionPieChart **
+activate PositionPieChart
+return p
+
+VisualizePositionCommand -> PieChartDisplayer ** : new PieChartDisplayer(p)
+' activate PieChartDisplayer
+' return d
+
+VisualizePositionCommand --> PieChartDisplayer : displayPieChart()
+
+@enduml
