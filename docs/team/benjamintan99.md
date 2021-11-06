@@ -27,8 +27,10 @@ Given below are my contributions to the project.
    * Changed fonts and colors used in different parts of the UI.
 
 
-* **Contributions to User Guide**:
-  * 
+* **Contributions to User Guide**: (Pull requests [#169](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/169))
+  * Added documentation for rejection rate feature.
+  * Fixed bugs in the User Guide.  
+  * Update Command Summary.
 
 
 * **Contributions to Developer Guide**:
