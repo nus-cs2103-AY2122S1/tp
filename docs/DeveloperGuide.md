@@ -636,7 +636,8 @@ formatting
 
 The following sequence diagram shows the above implementation:
 
-{Add IMAGE}
+![HistoryCommandSequenceDiagram](images/dg/logic/commands/historycommand/HistoryCommandSequenceDiagram.png)
+
 
 #### Limitation
 The current implementation can only show two commit branches: `MAIN` and `OLD`. While this is
