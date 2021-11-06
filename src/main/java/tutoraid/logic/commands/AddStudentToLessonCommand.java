@@ -82,6 +82,8 @@ public class AddStudentToLessonCommand extends AddCommand {
         model.updateFilteredLessonList(Model.PREDICATE_SHOW_ALL_LESSONS);
         model.viewList(MED);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, studentToAddToLesson, lessonToAddToStudent));
+        return new CommandResult(String.format(MESSAGE_SUCCESS,
+                studentToAddToLesson.toNameString(),
+                lessonToAddToStudent.toNameString()));
     }
 }
