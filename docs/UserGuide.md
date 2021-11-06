@@ -574,9 +574,9 @@ Example of the format of how data is saved for an applicant:
 ```
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes the data format invalid, RecruitIn will remove all saved data and start with an empty data file the next time you open the app.
+It is advised that you be careful when handling the data file directly!
 </div>
 
-<p align="center"><a href="#table-of-contents">Click here to see the table of contents</a></p>
 
 --------------------------------------------------------------------------------------------------------------------
 
