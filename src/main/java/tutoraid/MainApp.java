@@ -62,9 +62,15 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         TutorAidLessonStorage tutorAidLessonStorage = new JsonTutorAidLessonStorage(userPrefs.getLessonBookFilePath());
-        TutorAidStudentStorage tutorAidStudentStorage =
-                new JsonTutorAidStudentStorage(userPrefs.getStudentBookFilePath(),
-                        tutorAidLessonStorage.readLessonBook().orElseGet(SampleDataUtil::getSampleLessonBook));
+        TutorAidStudentStorage tutorAidStudentStorage;
+        try {
+            tutorAidLessonStorage.readLessonBook(userPrefs.getLessonBookFilePath());
+            tutorAidStudentStorage =
+                    new JsonTutorAidStudentStorage(userPrefs.getStudentBookFilePath(),
+                         tutorAidLessonStorage.readLessonBook().orElseGet(SampleDataUtil::getSampleLessonBook));
+        } catch (DataConversionException e) {
+            tutorAidStudentStorage = new JsonTutorAidStudentStorage(userPrefs.getStudentBookFilePath(), new LessonBook());
+        }
 
         storage = new StorageManager(tutorAidStudentStorage, tutorAidLessonStorage, userPrefsStorage);
 
