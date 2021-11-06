@@ -1,0 +1,56 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant "e:ExportCommand" as ExportCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Storage STORAGE_COLOR_T1
+participant "temporaryStorage:\nJsonAddressBookStorage" as JsonAddressBookStorage STORAGE_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+activate LogicManager
+
+LogicManager -> ExportCommand : execute()
+activate ExportCommand
+
+ExportCommand -> Model : getAddressBook()
+activate Model
+
+alt .json
+ExportCommand -> ExportCommand : exportAddressBookToJson()
+activate ExportCommand
+ExportCommand --> ExportCommand
+deactivate
+
+else .csv
+ExportCommand -> ExportCommand : exportAddressBookToCsv()
+activate ExportCommand
+ExportCommand --> ExportCommand
+deactivate
+
+end
+Model --> ExportCommand : currentAddressBook
+deactivate Model
+
+create JsonAddressBookStorage
+ExportCommand -> JsonAddressBookStorage
+activate JsonAddressBookStorage
+
+JsonAddressBookStorage --> ExportCommand
+deactivate JsonAddressBookStorage
+
+ref over ExportCommand, JsonAddressBookStorage : Util classes write address book to file
+
+ExportCommand --> LogicManager : result
+deactivate ExportCommand
+
+[<--LogicManager
+
+@enduml
