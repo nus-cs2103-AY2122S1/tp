@@ -306,7 +306,6 @@ public class ModelManager implements Model {
     }
 
     /**
-<<<<<<< HEAD
      * Delete tasks related to a given Order
      */
     @Override
@@ -324,14 +323,10 @@ public class ModelManager implements Model {
     }
 
     /**
-     * For each person, finds orders associated with the person, and adds up the amount.
-     * Creates a ClientTotalOrder for each person.
-=======
      * Groups and sums up all orders according to their {@code Customer}s.
      * This method computes total orders based on the {@code Customer}s,
      * but each {@code Customer} is supposed to map to an existing {@code Person} (Client),
      * hence the naming of the method and local variables.
->>>>>>> 7d4603133ce879c7e267914eb92fdca0f8d42c1e
      *
      * @return an ObservableList of {@code ClientTotalOrder}.
      */
