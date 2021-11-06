@@ -311,7 +311,7 @@ should not exceed the destroy marker X. This is a known limitation of PlantUML.<
     of sorting the search terms.
 
 * **Alternative 2:** Not sorting unique search terms and collecting as a set.
-    * Pros: Runtime complexity stays at `O(n)`. The show command will be more efficient than using **Alternative 1**.    * Pros: Intuitive for user to use `find` command to find certain types of interviews (past or future)
+    * Pros: Runtime complexity stays at `O(n)`. The show command will be more efficient than using **Alternative 1**.
     * Cons: List of search terms returned is in an order not defined by us, which could make it difficult for the users
     to find the search term they are looking for.
     * Cons: There is no general guarantee on the ordering of elements obtained by iterating over a set. This leads to lower
