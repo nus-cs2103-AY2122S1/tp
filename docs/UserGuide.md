@@ -557,6 +557,7 @@ Examples:
 To find students with the tag `new` or with lessons between `1100-1300`, you may type the command `find cond/any t/new time/1100-1300`. The figure below shows the list after this find command is executed.
 
 ![find](images/find.png)
+
 <div class="caption">TAB displays two students after the find command.</div>
 
 <br />
