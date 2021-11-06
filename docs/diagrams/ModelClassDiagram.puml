@@ -25,6 +25,7 @@ Class Phone
 Class Tag
 Class Task
 Class Description
+Class TaskListManager
 }
 
 Class HiddenOutside #FFFFFF
