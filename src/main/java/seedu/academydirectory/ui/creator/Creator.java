@@ -12,8 +12,6 @@ import seedu.academydirectory.ui.UiPart;
  */
 public abstract class Creator extends UiPart<Region> {
 
-    private AdditionalInfo<?> additionalInfo;
-
     /**
      * Constructor of an Additional View creator
      * @param additionalInfo information to be passed in
@@ -21,7 +19,6 @@ public abstract class Creator extends UiPart<Region> {
      */
     public Creator(AdditionalInfo<?> additionalInfo, String fxml) {
         super(fxml);
-        this.additionalInfo = additionalInfo;
     }
 
     /**

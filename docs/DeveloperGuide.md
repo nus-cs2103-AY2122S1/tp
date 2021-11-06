@@ -144,16 +144,32 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 ![Structure of the UI Component](images/dg/architecture/ui/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `VisualizerDisplay`, `StudentListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts smaller UI-part components, including `CommandBox`, `ResultDisplay`, 
+`VisualizerDisplay`, `StudentListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract 
+`UiPart` class which captures the commonalities between classes that represent smaller parts of the visible GUI. Of these, all components are always presented,
+except for the Help Window which can be shown or hide depending on the results of user command.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103T-T15-3/tp/blob/master/src/main/java/seedu/academydirectory/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-T15-3/tp/blob/master/src/main/resources/view/MainWindow.fxml)
+Some classes of the UI, notably `CommandBox` and `AppMenu`, keeps a reference of a functional interface called `CommandExecutor` that
+executes a Command from the Logic `component`. In consideration of this design - it is done allow components of UI to execute user commands 
+while still maximizing abstraction and reducing reliance of UI on the Logic component - rather it will be dependent on an intermediate component within UI.
+
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in their respective matching `.fxml` files stored in the `src/main/resources/view` folder. For example, the layout of the 
+[`MainWindow`](https://github.com/AY2122S1-CS2103T-T15-3/tp/blob/master/src/main/java/seedu/academydirectory/ui/MainWindow.java) is 
+specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-T15-3/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
 * executes user commands using the `Logic` component.
 * listens for changes to `VersionedModel` data so that the UI can be updated with the modified data.
-* keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `VersionedModel` component, as it displays `Student` object residing in the `VersionedModel` and requires grades statistics from `Student` object in the `VersionedModel`.
+* keeps a reference (for Main Window) or depends (for AppMenu) on the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
+* keeps a reference of some classes in the `VersionedModel` component, particularly the Student class, as it displays `Student` object residing in 
+  the `VersionedModel` and requires grades statistics from `Student` object in the `VersionedModel`.
+  
+![Creator Class Diagram](images/dg/architecture/ui/CreatorClassDiagram.png)
+
+One important component of the UI is the specialized Creator class which extends the abstract class UiPart - for the purpose of reusing the Visualizer Display
+to show users the result of a command execution. The Creator class takes in an AdditionalInfo object from Versioned Model, and convert it to the specific view
+for displaying to users in the Visualizer Display.
 
 ### Logic component
 
