@@ -118,7 +118,6 @@ public class Shift {
         if (this.recurrences.size() == 0) {
             return false;
         }
-
         return countOfOccurrences(period) != 0;
     }
 

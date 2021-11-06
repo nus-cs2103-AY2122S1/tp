@@ -111,7 +111,6 @@ public class Period {
     public boolean contains(Period period) {
         return this.contains(period.startDate)
                 && this.contains(period.endDate);
-
     }
 
     /**
