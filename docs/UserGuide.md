@@ -195,7 +195,7 @@ Format: `edit-applicant INDEX [n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pos/POSIT
 
 * Edit the applicant with the specified `INDEX`
 * At least one argument should be present
-* If `position` field is edited, the new `position` must have been added to MrTechRecruiter
+* If the `position` field is edited, the new `position` must already exist in MrTechRecruiter
 
 Examples:
 * `edit-applicant 1 n/Jasmine Doe p/98761432 e/jdoe@example.com`
