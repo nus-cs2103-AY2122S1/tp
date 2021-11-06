@@ -86,7 +86,7 @@ public class TabOption {
             return VALID_TAB_STRING[6];
         default:
             assert false : "Invalid tab option";
-            return null;
+            return "Invalid tab option";
         }
     }
 
