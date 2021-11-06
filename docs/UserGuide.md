@@ -448,67 +448,98 @@ Suppose the applicants list includes 3 applicants with name and role `John, Soft
 
 ### Marking an applicant : `mark`
 
-Marks the specified applicant by index from the list in RecruitIn as "Done" (have been attended to).
+Every applicant in RecruitIn will have a status of either "Done" or "Not Done".
+A "Done" status means that you are done handling the applicant and no longer need to keep their details.
+The `mark` command marks the specified applicant(s) in RecruitIn by changing their status to "Done".
 
 Format: `mark INDEX…​`
 
-* Marks the applicant at the specified `INDEX` as "Done".
-* An applicant that is has status "Done" cannot be marked again.
-* The `INDEX` refers to the index number shown in the displayed applicants list.
-* At least one `INDEX` must be given. (i.e. `mark ` is not a valid command)
-* `INDEX` **must be a positive integer** 1, 2, 3, …​
-* `INDEX` uses **1-based indexing**.
-* Duplicate `INDEX`s are not allowed. (i.e. `mark 2 2` is not a valid command)
-* `INDEX` should not exceed the total number of applicants in the displayed applicants list.
+* RecruitIn marks the applicant at the specified `INDEX`es as "Done".
+* `INDEX` refers to the number shown in RecruitIn's displayed applicants list.
+* `INDEX` **must be a positive whole number**, i.e. 1, 2, 3, …​
+* `INDEX` should not exceed the total number of applicants in RecruitIn's displayed applicants list.
+* `INDEX` in RecruitIn **starts from one**.
+* You must give at least one `INDEX`. (i.e. `mark ` is not a valid command)
+* You cannot give duplicate `INDEX`es. (i.e. `mark 2 2` is not a valid command)
+* You cannot mark an applicant that has status "Done".
 
 Examples:
-* After using the command `list`, `mark 2` marks the 2nd applicant listed in RecruitIn as "Done".
-* After using the command `find n/John`, `mark 1` marks the 1st applicant in the results of the `find` command.
+* After using the command `list`, `mark 1` marks the 1st applicant listed in RecruitIn as "Done".
+
+Before: ![images](images/MarkBefore.png)
+
+After: ![images](images/MarkAfter.png)
+
 * After using the command `list`, `mark 2 4 6` marks the 2nd, 4th and 6th applicant listed in RecruitIn as "Done".
+* After using the command `find n/John`, `mark 1` marks the 1st applicant listed in RecruitIn's results of the `find` command.
+
+<p align="center"><a href="#table-of-contents">Click here to see the table of contents</a></p>
 
 ### Unmarking an applicant : `unmark`
 
-Unmarks the specified applicant by index from the list in RecruitIn to "Not Done" (have not been attended to).
+Every applicant in RecruitIn will have a status of either "Done" or "Not Done".
+A "Not Done" status means that you are still handling the applicant and still need to keep their details.
+The `unmark` command unmarks the specified applicant(s) in RecruitIn by changing their status to "Not Done".
 
 Format: `unmark INDEX…​`
 
-* Unmarks the applicant at the specified `INDEX` to "Not Done".
-* An applicant that is has status "Not Done" cannot be unmarked again.
-* The `INDEX` refers to the index number shown in the displayed applicants list.
-* At least one `INDEX` must be given. (i.e. `unmark ` is not a valid command)
-* `INDEX` **must be a positive integer** 1, 2, 3, …​
-* `INDEX` uses **1-based indexing**.
-* Duplicate `INDEX`s are not allowed. (i.e. `delete 2 2` is not a valid command)
-* `INDEX` should not exceed the total number of applicants in the displayed applicants list.
+* RecruitIn unmarks the applicant at the specified `INDEX`es to "Not Done".
+* `INDEX` refers to the number shown in RecruitIn's displayed applicants list.
+* `INDEX` **must be a positive whole number**, i.e. 1, 2, 3, …​
+* `INDEX` should not exceed the total number of applicants in RecruitIn's displayed applicants list.
+* `INDEX` in RecruitIn **starts from one**.
+* You must give at least one `INDEX`. (i.e. `unmark ` is not a valid command)
+* You cannot give duplicate `INDEX`es. (i.e. `delete 2 2` is not a valid command)
+* You cannot unmark an applicant that has status "Not Done".
 
 Examples:
-* After using the command `list`, `ummark 2` unmarks the 2nd applicant listed in RecruitIn to "Not Done".
-* After using the command `find n/John`, `unmark 1` unmarks the 1st applicant in the results of the `find` command.
+* After using the command `list`, `ummark 1` unmarks the 1st applicant listed in RecruitIn to "Not Done".
+
+Before: ![images](images/UnmarkBefore.png)
+
+After: ![images](images/UnmarkAfter.png)
+
 * After using the command `list`, `unmark 2 4 6` unmarks the 2nd, 4th and 6th applicant listed in RecruitIn to "Not Done".
+* After using the command `find n/John`, `unmark 1` unmarks the 1st applicant listed in RecruitIn's results of the `find` command.
+
+<p align="center"><a href="#table-of-contents">Click here to see the table of contents</a></p>
 
 ### Deleting marked applicants: `delete_marked`
 
-Deletes all applicants that are marked as done.
+The `delete_marked` command deletes all applicants that are currently marked as done.
+This provides an easy way for you to delete the data of all applicants you no longer need.
 
 Format: `delete_marked`
 
+Example:
+
+Before: ![images](images/DeleteMarkedBefore.png)
+
+After: ![images](images/DeleteMarkedAfter.png)
+
+<p align="center"><a href="#table-of-contents">Click here to see the table of contents</a></p>
+
 ### Exiting the program : `exit`
 
-Exits the program.
+The `exit` command causes RecruitIn to close and exit.
 
 Format: `exit`
 
+You can also exit RecruitIn by clicking on the 'X' button found on the top right side of the app. 
+
+<p align="center"><a href="#table-of-contents">Click here to see the table of contents</a></p>
+
 ### Saving the data
 
-RecruitIn data is saved to the hard disk whenever there is a command that edits, updates or adds data.
-There is no need to save data manually with a command. Data also automatically loads when the application runs.
+Whenever you use any command which edits, updates or adds data, RecruitIn automatically saves the data.
+You do not need to manually save data with any command. The saved data also automatically loads when the application starts.
 
 ### Editing the data file
 
-RecruitIn data is saved as a String in `/data/applicants.json` for applicant data.
-Advanced users are welcome to update data directly by editing that data file.
+RecruitIn saves the applicant data as a String in `/data/applicants.json`.
+If you are advanced enough, you are welcome to update data directly by editing this data file.
 
-Example of format of data for one applicant in applicants:
+Example of the format of how data is saved for an applicant:
 
 ```JSON
 {
@@ -531,8 +562,10 @@ Example of format of data for one applicant in applicants:
 }
 ```
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, RecruitIn will discard all data and start with an empty data file at the next run.
+If your changes to the data file makes the data format invalid, RecruitIn will remove all saved data and start with an empty data file the next time you open the app.
 </div>
+
+<p align="center"><a href="#table-of-contents">Click here to see the table of contents</a></p>
 
 --------------------------------------------------------------------------------------------------------------------
 
