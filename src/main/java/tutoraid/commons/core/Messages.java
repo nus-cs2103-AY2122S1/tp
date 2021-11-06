@@ -17,10 +17,6 @@ public class Messages {
     public static final String MESSAGE_INVALID_LESSON_DISPLAYED_INDEX = "The lesson index provided is invalid";
     public static final String MESSAGE_INVALID_EDIT_COMMAND = "Invalid edit command format! "
             + "Must start with 'edit -s' or 'edit -l'";
-    public static final String MESSAGE_INVALID_STUDENT_DISPLAYED_MULTIPLE_INDEXES =
-            "The student indexes provided are invalid";
-    public static final String MESSAGE_INVALID_LESSON_DISPLAYED_MULTIPLE_INDEXES =
-            "The lesson indexes provided are invalid";
     public static final String MESSAGE_INVALID_STUDENT_ALREADY_ATTEND_LESSON = "The student provided"
             + " is already attending the lesson provided";
     public static final String MESSAGE_INVALID_STUDENT_NOT_IN_LESSON = "The student provided"

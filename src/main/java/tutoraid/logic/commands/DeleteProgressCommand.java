@@ -19,13 +19,15 @@ public class DeleteProgressCommand extends DeleteCommand {
 
     public static final String COMMAND_FLAG = "-p";
 
-    public static final String MESSAGE_USAGE = COMMAND_FLAG + ": Deletes a progress from a student in TutorAid "
-            + "identified by the index number used in the last student listing.\n"
-            + "Parameters: STUDENT_INDEX (must be a positive integer)\n"
-            + "\nExample: " + COMMAND_WORD + " " + COMMAND_FLAG + " 1";
+    public static final String MESSAGE_USAGE = String.format("%1$s %2$s: Deletes a progress entry from a student."
+                    + "\nParameters:"
+                    + "\nINDEX (must be a positive integer)"
+                    + "\nExample:"
+                    + "\n%1$s %2$s 1",
+            COMMAND_WORD, COMMAND_FLAG);
 
-    public static final String MESSAGE_SUCCESS = "Successfully deleted progress: %1$s from %2$s. "
-            + "Showing %2$s and his/her lessons.";
+    public static final String MESSAGE_SUCCESS = "Successfully deleted progress: %1$s from %2$s."
+            + "\nShowing %2$s and his/her lessons.";
 
     private final Index targetIndex;
 

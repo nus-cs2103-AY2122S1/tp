@@ -26,24 +26,23 @@ public class EditLessonCommand extends EditCommand {
 
     public static final String COMMAND_FLAG = "-l";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the lesson specified "
-            + "by the index number in the Lesson Panel. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_LESSON_NAME + "LESSON NAME "
-            + PREFIX_LESSON_PRICE + "LESSON PRICE (non-negative number with 0 or 2 decimal places) "
-            + PREFIX_LESSON_TIMING + "LESSON TIMING (any format) "
-            + PREFIX_LESSON_CAPACITY + "LESSON CAPACITY (positive integer) "
-            + "\n\nExample: " + COMMAND_WORD + " " + COMMAND_FLAG + " 1 "
-            + PREFIX_LESSON_NAME + "Math 1 "
-            + PREFIX_LESSON_PRICE + "19.90 "
-            + PREFIX_LESSON_TIMING + "10.00 AM to 12.00 PM every Monday "
-            + PREFIX_LESSON_CAPACITY + "10 ";
+    public static final String MESSAGE_USAGE = String.format("%1$s %2$s: Edits the details of the lesson specified."
+                    + "Existing values will be overwritten by the input values."
+                    + "\nParameters: "
+                    + "\nLESSON INDEX (must be a positive integer)"
+                    + "  [%3$sLESSON NAME]"
+                    + "  [%4$sLESSON CAPACITY]"
+                    + "  [%5$sLESSON PRICE]"
+                    + "  [%6$sLESSON TIMING]"
+                    + "\nExample:"
+                    + "\n%1$s %2$s 1 %3$sMaths 2 %4$s30 %5$s110 %6$sTue 1100-1300",
+            COMMAND_WORD, COMMAND_FLAG, PREFIX_LESSON_NAME, PREFIX_LESSON_CAPACITY, PREFIX_LESSON_PRICE,
+            PREFIX_LESSON_TIMING);
 
-    public static final String MESSAGE_EDIT_LESSON_SUCCESS = "Edit successful. Displaying %s and the students in "
-            + "this class.";
+    public static final String MESSAGE_EDIT_LESSON_SUCCESS =
+            "Successfully edited %1$s. Showing %1$s and the students in this class.";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists in TutorAid";
+    public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists in TutorAid.";
     public static final String MESSAGE_NOT_CHANGED = "Warning: Attempted to edit %s but the provided field(s) did not "
             + "contain any changes.";
 
@@ -199,7 +198,6 @@ public class EditLessonCommand extends EditCommand {
                 return false;
             }
 
-            EditLessonDescriptor e = (EditLessonDescriptor) other;
             EditLessonDescriptor otherDescriptor = (EditLessonDescriptor) other;
             return otherDescriptor.getLessonName().equals(getLessonName())
                     && otherDescriptor.getTiming().equals(getTiming())

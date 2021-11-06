@@ -128,6 +128,7 @@ public class ModelManager implements Model {
     public void deleteStudent(Student target) {
         studentBook.removeStudent(target);
         allStudents.remove(target);
+        updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
     }
 
     @Override
@@ -171,6 +172,7 @@ public class ModelManager implements Model {
                 student.getLessons().deleteLesson(lesson);
             }
         }
+        updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
     }
 
     //=========== LessonBook ================================================================================
@@ -214,7 +216,7 @@ public class ModelManager implements Model {
         filteredLessons.setPredicate(lesson -> lesson.equals(targetLesson));
         filteredStudents.setPredicate(student ->
                 targetLesson.getStudents().hasStudent(student));
-        UiManager.showFullDetails();
+        UiManager.showMediumDetails();
     }
 
     @Override
@@ -240,6 +242,7 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredStudentList(Predicate<Student> predicate) {
         requireNonNull(predicate);
+        filteredStudents.setPredicate(student -> false);
         filteredStudents.setPredicate(predicate);
     }
 
@@ -257,6 +260,7 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredLessonList(Predicate<Lesson> predicate) {
         requireNonNull(predicate);
+        filteredLessons.setPredicate(lesson -> false);
         filteredLessons.setPredicate(predicate);
     }
 
