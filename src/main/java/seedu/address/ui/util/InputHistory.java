@@ -43,15 +43,15 @@ public class InputHistory {
     }
 
     /**
-     * Resets the position of currentIndex to be the size of history
+     * Resets the position of currentIndex to be the size of history.
      */
     private void resetRecentIndex() {
         currentIndex = history.size();
     }
 
     /**
-     * Gets the previous input based on the currentIndex
-     * @return String of the previous input
+     * Gets the previous input based on the currentIndex.
+     * @return String of the previous input.
      */
     public String getPreviousInput() {
         if (isHistoryEmpty()) {
@@ -114,6 +114,9 @@ public class InputHistory {
         return currentIndex == history.size();
     }
 
+    /**
+     * Used to reset the singleton object to its original state.
+     */
     public static void resetSingleton() {
         inputHistory = null;
     }
