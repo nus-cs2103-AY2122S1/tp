@@ -51,8 +51,9 @@ public class ModelStub implements Model {
         throw new AssertionError("This method should not be called.");
     }
 
+
     @Override
-    public Applicant getApplicantByName(Name applicantName) {
+    public boolean hasApplicantsApplyingTo(Position position) {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -61,6 +62,10 @@ public class ModelStub implements Model {
         throw new AssertionError("This method should not be called.");
     }
 
+    @Override
+    public Applicant getApplicantWithName(Name name) {
+        throw new AssertionError("This method should not be called.");
+    }
 
     @Override
     public Path getApplicantBookFilePath() {
