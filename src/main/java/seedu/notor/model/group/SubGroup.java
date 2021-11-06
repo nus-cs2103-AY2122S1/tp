@@ -80,6 +80,18 @@ public class SubGroup extends Group implements Unique<SubGroup> {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        SubGroup sg = (SubGroup) o;
+        return name.equals(sg.name) && (parent == sg.parent || parent.equals(sg.parent));
+    }
+
+    @Override
     public boolean isSame(SubGroup other) {
         return other.toString().equals(this.toString());
     }

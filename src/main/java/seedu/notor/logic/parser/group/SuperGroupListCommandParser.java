@@ -19,7 +19,6 @@ public class SuperGroupListCommandParser extends GroupCommandParser {
      * @throws ParseException if the user input does not conform the expected format
      */
     public SuperGroupListCommand parse(String args) throws ParseException {
-        // TODO: Do we want to throw errors when extra stuff is added?
         return new SuperGroupListCommand();
     }
 

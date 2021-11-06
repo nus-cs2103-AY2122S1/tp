@@ -132,6 +132,8 @@ public interface Model {
 
     void deleteSubGroup(SubGroup subGroup);
 
+    void addSubGroup(Index index, SubGroup subGroup);
+
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in Notor.

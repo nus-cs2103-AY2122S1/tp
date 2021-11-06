@@ -215,6 +215,15 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void addSubGroup(Index index, SubGroup subGroup) {
+        Group group = getFilteredGroupList().get(index.getZeroBased());
+        SuperGroup superGroup = (SuperGroup) group;
+        subGroup.setParent(superGroup);
+        superGroup.addSubGroup(subGroup);
+        assert superGroup.getSubGroups().contains(subGroup);
+    }
+
+    @Override
     public void deleteSuperGroup(SuperGroup superGroup) {
         notor.deleteSuperGroup(superGroup);
         listSuperGroup();
@@ -244,7 +253,6 @@ public class ModelManager implements Model {
 
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
-        // TODO: I am using leveraging this method for list. Should we consider new method?
         requireNonNull(predicate);
         isPersonList = true;
         isSuperGroupList = false;
