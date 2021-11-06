@@ -33,6 +33,7 @@ Given below are my contributions to the project.
     * Added documentation for the features `ladd`, `ledit` and `ldelete` ([\#63](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/63), [\#119](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/119), [\#149](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/149))
     * Did cosmetic tweaks to existing documentation for Quick Start: [\#76](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/76)
     * Add brief overview for each section in UG: [\#162](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/162)
+    * Added lesson parameters table for easier reference. (Pull request [\#307](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/307))
     
   * Developer Guide:
     * Added implementation details and test cases for the `ladd` feature.
@@ -42,4 +43,26 @@ Given below are my contributions to the project.
   
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#261](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/261), [\#170](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/170), [\#93](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/93), [\#183](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/183), [\#126](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/126), [\#105](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/105), [\#109](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/109), [\#165](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/165)
-  
+
+#### Contributions to the User Guide
+The following contributions listed are made with the help of my teammates and their valuable contributions. 
+
+Major contributions:<br>
+* [Managing Lessons](../UserGuide.md#managing-lessons)
+
+Minor contributions:<br>
+* [Overview of the Command Format](../UserGuide.md#overview-of-the-command-format)
+* Sectioning and adding links to [Command Summary](../UserGuide.md#command-summary)
+
+
+#### Contributions to the Developer Guide
+The following contributions listed are made with the help of my teammates and their valuable contributions.
+
+Major contributions:<br>
+* [Lesson Management](../DeveloperGuide.md#lesson-management)
+* [Manual Testing - Adding a lesson](../DeveloperGuide.md#adding-a-lesson)
+* [Manual Testing - Editing a lesson of a student](../DeveloperGuide.md#editing-a-lesson-of-a-student)
+* [Manual Testing - Deleting a lesson from a student](../DeveloperGuide.md#deleting-a-lesson-from-a-student)
+
+Minor contribution:<br>
+* [Use cases](../DeveloperGuide.md#use-cases) 5, 6 and 7

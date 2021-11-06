@@ -22,7 +22,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/eeliana.png" width="200px">
 
-[[github](http://github.com/eeliana)]
+[[github](http://github.com/eeliana)] [[Portfolio](/team/eeliana.html)]
 
 * Role: Developer
 

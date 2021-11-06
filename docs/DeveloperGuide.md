@@ -14,6 +14,7 @@ List of sources of all reused/adapted ideas, code, documentation, and third-part
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 * Libraries used: [CalendarFX](https://dlsc.com/products/calendarfx/), [Jackson](https://github.com/FasterXML/jackson), [JavaFX](https://openjfx.io/), [JUnit5](https://github.com/junit-team/junit5)
 * Table cells with copy and paste and wrap-text functions reference: [Roland09](https://gist.github.com/Roland09/6fb31781a64d9cb62179#file-tableutils-java), [James_D](https://stackoverflow.com/questions/22732013/javafx-tablecolumn-text-wrapping).
+* Detection of overlapping dates: [Ole V.V.](https://stackoverflow.com/questions/60785426/)
 
 --------------------------------------------------------------------------------------------------------------------
 
