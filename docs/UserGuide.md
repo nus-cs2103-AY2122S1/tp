@@ -151,7 +151,7 @@ or their body measurements for clothing.
 
 </div>
 
-### Adding a client : `addclient` [Return to top](#table-of-contents)
+### Adding a client : `addclient` 
 
 Format: `addclient n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS m/MEASUREMENT g/GENDER [r/REMARK] [t/TAG]…​`
 
@@ -173,6 +173,8 @@ warning, and a reminder of the requirements:
 Some examples of valid commands:
 * `addclient n/Ng Chin Gan p/98765432 e/ncg@example.com a/42 Almond Street g/M m/170_100_40`
 * `addclient n/Alice Seah e/aseah@example.com a/47 Cashew Street p/92345782 t/important g/F m/160_85_35_81`
+
+[return to top](#table-of-contents)
 
 ### Deleting a client : `deleteclient`
 
