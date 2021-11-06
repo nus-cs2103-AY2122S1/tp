@@ -31,10 +31,10 @@ public class StudentTest {
         editedAlice = new StudentBuilder(TypicalStudents.ALICE).withStudentName(VALID_STUDENT_NAME_BOB).build();
         assertFalse(TypicalStudents.ALICE.isSameStudent(editedAlice));
 
-        // name differs in case, all other attributes same -> returns false
+        // name differs in case, all other attributes same -> returns true
         Student editedBob = new StudentBuilder(TypicalStudents.BOB).withStudentName(
                 VALID_STUDENT_NAME_BOB.toLowerCase()).build();
-        assertFalse(TypicalStudents.BOB.isSameStudent(editedBob));
+        assertTrue(TypicalStudents.BOB.isSameStudent(editedBob));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_STUDENT_NAME_BOB + " ";
