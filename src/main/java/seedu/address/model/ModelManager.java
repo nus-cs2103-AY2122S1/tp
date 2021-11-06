@@ -219,6 +219,8 @@ public class ModelManager implements Model {
         displayList.setPredicate(predicate);
     }
 
+
+
     @Override
     public void updateFilteredItemList(DisplayMode mode, Predicate<Item> predicate) {
 
@@ -250,6 +252,9 @@ public class ModelManager implements Model {
         displayList.setItems(transactionOptional.get().getOrderItems());
         return totalCost;
     }
+    public DisplayList getDisplayList() {
+        return this.displayList;
+    }
 
     @Override
     public DisplayMode getDisplayMode() {
@@ -278,8 +283,11 @@ public class ModelManager implements Model {
         return inventory.equals(other.inventory)
                 && userPrefs.equals(other.userPrefs)
                 && displayList.equals(other.displayList)
-                && optionalOrder.equals(other.optionalOrder);
+                && optionalOrder.equals(other.optionalOrder)
+                && transactions.equals(other.transactions)
+                && bookKeeping.equals(other.bookKeeping);
     }
+
 
     // ============== Order related methods ========================
 
@@ -364,6 +372,7 @@ public class ModelManager implements Model {
     public ReadOnlyTransactionList getTransactions() {
         return new TransactionList(new ArrayList<>(transactions));
     }
+
 
     @Override
     public void initialiseTransactions() {

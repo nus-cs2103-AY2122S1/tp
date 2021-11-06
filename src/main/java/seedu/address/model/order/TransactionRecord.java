@@ -3,6 +3,7 @@ package seedu.address.model.order;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import javafx.scene.layout.Region;
@@ -88,7 +89,7 @@ public class TransactionRecord extends Order implements Displayable {
         if (other instanceof TransactionRecord) {
             TransactionRecord temp = (TransactionRecord) other;
             return id.equals(temp.id)
-                    && timestamp.equals(temp.timestamp)
+                    && timestamp.truncatedTo(ChronoUnit.MINUTES).equals(temp.timestamp.truncatedTo(ChronoUnit.MINUTES))
                     && getOrderItems().equals(temp.getOrderItems());
         }
 
