@@ -154,86 +154,6 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedClassmate`. It extends `Classmate` with an undo/redo history, stored internally as an `classmateStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedClassmate#commit()` — Saves the current ClassMATE state in its history.
-* `VersionedClassmate#undo()` — Restores the previous ClassMATE state from its history.
-* `VersionedClassmate#redo()` — Restores a previously undone ClassMATE state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitClassmate()`, `Model#undoClassmate()` and `Model#redoClassmate()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedClassmate` will be initialized with the initial ClassMATE state, and the `currentStatePointer` pointing to that single ClassMATE state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `deletestu 5` command to delete the 5th student in the student list. The `deletestu` command calls `Model#commitClassmate()`, causing the modified state of ClassMATE after the `deletestu 5` command executes to be saved in the `classmateStateList`, and the `currentStatePointer` is shifted to the newly inserted ClassMATE state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `addstu n/David …​` to add a new student. The `addstu` command also calls `Model#commitClassmate()`, causing another modified ClassMATE state to be saved into the `classmateStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitClassmate()`, so the ClassMATE state will not be saved into the `classmateStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the student was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoClassmate()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous ClassMATE state, and restores ClassMATE to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial ClassMATE state, then there are no previous ClassMATE states to restore. The `undo` command uses `Model#canUndoClassmate()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoClassmate()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the ClassMATE to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `classmateStateList.size() - 1`, pointing to the latest ClassMATE state, then there are no undone ClassMATE states to restore. The `redo` command uses `Model#canRedoClassmate()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `liststu`. Commands that do not modify ClassMATE, such as `liststu`, will usually not call `Model#commitClassmate()`, `Model#undoClassmate()` or `Model#redoClassmate()`. Thus, the `classmateStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitClassmate()`. Since the `currentStatePointer` is not pointing at the end of the `classmateStateList`, all ClassMATE states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire ClassMATE.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `deletestu`, just save the student being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
 ### Tutorial Class Management Features
 (Contributed by Rushil Ramesh and Vishnu Sundaresan)
 
@@ -524,7 +444,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
+| `* * *`  | new user                                   | see help      | refer to instructions when I forget how to use the App                 |
 | `* *`  | new user                                       | view sample data              | see what the app looks like when in use                               |
 | `* * *`  | user                                       | add a new student              |                                                                        |
 | `* * *`  | user                                       | view a student's details       | easily check the details and progress of the students                  |
@@ -538,11 +458,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | view all classes               | see which classes I'm taking                                           |
 | `* * *`  | user                                       | view all students in a class   | see the students enrolled in a particular class                                         |
 | `* *`    | experienced user                           | add class participation details to a student | track the paricipation of each student                   |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many students in ClassMATE | sort students by name           | locate a student easily                                                 |
-| `*`      | user with many classes in ClassMATE | sort classes by name           | locate a class easily                                                 |
-
-*{More to be added}*
+| `* *` | experienced user | add groups within tutorial classes | to organise my class groups |
+| `* *` | experienced user | add students to specific sub-groups | to organise students in groups based on examination (e.g. OP1) |
+| `* *` | experienced user | delete students from specific sub-groups | remove students from the group as required |
+| `*` | user | add different types of marks to students | to mark students for various assessments |
 
 ### Use cases
 
@@ -731,13 +650,24 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+1. Deleting a student that at a negative index.
+   1. Prerequisites: List all students using the `liststu` command. Multiple students in the list.
+   1. Test case: `deletestu -5`<br>
+      Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
+   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Prerequisites: None
 
-1. _{ more test cases …​ }_
+   2. Test case: JSON file missing.<br>
+
+      Expected: ClassMATE gives warning about missing storage, and creates a new storage file populated with sample data.
+
+   3. Test case: JSON file corrupted
+
+      Expected: ClassMATE gives warning about corrupted data, and creates a new storage file populated with sample data.
