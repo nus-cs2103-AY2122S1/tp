@@ -118,7 +118,7 @@ Examples:
 
 ![help message](images/helpMessage.png)
 
-### Adding an item: `add`
+### Adding items: `add`
 
 Adds an item to the inventory.
 
@@ -127,7 +127,7 @@ Format: `add [{name} | id/{id number}] (c/{count}) (cp/{cost price}) (sp/{sell p
 Prefix  |  Argument     | Description                   | Remarks                                                  |
 --------|-------------- |-------------------------------|----------------------------------------------------------|
 &nbsp;  | name          | Name of the item to add.      | Only alphanumeric characters (and spaces) are allowed.   |
-`id/`   | id number     | Id number of item to add.     | Must be a 6 digit integer.                               |
+`id/`   | id number     | Id number of item to add.     | Must be an integer with no more than 6 digits.                               |
 `c/`    | count         | Quantity of the item to add.  | Must be an integer, default value is 1.                  |
 `cp/`   | cost price    | Cost price of the item to add.| Must be a positive number.                               |
 `sp/`   | sell price    | Sell price of the item to add.| Must be a positive number.                               |
@@ -140,7 +140,7 @@ Prefix  |  Argument     | Description                   | Remarks               
 Examples:
 
 - `add apple` adds an apple into the inventory
-- `add id/111111` adds 2 of item with id #111111 into the inventory
+- `add id/111111 c/2` adds 2 of item with id #111111 into the inventory
 - `add banana id/192023 cp/1.0 sp/2.2` adds a banana (#192023) with cost price $1 and sales price $2.20 into the
   inventory.
 
@@ -150,20 +150,20 @@ Examples:
 
 ![add](images/screenshots/add_item.png)
 
-### Deleting an item : `delete`
+### Deleting items : `delete`
 
-Deletes the specified item from the inventory. Use this command to delete items wrongly keyed into the inventory. Costs
+Deletes **all** the specified item from the inventory. Use this command to delete items wrongly keyed into the inventory. Costs
 initially incurred from the item will be removed too.
 
 Format: `delete [{name} | id/{id number}]`
 
-Prefix  |  Argument      | Description
---------|----------------|-------------
-&nbsp;  | name           | Name of the item to delete.
-`id/`   | id number      | Serial number of the item to delete.
+Prefix  |  Argument      | Description                  | Remarks
+--------|----------------|------------------------------|--------------------------------
+&nbsp;  | name           | Name of the item to delete.  | Only alphanumeric characters (and spaces) are allowed.
+`id/`   | id number      | Id number of item to delete. | Must be an integer with no more than 6 digits.
 
 - Delete the specified item entirely from the inventory.
-- An item can be specified by name, serial number, or both.
+- An item can be specified by name,{id number , or both.
 
 
 - `delete Apple` deletes by name
@@ -171,7 +171,7 @@ Prefix  |  Argument      | Description
 
 ![delete](images/screenshots/delete_item.png)
 
-### Removing an item : `remove`
+### Removing items : `remove`
 
 Removes a specified amount of a particular item from the inventory.
 
@@ -179,15 +179,15 @@ Format: `remove [ {name} | id/{id number} ] c/{count}`
 
 Flag    |  Argument      | Description                      | Remarks                                 |
 --------|----------------|----------------------------------|-----------------------------------------|
-&nbsp;  | name           | Name of the item to remove.      |                                         |
-`id/`   | id number      | Id number of the item to remove. |                                         |
+&nbsp;  | name           | Name of the item to remove.      | Only alphanumeric characters (and spaces) are allowed.                                         |
+`id/`   | id number      | Id number of the item to remove. | Must be an integer with no more than 6 digits.                                        |
 `c/`    | count          | Quantity of the item to remove.  | Must be an integer, default value is 1. |
 
-- An item can be specified by name, serial number, or both.
+- An item can be specified by name, id number, or both.
 
 Examples:
 
-- `remove Apple` removes an apple from inventory
+- `remove Apple` removes **one** apple from inventory
 - `remove id/181817 c/5` removes 5 items with id 181817
 
 ![remove](images/screenshots/remove_item.png)
@@ -199,17 +199,17 @@ Edit a particular item in the inventory. Note that display must be in inventory 
 
 Format: `edit {index} (n/{name}) (id/{id}) (cp/{cp}) (sp/{sp}) (t/{tag})...`
 
-Flag    |  Argument    | Description
---------|--------------|-------------
-&nbsp;  | index         | index of the item to edit.
-`n/`    | name          | new name for the item.
-`id/`   | id number     | new id number for the item.
-`cp/`   | cost price    | new cost price for the item.
-`sp/`   | sell price    | new sell price for the item.
-`t/`    | tag           | new tag(s) for the item.
+Flag    |  Argument     | Description                     | Remarks
+--------|---------------|---------------------------------|-------------------------
+&nbsp;  | index         | index of the item to edit.      | Index is 1 based.
+`n/`    | name          | new name for the item.          | Only alphanumeric characters (and spaces) are allowed.
+`id/`   | id number     | new id number for the item.     | Must be an integer with no more than 6 digits.
+`cp/`   | cost price    | new cost price for the item.    | Must be a positive number.
+`sp/`   | sell price    | new sell price for the item.    | Must be a positive number.
+`t/`    | tag           | new tag(s) for the item.        | Only alphanumeric characters are allowed.
 
 - Feel free to edit multiple fields at once!
-- Count cannot be edited, use add, delete or remove instead.
+- Count cannot be edited, use `add`, `delete` or `remove` instead.
 
 <div class="code-example bg-grey-lt-000">
 :exclamation:  When editing tags, old tags will be overwritten!
@@ -218,8 +218,8 @@ Flag    |  Argument    | Description
 
 Examples:
 
-- `edit 1 id/192028` edits first item's id to 192028
-- `edit 2 n/Panadol cp/2`  edits second item's name to Panadol and cost price to $2
+- `edit 1 id/192028` edits first item's id to #192028
+- `edit 2 n/Panadol cp/2`  edits second item's name to "Panadol" and cost price to $2
 
 ![edit](images/screenshots/edit_item.png)
 
@@ -331,7 +331,7 @@ Examples:
 Cancels the specified order from the current order.
 
 Format:
-`corder [ {name} | id/{serial number} ] (c/COUNT)`
+`corder [ {name} | id/{id number} ] (c/COUNT)`
 
 Flag    |  Argument      | Description                                 | Remarks                                         |
 --------|----------------|---------------------------------------------|-------------------------------------------------|
