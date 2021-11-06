@@ -22,10 +22,8 @@ Class Address
 Class Email
 Class Name
 Class Phone
-Class BirthDate
 Class ParticipantId
-Class Tag
-Class Note
+Class BirthDate
 Class NextOfKin
 Class Event
 Class EventName
@@ -58,11 +56,9 @@ Participant *--> Phone
 Participant *--> Email
 Participant *--> Address
 Participant *--> ParticipantId
-Participant *--> BirthDate
-Participant *--> "*" Tag
-Participant *--> "*" Note
-Participant *--> "*" NextOfKin
-Participant *-left-> "*" Event
+Participant --> "0..1" BirthDate
+Participant --> "*" NextOfKin
+Participant "*" <-left-> "*" Event
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address

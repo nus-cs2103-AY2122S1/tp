@@ -5,27 +5,20 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 AddressBook *-right-> "1" UniqueParticipantList
-AddressBook *-right-> "1" UniqueTagList
 AddressBook *-down-> "1" UniqueEventList
-UniqueTagList -[hidden]down- UniqueParticipantList
-UniqueTagList -[hidden]down- UniqueParticipantList
 
-UniqueTagList *-right-> "*" Tag
 UniqueParticipantList -down-> Participant
 UniqueEventList -down-> "*" Event
-
-Participant -up-> "*" Tag
 
 Participant *--> Name
 Participant *--> Phone
 Participant *--> Email
 Participant *--> Address
 Participant *--> ParticipantId
-Participant *--> BirthDate
-Participant *--> "*" Note
-Participant *--> "*" NextOfKin
-Participant *--> "*" Event
-Event *--> "1" EventName
-Event *--> "1" EventDate
+Participant "*" <-left-> "*" Event
+Participant --> "*" NextOfKin
+Participant --> "0..1" BirthDate
+Event *--> EventName
+Event *--> EventDate
 Event --> "0..1" EventTime
 @enduml

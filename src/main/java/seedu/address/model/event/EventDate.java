@@ -31,6 +31,8 @@ public class EventDate implements Comparable<EventDate> {
         this.date = LocalDate.parse(date, DateTimeFormatter.ofPattern(DATE_FORMAT));
     }
 
+    //@@author XXJJXJ-reused.
+    //Reused from https://stackoverflow.com/a/29038060/13624758 with minimal modification.
     /**
      * Returns true if a given string is a valid date.
      *

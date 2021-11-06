@@ -15,28 +15,28 @@ title: Developer Guide
   - [Storage component](#storage-component)
   - [Common classes](#common-classes)
 - [**Implementation**](#implementation)
-    - [\[Completed\] Add Event feature](#completed-add-event-feature)
+    - [Add Event feature](#add-event-feature)
        - [Implementation Details](#implementation-details)
        - [Implementation Rationale](#implementation-rationale)
-    - [\[Completed\] Remove Event feature](#completed-remove-event-feature)
+    - [Remove Event feature](#remove-event-feature)
        - [Implementation Details](#implementation-details)
        - [Design Considerations:](#design-considerations)
           - [Aspect: Specifying Event to be Removed:](#aspect-specifying-event-to-be-removed)
-- [\[Completed\] Filter Event feature](#completed-filter-event-feature)
+    - [Filter Event feature](#filter-event-feature)
       - [Implementation Details](#implementation-details)
       - [Implementation Rationale](#implementation-rationale)
       - [Design Considerations:](#design-considerations)
         - [Aspect: Criteria to filter by:](#aspect-criteria-to-filter-by)
         - [Aspect: With or without prefix:](#aspect-with-or-without-prefix)
-    - [\[Completed\] View Participant's Details feature](#completed-view-participants-details-feature)
+    - [View Participant's Details feature](#view-participants-details-feature)
       - [Implementation Details](#implementation-details-1)
       - [Implementation Rationale](#implementation-rationale-1)
       - [Design Considerations:](#design-considerations-1)
         - [Aspect: Similar participant IDs:](#aspect-similar-participant-ids)
-    - [\[Completed\] Add/Remove Participant to/from event by index](#completed-addremove-participant-tofrom-event-by-index)
+    - [Add/Remove Participant to/from event by index](#addremove-participant-tofrom-event-by-index)
       - [Implementation Details](#implementation-details-2)
       - [Implementation Rationale](#implementation-rationale-2)
-    - [\[Completed\] View Event Details feature](#completed-view-event-details-feature)
+    - [View Event Details feature](#view-event-details-feature)
       - [Implementation Details](#implementation-details-3)
       - [Implementation Rationale](#implementation-rationale-3)
       - [Design Considerations:](#design-considerations-2)
@@ -62,8 +62,8 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+* * `isValidDate` method of EventDate and BirthDate are adapted from stackoverflow [here](https://stackoverflow.com/a/29038060/13624758).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -90,7 +90,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ### Architecture
 
-<img src="images/ArchitectureDiagram.png" width="280" />
+<img src="images/DG images/ArchitectureDiagram.png" width="280" />
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
@@ -116,7 +116,7 @@ The rest of the App consists of four components.
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
-<img src="images/ArchitectureSequenceDiagram.png" width="574" />
+<img src="images/DC images/ArchitectureSequenceDiagram.png" width="574" />
 
 Each of the four main components (also shown in the diagram above),
 
@@ -125,7 +125,7 @@ Each of the four main components (also shown in the diagram above),
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
-<img src="images/ComponentManagers.png" width="300" />
+<img src="images/DC images/ComponentManagers.png" width="300" />
 
 The sections below give more details of each component.
 
@@ -133,7 +133,7 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
-![Structure of the UI Component](images/UiClassDiagram.png)
+![Structure of the UI Component](images/DG images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ParticipantListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
@@ -144,7 +144,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Participant` or `Event` objects residing in the `Model`.
 
 ### Logic component
 
@@ -152,7 +152,7 @@ The `UI` component,
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<img src="images/LogicClassDiagram.png" width="550"/>
+<img src="images/DC images/LogicClassDiagram.png" width="550"/>
 
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
@@ -162,14 +162,14 @@ How the `Logic` component works:
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete 1` Command](images/UG screenshots/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-<img src="images/ParserClasses.png" width="600"/>
+<img src="images/DC images/ParserClasses.png" width="600"/>
 
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
@@ -178,7 +178,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="600" />
+![ModelClassDiagram](images/DG images/ModelClassDiagram.png)
 
 
 The `Model` component,
@@ -190,7 +190,7 @@ The `Model` component,
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Participant` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Participant` needing their own `Tag` objects.<br>
 
-<img src="images/BetterModelClassDiagram.png" width="600" />
+![BetterModelClassDiagram](images/DG images/BetterModelClassDiagram.png)
 
 </div>
 
@@ -199,7 +199,7 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<img src="images/DC images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
 * can save both address book data and user preference data in json format, and read them back into corresponding objects.
@@ -216,7 +216,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Completed\] Add Event feature
+### Add Event feature
 
 This feature allows Managera users to create an event at the specified date and time.
 
@@ -239,7 +239,7 @@ this, Event is implemented with abstractions EventName, EventDate and EventTime.
 reliability of the program.
 
 
-### \[Completed\] Remove Event feature
+### Remove Event feature
 
 This feature allows Managera users to remove an existing event at a particular index of the displayed list.
 
@@ -275,7 +275,7 @@ When the command is executed, there is a check to ensure the index is within the
     * Cons:
         1. The user has to fully match the Event name, which is much more cumbersome. 
 
-### \[Completed\] Filter Event feature
+### Filter Event feature
 
 This feature allows Managera users to filter the event list by date of event and by time.
 
@@ -286,7 +286,7 @@ we can simply add a new `commandType` case for `FilterEventCommand` in `AddressB
 
 Since this feature requires Managera to take in user input and determine if the filter is by:
 
-1. Date only; or
+1. Date only, or
 2. Date and Time
 
 A `FilterEventCommandParser` is made to be responsible for this purpose. The `FilterEventCommandParser` parses user's 
@@ -303,7 +303,7 @@ event list. When the command is executed, the `model` will filter the `FilteredL
 #### Implementation Rationale
 
 With considerations to how the `Event` class is implemented, some events do not have time associated to them.
-We feel that since all `Event` have a date associated through the `EventDate` class, filtering should be done primarily 
+We feel that since all `Event` objects have a date associated through the `EventDate` class, filtering should be done primarily 
 through date i.e. `EventDate`. However, understanding that users might want to filter by time too, it is included as an 
 optional criteria for filtering.
 
@@ -347,9 +347,9 @@ optional criteria for filtering.
 
 The following is the sequence diagram for how a `FilterEventCommand` works internally.
 
-![FilterEventSequenceDiagram](images/FilterEventSequenceDiagram.png)
+![FilterEventSequenceDiagram](images/DG images/FilterEventSequenceDiagram.png)
 
-### \[Completed\] View Participant's Details feature
+### View Participant's Details feature
 
 This feature allows Managera users to look for a specific participant and view their details. The search is done using
 the participant's ID since each participant has a unique ID.
@@ -398,12 +398,14 @@ implemented to allow users the ability to sieve out a single participant for a m
 
 The following is the sequence diagram for how a `ViewCommand` works internally.
 
-![ViewSequenceDiagram](images/ViewSequenceDiagram.png)
+![ViewSequenceDiagram](images/DG images/ViewSequenceDiagram.png)
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-![ViewCommandActivityDiagram](images/ViewCommandActivityDiagram.png)
-### \[Completed\] Add/Remove Participant to/from event by index
+![ViewCommandActivityDiagram](images/DG images/ViewCommandActivityDiagram.png)
+
+
+### Add/Remove Participant to/from event by index
 
 This feature allows Managera users to quickly add/remove participant to/from event according to the current filtered
  list of events and participant visible to user.
@@ -435,14 +437,14 @@ The following activity diagrams summarise what happens when a user executes a ne
 
 `AddParticipantToEventByIndex`
 
-![AddParticipantToEventActivityDiagram](images/AddParticipantToEventByIndexActivityDiagram.png)
+![AddParticipantToEventActivityDiagram](images/DG images/AddParticipantToEventByIndexActivityDiagram.png)
 
 `RemoveParticipantFromEventByIndex`
 
-![RemoveParticipantFromEventActivityDiagram](images/RemoveParticipantByIndexActivityDiagram.png)
+![RemoveParticipantFromEventActivityDiagram](images/DG images/RemoveParticipantByIndexActivityDiagram.png)
 
 
-### \[Completed\] View Event Details feature
+### View Event Details feature
 
 This feature allows Managera users to find an Event by name and view its details. The search is done using the Event's 
 name since Managera employs a UniqueEventList and will not have more than one Event with a given name.
@@ -495,11 +497,11 @@ display.
 
 The following is the sequence diagram for how a `ShowEventDetailsCommand` works internally.
 
-![ShowEventDetailsSequenceDiagram](images/ShowEventDetailsSequenceDiagram.png)
+![ShowEventDetailsSequenceDiagram](images/DG images/ShowEventDetailsSequenceDiagram.png)
 
 The following activity diagram summarises what happens when a user executes a new command:
 
-![ShowEventDetailsActivityDiagram](images/ShowEventDetailsActivityDiagram.png)
+![ShowEventDetailsActivityDiagram](images/DG images/ShowEventDetailsActivityDiagram.png)
 
 ### \[Proposed\] Undo/redo feature
 
@@ -517,15 +519,15 @@ Given below is an example usage scenario and how the undo/redo mechanism behaves
 
 Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
 
-![UndoRedoState0](images/UndoRedoState0.png)
+![UndoRedoState0](images/DG images/UndoRedoState0.png)
 
 Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
-![UndoRedoState1](images/UndoRedoState1.png)
+![UndoRedoState1](images/DG images/UndoRedoState1.png)
 
 Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
-![UndoRedoState2](images/UndoRedoState2.png)
+![UndoRedoState2](images/DG images/UndoRedoState2.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
 
@@ -533,7 +535,7 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 
 Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
-![UndoRedoState3](images/UndoRedoState3.png)
+![UndoRedoState3](images/DG images/UndoRedoState3.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
@@ -542,7 +544,7 @@ than attempting to perform the undo.
 
 The following sequence diagram shows how the undo operation works:
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
+![UndoSequenceDiagram](images/DG images/UndoSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
@@ -556,11 +558,11 @@ The `redo` command does the opposite — it calls `Model#redoAddressBook()`,
 
 Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
 
-![UndoRedoState4](images/UndoRedoState4.png)
+![UndoRedoState4](images/DG images/UndoRedoState4.png)
 
 Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
-![UndoRedoState5](images/UndoRedoState5.png)
+![UndoRedoState5](images/DG images/UndoRedoState5.png)
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
@@ -875,7 +877,6 @@ Preconditions: At least one Event has been added to Managera.
 7.  Saved data should be kept in a single file to allow for easy transfer to a different device.
 8.  The system should respond within two seconds.
 
-*{More to be added}*
 
 ### Glossary
 
@@ -906,10 +907,9 @@ testers are expected to do more *exploratory* testing.
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
 
 ### Deleting a participant
 
@@ -926,7 +926,6 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
 
 ### Saving data
 
