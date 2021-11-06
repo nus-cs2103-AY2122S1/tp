@@ -482,7 +482,7 @@ The *Sequence Diagram* below shows how the `Ui` components interact with each ot
 *Figure I.1.1: Sequence Diagram of Calendar Command*
 
 When the user requests to view the calendar interface, the `displaySchedulePanel()` method of `CenterPanel` is called, which sets the current display to show the `SchedulePanel`.
-Switching to the student view and tag list is similarly achieved by calling `displayPersonGridPanel()` and `displayTagListPanel` respectively.
+Switching to the student view and tag list is similarly achieved by calling `displayPersonGridPanel()` and `displayTagListPanel()` methods respectively.
 
 ### Undo/redo feature
 
@@ -718,8 +718,8 @@ Priorities: High - must have; Medium - nice to have;  Low - unlikely to have.
 | S36 | `HIGH`   | user                                       | edit a student's outstanding fees                                   |                                                                         |
 | S37 | `HIGH`   | user                                       | delete a student's outstanding fees                                 |                                                                         |
 | S38 | `LOW`    | user                                       | have an archive for removed students                                | revisit the archived data if the need arises                            |
-| S39 | `LOW`    | user with many students stored in TAB  | sort students by name                                               | locate a student easily                                                 |
-| S40 | `LOW`    | user with many students stored in TAB  | sort students by tag                                                | locate a student easily                                                 |
+| S39 | `LOW`    | user with many students stored in TAB      | sort students by name                                               | locate a student easily                                                 |
+| S40 | `LOW`    | user with many students stored in TAB      | sort students by tag                                                | locate a student easily                                                 |
 | L1  | `HIGH`   | user                                       | add lessons for a student                                           | keep track of the lessons each student has                              |
 | L2  | `HIGH`   | user                                       | add recurring lessons for a student                                 | keep track of the regular lessons                                       |
 | L3  | `HIGH`   | user                                       | add makeup lessons for a student                                    | track lessons outside of my usual lesson schedule                       |
@@ -1101,24 +1101,24 @@ testers are expected to do more *exploratory* testing.
 
 ### Launch and shutdown
 
-1. Initial launch
+**Initial launch**
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the _GUI_ with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the _GUI_ with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+**Saving window preferences**
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+   2. Re-launch the app by double-clicking the jar file.<br>
+          Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+_{ more test cases …​ }_
 
 ### Deleting a person
 
-1. Deleting a person while all persons are being shown<br>
+**Deleting a person while all persons are being shown<br>**
 Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
    * Test case: `delete 1`<br>
@@ -1135,7 +1135,7 @@ Expected: Error details shown in the status message.
 
 ### Adding a lesson
 
-1. Adding a lesson to a students while all students are being shown<br>
+**Adding a lesson to a students while all students are being shown<br>**
 Prerequisites: List all students using the `list` command. Multiple students in the list.
 
   * Test case: `ladd 1 date/12 Oct 2021 time/1100-1200 subject/Science rates/40`<br>
@@ -1145,11 +1145,11 @@ Prerequisites: List all students using the `list` command. Multiple students in 
   * Test case: `ladd 1 time/1100-1200 subject/Science rates/40`<br>
      Expected: Missing start date for lesson. Error details will be shown in the status message.
 
-2. Adding a lesson to a student after a `find` command is executed.
+**Adding a lesson to a student after a `find` command is executed.**
   
   * Test case: `ladd 2 date/12 Oct 2021 time/1100-1200 subject/Science rates/40`<br>
     Expected: A lesson with the corresponding details will be added to the lesson list of the 2nd student in the resulting list after `find`.
-    Details of the added lesson, and the student with the lesson will be shown in the status message.
+    Details of the added lesson, and the student with the lesson will be shown in the status message. If there is no 2nd student, an error message will be shown.
 
 Incorrect `ladd` commands to try: `ladd...`
 
@@ -1163,7 +1163,7 @@ Expected: Error details will be shown in the status message.
 
 ### Editing a lesson of a student
 
-1. Editing a lesson of a student while all students are being shown<br>
+**Editing a lesson of a student while all students are being shown<br>**
 Prerequisites: List all students using the `list` command. Multiple students in the list.
 
 * Test case: `ledit 1 1 date/20 Jan 2022` <br>
@@ -1188,7 +1188,7 @@ Expected: Error details will be shown in the status message.
 
 ### Deleting a lesson from a student
 
-1. Deleting a lesson from a student while all persons are being shown<br>
+**Deleting a lesson from a student while all persons are being shown<br>**
 Prerequisites: List all students using the `list` command. Multiple students in the list.
 
   * Test case: `ldelete 1 1`<br>
@@ -1208,6 +1208,82 @@ Incorrect `ldelete` commands to try: `ldelete...`
 3. `ldelete x` where either the student index or lesson index is not specified.
 
 Expected: Error details will be shown in the status message.
+
+### Navigation
+
+**Navigating the Calendar**
+
+   * Test case: `week`<br>
+     Expected: `CenterPanel` displays the week page of the Calendar Interface. 
+   
+   * Test case: `next`<br>
+     Expected: `CenterPanel` displays the Calendar Interface and navigates forward in the calendar.
+   
+   * Test case: `today`<br>
+     Expected: `CenterPanel` displays the Calendar Interface and jumps to the current day/week/month/year.
+
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Note:**
+The Calendar remembers where you left off in the current _session_, so it is expected that calling `today` 
+will bring you to today in the month page, if you left off on the month page. 
+If you haven't previously entered the calendar interface, it will default to starting on the week page, which is typically
+the most used page.
+
+</div>
+
+**Navigating the student list**
+
+  * Test case: `list`
+  * Expected: `CenterPanel` displays the list of **all** students.
+
+  * Test case: `view 2`
+  * Expected: If there is a second student, this command will select and shows the lessons of the second student
+    (selecting the student in the GUI should do the same thing).
+    Otherwise, it will show an error message for trying to view a non-existent student 
+    ("The student index provided is invalid!").
+
+**Viewing the list of tags**
+
+  * Test case: `tag`
+  * Expected: `CenterPanel` displays the list of **all** tags.
+
+**Viewing Reminders:**
+
+  * Test case: `remind`
+  * Expected: [TODO @xiaoyunn]
+  
+**Viewing Help:**
+
+  * Test case: `help`
+  * Expected: Help window gets opened/focused, showing a table of all available commands and their details, 
+    as well as a link to the User Guide.
+
+### Shortcuts
+
+**Typing from anywhere in Tab:**
+  
+   * Test case: 
+     1. Click anywhere on the main window outside the CommandBox, such that it is no longer in focus.
+     2. Begin typing any command.
+   * Expected: CommandBox shifts back to focus, allowing you to type in it without having to click on it again.
+   
+**Going back to the previous commands:**<br>
+Prerequisites: Have a previous command entered, and an empty CommandBox in focus.
+   
+   * Test case: <kbd>Ctrl</kbd> + <kbd>z</kbd> 
+   * Expected: Brings back the previous command entered into the CommandBox.
+     
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Note:**
+<kbd>Ctrl</kbd> + <kbd>z</kbd> **NOT** a shortcut for the `undo` command.
+</div>
+
+**Function Key Accelerators:**
+
+  * Test case: <kbd>F1</kbd>
+  * Expected: Help window gets opened/focused
 
 ### Saving data
 
