@@ -444,35 +444,35 @@ Examples:
 * `list` displays all students and lessons in TutorAid by only showing their names and list indexes.
 * `list -a` displays all students and lessons in TutorAid while showing all of their fields' data.
 
-### Adding students to lessons: `add -sl`
+### Adding student to lesson: `add -sl`
 {:.no_toc}
-Adds students to lessons.
+Adds a student to a lesson.
 
-Format: `add -sl s/STUDENT_INDEX... l/LESSON_INDEX...`
+Format: `add -sl s/STUDENT_INDEX l/LESSON_INDEX`
 
-* Adds the students at the specified student indexes to the lessons at the specified lesson indexes.
+* Adds the student at the specified student index to the lesson at the specified lesson index.
 * The index refers to the index number shown in the displayed student list and lesson list.
 * The index must be a **positive integer** 1, 2, 3, ...
 
 Examples:
-* `add -sl s/1 2 3 l/1 2` add students with index 1, 2, 3 into lessons with index 1, 2.
+* `add -sl s/1 l/2` adds the student with index 1 into the lesson with index 2.
 
-> :exclamation: All of these students must not be attending any of the lessons provided for this command to work.
+> :exclamation: The student must not be attending the lesson provided for this command to work.
 
-### Deleting students from lessons: `del -sl`
+### Deleting student from lesson: `del -sl`
 {:.no_toc}
-Deletes students from lessons.
+Deletes a student from a lesson.
 
-Format: `del -sl s/STUDENT_INDEX... l/LESSON_INDEX...`
+Format: `del -sl s/STUDENT_INDEX l/LESSON_INDEX`
 
-* Deletes the students at the specified student indexes from the lessons at the specified lesson indexes.
+* Deletes the student at the specified student index from the lesson at the specified lesson index.
 * The index refers to the index number shown in the displayed student list and lesson list.
 * The index must be a **positive integer** 1, 2, 3, ...
 
 Examples:
-* `del -sl s/2 3 l/1 2 3` deletes students with index 2, 3 from lessons with index 1, 2, 3.
+* `del -sl s/2 l/1` deletes the student with index 2 from the lesson with index 1.
 
-> :exclamation: All of these students must be attending all the lessons provided for this command to work.
+> :exclamation: The student must be attending the lesson provided for this command to work.
 
 ## 5.4 Other Commands
 
@@ -555,8 +555,8 @@ Action | Format and Examples
 Action | Format and Examples
 --------|------------------
 **[List](#listing-all-students-and-lessons-list)** | `list [-a]`<br>e.g., `list`, `list -a`
-**[Add students to lessons](#adding-students-to-lessons-add--sl)** | `add -sl s/STUDENT_INDEX... l/LESSON_INDEX...`<br>e.g.,`add -sl s/1 2 3 l/1 2`
-**[Delete students from lessons](#deleting-students-from-lessons-del--sl)** | `del -sl s/STUDENT_INDEX... l/LESSON_INDEX...`<br>e.g.,`del -sl s/2 3 l/1 2 3`
+**[Add students to lessons](#adding-student-to-lesson-add--sl)** | `add -sl s/STUDENT_INDEX l/LESSON_INDEX`<br>e.g.,`add -sl s/1 l/2`
+**[Delete students from lessons](#deleting-student-from-lesson-del--sl)** | `del -sl s/STUDENT_INDEX l/LESSON_INDEX`<br>e.g.,`del -sl s/2 l/1`
 
 ### 8.4 Other commands
 
