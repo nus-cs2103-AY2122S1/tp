@@ -53,7 +53,7 @@ public class SampleDataUtil {
             new ModuleLesson(parseModuleCode("CS2103 T09"), new LessonDay("1"),
                     new LessonTime("14:00"), new LessonTime("15:00"), new Remark("I3 Audi")),
             new ModuleLesson(parseModuleCode("CS2040 T05"), new LessonDay("1"),
-                    new LessonTime("14:00"), new LessonTime("15:00"), new Remark("COM1-120")),
+                    new LessonTime("17:00"), new LessonTime("18:00"), new Remark("COM1-120")),
         };
     }
 
