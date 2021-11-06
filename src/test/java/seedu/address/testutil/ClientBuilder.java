@@ -1,10 +1,15 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLIENTID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.allPrefixLess;
 import static seedu.address.model.client.NextMeeting.NULL_MEETING;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.commons.mapper.PrefixMapper;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Address;
@@ -190,15 +195,11 @@ public class ClientBuilder {
      */
     public EditClientDescriptor buildFunction() {
         EditClientDescriptor editClientDescriptor = new EditClientDescriptor();
-        editClientDescriptor.setName(name);
-        editClientDescriptor.setPhone(phone);
-        editClientDescriptor.setEmail(email);
-        editClientDescriptor.setAddress(address);
-        editClientDescriptor.setRiskAppetite(riskAppetite);
-        editClientDescriptor.setDisposableIncome(disposableIncome);
-        editClientDescriptor.setCurrentPlan(currentPlan);
-        editClientDescriptor.setLastMet(lastMet);
-        editClientDescriptor.setNextMeeting(nextMeeting);
+        Client client = build();
+        Arrays.stream(allPrefixLess(PREFIX_CLIENTID, PREFIX_TAG))
+                .map(PrefixMapper::getAttributeAndSetFunction)
+                .forEach(f -> f.accept(editClientDescriptor, client));
+
         editClientDescriptor.setTags(tags);
         return editClientDescriptor;
     }

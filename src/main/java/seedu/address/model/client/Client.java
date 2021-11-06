@@ -383,18 +383,11 @@ public class Client {
             assert clientToEdit != null;
 
             EditClientDescriptor clientDescriptor = copyClientDescriptor(clientToEdit);
-            editClientDescriptor.getName().ifPresent(clientDescriptor::setName);
-            editClientDescriptor.getEmail().ifPresent(clientDescriptor::setEmail);
-            editClientDescriptor.getPhone().ifPresent(clientDescriptor::setPhone);
-            editClientDescriptor.getAddress().ifPresent(clientDescriptor::setAddress);
-            editClientDescriptor.getRiskAppetite().ifPresent(clientDescriptor::setRiskAppetite);
-            editClientDescriptor.getDisposableIncome().ifPresent(clientDescriptor::setDisposableIncome);
-            editClientDescriptor.getCurrentPlan().ifPresent(clientDescriptor::setCurrentPlan);
-            editClientDescriptor.getLastMet().ifPresent(clientDescriptor::setLastMet);
+            Arrays.stream(allPrefixLess(PREFIX_CLIENTID, PREFIX_TAG))
+                    .map(PrefixMapper::getEditAndSetFunction)
+                    .forEach(f -> f.accept(editClientDescriptor, clientDescriptor));
 
-            NextMeeting tempUpdatedNextMeeting = editClientDescriptor.getNextMeeting()
-                    .orElse(clientToEdit.getNextMeeting());
-            NextMeeting updatedNextMeeting = tempUpdatedNextMeeting.copyNextMeeting();
+            NextMeeting updatedNextMeeting = clientDescriptor.nextMeeting.copyNextMeeting();
             if (!updatedNextMeeting.isNullMeeting()) {
                 updatedNextMeeting.setWithWho(clientDescriptor.name);
             }

@@ -38,7 +38,7 @@ public class SortByAttribute implements Comparator<Client> {
     }
 
     /**
-     * {@see thenCompareByAttribute}
+     * @see #thenCompareByAttribute(Prefix, SortDirection)
      */
     public SortByAttribute thenCompareByAttribute(Prefix prefix) {
         return this.thenCompareByAttribute(prefix, SortDirection.SORT_ASCENDING);
