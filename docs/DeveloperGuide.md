@@ -1133,8 +1133,127 @@ testers are expected to do more *exploratory* testing.
 ***
 
 #### Get Personal Detail
+List of invariance to guide additional test case generation:
+- At least one of `p/`, `e/`, or `te/` must be provided
+- Name tag `n/` is optional; its use indicates intention to get personal detail of students whose name matches
+  the given keywords
+- Lack of phone number will not be explicitly shown, unless there are no other information to show.
+- Current view of AcademyDirectory does not affect result
+- View of AcademyDirectory always resets to the view that will be obtained when running [`ListCommand`](#listcommand)
+- Order of tags present to `GetCommand` does not matter. `GetCommand` will prioritise showing phone number, followed
+  by email address, followed by telegram handle.
+- If duplicates of the same tag is given, the last tag will be used regardless of its validity.
 
-1. _{ more test cases to come …​ }_
+Below are a few test cases which checks for the above. The test cases are by no means exhaustive. 
+
+1. Retrieving personal detail of all students while all students have a phone number. 
+   1. Prerequisites:
+       - All students in the list must have a phone number 
+       - Run each test case twice, the first time by having all students listed using the `list` command, 
+      and the second time by having the view only show some students e.g. by using `filter` command 
+      on the tags. Expected outcome is the same in both cases for all test cases
+   2. Test cases:
+      1. `get p/`<br>
+      Expected: Phone number of all students are shown in the result display. 
+      2. `get e/`<br>
+      Expected: Email address of all students are shown in the result display.
+      3. `get te/` <br>
+      Expected: Telegram handle of all students are shown in the result display.
+      4. `get p/ e/` <br>
+      Expected: Phone number of all students are shown in the result display, followed by email address
+      of all students.
+      5. `get e/ p/` <br>
+      Expected: Phone number of all students are shown in the result display, followed by email address
+      of all students.
+      6. `get e/ p/ te/` <br>
+      Expected: Phone number of all students are shown in the result display, followed by email address
+      and then by telegram handle. 
+2. Retrieving personal detail of all students. At least one student has no phone number and
+at least one student has a phone number.
+   1. Prerequisites:
+      - At least one student has no phone number and at least one student has a phone number.
+      - Run each test case twice, the first time by having all students listed using the `list` command,
+        and the second time by having the view only show some students e.g. by using `filter` command
+        on the tags. Expected outcome is the same in both cases for all test cases
+   2. Test Cases: Same as point 1 <br>
+      Expected: Same as point 1, but only students who have phone numbers will have their phone numbers displayed.
+      No change in email address results and/or telegram handle results
+3. Retrieving personal detail of all students. No student has a phone number. 
+   1. Prerequisites:
+       - No student has a phone number.
+       - Run each test case twice, the first time by having all students listed using the `list` command,
+         and the second time by having the view only show some students e.g. by using `filter` command
+         on the tags. Expected outcome is the same in both cases for all test cases
+   2. Test Cases: Same as point 1 <br>
+      Expected: Same as point 1, with the following (minor) changes 
+         1. Feedback box will always say "Failed to receive one or more personal details. Showing what I can..." for all 
+         test cases.
+         2. For test cases with tags `e/` and/or `te/`, result display will still show email addresses and/or telegram handles
+         3. For test cases without the above tags, result display will show "Nothing to show..."
+4. Retrieving personal detail of all students. No students are present in AcademyDirectory
+   1. Prerequisites: Use `clear` command before beginning testing to make sure no students are present in AcademyDirectory 
+   2. Test Cases: Same as point 1 <br>
+      Expected:
+         1. Feedback box will always say "Failed to receive one or more personal details. Showing what I can..." for all 
+            test cases.
+         2. Result display will always show "Nothing to show..."
+5. Retrieving personal detail of a student by keyword. At least one student whose name
+matches the given keyword is present in AcademyDirectory. Said student has a phone number.
+   1. Prerequisites:
+       - At least one student has a name matches `alex`. By match, we mean a case-insensitive keyword match i.e. both "Alex"
+   and "aLeX" will match to `alex`. See this matching behavior in [`FilterCommand`](#filtercommand) for more details.
+       - Matched students have a phone number.
+       - Run each test case twice, the first time by having all students listed using the `list` command, 
+      and the second time by having the view only show some students e.g. by using `filter` command
+      on the tags. Expected outcome is the same in both cases for all test cases
+   2. Test cases:
+       1. `get p/ n/alex`<br>
+        Expected: Phone number of all students whose name matches `alex` are shown in the result display.
+       2. `get e/ n/alex`<br>
+        Expected: Email address of all students whose name matches `alex` are shown in the result display.
+       3. `get te/ n/alex` <br>
+        Expected: Telegram handle of all students whose name matches `alex` are shown in the result display.
+       4. `get p/ e/ n/alex` <br>
+        Expected: Phone number of all students whose name matches `alex` are shown in the result display, followed by email address
+        of all students.
+       5. `get e/ p/ te/ n/alex` <br>
+        Expected: Phone number of all students whose name matches `alex` are shown in the result display, followed by email address
+        and then by telegram handle.
+       6. `get e/ n/alex p/ te/` <br>
+      Expected: Phone number of all students whose name matches `alex` are shown in the result display, followed by email address
+      and then by telegram handle.
+       7. `get n/alex e/ p/ te/` <br>
+      Expected: Phone number of all students whose name matches `alex` are shown in the result display, followed by email address
+      and then by telegram handle.
+
+6. Retrieving personal detail of a student by keyword. At least one student whose name matches the given keyword 
+is present in AcademyDirectory. Said student/s have no phone numbers.
+   1. Prerequisites:
+       - At least one student has a name matches `alex`. By match, we mean a case-insensitive keyword match i.e. both "Alex"
+       and "aLeX" will match to `alex`. See this matching behavior in [`FilterCommand`](#filtercommand) for more details.
+       - Matched students have no phone numbers.
+       - Run each test case twice, the first time by having all students listed using the `list` command,
+       and the second time by having the view only show some students e.g. by using `filter` command
+       on the tags. Expected outcome is the same in both cases for all test cases
+   2. Test cases: Same as point 5 <br>
+      Expected: Same as point 5, with the following (minor) changes
+       1. Feedback box will always say "Failed to receive one or more personal details. Showing what I can..." for all
+        test cases.
+       2. For test cases with tags `e/` and/or `te/`, result display will still show email addresses and/or telegram handles
+       3. For test cases without the above tags, result display will show "Nothing to show..."
+
+7. Retrieving personal detail of a student by keyword. No student whose name matches the given keyword is present in AcademyDirectory. 
+   1. Prerequisites:
+        - No student has a name which matches `alex`. By match, we mean a case-insensitive keyword match i.e. both "Alex"
+        and "aLeX" will match to `alex`. See this matching behavior in [`FilterCommand`](#filtercommand) for more details.
+        - Run each test case twice, the first time by having all students listed using the `list` command,
+        and the second time by having the view only show some students e.g. by using `filter` command
+        on the tags. Expected outcome is the same in both cases for all test cases
+   2. Test cases: Same as point 5 <br>
+      Expected: Same as point 5, with the following (minor) changes
+      1. Feedback box will always say "Failed to receive one or more personal details. Showing what I can..." for all
+         test cases.
+      2. Result display will always show "Nothing to show..."
 
 ***
 
