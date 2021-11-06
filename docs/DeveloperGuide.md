@@ -132,21 +132,23 @@ How the parsing works:
 The `Model` component is made up of the following subpackages,
 
 * [`friend`](https://github.com/AY2122S1-CS2103T-W13-4/tp/tree/master/src/main/java/seedu/address/model/friend)
-  * a `Friend` comprises of a `FriendId`, `FriendName` and a set of `GameFriendLink`s.
-  * stores the friends' data i.e., all `Friend` objects (which are contained in a `UniqueFriendsList` object).
+  * a `Friend` comprises of a `FriendId`, `FriendName`, `Schedule` and a map of `GameFriendLink`s.
+  * a `Schedule` is made of 7 `Day`s, each consisting of a `DayOfWeek`.
+  * stores the friends' data i.e., all `Friend` objects in a `UniqueFriendsList` object.
 
 * [`game`](https://github.com/AY2122S1-CS2103T-W13-4/tp/tree/master/src/main/java/seedu/address/model/game)
   * a `Game` comprises of a `GameId` object. 
-  * stores the games' data i.e., all `Game` objects (which are contained in a `UniqueGamesList` object).
+  * stores the games' data i.e., all `Game` objects in a `UniqueGamesList` object.
   
 * [`gamefriendlink`](https://github.com/AY2122S1-CS2103T-W13-4/tp/tree/master/src/main/java/seedu/address/model/gamefriendlink)
-  * stores the relationship between a `Friend` and a `Game` as a `GameFriendLink` object.
-  * a `GameFriendLink` object comprises of a `UserName` object.
+  * stores the relationship between a `Friend` and a `Game` through their respective `FriendId` and `GameId`, as a `GameFriendLink` object.
+  * a `GameFriendLink` comprises of a `UserName` and a `SkillValue`.
 
 The `Model` component also,
 
-* stores the currently 'selected' `Friend` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Friend>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* stores the currently 'selected' `Game` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Game>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the currently 'selected' `Friend` objects (e.g., results of a `list` query) as a separate _filtered_ list which is not exposed to outsiders.
+* stores the currently 'selected' and 'sorted' `Friend` objects (e.g., results of a `recommend` query) as a separate _filteredAndSorted_ list which is exposed to outsiders as an unmodifiable `ObservableList<Friend>` that can be 'observed' <br>e.g. the UI's `Friends` Window is bound to this list so that the UI automatically updates when the data in the list changes.
+* stores the currently 'selected' `Game` objects (e.g., results of a 'list' query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Game>` that can be 'observed' <br>e.g. the UI's `Games` Window is bound to this list so that the UI automatically updates when the data in the list changes.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` object.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
