@@ -153,6 +153,8 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+
 ### Category feature
 
 #### Implementation
@@ -182,7 +184,7 @@ The following sequence diagram shows how modifying the category field with `edit
 The following activity diagram shows what happens when a user executes the `edit` command with category specified
 ![EditCategoryActivityDiagram](images/EditCategoryActivityDiagram.png)
 
-####Design considerations:
+#### Design considerations:
 
 **Aspect: How Category is called by the user:**
 
@@ -248,7 +250,7 @@ The following activity diagram summarises what happens when a Tour Guide execute
 =======
 ### Filter feature
 
-#### Proposed Implementation
+#### Implementation
 
 The filter mechanism works by modifying the GUI of the application to display the contacts in that category without making any changes to the actual contacts stored. The filter implementation makes use of the following operations:
 
@@ -450,6 +452,7 @@ Step 2. The user can click on the contact on the GUI to expand it and display th
 * **Alternative 2:** Separate command for review
     * Pros: Increases modularity by making review an entirely new command.
     * Cons: Too many commands which may confuse the User.
+
 ### Summary Feature
 
 #### Implementation
@@ -477,6 +480,59 @@ The following sequence diagram gives an overview of how `Summary` works:
 * **Alternative 2:** Gets data directly from `Contact`, `Review` etc.
     * Pros: Data is kept directly with the low-level classes and pulled from there.
     * Cons: Extremely complex, especially after user adds, deletes or edits a contact.
+
+### Export Feature
+
+#### Implementation
+
+The Export feature works such that it export the contacts specified into a text file, without modifying any contacts in the list.
+It is implemented with the following operation:
+
+* `ExportCommandIndex#execute()`  —  Exports the contacts at the specified index in the current list.
+* * `ExportCommandAll#execute()`  —  Exports all the contacts in the current list.
+
+The feature makes use of an `ExportStorage` class, which handles the manipulation of the aforementioned exported text file. It is implemented inside the Storage component and is implemented using a singleton design pattern. This class has an `addToStorage` write method which is called by the `exportContact()` method in the read-only `AddressBook` model. 
+
+Given below is an example usage scenario and how the Export feature behaves at each step:
+
+Step 1. The user executes the command `list` to look at all contacts.
+
+Step 2. The user executes the command `export 1` to export the contact at index 1 in the list.
+The `export` command calls `ExportCommandParser#parse()`.
+
+Step 3. If the index is not out of range for the list (i.e. the list has a contact at index 1), an `ExportCommandIndex` is created by `ExportCommandParser#parse()` instead of an `ExportCommandAll`, as the command has specified a valid index.
+
+Step 4. The `ExportCommandIndex` will then be executed.
+
+The following sequence diagram shows how the Export operation works to export all filtered contacts:
+
+![Sequence Diagram for Export](images/ExportSequenceDiagram.png)
+
+The following activity diagram summarises what happens when a Tour Guide executes a new export command to export a single contact:
+
+![Activity Diagram for Export](images/ExportActivityDiagram.png)
+
+#### Design considerations:
+
+**Aspect: How Export retrieves data from the internal AddressBook**
+
+* **Alternative 1 (current choice):** Works on a Read-Only copy of `AddressBook`.
+    * Pros: Easier to implement, guaranteed to not edit the internals.
+    * Cons: Exposing internal workings of `AddressBook`.
+
+* **Alternative 2:** Gets data directly from `Contact`, `Review` etc.
+    * Pros: Data is kept directly with the low-level classes and pulled from there.
+    * Cons: Extremely complex, especially after user adds, deletes or edits a contact.
+
+**Aspect: How `ExportCommand` exports a single contact vs. all contacts**
+
+* **Alternative 1 (current choice):** `ExportCommand` is abstracted into `ExportCommandAll` and `ExportCommandIndex` for single export vs. collective export respectively.
+    * Pros: Easier to understand, hides the loop of exporting contacts away from the `Parser`, inside the implementation of `ExportCommandAll`.
+    * Cons: Creates two additional command classes
+
+* **Alternative 2:** Single `ExportCommand` takes an index as argument and is repeatedly called for exporting all contacts
+    * Pros: All export commands are handled in one class.
+    * Cons: The one ExportCommandParser will be extremely complex, has to handle parsing as well as recursively calling another `ExportCommand` for each index.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
