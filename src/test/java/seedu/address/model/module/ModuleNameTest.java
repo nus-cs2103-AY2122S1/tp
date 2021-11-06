@@ -41,10 +41,10 @@ class ModuleNameTest {
         // does not start with 2-4 letters -> returns false
         assertFalse(ModuleName.isValidName("A2103"));
 
-        // does not 4 digits -> returns false
+        // does not have 4 digits -> returns false
         assertFalse(ModuleName.isValidName("CS210"));
 
-        // does not start with 0-4 letters -> returns false
+        // does not end with 0-4 letters -> returns false
         assertFalse(ModuleName.isValidName("CS2103AAAAA"));
     }
 
