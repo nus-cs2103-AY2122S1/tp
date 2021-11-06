@@ -42,7 +42,7 @@ public class SummaryTest {
         ObservableList<PieChart.Data> summaryCategory = summary.getPercentageCategoryGui();
 
         String category = ContactBuilder.DEFAULT_CATEGORY_CODE;
-        model.addContact(new ContactBuilder().withName("Alice").build());
+        model.addContact(new ContactBuilder().withName("Ang Mo Kio Village").build());
 
 
         ReadOnlyAddressBook addressBookAfterAdd = model.getAddressBook();
@@ -73,7 +73,7 @@ public class SummaryTest {
         ObservableList<PieChart.Data> summaryRating = summary.getPercentageRatingsGui();
 
         String category = ContactBuilder.DEFAULT_RATING;
-        model.addContact(new ContactBuilder().withName("Alice").build());
+        model.addContact(new ContactBuilder().withName("Ang Mo Kio Village").build());
 
 
         ReadOnlyAddressBook addressBookAfterAdd = model.getAddressBook();
@@ -106,7 +106,7 @@ public class SummaryTest {
 
         String rating = ContactBuilder.DEFAULT_RATING;
         String category = ContactBuilder.DEFAULT_CATEGORY_CODE;
-        model.addContact(new ContactBuilder().withName("Alice").build());
+        model.addContact(new ContactBuilder().withName("Ang Mo Kio Village").build());
 
 
         ReadOnlyAddressBook addressBookAfterAdd = model.getAddressBook();
@@ -159,7 +159,7 @@ public class SummaryTest {
 
         String rating = ContactBuilder.DEFAULT_RATING;
         String category = ContactBuilder.DEFAULT_CATEGORY_CODE;
-        model.addContact(new ContactBuilder().withName("Alice").build());
+        model.addContact(new ContactBuilder().withName("Ang Mo Kio Village").build());
 
         model.setAddressBook(new AddressBook());
         ReadOnlyAddressBook addressBookAfterClear = model.getAddressBook();

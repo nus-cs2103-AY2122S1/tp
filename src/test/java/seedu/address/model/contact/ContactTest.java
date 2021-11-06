@@ -32,13 +32,13 @@ public class ContactTest {
         assertFalse(AIRZONE.isSameContact(null));
 
         // same name, all other attributes different -> returns true
-        Contact editedAlice = new ContactBuilder(AIRZONE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+        Contact editedAirzone = new ContactBuilder(AIRZONE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(AIRZONE.isSameContact(editedAlice));
+        assertTrue(AIRZONE.isSameContact(editedAirzone));
 
         // different name, all other attributes same -> returns false
-        editedAlice = new ContactBuilder(AIRZONE).withName(VALID_NAME_BOB).build();
-        assertFalse(AIRZONE.isSameContact(editedAlice));
+        editedAirzone = new ContactBuilder(AIRZONE).withName(VALID_NAME_BOB).build();
+        assertFalse(AIRZONE.isSameContact(editedAirzone));
 
         // name differs in case, all other attributes same -> returns false
         Contact editedBob = new ContactBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
@@ -53,8 +53,8 @@ public class ContactTest {
     @Test
     public void equals() {
         // same values -> returns true
-        Contact aliceCopy = new ContactBuilder(AIRZONE).build();
-        assertTrue(AIRZONE.equals(aliceCopy));
+        Contact airzoneCopy = new ContactBuilder(AIRZONE).build();
+        assertTrue(AIRZONE.equals(airzoneCopy));
 
         // same object -> returns true
         assertTrue(AIRZONE.equals(AIRZONE));
@@ -69,23 +69,23 @@ public class ContactTest {
         assertFalse(AIRZONE.equals(BOB));
 
         // different name -> returns false
-        Contact editedAlice = new ContactBuilder(AIRZONE).withName(VALID_NAME_BOB).build();
-        assertFalse(AIRZONE.equals(editedAlice));
+        Contact editedAirzone = new ContactBuilder(AIRZONE).withName(VALID_NAME_BOB).build();
+        assertFalse(AIRZONE.equals(editedAirzone));
 
         // different phone -> returns false
-        editedAlice = new ContactBuilder(AIRZONE).withPhone(VALID_PHONE_BOB).build();
-        assertFalse(AIRZONE.equals(editedAlice));
+        editedAirzone = new ContactBuilder(AIRZONE).withPhone(VALID_PHONE_BOB).build();
+        assertFalse(AIRZONE.equals(editedAirzone));
 
         // different email -> returns false
-        editedAlice = new ContactBuilder(AIRZONE).withEmail(VALID_EMAIL_BOB).build();
-        assertFalse(AIRZONE.equals(editedAlice));
+        editedAirzone = new ContactBuilder(AIRZONE).withEmail(VALID_EMAIL_BOB).build();
+        assertFalse(AIRZONE.equals(editedAirzone));
 
         // different address -> returns false
-        editedAlice = new ContactBuilder(AIRZONE).withAddress(VALID_ADDRESS_BOB).build();
-        assertFalse(AIRZONE.equals(editedAlice));
+        editedAirzone = new ContactBuilder(AIRZONE).withAddress(VALID_ADDRESS_BOB).build();
+        assertFalse(AIRZONE.equals(editedAirzone));
 
         // different tags -> returns false
-        editedAlice = new ContactBuilder(AIRZONE).withTags(VALID_TAG_HUSBAND).build();
-        assertFalse(AIRZONE.equals(editedAlice));
+        editedAirzone = new ContactBuilder(AIRZONE).withTags(VALID_TAG_HUSBAND).build();
+        assertFalse(AIRZONE.equals(editedAirzone));
     }
 }

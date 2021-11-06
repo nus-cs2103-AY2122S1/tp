@@ -46,9 +46,9 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicateContacts_throwsDuplicateContactException() {
         // Two contacts with the same identity fields
-        Contact editedAlice = new ContactBuilder(AIRZONE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Contact editedAirzone = new ContactBuilder(AIRZONE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        List<Contact> newContacts = Arrays.asList(AIRZONE, editedAlice);
+        List<Contact> newContacts = Arrays.asList(AIRZONE, editedAirzone);
         AddressBookStub newData = new AddressBookStub(newContacts);
 
         assertThrows(DuplicateContactException.class, () -> addressBook.resetData(newData));
@@ -73,9 +73,9 @@ public class AddressBookTest {
     @Test
     public void hasContact_contactWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addContact(AIRZONE);
-        Contact editedAlice = new ContactBuilder(AIRZONE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Contact editedAirzone = new ContactBuilder(AIRZONE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(addressBook.hasContact(editedAlice));
+        assertTrue(addressBook.hasContact(editedAirzone));
     }
 
     @Test

@@ -42,9 +42,9 @@ public class UniqueContactListTest {
     @Test
     public void contains_contactWithSameIdentityFieldsInList_returnsTrue() {
         uniqueContactList.add(AIRZONE);
-        Contact editedAlice = new ContactBuilder(AIRZONE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Contact editedAirzone = new ContactBuilder(AIRZONE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(uniqueContactList.contains(editedAlice));
+        assertTrue(uniqueContactList.contains(editedAirzone));
     }
 
     @Test
@@ -85,11 +85,11 @@ public class UniqueContactListTest {
     @Test
     public void setContact_editedContactHasSameIdentity_success() {
         uniqueContactList.add(AIRZONE);
-        Contact editedAlice = new ContactBuilder(AIRZONE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Contact editedAirzone = new ContactBuilder(AIRZONE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        uniqueContactList.setContact(AIRZONE, editedAlice);
+        uniqueContactList.setContact(AIRZONE, editedAirzone);
         UniqueContactList expectedUniqueContactList = new UniqueContactList();
-        expectedUniqueContactList.add(editedAlice);
+        expectedUniqueContactList.add(editedAirzone);
         assertEquals(expectedUniqueContactList, uniqueContactList);
     }
 

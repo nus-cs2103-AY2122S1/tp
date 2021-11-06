@@ -66,7 +66,7 @@ public class TypicalContacts {
             .withPhone("8482131").withEmail("mustafa@example.com").withAddress("chicago ave").withReview("bad")
             .withRating("2").build();
 
-    // Manually added - Contact's details found in {@code CommandTestUtil}a
+    // Manually added - Contact's details found in {@code CommandTestUtil}
     public static final Contact AMY = new ContactBuilder().withCategoryCode(VALID_CATEGORY_CODE_ATT)
             .withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
             .withAddress(VALID_ADDRESS_AMY).withReview(VALID_REVIEW_AMY).withTags(VALID_TAG_FRIEND)
@@ -89,6 +89,9 @@ public class TypicalContacts {
         return ab;
     }
 
+    /**
+     * Returns an {@code AddressBook} with randomised typical contacts.
+     */
     public static AddressBook getRandomTypicalAddressBook() {
         AddressBook ab = new AddressBook();
         for (Contact contact : getRandomTypicalContacts()) {
