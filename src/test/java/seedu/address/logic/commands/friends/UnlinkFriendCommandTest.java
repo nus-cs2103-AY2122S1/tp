@@ -1,5 +1,8 @@
 package seedu.address.logic.commands.friends;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalFriends.BOB;
@@ -7,6 +10,7 @@ import static seedu.address.testutil.TypicalFriends.CARL;
 import static seedu.address.testutil.TypicalFriends.getTypicalFriendsList;
 import static seedu.address.testutil.TypicalGames.APEX_LEGENDS;
 import static seedu.address.testutil.TypicalGames.GENSHIN_IMPACT;
+import static seedu.address.testutil.TypicalGames.MINECRAFT;
 import static seedu.address.testutil.TypicalGames.getTypicalGamesList;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_ITEM;
 
@@ -19,6 +23,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.gamefriendlink.GameFriendLink;
 import seedu.address.model.gamefriendlink.UserName;
+import seedu.address.testutil.FriendBuilder;
 
 public class UnlinkFriendCommandTest {
 
@@ -59,5 +64,33 @@ public class UnlinkFriendCommandTest {
                 GENSHIN_IMPACT.getGameId());
 
         assertCommandFailure(unlinkFriendCommand, model, Messages.MESSAGE_GAME_NOT_ASSOCIATED);
+    }
+
+    @Test
+    public void equals() {
+        Friend alice = new FriendBuilder().withFriendName("Alice").build();
+        Friend bob = new FriendBuilder().withFriendName("Bob").build();
+        UnlinkFriendCommand unlinkAliceCommand = new UnlinkFriendCommand(alice.getFriendId(),
+                GENSHIN_IMPACT.getGameId());
+        UnlinkFriendCommand unlinkBobCommand = new UnlinkFriendCommand(bob.getFriendId(), MINECRAFT.getGameId());
+
+        // same object -> equals
+        assertEquals(unlinkAliceCommand, unlinkAliceCommand);
+
+        // same values -> equals
+        UnlinkFriendCommand unlinkAliceCommandCopy = new UnlinkFriendCommand(alice.getFriendId(),
+                GENSHIN_IMPACT.getGameId());
+        assertEquals(unlinkAliceCommandCopy, unlinkAliceCommand);
+
+        // different types -> returns false
+        assertNotEquals(1, unlinkAliceCommand);
+
+        // null -> notEquals
+        assertNotEquals(null, unlinkAliceCommand);
+
+        assertFalse(unlinkAliceCommand.equals(null));
+
+        // different friend -> notEquals
+        assertNotEquals(unlinkBobCommand, unlinkAliceCommand);
     }
 }
