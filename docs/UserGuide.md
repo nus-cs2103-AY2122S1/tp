@@ -317,7 +317,15 @@ Clears all entries from the address book.
 | <img src="images/info_icon.png" width="50"/> | • As long as the first word in the command is `clear`, the command will still work regardless of the additional inputs. <br> eg. the command `clear asdknkjsaf` will still work. <br> • This command clears all clients in the **current** address book <br> • After inputting `clear`, another prompt will appear requesting for confirmation to clear the address book. The input required for the confirmation will either be: <br>    • `yes`: to confirm and proceed with the clear command. <br>    •`no`: to cancel the clear command.|
 | <img src="images/warn_icon.png" width="50"/> | •  This action is irreversible. Once you have clear all client information from the current address book, this information will be removed from the storage file and will not be retrievable.|
 
-### 5.11 Exiting the program : `exit`
+### 5.11 Getting help : `help`
+
+Opens a popup displaying the URL for our User Guide. Users can copy the URL to visit this User Guide.
+
+| Format | `help` |
+| --- | --- |
+| <img src="images/info_icon.png" width="50"/> | • As long as the first word in the command is `help`, the command will still work regardless of the additional inputs. <br> eg. the command `help asdknkjsaf` will still work |
+
+### 5.12 Exiting the program : `exit`
 
 Exits LeadsForce. 
 
@@ -325,11 +333,11 @@ Exits LeadsForce.
 | --- | --- |
 | <img src="images/info_icon.png" width="50"/> | • As long as the first word in the command is `exit`, the command will still work regardless of the additional inputs. <br> eg. the command `exit asdknkjsaf` will still work | 
 
-### 5.12 Saving the data
+### 5.13 Saving the data
 
 LeadsForce's data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### 5.13 Edit data file
+### 5.14 Edit data file
 
 LeadsForce's data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -443,6 +451,7 @@ Action | Format | Examples
 **Search** | `search KEYWORD... <attribute>/{ATTRIBUTE_KEYWORD}...` | search e/doe@gmail.com r/5
 **Filter** | `filter KEYWORD... <attribute>/{ATTRIBUTE_KEYWORD}...` | filter e/doe@gmail.com p/9
 **Clear** | `clear` | -
+**Help** | `help` | -
 **Exit** | `exit` | -
  
 ### 10.2 Multiple Address Book Commands

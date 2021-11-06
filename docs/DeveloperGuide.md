@@ -74,8 +74,9 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
+<p align="center">
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
-
+</p>
 The sections below give more details of each component.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -111,7 +112,9 @@ The `SideBar` also has a `MeetingListPanel`, which holds a list of `NextMeetingC
 
 Here's a (partial) class diagram of the `Logic` component:
 
+<p align="center">
 <img src="images/LogicClassDiagram.png" width="550"/>
+</p>
 
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
@@ -128,7 +131,9 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
+<p align="center">
 <img src="images/ParserClasses.png" width="600"/>
+</p>
 
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
@@ -138,8 +143,9 @@ How the parsing works:
 ### 3.4 Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
+<p align="center">
 <img src="images/ModelClassDiagram.png" width="450" />
-
+</p>
 
 The `Model` component,
 
@@ -158,7 +164,9 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
+<p align="center">
 <img src="images/StorageClassDiagram.png" width="550" />
+</p>
 
 The `Storage` component,
 * can save both address book data and user preference data in json format, and read them back into corresponding objects.
@@ -189,7 +197,9 @@ IS_EDITABLE | If set to `true`, the field is editable by the user through edit c
 
 ### 3.7.2 Field interfaces
 
+<p align="center">
 <img src="images/FieldClassDiagram.png" width="700" />
+</p>
 
 The following concrete interfaces inherit the `Field` interface. You can alternatively define your own interface or provide a concrete implementation of the field options within the `attribute` classes if they don't suit your needs.
 
@@ -222,7 +232,9 @@ IS_EDITABLE | `true`
 
 ### 3.7.6 FieldLength interfaces
 
+<p align="center">
 <img src="images/FieldLengthDiagram.png" width="700" />
+</p>
 
 There are FieldLength interfaces that contain a `MAX_LENGTH` field. This is used to help limit the number of characters that a user can input for a particular field.
 
@@ -260,7 +272,9 @@ LeadsForce allows users to view client info in the `ClientViewPanel` in the `Sid
 
 The following sequence diagram shows how the view operation works:
 
+<p align="center">
 <img src="images/ViewCommandSequenceDiagram.png" />
+</p>
 
 #### Implementation of ClientHasId
 
@@ -288,7 +302,9 @@ LeadsForce allows users to edit client info.
 
 The following sequence diagram shows how the view operation works:
 
+<p align="center">
 <img src="images/tracing/EditCommandSequenceDiagram.png" />
+</p>
 
 #### Implementation of EditClientDescriptor 
 
@@ -315,7 +331,9 @@ with any client's attribute or specifically with the specified attributes
 
 The following sequence diagram shows how the search operation works:
 
+<p align="center">
 <img src="images/tracing/SearchCommandSequenceDiagram.png" />
+</p>
 
 #### Implementation of ClientContainsKeywordPredicate
 
@@ -350,7 +368,9 @@ for multiple `filter` to be stacked, which allows for user to look for clients i
 
 The following sequence diagram shows how the filter operation works:
 
+<p align="center">
 <img src="images/tracing/FilterCommandSequenceDiagram.png" />
+</p>
 
 #### Implementation of ClientContainsKeywordPredicate
 
@@ -375,7 +395,9 @@ LeadsForce allows the user to `sort` clients according to client fields. LeadsFo
 
 The following sequence diagram shows how the sort operation works:
 
+<p align="center">
 <img src="images/tracing/SortCommandSequenceDiagram.png" />
+</p>
 
 ### 4.6 Multiple Address Book
 
@@ -399,9 +421,11 @@ Also, details with regard to AddressBookList has been omitted for simplicity if 
 6. The `LogicManger` then call setAddressBook method of `ModelManager` with the new `AddressBook` which will reset the `AddressBook` to a new `AddressBook`.
 7. The `LogicManger` will also call switchAddressBook method of `StorageManager` with the new `AddressBookStorage`.
 
-The following sequence diagram shows how the sort operation works:
+The following sequence diagram shows how the ab create operation works:
 
+<p align="center">
 <img src="images\AbCreateCommandSequenceDiagram.png" />
+</p>
 
 ### 4.6.2 Switch Address Book
 
@@ -414,9 +438,6 @@ The following sequence diagram shows how the sort operation works:
 7. The `LogicManger` then call setAddressBook method of `ModelManager` with the `AddressBook` which will reset the current `AddressBook` to that.
 8. The `LogicManger` will also call switchAddressBook method of `StorageManager` with the new `AddressBookStorage`.
 
-The following sequence diagram shows how the sort operation works:
-
-
 ### 4.6.3 Delete Address Book
 
 1. The `AbDeleteCommandParser` parse the name of the address book that is to be deleted to into a `Path` to that address book.
@@ -424,8 +445,6 @@ The following sequence diagram shows how the sort operation works:
 3. The `LogicManger` then call the execute method of `AbDeleteCommand`.
 4. The `AbDeleteCommand` will then attempt to delete the address book specified by the `Path`
 5. The `AbDeleteCommand` will finally create a new `CommandResult` which will be returned to `LogicManger`.
-
-The following sequence diagram shows how the sort operation works:
 
 ### 4.6.4 List Address Book
 
@@ -497,7 +516,9 @@ Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Sinc
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
+<p align="center">
 <img src="images/CommitActivityDiagram.png" width="250" />
+<p align="center">
 
 #### 4.7.2 Design considerations:
 
@@ -801,16 +822,16 @@ In this section, you can test general commands in LeadsForce. Below is a summary
 
 Action | Format | Examples
 --------|---------|---------
-**Create** | `add <name>/{CLIENT'S NAME} <email>/{EMAIL} <phone-no>/{PHONE NUMBER} <risk-appetite>/{RISK-APPETITE} ...`| add n/benedict e/benedict@gmail.com p/90909898 r/3 |
-**View** | `view CLIENT'S ID` | view 123 |
-**Edit** | `edit CLIENT'S ID... <attribute>/{CHANGED VALUE OF ATTRIBUTE}...` | edit 1234 n/Dominic p/12345678 |
-**Delete** | `delete CLIENT'S ID...` | delete 4  |
-**List** | `list` | - |
-**Sort** | `sort <attribute>/{ASC/DESC}...` | sort r/asc |
-**Schedule** | `schedule DATE` | schedule 22-09-2021 |
-**Search** | `search KEYWORD... <attribute>/{ATTRIBUTE_KEYWORD}...` | search * e/doe@gmail.com r/5 |
-**Filter** | `filter KEYWORD... <attribute>/{ATTRIBUTE_KEYWORD}...` | filter * e/doe@gmail.com p/9 |
-**Clear** | `clear` | - |
+**Create** | `add n/{CLIENT_NAME} e/{EMAIL} <attribute>/{OTHER ATTRIBUTES}...`| add n/benedict e/benedict@gmail.com p/90909898 r/3
+**View** | `view CLIENT_ID` | view 123
+**Edit** | `edit CLIENT_ID... <attribute>/{CHANGED VALUE OF ATTRIBUTE}...` | edit 12 n/Dominic p/12345678
+**Delete** | `delete CLIENT_ID...` | delete 4
+**List** | `list` | -
+**Sort** | `sort <attribute>/{ASC/DESC}...` | sort r/asc
+**Schedule** | `schedule [DATE]` | schedule 25-12-2021
+**Search** | `search KEYWORD... <attribute>/{ATTRIBUTE_KEYWORD}...` | search e/doe@gmail.com r/5
+**Filter** | `filter KEYWORD... <attribute>/{ATTRIBUTE_KEYWORD}...` | filter e/doe@gmail.com p/9
+**Clear** | `clear` | -
 
 #### 7.2.1 Adding a client
 
@@ -972,10 +993,10 @@ Action | Format | Examples
        
 
 #### 7.2.11 General commands 
-Action | Format | 
-| --- | --- | 
-**help** | `help` |
-**Exit** | `exit` | 
+Action | Format
+--- | ---
+**Help** | `help`
+**Exit** | `exit` 
 
 **Help command** 
  1. Getting help information 
@@ -1050,4 +1071,4 @@ Action | Format | Examples
 
 1. Dealing with missing/corrupted data files
 
-    1. The data files can be found in the `data` folder of the repository, and are named accordingly to the name of the address books in your application (For instance, if you have an address book that's called `Young Adults`, there will be a JSON file called `Young Adults.json` in the data folder). Remove the `client id` for one of the clients in the corrupted data file, and restart the application <br> Expected: LeadsForce should display an empty client list for the address book with the same name as the corrupted data file.
+    1. The data files can be found in the `data` folder of the repository, and are named accordingly to the name of the address books in your application (For instance, if you have an address book that's called `Young Adults`, there will be a JSON file called `Young Adults.json` in the data folder). Remove the `clientId` for one of the clients in the corrupted data file, and restart the application <br> Expected: LeadsForce should display an empty client list for the address book with the same name as the corrupted data file.
