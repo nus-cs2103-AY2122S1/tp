@@ -171,7 +171,7 @@ Examples:
 Screenshot:
 
 ![Friend add Screenshot](images/ui-screenshots/friend-add.png)
-<br><center><ins>Image: gitGud after adding a friend `Draco`</ins></center>
+<br><center><ins>Image: Command feedback box after adding a friend `Draco`</ins></center>
 
 #### Editing a friend: `friend --edit` 
 
@@ -187,7 +187,7 @@ Examples:
 
 Screenshot: 
 ![Friend edit Screenshot](images/ui-screenshots/friend-edit.png)
-<br><center><ins>Image: gitGud after editing an existing friend `kevcool`'s name to `Kevin Foong`</ins></center>
+<br><center><ins>Image: Command feedback box after editing an existing friend `kevcool`'s name to `Kevin Foong`</ins></center>
 
 #### Deleting a friend: `friend --delete`
 
@@ -204,7 +204,7 @@ Examples:
 Screenshot:
 
 ![Friend delete Screenshot](images/ui-screenshots/friend-delete.png)
-<br><center><ins>Image: gitGud after deleting a friend `Draco`</ins></center>
+<br><center><ins>Image: Command feedback box after deleting a friend `Draco`</ins></center>
 
 #### Link a game to a friend: `friend --link`
 
@@ -281,7 +281,7 @@ Examples:
 Screenshot:
 
 ![Ui after assigning skill value](images/ui-screenshots/friend-skill-success.png)
-<br><center><ins>Image: gitGud after assigning skill value to game linked to friend</ins></center>
+<br><center><ins>Image: Command feedback box after assigning skill value to game linked to friend</ins></center>
 
 #### Scheduling a friend: `friend --schedule`
 
@@ -318,7 +318,7 @@ Examples:
 Screenshot:
 
 ![Ui](images/ui-screenshots/friend-schedule.png)
-<br><center><ins>Image: gitGud after scheduling a friend's availability</ins></center>
+<br><center><ins>Image: Friend's schedule table updated after scheduling a friend's availability</ins></center>
 
 #### Recommending friends available to play with - `recommend`
 
@@ -421,7 +421,7 @@ Examples:
 Screenshot:
 
 ![Ui](images/ui-screenshots/game-add.png)
-<br><center><ins>Image: gitGud after adding a game</ins></center>
+<br><center><ins>Image: Command feedback box after adding a game</ins></center>
 
 #### Deleting a game: `game --delete`
 
