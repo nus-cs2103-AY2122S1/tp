@@ -44,6 +44,8 @@ public class EditLessonCommand extends EditCommand {
             + "this class.";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists in TutorAid";
+    public static final String MESSAGE_NOT_CHANGED = "Warning: Attempted to edit %s but the provided field(s) did not "
+            + "contain any changes.";
 
     private final Index targetIndex;
     private final EditLessonDescriptor editLessonDescriptor;
@@ -70,8 +72,12 @@ public class EditLessonCommand extends EditCommand {
         Lesson lessonToEdit = lastShownLessonList.get(targetIndex.getZeroBased());
         Lesson editedLesson = createEditedLesson(lessonToEdit, editLessonDescriptor);
 
-        if (lessonToEdit.equals(editedLesson) || model.hasLesson(editedLesson)) {
+        if (!lessonToEdit.isSameLesson(editedLesson) && model.hasLesson(editedLesson)) {
             throw new CommandException(MESSAGE_DUPLICATE_LESSON);
+        }
+
+        if (lessonToEdit.equals(editedLesson)) {
+            throw new CommandException(String.format(MESSAGE_NOT_CHANGED, editedLesson.toNameString()));
         }
 
         Capacity newCapacity = editedLesson.getCapacity();

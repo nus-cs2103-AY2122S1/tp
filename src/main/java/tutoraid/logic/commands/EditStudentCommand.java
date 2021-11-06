@@ -43,6 +43,8 @@ public class EditStudentCommand extends EditCommand {
             + PREFIX_PARENT_PHONE + "91234567 ";
 
     public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edit successful. Displaying %s and his/her lessons.";
+    public static final String MESSAGE_NOT_CHANGED = "Warning: Attempted to edit %s but the provided field(s) did not "
+            + "contain any changes.";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in TutorAid";
 
@@ -73,8 +75,12 @@ public class EditStudentCommand extends EditCommand {
         Student studentToEdit = lastShownStudentList.get(targetIndex.getZeroBased());
         Student editedStudent = createEditedStudent(studentToEdit, editStudentDescriptor);
 
-        if (studentToEdit.isSameStudent(editedStudent) || model.hasStudent(editedStudent)) {
+        if (!studentToEdit.isSameStudent(editedStudent) && model.hasStudent(editedStudent)) {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
+        }
+
+        if (studentToEdit.equals(editedStudent)) {
+            throw new CommandException(String.format(MESSAGE_NOT_CHANGED, editedStudent.toNameString()));
         }
 
         studentToEdit.replace(editedStudent);
