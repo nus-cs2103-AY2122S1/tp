@@ -10,14 +10,14 @@ This user guide will take you through the steps of setting up EdRecord and intro
 
 Some symbols used in this guide:
 
-| Symbol | Meaning |
-|--------|---------|
+| Symbol               | Meaning               |
+|----------------------|-----------------------|
 | :information_source: | Important information |
-| :bulb: | Useful tips |
-| :exclamation: | Cautions |
-
+| :bulb:               | Useful tips           |
+| :exclamation:        | Cautions              |
 
 --------------------------------------------------------------------------------------------------------------------
+
 * Table of Contents
 {:toc}
 
@@ -409,25 +409,26 @@ If your changes to the data file makes its format invalid, EdRecord will discard
 
 | Action                                  | Format, Examples                                                                                                                                                      |
 | --------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Add Student**                         | `add n/NAME p/PHONE e/EMAIL m/MODULE c/CLASS [i/INFO] [t/TAG]…​` <br> e.g., `add n/James Ho p/85436543 e/jamesho@u.nus.edu i/Currently on SHN t/strong t/careless` |
-| **Edit Student**                        | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [i/INFO] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@u.nus.edu`                                              |
-| **Delete Student**                      | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
-| **List Module**                         | `cd MODULE`<br> e.g.,`cd CS2103`, `cd *`                                                                                                                              |
-| **Create Module**                       | `mkmod MODULE`<br> e.g., `mkmod CS2103`                                                                                                                               |
-| **Delete Module**                       | `dlmod MODULE`<br> e.g., `dlmod CS2103`                                                                                                                               |
-| **List Class**                          | `lsclass`<br> e.g., `lsclass`                                                                                                                                         |
-| **Create Class**                        | `mkclass m/MODULE c/CLASS`<br> e.g., `mkclass m/CS2103 c/T09`                                                                                                         |
-| **Delete Class**                        | `dlclass m/MODULE c/CLASS`<br> e.g., `dlclass m/CS2103 c/T09`                                                                                                         |
-| **Move Student into Class in Module**   | `mv INDEX m/MODULE c/CLASS`<br> e.g.,`mv 2 m/CS2103 c/T10`                                                                                                            |
-| **Remove Student from Class in Module** | `rm INDEX m/MODULE c/CLASS`<br> e.g.,`rm 2 m/CS2103 c/T10`                                                                                                            |
-| **Create Assigment**                    | `mkasg n/ASSIGNMENT w/WEIGHTAGE s/MAXSCORE`<br> e.g., `mkasg n/Side quest 10 w/20 s/50`                                                                               |
-| **Edit Assignment**                     | `edasg ID [n/NAME] [w/WEIGHTAGE] [s/MAXSCORE]`<br> e.g., `edasg 1 n/PE Dry Run w/12.5 s/10`                                                                           |
-| **Delete Assignment**                   | `dlasg ID`<br> e.g., `dlasg 1`                                                                                                                                        |
-| **Grade an Assignment**                 | `grade INDEX id/ID st/STATUS [s/SCORE]`<br> e.g.,`grade 4 id/2 st/Graded s/50`                                                                                        |
-| **Delete student's grade**              | `dlgrade INDEX id/ID`<br> e.g.,`dlgrade 3 id/3`                                                                                                               |
-| **Toggle view**                         | `view (contacts/asg)`<br> e.g.,`view contacts`                                                                                                                        |
-| **Find**                                | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
-| **List**                                | `list [TAG]…​`                                                                                                                                                        |
+| **Add student**                         | `add n/NAME p/PHONE e/EMAIL m/MODULE c/CLASS [i/INFO] [t/TAG]…​` <br> e.g., `add n/James Ho p/85436543 e/jamesho@u.nus.edu i/Currently on SHN t/strong t/careless` |
+| **Edit student**                        | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [i/INFO] [t/TAG]…​`<br> e.g., `edit 2 n/James Lee e/jameslee@u.nus.edu`                                            |
+| **Delete student**                      | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
+| **List students**                       | `list [TAG]…​`                                                                                                                                                     |
+| **Find students**                       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find alex david`                                                                                                   |
+| **Change module working directory**     | `cd MODULE`<br> e.g.,`cd CS2103`, `cd *`                                                                                                                              |
+| **List modules**                        | `lsmod`                                                                                                                                                               |
+| **Create module**                       | `mkmod MODULE`<br> e.g., `mkmod CS2103`                                                                                                                               |
+| **Delete module**                       | `dlmod MODULE`<br> e.g., `dlmod CS2103`                                                                                                                               |
+| **Move student into class in module**   | `mv INDEX m/MODULE c/CLASS`<br> e.g., `mv 2 m/CS2103 c/T10`                                                                                                           |
+| **Remove student from class in module** | `rm INDEX m/MODULE c/CLASS`<br> e.g., `rm 2 m/CS2103 c/T10`                                                                                                           |
+| **List class**                          | `lsclass`                                                                                                                                                             |
+| **Create class**                        | `mkclass m/MODULE c/CLASS`<br> e.g., `mkclass m/CS2103 c/T09`                                                                                                         |
+| **Delete class**                        | `dlclass m/MODULE c/CLASS`<br> e.g., `dlclass m/CS2103 c/T09`                                                                                                         |
+| **Toggle view**                         | `view (contacts/asg)`<br> e.g., `view contacts`, `view asg`                                                                                                           |
+| **Create assigment**                    | `mkasg n/NAME w/WEIGHTAGE s/MAXSCORE`<br> e.g., `mkasg n/Midterm w/12.5 s/50`                                                                                         |
+| **Edit assignment**                     | `edasg ID [n/NAME] [w/WEIGHTAGE] [s/MAXSCORE]`<br> e.g., `edasg 1 n/PE Dry Run s/0`                                                                                   |
+| **Delete assignment**                   | `dlasg ID`<br> e.g., `dlasg 1`                                                                                                                                        |
+| **Grade an assignment**                 | `grade INDEX id/ID st/STATUS [s/SCORE]`<br> e.g.,`grade 4 id/2 st/Graded s/50`                                                                                        |
+| **Delete student's grade**              | `dlgrade INDEX id/ID`<br> e.g.,`dlgrade 3 id/3`                                                                                                                       |
 | **Clear**                               | `clear`                                                                                                                                                               |
 | **Help**                                | `help`                                                                                                                                                                |
 | **Exit**                                | `exit`                                                                                                                                                                |
