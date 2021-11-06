@@ -1,15 +1,19 @@
 package seedu.address.ui;
 
+import java.util.logging.Logger;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
 
 public class PersonGridPanel extends UiPart<Region> {
     private static final String FXML = "PersonGridPanel.fxml";
+    private static final Logger logger = LogsCenter.getLogger(CenterPanel.class);
 
     private PersonListPanel personListPanel;
     private LessonListPanel lessonListPanel;
@@ -50,6 +54,7 @@ public class PersonGridPanel extends UiPart<Region> {
      * @param lessons Lessons of the student.
      */
     public void fillListPanels(ObservableList<Lesson> lessons) {
+        logger.info("Showing the student list without lessons.");
         lessonListPanel = new LessonListPanel(lessons);
     }
 
