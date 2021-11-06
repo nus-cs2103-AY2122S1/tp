@@ -6,7 +6,7 @@
       "phone": "94351253",
       "email": "alice@example.com",
       "info": "Has surname Pauline",
-      "modules": "CS2103:T03",
+      "modules": "CS2103:[T03]",
       "tagged": ["friends"]
     },
     {
@@ -14,7 +14,7 @@
       "phone": "98765432",
       "email": "johnd@example.com",
       "info": "Struggles with visualization",
-      "modules": "CS2103:T03",
+      "modules": "CS2103:[T03]",
       "tagged": ["owesMoney", "friends"]
     },
     {
@@ -22,7 +22,7 @@
       "phone": "95352563",
       "email": "heinz@example.com",
       "info": "Has great hair",
-      "modules": "CS2103:T03",
+      "modules": "CS2103:[T03]",
       "tagged": []
     },
     {
@@ -30,7 +30,7 @@
       "phone": "87652533",
       "email": "cornelia@example.com",
       "info": "Very fashionable",
-      "modules": "CS2103:T03",
+      "modules": "CS2103:[T03]",
       "tagged": ["friends"]
     },
     {
@@ -38,7 +38,7 @@
       "phone": "9482224",
       "email": "werner@example.com",
       "info": "Quick to pick up on concepts",
-      "modules": "CS2103:T03",
+      "modules": "CS2103:[T03]",
       "tagged": []
     },
     {
@@ -46,7 +46,7 @@
       "phone": "9482427",
       "email": "lydia@example.com",
       "info": "Helpful to other students",
-      "modules": "CS2103:T03",
+      "modules": "CS2103:[T03]",
       "tagged": []
     },
     {
@@ -54,7 +54,7 @@
       "phone": "9482442",
       "email": "anna@example.com",
       "info": "Has potential to do better",
-      "modules": "CS2103:T03",
+      "modules": "CS2103:[T03]",
       "tagged": []
     }
   ]
