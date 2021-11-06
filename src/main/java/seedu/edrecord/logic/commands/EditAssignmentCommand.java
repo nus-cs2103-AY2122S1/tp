@@ -121,7 +121,7 @@ public class EditAssignmentCommand extends Command {
     private static Assignment createDeltaAssignment(Assignment edited, Assignment current) {
         Weightage deltaWeightage = new Weightage(
                 String.valueOf(edited.getWeightage().weightage - current.getWeightage().weightage));
-        return new Assignment(edited.getName(), deltaWeightage, edited.getMaxScore());
+        return new Assignment(edited.getName(), deltaWeightage, edited.getMaxScore(), current.getId());
     }
 
     @Override
