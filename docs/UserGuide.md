@@ -11,34 +11,29 @@ If you are already familiar with Unix commands, then UNIon will be easy for you 
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
-
-1. Download the latest `union.jar` from [here](https://github.com/AY2122S1-CS2103-T16-1/tp/releases).
-
+1. Download the latest JAR file` from [here](https://github.com/AY2122S1-CS2103-T16-1/tp/releases).
 1. Copy the file to the folder you want to use as the _home folder_ for your UNIon.
+1. Double-click the file to start the app. The GUI should appear in a few seconds, and it should look similar to this image below. Note how the app contains some sample contacts.<br>
+   
+<img alt="startup ui" src="images/startupUi.png" width="500px" />
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-
-   ![Ui](images/Ui.png)
-
-1. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.<br>
    Some example commands you can try:
-
    * `ls -contacts`: Lists all contacts.
-
    * `touch -n John Doe -p 98765432 -e johnd@example.com -a John street, block 123, #01-01`: Adds a contact named `John Doe` to UNIon.
-
    * `rm 3`: Deletes the 3rd contact shown in the current list.
-
    * `rm -contacts`: Deletes all contacts.
-
    * `exit`: Exits the app.
-
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -56,17 +51,19 @@ If you are already familiar with Unix commands, then UNIon will be easy for you 
   e.g. `[-t TAG]…​` can be used as ` ` (i.e. 0 times), `-t friend`, `-t friend -t family` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `-n NAME -p PHONE_NUMBER`, `-p PHONE_NUMBER -n NAME` is also acceptable.
+  e.g. if the command specifies `-n NAME -p PHONE`, `-p PHONE -n NAME` is also acceptable.
 
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `-p 12341234 -p 56785678`, only `-p 56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help` and `exit`) will be ignored.<br>
+* For commands that do not take in parameters (such as `help` and `exit`) , extraneous parameters will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* Flags such as `-contacts` and `-folders` are part of the command word and should be placed adjacent to the main command word
+* Flags such as `-contacts` and `-folders` are part of the command word and must be placed immediately after the main command word e.g. (`ls -contacts` not `ls -invalid_flag -contacts`)
 
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ### Viewing help: `help`
 
@@ -82,13 +79,14 @@ Format: `help`
 
 Adds a person to UNIon.
 
-Format: `touch -n NAME -p PHONE_NUMBER -e EMAIL -a ADDRESS [-t TAG]…​`
+Format: `touch -n NAME -p PHONE -e EMAIL -a ADDRESS [-t TAG]…​`
 
-* `PHONE_NUMBER` accepts any length to allow for phone formats from different countries.
 * `NAME` has a character limit of 70 characters.
 * `NAME` is case-sensitive as John Doe and john doe will be treated as different people.
+* `PHONE` accepts any length to allow for phone formats from different countries.
 * `ADDRESS` is truncated by an ellipsis if the contents cannot fit in one line.
 * Duplicate tags are ignored.
+* We recommend that `TAG`s are kept to a maximum of 50 characters. If a tag has more than 50 characters, you may not be able to view the entire tag (depending on the size of the window). 
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
@@ -104,6 +102,8 @@ Shows a list of all persons in UNIon.
 
 Format: `ls -contacts`
 
+<div style="page-break-after: always;"></div>
+
 #### Editing a person: `vim`
 
 Edits an existing person in the UNIon.
@@ -112,18 +112,19 @@ Format: `vim INDEX [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-t TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
-* `PHONE_NUMBER` accepts any length to allow for phone formats from different countries.
 * `NAME` has a character limit of 70 characters.
+* `PHONE` accepts any length to allow for phone formats from different countries.
 * `ADDRESS` is truncated by an ellipsis if the contents cannot fit in one line.
+* We recommend that `TAG`s are kept to a maximum of 50 characters. If a tag has more than 50 characters, you may not be able to view the entire tag (depending on the size of the window).
 
 * Duplicate tags are ignored.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `-t` without specifying any tags after it.
 
 Examples:
 *  `vim 1 -p 91234567 -e johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `vim 2 -n Betsy Crower -t ` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `vim 2 -n Betsy Crower -t` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
 #### Locating persons by name: `find -contacts`
 
@@ -139,10 +140,13 @@ Format: `find -contacts KEYWORD [MORE_KEYWORDS]`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 * All flags after `-contacts` will be ignored e.g. `find -contacts -invalid_flag Hans` is equivalent to `find -contacts Hans`
 
+<div style="page-break-after: always;"></div>
+
 Examples:
 * `find -contacts John` returns `john` and `John Doe`
 * `find -contacts alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+<img alt="result for 'find -contacts alex david'" src="images/findAlexDavidResult.png" width="500px"/>
 
 #### Deleting a person: `rm`
 
@@ -164,6 +168,8 @@ Clears all contacts from UNIon.
 
 Format: `rm -contacts`
 
+<div style="page-break-after: always;"></div>
+
 ### Managing folders
 
 #### Adding a folder: `mkdir`
@@ -182,34 +188,33 @@ Examples:
 
 #### Adding contacts to a folder: `echo`
 
-Adds contacts into an arbitrary folder.
+Adds existing contacts into a folder.
 
 Format: `echo CONTACT_INDEX [CONTACT_INDEX]... >> FOLDER_NAME`
 
-* `CONTACT_INDEX` must be a positive integer 1, 2, 3, ...
-* Command fails if such a contact index does not exist.
-* Command fails if contact has already been added before.
-* Command fails if duplicate contacts are added to the same folder.
+* Adds the persons at the specified indices into the given folder. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, ...
+* `CONTACT_INDEX` must be a valid index referring to an existing person in the current list of contacts shown
+* `CONTACT_INDEX` must not already be in the folder
+* If multiple `CONTACT_INDEX` are passed, they must be unique and cannot contain duplicates
 * `FOLDER_NAME` must be an existing folder
-* Command fails if there is no existing folder with that name.
-* Every index that has been input must be valid for the contacts to be added to folder.
 
 Examples:
 * `echo 3 >> CS2103` Adds contact 3 to CS2103 folder.
 * `echo 3 4 1 9 10 >> CS2103` Add contacts 3, 4, 1, 9, 10 to CS2103 folder.
 
+<div style="page-break-after: always;"></div>
+
 #### Deleting a contact from folder: `rm`
 
 Deletes the specified contact from the list of contacts from the folder.
 
-Format `rm 1 >> FOLDER_NAME`
+Format: `rm 1 >> FOLDER_NAME`
 
 * Deletes contact number 1 seen on the contact list from the folder named `FOLDER_NAME`.
 
 Examples:
 
 * `rm 1 >> CS1010` deletes a contact that corresponds to index 1 in the contact list from the folder `CS1010`.
-
 
 #### Listing all folders: `ls -folders`
 
@@ -221,18 +226,18 @@ Format: `ls -folders`
 
 Replaces the old folder name with the new folder name.
 
-Format: `mv OLD_FOLDER_NAME` &#124; `NEW_FOLDER_NAME`
+Format: `mv OLD_FOLDER_NAME | NEW_FOLDER_NAME`
+
 * `NEW_FOLDER_NAME` has a maximum character limit of 30.
 
 #### Locating folders by name: `find -folders`
 
-Finds folders whose names contain any of the given keywords.
+Finds folders whose name contains any of the given keywords.
 
 Format: `find -folders KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `cs2103` will match `CS2103`
+* The search is case-insensitive. e.g. `cs2103` will match `CS2103`
 * The order of the keywords does not matter. e.g. `Team Project CS2103` will match `CS2103 Team Project`
-* Only the folder name is searched.
 * Partial words will be matched e.g. `CS` will match `CS2103` and `CS2101`.
 * Folders matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `CS2103 Team Project` will return `CS2103`, `Team Project`
@@ -242,11 +247,13 @@ Examples:
 * `find -folders CS` returns `CS2103` and `CS2101`
 * `find -folders CS2103 Team Project` returns `CS2103`, `Team Project`
 
+<div style="page-break-after: always;"></div>
+
 #### Deleting a folder: `rmdir`
 
 Deletes a specified folder
 
-Format `rmdir FOLDER_NAME`
+Format: `rmdir FOLDER_NAME`
 
 * Deletes folder with the name `FOLDER_NAME`.
 
@@ -287,14 +294,16 @@ If your changes to the data file makes its format invalid, UNIon will discard al
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Command summary
 
 Action | Format, Examples
 --------|------------------
 **Help** | `help`
-**Add new contact** | `touch -n NAME -p PHONE_NUMBER -e EMAIL -a ADDRESS [-t TAG]` <br> e.g., `touch -n James Ho -p 22224444 -e jamesho@example.com -a 123, Clementi Rd, 1234665 -t friend -t colleague`
+**Add new contact** | `touch -n NAME -p PHONE -e EMAIL -a ADDRESS [-t TAG]` <br> e.g., `touch -n James Ho -p 22224444 -e jamesho@example.com -a 123, Clementi Rd, 1234665 -t friend -t colleague`
 **List contacts** | `ls -contacts`
-**Edit contact** | `vim INDEX [-n NAME] [-p PHONE_NUMBER] [-e EMAIL] [-a ADDRESS] [-t TAG]` <br> e.g., `vim 2 -n James Lee -e jameslee@example.com`
+**Edit contact** | `vim INDEX [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-t TAG]` <br> e.g., `vim 2 -n James Lee -e jameslee@example.com`
 **Find contact** | `find -contacts KEYWORD [MORE_KEYWORDS]`<br> e.g., `find -contacts James Jake`
 **Delete contact** | `rm INDEX`<br> e.g., `rm 3`
 **Clear contacts** | `rm -contacts`
@@ -303,7 +312,7 @@ Action | Format, Examples
 **Add multiple contacts to folder** | `echo CONTACT_INDEX [CONTACT_INDEX]... >> FOLDER_NAME` <br> e.g. `echo 3 4 1 9 10 >> CS2103`
 **Delete contact from folder** | `rm INDEX >> FOLDER_NAME` <br> e.g., `rm 1 >> CS2102`
 **List folders** | `ls -folders`
-**Edit folder name** | `mv OLD_FOLDER_NAME` &#124; `NEW_FOLDER_NAME` <br> e.g., `mv CS2103` &#124; `CS2102`
+**Edit folder name** | `mv OLD_FOLDER_NAME | NEW_FOLDER_NAME` <br> e.g., `mv CS2103 | CS2102`
 **Find folders** | `find -folders KEYWORD [MORE_KEYWORDS]`<br> e.g., `find -folders CS2103`
 **Delete folder** | `rmdir FOLDER_NAME` <br> e.g., `rmdir CS1010`
 **Clear folders** | `rm -folders`
