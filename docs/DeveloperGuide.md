@@ -1334,17 +1334,38 @@ testers are expected to do more *exploratory* testing.
         Expected: All students whose name that starts with the letter `c` are shown in 
    the student list. Lesson list will not be changed. No student shown if there is no student whose name starts with 
    the letter `c`. An update message showing the number of students found will also be shown in the 
-   message box.<br>_note that both first and last name of the student will be checked, to see if the student's name consists the letter `c`._
+   message box.<br>_Note: both first and last name of the student will be checked, to see if the student's name consists the letter `c`._
    
     * Test case: `find Alex`<br>
         Expected: All students whose name consists of `Alex` are shown in the student list. Lesson list will not be
    changed. No student shown if there is no student whose name consists of `Alex`. An update message showing 
-   the number of students found will also be shown in the message box. <br>_note that both the first and last name of the student will be checked, to see if the student's name consists of `Alex`._
+   the number of students found will also be shown in the message box. <br>_Note: both the first and last name of the student will be checked, to see if the student's name consists of `Alex`._
 
     * Test case: `find -`, `find .`, `find '`<br>
       Expected: No student will be found since name should only contain alphanumeric characters and spaces.
    
+#### Rostering
 
+1. Rostering by `LESSON_INDEX`
+
+    * Prerequisites: List all students and lessons using the `list` command. Multiple `Students` and `Lessons` in the 
+list with some `Students` already enrolled in some of the `Lessons`. For `LESSON_INDEX` used, it is within the number
+of existing `Lessons` found in TuitiONE.
+
+    * Test case: `roster 2`<br>
+        Expected: Only students who are enrolled in the lesson identified by the lesson index of `2` will be shown in 
+the student list. The lesson list will be updated to show the lesson identified by the lesson index of `2`. No student
+or lesson shown if there is no student enrolled in the lesson identified by the lesson index of `2`. An update message
+showing the number and the name of the students who are enrolled in the lesson will also be shown in the message box.
+
+    * Test case: `roster a`, `roster -`, `roster LESSON_CODE`<br>
+        Expected: No roster will be applied. An error message will be shown in the message box, warning the user to
+follow the command format by using `LESSON_INDEX`.
+
+    * Test case: `roster 100` (a `LESSON_INDEX` that is larger than the number of `LESSONS`)
+        Expected: No roster will be applied. An error message will be shown in the message box, warning the user to only
+use valid `LESSON_INDEX`.
+    
 #### Filtering
 
 1. Filtering by grade
@@ -1352,7 +1373,7 @@ testers are expected to do more *exploratory* testing.
     * Note: We will be using `S1` to conduct manual testing for positive tests, but feel free to test with any grade you wish (from `P1` to `S5`).
 
     * Test case: `filter g/S1`<br>
-      Expected: Only students and lessons of grade `S1` are shown in the student list and lesson list respectively. No students or lessons shown if there are none of grade `S1`. An update message showing the number of students and lessons found will also be shown in the message box.
+      Expected: Only students and lessons of grade `S1` are shown in the student list and lesson list respectively. No student or lesson shown if there are none of grade `S1`. An update message showing the number of students and lessons found will also be shown in the message box.
       
     * Test case: `filter g/s1`<br>
       Expected: Similar to previous.
@@ -1386,7 +1407,7 @@ testers are expected to do more *exploratory* testing.
       
     * Test case: `filter english S1`<br>
       Expected: No filter is applied, and no change to both lists. The message box displays a message alerting the user that the command format inputted is invalid, along with a description of what the filter command does, its parameters, and an example usage.
-
+    
 #### Editing a student
 
 1. Editing a student's name
