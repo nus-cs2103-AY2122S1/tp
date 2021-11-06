@@ -3,9 +3,10 @@ layout: page
 title: User Guide
 ---
 
-SalesNote is a **desktop app for managing contacts and tasks, optimized for use via a Command Line Interface** (CLI) 
-while still having the benefits of a Graphical User Interface (GUI). Fast typists can get more out of the application 
-than from traditional GUI apps. The application and guide are based on AB3 with new added features.
+SalesNote is a desktop app for Singapore-based tailors to manage local sales and clients, so that they can focus on 
+producing great work. SalesNote is optimized for use via a Command Line Interface (CLI) while still having the 
+benefits of a Graphical User Interface (GUI). Fast typists can get more out of the application than from traditional 
+GUI apps.
 
 This project is based on the AB3 project created by the [SE-EDU initiative](https://se-education.org).
 
