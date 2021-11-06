@@ -60,7 +60,8 @@ public class EditCommand extends Command {
             + PREFIX_EMAIL + "johndoe@example.com "
             + PREFIX_TELEGRAM + "@johndoe";
 
-    public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student: %1$s";
+    public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student: %1$s\n"
+            + "Please use `view` to see the new details";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the Academy Directory.";
 

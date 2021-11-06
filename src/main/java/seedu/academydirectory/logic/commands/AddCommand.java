@@ -58,7 +58,7 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "recursion "
             + PREFIX_TAG + "streams";
 
-    public static final String MESSAGE_SUCCESS = "New student added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New student added: %1$s\nPlease use `view` for more details";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the Academy Directory";
 
     private final Student toAdd;
