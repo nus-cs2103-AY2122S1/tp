@@ -11,7 +11,7 @@ Given below are my contributions to the project.
 
 * **Added several client attributes (Client ID and current financial plans)**:
   * Allows financial advisors to keep track of current financial plans, so that they can have a more comprehensive idea of the financial state of their clients
-  * Client ID is used extensive throughout LeadsForce, such that commands no longer have to rely on the client list. 
+  * Client ID is used extensive throughout LeadsForce, such that commands no longer have to rely on the client list.
   * Amended the `edit`, `add` commands to allow the app to take in these attributes
 
 * **New Command: `Schedule`**
@@ -31,13 +31,13 @@ Given below are my contributions to the project.
 * **Documentation**:
   * User Guide:
     * Overhauled the User Guide to using icons and tables to increase readability
-    * Removed bugs and misunderstandings from user guide 
+    * Removed bugs and misunderstandings from user guide
     * Wrote the `edit` and `view` commands in the user guide, the QnA portion, troubleshooting portion, client information portion, bugs reporting portion and the introduction.
     * Added the esxpected outcomes of commands
     * Organisation and dividing of the user guide
   * Developer Guide:
     * Added implementation details of the `edit` command.
-    * Wrote the introduction, the use cases, manual testing portion, product scope and the different components. 
+    * Wrote the introduction, the use cases, manual testing portion, product scope and the different components.
     * Color coded the different components of the application.
     * standardising the diagrams to make it easier to read, and changing the colours of the diagrams as well.
 
