@@ -125,8 +125,6 @@ on any operating system including Windows, macOS or Linux
 1. When you first start up, FAST will contain some sample data for you to explore the different features.
 1. You are now ready to start managing your clients!
 
-<div style="page-break-after: always"></div>
-
 ### User interface
 
 ![UiAnnotated](images/UiAnnotated.png)
@@ -388,7 +386,9 @@ A client can have any number of [`TAG`](#tag) (including 0)
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` will add a new client called 
   `John Doe`, who has phone number of `98765432`, has an email address `johnd@example.com` and stays at 
   `John street, block 123, #01-01`.
+  
   ![AddExample](images/addexample.png)
+  
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal` will add a new client 
    called `Betsy Crowe`, has a phone number of `1234567`, has an email address `betsycrowe@example.com`, 
   stays at `Newgate Prison` and is tagged as both a `friend` and `criminal`.
