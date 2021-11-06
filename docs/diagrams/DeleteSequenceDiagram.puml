@@ -3,7 +3,7 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ModuleTrackerParser" as ModuleTrackerParser LOGIC_COLOR
 participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
 participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
@@ -11,22 +11,25 @@ end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
+participant "l:List<Module>" as lastShownList MODEL_COLOR
+participant ":Module" as Module MODEL_COLOR
+participant ":ModuleTracker" as ModuleTracker MODEL_COLOR
 end box
 
 [-> LogicManager : execute("delete 1")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("delete 1")
-activate AddressBookParser
+LogicManager -> ModuleTrackerParser : parseCommand("delete 1")
+activate ModuleTrackerParser
 
 create DeleteCommandParser
-AddressBookParser -> DeleteCommandParser
+ModuleTrackerParser -> DeleteCommandParser
 activate DeleteCommandParser
 
-DeleteCommandParser --> AddressBookParser
+DeleteCommandParser --> ModuleTrackerParser
 deactivate DeleteCommandParser
 
-AddressBookParser -> DeleteCommandParser : parse("1")
+ModuleTrackerParser -> DeleteCommandParser : parse("1")
 activate DeleteCommandParser
 
 create DeleteCommand
@@ -36,20 +39,55 @@ activate DeleteCommand
 DeleteCommand --> DeleteCommandParser : d
 deactivate DeleteCommand
 
-DeleteCommandParser --> AddressBookParser : d
+DeleteCommandParser --> ModuleTrackerParser : d
 deactivate DeleteCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-DeleteCommandParser -[hidden]-> AddressBookParser
+DeleteCommandParser -[hidden]-> ModuleTrackerParser
 destroy DeleteCommandParser
 
-AddressBookParser --> LogicManager : d
-deactivate AddressBookParser
+ModuleTrackerParser --> LogicManager : d
+deactivate ModuleTrackerParser
 
 LogicManager -> DeleteCommand : execute()
 activate DeleteCommand
 
-DeleteCommand -> Model : deletePerson(1)
+DeleteCommand -> Model : getFilteredModuleList()
 activate Model
+
+create lastShownList
+Model -> lastShownList
+activate lastShownList
+
+lastShownList --> Model : l
+deactivate lastShownList
+
+Model --> DeleteCommand : l
+deactivate Model
+
+DeleteCommand -> lastShownList : get(index)
+activate lastShownList
+
+lastShownList -> Module
+activate Module
+
+Module --> lastShownList : m
+deactivate Module
+
+lastShownList --> DeleteCommand : m
+deactivate lastShownList
+
+lastShownList -[hidden]-> DeleteCommand
+destroy lastShownList
+
+DeleteCommand -> Model : deleteModule(m)
+activate Model
+
+Model -> ModuleTracker : removeModule(m)
+activate ModuleTracker
+
+ModuleTracker -> ModuleTracker : internally deleting Module
+ModuleTracker --> Model
+deactivate ModuleTracker
 
 Model --> DeleteCommand
 deactivate Model
@@ -61,7 +99,7 @@ activate CommandResult
 CommandResult --> DeleteCommand
 deactivate CommandResult
 
-DeleteCommand --> LogicManager : result
+DeleteCommand --> LogicManager : commandResult
 deactivate DeleteCommand
 
 [<--LogicManager

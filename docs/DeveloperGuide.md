@@ -100,7 +100,7 @@ How the `Logic` component works:
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteCommandSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -387,6 +387,35 @@ Below is an example sequence diagram and an explanation on how `EditCommand` is 
 **Step 5.** A copy of this module after substituting the edited fields with new values is created. 
 
 **Step 6.** The specified module in the `Model` is then replaced by the edited copy. The `Model` is updated to reflect this change in the Mod Tracker.
+
+### Delete Module feature
+
+####Implementation
+
+This section explains the mechanism used to delete a `Module` from the `ModuleTracker`. 
+
+The `DeleteCommand` results in the specified module being deleted from the application. This command requires a compulsory field Module Index to specify which module will be deleted.
+
+When the command is executed, a concrete `DeleteCommand` is created containing the specified Module Index.
+
+The `DeleteCommand` implements `DeleteCommandParser` method, which calls the appropriate methods in `Model` to get the specific `Module` and appropriate methods in `ModuleTracker` to remove the module.
+
+Below is a sequence diagram and explanation of how the `DeleteCommand` is executed.
+
+![DeleteCommand](images/DeleteCommandSequenceDiagram.png)
+
+**Step 1.** The user enters the command "delete 1".
+
+**Step 2.** ModuleTrackerParser takes in the user's input, and calls `DeleteCommandParser#parse` to create an `DeleteCommand` object containing the data parsed from the user input.
+
+**Step 3.** The `DeleteCommand` is then executed by calling its `execute` method.
+
+**Step 4.** Since the `Model` is passed to `DeleteCommand#execute`, it is able to call a method `Model#getFilteredModuleList` to get the last module list shown.
+
+**Step 5.** From this module list, we can find the correct `Module` to be deleted by calling `get` function with the specified `index`.
+
+**Step 6.** The `Module` will be removed from the `ModulTracker` by calling the `deleteModule` method in `Model` and the `removeModule` method in `ModuleTracker` one after another.
+
 
 ### \[Proposed\] Undo/redo feature
 
