@@ -7,7 +7,11 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import javafx.scene.chart.PieChart;
-import seedu.address.model.*;
+import seedu.address.model.AddressBook;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.UserPrefs;
 import seedu.address.testutil.ContactBuilder;
 
 
