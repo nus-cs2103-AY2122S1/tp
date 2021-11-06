@@ -487,7 +487,7 @@ The *Sequence Diagram* below summarizes the aforementioned steps.
     * Cons: Splitting groups based on a category makes it harder to extend to support filtering groups with a different category from what is implemented.
 
 * Alternative 2: Use a single list to store all tutorial groups.
-    * Pros: Simpler to implement, without the use of multiple lists to store tutorial groups of different types ("OP1" or "OP2").
+    * Pros: Simpler to implement, easier to add or remove tutorial groups.
       Storing tutorial groups as arrays in JSON is less complicated.
     * Cons: Searching or filtering the list of tutorial groups by group types may take a longer time.
     
@@ -530,14 +530,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | view a student's details       | easily check the details and progress of the students                  |
 | `* * *`  | user                                       | add a new class                |                                                                        |
 | `* * `   | user                                       | add a class schedule           | plan my week in advance                                                |
+| `* * *`  | user                                       | add a new tutorial group       | 
 | `* * *`  | user                                       | view a class' details          | easily check the details of a particular class                         |
 | `* * *`  | user                                       | delete a student               | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | delete a class                 | remove classes that I no longer need                                                                 |
+| `* * *`  | user                                       | delete a class                 | remove classes that I no longer need
+| `* * *`  | user                                       | delete a tutorial group        | remove tutorial groups that I no longer need  |
 | `* * *`  | user                                       | find a student by name          | locate details of students without having to go through the entire list |
 | `* * *`  | user                                       | find a class by code           | locate details of a class without having to go through the entire list |
 | `* * *`  | user                                       | view all classes               | see which classes I'm taking                                           |
 | `* * *`  | user                                       | view all students in a class   | see the students enrolled in a particular class                                         |
-| `* *`    | experienced user                           | add class participation details to a student | track the paricipation of each student                   |
+| `* *`    | experienced user                           | add class participation details to a student | track the participation of each student                   |
 | `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
 | `*`      | user with many students in ClassMATE | sort students by name           | locate a student easily                                                 |
 | `*`      | user with many classes in ClassMATE | sort classes by name           | locate a class easily                                                 |
@@ -570,6 +572,35 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. ClassMATE shows an error message.
 
       Use case resumes at step 2.
+
+**Use case: Edit a student**
+
+**MSS**
+
+1.  User requests to list students
+2.  ClassMATE shows a list of students
+3.  User requests to edit a specific student in the list with some parameters
+4.  ClassMATE edits the student
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. ClassMATE shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The given parameter to edit is a Class Code.
+
+    * 3b1. ClassMATE removes all existing tutorial groups of the student.
+    
+      Use case resumes at step 4.
 
 **Use case: List students**
 
@@ -632,6 +663,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: Add a tutorial group**
+
+**MSS**
+
+1.  User requests to add a tutorial group with the given parameters, Group number, Group type and Class code.
+2.  ClassMATE adds the tutorial class.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. ClassMATE detects an invalid parameter.
+    *  1a1. ClassMATE shows a message informing the user.
+
+  Use case ends.
+
+
+* 1b. The tutorial class that the tutorial group is being added to does not exists.
+    *  1b1. ClassMATE shows a message informing the user.
+
+  Use case ends.
+
+
+* 1c. The tutorial group already exists.
+    *  1c1. ClassMATE shows a message informing the user.
+
+  Use case ends.
+
 **Use case: Delete Latest Mark from Student**
 
 **MSS**
@@ -684,8 +743,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Private student detail**: A student detail that is not meant to be shared with others
 * **Tutorial class**: A CS2101 tutorial class. Each student can only have up to one tutorial class
 * **Student**: An NUS student taking the CS2101(T) module
-* **Group**: A group is a subsection of the class and contains a few students for the purpose of small activities or group project
-* **Group name**: The name of a group in the CS2101 class, which is specified by a number.
+* **Tutorial group**: A tutorial group is a subsection of the class and contains a few students for the purpose of small activities or group project.
+* **Group number**: The number of a group in the CS2101 class, which is specified by a number.
 * **Class code**: The name of a typical class in for the CS2101 module. E.g. G06.
 * **Group type**: The type of a group in the CS2101 class, which is either OP1 or OP2.
 
