@@ -524,7 +524,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
+| `* * *`  | new user                                   | see help      | refer to instructions when I forget how to use the App                 |
 | `* *`  | new user                                       | view sample data              | see what the app looks like when in use                               |
 | `* * *`  | user                                       | add a new student              |                                                                        |
 | `* * *`  | user                                       | view a student's details       | easily check the details and progress of the students                  |
@@ -538,11 +538,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | view all classes               | see which classes I'm taking                                           |
 | `* * *`  | user                                       | view all students in a class   | see the students enrolled in a particular class                                         |
 | `* *`    | experienced user                           | add class participation details to a student | track the paricipation of each student                   |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many students in ClassMATE | sort students by name           | locate a student easily                                                 |
-| `*`      | user with many classes in ClassMATE | sort classes by name           | locate a class easily                                                 |
-
-*{More to be added}*
+| `* *` | experienced user | add groups within tutorial classes | to organise my class groups |
+| `* *` | experienced user | add students to specific sub-groups | to organise students in groups based on examination (e.g. OP1) |
+| `* *` | experienced user | delete students from specific sub-groups | remove students from the group as required |
+| `*` | user | add different types of marks to students | to mark students for various assessments |
 
 ### Use cases
 
