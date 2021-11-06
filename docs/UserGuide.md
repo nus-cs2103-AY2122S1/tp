@@ -32,7 +32,6 @@ Whether you're using Windows or macOS, the steps for installation are the same.
 2. Download the latest `dash.jar` from [this website](https://github.com/AY2122S1-CS2103T-W15-2/tp/releases/tag/v1.3.1).
 
 3. Copy the file to the folder you want to use as the _home folder_ for Dash, which is where your data is stored.
-
    -  _We suggest creating a folder called "Dash" and putting the `dash.jar` file inside it. You can place this folder 
       wherever you want. Next, we recommend that you create a shortcut for Dash by right-clicking on the `dash.jar` 
       file. On Windows, click on the `Create Shortcut` option while on macOS, click on `Make Alias`. You can then put 
