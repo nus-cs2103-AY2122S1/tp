@@ -1,0 +1,25 @@
+{
+  "orders" : [ {
+    "id" : "1",
+    "date" : "2021-09-18",
+    "amount" : "10",
+    "customer" : "Josh",
+    "isComplete" : "false",
+    "label" : "testorder1"
+  }, {
+    "id" : "2",
+    "date" : "2021-09-19",
+    "amount" : "15",
+    "customer" : "Mac",
+    "isComplete" : "true",
+    "label" : "testorder2"
+  }, {
+    "id" : "3",
+    "date" : "2021-09-20",
+    "amount" : "20",
+    "customer" : "Clark",
+    "isComplete" : "true",
+    "label" : "testorder3"
+  } ]
+}
+
