@@ -292,42 +292,6 @@ should not exceed the destroy marker X. This is a known limitation of PlantUML.<
     * Cons: Breaks the single responsibility principle as deleting marked applicants does not delete applicants at specific indices
     like the rest of the `delete` command, but rather a certain group of applicants at once. 
 
-      
-### Delete feature
-
-The ```delete``` command is facilitated by creating a ```DeleteCommand``` depending on the given input.
-This command then updates the ```model``` accordingly.
-
-The following activity diagram summarizes what happens when a user executes an ```delete``` command:
-![images](images/DeleteActivityDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source:
- **Note:** There should only be one arrowhead at the end of every line 
-in the Activity Diagram. This is a known limitation of PlantUML.</div>
-
-Given below is an example usage scenario illustrated by a sequence diagram for ```delete``` command.
-
-Step 1. A valid command `delete 1` is given as user input. This invokes `LogicManager#execute()`, which calls
-`AddressBookParser#parseCommand()` to parse `delete 1` into command word `delete` and command argument ``` 1```.
-
-Step 2. `DeleteCommandParser` is initialized based on the parse results and `DeleteCommandParser#parse()` is called
-to identify the indices present in ``` 1```. `DeleteCommandParser#parse()` then initializes a
-`DeleteCommand` with the indices present as arguments.
-
-Step 3. `DeleteCommand#execute()` is then called, which will check the validity of the given indices. 
-If there is no exception thrown, `Model#deletePerson()` is called to delete the applicants corresponding to the 
-given indices.
-
-Step 4. `CommandResult` is initialized with `String` containing the details of the deleted applicant.
-This `CommandResult` is then returned.
-
-The following sequence diagram shows how the delete operation works.
-![images](images/DeleteSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source:
- **Note:** The lifeline for `DeleteCommandParser`
-should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
-
 ### Find feature
 
 The ```find``` command is facilitated by creating a ```FindCommand``` depending on the given
@@ -439,6 +403,41 @@ should not exceed the destroy marker X. This is a known limitation of PlantUML.<
   * Pros: Intuitive for user to use `find` command to find certain types of interviews (past or future)
   * Cons: Breaks the single responsibility principle as it does not find a specific input for a prefix, but rather
     types of inputs.
+    
+### Delete feature
+
+The ```delete``` command is facilitated by creating a ```DeleteCommand``` depending on the given input.
+This command then updates the ```model``` accordingly.
+
+The following activity diagram summarizes what happens when a user executes an ```delete``` command:
+![images](images/DeleteActivityDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** There should only be one arrowhead at the end of every line 
+in the Activity Diagram. This is a known limitation of PlantUML.</div>
+
+Given below is an example usage scenario illustrated by a sequence diagram for ```delete``` command.
+
+Step 1. A valid command `delete 1` is given as user input. This invokes `LogicManager#execute()`, which calls
+`AddressBookParser#parseCommand()` to parse `delete 1` into command word `delete` and command argument ``` 1```.
+
+Step 2. `DeleteCommandParser` is initialized based on the parse results and `DeleteCommandParser#parse()` is called
+to identify the indices present in ``` 1```. `DeleteCommandParser#parse()` then initializes a
+`DeleteCommand` with the indices present as arguments.
+
+Step 3. `DeleteCommand#execute()` is then called, which will check the validity of the given indices. 
+If there is no exception thrown, `Model#deletePerson()` is called to delete the applicants corresponding to the 
+given indices.
+
+Step 4. `CommandResult` is initialized with `String` containing the details of the deleted applicant.
+This `CommandResult` is then returned.
+
+The following sequence diagram shows how the delete operation works.
+![images](images/DeleteSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** The lifeline for `DeleteCommandParser`
+should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
 ### Show feature
 
