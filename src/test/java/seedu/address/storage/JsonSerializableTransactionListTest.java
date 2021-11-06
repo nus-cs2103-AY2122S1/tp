@@ -38,7 +38,6 @@ public class JsonSerializableTransactionListTest {
 
     @Test
     public void saveInventory() {
-
         ReadOnlyTransactionList txnList = TypicalOrders.getTypicalTransactionList();
 
         try {
@@ -47,6 +46,6 @@ public class JsonSerializableTransactionListTest {
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }
-    }
 
+    }
 }
