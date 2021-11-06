@@ -1310,18 +1310,18 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a student while all students are being shown
 
-* Prerequisites: Multiple "Students" shown in the list of students.
+    * Prerequisites: Multiple "Students" shown in the list of students.
 
-* Note: We will be using index `1` to conduct manual testing for positive tests, but feel free to test with any valid index (any positive integer shown in the student list).
+    * Note: We will be using index `1` to conduct manual testing for positive tests, but feel free to test with any valid index (any positive integer shown in the student list).
 
-* Test case: `delete 1`<br>
-  Expected: `Student` of index `1` is deleted from the list. `Student` will be unenrolled from the `Lesson`, and `Lesson` with `Student` inside will decrease its size by `1`. Details of the deleted student shown in the status message.
+    * Test case: `delete 1`<br>
+      Expected: `Student` of index `1` is deleted from the list. `Student` will be unenrolled from the `Lesson`, and `Lesson` with `Student` inside will decrease its size by `1`. Details of the deleted student shown in the status message.
 
-* Test case: `delete 0`<br>
-  Expected: No student is deleted. Error details shown in the status message.
+    * Test case: `delete 0`<br>
+      Expected: No student is deleted. Error details shown in the status message.
 
-* Other incorrect delete commands to try: `delete`, `delete x`, `delete y` (where x is larger than the list size, and y is a negative integer)<br>
-  Expected: Similar to previous.
+    * Other incorrect delete commands to try: `delete`, `delete x`, `delete y` (where x is larger than the list size, and y is a negative integer)<br>
+      Expected: Similar to previous.
 
 
 #### Editing a student
@@ -1505,18 +1505,18 @@ expected to correct the input parameters one by one._
 
 1. Deleting a lesson while all lessons are being shown.
 
-* Prerequisites: Multiple "Lessons" shown in the list of lessons
+    * Prerequisites: Multiple "Lessons" shown in the list of lessons
 
-* Note: We will be using index `1` to conduct manual testing for positive tests, but feel free to test with any valid index (any positive integer shown in the lesson list).
+    * Note: We will be using index `1` to conduct manual testing for positive tests, but feel free to test with any valid index (any positive integer shown in the lesson list).
 
-* Test case: `delete-l 1`<br>
-  Expected: Students currently enrolled in `Lesson` of index `1` would be unenrolled. `Lesson` of index `1` is deleted from the list. Details of the deleted lesson shown in the status message.
+    * Test case: `delete-l 1`<br>
+      Expected: Students currently enrolled in `Lesson` of index `1` would be unenrolled. `Lesson` of index `1` is deleted from the list. Details of the deleted lesson shown in the status message.
 
-* Test case: `delete-l 0`<br>
+    * Test case: `delete-l 0`<br>
   Expected: No lesson is deleted. Error details shown in the status message.
 
-* Other incorrect delete commands to try: `delete-l`, `delete-l x`, `delete-l y` (where x is larger than the list size, and y is a negative integer)<br>
-  Expected: Similar to previous.
+    * Other incorrect delete commands to try: `delete-l`, `delete-l x`, `delete-l y` (where x is larger than the list size, and y is a negative integer)<br>
+      Expected: Similar to previous.
 
 
 #### Viewing a lesson's roster 
