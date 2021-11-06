@@ -1,0 +1,14 @@
+{
+  "person" : {
+    "name" : "Cheong Yee Ming",
+    "telegram" : "iamym",
+    "github" : "valid",
+    "phone" : null,
+    "email" : null,
+    "address" : null,
+    "tagged" : [ ],
+    "isFavorite" : false,
+    "gitStats" : null,
+    "image" : null
+  }
+}
