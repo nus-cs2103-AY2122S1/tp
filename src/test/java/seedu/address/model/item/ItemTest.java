@@ -18,6 +18,13 @@ import seedu.address.testutil.ItemBuilder;
 public class ItemTest {
 
     @Test
+    public void altConstructor() {
+        Item item = new Item(APPLE_PIE, APPLE_PIE.getCount());
+
+        assertTrue(item.equals(APPLE_PIE));
+    }
+
+    @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Item item = new ItemBuilder().build();
         assertThrows(UnsupportedOperationException.class, () -> item.getTags().remove(0));
@@ -89,7 +96,27 @@ public class ItemTest {
         // different tags -> returns false
         editedPie = new ItemBuilder(APPLE_PIE).withSalesPrice(VALID_SALESPRICE_BAGEL).build();
         assertFalse(APPLE_PIE.equals(editedPie));
+    }
 
+    @Test
+    public void variousEqualityFunction() {
+        // same values -> returns true
+        Item pieCopy = new ItemBuilder(APPLE_PIE).build();
+        assertTrue(APPLE_PIE.isSameCount(pieCopy));
+        assertTrue(APPLE_PIE.isSameName(pieCopy));
+        assertTrue(APPLE_PIE.isSameId(pieCopy));
+        assertTrue(APPLE_PIE.isSameItem(pieCopy));
 
+        // same item
+        assertTrue(APPLE_PIE.isSameCount(APPLE_PIE));
+        assertTrue(APPLE_PIE.isSameName(APPLE_PIE));
+        assertTrue(APPLE_PIE.isSameId(APPLE_PIE));
+        assertTrue(APPLE_PIE.isSameItem(APPLE_PIE));
+
+        // different items with different values
+        assertFalse(APPLE_PIE.isSameCount(BAGEL.updateCount(BAGEL.getCount() + 1)));
+        assertFalse(APPLE_PIE.isSameName(BAGEL));
+        assertFalse(APPLE_PIE.isSameId(BAGEL));
+        assertFalse(APPLE_PIE.isSameItem(BAGEL));
     }
 }

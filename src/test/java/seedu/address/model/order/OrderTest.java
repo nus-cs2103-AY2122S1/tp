@@ -96,6 +96,14 @@ class OrderTest {
     }
 
     @Test
+    public void removeItem_countTooLow_throwIllegalArgumentException() {
+
+        order.addItem(APPLE_PIE);
+
+        assertThrows(IllegalArgumentException.class, () -> order.removeItem(APPLE_PIE, 6));
+    }
+
+    @Test
     public void removeItem_allExistingItem_itemRemoved() {
 
         order.addItem(APPLE_PIE);
@@ -162,5 +170,14 @@ class OrderTest {
         order.addItem(BAGEL);
         assertFalse(order.isEmpty());
     }
+
+    @Test
+    public void equal() {
+        // same item
+        assertTrue(order.equals(order));
+        // not an order
+        assertFalse(order.equals(3));
+    }
+
 
 }

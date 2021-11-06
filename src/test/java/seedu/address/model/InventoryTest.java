@@ -14,6 +14,7 @@ import static seedu.address.testutil.TypicalItems.DONUT;
 import static seedu.address.testutil.TypicalItems.getTypicalInventory;
 import static seedu.address.testutil.TypicalOrders.getTypicalTransaction;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -144,6 +145,28 @@ public class InventoryTest {
         expectedInventory.addItem(BAGEL.updateCount(10));
 
         assertEquals(inventory, expectedInventory);
+    }
+
+    @Test
+    public void addItem_moreThan1() {
+        inventory.addItems(new ArrayList<Item>(Arrays.asList(DONUT, BAGEL)));
+
+        Inventory expectedInventory = new Inventory();
+        expectedInventory.addItem(DONUT);
+        expectedInventory.addItem(BAGEL);
+
+        assertEquals(inventory, expectedInventory);
+    }
+
+    @Test
+    public void hashCodeTest() {
+        inventory.addItems(new ArrayList<Item>(Arrays.asList(DONUT, BAGEL)));
+
+        Inventory expectedInventory = new Inventory();
+        expectedInventory.addItem(DONUT);
+        expectedInventory.addItem(BAGEL);
+
+        assertEquals(inventory.hashCode(), expectedInventory.hashCode());
     }
 
     @Test

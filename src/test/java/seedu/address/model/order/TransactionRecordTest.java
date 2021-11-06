@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalItems.APPLE_PIE;
+import static seedu.address.testutil.TypicalItems.DONUT;
 import static seedu.address.testutil.TypicalItems.getTypicalItems;
 
 import java.time.Instant;
@@ -44,6 +45,33 @@ public class TransactionRecordTest {
     }
 
     @Test
+    public void getTimeStringTest() {
+        TransactionRecord copy = new TransactionRecord(
+                transaction.getOrderItems(),
+                transaction.getId(),
+                transaction.getTimestamp()
+        );
+
+        assertEquals(copy.getTimeString(), transaction.getTimeString());
+    }
+
+    @Test
+    public void isSameTransactionInfo() {
+        TransactionRecord other = new TransactionRecord(
+                List.of(APPLE_PIE),
+                transaction.getId(),
+                transaction.getTimestamp()
+        );
+
+        TransactionRecord other2 = new TransactionRecord(
+                List.of(DONUT),
+                transaction.getId(),
+                transaction.getTimestamp()
+        );
+        assertFalse(other2.isSameTransactionInfo(other.getOrderItems()));
+    }
+
+    @Test
     public void equals() {
         // same values -> returns true
         TransactionRecord copy = new TransactionRecord(
@@ -69,6 +97,14 @@ public class TransactionRecordTest {
                 transaction.getTimestamp()
         );
         assertFalse(transaction.equals(other));
+
+        // different items (same count) -> returns false
+        TransactionRecord other2 = new TransactionRecord(
+                List.of(DONUT),
+                transaction.getId(),
+                transaction.getTimestamp()
+        );
+        assertFalse(other2.isSameTransactionInfo(other.getOrderItems()));
 
         // different id -> returns false
         other = new TransactionRecord(

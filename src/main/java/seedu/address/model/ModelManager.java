@@ -405,4 +405,12 @@ public class ModelManager implements Model {
     public void initialiseBookKeeping() {
         bookKeeping.initialise();
     }
+
+    /**
+     * set bookKeeping.
+     * @param bookKeeping the bookKeeping it will be set to.
+     */
+    public void setBookKeeping(BookKeeping bookKeeping) {
+        this.bookKeeping = bookKeeping;
+    }
 }

@@ -15,6 +15,7 @@ import static seedu.address.testutil.TypicalItems.APPLE_PIE;
 import static seedu.address.testutil.TypicalItems.BAGEL;
 import static seedu.address.testutil.TypicalItems.BANANA_MUFFIN;
 import static seedu.address.testutil.TypicalItems.DONUT;
+import static seedu.address.testutil.TypicalTransactions.getTypicalTransactionList;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -77,6 +78,13 @@ public class ModelManagerTest {
         GuiSettings guiSettings = new GuiSettings(1, 2, 3, 4);
         modelManager.setGuiSettings(guiSettings);
         assertEquals(guiSettings, modelManager.getGuiSettings());
+    }
+
+    @Test
+    public void setBookKeeping_validBookKeeping_setBookKeeping() {
+        BookKeeping bookKeeping = new BookKeeping(3.0, 2.0, 1.0);
+        modelManager.setBookKeeping(bookKeeping);
+        assertEquals(bookKeeping, modelManager.getBookKeeping());
     }
 
     @Test
@@ -242,6 +250,30 @@ public class ModelManagerTest {
         assertThrows(ClassCastException.class, () ->
             modelManager.updateFilteredItemList(DISPLAY_TRANSACTION_LIST, x -> true)
         );
+    }
+
+    @Test
+    public void openTransactionTest() {
+        Inventory inventory = new InventoryBuilder().withItem(APPLE_PIE).withItem(BANANA_MUFFIN).build();
+        Inventory differentInventory = new Inventory();
+        UserPrefs userPrefs = new UserPrefs();
+
+        ModelManager modelManager = new ModelManager(inventory, userPrefs,
+                new TransactionList(getTypicalTransactionList()), new BookKeeping());
+        Double totalCost = modelManager.openTransaction("bagelid");
+        assertTrue(totalCost == BAGEL.getSalesPrice() * BAGEL.getCount());
+    }
+
+    @Test
+    public void openTransactionTest_empty() {
+        Inventory inventory = new InventoryBuilder().withItem(APPLE_PIE).withItem(BANANA_MUFFIN).build();
+        Inventory differentInventory = new Inventory();
+        UserPrefs userPrefs = new UserPrefs();
+
+        ModelManager modelManager = new ModelManager(inventory, userPrefs,
+                new TransactionList(), new BookKeeping());
+        Double totalCost = modelManager.openTransaction("bagelid");
+        assertTrue(totalCost == -1.0);
     }
 
     @Test
