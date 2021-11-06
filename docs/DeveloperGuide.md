@@ -434,7 +434,7 @@ also be outputted on the left of the GUI.
 
 The activity diagram of this `Find` command is shown below:
 
-![ViewShift Command Sequence Diagram](images/viewShiftCommand/viewShiftSequenceDiagram.png)
+![ViewShift Command Sequence Diagram](images/viewShiftCommand/ViewShiftSequenceDiagram.png)
 
 Notes:
 
