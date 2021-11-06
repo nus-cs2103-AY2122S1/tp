@@ -61,7 +61,12 @@ Person *--> "*" Notes
 Person *--> Done
 
 Name -[hidden]right-> Phone
-Phone -[hidden]right-> Email
+Role -[hidden]up-> Email
+EmploymentType -[hidden]left-> Role
+LevelOfEducation -[hidden]left-> EmploymentType
+ExpectedSalary -[hidden]left-> LevelOfEducation
+Experience -[hidden]left-> ExpectedSalary
+Interview -[hidden]left-> Experience
 
 ModelManager -->"~* filtered" Person
 @enduml
