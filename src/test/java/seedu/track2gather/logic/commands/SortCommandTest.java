@@ -5,8 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.track2gather.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.track2gather.logic.commands.SortCommand.COMPARATOR_PERSON_CASE_NUMBER;
 import static seedu.track2gather.logic.commands.SortCommand.COMPARATOR_PERSON_NAME;
-import static seedu.track2gather.logic.commands.SortCommand.COMPARATOR_PERSON_SHN_PERIOD_END;
-import static seedu.track2gather.logic.commands.SortCommand.COMPARATOR_PERSON_SHN_PERIOD_START;
+import static seedu.track2gather.logic.commands.SortCommand.COMPARATOR_PERSON_SHN_PERIOD_END_ASC;
+import static seedu.track2gather.logic.commands.SortCommand.COMPARATOR_PERSON_SHN_PERIOD_END_DSC;
+import static seedu.track2gather.logic.commands.SortCommand.COMPARATOR_PERSON_SHN_PERIOD_START_ASC;
+import static seedu.track2gather.logic.commands.SortCommand.COMPARATOR_PERSON_SHN_PERIOD_START_DSC;
 import static seedu.track2gather.logic.commands.SortCommand.SORTING_DIRECTION_STRINGS;
 import static seedu.track2gather.logic.commands.SortCommand.SORTING_FIELD_STRINGS;
 import static seedu.track2gather.logic.parser.CliSyntax.PREFIX_CASE_NUMBER;
@@ -80,7 +82,7 @@ public class SortCommandTest {
         // shn period start date, ascending
         prefixes = List.of(PREFIX_SHN_PERIOD_START);
         directions = List.of(Direction.ASCENDING);
-        comparator = COMPARATOR_PERSON_SHN_PERIOD_START;
+        comparator = COMPARATOR_PERSON_SHN_PERIOD_START_ASC;
 
         sortCommand = new SortCommand(prefixes, directions);
         expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, SORTING_FIELD_STRINGS.get(PREFIX_SHN_PERIOD_START)
@@ -93,7 +95,7 @@ public class SortCommandTest {
         // shn period end date, ascending
         prefixes = List.of(PREFIX_SHN_PERIOD_END);
         directions = List.of(Direction.ASCENDING);
-        comparator = COMPARATOR_PERSON_SHN_PERIOD_END;
+        comparator = COMPARATOR_PERSON_SHN_PERIOD_END_ASC;
 
         sortCommand = new SortCommand(prefixes, directions);
         expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS,
@@ -132,7 +134,7 @@ public class SortCommandTest {
         // shn period start date, descending
         prefixes = List.of(PREFIX_SHN_PERIOD_START);
         directions = List.of(Direction.DESCENDING);
-        comparator = COMPARATOR_PERSON_SHN_PERIOD_START.reversed();
+        comparator = COMPARATOR_PERSON_SHN_PERIOD_START_DSC.reversed();
 
         sortCommand = new SortCommand(prefixes, directions);
         expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, SORTING_FIELD_STRINGS.get(PREFIX_SHN_PERIOD_START)
@@ -145,7 +147,7 @@ public class SortCommandTest {
         // shn period end date, descending
         prefixes = List.of(PREFIX_SHN_PERIOD_END);
         directions = List.of(Direction.DESCENDING);
-        comparator = COMPARATOR_PERSON_SHN_PERIOD_END.reversed();
+        comparator = COMPARATOR_PERSON_SHN_PERIOD_END_DSC.reversed();
 
         sortCommand = new SortCommand(prefixes, directions);
         expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS,
