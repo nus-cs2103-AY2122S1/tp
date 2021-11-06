@@ -21,23 +21,6 @@ public enum Status {
     }
 
     /**
-     * Parses the status of the filter command.
-     *
-     * @param status The status specified in the filter command
-     * @return The {@code Status} group status.
-     */
-    public static Status parseStatusForFilter(String status) {
-        assert (status != null);
-        if (status.equalsIgnoreCase("SG")) {
-            return Status.NEED_GROUP;
-        } else if (status.equalsIgnoreCase("SM")) {
-            return Status.NEED_MEMBER;
-        } else {
-            return Status.NONE;
-        }
-    }
-
-    /**
      * Returns true if a given string is a valid status.
      */
     public static boolean isValidStatus(String test) {

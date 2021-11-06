@@ -1,46 +1,76 @@
 package seedu.modulink.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.modulink.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.modulink.testutil.Assert.assertThrows;
+import static seedu.modulink.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
-// import java.util.Arrays;
+import java.util.Set;
 import java.util.function.Predicate;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.modulink.commons.core.GuiSettings;
 import seedu.modulink.logic.commands.exceptions.CommandException;
+import seedu.modulink.logic.parser.exceptions.ParseException;
 import seedu.modulink.model.AddressBook;
 import seedu.modulink.model.Model;
+import seedu.modulink.model.ModelManager;
 import seedu.modulink.model.ReadOnlyAddressBook;
 import seedu.modulink.model.ReadOnlyUserPrefs;
+import seedu.modulink.model.UserPrefs;
+import seedu.modulink.model.person.Email;
+import seedu.modulink.model.person.GitHubUsername;
+import seedu.modulink.model.person.Name;
 import seedu.modulink.model.person.Person;
+import seedu.modulink.model.person.Phone;
+import seedu.modulink.model.person.StudentId;
+import seedu.modulink.model.tag.Mod;
 import seedu.modulink.testutil.PersonBuilder;
 
+// import java.util.Arrays;
+
 public class CreateCommandTest {
+
+    private Model model;
+    @BeforeEach
+    public void setUp() {
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    }
 
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new CreateCommand(null));
     }
 
-    /**
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+    public void execute_createPerson_success() throws CommandException {
         Person validPerson = new PersonBuilder().build();
-
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
-
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validPerson), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        CommandResult commandResult = new CreateCommand(validPerson).execute(model);
+        assertEquals(String.format(CreateCommand.MESSAGE_SUCCESS, validPerson), commandResult.getFeedbackToUser());
     }
-     **/
+
+    @Test
+    public void execute_duplicateIdPerson_throwsCommandException() throws ParseException {
+        Person myProfile = new Person(new Name("alex"), new StudentId("A1234589R"), new Phone("12332110"),
+                new Email("alex@example.com"), new GitHubUsername("alexyeoh"),
+                null, false,
+                Set.of(new Mod("CS2100 need member")), true);
+        Person otherPerson = new Person(new Name("alexa"), new StudentId("A1234589R"), new Phone("1232110"),
+                new Email("alexa@example.com"), new GitHubUsername("alexayeoh"),
+                null, false,
+                Set.of(new Mod("CS2100 need group")), false);
+        model.addPerson(otherPerson);
+        CreateCommand createCommand = new CreateCommand(myProfile);
+        assertCommandFailure(createCommand, model, CreateCommand.MESSAGE_DUPLICATE_STUDENT_ID);
+    }
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {

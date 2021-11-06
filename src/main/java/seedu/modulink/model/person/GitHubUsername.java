@@ -6,7 +6,8 @@ public class GitHubUsername {
 
     public static final String MESSAGE_CONSTRAINTS =
             "GitHub username should start with an alphanumeric character, "
-                    + "can only contain alphanumeric characters and hyphens, and must not contain any spaces.";
+                    + "can only contain alphanumeric characters and hyphens, "
+                    + "be longer than one character, and must not contain any spaces.";
     public static final String VALIDATION_REGEX = "^[A-Za-z0-9]+[A-Za-z0-9-]+$";
     public final String value;
 

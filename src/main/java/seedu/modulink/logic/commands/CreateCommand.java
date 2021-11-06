@@ -41,7 +41,7 @@ public class CreateCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Profile created: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
-    private static final String MESSAGE_DUPLICATE_STUDENT_ID = "There is already a person with this Student ID.";
+    public static final String MESSAGE_DUPLICATE_STUDENT_ID = "There is already a person with this Student ID.";
 
     private final Person myProfile;
 
