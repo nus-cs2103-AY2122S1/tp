@@ -2,7 +2,7 @@
 layout: page
 title: User Guide
 ---
-
+<span id="toc"/>
 * Table of Contents
 {:toc}
 
@@ -25,7 +25,7 @@ This user guide is intended for any user of TAB. It provides installation instru
 
 **Navigation**
 
-In the [Table of Contents](#), each item listed is a link which you can click on to go directly to that section in the guide.
+In the [Table of Contents](#toc), each item listed is a link which you can click on to go directly to that section in the guide.
 
 **Conventions Used**
 
@@ -173,7 +173,7 @@ An example of a command in TAB:
 
 <br />
 
-[back to table of contents](#)
+[back to table of contents](#toc)
 
 <div style="page-break-after: always;"></div>
 
@@ -199,7 +199,7 @@ Format: `help`
 
 <br />
 
-[back to table of contents](#)
+[back to table of contents](#toc)
 
 <div style="page-break-after: always;"></div>
 
@@ -436,7 +436,7 @@ Format: `list`
 
 <br />
 
-[back to table of contents](#)
+[back to table of contents](#toc)
 
 <div style="page-break-after: always;"></div>
 
@@ -561,7 +561,7 @@ To find students with the tag `new` or with lessons between `1100-1300`, you may
 
 <br />
 
-[back to table of contents](#)
+[back to table of contents](#toc)
 
 <div style="page-break-after: always;"></div>
 
@@ -827,7 +827,7 @@ Example: Suppose the date today is 1 Nov 2021 and current time is 1500h,
 
 <br />
 
-[back to table of contents](#)
+[back to table of contents](#toc)
 
 <div style="page-break-after: always;"></div>
 
@@ -912,7 +912,7 @@ This value would be used to calculate and flag out which lesson's fees are due b
 
 <br />
 
-[back to table of contents](#)
+[back to table of contents](#toc)
 
 <div style="page-break-after: always;"></div>
 
@@ -1005,7 +1005,7 @@ Format: `today`
 
 <br />
 
-[back to table of contents](#)
+[back to table of contents](#toc)
 
 <div style="page-break-after: always;"></div>
 
@@ -1075,7 +1075,7 @@ Format: `exit`
 
 <br />
 
-[back to table of contents](#)
+[back to table of contents](#toc)
 
 <div style="page-break-after: always;"></div>
 
@@ -1102,7 +1102,7 @@ If your changes to the data file makes its format invalid, TAB will discard all 
 
 <br />
 
-[back to table of contents](#)
+[back to table of contents](#toc)
 
 <div style="page-break-after: always;"></div>
 
@@ -1126,7 +1126,7 @@ This means that after clicking any button in the GUI, you do not have to click i
 
 <br />
 
-[back to table of contents](#)
+[back to table of contents](#toc)
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -1146,7 +1146,7 @@ This section records frequently asked questions from users of TAB.
 
 <br />
 
-[back to table of contents](#)
+[back to table of contents](#toc)
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -1172,7 +1172,7 @@ UX | User Experience - The experience a user has when using the app.
 
 <br />
 
-[back to table of contents](#)
+[back to table of contents](#toc)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1234,5 +1234,5 @@ Action | Format
 
 <br />
 
-[back to table of contents](#)
+[back to table of contents](#toc)
 
