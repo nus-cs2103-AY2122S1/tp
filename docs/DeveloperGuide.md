@@ -979,6 +979,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 ### Glossary
+
 Term | Definition | Comments
 -----| ----------- | ---------- 
 Operating System (OS) | Software that manages computer hardware and other computer software. |
