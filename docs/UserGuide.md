@@ -76,7 +76,7 @@ If you can type fast, MTR can get your application management tasks done faster 
 * Undoing the last modification: [`undo`](#undoing-the-last-modification--undo)
 * Exiting the program: [`exit`](#exiting-the-program--exit)
 
-### Position-Related Command
+### Position-Related Commands
 * Adding a position: [`add-position`](#adding-a-position-add-position)
 * Deleting a position: [`delete-position`](#deleting-a-position-delete-position)
 * Editing a position: [`edit-position`](#editing-a-position-edit-position)
