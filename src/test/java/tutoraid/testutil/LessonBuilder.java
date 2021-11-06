@@ -23,7 +23,6 @@ public class LessonBuilder {
     private LessonName lessonName;
     private Capacity capacity;
     private Price price;
-    private Students students;
     private Timing timing;
 
     /**
@@ -79,6 +78,6 @@ public class LessonBuilder {
     }
 
     public Lesson build() {
-        return new Lesson(lessonName, capacity, price, students, timing);
+        return new Lesson(lessonName, capacity, price, timing);
     }
 }

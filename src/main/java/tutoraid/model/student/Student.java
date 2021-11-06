@@ -185,31 +185,33 @@ public class Student {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-
         builder.append("\nStudent's name: " + getStudentName());
-
-        if (studentPhone != null) {
-            builder.append("\nStudent's phone: ")
-                    .append(getStudentPhone());
-        }
-
-        if (parentName != null) {
-            builder.append("\nParent's name: ")
-                    .append(getParentName());
-
-        }
-
-        if (parentPhone != null) {
-            builder.append("\nParent's phone: ")
-                    .append(getParentPhone());
-        }
-
+        builder.append("\nStudent's phone: ")
+                .append(getStudentPhone());
+        builder.append("\nParent's name: ")
+                .append(getParentName());
+        builder.append("\nParent's phone: ")
+                .append(getParentPhone());
         builder.append("\nProgress: ")
                 .append(getLatestProgress())
                 .append("; Lessons: ")
                 .append(getLessons());
-
         return builder.toString();
     }
 
+    /**
+     * Returns a copy of the current student object by creating a new object with the same fields.
+     *
+     * @return Copy of this student object
+     */
+    public Student copy() {
+        return new Student(
+                new StudentName(getStudentName().toString()),
+                new Phone(getStudentPhone().toString()),
+                new ParentName(getParentName().toString()),
+                new Phone(getParentPhone().toString()),
+                this.progressList,
+                this.lessons
+        );
+    }
 }

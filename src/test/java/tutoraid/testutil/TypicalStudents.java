@@ -16,7 +16,13 @@ import java.util.Arrays;
 import java.util.List;
 
 import tutoraid.model.StudentBook;
+import tutoraid.model.student.InitialStudent;
+import tutoraid.model.student.ParentName;
+import tutoraid.model.student.Phone;
+import tutoraid.model.student.Progress;
+import tutoraid.model.student.ProgressList;
 import tutoraid.model.student.Student;
+import tutoraid.model.student.StudentName;
 
 /**
  * A utility class containing a list of {@code Student} objects to be used in tests.
@@ -36,6 +42,13 @@ public class TypicalStudents {
             .withParentPhone("98765432")
             .withProgressList(new ArrayList<>())
             .build();
+    public static final InitialStudent INITIAL_BENSON = new InitialStudent(
+            new StudentName("Benson Meier"),
+            new Phone("98765423"),
+            new ParentName("Mrs Meier"),
+            new Phone("98765432"),
+            new ProgressList(),
+            new ArrayList<>());
     public static final Student CARL = new StudentBuilder()
             .withStudentName("Carl Kurz")
             .withStudentPhone("95352563")
@@ -120,6 +133,14 @@ public class TypicalStudents {
     }
 
     public static List<Student> getTypicalStudents() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(
+                ALICE.copy(),
+                BENSON.copy(),
+                CARL.copy(),
+                DANIEL.copy(),
+                ELLE.copy(),
+                FIONA.copy(),
+                GEORGE.copy()
+        ));
     }
 }

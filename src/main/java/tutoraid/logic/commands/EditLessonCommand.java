@@ -70,7 +70,7 @@ public class EditLessonCommand extends EditCommand {
         Lesson lessonToEdit = lastShownLessonList.get(targetIndex.getZeroBased());
         Lesson editedLesson = createEditedLesson(lessonToEdit, editLessonDescriptor);
 
-        if (!lessonToEdit.isSameLesson(editedLesson) && model.hasLesson(editedLesson)) {
+        if (lessonToEdit.equals(editedLesson) || model.hasLesson(editedLesson)) {
             throw new CommandException(MESSAGE_DUPLICATE_LESSON);
         }
 

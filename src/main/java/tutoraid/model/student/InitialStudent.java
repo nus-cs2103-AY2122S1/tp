@@ -59,4 +59,27 @@ public class InitialStudent {
     public StudentName getStudentName() {
         return studentName;
     }
+
+    /**
+     * Returns true if both initial students have the same identity and data fields.
+     * This defines a stronger notion of equality between two initial students.
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof InitialStudent)) {
+            return false;
+        }
+
+        InitialStudent otherStudent = (InitialStudent) other;
+        return otherStudent.studentName.equals(studentName)
+                && otherStudent.studentPhone.equals(studentPhone)
+                && otherStudent.parentName.equals(parentName)
+                && otherStudent.parentPhone.equals(parentPhone)
+                && otherStudent.progressList.equals(progressList)
+                && otherStudent.lessonNames.equals(lessonNames);
+    }
 }

@@ -1,19 +1,22 @@
 package tutoraid.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutoraid.logic.commands.CommandTestUtil.DESC_MATH;
 import static tutoraid.logic.commands.CommandTestUtil.DESC_SCIENCE;
+import static tutoraid.logic.commands.CommandTestUtil.VALID_CAPACITY_MATHS_TWO;
 import static tutoraid.logic.commands.CommandTestUtil.VALID_LESSON_NAME_MATHS_TWO;
 import static tutoraid.logic.commands.CommandTestUtil.VALID_LESSON_NAME_SCIENCE_TWO;
 import static tutoraid.logic.commands.CommandTestUtil.VALID_PRICE_MATHS_TWO;
+import static tutoraid.logic.commands.CommandTestUtil.VALID_PRICE_SCIENCE_TWO;
+import static tutoraid.logic.commands.CommandTestUtil.VALID_TIMING_SCIENCE_TWO;
 import static tutoraid.logic.commands.CommandTestUtil.assertCommandFailure;
-import static tutoraid.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutoraid.logic.commands.CommandTestUtil.showLessonAtIndex;
 import static tutoraid.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static tutoraid.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
 import static tutoraid.testutil.TypicalLessons.getTypicalLessonBook;
-import static tutoraid.testutil.TypicalLessons.getTypicalLessonBookWithoutStudents;
 import static tutoraid.testutil.TypicalStudents.getTypicalStudentBook;
 
 import org.junit.jupiter.api.Test;
@@ -21,7 +24,7 @@ import org.junit.jupiter.api.Test;
 import tutoraid.commons.core.Messages;
 import tutoraid.commons.core.index.Index;
 import tutoraid.logic.commands.EditLessonCommand.EditLessonDescriptor;
-import tutoraid.model.LessonBook;
+import tutoraid.logic.commands.exceptions.CommandException;
 import tutoraid.model.Model;
 import tutoraid.model.ModelManager;
 import tutoraid.model.UserPrefs;
@@ -32,105 +35,76 @@ import tutoraid.testutil.LessonBuilder;
 
 public class EditLessonCommandTest {
 
-    private Model model = new ModelManager(getTypicalStudentBook(), getTypicalLessonBook(), new UserPrefs());
-    private Model modelNoStudents = new ModelManager(
-            getTypicalStudentBook(), getTypicalLessonBookWithoutStudents(), new UserPrefs());
-
     @Test
-    public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Lesson editedLesson = new LessonBuilder().withLessonName("New Lesson").build();
-        EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder(editedLesson).build();
-        EditLessonCommand editCommand = new EditLessonCommand(INDEX_FIRST_ITEM, descriptor);
-
-        String expectedMessage = String.format(EditLessonCommand.MESSAGE_EDIT_LESSON_SUCCESS,
-                editedLesson.toNameString());
-
-        Model expectedModel = new ModelManager(
-                modelNoStudents.getStudentBook(), new LessonBook(modelNoStudents.getLessonBook()), new UserPrefs());
-        expectedModel.setLesson(modelNoStudents.getFilteredLessonList().get(0), editedLesson);
-        expectedModel.viewLesson(editedLesson);
-        expectedModel.updateFilteredStudentList(editedLesson::hasStudent);
-
-        assertCommandSuccess(editCommand, modelNoStudents, expectedMessage, expectedModel);
+    public void execute_allFieldsSpecifiedUnfilteredList_success() throws CommandException {
+        Model model = new ModelManager(getTypicalStudentBook(), getTypicalLessonBook(), new UserPrefs());
+        Lesson editedLesson = new LessonBuilder()
+                .withLessonName(VALID_LESSON_NAME_MATHS_TWO)
+                .withPrice(VALID_PRICE_MATHS_TWO)
+                .withCapacity(VALID_CAPACITY_MATHS_TWO)
+                .withTiming(VALID_TIMING_SCIENCE_TWO)
+                .build();
+        EditLessonCommand editCommand = new EditLessonCommand(INDEX_FIRST_ITEM,
+                new EditLessonDescriptorBuilder()
+                        .withLessonName(VALID_LESSON_NAME_MATHS_TWO)
+                        .withPrice(VALID_PRICE_MATHS_TWO)
+                        .withCapacity(VALID_CAPACITY_MATHS_TWO)
+                        .withTiming(VALID_TIMING_SCIENCE_TWO)
+                        .build());
+        editCommand.execute(model);
+        assertEquals(editedLesson, model.getFilteredLessonList().get(0));
     }
 
     @Test
-    public void execute_someFieldsSpecifiedUnfilteredList_success() {
-        Index indexLastLesson = Index.fromOneBased(model.getFilteredLessonList().size());
-        Lesson lastLesson = model.getFilteredLessonList().get(indexLastLesson.getZeroBased());
-
-        LessonBuilder personInList = new LessonBuilder(lastLesson);
-        Lesson editedLesson = personInList
+    public void execute_someFieldsSpecifiedUnfilteredList_success() throws CommandException {
+        Model model = new ModelManager(getTypicalStudentBook(), getTypicalLessonBook(), new UserPrefs());
+        Lesson editedLesson = new LessonBuilder()
                 .withLessonName(VALID_LESSON_NAME_MATHS_TWO)
-                .withPrice(VALID_PRICE_MATHS_TWO)
+                .withPrice(VALID_PRICE_SCIENCE_TWO)
                 .build();
-
-        EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder()
-                .withLessonName(VALID_LESSON_NAME_MATHS_TWO)
-                .withPrice(VALID_PRICE_MATHS_TWO)
-                .build();
-        EditLessonCommand editCommand = new EditLessonCommand(indexLastLesson, descriptor);
-        String expectedMessage = String.format(EditLessonCommand.MESSAGE_EDIT_LESSON_SUCCESS,
-                editedLesson.toNameString());
-        Model expectedModel = new ModelManager(
-                model.getStudentBook(), new LessonBook(model.getLessonBook()), new UserPrefs());
-        expectedModel.setLesson(lastLesson, editedLesson);
-        expectedModel.viewLesson(editedLesson);
-        expectedModel.updateFilteredStudentList(editedLesson::hasStudent);
-
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        EditLessonCommand editCommand = new EditLessonCommand(INDEX_FIRST_ITEM,
+                new EditLessonDescriptorBuilder()
+                        .withLessonName(VALID_LESSON_NAME_MATHS_TWO)
+                        .withPrice(VALID_PRICE_SCIENCE_TWO)
+                        .build());
+        editCommand.execute(model);
+        assertEquals(model.getFilteredLessonList().get(0), editedLesson);
     }
 
     @Test
-    public void execute_noFieldSpecifiedUnfilteredList_success() {
+    public void execute_noFieldSpecifiedUnfilteredList_failure() throws CommandException {
+        Model model = new ModelManager(getTypicalStudentBook(), getTypicalLessonBook(), new UserPrefs());
         EditLessonCommand editCommand = new EditLessonCommand(INDEX_FIRST_ITEM, new EditLessonDescriptor());
-        Lesson editedLesson = model.getFilteredLessonList().get(INDEX_FIRST_ITEM.getZeroBased());
-
-        String expectedMessage = String.format(EditLessonCommand.MESSAGE_EDIT_LESSON_SUCCESS,
-                editedLesson.toNameString());
-
-        Model expectedModel = new ModelManager(
-                model.getStudentBook(), new LessonBook(model.getLessonBook()), new UserPrefs());
-        expectedModel.viewLesson(editedLesson);
-        expectedModel.updateFilteredStudentList(editedLesson::hasStudent);
-
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        assertThrows(CommandException.class, () -> {
+            editCommand.execute(model);
+        });
     }
 
     @Test
-    public void execute_filteredList_success() {
+    public void execute_filteredList_success() throws CommandException {
+        Model model = new ModelManager(getTypicalStudentBook(), getTypicalLessonBook(), new UserPrefs());
         showLessonAtIndex(model, INDEX_FIRST_ITEM);
-
-        Lesson personInFilteredList = model.getFilteredLessonList().get(INDEX_FIRST_ITEM.getZeroBased());
-        Lesson editedLesson = new LessonBuilder(personInFilteredList)
+        Lesson editedLesson = new LessonBuilder()
                 .withLessonName(VALID_LESSON_NAME_MATHS_TWO)
                 .build();
         EditLessonCommand editCommand = new EditLessonCommand(INDEX_FIRST_ITEM,
                 new EditLessonDescriptorBuilder().withLessonName(VALID_LESSON_NAME_MATHS_TWO).build());
-
-        String expectedMessage = String.format(EditLessonCommand.MESSAGE_EDIT_LESSON_SUCCESS,
-                editedLesson.toNameString());
-
-        Model expectedModel = new ModelManager(
-                model.getStudentBook(), model.getLessonBook(), new UserPrefs());
-        expectedModel.setLesson(model.getFilteredLessonList().get(0), editedLesson);
-        expectedModel.viewLesson(editedLesson);
-        expectedModel.updateFilteredStudentList(editedLesson::hasStudent);
-
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        editCommand.execute(model);
+        assertEquals(model.getFilteredLessonList().get(0), editedLesson);
     }
 
     @Test
     public void execute_duplicateLessonUnfilteredList_failure() {
+        Model model = new ModelManager(getTypicalStudentBook(), getTypicalLessonBook(), new UserPrefs());
         Lesson firstLesson = model.getFilteredLessonList().get(INDEX_FIRST_ITEM.getZeroBased());
         EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder(firstLesson).build();
         EditLessonCommand editCommand = new EditLessonCommand(INDEX_SECOND_ITEM, descriptor);
-
         assertCommandFailure(editCommand, model, EditLessonCommand.MESSAGE_DUPLICATE_LESSON);
     }
 
     @Test
     public void execute_duplicateLessonFilteredList_failure() {
+        Model model = new ModelManager(getTypicalStudentBook(), getTypicalLessonBook(), new UserPrefs());
         showLessonAtIndex(model, INDEX_FIRST_ITEM);
 
         // edit person in filtered list into a duplicate in address book
@@ -143,6 +117,7 @@ public class EditLessonCommandTest {
 
     @Test
     public void execute_invalidLessonIndexUnfilteredList_failure() {
+        Model model = new ModelManager(getTypicalStudentBook(), getTypicalLessonBook(), new UserPrefs());
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredLessonList().size() + 1);
         EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder()
                 .withLessonName(VALID_LESSON_NAME_SCIENCE_TWO)
@@ -158,6 +133,7 @@ public class EditLessonCommandTest {
      */
     @Test
     public void execute_invalidLessonIndexFilteredList_failure() {
+        Model model = new ModelManager(getTypicalStudentBook(), getTypicalLessonBook(), new UserPrefs());
         showLessonAtIndex(model, INDEX_FIRST_ITEM);
         Index outOfBoundIndex = INDEX_SECOND_ITEM;
         // ensures that outOfBoundIndex is still in bounds of lesson book list

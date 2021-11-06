@@ -203,4 +203,18 @@ public class Lesson {
     public String toNameString() {
         return lessonName.toString();
     }
+
+    /**
+     * Returns a copy of the current lesson object by creating a new object with the same fields.
+     *
+     * @return Copy of this lesson object
+     */
+    public Lesson copy() {
+        return new Lesson(
+                new LessonName(getLessonName().toString()),
+                new Capacity(getCapacity().toString()),
+                new Price(getPrice().toString()),
+                new Timing(getTiming().toString())
+        );
+    }
 }

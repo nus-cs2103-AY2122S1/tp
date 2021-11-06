@@ -92,22 +92,10 @@ public class TypicalLessons {
         return lb;
     }
 
-    /**
-     * Returns an {@code LessonBook} with all the typical lessons but no students.
-     */
-    public static LessonBook getTypicalLessonBookWithoutStudents() {
-        LessonBook lb = new LessonBook();
-        for (Lesson lesson : getTypicalLessonsWithoutStudents()) {
-            lb.addLesson(lesson);
-        }
-        return lb;
-    }
-
     public static List<Lesson> getTypicalLessons() {
-        return new ArrayList<>(Arrays.asList(MATHS_ONE, SCIENCE_ONE));
-    }
-
-    public static List<Lesson> getTypicalLessonsWithoutStudents() {
-        return new ArrayList<>(List.of(MATHS_TWO_NO_STUDENTS));
+        return new ArrayList<>(Arrays.asList(
+                MATHS_ONE.copy(),
+                SCIENCE_ONE.copy()
+        ));
     }
 }
