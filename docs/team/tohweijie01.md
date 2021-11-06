@@ -61,7 +61,8 @@ Given below are my contributions to the project.
     [\#181](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/181), 
     [\#185](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/185), 
     [\#295](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/295),
-    [\#305](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/305)
+    [\#305](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/305),
+    [\#348](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/348)
   * Reported bugs for other team during PE Dry Run: 
     [\#105](https://github.com/AY2122S1-CS2103T-W15-4/tp/issues/105),
     [\#118](https://github.com/AY2122S1-CS2103T-W15-4/tp/issues/118), 
