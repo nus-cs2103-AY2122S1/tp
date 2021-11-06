@@ -260,7 +260,7 @@ If there is no exception thrown, `Model#deletePerson()` is called to delete the 
 given indices.
 
 Step 4. `CommandResult` is initialized with `String` containing the details of the deleted applicant.
-This CommandResult is then returned.
+This `CommandResult` is then returned.
 
 The following sequence diagram shows how the delete operation works.
 ![images](images/DeleteSequenceDiagram.png)
@@ -419,7 +419,7 @@ corresponding to the given indices. If there is no exception thrown, `Model#mark
 applicants corresponding to the given indices.
 
 Step 4. `CommandResult` is initialized with `String` containing the details of the newly marked applicants.
-This CommandResult is then returned.
+This `CommandResult` is then returned.
 
 The following sequence diagram shows how the mark operation works.
 ![images](images/MarkCommandSequenceDiagram.png)
@@ -453,7 +453,7 @@ Step 3. `UnmarkCommand#execute()` is then called, which will in turn call `Model
 corresponding to the given indices. If there is no exception thrown, `Model#unmarkPerson()` is called to unmark the applicants corresponding to the given indices.
 
 Step 4. `CommandResult` is initialized with `String` containing the details of the newly unmarked applicants.
-This CommandResult is then returned.
+This `CommandResult` is then returned.
 
 The following sequence diagram shows how the unmark operation works.
 ![images](images/UnmarkCommandSequenceDiagram.png)
