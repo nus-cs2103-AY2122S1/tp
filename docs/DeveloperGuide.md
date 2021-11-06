@@ -616,13 +616,13 @@ The navigating input history feature works by storing an arraylist within the cl
 
 `InputHistory` class will communicate with the class `CommandBox` to display the requested commands.
 
-The following sequence diagram gives an overview of how `InputHistory` works when the app launches:
+The following activity diagram gives an overview of how `InputHistory` works when the User attempts to navigate through their input history:
 
 #### Design considerations:
 
-**Aspect: How `InputHistory` is created and requested.**
+**Aspect: How `InputHistory` is created and accessed.**
 
-**Alternative 1 (current choice):** Adopt the Singleton pattern to refer to `InputHistory`
+**Alternative 1 (current choice):** Adopt the Singleton pattern as the design pattern for `InputHistory`
 * Pros: Provides an easy way to access `InputHistory` from anywhere in the code and enforces having only one `InputHistory` object.
 * Cons: Harder to test since Singleton objects carry data from one test to another.
 
