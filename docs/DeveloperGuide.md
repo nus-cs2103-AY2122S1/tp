@@ -238,6 +238,11 @@ In the following section, we will be going through how our edit command works. S
 
 Editing a customer can be split into 2 steps: `Parse` and `Execute`.
 
+Below is a partial class diagram for `EditCustomerCommand`. Note that to make it more comprehensible, details not
+related to `EditCustomerCommand` are abstracted away.
+
+![EditCustomerCommandClassDiagram](images/EditCustomerCommandClassDiagram.png)
+
 The sequence Diagram below illustrates the interactions within the `Logic` component for the `execute` API call.
 
 ![EditCustomerCommandSequenceDiagram](images/EditCustomerCommandSequenceDiagram.png)
@@ -378,6 +383,11 @@ works. More information on the differences in finding `Supplier` and `Employee` 
 
 #### Current Implementation
 Finding of customers can be divided into two steps: `Parse` and `Execute`.
+
+Below is a partial class diagram for `FindCustomerCommand`. Note that to make it more comprehensible, details not
+related to `FindCustomerCommand` are abstracted away.
+
+![FindCustomerCommandClassDiagram](images/FindCustomerClassDiagram.png)
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("findC Chetwin")` API call.
 

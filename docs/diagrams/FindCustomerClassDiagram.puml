@@ -1,0 +1,33 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+package Logic {
+class FindCustomerCommand
+class CommandResult
+}
+
+Interface Predicate <<Interface>>
+class String
+
+package Model {
+class ModelManager
+class Rhrh
+class UniqueCustomerList
+Class CustomerClassContainsKeywordsPredicate
+Interface Model <<Interface>>
+}
+
+FindCustomerCommand ..> Model
+
+FindCustomerCommand --> "1" CustomerClassContainsKeywordsPredicate
+CustomerClassContainsKeywordsPredicate .down.|> Predicate
+CustomerClassContainsKeywordsPredicate --> "1..*" String
+ModelManager .up.|> Model
+ModelManager -down-> "1" Rhrh
+Rhrh *-right-> "1" UniqueCustomerList
+FindCustomerCommand ..> "0..1" CommandResult : creates >
+
+@enduml
