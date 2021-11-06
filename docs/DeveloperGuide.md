@@ -2,8 +2,37 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-  {:toc}
+### Table of Contents
+- [**Acknowledgements**](#acknowledgements)
+- [**Setting up, getting started**](#setting-up-getting-started)
+- [**Design**](#design)
+  * [Architecture](#architecture)
+  * [UI component](#ui-component)
+  * [Logic component](#logic-component)
+  * [Model component](#model-component)
+  * [Storage component](#storage-component)
+  * [Common classes](#common-classes)
+- [**Implementation**](#implementation)
+  * [Add feature](#add-feature)
+  * [Datetime for interview](#datetime-for-interview)
+  * [Edit feature](#edit-feature)
+  * [Filter interview feature](#filter-interview-feature)
+    + [Design considerations:](#design-considerations)
+  * [Find feature](#find-feature)
+  * [Show feature](#show-feature)
+  * [Unmark feature](#unmark-feature)
+- [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
+- [**Appendix: Requirements**](#appendix-requirements)
+  * [Product scope](#product-scope)
+  * [User stories](#user-stories)
+  * [Use cases](#use-cases)
+  * [Non-Functional Requirements](#non-functional-requirements)
+  * [Glossary](#glossary)
+- [**Appendix: Instructions for manual testing**](#appendix-instructions-for-manual-testing)
+  * [Launch and shutdown](#launch-and-shutdown)
+  * [Deleting a person](#deleting-a-person)
+  * [Saving data](#saving-data)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -162,11 +191,15 @@ This command then updates the ```model``` accordingly.
 The following activity diagram summarizes what happens when a user executes an ```add``` command:
 ![images](images/AddCommandActivityDiagram.png)
 
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** There should only be one arrowhead at the end of every line 
+in the Activity Diagram. This is a known limitation of PlantUML.</div>
+
 Given below is an example usage scenario and how the add operation behaves at each step.
 
 Step 1. A valid command `add n/Dylan p/97998581 e/dylan.eyyou@gmail.com r/Pilot et/Full time s/3500 l/PhD y/4`
 is given as user input. This invokes `LogicManager#execute()`, which calls`AddressBookParser#parseCommand()` to parse
-the input into command word `add` and command argument ` n/Dylan p/97998581 e/dylan.eyyou@gmail.com r/Pilot et/Full time s/3500 l/PhD y/4`.
+the input into command word `add` and command argument ``` n/Dylan p/97998581 e/dylan.eyyou@gmail.com r/Pilot et/Full time s/3500 l/PhD y/4```.
 
 Step 2. `AddCommandParser` is initialized based on the parse results and `AddCommandParser#parse()` is called.
 `AddCommandParser#parse()` then calls `ArgumentTokenizer#tokenize()` to obtain an `ArgumentMultimap`, which is
@@ -189,6 +222,47 @@ The following sequence diagram shows how the add operation works.
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
+### Delete marked feature
+
+The ```delete_marked``` command is facilitated by creating an ```DeleteMarkedCommand```.
+This command then updates the ```model``` accordingly.
+
+The following activity diagram summarizes what happens when a user executes a ```delete_marked``` command:
+![images](images/DeleteMarkedCommandActivityDiagram.png)
+
+Given below is an example usage scenario illustrated by a sequence diagram for ```delete_marked``` command.
+
+Step 1. A valid command `delete_marked` is given as user input. This invokes `LogicManager#execute()`, which calls
+`AddressBookParser#parseCommand()` to parse `delete_marked`.
+
+Step 2. `AddreddBookParser#parseCommand()` initializes a `DeleteMarkedCommand`.
+
+Step 3. `DeleteMarkedCommand#execute()` is then called, which will in turn call `Model#updateFilteredList()` (not shown) to 
+update list for applicants marked then `Model#getFilteredList()` is then called to retrieve this list. 
+
+Step 4. `Model#deletePerson()` is called on applicants in the list to delete them.
+
+Step 5. Once the string of all applicant names that are marked is formed, `CommandResult` is initialized with this string as argument
+and returned.
+
+The following sequence diagram shows how the delete marked operation works.
+![images](images/DeleteMarkedCommandSequenceDiagram.png)
+
+#### Design considerations:
+
+**Aspect: User command to use in deleting marked applicants:**
+
+* **Alternative 1 (current choice):** Separate command for deleting marked applicants
+    * Pros: Command has single responsibility of deleting marked applicants based.
+    * Pros: Easy to use for user, does not take any additional input.
+    * Cons: User might be confused between `delete` command for general deletion and `delete_marked` command.
+
+* **Alternative 2:** Part of `delete` command functionality
+    * Pros: Intuitive for user to use `delete` command for all deletion purposes
+    * Cons: Breaks the single responsibility principle as deleting marked applicants does not delete applicants at specific indices
+    like the rest of the `delete` command, but rather a certain group of applicants at once. 
+
+
 ### Edit feature
 
 The ```edit``` command is facilitated by creating an ```EditCommand``` depending on the given input.
@@ -197,10 +271,14 @@ This command then updates the ```model``` accordingly.
 The following activity diagram summarizes what happens when a user executes an ```edit``` command:
 ![images](images/EditCommandActivityDiagram.png)
 
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** There should only be one arrowhead at the end of every line 
+in the Activity Diagram. This is a known limitation of PlantUML.</div>
+
 Given below is an example usage scenario and how the edit operation behaves at each step.
 
 Step 1. A valid command `edit 1 n/Ali` is given as user input. This invokes `LogicManager#execute()`, which calls
-`AddressBookParser#parseCommand()` to parse `edit 1 n/Ali` into command word `edit` and command argument ` 1 n/Ali`.
+`AddressBookParser#parseCommand()` to parse `edit 1 n/Ali` into command word `edit` and command argument ``` 1 n/Ali```.
 
 Step 2. `EditCommandParser` is initialized based on the parse results and `EditCommandParser#parse()` is called.
 `EditCommandParser#parse()` then calls `ArgumentTokenizer#tokenize()` to identify the `Index` of the person to be 
@@ -226,6 +304,41 @@ The following sequence diagram shows how the edit operation works.
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `EditCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
+### Delete feature
+
+The ```delete``` command is facilitated by creating a ```DeleteCommand``` depending on the given input.
+This command then updates the ```model``` accordingly.
+
+The following activity diagram summarizes what happens when a user executes an ```delete``` command:
+![images](images/DeleteActivityDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** There should only be one arrowhead at the end of every line 
+in the Activity Diagram. This is a known limitation of PlantUML.</div>
+
+Given below is an example usage scenario illustrated by a sequence diagram for ```delete``` command.
+
+Step 1. A valid command `delete 1` is given as user input. This invokes `LogicManager#execute()`, which calls
+`AddressBookParser#parseCommand()` to parse `delete 1` into command word `delete` and command argument ``` 1```.
+
+Step 2. `DeleteCommandParser` is initialized based on the parse results and `DeleteCommandParser#parse()` is called
+to identify the indices present in ``` 1```. `DeleteCommandParser#parse()` then initializes a
+`DeleteCommand` with the indices present as arguments.
+
+Step 3. `DeleteCommand#execute()` is then called, which will check the validity of the given indices. 
+If there is no exception thrown, `Model#deletePerson()` is called to delete the applicants corresponding to the 
+given indices.
+
+Step 4. `CommandResult` is initialized with `String` containing the details of the deleted applicant.
+This `CommandResult` is then returned.
+
+The following sequence diagram shows how the delete operation works.
+![images](images/DeleteSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** The lifeline for `DeleteCommandParser`
+should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
+
 ### Show feature
 
 The ```show``` command is facilitated by creating an ```ObservableList``` of ```Person``` objects from the
@@ -235,13 +348,17 @@ the prefix provided by the user.
 The following activity diagram summarizes what happens when a user executes a ```show``` command:
 ![images](images/ShowCommandActivityDiagram.png)
 
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** There should only be one arrowhead at the end of every line 
+in the Activity Diagram. This is a known limitation of PlantUML.</div>
+
 Given below is an example usage scenario and how the show operation behaves at each step.
 
 Step 1. A valid command `show n/` is given as user input. This invokes `LogicManager#execute()`, which calls
-`AddressBookParser#parseCommand()` to parse `show n/` into command word `show` and command argument ` n/`.
+`AddressBookParser#parseCommand()` to parse `show n/` into command word `show` and command argument ``` n/```.
 
 Step 2. `ShowCommandParser` is initialized based on the parse results and `ShowCommandParser#parse()` is called
-to identify the first prefix in the user input ` n/`. `ShowCommandParser#parse()` then initializes a
+to identify the first prefix in the user input ``` n/```. `ShowCommandParser#parse()` then initializes a
 `ShowCommand` with the first prefix `Name` as argument.
 
 Step 3. `ShowCommand#execute()` is then called, which will first obtain a `ReadOnlyAddressBook` from `Model`, from which
@@ -265,13 +382,17 @@ The following activity diagram summarizes what happens when a user executes a ``
 
 ![images](images/FindCommandActivityDiagram.png)
 
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** There should only be one arrowhead at the end of every line 
+in the Activity Diagram. This is a known limitation of PlantUML.</div>
+
 Given below is an example usage scenario illustrated by a sequence diagram for ```find``` command.
 
 Step 1. A valid command `find n/Alex y/0` is given as user input. This invokes `LogicManager#execute()`, which calls
 `AddressBookParser#parseCommand()` to parse `find n/Alex y/0` into command word `find` and command argument ` n/Alex y/0`.
 
 Step 2. `FindCommandParser` is initialized based on the parse results and `FindCommandParser#parse()` is called
-to identify the predicates present in ` n/Alex y/0`. `FindCommandParser#parse()` then initializes a
+to identify the predicates present in ``` n/Alex y/0```. `FindCommandParser#parse()` then initializes a
 `FindCommand` with the predicates as argument.
 
 Step 3. `FindCommand#execute()` is then called, which will in turn call `Model#updateFilteredPersonList()`
@@ -280,6 +401,7 @@ and filters for applicants that have `Alex` in their names and `0` year of exper
 Step 4. Once the string of all applicant names is formed, `CommandResult` is initialized with this string as argument
 and returned.
 
+The following sequence diagram shows how the find operation works.
 ![images](images/FindCommandSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source:
@@ -294,16 +416,19 @@ subclass depending on the given input. This command then updates the ```model```
 The following activity diagram summarizes what happens when a user executes a ```filter_interview``` command:
 ![images](images/FilterInterviewCommandActivityDiagram.png)
 
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** There should only be one arrowhead at the end of every line 
+in the Activity Diagram. This is a known limitation of PlantUML.</div>
 
 Given below is an example usage scenario and how the filter interview operation behaves at each step.
 
 Step 1. A valid command `filter_interview past` is given as user input. This invokes `LogicManager#execute()`, which calls
-`AddressBookParser#parseCommand()` to parse `filter_interview past` into command word `filter_interview` and command argument ` past`.
+`AddressBookParser#parseCommand()` to parse `filter_interview past` into command word `filter_interview` and command argument ``` past```.
 
 Step 2. `FilterInterviewCommandParser` is initialized based on the parse results and `FilterInterviewCommandParser#parse()` is called
-to identify the user input ` past`.
+to identify the user input ``` past```.
 
-Step 3. Upon identifying the user input ` past`, `FilterInterviewCommandParser#parse` will then call methods of the
+Step 3. Upon identifying the user input ``` past```, `FilterInterviewCommandParser#parse` will then call methods of the
 `ValidFilterInterviewArgs` class from the enum type `ValidFilterInterviewArgs.PAST` instead of `ValidFilterInterviewArgs.FUTURE`.
 The details of this step are omitted from the sequence diagram below for brevity.
 
@@ -339,6 +464,40 @@ should not exceed the destroy marker X. This is a known limitation of PlantUML.<
     * Cons: Breaks the single responsibility principle as it does not find a specific input for a prefix, but rather
     types of inputs.
 
+### Mark feature
+The ```mark``` command is facilitated by creating a ```MarkCommand```, which is a subclass of ```MarkingCommand```.
+This command then updates the ```model``` accordingly, depending on the given input.
+
+The following activity diagram summarizes what happens when a user executes a ```mark``` command:
+![images](images/MarkCommandActivityDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** There should only be one arrowhead at the end of every line 
+in the Activity Diagram. This is a known limitation of PlantUML.</div>
+
+Given below is an example usage scenario illustrated by a sequence diagram for ```mark``` command.
+
+Step 1. A valid command `mark 1 2` is given as user input. This invokes `LogicManager#execute()`, which calls
+`AddressBookParser#parseCommand()` to parse `mark 1 2` into command word `mark` and command argument ``` 1 2```.
+
+Step 2. `MarkingCommandParser` is initialized based on the parse results and `MarkingCommandParser#parse()` is called
+to identify the indices present in ``` 1 2```. `MarkingCommandParser#parse()` then initializes a
+`MarkCommand` with the indices present as arguments.
+
+Step 3. `MarkCommand#execute()` is then called, which will in turn call `Model#checkForMarkedPerson()` on the applicants
+corresponding to the given indices. If there is no exception thrown, `Model#markPerson()` is called to mark the
+applicants corresponding to the given indices.
+
+Step 4. `CommandResult` is initialized with `String` containing the details of the newly marked applicants.
+This `CommandResult` is then returned.
+
+The following sequence diagram shows how the mark operation works.
+![images](images/MarkCommandSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** The lifeline for `MarkingCommandParser`
+should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
+
 ### Unmark feature
 
 The ```unmark``` command is facilitated by creating a ```UnmarkCommand```, which is a subclass of 
@@ -347,23 +506,31 @@ The ```unmark``` command is facilitated by creating a ```UnmarkCommand```, which
 The following activity diagram summarizes what happens when a user executes a ```unmark``` command:
 ![images](images/UnmarkCommandActivityDiagram.png)
 
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** There should only be one arrowhead at the end of every line 
+in the Activity Diagram. This is a known limitation of PlantUML.</div>
+
 Given below is an example usage scenario illustrated by a sequence diagram for ```unmark``` command.
 
 Step 1. A valid command `unmark 3` is given as user input. This invokes `LogicManager#execute()`, which calls
-`AddressBookParser#parseCommand()` to parse `unmark 3` into command word `unmark` and command argument ` 3`.
+`AddressBookParser#parseCommand()` to parse `unmark 3` into command word `unmark` and command argument ``` 3```.
 
 Step 2. `MarkingCommandParser` is initialized based on the parse results and `MarkingCommandParser#parse()` is called
-to identify the indices present in ` 3`. `MarkingCommandParser#parse()` then initializes a
+to identify the indices present in ``` 3```. `MarkingCommandParser#parse()` then initializes a
 `UnmarkCommand` with the indices present as arguments, which in this case is a single index 3.
 
-Step 3. `MarkCommand#execute()` is then called, which will in turn call `Model#checkForUnmarkedPerson()` on the applicants
+Step 3. `UnmarkCommand#execute()` is then called, which will in turn call `Model#checkForUnmarkedPerson()` on the applicants
 corresponding to the given indices. If there is no exception thrown, `Model#unmarkPerson()` is called to unmark the applicants corresponding to the given indices.
 
-Step 4. Once the string of all applicant names that are marked is formed, `CommandResult` is initialized with this string as argument
-and returned.
+Step 4. `CommandResult` is initialized with `String` containing the details of the newly unmarked applicants.
+This `CommandResult` is then returned.
 
+The following sequence diagram shows how the unmark operation works.
 ![images](images/UnmarkCommandSequenceDiagram.png)
 
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** The lifeline for `MarkingCommandParser`
+should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
 ### Datetime for interview 
 
@@ -427,7 +594,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | list all applicants                           | keep track of all my applicants                                           |
 | `* * *`  | user                                       | add an applicant                              | update my list of applicants with new people                              |
 | `* * *`  | user                                       | delete an applicant                           | remove applicants I no longer need                                        |
-| `* *`    | user                                       | delete multiple applicants at once            | so that I can delete applicants more efficiently                          |
 | `* * *`  | user                                       | edit an applicant's information               | update their information without having to delete and add them again      |
 | `* * *`  | user                                       | find applicants by their name                 | locate details of applicants without having to go through the entire list |
 | `* * *`  | user                                       | find applicants by their phone number         | locate details of applicants without having to go through the entire list |
@@ -441,8 +607,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | find applicants by their interview time       | filter out applicants that match the desired interview times           |
 | `* * *`  | user                                       | find applicants by their notes                | filter out applicants that match the desired note                         |
 | `* * *`  | user                                       | find applicants by their done status          | filter out applicants that match the desire done status                   |
+| `* * *`  | user                                       | mark applicants as "Done"                     | know which applicants I have attended to                                  |
+| `* * *`  | user                                       | unmark applicants from "Done" to "Not Done"   | reflect the correct current status I have with the applicant              |
 | `* * *`  | user                                       | save applicant data                           | refer to it in the future without having to type in their data again      |
-| `* * *`  | user                                       | see all names available in the list           | check easily if a certain name is present in the list without having to go through the entire list      |
+| `* * *`  | user                                       | exit the application                          | so that I can end my session without having to force close the application by clicking the red X at the top right. |
+| `* *`    | user                                       | see all names available in the list           | check easily if a certain name is present in the list without having to go through the entire list      |
 | `* *`    | user                                       | see all phone numbers available in the list   | check easily if a certain number is present in the list without having to go through the entire list      |
 | `* *`    | user                                       | see all emails available in the list          | check easily if a certain email is present in the list without having to go through the entire list      |
 | `* *`    | user                                       | see all applied roles available in the list   | check easily if a certain role is present in the list without having to go through the entire list      |
@@ -450,17 +619,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user                                       | see all expected salaries available in the list | check easily if a certain expected salary is present in the list without having to go through the entire list      |
 | `* *`    | user                                       | see all interview times available in the list | check easily if a certain interview time is present in the list without having to go through the entire list      |
 | `* *`    | user                                       | see all tags available in the list | check easily if a certain tag is present in the list without having to go through the entire list      |
-| `* * *`  | user                                       | mark applicants as "Done"                     | know which applicants I have attended to                                  |
-| `* * *`  | user                                       | unmark applicants from "Done" to "Not Done"   | reflect the correct current status I have with the applicant              |
+| `* *`    | user                                       | delete multiple applicants at once            | so that I can delete applicants more efficiently                          |
 | `* *`    | user                                       | delete all applicants that are marked as done | so that I can focus only on applicants that I have not worked on, and easily reduce clutter in the address book |
-
-
-*{More to be added}*
+| `* *`    | user                                       | clear all applicants                         | so that I can save time clearing all data without having to manually input every single applicant via a delete command |
+| `* *`    | user                                       | find applicants with interviews that have passed | so that I can easily see and keep track of the applicants with passed interviews  |
+| `* *`    | user                                       | find applicants with interviews that are upcoming | so that I can easily see and keep track of the applicants with upcoming interviews |
 
 ### Use cases
 
 (For all use cases below, the **System** is the `RecruitIn` and the **Actor** is the `user`, unless specified otherwise)
-
 
 **Use case: UC01 - Asking for help**
 
@@ -501,8 +668,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. RecruitIn shows an error message.
 
       Use case resumes at step 1.
+    
+* 1b. The applicant that the user is trying to add is a duplicate of an applicant that already exists in the storage.
+    * 1b1. RecruitIn shows an error message.
+    
+      Use case resumes at step 1.
+    
+**Use case: UC04 - Editing an applicant**
 
-**Use case: UC04 - Deleting an applicant**
+**MSS**
+
+1.  User requests to edit an applicant with provided information.
+2.  RecruitIn edits the applicant in the storage.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The input format is invalid.
+    * 1a1. RecruitIn shows an error message.
+
+      Use case resumes at step 1.
+
+* 1b. The newly edited applicant is a duplicate of an applicant that already exists in the storage.
+    * 1b1. RecruitIn shows an error message.
+
+      Use case resumes at step 1.
+
+**Use case: UC05 - Deleting an applicant**
 
 **MSS**
 
@@ -515,7 +708,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. User requests to <u>find applicant (UC05)</u>.
+* 1a. User requests to <u>find applicant (UC06)</u>.
 
   Use case resumes at step 2.
 
@@ -523,12 +716,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The delete command is invalid.
+* 3a. The input format is invalid.
     * 3a1. RecruitIn shows an error message.
 
       Use case resumes at step 2.
 
-**Use case: UC05 - Finding an applicant**
+**Use case: UC06 - Finding an applicant**
 
 **MSS**
 
@@ -548,7 +741,59 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: UC06 - Showing search terms**
+**Use case: UC07 - Filtering applicants by passed interviews**
+
+**MSS**
+
+1.  User requests to <u>list applicants (UC01)</u>.
+2.  RecruitIn displays a list of applicants.
+3.  User requests to find all applicants with interviews that have already passed.
+4.  RecruitIn displays the applicants with interviews that have already passed.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User requests to <u>find applicant (UC06)</u>.
+
+  Use case resumes at step 2.
+
+* 2a. The list of applicants is empty.
+
+  Use case ends.
+
+* 3a. The input format is invalid.
+    * 3a1. RecruitIn shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: UC08 - Filtering applicants by upcoming interviews**
+
+**MSS**
+
+1.  User requests to <u>list applicants (UC01)</u>.
+2.  RecruitIn displays a list of applicants.
+3.  User requests to find all applicants with upcoming interviews in the future.
+4.  RecruitIn displays the applicants with upcoming interviews in the future.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User requests to <u>find applicant (UC06)</u>.
+
+  Use case resumes at step 2.
+
+* 2a. The list of applicants is empty.
+
+  Use case ends.
+
+* 3a. The input format is invalid.
+    * 3a1. RecruitIn shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: UC09 - Showing search terms**
 
 **MSS**
 
@@ -570,7 +815,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC07 - Marking an applicant**
+**Use case: UC010 - Marking an applicant**
 
 **MSS**
 
@@ -583,7 +828,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. User requests to <u>find applicant (UC05)</u>.
+* 1a. User requests to <u>find applicant (UC06)</u>.
 
   Use case resumes at step 2.
 
@@ -591,12 +836,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The mark command is invalid.
+* 3a. The input format is invalid.
     * 3a1. RecruitIn shows an error message.
 
       Use case resumes at step 2.
 
-**Use case: UC08 - Unmarking an applicant**
+**Use case: UC11 - Unmarking an applicant**
 
 **MSS**
 
@@ -609,7 +854,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. User requests to <u>find applicant (UC05)</u>.
+* 1a. User requests to <u>find applicant (UC06)</u>.
 
   Use case resumes at step 2.
 
@@ -617,12 +862,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The unmark command is invalid.
+* 3a. The input format is invalid.
     * 3a1. RecruitIn shows an error message.
 
       Use case resumes at step 2.
 
-**Use case: UC09 - Deleting marked applicants**
+**Use case: UC012 - Deleting marked applicants**
 
 **MSS**
 
@@ -635,7 +880,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. User requests to <u>find applicant (UC05)</u>.
+* 1a. User requests to <u>find applicant (UC06)</u>.
 
   Use case resumes at step 2.
 
@@ -643,7 +888,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The delete command is invalid.
+* 3a. The input format is invalid.
     * 3a1. RecruitIn shows an error message.
 
       Use case resumes at step 2.
@@ -653,7 +898,35 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-*{More to be added}*
+**Use case: UC013 - Clear all applicants**
+
+**MSS**
+
+1.  User requests to <u>list applicants (UC01)</u>.
+2.  RecruitIn displays a list of applicants.
+3.  User requests to delete all applicants at once.
+4.  RecruitIn deletes all applicants saved in RecruitIn.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User requests to <u>find applicant (UC06)</u>.
+
+  Use case resumes at step 2.
+
+* 2a. The list of applicants is empty.
+
+  Use case ends.
+
+**Use case: UC013 - Exiting RecruitIn**
+
+**MSS**
+
+1.  User requests to exit RecruitIn.
+2.  RecruitIn closes.
+
+    Use case ends.
 
 ### Non-Functional Requirements
 
@@ -663,14 +936,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Applicant**: Represents a person that is searching for a job
 * **Applied Role**: Represents the job a person is applying for
+* **Command**: Refers to a text input (which can be combined with user inputs) that executes certain features in RecruitIn
 * **Employment Type**: Represents the type of work contract, specifically Full time, Part time, Temporary & Internship
 * **Expected Salary**: Represents the minimum amount the applicant is willing to be paid for the job
 * **Level of Education**: Represents the highest/current level of education the applicant has, specifically Elementary, Middle School, High School, University, Bachelors, Masters, PhD
-* **Years of Experience**: Represents the number of years the applicant has previously worked in their applied role for
+* **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Search term**: Terms that can be searched for. e.g. Search terms for roles are all the roles that exist in the list, meaning these are all the roles that can be searched for.
+* **Years of Experience**: Represents the number of years the applicant has previously worked in their applied role for
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**

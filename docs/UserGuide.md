@@ -324,15 +324,42 @@ Shows a list of all applicants in RecruitIn.
 
 Format: `list`
 
+
+### Deleting an applicant : `delete`
+
+Deletes applicants by their index from the applicants list in RecruitIn.
+
+Format: `delete INDEX...`
+
+***Note:*** *As mentioned in [Basic Command Format](#basic-command-format), you can delete multiple applicants by including one or more indexes here.*
+
+* The `INDEX` refers to the index number shown in the displayed applicants list.
+* `INDEX` **must be a positive integer** such as 1, 2, 3, …​
+* `INDEX` uses **1-based indexing**, which means the first applicant in the list has the `INDEX`  1.
+*  You should type at least one `INDEX`. (i.e. `delete ` is not a valid command)
+*  You should not type duplicate `INDEX`s. (i.e. `delete 2 2` is not a valid command)
+* You should not type`INDEX` which exceeds the total number of applicants in the displayed applicants list.
+
+Examples:
+* After you execute the command `list`, `delete 1` deletes the 1st applicant listed in RecruitIn.
+* After you execute the command `find n/John`, `delete 1` deletes the 1st applicant in the results of the `find` command.
+* After you execute the command `list`, `delete 2 4 7` deletes the 2nd, 4th and 7th applicants listed in RecruitIn.
+
+<p align="center"><a href="#table-of-contents">Click here to see the table of contents</a></p>
+
+
 ### Finding an applicant : `find`
 
 Finds applicants by specific prefixes.
 
 Format: `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMPLOYMENT_TYPE] [s/EXPECTED_SALARY] [l/LEVEL_OF_EDUCATION] [y/YEARS_OF_EXPERIENCE]  [t/TAG]  [i/INTERVIEW] [nt/NOTES] [d/DONE]`
 
-* Find command must take **at least 1** prefix input.
-* If you input multiple of the same prefix, **only the last** prefix will be used for the search of that category.
-* Input for each prefix can contain multiple **keywords** separated by whitespace, e.g. `n/John Mary`, `t/friend colleague`
+***Note:*** *As mentioned in [Basic Command Format](#basic-command-format), you can include one or more of the search terms.*
+
+* You can key in parameters in either UPPER CASE or small case. 
+* If you key in multiple of the same prefix (e.g. `find n/alex n/bernice`) , the program will only find you applicants based on **the last** prefix (i.e. `n/bernice`).
+  ![FindInput](./images/features/Find.png)
+* You can key in each prefix with **multiple keywords** separated by whitespace, e.g. `n/John Mary`, `t/friend colleague`
 
 <div markdown="block" class="alert alert-warning">
 
@@ -341,30 +368,23 @@ Format: `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMPLOYMEN
 
 </div>
 
-* Inputs for all prefixes are **case-insensitive**.
-
-<div markdown="block" class="alert alert-warning">
-
-* Applicants will not be filtered by prefixes that are not provided.
-* Applicants will also not be filtered by prefixes that are provided, yet have empty inputs. (i.e. `find d/` will return all applicants unfiltered by their ***done*** status)
-
-</div>
+* You should not find applicants by prefix with empty parameters. (i.e. `find d/` will show you all applicants **unfiltered** by their ***done*** status)
 
 Examples:
-* `find n/John Mary` finds all applicants with either `John` or `Mary` as values for name prefix.
-* `find n/John n/Mary` finds all applicants with only `Mary` as values for name prefix.
-* `find t/friend colleague` finds all applicants with `friend` or `colleague` as values for tag prefix.
+* `find n/John Mary` finds you all applicants with either `John` or `Mary` as values for name prefix.
+* `find n/John n/Mary` finds you all applicants with only `Mary` as values for name prefix.
+* `find t/friend colleague` finds you all applicants with `friend` or `colleague` as values for tag prefix.
 * `find n/John Mary t/friend colleague`
 * `find n/Bob p/87654321 e/bob@gmail.com r/Software Engineering et/Full time s/4000 l/High School y/2 nt/has the credentials d/Not Done`
 
 <div markdown="block" class="alert alert-success">
-**:information_source: Prefix inputs for `find` command must follow the following input specifications:**<br>
+**:information_source: Prefix parameters for `find` command must follow the following input specifications:**<br>
 
 * You may
-    * refer to [**Find Parameter Specifications**](#find-parameters) for detailed input specifications.
-    * refer to find input specifications for specific prefixes by clicking on relevant links in the table below.
+    * refer to [**Find Parameter Specifications**](#find-parameters) for detailed parameter specifications, or
+    * refer to find parameter specifications for a specific prefix by clicking on relevant link in the table below.
 
-| Input | Prefix | Specifications |
+| Parameter | Prefix | Specifications |
 | :---: | :---: | :---: |
 | NAME | `n/` | [**name**](#name-n-1) |
 | PHONE_NUMBER | `p/` | [**phone_number**](#phonenumber-p-1) |
@@ -380,107 +400,125 @@ Examples:
 | DONE | `d/` | [**done**](#done-d) |
 
 </div>
+
+<p align="center"><a href="#table-of-contents">Click here to see the table of contents</a></p>
         
 ### Filtering interviews : `filter_interview`
-Filters applicants by interview dates based on whether they are upcoming or in the past (based on current date and time).
-Differs from ```find i/``` as it is not returning all applicants with interviews matching a specific date but 
+Filters applicants by interview dates based on whether they are upcoming or have past current date and time.
+Differs from ```find i/``` as it is not returning you all applicants with a specific interview date but 
 rather all applicants with interviews that fall into the same group (`past` or `future`).
 
 Format: `filter_interview past` or `filter_interview future`
 
-* `filter_interview past` returns applicants with interviews that were in the past (compared to the current date and time).
-* `filter_interview future` returns applicants with interviews that are coming up in the future (compared to the current date and time).
-* Either `past` or `future` must be given as an input after `filter_interview`, and is case-insensitive.
-* Only one input must be given (`filter_interview past future` will not work).
+* `filter_interview past` shows you applicants with interviews that were in the past (compared to the current date and time).
+* `filter_interview future` shows you applicants with interviews that are coming up in the future (compared to the current date and time).
+* You should give either `past` or `future` as an input after `filter_interview`, but not both.
+* You can type in either UPPER CASE or small case for `past` and `future`.
+  
+![FindInput](./images/features/FilterInterviewPast.png)
 
 Examples:
-* If the current date and time is 29th October 2021, 1600, then `filter_interview past` or 
- `filter_interview pAsT` will return applicants with interviews that were before and including
-  29th October 2021, 1600.
+* Let's assume that the current time is [29th October 2021, 1600].
+* If you type`filter_interview past` or 
+ `filter_interview pAsT` in the command box, you are able to see applicants with interviews that were before and including
+  [29th October 2021, 1600].
+* If you type `filter_interview future` or 
+ `filter_interview fUTURE` in the command box, you are able to see applicants with interviews that are after [29th October 2021, 1600].
 
-* If the current date and time is 29th October 2021, 1600, then `filter_interview future` or 
- `filter_interview fUTURE` will return applicants with interviews that are after 29th October 2021, 1600.
-
-### Deleting an applicant : `delete`
-
-Deletes applicants by their index from the list in RecruitIn.
-
-Format: `delete INDEX...`
-
-* Deletes the applicant at the specified `INDEX`.
-* The `INDEX` refers to the index number shown in the displayed applicants list.
-* At least one `INDEX` must be given. (i.e. `delete ` is not a valid command)
-* `INDEX` **must be a positive integer** 1, 2, 3, …​
-* `INDEX` uses **1-based indexing**.
-* Duplicate `INDEX`s are not allowed. (i.e. `delete 2 2` is not a valid command)
-* `INDEX` should not exceed the total number of applicants in the displayed applicants list.
-
-Examples:
-* After using the command `list`, `delete 1` deletes the 1st applicant listed in RecruitIn.
-* After using the command `find n/John`, `delete 1` deletes the 1st applicant in the results of the `find` command.
-* After using the command `list`, `delete 2 4 7` deletes the 2nd, 4th and 7th applicants listed in RecruitIn.
+<p align="center"><a href="#table-of-contents">Click here to see the table of contents</a></p>
 
 ### Showing search terms : `show`
 
-Shows unique search terms available for a specific prefix.
+Shows you unique search terms which you can use for a specific prefix.
 
 Format: `show [n/] [p/] [e/] [r/] [et/] [s/] [l/] [y/] [t/]`
 
-* Finds and displays a list of unique search terms available for a specific prefix.
-* **At least 1** prefix must be given.
-* Unique search terms will only be found for the **first** prefix input.
+***Note:*** *As mentioned in [Basic Command Format](#basic-command-format), you can include any one of the prefixes in square brackets  here.*
+
+* You should type **only 1** prefix that you want the program to show.
+    * If you type multiple prefixes after `show`, the program will only show you the unique search terms found for the **first** prefix input.
+      ![FindInput](./images/features/Show.png)
 
 Examples:
 
-Suppose the applicant data includes 3 applicants with name and role `John, Software Developer`, `Mary, Cook` and `Mary, Cleaner`.
+Suppose the applicants list includes 3 applicants with name and role `John, Software Developer`, `Mary, Cook` and `Mary, Cleaner`.
 * `show n/` will display a list consisting of `John` and `Mary`.
 * `show r/ n/` will display a list consisting of `Software Developer`, `Cleaner` and `Cook`.
 
+<p align="center"><a href="#table-of-contents">Click here to see the table of contents</a></p>
+
 ### Marking an applicant : `mark`
 
-Marks the specified applicant by index from the list in RecruitIn as "Done" (have been attended to).
+Every applicant in RecruitIn will have a status of either "Done" or "Not Done".
+A "Done" status means that you are done handling the applicant and no longer need to keep their details.
+The `mark` command marks the specified applicant(s) in RecruitIn by changing their status to "Done".
 
 Format: `mark INDEX…​`
 
-* Marks the applicant at the specified `INDEX` as "Done".
-* An applicant that is has status "Done" cannot be marked again.
-* The `INDEX` refers to the index number shown in the displayed applicants list.
-* At least one `INDEX` must be given. (i.e. `mark ` is not a valid command)
-* `INDEX` **must be a positive integer** 1, 2, 3, …​
-* `INDEX` uses **1-based indexing**.
-* Duplicate `INDEX`s are not allowed. (i.e. `mark 2 2` is not a valid command)
-* `INDEX` should not exceed the total number of applicants in the displayed applicants list.
+* RecruitIn marks the applicant at the specified `INDEX`es as "Done".
+* `INDEX` refers to the number shown in RecruitIn's displayed applicants list.
+* `INDEX` **must be a positive whole number**, i.e. 1, 2, 3, …​
+* `INDEX` should not exceed the total number of applicants in RecruitIn's displayed applicants list.
+* `INDEX` in RecruitIn **starts from one**.
+* You must give at least one `INDEX`. (i.e. `mark ` is not a valid command)
+* You cannot give duplicate `INDEX`es. (i.e. `mark 2 2` is not a valid command)
+* You cannot mark an applicant that has status "Done".
 
 Examples:
-* After using the command `list`, `mark 2` marks the 2nd applicant listed in RecruitIn as "Done".
-* After using the command `find n/John`, `mark 1` marks the 1st applicant in the results of the `find` command.
+* After using the command `list`, `mark 1` marks the 1st applicant listed in RecruitIn as "Done".
+
+Before: ![images](images/MarkBefore.png)
+
+After: ![images](images/MarkAfter.png)
+
 * After using the command `list`, `mark 2 4 6` marks the 2nd, 4th and 6th applicant listed in RecruitIn as "Done".
+* After using the command `find n/John`, `mark 1` marks the 1st applicant listed in RecruitIn's results of the `find` command.
+
+<p align="center"><a href="#table-of-contents">Click here to see the table of contents</a></p>
 
 ### Unmarking an applicant : `unmark`
 
-Unmarks the specified applicant by index from the list in RecruitIn to "Not Done" (have not been attended to).
+Every applicant in RecruitIn will have a status of either "Done" or "Not Done".
+A "Not Done" status means that you are still handling the applicant and still need to keep their details.
+The `unmark` command unmarks the specified applicant(s) in RecruitIn by changing their status to "Not Done".
 
 Format: `unmark INDEX…​`
 
-* Unmarks the applicant at the specified `INDEX` to "Not Done".
-* An applicant that is has status "Not Done" cannot be unmarked again.
-* The `INDEX` refers to the index number shown in the displayed applicants list.
-* At least one `INDEX` must be given. (i.e. `unmark ` is not a valid command)
-* `INDEX` **must be a positive integer** 1, 2, 3, …​
-* `INDEX` uses **1-based indexing**.
-* Duplicate `INDEX`s are not allowed. (i.e. `delete 2 2` is not a valid command)
-* `INDEX` should not exceed the total number of applicants in the displayed applicants list.
+* RecruitIn unmarks the applicant at the specified `INDEX`es to "Not Done".
+* `INDEX` refers to the number shown in RecruitIn's displayed applicants list.
+* `INDEX` **must be a positive whole number**, i.e. 1, 2, 3, …​
+* `INDEX` should not exceed the total number of applicants in RecruitIn's displayed applicants list.
+* `INDEX` in RecruitIn **starts from one**.
+* You must give at least one `INDEX`. (i.e. `unmark ` is not a valid command)
+* You cannot give duplicate `INDEX`es. (i.e. `delete 2 2` is not a valid command)
+* You cannot unmark an applicant that has status "Not Done".
 
 Examples:
-* After using the command `list`, `ummark 2` unmarks the 2nd applicant listed in RecruitIn to "Not Done".
-* After using the command `find n/John`, `unmark 1` unmarks the 1st applicant in the results of the `find` command.
+* After using the command `list`, `ummark 1` unmarks the 1st applicant listed in RecruitIn to "Not Done".
+
+Before: ![images](images/UnmarkBefore.png)
+
+After: ![images](images/UnmarkAfter.png)
+
 * After using the command `list`, `unmark 2 4 6` unmarks the 2nd, 4th and 6th applicant listed in RecruitIn to "Not Done".
+* After using the command `find n/John`, `unmark 1` unmarks the 1st applicant listed in RecruitIn's results of the `find` command.
+
+<p align="center"><a href="#table-of-contents">Click here to see the table of contents</a></p>
 
 ### Deleting marked applicants : `delete_marked`
 
-Deletes all applicants that are marked as done.
+The `delete_marked` command deletes all applicants that are currently marked as done.
+This provides an easy way for you to delete the data of all applicants you no longer need.
 
 Format: `delete_marked`
+
+Example:
+
+Before: ![images](images/DeleteMarkedBefore.png)
+
+After: ![images](images/DeleteMarkedAfter.png)
+
+<p align="center"><a href="#table-of-contents">Click here to see the table of contents</a></p>
 
 ### Clearing all data : `clear`
 
@@ -490,21 +528,25 @@ Format: `clear`
 
 ### Exiting the program : `exit`
 
-Exits the program.
+The `exit` command causes RecruitIn to close and exit.
 
 Format: `exit`
 
+You can also exit RecruitIn by clicking on the 'X' button found on the top right side of the app. 
+
+<p align="center"><a href="#table-of-contents">Click here to see the table of contents</a></p>
+
 ### Saving the data
 
-RecruitIn data is saved to the hard disk whenever there is a command that edits, updates or adds data.
-There is no need to save data manually with a command. Data also automatically loads when the application runs.
+Whenever you use any command which edits, updates or adds data, RecruitIn automatically saves the data.
+You do not need to manually save data with any command. The saved data also automatically loads when the application starts.
 
 ### Editing the data file
 
-RecruitIn data is saved as a String in `/data/applicants.json` for applicant data.
-Advanced users are welcome to update data directly by editing that data file.
+RecruitIn saves the applicant data as a String in `/data/applicants.json`.
+If you are advanced enough, you are welcome to update data directly by editing this data file.
 
-Example of format of data for one applicant in applicants:
+Example of the format of how data is saved for an applicant:
 
 ```JSON
 {
@@ -527,8 +569,10 @@ Example of format of data for one applicant in applicants:
 }
 ```
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, RecruitIn will discard all data and start with an empty data file at the next run.
+If your changes to the data file makes the data format invalid, RecruitIn will remove all saved data and start with an empty data file the next time you open the app.
 </div>
+
+<p align="center"><a href="#table-of-contents">Click here to see the table of contents</a></p>
 
 --------------------------------------------------------------------------------------------------------------------
 
