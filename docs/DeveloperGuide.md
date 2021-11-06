@@ -528,6 +528,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                         | update contact details                | the information stays updated                          |
 | `* * *`  | user                         | purge all data                        | easily start over                                      |
 | `* * *`  | careless user                | have case-insensitive commands        | speed up my typing                                     |
+| `* * *`  | marketer                     | keep my data encrypted                | secure my customer data                                |
+| `* * *`  | privacy-focused user         | have password protection              | makes sure only I can access my data                   |
 | `*`      | careless user                | be warned about incorrect data format | minimise errors                                        |
 | `*`      | with incomplete contact data | have autofill suggestions             | make the contact data complete                         |
 

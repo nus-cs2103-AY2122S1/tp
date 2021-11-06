@@ -43,12 +43,12 @@ public class EncryptionTest {
             throws IOException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException,
             InvalidAlgorithmParameterException {
         SecretKey secretKey = KeyGenerator.getInstance(ENCRYPTION_ALGORITHM).generateKey();
-        Encryption cryptor = new EncryptionManager(secretKey, CIPHER_TRANSFORMATION);
+        Encryption token = new EncryptionManager(secretKey, CIPHER_TRANSFORMATION);
 
         String content = FileUtil.readFromFile(DECRYPTED_FILEPATH_JSON);
-        cryptor.encrypt(DECRYPTED_FILEPATH_JSON, ENCRYPTED_FILEPATH_JSON);
+        token.encrypt(DECRYPTED_FILEPATH_JSON, ENCRYPTED_FILEPATH_JSON);
 
-        cryptor.decrypt(ENCRYPTED_FILEPATH_JSON, DECRYPTED_FILEPATH_JSON);
+        token.decrypt(ENCRYPTED_FILEPATH_JSON, DECRYPTED_FILEPATH_JSON);
         String decryptedContent = FileUtil.readFromFile(DECRYPTED_FILEPATH_JSON);
 
         assertEquals(content, decryptedContent);
@@ -62,11 +62,11 @@ public class EncryptionTest {
             throws NoSuchAlgorithmException, NoSuchPaddingException, IOException, InvalidKeyException,
             InvalidAlgorithmParameterException {
         SecretKey secretKey = KeyGenerator.getInstance(ENCRYPTION_ALGORITHM).generateKey();
-        Encryption cryptor = new EncryptionManager(secretKey, CIPHER_TRANSFORMATION);
+        Encryption token = new EncryptionManager(secretKey, CIPHER_TRANSFORMATION);
 
         String content = FileUtil.readFromFile(DECRYPTED_FILEPATH_JSON);
-        cryptor.encrypt(DECRYPTED_FILEPATH_JSON, ENCRYPTED_FILEPATH_JSON);
-        cryptor.decrypt(ENCRYPTED_FILEPATH_JSON, DECRYPTED_FILEPATH_JSON_OUTPUT);
+        token.encrypt(DECRYPTED_FILEPATH_JSON, ENCRYPTED_FILEPATH_JSON);
+        token.decrypt(ENCRYPTED_FILEPATH_JSON, DECRYPTED_FILEPATH_JSON_OUTPUT);
 
         assertTrue(FileUtil.isFileExists(DECRYPTED_FILEPATH_JSON_OUTPUT));
 
@@ -95,16 +95,16 @@ public class EncryptionTest {
         SecretKey secretKey1 = KeyGenerator.getInstance(ENCRYPTION_ALGORITHM).generateKey();
         SecretKey secretKey2 = KeyGenerator.getInstance(ENCRYPTION_ALGORITHM).generateKey();
 
-        Encryption cryptor1 = new EncryptionManager(secretKey1, CIPHER_TRANSFORMATION);
-        Encryption cryptor2 = new EncryptionManager(secretKey2, CIPHER_TRANSFORMATION);
+        Encryption token1 = new EncryptionManager(secretKey1, CIPHER_TRANSFORMATION);
+        Encryption token2 = new EncryptionManager(secretKey2, CIPHER_TRANSFORMATION);
 
-        cryptor1.encrypt(DECRYPTED_FILEPATH_JSON, ENCRYPTED_FILEPATH_JSON_ONE);
-        cryptor2.encrypt(DECRYPTED_FILEPATH_JSON, ENCRYPTED_FILEPATH_JSON_TWO);
+        token1.encrypt(DECRYPTED_FILEPATH_JSON, ENCRYPTED_FILEPATH_JSON_ONE);
+        token2.encrypt(DECRYPTED_FILEPATH_JSON, ENCRYPTED_FILEPATH_JSON_TWO);
 
         assertThrows(IOException.class, () ->
-                cryptor2.decrypt(ENCRYPTED_FILEPATH_JSON_ONE, DECRYPTED_FILEPATH_JSON));
+                token2.decrypt(ENCRYPTED_FILEPATH_JSON_ONE, DECRYPTED_FILEPATH_JSON));
         assertThrows(IOException.class, () ->
-                cryptor1.decrypt(ENCRYPTED_FILEPATH_JSON_TWO, DECRYPTED_FILEPATH_JSON));
+                token1.decrypt(ENCRYPTED_FILEPATH_JSON_TWO, DECRYPTED_FILEPATH_JSON));
 
         FileUtil.deleteFile(ENCRYPTED_FILEPATH_JSON_ONE); // Cleanup
         FileUtil.deleteFile(ENCRYPTED_FILEPATH_JSON_TWO); // Cleanup
@@ -114,9 +114,9 @@ public class EncryptionTest {
     public void failure_whenWrongFileFormatIsSuppliedToDecrypt()
             throws NoSuchAlgorithmException, NoSuchPaddingException {
         SecretKey secretKey = KeyGenerator.getInstance(ENCRYPTION_ALGORITHM).generateKey();
-        Encryption cryptor = new EncryptionManager(secretKey, CIPHER_TRANSFORMATION);
+        Encryption token = new EncryptionManager(secretKey, CIPHER_TRANSFORMATION);
 
-        assertThrows(IOException.class, () -> cryptor.decrypt(ILLEGAL_ENCRYPTED_FORMAT, DECRYPTED_FILEPATH_JSON));
+        assertThrows(IOException.class, () -> token.decrypt(ILLEGAL_ENCRYPTED_FORMAT, DECRYPTED_FILEPATH_JSON));
     }
 
     @Test
@@ -126,14 +126,14 @@ public class EncryptionTest {
         SecretKey key1 = EncryptionKeyGenerator.generateKey(PASSWORD_ONE);
         SecretKey key2 = EncryptionKeyGenerator.generateKey(PASSWORD_TWO);
 
-        Encryption cryptor1 = new EncryptionManager(key1, CIPHER_TRANSFORMATION);
-        Encryption cryptor2 = new EncryptionManager(key2, CIPHER_TRANSFORMATION);
+        Encryption token1 = new EncryptionManager(key1, CIPHER_TRANSFORMATION);
+        Encryption token2 = new EncryptionManager(key2, CIPHER_TRANSFORMATION);
 
-        cryptor1.encrypt(DECRYPTED_FILEPATH_JSON, ENCRYPTED_FILEPATH_JSON_ONE);
-        cryptor2.encrypt(DECRYPTED_FILEPATH_JSON, ENCRYPTED_FILEPATH_JSON_TWO);
+        token1.encrypt(DECRYPTED_FILEPATH_JSON, ENCRYPTED_FILEPATH_JSON_ONE);
+        token2.encrypt(DECRYPTED_FILEPATH_JSON, ENCRYPTED_FILEPATH_JSON_TWO);
 
-        assertThrows(IOException.class, () -> cryptor2.decrypt(ENCRYPTED_FILEPATH_JSON_ONE, DECRYPTED_FILEPATH_JSON));
-        assertThrows(IOException.class, () -> cryptor1.decrypt(ENCRYPTED_FILEPATH_JSON_TWO, DECRYPTED_FILEPATH_JSON));
+        assertThrows(IOException.class, () -> token2.decrypt(ENCRYPTED_FILEPATH_JSON_ONE, DECRYPTED_FILEPATH_JSON));
+        assertThrows(IOException.class, () -> token1.decrypt(ENCRYPTED_FILEPATH_JSON_TWO, DECRYPTED_FILEPATH_JSON));
 
         FileUtil.deleteFile(ENCRYPTED_FILEPATH_JSON_ONE); // Cleanup
         FileUtil.deleteFile(ENCRYPTED_FILEPATH_JSON_TWO); // Cleanup

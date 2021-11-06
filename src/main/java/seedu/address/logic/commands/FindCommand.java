@@ -38,12 +38,14 @@ public class FindCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
-        assert(predicate.toString() != "");
+        int numberOfPerson = model.getFilteredPersonList().size();
         return new CommandResult("Showing results for: "
                 + System.lineSeparator()
                 + predicate
                 + System.lineSeparator()
-                + String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                + (numberOfPerson == 1
+                ? Messages.MESSAGE_ONE_PERSON_LISTED_OVERVIEW
+                : String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, numberOfPerson)));
     }
 
     @Override

@@ -76,12 +76,14 @@ public class SetUpScreen extends UiPart<Stage> {
     }
 
     private void handleNewPassword() {
+        // Do not proceed if the password is invalid.
         if (!PasswordUtil.isValidPassword(userInputPassword.getText())) {
             responseDisplay.setText(PasswordCommand.CORRECT_PASSWORD_FORMAT);
             userInputPassword.clear();
             userConfirmPassword.clear();
             return;
         }
+
         try {
             app.setUp(userInputPassword.getText());
         } catch (UnsupportedPasswordException | NoSuchPaddingException | NoSuchAlgorithmException e) {

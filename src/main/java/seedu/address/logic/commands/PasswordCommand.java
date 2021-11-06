@@ -38,6 +38,8 @@ public class PasswordCommand extends Command {
      * @param newPassword the new password received from user.
      */
     public PasswordCommand(String oldPassword, String newPassword) {
+        // passwords should not be empty.
+        assert(!oldPassword.isEmpty() && !newPassword.isEmpty());
         this.oldPassword = oldPassword;
         this.newPassword = newPassword;
     }
