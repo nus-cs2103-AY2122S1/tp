@@ -543,9 +543,9 @@ without the prefix `d/`.
 
 --------------------------------------------------------------------------------------------------------------------
 
-#### Finding all upcoming tasks: `upcoming`
+#### Viewing all upcoming tasks: `upcoming`
 
-![Finding upcoming Tasks](images/UG-11.png)
+![Viewing upcoming Tasks](images/UG-11.png)
 
 :orange_book: If you want to view all of your upcoming tasks, you can use the _Upcoming_ command. Upcoming tasks are
 incomplete tasks whose Date/Time are after the current Date/Time.
@@ -569,7 +569,7 @@ In this example, it was 25 October 2021, 09:16 PM.
 
 :orange_book: After you’ve filtered your tasks using 
 [the _Find_ command](#finding-all-tasks-matching-given-details-find) or 
-[the _Upcoming_ command](#finding-all-upcoming-tasks-upcoming), if you want to view all of them again, you can
+[the _Upcoming_ command](#viewing-all-upcoming-tasks-upcoming), if you want to view all of them again, you can
 use the List command.
 
 :page_with_curl: Format: `list`

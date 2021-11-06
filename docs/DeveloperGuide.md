@@ -402,7 +402,7 @@ This boolean is propagated down as another additional argument of `TaskDate` con
 using `LocalDate#now` if it is used for editing purposes. 
 
 
-### \[Implemented\] Listing Upcoming Tasks
+### \[Implemented\] Viewing all Upcoming Tasks
 
 With the implementation of `TaskDate.java`, we can easily look up upcoming tasks by comparing dates and times.
 
@@ -414,7 +414,8 @@ and time via `LocalDateTime.now()`, and the current date via `LocalDate.now()`. 
 a date, then if it has a date but no time, and finally whether it has both date and time.
 
 When `UpcomingTaskCommand.execute(Model model)` is called by `LogicManager`, 
-`Model#sortTaskList()` is called which sorts the task list chronologically. `UpcomingTaskCommand` then calls
+`Model#sortTaskList()` is called which sorts the task list chronologically, with the use of a `Comparator` to define 
+an ordering between tasks by comparing `TaskDates`. `UpcomingTaskCommand` then calls
 `Model#updateFilteredTaskList(Predicate<Task> predicate)`, which filters out the upcoming tasks and updates the viewable
 `ObservableList<Task>`. 
 
@@ -524,9 +525,10 @@ be changed.
 
 **Target user profile**:
 
-* A student,
-  * Students generally have different types of tasks they need to organize and deadlines to keep track of.
-  * Students have many contacts from various places such as modules, CCAs, etc, that they would like to organize better.
+* A university student,
+  * University students generally have different types of tasks they need to organize and deadlines to keep track of
+  * University students have many contacts from various places such as modules, CCAs, etc, that they would like to 
+    organize better
 
 * On his laptop/computer very often,
   * Typing is mainly an advantage with a physical keyboard
@@ -534,8 +536,10 @@ be changed.
 
 * A person who prefers/is more skilled at typing,
   * Typing is only faster with experience
-  * Tasks and deadlines are easier to be specified with typing, instead of clicking through multiple options with a laptop trackpad
-  * Students may encounter situations where they need to type information/deadlines very quickly (e.g. during a lecture)
+  * Tasks and deadlines are easier to be specified with typing, instead of clicking through multiple options with a 
+    laptop trackpad
+  * Students may encounter situations where they need to take down tasks or contacts very quickly (e.g. during a 
+    lecture or tutorial)
 
 **Value proposition**:
  * Manage contacts and tasks faster than a typical mouse/GUI driven app.
