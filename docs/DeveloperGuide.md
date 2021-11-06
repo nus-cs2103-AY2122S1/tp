@@ -350,6 +350,8 @@ into `model`-friendly `Lesson` objects.<br>
 
 #### Displaying lessons in the GUI
 
+![PersonGridPanel](images/GuiPersonGridPanel.png)
+
 Each `Lesson` is displayed on a `LessonCard` in the `LessonListPanel`, next to the `PersonListPanel`.
 Selecting a student in the `PersonListPanel` through the `view` command or clicking on the GUI will display their lessons in the `LessonListPanel`.
 (see also: [Switching between students, calendar, and tags](#switching-between-students-calendar-and-tags)).<br>
@@ -392,7 +394,7 @@ we decided to put off alternative 2 for future considerations.
 
 TAB uses the [CalendarFX](https://dlsc.com/products/calendarfx/) library to implement its calendar interface, allowing users to view a calendar that contains all their existing lessons, so that they can visualise their schedule and plan ahead.
 
-![CalendarView](images/GUICalendarView.png)
+![CalendarView](images/GuiCalendarView.png)
 
 *Figure C.1.1: Integration of the CalendarView in our GUI*
 
