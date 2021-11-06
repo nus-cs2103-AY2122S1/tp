@@ -20,8 +20,7 @@ public class IsFavoritePredicateTest {
     @Test
     public void test_validInputFalse_success() {
         IsFavoritePredicate expected = new IsFavoritePredicate(false);
-        boolean test = expected.test(ALICE);
-        assertTrue(test);
+        assertTrue(expected.test(ALICE));
     }
 
     @Test
