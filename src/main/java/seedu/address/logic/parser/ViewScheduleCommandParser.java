@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
@@ -35,8 +34,7 @@ public class ViewScheduleCommandParser implements Parser<ViewScheduleCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_DASH_NAME, PREFIX_DASH_PHONE,
-                        PREFIX_DASH_INDEX, PREFIX_DATE,
-                        PREFIX_DASH_EMAIL, PREFIX_DASH_ADDRESS, PREFIX_DASH_TAG,
+                        PREFIX_DASH_INDEX, PREFIX_DATE, PREFIX_DASH_EMAIL, PREFIX_DASH_TAG,
                         PREFIX_DASH_STATUS, PREFIX_DASH_ROLE, PREFIX_DASH_SALARY);
         Period period = DateTimeUtil.getDisplayedPeriod();
         if (argMultimap.isEmpty()) {

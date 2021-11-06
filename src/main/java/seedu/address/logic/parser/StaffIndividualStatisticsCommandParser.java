@@ -1,6 +1,5 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
@@ -29,8 +28,7 @@ public class StaffIndividualStatisticsCommandParser implements Parser<StaffIndiv
         //created to test if there are any identifiers
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(userInput, PREFIX_DASH_NAME, PREFIX_DASH_PHONE,
-                        PREFIX_DASH_INDEX, PREFIX_DATE,
-                        PREFIX_DASH_EMAIL, PREFIX_DASH_ADDRESS, PREFIX_DASH_TAG,
+                        PREFIX_DASH_INDEX, PREFIX_DATE, PREFIX_DASH_EMAIL, PREFIX_DASH_TAG,
                         PREFIX_DASH_STATUS, PREFIX_DASH_ROLE, PREFIX_DASH_SALARY);
 
         Period period = Period.getPeriodFromDateOverMonth(LocalDate.now());

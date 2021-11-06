@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.DATE_RANGE_INPUT;
 import static seedu.address.commons.core.Messages.SHIFT_PERIOD_PARSING_DEFAULT;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
@@ -42,7 +41,6 @@ public class ViewScheduleCommand extends Command {
             + "[" + PREFIX_DASH_INDEX + "INDEX] "
             + "[" + PREFIX_DASH_PHONE + "PHONE] "
             + "[" + PREFIX_DASH_EMAIL + "EMAIL] "
-            + "[" + PREFIX_DASH_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_DASH_SALARY + "SALARY] "
             + "[" + PREFIX_DASH_STATUS + "STATUS] "
             + DATE_RANGE_INPUT

@@ -3,7 +3,6 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Period;
@@ -24,7 +23,6 @@ public class PersonBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_SALARY = "9";
     public static final String DEFAULT_ROLE = "floor";
     public static final String DEFAULT_STATUS = "parttime";
@@ -32,7 +30,6 @@ public class PersonBuilder {
     private Name name;
     private Phone phone;
     private Email email;
-    private Address address;
     private Set<Tag> tags;
     private Set<Role> roles;
     private Salary salary;
@@ -47,7 +44,6 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
-        address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
         absentDates = new HashSet<>();
         roles = new HashSet<>();
@@ -64,7 +60,6 @@ public class PersonBuilder {
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
-        address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
         roles = new HashSet<>(personToCopy.getRoles());
         salary = personToCopy.getSalary();
@@ -96,14 +91,6 @@ public class PersonBuilder {
      */
     public PersonBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
-        return this;
-    }
-
-    /**
-     * Sets the {@code Address} of the {@code Person} that we are building.
-     */
-    public PersonBuilder withAddress(String address) {
-        this.address = new Address(address);
         return this;
     }
 
@@ -159,7 +146,7 @@ public class PersonBuilder {
      * Returns a new Person object with the fields set in this PersonBuilder object.
      */
     public Person build() {
-        Person builtPerson = new Person(name, phone, email, address, roles, salary, status, tags, absentDates);
+        Person builtPerson = new Person(name, phone, email, roles, salary, status, tags, absentDates);
         builtPerson.setSchedule(schedule);
         return builtPerson;
     }

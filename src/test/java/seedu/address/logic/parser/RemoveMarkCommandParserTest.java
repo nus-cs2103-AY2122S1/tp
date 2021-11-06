@@ -1,6 +1,6 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
@@ -13,7 +13,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.logic.commands.RemoveMarkCommand;
-import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.predicates.PersonContainsFieldsPredicate;
 
@@ -41,12 +41,10 @@ public class RemoveMarkCommandParserTest {
 
     @Test
     public void parse_fields_success() {
-        String userInput = " " + PREFIX_DASH_PHONE + " 999 " + PREFIX_DASH_ADDRESS + " Kent Ridge";
+        String userInput = " " + PREFIX_DASH_PHONE + " 999 " + PREFIX_DASH_EMAIL + " helpme@mail.com";
         PersonContainsFieldsPredicate predicate = new PersonContainsFieldsPredicate(new Phone("999"),
-                new Address("Kent Ridge"));
+                new Email("helpme@mail.com"));
         assertParseSuccess(PARSER, userInput, new RemoveMarkCommand(predicate,
                 DateTimeUtil.getDisplayedPeriod()));
-
     }
-
 }

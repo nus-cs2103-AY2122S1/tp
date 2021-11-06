@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.RemoveMarkCommand.NO_STAFF_SATISFIES_QUERY;
 import static seedu.address.logic.commands.RemoveMarkCommand.listToString;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
@@ -38,7 +37,6 @@ public class MarkCommand extends Command {
             + "[" + PREFIX_DASH_NAME + " NAME] "
             + "[" + PREFIX_DASH_PHONE + " PHONE] "
             + "[" + PREFIX_DASH_EMAIL + " EMAIL] "
-            + "[" + PREFIX_DASH_ADDRESS + " ADDRESS] "
             + "[" + PREFIX_DASH_SALARY + " SALARY] "
             + "[" + PREFIX_DASH_STATUS + " STATUS] "
             + "[" + PREFIX_DASH_ROLE + " ROLE]... "
