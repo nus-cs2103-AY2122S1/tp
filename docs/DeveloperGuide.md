@@ -627,7 +627,24 @@ The following is the logic of `FeesCalculator` to decide whether to update the s
 
 This means that once the outstanding fees have been updated, any changes to fields that would affect outstanding fees (e.g. start date, end date, cancelling and uncancelling lessons in the past, change in lesson rates) will not be accounted for.
 
+The `Fees` field in person is the sum of all the person's lesson's outstanding fees. Users are not allowed to directly edit `Fees` field, instead they should edit individual lesson's `OutstandingFeesField` should the fees be incorrect.
+
 #### Payment
+
+Payment of outstanding fees is facilitated by `Money` and its subclasses as well as `FeesCalculator`.
+
+![MoneyInheritanceDiagram](images/MoneyInheritanceDiagram.png)
+
+*Figure I.6.3: Class diagram of Money and related classes.*
+
+`OutstandingFees` and `LessonRates` extends `Money` whereas `Fees` field in `Person` is composed of `OutstandingFees` as it is the sum of `OutstandingFees`. Money uses `BigDecimal` for all calculations.
+
+The user can record payment of the lesson using the `PaidCommand`. Payment made must be greater than 0 and lesser than or equals to the current outstanding fees.
+The `OutstandingFees` field would then be deducted by the paid amount. The following is the sequence diagram of the `PaidCommand`.
+
+
+
+
 
 
 
