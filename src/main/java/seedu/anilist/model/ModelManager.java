@@ -39,9 +39,9 @@ public class ModelManager implements Model {
 
         this.animeList = new AnimeList(animeList);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredAnime = new FilteredList<>(this.animeList.getAnimeList());
-        currentTab = new TabOption("all");
-        tabOptionFilter = PREDICATE_SHOW_ALL_ANIME;
+        this.filteredAnime = new FilteredList<>(this.animeList.getAnimeList());
+        this.currentTab = new TabOption("all");
+        this.tabOptionFilter = PREDICATE_SHOW_ALL_ANIME;
     }
 
     public ModelManager() {

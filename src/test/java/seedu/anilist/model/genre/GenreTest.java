@@ -55,8 +55,6 @@ public class GenreTest {
 
         // null input
         assertEquals(0, genreOne.compareTo(null));
-        // not a Genre
-        assertEquals(0, genreOne.compareTo(1));
         // same object
         assertEquals(0, genreOne.compareTo(genreOne));
         // same genreName

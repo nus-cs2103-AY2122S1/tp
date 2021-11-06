@@ -63,9 +63,11 @@ public class Anime {
         if (otherAnime == this) {
             return true;
         }
-
-        return otherAnime != null
-                && otherAnime.getName().equals(getName());
+        if (otherAnime == null) {
+            return false;
+        }
+        Name otherAnimeName = otherAnime.getName();
+        return otherAnimeName.equals(this.getName());
     }
 
     /**
@@ -83,10 +85,14 @@ public class Anime {
         }
 
         Anime otherAnime = (Anime) other;
-        return otherAnime.getName().equals(getName())
-                && otherAnime.getEpisode().equals(getEpisode())
-                && otherAnime.getStatus().equals(getStatus())
-                && otherAnime.getGenres().equals(getGenres());
+        Name otherAnimeName = otherAnime.getName();
+        Episode otherAnimeEpisode = otherAnime.getEpisode();
+        Status otherAnimeStatus = otherAnime.getStatus();
+        Set<Genre> otherAnimeGenres = otherAnime.getGenres();
+        return otherAnimeName.equals(this.getName())
+                && otherAnimeEpisode.equals(this.getEpisode())
+                && otherAnimeStatus.equals(this.getStatus())
+                && otherAnimeGenres.equals(this.getGenres());
     }
 
     @Override
