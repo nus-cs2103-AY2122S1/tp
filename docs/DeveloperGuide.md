@@ -1229,23 +1229,6 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-#### Deleting a student
-
-1. Deleting a student while all students are being shown
-
-    * Prerequisites: List all students using the `list` command. Multiple "Students" in the list.
-
-    * Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-
-    * Test case: `delete 0`<br>
-       Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
-
-    * Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
-
 ### Filtering
 
 1. Filtering by grade
@@ -1390,6 +1373,58 @@ testers are expected to do more *exploratory* testing.
       
     * Test case: `edit 0 n/Alex`<br>
       Expected: First student is not edited. The message box displays a message alerting the user that the given index is not valid.
+
+#### Enrolling a student into a lesson
+
+1. Enrolling a student into a lesson, while all students and lessons are being shown
+
+    * Prerequisites: Multiple "Students" and "Lessons" shown in the list of students and lessons. "Students" must not currently be enrolled in the "lesson" the user wishes to enroll the student in. 
+
+    * Note: We will be using index `1` to conduct manual testing for positive tests, but feel free to test with any valid index (any positive integer shown in the student and lesson lists).
+
+    * Test case: `enroll 1 l/1`<br>
+      Expected: Student of index `1` is enrolled in lesson of index `1` . Details of the student and lesson enrolled in shown in the status message.
+
+    * Test case: `enroll 0 l/0`<br>
+      Expected: No student is enrolled in any lesson. Error details shown in the status message.
+
+    * Other incorrect delete commands to try: `enroll`, `enroll 1`, `enroll 1 l/0`, `enroll 0 l/1`, `enroll x l/y`, `enroll y l/x` (where x is larger than the list size, and y is a negative integer)<br>
+      Expected: Similar to previous.
+
+#### Deleting a student
+
+1. Deleting a student while all students are being shown
+
+    * Prerequisites: Multiple "Students" shown in the list of students.
+    
+    * Note: We will be using index `1` to conduct manual testing for positive tests, but feel free to test with any valid index (any positive integer shown in the student list).
+
+    * Test case: `delete 1`<br>
+      Expected: Student of index `1` is deleted from the list. Details of the deleted student shown in the status message.
+
+    * Test case: `delete 0`<br>
+      Expected: No student is deleted. Error details shown in the status message.
+
+    * Other incorrect delete commands to try: `delete`, `delete x`, `delete y` (where x is larger than the list size, and y is a negative integer)<br>
+      Expected: Similar to previous.
+      
+
+#### Deleting a lesson
+
+1. Deleting a lesson while all lessons are being shown
+
+    * Prerequisites: Multiple "Lessons" shown in the list of lessons.
+
+    * Note: We will be using index `1` to conduct manual testing for positive tests, but feel free to test with any valid index (any positive integer shown in the lesson list).
+
+    * Test case: `delete-l 1`<br>
+      Expected: Students currently enrolled in lesson of index `1` would be unenrolled. Lesson `1` is deleted from the list. Details of the deleted lesson shown in the status message.
+
+    * Test case: `delete-l 0`<br>
+      Expected: No lesson is deleted. Error details shown in the status message.
+
+    * Other incorrect delete commands to try: `delete-l`, `delete-l x`, `delete-l y` (where x is larger than the list size, and y is a negative integer)<br>
+      Expected: Similar to previous.
 
 #### Clearing data
 
