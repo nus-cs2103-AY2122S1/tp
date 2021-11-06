@@ -635,7 +635,6 @@ Action | Format, Examples
 **Find class** | `findc KEYWORD [MORE_KEYWORDS]`<br> e.g., `findc G02`
 **Add Tutorial Group** | `addcg gn/GROUP_NUMBER c/CLASS_CODE type/TYPE` <br> e.g.,`addcg gn/1 c/G01 type/OP1`
 **Delete Tutorial Group** | `deletecg gn/GROUP_NUMBER c/CLASS_CODE type/TYPE` <br> e.g., `deletecg gn/1 c/G11 type/OP1`
-**List Tutorial Group** | `listg`
 **Add Student to Group** | `addsg INDEX g/GROUP_NUMBER c/CLASSCODE type/TYPE` <br> e.g., `addsg  1 gn/1 c/G01 type/OP1`
 **Delete Student from Group** | `deletesg INDEX g/GROUP_NUMBER c/CLASSCODE type/TYPE` <br> e.g., `deletesg  1 gn/1 c/G01 type/OP1`
 **Clear all students** | `clear`
