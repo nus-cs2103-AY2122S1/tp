@@ -793,11 +793,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The input format is invalid.
-    * 3a1. RecruitIn shows an error message.
-
-      Use case resumes at step 2.
-
 **Use case: UC013 - Exiting RecruitIn**
 
 **MSS**
