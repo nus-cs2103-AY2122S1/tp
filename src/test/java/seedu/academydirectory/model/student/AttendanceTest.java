@@ -1,6 +1,7 @@
 package seedu.academydirectory.model.student;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.academydirectory.testutil.Assert.assertThrows;
 
@@ -56,5 +57,25 @@ public class AttendanceTest {
         assertTrue(attendance.equals(attendanceCopy));
         assertFalse(attendance.equals(attendanceDiff));
 
+    }
+
+    @Test
+    public void testAttendanceStatus() {
+        Attendance attendance = new Attendance(12);
+        boolean[] statuses = new boolean[12];
+        statuses[3] = true;
+        statuses[5] = true;
+        attendance.setAttendance(statuses);
+
+        // equals if the value are both true or false
+        assertTrue(attendance.getAttendanceFromSession(3));
+        assertFalse(attendance.getAttendanceFromSession(10));
+
+        // not equals if the values are different (true vs false)
+        assertNotEquals(attendance.getAttendanceFromSession(5), false);
+
+        // throws if the value exceeds array size
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> attendance.getAttendanceFromSession(13));
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> attendance.getAttendanceFromSession(-1));
     }
 }

@@ -49,9 +49,6 @@ public class HelpCommand extends Command {
     @Override
     public CommandResult execute(VersionedModel model) throws CommandException {
         requireNonNull(model);
-        if (this.commandWord == null || this.helpMessage == null) {
-            throw new CommandException(Messages.MESSAGE_HELP_NOT_EXIST);
-        }
         model.setAdditionalViewType(AdditionalViewType.HELP);
         model.setAdditionalInfo(AdditionalInfo.of(helpMessage));
         CommandResult commandResult;

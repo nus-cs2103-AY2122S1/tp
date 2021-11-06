@@ -63,10 +63,6 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane visualiserDisplayPlaceholder;
 
     @FXML
-    private StackPane separator;
-
-
-    @FXML
     private StackPane statusbarPlaceholder;
 
     /**

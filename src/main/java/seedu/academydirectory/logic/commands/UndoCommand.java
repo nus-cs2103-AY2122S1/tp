@@ -38,4 +38,9 @@ public class UndoCommand extends Command {
         new RevertCommand(prevCommit.getHash()).execute(model);
         return new CommandResult(MESSAGE_SUCCESS);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return (obj instanceof UndoCommand);
+    }
 }

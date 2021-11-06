@@ -130,4 +130,15 @@ public class AssessmentTest {
         assertEquals(studentList, expectedDescendingList);
         assertNotEquals(studentList, expectedAscendingList);
     }
+
+    @Test
+    public void testVisualizeForView() {
+        Assessment assessment = new Assessment();
+        assertTrue(assessment.visualizeForView().contains(Assessment.PLACEHOLDER_RA1));
+        assertTrue(assessment.visualizeForView().contains(Assessment.PLACEHOLDER_MIDTERM));
+        assertTrue(assessment.visualizeForView().contains(Assessment.PLACEHOLDER_RA2));
+        assertTrue(assessment.visualizeForView().contains(Assessment.PLACEHOLDER_PE));
+        assertTrue(assessment.visualizeForView().contains(Assessment.PLACEHOLDER_FINAL));
+        assertTrue(assessment.visualizeForView().contains(Assessment.PLACEHOLDER_TOTAL));
+    }
 }

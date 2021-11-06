@@ -144,7 +144,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 ![Structure of the UI Component](images/dg/architecture/ui/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ChartDisplay`, `StudentListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `VisualizerDisplay`, `StudentListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103T-T15-3/tp/blob/master/src/main/java/seedu/academydirectory/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-T15-3/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
@@ -195,6 +195,7 @@ The `VersionedModel` component,
 * does not depend on any of the other three components (as the `VersionedModel` represents data entities of the domain, they should make sense on their own without depending on other components)
 * interfaces with `VersionControl` via the `VersionControlController`, which implements the `Version` API
 and thus gives the `VersionedModel` component the ability to interface with version control entities such as `Commit`.
+* stores a `AddtionalViewModel` that stores additional information required by the UI's `VisualizerDisplay` such as number statistic for the `Visualize` command.
 
 The above implementation is chosen because it makes _turning off_ version control relatively simple; a stub `VersionControlController`
 can be used instead.
@@ -483,8 +484,12 @@ The implementation is similar to `AttendanceCommand`, with the same sequence dia
 This command serves to display the summarised details of a single `Student` in the `AcademyDirectory`.
 
 `ViewCommand` displays the `Student` based on the relative `INDEX` in the `ObservableList` which is the list of `Student` viewed by the `Avenger`.
+Once the index and the student associated with the index is retrieved, it is set on the Additional View Model - with its associated type and info,
+to send to the UI for display.
 
-{Improve on explanation and add a possible UML Diagram}
+It extends the abstract class `Command` and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
+
+![ViewCommandSequenceDiagram](images/dg/logic/commands/viewcommand/ViewCommandSequenceDiagram.png)
 
 #### Implementation
 
@@ -513,7 +518,14 @@ This command provides a Box Plot of the performance of all `Student` in `Academy
 
 `VisualizeCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
 
-{Improve on explanation and add a possible UML Diagram}
+The grades are collated by iterating through all the students and extracting the grades from the `Assessment` HashMap using the input `Assessment` as the key.
+
+The information is returned as a HashMap with key being the `Assessment` name and value being a list containing the class' grade in that assessment.
+The information will be displayed in the AdditionalView. The success message is parsed into `CommandResult` to be returned by `VisualizeCommand`.
+
+The following sequence diagram describes what happens when `VisualizeCommand` is executed:
+
+![VisualizeCommandSequenceDiagram](images/dg/logic/commands/visualizecommand/VisualizeCommandSequenceDiagram.png)
 
 ### FilterCommand
 
@@ -544,15 +556,25 @@ The reference frame for GetComparator can be found below. It details the selecti
 
 ### Others
 
+### ExitCommand
+
+This command allows user to exit the application after saving all operations and data
+It extends the `Command` class and will consequently `@Override` the `Command#execute()` method to serve this purpose.
+
+#### Implementation
+
+![GetComparatorSequenceDiagram](images/dg/logic/commands/exitcommand/ExitCommandSequenceDiagram.png)
+
 ### ListCommand
 
-This command restores the original, unfiltered view of `AcademyDirectory`.
+This command shows all students on the class, ordered by when the student is added to the Academy.
 
 #### Implementation
 
 `ListCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
+`ListCommand` retrieves the student list and display it on the student list panel on the left side. All students will be displayed.
 
-{Add more details on implementation}
+![GetComparatorSequenceDiagram](images/dg/logic/commands/listcommand/ListCommandSequenceDiagram.png)
 
 ### ClearCommand
 
@@ -560,10 +582,11 @@ This command clears all `Student` entries from `AcademyDirectory`.
 
 #### Implementation
 
-`ClearCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
+`ClearCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose 
+and is Version Controllable. A new Academy Directory is created to replace the current one, meaning that the student list is set to empty.
 The `ClearCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands)
 
-{Add more details on implementation}
+![GetComparatorSequenceDiagram](images/dg/logic/commands/clearcommand/ClearCommandSequenceDiagram.png)
 
 ### HistoryCommand
 This command shows the commit history. Each commit will be shown with its five character hash, 
@@ -979,24 +1002,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 ### Glossary
-Term | Definition | Comments
------| ----------- | ---------- 
-Operating System (OS) | Software that manages computer hardware and other computer software. |
-Mainstream OS | Examples of mainstream OS includes: Windows, Linux, Unix, OS-X, MacOS, etc. |
-Personal Detail | A contact detail of a student | Phone number, Telegram handle, and email address
-CS1101S | An introductory Computer Science module for year 1 students in the the National University of Singapore. |
-Studios | Tutorials held in CS1101S and are essential in aiding the students to improve their grasp on the concepts taught during the lecture. | < 10 students in a studio
-Avengers | A special term to call a CS1101S tutor. An avenger organizes a Studio session to improve on CS1101S concepts taught in lecture, recording attendance and grades. | An avenger holds at most one class
-Principle of Least-Privilege | Minimum levels of access – or permissions – needed to perform function.
-Command Line Interface (CLI) | A text-based user interface, where users type commands to instruct the computer to do something.
-Graphical User Interface (GUI) | A graphics-based user interface, where users click buttons to instruct the computer to do something.
-Java | A program that allows running other programs written in Java programming language.
-`Command` | An interface representing an instruction typed by a user to Academy Directory.
-Version controlled `Command` | a `Command` that logs a commit message, and thus stages at least one `VcObject` object upon execution. | Refer to the list of such commands [here](#appendix-c-version-controlled-commands)
-Command Box | A part of the Academy Directory's GUI which can be used by users to type commands.
-Field | Additional information that can be provided to a command for correct command execution. | May or may not have an associated prefix
-Parameter | Part of the command which provides additional information provided by the user. | Actual values for the fields
-Prefix | An abbreviation of a field. | Always ends with a backslash ('/')
+
+| Term | Definition | Comments |
+|-----| ----------- | ---------- |
+| Operating System (OS) | Software that manages computer hardware and other computer software. | |
+| Mainstream OS | Examples of mainstream OS includes: Windows, Linux, Unix, OS-X, MacOS, etc. | |
+| Personal Detail | A contact detail of a student | Phone number, Telegram handle, and email address |
+| CS1101S | An introductory Computer Science module for year 1 students in the the National University of Singapore. | |
+| Studios | Tutorials held in CS1101S and are essential in aiding the students to improve their grasp on the concepts taught during the lecture. | < 10 students in a studio |
+| Avengers | A special term to call a CS1101S tutor. An avenger organizes a Studio session to improve on CS1101S concepts taught in lecture, recording attendance and grades. | An avenger holds at most one class. |
+| Principle of Least-Privilege | Minimum levels of access – or permissions – needed to perform function. | |
+| Command Line Interface (CLI) | A text-based user interface, where users type commands to instruct the computer to do something. | |
+| Graphical User Interface (GUI) | A graphics-based user interface, where users click buttons to instruct the computer to do something. | |
+| Java | A program that allows running other programs written in Java programming language. | |
+| `Command` | An interface representing an instruction typed by a user to Academy Directory. | |
+| Version controlled `Command` | a `Command` that logs a commit message, and thus stages at least one `VcObject` object upon execution. | Refer to the list of such commands [here](#appendix-c-version-controlled-commands) |
+| Command Box | A part of the Academy Directory's GUI which can be used by users to type commands. | |
+| Field | Additional information that can be provided to a command for correct command execution. | May or may not have an associated prefix |
+| Parameter | Part of the command which provides additional information provided by the user. | Actual values for the fields |
+| Prefix | An abbreviation of a field. | Always ends with a backslash ('/') |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1169,8 +1193,30 @@ testers are expected to do more *exploratory* testing.
 
 #### View student information
 
-1. _{ more test cases to come …​ }_
+1. View all related information of a student
+  1. Prerequisite: List all student using the `list` command. Multiple students are shown in the list. **List should have exactly 6 students** (can using sample data provided as default)
+  2. Test case: `view 1`
+     Expected: All related information of the first student is shown on the result display visualizer on the right side. This includes: Student name, current tags, all academic-related information (assessment score, studio participation, studio attendance), and personal contact information (phone, email, telegram)
+     Expected: No information is modified, Academy Directory runs as normal
+     Expected: Status message is that users are viewing student at position 1 of the list
+  3. Test case: `view 6`
+     Expected: All related information of the last student is shown on the result display visualizer on the right side. This includes: Student name, current tags, all academic-related information (assessment score, studio participation, studio attendance), and personal contact information (phone, email, telegram)
+     Expected: No information is modified, Academy Directory runs as normal
+     Expected: Status message is that users are viewing student at position 6 of the list
+  4. Test case: `view 7`
+     Expected: No view is shown on the result display. An error message is shown stating that index number is invalid
+  5. Test case: `view 0`, `view add`, `view myself in front of the mirror as a failure of society`
+     Expected: No view is shown on the result display. An error message is shown stating that index number is invalid (in a sense that it must be a positive integer)
 
+2. View students when list is altered
+  1. Prerequisite: Using filter to reduce the list view to 1 only. List should only have one student filtered.
+  2. Test case: `view 1`
+     Expected: All related information are shown about the student
+     Expected: Status message is that users are viewing student at position 1 of the list
+  3. Test case: `view 2`
+     Expected: No view is shown on the result display. An error message is shown stating that index number is invalid
+     Significance: View works for the current index number shown on the student list only.
+    
 ***
 
 #### Show Grade
@@ -1253,8 +1299,26 @@ testers are expected to do more *exploratory* testing.
 
 #### Help
 
-1. _{ more test cases to come …​ }_
-
+1. Test general help
+   1. Prerequisite: Application is started
+   2. Test case: `help`
+      Expected: A pop-up window is shown summarizing the format of all commands for users, as well as a link to the web User Guide of Academy Directory
+   3. Test case: `help    `
+      Expected: A pop-up window is shown summarizing the format of all commands for users, as well as a link to the web User Guide of Academy Directory
+2. Test specific help
+   1. Prerequisite: Application is started
+   2. Test case: `help edit`
+      Expected: A pop-up window is shown with a customized help message (based on the User Guide of `edit` command) on how to use `edit`, including significance, format, and example.
+   3. Test case: `help visualize`
+      Expected: A pop-up window is shown with a customized help message (based on the User Guide of `visualize` command) on how to use `visualize`, including significance, format, and example.
+   4. Test case: `help ad`, `help addd`
+      Expected: No pop-up window is shown, and an error message is shown as status message explaining that there exists no instruction for command `ad`. Significance of the test case is that specific `help` can only be useful when the command is typed in full rather than in partial
+   5. Test case: `help r230thg4b0p2nnbtpbgetbi03`
+      Expected: No pop-up window is shown, and an error message is shown as status message explaining that there exists no instruction for the command.
+3. Test functionality of pop-up window
+   1. Prerequisite: Help window is already opened before by any mean, and is kept opened for testing
+   2. Test case: Focus on the Main Window, do not close Help Window, and type in `help add` or any other equivalent command
+      Expected: The help window is refocused with its content change to the new `help` instead.
 ***
 
 #### Saving data
@@ -1267,9 +1331,40 @@ testers are expected to do more *exploratory* testing.
 
 ***
 
-### UI Testing
+### Graphic User Interface Testing
 
-#### Buttons
+#### Menus
+   1. Test the 5 menu items on the bar
+      1. Prerequisite: Application is started
+      2. Test case: Click on the second menu item
+         Expected: Menu item is expanded to show 5 entries: `show RA1`, `show RA2`, `show MIDTERM`, `show PE`, `show FINAL`
+      3. Test case: Click on the third menu-item
+         Expected: Menu item is expanded to show 1 entry: `visualize`
+   2. Test a random menu item
+      1. Prerequisite: The second menu is opened
+      2. Test case: Click on entry `Show RA1`
+         Expected: The command `show RA1` is executed as an equivalent command-button
+         
+#### User Interface
+   1. Test application user interface
+      1. Prerequisite: Application is started
+      2. Test case: Expand Academy Directory to full screen
+         Expected: Background image also expanded, alongside other components of the internal controls (result display, student list, and status message)
+         Expected: No other visual misbehavior of the User Interface (image is cropped or lacking in any visual design)
+      3. Test case: Shrink Academy Directory to the smallest possible size
+         Expected: Academy Directory is not minimized completely as there is a minimal size for users to still see the data
+      4. Test case: Enter keywords to the command bar.
+         
+#### User Experience
+
+
+### System testing
+
+#### Performance testing
+#### Load testing
+#### Compatibility testing
+#### Usability testing
+#### Portability testing
 
 1. _{ more test cases to come …​ }_
 

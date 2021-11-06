@@ -1,6 +1,7 @@
 package seedu.academydirectory.logic.parser;
 
 import static seedu.academydirectory.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.academydirectory.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import java.util.HashMap;
 
@@ -18,7 +19,8 @@ import seedu.academydirectory.logic.commands.VisualizeCommand;
 public class SingularCommandParserTest {
 
     private final String[] validInputs = {
-        "clear", "exit", "list", "redo", "undo", "history", "visualize"
+        "clear", "exit", "list", "redo",
+        "undo", "history", "visualize"
     };
 
     private final HashMap<String, Command> mapToValidCommand = new HashMap<>();
@@ -36,6 +38,10 @@ public class SingularCommandParserTest {
     @Test
     public void testValidSingularCommand() throws Exception {
         processHashMap();
+        for (String input : validInputs) {
+            SingularCommandParser parser = new SingularCommandParser(input);
+            assertParseSuccess(parser, "", mapToValidCommand.get(input));
+        }
     }
 
     @Test
@@ -43,8 +49,11 @@ public class SingularCommandParserTest {
         processHashMap();
         for (String input : validInputs) {
             SingularCommandParser parser = new SingularCommandParser(input);
-            String userInput = input + " argument";
-            assertParseFailure(parser, userInput,
+            String userInput1 = "2";
+            assertParseFailure(parser, userInput1,
+                    String.format(SingularCommandParser.MESSAGE_NO_ARGUMENT_SHOULD_FOLLOW, input));
+            String userInput2 = "random arg";
+            assertParseFailure(parser, userInput2,
                     String.format(SingularCommandParser.MESSAGE_NO_ARGUMENT_SHOULD_FOLLOW, input));
         }
     }

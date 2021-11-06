@@ -112,4 +112,9 @@ public class HistoryCommand extends Command {
         }
         return String.join(" ", result);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return (obj instanceof HistoryCommand);
+    }
 }
