@@ -378,7 +378,7 @@ Format: `findc m/MODULE_CODE(S)`/`findc d/DAY(S)`/`findc t/START_TIME(S)`
 * Day input is only accepted in integer form <br> e.g. `1` for Monday, `7` for Sunday
 * Start time input is only accepted in the `HH:mm` format <br> e.g. `15:00` `09:00`
 
-<div markdown="span" class="alert alert-primary">:warning: **Important:**
+<div markdown="span" class="alert alert-primary">:exclamation: **Important:**
 If multiple keywords are specified for the search, any lesson that matches at least one of the keywords will be returned <br>
 e.g. `findc m/CS2030 CS2040` will return lessons that are of module `CS2030` or `CS2040` <br>
 e.g. `findc d/2 3` will return lessons that are on Tuesday or Wednesday <br>
