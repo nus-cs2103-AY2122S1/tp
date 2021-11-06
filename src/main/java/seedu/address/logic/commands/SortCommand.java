@@ -26,7 +26,7 @@ public class SortCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sorts all contacts by a specified property in ascending order.\n"
-            + "Parameters: \n"
+            + "Parameters: "
             + "[" + PREFIX_NAME + "] "
             + "[" + PREFIX_GENDER + "] "
             + "[" + PREFIX_PHONE + "] "
