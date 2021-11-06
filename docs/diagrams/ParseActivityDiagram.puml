@@ -1,6 +1,6 @@
 @startuml
 start
-:AddressBookParser parses command;
+:SourceControlParser parses command;
 
 :Command word and arguments parsed;
 

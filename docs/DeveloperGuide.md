@@ -309,33 +309,33 @@ if command is valid. Command is invalid if user input is empty, or if user enter
 
 The `alias` feature allows users to define their own aliases for commands. This is useful to shorten the input for commands that the user uses often. 
 
-An alias is basically just a mapping of a user-provided string to a command word. It works by directly replacing the first word in the argument with the alias word, then parsing again.
-An alias contains two strings: An `aliasWord` which is the new user-defined word, and an `commandWord` which is the command word of an existing default command (e.g. `addstudent`, `clear`, `exit`).
+An alias is basically just a mapping of a user-provided string to a command word. It works by directly replacing the first word in the user's input command with the alias word, then parsing again.
+An alias contains two strings: An `aliasWord` which is the new user-defined word, and a `commandWord` which is the command word of an existing default command (e.g. `addstudent`, `clear`, `exit`).
 
 Parsing of an alias command follows the following steps:
 1. The alias word is checked to ensure that it is one word long.
-1. The alias word is also check to ensure that it does not overlap with any default command. This is to prevent the remapping of any default commands and potentially losing the functionality of the application.
+1. The alias word is also checked to ensure that it does not overlap with any default command word. This is to prevent the re-mapping of any default command words and potentially losing the functionality of the application.
 1. If the command word is an alias, it is replaced with the command word that the alias maps to.
 1. The command word is checked for validity by attempting to parse the command word. If the parser does not recognise the command word, it is not valid.
 1. The new `Alias` and `AliasCommand` is created, and executed.
 1. The alias is added to both the parser, and the model (so that it can be saved in the `UserPrefs`)
     * If the alias word is already present in the parser, the command word it is mapped to is replaced with the new command word instead.
-    * If the alias word and the command word are identical, the existing alias is removed instead.
+    * If the alias word and the command word are identical, it is assumed that the user is trying to delete an existing alias. The existing alias is removed instead.
     
 If the command word of any future user input matches the alias, the first word of the user input will be replaced by the command word of the alias.
 The activity diagram of how a command is parsed can be found in the [Logic section of this guide](#logic-component).
 
 #### Design Considerations
 
-**Aspect 1: How aliases are stored and how they parse**
+**Aspect 1: How aliases are stored and parsed**
 
 There were two ideas on how this could be done:
 1. Store the command's `Parser` in each alias. The parser attribute of the alias can then be retrieved and `Parser::execute` can be called when parsing.
     * Pros:
-        * Very elegant and streamlined parsing. Almost no changes need to be made to the logic of `AddressBookParser`.
+        * Very elegant and streamlined parsing. Almost no changes need to be made to the logic of `SourceControlParser`.
     * Cons:
         * It is not easy to obtain the type of `Parser` simply through the command word provided by the user given the current implementation of the project. You'd need to iterate through all possible `Commands`, and match their command word with the provided word. This approach would not be very extensible if more commands are to be added in the future. 
-        * It is also not easy to save/load the alias to/from the `UserPrefs`. The best approach is likely to just save the CommandWord, then generate the Parser when loading. However this poses a similar problem as the previous point, which is that it is not easy to generate the `Parser` just from the command word.
+        * It is also not easy to save/load the alias to/from the `UserPrefs`. The best approach is likely to just save the command word, then generate the `Parser` when loading. However, this poses a similar problem as the previous point, which is that it is not easy to generate the `Parser` just from the command word.
 1. Store the command word in each alias. Replace the command word of the user input if the user inputs an aliased command, and parse it again.
     * Pros:
         * Very easy to store. Each alias is essentially just two strings.
@@ -349,25 +349,25 @@ We decided to go with the easier implementation of storing each alias as two str
 That is, what happens when the user does `alias -c <existing_alias> -as <new_alias>`? There are two choices for this: 
 1. The new alias maps to the existing alias word directly.
     * The command word stored in the new `Alias` would be the alias word of the existing `Alias`.
-    * Assuming that an alias `as` already exists for `addstudent`, the following commands have the following effects:
-        * `alias -c as -as as2` would make `as2` map to `addstudent` via `as`.
-        * `alias -c addscore -as as` would make `as` map to `addscore`. `as2` would also then map to `addscore`, since it gets replaced by `as` when parsing, which then gets replaced by `addscore`.
+    * Assuming that an alias `ag` already exists for `addgroup`, the following commands have the following effects:
+        * `alias -c ag -as addg` would make `addg` map to `ag`, which is in turn mapped to `addgroup`. When parsing, `addg` will be replaced with `ag`, which is then replaced by `addgroup`.
+        * `alias -c addalloc -as ag` would make `ag` map to `addalloc`. `addg` would also then map to `addalloc`, since it gets replaced by `ag` when parsing, which then gets replaced by `addalloc`.
     * Pros:
-        * Intuitive approach to aliases: "I want `as2` to mean `as`".
+        * Intuitive approach to aliases: "I want `addg` to mean `ag`".
     * Cons:
         * Possible to make parsing a very expensive task due to having to replace the command word and parsing multiple times.
         * Possible to have an infinite loop by mapping two aliases to each other.
         * It's not very useful to have two aliases always mean the same thing.
-2. The new alias maps to the command that the existing alias maps to.
+2. The new alias maps to the command word that the existing alias maps to.
     * The command word stored in the new `Alias` would be the command word of the existing `Alias`.
-    * Assuming that an alias `as` already exists for `addstudent`, the following commands have the following effects:
-        * `alias -c as -as as2` would make `as2` map to `addstudent` directly.
-        * `alias -c addscore -as as` would make `as` map to `addscore`. `as2` would still then map to `addstudent`.
+    * Assuming that an alias `ag` already exists for `addgroup`, the following commands have the following effects:
+        * `alias -c ag -as addg` would make `addg` map to `addgroup` directly.
+        * `alias -c addalloc -as ag` would make `ag` map to `addalloc`. `addg` would still map to `addgroup`.
     * Pros:
         * Naturally prevents the creation of infinite loops.
         * Parsing is guaranteed to only take one recursive call to the `parse` method.
     * Cons: 
-        * It is a less intuitive approach to aliases: "I want `as2` to mean what `as` means at the current moment"
+        * It is a less intuitive approach to aliases: "I want `addg` to mean what `ag` means at the current moment"
     
 We decided to go with implementation 2 due to its ability to naturally handle infinite loops and better performance. Our target audience is also Computer Science professors, who should be very familiar with this style of referencing, since that is exactly how names refer to primitive values in programming.
 
@@ -390,7 +390,7 @@ Again, there are two choices we could take:
     * Cons:
         * Not particularly intuitive. The `alias` command feels like a command to use for adding aliases, but it is being used to remove one instead.
     
-We ended up going with the second approach since the alias functionality was a very small part of the application. We also believe that it did make sense that mapping an alias to itself would remove it.
+We ended up going with the second approach since the alias functionality was a very small part of the application. We also believe that it does make sense that mapping an alias to itself would remove it.
 
 Furthermore, removing aliases is likely a very rare use case, and dedicating a whole command to it does feel like a bit of a waste.
 
