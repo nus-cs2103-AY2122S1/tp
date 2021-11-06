@@ -32,19 +32,20 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ModelStub;
 import seedu.address.model.ReadOnlyInventory;
-import seedu.address.model.TransactionList;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.display.DisplayMode;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.ItemDescriptor;
 import seedu.address.testutil.ItemBuilder;
 import seedu.address.testutil.ItemDescriptorBuilder;
+import seedu.address.testutil.TypicalBookkeeping;
+import seedu.address.testutil.TypicalTransactions;
 
 public class AddCommandTest {
 
     private ModelStubAcceptingItemAdded modelStub = new ModelStubAcceptingItemAdded();
     private ModelManager model = new ModelManager(getTypicalInventory(), new UserPrefs(),
-            new TransactionList(), new BookKeeping());
+            TypicalTransactions.getTypicalTransaction(), TypicalBookkeeping.getTypicalBookkeeping());
 
     @Test
     public void constructor_nullItem_throwsNullPointerException() {
@@ -135,8 +136,10 @@ public class AddCommandTest {
         AddCommand addCommand = new AddCommand(bagelDescriptor);
         String expectedMessage = String.format(AddCommand.MESSAGE_SUCCESS_REPLENISH, 5, VALID_NAME_BAGEL);
 
+        BookKeeping bookKeeping = TypicalBookkeeping.getTypicalBookkeeping();
+        bookKeeping.addCost(BAGEL.getCostPrice() * 5);
         Model expectedModel = new ModelManager(getTypicalInventory(), new UserPrefs(),
-                new TransactionList(), new BookKeeping());
+                TypicalTransactions.getTypicalTransaction(), bookKeeping);
         expectedModel.addItem(BAGEL);
         expectedModel.restockItem(BAGEL, 5);
 
@@ -152,8 +155,10 @@ public class AddCommandTest {
         AddCommand addCommand = new AddCommand(bagelDescriptor);
         String expectedMessage = String.format(AddCommand.MESSAGE_SUCCESS_REPLENISH, 5, VALID_NAME_BAGEL);
 
+        BookKeeping bookKeeping = TypicalBookkeeping.getTypicalBookkeeping();
+        bookKeeping.addCost(BAGEL.getCostPrice() * 5);
         Model expectedModel = new ModelManager(getTypicalInventory(), new UserPrefs(),
-                new TransactionList(), new BookKeeping());
+                TypicalTransactions.getTypicalTransaction(), bookKeeping);
         expectedModel.addItem(BAGEL);
         expectedModel.restockItem(BAGEL, 5);
 
@@ -199,8 +204,10 @@ public class AddCommandTest {
         String replenishMessage = String.format(AddCommand.MESSAGE_SUCCESS_REPLENISH, 5, VALID_NAME_BAGEL);
         String expectedMessage = replenishMessage + "\n" + AddCommand.MESSAGE_EXTRA_PRICE_FLAGS;
 
+        BookKeeping bookKeeping = TypicalBookkeeping.getTypicalBookkeeping();
+        bookKeeping.addCost(BAGEL.getCostPrice() * 5);
         Model expectedModel = new ModelManager(getTypicalInventory(), new UserPrefs(),
-                new TransactionList(), new BookKeeping());
+                TypicalTransactions.getTypicalTransaction(), bookKeeping);
         expectedModel.addItem(BAGEL);
         expectedModel.restockItem(BAGEL, 5);
 
@@ -217,8 +224,10 @@ public class AddCommandTest {
         String replenishMessage = String.format(AddCommand.MESSAGE_SUCCESS_REPLENISH, 5, VALID_NAME_BAGEL);
         String expectedMessage = replenishMessage + "\n" + AddCommand.MESSAGE_EXTRA_TAG_FLAGS;
 
+        BookKeeping bookKeeping = TypicalBookkeeping.getTypicalBookkeeping();
+        bookKeeping.addCost(BAGEL.getCostPrice() * 5);
         Model expectedModel = new ModelManager(getTypicalInventory(), new UserPrefs(),
-                new TransactionList(), new BookKeeping());
+                TypicalTransactions.getTypicalTransaction(), bookKeeping);
         expectedModel.addItem(BAGEL);
         expectedModel.restockItem(BAGEL, 5);
 

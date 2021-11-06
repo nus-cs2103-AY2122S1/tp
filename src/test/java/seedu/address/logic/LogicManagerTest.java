@@ -24,6 +24,7 @@ import seedu.address.logic.commands.RemoveCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.BookKeeping;
+import seedu.address.model.Inventory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyInventory;
@@ -97,7 +98,10 @@ public class LogicManagerTest {
         String addCommand = AddCommand.COMMAND_WORD + " " + VALID_NAME_BAGEL + ID_DESC_BAGEL + COUNT_DESC_BAGEL
                 + COSTPRICE_DESC_BAGEL + SALESPRICE_DESC_BAGEL;
         Item expectedItem = new ItemBuilder(BAGEL).withTags().build();
-        ModelManager expectedModel = new ModelManager();
+        BookKeeping bookKeeping = new BookKeeping();
+        bookKeeping.addCost(BAGEL.getCostPrice() * 5);
+        ModelManager expectedModel = new ModelManager(new Inventory(), new UserPrefs(),
+                new TransactionList(), bookKeeping);
         expectedModel.addItem(expectedItem);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);

@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.PathUtil.addToPath;
 import static seedu.address.testutil.TypicalBookkeeping.getTypicalBookkeeping;
 import static seedu.address.testutil.TypicalItems.getTypicalInventory;
@@ -109,7 +110,8 @@ public class StorageManagerTest {
         TransactionList original = getTypicalTransactionList();
         storageManager.saveTransactionList(original);
         ReadOnlyTransactionList retrieved = storageManager.readTransactionList().get();
-        assertEquals(original, new TransactionList(retrieved));
+        boolean test = original.equalTestsTransactionLists(new TransactionList(retrieved));
+        assertTrue(test);
     }
 
     @Test

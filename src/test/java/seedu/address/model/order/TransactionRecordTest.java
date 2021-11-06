@@ -16,8 +16,8 @@ public class TransactionRecordTest {
 
     private static final String id1 = "id1";
     private static final String id2 = "id2";
-    private static final Instant timestamp1 = Instant.ofEpochMilli(1000);
-    private static final Instant timestamp2 = Instant.ofEpochMilli(2000);
+    private static final Instant timestamp1 = Instant.ofEpochSecond(1000);
+    private static final Instant timestamp2 = Instant.ofEpochSecond(8047);
 
     private TransactionRecord transaction =
             new TransactionRecord(getTypicalItems(), id1, timestamp1);

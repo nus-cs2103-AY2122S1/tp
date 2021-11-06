@@ -3,6 +3,7 @@ package seedu.address.model.order;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import javafx.collections.ObservableList;
@@ -81,7 +82,7 @@ public class TransactionRecord extends Order implements Displayable {
      * Returns true if items in the transacted order matches with the ones in the {@code otherList}.
      * Only considers name, id, quantity and sales price. (i.e. information relevant to transaction).
      */
-    private boolean isSameTransactionInfo(ObservableList<Item> otherList) {
+    public boolean isSameTransactionInfo(ObservableList<Item> otherList) {
 
         if (getOrderItems().size() != otherList.size()) {
             return false;
@@ -114,8 +115,8 @@ public class TransactionRecord extends Order implements Displayable {
         if (other instanceof TransactionRecord) {
             TransactionRecord temp = (TransactionRecord) other;
             return id.equals(temp.id)
-                    && timestamp.equals(temp.timestamp)
-                    && isSameTransactionInfo(temp.getOrderItems());
+                    && timestamp.truncatedTo(ChronoUnit.MINUTES).equals(temp.timestamp.truncatedTo(ChronoUnit.MINUTES))
+                    && getOrderItems().equals(temp.getOrderItems());
         }
 
         return false;

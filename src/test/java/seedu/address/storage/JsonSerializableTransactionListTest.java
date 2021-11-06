@@ -1,6 +1,6 @@
 package seedu.address.storage;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -26,7 +26,8 @@ public class JsonSerializableTransactionListTest {
                 JsonSerializableTransactionList.class).get();
         TransactionList listFromFile = dataFromFile.toModelType();
         TransactionList typicalTransactions = TypicalOrders.getTypicalTransactionList();
-        assertEquals(listFromFile, typicalTransactions);
+        boolean test = listFromFile.equalTestsTransactionLists(typicalTransactions);
+        assertTrue(test);
     }
 
     private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
@@ -38,11 +39,13 @@ public class JsonSerializableTransactionListTest {
     @Test
     public void saveInventory() {
         ReadOnlyTransactionList txnList = TypicalOrders.getTypicalTransactionList();
+
         try {
             new JsonTransactionStorage(Paths.get("typicalTransactions.json"))
                     .saveTransactionList(txnList, addToTestDataPathIfNotNull("typicalTransactions.json"));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }
+
     }
 }

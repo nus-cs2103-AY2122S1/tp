@@ -12,19 +12,20 @@ import static seedu.address.testutil.TypicalItems.getTypicalInventory;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.BookKeeping;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.TransactionList;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.item.ItemDescriptor;
 import seedu.address.model.order.Order;
 import seedu.address.testutil.ItemDescriptorBuilder;
+import seedu.address.testutil.TypicalBookkeeping;
+import seedu.address.testutil.TypicalTransactions;
 
 public class RemoveFromOrderCommandTest {
 
     private Model modelWithoutOrder = new ModelManager(getTypicalInventory(), new UserPrefs(),
-            new TransactionList(), new BookKeeping());
+            TypicalTransactions.getTypicalTransaction(),
+            TypicalBookkeeping.getTypicalBookkeeping());
     private Model modelWithOrder = getModelWithOrderedDonut();
 
     /**
@@ -32,7 +33,8 @@ public class RemoveFromOrderCommandTest {
      */
     private Model getModelWithOrderedDonut() {
         Model model = new ModelManager(getTypicalInventory(), new UserPrefs(),
-                new TransactionList(), new BookKeeping());
+                TypicalTransactions.getTypicalTransaction(),
+                TypicalBookkeeping.getTypicalBookkeeping());
         model.addItem(DONUT.updateCount(5));
         model.setOrder(new Order());
         model.addToOrder(DONUT.updateCount(5));
