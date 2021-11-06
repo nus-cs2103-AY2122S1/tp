@@ -12,20 +12,11 @@ UniqueTagList -[hidden]down- UniqueMemberList
 UniqueTagList *-right-> "      *" Tag
 UniqueMemberList -right-> "~*all" Member
 
-Member -up-> "        0..*" Tag
+Member -up-> "        *" Tag
 
 Member *--> "1" Name
 Member *--> "1" Phone
 Member *--> "1" Availability
 Member *--> "1" TodayAttendance
 Member *--> "1" TotalAttendance
-
-SportsPa *--> "1" UniqueFacilityList
-UniqueFacilityList --> "~*all" Facility
-Facility *--> "1" FacilityName
-Facility *--> "1" Capacity
-Facility *--> "1" Location
-Facility *--> "1" Time
-Facility *--> "1" AllocationMap
-AllocationMap *--> "1..*       " Member
 @enduml

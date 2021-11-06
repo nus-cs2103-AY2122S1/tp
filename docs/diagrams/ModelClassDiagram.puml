@@ -52,22 +52,24 @@ UniqueMemberList --> "~* all" Member
 Member *--> "1" Name
 Member *--> "1" Phone
 Member *--> "1" Availability
-Member *--> "    0..*" Tag
+Member *--> "*" Tag
 Member *--> "1" TodayAttendance
 Member *--> "1" TotalAttendance
 
 SportsPa *--> "1" UniqueFacilityList
-UniqueFacilityList --> "~*all      " Facility
+UniqueFacilityList --> "~*all " Facility
 Facility *--> "1" FacilityName
 Facility *--> "1" Capacity
 Facility *--> "1" Location
 Facility *--> "1" Time
 Facility *--> "1" AllocationMap
-AllocationMap *--> "1..*" Member
+AllocationMap --> "*" Member
 
 Name -[hidden]right-> Phone
 Availability -[hidden]right-> Phone
+FacilityName -[hidden]left- AllocationMap
+UniqueMemberList -[hidden]right- UniqueFacilityList
 
 ModelManager -->"~* filtered" Member
-ModelManager -->"~* filtered" Facility
+ModelManager -->" ~* filtered" Facility
 @enduml
