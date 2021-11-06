@@ -127,6 +127,87 @@ Shows a message explaning how to access the help page, which directs you to this
 
 Entering format: `help`
 
+## Tutorial Class Commands
+
+### Adding a tutorial class : `addc`
+
+Adds a tutorial class to ClassMATE.
+
+Entering format: `addc c/CLASS_CODE s/SCHEDULE [t/TAG]…​`
+
+<div markdown="span" class="alert alert-primary"> :bulb: **Note:**
+
+
+* Class Code should consist of 'G' followed by two numerical digits (i.e. any value from 'G01' to 'G99').
+* Schedule consists of 2 weekly timeslots
+  </div>
+
+Examples:
+
+* `addc c/G06 s/Tuesday 2 to 4pm, Friday 2 to 4pm`
+* `addc c/G01 s/Monday 10am to 12pm, Thursday 10am to 12pm`
+
+### Viewing a class: `viewc`
+
+![viewing a class](images/viewc.png)
+
+Views a class in ClassMATE, as shown above
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:**<br>
+`viewc` highlights the class chosen, and filters out only students in the class!
+</div>
+
+
+Entering format: `viewc INDEX`
+
+* Views the class details at the specified INDEX.
+* Details of a class includes students in the class and the class schedule.
+* The index refers to the index number shown in the displayed list of classes.
+* The index must be a positive integer 1, 2, 3, …​
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+In order to find a specific class, use the `findc` command to find a particular class before viewing it.
+</div>
+
+
+Examples:
+
+* `listc` followed by `viewc 2` shows the 2nd class in the displayed class list.
+
+### Listing all classes : `listc`
+
+Shows a list of all classes in ClassMATE.
+
+Entering format: `listc`
+
+### Finding classes by class codes: `findc`
+
+Find classes by class codes.
+
+Entering format: `findc KEYWORD [MORE_KEYWORDS]`
+
+* The search is not absolute. e.g `G0` will match `G06`
+
+Examples:
+
+* `findc G02` returns `G02` if it exists
+* `findc G` returns `G01`, `G02`, `G03`<br>
+
+### Deleting a class: `deletec`
+
+Deletes a class from ClassMATE
+
+Entering format: `deletec INDEX`
+
+* Deletes the class at the specified INDEX.
+* The index refers to the index number shown in the displayed list of classes.
+  The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+
+* `listc` followed by `deletec 2` deletes the 2nd class in the list of classes.
+* `findc G06` followed by `deletec 1` deletes the 1st class in the results of the `findc` command.
+
 ## Student Commands
 
 This part of the guide covers all the commands you can use to manage student information! 
@@ -397,6 +478,7 @@ Examples:
 * `listc` followed by `deletec 2` deletes the 2nd class in the list of classes.
 * `findc G06` followed by `deletec 1` deletes the 1st class in the results of the `findc` command.
 
+
 ## Tutorial Group Commands
 
 These are the commands that involve tutorial groups!
@@ -492,6 +574,17 @@ Example:
 * `liststu c/G06`shows that Betsy is a student in class G06 with Index 1.
   `deletesg 1 g/A c/G06 type/OP1` then removes Betsy from OP1 Group A in class G06
 
+### Clearing all data : `clear`
+
+Clears all data from ClassMATE. Below is how it would look like.
+
+![clear](images/clear.png)
+
+Entering format: `clear`
+
+<div markdown="span" class="alert alert-primary">:warning: **Warning:**
+This command deletes **ALL** data and is irreversible :warning:
+</div>
 
 ### Exiting the program : `exit`
 
@@ -525,8 +618,8 @@ If your changes to the data file makes its format invalid, ClassMATE will discar
 Action | Format, Examples
 --------|------------------
 **Help** | `help`
-**Add student** | `addstu n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLASS_CODE [t/TAG]…​`<br> e.g., `addstu n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 c/G01 t/attentive`
-**Edit student** | `editstu INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS_CODE] [t/TAG]…​`<br> e.g., `editstu 2 n/James Lee e/jameslee@example.com`
+**Add student** | `addstu n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLASS_CODE [t/TAG]…​`<br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 c/G01 t/attentive`
+**Edit student** | `editstu INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS_CODE] [t/TAG]…​`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com`
 **View student** | `viewstu INDEX`<br> e.g., `liststu` followed by `viewstu 2`
 **Find student** | `findstu KEYWORD [MORE_KEYWORDS]`<br> e.g., `findstu John`
 **Delete student** | `deletestu INDEX`<br> e.g., `liststu` followed by `deletestu 3`
@@ -535,9 +628,9 @@ Action | Format, Examples
 **Delete class** | `deletec INDEX`<br> e.g., `listc` followed by `deletec 2`
 **View class** | `viewc INDEX`<br> e.g., `listc` followed by `viewc 3`
 **List all classes** | `listc`
-**Find class** | `findc KEYWORD [MORE_KEYWORDS]`<br> e.g., `findc A02`
+**Find class** | `findc KEYWORD [MORE_KEYWORDS]`<br> e.g., `findc G02`
 **Add Tutorial Group** | `addcg gn/GROUP_NUMBER c/CLASS_CODE type/TYPE` <br> e.g.,`addcg gn/1 c/G01 type/OP1`
-**Delete Tutorial Group** | `deletecg INDEX` <br> e.g., `deletecg 2`
+**Delete Tutorial Group** | `deletecg gn/GROUP_NUMBER c/CLASS_CODE type/TYPE` <br> e.g., `deletecg gn/1 c/G11 type/OP1`
 **List Tutorial Group** | `listg`
 **Add Student to Group** | `addsg INDEX g/GROUP_NUMBER c/CLASSCODE type/TYPE` <br> e.g., `addsg  1 gn/1 c/G01 type/OP1`
 **Delete Student from Group** | `deletesg INDEX g/GROUP_NUMBER c/CLASSCODE type/TYPE` <br> e.g., `deletesg  1 gn/1 c/G01 type/OP1`
