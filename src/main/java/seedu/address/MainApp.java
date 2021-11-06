@@ -2,6 +2,7 @@ package seedu.address;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -13,6 +14,7 @@ import seedu.address.commons.core.Version;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.FeesCalculator;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
@@ -90,7 +92,18 @@ public class MainApp extends Application {
             initialData = new AddressBook();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        // update fees upon initialisation
+        Model model = new ModelManager(initialData, userPrefs);
+        FeesCalculator feesCalculator = new FeesCalculator(model.getLastUpdatedDate(), LocalDateTime.now());
+        model = feesCalculator.updateAllLessonOutstandingFees(model);
+
+        try {
+            storage.saveAddressBook(model.getAddressBook());
+        } catch (IOException io) {
+            logger.warning("Error encountered when saving updated model. The data will not be updated.");
+            return new ModelManager(initialData, userPrefs);
+        }
+        return model;
     }
 
     private void initLogging(Config config) {
