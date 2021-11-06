@@ -2,9 +2,38 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-  {:toc}
+### Table of Contents
+- [**Acknowledgements**](#acknowledgements)
+- [**Setting up, getting started**](#setting-up-getting-started)
+- [**Design**](#design)
+  * [Architecture](#architecture)
+  * [UI component](#ui-component)
+  * [Logic component](#logic-component)
+  * [Model component](#model-component)
+  * [Storage component](#storage-component)
+  * [Common classes](#common-classes)
+- [**Implementation**](#implementation)
+  * [Add feature](#add-feature)
+  * [Datetime for interview](#datetime-for-interview)
+  * [Edit feature](#edit-feature)
+  * [Filter interview feature](#filter-interview-feature)
+    + [Design considerations:](#design-considerations)
+  * [Find feature](#find-feature)
+  * [Show feature](#show-feature)
+  * [Unmark feature](#unmark-feature)
+- [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
+- [**Appendix: Requirements**](#appendix-requirements)
+  * [Product scope](#product-scope)
+  * [User stories](#user-stories)
+  * [Use cases](#use-cases)
+  * [Non-Functional Requirements](#non-functional-requirements)
+  * [Glossary](#glossary)
+- [**Appendix: Instructions for manual testing**](#appendix-instructions-for-manual-testing)
+  * [Launch and shutdown](#launch-and-shutdown)
+  * [Deleting a person](#deleting-a-person)
+  * [Saving data](#saving-data)
 
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
@@ -162,6 +191,10 @@ This command then updates the ```model``` accordingly.
 The following activity diagram summarizes what happens when a user executes an ```add``` command:
 ![images](images/AddCommandActivityDiagram.png)
 
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** There should only be one arrowhead at the end of every line 
+in the Activity Diagram. This is a known limitation of PlantUML.</div>
+
 Given below is an example usage scenario and how the add operation behaves at each step.
 
 Step 1. A valid command `add n/Dylan p/97998581 e/dylan.eyyou@gmail.com r/Pilot et/Full time s/3500 l/PhD y/4`
@@ -238,6 +271,10 @@ This command then updates the ```model``` accordingly.
 The following activity diagram summarizes what happens when a user executes an ```edit``` command:
 ![images](images/EditCommandActivityDiagram.png)
 
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** There should only be one arrowhead at the end of every line 
+in the Activity Diagram. This is a known limitation of PlantUML.</div>
+
 Given below is an example usage scenario and how the edit operation behaves at each step.
 
 Step 1. A valid command `edit 1 n/Ali` is given as user input. This invokes `LogicManager#execute()`, which calls
@@ -267,6 +304,41 @@ The following sequence diagram shows how the edit operation works.
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `EditCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
+### Delete feature
+
+The ```delete``` command is facilitated by creating a ```DeleteCommand``` depending on the given input.
+This command then updates the ```model``` accordingly.
+
+The following activity diagram summarizes what happens when a user executes an ```delete``` command:
+![images](images/DeleteActivityDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** There should only be one arrowhead at the end of every line 
+in the Activity Diagram. This is a known limitation of PlantUML.</div>
+
+Given below is an example usage scenario illustrated by a sequence diagram for ```delete``` command.
+
+Step 1. A valid command `delete 1` is given as user input. This invokes `LogicManager#execute()`, which calls
+`AddressBookParser#parseCommand()` to parse `delete 1` into command word `delete` and command argument ` 1`.
+
+Step 2. `DeleteCommandParser` is initialized based on the parse results and `DeleteCommandParser#parse()` is called
+to identify the indices present in ` 1`. `DeleteCommandParser#parse()` then initializes a
+`DeleteCommand` with the indices present as arguments.
+
+Step 3. `DeleteCommand#execute()` is then called, which will check the validity of the given indices. 
+If there is no exception thrown, `Model#deletePerson()` is called to delete the applicants corresponding to the 
+given indices.
+
+Step 4. `CommandResult` is initialized with `String` containing the details of the deleted applicant.
+This `CommandResult` is then returned.
+
+The following sequence diagram shows how the delete operation works.
+![images](images/DeleteSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** The lifeline for `DeleteCommandParser`
+should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
+
 ### Show feature
 
 The ```show``` command is facilitated by creating an ```ObservableList``` of ```Person``` objects from the
@@ -275,6 +347,10 @@ the prefix provided by the user.
 
 The following activity diagram summarizes what happens when a user executes a ```show``` command:
 ![images](images/ShowCommandActivityDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** There should only be one arrowhead at the end of every line 
+in the Activity Diagram. This is a known limitation of PlantUML.</div>
 
 Given below is an example usage scenario and how the show operation behaves at each step.
 
@@ -306,6 +382,10 @@ The following activity diagram summarizes what happens when a user executes a ``
 
 ![images](images/FindCommandActivityDiagram.png)
 
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** There should only be one arrowhead at the end of every line 
+in the Activity Diagram. This is a known limitation of PlantUML.</div>
+
 Given below is an example usage scenario illustrated by a sequence diagram for ```find``` command.
 
 Step 1. A valid command `find n/Alex y/0` is given as user input. This invokes `LogicManager#execute()`, which calls
@@ -321,6 +401,7 @@ and filters for applicants that have `Alex` in their names and `0` year of exper
 Step 4. Once the string of all applicant names is formed, `CommandResult` is initialized with this string as argument
 and returned.
 
+The following sequence diagram shows how the find operation works.
 ![images](images/FindCommandSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source:
@@ -335,6 +416,9 @@ subclass depending on the given input. This command then updates the ```model```
 The following activity diagram summarizes what happens when a user executes a ```filter_interview``` command:
 ![images](images/FilterInterviewCommandActivityDiagram.png)
 
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** There should only be one arrowhead at the end of every line 
+in the Activity Diagram. This is a known limitation of PlantUML.</div>
 
 Given below is an example usage scenario and how the filter interview operation behaves at each step.
 
@@ -380,6 +464,40 @@ should not exceed the destroy marker X. This is a known limitation of PlantUML.<
     * Cons: Breaks the single responsibility principle as it does not find a specific input for a prefix, but rather
     types of inputs.
 
+### Mark feature
+The ```mark``` command is facilitated by creating a ```MarkCommand```, which is a subclass of ```MarkingCommand```.
+This command then updates the ```model``` accordingly, depending on the given input.
+
+The following activity diagram summarizes what happens when a user executes a ```mark``` command:
+![images](images/MarkCommandActivityDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** There should only be one arrowhead at the end of every line 
+in the Activity Diagram. This is a known limitation of PlantUML.</div>
+
+Given below is an example usage scenario illustrated by a sequence diagram for ```mark``` command.
+
+Step 1. A valid command `mark 1 2` is given as user input. This invokes `LogicManager#execute()`, which calls
+`AddressBookParser#parseCommand()` to parse `mark 1 2` into command word `mark` and command argument ` 1 2`.
+
+Step 2. `MarkingCommandParser` is initialized based on the parse results and `MarkingCommandParser#parse()` is called
+to identify the indices present in ` 1 2`. `MarkingCommandParser#parse()` then initializes a
+`MarkCommand` with the indices present as arguments.
+
+Step 3. `MarkCommand#execute()` is then called, which will in turn call `Model#checkForMarkedPerson()` on the applicants
+corresponding to the given indices. If there is no exception thrown, `Model#markPerson()` is called to mark the
+applicants corresponding to the given indices.
+
+Step 4. `CommandResult` is initialized with `String` containing the details of the newly marked applicants.
+This `CommandResult` is then returned.
+
+The following sequence diagram shows how the mark operation works.
+![images](images/MarkCommandSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** The lifeline for `MarkingCommandParser`
+should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
+
 ### Unmark feature
 
 The ```unmark``` command is facilitated by creating a ```UnmarkCommand```, which is a subclass of 
@@ -387,6 +505,10 @@ The ```unmark``` command is facilitated by creating a ```UnmarkCommand```, which
 
 The following activity diagram summarizes what happens when a user executes a ```unmark``` command:
 ![images](images/UnmarkCommandActivityDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** There should only be one arrowhead at the end of every line 
+in the Activity Diagram. This is a known limitation of PlantUML.</div>
 
 Given below is an example usage scenario illustrated by a sequence diagram for ```unmark``` command.
 
@@ -397,14 +519,18 @@ Step 2. `MarkingCommandParser` is initialized based on the parse results and `Ma
 to identify the indices present in ` 3`. `MarkingCommandParser#parse()` then initializes a
 `UnmarkCommand` with the indices present as arguments, which in this case is a single index 3.
 
-Step 3. `MarkCommand#execute()` is then called, which will in turn call `Model#checkForUnmarkedPerson()` on the applicants
+Step 3. `UnmarkCommand#execute()` is then called, which will in turn call `Model#checkForUnmarkedPerson()` on the applicants
 corresponding to the given indices. If there is no exception thrown, `Model#unmarkPerson()` is called to unmark the applicants corresponding to the given indices.
 
-Step 4. Once the string of all applicant names that are marked is formed, `CommandResult` is initialized with this string as argument
-and returned.
+Step 4. `CommandResult` is initialized with `String` containing the details of the newly unmarked applicants.
+This `CommandResult` is then returned.
 
+The following sequence diagram shows how the unmark operation works.
 ![images](images/UnmarkCommandSequenceDiagram.png)
 
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** The lifeline for `MarkingCommandParser`
+should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
 ### Datetime for interview 
 
@@ -704,14 +830,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Applicant**: Represents a person that is searching for a job
 * **Applied Role**: Represents the job a person is applying for
+* **Command**: Refers to a text input (which can be combined with user inputs) that executes certain features in RecruitIn
 * **Employment Type**: Represents the type of work contract, specifically Full time, Part time, Temporary & Internship
 * **Expected Salary**: Represents the minimum amount the applicant is willing to be paid for the job
 * **Level of Education**: Represents the highest/current level of education the applicant has, specifically Elementary, Middle School, High School, University, Bachelors, Masters, PhD
-* **Years of Experience**: Represents the number of years the applicant has previously worked in their applied role for
+* **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Search term**: Terms that can be searched for. e.g. Search terms for roles are all the roles that exist in the list, meaning these are all the roles that can be searched for.
+* **Years of Experience**: Represents the number of years the applicant has previously worked in their applied role for
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**

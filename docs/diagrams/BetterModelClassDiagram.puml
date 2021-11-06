@@ -17,5 +17,12 @@ Person -up-> "*" Tag
 Person *--> Name
 Person *--> Phone
 Person *--> Email
-Person *--> Address
+Person *--> Role
+Person *--> EmploymentType
+Person *--> ExpectedSalary
+Person *--> LevelOfEducation
+Person *--> Experience
+Person *--> "*" Interview
+Person *--> "*" Notes
+Person *--> Done
 @enduml
