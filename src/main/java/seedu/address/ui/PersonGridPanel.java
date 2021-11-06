@@ -26,7 +26,8 @@ public class PersonGridPanel extends UiPart<Region> {
     /**
      * Constructor for a CenterPanel.
      *
-     * @param personList The ObservableList of persons.
+     * @param personList The Observable List of persons to display.
+     * @param lessonList The Observable List of lessons to display.
      */
     public PersonGridPanel(ObservableList<Person> personList, ObservableList<Lesson> lessonList) {
         super(FXML);
@@ -51,7 +52,7 @@ public class PersonGridPanel extends UiPart<Region> {
     /**
      * Initialise empty panels content.
      *
-     * @param lessons Lessons of the student.
+     * @param lessons List of lessons to display.
      */
     public void fillListPanels(ObservableList<Lesson> lessons) {
         logger.info("Showing the student list without lessons.");
