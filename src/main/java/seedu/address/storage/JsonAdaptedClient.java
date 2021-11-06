@@ -3,6 +3,7 @@ package seedu.address.storage;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -21,8 +22,10 @@ import seedu.address.model.client.Email;
 import seedu.address.model.client.LastMet;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.NextMeeting;
+import seedu.address.model.client.OptionalNonStringBasedField;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.RiskAppetite;
+import seedu.address.model.client.SortDirection;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -126,17 +129,33 @@ class JsonAdaptedClient {
         }
         final Email modelEmail = new Email(email);
 
+        //check nextMeeting
         if (lastMet == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, LastMet.class.getSimpleName()));
         }
-        final LastMet modelLastMet = ParserUtil.parseLastMet(lastMet);
+        LastMet tempLastMet = ParserUtil.parseLastMet(lastMet);
 
         if (nextMeeting == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     NextMeeting.class.getSimpleName()));
         }
-        final NextMeeting modelNextMeeting = ParserUtil.parseNextMeeting(nextMeeting);
-        modelNextMeeting.setWithWho(modelName);
+        Optional<OptionalNonStringBasedField> parsedMeeting = ParserUtil.parseMeeting(nextMeeting);
+        NextMeeting tempNextMeeting = NextMeeting.NULL_MEETING;
+        if (parsedMeeting.get() instanceof LastMet) {
+            LastMet newLastMet = (LastMet) parsedMeeting.get();
+            if (tempLastMet == null) {
+                tempLastMet = newLastMet;
+            }
+            if (newLastMet.compareWithDirection(tempLastMet, SortDirection.of("asc")) >= 0) {
+                tempLastMet = newLastMet;
+            }
+        } else if (parsedMeeting.get() instanceof NextMeeting) {
+            tempNextMeeting = (NextMeeting) parsedMeeting.get();
+            tempNextMeeting.setWithWho(modelName);
+        }
+
+        final LastMet modelLastMet = tempLastMet;
+        final NextMeeting modelNextMeeting = tempNextMeeting;
 
         if (currentPlan == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
