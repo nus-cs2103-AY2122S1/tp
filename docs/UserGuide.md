@@ -451,65 +451,65 @@ Suppose the applicants list includes 3 applicants with name and role `John, Soft
 ### Marking an applicant : `mark`
 [Table of contents](#table-of-contents)
 
-Every applicant in RecruitIn will have a status of either "Done" or "Not Done".
-A "Done" status means that you are done handling the applicant and no longer need to keep their details.
-The `mark` command marks the specified applicant(s) in RecruitIn by changing their status to "Done".
+Every applicant in RecruitIn will have a status of either `Done` or `Not Done`.
+A `Done` status means that you are done handling the applicant and no longer need to keep their details.
+The `mark` command marks the specified applicant(s) in RecruitIn by changing their status to `Done`.
 
 Format: `mark INDEX…​`
 
-* RecruitIn marks the applicant at the specified `INDEX`es as "Done".
+* RecruitIn marks the applicant at the specified `INDEX`es as `Done`.
 * `INDEX` refers to the number shown in RecruitIn's displayed applicants list.
 * `INDEX` **must be a positive whole number**, i.e. 1, 2, 3, …​
 * `INDEX` should not exceed the total number of applicants in RecruitIn's displayed applicants list.
 * `INDEX` in RecruitIn **starts from one**.
 * You must give at least one `INDEX`. (i.e. `mark ` is not a valid command)
 * You cannot give duplicate `INDEX`es. (i.e. `mark 2 2` is not a valid command)
-* You cannot mark an applicant that has status "Done".
+* You cannot mark an applicant that has status `Done`.
 
 Examples:
-* After using the command `list`, `mark 1` marks the 1st applicant listed in RecruitIn as "Done".
+* After using the command `list`, `mark 1` marks the 1st applicant listed in RecruitIn as `Done`.
 
 Before: ![images](images/MarkBefore.png)
 
 After: ![images](images/MarkAfter.png)
 
-* After using the command `list`, `mark 2 4 6` marks the 2nd, 4th and 6th applicant listed in RecruitIn as "Done".
-* After using the command `find n/John`, `mark 1` marks the 1st applicant listed in RecruitIn's results of the `find` command.
+* After using the command `list`, `mark 2 4 6` marks the 2nd, 4th and 6th applicant listed in RecruitIn as `Done`.
+* After using the command `find n/John`, `mark 1` marks the 1st applicant listed in RecruitIn's results of the `find` command as `Done`.
 
 
 ### Unmarking an applicant : `unmark`
 [Table of contents](#table-of-contents)
 
-Every applicant in RecruitIn will have a status of either "Done" or "Not Done".
-A "Not Done" status means that you are still handling the applicant and still need to keep their details.
-The `unmark` command unmarks the specified applicant(s) in RecruitIn by changing their status to "Not Done".
+Every applicant in RecruitIn will have a status of either `Done` or `Not Done`.
+A `Not Done` status means that you are still handling the applicant and still need to keep their details.
+The `unmark` command unmarks the specified applicant(s) in RecruitIn by changing their status to `Not Done`.
 
 Format: `unmark INDEX…​`
 
-* RecruitIn unmarks the applicant at the specified `INDEX`es to "Not Done".
+* RecruitIn unmarks the applicant at the specified `INDEX`es to `Not Done`.
 * `INDEX` refers to the number shown in RecruitIn's displayed applicants list.
 * `INDEX` **must be a positive whole number**, i.e. 1, 2, 3, …​
 * `INDEX` should not exceed the total number of applicants in RecruitIn's displayed applicants list.
 * `INDEX` in RecruitIn **starts from one**.
 * You must give at least one `INDEX`. (i.e. `unmark ` is not a valid command)
 * You cannot give duplicate `INDEX`es. (i.e. `delete 2 2` is not a valid command)
-* You cannot unmark an applicant that has status "Not Done".
+* You cannot unmark an applicant that has status `Not Done`.
 
 Examples:
-* After using the command `list`, `ummark 1` unmarks the 1st applicant listed in RecruitIn to "Not Done".
+* After using the command `list`, `ummark 1` unmarks the 1st applicant listed in RecruitIn to `Not Done`.
 
 Before: ![images](images/UnmarkBefore.png)
 
 After: ![images](images/UnmarkAfter.png)
 
-* After using the command `list`, `unmark 2 4 6` unmarks the 2nd, 4th and 6th applicant listed in RecruitIn to "Not Done".
-* After using the command `find n/John`, `unmark 1` unmarks the 1st applicant listed in RecruitIn's results of the `find` command.
+* After using the command `list`, `unmark 2 4 6` unmarks the 2nd, 4th and 6th applicant listed in RecruitIn to `Not Done`.
+* After using the command `find n/John`, `unmark 1` unmarks the 1st applicant listed in RecruitIn's results of the `find` command to `Not Done`.
 
 
 ### Deleting marked applicants : `delete_marked`
 [Table of contents](#table-of-contents)
 
-The `delete_marked` command deletes all applicants that are currently marked as done.
+The `delete_marked` command deletes all applicants that are currently marked as `Done`.
 This provides an easy way for you to delete the data of all applicants you no longer need.
 
 Format: `delete_marked`
