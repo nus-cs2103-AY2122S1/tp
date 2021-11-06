@@ -325,8 +325,6 @@ public class ModelManager implements Model {
     }
 
     /**
-     * For each person, finds orders associated with the person, and adds up the amount.
-     * Creates a ClientTotalOrder for each person.
      * Groups and sums up all orders according to their {@code Customer}s.
      * This method computes total orders based on the {@code Customer}s,
      * but each {@code Customer} is supposed to map to an existing {@code Person} (Client),

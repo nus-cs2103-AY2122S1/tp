@@ -14,7 +14,7 @@ public class TotalOrdersCommand extends Command {
             + "Example: " + COMMAND_WORD;
 
     public static final String SHOWING_TOTAL_ORDERS_MESSAGE = "Opened/Refreshed total orders window.\n"
-            + "You might need to click the icon on taskbar if you have minimized it.";
+            + "You might need to restore the window if you have minimized it.";
 
     @Override
     public CommandResult execute(Model model) {
