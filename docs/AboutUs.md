@@ -32,7 +32,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/justinhoejj.png" width="200px">
 
 [[github](http://github.com/justinhoejj)]
-[[portfolio](team/justinhoe.md)]
+[[portfolio](team/justinhoejj.md)]
 
 * Role: Developer
 * Responsibilities: UI + Repo config
@@ -42,7 +42,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/cookiedan42.png" width="200px">
 
 [[github](http://github.com/cookiedan42)]
-[[portfolio](team/daniel.md)]
+[[portfolio](team/cookiedan42.md)]
 
 * Role: Developer
 * Responsibilities: tests and documentation
@@ -52,7 +52,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/jiwei99.png" width="200px">
 
 [![github](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](http://github.com/jiwei99)
-[[portfolio](team/jiwei.md)]
+[[portfolio](team/jiwei99.md)]
 
 * Role: Developer
 * Responsibilities: In charge of Storage

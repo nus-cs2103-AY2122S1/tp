@@ -9,13 +9,13 @@ import seedu.address.model.person.FindPredicate;
 
 
 /**
- * Finds and lists all persons in address book whose details contain ALL of the argument keywords provided.
+ * Finds and lists all contacts in address book whose details contain ALL of the argument keywords provided.
  * Keyword matching is case insensitive.
  */
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
-    public static final String COMMAND_DESCRIPTION = "Finds all persons whose names contain ALL of "
+    public static final String COMMAND_DESCRIPTION = "Finds all contacts whose names contain ALL of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n";
     public static final String COMMAND_EXAMPLE = "Parameters: n/[name] ... t/[tag] ...\n"
             + "Note that users can opt for case-sensitive search on Tags by including the 'c/' flag "
