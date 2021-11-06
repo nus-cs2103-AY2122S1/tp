@@ -11,7 +11,7 @@ public class Phone {
 
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Phone numbers should only contain numbers, and it should be exactly 8 digits long";
+            "Phone numbers can start with a * or +, and it should only be 8 - 16 digits long";
     public static final String VALIDATION_REGEX = "[+*]?\\d{8,16}";
     public final String value;
 
