@@ -116,7 +116,7 @@ public class FindCommand extends Command {
         ObservableList<Person> staffs = model.getFilteredPersonList();
         int counter = 1;
         for (Person p : staffs) {
-            successMessage.append(counter).append(". ").append(p.getName()).append("\n");
+            successMessage.append(counter).append(". ").append(p.toString()).append("\n\n");
             counter++;
         }
         return new CommandResult(
@@ -128,15 +128,12 @@ public class FindCommand extends Command {
         ObservableList<Person> staffs = model.getFilteredPersonList();
         int counter = 1;
         for (Person p : staffs) {
-            successMessage.append(counter).append(". ").append(p.getName()).append("\n");
+            successMessage.append(counter).append(". ").append(p.toString()).append("\n\n");
             counter++;
         }
         return new CommandResult(
                 String.format(successMessage.toString(), model.getFilteredPersonList().size()));
     }
-
-
-
 
     /**
      * Executes a search by index.
@@ -149,7 +146,7 @@ public class FindCommand extends Command {
         ObservableList<Person> staffs = model.getFilteredPersonList();
         int counter = 1;
         for (Person p : staffs) {
-            successMessage.append(counter).append(". ").append(p.getName()).append("\n");
+            successMessage.append(counter).append(". ").append(p.toString()).append("\n\n");
             counter++;
         }
         return new CommandResult(

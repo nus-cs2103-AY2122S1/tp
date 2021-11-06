@@ -77,6 +77,10 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         try {
             if (argMultimap.getValue(PREFIX_DASH_INDEX).isPresent()) {
+                if (!ParserUtil.isValidInt(argMultimap.getValue(PREFIX_DASH_INDEX).get())) {
+                    throw new ParseException(
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+                }
                 Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_DASH_INDEX).get());
                 return new EditCommand(index, editPersonDescriptor);
             }

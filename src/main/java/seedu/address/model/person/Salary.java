@@ -10,9 +10,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Salary implements Field {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Salaries have to be a positive integer (or 0) representing the pay in dollars. Cents can be added by "
-            + "adding it after a \".\", but a positive integer (or 0) is required after the period if it is "
-            + "included.";
+            "Salaries have to be a non-negative integer representing the pay in dollars. Cents can be added by "
+            + "adding it after a \".\", but a non-negative integer is required after the period if it is "
+            + "included. The salary cannot exceed $999999.99 per hour.";
 
     public final Integer value; //
 
@@ -62,7 +62,18 @@ public class Salary implements Field {
         if (!test.matches("\\d+") || test.equals("")) {
             return false;
         }
-        int dollarInt = Integer.parseInt(test);
+
+        int dollarInt;
+        try {
+            dollarInt = Integer.parseInt(test);
+        // This exception will be caught if the integer exceeds max integer
+        } catch (NumberFormatException e) {
+            return false;
+        }
+
+        if (dollarInt > 999999) {
+            return false;
+        }
         return dollarInt >= 0;
     }
 
