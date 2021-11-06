@@ -51,13 +51,21 @@ public class UniqueApplicantList implements Iterable<Applicant> {
     }
 
     /**
+     * Returns true if the list contains applicants applying to {@code position}.
+     */
+    public boolean hasApplicantsApplyingTo(Position position) {
+        requireNonNull(position);
+        return internalList.stream().anyMatch(applicant -> applicant.isApplyingTo(position));
+    }
+
+    /**
      * Returns the applicant in the list with the specified name, if any.
      * @throws ApplicantNotFoundException if not found.
      */
-    public Applicant getApplicantByNameIgnoreCase(Name name) {
+    public Applicant getApplicantWithName(Name name) {
         requireNonNull(name);
         return internalList.stream()
-                .filter(applicant -> applicant.hasNameIgnoreCase(name))
+                .filter(applicant -> applicant.hasName(name))
                 .findFirst()
                 .orElseThrow(ApplicantNotFoundException::new);
     }

@@ -29,9 +29,9 @@ public class MarkApplicantStatusCommandParser implements Parser<MarkApplicantSta
                     MarkApplicantStatusCommand.MESSAGE_USAGE));
         }
 
-        Name name = ApplicantParserUtil.parseName(argMultimap.getPreamble());
+        Name name = ParserUtil.parseName(argMultimap.getPreamble());
         ApplicationStatus applicationStatus =
-                ApplicantParserUtil.parseApplicationStatus(argMultimap.getValue(PREFIX_STATUS).get());
+                ParserUtil.parseApplicationStatus(argMultimap.getValue(PREFIX_STATUS).get());
 
         return new MarkApplicantStatusCommand(name, applicationStatus);
     }

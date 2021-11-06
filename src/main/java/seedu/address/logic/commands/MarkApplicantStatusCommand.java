@@ -19,13 +19,15 @@ public class MarkApplicantStatusCommand extends Command {
 
     public static final String COMMAND_WORD = "mark";
 
-    public static final String MESSAGE_USAGE =
-            COMMAND_WORD + ": Updates an applicant's application status as specified. "
-            + "Parameters: NAME " + PREFIX_STATUS + "STATUS\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Updates an applicant's application status as specified. " + "\n"
+            + "Parameters: NAME " + PREFIX_STATUS + "STATUS" + "\n"
             + "Example: " + COMMAND_WORD + " John Doe " + PREFIX_STATUS + "accepted";
 
     public static final String MESSAGE_MARK_APPLICANT_STATUS_SUCCESS =
-            "Updated applicant '%1$s''s status to: %2$s.";
+            "Updated the status of applicant '%1$s' to: %2$s.";
+    public static final String MESSAGE_APPLICANT_STATUS_UNCHANGED =
+            "Applicant '%1$s' already has status: %2$s.";
     public static final String MESSAGE_NO_SUCH_APPLICANT_WITH_NAME =
             "There is no applicant with name: '%1$s' in MrTechRecruiter.";
 
@@ -47,9 +49,13 @@ public class MarkApplicantStatusCommand extends Command {
 
         Applicant applicantToUpdate;
         try {
-            applicantToUpdate = model.getApplicantByNameIgnoreCase(name);
+            applicantToUpdate = model.getApplicantWithName(name);
         } catch (ApplicantNotFoundException e) {
             throw new CommandException(String.format(MESSAGE_NO_SUCH_APPLICANT_WITH_NAME, name));
+        }
+
+        if (applicantToUpdate.hasApplicationStatus(applicationStatus)) {
+            throw new CommandException(String.format(MESSAGE_APPLICANT_STATUS_UNCHANGED, name, applicationStatus));
         }
 
         memento.record(model.getCopiedModel());

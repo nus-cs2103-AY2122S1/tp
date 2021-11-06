@@ -14,13 +14,13 @@ public class AddPositionCommand extends Command {
     public static final String COMMAND_WORD = "add-position";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Adds a position to the MTR system. "
+            + ": Adds a position to the MTR system. " + "\n"
             + "Parameters: "
             + PREFIX_TITLE + "TITLE "
             + PREFIX_DESCRIPTION + "DESCRIPTION " + "\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TITLE + "software engineer "
-            + PREFIX_DESCRIPTION + "writes code everyday :/ ";
+            + PREFIX_DESCRIPTION + "writes code everyday :/";
 
 
     public static final String MESSAGE_SUCCESS = "New position added: %1$s";
