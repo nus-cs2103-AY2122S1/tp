@@ -826,7 +826,7 @@ Expected: No module is added. Error details are shown in the status message.
 Expected: Similar to previous.
 
 
-## **Appendix C: Instructions for manual testing**
+## **Appendix C: Effort**
 
 If the effort required to create AB3 is 100, we would place the effort required to implement the current version of NUS Mod Tracker at 120. We currently has over 10,000 lines of code contributed and over 300 automated tests. Below, we list some changes that need a significant amount of effort to implement.
 
