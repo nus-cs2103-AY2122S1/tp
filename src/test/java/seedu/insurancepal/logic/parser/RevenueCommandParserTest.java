@@ -39,7 +39,8 @@ public class RevenueCommandParserTest {
     @Test
     public void parse_invalidRevenue_throwsParseException() {
         // no leading and trailing whitespaces
-        assertParseFailure(parser, "1 r/iudsiu8w", INVALID_REVENUE_COMMAND_FORMAT);
+        assertParseFailure(parser, "1 r/iudsiu8w", String.format(INVALID_REVENUE_COMMAND_FORMAT,
+                RevenueCommand.COMMAND_WORD));
     }
 
     @Test
