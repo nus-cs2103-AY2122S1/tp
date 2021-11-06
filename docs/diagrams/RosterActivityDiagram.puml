@@ -1,0 +1,33 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:CSO executes the roster
+command with the relevant
+lesson index;
+
+:Tuitione starts to parse
+and check the validity of
+the lesson index entered;
+
+
+if () then ([valid LESSON_INDEX])
+        :Lesson &
+        student list
+        filtered by
+        the specified
+        lesson;
+
+        :UI updated with
+        roster applied;
+
+else ([invalid LESSON_INDEX])
+        :Tuitione
+        informs CSO
+        of the incorrect
+        lesson index input;
+endif
+
+stop
+
+@enduml
