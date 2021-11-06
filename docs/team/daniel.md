@@ -29,6 +29,8 @@ Given below are my contributions to the project.
   * Wrote test cases for handling `Tag` command
 
 * **Documentation**:
+  * User Guide:
+    * Did cosmetic and grammatical tweaks to existing documentation of features: [\#192]()
   * Developer Guide:
     * Added user stories for versions 1.1 and 1.2 (Pull requests [\#13](), [\#35]())
     * Product scope for version 1.2 (Pull request [#39]())
