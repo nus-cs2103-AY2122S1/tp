@@ -110,6 +110,15 @@ public class EditPersonDescriptorBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code isProfile} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withIsProfile(boolean isProfile) {
+        descriptor.setIsProfile(isProfile);
+        return this;
+    }
+
+
     public EditPersonDescriptor build() {
         return descriptor;
     }
