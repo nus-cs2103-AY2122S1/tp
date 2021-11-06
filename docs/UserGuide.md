@@ -27,32 +27,56 @@ Welcome to the _TutAssistor User Guide_! Simply choose a topic below to find ans
    2.2 [Try it yourself!](#22-try-it-yourself)
 
 3. <details open><summary><a href="#3-features">Features</a></summary>
+
    3.1 <a href="#31-add-studenttuition-class">Add student/class</a><br>
+
    3.2 <a href="#32-view-studenttuition-class">View student/class</a><br>
+
    3.3 <a href="#33-edit-studenttuition-class">Edit student/class</a><br>
+
    3.4 <a href="#34-delete-studenttuition-class">Delete student/class</a><br>
+
    3.5 <a href="#35-addremove-student-from-class">Move student</a><br>
+
    3.6 <a href="36-add-remark-to-studenttuition-class">Add remark</a><br>
+
    3.7 <a href="#37-find-studenttuition-class">Find students/classes</a><br>
+
    3.8 <a href="#38-list-all-studentstuition-classes">List students/classes</a><br>
+
    3.9 <a href="#39-sort-tuition-classes-sort--s">Sort classes</a><br>
+
    3.10 <a href="#310-view-timetable-timetable--tt">View timetable</a><br>
+
    3.11 <a href="#311-view-todays-classes-today--td">View today's classes</a><br>
+
    3.12 <a href="#312-view-help-help--h">View help</a><br>
+
    3.13 <a href="#313-navigate-input-history">Navigate Input History</a><br>
+
    3.14 <a href="#314-clear-data-clear">Clear data</a><br>
+
    3.15 <a href="#315-exit-the-app-exit">Exit the program</a><br>
+
    3.16 <a href="#316-track-payment-coming-in-v20">Track payment `coming in v2.0`</a><br></details>
 
-4. <details open><summary><a href="#4-additional-command-format-information">Additional Command Format Information</a></summary>
+
+5. <details open><summary><a href="#4-additional-command-format-information">Additional Command Format Information</a></summary>
+   
    4.1 <a href="#41-name">Name</a><br>
+
    4.2 <a href="#42-phone-number">Phone Number</a><br>
+
    4.3 <a href="#43-email">Email</a><br>
+
    4.4 <a href="#44-timeslot">Timeslot</a><br>
+
    4.5 <a href="#45-index">Index</a><br></details>
 
-5. [FAQ](#5-faq)
-6. [Command Summary](#6-command-summary)
+
+7. [FAQ](#5-faq)
+
+8. [Command Summary](#6-command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
