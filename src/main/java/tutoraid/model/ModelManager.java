@@ -226,6 +226,7 @@ public class ModelManager implements Model {
                 lesson.removeStudent(student);
             }
         }
+        updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
     }
 
     //=========== Filtered Student List Accessors =============================================================
