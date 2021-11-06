@@ -1,0 +1,101 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddAllocCommandParser" as AddAllocCommandParser LOGIC_COLOR
+participant "allocDescriptor\n:AllocDescriptor" as AllocDescriptor LOGIC_COLOR
+participant "addAllocCommand\n:AddAllocCommand" as AddAllocCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant "groupToEdit\n:Group" MODEL_COLOR
+end box
+
+[-> LogicManager : execute("addalloc \n-g T01A -n Zhiying")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("addalloc \n-g T01A -n Zhiying")
+activate AddressBookParser
+
+create AddAllocCommandParser
+AddressBookParser -> AddAllocCommandParser
+activate AddAllocCommandParser
+
+AddAllocCommandParser --> AddressBookParser
+deactivate AddAllocCommandParser
+
+AddressBookParser -> AddAllocCommandParser : parse("-g T01A -n Zhiying")
+activate AddAllocCommandParser
+
+create AllocDescriptor
+AddAllocCommandParser -> AllocDescriptor
+activate AllocDescriptor
+
+AllocDescriptor --> AddAllocCommandParser : allocDescriptor
+deactivate AllocDescriptor
+
+create AddAllocCommand
+AddAllocCommandParser -> AddAllocCommand : AddAllocCommand(allocDescriptor)
+activate AddAllocCommand
+
+AddAllocCommand --> AddAllocCommandParser : addAllocCommand
+deactivate AddAllocCommand
+
+AddAllocCommandParser --> AddressBookParser : addAllocCommand
+deactivate AddAllocCommandParser
+
+destroy AllocDescriptor
+
+'hidden arrow to position destroy marker
+Model -[hidden]->
+destroy AddAllocCommandParser
+
+AddressBookParser --> LogicManager : addAllocCommand
+deactivate AddressBookParser
+
+'hidden arrow to position destroy marker
+Model -[hidden]->
+destroy AddressBookParser
+
+LogicManager -> AddAllocCommand : execute()
+activate AddAllocCommand
+
+AddAllocCommand -> Model : getGroupList()
+AddAllocCommand -> Model : getStudentList()
+
+AddAllocCommand -> AddAllocCommand : getAllocGroup()
+activate AddAllocCommand
+
+AddAllocCommand --> AddAllocCommand : groupToEdit
+deactivate AddAllocCommand
+
+'hidden arrow to add extra spacing
+Model -[hidden]->
+
+AddAllocCommand -> AddAllocCommand : getAllocStudents()
+activate AddAllocCommand
+
+AddAllocCommand --> AddAllocCommand : studentToEdit
+deactivate AddAllocCommand
+
+AddAllocCommand -> "groupToEdit\n:Group" : addStudent()
+AddAllocCommand -> Model : setStudent()
+
+create CommandResult
+AddAllocCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddAllocCommand
+deactivate CommandResult
+
+AddAllocCommand --> LogicManager
+deactivate AddAllocCommand
+
+[<--LogicManager
+deactivate LogicManager
+
+@enduml
