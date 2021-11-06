@@ -403,21 +403,30 @@ Step 7. CONNECTIONS `UI` will observe a change in the `ObservableList<Person>` a
     * Cons: Harder to implement and maintain.
     
 ### Mailing List feature
-Allows user to download a CSV file mailing list of the current view
-Users can use arguments to specify which fields to include in their download
+Allows user to download a CSV file mailing list of the current view.  
+Users can use arguments to specify which fields to include in their download.
 
 #### Implementation
 Given below is an example usage scenario and how the Mailing List mechanism behaves at each step.
 
-Step 1. The user filters the contacts using other commands, eg. `find`.
+Step 1. The user filters the contacts using other commands, eg. `find`.  
+Step 2. The `FilteredList` in `Model` is updated.  
+Step 3. The UI is updated to reflect this new state.  
+Step 4. The user provides a series of prefixes to `mailingList` to pick the fields. If no arguments are provided, default selectors are used.  
+Step 5. These `Prefix` arguments are stored in `Model`.  
+Step 6. The user is prompted to pick the name and download location of their generated CSV file.  
+Step 7. The `FilteredList`, `Prefixes` and `Path` are passed to `CsvUtil#modelToCsv`, which will serialize and write the CSV file.   
+![MailingListSequenceDiagram](images/MailingListSequenceDiagram.png)  
+Step 8. The header row is created based on `Prefix` arguments stored in `Model`, based on a mapping in `CsvUtil`.  
+Step 9. Individual rows are generated based on the `Prefix` arguments stored in `Model` and the `FilteredPerson` in `ModelManager`, based on a mapping in `CsvUtil`.  
+Step 10. The headers and rows are written to the CSV file that is specified by the user.  
 
-Step 2. The user provides a series of prefixes to `mailingList` to pick the fields. If no arguments are provided, default selectors are used.
 
-Step 3. The user is prompted to pick the name and download location of their generated CSV file.
+
 
 #### Design considerations:
 * Arguments for the command should follow the standard used in other parts of the software.
-* Balancing between simplicity of use when no arguments are provided, and customisability for users who might want additional information.
+* Balancing between simplicity of use when no arguments are provided, and flexibility for users who might want additional information.
 
 ### [Proposed] Partial data recovery feature
 Allows user to recover partial data in event of corruption in data file. 

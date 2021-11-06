@@ -25,8 +25,8 @@ public class MailingListCommand extends Command {
             + "[" + PREFIX_PHONE + "] "
             + "[" + PREFIX_EMAIL + "] "
             + "[" + PREFIX_ADDRESS + "] "
-            + "[" + PREFIX_TAG + "] "
-            + "[" + PREFIX_BIRTHDAY + "] \n"
+            + "[" + PREFIX_BIRTHDAY + "] "
+            + "[" + PREFIX_TAG + "] \n"
             + "Default export is Phone numbers and Email addresses.\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_PHONE + " " + PREFIX_EMAIL;
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": " + COMMAND_DESCRIPTION + COMMAND_EXAMPLE;
