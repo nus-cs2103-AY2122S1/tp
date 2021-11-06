@@ -17,9 +17,6 @@ Class Timing
 Class Student
 }
 
-Class HiddenOutside #FFFFFF
-HiddenOutside --> Lesson
-
 Lesson *--> "1" Capacity
 Lesson *--> "1" LessonName
 Lesson *--> "1" Price

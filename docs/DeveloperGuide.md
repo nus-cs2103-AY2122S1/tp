@@ -133,7 +133,6 @@ Each `Lesson` and `Student` object consists of fields as shown in the class diag
 ![](images/StudentClassDiagram.png)
 ![](images/LessonClassDiagram.png)
 
-Note that the `Student` and `Lesson` classes have dependencies through `LessonName` and `StudentName`, rather than storing `Lesson` and `Student` directly. This should be addressed in subsequent iterations to improve the use of OOP. It suffices for now as this information in the model is only used by the `Ui` to display the names of students or lessons.
 
 ### Storage component
 
