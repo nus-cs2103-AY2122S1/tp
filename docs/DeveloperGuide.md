@@ -650,13 +650,24 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+1. Deleting a student that at a negative index.
+   1. Prerequisites: List all students using the `liststu` command. Multiple students in the list.
+   1. Test case: `deletestu -5`<br>
+      Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
+   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Prerequisites: None
 
-1. _{ more test cases …​ }_
+   2. Test case: JSON file missing.<br>
+
+      Expected: ClassMATE gives warning about missing storage, and creates a new storage file populated with sample data.
+
+   3. Test case: JSON file corrupted
+
+      Expected: ClassMATE gives warning about corrupted data, and creates a new storage file populated with sample data.
