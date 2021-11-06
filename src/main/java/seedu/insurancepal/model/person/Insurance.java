@@ -3,7 +3,6 @@ package seedu.insurancepal.model.person;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import java.util.stream.LongStream;
 
 import seedu.insurancepal.commons.exceptions.IllegalValueException;
 
