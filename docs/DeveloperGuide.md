@@ -214,35 +214,35 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo
-history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the
+The proposed undo/redo mechanism is facilitated by `VersionedProgrammerError`. It extends `ProgrammerError` with an undo/redo
+history, stored internally as an `programmerErrorStateList` and `currentStatePointer`. Additionally, it implements the
 following operations:
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()`
+* `VersionedProgrammerError#commit()` — Saves the current address book state in its history.
+* `VersionedProgrammerError#undo()` — Restores the previous address book state from its history.
+* `VersionedProgrammerError#redo()`
 * ores a previously undone address book state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()`
-and `Model#redoAddressBook()` respectively.
+These operations are exposed in the `Model` interface as `Model#commitProgrammerError()`, `Model#undoProgrammerError()`
+and `Model#redoProgrammerError()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the
+Step 1. The user launches the application for the first time. The `VersionedProgrammerError` will be initialized with the
 initial address book state, and the `currentStatePointer` pointing to that single address book state.
 
 ![UndoRedoState0](images/commands/UndoCommand/UndoRedoState0.png)
 
 Step 2. The user executes `delete 5` command to delete the 5th student in the address book. The `delete` command
-calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes
-to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book
+calls `Model#commitProgrammerError()`, causing the modified state of the address book after the `delete 5` command executes
+to be saved in the `programmerErrorStateList`, and the `currentStatePointer` is shifted to the newly inserted address book
 state.
 
 ![UndoRedoState1](images/commands/UndoCommand/UndoRedoState1.png)
 
 Step 3. The user executes `add n/David …​` to add a new student. The `add` command also
-calls `Model#commitAddressBook()`, causing another modified address book state to be saved into
-the `addressBookStateList`.
+calls `Model#commitProgrammerError()`, causing another modified address book state to be saved into
+the `programmerErrorStateList`.
 
 ![UndoRedoState2](images/commands/UndoCommand/UndoRedoState2.png)
 
@@ -251,7 +251,7 @@ the `addressBookStateList`.
 </div>
 
 Step 4. The user now decides that adding the student was a mistake, and decides to undo that action by executing
-the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer`
+the `undo` command. The `undo` command will call `Model#undoProgrammerError()`, which will shift the `currentStatePointer`
 once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 ![UndoRedoState3](images/commands/UndoCommand/UndoRedoState3.png)
@@ -269,7 +269,7 @@ The following sequence diagram shows how the undo operation works:
 
 </div>
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once
+The `redo` command does the opposite — it calls `Model#redoProgrammerError()`, which shifts the `currentStatePointer` once
 to the right, pointing to the previously undone state, and restores the address book to that state.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the CS2100 TA rather than attempting to perform the redo.
@@ -277,13 +277,13 @@ to the right, pointing to the previously undone state, and restores the address 
 </div>
 
 Step 5. The CS2100 TA then decides to execute the command `list`. Commands that do not modify the address book, such
-as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`.
-Thus, the `addressBookStateList` remains unchanged.
+as `list`, will usually not call `Model#commitProgrammerError()`, `Model#undoProgrammerError()` or `Model#redoProgrammerError()`.
+Thus, the `programmerErrorStateList` remains unchanged.
 
 ![UndoRedoState4](images/commands/UndoCommand/UndoRedoState4.png)
 
-Step 6. The CS2100 TA executes `purge`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not
-pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be
+Step 6. The CS2100 TA executes `purge`, which calls `Model#commitProgrammerError()`. Since the `currentStatePointer` is not
+pointing at the end of the `programmerErrorStateList`, all address book states after the `currentStatePointer` will be
 purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern
 desktop applications follow.
 
@@ -409,9 +409,9 @@ The mechanism is as described below:
   index and creates a `ShowCommandResult` with the student identified.
 
 
-* `MainWindow` receives the `ShowCommandResult` and displays the information and lab results of the identifed student.
+* `MainWindow` receives the `ShowCommandResult` and displays the information and lab results of the identified student.
 
-Step 2. The CS2100 TA key in `show 2`: The side panel is updated with the information and lab results of the student at index
+Step 2. The CS2100 TA keys in `show 2`: The side panel is updated with the information and lab results of the student at index
 2
 
 Step 3. The CS2100 TA key in `show 3`: ProgrammerError will show an error message in the `resultDisplay`, warning the user
