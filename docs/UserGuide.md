@@ -7,10 +7,14 @@ title: User Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always"></div>
+
 ## **Introduction**
 
 <div align="center">
-  <img alt="logo" src="images/logo.png">
+  <img alt="logo" src="images/logo.png"
+        width="500"
+        height="500">
 </div>
 
 Welcome and thank you for downloading **FAST**! Are you a financial advisor having troubles managing your contacts
