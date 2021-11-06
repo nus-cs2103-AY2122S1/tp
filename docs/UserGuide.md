@@ -174,6 +174,20 @@ Welcome to TutorAid's beginner's tutorial! Here, you will learn how you can use 
 If this is your first time launching TutorAid, you will be able to see that some sample data has been provided to you. For this tutorial, let's assume that you tutor the student(s) 
 shown in the Student Panel and that you offer the lesson(s) shown in the Lesson Panel. 
 
+### Step 1: Adding a student
+{:.no_toc}
+First, imagine a new student, John Yeo, has just approached you for your tutoring services, and you wish to record down his students details in TutorAid so that you can keep track of his details and refer to them when needed. Furthermore, John Yeo has also given you the following details:
+* John's phone number: 98765432
+* John's parent's name: Mary Yeo
+* John's parent's phone number: 81234567
+
+You can then easily add his data to TutorAid by following the steps below:
+1. Key in `add -s sn/John Yeo sp/98765432 pn/Mary Yeo pp/81234567` into the command box. 
+> :bulb: If John did not provide you with his phone number, parent's name and parent's phone number, you can still add his student details to TutorAid by keying in `add -s sn/John Yeo` into the command box, since those are optional details for you to include in the command.
+2. Upon pressing enter, all specified details belonging to John Yeo will be added and stored in TutorAid.
+
+Now, the Student Panel will be updated accordingly with John's details. If you do not see John's details on your screen, you can either scroll down the Student Panel to find his details, or enter the command `find -s John Yeo` to display only his details in the Student Panel.
+
 ### Step 2: Adding a lesson
 {:.no_toc}
 Now that you've added your first student (and perhaps a few others too), let's add some Lessons to TutorAid. In this tutorial, we will be adding a lesson named History 1 into TutorAid by performing the steps below:
@@ -351,7 +365,7 @@ Format: `add -l n/LESSON_NAME [c/LESSON_CAPACITY] [p/LESSON_PRICE] [t/LESSON_TIM
 * Duplicate lessons cannot be added. A lesson counts as a duplicate if it has the same lesson name as an existing lesson. Letter case is ignored when determining if two lesson names are the same.
 * If provided, the lesson's capacity must be a **positive integer** 1, 2, 3, …
 * If provided, the lesson's price must be a **non-negative number** with either 0 or 2 decimal places. Examples of a valid price are `80` and `85.50`.
-* The lesson's timing can be anything you want (other than hyphens and slashes) - you could use it to remind yourself what time your lesson is, but you can use this space for any remarks or reminders you may have.
+* The lesson's timing can be anything you want - you could use it to remind yourself what time your lesson is, but you can use this space for any remarks or reminders you may have.
 
 Examples:
 * `add -l n/P6 Maths c/20 p/80 t/Monday 1200-1400` adds a lesson with name `P6 Maths`, capacity of `20 students`, price of `$80` and timing `Monday 1200-1400`.
@@ -381,7 +395,7 @@ Format: `edit -l LESSON_INDEX [n/LESSON_NAME] [c/LESSON_CAPACITY] [p/LESSON_PRIC
 * If provided, the lesson name should only contain alphanumeric characters and spaces.
 * If provided, the lesson's capacity must be a **positive integer** 1, 2, 3, …
 * If provided, the lesson's price must be a **non-negative number** with either 0 or 2 decimal places. Examples of a valid price are `80` and `85.50`.
-* * The lesson's timing can be anything you want (other than hyphens and slashes) - you could use it to remind yourself what time your lesson is, but you can use this space for any remarks or reminders you may have.
+* The lesson's timing can be anything you want - you could use it to remind yourself what time your lesson is, but you can use this space for any remarks or reminders you may have.
 * At least 1 out of 4 optional fields must be provided.
 
 > :bulb: After you run this command, the Student Panel will only show students who are taking this lesson. Don't worry: you can easily find your students again using the [`list -a`](#listing-all-students-and-lessons-list) command.

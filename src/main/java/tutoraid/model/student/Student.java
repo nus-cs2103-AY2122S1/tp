@@ -194,8 +194,9 @@ public class Student {
                 .append(getParentPhone());
         builder.append("\nProgress: ")
                 .append(getLatestProgress())
-                .append("; Lessons: ")
-                .append(getLessons());
+                .append("\nLessons: ")
+                .append(getLessons())
+                .append("\n");
         return builder.toString();
     }
 
