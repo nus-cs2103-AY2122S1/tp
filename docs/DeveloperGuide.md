@@ -572,7 +572,7 @@ Same as UC02P but references to patient is replaced with doctor instead.
 
        Use case ends.
 
-**Use case: UC03P Finding doctors** <br>
+**Use case: UC03D Finding doctors** <br>
 **Precondition:** PlannerMD is displaying the doctor tab.
 
 Same as UC02P but references to patient is replaced with doctor instead.
@@ -599,8 +599,6 @@ Same as UC02P but references to patient is replaced with doctor instead.
     * 2a1. PlannerMD shows an error message.
 
       Use case resumes at step 1.
-  
-  Use case ends.
 
 **Use case: UC04D Deleting a doctor** <br>
 **Precondition:** PlannerMD is displaying the doctor tab.
@@ -629,7 +627,7 @@ Same as UC04P but with the following changes:
 
 * 2a. The given index is invalid.
 
-    * 3a1. PlannerMD shows an error message.
+    * 2a1. PlannerMD shows an error message.
 
       Use case resumes at step 2.
 
@@ -734,13 +732,13 @@ Same as UC07P but with the following changes:
 
 * 2a. The given index is invalid.
 
-    * 3a1. PlannerMD shows an error message.
+    * 2a1. PlannerMD shows an error message.
 
       Use case resumes at step 2.
 
 * 2b. The given tag is non-existent.
 
-    * 3b1. PlannerMD shows an error message.
+    * 2b1. PlannerMD shows an error message.
 
       Use case resumes at step 2.
 
