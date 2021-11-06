@@ -59,7 +59,7 @@ meetings. It is optimized for use via a Command Line Interface (CLI) while still
 Managing your leads has never been easier.
 
 ### 1.1 Reading this User Guide
-When reading our User Guide, here are some important information to take note of.
+When reading our User Guide, here are some important information to take note.
 
 ### 1.1.1 Icons and its meaning
 
@@ -228,8 +228,10 @@ Adds a new client to the address book.
 
 **Expected Outcome:** <br>
 For instance, if the command `add n/Keith e/keithtan@ymail.com p/12345678 r/4` was used, a new client will be recorded in the client list view with the corresponding attributes. <br> 
+<p align="center" >
 <img src="images/ExpectedAddCommand.png" width="400"/>
-
+</p> 
+   
 ### 5.2 Retrieve Particular Contact : `view`
 
 View client's information in detail.
@@ -240,8 +242,9 @@ View client's information in detail.
 
 **Expected Outcome:** <br>
 For instance, if `Alex Yeoh` is the client with client ID 1, the following will be shown in the client info view of LeadsForce when `view 1` is entered into the command box. <br>
-<img src="images/ClientInfoView.png" width="400"/>
-
+<p align="center" >
+<img src="images/ClientInfoView.png" width="500"/>
+</p> 
 
 ### 5.3 Update Existing Contact : `edit`
 
@@ -258,8 +261,9 @@ Update the attributes of existing users using the tag of the client’s attribut
 
 **Expected Outcome:** <br>
 The corresponding information will be changed to the attributes specified by the client. This change can be seen in the client list view. For instance, the command `edit 3 p/12345678 r/5` will change client's 3 information as such. <br>
-<img src="images/ExpectedEditCommand.png" width="400"/>
-
+<p align="center" >
+<img src="images/ExpectedEditCommand.png" width="500"/>
+</p> 
 
 ### 5.4 Delete particular contact : `delete`
 
@@ -296,10 +300,12 @@ Sorts clients in order based on the inputted attribute. Clients can be sorted as
 
 
 **Expected Outcome:** <br>
-For instance, the command `sort r/ASC` sorts users by their risk appetite in ascending order. <br>
-<img src="images/ExpectedSortCommand.png" width="600"/> <br> 
+For instance, the command `sort r/ASC` sorts users by their risk appetite in ascending order. <br> <p align="center" >
+   <img src="images/ExpectedSortCommand.png" width="600"/> </p> <br> 
 On the other hand, using the command `sort r/dsc` will sort users by their risk appetite in descending order instead as shown. <br>
-<img src="images/ExpectedSortCommand_DSC.png" width="600"/> <br>
+<p align="center" >
+   <img src="images/ExpectedSortCommand_DSC.png" width="600"/>
+</p><br>
 
 ### 5.7 Find meeting schedule : `schedule`
 
@@ -314,7 +320,7 @@ Finds the meeting schedule on a specified date.
 For instance, using `schedule 30-11-2021` will produce the following result. <br>
 | Before | After |
 | --- | --- |
-| <img src="images/ExpectedEditCommand.png" width="400"/> | <img src="images/ExpectedEditCommand_AFTER.png" width="400"/> |
+| <img src="images/ExpectedScheduleCommand.png" width="500"/> | <img src="images/ExpectedScheduleCommand_AFTER.png" width="500"/> |
 
 ### 5.8 Locating clients by keywords : `search`
 
@@ -329,7 +335,7 @@ Finds clients whose contacts match with the given keywords.
 For instance, using `search Alex` will produce the following result. <br>
 | Before | After |
 | --- | --- |
-| <img src="images/ExpectedSearchCommand.png" width="400"/> | <img src="images/ExpectedSearchCommand_AFTER.png" width="400"/> |
+| <img src="images/ExpectedSearchCommand.png" width="500"/> | <img src="images/ExpectedSearchCommand_AFTER.png" width="500"/> |
 
 
 ### 5.9 Filter current list by keywords : `filter`
@@ -347,7 +353,7 @@ Filters the current list by the given keywords.
 For instance, using `filter t/colleagues` will produce the following result.
 | Before | After |
 | --- | --- |
-| <img src="images/ExpectedFilterCommand.png" width="400"/> | <img src="images/ExpectedFilterCommand_AFTER.png" width="400"/> |
+| <img src="images/ExpectedFilterCommand.png" width="500"/> | <img src="images/ExpectedFilterCommand_AFTER.png" width="500"/> |
 
 ### 5.10 Clearing all entries : `clear`
 
@@ -418,17 +424,20 @@ For instance, using `ab switch youngadults` when on the `newAddressBook` address
 
 | Before | After |
 | --- | --- |
-| <img src="images/ExpectedSwitchAbCommand.png" width="500"/> | <img src="ExpectedSwitchAbCommand_AFTER.png" width="500"/> |
+| <img src="images/ExpectedSwitchAbCommand.png" width="500"/> | <img src="images/ExpectedSwitchAbCommand_AFTER.png" width="500"/> |
 
 ### 6.4 List all address book : `ab list`
 
-List all the name of all the existing address books
+List all the name of all the existing address books. 
 
 | Format | `ab list` |
-
-#### Expected Outcome:
-##### If you have 2 address books named `newAddressBook` and `YoungAdults`, here's the output from the command view. <br> 
+| ------ | --------- |
+   
+**Expected Outcome:** <br>
+If you have 2 address books named `newAddressBook` and `YoungAdults`, here's the output from the command result view.
+<p align="center"> 
 <img src="images/ExpectedAbListCommand.png" width="500"/>
+</p><br> 
 --------------------------------------------------------------------------------------------------------------------
 
 ## 7. FAQ
