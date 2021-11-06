@@ -174,6 +174,34 @@ Welcome to TutorAid's beginner's tutorial! Here, you will learn how you can use 
 If this is your first time launching TutorAid, you will be able to see that some sample data has been provided to you. For this tutorial, let's assume that you tutor the student(s) 
 shown in the Student Panel and that you offer the lesson(s) shown in the Lesson Panel. 
 
+### Step 1: Adding a student
+{:.no_toc}
+First, imagine a new student, John Yeo, has just approached you for your tutoring services, and you wish to record down his students details in TutorAid so that you can keep track of his details and refer to them when needed. Furthermore, John Yeo has also given you the following details:
+* John's phone number: 98765432
+* John's parent's name: Mary Yeo
+* John's parent's phone number: 81234567
+
+You can then easily add his data to TutorAid by following the steps below:
+1. Key in `add -s sn/John Yeo sp/98765432 pn/Mary Yeo pp/81234567` into the command box. 
+> :bulb: If John did not provide you with his phone number, parent's name and parent's phone number, you can still add his student details to TutorAid by keying in `add -s sn/John Yeo` into the command box, since those are optional details for you to include in the command.
+2. Upon pressing enter, all specified details belonging to John Yeo will be added and stored in TutorAid.
+
+Now, the Student Panel will be updated accordingly with John's details. If you do not see John's details on your screen, you can either scroll down the Student Panel to find his details, or enter the command `find -s John Yeo` to display only his details in the Student Panel.
+
+### Step 2: Adding a lesson
+{:.no_toc}
+Now that you've added your first student (and perhaps a few others too), let's add some Lessons to TutorAid. In this tutorial, we will be adding a lesson named History 1 into TutorAid by performing the steps below:
+
+1. Type `add -l n/History 1` into the command box and press enter.
+
+![](images/tutorialAddLesson1.png)
+
+2. Observe how History 1 appears in the Lesson Panel.
+3. We've added the lesson successfully, but we can continue by adding more details, such as its timing (10AM - 11AM on Mondays), price ($125.90) and capacity (10). Assuming that History 1 is the only lesson in your Lesson Panel, type the command `edit -l 1 t/10AM - 11AM on Mondays c/10`. Press Enter on your keyboard.
+4. Observe how the capacity and timing now show what you have requested.
+> :bulb: If you know what details you wish to add from the beginning, you can type `add -l n/History 1 c/10 t/10 AM - 11AM on Mondays p/125.90` to enter these details in a single command.
+5. That's it, you've added your first lesson. If you need more information, you can check out the detailed documentation of the [add lesson](#adding-a-lesson-add--l) and [edit lesson](#editing-a-lesson-edit--l) commands.
+
 ### Step 4: Adding a progress note for a student
 {:.no_toc}
 Now, imagine you have ended your 'Maths 1' lesson. You realised that one of your students, Alex Yeoh, seems to struggle with the topic 'Vectors', and you wish to take 
@@ -306,6 +334,9 @@ Format: `add -p STUDENT_INDEX PROGRESS`
 Examples:
 * `list` followed by `add -p 2 completed homework` adds `completed homework` to the 2nd student displayed in the Student Panel.
 
+> :bulb: Using this command will update the student panel to only display the edited student.
+
+
 ### Deleting progress from a student: `del -p`
 {:.no_toc}
 Removes a progress note from the student at the specified student index.
@@ -318,6 +349,8 @@ Format: `del -p STUDENT_INDEX`
 
 Examples:
 * `list` followed by `del -p 2` deletes the progress of the 2nd student displayed in the Student Panel.
+
+> :bulb: Using this command will update the student panel to only display the edited student.
 
 ## 5.2 Lesson Commands
 

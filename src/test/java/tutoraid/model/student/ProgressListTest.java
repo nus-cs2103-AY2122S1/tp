@@ -35,8 +35,8 @@ public class ProgressListTest {
         assertFalse(ProgressList.isValidProgressList(nullElements));
 
         ArrayList<String> invalidProgress = new ArrayList<>();
-        invalidProgress.add("abc"); // valid progress description
-        invalidProgress.add("exam*"); // invalid progress description
+        invalidProgress.add("exam*"); // valid progress description
+        invalidProgress.add(" "); // invalid progress description
         assertFalse(ProgressList.isValidProgressList(invalidProgress));
 
         // valid progress list
