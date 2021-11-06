@@ -24,7 +24,7 @@ import seedu.address.testutil.TypicalTransactions;
 public class RemoveFromOrderCommandTest {
 
     private Model modelWithoutOrder = new ModelManager(getTypicalInventory(), new UserPrefs(),
-            TypicalTransactions.getTypicalTransaction(),
+            TypicalTransactions.getTypicalTransactionList(),
             TypicalBookkeeping.getTypicalBookkeeping());
     private Model modelWithOrder = getModelWithOrderedDonut();
 
@@ -33,7 +33,7 @@ public class RemoveFromOrderCommandTest {
      */
     private Model getModelWithOrderedDonut() {
         Model model = new ModelManager(getTypicalInventory(), new UserPrefs(),
-                TypicalTransactions.getTypicalTransaction(),
+                TypicalTransactions.getTypicalTransactionList(),
                 TypicalBookkeeping.getTypicalBookkeeping());
         model.addItem(DONUT.updateCount(5));
         model.setOrder(new Order());

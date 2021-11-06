@@ -1,8 +1,12 @@
 package seedu.address.model;
 
 import static seedu.address.testutil.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
+
+import java.nio.file.Paths;
 
 public class UserPrefsTest {
 
@@ -17,5 +21,31 @@ public class UserPrefsTest {
         UserPrefs userPrefs = new UserPrefs();
         assertThrows(NullPointerException.class, () -> userPrefs.setInventoryFilePath(null));
     }
+
+    @Test
+    public void equals_sameObject() {
+        UserPrefs userPrefs = new UserPrefs();
+        assertTrue(userPrefs.equals(userPrefs));
+    }
+
+    @Test
+    public void unequal_notUserPrefs() {
+        UserPrefs userPrefs = new UserPrefs();
+        assertFalse(userPrefs.equals(1));
+    }
+
+    @Test
+    public void hashCodeTest() {
+        UserPrefs userPrefs = new UserPrefs();
+        assertTrue(userPrefs.hashCode() == userPrefs.hashCode());
+    }
+
+    @Test
+    public void getBookKeepingTest() {
+        UserPrefs userPrefs = new UserPrefs();
+        assertTrue(userPrefs.getBookKeepingFilePath().equals(Paths.get("data", "bookKeeping.json")));
+    }
+
+
 
 }

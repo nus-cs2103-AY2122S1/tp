@@ -1,12 +1,17 @@
 package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalItems.APPLE_PIE;
 import static seedu.address.testutil.TypicalItems.BAGEL;
 import static seedu.address.testutil.TypicalItems.getTypicalInventory;
 import static seedu.address.testutil.TypicalItems.getTypicalItems;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -57,6 +62,20 @@ public class DisplayListTest {
     }
 
     @Test
+    public void altSetItems() {
+        ObservableList<Item> itemSource = FXCollections.observableArrayList(getTypicalItems());
+        List<Item> ls = new ArrayList<>(itemSource);
+        displayList.setItems(ls);
+
+        displayList.setPredicate(x -> x.equals(APPLE_PIE));
+
+        FilteredList<Item> expectedList = new FilteredList<>(getTypicalInventory().getItemList());
+        expectedList.setPredicate(x -> x.equals(APPLE_PIE));
+
+        assertEquals(filteredList, expectedList);
+    }
+
+    @Test
     public void setPredicate_success() {
         displayList.setPredicate(x -> x.equals(APPLE_PIE));
 
@@ -64,6 +83,12 @@ public class DisplayListTest {
         expectedList.setPredicate(x -> x.equals(APPLE_PIE));
 
         assertEquals(filteredList, expectedList);
+    }
+
+    @Test
+    public void equalsTest() {
+        assertTrue(displayList.equals(displayList));
+        assertFalse(displayList.equals(2));
     }
 
     /**

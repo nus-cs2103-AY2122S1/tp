@@ -26,14 +26,14 @@ public class EndAndTransactOrderCommandTest {
     public Path temporaryFolder;
 
     private Model modelWithoutOrder = new ModelManager(getTypicalInventory(), new UserPrefs(),
-            TypicalTransactions.getTypicalTransaction(), TypicalBookkeeping.getTypicalBookkeeping());
+            TypicalTransactions.getTypicalTransactionList(), TypicalBookkeeping.getTypicalBookkeeping());
 
     /**
      * Returns a model with 5 donuts in its unclosed order
      */
     private Model getModelWithOrderedDonut(Path path) {
         UserPrefs userPrefs = new UserPrefs(path);
-        Model model = new ModelManager(getTypicalInventory(), userPrefs, TypicalTransactions.getTypicalTransaction(),
+        Model model = new ModelManager(getTypicalInventory(), userPrefs, TypicalTransactions.getTypicalTransactionList(),
                 TypicalBookkeeping.getTypicalBookkeeping());
         model.addItem(DONUT.updateCount(5));
         model.setOrder(new Order());
@@ -58,12 +58,12 @@ public class EndAndTransactOrderCommandTest {
         EndAndTransactOrderCommand command = new EndAndTransactOrderCommand();
 
         Model modelWithEmptyOrder = new ModelManager(getTypicalInventory(),
-                new UserPrefs(), TypicalTransactions.getTypicalTransaction(),
+                new UserPrefs(), TypicalTransactions.getTypicalTransactionList(),
                 TypicalBookkeeping.getTypicalBookkeeping());
         modelWithEmptyOrder.setOrder(new Order());
 
         Model modelWithoutOrder = new ModelManager(getTypicalInventory(),
-                new UserPrefs(), TypicalTransactions.getTypicalTransaction(),
+                new UserPrefs(), TypicalTransactions.getTypicalTransactionList(),
                 TypicalBookkeeping.getTypicalBookkeeping());
         CommandResult expectedResult = new CommandResult(EndAndTransactOrderCommand.MESSAGE_EMPTY_ORDER);
         assertCommandSuccess(command, modelWithEmptyOrder, expectedResult, modelWithoutOrder);
@@ -74,7 +74,7 @@ public class EndAndTransactOrderCommandTest {
         String expectedMessage = EndAndTransactOrderCommand.MESSAGE_SUCCESS;
 
         Model expectedModel = new ModelManager(getTypicalInventory(),
-                new UserPrefs(temporaryFolder.resolve("transaction.json")), TypicalTransactions.getTypicalTransaction(),
+                new UserPrefs(temporaryFolder.resolve("transaction.json")), TypicalTransactions.getTypicalTransactionList(),
                 TypicalBookkeeping.getTypicalBookkeeping());
         expectedModel.addItem(DONUT.updateCount(5));
         expectedModel.setOrder(new Order());
@@ -95,7 +95,7 @@ public class EndAndTransactOrderCommandTest {
         EndAndTransactOrderCommand command = new EndAndTransactOrderCommand();
         String expectedMessage = EndAndTransactOrderCommand.MESSAGE_SUCCESS;
 
-        TransactionList typicalTransactions = TypicalTransactions.getTypicalTransaction();
+        TransactionList typicalTransactions = TypicalTransactions.getTypicalTransactionList();
         Model expectedModel = new ModelManager(getTypicalInventory(),
                 new UserPrefs(temporaryFolder.resolve("transaction.json")), typicalTransactions,
                 TypicalBookkeeping.getTypicalBookkeeping());

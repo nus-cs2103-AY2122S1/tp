@@ -45,7 +45,7 @@ public class AddCommandTest {
 
     private ModelStubAcceptingItemAdded modelStub = new ModelStubAcceptingItemAdded();
     private ModelManager model = new ModelManager(getTypicalInventory(), new UserPrefs(),
-            TypicalTransactions.getTypicalTransaction(), TypicalBookkeeping.getTypicalBookkeeping());
+            TypicalTransactions.getTypicalTransactionList(), TypicalBookkeeping.getTypicalBookkeeping());
 
     @Test
     public void constructor_nullItem_throwsNullPointerException() {
@@ -139,7 +139,7 @@ public class AddCommandTest {
         BookKeeping bookKeeping = TypicalBookkeeping.getTypicalBookkeeping();
         bookKeeping.addCost(BAGEL.getCostPrice() * 5);
         Model expectedModel = new ModelManager(getTypicalInventory(), new UserPrefs(),
-                TypicalTransactions.getTypicalTransaction(), bookKeeping);
+                TypicalTransactions.getTypicalTransactionList(), bookKeeping);
         expectedModel.addItem(BAGEL);
         expectedModel.restockItem(BAGEL, 5);
 
@@ -158,7 +158,7 @@ public class AddCommandTest {
         BookKeeping bookKeeping = TypicalBookkeeping.getTypicalBookkeeping();
         bookKeeping.addCost(BAGEL.getCostPrice() * 5);
         Model expectedModel = new ModelManager(getTypicalInventory(), new UserPrefs(),
-                TypicalTransactions.getTypicalTransaction(), bookKeeping);
+                TypicalTransactions.getTypicalTransactionList(), bookKeeping);
         expectedModel.addItem(BAGEL);
         expectedModel.restockItem(BAGEL, 5);
 
@@ -207,7 +207,7 @@ public class AddCommandTest {
         BookKeeping bookKeeping = TypicalBookkeeping.getTypicalBookkeeping();
         bookKeeping.addCost(BAGEL.getCostPrice() * 5);
         Model expectedModel = new ModelManager(getTypicalInventory(), new UserPrefs(),
-                TypicalTransactions.getTypicalTransaction(), bookKeeping);
+                TypicalTransactions.getTypicalTransactionList(), bookKeeping);
         expectedModel.addItem(BAGEL);
         expectedModel.restockItem(BAGEL, 5);
 
@@ -227,7 +227,7 @@ public class AddCommandTest {
         BookKeeping bookKeeping = TypicalBookkeeping.getTypicalBookkeeping();
         bookKeeping.addCost(BAGEL.getCostPrice() * 5);
         Model expectedModel = new ModelManager(getTypicalInventory(), new UserPrefs(),
-                TypicalTransactions.getTypicalTransaction(), bookKeeping);
+                TypicalTransactions.getTypicalTransactionList(), bookKeeping);
         expectedModel.addItem(BAGEL);
         expectedModel.restockItem(BAGEL, 5);
 
