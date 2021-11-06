@@ -227,6 +227,80 @@ reaches the end of diagram.
 
 </div>
 
+### Edit command
+
+In the following section, we will be going through how our edit command works. Since the edit command is very similar across all person types, we will be using the `EditCustomerCommand` to illustrate how the edit command works. More information on the differences in editing `Customer`, `Employee` and `Supplier` can be found in our [User Guide](https://ay2122s1-cs2103t-t17-1.github.io/tp/UserGuide.html)
+
+#### Current Implementation
+
+{:no_toc}
+
+Editing a customer can be split into 2 steps: `Parse` and `Execute`.
+
+The sequence Diagram below illustrates the interactions within the `Logic` component for the `execute` API call.
+
+![EditCustomerCommandSequenceDiagram](images/EditCustomerCommandSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for 
+`EditCustomerCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline 
+reaches the end of diagram.
+</div>
+
+`Parse`:
+1. When `Logic` is called upon to execute `EditCustomerCommand`, it uses the `RhrhParser` class to parse the user command.
+2. The `RhrhParser` then creates an `EditCustomerCommandParser` to parse the command input.
+3. If successful, this results in an `EditCustomerCommand` object being created which will then be executed by the `LogicManager`.
+
+`Execute`:
+1. The instance of `EditCustomerCommand` created can communicate with the `Model` when it is executed to add an customer to the `UniqueCustomerList`.
+2. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+
+**Flow of execution**
+
+The activity diagram below shows the flow of execution when a user calls the `EditCustomerCommand` together with the
+details when this command is executed
+
+![EditCustomerCommandActivityDiagram](images/EditCustomerCommandActivityDiagram.png)
+
+#### Design Considerations
+
+* Current Design: We separated `EditCustomerCommmand`, `EditEmployeeCommmand` and `EditSupplierCommmand` as different
+  command types.
+    * Pros
+        * It is much neater as everything is divided based on the Person type and prefixes are easily separated based on whichever Person Type it is.
+        * Errors in user input is easier to identify due to the separation of Person type.
+
+    * Cons
+        * Additional classes have to be implemented.
+        * More commands for a similar feature.
+
+* Alternative Design: We could have a singular `EditCommand` and parse the user's input to see what Person Type the user wanted to add.
+    * Pros
+        * Fewer commands for the user to remember.
+
+    * Cons
+        * Error messages would have been confusing to select.
+
+#### Differences regarding editing reservation command
+Parsing `Reservecommand` is similar to other add commands. However, since for `Reservation`, we need some logic to check for restaurant availability, then there are some differences regarding how a `Reservecommand` is executed.
+
+The class diagram below demonstrates the class structure of `Reservecommand`.
+
+![AddReservationCommandClassDiagram](images/AddReservationCommandClassDiagram.png)
+
+The sequence diagram below shows how a valid `ReserveCommand` is executed.
+
+![AddReservationCommandSequenceDiagram](images/AddReservationCommandSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** The lifeline for
+`rm:ReservationManager` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline
+reaches the end of diagram.
+
+</div>
+
+
 ### Delete Command
 In the following section, we will be going through how our delete command works. Since the delete command is very 
 similar across all person types, we will be using the `DeleteSupplierCommand` to illustrate how the delete 
