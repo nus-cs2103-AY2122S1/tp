@@ -64,6 +64,8 @@ tasks done faster than traditional GUI apps.
 
 * Students in different modules with the same student id are treated as different students.
 
+* Tasks can be added to modules without students, but will only become visible after students have been added to the module.
+
 </div>
 
 
@@ -80,6 +82,8 @@ Examples:
 * `add module m/CS2100`: 
   * Add module CS2100 to TAB
 
+![AddModule](images/AddModule.png)
+
 ### Edit a module's name: `edit module`
 
 Edit the name of the module.<br>
@@ -91,6 +95,8 @@ Format: `edit module m/<old module name> mn/<new module name>`
 Examples:
 * `edit module m/CS2103 mn/CS2105`:
   * Edit the module name of module "CS2103" to "CS2105"
+
+![EditModule](images/EditModule.png)
 
 ### Delete a module from TAB: `delete module`
 
@@ -104,6 +110,8 @@ Examples:
   * Delete module CS2103 from TAB
 * `delete module m/CS2100`:
   * Delete module CS2100 from TAB
+
+![DeleteModule](images/DeleteModule.png)
 
 ### Add a student to a specific module: `add student`
 
@@ -125,6 +133,8 @@ Examples:
 * `add student m/CS2100 i/A0123457A n/Amy t/@amylee e/amy@u.nus.edu`:
   * Add student with id A0123457A to module CS2100
 
+![AddStudent](images/AddStudent.png)
+
 ### Edit a student's information: `edit student`
 
 Edit a student's information.<br>
@@ -144,6 +154,8 @@ Examples:
 * `edit student m/CS2100 i/A0123457A t/@amylee e/amy@u.nus.edu`:
   * Edit the tele handle and email of the student with id A0123457A in the module CS2100 to @amylee and amy@u.nus.edu respectively
 
+![EditStudent](images/EditStudent.png)
+
 ### Delete a student from a specific module: `delete student`
 
 Delete the specified student from the specified module by providing the module name and the student id.
@@ -156,9 +168,12 @@ Examples:
 * `delete student m/CS2100 i/A7654321A`:
   * Delete student with id A7654321A from module CS2100’s list of students
 
+![DeleteStudent](images/DeleteStudent.png)
+
 ### Add a new task to a module: `add task`
 
 Add a new task to the specified module by providing the module name, task id, task name, and the task deadline.<br>
+Tasks can be added to modules without students, but will only become visible after student(s) have been added to the module.<br>
 Task id must begin with a capital letter 'T', followed by a positive integer.<br>
 Task name must only contain alphanumeric characters and spaces, and it must not be blank.<br>
 Task deadline can contain either the date and time, or only the date, or only the time.<br>
@@ -172,6 +187,8 @@ Examples:
   * Add the task assignment1 with deadline 'Tue, Oct 12 2021' to module CS2103
 * `add task m/CS2100 ti/T1 a/lab1 d/2021-10-13 16:00 `:
   * Add the task lab1 with deadline 'Wed, Oct 13 2021 04:00 pm' to module CS2100
+
+![AddTask](images/AddTask.png)
 
 ### Edit a task's information: `edit task`
 
@@ -191,7 +208,9 @@ Examples:
   * Edit the name and deadline of the task with task id 'T10' to 'Final exam' and 'Tue, Nov 23 2021' respectively
 * `edit task m/CS2103 ti/T10 d/2021-11-23 17:00`: 
   * Edit only the deadline of the task with task id 'T10' to 'Tue, Nov 23 2021 5:00 pm'
-  
+
+![EditTask](images/EditTask.png)
+
 ### Delete a task from a module: `delete task`
 
 Delete the specified task from the specified module by providing the module name and the task id.<br>
@@ -205,6 +224,8 @@ Examples:
 * `delete task m/CS2105 ti/T2`: 
   * Delete the task with task id T2 from CS2105
 
+![DeleteTask](images/DeleteTask.png)
+
 ### Mark a task as done: `mark done`
 
 Mark the specified task from the specified module under the specified student as done.<br>
@@ -216,6 +237,8 @@ Examples:
 * `mark done m/CS2103 i/A1234567A ti/T1`:
   * Mark the task with id T1 under student with id A1234567A of module CS2103 as done.
   * This means that student A1234567A has completed task T1 of module CS2103.
+
+![MarkDone](images/MarkDone.png)
 
 ### Mark a task as undone: `mark undone`
 
@@ -230,6 +253,8 @@ Examples:
   * Student A1234567A has not completed task T1 of module CS2103 yet. 
   * But for some reason (e.g. human error) the task is marked as done.
 
+![MarkUndone](images/MarkUndone.png)
+
 ### Find a student: `find`
 
 Find the student in the module specified along with the student's information.
@@ -240,11 +265,15 @@ Examples:
 * `find m/CS2103 i/A0123456A`: 
   * Find and show student with id A0123456A from module CS2103
 
+![Find](images/Find.png)
+
 ### Go to homepage: `home`
 
 Return to the homepage which shows the complete list of modules and students along with their tasks.
 
 Format: `home`
+
+![Home](images/Home.png)
 
 ### Clear all information: `clear`
 
@@ -254,6 +283,8 @@ Format: `clear`
 
 <div markdown="span" class="alert alert-warning">:warning: **Caution:** Clearing is irreversible, please use with caution.
 </div>
+
+![Clear](images/Clear.png)
 
 ### Exit the application: `exit`
 
@@ -335,6 +366,6 @@ Emails should be of the format local-part@domain and adhere to the following con
 3. This is followed by a '@' and then a domain name. 
 4. The domain name is made up of domain labels separated by periods. 
 5. The domain name must:<br>
-   5.1. End with a domain label at least 2 characters long.
-   5.2. Have each domain label start and end with alphanumeric characters.
+   5.1. End with a domain label at least 2 characters long.<br>
+   5.2. Have each domain label start and end with alphanumeric characters.<br>
    5.3. Have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
