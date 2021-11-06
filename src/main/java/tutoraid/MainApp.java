@@ -69,7 +69,9 @@ public class MainApp extends Application {
                     new JsonTutorAidStudentStorage(userPrefs.getStudentBookFilePath(),
                          tutorAidLessonStorage.readLessonBook().orElseGet(SampleDataUtil::getSampleLessonBook));
         } catch (DataConversionException e) {
-            tutorAidStudentStorage = new JsonTutorAidStudentStorage(userPrefs.getStudentBookFilePath(), new LessonBook());
+            tutorAidStudentStorage = new JsonTutorAidStudentStorage(
+                    userPrefs.getStudentBookFilePath(),
+                    new LessonBook());
         }
 
         storage = new StorageManager(tutorAidStudentStorage, tutorAidLessonStorage, userPrefsStorage);

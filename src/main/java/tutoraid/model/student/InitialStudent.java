@@ -5,7 +5,6 @@ import java.util.List;
 
 import tutoraid.commons.util.CollectionUtil;
 import tutoraid.model.lesson.Lesson;
-import tutoraid.model.lesson.exceptions.LessonNotFoundException;
 
 /**
  * Represents a Student in the TutorAid.
