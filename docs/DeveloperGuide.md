@@ -197,7 +197,7 @@ This section describes noteworthy details on how certain features are implemente
 
 #### Implementation
 
-The telegram handle field is facilitated by the `Telegram` class. It is stored interally as a `String` in the data file `addressbook.json` and is then initialized as a `Telegram` object. 
+The telegram handle field is facilitated by the `Telegram` class. It is stored internally as a `String` in the data file `addressbook.json` and is then initialized as a `Telegram` object. 
 
 The `Telegram` class implements the following operation:
 
