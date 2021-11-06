@@ -8,7 +8,7 @@ participant ":UiPart" as UiPart UI_COLOR
 end box
 
 box Logic LOGIC_COLOR_T1
-participant ":Logic" as Logic LOGIC_COLOR
+participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant "<<class>> \n EditCommand" as EditCommand LOGIC_COLOR
 end box
 
@@ -18,26 +18,26 @@ activate MainWindow
 MainWindow -> MainWindow : setUserProfileInMenuBar()
 activate MainWindow
 
-MainWindow -> Logic : isProfilePresent()
-activate Logic
+MainWindow -> LogicManager : isProfilePresent()
+activate LogicManager
 
-Logic --> MainWindow
-deactivate Logic
+LogicManager --> MainWindow
+deactivate LogicManager
 
 alt Profile is Present and Profile has not been set up
 
 create UserProfileWindow
-MainWindow -> UserProfileWindow : new UserProfileInMenuBar(logic)
+MainWindow -> UserProfileWindow : new UserProfileInMenuBar(LogicManager)
 activate UserProfileWindow
 
 UserProfileWindow -> UserProfileWindow : setUserProfileOnMenuBar()
 activate UserProfileWindow
 
-UserProfileWindow -> Logic : getUserProfile()
-activate Logic
+UserProfileWindow -> LogicManager : getUserProfile()
+activate LogicManager
 
-Logic --> UserProfileWindow
-deactivate Logic
+LogicManager --> UserProfileWindow
+deactivate LogicManager
 
 UserProfileWindow --> UserProfileWindow
 deactivate UserProfileWindow
