@@ -574,7 +574,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | Event organiser with many events            | sort events by date and time       | keep track of which events occur when and prepare accordingly                  |
 | `*`      | Event organiser with many participants      | find a participant by name         | I can contact the participant to inform him of updates or changes to the event |
 
-*{More to be added}*
 
 ### Use cases
 
@@ -863,19 +862,41 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all participants using the `list` command. Multiple participants in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First participant is deleted from the list. Details of the deleted participant shown in the status message.
 
    1. Test case: `delete 0`<br>
-      Expected: No participant is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No participant is deleted. Error details shown in the status message.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+
+
+###  Deleting an Event
+
+1. Deleting an event while all events are being shown
+
+   1. Prerequisites: List all events using the `listEvents` command. Multiple events in the list.
+
+   2. Test case: `deleteEvent 1`<br>
+      Expected: First event is deleted from the list. Details of the deleted event shown in the status message.
+
+   3. Test case: `deleteEvent 0`<br>
+      Expected: No event is deleted. Error details shown in the status message.
+
+   4. Other incorrect deleteEvent commands to try: `deleteEvent`, `deleteEvent x`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+
 
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Navigate to and open `[JAR file location]/data/managera.json` in a text editor.
 
-1. _{ more test cases …​ }_
+   2. Delete one line of code at the beginning `"participants" : [ {`.
+   
+   3. Restart Managera.
+
+   4. Managera will start with no events and participants.
+
