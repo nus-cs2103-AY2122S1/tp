@@ -19,7 +19,7 @@ import seedu.address.model.person.Person;
 public class StaffStatisticsCommand extends Command {
 
     public static final String COMMAND_WORD = "stats";
-    public static final String MESSAGE_SUCCESS = "Stats:\n"
+    public static final String MESSAGE_SUCCESS = "Stats for %4$s:\n"
             + "Total salary: %1$s\n"
             + "Total work time: %2$s\n"
             + "Average work time: %3$s\n";
@@ -35,7 +35,7 @@ public class StaffStatisticsCommand extends Command {
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS,
                 totalSalary(staffList), totalWorkTime(staffList),
-                totalWorkTime(staffList) / staffList.size()));
+                totalWorkTime(staffList) / staffList.size(), getCurrentPeriod()));
     }
 
     /**
