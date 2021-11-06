@@ -1294,17 +1294,27 @@ testers are expected to do more *exploratory* testing.
 
     * Download the jar file and copy into an empty folder
 
-    * Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    * Double-click the jar file <br>
+      Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 2. Saving window preferences
 
     * Resize the window to an optimum size. Move the window to a different location. Close the window.
 
     * Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+      Expected: The most recent window size and location is retained.
 
-3. _{ more test cases …​ }_
+3. Shutdown with exit command
 
+    * Type exit into the input box. <br>
+      Expected: The application will close.
+
+4. Shutdown with context menu
+
+    * Click on file at the top left of the application window.
+
+    * Click the exit option in the dropdown menu from file. <br>
+      Expected: The application will close.
 
 #### Deleting a student
 
@@ -1498,9 +1508,9 @@ the message box to inform the user that the lesson already exists in TuitiONE.
 
 1. Incorrect addition of a lesson by passing in any incorrect input
 
-    * Expected: Addition of the particular lesson will not be applied to TuitiONE. An alert message corresponds to the 
+    * Expected: Addition of the particular lesson will not be applied to TuitiONE. An alert message corresponding to the 
 wrongly entered parameter will be shown in the message box to remind the user of the correct input parameter 
-format.<br>_Note: Only the alert message corresponds to the first encountered incorrect parameter will be shown. User is
+format.<br>_Note: Only the alert message corresponding to the first encountered incorrect parameter will be shown. User is
 expected to correct the input parameters one by one._
 
 
