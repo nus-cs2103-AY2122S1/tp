@@ -63,7 +63,7 @@ public class SearchCommandTest {
 
     @Test
     public void execute_zeroNameKeywords_noPersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, "0 students");
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(parseInput(" "));
         SearchCommand command = new SearchCommand(predicate);
         expectedModel.updateFilteredStudentList(predicate);
@@ -73,7 +73,7 @@ public class SearchCommandTest {
 
     @Test
     public void execute_multipleNameKeywords_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, "3 students");
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(parseInput("Kurz Elle Kunz"));
         SearchCommand command = new SearchCommand(predicate);
         expectedModel.updateFilteredStudentList(predicate);
@@ -83,7 +83,7 @@ public class SearchCommandTest {
 
     @Test
     public void execute_zeroIdKeywords_noPersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, "0 students");
         IdContainsKeywordsPredicate predicate = new IdContainsKeywordsPredicate(parseInput(" "));
         SearchCommand command = new SearchCommand(predicate);
         expectedModel.updateFilteredStudentList(predicate);
@@ -93,7 +93,7 @@ public class SearchCommandTest {
 
     @Test
     public void execute_multipleIdKeywords_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, "3 students");
         IdContainsKeywordsPredicate predicate =
                 new IdContainsKeywordsPredicate(parseInput("E0538201 E0582305 E0537266"));
         SearchCommand command = new SearchCommand(predicate);
@@ -104,7 +104,7 @@ public class SearchCommandTest {
 
     @Test
     public void execute_zeroGroupKeywords_noPersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, "0 students");
         GroupContainsKeywordsPredicate predicate = new GroupContainsKeywordsPredicate(parseInput(" "));
         SearchCommand command = new SearchCommand(predicate);
         expectedModel.updateFilteredStudentList(predicate);
@@ -114,7 +114,7 @@ public class SearchCommandTest {
 
     @Test
     public void execute_multipleGroupKeywords_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, "3 students");
         GroupContainsKeywordsPredicate predicate = new GroupContainsKeywordsPredicate(parseInput("R03A R01C"));
         SearchCommand command = new SearchCommand(predicate);
         expectedModel.updateFilteredStudentList(predicate);
@@ -124,7 +124,7 @@ public class SearchCommandTest {
 
     @Test
     public void execute_zeroTagKeywords_noPersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, "0 students");
         TagContainsKeywordsPredicate predicate = new TagContainsKeywordsPredicate(parseInput(" "));
         SearchCommand command = new SearchCommand(predicate);
         expectedModel.updateFilteredStudentList(predicate);
@@ -134,7 +134,7 @@ public class SearchCommandTest {
 
     @Test
     public void execute_singleTagKeyword_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, "3 students");
         TagContainsKeywordsPredicate predicate = new TagContainsKeywordsPredicate(parseInput("friends"));
         SearchCommand command = new SearchCommand(predicate);
         expectedModel.updateFilteredStudentList(predicate);

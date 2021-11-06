@@ -8,26 +8,12 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.util.StringConverter;
-import seedu.address.model.student.Score;
 
 /**
  * Creates JavaFX charts
  */
 public class ChartUtil {
     private static final double DEFAULT_TICK_UNIT = 5.0;
-    private static final StringConverter<Number> CUSTOM_TICK_LABEL_FORMATTER = new StringConverter<>() {
-        @Override
-        public String toString(Number number) {
-            // Hide labels that are greater than max score since they only serve as padding
-            return number.doubleValue() > Score.MAX_SCORE ? "" : String.valueOf(number.intValue());
-        }
-
-        @Override
-        public Number fromString(String string) {
-            return Double.parseDouble(string);
-        }
-    };
 
     /**
      * Creates a JavaFX BarChart with the given title, axis labels and data points.
@@ -82,9 +68,8 @@ public class ChartUtil {
 
         yAxis.setAutoRanging(false);
         yAxis.setLowerBound(0);
-        yAxis.setUpperBound(104);
+        yAxis.setUpperBound(100);
         yAxis.setTickUnit(10);
-        yAxis.setTickLabelFormatter(CUSTOM_TICK_LABEL_FORMATTER);
 
         final LineChart<String, Number> lineChart = new LineChart<String, Number>(xAxis, yAxis);
         lineChart.setTitle(title);
@@ -188,11 +173,11 @@ public class ChartUtil {
 
         int numOfLines = result.size() - 1;
 
-        String wrappedString = result.get(0);
-
         if (count < words.length) {
             result.set(2, result.get(2).substring(0, 10) + "...");
         }
+
+        String wrappedString = result.get(0);
         if (numOfLines >= 1) {
             wrappedString += "\n" + result.get(1);
         }

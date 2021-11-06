@@ -61,28 +61,18 @@ public class AliasCommandParser implements Parser<AliasCommand> {
      * Checks if the provided commandWord is a valid commandWord.
      */
     private boolean isValidCommandWord(String commandWord) {
-        if (commandWord.equals("")) {
+        if (commandWord.equals("") || commandWord.contains(" ")) {
             return false;
         }
 
-        // canParse would be true if the commandWord gets recognised as a proper command
-        boolean canParse = true;
         try {
             parser.parseCommand(commandWord);
         } catch (ParseException e) {
             if (e.getMessage().equals(MESSAGE_UNKNOWN_COMMAND)) {
-                canParse = false;
+                return false;
             }
         }
 
-        int lastIndex = commandWord.lastIndexOf(" ");
-        if (lastIndex == -1) {
-            return canParse;
-        } else {
-            // to ensure that the command does not overlap with another smaller command
-            // e.g. if command word is clear hello, this is not a valid command word, but would still parse properly
-            String smallerCommand = commandWord.substring(0, lastIndex);
-            return canParse && !isValidCommandWord(smallerCommand);
-        }
+        return true;
     }
 }

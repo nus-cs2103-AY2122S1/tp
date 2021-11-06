@@ -20,14 +20,16 @@ This guide takes you through all the _latest features_ of Source Control. If you
 all the basic knowledge to [get started](#quick-start) with Source Control. If you are an experienced user,
 feel free to skip to the [command summary](#command-summary) and experiment with our more [advanced features](#setting-customised-aliases-for-commands--alias)!
 
+<br>
+
 --------------------------------------------------------------------------------------------------------------------
 
-## Table of Contents
+## **Table of Contents**
 
-* [Overview](#)
-* [Table of Contents](#table-of-contents)
-* [Quick Start](#quick-start)
-* Features
+* [**Overview**](#)
+* [**Table of Contents**](#table-of-contents)
+* [**Quick Start**](#quick-start)
+* **Features**
   * [Notes on Command Format](#features)
   * Adding Data
     * [Adding a student : `addstudent`](#adding-a-student--addstudent)
@@ -54,16 +56,16 @@ feel free to skip to the [command summary](#command-summary) and experiment with
   * Advanced Features
     * [Setting customised aliases for commands: `alias`](#setting-customised-aliases-for-commands--alias)
     * [Editing the data file](#editing-the-data-file)
-* [FAQ](#faq)
-* [Glossary](#glossary)
-* [Command Summary](#command-summary)
-* [Example Visual Aids](#example-visual-aids)
+* [**FAQ**](#faq)
+* [**Glossary**](#glossary)
+* [**Command Summary**](#command-summary)
+* [**Example Visual Aids**](#example-visual-aids)
 
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick Start
+## **Quick Start**
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
@@ -95,7 +97,7 @@ feel free to skip to the [command summary](#command-summary) and experiment with
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## **Features**
 
 <div markdown="block" class="alert alert-info">
 
@@ -371,9 +373,8 @@ Format: `import -f <file_path> [-g <number_of_group_columns>] [-a <number_of_ass
 * The next `<number_of_tag_columns>` columns, refer to the student's tags.
 * The number of group columns, assessment columns, and tag columns are assumed to be 0 if they are not specified.
 
-<div markdown="block" class="alert alert-primary">
-
-:bulb: **Tips:**<br>
+<div markdown="block" class="alert alert-info">
+**:information_source: Notes:**<br>
 
 * `<number_of_group_columns>` refers to the number of **columns** the groups occupy in the CSV file, not the number of **types** of groups.
 The similar applies for `<number_of_tag_columns>`.
@@ -441,6 +442,7 @@ Format: `exit`
 
 [Return to Table of Contents](#table-of-contents)
 
+
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
@@ -450,6 +452,7 @@ Shows a message explaining how to access the help page.
 Format: `help`
 
 [Return to Table of Contents](#table-of-contents)
+
 
 ### Accessing command history
 
@@ -475,7 +478,15 @@ Format: `alias -c <existing_command> -as <alias>`
 * Default and existing aliases can still be used after new alias is added. E.g. after `alias -c addstudent -as student`, both `student` and `addstudent` can be used.
 * The `<existing_command>` can also take any existing alias as an input. The new alias will be added as an alternative to the default command.
 * If you find that you have too many aliases, you can remove an alias by using `alias -c <alias> -as <same_alias>`.
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Notes:**<br>
+
 * The aliases created will persist between Source Control sessions, as long as the application is in the same directory as it was previously.
+* Default commands cannot be overwritten to perform different functionalities, and cannot be deleted.
+
+</div>
+
 
 Examples:
 * `alias -c addstudent -as example`
@@ -506,7 +517,7 @@ If your changes to the data file makes its format invalid, Source Control will d
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+## **FAQ**
 
 ### Double-clicking isn't opening the app! What can I do?
 Open your Command Prompt (Windows) or your Terminal (MacOS, Linux) and navigate to the folder your JAR file resides in.
@@ -539,7 +550,7 @@ as well as you alias preferences.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Glossary
+## **Glossary**
 
 Below is a table of the argument flags used in our document.
 
@@ -577,6 +588,7 @@ Group | Group name can be any alphanumeric words. | `Tutorial Group 2`
 Assessment | Assessment name can be any alphanumeric words. | `Practical Assessment 2`
 Score | Score is in percentage, recorded up to 2 decimal places. | `67.75`
 Tag | Tag can be a single alphanumeric word. | `Beginner1`
+Alias | Command alias can be a single alphanumeric word. | `addstu1`
 
 [Return to Table of Contents](#table-of-contents)
 
@@ -597,15 +609,13 @@ JSON | JavaScript Object Notation (JSON) is an open standard file format and dat
 Directory | It is where files in the computer are stored, or commonly known as folder.
 Path | A string of characters to uniquely identify the location in the computer. Absolute path starts from the root directory and relative path starts from the current working directory.
 
-
-
 [Return to Table of Contents](#table-of-contents)
 
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command Summary
+## **Command Summary**
 
 Action | Format | Examples
 --------|--------|----------
@@ -631,7 +641,7 @@ Action | Format | Examples
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Example Visual Aids
+## **Example Visual Aids**
 
 ### Addstudent Example 2
 Command: `addstudent -n Jonas Chow -i E0123456 -g T01A -g R01A` <br>
