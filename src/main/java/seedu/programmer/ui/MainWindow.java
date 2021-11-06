@@ -262,7 +262,7 @@ public class MainWindow extends UiPart<Stage> {
             return;
         }
 
-        File destinationFile = promptUserForDestination();
+        File destinationFile = promptUserForFileDestination();
         if (destinationFile == null) {
             return;
         }
@@ -379,7 +379,7 @@ public class MainWindow extends UiPart<Stage> {
      *
      * @return File object with a file name appended to the chosen directory
      */
-    public File promptUserForDestination() {
+    public File promptUserForFileDestination() {
         String destFileName = "programmerError.csv";
         DirectoryChooser dirChooser = new DirectoryChooser();
         File chosenDir = dirChooser.showDialog(primaryStage);
