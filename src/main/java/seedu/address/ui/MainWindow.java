@@ -221,7 +221,6 @@ public class MainWindow extends UiPart<Stage> {
                     if (newVal != null) {
                         logger.info("Showing lessons for " + newVal.getName());
                         handlePersonGridPanel(newVal);
-                        resultDisplay.setFeedbackToUser(String.format(ViewCommand.MESSAGE_SUCCESS, newVal.getName()));
                     }
                 });
         personListView.setOnMouseClicked(event -> handlePersonGridPanel(
