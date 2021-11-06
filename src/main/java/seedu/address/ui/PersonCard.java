@@ -102,7 +102,7 @@ public class PersonCard extends UiPart<Region> {
         }
 
         // set favBtn here based on isFavorite
-        if (person.isFavourite()) {
+        if (person.isFavorite()) {
             favBtn.setImage(FAVORITE);
         } else {
             favBtn.setImage(NOT_FAVORITE);

@@ -53,10 +53,10 @@ public class HelpWindow extends UiPart<Stage> {
     private static final String SHOW_CONTACT_FEATURE_COMMAND_V2 = "show <INDEX>";
     private static final String LIST_CONTACTS_FEATURE_NAME = "List all Contacts present";
     private static final String LIST_CONTACTS_FEATURE_COMMAND = "list";
-    private static final String FAVOURITE_CONTACT_FEATURE_NAME = "Mark a Contact as Favourite";
-    private static final String FAVOURITE_CONTACT_FEATURE_COMMAND = "fav <INDEX>";
-    private static final String UNFAVOURITE_CONTACT_FEATURE_NAME = "Mark a Contact as UnFavourite";
-    private static final String UNFAVOURITE_CONTACT_FEATURE_COMMAND = "unfav <INDEX>";
+    private static final String FAVORITE_CONTACT_FEATURE_NAME = "Mark a Contact as Favorite";
+    private static final String FAVORITE_CONTACT_FEATURE_COMMAND = "fav <INDEX>";
+    private static final String UNFAVORITE_CONTACT_FEATURE_NAME = "Mark a Contact as UnFavorite";
+    private static final String UNFAVORITE_CONTACT_FEATURE_COMMAND = "unfav <INDEX>";
     private static final String ADD_TAGS_FEATURE_NAME = "To Add Tag(s)";
     private static final String ADD_TAGS_FEATURE_COMMAND = "tag <INDEX> a/<TAG> [MORE_TAGS]";
     private static final String REMOVE_TAGS_FEATURE_NAME = "To Remove Tag(s)";
@@ -215,10 +215,10 @@ public class HelpWindow extends UiPart<Stage> {
                 SHOW_CONTACT_FEATURE_COMMAND_V2);
         CommandDetails listAllContactsCommandDetails = new CommandDetails(LIST_CONTACTS_FEATURE_NAME,
                 LIST_CONTACTS_FEATURE_COMMAND);
-        CommandDetails favouriteContactCommandDetails = new CommandDetails(FAVOURITE_CONTACT_FEATURE_NAME,
-                FAVOURITE_CONTACT_FEATURE_COMMAND);
-        CommandDetails unFavouriteContactCommandDetails = new CommandDetails(UNFAVOURITE_CONTACT_FEATURE_NAME,
-                UNFAVOURITE_CONTACT_FEATURE_COMMAND);
+        CommandDetails favoriteContactCommandDetails = new CommandDetails(FAVORITE_CONTACT_FEATURE_NAME,
+                FAVORITE_CONTACT_FEATURE_COMMAND);
+        CommandDetails unFavoriteContactCommandDetails = new CommandDetails(UNFAVORITE_CONTACT_FEATURE_NAME,
+                UNFAVORITE_CONTACT_FEATURE_COMMAND);
         CommandDetails addTagsCommandDetails = new CommandDetails(ADD_TAGS_FEATURE_NAME, ADD_TAGS_FEATURE_COMMAND);
         CommandDetails removeTagsCommandDetails = new CommandDetails(REMOVE_TAGS_FEATURE_NAME,
                 REMOVE_TAGS_FEATURE_COMMAND);
@@ -249,8 +249,8 @@ public class HelpWindow extends UiPart<Stage> {
         helpSectionCommandDetails.add(showContactByNameCommandDetails);
         helpSectionCommandDetails.add(showContactByIndexCommandDetails);
         helpSectionCommandDetails.add(listAllContactsCommandDetails);
-        helpSectionCommandDetails.add(favouriteContactCommandDetails);
-        helpSectionCommandDetails.add(unFavouriteContactCommandDetails);
+        helpSectionCommandDetails.add(favoriteContactCommandDetails);
+        helpSectionCommandDetails.add(unFavoriteContactCommandDetails);
         helpSectionCommandDetails.add(addTagsCommandDetails);
         helpSectionCommandDetails.add(removeTagsCommandDetails);
         helpSectionCommandDetails.add(addAndRemoveTagsSimultaneouslyCommandDetails);

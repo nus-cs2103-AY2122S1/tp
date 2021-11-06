@@ -25,7 +25,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.ExportCommand;
-import seedu.address.logic.commands.FavouriteCommand;
+import seedu.address.logic.commands.FavoriteCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.GithubCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -34,7 +34,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ShowCommand;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.TelegramCommand;
-import seedu.address.logic.commands.UnfavouriteCommand;
+import seedu.address.logic.commands.UnfavoriteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -78,7 +78,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_emptyArg() {
-        String userInput = FavouriteCommand.COMMAND_WORD;
+        String userInput = FavoriteCommand.COMMAND_WORD;
         String expectedOutput = userInput + MESSAGE_COMMAND_DESCRIPTION_CANNOT_BE_EMPTY;
         assertThrows(ParseException.class, expectedOutput, () -> parser.parseCommand(userInput));
     }
@@ -98,10 +98,10 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_favourite() throws Exception {
-        FavouriteCommand command = (FavouriteCommand) parser.parseCommand(FavouriteCommand.COMMAND_WORD + " "
+    public void parseCommand_favorite() throws Exception {
+        FavoriteCommand command = (FavoriteCommand) parser.parseCommand(FavoriteCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new FavouriteCommand(INDEX_FIRST_PERSON), command);
+        assertEquals(new FavoriteCommand(INDEX_FIRST_PERSON), command);
     }
 
     @Test
@@ -180,10 +180,10 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_unfavourite() throws Exception {
-        UnfavouriteCommand command = (UnfavouriteCommand) parser.parseCommand(UnfavouriteCommand.COMMAND_WORD + " "
+    public void parseCommand_unfavorite() throws Exception {
+        UnfavoriteCommand command = (UnfavoriteCommand) parser.parseCommand(UnfavoriteCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new UnfavouriteCommand(INDEX_FIRST_PERSON), command);
+        assertEquals(new UnfavoriteCommand(INDEX_FIRST_PERSON), command);
     }
 
     @Test
