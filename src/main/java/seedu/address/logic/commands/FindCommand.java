@@ -34,22 +34,22 @@ public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
 
     public static final String COMMAND_PARAMETERS = "[" + PREFIX_FIND_CONDITION + "{all | any | none}] "
-            + "[" + PREFIX_TAG + "TAG]... "
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_PARENT_PHONE + "PARENT_PHONE] "
-            + "[" + PREFIX_PARENT_EMAIL + "PARENT_EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_SCHOOL + "SCHOOL] "
-            + "[" + PREFIX_ACAD_STREAM + "ACAD_STREAM] "
-            + "[" + PREFIX_ACAD_LEVEL + "ACAD_LEVEL] "
-            + "[" + PREFIX_SUBJECT + "SUBJECT] "
+            + "[" + PREFIX_TAG + "TAG_KEYWORDS]... "
+            + "[" + PREFIX_NAME + "NAME_KEYWORDS] "
+            + "[" + PREFIX_PHONE + "PHONE_KEYWORDS] "
+            + "[" + PREFIX_EMAIL + "EMAIL_KEYWORDS] "
+            + "[" + PREFIX_PARENT_PHONE + "PARENT_PHONE_KEYWORDS] "
+            + "[" + PREFIX_PARENT_EMAIL + "PARENT_EMAIL_KEYWORDS] "
+            + "[" + PREFIX_ADDRESS + "ADDRESS_KEYWORDS] "
+            + "[" + PREFIX_SCHOOL + "SCHOOL_KEYWORDS] "
+            + "[" + PREFIX_ACAD_STREAM + "ACAD_STREAM_KEYWORDS] "
+            + "[" + PREFIX_ACAD_LEVEL + "ACAD_LEVEL_KEYWORDS] "
+            + "[" + PREFIX_SUBJECT + "SUBJECT_KEYWORDS] "
             + "[" + PREFIX_TIME + "TIME_RANGE] "
             + "[" + PREFIX_DATE + "START_DATE] "
             + "[" + PREFIX_CANCEL + "CANCELLED_DATE] "
-            + "[" + PREFIX_RATES + "LESSON_RATES] "
-            + "[" + PREFIX_HOMEWORK + "HOMEWORK] ";
+            + "[" + PREFIX_RATES + "LESSON_RATES_KEYWORDS] "
+            + "[" + PREFIX_HOMEWORK + "HOMEWORK_KEYWORDS] ";
 
     public static final String COMMAND_FORMAT = COMMAND_WORD + " " + COMMAND_PARAMETERS;
 
