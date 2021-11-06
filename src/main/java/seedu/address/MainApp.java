@@ -140,7 +140,7 @@ public class MainApp extends Application {
             modelManager.checkClientAndOrderRelation();
             modelManager.checkTaskAndOrderRelation();
         } catch (DataConversionException e) {
-            logger.warning("Data file not corrupted. Will be starting with a empty Data.");
+            logger.warning(e.getMessage() + ".  Will be starting with a empty Data.");
             modelManager = modelManager.resetModelManager();
         }
 
