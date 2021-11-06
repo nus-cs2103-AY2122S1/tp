@@ -1,7 +1,8 @@
 
 package seedu.anilist.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.anilist.logic.commands.CommandTestUtil.DESC_GENRE_ACTION;
 import static seedu.anilist.logic.commands.CommandTestUtil.DESC_GENRE_SCIENCE_FICTION;
@@ -35,7 +36,7 @@ import seedu.anilist.testutil.GenresDescriptorBuilder;
 public class GenreDeleteCommandTest {
     private static final String ANIME_ONE_GENRE = FIRST_ANIME_GENRE;
 
-    private Model model = new ModelManager(getTypicalAnimeList(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAnimeList(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredListGenrePresent_success() {
@@ -175,22 +176,22 @@ public class GenreDeleteCommandTest {
         // same values -> returns true
         GenreDeleteCommand.GenresDescriptor copyDescriptor = new GenreCommand.GenresDescriptor(descriptor);
         GenreDeleteCommand commandWithSameValues = new GenreDeleteCommand(INDEX_FIRST_ANIME, copyDescriptor);
-        assertTrue(standardCommand.equals(commandWithSameValues));
+        assertEquals(standardCommand, commandWithSameValues);
 
         // same object -> returns true
-        assertTrue(standardCommand.equals(standardCommand));
+        assertEquals(standardCommand, standardCommand);
 
         // null -> returns false
-        assertFalse(standardCommand.equals(null));
+        assertNotEquals(null, standardCommand);
 
         // different types -> returns false
-        assertFalse(standardCommand.equals(new ClearCommand()));
+        assertNotEquals(standardCommand, new ClearCommand());
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new GenreDeleteCommand(INDEX_SECOND_ANIME, descriptor)));
+        assertNotEquals(standardCommand, new GenreDeleteCommand(INDEX_SECOND_ANIME, descriptor));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new GenreDeleteCommand(INDEX_FIRST_ANIME, DESC_GENRE_SCIENCE_FICTION)));
+        assertNotEquals(standardCommand, new GenreDeleteCommand(INDEX_FIRST_ANIME, DESC_GENRE_SCIENCE_FICTION));
     }
 
     /**

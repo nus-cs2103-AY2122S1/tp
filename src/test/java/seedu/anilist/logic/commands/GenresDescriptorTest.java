@@ -1,6 +1,8 @@
 package seedu.anilist.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.anilist.logic.commands.CommandTestUtil.DESC_GENRE_ACTION;
 import static seedu.anilist.logic.commands.CommandTestUtil.DESC_GENRE_SCIENCE_FICTION;
@@ -15,8 +17,6 @@ import org.junit.jupiter.api.Test;
 import seedu.anilist.testutil.GenresDescriptorBuilder;
 
 
-
-
 public class GenresDescriptorTest {
     @Test
     public void equals() {
@@ -24,25 +24,25 @@ public class GenresDescriptorTest {
         GenreCommand.GenresDescriptor descriptorWithSameValues =
                 new GenresDescriptorBuilder()
                         .withGenre(VALID_GENRE_ACTION).build();
-        assertTrue(DESC_GENRE_ACTION.equals(descriptorWithSameValues));
+        assertEquals(DESC_GENRE_ACTION, descriptorWithSameValues);
 
         // same object -> returns true
-        assertTrue(DESC_GENRE_ACTION.equals(DESC_GENRE_ACTION));
+        assertEquals(DESC_GENRE_ACTION, DESC_GENRE_ACTION);
 
         // null -> returns false
-        assertFalse(DESC_GENRE_ACTION.equals(null));
+        assertNotEquals(null, DESC_GENRE_ACTION);
 
         // different types -> returns false
-        assertFalse(DESC_GENRE_ACTION.equals(5));
+        assertNotEquals(5, DESC_GENRE_ACTION);
 
         // different genres -> returns false
-        assertFalse(DESC_GENRE_ACTION.equals(DESC_GENRE_SCIENCE_FICTION));
+        assertNotEquals(DESC_GENRE_ACTION, DESC_GENRE_SCIENCE_FICTION);
 
         // partial genre matches -> returns false
         GenreCommand.GenresDescriptor descriptorWithMultipleGenres =
                 new GenresDescriptorBuilder()
                         .withGenre(VALID_GENRE_ACTION, VALID_GENRE_SCIENCE_FICTION).build();
-        assertFalse(DESC_NAME_AKIRA.equals(descriptorWithMultipleGenres));
+        assertNotEquals(DESC_NAME_AKIRA, descriptorWithMultipleGenres);
     }
 
     @Test

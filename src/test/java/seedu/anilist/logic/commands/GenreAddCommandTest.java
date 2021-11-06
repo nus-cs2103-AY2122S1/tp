@@ -1,6 +1,7 @@
 package seedu.anilist.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.anilist.logic.commands.CommandTestUtil.DESC_GENRE_ACTION;
 import static seedu.anilist.logic.commands.CommandTestUtil.DESC_GENRE_SCIENCE_FICTION;
@@ -36,7 +37,7 @@ import seedu.anilist.testutil.GenresDescriptorBuilder;
 public class GenreAddCommandTest {
     private static final String ANIME_ONE_GENRE = FIRST_ANIME_GENRE;
 
-    private Model model = new ModelManager(getTypicalAnimeList(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAnimeList(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredListNewGenre_success() {
@@ -136,8 +137,7 @@ public class GenreAddCommandTest {
     @Test
     public void execute_invalidAnimeIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredAnimeList().size() + 1);
-        GenreAddCommand.GenresDescriptor descriptor = DESC_GENRE_ACTION;
-        GenreAddCommand genreAddCommand = new GenreAddCommand(outOfBoundIndex, descriptor);
+        GenreAddCommand genreAddCommand = new GenreAddCommand(outOfBoundIndex, DESC_GENRE_ACTION);
 
         assertCommandFailure(genreAddCommand, model, Messages.MESSAGE_INVALID_ANIME_DISPLAYED_INDEX);
     }
@@ -152,8 +152,7 @@ public class GenreAddCommandTest {
         Index outOfBoundIndex = INDEX_SECOND_ANIME;
         // ensures that outOfBoundIndex is still in bounds of anime list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAnimeList().getAnimeList().size());
-        GenreAddCommand.GenresDescriptor descriptor = DESC_GENRE_ACTION;
-        GenreAddCommand genreAddCommand = new GenreAddCommand(outOfBoundIndex, descriptor);
+        GenreAddCommand genreAddCommand = new GenreAddCommand(outOfBoundIndex, DESC_GENRE_ACTION);
 
         assertCommandFailure(genreAddCommand, model, Messages.MESSAGE_INVALID_ANIME_DISPLAYED_INDEX);
     }
@@ -166,22 +165,22 @@ public class GenreAddCommandTest {
         // same values -> returns true
         GenreAddCommand.GenresDescriptor copyDescriptor = new GenreCommand.GenresDescriptor(descriptor);
         GenreAddCommand commandWithSameValues = new GenreAddCommand(INDEX_FIRST_ANIME, copyDescriptor);
-        assertTrue(standardCommand.equals(commandWithSameValues));
+        assertEquals(standardCommand, commandWithSameValues);
 
         // same object -> returns true
-        assertTrue(standardCommand.equals(standardCommand));
+        assertEquals(standardCommand, standardCommand);
 
         // null -> returns false
-        assertFalse(standardCommand.equals(null));
+        assertNotEquals(null, standardCommand);
 
         // different types -> returns false
-        assertFalse(standardCommand.equals(new ClearCommand()));
+        assertNotEquals(standardCommand, new ClearCommand());
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new GenreAddCommand(INDEX_SECOND_ANIME, descriptor)));
+        assertNotEquals(standardCommand, new GenreAddCommand(INDEX_SECOND_ANIME, descriptor));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new GenreAddCommand(INDEX_FIRST_ANIME, DESC_GENRE_SCIENCE_FICTION)));
+        assertNotEquals(standardCommand, new GenreAddCommand(INDEX_FIRST_ANIME, DESC_GENRE_SCIENCE_FICTION));
     }
 
     /**

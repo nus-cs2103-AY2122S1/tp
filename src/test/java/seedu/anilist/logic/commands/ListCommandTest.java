@@ -1,8 +1,7 @@
 package seedu.anilist.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.anilist.commons.core.Messages.MESSAGE_ANIME_LISTED_OVERVIEW;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_STATUS_TOWATCH;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_STATUS_WATCHING;
@@ -78,22 +77,22 @@ public class ListCommandTest {
         ListCommand listSecondCommand = new ListCommand(secondPredicate);
 
         // same object -> returns true
-        assertTrue(listFirstCommand.equals(listFirstCommand));
+        assertEquals(listFirstCommand, listFirstCommand);
 
         // same values -> returns true
         ListCommand listFirstCommandCopy = new ListCommand(firstPredicate);
-        assertTrue(listFirstCommand.equals(listFirstCommandCopy));
+        assertEquals(listFirstCommand, listFirstCommandCopy);
 
         ListCommand listSecondCommandCopy = new ListCommand(secondPredicate);
-        assertTrue(listSecondCommand.equals(listSecondCommandCopy));
+        assertEquals(listSecondCommand, listSecondCommandCopy);
 
         // different types -> returns false
-        assertFalse(listFirstCommand.equals(1));
+        assertNotEquals(1, listFirstCommand);
 
         // null -> returns false
-        assertFalse(listFirstCommand.equals(null));
+        assertNotEquals(null, listFirstCommand);
 
         // different anime -> returns false
-        assertFalse(listFirstCommand.equals(listSecondCommand));
+        assertNotEquals(listFirstCommand, listSecondCommand);
     }
 }

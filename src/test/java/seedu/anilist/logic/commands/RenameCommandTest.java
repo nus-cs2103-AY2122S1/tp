@@ -1,6 +1,7 @@
 package seedu.anilist.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.anilist.logic.commands.CommandTestUtil.DESC_NAME_AKIRA;
 import static seedu.anilist.logic.commands.CommandTestUtil.DESC_NAME_BNHA;
@@ -25,7 +26,7 @@ import seedu.anilist.testutil.AnimeBuilder;
 import seedu.anilist.testutil.NameDescriptorBuilder;
 
 public class RenameCommandTest {
-    private Model model = new ModelManager(getTypicalAnimeList(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAnimeList(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -103,22 +104,22 @@ public class RenameCommandTest {
         RenameCommand.NameDescriptor copyDescriptor = new RenameCommand.NameDescriptor(
             DESC_NAME_AKIRA);
         RenameCommand commandWithSameValues = new RenameCommand(INDEX_FIRST_ANIME, copyDescriptor);
-        assertTrue(standardCommand.equals(commandWithSameValues));
+        assertEquals(standardCommand, commandWithSameValues);
 
         // same object -> returns true
-        assertTrue(standardCommand.equals(standardCommand));
+        assertEquals(standardCommand, standardCommand);
 
         // null -> returns false
-        assertFalse(standardCommand.equals(null));
+        assertNotEquals(null, standardCommand);
 
         // different types -> returns false
-        assertFalse(standardCommand.equals(new ClearCommand()));
+        assertNotEquals(standardCommand, new ClearCommand());
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new RenameCommand(INDEX_SECOND_ANIME, DESC_NAME_AKIRA)));
+        assertNotEquals(standardCommand, new RenameCommand(INDEX_SECOND_ANIME, DESC_NAME_AKIRA));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new RenameCommand(INDEX_FIRST_ANIME, DESC_NAME_BNHA)));
+        assertNotEquals(standardCommand, new RenameCommand(INDEX_FIRST_ANIME, DESC_NAME_BNHA));
     }
 
 }

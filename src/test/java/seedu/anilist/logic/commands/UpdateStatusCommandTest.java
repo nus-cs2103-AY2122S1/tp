@@ -31,7 +31,7 @@ import seedu.anilist.testutil.StatusDescriptorBuilder;
  */
 public class UpdateStatusCommandTest {
 
-    private Model model = new ModelManager(getTypicalAnimeList(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAnimeList(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {

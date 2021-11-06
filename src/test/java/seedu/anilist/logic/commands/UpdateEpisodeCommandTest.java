@@ -1,6 +1,7 @@
 package seedu.anilist.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.anilist.logic.commands.CommandTestUtil.DESC_EPISODE_ONE;
 import static seedu.anilist.logic.commands.CommandTestUtil.DESC_EPISODE_ZERO;
@@ -26,7 +27,7 @@ import seedu.anilist.testutil.EpisodeDescriptorBuilder;
 
 public class UpdateEpisodeCommandTest {
 
-    private Model model = new ModelManager(getTypicalAnimeList(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAnimeList(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -104,21 +105,21 @@ public class UpdateEpisodeCommandTest {
         UpdateEpisodeCommand.EpisodeDescriptor copyDescriptor = new UpdateEpisodeCommand.EpisodeDescriptor(
             DESC_EPISODE_ONE);
         UpdateEpisodeCommand commandWithSameValues = new UpdateEpisodeCommand(INDEX_FIRST_ANIME, copyDescriptor);
-        assertTrue(standardCommand.equals(commandWithSameValues));
+        assertEquals(standardCommand, commandWithSameValues);
 
         // same object -> returns true
-        assertTrue(standardCommand.equals(standardCommand));
+        assertEquals(standardCommand, standardCommand);
 
         // null -> returns false
-        assertFalse(standardCommand.equals(null));
+        assertNotEquals(null, standardCommand);
 
         // different types -> returns false
-        assertFalse(standardCommand.equals(new ClearCommand()));
+        assertNotEquals(standardCommand, new ClearCommand());
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new UpdateEpisodeCommand(INDEX_SECOND_ANIME, DESC_EPISODE_ONE)));
+        assertNotEquals(standardCommand, new UpdateEpisodeCommand(INDEX_SECOND_ANIME, DESC_EPISODE_ONE));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new UpdateEpisodeCommand(INDEX_FIRST_ANIME, DESC_EPISODE_ZERO)));
+        assertNotEquals(standardCommand, new UpdateEpisodeCommand(INDEX_FIRST_ANIME, DESC_EPISODE_ZERO));
     }
 }

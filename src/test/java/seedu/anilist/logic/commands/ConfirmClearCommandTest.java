@@ -22,7 +22,7 @@ import seedu.anilist.model.anime.NameContainsKeywordsPredicate;
 public class ConfirmClearCommandTest {
 
     /** {@code Predicate} that always evaluate to false */
-    private Predicate<Anime> predicateShowNoAnime = unused -> false;
+    private final Predicate<Anime> predicateShowNoAnime = unused -> false;
 
     @Test
     public void execute_emptyAnimeList_success() {
@@ -49,11 +49,6 @@ public class ConfirmClearCommandTest {
         Model expectedModel = new ModelManager();
 
         assertCommandSuccess(new ConfirmClearCommand(), model, ConfirmClearCommand.MESSAGE_SUCCESS, expectedModel);
-    }
-
-    @Test
-    public void execute_nonEmptyFilteredByStatusAnimeList_success() {
-        //TODO write this after merging with tab command branch
     }
 
     @Test
