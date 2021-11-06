@@ -30,7 +30,8 @@ public class AddLastMarkCommandParser implements Parser<AddLastMarkCommand> {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX, AddLastMarkCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX + MESSAGE_INVALID_COMMAND_FORMAT,
+                            AddLastMarkCommand.MESSAGE_USAGE), pe);
         }
 
         StudentMark newMark = null;

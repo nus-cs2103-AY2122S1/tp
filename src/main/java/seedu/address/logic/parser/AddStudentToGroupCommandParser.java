@@ -35,7 +35,8 @@ public class AddStudentToGroupCommandParser implements Parser<AddGroupCommand> {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (IllegalValueException ive) {
             throw new ParseException(String.format(
-                    MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX, AddStudentToGroupCommand.MESSAGE_USAGE), ive);
+                    MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX + MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddStudentToGroupCommand.MESSAGE_USAGE), ive);
         }
 
         if (!arePrefixesPresent(argMultimap, PREFIX_GROUPNUMBER, PREFIX_CLASSCODE, PREFIX_TYPE)) {
