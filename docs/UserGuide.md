@@ -20,6 +20,8 @@ This guide takes you through all the _latest features_ of Source Control. If you
 all the basic knowledge to [get started](#quick-start) with Source Control. If you are an experienced user,
 feel free to skip to the [command summary](#command-summary) and experiment with our more [advanced features](#setting-customised-aliases-for-commands--alias)!
 
+<br>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Table of Contents**
