@@ -139,8 +139,10 @@ public class Person {
         Set<Period> periods = period.union(this.getAbsentDates())
                 .stream()
                 .collect(Collectors.toUnmodifiableSet());
-        return new Person(name, phone, email, address,
+        Person person = new Person(name, phone, email, address,
                 roles, salary, status, tags, periods);
+        person.setSchedule(getSchedule());
+        return person;
 
     }
 
@@ -171,8 +173,10 @@ public class Person {
         Set<Period> result = getAbsentDates().stream()
                 .flatMap(p -> p.complement(period).stream())
                 .collect(Collectors.toSet());
-        return new Person(name, phone, email, address,
+        Person person = new Person(name, phone, email, address,
                 roles, salary, status, tags, result);
+        person.setSchedule(getSchedule());
+        return person;
     }
 
 
