@@ -73,4 +73,23 @@ public class BookKeeping implements ReadOnlyBookKeeping {
         this.cost = 0.0;
         this.profit = 0.0;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        // short circuit if same object
+        if (obj == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(obj instanceof BookKeeping)) {
+            return false;
+        }
+
+        // state check
+        BookKeeping other = (BookKeeping) obj;
+        return revenue.equals(other.revenue)
+                && profit.equals(other.profit)
+                && cost.equals(other.cost);
+    }
 }

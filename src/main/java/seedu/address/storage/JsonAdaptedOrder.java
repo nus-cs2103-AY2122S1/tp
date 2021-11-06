@@ -11,22 +11,22 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.model.item.Item;
 import seedu.address.model.order.TransactionRecord;
 
+/**
+ * Jackson-friendly version of {@link TransactionRecord}.
+ */
 class JsonAdaptedOrder {
 
     private final List<JsonAdaptedItemOrder> itemOrders = new ArrayList<>();
     private final String id;
     private final Instant timeStamp;
-    private final Double totalCosts;
 
     @JsonCreator
     public JsonAdaptedOrder(@JsonProperty("itemOrders") List<JsonAdaptedItemOrder> itemOrders,
                             @JsonProperty("id") String id,
-                            @JsonProperty("timeStamp") Instant timeStamp,
-                            @JsonProperty("totalCosts") Double totalCosts) {
+                            @JsonProperty("timeStamp") Instant timeStamp) {
         this.itemOrders.addAll(itemOrders);
         this.id = id;
         this.timeStamp = timeStamp;
-        this.totalCosts = totalCosts;
     }
 
     public JsonAdaptedOrder(TransactionRecord source) {
@@ -34,8 +34,6 @@ class JsonAdaptedOrder {
         this.timeStamp = source.getTimestamp();
 
         itemOrders.addAll(source.getOrderItems().stream().map(JsonAdaptedItemOrder::new).collect(Collectors.toList()));
-        totalCosts = source.getOrderItems().stream()
-                .map(item -> item.getCount() * item.getSalesPrice()).reduce((a, b) -> a + b).get();
     }
 
     public TransactionRecord toModelType() {

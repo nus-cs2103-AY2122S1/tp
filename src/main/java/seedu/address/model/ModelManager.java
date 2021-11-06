@@ -8,7 +8,6 @@ import static seedu.address.model.display.DisplayMode.DISPLAY_TRANSACTION;
 import static seedu.address.model.display.DisplayMode.DISPLAY_TRANSACTION_LIST;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -38,7 +37,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final DisplayList displayList;
     private Optional<Order> optionalOrder;
-    private List<TransactionRecord> transactions;
+    private TransactionList transactions;
     private BookKeeping bookKeeping;
 
     private DisplayMode currentDisplay = DISPLAY_INVENTORY;
@@ -56,7 +55,7 @@ public class ModelManager implements Model {
 
         this.inventory = new Inventory(inventory);
         this.userPrefs = new UserPrefs(userPrefs);
-        this.transactions = transactionList.getTransactionRecordList();
+        this.transactions = new TransactionList(transactionList);
         displayList = new DisplayList(this.inventory.getItemList());
         optionalOrder = Optional.empty();
         this.bookKeeping = new BookKeeping(bookKeeping);
@@ -209,7 +208,7 @@ public class ModelManager implements Model {
                     this.optionalOrder.map(Order::getOrderItems).get()
                 );
             } else {
-                displayList.setItems(transactions);
+                displayList.setItems(transactions.getTransactionRecordList());
             }
 
             currentDisplay = mode;
@@ -232,7 +231,7 @@ public class ModelManager implements Model {
     @Override
     public Double openTransaction(String id) {
         // Attempt to find transaction with matching id
-        Optional<TransactionRecord> transactionOptional = transactions.stream()
+        Optional<TransactionRecord> transactionOptional = transactions.getTransactionRecordList().stream()
                 .filter(txn -> txn.getId().equals(id))
                 .findFirst();
 
@@ -362,12 +361,12 @@ public class ModelManager implements Model {
 
     @Override
     public ReadOnlyTransactionList getTransactions() {
-        return new TransactionList(new ArrayList<>(transactions));
+        return transactions;
     }
 
     @Override
     public void initialiseTransactions() {
-        transactions = new TransactionList().getTransactionRecordList();
+        transactions = new TransactionList();
     }
 
     //=========== BookKeeping ================================================================================
