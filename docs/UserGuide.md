@@ -151,7 +151,7 @@ or their body measurements for clothing.
 
 </div>
 
-### Adding a client : `addclient`
+### Adding a client : `addclient` [Return to top](#table-of-contents)
 
 Format: `addclient n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS m/MEASUREMENT g/GENDER [r/REMARK] [t/TAG]…​`
 
@@ -267,7 +267,7 @@ with a label describing them, a client, an amount, and a date. The following are
 </div>
 
 
-### Adding an order : `addorder`
+### Adding an order : `addorder` [!back]
 
 Format: `addorder l/LABEL c/CUSTOMER a/AMOUNT d/DATE`
 
