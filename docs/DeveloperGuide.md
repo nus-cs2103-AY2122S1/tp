@@ -417,9 +417,9 @@ Step 5. These `Prefix` arguments are stored in `Model`
 Step 6. The user is prompted to pick the name and download location of their generated CSV file.  
 Step 7. The `FilteredList`, `Prefixes` and `Path` are passed to `CsvUtil#modelToCsv`, which will serialize and write the CSV file.  
 ![MailingListSequenceDiagram](images/MailingListSequenceDiagram.png)  
-Step 8. The header row is created based on `Prefix` arguments stored in `Model`, based on a mapping in `CsvUtil`  
-Step 9. Individual rows are generated based on the `Prefix` arguments stored in `Model` and the `FilteredPerson` in `ModelManager`, based on a mapping in `CsvUtil`  
-Step 10. The headers and rows are written to the CSV file that is specified by the user  
+Step 8. The header row is created based on `Prefix` arguments stored in `Model`, based on a mapping in `CsvUtil`.  
+Step 9. Individual rows are generated based on the `Prefix` arguments stored in `Model` and the `FilteredPerson` in `ModelManager`, based on a mapping in `CsvUtil`.  
+Step 10. The headers and rows are written to the CSV file that is specified by the user.  
 
 
 
