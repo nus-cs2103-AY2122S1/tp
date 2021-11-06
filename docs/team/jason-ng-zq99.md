@@ -20,9 +20,8 @@ Given below are my contributions to the project.
 * **Justification**: User now need not type the full name just to search for a single person, making the process faster especially for long names.
 * **Justification**: While this might return more entries per search, it is still not significantly long enough to affect search experience.
 
-**Enhanced Feature**: Refactor `moduleClass` class to `moduleLesson` class. (PR [#98](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/98))
-* **What it does**: Rename `moduleClass` class to `moduleLesson` class. This includes changing all instances of `moduleClass` in packages, methods, test cases and comments.
-* **Justification**: As it became confusing to discuss about `moduleClass` class and a `module` class, we realised that there was a need to rename this class to make it more instinctive.
+**Team-Based Tasks**: 
+* Refactored `moduleClass` class to `moduleLesson` class. (PR [#98](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/98))
 
 **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&zFR=false&tabAuthor=jason-ng-zq99&tabRepo=AY2122S1-CS2103T-T09-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
 
