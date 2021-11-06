@@ -1,6 +1,7 @@
 package seedu.siasa.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.siasa.commons.util.CurrencyUtil.centsToDollars;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -68,21 +69,30 @@ public class DownloadCommand extends Command {
         stringList.add("Statistics for " + CURRENT_DATE + "\n");
         stringList.add("Most premium contacts:\n" + TITLE_UNDERLINE);
         commissionPerContact.forEach((contact, commission) -> {
-            stringList.add(contact + "; Commission: " + centsToDollars(commission));
+            stringList.add(contact + "; Commission: " + commissionToDollarsStr(commission));
         });
         stringList.add("\n");
 
         stringList.add("Number of policies per contact:\n" + TITLE_UNDERLINE);
-        numberPoliciesPerContact.forEach((contact, noPolicies) -> {
-            stringList.add(contact + "; Number of Policies: " + noPolicies);
+        numberPoliciesPerContact.forEach((contact, policyCount) -> {
+            stringList.add(contact + "; Number of Policies: " + policyCount);
         });
         stringList.add("\n");
 
         stringList.add("Average number of policies per contact: "
                 + String.format("%.2f", getAvgPoliciesPerContact(numberPoliciesPerContact)));
 
-        stringList.add("Total Commission: " + centsToDollars(totalCommission));
+        stringList.add("Total Commission: " + commissionToDollarsStr(totalCommission));
         return stringList;
+    }
+
+    private String commissionToDollarsStr(int commission) {
+        boolean isMaxInt = commission == Integer.MAX_VALUE;
+        if (isMaxInt) {
+            return centsToDollars(commission) + " (Max Value reached)";
+        } else {
+            return centsToDollars(commission);
+        }
     }
 
     private void writeToTxt(List<String> stringList) throws IOException {
@@ -94,19 +104,4 @@ public class DownloadCommand extends Command {
         }
         FileUtil.writeToFile(pathToFile, stats.toString());
     }
-
-    private String centsToDollars(int priceInCents) {
-        int cents = priceInCents % 100;
-        int dollars = (priceInCents - cents) / 100;
-
-        String centsStr;
-        if (cents <= 9) {
-            centsStr = 0 + "" + cents;
-        } else {
-            centsStr = Integer.toString(cents);
-        }
-
-        return "$" + dollars + "." + centsStr;
-    }
-
 }

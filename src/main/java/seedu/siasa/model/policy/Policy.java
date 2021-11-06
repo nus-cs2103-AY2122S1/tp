@@ -71,6 +71,14 @@ public class Policy {
         return Collections.unmodifiableSet(tags);
     }
 
+    public int compareTotalCommission(Policy other) {
+        return Double.compare(getTotalCommission(), other.getTotalCommission());
+    }
+
+    public double getTotalCommission() {
+        return ((double) commission.commissionPercentage / 100) * (double) paymentStructure.paymentAmount
+                * (double) commission.numberOfPayments;
+    }
     /**
      *  Returns true if both policies have the same title and owner (by identity).
      *  this defines a weaker notion of equality between two policies.

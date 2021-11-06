@@ -25,6 +25,8 @@ public class SortContactCommand extends Command {
 
     public static final String MESSAGE_NO_SUCH_COMPARATOR = "No such sorting order";
 
+    public static final String MESSAGE_NO_POLICIES = "There are no policies to sort";
+
     private final Comparator<Contact> comparator;
 
     public SortContactCommand() {
@@ -40,7 +42,11 @@ public class SortContactCommand extends Command {
         requireNonNull(model);
         if (comparator != null) {
             model.updateFilteredContactList(comparator);
-            return new CommandResult(MESSAGE_SUCCESS);
+            if (model.getFilteredPolicyList().isEmpty()) {
+                return new CommandResult(MESSAGE_NO_POLICIES);
+            } else {
+                return new CommandResult(MESSAGE_SUCCESS);
+            }
         } else {
             return new CommandResult(MESSAGE_NO_SUCH_COMPARATOR);
         }

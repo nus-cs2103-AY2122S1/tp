@@ -22,38 +22,38 @@ public class GuideWindow extends UiPart<Stage> {
                 + "This is a guide that teaches you all the basic commands to use this application.\n"
                 + "For a more detailed guide, visit the user guide on our github repository.",
             new Image("file:src/main/resources/images/guide/page_one.png")),
-        TWO("User Guide - Contacts", "addcontact: Adds a contact to your Siasa address book.\n"
+        TWO("User Guide - Contacts", "addcontact: Adds a contact to your SIASA.\n"
             + "Format: addcontact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]\n"
-            + "Example: addcontact n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01",
+            + "Example: addcontact n/Travis Scott p/98765454 e/travist@example.com a/Travis Park, block 123, #01-01",
             new Image("file:src/main/resources/images/guide/page_two.png")),
         THREE("User Guide - Contacts",
-            "deletecontact: Removes a contact from your Siasa address book based on the index provided.\n"
+            "deletecontact: Removes a contact from your SIASA based on the index provided.\n"
                 + "Format: deletecontact INDEX\n"
                 + "Example: deletecontact 2",
             new Image("file:src/main/resources/images/guide/page_three.png")),
         FOUR("User Guide - Contacts",
-            "editcontact: Edit a contact from your Siasa address book based on the index provided. "
+            "editcontact: Edit a contact from your SIASA based on the index provided. "
                 + "At least one of the optional fields should be filled.\n"
                 + "Format: editcontact INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…\n"
-                + "Example: editcontact 2 p/91234567 e/johndoe@example.com",
+                + "Example: editcontact 3 p/91234567 e/johndoe@example.com",
             new Image("file:src/main/resources/images/guide/page_four.png")),
         FIVE("User Guide - Policies",
-            "addpolicy: Adds a policy that is linked to a contact to your Siasa address book.\n"
-                + "addpolicy n/NAME_OF_POLICY p/PMT_AMOUNT [PMT_FREQ] [NUM_OF_PMT] c/COMMISSION_% "
-                + "[NUM_OF_PMT] cl/CONTACT_INDEX [t/TAGS] [e/COVERAGE_EXPIRY_DATE]\n"
-                + "Example: addpolicy n/Life Policy e/2021-12-13 p/1000 12 50 c/20 10 cl/1 ",
+            "addpolicy: Adds a policy that is linked to a contact to your SIASA.\n"
+                + "addpolicy n/POLICY_NAME p/PMT_AMOUNT_CENTS [PMTS_PER_YR] [NUM_OF_PMTS] "
+                + "c/COMMISSION_% NUM_OF_COMM cl/CONTACT_INDEX [e/COVERAGE_EXPIRY_DATE] [t/TAG]…\n"
+                + "Example: addpolicy n/full life p/10050 c/10 1 cl/1 e/2021-12-12 t/Aviva ",
             new Image("file:src/main/resources/images/guide/page_five.png")),
         SIX("User Guide - Policies",
-            "deletepolicy: Removes a policy from your Siasa address book based on the index provided.\n"
+            "deletepolicy: Removes a policy from your SIASA based on the index provided.\n"
                 + "deletepolicy INDEX\n"
                 + "Example: deletepolicy 2",
             new Image("file:src/main/resources/images/guide/page_six.png")),
         SEVEN("User Guide - Policies",
-                "editpolicy: Edits a policy from your Siasa address book based on the index provided. "
+                "editpolicy: Edits a policy from your SIASA based on the index provided. "
                 + "At least one of the optional fields should be filled.\n"
                 + "Format: editpolicy INDEX [n/NAME_OF_POLICY] [p/PMT_AMOUNT [PMT_FREQ] [NUM_OF_PMT]] "
                 + "[c/COMMISSION_% [NUM_OF_PMT]] [cl/PERSON_INDEX] [t/TAGS] [e/COVERAGE_EXPIRY_DATE]\n"
-                + "Example: editpolicy 2 n/Life Policy 2 c/20 20 e/2022-10-22",
+                + "Example: editpolicy 2 n/Life Policy 2 e/2022-10-22",
             new Image("file:src/main/resources/images/guide/page_seven.png")),
         EIGHT("User Guide - Policies",
             "contactpolicy: List the policies belonging to the contact based on the index provided.\n"
@@ -61,9 +61,9 @@ public class GuideWindow extends UiPart<Stage> {
                 + "Example: contactpolicy 1",
             new Image("file:src/main/resources/images/guide/page_eight.png")),
         NINE("User Guide - Policies",
-            "listpolicy: List all policies in your Siasa address book.\n"
-                + "listpolicy\n"
-                + "Example: listpolicy",
+            "allpolicy: List all policies in your SIASA.\n"
+                + "allpolicy\n"
+                + "Example: allpolicy",
             new Image("file:src/main/resources/images/guide/page_nine.png"));
 
         private final String title;
@@ -188,6 +188,10 @@ public class GuideWindow extends UiPart<Stage> {
             currentPage = Page.EIGHT;
             showPage();
             return;
+        case EIGHT:
+            currentPage = Page.NINE;
+            showPage();
+            return;
         default:
         }
 
@@ -227,6 +231,10 @@ public class GuideWindow extends UiPart<Stage> {
             return;
         case EIGHT:
             currentPage = Page.SEVEN;
+            showPage();
+            return;
+        case NINE:
+            currentPage = Page.EIGHT;
             showPage();
             return;
         default:

@@ -201,7 +201,7 @@ Format: `clearpolicy CONTACT_INDEX`
 Finds and lists all contacts in address book whose name contains any of the argument keywords.
 
 Format: `findcontact KEYWORD`
-* Keyword matching is case insensitive.
+* Keyword matching is case-insensitive.
 
 Example:
 * `findcontact john` returns a list with all the contacts containing the name john.
@@ -214,37 +214,37 @@ Format: `expiringpolicy`
 
 #### Sorting contacts : `sortcontact`
 
-Sorts the contact list alphabetically by the order specified.
+Sorts the contact list alphabetically by the order specified. Case-insensitive.
 
 Format: `sortcontact SORTER`
 
 These are the current sorters implemented:
-* `asc`: Sorts the contacts in ascending order based on the saved name
-* `dsc`: Sorts the contacts in descending order based on the saved name
+* `asc`: Sorts the contacts in ascending order alphabetically based on the saved name
+* `dsc`: Sorts the contacts in descending order alphabetically based on the saved name
 
 #### Sorting policies: `sortpolicy`
 
-Sorts the policy list alphabetically by the order specified.
+Sorts the policy list using the sorter specified.
 
 Format: `sortpolicy SORTER`
 
-These are the current sorts implemented:
-* `titleasc`: Sorts the policies in ascending order based on the saved title
-* `titledsc`: Sorts the policies in descending order based on the saved title
-* `priceasc`: Sorts the policies in ascending order based on the saved payment
-* `pricedsc`: Sorts the policies in descending order based on the saved payment
-* `commasc`: Sorts the policies in ascending order based on the saved commission
-* `commdsc`: Sorts the policies in descending order based on the saved commission
-* `dateasc`: Sorts the policies in ascending order based on the saved expiry date
-* `datedsc`: Sorts the policies in descending order based on the saved expiry date
+These are the current sorters implemented:
+* `titleasc`: Sorts the policies in ascending order alphabetically based on the saved title (Case-insensitive)
+* `titledsc`: Sorts the policies in descending order alphabetically based on the saved title (Case-insensitive)
+* `paymentasc`: Sorts the policies in ascending order based on the total payment amount (indefinite payments count as infinite)
+* `paymentdsc`: Sorts the policies in descending order based on the total payment amount (indefinite payments count as infinite)
+* `commasc`: Sorts the policies in ascending order based on the total commission amount
+* `commdsc`: Sorts the policies in descending order based on the total commission amount
+* `expiryasc`: Sorts the policies in ascending order based on the saved expiry date, if it exists
+* `expirydsc`: Sorts the policies in descending order based on the saved expiry date, if it exists
 
 ### Statistics
 
 #### Download useful statistics as CSV : `download`
 
 Download a CSV file containing useful statistics for the user. This includes
-- Most valuable contacts + commission from them
-- Number of policies per contact
+- Most valuable contacts + total commission from each of them
+- Number of policies for each contact
 - Average number of policies per contact
 - Total commission
 

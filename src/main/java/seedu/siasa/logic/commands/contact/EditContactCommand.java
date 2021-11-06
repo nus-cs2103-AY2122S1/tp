@@ -29,7 +29,7 @@ import seedu.siasa.model.contact.Phone;
 import seedu.siasa.model.tag.Tag;
 
 /**
- * Edits the details of an existing contact in the address book.
+ * Edits the details of an existing contact in the SIASA.
  */
 public class EditContactCommand extends Command {
 
@@ -49,8 +49,8 @@ public class EditContactCommand extends Command {
             + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_CONTACT_SUCCESS = "Edited Contact: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_CONTACT = "This contact already exists in the address book.";
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided";
+    public static final String MESSAGE_DUPLICATE_CONTACT = "This contact already exists in the SIASA";
 
     private final Index index;
     private final EditContactDescriptor editContactDescriptor;

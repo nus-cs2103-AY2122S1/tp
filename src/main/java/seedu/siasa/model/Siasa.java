@@ -90,8 +90,8 @@ public class Siasa implements ReadOnlySiasa {
     }
 
     /**
-     * Adds a contact to the address book.
-     * The contact must not already exist in the address book.
+     * Adds a contact to the SIASA.
+     * The contact must not already exist in the SIASA.
      */
     public void addContact(Contact p) {
         contacts.add(p);
@@ -99,9 +99,9 @@ public class Siasa implements ReadOnlySiasa {
 
     /**
      * Replaces the given contact {@code target} in the list with {@code editedContact}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in the SIASA.
      * The contact identity of {@code editedContact} must not be the same as another
-     * existing contact in the address book.
+     * existing contact in the SIASA.
      */
     public void setContact(Contact target, Contact editedContact) {
         requireNonNull(editedContact);
@@ -157,15 +157,10 @@ public class Siasa implements ReadOnlySiasa {
     public Map<Contact, Integer> getCommissionPerContact() {
         HashMap<Contact, Integer> hashMap = new HashMap<>();
         contacts.forEach(contact -> {
-            float commission = 0;
+            double commission = 0;
             for (Policy policy : policies) {
                 if (policy.getOwner().equals(contact)) {
-                    float commissionPercentage = policy.getCommission().commissionPercentage;
-                    int numberPayments = policy.getCommission().numberOfPayments;
-                    int paymentAmt = policy.getPaymentStructure().paymentAmount;
-                    float policyCommission = (commissionPercentage / 100)
-                            * numberPayments * paymentAmt;
-                    commission += policyCommission;
+                    commission += policy.getTotalCommission();
                 }
             }
             hashMap.put(contact, (int) commission);

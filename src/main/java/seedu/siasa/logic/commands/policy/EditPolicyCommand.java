@@ -32,7 +32,7 @@ import seedu.siasa.model.policy.Title;
 import seedu.siasa.model.tag.Tag;
 
 /**
- * Edits the details of an existing policy in the address book.
+ * Edits the details of an existing policy in the SIASA.
  */
 public class EditPolicyCommand extends Command {
 
@@ -53,9 +53,9 @@ public class EditPolicyCommand extends Command {
             + PREFIX_EXPIRY + "2021-06-13";
 
     public static final String MESSAGE_EDIT_POLICY_SUCCESS = "Edited Policy: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_POLICY = "This policy already exists in the address book.";
-    public static final String MESSAGE_PAST_EXPIRY_DATE = "Expiry Date is in the past.";
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided";
+    public static final String MESSAGE_DUPLICATE_POLICY = "This policy already exists in the SIASA";
+    public static final String MESSAGE_NOT_FUTURE_EXPIRY_DATE = "Expiry Date is not in the future";
 
     private final Index index;
     private final EditPolicyDescriptor editPolicyDescriptor;
@@ -87,7 +87,7 @@ public class EditPolicyCommand extends Command {
 
         if (editPolicyDescriptor.expiryDate != null
                 && !CoverageExpiryDate.isFutureExpiryDate(editPolicyDescriptor.expiryDate.value)) {
-            boolean response = Warning.isUserConfirmingCommand(MESSAGE_PAST_EXPIRY_DATE);
+            boolean response = Warning.isUserConfirmingCommand(MESSAGE_NOT_FUTURE_EXPIRY_DATE);
             if (!response) {
                 return new CommandResult(Messages.MESSAGE_CANCELLED_COMMAND);
             }

@@ -6,7 +6,7 @@ import static seedu.siasa.commons.util.AppUtil.checkArgument;
 import seedu.siasa.commons.util.StringUtil;
 
 /**
- * Represents a Contact's name in the address book.
+ * Represents a Contact's name in the SIASA.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
 public class Name {
