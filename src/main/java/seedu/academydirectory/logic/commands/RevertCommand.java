@@ -62,7 +62,7 @@ public class RevertCommand extends Command {
 
         try {
             academyDirectoryOptional = storage.readAcademyDirectory();
-            initialData = academyDirectoryOptional.orElseGet(SampleDataUtil::getSampleAcademyDirectory);
+            initialData = academyDirectoryOptional.orElseGet(AcademyDirectory::new);
         } catch (DataConversionException | IOException e) {
             initialData = new AcademyDirectory();
         }
