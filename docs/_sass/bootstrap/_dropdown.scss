@@ -1,3 +1,7 @@
+//@@author anonymxtrix-reused
+// Stylesheet was taken from Bootstrap (https://getbootstrap.com/) so that we can make use of their components in our
+// documentation.
+
 // The dropdown wrapper (`<div>`)
 .dropup,
 .dropdown {
@@ -129,3 +133,5 @@
   color: $dropdown-header-color;
   white-space: nowrap; // as with > li > a
 }
+
+//@@author

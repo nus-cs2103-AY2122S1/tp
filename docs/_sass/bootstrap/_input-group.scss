@@ -1,3 +1,7 @@
+//@@author anonymxtrix-reused
+// Stylesheet was taken from Bootstrap (https://getbootstrap.com/) so that we can make use of their components in our
+// documentation.
+
 // stylelint-disable selector-no-qualifying-type
 
 //
@@ -157,3 +161,5 @@
 .input-group > .input-group-prepend:first-child > .input-group-text:not(:first-child) {
   @include border-left-radius(0);
 }
+
+//@@author

@@ -1,3 +1,7 @@
+//@@author anonymxtrix-reused
+// Stylesheet was taken from Bootstrap (https://getbootstrap.com/) so that we can make use of their components in our
+// documentation.
+
 @keyframes progress-bar-stripes {
   from { background-position: $progress-height 0; }
   to { background-position: 0 0; }
@@ -31,3 +35,5 @@
 .progress-bar-animated {
   animation: progress-bar-stripes $progress-bar-animation-timing;
 }
+
+//@@author

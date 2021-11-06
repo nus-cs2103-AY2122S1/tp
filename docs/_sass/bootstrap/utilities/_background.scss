@@ -1,3 +1,7 @@
+//@@author anonymxtrix-reused
+// Stylesheet was taken from Bootstrap (https://getbootstrap.com/) so that we can make use of their components in our
+// documentation.
+
 // stylelint-disable declaration-no-important
 
 @each $color, $value in $theme-colors {
@@ -17,3 +21,5 @@
 .bg-transparent {
   background-color: transparent !important;
 }
+
+//@@author

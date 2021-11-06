@@ -1,3 +1,7 @@
+//@@author anonymxtrix-reused
+// Stylesheet was taken from Bootstrap (https://getbootstrap.com/) so that we can make use of their components in our
+// documentation.
+
 // Base class
 //
 // Easily usable on <ul>, <ol>, or <div>.
@@ -113,3 +117,5 @@
 @each $color, $value in $theme-colors {
   @include list-group-item-variant($color, theme-color-level($color, -9), theme-color-level($color, 6));
 }
+
+//@@author

@@ -1,3 +1,7 @@
+//@@author anonymxtrix-reused
+// Stylesheet was taken from Bootstrap (https://getbootstrap.com/) so that we can make use of their components in our
+// documentation.
+
 // Bootstrap functions
 //
 // Utility mixins and functions for evalutating source code across our variables, maps, and mixins.
@@ -84,3 +88,5 @@
 
   @return mix($color-base, $color, $level * $theme-color-interval);
 }
+
+//@@author

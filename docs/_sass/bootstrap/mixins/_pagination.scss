@@ -1,3 +1,7 @@
+//@@author anonymxtrix-reused
+// Stylesheet was taken from Bootstrap (https://getbootstrap.com/) so that we can make use of their components in our
+// documentation.
+
 // Pagination
 
 @mixin pagination-size($padding-y, $padding-x, $font-size, $line-height, $border-radius) {
@@ -20,3 +24,5 @@
     }
   }
 }
+
+//@@author

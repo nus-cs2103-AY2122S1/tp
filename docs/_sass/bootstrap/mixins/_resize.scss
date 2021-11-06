@@ -1,6 +1,12 @@
+//@@author anonymxtrix-reused
+// Stylesheet was taken from Bootstrap (https://getbootstrap.com/) so that we can make use of their components in our
+// documentation.
+
 // Resize anything
 
 @mixin resizable($direction) {
   overflow: auto; // Per CSS3 UI, `resize` only applies when `overflow` isn't `visible`
   resize: $direction; // Options: horizontal, vertical, both
 }
+
+//@@author

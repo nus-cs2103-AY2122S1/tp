@@ -1,3 +1,7 @@
+//@@author anonymxtrix-reused
+// Stylesheet was taken from Bootstrap (https://getbootstrap.com/) so that we can make use of their components in our
+// documentation.
+
 // Gradients
 
 @mixin gradient-bg($color) {
@@ -43,3 +47,5 @@
 @mixin gradient-striped($color: rgba(255,255,255,.15), $angle: 45deg) {
   background-image: linear-gradient($angle, $color 25%, transparent 25%, transparent 50%, $color 50%, $color 75%, transparent 75%, transparent);
 }
+
+//@@author

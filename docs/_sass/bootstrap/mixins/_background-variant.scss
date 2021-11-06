@@ -1,3 +1,7 @@
+//@@author anonymxtrix-reused
+// Stylesheet was taken from Bootstrap (https://getbootstrap.com/) so that we can make use of their components in our
+// documentation.
+
 // stylelint-disable declaration-no-important
 
 // Contextual backgrounds
@@ -19,3 +23,5 @@
     background: $color linear-gradient(180deg, mix($body-bg, $color, 15%), $color) repeat-x !important;
   }
 }
+
+//@@author

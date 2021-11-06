@@ -1,5 +1,11 @@
+//@@author anonymxtrix-reused
+// Stylesheet was taken from Bootstrap (https://getbootstrap.com/) so that we can make use of their components in our
+// documentation.
+
 @mixin box-shadow($shadow...) {
   @if $enable-shadows {
     box-shadow: $shadow;
   }
 }
+
+//@@author
