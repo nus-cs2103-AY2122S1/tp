@@ -34,7 +34,7 @@ public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
 
     public static final String COMMAND_PARAMETERS = "[" + PREFIX_FIND_CONDITION + "{all | any | none}] "
-            + "[" + PREFIX_TAG + "TAG_KEYWORDS]... "
+            + "[" + PREFIX_TAG + "TAG_KEYWORD]... "
             + "[" + PREFIX_NAME + "NAME_KEYWORDS] "
             + "[" + PREFIX_PHONE + "PHONE_KEYWORDS] "
             + "[" + PREFIX_EMAIL + "EMAIL_KEYWORDS] "
