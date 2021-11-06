@@ -3,8 +3,8 @@ package seedu.address.storage;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -143,7 +143,7 @@ class JsonAdaptedClient {
         NextMeeting tempNextMeeting = NextMeeting.NULL_MEETING;
         if (parsedMeeting.get() instanceof LastMet) {
             LastMet newLastMet = (LastMet) parsedMeeting.get();
-            if (tempLastMet == null) {
+            if (tempLastMet.isEmpty()) {
                 tempLastMet = newLastMet;
             }
             if (newLastMet.compareWithDirection(tempLastMet, SortDirection.of("asc")) >= 0) {

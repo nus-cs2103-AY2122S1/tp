@@ -77,4 +77,16 @@ public class LastMetTest {
         // future date
         assertFalse(LastMet.isNotFutureDate("20-12-2050"));
     }
+
+    @Test
+    public void isEmpty() {
+
+        LastMet emptyLastMet = new LastMet("");
+        LastMet tempLastMet = new LastMet("20-12-2020");
+
+        // empty Last Met
+        assertTrue(emptyLastMet.isEmpty());
+
+        assertFalse(tempLastMet.isEmpty());
+    }
 }
