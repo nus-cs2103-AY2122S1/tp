@@ -3,115 +3,52 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+
 participant "i:IncludeCommand" as IncludeCommand LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
-participant ":AddressBook" as AddressBook MODEL_COLOR
 participant "current:Event" as currEvent MODEL_COLOR
-participant "edited:Event" as editedEvent MODEL_COLOR
 end box
-[-> LogicManager : execute(include)
+
 activate LogicManager
-
-LogicManager -> AddressBookParser : parseCommand(include)
-activate AddressBookParser
-
-create IncludeCommand
-AddressBookParser -> IncludeCommand
-activate IncludeCommand
-
-IncludeCommand --> AddressBookParser
-deactivate IncludeCommand
-
-AddressBookParser --> LogicManager : i
-deactivate AddressBookParser
-
 LogicManager -> IncludeCommand : execute()
 activate IncludeCommand
 
 IncludeCommand -> Model : getFilteredEventList()
 activate Model
 
-Model -> AddressBook : getFilteredEventList()
-activate AddressBook
-
-AddressBook --> Model :
-deactivate AddressBook
-
 Model --> IncludeCommand : eventList
 deactivate Model
-
-create currEvent
-IncludeCommand -> currEvent : eventList.get(Index)
-activate currEvent
-
-currEvent --> IncludeCommand
-deactivate currEvent
 
 IncludeCommand -> Model : toPersonList()
 activate Model
 
-loop for all person(names or rooms) in list
-Model -> AddressBook : findPerson(person)
-activate AddressBook
-
-AddressBook --> Model :
-deactivate AddressBook
-end
-
 Model --> IncludeCommand : toAdd
 deactivate Model
 
-IncludeCommand -> Model : getCurrentEventResidents()
-activate Model
+IncludeCommand --> IncludeCommand : createEditedEvent(current, toAdd)
+activate IncludeCommand
 
-loop for all person(names) in list
-Model -> AddressBook : findPerson(person)
-activate AddressBook
-
-AddressBook --> Model :
-deactivate AddressBook
-end
-
-Model --> IncludeCommand : currentResidents
-deactivate Model
-
-IncludeCommand -> currEvent : addResidentsToEvent(toAdd, currentResidents)
+IncludeCommand -> currEvent : getCombinedDisplayString(toAdd)
 activate currEvent
+return displayString
 
-currEvent --> IncludeCommand : newResidents
-deactivate currEvent
+IncludeCommand -> currEvent : getCombinedStorageString(toAdd)
+activate currEvent
+return storageString
 
-create editedEvent
-IncludeCommand -> editedEvent : Class(newResidents)
-activate editedEvent
+return editedEvent
 
-editedEvent --> IncludeCommand
-deactivate editedEvent
-
-IncludeCommand -> Model : setEvent(current, edited)
+IncludeCommand -> Model : setEvent(current, editedEvent)
 activate Model
-
-Model -> AddressBook : setEvent(current, edited)
-activate AddressBook
-
-AddressBook --> Model
-deactivate AddressBook
 
 Model --> IncludeCommand
 deactivate Model
 
 IncludeCommand -> Model : updateFilteredEventList()
 activate Model
-
-Model -> AddressBook : updateFilteredEventList()
-activate AddressBook
-
-AddressBook --> Model
-deactivate AddressBook
 
 Model --> IncludeCommand
 deactivate Model

@@ -33,7 +33,7 @@ public class DeadlineCommand extends Command {
             + CliSyntax.PREFIX_DATE1 + "30-09-2021 "
             + CliSyntax.PREFIX_DATE2 + "05-10-2021";
 
-    public static final String MESSAGE_USAGE_LATE = COMMAND_WORD + ": Lists residents whose ART collection or"
+    public static final String MESSAGE_USAGE_LATE = COMMAND_WORD + ": Lists residents whose ART collection or "
             + "FET tests are due before the given date.\n"
             + "Parameters: "
             + CliSyntax.PREFIX_KEYWORD + "KEYWORD "
