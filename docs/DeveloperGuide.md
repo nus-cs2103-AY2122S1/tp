@@ -20,31 +20,31 @@ title: Developer Guide
        - [Implementation Rationale](#implementation-rationale)
     - [Remove Event feature](#remove-event-feature)
        - [Implementation Details](#implementation-details)
-       - [Design Considerations:](#design-considerations)
-          - [Aspect: Specifying Event to be Removed:](#aspect-specifying-event-to-be-removed)
+       - [Design Considerations](#design-considerations)
+          - [Aspect: Specifying Event to be Removed](#aspect-specifying-event-to-be-removed)
     - [Filter Event feature](#filter-event-feature)
       - [Implementation Details](#implementation-details)
       - [Implementation Rationale](#implementation-rationale)
-      - [Design Considerations:](#design-considerations)
-        - [Aspect: Criteria to filter by:](#aspect-criteria-to-filter-by)
-        - [Aspect: With or without prefix:](#aspect-with-or-without-prefix)
+      - [Design Considerations](#design-considerations)
+        - [Aspect: Criteria to filter by](#aspect-criteria-to-filter-by)
+        - [Aspect: With or without prefix](#aspect-with-or-without-prefix)
     - [View Participant's Details feature](#view-participants-details-feature)
       - [Implementation Details](#implementation-details-1)
       - [Implementation Rationale](#implementation-rationale-1)
-      - [Design Considerations:](#design-considerations-1)
-        - [Aspect: Similar participant IDs:](#aspect-similar-participant-ids)
+      - [Design Considerations](#design-considerations-1)
+        - [Aspect: Similar participant IDs](#aspect-similar-participant-ids)
     - [Add/Remove Participant to/from event - enroll/expel](#addremove-participant-tofrom-event---enrollexpel)
       - [Implementation Details](#implementation-details-2)
       - [Implementation Rationale](#implementation-rationale-2)
     - [View Event Details feature](#view-event-details-feature)
       - [Implementation Details](#implementation-details-3)
       - [Implementation Rationale](#implementation-rationale-3)
-      - [Design Considerations:](#design-considerations-2)
-        - [Aspect: Similar Event names:](#aspect-similar-event-names)
-    - [\[Proposed\] Undo/redo feature](#proposed-undoredo-feature)
+      - [Design Considerations](#design-considerations-2)
+        - [Aspect: Similar Event names](#aspect-similar-event-names)
+    - [\[Proposed\] Undone Event feature](#proposed-undone-event-feature)
       - [Proposed Implementation](#proposed-implementation)
-      - [Design considerations:](#design-considerations-3)
-    - [\[Proposed\] Data archiving](#proposed-data-archiving)
+    - [\[Proposed\] Enroll and Expel multiple Participants from multiple events](#proposed-enroll-and-expel-multiple-participants-from-multiple-events)
+      - [Proposed Implementation](#proposed-implementation)
 - [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
 - [**Appendix: Requirements**](#appendix-requirements)
   - [Product scope](#product-scope)
@@ -133,7 +133,7 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
-![Structure of the UI Component](images/DG images/UiClassDiagram.png)
+![Structure of the UI Component](images/DG-images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ParticipantListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
@@ -162,7 +162,7 @@ How the `Logic` component works:
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/UG screenshots/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete 1` Command](images/UG-screenshots/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -178,7 +178,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-![ModelClassDiagram](images/DG images/ModelClassDiagram.png)
+![ModelClassDiagram](images/DG-images/ModelClassDiagram.png)
 
 
 The `Model` component,
@@ -190,7 +190,7 @@ The `Model` component,
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Participant` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Participant` needing their own `Tag` objects.<br>
 
-![BetterModelClassDiagram](images/DG images/BetterModelClassDiagram.png)
+![BetterModelClassDiagram](images/DG-images/BetterModelClassDiagram.png)
 
 </div>
 
@@ -347,62 +347,57 @@ optional criteria for filtering.
 
 The following is the sequence diagram for how a `FilterEventCommand` works internally.
 
-![FilterEventSequenceDiagram](images/DG images/FilterEventSequenceDiagram.png)
+![FilterEventSequenceDiagram](images/DG-images/FilterEventSequenceDiagram.png)
 
 ### View Participant's Details feature
 
-This feature allows Managera users to look for a specific participant and view their details. The search is done using
-the participant's ID since each participant has a unique ID.
+This feature allows Managera users to look for a specific Participant and view their details. The search is done using
+the Participant's index in the displayed Participant list.
 
 #### Implementation Details
 
 The `AddressBookParser` is responsible for determining the type of `Command` to be created from user input,
 we can simply add a new `commandType` case for `ViewCommand` in `AddressBookParser`.
 
-A `ViewCommandParser` parses the user's input and creates the `ParticipantIdMatchesGivenIdPredicate` which the 
-`ViewCommand` will use to search for the participant. `ParticipantIdMatchesGivenIdPredicate` implements 
-`Predicate<Participant>` which can be passed to a `FilteredList<Participant>` to filter out the participant. Since the
-predicate searches for the exact match, it would return only one result in the filtered list.
-
-The `ViewCommand` created by `ViewCommandParser` will contain the `ParticipantIdMatchesGivenIdPredicate` to filter
-the participant list. When the command is executed, the `model` will filter the `FilteredList<Participant>` using
-the `ParticipantIdMatchesGivenIdPredicate` and display the participant that fulfils the 
-`ParticipantIdMatchesGivenIdPredicate` contained in `ViewCommand`.
+A `ViewCommandParser` parses the user's input and creates an `Index` object which the `ViewCommand` will use to search 
+for the Participant. The `ViewCommand` created by `ViewCommandParser` will then contain the `Index` to filter the
+Participant list. When the command is executed, the `model` obtains the Participant by getting the `Participant` with 
+the given `Index` from the `FilteredList<Participant>` and displays its details.
 
 #### Implementation Rationale
 
-Since each participant has a unique ID, it provides a convenient way for the user to look for a specific participant if
-matching ID is used as the criterion. The `findParticipant` command provides similar functionality, but returns a list 
-of participants instead because it uses names, which are more imprecise. Hence, a separate command was decidedly
-implemented to allow users the ability to sieve out a single participant for a more detailed view.
+Since each Participant has a unique index in the displayed Participant list, it provides a convenient way for the user 
+to look for a specific Participant if index is used as the criterion. The `find` command provides similar functionality,
+but returns a list of Participants instead because it uses names, which are more imprecise. Hence, a separate command 
+was decidedly implemented to allow users the ability to sieve out a single Participant for a more detailed view.
 
 #### Design Considerations:
 ##### Aspect: Similar participant IDs:
 
-* **Alternative 1 (Current Choice)**: Exact match:
+* **Alternative 1 (Current Choice)**: Find by index:
     * Pros:
-        1. The details of the specific participant are returned immediately, provided that the user's input is an exact
-           match of the participant's ID.
-        2. Simpler implementation, simpler for the participant to use.
+        1. The details of the specific Participant are returned immediately, provided that the user's input is a valid 
+           index in the displayed Participant list.
+        2. Simple implementation.
     * Cons:
-        1. The user has to know the exact ID of the participant otherwise the wrong participant may be found.
+        1. The user has to know the index of the Participant, which can be troublesome with a long list of Participants.
+           However, the user can use the `find` function to filter their search, making this process slightly easier.
 
-
-* **Alternative 2**: Find similar IDs:
+* **Alternative 2**: Find by Participant ID:
     * Pros:
-        1. A list of participants that contain the user's input in their IDs are returned, offering greater flexibility 
-        if the user does not fully recall the exact ID of the participant they are looking for. The search can be 
-           further refined by subsequent user input to narrow it down to the specific participant.
+        1. The details of the specific Participant are returned immediately, provided that the user's input is an exact
+           match of the Participant's ID.
     * Cons:
-        1. Significantly harder implementation.
+        1. The current implementation does not provide the Participant ID to the user, and providing more details may 
+           come across to the user as more cluttered.
 
 The following is the sequence diagram for how a `ViewCommand` works internally.
 
-![ViewSequenceDiagram](images/DG images/ViewSequenceDiagram.png)
+![ViewSequenceDiagram](images/DG-images/ViewSequenceDiagram.png)
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-![ViewCommandActivityDiagram](images/DG images/ViewCommandActivityDiagram.png)
+![ViewCommandActivityDiagram](images/DG-images/ViewCommandActivityDiagram.png)
 
 ### Add/Remove Participant to/from event - enroll/expel
 
@@ -436,11 +431,11 @@ The following activity diagrams summarise what happens when a user executes a ne
 
 `AddParticipantToEvent` - `enroll`
 
-![AddParticipantToEventActivityDiagram](images/DG images/AddParticipantToEventByIndexActivityDiagram.png)
+![AddParticipantToEventActivityDiagram](images/DG-images/AddParticipantToEventByIndexActivityDiagram.png)
 
 `RemoveParticipantFromEvent` - `expel`
 
-![RemoveParticipantFromEventActivityDiagram](images/DG images/RemoveParticipantByIndexActivityDiagram.png)
+![RemoveParticipantFromEventActivityDiagram](images/DG-images/RemoveParticipantByIndexActivityDiagram.png)
 
 The command keywords to add/remove participant to/from events are `enroll` and `expel`
 respectively as many have found `addParticipant` and `removeParticipant` to be too long for the commands that are used 
@@ -449,26 +444,23 @@ regularly and the main core of the application.
 ### View Event Details feature
 
 This feature allows Managera users to find an Event by name and view its details. The search is done using the Event's 
-name since Managera employs a UniqueEventList and will not have more than one Event with a given name.
+index in the displayed Event list.
 
 #### Implementation Details
 
 The `AddressBookParser` is responsible for determining the type of `Command` to be created from user input, hence we 
 simply added a new `commandType` case for `ShowEventDetailsCommand` in `AddressBookParser`.
 
-A `ShowEventDetailsCommandParser` parses the user's input and creates an `EventNamePredicate` which the
-`ShowEventDetailsCommand` uses to search for the Event. `EventNamePredicate` implements `Predicate<Event>` which 
-can be passed to a `FilteredList<Event>` to filter out the Event. Since the predicate searches for the Event with a name
-that matches the predicate exactly, it returns only one result in the filtered list.
-
-The `ShowEventDetailsCommand` created by `ShowEventDetailsParser` contains the `EventNamePredicate` used to filter the 
-Event list. When the command is executed, the `model` obtains the Event by filtering the `FilteredList<Event>` using 
-the `EventNamePredicate` and displays its details.
+A `ShowEventDetailsCommandParser` parses the user's input and creates an `Index` object which the
+`ShowEventDetailsCommand` uses to search for the Event. The `ShowEventDetailsCommand` created by 
+`ShowEventDetailsParser` will then contain the `Index` used to filter the Event list. When the command is executed, the 
+`model` obtains the Event by getting the `Event` with the given `Index` from the `FilteredList<Event>` and displays its 
+details.
 
 #### Implementation Rationale
 
-Since each Event has a unique name, it provides a convenient way for the user to look for a specific Event if matching 
-name is used as the criterion. 
+Since each Event has a unique index in the displayed Event list, it provides a convenient way for the user to look for a
+specific Event if index is used as the criterion. 
 
 Another command similar in function is `findEvent`, where the model will filter the existing Event list and display the 
 Events with names that contain a given keyword. However, this implementation is meant for returning a list of possibly 
@@ -479,31 +471,41 @@ display.
 #### Design Considerations:
 ##### Aspect: Similar Event names:
 
-* **Alternative 1 (Current Choice)**: Exact name match:
+* **Alternative 1 (Current Choice)**: Find by index:
+    * Pros:
+        1. The details of the specific Event are returned immediately, provided that the user's input is a valid Event
+           index in the displayed Event list.
+        2. Simple implementation.
+    * Cons:
+        1. The user has to know the index of the Event, which can be troublesome with a long list of Events. However,
+           the user can use the `findEvent` function to filter their search, making this process slightly easier.
+
+* **Alternative 2**: Find by exact name:
     * Pros:
         1. The details of the specific Event are returned immediately, provided that the user's input is an exact
            match of the Event's name.
-        2. Simpler to implement.
+        2. Relatively simple implementation.
     * Cons:
         1. The user has to know the exact name of the Event, otherwise no Event, or the wrong Event, may be found.
         2. If the Event name is long, typographical errors are likely, resulting in the desired Event not being found.
 
 
-* **Alternative 2**: Find similar names, or by a given keyword:
+* **Alternative 3**: Find by similar names or a given keyword:
     * Pros:
         1. A list of Events with names that contain the user's input are returned, offering greater flexibility
            if the user does not fully recall the entire name of the Event they are looking for. The search can be
            further refined by subsequent user input to narrow it down to the specific Event.
     * Cons:
-        1. Significantly harder implementation.
+        1. Relatively harder implementation.
+        2. Might be more troublesome and time-consuming to have to refine the search multiple times.
 
 The following is the sequence diagram for how a `ShowEventDetailsCommand` works internally.
 
-![ShowEventDetailsSequenceDiagram](images/DG images/ShowEventDetailsSequenceDiagram.png)
+![ShowEventDetailsSequenceDiagram](images/DG-images/ShowEventDetailsSequenceDiagram.png)
 
 The following activity diagram summarises what happens when a user executes a new command:
 
-![ShowEventDetailsActivityDiagram](images/DG images/ShowEventDetailsActivityDiagram.png)
+![ShowEventDetailsActivityDiagram](images/DG-images/ShowEventDetailsActivityDiagram.png)
 
 ### \[Proposed\] Undone Event feature
 
