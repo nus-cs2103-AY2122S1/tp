@@ -45,14 +45,14 @@ public class IsFavouritePredicateTest {
     }
 
     @Test
-    public void equals_twoDifferentObjectsWithSamePredicate_success() {
+    public void equals_twoDifferentObjectsWithSameBooleanValues_success() {
         IsFavouritePredicate predicate1 = new IsFavouritePredicate(false);
         IsFavouritePredicate predicate2 = new IsFavouritePredicate(false);
         assertTrue(predicate1.equals(predicate2));
     }
 
     @Test
-    public void equals_twoDifferentObjectsWithDifferentPredicate_falseOutput() {
+    public void equals_twoDifferentObjectsWithDifferentBooleanValues_falseOutput() {
         IsFavouritePredicate predicate1 = new IsFavouritePredicate(false);
         IsFavouritePredicate predicate2 = new IsFavouritePredicate(true);
         assertFalse(predicate1.equals(predicate2));

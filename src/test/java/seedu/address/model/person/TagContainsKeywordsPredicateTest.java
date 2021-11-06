@@ -69,7 +69,7 @@ public class TagContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void equals_twoDifferentObjectsWithDifferentListsButSameKeywords_falseOutput() {
+    public void equals_twoDifferentObjectsWithDifferentListsButSameKeywords_success() {
         List<String> keywords1 = new ArrayList<>();
         List<String> keywords2 = new ArrayList<>();
         keywords1.add("CS2103T");
