@@ -151,6 +151,8 @@ or their body measurements for clothing.
 
 </div>
 
+[return to top](#table-of-contents)
+
 ### Adding a client : `addclient` 
 
 Format: `addclient n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS m/MEASUREMENT g/GENDER [r/REMARK] [t/TAG]…​`
@@ -193,6 +195,8 @@ Examples:
   </br> This is a quick and convenient way to remove a specific client that you know is in SalesNote, without 
   having to scroll to find them.
 
+[return to top](#table-of-contents)
+
 ### Editing a client : `editclient`
 
 Format: `editclient INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [m/MEASUREMENT] [g/GENDER] [r/REMARK] [t/TAG]…​`
@@ -218,6 +222,8 @@ Examples:
 *  `editclient 1 p/91234567 e/jacobtan@example.com` Edits the phone number and email address of the 1st client to be `91234567` and `jaconbtan@example.com` respectively.
 *  `editclient 2 n/Jamie Chew t/` Edits the name of the 2nd client to be `Jamie Chew` and clears all existing tags.
 
+[return to top](#table-of-contents)
+
 ### Locating clients by name : `findclient`
 
 Format: `findclient KEYWORD [MORE_KEYWORDS]`
@@ -234,6 +240,8 @@ Examples:
 * `findclient jacob` can return `Jacob Chua` and `Jacob Tan`
 * `findclient alex david` can return `Alex Yeoh` and `David Li`
 
+[return to top](#table-of-contents)
+
 ### Listing all clients : `listclients`
 
 Format: `listclients`
@@ -242,6 +250,8 @@ Displays a list of all clients in SalesNote to you.
 
 One common use of this command is to remove a filter. For instance you might have used `findclient tan` to display only clients
 whose names contain "Tan". Following with the command `listclients` allows you to refresh the client list to display all clients currently in SalesNote.
+
+[return to top](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -278,10 +288,11 @@ they have the same **label and customer**. So `addorder l/blue blouse c/Alice a/
 will not be allowed. This is to help guard against user error. If you are sure this is what you want, our suggestion is to add a number at the end of the order label
 e.g. `addorder l/blue blouse1 c/alice a/100 d/21 August 2021` instead.
 
-
 Examples:
 * `addorder l/blue blouse c/Alice a/21.90 d/20 August 2021`
 * `addorder l/school uniform c/John a/15.00 d/15 October 2021`
+
+[return to top](#table-of-contents)
 
 ### Deleting an order : `deleteorder`
 
@@ -298,6 +309,8 @@ Note that this will also delete all tasks tagged to the deleted order (for more 
 Examples:
 * `listorders` followed by `deleteorder 1` deletes the first listed task in SalesNote
 * `findorders Tan` followed by `deleteorder 1` deletes the first customer with surname "Tan" in SalesNote
+
+[return to top](#table-of-contents)
 
 ### Finding orders by keywords : `findorder`
 
@@ -318,11 +331,15 @@ Examples:
 As the purpose of the order commands in SalesNote are to help you manage accounts better, we offer a more comprehensive
 set of commands for viewing and sorting orders, shown here below.
 
+[return to top](#table-of-contents)
+
 ### Listing all orders : `listorders`
 
 Format: `listorders`
 
 Displays a list of all orders in SalesNote to you.
+
+[return to top](#table-of-contents)
 
 ### Listing completed orders : `completedorders`
 
@@ -330,11 +347,15 @@ Format: `completedorders`
 
 Filters the list to show only completed orders to you.
 
+[return to top](#table-of-contents)
+
 ### Listing incomplete orders : `incompleteorders`
 
 Format: `incompleteorders`
 
 Filters the list to show only incomplete orders to you.
+
+[return to top](#table-of-contents)
 
 ### Marking an order as complete : `markorder`
 
@@ -350,6 +371,8 @@ This command can be combined with others for ease of use. Some examples:
 * Using `findorder Alice` to find all orders addressed to clients named Alice, followed by `markorder 1` to mark the first such order as complete.
 * Using `incompleteorders` to filter the list to show only the orders where payment is outstanding first, to quickly find the 
   correct one to mark as complete when a client is making payment.
+
+[return to top](#table-of-contents)
 
 ### Sorting orders : `sortorders`
 
@@ -381,6 +404,8 @@ Examples:
 * `sortorders f/a o/ascending` sorts your orders in ascending order of amount (orders for smaller amounts shown first).
 * `sortorders f/amount` sorts your orders in ascending order of amount (orders for smaller amounts shown first).
 
+[return to top](#table-of-contents)
+
 ### Viewing total orders : `totalorders`
 
 Format: `totalorders`
@@ -400,7 +425,7 @@ orders in SalesNote will not be shown.
 <figcaption align = "center">e.g. In the figure above, the application has three clients Ng Chin Gan, Alice Seah,
 and Jacob Tan, but Jacob Tan is not shown as there are no orders from him in SalesNote yet</figcaption>
 
-
+[return to top](#table-of-contents)
 --------------------------------------------------------------------------------------------------------------------
 
 ## Task Commands
@@ -434,6 +459,8 @@ as completed, but also provides you with an ability to tag tasks to orders.
   **dd/mm/yyyy** | `08/11/2021`
 </div>
 
+[return to top](#table-of-contents)
+
 ### Adding a task : `addtask`
 
 Format: `addtask l/LABEL d/DATE [t/TASKTAG]`
@@ -455,6 +482,8 @@ Examples:
 * `addtask l/sew buttons onto blazer d/20 Aug 2021` (the tasktag can be omitted)
 * `addtask l/sew buttons onto blazer d/2021/08/18`
 
+[return to top](#table-of-contents)
+
 ### Deleting a task : `deletetask`
 
 Format: `deletetask INDEX`
@@ -468,6 +497,8 @@ Lets you delete a specified task from SalesNote.
 Examples:
 * `listtasks` followed by `deletetask 2` deletes the 2nd task in SalesNote.
 * `findtask sew` followed by `deletetask 1` deletes the 1st task in the results of the `findtask` command.
+
+[return to top](#table-of-contents)
 
 ### Editing a task : `edittask`
 
@@ -485,6 +516,8 @@ Examples:
 * `edittask 1 l/order cloth d/19 September 2021` edits the label and date of the 1st task to be `order cloth` and `19th September 2021` respectively.
 * `edittask 2 t/General` edits the tag of the 2nd task to be `General`
 
+[return to top](#table-of-contents)
+
 ### Finding tasks by keywords : `findtask`
 
 Format: `findtask KEYWORD [MORE_KEYWORDS]`
@@ -500,6 +533,7 @@ Examples:
 * `findtask buttons` returns `order buttons` and `deliver red buttons`
 * `findtask SO1` returns task with task tag of `SO1`
 
+[return to top](#table-of-contents)
 
 ### Listing all tasks : `listtasks`
 
@@ -507,6 +541,7 @@ Format: `listtasks`
 
 Displays a list of all tasks in SalesNote to you.
 
+[return to top](#table-of-contents)
 
 ### Listing completed tasks : `completedtasks`
 
@@ -514,6 +549,7 @@ Format: `completedtasks`
 
 Filters the list of tasks to show all completed tasks to you.
 
+[return to top](#table-of-contents)
 
 ### Listing incomplete tasks : `incompletetasks`
 
@@ -521,6 +557,7 @@ Format: `incompletetasks`
 
 Filters the list of tasks to show all incomplete tasks to you.
 
+[return to top](#table-of-contents)
 
 ### Marking a task as done : `marktask`
 
@@ -535,6 +572,8 @@ Allows you to mark a specified task from SalesNote as done.
 Examples:
 * `listtasks` followed by `marktask 2` marks the the 2nd task displayed as done.
 
+[return to top](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Clearing all entries : `clear`
@@ -544,6 +583,7 @@ Format: `clear`
 This is to quickly clear all entries (Clients, Tasks, SalesOrder) from SalesNote. Useful for a new user who wants to
 remove all the example data.
 
+[return to top](#table-of-contents)
 
 ### Exiting the program : `exit`
 
@@ -551,10 +591,13 @@ Format: `exit`
 
 Exits the program.
 
+[return to top](#table-of-contents)
 
 ### Saving the data
 
 SalesNote data is saved in the hard disk (As a JSON file) automatically after any command that changes the data. There is no need to save manually.
+
+[return to top](#table-of-contents)
 
 ### Editing the data file
 
@@ -573,6 +616,8 @@ _Example usage_
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file make its format invalid, SalesNote will discard all data related to the incorrectly formatted JSON file and start with an empty data file at the next run.</div>
+
+[return to top](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -630,6 +675,7 @@ Action | Format
 **Clear** | `clear`
 **Exit** | `exit`
 
+[return to top](#table-of-contents)
 
 Acknowledgements:
 This project is based on the AB3 project created by the [SE-EDU initiative](https://se-education.org).
