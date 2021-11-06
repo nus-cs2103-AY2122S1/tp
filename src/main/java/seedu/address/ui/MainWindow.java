@@ -22,7 +22,6 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.LessonAddCommand;
-import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.commands.WeekCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
