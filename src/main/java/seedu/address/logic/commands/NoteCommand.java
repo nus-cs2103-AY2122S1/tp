@@ -51,4 +51,22 @@ public class NoteCommand extends Command {
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, studentName, note), false, false, editedStudent);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof NoteCommand)) {
+            return false;
+        }
+
+        // state check
+        NoteCommand n = (NoteCommand) other;
+        return studentName.equals(n.studentName)
+                && note.equals(n.note);
+    }
 }
