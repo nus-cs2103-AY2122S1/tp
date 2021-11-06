@@ -34,14 +34,14 @@ public class RevenueCommandParser implements Parser<RevenueCommand> {
                     RevenueCommand.COMMAND_WORD), ive);
         }
         Revenue revenue = argMultimap.getValue(PREFIX_REVENUE).map(s -> {
-                    try {
-                        return ParserUtil.parseRevenue(s);
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                        return null;
-                    }
-                })
-                .orElseThrow(() -> new ParseException(ILLEGAL_REVENUE_MESSAGE));
+            try {
+                return ParserUtil.parseRevenue(s);
+            } catch (ParseException e) {
+                e.printStackTrace();
+                return null;
+            }
+        })
+        .orElseThrow(() -> new ParseException(ILLEGAL_REVENUE_MESSAGE));
         return new RevenueCommand(index, revenue);
     }
 }
