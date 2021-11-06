@@ -1,15 +1,16 @@
 package seedu.siasa.logic.commands.contact;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.siasa.commons.core.Messages.MESSAGE_CONTACTS_LISTED_OVERVIEW;
+import static seedu.siasa.commons.core.Messages.MESSAGE_CONTACTS_LIST_EMPTY;
 
-import seedu.siasa.commons.core.Messages;
 import seedu.siasa.logic.commands.Command;
 import seedu.siasa.logic.commands.CommandResult;
 import seedu.siasa.model.Model;
 import seedu.siasa.model.contact.NameContainsKeywordsPredicate;
 
 /**
- * Finds and lists all contacts in address book whose name contains any of the argument keywords.
+ * Finds and lists all contacts in SIASA whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
 public class FindContactCommand extends Command {
@@ -31,8 +32,13 @@ public class FindContactCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredContactList(predicate);
-        return new CommandResult(
-                String.format(Messages.MESSAGE_CONTACTS_LISTED_OVERVIEW, model.getFilteredContactList().size()));
+
+        if (model.getFilteredContactList().size() > 0) {
+            return new CommandResult(
+                    String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, model.getFilteredContactList().size()));
+        } else {
+            return new CommandResult(MESSAGE_CONTACTS_LIST_EMPTY);
+        }
     }
 
     @Override

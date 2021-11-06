@@ -38,7 +38,7 @@ public interface Logic {
     ObservableList<Policy> getFilteredPolicyList();
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' SIASA file path.
      */
     Path getAddressBookFilePath();
 

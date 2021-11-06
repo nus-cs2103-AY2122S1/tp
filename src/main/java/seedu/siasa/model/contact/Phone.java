@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.siasa.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Contact's phone number in the address book.
+ * Represents a Contact's phone number in the SIASA.
  * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
  */
 public class Phone {

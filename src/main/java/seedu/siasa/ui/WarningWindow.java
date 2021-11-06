@@ -17,7 +17,7 @@ public class WarningWindow extends UiPart<Stage> {
     private static final Logger logger = LogsCenter.getLogger(WarningWindow.class);
     private static final String FXML = "WarningWindow.fxml";
     private static final String MESSAGE_ASK_CONFIRMATION = " Do you want to continue?";
-    private static boolean userResponse;
+    private static boolean isConfirmingCommand;
 
     @FXML
     private Button yesButton;
@@ -55,8 +55,8 @@ public class WarningWindow extends UiPart<Stage> {
      *
      * @return Boolean value of the user's response.
      */
-    public boolean getUserResponse() {
-        return userResponse;
+    public boolean isUserConfirmingCommand() {
+        return isConfirmingCommand;
     }
 
     /**
@@ -71,16 +71,16 @@ public class WarningWindow extends UiPart<Stage> {
         String buttonClicked = source.getId();
         if (buttonClicked.equals("noButton")) {
             getRoot().hide();
-            userResponse = false;
+            isConfirmingCommand = false;
         } else {
             getRoot().hide();
-            userResponse = true;
+            isConfirmingCommand = true;
         }
     }
 
     @FXML
     private void handleCloseButtonAction(WindowEvent event) {
-        userResponse = false;
+        isConfirmingCommand = false;
     }
 
 }

@@ -5,10 +5,10 @@ import static seedu.siasa.model.policy.PolicyComparator.POLICY_SORT_BY_ALPHA_ASC
 import static seedu.siasa.model.policy.PolicyComparator.POLICY_SORT_BY_ALPHA_DSC;
 import static seedu.siasa.model.policy.PolicyComparator.POLICY_SORT_BY_COMMISSION_ASC;
 import static seedu.siasa.model.policy.PolicyComparator.POLICY_SORT_BY_COMMISSION_DSC;
-import static seedu.siasa.model.policy.PolicyComparator.POLICY_SORT_BY_DATE_ASC;
-import static seedu.siasa.model.policy.PolicyComparator.POLICY_SORT_BY_DATE_DSC;
-import static seedu.siasa.model.policy.PolicyComparator.POLICY_SORT_BY_PRICE_ASC;
-import static seedu.siasa.model.policy.PolicyComparator.POLICY_SORT_BY_PRICE_DSC;
+import static seedu.siasa.model.policy.PolicyComparator.POLICY_SORT_BY_EXPIRY_ASC;
+import static seedu.siasa.model.policy.PolicyComparator.POLICY_SORT_BY_EXPIRY_DSC;
+import static seedu.siasa.model.policy.PolicyComparator.POLICY_SORT_BY_PAYMENT_ASC;
+import static seedu.siasa.model.policy.PolicyComparator.POLICY_SORT_BY_PAYMENT_DSC;
 
 import seedu.siasa.logic.commands.policy.SortPolicyCommand;
 import seedu.siasa.logic.parser.Parser;
@@ -39,11 +39,11 @@ public class SortPolicyCommandParser implements Parser<SortPolicyCommand> {
         case "titledsc":
             return new SortPolicyCommand(POLICY_SORT_BY_ALPHA_DSC);
 
-        case "priceasc":
-            return new SortPolicyCommand(POLICY_SORT_BY_PRICE_ASC);
+        case "paymentasc":
+            return new SortPolicyCommand(POLICY_SORT_BY_PAYMENT_ASC);
 
-        case "pricedsc":
-            return new SortPolicyCommand(POLICY_SORT_BY_PRICE_DSC);
+        case "paymentdsc":
+            return new SortPolicyCommand(POLICY_SORT_BY_PAYMENT_DSC);
 
         case "commasc":
             return new SortPolicyCommand(POLICY_SORT_BY_COMMISSION_ASC);
@@ -51,11 +51,11 @@ public class SortPolicyCommandParser implements Parser<SortPolicyCommand> {
         case "commdsc":
             return new SortPolicyCommand(POLICY_SORT_BY_COMMISSION_DSC);
 
-        case "dateasc":
-            return new SortPolicyCommand(POLICY_SORT_BY_DATE_ASC);
+        case "expiryasc":
+            return new SortPolicyCommand(POLICY_SORT_BY_EXPIRY_ASC);
 
-        case "datedsc":
-            return new SortPolicyCommand(POLICY_SORT_BY_DATE_DSC);
+        case "expirydsc":
+            return new SortPolicyCommand(POLICY_SORT_BY_EXPIRY_DSC);
 
         default:
             return new SortPolicyCommand();

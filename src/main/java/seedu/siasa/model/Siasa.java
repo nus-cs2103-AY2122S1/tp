@@ -2,7 +2,10 @@ package seedu.siasa.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -87,8 +90,8 @@ public class Siasa implements ReadOnlySiasa {
     }
 
     /**
-     * Adds a contact to the address book.
-     * The contact must not already exist in the address book.
+     * Adds a contact to the SIASA.
+     * The contact must not already exist in the SIASA.
      */
     public void addContact(Contact p) {
         contacts.add(p);
@@ -96,9 +99,9 @@ public class Siasa implements ReadOnlySiasa {
 
     /**
      * Replaces the given contact {@code target} in the list with {@code editedContact}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in the SIASA.
      * The contact identity of {@code editedContact} must not be the same as another
-     * existing contact in the address book.
+     * existing contact in the SIASA.
      */
     public void setContact(Contact target, Contact editedContact) {
         requireNonNull(editedContact);
@@ -142,26 +145,33 @@ public class Siasa implements ReadOnlySiasa {
             int currentCount = hashMap.get(owner);
             hashMap.put(owner, currentCount + 1);
         });
-        return hashMap;
+        List<Map.Entry<Contact, Integer>> list = new ArrayList<>(hashMap.entrySet());
+        list.sort(Collections.reverseOrder(Map.Entry.comparingByValue()));
+        Map<Contact, Integer> sortedResult = new LinkedHashMap<>();
+        for (Map.Entry<Contact, Integer> entry : list) {
+            sortedResult.put(entry.getKey(), entry.getValue());
+        }
+        return sortedResult;
     }
 
     public Map<Contact, Integer> getCommissionPerContact() {
         HashMap<Contact, Integer> hashMap = new HashMap<>();
         contacts.forEach(contact -> {
-            float commission = 0;
+            double commission = 0;
             for (Policy policy : policies) {
                 if (policy.getOwner().equals(contact)) {
-                    float commissionPercentage = policy.getCommission().commissionPercentage;
-                    int numberPayments = policy.getCommission().numberOfPayments;
-                    int paymentAmt = policy.getPaymentStructure().paymentAmount;
-                    float policyCommission = (commissionPercentage / 100)
-                            * numberPayments * paymentAmt;
-                    commission += policyCommission;
+                    commission += policy.getTotalCommission();
                 }
             }
             hashMap.put(contact, (int) commission);
         });
-        return hashMap;
+        List<Map.Entry<Contact, Integer>> list = new ArrayList<>(hashMap.entrySet());
+        list.sort(Collections.reverseOrder(Map.Entry.comparingByValue()));
+        Map<Contact, Integer> sortedResult = new LinkedHashMap<>();
+        for (Map.Entry<Contact, Integer> entry : list) {
+            sortedResult.put(entry.getKey(), entry.getValue());
+        }
+        return sortedResult;
     }
 
     /// policy-level operations

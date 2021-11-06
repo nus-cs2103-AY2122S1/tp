@@ -2,6 +2,7 @@ package seedu.siasa.logic.commands.policy;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_COMMISSION;
+import static seedu.siasa.logic.parser.CliSyntax.PREFIX_CONTACT_INDEX;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_EXPIRY;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_PAYMENT;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_TAG;
@@ -19,6 +20,7 @@ import seedu.siasa.commons.core.index.Index;
 import seedu.siasa.commons.util.CollectionUtil;
 import seedu.siasa.logic.commands.Command;
 import seedu.siasa.logic.commands.CommandResult;
+import seedu.siasa.logic.commands.Warning;
 import seedu.siasa.logic.commands.exceptions.CommandException;
 import seedu.siasa.model.Model;
 import seedu.siasa.model.contact.Contact;
@@ -30,28 +32,30 @@ import seedu.siasa.model.policy.Title;
 import seedu.siasa.model.tag.Tag;
 
 /**
- * Edits the details of an existing policy in the address book.
+ * Edits the details of an existing policy in the SIASA.
  */
 public class EditPolicyCommand extends Command {
 
     public static final String COMMAND_WORD = "editpolicy";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the policy identified "
-            + "by the index number used in the displayed policy list. "
+            + "by the index number used in the displayed policy list.\n"
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_TITLE + "TITLE] "
-            + "[" + PREFIX_EXPIRY + "EXPIRY] "
-            + "[" + PREFIX_PAYMENT + "PAYMENT_AMOUNT PAYMENT_FREQUENCY(OPT) NUM_OF_PAYMENTS(OPT)] "
-            + "[" + PREFIX_COMMISSION + "COMMISSION_PERCENTAGE NUM_OF_PAYMENTS_W_COMM] "
+            + "[" + PREFIX_TITLE + "POLICY_NAME] "
+            + "[" + PREFIX_PAYMENT + "PMT_AMOUNT_CENTS [PMTS_PER_YR] [NUM_OF_PMTS]] "
+            + "[" + PREFIX_COMMISSION + "COMMISSION_% NUM_OF_COMM] "
+            + "[" + PREFIX_CONTACT_INDEX + "CONTACT_INDEX] "
+            + "[" + PREFIX_EXPIRY + "COVERAGE_EXPIRY_DATE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_TITLE + "Full Life "
             + PREFIX_EXPIRY + "2021-06-13";
 
     public static final String MESSAGE_EDIT_POLICY_SUCCESS = "Edited Policy: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_POLICY = "This policy already exists in the address book.";
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided";
+    public static final String MESSAGE_DUPLICATE_POLICY = "This policy already exists in the SIASA";
+    public static final String MESSAGE_NOT_FUTURE_EXPIRY_DATE = "Expiry Date is not in the future";
 
     private final Index index;
     private final EditPolicyDescriptor editPolicyDescriptor;
@@ -77,8 +81,17 @@ public class EditPolicyCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_POLICY_DISPLAYED_INDEX);
         }
 
+
         Policy policyToEdit = lastShownList.get(index.getZeroBased());
         Policy editedPolicy = createEditedPolicy(policyToEdit, editPolicyDescriptor, model);
+
+        if (editPolicyDescriptor.expiryDate != null
+                && !CoverageExpiryDate.isFutureExpiryDate(editPolicyDescriptor.expiryDate.value)) {
+            boolean response = Warning.isUserConfirmingCommand(MESSAGE_NOT_FUTURE_EXPIRY_DATE);
+            if (!response) {
+                return new CommandResult(Messages.MESSAGE_CANCELLED_COMMAND);
+            }
+        }
 
         if (!policyToEdit.isSamePolicy(editedPolicy) && model.hasPolicy(editedPolicy)) {
             throw new CommandException(MESSAGE_DUPLICATE_POLICY);
@@ -111,6 +124,7 @@ public class EditPolicyCommand extends Command {
         if (updatedCommission.numberOfPayments > updatedPaymentStructure.numberOfPayments) {
             throw new CommandException(Messages.MESSAGE_INVALID_COMMISSION_NUM_OF_PMT);
         }
+
         Contact updatedOwner;
         if (editPolicyDescriptor.getOwnerIndex().isEmpty()) {
             updatedOwner = policyToEdit.getOwner();

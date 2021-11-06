@@ -17,8 +17,8 @@ import seedu.siasa.commons.core.Messages;
 import seedu.siasa.commons.core.index.Index;
 import seedu.siasa.logic.commands.Command;
 import seedu.siasa.logic.commands.CommandResult;
+import seedu.siasa.logic.commands.Warning;
 import seedu.siasa.logic.commands.exceptions.CommandException;
-import seedu.siasa.logic.commands.warnings.Warning;
 import seedu.siasa.model.Model;
 import seedu.siasa.model.contact.Contact;
 import seedu.siasa.model.policy.Commission;
@@ -30,32 +30,34 @@ import seedu.siasa.model.tag.Tag;
 
 
 /**
- * Adds a policy to the address book.
+ * Adds a policy to the SIASA.
  */
 public class AddPolicyCommand extends Command {
 
     public static final String COMMAND_WORD = "addpolicy";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a policy to the policy list. "
+            + "\n"
             + "Parameters: "
-            + PREFIX_TITLE + "TITLE "
-            + PREFIX_EXPIRY + "EXPIRY "
-            + PREFIX_PAYMENT + "PAYMENT_AMOUNT PAYMENT_FREQUENCY(OPT) NUM_OF_PAYMENTS(OPT) "
-            + PREFIX_COMMISSION + "COMMISSION_PERCENTAGE NUM_OF_PAYMENTS_W_COMM "
+            + PREFIX_TITLE + "POLICY_NAME "
+            + PREFIX_PAYMENT + "PMT_AMOUNT_CENTS [PMTS_PER_YR] [NUM_OF_PMTS] "
+            + PREFIX_COMMISSION + "COMMISSION_% NUM_OF_COMM "
             + PREFIX_CONTACT_INDEX + "CONTACT_INDEX "
-            + PREFIX_TAG + "TAG... "
+            + "[" + PREFIX_EXPIRY + "COVERAGE_EXPIRY_DATE] "
+            + "[" + PREFIX_TAG + "TAG]... "
+            + "\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TITLE + "Life Policy "
-            + PREFIX_EXPIRY + "2021-06-13 "
             + PREFIX_PAYMENT + "1000 12 120 "
             + PREFIX_COMMISSION + "20 12 "
             + PREFIX_CONTACT_INDEX + "1 "
+            + PREFIX_EXPIRY + "2021-06-13 "
             + PREFIX_TAG + "AIA";
 
     public static final String MESSAGE_SUCCESS = "New policy added: %1$s";
     public static final String MESSAGE_DUPLICATE_POLICY = "This policy already exists for the specified contact";
-    public static final String MESSAGE_PAST_EXPIRY_DATE = "Expiry Date is in the past.";
-    public static final String MESSAGE_SIMILAR_POLICY = "A similar policy: %1$s already exists in the address book.";
+    public static final String MESSAGE_NOT_FUTURE_EXPIRY_DATE = "Expiry Date is not in the future";
+    public static final String MESSAGE_SIMILAR_POLICY = "A similar policy: %1$s already exists in the SIASA";
 
     private final Title title;
     private final PaymentStructure paymentStructure;
@@ -89,7 +91,7 @@ public class AddPolicyCommand extends Command {
         }
 
         if (coverageExpiryDate != null && !CoverageExpiryDate.isFutureExpiryDate(coverageExpiryDate.value)) {
-            boolean response = Warning.warnUser(MESSAGE_PAST_EXPIRY_DATE);
+            boolean response = Warning.isUserConfirmingCommand(MESSAGE_NOT_FUTURE_EXPIRY_DATE);
             if (!response) {
                 return new CommandResult(Messages.MESSAGE_CANCELLED_COMMAND);
             }
@@ -105,7 +107,8 @@ public class AddPolicyCommand extends Command {
 
         if (model.getSimilarPolicy(toAdd).isPresent()) {
             Policy similarPolicy = model.getSimilarPolicy(toAdd).get();
-            boolean response = Warning.warnUser(String.format(MESSAGE_SIMILAR_POLICY, similarPolicy.getTitle()));
+            boolean response = Warning.isUserConfirmingCommand(
+                    String.format(MESSAGE_SIMILAR_POLICY, similarPolicy.getTitle()));
             if (!response) {
                 return new CommandResult(Messages.MESSAGE_CANCELLED_COMMAND);
             }

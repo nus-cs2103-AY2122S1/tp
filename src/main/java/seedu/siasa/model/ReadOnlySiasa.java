@@ -5,7 +5,7 @@ import seedu.siasa.model.contact.Contact;
 import seedu.siasa.model.policy.Policy;
 
 /**
- * Unmodifiable view of an address book
+ * Unmodifiable view of an SIASA
  */
 public interface ReadOnlySiasa {
 

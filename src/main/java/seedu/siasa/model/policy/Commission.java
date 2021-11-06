@@ -7,8 +7,9 @@ import java.util.Objects;
 
 public class Commission {
     public static final String MESSAGE_CONSTRAINTS =
-            "Commission percentage should be a number from 0 to 100 representing the percentage; "
-                    + "Num of payments with commission >= 0 and <= num of payments in the payment structure.";
+            "Commission percentage should be a number from 0 to 100 representing the percentage;\n"
+                    + "Num of payments with commission should be non-negative and not larger than the "
+                    + "num of payments in the payment structure and 2147483647";
     public final int commissionPercentage;
     // number of payments with commission
     public final int numberOfPayments;
@@ -43,11 +44,8 @@ public class Commission {
 
     @Override
     public String toString() {
-        String numberOfPaymentsStr = " [" + Integer.toString(numberOfPayments) + " payment(s)]";
-        if (numberOfPayments == PaymentStructure.INDEFINITE_NUMBER_OF_PAYMENTS) {
-            numberOfPaymentsStr = "";
-        }
-        return Integer.toString(commissionPercentage) + "%" + numberOfPaymentsStr;
+        String numberOfPaymentsStr = " [" + numberOfPayments + " payment(s)]";
+        return commissionPercentage + "%" + numberOfPaymentsStr;
     }
 
     @Override

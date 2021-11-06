@@ -206,8 +206,6 @@ public class ModelManager implements Model {
     public void updateFilteredContactList(Comparator<Contact> comparator) {
         requireNonNull(comparator);
         sortedContacts.setComparator(comparator);
-        filteredContacts.removeAll();
-        filteredContacts.addAll(sortedContacts);
     }
 
     //=========== Filtered Policy List Accessors =============================================================
@@ -231,8 +229,6 @@ public class ModelManager implements Model {
     public void updateFilteredPolicyList(Comparator<Policy> comparator) {
         requireNonNull(comparator);
         sortedPolicies.setComparator(comparator);
-        filteredPolicies.removeAll();
-        filteredPolicies.addAll(sortedPolicies);
     }
 
     /**
