@@ -614,7 +614,7 @@ _Example usage_
 2. Edit the entities in the JSON file as you wish.
 3. Re-open SaleNote and changes should be reflected.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="span" class="alert alert-warning">:exclamation: <b>Caution:</b>
 If your changes to the data file make its format invalid, SalesNote will discard all data related to the incorrectly formatted JSON file and start with an empty data file at the next run.</div>
 
 [return to top](#table-of-contents)
