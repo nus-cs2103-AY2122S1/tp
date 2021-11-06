@@ -12,7 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.customer.Customer;
 
 /**
- * Deletes a customer identified using it's displayed index from the address book.
+ * Deletes a customer identified using it's displayed index from RHRH.
  */
 public class DeleteCustomerCommand extends Command {
 

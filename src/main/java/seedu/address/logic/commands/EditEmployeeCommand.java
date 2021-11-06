@@ -36,7 +36,7 @@ import seedu.address.model.person.employee.Shift;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing employee in the address book.
+ * Edits the details of an existing employee in RHRH.
  */
 public class EditEmployeeCommand extends Command {
 
@@ -63,12 +63,14 @@ public class EditEmployeeCommand extends Command {
 
     public static final String MESSAGE_EDIT_EMPLOYEE_SUCCESS = "Edited Employee: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_EMPLOYEE = "This employee already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_EMPLOYEE = "This employee already exists in RHRH.";
 
     private final Index index;
     private final EditEmployeeCommand.EditEmployeeDescriptor editEmployeeDescriptor;
 
     /**
+     * Constructs an EditEmployeeCommand to edit the employee at {@code Index}
+     *
      * @param index of the employee in the filtered employee list to edit
      * @param editEmployeeDescriptor details to edit the employee with
      */

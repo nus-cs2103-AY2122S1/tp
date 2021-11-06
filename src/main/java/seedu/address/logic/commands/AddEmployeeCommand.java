@@ -17,13 +17,13 @@ import seedu.address.model.Model;
 import seedu.address.model.person.employee.Employee;
 
 /**
- * Adds an employee to the address book.
+ * Adds an employee to RHRH.
  */
 public class AddEmployeeCommand extends Command {
     public static final String COMMAND_WORD = "adde";
 
     public static final String MESSAGE_USAGE = CommandUtil.formatCommandWord(COMMAND_WORD)
-            + ": Adds an employee to the address book. "
+            + ": Adds an employee to RHRH. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -46,7 +46,7 @@ public class AddEmployeeCommand extends Command {
             + PREFIX_TAG + "Team C";
 
     public static final String MESSAGE_SUCCESS = "New employee has been added: %1$s";
-    public static final String MESSAGE_DUPLICATE_EMPLOYEE = "Employee information already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_EMPLOYEE = "Employee information already exists in RHRH";
 
     private final Employee toAdd;
 

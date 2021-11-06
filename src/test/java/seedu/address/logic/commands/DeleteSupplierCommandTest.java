@@ -68,7 +68,7 @@ public class DeleteSupplierCommandTest {
         showSupplierAtIndex(model, INDEX_FIRST_SUPPLIER);
 
         Index outOfBoundIndex = INDEX_SECOND_SUPPLIER;
-        // ensures that outOfBoundIndex is still in bounds of address book list
+        // ensures that outOfBoundIndex is still in bounds of RHRH list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getRhrh().getSupplierList().size());
 
         DeleteSupplierCommand deleteSupplierCommand = new DeleteSupplierCommand(outOfBoundIndex);

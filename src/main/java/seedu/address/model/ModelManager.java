@@ -23,7 +23,7 @@ import seedu.address.model.table.Table;
 import seedu.address.model.table.TableManager;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of RHRH data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -47,7 +47,7 @@ public class ModelManager implements Model {
         super();
         requireAllNonNull(rhrh, userPrefs);
 
-        logger.fine("Initializing with address book: " + rhrh + " and user prefs " + userPrefs);
+        logger.fine("Initializing with RHRH: " + rhrh + " and user prefs " + userPrefs);
 
         this.rhrh = new Rhrh(rhrh);
         this.userPrefs = new UserPrefs(userPrefs);
