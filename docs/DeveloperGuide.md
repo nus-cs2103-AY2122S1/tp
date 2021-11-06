@@ -164,7 +164,7 @@ The `Model` component,
 
 <img src="images/StorageClassDiagram.png" width="600" />
 
-The `Storage` component,
+How the Storage component works:
 * Saves address book data, task book data, sales order book data
   and user preference data in json format, and read them back into corresponding objects.
 * The main storage class inherits from all of `AddressBookStorage`, `TaskBookStorage`, `OrderBookStorage`,
