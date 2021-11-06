@@ -9,7 +9,6 @@ import seedu.address.model.friend.FriendName;
 import seedu.address.model.friend.Schedule;
 import seedu.address.model.game.GameId;
 import seedu.address.model.gamefriendlink.GameFriendLink;
-import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Person objects.
@@ -57,7 +56,9 @@ public class FriendBuilder {
      * building.
      */
     public FriendBuilder withGameFriendLinks(GameFriendLink... gameFriendLinks) {
-        this.games = SampleDataUtil.getGameFriendLinkMap(gameFriendLinks);
+        for (GameFriendLink currGameFriendLink: gameFriendLinks) {
+            this.games.put(currGameFriendLink.getGameId(), currGameFriendLink);
+        }
         return this;
     }
 

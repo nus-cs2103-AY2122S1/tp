@@ -138,11 +138,6 @@ public class UniqueGamesList implements Iterable<Game> {
                 && internalList.equals(((UniqueGamesList) other).internalList));
     }
 
-    @Override
-    public int hashCode() {
-        return internalList.hashCode();
-    }
-
     /**
      * Returns true if {@code games} contains only unique games.
      */

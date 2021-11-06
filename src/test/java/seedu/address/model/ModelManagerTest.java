@@ -16,6 +16,7 @@ import static seedu.address.testutil.TypicalGames.VALORANT;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Comparator;
 
 import org.junit.jupiter.api.Test;
 
@@ -204,11 +205,6 @@ public class ModelManagerTest {
         GamesList differentGamesList = new GamesList();
         UserPrefs userPrefs = new UserPrefs();
 
-        // same values -> returns true
-        modelManager = new ModelManager(friendsList, gamesList, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(friendsList, gamesList, userPrefs);
-        assertTrue(modelManager.equals(modelManagerCopy));
-
         // same object -> returns true
         assertTrue(modelManager.equals(modelManager));
 
@@ -218,17 +214,30 @@ public class ModelManagerTest {
         // different types -> returns false
         assertFalse(modelManager.equals(new FriendsList()));
 
+        // same values -> returns true
+        modelManager = new ModelManager(friendsList, gamesList, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(friendsList, gamesList, userPrefs);
+        assertTrue(modelManager.equals(modelManagerCopy));
+
         // different friendsList -> returns false
         assertFalse(modelManager.equals(new ModelManager(differentFriendsList, gamesList, userPrefs)));
-
-        // different gamesList -> returns false
-        assertFalse(modelManager.equals(new ModelManager(friendsList, differentGamesList, userPrefs)));
 
         // different filteredFriendsList -> returns false
         String[] keywords = ALICE.getFriendName().fullName.split("\\s+");
         modelManager.updateFilteredAndSortedFriendsList(
-            new FriendNameContainsKeywordsPredicate(Arrays.asList(keywords)));
+                new FriendNameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(friendsList, gamesList, userPrefs)));
+
+        // different filteredAndSortedFriends -> returns false
+        modelManager.updateFilteredAndSortedFriendsList(PREDICATE_SHOW_ALL_FRIENDS, new ComparatorStub());
+        assertFalse(modelManager.equals(new ModelManager(friendsList, gamesList, userPrefs)));
+
+        // resets modelManager to initial state for upcoming tests
+        modelManager.updateFilteredAndSortedFriendsList(PREDICATE_SHOW_ALL_FRIENDS);
+        modelManager.updateFilteredGamesList(PREDICATE_SHOW_ALL_GAMES);
+
+        // different gamesList -> returns false
+        assertFalse(modelManager.equals(new ModelManager(friendsList, differentGamesList, userPrefs)));
 
         // different filteredGamesList -> returns false
         modelManager.updateFilteredGamesList(new GameIdContainsKeywordPredicate(MINECRAFT.getGameId().value));
@@ -242,5 +251,12 @@ public class ModelManagerTest {
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setFriendsListFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(friendsList, gamesList, differentUserPrefs)));
+    }
+
+    private class ComparatorStub implements Comparator<Friend> {
+        @Override
+        public int compare(Friend o1, Friend o2) {
+            return -1 * o1.getFriendId().value.compareToIgnoreCase(o2.getFriendId().value);
+        }
     }
 }

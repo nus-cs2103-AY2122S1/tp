@@ -4,18 +4,23 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_FRIEND_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FRIEND_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GAME_ID_CSGO;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalFriends.ALICE;
 import static seedu.address.testutil.TypicalFriends.ALICE_FRIEND_ID;
 import static seedu.address.testutil.TypicalFriends.BOB;
+import static seedu.address.testutil.TypicalFriends.CARL;
 import static seedu.address.testutil.TypicalGameFriendLinks.APEX_AMY_DRACO_LINK;
 import static seedu.address.testutil.TypicalGameFriendLinks.CSGO_AMY_DRACO_LINK;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.friend.exceptions.InvalidDayTimeException;
 import seedu.address.model.game.Game;
 import seedu.address.model.gamefriendlink.GameFriendLink;
 import seedu.address.testutil.FriendBuilder;
@@ -24,6 +29,12 @@ import seedu.address.testutil.GameFriendLinkBuilder;
 
 
 public class FriendTest {
+
+    @Test
+    public void constructor_nullFriendName_defaultName() {
+        Friend friend = new Friend(CARL.getFriendId(), null, CARL.getGameFriendLinks(), CARL.getSchedule());
+        assertEquals(FriendName.DEFAULT_FRIEND_NAME, friend.getFriendName());
+    }
 
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
@@ -101,21 +112,20 @@ public class FriendTest {
         assertThrows(NullPointerException.class, () -> alice.unlink(null));
     }
 
-
     @Test
     public void equals() {
-        // same values -> returns true
-        Friend aliceCopy = new FriendBuilder(ALICE).build();
-        assertEquals(ALICE, aliceCopy);
-
         // same object -> returns true
         assertEquals(ALICE, ALICE);
 
         // null -> returns false
-        assertNotEquals(null, ALICE);
+        assertNotEquals(ALICE, null);
 
         // different type -> returns false
-        assertNotEquals(5, ALICE);
+        assertNotEquals(ALICE, "String");
+
+        // same values -> returns true
+        Friend aliceCopy = new FriendBuilder(ALICE).build();
+        assertEquals(ALICE, aliceCopy);
 
         // different friend -> returns false
         assertNotEquals(BOB, ALICE);
@@ -130,6 +140,33 @@ public class FriendTest {
 
         // different games -> returns false
         editedAlice = new FriendBuilder(ALICE).withGameFriendLinks(CSGO_AMY_DRACO_LINK).build();
-        assertFalse(ALICE.equals(editedAlice));
+        assertNotEquals(ALICE, editedAlice);
+
+        // different schedule -> false
+        Schedule newSchedule = new Schedule();
+        try {
+            newSchedule.setScheduleDay(1, "1", "2", true);
+        } catch (InvalidDayTimeException ex) {
+            System.out.println(ex.getMessage());
+            fail();
+        }
+        editedAlice = new FriendBuilder(ALICE).withSchedule(newSchedule).build();
+        assertNotEquals(ALICE, editedAlice);
+    }
+
+    @Test
+    public void toString_emptyGameFriendLinks_correctString() {
+        String expectedMessage = "Friend ID: amyawesome; Name: Amy Bee; \n"
+                + "Day: MONDAY; Free TimeSlots: ;\n"
+                + "Day: TUESDAY; Free TimeSlots: ;\n"
+                + "Day: WEDNESDAY; Free TimeSlots: ;\n"
+                + "Day: THURSDAY; Free TimeSlots: ;\n"
+                + "Day: FRIDAY; Free TimeSlots: ;\n"
+                + "Day: SATURDAY; Free TimeSlots: ;\n"
+                + "Day: SUNDAY; Free TimeSlots: ;";
+
+        Friend editedAmy = new FriendBuilder().withFriendId(VALID_FRIEND_ID_AMY).withFriendName(VALID_NAME_AMY)
+                .withGameFriendLinks().build();
+        assertEquals(expectedMessage, editedAmy.toString());
     }
 }

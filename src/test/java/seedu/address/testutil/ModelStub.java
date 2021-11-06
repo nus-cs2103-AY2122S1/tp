@@ -156,11 +156,6 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void setGame(Game target, Game editedGame) {
-        throw new AssertionError("This method should not be called.");
-    }
-
-    @Override
     public ObservableList<Game> getFilteredGamesList() {
         throw new AssertionError("This method should not be called.");
     }

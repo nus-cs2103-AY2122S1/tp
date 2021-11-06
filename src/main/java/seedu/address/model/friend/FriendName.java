@@ -53,10 +53,4 @@ public class FriendName {
                 || (other instanceof FriendName // instanceof handles nulls
                 && fullName.equals(((FriendName) other).fullName)); // state check
     }
-
-    @Override
-    public int hashCode() {
-        return fullName.hashCode();
-    }
-
 }

@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalFriends.ALICE;
@@ -133,19 +134,23 @@ public class FriendsListTest {
 
     @Test
     public void equals() {
-        // emoty list -> equals
-        assertEquals(friendsList.getFriendsList(), Collections.emptyList());
+        // same object
+        assertEquals(friendsList, friendsList);
 
-        // another empty friendsList -> equals
-        assertEquals(friendsList.getFriendsList(), new FriendsList().getFriendsList());
+        // null
+        assertNotEquals(friendsList, null);
+
+        // different type
+        assertNotEquals(friendsList, "String");
+
+        // another new friendsList
+        assertEquals(friendsList, new FriendsList());
 
         // lists with friend with same fields -> equals
         FriendsList first = new FriendsList();
         FriendsList second = new FriendsList();
         first.addFriend(new FriendBuilder().withFriendId("dummy").withFriendName("Jim").build());
         second.addFriend(new FriendBuilder().withFriendId("dummy").withFriendName("Jim").build());
-
         assertEquals(first, second);
     }
-
 }

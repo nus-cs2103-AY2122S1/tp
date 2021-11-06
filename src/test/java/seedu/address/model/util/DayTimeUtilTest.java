@@ -7,6 +7,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.friend.exceptions.InvalidDayTimeException;
 
+/**
+ * Unreachable instruction in DayTimeUtilTest - class creation.
+ */
 class DayTimeUtilTest {
 
     @Test

@@ -6,8 +6,4 @@ public class InvalidHourOfDayException extends Exception {
     public InvalidHourOfDayException() {
         super(MESSAGE_INVALID_HOUR_OF_DAY);
     }
-
-    public InvalidHourOfDayException(String message) {
-        super(message);
-    }
 }

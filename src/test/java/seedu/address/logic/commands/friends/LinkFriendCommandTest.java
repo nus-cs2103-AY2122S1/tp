@@ -5,7 +5,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalFriends.ALICE;
 import static seedu.address.testutil.TypicalFriends.AMY;
 import static seedu.address.testutil.TypicalFriends.getTypicalFriendsList;
-import static seedu.address.testutil.TypicalGames.CSGO;
+import static seedu.address.testutil.TypicalGames.APEX_LEGENDS;
 import static seedu.address.testutil.TypicalGames.GENSHIN_IMPACT;
 import static seedu.address.testutil.TypicalGames.getTypicalGamesList;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
@@ -57,7 +57,8 @@ public class LinkFriendCommandTest {
     @Test
     public void execute_nonExistentGameIdUnfilteredList_throwsCommandException() {
         UserName userName = new UserName("GoldNova");
-        LinkFriendCommand linkFriendCommand = new LinkFriendCommand(ALICE.getFriendId(), CSGO.getGameId(), userName);
+        LinkFriendCommand linkFriendCommand =
+                new LinkFriendCommand(ALICE.getFriendId(), APEX_LEGENDS.getGameId(), userName);
 
         assertCommandFailure(linkFriendCommand, model, Messages.MESSAGE_NONEXISTENT_GAME_ID);
     }

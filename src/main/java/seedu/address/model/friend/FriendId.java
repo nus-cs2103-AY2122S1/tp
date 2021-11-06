@@ -50,9 +50,4 @@ public class FriendId {
                 || (other instanceof FriendId // instanceof handles nulls
                 && value.equalsIgnoreCase(((FriendId) other).value)); // state check
     }
-
-    @Override
-    public int hashCode() {
-        return value.hashCode();
-    }
 }

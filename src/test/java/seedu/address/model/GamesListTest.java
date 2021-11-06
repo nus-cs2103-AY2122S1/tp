@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalGames.MINECRAFT;
@@ -111,4 +112,25 @@ public class GamesListTest {
         }
     }
 
+    @Test
+    public void equals() {
+        // same object
+        assertEquals(gamesList, gamesList);
+
+        // null
+        assertNotEquals(gamesList, null);
+
+        // null
+        assertNotEquals(gamesList, "String");
+
+        // another new gamesList
+        assertEquals(gamesList, new GamesList());
+
+        // lists with games of same fields -> equals
+        GamesList first = new GamesList();
+        GamesList second = new GamesList();
+        first.addGame(new GameBuilder().withGameId("dummy").build());
+        second.addGame(new GameBuilder().withGameId("dummy").build());
+        assertEquals(first, second);
+    }
 }
