@@ -7,10 +7,14 @@ title: User Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always"></div>
+
 ## **Introduction**
 
 <div align="center">
-  <img alt="logo" src="images/logo.png">
+  <img alt="logo" src="images/logo.png"
+        width="500"
+        height="500">
 </div>
 
 Welcome and thank you for downloading **FAST**! Are you a financial advisor having troubles managing your contacts
@@ -25,6 +29,7 @@ More importantly, FAST is **optimized for those who prefer to work with a Comman
 Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 If you are a Financial Advisor that can type fast, FAST will get your contact management tasks done faster than traditional GUI apps!
 
+<div style="page-break-after: always"></div>
 
 ### Features overview
 Here is an overview of the features FAST offers:
@@ -40,6 +45,8 @@ This guide also serves as a reminder for existing users to quickly search for sp
 by clicking on the links, to jump to the section where the information which they are looking for exists.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always"></div>
 
 ## **How to use this user guide**
 We recommend first time users to read the user guide in the order that is written.
@@ -98,6 +105,8 @@ In [Glossary](#glossary), you will find useful descriptions and meanings of term
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always"></div>
+
 ## **Quick start**
 
 1. Ensure you have Java `11` or above installed in your Computer. FAST can be used 
@@ -117,7 +126,7 @@ on any operating system including Windows, macOS or Linux
    
 1. When you first start up, FAST will contain some sample data for you to explore the different features.
 1. You are now ready to start managing your clients!
-   
+
 ### User interface
 
 ![UiAnnotated](images/UiAnnotated.png)
@@ -157,6 +166,8 @@ are all sample data! Here are some commands you can try to see what they do:
 
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always"></div>
 
 ## **Features**
 
@@ -379,7 +390,9 @@ A client can have any number of [`TAG`](#tag) (including 0)
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` will add a new client called 
   `John Doe`, who has phone number of `98765432`, has an email address `johnd@example.com` and stays at 
   `John street, block 123, #01-01`.
+  
   ![AddExample](images/addexample.png)
+  
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal` will add a new client 
    called `Betsy Crowe`, has a phone number of `1234567`, has an email address `betsycrowe@example.com`, 
   stays at `Newgate Prison` and is tagged as both a `friend` and `criminal`.
@@ -873,6 +886,8 @@ FAST will start with an empty data file on the next run!
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always"></div>
+
 ## **FAQs**
 
 **Q**: How do I transfer my data to another Computer?<br>
@@ -886,6 +901,9 @@ FAST will start with an empty data file on the next run!
 **A**: It is likely that some of your changes to your data file caused FAST to be unable to read your data file. Double-check the changes you made, or revert them if necessary. If FAST is able to read the data file after you made the changes, all your saved contacts will appear on the next start.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always"></div>
+
 
 ## **Command summary**
 The tables below provides you with a summary for **all** the available commands in FAST. You can use this section to quickly refresh your memory on the different command formats. 
@@ -941,6 +959,8 @@ Action|Format, Examples
 **Exit** | `exit`
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always"></div>
 
 ## **Glossary**
 
