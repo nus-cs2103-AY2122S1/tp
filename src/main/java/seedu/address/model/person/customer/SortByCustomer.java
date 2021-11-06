@@ -6,7 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.util.Comparator;
 
 /**
- * Represents the types of sorting methods we can apply to suppliers in the address book.
+ * Represents the types of sorting methods we can apply to suppliers in RHRH.
  */
 public class SortByCustomer {
 

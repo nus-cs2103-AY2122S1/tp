@@ -35,7 +35,7 @@ import seedu.address.model.tag.Tag;
 
 
 /**
- * Edits the details of an existing customer in the address book.
+ * Edits the details of an existing customer in RHRH.
  */
 public class EditCustomerCommand extends Command {
     public static final String COMMAND_WORD = "editc";
@@ -67,6 +67,8 @@ public class EditCustomerCommand extends Command {
     private final EditCustomerDescriptor editCustomerDescriptor;
 
     /**
+     * Constructs an EditCustomerCommand to edit the customer at {@code Index}
+     *
      * @param index of the customer in the filtered customer list to edit
      * @param editCustomerDescriptor details to edit the customer with
      */

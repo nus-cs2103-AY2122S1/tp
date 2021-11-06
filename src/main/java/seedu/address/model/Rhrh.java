@@ -113,7 +113,7 @@ public class Rhrh implements ReadOnlyRhrh {
     //// customer-level operations
 
     /**
-     * Returns true if a customer with the same identity as {@code customer} exists in the address book.
+     * Returns true if a customer with the same identity as {@code customer} exists in RHRH.
      */
     public boolean hasCustomer(Customer customer) {
         requireNonNull(customer);
@@ -121,7 +121,7 @@ public class Rhrh implements ReadOnlyRhrh {
     }
 
     /**
-     * Returns true if a customer with the same phone as {@code phone} exists in the address book.
+     * Returns true if a customer with the same phone as {@code phone} exists in RHRH.
      */
     public boolean hasCustomerWithPhone(Phone phone) {
         requireNonNull(phone);
@@ -129,8 +129,8 @@ public class Rhrh implements ReadOnlyRhrh {
     }
 
     /**
-     * Adds a customer to the address book.
-     * The customer must not already exist in the address book.
+     * Adds a customer to RHRH.
+     * The customer must not already exist in RHRH.
      */
     public void addCustomer(Customer c) {
         customers.add(c);
@@ -138,9 +138,9 @@ public class Rhrh implements ReadOnlyRhrh {
 
     /**
      * Replaces the given customer {@code target} in the list with {@code editedCustomer}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in RHRH.
      * The customer identity of {@code editedCustomer} must not be the same as another existing customer in
-     * the address book.
+     * RHRH.
      */
     public void setCustomer(Customer target, Customer editedCustomer) {
         requireNonNull(editedCustomer);
@@ -176,7 +176,7 @@ public class Rhrh implements ReadOnlyRhrh {
 
     /// supplier level operations
     /**
-     * Returns true if a supplier with the same identity as {@code supplier} exists in the address book.
+     * Returns true if a supplier with the same identity as {@code supplier} exists in RHRH.
      */
     public boolean hasSupplier(Supplier supplier) {
         requireNonNull(supplier);
@@ -184,8 +184,8 @@ public class Rhrh implements ReadOnlyRhrh {
     }
 
     /**
-     * Adds a supplier to the address book.
-     * The supplier must not already exist in the address book.
+     * Adds a supplier to RHRH.
+     * The supplier must not already exist in RHRH.
      */
     public void addSupplier(Supplier s) {
         suppliers.add(s);
@@ -193,7 +193,7 @@ public class Rhrh implements ReadOnlyRhrh {
 
     /**
      * Replaces the given supplier {@code target} in the list with {@code editedSupplier}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in RHRH.
      * The person identity of {@code editedSupplier} must not be the same as another existing supplier in the address
      * book.
      */
@@ -241,7 +241,7 @@ public class Rhrh implements ReadOnlyRhrh {
 
     /**
      * Removes {@code key} from this {@code Rhrh}.
-     * {@code key} must exist in the address book.
+     * {@code key} must exist in RHRH.
      */
     public void removeSupplier(Supplier key) {
         suppliers.remove(key);
@@ -386,7 +386,7 @@ public class Rhrh implements ReadOnlyRhrh {
     }
 
     /**
-     * Returns true if an employee with the same identity as {@code employee} exists in the address book.
+     * Returns true if an employee with the same identity as {@code employee} exists in RHRH.
      */
     public boolean hasEmployee(Employee employee) {
         requireNonNull(employee);
@@ -395,7 +395,7 @@ public class Rhrh implements ReadOnlyRhrh {
 
     /**
      * Removes {@code employee} from this {@code Rhrh}.
-     * {@code employee} must exist in the address book.
+     * {@code employee} must exist in RHRH.
      */
     public void removeEmployee(Employee employee) {
         employees.remove(employee);

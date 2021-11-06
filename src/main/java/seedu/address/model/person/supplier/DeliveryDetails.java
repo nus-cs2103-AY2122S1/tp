@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represents a Supplier's delivery details in the address book.
+ * Represents a Supplier's delivery details in RHRH.
  * Guarantees: immutable; is valid as declared in {@link #isValidDeliveryDetail(String)}
  */
 public class DeliveryDetails {

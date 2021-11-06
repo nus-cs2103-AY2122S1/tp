@@ -12,7 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.reservation.Reservation;
 
 /**
- * Deletes a reservation identified using it's displayed index from the address book.
+ * Deletes a reservation identified using it's displayed index from RHRH.
  */
 public class DeleteReservationCommand extends Command {
 

@@ -54,17 +54,17 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' RHRH file path.
      */
     Path getRhrhFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' RHRH file path.
      */
     void setRhrhFilePath(Path rhrhFilePath);
 
     /**
-     * Replaces address book data with the data in {@code rhrh}.
+     * Replaces RHRH data with the data in {@code rhrh}.
      */
     void setRhrh(ReadOnlyRhrh rhrh);
 
@@ -72,47 +72,47 @@ public interface Model {
     ReadOnlyRhrh getRhrh();
 
     /**
-     * Returns true if a customer with the same identity as {@code customer} exists in the address book.
+     * Returns true if a customer with the same identity as {@code customer} exists in RHRH.
      */
     boolean hasCustomer(Customer customer);
 
     /**
-     * Returns true if a customer with the same phone as {@code phone} exists in the address book.
+     * Returns true if a customer with the same phone as {@code phone} exists in RHRH.
      */
     boolean hasCustomerWithPhone(Phone phone);
 
     /**
-     * Returns true if an employee with the same identity as {@code employee} exists in the address book.
+     * Returns true if an employee with the same identity as {@code employee} exists in RHRH.
      */
     boolean hasEmployee(Employee employee);
 
     /**
      * Deletes the given customer.
-     * The customer must exist in the address book.
+     * The customer must exist in RHRH.
      */
     void deleteCustomer(Customer target);
     /**
      * Deletes the given employee.
-     * The employee must exist in the address book.
+     * The employee must exist in RHRH.
      */
     void deleteEmployee(Employee employee);
 
     /**
      * Adds the given customer.
-     * {@code customer} must not already exist in the address book.
+     * {@code customer} must not already exist in RHRH.
      */
     void addCustomer(Customer customer);
     /**
      * Adds the given employee.
-     * {@code employee} must not already exist in the address book.
+     * {@code employee} must not already exist in RHRH.
      */
     void addEmployee(Employee employee);
 
     /**
      * Replaces the given customer {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in RHRH.
      * The customer identity of {@code editedCustomer} must not be the same as another existing customer in
-     * the address book.
+     * RHRH.
      */
     void setCustomer(Customer target, Customer editedCustomer);
 
@@ -127,9 +127,9 @@ public interface Model {
 
     /**
      * Replaces the given employee {@code target} with {@code editedEmployee}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in RHRH.
      * The employee identity of {@code editedEmployee} must not be the
-     * same as another existing employee in the address book.
+     * same as another existing employee in RHRH.
      */
     void setEmployee(Employee target, Employee editedEmployee);
 
@@ -168,7 +168,7 @@ public interface Model {
     void setTableList(List<Table> tableList);
 
     /**
-     * Returns true if tableList with the same identity as {@code tableList} exists in the address book.
+     * Returns true if tableList with the same identity as {@code tableList} exists in RHRH.
      */
     boolean hasTable(Table table);
 
@@ -213,25 +213,25 @@ public interface Model {
     void updateFilteredEmployeeList(Predicate<Employee> predicate);
 
     /**
-     * Returns true if a supplier with the same identity as {@code supplier} exists in the address book.
+     * Returns true if a supplier with the same identity as {@code supplier} exists in RHRH.
      */
     boolean hasSupplier(Supplier supplier);
 
     /**
      * Deletes the given supplier.
-     * The person must exist in the address book.
+     * The person must exist in RHRH.
      */
     void deleteSupplier(Supplier target);
 
     /**
      * Adds the given supplier.
-     * {@code supplier} must not already exist in the address book.
+     * {@code supplier} must not already exist in RHRH.
      */
     void addSupplier(Supplier supplier);
 
     /**
      * Replaces the given person {@code target} with {@code editedSupplier}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in RHRH.
      * The person identity of {@code editedSupplier} must not be the same as another existing supplier in the address
      * book.
      */

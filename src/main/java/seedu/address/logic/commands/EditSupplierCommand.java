@@ -32,7 +32,7 @@ import seedu.address.model.person.supplier.SupplyType;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing supplier in the address book.
+ * Edits the details of an existing supplier in RHRH.
  */
 public class EditSupplierCommand extends Command {
 
@@ -56,12 +56,14 @@ public class EditSupplierCommand extends Command {
 
     public static final String MESSAGE_EDIT_SUPPLIER_SUCCESS = "Edited Supplier: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_SUPPLIER = "This supplier already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_SUPPLIER = "This supplier already exists in RHRH.";
 
     private final Index index;
     private final EditSupplierCommand.EditSupplierDescriptor editSupplierDescriptor;
 
     /**
+     * Constructs an EditSupplierCommand to edit the supplier at {@code Index}
+     *
      * @param index of the supplier in the filtered person list to edit
      * @param editSupplierDescriptor details to edit the supplier with
      */

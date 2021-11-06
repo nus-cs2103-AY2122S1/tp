@@ -12,7 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.supplier.Supplier;
 
 /**
- * Deletes a supplier identified using it's displayed index from the address book.
+ * Deletes a supplier identified using it's displayed index from RHRH.
  */
 public class DeleteSupplierCommand extends Command {
 

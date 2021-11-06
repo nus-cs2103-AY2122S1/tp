@@ -20,7 +20,7 @@ public class AddCustomerCommand extends Command {
     public static final String COMMAND_WORD = "addc";
 
     public static final String MESSAGE_USAGE = CommandUtil.formatCommandWord(COMMAND_WORD)
-            + ": Adds a customer to the address book. "
+            + ": Adds a customer to RHRH. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "

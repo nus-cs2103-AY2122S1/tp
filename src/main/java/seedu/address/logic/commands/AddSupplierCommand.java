@@ -15,13 +15,13 @@ import seedu.address.model.Model;
 import seedu.address.model.person.supplier.Supplier;
 
 /**
- * Adds a supplier to the address book.
+ * Adds a supplier to RHRH.
  */
 public class AddSupplierCommand extends Command {
     public static final String COMMAND_WORD = "adds";
 
     public static final String MESSAGE_USAGE = CommandUtil.formatCommandWord(COMMAND_WORD)
-            + ": Adds a person to the address book. "
+            + ": Adds a person to RHRH. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -41,7 +41,7 @@ public class AddSupplierCommand extends Command {
             + PREFIX_DELIVERY_DETAILS + "12:00 10-11-2021";
 
     public static final String MESSAGE_SUCCESS = "New supplier added: %1$s";
-    public static final String MESSAGE_DUPLICATE_SUPPLIER = "This supplier already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_SUPPLIER = "This supplier already exists in RHRH";
 
     private final Supplier toAdd;
 

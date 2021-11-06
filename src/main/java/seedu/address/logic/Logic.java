@@ -45,7 +45,7 @@ public interface Logic {
     ObservableList<Reservation> getFilteredReservations();
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' RHRH file path.
      */
     Path getRhrhFilePath();
 
