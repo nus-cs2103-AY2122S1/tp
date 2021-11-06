@@ -19,12 +19,12 @@ valid with valid input])
     upcoming;
     endif
 
-    :GUI Result Display updated with
-    correct list of applicants;
+    :GUI updates with filtered applicants;
 
 
 else([else])
-
+:GUI updates with error message
+indicating invalid input;
 
 endif
 stop

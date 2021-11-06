@@ -10,12 +10,11 @@ marked done ;
 
 if () then ([filtered list is not empty])
 :Delete marked applicants from model;
-    :GUI Result Display updated with
-    marked applicants that have been deleted;
+    :GUI updates to indicate that
+    marked applicants have been deleted;
 else ([else])
-    :GUI Result Display updated
-    with message that there are no marked
-    applicants and none have been deleted;
+    :GUI updates with error message
+    indicating there are no marked applicants;
 endif
 
 stop
