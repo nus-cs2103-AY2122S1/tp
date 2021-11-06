@@ -82,7 +82,7 @@ public class TransactionRecord extends Order implements Displayable {
      * Returns true if items in the transacted order matches with the ones in the {@code otherList}.
      * Only considers name, id, quantity and sales price. (i.e. information relevant to transaction).
      */
-    private boolean isSameTransactionInfo(ObservableList<Item> otherList) {
+    public boolean isSameTransactionInfo(ObservableList<Item> otherList) {
 
         if (getOrderItems().size() != otherList.size()) {
             return false;

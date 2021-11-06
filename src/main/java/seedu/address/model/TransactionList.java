@@ -52,4 +52,32 @@ public class TransactionList implements ReadOnlyTransactionList {
         TransactionList other = (TransactionList) obj;
         return transactionRecordList.equals(other.transactionRecordList);
     }
+
+    /**
+     * Checking whether transaction lists are the same.
+     */
+    public boolean equalTestsTransactionLists (Object obj) {
+        // short circuit if same object
+        if (obj == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(obj instanceof TransactionList)) {
+            return false;
+        }
+
+        // state check
+        TransactionList other = (TransactionList) obj;
+        if (this.transactionRecordList.size() != other.transactionRecordList.size()) {
+            return false;
+        }
+        for (int i = 0; i < this.transactionRecordList.size(); i += 1 ) {
+            if (!this.transactionRecordList.get(i).isSameTransactionInfo(
+                    other.transactionRecordList.get(i).getOrderItems())) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

@@ -1,7 +1,7 @@
 package seedu.address.storage;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.PathUtil.addToPath;
 import static seedu.address.testutil.TypicalOrders.getTypicalTransaction;
@@ -58,19 +58,22 @@ public class JsonTransactionStorageTest {
         // Save in new file and read back
         jsonTransactionStorage.saveTransactionList(original, filePath);
         ReadOnlyTransactionList readBack = jsonTransactionStorage.readTransactionList(filePath).get();
-        assertEquals(original, new TransactionList(readBack));
+        boolean test = original.equalTestsTransactionLists(new TransactionList(readBack));
+        assertTrue(test);
 
         // Modify data, overwrite exiting file, and read back
         original.add(getTypicalTransaction());
         jsonTransactionStorage.saveTransactionList(original, filePath);
         readBack = jsonTransactionStorage.readTransactionList(filePath).get();
-        assertEquals(original, new TransactionList(readBack));
+        boolean test2 = original.equalTestsTransactionLists(new TransactionList(readBack));
+        assertTrue(test2);
 
         // Save and read without specifying file path
         original.add(getTypicalTransaction());
         jsonTransactionStorage.saveTransactionList(original); // file path not specified
         readBack = jsonTransactionStorage.readTransactionList().get(); // file path not specified
-        assertEquals(original, new TransactionList(readBack));
+        boolean test3 = original.equalTestsTransactionLists(new TransactionList(readBack));
+        assertTrue(test3);
 
     }
 
