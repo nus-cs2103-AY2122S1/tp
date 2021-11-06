@@ -149,7 +149,7 @@ public class MainWindow extends UiPart<Stage> {
             try {
                 helpWindow.openUserGuide();
             } catch (IOException | SecurityException | UnsupportedOperationException ex) {
-                logger.info(ex.getMessage());
+                logger.warning(ex.getMessage());
                 handleBackUpHelp();
             }
         } else {
@@ -165,7 +165,7 @@ public class MainWindow extends UiPart<Stage> {
             try {
                 helpWindow.openCommandSummary();
             } catch (IOException | SecurityException | UnsupportedOperationException ex) {
-                logger.info(ex.getMessage());
+                logger.warning(ex.getMessage());
                 handleBackUpHelp();
             }
         } else {
