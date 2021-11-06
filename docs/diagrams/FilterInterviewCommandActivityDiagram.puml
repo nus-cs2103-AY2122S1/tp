@@ -8,7 +8,7 @@ start
 if () then ([command is
 valid with valid input])
 
-    if () then ([input is 'past])
+    if () then ([input is 'past'])
     :List of applicants filtered
     for those with interviews that have
     passed;
