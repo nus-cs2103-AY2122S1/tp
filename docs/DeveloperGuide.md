@@ -297,12 +297,12 @@ This feature can be accessed by using `tadd` command with parameters of
 Given below is the sequence diagram when a user provides a valid `tadd` command: `tadd /n meeting /d 11/11/2021 20:00 /m 1 /m 2`
 to add a new task with its name and deadline to the first and second member displayed in the currently shown member list.
 
-<img src="images/task/TaskAddSequenceDiagram.png" width="450" />
+<img src="images/task/TaskAddSequenceDiagram.png" width="600" />
 
 As seen in the diagram above, once the user entered the `tadd` command,
 the `Logic` component will parse the parameters and create a `Task` object based on the parameters and a `TaddCommand` object.
 
-<img src="images/task/TaskAddExecutionSequenceDiagram.png" width = 450 />
+<img src="images/task/TaskAddExecutionSequenceDiagram.png" width = "600" />
 
 After `LogicManager` receives the `TaddCommand` object, 
 1. `LogicManager` will call the `execute` method of `TaddCommand`.
@@ -322,7 +322,7 @@ because its implementation is similar to the construction of `TaddCommand` shown
 
 </div>
 
-<img src="images/task/TaskDoneSequenceDiagram.png" width = 450 />
+<img src="images/task/TaskDoneSequenceDiagram.png" width = "600" />
 
 After `LogicManager` receives the `TdoneCommand` object,
 1. `LogicManager` will call the `execute` method of `TdonedCommand`.
