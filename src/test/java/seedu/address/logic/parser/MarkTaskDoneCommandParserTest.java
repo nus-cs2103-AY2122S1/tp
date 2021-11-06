@@ -66,7 +66,7 @@ class MarkTaskDoneCommandParserTest {
     }
 
     @Test
-    public void parse_invalidValueFailure() {
+    public void parse_invalidValue_failure() {
         // invalid module name
         assertParseFailure(parser, INVALID_MODULE_NAME_DESC + STUDENT_ID_DESC_AMY + TASK_ID_DESC_0,
                 ModuleName.MESSAGE_CONSTRAINTS);
