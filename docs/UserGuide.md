@@ -324,6 +324,7 @@ Examples:
 Finds staff whose names contain any of the given keywords, or by their index in the staff list.
 Can attach [fields](#fields-of-a-staff) for additional restrictions or find by fields alone. 
 If index search is performed, no other input is expected.
+The filtered result is displayed on both staff view and schedule.
 
 Name Search:
 
@@ -426,6 +427,7 @@ The output will look like the following.
 #### Viewing all the staff(s) working a shift : `viewShift`
 
 Finds all the staff working at a particular shift. The shift can be specified either by detailing the day of the week and the time, or the day of the week and slot number.
+The result also filters the schedule GUI.
 
 * When using the -ti flag, it is in 24-hour format. Example, for 4.pm on wednesday, we use <br> `wednesday-16:00`.
 * The DAY entry is not case-sensitive.
