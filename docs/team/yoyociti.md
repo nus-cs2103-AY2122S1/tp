@@ -41,6 +41,7 @@ Updating tests was also more complicated as many of the commands already relied 
         * Did cosmetic and tonal tweaks to make User Guide more welcoming and visually aiding (i.e. screenshots, tips) (Pull Requests [\#135](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/135) [\#163](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/163))
     * Developer Guide:
         * Added implementation details of the `alias`, `unalias` and `aliases` feature as well as UML diagrams for illustration (Pull Request [\#124](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/124))
+        * Review overall updates to Developer Guide Design section and update if necessary (Pull Request [\#259](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/259))  
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments): [\#112](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/112), [\#137](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/137)
