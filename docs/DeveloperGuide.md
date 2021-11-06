@@ -278,21 +278,6 @@ The following sequence diagram shows how the edit operation works.
 ![images](images/EditCommandSequenceDiagram.png)
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `EditCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
-
-#### Design considerations:
-
-**Aspect: User command to use in deleting marked applicants:**
-
-* **Alternative 1 (current choice):** Separate command for deleting marked applicants
-    * Pros: Command has single responsibility of deleting marked applicants based.
-    * Pros: Easy to use for user, does not take any additional input.
-    * Cons: User might be confused between `delete` command for general deletion and `delete_marked` command.
-
-* **Alternative 2:** Part of `delete` command functionality
-    * Pros: Intuitive for user to use `delete` command for all deletion purposes
-    * Cons: Breaks the single responsibility principle as deleting marked applicants does not delete applicants at specific indices
-    like the rest of the `delete` command, but rather a certain group of applicants at once. 
-
       
 ### Delete feature
 
@@ -563,6 +548,18 @@ The following sequence diagram shows how the unmark operation works.
  **Note:** The lifeline for `MarkingCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
+#### Design considerations:
+
+**Aspect: User command to use in marking and unmarking applicants:**
+
+* **Alternative 1 (current choice):** Separate command for `mark` and `unmark`
+  * Pros: Command has single responsibility of marking or unmarking applicants.
+  * Pros: Easy and intuitive to use for user, does not take any additional input to differentiate the two commands from each other.
+  * Cons: Certain amount of repeat in code for both mark and unmark commands.
+
+* **Alternative 2:** Implement both `mark` and `unmark` as one singular command
+  * Pros: Reduces code duplication in implementation.
+  * Cons: Breaks the single responsibility principle as marking does a relatively different task from unmarking.
 
 ### Delete marked feature
 
@@ -589,6 +586,20 @@ and returned.
 
 The following sequence diagram shows how the delete marked operation works.
 ![images](images/DeleteMarkedCommandSequenceDiagram.png)
+
+#### Design considerations:
+
+**Aspect: User command to use in deleting marked applicants:**
+
+* **Alternative 1 (current choice):** Separate command for deleting marked applicants
+  * Pros: Command has single responsibility of deleting marked applicants based.
+  * Pros: Easy to use for user, does not take any additional input.
+  * Cons: User might be confused between `delete` command for general deletion and `delete_marked` command.
+
+* **Alternative 2:** Part of `delete` command functionality
+  * Pros: Intuitive for user to use `delete` command for all deletion purposes
+  * Cons: Breaks the single responsibility principle as deleting marked applicants does not delete applicants at specific indices
+    like the rest of the `delete` command, but rather a certain group of applicants at once.
 
 ### Datetime for interview 
 
