@@ -42,17 +42,17 @@ MainWindow --> "0..1" HelpWindow
 EventListPanel -down-> "*" EventCard
 ParticipantListPanel -down-> "*" ParticipantCard
 
-MainWindow -left-|> UiPart
+MainWindow --|> UiPart
 
-ResultDisplay --|> UiPart
-CommandBox --|> UiPart
-ParticipantListPanel --|> UiPart
-ParticipantCard --|> UiPart
-StatusBarFooter --|> UiPart
-HelpWindow --|> UiPart
+ResultDisplay -down-|> UiPart
+CommandBox -down-|> UiPart
+ParticipantListPanel -down-|> UiPart
+ParticipantCard -down-|> UiPart
+StatusBarFooter -down-|> UiPart
+HelpWindow -down-|> UiPart
 
-EventCard .> Model
-ParticipantCard .> Model
+EventCard .right.> Model
+ParticipantCard .right.> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 
