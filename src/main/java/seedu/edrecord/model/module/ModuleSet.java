@@ -84,6 +84,13 @@ public class ModuleSet {
     }
 
     /**
+     * Checks if the underlying set is empty.
+     */
+    public boolean isEmpty() {
+        return this.modules.isEmpty();
+    }
+
+    /**
      * Checks if the given module is in the set based on correct code.
      * The module does not need to have the same classes.
      * @return boolean to show if the set contains the given module.
