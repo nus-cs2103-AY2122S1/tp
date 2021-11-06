@@ -29,8 +29,8 @@ import seedu.address.model.tag.Tag;
  */
 public class TagCommand extends Command {
     public static final String COMMAND_WORD = "tag";
-    public static final String COMMAND_DESCRIPTION = "Adds one or more Tags to the details of the person "
-            + "identified by the index number used in the displayed person list.\n";
+    public static final String COMMAND_DESCRIPTION = "Adds one or more Tags to the details of the contact "
+            + "identified by the index number used in the displayed contact list.\n";
     public static final String COMMAND_EXAMPLE = "Parameters: INDEX (must be a positive integer) "
             + PREFIX_TAG + "TAG "
             + "[" + PREFIX_TAG + "EXTRA_TAG]...\n"
@@ -38,8 +38,8 @@ public class TagCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": " + COMMAND_DESCRIPTION + COMMAND_EXAMPLE;
 
-    public static final String MESSAGE_TAG_ADD_SUCCESS = "Person %1$s now has tags: %2$s";
-    public static final String MESSAGE_TAG_ADD_EXISTS = "Person %1$s already had tags: %2$s";
+    public static final String MESSAGE_TAG_ADD_SUCCESS = "Contact %1$s now has tags: %2$s";
+    public static final String MESSAGE_TAG_ADD_EXISTS = "Contact %1$s already had tags: %2$s";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;

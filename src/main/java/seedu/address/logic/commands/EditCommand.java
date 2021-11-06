@@ -27,12 +27,12 @@ import seedu.address.model.person.Pin;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing contact in the address book.
  */
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
-    public static final String COMMAND_DESCRIPTION = "Edits the details of the person identified "
+    public static final String COMMAND_DESCRIPTION = "Edits the details of the contact identified "
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n";
     public static final String COMMAND_EXAMPLE = "Parameters: INDEX (must be a positive integer) "
@@ -48,11 +48,11 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": " + COMMAND_DESCRIPTION + COMMAND_EXAMPLE;
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited contact: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_NO_CHANGES = "Provided data is same as existing data,"
             + " no changes to the contact were made.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.\n"
+    public static final String MESSAGE_DUPLICATE_PERSON = "This contact already exists in the address book.\n"
             + "Reason: duplicate phone number.";
 
     private final Index index;

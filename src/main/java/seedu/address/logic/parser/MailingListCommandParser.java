@@ -39,7 +39,7 @@ public class MailingListCommandParser implements Parser<MailingListCommand> {
 
         // check that only valid Prefix are provided
         if (hasExtraArguments(argMultimap, providedPrefixes)) {
-            throw new ParseException(MailingListCommand.MESSAGE_USAGE);
+            throw new ParseException(MailingListCommand.MESSAGE_EXTRA_ARGUMENTS_FAILURE);
         }
 
         // set defaults

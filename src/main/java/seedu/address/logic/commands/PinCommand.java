@@ -19,13 +19,13 @@ import seedu.address.model.person.Pin;
 import seedu.address.model.tag.Tag;
 
 /**
- * Pins a person identified using it's displayed index from the address book.
+ * Pins a contact identified using it's displayed index from the address book.
  */
 public class PinCommand extends Command {
 
     public static final String COMMAND_WORD = "pin";
-    public static final String COMMAND_DESCRIPTION = "Pins the person identified by the index number "
-            + "used in the displayed person list.\n";
+    public static final String COMMAND_DESCRIPTION = "Pins the contact identified by the index number "
+            + "used in the displayed contact list.\n";
 
     public static final String COMMAND_EXAMPLE =
             "Parameters: INDEX (must be a positive integer)\n"
@@ -33,8 +33,8 @@ public class PinCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": " + COMMAND_DESCRIPTION + COMMAND_EXAMPLE;
 
-    public static final String MESSAGE_PINNED_PERSON_SUCCESS = "Pinned Person: %1$s";
-    public static final String MESSAGE_PERSON_ALREADY_PINNED_FAILURE = "Person is already pinned!";
+    public static final String MESSAGE_PINNED_PERSON_SUCCESS = "Pinned contact: %1$s";
+    public static final String MESSAGE_PERSON_ALREADY_PINNED_FAILURE = "Contact is already pinned!";
 
     private final Index targetIndex;
 
