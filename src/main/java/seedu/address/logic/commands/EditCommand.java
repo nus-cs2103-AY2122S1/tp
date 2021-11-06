@@ -82,6 +82,8 @@ public class EditCommand extends UndoableCommand {
     private Person personAfterEdit;
 
     /**
+     * Constructs an EditCommand.
+     *
      * @param index of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */

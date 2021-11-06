@@ -388,8 +388,10 @@ public class LessonEditCommand extends UndoableCommand {
         }
 
         /**
-         * Sets {@code homeworkSet} to this object's {@code homeworkSet}.
-         * A defensive copy of {@code homeworkSet} is used internally.
+         * Returns an unmodifiable homework set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         *
+         * @return {@code Optional#empty()} if {@code homeworkSet} is null.
          */
         public Optional<Set<Homework>> getHomeworkSet() {
             return (homeworkSet != null)
@@ -398,9 +400,10 @@ public class LessonEditCommand extends UndoableCommand {
         }
 
         /**
-         * Returns an unmodifiable homework set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code homeworkSet} is null.
+         * Sets {@code homeworkSet} to this object's {@code homeworkSet}.
+         * A defensive copy of {@code homeworkSet} is used internally.
+         *
+         * @param homeworkSet A set of homework.
          */
         public void setHomeworkSet(Set<Homework> homeworkSet) {
             this.homeworkSet = (homeworkSet != null) ? new HashSet<>(homeworkSet) : null;
@@ -430,22 +433,46 @@ public class LessonEditCommand extends UndoableCommand {
             this.outstandingFees = outstandingFees;
         }
 
+        /**
+         * Returns an unmodifiable cancelled dates set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         *
+         * @return {@code Optional#empty()} if {@code cancelDates} is null.
+         */
         public Optional<Set<Date>> getCancelDates() {
             return (cancelDates != null)
                     ? Optional.of(Collections.unmodifiableSet(cancelDates))
                     : Optional.empty();
         }
 
+        /**
+         * Sets {@code cancelDates} to this object's {@code cancelDates}.
+         * A defensive copy of {@code cancelDates} is used internally.
+         *
+         * @param cancelDates A set of dates to cancel.
+         */
         public void setCancelDates(Set<Date> cancelDates) {
             this.cancelDates = (cancelDates != null) ? new HashSet<>(cancelDates) : null;
         }
 
+        /**
+         * Returns an unmodifiable uncancelled dates set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         *
+         * @return {@code Optional#empty()} if {@code uncancelDates} is null.
+         */
         public Optional<Set<Date>> getUncancelDates() {
             return (uncancelDates != null)
                     ? Optional.of(Collections.unmodifiableSet(uncancelDates))
                     : Optional.empty();
         }
 
+        /**
+         * Sets {@code uncancelDates} to this object's {@code uncancelDates}.
+         * A defensive copy of {@code uncancelDates} is used internally.
+         *
+         * @param uncancelDates A set of dates to cancel.
+         */
         public void setUncancelDates(Set<Date> uncancelDates) {
             this.uncancelDates = (uncancelDates != null) ? new HashSet<>(uncancelDates) : null;
         }

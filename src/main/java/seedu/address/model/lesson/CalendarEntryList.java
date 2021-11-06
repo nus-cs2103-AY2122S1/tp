@@ -380,7 +380,7 @@ public class CalendarEntryList {
      *
      * @param owner The person with the lesson.
      * @param lesson The lesson associated with this entry.
-     * @return The calendar entry that also contains this lesson.
+     * @return Then calendar entry of the lesson.
      */
     private Entry<Lesson> convertToMakeupEntry(Person owner, Lesson lesson) {
         return convertToEntry(owner, lesson, new Interval(lesson.getStartDateTime(), lesson.getEndDateTime()));
@@ -393,7 +393,7 @@ public class CalendarEntryList {
      * @param owner The person with the lesson.
      * @param lesson The lesson associated with this entry.
      * @param entryInterval The interval of this entry.
-     * @return The calendar entry that also contains this lesson.
+     * @return Then calendar entry of the lesson.
      */
     private Entry<Lesson> convertToRecurringEntry(Person owner, Lesson lesson, Interval entryInterval) {
         Entry<Lesson> entry = convertToEntry(owner, lesson, entryInterval);
@@ -411,7 +411,7 @@ public class CalendarEntryList {
      * @param lesson The lesson associated with this entry.
      * @param entryInterval The interval of this entry.
      * @param endDate The end date of the recurrence.
-     * @return
+     * @return Then calendar entry of the lesson.
      */
     private Entry<Lesson> convertToRecurringEntryWithEnd(Person owner, Lesson lesson, Interval entryInterval,
             LocalDate endDate) {
