@@ -2,12 +2,10 @@
 !include style.puml
 skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
-skinparam backgroundColor GRAY
 skinparam classBackgroundColor MODEL_COLOR
-skinparam classFontColor black
 
-class "HashSet<String>" as DisplaySuperGroups
-class "HashSet<String>" as DisplaySubGroups
+class "HashSet<String>" as DisplaySuperGroups MODEL_COLOR
+class "HashSet<String>" as DisplaySubGroups MODEL_COLOR
 HashSet *- String
 Notor *-right-> "1" UniquePersonList
 Notor *-right-> "1" UniqueSuperGroupList

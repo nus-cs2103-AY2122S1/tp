@@ -6,7 +6,7 @@ title: Developer Guide
 ## **Introduction**
 
 Thank you for your interest in the developing of Notor! This is an open-source project aimed at helping mentors take
-quick, efficient notes to facillitate effective and efficient mentoring of many mentees. The design principles
+quick, efficient notes to facilitate effective and efficient mentoring of many mentees. The design principles
 scaffolding Notor are as follows.
 
 1. **Efficient UX for the User:**
@@ -106,6 +106,17 @@ New Workflow for Adding Commands:
 Notor allows you to search for groups and people, and both searches have slightly different requirements.
 
 Lets break down what happens to call a person comamnd.
+
+### UI Changes
+
+*(placeholder API for now, will update to our own link later when implemented.)*
+
+![Structure of the UI Component](images/UiClassDiagram.png)
+
+* `MainWindow` does not contain PersonListPanel anymore.
+Now it contains ListPanel which can be a PersonListPanel, GroupListPanel or SubgroupListPanel.
+* `MainWindow` contains a new GeneralNote which displays the general note.
+
 
 ### Model Changes
 
@@ -339,8 +350,7 @@ Priorities:<p>
 
 (For all use cases below, the **System** is the `Notor` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Add a note to a person**
-
+**Use case: Add a note to a person**<br>
 **MSS**
 
 1. User requests to add a note to the person
@@ -348,7 +358,7 @@ Priorities:<p>
 3. User requests to add a note to a specific person in the list
 4. Notor opens up a pop up dialogue for the user to type the note for the person
 5. User requests to save the note to the person
-6. Notor stores the book to the person
+6. Notor stores the note to the person
 7. Notor saves the note to storage
 
    Use case ends.
@@ -360,22 +370,53 @@ Priorities:<p>
 * 3a. The given index is invalid.
     * 3a1. Notor shows an error message. Use case resumes at step 2.
 
-**Use case: User types a command**
+**Use case: Add a note to a Group**<br>
+**MSS**
+1. Similar to Add a note to a person except Notor shows a list of groups in step 2
 
+**Use case: Add a note to a Subgroup**<br>
+**MSS**
+1. Similar to Add a note to a person except Notor shows a list of subgroups in step 2
+
+**Use case: Add a person to a group**<br>
 **MSS**
 
-1. User starts typing a command in Notor
-2. Notor shows possible commands starting with what user has typed
-3. User presses tab to select the right command
-4. User presses enter to execute the selected command
-5. Notor <u>runs command (UC1)</u>
+1. User requests to add a person to a group
+2. Notor shows a list of persons
+3. User requests to add a specific person in the list to a specified group
+4. Notor adds the person to group
+
+   Use case ends.
+
+**Use case: Add a person to a subgroup**<br>
+**MSS**
+1. Similar to Add a person to a group except User requeststo add person to a subgroup instead.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. The typed string is not in any command.
-    * 2a1. Notor displays no commands. Use case resumes at step 1.
+* 2a. The list is empty. Use case ends.
+
+* 3a. The given index is invalid.
+    * 3a1. Notor shows an error message. Use case resumes at step 2.
+
+* 3b. The specified group is not found in Notor.
+    * 3b1. Notor shows an error message. Use case resumes at step 2.
+
+* 3c. The person is already in the group specified.
+    * 3c1. Notor shows an error message. Use case resumes at step 2.
+
+
+**Use case: Export data**<br>
+**MSS**
+
+1. User requests to export data
+2. Notor exports the data in CSV format to the directory where Notor belongs.
+
+   Use case ends.
+
+
 
 ### Non-Functional Requirements
 
@@ -422,25 +463,144 @@ testers are expected to do more *exploratory* testing.
     1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Listing persons
+1. List all persons
+    
+    1. Test case: `person /list`<br>
+       Expected: All persons are listed. The UI is updated with all persons.
+
+    1. Other incorrect delete commands to try: `person /lis`, `...`
+        (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+### Listing groups
+1. List all groups
+    1. Similar to List all persons except `group /list` is used.
+
+### Listing persons in a group
+1. List all persons in a group
+
+    1. Prerequisites: List all groups using the `group /list` command. Multiple groups in the list. First group contains multiple persons.
+
+    1. Test case: `person 1 /list`<br>
+       Expected: All persons in first group is listed. The UI is updated with all persons in the first group.
+       
+    1. Test case: `person 0 /list`<br>
+    Expected: Persons not listed. Error details shown in the status message.
+              
+    1. Other incorrect delete commands to try: `person /lis`, `...`
+       (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+### Listing subgroups
+1. List all subgroups
+    1. Similar to List all persons except `group (INDEX) /list` is used and groups are listed using `group /list` command.
+    
+### Listing persons in a subgroup
+1. List all persons in a subgroup
+    1. Similar to Listing persons in a group except that subgroups are listed.
 
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all persons using the `person /list` command. Multiple persons in the list.
 
-    1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
-       Timestamp in the status bar is updated.
+    1. Test case: `person 1 /delete`<br>
+       Expected: A confirmation window popped. Upon confirmation, first person is deleted from the list.
 
-    1. Test case: `delete 0`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `person 0 /delete`<br>
+       Expected: No person is deleted. Error details shown in the status message.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+    1. Other incorrect delete commands to try: `person /delete`, `person x /delete`, `...` 
+        (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-1. _{ more test cases ... }_
+### Adding a group
+
+1. Adding a group
+    1. Test case: `group Test /create`<br>
+       Expected: Group is created. If you switch to group list, you will be able to see the new group created.
+       
+    1. Test case: `group 123 /create`<br>
+       Expected: No group is created. Error details shown in the status message.
+
+    1. Other incorrect delete commands to try: `group /create`, `group group_1 /create`, `...`
+       (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+### Deleting a group
+
+1. Deleting a group while all groups are being shown
+
+    1. Prerequisites: List all groups using the `group /list` command. Multiple groups in the list.
+
+    1. Test case: `group 1 /delete`<br>
+       Expected: A confirmation window popped. Upon confirmation, first group is deleted from the list.
+
+    1. Test case: `group 0 /delete`<br>
+       Expected: No group is deleted. Error details shown in the status message.
+
+    1. Other incorrect delete commands to try: `group /delete`, `group x /delete`, `...`
+       (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+
+### Adding person to a group
+
+1. Prerequisites: List all persons using the `person /list` command. Multiple persons in the list. Only the group Orbital is created.
+
+    1. Test case: `person 1 /add g:Orbital`<br>
+       Expected: Person is added to the group. Person is updated with a new group in the UI.
+       
+    1. Test case: `person 0 /add g:Orbital`<br>
+       Expected: Nothing happened. Error details shown in the status message.
+    
+    1. Other incorrect delete commands to try: `person /add`, `person 1 /add g:NonExistent`, `...`
+       (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+### Removing a person from a group
+
+1. Prerequisites: List all persons using the `person /list` command. Multiple persons in the list. First person is added to group Orbital.
+    1. Test case: `person 1 /remove g:Orbital`<br>
+           Expected: Person is removed to the group. Person is updated with group removed in the UI.
+
+    1. Test case: `person 0 /remove g:Orbital`<br>
+       Expected: No person is removed. Error details shown in the status message.
+
+    1. Other incorrect delete commands to try: `person /remove`, `person 1 /remove g:NonExistent`, `...`
+       (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+### Adding subgroup to a group
+
+1. Prerequisites: List all groups using the `group /list` command. Multiple groups in the list.
+
+    1. Test case: `group 1 /create n:Artemis`<br>
+       Expected: Artemis is added to the first group. Group is updated with a new subgroup in the UI.
+
+    1. Test case: `group 0 /create n:Artemis`<br>
+       Expected: No group is created. Error details shown in the status message.
+
+    1. Other incorrect delete commands to try: `group /create`, `...`
+       (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+### Removing a subgroup from a group
+
+1. Prerequisites: List all groups using the `group /list` command. Multiple groups in the list. First group contains subgroup Artemis.
+    1. Test case: `group 1 /delete n:Artemis`<br>
+       Expected: Confirmation window pops up. Upon confirmation, Artemis is removed from the first group. 
+       Group is updated with a subgroup removed in the UI.
+       
+    1. Test case: `group 0 /delete n:Artemis`<br>
+       Expected: No subgroup is removed. Error details shown in the status message.
+
+    1. Other incorrect delete commands to try: `group /delete`, `group 1 /delete n:NonExistent`, `...`
+       (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
 
 ### Saving data
 

@@ -9,7 +9,7 @@ import seedu.notor.model.Notor;
 import seedu.notor.model.common.Note;
 import seedu.notor.ui.ConfirmationWindow;
 import seedu.notor.ui.ResultDisplay;
-import seedu.notor.ui.view.ViewPanel;
+import seedu.notor.ui.GeneralNote;
 
 public class GeneralNoteWindow extends NoteWindow {
 
@@ -59,7 +59,7 @@ public class GeneralNoteWindow extends NoteWindow {
         Note editedNote = Note.of(paragraph, noteLastModified());
         notor.setNote(editedNote);
         logic.executeSaveNote(notor);
-        ViewPanel viewPane = new ViewPanel(logic.getNotor().getNote());
+        GeneralNote viewPane = new GeneralNote(logic.getNotor().getNote());
         notePane.getChildren().add(viewPane.getRoot());
         resultDisplay.setFeedbackToUser(generateSuccessMessage(MESSAGE_SAVE_NOTE_SUCCESS));
         logger.info(MESSAGE_SAVE_NOTE_SUCCESS);
