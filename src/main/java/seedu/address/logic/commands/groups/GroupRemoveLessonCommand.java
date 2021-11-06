@@ -13,8 +13,8 @@ import seedu.address.model.group.Group;
 
 public class GroupRemoveLessonCommand extends Command {
 
-    public static final String MESSAGE_SUCCESS = "Lesson deleted: %1$s";
-
+    public static final String MESSAGE_SUCCESS = "Lesson deleted";
+    
     private Index groupIndex;
     private Index lessonIndex;
 
