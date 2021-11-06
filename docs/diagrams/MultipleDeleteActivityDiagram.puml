@@ -20,7 +20,7 @@ if () then ([no invalid indexes])
 :Delete the contacts;
 :Update Model and Storage;
 else ([invalid indexes])
-- Thrown Exception
+- Throw Exception
 endif
 else ([duplicates])
 - Throw Exception
