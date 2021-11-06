@@ -6,7 +6,7 @@ title: Developer Guide
 ## **Introduction**
 
 Thank you for your interest in the developing of Notor! This is an open-source project aimed at helping mentors take
-quick, efficient notes to facillitate effective and efficient mentoring of many mentees. The design principles
+quick, efficient notes to facilitate effective and efficient mentoring of many mentees. The design principles
 scaffolding Notor are as follows.
 
 1. **Efficient UX for the User:**
@@ -16,7 +16,7 @@ scaffolding Notor are as follows.
     - We target fast-typers who are comfortable taking notes on their computer.
 
 In particular, we tackle the needs of mentor professors, who tend to be busy and are assigned mentees they are unlikely
-to personally know or even contact often outside of the mentor relationship. Key features of Notor which scaffold this
+to personally know or run into often. A personal CRM like Notor is a useful tool to help mantain the mentor-mentee relationship. Key features of Notor which scaffold this
 are:
 
 1. Powerful Organisation which is up to the user to manage many mentees
@@ -26,16 +26,14 @@ are:
 2. A clean note-taking system
     - designed so that they can take notes concurrently with meeting the mentee so no information is forgotten
 
-### **Acknowledgements**
+### Acknowledgements
 
 This project is a further iteration of the [_AddressBook-Level 3 (
 AB-3)_](https://nus-cs2103-ay2122s1.github.io/tp/DeveloperGuide.html) project. All features we have are in addition to
 those already present in AB-3. Removed features may or may not be listed as well.
 
-* Table of Contents {:toc}
-
---------------------------------------------------------------------------------------------------------------------
-
+* Table of Contents 
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -105,7 +103,16 @@ New Workflow for Adding Commands:
 
 Notor allows you to search for groups and people, and both searches have slightly different requirements.
 
-Lets break down what happens to call a person comamnd.
+Let's break down what happens when you call a command, like the find command. The following is a low-level sequence diagram to show in detail how the method is called.
+
+![FindSequenceDiagram](images/FindSequenceDiagram.png)
+
+* The common logic for all commands is shared in `LogicManager` and `NotorParser`, which uses the Command design pattern. Making use of polymorphism, we know we will have a `Command` returned which can be executed by the `LogicManager`, while different classes hold the functionality.
+* Each specific command parser (`FindCommandParser` in the diagram) is responsible for checking that the correct parameters have been passed, and forming them into the appropriate parameters. The parser creates an appropriate command (`FindPersonCommand`), which extends the `Command` interface. Hence, we know the `FindPersonCommand` will definitely implement `execute`.
+* In the constructor for the `FindPersonCommand`, the `FindPersonExecutor` is initialised. As mentioned earlier, executors hold all the execution functionality. In the case of find, this means in its initialisation it is passed the predicate initialised in the `FindCommandParser` which is used to filter the list of persons in the model later
+* After the initialisation of the `FindPersonCommand` is done, the Command is returned all the way to `LogicManager`. 
+* `LogicManager` uses the Command API to call execute() on the command, which calls the execute method on the executor.
+* The executor updates the model and returns the command result, which is passed back to the `LogicManager`.
 
 
 #### In-depth example of Command Workflow, using the Person Note Command.
@@ -174,100 +181,6 @@ API** : [`Trie.java`](https://github.com/AY2122S1-CS2103T-W08-1/tp/blob/master/s
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedNotor`. It extends `Notor` with an undo/redo history,
-stored internally as an `NotorStateList` and `currentStatePointer`. Additionally, it implements the following
-operations:
-
-* `VersionedNotor#commit()` — Saves the current address book state in its history.
-* `VersionedNotor#undo()` — Restores the previous address book state from its history.
-* `VersionedNotor#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitNotor()`, `Model#undoNotor()`
-and `Model#redoNotor()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedNotor` will be initialized with the initial
-address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command
-calls `Model#commitNotor()`, causing the modified state of the address book after the `delete 5` command executes to be
-saved in the `NotorStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitNotor()`
-, causing another modified address book state to be saved into the `NotorStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitNotor()`, so the address book state will not be saved into the `NotorStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing
-the `undo` command. The `undo` command will call `Model#undoNotor()`, which will shift the `currentStatePointer`
-once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial Notor state, then there are no previous Notor states to restore. The `undo` command uses `Model#canUndoNotor()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoNotor()`, which shifts the `currentStatePointer` once to the
-right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `NotorStateList.size() - 1`, pointing to the latest address book state, then there are no undone Notor states to restore. The `redo` command uses `Model#canRedoNotor()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such
-as `list`, will usually not call `Model#commitNotor()`, `Model#undoNotor()` or `Model#redoNotor()`. Thus,
-the `NotorStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitNotor()`. Since the `currentStatePointer` is not pointing at
-the end of the `NotorStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no
-longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications
-follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-![CommitActivityDiagram](images/CommitActivityDiagram.png)
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-    * Pros: Easy to implement.
-    * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by itself.
-    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-    * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
@@ -335,58 +248,134 @@ Priorities:<p>
 |experienced user                                                                            |pin users I need to access regularly                                                                          |see commonly accessed users easily                         |Low         |           |Iteration 1.3b|
 |experienced user                                                                            |see personal metadata such as number of high-priority students & number of contacts                           |determine my own usage                                     |Low         |           |Iteration 1.3b|
 |new user                                                                                    |see a short tutorial                                                                                          |get familiar with key features                             |Low         |Not started|Iteration 1.3b|
-|general user                                                                                |see a list of recently looked up people                                                                       |quickly add on thoughts on the people I've just seen       |Medium      |           |Iteration 1.3b|
 |mentor professor, module professor                                                          |hide groups                                                                                                   |ignore groups no longer relevant to me                     |Low         |           |Iteration 1.3b|
 |general user, mentor professor, module professor, on the go user                            |export the data to PDF & CSV / Excel                                                                          |reference the information in another format                |Low         |           |Iteration 1.3b|
 |experienced user                                                                            |sort by complete inclusion of terms rather than matching any term                                             |narrow down my search results easily                       |Low         |Not started|Iteration 1.3b|
-|general user                                                                                |create general reminders                                                                                      |remind myself of tasks I need to do for my mentees/students|Low         |Not started|Iteration 1.3b|
 |experienced user, module professor                                                          |set my own command aliases                                                                                    |use my own commands when I am used to them                 |Low         |           |Delay         |
 |experienced user, mentor professor, module professor                                        |use shorter commands                                                                                          |save time                                                  |Medium      |           |Delay         |
 
 ### Use cases
 
-(For all use cases below, the **System** is the `Notor` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, `Notor` is the **System** and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Add a note to a person**
+#### Navigation
+
+##### Use case 1: Display a desired list
 
 **MSS**
 
-1. User requests to add a note to the person.
-2. Notor shows a list of persons.
-3. User requests to add a note to a specific person in the list.
-4. Notor opens up a pop up dialogue for the user to type the note for the person.
-5. User types in note for the person in the pop up dialogue.
-6. User requests to save the note to the person.
-7. Notor saves the note to storage.
-8. User requests to close pop up dialogue for note.
-9. Notor closes pop up dialogue for note.
+1. User requests to view list of persons/groups/archived persons
+2. Notor shows the list selected
+
+**Extensions**
+
+* 2a. The list is empty. Use case ends.
+
+##### Use case 2: Display a subset of a list
+
+**MSS**
+
+1. User requests for Notor to return the persons/groups which fit a certain criteria
+2. Notor returns a list filtered by said criteria
+
+   Use case ends.
+
+#### General Use Cases
+
+##### UC-CommandError : User enters the wrong command
+
+Precondition: User passes the wrong parameters, command, or data
+
+1. Notor detects an error in the entered data, and displays an error message
+2. User corrects their command to not have any errors. Steps 1 and 2 are repeated until the data entered are correct. Command is executed from where the use case is interrupted.
+
+#### Basic Person Use Cases
+
+##### Use case: Add a person to Notor
+
+**MSS**
+
+1. User requests to add a person to Notor, specifying their name and optional parameters for their personal details
+2. Notor adds said person to the storage, and displays a success message
 
    Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
-  
+* 1a. User <u> commands Notor to display the list of groups</u> (UC1)
+    * 1a1. User requests to add a person to Notor, specifying their name and optional parameters for their personal details, as well as the group they want to add them to
+    * Resume usecase at 2
+* 1b. User enters the <u> wrong parameters for their request to add person, resulting in </u> (UC-CommandError).
+  * Resume usecase at 2
+
+##### Use case: Edit Person, Tag Person, or Add/remove person to a group
+
+**MSS**
+
+1. User commands <u> Notor to display the list of persons </u> (UC1)
+2. User specifies a person they want to change, and informs Notor of which fields they want changed and to what values.
+3. Notor changes the fields, displaying the correct fields and a success message
+
+**Extensions**
+
+* 2a. User tries to add person to a group that does not exist.
+  * Notor informs the user that the group does not exist
+    * User decides to <u> create the group</u> first (UC)
+    * Resume use case from step 1.
+
+##### Use case: Add a note to a person
+
+**MSS**
+
+1. User <u> commands Notor to display the list of persons </u> (UC1)
+2. User requests to add a note to a specific person in the list
+3. Notor opens up a pop up window for the user to type the note for the person
+4. User types in their notes.
+5. User requests to save and close the note
+6. Notor closes the note window and displays a success message that note has been saved.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. User <u> makes a mistake in their request, such as specifying a person that doesn't exist </u> (UC-CommandError)
+  * Resume use case from step 2
+* 6a. User requests to save the note to the person
+  * 6a1. Notor displays a message that the note has been saved. Use case resumes at step 5 or 6
+* 6b. User requests to close the note (without saving)
+  * 6b1. Notor shows a warning window.
+    * 6b2.1 : User cancels the request to close the note. Use case resumes at step 5 or 6
+    * 6b2.2 : User accepts to close the note without saving. Notor closes the note window. Not shown that note is saved.
+
+##### Use Case: Clear tags or notes
+
+**MSS**
+
+Precondition: The person or group whose tags or notes you want to clear is visible and able to be selected
+
+1. User requests to clear all tags or notes
+2. Notor displays a confirmation window
+3. User confirms their wish to clear all tags or notes
+4. Notor clears tags or notes, then displays a success message.
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. User cancels their request
+  * 3a1. Notor displays a confirmation of the cancelling of the request
     Use case ends.
 
-* 3a. The given index is invalid.
-    * 3a1. Notor shows an error message.
-      
-       Use case resumes at step 2.
+#### Basic Group Commands
 
-* 5a. User requests to close pop up dialogue for note without saving note.
-    * 5a1. Notor opens up another confirmation pop up dialogue for the user to confirm.
-    * 5a2. User confirms exiting without saving note via confirmation pop up dialogue.
-    * 5a3. Notor closes pop up dialogue for note and confirmation pop up dialogue.
-    
-    Use case ends.
+##### Use Case : Create Group
 
-* 5a1 a. User confirms closing and saving the pop up dialogue for note via confirmation pop up dialogue.
+1. User informs Notor to create a group, specifying its name
+2. Notor creates the group and displays a success message
 
-    Use case resumes at step 5a3.
+#### Proposed Extended Use Cases ( Not Implemented )
 
-
-**Use case: User types a command**
+##### Use case: User types a command
 
 **MSS**
 
@@ -411,15 +400,14 @@ Priorities:<p>
    able to accomplish most of the tasks faster using commands than using the mouse.
 4. Installing a new update shall not in any way, modify or erase existing data and value from the previous version, and
    the new update should be compatible with the data produced earlier within the system.
-5. Should be able to store notes in English language, and provisions shall be made to support all languages.
+5. Should be able to store notes in English language. Note that support for other languages is not in scope.
 6. The system should be able to handle notes with at most 1000 lines without any noticeable decrease in performance, so
    that users can keep extensive notes on their mentees.
-7. The user should not lose any data if the system exits prematurely.
+7. The user should not lose any data if exit command is triggered by the user.
 8. The system should be able to reply to the prompt or command from the user within 3 seconds.
-9. The system should be intuitive to use for a mentor professor.
+9. The system should be logical to use for a mentor professor.
 10. Should ensure personal data privacy and security of data access.
-11. Software testing will require the use of automated testing. The test will be deleted after successful implementation
-    of the software system.
+11. While the software should be accessible for colour-blind or vision impaired mentors, this goal is out of scope for Notor 1.4 due to time constraints.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -427,7 +415,9 @@ Priorities:<p>
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
+<div markdown="span" class="alert alert-info">:information_source: 
+
+**Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
 
 </div>
@@ -450,12 +440,38 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+### List Commands
+
+1. Test case: `person /list`<br>
+  Expected: View list of all persons in Notor who are not archived
+2. Test case: `person /list CSENfeisvnldifosjeri`<br>
+  Expected: Same as above -- following string is ignored.
+3. Test case: `group /list`<br>
+  Expected: List all groups in your Notor
+4. Incorrect test cases to try: `grop /list` (or other typos)
+  Prerequisite: On the person list, using the command `person (INDEX) /list`. Expected: Display error message.
+5. Test case: `person /lar` <br>
+  Prerequisite: List the archived persons
+
+Prerequisites: Be in a list of groups. They can be subgroups or supergroups. Must have at least one group in the list.
+1. Test case: `person 3 /list`<br>
+  Expected: View list of all persons in the third group who are not archived
+2. Test case: `group 2 /list`<br>
+  Expected: View list of all subgroups in group 2 who are not archived
+3. Test case: `person 0 /list `<br>
+  Expected: No change in list display. Error details shown in the status message.
+
+### Find Commands
+1. Test case: `person /find n:John t:AI `<br>
+  Expected: Display all people who's names include 'John' tagged with the specific tag 'AI'.
+2. Test case: `person /find` <br>
+  Expected: Display an error message as no parameters were provided.
+
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
 
-    1. Prerequisites: List all persons using the `person /list` command or already in person list. 
-       Must have at least one person in the list.
+    1. Prerequisites: Be in person list. Must have at least one person in the list.
 
     1. Test case: `person 1 /delete`<br>
        Expected: First contact is deleted from the list. Details of the deleted person shown in the status message.
@@ -488,9 +504,9 @@ testers are expected to do more *exploratory* testing.
 ### Adding note to a person
 
 1. Adding note to a person in person list. <br>
-    Prerequisites: List all persons using the `person /list` command or already in person list. 
+    Prerequisites: List all persons using the `person /list` command or already in person list.
     Must have at least one person in the list.
-    
+
     1. Test case: `person 1 /note` <br>
         Expected: Note window opened with title of note window named as the person to add note to.
         Within the note window, user can make use of keyboard shortcuts in  **User Guide** for saving 
@@ -519,7 +535,9 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect delete commands to try: `p /clearnote`, `p x /clearnote`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
+### Tagging a person
 
+{Todo...}
 ### Saving data
 
 1. Dealing with missing/corrupted data files
