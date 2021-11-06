@@ -184,7 +184,7 @@ Weekly recurring or one-off (makeup) lessons are classified as `Lesson` objects.
 student in TAB. Added lessons can also be edited and deleted.<br>
 
 A `Lesson` is represented in the application as shown in the figure below. It contains a start `Date`, an end `Date`, a `CancelledDates` set,  a `TimeRange` for the
-`Lesson`, , a `Subject`, a `LessonRates` and `Homework` fields. There are 2 types of `Lesson` – `RecurringLesson` and `MakeUpLesson`. `RecurringLesson`
+`Lesson`, a `Subject`, a `LessonRates` and `Homework` fields. There are 2 types of `Lesson` – `RecurringLesson` and `MakeUpLesson`. `RecurringLesson`
 represents a **weekly** recurring lesson. `MakeUpLesson` represents a one-off lesson outside the regular schedule.<br>
 
 ![LessonClassDiagram](images/LessonClassDiagram.png)
@@ -260,7 +260,7 @@ the changes made to the specified lesson.<br>
 
 Cancelling and uncancelling of lessons is done using the `LessonEditCommand`, which allows the user to specify multiple cancel and uncancel dates in one command. 
 
-Cancelled dates of a lesson are stored as a field, `CancelledDates` in the lesson object. When a user specifies a valid lesson date to cancel, the date is added into the `CancelledDates` set. When a user specifies a valid lesson date to uncancel, the date is removed from `CancelledDates`.
+Cancelled dates of a lesson are stored as a field, `CancelledDates` in the lesson object. When a user specifies a valid lesson date to be cancelled, the date is added into the `CancelledDates` set. When a user specifies a valid lesson date to be uncancelled, the date is removed from `CancelledDates`.
 
 #### Deleting Lessons
 The `LessonDeleteCommand` deletes the lesson specified by its lesson index in the displayed list of lessons with respect to the
@@ -384,7 +384,7 @@ To represent this recurring lesson, 3 calendar entries are created:
 2. Recurring entry 2 with start date of `29 Sep 2021` and end date of `6 Oct 2021`
 3. Recurring entry 3 with start date of `20 Oct 2021` and no end date.
 
-In this way, the lesson will not be  displayed on the cancelled dates.
+In this way, the lesson will not be displayed on the cancelled dates.
 
 ### Undo/redo feature
 
