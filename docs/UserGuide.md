@@ -92,7 +92,6 @@ Lesson Card | The area that shows the details of a lesson. See [Managing Lessons
 Center Panel | The region that displays the lists of students and lessons, calendar or the list of tags depending on the command you have entered. See [Features](#features) for more details.
 Footer | The area which shows where TAB saves your student details to. <br> e.g. **./data/addressbook.json** means that TAB saves your data to the sub-folder **data** in the home folder (where TAB located in) with file name **addressbook.json** as shown in the following screenshot: <br> ![fileStorage](images/annotatedFileStorage.png)
 
-
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
@@ -175,9 +174,8 @@ An example of a command in TAB:
 
 [back to table of contents](#toc)
 
-<div style="page-break-after: always;"></div>
-
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### Getting Help 
 This section tells you what to do if you require help while using TAB.
@@ -200,6 +198,8 @@ Format: `help`
 <br />
 
 [back to table of contents](#toc)
+
+--------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
@@ -365,8 +365,6 @@ Executing any of the commands in this section will bring you to the students int
     </tbody>
 </table>
 
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 #### Adding a student: `add`
@@ -437,6 +435,8 @@ Format: `list`
 <br />
 
 [back to table of contents](#toc)
+
+--------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
@@ -557,11 +557,14 @@ Examples:
 To find students with the tag `new` or with lessons between `1100-1300`, you may type the command `find cond/any t/new time/1100-1300`. The figure below shows the list after this find command is executed.
 
 ![find](images/find.png)
+
 <div class="caption">TAB displays two students after the find command.</div>
 
 <br />
 
 [back to table of contents](#toc)
+
+--------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
@@ -731,7 +734,7 @@ Edits the specified lesson of the specified student in TAB with the indicated ch
 
 Format: `ledit INDEX LESSON_INDEX [recurring/END_DATE] [date/START_DATE] [time/TIME_RANGE] [subject/SUBJECT] [rates/LESSON_RATES] [f/OUTSTANDING_FEES] [hw/HOMEWORK]… [cancel/CANCEL_DATE]… [uncancel/UNCANCEL_DATE]…​`
 
-Additional fields to the ones in [Lesson parameters](#lesson-parameters) are listed below.
+Additional fields to the ones in [Lesson parameters](#lesson-parameters) are listed below.<br>
 
 Field | Prefix | Constraints | Examples |
 ------------------|-------|-----------| --------|
@@ -773,6 +776,7 @@ Examples:
 
 * `find n/Betsy` followed by `ldelete 1 1` deletes the 1st lesson for the 1st student in the results of the `find` command.
 
+
 #### Viewing a student's lessons: `view`
 
 Views all the lessons for the specified student in TAB.
@@ -782,10 +786,10 @@ Format: `view INDEX`
 * Views the list of lessons belonging to the student of the specified `INDEX`.
 
 Examples:
-
 * `view 1` displays the list of lessons for the 1st student in the displayed student list.
-  ![viewLessons](images/viewLessons.png)
-  <div class="caption">A list of lessons for the 1st student is shown on the lesson panel.</div>
+  
+![viewLessons](images/viewLessons.png)
+<div class="caption">A list of lessons for the 1st student is shown on the lesson panel.</div>
 
 * `find n/Betsy` followed by `view 1` displays the list of lessons for the 1st student in the results of the `find` command.
 
@@ -828,6 +832,8 @@ Example: Suppose the date today is 1 Nov 2021 and current time is 1500h,
 <br />
 
 [back to table of contents](#toc)
+
+--------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
@@ -913,6 +919,8 @@ This value would be used to calculate and flag out which lesson's fees are due b
 <br />
 
 [back to table of contents](#toc)
+
+--------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
@@ -1007,6 +1015,8 @@ Format: `today`
 
 [back to table of contents](#toc)
 
+--------------------------------------------------------------------------------------------------------------------
+
 <div style="page-break-after: always;"></div>
 
 ### Miscellaneous Commands
@@ -1077,6 +1087,8 @@ Format: `exit`
 
 [back to table of contents](#toc)
 
+--------------------------------------------------------------------------------------------------------------------
+
 <div style="page-break-after: always;"></div>
 
 ### Managing Data
@@ -1103,6 +1115,8 @@ If your changes to the data file makes its format invalid, TAB will discard all 
 <br />
 
 [back to table of contents](#toc)
+
+--------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
@@ -1235,4 +1249,6 @@ Action | Format
 <br />
 
 [back to table of contents](#toc)
+
+--------------------------------------------------------------------------------------------------------------------
 

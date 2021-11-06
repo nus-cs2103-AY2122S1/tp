@@ -7,13 +7,35 @@ title: Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
+## About This Guide
+
+This guide is intended for any developers looking to contribute to TAB.
+It aims to contain all the information required to help you quickly get started. 
+
+In the [Table of Contents](#), each item listed is a link which you can click on to go directly to that section in the guide.
+
+**Conventions Used**
+
+Syntax | Meaning
+--------|------------------
+`text` | A command, or a code block
+<kbd>text</kbd> | A keyboard input, or a button to be clicked on.
+[text](#about-this-guide) | Links to other parts of the document, or links to be opened in the browser.
+_text_ | A _technical_ word with definitions provided in the [Glossary](#appendix-b-glossary), or a caption for images.
+<div markdown="block" class="alert alert-info"> :information_source: </div> | Indication that the following text is a note, which is useful in helping you understand how TAB works.
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## **Acknowledgements**
 
 List of sources of all reused/adapted ideas, code, documentation, and third-party libraries:
 
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 * Libraries used: [CalendarFX](https://dlsc.com/products/calendarfx/), [Jackson](https://github.com/FasterXML/jackson), [JavaFX](https://openjfx.io/), [JUnit5](https://github.com/junit-team/junit5)
-* Table cells with copy and paste and wrap-text functions reference: [Roland09](https://gist.github.com/Roland09/6fb31781a64d9cb62179#file-tableutils-java), [James_D](https://stackoverflow.com/questions/22732013/javafx-tablecolumn-text-wrapping).
+* The [`SchedulePanel#createTimeThread()`](https://github.com/AY2122S1-CS2103T-F13-3/tp/blob/master/src/main/java/seedu/address/ui/SchedulePanel.java#L114) method was reused with minimal changes from the CalendarFX [developer manual](http://dlsc.com/wp-content/html/calendarfx/manual.html#_quick_start).
+* Initialising the `CalendarView` in the `[SchedulePanel](https://github.com/AY2122S1-CS2103T-F13-3/tp/blob/master/src/main/java/seedu/address/ui/SchedulePanel.java#L32)` was done with reference to the CalendarFX [_API_](https://dlsc.com/wp-content/html/calendarfx/apidocs/index.html).
+* The [CenterPanel](https://github.com/AY2122S1-CS2103T-F13-3/tp/blob/master/src/main/java/seedu/address/ui/CenterPanel.java#L138) JavaFX solution was inspired by [this StackOverflow post](https://stackoverflow.com/questions/16176701/switch-between-panes-in-javafx#:~:text=Replace%20just%20a%20specific%20pane,of%20the%20stack's%20child%20list.).
+* UG and DG Table cells with copy and paste and wrap-text functions reference: [Roland09](https://gist.github.com/Roland09/6fb31781a64d9cb62179#file-tableutils-java), [James_D](https://stackoverflow.com/questions/22732013/javafx-tablecolumn-text-wrapping).
 * Detection of overlapping dates: [Ole V.V.](https://stackoverflow.com/questions/60785426/)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -80,11 +102,15 @@ The sections below give more details of each component.
 
 ### UI component
 
+![TAB UI](images/annotatedGui.png)
+
+*Figure A.1.1: Graphical User Interface of TAB*
+
 The *API* of this component is specified in the [`Ui.java`](https://github.com/AY2122S1-CS2103T-F13-3/tp/tree/master/src/main/java/seedu/address/ui/Ui.java) interface.
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-*Figure A.1.1: Class Diagram of GUI using JavaFX framework*
+*Figure A.1.2: Class Diagram of GUI using JavaFX framework*
 
 The `Ui` component uses the JavaFX framework and consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `CenterPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible _GUI_.
 
@@ -97,7 +123,8 @@ The `Ui` component
 * keeps a reference to the `Logic` component, as it relies on `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person`, `Calendar` objects residing in the `Model`.
 * chooses which component it displays based on the `CommandResult` returned by `Logic` component after executing the user command. 
-  * e.g., if `CommandResult#getDisplayType()` returns `CALENDAR`, it tells the `Ui` to display the calendar view.
+  * e.g., if `CommandResult#getDisplayType()` is a `CommandResult.DisplayType.CALENDAR` enumerator, it tells the `Ui` to display the calendar view.
+
 
 ### Logic component
 
@@ -111,9 +138,9 @@ Here's a (partial) *class diagram* of the `Logic` component:
 
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses, e.g., `AddCommand`) which is then executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
+2. This results in a `Command` object (more precisely, an object of one of its subclasses, e.g., `AddCommand`) which is then executed by the `LogicManager`.
+3. The command can communicate with the `Model` when it is executed (e.g. to add a person).
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
 
 The _Sequence Diagram_ below illustrates the interactions within the `Logic` component for the `execute("delete 1")` _API_ call.
 
@@ -138,28 +165,43 @@ How the parsing works:
 
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-F13-3/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="800" />
+<img src="images/BetterModelClassDiagram.png" width="450" />
 
 *Figure A.3.1: Class Diagram of Model Component*
 
-
 The `Model` component
 
-* contains the `AddressBook`. 
-  * `AddressBook` stores all tuition address book data, i.e., all `Person`, calendar `Entry` and `Tag` objects (which are contained in a `UniquePersonList`, `CalendarEntryList` and `UniqueTagList` objects respectively).
-  * While `UniqueTagList` stores all existing distinct tags created, `Tag` objects with the same tag name may not have the same reference. This means that each `Person` object still has its own `Tag` objects and the `Tag` is only added into `UniqueTagList` if it does not exist in the tag list yet.
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate filtered list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed', e.g., the `Ui` component can be bound to this list so that it automatically updates when the data in the list change.
+* stores the tuition address book data, i.e., all `Person`, calendar `Entry`, and `Tag` objects (which are contained in the `UniquePersonList`, `CalendarEntryList`, and `UniqueTagList` objects respectively).
+* stores the currently 'filtered' `Person` objects (e.g., results of a search query) as a separate filtered list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed', e.g., the `Ui` component can be bound to this list so that it automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** 
+The _Sequence Diagram_ below illustrates the interactions when a person, p, is removed from the model.
+
+![Interactions Inside the Model Component for the `delete 1` Command](images/ModelDeleteSequenceDiagram.png)
+
+*Figure A.3.2: Sequence Diagram of Deleting a Person from the Model*
+
+Note that deleting a person in the tuition address book requires
+1. removing that person from the `UniquePersonList`
+2. removing all calendar `Entry`s related to that person from the `CalendarEntryList`
+3. removing all `Tag`s related to that person from the `UniqueTagList`
+
+Working together, the `UniquePersonList`, `CalendarEntrylist`, and `UniqueTagList` manage all of TAB's data.
+**All three of these lists must be updated together, whenever a change is made to TAB's data.**
+
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** 
+The `UniqueTagList` stores all existing distinct tags created, `Tag` objects with the same tag name may not have the same reference.
+This means that each `Person` object still has its own `Tag` objects and the `Tag` is only added from the `Person` into `UniqueTagList` if an equivalent `Tag` (with the same tag name) does not exist in the tag list.
+<br>
 An alternative (arguably, a more OOP) model will have the `UniqueTagList` storing all `Tag` objects which `Person` references. 
 This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 e.g. Suppose `Bernice` was the only person tagged with `UNPAID`. Then the user adds the tag `UNPAID` to `Alex` as well, the state of the dependencies will be as shown in the Final State Diagram, instead of TAB creating another `Tag` named `UNPAID` for `Alex` as per current implementation. <br>
 <img src="images/AddTagState0-Initial_state.png" width="324" />   <img src="images/AddTagState1-Final_state.png" width="324" />
 
 </div>
-
 
 ### Storage component
 
@@ -185,7 +227,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Lesson Management
+### Lesson management features
 
 Weekly recurring or one-off (makeup) lessons are classified as `Lesson` objects. These lessons can be added to any particular
 student in TAB. Added lessons can also be edited and deleted.<br>
@@ -211,7 +253,7 @@ The class diagram given below shows how these commands are part of the `Logic` C
 
 These commands are described in greater detail in the sections below.
 
-#### Adding Lessons
+#### Adding lessons
 The `LessonAddCommand` adds a lesson to the list of lessons of a student in TAB.<br>
 
 A simple illustration of how TAB might interact with the user for `LessonAddCommand` is shown below.
@@ -235,9 +277,9 @@ The figure below shows the sequence diagram for adding a lesson to a student.
 
 The `LessonAddCommand#executeUndoableCommand()` method updates the `Lesson` objects in the `Person` in the `UniquePersonList` 
 by adding `toAdd` to the list of lessons the student currently has. Note that `toAdd` will not be added if there is an 
-existing lesson with a clashing date and timeslot.<br>
+existing lesson with a clashing date and timeslot.
 
-#### Editing Lessons
+#### Editing lessons
 The `LessonEditCommand` edits the lesson identified by its index in the displayed list of lessons with respect to the student
 with this lesson. The lesson will be edited per the given information input by the user.<br>
 
@@ -263,7 +305,7 @@ The `executeUndoableCommand()` method of the `LessonEditCommand` uses this `edit
 The new lesson is stored in TAB in place of the old lesson. The student's list of lessons will be updated to reflect
 the changes made to the specified lesson.<br>
 
-#### Deleting Lessons
+#### Deleting lessons
 The `LessonDeleteCommand` deletes the lesson specified by its lesson index in the displayed list of lessons with respect to the
 student with this lesson.
 
@@ -273,17 +315,20 @@ list without the deleted lesson will be created and will replace the original `P
 
 The specified `Lesson` object will be deleted from the `model` of TAB, and the updated list of lessons of the student will be displayed.<br>
 
-#### Storing Lessons
+#### Storing lessons
+
 The set of `Lesson` objects are stored within the `Person` who is referencing these `Lesson` objects. The `JsonAdaptedLesson` is used
 to convert the `Lesson` objects to Jackson-friendly `JsonAdaptedLesson` objects that can be stored in the `.json` file, where all the
 `Person` objects in TAB is stored. When the application starts up, this class is also used to convert the `JsonAdaptedLesson` objects
 into `model`-friendly `Lesson` objects.<br>
 
-#### Displaying Lessons in GUI
-A single `Lesson` is displayed using a `LessonCard`. All `Lesson` objects belonging to a student is displayed in a list using
-the `LessonListPanel`, which contains a `ListView` of multiple `LessonCard`s.
-The list of lessons is displayed side by side the list of students. The `ViewCommand` is used to specify which student's
-list of lessons to view. The `PersonListPanel` also has a listener that displays the selected student's list of lesson.<br>
+#### Displaying lessons in the GUI
+
+![PersonGridPanel](images/GuiPersonGridPanel.png)
+
+Each `Lesson` is displayed on a `LessonCard` in the `LessonListPanel`, next to the `PersonListPanel`.
+Selecting a student in the `PersonListPanel` through the `view` command or clicking on the GUI will display their lessons in the `LessonListPanel`.
+(see also: [Switching between students, calendar, and tags](#switching-between-students-calendar-and-tags)).<br>
 
 #### Design considerations
 
@@ -315,59 +360,67 @@ where the lessons are isolated to the student for more personalised teaching.<br
 
 Alternative 1 is our choice as weekly recurring lessons are common for private 1-to-1 tuition in Singapore and also allows us
 to implement the clashing warning feature more easily. As alternative 2 required more thinking on how to calculate overlapping dates,
-we decided to put off alternative 2 for future considerations.<br>
+we decided to put off alternative 2 for future considerations.
 
+<br/>
 
-### Schedule feature
+### Calendar View
 
-This feature allows users to view a calendar that contains all existing lessons to visualise their schedule and plan ahead.
+TAB uses the [CalendarFX](https://dlsc.com/products/calendarfx/) library to implement its calendar interface, allowing users to view a calendar that contains all their existing lessons, so that they can visualise their schedule and plan ahead.
 
-TAB uses the [CalendarFX](https://dlsc.com/products/calendarfx/) library to implement its calendar interface.
-Each lesson stored in the `Model` component is also converted to a CalendarFX `Entry`and maintained in the `CalendarEntryList` of `AddressBook` (see also: [`Model` component](#model-component)). 
-The `Ui` component shows this list of entries in the `SchedulePanel` using CalendarFX's `CalendarView` with our custom display settings.
+![CalendarView](images/GuiCalendarView.png)
 
-Any changes made to the `Calendar` in `Model` will automatically update the `CalendarView` through CalendarFX's internal implementation (see how in their [manual](http://dlsc.com/wp-content/html/calendarfx/manual.html)). 
+*Figure C.1.1: Integration of the CalendarView in our GUI*
 
-#### CenterPanel
+A CalendarFX `CalendarView` with custom display settings is integrated into our GUI through the `SchedulePanel` class in the `Ui` component.
+This `CalendarView` displays every CalendarFX `Entry` that we store in model component's `CalendarEntryList`.
+Any changes made to the `CalendarEntryList` in `Model` will automatically update the `CalendarView` through CalendarFX's internal implementation (see how in their [manual](http://dlsc.com/wp-content/html/calendarfx/manual.html)).
 
-We allow the user to toggle between viewing the schedule and viewing the list of students with the `CenterPanel` class in the `Ui` component.
+`CalendarEntryList` converts every `Lesson` in TAB and maintains them as CalendarFX `Entry`(s) (see also: [Model Component](#model-component)).
+Some knowledge of the CalendarFX `Entry` _API_ (provided [here](https://dlsc.com/wp-content/html/calendarfx/apidocs/index.html)) 
+is necessary to understand the conversion that happens in [`CalendarEntryList#convertRecurringLessonToEntries(Person, Lesson)`](https://github.com/AY2122S1-CS2103T-F13-3/tp/blob/master/src/main/java/seedu/address/model/lesson/CalendarEntryList.java#L331)
+and [`CalendarEntryList#convertToMakeupEntry(Person, Lesson)`](https://github.com/AY2122S1-CS2103T-F13-3/tp/blob/master/src/main/java/seedu/address/model/lesson/CalendarEntryList.java#L384).
 
-The *Sequence Diagram* below shows how the `Ui` components interact with each other when user inputs the `schedule` command.
+It is important to understand the limitations of CalendarFX `Entry`. In particular, it does not support recurrence exceptions. 
+This means that we cannot modify properties of specific occurrences of a recurring `Entry`. 
+For example, suppose we have a lesson entry that recurs weekly starting from 1st Jan till 31st Dec. There is no in-built way to change the details of a single date, 
+such as cancelling a lesson only on 15th Jan. However, cancelling lessons for a particular week is a valid and common
+behaviour of a 1-to-1 private home tutor. 
 
-![Interactions Inside the Ui Component for the `schedule` Command](images/ScheduleSequenceDiagram.png)
+To circumvent this problem, [`CalendarEntryList#convertRecurringLessonToEntries(Person, Lesson)`](https://github.com/AY2122S1-CS2103T-F13-3/tp/blob/master/src/main/java/seedu/address/model/lesson/CalendarEntryList.java#L331)
+maps `RecurringLesson`s to a `List` of `Entry`s. The aforementioned example lesson would thus be converted to:
+1. A first calendar `Entry` that recurs weekly, from 1st Jan to 8th Jan (inclusive);
+2. A second calendar `Entry` that recurs weekly, from 22nd Jan to 31st Dec (inclusive).
 
-*Figure I.1.1: Sequence Diagram of Schedule Command*
-
-When the user requests to view the schedule,the `displaySchedulePanel()` method of `CenterPanel` is called, which sets the current display to show the `SchedulePanel`.
-Switching back is similarly achieved by calling the `displayPersonListPanel()` method of `CenterPanel`.
+This effectively "cancels" the lesson that occurs on 15th Jan in the calendar interface.
 
 #### Design considerations
 
 **Aspect: How the calendar interface is implemented:**
 
 * **Alternative 1:**  Create a calendar view using JavaFX.
-    * Pros: More customisable as we are not limited by CalendarFX's _API_.
-    * Cons: Much more difficult to implement.
+  * Pros: More customisable as we are not limited by CalendarFX's _API_.
+  * Cons: Much more difficult to implement.
 
 * **Alternative 2 (current implementation):** Use CalendarFX to display entries while storing entry data locally.
-    * Pros: Less code is written to implement it and the difficulty of implementing a calendar is completely abstracted away.
-    * Cons: There is the initial difficulty in picking up and learning CalendarFX's API, and a risk that it might not work out the way we want it to. We will also be limited to the features of CalendarFX, and any bug or issues will be inevitably find its way into our system as well.
+  * Pros: Less code is written to implement it and the difficulty of implementing a calendar is completely abstracted away.
+  * Cons: There is the initial difficulty in picking up and learning CalendarFX's API, and a risk that it might not work out the way we want it to. We will also be limited to the features of CalendarFX, and any bug or issues will be inevitably find its way into our system as well.
 
 We chose alternative 2 and integrated CalendarFX into our app as the possibility of introducing bugs seems small due to it being a well-used and well-tested library. Furthermore, the schedule feature will be much more robust and can be implemented much faster as compared with alternative 1.
 
 **Aspect: How to implement different calendar views such as week view and month view:**
 
 * **Alternative 1 (current implementation):**  Use CalendarFX's `CalendarView` which is a complete calendar interface.
-    * Pros: Very easy to implement, as most things are done internally by CalendarFX. We also benefit from additional features such as their search bar, buttons for navigation, and fancy animations and transitions. 
-    * Cons: Each page becomes very small in our GUI, limiting its usefulness for users with smaller screens. Furthermore, we have no choice but to display all four of the default calendarFX pages (i.e., day, week, month and year pages), even if we do not want to.
+  * Pros: Very easy to implement, as most things are done internally by CalendarFX. We also benefit from additional features such as their search bar, buttons for navigation, and fancy animations and transitions.
+  * Cons: Each page becomes very small in our GUI, limiting its usefulness for users with smaller screens. Furthermore, we have no choice but to display all four of the default calendarFX pages (i.e., day, week, month and year pages), even if we do not want to.
 
 * **Alternative 2:**  Create our own JavaFX panels for each page for displaying week and month.
-    * Pros: Month view will be slightly bigger, increasing the number of entries that can be seen by a small amount. Bugs and inconsistencies in other pages can be avoided as we will have better control what we want to display.
-    * Cons: Much harder to implement, no more fancy transitions or inbuilt buttons, and GUI improvements seem marginal at best.
+  * Pros: Month view will be slightly bigger, increasing the number of entries that can be seen by a small amount. Bugs and inconsistencies in other pages can be avoided as we will have better control what we want to display.
+  * Cons: Much harder to implement, no more fancy transitions or inbuilt buttons, and GUI improvements seem marginal at best.
 
 Alternative 1 is our preferred choice as its pros and cons seem much better than alternative 2, especially due to its ease of implementation. The main difficulty of alternative 1 becoming familiar with the CalendarFX _API_, but this difficulty is also present in alternative 2.
 
-### Reminder Feature
+### Upcoming lesson reminders
 The reminder feature allows users to view a list of upcoming lessons that ends in the next 48 hours.
 
 - Example: Suppose the date today is 1 Nov 2021 and current time is 1500h,
@@ -390,7 +443,6 @@ Given below is a simple illustration of how the reminder list might change with 
 <img src="images/ReminderActivityDiagram.png" /> <br>
 
 *Figure I.5.1: Reminder activity diagram for adding a lesson.*
-
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** 
 Reminder does not refresh the list of upcoming lessons automatically if no data modifications were made to lessons. Users need to enter `remind`, click <kbd>Reminder</kbd> on the menu bar or press <kbd>F5</kbd> to update the list of upcoming lessons. </div>
@@ -422,7 +474,70 @@ Figure I.5.3 shows a sequence diagram of how the reminder window is displayed wi
 
 As Alternative 2 requires more testing and hence more time to minimize bugs, we decided to put off alternative 2 for future considerations given the limited amount of time we have.
 
-### Undo/redo feature
+### Viewing Tags
+
+Viewing tag is facilitated by `UniqueTagList`.
+
+- `UniqueTagList` stores a list of alphabetically sorted unique unmodifiable tags with case-insensitive tag names.
+- `UniqueTagList` holds a private field `tagCounter` that maps `Tag` to `Integer`, where `Integer` is the number of persons labelled under each tag.
+- `Tag` objects in `UniqueTagList` may not have the same reference as the `Person` object's `Tag`, i.e. each `Person` has a set of `Tag` objects on its own.
+
+Operations include:
+- `UniqueTagList#addTagFromPerson(Person)` - Adds tags from the specified person to the tag list if the tags do not exist in the tag list. If there is already a tag with same case-insensitive name, it increments the `Integer` that this tag is mapped to in `tagCounter`.
+- `UniqueTagList#removeTagFromPerson(Person)` - Removes tags belonging to the specified person from the tag list if there is no person labelled under this tag after removal, else, decrements the `Integer` that this tag is mapped to in `tagCounter`.
+- `UniqueTagList#editTagFromPerson(Person)` - Removes the original tags belonging to the specified person from the tag list and adds the new tags labelled for the specified person to the tag list.
+
+These operations are called when a person is added, edited, or deleted with `AddCommand`, `EditCommand` and `DeleteCommand` respectively.
+
+Given below is an example usage scenario and how viewing tag is executed:
+- **Step 1:** The user launches the application. The `Model` is initialized with the saved data (or sample data if there were no saved data). Tags from each person is loaded into `UniqueTagList` and `tagCounter` will store the corresponding number of students labelled with the tags.
+- **Step 2:** The user enter the command `tag` to view all tags. `Logic` calls `AddressBookParser` to parse this command string, creating a `TagCommand`.
+- **Step 3:** `Logic` executes the `TagCommand`. During execution, `TagCommand#execute()` instantiates a `CommandResult` with the `DisplayType` of `TAGS` as a signal for `MainWindow` to switch the center panel to show the tag list.
+- **Step 4:** `MainWindow` then handles this command by calling `CenterPanel#displayTagListPanel()` to display the tag list to the user.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** Tags with duplicate case-insensitive tag names for a person is not allowed. If the user tries to adds a tag with the same tag name to the person already with that tag, the new tag will not be added and `tagCounter` will not increment the count for this tag.<br></div>
+
+Figure I.4.1 shows a sequence diagram of how the tag list is displayed to the user with UI components.<br>
+<img src="images/ViewTagSequenceDiagramUi.png" width="800" />
+
+*Figure I.4.1: View tags UI sequence diagram*
+
+#### Design considerations
+**Aspect: Data Structures to support lesson operations**
+
+* **Alternative 1 (current implementation):** Use a `UniqueTagList` to store the tags created and a class field `tagCounter` to map each unique `Tag` to the number of persons labelled under it.
+  - Pros:
+    - Quicker retrieval and update of data using a `HashMap` for `tagCounter`.
+  - Cons:
+    - Each `Person` object has its own set of `Tags` which may be repetitive and memory-consuming if there is a large number of same tags.
+    - Retrieval of all tags and calculation of the number of persons labelled under each tag during the initialization of the application requires iterating through all persons in TAB.
+
+* **Alternative 2:** Each tag stores a list of persons or number of persons labelled with that tag.
+  - Pros:
+    - Faster retrieval of the number of persons under each tag.
+  - Cons:
+    - This could result in circular dependency since a `Person` keeps reference of a set of `Tags` and a `Tag` has to keep a reference to a list of `Persons` simultaneously.
+    - Updating the tags labelled for a `Person` requires modification of the data fields of the `Person`. Since TAB objects are immutable, this means that new copies of `Person` and `Tag` have to be created after every command that modifies the data. This could slow down the application when there is a large amount of data stored.
+    
+### Switching between students, calendar, and tags
+
+The `CenterPanel` in the `Ui` component consists of the `PersonGridPanel`, `SchedulePanel`, and `TagListPanel` and handles the switching between each of them for users to view their list of students and lessons, schedule, and list of tags respectively.
+
+![CenterPanel Class Diagram](images/CenterPanelClassDiagram.png)
+
+The *Sequence Diagram* below shows how the `Ui` components interact with each other when user inputs the `calendar` command.
+
+![Interactions Inside the Ui Component for the `calendar` Command](images/ScheduleSequenceDiagram.png)
+
+*Figure I.1.1: Sequence Diagram of Calendar Command*
+
+When the user requests to view the calendar interface, the `displaySchedulePanel()` method of `CenterPanel` is called, which sets the current display to show the `SchedulePanel`.
+Switching to the student view and tag list is similarly achieved by calling `displayPersonGridPanel()` and `displayTagListPanel()` methods respectively.
+
+How `PersonGridPanel`, `SchedulePanel`, and `TagListPanel` work is described in detail in the
+[Displaying Lessons in the GUI](#displaying-lessons-in-the-gui), [Calendar Interface](#calendar-interface) and [Tag list interface](#tag-list-interface) sections respectively.
+
+### Undo/redo
 
 The undo/redo mechanism is facilitated by an `UndoRedoStack`, which resides in `LogicManager`. It supports the undoing and redoing of commands that modifies the state of the address book (e.g. `add`, `edit`). Such commands will inherit from `UndoableCommand`.
 
@@ -524,8 +639,7 @@ The redo does the exact opposite (pops from `redoStack`, push to `undoStack`, an
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the `redoStack` is empty, then there are no other commands left to be redone, and an `Exception` will be thrown when popping the `redoStack`.<br></div>
 
-
-#### Design considerations:
+#### Design considerations
 
 **Aspect: How undo & redo executes:**
 
@@ -537,51 +651,6 @@ The redo does the exact opposite (pops from `redoStack`, push to `undoStack`, an
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
-  
-### Viewing Tags
-Viewing tag is facilitated by `UniqueTagList`. 
-
-- `UniqueTagList` stores a list of alphabetically sorted unique unmodifiable tags with case-insensitive tag names.
-- `UniqueTagList` holds a private field `tagCounter` that maps `Tag` to `Integer`, where `Integer` is the number of persons labelled under each tag. 
-- `Tag` objects in `UniqueTagList` may not have the same reference as the `Person` object's `Tag`, i.e. each `Person` has a set of `Tag` objects on its own.
-
-Operations include:
-- `UniqueTagList#addTagFromPerson(Person)` - Adds tags from the specified person to the tag list if the tags do not exist in the tag list. If there is already a tag with same case-insensitive name, it increments the `Integer` that this tag is mapped to in `tagCounter`.
-- `UniqueTagList#removeTagFromPerson(Person)` - Removes tags belonging to the specified person from the tag list if there is no person labelled under this tag after removal, else, decrements the `Integer` that this tag is mapped to in `tagCounter`.
-- `UniqueTagList#editTagFromPerson(Person)` - Removes the original tags belonging to the specified person from the tag list and adds the new tags labelled for the specified person to the tag list.
-
-These operations are called when a person is added, edited, or deleted with `AddCommand`, `EditCommand` and `DeleteCommand` respectively.
-
-Given below is an example usage scenario and how viewing tag is executed:
-- **Step 1:** The user launches the application. The `Model` is initialized with the saved data (or sample data if there were no saved data). Tags from each person is loaded into `UniqueTagList` and `tagCounter` will store the corresponding number of students labelled with the tags.
-- **Step 2:** The user enter the command `tag` to view all tags. `Logic` calls `AddressBookParser` to parse this command string, creating a `TagCommand`.
-- **Step 3:** `Logic` executes the `TagCommand`. During execution, `TagCommand#execute()` instantiates a `CommandResult` with the `DisplayType` of `TAGS` as a signal for `MainWindow` to switch the center panel to show the tag list.
-- **Step 4:** `MainWindow` then handles this command by calling `CenterPanel#displayTagListPanel()` to display the tag list to the user.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** Tags with duplicate case-insensitive tag names for a person is not allowed. If the user tries to adds a tag with the same tag name to the person already with that tag, the new tag will not be added and `tagCounter` will not increment the count for this tag.<br></div>
-
-Figure I.4.1 shows a sequence diagram of how the tag list is displayed to the user with UI components.<br>
-<img src="images/ViewTagSequenceDiagramUi.png" width="800" />
-
-*Figure I.4.1: View tags UI sequence diagram*
-
-#### Design considerations
-**Aspect: Data Structures to support lesson operations**
-
-* **Alternative 1 (current implementation):** Use a `UniqueTagList` to store the tags created and a class field `tagCounter` to map each unique `Tag` to the number of persons labelled under it.
-  - Pros:
-    - Quicker retrieval and update of data using a `HashMap` for `tagCounter`.
-  - Cons:
-    - Each `Person` object has its own set of `Tags` which may be repetitive and memory-consuming if there is a large number of same tags.
-    - Retrieval of all tags and calculation of the number of persons labelled under each tag during the initialization of the application requires iterating through all persons in TAB.
-
-* **Alternative 2:** Each tag stores a list of persons or number of persons labelled with that tag.
-  - Pros:
-    - Faster retrieval of the number of persons under each tag.
-  - Cons:
-    - This could result in circular dependency since a `Person` keeps reference of a set of `Tags` and a `Tag` has to keep a reference to a list of `Persons` simultaneously.
-    - Updating the tags labelled for a `Person` requires modification of the data fields of the `Person`. Since TAB objects are immutable, this means that new copies of `Person` and `Tag` have to be created after every command that modifies the data. This could slow down the application when there is a large amount of data stored.
-
 
 ### Finding students
 
@@ -604,8 +673,7 @@ Additionally, a `FindCondition` can be specified by the user which determines wh
 The `PersonMatchesKeywordsPredicate#test()` method will compose all searched field predicates into a single predicate, depending on the find condition.
 The predicate is then used to filter the list of person.
 
-
-**Design considerations**
+#### Design considerations
 
 **Aspect: Data structure of predicates**
 * **Alternative 1 (current choice):** Use a single `PersonMatchesKeywordsPredicate` class to represent all fields' predicates.
@@ -614,7 +682,6 @@ The predicate is then used to filter the list of person.
 * **Alternative 2:** Use multiple `{field}MatchesKeywordsPredicate` classes to represent each field's predicate.
     * Pros: It offers greater flexibility for each field predicate to have its own matching behavior.
     * Cons: There is greater probability of bugs introduced if a new field to search is to be added, or if the matching behaviour of all predicates are required to be changed.
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -628,29 +695,27 @@ The predicate is then used to filter the list of person.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
+## **Appendix A: Requirements**
 
 ### Product scope
 
 **Target user profile**:
 
-A private 1-to-1 home tuition teacher in Singapore that:
+A private 1-to-1 home tuition teacher that:
 
 1. has a need to manage not more than 50 student contacts
-2. has a need to manage admin details of each student, namely, lesson fees and payment
+2. has a need to manage payment details of each student
 3. has a need to keep track of lesson details for each student
-4. teaches lessons anytime between 8am and 10pm (UTC+8), on any day of the week
+4. teaches lessons anytime between typical working hours of 8am and 10pm, on any day of the week
 5. has a need to manage a busy schedule of not more than 50 lessons
 6. prefers desktop apps over other types
 7. can type fast
-8. prefers typing to mouse interactions
+8. prefers keyboard interactions to mouse interactions
 9. is reasonably comfortable using CLI apps
-10. tutors students belonging to Singapore’s education system
 
 **Value proposition**: TAB is an all-in-one app that manages work schedule and client relationships faster than 
 a typical mouse/_GUI_ driven app. TAB effortlessly keeps track of large amounts of necessary 
-student and lesson information, to empower tutors to provide the best quality home tuition service.  
-
+student and lesson information, to empower tutors to provide the best quality home tuition service.
 
 ### User stories
 
@@ -701,8 +766,8 @@ Priorities: High - must have; Medium - nice to have;  Low - unlikely to have.
 | S36 | `HIGH`   | user                                       | edit a student's outstanding fees                                   |                                                                         |
 | S37 | `HIGH`   | user                                       | delete a student's outstanding fees                                 |                                                                         |
 | S38 | `LOW`    | user                                       | have an archive for removed students                                | revisit the archived data if the need arises                            |
-| S39 | `LOW`    | user with many students stored in TAB  | sort students by name                                               | locate a student easily                                                 |
-| S40 | `LOW`    | user with many students stored in TAB  | sort students by tag                                                | locate a student easily                                                 |
+| S39 | `LOW`    | user with many students stored in TAB      | sort students by name                                               | locate a student easily                                                 |
+| S40 | `LOW`    | user with many students stored in TAB      | sort students by tag                                                | locate a student easily                                                 |
 | L1  | `HIGH`   | user                                       | add lessons for a student                                           | keep track of the lessons each student has                              |
 | L2  | `HIGH`   | user                                       | add recurring lessons for a student                                 | keep track of the regular lessons                                       |
 | L3  | `HIGH`   | user                                       | add makeup lessons for a student                                    | track lessons outside of my usual lesson schedule                       |
@@ -1086,7 +1151,7 @@ Use case ends.
 11. Should allow users to easily navigate the app interface
 
 
-### Glossary
+## Appendix B: Glossary
 
 * **Academic level**: Mainstream academic years from primary to tertiary education in Singapore (i.e. Primary 1-6, Secondary 1-5, Junior College 1-2 and Year 1-6).
 * **Academic stream**: Mainstream tracks in Singapore (i.e. Express, NA, NT, IP, IB) as well as other common exam streams (e.g. IELTS, SAT, ACT).
@@ -1101,13 +1166,11 @@ Use case ends.
 * **Session**: A session begins when the app is started and ends when the app is exited.
 * **UI**: User Interface - the means by which the user and the app interact.
 * **UML**: Unified Modeling Language - a modeling language that software engineers use to provide a standard way to visualize the design of a system.
-* **UTC+8**: The UTC offset used by Singapore Standard Time (SST), 8 hours ahead of UTC. Historically also referred to as GMT+8.
-  UTC, or Coordinated Universal Time, is the primary time standard by which the world regulates clocks and time.
 * **UX**: User Experience - The experience a user has when using the app.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **Appendix C: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 
@@ -1118,24 +1181,24 @@ testers are expected to do more *exploratory* testing.
 
 ### Launch and shutdown
 
-1. Initial launch
+**Initial launch**
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the _GUI_ with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the _GUI_ with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+**Saving window preferences**
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+   2. Re-launch the app by double-clicking the jar file.<br>
+          Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+_{ more test cases …​ }_
 
 ### Deleting a person
 
-1. Deleting a person while all persons are being shown<br>
+**Deleting a person while all persons are being shown<br>**
 Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
    * Test case: `delete 1`<br>
@@ -1152,7 +1215,7 @@ Expected: Error details shown in the status message.
 
 ### Adding a lesson
 
-1. Adding a lesson to a students while all students are being shown<br>
+**Adding a lesson to a students while all students are being shown<br>**
 Prerequisites: List all students using the `list` command. Multiple students in the list.
 
   * Test case: `ladd 1 date/12 Oct 2021 time/1100-1200 subject/Science rates/40`<br>
@@ -1162,11 +1225,11 @@ Prerequisites: List all students using the `list` command. Multiple students in 
   * Test case: `ladd 1 time/1100-1200 subject/Science rates/40`<br>
      Expected: Missing start date for lesson. Error details will be shown in the status message.
 
-2. Adding a lesson to a student after a `find` command is executed.
+**Adding a lesson to a student after a `find` command is executed.**
   
   * Test case: `ladd 2 date/12 Oct 2021 time/1100-1200 subject/Science rates/40`<br>
     Expected: A lesson with the corresponding details will be added to the lesson list of the 2nd student in the resulting list after `find`.
-    Details of the added lesson, and the student with the lesson will be shown in the status message.
+    Details of the added lesson, and the student with the lesson will be shown in the status message. If there is no 2nd student, an error message will be shown.
 
 Incorrect `ladd` commands to try: `ladd...`
 
@@ -1180,7 +1243,7 @@ Expected: Error details will be shown in the status message.
 
 ### Editing a lesson of a student
 
-1. Editing a lesson of a student while all students are being shown<br>
+**Editing a lesson of a student while all students are being shown<br>**
 Prerequisites: List all students using the `list` command. Multiple students in the list.
 
 * Test case: `ledit 1 1 date/20 Jan 2022` <br>
@@ -1205,7 +1268,7 @@ Expected: Error details will be shown in the status message.
 
 ### Deleting a lesson from a student
 
-1. Deleting a lesson from a student while all persons are being shown<br>
+**Deleting a lesson from a student while all persons are being shown<br>**
 Prerequisites: List all students using the `list` command. Multiple students in the list.
 
   * Test case: `ldelete 1 1`<br>
@@ -1226,6 +1289,77 @@ Incorrect `ldelete` commands to try: `ldelete...`
 
 Expected: Error details will be shown in the status message.
 
+### Navigation
+
+**Navigating the Calendar**
+
+   * Test case: `week`<br>
+     Expected: `CenterPanel` displays the week page of the Calendar Interface. 
+   
+   * Test case: `next`<br>
+     Expected: `CenterPanel` displays the Calendar Interface and navigates forward in the calendar.
+   
+   * Test case: `today`<br>
+     Expected: `CenterPanel` displays the Calendar Interface and jumps to the current day/week/month/year.
+
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Note:**
+The Calendar remembers where you left off in the current _session_, so it is expected that calling `today` 
+will bring you to today in the month page, if you left off on the month page. 
+If you haven't previously entered the calendar interface, it will default to starting on the week page, which is typically
+the most used page.
+
+</div>
+
+**Navigating the student list**
+
+  * Test case: `list`
+  * Expected: `CenterPanel` displays the list of **all** students.
+
+  * Test case: `view 2`
+  * Expected: If there is a second student, this command will select and shows the lessons of the second student
+    (selecting the student in the GUI should do the same thing).
+    Otherwise, it will show an error message for trying to view a non-existent student 
+    ("The student index provided is invalid!").
+
+**Viewing the list of tags**
+
+  * Test case: `tag`
+  * Expected: `CenterPanel` displays the list of **all** tags.
+  
+**Viewing Help:**
+
+  * Test case: `help`
+  * Expected: Help window gets opened/focused, showing a table of all available commands and their details, 
+    as well as a link to the User Guide.
+
+### Shortcuts
+
+**Typing from anywhere in Tab:**
+  
+   * Test case: 
+     1. Click anywhere on the main window outside the CommandBox, such that it is no longer in focus.
+     2. Begin typing any command.
+   * Expected: CommandBox shifts back to focus, allowing you to type in it without having to click on it again.
+   
+**Going back to the previous commands:**<br>
+Prerequisites: Have a previous command entered, and an empty CommandBox in focus.
+   
+   * Test case: <kbd>Ctrl</kbd> + <kbd>z</kbd> 
+   * Expected: Brings back the previous command entered into the CommandBox.
+     
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Note:**
+<kbd>Ctrl</kbd> + <kbd>z</kbd> is **NOT** a shortcut for the `undo` command.
+</div>
+
+**Function Key Accelerators:**
+
+  * Test case: <kbd>F1</kbd>
+  * Expected: Help window gets opened/focused
+  
 ### Viewing reminder
 
 1. Add a lesson to a student. <br>
@@ -1263,3 +1397,28 @@ Expected: Error details will be shown in the status message.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+## **Appendix D: Efforts**
+
+In this Appendix, we highlight the difficulty level, challenges faced, effort required, and achievements of our project.
+
+**Calendar Interface and CenterPanel**
+
+The Calendar interface was implemented using the CalendarFX library -- our work on adapting CalendarFX into TAB is contained in the `SchedulePanel` class (see how in the [Calendar interface](#calendar-interface) section).
+A lot of effort was required to make this feature work as there was very a steep learning curve due to the massive size and complexity of the library, and minimal documentation on how to customise it.
+Integrating the interface into our app with JavaFX was also extremely difficult, as the learning curve was just as steep with JavaFX and FXML elements.
+It took two weeks (from v1.1 to v1.2b) of learning and trial-and-error to achieve a working prototype of a weekly calendar and the CenterPanel which houses it.
+Furthermore, additional complex calendar logic had to be added to customise behaviours to fit our target audience, such as allowing recurrence exceptions.
+Implementation of these features took ~4k Loc.
+
+**Undo/Redo feature**
+
+**Finding students**
+
+**Lessons**
+
+**Clashing Lessons**
+
+**Fee Calculator**
+
+
