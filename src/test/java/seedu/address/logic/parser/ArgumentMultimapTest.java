@@ -16,7 +16,7 @@ public class ArgumentMultimapTest {
 
     @Test
     public void isAllPresent() {
-        ArgumentMultimap allPresent = ArgumentTokenizer.tokenize(" n/ w/ m/",
+        ArgumentMultimap allPresent = ArgumentTokenizer.tokenize(" all/ w/ m/",
                 PREFIX_INCOMING_MONTH, PREFIX_INCOMING_WEEK, PREFIX_NORMAL_LIST);
 
         ArgumentMultimap somePresent = ArgumentTokenizer.tokenize(" v/123",
@@ -36,11 +36,12 @@ public class ArgumentMultimapTest {
 
     @Test
     public void isMultiplePresent() {
-        ArgumentMultimap allPresent = ArgumentTokenizer.tokenize(" n/ w/ m/",
+        ArgumentMultimap allPresent = ArgumentTokenizer.tokenize(" all/ w/ m/",
                 PREFIX_INCOMING_MONTH, PREFIX_INCOMING_WEEK, PREFIX_NORMAL_LIST);
 
         ArgumentMultimap somePresent = ArgumentTokenizer.tokenize(" v/123",
                 PREFIX_VISIT, PREFIX_LAST_VISIT);
+
         // in this case lv/ is considered the value of key v/
         ArgumentMultimap somePresentNoSpace = ArgumentTokenizer.tokenize(" v/lv/",
                 PREFIX_VISIT, PREFIX_LAST_VISIT);

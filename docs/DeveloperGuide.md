@@ -14,6 +14,7 @@ title: Developer Guide
   - [Common classes](#common-classes)
 - [Implementation](#implementation)
   - [Datetime for Visit and LastVisit](#datetime-for-visit-and-lastvisit)
+  - [Command warning](#command-warning)
   - [Add command](#add-command)
   - [Visit command](#visit-command)
   - [Delete command](#delete-command)
@@ -22,6 +23,7 @@ title: Developer Guide
   - [Sort command](#sort-command)
   - [Summary command](#summary-command)
   - [Download command](#download-command)
+  - [List command](#list-command)
 - [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 - [Appendix: Requirements](#appendix-requirements)
   - [Product scope](#product-scope)
@@ -187,6 +189,24 @@ The datetime is stored and displayed differently in the system for both efficien
 
 For example, time at two o'clock in the afternoon of 1st November 2021 will be stored or parsed as `2021-11-01 14:00` and displayed as `01 Nov 2021 14:00`.
 
+
+### Command warning
+
+#### Implementation
+
+Class `CommandWarning` stores warning details for a command executed. `CommandResult` class has a composition association with `CommandWarning` class. A `CommandWarning` is an optional field of a `CommandResult` instance:
+
+![CommandWarningClassDiagram](images/CommandWarningClassDiagram.png)
+
+
+There are two types of command warnings:
+
+- `FUTURE_LAST_VISIT_WARNING`, when the user executes a command that updates a `LastVisit` field to a future datetime.
+- `PAST_NEXT_VISIT_WARNING`, when the user executes a command that updates a `Visit` field to a past datetime.
+
+When a warning is present, it affects the command result's displayed text and colour on the GUI.
+
+
 ### Add command
 
 #### Implementation details
@@ -293,7 +313,7 @@ Given below is an example usage scenario:
 
   We want to keep the data safe by ensuring immutability of Person objects. Therefore, we create an instance of Person with visit removed to replace the previous Person object.
 
-### Done Command
+### Done command
 
 #### Implementation details
 
@@ -307,6 +327,12 @@ It makes use of polymorphism and interfaces, and is similar in implementation to
 The following activity diagram illustrates the activity flow of the done command:
 
 <img src="images/DoneCommandActivityDiagram.png" width="600" />
+
+The following sequence diagram shows how different components of SeniorLove interact with each other 
+when executing a done command where the next visit is present for the elderly specified by the index:
+
+![DoneSequenceDiagram](images/DoneCommandSequenceDiagram.png)
+
 
 #### Design choices
 
@@ -427,6 +453,30 @@ Given below is an example usage scenario:
 - Converting JSON to CSV:
 
   While it is possible to simply export the `addressbook.json` file as a JSON file, we decided to reformat the JSON file as a CSV file because we thought it would be make the data more readable. The JSON file formats elderly information in a way that is easier to query, and organises them by elderly. Converting to a CSV file allows us to display separate data fields as their own columns, making it easier to read.
+
+
+### List command
+
+#### Implementation details
+
+The list command displays a list of either all elderly in SeniorLove, or all the elderly with next visit in the incoming week or month depending on the flag .
+
+It makes use of polymorphism and is similar in implementation to other commands in SeniorLove:
+
+- `ListCommand` extends `Command`
+
+Given below is an example usage scenario:
+
+1. User inputs the list command, specifying the flag for listing all or the flag for listing those with visit in the next week or month.
+2. After successfully parsing the user input, the `ListCommand#execute(Model model)` method is called with the appropriate `Predicate<Person>` applied for filtering.
+3. The model list is filtered,and a `CommandResult` object is instantiated and returned to `LogicManager`.
+
+#### Design choices
+
+- Combine features of listing all and of listing elderly with incoming visits into one `list` command:
+
+  We choose to combine these two similar and relevant features into one command for simplicity. Different and self-explanatory flags are used here to distinguish them.
+
 
 ---
 
@@ -818,7 +868,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Listing elderly
 
-   1. Test case: `list n/`<br>
+   1. Test case: `list all/`<br>
       Expected: All elderly are displayed.
 
    2. Test case: `list m/`<br>

@@ -224,7 +224,7 @@ Shows a list of all or selecteded elderly and their associated details in Senior
 
 Format: `list [CRITERION_FOR_LISTING]`
 
-* `list n/` displays all the elderly in the alphabetical order of their names.
+* `list all/` displays all the elderly in the alphabetical order of their names.
 * `list w/` displays all the elderly with an incoming visit in the next week.
 * `list m/` displays all the elderly with an incoming visit in the next month.
 
@@ -234,7 +234,7 @@ Format: `list [CRITERION_FOR_LISTING]`
 </div>
 
 Examples:
-* `list n/`
+* `list all/`
   > Displays all the elderly.
 * `list m/`
   > Displays all the elderly with an incoming visit in the next month.
@@ -404,7 +404,7 @@ Action | Format, Examples
 **visit** | `visit INDEX at/VISIT [f/FREQUENCY o/OCCURRENCE]`<br> e.g.,`visit 3 at/2021-11-12 16:30 f/Weekly o/2`
 **edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [h/HEALTH_CONDITION]…​`<br> e.g.,`edit 3 n/James`
 **find** | `find KEYWORD [MORE_KEYWORDS]` <br> e.g., `find alex english`
-**list** | `list [CRITERION_FOR_LISTING]` <br> e.g., `list n/`<br> e.g., `list w/`<br> e.g., `list m/`
+**list** | `list [CRITERION_FOR_LISTING]` <br> e.g., `list all/`<br> e.g., `list w/`<br> e.g., `list m/`
 **sort** | `sort [FIELD_TO_BE_SORTED]`<br> e.g., `sort v/`<br> e.g., `sort lv/`
 **summary** | `summary`
 **clear** | `clear`

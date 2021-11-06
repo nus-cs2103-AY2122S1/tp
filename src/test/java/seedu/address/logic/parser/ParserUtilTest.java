@@ -1,7 +1,10 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FREQUENCY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INCOMING_WEEK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LAST_VISIT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VISIT;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
@@ -320,5 +323,25 @@ public class ParserUtilTest {
         ArgumentMultimap argMap = ArgumentTokenizer.tokenize("v/ lv/" + VALID_VISIT_DATETIME,
                 PREFIX_VISIT, PREFIX_LAST_VISIT);
         assertTrue(arePrefixesPresent(argMap));
+    }
+
+    @Test
+    public void isPrefixPresentAndEmpty() {
+        ArgumentMultimap argMap = ArgumentTokenizer.tokenize("v/2021-01-10 12:00 lv/",
+                PREFIX_VISIT, PREFIX_LAST_VISIT);
+
+        // absent -> false
+        assertFalse(ParserUtil.isPrefixPresentAndEmpty(argMap, PREFIX_FREQUENCY));
+        // present but not empty -> false
+        assertFalse(ParserUtil.isPrefixPresentAndEmpty(argMap, PREFIX_VISIT));
+        // present and empty -> true
+        assertTrue(ParserUtil.isPrefixPresentAndEmpty(argMap, PREFIX_LAST_VISIT));
+
+
+        ArgumentMultimap argMapWithSpace = ArgumentTokenizer.tokenize(" w/    ",
+                PREFIX_INCOMING_WEEK);
+        // trailing whitespaces ignored
+        assertTrue(ParserUtil.isPrefixPresentAndEmpty(argMapWithSpace, PREFIX_INCOMING_WEEK));
+
     }
 }
