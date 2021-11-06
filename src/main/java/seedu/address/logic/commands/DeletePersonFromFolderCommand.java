@@ -15,15 +15,14 @@ import seedu.address.model.person.Person;
 
 /**
  * Deletes the contact that belongs to an existing
- * folder in the address book.
+ * folder in UNIon.
  */
 public class DeletePersonFromFolderCommand extends Command {
 
     public static final String COMMAND_WORD = "rm";
     public static final String COMMAND_IDENTIFIER = ">>";
 
-    public static final String MESSAGE_NO_SUCH_FOLDER = "No such folder found in UNIon";
-    public static final String MESSAGE_NO_CONTACT_IN_FOLDER = "No such contact in folder";
+    public static final String MESSAGE_NO_SUCH_PERSON_IN_FOLDER = "This person does not exist in this folder";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the person identified by the index number from the folder specified.\n"
             + "Parameters: INDEX (must be a positive integer) + "
@@ -32,7 +31,7 @@ public class DeletePersonFromFolderCommand extends Command {
             + COMMAND_WORD
             + " 1 " + COMMAND_IDENTIFIER + " CS2103";
 
-    public static final String MESSAGE_DELETE_PERSON_FROM_FOLDER_SUCCESS = "Contact deleted from folder %1$s";
+    public static final String MESSAGE_DELETE_PERSON_FROM_FOLDER_SUCCESS = "Deleted person from folder: %1$s";
 
     private final Index targetIndex;
     private final Folder targetFolder;
@@ -57,20 +56,23 @@ public class DeletePersonFromFolderCommand extends Command {
         requireNonNull(model);
 
         List<Person> lastShownList = model.getFilteredPersonList();
+        List<Folder> lastShownFolderList = model.getFilteredFolderList();
+
+        int indexOfFolder = lastShownFolderList.indexOf(targetFolder);
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_IN_UNION);
         }
 
-        if (!model.hasFolder(targetFolder)) {
-            throw new CommandException(MESSAGE_NO_SUCH_FOLDER);
+        if (indexOfFolder == -1) {
+            throw new CommandException(Messages.MESSAGE_NONEXISTENT_FOLDER_IN_CURRENT_LIST);
         }
 
         Person personToRemove = lastShownList.get(targetIndex.getZeroBased());
 
         if (!model.folderContainsPerson(personToRemove,
                 this.targetFolder.getFolderName())) {
-            throw new CommandException(MESSAGE_NO_CONTACT_IN_FOLDER);
+            throw new CommandException(MESSAGE_NO_SUCH_PERSON_IN_FOLDER);
         }
 
         model.deletePersonFromFolder(personToRemove, targetFolder);

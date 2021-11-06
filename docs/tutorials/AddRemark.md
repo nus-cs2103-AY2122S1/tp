@@ -340,7 +340,7 @@ save it with `Model#setPerson()`.
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_INDEX_EXCEEDS_LIST_SIZE);
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());

@@ -4,6 +4,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 
 import java.util.Arrays;
 
+import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.FindFoldersCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.folder.FolderNameContainsKeywordsPredicate;
@@ -19,7 +20,7 @@ public class FindFoldersCommandParser implements Parser<FindFoldersCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindFoldersCommand parse(String args) throws ParseException {
-        String trimmedArgs = args.trim();
+        String trimmedArgs = StringUtil.stripFlags(args.trim());
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindFoldersCommand.MESSAGE_USAGE));

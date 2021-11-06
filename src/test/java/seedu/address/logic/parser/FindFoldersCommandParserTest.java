@@ -19,6 +19,7 @@ public class FindFoldersCommandParserTest {
     public void parse_emptyArg_throwsParseException() {
         String expectedParseException = String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindFoldersCommand.MESSAGE_USAGE);
         assertParseFailure(parser, "     ", expectedParseException);
+        assertParseFailure(parser, "-folders -flags -ignore", expectedParseException);
     }
 
     @Test

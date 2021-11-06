@@ -21,17 +21,37 @@ import seedu.address.model.tag.Tag;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Person with this index does not exist";
-
+    public static final String MESSAGE_INVALID_INDEX = "The index '%1$s' is invalid. It should be a positive integer";
+    public static final String MESSAGE_OVERFLOW_INTEGER = "UNIon is unable to handle such a large integer";
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
-    public static Index parseIndex(String oneBasedIndex) throws ParseException {
+    public static Index parseIndex(String oneBasedIndex, ParseException exception) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
+        char firstElement = trimmedIndex.charAt(0);
+
+        if (firstElement == 45 && trimmedIndex.length() == 1) {
+            throw exception;
+        }
+
+        //Check for - symbol or 0 as first element
+        if (firstElement == 45 || firstElement == 48) {
+            throw new ParseException(String.format(MESSAGE_INVALID_INDEX, trimmedIndex));
+        }
+
+        //Check if all values are integers only
+        for (int i = 0; i < trimmedIndex.length(); i++) {
+            char element = trimmedIndex.charAt(i);
+            if (!Character.isDigit(element)) {
+                throw exception;
+            }
+        }
+
+        //Check if integer input is too big
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
+            throw new ParseException(MESSAGE_OVERFLOW_INTEGER);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }

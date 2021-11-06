@@ -16,7 +16,7 @@ Given below are my contributions to the project.
 
 * **New Feature**: Adding multiple contacts to a folder [\#95](https://github.com/AY2122S1-CS2103-T16-1/tp/pull/95)
     * What it does: Allows the user to add multiple contacts into a folder in one command
-    * Justification: UNIon allows users to add contacts to a folder one at a time however if a particular folder has many contacts it will be tiring for a user to add all of them in one by one. 
+    * Justification: UNIon allows users to add contacts to a folder one at a time however if a particular folder has many contacts it will be tiring for a user to add all of them in one by one.
     * Highlights: This command required changing some classes written in my first feature and required some careful planning on how it will handle certain user inputs. It was also a feature that required rigorous testing and debugging as there were plenty of edge cases.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=rehmmann)

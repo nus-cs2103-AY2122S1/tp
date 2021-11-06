@@ -9,7 +9,7 @@ import seedu.address.model.folder.Folder;
 import seedu.address.model.folder.FolderNameContainsKeywordsPredicate;
 
 /**
- * Finds and lists all folders in address book whose name contains any of the argument keywords.
+ * Finds and lists all folders in UNIon whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
 public class FindFoldersCommand extends Command {

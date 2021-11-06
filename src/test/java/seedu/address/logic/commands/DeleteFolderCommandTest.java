@@ -8,10 +8,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -20,6 +23,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.folder.Folder;
 import seedu.address.model.folder.FolderName;
+import seedu.address.model.folder.FolderNameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 
 public class DeleteFolderCommandTest {
@@ -52,6 +56,22 @@ public class DeleteFolderCommandTest {
         modelWithFolderStub.addNewFolder(firstFolder);
         DeleteFolderCommand deleteFolderCommand = new DeleteFolderCommand(otherFolder);
 
+        assertThrows(CommandException.class, () -> deleteFolderCommand.execute(modelWithFolderStub));
+    }
+
+    @Test
+    public void execute_deleteFolderNotInFilteredList_throwsCommandException() {
+        Folder firstFolder = new Folder(new FolderName("Folder 1"));
+        Folder otherFolder = new Folder(new FolderName("Folder 2"));
+        ModelStubWithFolder modelWithFolderStub = new ModelStubWithFolder();
+
+        modelWithFolderStub.addNewFolder(firstFolder);
+        modelWithFolderStub.addNewFolder(otherFolder);
+
+        FolderNameContainsKeywordsPredicate predicate = new FolderNameContainsKeywordsPredicate(List.of("1"));
+        FindFoldersCommand findFoldersCommand = new FindFoldersCommand(predicate);
+        DeleteFolderCommand deleteFolderCommand = new DeleteFolderCommand(otherFolder);
+        findFoldersCommand.execute(modelWithFolderStub);
         assertThrows(CommandException.class, () -> deleteFolderCommand.execute(modelWithFolderStub));
     }
 
@@ -226,6 +246,7 @@ public class DeleteFolderCommandTest {
      */
     private class ModelStubWithFolder extends DeleteFolderCommandTest.ModelStub {
         private final ArrayList<Folder> existingFolders = new ArrayList<>();
+        private ObservableList<Folder> observableList = FXCollections.observableArrayList();
 
         @Override
         public boolean hasFolder(Folder folder) {
@@ -235,6 +256,21 @@ public class DeleteFolderCommandTest {
 
         public void addNewFolder(Folder folder) {
             this.existingFolders.add(folder);
+            this.observableList.add(folder);
+        }
+
+        @Override
+        public void updateFilteredFolderList(Predicate<Folder> predicate) {
+            observableList = FXCollections.observableArrayList(observableList
+                    .stream()
+                    .filter(predicate)
+                    .collect(Collectors.toList()));
+
+        }
+
+        @Override
+        public ObservableList<Folder> getFilteredFolderList() {
+            return this.observableList;
         }
 
         @Override

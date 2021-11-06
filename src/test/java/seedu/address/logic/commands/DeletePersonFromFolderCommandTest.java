@@ -31,7 +31,7 @@ public class DeletePersonFromFolderCommandTest {
 
     @Test
     public void constructor_nullFolder_throwsNullPointerException() throws ParseException {
-        Index validIndex = ParserUtil.parseIndex(stringIndex);
+        Index validIndex = ParserUtil.parseIndex(stringIndex, new ParseException(DeleteCommand.MESSAGE_USAGE));
         assertThrows(NullPointerException.class, () -> new DeletePersonFromFolderCommand(validIndex, null));
     }
 
@@ -44,7 +44,7 @@ public class DeletePersonFromFolderCommandTest {
     @Test
     public void execute_removeContactFromNonExistingFolder_failure() throws ParseException {
         Folder validFolder = new Folder(new FolderName("folder 1"));
-        Index validIndex = ParserUtil.parseIndex(stringIndex);
+        Index validIndex = ParserUtil.parseIndex(stringIndex, new ParseException(DeleteCommand.MESSAGE_USAGE));
         DeletePersonFromFolderCommand deletePersonFromFolderCommand = new DeletePersonFromFolderCommand(
                 validIndex, validFolder);
         assertThrows(CommandException.class, () -> deletePersonFromFolderCommand.execute(model));
@@ -62,7 +62,7 @@ public class DeletePersonFromFolderCommandTest {
                 new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
                 SampleDataUtil.getTagSet("neighbours"));
         model.addPerson(validPerson);
-        Index validIndex = ParserUtil.parseIndex(stringIndex);
+        Index validIndex = ParserUtil.parseIndex(stringIndex, new ParseException(DeleteCommand.MESSAGE_USAGE));
         DeletePersonFromFolderCommand deletePersonFromFolderCommand = new DeletePersonFromFolderCommand(
                 validIndex, validFolder);
         assertThrows(CommandException.class, () -> deletePersonFromFolderCommand.execute(model));
@@ -79,7 +79,7 @@ public class DeletePersonFromFolderCommandTest {
                 SampleDataUtil.getTagSet("neighbours"));
         validFolder.addContacts(validPerson);
         model.addFolder(validFolder);
-        Index validIndex = ParserUtil.parseIndex(stringIndexLarge);
+        Index validIndex = ParserUtil.parseIndex(stringIndexLarge, new ParseException(DeleteCommand.MESSAGE_USAGE));
         DeletePersonFromFolderCommand deletePersonFromFolderCommand = new DeletePersonFromFolderCommand(
                 validIndex, validFolder);
         assertThrows(CommandException.class, () -> deletePersonFromFolderCommand.execute(model));
@@ -93,7 +93,7 @@ public class DeletePersonFromFolderCommandTest {
         validFolder.addContacts(TypicalPersons.ALICE);
         model.addFolder(validFolder);
 
-        Index validIndex = ParserUtil.parseIndex(stringIndex);
+        Index validIndex = ParserUtil.parseIndex(stringIndex, new ParseException(DeleteCommand.MESSAGE_USAGE));
         DeletePersonFromFolderCommand deletePersonFromFolderCommand = new DeletePersonFromFolderCommand(
                 validIndex, validFolder2);
 

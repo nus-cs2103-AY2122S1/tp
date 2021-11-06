@@ -16,7 +16,7 @@ import seedu.address.model.folder.FolderName;
 import seedu.address.model.person.Person;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of UNIon data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);

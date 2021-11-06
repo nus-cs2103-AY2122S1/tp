@@ -103,7 +103,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// person-level operations
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a person with the same identity as {@code person} exists in UNIon.
      */
     public boolean hasPerson(Person person) {
         requireNonNull(person);
@@ -111,8 +111,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
+     * Adds a person to UNIon.
+     * The person must not already exist in UNIon.
      */
     public void addPerson(Person p) {
         persons.add(p);
@@ -120,8 +120,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * {@code target} must exist in UNIon.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in UNIon.
      */
     public void setPerson(Person target, Person editedPerson) {
         requireNonNull(editedPerson);
@@ -132,7 +132,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * {@code key} must exist in UNIon.
      */
     public void removePerson(Person key) {
         persons.remove(key);
@@ -143,7 +143,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// folder-level operations
 
     /**
-     * Returns true if a folder with the same identity as {@code folder} exists in the address book.
+     * Returns true if a folder with the same identity as {@code folder} exists in UNIon.
      */
     public boolean hasFolder(Folder folder) {
         requireNonNull(folder);
@@ -152,9 +152,9 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Replaces the given folder {@code oldFolder} in the list with {@code newFolder}.
-     * {@code oldFolder} must exist in the address book.
+     * {@code oldFolder} must exist in UNIon.
      * The folder identity of {@code newFolder} must not be the same as
-     * another existing folder in the address book.
+     * another existing folder in UNIon.
      */
     public void setNewFolder(Folder oldFolder, Folder newFolder) {
         requireNonNull(newFolder);
@@ -179,8 +179,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a folder to the address book.
-     * The folder must not already exist in the address book.
+     * Adds a folder to UNIon.
+     * The folder must not already exist in UNIon.
      */
     public void addFolder(Folder f) {
         folders.add(f);
@@ -208,8 +208,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Deletes a folder in the address book.
-     * The folder must already exist in the address book.
+     * Deletes a folder in UNIon.
+     * The folder must already exist in UNIon.
      */
     public void deleteFolder(Folder f) {
         folders.remove(f);

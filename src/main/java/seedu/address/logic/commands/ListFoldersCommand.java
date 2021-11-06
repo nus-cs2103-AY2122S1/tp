@@ -6,7 +6,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_FOLDERS;
 import seedu.address.model.Model;
 
 /**
- * Lists all folders in the address book to the user.
+ * Lists all folders in UNIon to the user.
  */
 public class ListFoldersCommand extends Command {
 
