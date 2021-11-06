@@ -118,11 +118,10 @@ public class PersonViewCard extends UiPart<Region> {
 
         // add person tasks
         UiUtil.addIndexedLabels(tasks, personTasks.stream().map(task -> {
-                    Boolean isDone = personTasksCompletion.get(task);
-                    assert !isDone.equals(null);
-                    return task.toCompletionString(isDone);
-                })
-                .collect(Collectors.toList()), Optional.of("No tasks yet!"));
+            Boolean isDone = personTasksCompletion.get(task);
+            assert !isDone.equals(null);
+            return task.toCompletionString(isDone);
+        }).collect(Collectors.toList()), Optional.of("No tasks yet!"));
 
         // add person exams
         UiUtil.addIndexedLabels(exams, person.getExams().stream().map(exam ->
