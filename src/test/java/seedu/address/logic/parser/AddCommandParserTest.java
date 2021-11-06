@@ -167,8 +167,8 @@ public class AddCommandParserTest {
 
         // Guessing there is an issue with the way it is parsed. Doesn't look out for
         // two invalid values, only first invalid value reported
-                assertParseFailure(parser, INVALID_NAME_DESC + CATEGORY_DESC_ATT + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                        + INVALID_ADDRESS_DESC + VALID_RATING_BOB, Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, INVALID_NAME_DESC + CATEGORY_DESC_ATT + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                + INVALID_ADDRESS_DESC + VALID_RATING_BOB, Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + CATEGORY_DESC_ATT + NAME_DESC_BOB + PHONE_DESC_BOB
