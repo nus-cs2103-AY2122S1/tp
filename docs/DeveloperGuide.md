@@ -146,10 +146,9 @@ How the parsing works:
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
-
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the staff data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which
   is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to
   this list so that the UI automatically updates when the data in the list change.
@@ -163,6 +162,13 @@ The `Model` component,
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
 </div>
+
+<img src="images/PersonClassDiagram.png" width="450"/>
+
+The `Person` subcomponent,
+
+* stores what a `Person` should have, i.e. all `Field` objects and details of employment (e.g. Schedule, dates of being absent).
+* does not depend on any of the other three components as it is part of the `Model` component.
 
 ### Storage component
 
