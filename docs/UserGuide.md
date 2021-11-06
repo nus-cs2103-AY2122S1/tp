@@ -38,9 +38,9 @@ open the help window.<br>
 
    * **`mlist`** : Lists all members in Ailurus.
 
-   * **`madd`**`/n John Doe /ph 98765432 /em johnd@example.com /a John street, block 123, #01-01` : Adds a contact named `John Doe` to Ailurus.
+   * **`madd /n John Doe /ph 98765432 /em johnd@example.com /a John street, block 123, #01-01`**: Adds a contact named `John Doe` to Ailurus.
 
-   * **`mdel`**`/m 3` : Deletes the 3rd contact shown in the current list of people.
+   * **`mdel /m 3`** : Deletes the 3rd contact shown in the current list of people.
 
    * **`exit`** : Exits the app.
 
@@ -94,7 +94,7 @@ open the help window.<br>
 
 ### Member
 
-The member list is the in the centre column of the application, which lists all members and is scrollable. Each member have their own task list. Members have their own member card which consists of their relevant details, which include (from top to bottom):
+The member list is in the centre column of the application, which lists all members and is scrollable. Each member has their own task list. Members have their own member card which consists of their relevant details, which include (from top to bottom):
 * Name of member
 * Positions of member
 * Phone number
@@ -186,7 +186,7 @@ Examples:
 
 #### Locating members by their tasks : `mtfind`
 
-Finds members whose tasks' names contains the given keyword.
+Finds members whose tasks' names contain the given keyword.
 
 Format: `mtfind KEY_WORD`
 
@@ -274,6 +274,7 @@ Marks the specified tasks of the specified member as done.
 Format: `tdone /t TASK_INDEX [/t MORE_TASK_INDEX]…​`
 
 * **Only can be used when the task list has entries** (accessible via `tlist /m MEMBER_INDEX`)
+  * Otherwise, an error message "Task X does not exist in the task list of the member" will be shown as the task list is empty.
 * Multiple tasks can be marked as done when there is more than one `TASK_INDEX` provided.
 * Marks the task specified by `TASK_INDEX` as complete.
 
@@ -286,6 +287,7 @@ Marks the specified completed task of the specified member as undone.
 Format: `tundone /t TASK_INDEX [/t MORE_TASK_INDEX]…​`
 
 * **Only can be used when the task list has entries** (accessible via `tlist /m MEMBER_INDEX`).
+    * Otherwise, an error message "Task X does not exist in the task list of the member" will be shown as the task list is empty.
 * Multiple completed tasks can be marked as undone when there is more than one `TASK_INDEX` provided.
 * Marks the task specified by `TASK_INDEX` as incomplete.
 
@@ -297,6 +299,8 @@ Edits an existing task within Ailurus.
 
 Format: `tedit /t TASK_INDEX [/n TASK_NAME] [/d DATE_TIME]`
 
+* **Only can be used when the task list has entries** (accessible via `tlist /m MEMBER_INDEX`).
+    * Otherwise, an error message "Task X does not exist in the task list of the member" will be shown as the task list is empty.
 * Edits the task at the specified `TASK_INDEX`. 
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
@@ -312,6 +316,7 @@ Deletes the specified task of a specified member from Ailurus.
 Format: `tdel /t TASK_INDEX`
 
 * **Only can be used when the task list has entries** (accessible via `tlist /m MEMBER_INDEX`).
+    * Otherwise, an error message "Task X does not exist in the task list of the member" will be shown as the task list is empty.
 * Deletes the task according to the specified `TASK_INDEX`.
 
 Examples:
@@ -412,7 +417,7 @@ Marks the attendance of all participants in the specific event.
 Format: `emarkall /e EVENT_INDEX`
 
 Examples:
-* `markall /e 3` marks the attendance of all participants in Event 3.
+* `emarkall /e 3` marks the attendance of all participants in Event 3.
 
 #### Undo marking participants as attended : `eunmark`
 
@@ -524,11 +529,11 @@ Action | Format, Examples
 **help** | `help`
 **madd** | `madd /n NAME /ph PHONE_NUMBER [/em EMAIL] [/a ADDRESS] [/p POSITION]…​` <br> e.g., `madd /n James Ho /ph 22224444 /em jamesho@example.com /a 123, Clementi Rd, 1234665 /p friend /p colleague`
 **mlist** | `mlist [/e EVENT_INDEX] [/att] [/abs]` <br> e.g., `mlist /e 3 /att`
-**medit** | `medit /m MEMBER_INDEX [/n NAME] [/ph PHONE_NUMBER] [/em EMAIL] [/a ADDRESS] [/p POSITION]…​`<br> e.g.,`edit /m 2 /n James Lee /em jameslee@example.com`
+**medit** | `medit /m MEMBER_INDEX [/n NAME] [/ph PHONE_NUMBER] [/em EMAIL] [/a ADDRESS] [/p POSITION]…​`<br> e.g.,`medit /m 2 /n James Lee /em jameslee@example.com`
 **mfind** | `mfind KEYWORD [MORE_KEYWORDS]…​`<br> e.g., `mfind James Jake`
 **mtfind** | `mtfind KEYWORD [MORE_KEYWORDS]…​`<br> e.g., `mtfind form`
 **mdel** | `mdel /m MEMBER_INDEX` <br> e.g., `mdel /m 5`
-**tadd** | `tadd /n TASKNAME /m MEMBER_INDEX` <br> e.g., `tadd /n Collect payment from members /m 3`
+**tadd** | `tadd /n NAME /d DATE_TIME /m MEMBER_INDEX [/m MORE_MEMBER_INDEX]…​` <br> e.g., `tadd /n Collect payment from members /d 20/11/2021 11:30 /m 3`
 **tfind** | `tfind KEYWORD [MORE_KEYWORDS]…​`<br> e.g., `tfind form`
 **tlist** | `tlist /m MEMBER_INDEX [/dn OPTION] [/ovd]` <br> e.g., `tlist /m 2 /dn y`
 **tdone** | `tdone /t TASK_INDEX [/t MORE_TASK_INDEX]…​`<br> e.g. `tdone /t 3 /t 4`
