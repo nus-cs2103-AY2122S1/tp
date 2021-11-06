@@ -155,7 +155,9 @@ public class EditCommandTest {
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
-    //User edits profile correctly, i.e. leaves none of the fields to be edited blank
+    /**
+     * User edits profile correctly, i.e. leaves none of the fields to be edited blank
+     */
     @Test
     public void executeEditProfile_success() {
         Model modelWithUserProfile = new ModelManager(getTypicalAddressBook(), new UserPrefs(), null);
