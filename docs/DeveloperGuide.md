@@ -6,6 +6,8 @@ title: Developer Guide
 - [Table of Contents](#table-of-contents)
 - [**Acknowledgements**](#acknowledgements)
 - [**Introduction**](#introduction)
+- [**What this developer guide is for**](#what-this-developer-guide-is-for)
+- [**How to use this developer guide**](#how-to-use-this-developer-guide)
 - [**Setting up, getting started**](#setting-up-getting-started)
 - [**Design**](#design)
   - [Architecture](#architecture)
@@ -69,9 +71,47 @@ title: Developer Guide
 
 ## **Introduction**
 
-Managera is a desktop application for managing your event details and its corresponding participant credentials. While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
+Managera is a desktop application provides event organisers with a convenient method of keeping track of upcoming
+events and the details of their participants. While it has a GUI, most of the user interactions happen using a 
+CLI (Command Line Interface).
 
 * For the detailed documentation of this project, see the **[Managera Product Website](https://ay2122s1-cs2103t-t10-2.github.io/tp/UserGuide.html)**.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **What this developer guide is for**
+
+This developer guide aims to give a clear understanding of Managera's overall architecture and how features were 
+implemented. It is intended mainly for developers and maintainers of Managera. This guide will also clarify what 
+purposes that Managera should primarily serve. 
+
+If this is your first time using this guide, please refer to the [next section](#how-to-use-this-developer-guide) 
+of this guide.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **How to use this developer guide**
+
+If this is your first time setting up the Managera project, please refer to the 
+[Setting up, getting started](#setting-up-getting-started) section to learn how to get started.
+
+For a general overview of Managera's architecture and its components, you may refer to the [Design](#design) section.
+
+To learn about how features for Managera were implemented or how they function, you may refer to the 
+[Implementation](#implementation) section.
+
+For guides on documentation, testing, logging, configuration or DevOps for Managera, please refer to 
+[this section](#documentation-logging-testing-configuration-dev-ops).
+
+For information about the product scope for Managera, such as its target audience, value proposition and use cases, 
+you may refer to the [Appendix: Requirements](#appendix-requirements). Please use this section to guide any design 
+decisions for feature enhancements or additions to Managera.
+
+For instructions about how to perform manual testing for Managera, you may refer to the 
+[Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing).
+
+For any terms that you may find confusing or unfamiliar in this guide, there are definitions provided in the 
+[glossary](#glossary).
 
 --------------------------------------------------------------------------------------------------------------------
 
