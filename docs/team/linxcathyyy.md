@@ -107,7 +107,8 @@ Implemented second panel for view, help and stat command together with Benjamin 
 [\#148](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/148),
 [\#302](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/302),
 [\#311](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/311),
-[\#312](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/312))
+[\#312](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/312),
+[\#326](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/326))
 
 #### Contributions to Team-based Tasks
 * Drawing all UML diagrams for DG
