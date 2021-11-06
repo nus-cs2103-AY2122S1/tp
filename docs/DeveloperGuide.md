@@ -268,7 +268,8 @@ The following activity diagram summarises what happens when a user executes the 
 
 The following sequence diagram summarises what happens when the user inputs an `addalloc` command together with a group and a student, specified by name, to be allocated.
 
-![AddGroupSequenceDiagram](images/AddAllocSequenceDiagram.png)
+![AddAllocSequenceDiagram](images/AddAllocSequenceDiagram.png)
+![AddAllocToModelSequenceDiagram](images/AddAllocToModelSequenceDiagram.png)
 
 ### Add Score : `addscore`
 
@@ -292,7 +293,8 @@ The following activity diagram summarises what happens when a user executes the 
 
 The following sequence diagram summarises what happens when the user inputs an `addscore` command together with an assessment, a student, specified by name, and a score to be added.
 
-![AddGroupSequenceDiagram](images/AddScoreSequenceDiagram.png)
+![AddScoreSequenceDiagram](images/AddScoreSequenceDiagram.png)
+![AddScoreToModelSequenceDiagram](images/AddScoreToModelSequenceDiagram.png)
 
 ### Search : `search`
 
@@ -367,6 +369,7 @@ The following activity diagrams summarise what happens when a user executes the 
 The following sequence diagram summarises what happens when the user inputs an `show` command together with a student specified by name.
 
 ![ShowSequenceDiagram](images/ShowSequenceDiagram.png)
+![ShowStatsFromModelSequenceDiagram](images/ShowStatsFromModelSequenceDiagram.png)
 
 <br>
 
