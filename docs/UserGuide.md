@@ -148,6 +148,12 @@ Entering format: `addc c/CLASS_CODE s/SCHEDULE [t/TAG]…​`
 
 * Schedule should strictly follow the format: [Day] (hh:mm)am/pm to (hh:mm)am/pm, [Day]...
 
+* Incorrect timings are not checked.
+
+  <div markdown="span" class="alert alert-primary">:warning: **Warning:**
+  Entering wrong/impossible timings is possible and will not be stopped. Enter schedule timings carefully. :warning:
+  </div>
+
 Examples:
 
 * `addc c/G06 s/Tuesday 2:00pm to 4:00pm, Friday 2:00 to 4:00pm`
@@ -375,17 +381,6 @@ Examples:
 * `liststu` followed by `addlm 2 m/Low`  and `deleteam 2` deletes all marks assigned to the 2nd student in the student list.
 * `findstu Betsy` followed by `deleteam 1` deletes all sessions' mark for 1st student in the results of `findstu`.
 
-### Clearing all students : `clear`
-
-Clears all students from ClassMATE. Below is how it would look like.
-
-![clear](images/clear.png)
-
-Entering format: `clear`
-
-<div markdown="span" class="alert alert-primary">:warning: **Warning:**
-This command deletes **ALL** students and is irreversible :warning:
-</div>
 
 ## Tutorial Class Commands
 
