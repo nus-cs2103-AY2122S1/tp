@@ -59,7 +59,7 @@ Some symbols used in this guide:
   e.g. in `n/NAME`, `NAME` is a parameter that you should provide. For example, if the student's name is "John Doe", you should type `n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times, including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (blank, i.e. 0 times), `t/friend` (1 time), or `t/friend t/family` (2 times) etc.
@@ -94,7 +94,7 @@ Adds a student to EdRecord.
 
 Format: `add n/NAME p/PHONE e/EMAIL m/MODULE c/CLASS [i/INFO] [t/TAG]…​`
 
-* If specified, the module and class must already exist (see [mkmod](#create-module-mkmod) and [mkclass](#create-class-mkclass) for creating module and class).
+* If specified, the module and class must already exist (see [mkmod](#creating-a-module-mkmod) and [mkclass](#creating-a-class-mkclass) for creating module and class).
 
 <div markdown="span" class="alert alert-primary">:bulb:
 A student can have any number of tags and info fields (including 0).
@@ -115,7 +115,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [i/INFO] [t/TAG]…​`
 * The index refers to the index number shown in the student list being displayed on EdRecord. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the student will be removed, to be replaced by new tags provided by your input, i.e adding of tags is **not cumulative**.
+* When editing tags, the existing tags of the student will be removed, to be replaced by new tags provided by your input, i.e. adding of tags is **not cumulative**.
   
 <div markdown="span" class="alert alert-primary">:bulb:
 Thus, you can remove all the student’s tags by typing `t/` without specifying any tags after it.
@@ -153,13 +153,13 @@ Finds students whose names contain any of the given keywords *in the current mod
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The search is case-insensitive, e.g. `hans` will match `Hans`
+* The order of the keywords does not matter, e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Only full words will be matched, e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-* If no module is selected, the scope of the command would be across all modules.
+* If no module is selected, the scope of the command would be across **all** modules.
 
 Examples:
 
@@ -177,7 +177,7 @@ Format: `cd MODULE`
 
 * Changes the scope of the displayed student list to show only students under `MODULE`.
 * `MODULE` should already exist in EdRecord (see [mkmod](#creating-a-module-mkmod) for creating a module).
-* Many commands such as [mkasg](#create-assignment-mkasg), [dlasg](#delete-assignment-dlasg) only work after you `cd` into a module.
+* Many commands such as [mkasg](#creating-an-assignment-mkasg), [dlasg](#deleting-an-assignment-dlasg) only work after you `cd` into a module.
 
 <div markdown="span" class="alert alert-primary">:information_source: 
 Use `cd *` to "move out" of any selected module. This command is useful to get an overview of all students in all modules.
@@ -276,7 +276,7 @@ Toggles the view between showing student details and showing the module's assign
 Format: `view (contacts/asg)`
 
 * The default view when the application launches is the student details view.
-* The only valid parameters are `contacts` or `asg`
+* The only valid parameters are `contacts` or `asg`.
 * `view contacts` toggles the view to display the student's contact details for each student listed.
 * `view asg` toggles the view to display the assignment completion status and/or grade for each student.
 
@@ -412,8 +412,8 @@ If your changes to the data file makes its format invalid, EdRecord will discard
 | **Add student**                         | `add n/NAME p/PHONE e/EMAIL m/MODULE c/CLASS [i/INFO] [t/TAG]…​` <br> e.g., `add n/James Ho p/85436543 e/jamesho@u.nus.edu i/Currently on SHN t/strong t/careless` |
 | **Edit student**                        | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [i/INFO] [t/TAG]…​`<br> e.g., `edit 2 n/James Lee e/jameslee@u.nus.edu`                                            |
 | **Delete student**                      | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
-| **List students**                       | `list`                                                                                                                                                     |
-| **Find students**                       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find alex david`                                                                                                   |
+| **List students**                       | `list`                                                                                                                                                                |
+| **Find students**                       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find alex david`                                                                                                            |
 | **Change module working directory**     | `cd MODULE`<br> e.g.,`cd CS2103`, `cd *`                                                                                                                              |
 | **List modules**                        | `lsmod`                                                                                                                                                               |
 | **Create module**                       | `mkmod MODULE`<br> e.g., `mkmod CS2103`                                                                                                                               |
