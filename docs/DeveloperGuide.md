@@ -980,24 +980,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
-Term | Definition | Comments
------| ----------- | ---------- 
-Operating System (OS) | Software that manages computer hardware and other computer software. |
-Mainstream OS | Examples of mainstream OS includes: Windows, Linux, Unix, OS-X, MacOS, etc. |
-Personal Detail | A contact detail of a student | Phone number, Telegram handle, and email address
-CS1101S | An introductory Computer Science module for year 1 students in the the National University of Singapore. |
-Studios | Tutorials held in CS1101S and are essential in aiding the students to improve their grasp on the concepts taught during the lecture. | < 10 students in a studio
-Avengers | A special term to call a CS1101S tutor. An avenger organizes a Studio session to improve on CS1101S concepts taught in lecture, recording attendance and grades. | An avenger holds at most one class.
-Principle of Least-Privilege | Minimum levels of access – or permissions – needed to perform function. |
-Command Line Interface (CLI) | A text-based user interface, where users type commands to instruct the computer to do something. |
-Graphical User Interface (GUI) | A graphics-based user interface, where users click buttons to instruct the computer to do something. |
-Java | A program that allows running other programs written in Java programming language. |
-`Command` | An interface representing an instruction typed by a user to Academy Directory. |
-Version controlled `Command` | a `Command` that logs a commit message, and thus stages at least one `VcObject` object upon execution. | Refer to the list of such commands [here](#appendix-c-version-controlled-commands)
-Command Box | A part of the Academy Directory's GUI which can be used by users to type commands. |
-Field | Additional information that can be provided to a command for correct command execution. | May or may not have an associated prefix
-Parameter | Part of the command which provides additional information provided by the user. | Actual values for the fields
-Prefix | An abbreviation of a field. | Always ends with a backslash ('/')
+| Term | Definition | Comments |
+|-----| ----------- | ---------- |
+| Operating System (OS) | Software that manages computer hardware and other computer software. | |
+| Mainstream OS | Examples of mainstream OS includes: Windows, Linux, Unix, OS-X, MacOS, etc. | |
+| Personal Detail | A contact detail of a student | Phone number, Telegram handle, and email address |
+| CS1101S | An introductory Computer Science module for year 1 students in the the National University of Singapore. | |
+| Studios | Tutorials held in CS1101S and are essential in aiding the students to improve their grasp on the concepts taught during the lecture. | < 10 students in a studio |
+| Avengers | A special term to call a CS1101S tutor. An avenger organizes a Studio session to improve on CS1101S concepts taught in lecture, recording attendance and grades. | An avenger holds at most one class. |
+| Principle of Least-Privilege | Minimum levels of access – or permissions – needed to perform function. | |
+| Command Line Interface (CLI) | A text-based user interface, where users type commands to instruct the computer to do something. | |
+| Graphical User Interface (GUI) | A graphics-based user interface, where users click buttons to instruct the computer to do something. | |
+| Java | A program that allows running other programs written in Java programming language. | |
+| `Command` | An interface representing an instruction typed by a user to Academy Directory. | |
+| Version controlled `Command` | a `Command` that logs a commit message, and thus stages at least one `VcObject` object upon execution. | Refer to the list of such commands [here](#appendix-c-version-controlled-commands) |
+| Command Box | A part of the Academy Directory's GUI which can be used by users to type commands. | |
+| Field | Additional information that can be provided to a command for correct command execution. | May or may not have an associated prefix |
+| Parameter | Part of the command which provides additional information provided by the user. | Actual values for the fields |
+| Prefix | An abbreviation of a field. | Always ends with a backslash ('/') |
 
 --------------------------------------------------------------------------------------------------------------------
 
