@@ -429,12 +429,15 @@ Finds all the staff working at a particular shift. The shift can be specified ei
 
 * When using the -ti flag, it is in 24-hour format. Example, for 4.pm on wednesday, we use <br> `wednesday-16:00`.
 * The DAY entry is not case-sensitive.
-* If no date input is provided, the next occurrence of the provided shift is displayed.
+* If no DATE input is provided, the next occurrence of the provided shift is displayed.
+* If DATE is provided, the shift that will be looked at is the next date which satisfies the DAY entry.
 * Similarly, if only one date input is provided, the next occurrence of the provided shift *after the provided date* is displayed.
+* If no input is provided, displays output for the shift occurring now. (The current date and time)
 
 Formats:  
-`viewShift -d DAY-shift_number [da/START_DATE] [da/END_DATE]`  
-`viewShift -ti DAY-HH:mm [da/START_DATE] [da/END_DATE]`
+`viewShift -d DAY-shift_number [da/DATE]`  
+`viewShift -ti DAY-HH:mm [da/DATE]`
+`viewShift`
 
 Note that day refers to the day of the week, and it is case-insensitive. However, it should be spelt in full (e.g. MONDAY instead of Mon).
 
@@ -443,6 +446,7 @@ Examples:
 `viewShift -d TUESDAY-0`  
 `viewShift -ti wednesday-12:00`  
 `viewShift -ti THURSDAY-16:30`
+`viewShift`
 
 Demonstration:  
 ![Example of ViewShiftCommand](images/viewShiftCommand/viewShift.jpg)
@@ -557,7 +561,7 @@ Action | Format, Examples
 **Swap shifts** | `swapShift -n NAME -n NAME d/day-shift_number d/day-shift_number [da/START_DATE] [da/END_DATE]` <br> `swapShift -n NAME d/day-shift_number -n NAME d/day-shift_number [da/START_DATE] [da/END_DATE]`
 **Set shift time** | `setShiftTime -n NAME d/DAYOFWEEK-SHIFTNUMBER st/hh:mm-hh:mm [da/START_DATE] [da/END_DATE]` <br> `setShiftTime -i INDEX d/DAYOFWEEK-SHIFTNUMBER st/hh:mm-hh:mm [da/START_DATE] [da/END_DATE]`
 **Delete staff shift** | `deleteShift -n NAME d/DAY-SHIFTNUMBER [da/START_DATE] [da/END_DATE]` <br> `deleteShift -i INDEX d/DAY-SHIFTNUMBER [da/START_DATE] [da/END_DATE]`
-**View shift** | `viewShift -d DAY-SHIFTNUMBER [da/START_DATE] [da/END_DATE]` <br> `viewShift -ti DAY-HH:mm [da/START_DATE] [da/END_DATE]`
+**View shift** | `viewShift -d DAY-SHIFTNUMBER [da/DATE]` <br> `viewShift -ti DAY-HH:mm [DATE]` <br> `viewShift`
 **Mark absent** | `mark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [da/START_DATE] [da/END_DATE]`
 **Remove mark** | `unmark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [da/START_DATE] [da/END_DATE]`
 **Change schedule** | `change da/START_DATE`
