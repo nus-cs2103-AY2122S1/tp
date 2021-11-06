@@ -154,15 +154,16 @@ Examples:
 Views a class in ClassMATE, as shown above
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:**<br>
-`viewc` highlights the class chosen, and filters out only students in the class!
+`viewc` highlights the class at the given INDEX, and filters out only students in that class!
 </div>
+
 
 
 Entering format: `viewc INDEX`
 
 * Views the class details at the specified INDEX.
 * Details of a class includes students in the class and the class schedule.
-* The index refers to the index number shown in the displayed list of classes.
+* The index refers to the index number shown in the displayed list of classes, **not the Class Code**.
 * The index must be a positive integer 1, 2, 3, …​
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -424,6 +425,12 @@ Displayes a class and its students in ClassMATE, as shown above.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:**<br>
 `viewc` highlights the class chosen, and filters out only students in the class!
+</div>
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+
+
+In order to view all classes after, use the `listc` command. To view all students after, use `liststu`
+
 </div>
 
 Entering format: `viewc INDEX`
