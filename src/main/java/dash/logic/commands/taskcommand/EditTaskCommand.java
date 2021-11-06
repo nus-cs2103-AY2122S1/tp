@@ -1,5 +1,6 @@
 package dash.logic.commands.taskcommand;
 
+import static dash.logic.parser.CliSyntax.PREFIX_PERSON;
 import static dash.logic.parser.CliSyntax.PREFIX_TAG;
 import static dash.logic.parser.CliSyntax.PREFIX_TASK_DATE;
 import static dash.logic.parser.CliSyntax.PREFIX_TASK_DESCRIPTION;
@@ -32,14 +33,13 @@ public class EditTaskCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
-            + "by the index number used in the displayed task list. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_TASK_DESCRIPTION + "TASK_DESCRIPTION] "
-            + "[" + PREFIX_TASK_DATE + "DATE]\n"
-            + "[" + PREFIX_TASK_DATE + "TIME]\n"
-            + "[" + PREFIX_TASK_DATE + "DATE, TIME]\n"
+    public static final String MESSAGE_USAGE = "Format: " + COMMAND_WORD
+            + " INDEX "
+            + "[" + PREFIX_TASK_DESCRIPTION + "DESCRIPTION] "
+            + "[" + PREFIX_TASK_DATE + "DATE] "
+            + "[" + PREFIX_TASK_DATE + "TIME] "
+            + "[" + PREFIX_TASK_DATE + "DATE, TIME] "
+            + "[" + PREFIX_PERSON + "PERSON_INDEX]... "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_TASK_DESCRIPTION + "Watch ST2334 Lecture 9 "

@@ -16,19 +16,19 @@ public class AddTaskCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task list. \n"
-            + "Parameters: "
-            + PREFIX_TASK_DESCRIPTION + "DESCRIPTION\n"
-            + "[" + PREFIX_TASK_DATE + "DATE]\n"
-            + "[" + PREFIX_TASK_DATE + "TIME]\n"
-            + "[" + PREFIX_TASK_DATE + "DATE, TIME]\n"
+    public static final String MESSAGE_USAGE = "Format: " + COMMAND_WORD
+            + " " + PREFIX_TASK_DESCRIPTION +  "DESCRIPTION "
+            + "[" + PREFIX_TASK_DATE + "DATE] "
+            + "[" + PREFIX_TASK_DATE + "TIME] "
+            + "[" + PREFIX_TASK_DATE + "DATE, TIME] "
+            + "[" + PREFIX_PERSON + "PERSON_INDEX]... "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "[" + PREFIX_PERSON + "PERSON_INDEX]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TASK_DESCRIPTION + "CS2103T Quiz 9 "
             + PREFIX_TASK_DATE + "21/10/2021, 1500 "
-            + PREFIX_TAG + "quizzes "
-            + PREFIX_PERSON + "3";
+            + PREFIX_PERSON + "3 "
+            + PREFIX_TAG + "quizzes";
+
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     private final Task toAdd;

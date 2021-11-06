@@ -1,5 +1,10 @@
 package dash.logic.commands.personcommand;
 
+import static dash.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static dash.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static dash.logic.parser.CliSyntax.PREFIX_NAME;
+import static dash.logic.parser.CliSyntax.PREFIX_PHONE;
+import static dash.logic.parser.CliSyntax.PREFIX_TAG;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
@@ -10,7 +15,6 @@ import dash.commons.core.Messages;
 import dash.commons.util.CollectionUtil;
 import dash.logic.commands.Command;
 import dash.logic.commands.CommandResult;
-import dash.logic.parser.CliSyntax;
 import dash.model.Model;
 import dash.model.person.AddressContainsKeywordsPredicate;
 import dash.model.person.EmailContainsKeywordsPredicate;
@@ -27,24 +31,16 @@ public class FindPersonCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain all of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters Type 1 (find by name): NAME\n"
-            + "Parameters Type 2 (find by field): "
-            + "[" + CliSyntax.PREFIX_NAME + "NAME] "
-            + "[" + CliSyntax.PREFIX_PHONE + "PHONE] "
-            + "[" + CliSyntax.PREFIX_EMAIL + "EMAIL] "
-            + "[" + CliSyntax.PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + CliSyntax.PREFIX_TAG + "TAG]... (at least 1)\n"
-            + "Parameters Type 3 (find by both): NAME "
-            + "[" + CliSyntax.PREFIX_PHONE + "PHONE] "
-            + "[" + CliSyntax.PREFIX_EMAIL + "EMAIL] "
-            + "[" + CliSyntax.PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + CliSyntax.PREFIX_TAG + "TAG]... (at least 1)\n"
-            + "Example 1: " + COMMAND_WORD + " alice bob charlie\n"
-            + "Example 2: " + COMMAND_WORD + " [" + CliSyntax.PREFIX_PHONE + "91234567] " + "[" + CliSyntax.PREFIX_EMAIL
-            + "johndoe@example.com]\n"
-            + "Example 3: " + COMMAND_WORD + " Bob " + "[" + CliSyntax.PREFIX_PHONE + "91234567]\n";
+    public static final String MESSAGE_USAGE = "Format: " + COMMAND_WORD
+            + " [" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_PHONE + "PHONE_NUMBER] "
+            + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_TAG + "TAG]... \n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_PHONE + "91234567 "
+            + PREFIX_EMAIL + "johndoe@example.com\n";
+
 
     private final FindPersonDescriptor findPersonDescriptor;
     private final Predicate<Person> predicate;

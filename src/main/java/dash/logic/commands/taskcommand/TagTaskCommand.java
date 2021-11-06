@@ -21,16 +21,14 @@ public class TagTaskCommand extends Command {
 
     public static final String COMMAND_WORD = "tag";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Tags task with provided additional tags "
-            + "by the index number used in the displayed task list. "
-            + "Existing tags will not be overwritten.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+    public static final String MESSAGE_USAGE = "Format: " + COMMAND_WORD
+            + " INDEX "
+            + PREFIX_TAG + "TAG...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_TAG + "lecture "
-            + PREFIX_TAG + "important ";
+            + PREFIX_TAG + "important";
 
-    public static final String MESSAGE_EDIT_TASK_SUCCESS = "Tags added to: %1$s";
+    public static final String MESSAGE_EDIT_TASK_SUCCESS = "Tag(s) added to: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one tag to add must be provided.";
 
     private final Index index;
