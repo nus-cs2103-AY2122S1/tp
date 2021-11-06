@@ -2,13 +2,13 @@
 layout: page
 title: User Guide
 ---
+![CSBook](images/CSBook.png)
 
-Welcome to the CSBook User Guide. **CSBook is a desktop app for teaching assistants (TAs) to manage their students, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you are faster at typing, CSBook can get your student management tasks done faster than traditional GUI applications.
+Welcome to the CSBook User Guide. **CSBook is a desktop app for teaching assistants (TAs) to manage their students. It is optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you are faster at typing, CSBook can get your student management tasks done faster than traditional GUI applications.
 
-**CSBook aims to help lessen your workload** of having to create separate spreadsheets or notes to track your students' academic progress. With CSBook, **your students may be organised in a more intuitive manner in custom groups** and **track them and their academic progress in assignments more efficiently**, saving time and letting you get back to your students quicker.
+CSBook aims to help **lessen your workload** and **save you the trouble** of having to use external applications to track your students' academic progress i.e. creating spreadsheets to track grades and take down notes.  With CSBook, you can **organise your students into custom groups** and **store their information such as contact details, notes and assessments**. This allows you to manage your students in a **more intuitive and efficient** manner, which will free up more time for you to spend on teaching and helping them.
 
-If this is your first time using CSBook, we recommend that you first look at the [How to use](#how-to-use)
-section of the user guide.
+We would recommend that you first take a look at the [How to use](#how-to-use) section in the user guide.
 
 ## Table of Contents
 
@@ -18,10 +18,14 @@ section of the user guide.
 --------------------------------------------------------------------------------------------------------------------
 
 ## How to use
+This user guide will take you through the usages of CSBook and its features.
 
-This user guide will bring you through **how to quickly start using our application through the [Quick Start](#quick-start) section**, while also serving as a **reference to more experienced users in the [Feature List](#feature-list) section**, where notes and tips on how best to make use of our application will also be given.
+If you are a new user, do refer to the [Quick Start](#quick-start) section for **instructions to start using the application**. 
 
-**If you face any difficulty while following the user guide, do refer to the [FAQ section](#faq)** to see if your issue has been addressed there. If the solution provided or your query has yet to be answered in the FAQ section, feel free to reach out to our team lead, Erin Ong, at [e0559779@u.nus.edu](mailto:e0559779@u.nus.edu) through email.
+If you are more experienced, you can continue on to the [Feature List](#feature-list) section, which provides **comprehensive descriptions on the usages of the various features**. There are also additional notes and tips for you on how to enhance the use of CSBook.
+Else, you may refer to the [Command Summary](#command-summary) section for a **brief summary of the commands and their formats**.
+
+Should you face any difficulties while following the user guide, do refer to the [FAQ](#faq) section for possible resolutions. If your query remains unresolved or is not addressed, feel free to reach out to our team through email at [e0559779@u.nus.edu](mailto:e0559779@u.nus.edu).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -33,13 +37,13 @@ This user guide will bring you through **how to quickly start using our applicat
 
 3. Copy the file to the folder you want to use as the _home folder_ for CSBook.
 
-4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br><br>
-   ![Ui](images/Ui.png)
+4. Double-click the file to start the app. The GUI as shown below should appear in a few seconds. You can refer to the [GUI](#gui) Section for more information on the layout. Note that the app contains some sample data.<br><br>
+   ![Ui](images/Ui.png) 
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br><br>
    Some example commands you can try:
 
-    * **`list`** : Lists all students currently stored.
+    * **`list`** : Lists all students and groups currently stored.
 
     * **`addgroup`** `g/CS2100 d/Computer Organisation` : Adds a group named `CS2100` with the description `Computer Organisation` to CSBook
 
@@ -54,7 +58,7 @@ This user guide will bring you through **how to quickly start using our applicat
 
     * **`exit`** : Exits the app.
 
-6. Refer to the [Feature list](#feature-list) below for the full details of each command.
+6. Refer to the [Feature List](#feature-list) below for the full details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -68,13 +72,13 @@ Term | Definition
 **Java** |The programming language used to create CSBook. It may also refer to the Java Runtime Environment, which allows Java applications like CSBook to be run.
 **Module**|A unit of study that makes up a part of a course taught in university.
 **Operating System (OS)** |The system software that is running on the computer. E.g. Microsoft Windows, macOS, Linux.
-**Student**|A student in any module that a TA is teaching.
+**Student**|A student in any module that the TA is teaching.
 **Terminal window**|A simple CLI-based program that allows the user to run some system commands.
 **Teaching Assistant (TA)**|A student teacher that has been hired to assist in teaching a tutorial/lab session for a module.
 
 ## Glossary of icons
 
-These icons will appear within coloured boxes to indicate
+These icons will appear within coloured boxes to indicate information related to section or features.
 
 &nbsp; &nbsp; &nbsp; Icon &nbsp; &nbsp; &nbsp; | Meaning | Box colour
 ------------|------------------|----
@@ -83,7 +87,47 @@ These icons will appear within coloured boxes to indicate
  :exclamation:**Caution** |This icon serves to give a note on behaviour of the application that could be unexpected to you|Yellow
  :warning:**Warning** |This icon serves to warn against using a feature in some unintended manner| Yellow
 
+---
+## GUI
 
+This section will provide you with a brief introduction of our GUI. 
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: GUI is optimised when window is maximised to full screen. Names may appear truncated for smaller screen sizes.
+:**<br>
+
+### Main Screen
+
+![Ui](images/ug1.png)
+
+The main screen would show two panels which consist of the list of students and list of groups respectively. 
+
+The student card which represents each student will have the student’s name and the group they belong to. 
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: A student would be flagged red if their score on the most recent assessment falls below the passing threshold of 50%.
+:**<br>
+
+The group card which represents each group will have the group’s name and description. 
+
+The command box is located at the bottom of the window in which you can enter the commands.
+
+
+### Detailed Student Page
+![Ui](images/ug2.png)
+
+This is the detailed student page which consists of the student’s information -- group the student belongs to, contact details, list of assessments and notes on the student. 
+
+For assessments, the assessment name, score the student received and percentage of performance would be displayed.
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: An assessment would be flagged red if the student’s score falls below the passing threshold of 50%.
+:**<br>
+
+---
 
 ## Feature List
 
@@ -91,7 +135,7 @@ These icons will appear within coloured boxes to indicate
 
 **:information_source: Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+* Words in `UPPER_CASE` are the parameters to be supplied by you.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Jun Wei`.
 
 * Parameters can be in any order.<br>
@@ -100,9 +144,11 @@ These icons will appear within coloured boxes to indicate
 * Optional parameters/fields will be indicated within square brackets.
   e.g. if the command specifies `edit INDEX [n/NAME] [t/TELEGRAM_HANDLE] [e/EMAIL] [g/GROUP_NAME]`, `edit 1 n/Jiaxian` or `edit 1 n/Jiaxian t/@albino_monkey e/e0540014X@u.nus.edu g/CS2103T` are both acceptable commands
 
-* For parameters that expect a number value, such as `INDEX` of a student or `SCORE` for assessments, CSBook will have unexpected behaviours if too large of a number is given. The reason being is that CSBook was designed to manage at most a few thousand students, and it is not realistic for an assessment to have the total number of marks above a couple of hundreds either.
+* For parameters that expect a number value, such as `INDEX` of a student or `SCORE` for assessments, if you try to enter an extremely large value, CSBook will not behave as expected. This is because for assessments to have total scores above a few hundreds or for a TA to have more than a few thousand students is considered unrealistic.
 
-* If a parameter is expected only once in the command but if you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
+* For parameters that expect a string value i.e. non-numeric value, such as `NAME` of a student or `GROUPNAME` of a group, if you try to enter extremely long values, the name may be truncated. This is because for students or groups to have extremely long names is considered unrealistic. 
+
+* If you specify a parameter multiple times when it is expected only once in the command, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `t/@albino_monkii t/@albino_api`, only `t/@albino_api` will be taken.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
@@ -115,7 +161,7 @@ These icons will appear within coloured boxes to indicate
 ### General features
 
 <div markdown="block" class="alert alert-info">
-:information_source: **Note**: Listed in this section are general features and commands to use and manage CSBook.
+:information_source: **Note**: Listed in this section are general features and commands you can use to manage CSBook.
 </div>
 
 #### Viewing help : `help`
@@ -134,13 +180,13 @@ Format: `clear`
 
 #### Encrypting the data file: `encrypt`
 
-Encrypts the CSBook data file into a non-human-readable format to protect the data from access by undesirable parties.
+Encrypts the CSBook data file by converting data into a non-human-readable format to protect the data from access by undesirable parties.
 
 Format: `encrypt`
 
 #### Decrypting the data file: `decrypt`
 
-Decrypts the CSBook data file back into a human-readable format from its previously encrypted state.
+Decrypts the CSBook data file by converting data back into a human-readable format from its previously encrypted state.
 
 Format: `decrypt`
 
@@ -152,13 +198,14 @@ Format: `exit`
 
 #### Saving the data
 
-CSBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually. The data is decrypted by default, but you may encrypt them using the `encrypt` command listed above.
+CSBook data is saved in the hard disk automatically after you have used any command that changes the data. There is no need for you to save manually. The data is decrypted by default, but you may encrypt them using the `encrypt` command listed above.
 
 #### Editing the data file
 
-CSBook data are saved as an JSON file at `[JAR file location]/data/csbook`. Advanced users are welcome to update data directly by editing that data file.
+CSBook data is saved as an JSON file at `[JAR file location]/data/csbook`. If you are  a more advanced user, you are welcome to update data by editing the data file directly .
 
-Note that if the encrypt function is turned on, the data will be saved in an encrypted JSON format. In which case, users are highly advised to decrypt the data file first through the `decrypt` command before editing the data file directly.
+
+Note that if you have enabled the encrypt function, the data will be saved in an encrypted JSON format. In which case, you are highly advised to decrypt the data file with the `decrypt` command before editing the data file directly.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If there are changes to the data file that makes its format invalid, CSBook will discard all data and start with an empty data file on the next run.<br/><br/>
@@ -169,7 +216,7 @@ If there are changes to the data file that makes its format invalid, CSBook will
 ### Student management features
 
 <div markdown="block" class="alert alert-info">
-:information_source: **Note**: Listed in this section are all the features and commands related to managing and tracking student information in CSBook. Stored student information helps you keep track of all the information related to each of your students in one collated entry.
+:information_source: **Note**: Listed in this section are all the features and commands you can use to manage your students and their information in CSBook. The information you stored for each student will be collated into a single entry to help you keep track of them.
 </div>
 
 #### Adding a student: `add`
@@ -179,7 +226,7 @@ Adds a student to the CSBook.
 Format: `add n/NAME t/TELEGRAM_HANDLE e/EMAIL g/GROUP_NAME`
 
 * Adds a new student into CSBook.
-* The group name must correspond to that of a group that has been added to CSBook before the student is created. Each student **MUST** belong to a group.
+* Each student **MUST** belong to a group.The group name must correspond to that of an existing group, which means that the group should be added to CSBook before the student is created.
 * Each student can only belong to one group.
 * `NAME` is case-sensitive and must be unique. Thus, it is possible to have two students named `John` and `john`, but it is not possible to have two students named `Alfred` and `Alfred`
 * The `EMAIL` used can be any email; it need not be an NUS email.
@@ -195,11 +242,9 @@ Examples:
 Result of `add n/Jun Wei t/@albino_api e/albinoape@u.nus.edu g/CS2101`:
   ![result for 'add n/Jia Xian t/@albino_monkii e/albinomonkey@u.nus.edu g/CS2103T'](images/addJunWeiResult.png)
 
-#### Listing all students : `list`
+#### Listing all students and groups : `list`
 
-Shows a list of all students in the CSBook.
-
-* A student will be coloured red if their latest assessment fall below the passing threshold of 50%.
+Shows a list of all students and groups in the CSBook.
 
 Format: `list`
 
@@ -209,7 +254,8 @@ Edits an existing student in the CSBook.
 
 Format: `edit INDEX [n/NAME] [t/TELEGRAM_HANDLE] [e/EMAIL]`
 
-* Edits the student at the specified INDEX. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the student at the specified `INDEX`. 
+* The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
@@ -220,7 +266,7 @@ Examples:
 
 #### Finding students by name: `find`
 
-Finds students whose names contain any of the given keywords.
+Finds students in the CSBook whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -238,7 +284,7 @@ Examples:
 Result of `find alex david`:
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-#### View student: `viewstudent`
+#### Viewing students: `viewstudent`
 
 Views an existing student in the CSBook.
 
@@ -247,8 +293,8 @@ Format: `viewstudent NAME`
 * The search is **case-sensitive**. e.g. `david` will not match `David`
 * The full name of the student must be matched. e.g. `Alex` will not match `Alex Yeoh`
 * The student's details shown includes their full name, group, telegram handle, email, notes and assessments.
-* Individual assessments are coloured red if they fall below the passing threshold of 50%.
-* To go back to the main page with the list of students, use the `list` command.
+* Individual assessments are flagged red if they fall below the passing threshold of 50%.
+* To go back to the main page with the list of students and groups, use the `list` command.
 
 Examples:
 * `viewstudent David Li` returns `David Li`
@@ -259,18 +305,17 @@ Result of `viewstudent Irfan Ibrahim`:
 
 #### Adding an assessment: `addassessment`
 
-Adds an assessment for a student.
+Adds an assessment for a student in the CSBook.
 
 Format: `addassessment INDEX a/ASSESSMENT_NAME s/SCORE`
 
 * Adds a new assessment to the student at the specified `INDEX`
-* The index refers to the index number shown in the displayed student list.
-* The index must be a **positive integer** 1, 2, 3, …​
+* The index refers to the index number shown in the displayed student list. The index must be a **positive integer** 1, 2, 3, …​
 * The assessment name must be unique in the student's assessment list.
 * The assessment name should only contain alphanumeric characters and spaces, and it should not be blank
-* The score consists of two components: an *actual score* and a *total score*.
+* The `SCORE` consists of two components: an *actual score* and a *total score* i.e. *actual score*/*total score*.
+  *   The *total score* should be an integer greater than 0.
   * The *actual score* should be an integer greater than or equal to 0
-  + The *total score* should be an integer greater than 0.
   + The *actual score* should be less than or equal to the *total score*.
 
 <div markdown="block" class="alert alert-info">
@@ -286,7 +331,7 @@ Result of `addassessment 6 a/Participation s/3/5`:
 
 #### Deleting an assessment: `deleteassessment`
 
-Deletes an assessment from a student.
+Deletes an assessment from a student in the CSBook.
 
 Format: `deleteassessment INDEX a/ASSESSMENT_NAME`
 
@@ -302,23 +347,24 @@ Examples:
 
 #### Adding a note: `note`
 
-Sets the note of the student to the given input.
+Sets the note of the student in the CSBook to the given input.
 
 Format: `note n/NAME no/NOTE`
 
-* If a note exists, it will be overwritten with the new note.
-* An existing note can be cleared by having an empty `NOTE` parameter. i.e., `note n/NAME no/`
+* If there is an existing note, it will be overwritten by the new note.
+* An existing note can be cleared by using the command with an empty `NOTE` parameter. i.e., `note n/NAME no/`
 
 Examples:
-* `note n/Charlotte Oliveiro no/Great with presentations` will replace the existing note `Very convincing presentations` with `Great with presentations`
 * `note n/Roy Balakrishnan no/Not clear about UML diagrams, particularly with Sequence Diagrams. Can use a bit of help with Object Diagrams as well.` will add a note `Not clear about UML diagrams, particularly with Sequence Diagrams. Can use a bit of help with Object Diagrams as well.`<br>
 
 Result of the above `note n/Roy Balakrishnan no/Not clear about...`:
   ![result for 'note n/Roy Balakrishnan no/Not clear about UML diagrams, particularly with Sequence Diagrams. Can use a bit of help with Object Diagrams as well.'](images/noteRoyUmlResult.png)
 
+* `note n/Roy Balakrishnan no/Improvement in UML Diagrams but still lacks understanding in Object Diagrams.` will replace the existing note shown above with `Improvement in UML Diagrams but still lacks understanding in Object Diagrams.`.
+
 #### Deleting a student : `delete`
 
-Deletes the specified student from CSBook.
+Deletes the specified student from the CSBook.
 
 Format: `delete INDEX`
 
@@ -333,13 +379,11 @@ Examples:
 ### Group management features
 
 <div markdown="block" class="alert alert-info">
-:information_source: **Note**: Listed in this section are all the features and commands related to
-managing groups that students can be assigned to in CSBook. Groups allow you to put students
-that match some similar criteria into the same category for easier lookup and management of students.<br>
+:information_source: **Note**: Listed in this section are all the features and commands you can use to manage groups in CSBook. Groups allow you to assign students into various groupings based on certain criteria, which will facilitate easier lookup and management of students. <br>
 
-:bulb: **Use cases**: You may use groups in any way that best suits your needs! You may split students by
-module/tutorial group if you're teaching more than one module/class. You may also divide students within the
-same class into consultation groups to better focus your needs on certain students.
+:bulb: **Use cases**: You should use the groups feature in any way that best suits your needs! You can split students by
+module/tutorial group if you're teaching more than one module/class. You can also create consultation groups for students within the same class to focus on certain students.
+
 </div>
 
 #### Creating a group: `addgroup`
@@ -355,7 +399,7 @@ Format: `addgroup g/GROUPNAME d/DESCRIPTION`
 </div>
 
 Examples:
-* `addgroup g/CS2100 d/Computer Organisation` creates a group called `CS2100` and the description `Computer Organisation`
+* `addgroup g/CS2100 d/Computer Organisation` creates a group called `CS2100` with the description `Computer Organisation`
 that students can be added into.<br>
 
 
@@ -365,19 +409,19 @@ that students can be added into.<br>
 
 #### Viewing students of a group: `viewgroup`
 
-Views the students in a group.
+Views the students who belong to the specified group.
 
 Format: `viewgroup g/GROUPNAME`
 
 Examples:
-* `viewgroup g/CS2103T` displays the students in `CS2103T`.
+* `viewgroup g/CS2103T` displays the students in the group `CS2103T`.
 
 Result of `viewgroup g/CS2103T`:
   ![result for `viewgroup g/CS2103T`](images/viewGroupCS2103T.png)
 
 #### Changing the group of a student: `changegroup`
 
-Changes the group which the given student belongs in to the given group.
+Changes the group of the specified student to the specified group.
 
 Format: `changegroup n/NAME g/GROUPNAME`
 
@@ -407,7 +451,7 @@ Action | Format, Examples
 **Decrypt** | `decrypt`
 **Exit** | `exit`
 **Add Student** | `add n/NAME t/TELEGRAM_HANDLE e/EMAIL g/GROUPNAME` <br> e.g., `add n/Jia Xian t/@albino_monkii e/albinomonkey@u.nus.edu g/CS2103T`
-**List Students** | `list`
+**List Students and Groups** | `list`
 **Edit Student** | `edit INDEX [n/NAME] [t/TELEGRAM_HANDLE] [e/EMAIL]`<br> e.g.,`edit 1 t/@albino_monkey e/e0540014X@u.nus.edu`
 **Find Students** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find oliveiro`
 **View Student** | `viewstudent NAME`<br> e.g., `viewstudent David Li`
