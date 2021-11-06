@@ -4,6 +4,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -37,7 +38,7 @@ class TdoneCommandTest {
     }
 
     @Test
-    void execute_markOneTaskAsDone_markSuccessful() throws CommandException {
+    void execute_markOneTaskAsDone_markSuccessful() throws Exception {
         Index validMemberId = Index.fromOneBased(1);
         Set<Index> validMemberIdList = new HashSet<>();
         validMemberIdList.add(validMemberId);
@@ -47,13 +48,103 @@ class TdoneCommandTest {
         Task validTask = new TaskBuilder().build();
         Member validMember = new MemberBuilder().build();
         AddressBook addressBook = new AddressBookBuilder().withMember(validMember).build();
-        ModelStubAcceptingTaskAdded modelStub =
-                new ModelStubAcceptingTaskAdded(addressBook, validTask, validMemberIdList);
-        modelStub.addTask(validMember, validTask);
+        TaddCommand tAddCommand = new TaddCommand(validMemberIdList, validTask);
+        TlistCommand tlistCommand = new TlistCommand(validMemberId);
+        ModelStubAcceptingWithOneTask modelStub =
+                new ModelStubAcceptingWithOneTask(addressBook, validTask, validMemberIdList);
+        tAddCommand.execute(modelStub);
+        tlistCommand.execute(modelStub);
         CommandResult commandResult = new TdoneCommand(validTaskIdList).execute(modelStub);
 
         assertEquals(String.format(TdoneCommand.MESSAGE_DONE_TASK_SUCCESS, validTask),
                 commandResult.getFeedbackToUser());
+    }
+
+    @Test
+    void execute_markMultipleTasksAsDone_markSuccessful() throws Exception {
+        Index validMemberId = Index.fromOneBased(1);
+        Set<Index> validMemberIdList = new HashSet<>();
+        validMemberIdList.add(validMemberId);
+        Index validTaskId = Index.fromOneBased(1);
+        Index validTaskId2 = Index.fromOneBased(2);
+        Index validTaskId3 = Index.fromOneBased(3);
+        Set<Index> validTaskIdList = new HashSet<>();
+        validTaskIdList.add(validTaskId2);
+        validTaskIdList.add(validTaskId3);
+        validTaskIdList.add(validTaskId);
+        Task validTask = new TaskBuilder().build();
+        Task validTask2 = new TaskBuilder().withName("Test2").withDeadline("19/02/2022 23:59").build();
+        Task validTask3 = new TaskBuilder().withName("Test3").withDeadline("19/02/2022 23:59").build();
+        Member validMember = new MemberBuilder().build();
+        AddressBook addressBook = new AddressBookBuilder().withMember(validMember).build();
+        TaddCommand tAddCommand = new TaddCommand(validMemberIdList, validTask);
+        TaddCommand tAddCommand2 = new TaddCommand(validMemberIdList, validTask2);
+        TaddCommand tAddCommand3 = new TaddCommand(validMemberIdList, validTask3);
+        TlistCommand tlistCommand = new TlistCommand(validMemberId);
+        ModelStubAcceptingWithOneTask modelStub =
+                new ModelStubAcceptingWithOneTask(addressBook, validTask, validMemberIdList);
+        tAddCommand.execute(modelStub);
+        tAddCommand2.execute(modelStub);
+        tAddCommand3.execute(modelStub);
+        tlistCommand.execute(modelStub);
+        CommandResult commandResult = new TdoneCommand(validTaskIdList).execute(modelStub);
+
+        String expectedMessage = String.format(TdoneCommand.MESSAGE_DONE_TASK_SUCCESS, validTask)
+                + String.format(TdoneCommand.MESSAGE_DONE_TASK_SUCCESS, validTask2)
+                + String.format(TdoneCommand.MESSAGE_DONE_TASK_SUCCESS, validTask3);
+        assertEquals(expectedMessage, commandResult.getFeedbackToUser());
+    }
+
+    @Test
+    void execute_markOneTaskAndItDoesNotExist_throwsCommandException() throws Exception {
+        Index validMemberId = Index.fromOneBased(1);
+        Set<Index> validMemberIdList = new HashSet<>();
+        validMemberIdList.add(validMemberId);
+        Index invalidTaskId = Index.fromOneBased(1);
+        Set<Index> validTaskIdList = new HashSet<>();
+        validTaskIdList.add(invalidTaskId);
+        Task validTask = new TaskBuilder().build();
+        Member validMember = new MemberBuilder().build();
+        AddressBook addressBook = new AddressBookBuilder().withMember(validMember).build();
+        TlistCommand tlistCommand = new TlistCommand(validMemberId);
+        ModelStubAcceptingWithOneTask modelStub =
+                new ModelStubAcceptingWithOneTask(addressBook, validTask, validMemberIdList);
+        tlistCommand.execute(modelStub);
+
+        assertThrows(CommandException.class,
+                String.format(TdoneCommand.MESSAGE_TASK_NOT_FOUND, invalidTaskId.getOneBased()), () ->
+                        new TdoneCommand(validTaskIdList).execute(modelStub));
+    }
+
+    @Test
+    void execute_markMultipleTasksAndOneDoesNotExist_throwsCommandException() throws Exception {
+        Index validMemberId = Index.fromOneBased(1);
+        Set<Index> validMemberIdList = new HashSet<>();
+        validMemberIdList.add(validMemberId);
+        Index validTaskId = Index.fromOneBased(1);
+        Index validTaskId2 = Index.fromOneBased(2);
+        Index invalidTaskId3 = Index.fromOneBased(3);
+        Set<Index> taskIdListWithOneInvalidId = new HashSet<>();
+        taskIdListWithOneInvalidId.add(validTaskId2);
+        taskIdListWithOneInvalidId.add(invalidTaskId3);
+        taskIdListWithOneInvalidId.add(validTaskId);
+        Task validTask = new TaskBuilder().build();
+        Task validTask2 = new TaskBuilder().withName("Test2").withDeadline("19/02/2022 23:59").build();
+        Task validTask3 = new TaskBuilder().withName("Test3").withDeadline("19/02/2022 23:59").build();
+        Member validMember = new MemberBuilder().build();
+        AddressBook addressBook = new AddressBookBuilder().withMember(validMember).build();
+        TaddCommand tAddCommand = new TaddCommand(validMemberIdList, validTask);
+        TaddCommand tAddCommand2 = new TaddCommand(validMemberIdList, validTask2);
+        TlistCommand tlistCommand = new TlistCommand(validMemberId);
+        ModelStubAcceptingWithOneTask modelStub =
+                new ModelStubAcceptingWithOneTask(addressBook, validTask, validMemberIdList);
+        tAddCommand.execute(modelStub);
+        tAddCommand2.execute(modelStub);
+        tlistCommand.execute(modelStub);
+
+        assertThrows(CommandException.class,
+                String.format(TdoneCommand.MESSAGE_TASK_NOT_FOUND, invalidTaskId3.getOneBased()), () ->
+                        new TdoneCommand(taskIdListWithOneInvalidId).execute(modelStub));
     }
 
 
@@ -242,15 +333,16 @@ class TdoneCommandTest {
     /**
      * A Model stub that always accept the member being added.
      */
-    private class ModelStubAcceptingTaskAdded extends ModelStub {
+    private class ModelStubAcceptingWithOneTask extends ModelStub {
         private final AddressBook addressBook;
         private final Set<Member> members = new HashSet<>();
         private final Task task;
         private TaskList taskListManager;
         private final FilteredList<Member> filteredMembers;
+        private FilteredList<Task> filteredTasks;
 
 
-        ModelStubAcceptingTaskAdded(ReadOnlyAddressBook addressBook, Task task, Set<Index> memberIdList) {
+        ModelStubAcceptingWithOneTask(ReadOnlyAddressBook addressBook, Task task, Set<Index> memberIdList) {
             this.addressBook = new AddressBook(addressBook);
             requireNonNull(memberIdList);
             this.filteredMembers = new FilteredList<>(this.addressBook.getMemberList());
@@ -261,6 +353,7 @@ class TdoneCommandTest {
             requireNonNull(task);
             this.task = task;
             this.taskListManager = new TaskList();
+            filteredTasks = new FilteredList<>(this.taskListManager.asUnmodifiableObservableList());
         }
 
         @Override
@@ -291,7 +384,30 @@ class TdoneCommandTest {
             requireNonNull(member);
             if (this.taskListManager != member.getTaskList()) {
                 this.taskListManager = member.getTaskList();
+                this.filteredTasks = new FilteredList<>(this.taskListManager.asUnmodifiableObservableList());
+
             }
+        }
+        @Override
+        public void setTask(Task target, Task editedTask) {
+            taskListManager.setTask(target, editedTask);
+        }
+
+        @Override
+        public ObservableList<Task> getFilteredTaskList(Member member) {
+            loadTaskList(member);
+            return filteredTasks;
+        }
+        @Override
+        public ObservableList<Task> getFilteredTaskList() {
+            return filteredTasks;
+        }
+
+        @Override
+        public void updateFilteredTaskList(Member member, Predicate<Task> predicate) {
+            requireNonNull(predicate);
+            loadTaskList(member);
+            filteredTasks.setPredicate(predicate);
         }
     }
 }
