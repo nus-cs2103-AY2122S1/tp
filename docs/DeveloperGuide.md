@@ -397,7 +397,7 @@ Step 5. Following this, the displayed staff list will display the updated filter
 
 The activity diagram of this `Find` command is shown below:
 
-![Find Command Sequence Diagram](images/findCommand/findSequenceDiagram.png)
+![Find Command Sequence Diagram](images/findCommand/FindSequenceDiagram.png)
 
 Notes:
 
@@ -448,9 +448,10 @@ for staff who are working at that particular timing.
 Step 5. Following this, the displayed staff list will display the updated filtered list, and the names of those working will
 also be outputted on the left of the GUI.
 
-The activity diagram of this `Find` command is shown below:
+The activity diagram of this `viewShift` command is shown below:
 
 ![ViewShift Command Sequence Diagram](images/viewShiftCommand/ViewShiftSequenceDiagram.png)
+![ViewShiftCommand Execution Diagram](images/viewShiftCommand/ViewShiftCommandExecutionSequenceDiagram.png)
 
 Notes:
 

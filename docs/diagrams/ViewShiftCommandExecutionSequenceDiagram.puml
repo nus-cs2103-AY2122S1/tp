@@ -1,0 +1,38 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+
+participant "command:ViewShiftCommand" as ViewShiftCommand LOGIC_COLOR
+
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+
+activate ViewShiftCommand
+
+
+ViewShiftCommand -> Model : updateFilteredPersonList(isWorkingPredicate)
+activate Model
+Model --> ViewShiftCommand : ObservableList<Person> Filtered_Staff
+deactivate Model
+
+alt viewShift by Slot Number
+    ViewShiftCommand -> Model : executeViewShiftBySlot()
+    activate Model
+    Model --> ViewShiftCommand : result
+    deactivate Model
+
+else  viewShift by Time
+    ViewShiftCommand -> Model : executeViewShiftByTime()
+    activate Model
+    Model --> ViewShiftCommand : result
+    deactivate Model
+end
+
+deactivate Model
+@enduml
+
