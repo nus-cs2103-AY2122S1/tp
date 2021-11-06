@@ -479,27 +479,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use an instruction              |
-| `* * *`  | clinic receptionist                        | add a new patient              |                                                                        |
-| `* * *`  | clinic receptionist                        | delete a patient               | remove entries that I no longer need                                   |
-| `* * *`  | clinic receptionist                        | view a patient's personal details| view his/her personal details to better understand him/her and contact him/her |
-| `* * *`  | clinic receptionist                        | view a patient's risk profile| view his/her risk |
-| `* * *`  | clinic receptionist                        | edit a patient's personal details| change his/her personal details should it change|
-| `* * *`  | clinic receptionist                        | edit a patient's risk profile| change his/her risk profile should it change |
-| `* * *`  | clinic receptionist                        | find a patient by name         | locate details of patients without having to go through the entire list |
-| `* * *`  | clinic receptionist                        | add a doctor |     |
-| `* * *`  | clinic receptionist                        | view a doctor's personal details| view his/her personal details to contact him/her |
-| `* * *`  | clinic receptionist                        | edit a doctor's personal details| edit his/her details should it change |
-| `* * *`  | clinic receptionist                        | delete a doctor | remove entries that I no longer need |
-| `* * *`  | clinic receptionist                        | view a doctor's schedule | schedule appointments during available times                                  |
-| `* * *`  | clinic receptionist                        | add an appointment |                                                 |
-| `* * *`  | clinic receptionist                        | delete an appointment | cancel the appointment |
-| `* * *`  | clinic receptionist                        | edit an appointment | reschedule the appointment when the patient or doctor asks for it |
-| `* * *`  | clinic receptionist                        | view the appointments that have been scheduled | see what appointments the clinic has at any time|
+| `* * *`  | new user            | see usage instructions         | refer to instructions when I forget how to use an instruction              |
+| `* * *`  | clinic receptionist | add patients' personal details | better understand them and have a way of easily contacting them                                                                       |
+| `* * *`  | clinic receptionist | delete a patient from the patient records  | remove entries that I no longer need and keep my database clean   |
+| `* * *`  | clinic receptionist | view a patient's personal details | contact him/her |
+| `* * *`  | clinic receptionist | view a patient's risk profile| decide whether or not the patient should be given priority to see the doctor |
+| `* * *`  | clinic receptionist | edit a patient's personal details | change his/her personal details should it change and keep my database updated|
+| `* * *`  | clinic receptionist | edit a patient's risk profile| change his/her risk profile should it change and keep my database updated |
+| `* * *`  | clinic receptionist | find a patient by name | locate details of patients without having to go through the entire list |
+| `* * *`  | clinic receptionist | add doctors' personal details | easily contact the doctor when the need arises|
+| `* * *`  | clinic receptionist | delete a doctor from the doctors records | remove entries that I no longer need and keep my database clean |
+| `* * *`  | clinic receptionist | view a doctor's personal details | contact him/her |
+| `* * *`  | clinic receptionist | edit a doctor's personal details| edit his/her details should it change and keep my database updated |
+| `* * *`  | clinic receptionist | add an appointment | so that I can easily manage my schedule without having to rely on a physical planner |
+| `* * *`  | clinic receptionist | delete an appointment | cancel the appointment and keep my schedule updated |
+| `* * *`  | clinic receptionist | edit an appointment | reschedule the appointment when the patient or doctor asks for it |
+| `* * *`  | clinic receptionist | search and filter through all my scheduled appointments | see what appointments a particular patient or doctor has at a particular point in time  |
+| `* * *`  | clinic receptionist | list the appointments that have been scheduled today | see what appointments the clinic has today|
 | `* *`    | clinic receptionist | add remarks for a patient | add additional information about the patient |            |
-| `* *`    | clinic receptionist | edit remarks for a patient| change any additional information about the patient                                             |
-| `*`      | clinic receptionist                        | write tags for a patient  | easily identify him/her or provide additional information                |
-| `*`      | clinic receptionist                        | write tags for a doctor  | easily identify him/her or provide additional information       |
+| `* *`    | clinic receptionist | edit remarks for a patient| change any additional information about the patient    |
+| `* *`    | clinic receptionist | add remarks for a doctor | add additional information about the doctor |            |
+| `* *`    | clinic receptionist | edit remarks for a doctor | change any additional information about the doctor    |
+| `*`      | clinic receptionist | write tags for a patient  | easily identify important things to note about the patient             |
+| `*`      | clinic receptionist | write tags for a doctor  | easily identify important things to note about the doctor      |
  
 ### Use cases  <a name="use-cases"/>
 These are some use cases to familiarise with the flow of our application: 
