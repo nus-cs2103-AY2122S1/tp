@@ -3,18 +3,13 @@ package seedu.modulink.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.modulink.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.modulink.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.modulink.testutil.Assert.assertThrows;
 import static seedu.modulink.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
-// import java.util.Arrays;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -38,8 +33,9 @@ import seedu.modulink.model.person.Person;
 import seedu.modulink.model.person.Phone;
 import seedu.modulink.model.person.StudentId;
 import seedu.modulink.model.tag.Mod;
-import seedu.modulink.testutil.EditPersonDescriptorBuilder;
 import seedu.modulink.testutil.PersonBuilder;
+
+// import java.util.Arrays;
 
 public class CreateCommandTest {
 
