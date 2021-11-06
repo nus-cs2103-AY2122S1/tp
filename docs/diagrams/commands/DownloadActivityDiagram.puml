@@ -7,10 +7,10 @@ start
 
 if (data is present) then ([command downloads data])
     : user selects destination folder;
-    : write ProgrammerError.json data to CSV format;
+    : write ProgrammerError.json data to CSV file;
     : display success pop-up message;
 else ([else])
-    : display unsuccessful pop-up message;
+    : display error pop-up message;
 endif
 stop
 @enduml
