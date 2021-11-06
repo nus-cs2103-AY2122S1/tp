@@ -7,8 +7,6 @@ title: Wu Xiao Yun's Project Portfolio Page
 
 Tuition Address Book (TAB) is an all-in-one desktop application for 1-to-1 private home tutors that helps to keep track of their students and their respective lesson information Everything on TAB can be done without ever leaving the keyboard! and empower tutors to provide the best quality home tuition service. TAB helps users manage students’ contact details faster than a typical mouse/GUI driven app.
 
-
-
 Given below are my contributions to the project.
 
 * **New Feature**: Added a tag command that allows users to view all existing tags in TAB.
@@ -24,7 +22,7 @@ Given below are my contributions to the project.
   * Highlights: This feature complements the Calendar feature. While users can view the sequence of lessons in a systematic manner using the various calendar views, they can only see the student name, subject and type of the lessons in the calendar views.
     Having the reminder command allows users to see the homework as well as outstanding fees for the lessons, if any. 
     This could aid in reminding users to prepare the materials and/or collect fees from their students.
-
+  
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=f13-3&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=Xiaoyunnn&tabRepo=AY2122S1-CS2103T-F13-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false&zFR=false)
 
 * **Enhancements to existing features**:
@@ -47,3 +45,9 @@ Given below are my contributions to the project.
 * **Community**:
     * PRs reviewed (with non-trivial review comments): [\#67](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/67), [\#73](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/73), [\#107](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/107), [\#123](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/123), [\#134](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/134), [\#183](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/183), [\#223](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/223), [\#276](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/276), [\#278](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/278), [\#279](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/279), [\#280](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/280), [\#307](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/307), [\#311](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/311).
 
+#### Contribution to User Guide
+Given below is an excerpt from TAB's [User Guide](/UserGuide) detailing instructions on how to use the new `remind` feature I added.
+
+
+#### Contribution to User Guide
+Given below is an excerpt from TAB's [Developer Guide](/DeveloperGuide) detailing the implementation of the new `tag` and `remind` features I added.
