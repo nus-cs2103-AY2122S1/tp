@@ -1324,6 +1324,27 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+#### Finding a student
+
+1. Finding a student while all students are being shown
+   
+    * Prerequisites: List all students using the `list` command. Multiple "Students" in the list.
+
+    * Test case: `find c`<br>
+        Expected: All students whose name that starts with the letter `c` are shown in 
+   the student list. Lesson list will not be changed. No student shown if there is no student whose name starts with 
+   the letter `c`. An update message showing the number of students found will also be shown in the 
+   message box.<br>_note that both first and last name of the student will be checked, to see if the student's name consists the letter `c`._
+   
+    * Test case: `find Alex`<br>
+        Expected: All students whose name consists of `Alex` are shown in the student list. Lesson list will not be
+   changed. No student shown if there is no student whose name consists of `Alex`. An update message showing 
+   the number of students found will also be shown in the message box. <br>_note that both the first and last name of the student will be checked, to see if the student's name consists of `Alex`._
+
+    * Test case: `find -`, `find .`, `find '`<br>
+      Expected: No student will be found since name should only contain alphanumeric characters and spaces.
+   
+
 #### Filtering
 
 1. Filtering by grade
