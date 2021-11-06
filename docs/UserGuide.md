@@ -629,8 +629,8 @@ If your changes to the data file makes the data format invalid, RecruitIn will r
         * EMPLOYMENT_TYPE parameters such as `Long term` are not acceptable.
     
 * ##### EXPECTED_SALARY `s/`
-    * An EXPECTED_SALARY parameter should only be **non-negative integers**.
-        * Non-negative integers are defined as integers (no decimals or fractions) that range from 0 to 2^(31) - 1 inclusive.
+    * An EXPECTED_SALARY parameter should only be **non-negative whole numbers**.
+        * An EXPECTED_SALARY can range from 0 to 2^(31) - 1 inclusive.
     * For example:
         * EXPECTED_SALARY parameters such as `0` and `3500` are acceptable.
         * EXPECTED_SALARY parameters such as `-600` and `~350` are not acceptable.
