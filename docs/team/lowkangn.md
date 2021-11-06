@@ -11,12 +11,12 @@ and the details of their participants. It does not handle communication between 
 Given below are my contributions to the project.
 
 * **New Feature**: `Mark an Event as Done`
-    * What it does: Allow users to mark a specific event as done, implying that it has concluded or passed.
+    * What it does: Allows users to mark a specific event as done, implying that it has concluded or passed.
     * Justification: After an event has passed, users may want to mark it as done so that they can be certain that 
       the event was conducted and concluded.
 
 * **New Feature**: `View a Participant's details`
-    * What it does: Allow users to view the detailed information of a participant in the list, including the list of 
+    * What it does: Allows users to view the detailed information of a participant in the list, including the list of 
       events the participant is attending.
     * Justification: After many events and participants have been added to Managera, users may want to recall which 
     events a certain participant is enrolled in to make plans for their upcoming schedules.
