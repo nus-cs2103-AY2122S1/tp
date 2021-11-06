@@ -7,6 +7,7 @@ import static seedu.anilist.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.anilist.logic.parser.CliSyntax.PREFIX_STATUS;
 
 import seedu.anilist.logic.commands.exceptions.CommandException;
+import seedu.anilist.logic.parser.Prefix;
 import seedu.anilist.model.Model;
 import seedu.anilist.model.anime.Anime;
 
@@ -32,6 +33,10 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New anime added: %1$s";
     public static final String MESSAGE_DUPLICATE_ANIME = "This anime already exists in the anime list";
+
+    public static final Prefix[] REQUIRED_PREFIXES = new Prefix[] {PREFIX_NAME};
+    public static final Prefix[] OPTIONAL_PREFIXES = new Prefix[] {PREFIX_EPISODE, PREFIX_STATUS, PREFIX_GENRE};
+    public static final boolean REQUIRES_PREAMBLE = false;
 
     private final Anime toAdd;
 

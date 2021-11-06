@@ -11,6 +11,7 @@ import java.util.Set;
 import seedu.anilist.commons.core.Messages;
 import seedu.anilist.commons.core.index.Index;
 import seedu.anilist.logic.commands.exceptions.CommandException;
+import seedu.anilist.logic.parser.Prefix;
 import seedu.anilist.model.Model;
 import seedu.anilist.model.anime.Anime;
 import seedu.anilist.model.anime.Episode;
@@ -32,6 +33,10 @@ public class UpdateStatusCommand extends Command {
 
     public static final String MESSAGE_UPDATE_ANIME_STATUS_SUCCESS = "Updated Anime status: %1$s";
     public static final String MESSAGE_NOT_EDITED = "A new status should be provided.";
+
+    public static final Prefix[] REQUIRED_PREFIXES = new Prefix[] {PREFIX_STATUS};
+    public static final Prefix[] OPTIONAL_PREFIXES = new Prefix[] {};
+    public static final boolean REQUIRES_PREAMBLE = true;
 
     private final Index index;
     private final UpdateStatusCommand.StatusDescriptor statusDescriptor;

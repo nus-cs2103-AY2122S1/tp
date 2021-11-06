@@ -11,6 +11,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.anilist.commons.core.index.Index;
+import seedu.anilist.logic.parser.Prefix;
 import seedu.anilist.model.genre.Genre;
 
 /**
@@ -36,6 +37,10 @@ public abstract class GenreCommand extends Command {
             + PREFIX_ACTION + "delete "
             + PREFIX_GENRE + "Fantasy "
             + PREFIX_GENRE + "Action";
+
+    public static final Prefix[] REQUIRED_PREFIXES = new Prefix[] {PREFIX_ACTION, PREFIX_GENRE};
+    public static final Prefix[] OPTIONAL_PREFIXES = new Prefix[] {};
+    public static final boolean REQUIRES_PREAMBLE = true;
 
     private final GenreCommand.GenresDescriptor genresDescriptor;
     private final Index index;
