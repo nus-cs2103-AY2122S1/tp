@@ -17,7 +17,7 @@ public class AddTaskCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = "Format: " + COMMAND_WORD
-            + " " + PREFIX_TASK_DESCRIPTION +  "DESCRIPTION "
+            + " " + PREFIX_TASK_DESCRIPTION + "DESCRIPTION "
             + "[" + PREFIX_TASK_DATE + "DATE] "
             + "[" + PREFIX_TASK_DATE + "TIME] "
             + "[" + PREFIX_TASK_DATE + "DATE, TIME] "
