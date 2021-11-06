@@ -1,16 +1,24 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.io.IOException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
@@ -32,6 +40,97 @@ public class StorageManagerTest {
 
     private Path getTempFilePath(String fileName) {
         return testFolder.resolve(fileName);
+    }
+
+    @Test
+    public void getUserProfilePath_samePath_success() {
+        Path expectedPath = Paths.get("userprofile.json");
+        assertEquals(expectedPath, storageManager.getUserProfilePath());
+    }
+
+    @Test
+    public void getUserProfilePath_differentPath_failure() {
+        Path expectedPath = Paths.get("userprofile2.json");
+        assertNotEquals(expectedPath, storageManager.getUserProfilePath());
+    }
+
+    @Test
+    public void readUserProfile_correctPath_success() {
+        JsonUserProfileStorage userProfileStorage = new JsonUserProfileStorage();
+        try {
+            assertEquals(storageManager.readUserProfile(), userProfileStorage.readUserProfile());
+        } catch (Exception e) {
+            assertNotNull(e);
+        }
+    }
+
+    @Test
+    public void readUserProfile_wrongPath_failure() {
+        JsonUserProfileStorage userProfileStorage = new JsonUserProfileStorage();
+        Path expectedPath = Paths.get("userprofile2.json");
+        try {
+            assertNotEquals(storageManager.readUserProfile(), userProfileStorage.readUserProfile(expectedPath));
+        } catch (Exception e) {
+            assertNotNull(e);
+        }
+    }
+
+    @Test
+    public void saveUserProfile_correctPath_success() {
+        JsonUserProfileStorage userProfileStorage = new JsonUserProfileStorage();
+        Path profileFilePath = Paths.get("userprofile.json");
+        Optional<JsonSerializableUserProfile> userProfile;
+        try {
+            userProfile = JsonUtil.readJsonFile(profileFilePath,
+                    JsonSerializableUserProfile.class);
+            try {
+                storageManager.saveUserProfile(userProfile.get());
+            } catch (IOException e) {
+                assertNull(e);
+            }
+        } catch (DataConversionException dce) {
+            assertNull(dce);
+        }
+    }
+
+    @Test
+    public void saveUserProfile_wrongPath_success() {
+        JsonUserProfileStorage userProfileStorage = new JsonUserProfileStorage();
+        Path profileFilePath = Paths.get("userprofile2.json");
+        Optional<JsonSerializableUserProfile> userProfile;
+        try {
+            userProfile = JsonUtil.readJsonFile(profileFilePath,
+                    JsonSerializableUserProfile.class);
+            try {
+                storageManager.saveUserProfile(userProfile.get());
+            } catch (IOException e) {
+                assertNull(e);
+            }
+        } catch (DataConversionException dce) {
+            assertNull(dce);
+        } catch (NoSuchElementException e) {
+            assertNotNull(e);
+        }
+    }
+
+    @Test
+    public void saveUserProfile_invalidFile_success() {
+        JsonUserProfileStorage userProfileStorage = new JsonUserProfileStorage();
+        Path profileFilePath = Paths.get("invalidUserProfile.json");
+        Optional<JsonSerializableUserProfile> userProfile;
+        try {
+            userProfile = JsonUtil.readJsonFile(profileFilePath,
+                    JsonSerializableUserProfile.class);
+            try {
+                storageManager.saveUserProfile(userProfile.get());
+            } catch (IOException e) {
+                assertNull(e);
+            }
+        } catch (DataConversionException dce) {
+            assertNotNull(dce);
+        } catch (NoSuchElementException e) {
+            assertNull(e);
+        }
     }
 
     @Test
@@ -66,4 +165,9 @@ public class StorageManagerTest {
         assertNotNull(storageManager.getAddressBookFilePath());
     }
 
+    @Test
+    public void readUserPrefsFilePath() {
+        Path wrongPath = Paths.get("src", "test", "data", "JsonUserPrefsStorageTest");
+        assertNotEquals(wrongPath, storageManager.getUserPrefsFilePath());
+    }
 }
