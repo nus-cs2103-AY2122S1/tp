@@ -65,7 +65,7 @@ loop until list of indices ends
 end
 
 loop until list of indices ends
-    UnmarkCommand -> Model: unmarkPerson(personToMark)
+    UnmarkCommand -> Model: unmarkPerson(personToUnmark)
     activate Model
     Model --> UnmarkCommand:
     deactivate Model
