@@ -103,6 +103,13 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
+<img src="images/WeekShiftsPaneClassDiagram.png" width="300" />
+
+The `Schedule view` subcomponent of the `UI` component,
+
+* displays 2 `SlotCard` for each `DayCard`
+* listens to changes in `Model` data to be updated with the modified data
+
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
@@ -184,6 +191,15 @@ The `Storage` component,
   the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
   that belong to the `Model`)
+
+<img src="images/StoragePersonDiagram.png" width="550" />
+
+The storage of `Person`,
+
+* can save all the details of a staff in `JsonAdaptedPerson`
+* depends on the `Model` component as it is in the `Storage` component
+
+
 
 ### Common classes
 
