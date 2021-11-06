@@ -12,6 +12,8 @@ import seedu.insurancepal.model.person.Revenue;
 
 public class RevenueCommandParser implements Parser<RevenueCommand> {
 
+    public static final String ILLEGAL_REVENUE_MESSAGE =
+            "The revenue is either missing or is in invalid format!";
     /**
      * Parses the given {@code String} of arguments in the context of the RevenueCommand
      * and returns a RevenueCommand object for execution.
@@ -31,9 +33,15 @@ public class RevenueCommandParser implements Parser<RevenueCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     RevenueCommand.COMMAND_WORD), ive);
         }
-
-        Revenue revenue = ParserUtil.parseRevenue(argMultimap.getValue(PREFIX_REVENUE).get());
-
+        Revenue revenue = argMultimap.getValue(PREFIX_REVENUE).map(s -> {
+                    try {
+                        return ParserUtil.parseRevenue(s);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                        return null;
+                    }
+                })
+                .orElseThrow(() -> new ParseException(ILLEGAL_REVENUE_MESSAGE));
         return new RevenueCommand(index, revenue);
     }
 }
