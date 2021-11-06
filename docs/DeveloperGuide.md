@@ -35,17 +35,23 @@ title: Developer Guide
   * [Delete a Student](#deleting-a-student)
   * [Saving Data](#saving-data)
 
+<br>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
 
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
+<br>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
+
+<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -144,6 +150,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model Component
+
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
@@ -162,7 +169,6 @@ The `Model` component,
 
 </div>
 
-
 ### Storage Component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
@@ -177,6 +183,8 @@ The `Storage` component,
 ### Common Classes
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
+
+<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -347,6 +355,18 @@ The following diagram summarizes what happens after user input search command:
 if command is valid. Command is invalid if user input is empty, or if user entered more or less than one flag.
 </div>
 
+#### Design considerations
+
+**Aspect: How search executes:**
+
+* **Alternative 1:** Multiple search commands to search using different identifiers.
+    * Pros: Easy to implement.
+    * Cons: Inconvenient for user to remember different command words.
+
+* **Alternative 2 (current choice):** Single search command to perform search for multiple identifiers.
+    * Pros: More straightforward and convenient for users.
+    * Cons: We need to identify the type of input given.
+
 ### Show : `show`
 
 The `show` feature allows users to show the performance analysis of a student, a group or the cohort in an assessment.
@@ -373,19 +393,9 @@ The following activity diagrams summarise what happens when a user executes the 
 
 The following sequence diagram summarises what happens when the user inputs an `show` command together with a student specified by name.
 
-![AddGroupSequenceDiagram](images/ShowSequenceDiagram.png)
+![ShowSequenceDiagram](images/ShowSequenceDiagram.png)
 
-#### Design considerations
-
-**Aspect: How search executes:**
-
-* **Alternative 1:** Multiple search commands to search using different identifiers.
-    * Pros: Easy to implement.
-    * Cons: Inconvenient for user to remember different command words.
-
-* **Alternative 2 (current choice):** Single search command to perform search for multiple identifiers.
-    * Pros: More straightforward and convenient for users.
-    * Cons: We need to identify the type of input given.
+<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -396,6 +406,8 @@ The following sequence diagram summarises what happens when the user inputs an `
 * [Logging guide](Logging.md)
 * [Configuration guide](Configuration.md)
 * [DevOps guide](DevOps.md)
+
+<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -480,7 +492,6 @@ Others:
 | `*`  | Forgetful user | Have reminders about upcoming meetings | Avoid missing any important events |
 | `*`  | CS1101S Professor | Add TODO bug fixes accumulated throughout the semester | Fix them during CP3108 |
 
-
 ### Use cases
 
 (For all use cases below, the **System** is `Source Control` and the **Actor** is the `user`, unless specified otherwise)
@@ -545,6 +556,8 @@ Others:
 * **Score**: The score that a student has attained for an assessment, stored in percentage and can be recorded up to 2 decimal places. Each student can only have 1 score per assessment.
 * **Student list**: The list of students displayed on the right panel of Source Control. Student list can be filtered to display selected students only.
 * **Flag**: Arguments flags are used to indicate different types of user inputs e.g. `-n` for student name, and `-g` for group. More about flags can be found [here](https://ay2122s1-cs2103t-w08-2.github.io/tp/UserGuide.html#glossary).
+
+<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
