@@ -510,8 +510,8 @@ _{more aspects and alternatives to be added}_
 CS2100 TAs who
 
 * have to manage a number of students across different classes
-* keep track of the students' attendance
-* keep track of the students' emails
+* keep track of the students' lab results 
+* keep track of the students' details (eg. studentId, email)
 * prefer and comfortable with CLI tools
 * can type fast
 * are proficient with Unix commands
@@ -520,10 +520,7 @@ CS2100 TAs who
 **Value proposition**:
 
 CS2100 TAs who use ProgrammerError enjoys greater productivity and efficiency when managing his/her classes of students.
-<<<<<<< HEAD
 
-=======
-> > > > > > > master
 
 ### User stories
 
@@ -683,7 +680,7 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
 **MSS**
 
-1. CS2100 TA creates (UC2) / views (UC3) / delete (UC4) / update (UC5) a student record
+1. CS2100 TA <ins>creates (UC2) </ins> /  <ins>views (UC3) </ins> /  <ins>delete (UC4) </ins> /  <ins>update (UC5) </ins> a student record
 2. CS2100 TA requests to list student records
 3. ProgrammerError automatically sort the changed student records
 
@@ -693,7 +690,7 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
 **MSS**
 
-1. CS2100 TA creates (UC2) / views (UC3) / delete (UC4) / update (UC5) a student record
+1. CS2100 TA <ins>creates (UC2) </ins> /  <ins>views (UC3) </ins> /  <ins>delete (UC4) </ins> /  <ins>update (UC5) </ins> a student record
 2. ProgrammerError automatically save the changed student records to hard disk
 3. CS2100 TA restarts the application
 4. ProgrammerError shows the saved data
