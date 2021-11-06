@@ -45,7 +45,7 @@ public class ParserUtil {
         ArrayList<Index> indexList = new ArrayList<>();
         String trimmedIndices = oneBasedIndices.trim();
 
-        String[] trimmedIndicesArr = trimmedIndices.split("\\s");
+        String[] trimmedIndicesArr = trimmedIndices.split("\\s+");
 
         for (String trimmedIndex : trimmedIndicesArr) {
             if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
