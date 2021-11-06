@@ -26,7 +26,7 @@ activate addEmployeeCommandParser
 addEmployeeCommandParser --[LOGIC_COLOR]> rhrhParser
 deactivate addEmployeeCommandParser
 
-rhrhParser -[LOGIC_COLOR]> addEmployeeCommandParser :"parse(n/John Doe...)"
+rhrhParser -[LOGIC_COLOR]> addEmployeeCommandParser :parse(n/John Doe...)
 activate addEmployeeCommandParser
 
 create command
