@@ -100,8 +100,6 @@ public class CommandTestUtil {
             " " + CliSyntax.PREFIX_LESSON_CAPACITY + "911.1"; // must be integer
     public static final String INVALID_PRICE_DESC =
             " " + CliSyntax.PREFIX_LESSON_PRICE + "911.123"; // too many decimal places
-    public static final String INVALID_TIMING_DESC =
-            " " + CliSyntax.PREFIX_LESSON_TIMING + "&"; // only alphanumeric chars
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

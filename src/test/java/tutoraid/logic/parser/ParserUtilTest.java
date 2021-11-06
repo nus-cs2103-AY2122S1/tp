@@ -27,7 +27,6 @@ public class ParserUtilTest {
     private static final String INVALID_LESSON_NAME = "Maths&";
     private static final String INVALID_CAPACITY = "911.1";
     private static final String INVALID_PRICE = "911.123";
-    private static final String INVALID_TIMING = "&";
 
     private static final String VALID_LESSON_NAME = "Maths 2";
     private static final String VALID_CAPACITY = "40";
@@ -197,11 +196,6 @@ public class ParserUtilTest {
     @Test
     public void parseTiming_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseTiming((String) null));
-    }
-
-    @Test
-    public void parseTiming_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTiming(INVALID_TIMING));
     }
 
     @Test
