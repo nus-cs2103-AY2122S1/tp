@@ -520,9 +520,18 @@ Figure I.4.1 shows a sequence diagram of how viewing tags works.<br>
 
 ### Finding students
 
-The `FindCommand` allows users to find students based on person fields.
+The `FindCommand` allows users to find students based on person fields and lesson fields.
 
-**Current Implementation**
+Finding students is facilitated by the `PersonMatchesKeywordsPredicate`.
+* `PersonMatchesKeywordsPredicate` stores a list of keywords for each field that is being searched for.
+* It also stores a `FindCondition` which takes on one of the values `ALL`, `ANY`, or `NONE`, and defaults to `ALL`. It determines whether all, any or none of the fields specified are required to match with a given person, for the person to be returned.
+
+Given below is an example usage scenario and how the Find Command is executed:
+* **Step 1:** The user enters the `find` command with name keyword `John` and tag keyword `unpaid`.
+* **Step 2:** The `FindCommandParser` parses this command and creates a `PersonMatchesKeywordsPredicate` that stores the respective keywords for name and tag.
+* **Step 3:** This predicate is passed into the method `Model#updateFilteredPersonList`.
+* **Step 4:** When the `PersonMatchesKeywordsPredicate#test()` method is called, a predicate is created for each searched field, name and tag, which tests if the given person's fields contain all the specified keywords.
+* **Step 5:** All searched field predicates are composed into a single predicate, depending on the find condition. This composed predicate is then applied on the person to determine whether there is a match.
 
 ![Find Command](images/FindSequenceDiagram.png)
 
@@ -531,19 +540,7 @@ The `FindCommand` allows users to find students based on person fields.
 ![Find Command Continued](images/FindUpdateFilteredListLogicSequenceDiagram.png)
 *Figure I.3.3.3: Continued Sequence Diagram of Find Command*
 
-
-The user can specify multiple fields to search for and some fields may accept multiple keywords.
-
-The `PersonMatchesKeywordsPredicate` is used to test whether a person matches the specified keywords.
-For each searchable field, a predicate is created which tests if a given person's field contains all specified keywords.
-
-Additionally, a `FindCondition` can be specified by the user which determines whether `all`, `any` or `none` of the fields specified are required to match with a given person, for the person to be returned. The default is `all`.
-
-The `PersonMatchesKeywordsPredicate#test()` method will compose all searched field predicates into a single predicate, depending on the find condition.
-The predicate is then used to filter the list of person.
-
-
-**Design considerations:**
+#### Design considerations:
 
 **Aspect: Data structure of predicates**
 * **Alternative 1 (current choice):** Use a single `PersonMatchesKeywordsPredicate` class to represent all fields' predicates.
