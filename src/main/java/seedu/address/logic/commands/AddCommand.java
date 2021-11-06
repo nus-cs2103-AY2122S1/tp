@@ -85,7 +85,7 @@ public class AddCommand extends Command {
             Item newItem = toAddDescriptor.buildItem();
             model.addItem(newItem);
 
-            model.addCostBookKeeping(newItem.getCostPrice() * newItem.getCount());
+            model.addCostBookKeeping(newItem.getCostPrice(), newItem.getCount());
 
             return new CommandResult(String.format(MESSAGE_SUCCESS_NEW, newItem));
         }
@@ -136,7 +136,7 @@ public class AddCommand extends Command {
         Item target = matchingItems.get(0);
         int amount = toAddDescriptor.getCount().get();
         model.restockItem(target, amount);
-        model.addCostBookKeeping(amount * target.getCostPrice());
+        model.addCostBookKeeping(target.getCostPrice(), amount);
         String replenishedMessage = String.format(MESSAGE_SUCCESS_REPLENISH, amount, target.getName());
         if (extraCostFlags) {
             return new CommandResult(replenishedMessage + "\n" + MESSAGE_EXTRA_PRICE_FLAGS);

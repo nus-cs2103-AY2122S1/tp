@@ -341,30 +341,26 @@ public class ModelManager implements Model {
 
     @Override
     public void transactAndCloseOrder() {
-        transactAndClearOrder(userPrefs.getTransactionFilePath());
+        transactAndClearOrder();
     }
 
     /**
      * Helper TransactAndClearOrder with given path (for testing purposes)
      * Model must have an unclosed order. The order must have at least 1 item.
-     * @param path the path of the file
      */
-    public void transactAndClearOrder(Path path) {
+    public void transactAndClearOrder() {
         assert hasUnclosedOrder();
         assert !optionalOrder.get().isEmpty();
 
         TransactionRecord transaction = inventory.transactOrder(optionalOrder.get());
 
         transactions.add(transaction);
-        Double totalRevenue = transaction.getOrderItems().stream()
-                .map(i -> i.getCount() * i.getSalesPrice())
-                .reduce(0.0, (subTotal, next) -> subTotal + next);
-
-        addRevenueBookKeeping(totalRevenue);
+        transaction.getOrderItems().stream()
+                .forEach(item -> addRevenueBookKeeping(item.getSalesPrice(), item.getCount()));
 
         closeOrder();
 
-        logger.fine(TRANSACTION_LOGGING_MSG + transaction.toString());
+        logger.fine(TRANSACTION_LOGGING_MSG + transaction);
     }
 
     @Override
@@ -380,27 +376,16 @@ public class ModelManager implements Model {
 
     //=========== BookKeeping ================================================================================
 
-    /**
-     * Add cost to bookKeeping.
-     *
-     * @param cost cost to add.
-     */
-    public void addCostBookKeeping(Double cost) {
-        bookKeeping.addCost(cost);
+    @Override
+    public void addCostBookKeeping(Double revenue, int amount) {
+        bookKeeping.addCost(revenue, amount);
     }
 
-    /**
-     * Add revenue to bookKeeping.
-     *
-     * @param revenue revenue to add.
-     */
-    public void addRevenueBookKeeping(Double revenue) {
-        bookKeeping.addRevenue(revenue);
+    @Override
+    public void addRevenueBookKeeping(Double revenue, int amount) {
+        bookKeeping.addRevenue(revenue, amount);
     }
 
-    /**
-     * Reinitialise bookKeeping.
-     */
     @Override
     public void initialiseBookKeeping() {
         bookKeeping.initialise();

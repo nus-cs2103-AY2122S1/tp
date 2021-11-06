@@ -1,21 +1,21 @@
 package seedu.address.model;
 
 public class BookKeeping implements ReadOnlyBookKeeping {
+
+    public static final double LIMIT = 999999999;
+
     private Double revenue;
     private Double cost;
-    private Double profit;
 
     /**
      * Constructor for BookKeeping.
      *
      * @param revenue Current revenue.
      * @param cost Current cost.
-     * @param profit Current profit.
      */
-    public BookKeeping(Double revenue, Double cost, Double profit) {
+    public BookKeeping(Double revenue, Double cost) {
         this.revenue = revenue;
         this.cost = cost;
-        this.profit = profit;
     }
 
     /**
@@ -26,11 +26,10 @@ public class BookKeeping implements ReadOnlyBookKeeping {
     public BookKeeping(ReadOnlyBookKeeping bookKeeping) {
         this.revenue = bookKeeping.getRevenue();
         this.cost = bookKeeping.getCost();
-        this.profit = bookKeeping.getProfit();
     }
 
     public BookKeeping() {
-        this(0.0, 0.0, 0.0);
+        this(0.0, 0.0);
     }
 
     public Double getRevenue() {
@@ -42,27 +41,33 @@ public class BookKeeping implements ReadOnlyBookKeeping {
     }
 
     public Double getProfit() {
-        return profit;
+        return this.revenue - this.cost;
     }
 
     /**
-     * Add cost to bookKeeping.
+     * Add cost to bookKeeping. Total cost is capped at $999,999,999.
      *
-     * @param cost cost to add.
+     * @param cost cost of buying the item.
+     * @param amount of item to add.
      */
-    public void addCost(Double cost) {
-        this.cost += cost;
-        this.profit -= cost;
+    public void addCost(Double cost, Integer amount) {
+        Double amountToAdd = cost * amount;
+
+        this.cost += amountToAdd;
+        this.cost = Math.min(this.cost, LIMIT);
     }
 
     /**
-     * Add revenue to bookKeeping.
+     * Add revenue to bookKeeping. Total revenue is capped at $999,999,999.
      *
-     * @param revenue revenue to add.
+     * @param revenue revenue of selling the item.
+     * @param amount of item to add.
      */
-    public void addRevenue(Double revenue) {
-        this.revenue += revenue;
-        this.profit += revenue;
+    public void addRevenue(Double revenue, Integer amount) {
+        Double amountToAdd = revenue * amount;
+
+        this.revenue += amountToAdd;
+        this.revenue = Math.min(this.revenue, LIMIT);
     }
 
     /**
@@ -71,7 +76,6 @@ public class BookKeeping implements ReadOnlyBookKeeping {
     public void initialise() {
         this.revenue = 0.0;
         this.cost = 0.0;
-        this.profit = 0.0;
     }
 
     @Override
@@ -89,7 +93,6 @@ public class BookKeeping implements ReadOnlyBookKeeping {
         // state check
         BookKeeping other = (BookKeeping) obj;
         return revenue.equals(other.revenue)
-                && profit.equals(other.profit)
                 && cost.equals(other.cost);
     }
 }
