@@ -20,6 +20,7 @@
       <padding>
         <Insets top="5" right="5" bottom="5" left="15" />
       </padding>
+
       <HBox spacing="5" alignment="CENTER_LEFT">
         <Label fx:id="id" styleClass="cell_big_label">
           <minWidth>
@@ -27,13 +28,14 @@
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
-        <Label fx:id="name" text="\$first" styleClass="cell_big_label" maxWidth="500"/>
+        <Label fx:id="name" text="\$first" styleClass="cell_big_label" maxWidth="500" />
         <Region HBox.hgrow="ALWAYS" />
-        <Label text="Case No: " id="nokParticulars"/>
-        <Label fx:id="caseNumber"/>
+        <Label text="Case No: " id="nokParticulars" />
+        <Label fx:id="caseNumber" />
       </HBox>
+
       <HBox HBox.hgrow="ALWAYS">
-        <VBox id="personalParticularsBlock" minWidth="290" HBox.hgrow="ALWAYS">
+        <VBox id="personalParticularsBlock" minWidth="320" maxWidth="320" HBox.hgrow="NEVER">
           <Label fx:id="personalParticulars" text="Personal Particulars" />
 
           <HBox fx:id="phoneHBox" alignment="CENTER_LEFT">
@@ -46,7 +48,7 @@
                 <Image url="@/images/phone_icon.png" />
               </image>
             </ImageView>
-            <Region minWidth="5" HBox.hgrow="NEVER"/>
+            <Region minWidth="5" HBox.hgrow="NEVER" />
             <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
           </HBox>
 
@@ -74,7 +76,7 @@
                 <Image url="@/images/email_icon.png" />
               </image>
             </ImageView>
-            <Region minWidth="5" HBox.hgrow="NEVER"/>
+            <Region minWidth="5" HBox.hgrow="NEVER" />
             <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
           </HBox>
 
@@ -102,7 +104,7 @@
                 <Image url="@/images/shn_address_icon.png" />
               </image>
             </ImageView>
-            <Region minWidth="5" HBox.hgrow="NEVER"/>
+            <Region minWidth="5" HBox.hgrow="NEVER" />
             <Label fx:id="quarantineAddress" styleClass="cell_small_label" text="\@placeholder" />
           </HBox>
 
@@ -116,61 +118,63 @@
                 <Image url="@/images/shn_period_icon.png" />
               </image>
             </ImageView>
-            <Region minWidth="5" HBox.hgrow="NEVER"/>
+            <Region minWidth="5" HBox.hgrow="NEVER" />
             <Label fx:id="shnPeriod" styleClass="cell_small_label" text="\@placeholder" />
           </HBox>
         </VBox>
 
         <Region minWidth="10" HBox.hgrow="NEVER"/>
 
-        <VBox fx:id="nextOfKinBlock" minWidth="290" HBox.hgrow="ALWAYS">
-          <Label id="nokParticulars" text="Next-Of-Kin Particulars" />
+        <HBox minWidth="320" maxWidth="320">
+          <VBox fx:id="nextOfKinBlock" minWidth="320" HBox.hgrow="NEVER">
+            <Label id="nokParticulars" text="Next-Of-Kin Particulars" />
 
-          <HBox fx:id="nextOfKinNameHBox" alignment="CENTER_LEFT">
-            <ImageView
-                    fitHeight="10.0"
-                    fitWidth="10.0"
-                    smooth="false"
-                    HBox.hgrow="NEVER" >
-              <image>
-                <Image url="@/images/track2gather_icon.png" />
-              </image>
-            </ImageView>
-            <Region minWidth="5" HBox.hgrow="NEVER"/>
-            <Label fx:id="nextOfKinName" styleClass="cell_small_label" text="\@placeholder" />
-          </HBox>
+            <HBox fx:id="nextOfKinNameHBox" alignment="CENTER_LEFT">
+              <ImageView
+                      fitHeight="10.0"
+                      fitWidth="10.0"
+                      smooth="false"
+                      HBox.hgrow="NEVER" >
+                <image>
+                  <Image url="@/images/track2gather_icon.png" />
+                </image>
+              </ImageView>
+              <Region minWidth="5" HBox.hgrow="NEVER"/>
+              <Label fx:id="nextOfKinName" styleClass="cell_small_label" text="\@placeholder" />
+            </HBox>
 
-          <HBox fx:id="nextOfKinPhoneHBox" alignment="CENTER_LEFT">
-            <ImageView
-                    fitHeight="10.0"
-                    fitWidth="10.0"
-                    smooth="false"
-                    HBox.hgrow="NEVER" >
-              <image>
-                <Image url="@/images/phone_icon.png" />
-              </image>
-            </ImageView>
-            <Region minWidth="5" HBox.hgrow="NEVER"/>
-            <Label fx:id="nextOfKinPhone" styleClass="cell_small_label" text="\@placeholder" />
-          </HBox>
+            <HBox fx:id="nextOfKinPhoneHBox" alignment="CENTER_LEFT">
+              <ImageView
+                      fitHeight="10.0"
+                      fitWidth="10.0"
+                      smooth="false"
+                      HBox.hgrow="NEVER" >
+                <image>
+                  <Image url="@/images/phone_icon.png" />
+                </image>
+              </ImageView>
+              <Region minWidth="5" HBox.hgrow="NEVER" />
+              <Label fx:id="nextOfKinPhone" styleClass="cell_small_label" text="\@placeholder" />
+            </HBox>
 
-          <HBox fx:id="nextOfKinAddressHBox" alignment="CENTER_LEFT">
-            <ImageView
-                    fitHeight="10.0"
-                    fitWidth="10.0"
-                    smooth="false"
-                    HBox.hgrow="NEVER" >
-              <image>
-                <Image url="@/images/home_icon.png" />
-              </image>
-            </ImageView>
-            <Region minWidth="5" HBox.hgrow="NEVER"/>
-            <Label fx:id="nextOfKinAddress" styleClass="cell_small_label" text="\@placeholder" />
-          </HBox>
+            <HBox fx:id="nextOfKinAddressHBox" alignment="CENTER_LEFT">
+              <ImageView
+                      fitHeight="10.0"
+                      fitWidth="10.0"
+                      smooth="false"
+                      HBox.hgrow="NEVER" >
+                <image>
+                  <Image url="@/images/home_icon.png" />
+                </image>
+              </ImageView>
+              <Region minWidth="5" HBox.hgrow="NEVER"/>
+              <Label fx:id="nextOfKinAddress" styleClass="cell_small_label" text="\@placeholder" />
+            </HBox>
 
-        </VBox>
+          </VBox>
+        </HBox>
 
-        <Region minWidth="10" HBox.hgrow="ALWAYS"/>
+        <Region minWidth="10" HBox.hgrow="NEVER"/>
 
         <HBox minWidth="120" maxWidth="120" HBox.hgrow="NEVER">
           <VBox fx:id="callStatusBlock" minWidth="120" HBox.hgrow="NEVER">
