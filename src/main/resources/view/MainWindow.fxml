@@ -28,7 +28,7 @@
       </stylesheets>
 
       <VBox prefHeight="630.0" prefWidth="650.0" styleClass="background">
-            <HBox prefHeight="43.0" prefWidth="126.0" style="-fx-background-color: FFFFFF;">
+            <HBox prefHeight="43.0" prefWidth="126.0" style="-fx-background-color: #5BC8AF;">
                <children>
                   <ImageView fitHeight="58.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -98,7 +98,7 @@
                </children>
             </HBox>
 
-              <StackPane fx:id="commandBoxPlaceholder" prefHeight="66.0" prefWidth="799.0" styleClass="background">
+              <StackPane fx:id="commandBoxPlaceholder" prefHeight="66.0" prefWidth="799.0" styleClass="pane-with-border">
           <padding>
             <Insets bottom="5" left="10" right="10" top="5" />
           </padding>

@@ -6,14 +6,14 @@
 .label {
     -fx-font-size: 11pt;
     -fx-font-family: "Verdana Semibold";
-    -fx-text-fill: #FFFFFF;
+    -fx-text-fill: #000000;
     -fx-opacity: 0.9;
 }
 
 .label-bright {
     -fx-font-size: 11pt;
     -fx-font-family: "Verdana Semibold";
-    -fx-text-fill: white;
+    -fx-text-fill: black;
     -fx-opacity: 1;
 }
 
@@ -103,15 +103,15 @@
  * Applicant & Position cell bkg colors
  */
 .list-cell:filled:even {
-    -fx-background-color: #2A4858;
+    -fx-background-color: #00218A;
 }
 
 .list-cell:filled:odd {
-    -fx-background-color: #425F6D;
+    -fx-background-color: #535EEB;
 }
 
 .list-cell:filled:selected {
-    -fx-background-color: #424d5f;
+    -fx-background-color: #B030B0;
 }
 
 .list-cell:filled:selected #cardPane {
@@ -149,8 +149,8 @@
  * Change border colors (those around panels).
  */
 .pane-with-border {
-     -fx-background-color: derive(#1d1d1d, 20%);
-     -fx-border-color: derive(#1d1d1d, 10%);
+     -fx-background-color: derive(#BDBDFD, 20%);
+     -fx-border-color: #000000;
      -fx-border-top-width: 1px;
 }
 
