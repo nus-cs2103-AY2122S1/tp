@@ -3,9 +3,7 @@ package tutoraid.model.lesson;
 import static tutoraid.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
-import java.util.Optional;
 
-import tutoraid.model.ModelManager;
 import tutoraid.model.lesson.exceptions.LessonExceedCapacityException;
 import tutoraid.model.student.Student;
 

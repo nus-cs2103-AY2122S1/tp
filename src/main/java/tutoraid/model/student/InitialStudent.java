@@ -54,6 +54,15 @@ public class InitialStudent {
         return student;
     }
 
+    /**
+     * Finds lessons by a lesson name and creates the dependency between the Lesson object and the Student object.
+     *
+     * @param lessonName The name of the lesson
+     * @param fullLessonList The list of all lessons
+     * @param lessons The lessons object of the Student
+     * @param student The Student object involved in the dependency
+     * @throws IOException if there are too many students in a lesson (over-capacity)
+     */
     public void addStudentLessonLink(String lessonName, List<Lesson> fullLessonList, Lessons lessons, Student student)
             throws IOException {
         for (Lesson lesson : fullLessonList) {
