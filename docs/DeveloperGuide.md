@@ -638,6 +638,7 @@ The following sequence diagram shows the above implementation:
 
 ![HistoryCommandSequenceDiagram](images/dg/logic/commands/historycommand/HistoryCommandSequenceDiagram.png)
 
+Note that the above diagram is omits several details but should be sufficient to grasp how `HistoryCommand` works.
 
 #### Limitation
 The current implementation can only show two commit branches: `MAIN` and `OLD`. While this is
@@ -671,14 +672,19 @@ serve the aforementioned purpose.
 
 The following sequence diagram shows the above implementation:
 
-{Add IMAGE}
+![RevertCommandSequenceDiagram](images/dg/logic/commands/revertcommand/RevertCommandSequenceDiagram.png)
+
+Note that the above diagram is incomplete; it is approximately accurate but is sufficient to help explain the limitation
+of `RevertCommand`, as in below. 
 
 #### Limitation
 Because `RevertCommand` has to restore academy directory data which is the responsibility of the
-`Storage` component, `RevertCommand` reinitialize a `Storage` and `VersionedModel` and changes the 
-current `VersionedModel` reference to the newly created `VersionedModel`. This is (highly) not 
-ideal, but the implementer has no idea how to do this properly without the ungodly reinitialization
-of `Storage` and `VersionedModel`...
+`Storage` component, `RevertCommand` creates a `StorageManager` and uses it to load data from disk 
+and set the current `VersionedModel` internal data to the newly reloaded data. This is indicated in the sequence diagram
+as the sudden use of `Storage` component directly from `RevertCommand`. This is (highly) not 
+ideal, but the implementer has no idea how to do this properly i.e. without sudden creation of a new `StorageManager`
+... Right now the solution is to ensure that this newly created `StorageManager` is destroyed immediately to prevent
+access from elsewhere, and to put this limitation in this documentation to be solved one day. 
 
 ### UndoCommand
 This command undoes a change done to the underlying `AcademyDirectory` data. Note that this is
