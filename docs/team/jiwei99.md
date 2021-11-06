@@ -43,14 +43,15 @@ Given below are my contributions to the project.
 
 * **Enhancements to existing feature**: Added unit test for functions.
   * Added unit tests to for new and existing features to increase test coverage.
+  * Features include `Help`, `Untag` and `Command History`.
  
  
 * **Documentation**:
   * User Guide:
-      * Updated and refactored User Guide to align with features of CONNECTIONS ([\#20](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/20))
-      * Added documentation for BIRTHDAY parameter ([\#20](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/20))
-      * Added documentation for the `Tag`, `Untag` and `Help` commands ([\#20](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/20), [\#112](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/112))
-      * Added documentation for `Command History` and `Command Assistant` features ([\#112](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/112))
+    * Updated and refactored User Guide to align with features of CONNECTIONS ([\#20](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/20))
+    * Added documentation for BIRTHDAY parameter ([\#20](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/20))
+    * Added documentation for the `Tag`, `Untag` and `Help` commands ([\#20](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/20), [\#112](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/112))
+    * Added documentation for `Command History` and `Command Assistant` features ([\#112](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/112))
   * Developer Guide:
     * Added implementation for features `Tags`and `Help` ([\#94](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/94))
     * Added use case for `Help` feature ([\#94](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/94))
