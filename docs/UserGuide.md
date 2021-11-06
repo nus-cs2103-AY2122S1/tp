@@ -42,7 +42,7 @@ Welcome to the _TutAssistor User Guide_! Simply choose a topic below to find ans
    3.13 <a href="#313-navigate-input-history">Navigate Input History</a><br><br>
    3.14 <a href="#314-clear-data-clear">Clear data</a><br><br>
    3.15 <a href="#315-exit-the-app-exit">Exit the program</a><br><br>
-   3.16 <a href="#316-track-payment-coming-in-v20">Track payment `coming in v2.0`</a><br></details><br>
+   3.16 <a href="#316-track-payment-coming-in-v20" markdown="1">Track payment `coming in v2.0`</a><br></details><br>
 
 4. <details open><summary><a href="#4-additional-command-format-information">Additional Command Format Information</a></summary><br>
    4.1 <a href="#41-name">Name</a><br><br>
