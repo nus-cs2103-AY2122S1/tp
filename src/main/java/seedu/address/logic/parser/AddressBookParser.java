@@ -21,7 +21,7 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.ExportCommand;
-import seedu.address.logic.commands.FavouriteCommand;
+import seedu.address.logic.commands.FavoriteCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.GithubCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -30,7 +30,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ShowCommand;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.TelegramCommand;
-import seedu.address.logic.commands.UnfavouriteCommand;
+import seedu.address.logic.commands.UnfavoriteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 
@@ -46,8 +46,8 @@ public class AddressBookParser {
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
     private ArrayList<String> commandsWithDescription =
             new ArrayList<>(Arrays.asList(AddCommand.COMMAND_WORD, EditCommand.COMMAND_WORD,
-                    DeleteCommand.COMMAND_WORD, FavouriteCommand.COMMAND_WORD,
-                    UnfavouriteCommand.COMMAND_WORD, FindCommand.COMMAND_WORD, ExportCommand.COMMAND_WORD,
+                    DeleteCommand.COMMAND_WORD, FavoriteCommand.COMMAND_WORD,
+                    UnfavoriteCommand.COMMAND_WORD, FindCommand.COMMAND_WORD, ExportCommand.COMMAND_WORD,
                     ShowCommand.COMMAND_WORD, ImportCommand.COMMAND_WORD, TagCommand.COMMAND_WORD)
             );
     private ArrayList<String> commandsWithoutDescription =
@@ -93,10 +93,10 @@ public class AddressBookParser {
             return new EditCommandParser().parse(arguments);
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
-        case FavouriteCommand.COMMAND_WORD:
-            return new FavouriteCommandParser().parse(arguments);
-        case UnfavouriteCommand.COMMAND_WORD:
-            return new UnfavouriteCommandParser().parse(arguments);
+        case FavoriteCommand.COMMAND_WORD:
+            return new FavoriteCommandParser().parse(arguments);
+        case UnfavoriteCommand.COMMAND_WORD:
+            return new UnfavoriteCommandParser().parse(arguments);
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
         case ExportCommand.COMMAND_WORD:

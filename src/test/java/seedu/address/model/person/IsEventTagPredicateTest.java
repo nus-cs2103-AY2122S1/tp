@@ -33,7 +33,7 @@ public class IsEventTagPredicateTest {
     @Test
     public void equals_twoDifferentObjects_falseOutput() {
         IsEventTagPredicate eventTagPredicate = new IsEventTagPredicate();
-        IsFavouritePredicate favouritePredicate = new IsFavouritePredicate(false);
+        IsFavoritePredicate favouritePredicate = new IsFavoritePredicate(false);
         assertFalse(eventTagPredicate.equals(favouritePredicate));
     }
 

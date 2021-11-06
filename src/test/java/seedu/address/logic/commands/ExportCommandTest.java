@@ -223,12 +223,12 @@ public class ExportCommandTest {
         }
 
         @Override
-        public void favouritePerson(Person target) {
+        public void favoritePerson(Person target) {
 
         }
 
         @Override
-        public void unfavouritePerson(Person target) {
+        public void unfavoritePerson(Person target) {
 
         }
 
