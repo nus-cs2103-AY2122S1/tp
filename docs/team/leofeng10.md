@@ -62,9 +62,9 @@ Access my [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?s
 #### Contributions to the User Guide
   * Added documentation for the features `addclass` and `today` (Pull Request [\#109](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/109))
 #### Contributions to the Developer Guide
-Added the implementation details of time conflict management (Pull Request [\#108](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/108))
-Added the UML diagram for time conflict management (Pull Request [\#203](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/203))
-Added Use cases for **TutAssistor**.
+  * Added the implementation details of time conflict management (Pull Request [\#108](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/108))
+  * Added the UML diagram for time conflict management (Pull Request [\#203](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/203))
+  * Added Use cases for **TutAssistor**.
 
 
 #### Contributions to the team-based tasks
