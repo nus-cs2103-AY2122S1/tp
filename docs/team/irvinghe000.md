@@ -60,4 +60,3 @@ Given below are my contributions to the project.
       [\#92](https://github.com/AY2122S1-CS2103T-W11-2/tp/pull/92),
       [\#124](https://github.com/AY2122S1-CS2103T-W11-2/tp/pull/124),
       [\#233](https://github.com/AY2122S1-CS2103T-W11-2/tp/pull/233)
-      

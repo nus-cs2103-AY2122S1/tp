@@ -10,7 +10,8 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+This project is based on the [AddressBook-Level3](https://github.com/nus-cs2103-AY2122S1/tp) ([UG](https://se-education.org/addressbook-level3/UserGuide.html), 
+[DG](https://se-education.org/addressbook-level3/DeveloperGuide.html)) project created by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -647,6 +648,23 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+### Adding a person
+1. Adding a person to the address book
+
+    1. Test case: `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 $/100` <br>
+       Expected: If there is already a person called `John Doe` in the address book, then an error message will appear
+       at the left output box. Otherwise, a new staff will be added to the list in the right output box, with name `John Doe`,
+       phone number `98765432`, email `johnd@example.com`, address `311, Clementi Ave 2, #02-25` and salary `100`.
+       
+    1. Test case: `add n/John Doe p/98765432`<br>
+       Expected: No person is added. Error details shown in the status message. 
+       Status bar remains the same.
+       
+    1. Other incorrect add commands to try: `add p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 $/100`,
+       `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25`, `...` (where one or more attributes
+       are missing in the command)
+       Expected: A wrong message of `Invalid command format` will be shown in the status message.
+       
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
@@ -665,6 +683,30 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+### Adding a shift to a person's schedule
+1. Adding a shift to an existing person's schedule, given the target person's index in the list.
+    
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    
+    1. Test case: `addShift -i 1 d/Monday-0`
+       Expected: A shift on next Monday morning will be added to the first staff's schedule in the list, 
+       if that slot does not have a shift yet. Otherwise, no shift is added and error details will be shown
+       in the status message. 
+       
+    1. Test case: `addShift -i 1 d/Monday-0 da/2021-11-07`
+       Expected: A new shift will be added to the first person in the list schedule. In this case, 
+       the date of that shift will be `2021-11-08`, and the slot is `morning`.
+       Otherwise, no shift is added and error details will be shown in the status message.
+       
+    1. Test case: `addShift -i 1 d/Monday-0 da/2021-11-06 da/2021-12-06` 
+       Expected: New shifts will be added to the first person in the list schedule. In this case,
+       the date of shifts will be `2021-11-08`, `2021-11-15`, `2021-11-22`, `2021-11-29`, `2021-12-06`
+       and the slot is `morning`. Otherwise, no shift is added and error details will be shown in the status message.
+       
+    1. Other incorrect delete commands to try: `addShift -i 0 d/Monday-0`, `addShift -i x d/Monday-0`, (where 
+       x is larger than the list size) `addShift -i 0 d/mon-0`, `...`.
+       Expected: A wrong details will be shown in the status message.
+       
 ### Saving data
 
 1. Dealing with missing/corrupted data files
