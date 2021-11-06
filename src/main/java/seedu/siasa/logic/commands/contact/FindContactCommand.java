@@ -1,9 +1,9 @@
 package seedu.siasa.logic.commands.contact;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.siasa.commons.core.Messages.MESSAGE_CONTACTS_LISTED_OVERVIEW;
 import static seedu.siasa.commons.core.Messages.MESSAGE_CONTACTS_LIST_EMPTY;
 
-import seedu.siasa.commons.core.Messages;
 import seedu.siasa.logic.commands.Command;
 import seedu.siasa.logic.commands.CommandResult;
 import seedu.siasa.model.Model;
@@ -35,7 +35,7 @@ public class FindContactCommand extends Command {
 
         if (model.getFilteredContactList().size() > 0) {
             return new CommandResult(
-                    String.format(Messages.MESSAGE_CONTACTS_LISTED_OVERVIEW, model.getFilteredContactList().size()));
+                    String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, model.getFilteredContactList().size()));
         } else {
             return new CommandResult(MESSAGE_CONTACTS_LIST_EMPTY);
         }
