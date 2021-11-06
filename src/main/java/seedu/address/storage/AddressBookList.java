@@ -51,4 +51,17 @@ public class AddressBookList {
         addressBookPaths.forEach(x -> sb.append("\n-").append(FileUtil.convertToAddressBookName(x)));
         return sb.toString();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+
+        if (!(o instanceof AddressBookList)) {
+            return false;
+        }
+
+        return addressBookPaths.equals(((AddressBookList) o).addressBookPaths);
+    }
 }

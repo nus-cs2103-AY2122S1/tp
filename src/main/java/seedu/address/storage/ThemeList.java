@@ -45,4 +45,17 @@ public class ThemeList {
     public void setTheme(ThemeType theme) {
         currentTheme.setPredicate(x -> x.equals(theme));
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (!(o instanceof ThemeList)) {
+            return false;
+        }
+
+        return this.currentTheme.equals(((ThemeList) o).currentTheme);
+    }
 }
