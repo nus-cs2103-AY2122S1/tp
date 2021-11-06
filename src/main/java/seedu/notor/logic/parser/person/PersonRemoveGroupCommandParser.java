@@ -47,11 +47,11 @@ public class PersonRemoveGroupCommandParser extends PersonCommandParser {
         }
         // TODO: Check here for validty after Yukun allow special characters.
         if (!SuperGroup.isValidGroupName(groupName)) {
-            throw new ParseException("Please input a valid group.");
+            throw new ParseException("Please input a valid group name.");
         }
 
         if (subGroupName != null && !SubGroup.isValidGroupName(subGroupName)) {
-            throw new ParseException("Please input a valid subgroup.");
+            throw new ParseException("Please input a valid subgroup name.");
         }
 
         if (subGroupName != null) {
