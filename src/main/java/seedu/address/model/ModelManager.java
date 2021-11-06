@@ -417,7 +417,7 @@ public class ModelManager implements Model {
             String nameOfPerson = eachOrder.getCustomer().getName();
             if (!this.addressBook.hasPersonWithName(nameOfPerson)) {
                 throw new DataConversionException(
-                        new IllegalValueException("Given customer name does not exist in Address Book"));
+                        new IllegalValueException("Given customer name does not exist in the Address Book"));
             }
         }
     }
@@ -433,7 +433,7 @@ public class ModelManager implements Model {
             Long id = eachTask.getTaskTag().getTagId();
             if (!this.orderBook.hasOrder(id)) {
                 throw new DataConversionException(
-                        new IllegalValueException("Given Sales ID does not exist in Order Book"));
+                        new IllegalValueException("Given Sales ID does not exist in the Order Book"));
             }
         }
     }
