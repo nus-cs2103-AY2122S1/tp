@@ -909,7 +909,6 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 * **CONNECTIONS**: The name of our product
 * **Entry**: An item written or printed in a diary, list, account book, or reference book.
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Search Term**: A search term is what users key in when they want to find something specific
 * **Tag**: A label attached to someone or something for the purpose of identification or to give other information.
 
