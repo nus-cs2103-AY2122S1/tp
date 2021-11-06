@@ -6,8 +6,16 @@ import java.util.List;
 
 import seedu.address.commons.util.StringUtil;
 
+/**
+ * Tests that a {@code Person}'s {@code Address} matches any of the keywords given.
+ */
 public class AddressContainsKeywordsPredicate extends AttributeContainsKeywordsPredicate {
 
+    /**
+     * Constructor for an AddressContainsKeywordsPredicate.
+     *
+     * @param keywords The {@code List<String>} that contains keywords used to find a person.
+     */
     public AddressContainsKeywordsPredicate(List<String> keywords) {
         super(keywords);
     }

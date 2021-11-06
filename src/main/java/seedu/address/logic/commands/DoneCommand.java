@@ -41,8 +41,8 @@ public class DoneCommand extends Command {
     /**
      * Constructor for a DoneCommand to mark a task of a person as done.
      *
-     * @param targetPersonIndex The Index of the target person.
-     * @param targetTaskIndexes The Index of the target Task that belongs to target person.
+     * @param targetPersonIndex The {@code Index} of the target person.
+     * @param targetTaskIndexes The {@code Index} of the target Task that belongs to target person.
      */
     public DoneCommand(Index targetPersonIndex, List<Index> targetTaskIndexes) {
         requireAllNonNull(targetPersonIndex, targetTaskIndexes);
@@ -95,14 +95,6 @@ public class DoneCommand extends Command {
         return new CommandResult(generateSuccessMessage(editedPerson, targetTaskIndexes.size(), alreadyDone));
     }
 
-    public String getCommand() {
-        return COMMAND_WORD;
-    }
-
-    public String getDescription() {
-        return DESCRIPTION;
-    }
-
     /**
      * Generates a command execution success message based on
      * the task removed.
@@ -123,6 +115,14 @@ public class DoneCommand extends Command {
                 || (other instanceof DoneCommand // instanceof handles nulls
                 && targetPersonIndex.equals(((DoneCommand) other).targetPersonIndex)
                 && targetTaskIndexes.equals(((DoneCommand) other).targetTaskIndexes)); // state check
+    }
+
+    public String getCommand() {
+        return COMMAND_WORD;
+    }
+
+    public String getDescription() {
+        return DESCRIPTION;
     }
 
 }

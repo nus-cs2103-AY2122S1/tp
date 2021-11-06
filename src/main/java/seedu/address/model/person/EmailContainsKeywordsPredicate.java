@@ -6,8 +6,16 @@ import java.util.List;
 
 import seedu.address.commons.util.StringUtil;
 
+/**
+ * Tests that a {@code Person}'s {@code Email} matches the keywords given.
+ */
 public class EmailContainsKeywordsPredicate extends AttributeContainsKeywordsPredicate {
 
+    /**
+     * Constructor for an EmailContainsKeywordsPredicate.
+     *
+     * @param keywords The {@code List<String>} that contains keywords used to find a person.
+     */
     public EmailContainsKeywordsPredicate(List<String> keywords) {
         super(keywords);
     }

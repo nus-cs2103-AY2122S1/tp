@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -12,21 +14,30 @@ import seedu.address.model.UserPrefs;
 
 public class ClearCommandTest {
 
-    @Test
-    public void execute_emptyAddressBook_success() {
-        Model model = new ModelManager();
-        Model expectedModel = new ModelManager();
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-        assertCommandSuccess(new DeleteCommand(), model, DeleteCommand.MESSAGE_DELETE_ALL_SUCCESS, expectedModel);
+    @Test
+    public void execute_success() {
+        ClearCommand clearCommand = new ClearCommand();
+        String expectedMessage = ClearCommand.MESSAGE_SUCCESS;
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.updateFilteredPersonList(unused -> false);
+        expectedModel.displayFilteredTaskList(unused -> false);
+        assertCommandSuccess(clearCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_nonEmptyAddressBook_success() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel.setAddressBook(new AddressBook());
+    public void equals() {
+        ClearCommand clearCommand = new ClearCommand();
 
-        assertCommandSuccess(new DeleteCommand(), model, DeleteCommand.MESSAGE_DELETE_ALL_SUCCESS, expectedModel);
+        // same object -> returns true
+        assertEquals(clearCommand, clearCommand);
+
+        // different types -> returns false
+        Command otherCommand = new DeleteCommand();
+        assertNotEquals(otherCommand, clearCommand);
+
+        // null -> returns false
+        assertNotEquals(null, clearCommand);
     }
-
 }

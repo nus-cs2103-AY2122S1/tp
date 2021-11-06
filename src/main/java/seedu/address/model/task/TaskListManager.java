@@ -251,10 +251,8 @@ public class TaskListManager {
         if (!(obj instanceof TaskListManager)) {
             return false;
         }
-
         // state check
         TaskListManager other = (TaskListManager) obj;
-
         boolean isEquals = taskListArchive.equals(other.taskListArchive)
                 && observableTaskList.equals(other.observableTaskList)
                 && filteredTasks.equals(other.filteredTasks);

@@ -42,6 +42,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Constructor for a DeleteCommand to delete one person.
+     *
      * @param targetIndex The {@code Index} of the target person.
      */
     public DeleteCommand(Index targetIndex) {
@@ -51,6 +52,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Constructor for a DeleteCommand to delete a number of people.
+     *
      * @param targetIndexes The {@code List<Index>} for multiple people.
      */
     public DeleteCommand(List<Index> targetIndexes) {
@@ -87,6 +89,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Executes the delete command for one index and returns the result.
+     *
      * @param model The in-memory {@code Model} of the address book data.
      * @param lastShownList The most recently updated {@code List}.
      * @param targetIndex The {@code Index} of the target person.
@@ -110,6 +113,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Executes the delete command for multiple indexes and returns the result.
+     *
      * @param model The in-memory {@code Model} of the address book data.
      * @param lastShownList The most recently updated {@code List}.
      * @param targetIndexes The {@code List<Index>} for the target people.

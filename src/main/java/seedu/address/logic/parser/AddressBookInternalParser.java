@@ -11,6 +11,9 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ViewTaskListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * Parses input arguments.
+ */
 public class AddressBookInternalParser {
 
     /**

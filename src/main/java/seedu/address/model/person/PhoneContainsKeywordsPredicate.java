@@ -6,7 +6,16 @@ import java.util.List;
 
 import seedu.address.commons.util.StringUtil;
 
+/**
+ * Tests that a {@code Person}'s {@code Phone} matches the keywords given.
+ */
 public class PhoneContainsKeywordsPredicate extends AttributeContainsKeywordsPredicate {
+
+    /**
+     * Constructor for a PhoneContainsKeywordsPredicate.
+     *
+     * @param keywords The {@code List<String>} that contains keywords used to find a person.
+     */
     public PhoneContainsKeywordsPredicate(List<String> keywords) {
         super(keywords);
     }

@@ -29,7 +29,6 @@ public class ReminderCommand extends Command {
     private final boolean isSet;
     private final int daysPriorToTaskDate;
 
-
     /**
      * Constructor to use if "-s" flag is not provided.
      */
@@ -40,6 +39,8 @@ public class ReminderCommand extends Command {
 
     /**
      * Constructor to use if "-s" flag is provided.
+     *
+     * @param daysPriorToTaskDate The given number of days prior to a task's date.
      */
     public ReminderCommand(int daysPriorToTaskDate) {
         this.isSet = true;
