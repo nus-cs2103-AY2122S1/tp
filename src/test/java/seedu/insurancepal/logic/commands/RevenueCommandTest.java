@@ -91,8 +91,7 @@ public class RevenueCommandTest {
 
         Money negativeMoneyOfBob = new Money((-1) * Float.valueOf(REVENUE_STUB));
         RevenueCommand revenueCommand = new RevenueCommand(INDEX_FIRST_PERSON, new Revenue(negativeMoneyOfBob));
-
-        String errorMessage = String.format(RevenueCommand.MESSAGE_ADD_REVENUE_FAIL, firstPerson);
+        String errorMessage = String.format(RevenueCommand.MESSAGE_ADD_REVENUE_FAIL_NEGATIVE, firstPerson.getName());
 
         assertCommandFailure(revenueCommand, model, errorMessage);
     }
