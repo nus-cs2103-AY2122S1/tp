@@ -228,7 +228,7 @@ Adds a new client to the address book.
 
 **Expected Outcome:** <br>
 For instance, if the command `add n/Keith e/keithtan@ymail.com p/12345678 r/4` was used, a new client will be recorded in the client list view with the corresponding attributes. <br> 
-<img src="images/ClientInfoView.png" width="300"/>
+<img src="images/ExpectedAddCommand.png" width="400"/>
 
 ### 5.2 Retrieve Particular Contact : `view`
 
@@ -240,7 +240,7 @@ View client's information in detail.
 
 **Expected Outcome:** <br>
 For instance, if `Alex Yeoh` is the client with client ID 1, the following will be shown in the client info view of LeadsForce when `view 1` is entered into the command box. <br>
-<img src="images/ExpectedAddCommand.png" width="300"/>
+<img src="images/ClientInfoView.png" width="400"/>
 
 
 ### 5.3 Update Existing Contact : `edit`
@@ -258,7 +258,7 @@ Update the attributes of existing users using the tag of the client’s attribut
 
 **Expected Outcome:** <br>
 The corresponding information will be changed to the attributes specified by the client. This change can be seen in the client list view. For instance, the command `edit 3 p/12345678 r/5` will change client's 3 information as such. <br>
-<img src="images/ExpectedEditCommand.png" width="300"/>
+<img src="images/ExpectedEditCommand.png" width="400"/>
 
 
 ### 5.4 Delete particular contact : `delete`
@@ -314,7 +314,7 @@ Finds the meeting schedule on a specified date.
 For instance, using `schedule 30-11-2021` will produce the following result. <br>
 | Before | After |
 | --- | --- |
-| <img src="images/ExpectedEditCommand.png" width="300"/> | <img src="images/ExpectedEditCommand_AFTER.png" width="300"/> |
+| <img src="images/ExpectedEditCommand.png" width="400"/> | <img src="images/ExpectedEditCommand_AFTER.png" width="400"/> |
 
 ### 5.8 Locating clients by keywords : `search`
 
@@ -329,7 +329,7 @@ Finds clients whose contacts match with the given keywords.
 For instance, using `search Alex` will produce the following result. <br>
 | Before | After |
 | --- | --- |
-| <img src="images/ExpectedSearchCommand.png" width="300"/> | <img src="images/ExpectedSearchCommand_AFTER.png" width="300"/> |
+| <img src="images/ExpectedSearchCommand.png" width="400"/> | <img src="images/ExpectedSearchCommand_AFTER.png" width="400"/> |
 
 
 ### 5.9 Filter current list by keywords : `filter`
@@ -347,7 +347,7 @@ Filters the current list by the given keywords.
 For instance, using `filter t/colleagues` will produce the following result.
 | Before | After |
 | --- | --- |
-| <img src="images/ExpectedFilterCommand.png" width="300"/> | <img src="images/ExpectedFilterCommand_AFTER.png" width="300"/> |
+| <img src="images/ExpectedFilterCommand.png" width="400"/> | <img src="images/ExpectedFilterCommand_AFTER.png" width="400"/> |
 
 ### 5.10 Clearing all entries : `clear`
 
@@ -411,7 +411,7 @@ Switch to a different address book that currently exists.
 | Format | `ab switch ADDRESSBOOK_NAME` <br> <br> • `ADDRESSBOOK_NAME` refers to the name of the address book to switched to .|
 | :-: | :-- |
 | Example | `ab switch other` will switch over to the address book named `other` |
-| <img src="images/tip_icon.png" width="50"> | • Switch between different address books by toggling the address book tab (which is the 3rd tab from the left) <br> <img src=images/MultipleAddressBookTab.jpg width="300"> |
+| <img src="images/tip_icon.png" width="50"> | • Switch between different address books by toggling the address book tab (which is the 3rd tab from the left) <br> <img src=images/MultipleAddressBookTab.jpg width="400"> |
 
 **Expected Outcome:** <br>
 For instance, using `ab switch youngadults` when on the `newAddressBook` address book will produce the following result.
@@ -426,8 +426,8 @@ List all the name of all the existing address books
 
 | Format | `ab list` |
 
-**Expected Outcome:** <br>
-If you have 2 address books named `newAddressBook` and `YoungAdults`, here's the output from the command view.
+#### Expected Outcome:
+##### If you have 2 address books named `newAddressBook` and `YoungAdults`, here's the output from the command view. <br> 
 <img src="images/ExpectedAbListCommand.png" width="500"/>
 --------------------------------------------------------------------------------------------------------------------
 
