@@ -2,6 +2,7 @@ package seedu.notor.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javafx.collections.ObservableList;
@@ -16,10 +17,18 @@ import seedu.notor.model.person.Person;
 import seedu.notor.model.util.UniqueList;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at the 'Notor' level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
 public class Notor implements ReadOnlyNotor {
+    private static final String INTIAL_NOTE = "Welcome to NOTOR v1.4! This application is a personal\n"
+            + " CLI designed for mentors to keep tabs on their mentees.\n"
+            + "If you need help, you can refer to the help page!\n\n"
+            + "Some things this application can do are: \n"
+            + "person /list : Lists all contacts.\n"
+            + "person 3 /delete : Deletes the 3rd contact (contact with\nindex number 3) shown in the current list.\n"
+            + "note: Edit this note here to whatever you wish!"
+            + "\n\n\n ...and much more!";
 
     private final UniqueList<Person> persons;
     private final UniqueList<SuperGroup> superGroups;
@@ -34,7 +43,7 @@ public class Notor implements ReadOnlyNotor {
     }
 
     public Notor() {
-        this.note = Note.EMPTY_NOTE;
+        this.note = Note.of(INTIAL_NOTE, LocalDate.now().toString());
     }
 
     public Notor(Note note) {
@@ -177,7 +186,7 @@ public class Notor implements ReadOnlyNotor {
 
     /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in Notor.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
     public void setPerson(Person target, Person editedPerson) {
@@ -188,7 +197,7 @@ public class Notor implements ReadOnlyNotor {
 
     /**
      * Removes {@code key} from this {@code Notor}.
-     * {@code key} must exist in the address book.
+     * {@code key} must exist in Notor.
      */
     public void removePerson(Person key) {
         persons.remove(key);

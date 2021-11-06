@@ -26,7 +26,7 @@ public class PersonFindCommand extends PersonCommand {
             + COMMAND_DESCRIPTION
             + "Parameters: n:NAME_QUERY t:TAG_1, TAG_2 \n"
             + "Example: "
-            + PersonCommand.COMMAND_WORD + " /" + COMMAND_WORD + "n:Alex t:graduated, engineering";
+            + PersonCommand.COMMAND_WORD + " /" + COMMAND_WORD + " n:Alex t:graduated, engineering";
 
     private final PersonExecutor executor;
 
