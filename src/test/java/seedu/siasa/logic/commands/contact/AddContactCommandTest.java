@@ -195,7 +195,7 @@ public class AddContactCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-        public int getTotalCommission() {
+        public double getTotalCommission() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -205,7 +205,7 @@ public class AddContactCommandTest {
         }
 
         @Override
-        public Map<Contact, Integer> getCommissionPerContact() {
+        public Map<Contact, Double> getCommissionPerContact() {
             throw new AssertionError("This method should not be called.");
         }
     }

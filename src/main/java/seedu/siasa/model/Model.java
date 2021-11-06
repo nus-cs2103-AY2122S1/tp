@@ -111,7 +111,7 @@ public interface Model {
     /**
      * Returrns a map of contacts and the commission from each contact.
      */
-    Map<Contact, Integer> getCommissionPerContact();
+    Map<Contact, Double> getCommissionPerContact();
 
     /**
      * Returns true if a policy with the same identity as {@code policy} exists in the SIASA.
@@ -147,7 +147,7 @@ public interface Model {
     /**
      * Returns the total commission of the policy list.
      */
-    int getTotalCommission();
+    double getTotalCommission();
 
     /**
      * Removes all policies belonging to the given person {@code target}.

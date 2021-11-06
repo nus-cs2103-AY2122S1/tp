@@ -154,8 +154,8 @@ public class Siasa implements ReadOnlySiasa {
         return sortedResult;
     }
 
-    public Map<Contact, Integer> getCommissionPerContact() {
-        HashMap<Contact, Integer> hashMap = new HashMap<>();
+    public Map<Contact, Double> getCommissionPerContact() {
+        HashMap<Contact, Double> hashMap = new HashMap<>();
         contacts.forEach(contact -> {
             double commission = 0;
             for (Policy policy : policies) {
@@ -163,12 +163,12 @@ public class Siasa implements ReadOnlySiasa {
                     commission += policy.getTotalCommission();
                 }
             }
-            hashMap.put(contact, (int) commission);
+            hashMap.put(contact, commission);
         });
-        List<Map.Entry<Contact, Integer>> list = new ArrayList<>(hashMap.entrySet());
+        List<Map.Entry<Contact, Double>> list = new ArrayList<>(hashMap.entrySet());
         list.sort(Collections.reverseOrder(Map.Entry.comparingByValue()));
-        Map<Contact, Integer> sortedResult = new LinkedHashMap<>();
-        for (Map.Entry<Contact, Integer> entry : list) {
+        Map<Contact, Double> sortedResult = new LinkedHashMap<>();
+        for (Map.Entry<Contact, Double> entry : list) {
             sortedResult.put(entry.getKey(), entry.getValue());
         }
         return sortedResult;
@@ -223,7 +223,7 @@ public class Siasa implements ReadOnlySiasa {
         this.policies.setPolicies(policies);
     }
 
-    public int getTotalCommission() {
+    public double getTotalCommission() {
         return policies.getTotalCommission();
     }
 
