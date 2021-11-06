@@ -1,5 +1,6 @@
 package tutoraid.model.student;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,20 +40,31 @@ public class InitialStudent {
 
     /**
      * Convert an InitialStudent to a Student by creating the dependencies to Lesson objects.
+     * At the same time, Student objects are added to the respective Lesson objects.
      *
      * @param fullLessonList A list of available lessons in TutorAid
      * @return The resulting Student object
      */
-    public Student toStudent(List<Lesson> fullLessonList) {
+    public Student toStudent(List<Lesson> fullLessonList) throws IOException {
         Lessons lessons = new Lessons();
+        Student student = new Student(studentName, studentPhone, parentName, parentPhone, progressList, lessons);
         for (String lessonName : lessonNames) {
-            for (Lesson lesson : fullLessonList) {
-                if (lesson.toNameString().equals(lessonName)) {
-                    lessons.addLesson(lesson);
-                }
+            addStudentLessonLink(lessonName, fullLessonList, lessons, student);
+        }
+        return student;
+    }
+
+    public void addStudentLessonLink(String lessonName, List<Lesson> fullLessonList, Lessons lessons, Student student)
+            throws IOException {
+        for (Lesson lesson : fullLessonList) {
+            if (lesson.toNameString().equals(lessonName) && lesson.isFull()) {
+                lesson.removeAllStudents();
+                throw new IOException();
+            } else if (lesson.toNameString().equals(lessonName)) {
+                lessons.addLesson(lesson);
+                lesson.addStudent(student);
             }
         }
-        return new Student(studentName, studentPhone, parentName, parentPhone, progressList, lessons);
     }
 
     public StudentName getStudentName() {

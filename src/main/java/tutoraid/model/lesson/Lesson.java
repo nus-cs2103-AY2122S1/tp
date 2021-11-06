@@ -19,7 +19,7 @@ public class Lesson {
     private LessonName lessonName;
 
     // Data Fields
-    private Optional<Students> students;
+    private Students students;
     private Capacity capacity;
     private Price price;
     private Timing timing;
@@ -32,7 +32,7 @@ public class Lesson {
         this.lessonName = lessonName;
         this.capacity = capacity;
         this.price = price;
-        this.students = Optional.empty();
+        this.students = new Students();
         this.timing = timing;
     }
 
@@ -44,7 +44,7 @@ public class Lesson {
         this.lessonName = lessonName;
         this.capacity = capacity;
         this.price = price;
-        this.students = Optional.of(students);
+        this.students = students;
         this.timing = timing;
     }
 
@@ -61,17 +61,7 @@ public class Lesson {
     }
 
     public Students getStudents() {
-        if (students.isPresent()) {
-            return students.get();
-        }
-        Students computedStudents = new Students();
-        for (Student std : ModelManager.getAllStudents()) {
-            if (std.hasLesson(this)) {
-                computedStudents.addStudent(std);
-            }
-        }
-        students = Optional.of(computedStudents);
-        return computedStudents;
+        return students;
     }
 
     public Timing getTiming() {
@@ -94,7 +84,7 @@ public class Lesson {
      * @param student student to be added
      */
     public void addStudent(Student student) {
-        students = Optional.of(getStudents().addStudent(student));
+        students.addStudent(student);
     }
 
     /**
@@ -103,7 +93,14 @@ public class Lesson {
      * @param student student to be removed
      */
     public void removeStudent(Student student) {
-        students = Optional.of(getStudents().removeStudent(student));
+        students.removeStudent(student);
+    }
+
+    /**
+     * Removes all students from this lesson.
+     */
+    public void removeAllStudents() {
+        students = new Students();
     }
 
     /**
