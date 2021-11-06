@@ -18,7 +18,7 @@ In the [Table of Contents](#), each item listed is a link which you can click on
 
 Syntax | Meaning
 --------|------------------
-`text` | A command to be entered into the command box in TAB.
+`text` | A command, or a code block
 <kbd>text</kbd> | A keyboard input, or a button to be clicked on.
 [text](#about-this-guide) | Links to other parts of the document, or links to be opened in the browser.
 _text_ | A _technical_ word with definitions provided in the [Glossary](#glossary), or a caption for images.
@@ -69,10 +69,6 @@ private void createTimeThread() {
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
-
-## How to read this guide
-
-[TODO]
 
 ## **Design**
 
