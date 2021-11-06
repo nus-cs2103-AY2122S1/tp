@@ -88,7 +88,7 @@ public class JsonUserProfileStorageTest {
     @Test
     public void saveUserProfile() {
         JsonUserProfileStorage userProfileStorage = new JsonUserProfileStorage();
-        Path profileFilePath = Paths.get("userprofile.json");
+        Path profileFilePath = Paths.get("userprofilesave.json");
         Optional<JsonSerializableUserProfile> userProfile;
         try {
             userProfile = JsonUtil.readJsonFile(profileFilePath,
