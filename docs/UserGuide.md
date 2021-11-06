@@ -206,7 +206,7 @@ Action | Format, Examples
 
 ### Viewing help: `help`
 
-Shows a message explaining how to access the help page.
+>Shows a message explaining how to access the help page.
 
 ![helpMessage](images/help_message.png)
 
