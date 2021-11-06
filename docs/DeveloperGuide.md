@@ -1056,13 +1056,13 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list all currently `Not Done`.
 
     2. Test case: `mark 1`<br>
-       Expected: First contact is marked. Details of the marked contact shown in the status message.
+       Expected: First contact is marked to `Done`. Details of the marked contact shown in the status message.
 
     3. Test case: `mark 0`<br>
        Expected: No person is marked. Error details shown in the status message.
 
     4. Test case: `mark 2`, then `mark 2` again<br>
-       Expected: Second contact is marked with the first `mark 2`. Details of the marked contact shown in the status message.
+       Expected: Second contact is marked to `Done` with the first `mark 2`. Details of the marked contact shown in the status message.
                  For the second `mark 2`, no new person is marked. Error details shown in the status message.
 
     5. Test case: `mark 3 3`<br>
@@ -1070,26 +1070,21 @@ testers are expected to do more *exploratory* testing.
 
     6. Other incorrect mark commands to try: `mark`, `mark x` (where x is larger than the list size), `mark y` (where y is any non-positive integer)<br>
        Expected: No person is marked. Error details shown in the status message.
+
+    7. Test case: `mark 4 5`<br>
+       Expected: Fourth and fifth contact are marked to `Done`. Details of the marked contacts shown in the status message.
+
 
 2. Marking a person while a filtered list of persons are being shown
 
     1. Prerequisites: Find a valid group of persons using the `find` command with appropriate inputs. Multiple persons in the filtered list all currently `Not Done`.
+    
+    2. Test case: Utilise the same test cases in Section 1 of Marking a person<br>
+       Expected: Same results as the corresponding expected test case results in Section 1 of Marking a person, while still in the filtered list.
 
-    2. Test case: `mark 1`<br>
-       Expected: First contact is marked. Details of the marked contact shown in the status message.
-
-    3. Test case: `mark 0`<br>
-       Expected: No person is marked. Error details shown in the status message.
-
-    4. Test case: `mark 2`, then `mark 2` again<br>
-       Expected: Second contact is marked with the first `mark 2`. Details of the marked contact shown in the status message.
-                 For the second `mark 2`, no new person is marked. Error details shown in the status message.
-
-    5. Test case: `mark 3 3`<br>
-       Expected: No person is marked. Error details shown in the status message.
-
-    6. Other incorrect mark commands to try: `mark`, `mark x` (where x is larger than the list size), `mark y` (where y is any non-positive integer)<br>
-       Expected: No person is marked. Error details shown in the status message.
+    3. Test case: `mark 6`, then `list`<br>
+       Expected: For `mark 6`, the sixth contact is marked to `Done` and details of the marked contact shown in the status message.
+                 After `list`, locate the marked person in the list and the person should still be `Done`.
 
 ### Unmarking a person
 
@@ -1114,7 +1109,7 @@ testers are expected to do more *exploratory* testing.
        Expected: No person is unmarked. Error details shown in the status message.
 
     7. Test case: `unmark 4 5`<br>
-       Expected: Fifth and sixth contact is unmarked to `Not Done`. Details of the unmarked contacts shown in the status message.
+       Expected: Fourth and fifth contact are unmarked to `Not Done`. Details of the unmarked contacts shown in the status message.
 
 2. Marking a person while a filtered list of persons are being shown
 
@@ -1123,8 +1118,8 @@ testers are expected to do more *exploratory* testing.
     2. Test case: Utilise the same test cases in Section 1 of Unmarking a person<br>
        Expected: Same results as the corresponding expected test case results in Section 1 of Unmarking a person, while still in the filtered list.
 
-    3. Test case: `unmark 7`, then `list`<br>
-       Expected: For `unmark 7`, the seventh contact is unmarked to `Not Done` and details of the unmarked contacts shown in the status message.
+    3. Test case: `unmark 6`, then `list`<br>
+       Expected: For `unmark 6`, the sixth contact is unmarked to `Not Done` and details of the unmarked contact shown in the status message.
                  After `list`, locate the unmarked person in the list and the person should still be `Not Done`.
     
 ### Saving data
