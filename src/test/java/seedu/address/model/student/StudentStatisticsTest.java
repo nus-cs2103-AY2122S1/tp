@@ -22,7 +22,7 @@ public class StudentStatisticsTest {
             new Assessment("Final Examination"), new Score("100")
     );
 
-    private final Map<ID, Score> P01Scores = Map.of(
+    private final Map<ID, Score> p01Score = Map.of(
             new ID("E0000001"), new Score("5.5"),
             new ID("E0000002"), new Score("13"),
             new ID("E0000003"), new Score("46"),
@@ -35,9 +35,9 @@ public class StudentStatisticsTest {
             new ID("E0000010"), new Score("100")
     );
 
-    private final Assessment P01 = new Assessment("P01");
+    private final Assessment p01 = new Assessment("P01");
 
-    private final Map<ID, Score> P02Scores = Map.of(
+    private final Map<ID, Score> p02Score = Map.of(
             new ID("E0000001"), new Score("13.3"),
             new ID("E0000002"), new Score("44.7"),
             new ID("E0000003"), new Score("23"),
@@ -50,11 +50,11 @@ public class StudentStatisticsTest {
             new ID("E0000010"), new Score("100")
     );
 
-    private final Assessment P02 = new Assessment("P02");
+    private final Assessment p02 = new Assessment("P02");
 
     private final Map<Assessment, Score> scores2 = Map.of(
-            P01, new Score("5.5"),
-            P02, new Score("13.3")
+            p01, new Score("5.5"),
+            p02, new Score("13.3")
     );
 
 
@@ -84,8 +84,8 @@ public class StudentStatisticsTest {
         student.addScores(scores2);
         StudentStatistics statistics = new StudentStatistics(student);
 
-        P01.setScores(P01Scores);
-        P02.setScores(P02Scores);
+        p01.setScores(p01Score);
+        p02.setScores(p02Score);
 
         Map<String, Number> expectedMean = Map.of(
                 "P01", 56.95,
