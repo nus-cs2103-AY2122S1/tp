@@ -14,7 +14,7 @@ written in Java, and has about 10 kLoC.
 ### **Code contributed**
 
 My code contributed can be found at
-this [RepoSense Link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?&tabOpen=true&tabType=authorship&tabAuthor=Yukun99&tabRepo=AY2122S1-CS2103T-W08-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&zFR=false)
+this [RepoSense Link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?tabOpen=true&tabType=authorship&tabAuthor=Yukun99&tabRepo=AY2122S1-CS2103T-W08-1%2Ftp%5Bmaster%5D&authorshipFileTypes=docs~functional-code~test-code)
 .
 
 ### **New Features**:
