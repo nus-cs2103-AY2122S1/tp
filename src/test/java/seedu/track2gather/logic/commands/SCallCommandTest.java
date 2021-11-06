@@ -17,17 +17,18 @@ import seedu.track2gather.model.Model;
 import seedu.track2gather.model.ModelManager;
 import seedu.track2gather.model.UserPrefs;
 import seedu.track2gather.model.person.Person;
+import seedu.track2gather.testutil.TestUtil;
 
 public class SCallCommandTest {
 
-    private Model model = new ModelManager(getTypicalTrack2Gather(), new UserPrefs());
-
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Person personToIncrement = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Model model = new ModelManager(getTypicalTrack2Gather(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getTrack2Gather(), new UserPrefs());
+
         SCallCommand command = new SCallCommand(INDEX_FIRST_PERSON);
 
-        ModelManager expectedModel = new ModelManager(model.getTrack2Gather(), new UserPrefs());
+        Person personToIncrement = TestUtil.getPerson(model, INDEX_FIRST_PERSON);
         Person newPerson = new Person(personToIncrement, personToIncrement.getCallStatus().call());
         expectedModel.setPerson(personToIncrement, newPerson);
         String expectedMessage = String.format(SCallCommand.MESSAGE_CALL_PERSON_SUCCESS, newPerson.getName(),
@@ -38,6 +39,8 @@ public class SCallCommandTest {
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
+        Model model = new ModelManager(getTypicalTrack2Gather(), new UserPrefs());
+
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         SCallCommand command = new SCallCommand(outOfBoundIndex);
 
@@ -46,14 +49,14 @@ public class SCallCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-
-        Person personToIncrement = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        SCallCommand command = new SCallCommand(INDEX_FIRST_PERSON);
-
+        Model model = new ModelManager(getTypicalTrack2Gather(), new UserPrefs());
         Model expectedModel = new ModelManager(model.getTrack2Gather(), new UserPrefs());
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
         showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
 
+        SCallCommand command = new SCallCommand(INDEX_FIRST_PERSON);
+
+        Person personToIncrement = TestUtil.getPerson(model, INDEX_FIRST_PERSON);
         Person newPerson = new Person(personToIncrement, personToIncrement.getCallStatus().call());
         expectedModel.setPerson(personToIncrement, newPerson);
         String expectedMessage = String.format(SCallCommand.MESSAGE_CALL_PERSON_SUCCESS, newPerson.getName(),
@@ -64,6 +67,7 @@ public class SCallCommandTest {
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
+        Model model = new ModelManager(getTypicalTrack2Gather(), new UserPrefs());
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
@@ -76,7 +80,27 @@ public class SCallCommandTest {
     }
 
     @Test
+    public void execute_validIndexEnforcementMode_success() {
+        Model model = new ModelManager(getTypicalTrack2Gather(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getTrack2Gather(), new UserPrefs());
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_NON_CALLED);
+        expectedModel.updateFilteredPersonList(Model.PREDICATE_SHOW_NON_CALLED);
+
+        SCallCommand command = new SCallCommand(INDEX_FIRST_PERSON);
+
+        Person personToIncrement = TestUtil.getPerson(model, INDEX_FIRST_PERSON);
+        Person newPerson = new Person(personToIncrement, personToIncrement.getCallStatus().call());
+        expectedModel.setPerson(personToIncrement, newPerson);
+        String expectedMessage = String.format(SCallCommand.MESSAGE_CALL_PERSON_SUCCESS, newPerson.getName(),
+                newPerson.getCaseNumber(), newPerson.getCallStatus().getNumFailedCalls());
+
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+    }
+
+    @Test
     public void execute_multipleSCallCommand_throwsCommandException() {
+        Model model = new ModelManager(getTypicalTrack2Gather(), new UserPrefs());
+
         Person personToIncrement = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person newPerson = new Person(personToIncrement, personToIncrement.getCallStatus().call());
         model.setPerson(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()), newPerson);
