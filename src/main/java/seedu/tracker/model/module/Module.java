@@ -149,16 +149,17 @@ public class Module {
                 .append(", Description: ")
                 .append(getDescription())
                 .append(", ")
-                .append(getMc());
+                .append(getMc())
+                .append(", ");
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
-            builder.append("; Tags: ");
+            builder.append("Tags: ");
             tags.forEach((tag)->builder.append(tag.toString() + "; "));
         }
 
         if (hasAcademicCalendar) {
-            builder.append("; AcademicCalendar: ")
+            builder.append(", AcademicCalendar: ")
                     .append(getAcademicCalendar());
         }
         return builder.toString();

@@ -23,7 +23,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S1-CS2103T-W17-2/tp/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
 ### Architecture
@@ -36,7 +36,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S1-CS2103T-W17-2/tp/tree/master/src/main/java/seedu/tracker/Main.java) and [`MainApp`](https://github.com/AY2122S1-CS2103T-W17-2/tp/tree/master/src/main/java/seedu/tracker/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -114,39 +114,38 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-W17-2/tp/tree/master/src/main/java/seedu/tracker/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
+* stores a `UserPrefs` object that represents the user's preferences.
+* stores the `ModuleTracker` data, which contains data of modules, user's information and Mc progress.
+* exposes various `ObservableList`s that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list changes.
+* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
+<br><br>
+  
+A `Module` stores a `Title`, `Code`, `Description`, `Mc`, `AcademicCalendar` and zero or more `Tag`s.
+<br><br>
+A `UserInfo` stores a `Mc` as Mc goal and a `AcademicCalendar` as current semester.
 
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-W17-2/tp/tree/master/src/main/java/seedu/tracker/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save module tracker data, user's information and user preference data in JSON format, and read them back into corresponding objects.
+* inherits from `ModuleTrackerStorage`, `UserInfoStorage` and `UserPrefStorage`, which means it can be treated as any one of the three (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.moduletracker.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -161,21 +160,48 @@ This section describes some noteworthy details on how certain features are imple
 The `take` command is implemented via the `TakeCommand` and `TakeCommandParser` classes.
 
 The `TakeCommandParser` class implements the `Parser` interface and is responsible for parsing the user input to retrieve the index and `AcademicYear` object which represents the year and semester. <br>
-The `TakeCommandParser#parse()` method does this, and returns a `TakeCommand` object with the index and the `AcademicYear` object as arguments.
+The `TakeCommandParser#parse()` method does this, and returns a `TakeCommand` object containing the index and the `AcademicYear` object.
 
 The `TakeCommand` class extends the `Command` class and implements the `TakeCommand#execute()` method which handles the main logic of the class. <br>
 It contains non-null `index` and `academicCalendar` fields. <br>
 When the `TakeCommand#execute()` method is called,
 
 - The `Module` object corresponding to the `index` is found from the `Model`.
-- A copy of the `Module` object is made with the value of `academicCalendar`, which is stored in its corresponding field in the copy.
-- The `Module` object in the Model is then replaced by this copy.
+- A copy of the `Module` object containing the value of `academicCalendar` is created. The value of `academicCalendar` is stored in a corresponding field in this copy.
+- The `Module` object in the `Model` is then replaced by this copy.
 
-Note:
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:**
 
 - When a new `Module` object is added to the module tracker, its `academicCalendar` field is unassigned by default.
 - Removing a schedule from a module is not supported in the `take` command, this functionality is instead moved to a separate `untake` command.
 - If the module is already scheduled, its current `academicCalendar` field will be overridden by a new `AcademicCalendar` object.
+</div>
+
+Below is a sequence diagram, and an explanation of how `TakeCommand` is executed.
+
+![Interactions Inside the Logic Component for the `take 2 y/1 s/2` Command](images/TakeSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `TakeCommand` and `TakeCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+**Step 1.** The user enters the command "take 2 y/1 s/2".
+
+**Step 2.** ModuleTrackerParser takes in the user's input, and calls `TakeCommandParser#parse` to create a TakeCommand object containing the data parsed from the user input.
+* In this case, the TakeCommand object contains the specified module index (`2`), and the academic year the specified module is scheduled for (`y/1 s/2`)
+
+**Step 3.** The `TakeCommand` is then executed by calling its `execute` method.
+
+**Step 4.** The module at the specified index (`2`) in the list is obtained from the `Model`.
+
+**Step 5.** A copy of this module containing the specified academic calendar (`y/1 s/2`) is created. This copy is the scheduled module.
+
+**Step 6.** The specified module in the `Model` is then replaced by the scheduled copy. The `Model` is also updated to reflect this change in the Mod Tracker.
+
+Certain details have been omitted from the sequence diagram for simplicity, including:
+* Details of how the specified module (`moduleToSchedule`) is obtained from the `Model`.
+* Details of how the `Model` is updated to reflect the changes in the Mod Tracker.
 
 #### Design considerations:
 
@@ -522,39 +548,37 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​                                                   | I want to …​                                         | So that I can…​                                                     |
 | -------- | ------------------------------------------------------------ | ------------------------------------------------------- | ---------------------------------------------------------------------- |
 | `* * *`  | user                                                         | see usage instructions                                  | refer to instructions when I forget how to use the App                 |
-| `* * *`  | CS student                                                   | view the compulsory core modules for my major           | keep track of the required module courses
-| `* * *`  | CS student                                                   | mark the module as done/selected for current sem        |
-| `* * *`  | CS student                                                   | view the modules I'm currently taking                   |
-| `* * *`  | CS student                                                   | delete modules                                          | remove module entries that I no longer need
+| `* * *`  | CS student                                                   | view the modules for my major                           | keep track of the modules I may take
+| `* * *`  | CS student                                                   | mark the module as selected for the current semester    | make a academic plan for the current semester
+| `* * *`  | CS student                                                   | view the modules I'm currently taking                   | remember the modules I am currently taking
+| `* * *`  | CS student                                                   | delete modules                                          | remove modules that I no longer intend to take
 | `* * *`  | CS student                                                   | edit the module details                                 | modify information for any module entry
-| `* * *`  | CS student                                                   | add new modules                                         | keep track of my modules(such as GE/UE/Focus Area)
+| `* * *`  | CS student                                                   | add new modules                                         | specify new modules that I intend to take
 | `* * *`  | CS student                                                   | view the modules I have taken                           | keep track of the modules that I have taken
-| `* * *`  | CS student                                                   | view the modules I plan to take in the future           | Be able to plan which modules im taking in advance
-| `* * *`  | CS student                                                   | keep track of my CAP                                    | monitor my learning in NUS
-| `* * *`  | CS student                                                   | mark a module I have taken as done                      | only choose the modules I haven’t taken
-| `* * *`  | CS student who want to find a specific mod                   | search for a module by keywords/codes                   | search for specific module entries easily
-| `* * *`  | CS student who is looking for a specific kind of modules     | categorise my modules                                   | search for a specific type of modules easily
-| `* * *`  | CS student who is looking for a specific kind of modules     | view the modules according to year/semester             | find specific modules easily
-| `* * *`  | CS student who is making a module plan                       | change the colour scheme of each module                 | easily differentiate between different modules
-| `* * *`  | CS student who is making a module plan                       | find free time slots in our schedule                    | add other modules in my free time slots
-| `* * *`  | CS student who is looking for modules                        | sort the modules according to the level (1k/2k/3k…)     | know the workload difficulty of the modules
-| `* * *`  | first time user                                              | see some sample module plans when I open the app        | easily try out its features
-| `* *  `  | CS student                                                   | tag modules according to type                           | Specify the type of the module (such as GE/UE/Focus Area)
-| `* *  `  | CS student                                                   | view the number of MCs I have taken                     | keep track of my degree’s MC requirement progress
-| `* *  `  | CS student                                                   | view the number of MCs left to take before graduating   | keep track of my degree progress
-| `* *  `  | CS student                                                   | add internship semester                                 | take note of my internship period
-| `* *  `  | CS student                                                   | see on which module I can exercise S/U option           | decide how to use my S/Us better
+| `* * *`  | CS student                                                   | view the modules I plan to take in the future           | be able to plan which modules I will take in advance
+| `* * *`  | CS student                                                   | mark a module I have taken as done                      | only choose the modules I have not taken for my future plan
+| `* * *`  | CS student who want to find a specific module                | search for a module by keywords/code                    | search for specific modules easily
+| `* * *`  | CS student who is looking for a specific kind of modules     | view my module plan for each semester                   | see my plan for each semester easily
+| `* * *`  | first time user                                              | see some sample modules when I open the app             | easily try out its features
+| `* * *`  | CS student                                                   | view the number of MCs I have taken                     | keep track of my degree progress
+| `* * *`  | CS student who is making a module plan                       | specify modules to take for each semester               | make a academic plan for my whole course of study
+| `* *  `  | CS student                                                   | tag modules according to type                           | keep track of my modules for each degree requirement (such as GE/UE/Focus Area)
+| `* *  `  | CS student                                                   | view the number of MCs left to take before graduating   | determine if I am on track to graduate on time
+| `* *  `  | CS student                                                   | view the number of MCs completed for each course requirement   | keep track of my degree progress
+| `* *  `  | CS student                                                   | add "DIY" modules                                       | keep track of "DYOM" modules
+| `* *  `  | CS student who is looking for modules                        | sort the modules according to the level (1k/2k/3k…)     | know the workload difficulty of the modules
+| `* *  `  | CS student                                                   | see which modules I can exercise my S/U option on        | decide how to use my S/Us better
 | `* *  `  | CS student                                                   | see how many S/U credits I have left                    | have a better understanding of S/U credit usage
 | `* *  `  | CS student                                                   | view my grade for modules I have taken                  | keep track of my grades
-| `* *  `  | CS student                                                   | see the marking scheme for cs modules                   | have a full understanding of the module
-| `* *  `  | CS student                                                   | add ‘DIY’ courses                                       | keep track of my DYOM mods
-| `* *  `  | CS student who is preparing their resume                     | view which modules to put on my resume                  | prepare for job applications
+| `* *  `  | CS student                                                   | see the marking scheme for CS modules                   | have a full understanding of the module
 | `* *  `  | CS student who needs module help                             | see the contact information of professors for the module| easily reach professors when needed
-| `* *  `  | CS student who is making a module plan                       | specify modules to take in each semester                | make a plan in advance
-| `* *  `  | CS student who does not like the default font style/size     | change the font style/size                              | be more comfortable for them to use
-| `* *  `  | clueless CS student                                          | see the recommended schedule for my major               | make a better plan according to the suggestion
+| `* *  `  | CS student who does not like the default font style/size     | change the font style/size                              | have a more comfortable user experience
+| `* *  `  | clueless CS student                                          | see the recommended module plan for my major            | make a better plan according to the suggestion
+| `*    `  | CS student                                                   | keep track of my CAP                                    | monitor my learning in NUS
+| `*    `  | CS student who is making a module plan                       | change the colour scheme of each module                 | easily differentiate between different modules
+| `*    `  | CS student who is making a module plan                       | find free slots in my plan                              | add other modules in these free slots
 | `*    `  | forgetful CS student                                         | get notified when it's time for class                   | attend the classes on time
-| `*    `  | forgetful CS student                                         | get notified when exam dates approaching                | keep track of them
+| `*    `  | forgetful CS student                                         | get notified when exam dates are approaching            | be aware of important assessments
 
 
 
@@ -562,36 +586,62 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `ModuleTracker` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `NUS Mod Tracker` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+#### Database Features
+
+**UC1: Delete a Module from the Database**
 
 **MSS**
 
-1.  User requests to list modules
-2.  Mod tracker shows a list of modules
-3.  User requests to delete a specific module in the list
-4.  Mod tracker deletes the person
-5.  User requests to add a module to the list
-6.  Mod tracker adds the module
-
+1. User requests to delete a specific module in the list of modules in the database.
+2. NUS Mod Tracker deletes the module from the database.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The given module index is invalid.
+    * 1a1. NUS Mod Tracker shows an error message.
 
-  Use case resumes at step 5.
+      Use case resumes at step 1.
 
-* 3a. The given index is invalid.
+#### Academic Plan Features
 
-    * 3a1. Mod tracker shows an error message.
+**UC2: Add a Module to the Academic Plan**
 
-      Use case resumes at step 2.
-* 5a. The module code given is invalid
-    * 5a1. Mod tracker shows an error message.
-      Use case ends.
+**MSS**
+
+1. User requests to add a specific module to the academic plan.
+2. NUS Mod Tracker adds the module to the academic plan under the specified year and semester.
+
+    Use case ends.
+
+**Extensions**
+* 1a. The given module index or arguments are invalid.
+  * 1a1. NUS Mod Tracker shows an error message.
+  
+    Use case resumes at step 1.
+
+**UC3: Remove a Module from the Academic Plan**
+
+**MSS**
+
+1. User requests to remove a specific module from the academic plan.
+2. NUS Mod Tracker removes the module from the academic plan.
+
+   Use case ends.
+
+**Extensions**
+* 1a. The given module index is invalid.
+  * 1a1. NUS Mod Tracker shows an error message.
+
+    Use case resumes at step 1.
+* 1b. The specified module is not in the academic plan.
+  * 1b1. NUS Mod Tracker shows an error message.
+    
+    Use case resumes at step 1.
+
 
 
 
@@ -741,7 +791,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file Expected: Shows the GUI with a set of sample modules. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -752,27 +802,29 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a module
 
-1. Deleting a person while all persons are being shown
+1. Deleting a module while all modules are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all modules using the `list` command. Multiple modules in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First module is deleted from the list. Details of the deleted module are shown in the status message.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No module is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+      
+### Adding a module
 
-1. _{ more test cases …​ }_
-
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+1. Test case: `add c/ST2131 t/Probability d/The objective of this module is to give an elementary introduction to probability theory m/4 tag/UE`
+Expected: A new module is added to the bottom of the list. Details of the added module are shown in the status message.
+   
+2. Test case: `add c/ t/software engineering d/introduces software engineering m/4`
+Expected: No module is added. Error details are shown in the status message.
+   
+3. Other incorrect add commands to try: `add `,`add c/ST21312132 t/abcd d/efgh m/4`, `...`
+Expected: Similar to previous.
+   

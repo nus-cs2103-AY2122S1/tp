@@ -12,7 +12,7 @@ import seedu.tracker.model.calendar.AcademicCalendar;
 import seedu.tracker.model.module.Mc;
 
 /**
- * Sets current semester in Module Tracker.
+ * Sets the current semester or mc goal in the Module Tracker.
  */
 public class SetCommand extends Command {
     public static final String COMMAND_WORD = "set";

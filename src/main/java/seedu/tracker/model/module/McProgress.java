@@ -52,9 +52,16 @@ public class McProgress {
     }
 
     public double getCompletionRatio() {
-        return completed.value >= target.value
-                ? 1
-                : (double) completed.value / target.value;
+        double ratio = (double) completed.value / target.value;
+        double minDisplayRatio = 0.061; // minimum value for progress bar display to appear
+
+        if (ratio > 0 && ratio <= minDisplayRatio) {
+            return minDisplayRatio;
+        } else if (ratio >= 1) {
+            return 1;
+        } else {
+            return ratio;
+        }
     }
 
     public boolean isCompleted() {
