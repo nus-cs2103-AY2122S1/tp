@@ -30,6 +30,11 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_AMY;
+import static seedu.address.logic.commands.EditCommand.MESSAGE_EDIT_PROFILE_GITHUB_CANNOT_BE_EMPTY;
+import static seedu.address.logic.commands.EditCommand.MESSAGE_EDIT_PROFILE_NAME_CANNOT_BE_EMPTY;
+import static seedu.address.logic.commands.EditCommand.MESSAGE_EDIT_PROFILE_PARAMETERS_CANNOT_BE_EMPTY;
+import static seedu.address.logic.commands.EditCommand.MESSAGE_EDIT_PROFILE_TELEGRAM_CANNOT_BE_EMPTY;
+import static seedu.address.logic.commands.EditCommand.MESSAGE_NOT_EDITED;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -68,7 +73,7 @@ public class EditCommandParserTest {
         assertParseFailure(parser, VALID_NAME_AMY, MESSAGE_INVALID_FORMAT);
 
         // no field specified
-        assertParseFailure(parser, "1", EditCommand.MESSAGE_NOT_EDITED);
+        assertParseFailure(parser, "1", MESSAGE_NOT_EDITED);
 
         // no index and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
@@ -83,7 +88,7 @@ public class EditCommandParserTest {
         assertParseFailure(parser, PROFILE + " " + "1", MESSAGE_INVALID_FORMAT);
 
         // no index and no field specified
-        assertParseFailure(parser, PROFILE + " " + "", EditCommand.MESSAGE_NOT_EDITED);
+        assertParseFailure(parser, PROFILE + " " + "", MESSAGE_NOT_EDITED);
     }
 
     @Test
@@ -250,5 +255,40 @@ public class EditCommandParserTest {
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    //=========== Edit profile tests ==========================================
+    @Test
+    public void parse_missingDescription_throwsParseException() {
+        assertParseFailure(parser, "profile", MESSAGE_NOT_EDITED);
+    }
+
+    @Test
+    public void parse_missingAllParameters_throwsParseException() {
+        assertParseFailure(parser, "profile n/ te/ g/", MESSAGE_EDIT_PROFILE_PARAMETERS_CANNOT_BE_EMPTY);
+    }
+
+    @Test
+    public void parse_missingNameParameter_throwsParseException() {
+        //User only wants to edit name but edited name is missing
+        assertParseFailure(parser, "profile n/", MESSAGE_EDIT_PROFILE_NAME_CANNOT_BE_EMPTY);
+        //User wants to edit name and Telegram handle but edited name is missing
+        assertParseFailure(parser, "profile n/ te/bobx_1", MESSAGE_EDIT_PROFILE_NAME_CANNOT_BE_EMPTY);
+    }
+
+    @Test
+    public void parse_missingTelegramParameter_throwsParseException() {
+        //User only wants to edit Telegram handle but edited telegram handle is missing
+        assertParseFailure(parser, "profile te/", MESSAGE_EDIT_PROFILE_TELEGRAM_CANNOT_BE_EMPTY);
+        //User wants to edit Telegram handle and GitHub username but edited Telegram handle is missing
+        assertParseFailure(parser, "profile te/ g/she-codes", MESSAGE_EDIT_PROFILE_TELEGRAM_CANNOT_BE_EMPTY);
+    }
+
+    @Test
+    public void parse_missingGithubParameter_throwsParseException() {
+        //User only wants to edit GitHub username but edited GitHub username is missing
+        assertParseFailure(parser, "profile g/", MESSAGE_EDIT_PROFILE_GITHUB_CANNOT_BE_EMPTY);
+        //User wants to edit GitHub username and Telegram handle but edited GitHub username is missing
+        assertParseFailure(parser, "profile g/ te/bobx_1", MESSAGE_EDIT_PROFILE_GITHUB_CANNOT_BE_EMPTY);
     }
 }
