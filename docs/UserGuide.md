@@ -239,7 +239,7 @@ Example:
 ### Deleting an exam from a student: `student -de`
 <details markdown="1">
 <summary>
-Deletes a lesson from the specific student
+Deletes an exam from the specific student
 </summary>
 
 Format: `student -de PERSON_INDEX EXAM_INDEX`
@@ -281,7 +281,7 @@ Examples:
 Deletes a group of students.
 </summary>
 
-Format: `student -d INDEX`
+Format: `group -d INDEX`
 
 * Deletes a group of students specified at `INDEX`
 * `-d` refers to delete group command.
@@ -289,7 +289,7 @@ Format: `student -d INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `student -d 5` deletes the group specified at the index 5.
+* `group -d 5` deletes the group specified at the index 5.
 </details>
 
 ### Adding a lesson to a group: `group -al`
