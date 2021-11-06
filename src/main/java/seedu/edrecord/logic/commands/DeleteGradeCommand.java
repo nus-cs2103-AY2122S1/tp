@@ -2,7 +2,7 @@ package seedu.edrecord.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.edrecord.commons.core.Messages.MESSAGE_NO_MODULE_SELECTED;
-import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.edrecord.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
@@ -33,27 +33,25 @@ public class DeleteGradeCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a grade from the student "
             + "identified by the index number used in the displayed student list. \n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_NAME + "ASSIGNMENT NAME \n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_NAME + "Assignment 2";
+            + PREFIX_ID + "ASSIGNMENT ID \n"
+            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_ID + "4";
 
     public static final String MESSAGE_SUCCESS = "Deleted grade %s \nfor assignment: %s \nfor student: %s";
-    public static final String MESSAGE_NO_SUCH_ASSIGNMENT = "There is no assignment with this name";
-    public static final String MESSAGE_NO_SUCH_GRADE = "There is no grade for this assignment";
+    public static final String MESSAGE_NO_SUCH_GRADE = "There is no grade for this assignment.";
 
     private final Index index;
-    private final Name name;
+    private final Index id;
 
     /**
      * @param index Index of the student to grade.
-     * @param name  Name of the assignment to grade.
+     * @param id    ID of the assignment to grade.
      */
-    public DeleteGradeCommand(Index index, Name name) {
+    public DeleteGradeCommand(Index index, Index id) {
         requireNonNull(index);
-        requireNonNull(name);
+        requireNonNull(id);
 
         this.index = index;
-        this.name = name;
+        this.id = id;
     }
 
     @Override
@@ -71,9 +69,16 @@ public class DeleteGradeCommand extends Command {
             throw new CommandException(MESSAGE_NO_MODULE_SELECTED);
         }
 
-        // Get assignment
-        Assignment assignment = model.searchAssignment(name)
-                .orElseThrow(() -> new CommandException(MESSAGE_NO_SUCH_ASSIGNMENT));
+        List<Assignment> assignmentList = model.getAssignmentList();
+
+        if (id.getOneBased() >= model.getAssignmentCounter()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_ASSIGNMENT_DISPLAYED_INDEX);
+        }
+
+        Assignment assignment = assignmentList.stream()
+                .filter(asg -> asg.getId() == id.getOneBased())
+                .findFirst()
+                .orElseThrow(() -> new CommandException(Messages.MESSAGE_INVALID_ASSIGNMENT_DISPLAYED_INDEX));
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
         AssignmentGradeMap grades = personToEdit.getGrades();
@@ -123,7 +128,6 @@ public class DeleteGradeCommand extends Command {
 
         // state check
         DeleteGradeCommand e = (DeleteGradeCommand) other;
-        return index.equals(e.index)
-                && name.equals(e.name);
+        return index.equals(e.index) && id.equals(id);
     }
 }

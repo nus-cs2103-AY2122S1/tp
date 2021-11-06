@@ -3,12 +3,11 @@ package seedu.edrecord.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.edrecord.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.edrecord.logic.parser.AddCommandParser.arePrefixesPresent;
-import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_ID;
 
 import seedu.edrecord.commons.core.index.Index;
 import seedu.edrecord.logic.commands.DeleteGradeCommand;
 import seedu.edrecord.logic.parser.exceptions.ParseException;
-import seedu.edrecord.model.name.Name;
 
 /**
  * Parses input arguments and creates a new GradeCommand object
@@ -24,9 +23,9 @@ public class DeleteGradeCommandParser implements Parser<DeleteGradeCommand> {
     public DeleteGradeCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME);
+                ArgumentTokenizer.tokenize(args, PREFIX_ID);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME)) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_ID)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteGradeCommand.MESSAGE_USAGE));
         }
 
@@ -39,8 +38,8 @@ public class DeleteGradeCommandParser implements Parser<DeleteGradeCommand> {
                     DeleteGradeCommand.MESSAGE_USAGE), pe);
         }
 
-        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        Index id = ParserUtil.parseId(argMultimap.getValue(PREFIX_ID).get());
 
-        return new DeleteGradeCommand(index, name);
+        return new DeleteGradeCommand(index, id);
     }
 }
