@@ -3,9 +3,10 @@ layout: page
 title: User Guide
 ---
 
-SalesNote is a **desktop app for managing contacts and tasks, optimized for use via a Command Line Interface** (CLI) 
-while still having the benefits of a Graphical User Interface (GUI). Fast typists can get more out of the application 
-than from traditional GUI apps. The application and guide are based on AB3 with new added features.
+SalesNote is a desktop app for Singapore-based tailors to manage local sales and clients, so that they can focus on 
+producing great work. SalesNote is optimized for use via a Command Line Interface (CLI) while still having the 
+benefits of a Graphical User Interface (GUI). Fast typists can get more out of the application than from traditional 
+GUI apps.
 
 This project is based on the AB3 project created by the [SE-EDU initiative](https://se-education.org).
 
@@ -152,7 +153,6 @@ Format: `addclient n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS m/MEASUREMENT g/GENDE
 A client can have any number of tags (including 0). The remark is also optional.
 </div>
 
-
 Examples:
 * `addclient n/John Doe p/98765432 e/johnd@example.com a/John street Blk 92 g/M m/170_100_40`
 * `addclient n/Betsy Crowe e/bcrowe@example.com a/Sesame Street p/1234567 t/important g/F m/160_85_35_81`
@@ -233,7 +233,7 @@ Adds a task to the application.
 Format: `addtask l/LABEL d/DATE [t/TASKTAG]`
 
 <div markdown="span" class="alert alert-primary">:information_source: **Note:**
-The new task will automatically be assigned the 'General' tag if the task tag parameter is not supplied.
+The new task will automatically be assigned the 'General' tag if the `TASKTAG` parameter is not supplied.
 </div>
 
 Examples:
@@ -378,22 +378,23 @@ Format: `incompleteorders`
 
 Sorts all orders based on a chosen field and arrangement.
 
-Format: `sortorders f/FIELD o/ORDERING`
+Format: `sortorders f/FIELD [o/ORDERING]`
 
 * Your orders are sorted based on the `FIELD` chosen. You may choose between:
   * The Date field, identified with a "d" or "date".
   * The Amount field, identified with an "a" or "amount".
-* By default, the orders are sorted in the sequence they are added. This is also used as a tiebreaker when two or more orders have an identical value for the `FIELD` chosen.
 * The direction of the arrangement depends on the `ORDERING`, which is either:
   * Ascending, identified with an "asc" or "ascending".
   * Descending, identified with a "desc" or "descending".
+* If the `ORDERING` parameter is not supplied, the list will be sorted in ascending order.
 
 <div markdown="block" class="alert alert-primary">
 
-**:information_source: Note:**<br>
+**:information_source: Note:** <br>
 
-* Adding / Deleting an order reverts the list to the default ordering.
-* The order list will automatically be be sorted in ascending order if the ORDERING parameter is not supplied.
+* Your orders are normally arranged in the sequence they were added. 
+* When two or more orders have an identical value for the `FIELD` chosen, the normal arrangement is used as a tiebreaker.
+* Adding / Deleting an order reverts the list to the normal arrangement.
 
 </div>
 
@@ -408,8 +409,10 @@ Examples:
 Shows the total orders for each client in the application.
 
 <div markdown="block" class="alert alert-info">
-:information_source: The total orders displayed are based on the clients in the application.
-If the customer of an order cannot be found among the clients, the order will not be shown.
+:information_source:
+
+* Clients without orders will not be displayed.
+* After adding/deleting orders, you might want to run this command again to refresh the window.
 </div>
 
 ![TotalOrdersWindow](images/TotalOrdersWindow.png)
