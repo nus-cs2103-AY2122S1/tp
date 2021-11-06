@@ -53,7 +53,7 @@ Given below are my contributions to the project.
     * Added documentation for the features `list`, `filter` and `export` [\#78](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/78).
 
   * Developer Guide:
-    * Added implementation details of the `ratings` field and `export` command [\#69](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/69).
+    * Added implementation details of the `ratings` field and `export` command [\#69](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/69) [\#191](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/191).
     * Added use cases [\#19](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/19).
 
 
