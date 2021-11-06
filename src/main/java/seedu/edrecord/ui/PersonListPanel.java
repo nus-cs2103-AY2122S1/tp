@@ -59,6 +59,9 @@ public class PersonListPanel extends UiPart<Region> {
         assignmentListView.setVisible(this.selectedView == View.ASSIGNMENTS);
     }
 
+    /**
+     * Forces a refresh of the list views.
+     */
     public void refresh() {
         personListView.refresh();
         assignmentListView.refresh();

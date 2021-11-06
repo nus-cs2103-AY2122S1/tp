@@ -55,7 +55,7 @@ public class DeleteModuleCommand extends Command {
         model.deleteModule(savedMod);
         Module selectedMod = model.getSelectedModule().getValue();
         if (selectedMod != null && selectedMod.isSameModule(savedMod)) {
-           model.setModuleFilter(PartOfModulePredicate.PREDICATE_SHOW_ALL_MODULES);
+            model.setModuleFilter(PartOfModulePredicate.PREDICATE_SHOW_ALL_MODULES);
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, savedMod));
     }

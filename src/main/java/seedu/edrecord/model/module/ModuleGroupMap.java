@@ -24,6 +24,11 @@ public class ModuleGroupMap {
         mapping.putAll(mods.getMapping());
     }
 
+    /**
+     * Removes the specified module from the map.
+     * @param mod The module to be removed.
+     * @return The group of the removed module.
+     */
     public Group removeMod(Module mod) {
         for (Map.Entry<Module, Group> modGroupMapping : mapping.entrySet()) {
             Module m = modGroupMapping.getKey();
