@@ -11,10 +11,6 @@ public class TodayAttendance {
         this.isPresent = isPresent;
     }
 
-    public Boolean getAttendance() {
-        return isPresent;
-    }
-
     /**
      * Returns icon of attendance status.
      *

@@ -28,6 +28,7 @@ public class Member {
     private final Set<Tag> tags = new HashSet<>();
 
     /**
+     * Constructor that creates member objected with no attendance.
      * Every field must be present and not null.
      */
     public Member(Name name, Phone phone, Availability availability, Set<Tag> tags) {
@@ -50,8 +51,7 @@ public class Member {
      * @param tags Tags associated with member.
      */
     public Member(Name name, Phone phone, Availability availability,
-                  TodayAttendance todayAttendance, TotalAttendance totalAttendance,
-                  Set<Tag> tags) {
+                  TodayAttendance todayAttendance, TotalAttendance totalAttendance, Set<Tag> tags) {
         requireAllNonNull(name, phone, availability, todayAttendance, totalAttendance, tags);
         this.name = name;
         this.phone = phone;
@@ -62,7 +62,7 @@ public class Member {
     }
 
     /**
-     * Constructor that creates member object with attendance.
+     * Constructor that creates member object with no tags.
      *
      * @param name Name of member
      * @param phone Phone number of member

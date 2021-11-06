@@ -13,6 +13,7 @@ public class TotalAttendance {
     public Integer getAttendance() {
         return totalAttendance;
     }
+
     /**
      * Increases total attendance by one.
      */

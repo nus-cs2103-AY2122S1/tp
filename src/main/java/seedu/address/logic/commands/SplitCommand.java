@@ -21,11 +21,9 @@ public class SplitCommand extends Command {
             + "where 1 represents Monday, 2 represents Tuesday ... and 7 represents Sunday\n"
             + "Example: " + COMMAND_WORD + " 1";
     public static final String MESSAGE_SUCCESS = "Members have been split for %1$s";
-    public static final String MESSAGE_INSUFFICIENT_FACILITIES =
-            "There are not enough facilities to accommodate all members for %1$s.\n"
-                    + "%2$d member(s) cannot be allocated.";
-    public static final String MESSAGE_NO_MEMBERS_AVAILABLE =
-            "There are no members available on %1$s.";
+    public static final String MESSAGE_INSUFFICIENT_FACILITIES = "There are not enough facilities "
+            + "to accommodate all members for %1$s.\n%2$d member(s) cannot be allocated.";
+    public static final String MESSAGE_NO_MEMBERS_AVAILABLE = "There are no members available on %1$s.";
 
     private final int dayNumber;
 
