@@ -2,6 +2,7 @@
 layout: page
 title: Developer Guide
 ---
+## **Table of Contents**
 
 * Table of Contents
 {:toc}
@@ -403,6 +404,7 @@ There were two ideas on how this could be done:
     
 We decided to go with the easier implementation of storing each alias as two strings. However, there were still more aspects to be considered.
 
+
 **Aspect 2: How to handle aliases of aliases**
 
 That is, what happens when the user does `alias -c <existing_alias> -as <new_alias>`? There are two choices for this: 
@@ -430,9 +432,10 @@ That is, what happens when the user does `alias -c <existing_alias> -as <new_ali
     
 We decided to go with implementation 2 due to its ability to naturally handle infinite loops and better performance. Our target audience is also Computer Science professors, who should be very familiar with this style of referencing, since that is exactly how names refer to primitive values in programming.
 
+
 **Aspect 3: Removing aliases**
 
-We believe that there needs to be a way to remove aliases. Otherwise, there will eventually be a very large amount of aliases, and some typo might lead to executing a command you didn't intend to execute. Hopefully, that command isn't `clear`
+We believe that there needs to be a way to remove aliases. Otherwise, there will eventually be a very large amount of aliases, and some typo might lead to executing a command you didn't intend to execute. Hopefully, that command isn't `clear`.
 
 Again, there are two choices we could take:
 1. Make a new command for removing an alias, e.g. `removealias`.
