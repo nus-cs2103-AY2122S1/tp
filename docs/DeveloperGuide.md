@@ -535,7 +535,7 @@ The following sequence diagram shows how `Summary` updates when these commands a
 ![Sequence Diagram for Summary Commands](images/SummarySequenceDiagramCommand.png)
 
 
-The above sequence diagrams describe how Summary pulls data from the `AddressBook` to summarise data.
+The above sequence diagrams describe how Summary pulls data from `AddressBook` to summarise data.
 `Summary` uses `JavaFx chart` to display data, on top of the text.
 
 #### Design considerations:
@@ -721,10 +721,9 @@ Use case ends.
 **MSS**
 
 1.  User requests to delete a specific contact in the list
-2.  AddressBook deletes the contact
+2.  WhereTourGo deletes the contact
 
-
-    Use case ends.
+  Use case ends.
 
 **Extensions**
 
@@ -732,18 +731,17 @@ Use case ends.
 
   * 1a1. WhereTourGo shows an error message, and instructions on how to use the command.
 
-
-      Use case ends.
+  Use case ends.
 
 * 1b. The given name is invalid.
 
-  * 1b1. AddressBook shows an error message, and instructions on how to use the command.
+  * 1b1. WhereTourGo shows an error message, and instructions on how to use the command.
 
     Use case ends.
 
 * 1c. The command format is invalid.
 
-  * 1c1. AddressBook shows an error message, and instructions on how to use the command.
+  * 1c1. WhereTourGo shows an error message, and instructions on how to use the command.
 
     Use case ends.
 
@@ -791,8 +789,8 @@ Use case ends.
 
 **MSS**
 
-1.  User requests to view the summary of the AddressBook
-2.  The addressBook returns the summary on the GUI
+1.  User requests to view the summary of the WhereTourGo
+2.  WhereTourGo returns the summary on the GUI
 
     Use case ends.
 
@@ -800,13 +798,13 @@ Use case ends.
 
 * 1a. The command format is wrong (e.g. `sum 1`)
 
-  * 1a1. AddressBook shows an error message, and instructions on how to use the command.
+  * 1a1. WhereTourGo shows an error message, and instructions on how to use the command.
 
     Use case ends.
 
-* 2a. The addressBook is empty
+* 2a. WhereTourGo is empty
 
-  * 2a1. AddressBook will not display chart data and show total contacts as 0.
+  * 2a1. WhereTourGo will not display chart data and show total contacts as 0.
 
     Use case ends.
 
@@ -1000,51 +998,8 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `delete 0`<br>
       Expected: No contact is deleted. Error details shown in the status message. Summary is displayed.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size, or negative), `delete 00001`, `delete 1 n/`, `delete n/INVALID_NAME`(invalid name that does not exist in the addressBook)<br>
+   1. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size, or negative), `delete 00001`, `delete 1 n/`, `delete n/INVALID_NAME`(invalid name that does not exist in WhereTourGo)<br>
       Expected: Similar to previous.
-
-### Displaying Summary
-
-1. Using the `sum` command
-
-    1. Prerequisites: AddressBook has at least 1 contact. Used any command that hides summary such as:  `edit`, `view`.
-    
-    1. Test case: `sum`<br>
-        Expected: Displays summary with the correct information.
-       
-    1. Test case: `sum 2`<br>
-        Expected: Error details shown in the status message, with instructions on how to use the `sum` command. No summary is displayed.
-
-1. Modifying AddressBook with commands that involve summary.
-
-    1. Prerequisites: List all contacts using the `list` command. First contact does not have a 'fnb' category code. Multiple contacts in the list.
-
-    1. Test case: `add c/att n/Singapore Flyers p/92345678 e/123@example.com a/30 Raffles Ave, Singapore 039803 ra/4`<br>
-       Expected: Contact with name 'Singapore Flyers', rating of 4 stars and category of attraction is added. Summary is updated and displayed (Total number of contacts, category and rating charts updated).
-
-    1. Test case: `edit 1 c/fnb`<br>
-       Expected: Category code of first contact in the list is updated to 'fnb'. Summary is updated and displayed (Number of contacts remains the same, category code chart updated with 1 more 'fnb', and one less of the original category code).
-       
-    1. Test case: `clear`<br>
-        Expected: Entire addressBook is deleted. Summary is updated and displayed (Charts are empty, total number of contacts equals 0).
-       
-    1. Test case: `delete 1`<br>
-        Expected: First contact in the addressBook is deleted. Summary is updated and displayed (Number of contacts decreases by 1, contact's category code and rating removed from pie chart segment).
-       
-    1. Test case: `find VALID_SEARCH_QUERY` (any keyword in the addressBook) <br>
-        Expected: Displays results of the `find` command. Summary is displayed.
-
-    1. Test case: `filter c/fnb` <br>
-       Expected: Displays results of the `filter` command. Summary is displayed.
-
-    1. Test case: `list` <br>
-       Expected: Displays results of the `list` command (Displays all contacts). Summary is displayed.
-
-    1. Test case: `undo` (A command affecting the addressBook must be ran first, such as `delete`) <br>
-        Expected: Undoes previous command. Summary is updated and displayed (i.e. summary reflects the undone command).
-       
-    1. Test case: `redo` (Previous test case, `undo`, must be executed first) <br>
-        Expected: Redoes the previous command that was undone. Summary is updated and displayed (i.e. summary reflects the redone command).
       
 
 ### Listing all contacts
@@ -1063,7 +1018,48 @@ testers are expected to do more *exploratory* testing.
 
 ### Sorting contacts
 
-### Summarizing contacts
+### Displaying Summary
+
+1. Using the `sum` command
+
+    1. Prerequisites: WhereTourGo has at least 1 contact. Used any command that hides summary such as:  `edit`, `view`.
+  
+    1. Test case: `sum`<br>
+       Expected: Displays summary with the correct information.
+  
+    1. Test case: `sum 2`<br>
+       Expected: Error details shown in the status message, with instructions on how to use the `sum` command. No summary is displayed.
+
+1. Modifying WhereTourGo with commands that involve summary.
+
+    1. Prerequisites: List all contacts using the `list` command. First contact does not have a 'fnb' category code. Multiple contacts in the list.
+  
+    1. Test case: `add c/att n/Singapore Flyers p/92345678 e/123@example.com a/30 Raffles Ave, Singapore 039803 ra/4`<br>
+       Expected: Contact with name 'Singapore Flyers', rating of 4 stars and category of attraction is added. Summary is updated and displayed (Total number of contacts, category and rating charts updated).
+  
+    1. Test case: `edit 1 c/fnb`<br>
+       Expected: Category code of first contact in the list is updated to 'fnb'. Summary is updated and displayed (Number of contacts remains the same, category code chart updated with 1 more 'fnb', and one less of the original category code).
+  
+    1. Test case: `clear`<br>
+       Expected: Entire contact list is deleted. Summary is updated and displayed (Charts are empty, total number of contacts equals 0).
+  
+    1. Test case: `delete 1`<br>
+       Expected: First contact in WhereTourGo is deleted. Summary is updated and displayed (Number of contacts decreases by 1, contact's category code and rating removed from pie chart segment).
+  
+    1. Test case: `find VALID_SEARCH_QUERY` (any keyword in WhereTourGo) <br>
+       Expected: Displays results of the `find` command. Summary is displayed.
+  
+    1. Test case: `filter c/fnb` <br>
+       Expected: Displays results of the `filter` command. Summary is displayed.
+  
+    1. Test case: `list` <br>
+       Expected: Displays results of the `list` command (Displays all contacts). Summary is displayed.
+  
+    1. Test case: `undo` (A command affecting WhereTourGo must be run first, such as `delete`) <br>
+       Expected: Undoes previous command. Summary is updated and displayed (i.e. summary reflects the undone command).
+  
+    1. Test case: `redo` (Previous test case, `undo`, must be executed first) <br>
+       Expected: Redoes the previous command that was undone. Summary is updated and displayed (i.e. summary reflects the redone command).
 
 ### Viewing a contact
 
