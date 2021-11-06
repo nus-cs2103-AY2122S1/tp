@@ -37,6 +37,13 @@ public class UniqueGroupList implements Iterable<Group> {
     }
 
     /**
+     * Returns true if the list does not contain any group.
+     */
+    public boolean hasAnyGroup() {
+        return !internalList.isEmpty();
+    }
+
+    /**
      * Adds a group to the list.
      * The group must not already exist in the list.
      */

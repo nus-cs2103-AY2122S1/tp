@@ -26,11 +26,11 @@ public class ModuleSet {
     public void add(Module mod, Group group) {
         if (!containsModule(mod)) {
             Module newModule = new Module(mod.getCode());
-            modules.add(newModule);
+            this.getModules().add(newModule);
         }
 
         if (!containsGroupInModule(mod, group)) {
-            for (Module module : modules) {
+            for (Module module : this.getModules()) {
                 if (module.isSameModule(mod)) {
                     module.addGroup(group);
                 }
@@ -42,11 +42,11 @@ public class ModuleSet {
      * Used for testing purposes only.
      */
     public void addToSet(Module mod) {
-        modules.add(mod);
+        this.getModules().add(mod);
     }
 
     public void addAll(ModuleSet mods) {
-        modules.addAll(mods.getModules());
+        this.getModules().addAll(mods.getModules());
     }
 
     /**
@@ -56,7 +56,7 @@ public class ModuleSet {
     public void removeMod(Module mod) {
         for (Module module : this.getModules()) {
             if (module.isSameModule(mod)) {
-                modules.remove(module);
+                this.getModules().remove(module);
                 return;
             }
         }
@@ -115,6 +115,18 @@ public class ModuleSet {
         }
         return false;
     }
+    /**
+     * Checks if the module contains any groups.
+     * This method should be called with containsModule
+     */
+    public boolean hasAnyGroup(Module mod) {
+        for (Module module : this.getModules()) {
+            if (module.isSameModule(mod) && module.hasAnyGroup()) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     @Override
     public boolean equals(Object other) {
@@ -132,13 +144,13 @@ public class ModuleSet {
 
     @Override
     public int hashCode() {
-        return modules.hashCode();
+        return this.getModules().hashCode();
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (Module module : modules) {
+        for (Module module : this.getModules()) {
             sb.append(module.getCode())
                     .append(":")
                     .append(module.getGroupSystem())
