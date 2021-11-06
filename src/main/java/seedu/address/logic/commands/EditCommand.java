@@ -30,7 +30,6 @@ import seedu.address.model.contact.Name;
 import seedu.address.model.contact.Phone;
 import seedu.address.model.contact.Rating;
 import seedu.address.model.contact.Review;
-import seedu.address.model.summary.Summary;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -93,7 +92,6 @@ public class EditCommand extends Command {
 
         model.setContact(contactToEdit, editedContact);
         model.updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
-        Summary summary = new Summary(model.getAddressBook());
         return new CommandResult(String.format(MESSAGE_EDIT_CONTACT_SUCCESS, editedContact), editedContact);
     }
 

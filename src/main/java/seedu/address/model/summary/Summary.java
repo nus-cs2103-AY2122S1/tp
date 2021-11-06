@@ -31,7 +31,7 @@ public class Summary {
     public Summary(ReadOnlyAddressBook addressBook) {
         this.contactList = addressBook.getContactList();
         numberOfContacts = setNumberOfContacts();
-        percentageCategory = setNumberCategory();
+        percentageCategory = setPercentageCategory();
         percentageRatings = setPercentageRatings();
     }
 
@@ -68,7 +68,7 @@ public class Summary {
      * Sets the total number of contacts in each category.
      * @return HashMap of total number of contacts in each category.
      */
-    private HashMap<String, Integer> setNumberCategory() {
+    private HashMap<String, Integer> setPercentageCategory() {
         HashMap<String, Integer> count = new HashMap<>();
 
         for (Contact contact : contactList) {
@@ -85,15 +85,15 @@ public class Summary {
         return count;
     }
 
-    public int getNumberOfContacts() {
+    private int getNumberOfContacts() {
         return numberOfContacts;
     }
 
-    public HashMap<String, Integer> getPercentageCategory() {
+    private HashMap<String, Integer> getPercentageCategory() {
         return percentageCategory;
     }
 
-    public HashMap<String, Integer> getPercentageRatings() {
+    private HashMap<String, Integer> getPercentageRatings() {
         return percentageRatings;
     }
 
