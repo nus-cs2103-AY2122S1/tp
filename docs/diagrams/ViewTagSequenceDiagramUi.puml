@@ -19,6 +19,12 @@ activate Logic
 Logic --> MainWindow : commandResult
 deactivate Logic
 
+note right
+Details of executing the
+command string is similar to
+that of viewing reminder logic.
+end note
+
 MainWindow -> MainWindow : handleShowTagList()
 activate MainWindow
 

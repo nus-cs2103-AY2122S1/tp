@@ -366,6 +366,61 @@ We chose alternative 2 and integrated CalendarFX into our app as the possibility
 
 Alternative 1 is our preferred choice as its pros and cons seem much better than alternative 2, especially due to its ease of implementation. The main difficulty of alternative 1 becoming familiar with the CalendarFX _API_, but this difficulty is also present in alternative 2.
 
+### Reminder Feature
+The reminder feature allows users to view a list of upcoming lessons that ends in the next 48 hours.
+
+- Example: Suppose the date today is 1 Nov 2021 and current time is 1500h,
+  - lessons with the following dates and time are considered upcoming:
+    - 1 Nov 2021 with end time at or after 1500h,
+    - 2 Nov 2021 with any valid time range,
+    - 3 Nov 2021 with start time before or at 1500h.
+  - lessons with the following dates and time are not considered upcoming:
+    - dates before 1 Nov 2021 (has passed),
+    - 1 Nov 2021 with end time before 1500h (has passed),
+    - 3 Nov 2021 with start time after 1500h (beyond 48 hours).
+
+Viewing a list of upcoming lessons is facilitated by `CalendarEntryList`.
+- `CalendarEntryList` holds all lesson entries as well as a separate list of lessons that are considered upcoming.
+- Whenever data modifications are made to lessons, `CalendarEntryList` will update the list of calendar entries accordingly.
+- At the same time, `CalendarEntryList#isUpcoming(Entry<Lesson>)` checks if the lesson modified ends within the next 48 hours and `CalendarEntryList` will make changes accordingly to the list of upcoming lessons.
+  - e.g. if the user edits an upcoming lesson such that the date and time are no longer considered upcoming, the lesson will be removed from the reminder list.
+
+Given below is a simple illustration of how the reminder list might change with user inputs.
+<img src="images/ReminderActivityDiagram.png" /> <br>
+
+*Figure I.5.1: Reminder activity diagram for adding a lesson.*
+
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** 
+Reminder does not refresh the list of upcoming lessons automatically if no data modifications were made to lessons. Users need to enter `remind`, click <kbd>Reminder</kbd> on the menu bar or press <kbd>F5</kbd> to update the list of upcoming lessons. </div>
+
+Given below is an example usage scenario and how viewing reminder is executed:
+- **Step 1:** The user enter the command `remind` to view the list of upcoming lessons. `Logic` calls `AddressBookParser` to parse this command string, creating a `RemindCommand`.
+- **Step 3:** `Logic` executes the `RemindCommand`. During execution, `RemindCommand#execute()` instantiates a `CommandResult` with the `DisplayType` of `REMINDER` as a signal for `MainWindow` to open the `ReminderWindow` or focus on it if it was already opened.
+- **Step 4:** `MainWindow` then handles this command by calling `MainWindow#showReminder()`. `Logic#updateUpcomingLessons()` is then called to display the updated list of upcoming lessons to the user.
+
+Figure I.5.2 shows a sequence diagram of how viewing reminder's logic works.<br>
+<img src="images/ViewRemindSequenceDiagramLogic.png" width="800" />
+
+*Figure I.5.2: View reminder logic sequence diagram*
+
+Figure I.5.3 shows a sequence diagram of how the reminder window is displayed with the UI components.<br>
+<img src="images/ReminderSequenceDiagram.png" width="800" /> <br>
+
+*Figure I.5.3: View reminder sequence diagram.*
+
+#### Design considerations
+**Aspect: Date and time range of lessons to be considered as upcoming**
+
+* **Alternative 1 (current implementation):** Lessons are considered upcoming if they end within the next 48 hours.
+  * Pros: Easy to implement and detect misbehavior.
+  * Cons: Low flexibility towards users customization. Users are unable to determine the time range that they want to consider lessons as "upcoming".
+* **Alternative 2:** Allow users to define the time range within which lessons are considered "upcoming".
+  * Pros: Greater flexibility in planning lesson materials.
+  * Cons: Higher chance of causing the app to misbehave.
+
+As Alternative 2 requires more testing and hence more time to minimize bugs, we decided to put off alternative 2 for future considerations given the limited amount of time we have.
+
 ### Undo/redo feature
 
 The undo/redo mechanism is facilitated by an `UndoRedoStack`, which resides in `LogicManager`. It supports the undoing and redoing of commands that modifies the state of the address book (e.g. `add`, `edit`). Such commands will inherit from `UndoableCommand`.
@@ -487,7 +542,7 @@ Viewing tag is facilitated by `UniqueTagList`.
 
 - `UniqueTagList` stores a list of alphabetically sorted unique unmodifiable tags with case-insensitive tag names.
 - `UniqueTagList` holds a private field `tagCounter` that maps `Tag` to `Integer`, where `Integer` is the number of persons labelled under each tag. 
-- `Tag` objects are not referenced by `Person`, i.e. each `Person` has a set of `Tag` objects.
+- `Tag` objects in `UniqueTagList` may not have the same reference as the `Person` object's `Tag`, i.e. each `Person` has a set of `Tag` objects on its own.
 
 Operations include:
 - `UniqueTagList#addTagFromPerson(Person)` - Adds tags from the specified person to the tag list if the tags do not exist in the tag list. If there is already a tag with same case-insensitive name, it increments the `Integer` that this tag is mapped to in `tagCounter`.
@@ -504,15 +559,10 @@ Given below is an example usage scenario and how viewing tag is executed:
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** Tags with duplicate case-insensitive tag names for a person is not allowed. If the user tries to adds a tag with the same tag name to the person already with that tag, the new tag will not be added and `tagCounter` will not increment the count for this tag.<br></div>
 
-Figure I.4.1 shows a sequence diagram of how viewing tags works.<br>
-<img src="images/ViewTagSequenceDiagramLogic.png" width="800" />
-
-*Figure I.4.1: View tags logic sequence diagram*
-
-Figure I.4.2 shows a sequence diagram of how the tag list is displayed to the user with UI components.<br>
+Figure I.4.1 shows a sequence diagram of how the tag list is displayed to the user with UI components.<br>
 <img src="images/ViewTagSequenceDiagramUi.png" width="800" />
 
-*Figure I.4.2: View tags UI sequence diagram*
+*Figure I.4.1: View tags UI sequence diagram*
 
 #### Design considerations
 **Aspect: Data Structures to support lesson operations**
@@ -531,55 +581,6 @@ Figure I.4.2 shows a sequence diagram of how the tag list is displayed to the us
     - This could result in circular dependency since a `Person` keeps reference of a set of `Tags` and a `Tag` has to keep a reference to a list of `Persons` simultaneously.
     - Updating the tags labelled for a `Person` requires modification of the data fields of the `Person`. Since TAB objects are immutable, this means that new copies of `Person` and `Tag` have to be created after every command that modifies the data. This could slow down the application when there is a large amount of data stored.
 
-
-### Reminder Feature
-The reminder feature allows users to view a list of upcoming lessons that ends in the next 48 hours.
-
-- Example: Suppose the date today is 1 Nov 2021 and current time is 1500h,
-  - lessons with the following dates and time are considered upcoming:
-    - 1 Nov 2021 with end time at or after 1500h,
-    - 2 Nov 2021 with any valid time range,
-    - 3 Nov 2021 with start time before or at 1500h.
-  - lessons with the following dates and time are not considered upcoming:
-    - dates before 1 Nov 2021 (has passed),
-    - 1 Nov 2021 with end time before 1500h (has passed),
-    - 3 Nov 2021 with start time after 1500h (beyond 48 hours).
-
-Viewing a list of upcoming lessons is facilitated by `CalendarEntryList`.
-- `CalendarEntryList` holds all lesson entries as well as a separate list of lessons that are considered upcoming. 
-- Whenever data modifications are made to lessons, `CalendarEntryList` will update the list of calendar entries accordingly. 
-- At the same time, `CalendarEntryList#isUpcoming(Entry<Lesson>)` checks if the lesson modified ends within the next 48 hours and `CalendarEntryList` will make changes accordingly to the list of upcoming lessons.
-  - e.g. if the user edits an upcoming lesson such that the date and time are no longer considered upcoming, the lesson will be removed from the reminder list.
-
-Given below is a simple illustration of how the reminder list might change with user inputs.
-<img src="images/ReminderActivityDiagram.png" /> <br>
-
-*Figure I.5.1: Reminder activity diagram for adding a lesson.*
-
-Figure I.5.2 shows a sequence diagram of how viewing reminder works.<br>
-<div markdown="span" class="alert alert-info">:information_source: **Note:** 
-Reminder does not refresh the list of upcoming lessons automatically if no data modifications were made to lessons. Users need to enter `remind`, click <kbd>Reminder</kbd> on the menu bar or press <kbd>F5</kbd> to update the list of upcoming lessons. </div>
-
-Given below is an example usage scenario and how viewing reminder is executed:
-- **Step 1:** The user enter the command `remind` to view the list of upcoming lessons. `Logic` calls `AddressBookParser` to parse this command string, creating a `RemindCommand`.
-- **Step 3:** `Logic` executes the `RemindCommand`. During execution, `RemindCommand#execute()` instantiates a `CommandResult` with the `DisplayType` of `REMINDER` as a signal for `MainWindow` to open the `ReminderWindow` or focus on it if it was already opened.
-- **Step 4:** `MainWindow` then handles this command by calling `MainWindow#showReminder()`. `Logic#updateUpcomingLessons()` is then called to display the updated list of upcoming lessons to the user.
-
-<img src="images/ReminderSequenceDiagram.png" width="800" /> <br>
-
-*Figure I.5.2: View reminder sequence diagram.*
-
-#### Design considerations
-**Aspect: Date and time range of lessons to be considered as upcoming**
-
-* **Alternative 1 (current implementation):** Lessons are considered upcoming if they end within the next 48 hours.
-  * Pros: Easy to implement and detect misbehavior.
-  * Cons: Low flexibility towards users customization. Users are unable to determine the time range that they want to consider lessons as "upcoming".
-* **Alternative 2:** Allow users to define the time range within which lessons are considered "upcoming".
-  * Pros: Greater flexibility in planning lesson materials.
-  * Cons: Higher chance of causing the app to misbehave.
-
-As Alternative 2 requires more testing and hence more time to minimize bugs, we decided to put off alternative 2 for future considerations given the limited amount of time we have.
 
 ### Finding students
 

@@ -18,11 +18,6 @@ activate Logic
 Logic --> MainWindow : commandResult
 deactivate Logic
 
-note right
-Details of executing the command string
-is similar to that of viewing tag logic.
-end note
-
 MainWindow -> MainWindow : handleReminder()
 activate MainWindow
 
