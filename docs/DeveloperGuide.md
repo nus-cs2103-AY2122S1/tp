@@ -430,14 +430,14 @@ The following sequence diagram gives the overview of the add command with a revi
 
 The following activity diagram shows how the review operation works:
 
-![Sequence Diagram for Review](images/ReviewActivityDiagram.png)
+![Activity Diagram for Review](images/ReviewActivityDiagram.png)
 
 
 Given below is an example usage scenario of adding a Review:
 
-Step 1. The user adds a new Review using the `add` command e.g. `add n/test e/test@gmail.com p/12344321 a/test c/att rv/test review`
+Step 1. The user adds a new Review using the `add` command e.g. `add n/test e/test@gmail.com p/12344321 a/test c/att rv/test review`.
 
-Step 2. The user can click on the contact on the GUI to expand it and display the full review
+Step 2. The user can click on the contact on the GUI to expand it and display the full review.
 
 #### Design considerations:
 
@@ -450,21 +450,46 @@ Step 2. The user can click on the contact on the GUI to expand it and display th
 * **Alternative 2:** Separate command for review
     * Pros: Increases modularity by making review an entirely new command.
     * Cons: Too many commands which may confuse the User.
+    
 ### Summary Feature
 
 #### Implementation
 
 The `Summary` class summarises the contents of the entire `AddressBook`. It utilises the `AddressBook` class to
 obtain a read-only copy of `AddressBook` to summarise the data within. It implements the following operations:
-* `setNumberOfContacts`  — Calculates and sets the number of contacts in the addressbook.
-* `setPercentageReviews()`  — Calculates and sets the percentage of contacts that have a review.
-* `setNumberCategory`  — Calculates and sets the number of contacts in each category defined by `CatergoryCode`.
+* `setNumberOfContacts()`  — Calculates and sets the number of contacts in the addressbook.
+* `setPercentageRatings()`  — Calculates and sets the percentage of contacts that have a rating (unrated not included).
+* `setNumberCategory()`  — Calculates and sets the number of contacts in each category defined by `CatergoryCode`.
+* `getNumberOfContactsGui()`  — Returns the total number of contacts to display on the GUI.
+* `getPercentageRatingsGui()`  — Returns the Pie Chart data for the proportions/percentage of `Rating`.
+* `getPercentageCategoryGui()`  — Returns the Pie Chart data for the proportions/percentage for `CatergoryCode`.
 
-Additionally, `Summary` will communicate with `UI` to display the summarised results
 
-The following sequence diagram gives an overview of how `Summary` works:
+Additionally, `Summary` will communicate with `UI`, specifically `MainWindow` to display the summarised results.
+
+The following sequence diagram gives an overview of how `Summary` works when the app launches:
 
 ![Sequence Diagram for Summary](images/SummarySequenceDiagram.png)
+
+`Summary` updates when certain commands are run:
+
+These commands include:
+1. Add Command
+2. Clear Command
+3. Delete Command
+4. Filter Command
+5. Find Command
+6. List Command
+7. Undo Command
+8. Redo Command
+9. Summary Command
+
+The following sequence diagram shows how `Summary` updates when these commands run:
+
+![Sequence Diagram for Summary Commands](images/SummarySequenceDiagramCommand.png)
+
+
+The above sequence diagrams describe how Summary pulls data from the `AddressBook` to summarise data.  `MainWindow` then displays the summary to the user.
 
 #### Design considerations:
 
@@ -472,7 +497,7 @@ The following sequence diagram gives an overview of how `Summary` works:
 
 * **Alternative 1 (current choice):** Works on a Read-Only copy of `AddressBook`.
     * Pros: Easier to implement, guaranteed to not edit the internals.
-    * Cons: Exposing internal workings of `AddressBook`.
+    * Cons: Works directly with a Read-Only copy of `AddressBook`.
 
 * **Alternative 2:** Gets data directly from `Contact`, `Review` etc.
     * Pros: Data is kept directly with the low-level classes and pulled from there.

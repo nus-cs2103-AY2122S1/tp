@@ -93,7 +93,6 @@ public class EditCommand extends Command {
 
         model.setContact(contactToEdit, editedContact);
         model.updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
-        Summary summary = new Summary(model.getAddressBook());
         return new CommandResult(String.format(MESSAGE_EDIT_CONTACT_SUCCESS, editedContact), editedContact);
     }
 
