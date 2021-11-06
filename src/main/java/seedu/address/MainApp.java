@@ -278,7 +278,7 @@ public class MainApp extends Application {
             storage.saveAddressBook(SampleDataUtil.getSampleAddressBook());
             FileUtil.createFile(userPrefs.getEncryptedFilePath());
             cryptor.encrypt(storage.getAddressBookFilePath(), userPrefs.getEncryptedFilePath());
-        } catch (IOException e ) {
+        } catch (IOException e) {
             e.printStackTrace();
         } catch (InvalidKeyException e) {
             FileUtil.deleteFile(storage.getAddressBookFilePath());

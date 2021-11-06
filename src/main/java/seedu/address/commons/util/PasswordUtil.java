@@ -30,11 +30,13 @@ public class PasswordUtil {
         Matcher hasHyphen = hyphen.matcher(password);
         Matcher hasSPace = space.matcher(password);
 
-        return password.length() >= MIN_PASSWORD_LENGTH
-                && password.length() <= MAX_PASSWORD_LENGTH
-                && !hasSlash.find()
+        Boolean isValidLength = password.length() >= MIN_PASSWORD_LENGTH
+                && password.length() <= MAX_PASSWORD_LENGTH;
+        Boolean isValidSyntax = !hasSlash.find()
                 && !hasHyphen.find()
                 && !hasSPace.find();
+
+        return isValidLength && isValidSyntax;
     }
 
 }
