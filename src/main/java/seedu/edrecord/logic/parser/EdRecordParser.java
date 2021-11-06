@@ -6,7 +6,6 @@ import static seedu.edrecord.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.edrecord.logic.commands.AddAssignmentCommand;
 import seedu.edrecord.logic.commands.AddCommand;
 import seedu.edrecord.logic.commands.CdCommand;
 import seedu.edrecord.logic.commands.ClearCommand;
@@ -25,6 +24,7 @@ import seedu.edrecord.logic.commands.HelpCommand;
 import seedu.edrecord.logic.commands.ListClassesCommand;
 import seedu.edrecord.logic.commands.ListCommand;
 import seedu.edrecord.logic.commands.ListModulesCommand;
+import seedu.edrecord.logic.commands.MakeAssignmentCommand;
 import seedu.edrecord.logic.commands.MakeGroupCommand;
 import seedu.edrecord.logic.commands.MakeModuleCommand;
 import seedu.edrecord.logic.commands.MoveCommand;
@@ -98,8 +98,8 @@ public class EdRecordParser {
         case ViewCommand.COMMAND_WORD:
             return new ViewCommandParser().parse(arguments);
 
-        case AddAssignmentCommand.COMMAND_WORD:
-            return new AddAssignmentCommandParser().parse(arguments);
+        case MakeAssignmentCommand.COMMAND_WORD:
+            return new MakeAssignmentCommandParser().parse(arguments);
 
         case DeleteAssignmentCommand.COMMAND_WORD:
             return new DeleteAssignmentCommandParser().parse(arguments);

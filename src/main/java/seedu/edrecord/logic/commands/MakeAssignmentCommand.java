@@ -10,7 +10,7 @@ import seedu.edrecord.logic.commands.exceptions.CommandException;
 import seedu.edrecord.model.Model;
 import seedu.edrecord.model.assignment.Assignment;
 
-public class AddAssignmentCommand extends Command {
+public class MakeAssignmentCommand extends Command {
 
     public static final String COMMAND_WORD = "mkasg";
 
@@ -31,9 +31,9 @@ public class AddAssignmentCommand extends Command {
     private final Assignment toAdd;
 
     /**
-     * Creates an AddAssignmentCommand to add the specified {@code Assignment}
+     * Creates an MakeAssignmentCommand to add the specified {@code Assignment}
      */
-    public AddAssignmentCommand(Assignment assignment) {
+    public MakeAssignmentCommand(Assignment assignment) {
         requireNonNull(assignment);
         toAdd = assignment;
     }
@@ -54,7 +54,7 @@ public class AddAssignmentCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddAssignmentCommand // instanceof handles nulls
-                && toAdd.equals(((AddAssignmentCommand) other).toAdd));
+                || (other instanceof MakeAssignmentCommand // instanceof handles nulls
+                && toAdd.equals(((MakeAssignmentCommand) other).toAdd));
     }
 }
