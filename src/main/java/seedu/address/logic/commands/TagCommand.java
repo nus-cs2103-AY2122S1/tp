@@ -20,9 +20,9 @@ public class TagCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) a/TAG [r/TAG] [MORE_TAGS]..\n"
             + "Example: " + COMMAND_WORD + " 1 a/friends ";
 
-    public static final String MESSAGE_TAGGED_PERSON_SUCCESS = "Successfully added/removed required tag(s) to %1$s!";
-    public static final String MESSAGE_INVALID_TAG_INDEX = "Invalid index entered! Tag index must be a "
-            + "positive integer";
+    public static final String MESSAGE_TAGGED_PERSON_SUCCESS = "Successfully added/removed tag(s) to %1$s!";
+    public static final String MESSAGE_ADD_TAG_SUCCESS = "Successfully added tag(s) to %1$s!";
+    public static final String MESSAGE_REMOVE_TAG_SUCCESS = "Successfully removed tag(s) to %1$s!";
     public static final String MESSAGE_MISSING_ADD_AND_REMOVE_TAG_ARGS = "Tags to be added and removed are missing!\n"
             + MESSAGE_USAGE;
     public static final String MESSAGE_MISSING_ADD_TAG_ARGS = "Tags to be added are missing!\n" + MESSAGE_USAGE;
@@ -71,6 +71,18 @@ public class TagCommand extends Command {
         newTags.addAll(toAdd);
         return newTags;
     }
+
+    public String getTagSuccessMessage(Person editedPerson, boolean tagsAdded, boolean tagsRemoved) {
+        String successMessage = "";
+        if (tagsAdded && tagsRemoved) {
+            successMessage = String.format(MESSAGE_TAGGED_PERSON_SUCCESS, editedPerson);
+        } else if (tagsAdded) {
+            successMessage = String.format(MESSAGE_ADD_TAG_SUCCESS, editedPerson);
+        } else if (tagsRemoved) {
+            successMessage = String.format(MESSAGE_REMOVE_TAG_SUCCESS, editedPerson);
+        }
+        return successMessage;
+    }
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -95,14 +107,18 @@ public class TagCommand extends Command {
                 personToEdit.isFavourite(), personToEdit.getProfilePicture(), personToEdit.getGitStats());
 
         model.setPerson(personToEdit, editedPerson);
-        model.getPersonListControl().refreshPersonListUI();
-        return new CommandResult(String.format(MESSAGE_TAGGED_PERSON_SUCCESS, editedPerson));
+        if (model.getPersonListControl() != null) {
+            model.getPersonListControl().refreshPersonListUI();
+        }
+        return new CommandResult(getTagSuccessMessage(editedPerson, !toAdd.isEmpty(), !toRemove.isEmpty()));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof TagCommand // instanceof handles nulls
-                && targetIndex.equals(((TagCommand) other).targetIndex)); // state check
+                && targetIndex.equals(((TagCommand) other).targetIndex))
+                && toAdd.containsAll(((TagCommand) other).toAdd)
+                && toRemove.containsAll(((TagCommand) other).toRemove); // state check
     }
 }
