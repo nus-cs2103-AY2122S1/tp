@@ -23,6 +23,9 @@ public class FindCommand extends Command {
             + "Example: " + COMMAND_WORD + " n/alice n/bob t/friends t/colleagues";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": " + COMMAND_DESCRIPTION + COMMAND_EXAMPLE;
+    public static final String CASE_SENSITIVE_FLAG_FORMAT_MESSAGE = "The case-sensitive flag `c/` must come "
+            + "right after the " + "command word!\n" + "For example, rather than 'find n/NAME c/ t/TAG' or "
+            + "'find n/NAME t/TAG c/', it should be 'find c/ n/NAME t/TAG' instead.";
 
     private final FindPredicate findPredicate;
 
