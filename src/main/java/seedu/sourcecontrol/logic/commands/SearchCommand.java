@@ -18,7 +18,7 @@ import seedu.sourcecontrol.model.student.TagContainsKeywordsPredicate;
 
 
 /**
- * Finds and lists all persons in Source Control application whose fields contains any of the argument keywords.
+ * Finds and lists all students in Source Control application whose fields contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
 public class SearchCommand extends Command {
@@ -63,7 +63,7 @@ public class SearchCommand extends Command {
         model.updateFilteredStudentList(predicate);
         int numStudents = model.getFilteredStudentList().size();
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW,
+                String.format(Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW,
                         numStudents + " student" + (numStudents == 1 ? "" : "s")));
     }
 

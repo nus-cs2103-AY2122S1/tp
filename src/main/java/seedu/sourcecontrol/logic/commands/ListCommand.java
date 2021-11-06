@@ -6,7 +6,7 @@ import static seedu.sourcecontrol.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import seedu.sourcecontrol.model.Model;
 
 /**
- * Lists all persons in the Source Control application to the user.
+ * Lists all students in the Source Control application to the user.
  */
 public class ListCommand extends Command {
 

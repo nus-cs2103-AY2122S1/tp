@@ -7,8 +7,8 @@ import static seedu.sourcecontrol.logic.commands.CommandTestUtil.VALID_SCORES_AM
 import static seedu.sourcecontrol.testutil.Assert.assertThrows;
 import static seedu.sourcecontrol.testutil.TypicalAssessments.MISSION_01;
 import static seedu.sourcecontrol.testutil.TypicalAssessments.PATH_05;
-import static seedu.sourcecontrol.testutil.TypicalPersons.AMY;
-import static seedu.sourcecontrol.testutil.TypicalPersons.BOB;
+import static seedu.sourcecontrol.testutil.TypicalStudents.AMY;
+import static seedu.sourcecontrol.testutil.TypicalStudents.BOB;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,7 +19,7 @@ import seedu.sourcecontrol.model.student.exceptions.AssessmentNotFoundException;
 import seedu.sourcecontrol.model.student.exceptions.DuplicateAssessmentException;
 import seedu.sourcecontrol.testutil.AssessmentBuilder;
 import seedu.sourcecontrol.testutil.AssessmentListBuilder;
-import seedu.sourcecontrol.testutil.PersonBuilder;
+import seedu.sourcecontrol.testutil.StudentBuilder;
 
 public class AssessmentListTest {
 
@@ -82,7 +82,7 @@ public class AssessmentListTest {
 
     @Test
     public void update_studentToUpdateWithExistentAssessment_successWithExistentAssessmentUpdated() {
-        Student updatedBob = new PersonBuilder(BOB).withScores(VALID_SCORES_AMY).build(); // Bob with Amy's scores
+        Student updatedBob = new StudentBuilder(BOB).withScores(VALID_SCORES_AMY).build(); // Bob with Amy's scores
         assessments.update(AMY);
         assessments.update(updatedBob);
         AssessmentList expectedAssessments = new AssessmentListBuilder()

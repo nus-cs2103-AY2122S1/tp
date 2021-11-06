@@ -59,7 +59,7 @@ public class SampleDataUtil {
      */
     private static final Set<String> TAKEN_IDS = new HashSet<>();
 
-    public static List<Student> getSamplePersons() {
+    public static List<Student> getSampleStudents() {
         List<Student> sampleStudents = new ArrayList<>();
 
         for (String studentName : SAMPLE_STUDENT_NAMES) {
@@ -78,7 +78,7 @@ public class SampleDataUtil {
 
     public static ReadOnlySourceControl getSampleSourceControl() {
         SourceControl sampleAb = new SourceControl();
-        for (Student sampleStudent : getSamplePersons()) {
+        for (Student sampleStudent : getSampleStudents()) {
             sampleAb.addStudent(sampleStudent);
         }
         return sampleAb;

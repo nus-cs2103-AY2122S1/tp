@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.sourcecontrol.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import static seedu.sourcecontrol.testutil.Assert.assertThrows;
-import static seedu.sourcecontrol.testutil.TypicalPersons.ALICE;
-import static seedu.sourcecontrol.testutil.TypicalPersons.BENSON;
+import static seedu.sourcecontrol.testutil.TypicalStudents.ALICE;
+import static seedu.sourcecontrol.testutil.TypicalStudents.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -79,23 +79,23 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
+    public void hasStudent_nullStudent_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.hasStudent(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasStudent_studentNotInAddressBook_returnsFalse() {
         assertFalse(modelManager.hasStudent(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasStudent_studentInAddressBook_returnsTrue() {
         modelManager.addStudent(ALICE);
         assertTrue(modelManager.hasStudent(ALICE));
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getFilteredStudentList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredStudentList().remove(0));
     }
 
@@ -146,7 +146,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        SourceControl addressBook = new SourceControlBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        SourceControl addressBook = new SourceControlBuilder().withStudent(ALICE).withStudent(BENSON).build();
         SourceControl differentAddressBook = new SourceControl();
         UserPrefs userPrefs = new UserPrefs();
 

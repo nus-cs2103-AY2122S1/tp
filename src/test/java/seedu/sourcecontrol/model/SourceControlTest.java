@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.sourcecontrol.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.sourcecontrol.testutil.Assert.assertThrows;
-import static seedu.sourcecontrol.testutil.TypicalPersons.ALICE;
-import static seedu.sourcecontrol.testutil.TypicalPersons.getTypicalSourceControl;
+import static seedu.sourcecontrol.testutil.TypicalStudents.ALICE;
+import static seedu.sourcecontrol.testutil.TypicalStudents.getTypicalSourceControl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,8 +22,8 @@ import javafx.collections.ObservableList;
 import seedu.sourcecontrol.model.student.Assessment;
 import seedu.sourcecontrol.model.student.Group;
 import seedu.sourcecontrol.model.student.Student;
-import seedu.sourcecontrol.model.student.exceptions.DuplicatePersonException;
-import seedu.sourcecontrol.testutil.PersonBuilder;
+import seedu.sourcecontrol.model.student.exceptions.DuplicateStudentException;
+import seedu.sourcecontrol.testutil.StudentBuilder;
 
 public class SourceControlTest {
 
@@ -47,42 +47,42 @@ public class SourceControlTest {
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
+    public void resetData_withDuplicateStudents_throwsDuplicateStudentException() {
         // Two students with the same identity fields
-        Student editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
+        Student editedAlice = new StudentBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Student> newStudents = Arrays.asList(ALICE, editedAlice);
         SourceControlStub newData = new SourceControlStub(newStudents);
 
-        assertThrows(DuplicatePersonException.class, () -> sourceControl.resetData(newData));
+        assertThrows(DuplicateStudentException.class, () -> sourceControl.resetData(newData));
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
+    public void hasStudent_nullStudent_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> sourceControl.hasStudent(null));
     }
 
     @Test
-    public void hasPerson_personNotInSourceControl_returnsFalse() {
+    public void hasStudent_studentNotInSourceControl_returnsFalse() {
         assertFalse(sourceControl.hasStudent(ALICE));
     }
 
     @Test
-    public void hasPerson_personInSourceControl_returnsTrue() {
+    public void hasStudent_studentInSourceControl_returnsTrue() {
         sourceControl.addStudent(ALICE);
         assertTrue(sourceControl.hasStudent(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInSourceControl_returnsTrue() {
+    public void hasStudent_studentWithSameIdentityFieldsInSourceControl_returnsTrue() {
         sourceControl.addStudent(ALICE);
-        Student editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
+        Student editedAlice = new StudentBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(sourceControl.hasStudent(editedAlice));
     }
 
     @Test
-    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getStudentList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> sourceControl.getStudentList().remove(0));
     }
 
@@ -130,7 +130,7 @@ public class SourceControlTest {
         assertEquals(sourceControl.hashCode(), sourceControl1.hashCode());
 
         sourceControl = new SourceControl();
-        sourceControl.addStudent(new PersonBuilder(ALICE).build());
+        sourceControl.addStudent(new StudentBuilder(ALICE).build());
         sourceControl1 = new SourceControl(sourceControl);
         assertEquals(sourceControl, sourceControl1);
         assertEquals(sourceControl.hashCode(), sourceControl1.hashCode());

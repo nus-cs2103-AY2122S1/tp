@@ -2,11 +2,11 @@ package seedu.sourcecontrol.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static seedu.sourcecontrol.logic.commands.CommandTestUtil.VALID_TYPICAL_PERSONS_ASSESSMENT_COUNT;
-import static seedu.sourcecontrol.logic.commands.CommandTestUtil.VALID_TYPICAL_PERSONS_GROUP_COUNT;
-import static seedu.sourcecontrol.logic.commands.CommandTestUtil.VALID_TYPICAL_PERSONS_TAG_COUNT;
+import static seedu.sourcecontrol.logic.commands.CommandTestUtil.VALID_TYPICAL_STUDENTS_ASSESSMENT_COUNT;
+import static seedu.sourcecontrol.logic.commands.CommandTestUtil.VALID_TYPICAL_STUDENTS_GROUP_COUNT;
+import static seedu.sourcecontrol.logic.commands.CommandTestUtil.VALID_TYPICAL_STUDENTS_TAG_COUNT;
 import static seedu.sourcecontrol.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.sourcecontrol.testutil.TypicalPersons.getTypicalSourceControl;
+import static seedu.sourcecontrol.testutil.TypicalStudents.getTypicalSourceControl;
 
 import java.nio.file.Path;
 
@@ -46,9 +46,9 @@ public class ExportCommandTest {
         command.execute(model);
 
         ImportCommand importCommand = new ImportCommand(
-                VALID_TYPICAL_PERSONS_GROUP_COUNT,
-                VALID_TYPICAL_PERSONS_ASSESSMENT_COUNT,
-                VALID_TYPICAL_PERSONS_TAG_COUNT, path);
+                VALID_TYPICAL_STUDENTS_GROUP_COUNT,
+                VALID_TYPICAL_STUDENTS_ASSESSMENT_COUNT,
+                VALID_TYPICAL_STUDENTS_TAG_COUNT, path);
 
         Model expectedModel = new ModelManager(new SourceControl(), new UserPrefs());
         importCommand.execute(expectedModel);

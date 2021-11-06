@@ -18,14 +18,14 @@ import static seedu.sourcecontrol.logic.commands.CommandTestUtil.VALID_ASSESSMEN
 import static seedu.sourcecontrol.logic.commands.CommandTestUtil.VALID_GROUP_TUTORIAL;
 import static seedu.sourcecontrol.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.sourcecontrol.logic.commands.CommandTestUtil.VALID_SCORE_AMY;
-import static seedu.sourcecontrol.logic.commands.CommandTestUtil.VALID_TYPICAL_PERSONS_ASSESSMENT_COUNT;
-import static seedu.sourcecontrol.logic.commands.CommandTestUtil.VALID_TYPICAL_PERSONS_CSV_PATH;
-import static seedu.sourcecontrol.logic.commands.CommandTestUtil.VALID_TYPICAL_PERSONS_GROUP_COUNT;
-import static seedu.sourcecontrol.logic.commands.CommandTestUtil.VALID_TYPICAL_PERSONS_TAG_COUNT;
+import static seedu.sourcecontrol.logic.commands.CommandTestUtil.VALID_TYPICAL_STUDENTS_ASSESSMENT_COUNT;
+import static seedu.sourcecontrol.logic.commands.CommandTestUtil.VALID_TYPICAL_STUDENTS_CSV_PATH;
+import static seedu.sourcecontrol.logic.commands.CommandTestUtil.VALID_TYPICAL_STUDENTS_GROUP_COUNT;
+import static seedu.sourcecontrol.logic.commands.CommandTestUtil.VALID_TYPICAL_STUDENTS_TAG_COUNT;
 import static seedu.sourcecontrol.logic.parser.CliSyntax.PREFIX_ALIAS;
 import static seedu.sourcecontrol.logic.parser.CliSyntax.PREFIX_COMMAND;
 import static seedu.sourcecontrol.testutil.Assert.assertThrows;
-import static seedu.sourcecontrol.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.sourcecontrol.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 
 import java.util.Arrays;
 import java.util.List;
@@ -59,8 +59,8 @@ import seedu.sourcecontrol.testutil.AllocDescriptorBuilder;
 import seedu.sourcecontrol.testutil.AssessmentBuilder;
 import seedu.sourcecontrol.testutil.EditStudentDescriptorBuilder;
 import seedu.sourcecontrol.testutil.GroupBuilder;
-import seedu.sourcecontrol.testutil.PersonBuilder;
-import seedu.sourcecontrol.testutil.PersonUtil;
+import seedu.sourcecontrol.testutil.StudentBuilder;
+import seedu.sourcecontrol.testutil.StudentUtil;
 import seedu.sourcecontrol.testutil.ScoreDescriptorBuilder;
 
 public class SourceControlParserTest {
@@ -69,8 +69,8 @@ public class SourceControlParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Student student = new PersonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(student));
+        Student student = new StudentBuilder().build();
+        AddCommand command = (AddCommand) parser.parseCommand(StudentUtil.getAddCommand(student));
         assertEquals(new AddCommand(student), command);
     }
 
@@ -94,17 +94,17 @@ public class SourceControlParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_STUDENT.getOneBased());
+        assertEquals(new DeleteCommand(INDEX_FIRST_STUDENT), command);
     }
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Student student = new PersonBuilder().build();
+        Student student = new StudentBuilder().build();
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(student).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditStudentDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+                + INDEX_FIRST_STUDENT.getOneBased() + " " + StudentUtil.getEditStudentDescriptorDetails(descriptor));
+        assertEquals(new EditCommand(INDEX_FIRST_STUDENT, descriptor), command);
     }
 
     @Test
@@ -143,10 +143,10 @@ public class SourceControlParserTest {
                 + TAG_COUNT_DESC_TYPICAL);
 
         assertEquals(new ImportCommand(
-                VALID_TYPICAL_PERSONS_GROUP_COUNT,
-                VALID_TYPICAL_PERSONS_ASSESSMENT_COUNT,
-                VALID_TYPICAL_PERSONS_TAG_COUNT,
-                ParserUtil.parsePath(VALID_TYPICAL_PERSONS_CSV_PATH, ".csv")), command);
+                VALID_TYPICAL_STUDENTS_GROUP_COUNT,
+                VALID_TYPICAL_STUDENTS_ASSESSMENT_COUNT,
+                VALID_TYPICAL_STUDENTS_TAG_COUNT,
+                ParserUtil.parsePath(VALID_TYPICAL_STUDENTS_CSV_PATH, ".csv")), command);
     }
 
     @Test

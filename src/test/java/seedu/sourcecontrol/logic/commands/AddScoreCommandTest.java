@@ -12,7 +12,7 @@ import static seedu.sourcecontrol.logic.commands.CommandTestUtil.VALID_SCORE_AMY
 import static seedu.sourcecontrol.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.sourcecontrol.logic.commands.CommandTestUtil.assertCommandFailureWithFilteredListChange;
 import static seedu.sourcecontrol.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.sourcecontrol.testutil.TypicalPersons.getTypicalSourceControl;
+import static seedu.sourcecontrol.testutil.TypicalStudents.getTypicalSourceControl;
 
 import java.util.Map;
 
@@ -27,7 +27,7 @@ import seedu.sourcecontrol.model.student.Assessment;
 import seedu.sourcecontrol.model.student.Score;
 import seedu.sourcecontrol.model.student.Student;
 import seedu.sourcecontrol.testutil.AssessmentBuilder;
-import seedu.sourcecontrol.testutil.PersonBuilder;
+import seedu.sourcecontrol.testutil.StudentBuilder;
 import seedu.sourcecontrol.testutil.ScoreBuilder;
 import seedu.sourcecontrol.testutil.ScoreDescriptorBuilder;
 
@@ -38,7 +38,7 @@ public class AddScoreCommandTest {
 
     private final Model model = new ModelManager(getTypicalSourceControl(), new UserPrefs());
 
-    private final Student simpleAmy = new PersonBuilder()
+    private final Student simpleAmy = new StudentBuilder()
             .withName(VALID_NAME_AMY)
             .withId(VALID_ID_AMY).build();
 
@@ -59,7 +59,7 @@ public class AddScoreCommandTest {
         model.addStudent(simpleAmy);
         model.addAssessment(simpleAssessment);
 
-        Student expectedAmy = new PersonBuilder(simpleAmy)
+        Student expectedAmy = new StudentBuilder(simpleAmy)
                 .withScores(Map.of(simpleAssessment, simpleScore)).build();
 
         Assessment expectedAssessment = new AssessmentBuilder(simpleAssessment)
@@ -85,7 +85,7 @@ public class AddScoreCommandTest {
         model.addStudent(simpleAmy);
         model.addAssessment(simpleAssessment);
 
-        Student expectedAmy = new PersonBuilder(simpleAmy)
+        Student expectedAmy = new StudentBuilder(simpleAmy)
                 .withScores(Map.of(simpleAssessment, simpleScore)).build();
 
         Assessment expectedAssessment = new AssessmentBuilder(simpleAssessment)
@@ -138,7 +138,7 @@ public class AddScoreCommandTest {
                 .withScore(VALID_SCORE_AMY).build();
         AddScoreCommand addScoreCommand = new AddScoreCommand(scoreDescriptor);
 
-        Student duplicateAmy = new PersonBuilder()
+        Student duplicateAmy = new StudentBuilder()
                 .withName(VALID_NAME_AMY)
                 .withId(VALID_ID_BOB).build();
 
@@ -168,7 +168,7 @@ public class AddScoreCommandTest {
         model.addStudent(simpleAmy);
         model.addAssessment(assessmentWithAmyGraded);
 
-        Student expectedAmy = new PersonBuilder(simpleAmy)
+        Student expectedAmy = new StudentBuilder(simpleAmy)
                 .withScores(Map.of(simpleAssessment, new Score("50"))).build();
 
         Assessment expectedAssessment = new AssessmentBuilder(assessmentWithAmyGraded)

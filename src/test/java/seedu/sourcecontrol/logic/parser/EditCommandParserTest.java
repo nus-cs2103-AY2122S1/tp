@@ -22,10 +22,10 @@ import static seedu.sourcecontrol.logic.commands.CommandTestUtil.VALID_TAG_HUSBA
 import static seedu.sourcecontrol.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.sourcecontrol.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.sourcecontrol.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.sourcecontrol.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.sourcecontrol.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.sourcecontrol.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
-import static seedu.sourcecontrol.testutil.TypicalPersons.getTypicalSourceControl;
+import static seedu.sourcecontrol.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
+import static seedu.sourcecontrol.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
+import static seedu.sourcecontrol.testutil.TypicalIndexes.INDEX_THIRD_STUDENT;
+import static seedu.sourcecontrol.testutil.TypicalStudents.getTypicalSourceControl;
 
 import org.junit.jupiter.api.Test;
 
@@ -109,7 +109,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        Index targetIndex = INDEX_SECOND_PERSON;
+        Index targetIndex = INDEX_SECOND_STUDENT;
         String userInput = targetIndex.getOneBased() + ID_DESC_BOB + TAG_DESC_HUSBAND
                 + GROUP_DESC_TUTORIAL + NAME_DESC_AMY + GROUP_DESC_RECITATION + TAG_DESC_FRIEND;
 
@@ -123,7 +123,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_someFieldsSpecified_success() {
-        Index targetIndex = INDEX_FIRST_PERSON;
+        Index targetIndex = INDEX_FIRST_STUDENT;
         String userInput = targetIndex.getOneBased() + ID_DESC_BOB + GROUP_DESC_TUTORIAL;
 
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withId(VALID_ID_BOB)
@@ -136,7 +136,7 @@ public class EditCommandParserTest {
     @Test
     public void parse_oneFieldSpecified_success() {
         // name
-        Index targetIndex = INDEX_THIRD_PERSON;
+        Index targetIndex = INDEX_THIRD_STUDENT;
         String userInput = targetIndex.getOneBased() + NAME_DESC_AMY;
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
@@ -163,7 +163,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
-        Index targetIndex = INDEX_FIRST_PERSON;
+        Index targetIndex = INDEX_FIRST_STUDENT;
         String userInput = targetIndex.getOneBased() + ID_DESC_AMY + GROUP_DESC_TUTORIAL + TAG_DESC_FRIEND
                 + ID_DESC_AMY + GROUP_DESC_TUTORIAL + TAG_DESC_FRIEND
                 + ID_DESC_BOB + GROUP_DESC_RECITATION + TAG_DESC_HUSBAND;
@@ -180,7 +180,7 @@ public class EditCommandParserTest {
     @Test
     public void parse_invalidValueFollowedByValidValue_success() {
         // no other valid values specified
-        Index targetIndex = INDEX_FIRST_PERSON;
+        Index targetIndex = INDEX_FIRST_STUDENT;
         String userInput = targetIndex.getOneBased() + INVALID_ID_DESC + ID_DESC_BOB;
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withId(VALID_ID_BOB).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
@@ -195,7 +195,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_resetTags_success() {
-        Index targetIndex = INDEX_THIRD_PERSON;
+        Index targetIndex = INDEX_THIRD_STUDENT;
         String userInput = targetIndex.getOneBased() + TAG_EMPTY;
 
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withTags().build();

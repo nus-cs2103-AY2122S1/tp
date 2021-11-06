@@ -23,8 +23,8 @@ import static seedu.sourcecontrol.logic.commands.CommandTestUtil.VALID_TAG_FRIEN
 import static seedu.sourcecontrol.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.sourcecontrol.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.sourcecontrol.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.sourcecontrol.testutil.TypicalPersons.AMY;
-import static seedu.sourcecontrol.testutil.TypicalPersons.BOB;
+import static seedu.sourcecontrol.testutil.TypicalStudents.AMY;
+import static seedu.sourcecontrol.testutil.TypicalStudents.BOB;
 
 import java.util.LinkedHashMap;
 
@@ -36,14 +36,14 @@ import seedu.sourcecontrol.model.student.ID;
 import seedu.sourcecontrol.model.student.Name;
 import seedu.sourcecontrol.model.student.Student;
 import seedu.sourcecontrol.model.tag.Tag;
-import seedu.sourcecontrol.testutil.PersonBuilder;
+import seedu.sourcecontrol.testutil.StudentBuilder;
 
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Student expectedStudent = new PersonBuilder(BOB)
+        Student expectedStudent = new StudentBuilder(BOB)
                 .withGroups(VALID_GROUP_TUTORIAL)
                 .withScores(new LinkedHashMap<>())
                 .withTags(VALID_TAG_FRIEND).build();
@@ -61,7 +61,7 @@ public class AddCommandParserTest {
                 + TAG_DESC_FRIEND, new AddCommand(expectedStudent));
 
         // multiple groups - all accepted
-        Student expectedStudentMultipleGroups = new PersonBuilder(BOB)
+        Student expectedStudentMultipleGroups = new StudentBuilder(BOB)
                 .withScores(new LinkedHashMap<>())
                 .withGroups(VALID_GROUP_TUTORIAL, VALID_GROUP_RECITATION)
                 .withTags(VALID_TAG_FRIEND).build();
@@ -69,7 +69,7 @@ public class AddCommandParserTest {
                 + TAG_DESC_FRIEND, new AddCommand(expectedStudentMultipleGroups));
 
         //multiple similar groups - only one unique instance accepted
-        Student expectedStudentWithMultipleSimilarGroups = new PersonBuilder(BOB)
+        Student expectedStudentWithMultipleSimilarGroups = new StudentBuilder(BOB)
                 .withScores(new LinkedHashMap<>())
                 .withGroups(VALID_GROUP_RECITATION)
                 .withTags(VALID_TAG_FRIEND)
@@ -79,7 +79,7 @@ public class AddCommandParserTest {
                 new AddCommand(expectedStudentWithMultipleSimilarGroups));
 
         // multiple tags - all accepted
-        Student expectedStudentMultipleTags = new PersonBuilder(BOB)
+        Student expectedStudentMultipleTags = new StudentBuilder(BOB)
                 .withScores(new LinkedHashMap<>())
                 .withGroups(VALID_GROUP_TUTORIAL)
                 .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND).build();
@@ -90,12 +90,12 @@ public class AddCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Student expectedStudent = new PersonBuilder(AMY).withTags().withScores(new LinkedHashMap<>()).build();
+        Student expectedStudent = new StudentBuilder(AMY).withTags().withScores(new LinkedHashMap<>()).build();
         assertParseSuccess(parser, NAME_DESC_AMY + ID_DESC_AMY + GROUP_DESC_TUTORIAL,
                 new AddCommand(expectedStudent));
 
         // zero groups
-        Student expectedStudentWithNoGroups = new PersonBuilder(AMY).withScores(new LinkedHashMap<>())
+        Student expectedStudentWithNoGroups = new StudentBuilder(AMY).withScores(new LinkedHashMap<>())
                 .withGroups().build();
         assertParseSuccess(parser, NAME_DESC_AMY + ID_DESC_AMY + TAG_DESC_FRIEND,
                 new AddCommand(expectedStudentWithNoGroups));

@@ -106,7 +106,7 @@ public class GroupListTest {
     }
 
     @Test
-    public void remove_personDoesNotExist_throwsGroupNotFoundException() {
+    public void remove_studentDoesNotExist_throwsGroupNotFoundException() {
         assertThrows(GroupNotFoundException.class, () -> groups.remove(TUTORIAL));
     }
 

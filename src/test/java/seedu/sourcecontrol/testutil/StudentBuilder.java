@@ -19,7 +19,7 @@ import seedu.sourcecontrol.model.util.SampleDataUtil;
 /**
  * A utility class to help with building Student objects.
  */
-public class PersonBuilder {
+public class StudentBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_ID = "E0543947";
@@ -31,9 +31,9 @@ public class PersonBuilder {
     private Set<Tag> tags;
 
     /**
-     * Creates a {@code PersonBuilder} with the default details.
+     * Creates a {@code StudentBuilder} with the default details.
      */
-    public PersonBuilder() {
+    public StudentBuilder() {
         name = new Name(DEFAULT_NAME);
         id = new ID(DEFAULT_ID);
         groups = new ArrayList<>();
@@ -42,9 +42,9 @@ public class PersonBuilder {
     }
 
     /**
-     * Initializes the PersonBuilder with the data of {@code studentToCopy}.
+     * Initializes the StudentBuilder with the data of {@code studentToCopy}.
      */
-    public PersonBuilder(Student studentToCopy) {
+    public StudentBuilder(Student studentToCopy) {
         name = studentToCopy.getName();
         id = studentToCopy.getId();
         groups = new ArrayList<>(studentToCopy.getGroups());
@@ -55,7 +55,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code Name} of the {@code Student} that we are building.
      */
-    public PersonBuilder withName(String name) {
+    public StudentBuilder withName(String name) {
         this.name = new Name(name);
         return this;
     }
@@ -63,7 +63,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code ID} of the {@code Student} that we are building.
      */
-    public PersonBuilder withId(String id) {
+    public StudentBuilder withId(String id) {
         this.id = new ID(id);
         return this;
     }
@@ -71,7 +71,7 @@ public class PersonBuilder {
     /**
      * Parses the {@code groups} into a {@code List<Group} and set it to the {@code Student} that we are building.
      */
-    public PersonBuilder withGroups(String... groups) {
+    public StudentBuilder withGroups(String... groups) {
         this.groups = SampleDataUtil.getGroupList(groups);
         return this;
     }
@@ -79,7 +79,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code scores} of the {@code Student} that we are building.
      */
-    public PersonBuilder withScores(Map<Assessment, Score> scores) {
+    public StudentBuilder withScores(Map<Assessment, Score> scores) {
         this.scores = scores;
         return this;
     }
@@ -87,7 +87,7 @@ public class PersonBuilder {
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Student} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
+    public StudentBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }

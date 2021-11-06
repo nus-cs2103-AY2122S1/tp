@@ -2,7 +2,7 @@ package seedu.sourcecontrol.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.sourcecontrol.testutil.Assert.assertThrows;
-import static seedu.sourcecontrol.testutil.TypicalPersons.BENSON;
+import static seedu.sourcecontrol.testutil.TypicalStudents.BENSON;
 
 import java.util.LinkedHashMap;
 

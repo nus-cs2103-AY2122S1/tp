@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.sourcecontrol.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.sourcecontrol.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.sourcecontrol.testutil.TypicalPersons.AMY;
-import static seedu.sourcecontrol.testutil.TypicalPersons.BOB;
+import static seedu.sourcecontrol.testutil.TypicalStudents.AMY;
+import static seedu.sourcecontrol.testutil.TypicalStudents.BOB;
 
 import org.junit.jupiter.api.Test;
 

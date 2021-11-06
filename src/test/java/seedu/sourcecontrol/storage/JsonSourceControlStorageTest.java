@@ -3,10 +3,10 @@ package seedu.sourcecontrol.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.sourcecontrol.testutil.Assert.assertThrows;
-import static seedu.sourcecontrol.testutil.TypicalPersons.ALICE;
-import static seedu.sourcecontrol.testutil.TypicalPersons.HOON;
-import static seedu.sourcecontrol.testutil.TypicalPersons.IDA;
-import static seedu.sourcecontrol.testutil.TypicalPersons.getTypicalSourceControl;
+import static seedu.sourcecontrol.testutil.TypicalStudents.ALICE;
+import static seedu.sourcecontrol.testutil.TypicalStudents.HOON;
+import static seedu.sourcecontrol.testutil.TypicalStudents.IDA;
+import static seedu.sourcecontrol.testutil.TypicalStudents.getTypicalSourceControl;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -52,13 +52,13 @@ public class JsonSourceControlStorageTest {
     }
 
     @Test
-    public void readSourceControl_invalidPersonSourceControl_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readSourceControl("invalidPersonSourceControl.json"));
+    public void readSourceControl_invalidStudentSourceControl_throwDataConversionException() {
+        assertThrows(DataConversionException.class, () -> readSourceControl("invalidStudentSourceControl.json"));
     }
 
     @Test
-    public void readSourceControl_invalidAndValidPersonSourceControl_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readSourceControl("invalidAndValidPersonSourceControl.json"));
+    public void readSourceControl_invalidAndValidStudentSourceControl_throwDataConversionException() {
+        assertThrows(DataConversionException.class, () -> readSourceControl("invalidAndValidStudentSourceControl.json"));
     }
 
     @Test

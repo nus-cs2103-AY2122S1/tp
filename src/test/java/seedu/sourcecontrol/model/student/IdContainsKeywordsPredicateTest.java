@@ -9,7 +9,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.sourcecontrol.testutil.PersonBuilder;
+import seedu.sourcecontrol.testutil.StudentBuilder;
 
 public class IdContainsKeywordsPredicateTest {
 
@@ -42,33 +42,33 @@ public class IdContainsKeywordsPredicateTest {
     public void test_idContainsKeywords_returnsTrue() {
         // One keyword
         IdContainsKeywordsPredicate predicate = new IdContainsKeywordsPredicate(Collections.singletonList("E0123456"));
-        assertTrue(predicate.test(new PersonBuilder().withId("E0123456").build()));
+        assertTrue(predicate.test(new StudentBuilder().withId("E0123456").build()));
 
         // Multiple keywords
         predicate = new IdContainsKeywordsPredicate(Arrays.asList("E012", "345"));
-        assertTrue(predicate.test(new PersonBuilder().withId("E0123456").build()));
+        assertTrue(predicate.test(new StudentBuilder().withId("E0123456").build()));
 
         // Only one matching keyword
         predicate = new IdContainsKeywordsPredicate(Arrays.asList("E0123456", "E6666666"));
-        assertTrue(predicate.test(new PersonBuilder().withId("E0123456").build()));
+        assertTrue(predicate.test(new StudentBuilder().withId("E0123456").build()));
 
         // Mixed-case keywords
         predicate = new IdContainsKeywordsPredicate(Arrays.asList("e0123456"));
-        assertTrue(predicate.test(new PersonBuilder().withId("E0123456").build()));
+        assertTrue(predicate.test(new StudentBuilder().withId("E0123456").build()));
     }
 
     @Test
     public void test_idDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         IdContainsKeywordsPredicate predicate = new IdContainsKeywordsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new PersonBuilder().withId("E0123456").build()));
+        assertFalse(predicate.test(new StudentBuilder().withId("E0123456").build()));
 
         // Non-matching keyword
         predicate = new IdContainsKeywordsPredicate(Arrays.asList("E6666666"));
-        assertFalse(predicate.test(new PersonBuilder().withId("E0123456").build()));
+        assertFalse(predicate.test(new StudentBuilder().withId("E0123456").build()));
 
         // Keywords match tag, but does not match Id
         predicate = new IdContainsKeywordsPredicate(Arrays.asList("E0123456"));
-        assertFalse(predicate.test(new PersonBuilder().withId("E6666666").withTags("E0123456").build()));
+        assertFalse(predicate.test(new StudentBuilder().withId("E6666666").withTags("E0123456").build()));
     }
 }

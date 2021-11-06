@@ -6,7 +6,7 @@ import static seedu.sourcecontrol.logic.commands.CommandTestUtil.VALID_ASSESSMEN
 import static seedu.sourcecontrol.logic.commands.CommandTestUtil.VALID_ASSESSMENT_BOB;
 import static seedu.sourcecontrol.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.sourcecontrol.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.sourcecontrol.testutil.TypicalPersons.getTypicalSourceControl;
+import static seedu.sourcecontrol.testutil.TypicalStudents.getTypicalSourceControl;
 
 import org.junit.jupiter.api.Test;
 

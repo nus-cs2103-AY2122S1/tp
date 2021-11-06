@@ -24,7 +24,7 @@ import seedu.sourcecontrol.model.student.ID;
 import seedu.sourcecontrol.model.student.Name;
 import seedu.sourcecontrol.model.student.Score;
 import seedu.sourcecontrol.model.student.Student;
-import seedu.sourcecontrol.model.student.exceptions.DuplicatePersonException;
+import seedu.sourcecontrol.model.student.exceptions.DuplicateStudentException;
 import seedu.sourcecontrol.model.tag.Tag;
 
 
@@ -94,7 +94,7 @@ public class ImportCommand extends Command {
         for (int i = 1; i < lines.length; i++) {
             try {
                 newAb.addStudent(readStudentFromRow(lines[i], assessments, newAb.getGroupList()));
-            } catch (DuplicatePersonException e) {
+            } catch (DuplicateStudentException e) {
                 throw new CommandException(MESSAGE_DUPLICATE_ID);
             }
         }

@@ -50,12 +50,12 @@ public class CommandTestUtil {
             Map.of(new Assessment(VALID_ASSESSMENT_BOB), new Score(VALID_SCORE_BOB));
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
-    public static final String VALID_TYPICAL_PERSONS_CSV_PATH = "src/test/data/ImportCommandTest/typicalPersons.csv";
+    public static final String VALID_TYPICAL_STUDENTS_CSV_PATH = "src/test/data/ImportCommandTest/typicalStudents.csv";
     public static final String VALID_WRONG_CSV_PATH = "src/test/data/ImportCommandTest/wrongFormat.csv";
     public static final String VALID_NON_EXISTENT_PATH = "src/test/data/ImportCommandTest/doesNotExist.csv";
-    public static final int VALID_TYPICAL_PERSONS_GROUP_COUNT = 2;
-    public static final int VALID_TYPICAL_PERSONS_ASSESSMENT_COUNT = 2;
-    public static final int VALID_TYPICAL_PERSONS_TAG_COUNT = 2;
+    public static final int VALID_TYPICAL_STUDENTS_GROUP_COUNT = 2;
+    public static final int VALID_TYPICAL_STUDENTS_ASSESSMENT_COUNT = 2;
+    public static final int VALID_TYPICAL_STUDENTS_TAG_COUNT = 2;
 
     public static final String ASSESSMENT_DESC_AMY = " " + PREFIX_ASSESSMENT + VALID_ASSESSMENT_AMY;
     public static final String ASSESSMENT_DESC_BOB = " " + PREFIX_ASSESSMENT + VALID_ASSESSMENT_BOB;
@@ -70,14 +70,14 @@ public class CommandTestUtil {
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
-    public static final String FILE_DESC_VALID_FILE = " " + PREFIX_FILE + VALID_TYPICAL_PERSONS_CSV_PATH;
+    public static final String FILE_DESC_VALID_FILE = " " + PREFIX_FILE + VALID_TYPICAL_STUDENTS_CSV_PATH;
     public static final String FILE_DESC_INVALID_FILE = " " + PREFIX_FILE + VALID_WRONG_CSV_PATH;
     public static final String FILE_DESC_NON_EXISTENT_FILE = " " + PREFIX_FILE + VALID_NON_EXISTENT_PATH;
-    public static final String GROUP_COUNT_DESC_TYPICAL = " " + PREFIX_GROUP + VALID_TYPICAL_PERSONS_GROUP_COUNT;
+    public static final String GROUP_COUNT_DESC_TYPICAL = " " + PREFIX_GROUP + VALID_TYPICAL_STUDENTS_GROUP_COUNT;
     public static final String ASSESSMENT_COUNT_DESC_TYPICAL = " " + PREFIX_ASSESSMENT
-            + VALID_TYPICAL_PERSONS_ASSESSMENT_COUNT;
-    public static final String TAG_COUNT_DESC_TYPICAL = " " + PREFIX_TAG + VALID_TYPICAL_PERSONS_TAG_COUNT;
-    public static final String TAG_COUNT_DESC_ABOVE_TYPICAL = " " + PREFIX_TAG + (VALID_TYPICAL_PERSONS_TAG_COUNT + 1);
+            + VALID_TYPICAL_STUDENTS_ASSESSMENT_COUNT;
+    public static final String TAG_COUNT_DESC_TYPICAL = " " + PREFIX_TAG + VALID_TYPICAL_STUDENTS_TAG_COUNT;
+    public static final String TAG_COUNT_DESC_ABOVE_TYPICAL = " " + PREFIX_TAG + (VALID_TYPICAL_STUDENTS_TAG_COUNT + 1);
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_ID_DESC = " " + PREFIX_ID + "E0123"; // ID length too short
@@ -201,7 +201,7 @@ public class CommandTestUtil {
      * Updates {@code model}'s filtered list to show only the student at the given {@code targetIndex} in the
      * {@code model}'s Source Control.
      */
-    public static void showPersonAtIndex(Model model, Index targetIndex) {
+    public static void showStudentAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredStudentList().size());
 
         Student student = model.getFilteredStudentList().get(targetIndex.getZeroBased());

@@ -1,7 +1,7 @@
 package seedu.sourcecontrol.logic.commands;
 
 import static seedu.sourcecontrol.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.sourcecontrol.testutil.TypicalPersons.getTypicalSourceControl;
+import static seedu.sourcecontrol.testutil.TypicalStudents.getTypicalSourceControl;
 
 import org.junit.jupiter.api.Test;
 

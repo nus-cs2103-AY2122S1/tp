@@ -2,7 +2,7 @@ package seedu.sourcecontrol.logic.commands;
 
 import static seedu.sourcecontrol.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.sourcecontrol.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.sourcecontrol.testutil.TypicalPersons.getTypicalSourceControl;
+import static seedu.sourcecontrol.testutil.TypicalStudents.getTypicalSourceControl;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,7 +11,7 @@ import seedu.sourcecontrol.model.Model;
 import seedu.sourcecontrol.model.ModelManager;
 import seedu.sourcecontrol.model.UserPrefs;
 import seedu.sourcecontrol.model.student.Student;
-import seedu.sourcecontrol.testutil.PersonBuilder;
+import seedu.sourcecontrol.testutil.StudentBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddCommand}.
@@ -26,8 +26,8 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
-    public void execute_newPerson_success() {
-        Student validStudent = new PersonBuilder().build();
+    public void execute_newStudent_success() {
+        Student validStudent = new StudentBuilder().build();
 
         Model expectedModel = new ModelManager(model.getSourceControl(), new UserPrefs());
         expectedModel.addStudent(validStudent);
@@ -37,7 +37,7 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
+    public void execute_duplicateStudent_throwsCommandException() {
         Student studentInList = model.getSourceControl().getStudentList().get(0);
         assertCommandFailure(new AddCommand(studentInList), model, AddCommand.MESSAGE_DUPLICATE_STUDENT);
     }

@@ -8,10 +8,10 @@ import static seedu.sourcecontrol.logic.commands.CommandTestUtil.VALID_GROUP_TUT
 import static seedu.sourcecontrol.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.sourcecontrol.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.sourcecontrol.testutil.Assert.assertThrows;
-import static seedu.sourcecontrol.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.sourcecontrol.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.sourcecontrol.testutil.TypicalPersons.AMY;
-import static seedu.sourcecontrol.testutil.TypicalPersons.getTypicalSourceControl;
+import static seedu.sourcecontrol.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
+import static seedu.sourcecontrol.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
+import static seedu.sourcecontrol.testutil.TypicalStudents.AMY;
+import static seedu.sourcecontrol.testutil.TypicalStudents.getTypicalSourceControl;
 
 import java.nio.file.Path;
 import java.util.List;
@@ -126,8 +126,8 @@ public class ShowCommandTest {
 
     @Test
     public void equals() {
-        ShowCommand showFirstCommand = new ShowCommand(INDEX_FIRST_PERSON, Path.of("abc.csv"));
-        ShowCommand showSecondCommand = new ShowCommand(INDEX_FIRST_PERSON, Path.of("abc.csv"));
+        ShowCommand showFirstCommand = new ShowCommand(INDEX_FIRST_STUDENT, Path.of("abc.csv"));
+        ShowCommand showSecondCommand = new ShowCommand(INDEX_FIRST_STUDENT, Path.of("abc.csv"));
 
         // same object -> returns true
         assertTrue(showFirstCommand.equals(showFirstCommand));
@@ -142,7 +142,7 @@ public class ShowCommandTest {
         assertFalse(showFirstCommand.equals(null));
 
         // different ID -> returns false
-        showSecondCommand = new ShowCommand(INDEX_SECOND_PERSON, Path.of("abc.csv"));
+        showSecondCommand = new ShowCommand(INDEX_SECOND_STUDENT, Path.of("abc.csv"));
         assertFalse(showFirstCommand.equals(showSecondCommand));
 
         //diff types of arguments -> returns false

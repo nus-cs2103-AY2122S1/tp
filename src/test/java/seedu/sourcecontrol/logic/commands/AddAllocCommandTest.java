@@ -11,7 +11,7 @@ import static seedu.sourcecontrol.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.sourcecontrol.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.sourcecontrol.logic.commands.CommandTestUtil.assertCommandFailureWithFilteredListChange;
 import static seedu.sourcecontrol.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.sourcecontrol.testutil.TypicalPersons.getTypicalSourceControl;
+import static seedu.sourcecontrol.testutil.TypicalStudents.getTypicalSourceControl;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +24,7 @@ import seedu.sourcecontrol.model.student.Group;
 import seedu.sourcecontrol.model.student.Student;
 import seedu.sourcecontrol.testutil.AllocDescriptorBuilder;
 import seedu.sourcecontrol.testutil.GroupBuilder;
-import seedu.sourcecontrol.testutil.PersonBuilder;
+import seedu.sourcecontrol.testutil.StudentBuilder;
 
 /**
  * Contains integration tests (interaction with Model) and unit tests for AddAllocCommand.
@@ -33,7 +33,7 @@ public class AddAllocCommandTest {
 
     private final Model model = new ModelManager(getTypicalSourceControl(), new UserPrefs());
 
-    private final Student simpleAmy = new PersonBuilder()
+    private final Student simpleAmy = new StudentBuilder()
             .withName(VALID_NAME_AMY)
             .withId(VALID_ID_AMY).build();
 
@@ -55,7 +55,7 @@ public class AddAllocCommandTest {
         model.addGroup(simpleGroup);
         expectedModel.addGroup(simpleGroupCopy);
 
-        Student expectedAmy = new PersonBuilder(simpleAmy)
+        Student expectedAmy = new StudentBuilder(simpleAmy)
                 .withGroups(VALID_GROUP_TUTORIAL).build();
 
         expectedModel.setStudent(simpleAmy, expectedAmy);
@@ -80,7 +80,7 @@ public class AddAllocCommandTest {
         model.addGroup(simpleGroup);
         expectedModel.addGroup(simpleGroupCopy);
 
-        Student expectedAmy = new PersonBuilder(simpleAmy)
+        Student expectedAmy = new StudentBuilder(simpleAmy)
                 .withGroups(VALID_GROUP_TUTORIAL).build();
 
         expectedModel.setStudent(simpleAmy, expectedAmy);
@@ -125,7 +125,7 @@ public class AddAllocCommandTest {
                 .withGroup(VALID_GROUP_TUTORIAL).build();
         AddAllocCommand addAllocCommand = new AddAllocCommand(allocDescriptor);
 
-        Student duplicateAmy = new PersonBuilder()
+        Student duplicateAmy = new StudentBuilder()
                 .withName(VALID_NAME_AMY)
                 .withId(VALID_ID_BOB).build();
 

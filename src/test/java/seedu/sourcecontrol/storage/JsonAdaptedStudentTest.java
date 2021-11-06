@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.sourcecontrol.storage.JsonAdaptedStudent.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.sourcecontrol.testutil.Assert.assertThrows;
-import static seedu.sourcecontrol.testutil.TypicalPersons.BENSON;
+import static seedu.sourcecontrol.testutil.TypicalStudents.BENSON;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +50,7 @@ public class JsonAdaptedStudentTest {
     }
 
     @Test
-    public void toModelType_validPersonDetails_returnsPerson() throws Exception {
+    public void toModelType_validStudentDetails_returnsStudent() throws Exception {
         JsonAdaptedStudent student = new JsonAdaptedStudent(BENSON);
         assertEquals(BENSON, student.toModelType(GROUP_LIST, ASSESSMENT_LIST));
     }
@@ -92,7 +92,7 @@ public class JsonAdaptedStudentTest {
     }
 
     @Test
-    public void toModelType_invalidGroups_notAddedToPerson() throws IllegalValueException {
+    public void toModelType_invalidGroups_notAddedToStudent() throws IllegalValueException {
         List<String> invalidGroups = new ArrayList<>(VALID_GROUPS);
         invalidGroups.add(INVALID_GROUP);
         JsonAdaptedStudent student =
@@ -103,7 +103,7 @@ public class JsonAdaptedStudentTest {
     }
 
     @Test
-    public void toModelType_invalidAssessment_notAddedToPerson() throws IllegalValueException {
+    public void toModelType_invalidAssessment_notAddedToStudent() throws IllegalValueException {
         List<String> invalidAssessments = new ArrayList<>(VALID_ASSESSMENTS);
         invalidAssessments.add(INVALID_ASSESSMENT);
         JsonAdaptedStudent student =

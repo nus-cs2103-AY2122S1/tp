@@ -9,7 +9,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.sourcecontrol.testutil.PersonBuilder;
+import seedu.sourcecontrol.testutil.StudentBuilder;
 
 public class GroupContainsKeywordsPredicateTest {
 
@@ -44,33 +44,33 @@ public class GroupContainsKeywordsPredicateTest {
         // One keyword
         GroupContainsKeywordsPredicate predicate =
                 new GroupContainsKeywordsPredicate(Collections.singletonList("T02A"));
-        assertTrue(predicate.test(new PersonBuilder().withGroups("T02A").build()));
+        assertTrue(predicate.test(new StudentBuilder().withGroups("T02A").build()));
 
         // Multiple keywords
         predicate = new GroupContainsKeywordsPredicate(Arrays.asList("T02", "02A"));
-        assertTrue(predicate.test(new PersonBuilder().withGroups("T02A").build()));
+        assertTrue(predicate.test(new StudentBuilder().withGroups("T02A").build()));
 
         // Only one matching keyword
         predicate = new GroupContainsKeywordsPredicate(Arrays.asList("T02A", "R05B"));
-        assertTrue(predicate.test(new PersonBuilder().withGroups("T02A").build()));
+        assertTrue(predicate.test(new StudentBuilder().withGroups("T02A").build()));
 
         // Mixed-case keywords
         predicate = new GroupContainsKeywordsPredicate(Arrays.asList("t02a"));
-        assertTrue(predicate.test(new PersonBuilder().withGroups("T02A").build()));
+        assertTrue(predicate.test(new StudentBuilder().withGroups("T02A").build()));
     }
 
     @Test
     public void test_groupDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         GroupContainsKeywordsPredicate predicate = new GroupContainsKeywordsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new PersonBuilder().withGroups("T02A").build()));
+        assertFalse(predicate.test(new StudentBuilder().withGroups("T02A").build()));
 
         // Non-matching keyword
         predicate = new GroupContainsKeywordsPredicate(Arrays.asList("T03B"));
-        assertFalse(predicate.test(new PersonBuilder().withGroups("T02A").build()));
+        assertFalse(predicate.test(new StudentBuilder().withGroups("T02A").build()));
 
         // Keywords match tag, but does not match group
         predicate = new GroupContainsKeywordsPredicate(Arrays.asList("T02A"));
-        assertFalse(predicate.test(new PersonBuilder().withGroups("R05B").withTags("T02A").build()));
+        assertFalse(predicate.test(new StudentBuilder().withGroups("R05B").withTags("T02A").build()));
     }
 }

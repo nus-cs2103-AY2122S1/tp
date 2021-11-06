@@ -13,10 +13,10 @@ import static seedu.sourcecontrol.logic.commands.CommandTestUtil.PREAMBLE_WHITES
 import static seedu.sourcecontrol.logic.commands.CommandTestUtil.TAG_COUNT_DESC_ABOVE_TYPICAL;
 import static seedu.sourcecontrol.logic.commands.CommandTestUtil.TAG_COUNT_DESC_TYPICAL;
 import static seedu.sourcecontrol.logic.commands.CommandTestUtil.VALID_NON_EXISTENT_PATH;
-import static seedu.sourcecontrol.logic.commands.CommandTestUtil.VALID_TYPICAL_PERSONS_ASSESSMENT_COUNT;
-import static seedu.sourcecontrol.logic.commands.CommandTestUtil.VALID_TYPICAL_PERSONS_CSV_PATH;
-import static seedu.sourcecontrol.logic.commands.CommandTestUtil.VALID_TYPICAL_PERSONS_GROUP_COUNT;
-import static seedu.sourcecontrol.logic.commands.CommandTestUtil.VALID_TYPICAL_PERSONS_TAG_COUNT;
+import static seedu.sourcecontrol.logic.commands.CommandTestUtil.VALID_TYPICAL_STUDENTS_ASSESSMENT_COUNT;
+import static seedu.sourcecontrol.logic.commands.CommandTestUtil.VALID_TYPICAL_STUDENTS_CSV_PATH;
+import static seedu.sourcecontrol.logic.commands.CommandTestUtil.VALID_TYPICAL_STUDENTS_GROUP_COUNT;
+import static seedu.sourcecontrol.logic.commands.CommandTestUtil.VALID_TYPICAL_STUDENTS_TAG_COUNT;
 import static seedu.sourcecontrol.logic.commands.CommandTestUtil.VALID_WRONG_CSV_PATH;
 import static seedu.sourcecontrol.logic.parser.CliSyntax.PREFIX_FILE;
 import static seedu.sourcecontrol.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -32,10 +32,10 @@ public class ImportCommandParserTest {
     @Test
     public void parse_allFieldsPresent_success() throws Exception {
         ImportCommand expectedCommand = new ImportCommand(
-                VALID_TYPICAL_PERSONS_GROUP_COUNT,
-                VALID_TYPICAL_PERSONS_ASSESSMENT_COUNT,
-                VALID_TYPICAL_PERSONS_TAG_COUNT,
-                ParserUtil.parsePath(VALID_TYPICAL_PERSONS_CSV_PATH, ".csv"));
+                VALID_TYPICAL_STUDENTS_GROUP_COUNT,
+                VALID_TYPICAL_STUDENTS_ASSESSMENT_COUNT,
+                VALID_TYPICAL_STUDENTS_TAG_COUNT,
+                ParserUtil.parsePath(VALID_TYPICAL_STUDENTS_CSV_PATH, ".csv"));
 
         // standard usage
         assertParseSuccess(parser, FILE_DESC_VALID_FILE
@@ -56,36 +56,36 @@ public class ImportCommandParserTest {
     public void parse_someFieldsPresent_success() throws Exception {
         ImportCommand expectedCommand = new ImportCommand(
                 0,
-                VALID_TYPICAL_PERSONS_ASSESSMENT_COUNT,
-                VALID_TYPICAL_PERSONS_TAG_COUNT,
-                ParserUtil.parsePath(VALID_TYPICAL_PERSONS_CSV_PATH, ".csv"));
+                VALID_TYPICAL_STUDENTS_ASSESSMENT_COUNT,
+                VALID_TYPICAL_STUDENTS_TAG_COUNT,
+                ParserUtil.parsePath(VALID_TYPICAL_STUDENTS_CSV_PATH, ".csv"));
 
         // group count not provided
         assertParseSuccess(parser, FILE_DESC_VALID_FILE
                 + ASSESSMENT_COUNT_DESC_TYPICAL + TAG_COUNT_DESC_TYPICAL, expectedCommand);
 
         expectedCommand = new ImportCommand(
-                VALID_TYPICAL_PERSONS_GROUP_COUNT,
+                VALID_TYPICAL_STUDENTS_GROUP_COUNT,
                 0,
-                VALID_TYPICAL_PERSONS_TAG_COUNT,
-                ParserUtil.parsePath(VALID_TYPICAL_PERSONS_CSV_PATH, ".csv"));
+                VALID_TYPICAL_STUDENTS_TAG_COUNT,
+                ParserUtil.parsePath(VALID_TYPICAL_STUDENTS_CSV_PATH, ".csv"));
 
         // assessment count not provided
         assertParseSuccess(parser, FILE_DESC_VALID_FILE
                 + GROUP_COUNT_DESC_TYPICAL + TAG_COUNT_DESC_TYPICAL, expectedCommand);
 
         expectedCommand = new ImportCommand(
-                VALID_TYPICAL_PERSONS_GROUP_COUNT,
-                VALID_TYPICAL_PERSONS_ASSESSMENT_COUNT,
+                VALID_TYPICAL_STUDENTS_GROUP_COUNT,
+                VALID_TYPICAL_STUDENTS_ASSESSMENT_COUNT,
                 0,
-                ParserUtil.parsePath(VALID_TYPICAL_PERSONS_CSV_PATH, ".csv"));
+                ParserUtil.parsePath(VALID_TYPICAL_STUDENTS_CSV_PATH, ".csv"));
 
         // tag count not provided
         assertParseSuccess(parser, FILE_DESC_VALID_FILE
                 + GROUP_COUNT_DESC_TYPICAL + ASSESSMENT_COUNT_DESC_TYPICAL, expectedCommand);
 
         expectedCommand = new ImportCommand(0, 0, 0,
-                ParserUtil.parsePath(VALID_TYPICAL_PERSONS_CSV_PATH, ".csv"));
+                ParserUtil.parsePath(VALID_TYPICAL_STUDENTS_CSV_PATH, ".csv"));
 
         // only file provided
         assertParseSuccess(parser, FILE_DESC_VALID_FILE, expectedCommand);
@@ -105,10 +105,10 @@ public class ImportCommandParserTest {
     @Test
     public void parse_tooManyColumnsSpecified_success() throws Exception {
         ImportCommand expectedCommand = new ImportCommand(
-                VALID_TYPICAL_PERSONS_GROUP_COUNT,
-                VALID_TYPICAL_PERSONS_ASSESSMENT_COUNT,
-                VALID_TYPICAL_PERSONS_TAG_COUNT + 1,
-                ParserUtil.parsePath(VALID_TYPICAL_PERSONS_CSV_PATH, ".csv"));
+                VALID_TYPICAL_STUDENTS_GROUP_COUNT,
+                VALID_TYPICAL_STUDENTS_ASSESSMENT_COUNT,
+                VALID_TYPICAL_STUDENTS_TAG_COUNT + 1,
+                ParserUtil.parsePath(VALID_TYPICAL_STUDENTS_CSV_PATH, ".csv"));
 
         // It's the command's job to read the file and validate column counts
         assertParseSuccess(parser, FILE_DESC_VALID_FILE + GROUP_COUNT_DESC_TYPICAL
@@ -131,9 +131,9 @@ public class ImportCommandParserTest {
     @Test
     public void parse_badFile_success() throws Exception {
         ImportCommand expectedCommand = new ImportCommand(
-                VALID_TYPICAL_PERSONS_GROUP_COUNT,
-                VALID_TYPICAL_PERSONS_ASSESSMENT_COUNT,
-                VALID_TYPICAL_PERSONS_TAG_COUNT,
+                VALID_TYPICAL_STUDENTS_GROUP_COUNT,
+                VALID_TYPICAL_STUDENTS_ASSESSMENT_COUNT,
+                VALID_TYPICAL_STUDENTS_TAG_COUNT,
                 ParserUtil.parsePath(VALID_NON_EXISTENT_PATH, ".csv"));
 
         // path leads to a file that doesn't exist (it's the command's job to check for existence)
@@ -141,9 +141,9 @@ public class ImportCommandParserTest {
                 + GROUP_COUNT_DESC_TYPICAL + ASSESSMENT_COUNT_DESC_TYPICAL + TAG_COUNT_DESC_TYPICAL, expectedCommand);
 
         expectedCommand = new ImportCommand(
-                VALID_TYPICAL_PERSONS_GROUP_COUNT,
-                VALID_TYPICAL_PERSONS_ASSESSMENT_COUNT,
-                VALID_TYPICAL_PERSONS_TAG_COUNT,
+                VALID_TYPICAL_STUDENTS_GROUP_COUNT,
+                VALID_TYPICAL_STUDENTS_ASSESSMENT_COUNT,
+                VALID_TYPICAL_STUDENTS_TAG_COUNT,
                 ParserUtil.parsePath(VALID_WRONG_CSV_PATH, ".csv"));
 
         // path leads to a file that has the wrong format (it's the command's job to read the file)

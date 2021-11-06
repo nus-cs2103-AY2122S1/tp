@@ -14,8 +14,8 @@ import static seedu.sourcecontrol.logic.commands.CommandTestUtil.VALID_ASSESSMEN
 import static seedu.sourcecontrol.logic.commands.CommandTestUtil.VALID_GROUP_TUTORIAL;
 import static seedu.sourcecontrol.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.sourcecontrol.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.sourcecontrol.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.sourcecontrol.testutil.TypicalPersons.AMY;
+import static seedu.sourcecontrol.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
+import static seedu.sourcecontrol.testutil.TypicalStudents.AMY;
 
 import java.nio.file.Path;
 
@@ -38,7 +38,7 @@ public class ShowCommandParserTest {
 
     private final ShowCommandParser parser = new ShowCommandParser();
 
-    private final Index index = INDEX_SECOND_PERSON;
+    private final Index index = INDEX_SECOND_STUDENT;
     private final Student student = AMY;
     private final Assessment assessment = new AssessmentBuilder().withValue(VALID_ASSESSMENT_AMY).build();
     private final Group group = new GroupBuilder().withName(VALID_GROUP_TUTORIAL).build();

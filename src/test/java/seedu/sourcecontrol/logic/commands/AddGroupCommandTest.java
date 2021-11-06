@@ -10,9 +10,9 @@ import static seedu.sourcecontrol.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.sourcecontrol.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.sourcecontrol.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.sourcecontrol.testutil.Assert.assertThrows;
-import static seedu.sourcecontrol.testutil.TypicalPersons.AMY;
-import static seedu.sourcecontrol.testutil.TypicalPersons.BOB;
-import static seedu.sourcecontrol.testutil.TypicalPersons.getTypicalSourceControl;
+import static seedu.sourcecontrol.testutil.TypicalStudents.AMY;
+import static seedu.sourcecontrol.testutil.TypicalStudents.BOB;
+import static seedu.sourcecontrol.testutil.TypicalStudents.getTypicalSourceControl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,7 +30,7 @@ import seedu.sourcecontrol.model.student.Group;
 import seedu.sourcecontrol.model.student.Student;
 import seedu.sourcecontrol.testutil.AllocDescriptorBuilder;
 import seedu.sourcecontrol.testutil.GroupBuilder;
-import seedu.sourcecontrol.testutil.PersonBuilder;
+import seedu.sourcecontrol.testutil.StudentBuilder;
 
 public class AddGroupCommandTest {
     private static final String NEW_GROUP = "X01X";
@@ -151,8 +151,8 @@ public class AddGroupCommandTest {
     public void execute_ambiguousStudentName_throwsCommandException() {
         // Two students named John Doe (with different IDs) exist in the application
         final String duplicatedName = "John Doe";
-        Student firstJohn = new PersonBuilder().withName(duplicatedName).withId("E9090909").build();
-        Student secondJohn = new PersonBuilder(firstJohn).withId("E9191919").build();
+        Student firstJohn = new StudentBuilder().withName(duplicatedName).withId("E9090909").build();
+        Student secondJohn = new StudentBuilder(firstJohn).withId("E9191919").build();
         model.addStudent(firstJohn);
         model.addStudent(secondJohn);
 

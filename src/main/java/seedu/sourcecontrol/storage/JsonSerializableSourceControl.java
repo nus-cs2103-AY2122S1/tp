@@ -21,7 +21,7 @@ import seedu.sourcecontrol.model.student.Student;
 @JsonRootName(value = "sourcecontrol")
 class JsonSerializableSourceControl {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate student(s).";
+    public static final String MESSAGE_DUPLICATE_STUDENT = "Student list contains duplicate student(s).";
     public static final String MESSAGE_DUPLICATE_ASSESSMENT = "Assessment list contains duplicate assessment(s).";
     public static final String MESSAGE_DUPLICATE_GROUP = "Group list contains duplicate group(s).";
 
@@ -88,7 +88,7 @@ class JsonSerializableSourceControl {
                     sourceControl.getGroupList(),
                     sourceControl.getAssessmentList());
             if (sourceControl.hasStudent(student)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+                throw new IllegalValueException(MESSAGE_DUPLICATE_STUDENT);
             }
             sourceControl.addStudent(student);
         }

@@ -7,7 +7,7 @@ import static seedu.sourcecontrol.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.sourcecontrol.logic.commands.CommandTestUtil.ID_DESC_AMY;
 import static seedu.sourcecontrol.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.sourcecontrol.testutil.Assert.assertThrows;
-import static seedu.sourcecontrol.testutil.TypicalPersons.AMY;
+import static seedu.sourcecontrol.testutil.TypicalStudents.AMY;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -31,7 +31,7 @@ import seedu.sourcecontrol.model.student.Student;
 import seedu.sourcecontrol.storage.JsonSourceControlStorage;
 import seedu.sourcecontrol.storage.JsonUserPrefsStorage;
 import seedu.sourcecontrol.storage.StorageManager;
-import seedu.sourcecontrol.testutil.PersonBuilder;
+import seedu.sourcecontrol.testutil.StudentBuilder;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");
@@ -82,7 +82,7 @@ public class LogicManagerTest {
 
         // Execute add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + ID_DESC_AMY;
-        Student expectedStudent = new PersonBuilder(AMY)
+        Student expectedStudent = new StudentBuilder(AMY)
                 .withGroups()
                 .withScores(new LinkedHashMap<>())
                 .withTags().build();
@@ -93,8 +93,8 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+    public void getFilteredStudentList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredStudentList().remove(0));
     }
 
     @Test

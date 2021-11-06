@@ -1,7 +1,7 @@
 package seedu.sourcecontrol.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.sourcecontrol.testutil.TypicalPersons.getTypicalSourceControl;
+import static seedu.sourcecontrol.testutil.TypicalStudents.getTypicalSourceControl;
 
 import java.nio.file.Path;
 

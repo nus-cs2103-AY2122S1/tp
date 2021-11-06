@@ -4,9 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.sourcecontrol.testutil.Assert.assertThrows;
-import static seedu.sourcecontrol.testutil.TypicalPersons.CARL;
-import static seedu.sourcecontrol.testutil.TypicalPersons.ELLE;
-import static seedu.sourcecontrol.testutil.TypicalPersons.FIONA;
+import static seedu.sourcecontrol.testutil.TypicalStudents.CARL;
+import static seedu.sourcecontrol.testutil.TypicalStudents.ELLE;
+import static seedu.sourcecontrol.testutil.TypicalStudents.FIONA;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.sourcecontrol.testutil.GroupBuilder;
 import seedu.sourcecontrol.testutil.IdBuilder;
-import seedu.sourcecontrol.testutil.PersonBuilder;
+import seedu.sourcecontrol.testutil.StudentBuilder;
 
 public class GroupTest {
 
@@ -82,7 +82,7 @@ public class GroupTest {
 
     @Test
     public void hasStudent_included() {
-        Student student = new PersonBuilder().build();
+        Student student = new StudentBuilder().build();
         Group group = new GroupBuilder().withStudents(student).build();
         assertTrue(() -> group.hasStudent(student.getId()));
     }
