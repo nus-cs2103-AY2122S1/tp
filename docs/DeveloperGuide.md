@@ -506,14 +506,15 @@ These are some use cases to familiarise with the flow of our application:
 
 (For all use cases below, the **System** is `PlannerMD` and the **Actor** is the `receptionist`, unless specified otherwise)
 
-**Use case: Adding a patient/doctor**
+**Use case: UC01P Adding a patient** <br>
+**Precondition:** PlannerMD is displaying the patient tab.
 
 **MSS**
 
-1. Receptionist requests to add a patient/doctor by typing in their details
-2. PlannerMD adds the patient/doctor which is reflected immediately in the list
+1. Receptionist requests to add a patient by typing in their details.
+2. PlannerMD adds the patient which is reflected immediately in the list
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
@@ -521,245 +522,326 @@ These are some use cases to familiarise with the flow of our application:
 
     * 1a1. PlannerMD shows an error message.
 
-    Use case resumes at step 1.
+  Use case resumes at step 1.
 
 * 1b. PlannerMD detects data entered with invalid format.
 
     * 1b1. PlannerMD shows an error message stating the required format.
 
-    Use case resumes at step 1.
+  Use case resumes at step 1.
 
-**Use case: Deleting a patient/doctor**
+**Use case: UC01D Adding a doctor** <br>
+**Precondition:** PlannerMD is displaying the doctor tab.
+
+Same as UC01P but references to patient is replaced with doctor instead.
+
+**Use case: UC02P Listing all patient**
 
 **MSS**
 
-1.  Receptionist requests for a list of patients/doctors
-2.  PlannerMD shows a list of patients/doctors
-3.  Receptionist requests to delete a specific patient/doctor in the list
-4.  PlannerMD deletes the patient/doctor which is reflected immediately in the list
+1. Receptionist requests to list all patients.
+2. All patients are displayed in the patient records tab.
+
+   Use case ends.
+
+**Use case: UC02D Listing all patient** <br>
+**Precondition:** PlannerMD is displaying the doctor tab.
+
+Same as UC02P but references to patient is replaced with doctor instead.
+
+**Use case: UC03P Finding patients** <br>
+**Precondition:** PlannerMD is displaying the patient tab.
+
+**MSS**
+
+1. Receptionist requests to find patients with desired keywords.
+2. All patients with desired keywords are displayed in the patient records tab.
+
+   Use case ends.
+
+**Extensions**
+* 1a. No keywords given.
+
+    * 1a1. PlannerMD shows an error message.
+
+       Use case ends.
+
+**Use case: UC03P Finding doctors** <br>
+**Precondition:** PlannerMD is displaying the doctor tab.
+
+Same as UC02P but references to patient is replaced with doctor instead.
+
+**Use case: UC04P Deleting a patient** <br>
+**Precondition:** PlannerMD is displaying the patient tab.
+
+**MSS**
+
+1. Receptionist <u>lists (UC02P)</u> or <u>finds (UC03P)</u> relevant patients.
+2. Receptionist requests to delete a specific patient/doctor in the list
+3. PlannerMD deletes the patient/doctor which is reflected immediately in the list
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The list is empty.
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 2a. The given index is invalid.
 
-    * 3a1. PlannerMD shows an error message.
+    * 2a1. PlannerMD shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 1.
   
   Use case ends.
 
-**Use case: Adding a risk profile to a patient**
+**Use case: UC04D Deleting a doctor** <br>
+**Precondition:** PlannerMD is displaying the doctor tab.
+
+Same as UC04P but with the following changes:
+* Replace references of patients with doctors
+* Replace references of <u>listing patients (UC02P)</u> with <u>listing doctors (UC02D)</u>
+* Replace references of <u>finding patients (UC03P)</u> with <u>finding doctors (UC03D)</u>
+
+**Use case: UC05P Editing personal details of a patient**
+**Precondition:** PlannerMD is displaying the patient tab.
 
 **MSS**
 
-1.  Receptionist requests to find a certain patient by typing his/her name in the CLI
-2.  PlannerMD shows a list of patients with that name
-3.  Receptionist requests to add a risk profile to a specific person in the list
-4.  PlannerMD adds the risk profile which is reflected immediately in the list
+1. Receptionist <u>lists (UC02P)</u> or <u>finds (UC03P)</u> relevant patients.
+2. Receptionist requests to edit the personal details of a specific patient in the list
+3. PlannerMD edits the patient's personal details which is reflected immediately
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The list is empty.
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 2a. The given index is invalid.
 
     * 3a1. PlannerMD shows an error message.
 
       Use case resumes at step 2.
 
-**Use case: Editing the risk profile of a patient**
+**Use case: UC05D Editing personal details of a doctor** <br>
+**Precondition:** PlannerMD is displaying the doctor tab.
+
+Same as UC05P but with the following changes:
+* Replace references of patients with doctors
+* Replace references of <u>listing patients (UC02P)</u> with <u>listing doctors (UC02D)</u>
+* Replace references of <u>finding patients (UC03P)</u> with <u>finding doctors (UC03D)</u>
+
+**Use case: UC06P Editing the remark of a patient** <br>
+**Precondition:** PlannerMD is displaying the patient tab.
 
 **MSS**
 
-1.  Receptionist requests to find a certain patient by typing his/her name in the CLI
-2.  PlannerMD shows a list of patients with that name
-3.  Receptionist requests to add a risk profile tag of a specific person in the list
-4.  PlannerMD adds the risk profile tag which is reflected immediately in the list
+1. Receptionist <u>lists (UC02P)</u> or <u>finds (UC03P)</u> relevant patients.
+2. Receptionist requests to edit the remark of a specific person in the list
+3. PlannerMD edits the remark which is reflected immediately in the list
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The list is empty.
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 2a. The given index is invalid.
 
-    * 3a1. PlannerMD shows an error message.
+    * 2a1. PlannerMD shows an error message.
 
       Use case resumes at step 2.
 
-**Use case: Adding a tag to a patient**
+**Use case: UC06D Editing the remark of a patient** <br>
+**Precondition:** PlannerMD is displaying the doctor tab.
+
+Same as UC06P but with the following changes:
+* Replace references of patients with doctors
+* Replace references of <u>listing patients (UC02P)</u> with <u>listing doctors (UC02D)</u>
+* Replace references of <u>finding patients (UC03P)</u> with <u>finding doctors (UC03D)</u>
+
+**Use case: UC07P Adding a tag to a patient**<br>
+**Precondition:** PlannerMD is displaying the patient tab.
 
 **MSS**
 
-1.  Receptionist requests to list patients
-2.  PlannerMD shows a list of patients
-3.  Receptionist requests to add a tag to a specific person in the list
-4.  PlannerMD adds the tag which is reflected immediately in the list
+1. Receptionist <u>lists (UC02P)</u> or <u>finds (UC03P)</u> relevant patients.
+2. Receptionist requests to add a tag to a specific person in the list
+3. PlannerMD adds the tag which is reflected immediately in the list
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The list is empty.
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 2a. The given index is invalid.
+
+    * 2a1. PlannerMD shows an error message.
+
+      Use case resumes at step 2.
+
+* 2b. The given tag is invalid.
+
+    * 2b1. PlannerMD shows an error message.
+
+      Use case resumes at step 2.
+  
+* 2c. The given tag already exists.
+
+    * 2c1. PlannerMD shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: UC07D Adding a tag to a doctor** <br>
+**Precondition:** PlannerMD is displaying the doctor tab.
+
+Same as UC07P but with the following changes:
+* Replace references of patients with doctors
+* Replace references of <u>listing patients (UC02P)</u> with <u>listing doctors (UC02D)</u>
+* Replace references of <u>finding patients (UC03P)</u> with <u>finding doctors (UC03D)</u>
+
+**Use case: UC08P Deleting a tag from a patient**<br>
+**Precondition:** PlannerMD is displaying the patient tab.
+
+**MSS**
+
+1. Receptionist <u>lists (UC02P)</u> or <u>finds (UC03P)</u> relevant patients.
+2. Receptionist requests to delete a tag from a specific person in the list
+3. PlannerMD deletes the tag which is reflected immediately in the list
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+* 2a. The given index is invalid.
 
     * 3a1. PlannerMD shows an error message.
 
       Use case resumes at step 2.
 
-* 3b. The given tag is invalid.
+* 2b. The given tag is non-existent.
 
     * 3b1. PlannerMD shows an error message.
 
       Use case resumes at step 2.
 
-**Use case: Deleting a tag from a patient**
+**Use case: UC08D Deleting a tag from a doctor** <br>
+**Precondition:** PlannerMD is displaying the doctor tab.
+
+Same as UC08P but with the following changes:
+* Replace references of patients with doctors
+* Replace references of <u>listing patients (UC02P)</u> with <u>listing doctors (UC02D)</u>
+* Replace references of <u>finding patients (UC03P)</u> with <u>finding doctors (UC03D)</u>
+
+**Use case: UC09 Scheduling an appointment**
 
 **MSS**
 
-1.  Receptionist requests a list of patients
-2.  PlannerMD shows a list of patients
-3.  Receptionist requests to delete a tag from a specific person in the list
-4.  PlannerMD deletes the tag which is reflected immediately in the list
+1. Receptionist <u>lists (UC02P)</u> or <u>finds (UC03P)</u> relevant patients.
+2. Receptionist <u>lists (UC02D)</u> or <u>finds (UC03D)</u> relevant doctors.
+3. Receptionist requests to schedule the appointment with patients and doctors listed.
+4. PlannerMD updates the doctor's schedule which is reflected immediately
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The list is empty.
 
   Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. PlannerMD shows an error message.
-
-      Use case resumes at step 2.
-
-* 3b. The given tag is non-existent.
-
-    * 3b1. PlannerMD shows an error message.
-
-      Use case resumes at step 2.
-
-**Use case: Editing personal details of a patient**
-
-**MSS**
-
-1.  Receptionist requests to find a certain patient by typing his/her name in the CLI
-2.  PlannerMD shows a list of patients with that name
-3.  Receptionist requests to edit the personal details of a specific patient in the list
-4.  PlannerMD edits the patient's personal details which is reflected immediately
-
-    Use case ends.
-
-**Extensions**
 
 * 2a. The list is empty.
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 3a. The given index for patient/doctor is invalid.
 
     * 3a1. PlannerMD shows an error message.
 
       Use case resumes at step 2.
 
-**Use case: Editing personal details of a doctor**
+* 3a. The appointment time clashes with the doctor's schedule
 
-**MSS**
-
-1.  Receptionist requests to find a certain doctor by typing his/her name in the CLI
-2.  PlannerMD shows a list of doctors with that name
-3.  Receptionist requests to edit the personal details of a specific doctor in the list
-4.  PlannerMD edits the doctor's personal details which is reflected immediately
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. PlannerMD shows an error message.
-
-      Use case resumes at step 2.
-
-**Use case: Scheduling an appointment**
-
-**MSS**
-
-1.  Receptionist requests to find a certain doctor by typing his/her name in the CLI
-2.  PlannerMD shows a list of doctors with that name and the corresponding appointments
-3.  Receptionist sees that doctor is available and requests to schedule the appointment
-4.  PlannerMD updates the doctor's schedule which is reflected immediately
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. PlannerMD shows an error message.
-
-      Use case resumes at step 2.
-
-* 4a. The appointment time clashes with the doctor's schedule
-
-    * 4a1. Receptionist decides to reschedule to a different time.
-    * 4a2. Receptionist requests to reschedule to a different time.
-    * 4a3. PlannerMD updates the doctor's schedule which is reflected immediately.
+    * 3a1. Receptionist decides to reschedule to a different time.
+    * 3a2. Receptionist requests to reschedule to a different time.
+    * 3a3. PlannerMD updates the doctor's schedule which is reflected immediately.
 
       Use case ends.
 
-**Use case: Deleting an appointment**
+**Use case: UC10 Listing today's appointments**
 
 **MSS**
-1. Receptionist requests to list appointments
-2. PlannerMD shows the list of appointments
-3. Receptionist requests to delete an appointment
-4. PlannerMD deletes the appointment from the appointment list which is reflected immediately
+1. Receptionist request to list all of today's appointments with his/her desired parameters.
+2. All of today's appointments are displayed in the appointment list.
+
+   Use case ends.
+
+**Extensions**
+* 1a. There are no appointments for the current day.
+
+    * 1a1. A message is shown informing the user that there are no appointments for the current day.
+
+      Use case ends.
+
+**Use case: UC11 Filtering appointments**
+
+**MSS**
+1. Receptionist request to filter through all appointments with his/her desired parameters.
+2. The filtered results are displayed in the appointment list.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The user does not specify any parameters when filtering through the appointment records.
+    * 1a1. All appointments in the appointment records are displayed in the appointment list.
+
+      Use case ends.
+
+* 1b. The user enters a parameter that is invalid.
+    * 1b1. An error message is shown, informing the user of an invalid parameter.
+    * 1b2. User enters the new parameters.
+
+      Steps 1b1-1b2 are repeated until the new parameters entered are valid.
+
+      Use case resumes from step 2.
+    
+**Use case: UC12 Deleting an appointment**
+
+**MSS**
+1. Receptionist <u>lists (UC10)</u> or <u>filters (UC11)</u> for relevant appointments .
+2. Receptionist requests to delete an appointment
+3. PlannerMD deletes the appointment from the appointment list which is reflected immediately
 
     Use case ends.
 
 **Extensions**
 
-* 3a. The given index is invalid.
+* 2a. The given index is invalid.
 
-    * 3a1. PlannerMD shows an error message.
+    * 2a1. PlannerMD shows an error message.
 
       Use case resumes at step 2.
 
-**Use case: Editing an appointment**
+**Use case: UC13 Editing an appointment**
 
 **MSS**
-1. Receptionist requests to list appointments
-2. PlannerMD shows the list of appointments
-3. Receptionist requests to edit a specific appointment
-4. PlannerMD edits the appointment which is reflected immediately
+1. Receptionist <u>lists (UC10)</u> or <u>filters (UC11)</u> for relevant appointments .
+2. Receptionist requests to edit a specific appointment
+3. PlannerMD edits the appointment which is reflected immediately
 
     Use case ends.
 
@@ -769,74 +851,24 @@ These are some use cases to familiarise with the flow of our application:
 
     Use case ends.
 
-* 3a. The given index is invalid.
+* 2a. The given index is invalid.
 
     * 3a1. PlannerMD shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
-* 3b. The given parameters are invalid.
+* 2b. The given parameters are invalid.
 
-    * 3b1. PlannerMD shows an error message.
+    * 2b1. PlannerMD shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
-* 3c. The edited appointment date or time clashes with an existing appointment.
+* 2c. The edited appointment date or time clashes with an existing appointment.
 
     * 3c1. PlannerMD shows an error message and lists the clashing appointment(s).
 
-      Use case resumes at step 2.
+      Use case resumes at step 1.
     
-**Use case: Filtering appointments**
-
-**MSS**
-1. Clinic receptionist wishes to filter through all appointments.
-2. Clinic receptionist enters the parameters to filter through the appointment records.
-3. The filtered results are displayed in the appointment list.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The user does not specify any parameters when filtering through the appointment records.
-  
-    * 2a1. All appointments in the appointment records are displayed in the appointment list.
-    
-        Use case ends.
-    
-* 2b. The users enters a parameter that is invalid.
-  
-    * 2b1. An error message is shown, informing the user of an invalid parameter.
-    * 2b2. User enters the new parameters.
-    
-        Steps 2b1-2b2 are repeated until the new parameters entered are valid.
-      
-        Use case resumes from step 3.  
-    
-**Use case: Listing today's appointments**
-
-**MSS**
-1. Clinic receptionists wishes to view all of today's appointments.
-2. Clinic receptionists enters the `appt -l` command.
-3. All of today's appointments are displayed in the appointment list.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The given command is invalid.
-
-    * 2a1. An error message is shown to the user.
-  
-        Use case resumes at step 2.
-    
-* 2b. There are no appointments for the current day.
-
-    * 2b1. A message is shown informing the user that there are no appointments for the current day.
-    
-        Use case ends.
-
-
 ### Non-Functional Requirements  <a name="nfr"/>
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -921,6 +953,52 @@ testers are expected to do more *exploratory* testing.
     8. Other incorrect add commands to try: `add`, `add n/Bob hp/`, `add n/` (not all fields, except tags and risk, are filled)<br>
        Expected: No Patient is added. Error message is shown in the response box: "Invalid command format!..."
 
+### Finding a patient <a name="find-patient-manual-testing"/>
+
+Prerequisites: The tests for finding patients uses the sample data from `SampleDataUtil#getSamplePatients`. This is the sample data loaded at initial launch of the application, or in the absence of the `data/plannermd.json` file.
+
+1. Finding patients while all patients are being shown
+
+    1. Prerequisites:
+        1. Ensure the active tab is the "Patients" tab, else use the `toggle` command to toggle to the "Patients" tab.
+        1. List all patients using the `list` command. Multiple patients in the list.
+
+    1. Test case: `find Aaron`<br>
+       Expected: Patient list shows only one patient "Aaron Yeoh". Status message shown says "1 patients listed!".
+
+    1. Test case: `find aaron`<br>
+       Expected: `find` command is case-insensitive. Patient list shows only one patient "Aaron Yeoh". Status message shown says "1 patients listed!".
+
+    1. Test case: `find aaron Bobby`<br>
+       Expected: `find` command is able to search multiple patients using multiple keywords. Patient list shows two patients "Aaron Yeoh" and "Bobby Yu". Status message shown says "2 patients listed!".
+
+    1. Test case: `find aar`<br>
+       Expected: Patient list shows "No patients found". Status message shown says "0 patients listed!".
+
+    1. Test case: `find Alex`<br>
+       Expected: Patient list shows "No patients found". Status message shown says "0 patients listed!".
+
+2. Finding patients while some patients are being shown
+
+    2. Prerequisites:
+        2. Ensure the active tab is the "Patients" tab, else use the `toggle` command to toggle to the "Patients" tab.
+        2. List all patients using the `list` command. Multiple patients in the list.
+        2. List some patients using `find xyz` (xyz is the name of an existing patient).
+
+    2. Test cases are similar to those above.
+
+### Listing all patients <a name="list-patients-manual-testing"/>
+
+1. List all patients while none/some patients are being shown
+
+    1. Prerequisites: `toggle` to the `Patients` tab. Ensure that there are existing patients. If there is none, use the [add](#add-patient-manual-testing) command to add some patients. List some patients using `find XYZ` (XYZ is the name of an existing/non-existent patient).
+
+    2. Test case: `list`<br>
+       Expected: All existing patients are listed.
+
+    3. Test case: `list extra-parameters`<br>
+       Expected: All existing patients are listed.
+
 ### Deleting a patient  <a name="delete-patient-manual-testing"/>
 1. Deleting a patient while all doctors are being shown
     1. Prerequisites: `toggle` to the `Patients` tab. List all patients using the `list` command. There must be multiple patients. 
@@ -936,7 +1014,6 @@ testers are expected to do more *exploratory* testing.
 
 
 2. Delete a patient while some patients are being shown
-
     1. Prerequisites: `toggle` to the `Patients` tab. List some patients using `find XYZ` (XYZ is the name of an existing patient).
 
     2. Test cases are similar to those above.
@@ -991,52 +1068,6 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: `toggle` to the `Patients` tab. List some patients using `find XYZ` (XYZ is the name of an existing patient).
 
     2. Test cases are similar to those above.
-
-### Finding a patient <a name="find-patient-manual-testing"/>
-
-Prerequisites: The tests for finding patients uses the sample data from `SampleDataUtil#getSamplePatients`. This is the sample data loaded at initial launch of the application, or in the absence of the `data/plannermd.json` file.
-
-1. Finding patients while all patients are being shown
-
-    1. Prerequisites:
-        1. Ensure the active tab is the "Patients" tab, else use the `toggle` command to toggle to the "Patients" tab. 
-        1. List all patients using the `list` command. Multiple patients in the list.
-    
-    1. Test case: `find Aaron`<br>
-       Expected: Patient list shows only one patient "Aaron Yeoh". Status message shown says "1 patients listed!".
-
-    1. Test case: `find aaron`<br>
-       Expected: `find` command is case-insensitive. Patient list shows only one patient "Aaron Yeoh". Status message shown says "1 patients listed!".
-
-    1. Test case: `find aaron Bobby`<br>
-       Expected: `find` command is able to search multiple patients using multiple keywords. Patient list shows two patients "Aaron Yeoh" and "Bobby Yu". Status message shown says "2 patients listed!".
-
-    1. Test case: `find aar`<br>
-       Expected: Patient list shows "No patients found". Status message shown says "0 patients listed!".
-       
-    1. Test case: `find Alex`<br>
-       Expected: Patient list shows "No patients found". Status message shown says "0 patients listed!".
-
-2. Finding patients while some patients are being shown
-
-    2. Prerequisites:
-        2. Ensure the active tab is the "Patients" tab, else use the `toggle` command to toggle to the "Patients" tab.
-        2. List all patients using the `list` command. Multiple patients in the list.
-        2. List some patients using `find xyz` (xyz is the name of an existing patient).
-
-    2. Test cases are similar to those above.
-
-### Listing all patients <a name="list-patients-manual-testing"/>
-
-1. List all patients while none/some patients are being shown
-
-    1. Prerequisites: `toggle` to the `Patients` tab. Ensure that there are existing patients. If there is none, use the [add](#add-patient-manual-testing) command to add some patients. List some patients using `find XYZ` (XYZ is the name of an existing/non-existent patient).
-
-    2. Test case: `list`<br>
-       Expected: All existing patients are listed.
-
-    3. Test case: `list extra-parameters`<br>
-       Expected: All existing patients are listed.
     
 ### Editing a patient's remark <a name="remark-patient"/>
 1. Editing a patient's remark while all patient are being shown
@@ -1141,72 +1172,7 @@ Prerequisites: The tests for finding patients uses the sample data from `SampleD
     8. Other incorrect add commands to try: `add`, `add n/Bob hp/`, `add n/` (not all fields, except tags, are filled)<br>
         Expected: No doctor is added. Error message is shown in the response box: "Invalid command format!..."
 
-### Deleting a doctor  <a name="delete-doctor-manual-testing"/>
-1. Deleting a doctor while all doctors are being shown
-    1. Prerequisites: `toggle` to the `Doctors` tab. List all doctors using the `list` command. There must be multiple doctors. 
-
-    2. Test case: `delete 1`<br>
-       Expected: First doctor is deleted from the doctors list. Details of the deleted doctor are shown in the status message.
-
-    3. Test case: `delete 0`<br>
-       Expected: No doctor is deleted. Error details are shown in the response box.
-
-    4. Other incorrect delete commands to try: `delete`, `delete x`, `delete abcd` (where x is larger than the list size, and abcd are any alphabets)<br>
-       Expected: Similar to previous.
-
-2. Delete a doctor while some doctors are being shown
-
-    1. Prerequisites: `toggle` to the `Doctors` tab. List some doctors using `find XYZ` (XYZ is the name of an existing doctor).
-
-    2. Test cases are similar to those above.
-    
-### Editing a doctor <a name="edit-doctor-manual-testing"/>
-
-1. Editing a doctor while all doctors are being shown
-
-    1. Prerequisites: `toggle` to the `Doctors` tab. List all doctors using the `list` command.
-
-    2. Test case: `edit 1 n/John Doe`<br>
-       Expected: First doctor's name is edited to `John Doe`. Details of the edited doctor are shown in the status message.
-
-    3. Test case: `edit 1 hp/91234567 eml/johndoe@example.com`<br>
-       Expected: First doctor's phone and email are edited to `91234567` and `johndoe@example.com` respectively. Details of the edited doctor are shown in the status message.
-
-    4. Test case: `edit 1 hp/abc`<br>
-       Expected: No doctor is edited. Error details are shown in the status message: "Phone numbers should only contain numbers...".
-
-    5. Test case: `edit 1 eml/xyz`<br>
-       Expected: No doctor is edited. Error details are shown in the status message: "Emails should be of the format local-part@domain...".
-
-    6. Test case: `edit 1 a/Blk 30, Clementi Ave 2`<br>
-       Expected: First doctor's address is edited to `Blk 30, Clementi Ave 2`. Details of the edited doctor are shown in the status message.
-
-    7. Test case: `edit 1 dob/20/12/1960`<br>
-       Expected: First doctor's date of birth is edited to `1960-12-20`. Details of the edited doctor are shown in the status message.
-
-    8. Test case: `edit 1 dob/20/14/1960`<br>
-       Expected: No doctor is edited. Error details are shown in the status message: "Birth dates should be of the format DD/MM/YYYY and adhere to the following constraints...".
-
-    9. Test case: `edit 1 t/experienced`<br>
-       Expected: First doctor's tag is edited to `experienced`. Details of the edited doctor are shown in the status message.
-
-    10. Test case: `edit 1 t/`<br>
-        Expected: First doctor's tags are deleted. Details of the edited doctor are shown in the status message.
-
-    11. Test case: `edit 0 hp/91234567`<br>
-        Expected: No doctor is edited. Error details are shown in the status message: "Invalid command format...".
-
-    12. Other incorrect edit commands to try: `edit`, `edit x`, `...` (where x is larger than the list size)<br>
-        Expected: No doctor is edited. Error details are shown in the status message.
-
-2. Editing a doctor while some doctors are being shown
-
-    1. Prerequisites: `toggle` to the `Doctors` tab. List some doctors using `find XYZ` (XYZ is the name of an existing doctor).
-
-    2. Test cases are similar to those above.
-
 ### Finding doctors <a name="find-doctor"/>
-
 Prerequisites: The tests for finding doctors uses the sample data from `SampleDataUtil#getSampleDoctors`. This is the sample data loaded at initial launch of the application, or in the absence of the `data/plannermd.json` file.
 
 1. Finding doctors while all doctors are being shown
@@ -1250,6 +1216,70 @@ Prerequisites: The tests for finding doctors uses the sample data from `SampleDa
 
     3. Test case: `list extra-parameters`<br>
        Expected: All existing doctors are listed.
+
+### Deleting a doctor  <a name="delete-doctor-manual-testing"/>
+1. Deleting a doctor while all doctors are being shown
+    1. Prerequisites: `toggle` to the `Doctors` tab. List all doctors using the `list` command. There must be multiple doctors. 
+
+    2. Test case: `delete 1`<br>
+       Expected: First doctor is deleted from the doctors list. Details of the deleted doctor are shown in the status message.
+
+    3. Test case: `delete 0`<br>
+       Expected: No doctor is deleted. Error details are shown in the response box.
+
+    4. Other incorrect delete commands to try: `delete`, `delete x`, `delete abcd` (where x is larger than the list size, and abcd are any alphabets)<br>
+       Expected: Similar to previous.
+
+2. Delete a doctor while some doctors are being shown
+
+    1. Prerequisites: `toggle` to the `Doctors` tab. List some doctors using `find XYZ` (XYZ is the name of an existing doctor).
+
+    2. Test cases are similar to those above.
+    
+### Editing a doctor <a name="edit-doctor-manual-testing"/>
+1. Editing a doctor while all doctors are being shown
+
+    1. Prerequisites: `toggle` to the `Doctors` tab. List all doctors using the `list` command.
+
+    2. Test case: `edit 1 n/John Doe`<br>
+       Expected: First doctor's name is edited to `John Doe`. Details of the edited doctor are shown in the status message.
+
+    3. Test case: `edit 1 hp/91234567 eml/johndoe@example.com`<br>
+       Expected: First doctor's phone and email are edited to `91234567` and `johndoe@example.com` respectively. Details of the edited doctor are shown in the status message.
+
+    4. Test case: `edit 1 hp/abc`<br>
+       Expected: No doctor is edited. Error details are shown in the status message: "Phone numbers should only contain numbers...".
+
+    5. Test case: `edit 1 eml/xyz`<br>
+       Expected: No doctor is edited. Error details are shown in the status message: "Emails should be of the format local-part@domain...".
+
+    6. Test case: `edit 1 a/Blk 30, Clementi Ave 2`<br>
+       Expected: First doctor's address is edited to `Blk 30, Clementi Ave 2`. Details of the edited doctor are shown in the status message.
+
+    7. Test case: `edit 1 dob/20/12/1960`<br>
+       Expected: First doctor's date of birth is edited to `1960-12-20`. Details of the edited doctor are shown in the status message.
+
+    8. Test case: `edit 1 dob/20/14/1960`<br>
+       Expected: No doctor is edited. Error details are shown in the status message: "Birth dates should be of the format DD/MM/YYYY and adhere to the following constraints...".
+
+    9. Test case: `edit 1 t/experienced`<br>
+       Expected: First doctor's tag is edited to `experienced`. Details of the edited doctor are shown in the status message.
+
+    10. Test case: `edit 1 t/`<br>
+        Expected: First doctor's tags are deleted. Details of the edited doctor are shown in the status message.
+
+    11. Test case: `edit 0 hp/91234567`<br>
+        Expected: No doctor is edited. Error details are shown in the status message: "Invalid command format...".
+
+    12. Other incorrect edit commands to try: `edit`, `edit x`, `...` (where x is larger than the list size)<br>
+        Expected: No doctor is edited. Error details are shown in the status message.
+
+2. Editing a doctor while some doctors are being shown
+
+    1. Prerequisites: `toggle` to the `Doctors` tab. List some doctors using `find XYZ` (XYZ is the name of an existing doctor).
+
+    2. Test cases are similar to those above.
+    
 
 ### Editing a doctor's remark <a name="remark-doctor"/>
 1. Editing a doctor's remark while all doctors are being shown
