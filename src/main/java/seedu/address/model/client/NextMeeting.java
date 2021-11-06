@@ -26,6 +26,7 @@ public class NextMeeting implements OptionalNonStringBasedField, IgnoreNullCompa
             + "(Character limit: 100)";
     public static final String MESSAGE_INVALID_TIME_DURATION = "End Time should be after Start Time.";
     public static final String MESSAGE_MEETING_DATE_OVER = "NextMeeting should not be in the past.";
+
     public static final String NO_NEXT_MEETING = "No meeting planned";
     public static final NextMeeting NULL_MEETING = new NextMeeting(null, null, null,
             null, null);
