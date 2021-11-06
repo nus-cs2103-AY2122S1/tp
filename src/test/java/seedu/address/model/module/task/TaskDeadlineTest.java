@@ -7,9 +7,9 @@ import static seedu.address.model.module.task.TaskDeadline.DEADLINE_DATE_TIME_FO
 import static seedu.address.model.module.task.TaskDeadline.isValidTaskDeadline;
 import static seedu.address.testutil.Assert.assertThrows;
 
-import org.junit.jupiter.api.Test;
-
 import java.time.LocalDateTime;
+
+import org.junit.jupiter.api.Test;
 
 class TaskDeadlineTest {
     @Test

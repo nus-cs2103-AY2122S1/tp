@@ -1,10 +1,10 @@
 package seedu.address.model.module.event;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.module.event.EventDate.isValidEventDate;
+
+import org.junit.jupiter.api.Test;
 
 public class EventDateTest {
 
