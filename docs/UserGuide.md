@@ -170,7 +170,7 @@ Example:
 
 Edits an existing member in Ailurus. 
 
-Format: `medit /m MEMBER_INDEX [/n NAME] [/ph PHONE] [/em EMAIL] [/a ADDRESS] [/p POSITION]…​`
+Format: `medit /m MEMBER_INDEX [/n NAME] [/ph PHONE_NUMBER] [/em EMAIL] [/a ADDRESS] [/p POSITION]…​`
 
 * Edits the member at the specified `MEMBER_INDEX`.
 * At least one of the optional fields must be provided.
@@ -531,7 +531,7 @@ Ailurus data are saved in the hard disk automatically after any command that cha
 Ailurus data are saved as a JSON file `[JAR file location]/data/Ailurus.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">
-:exclamation: **Caution:** If your changes to the data file makes its format invalid, Ailurus will discard all data and start with an empty data file at the next run.
+:exclamation: **Caution:** If your changes to the data file makes its format invalid, Ailurus will discard all data and start with an empty data file at the next run. If this happens, you can delete the data file and restart Ailurus app, and it will automatically create a new data file after new data is added.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -549,7 +549,7 @@ Action | Format, Examples
 --------|------------------
 **madd** | `madd /n NAME /ph PHONE_NUMBER [/em EMAIL] [/a ADDRESS] [/p POSITION]…​` <br> e.g., `madd /n James Ho /ph 22224444 /em jamesho@example.com /a 123, Clementi Rd, 1234665 /p friend /p colleague`
 **mlist** | `mlist [/e EVENT_INDEX] [/att] [/abs]` <br> e.g., `mlist /e 3 /att`
-**medit** | `medit /m MEMBER_INDEX [/n NAME] [/ph PHONE] [/em EMAIL] [/a ADDRESS] [/p POSITION]…​`<br> e.g.,`medit /m 2 /n James Lee /em jameslee@example.com`
+**medit** | `medit /m MEMBER_INDEX [/n NAME] [/ph PHONE_NUMBER] [/em EMAIL] [/a ADDRESS] [/p POSITION]…​`<br> e.g.,`medit /m 2 /n James Lee /em jameslee@example.com`
 **mfind** | `mfind KEYWORD [MORE_KEYWORDS]…​`<br> e.g., `mfind James Jake`
 **mtfind** | `mtfind KEYWORD [MORE_KEYWORDS]…​`<br> e.g., `mtfind form`
 **mdel** | `mdel /m MEMBER_INDEX` <br> e.g., `mdel /m 5`
