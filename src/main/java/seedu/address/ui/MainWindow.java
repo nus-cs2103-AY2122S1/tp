@@ -22,6 +22,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.LessonAddCommand;
+import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.commands.WeekCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -218,11 +219,13 @@ public class MainWindow extends UiPart<Stage> {
         personListView.getSelectionModel().selectedItemProperty()
                 .addListener((obs, oldVal, newVal) -> {
                     if (newVal != null) {
+                        logger.info("Showing lessons for " + newVal.getName());
                         handlePersonGridPanel(newVal);
+                        resultDisplay.setFeedbackToUser(String.format(ViewCommand.MESSAGE_SUCCESS, newVal.getName()));
                     }
                 });
-        personListView.setOnMouseClicked(event -> handlePersonGridPanel(personListView
-                .getSelectionModel().getSelectedItem()));
+        personListView.setOnMouseClicked(event -> handlePersonGridPanel(
+                personListView.getSelectionModel().getSelectedItem()));
     }
 
     /**
@@ -359,6 +362,7 @@ public class MainWindow extends UiPart<Stage> {
         if (commandResult.getStudent().isPresent()) {
             Person student = commandResult.getStudent().get();
             handlePersonGridPanel(student);
+            centerPanel.getPersonListView().scrollTo(student);
         } else {
             handlePersonGridPanel();
         }
