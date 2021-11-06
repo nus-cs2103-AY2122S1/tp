@@ -56,7 +56,7 @@ ShowCommand -> ShowCommand : getUniqueCategoryInputs()
 
 activate ShowCommand
 ShowCommand -> Model : getAddressBook()
-Model -> ShowCommand: addressBook
+Model --> ShowCommand: addressBook
 
 ShowCommand --> ShowCommand: "Here are all the names present\nAlex Yeoh\nBernice Yu\nCharlotte Oliviero\nDavid Li\nIrfan Ibrahim\nRoy Balakrishnan"
 
@@ -75,3 +75,6 @@ deactivate ShowCommand
 [<--LogicManager
 deactivate LogicManager
 @enduml
+
+
+

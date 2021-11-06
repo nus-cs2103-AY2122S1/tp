@@ -185,8 +185,8 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Add feature 
 
-The ```add``` command is facilitated by creating an ```AddCommand``` depending on the given input.
-This command then updates the ```model``` accordingly.
+The `add` command is facilitated by creating an `AddCommand` depending on the given input.
+This command then updates the `model` accordingly.
 
 The following activity diagram summarizes what happens when a user executes an ```add``` command:
 ![images](images/AddCommandActivityDiagram.png)
@@ -215,7 +215,7 @@ is then called, which calls `Model#hasPerson()` to ensure that the new `Person` 
 Step 5. `AddCommand#execute()` then calls `Model#addPerson()` to add the new applicant in the `AddressBook`.
 
 Step 6. `CommandResult` is initialized with `String` containing the details of the new applicant.
-This CommandResult is then returned.
+This `CommandResult` is then returned.
 
 The following sequence diagram shows how the add operation works.
 ![images](images/AddCommandSequenceDiagram.png)
@@ -297,7 +297,7 @@ Step 5. After checking that the new `Person` is not a duplicate of any existing 
 is called to reflect the changes in the list of applicants shown to the user.
 
 Step 6. Once the list is updated, `CommandResult` is initialized with `String` containing the details of the edited applicants.
-This CommandResult is then returned.
+This `CommandResult` is then returned.
 
 The following sequence diagram shows how the edit operation works.
 ![images](images/EditCommandSequenceDiagram.png)
@@ -372,7 +372,26 @@ The following sequence diagram shows how the show operation works.
 ![images](images/ShowCommandSequenceDiagram.png)
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ShowCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
-   
+
+#### Design considerations:
+
+**Aspect: Finding search terms:**
+
+* **Alternative 1 (current choice):** Sort unique search terms into a list.
+    * Pros: List of search terms follows an order defined by us that would make it easier for the user to find the search
+    term they are looking for, especially when there are a lot of search terms.
+    * Pros: Testability improves as `ShowCommand#getUniqueCategoryInputs()` will return a list with 
+    an order defined by us, making it easier for us to craft test cases
+    * Cons: Runtime complexity will increase to `O(n log n)` rather than `O(n)` due to extra performance costs
+    of sorting the search terms.
+
+* **Alternative 2:** Not sorting unique search terms and collecting as a set.
+    * Pros: Runtime complexity stays at `O(n)`. The show command will be more efficient than using **Alternative 1**.
+    * Cons: List of search terms returned is in an order not defined by us, which could make it difficult for the users
+    to find the search term they are looking for.
+    * Cons: There is no general guarantee on the ordering of elements obtained by iterating over a set. This leads to lower
+    testability as it is difficult to create test cases if the result of the method is difficult to determine.
+
 ### Find feature
 
 The ```find``` command is facilitated by creating a ```FindCommand``` depending on the given
@@ -389,7 +408,7 @@ in the Activity Diagram. This is a known limitation of PlantUML.</div>
 Given below is an example usage scenario illustrated by a sequence diagram for ```find``` command.
 
 Step 1. A valid command `find n/Alex y/0` is given as user input. This invokes `LogicManager#execute()`, which calls
-`AddressBookParser#parseCommand()` to parse `find n/Alex y/0` into command word `find` and command argument ` n/Alex y/0`.
+`AddressBookParser#parseCommand()` to parse `find n/Alex y/0` into command word `find` and command argument ``` n/Alex y/0```.
 
 Step 2. `FindCommandParser` is initialized based on the parse results and `FindCommandParser#parse()` is called
 to identify the predicates present in ``` n/Alex y/0```. `FindCommandParser#parse()` then initializes a
@@ -627,7 +646,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `RecruitIn` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `RecruitIn` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: UC01 - Asking for help**
 

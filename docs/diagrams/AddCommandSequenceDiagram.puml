@@ -15,9 +15,8 @@ participant ":Model" as Model MODEL_COLOR
 participant "person:Person" as Person MODEL_COLOR
 end box
 
-[-> LogicManager : execute(input)
+[-> LogicManager : execute(add n/Dylan p/97998581\n e/dylan.eyyou@gmail.com\n r/Pilot et/Full time s/3500\n l/PhD y/4)
 activate LogicManager
-note left: input = "add n/Dylan p/97998581 e/dylan.eyyou@gmail.com r/Pilot et/Full time s/3500 l/PhD y/4"
 
 LogicManager -> AddressBookParser : parseCommand(input)
 activate AddressBookParser
@@ -31,9 +30,8 @@ deactivate AddCommandParser
 
 'Hidden arrow to position the destroy marker below the end of the activation bar.
 AddCommandParser -[hidden]-> AddressBookParser: BUFFER_MESSAGE
-note right: arguments = " n/Dylan p/97998581 e/dylan.eyyou@gmail.com r/Pilot et/Full time s/3500 l/PhD y/4"
 
-AddressBookParser -> AddCommandParser : parse(arguments)
+AddressBookParser -> AddCommandParser : parse(add n/Dylan p/97998581\n e/dylan.eyyou@gmail.com\n r/Pilot et/Full time s/3500\n l/PhD y/4)
 activate AddCommandParser
 
 AddCommandParser -> ArgumentTokenizer : tokenize()
@@ -100,3 +98,4 @@ deactivate AddCommand
 [<--LogicManager
 deactivate LogicManager
 @enduml
+
