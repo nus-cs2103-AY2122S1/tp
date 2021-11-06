@@ -82,7 +82,7 @@ public class ModelManagerTest {
 
     @Test
     public void setBookKeeping_validBookKeeping_setBookKeeping() {
-        BookKeeping bookKeeping = new BookKeeping(3.0, 2.0, 1.0);
+        BookKeeping bookKeeping = new BookKeeping(3.0, 2.0);
         modelManager.setBookKeeping(bookKeeping);
         assertEquals(bookKeeping, modelManager.getBookKeeping());
     }
