@@ -1242,17 +1242,34 @@ testers are expected to do more *exploratory* testing.
        Expected: The most recent window size and location is retained.
 
 
-### Deleting an applicant
 
-1. Deleting an applicant from MrTechRecruiter
+### Adding a new position
 
-    1. Prerequisites: There are 2 applicants within MTR. At index `1` we have `John Doe`, and at index `2` we have Mary Jane.
+1. Adding a position to MrTechRecruiter
+   1. Prerequisites: -
+   2. Test case: `add-position tit/tester desc/test codes`<br>
+      Expected: The position `tester` is added to MTR. The detailed information is shown in the status message.
+   3. Test case (followed by the previous test case): `add-position tit/tester desc/testing`<br>
+      Expected: An error message will show, indicating that the position `tester` already exists in MTR.
 
-    1. Test case: `delete-applicant 1`<br>
-       Expected: John Doe is deleted from the list. Details of the deleted contact shown in the status message.
+### Editing a position
+1. Editing a position in MrTechRecruiter. 
+   1. Prerequisites: There is at least one position in MTR. Assume there are two positions, `software engineer` at index `1` and `tester` at index `2`
+   2. Test case: `edit-position 1 tit/data engineer desc/create data pipeline`<br>
+      Expected: The title of the position is changed to `data engineer`, and the description is also changed. 
+   3. Test case: `edit-position 1 tit/tester`<br>
+      Expected: An error message will show, indicating that the position `tester` already exists in MTR.
 
-    1. Test case: `delete-applicant 3`<br>
-       Expected: No person is deleted. Error details depicting index out of bounds is shown.
+### Deleting a position
+
+1. Deleting a position from MrTechRecruiter 
+   1. Prerequisites: There is at least one position in MTR. Assume there are two positions, `software engineer` at index `1` and `tester` at index `2`
+   2. Test case: `delete-position 1`<br>
+      Expected: `tester` is deleted from the position list. The detailed information is shown in the status message. 
+   3. Test case: `delete-applicant 3`<br>
+      Expected: An error message will show, indicating that the index is invalid.
+
+      
 
 
 ### Adding a new applicant
@@ -1272,16 +1289,33 @@ testers are expected to do more *exploratory* testing.
 
 1. Editing an applicant in MrTechRecruiter
    1. Prerequisites: There is at least one applicant in MTR. Assume there are two positions `software engineer` and `tester` in MTR and for applicants, at index `1` we have `John Doe`, and at index `2` we have Mary Jane.
-   2. Test case: edit-applicant 1 p/89385853 pos/tester
+   2. Test case: `edit-applicant 1 p/89385853 pos/tester`<br>
       Expected: The phone and the position of `John Doe` are successfully edited. A success message will show. 
-   3. Test case: edit-applicant 2 n/Mary
+   3. Test case: `edit-applicant 2 n/Mary`<br>
       Expected: The name of the applicant at index `2` is successfully edited. A success message will show.
-   4. Other incorrect command to try: edit-applicant 5
+   4. Other incorrect command to try: `edit-applicant 5`
       Expected: An error message will show, indicating that the index is invalid. 
 
-### View average rate of a job
 
-1. View average rate of a job in MrTechRecruiter
+### Deleting an applicant
+
+1. Deleting an applicant from MrTechRecruiter
+
+  1. Prerequisites: There are 2 applicants within MTR. At index `1` we have `John Doe`, and at index `2` we have Mary Jane.
+
+  1. Test case: `delete-applicant 1`<br>
+     Expected: John Doe is deleted from the list. Details of the deleted contact shown in the status message.
+
+  1. Test case: `delete-applicant 3`<br>
+     Expected: No applicant is deleted. Error details depicting index out of bounds is shown.
+  
+
+
+
+
+### Viewing average rate of a job
+
+1. Viewing average rate of a job in MrTechRecruiter
 
     1. Prerequisites: <br>
        a. Job must exist in address book. <br>
@@ -1289,6 +1323,14 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `rate pos/software engineer`<br>
        Expected: Text indicating the rejection rate will be displayed in the status bar. E.g. `Rejection rate for software engineer = 10.00%`
+
+
+### Undoing 
+
+1. Undoing the previous modification in MrTechRecruiter
+   1. Test case: `undo`
+      Expected: If modification has been made to MTR, the previous modification will be reverted. 
+        Otherwise, an error message will be shown, indicating that there is no modification to undo. 
 
 
 ### Saving data
