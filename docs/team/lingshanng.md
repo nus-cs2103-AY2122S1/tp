@@ -21,6 +21,7 @@ Given below are my contributions to the project.
   
 * **Other Enhancements**:
   * Retrieve last command [\#111](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/111)
+  * Refactoring AB3 terms to TAB [\#127](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/127)
   * Improve sample data with lessons [\#183](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/183)
   * Improve index error messages [\#280](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/280)
   * Improve lesson ordering [\#311](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/311)
@@ -40,10 +41,18 @@ Given below are my contributions to the project.
     * Added implementation details of the `find` feature and lesson cancelling.
   
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
-
-* **Tools**:
-  * Integrated a third party library (Natty) to the project ([\#42]())
-  * Integrated a new Github plugin (CircleCI) to the team repo
+  * PRs reviewed (with non-trivial review comments): 
+    [\#19](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/19), 
+    [\#25](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/25), 
+    [\#38](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/38),
+    [\#39](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/39)
+    [\#109](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/109)
+    [\#112](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/112)
+    [\#118](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/118)
+    [\#126](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/126)
+    [\#170](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/170)
+    [\#186](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/186)
+    [\#191](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/191)
+    [\#208](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/208)
 
 * _{you can add/remove categories in the list above}_
