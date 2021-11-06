@@ -52,7 +52,7 @@ public class ItemCard extends UiPart<Region> {
         this.item = item;
         index.setText(displayedIndex + ". ");
         name.setText(item.getName().fullName);
-        id.setText(String.format("#%06d", item.getId()));
+        id.setText(String.format("%06d", item.getId()));
         count.setText(String.format("Quantity: %d", item.getCount()));
         costPrice.setText(String.format("Cost Price: $ %.2f", item.getCostPrice()));
         salesPrice.setText(String.format("Sales Price: $ %.2f", item.getSalesPrice()));
