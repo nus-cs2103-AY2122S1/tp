@@ -515,12 +515,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | unmark applicants from "Done" to "Not Done"   | reflect the correct current status I have with the applicant              |
 | `* *`    | user                                       | delete all applicants that are marked as done | so that I can focus only on applicants that I have not worked on, and easily reduce clutter in the address book |
 
-
-*{More to be added}*
-
 ### Use cases
 
-(For all use cases below, the **System** is the `RecruitIn` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `RecruitIn` and the **Actor** is the `user`, unless specified otherwise)
 
 
 **Use case: UC01 - Asking for help**
@@ -713,8 +710,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3b1. RecruitIn informs the user that no applicants were marked as "Done", and thus no applicants were deleted.
 
   Use case ends.
-
-*{More to be added}*
 
 ### Non-Functional Requirements
 
