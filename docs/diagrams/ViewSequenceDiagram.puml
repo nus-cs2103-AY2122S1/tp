@@ -56,7 +56,7 @@ create CommandResult
 ViewCommand -> CommandResult++
 CommandResult --> ViewCommand--
 
-ViewCommand --> LogicManager--
+ViewCommand --> LogicManager-- : commandResult
 
 destroy ViewCommand
 LogicManager -->[

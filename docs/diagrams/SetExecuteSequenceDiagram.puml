@@ -44,11 +44,11 @@ deactivate Model
 create CommandResult
 SetCommand -> CommandResult
 activate CommandResult
-CommandResult --> SetCommand : result
+CommandResult --> SetCommand
 deactivate CommandResult
 end
 
-SetCommand --> LogicManager : result
+SetCommand --> LogicManager : commandResult
 deactivate SetCommand
 
 
