@@ -323,6 +323,30 @@ Shows a list of all applicants in RecruitIn.
 
 Format: `list`
 
+
+### Deleting an applicant : `delete`
+
+Deletes applicants by their index from the applicants list in RecruitIn.
+
+Format: `delete INDEX...`
+
+***Note:*** *As mentioned in [Basic Command Format](#basic-command-format), you can delete multiple applicants by including one or more indexes here.*
+
+* The `INDEX` refers to the index number shown in the displayed applicants list.
+* `INDEX` **must be a positive integer** such as 1, 2, 3, …​
+* `INDEX` uses **1-based indexing**, which means the first applicant in the list has the `INDEX`  1.
+*  You should type at least one `INDEX`. (i.e. `delete ` is not a valid command)
+*  You should not type duplicate `INDEX`s. (i.e. `delete 2 2` is not a valid command)
+* You should not type`INDEX` which exceeds the total number of applicants in the displayed applicants list.
+
+Examples:
+* After you execute the command `list`, `delete 1` deletes the 1st applicant listed in RecruitIn.
+* After you execute the command `find n/John`, `delete 1` deletes the 1st applicant in the results of the `find` command.
+* After you execute the command `list`, `delete 2 4 7` deletes the 2nd, 4th and 7th applicants listed in RecruitIn.
+
+<p align="center"><a href="#table-of-contents">Click here to see the table of contents</a></p>
+
+
 ### Finding an applicant : `find`
 
 Finds applicants by specific prefixes.
@@ -399,28 +423,6 @@ Examples:
   [29th October 2021, 1600].
 * If you type `filter_interview future` or 
  `filter_interview fUTURE` in the command box, you are able to see applicants with interviews that are after [29th October 2021, 1600].
-
-<p align="center"><a href="#table-of-contents">Click here to see the table of contents</a></p>
-
-### Deleting an applicant : `delete`
-
-Deletes applicants by their index from the applicants list in RecruitIn.
-
-Format: `delete INDEX...`
-
-***Note:*** *As mentioned in [Basic Command Format](#basic-command-format), you can delete multiple applicants by including one or more indexes here.*
-
-* The `INDEX` refers to the index number shown in the displayed applicants list.
-* `INDEX` **must be a positive integer** such as 1, 2, 3, …​
-* `INDEX` uses **1-based indexing**, which means the first applicant in the list has the `INDEX`  1.
-*  You should type at least one `INDEX`. (i.e. `delete ` is not a valid command)
-*  You should not type duplicate `INDEX`s. (i.e. `delete 2 2` is not a valid command)
-* You should not type`INDEX` which exceeds the total number of applicants in the displayed applicants list.
-
-Examples:
-* After you execute the command `list`, `delete 1` deletes the 1st applicant listed in RecruitIn.
-* After you execute the command `find n/John`, `delete 1` deletes the 1st applicant in the results of the `find` command.
-* After you execute the command `list`, `delete 2 4 7` deletes the 2nd, 4th and 7th applicants listed in RecruitIn.
 
 <p align="center"><a href="#table-of-contents">Click here to see the table of contents</a></p>
 
