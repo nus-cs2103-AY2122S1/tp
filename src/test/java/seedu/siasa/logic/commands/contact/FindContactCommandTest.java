@@ -1,4 +1,4 @@
-package seedu.siasa.logic.commands;
+package seedu.siasa.logic.commands.contact;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -16,7 +16,6 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.siasa.logic.commands.contact.FindContactCommand;
 import seedu.siasa.model.Model;
 import seedu.siasa.model.ModelManager;
 import seedu.siasa.model.UserPrefs;

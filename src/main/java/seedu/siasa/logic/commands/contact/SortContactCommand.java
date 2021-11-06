@@ -51,4 +51,11 @@ public class SortContactCommand extends Command {
             return new CommandResult(MESSAGE_NO_SUCH_COMPARATOR);
         }
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this
+                || (other instanceof SortContactCommand
+                && comparator.equals(((SortContactCommand) other).comparator));
+    }
 }

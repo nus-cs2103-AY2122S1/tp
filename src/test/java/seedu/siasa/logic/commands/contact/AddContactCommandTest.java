@@ -32,21 +32,6 @@ public class AddContactCommandTest {
         assertThrows(NullPointerException.class, () -> new AddContactCommand(null));
     }
 
-    /*
-    TODO: fix test case
-    @Test
-    public void execute_contactAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingContactAdded modelStub = new ModelStubAcceptingContactAdded();
-        Contact validContact = new ContactBuilder().build();
-
-        CommandResult commandResult = new AddContactCommand(validContact).execute(modelStub);
-
-        assertEquals(String.format(AddContactCommand.MESSAGE_SUCCESS, validContact), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validContact), modelStub.contactsAdded);
-    }
-
-     */
-
     @Test
     public void execute_duplicateContact_throwsCommandException() {
         Contact validContact = new ContactBuilder().build();
