@@ -162,6 +162,10 @@ This command then updates the ```model``` accordingly.
 The following activity diagram summarizes what happens when a user executes an ```add``` command:
 ![images](images/AddCommandActivityDiagram.png)
 
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** There should only be one arrowhead at the end of every line 
+in the Activity Diagram. This is a known limitation of PlantUML.</div>
+
 Given below is an example usage scenario and how the add operation behaves at each step.
 
 Step 1. A valid command `add n/Dylan p/97998581 e/dylan.eyyou@gmail.com r/Pilot et/Full time s/3500 l/PhD y/4`
@@ -196,6 +200,10 @@ This command then updates the ```model``` accordingly.
 
 The following activity diagram summarizes what happens when a user executes an ```edit``` command:
 ![images](images/EditCommandActivityDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** There should only be one arrowhead at the end of every line 
+in the Activity Diagram. This is a known limitation of PlantUML.</div>
 
 Given below is an example usage scenario and how the edit operation behaves at each step.
 
@@ -234,6 +242,10 @@ This command then updates the ```model``` accordingly.
 The following activity diagram summarizes what happens when a user executes an ```delete``` command:
 ![images](images/DeleteActivityDiagram.png)
 
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** There should only be one arrowhead at the end of every line 
+in the Activity Diagram. This is a known limitation of PlantUML.</div>
+
 Given below is an example usage scenario illustrated by a sequence diagram for ```delete``` command.
 
 Step 1. A valid command `delete 1` is given as user input. This invokes `LogicManager#execute()`, which calls
@@ -266,6 +278,10 @@ the prefix provided by the user.
 The following activity diagram summarizes what happens when a user executes a ```show``` command:
 ![images](images/ShowCommandActivityDiagram.png)
 
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** There should only be one arrowhead at the end of every line 
+in the Activity Diagram. This is a known limitation of PlantUML.</div>
+
 Given below is an example usage scenario and how the show operation behaves at each step.
 
 Step 1. A valid command `show n/` is given as user input. This invokes `LogicManager#execute()`, which calls
@@ -295,6 +311,10 @@ input. This command then updates the ```model``` accordingly.
 The following activity diagram summarizes what happens when a user executes a ```find``` command:
 
 ![images](images/FindCommandActivityDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** There should only be one arrowhead at the end of every line 
+in the Activity Diagram. This is a known limitation of PlantUML.</div>
 
 Given below is an example usage scenario illustrated by a sequence diagram for ```find``` command.
 
@@ -326,6 +346,9 @@ subclass depending on the given input. This command then updates the ```model```
 The following activity diagram summarizes what happens when a user executes a ```filter_interview``` command:
 ![images](images/FilterInterviewCommandActivityDiagram.png)
 
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** There should only be one arrowhead at the end of every line 
+in the Activity Diagram. This is a known limitation of PlantUML.</div>
 
 Given below is an example usage scenario and how the filter interview operation behaves at each step.
 
@@ -378,6 +401,10 @@ This command then updates the ```model``` accordingly, depending on the given in
 The following activity diagram summarizes what happens when a user executes a ```mark``` command:
 ![images](images/MarkCommandActivityDiagram.png)
 
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** There should only be one arrowhead at the end of every line 
+in the Activity Diagram. This is a known limitation of PlantUML.</div>
+
 Given below is an example usage scenario illustrated by a sequence diagram for ```mark``` command.
 
 Step 1. A valid command `mark 1 2` is given as user input. This invokes `LogicManager#execute()`, which calls
@@ -408,6 +435,10 @@ The ```unmark``` command is facilitated by creating a ```UnmarkCommand```, which
 
 The following activity diagram summarizes what happens when a user executes a ```unmark``` command:
 ![images](images/UnmarkCommandActivityDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** There should only be one arrowhead at the end of every line 
+in the Activity Diagram. This is a known limitation of PlantUML.</div>
 
 Given below is an example usage scenario illustrated by a sequence diagram for ```unmark``` command.
 
