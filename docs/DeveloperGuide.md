@@ -569,10 +569,8 @@ testers are expected to do more *exploratory* testing.
 3. Deleting an alias unsuccessfully.
 
    1. Test case: `alias -c addstudent -as addstudent`<br> Expected: The alias `addstudent` will not be removed. 
-   Error detail shown in the status message to inform user that default command cannot be overwritten.
-
+   Error detail shown in the status message to inform user that default command cannot be overwritten.<br>
    <br>
-   
 4. Adding an alias unsuccessfully.
 
    1. Test case: `alias -c addgroup -as addstudent `<br> Expected: No alias will be created. Error detail shown in the status message to inform user that default command cannot be overwritten.
