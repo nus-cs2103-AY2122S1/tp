@@ -1268,6 +1268,17 @@ testers are expected to do more *exploratory* testing.
        Expected: An error message will show, indicating that the github url passed is not a valid gitHub profile url (because it is the gitHub homepage).
 
 
+### Editing an applicant
+
+1. Editing an applicant in MrTechRecruiter
+   1. Prerequisites: There is at least one applicant in MTR. Assume there are two positions `software engineer` and `tester` in MTR and for applicants, at index `1` we have `John Doe`, and at index `2` we have Mary Jane.
+   2. Test case: edit-applicant 1 p/89385853 pos/tester
+      Expected: The phone and the position of `John Doe` are successfully edited. A success message will show. 
+   3. Test case: edit-applicant 2 n/Mary
+      Expected: The name of the applicant at index `2` is successfully edited. A success message will show.
+   4. Other incorrect command to try: edit-applicant 5
+      Expected: An error message will show, indicating that the index is invalid. 
+
 ### View average rate of a job
 
 1. View average rate of a job in MrTechRecruiter
