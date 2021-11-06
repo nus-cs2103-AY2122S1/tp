@@ -1,0 +1,53 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":TutorAidParser" as TutorAidParser LOGIC_COLOR
+participant ":AddCommandParser" as AddCommandParser LOGIC_COLOR
+participant ":AddLessonCommandParser" as AddLessonCommandParser LOGIC_COLOR
+participant ":AddLessonCommand" as AddLessonCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "lesson:Lesson" as Lesson MODEL_COLOR
+end box
+
+[-> LogicManager : execute("add -l n/Maths 1 c/15")
+activate LogicManager
+
+LogicManager -> TutorAidParser : parseCommand("add -l n/Maths 1 c/15")
+activate TutorAidParser
+
+create AddCommandParser
+TutorAidParser -> AddCommandParser : parse("-l n/Maths 1 c/15")
+activate AddCommandParser
+
+create AddLessonCommandParser
+AddCommandParser -> AddLessonCommandParser : parse("n/Maths 1 c/15")
+activate AddLessonCommandParser
+
+create Lesson
+AddLessonCommandParser -> Lesson : Lesson(lessonName, capacity, price, students, timing)
+activate Lesson
+
+Lesson --> AddLessonCommandParser
+deactivate Lesson
+
+create AddLessonCommand
+AddLessonCommandParser -> AddLessonCommand : AddLessonCommand(lesson)
+activate AddLessonCommand
+
+AddLessonCommand --> AddLessonCommandParser
+deactivate AddLessonCommand
+
+AddLessonCommandParser --> AddCommandParser
+deactivate AddLessonCommandParser
+
+AddCommandParser --> TutorAidParser
+deactivate AddCommandParser
+
+TutorAidParser --> LogicManager
+deactivate TutorAidParser
+
+@enduml

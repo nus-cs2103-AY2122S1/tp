@@ -137,13 +137,13 @@ Note that the `Student` and `Lesson` classes have dependencies through `LessonNa
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-W16-3/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-W16-3/tp/blob/master/src/main/java/tutoraid/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save students' data, lessons' data and user preference data in json format, and read them back into corresponding objects.
+* inherits from `TutorAidStudentStorage`, `TutorAidLessonStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
@@ -364,9 +364,11 @@ These UI elements inherit the `Card` class, which in turn inherits `UiPart<Regio
 
 ![CardClassDiagram](images/CardClassDiagram.png)
 
+
 At all times, the `LessonListPanel` and `StudentListPanel` in the `MainWindow` will display Lessons and Students from the model using either the fully-detailed or minimal `Card` objects. The variant being displayed depends on the user command: `list -a` will cause both panels to display all details (apart from student progress - only the latest one is shown) while `list` will cause both panels to display only minimal details. Most other commands that affect the `Model` will cause all information to be displayed, especially for edited components.
 
-The two panels are kept in sync: Lessons in the `LessonListPanel` are those that are attended by Students in the `StudentListPanel`. 
+
+The two panels are kept in sync: Lessons in the `LessonListPanel` are those that are attended by Students in the `StudentListPanel`.
 
 There are thus three static instances of `StudentListPanel` and two of `LessonListPanel` - one for each variant. Every time the `Model` is updated, `MainWindow#fillStudentCard()` and `MainWindow#fillLessonCard()` will be called to ensure that the correct variant is displayed in the `MainWindow`. The sequence diagram below shows how this works:
 
@@ -385,6 +387,59 @@ The above applies to the scenario when the user inputs a command which calls a m
 The panels default to `StudentCard` and `LessonCard` for the application launch, thus showing most details to the user but not the complete list of `Progress` entries.
 
 ***
+
+### Add lesson feature
+
+#### Implementation
+
+This feature adds a lesson to TutorAid. A lesson consists of the lesson name, capacity, pricing, timing and student list.
+
+This feature implements the following operations:
+
+* `AddLessonCommand#execute()` - Adds a `Lesson` object to TutorAid.
+
+This feature is additionally facilitated by the following operations:
+
+* `TutorAidParser#parseCommand()` - Checks for the command word that is required for the addition of a lesson.
+* `AddCommandParser#parse()` - Checks for the command flag that specifies the addition of a lesson.
+* `AddLessonCommandParser#parse()` - Parses the arguments provided to create a `Lesson` object.
+
+To represent a lesson and its details, a `Lesson` class is introduced. Its class diagram can be seen below.
+
+<img src="images/LessonClassDiagram.png" width="500"/>
+
+Given below is an example usage scenario for adding a lesson to TutorAid, and how the command is executed.
+
+1. The user executes `add -l n/Maths 1 c/15` to add a lesson named `Maths 1` which has a capacity of `15` to TutorAid. `LogicManager#execute()` is executed, where the user input is passed into `TutorAidParser#parseCommand()`. 
+
+2. This in turn calls `AddCommandParser#parse()`, where the string `-l n/Maths 1 c/15` is passed in as the argument. Due to the command flag `-l` at the start of the argument, `AddLessonCommandParser#parse()` is called to parse the remaining parameters `n/Maths 1 c/15` into lesson details.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** 
+At this point, if `AddLessonCommandParser#parse()` detects that no lesson name has been supplied, the command will fail 
+its execution and `ParseException` will be thrown.
+</div>
+
+3. The original arguments (Maths 1 and 15) are used for the parameters `lessonName` and `capacity` respectively. Since the optional parameters (`price` and `timing`) are not provided in the command, a default argument (`""`)  is supplied for these parameters. These parameters are then used to create `LessonName`, `Price`, `Capacity` and `Timing` instances.
+
+4. These individual instances, along with a `Students` object containing an empty `ArrayList<Student>`,  are then used to create a `Lesson` object. This `Lesson` instance is used to create a `AddLessonCommand` object.
+
+Below is the sequence diagram that depicts the parsing of the command `add -l n/Maths 1 c/15`, and the instantiation of the `AddLessonCommand` object.
+
+<img src="images/ParseAddLessonCommandSequenceDiagram.png" height="250"/>
+
+5. `AddLessonCommand#execute()` is then called to add the lesson to TutorAid. 
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** 
+At this point, if the newly created lesson has the same lesson name as an existing lesson in TutorAid, the lesson will not be added into TutorAid, and the user will be alerted of this.
+</div>
+
+6. This in turn calls on `ModelManager#addLesson()` and `LessonBook#addLesson()` to store the details of the new lesson in memory. 
+
+7. A `CommandResult` object is then created and returned to notify the user that the lesson, with the specified details, has been successfully added to TutorAid.
+
+Below is the sequence diagram that depicts the adding of the newly created `Lesson` object to TutorAid.
+
+<img src="images/AddLessonSequenceDiagram.png" />
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 

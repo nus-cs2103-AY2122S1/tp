@@ -20,7 +20,7 @@ public class JsonAdaptedLessonTest {
     private static final String INVALID_LESSON_NAME = "M@ths 1";
     private static final String INVALID_LESSON_CAPACITY = "fifty";
     private static final String INVALID_LESSON_PRICE = "one hundred";
-    private static final String INVALID_LESSON_TIMING = "ten @m to twelve pm";
+    private static final String INVALID_LESSON_TIMING = " ";
 
     private static final String VALID_LESSON_NAME = TypicalLessons.SCIENCE_ONE.getLessonName().toString();
     private static final String VALID_LESSON_CAPACITY = TypicalLessons.SCIENCE_ONE.getCapacity().toString();

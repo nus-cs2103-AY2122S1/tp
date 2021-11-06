@@ -120,6 +120,15 @@ public class ProgressList {
         return allProgressAsStringArrayList;
     }
 
+    /**
+     * Checks if there is any progress entries in the list.
+     *
+     * @return True if there is no progress entry in the list.
+     */
+    public boolean isProgressListEmpty() {
+        return progressList.size() == 0;
+    }
+
     @Override
     public String toString() {
         if (progressList.size() == 0) {
