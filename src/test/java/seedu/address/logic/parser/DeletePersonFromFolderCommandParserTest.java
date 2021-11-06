@@ -49,7 +49,7 @@ public class DeletePersonFromFolderCommandParserTest {
     @Test
     public void parse_properFolderAndInvalidIndex_failure() {
         String successStringInput = " -1 >> TestFolder1";
-        String expectedErrorMessage = ParserUtil.MESSAGE_INVALID_INDEX;
+        String expectedErrorMessage = String.format(ParserUtil.MESSAGE_INVALID_INDEX, "-1");
         DeletePersonFromFolderCommandParser deletePersonFromFolderCommandParser =
                 new DeletePersonFromFolderCommandParser();
         assertParseFailure(

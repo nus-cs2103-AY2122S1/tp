@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FOLDER_NAME_CCA;
-import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_OVERFLOW_INTEGER;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -49,10 +49,9 @@ public class ParserUtilTest {
 
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
-            -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1),
-                new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                AddToFolderCommand.MESSAGE_USAGE))));
+        assertThrows(ParseException.class, MESSAGE_OVERFLOW_INTEGER, ()
+            -> ParserUtil.parseIndex("1000000000000",
+                new ParseException(MESSAGE_OVERFLOW_INTEGER)));
     }
 
     @Test

@@ -48,15 +48,17 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
-        //Check for - symbol as first element
+        // Check for - symbol as first element (or negative index)
         if (firstElement == 45) {
-            throw new ParseException(ParserUtil.MESSAGE_INVALID_INDEX);
+            throw new ParseException(String.format(ParserUtil.MESSAGE_INVALID_INDEX, preamble));
         }
 
+        // Check for String input as person index
         for (int i = 0; i < preamble.length(); i++) {
             char element = preamble.charAt(i);
             if (!Character.isDigit(element)) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        EditCommand.MESSAGE_USAGE));
             }
         }
 
