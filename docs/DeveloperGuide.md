@@ -49,7 +49,7 @@ Given below is a quick overview of main components and how they interact with ea
 **Main components of the architecture**
 
 **`Main`** has two classes called [`Main`](https://github.com/AY2122S1-CS2103T-W08-2/tp/tree/master/src/main/java/seedu/sourcecontrol/Main.java) and [`MainApp`](https://github.com/AY2122S1-CS2103T-W08-2/tp/tree/master/src/main/java/seedu/sourcecontrol/MainApp.java). It is responsible for,
-* At app launch: Initializes the components in the correct sequence, and connects them up with each other.
+* At app launch: Initialises the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
@@ -176,7 +176,7 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Import : `import`
 
-The following activity diagram summarizes what happens when the user inputs an import command:
+The following activity diagram summarises what happens when the user inputs an import command:
 
 ![ImportCommandActivityDiagram](images/ImportActivityDiagram.png)
 
@@ -210,7 +210,7 @@ It then retrieves the characters that follow each prefix and allocates them to t
 
 In the case where the compulsory prefixes `-n` and `-i` are not present, a `ParseException` is thrown, prompting the user that the wrong command format has been used.
 
-The following activity diagram summarizes what happens when the user inputs an add student command:
+The following activity diagram summarises what happens when the user inputs an add student command:
 
 ![AddStudentActivityDiagram](images/AddStudentActivityDiagram.png)
 
@@ -237,12 +237,12 @@ The `addgroup` feature allows users to create new groups, as well as specify stu
 <div markdown="span" class="alert alert-info">:information_source: **Note:** In the case where there are more than one students matched because they share the same name, an error message will be displayed to the user. The user will then have to specify the student to be added using his/her student ID.
 </div>
 
-The following activity diagrams summarizes what happens when a user executes a command to add a new group. In the case where the group is not added, an error message will be displayed with the reason.
+The following activity diagrams summarises what happens when a user executes a command to add a new group. In the case where the group is not added, an error message will be displayed with the reason.
 
 ![AddGroupActivityDiagram](images/AddGroupActivityDiagram.png)
 ![AddStudentToGroupActivityDiagram](images/AddStudentsToGroupActivityDiagram.png)
 
-The following sequence diagram summarizes what happens when the user inputs an add group command together with a student to be added:
+The following sequence diagram summarises what happens when the user inputs an add group command together with a student to be added:
 
 ![AddGroupSequenceDiagram](images/AddGroupSequenceDiagram.png)
 
@@ -323,7 +323,7 @@ each with different implementation of the `test(Student student)` function.
 * `TagContainsKeywordsPredicate`: checks if the tag of student contains any word in the given keywords.
   Partial search is supported. e.g. `beginner` will match `beginners`.
 
-The following diagram summarizes what happens after user input search command:
+The following diagram summarises what happens after user input search command:
 
 ![SearchActivityDiagram](images/SearchActivityDiagram.png)
 
