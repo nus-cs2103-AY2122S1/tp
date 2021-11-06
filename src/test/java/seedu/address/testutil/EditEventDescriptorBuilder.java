@@ -1,6 +1,6 @@
 package seedu.address.testutil;
 
-import seedu.address.logic.commands.event.EeditCommand;
+import seedu.address.logic.commands.event.EeditCommand.EditEventDescriptor;
 import seedu.address.model.module.Name;
 import seedu.address.model.module.event.Event;
 import seedu.address.model.module.event.EventDate;
@@ -10,21 +10,21 @@ import seedu.address.model.module.event.EventDate;
  */
 public class EditEventDescriptorBuilder {
 
-    private EeditCommand.EditEventDescriptor descriptor;
+    private EditEventDescriptor descriptor;
 
     public EditEventDescriptorBuilder() {
-        descriptor = new EeditCommand.EditEventDescriptor();
+        descriptor = new EditEventDescriptor();
     }
 
-    public EditEventDescriptorBuilder(EeditCommand.EditEventDescriptor descriptor) {
-        this.descriptor = new EeditCommand.EditEventDescriptor(descriptor);
+    public EditEventDescriptorBuilder(EditEventDescriptor descriptor) {
+        this.descriptor = new EditEventDescriptor(descriptor);
     }
 
     /**
      * Returns an {@code EditEventDescriptor} with fields containing {@code event}'s details
      */
     public EditEventDescriptorBuilder(Event event) {
-        descriptor = new EeditCommand.EditEventDescriptor();
+        descriptor = new EditEventDescriptor();
         descriptor.setName(event.getName());
         descriptor.setDate(event.getDate());
     }
@@ -45,7 +45,7 @@ public class EditEventDescriptorBuilder {
         return this;
     }
 
-    public EeditCommand.EditEventDescriptor build() {
+    public EditEventDescriptor build() {
         return descriptor;
     }
 }
