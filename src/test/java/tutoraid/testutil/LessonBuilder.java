@@ -1,14 +1,10 @@
 package tutoraid.testutil;
 
-import java.util.ArrayList;
-
 import tutoraid.model.lesson.Capacity;
 import tutoraid.model.lesson.Lesson;
 import tutoraid.model.lesson.LessonName;
 import tutoraid.model.lesson.Price;
-import tutoraid.model.lesson.Students;
 import tutoraid.model.lesson.Timing;
-import tutoraid.model.student.Student;
 
 /**
  * A utility class to help with building Lesson objects.

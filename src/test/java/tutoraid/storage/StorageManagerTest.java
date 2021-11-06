@@ -19,12 +19,11 @@ import tutoraid.testutil.TypicalLessons;
 import tutoraid.testutil.TypicalStudents;
 
 public class StorageManagerTest {
+    private static final ReadOnlyLessonBook lb = TypicalLessons.getTypicalLessonBook();
 
     @TempDir
     public Path testFolder;
-
     private StorageManager storageManager;
-    private static final ReadOnlyLessonBook lb = TypicalLessons.getTypicalLessonBook();
 
     @BeforeEach
     public void setUp() {

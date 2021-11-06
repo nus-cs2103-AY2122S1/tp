@@ -2,7 +2,6 @@ package tutoraid.testutil;
 
 import java.util.ArrayList;
 
-import tutoraid.model.student.Lessons;
 import tutoraid.model.student.ParentName;
 import tutoraid.model.student.Phone;
 import tutoraid.model.student.ProgressList;

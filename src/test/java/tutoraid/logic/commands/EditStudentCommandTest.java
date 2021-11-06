@@ -74,7 +74,9 @@ public class EditStudentCommandTest {
     public void execute_noFieldSpecifiedUnfilteredList_failure() {
         Model model = new ModelManager(getTypicalStudentBook(), getTypicalLessonBook(), new UserPrefs());
         EditStudentCommand editCommand = new EditStudentCommand(INDEX_FIRST_ITEM, new EditStudentDescriptor());
-        assertThrows(CommandException.class, () -> {editCommand.execute(model);});
+        assertThrows(CommandException.class, () -> {
+            editCommand.execute(model);
+        });
     }
 
     @Test
