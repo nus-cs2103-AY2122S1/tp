@@ -355,7 +355,7 @@
 .bigger_student_name{
     -fx-font-family: fantasy;
     -fx-font-weight: bold;
-    -fx-font-size: 70px;
+    -fx-font-size: 70;
     -fx-text-fill: #010504;
 }
 

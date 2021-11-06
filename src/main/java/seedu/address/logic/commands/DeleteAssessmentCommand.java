@@ -24,9 +24,9 @@ public class DeleteAssessmentCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the assessment from the student identified by the index number used in the displayed"
             + " student list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + PREFIX_ASSESSMENT_NAME + "ASSESSMENT NAME "
-            + "Example: " + COMMAND_WORD + " 1"
+            + "Parameters: INDEX (must be a positive integer) "
+            + PREFIX_ASSESSMENT_NAME + "ASSESSMENT NAME\n"
+            + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_ASSESSMENT_NAME + "Midterms";
 
     public static final String MESSAGE_DELETE_ASSESSMENT_SUCCESS = "Deleted Assessment: %1$s";

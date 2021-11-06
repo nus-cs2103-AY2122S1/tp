@@ -65,4 +65,12 @@ public class ChangeGroupCommand extends Command {
         model.updateGroupStudent(group, student);
         return new CommandResult(String.format(MESSAGE_CHANGE_GROUP_SUCCESS, studentName, newGroupName));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ChangeGroupCommand // instanceof handles nulls
+                && studentName.equals(((ChangeGroupCommand) other).studentName))
+                && newGroupName.equals(((ChangeGroupCommand) other).newGroupName);
+    }
 }
