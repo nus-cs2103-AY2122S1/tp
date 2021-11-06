@@ -20,17 +20,15 @@ public class VisualizePositionCommandParser implements Parser<VisualizePositionC
     public VisualizePositionCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
-        String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()) {
+        Title titleToShow;
+        try {
+            titleToShow = ParserUtil.parseTitle(args);
+        } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, VisualizePositionCommand.MESSAGE_USAGE));
         }
 
-        if (!Title.isValidTitle(trimmedArgs)) {
-            throw new ParseException(Title.MESSAGE_CONSTRAINTS);
-        }
-
-        return new VisualizePositionCommand(new Title(trimmedArgs));
+        return new VisualizePositionCommand(titleToShow);
     }
 
 }

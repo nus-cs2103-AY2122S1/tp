@@ -71,6 +71,7 @@ public class AddPositionCommandTest {
 
 
     /**
+
      * A Model stub that contains a single position.
      */
     private class ModelStubWithPosition extends ModelStub {

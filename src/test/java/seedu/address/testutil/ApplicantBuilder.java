@@ -18,6 +18,7 @@ public class ApplicantBuilder {
     public static final Position DEFAULT_POSITION = new PositionBuilder().build();
     public static final String DEFAULT_URL = "https://www.github.com/SAMPLE";
 
+
     private Name name;
     private Phone phone;
     private Email email;

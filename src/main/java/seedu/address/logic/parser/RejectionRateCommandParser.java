@@ -26,7 +26,7 @@ public class RejectionRateCommandParser implements Parser<RejectionRateCommand> 
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RejectionRateCommand.MESSAGE_USAGE));
         }
 
-        Title positionTitle = ApplicantParserUtil.parseTitle(argumentMultimap.getValue(PREFIX_POSITION).get());
+        Title positionTitle = ParserUtil.parseTitle(argumentMultimap.getValue(PREFIX_POSITION).get());
 
         return new RejectionRateCommand(positionTitle);
     }

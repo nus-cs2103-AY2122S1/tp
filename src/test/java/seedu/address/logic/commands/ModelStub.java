@@ -130,7 +130,7 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public Position getPositionByTitle(Title title) {
+    public Position getPositionWithTitle(Title title) {
         throw new AssertionError("This method should not be called.");
     }
 

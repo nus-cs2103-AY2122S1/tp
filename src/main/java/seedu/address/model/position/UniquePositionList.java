@@ -61,7 +61,7 @@ public class UniquePositionList implements Iterable<Position> {
     /**
      * Searches for a position with the given {@code title}.
      */
-    public Position getPositionByTitle(Title title) {
+    public Position getPositionWithTitle(Title title) {
         requireNonNull(title);
         return internalList.stream()
                 .filter(position -> position.getTitle().equals(title))

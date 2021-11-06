@@ -43,7 +43,7 @@ public class VisualizePositionCommand extends Command {
 
         Position position;
         try {
-            position = model.getPositionByTitle(toShowTitle);
+            position = model.getPositionWithTitle(toShowTitle);
         } catch (PositionNotFoundException e) {
             throw new CommandException(MESSAGE_NO_SUCH_POSITION);
         }
@@ -58,7 +58,7 @@ public class VisualizePositionCommand extends Command {
         PieChartDisplayer positionChartDisplayer = new PieChartDisplayer(positionChart);
         positionChartDisplayer.displayPieChart();
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toShowTitle));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, position.getTitle()));
     }
 
     @Override

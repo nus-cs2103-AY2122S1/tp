@@ -150,7 +150,7 @@ public class EditApplicantDescriptor {
         Address updatedAddress = getAddress().orElse(applicantToEdit.getAddress());
 
         Title title = getTitle().orElse(applicantToEdit.getTitle());
-        Position updatedPosition = model.getPositionByTitle(title);
+        Position updatedPosition = model.getPositionWithTitle(title);
 
         ProfileUrl updatedGitHubUrl = getGitHubUrl().orElse(applicantToEdit.getGitHubUrl());
         return new Applicant(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedPosition,
