@@ -514,6 +514,8 @@ The `exit` command causes RecruitIn to close and exit.
 
 Format: `exit`
 
+You can also exit RecruitIn by clicking on the 'X' button found on the top right side of the app. 
+
 <p align="center"><a href="#table-of-contents">Click here to see the table of contents</a></p>
 
 ### Saving the data
