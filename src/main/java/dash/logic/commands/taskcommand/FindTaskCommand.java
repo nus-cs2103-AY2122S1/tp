@@ -1,5 +1,10 @@
 package dash.logic.commands.taskcommand;
 
+import static dash.logic.parser.CliSyntax.PREFIX_COMPLETION_STATUS;
+import static dash.logic.parser.CliSyntax.PREFIX_PERSON;
+import static dash.logic.parser.CliSyntax.PREFIX_TAG;
+import static dash.logic.parser.CliSyntax.PREFIX_TASK_DATE;
+import static dash.logic.parser.CliSyntax.PREFIX_TASK_DESCRIPTION;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
@@ -10,7 +15,6 @@ import dash.commons.core.Messages;
 import dash.commons.util.CollectionUtil;
 import dash.logic.commands.Command;
 import dash.logic.commands.CommandResult;
-import dash.logic.parser.CliSyntax;
 import dash.model.Model;
 import dash.model.task.CompletionStatusContainsKeywordsPredicate;
 import dash.model.task.DateContainsKeywordsPredicate;
@@ -29,19 +33,17 @@ public class FindTaskCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all tasks whose description contain all of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters Type 1 (find by description): DESCRIPTION\n"
-            + "Parameters Type 2 (find by field): "
-            + "[" + CliSyntax.PREFIX_TASK_DESCRIPTION + "DESCRIPTION] "
-            + "[" + CliSyntax.PREFIX_TAG + "TAG]... (at least 1) "
-            + "[" + CliSyntax.PREFIX_TASK_DATE + "DATE] "
-            + "[" + CliSyntax.PREFIX_TASK_DATE + "TIME] "
-            + "[" + CliSyntax.PREFIX_TASK_DATE + "DATE, TIME] "
-            + "[" + CliSyntax.PREFIX_PERSON + "PERSON] "
-            + "[" + CliSyntax.PREFIX_COMPLETION_STATUS + "TRUE/FALSE]\n"
-            + "Example 1: " + COMMAND_WORD + " CS2103T Homework\n"
-            + "Example 2: " + COMMAND_WORD + " " + CliSyntax.PREFIX_TAG + "Groupwork\n";
+    public static final String MESSAGE_USAGE = "Format: " + COMMAND_WORD
+            + " [" + PREFIX_TASK_DESCRIPTION + "DESCRIPTION] "
+            + "[" + PREFIX_TASK_DATE + "DATE] "
+            + "[" + PREFIX_TASK_DATE + "TIME] "
+            + "[" + PREFIX_TASK_DATE + "DATE, TIME] "
+            + "[" + PREFIX_COMPLETION_STATUS + "COMPLETION_STATUS (true/false)] "
+            + "[" + PREFIX_PERSON + "PERSON_INDEX]... "
+            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_TASK_DESCRIPTION + "Assignment "
+            + PREFIX_TAG + "urgent\n";
 
     private final FindTaskDescriptor findTaskDescriptor;
     private final Predicate<Task> predicate;
@@ -72,8 +74,8 @@ public class FindTaskCommand extends Command {
     }
 
     /**
-     * Stores the predicates to find a person with. Each non-empty field value will determine
-     * the fields to search for a specific person.
+     * Stores the predicates to find a task with. Each non-empty field value will determine
+     * the fields to search for a specific task.
      */
     public static class FindTaskDescriptor {
         private DescriptionContainsKeywordsPredicate descPredicate;

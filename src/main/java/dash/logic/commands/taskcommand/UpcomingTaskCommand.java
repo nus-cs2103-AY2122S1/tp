@@ -11,7 +11,7 @@ import dash.model.task.TaskDateAfterCurrentDatePredicate;
 public class UpcomingTaskCommand extends Command {
     public static final String COMMAND_WORD = "upcoming";
 
-    public static final String MESSAGE_SUCCESS = "Listed all upcoming tasks";
+    public static final String MESSAGE_SUCCESS = "Listed all upcoming tasks.";
 
     private final TaskDateAfterCurrentDatePredicate predicate = new TaskDateAfterCurrentDatePredicate();
 

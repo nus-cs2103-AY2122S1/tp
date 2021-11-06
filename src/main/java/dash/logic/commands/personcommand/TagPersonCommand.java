@@ -22,11 +22,9 @@ public class TagPersonCommand extends Command {
 
     public static final String COMMAND_WORD = "tag";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": tags the person identified "
-            + "by the index number used in the displayed person list. "
-            + "Existing tags will not be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+    public static final String MESSAGE_USAGE = "Format: " + COMMAND_WORD
+            + " INDEX "
+            + " " + PREFIX_TAG + "TAG...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_TAG + "friend "
             + PREFIX_TAG + "roommate ";

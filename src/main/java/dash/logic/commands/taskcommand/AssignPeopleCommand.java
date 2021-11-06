@@ -21,11 +21,8 @@ public class AssignPeopleCommand extends Command {
 
     public static final String COMMAND_WORD = "assign";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns people to task "
-            + "by the index number used in the displayed task list. "
-            + "Existing people will not be overwritten.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_PERSON + "INDEX]...\n"
+    public static final String MESSAGE_USAGE = "Format: " + COMMAND_WORD + " INDEX"
+            + " " + PREFIX_PERSON + "PERSON_INDEX...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PERSON + "2 "
             + PREFIX_PERSON + "4 ";

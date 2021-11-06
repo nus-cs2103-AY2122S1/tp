@@ -131,7 +131,9 @@ Refer to the [Features](#features) below for details of each command.
   e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…` after them can be used more than once.<br>
-  e.g. `[t/TAG]…` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `p/PERSON_INDEX…` can be used as `p/1`, `p/1 p/3`, `p/4 p/5 p/2` etc.<br>
+  e.g. `[t/TAG]…` can be used as ` ` (i.e. 0 times, because of the square brackets), `t/friend`, `t/friend t/family` 
+  etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.

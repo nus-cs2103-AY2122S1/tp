@@ -57,10 +57,6 @@ public class CommandTestUtil {
     public static final String VALID_TASK_DESCRIPTION_PR_REVIEW = "Do PR review";
     public static final String VALID_TASK_DESCRIPTION_QUIZ = "ST2334 quiz before Friday";
 
-    public static final String VALID_TASK_DATE_ASSIGNMENT = "2359";
-    public static final String VALID_TASK_DATE_LECTURE = "21/10/2021";
-    public static final String VALID_TASK_DATE_PR_REVIEW = "21/02/2021, 10:00 PM";
-
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;

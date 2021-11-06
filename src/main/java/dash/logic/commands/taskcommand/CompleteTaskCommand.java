@@ -17,9 +17,8 @@ public class CompleteTaskCommand extends Command {
 
     public static final String COMMAND_WORD = "complete";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Completes the task identified by the index number used in the task list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
+    public static final String MESSAGE_USAGE = "Format: " + COMMAND_WORD
+            + " INDEX\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_COMPLETE_TASK_SUCCESS = "Completed Task: %1$s";
