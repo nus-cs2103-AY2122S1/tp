@@ -61,6 +61,8 @@ private void createTimeThread() {
 }
 ```
 * Initialising the `CalendarView` in the `SchedulePanel` was done with reference to the CalendarFX [_API_](https://dlsc.com/wp-content/html/calendarfx/apidocs/index.html).
+* CenterPanel JavaFX solution inspired by [this StackOverflow post](https://stackoverflow.com/questions/16176701/switch-between-panes-in-javafx#:~:text=Replace%20just%20a%20specific%20pane,of%20the%20stack's%20child%20list.).
+* UG and DG Table cells with copy and paste and wrap-text functions reference: [Roland09](https://gist.github.com/Roland09/6fb31781a64d9cb62179#file-tableutils-java), [James_D](https://stackoverflow.com/questions/22732013/javafx-tablecolumn-text-wrapping).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -145,8 +147,9 @@ The `Ui` component
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the _UI_ can be updated with the modified data.
 * keeps a reference to the `Logic` component, as it relies on `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` and `Calendar` objects residing in the `Model`.
-* chooses which component it displays based on the `CommandResult` returned by `Logic` component after executing the user command (e.g., `CommandResult.DisplayType.STUDENTS` tells the `Ui` to display the `PersonGridPanel`. See also: [Switching between students calendar and tags](#switching-between-students-calendar-and-tags)). 
+* depends on some classes in the `Model` component, as it displays `Person`, `Calendar` objects residing in the `Model`.
+* chooses which component it displays based on the `CommandResult` returned by `Logic` component after executing the user command. 
+  * e.g., if `CommandResult#getDisplayType()` is a `CommandResult.DisplayType.CALENDAR` enumerator, it tells the `Ui` to display the calendar view.
 
 ### Logic component
 
@@ -187,7 +190,7 @@ How the parsing works:
 
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-F13-3/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="800" />
+<img src="images/BetterModelClassDiagram.png" width="450" />
 
 *Figure A.3.1: Class Diagram of Model Component*
 
@@ -198,7 +201,7 @@ The `Model` component
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
 
-The _Sequence Diagram_ below illustrates the interactions when a person *p* is removed from the model.
+The _Sequence Diagram_ below illustrates the interactions when a person, p, is removed from the model.
 
 ![Interactions Inside the Model Component for the `delete 1` Command](images/ModelDeleteSequenceDiagram.png)
 
@@ -212,9 +215,12 @@ Note that deleting a person in the tuition address book requires
 Working together, the `UniquePersonList`, `CalendarEntrylist`, and `UniqueTagList` manage all of TAB's data.
 **All three of these lists must be updated together, whenever a change is made to TAB's data.**
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
+<div markdown="span" class="alert alert-info">:information_source: **Note:** 
+The `UniqueTagList` stores all existing distinct tags created, `Tag` objects with the same tag name may not have the same reference. This means that each `Person` object still has its own `Tag` objects and the `Tag` is only added into `UniqueTagList` if a similar `Tag` does not exist in the tag list yet.
+An alternative (arguably, a more OOP) model will have the `UniqueTagList` storing all `Tag` objects which `Person` references. 
+This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+e.g. Suppose `Bernice` was the only person tagged with `UNPAID`. Then the user adds the tag `UNPAID` to `Alex` as well, the state of the dependencies will be as shown in the Final State Diagram, instead of TAB creating another `Tag` named `UNPAID` for `Alex` as per current implementation. <br>
+<img src="images/AddTagState0-Initial_state.png" width="324" />   <img src="images/AddTagState1-Final_state.png" width="324" />
 
 </div>
 
@@ -440,52 +446,6 @@ We chose alternative 2 and integrated CalendarFX into our app as the possibility
 
 Alternative 1 is our preferred choice as its pros and cons seem much better than alternative 2, especially due to its ease of implementation. The main difficulty of alternative 1 becoming familiar with the CalendarFX _API_, but this difficulty is also present in alternative 2.
 
-### Viewing Tags
-
-Viewing tag is facilitated by `UniqueTagList`.
-- `UniqueTagList` stores a list of alphabetically sorted unique unmodifiable tags with case-insensitive tag names.
-- `UniqueTagList` holds a class field `tagCounter` that maps `Tag` to `Integer`, where `Integer` is the number of persons labelled under each tag.
-- `Tag` objects are not referenced by `Person`, i.e. each `Person` has a set of `Tag` objects.
-
-Operations include:
-- `UniqueTagList#asUnmodifiableTagList()` - Returns an unmodifiable view of the tag list.
-- `UniqueTagList#addTagFromPersonList(List<Person>)` - Adds tags from the specified list of persons to the tag list.
-- `UniqueTagList#addTagFromPerson(Person)` - Adds tags from the specified person to the tag list if the tags do not exist in the tag list. If there is already a tag with same case-insensitive name, it increments the `Integer` that this tag is mapped to in `tagCounter`.
-- `UniqueTagList#removeTagFromPerson(Person)` - Removes tags belonging to the specified person from the tag list if there is no person labelled under this tag after removal, else, decrements the `Integer` that this tag is mapped to in `tagCounter`.
-- `UniqueTagList#editTagFromPerson(Person)` - Removes the original tags belonging to the specified person to the tag list and adds the new tags labelled for the specified person.
-- `UniqueTagList#getNumStudentsForTag(Tag)` - Returns the number of students labelled under the specified tag as stored in `tagCounter`.
-  These operations are called when a person is added, deleted, or edited with `AddCommand`, `EditCommand` and `DeleteCommand`.
-
-Given below is an example usage scenario and how viewing tag is executed:
-- **Step 1:** The user launches the application. The `Model` is initialized with the saved data (or sample data if there is no saved data). Tags from each person is loaded into `UniqueTagList` and `tagCounter` with corresponding number of students labelled with the tags.
-- **Step 2:** The user enter the command `tag` to view all tags. `AddressBookParser` parses this command, creating a `TagCommand`.
-- **Step 3:** `LogicManager` executes the `TagCommand`.
-  - During execution, `TagCommand#execute()` calls `Model#getObservableList()` to get the tag list with the tags created in TAB with their corresponding number of students labelled under them to be displayed to the user.
-<div markdown="span" class="alert alert-info">:information_source: **Note:** Tags with duplicate case-insensitive tag names for a person is not allowed. If the user tries to adds a tag with the same tag name to the person already with that tag, the new tag will not be added and `tagCounter` will not increment the count for this tag.<br></div>
-
-Figure I.4.1 shows a sequence diagram of how viewing tags works.<br>
-<img src="images/ViewTagSequenceDiagram.png" width="800" />
-
-*Figure I.4.1: View tag sequence diagram*
-
-#### Design considerations
-
-**Alternative 1 (current implementation):** Use a `UniqueTagList` to store the tags created and a class field `tagCounter` to map each unique `Tag` to the number of persons labelled under it.
-- Pros:
-  - Quicker retrieval and update of data using a `HashMap` for `tagCounter`.
-- Cons:
-  - Each `Person` object has its own set of `Tags` which may be repetitive and memory-consuming if there is a large number of same tags.
-  - Retrieval of all tags and calculation of the number of persons labelled under each tag during the initialization of the application requires iterating through all persons in TAB.
-
-**Alternative 2:** Each tag stores a list of persons or number of persons labelled with that tag.
-- Pros:
-  - Faster retrieval of the number of persons under each tag.
-- Cons:
-  - This could result in circular dependency since a `Person` keeps reference of a set of `Tags` and a `Tag` has to keep a reference to a list of `Persons` simultaneously.
-  - Updating the tags labelled for a `Person` requires modification of the data fields of the `Person`. Since TAB objects are immutable, this means that new copies of `Person` and `Tag` have to be created after every command that modifies the data. This could slow down the application when there is a large amount of data stored.
-
-<br />
-
 ### Switching between students, calendar, and tags
 
 The `CenterPanel` in the `Ui` component consists of the `PersonGridPanel`, `SchedulePanel`, and `TagListPanel` and handles the switching between each of them for users to view their list of students and lessons, schedule, and list of tags respectively.
@@ -500,6 +460,61 @@ The *Sequence Diagram* below shows how the `Ui` components interact with each ot
 
 When the user requests to view the calendar interface, the `displaySchedulePanel()` method of `CenterPanel` is called, which sets the current display to show the `SchedulePanel`.
 Switching to the student view and tag list is similarly achieved by calling `displayPersonGridPanel()` and `displayTagListPanel()` methods respectively.
+
+### Reminder Feature
+The reminder feature allows users to view a list of upcoming lessons that ends in the next 48 hours.
+
+- Example: Suppose the date today is 1 Nov 2021 and current time is 1500h,
+  - lessons with the following dates and time are considered upcoming:
+    - 1 Nov 2021 with end time at or after 1500h,
+    - 2 Nov 2021 with any valid time range,
+    - 3 Nov 2021 with start time before or at 1500h.
+  - lessons with the following dates and time are not considered upcoming:
+    - dates before 1 Nov 2021 (has passed),
+    - 1 Nov 2021 with end time before 1500h (has passed),
+    - 3 Nov 2021 with start time after 1500h (beyond 48 hours).
+
+Viewing a list of upcoming lessons is facilitated by `CalendarEntryList`.
+- `CalendarEntryList` holds all lesson entries as well as a separate list of lessons that are considered upcoming.
+- Whenever data modifications are made to lessons, `CalendarEntryList` will update the list of calendar entries accordingly.
+- At the same time, `CalendarEntryList#isUpcoming(Entry<Lesson>)` checks if the lesson modified ends within the next 48 hours and `CalendarEntryList` will make changes accordingly to the list of upcoming lessons.
+  - e.g. if the user edits an upcoming lesson such that the date and time are no longer considered upcoming, the lesson will be removed from the reminder list.
+
+Given below is a simple illustration of how the reminder list might change with user inputs.
+<img src="images/ReminderActivityDiagram.png" /> <br>
+
+*Figure I.5.1: Reminder activity diagram for adding a lesson.*
+
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** 
+Reminder does not refresh the list of upcoming lessons automatically if no data modifications were made to lessons. Users need to enter `remind`, click <kbd>Reminder</kbd> on the menu bar or press <kbd>F5</kbd> to update the list of upcoming lessons. </div>
+
+Given below is an example usage scenario and how viewing reminder is executed:
+- **Step 1:** The user enter the command `remind` to view the list of upcoming lessons. `Logic` calls `AddressBookParser` to parse this command string, creating a `RemindCommand`.
+- **Step 3:** `Logic` executes the `RemindCommand`. During execution, `RemindCommand#execute()` instantiates a `CommandResult` with the `DisplayType` of `REMINDER` as a signal for `MainWindow` to open the `ReminderWindow` or focus on it if it was already opened.
+- **Step 4:** `MainWindow` then handles this command by calling `MainWindow#showReminder()`. `Logic#updateUpcomingLessons()` is then called to display the updated list of upcoming lessons to the user.
+
+Figure I.5.2 shows a sequence diagram of how viewing reminder's logic works.<br>
+<img src="images/ViewRemindSequenceDiagramLogic.png" width="800" />
+
+*Figure I.5.2: View reminder logic sequence diagram*
+
+Figure I.5.3 shows a sequence diagram of how the reminder window is displayed with the UI components.<br>
+<img src="images/ReminderSequenceDiagram.png" width="800" /> <br>
+
+*Figure I.5.3: View reminder sequence diagram.*
+
+#### Design considerations
+**Aspect: Date and time range of lessons to be considered as upcoming**
+
+* **Alternative 1 (current implementation):** Lessons are considered upcoming if they end within the next 48 hours.
+  * Pros: Easy to implement and detect misbehavior.
+  * Cons: Low flexibility towards users customization. Users are unable to determine the time range that they want to consider lessons as "upcoming".
+* **Alternative 2:** Allow users to define the time range within which lessons are considered "upcoming".
+  * Pros: Greater flexibility in planning lesson materials.
+  * Cons: Higher chance of causing the app to misbehave.
+
+As Alternative 2 requires more testing and hence more time to minimize bugs, we decided to put off alternative 2 for future considerations given the limited amount of time we have.
 
 ### Undo/redo feature
 
@@ -617,6 +632,51 @@ The redo does the exact opposite (pops from `redoStack`, push to `undoStack`, an
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
   
+### Viewing Tags
+Viewing tag is facilitated by `UniqueTagList`. 
+
+- `UniqueTagList` stores a list of alphabetically sorted unique unmodifiable tags with case-insensitive tag names.
+- `UniqueTagList` holds a private field `tagCounter` that maps `Tag` to `Integer`, where `Integer` is the number of persons labelled under each tag. 
+- `Tag` objects in `UniqueTagList` may not have the same reference as the `Person` object's `Tag`, i.e. each `Person` has a set of `Tag` objects on its own.
+
+Operations include:
+- `UniqueTagList#addTagFromPerson(Person)` - Adds tags from the specified person to the tag list if the tags do not exist in the tag list. If there is already a tag with same case-insensitive name, it increments the `Integer` that this tag is mapped to in `tagCounter`.
+- `UniqueTagList#removeTagFromPerson(Person)` - Removes tags belonging to the specified person from the tag list if there is no person labelled under this tag after removal, else, decrements the `Integer` that this tag is mapped to in `tagCounter`.
+- `UniqueTagList#editTagFromPerson(Person)` - Removes the original tags belonging to the specified person from the tag list and adds the new tags labelled for the specified person to the tag list.
+
+These operations are called when a person is added, edited, or deleted with `AddCommand`, `EditCommand` and `DeleteCommand` respectively.
+
+Given below is an example usage scenario and how viewing tag is executed:
+- **Step 1:** The user launches the application. The `Model` is initialized with the saved data (or sample data if there were no saved data). Tags from each person is loaded into `UniqueTagList` and `tagCounter` will store the corresponding number of students labelled with the tags.
+- **Step 2:** The user enter the command `tag` to view all tags. `Logic` calls `AddressBookParser` to parse this command string, creating a `TagCommand`.
+- **Step 3:** `Logic` executes the `TagCommand`. During execution, `TagCommand#execute()` instantiates a `CommandResult` with the `DisplayType` of `TAGS` as a signal for `MainWindow` to switch the center panel to show the tag list.
+- **Step 4:** `MainWindow` then handles this command by calling `CenterPanel#displayTagListPanel()` to display the tag list to the user.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** Tags with duplicate case-insensitive tag names for a person is not allowed. If the user tries to adds a tag with the same tag name to the person already with that tag, the new tag will not be added and `tagCounter` will not increment the count for this tag.<br></div>
+
+Figure I.4.1 shows a sequence diagram of how the tag list is displayed to the user with UI components.<br>
+<img src="images/ViewTagSequenceDiagramUi.png" width="800" />
+
+*Figure I.4.1: View tags UI sequence diagram*
+
+#### Design considerations
+**Aspect: Data Structures to support lesson operations**
+
+* **Alternative 1 (current implementation):** Use a `UniqueTagList` to store the tags created and a class field `tagCounter` to map each unique `Tag` to the number of persons labelled under it.
+  - Pros:
+    - Quicker retrieval and update of data using a `HashMap` for `tagCounter`.
+  - Cons:
+    - Each `Person` object has its own set of `Tags` which may be repetitive and memory-consuming if there is a large number of same tags.
+    - Retrieval of all tags and calculation of the number of persons labelled under each tag during the initialization of the application requires iterating through all persons in TAB.
+
+* **Alternative 2:** Each tag stores a list of persons or number of persons labelled with that tag.
+  - Pros:
+    - Faster retrieval of the number of persons under each tag.
+  - Cons:
+    - This could result in circular dependency since a `Person` keeps reference of a set of `Tags` and a `Tag` has to keep a reference to a list of `Persons` simultaneously.
+    - Updating the tags labelled for a `Person` requires modification of the data fields of the `Person`. Since TAB objects are immutable, this means that new copies of `Person` and `Tag` have to be created after every command that modifies the data. This could slow down the application when there is a large amount of data stored.
+
+
 ### Finding students
 
 The `FindCommand` allows users to find students based on person fields.
@@ -639,7 +699,7 @@ The `PersonMatchesKeywordsPredicate#test()` method will compose all searched fie
 The predicate is then used to filter the list of person.
 
 
-**Design considerations:**
+**Design considerations**
 
 **Aspect: Data structure of predicates**
 * **Alternative 1 (current choice):** Use a single `PersonMatchesKeywordsPredicate` class to represent all fields' predicates.
@@ -1024,7 +1084,7 @@ Priorities: High - must have; Medium - nice to have;  Low - unlikely to have.
 
 **MSS**
 
-1. User requests for help
+1. User requests for help.
 2. TAB displays usage guide.
 
    Use case ends.
@@ -1067,6 +1127,40 @@ Priorities: High - must have; Medium - nice to have;  Low - unlikely to have.
   
       Use case ends.
     
+<br/>
+
+**Use case: UC12 – View reminder**
+
+**MSS**
+
+1. User requests for reminders.
+2. TAB displays a list of upcoming lessons.
+
+Use case ends.
+
+**Extension**
+
+* 1a. There are no upcoming lessons.
+
+    Use case ends.
+
+<br/>
+
+**Use case: UC13 – View tags**
+
+**MSS**
+
+1. User requests to view the list of tags.
+2. TAB displays a list of existing tags created for all students in TAB.
+
+Use case ends.
+
+**Extension**
+
+* 1a. There are no tags.
+
+  Use case ends.
+
 <br/>
 
 ### Non-Functional Requirements
@@ -1260,11 +1354,6 @@ the most used page.
 
   * Test case: `tag`
   * Expected: `CenterPanel` displays the list of **all** tags.
-
-**Viewing Reminders:**
-
-  * Test case: `remind`
-  * Expected: [TODO @xiaoyunn]
   
 **Viewing Help:**
 
@@ -1297,6 +1386,36 @@ Prerequisites: Have a previous command entered, and an empty CommandBox in focus
 
   * Test case: <kbd>F1</kbd>
   * Expected: Help window gets opened/focused
+  
+### Viewing reminder
+
+1. Add a lesson to a student. <br>
+   Prerequisites: This lesson does not clash with existing lessons. If there were clashes, delete the clashing lesson(s).
+2. Enter `remind` to open the reminder window.
+
+<div markdown="span" class="alert alert-info">:information_source: <b>Note:</b> Please vary the date and time accordingly (adding or subtracting by an equivalent amount of day(s) and time), 
+depending on the date and time when you are testing.</div>
+
+Suppose the date today is 1 Nov 2021 and current time is 1500 hours,
+* Test case: `ladd 1 date/1 nov 2021 time/1500-1501 rates/40 subject/math` followed by `remind`. <br>
+  Expected: This lesson will appear in the reminder window. <br>
+  Suppose the time now is 1502 hours, enter `remind`. <br>
+  Expected: This lesson no longer appears in the reminder window.
+
+* Test case: `ladd 1 date/2 nov 2021 time/1600-1700 rates/40 subject/math` followed by `remind`.<br>
+  Expected: This lesson appears in the reminder window.
+
+* Test case: `ladd 1 date/3 nov 2021 time/1600-1700 rates/40 subject/math` followed by `remind`.<br>
+  Expected: This lesson does not end within the next 48 hours and hence does not appear in the reminder window.
+
+* Test case: `ladd 1 date/31 oct 2021 time/1600-1700 rates/40 subject/math` followed by `remind`.<br>
+  Expected: This lesson has passed and hence does not appear in the reminder window.
+
+Incorrect `remind` command to try:
+
+1. `remind x` where x is any character.
+
+Expected: Error details will be shown in the status message.
 
 ### Saving data
 
