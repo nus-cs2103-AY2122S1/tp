@@ -1305,114 +1305,25 @@ testers are expected to do more *exploratory* testing.
 
 3. _{ more test cases …​ }_
 
-#### Adding a lesson
 
-1. Adding a lesson with all correct parameters 
+#### Deleting a student
 
-    * Prerequisites: All parameters are entered correctly as according to the DG's [Add Lesson Feature](#add-lesson-feature)
-and the lesson to be added does not exist in TuitiONE yet.
+1. Deleting a student while all students are being shown
 
-    * Test case: `add-l s/Science g/P2 d/Wed t/1200 c/10.50`<br>
-        Expected: A new lesson `Science-P2-Wed-1200` will be added into the lesson list. Lesson list will be updated
-while there is no change to the student list. An update message will also be shown in the message box to inform the user
-that a new lesson is successfully added.
+* Prerequisites: Multiple "Students" shown in the list of students.
 
-    * Incorrect addition of a lesson due to duplication:<br>`add-l s/Science g/P2 d/Wed t/1200 c/10.50`<br>
-        Expected: Addition of the particular lesson will not be applied to TuitiONE. An alert message will be shown in 
-the message box to inform the user that the lesson already exists in TuitiONE.
+* Note: We will be using index `1` to conduct manual testing for positive tests, but feel free to test with any valid index (any positive integer shown in the student list).
 
-    * Incorrect addition of a lesson by passing in any incorrect input:<br>
-        Expected: Addition of the particular lesson will not be applied to TuitiONE. An alert message corresponds to the 
-wrongly entered parameter will be shown in the message box to remind the user of the correct input parameter 
-format.<br>_Note: Only the alert message corresponds to the first encountered incorrect parameter will be shown. User is
-expected to correct the input parameters one by one._
+* Test case: `delete 1`<br>
+  Expected: `Student` of index `1` is deleted from the list. `Student` will be unenrolled from the `Lesson`, and `Lesson` with `Student` inside will decrease its size by `1`. Details of the deleted student shown in the status message.
 
-1. Finding a student while all students are being shown
-   
-    * Prerequisites: List all students using the `list` command. Multiple "Students" in the list.
+* Test case: `delete 0`<br>
+  Expected: No student is deleted. Error details shown in the status message.
 
-    * Test case: `find c`<br>
-        Expected: All students whose name that starts with the letter `c` are shown in 
-   the student list. Lesson list will not be changed. No student shown if there is no student whose name starts with 
-   the letter `c`. An update message showing the number of students found will also be shown in the 
-   message box.<br>_Note: both first and last name of the student will be checked, to see if the student's name consists the letter `c`._
-   
-    * Test case: `find Alex`<br>
-        Expected: All students whose name consists of `Alex` are shown in the student list. Lesson list will not be
-   changed. No student shown if there is no student whose name consists of `Alex`. An update message showing 
-   the number of students found will also be shown in the message box. <br>_Note: both the first and last name of the student will be checked, to see if the student's name consists of `Alex`._
+* Other incorrect delete commands to try: `delete`, `delete x`, `delete y` (where x is larger than the list size, and y is a negative integer)<br>
+  Expected: Similar to previous.
 
-    * Test case: `find -`, `find .`, `find '`<br>
-      Expected: No student will be found since name should only contain alphanumeric characters and spaces. An update
-message showing that `No students found.` will also be displayed in the message box. 
 
-#### Viewing a lesson's roster 
-
-1. View a lesson's roster using `LESSON_INDEX` while all students and lessons are being shown
-
-    * Prerequisites: List all students and lessons using the `list` command. Multiple `Students` and `Lessons` in the 
-list with some `Students` already enrolled in some of the `Lessons`. For `LESSON_INDEX` used, it is within the number
-of existing `Lessons` found in TuitiONE.
-
-    * Test case: `roster 2`<br>
-        Expected: Only students who are enrolled in the lesson identified by the lesson index of `2` will be shown in 
-the student list. The lesson list will be updated to show the lesson identified by the lesson index of `2`. No student
-or lesson shown if there is no student enrolled in the lesson identified by the lesson index of `2`. An update message
-showing the number and the name of the students who are enrolled in the lesson will also be displayed in the message box.
-
-    * Incorrect roster commands to try: `roster`, `roster a`, `roster -`, 
-`roster LESSON_CODE`<br>
-        Expected: No roster will be applied. An alert message will be shown in the message box, warning the user to
-follow the command format by using `LESSON_INDEX`.
-
-    * Other incorrect roster commands to try: `roster 100` (passing in a a `LESSON_INDEX` that is larger than the number of `LESSONS`)<br> 
-        Expected: No roster will be applied. An error message will be shown in the message box, warning the user to only
-use valid `LESSON_INDEX`.
-
-#### Filtering
-
-1. Filtering by grade
-
-    * Note: We will be using `S1` to conduct manual testing for positive tests, but feel free to test with any grade you wish (from `P1` to `S5`).
-
-    * Test case: `filter g/S1`<br>
-      Expected: Only students and lessons of grade `S1` are shown in the student list and lesson list respectively. No student or lesson shown if there are none of grade `S1`. An update message showing the number of students and lessons found will also be shown in the message box.
-      
-    * Test case: `filter g/s1`<br>
-      Expected: Similar to previous.
-      
-    * Test case: `filter g/J8`<br>
-      Expected: No filter is applied, and no change to both lists. The message box displays a message alerting the user of the constraints of the grade condition to be inputted. 
-      
-    * Other incorrect filter by grade commands to try: `filter g/abc`, `filter g/123`, `filter g/g/`<br>
-      Expected. Similar to previous.
-      
-    * Test case: `filter s2`<br>
-      Expected: No filter is applied, and no change to both lists. The message box displays a message alerting the user that the command format inputted is invalid, along with a description of what the filter command does, its parameters, and an example usage.
-
-1. Filtering by subject
-
-    * Note: We will be using the `English` subject to conduct manual testing for positive tests.
-
-    * Test case: `filter s/English`<br>
-      Expected: Only lessons with subject matching `English` are shown in the lesson list. No lessons shown if none have matching subject. No change to student list. An update message showing the number of lessons found will also be shown in the message box.
-      
-    * Test case: `filter s/english`<br>
-      Expected: Similar to previous.
-      
-    * Test case: `filter english`<br>
-      Expected: No filter is applied, and no change to both lists. The message box displays a message alerting the user that the command format inputted is invalid, along with a description of what the filter command does, its parameters, and an example usage.
-      
-1. Filtering by both grade and subject
-
-    * Note: It will be good to add more lessons of grade `S1` but of different subject (e.g. English, Math etc.) to better test this feature. (refer to [Add Lesson Feature](#add-lesson-feature) on how to use the add lesson feature)
-    
-    * Test case: `filter s/English g/S1`<br>
-      Expected: Only students of grade `S1` will be displayed in the student list. Only lessons with subject matching `English` and of grade `S1` will be displayed in the lesson list. No lessons or students shown if none have matching the given filter conditions. An update message showing the number of students and lessons found will also be shown in the message box.
-      
-    * Test case: `filter english S1`<br>
-      Expected: No filter is applied, and no change to both lists. The message box displays a message alerting the user that the command format inputted is invalid, along with a description of what the filter command does, its parameters, and an example usage.
-    
 #### Editing a student
 
 1. Editing a student's name
@@ -1543,28 +1454,56 @@ Enrolling a `Student` into a `Lesson`, while the students and lessons are being 
 
 * Other incorrect delete commands to try: `enroll`, `enroll 1`, `enroll 1 l/0`, `enroll 0 l/1`, `enroll x l/y`, `enroll y l/x` (where x is larger than the list size, and y is a negative integer)<br>
   Expected: Similar to previous.
+  
 
-#### Deleting a student
+#### Finding a student
 
-Deleting a student while all students are being shown
+1. Finding a student while all students are being shown
+   
+    * Prerequisites: List all students using the `list` command. Multiple "Students" in the list.
 
-* Prerequisites: Multiple "Students" shown in the list of students.
+    * Test case: `find c`<br>
+        Expected: All students whose name that starts with the letter `c` are shown in 
+   the student list. Lesson list will not be changed. No student shown if there is no student whose name starts with 
+   the letter `c`. An update message showing the number of students found will also be shown in the 
+   message box.<br>_Note: both first and last name of the student will be checked, to see if the student's name consists the letter `c`._
+   
+    * Test case: `find Alex`<br>
+        Expected: All students whose name consists of `Alex` are shown in the student list. Lesson list will not be
+   changed. No student shown if there is no student whose name consists of `Alex`. An update message showing 
+   the number of students found will also be shown in the message box. <br>_Note: both the first and last name of the student will be checked, to see if the student's name consists of `Alex`._
 
-* Note: We will be using index `1` to conduct manual testing for positive tests, but feel free to test with any valid index (any positive integer shown in the student list).
+    * Test case: `find -`, `find .`, `find '`<br>
+      Expected: No student will be found since name should only contain alphanumeric characters and spaces. An update
+message showing that `No students found.` will also be displayed in the message box. 
 
-* Test case: `delete 1`<br>
-  Expected: `Student` of index `1` is deleted from the list. `Student` will be unenrolled from the `Lesson`, and `Lesson` with `Student` inside will decrease its size by `1`. Details of the deleted student shown in the status message.
 
-* Test case: `delete 0`<br>
-  Expected: No student is deleted. Error details shown in the status message.
+#### Adding a lesson
 
-* Other incorrect delete commands to try: `delete`, `delete x`, `delete y` (where x is larger than the list size, and y is a negative integer)<br>
-  Expected: Similar to previous.
-      
+1. Adding a lesson with all correct parameters 
+
+    * Prerequisites: All parameters are entered correctly as according to the DG's [Add Lesson Feature](#add-lesson-feature)
+and the lesson to be added does not exist in TuitiONE yet.
+
+    * Test case: `add-l s/Science g/P2 d/Wed t/1200 c/10.50`<br>
+        Expected: A new lesson `Science-P2-Wed-1200` will be added into the lesson list. Lesson list will be updated
+while there is no change to the student list. An update message will also be shown in the message box to inform the user
+that a new lesson is successfully added.
+
+    * Incorrect addition of a lesson due to duplication:<br>`add-l s/Science g/P2 d/Wed t/1200 c/10.50`<br>
+        Expected: Addition of the particular lesson will not be applied to TuitiONE. An alert message will be shown in 
+the message box to inform the user that the lesson already exists in TuitiONE.
+
+    * Incorrect addition of a lesson by passing in any incorrect input:<br>
+        Expected: Addition of the particular lesson will not be applied to TuitiONE. An alert message corresponds to the 
+wrongly entered parameter will be shown in the message box to remind the user of the correct input parameter 
+format.<br>_Note: Only the alert message corresponds to the first encountered incorrect parameter will be shown. User is
+expected to correct the input parameters one by one._
+
 
 #### Deleting a lesson
 
-Deleting a lesson while all lessons are being shown.
+1. Deleting a lesson while all lessons are being shown.
 
 * Prerequisites: Multiple "Lessons" shown in the list of lessons
 
@@ -1578,6 +1517,76 @@ Deleting a lesson while all lessons are being shown.
 
 * Other incorrect delete commands to try: `delete-l`, `delete-l x`, `delete-l y` (where x is larger than the list size, and y is a negative integer)<br>
   Expected: Similar to previous.
+
+
+#### Viewing a lesson's roster 
+
+1. View a lesson's roster using `LESSON_INDEX` while all students and lessons are being shown
+
+    * Prerequisites: List all students and lessons using the `list` command. Multiple `Students` and `Lessons` in the 
+list with some `Students` already enrolled in some of the `Lessons`. For `LESSON_INDEX` used, it is within the number
+of existing `Lessons` found in TuitiONE.
+
+    * Test case: `roster 2`<br>
+        Expected: Only students who are enrolled in the lesson identified by the lesson index of `2` will be shown in 
+the student list. The lesson list will be updated to show the lesson identified by the lesson index of `2`. No student
+or lesson shown if there is no student enrolled in the lesson identified by the lesson index of `2`. An update message
+showing the number and the name of the students who are enrolled in the lesson will also be displayed in the message box.
+
+    * Incorrect roster commands to try: `roster`, `roster a`, `roster -`, 
+`roster LESSON_CODE`<br>
+        Expected: No roster will be applied. An alert message will be shown in the message box, warning the user to
+follow the command format by using `LESSON_INDEX`.
+
+    * Other incorrect roster commands to try: `roster 100` (passing in a a `LESSON_INDEX` that is larger than the number of `LESSONS`)<br> 
+        Expected: No roster will be applied. An error message will be shown in the message box, warning the user to only
+use valid `LESSON_INDEX`.
+
+
+#### Filtering
+
+1. Filtering by grade
+
+    * Note: We will be using `S1` to conduct manual testing for positive tests, but feel free to test with any grade you wish (from `P1` to `S5`).
+
+    * Test case: `filter g/S1`<br>
+      Expected: Only students and lessons of grade `S1` are shown in the student list and lesson list respectively. No student or lesson shown if there are none of grade `S1`. An update message showing the number of students and lessons found will also be shown in the message box.
+      
+    * Test case: `filter g/s1`<br>
+      Expected: Similar to previous.
+      
+    * Test case: `filter g/J8`<br>
+      Expected: No filter is applied, and no change to both lists. The message box displays a message alerting the user of the constraints of the grade condition to be inputted. 
+      
+    * Other incorrect filter by grade commands to try: `filter g/abc`, `filter g/123`, `filter g/g/`<br>
+      Expected. Similar to previous.
+      
+    * Test case: `filter s2`<br>
+      Expected: No filter is applied, and no change to both lists. The message box displays a message alerting the user that the command format inputted is invalid, along with a description of what the filter command does, its parameters, and an example usage.
+
+1. Filtering by subject
+
+    * Note: We will be using the `English` subject to conduct manual testing for positive tests.
+
+    * Test case: `filter s/English`<br>
+      Expected: Only lessons with subject matching `English` are shown in the lesson list. No lessons shown if none have matching subject. No change to student list. An update message showing the number of lessons found will also be shown in the message box.
+      
+    * Test case: `filter s/english`<br>
+      Expected: Similar to previous.
+      
+    * Test case: `filter english`<br>
+      Expected: No filter is applied, and no change to both lists. The message box displays a message alerting the user that the command format inputted is invalid, along with a description of what the filter command does, its parameters, and an example usage.
+      
+1. Filtering by both grade and subject
+
+    * Note: It will be good to add more lessons of grade `S1` but of different subject (e.g. English, Math etc.) to better test this feature. (refer to [Add Lesson Feature](#add-lesson-feature) on how to use the add lesson feature)
+    
+    * Test case: `filter s/English g/S1`<br>
+      Expected: Only students of grade `S1` will be displayed in the student list. Only lessons with subject matching `English` and of grade `S1` will be displayed in the lesson list. No lessons or students shown if none have matching the given filter conditions. An update message showing the number of students and lessons found will also be shown in the message box.
+      
+    * Test case: `filter english S1`<br>
+      Expected: No filter is applied, and no change to both lists. The message box displays a message alerting the user that the command format inputted is invalid, along with a description of what the filter command does, its parameters, and an example usage.
+
 
 #### Clearing data
 
