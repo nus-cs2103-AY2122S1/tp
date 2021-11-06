@@ -760,6 +760,7 @@ Format: `ldelete INDEX LESSON_INDEX`
 
 Examples:
 * `list` followed by `ldelete 2 1` deletes the 1st lesson for the 2nd student in TAB.
+
 * `find n/Betsy` followed by `ldelete 1 1` deletes the 1st lesson for the 1st student in the results of the `find` command.
 
 #### Viewing a student's lessons: `view`
@@ -846,9 +847,7 @@ Format: `ladd 1 COMPULSORY_FIELDS f/OUTSTANDING_AMOUNT`
 
 Examples:
 
-* `ladd 1 recurring/23 Nov 2022 date/30 jan 2022 time/0900-1100 subject/Math rates/37.50` adds a recurring lesson that
-  starts on 30 Jan 2022 and ends on 23 Nov 2022 to the 1st student in the displayed student list.
-
+* `ladd 1 recurring/23 Nov 2022 date/30 jan 2022 time/0900-1100 subject/Math rates/37.50` adds the recurring lesson with the specified details and outstanding fees is assumed to be `$0.00`.
 * `ladd 1 recurring/ date/30 jan 2022 time/0900-1100 subject/Math rates/37.50 f/250`
   adds the recurring lesson with an outstanding fee of `$250.00`.
 
