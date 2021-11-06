@@ -41,7 +41,7 @@ The UI consists of a:
 
 ## Quick Start
 
-Now that you have installer Tutor Master, let us give it a try!
+Now that you have installed Tutor Master, let us give it a try!
 
 Type any command in the "Command Panel" and hit `Enter` to execute it.
 
@@ -56,28 +56,23 @@ Let us
 
 // to be added
 
-3. `student -v 5`
+3. Type `student -v 5` in the Command Panel and hit `Enter`
     * Displays the student at `INDEX` 5 in the "Viewing Panel"
-    * David is now in the Group "CS2103T"
       ![View David](images/imagesInUG/student-viewDavid.png)
 
 ### Managing Groups
 
 Let us now add "David" to a group named "CS2103T".
 
-1.  `group -a 5 n/CS2103T`
-    * Creates a group named "CS2103T" and adds "David" who was at `INDEX` 5
-    * "CS2103T" has the `INDEX` of 3 in the "Group Panel"
+1.  Type `group -a 5 n/CS2103T` in the "Command Panel" and hit `Enter`
+    * Takes "David" who is at `INDEX` 5 in the "Person Panel" and creates a group named "CS2103T"
+    * "CS2103T" is now added to the "Group Panel". It has an `INDEX` of 3 in the "Group Panel"
     * This group currently has "David" inside
       ![Add David To Group](images/imagesInUG/group-addDavidInGroup.png)
       
-2. `group -v 3`
+2. Type `group -v 3` in the "Command Panel" and hit `Enter`
     * Displays the group at `INDEX` 3 in the "Viewing Panel"
-    
-3. `student -v 5`
-    * Displays the student at `INDEX` 5 in the "Viewing Panel"
-    * David is now in the Group "CS2103T"
-      ![View David](images/imagesInUG/student-viewDavid.png)
+
 
 ### Managing Tasks
 
