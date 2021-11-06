@@ -407,8 +407,8 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ### Add/Remove Participant to/from event by index
 
-This feature allows Managera users to quickly add/remove participant to/from event according to the current filtered
- list of events and participant visible to user.
+This feature allows Managera users to quickly add/remove Participant to/from event according to the current filtered
+ list of events and Participant visible to user.
 
 #### Implementation Details
 
@@ -421,7 +421,7 @@ If all indexes are valid, a `AddParticipantByIndexCommand` will be created by th
 
 The `AddParticipantByIndexCommand` created by `AddParticipantToEventByIndexParser` contains 2 zero-based indexes. 
 The first one is used to identify the `Participant` while the second is used to identify the `Event`. 
-When the command is executed, the `model` first tries to obtain Participant at specified index (if unsuccessful, a `CommandException` will be thrown accordingly) and then event will be retrieved in the same manner (if unsuccessful, a `CommmandException` will be thrown accordingly). If the Event does not already contain the `Participant` object, the participant will be added to the event accordingly.
+When the command is executed, the `model` first tries to obtain Participant at specified index (if unsuccessful, a `CommandException` will be thrown accordingly) and then event will be retrieved in the same manner (if unsuccessful, a `CommmandException` will be thrown accordingly). If the Event does not already contain the `Participant` object, the Participant will be added to the event accordingly.
  Otherwise, a `CommandException` will be thrown.
 
 A `RemoveParticipantFromEventByIndexParser` parses the user's input and obtain indexes for Participant and Event respectively. 
@@ -431,7 +431,7 @@ the `CommandException` will be thrown when `Participant` *doesn't* exist in the 
 
 #### Implementation Rationale
 
-Since the command implies that the index of participant should come before event, there is no need for prefixes to be used as that would incur extra typing for the user and slow down the process.
+Since the command implies that the index of Participant should come before event, there is no need for prefixes to be used as that would incur extra typing for the user and slow down the process.
 
 The following activity diagrams summarise what happens when a user executes a new command in each case:
 
