@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.FILE_NOT_FOUND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Set;
 
 import javafx.collections.ObservableList;
@@ -42,7 +42,7 @@ public class SetRoleReqCommand extends Command {
 
             try {
                 RoleReqStorage.update(roleReqSplit[0], Integer.parseInt(roleReqSplit[1]));
-            } catch (FileNotFoundException e) {
+            } catch (IOException e) {
                 throw new CommandException(FILE_NOT_FOUND + RoleReqStorage.FILEPATH);
             }
         }
