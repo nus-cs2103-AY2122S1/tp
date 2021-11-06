@@ -155,7 +155,7 @@ This section describes some noteworthy details on how certain features are imple
 
 :information_source: **Note:**
 
-* The lifeline for all activation bars should end at their respective destroy markers (X) but due to a limitation of PlantUML, the lifeline
+The lifeline for all activation bars should end at their respective destroy markers (X) but due to a limitation of PlantUML, the lifeline
   reaches the end of diagram.
 
 </div>
@@ -178,11 +178,6 @@ related to `AddEmployeeCommand` are abstracted away.
 The sequence Diagram below illustrates the interactions within the `Logic` component for the `execute` API call. 
 
 ![AddEmployeeCommandSequenceDiagram](images/AddEmployeeCommandSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for 
-`AddEmployeeCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline 
-reaches the end of diagram.
-</div>
 
 `Parse`:
 1. When `Logic` is called upon to execute `AddEmployeeCommand`, it uses the `RhrhParser` class to parse the user command.
@@ -359,6 +354,12 @@ details when this command is executed
 
 ![FindCustomerCommandActivityDiagram](images/FindCustomerCommandActivityDiagram.png)
 
+
+#### Design Considerations
+
+Due to the similarities of the design considerations between this command and the `Add` command, please refer to the `Design Considerations` section of the `Add` command above for more information.
+
+
 ### Sort Command
 In the following section, we will be going through how our sort command works. Since the sort command is also very
 similar across all person types, we will be using the `SortSupplierCommand` to illustrate how the sort command
@@ -378,12 +379,6 @@ o/a")` API call.
 
 ![SortSupplierSequenceDiagram](images/SortSequenceDiagram.png)
 
-
-#### Design Considerations
-
-Due to the similarities of the design considerations between this command and the `Add` command, please refer to the `Design Considerations` section of the `Add` command above for more information.
-
-
 `Parse`:
 1. When `Logic` is called upon to execute the `SortSupplierCommand`, it uses the `RhrhParser` class to parse the user command.
 2. The `RhrhParser` then creates a `SortSupplierCommandParser` to parse the command input.
@@ -402,6 +397,11 @@ The activity diagram below shows the flow of execution when a user calls the `So
 details when this command is executed
 
 ![SortSupplierActivityDiagram](images/SortActivityDiagram.png)
+
+
+#### Design Considerations
+
+Due to the similarities of the design considerations between this command and the `Add` command, please refer to the `Design Considerations` section of the `Add` command above for more information.
 
 ### Set Tables Command
 
