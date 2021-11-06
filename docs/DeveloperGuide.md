@@ -24,10 +24,6 @@ title: Developer Guide
   * [Search : `search`](#search--search)
   * [Import : `import`](#import--import)
 * [**Documentation, Testing, Logging, Configuration, Dev-Ops**](#documentation-testing-logging-configuration-dev-ops)
-  * [Documentation Guide](#documentation-guidedocumentationmd)
-  * [Testing Guide](#testing-guidetestingmd)
-  * [Configuration Guide](#configuration-guideconfigurationmd)
-  * [Dev-Ops Guide](#devops-guidedevopsmd)
 * [**Appendix: Requirements**](#appendix-requirements)
   * [Product Scope](#product-scope)
   * [User Stories](#user-stories)
@@ -405,11 +401,11 @@ The following sequence diagram summarises what happens when the user inputs an `
 
 ## **Documentation, Testing, Logging, Configuration, Dev-Ops**
 
-###[Documentation Guide](Documentation.md)
-###[Testing Guide](Testing.md)
-###[Logging Guide](Logging.md)
-###[Configuration Guide](Configuration.md)
-###[DevOps Guide](DevOps.md)
+* [Documentation Guide](Documentation.md)
+* [Testing Guide](Testing.md)
+* [Logging Guide](Logging.md)
+* [Configuration Guide](Configuration.md)
+* [DevOps Guide](DevOps.md)
 
 <br>
 
