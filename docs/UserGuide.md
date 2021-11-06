@@ -504,7 +504,7 @@ TutorAid data are saved in the hard disk automatically after any command that ch
 
 ### Editing the data file
 {:.no_toc}
-TutorAid data are saved as a JSON file `[JAR file location]/data/tutoraid.json`. Advanced users are welcome to update data directly by editing that data file.
+TutorAid student data are saved as a JSON file `[JAR file location]/data/tutorAidStudents.json`, while TutorAid lesson data are saved as a JSON file `[JAR file location]/data/tutorAidLessons.json`. Advanced users are welcome to update data directly by editing any of the two data files.
 
 > :exclamation: **If your changes to the data file makes its format invalid, TutorAid will discard all data and start with an empty data file at the next run.**
 
@@ -519,7 +519,7 @@ TutorAid data are saved as a JSON file `[JAR file location]/data/tutoraid.json`.
 # 7. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TutorAid home folder.
+**A**: Install the app in the other computer and overwrite the empty data files it creates with the files that contains the data of your previous TutorAid home folder.
 
 ***
 
