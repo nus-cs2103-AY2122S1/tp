@@ -355,10 +355,10 @@ in the Activity Diagram. This is a known limitation of PlantUML.</div>
 Given below is an example usage scenario and how the show operation behaves at each step.
 
 Step 1. A valid command `show n/` is given as user input. This invokes `LogicManager#execute()`, which calls
-`AddressBookParser#parseCommand()` to parse `show n/` into command word `show` and command argument ` n/`.
+`AddressBookParser#parseCommand()` to parse `show n/` into command word `show` and command argument ``` n/```.
 
 Step 2. `ShowCommandParser` is initialized based on the parse results and `ShowCommandParser#parse()` is called
-to identify the first prefix in the user input ` n/`. `ShowCommandParser#parse()` then initializes a
+to identify the first prefix in the user input ``` n/```. `ShowCommandParser#parse()` then initializes a
 `ShowCommand` with the first prefix `Name` as argument.
 
 Step 3. `ShowCommand#execute()` is then called, which will first obtain a `ReadOnlyAddressBook` from `Model`, from which
@@ -392,7 +392,7 @@ Step 1. A valid command `find n/Alex y/0` is given as user input. This invokes `
 `AddressBookParser#parseCommand()` to parse `find n/Alex y/0` into command word `find` and command argument ` n/Alex y/0`.
 
 Step 2. `FindCommandParser` is initialized based on the parse results and `FindCommandParser#parse()` is called
-to identify the predicates present in ` n/Alex y/0`. `FindCommandParser#parse()` then initializes a
+to identify the predicates present in ``` n/Alex y/0```. `FindCommandParser#parse()` then initializes a
 `FindCommand` with the predicates as argument.
 
 Step 3. `FindCommand#execute()` is then called, which will in turn call `Model#updateFilteredPersonList()`
@@ -423,12 +423,12 @@ in the Activity Diagram. This is a known limitation of PlantUML.</div>
 Given below is an example usage scenario and how the filter interview operation behaves at each step.
 
 Step 1. A valid command `filter_interview past` is given as user input. This invokes `LogicManager#execute()`, which calls
-`AddressBookParser#parseCommand()` to parse `filter_interview past` into command word `filter_interview` and command argument ` past`.
+`AddressBookParser#parseCommand()` to parse `filter_interview past` into command word `filter_interview` and command argument ``` past```.
 
 Step 2. `FilterInterviewCommandParser` is initialized based on the parse results and `FilterInterviewCommandParser#parse()` is called
-to identify the user input ` past`.
+to identify the user input ``` past```.
 
-Step 3. Upon identifying the user input ` past`, `FilterInterviewCommandParser#parse` will then call methods of the
+Step 3. Upon identifying the user input ``` past```, `FilterInterviewCommandParser#parse` will then call methods of the
 `ValidFilterInterviewArgs` class from the enum type `ValidFilterInterviewArgs.PAST` instead of `ValidFilterInterviewArgs.FUTURE`.
 The details of this step are omitted from the sequence diagram below for brevity.
 
