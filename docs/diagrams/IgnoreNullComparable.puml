@@ -1,0 +1,32 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR_T2
+skinparam classBackgroundColor MODEL_COLOR
+
+interface Comparable <<Interface>>
+interface IgnoreNullComparable <<Interface>>
+abstract class StringComparable <<Abstract>>
+abstract class NumberComparable <<Abstract>>
+
+
+IgnoreNullComparable -right-|> Comparable
+
+StringComparable -up-|> IgnoreNullComparable
+NumberComparable -up-|> IgnoreNullComparable
+
+LastMet .up.|> IgnoreNullComparable
+NextMeeeting .up.|> IgnoreNullComparable
+
+Name .up.|> StringComparable
+Email .up.|> StringComparable
+Address .up.|> StringComparable
+CurrentPlan .up.|> StringComparable
+Tag .up.|> StringComparable
+
+Phone .up.|> NumberComparable
+ClientId .up.|> NumberComparable
+DisposableIncome .up.|> NumberComparable
+RiskAppetite .up.|> NumberComparable
+
+@enduml
