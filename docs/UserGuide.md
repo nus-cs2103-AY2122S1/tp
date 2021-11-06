@@ -87,6 +87,8 @@ Messages that appear in these boxes will be useful in helping you to understand 
 
 Messages that appear in these boxes indicate that the text is of a more technical nature, such as user input.
 
+<div style="page-break-after: always"></div>
+
 ### Structure of this document
 To help you make the most of your time, we have added a multitude of features to FAST, which will help you efficiently manage your contacts.
 As such, this user guide has been structured to help you find what you are looking for.
@@ -174,7 +176,6 @@ are all sample data! Here are some commands you can try to see what they do:
 ### **Command Format**
 *All* the commands used in FAST application follows these notations!
 
-
 * Words in `UPPER_CASE` are the parameters to be added in by the user.<br>
   * e.g. for `add n/NAME`, `NAME` is where you would replace it with the actual client's name such as in `add n/John Doe`.
 
@@ -218,7 +219,7 @@ Parameters refer to the details that are to be included as an input to a command
 Prefix refers to the word symbol used before the parameter. 
 </div>
 
-<br> <br>
+<br>
 
 ### **Command Parameters**
 In this subsection, you can see all the parameters used in FAST at one place. These parameters are used for 
@@ -397,7 +398,8 @@ A client can have any number of [`TAG`](#tag) (including 0)
    called `Betsy Crowe`, has a phone number of `1234567`, has an email address `betsycrowe@example.com`, 
   stays at `Newgate Prison` and is tagged as both a `friend` and `criminal`.
 
-<br> 
+<br> <br>
+
 
 #### Editing a client: `edit`
 
@@ -509,6 +511,8 @@ Try to add remarks with specific keywords so that it is easier to [search](#sear
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 Adding a remark will overwrite any previous remarks that were made for the client!
 </div>
+
+<div style="page-break-after: always"></div>
 
 #### Appointments
 
@@ -816,7 +820,7 @@ You can clear all clients from FAST. This command is useful to remove the defaul
 This CANNOT be undone! 
 </div>
 
-<br>
+<div style="page-break-after: always"></div>
 
 ### **Others**
 
@@ -840,7 +844,9 @@ In the help window, you can view all the command usages built-in right into FAST
 The help window can also be quickly accessed by entering using the F1 key on your keyboard!
 </div>
 
-<br>
+
+<div style="page-break-after: always"></div>
+
 
 #### Viewing statistics
 
