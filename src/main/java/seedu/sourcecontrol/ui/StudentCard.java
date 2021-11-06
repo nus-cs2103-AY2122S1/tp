@@ -9,8 +9,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.sourcecontrol.model.student.Group;
 import seedu.sourcecontrol.model.student.Student;
+import seedu.sourcecontrol.model.student.group.Group;
 
 /**
  * A UI component that displays information of a {@code Student}.

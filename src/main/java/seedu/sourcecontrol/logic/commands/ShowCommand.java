@@ -19,16 +19,16 @@ import seedu.sourcecontrol.commons.core.Messages;
 import seedu.sourcecontrol.commons.core.index.Index;
 import seedu.sourcecontrol.logic.commands.exceptions.CommandException;
 import seedu.sourcecontrol.model.Model;
-import seedu.sourcecontrol.model.student.Assessment;
-import seedu.sourcecontrol.model.student.AssessmentStatistics;
-import seedu.sourcecontrol.model.student.Group;
-import seedu.sourcecontrol.model.student.GroupStatistics;
-import seedu.sourcecontrol.model.student.ID;
-import seedu.sourcecontrol.model.student.IdContainsKeywordsPredicate;
-import seedu.sourcecontrol.model.student.Name;
-import seedu.sourcecontrol.model.student.NameEqualsPredicate;
 import seedu.sourcecontrol.model.student.Student;
-import seedu.sourcecontrol.model.student.StudentStatistics;
+import seedu.sourcecontrol.model.student.assessment.Assessment;
+import seedu.sourcecontrol.model.student.assessment.AssessmentStatistics;
+import seedu.sourcecontrol.model.student.assessment.StudentStatistics;
+import seedu.sourcecontrol.model.student.group.Group;
+import seedu.sourcecontrol.model.student.group.GroupStatistics;
+import seedu.sourcecontrol.model.student.id.ID;
+import seedu.sourcecontrol.model.student.id.IdContainsKeywordsPredicate;
+import seedu.sourcecontrol.model.student.name.Name;
+import seedu.sourcecontrol.model.student.name.NameEqualsPredicate;
 
 /**
  * Shows information of a student or an assessment.

@@ -9,10 +9,10 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.sourcecontrol.logic.commands.SearchCommand;
-import seedu.sourcecontrol.model.student.GroupContainsKeywordsPredicate;
-import seedu.sourcecontrol.model.student.IdContainsKeywordsPredicate;
-import seedu.sourcecontrol.model.student.NameContainsKeywordsPredicate;
-import seedu.sourcecontrol.model.student.TagContainsKeywordsPredicate;
+import seedu.sourcecontrol.model.student.group.GroupContainsKeywordsPredicate;
+import seedu.sourcecontrol.model.student.id.IdContainsKeywordsPredicate;
+import seedu.sourcecontrol.model.student.name.NameContainsKeywordsPredicate;
+import seedu.sourcecontrol.model.student.tag.TagContainsKeywordsPredicate;
 
 public class SearchCommandParserTest {
 

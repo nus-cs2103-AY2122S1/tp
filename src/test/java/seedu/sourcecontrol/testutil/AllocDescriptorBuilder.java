@@ -1,9 +1,9 @@
 package seedu.sourcecontrol.testutil;
 
 import seedu.sourcecontrol.logic.commands.AddAllocCommand.AllocDescriptor;
-import seedu.sourcecontrol.model.student.Group;
-import seedu.sourcecontrol.model.student.ID;
-import seedu.sourcecontrol.model.student.Name;
+import seedu.sourcecontrol.model.student.group.Group;
+import seedu.sourcecontrol.model.student.id.ID;
+import seedu.sourcecontrol.model.student.name.Name;
 
 /**
  * A utility class to help with building AllocDescriptor objects.

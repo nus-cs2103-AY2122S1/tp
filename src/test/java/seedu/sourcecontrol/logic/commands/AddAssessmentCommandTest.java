@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 import seedu.sourcecontrol.model.Model;
 import seedu.sourcecontrol.model.ModelManager;
 import seedu.sourcecontrol.model.UserPrefs;
-import seedu.sourcecontrol.model.student.Assessment;
+import seedu.sourcecontrol.model.student.assessment.Assessment;
 
 public class AddAssessmentCommandTest {
     private final Model model = new ModelManager(getTypicalSourceControl(), new UserPrefs());

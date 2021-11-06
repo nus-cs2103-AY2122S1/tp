@@ -7,11 +7,11 @@ import java.util.stream.Collectors;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
-import seedu.sourcecontrol.model.student.Assessment;
-import seedu.sourcecontrol.model.student.AssessmentStatistics;
-import seedu.sourcecontrol.model.student.Group;
 import seedu.sourcecontrol.model.student.Student;
-import seedu.sourcecontrol.model.tag.Tag;
+import seedu.sourcecontrol.model.student.assessment.Assessment;
+import seedu.sourcecontrol.model.student.assessment.AssessmentStatistics;
+import seedu.sourcecontrol.model.student.group.Group;
+import seedu.sourcecontrol.model.student.tag.Tag;
 
 /**
  * A UI component that displays information of a {@code Student}.

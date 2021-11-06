@@ -28,10 +28,10 @@ import org.junit.jupiter.api.Test;
 
 import seedu.sourcecontrol.logic.commands.AddScoreCommand;
 import seedu.sourcecontrol.logic.commands.AddScoreCommand.ScoreDescriptor;
-import seedu.sourcecontrol.model.student.Assessment;
-import seedu.sourcecontrol.model.student.ID;
-import seedu.sourcecontrol.model.student.Name;
-import seedu.sourcecontrol.model.student.Score;
+import seedu.sourcecontrol.model.student.assessment.Assessment;
+import seedu.sourcecontrol.model.student.assessment.Score;
+import seedu.sourcecontrol.model.student.id.ID;
+import seedu.sourcecontrol.model.student.name.Name;
 import seedu.sourcecontrol.testutil.ScoreDescriptorBuilder;
 
 public class AddScoreCommandParserTest {

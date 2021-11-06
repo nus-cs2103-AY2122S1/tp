@@ -11,10 +11,10 @@ import java.util.List;
 
 import seedu.sourcecontrol.logic.commands.SearchCommand;
 import seedu.sourcecontrol.logic.parser.exceptions.ParseException;
-import seedu.sourcecontrol.model.student.GroupContainsKeywordsPredicate;
-import seedu.sourcecontrol.model.student.IdContainsKeywordsPredicate;
-import seedu.sourcecontrol.model.student.NameContainsKeywordsPredicate;
-import seedu.sourcecontrol.model.student.TagContainsKeywordsPredicate;
+import seedu.sourcecontrol.model.student.group.GroupContainsKeywordsPredicate;
+import seedu.sourcecontrol.model.student.id.IdContainsKeywordsPredicate;
+import seedu.sourcecontrol.model.student.name.NameContainsKeywordsPredicate;
+import seedu.sourcecontrol.model.student.tag.TagContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new SearchCommand object

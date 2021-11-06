@@ -12,7 +12,7 @@ import static seedu.sourcecontrol.logic.parser.CommandParserTestUtil.assertParse
 import org.junit.jupiter.api.Test;
 
 import seedu.sourcecontrol.logic.commands.AddAssessmentCommand;
-import seedu.sourcecontrol.model.student.Assessment;
+import seedu.sourcecontrol.model.student.assessment.Assessment;
 
 public class AddAssessmentCommandParserTest {
     private AddAssessmentCommandParser parser = new AddAssessmentCommandParser();

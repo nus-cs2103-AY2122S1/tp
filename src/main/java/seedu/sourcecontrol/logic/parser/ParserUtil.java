@@ -15,12 +15,12 @@ import seedu.sourcecontrol.commons.core.index.Index;
 import seedu.sourcecontrol.commons.util.FileUtil;
 import seedu.sourcecontrol.commons.util.StringUtil;
 import seedu.sourcecontrol.logic.parser.exceptions.ParseException;
-import seedu.sourcecontrol.model.student.Assessment;
-import seedu.sourcecontrol.model.student.Group;
-import seedu.sourcecontrol.model.student.ID;
-import seedu.sourcecontrol.model.student.Name;
-import seedu.sourcecontrol.model.student.Score;
-import seedu.sourcecontrol.model.tag.Tag;
+import seedu.sourcecontrol.model.student.assessment.Assessment;
+import seedu.sourcecontrol.model.student.assessment.Score;
+import seedu.sourcecontrol.model.student.group.Group;
+import seedu.sourcecontrol.model.student.id.ID;
+import seedu.sourcecontrol.model.student.name.Name;
+import seedu.sourcecontrol.model.student.tag.Tag;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.

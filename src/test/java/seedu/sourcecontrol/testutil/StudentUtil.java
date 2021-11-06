@@ -10,9 +10,9 @@ import java.util.Set;
 
 import seedu.sourcecontrol.logic.commands.AddCommand;
 import seedu.sourcecontrol.logic.commands.EditCommand.EditStudentDescriptor;
-import seedu.sourcecontrol.model.student.Group;
 import seedu.sourcecontrol.model.student.Student;
-import seedu.sourcecontrol.model.tag.Tag;
+import seedu.sourcecontrol.model.student.group.Group;
+import seedu.sourcecontrol.model.student.tag.Tag;
 
 /**
  * A utility class for Student.

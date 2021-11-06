@@ -35,10 +35,10 @@ import seedu.sourcecontrol.logic.commands.EditCommand.EditStudentDescriptor;
 import seedu.sourcecontrol.model.Model;
 import seedu.sourcecontrol.model.ModelManager;
 import seedu.sourcecontrol.model.UserPrefs;
-import seedu.sourcecontrol.model.student.Group;
-import seedu.sourcecontrol.model.student.ID;
-import seedu.sourcecontrol.model.student.Name;
-import seedu.sourcecontrol.model.tag.Tag;
+import seedu.sourcecontrol.model.student.group.Group;
+import seedu.sourcecontrol.model.student.id.ID;
+import seedu.sourcecontrol.model.student.name.Name;
+import seedu.sourcecontrol.model.student.tag.Tag;
 import seedu.sourcecontrol.testutil.EditStudentDescriptorBuilder;
 
 public class EditCommandParserTest {

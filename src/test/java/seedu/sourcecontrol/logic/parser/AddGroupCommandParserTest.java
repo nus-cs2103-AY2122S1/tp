@@ -25,8 +25,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.sourcecontrol.logic.commands.AddAllocCommand.AllocDescriptor;
 import seedu.sourcecontrol.logic.commands.AddGroupCommand;
-import seedu.sourcecontrol.model.student.Group;
-import seedu.sourcecontrol.model.student.ID;
+import seedu.sourcecontrol.model.student.group.Group;
+import seedu.sourcecontrol.model.student.id.ID;
 import seedu.sourcecontrol.testutil.AllocDescriptorBuilder;
 import seedu.sourcecontrol.testutil.GroupBuilder;
 

@@ -16,10 +16,10 @@ import java.util.stream.Collectors;
 
 import seedu.sourcecontrol.logic.commands.exceptions.CommandException;
 import seedu.sourcecontrol.model.Model;
-import seedu.sourcecontrol.model.student.Group;
-import seedu.sourcecontrol.model.student.Name;
-import seedu.sourcecontrol.model.student.NameEqualsPredicate;
 import seedu.sourcecontrol.model.student.Student;
+import seedu.sourcecontrol.model.student.group.Group;
+import seedu.sourcecontrol.model.student.name.Name;
+import seedu.sourcecontrol.model.student.name.NameEqualsPredicate;
 
 /**
  * Adds a group to the Source Control application.

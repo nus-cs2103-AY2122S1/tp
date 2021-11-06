@@ -5,7 +5,7 @@ import static seedu.sourcecontrol.logic.parser.CliSyntax.PREFIX_ASSESSMENT;
 
 import seedu.sourcecontrol.logic.commands.AddAssessmentCommand;
 import seedu.sourcecontrol.logic.parser.exceptions.ParseException;
-import seedu.sourcecontrol.model.student.Assessment;
+import seedu.sourcecontrol.model.student.assessment.Assessment;
 
 
 /**

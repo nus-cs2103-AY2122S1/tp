@@ -17,9 +17,9 @@ import java.util.List;
 import java.util.Map;
 
 import seedu.sourcecontrol.model.SourceControl;
-import seedu.sourcecontrol.model.student.Assessment;
-import seedu.sourcecontrol.model.student.Score;
 import seedu.sourcecontrol.model.student.Student;
+import seedu.sourcecontrol.model.student.assessment.Assessment;
+import seedu.sourcecontrol.model.student.assessment.Score;
 
 /**
  * A utility class containing a list of {@code Student} objects to be used in tests.

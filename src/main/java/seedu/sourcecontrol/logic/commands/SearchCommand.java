@@ -10,11 +10,11 @@ import java.util.function.Predicate;
 
 import seedu.sourcecontrol.commons.core.Messages;
 import seedu.sourcecontrol.model.Model;
-import seedu.sourcecontrol.model.student.GroupContainsKeywordsPredicate;
-import seedu.sourcecontrol.model.student.IdContainsKeywordsPredicate;
-import seedu.sourcecontrol.model.student.NameContainsKeywordsPredicate;
 import seedu.sourcecontrol.model.student.Student;
-import seedu.sourcecontrol.model.student.TagContainsKeywordsPredicate;
+import seedu.sourcecontrol.model.student.group.GroupContainsKeywordsPredicate;
+import seedu.sourcecontrol.model.student.id.IdContainsKeywordsPredicate;
+import seedu.sourcecontrol.model.student.name.NameContainsKeywordsPredicate;
+import seedu.sourcecontrol.model.student.tag.TagContainsKeywordsPredicate;
 
 
 /**

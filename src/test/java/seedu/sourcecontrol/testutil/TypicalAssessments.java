@@ -9,7 +9,7 @@ import static seedu.sourcecontrol.logic.commands.CommandTestUtil.VALID_SCORE_BOB
 
 import java.util.Map;
 
-import seedu.sourcecontrol.model.student.Assessment;
+import seedu.sourcecontrol.model.student.assessment.Assessment;
 
 /**
  * A utility class containing a list of {@code Assessment} objects to be used in tests.

@@ -1,6 +1,6 @@
 package seedu.sourcecontrol.testutil;
 
-import seedu.sourcecontrol.model.student.ID;
+import seedu.sourcecontrol.model.student.id.ID;
 
 /**
  * A utility class to help with building ID objects.

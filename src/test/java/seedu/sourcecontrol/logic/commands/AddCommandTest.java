@@ -22,9 +22,9 @@ import seedu.sourcecontrol.model.Model;
 import seedu.sourcecontrol.model.ReadOnlySourceControl;
 import seedu.sourcecontrol.model.ReadOnlyUserPrefs;
 import seedu.sourcecontrol.model.SourceControl;
-import seedu.sourcecontrol.model.student.Assessment;
-import seedu.sourcecontrol.model.student.Group;
 import seedu.sourcecontrol.model.student.Student;
+import seedu.sourcecontrol.model.student.assessment.Assessment;
+import seedu.sourcecontrol.model.student.group.Group;
 import seedu.sourcecontrol.testutil.StudentBuilder;
 
 public class AddCommandTest {

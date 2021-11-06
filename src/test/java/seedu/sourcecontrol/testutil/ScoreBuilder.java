@@ -1,6 +1,6 @@
 package seedu.sourcecontrol.testutil;
 
-import seedu.sourcecontrol.model.student.Score;
+import seedu.sourcecontrol.model.student.assessment.Score;
 
 /**
  * A utility class to help with building Score objects.

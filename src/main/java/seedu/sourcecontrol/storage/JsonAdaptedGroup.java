@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.sourcecontrol.commons.exceptions.IllegalValueException;
-import seedu.sourcecontrol.model.student.Group;
+import seedu.sourcecontrol.model.student.group.Group;
 
 public class JsonAdaptedGroup {
     private final String name;

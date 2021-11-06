@@ -7,7 +7,7 @@ import static seedu.sourcecontrol.testutil.TypicalStudents.BENSON;
 import org.junit.jupiter.api.Test;
 
 import seedu.sourcecontrol.commons.exceptions.IllegalValueException;
-import seedu.sourcecontrol.model.student.Group;
+import seedu.sourcecontrol.model.student.group.Group;
 
 public class JsonAdaptedGroupTest {
     private static final String VALID_GROUP = BENSON.getGroups().get(0).name;

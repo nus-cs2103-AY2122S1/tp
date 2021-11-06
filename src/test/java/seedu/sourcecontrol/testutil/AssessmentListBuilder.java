@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import seedu.sourcecontrol.model.student.Assessment;
-import seedu.sourcecontrol.model.student.AssessmentList;
-import seedu.sourcecontrol.model.student.Score;
 import seedu.sourcecontrol.model.student.Student;
+import seedu.sourcecontrol.model.student.assessment.Assessment;
+import seedu.sourcecontrol.model.student.assessment.AssessmentList;
+import seedu.sourcecontrol.model.student.assessment.Score;
 
 public class AssessmentListBuilder {
 

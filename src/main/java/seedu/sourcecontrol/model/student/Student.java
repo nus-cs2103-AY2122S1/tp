@@ -11,7 +11,12 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.sourcecontrol.model.tag.Tag;
+import seedu.sourcecontrol.model.student.assessment.Assessment;
+import seedu.sourcecontrol.model.student.assessment.Score;
+import seedu.sourcecontrol.model.student.group.Group;
+import seedu.sourcecontrol.model.student.id.ID;
+import seedu.sourcecontrol.model.student.name.Name;
+import seedu.sourcecontrol.model.student.tag.Tag;
 
 /**
  * Represents a Student in the Source Control application.

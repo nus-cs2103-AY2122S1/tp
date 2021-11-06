@@ -14,11 +14,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import seedu.sourcecontrol.commons.exceptions.IllegalValueException;
-import seedu.sourcecontrol.model.student.Assessment;
-import seedu.sourcecontrol.model.student.Group;
-import seedu.sourcecontrol.model.student.ID;
-import seedu.sourcecontrol.model.student.Name;
 import seedu.sourcecontrol.model.student.Student;
+import seedu.sourcecontrol.model.student.assessment.Assessment;
+import seedu.sourcecontrol.model.student.group.Group;
+import seedu.sourcecontrol.model.student.id.ID;
+import seedu.sourcecontrol.model.student.name.Name;
 
 public class JsonAdaptedStudentTest {
     private static final String INVALID_NAME = "R@chel";

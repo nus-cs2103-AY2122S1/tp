@@ -13,9 +13,9 @@ import javafx.collections.transformation.FilteredList;
 import seedu.sourcecontrol.commons.core.GuiSettings;
 import seedu.sourcecontrol.commons.core.LogsCenter;
 import seedu.sourcecontrol.logic.parser.Alias;
-import seedu.sourcecontrol.model.student.Assessment;
-import seedu.sourcecontrol.model.student.Group;
 import seedu.sourcecontrol.model.student.Student;
+import seedu.sourcecontrol.model.student.assessment.Assessment;
+import seedu.sourcecontrol.model.student.group.Group;
 
 /**
  * Represents the in-memory model of the Source Control data.

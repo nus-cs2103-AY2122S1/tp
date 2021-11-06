@@ -3,9 +3,9 @@ package seedu.sourcecontrol.model;
 import java.util.List;
 
 import javafx.collections.ObservableList;
-import seedu.sourcecontrol.model.student.Assessment;
-import seedu.sourcecontrol.model.student.Group;
 import seedu.sourcecontrol.model.student.Student;
+import seedu.sourcecontrol.model.student.assessment.Assessment;
+import seedu.sourcecontrol.model.student.group.Group;
 
 /**
  * Unmodifiable view of a Source Control.

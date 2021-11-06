@@ -3,9 +3,9 @@ package seedu.sourcecontrol.testutil;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import seedu.sourcecontrol.model.student.Assessment;
-import seedu.sourcecontrol.model.student.ID;
-import seedu.sourcecontrol.model.student.Score;
+import seedu.sourcecontrol.model.student.assessment.Assessment;
+import seedu.sourcecontrol.model.student.assessment.Score;
+import seedu.sourcecontrol.model.student.id.ID;
 
 /**
  * A utility class to help with building Assessment object.

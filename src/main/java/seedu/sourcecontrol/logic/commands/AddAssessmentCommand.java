@@ -5,7 +5,7 @@ import static seedu.sourcecontrol.logic.parser.CliSyntax.PREFIX_ASSESSMENT;
 
 import seedu.sourcecontrol.logic.commands.exceptions.CommandException;
 import seedu.sourcecontrol.model.Model;
-import seedu.sourcecontrol.model.student.Assessment;
+import seedu.sourcecontrol.model.student.assessment.Assessment;
 
 /**
  * Adds a group to the Source Control application.

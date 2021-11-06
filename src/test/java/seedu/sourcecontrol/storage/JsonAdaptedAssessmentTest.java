@@ -9,9 +9,9 @@ import java.util.LinkedHashMap;
 import org.junit.jupiter.api.Test;
 
 import seedu.sourcecontrol.commons.exceptions.IllegalValueException;
-import seedu.sourcecontrol.model.student.Assessment;
-import seedu.sourcecontrol.model.student.ID;
-import seedu.sourcecontrol.model.student.Score;
+import seedu.sourcecontrol.model.student.assessment.Assessment;
+import seedu.sourcecontrol.model.student.assessment.Score;
+import seedu.sourcecontrol.model.student.id.ID;
 
 public class JsonAdaptedAssessmentTest {
     private static final String VALID_ASSESSMENT = BENSON.getScores().keySet().iterator().next().name;

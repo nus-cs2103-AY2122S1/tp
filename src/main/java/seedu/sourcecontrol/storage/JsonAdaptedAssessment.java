@@ -7,9 +7,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.sourcecontrol.commons.exceptions.IllegalValueException;
-import seedu.sourcecontrol.model.student.Assessment;
-import seedu.sourcecontrol.model.student.ID;
-import seedu.sourcecontrol.model.student.Score;
+import seedu.sourcecontrol.model.student.assessment.Assessment;
+import seedu.sourcecontrol.model.student.assessment.Score;
+import seedu.sourcecontrol.model.student.id.ID;
 
 public class JsonAdaptedAssessment {
     private final String name;

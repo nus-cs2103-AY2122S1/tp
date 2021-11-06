@@ -17,8 +17,8 @@ import seedu.sourcecontrol.commons.core.index.Index;
 import seedu.sourcecontrol.logic.commands.EditCommand;
 import seedu.sourcecontrol.logic.commands.EditCommand.EditStudentDescriptor;
 import seedu.sourcecontrol.logic.parser.exceptions.ParseException;
-import seedu.sourcecontrol.model.student.Group;
-import seedu.sourcecontrol.model.tag.Tag;
+import seedu.sourcecontrol.model.student.group.Group;
+import seedu.sourcecontrol.model.student.tag.Tag;
 
 /**
  * Parses input arguments and creates a new EditCommand object

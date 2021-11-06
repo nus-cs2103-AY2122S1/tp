@@ -8,12 +8,12 @@ import java.util.Map;
 import seedu.sourcecontrol.commons.util.FileUtil;
 import seedu.sourcecontrol.logic.commands.exceptions.CommandException;
 import seedu.sourcecontrol.model.Model;
-import seedu.sourcecontrol.model.student.Assessment;
-import seedu.sourcecontrol.model.student.Group;
-import seedu.sourcecontrol.model.student.ID;
-import seedu.sourcecontrol.model.student.Score;
 import seedu.sourcecontrol.model.student.Student;
-import seedu.sourcecontrol.model.tag.Tag;
+import seedu.sourcecontrol.model.student.assessment.Assessment;
+import seedu.sourcecontrol.model.student.assessment.Score;
+import seedu.sourcecontrol.model.student.group.Group;
+import seedu.sourcecontrol.model.student.id.ID;
+import seedu.sourcecontrol.model.student.tag.Tag;
 
 
 public class ExportCommand extends Command {

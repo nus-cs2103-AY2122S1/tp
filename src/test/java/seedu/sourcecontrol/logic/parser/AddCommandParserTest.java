@@ -31,11 +31,11 @@ import java.util.LinkedHashMap;
 import org.junit.jupiter.api.Test;
 
 import seedu.sourcecontrol.logic.commands.AddCommand;
-import seedu.sourcecontrol.model.student.Group;
-import seedu.sourcecontrol.model.student.ID;
-import seedu.sourcecontrol.model.student.Name;
 import seedu.sourcecontrol.model.student.Student;
-import seedu.sourcecontrol.model.tag.Tag;
+import seedu.sourcecontrol.model.student.group.Group;
+import seedu.sourcecontrol.model.student.id.ID;
+import seedu.sourcecontrol.model.student.name.Name;
+import seedu.sourcecontrol.model.student.tag.Tag;
 import seedu.sourcecontrol.testutil.StudentBuilder;
 
 public class AddCommandParserTest {

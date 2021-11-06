@@ -6,13 +6,12 @@ import java.util.List;
 import java.util.Objects;
 
 import javafx.collections.ObservableList;
-import seedu.sourcecontrol.model.student.Assessment;
-import seedu.sourcecontrol.model.student.AssessmentList;
-import seedu.sourcecontrol.model.student.Group;
-import seedu.sourcecontrol.model.student.GroupList;
 import seedu.sourcecontrol.model.student.Student;
 import seedu.sourcecontrol.model.student.UniqueStudentList;
-
+import seedu.sourcecontrol.model.student.assessment.Assessment;
+import seedu.sourcecontrol.model.student.assessment.AssessmentList;
+import seedu.sourcecontrol.model.student.group.Group;
+import seedu.sourcecontrol.model.student.group.GroupList;
 
 /**
  * Wraps all data at the Source Control level

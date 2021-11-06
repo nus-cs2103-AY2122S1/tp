@@ -6,11 +6,11 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.sourcecontrol.logic.commands.EditCommand.EditStudentDescriptor;
-import seedu.sourcecontrol.model.student.Group;
-import seedu.sourcecontrol.model.student.ID;
-import seedu.sourcecontrol.model.student.Name;
 import seedu.sourcecontrol.model.student.Student;
-import seedu.sourcecontrol.model.tag.Tag;
+import seedu.sourcecontrol.model.student.group.Group;
+import seedu.sourcecontrol.model.student.id.ID;
+import seedu.sourcecontrol.model.student.name.Name;
+import seedu.sourcecontrol.model.student.tag.Tag;
 
 /**
  * A utility class to help with building EditStudentDescriptor objects.
