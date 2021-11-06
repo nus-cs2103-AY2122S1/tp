@@ -2,6 +2,7 @@ package seedu.address;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -60,7 +61,7 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        UserProfileStorage userProfileStorage = new JsonUserProfileStorage();
+        UserProfileStorage userProfileStorage = new JsonUserProfileStorage(Paths.get("userprofile.json"));
         storage = new StorageManager(addressBookStorage, userPrefsStorage, userProfileStorage);
 
         initLogging(config);

@@ -16,24 +16,19 @@ import seedu.address.commons.util.JsonUtil;
 
 public class JsonUserProfileStorageTest {
 
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonUserProfileStorageTest");
+
     @Test
     public void getUserProfilePath_samePath_success() {
-        JsonUserProfileStorage userProfileStorage = new JsonUserProfileStorage();
-        Path expectedPath = Paths.get("userprofile.json");
+        Path expectedPath = TEST_DATA_FOLDER.resolve("userprofile.json");
+        JsonUserProfileStorage userProfileStorage = new JsonUserProfileStorage(expectedPath);
         assertEquals(expectedPath, userProfileStorage.getUserProfilePath());
     }
 
     @Test
-    public void getUserProfilePath_differentPath_failure() {
-        JsonUserProfileStorage userProfileStorage = new JsonUserProfileStorage();
-        Path expectedPath = Paths.get("userprofile2.json");
-        assertNotEquals(expectedPath, userProfileStorage.getUserProfilePath());
-    }
-
-    @Test
     public void readUserProfilePath_noFilePathProvided_success() {
-        JsonUserProfileStorage userProfileStorage = new JsonUserProfileStorage();
-        Path expectedPath = Paths.get("userprofile.json");
+        Path expectedPath = TEST_DATA_FOLDER.resolve("userprofile.json");
+        JsonUserProfileStorage userProfileStorage = new JsonUserProfileStorage(expectedPath);
         try {
             assertNotNull(userProfileStorage.readUserProfile());
         } catch (DataConversionException e) {
@@ -43,8 +38,8 @@ public class JsonUserProfileStorageTest {
 
     @Test
     public void readUserProfilePath_noFilePathProvided_failure() {
-        JsonUserProfileStorage userProfileStorage = new JsonUserProfileStorage();
-        Path expectedPath = Paths.get("userprofile2.json");
+        Path expectedPath = TEST_DATA_FOLDER.resolve("userprofile2.json");
+        JsonUserProfileStorage userProfileStorage = new JsonUserProfileStorage(expectedPath);
         try {
             assertNotNull(userProfileStorage.readUserProfile());
         } catch (DataConversionException e) {
@@ -54,8 +49,8 @@ public class JsonUserProfileStorageTest {
 
     @Test
     public void readUserProfilePath_correctFilePathProvided_success() {
-        JsonUserProfileStorage userProfileStorage = new JsonUserProfileStorage();
-        Path expectedPath = Paths.get("userprofile.json");
+        Path expectedPath = TEST_DATA_FOLDER.resolve("userprofile.json");
+        JsonUserProfileStorage userProfileStorage = new JsonUserProfileStorage(expectedPath);
         try {
             assertNotNull(userProfileStorage.readUserProfile(expectedPath));
         } catch (DataConversionException e) {
@@ -65,8 +60,8 @@ public class JsonUserProfileStorageTest {
 
     @Test
     public void readUserProfilePath_invalidFilePathProvided_success() {
-        JsonUserProfileStorage userProfileStorage = new JsonUserProfileStorage();
-        Path expectedPath = Paths.get("invalidUserProfile.json");
+        Path expectedPath = TEST_DATA_FOLDER.resolve("invalidUserProfile.json");
+        JsonUserProfileStorage userProfileStorage = new JsonUserProfileStorage(expectedPath);
         try {
             assertNotNull(userProfileStorage.readUserProfile(expectedPath));
         } catch (Exception e) {
@@ -76,8 +71,8 @@ public class JsonUserProfileStorageTest {
 
     @Test
     public void readUserProfilePath_wrongFilePathProvided_failure() {
-        JsonUserProfileStorage userProfileStorage = new JsonUserProfileStorage();
-        Path expectedPath = Paths.get("userprofile2.json");
+        Path expectedPath = TEST_DATA_FOLDER.resolve("userprofile2.json");
+        JsonUserProfileStorage userProfileStorage = new JsonUserProfileStorage(expectedPath);
         try {
             assertNotNull(userProfileStorage.readUserProfile(expectedPath));
         } catch (DataConversionException e) {
@@ -87,8 +82,9 @@ public class JsonUserProfileStorageTest {
 
     @Test
     public void saveUserProfile() {
-        JsonUserProfileStorage userProfileStorage = new JsonUserProfileStorage();
-        Path profileFilePath = Paths.get("userprofilesave.json");
+        Path profileFilePath = TEST_DATA_FOLDER.resolve("userprofilesave.json");
+        JsonUserProfileStorage userProfileStorage = new JsonUserProfileStorage(profileFilePath);
+
         Optional<JsonSerializableUserProfile> userProfile;
         try {
             userProfile = JsonUtil.readJsonFile(profileFilePath,
