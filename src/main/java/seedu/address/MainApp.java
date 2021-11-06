@@ -212,12 +212,11 @@ public class MainApp extends Application {
      * Sets up the data with the given password.
      *
      * @param input The input password from user.
-     * @return {@code true} if the password is correct, {@code false} otherwise
      * @throws UnsupportedPasswordException If error occurs when generating the encryption key.
      * @throws NoSuchPaddingException If the padding does not exist.
      * @throws NoSuchAlgorithmException If the specified algorithm does not exist.
      */
-    public boolean setUp(String input) throws NoSuchPaddingException, NoSuchAlgorithmException,
+    public void setUp(String input) throws NoSuchPaddingException, NoSuchAlgorithmException,
             UnsupportedPasswordException, InvalidKeyException, FileAlreadyExistsException {
         // Guard clause for the case when user adds a data file after opening the app.
         logger.info("Setting up password.");
@@ -234,7 +233,6 @@ public class MainApp extends Application {
         logic = new LogicManager(model, storage, token, userPrefs.getEncryptedFilePath());
         new UiManager(logic).start(stage);
         isLoggedIn = true;
-        return true;
     }
 
     /**
