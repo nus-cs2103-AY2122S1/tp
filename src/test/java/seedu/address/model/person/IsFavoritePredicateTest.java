@@ -18,12 +18,6 @@ public class IsFavoritePredicateTest {
     }
 
     @Test
-    public void test_validInputFalse_success() {
-        IsFavoritePredicate expected = new IsFavoritePredicate(false);
-        assertTrue(expected.test(ALICE));
-    }
-
-    @Test
     public void test_validInputTrue_success() {
         IsFavoritePredicate expected = new IsFavoritePredicate(true);
         ALICE.setIsFavorite();
