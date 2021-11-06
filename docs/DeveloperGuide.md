@@ -528,8 +528,11 @@ The `FindCommand` allows users to find students based on person fields.
 
 *Figure I.5.1: Sequence Diagram of Find Command*
 
-The user can specify multiple fields to search for and each field takes in multiple keywords.
-An exception is the tag field which only accepts a single keyword. Instead, users can specify multiple tag fields.
+![Find Command Continued](images/FindUpdateFilteredListLogicSequenceDiagram.png)
+*Figure I.3.3.3: Continued Sequence Diagram of Find Command*
+
+
+The user can specify multiple fields to search for and some fields may accept multiple keywords.
 
 The `PersonMatchesKeywordsPredicate` is used to test whether a person matches the specified keywords.
 For each searchable field, a predicate is created which tests if a given person's field contains all specified keywords.
