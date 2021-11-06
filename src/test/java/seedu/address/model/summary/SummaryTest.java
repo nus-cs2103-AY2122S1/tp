@@ -3,8 +3,6 @@ package seedu.address.model.summary;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.TypicalContacts.getTypicalAddressBook;
 
-import java.util.HashMap;
-
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;

@@ -30,7 +30,6 @@ import seedu.address.model.contact.Name;
 import seedu.address.model.contact.Phone;
 import seedu.address.model.contact.Rating;
 import seedu.address.model.contact.Review;
-import seedu.address.model.summary.Summary;
 import seedu.address.model.tag.Tag;
 
 /**
