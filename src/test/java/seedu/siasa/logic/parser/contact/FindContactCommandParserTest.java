@@ -1,4 +1,4 @@
-package seedu.siasa.logic.parser;
+package seedu.siasa.logic.parser.contact;
 
 import static seedu.siasa.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.siasa.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -9,7 +9,6 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.siasa.logic.commands.contact.FindContactCommand;
-import seedu.siasa.logic.parser.contact.FindCommandParser;
 import seedu.siasa.model.contact.NameContainsKeywordsPredicate;
 
 public class FindContactCommandParserTest {

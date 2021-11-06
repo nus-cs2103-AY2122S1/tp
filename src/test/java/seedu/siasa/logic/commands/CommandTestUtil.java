@@ -3,10 +3,14 @@ package seedu.siasa.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.siasa.logic.parser.CliSyntax.PREFIX_COMMISSION;
+import static seedu.siasa.logic.parser.CliSyntax.PREFIX_CONTACT_INDEX;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.siasa.logic.parser.CliSyntax.PREFIX_PAYMENT;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.siasa.logic.parser.CliSyntax.PREFIX_TITLE;
 import static seedu.siasa.testutil.Assert.assertThrows;
 
 import java.time.LocalDate;
@@ -68,6 +72,12 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+
+    public static final String TITLE_DESC = " " + PREFIX_TITLE + VALID_POLICY_TITLE_CRITICAL;
+    public static final String PAYMENT_DESC = " " + PREFIX_PAYMENT + VALID_POLICY_PAYMENT_AMOUNT_CRITICAL;
+    public static final String COMMISSION_DESC =
+            " " + PREFIX_COMMISSION + VALID_POLICY_COMMISSION_PERCENTAGE_CRITICAL + " 1";
+    public static final String CLIENT_DESC = " " + PREFIX_CONTACT_INDEX + " 1";
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
