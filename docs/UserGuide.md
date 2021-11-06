@@ -96,7 +96,7 @@ You can quickly jump to any of the sections by using the [Table of Contents](#ta
 
 3. Download the latest release `managera.jar` from [here](https://github.com/AY2122S1-CS2103T-T10-2/tp/releases).
 
-4. Copy `managera.jar` to a new folder which will act as the _home folder_ for Managera.
+4. Copy `managera.jar` to a new folder which will act as the [_home folder_](#glossary) for Managera.
 
 5. Double-click `managera.jar` to start the app. The GUI similar to the one below should appear in a few seconds. Note 
    how the app contains some sample data.<br>
@@ -286,11 +286,11 @@ Example Usage:
 
 <br>![result for 'view 1'](images/UG screenshots/viewFirstResult.png)
 
-### Adding a Next-of-Kin to a Participant: `addNok`
+## Adding a Next-of-Kin to a Participant: `addNok`
 
 Adds a Next-of-Kin (NOK) to a Participant.
 
-Format: `addNok INDEX n/NAME p/PHONE tag/TAG`
+Format: `addNok INDEX n/NAME p/PHONE tag/TAG`#
 
 * Adds an NOK to the Participant at the specified `INDEX`.
 * The index refers to the index number of the Participant as shown in the displayed Participant list.
@@ -639,9 +639,15 @@ check for possible schedule clashes manually when enrolling a participant.
 
 ## Glossary
 
+The glossary contains definitions for terms which you may not fully understand.
+
 **Participant**: A person that is participating in or attending some given event.<br>
 
 **Event**: An event that will be conducted in real life e.g., a competition, meeting, social activity etc.<br>
+
+**Home Folder**: The home folder for Managera is the folder which you have placed `managera.jar` in. You are strongly 
+recommended creating a new folder for Managera instead of running it on the desktop, as Managera will be 
+creating new files and folders in the same directory.
 
 **Command**: A command is a specific instruction that you give to Managera to perform a certain action, like adding a 
 new Participant to the list. Commands will be the primary way that you will interact with Managera.<br>
