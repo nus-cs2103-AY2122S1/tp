@@ -478,6 +478,7 @@ During the parsing, a new TutorialGroup instance is created. This `TutorialGroup
 The *Sequence Diagram* below summarizes the aforementioned steps.
 
 ![AddGroupSequenceDiagram](images/AddGroupSequenceDiagram.png)
+![GetTutorialGroupsDiagram](images/GetTutorialGroupsDiagram.png)
 
 #### Design Considerations
 

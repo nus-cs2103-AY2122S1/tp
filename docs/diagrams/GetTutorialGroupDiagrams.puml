@@ -1,0 +1,31 @@
+@startuml
+!include style.puml
+
+box Model MODEL_COLOR_T1
+participant "**tutorialClasses:UniqueTutorialClassList**" as UniqueTutorialClassList MODEL_COLOR
+participant "<<class>>\n**TutorialClass**" as StaticTutorialClass MODEL_COLOR
+participant ":**TutorialClass**" as TutorialClass MODEL_COLOR
+end box
+
+mainframe sd get tutorial groups
+
+UniqueTutorialClassList -> StaticTutorialClass : ""createTestTutorialClass(cc)""
+activate StaticTutorialClass
+StaticTutorialClass --> UniqueTutorialClassList
+deactivate StaticTutorialClass
+
+note right
+""cc"" is the ClassCode
+of the TutorialClass
+that the TutorialGroup is
+being added to
+end note
+
+UniqueTutorialClassList -> TutorialClass : ""check for matching tutorial class""
+activate TutorialClass
+UniqueTutorialClassList -> TutorialClass : ""getTutorialGroups()""
+
+TutorialClass --> UniqueTutorialClassList
+deactivate TutorialClass
+
+@enduml

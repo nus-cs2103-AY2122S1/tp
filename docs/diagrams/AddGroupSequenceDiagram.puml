@@ -2,22 +2,14 @@
 !include style.puml
 
 box Model MODEL_COLOR_T1
-participant "**classmate:Classmate**" as Classmate MODEL_COLOR
-participant "**tutorialClasses:UniqueTutorialClassList**" as UniqueTutorialClassList MODEL_COLOR
-participant TutorialClass as TutorialClass MODEL_COLOR
-participant UniqueTutorialGroupList as UniqueTutorialGroupList MODEL_COLOR
+participant "**:UniqueTutorialClassList**" as UniqueTutorialClassList MODEL_COLOR
+participant "<<class>>\n**TutorialClass**" as StaticTutorialClass MODEL_COLOR
+participant ":**TutorialClass**" as TutorialClass MODEL_COLOR
+participant ":**UniqueTutorialGroupList**" as UniqueTutorialGroupList MODEL_COLOR
 end box
 
 
-[-> Classmate : ""hasTutorialClass(tc)""
-activate Classmate
-
-Classmate -> UniqueTutorialClassList : ""contains(tc)""
-activate UniqueTutorialClassList
-
-UniqueTutorialClassList -> TutorialClass : ""check through tutorial class list""
-activate TutorialClass
-
+[-> UniqueTutorialClassList : ""contains(tc)""
 
 note right
 ""tc"" is the TutorialClass
@@ -26,62 +18,30 @@ being added to ClassMate
 belongs to
 end note
 
-TutorialClass --> UniqueTutorialClassList
-deactivate TutorialClass
-
-UniqueTutorialClassList --> Classmate
-deactivate UniqueTutorialClassList
-
-[-> Classmate : ""hasTutorialGroup(tg)""
-
-Classmate -> UniqueTutorialClassList : ""contains(tg)""
-activate UniqueTutorialClassList
-
-UniqueTutorialClassList -> TutorialClass : ""getClassCode(tg)""
-activate TutorialClass
-UniqueTutorialClassList -> TutorialClass : ""createTestTutorialClass(cc)""
-note right
-""cc"" is the ClassCode
-of the TutorialClass
-that the TutorialGroup is
-being added to
-end note
 UniqueTutorialClassList -> TutorialClass : ""check for matching tutorial class""
-UniqueTutorialClassList -> TutorialClass : ""getTutorialGroups()""
 
-TutorialClass --> UniqueTutorialClassList
-deactivate TutorialClass
+[-> UniqueTutorialClassList : ""contains(tg)""
 
-UniqueTutorialClassList -> UniqueTutorialGroupList : ""check if tutorial group exists""
+ref over UniqueTutorialClassList, StaticTutorialClass, TutorialClass
+get tutorial groups
+end ref
+
+UniqueTutorialClassList -> UniqueTutorialGroupList : ""contains(tg)""
 activate UniqueTutorialGroupList
 
 UniqueTutorialGroupList --> UniqueTutorialClassList
 deactivate UniqueTutorialGroupList
 
-UniqueTutorialClassList --> Classmate
-deactivate UniqueTutorialClassList
+[-> UniqueTutorialClassList : ""add(tg)""
 
-[-> Classmate : ""addTutorialGroup(tc)""
+ref over UniqueTutorialClassList, StaticTutorialClass, TutorialClass
+get tutorial groups
+end ref
 
-Classmate -> UniqueTutorialClassList : ""add(tg)""
-activate UniqueTutorialClassList
-
-UniqueTutorialClassList -> TutorialClass : ""getClassCode(tg)""
-activate TutorialClass
-UniqueTutorialClassList -> TutorialClass : ""createTestTutorialClass(tc)""
-UniqueTutorialClassList -> TutorialClass : ""check for matching tutorial class""
-UniqueTutorialClassList -> TutorialClass : ""getTutorialGroups()""
-
-TutorialClass --> UniqueTutorialClassList
-deactivate TutorialClass
-
-UniqueTutorialClassList -> UniqueTutorialGroupList : ""add tutorial group""
+UniqueTutorialClassList -> UniqueTutorialGroupList : ""add(tg))""
 activate UniqueTutorialGroupList
 
 UniqueTutorialGroupList --> UniqueTutorialClassList
 deactivate UniqueTutorialGroupList
-
-UniqueTutorialClassList --> Classmate
-deactivate UniqueTutorialClassList
 
 @enduml
