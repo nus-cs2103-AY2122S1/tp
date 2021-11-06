@@ -503,6 +503,43 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
+**Use case: UC05 - Update a resident's last FET date**
+
+**MSS**
+
+1.  Actor requests to list residents
+2.  System shows a list of residents
+3.  Actor requests to update a specific resident's last FET date
+4.  System updates the specified resident's last FET date
+5.  Actor requests to view all details of the specified resident to confirm that the details have been updated correctly
+6.  System shows all details of the specified resident
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. System shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The given date is invalid.
+
+    * 3b1. System shows an error message.
+
+      Use case resumes at step 2.
+
+* 5a. The given index is invalid.
+
+    * 5a1. System shows an error message.
+
+      Use case resumes at step 4.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
