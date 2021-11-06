@@ -79,8 +79,6 @@ Otherwise, if Java `11` is not installed, you may follow the installation instru
 e.g. typing **`help`** and pressing `Enter` will open the help window.<br>
    Here are some example commands you can try:
 
-   * **`friend --list`** : Lists all friends.
-
    * **`friend --add Draco -n Marcus`** : Adds a friend __Marcus__ with gitGud `FRIEND_ID` of __Draco__ to the application.
 
    * **`friend --delete Draco`** : Deletes friend with gitGud `FRIEND_ID` of __Draco__.
@@ -137,7 +135,8 @@ Adds a new friend to gitGud friend’s list with an associated **unique** friend
 
 **:information_source: What is the friend identifier?**
 
-The friend identifier (`FRIEND_ID`) is a name you assign to a friend to refer to each unique friend for use within the gitGud application, 
+The friend identifier (`FRIEND_ID`) is an ID you assign to a friend to refer to each unique friend for use within the 
+gitGud application, 
 it must also be unique and not previously exist in the friends list.
 gitGud has imposed the command constraints listed below on the friend identifier to ensure it is easy for you to remember and type.
 </div>
