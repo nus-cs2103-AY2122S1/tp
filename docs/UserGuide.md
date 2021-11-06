@@ -398,7 +398,8 @@ A client can have any number of [`TAG`](#tag) (including 0)
    called `Betsy Crowe`, has a phone number of `1234567`, has an email address `betsycrowe@example.com`, 
   stays at `Newgate Prison` and is tagged as both a `friend` and `criminal`.
 
-<br> 
+<br> <br>
+
 
 #### Editing a client: `edit`
 
@@ -843,7 +844,9 @@ In the help window, you can view all the command usages built-in right into FAST
 The help window can also be quickly accessed by entering using the F1 key on your keyboard!
 </div>
 
-<br>
+
+<div style="page-break-after: always"></div>
+
 
 #### Viewing statistics
 
