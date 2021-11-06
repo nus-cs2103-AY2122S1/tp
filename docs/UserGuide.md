@@ -46,6 +46,8 @@ by clicking on the links, to jump to the section where the information which the
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always"></div>
+
 ## **How to use this user guide**
 We recommend first time users to read the user guide in the order that is written.
 Throughout the user guide, we include links in blue like [this](#how-to-use-this-user-guide) which will jump to the 
@@ -164,6 +166,9 @@ are all sample data! Here are some commands you can try to see what they do:
 
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always"></div>
+
 
 ## **Features**
 
@@ -882,6 +887,9 @@ FAST will start with an empty data file on the next run!
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always"></div>
+
+
 ## **FAQs**
 
 **Q**: How do I transfer my data to another Computer?<br>
@@ -895,6 +903,9 @@ FAST will start with an empty data file on the next run!
 **A**: It is likely that some of your changes to your data file caused FAST to be unable to read your data file. Double-check the changes you made, or revert them if necessary. If FAST is able to read the data file after you made the changes, all your saved contacts will appear on the next start.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always"></div>
+
 
 ## **Command summary**
 The tables below provides you with a summary for **all** the available commands in FAST. You can use this section to quickly refresh your memory on the different command formats. 
@@ -950,6 +961,9 @@ Action|Format, Examples
 **Exit** | `exit`
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always"></div>
+
 
 ## **Glossary**
 
