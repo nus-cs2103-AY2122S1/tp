@@ -649,6 +649,7 @@ cannot be reverted to and / or be undone or redone.
 - Design of the internal version control system is heavily inspired by [Git](https://github.com/git/git).
 - Certain code implementations may have been inspired by [Baeldung tutorials](https://www.baeldung.com/)
 - Libraries used:
-  - Junit5
-  - JavaFX
-  - [Add more]
+  - [JavaFX](https://openjfx.io/) for the amazing GUI
+  - [Jackson](https://github.com/FasterXML/jackson) to save your data
+  - [JUnit5](https://github.com/junit-team/junit5) so that we can deliver to you bug-free!
+  - [MDFX](https://github.com/JPro-one/markdown-javafx-renderer) so that you can see User Guide in help without internet
