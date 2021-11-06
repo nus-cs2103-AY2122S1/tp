@@ -76,7 +76,7 @@ public class SetUpScreen extends UiPart<Stage> {
     }
 
     private void handleNewPassword() {
-        // Do not proceed is the password is invalid.
+        // Do not proceed if the password is invalid.
         if (!PasswordUtil.isValidPassword(userInputPassword.getText())) {
             responseDisplay.setText(PasswordCommand.CORRECT_PASSWORD_FORMAT);
             userInputPassword.clear();
