@@ -611,9 +611,9 @@ Marks the specified Event in Managera as undone.
 
 Format: `undone INDEX`
 
-* Marks the completed(done) Event at the specified INDEX as undone.
+* Marks the completed(done) Event at the specified `INDEX` as undone.
 * The index refers to the index number of the Event shown in the displayed Event list.
-* The index must be a positive integer 1, 2, 3, …​
+* The index **must be a positive integer** 1, 2, 3, …​
 
 Example Usage:
 
