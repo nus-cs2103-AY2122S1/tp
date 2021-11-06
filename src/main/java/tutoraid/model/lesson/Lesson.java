@@ -65,7 +65,7 @@ public class Lesson {
             return students.get();
         }
         Students computedStudents = new Students();
-        for (Student std : ModelManager.allStudents) {
+        for (Student std : ModelManager.getAllStudents()) {
             if (std.hasLesson(this)) {
                 computedStudents.addStudent(std);
             }

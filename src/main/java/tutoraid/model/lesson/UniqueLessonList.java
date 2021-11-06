@@ -69,15 +69,6 @@ public class UniqueLessonList implements Iterable<Lesson> {
     }
 
     /**
-     * Refreshes this Unique Lesson List.
-     */
-    public void refreshUniqueLessonList() {
-        for (int i = 0; i < internalList.size(); i++) {
-            setLesson(internalList.get(i), internalList.get(i));
-        }
-    }
-
-    /**
      * Removes the equivalent lesson from the list.
      * The lesson must exist in the list.
      */

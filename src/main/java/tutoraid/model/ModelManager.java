@@ -24,8 +24,7 @@ import tutoraid.ui.UiManager;
  * Represents the in-memory model of the student book data.
  */
 public class ModelManager implements Model {
-    public static List<Student> allStudents = new ArrayList<>();
-
+    private static final List<Student> allStudents = new ArrayList<>();
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
     private final StudentBook studentBook;
     private final LessonBook lessonBook;
@@ -48,11 +47,15 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredStudents = new FilteredList<>(this.studentBook.getStudentList());
         filteredLessons = new FilteredList<>(this.lessonBook.getLessonList());
-        allStudents = studentBook.getStudentList();
+        allStudents.addAll(studentBook.getStudentList());
     }
 
     public ModelManager() {
         this(new StudentBook(), new LessonBook(), new UserPrefs());
+    }
+
+    public static List<Student> getAllStudents() {
+        return allStudents;
     }
 
     //=========== UserPrefs ==================================================================================
@@ -106,7 +109,8 @@ public class ModelManager implements Model {
     @Override
     public void setStudentBook(ReadOnlyStudentBook studentBook) {
         this.studentBook.resetData(studentBook);
-        allStudents = studentBook.getStudentList();
+        allStudents.clear();
+        allStudents.addAll(studentBook.getStudentList());
     }
 
     @Override
@@ -123,13 +127,14 @@ public class ModelManager implements Model {
     @Override
     public void deleteStudent(Student target) {
         studentBook.removeStudent(target);
+        allStudents.remove(target);
     }
 
     @Override
     public void addStudent(Student student) {
         studentBook.addStudent(student);
         updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
-        allStudents = studentBook.getStudentList();
+        allStudents.add(student);
     }
 
     @Override
@@ -137,7 +142,6 @@ public class ModelManager implements Model {
         CollectionUtil.requireAllNonNull(target, editedStudent);
 
         studentBook.setStudent(target, editedStudent);
-        allStudents = studentBook.getStudentList();
     }
 
     @Override
@@ -167,8 +171,6 @@ public class ModelManager implements Model {
                 student.getLessons().deleteLesson(lesson);
             }
         }
-        studentBook.refreshStudentBook();
-        allStudents = studentBook.getStudentList();
     }
 
     //=========== LessonBook ================================================================================
@@ -222,7 +224,6 @@ public class ModelManager implements Model {
                 lesson.removeStudent(student);
             }
         }
-        lessonBook.refreshLessonBook();
     }
 
     //=========== Filtered Student List Accessors =============================================================
@@ -239,7 +240,6 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredStudentList(Predicate<Student> predicate) {
         requireNonNull(predicate);
-        studentBook.refreshStudentBook();
         filteredStudents.setPredicate(predicate);
     }
 
@@ -257,7 +257,6 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredLessonList(Predicate<Lesson> predicate) {
         requireNonNull(predicate);
-        lessonBook.refreshLessonBook();
         filteredLessons.setPredicate(predicate);
     }
 
