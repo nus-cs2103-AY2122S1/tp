@@ -1,5 +1,6 @@
 package seedu.academydirectory.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.academydirectory.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.academydirectory.testutil.TypicalStudents.getTypicalAcademyDirectory;
 
@@ -29,4 +30,9 @@ public class ClearCommandTest {
         assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
+    @Test
+    public void validClearCommand() {
+        ClearCommand clearCommand = new ClearCommand();
+        assertEquals(clearCommand, new ClearCommand());
+    }
 }

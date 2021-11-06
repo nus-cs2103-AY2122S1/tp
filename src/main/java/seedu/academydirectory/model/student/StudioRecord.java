@@ -7,6 +7,10 @@ public class StudioRecord implements Information {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Studio Session should only be an integer from 1 to 12 inclusive.";
+    public static final String SESSION_PLACEHOLDER = "- Session ";
+    public static final String ATTENDED = " attended. ";
+    public static final String NOT_ATTENDED = " not attended.\n";
+    public static final String PARTICIPATION_PLACEHOLDER = "Participation mark is ";
 
     private static final String VALIDATION_REGEX = "^-?\\d+$";
 
@@ -81,16 +85,20 @@ public class StudioRecord implements Information {
         return this.participation;
     }
 
-    public String getExtendedStudioRecords() {
+    /**
+     * Visualize studio participation and attendance for view
+     * @return studio record in complete
+     */
+    public String visualizeForView() {
         String displayedInfo = "";
         for (int sessionNumber = 0; sessionNumber < numberOfSessions; sessionNumber++) {
             boolean hasAttendedSession = attendance.getAttendanceFromSession(sessionNumber);
             int participationScore = participation.getParticipationScoreFrom(sessionNumber);
             if (hasAttendedSession) {
-                displayedInfo += "- Session " + (sessionNumber + 1) + " attended. ";
-                displayedInfo += "Participation mark is " + participationScore + "\n";
+                displayedInfo += SESSION_PLACEHOLDER + (sessionNumber + 1) + ATTENDED;
+                displayedInfo += PARTICIPATION_PLACEHOLDER + participationScore + "\n";
             } else {
-                displayedInfo += "- Session " + (sessionNumber + 1) + " not attended.\n";
+                displayedInfo += SESSION_PLACEHOLDER + (sessionNumber + 1) + NOT_ATTENDED;
             }
         }
         return displayedInfo;

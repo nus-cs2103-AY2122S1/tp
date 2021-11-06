@@ -10,6 +10,13 @@ import java.util.List;
  */
 public class Assessment extends SortableInformation {
 
+    public static final String PLACEHOLDER_RA1 = "- Reading Assessment 1: ";
+    public static final String PLACEHOLDER_MIDTERM = "- Midterm Examination: ";
+    public static final String PLACEHOLDER_RA2 = "- Reading Assessment 2: ";
+    public static final String PLACEHOLDER_PE = "- Practical Examination: ";
+    public static final String PLACEHOLDER_FINAL = "- Final Examination: ";
+    public static final String PLACEHOLDER_TOTAL = "Total score: ";
+
     public static final List<String> ASSESSMENT_LIST = Arrays.asList(
             "RA1",
             "MIDTERM",
@@ -87,19 +94,23 @@ public class Assessment extends SortableInformation {
         return total;
     }
 
-    public String getVisualizerDisplay() {
+    /**
+     * Visualize assessment score of student
+     * @return assessment score
+     */
+    public String visualizeForView() {
         StringBuilder displayedInfo = new StringBuilder();
-        displayedInfo.append("- Reading Assessment 1: ")
+        displayedInfo.append(PLACEHOLDER_RA1)
                 .append(getAssessmentGrade("RA1")).append("\n")
-                .append("- Midterm Examination: ")
+                .append(PLACEHOLDER_MIDTERM)
                 .append(getAssessmentGrade("MIDTERM")).append("\n")
-                .append("- Reading Assessment 2: ")
+                .append(PLACEHOLDER_RA2)
                 .append(getAssessmentGrade("RA2")).append("\n")
-                .append("- Practical Examination: ")
+                .append(PLACEHOLDER_PE)
                 .append(getAssessmentGrade("PE")).append("\n")
-                .append("- Final Examination: ")
-                .append(getAssessmentGrade("FINAL")).append("\n")
-                .append("Total score: ").append(getTotalGrade());
+                .append(PLACEHOLDER_FINAL)
+                .append(getAssessmentGrade("FINAL")).append("\n\n")
+                .append(PLACEHOLDER_TOTAL).append(getTotalGrade());
         return displayedInfo.toString();
     }
 

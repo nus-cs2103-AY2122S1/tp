@@ -1,6 +1,6 @@
 package seedu.academydirectory.ui.creator;
 
-import java.util.Set;
+import java.util.Comparator;
 
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -10,14 +10,13 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import seedu.academydirectory.model.AdditionalInfo;
 import seedu.academydirectory.model.student.Student;
-import seedu.academydirectory.model.student.StudioRecord;
-import seedu.academydirectory.model.tag.Tag;
 
 public class ViewCreator extends Creator {
 
+    public static final String PLACEHOLDER_PHONE = "1. Phone number ";
+    public static final String PLACEHOLDER_EMAIL = "2. Email address: ";
+    public static final String PLACEHOLDER_TELEGRAM = "3. Telegram handle: ";
     private static final String FXML = "creator/ViewCreator.fxml";
-
-    private final Student student;
 
     @FXML
     private StackPane placeHolder;
@@ -49,21 +48,23 @@ public class ViewCreator extends Creator {
      */
     public ViewCreator(AdditionalInfo<?> additionalInfo) {
         super(additionalInfo, FXML);
-        this.student = (Student) additionalInfo.get();
+        Student student = (Student) additionalInfo.get();
+
         fullName.setText(student.getName().fullName);
-        phone.setText("- Phone number: " + student.getPhone().toString());
-        email.setText("- Email address: " + student.getEmail().value);
-        telegram.setText("- Telegram handle: " + student.getTelegram().value);
-        Set<Tag> tagsList = student.getTags();
-        for (Tag tag : tagsList) {
-            Label tagWrapper = new Label(tag.tagName + " ");
-            tags.getChildren().add(tagWrapper);
-        }
-        StudioRecord studioRecord = student.getStudioRecord();
-        Label displayInfoPlaceHolder = new Label(studioRecord.getExtendedStudioRecords());
+        phone.setText(PLACEHOLDER_PHONE + student.getPhone().toString());
+        email.setText(PLACEHOLDER_EMAIL + student.getEmail().value);
+        telegram.setText(PLACEHOLDER_TELEGRAM + student.getTelegram().value);
+        student.getTags().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
+        String studioRecord = student.getStudioRecord().visualizeForView();
+        Label displayInfoPlaceHolder = new Label(studioRecord);
         participation.setContent(displayInfoPlaceHolder);
-        String assessments = student.getAssessment().getVisualizerDisplay();
-        testScores.setContent(new Label(assessments));
+
+        String assessments = student.getAssessment().visualizeForView();
+        Label assessmentPlaceHolder = new Label(assessments);
+        testScores.setContent(assessmentPlaceHolder);
     }
 
     @Override

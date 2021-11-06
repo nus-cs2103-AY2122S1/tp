@@ -23,8 +23,12 @@ import seedu.academydirectory.logic.commands.ExitCommand;
 import seedu.academydirectory.logic.commands.FilterCommand;
 import seedu.academydirectory.logic.commands.GetCommand;
 import seedu.academydirectory.logic.commands.HelpCommand;
+import seedu.academydirectory.logic.commands.HistoryCommand;
 import seedu.academydirectory.logic.commands.ListCommand;
+import seedu.academydirectory.logic.commands.RedoCommand;
+import seedu.academydirectory.logic.commands.UndoCommand;
 import seedu.academydirectory.logic.commands.ViewCommand;
+import seedu.academydirectory.logic.commands.VisualizeCommand;
 import seedu.academydirectory.logic.parser.exceptions.ParseException;
 import seedu.academydirectory.model.student.InformationContainsKeywordsPredicate;
 import seedu.academydirectory.model.student.Student;
@@ -98,6 +102,26 @@ public class AcademyDirectoryParserTest {
     @Test
     public void parseCommand_view() throws Exception {
         assertTrue(parser.parseCommand(ViewCommand.COMMAND_WORD + " 2") instanceof ViewCommand);
+    }
+
+    @Test
+    public void parseCommand_visualize() throws Exception {
+        assertTrue(parser.parseCommand(VisualizeCommand.COMMAND_WORD) instanceof VisualizeCommand);
+    }
+
+    @Test
+    public void parseCommand_undo() throws Exception {
+        assertTrue(parser.parseCommand(UndoCommand.COMMAND_WORD) instanceof UndoCommand);
+    }
+
+    @Test
+    public void parseCommand_redo() throws Exception {
+        assertTrue(parser.parseCommand(RedoCommand.COMMAND_WORD) instanceof RedoCommand);
+    }
+
+    @Test
+    public void parseCommand_history() throws Exception {
+        assertTrue(parser.parseCommand(HistoryCommand.COMMAND_WORD) instanceof HistoryCommand);
     }
 
     @Test

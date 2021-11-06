@@ -485,7 +485,7 @@ This command serves to display the summarised details of a single `Student` in t
 
 `ViewCommand` displays the `Student` based on the relative `INDEX` in the `ObservableList` which is the list of `Student` viewed by the `Avenger`.
 
-{Improve on explanation and add a possible UML Diagram}
+![ViewCommandSequenceDiagram](images/dg/logic/commands/viewcommand/ViewCommandSequenceDiagram.png)
 
 #### Implementation
 
@@ -1178,8 +1178,30 @@ testers are expected to do more *exploratory* testing.
 
 #### View student information
 
-1. _{ more test cases to come …​ }_
+1. View all related information of a student
+  1. Prerequisite: List all student using the `list` command. Multiple students are shown in the list. **List should have exactly 6 students** (can using sample data provided as default)
+  2. Test case: `view 1`
+     Expected: All related information of the first student is shown on the result display visualizer on the right side. This includes: Student name, current tags, all academic-related information (assessment score, studio participation, studio attendance), and personal contact information (phone, email, telegram)
+     Expected: No information is modified, Academy Directory runs as normal
+     Expected: Status message is that users are viewing student at position 1 of the list
+  3. Test case: `view 6`
+     Expected: All related information of the last student is shown on the result display visualizer on the right side. This includes: Student name, current tags, all academic-related information (assessment score, studio participation, studio attendance), and personal contact information (phone, email, telegram)
+     Expected: No information is modified, Academy Directory runs as normal
+     Expected: Status message is that users are viewing student at position 6 of the list
+  4. Test case: `view 7`
+     Expected: No view is shown on the result display. An error message is shown stating that index number is invalid
+  5. Test case: `view 0`, `view add`, `view myself in front of the mirror as a failure of society`
+     Expected: No view is shown on the result display. An error message is shown stating that index number is invalid (in a sense that it must be a positive integer)
 
+2. View students when list is altered
+  1. Prerequisite: Using filter to reduce the list view to 1 only. List should only have one student filtered.
+  2. Test case: `view 1`
+     Expected: All related information are shown about the student
+     Expected: Status message is that users are viewing student at position 1 of the list
+  3. Test case: `view 2`
+     Expected: No view is shown on the result display. An error message is shown stating that index number is invalid
+     Significance: View works for the current index number shown on the student list only.
+    
 ***
 
 #### Show Grade
@@ -1262,8 +1284,26 @@ testers are expected to do more *exploratory* testing.
 
 #### Help
 
-1. _{ more test cases to come …​ }_
-
+1. Test general help
+   1. Prerequisite: Application is started
+   2. Test case: `help`
+      Expected: A pop-up window is shown summarizing the format of all commands for users, as well as a link to the web User Guide of Academy Directory
+   3. Test case: `help    `
+      Expected: A pop-up window is shown summarizing the format of all commands for users, as well as a link to the web User Guide of Academy Directory
+2. Test specific help
+   1. Prerequisite: Application is started
+   2. Test case: `help edit`
+      Expected: A pop-up window is shown with a customized help message (based on the User Guide of `edit` command) on how to use `edit`, including significance, format, and example.
+   3. Test case: `help visualize`
+      Expected: A pop-up window is shown with a customized help message (based on the User Guide of `visualize` command) on how to use `visualize`, including significance, format, and example.
+   4. Test case: `help ad`, `help addd`
+      Expected: No pop-up window is shown, and an error message is shown as status message explaining that there exists no instruction for command `ad`. Significance of the test case is that specific `help` can only be useful when the command is typed in full rather than in partial
+   5. Test case: `help r230thg4b0p2nnbtpbgetbi03`
+      Expected: No pop-up window is shown, and an error message is shown as status message explaining that there exists no instruction for the command.
+3. Test functionality of pop-up window
+   1. Prerequisite: Help window is already opened before by any mean, and is kept opened for testing
+   2. Test case: Focus on the Main Window, do not close Help Window, and type in `help add` or any other equivalent command
+      Expected: The help window is refocused with its content change to the new `help` instead.
 ***
 
 #### Saving data
@@ -1276,9 +1316,30 @@ testers are expected to do more *exploratory* testing.
 
 ***
 
-### UI Testing
+### Graphic User Interface Testing
 
-#### Buttons
+#### Menus
+   1. Test the 5 menu items on the bar
+      1. Prerequisite: Application is started
+      2. Test case: Click on the second menu item
+         Expected: Menu item is expanded to show 5 entries: `show RA1`, `show RA2`, `show MIDTERM`, `show PE`, `show FINAL`
+      3. Test case: Click on the third menu-item
+         Expected: Menu item is expanded to show 1 entry: `visualize`
+   2. Test a random menu item
+      1. Prerequisite: The second menu is opened
+      2. Test case: Click on entry `Show RA1`
+         Expected: The command `show RA1` is executed as an equivalent command-button
+         
+#### User Interface
+   1. Test application user interface
+      1. Prerequisite: Application is started
+      2. Test case: Expand Academy Directory to full screen
+         Expected: Background image also expanded, alongside other components of the internal controls (result display, student list, and status message)
+         Expected: No other visual misbehavior of the User Interface (image is cropped or lacking in any visual design)
+      3. Test case: Shrink Academy Directory to the smallest possible size
+         Expected: Academy Directory is not shrinked completely as there is a limit
+         
+#### User Experience
 
 1. _{ more test cases to come …​ }_
 

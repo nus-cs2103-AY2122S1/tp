@@ -1,5 +1,6 @@
 package seedu.academydirectory.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.academydirectory.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.academydirectory.logic.commands.CommandTestUtil.showStudentAtIndex;
 import static seedu.academydirectory.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
@@ -35,5 +36,11 @@ public class ListCommandTest {
     public void execute_listIsFiltered_showsEverything() {
         showStudentAtIndex(model, INDEX_FIRST_STUDENT);
         assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void equalTest() {
+        ListCommand listCommand = new ListCommand();
+        assertEquals(listCommand, new ListCommand());
     }
 }

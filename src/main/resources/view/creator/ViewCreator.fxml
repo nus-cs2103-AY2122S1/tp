@@ -7,7 +7,8 @@
 <?import java.net.URL?>
 <StackPane fx:id="placeHolder" styleClass="pane-with-border"
            style="-fx-opaque: 0.9;"
-           xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+           xmlns="http://javafx.com/javafx/11.0.1"
+           xmlns:fx="http://javafx.com/fxml/1">
     <VBox>
         <stylesheets>
             <URL value="@../Fonts.css"/>

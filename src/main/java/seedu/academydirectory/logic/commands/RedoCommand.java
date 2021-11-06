@@ -41,4 +41,9 @@ public class RedoCommand extends Command {
         new RevertCommand(nextCommit.getHash()).execute(model);
         return new CommandResult(MESSAGE_SUCCESS);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return (obj instanceof RedoCommand);
+    }
 }

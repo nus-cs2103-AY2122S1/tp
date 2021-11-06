@@ -20,4 +20,9 @@ public class ExitCommand extends Command {
     public CommandResult execute(VersionedModel model) {
         return new CommandResult(MESSAGE_EXIT_ACKNOWLEDGEMENT, false, true);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return (obj instanceof ExitCommand);
+    }
 }
