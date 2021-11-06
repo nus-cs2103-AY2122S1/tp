@@ -252,19 +252,11 @@ Step 4. The student is allocated into the group.
 
 The following activity diagram summarises what happens when a user executes the `addalloc` command to allocate a student into a group. In the case where the allocation is not made successfully, an error message will be displayed with the reason.
 
-<div style="text-align:center">
-
 ![AddAllocActivityDiagram](images/AddAllocActivityDiagram.png)
-
-</div>
 
 The following sequence diagram summarises what happens when the user inputs an `addalloc` command together with a group and a student, specified by name, to be allocated.
 
-<div style="text-align:center">
-
 ![AddGroupSequenceDiagram](images/AddAllocSequenceDiagram.png)
-
-</div>
 
 ### Add Score Feature
 
@@ -284,24 +276,15 @@ Step 3. The `ScoreDescriptor` is used to find the assessment and the student(s) 
 Step 4. The score is updated in the assessment of the student.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** In the case where there are more than one students matched because they share the same name, an error message will be displayed to the user. The user will then have to specify the student to be added using his/her student ID.
-
 </div>
-
-<div style="text-align:center">
 
 The following activity diagram summarises what happens when a user executes the `addscore` command to add score for an assessment of a student. In the case where the update is not made successfully, an error message will be displayed with the reason.
 
 ![AddScoreActivityDiagram](images/AddScoreActivityDiagram.png)
 
-</div>
-
 The following sequence diagram summarises what happens when the user inputs an `addscore` command together with an assessment, a student, specified by name, and a score to be added.
 
-<div style="text-align:center">
-
 ![AddGroupSequenceDiagram](images/AddScoreSequenceDiagram.png)
-
-</div>
 
 ### Search feature
 
@@ -358,23 +341,13 @@ Step 3. The `ScoreDescriptor` is used to find the assessment and the student(s) 
 
 The following activity diagrams summarise what happens when a user executes the `show` command to show the performance analysis of a student, a group or the cohort in an assessment. In the case where the display is not presented successfully, an error message will be displayed with the reason.
 
-<div style="center">
-
-<img src="/images/ShowActivityDiagram.png" alt="ShowActivityDiagram">
-
 ![ShowActivityDiagram](images/ShowActivityDiagram.png)
 ![ShowStudentDiagram](images/ShowStudentActivityDiagram.png)
 ![ShowStudentsActivityDiagram](images/ShowStudentsActivityDiagram.png)
 
-</div>
-
 The following sequence diagram summarises what happens when the user inputs an `show` command together with a student specified by name.
 
-<div style="text-align:center">
-
 ![AddGroupSequenceDiagram](images/ShowSequenceDiagram.png)
-
-</div>
 
 #### Design considerations
 
