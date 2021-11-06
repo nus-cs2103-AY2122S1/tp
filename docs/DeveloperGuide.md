@@ -518,6 +518,8 @@ of the event in Event list to be undone. When the command is executed, the `mode
 
 ### \[Proposed\] Enroll and Expel multiple participants from multiple events
 
+#### Proposed Implementation
+
 The current implementation of `AddParticipantToEventCommand`(enroll) and `RemoveParticipantFromEventCommand`(expel)
 only allows single participant to single event enrolling/expelling. To extend this feature to:
 
