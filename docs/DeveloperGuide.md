@@ -492,6 +492,14 @@ The *Sequence Diagram* below summarizes the aforementioned steps.
       Storing tutorial groups as arrays in JSON is less complicated.
     * Cons: Searching or filtering the list of tutorial groups by group types may take a longer time.
     
+### Recommended workflow for setting up ClassMATE
+
+The *Activity Diagram* below provides an example of how users should set up their tutorial classes, tutorial groups and students
+in ClassMATE.
+
+![SetUpActivityDiagram](images/SetUpActivityDiagram.png)
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
