@@ -3,32 +3,32 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":SourceControlParser" as SourceControlParser LOGIC_COLOR
 participant ":AddGroupCommandParser" as AddGroupCommandParser LOGIC_COLOR
-participant "T01A:Group" as Group LOGIC_COLOR
-participant "allocDescriptor:AllocDescriptor" as JohnDoeDescriptor LOGIC_COLOR
+participant "allocDescriptor\n:AllocDescriptor" as JohnDoeDescriptor LOGIC_COLOR
 participant "addGroupCommand\n:AddGroupCommand" as AddGroupCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
+participant "T01A:Group" as Group MODEL_COLOR
 end box
 
 [-> LogicManager : execute("addgroup \n-g T01A \n-n John Doe")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand(\n"addgroup -g T01A \n-n John Doe")
-activate AddressBookParser
+LogicManager -> SourceControlParser : parseCommand("addgroup \n-g T01A \n-n John Doe")
+activate SourceControlParser
 
 create AddGroupCommandParser
-AddressBookParser -> AddGroupCommandParser
+SourceControlParser -> AddGroupCommandParser
 activate AddGroupCommandParser
 
-AddGroupCommandParser --> AddressBookParser
+AddGroupCommandParser --> SourceControlParser
 deactivate AddGroupCommandParser
 
-AddressBookParser -> AddGroupCommandParser : parse(" -g T01A \n-n John Doe")
+SourceControlParser -> AddGroupCommandParser : parse(" -g T01A \n-n John Doe")
 activate AddGroupCommandParser
 
 create Group
@@ -46,36 +46,28 @@ JohnDoeDescriptor --> AddGroupCommandParser : allocDescriptor
 deactivate JohnDoeDescriptor
 
 create AddGroupCommand
-AddGroupCommandParser -> AddGroupCommand : AddGroupCommand(T01A, allocDescriptor)
+AddGroupCommandParser -> AddGroupCommand : AddGroupCommand(T01A, \nallocDescriptor)
 activate AddGroupCommand
 
 AddGroupCommand --> AddGroupCommandParser : addGroupCommand
 deactivate AddGroupCommand
 
-AddGroupCommandParser --> AddressBookParser : addGroupCommand
+AddGroupCommandParser --> SourceControlParser : addGroupCommand
 deactivate AddGroupCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-AddGroupCommandParser -[hidden]-> AddressBookParser
+AddGroupCommandParser -[hidden]-> SourceControlParser
 destroy AddGroupCommandParser
 
-AddressBookParser --> LogicManager : addGroupCommand
-deactivate AddressBookParser
+SourceControlParser --> LogicManager : addGroupCommand
+deactivate SourceControlParser
 
 LogicManager -> AddGroupCommand : execute()
 activate AddGroupCommand
 
-AddGroupCommand -> Model : getAllocStudent(allocDescriptor)
-activate Model
+ref over AddGroupCommand, Model, Group: add group to model
 
-Model --> AddGroupCommand : John Doe
-deactivate Model
-'Hidden arrow to position the destroy marker below the end of the activation bar.
 JohnDoeDescriptor -[hidden]-> JohnDoeDescriptor
 destroy JohnDoeDescriptor
-
-AddGroupCommand -> Group : addStudent(John Doe)
-
-AddGroupCommand -> Model : addGroup(T01A)
 
 create CommandResult
 AddGroupCommand -> CommandResult

@@ -1,0 +1,24 @@
+@startuml
+!include style.puml
+
+mainframe **sd**  add group to model\t
+
+box Logic LOGIC_COLOR_T1
+participant "addGroupCommand\n:AddGroupCommand" as AddGroupCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant "T01A:Group" as Group MODEL_COLOR
+end box
+
+AddGroupCommand -> Model : getAllocStudent(allocDescriptor)
+activate Model
+
+Model --> AddGroupCommand : John Doe
+deactivate Model
+
+AddGroupCommand -> Group : addStudent(John Doe)
+
+AddGroupCommand -> Model : addGroup(T01A)
+@enduml

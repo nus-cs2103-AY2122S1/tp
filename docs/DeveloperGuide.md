@@ -245,6 +245,7 @@ The following activity diagrams summarizes what happens when a user executes a c
 The following sequence diagram summarizes what happens when the user inputs an add group command together with a student to be added:
 
 ![AddGroupSequenceDiagram](images/AddGroupSequenceDiagram.png)
+![AddGroupToModelSequenceDiagram](images/AddGroupToModelSequenceDiagram.png)
 
 ### Add Allocation : `addalloc`
 
