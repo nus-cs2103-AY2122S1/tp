@@ -115,36 +115,34 @@ class JsonAdaptedPerson {
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, ModuleGroupMap.class.getSimpleName()));
         }
         ModuleGroupMap moduleGroupMap = new ModuleGroupMap();
-        if (!mods.strip().isEmpty()) {
-            String[] modGroupPairs = mods.split(" ");
-            for (String modGroupPair : modGroupPairs) {
-                String[] modGroupArray = modGroupPair.split(":");
-                if (modGroupArray.length != 2) {
-                    throw new IllegalValueException(ModuleGroupMap.MESSAGE_CONSTRAINTS);
-                }
-                String mod = modGroupArray[0];
-                String group = modGroupArray[1];
-
-                if (!Module.isValidModuleCode(mod)) {
-                    throw new IllegalValueException(Module.MESSAGE_CONSTRAINTS);
-                }
-                if (!Module.MODULE_SYSTEM.hasModule(mod)) {
-                    throw new IllegalValueException(Module.MESSAGE_DOES_NOT_EXIST);
-                }
-                final Module modelModule = Module.MODULE_SYSTEM.getModule(mod);
-
-                if (!Group.isValidGroup(group)) {
-                    throw new IllegalValueException(Group.MESSAGE_CONSTRAINTS);
-                }
-                if (!modelModule.getGroupSystem().hasGroup(group)) {
-                    throw new IllegalValueException(Group.MESSAGE_DOES_NOT_EXIST);
-                }
-                final Group modelGroup = modelModule.getGroup(group);
-                if (!modelModule.getGroupSystem().hasGroup(modelGroup)) {
-                    modelModule.getGroupSystem().addGroup(modelGroup);
-                }
-                moduleGroupMap.add(modelModule, modelGroup);
+        String[] modGroupPairs = mods.split(" ");
+        for (String modGroupPair : modGroupPairs) {
+            String[] modGroupArray = modGroupPair.split(":");
+            if (modGroupArray.length != 2) {
+                throw new IllegalValueException(ModuleGroupMap.MESSAGE_CONSTRAINTS);
             }
+            String mod = modGroupArray[0];
+            String group = modGroupArray[1];
+
+            if (!Module.isValidModuleCode(mod)) {
+                throw new IllegalValueException(Module.MESSAGE_CONSTRAINTS);
+            }
+            if (!Module.MODULE_SYSTEM.hasModule(mod)) {
+                throw new IllegalValueException(Module.MESSAGE_DOES_NOT_EXIST);
+            }
+            final Module modelModule = Module.MODULE_SYSTEM.getModule(mod);
+
+            if (!Group.isValidGroup(group)) {
+                throw new IllegalValueException(Group.MESSAGE_CONSTRAINTS);
+            }
+            if (!modelModule.getGroupSystem().hasGroup(group)) {
+                throw new IllegalValueException(Group.MESSAGE_DOES_NOT_EXIST);
+            }
+            final Group modelGroup = modelModule.getGroup(group);
+            if (!modelModule.getGroupSystem().hasGroup(modelGroup)) {
+                modelModule.getGroupSystem().addGroup(modelGroup);
+            }
+            moduleGroupMap.add(modelModule, modelGroup);
         }
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
