@@ -344,7 +344,7 @@ The following UML activity diagram summarizes what happens when a CS2100 TA exec
 
 * **Alternative 1 (current choice):** Filter commands can take in any combination of query parameters (`-n`, `-cid`
   , `-sid`)
-    * Pros: Allow for flexibility in the way the CS2100 TA want to filter the list.
+    * Pros: Allow for flexibility in the way the CS2100 TA wants to filter the list.
     * Cons: More difficult to implement and proper handling of the combinations of query parameters is needed.
 
 * **Alternative 2:** A different type of filter command to filter by each of the student's attribute.
@@ -396,7 +396,7 @@ Given below is a possible usage scenario:
 
 [Pre-Condition] There are 2 students in ProgrammerError, and the CS2100 TA has created some lab results for each of them.
 
-Step 1. The CS2100 TA key in the command `show 1`: The information of the student at index 1 as well as his/her lab results
+Step 1. The CS2100 TA keys in the command `show 1`: The information of the student at index 1 as well as his/her lab results
 are displayed on the side panel.
 
 The mechanism is as described below:
