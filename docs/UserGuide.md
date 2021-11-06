@@ -20,14 +20,16 @@ This guide takes you through all the _latest features_ of Source Control. If you
 all the basic knowledge to [get started](#quick-start) with Source Control. If you are an experienced user,
 feel free to skip to the [command summary](#command-summary) and experiment with our more [advanced features](#setting-customised-aliases-for-commands--alias)!
 
+<br>
+
 --------------------------------------------------------------------------------------------------------------------
 
-## Table of Contents
+## **Table of Contents**
 
-* [Overview](#)
-* [Table of Contents](#table-of-contents)
-* [Quick Start](#quick-start)
-* Features
+* [**Overview**](#)
+* [**Table of Contents**](#table-of-contents)
+* [**Quick Start**](#quick-start)
+* **Features**
   * [Notes on Command Format](#features)
   * Adding Data
     * [Adding a student : `addstudent`](#adding-a-student--addstudent)
@@ -54,16 +56,16 @@ feel free to skip to the [command summary](#command-summary) and experiment with
   * Advanced Features
     * [Setting customised aliases for commands: `alias`](#setting-customised-aliases-for-commands--alias)
     * [Editing the data file](#editing-the-data-file)
-* [FAQ](#faq)
-* [Glossary](#glossary)
-* [Command Summary](#command-summary)
-* [Example Visual Aids](#example-visual-aids)
+* [**FAQ**](#faq)
+* [**Glossary**](#glossary)
+* [**Command Summary**](#command-summary)
+* [**Example Visual Aids**](#example-visual-aids)
 
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick Start
+## **Quick Start**
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
@@ -95,7 +97,7 @@ feel free to skip to the [command summary](#command-summary) and experiment with
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## **Features**
 
 <div markdown="block" class="alert alert-info">
 
@@ -440,6 +442,7 @@ Format: `exit`
 
 [Return to Table of Contents](#table-of-contents)
 
+
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
@@ -449,6 +452,7 @@ Shows a message explaining how to access the help page.
 Format: `help`
 
 [Return to Table of Contents](#table-of-contents)
+
 
 ### Accessing command history
 
@@ -513,7 +517,7 @@ If your changes to the data file makes its format invalid, Source Control will d
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+## **FAQ**
 
 ### Double-clicking isn't opening the app! What can I do?
 Open your Command Prompt (Windows) or your Terminal (MacOS, Linux) and navigate to the folder your JAR file resides in.
@@ -546,7 +550,7 @@ as well as you alias preferences.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Glossary
+## **Glossary**
 
 Below is a table of the argument flags used in our document.
 
@@ -605,15 +609,13 @@ JSON | JavaScript Object Notation (JSON) is an open standard file format and dat
 Directory | It is where files in the computer are stored, or commonly known as folder.
 Path | A string of characters to uniquely identify the location in the computer. Absolute path starts from the root directory and relative path starts from the current working directory.
 
-
-
 [Return to Table of Contents](#table-of-contents)
 
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command Summary
+## **Command Summary**
 
 Action | Format | Examples
 --------|--------|----------
@@ -639,7 +641,7 @@ Action | Format | Examples
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Example Visual Aids
+## **Example Visual Aids**
 
 ### Addstudent Example 2
 Command: `addstudent -n Jonas Chow -i E0123456 -g T01A -g R01A` <br>
