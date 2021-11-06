@@ -25,7 +25,7 @@ You can reach us at the email `AniList@comp.nus.edu.sg`
 <img src="images/auhc99.png" width="200px">
 
 [[github](https://github.com/auhc99)]
-[[portfolio](team/minhong.md)]
+[[portfolio](team/auhc99.md)]
 
 * Role: Code Quality
 * Responsibilities: Looks after code quality, ensures adherence to coding standards
@@ -44,7 +44,7 @@ You can reach us at the email `AniList@comp.nus.edu.sg`
 <img src="images/luodan01.png" width="200px">
 
 [[github](http://github.com/luodan01)]
-[[portfolio](team/luodan.md)]
+[[portfolio](team/luodan01.md)]
 
 * Role: Integration
 * Responsibilities: Versioning the code, maintaining the code repository
@@ -54,7 +54,7 @@ You can reach us at the email `AniList@comp.nus.edu.sg`
 <img src="images/muhammad-faruq.png" width="200px">
 
 [[github](http://github.com/muhammad-faruq)]
-[[portfolio](team/faruq.md)]
+[[portfolio](team/muhammad-faruq.md)]
 
 * Role: Scheduling and tracking
 * Responsibilities: Defining, assigning, and tracking project tasks
