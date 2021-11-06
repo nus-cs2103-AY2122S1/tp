@@ -824,9 +824,22 @@ Preconditions: At least one Event has been added to Managera.
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Command Line Interface (CLI)**: A CLI is a text-based interface that processes commands to a computer program in the form of lines of text.
-* **Graphical User Interface (GUI)**: A GUI is a form of user interface through which users interact with electronic devices via visual indicator representations.
+* **Mainstream OS**: Windows, Linux, Unix, OS-X. <br>
+* **Command Line Interface (CLI)**: A CLI is a text-based interface that processes commands to a computer program in the form of lines of text.<br>
+* **Graphical User Interface (GUI)**: A GUI is a form of user interface through which users interact with electronic devices via visual indicator representations.<br>
+* **API**: The Application Programming Interface specifies the interface through which software and other programs interact.<br>
+* **Main Success Scenario (MSS)**: The most straightforward interaction for a given use case, which assumes that nothing goes wrong.<br>
+* **JSON**: JavaScript Object Notation, is a common file format which stores data in key-value pairs and arrays.<br>
+* **Participant**: A person that is participating in or attending some given event.<br>
+* **Event**: An event that will be conducted in real life e.g., a competition, meeting, social activity etc.<br>
+* **Command**: A command is a specific instruction that you give to Managera to perform a certain action, like adding a 
+  new Participant to the list. Commands will be the primary way that you will interact with Managera.<br>
+* **Parameter**: Parameters are pieces of data that must be passed to certain commands to tell Managera which actions to
+  perform. For example, the `done` command requires a single integer as a parameter so that it knows which event to mark
+  as done.<br>
+* **Prefix**: Prefixes are unique identifiers in front of parameters so that Managera understands what kind of values
+  they are. For example, the prefix "n/" lets Managera know that a name is expected to follow behind it, while the
+  prefix "d/" lets Managera know that a date is expected.<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
