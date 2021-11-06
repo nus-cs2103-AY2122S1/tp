@@ -1,7 +1,5 @@
 package seedu.edrecord.ui;
 
-import static seedu.edrecord.commons.core.Messages.MESSAGE_NO_MODULE_SELECTED;
-
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -14,6 +12,7 @@ import seedu.edrecord.model.module.Module;
  */
 public class StatusBarFooter extends UiPart<Region> {
 
+    public static final String MESSAGE_NO_MODULE_SELECTED = "No module selected";
     private static final String FXML = "StatusBarFooter.fxml";
 
     @FXML

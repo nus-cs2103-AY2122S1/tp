@@ -2,7 +2,6 @@ package seedu.edrecord.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.edrecord.commons.core.Messages;
 import seedu.edrecord.logic.commands.exceptions.CommandException;
 import seedu.edrecord.model.Model;
 import seedu.edrecord.model.module.Module;
@@ -22,6 +21,7 @@ public class CdCommand extends Command {
             + "Example: " + COMMAND_WORD + " CS1101S";
 
     public static final String MESSAGE_NO_SUCH_MODULE = "Module %s does not exist!";
+    public static final String MESSAGE_SUCCESS = "Switched to %s.";
 
     private final PartOfModulePredicate predicate;
 
@@ -39,8 +39,9 @@ public class CdCommand extends Command {
         }
 
         model.setModuleFilter(predicate);
-        return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+
+        String name = moduleCode.equals(WILDCARD_MODULE_CODE) ? "all modules" : moduleCode;
+        return new CommandResult(String.format(MESSAGE_SUCCESS, name));
     }
 
 

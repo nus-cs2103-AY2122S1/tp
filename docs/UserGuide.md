@@ -63,6 +63,8 @@ EdRecord is a **desktop app for managing student contacts, optimized for use via
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+* Scope of commands: All commands work within the currently selected module. If no module is selected, then the commands will work on all students across all modules.
+
 </div>
 
 ### Viewing help : `help`
@@ -123,7 +125,7 @@ Examples:
 
 ### Listing all students: `list`
 
-Shows a list of all students matching the specified tags or list of all students if no tags are specified.
+Shows a list of all students in the current module matching the specified tags or list of all students in the current module if no tags are specified.
 
 Format: `list [TAG]…​`
 
@@ -153,7 +155,7 @@ Format: `rm INDEX m/MODULE c/CLASS`
 
 ### Toggle view: `view`
 
-Toggle the view between showing student details and showing module's assignments.
+Toggle the view between showing student details and showing module's assignments. This command works on the filtered list, toggling the view for students currently listed.
 
 Format: `view (contacts/asg)`
 
@@ -227,6 +229,7 @@ Examples:
 * `mkasg n/Side quest 10 w/20 s/50`
 
 * This command can only be made after changing directory to a particular module (i.e `cd MODULE`).
+ 
 ### Delete Assignment: `dlasg`
 
 Deletes an assignment in the specified module.
@@ -259,7 +262,7 @@ Format: `dlgrade INDEX n/ASSIGNMENT`
 
 ### Locating students by name: `find`
 
-Finds students whose names contain any of the given keywords.
+Finds students whose names contain any of the given keywords *in the current module*. 
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -269,6 +272,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* If no module is selected, the scope of the command would be across all modules.
 
 Examples:
 * `find John` returns `john` and `John Doe`
