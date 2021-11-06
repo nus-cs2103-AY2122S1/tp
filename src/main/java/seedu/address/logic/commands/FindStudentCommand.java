@@ -28,10 +28,10 @@ public class FindStudentCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds student with the student ID from a module.\n"
             + "Parameters: "
             + PREFIX_MODULE_NAME + "MODULE NAME "
-            + PREFIX_STUDENT_ID + "STUDENT ID "
+            + PREFIX_STUDENT_ID + "STUDENT ID\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_MODULE_NAME + "CS2103 "
-            + PREFIX_STUDENT_ID + "A1234567A ";
+            + PREFIX_STUDENT_ID + "A1234567A";
 
     private final StudentId studentId;
     private final ModuleName moduleName;

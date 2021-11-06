@@ -40,7 +40,7 @@ public class AddStudentCommand extends AddCommand {
             + PREFIX_STUDENT_ID + "A1234567A "
             + PREFIX_NAME + "John Doe "
             + PREFIX_TELE_HANDLE + "@johndoe "
-            + PREFIX_EMAIL + "johnd@example.com ";
+            + PREFIX_EMAIL + "johnd@example.com";
 
     public static final String MESSAGE_ADD_STUDENT_SUCCESS = "New student added to the module: %1$s";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the module";
@@ -71,7 +71,7 @@ public class AddStudentCommand extends AddCommand {
                 if (module.hasStudent(studentToAdd)) {
                     throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
                 }
-                module.addStudent(studentToAdd);
+
                 // for each task in this module's taskList, add it to a new UniqueTaskList
                 // give the new UniqueTaskList to student after all tasks have been added
                 UniqueTaskList thisModuleTaskList = module.getTaskList();
@@ -85,6 +85,7 @@ public class AddStudentCommand extends AddCommand {
                     newStudentTaskList.add(taskToAdd);
                 }
                 studentToAdd.setTaskList(newStudentTaskList);
+                module.addStudent(studentToAdd);
                 return new CommandResult(String.format(MESSAGE_ADD_STUDENT_SUCCESS, studentToAdd));
             }
         }

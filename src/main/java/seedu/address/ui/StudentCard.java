@@ -65,8 +65,8 @@ public class StudentCard extends UiPart<Region> {
      * Fills up all the placeholders of this StudentCard.
      */
     void fillInnerParts() {
-        ObservableList<Task> taskList = student.getTaskList().asModifiableObservableList();
-        taskListPanel = new TaskListPanel(student.getTaskList().asModifiableObservableList());
+        ObservableList<Task> taskList = student.getTaskList().asUnmodifiableObservableList();
+        taskListPanel = new TaskListPanel(student.getTaskList().asUnmodifiableObservableList());
         taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
     }
 

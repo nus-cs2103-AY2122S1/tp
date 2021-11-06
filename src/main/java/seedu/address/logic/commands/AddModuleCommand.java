@@ -19,7 +19,7 @@ public class AddModuleCommand extends AddCommand {
             + ": Adds a module to TAB. "
             + "Parameters: "
             + PREFIX_MODULE_NAME + "MODULE NAME \n"
-            + "Example: " + AddCommand.COMMAND_WORD + " " + COMMAND_TYPE
+            + "Example: " + AddCommand.COMMAND_WORD + " " + COMMAND_TYPE + " "
             + PREFIX_MODULE_NAME + "CS2103 ";
 
     public static final String MESSAGE_SUCCESS = "New module added: %1$s";

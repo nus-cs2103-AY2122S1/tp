@@ -35,13 +35,13 @@ public class EditStudentCommand extends EditCommand {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits a student's information. Must provide at least "
-            + "one editable field (name/tele handle/email) to be edited. "
+            + "one editable field (name/tele handle/email) to be edited.\n"
             + "Parameters: "
             + PREFIX_MODULE_NAME + "MODULE NAME "
             + PREFIX_STUDENT_ID + "STUDENT ID "
-            + PREFIX_NAME + "EDITED NAME (OR) "
-            + PREFIX_TELE_HANDLE + "EDITED TELE HANDLE (OR) "
-            + PREFIX_EMAIL + "EDITED EMAIL \n"
+            + PREFIX_NAME + "EDITED NAME (AND/OR) "
+            + PREFIX_TELE_HANDLE + "EDITED TELE HANDLE (AND/OR) "
+            + PREFIX_EMAIL + "EDITED EMAIL\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_MODULE_NAME + "CS2103 "
             + PREFIX_STUDENT_ID + "A1234567A "
