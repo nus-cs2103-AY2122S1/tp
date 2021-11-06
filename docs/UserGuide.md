@@ -213,6 +213,7 @@ A module can have 4 different colour codes:
 * Inputs for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+
 </div>
 
 ### 3.5 Command Terminology
@@ -486,6 +487,12 @@ This section gives you the solutions to commonly asked questions.
 
 **Q**: Why is the module not included in the [MC Goal Progress](#325-mc-goal-progress) even though I have added it to my academic plan using the [take](#421-adding-a-module-to-the-academic-plan--take) command<br>
 **A**: Make sure that the module has the appropriate tag. Also make sure that the module is colour coded in green as specified [here](#33-module-explanation). Do remember that our MC Goal Progress only takes into account the modules that you have taken.
+
+**Q**: What should I do if I want to edit my data file directly? <br>
+**A**: Your data is saved as a JSON file `[JAR file location]/data/moduletracker.json`, you may directly access the file to edit your data. 
+<div markdown="span" class="alert alert-info">:information_source:
+Do note that if you edit your data file and NUS Mod Tracker deems it as an invalid data file, your data will be discarded and you will start with the default database modules.
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 

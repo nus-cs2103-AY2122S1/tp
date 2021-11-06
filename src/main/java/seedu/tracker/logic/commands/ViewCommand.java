@@ -15,7 +15,7 @@ public class ViewCommand extends Command {
     public static final String COMMAND_WORD = "view";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": View modules in specific semester."
+            + ": View modules in a specific semester."
             + "\nParameters: "
             + PREFIX_ACADEMIC_YEAR + "YEAR "
             + PREFIX_SEMESTER + "SEMESTER ";
