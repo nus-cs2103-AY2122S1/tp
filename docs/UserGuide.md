@@ -325,7 +325,7 @@ Examples:
 
 ### Setting the number of days before tasks are considered due soon: `reminder`
 
-1. Displays the current number of days prior to the date of tasks for them to be considered due soon. 
+1. Displays the current number of days prior to the date of tasks for them to be considered due soon.
 
    Format: `reminder`
 
@@ -355,8 +355,8 @@ Clears the persons list and task list displayed. Does not delete any persons or 
 
 Format: `clear`
 
-Example: 
-* `clear` Clears the persons list and task list in the GUI 
+Example:
+* `clear` Clears the persons list and task list in the GUI
 
 ### Accessing the cache
 

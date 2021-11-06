@@ -206,7 +206,7 @@ The following activity diagram summarises what happens when a user executes a `c
 
 * **Alternative 2:** Have only one panel. The person list gets replaced by task list when cat is executed.
 
-  * Pros: 
+  * Pros:
     * More convenient to implement.
 
   * Cons:
@@ -598,10 +598,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. ContactSH shows an error message.
 
       Use case resumes at step 2.
-  
+
 * 3b. User requests to delete all contacts in the list.
 
-    * 3b1. ContactSH deletes all contacts in the list. 
+    * 3b1. ContactSH deletes all contacts in the list.
 
       Use case ends.
 
@@ -687,7 +687,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3a. User requests for list of tasks of all users.
 
     * 3a1. ContactSH returns list of tasks of all users.
-  
+
       Use case resumes at step 5.
 
 * 3b. The list is empty.
