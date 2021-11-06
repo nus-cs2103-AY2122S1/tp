@@ -58,11 +58,11 @@ public class ViewCreator extends Creator {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
 
-        String studioRecord = student.getStudioRecord().getExtendedStudioRecords();
+        String studioRecord = student.getStudioRecord().visualizeForView();
         Label displayInfoPlaceHolder = new Label(studioRecord);
         participation.setContent(displayInfoPlaceHolder);
 
-        String assessments = student.getAssessment().getVisualizerDisplay();
+        String assessments = student.getAssessment().visualizeForView();
         Label assessmentPlaceHolder = new Label(assessments);
         testScores.setContent(assessmentPlaceHolder);
     }

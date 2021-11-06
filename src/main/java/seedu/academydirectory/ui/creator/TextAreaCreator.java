@@ -19,10 +19,10 @@ public class TextAreaCreator extends Creator {
      */
     public TextAreaCreator(AdditionalInfo<?> additionalInfo) {
         super(additionalInfo, FXML);
-        String history = (String) additionalInfo.get();
+        String contentToDisplay = (String) additionalInfo.get();
 
         resultDisplay.setWrapText(true);
-        resultDisplay.setText(history);
+        resultDisplay.setText(contentToDisplay);
     }
 
     @Override
