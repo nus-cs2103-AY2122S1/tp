@@ -273,6 +273,10 @@ Format: `addassessment INDEX a/ASSESSMENT_NAME s/SCORE`
   + The *total score* should be an integer greater than 0.
   + The *actual score* should be less than or equal to the *total score*.
 
+<div markdown="block" class="alert alert-info">
+:information_source: **Note**: `ASSESSMENT_NAME` is case sensitive. For example, this means that `Midterms` and `midterms` will refer to two different assessments and allowed to coexist.
+</div>
+
 Examples:
 * `addassessment 1 a/Finals s/13/30`
 * `addassessment 6 a/Participation s/3/5`<br>
