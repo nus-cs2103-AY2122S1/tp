@@ -3,7 +3,7 @@ layout: page
 title: Aakansha Narain's Project Portfolio Page
 ---
 
-### Project: Modulink
+### Project: ModuLink
 
 ModuLink is a desktop-based application for Computer Science (CS) students at NUS to facilitate finding teammates for group-based modules. It allows you to find students taking the modules you are interested in, search by their group status (to find students available to form or join groups), and much more. ModuLink has been developed using Java and has about 18k LoC.
 
@@ -16,7 +16,7 @@ Given below are my contributions to the project.
 
 * **New Feature**: Edit group status for modules on your profile
     * What it does: Allows the user to edit the group status of a module on their profile.
-    * Justification: This feature is makes updating the module tags easier instead of having to delete and add a new module tag every time the user’s group status changes.
+    * Justification: This feature makes updating the module tags easier instead of having to delete and add a new module tag every time the user’s group status changes.
     * Highlights: This was a new command to implement, and took about 340 LoC to develop.
 
 * **Feature Enhancements**: Added the Student ID, Telegram handle and GitHub username attribute fields to the profiles.
