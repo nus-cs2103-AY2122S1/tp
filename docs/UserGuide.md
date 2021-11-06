@@ -227,6 +227,7 @@ Examples:
 * `mkasg n/Side quest 10 w/20 s/50`
 
 * This command can only be made after changing directory to a particular module (i.e `cd MODULE`).
+ 
 ### Delete Assignment: `dlasg`
 
 Deletes an assignment in the specified module.
