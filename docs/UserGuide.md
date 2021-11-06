@@ -254,7 +254,7 @@ Format:
 
 ### Finding items: `find`
 
-Find items in the inventory. Note that display must be in inventory mode (see `list`).
+Find items in the inventory. Note that display must be in inventory mode (see [`list`](#listing-items-list)).
 
 Format: `find [ n/{name}... | id/{id}... | t/{tag}... ]`
 
@@ -288,20 +288,24 @@ processing an order, the revenue attained will be added into total revenue.
 :exclamation: Be sure not to close BogoBogo without saving your order! Any unsaved order will be lost. 
 </div>
 
-Remove items from the inventory by logging in an order. To enter order logging mode, use `sorder`. Exit the mode
-with `eorder`.
+The workflow of the order system is as follows:
+* Use `sorder` to enter ordering mode.
+* Use `iorder` to add items into your order.
+* Use `corder` to remove items from your order.
+* Use `eorder` to place your order.
+* Use `list order` to see current items in your order (see [`list`](#listing-items-list)).
 
 ![mange orders workflow](images/manageOrdersWorkflow.png)
 
 ### Start ordering: `sorder`
 
-Starts a new order.
+Starts a new order and enters ordering mode.
 
 Format: `sorder`
 
 ![sorder](images/screenshots/sorder.png)
 
-### Inputting an item into order: `iorder`
+### Adding an item into order: `iorder`
 
 Add an item into the current order. BogoBogo will let you know if there isn't enough items in the inventory to fulfill
 the order request.
@@ -315,8 +319,8 @@ Format:
 
 Flag    |  Argument      | Description                            | Remarks                                         |
 --------|----------------|----------------------------------------|-------------------------------------------------|
-&nbsp;  | name           | Name of the item to add to order.      |                                                 |
-`id/`   | id number      | Id number of the item to add to order. |                                                 |
+&nbsp;  | name           | Name of the item to add to order.      | Only alphanumeric characters (and spaces) are allowed.                                                |
+`id/`   | id number      | Id number of the item to add to order. | Must be an integer with no more than 6 digits.                                                |
 `c/`    | count          | Quantity of the item to add to order.  | Must be a positive integer, default value is 1. |
 
 Examples:
@@ -331,12 +335,12 @@ Examples:
 Cancels the specified order from the current order.
 
 Format:
-`corder [ {name} | id/{id number} ] (c/COUNT)`
+`corder [ {name} | id/{id} ] (c/COUNT)`
 
 Flag    |  Argument      | Description                                 | Remarks                                         |
 --------|----------------|---------------------------------------------|-------------------------------------------------|
-&nbsp;  | name           | Name of the item to remove from order.      |                                                 |
-`id/`   | id number      | Id number of the item to remove from order. |                                                 |
+&nbsp;  | name           | Name of the item to remove from order.      | Only alphanumeric characters (and spaces) are allowed.                                                |
+`id/`   | id number      | Id number of the item to remove from order. | Must be an integer with no more than 6 digits.                                                |
 `c/`    | count          | Quantity of the item to remove from order.  | Must be a positive integer, default value is 1. |
 
 Examples:

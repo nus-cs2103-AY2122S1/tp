@@ -54,7 +54,20 @@ Given below are my contributions to the project.
           structure [\#177](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/177)
         * Refine and update class diagrams to make them more and clean and
           readable [\#178](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/178/files?authenticity_token=cnwcniV%2B3SlxviaiSsFhbzbBAYOnwhmeY2huI3o3cGoSb8zemdrQDT4cW%2B9c4lGKPdVT4ZxW%2BANMgfyP%2FE269A%3D%3D&file-filters%5B%5D=.png)
-        * Draw object diagrams for Observer pattern.
+        * Draw object diagrams for Observer pattern. [\#184](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/184)
+
+* **Manual Testing**:
+   * System Testing:
+        * Tests all commands with positive and negative EP cases.
+        * Log and report bugs to team for bug fix solutions.
+   * Acceptance Testing:
+        * Tests the app against User Guide.
+        * Fix User Guide inconsistency, ambiguity, and errors.
+        * Log and report bugs and possible improvements to team for bug fix solutions. (
+            [\#197](https://github.com/AY2122S1-CS2103-F10-2/tp/issues/197), 
+            [\#198](https://github.com/AY2122S1-CS2103-F10-2/tp/issues/198),
+            [\#199](https://github.com/AY2122S1-CS2103-F10-2/tp/issues/199))
+   
 
 * **Community**:
     * PRs reviewed: [\#37](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/37)
