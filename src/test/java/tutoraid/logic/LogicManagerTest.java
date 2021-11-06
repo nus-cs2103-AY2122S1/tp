@@ -25,10 +25,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import tutoraid.commons.core.Messages;
+import tutoraid.commons.exceptions.DataConversionException;
 import tutoraid.logic.commands.CommandResult;
 import tutoraid.logic.commands.ListCommand;
 import tutoraid.logic.commands.exceptions.CommandException;
 import tutoraid.logic.parser.exceptions.ParseException;
+import tutoraid.model.LessonBook;
 import tutoraid.model.Model;
 import tutoraid.model.ModelManager;
 import tutoraid.model.ReadOnlyLessonBook;
@@ -36,6 +38,7 @@ import tutoraid.model.ReadOnlyStudentBook;
 import tutoraid.model.UserPrefs;
 import tutoraid.model.lesson.Lesson;
 import tutoraid.model.student.Student;
+import tutoraid.model.util.SampleDataUtil;
 import tutoraid.storage.JsonTutorAidLessonStorage;
 import tutoraid.storage.JsonTutorAidStudentStorage;
 import tutoraid.storage.JsonUserPrefsStorage;
@@ -53,11 +56,12 @@ public class LogicManagerTest {
     private Logic logic;
 
     @BeforeEach
-    public void setUp() {
-        JsonTutorAidStudentStorage studentBookStorage =
-                new JsonTutorAidStudentStorage(temporaryFolder.resolve("tutorAidStudents.json"));
+    public void setUp() throws DataConversionException {
         JsonTutorAidLessonStorage lessonBookStorage =
                 new JsonTutorAidLessonStorage(temporaryFolder.resolve("tutorAidLessons.json"));
+        JsonTutorAidStudentStorage studentBookStorage =
+                new JsonTutorAidStudentStorage(temporaryFolder.resolve("tutorAidStudents.json"),
+                        lessonBookStorage.readLessonBook().orElseGet(SampleDataUtil::getSampleLessonBook));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         StorageManager storage = new StorageManager(studentBookStorage, lessonBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
@@ -194,7 +198,7 @@ public class LogicManagerTest {
      */
     private static class JsonTutorAidStudentIoExceptionThrowingStub extends JsonTutorAidStudentStorage {
         private JsonTutorAidStudentIoExceptionThrowingStub(Path filePath) {
-            super(filePath);
+            super(filePath, new LessonBook());
         }
 
         @Override

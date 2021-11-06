@@ -23,7 +23,6 @@ import tutoraid.model.ReadOnlyStudentBook;
 import tutoraid.model.ReadOnlyUserPrefs;
 import tutoraid.model.StudentBook;
 import tutoraid.model.UserPrefs;
-import tutoraid.model.lesson.exceptions.LessonNotFoundException;
 import tutoraid.model.util.SampleDataUtil;
 import tutoraid.storage.JsonTutorAidLessonStorage;
 import tutoraid.storage.JsonTutorAidStudentStorage;

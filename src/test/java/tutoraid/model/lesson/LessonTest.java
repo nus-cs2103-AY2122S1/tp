@@ -28,7 +28,6 @@ public class LessonTest {
         Lesson editedMathsOne = new LessonBuilder(TypicalLessons.MATHS_ONE).withLessonName("Maths 1")
                 .withCapacity("51")
                 .withPrice("101")
-                .withStudents(new ArrayList<>(Arrays.asList()))
                 .withTiming("1001-1201")
                 .build();;
         assertTrue(TypicalLessons.MATHS_ONE.isSameLesson(editedMathsOne));

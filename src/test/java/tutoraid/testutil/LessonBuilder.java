@@ -18,7 +18,6 @@ public class LessonBuilder {
     public static final String DEFAULT_LESSON_NAME = "Maths 3";
     public static final String DEFAULT_LESSON_CAPACITY = "50";
     public static final String DEFAULT_LESSON_PRICE = "100";
-    public static final ArrayList<Student> DEFAULT_LESSON_STUDENTS = new ArrayList<Student>();
     public static final String DEFAULT_LESSON_TIMING = "1000-1200";
 
     private LessonName lessonName;
@@ -34,7 +33,6 @@ public class LessonBuilder {
         lessonName = new LessonName(DEFAULT_LESSON_NAME);
         capacity = new Capacity(DEFAULT_LESSON_CAPACITY);
         price = new Price(DEFAULT_LESSON_PRICE);
-        students = new Students(DEFAULT_LESSON_STUDENTS);
         timing = new Timing(DEFAULT_LESSON_TIMING);
     }
 
@@ -45,7 +43,6 @@ public class LessonBuilder {
         lessonName = lessonToCopy.getLessonName();
         capacity = lessonToCopy.getCapacity();
         price = lessonToCopy.getPrice();
-        students = lessonToCopy.getStudents();
         timing = lessonToCopy.getTiming();
     }
 
@@ -70,14 +67,6 @@ public class LessonBuilder {
      */
     public LessonBuilder withPrice(String price) {
         this.price = new Price(price);
-        return this;
-    }
-
-    /**
-     * Sets the {@code Students} of the {@code Lesson} that we are building.
-     */
-    public LessonBuilder withStudents(ArrayList<Student> students) {
-        this.students = new Students(students);
         return this;
     }
 

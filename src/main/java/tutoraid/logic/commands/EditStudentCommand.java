@@ -5,7 +5,6 @@ import static tutoraid.logic.parser.CliSyntax.PREFIX_PARENT_NAME;
 import static tutoraid.logic.parser.CliSyntax.PREFIX_PARENT_PHONE;
 import static tutoraid.logic.parser.CliSyntax.PREFIX_STUDENT_NAME;
 import static tutoraid.logic.parser.CliSyntax.PREFIX_STUDENT_PHONE;
-import static tutoraid.model.Model.PREDICATE_SHOW_ALL_LESSONS;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,7 +14,6 @@ import tutoraid.commons.core.index.Index;
 import tutoraid.commons.util.CollectionUtil;
 import tutoraid.logic.commands.exceptions.CommandException;
 import tutoraid.model.Model;
-import tutoraid.model.lesson.Lesson;
 import tutoraid.model.student.Lessons;
 import tutoraid.model.student.ParentName;
 import tutoraid.model.student.Phone;
