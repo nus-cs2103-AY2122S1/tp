@@ -26,7 +26,7 @@ valid])
     :Replace the specified Person in the
     AddressBook with the new edited Person;
 
-    :GUI Person Panel updated with
+    :GUI updated with
     new correct list of applicants;
 else ([else])
 
