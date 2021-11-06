@@ -46,12 +46,12 @@ public class FilterCommand extends Command {
         requireNonNull(model);
         String output = "";
 
-        // subject and grade wil never both be null
+        // subject and grade will never both be null
         if (grade != null) {
             model.updateFilteredStudentList(new StudentIsOfSpecifiedGrade(grade));
             if (subject != null) {
                 model.updateFilteredLessonList(new LessonIsOfSpecifiedGradeAndSubject(grade, subject));
-            } else {
+            } else { // subject == null
                 model.updateFilteredLessonList(new LessonIsOfSpecifiedGrade(grade));
             }
             output = studentAndLessonFoundOutput(model.getFilteredStudentList().size(),

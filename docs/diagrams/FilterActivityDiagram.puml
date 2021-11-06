@@ -36,7 +36,10 @@ else ([filter by single variable])
 
     endif
 endif
-:UI updated with filters applied;
+:UI updated with
+the corresponding result
+(with filter applied or
+error message);
 stop
 
 @enduml
