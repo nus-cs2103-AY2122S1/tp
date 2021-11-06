@@ -11,7 +11,7 @@ else ([else])
     stop
 endif
 
-if () then ([assessment name are valid\n      and not duplicated])
+if () then ([assessment names are valid\n      and not duplicated])
     :Make new assessments;
 else ([else])
     :Display an error message;
