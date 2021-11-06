@@ -154,9 +154,4 @@ public class FriendsList implements ReadOnlyFriendsList {
             || (other instanceof FriendsList // instanceof handles nulls
             && friends.equals(((FriendsList) other).friends));
     }
-
-    @Override
-    public int hashCode() {
-        return friends.hashCode();
-    }
 }

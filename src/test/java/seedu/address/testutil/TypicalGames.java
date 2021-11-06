@@ -36,7 +36,7 @@ public class TypicalGames {
     } // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code GamesList} with all the typical persons.
      */
     public static GamesList getTypicalGamesList() {
         GamesList ab = new GamesList();
@@ -48,6 +48,6 @@ public class TypicalGames {
 
     public static List<Game> getTypicalGames() {
         return new ArrayList<>(Arrays.asList(MINECRAFT, LEAGUE_OF_LEGENDS, FORTNITE, GENSHIN_IMPACT, GTA_V,
-                ANIMAL_CROSSING, VALORANT));
+                ANIMAL_CROSSING, VALORANT, CSGO));
     }
 }

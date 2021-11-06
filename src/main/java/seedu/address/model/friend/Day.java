@@ -9,7 +9,6 @@ import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 import seedu.address.model.friend.exceptions.InvalidDayTimeException;
 import seedu.address.model.time.exceptions.InvalidHourOfDayException;
@@ -41,6 +40,17 @@ public class Day {
     public Day(DayOfWeek dayOfWeek) {
         requireNonNull(dayOfWeek);
         this.timeSlots = new boolean[NUMBER_OF_SLOTS];
+        this.dayOfWeek = dayOfWeek;
+    }
+
+    /**
+     * Constructs a {@code Day}.
+     *
+     * @param timeSlots Timeslots of day.
+     * @param dayOfWeek A day of the week.
+     */
+    public Day(boolean[] timeSlots, DayOfWeek dayOfWeek) {
+        this.timeSlots = timeSlots;
         this.dayOfWeek = dayOfWeek;
     }
 
@@ -98,6 +108,15 @@ public class Day {
     }
 
     /**
+     * Gets a copy of timeslots
+     *
+     * @return Copy of Timeslots
+     */
+    public boolean[] getTimeSlots() {
+        return timeSlots.clone();
+    }
+
+    /**
      * Gets free time slots grouped.
      * eg. groups 0800-0900 (index 8) and 0900-1000 (index 9) to [0800, 1000]
      *
@@ -129,20 +148,15 @@ public class Day {
     @Override
     public boolean equals(Object o) {
         if (this == o) {
-            return true;
+            return true; // short-circuit if same object
         }
-        if (o == null || getClass() != o.getClass()) {
+
+        if (!(o instanceof Day)) { // handles null
             return false;
         }
+
         Day day = (Day) o;
         return Arrays.equals(timeSlots, day.timeSlots) && dayOfWeek == day.dayOfWeek;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = Objects.hash(dayOfWeek);
-        result = 31 * result + Arrays.hashCode(timeSlots);
-        return result;
     }
 
     @Override

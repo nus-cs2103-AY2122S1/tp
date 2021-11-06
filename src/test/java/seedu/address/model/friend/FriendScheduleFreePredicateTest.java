@@ -13,6 +13,9 @@ import seedu.address.model.friend.exceptions.InvalidDayTimeException;
 import seedu.address.model.time.HourOfDay;
 import seedu.address.testutil.FriendBuilder;
 
+/**
+ * Runtime-unreachable code present in test().
+ */
 public class FriendScheduleFreePredicateTest {
 
     @Test
@@ -22,7 +25,6 @@ public class FriendScheduleFreePredicateTest {
         DayOfWeek dayOfWeekMonday = DayOfWeek.of(1);
         DayOfWeek dayOfWeekSunday = DayOfWeek.of(7);
 
-
         FriendScheduleFreePredicate friendScheduleFreePredicateOne =
             new FriendScheduleFreePredicate(hourZero, dayOfWeekMonday);
         FriendScheduleFreePredicate friendScheduleFreePredicateSameFields =
@@ -31,14 +33,14 @@ public class FriendScheduleFreePredicateTest {
         // same object -> equal
         assertEquals(friendScheduleFreePredicateOne, friendScheduleFreePredicateOne);
 
-        // same fields -> equal
-        assertEquals(friendScheduleFreePredicateOne, friendScheduleFreePredicateSameFields);
+        // null -> not equal
+        assertNotEquals(friendScheduleFreePredicateOne, null);
 
         // different types -> not equal
-        assertNotEquals(1, friendScheduleFreePredicateOne);
+        assertNotEquals(friendScheduleFreePredicateOne, "String");
 
-        // null -> not equal
-        assertNotEquals(null, friendScheduleFreePredicateOne);
+        // same fields -> equal
+        assertEquals(friendScheduleFreePredicateOne, friendScheduleFreePredicateSameFields);
 
         // different hourOfDay -> not equal
         FriendScheduleFreePredicate differentHourPredicate = new FriendScheduleFreePredicate(
@@ -74,7 +76,7 @@ public class FriendScheduleFreePredicateTest {
         Friend freeFriendDuringTenToTwelveMonday = new FriendBuilder().withFriendId("misc")
             .withSchedule(tenToTwelveFree).build();
 
-        // negative test for invalid hour but valid day
+        // negative test for busy hour but correct day
         FriendScheduleFreePredicate isFreeAtNineMonday = new FriendScheduleFreePredicate(new HourOfDay(9),
             DayOfWeek.of(1));
         assertFalse(isFreeAtNineMonday.test(freeFriendDuringTenToTwelveMonday));
@@ -83,7 +85,7 @@ public class FriendScheduleFreePredicateTest {
             DayOfWeek.of(1));
         assertFalse(isFreeAtTwelveMonday.test(freeFriendDuringTenToTwelveMonday));
 
-        // negative test for invalid hour but valid day
+        // negative test for correct hour but busy day
         FriendScheduleFreePredicate isFreeAtTenTuesDay = new FriendScheduleFreePredicate(new HourOfDay(10),
             DayOfWeek.of(2));
         assertFalse(isFreeAtNineMonday.test(freeFriendDuringTenToTwelveMonday));

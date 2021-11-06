@@ -18,7 +18,7 @@ public class Schedule {
     public static final String MESSAGE_INVALID_SCHEDULE = "Schedule must contain 7 valid days, from Monday to Sunday.";
 
     private static final String MESSAGE_DAYTIME_INVALID_RANGE =
-        "Day value must be an Integer within 1 - 7 (inclusive).";
+            "Day value must be an Integer within 1 - 7 (inclusive).";
     private static final int SCHEDULE_START_INDEX = 1;
     private static final int SCHEDULE_END_INDEX = 7;
     private static final int EXPECTED_LIST_LENGTH = (SCHEDULE_END_INDEX - SCHEDULE_START_INDEX + 1);
@@ -31,6 +31,25 @@ public class Schedule {
         this.daysOfWeek = new ArrayList<>();
         for (int i = SCHEDULE_START_INDEX; i <= SCHEDULE_END_INDEX; i++) {
             daysOfWeek.add(new Day(DayOfWeek.of(i)));
+        }
+    }
+
+    /**
+     * Constructs a copy of a {@code Schedule}.
+     *
+     * @param schedule Schedule
+     */
+    public Schedule(Schedule schedule) {
+        this.daysOfWeek = new ArrayList<>();
+        // if invalid schedule passed in, create empty schedule
+        if (!isValidSchedule(schedule)) {
+            for (int i = SCHEDULE_START_INDEX; i <= SCHEDULE_END_INDEX; i++) {
+                daysOfWeek.add(new Day(DayOfWeek.of(i)));
+            }
+        } else {
+            for (int i = SCHEDULE_START_INDEX; i <= SCHEDULE_END_INDEX; i++) {
+                daysOfWeek.add(new Day(schedule.daysOfWeek.get(i - 1).getTimeSlots(), DayOfWeek.of(i)));
+            }
         }
     }
 
@@ -61,7 +80,7 @@ public class Schedule {
      * @throws InvalidDayTimeException   thrown when dayOfWeek given exceeds valid range.
      * @throws InvalidHourOfDayException thrown when hourOfDay given exceeds valid range.
      */
-    public boolean isTimeslotAvailable(int hourOfDay, int dayOfWeek)
+    public boolean isTimeSlotAvailable(int hourOfDay, int dayOfWeek)
             throws InvalidDayTimeException, InvalidHourOfDayException {
         if (dayOfWeek < SCHEDULE_START_INDEX || dayOfWeek > SCHEDULE_END_INDEX) {
             throw new InvalidDayTimeException(MESSAGE_DAYTIME_INVALID_RANGE);
@@ -126,10 +145,5 @@ public class Schedule {
 
     private int convertToListIndex(int dayOfWeek) {
         return dayOfWeek - 1;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(daysOfWeek);
     }
 }

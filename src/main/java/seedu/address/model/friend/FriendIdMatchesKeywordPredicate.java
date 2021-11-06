@@ -12,10 +12,6 @@ public class FriendIdMatchesKeywordPredicate implements Predicate<Friend> {
         this.keyword = keyword;
     }
 
-    public String getKeyword() {
-        return keyword;
-    }
-
     @Override
     public boolean test(Friend friend) {
         return keyword.equalsIgnoreCase(friend.getFriendId().value);

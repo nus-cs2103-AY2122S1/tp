@@ -8,7 +8,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-public class SkillLevelTest {
+public class SkillValueTest {
     @Test
     public void constructor_invalidSkillValue_throwsIllegalArgumentException() {
         Integer outsideLowerBounds = -1;
@@ -38,14 +38,28 @@ public class SkillLevelTest {
     }
 
     @Test
+    public void isValidSkillValueString_nonIntegerString_returnsFalse() {
+        String notAnInteger = "NotAnInteger";
+        assertFalse(SkillValue.isValidSkillValueString(notAnInteger));
+    }
+
+    @Test
     public void equals() {
-        // same skillValue is equal
-        assertEquals(new SkillValue(10), new SkillValue(10));
-        // different skillValue not equal
-        assertNotEquals(new SkillValue(10), new SkillValue(9));
-        // not equals to null
-        assertNotEquals(new SkillValue(10), null);
-        // different type and different from int
-        assertNotEquals(new SkillValue(10), 10);
+        SkillValue skillValue = new SkillValue(10);
+
+        // same object
+        assertEquals(skillValue, skillValue);
+
+        // null
+        assertNotEquals(skillValue, null);
+
+        // different type
+        assertNotEquals(skillValue, "String");
+
+        // different object, same identity fields
+        assertEquals(skillValue, new SkillValue(skillValue.skillVal));
+
+        // different identity fields
+        assertNotEquals(skillValue, new SkillValue(9));
     }
 }

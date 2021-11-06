@@ -28,16 +28,16 @@ public class FriendNameContainsKeywordsPredicateTest {
         // same object -> returns true
         assertEquals(firstPredicate, firstPredicate);
 
+        // null -> returns false
+        assertNotEquals(firstPredicate, null);
+
+        // different types -> returns false
+        assertNotEquals(firstPredicate, "String");
+
         // same values -> returns true
         FriendNameContainsKeywordsPredicate firstPredicateCopy =
                 new FriendNameContainsKeywordsPredicate(firstPredicateKeywordList);
         assertEquals(firstPredicateCopy, firstPredicate);
-
-        // different types -> returns false
-        assertNotEquals(1, firstPredicate);
-
-        // null -> returns false
-        assertNotEquals(null, firstPredicate);
 
         // different person -> returns false
         assertNotEquals(secondPredicate, firstPredicate);

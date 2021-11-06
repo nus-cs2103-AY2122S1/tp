@@ -2,8 +2,6 @@ package seedu.address.model.gamefriendlink;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Objects;
-
 import seedu.address.model.friend.FriendId;
 import seedu.address.model.game.GameId;
 
@@ -108,11 +106,6 @@ public class GameFriendLink {
                 && otherLink.getSkillValue().equals(getSkillValue());
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(gameId, friendId, userName);
-    }
-
     /**
      * Format state as text for viewing.
      */
@@ -121,7 +114,9 @@ public class GameFriendLink {
         builder.append("Game ID: ")
                 .append(getGameId())
                 .append(" Username: ")
-                .append(getUserName());
+                .append(getUserName())
+                .append(" Skill: ")
+                .append(getSkillValue());
 
         return builder.toString();
     }

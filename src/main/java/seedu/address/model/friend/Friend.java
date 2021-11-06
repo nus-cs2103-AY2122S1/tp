@@ -8,7 +8,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 import seedu.address.model.friend.exceptions.GameLinkNotFoundException;
 import seedu.address.model.friend.exceptions.InvalidDayTimeException;
@@ -155,7 +154,7 @@ public class Friend {
      */
     public boolean isFriendScheduleFree(HourOfDay hour, DayOfWeek dayOfWeek)
             throws InvalidHourOfDayException, InvalidDayTimeException {
-        return this.schedule.isTimeslotAvailable(hour.getHour(), dayOfWeek.getValue());
+        return this.schedule.isTimeSlotAvailable(hour.getHour(), dayOfWeek.getValue());
     }
 
     /**
@@ -179,25 +178,22 @@ public class Friend {
     }
 
     @Override
-    public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(friendId);
-    }
-
-    @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append("Friend ID: ")
                 .append(getFriendId())
-                .append("; Name: ")
-                .append(getFriendName());
+                .append("; ")
+                .append("Name: ")
+                .append(getFriendName())
+                .append("; ");
 
         Collection<GameFriendLink> gameFriendLinks = getGameFriendLinks().values();
         if (!gameFriendLinks.isEmpty()) {
-            builder.append("; Games: ");
+            builder.append("Games: ");
             gameFriendLinks.forEach(builder::append);
             builder.append(" ");
         }
+
         builder.append(schedule);
         return builder.toString();
     }

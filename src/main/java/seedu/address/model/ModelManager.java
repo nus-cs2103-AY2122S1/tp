@@ -292,13 +292,6 @@ public class ModelManager implements Model {
         return gamesList.getGame(gameId);
     }
 
-    @Override
-    public void setGame(Game target, Game editedGame) {
-        requireAllNonNull(target, editedGame);
-
-        gamesList.setGame(target, editedGame);
-    }
-
     //=========== Filtered Game List Accessors =============================================================
 
     @Override

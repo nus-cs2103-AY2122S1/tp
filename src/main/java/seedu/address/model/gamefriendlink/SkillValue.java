@@ -38,7 +38,7 @@ public class SkillValue {
         requireNonNull(skillValString);
         try {
             int skillVal = Integer.parseInt(skillValString);
-            return skillVal >= SKILL_LEVEL_MIN && skillVal <= SKILL_LEVEL_MAX;
+            return validateSkillValue(skillVal);
         } catch (NumberFormatException nfe) {
             return false;
         }
