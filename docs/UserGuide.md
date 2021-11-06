@@ -17,10 +17,10 @@ Welcome to LeadsForce's User Guide! Find answers and step-by-step instructions t
   * [1.1 Reading this User Guide](#11-reading-this-user-guide)
 * [**2. Quick Start**](#2-quick-start)
 * [**3. Client Information**](#3-client-information)
-    * [3.1 Duplicate Clients](#31-nextmeeting) 
+    * [3.1 Duplicate Clients](#31-duplicate-clients) 
     * [3.2 Next Meeting Attribute](#32-next-meeting-attribute) 
-    * [3.3 Last Meeting Attribute](#33-last-meeting-attribute)
-* [**4. Navigating LeadsForce**](#4-navigating-leadsForce)
+    * [3.3 Last Met Attribute](#33-last-met-attribute)
+* [**4. Navigating LeadsForce**](#4-navigating-leadsforce)
 * [**5. Features**](#5-features)
     * [5.1 Create new contact: add](#51-create-new-contact--add)
     * [5.2 Retrieve particular contact: view](#52-retrieve-particular-contact--view)
@@ -44,7 +44,7 @@ Welcome to LeadsForce's User Guide! Find answers and step-by-step instructions t
 * [**8. Troubleshooting**](#8-troubleshooting)
 * [**9. Bugs Reporting**](#9-bugs-reporting)
 * [**10. Command Summary**](#10-command-summary)
-    * [10.1 Address Book Specific Commands](#101-client-specific-commands)
+    * [10.1 Client Management Commands](#101-client-management-commands)
     * [10.2 Multiple Address Book Commands](#102-multiple-address-book-commands)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -150,47 +150,50 @@ The `Last Met` attribute refers to the last date the user (typically a financial
 | :-: | :-- |
 
 --------------------------------------------------------------------------------------------------------------------
+
 ## 4. Navigating LeadsForce
-
 This section details the various components of LeadsForce's interface and how you could go about navigating our application. An overview of LeadsForce's interface is shown below.
-![Ui](images/NavigatingLeadsForce.png)
+<img src=images/NavigatingLeadsForce.png />
 
-### 4.1 Command 
-The command portion is where you will be able to input commands into LeadsForce.
-
+### 4.1 Command View
+<p align="center">
 <img src=images/CommandViewInterface.png width="500"/>
+</p>
 <br> 
-The command view consist of the following components: 
+The command view is where you will be able to input commands into LeadsForce. The command view consist of the following components: <br> 
 
-1. Toolsbar <br> 
+1. **Toolsbar** <br> 
    • help bar that directs users to LeadsForce's user guide <br> 
    • File bar where users can exit the app <br> 
    • Address Book bar which allows users to switch between address books <br> 
    • Themes bar which allows users to switch between different themes <br> 
-   
-2. Command Box <br>
+2. **Command Box** <br>
    • This is where users can input their commands into LeadsForce <br> 
    
-3. Command Result Display <br>
+3. **Command Result Display** <br>
    • This is where LeadsForce will display details of the commands from the app <br> 
    
-4. Filter tag <br>
-   • For tags that clients have, they will show up here in the filter tag. By clicking on one of these tags and pressing `enter`, LeadsForce can filter out clients with based on the tag that is chosen. More details of the `filter` command can be found [here](#59-filter-current-list-by-keywords--`filter`)
+4. **Filter tag** <br>
+   • For tags that clients have, they will show up here in the filter tag. By clicking on one of these tags and pressing `enter`, LeadsForce can filter out clients with based on the tag that is chosen. Further details of the `filter` command can be found [here](#59-filter-current-list-by-keywords--filter)
 
-### 4.2 Client List 
-The client list view consist of a list of clients. <br>  
-• This list will change according to the commands used - `search`, `filter`, `list`, `clear`, among others. <br>
-• The client list view also provides users with an overview of the client's information. <br> 
+### 4.2 Client List View 
+<p align="center">
 <img src=images/ClientListView.png width="500"/>
-<br>
+</p>
+The client list view consist of the list of clients from the user's address book,and provides an overview of their clients' infomation.
 
-### 4.3 Client Info 
-The client information view provides in-depth information about the client's attributes. Using the [`view`](#52-retrieve-particular-contact--view) command, users can view the client information in the client info view. <br> 
+  • This list will change according to the commands used such as `list` and `search`. <br> 
+  • When opening the application, all clients in an address book will be shown. <br>
+  
+### 4.3 Client Info View 
+<p align="center">
 <img src=images/ClientInfoView.png width="500"/>
-<br> 
-### 4.3 Meeting Schedule 
-The meeting schedule view showcases the upcoming meetings that the client has, and they are sorted from the earliest to the latest meeting that the client has. When first booting up the application, all meetings will be shown. Using the [`Schedule`](#57-find-meeting-schedule--schedule) command can change the list of meetings shown to the user.
+</p>
 
+The client information view provides in-depth information about the client's attributes. Using the [`View`](#52-retrieve-particular-contact--view) command, users can view the client information in the client info view. 
+
+### 4.3 Meeting Schedule View
+The meeting schedule view showcases the upcoming meetings that the client has, and they are sorted from the earliest to the latest meeting that the client has. When first booting up the application, all meetings will be shown. Using the [`Schedule`](#57-find-meeting-schedule--schedule) command can change the list of meetings shown to the user.
 
 ## 5. Features
 
@@ -228,9 +231,10 @@ View client's information in detail.
 | :-: | :-- |
 | **example** | • `view 1` would be used to view client 1's information|
 
-**Expected Outcome:**
-For instance, if `Alex Yeoh` is the client with client ID 1, the following will be shown in the client info portion of LeadsForce. 
+**Expected Outcome:** <br> 
+For instance, if `Alex Yeoh` is the client with client ID 1, the following will be shown in the client info view of LeadsForce. <br> 
 <img src=images/ClientInfoView.png width="300"/>
+
  
 ### 5.3 Update Existing Contact : `edit`
 
@@ -402,7 +406,6 @@ List all the name of all the existing address books
 2. If you get the version information, and have made sure that the java version is `11` and above. You have downloaded the correct java version, and can skip the rest of this tutorial.
 3. Otherwise, head to the Oracle website [here](https://www.oracle.com/java/technologies/downloads/#java11-mac) to download the mac version of the java JDK.
  
- 
 **For Windows users,**
  
 1. Open the command prompt, and type `java -version`, and press `enter`. 
@@ -420,7 +423,7 @@ However, if you do happen to encounter any bugs while using LeadsForce, please g
 
 This section details all commands in using the features in LeadsForce.
 
-### 10.1 Address Book Specific Commands
+### 10.1 Client Management Commands
 Action | Format | Examples
 --------|---------|---------
 **Create** | `add n/{CLIENT'S NAME} e/{EMAIL} <attribute>/{OTHER ATTRIBUTES}...`| add n/benedict e/benedict@gmail.com p/90909898 r/3 |
