@@ -937,7 +937,8 @@ Brings you to TAB's calendar interface for you to see all your scheduled lessons
 Format: `calendar`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-All the other commands in this [Viewing your Calendar](#viewing-your-calendar) section act as a shortcut that opens the calendar as well!
+
+All the other commands in this [Managing Your Schedule](#managing-your-schedule) section act as a shortcut that opens the calendar as well!
 For example, the `day` command below opens the calendar, **and** goes to the day page. You can skip typing `calendar`! 
 </div>
 
