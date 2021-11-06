@@ -33,7 +33,7 @@ title: Developer Guide
       - [Implementation Rationale](#implementation-rationale-1)
       - [Design Considerations:](#design-considerations-1)
         - [Aspect: Similar participant IDs:](#aspect-similar-participant-ids)
-    - [Add/Remove Participant to/from event by index](#addremove-participant-tofrom-event-by-index)
+    - [Add/Remove Participant to/from event - enroll/expel](#addremove-participant-tofrom-event---enrollexpel)
       - [Implementation Details](#implementation-details-2)
       - [Implementation Rationale](#implementation-rationale-2)
     - [View Event Details feature](#view-event-details-feature)
@@ -404,8 +404,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ![ViewCommandActivityDiagram](images/DG images/ViewCommandActivityDiagram.png)
 
-
-### Add/Remove Participant to/from event by index
+### Add/Remove Participant to/from event - enroll/expel
 
 This feature allows Managera users to quickly add/remove participant to/from event according to the current filtered
  list of events and participant visible to user.
@@ -413,19 +412,19 @@ This feature allows Managera users to quickly add/remove participant to/from eve
 #### Implementation Details
 
 The `AddressBookParser` is responsible for determining the type of `Command` to be created from user input, 
-hence we add new `commandType` cases for `AddParticipantToEventByIndexCommand` and `RemoveParticipantFromEventByIndexCommand` in `AddressBookParser`
+hence we add new `commandType` cases for `AddParticipantToEventCommand` and `RemoveParticipantFromEventCommand` in `AddressBookParser`
 
-A `AddParticipantToEventByIndexParser` parses the user's input and obtain indexes for Participant and Event respectively. 
-If the indexes given by the user are not zero-based indexes, a `ParseException` will be thrown before `AddParticipantByIndexParser` creates the command itself to prevent any further error. 
-If all indexes are valid, a `AddParticipantByIndexCommand` will be created by the parser.
+A `AddParticipantToEventParser` parses the user's input and obtain indexes for Participant and Event respectively. 
+If the indexes given by the user are not zero-based indexes, a `ParseException` will be thrown before `AddParticipantToEventParser` creates the command itself to prevent any further error. 
+If all indexes are valid, a `AddParticipantToEventCommand` will be created by the parser.
 
-The `AddParticipantByIndexCommand` created by `AddParticipantToEventByIndexParser` contains 2 zero-based indexes. 
+The `AddParticipantToEventCommand` created by `AddParticipantToEventParser` contains 2 zero-based indexes. 
 The first one is used to identify the `Participant` while the second is used to identify the `Event`. 
 When the command is executed, the `model` first tries to obtain Participant at specified index (if unsuccessful, a `CommandException` will be thrown accordingly) and then event will be retrieved in the same manner (if unsuccessful, a `CommmandException` will be thrown accordingly). If the Event does not already contain the `Participant` object, the participant will be added to the event accordingly.
  Otherwise, a `CommandException` will be thrown.
 
-A `RemoveParticipantFromEventByIndexParser` parses the user's input and obtain indexes for Participant and Event respectively. 
-The workflow is nearly identical to `AddParticipantToEventByIndex`. It is only that instead of throwing `CommandException` if `Participant` object already exists in the event,
+A `RemoveParticipantFromEventParser` parses the user's input and obtain indexes for Participant and Event respectively. 
+The workflow is nearly identical to `AddParticipantToEvent`. It is only that instead of throwing `CommandException` if `Participant` object already exists in the event,
 the `CommandException` will be thrown when `Participant` *doesn't* exist in the event. After all of that, the `Participant` object will be removed from the `Event`. 
 
 
@@ -435,14 +434,17 @@ Since the command implies that the index of participant should come before event
 
 The following activity diagrams summarise what happens when a user executes a new command in each case:
 
-`AddParticipantToEventByIndex`
+`AddParticipantToEvent` - `enroll`
 
 ![AddParticipantToEventActivityDiagram](images/DG images/AddParticipantToEventByIndexActivityDiagram.png)
 
-`RemoveParticipantFromEventByIndex`
+`RemoveParticipantFromEvent` - `expel`
 
 ![RemoveParticipantFromEventActivityDiagram](images/DG images/RemoveParticipantByIndexActivityDiagram.png)
 
+The command keywords to add/remove participant to/from events are `enroll` and `expel`
+respectively as many have found `addParticipant` and `removeParticipant` to be too long for the commands that are used 
+regularly and the main core of the application.
 
 ### View Event Details feature
 
