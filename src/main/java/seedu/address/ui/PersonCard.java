@@ -39,8 +39,6 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label teleHandle;
     @FXML
-    private FlowPane lessonCodes;
-    @FXML
     private Label remark;
     @FXML
     private FlowPane moduleCodes;
@@ -57,13 +55,10 @@ public class PersonCard extends UiPart<Region> {
         remark.setText(person.getRemark().value);
         person.getModuleCodes().stream()
                         .sorted(Comparator.comparing(moduleCode -> moduleCode.value))
-                                .forEach(moduleCode -> moduleCodes.getChildren().add(new Label(moduleCode.value)));
+                                .forEach(moduleCode -> moduleCodes.getChildren().add(
+                                new Label(moduleCode.value + " " + moduleCode.lessonCodes.toString())));
         phone.setText(person.getPhone().value);
         teleHandle.setText(person.getTeleHandle().value);
-        person.getModuleCodes().stream()
-                .sorted(Comparator.comparing(moduleCode -> moduleCode.value))
-                .map(moduleCode -> moduleCode.lessonCodes)
-                .forEach(t -> t.forEach(lessonCode -> lessonCodes.getChildren().add(new Label(lessonCode.lessonCode))));
     }
 
     @Override

@@ -18,14 +18,14 @@ public class JsonSerializableConthacksTest {
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonSerializableConthacksTest");
     private static final Path TYPICAL_PERSONS_FILE = TEST_DATA_FOLDER.resolve("typicalPersonsConthacks.json");
-    private static final Path TYPICAL_MODULE_CLASSES_FILE = TEST_DATA_FOLDER
-            .resolve("typicalModuleClassesConthacks.json");
+    private static final Path TYPICAL_MODULE_LESSON_FILE = TEST_DATA_FOLDER
+            .resolve("typicalModuleLessonsConthacks.json");
     private static final Path INVALID_PERSON_FILE = TEST_DATA_FOLDER.resolve("invalidPersonConthacks.json");
-    private static final Path INVALID_MODULE_CLASS_FILE = TEST_DATA_FOLDER
-            .resolve("invalidModuleClassConthacks.json");
+    private static final Path INVALID_MODULE_LESSON_FILE = TEST_DATA_FOLDER
+            .resolve("invalidModuleLessonConthacks.json");
     private static final Path DUPLICATE_PERSON_FILE = TEST_DATA_FOLDER.resolve("duplicatePersonConthacks.json");
-    private static final Path DUPLICATE_MODULE_CLASS_FILE = TEST_DATA_FOLDER.resolve(
-            "duplicateModuleClassConthacks.json");
+    private static final Path DUPLICATE_MODULE_LESSON_FILE = TEST_DATA_FOLDER.resolve(
+            "duplicateModuleLessonConthacks.json");
 
     @Test
     public void toModelType_typicalPersonsFile_success() throws Exception {
@@ -37,8 +37,8 @@ public class JsonSerializableConthacksTest {
     }
 
     @Test
-    public void toModelType_typicalModuleClassesFile_success() throws Exception {
-        JsonSerializableConthacks dataFromFile = JsonUtil.readJsonFile(TYPICAL_MODULE_CLASSES_FILE,
+    public void toModelType_typicalModuleLessonsFile_success() throws Exception {
+        JsonSerializableConthacks dataFromFile = JsonUtil.readJsonFile(TYPICAL_MODULE_LESSON_FILE,
                 JsonSerializableConthacks.class).get();
         Conthacks conthacksFromFile = dataFromFile.toModelType();
         Conthacks typicalModuleClasses = TypicalModuleLessons.getTypicalConthacks();
@@ -53,8 +53,8 @@ public class JsonSerializableConthacksTest {
     }
 
     @Test
-    public void toModelType_invalidModuleClass_throwsIllegalArgument() throws Exception {
-        JsonSerializableConthacks dataFromFile = JsonUtil.readJsonFile(INVALID_MODULE_CLASS_FILE,
+    public void toModelType_invalidModuleLesson_throwsIllegalArgument() throws Exception {
+        JsonSerializableConthacks dataFromFile = JsonUtil.readJsonFile(INVALID_MODULE_LESSON_FILE,
                 JsonSerializableConthacks.class).get();
         assertThrows(IllegalArgumentException.class, dataFromFile::toModelType);
     }
@@ -68,8 +68,8 @@ public class JsonSerializableConthacksTest {
     }
 
     @Test
-    public void toModelType_duplicateModuleClasses_throwsIllegalValueException() throws Exception {
-        JsonSerializableConthacks dataFromFile = JsonUtil.readJsonFile(DUPLICATE_MODULE_CLASS_FILE,
+    public void toModelType_duplicateModuleLessons_throwsIllegalValueException() throws Exception {
+        JsonSerializableConthacks dataFromFile = JsonUtil.readJsonFile(DUPLICATE_MODULE_LESSON_FILE,
                 JsonSerializableConthacks.class).get();
         assertThrows(IllegalValueException.class, JsonSerializableConthacks.MESSAGE_DUPLICATE_LESSON,
                 dataFromFile::toModelType);

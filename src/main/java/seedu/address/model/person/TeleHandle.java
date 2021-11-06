@@ -6,15 +6,16 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.util.Objects;
 
 /**
- * Represents a Person's Telegram handle in the address book.
+ * Represents a Person's Telegram handle in contHACKS.
  * Guarantees: immutable; is valid as declared in {@link #isValidTeleHandle(String)}
  */
 public class TeleHandle {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Telegram handles should begin with a '@' and it should be at least 5 characters long with no spaces";
+            "Telegram handles should begin with a '@', contain alphanumeric characters and underscores,"
+                    + " and should be at least 5 to 32 characters long with no spaces";
 
-    public static final String VALIDATION_REGEX = "@[\\p{Alnum}]{5,}";
+    public static final String VALIDATION_REGEX = "@[\\p{Alnum}_]{5,32}";
     public final String value;
 
     /**

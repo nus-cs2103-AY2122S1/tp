@@ -34,11 +34,7 @@
       </HBox>
       <FlowPane fx:id="moduleCodes">
             <padding>
-               <Insets bottom="5.0" />
-            </padding></FlowPane>
-      <FlowPane fx:id="lessonCodes">
-            <padding>
-               <Insets bottom="5.0" />
+               <Insets bottom="3.0" />
             </padding></FlowPane>
       <Label fx:id="email" styleClass="cell_small_label" text="\$email">
         <padding>

@@ -19,142 +19,143 @@ import seedu.address.testutil.ModuleLessonBuilder;
 
 public class UniqueModuleLessonListTest {
 
-    private final UniqueModuleLessonList uniqueClassList = new UniqueModuleLessonList();
+    private final UniqueModuleLessonList uniqueLessonList = new UniqueModuleLessonList();
 
     @Test
-    public void contains_nullClass_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueClassList.contains(null));
+    public void contains_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueLessonList.contains(null));
     }
 
     @Test
-    public void contains_classNotInList_returnsFalse() {
-        assertFalse(uniqueClassList.contains(CS2100_LAB1));
+    public void contains_lessonNotInList_returnsFalse() {
+        assertFalse(uniqueLessonList.contains(CS2100_LAB1));
     }
 
     @Test
-    public void contains_classInList_returnsTrue() {
-        uniqueClassList.add(CS2100_LAB1);
-        assertTrue(uniqueClassList.contains(CS2100_LAB1));
+    public void contains_lessonInList_returnsTrue() {
+        uniqueLessonList.add(CS2100_LAB1);
+        assertTrue(uniqueLessonList.contains(CS2100_LAB1));
     }
 
     @Test
-    public void contains_classWithSameIdentityFieldsInList_returnsTrue() {
-        uniqueClassList.add(CS2100_LAB1);
+    public void contains_lessonWithSameIdentityFieldsInList_returnsTrue() {
+        uniqueLessonList.add(CS2100_LAB1);
         ModuleLesson editedCS2100Lab1 = new ModuleLessonBuilder(CS2100_LAB1).withRemark("hello").build();
-        assertTrue(uniqueClassList.contains(editedCS2100Lab1));
+        assertTrue(uniqueLessonList.contains(editedCS2100Lab1));
     }
 
     @Test
-    public void add_nullModuleClass_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueClassList.add(null));
+    public void add_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueLessonList.add(null));
     }
 
     @Test
-    public void add_duplicateModuleClass_throwsDuplicateModuleClassException() {
-        uniqueClassList.add(CS2100_LAB1);
-        assertThrows(DuplicateModuleLessonException.class, () -> uniqueClassList.add(CS2100_LAB1));
+    public void add_duplicateModuleLesson_throwsDuplicateModuleLessonException() {
+        uniqueLessonList.add(CS2100_LAB1);
+        assertThrows(DuplicateModuleLessonException.class, () -> uniqueLessonList.add(CS2100_LAB1));
     }
 
     @Test
-    public void setModuleClass_nullTargetModuleClass_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueClassList.setModuleLesson(null, CS2100_LAB1));
+    public void setModuleLesson_nullTargetModuleLesson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueLessonList.setModuleLesson(null, CS2100_LAB1));
     }
 
     @Test
-    public void setModuleClass_nullEditedModuleClass_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueClassList.setModuleLesson(CS2100_LAB1, null));
+    public void setModuleLesson_nullEditedModuleLesson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueLessonList.setModuleLesson(CS2100_LAB1, null));
     }
 
     @Test
-    public void setModuleClass_targeClassNotInList_throwsPersonNotFoundException() {
-        assertThrows(ModuleLessonNotFoundException.class, () -> uniqueClassList.setModuleLesson(
+    public void setModuleLesson_targetLessonNotInList_throwsPersonNotFoundException() {
+        assertThrows(ModuleLessonNotFoundException.class, () -> uniqueLessonList.setModuleLesson(
                 CS2100_LAB1, CS2100_LAB1));
     }
 
     @Test
-    public void setModuleClass_editedClassIsSameModuleClass_success() {
-        uniqueClassList.add(CS2100_LAB1);
-        uniqueClassList.setModuleLesson(CS2100_LAB1, CS2100_LAB1);
+    public void setModuleLesson_editedLessonIsSameModuleLesson_success() {
+        uniqueLessonList.add(CS2100_LAB1);
+        uniqueLessonList.setModuleLesson(CS2100_LAB1, CS2100_LAB1);
         UniqueModuleLessonList expectedUniqueClassList = new UniqueModuleLessonList();
         expectedUniqueClassList.add(CS2100_LAB1);
-        assertEquals(expectedUniqueClassList, uniqueClassList);
+        assertEquals(expectedUniqueClassList, uniqueLessonList);
     }
 
     @Test
-    public void setClass_editedModuleClassHasDifferentIdentity_success() {
-        uniqueClassList.add(CS2100_LAB1);
-        uniqueClassList.setModuleLesson(CS2100_LAB1, CS2106_TUT1);
+    public void setLesson_editedModuleLessonHasDifferentIdentity_success() {
+        uniqueLessonList.add(CS2100_LAB1);
+        uniqueLessonList.setModuleLesson(CS2100_LAB1, CS2106_TUT1);
         UniqueModuleLessonList expectedUniqueClassList = new UniqueModuleLessonList();
         expectedUniqueClassList.add(CS2106_TUT1);
-        assertEquals(expectedUniqueClassList, uniqueClassList);
+        assertEquals(expectedUniqueClassList, uniqueLessonList);
     }
 
     @Test
-    public void setModuleClass_editedClassHasNonUniqueIdentity_throwsDuplicateModuleClassException() {
-        uniqueClassList.add(CS2100_LAB1);
-        uniqueClassList.add(CS2106_TUT1);
-        assertThrows(DuplicateModuleLessonException.class, () -> uniqueClassList.setModuleLesson(
+    public void setModuleLesson_editedLessonHasNonUniqueIdentity_throwsDuplicateModuleLessonException() {
+        uniqueLessonList.add(CS2100_LAB1);
+        uniqueLessonList.add(CS2106_TUT1);
+        assertThrows(DuplicateModuleLessonException.class, () -> uniqueLessonList.setModuleLesson(
                 CS2100_LAB1, CS2106_TUT1));
     }
 
     @Test
-    public void remove_nullModuleClass_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueClassList.remove(null));
+    public void remove_nullModuleLesson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueLessonList.remove(null));
     }
 
     @Test
-    public void remove_moduleClassDoesNotExist_throwsModuleClassNotFoundException() {
-        assertThrows(ModuleLessonNotFoundException.class, () -> uniqueClassList.remove(CS2100_LAB1));
+    public void remove_moduleLessonDoesNotExist_throwsModuleLessonNotFoundException() {
+        assertThrows(ModuleLessonNotFoundException.class, () -> uniqueLessonList.remove(CS2100_LAB1));
     }
 
     @Test
-    public void remove_existingClass_removesModuleClass() {
-        uniqueClassList.add(CS2100_LAB1);
-        uniqueClassList.remove(CS2100_LAB1);
+    public void remove_existingLesson_removesModuleLesson() {
+        uniqueLessonList.add(CS2100_LAB1);
+        uniqueLessonList.remove(CS2100_LAB1);
         UniqueModuleLessonList expectedUniqueClassList = new UniqueModuleLessonList();
-        assertEquals(expectedUniqueClassList, uniqueClassList);
+        assertEquals(expectedUniqueClassList, uniqueLessonList);
     }
 
     @Test
-    public void setModuleClass_nullUniqueModuleClassList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueClassList.setModuleLessons((UniqueModuleLessonList) null));
+    public void setModuleLesson_nullUniqueModuleLessonList_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueLessonList
+                .setModuleLessons((UniqueModuleLessonList) null));
     }
 
     @Test
     public void setPersons_uniquePersonList_replacesOwnListWithProvidedUniquePersonList() {
-        uniqueClassList.add(CS2100_LAB1);
+        uniqueLessonList.add(CS2100_LAB1);
         UniqueModuleLessonList expectedUniqueClassList = new UniqueModuleLessonList();
         expectedUniqueClassList.add(CS2106_TUT1);
-        uniqueClassList.setModuleLessons(expectedUniqueClassList);
-        assertEquals(expectedUniqueClassList, uniqueClassList);
+        uniqueLessonList.setModuleLessons(expectedUniqueClassList);
+        assertEquals(expectedUniqueClassList, uniqueLessonList);
     }
 
     @Test
-    public void setModuleClasses_nullList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueClassList.setModuleLessons((List<ModuleLesson>) null));
+    public void setModuleLessons_nullList_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueLessonList.setModuleLessons((List<ModuleLesson>) null));
     }
 
     @Test
-    public void setModuleClasses_list_replacesOwnListWithProvidedList() {
-        uniqueClassList.add(CS2100_LAB1);
+    public void setModuleLessons_list_replacesOwnListWithProvidedList() {
+        uniqueLessonList.add(CS2100_LAB1);
         List<ModuleLesson> classList = Collections.singletonList(CS2106_TUT1);
-        uniqueClassList.setModuleLessons(classList);
+        uniqueLessonList.setModuleLessons(classList);
         UniqueModuleLessonList expectedUniqueClassList = new UniqueModuleLessonList();
         expectedUniqueClassList.add(CS2106_TUT1);
-        assertEquals(expectedUniqueClassList, uniqueClassList);
+        assertEquals(expectedUniqueClassList, uniqueLessonList);
     }
 
     @Test
-    public void setClasses_listWithDuplicateModuleClasses_throwsDuplicateModuleClassException() {
+    public void setLessons_listWithDuplicateModuleLessons_throwsDuplicateModuleLessonException() {
         List<ModuleLesson> listWithDuplicateClasses = Arrays.asList(CS2100_LAB1, CS2100_LAB1);
-        assertThrows(DuplicateModuleLessonException.class, () -> uniqueClassList.setModuleLessons(
+        assertThrows(DuplicateModuleLessonException.class, () -> uniqueLessonList.setModuleLessons(
                 listWithDuplicateClasses));
     }
 
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () ->
-                uniqueClassList.asUnmodifiableObservableList().remove(0));
+                uniqueLessonList.asUnmodifiableObservableList().remove(0));
     }
 
 }

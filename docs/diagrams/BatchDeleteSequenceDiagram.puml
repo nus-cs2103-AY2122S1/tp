@@ -13,10 +13,10 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("delete 1")
+[-> LogicManager : execute("delete m/CS2103T")
 activate LogicManager
 
-LogicManager -> ConthacksParser : parseCommand("delete 1")
+LogicManager -> ConthacksParser : parseCommand("delete m/CS2103T")
 activate ConthacksParser
 
 create DeletePersonCommandParser
@@ -26,7 +26,7 @@ activate DeletePersonCommandParser
 DeletePersonCommandParser --> ConthacksParser
 deactivate DeletePersonCommandParser
 
-ConthacksParser -> DeletePersonCommandParser : parse(" 1")
+ConthacksParser -> DeletePersonCommandParser : parse(" m/CS2103T")
 activate DeletePersonCommandParser
 
 create DeletePersonCommand
@@ -48,11 +48,21 @@ deactivate ConthacksParser
 LogicManager -> DeletePersonCommand : execute()
 activate DeletePersonCommand
 
-DeletePersonCommand -> Model : deletePerson(1)
+loop no. of contacts with module code CS2103T
+alt contact tagged to only CS2103T
+DeletePersonCommand -> Model : deletePerson()
 activate Model
 
 Model --> DeletePersonCommand
 deactivate Model
+else contacts attached to other module codes
+DeletePersonCommand -> Model : setPerson()
+activate Model
+
+Model --> DeletePersonCommand
+deactivate Model
+end
+end
 
 create CommandResult
 DeletePersonCommand -> CommandResult

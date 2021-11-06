@@ -19,6 +19,9 @@ import seedu.address.model.modulelesson.LessonDayContainsKeywordsPredicate;
 import seedu.address.model.modulelesson.LessonTimeContainsKeywordsPredicate;
 import seedu.address.model.modulelesson.ModuleCodeContainsKeywordsPredicate;
 
+/**
+ * Parses input arguments and creates a new FindModuleLessonCommand object.
+ */
 public class FindModuleLessonCommandParser implements Parser<FindModuleLessonCommand> {
 
     /**

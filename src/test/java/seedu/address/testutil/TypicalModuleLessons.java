@@ -41,13 +41,13 @@ public class TypicalModuleLessons {
      */
     public static Conthacks getTypicalConthacks() {
         Conthacks ab = new Conthacks();
-        for (ModuleLesson moduleLesson : getTypicalModuleClasses()) {
+        for (ModuleLesson moduleLesson : getTypicalModuleLessons()) {
             ab.addLesson(moduleLesson);
         }
         return ab;
     }
 
-    public static List<ModuleLesson> getTypicalModuleClasses() {
+    public static List<ModuleLesson> getTypicalModuleLessons() {
         return new ArrayList<>(Arrays.asList(CS2100_LAB1, CS2103_TUT1, CS2106_TUT1));
     }
 }

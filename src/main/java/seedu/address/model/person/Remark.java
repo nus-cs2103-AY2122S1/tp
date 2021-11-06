@@ -9,12 +9,13 @@ import static java.util.Objects.requireNonNull;
 public class Remark {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Remarks should only contain ASCII characters, and it should not be blank";
-    /*
+            "Remarks should only contain ASCII characters, and it should be at most 52 characters long.";
+
+    /**
      * The first character of the remark must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid remark.
      */
-    public static final String VALIDATION_REGEX = "[\\p{ASCII}]+[^\\s]";
+    public static final String VALIDATION_REGEX = "[\\p{ASCII}&&[^ ]][\\p{ASCII}]{0,51}";
 
     public final String value;
 
@@ -32,7 +33,7 @@ public class Remark {
      * Returns true if a given string is a valid remark.
      */
     public static boolean isValidRemark(String test) {
-        return test.equals("") || test.matches(VALIDATION_REGEX);
+        return test.equals("") || (test.matches(VALIDATION_REGEX) && test.length() <= 52 && !test.trim().isEmpty());
     }
 
 

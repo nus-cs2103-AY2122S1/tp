@@ -17,6 +17,9 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.modulelesson.ModuleCodeContainsKeywordsPredicate;
 import seedu.address.model.person.ModuleCode;
 
+/**
+ * Parses input arguments and creates a new DeleteModuleLessonCommand object.
+ */
 public class DeleteModuleLessonCommandParser implements Parser<DeleteModuleLessonCommand> {
     /**
      * Parses {@code userInput} into a command and returns it.
@@ -57,6 +60,16 @@ public class DeleteModuleLessonCommandParser implements Parser<DeleteModuleLesso
         }
         List<String> listOfModuleCode = ParserUtil.parseModuleCodes(moduleCodes).stream()
                 .map(ModuleCode::toString)
+                .map(string -> {
+                    String temp = string;
+                    if (string.contains("[")) {
+                        temp = temp.substring(temp.indexOf("[") + 1);
+                    }
+                    if (string.contains("]")) {
+                        temp = temp.substring(0, temp.indexOf("]"));
+                    }
+                    return temp;
+                })
                 .collect(Collectors.toList());
         return new DeleteModuleLessonCommand(
                 new ModuleCodeContainsKeywordsPredicate(Collections.singletonList(listOfModuleCode.get(0)))

@@ -47,7 +47,8 @@ public class JsonAdaptedModuleLesson {
      * Converts a given {@code ModuleLesson} into this lesson for Jackson use.
      */
     public JsonAdaptedModuleLesson(ModuleLesson source) {
-        moduleCode = source.getModuleCode().toString();
+        int length = source.getModuleCode().toString().length();
+        moduleCode = source.getModuleCode().toString().substring(1, length - 1);
         lessonDay = source.getDay().getDayAsIntString();
         lessonStartTime = source.getLessonStartTime().toString();
         lessonEndTime = source.getLessonEndTime().toString();

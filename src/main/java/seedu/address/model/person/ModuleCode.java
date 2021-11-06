@@ -9,7 +9,7 @@ import java.util.Set;
 import seedu.address.model.lessoncode.LessonCode;
 
 /**
- * Represents a module code that a Person is taking in the address book.
+ * Represents a module code that a Person is taking in contHACKS.
  * Guarantees: immutable; is valid as declared in {@link #isValidModuleCode(String)}
  */
 public class ModuleCode {
@@ -18,7 +18,7 @@ public class ModuleCode {
             "Module codes should consists of a two- or three-letter prefix followed by a 4-digit number"
                     + " and optionally a one-letter suffix";
 
-    public static final String VALIDATION_REGEX = "[a-zA-Z]{2,3}[\\d]{4}[a-zA-Z]*";
+    public static final String VALIDATION_REGEX = "[a-zA-Z]{2,3}[\\d]{4}[a-zA-Z]?";
     public final String value;
     public final Set<LessonCode> lessonCodes;
 
@@ -55,11 +55,13 @@ public class ModuleCode {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder(value);
+        StringBuilder sb = new StringBuilder("[");
+        sb.append(value);
         for (LessonCode lessonCode : lessonCodes) {
             sb.append(" ");
             sb.append(lessonCode);
         }
+        sb.append("]");
         return sb.toString();
     }
 
@@ -73,9 +75,5 @@ public class ModuleCode {
     @Override
     public int hashCode() {
         return value.hashCode();
-    }
-
-    public int compareTo(ModuleCode c) {
-        return this.value.toLowerCase().compareTo(c.value.toLowerCase());
     }
 }

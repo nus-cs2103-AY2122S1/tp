@@ -86,8 +86,9 @@ public class ParserUtil {
      */
     public static ModuleCode parseModuleCode(String moduleCode) throws ParseException {
         requireNonNull(moduleCode);
-        String trimmedModuleCode = moduleCode.trim();
-        String[] moduleCodeArr = trimmedModuleCode.split("\\s+");
+        String processedModuleCode = moduleCode.trim().toUpperCase();
+
+        String[] moduleCodeArr = processedModuleCode.split("\\s+");
         assert moduleCodeArr.length >= 1 : "Array should not be empty\n";
         if (!ModuleCode.isValidModuleCode(moduleCodeArr[0])) {
             throw new ParseException(ModuleCode.MESSAGE_CONSTRAINTS);
@@ -112,8 +113,8 @@ public class ParserUtil {
      */
     public static ModuleCode parseModuleCodeForModuleLesson(String moduleCode) throws ParseException {
         requireNonNull(moduleCode);
-        String trimmedModuleCode = moduleCode.trim();
-        String[] moduleCodeArr = trimmedModuleCode.split("\\s+");
+        String processedModuleCode = moduleCode.trim().toUpperCase();
+        String[] moduleCodeArr = processedModuleCode.split("\\s+");
         if (moduleCodeArr.length < 2) {
             throw new ParseException(MESSAGE_INVALID_MODULE_INFO);
         }
