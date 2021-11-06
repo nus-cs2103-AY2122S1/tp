@@ -7,7 +7,7 @@ import javafx.scene.layout.Region;
 import seedu.address.model.game.Game;
 
 /**
- * An UI component that displays information of a {@code Game}.
+ * A UI component that displays information of a {@code Game}.
  */
 public class GameCard extends UiPart<Region> {
 

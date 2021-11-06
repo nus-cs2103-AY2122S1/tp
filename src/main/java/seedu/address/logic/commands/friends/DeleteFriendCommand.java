@@ -21,7 +21,7 @@ public class DeleteFriendCommand extends Command {
             + CMD_FRIEND + " " + FLAG_DELETE + "Draco";
     public static final String MESSAGE_DELETE_FRIEND_SUCCESS = "Deleted friend - FRIEND_ID: %1$s";
 
-    private FriendId friendToDeleteId;
+    private final FriendId friendToDeleteId;
 
     /**
      * Command to delete a friend using the unique FRIEND_ID.

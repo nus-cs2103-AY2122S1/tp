@@ -12,14 +12,14 @@ import seedu.address.model.friend.Friend;
 import seedu.address.model.game.Game;
 
 /**
- * Panel containing the list of Games.
+ * A panel containing the list of Games.
  */
 public class GameListPanel extends UiPart<Region> {
     private static final String FXML = "GameListPanel.fxml";
 
     private final Logger logger = LogsCenter.getLogger(GameListPanel.class);
 
-    private ObservableList<Friend> friendList;
+    private final ObservableList<Friend> friendList;
 
     @FXML
     private ListView<Game> gameListView;
@@ -36,6 +36,7 @@ public class GameListPanel extends UiPart<Region> {
 
     /**
      * Returns the number of friends with the game in their GameFriendLinks.
+     *
      * @return Number of friends.
      */
     private int numberOfFriendsWithGame(Game game) {

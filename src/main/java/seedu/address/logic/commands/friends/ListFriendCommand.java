@@ -49,7 +49,7 @@ public class ListFriendCommand extends Command {
     }
 
     /**
-     * Returns success message to display after running list
+     * Returns success message to display after running the list command.
      *
      * @return String containing success message
      */

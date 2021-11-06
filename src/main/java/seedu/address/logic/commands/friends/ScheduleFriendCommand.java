@@ -35,11 +35,11 @@ public class ScheduleFriendCommand extends Command {
     public static final String MESSAGE_SCHEDULE_FRIEND_SUCCESS = "Scheduled Friend - FRIEND_ID: %1$s, START_HOUR: %2$s "
             + ", END_HOUR: %3$s, DAY: %4$s, IS_FREE: %5$s";
 
-    private FriendId friendToScheduleId;
-    private int day;
-    private String startTime;
-    private String endTime;
-    private boolean isFree;
+    private final FriendId friendToScheduleId;
+    private final int day;
+    private final String startTime;
+    private final String endTime;
+    private final boolean isFree;
 
     /**
      * Command to schedule a friend using the unique FRIEND_ID.

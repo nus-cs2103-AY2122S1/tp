@@ -24,11 +24,11 @@ import seedu.address.model.time.HourOfDay;
 public class RecommendCommand extends Command {
     public static final String COMMAND_WORD = "recommend";
     public static final String MESSAGE_USAGE = "Format: "
-        + COMMAND_WORD + " " + FLAG_GAME_ID + "GAME_ID " + FLAG_TIME + "HOUR DAY\n"
-        + "Example: " + COMMAND_WORD + " " + FLAG_GAME_ID + "Valorant " + FLAG_TIME + "10 6";
+            + COMMAND_WORD + " " + FLAG_GAME_ID + "GAME_ID " + FLAG_TIME + "HOUR DAY\n"
+            + "Example: " + COMMAND_WORD + " " + FLAG_GAME_ID + "Valorant " + FLAG_TIME + "10 6";
     public static final String MESSAGE_GAME_NOT_FOUND = "Game with provided GAME_ID not found in games list.";
     public static final String MESSAGE_SUCCESS = "Listing friend recommendations - sorted by highest skill "
-        + "for GAME_ID: %1$s, available weekly on: %2$s, %3$s";
+            + "for GAME_ID: %1$s, available weekly on: %2$s, %3$s";
 
     private final GameId gameFilter;
     private final HourOfDay hourFilter;

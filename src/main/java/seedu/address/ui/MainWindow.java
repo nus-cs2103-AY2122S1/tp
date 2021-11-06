@@ -35,15 +35,15 @@ public class MainWindow extends UiPart<Stage> {
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
-    private Stage primaryStage;
-    private Logic logic;
+    private final Stage primaryStage;
+    private final Logic logic;
     private boolean isFriendTable;
 
     // Independent Ui parts residing in this Ui container
     private FriendListPanel friendListPanel;
     private GameListPanel gameListPanel;
     private ResultDisplay resultDisplay;
-    private HelpWindow helpWindow;
+    private final HelpWindow helpWindow;
     private Friend currentFriendToGet;
     private FriendMainCardTable friendMainCardTable;
     private FriendSchedulePanel friendSchedulePanel;
@@ -240,7 +240,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private Friend getUpdatedFriend(Friend toUpdate) {
         ObservableList<Friend> friendsList = getFriendList();
-        for (Friend friend: friendsList) {
+        for (Friend friend : friendsList) {
             if (friend.getFriendId().equals(toUpdate.getFriendId())) {
                 return friend;
             }

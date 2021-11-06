@@ -40,8 +40,8 @@ public class GameId {
     }
 
     @Override
-    public String toString() {
-        return value;
+    public int hashCode() {
+        return value.toLowerCase().hashCode();
     }
 
     @Override
@@ -52,7 +52,7 @@ public class GameId {
     }
 
     @Override
-    public int hashCode() {
-        return value.toLowerCase().hashCode();
+    public String toString() {
+        return value;
     }
 }
