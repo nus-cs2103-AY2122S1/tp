@@ -42,7 +42,7 @@ public class DayCard extends UiPart<Region> {
     private Label dayDateLabel;
 
     /**
-     * Creates a {@code DayCard} with the given {@code LocalDate firstDate} 
+     * Creates a {@code DayCard} with the given {@code LocalDate firstDate}
      * and {@code ObservableList<Person> staffList} to display.
      */
     public DayCard(LocalDate firstDate, int dayCardNumber, ObservableList<Person> stafflist, Period currentPeriod) {
