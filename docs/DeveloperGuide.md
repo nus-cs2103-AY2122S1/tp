@@ -284,7 +284,29 @@ Order uses its `id` field to produce the default ordering of the `OrderList`.
 
 ### Display client's total orders feature
 
-The feature displays the total orders for each client in a new window. Its mechanism is a mix of the mechanisms for `MainWindow` and `HelpWindow`.
+The feature displays the total orders for all clients except those without orders in a new window. 
+Its mechanism is a mix of the mechanisms for `MainWindow` and `HelpWindow`.
+
+Similar to `help` and `exit`, `CommandResult` has a dedicated `boolean` field to indicate whether the command is a 
+`totalorders` command. There is also a dedicated method to handle `totalorders` command in `MainWindow` class.
+By calling this method, the data of total orders is reloaded similar to loading other data (`Client/Task/Order`) in the Main Window, i.e. 
+through the `Logic` component. After reloading data, that method shows or focuses the total orders window similar to that of the 
+help window.
+
+#### Execution
+
+The sequence diagram below shows the interaction within the `UI` component when a `totalorders` command is executed.
+
+![Interactions Inside the Logic and Model Component for the `totalorders` Command](images/TotalOrdersSequenceDiagram2.png)
+
+The sequence diagram below shows the interaction within the `Logic` component when the `UI` component calls 
+`execute("totalorders")`. Note that there is no need to have a `TotalOrdersCommandParser`. This is because the 
+`SalesNoteParser` can directly create and return a `TotalOrdersCommand`, similar to that of `help` and `exit` commands.  
+
+![Interactions Inside the Logic and Model Component for the `totalorders` Command](images/TotalOrdersSequenceDiagram1.png)
+
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
