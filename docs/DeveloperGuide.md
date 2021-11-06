@@ -494,11 +494,11 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding a group successfully.
 
-   1. Prerequisites: Group should not already exist in database. Database contain a student with name `Hong Fai` and another student A with ID `E0123456`.
+   1. Prerequisites: Group should not already exist in database. Database contain a student with name `Hong Fai` and another student `A` with ID `E0123456`.
    
    2. Test case: `addgroup -g T01A`<br> Expected: Group `T01A` will be added to the database.
    
-   3. Test case: `addgroup -g T02B -n Hong Fai -i E0123456`<br> Expected: Group `T02B` will be added to database with students `Hong Fai` and A in the group.
+   3. Test case: `addgroup -g T02B -n Hong Fai -i E0123456`<br> Expected: Group `T02B` will be added to database with students `Hong Fai` and `A` in the group.
    
 2. Adding a group with incorrect formats.
 
@@ -506,7 +506,7 @@ testers are expected to do more *exploratory* testing.
    
    2. Test case: `addgroup -g`<br> Expected: No group is created. Error detail shown in the status message to inform user that group name cannot be blank.
    
-   3. Test case: `addgroup -g Tutorial-1`<br> Expected: No group is created. Error detail shown in the status message to inform user that group name must be alphanumeric.
+   3. Test case: `addgroup -g Tutorial@Wednesday`<br> Expected: No group is created. Error detail shown in the status message to inform user that group name must be alphanumeric.
 
 3. Adding a group that already exists in database.
 
@@ -554,11 +554,11 @@ testers are expected to do more *exploratory* testing.
 ### Adding an alias
 1. Adding an alias successfully.
 
-   1. Test case: `alias -c addstudent -as example`<br> Expected: A new alias `example` is added for `addstudent`. `example -n Zhiying -i E1234567` will add student `Zhiying` to the database.
+   1. Test case: `alias -c addstudent -as example`<br> Expected: A new alias `example` is added for `addstudent`. <br>`example -n Zhiying -i E1234567` will add student `Zhiying` to the database.
    
    2. Test case: `alias -c example -as example2`<br> Expected: A new alias `examples` is added for `addstudent` (the command `example` is mapped to).
    
-   3. Test case: `alias -c addgroup -as example`<br> Expected: The alias `example` is mapped to `addgroup` and no longer represent `addgroup`. `example -g T02A` will create a new group `T02A`.
+   3. Test case: `alias -c addgroup -as example`<br> Expected: The alias `example` is mapped to `addgroup` and no longer represent `addgroup`. <br>`example -g T02A` will create a new group `T02A`.
 
 2. Deleting an alias successfully.
 
@@ -568,7 +568,9 @@ testers are expected to do more *exploratory* testing.
 
 3. Deleting an alias unsuccessfully.
 
-   1. Test case: `alias -c addstudent -as addstudent`<br> Expected: The alias `addstudent` will not be removed. Error detail shown in the status message to inform user that default command cannot be overwritten.
+   1. Test case: `alias -c addstudent -as addstudent`<br> Expected: The alias `addstudent` will not be removed. 
+   Error detail shown in the status message to inform user that default command cannot be overwritten.
+   
 
 4. Adding an alias unsuccessfully.
 
