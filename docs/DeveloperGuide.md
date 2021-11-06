@@ -306,7 +306,7 @@ Firstly, the user command is handed over to `ExportCommandParser`. `ExportComman
 * Not more than 1 argument
 * Filename provided is a .csv or .json file
 
-The Sequence Diagram below illustrates the interactions within the `Logic` component during the first step of executing `execute("export newfriends.json")`.
+The Sequence Diagram below illustrates the interactions within the `Logic` component during the first step of executing `execute("export cs2103t.json")`.
 
 ![ExportSequenceDiagram](images/ExportSequenceDiagramStep1.png)
 
@@ -353,7 +353,7 @@ Next, The `ExportCommand` is then executed in `LogicManager`. The `ExportCommand
     4. `CsvUtil#saveCsvFile(T, Path)` serializes the address book and writes to the file, using `CsvMapper`, a Jackson class.
 
 
-The Sequence Diagram below illustrates the interactions during the second step of executing `execute("export newfriends.json")`.
+The Sequence Diagram below illustrates the interactions during the second step of executing `execute("export cs2103t.json")`.
 
 ![ExportSequenceDiagram](images/ExportSequenceDiagramStep2.png)
 
@@ -370,6 +370,7 @@ Executing an Import command can be summarized with the following steps:
 4. Command Result with success message is returned.
 
 The sequence diagram for the first step is similar to the Export Command. The following sequence diagram illustrates the execution of an import command from part 2 onwards.
+
 ![ImportSequenceDiagram](images/ImportSequenceDiagram.png)
 
 #### Reading JSON / CSV file
