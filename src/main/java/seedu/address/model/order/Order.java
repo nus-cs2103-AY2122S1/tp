@@ -102,6 +102,6 @@ public class Order {
      */
     @Override
     public String toString() {
-        return "[ Product Name: " + productName + ", Quantity: " + quantity + ", Time " + time + "]";
+        return "[ Product Name: " + productName + ", Quantity: " + quantity + ", Time: " + time + "]";
     }
 }
