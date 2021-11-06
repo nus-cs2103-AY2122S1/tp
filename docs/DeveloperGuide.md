@@ -256,6 +256,12 @@ The `executeUndoableCommand()` method of the `LessonEditCommand` uses this `edit
 The new lesson is stored in TAB in place of the old lesson. The student's list of lessons will be updated to reflect
 the changes made to the specified lesson.<br>
 
+#### Cancelling and Uncancelling Lessons
+
+Cancelling and uncancelling of lessons is done using the `LessonEditCommand`, which allows the user to specify multiple cancel and uncancel dates in one command. 
+
+Cancelled dates of a lesson are stored as a field, `CancelledDates` in the lesson object. When a user specifies a valid lesson date to cancel, the date is added into the `CancelledDates` set. When a user specifies a valid lesson date to uncancel, the date is removed from `CancelledDates`.
+
 #### Deleting Lessons
 The `LessonDeleteCommand` deletes the lesson specified by its lesson index in the displayed list of lessons with respect to the
 student with this lesson.
@@ -359,6 +365,26 @@ We chose alternative 2 and integrated CalendarFX into our app as the possibility
     * Cons: Much harder to implement, no more fancy transitions or inbuilt buttons, and GUI improvements seem marginal at best.
 
 Alternative 1 is our preferred choice as its pros and cons seem much better than alternative 2, especially due to its ease of implementation. The main difficulty of alternative 1 becoming familiar with the CalendarFX _API_, but this difficulty is also present in alternative 2.
+
+#### Displaying of recurring lessons with cancelled dates
+
+Entries of recurring lessons are displayed with the help of recurrence rules in CalendarFX. However, CalendarFX does not support exclusion of specific dates in the recurrence. This means that there is no way to represent a recurring lesson with cancelled dates as a single entry. As a work around, we create multiple entries to represent a single recurring lesson with the method `CalendarEntryList#convertRecurringLessonToEntries`.
+
+Example:
+* A recurring lesson has a start date of `1 Sep 2021` with no end date.
+* The lesson is cancelled on `22 Sep 2021` and `13 Oct 2021`.
+
+The figure below shows the recurring lesson displayed on the yearly calendar, where the lesson occurs on the dates marked green.
+
+![Recurring Calendar Entries](images/RecurringCalendarEntries.png)
+*Figure I.1.2: Recurring lesson displayed on the yearly calendar*
+
+To represent this recurring lesson, 3 calendar entries are created:
+1. Recurring entry 1 with start date of `1 Sep 2021`, and end date of `15 Sep 2021`
+2. Recurring entry 2 with start date of `29 Sep 2021` and end date of `6 Oct 2021`
+3. Recurring entry 3 with start date of `20 Oct 2021` and no end date.
+
+In this way, the lesson will not be  displayed on the cancelled dates.
 
 ### Undo/redo feature
 
@@ -538,7 +564,7 @@ Given below is an example usage scenario and how the Find Command is executed:
 *Figure I.5.1: Sequence Diagram of Find Command*
 
 ![Find Command Continued](images/FindUpdateFilteredListLogicSequenceDiagram.png)
-*Figure I.3.3.3: Continued Sequence Diagram of Find Command*
+*Figure I.5.2: Continued Sequence Diagram of Find Command*
 
 #### Design considerations:
 
