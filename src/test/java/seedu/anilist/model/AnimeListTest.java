@@ -6,7 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_ACTION;
 import static seedu.anilist.testutil.Assert.assertThrows;
 import static seedu.anilist.testutil.TypicalAnimes.AOT;
+import static seedu.anilist.testutil.TypicalAnimes.getTypicalAnime;
 import static seedu.anilist.testutil.TypicalAnimes.getTypicalAnimeList;
+import static seedu.anilist.testutil.TypicalAnimes.getTypicalAnimeStats;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -104,6 +106,13 @@ public class AnimeListTest {
         int actionGenreCount = 1;
         expectedGenreCountHashmap.put(new Genre(VALID_GENRE_ACTION), actionGenreCount);
         Stats expectedStats = new Stats(1 , 0, 0, expectedGenreCountHashmap);
+        assertEquals(expectedStats, animeList.fetchUserStats());
+    }
+
+    @Test
+    public void fetchStats_multipleAnimesInAnimeList_returnsTrue() {
+        animeList.setAnimeList(getTypicalAnime());
+        Stats expectedStats = getTypicalAnimeStats();
         assertEquals(expectedStats, animeList.fetchUserStats());
     }
 

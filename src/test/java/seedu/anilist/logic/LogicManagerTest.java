@@ -124,6 +124,23 @@ public class LogicManagerTest {
         assertNotNull(logic.getCurrentTab());
     }
 
+    @Test
+    public void getStats_nonNull_getsNonNullStats() {
+        assertNotNull(logic.getStats());
+    }
+
+    @Test
+    public void setThemeCss_darkTheme_setsThemeCss() {
+        String themeCss = "DarkTheme.css";
+        logic.setThemeCss(themeCss);
+        assertEquals(themeCss, logic.getThemeCss());
+    }
+
+    @Test
+    public void getThemeCss_nonNull_getNonNullCss() {
+        assertNotNull(logic.getThemeCss());
+    }
+
     /**
      * Executes the command and confirms that
      * - no exceptions are thrown <br>
