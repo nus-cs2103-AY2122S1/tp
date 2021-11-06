@@ -161,7 +161,7 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Edit Module feature
 
-####Implementation
+#### Implementation
 
 The `edit` command is implemented via the `EditCommand`, `EditCommandParser` and `EditModuleDescriptor` classes.
 
@@ -209,15 +209,13 @@ When the `TakeCommand#execute()` method is called,
 - A copy of the `Module` object containing the value of `academicCalendar` is created. The value of `academicCalendar` is stored in a corresponding field in this copy.
 - The `Module` object in the `Model` is then replaced by this copy.
 
-<div markdown="span" class="alert alert-info">
-:information_source: **Note:**
-
+Note: 
 - When a new `Module` object is added to the module tracker, its `academicCalendar` field is unassigned by default.
 - Removing a schedule from a module is not supported in the `take` command, this functionality is instead moved to a separate `untake` command.
 - If the module is already scheduled, its current `academicCalendar` field will be overridden by a new `AcademicCalendar` object.
-</div>
 
-Below is a sequence diagram, and an explanation of how `TakeCommand` is executed.
+
+Below is a sequence diagram, and an example to explain how `TakeCommand` is executed.
 
 ![Interactions Inside the Logic Component for the `take 2 y/1 s/2` Command](images/TakeSequenceDiagram.png)
 
@@ -959,21 +957,35 @@ Expected: No module is added. Error details are shown in the status message.
 Expected: Similar to previous.
 
 
-## **Appendix C: Instructions for manual testing**
+## **Appendix C: Effort**
 
-If the effort required to create AB3 is 100, we would place the effort required to implement the current version of NUS Mod Tracker at 120. We currently has over 10,000 lines of code contributed and over 300 automated tests. Below, we list some changes that need a significant amount of effort to implement.
+If the effort required to create AB3 is 100, we would place the effort required to implement the current version of NUS Mod Tracker at 120. Our team has contributed over 10,000 lines of code contributed and over 300 automated tests. Below are some changes in particular, that required a larger amount of effort to implement.
 
 1. Modifying all AB3 components
 
-   We need to modify the entire AB3 in order to support operations on modules.
-   In `Model` component, we need to delete all models in the `person` folder and create a new folder that contains the model for module and all other attributes related to module(`Code`, `Title`, `Description`, `Mc`, ). All other classes in `model` folder need to be modified accordingly. 
-   In `Logic` component, we need to modify all command parsers in order to parser modules. All commands also need to be modified to support the operation on modules.
-   In `storage` component, we also need to modify all classes in order to store modules.
-   The `UI` component also need to be modified. 
-   All test cases need to be changed accordingly.
+   We needed to modify the entire AB3 in order to support operations on modules.
+
+   In the `Model` component, we needed to update all models in the `person` folder with a new folder that contains the model for module, as well as all other attributes related to a module (`Code`, `Title`, `Description`, `Mc`, ).
    
-2. Mc progress list
-    
-3. User Information
+   All other classes in `model` folder had to be modified accordingly.
+
+   In the `Logic` component, we need to modify all command parsers in order to parse modules. All commands also needed to be modified to support the operations on modules.
    
+   In the `Storage` component, we also needed to modify all classes in order to store modules.
+
+   The `UI` component also needed to be modified to display all the attributes of a module clearly, 
+   and the test cases changed accordingly.
    
+
+2. Mc progress panel
+
+    In order to allow the user to easily track their course progress, our team had to add a component that allows the user to view the number of MCs completed in total, as well as for each course requirement.
+
+    This involved creating a brand-new UI component from scratch that would display this information to the user.
+
+    Firstly, we altered the application's UI to accommodate the new Mc progress panel.
+
+    As many commands can cause the user's MC progress to change (i.e. setting MC goal, setting the current semester, taking new modules), we had to create a new model 
+for a `McProgress`, as well as a `McProgressList`. These components are then updated accordingly after execution of a command.
+
+    We then link the `McProgressList` to the UI component so that any changes to the `McProgress` will be detected by the UI, and will allow the UI to update accordingly. 
