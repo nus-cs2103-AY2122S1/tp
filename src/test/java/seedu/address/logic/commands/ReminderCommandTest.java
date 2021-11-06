@@ -9,6 +9,7 @@ import static seedu.address.logic.commands.ReminderCommand.MESSAGE_SHOW_REMINDER
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;

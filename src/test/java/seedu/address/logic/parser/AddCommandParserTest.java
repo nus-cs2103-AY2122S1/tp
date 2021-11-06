@@ -32,7 +32,6 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -47,10 +46,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.TaskDate;
-import seedu.address.model.task.TaskName;
-import seedu.address.model.task.TaskTime;
-import seedu.address.model.task.Venue;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandParserTest {
