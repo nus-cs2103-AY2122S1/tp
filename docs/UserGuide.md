@@ -43,8 +43,6 @@ _text_ | Caption for images.
 
 ## Quick Start
 
-<div markdown="block" class="alert alert-info">
-
 1. Ensure you have **Java 11** or above installed on your computer. If you need help with installation, you can visit this [website](https://docs.oracle.com/en/java/javase/17/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A) for more details.
 
 2. Download the latest **TAB.jar** from [here](https://github.com/AY2122S1-CS2103T-F13-3/tp/releases).
@@ -158,8 +156,7 @@ An example of a command in TAB:
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Each parameter prefix is separated from the others with a space.<br/>
-  For example, `t/t/` means the parameter value of the first `t/` is "t/", and TAB will interpret it as an invalid tag. On the other hand, `t/ t/` represents two `t/` parameters with no parameter value for both. TAB recognises this as 2 empty tags (see [Managing students](#managing-students) for more details about tags).
+* Each parameter and its prefix are separated from the others with a **space**.<br/>
 
 * If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
@@ -345,6 +342,7 @@ Executing any of the commands in this section will bring you to the students int
             <td><ul>
               <li><code>t/unpaid</code> is valid.</li>
               <li><code>t/unpaid retained</code> is invalid.</li>
+              <li><code>t/unpaid t/</code> replaces existing tags with the <code>unpaid</code> tag.</li>
               <li><code>t/</code> clears <strong>all</strong> tags.</li>
             </ul></td>
         </tr>
@@ -406,10 +404,10 @@ Format: `edit INDEX [n/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [pp/PARENT_PHONE_NU
 * You cannot remove a contact field if it is the only remaining means of contact you have with a student.<br>
   e.g. no student should have all contact fields empty. `edit 2 pp/` will not work if the student does not have
   any `PHONE_NUMBER`, `EMAIL`, or `PARENT_EMAIL`.
-  
+
 * When editing tags, all existing tags of the student will be removed and replaced with the tags specified.<br>
   e.g. `edit 2 t/SEC2 t/IP` will erase the student's original tags and replace it with the new tags `SEC2` and `IP`.
-  
+
 Examples:
 * `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
 * `edit 2 n/Betsy Crower t/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
@@ -704,8 +702,7 @@ You can add multiple pieces of homework to a lesson in TAB.
 
 Examples:
 
-* `ladd 1 recurring/23 Nov 2022 date/30 jan 2022 time/0900-1100 subject/Math rates/37.50` adds a recurring lesson that
-  starts on 30 Jan 2022 and ends on 23 Nov 2022 to the 1st student in the displayed student list.
+* `ladd 1 recurring/23 Nov 2022 date/30 jan 2022 time/0900-1100 subject/Math rates/37.50` adds a recurring lesson that starts on 30 Jan 2022 and ends on 23 Nov 2022 to the 1st student in the displayed student list.
 
 * `list` followed by `ladd 1 recurring/ date/30 jan 2022 time/0900-1100 subject/Math rates/37.50`
   adds the recurring lesson to the 1st student in the displayed student list.
@@ -761,9 +758,7 @@ Format: `ldelete INDEX LESSON_INDEX`
 
 Examples:
 * `list` followed by `ldelete 2 1` deletes the 1st lesson for the 2nd student in TAB.
-
-* `find n/Betsy` followed by `ldelete 1 1` deletes the 1st lesson for the 1st student in the results
-  of the `find` command.
+* `find n/Betsy` followed by `ldelete 1 1` deletes the 1st lesson for the 1st student in the results of the `find` command.
 
 #### Viewing a student's lessons: `view`
 
@@ -792,10 +787,10 @@ Format: `remind`
 
 <div class="caption">Reminder window interface.</div>
 
-Example: Suppose the date today is 1 Nov 2021 and current time is 1500h,
+Example: Suppose the date today is 1 Nov 2021 and current time is 1500h, 
 - lessons with the following dates and time are considered upcoming:
-    - 1 Nov 2021 with end time at or after 1500h,
-    - 2 Nov 2021 with any valid time range,
+    - 1 Nov 2021 with end time at or after 1500h, 
+    - 2 Nov 2021 with any valid time range, 
     - 3 Nov 2021 with start time before or at 1500h.
 - lessons with the following dates and time are not considered upcoming:
     - dates before 1 Nov 2021 (has passed),
@@ -885,7 +880,7 @@ Examples:
 TAB will update your lesson's outstanding fees upon launching TAB after the lesson has ended using the Fees Calculator feature. Fees will not be updated while TAB is open, it will only update fees upon launch.
 The Fees Calculator will account for cancelled dates and ensure that lesson fees on these dates will not be added.
 
-However, the Fees Calculator will not account for any changes to lessons that have passed.
+However, the Fees Calculator will not account for any changes to lessons that have passed. 
 
 Note that outstanding fees will not change with the following cases:
 
