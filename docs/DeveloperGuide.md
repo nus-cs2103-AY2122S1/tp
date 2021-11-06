@@ -1269,6 +1269,8 @@ testers are expected to do more *exploratory* testing.
 
 1. Filtering by subject
 
+    * Note: We will be using the `English` subject to conduct manual testing for positive tests.
+
     * Test case: `filter s/English`<br>
       Expected: Only lessons with subject matching `English` are shown in the lesson list. No lessons shown if none have matching subject. No change to student list. An update message showing the number of lessons found will also be shown in the message box.
       
@@ -1280,7 +1282,7 @@ testers are expected to do more *exploratory* testing.
       
 1. Filtering by both grade and subject
 
-    * Note: It will be good to add more lessons of grade `S1` but of different subject (eg. English, Math etc.) to better test this feature.
+    * Note: It will be good to add more lessons of grade `S1` but of different subject (eg. English, Math etc.) to better test this feature (you can refer to the user guide on how to use the add lesson feature).
     
     * Test case: `filter s/English g/S1`<br>
       Expected: Only students of grade `S1` will be displayed in the student list. Only lessons with subject matching `English` and of grade `S1` will be displayed in the lesson list. No lessons or students shown if none have matching the given filter conditions. An update message showing the number of students and lessons found will also be shown in the message box.
