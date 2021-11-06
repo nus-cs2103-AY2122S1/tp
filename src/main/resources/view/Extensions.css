@@ -9,9 +9,9 @@
 }
 
 .barcode_label {
-    -fx-font-family: "Open Sans Regular";
-    -fx-font-size: 13px;
-    -fx-text-fill: black !important;
+    -fx-font-family: "Open Sans Semibold";
+    -fx-font-size: 15px;
+    -fx-text-fill: #4d4d4d !important;
     -fx-graphic: url("../images/barcode.png");
 }
 
