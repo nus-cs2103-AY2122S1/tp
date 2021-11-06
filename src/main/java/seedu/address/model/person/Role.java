@@ -8,7 +8,7 @@ public enum Role implements Field {
     KITCHEN("kitchen"), BARTENDER("bartender"), FLOOR("floor"), NO_ROLE("norole");
 
     public static final String STORAGE_WRONG_ROLE_MESSAGE =
-            "List of valid Roles: kitchen, bartender, floor. (norole if no role is assigned). The role norole" 
+            "List of valid Roles: kitchen, bartender, floor. (norole if no role is assigned). The role norole"
             + " cannot be together with other roles.";
 
     public static final String MESSAGE_CONSTRAINTS = "List of valid Roles: kitchen, bartender, floor.";
@@ -29,7 +29,7 @@ public enum Role implements Field {
     }
 
     /**
-     * Translate a string into a Role enum if the string matches any Role values except for norole. 
+     * Translate a string into a Role enum if the string matches any Role values except for norole.
      * Trims string.
      * @param string String to be translated.
      * @return The translated Role if the string is valid.
