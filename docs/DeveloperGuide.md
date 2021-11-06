@@ -3,37 +3,9 @@ layout: page
 title: Developer Guide
 ---
 
-## Table of Contents
+## **Table of Contents**
 
-* [**Overview**](#)
-* [**Table of Contents**](#table-of-contents)
-* [**Acknowledgements**](#acknowledgements)
-* [**Setting up, getting started**](#setting-up-getting-started)
-* [**Design**](#design)
-  * [Architecture](#architecture)
-  * [UI Component](#ui-component)
-  * [Logic Component](#logic-component)
-  * [Model Component](#model-component)
-  * [Storage Component](#storage-component)
-  * [Common Classes](#common-classes)
-* [**Implementation**](#implementation)
-  * [Add Student : `addstudent`](#add-student--addstudent)
-  * [Add Group : `addgroup`](#add-group--addgroup)
-  * [Add Alloc : `addalloc`](#add-allocation--addalloc)
-  * [Add Score : `addscore`](#add-score--addscore)
-  * [Search : `search`](#search--search)
-  * [Import : `import`](#import--import)
-* [**Documentation, Testing, Logging, Configuration, Dev-Ops**](#documentation-testing-logging-configuration-dev-ops)
-* [**Appendix: Requirements**](#appendix-requirements)
-  * [Product Scope](#product-scope)
-  * [User Stories](#user-stories)
-  * [Use Cases](#use-cases)
-  * [Non-Functional Requirements](#non-functional-requirements)
-  * [Glossary](#glossary)
-* [**Appendix: Instructions for Manual Testing**](#appendix-instructions-for-manual-testing)
-  * [Launch and Shutdown](#launch-and-shutdown)
-  * [Delete a Student](#deleting-a-student)
-  * [Saving Data](#saving-data)
+{:toc}
 
 <br>
 
