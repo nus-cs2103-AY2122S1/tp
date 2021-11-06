@@ -40,8 +40,7 @@ public class RevenueCommandParser implements Parser<RevenueCommand> {
                 e.printStackTrace();
                 return null;
             }
-        })
-        .orElseThrow(() -> new ParseException(ILLEGAL_REVENUE_MESSAGE));
+        }).orElseThrow(() -> new ParseException(ILLEGAL_REVENUE_MESSAGE));
         return new RevenueCommand(index, revenue);
     }
 }
