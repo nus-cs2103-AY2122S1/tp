@@ -48,7 +48,7 @@ title: Developer Guide
     * [Glossary](#glossary)
   * [Manual Testing](#appendix-b-instructions-for-manual-testing)
     * [Feature Testing](#feature-testing)
-    * [UI Testing](#ui-testing)
+    * [GUI Testing](#graphical-user-interface-gui-testing)
   * [Version Controlled Commands](#appendix-c-version-controlled-commands)
     
 --------------------------------------------------------------------------------------------------------------------
@@ -75,10 +75,11 @@ certain technical terms commonly used in this user guide [here](#glossary).
 - The formatting and content of this User Guide is referenced from [AY2122S1-CS2103T-w17-1/tp](https://ay2122s1-cs2103t-w17-1.github.io/tp/).
 - Design of the internal version control system is heavily inspired by [Git](https://github.com/git/git).
 - Certain code implementations may have been inspired by [Baeldung tutorials](https://www.baeldung.com/)
-- Libraries used: 
-  - Junit5
-  - JavaFX
-  - [Add more]
+- Libraries used:
+  - [JavaFX](https://openjfx.io/) for the amazing GUI
+  - [Jackson](https://github.com/FasterXML/jackson) to save your data
+  - [JUnit5](https://github.com/junit-team/junit5) so that we can deliver to you bug-free!
+  - [MDFX](https://github.com/JPro-one/markdown-javafx-renderer) so that you can see User Guide in help without internet
   
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1499,7 +1500,7 @@ is present in AcademyDirectory. Said student/s have no phone numbers.
 
 ***
 
-### Graphic User Interface Testing
+### Graphical User Interface (GUI) Testing
 
 #### Menus
    1. Test the 5 menu items on the bar
