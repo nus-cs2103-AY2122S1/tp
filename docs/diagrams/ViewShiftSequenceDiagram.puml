@@ -31,16 +31,16 @@ activate ViewShiftCommand
 
 
 
-ViewShiftCommand --> ViewShiftCommandParser 
+ViewShiftCommand --> ViewShiftCommandParser
 deactivate ViewShiftCommand
 
-ViewShiftCommandParser --> AddressBookParser 
+ViewShiftCommandParser --> AddressBookParser
 deactivate ViewShiftCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
 ViewShiftCommandParser -[hidden]-> AddressBookParser
 destroy ViewShiftCommandParser
 
-AddressBookParser --> LogicManager  
+AddressBookParser --> LogicManager
 deactivate AddressBookParser
 
 LogicManager -> ViewShiftCommand : execute()

@@ -35,16 +35,16 @@ activate FindCommand
 
 
 
-FindCommand --> FindCommandParser : 
+FindCommand --> FindCommandParser
 deactivate FindCommand
 
-FindCommandParser --> AddressBookParser : 
+FindCommandParser --> AddressBookParser
 deactivate FindCommandParser
 
 
 destroy FindCommandParser
 
-AddressBookParser --> LogicManager : 
+AddressBookParser --> LogicManager
 deactivate AddressBookParser
 
 LogicManager -> FindCommand : execute()
@@ -58,7 +58,7 @@ deactivate Model
 
 
 
-FindCommand --> LogicManager :
+FindCommand --> LogicManager
 deactivate FindCommand
 
 [<--LogicManager
