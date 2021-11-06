@@ -666,36 +666,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 (For all use cases below, the **System** is `WhereTourGo` and the **Actor** is the `User`, unless specified otherwise)
 
 **UC01 - Add a Contact**
-**UC - Edit a Contact**
-**UC - Delete a Contact**
-**UC - List all Contacts**
-**UC - Find a Contact**
-**UC - Filter for Contacts**
-**UC - Sort all Contacts**
-**UC - Summarize all Contacts**
-**UC - View a Contact**
-**UC - Navigate Input History**
-**UC - Undo an Operation**
-**UC - Redo an Operation**
-**UC - Export a Contact**
-**UC - Export all Contacts in Filtered List**
-**UC - Clear all Contacts**
-**UC - Exit the App**
-**UC - View Help Page**
-**UC - Display Commands**
+**UC02 - Edit a Contact**
+**UC03 - Delete a Contact**
+**UC04 - List all Contacts**
+**UC05 - Find a Contact**
+**UC06 - Filter for Contacts**
+**UC07 - Sort all Contacts**
+**UC08 - Summarize all Contacts**
+**UC09 - View a Contact**
+**UC10 - Navigate Input History**
+**UC11 - Undo an Operation**
+**UC12 - Redo an Operation**
+**UC13 - Export a Contact by Index**
+**UC14 - Export all Contacts in Filtered List**
+**UC15 - Clear all Contacts**
+**UC16 - Exit the App**
+**UC17 - View Help Page**
+**UC18 - Display Commands**
 
 
-**UC - Add a Contact**
+**UC01 - Add a Contact**
 
 **MSS**
 
-1.User decides to add a contact
+1. User decides to add a contact
 
-2.User inputs the add command to the interface
+2. User inputs the add command to the interface
 
-3.WhereTourGo informs the user that the contact was added
+3. WhereTourGo informs the user that the contact was added
 
-4.WhereTourGo displays updated list of contacts
+4. WhereTourGo displays updated list of contacts and summary page
 Use case ends.
 
 **Extensions**
@@ -703,91 +703,15 @@ Use case ends.
 
     * 2a1. WhereTourGo shows an error message
 
-  Use case resumes at step 2.
+  Use case ends.
 
 * 2b.  Contact already exists in WhereTourGo
 
     * 2b1. WhereTourGo shows an error message
 
-  Use case resumes at step 2
-
-
-
-
-
-
-**UC - Export a Contact by Index**
-***Preconditions: User has <u>listed all contacts UC02</u>***
-
-**MSS**
-
-1.  User requests to export a specific contact in the list.
-2.  WhereTourGo exports the contact.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The given index is invalid.
-
-    * 2a1. WhereTourGo shows an error message.
-
-      Use case ends.
-
-**UC - Export all Contacts in Filtered List**
-
-**MSS**
-
-1.  User requests to export all contacts in the current list.
-2.  WhereTourGo exports all contacts.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
   Use case ends.
 
-**UC - List all Contacts**
-
-
-**MSS**
-
-1.User requests to list all contacts.
-2.WhereTourGo shows a list of contacts.
-
-  Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-**UC - Clear all Contacts**
-
-**MSS**
-
-1.User requests to clear all contacts.
-2.WhereTourGo clears all contacts.
-
-Use case ends.
-
-**Extensions**
-
-* 2a. WhereTourGo has no contacts to be cleared.
-
-  Use case ends.
-
-**UC - Exit the App**
-
-**MSS**
-
-1.User requests to exit the application.
-2.WhereTourGo closes.
-
-Use case ends.
+**UC02 - Edit a Contact**
 
 
 **UC03 - Delete a Contact**
@@ -806,30 +730,45 @@ Use case ends.
 
 * 1a. The given index is invalid.
 
-    * 1a1. WhereTourGo shows an error message, and instructions on how to use the command.
+  * 1a1. WhereTourGo shows an error message, and instructions on how to use the command.
 
 
       Use case ends.
-    
+
 * 1b. The given name is invalid.
 
-    * 1b1. AddressBook shows an error message, and instructions on how to use the command.
-    
-         Use case ends.
-  
+  * 1b1. AddressBook shows an error message, and instructions on how to use the command.
+
+    Use case ends.
+
 * 1c. The command format is invalid.
 
-    * 1c1. AddressBook shows an error message, and instructions on how to use the command.
+  * 1c1. AddressBook shows an error message, and instructions on how to use the command.
 
-        Use case ends.
+    Use case ends.
 
+**UC04 - List all Contacts**
 
-**UC - Find a Contact**
 
 **MSS**
 
-1.  User requests to find a contact
-2.  WhereTourGo displays a list of all contacts with the given keywords
+1. User requests to list all contacts.
+2. WhereTourGo shows a list of contacts.
+
+Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+**UC05 - Find a Contact**
+
+**MSS**
+
+1. User requests to find a contact
+2. WhereTourGo displays a list of all contacts with the given keywords
 
     Use case ends.
 
@@ -841,12 +780,14 @@ Use case ends.
 
 * 2b. No keywords are provided
 
-    * 2b1. WhereTourGo shows an error message
+  * 2b1. WhereTourGo shows an error message
 
-      Use case resumes at step 2.
+    Use case resumes at step 2.
 
-**UC05 - Summarising Contacts**
+**UC06 - Filter for Contacts**
+**UC07 - Sort all Contacts**
 
+**UC08 - Summarising Contacts**
 
 **MSS**
 
@@ -858,16 +799,121 @@ Use case ends.
 **Extensions**
 
 * 1a. The command format is wrong (e.g. `sum 1`)
-    
-    * 1a1. AddressBook shows an error message, and instructions on how to use the command.
 
-      Use case ends.
+  * 1a1. AddressBook shows an error message, and instructions on how to use the command.
+
+    Use case ends.
 
 * 2a. The addressBook is empty
 
-    * 2a1. AddressBook will not display chart data and show total contacts as 0.
+  * 2a1. AddressBook will not display chart data and show total contacts as 0.
+
+    Use case ends.
+
+**UC09 - View a Contact**
+
+**UC10 - Navigate Input History** 
+
+**MSS**
+1. User request for a previously entered command.
+2. WhereTourGo retrieves the command and displays it in the command box.<br>
+Use case ends
+
+**Extensions**
+* 1a. There is no previously entered command.
+  * 1a1. The command is reset to the current command's original form.
+  
+  Use case ends
+
+**UC11 - Undo an Operation**
+**UC12 - Redo an Operation**
+
+**UC13 - Export a Contact by Index**
+
+***Preconditions: User has <u>listed all contacts UC02</u>***
+
+**MSS**
+
+1.  User requests to export a specific contact in the list.
+2.  WhereTourGo exports the contact.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given index is invalid.
+
+    * 2a1. WhereTourGo shows an error message.
 
       Use case ends.
+
+**UC14 - Export all Contacts in Filtered List**
+
+**MSS**
+
+1.  User requests to export all contacts in the current list.
+2.  WhereTourGo exports all contacts.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+**UC15 - Clear all Contacts**
+
+**MSS**
+
+1. User requests to clear all contacts.
+2. WhereTourGo clears all contacts.
+
+Use case ends.
+
+**Extensions**
+
+* 2a. WhereTourGo has no contacts to be cleared.
+
+  Use case ends.
+
+**UC16 - Exit the App**
+
+**MSS**
+
+1. User requests to exit the application.
+2. WhereTourGo closes.
+
+Use case ends.
+
+**UC17 - View Help Page**
+
+**MSS**
+
+1. User requests to view the help page.
+2. WhereTourGo opens the User Guide using the User's default browser.
+
+Use case ends.
+
+**Extensions**
+* 2a. User's default browser cannot be opened.
+  * 2a1. WhereTourGo will display the in-built help window
+    
+  Use case ends.
+
+**UC18 - Display Commands**
+
+**MSS**
+1. User requests to view the command summary.
+2. WhereTourGo opens the Command Summary using the User's default browser.
+
+Use case ends.
+
+**Extensions**
+* 2a. User's default browser cannot be opened.
+  * 2a1. WhereTourGo will display the in-built help window
+  
+  Use case ends.
 
 *{More to be added}*
 
@@ -917,6 +963,25 @@ testers are expected to do more *exploratory* testing.
 1. _{ more test cases …​ }_
 
 ### Adding a contact
+1. Adding a contact
+
+    1. Test case: `add c/att n/Singapore Flyers p/92345678 e/123@example.com a/30 Raffles Ave, Singapore 039803 rv/Great place! t/view t/tourist ra/4` <br>
+       Expected: "Singapore Flyers" is added to the list. Details of the added contact shown in the status message. Summary is updated and displayed.
+
+    1. Test case:  `add c/fnb n/Genki Sushi WestGate p/12345678 e/123@example.com a/3 Gateway Dr, #03-05, Singapore 608532` <br>
+       Expected: "Genki Sushi WestGate" is added to the list. Details of the added contact shown in the status message. Summary is updated and displayed.
+
+    1. Test case: `add a/8 Sentosa Gateway, 098269 n/HardRock Hotel p/98765432 ra/4 c/acc e/123@example.com ` <br>
+       Expected: "HardRock Hotel" is added to the list. Details of the added contact shown in the status message. Summary is updated and displayed.
+
+    1. Test case: `add a/8 Sentosa Gateway, 098269 n/HardRock Hotel p/98765432 ra/10 c/acc e/123@example.com ` <br>
+       Expected: No contact is added. Error details shown in the status message. Summary is displayed.
+
+    1. Test case: `add c/att n/Botanic Gardens p/23456789 e/123@example.com` <br>
+       Expected: No contact is added. Error details shown in the status message. Summary is displayed.
+
+    1. Other incorrect add commands to try: `add`, `add 0`, `add n/`, `123 add ALL_NECESSARY_PARAMETERS` (All necessary parameters include category, name, phone number, email and address)<br>
+       Expected: Similar to previous.
 
 ### Editing a contact
 
@@ -1002,11 +1067,30 @@ testers are expected to do more *exploratory* testing.
 
 ### Viewing a contact
 
-### Navigating WhereTourGo
-
 ### Navigating input history
+1. Navigating input history using the up arrow key
+
+   1. Test case: Pressing up arrow key (When there are no previously saved commands)<br>
+      Expected: Resets the current command in the command box to its previous value
+
+   1. Test case Pressing up arrow key (When there are previously saved commands)<br>
+      Expected: Changes the current command in the command box to the previous command
+
+1. Navigating input history using the down arrow key
+
+   1. Test case: Pressing down arrow key (When there are no next saved commands)<br>
+      Expected: Clears the current command in the command box
+
+   1. Test case: Pressing down arrow key (When there are next saved commands)<br>
+      Expected: Changes the current command in the command box to the next saved value
 
 ### Clicking on contacts
+1. Clicking on contacts shown in the contact list
+
+    1. Prerequisites: AddressBook has at least 1 contact shown in the contact list.
+
+    1. Test case: Click a contact within the Contact Pane.
+       Expected: Contact Card will light up for a short duration. Details will be displayed in both the display panel and the status message. 
 
 ### Undoing operations
 
@@ -1029,7 +1113,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Exporting all contacts in filtered list
 
-    1. Prerequisites: List all contacts using the a command such as `list`, `filter` etc. Multiple contacts in the list.
+    1. Prerequisites: List all contacts using the command such as `list`, `filter` etc. Multiple contacts in the list.
 
     1. Test case: `export`<br>
        Expected: All contacts are exported from the list. Details of the exported contacts found in the specified export .txt file.
@@ -1065,7 +1149,22 @@ testers are expected to do more *exploratory* testing.
 
 ### Viewing help
 
+1. Viewing help
+
+   1. Test case: `help`<br>
+      Expected: User Guide is opened in the User's default browser.
+
+   1. Other incorrect exit commands to try: `help abc`, `help 2`, `...` <br>
+      Expected: WhereTourGo does not open User Guide. Error details shown in the status message.
+
 ### Displaying commands
 
+1. Displaying command summary
+
+   1. Test case: `cmd` <br>
+      Expected: Command summary is opened in the User's default browser.
+
+   1. Other incorrect exit commands to try: `cmd abc`, `cmd 2`, `...` <br>
+      Expected: WhereTourGo does not open command summary. Error details shown in the status message.
 
 ## **Appendix: Effort**
