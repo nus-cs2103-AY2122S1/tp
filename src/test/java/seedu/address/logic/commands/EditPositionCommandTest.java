@@ -161,7 +161,6 @@ public class EditPositionCommandTest {
         // null -> returns false
         assertFalse(standardCommand.equals(null));
 
-
         // different index -> returns false
         assertFalse(standardCommand.equals(new EditPositionCommand(INDEX_SECOND_POSITION, DESC_DATA_ENGINEER)));
 
