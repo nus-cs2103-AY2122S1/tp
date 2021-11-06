@@ -38,7 +38,9 @@ public class JsonSerializableTransactionListTest {
 
     @Test
     public void saveInventory() {
+
         ReadOnlyTransactionList txnList = TypicalOrders.getTypicalTransactionList();
+
         try {
             new JsonTransactionStorage(Paths.get("typicalTransactions.json"))
                     .saveTransactionList(txnList, addToTestDataPathIfNotNull("typicalTransactions.json"));

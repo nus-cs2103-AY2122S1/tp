@@ -23,7 +23,6 @@ public class TypicalTransactions {
         transactions.add(new TransactionRecord(List.of(TypicalItems.DONUT),
                 TypicalTransactions.TRANSACTION_ID_DONUT, TypicalTransactions.TRANSACTION_TIME_DONUT));
         return new TransactionList(transactions);
-
     }
 
 }
