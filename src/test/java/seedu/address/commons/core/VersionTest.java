@@ -1,6 +1,7 @@
 package seedu.address.commons.core;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -28,6 +29,34 @@ public class VersionTest {
         assertEquals(10, version.getMinor());
         assertEquals(20, version.getPatch());
         assertEquals(true, version.isEarlyAccess());
+    }
+
+    @Test
+    public void versionGetMajor_correctMajor() {
+        int expectedMajor = 19;
+        Version version = new Version(expectedMajor, 10, 20, true);
+        assertEquals(expectedMajor, version.getMajor());
+    }
+
+    @Test
+    public void versionGetMinor_correctMinor() {
+        int expectedMinor = 10;
+        Version version = new Version(19, expectedMinor, 20, true);
+        assertEquals(expectedMinor, version.getMinor());
+    }
+
+    @Test
+    public void versionGetPatch_correctPatch() {
+        int expectedPatch = 20;
+        Version version = new Version(19, 10, expectedPatch, true);
+        assertEquals(expectedPatch, version.getPatch());
+    }
+
+    @Test
+    public void versionIsEarlyAccess_correctIsEarlyAccess() {
+        boolean expectedIsEarlyAccess = true;
+        Version version = new Version(19, 10, 20, expectedIsEarlyAccess);
+        assertEquals(expectedIsEarlyAccess, version.isEarlyAccess());
     }
 
     @Test
@@ -103,6 +132,11 @@ public class VersionTest {
         one = new Version(2, 15, 0, false);
         another = new Version(2, 15, 5, true);
         assertTrue(one.compareTo(another) < 0);
+
+        // Tests access
+        one = new Version(2, 15, 0, false);
+        another = new Version(2, 15, 0, true);
+        assertTrue(one.compareTo(another) == 1);
     }
 
     @Test
@@ -126,6 +160,21 @@ public class VersionTest {
         one = new Version(100, 191, 275, true);
         another = new Version(100, 191, 275, true);
         assertTrue(one.equals(another));
+    }
+
+    @Test
+    public void versionComparable_invalidVersion_equalIsCorrect() {
+        Version one;
+        Version another;
+        GuiSettings notVersion;
+
+        one = new Version(0, 0, 0, false);
+        another = null;
+        assertFalse(one.equals(another));
+
+        one = new Version(100, 191, 275, true);
+        notVersion = new GuiSettings();
+        assertFalse(one.equals(notVersion));
     }
 
     private void verifyVersionParsedCorrectly(String versionString,
