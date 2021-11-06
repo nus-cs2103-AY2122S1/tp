@@ -189,6 +189,47 @@ The following sequence diagram shows how the add operation works.
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
+### Delete marked feature
+
+The ```delete_marked``` command is facilitated by creating an ```DeleteMarkedCommand```.
+This command then updates the ```model``` accordingly.
+
+The following activity diagram summarizes what happens when a user executes a ```delete_marked``` command:
+![images](images/DeleteMarkedCommandActivityDiagram.png)
+
+Given below is an example usage scenario illustrated by a sequence diagram for ```delete_marked``` command.
+
+Step 1. A valid command `delete_marked` is given as user input. This invokes `LogicManager#execute()`, which calls
+`AddressBookParser#parseCommand()` to parse `delete_marked`.
+
+Step 2. `AddreddBookParser#parseCommand()` initializes a `DeleteMarkedCommand`.
+
+Step 3. `DeleteMarkedCommand#execute()` is then called, which will in turn call `Model#updateFilteredList()` (not shown) to 
+update list for applicants marked then `Model#getFilteredList()` is then called to retrieve this list. 
+
+Step 4. `Model#deletePerson()` is called on applicants in the list to delete them.
+
+Step 5. Once the string of all applicant names that are marked is formed, `CommandResult` is initialized with this string as argument
+and returned.
+
+The following sequence diagram shows how the delete marked operation works.
+![images](images/DeleteMarkedCommandSequenceDiagram.png)
+
+#### Design considerations:
+
+**Aspect: User command to use in deleting marked applicants:**
+
+* **Alternative 1 (current choice):** Separate command for deleting marked applicants
+    * Pros: Command has single responsibility of deleting marked applicants based.
+    * Pros: Easy to use for user, does not take any additional input.
+    * Cons: User might be confused between `delete` command for general deletion and `delete_marked` command.
+
+* **Alternative 2:** Part of `delete` command functionality
+    * Pros: Intuitive for user to use `delete` command for all deletion purposes
+    * Cons: Breaks the single responsibility principle as deleting marked applicants does not delete applicants at specific indices
+    like the rest of the `delete` command, but rather a certain group of applicants at once. 
+
+
 ### Edit feature
 
 The ```edit``` command is facilitated by creating an ```EditCommand``` depending on the given input.
