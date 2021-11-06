@@ -160,21 +160,51 @@ Lists residents whose ART collection or FET tests are either:
 * due before a given date, `d1`, by using the `late keywords` or 
 * due within the range of two given dates, `d1` and `d2`, by using the `normal keywords`.
 
-There is a one week deadline for the test kit collection and fet test, therefore due date refers to one week after the last recorded date
+<div markdown="block" class="alert alert-info">
 
-Format: `deadline k/KEYWORD d1/DATE1 d2/DATE2` or `deadline k/LATE_KEYWORD d1/DATE1`
+**:information_source: Note:**<br>
 
-* A resident's fet or collection is due one week after their last fet date or last collection date. 
-  * For example, if a resident's last fet date is on a friday, `15-10-2021`, then the resident's fet deadline is on the following friday which is `22-10-2021`
-* The number of days a resident is considered late is calculated from `a day after` their deadline to the `current date`, both inclusive. 
-  * For example, if a resident's last fet date is `15-10-2021`, then the fet deadline will be `22-10-2021`, if the current date is `25-10-2021`, then the number of days the resident is late for fet is `3 days`.
-* Normal keywords are `f` for fet and `c` for collection
-* Late keywords are `lf` for late fet and `lc` for late collection
-* When a normal keyword is given, both `DATE1` and `DATE2` have to be inputted
-* The given `DATE2` must be a date later than the given `DATE1`
-* `DATE1` is the start date and `DATE2` is the last date inclusive
-* When a late keyword is given, only date1 should be given
-* Anyone whose fet and collection is due before but not on `DATE1` is outputted
+* There is a one week deadline for the test kit collection and fet test, therefore due date refers to one week after the last recorded date
+
+</div>
+
+| Differences | Normal Keyword | Late Keyword |
+|-------------|--------|------|
+| Format | `deadline k/KEYWORD d1/DATE1 d2/DATE2` | `deadline k/LATE_KEYWORD d1/DATE1`|
+| Keyword | `f` or `c` | `lf` or `lc` |
+| Input Date | Both `DATE1` and `DATE2` have to be inputted | Only `DATE1` should be inputted |
+| Command Example | `deadline k/f d1/10-10-2021 d2/12-10-2021` | `deadline k/lf d1/11-10-2021` |
+| Usage | List residents whose deadline lie within the range of two given dates, inclusive | List residents whose deadline is due before a given date
+| Usage Example | A resident's fet or collection is due one week after their `last fet date` or `last collection date`. <br> For example, if a resident's last fet date is on a friday, `15-10-2021`, then the resident's fet deadline is on the following friday which is `22-10-2021` | The number of days a resident is considered late is calculated from `a day after` their deadline to the `current date`, both inclusive.<br> For example, if a resident's last fet date is `15-10-2021`, then the fet deadline will be `22-10-2021`, if the current date is `25-10-2021`, then the number of days the resident is late for fet is `3 days`.
+| Note | The given `DATE2` must be a date later than the given `DATE1`<br>`DATE1` is the start date and `DATE2` is the last date inclusive | Anyone whose fet and collection is due before but not on `DATE1` is outputted
+
+Here's a step by step guide for `Normal Keyword`:<br>
+1. Navigate to the `Resident` Tab
+   ![Step1](images/logic/commands/deadlinecommand/step1.png)
+
+
+2. Type the `deadline` command with the `normal keyword`, `f` for fet or `c` for collection, `d1`, the start date and
+   `d2`, the end date.
+   ![Step2](images/logic/commands/deadlinecommand/step2a.png)
+
+
+3. The event list will now show the filtered list of residents.
+   ![Step3](images/logic/commands/deadlinecommand/step3a.png)
+
+
+Here's a step by step guide for `Late Keyword`:<br>
+1. Navigate to the `Resident` Tab
+   ![Step1](images/logic/commands/deadlinecommand/step1.png)
+
+
+2. Type the `deadline` command with the `late keyword`, `lf` for late fet or `lc` for late collection, `d1`, the 
+   end date
+   ![Step2](images/logic/commands/deadlinecommand/step2b.png)
+
+
+3. The event list will now show the filtered list of residents.
+   ![Step3](images/logic/commands/deadlinecommand/step3b.png)
+   
 
 Examples:
 * `deadline k/f d1/10-10-2021 d2/12-10-2021` retrieves a list of residents whose `FET` is due between `10 Oct 2021` and `12 Oct 2021`, inclusive
@@ -417,11 +447,34 @@ Add multiple residents to an event based on the information given(name or room n
 
 Format: `include INDEX r/RESIDENTS`
 
-* Residents can be given in the form of name or room, but all has to be all rooms or all names
-* The resident's name/room inputted has to exist in the address book under the `Resident` Tab to be added to an `Event`  
-* When adding multiple names/rooms, each resident's name/room is separated by a comma
-* The resident's name/room inputted is case-insensitive
-* If one or more of the given name/room is invalid, an error message is outputted and none of the name/room is added to the event
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:**<br>
+
+* Residents can be given in the form of `names/rooms`, but all has to be all `rooms` or all `names`
+* The residents' `names/rooms` inputted have to exist in the address book under the `Resident` Tab to be added to an `Event`
+* When adding multiple `names/rooms`, each resident's `name/room` is separated by a comma
+* The resident's `name/room` inputted is case-insensitive
+
+</div>
+
+Here's a step by step guide:<br>
+1. Navigate to the `Event` Tab
+   ![Step1](images/logic/commands/includecommand/step1.png)
+   
+
+2. View the event to add residents to, either through the `view` command or by clicking on the desired event
+   ![Step2](images/logic/commands/includecommand/step2.png)
+
+
+3. Type the `include` command with the `index` of the event, and the `names/rooms` of the residents to include to
+   the event. When adding multiple `names/rooms`, remember to separate the `names/rooms` by a comma.
+   ![Step3](images/logic/commands/includecommand/step3.png)
+
+
+4. The sidebar will now show the updated list of residents in the event.
+   ![Step2](images/logic/commands/includecommand/step4.png)
+   
 
 Examples:
 * `include 1 r/A101` adds the resident who stays in room A101 to the first event in the address book
@@ -435,11 +488,34 @@ Remove multiple residents from an event based on the information given(name or r
 
 Format: `exclude INDEX r/RESIDENTS`
 
-* Residents can be given in the form of name or room, but all has to be all rooms or all names
-* The resident's name/room inputted has to be invovled with the `Event` under the `Event` Tab, to be removed from that event
-* When removing multiple names/rooms, each resident's name/room is separated by a comma
-* The resident's name/room inputted is case-insensitive
-* If one or more of the given name/room is invalid, an error message is outputted and none of the name/room is removed from the event
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:**<br>
+
+* Residents can be given in the form of `names/rooms`, but all has to be all `rooms` or all `names`
+* The residents' `names/rooms` inputted have to be involved in the `Event` under the `Event` Tab, to be removed from
+  that event
+* When removing multiple `names/rooms`, each resident's `name/room` is separated by a comma
+* The resident's `name/room` inputted is case-insensitive
+
+</div>
+
+Here's a step by step guide:<br>
+1. Navigate to the `Event` Tab
+   ![Step1](images/logic/commands/excludecommand/step1.png)
+
+
+2. View the event to remove residents from, either through the `view` command or by clicking on the desired event
+   ![Step2](images/logic/commands/excludecommand/step2.png)
+
+
+3. Type the `exclude` command with the `index` of the event, and the `names/rooms` of the residents to exclude from
+   the event. When removing multiple `names/rooms`, remember to separate the `names/rooms` by a comma.
+   ![Step3](images/logic/commands/excludecommand/step3.png)
+
+
+4. The sidebar will now show the updated list of residents in the event.
+   ![Step2](images/logic/commands/excludecommand/step4.png)
 
 Examples:
 * `exclude 1 r/A101` removes the resident who stays in room A101 from the first event in the address book
