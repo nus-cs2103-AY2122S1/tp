@@ -86,6 +86,8 @@ public class EditCommand extends Command {
     private final EditTaskDescriptor editTaskDescriptor;
 
     /**
+     * Constructor for an EditCommand to edit both a person's details and the tasks.
+     *
      * @param index of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      * @param targetTaskIndex of the person in the filtered person list
@@ -102,6 +104,8 @@ public class EditCommand extends Command {
     }
 
     /**
+     * Constructor for an EditCommand to edit a person's details
+     *
      * @param index of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
@@ -196,54 +200,14 @@ public class EditCommand extends Command {
         return new Task(updatedName, updatedDate, updatedTime, updatedVenue);
     }
 
-    @Override
-    public boolean equals(Object other) {
-        // short circuit if same object
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof EditCommand)) {
-            return false;
-        }
-
-        // state check
-        EditCommand e = (EditCommand) other;
-        if (index.equals(e.index) && editPersonDescriptor.equals(e.editPersonDescriptor)) {
-            if (editTaskDescriptor != null && e.editTaskDescriptor == null
-                    || editTaskDescriptor == null && e.editTaskDescriptor != null) {
-                return false;
-            } else {
-                boolean hasSameNonNullIndex = targetTaskIndex != null && e.targetTaskIndex != null
-                        && targetTaskIndex.equals(e.targetTaskIndex);
-                if (editTaskDescriptor != null) {
-                    return editTaskDescriptor.equals(e.editTaskDescriptor) &&
-                            (targetTaskIndex == null && e.targetTaskIndex == null)
-                            || hasSameNonNullIndex;
-                } else {
-                    return (targetTaskIndex == null && e.targetTaskIndex == null)
-                            || hasSameNonNullIndex;
-                }
-            }
-        }
-        return false;
-    }
-
-    public String getCommand() {
-        return COMMAND_WORD;
-    }
-
-    public String getDescription() {
-        return DESCRIPTION;
-    }
-
     /**
      * Stores the details to edit the person with. Each non-empty field value will replace the
      * corresponding field value of the person.
      */
     public static class EditPersonDescriptor {
+
         private Name name;
+
         private Phone phone;
         private Email email;
         private Address address;
@@ -251,9 +215,7 @@ public class EditCommand extends Command {
         private Description description;
         private List<Task> tasks;
         private Boolean isImportant;
-
         public EditPersonDescriptor() {}
-
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
@@ -372,20 +334,20 @@ public class EditCommand extends Command {
                     && getTasks().equals(e.getTasks())
                     && getDescription().equals(e.getDescription());
         }
-    }
 
+
+    }
     /**
      * Stores the details to edit the task with. Each non-empty field value will replace the
      * corresponding field value of the task.
      */
     public static class EditTaskDescriptor {
         private TaskName taskName;
+
         private TaskDate taskDate;
         private TaskTime taskTime;
         private Venue taskVenue;
-
         public EditTaskDescriptor() {}
-
         /**
          * Copy constructor.
          */
@@ -455,5 +417,47 @@ public class EditCommand extends Command {
                     && getTaskTime().equals(e.getTaskTime())
                     && getTaskVenue().equals(e.getTaskVenue());
         }
+
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof EditCommand)) {
+            return false;
+        }
+
+        // state check
+        EditCommand e = (EditCommand) other;
+        if (index.equals(e.index) && editPersonDescriptor.equals(e.editPersonDescriptor)) {
+            if (editTaskDescriptor != null && e.editTaskDescriptor == null
+                    || editTaskDescriptor == null && e.editTaskDescriptor != null) {
+                return false;
+            } else {
+                boolean hasSameNonNullIndex = targetTaskIndex != null && e.targetTaskIndex != null
+                        && targetTaskIndex.equals(e.targetTaskIndex);
+                if (editTaskDescriptor != null) {
+                    return editTaskDescriptor.equals(e.editTaskDescriptor) && (targetTaskIndex == null
+                            && e.targetTaskIndex == null) || hasSameNonNullIndex;
+                } else {
+                    return (targetTaskIndex == null && e.targetTaskIndex == null)
+                            || hasSameNonNullIndex;
+                }
+            }
+        }
+        return false;
+    }
+
+    public String getCommand() {
+        return COMMAND_WORD;
+    }
+
+    public String getDescription() {
+        return DESCRIPTION;
     }
 }

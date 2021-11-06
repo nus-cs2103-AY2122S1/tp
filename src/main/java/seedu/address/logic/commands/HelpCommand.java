@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.util.Hashtable;
 
 import seedu.address.model.Model;
-import seedu.address.ui.HelpWindow;
 
 /**
  * Format full help instructions for every command for display.
@@ -46,6 +45,7 @@ public class HelpCommand extends Command {
 
     /**
      * Constructor for a HelpCommand to show help for a specified command.
+     *
      * @param commandSpecified The command specified to show help for.
      */
     public HelpCommand(String commandSpecified) {
@@ -81,6 +81,12 @@ public class HelpCommand extends Command {
         commandTable.put(ViewTaskListCommand.COMMAND_WORD, this::parseViewTaskList);
     }
 
+    /**
+     * Parses the given commandWord.
+     *
+     * @param commandWord The specified commandWord.
+     * @return CommandResult that contains information to display to the user.
+     */
     public CommandResult parseCommandWord(String commandWord) {
         CommandResult defaultCommandResult = new CommandResult(DESCRIPTION);
         if (commandTable.containsKey(commandWord)) {

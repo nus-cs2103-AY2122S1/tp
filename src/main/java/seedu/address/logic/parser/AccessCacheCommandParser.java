@@ -8,6 +8,9 @@ import seedu.address.logic.commands.AccessCacheCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * Parses input arguments and creates a new AccessCacheCommand object.
+ */
 public class AccessCacheCommandParser implements Parser<Command> {
 
     public static final String UNKNOWN_KEY = "Unknown Key found in AccessCacheCommandParser!";

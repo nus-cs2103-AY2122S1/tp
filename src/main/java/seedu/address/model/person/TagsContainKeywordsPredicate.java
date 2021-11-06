@@ -9,7 +9,16 @@ import java.util.Set;
 
 import seedu.address.model.tag.Tag;
 
+/**
+ * Tests that a {@code Person}'s {@code List<Tag>} matches any of the keywords given.
+ */
 public class TagsContainKeywordsPredicate extends AttributeContainsKeywordsPredicate {
+
+    /**
+     * Constructor for a TagsContainKeywordsPredicate.
+     *
+     * @param keywords The {@code List<String>} that contains keywords used to find a person.
+     */
     public TagsContainKeywordsPredicate(List<String> keywords) {
         super(keywords);
     }

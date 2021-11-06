@@ -186,43 +186,16 @@ public class EditTaskCommand extends Command {
         return idx;
     }
 
-    @Override
-    public boolean equals(Object other) {
-        // short circuit if same object
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof EditTaskCommand)) {
-            return false;
-        }
-
-        // state check
-        EditTaskCommand e = (EditTaskCommand) other;
-        return targetPersonIndex.equals(e.targetPersonIndex)
-                && targetTaskIndex.equals(e.targetTaskIndex)
-                && editTaskDescriptor.equals(e.editTaskDescriptor);
-    }
-
-    public String getCommand() {
-        return COMMAND_WORD;
-    }
-
-    public String getDescription() {
-        return DESCRIPTION;
-    }
-
     /**
      * Stores the details to edit the task with. Each non-empty field value will replace the
      * corresponding field value of the task.
      */
     public static class EditTaskDescriptor {
+
         private TaskName taskName;
         private TaskDate taskDate;
         private TaskTime taskTime;
         private Venue taskVenue;
-
         public EditTaskDescriptor() {}
 
         /**
@@ -294,5 +267,33 @@ public class EditTaskCommand extends Command {
                     && getTaskTime().equals(e.getTaskTime())
                     && getTaskVenue().equals(e.getTaskVenue());
         }
+
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof EditTaskCommand)) {
+            return false;
+        }
+
+        // state check
+        EditTaskCommand e = (EditTaskCommand) other;
+        return targetPersonIndex.equals(e.targetPersonIndex)
+                && targetTaskIndex.equals(e.targetTaskIndex)
+                && editTaskDescriptor.equals(e.editTaskDescriptor);
+    }
+
+    public String getCommand() {
+        return COMMAND_WORD;
+    }
+
+    public String getDescription() {
+        return DESCRIPTION;
     }
 }

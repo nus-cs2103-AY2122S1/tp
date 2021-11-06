@@ -11,6 +11,11 @@ import seedu.address.commons.util.StringUtil;
  */
 public class NameContainsKeywordsPredicate extends AttributeContainsKeywordsPredicate {
 
+    /**
+     * Constructor for a NameContainsKeywordsPredicate.
+     *
+     * @param keywords The {@code List<String>} that contains keywords used to find a person.
+     */
     public NameContainsKeywordsPredicate(List<String> keywords) {
         super(keywords);
     }

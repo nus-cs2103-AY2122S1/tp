@@ -28,16 +28,16 @@ public class ClearCommand extends Command {
         return commandResult;
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return (other instanceof ClearCommand); // instanceof handles nulls
+    }
+
     public String getCommand() {
         return COMMAND_WORD;
     }
 
     public String getDescription() {
         return DESCRIPTION;
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        return (other instanceof ClearCommand); // instanceof handles nulls
     }
 }
