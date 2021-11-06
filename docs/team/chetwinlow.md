@@ -55,5 +55,5 @@ restaurants.
 * Removed remaining traces of [`AB3`](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/45) related information from UG. 
 
 #### Contributions to the Developer Guide (DG):
-* Draw UML diagrams for [to be completed]
+* Drew Class, Sequence, Activity diagrams for [`FindCustomerCommand`](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/228) and [`EditCustomerCommand`](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/230)
 * Added [use case](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/32) for `Add Customer`, `Add Employee`, `Add Supplier` in DG
