@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -31,7 +32,7 @@ public class DeleteClassCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_CLASS_SUCCESS = "Deleted Student: %1$s";
+    public static final String MESSAGE_DELETE_CLASS_SUCCESS = "Deleted Class: %1$s";
 
     private final Index targetIndex;
 
@@ -78,7 +79,7 @@ public class DeleteClassCommand extends Command {
             ClassCode classCode = new EmptyClassCode();
             Set<Tag> tags = student.getTags();
             List<StudentMark> marks = student.getMarks();
-            Set<TutorialGroup> tutorialGroups = student.getTutorialGroups();
+            Set<TutorialGroup> tutorialGroups = new HashSet<>();
             return new Student(name, phone, email, address, classCode, tags, marks, tutorialGroups);
         }
         return student;

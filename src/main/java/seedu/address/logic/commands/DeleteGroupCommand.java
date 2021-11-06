@@ -63,6 +63,10 @@ public class DeleteGroupCommand extends Command {
 
         model.deleteTutorialGroup(toDelete);
 
+        // filters students that belong to that tutorial group and edits them to have the tutorial group deleted
+        model.getUnfilteredStudentList().stream().filter(x -> x.isBelongTutorialGroup(toDelete))
+                .forEach(x -> model.setStudent(x, DeleteStudentFromGroupCommand.deleteTutorialGroup(x, toDelete)));
+
         // rearrange tutorial groups in order after deleting
         model.sortTutorialGroups();
         return new CommandResult(String.format(MESSAGE_DELETE_GROUP_SUCCESS, toDelete));

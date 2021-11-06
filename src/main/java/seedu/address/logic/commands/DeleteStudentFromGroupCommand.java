@@ -103,7 +103,7 @@ public class DeleteStudentFromGroupCommand extends Command {
     /**
      * Creates and returns a {@code Student} with the {@code TutorialGroup} deleted.
      */
-    private static Student deleteTutorialGroup(Student studentToEdit, TutorialGroup group) throws CommandException {
+    public static Student deleteTutorialGroup(Student studentToEdit, TutorialGroup group) {
         assert studentToEdit != null;
 
         Set<TutorialGroup> updatedTutorialGroups = new HashSet<>(studentToEdit.getTutorialGroups());
