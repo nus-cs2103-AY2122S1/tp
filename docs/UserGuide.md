@@ -189,9 +189,10 @@ Format: `findStudent KEYWORD [MORE_KEYWORDS]`
 * Students matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
+
 Examples:
-* `findStudent Joh@` returns `john` and `John Doe`
-* `findStudent alex! davi` returns `Alex Yeoh`, `David Li`<br>
+* `findStudent Joh@` returns `john` and `John Doe`, if there are students named 'john' and 'John Doe'
+* `findStudent alex! davi` returns `Alex Yeoh`, `David Li`, if there are students named 'Alex Yeoh' and 'David Li'<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
   
 ### Clearing all entries from student list: `clearStudents`
@@ -494,7 +495,7 @@ Commands | Format | Examples
 [**Delete Student**](#delete-a-student-deletestudent) | `deleteStudent INDEX` | e.g., `deleteStudent 1`
 [**Mark Student Attendance**](#marking-a-students-attendance-marka) | `marka INDEX w/WEEK` | e.g., `marka 1 w/10`
 [**Mark Student Participation**](#marking-a-students-participation-markp) | `markp INDEX w/WEEK` | e.g., `markp 1 w/10`
-[**Find Student**](#find-student-by-name-findstudent) | `findStudent KEYWORD [MORE_KEYWORDS]` | e.g., `findStudent John`
+[**Find Student**](#find-student-by-name-findstudent) | `findStudent KEYWORD [MORE_KEYWORDS]` | e.g., `findStudent David`
 [**Clear Students**](#clearing-all-entries-from-student-list-clearstudents) | `clearStudents`
 
 ## [Groups](#groups)
