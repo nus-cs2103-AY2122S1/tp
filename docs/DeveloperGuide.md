@@ -570,22 +570,37 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect delete commands to try: `view 0`, `view x` (where x is larger than the list size)<br>
        Expected: Error message shown
 
-### Deleting a person
+### Editing residents
 
-1. Deleting a person while all persons are being shown
+1. Edit multiple residents' details while all residents are being shown
+   
+    1. Prerequisites: View all residents using the `view` command. Multiple residents in the list. 
+       Edited resident does not already exist in the address book. Edited details are not the same as the original details.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Test case: `edit 1 2 v/T`<br>
+       Expected: First and second residents' vaccination statuses are updated to vaccinated. First and second residents' names shown in the status message.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `edit 0`<br>
+       Expected: No resident is edited. Error details shown in the status message.
+
+    1. Other incorrect delete commands to try: `edit`, `edit x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+       
+### Deleting residents
+
+1. Deleting multiple resident while all residents are being shown
+
+   1. Prerequisites: View all resident using the `view` command. Multiple residents in the list.
+
+   1. Test case: `delete 1 2`<br>
+      Expected: First and second residents are deleted from the list. Names of the deleted residents shown in the status message.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No resident is deleted. Error details shown in the status message. 
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
 
 ### Finding an event
 
@@ -601,6 +616,22 @@ testers are expected to do more *exploratory* testing.
 
     1. Other incorrect delete commands to try: `find`, `find d/03-01` (invalid date input)<br>
        Expected: Error message shown
+
+### Editing an event
+
+1. Edit an event's details while all events are being shown
+
+    1. Prerequisites: View all events using the `view` command. Multiple events in the list.
+       Edited event does not already exist in the address book. Edited details are not the same as the original details.
+
+    1. Test case: `edit 1 c/5`<br>
+       Expected: First event capacity is updated to 5. Updated event details shown in the status message.
+
+    1. Test case: `edit 0`<br>
+       Expected: No event is edited. Error details shown in the status message.
+
+    1. Other incorrect delete commands to try: `edit`, `edit x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
 
 ### Deleting an event
 
