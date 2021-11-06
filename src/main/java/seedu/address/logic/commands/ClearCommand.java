@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -27,13 +27,13 @@ public class ClearCommand extends Command {
 
         try {
             RoleReqStorage.reset();
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             throw new CommandException(Messages.FILE_NOT_FOUND + "\n" + RoleReqStorage.FILEPATH);
         }
 
         try {
             DefaultShiftTimingsStorage.reset();
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             throw new CommandException(Messages.FILE_NOT_FOUND + "\n" + DefaultShiftTimingsStorage.FILEPATH);
         }
 
