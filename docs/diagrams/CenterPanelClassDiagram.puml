@@ -1,0 +1,38 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor UI_COLOR_T4
+skinparam classBackgroundColor UI_COLOR
+
+package UI <<Rectangle>> {
+Class CenterPanel
+Class SchedulePanel
+Class PersonGridPanel
+Class PersonListPanel
+Class LessonListPanel
+Class TagListPanel
+Class LessonCard
+Class PersonCard
+Class TagCard
+}
+
+package Model <<Rectangle>> {
+Class HiddenModel #FFFFFF
+}
+
+CenterPanel *--> "1" PersonGridPanel
+CenterPanel *--> "1" SchedulePanel
+CenterPanel *--> "1" TagListPanel
+
+PersonGridPanel --> "1" PersonListPanel
+PersonGridPanel --> "1" LessonListPanel
+
+PersonListPanel --> "*" PersonCard
+LessonListPanel --> "*" LessonCard
+TagListPanel --> "*" TagCard
+
+PersonCard ..> Model
+LessonCard ..> Model
+TagCard ..> Model
+SchedulePanel ..> Model
+@enduml

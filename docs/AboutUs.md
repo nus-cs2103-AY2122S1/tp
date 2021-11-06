@@ -20,7 +20,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 <img src="images/eeliana.png" width="200px">
 
-[[github](http://github.com/eeliana)]
+[[github](http://github.com/eeliana)] [[Portfolio](./team/eeliana.md)]
 
 * Role: Developer
 
@@ -37,7 +37,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 <img src="images/xiaoyunnn.png" width="200px">
 
-[[github](http://github.com/Xiaoyunnn)] [[Portfolio](team/xiaoyunnn.html)]
+[[github](http://github.com/Xiaoyunnn)] [[Portfolio](team/xiaoyunnn.md)]
 
 * Role: Developer, UI Designer
 * Responsibility: UI
