@@ -3,12 +3,12 @@ package seedu.anilist.logic.parser;
 import static seedu.anilist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.anilist.commons.core.Messages.MESSAGE_OUT_OF_RANGE_INDEX;
 import static seedu.anilist.logic.commands.CommandTestUtil.ACTION_DESC_ADD;
-import static seedu.anilist.logic.commands.CommandTestUtil.ACTION_DESC_DELETE;
+import static seedu.anilist.logic.commands.CommandTestUtil.ACTION_DESC_DELETE_SHORT_FORM;
 import static seedu.anilist.logic.commands.CommandTestUtil.GENRE_DESC_ACTION;
 import static seedu.anilist.logic.commands.CommandTestUtil.GENRE_DESC_SCIENCE_FICTION;
-import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_ACTION_DESC;
-import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_ACTION_NO_SUCH_ACTION;
-import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_GENRE_DESC;
+import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_ACTION_ALPHA;
+import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_ACTION_DESC_ALPHA;
+import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_GENRE_DESC_NON_ALPHANUMERIC;
 import static seedu.anilist.logic.commands.CommandTestUtil.STATUS_DESC_TOWATCH;
 import static seedu.anilist.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.anilist.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -82,14 +82,15 @@ public class GenreCommandParserTest {
     public void parse_invalidValue_failure() {
         //invalid action
         assertParseFailure(parser,
-                "1" + INVALID_ACTION_DESC + GENRE_DESC_SCIENCE_FICTION,
-                String.format(Action.MESSAGE_INVALID_ACTION_FORMAT, INVALID_ACTION_NO_SUCH_ACTION));
+                "1" + INVALID_ACTION_DESC_ALPHA + GENRE_DESC_SCIENCE_FICTION,
+                String.format(Action.MESSAGE_INVALID_ACTION_FORMAT, INVALID_ACTION_ALPHA));
 
         //invalid genre
-        assertParseFailure(parser, "1" + ACTION_DESC_DELETE + INVALID_GENRE_DESC, Genre.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + ACTION_DESC_DELETE_SHORT_FORM + INVALID_GENRE_DESC_NON_ALPHANUMERIC,
+                Genre.MESSAGE_CONSTRAINTS);
 
         // wrong params specified
-        assertParseFailure(parser, "1" + ACTION_DESC_DELETE + GENRE_DESC_ACTION + STATUS_DESC_TOWATCH,
+        assertParseFailure(parser, "1" + ACTION_DESC_DELETE_SHORT_FORM + GENRE_DESC_ACTION + STATUS_DESC_TOWATCH,
                 MESSAGE_INVALID_FORMAT);
     }
 

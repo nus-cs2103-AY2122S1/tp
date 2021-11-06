@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.anilist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.anilist.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.anilist.logic.commands.CommandTestUtil.ACTION_DESC_ADD;
-import static seedu.anilist.logic.commands.CommandTestUtil.ACTION_DESC_DELETE;
+import static seedu.anilist.logic.commands.CommandTestUtil.ACTION_DESC_DELETE_SHORT_FORM;
 import static seedu.anilist.logic.commands.CommandTestUtil.GENRE_DESC_SCIENCE_FICTION;
 import static seedu.anilist.logic.commands.CommandTestUtil.STATUS_DESC_WATCHING;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_SCIENCE_FICTION;
@@ -87,7 +87,7 @@ public class AnimeListParserTest {
                 .withGenre(VALID_GENRE_SCIENCE_FICTION)
                 .build();
         GenreCommand command = (GenreCommand) parser.parseCommand(GenreCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_ANIME.getOneBased() + ACTION_DESC_DELETE
+                + INDEX_FIRST_ANIME.getOneBased() + ACTION_DESC_DELETE_SHORT_FORM
                 + GENRE_DESC_SCIENCE_FICTION);
         assertEquals(new GenreDeleteCommand(INDEX_FIRST_ANIME, descriptor), command);
     }

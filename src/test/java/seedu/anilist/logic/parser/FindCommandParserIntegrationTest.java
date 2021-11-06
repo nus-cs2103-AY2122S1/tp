@@ -3,8 +3,8 @@ package seedu.anilist.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.anilist.commons.core.Messages.MESSAGE_ANIME_LISTED_OVERVIEW;
 import static seedu.anilist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_GENRE_DESC;
-import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_GENRE_DESC_NON_ALPHANUMERIC;
+import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_NAME_DESC_BLANK;
 import static seedu.anilist.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.anilist.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.anilist.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -46,8 +46,8 @@ public class FindCommandParserIntegrationTest {
     public void execute_zeroKeywords_throwsParseException() {
         assertParseFailure(parser, PREAMBLE_NON_EMPTY, MESSAGE_INVALID_FORMAT);
         assertParseFailure(parser, PREAMBLE_WHITESPACE, MESSAGE_INVALID_FORMAT);
-        assertParseFailure(parser, INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, INVALID_GENRE_DESC, Genre.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, INVALID_NAME_DESC_BLANK, Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, INVALID_GENRE_DESC_NON_ALPHANUMERIC, Genre.MESSAGE_CONSTRAINTS);
     }
 
     @Test

@@ -3,8 +3,8 @@ package seedu.anilist.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_ACTION_ALPHA;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_ACTION_EMPTY_STRING;
-import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_ACTION_NO_SUCH_ACTION;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_ACTION_ADD;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_ACTION_DELETE_SHORT_FORM;
 import static seedu.anilist.testutil.Assert.assertThrows;
@@ -18,7 +18,7 @@ public class ActionTest {
         // null action string
         assertThrows(NullPointerException.class, () -> Action.isValidAction(null));
 
-        assertFalse(Action.isValidAction(INVALID_ACTION_NO_SUCH_ACTION));
+        assertFalse(Action.isValidAction(INVALID_ACTION_ALPHA));
         assertFalse(Action.isValidAction(INVALID_ACTION_EMPTY_STRING));
 
         assertTrue(Action.isValidAction(VALID_ACTION_ADD));

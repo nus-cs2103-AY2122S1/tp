@@ -7,8 +7,8 @@ import static seedu.anilist.logic.commands.CommandTestUtil.GENRE_DESC_ACTION;
 import static seedu.anilist.logic.commands.CommandTestUtil.GENRE_DESC_SCIENCE_FICTION;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_EPISODE_DESC_DECIMAL;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_EPISODE_DESC_LARGER_THAN_MAX_INT;
-import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_GENRE_DESC;
-import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_GENRE_DESC_NON_ALPHANUMERIC;
+import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_NAME_DESC_BLANK;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_STATUS_DESC_ALPHA;
 import static seedu.anilist.logic.commands.CommandTestUtil.NAME_DESC_AKIRA;
 import static seedu.anilist.logic.commands.CommandTestUtil.NAME_DESC_BNHA;
@@ -113,7 +113,7 @@ public class AddCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         // invalid name
-        assertParseFailure(parser, INVALID_NAME_DESC + EPISODE_DESC_EPISODE_TWO + STATUS_DESC_TOWATCH
+        assertParseFailure(parser, INVALID_NAME_DESC_BLANK + EPISODE_DESC_EPISODE_TWO + STATUS_DESC_TOWATCH
                 + GENRE_DESC_ACTION + GENRE_DESC_SCIENCE_FICTION, Name.MESSAGE_CONSTRAINTS);
 
         // invalid episode
@@ -128,7 +128,7 @@ public class AddCommandParserTest {
 
         // invalid genres
         assertParseFailure(parser, NAME_DESC_BNHA + EPISODE_DESC_EPISODE_TWO + STATUS_DESC_TOWATCH
-                + INVALID_GENRE_DESC + VALID_GENRE_SCIENCE_FICTION, Genre.MESSAGE_CONSTRAINTS);
+                + INVALID_GENRE_DESC_NON_ALPHANUMERIC + VALID_GENRE_SCIENCE_FICTION, Genre.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BNHA
