@@ -1,11 +1,15 @@
 package seedu.address.model.module.task;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.model.module.task.TaskDeadline.DEADLINE_DATE_TIME_FORMATTER;
 import static seedu.address.model.module.task.TaskDeadline.isValidTaskDeadline;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
+
+import java.time.LocalDateTime;
 
 class TaskDeadlineTest {
     @Test
@@ -44,5 +48,11 @@ class TaskDeadlineTest {
         assertTrue(isValidTaskDeadline("17/09/1999 24:00"));
         assertTrue(isValidTaskDeadline("01/01/1970 00:00"));
         assertTrue(isValidTaskDeadline("31/12/3000 23:59"));
+    }
+
+    @Test
+    public void test_deadlineMethod() {
+        LocalDateTime testDateTime = LocalDateTime.parse("01/01/1970 00:00", DEADLINE_DATE_TIME_FORMATTER);
+        assertEquals(testDateTime, new TaskDeadline("01/01/1970 00:00").getDeadline());
     }
 }
