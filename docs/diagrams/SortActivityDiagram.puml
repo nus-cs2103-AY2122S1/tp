@@ -1,0 +1,16 @@
+@startuml
+!include style.puml
+
+start
+:User sorts contact(s);
+:Parse command;
+if () then ([User types valid command])
+  :Contacts Pane shows sorted list of contact(s);
+else ([User types invalid command])
+    :Results Pane shows "Invalid command format!"
+    and the details of Sort command;
+    :Contacts Pane shows current list of contact(s);
+endif
+stop
+
+@enduml
