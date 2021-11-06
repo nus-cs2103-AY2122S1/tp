@@ -12,28 +12,30 @@ title: Developer Guide
 5. [UI](#UI component)
 6. [Logic component](#Logic component)
 7. [Storage component](#component)
-8. [Common classes](#Common classes)
-9. [User Stories](#User Stories)
-10. [Use case](#Use case)
-11. [Non-Functional Requirements](#Non-Functional Requirements)
-12. [Glossary](#Glossary) 
-13. [Appendix: Instructions for manual testing](#Appendix)
+8. [Documentation, logging, testing, configuration, dev-ops](#Documentation)
+9. [Appendix: Requirements](#Appendix Requirements)
+9. [Common classes](#Common classes)
+10. [User Stories](#User Stories)
+11. [Use case](#Use case)
+12. [Non-Functional Requirements](#Non-Functional Requirements)
+13. [Glossary](#Glossary) 
+14. [Appendix: Instructions for manual testing](#Appendix)
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Acknowledgements**
+## <a name="Acknowledgements"></a> **Acknowledgements**
 ProgrammerError makes use of the following third-party libraries:
 * Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JSON In Java](https://mvnrepository.com/artifact/org.json/json), [opencsv](http://opencsv.sourceforge.net/), [JUnit5](https://github.com/junit-team/junit5)
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+## <a name="Setting up"></a> **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Design**
+## <a name="Design"></a> **Design**
 
 <div markdown="span" class="alert alert-primary">
 
@@ -41,7 +43,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 the [diagrams](https://github.com/AY2122S1-CS2103-F09-3/tp/tree/master/docs/diagrams) folder.
 </div>
 
-### Architecture
+## <a name="Architecture"></a> Architecture
 
 <img src="images/ArchitectureDiagram.png" width="280" />
 
@@ -52,8 +54,8 @@ Given below is a quick overview of main components and how they interact with ea
 **Main components of the architecture**
 
 **`Main`** has two classes
-called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java)
-and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It
+called [`Main`](https://github.com/AY2122S1-CS2103-F09-3/tp/blob/master/src/main/java/seedu/programmer/Main.java)
+and [`MainApp`](https://github.com/AY2122S1-CS2103-F09-3/tp/blob/master/src/main/java/seedu/programmer/MainApp.java). It
 is responsible for,
 
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
@@ -90,7 +92,7 @@ implementation of a component), as illustrated in the (partial) class diagram be
 
 The sections below give more details of each component.
 
-### UI component
+## <a name="UI component"></a> UI component
 
 The **API** of this component is specified
 in [`Ui.java`](https://github.com/AY2122S1-CS2103-F09-3/tp/blob/master/src/main/java/seedu/programmer/ui/Ui.java)
@@ -120,7 +122,7 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Student` object residing in the `Model`.
 
-### Logic component
+## <a name="Logic component"></a> Logic component
 
 **
 API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
@@ -159,7 +161,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser`
   interface so that they can be treated similarly where possible e.g, during testing.
 
-### Model component
+## <a name="Model component"></a> Model component
 
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103-F09-3/tp/blob/master/src/main/java/seedu/programmer/model/Model.java)
 
@@ -183,7 +185,7 @@ The `Model` component,
 
 </div>
 
-### Storage component
+## <a name="Storage component"></a> Storage component
 
 **API** : [`Storage.java`](https://github.com/AY2122S1-CS2103-F09-3/tp/blob/master/src/main/java/seedu/programmer/storage/Storage.java)
 
@@ -198,13 +200,13 @@ The `Storage` component,
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
   that belong to the `Model`)
 
-### Common classes
+## <a name="Common classes"></a> Common classes
 
 Classes used by multiple components are in the `seedu.programmer.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Implementation**
+## <a name="Implementation"></a> **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
 
@@ -212,35 +214,35 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo
-history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the
+The proposed undo/redo mechanism is facilitated by `VersionedProgrammerError`. It extends `ProgrammerError` with an undo/redo
+history, stored internally as an `programmerErrorStateList` and `currentStatePointer`. Additionally, it implements the
 following operations:
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()`
+* `VersionedProgrammerError#commit()` — Saves the current address book state in its history.
+* `VersionedProgrammerError#undo()` — Restores the previous address book state from its history.
+* `VersionedProgrammerError#redo()`
 * ores a previously undone address book state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()`
-and `Model#redoAddressBook()` respectively.
+These operations are exposed in the `Model` interface as `Model#commitProgrammerError()`, `Model#undoProgrammerError()`
+and `Model#redoProgrammerError()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the
+Step 1. The user launches the application for the first time. The `VersionedProgrammerError` will be initialized with the
 initial address book state, and the `currentStatePointer` pointing to that single address book state.
 
 ![UndoRedoState0](images/commands/UndoCommand/UndoRedoState0.png)
 
 Step 2. The user executes `delete 5` command to delete the 5th student in the address book. The `delete` command
-calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes
-to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book
+calls `Model#commitProgrammerError()`, causing the modified state of the address book after the `delete 5` command executes
+to be saved in the `programmerErrorStateList`, and the `currentStatePointer` is shifted to the newly inserted address book
 state.
 
 ![UndoRedoState1](images/commands/UndoCommand/UndoRedoState1.png)
 
 Step 3. The user executes `add n/David …​` to add a new student. The `add` command also
-calls `Model#commitAddressBook()`, causing another modified address book state to be saved into
-the `addressBookStateList`.
+calls `Model#commitProgrammerError()`, causing another modified address book state to be saved into
+the `programmerErrorStateList`.
 
 ![UndoRedoState2](images/commands/UndoCommand/UndoRedoState2.png)
 
@@ -249,7 +251,7 @@ the `addressBookStateList`.
 </div>
 
 Step 4. The user now decides that adding the student was a mistake, and decides to undo that action by executing
-the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer`
+the `undo` command. The `undo` command will call `Model#undoProgrammerError()`, which will shift the `currentStatePointer`
 once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 ![UndoRedoState3](images/commands/UndoCommand/UndoRedoState3.png)
@@ -267,27 +269,27 @@ The following sequence diagram shows how the undo operation works:
 
 </div>
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once
+The `redo` command does the opposite — it calls `Model#redoProgrammerError()`, which shifts the `currentStatePointer` once
 to the right, pointing to the previously undone state, and restores the address book to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the CS2100 TA rather than attempting to perform the redo.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such
-as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`.
-Thus, the `addressBookStateList` remains unchanged.
+Step 5. The CS2100 TA then decides to execute the command `list`. Commands that do not modify the address book, such
+as `list`, will usually not call `Model#commitProgrammerError()`, `Model#undoProgrammerError()` or `Model#redoProgrammerError()`.
+Thus, the `programmerErrorStateList` remains unchanged.
 
 ![UndoRedoState4](images/commands/UndoCommand/UndoRedoState4.png)
 
-Step 6. The user executes `purge`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not
-pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be
+Step 6. The CS2100 TA executes `purge`, which calls `Model#commitProgrammerError()`. Since the `currentStatePointer` is not
+pointing at the end of the `programmerErrorStateList`, all address book states after the `currentStatePointer` will be
 purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern
 desktop applications follow.
 
 ![UndoRedoState5](images/commands/UndoCommand/UndoRedoState5.png)
 
-The following activity diagram summarizes what happens when a user executes a new command:
+The following activity diagram summarizes what happens when a CS2100 TA executes a new command:
 
 <img src="images/CommitActivityDiagram.png" width="250" />
 
@@ -321,9 +323,9 @@ These operations are exposed in the `Model` interface as `Model#updateFilteredSt
 
 Given below is an example usage scenario and how the list filtering mechanism behaves at each step.
 
-Step 1. The user launches the application.
+Step 1. The CS2100 TA launches the application.
 
-Step 2. The user executes `filter -cid B01` to display all the students whose Class ID matches `B01`.
+Step 2. The CS2100 TA executes `filter -cid B01` to display all the students whose Class ID matches `B01`.
 
 The following UML sequence diagram shows how the filter command works.
 
@@ -334,7 +336,7 @@ the lifeline reaches the end of diagram.>
 
 </div>
 
-The following UML activity diagram summarizes what happens when a user executes a new filter command.
+The following UML activity diagram summarizes what happens when a CS2100 TA executes a new filter command.
 
 #### Design Consideration
 
@@ -342,7 +344,7 @@ The following UML activity diagram summarizes what happens when a user executes 
 
 * **Alternative 1 (current choice):** Filter commands can take in any combination of query parameters (`-n`, `-cid`
   , `-sid`)
-    * Pros: Allow for flexibility in the way users want to filter the list.
+    * Pros: Allow for flexibility in the way the CS2100 TA wants to filter the list.
     * Cons: More difficult to implement and proper handling of the combinations of query parameters is needed.
 
 * **Alternative 2:** A different type of filter command to filter by each of the student's attribute.
@@ -380,7 +382,7 @@ The following UML activity diagram summarizes what happens when a user executes 
 
 #### Implementation
 
-The show lab results feature allows the user to view the lab result list of a particular student. Its implementation
+The show lab results feature allows the CS2100 TA to view the lab result list of a particular student. Its implementation
 introduces the following classes:
 
 * `ShowCommand`that extends `Command`
@@ -392,9 +394,9 @@ results of student at index 1 of the current list.
 
 Given below is a possible usage scenario:
 
-[Pre-Condition] There are 2 students in ProgrammerError, and the user has created some lab results for each of them.
+[Pre-Condition] There are 2 students in ProgrammerError, and the CS2100 TA has created some lab results for each of them.
 
-Step 1. The user key in the command `show 1`: The information of the student at index 1 as well as his/her lab results
+Step 1. The CS2100 TA keys in the command `show 1`: The information of the student at index 1 as well as his/her lab results
 are displayed on the side panel.
 
 The mechanism is as described below:
@@ -407,19 +409,19 @@ The mechanism is as described below:
   index and creates a `ShowCommandResult` with the student identified.
 
 
-* `MainWindow` receives the `ShowCommandResult` and displays the information and lab results of the identifed student.
+* `MainWindow` receives the `ShowCommandResult` and displays the information and lab results of the identified student.
 
-Step 2. The user key in `show 2`: The side panel is updated with the information and lab results of the student at index
+Step 2. The CS2100 TA keys in `show 2`: The side panel is updated with the information and lab results of the student at index
 2
 
-Step 3. The user key in `show 3`: ProgrammerError will show an error message in the `resultDisplay`, warning the user
+Step 3. The CS2100 TA key in `show 3`: ProgrammerError will show an error message in the `resultDisplay`, warning the user
 that the index is invalid. This is triggered by `CommandException`, which is thrown by `ShowCommand`.
 
 The following sequence diagram shows how the show command works:
 
 ![ShowSequenceDiagram](images/commands/ShowCommand/ShowSequenceDiagram.png)
 
-The following activity diagram summarizes what happens when a user executes a new command:
+The following activity diagram summarizes what happens when a CS2100 TA executes a new command:
 
 ![ShowActivityDiagram](images/commands/ShowCommand/ShowActivityDiagram.png)
 
@@ -441,7 +443,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ### Download Data Feature
 
-The download data feature allows the user to download student data as a CSV file in a directory location of their
+The download data feature allows the CS2100 TA to download student data as a CSV file in a directory location of their
 choice.
 
 #### Implementation
@@ -450,24 +452,25 @@ The implementation details of this feature can be found mainly in `MainWindow` a
 related to the UI. In addition, the following classes are utilised:
 
 - `DownloadCommand`: for generating the `DownloadCommandResult`
-- `DownloadCommandResult`: for displaying the feedback to the user
+- `DownloadCommandResult`: for displaying the feedback to the CS2100 TA
 - `MainWindow.fxml`: for the addition of a 'Download' button on the MainWindow
 - `Popup.css`: for the customisation of styles for pop-up messages
 
 In the `Logic` components, the `download` command works in a similar fashion to the `show` command, except that it does not require its own parser. 
 
+
 This sequence diagram shows how the `download` command works at a lever lower:
 
 ![DownloadSequenceDiagram](images/commands/DownloadCommand/DownloadSequenceDiagram.png)
 
-The following activity diagram summarizes what happens when a user executes the download command:
+The following activity diagram summarizes what happens when a CS2100 TA executes the download command:
 
 ![DownloadActivityDiagram](images/commands/DownloadCommand/DownloadActivityDiagram.png)
 
 #### Design Considerations
 
 One of the main considerations was to deal with reading and writing files only when necessary. This meant checking if
-there is any data to begin with. Only if there exists any data will the user be prompted to select a folder destination.
+there is any data to begin with. Only if there exists any data will the CS2100 TA be prompted to select a folder destination.
 
 Additionally, a pop-up message was chosen to be displayed for two reasons. First, it provides the user a clear visual
 indicator of the result of their command, as compared to the typical textual output they would see. Second, we would
@@ -481,14 +484,14 @@ success.
    write the corresponding values to a CSV file which ProgrammerError would create. We chose not to go down this route as it is much more tedious with little reward in terms of code management and code
    quality.
 
-2. Another alternative with respect to the user experience could be to disallow the user from selecting a folder to save
-   their data to. Instead, a default location could be chosen so as to save the user some time in getting their data
+2. Another alternative with respect to the CS2100 TA experience could be to disallow the user from selecting a folder to save
+   their data to. Instead, a default location could be chosen so as to save the CS2100 TA some time in getting their data
    downloaded quickly. However, since we wanted to make ProgrammerError more flexible and adaptable to different users, we opted to include the 
-   functionality of allowing the user to select a folder destination.
+   functionality of allowing the CS2100 TA to select a folder destination.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## <a name="docs"></a> **Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -498,7 +501,7 @@ success.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
+## <a name="Appendix Requirements"></a> **Appendix: Requirements**
 
 ### Product scope
 
@@ -507,8 +510,8 @@ success.
 CS2100 TAs who
 
 * have to manage a number of students across different classes
-* keep track of the students' attendance
-* keep track of the students' emails
+* keep track of the students' lab results 
+* keep track of the students' details (eg. studentId, email)
 * prefer and comfortable with CLI tools
 * can type fast
 * are proficient with Unix commands
@@ -518,26 +521,26 @@ CS2100 TAs who
 
 CS2100 TAs who use ProgrammerError enjoys greater productivity and efficiency when managing their classes of students.
 
-### User stories
+## <a name="User stories"></a> User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​                                    | I want to …​                                                                               | So that I can…​
 | -------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------
-| `* * *`  | potential user exploring the app           | see the app populated with sample data| easily see how the app will look like when it is in use.
-| `* * *`  | user ready to start using the app          | purge all current data         |  get rid of data in the app.
+| `* * *`  | potential CS2100 TA exploring the app           | see the app populated with sample data| easily see how the app will look like when it is in use.
+| `* * *`  | CS2100 TA ready to start using the app          | purge all current data         |  get rid of data in the app.
 | `* * *`  | CS2100 TA                                  | be able to create records of individual students: (Name, Student ID, Class ID, email)| so that I can identify and track their progress separately.
 | `* * *`  | CS2100 TA                                  | be able to sort the class records| have an organized class record.
 | `* * *`  | CS2100 TA                                  | delete the details of a student| clear the information of students who have dropped out of the class.
-| `* * *`  | new user                                   | use the in-build help feature  | learn how to use the app quickly.
+| `* * *`  | new CS2100 TA                                   | use the in-build help feature  | learn how to use the app quickly.
 | `* * *`  | CS2100 TA                                  | be able to view (read) the records of individual students| know more about the student's current performance and email.
 | `* * *`  | CS2100 TA                                  | be able to update the details of a student| correct any mistakes that I have made.
 | `* * *`  | CS2100 TA                                  | be able to save the data in a CSV file| upload to LumiNUS and share with the CS2100 Instructors.
-| `* * *`  | proficient programmer / TA                 | navigate ProgrammerError seamlessly with the use of Unix command| efficiently manage my class.
+| `* * *`  | proficient programmer / CS2100 TA                 | navigate ProgrammerError seamlessly with the use of Unix command| efficiently manage my class.
 | `* * `  | CS2100 TA with multiple devices             | export the data in my ProgrammerError                                                            | import it on another device.
 | `* * `  | busy CS2100 TA                              | view students' statistics formatted in a standard form                                            | avoid sorting the information on my own.
 | `* * `  | CS2100 TA                                   | use the app to track students' performance                                                       | identify those who need more help.
-| `* * `  | user                                        | know that the software and data will be available 99.999 percent of the time I try to access it  | don't get frustrated and find another software to use.
+| `* * `  | CS2100 TA                                        | know that the software and data will be available 99.999 percent of the time I try to access it  | don't get frustrated and find another software to use.
 | `* *`   | CS2100 TA who is an undergradudate myself   | spend little time updating ProgrammerError                                                       | have have sufficient time for my other commitments.
 | `* *`   | CS2100 TA with overwhelming work            | be greeted with a nice interface                                                                 | enjoy the process of doing admin tasks.
 | `* *`   | CS2100 TA                                   | upload the students' lab results to LumiNUS conveniently                                         |
@@ -547,12 +550,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`   | CS2100 admin                                | have a dashboard to have a bird eye view of my class statistics                                  | be updated quickly on my class progress.
 | `* *`   | CS2100 TA                                   | use tags to identify which labs are marked or unmarked                                           | know which what labs to mark next.
 | `*`     | CS2100 TA with multiple classes             | filter the contact list by name, classes, email  | easily identify those in the current class.                |                                                                        
-| `*`     | archive previous batch statistics           | compare current batch performance with them                                                      |
-| `*`     | expert user                                 | archive/hide unused data                                                                         | avoid being distracted by irrelevant data.
-| `*`     | a TA with many students and classes         | store vital information of my students                                                           | query it when the need arises.
+| `*`     | CS2100 TA                                   | archive previous batch statistics           | compare current batch performance with them                                                      |
+| `*`     | expert CS2100 TA                                 | archive/hide unused data                                                                         | avoid being distracted by irrelevant data.
+| `*`     | a CS2100 TA with many students and classes         | store vital information of my students                                                           | query it when the need arises.
 | `*`     | CS2100 Teaching Staff                       | easily search and update student's contact details                                               | I can reach them throughout the module.
 
-### Use cases
+## <a name="Use cases"></a> Use cases
 
 For all use cases below, the **System** is the `ProgrammerError` and the **Actor** is the
 `CS2100 Teaching Assistant (CS2100 TA in short)`, unless otherwise specified.
@@ -576,10 +579,8 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
 1. CS2100 TA requests to list student records
 2. ProgrammerError shows a list of student records
-3. CS2100 TA requests to create a student record
-4. ProgrammerError requests for the student's details
-5. CS2100 TA specifies the student's details
-6. ProgrammerError creates a student record
+3. CS2100 TA specifies the student's details
+4. ProgrammerError creates a student record
 
    Use case ends.
 
@@ -589,11 +590,17 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
   Use case ends.
 
-* 5a. The student details given are incomplete.
+* 3a. The student details given are incomplete. 
 
-    * 5a1. ProgrammerError shows an error message.
+    * 3a.1. ProgrammerError shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 3.
+  
+* 3b. The student email or ID given are not unique.
+
+    * 3a.1. ProgrammerError shows an error message.
+
+      Use case resumes at step 3.
 
 **Use case: UC3 View a student record**
 
@@ -668,29 +675,20 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
     * 3b.1. ProgrammerError shows an error message. 
   
-        Use case resumes at step 2. 
+        Use case resumes at step 2.
 
-**Use case: UC6 Automatic sort student records**
-
-**MSS**
-
-1. CS2100 TA creates (UC2) / views (UC3) / delete (UC4) / update (UC5) a student record
-2. CS2100 TA requests to list student records
-3. ProgrammerError automatically sort the changed student records
-
-   Use case ends.
-
-**Use case: UC7 Download student records**
+**Use case: UC6 Download student records**
 
 **MSS**
 
-1. CS2100 TA creates (UC2) / views (UC3) / delete (UC4) / update (UC5) a student record
-2. CS2100 TA requests to download current student records to a file on their hard disk
-3. ProgrammerError saves the student records to a CSV file in a folder of the TA's choice.
+1. CS2100 TA <ins>creates (UC2) </ins> /  <ins>views (UC3) </ins> /  <ins>delete (UC4) </ins> /  <ins>update (UC5) </ins> a student record
+2. ProgrammerError automatically save the changed student records to hard disk
+3. CS2100 TA restarts the application
+4. ProgrammerError shows the saved data
 
    Use case ends.
 
-**Use case: UC8 Create a lab record**
+**Use case: UC7 Create a lab record**
 
 **MSS**
 
@@ -709,7 +707,7 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
 Use case ends.
 
-**Use case: UC9 Edit a lab record**
+**Use case: UC8 Edit a lab record**
 
 **MSS**
 
@@ -731,7 +729,7 @@ Use case ends.
 
 {More to be added}
 
-### Non-Functional Requirements
+## <a name="Non-Functional Requirements"></a> Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2. A TA with above average typing speed for code should be able to accomplish most of the tasks faster using commands
@@ -748,7 +746,7 @@ Use case ends.
 9. the GUI should be usable (i.e., all functions can be used even if the user experience is not optimal) for resolutions
    1280x720 and higher, and screen scales 150%.
 
-### Glossary
+## <a name="Glossary"></a> Glossary
 
 - **Mainstream OS**: Windows, Linux, Unix, OS-X
 - **Student ID**: An NUS student's matriculation number (AXXXXXXXY)
@@ -758,7 +756,7 @@ Use case ends.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## <a name="Appendix"></a> **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 
@@ -814,5 +812,5 @@ testers are expected to do more *exploratory* testing.
 
 1. Enter dashboard as a command or press F5 to view the dashboard.  
     
-    1. User will be able to view the number of students, number of classes, number of labs. 
-    2. User will also be able to see the number of labs left to mark. 
+    1. CS2100 TA will be able to view the number of students, number of classes, number of labs. 
+    2. CS2100 TA will also be able to see the number of labs left to mark. 
