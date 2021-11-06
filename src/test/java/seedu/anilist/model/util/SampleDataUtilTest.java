@@ -3,6 +3,8 @@ package seedu.anilist.model.util;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_ACTION;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_SCIENCE_FICTION;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -32,8 +34,8 @@ public class SampleDataUtilTest {
 
     @Test
     public void getGenreSet_getsGenreSet() {
-        String genreString1 = "fantasy";
-        String genreString2 = "action";
+        String genreString1 = VALID_GENRE_SCIENCE_FICTION;
+        String genreString2 = VALID_GENRE_ACTION;
         Set<Genre> expectedGenreSet = new HashSet<>() {{
                 add(new Genre(genreString1));
                 add(new Genre(genreString2));
