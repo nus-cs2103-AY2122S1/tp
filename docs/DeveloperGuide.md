@@ -1490,12 +1490,15 @@ and the lesson to be added does not exist in TuitiONE yet.
 while there is no change to the student list. An update message will also be shown in the message box to inform the user
 that a new lesson is successfully added.
 
-    * Incorrect addition of a lesson due to duplication:<br>`add-l s/Science g/P2 d/Wed t/1200 c/10.50`<br>
+1. Incorrect addition of a lesson due to duplication
+
+    * Test case: `add-l s/Science g/P2 d/Wed t/1200 c/10.50`<br>
         Expected: Addition of the particular lesson will not be applied to TuitiONE. An alert message will be shown in 
 the message box to inform the user that the lesson already exists in TuitiONE.
 
-    * Incorrect addition of a lesson by passing in any incorrect input:<br>
-        Expected: Addition of the particular lesson will not be applied to TuitiONE. An alert message corresponds to the 
+1. Incorrect addition of a lesson by passing in any incorrect input
+
+    * Expected: Addition of the particular lesson will not be applied to TuitiONE. An alert message corresponds to the 
 wrongly entered parameter will be shown in the message box to remind the user of the correct input parameter 
 format.<br>_Note: Only the alert message corresponds to the first encountered incorrect parameter will be shown. User is
 expected to correct the input parameters one by one._
