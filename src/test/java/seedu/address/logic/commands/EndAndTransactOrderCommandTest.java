@@ -33,7 +33,8 @@ public class EndAndTransactOrderCommandTest {
      */
     private Model getModelWithOrderedDonut(Path path) {
         UserPrefs userPrefs = new UserPrefs(path);
-        Model model = new ModelManager(getTypicalInventory(), userPrefs, TypicalTransactions.getTypicalTransactionList(),
+        Model model = new ModelManager(getTypicalInventory(), userPrefs,
+                TypicalTransactions.getTypicalTransactionList(),
                 TypicalBookkeeping.getTypicalBookkeeping());
         model.addItem(DONUT.updateCount(5));
         model.setOrder(new Order());
@@ -74,7 +75,8 @@ public class EndAndTransactOrderCommandTest {
         String expectedMessage = EndAndTransactOrderCommand.MESSAGE_SUCCESS;
 
         Model expectedModel = new ModelManager(getTypicalInventory(),
-                new UserPrefs(temporaryFolder.resolve("transaction.json")), TypicalTransactions.getTypicalTransactionList(),
+                new UserPrefs(temporaryFolder.resolve("transaction.json")),
+                TypicalTransactions.getTypicalTransactionList(),
                 TypicalBookkeeping.getTypicalBookkeeping());
         expectedModel.addItem(DONUT.updateCount(5));
         expectedModel.setOrder(new Order());

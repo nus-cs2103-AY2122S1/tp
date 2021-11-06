@@ -1,23 +1,19 @@
 package seedu.address.model;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.TypicalOrders.getTypicalOrder;
-import static seedu.address.testutil.TypicalOrders.getTypicalTransaction;
 import static seedu.address.testutil.TypicalTransactions.getTypicalTransactionList;
 import static seedu.address.testutil.TypicalTransactions.getTypicalTransactionList2;
 import static seedu.address.testutil.TypicalTransactions.getTypicalTransactionList3;
 
 import org.junit.jupiter.api.Test;
-import seedu.address.model.order.TransactionRecord;
 
 public class TransactionListTest {
 
-    TransactionList transactionList1 = getTypicalTransactionList();
-    TransactionList transactionList2 = getTypicalTransactionList2();
-    TransactionList transactionList3 = getTypicalTransactionList3();
-    TransactionList transactionList1Copy = getTypicalTransactionList();
+    private TransactionList transactionList1 = getTypicalTransactionList();
+    private TransactionList transactionList2 = getTypicalTransactionList2();
+    private TransactionList transactionList3 = getTypicalTransactionList3();
+    private TransactionList transactionList1Copy = getTypicalTransactionList();
 
     @Test
     public void equalSameObject() {
@@ -35,7 +31,7 @@ public class TransactionListTest {
     }
 
     @Test
-    public void unequalTestTransactionList_NonTransaction() {
+    public void unequalTestTransactionList_nonTransaction() {
         assertFalse(transactionList1.equalTestsTransactionLists(1));
     }
 

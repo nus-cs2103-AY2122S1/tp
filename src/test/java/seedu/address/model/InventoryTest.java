@@ -14,7 +14,11 @@ import static seedu.address.testutil.TypicalItems.DONUT;
 import static seedu.address.testutil.TypicalItems.getTypicalInventory;
 import static seedu.address.testutil.TypicalOrders.getTypicalTransaction;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 

@@ -72,7 +72,7 @@ public class TransactionList implements ReadOnlyTransactionList {
         if (this.transactionRecordList.size() != other.transactionRecordList.size()) {
             return false;
         }
-        for (int i = 0; i < this.transactionRecordList.size(); i += 1 ) {
+        for (int i = 0; i < this.transactionRecordList.size(); i += 1) {
             if (!this.transactionRecordList.get(i).isSameTransactionInfo(
                     other.transactionRecordList.get(i).getOrderItems())) {
                 return false;
