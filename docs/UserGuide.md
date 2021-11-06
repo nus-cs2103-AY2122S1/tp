@@ -33,14 +33,14 @@ Whether you're using Windows or macOS, the steps for installation are the same.
 
 3. Copy the file to the folder you want to use as the _home folder_ for Dash, which is where your data is stored.
 
-  <div markdown="block" class="alert alert-info">
+    <div markdown="block" class="alert alert-info">
 
-  :bulb: We suggest creating a folder called "Dash" and putting the `dash.jar` file inside it. You can place this 
-  folder wherever you want. Next, we recommend that you create a shortcut for Dash by right-clicking on the `dash.jar` 
-  file. On Windows, click on the `Create Shortcut` option while on macOS, click on `Make Alias`. You can then put this 
-  shortcut in a convenient place (such as your Desktop) for easy access.
+    :bulb: We suggest creating a folder called "Dash" and putting the `dash.jar` file inside it. You can place this 
+    folder wherever you want. Next, we recommend that you create a shortcut for Dash by right-clicking on the `dash.jar` 
+    file. On Windows, click on the `Create Shortcut` option while on macOS, click on `Make Alias`. You can then put this 
+    shortcut in a convenient place (such as your Desktop) for easy access.
 
-  </div>
+    </div>
 
 4. Double-click the file to start the app. Here's what you should see in a few seconds:<br>
    ![Ui](images/UG-00.png)
