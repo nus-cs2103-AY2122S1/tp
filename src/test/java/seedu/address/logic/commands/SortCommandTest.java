@@ -25,7 +25,7 @@ public class SortCommandTest {
     @Test
     public void execute_sortPersonList_success() {
         SortCommand sortCommand = new SortCommand(false);
-        String expectedMessage = "Sorted all persons in reverse order";
+        String expectedMessage = "Sorted all persons";
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.updateSortedPersonList(false);
         assertCommandSuccess(sortCommand, model, expectedMessage, expectedModel);
