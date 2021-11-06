@@ -10,13 +10,17 @@ Class StudentName
 Class Phone
 Class ParentName
 Class Progress
-Class LessonName
+Class ProgressList
+Class Lessons
+Class Lesson
 
 Student *--> "1"StudentName
 Student *--> "0..2" Phone
 Student *--> "1"ParentName
-Student *--> "0..10"Progress
-Student -right-> "*"LessonName
+Student *--> "1"ProgressList
+ProgressList *--> "0..10"Progress
+Student *-right-> "*"Lessons
+Lessons --> "*"Lesson
 
 
 @enduml
