@@ -302,16 +302,17 @@ Step 2. `LogicManager` passes the command to `AddressBookParser` to parse the co
 with `addShift`, a new `AddShiftCommandParser` is created to parse the command further.
 
 Step 3. `AddShiftCommandParser` uses `ArgumentMultimap` to tokenize the prefixes part the command. After extracting the
-information the target staff and the shift, A new
+information the target staff, the shift, and the date, A new
 `AddShiftCommand` is created with the information. In this case, the name of the target staff is "Steve", and the
-proposed shift is on Monday morning.
+proposed shift is on Monday morning, and the period is seven days starting from the current date when the user runs the
+command.
 
 Step 4. `AddShiftCommand` passes the given name to `ModelManager#findPersonByName()`. After finding the specific
-staff, `AddShiftCommand` passes the staff,
-`DayOfWeek`, and the `Slot` of the shift to `ModelManager#addShift()`.
+staff, `AddShiftCommand` passes the `targetStaff`
+`dayOfWeek`, `slot` and `startDate`, `endDate` of the shift to `ModelManager#addShift()`.
 
-Step 5. `Modelmanager#addShift()` updates the schedule of the target staff with a new `Shift` created with the
-given `DayOfWeek` and `Slot`.
+Step 5. `Modelmanager#addShift()` updates the schedule of the `targetStaff` with a new `Shift` created with the given
+`dayOfWeek`, `slot` and `startDate`, `endDate`.
 
 The activity diagram of this `addShift` command is shown below:
 
