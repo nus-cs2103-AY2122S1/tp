@@ -69,6 +69,8 @@ public class StringUtil {
 
     /**
      * Returns a detailed message of the t, including the stack trace.
+     *
+     * @param t The throwable to get message from.
      */
     public static String getDetails(Throwable t) {
         requireNonNull(t);

@@ -117,6 +117,7 @@ public class LessonEditCommand extends UndoableCommand {
 
         personBeforeLessonEdit = CommandUtil.getPerson(lastShownList, index);
 
+        // Get lessons as a list copy
         List<Lesson> lessonList = personBeforeLessonEdit.getLessons().stream().sorted().collect(Collectors.toList());
         Lesson lessonToEdit = CommandUtil.getLesson(lessonList, lessonIndex);
         Lesson editedLesson = createEditedLesson(lessonToEdit, editLessonDescriptor);
@@ -141,14 +142,17 @@ public class LessonEditCommand extends UndoableCommand {
     /**
      * Creates and returns a {@code Lesson} with the details of {@code lessonToEdit}
      * edited with {@code editPersonDescriptor}.
+     *
+     * @param lessonToEdit Existing lesson to edit.
+     * @param editLessonDescriptor The object that contains the edited information.
      */
     public Lesson createEditedLesson(Lesson lessonToEdit, EditLessonDescriptor editLessonDescriptor)
             throws CommandException {
         assert lessonToEdit != null;
         Date updatedDate = editLessonDescriptor.getDate().orElse(lessonToEdit.getStartDate());
         Date updatedEndDate = lessonToEdit.isRecurring()
-                ? editLessonDescriptor.getEndDate().orElse(lessonToEdit.getEndDate())
-                : updatedDate;
+                ? editLessonDescriptor.getEndDate().orElse(lessonToEdit.getEndDate()) // End date can be changed
+                : updatedDate; // makeup – end date is same as date
         TimeRange updatedTimeRange = editLessonDescriptor.getTimeRange().orElse(lessonToEdit.getTimeRange());
         Subject updatedSubject = editLessonDescriptor.getSubject().orElse(lessonToEdit.getSubject());
         Set<Homework> updatedHomeworkSet = editLessonDescriptor.getHomeworkSet().orElse(lessonToEdit.getHomework());

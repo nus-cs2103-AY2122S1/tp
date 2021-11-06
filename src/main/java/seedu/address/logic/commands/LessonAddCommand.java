@@ -83,6 +83,9 @@ public class LessonAddCommand extends UndoableCommand {
 
     /**
      * Creates a LessonAddCommand to add the specified {@code Lesson}
+     *
+     * @param index of the person in the filtered person list to add the lesson to.
+     * @param lesson to be added to the person.
      */
     public LessonAddCommand(Index index, Lesson lesson) {
         super(COMMAND_ACTION);
