@@ -36,6 +36,10 @@ public class AddLastMarkCommandParser implements Parser<AddLastMarkCommand> {
 
         if (argMultimap.getValue(PREFIX_MARK).isPresent()) {
             newMark = ParserUtil.parseMark(argMultimap.getValue(PREFIX_MARK).get());
+        } else {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLastMarkCommand.MESSAGE_NOT_EDITED)
+            );
         }
 
         return new AddLastMarkCommand(index, newMark);
