@@ -1367,7 +1367,7 @@ expected to correct the input parameters one by one._
       Expected: No student will be found since name should only contain alphanumeric characters and spaces. An update
 message showing that `No students found.` will also be displayed in the message box. 
 
-#### View lesson rostering
+#### View a lesson's roster 
 
 1. View a lesson's roster using `LESSON_INDEX` while all students and lessons are being shown
 
