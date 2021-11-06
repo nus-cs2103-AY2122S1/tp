@@ -143,4 +143,8 @@ public interface Model {
      * Sets the predicate used to filter {@code observablePersonList}.
      */
     void setViewAllTasksFindPred(Predicate<Task> predicate);
+
+    boolean getIsViewAllTasks();
+
+    void setIsViewAllTasks(boolean isViewAllTasks);
 }

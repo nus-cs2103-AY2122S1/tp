@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
+<<<<<<< HEAD
 import seedu.address.logic.commands.AccessCacheCommand;
 
 public class AccessCacheCommandParserTest {
@@ -23,5 +24,27 @@ public class AccessCacheCommandParserTest {
         // Wrong key pressed
         assertParseFailure(accessCacheCommandParser, "accesscache LEFT",
                 MESSAGE_INVALID_INTERNAL_COMMAND_FORMAT);
+=======
+
+import seedu.address.logic.commands.AccessCacheCommand;
+
+public class AccessCacheCommandParserTest {
+
+    private Parser parser = new AccessCacheCommandParser();
+    private String invalidInput = "ABC";
+    private String invalidInputKey = " -qq ABC";
+    private String validInput = " -qqUP";
+
+    @Test
+    public void invalidInput_fails() {
+        assertParseFailure(parser, invalidInput, MESSAGE_INVALID_INTERNAL_COMMAND_FORMAT);
+        assertParseFailure(parser, invalidInputKey, AccessCacheCommandParser.UNKNOWN_KEY);
+    }
+
+    @Test
+    public void validKey_success() {
+        assertParseSuccess(parser, validInput,
+                new AccessCacheCommand("UP"));
+>>>>>>> origin/master
     }
 }

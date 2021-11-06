@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TASK;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -78,6 +79,8 @@ class DeleteTaskCommandTest {
     @Test
     void execute_invalidTargetTaskIndex_throwsCommandException() {
         Person person = model.getFilteredPersonList().get(0);
+        model.displayPersonTaskList(person);
+
         Name personName = person.getName();
         Index targetTaskIndex = Index.fromZeroBased(person.getTasks().size());
         List<Index> targetTaskIndexList = new ArrayList<>();
@@ -99,6 +102,7 @@ class DeleteTaskCommandTest {
         try {
             Index personIndex = Index.fromOneBased(model.getFilteredPersonList().size());
             Person person = model.getFilteredPersonList().get(personIndex.getZeroBased());
+            model.displayPersonTaskList(person);
 
             List<Task> taskListCopy = new ArrayList<>(person.getTasks());
             Index targetTaskIndex = Index.fromOneBased(taskListCopy.size());
@@ -127,16 +131,17 @@ class DeleteTaskCommandTest {
         try {
             Index personIndex = Index.fromOneBased(model.getFilteredPersonList().size());
             Person person = model.getFilteredPersonList().get(personIndex.getZeroBased());
+            model.displayPersonTaskList(person);
 
-            List<Task> taskListCopy = new ArrayList<>(person.getTasks());
-            Index targetTaskIndex = Index.fromOneBased(taskListCopy.size());
-            Index targetTaskIndex2 = Index.fromOneBased(taskListCopy.size() - 1);
+            List<Task> taskListCopy = new ArrayList<>(model.getDisplayTaskList());
+            Index lastTaskIndex = Index.fromOneBased(taskListCopy.size());
+            Index firstTaskIndex = Index.fromOneBased(INDEX_FIRST_TASK.getOneBased());
             List<Index> targetTaskIndexList = new ArrayList<>();
-            targetTaskIndexList.add(targetTaskIndex);
-            targetTaskIndexList.add(targetTaskIndex2);
+            targetTaskIndexList.add(lastTaskIndex);
+            targetTaskIndexList.add(firstTaskIndex);
 
-            taskListCopy.remove(targetTaskIndex.getZeroBased());
-            taskListCopy.remove(targetTaskIndex.getZeroBased() - 1);
+            taskListCopy.remove(lastTaskIndex.getZeroBased());
+            taskListCopy.remove(firstTaskIndex.getZeroBased());
 
             DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(personIndex, targetTaskIndexList);
 
