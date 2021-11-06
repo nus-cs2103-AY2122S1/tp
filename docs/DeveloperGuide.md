@@ -789,6 +789,29 @@ Use case ends.
 
 **UC02 - Edit a Contact**
 
+**MSS**
+
+1. User decides to edit a contact
+
+2. User inputs the edit command to the interface
+
+3. WhereTourGo informs the user that the contact was edited
+
+4. WhereTourGo displays updated list of contacts and summary page
+   Use case ends.
+
+**Extensions**
+* 2a. The format is wrong
+
+  * 2a1. WhereTourGo shows an error message
+
+  Use case ends.
+
+* 2b.  Contact already exists in WhereTourGo
+
+  * 2b1. WhereTourGo shows an error message
+
+  Use case ends.
 
 **UC03 - Delete a Contact**
 
@@ -1082,6 +1105,19 @@ testers are expected to do more *exploratory* testing.
        Expected: Similar to previous.
 
 ### Editing a contact
+1. Editing a contact
+
+  1. Test case: `edit 1 n/Singapore Flyers` <br>
+     Expected: The first contact's name is changed to "Singapore Flyers". Details of the edited contact shown in the status message. Summary is updated and displayed.
+  
+  1. Test case: `edit 0`<br>
+     Expected: No contact is deleted. Error details shown in the status message. Summary is displayed.
+
+  1. Test case: `123 edit n/VALID_NAME` (Valid names should not be blank, contains only alphanumeric characters and spaces and cannot be longer than 100 characters) <br>
+     Expected: No contact is added. Error details shown in the status message. Summary is displayed.
+
+1. Other incorrect delete commands to try: `edit`, `edit x n/VALID_NAME` (where x is larger than the list size, or negative), `edit 00001 n/VALID_NAME`, `edit 1 n/`, `edit 1 n/INVALID_NAME`(invalid name that does not exist in WhereTourGo)<br>
+   Expected: Similar to previous.
 
 ### Deleting a contact
 
