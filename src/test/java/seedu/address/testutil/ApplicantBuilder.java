@@ -16,15 +16,14 @@ public class ApplicantBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final Position DEFAULT_POSITION = new PositionBuilder().build();
-    public static final String DEFAULT_URL = "https://www.github.com/SAMPLE";
-
+    private static final ProfileUrl DEFAULT_GITHUB_PROFILE = ProfileUrl.ofNullable("https://github.com/empty");
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private Position position;
-    private ProfileUrl gitHubUrl;
+    private ProfileUrl gitHubProfile;
 
     /**
      * Creates a {@code ApplicantBuilder} with the default details.
@@ -35,7 +34,7 @@ public class ApplicantBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         position = DEFAULT_POSITION;
-        gitHubUrl = new ProfileUrl(DEFAULT_URL);
+        gitHubProfile = DEFAULT_GITHUB_PROFILE;
     }
 
     /**
@@ -47,7 +46,7 @@ public class ApplicantBuilder {
         email = applicantToCopy.getEmail();
         address = applicantToCopy.getAddress();
         position = applicantToCopy.getApplication().getPosition();
-        gitHubUrl = applicantToCopy.getGitHubUrl();
+        gitHubProfile = applicantToCopy.getGitHubUrl();
     }
 
     /**
@@ -90,11 +89,19 @@ public class ApplicantBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code gitHubProfile} of the {@code Applicant} that we are building.
+     */
+    public ApplicantBuilder withGitHubProfile(String githubUrl) {
+        this.gitHubProfile = ProfileUrl.ofNullable(githubUrl);
+        return this;
+    }
+
     public ApplicantParticulars getParticulars() {
-        return new ApplicantParticulars(name, phone, email, address, position.getTitle(), gitHubUrl);
+        return new ApplicantParticulars(name, phone, email, address, position.getTitle(), gitHubProfile);
     }
 
     public Applicant build() {
-        return new Applicant(name, phone, email, address, position, gitHubUrl);
+        return new Applicant(name, phone, email, address, position, gitHubProfile);
     }
 }

@@ -184,7 +184,8 @@ public class Applicant {
                 && phone.equals(otherApplicant.phone)
                 && email.equals(otherApplicant.email)
                 && address.equals(otherApplicant.address)
-                && application.equals(otherApplicant.application);
+                && application.equals(otherApplicant.application)
+                && gitHubUrl.equals(otherApplicant.gitHubUrl);
     }
 
     @Override
@@ -203,7 +204,9 @@ public class Applicant {
                 + "; Address: "
                 + address
                 + "; Application: "
-                + application;
+                + application
+                + "; GitHub Profile: "
+                + gitHubUrl;
     }
 
     public String getApplicationSummary() {
