@@ -777,10 +777,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    Use case ends
 
 **Extensions**
-* 3a. User requests for the syntax of all commands
-  *  3a1. Academy Directory shows a list of all the commands and their associated syntax.
-    
-     Use case ends
 * 3b. User requests for help in a command that does not exist
   * 3b1. Academy Directory shows an error message
     
@@ -984,6 +980,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a2. Academy Directory requests for the user to try another information.
   
         Use case ends.
+  
+**Use case: View student information**
+
+**MSS**
+
+1. User enter a command to view all information of one student
+2. Academy Directory fetches all related data of one student
+3. Academy Directory displays all these information to users.
+
+**Extensions**
+* 1a. The index number entered exceeds the size of the list
+    * 1a1. Academy Directory informs users that the index is invalid via an error message
+    
+    Use case resumes at step 1
+* 1a. The argument followed is not a positive integer
+    * 1a1. Academy Directory informs users that the index must be a positive integer for the command to be executed
+     
+    Use case resumes at step 1
 
 ### Non-Functional Requirements
 
@@ -998,8 +1012,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 9. Logs and previous commits stored should be based on the _Principle of Least-Privilege_.
 10. Logs and previous commits should be recoverable even when `AcademyDirectory` itself is deleted.
 11. Logs and previous commits should be transferable and functional after transfer onto other computers.
-12. Users should be able to undo up to at least _100_ commands. 
-
+12. Users should be able to undo up to at least _100_ commands.
 
 ### Glossary
 
@@ -1275,14 +1288,24 @@ testers are expected to do more *exploratory* testing.
 
 #### List All Students
 
-1. _{ more test cases to come …​ }_
-
+1. List all students on Academy Directory
+   1. Prerequisite: Application database is not empty (meaning that the `clear` command has not been executed, or that there are student entries on the student list)
+   2. Test case: `list`
+      Expected: All students are shown on the student list panel
+   3. Test case: `list 3`
+      Expected: Error message is shown on the status message display stating that there is an invalid usage detected, no other argument should follow, and that the command is highlighted in red.
+   4. Test case: `list 02it0hg204`
+      Expected: Error message is shown on the status message display, stating that there is an invalid usage detected, no other argument should follow, and that the command is highlighted in red.
 ***
 
 #### Clear Student List
 
-1. _{ more test cases to come …​ }_
-
+1. List all students on Academy Directory
+  1. Prerequisite: Application database is not empty (meaning that the `clear` command has not been executed, or that there are student entries on the student list)
+  2. Test case: `clear`
+     Expected: Student list panel on the left is emptied, with a status message stating that the entries have been cleared.
+  3. Test case: `clear 3`
+     Expected: Error message is shown on the status message display stating that there is an invalid usage detected, no other argument should follow, and that the command is highlighted in red.
 ***
 
 #### Undo Changes
@@ -1303,8 +1326,8 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisite: Application is started
    2. Test case: `help`
       Expected: A pop-up window is shown summarizing the format of all commands for users, as well as a link to the web User Guide of Academy Directory
-   3. Test case: `help    `
-      Expected: A pop-up window is shown summarizing the format of all commands for users, as well as a link to the web User Guide of Academy Directory
+      Expected: All commands used in Academy Directory are shown, and the summary table does not lack any command. To assert this, compare the table to the
+      actual User Guide web version and see the matched commands.
 2. Test specific help
    1. Prerequisite: Application is started
    2. Test case: `help edit`
@@ -1312,13 +1335,16 @@ testers are expected to do more *exploratory* testing.
    3. Test case: `help visualize`
       Expected: A pop-up window is shown with a customized help message (based on the User Guide of `visualize` command) on how to use `visualize`, including significance, format, and example.
    4. Test case: `help ad`, `help addd`
-      Expected: No pop-up window is shown, and an error message is shown as status message explaining that there exists no instruction for command `ad`. Significance of the test case is that specific `help` can only be useful when the command is typed in full rather than in partial
+      Expected: No pop-up window is shown, and an error message is shown as status message explaining that there exists no instruction for command `ad`. 
+      Significance of the test case is that specific `help` can only be useful when the command is typed in full rather than in partial - to view help for command `add`, users need to type in `help add` exactly.
    5. Test case: `help r230thg4b0p2nnbtpbgetbi03`
       Expected: No pop-up window is shown, and an error message is shown as status message explaining that there exists no instruction for the command.
 3. Test functionality of pop-up window
    1. Prerequisite: Help window is already opened before by any mean, and is kept opened for testing
    2. Test case: Focus on the Main Window, do not close Help Window, and type in `help add` or any other equivalent command
       Expected: The help window is refocused with its content change to the new `help` instead.
+   3. Test case: Click on the `Copy UG Guide` button on the right side, and access the link
+      Expected: The User Guide web-version of Academy Directory can be accessed, meaning that the link is indeed copied.
 ***
 
 #### Saving data
@@ -1345,24 +1371,56 @@ testers are expected to do more *exploratory* testing.
       2. Test case: Click on entry `Show RA1`
          Expected: The command `show RA1` is executed as an equivalent command-button
          
-#### User Interface
+#### User Interface and Experience
    1. Test application user interface
-      1. Prerequisite: Application is started
-      2. Test case: Expand Academy Directory to full screen
+      1. Prerequisite: Application is started, application has not been cleared of data and has student records inside
+      2. Test case: Ensure that Academy Directory has a student list with the various student cards inside.
+         Expected: Student list and student cards are shown, if the list is not empty
+         Expected: Student cards are clickable
+      3. Test case: Ensure that Academy Directory has an opaque rectangle in the top-right corner of the Main Window.
+         Expected: The rectangle is shown to the user, and users cannot edit it or remove it.
+      4. Test case: Ensure that Academy Directory has an opaque rectangle in the bottom-right corner of the Main Window.
+         Expected: The rectangle is shown to the user, and users cannot edit it or remove it.
+      5. Test case: Ensure that Academy Directory has a command box at the bottom of Main Window that users can enter something in
+         Expected: The command box is shown, users can enter something in and see what they have typed in.
+      6. Test case: Expand Academy Directory to full screen
          Expected: Background image also expanded, alongside other components of the internal controls (result display, student list, and status message)
          Expected: No other visual misbehavior of the User Interface (image is cropped or lacking in any visual design)
-      3. Test case: Shrink Academy Directory to the smallest possible size
+      7. Test case: Shrink Academy Directory to the smallest possible size
          Expected: Academy Directory is not minimized completely as there is a minimal size for users to still see the data
-      4. Test case: Enter keywords to the command bar.
-         
-#### User Experience
+      8. Test case: Enter `help` to the command box
+         Expected: The word `help` is shown on the command box for users to see
+      9. Test case: Press Enter to execute the command
+         Expected: Status logger displays a message that informs user a general help message is being shown
+         Expected: Help Window is pop-up
+      10. Test case: Resize the Help Window by expand it to full screen
+         Expected: Help Window is expanded to full screen without compromising the content inside (the message is not being minimized or expanded, users are able to view the message regardless of the size).
+         Expected: All commands are inside the help message. To check, scroll the window and see whether commands `participation`, or `revert`, or `visualize` are in the table
+      11. Test case: Close the help window
+         Expected: Help Window is closed successfully, without the Main Window being closed or affected as well
+      12. Test case: Click on the logger display and try to edit the message
+         Expected: Users cannot edit the message or remove the message. Reason is to avoid confusion in usage of the application
+      13. Test case: Enter `visualize` to the command box, and press enter.
+         Expected: A box-whisker plot is shown to the users visualizing relative performance on student exam.
+      14. Test case: Attempt to click on the bottom-right rectangle and remove the data visualization
+         Expected: Users cannot remove the data.
+      15. Test case: Enter `view 1` to the command box, and press enter
+         Expected: A visualized view of the student is shown in the bottom-right corner
+      16. Test case: Click on the drop-down menu with "View Participation" on the current view
+         Expected: The menu is dropped, and users can see the summary of student participation and attendance of CS1101S studio
+      17. Test case: Click on the drop-down menu with "View Test Score" on the current view
+         Expected: The previous menu is closed, the clicked menu is dropped, and users can see the summary of student test score of CS1101S
+      18. Test case: Enter `list` to the command box, and press enter
+         Expected: The `view` visualization of student information does not disappear even though the application is still functioning good enough.
+          
 
 ### System testing
 
 #### Performance testing
-#### Load testing
+    
+Purpose: Test and record the average time of which Academy Directory execute users' command
+
 #### Compatibility testing
-#### Usability testing
 #### Portability testing
 
 ## **Appendix C: Version Controlled Commands**
