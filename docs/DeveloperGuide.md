@@ -90,7 +90,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ### Architecture
 
-<img src="images/ArchitectureDiagram.png" width="280" />
+<img src="images/DG images/ArchitectureDiagram.png" width="280" />
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
@@ -116,7 +116,7 @@ The rest of the App consists of four components.
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
-<img src="images/ArchitectureSequenceDiagram.png" width="574" />
+<img src="images/DC images/ArchitectureSequenceDiagram.png" width="574" />
 
 Each of the four main components (also shown in the diagram above),
 
@@ -125,7 +125,7 @@ Each of the four main components (also shown in the diagram above),
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
-<img src="images/ComponentManagers.png" width="300" />
+<img src="images/DC images/ComponentManagers.png" width="300" />
 
 The sections below give more details of each component.
 
@@ -133,7 +133,7 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
-![Structure of the UI Component](images/UiClassDiagram.png)
+![Structure of the UI Component](images/DG images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ParticipantListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
@@ -152,7 +152,7 @@ The `UI` component,
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<img src="images/LogicClassDiagram.png" width="550"/>
+<img src="images/DC images/LogicClassDiagram.png" width="550"/>
 
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
@@ -162,14 +162,14 @@ How the `Logic` component works:
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete 1` Command](images/UG screenshots/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-<img src="images/ParserClasses.png" width="600"/>
+<img src="images/DC images/ParserClasses.png" width="600"/>
 
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
@@ -178,7 +178,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-![ModelClassDiagram](images/ModelClassDiagram.png)
+![ModelClassDiagram](images/DG images/ModelClassDiagram.png)
 
 
 The `Model` component,
@@ -190,7 +190,7 @@ The `Model` component,
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Participant` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Participant` needing their own `Tag` objects.<br>
 
-![BetterModelClassDiagram](images/BetterModelClassDiagram.png)
+![BetterModelClassDiagram](images/DG images/BetterModelClassDiagram.png)
 
 </div>
 
@@ -199,7 +199,7 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<img src="images/DC images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
 * can save both address book data and user preference data in json format, and read them back into corresponding objects.
@@ -347,7 +347,7 @@ optional criteria for filtering.
 
 The following is the sequence diagram for how a `FilterEventCommand` works internally.
 
-![FilterEventSequenceDiagram](images/FilterEventSequenceDiagram.png)
+![FilterEventSequenceDiagram](images/DG images/FilterEventSequenceDiagram.png)
 
 ### View Participant's Details feature
 
@@ -398,11 +398,11 @@ implemented to allow users the ability to sieve out a single participant for a m
 
 The following is the sequence diagram for how a `ViewCommand` works internally.
 
-![ViewSequenceDiagram](images/ViewSequenceDiagram.png)
+![ViewSequenceDiagram](images/DG images/ViewSequenceDiagram.png)
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-![ViewCommandActivityDiagram](images/ViewCommandActivityDiagram.png)
+![ViewCommandActivityDiagram](images/DG images/ViewCommandActivityDiagram.png)
 
 
 ### Add/Remove Participant to/from event by index
@@ -437,11 +437,11 @@ The following activity diagrams summarise what happens when a user executes a ne
 
 `AddParticipantToEventByIndex`
 
-![AddParticipantToEventActivityDiagram](images/AddParticipantToEventByIndexActivityDiagram.png)
+![AddParticipantToEventActivityDiagram](images/DG images/AddParticipantToEventByIndexActivityDiagram.png)
 
 `RemoveParticipantFromEventByIndex`
 
-![RemoveParticipantFromEventActivityDiagram](images/RemoveParticipantByIndexActivityDiagram.png)
+![RemoveParticipantFromEventActivityDiagram](images/DG images/RemoveParticipantByIndexActivityDiagram.png)
 
 
 ### View Event Details feature
@@ -497,11 +497,11 @@ display.
 
 The following is the sequence diagram for how a `ShowEventDetailsCommand` works internally.
 
-![ShowEventDetailsSequenceDiagram](images/ShowEventDetailsSequenceDiagram.png)
+![ShowEventDetailsSequenceDiagram](images/DG images/ShowEventDetailsSequenceDiagram.png)
 
 The following activity diagram summarises what happens when a user executes a new command:
 
-![ShowEventDetailsActivityDiagram](images/ShowEventDetailsActivityDiagram.png)
+![ShowEventDetailsActivityDiagram](images/DG images/ShowEventDetailsActivityDiagram.png)
 
 ### \[Proposed\] Undone Event feature
 
