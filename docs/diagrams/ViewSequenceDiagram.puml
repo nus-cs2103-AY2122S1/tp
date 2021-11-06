@@ -11,14 +11,13 @@ participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
-participant "p:ParticipantIdMatchesGivenIdPredicate" as ParticipantIdMatchesGivenIdPredicate MODEL_COLOR
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("view aleyeo1"))
+[-> LogicManager : execute("view 1"))
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("view aleyeo1")
+LogicManager -> AddressBookParser : parseCommand("view 1")
 activate AddressBookParser
 
 create ViewCommandParser
@@ -28,19 +27,12 @@ activate ViewCommandParser
 ViewCommandParser --> AddressBookParser
 deactivate ViewCommandParser
 
-AddressBookParser -> ViewCommandParser : parse(" aleyeo1")
+AddressBookParser -> ViewCommandParser : parse(" 1")
 activate ViewCommandParser
 
 create ViewCommand
 ViewCommandParser -> ViewCommand
 activate ViewCommand
-
-create ParticipantIdMatchesGivenIdPredicate
-ViewCommand --> ParticipantIdMatchesGivenIdPredicate
-activate ParticipantIdMatchesGivenIdPredicate
-
-ParticipantIdMatchesGivenIdPredicate --> ViewCommand : p
-deactivate ParticipantIdMatchesGivenIdPredicate
 
 ViewCommand --> ViewCommandParser : v
 deactivate ViewCommand
@@ -75,7 +67,6 @@ ViewCommand --> LogicManager : result
 deactivate
 ViewCommand -[hidden]-> LogicManager : result
 destroy ViewCommand
-destroy ParticipantIdMatchesGivenIdPredicate
 
 [<--LogicManager
 deactivate LogicManager
