@@ -264,10 +264,10 @@ with a label describing them, a client, an amount, and a date. The following are
 
 * The amount field is any number from 0 to 1 billion.
 * The client for the order **must exist in SalesNote** to create the order. For instance <br>
-`addorder l/blue blouse c/Jane a/22.50 d/20 August 2021` will fail if the client with name `Jane` is not in SalesNote. Note that the name is matched
+  `addorder l/blue blouse c/Jane a/22.50 d/20 August 2021` will fail if the client with name `Jane` is not in SalesNote. Note that the name is matched
   **regardless of capitalisation!** So if you have a client named `James`, your order can be addressed to `james`, `JAMES`, `James` and so on.
 * Editing a client, will also edit all the orders tied to the client. For instance, if a client's name is changed from
-"Alice" to "Alice Lin", all orders addressed to "Alice" will now be addressed to "Alice Lin". 
+  "Alice" to "Alice Lin", all orders addressed to "Alice" will now be addressed to "Alice Lin". 
 * The date field should follow one of the following formats:
 
   Format | Example
