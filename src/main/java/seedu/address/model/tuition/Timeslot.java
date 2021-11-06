@@ -97,9 +97,9 @@ public class Timeslot {
         }
         if (other instanceof Timeslot) {
             Timeslot otherSlot = ((Timeslot) other);
-            return day == otherSlot.getDay()
-                    && !(otherSlot.getEnd().isAfter(end) || otherSlot.getEnd().isBefore(end))
-                    && !(otherSlot.getStart().isAfter(start) || otherSlot.getStart().isBefore(start));
+            return day.getDay() == otherSlot.getDay().getDay()
+                    && otherSlot.getStart().equals(start)
+                    && otherSlot.getEnd().equals(end);
         }
         return false;
     }

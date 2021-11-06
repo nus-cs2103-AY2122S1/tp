@@ -12,7 +12,6 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -21,7 +20,6 @@ import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
-import seedu.address.model.student.Remark;
 import seedu.address.model.student.Student;
 import seedu.address.model.tuition.TuitionClass;
 
@@ -32,7 +30,6 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
     public static final String SHORTCUT = "e";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Edits details of the student identified by the index number. "
             + "At least one parameter must be specified.\n"
@@ -45,8 +42,8 @@ public class EditCommand extends Command {
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student:\n %1$s";
-    public static final String MESSAGE_NO_STUDENT_CHANGES = "Student details are already up to date.";
+    public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student: %1$s";
+    public static final String MESSAGE_NO_STUDENT_CHANGES = "Student details fisanyare already up to date.";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the address book.";
     private static final Logger logger = LogsCenter.getLogger(EditCommand.class);
     private final Index index;
@@ -69,15 +66,12 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Student> lastShownList = model.getFilteredStudentList();
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
-        }
-        Student studentToEdit = lastShownList.get(index.getZeroBased());
+        model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
+        Student studentToEdit = model.getStudent(index);
         Student editedStudent = createEditedStudent(studentToEdit, editStudentDescriptor);
 
         //checks if name is unchanged or name is changed to that of a student who exists in database
-        if (!studentToEdit.isSameStudent(editedStudent) && model.hasStudent(editedStudent)) {
+        if (studentToEdit.isSameStudent(editedStudent) || model.hasStudent(editedStudent)) {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
         }
         //stronger check for all fields - name address phone email
@@ -87,12 +81,12 @@ public class EditCommand extends Command {
         //if the name is changed, the student list of all classes the student is enrolled in has to be updated
         if (!studentToEdit.isSameStudent(editedStudent)) {
             List<TuitionClass> enrolledClasses = editedStudent
-                    .getClasses().getClasses().stream().map(id -> model.getClassById(id)).collect(Collectors.toList());
+                    .getClasses().getClasses().stream().map(model::getClassById).collect(Collectors.toList());
             for (TuitionClass tuitionClass: enrolledClasses) {
                 tuitionClass.updateStudent(studentToEdit, editedStudent);
             }
         }
-        logger.info(String.format("Edited student: Name changed from %s to %s", studentToEdit, editedStudent));
+        logger.info(String.format("Edited student: Details changed from %s to %s", studentToEdit, editedStudent));
         model.setStudent(studentToEdit, editedStudent);
         return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent));
     }
@@ -108,10 +102,9 @@ public class EditCommand extends Command {
         Phone updatedPhone = editStudentDescriptor.getPhone().orElse(studentToEdit.getPhone());
         Email updatedEmail = editStudentDescriptor.getEmail().orElse(studentToEdit.getEmail());
         Address updatedAddress = editStudentDescriptor.getAddress().orElse(studentToEdit.getAddress());
-        Remark updatedRemark = studentToEdit.getRemark();
 
         return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress,
-                updatedRemark, studentToEdit.getTags(), studentToEdit.getClasses());
+                studentToEdit.getRemark(), studentToEdit.getTags(), studentToEdit.getClasses());
     }
 
     /**

@@ -38,7 +38,7 @@ public class AddToClassCommandParser implements Parser<AddToClassCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddToClassCommand.MESSAGE_USAGE));
         }
-        List<Index> studentIndex = ParserUtil.parseStudentIndexes(argMultimap.getAllValues(PREFIX_STUDENT_INDEX));
+        List<Index> studentIndex = ParserUtil.parseIndices(argMultimap.getAllValues(PREFIX_STUDENT_INDEX));
         Index classIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_TUITION_CLASS).get());
         return new AddToClassCommand(studentIndex, classIndex);
     }

@@ -9,7 +9,6 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -225,20 +224,25 @@ public class ParserUtil {
     /**
      * Parses a {@code List studentIndexes} into a List of indexes.
      *
-     * @param studentIndexes List of indexes, each representing a student.
+     * @param indices List of indexes, each representing a student.
      * @return List of student indexes sorted in descending order.
      * @throws ParseException If any index is invalid.
      */
-    public static List<Index> parseStudentIndexes(List studentIndexes) throws ParseException {
+    public static List<Index> parseIndices(List<String> indices) throws ParseException {
         List<Index> args = new ArrayList<Index>();
-        String[] students = ((String) studentIndexes.get(0)).split(" ");
-        for (String student : students) {
-            Index i = parseIndex(student);
-            if (!args.contains(i)) {
-                args.add(i);
+        String[] students;
+        try {
+            students = ((String) indices.get(0)).split(" ");
+            for (String student : students) {
+                Index i = parseIndex(student);
+                if (!args.contains(i)) {
+                    args.add(i);
+                }
             }
+        } catch (IndexOutOfBoundsException | java.util.regex.PatternSyntaxException | ParseException pe) {
+            throw new ParseException(Messages.MESSAGE_INVALID_INDICES);
         }
-        Collections.sort(args, (index1, index2) -> {
+        args.sort((index1, index2) -> {
             if (index1.getOneBased() < index2.getOneBased()) {
                 return 1;
             } else if (index1.getOneBased() > index2.getOneBased()) {
@@ -260,11 +264,10 @@ public class ParserUtil {
      */
     public static Timeslot parseTimeslot(String timeslot) throws ParseException {
         requireNonNull(timeslot);
-        //Splits day from time
         String[] arr = timeslot.trim().split(" ", 2);
         String[] times = arr.length == 2 ? arr[1].split("-", 2) : null;
 
-        if (arr.length < 2 || times == null || times.length < 2) {
+        if (arr.length < 2 || arr[0].length() != 3 || times == null || times.length < 2) {
             throw new ParseException(Messages.MESSAGE_TIMESLOT_FORMAT);
         }
         DateFormat dayFormat = new SimpleDateFormat("EEE");

@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_INDICES;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
@@ -94,11 +95,11 @@ class AddToClassCommandParserTest {
     public void parse_invalidValue_failure() {
         //zero student index
         assertParseFailure(parser, SPACE + PREFIX_STUDENT_INDEX
-                + ZERO_INDEX + SPACE + PREFIX_TUITION_CLASS + VALID_INDEX_ONE, MESSAGE_INVALID_INDEX);
+                + ZERO_INDEX + SPACE + PREFIX_TUITION_CLASS + VALID_INDEX_ONE, MESSAGE_INVALID_INDICES);
 
         //negative student index
         assertParseFailure(parser, SPACE + PREFIX_STUDENT_INDEX
-                + NEGATIVE_INDEX + SPACE + PREFIX_TUITION_CLASS + VALID_INDEX_ONE, MESSAGE_INVALID_INDEX);
+                + NEGATIVE_INDEX + SPACE + PREFIX_TUITION_CLASS + VALID_INDEX_ONE, MESSAGE_INVALID_INDICES);
 
         //zero tuition class index
         assertParseFailure(parser, SPACE + PREFIX_STUDENT_INDEX
@@ -110,12 +111,12 @@ class AddToClassCommandParserTest {
 
         //student index separated by comma
         assertParseFailure(parser, SPACE + PREFIX_STUDENT_INDEX
-                + INDEXES_SEPARATED_BY_COMMA + SPACE + PREFIX_TUITION_CLASS + VALID_INDEX_ONE, MESSAGE_INVALID_INDEX);
+                + INDEXES_SEPARATED_BY_COMMA + SPACE + PREFIX_TUITION_CLASS + VALID_INDEX_ONE, MESSAGE_INVALID_INDICES);
 
         //name separated by space around comma
         assertParseFailure(parser, SPACE + PREFIX_STUDENT_INDEX
                 + NAMES_SEPARATED_BY_SPACE_AND_COMMA + SPACE + PREFIX_TUITION_CLASS
-                + VALID_INDEX_ONE, MESSAGE_INVALID_INDEX);
+                + VALID_INDEX_ONE, MESSAGE_INVALID_INDICES);
     }
 
     @Test
