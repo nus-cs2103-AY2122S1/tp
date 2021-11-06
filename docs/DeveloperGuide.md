@@ -29,7 +29,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* [Opencsv](http://opencsv.sourceforge.net/)
+  * [Opencsv](http://opencsv.sourceforge.net/)
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
