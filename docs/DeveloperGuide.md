@@ -401,20 +401,20 @@ in the Window.
 #### Implementation
 
 The class `UserProfileWindow` is responsible for displaying the User Profile
-Window. It is showed only when the user either uses the keyboard shortcut, 
+Window. It is shown when the user either uses the keyboard shortcut, 
 `Command/Control + P`, or clicks on the User Profile located in the top right in
 the Menu Bar. It is facilitated by `UserProfileWindow.fxml`
 and `UserProfileWindow.css`. The `.fxml` file is responsible for the layout of the
-various components in this window, and the `.css` file add a style, and enhances the
-overall Ui.
+various components in this window, and the `.css` file adds a style and enhances the
+overall UI.
 
 The `UserProfileWindow` class extends `UiPart<Stage>`.
 
-This window can only be viewed when the app has successfully started up,
-and has the valid User Credentials.
+This window can only be viewed when the app has successfully started up and 
+has valid User Credentials.
 
-This window is initialized when the `MainWindow` is initialized. Basically, it
-is initialized in the `MainWindow` constructor. This window, to be seen, has to be 
+This window is initialized when the `MainWindow` is initialized. It is
+initialized in the `MainWindow` constructor. This window, to be seen, has to be 
 triggered as an event by the user. The `MainWindow` class has a method 
 `handleUserProfileWindow()`, which is responsible for displaying this window.
 
@@ -426,8 +426,8 @@ minimized by the User, `UserProfileWindow#getRoot()#toFront()` is called to
 bring the window to the maximized state.
 
 The `UserProfileWindow#show()`, first calls the `UserProfileWindow#initializeFields()`,
-to initialize all the fields with the latest User Profile Credentials. This would in turn
-also call `UserProfileWindow#setFields()`, to set them up in the Ui. After all the setting
+to initialize all the fields with the latest User Profile Credentials. This would, in turn
+also call `UserProfileWindow#setFields()`, to set them up in the UI. After all the setting
 up is done, the User Profile Window is shown.
 
 The `UserProfileWindow#focus()`, calls the `getRoot()` method to obtain the root object.
