@@ -1324,7 +1324,7 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Filtering
+#### Filtering
 
 1. Filtering by grade
 
@@ -1366,7 +1366,7 @@ testers are expected to do more *exploratory* testing.
     * Test case: `filter english S1`<br>
       Expected: No filter is applied, and no change to both lists. The message box displays a message alerting the user that the command format inputted is invalid, along with a description of what the filter command does, its parameters, and an example usage.
 
-### Editing a student
+#### Editing a student
 
 1. Editing a student's name
 
