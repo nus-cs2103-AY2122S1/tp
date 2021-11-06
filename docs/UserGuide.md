@@ -259,9 +259,19 @@ Edits an existing student in ClassMATE.
 Entering format: `editstu INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS_CODE] [t/TAG]…​`
 
 * Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+
 * At least one of the optional fields must be provided.
+
+* The index will be checked *after* it checks for provision of at least one optional field.
+
+  <div markdown="span" class="alert alert-primary"> :information-source: **Note:**
+      An error message will be displayed to provide at least one field if no fields are provided, regardless of whether the INDEX is valid or not. The INDEX will be checked after at least one optional field is provided.
+  </div>
+
 * Existing values will be updated to the input values.
+
 * When editing tags, the existing tags of the student will be removed i.e adding of tags is not cumulative.
+
 * You can remove all the student’s tags by typing `t/` without
   specifying any tags after it.
 
@@ -399,15 +409,11 @@ Adds a tutorial class to ClassMATE.
 
 Entering format: `addc c/CLASS_CODE s/SCHEDULE [t/TAG]…​`
 
-<div markdown="span" class="alert alert-primary"> :information-source: **Note:**
-
 * Class Code should consist of 'G' followed by two numerical digits (i.e. any value from `G01` to `G99`).
 
 * Schedule consists of 2 weekly timeslots. Day of the week should be capitalized. Short form for days are also accepted (e.g. Tues for Tuesday).
 
 * Time slots in Schedules should be written in the H:MM am/pm (e.g. 12:00pm)
-
-</div>
 
 Examples:
 * `addc c/G01 s/Tuesday 2:00pm to 4:00pm, Friday 2:00 to 4:00pm`
