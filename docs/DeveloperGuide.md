@@ -206,7 +206,8 @@ The following activity diagram summarises what happens when a user executes a `c
 
 * **Alternative 2:** Have only one panel. The person list gets replaced by task list when cat is executed.
 
-  * Pros: More convenient to implement.
+  * Pros: 
+    * More convenient to implement.
 
   * Cons:
     * `list` has to be executed again if user wants to redirect back to the person list (extra overhead
@@ -424,7 +425,7 @@ _{Explain here how the data archiving feature will be implemented}_
 **Target user profile**:
 
 * NUS Student Entrepreneurs
-* Proficient in Unix CLI
+* Proficient in Linux style CLIs
 * Has many meetings and is in contact with different people (students, mentors,
   stakeholders, clients, partners)
 * Carries Laptop around (prefers Laptop)
@@ -438,44 +439,58 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### User stories
 
+<div markdown="span" class="alert alert-primary">
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+
+:memo: **Bolded** user stories are `epics`.
+</div>
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `***` | user | update contact details | keep track of their details |
-| `***` | user | delete contacts | get rid of contacts who are no longer relevant |
-| | **general user** | | |
-| `**` | general CLI user| use commands from cli | exclude the need to learn new commands |
-| `**` | student entrepreneur | categorize my business contacts | organize them better |
-| `**` | student entrepreneur | differentiate between business and student contacts | differentiate easily |
-| `***` | student entrepreneur | view my contacts in an organized manner | have a better overview |
-| `***` | new user | save contacts | keep track of them |
+| | **general user** | **have essential functionalities**| |
+| `***` | general user | update contact details | keep track of up to date details |
+| `***` | general user | delete contacts | get rid of contacts who are no longer relevant |
+| `***` | general user | save contacts | keep track of them |
+| `***` | general user | look through the list of contacts| see the contacts I have added |
+| | **new user** | **start using the app normally as soon as possible**| |
 | `***` | new user | purge all example contacts | start adding my own contacts |
-| | **beginner user** | **learn commands fast** | **spend less time on learning** |
+| | **Linux CLI user** | **have a CLI similar to Linux CLI** | |
+| `***` | Linux CLI user | use similar commands to Linux CLI | reduce the need to learn new commands |
+| `***` | Linux CLI user | backtrack commands i have entered before | save time on retyping them |
+| | **student entrepreneur** | **categorize my business contacts** | **organize them better** |
+| `**` | student entrepreneur | differentiate between business and student contacts | differentiate easily |
+| `*` | student entrepreneur | organise my contacts according to specific groups | find the ones i want easily |
+| `**` | student entrepreneur | mark my contacts as important | know which contacts i prioritize |
+| | **student entrepreneur** | **have statistics and indicators for my tasks** | **improve my tasks management** |
+| `**` | student entrepreneur | view the overall statistics of all my tasks | have an idea of my tasks progression |
+| `**` | student entrepreneur | be reminded when tasks are due or due soon | be aware and take necessary actions to deal with them |
+| | **beginner user** | **learn how to use the app fast** | **spend less time on learning** |
 | `***` | beginner user | view the user guide easily | learn the commands as and when I need |
 | `***` | beginner user | view the list of instructions | know what instructions are available |
 | `***` | beginner user | see examples of contacts | have an idea of how contacts will be presented |
-| | **student entrepreneur** | **organise my contacts according to specific groups** | **find the ones i want easily** |
 | | **intermediate user** | **sort and filter my contacts** | **sieve out irrelevant contacts** |
-| `***` | intermediate user | look through the list of contacts| see the contacts I have added |
-| `***` | intermediate user | search for contact names | directly find the contact of a person in mind |
+| `***` | intermediate user | search for contacts with the attribute of my choice | find my contacts faster and more accurately |
+| `**` | intermediate user | sort contacts by tasks | identify connections between contacts |
+| `*` | intermediate user | choose what information about my contacts to view | read the information easier |
+| `**` | intermediate user | search for contacts using abbreviations | improve my work efficiency |
+| | **intermediate user** | **keep track of tasks related to my contacts** |  |
 | `***` | intermediate user | assign tasks to contacts | know what I should contact them for |
 | `***` | intermediate user | delete tasks from contacts | remove task which are done |
-| `**` | intermediate user | sort contacts by tasks | identify connections between contacts |
-| `**` | intermediate user | choose what information about my contacts to view | read the information easier |
-| `***` | intermediate user | view task from contacts | see what tasks are connected to said contact |
+| `**` | intermediate user | mark a task as complete | still keep the task but know that it has been done |
+| `***` | intermediate user | view tasks of a specific contact | see what tasks are connected to said contact |
+| `***` | intermediate user | view every contact's tasks in a form of a list | an overview of all my tasks |
+| `**` | intermediate user | filter what tasks i view using keywords | narrow down tasks that i am looking for |
 | | **experienced user** |	**manipulate multiple contacts with one command** | **improve my work efficiency** |
 | `**` | experienced user | delete multiple contacts using only one command | improve my work efficiency |
-| `**` | experienced user |	move multiple contacts using only one command | improve my work efficiency |
+| `*` | experienced user |	move multiple contacts using only one command | improve my work efficiency |
 | `**` | experienced user |	add multiple contacts using only one command | improve my work efficiency |
-| `**` | experienced user |	search for contacts using abbreviations | improve my work efficiency |
 | | **experienced user** | **update large number of contacts at once** | **exclude manually adding them myself** |
 | `**` | experienced user | import a list of contacts | add a large number of contacts at once |
 | `**` | experienced user | export a list of contacts | send them to other people |
-| | **expert CL user** | **use high-level CLI instructions** | **directly use the app at a high-level** |
-| `**` | expert CL user | make command combinations | execute multiple instructions in one line |
-| `**` | expert CL user | redirect input/output | input/output from/to files instead of stdin |
-| `**` | expert CL user | create scripts | automate specific tasks |
+| | **expert Linux CLI user** | **use high-level CLI instructions** | **directly use the app at a high-level** |
+| `*` | expert Linux CLI user | make command combinations | execute multiple instructions in one line |
+| `*` | expert Linux CLI user | redirect input/output | input/output from/to files instead of stdin |
+| `*` | expert Linux CLI user | create scripts | automate specific tasks |
 
 ### Use cases
 
