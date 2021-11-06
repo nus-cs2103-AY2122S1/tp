@@ -580,10 +580,8 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
 1. CS2100 TA requests to list student records
 2. ProgrammerError shows a list of student records
-3. CS2100 TA requests to create a student record
-4. ProgrammerError requests for the student's details
-5. CS2100 TA specifies the student's details
-6. ProgrammerError creates a student record
+3. CS2100 TA specifies the student's details
+4. ProgrammerError creates a student record
 
    Use case ends.
 
@@ -593,11 +591,17 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
   Use case ends.
 
-* 5a. The student details given are incomplete.
+* 3a. The student details given are incomplete. 
 
-    * 5a1. ProgrammerError shows an error message.
+    * 3a.1. ProgrammerError shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 3.
+  
+* 3b. The student email or ID given are not unique.
+
+    * 3a.1. ProgrammerError shows an error message.
+
+      Use case resumes at step 3.
 
 **Use case: UC3 View a student record**
 
@@ -672,19 +676,9 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
     * 3b.1. ProgrammerError shows an error message. 
   
-        Use case resumes at step 2. 
+        Use case resumes at step 2.
 
-**Use case: UC6 Automatic sort student records**
-
-**MSS**
-
-1. CS2100 TA <ins>creates (UC2) </ins> /  <ins>views (UC3) </ins> /  <ins>delete (UC4) </ins> /  <ins>update (UC5) </ins> a student record
-2. CS2100 TA requests to list student records
-3. ProgrammerError automatically sort the changed student records
-
-   Use case ends.
-
-**Use case: UC7 Download student records**
+**Use case: UC6 Download student records**
 
 **MSS**
 
@@ -695,7 +689,7 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
    Use case ends.
 
-**Use case: UC8 Create a lab record**
+**Use case: UC7 Create a lab record**
 
 **MSS**
 
@@ -714,7 +708,7 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
 Use case ends.
 
-**Use case: UC9 Edit a lab record**
+**Use case: UC8 Edit a lab record**
 
 **MSS**
 
