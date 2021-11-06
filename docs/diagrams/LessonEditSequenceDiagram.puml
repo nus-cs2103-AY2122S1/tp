@@ -14,20 +14,20 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("ledit 1 2 time/...")
+[-> LogicManager : execute("ledit...")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("ledit 1 2 time/...")
+LogicManager -> AddressBookParser : parseCommand("ledit...")
 activate AddressBookParser
 
 create LessonEditCommandParser
 AddressBookParser -> LessonEditCommandParser
 activate LessonEditCommandParser
 
-LessonEditCommand --> AddressBookParser
+LessonEditCommandParser --> AddressBookParser
 deactivate LessonEditCommandParser
 
-AddressBookParser -> LessonEditCommandParser : parse("1 2 time/...")
+AddressBookParser -> LessonEditCommandParser : parse("...")
 activate LessonEditCommandParser
 
 create EditLessonDescriptor
@@ -53,10 +53,10 @@ destroy LessonEditCommandParser
 AddressBookParser --> LogicManager : le
 deactivate AddressBookParser
 
-LogicManager -> LessonEditCommand : execute()
+LogicManager -> LessonEditCommand : executeUndoableCommand()
 activate LessonEditCommand
 
-LessonEditCommand -> Model : handle Lesson Edit logic
+LessonEditCommand -> Model : handle logic
 activate Model
 
 note bottom
