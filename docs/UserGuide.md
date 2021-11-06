@@ -365,7 +365,7 @@ Format: `add -l n/LESSON_NAME [c/LESSON_CAPACITY] [p/LESSON_PRICE] [t/LESSON_TIM
 * Duplicate lessons cannot be added. A lesson counts as a duplicate if it has the same lesson name as an existing lesson. Letter case is ignored when determining if two lesson names are the same.
 * If provided, the lesson's capacity must be a **positive integer** 1, 2, 3, …
 * If provided, the lesson's price must be a **non-negative number** with either 0 or 2 decimal places. Examples of a valid price are `80` and `85.50`.
-* The lesson's timing can be anything you want (other than hyphens and slashes) - you could use it to remind yourself what time your lesson is, but you can use this space for any remarks or reminders you may have.
+* The lesson's timing can be anything you want - you could use it to remind yourself what time your lesson is, but you can use this space for any remarks or reminders you may have.
 
 Examples:
 * `add -l n/P6 Maths c/20 p/80 t/Monday 1200-1400` adds a lesson with name `P6 Maths`, capacity of `20 students`, price of `$80` and timing `Monday 1200-1400`.
