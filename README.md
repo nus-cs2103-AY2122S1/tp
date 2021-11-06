@@ -7,7 +7,7 @@
   thus providing much convenience in their work.
 * For the detailed documentation of this project, see the **[Ailurus Product Website](https://ay2122s1-cs2103t-t15-2.github.io/tp/)**.
 # Mock UI
-![Ui](docs/images/sampleUi.png)
+![Ui](docs/images/Ui.png)
 
 # Acknowledgement
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).

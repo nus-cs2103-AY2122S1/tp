@@ -30,7 +30,7 @@ It is also <u>highly recommended</u> for first time users to read the `Notes abo
 3. Copy the file to the folder you want to use as the _home folder_ for Ailurus.
 
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/sampleUi.png)
+   ![Ui](images/Ui.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will 
 open the help window.<br>
@@ -545,6 +545,7 @@ Ailurus data are saved as a JSON file `[JAR file location]/data/Ailurus.json`. A
 
 ## Command summary
 
+### Member commands
 Action | Format, Examples
 --------|------------------
 **madd** | `madd /n NAME /ph PHONE_NUMBER [/em EMAIL] [/a ADDRESS] [/p POSITION]…​` <br> e.g., `madd /n James Ho /ph 22224444 /em jamesho@example.com /a 123, Clementi Rd, 1234665 /p friend /p colleague`
@@ -553,6 +554,10 @@ Action | Format, Examples
 **mfind** | `mfind KEYWORD [MORE_KEYWORDS]…​`<br> e.g., `mfind James Jake`
 **mtfind** | `mtfind KEYWORD [MORE_KEYWORDS]…​`<br> e.g., `mtfind form`
 **mdel** | `mdel /m MEMBER_INDEX` <br> e.g., `mdel /m 5`
+
+### Task commands
+Action | Format, Examples
+--------|------------------
 **tadd** | `tadd /n NAME /d DATE_TIME /m MEMBER_INDEX [/m MORE_MEMBER_INDEX]…​` <br> e.g., `tadd /n Collect payment from members /d 20/11/2021 11:30 /m 3`
 **tfind** | `tfind KEYWORD [MORE_KEYWORDS]…​`<br> e.g., `tfind form`
 **tlist** | `tlist /m MEMBER_INDEX [/dn OPTION] [/ovd]` <br> e.g., `tlist /m 2 /dn y`
@@ -560,6 +565,10 @@ Action | Format, Examples
 **tundone** | `tundone /t TASK_INDEX [/t MORE_TASK_INDEX]…​`<br> e.g. `tundone /t 3 /t 4`
 **tedit** | `tedit /t TASK_INDEX [/n NAME] [/d DATE_TIME]` <br> e.g. `tedit /t 2 /n Do OSA Quiz /d 21/10/2021 23:59`
 **tdel** | `tdel /t TASK_INDEX` <br> e.g., `tdel /t 1`
+
+### Event commands
+Action | Format, Examples
+--------|------------------
 **eadd** | `eadd /n NAME /d DATE [/m MEMBER_INDEX]…​` <br> e.g., `eadd /n Computing Freshmen Orientation Camp 2021 /d 22/11/2021 /m 4 /m 5 /m 6`
 **edel** | `edel /e EVENT_INDEX ` <br> e.g., `edel /e 7`
 **elist** | `elist`
@@ -570,5 +579,9 @@ Action | Format, Examples
 **efind** | `efind KEYWORD [MORE_KEYWORDS]…​`<br> e.g., `efind competition`
 **emadd** | `emadd /e EVENT_INDEX /m MEMBER_INDEX [/m MORE_MEMBER_INDEX]…​` <br> e.g. `emadd /e 1 /m 2 /m 3`
 **emdel** | `emdel /e EVENT_INDEX /m MEMBER_INDEX [/m MORE_MEMBER_INDEX]…​` <br> e.g. `emdel /e 1 /m 2 /m 3`
+
+### Other commands
+Action | Format, Examples
+--------|------------------
 **help** | `help`
 **exit** | `exit`
