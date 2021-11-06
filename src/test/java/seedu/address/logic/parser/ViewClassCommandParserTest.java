@@ -1,6 +1,6 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_CLASS_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
@@ -14,7 +14,7 @@ class ViewClassCommandParserTest {
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "xxx", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        assertParseFailure(parser, "xxx", String.format(MESSAGE_INVALID_CLASS_DISPLAYED_INDEX,
                 ViewClassCommand.MESSAGE_USAGE));
     }
 

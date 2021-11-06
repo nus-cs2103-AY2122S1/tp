@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSCODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUPNUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
@@ -34,7 +35,7 @@ public class DeleteStudentFromGroupCommandParser implements Parser<AddGroupComma
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (IllegalValueException ive) {
             throw new ParseException(String.format(
-                    MESSAGE_INVALID_COMMAND_FORMAT, DeleteStudentFromGroupCommand.MESSAGE_USAGE), ive);
+                    MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX, DeleteStudentFromGroupCommand.MESSAGE_USAGE), ive);
         }
 
         if (!arePrefixesPresent(argMultimap, PREFIX_GROUPNUMBER, PREFIX_CLASSCODE, PREFIX_TYPE)) {

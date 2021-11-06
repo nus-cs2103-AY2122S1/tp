@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MARK;
 
 import seedu.address.commons.core.index.Index;
@@ -29,7 +30,7 @@ public class AddLastMarkCommandParser implements Parser<AddLastMarkCommand> {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLastMarkCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX, AddLastMarkCommand.MESSAGE_USAGE), pe);
         }
 
         StudentMark newMark = null;
