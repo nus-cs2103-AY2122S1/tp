@@ -11,7 +11,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Ryan Tian Jun
 
-<img src="images/ryantianj.png" width="200px">
+<img src="images/team/ryantianj.png" width="200px">
 
 [[github](https://github.com/ryantianj)]
 
@@ -22,7 +22,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Marcus Chua
 
-<img src="images/marcuschj.png" width="200px">
+<img src="images/team/marcuschj.png" width="200px">
 
 [[github](https://github.com/marcuschj)]
 
@@ -33,16 +33,18 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Ong Hong Kai
 
-<img src="images/imerbear.png" width="200px">
+<img src="images/team/imerbear.png" width="200px">
 
 [[github](https://github.com/Imerbear)]
+
+[[portfolio](team/imerbear.md)]
 
 * Role: Developer
 * Responsibilities:  Deliverables & Deadlines, Model, DG
 
 ### Natania Yovela Purwanto
 
-<img src="images/nataniayp.png" width="200px">
+<img src="images/team/nataniayp.png" width="200px">
 
 [[github](http://github.com/nataniayp)]
 
@@ -51,7 +53,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Lethicia Renissa Santoso
 
-<img src="images/lethiciars.png" width="200px">
+<img src="images/team/lethiciars.png" width="200px">
 
 [[github](http://github.com/lethiciars)]
 

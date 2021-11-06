@@ -26,10 +26,12 @@ class IsFilterablePredicateTest {
         Set<Tag> firstTag = new HashSet<>(Arrays.asList(new Tag("outdoor")));
         Set<Tag> secondTag = Collections.emptySet();
 
-        IsFilterablePredicate firstPredicate = new IsFilterablePredicate(firstCategoryCodeSet, firstRating, firstTag);
+        IsFilterablePredicate firstPredicate = new IsFilterablePredicate(
+                firstCategoryCodeSet, firstRating, firstTag);
         IsFilterablePredicate secondPredicate = new IsFilterablePredicate(
                 secondCategoryCodeSet, secondRating, secondTag);
-        IsFilterablePredicate thirdPredicate = new IsFilterablePredicate(firstCategoryCodeSet, secondRating, firstTag);
+        IsFilterablePredicate thirdPredicate = new IsFilterablePredicate(
+                firstCategoryCodeSet, secondRating, firstTag);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));

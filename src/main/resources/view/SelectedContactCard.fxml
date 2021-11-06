@@ -72,8 +72,8 @@
                     </padding>
                 </Label>
                 <HBox>
-                    <PieChart fx:id="pieChartRating" legendVisible="false" maxHeight="200.0" minHeight="200.0" prefHeight="200.0" />
-                    <PieChart fx:id="pieChartCategory" legendVisible="false" maxHeight="200.0" minHeight="200.0" prefHeight="200.0" />
+                    <PieChart fx:id="pieChartRating" labelLineLength="10.0" legendVisible="false" maxHeight="200.0" minHeight="200.0" prefHeight="200.0" />
+                    <PieChart fx:id="pieChartCategory" labelLineLength="10.0" legendVisible="false" maxHeight="200.0" minHeight="200.0" prefHeight="200.0" />
                 </HBox>
                 <Label fx:id="totalContacts" styleClass="details_contact_field" text="\$totalContacts">
                     <padding>

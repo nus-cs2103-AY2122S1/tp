@@ -9,9 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Rating implements Comparable<Rating> {
 
-
-    public static final String MESSAGE_CONSTRAINTS =
-        "Ratings should be a single integer between 1 to 5 inclusive";
+    public static final String MESSAGE_CONSTRAINTS = "Ratings should be a single integer between 1 to 5 inclusive";
     public static final String VALIDATION_REGEX = "$|[1-5]";
     public static final String EMPTY_RATING = "unrated";
     public final String value;
@@ -42,10 +40,16 @@ public class Rating implements Comparable<Rating> {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns true if a given string is an empty rating.
+     */
     public static boolean isEmptyRating(String test) {
         return test.equals(EMPTY_RATING);
     }
 
+    /**
+     * Returns true if a given rating is an empty rating.
+     */
     public static boolean isEmptyRating(Rating rating) {
         return rating.equals(new Rating());
     }
