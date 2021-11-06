@@ -27,7 +27,7 @@ import seedu.address.model.tag.Tag;
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_GENDER = "N";
-    private static final String INVALID_PHONE = "+651234";
+    private static final String INVALID_PHONE = "@651234";
     private static final String INVALID_NATIONALITY = "SoCIAN";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TUTORIAL_GROUP = "B";
@@ -35,7 +35,7 @@ public class ParserUtilTest {
     private static final String INVALID_TAG = "#friend";
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_GENDER = "M";
-    private static final String VALID_PHONE = "123456";
+    private static final String VALID_PHONE = "+123456";
     private static final String VALID_NATIONALITY = "Vietnamese";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TUTORIAL_GROUP = "T09";

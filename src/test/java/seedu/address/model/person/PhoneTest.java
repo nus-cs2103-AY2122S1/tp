@@ -24,11 +24,17 @@ public class PhoneTest {
         assertFalse(Phone.isValidPhone("phone")); // non-numeric
         assertFalse(Phone.isValidPhone("9011p041")); // alphabets within digits
         assertFalse(Phone.isValidPhone("9312 1534")); // spaces within digits
+        assertFalse(Phone.isValidPhone("1242938420331231")); // more than 15 digits
+        assertFalse(Phone.isValidPhone("+")); // + only
 
         // valid phone numbers
         assertTrue(Phone.isValidPhone("911")); // exactly 3 numbers
         assertTrue(Phone.isValidPhone("93121534"));
-        assertTrue(Phone.isValidPhone("124293842033123")); // long phone numbers
+        assertTrue(Phone.isValidPhone("124293842033123")); // long phone numbers, 15 digits
         assertTrue(Phone.isValidPhone("")); // empty string
+        assertTrue(Phone.isValidPhone("+911")); // + with 3 numbers
+        assertTrue(Phone.isValidPhone("+124293842033123")); // + with 15 numbers
+
+
     }
 }

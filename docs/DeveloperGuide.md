@@ -196,6 +196,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 This section describes some noteworthy details on how certain features are implemented.
 
 The features mentioned are:
+
 1. Viewing help
 2. Modify
    1. Adding a person
@@ -212,12 +213,15 @@ The features mentioned are:
    3. [Sorting persons](#sorting-persons)
    4. Viewing statistics
 4. Share
-   1. Importing contacts
-   2. Exporting contacts
+   1. [Importing contacts](#import-json-file)
+   2. [Exporting contacts](#export-json-file)
 5. Advance
-   1. Aliasing commands
-6. Exiting the program
-7. Saving the data
+   1. [Aliasing commands](#aliasing-commands)
+6. Utility
+   1. [Input Suggestion](#input-suggestion)
+7. Exiting the program
+8. Saving the data
+
 
 ### Add contacts with optional arguments
 
@@ -313,6 +317,7 @@ The following sequence diagram shows how the add remark mechanism works:
 
 The find mechanism is facilitated by FindCommand and FindCommandParser. It allows users to find contacts using any of their contact details.
 
+
 #### Usage
 
 Given below is an example usage scenario of how the findCommand mechanism behaves at each step.
@@ -342,6 +347,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Aspect: How contacts are saved with multiple arguments:**
 
+
 * **Alternative 1 (current choice):** Only include people who contain all the specified contact details
     * Pros: Intuitive feature. Similar to a Filter function in popular apps today.
     * Cons: Requires you to be familiar of the people in your contact list.
@@ -354,7 +360,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 #### Implementation
 
-The deleting multiple person mechanism will delete contacts specified by a given set of keywords. Any contacts containing all the specified keywords will be deleted.
+The deleting multiple person mechanism will delete contacts specified by a given set of keywords. Any contacts containing **all** the specified keywords will be deleted.
 
 It works by filtering for the contacts in the `model` and deleting them one by one.
 
@@ -451,7 +457,7 @@ The following sequence diagram shows how the Sort mechanism works:
 
 The import JSON file will import an external addressbook and add all the entries to the current addressbook in the user's device.
 
-It works by utilizing the same mechanism that is used by AB3 when first initializing the addressbook with existing JSON data.
+It works by utilizing the same mechanism that is used by Socius when first initializing the addressbook with existing JSON data.
 
 #### Usage
 
@@ -486,6 +492,85 @@ Step 7. Finally, it will return a `CommandResult` if the operation is successful
 * **Alternative 2:** Allow to-be-imported files to be located anywhere
     * Pros: Gives user the flexibility to put the file wherever they want.
     * Cons: Different OSes have different file paths convention.
+
+
+### Export JSON file
+
+#### Implementation
+
+The export JSON file will export all the current data into a JSON file.
+
+It works by utilizing the same mechanism that is used by Socius when saving the addressbook into a JSON file.
+
+#### Usage
+
+Given below is an example usage scenario and how the Export mechanism behaves at each step.
+
+Step 1. The user launches the application.
+
+Step 2. The user executes `export tmp.json` command to export a file located in `data/tmp.json`.
+
+Step 3. This will call `ExportCommandParser#parse` which will then parse the argument provided.
+
+Step 4. A new `ExportCommand` object will be created with its `outputFilePath` set to `data/FILE_NAME`,
+with the `FILE_NAME` being the string parsed in the previous step.
+
+Step 5. `ExportCommand#execute` will first call `FileUtil#createIfMissing` to create the file as specified in `outputFilePath`.
+
+Step 6. It will then call `JsonUtil#saveJsonFile` which will take in the `outputFilePath` and a `JsonSerializableAddressBook` of the current data, which is retrieved by calling `model#getAddressBook()`.
+
+Step 7. Finally, it will return a `CommandResult` if the operation is successful.
+
+#### Design considerations:
+
+**Aspect: File directory:**
+
+* **Alternative 1 (current choice):** Only allow files to be exported to the `data` directory
+    * Pros: Every file exported from the application will live under a single `data` directory.
+    * Cons: Less flexibility for the user.
+
+* **Alternative 2:** Allow users to export files to any directory
+    * Pros: Gives user the flexibility to place the file wherever they want.
+    * Cons: Different OSes have different file paths convention.
+
+### Aliasing Commands
+
+#### Implementation
+
+The aliasing mechanism will give an alias to the specified command. If an alias already exists, the new command being aliased will overwrite the old one.
+
+During `AliasCommand#execute`, a new entry of alias-command pair will be put into a singleton class called `CommandAliases`, which is implemented using a `HashMap`.
+
+#### Usage
+
+Given below is an example usage scenario and how the alias mechanism behaves at each step.
+
+Step 1. The user executes `alias a/Singaporeans c/find nat/Singaporean` command to assign the alias `Singaporeans` to the command `find nat/Singaporean`.
+
+Step 2. `AliasCommandParser#parse` will then parse the arguments provided. Then a new `AliasCommand` object will be created after parsing.
+
+The following sequence diagram briefly shows how the alias operation works:
+
+![AliasParserSequenceDiagram](images/AliasParserSequenceDiagram.png)
+
+Step 3. `AliasCommand#execute` will then add a new entry of alias-command pair into `CommandAliases` by calling `CommandAliases#put`.
+
+The following sequence diagram shows how the alias command mechanism works:
+
+![AliasSequenceDiagram](images/AliasSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not be saved in the AddressBook, so the person inside the AddressBook will not be updated.
+</div>
+
+#### Design considerations:
+
+* **Alternative 1 (current choice):** Singleton pattern
+    * Pros: Cannot be instantiated multiple times.
+    * Cons: Might be confusing for new developers.
+
+* **Alternative 2:** Non-Singleton
+    * Pros: More commonly used in general and thus easier to understand.
+    * Cons: A normal class can be instantiated multiple times, which does not suit the context of this implementation.
 
 
 ### \[Proposed\] Undo/redo feature
@@ -596,7 +681,7 @@ The `Levenshtein distance` between two words is the minimum number of single-cha
 
 #### Usage
 
-Given below is an example usage scenario and how the Input Suggestion mechanism behaves at each step.
+Given below is an example usage scenario and how the Input Suggestion mechanism behaves at each step when a user types in a wrong command word.
 
 Step 1. The user launches the application.
 
@@ -606,7 +691,7 @@ Step 3. This will call `AddressBookParser#parseCommand`. But since there are no 
 it will end up at the `default` clause of the `switch` statement.
 
 Step 4. A new `WordSuggestion` object will be created with its `word` set to the `commandWord`,
-`validWords` set to the `COMMAND_WORDS` list, and the `distanceLimit` set to 3.
+`validWords` set to the `COMMAND_WORDS` list, and the `distanceLimit` set to 2.
 
 Step 5. While being initialized, `WordSuggestion#computeAllLevenshteinDistance` will be called, and it will compute the
 `Levenshtein distance` of `word` with every single word in `validWords`.
@@ -624,8 +709,8 @@ display the suggestions to the user.
 
 **Aspect: Algorithm and Time Complexity:**
 
-* **Alternative 1 (current choice):** Dynamic programming
-    * Pros: More efficient, only takes O(n*m) time, with n and m being the length of each of the two strings.
+* **Alternative 1 (current choice):** Dynamic programming (Wagner-Fischer algorithm)
+    * Pros: More efficient, only takes `O(n * m)` time, with `n` and `m` being the length of each of the two strings.
     * Cons: Harder to implement by the developers.
 
 * **Alternative 2:** Recursive
@@ -658,12 +743,11 @@ _{more aspects and alternatives to be added}_
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
-* is enrolled in CS2103T in NUS
-* is an international student who just came to Singapore
-* wish to meet new friends and form CS2103T project groups
+* is an NUS student enrolled in CS2103T
+* wishes to meet new friends and form CS2103T project groups
 
 **Value proposition**: Socius is a simple desktop app for managing CS2103T tutorial classmates’ contacts for
-international students, optimized for use via a Command Line Interface (CLI) while still having the benefits of a
+CS2103T module-takers, optimized for use via a Command Line Interface (CLI) while still having the benefits of a
 Graphical User Interface (GUI). If you can type fast, Socius can get your contact management tasks done faster than
 traditional GUI apps.
 
@@ -677,8 +761,8 @@ Priorities: 🔴 High: Must have | 🟡 Medium: Good to have | 🟢 Low: Unlikel
 | Priority          | As a …​           | I want to …​                                     | So that I can…​                                            |
 | :---------------- | :---------------- | :----------------------------------------------- | :--------------------------------------------------------- |
 |🔴 High|student|scroll through each user’s entry to access information about my classmates|have a basic understanding of my classmates background|
-|🔴 High|student|add new contacts|keep track of new people|
-|🔴 High|student|delete existing contacts|delete irrelevant or outdated contacts from the address book|
+|🔴 High|student|add new contacts|keep track of new students|
+|🔴 High|student|delete existing contacts|delete irrelevant or outdated contacts from my address book|
 |🔴 High|student|edit existing contacts|update any outdated contacts and customise my address book|
 |🔴 High|introvert student|obtain the information of all classmates|know more about them without having to chat with all of them personally|
 |🔴 High|first time user|see all the features / commands of the application|better understand how to use it|
@@ -686,24 +770,22 @@ Priorities: 🔴 High: Must have | 🟡 Medium: Good to have | 🟢 Low: Unlikel
 |🟡&nbsp;Medium|visual student|see more graphics|understand the program faster|
 |🟡 Medium|unorganized student|able to organise my modules/schedule easily|keeps things on schedule so i wont lack behind|
 |🟡 Medium|impatient student|have a responsive interface|have a good user experience|
+|🟡 Medium|impatient student|customise my commands to keep them short and simple|have a better user experience|
 |🟡 Medium|tutor|track students with varying ability|better spread out students with similar ability so that the weakest wont be in the same group|
 |🟡 Medium|tutor|track students with varying background|better spread out students with similar background into different groups|
-|🟡 Medium|student|find the address of my classmates to identify where they are staying|see who stays on campus and who does not|
 |🟡 Medium|student|find people with different skillsets|learn from others|
+|🟡 Medium|student|view all of my contact's social handles on a single platform|view their profile and easily contact them|
 |🟡 Medium|student|check teammates availability|make sure my teammates have same vacant timeslots as me|
-|🟡 Medium|student|differentiate classmates with different personalities|identify like minded people / people of certain qualities you hope to work with in the group project|
+|🟡 Medium|student|know my classmates' personalities|identify like minded people / people of certain qualities I hope to work with in the group project|
 |🟡 Medium|student|differentiate classmates from different countries|form groups with the correct international / local ratio|
-|🟡 Medium|student|find classmates who stay near me|form groups with people who stay near me|
-|🟡 Medium|student|find good off-campus study spots|find convenient meeting places|
-|🟡 Medium|student|find where classmates stay|find convenient meeting places|
 |🟡 Medium|student|identify classmates with experience|ensure the spread of people with background in different groups|
 |🟡 Medium|student|start finding teammates early|make a sound decision on who I wish to be in the same group with|
+|🟡 Medium|student|view my tutorial group's student statistics|have a better understanding of my tutorial group's demographics|
 |🟡 Medium|student|find classmates of the opposite gender|form groups with the correct gender ratio|
-|🟡 Medium|student|be reminded of tutorial/lecture/meeting time|be aware of the deadlines and not miss any of them|
+|🟡 Medium|student|mass tag a group of contacts|shortlist them as potential groupmates|
 |🟡 Medium|international student|find other international students, possibly from the same country as me|connect with them and talk with them|
 |🟡 Medium|high CAP student|find competent team|to mantain a good cap|
 |🟡 Medium|low cap student|find people to carry|learn from them|
-|🟢 Low|international student|have use the application in my own language|feel more comfortable using the application|
 |🟢 Low|fast-typer student|pipe my commands|achive greater efficiency|
 
 ### Use cases
@@ -716,7 +798,7 @@ otherwise)
 **MSS**
 
 1. User requests to add a person in the list
-2. AddressBook adds the person
+2. Socius adds the person
 
 Use case ends.
 
@@ -735,7 +817,7 @@ Use case ends.
 **MSS**
 
 1. User requests to list persons
-2. AddressBook shows a list of persons
+2. Socius shows a list of persons
 3. User requests to edit the personal details of a specific person in the list
 4. Socius edits the personal details of the person
 
@@ -760,7 +842,7 @@ Use case ends.
 **MSS**
 
 1. User requests to list persons
-2. AddressBook shows a list of persons
+2. Socius shows a list of persons
 3. User requests to delete a specific person in the list
 4. Socius deletes the person
 
@@ -810,17 +892,21 @@ Use case ends.
 
 * 2a. The list is empty.
 
-  Use case ends.
+      Use case ends.
 
 * 3a. The given index is invalid.
     * 3a1. Socius shows an error message.
     * 3a2. User enters a new request.
-    * Steps 3a1-3a2 are repeated until the data entered are correct. Use case resumes from step 4.
+    * Steps 3a1-3a2 are repeated until the data entered are correct.
+
+      Use case resumes at step 4.
 
 * 3b. The format of the request is invalid.
     * 3b1. Socius shows an error message.
     * 3b2. User enters a new request.
-    * Steps 3b1-3b2 are repeated until the data entered are correct. Use case resumes from step 4.
+    * Steps 3b1-3b2 are repeated until the data entered are correct.
+
+      Use case resumes at step 4.
 
 **Use case: Remove existing tag of a person**
 
@@ -840,7 +926,9 @@ Use case ends.
 * 3a. The given index is invalid.
     * 3a1. Socius shows an error message.
     * 3a2. User enters a new request.
-    * Steps 3a1-3a2 are repeated until the data entered are correct. Use case resumes from step 4.
+    * Steps 3a1-3a2 are repeated until the data entered are correct.
+
+      Use case resumes at step 4.
 
 **Use case: Filter persons by tag**
 
@@ -856,16 +944,20 @@ Use case ends.
 * 2a. The list is empty. Use case ends.
 
 * 3a. The given tag is invalid.
-    * 3a1. Socius shows an empty list. Use case ends.
+    * 3a1. Socius shows an empty list.
+
+      Use case ends.
 
 **Use case: Add remarks for a person**
 
 **MSS**
 
-1. User requests to list persons
-2. Socius shows a list of persons
-3. User requests to add remarks for a specific person in the list
-4. Socius adds remarks for the person Use case ends.
+1. User requests to list persons.
+2. Socius shows a list of persons.
+3. User requests to add remarks for a specific person in the list.
+4. Socius adds remarks for the person.
+
+      Use case ends.
 
 **Extensions**
 
@@ -874,14 +966,69 @@ Use case ends.
 * 3a. The given index is invalid.
     * 3a1. Socius shows an error message.
     * 3a2. User enters a new request.
-    * Steps 3a1-3a2 are repeated until the data entered are correct. Use case resumes from step 4.
+    * Steps 3a1-3a2 are repeated until the data entered are correct.
+
+      Use case resumes at step 4.
 
 * 3b. The format of the request is invalid.
     * 3b1. Socius shows an error message.
     * 3b2. User enters a new request.
-    * Steps 3b1-3b2 are repeated until the data entered are correct. Use case resumes from step 4.
+    * Steps 3b1-3b2 are repeated until the data entered are correct.
 
-*{More to be added}*
+      Use case resumes at step 4.
+
+**Use case: Mass tag multiple persons**
+
+**MSS**
+
+1. User requests to list persons.
+2. Socius shows a list of persons.
+3. User requests to tag everyone in the list.
+4. Socius adds tag for the list of persons.
+
+      Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+      Use case ends.
+
+* 3a. The format of the request is invalid.
+    * 3a1. Socius shows an error message.
+    * 3a2. User enters a new request.
+    * Steps 3a1-3a2 are repeated until the data entered are correct.
+
+      Use case resumes at step 4.
+
+**Use case: View tutorial group statistics**
+
+**MSS**
+
+1. User requests to list persons.
+2. Socius shows a list of persons.
+3. User requests to view statistics of a particular tutorial group.
+4. Socius displays statistics of the tutorial group.
+
+      Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+      Use case ends.
+
+* 3a. The tutorial group does not exist.
+    * 3b1. Socius shows an error message.
+    * 3b2. User enters a new request.
+    * Steps 3a1-3a2 are repeated until the data entered are correct.
+
+      Use case resumes at step 4.
+
+* 3b. The format of the request is invalid.
+    * 3b1. Socius shows an error message.
+    * 3b2. User enters a new request.
+    * Steps 3b1-3b2 are repeated until the data entered are correct.
+
+      Use case resumes at step 4.
 
 ### Non-Functional Requirements
 
@@ -927,7 +1074,9 @@ testers are expected to do more *exploratory* testing.
     1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+1. Shutdown
+
+    1. Exit the application using the `exit` command.
 
 ### Deleting a person
 
@@ -945,12 +1094,42 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+
+### Adding a person
+
+1. Adding a person
+
+    1. Prerequisites: -
+
+    1. Test case: `add n/Jon Snow p/98765432 g/M t/North`<br>
+       Expected: New person Jon Snow, along with parameters parsed, is added to the list.
+       Details of the added contact shown in the status message.
+
+    1. Test case: `add r/King of the North e/snowyjon@gmail.com`<br>
+       Expected: No person is added. Error details shown in the status message.
+
+    1. Other incorrect delete commands to try: `add` <br>
+       Expected: Similar to previous.
+
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing data files
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Prerequisites: Ensure that you have a `data` folder containing a file titled `addressbook.json` in the same directory as your jar file.
 
-1. _{ more test cases …​ }_
+    1. Simulate a missing file by deleting the `addressbook.json` file.
+
+    1. Re-Launch the application again.
+       Expected: Shows the GUI with a set of sample contacts and new file titled `addressbook.json` will be created in the `data` folder.
+
+1. Dealing with corrupted data files
+
+    1. Prerequisites: Ensure that you have a `data` folder containing a file titled `addressbook.json` in the same directory as your jar file.
+
+    1. Simulate a corrupted file by editing the `addressbook.json` file.
+
+    1. Re-Launch the application again.
+       Expected: Shows the GUI with a set of sample contacts and upon shutdown, the `addressbook.json` file will be updated with the sample contacts.
+
+

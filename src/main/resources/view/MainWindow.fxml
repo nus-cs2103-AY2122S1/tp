@@ -41,7 +41,7 @@
             </padding>
             <SplitPane VBox.vgrow="ALWAYS">
               <StackPane fx:id="personListPanelPlaceholder" minWidth="200" VBox.vgrow="ALWAYS"/>
-              <StackPane VBox.vgrow="ALWAYS" fx:id="resultDisplayPlaceholder" minWidth="200" styleClass="pane-with-border">
+              <StackPane VBox.vgrow="ALWAYS" fx:id="resultDisplayPlaceholder" minWidth="700" styleClass="pane-with-border">
                 <padding>
                   <Insets top="5" right="10" bottom="5" left="10" />
                 </padding>

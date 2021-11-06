@@ -32,7 +32,7 @@ public class PersonTest {
                 .withNationality(VALID_NATIONALITY_BOB).withTutorialGroup(VALID_TUTORIAL_GROUP_BOB)
                 .withSocialHandles(VALID_SOCIAL_HANDLE_BOB).withGender(VALID_GENDER_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(ALICE.isSamePerson(editedAlice));
+        assertFalse(ALICE.isSamePerson(editedAlice));
 
         // different name, all other attributes same -> returns false
         editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();

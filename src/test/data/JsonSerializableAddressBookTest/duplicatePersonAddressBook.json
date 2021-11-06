@@ -19,5 +19,17 @@
     "nationality": "Singaporean ",
     "tutorialGroup": "T09",
     "remark": "likes coding"
+  }, {
+    "name": "Alice Pauline",
+    "gender": "F",
+    "phone": "94351253",
+    "email": "alice@example.com",
+    "nationality": "Singaporean ",
+    "tutorialGroup": "T09",
+    "remark": "likes coding",
+    "tagged" : [ {
+      "tagName" : "friend",
+      "tagColour" : "#3e7b91"
+    } ]
   } ]
 }

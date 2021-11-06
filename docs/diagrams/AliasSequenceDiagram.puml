@@ -1,0 +1,30 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant "s:AliasCommand" as AliasCommand LOGIC_COLOR
+participant ":CommandAliases" as CommandAliases LOGIC_COLOR
+end box
+
+[-> LogicManager : execute("alias a/Singaporeans c/find nat/Singaporean")
+activate LogicManager
+
+ref over LogicManager, AliasCommand : Parse Alias Command
+
+LogicManager -> AliasCommand : execute()
+activate AliasCommand
+
+AliasCommand -> CommandAliases : put(alias, command)
+activate CommandAliases
+
+return
+deactivate CommandAliases
+
+AliasCommand --> LogicManager : result
+deactivate AliasCommand
+
+[<--LogicManager : result
+deactivate LogicManager
+destroy AliasCommand
+@enduml

@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
@@ -21,15 +23,19 @@ public class RemarkCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Edits the remark of the person identified "
-            + "by the index number used in the last person listing. "
-            + "Existing remark will be overwritten by the input.\n"
+            + "by the index number used in the displayed person list. "
+            + "Existing remark will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "r/ [REMARK]\n"
+            + "[" + PREFIX_REMARK + "REMARK]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + "r/Likes to swim.";
+            + "r/Likes to swim";
 
     public static final String MESSAGE_ADD_REMARK_SUCCESS = "Added remark to Person: %1$s";
     public static final String MESSAGE_DELETE_REMARK_SUCCESS = "Removed remark from Person: %1$s";
+    public static final String MESSAGE_INVALID_COMMAND_FORMAT_INVALID_INDEX = String.format(
+            MESSAGE_INVALID_COMMAND_FORMAT, "A valid index was not entered. \n%1$s");
+    public static final String MESSAGE_INVALID_COMMAND_FORMAT_REMARK_ABSENT = String.format(
+            MESSAGE_INVALID_COMMAND_FORMAT, "No remark was entered. \n%1$s");
 
     private final Index index;
     private final Remark remark;

@@ -132,9 +132,10 @@ public class AddressBookParser {
             return new AddTagCommandParser().parse(arguments);
 
         default:
-            WordSuggestion commandSuggestions = new WordSuggestion(commandWord, COMMAND_WORDS, 3);
+            WordSuggestion commandSuggestions = new WordSuggestion(commandWord, COMMAND_WORDS, 2);
 
-            throw new ParseException(MESSAGE_UNKNOWN_COMMAND + commandSuggestions.getSuggestedWords());
+            throw new ParseException(String.format("%s: %s.\n%s",
+                    MESSAGE_UNKNOWN_COMMAND, userInput, commandSuggestions.getSuggestedWords()));
         }
     }
 

@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.awt.Color;
+import java.lang.reflect.Field;
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
@@ -11,8 +12,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.commons.util.ImageUtil;
 import seedu.address.model.person.Person;
-import seedu.address.storage.ImageStorage;
+import seedu.address.model.tag.Tag;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -61,7 +63,7 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         // Add gender icon
-        Image genderImage = ImageStorage.getGenderIcon(person.getGender().gender);
+        Image genderImage = ImageUtil.getGenderIcon(person.getGender().gender);
         if (genderImage != null) {
             ImageView genderIcon = new ImageView(genderImage);
             genderIcon.setFitHeight(15);
@@ -105,7 +107,7 @@ public class PersonCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(socialHandle -> socialHandle.platform))
                 .forEach(socialHandle -> {
                     Label label = new Label();
-                    Image image = ImageStorage.getSocialIcon(socialHandle.platform);
+                    Image image = ImageUtil.getSocialIcon(socialHandle.platform);
                     if (image == null) {
                         label.setText(socialHandle.platform + " : " + socialHandle.value);
                     } else {
@@ -144,14 +146,31 @@ public class PersonCard extends UiPart<Region> {
      * @return
      */
     public boolean isTagTooBright(String tagColour) {
-        tagColour = tagColour.substring(1);
-        int hexadecimalCode = Integer.parseInt(tagColour, 16);
-        Color colour = new Color(hexadecimalCode);
+        //@@author e0543978-reused
+        //Reused from
+        // https://stackoverflow.com/questions/4679715/is-there-a-way-to-tell-if-a-html-hex-colour-is-light-or-dark
+        // with minor modifications
+        Color colour;
+
+        if (Tag.isValidColourCode(tagColour)) {
+            tagColour = tagColour.substring(1);
+            int hexadecimalCode = Integer.parseInt(tagColour, 16);
+            colour = new Color(hexadecimalCode);
+        } else {
+            try {
+                Field f = Color.class.getField(tagColour);
+                colour = (Color) f.get(null);
+            } catch (Exception e) {
+                return false;
+            }
+        }
         float[] hsbArray = Color.RGBtoHSB(colour.getRed(), colour.getGreen(), colour.getBlue(), null);
         float brightness = hsbArray[2];
         if (brightness < 0.5) {
             return false;
         }
         return true;
+        //@@author
     }
+
 }

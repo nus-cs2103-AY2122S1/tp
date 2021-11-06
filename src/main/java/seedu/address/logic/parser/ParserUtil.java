@@ -36,6 +36,10 @@ public class ParserUtil {
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+            if (trimmedIndex.matches("\\d*[1-9]d*")) { // Number of any length, but must not be all 0s.
+                // assume the total number of users is less than 2.147 billion.
+                return Index.fromOneBased(Integer.MAX_VALUE);
+            }
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
@@ -81,14 +85,18 @@ public class ParserUtil {
         requireNonNull(nationality);
         String trimmedNationality = nationality.trim();
         if (!Nationality.isValidNationality(trimmedNationality)) {
-            String exceptionMessage = Nationality.MESSAGE_CONSTRAINTS;
+            String exceptionMessage = "";
 
             // Check for suggestions
             if (Nationality.VALID_NATIONALITIES.size() > 0) {
                 WordSuggestion nationalitiesSuggestion = new WordSuggestion(trimmedNationality,
-                        Nationality.VALID_NATIONALITIES);
+                        Nationality.VALID_NATIONALITIES, 2, true);
 
                 exceptionMessage = nationalitiesSuggestion.getSuggestedWords();
+            }
+
+            if (exceptionMessage.equals("")) {
+                exceptionMessage = Nationality.MESSAGE_NOT_FOUND;
             }
 
             throw new ParseException(exceptionMessage);

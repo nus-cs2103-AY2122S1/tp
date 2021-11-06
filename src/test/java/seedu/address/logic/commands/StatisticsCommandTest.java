@@ -28,7 +28,7 @@ public class StatisticsCommandTest {
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_validTutorialGroup_success() {
+    public void execute_validTutorialGroup_success() throws CommandException {
         StatisticsCommand statisticsCommand = new StatisticsCommand(tutorialGroup);
 
         model.updateFilteredPersonList(p -> p.getTutorialGroup().equals(tutorialGroup));

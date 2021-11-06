@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ALIAS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMAND;
@@ -21,10 +22,19 @@ public class AliasCommand extends Command {
             + ": Creates a shortcut name for a command.\n"
             + "Parameters: "
             + PREFIX_ALIAS + "ALIAS "
-            + PREFIX_COMMAND + "COMMAND ";
+            + PREFIX_COMMAND + "COMMAND\n"
+            + "Example: "
+            + COMMAND_WORD
+            + " a/findPartner c/find g/m nat/South Korean";
 
     public static final String MESSAGE_SUCCESS = "Alias successfully added. Mapped `%s` to the command `%s`.";
     public static final String MESSAGE_INVALID_ALIAS = "Invalid alias. Command words cannot be used as an alias.";
+    public static final String MESSAGE_INVALID_COMMAND_FORMAT_ALIAS_ABSENT = String.format(
+            MESSAGE_INVALID_COMMAND_FORMAT, "No alias was entered. \n%1$s");
+    public static final String MESSAGE_INVALID_COMMAND_FORMAT_COMMAND_ABSENT = String.format(
+            MESSAGE_INVALID_COMMAND_FORMAT, "No command was entered. \n%1$s");
+    public static final String MESSAGE_INVALID_COMMAND_FORMAT_PREAMBLE_PRESENT = String.format(
+            MESSAGE_INVALID_COMMAND_FORMAT, "An input was entered without prefix. \n%1$s");
 
     private final String alias;
     private final Command command;

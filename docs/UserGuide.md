@@ -17,7 +17,7 @@ Are you a developer? Make sure to check out our Developer Guide too! You can fin
 2. [Using this guide](#using-this-guide)
 3. [Quick start](#quick-start)
 4. [Features](#features)
-   1. [Viewing help `help`](#help)
+   1. [Viewing help `help`](#viewing-help-help)
    2. [Modify](#adding-a-person-add)
        1. [Adding a person `add`](#adding-a-person-add)
        2. [Adding tags to persons `addt`](#adding-tags-addt)
@@ -44,15 +44,16 @@ Are you a developer? Make sure to check out our Developer Guide too! You can fin
 5. [Parameter Constraints](#parameter-constraints)
    1. [`n/NAME`](#nname)
    2. [`g/GENDER`](#ggender)
-   3. [`p/PHONE`](#pphone)
+   3. [`p/PHONE_NUMBER`](#pphonenumber)
    4. [`e/EMAIL`](#eemail)
    5. [`nat/NATIONALITY`](#natnationality)
-   6. [`tg/TUTORIAL GROUP`](#tgtutorial-group)
-   7. [`s/SOCIAL HANDLE`](#ssocial-handle)
-   8. [`r/REMARK`](#rremark)
-   9. [`t/TAG`](#ttag)
-   10. [`a/ALIAS`](#aalias)
-   11. [`c/COMMAND`](#ccommand)
+   6. [`tg/TUTORIAL_GROUP`](#tgtutorialgroup)
+   7. [`s/SOCIAL_HANDLE`](#ssocialhandle)
+   8. [`s/SOCIAL_HANDLE_USERID`](#ssocialhandleuserid)
+   9. [`r/REMARK`](#rremark)
+   10. [`t/TAG`](#ttag)
+   11. [`a/ALIAS`](#aalias)
+   12. [`c/COMMAND`](#ccommand)
 6. [FAQ](#faq)
 7. [Glossary](#glossary)
 8. [Authors](#authors)
@@ -182,7 +183,7 @@ Format: **`help`**
 
 If you want to add a new person into Socius, you can use the `add` command.
 
-Format: **`add`** `n/NAME [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/TUTORIAL GROUP] [s/SOCIAL HANDLE]…​ [r/REMARK] [t/TAG]…​`
+Format: **`add`** `n/NAME [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/TUTORIAL_GROUP] [s/SOCIAL_HANDLE]…​ [r/REMARK] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 The [Parameter Constraints](#parameter-constraints) section shows the constraints for each parameter.
@@ -264,11 +265,11 @@ Format: **`edit`** `INDEX FIELD_PREFIX/VALUE [FIELD_PREFIX/VALUE]…​`
 * `FIELD_PREFIX/VALUE` can be any of the following:
   * `n/NAME`
   * `g/GENDER`
-  * `p/PHONE`
+  * `p/PHONE_NUMBER`
   * `e/EMAIL`
   * `nat/NATIONALITY`
-  * `tg/TUTORIAL GROUP`
-  * `s/SOCIAL HANDLE`
+  * `tg/TUTORIAL_GROUP`
+  * `s/SOCIAL_HANDLE`
   * `r/REMARK`
   * `t/TAG`
 
@@ -281,7 +282,7 @@ The [Parameter Constraints](#parameter-constraints) section shows the constaints
 * `INDEX` refers to the index number shown on the left of the name of a displayed person.
 * New input values will overwrite existing values.
 * To remove a field, simply leave the `VALUE` empty
-  * For `s/SOCIAL HANDLE`, you can specify which social handle to remove by only leaving the `USERID` part empty (i.e. `s/PLATFORM:`)
+  * For `s/SOCIAL_HANDLE`, you can specify which social handle to remove by only leaving the `USERID` part empty (i.e. `s/PLATFORM:`)
 * If duplicated fields are given, only the latest one will be taken
   * This does not applies to `s/SOCIAL_HANDLE` and `t/TAG` as they can accept multiple values.
 * When editing tags, the existing tags of the person will be replaced (i.e adding of tags is not cumulative).
@@ -313,6 +314,26 @@ Examples:
 * **`list`** followed by **`delete`** `2` deletes the person at index 2 from the contact book.
 * **`find`** `n/benedict` followed by **`delete`** `1` deletes the person at index 1 from the results of the **`find`** command.
 
+### Deleting tags: `deletet`
+You can delete tags to a person in the contact book by `INDEX`. Alternatively, you can delete tags for everyone in the
+contact book by replacing `INDEX` with the word `all`.
+
+Format: **`deletet`** `INDEX [t/TAG]…​`
+* Delete tags of the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* Index must be provided and **must be a positive integer** 1, 2, 3, …​
+* The tag refers to the tags to delete from the person.
+* Existing tag will be removed if one of the input tags is the existing tag.
+* If no `TAG` is provided, all tags of the person will be deleted.
+* `TAG` is case-sensitive
+
+Alternatively, **`deletet`** `all [t/TAG]…​`
+* Delete tags of everybody in the list.
+* The tag refers to the tags to delete from everyone.
+* Existing tag will be removed if one of the input tags is the existing tag.
+* If no `TAG` is provided, every tag in the list will be deleted.
+* `TAG` is case-sensitive
+
 ### Deleting multiple person: `deletem`
 
 You can delete multiple person from the contact book using `KEYWORD`.
@@ -322,7 +343,7 @@ Format: **`deletem`** `FIELD_PREFIX/KEYWORD [FIELD_PREFIX/KEYWORD]…​`
 * `FIELD_PREFIX/KEYWORD` can be any of the following:
   * `n/NAME`
   * `g/GENDER`
-  * `p/PHONE`
+  * `p/PHONE_NUMBER`
   * `e/EMAIL`
   * `nat/NATIONALITY`
   * `tg/TUTORIAL_GROUP`
@@ -393,11 +414,11 @@ Format: **`find`** `FIELD_PREFIX/KEYWORD [FIELD_PREFIX/KEYWORD]…​`
 * `FIELD_PREFIX/KEYWORD` can be any of the following:
      * `n/NAME`
      * `g/GENDER`
-     * `p/PHONE`
+     * `p/PHONE_NUMBER`
      * `e/EMAIL`
      * `nat/NATIONALITY`
      * `tg/TUTORIAL_GROUP`
-     * `s/SOCIAL_HANDLE`
+     * `s/SOCIAL_HANDLE_USERID`
      * `r/REMARK`
      * `t/TAG`
 
@@ -436,7 +457,7 @@ Examples:
 
 You can view the nationality statistics of a specified tutorial group.
 
-Format: **`stat`** `TUTORIAL GROUP`
+Format: **`stat`** `TUTORIAL_GROUP`
 
 Examples:
 
@@ -454,7 +475,9 @@ Format: **`import`** `FILE_NAME.json`
 * File must be located in the `./data` directory in relative to the directory of `Socius.jar`.
 
 Examples:
-* **`import`** `amy.json` import a contact book via a file named `amy.json` into your existing application.
+* **`import`** `groupmates.json` imports a contact book via a file named `groupmates.json` into your existing application.
+![Folder Directory for imported files](images/ImportExample.png)
+*Illustration of where the JSON file should be located*
 
 ### Exporting contacts: `export`
 
@@ -462,6 +485,7 @@ You can export your contact book and share it with your friends.
 
 Format: **`export`** `FILE_NAME.json`
 
+* File can only be exported to JSON format.
 * File will be stored in the `./data` directory in relative to the directory of `Socius.jar`.
 
 Examples:
@@ -470,12 +494,12 @@ Examples:
 
 ### Aliasing commands: `alias`
 
-You can create command shortcut by aliasing it with custom `KEYWORD`.
+You can create command shortcut by aliasing it with custom `KEYWORD`. This will assign the `KEYWORD` to a particular `COMMAND`,
+so next time you can simply type in `KEYWORD` instead of the full `COMMAND`.
 
 Format: **`alias`** `a/KEYWORD c/COMMAND`.
 
 * `KEYWORD` cannot be same as command keywords such as `add`.
-* Exactly one `KEYWORD` must be provided.
 * The order of `KEYWORD` and `COMMAND` does not matter.
 
 Examples:
@@ -513,8 +537,8 @@ Example: `n/Zayden Tan Bee Hoon`
 
 Examples: `g/M`, `g/f`
 
-### `p/PHONE`
-`PHONE` should only contain numbers, and it should be at least 3 digits long.
+### `p/PHONE_NUMBER`
+`PHONE_NUMBER` should only contain numbers, and it should be at least 3 digits long.
 
 Example: `98739283`
 
@@ -531,17 +555,17 @@ Example: `98739283`
 Example: `e/e3029834@u.nus.edu`
 
 ### `nat/NATIONALITY`
-`NATIONALITY` is only valid if it is one of the nationality listed in the [list of nationalities CSV file](https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/664133/CH_Nationality_List_20171130_v1.csv/preview) by GOV.UK.
+`NATIONALITY` is only valid if it is one of the nationality listed in this [list of nationalities TXT file](https://gist.github.com/marijn/274449).
 
 Example: `nat/Singaporean`
 
-### `tg/TUTORIAL GROUP`
-`TUTORIAL GROUP` should only contain one letter that is either M/T/W/F followed by two digits.
+### `tg/TUTORIAL_GROUP`
+`TUTORIAL_GROUP` should only contain one letter that is either M/T/W/F followed by two digits.
 
 Example: `tg/T09`
 
-### `s/SOCIAL HANDLE`
-`SOCIAL HANDLE` should be of the format `PLATFORM:USERID` and should adhere to the following constraints:
+### `s/SOCIAL_HANDLE`
+`SOCIAL_HANDLE` should be of the format `PLATFORM:USERID` and should adhere to the following constraints:
 * Only the following `PLATFORM` are supported: `Instagram`, `Telegram`, `Facebook`, `Twitter`, `Github`, `Linkedin`, `Snapchat`, `Discord`
 * The following 2 letter shorthand can be used to replace the full name of the social platform:
      * `ig` for Instagram
@@ -555,6 +579,9 @@ Example: `tg/T09`
 * `USERID` should not contains whitespaces
 
 Example: `s/tg:alexx9384`
+
+### `s/SOCIAL_HANDLE_USERID`
+`SOCIAL_HANDLE_USERID` is the `USERID` component of [`SOCIAL_HANDLE`](#ssocial-handle)
 
 ### `r/REMARK`
 `REMARK` can take any values.

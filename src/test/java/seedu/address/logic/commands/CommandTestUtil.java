@@ -96,7 +96,7 @@ public class CommandTestUtil {
             + PREFIX_SOCIAL_HANDLE + "igjewfewij"; // missing ':' to delimit platform and value
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_TAG_COLOUR_DESC = " " + PREFIX_TAG + "hubby" + TAG_COLOUR_DELIMITER
-            + "blue"; // invalid colour code not allowed
+            + "bubbleBlue"; // invalid colour code not allowed
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 

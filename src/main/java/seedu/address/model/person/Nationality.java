@@ -17,7 +17,9 @@ import seedu.address.MainApp;
 public class Nationality {
 
     public static final List<String> VALID_NATIONALITIES = readValidNationalities();
-    public static final String MESSAGE_CONSTRAINTS = "Nationality can take any values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Nationality can be any valid nationality spelled in full.\n"
+            + "Leaving it blank will remove the Nationality field.";
+    public static final String MESSAGE_NOT_FOUND = "The nationality entered is not valid. Please try again";
 
     /*
      * The first character of the nationality must not be a whitespace,
@@ -38,7 +40,9 @@ public class Nationality {
         requireNonNull(nationality);
         checkArgument(isValidNationality(nationality), MESSAGE_CONSTRAINTS);
 
-        value = nationality;
+        value = nationality.equals("")
+                ? nationality
+                : nationality.substring(0, 1).toUpperCase() + nationality.substring(1).toLowerCase();
     }
 
     /**
