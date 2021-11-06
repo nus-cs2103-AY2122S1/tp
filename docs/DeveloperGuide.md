@@ -7,6 +7,27 @@ title: Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
+## About This Guide
+
+This user guide is intended for developers looking to contribute to TAB.
+It aims to contain all the information required to quickly get a calendar UI into your application. 
+
+In the [Table of Contents](#), each item listed is a link which you can click on to go directly to that section in the guide.
+
+**Conventions Used**
+
+Syntax | Meaning
+--------|------------------
+`text` | A command to be entered into the command box in TAB.
+<kbd>text</kbd> | A keyboard input, or a button to be clicked on.
+[text](#about-this-guide) | Links to other parts of the document, or links to be opened in the browser.
+_text_ | A _technical_ word with definitions provided in the [Glossary](#glossary), or a caption for images.
+<div markdown="block" class="alert alert-info"> :information_source: </div> | Indication that the following text is a note, which is useful in helping you understand how TAB works.
+<div markdown="block" class="alert alert-primary"> :bulb: </div> | Indication that the following text is a tip, which allows you to interact with TAB more effectively and quickly.
+<div markdown="block" class="alert alert-warning"> :exclamation: </div> | Indication that the following text is important. Missing it out may impair your user experience and may potentially cause TAB to misbehave!
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## **Acknowledgements**
 
 List of sources of all reused/adapted ideas, code, documentation, and third-party libraries:
@@ -645,29 +666,27 @@ The predicate is then used to filter the list of person.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
+## **Appendix A: Requirements**
 
 ### Product scope
 
 **Target user profile**:
 
-A private 1-to-1 home tuition teacher in Singapore that:
+A private 1-to-1 home tuition teacher that:
 
 1. has a need to manage not more than 50 student contacts
-2. has a need to manage admin details of each student, namely, lesson fees and payment
+2. has a need to manage payment details of each student
 3. has a need to keep track of lesson details for each student
-4. teaches lessons anytime between 8am and 10pm (UTC+8), on any day of the week
+4. teaches lessons anytime between typical working hours of 8am and 10pm, on any day of the week
 5. has a need to manage a busy schedule of not more than 50 lessons
 6. prefers desktop apps over other types
 7. can type fast
-8. prefers typing to mouse interactions
+8. prefers keyboard interactions to mouse interactions
 9. is reasonably comfortable using CLI apps
-10. tutors students belonging to Singapore’s education system
 
 **Value proposition**: TAB is an all-in-one app that manages work schedule and client relationships faster than 
 a typical mouse/_GUI_ driven app. TAB effortlessly keeps track of large amounts of necessary 
-student and lesson information, to empower tutors to provide the best quality home tuition service.  
-
+student and lesson information, to empower tutors to provide the best quality home tuition service.
 
 ### User stories
 
@@ -1069,7 +1088,7 @@ Priorities: High - must have; Medium - nice to have;  Low - unlikely to have.
 11. Should allow users to easily navigate the app interface
 
 
-### Glossary
+## Appendix B: Glossary
 
 * **Academic level**: Mainstream academic years from primary to tertiary education in Singapore (i.e. Primary 1-6, Secondary 1-5, Junior College 1-2 and Year 1-6).
 * **Academic stream**: Mainstream tracks in Singapore (i.e. Express, NA, NT, IP, IB) as well as other common exam streams (e.g. IELTS, SAT, ACT).
@@ -1084,13 +1103,11 @@ Priorities: High - must have; Medium - nice to have;  Low - unlikely to have.
 * **Session**: A session begins when the app is started and ends when the app is exited.
 * **UI**: User Interface - the means by which the user and the app interact.
 * **UML**: Unified Modeling Language - a modeling language that software engineers use to provide a standard way to visualize the design of a system.
-* **UTC+8**: The UTC offset used by Singapore Standard Time (SST), 8 hours ahead of UTC. Historically also referred to as GMT+8.
-  UTC, or Coordinated Universal Time, is the primary time standard by which the world regulates clocks and time.
 * **UX**: User Experience - The experience a user has when using the app.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **Appendix C: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 
@@ -1277,7 +1294,7 @@ Prerequisites: Have a previous command entered, and an empty CommandBox in focus
 <div markdown="span" class="alert alert-primary">
 
 :bulb: **Note:**
-<kbd>Ctrl</kbd> + <kbd>z</kbd> **NOT** a shortcut for the `undo` command.
+<kbd>Ctrl</kbd> + <kbd>z</kbd> is **NOT** a shortcut for the `undo` command.
 </div>
 
 **Function Key Accelerators:**
@@ -1293,7 +1310,7 @@ Prerequisites: Have a previous command entered, and an empty CommandBox in focus
 
 1. _{ more test cases …​ }_
 
-## **Appendix: Efforts**
+## **Appendix D: Efforts**
 
 In this Appendix, we highlight the difficulty level, challenges faced, effort required, and achievements of our project.
 
