@@ -165,9 +165,12 @@ public class JsonUtil {
         }
 
         try {
-            String stringJsonData = CDL.toString(jsonData).replace("-1", "0");;
-            FileUtils.writeStringToFile(destinationFile, stringJsonData, Charset.defaultCharset());
-            logger.info("The following data was written:\n" + stringJsonData);
+            String rawJsonDataString = CDL.toString(jsonData);
+
+            // Store unmarked lab scores as 0 instead of -1 for ease of upload to grade book
+            String parsedJsonData = rawJsonDataString.replace("-1", "0");
+            FileUtils.writeStringToFile(destinationFile, parsedJsonData, Charset.defaultCharset());
+            logger.info("The following data was written:\n" + parsedJsonData);
         } catch (IOException | JSONException e) {
             logger.severe("Unexpected error: " + e);
         }
