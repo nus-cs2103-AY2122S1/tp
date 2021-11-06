@@ -120,12 +120,22 @@ public class StatsTest {
 
     @Test
     public void equals() {
-        Stats stats1 = new Stats(1, 2, 3, new HashMap<>());
-        Stats stats2 = new Stats(1, 2, 3, new HashMap<>());
+        Genre firstGenre = new Genre(GenreList.getListOfGenres()[0]);
+        Genre secondGenre = new Genre(GenreList.getListOfGenres()[1]);
+        HashMap<Genre, Integer> genres1 = new HashMap<>() {{
+                put(firstGenre, 2);
+                put(secondGenre, 3);
+            }};
+        HashMap<Genre, Integer> genres2 = new HashMap<>() {{
+                put(secondGenre, 3);
+                put(firstGenre, 2);
+            }};
+        Stats stats1 = new Stats(1, 2, 3, genres1);
+        Stats stats2 = new Stats(1, 2, 3, genres2);
 
         //same Stats object
         assertTrue(stats1.equals(stats1));
-        //no animes tagged with genres
+        //different Stats object
         assertTrue(stats1.equals(stats2));
     }
 }
