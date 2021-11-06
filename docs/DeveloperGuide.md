@@ -1376,62 +1376,66 @@ testers are expected to do more *exploratory* testing.
 
 #### Enrolling a student into a lesson
 
-1. Enrolling a student into a lesson, while all students and lessons are being shown.
+Enrolling a `Student` into a `Lesson`, while the students and lessons are being shown
 
-    * Prerequisites: Multiple "Students" and "Lessons" shown in the list of students and lessons. "Students" must not currently be enrolled in the "lesson" the user wishes to enroll the student in. 
+* Prerequisites: 
+  * Multiple `Students` and `Lessons` shown in the list of students and lessons. `Students` must not currently be enrolled in the `Lesson` the user wishes to enroll the student in.
+  * `Student` must have the same `grade` as the `Lesson` to be enrolled in
+  * `Student` must not currently be enrolled in `Lesson` of interest
+  * `Student` must not have any existing classes that clash with the duration in `Lesson`
+  * `Student` must currently be enrolled in fewer than `10` lessons
+  * `Lesson` must currently have fewer than `15` students enrolled inside the lesson
+  * Should any of the above conditions not be met, the `Student` will not be able to be enrolled in the `Lesson` of interest  
 
-    * Note: We will be using index `1` to conduct manual testing for positive tests, but feel free to test with any valid index (any positive integer shown in the student and lesson lists).
-      
-    * Note: We will be assuming the following things
-        * `Student` of index `1` has the same `grade` as the `Lesson` of index `1`
-        * `Student` of index `1` is not currently enrolled in `Lesson` of index `1`
-        * `Student` of index `1` does not have any existing classes that clash with the duration in `Lesson` of index `1`
-        * `Student` of index `1` is currently enrolled in fewer than 10 lessons
-        * `Lesson` of index `1` currently has fewer than 15 students enrolled inside the lesson
 
-    * Test case: `enroll 1 l/1`<br>
-      Expected: `Student` of index `1` is enrolled in `Lesson` of index `1` . Details of the student and lesson enrolled in shown in the status message.
+* Note: 
+  * We will be using index `2` to conduct manual testing for positive tests, but feel free to test with any valid index (any positive integer shown in the student and lesson lists).
+  * In this case, we will be using the sample data given when loading up **TuitiONE** for the first time (delete tuitione.json file if it is not your first time). 
+  * The `Student` of index `2` (Bernice Yu of grade P4) will be enrolled into `Lesson` of `index` 2 (Math-P4-Wed-1800).
 
-    * Test case: `enroll 0 l/0`<br>
-      Expected: No student is enrolled in any lesson. Error details shown in the status message.
+* Test case: `enroll 1 l/1`<br>
+  Expected: `Student` of index `1` is enrolled in `Lesson` of index `1` . Details of the student and lesson enrolled in shown in the status message.
 
-    * Other incorrect delete commands to try: `enroll`, `enroll 1`, `enroll 1 l/0`, `enroll 0 l/1`, `enroll x l/y`, `enroll y l/x` (where x is larger than the list size, and y is a negative integer)<br>
-      Expected: Similar to previous.
+* Test case: `enroll 0 l/0`<br>
+  Expected: No student is enrolled in any lesson. Error details shown in the status message.
+
+* Other incorrect delete commands to try: `enroll`, `enroll 1`, `enroll 1 l/0`, `enroll 0 l/1`, `enroll x l/y`, `enroll y l/x` (where x is larger than the list size, and y is a negative integer)<br>
+  Expected: Similar to previous.
 
 #### Deleting a student
 
-1. Deleting a student while all students are being shown.
+Deleting a student while all students are being shown
 
-    * Prerequisites: Multiple "Students" shown in the list of students.
-    
-    * Note: We will be using index `1` to conduct manual testing for positive tests, but feel free to test with any valid index (any positive integer shown in the student list).
+* Prerequisites: Multiple "Students" shown in the list of students.
 
-    * Test case: `delete 1`<br>
-      Expected: `Student` of index `1` is deleted from the list. Details of the deleted student shown in the status message.
+* Note: We will be using index `1` to conduct manual testing for positive tests, but feel free to test with any valid index (any positive integer shown in the student list).
 
-    * Test case: `delete 0`<br>
-      Expected: No student is deleted. Error details shown in the status message.
+* Test case: `delete 1`<br>
+  Expected: `Student` of index `1` is deleted from the list. Details of the deleted student shown in the status message.
 
-    * Other incorrect delete commands to try: `delete`, `delete x`, `delete y` (where x is larger than the list size, and y is a negative integer)<br>
-      Expected: Similar to previous.
+* Test case: `delete 0`<br>
+  Expected: No student is deleted. Error details shown in the status message.
+
+* Other incorrect delete commands to try: `delete`, `delete x`, `delete y` (where x is larger than the list size, and y is a negative integer)<br>
+  Expected: Similar to previous.
       
 
 #### Deleting a lesson
 
-1. Deleting a lesson while all lessons are being shown.
+Deleting a lesson while all lessons are being shown.
 
-    * Prerequisites: Multiple "Lessons" shown in the list of lessons.
+* Prerequisites: Multiple "Lessons" shown in the list of lessons
 
-    * Note: We will be using index `1` to conduct manual testing for positive tests, but feel free to test with any valid index (any positive integer shown in the lesson list).
+* Note: We will be using index `1` to conduct manual testing for positive tests, but feel free to test with any valid index (any positive integer shown in the lesson list).
 
-    * Test case: `delete-l 1`<br>
-      Expected: Students currently enrolled in `Lesson` of index `1` would be unenrolled. `Lesson` of index `1` is deleted from the list. Details of the deleted lesson shown in the status message.
+* Test case: `delete-l 1`<br>
+  Expected: Students currently enrolled in `Lesson` of index `1` would be unenrolled. `Lesson` of index `1` is deleted from the list. Details of the deleted lesson shown in the status message.
 
-    * Test case: `delete-l 0`<br>
-      Expected: No lesson is deleted. Error details shown in the status message.
+* Test case: `delete-l 0`<br>
+  Expected: No lesson is deleted. Error details shown in the status message.
 
-    * Other incorrect delete commands to try: `delete-l`, `delete-l x`, `delete-l y` (where x is larger than the list size, and y is a negative integer)<br>
-      Expected: Similar to previous.
+* Other incorrect delete commands to try: `delete-l`, `delete-l x`, `delete-l y` (where x is larger than the list size, and y is a negative integer)<br>
+  Expected: Similar to previous.
 
 #### Clearing data
 
