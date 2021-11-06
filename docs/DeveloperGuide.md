@@ -3,9 +3,10 @@ layout: page
 title: Developer Guide
 ---
 
-Ailurus is a **desktop app** that helps to organise committees account for details of their members. It provides users with convenient viewing and editing access to all information, thus providing much convenience in their work.
+Ailurus is a **desktop application** designed to aid Organising Committees from the Computing Faculty in managing and accounting for their administrative concerns. It provides users with the ability to plan and manage events and tasks for their members. 
 
-The Developer Guide seeks to provide detailed documentation for developers to set up their environment, and understand the architecture and the different components, as well as their implementations in various commands. It also informs developers of the requirements and instructions for manual testing for the Ailurus product.
+The Developer Guide seeks to provide detailed documentation for developers to set up their environment, and understand the architecture and the different components, as well as their implementations in various commands.
+It also informs developers of the requirements and instructions for manual testing for Ailurus.
 
 * Table of Contents
 {:toc}
@@ -56,7 +57,7 @@ The rest of the App consists of four components.
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `mdel 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `mdel /m 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -101,20 +102,6 @@ or `Member` would update the `EventListPanel` and `MemberListPanel` to show thei
 and `MemberCard` accordingly. Each of the `EventCard` and `MemberCard` would display the fields under the 
 corresponding `Event` and `Member` objects as discussed under [Model Component](#model-component).
 
-However, there are problems faced when the fields inside `Event` and `Member` are being changed. There seems to be 
-some difficulty in updating the `MemberCard` when a `Task` object is being created under the `Member` object, or is 
-removed. Similarly, the same problem also lies in `EventCard` not updating when a `Member` object associated with 
-the `Event` object is being removed.
-
-#### Future Plans for UI
-
-To address the above-mentioned bug where the `EventCard` and `MemberCard` are not updated spontaneously, we decided 
-to implement a third column featuring `Task` objects. As such, we are able to totally remove the `Member` and `Task` 
-from `EventCard` and `MemberCard` respectively. 
-
-We plan to support this implementation by using the `elist`, `mlist` and `tlist` commands to determine what is being 
-displayed in the `MainWindow`.
-
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
@@ -127,11 +114,12 @@ How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `MaddCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a member).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+1. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
 
-The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("mdel 1")` API call.
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("mdel /m 1")` 
+API call.
 
-![Interactions Inside the Logic Component for the `mdel 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `mdel /m 1` Command](images/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -152,7 +140,7 @@ Here is the Activity Diagram for a User when choosing the module and command to 
 
 New feature: Events
 * Events can be added and deleted from event list via `eadd` and `edel` commands
-* The participating members can be listed using the command `mlist /v EVENT_INDEX`
+* The participating members can be listed using the command `mlist /e EVENT_INDEX`
 * New events created can have many participants selected from member list.
 * <u>Design Decision</u>: Instead of only allowing adding of events and creating a command
 for adding participants separately, eadd command allows creation of complete event to
@@ -163,8 +151,6 @@ for familiarity with similar commands for other modules.
 #### Future Plans for Event
 
 Future plans for Events
-* Include adding and deleting of participants, as well as marking whether a participant has attended the event.
-* Include updating of event with participants and different name
 * Include searching for the list of events for a participant
 * Include filtering of events by month or events that are happening today.
 * Include sorting of events by date, name or number of participants.
@@ -182,30 +168,30 @@ The operations are exposed in the `Model` interface as `Model#getFilteredMemberl
 
 Given below is an example usage scenario:
 
-The user executes `tadd /n take attendance /m 1 /m 2`. The parser will be called upon to create a TaddCommandParser.
-The parser will then parse the input to create a TaddCommand with task name as "take attendance" and member ids 1 and 2.
-This command will add the task "take attendance" to the first and second member of the member list.
+The user executes `tadd /n Take Attendance /d 21/10/2021 23:59 /m 1 /m 2`. The parser will be called upon to create a TaddCommandParser.
+The parser will then parse the input to create a TaddCommand with task name as "Take Attendance", task deadline of "21/10/2021 23:59" and member indexes 1 and 2.
+This command will add the task "Take Attendance" to the first and second member of the member list.
 
 ### Delete a task feature for a member
 
 #### Current Implementation for deleting tasks
 
 The proposed feature is achieved by getting the member(s) from the filtered member list
-and use API from the model manager to delete the task with given task id from the member with given member id.
+and use API from the model manager to delete the task with given task index from the member with given member index.
 
 The operations are exposed in the `Model` interface as `Model#getFilteredMemberlist()` and `Model#deleteTask()`.
 
 Given below is an example usage scenario:
 
-The user executes `tdel /t 1 /m 1`. The parser will be called upon to create a TdelCommandParser.
-The parser will then parse the input to create a TdelCommand with task id as 1 and member id as 1.
-This command will delete the first task from the task list of the first member of the member list.
+The user executes `tdel /t 1`. The parser will be called upon to create a TdelCommandParser.
+The parser will then parse the input to create a TdelCommand with task index as 1.
+This command will delete the first task from the task list.
 
 ### List tasks feature for a member
 
 #### Current Implementation for lists
 
-The proposed feature is achieved by getting the member with given member id from the filtered member list
+The proposed feature is achieved by getting the member with given member index from the filtered member list
 and use API from the model manager to list all the tasks of the member.
 
 The operations are exposed in the `Model` interface as `Model#getFilteredMemberlist()` and `Model#updateFilteredTaskList()`.
@@ -213,7 +199,7 @@ The operations are exposed in the `Model` interface as `Model#getFilteredMemberl
 Given below is an example usage scenario:
 
 The user executes `tlist /m 1`. The parser will be called upon to create a TlistCommandParser.
-The parser will then parse the input to create a TlistCommand with member id as 1.
+The parser will then parse the input to create a TlistCommand with member index as 1.
 This command will display all the tasks of the first member of the member list.
 
 ### Model component
@@ -306,7 +292,7 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `mdel 5` command to delete the 5th member in the address book. The `mdel` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `mdel 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `mdel /m 5` command to delete the 5th member in the address book. The `mdel` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `mdel /m 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
@@ -341,13 +327,10 @@ The `redo` command does the opposite — it calls `Model#redoAddressBook()`,
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `mlist`. Commands that do not modify the address book, such as `mlist`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. 
+Thus, the `addressBookStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add /n David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
 
 The following activity diagram summarizes what happens when a user executes a new command:
 

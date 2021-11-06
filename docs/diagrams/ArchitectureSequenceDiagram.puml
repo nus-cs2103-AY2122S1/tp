@@ -10,7 +10,7 @@ Participant ":Storage" as storage STORAGE_COLOR
 user -[USER_COLOR]> ui : "mdel 1"
 activate ui UI_COLOR
 
-ui -[UI_COLOR]> logic : execute("mdel 1")
+ui -[UI_COLOR]> logic : execute("mdel /m 1")
 activate logic LOGIC_COLOR
 
 logic -[LOGIC_COLOR]> model : deleteMember(p)
