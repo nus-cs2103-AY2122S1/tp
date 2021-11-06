@@ -22,9 +22,8 @@ title: Developer Guide
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
-
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
-  original source as well}
+ProgrammerError makes use of the following third-party libraries:
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JSON In Java](https://mvnrepository.com/artifact/org.json/json), [opencsv](http://opencsv.sourceforge.net/), [JUnit5](https://github.com/junit-team/junit5)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -39,9 +38,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 <div markdown="span" class="alert alert-primary">
 
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in
-the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML
-Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit
-diagrams.
+the [diagrams](https://github.com/AY2122S1-CS2103-F09-3/tp/tree/master/docs/diagrams) folder.
 </div>
 
 ### Architecture
@@ -66,9 +63,9 @@ is responsible for,
 
 The rest of the App consists of four components.
 
-* [**`UI`**](#ui-component): The UI of the App.
+* [**`UI`**](#ui-component): ProgrammerError's UI.
 * [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
+* [**`Model`**](#model-component): Holds the data of ProgrammerError in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
 **How the architecture components interact with each other**
@@ -96,19 +93,25 @@ The sections below give more details of each component.
 ### UI component
 
 The **API** of this component is specified
-in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+in [`Ui.java`](https://github.com/AY2122S1-CS2103-F09-3/tp/blob/master/src/main/java/seedu/programmer/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`
+The main UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `StudentListPanel`
 , `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures
 the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that
+In addition, there are two additional windows that the UI can display: `HelpWindow` and `DashboardWindow`. 
+They inherit from the abstract class `PopupWindow`, 
+which captures the commonalities between classes that represent popup information to be displayed to the user.
+
+The `UI` component uses the JavaFx UI framework. 
+- The layout of these UI parts are defined in matching `.fxml` files that
 are in the `src/main/resources/view` folder. For example, the layout of
 the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java)
 is specified
 in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+- The styling of the UI components are defined in the `src/main/resources/view/css` folder.
 
 The `UI` component,
 
@@ -158,8 +161,7 @@ How the parsing works:
 
 ### Model component
 
-**
-API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2122S1-CS2103-F09-3/tp/blob/master/src/main/java/seedu/programmer/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -168,14 +170,14 @@ The `Model` component,
 
 * stores the address book data i.e., all `Student` objects (which are contained in a `UniqueStudentList` object).
 * stores the currently 'selected' `Student` objects (e.g., results of a search query) as a separate _filtered_ list
-  which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be
+  which is exposed to outsiders as an unmodifiable `ObservableList<Student>` that can be 'observed' e.g. the UI can be
   bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as
   a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
   should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in `ProgrammerError`, which `Student` references. This allows `ProgrammerError` to only require one `Tag` object per unique tag, instead of each `Student` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -183,8 +185,7 @@ The `Model` component,
 
 ### Storage component
 
-**
-API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S1-CS2103-F09-3/tp/blob/master/src/main/java/seedu/programmer/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -451,9 +452,13 @@ related to the UI. In addition, the following classes are utilised:
 - `DownloadCommand`: for generating the `DownloadCommandResult`
 - `DownloadCommandResult`: for displaying the feedback to the user
 - `MainWindow.fxml`: for the addition of a 'Download' button on the MainWindow
-- `Styles.css`: for the customisation of styles for pop-up messages
+- `Popup.css`: for the customisation of styles for pop-up messages
 
-The following sequence diagram shows how the `download` command works:
+The following sequence diagrams shows how the `download` command works:
+
+1. Similarly to the Show command, when the user executes the `download` command, the `Logic Manager` and `ProgrammerErrorParser`are used. 
+
+![DownloadSequenceDiagram1](images/commands/DownloadCommand/DownloadSequenceDiagram1.png)
 
 ![DownloadSequenceDiagram](images/commands/DownloadCommand/DownloadSequenceDiagram.png)
 
@@ -469,25 +474,19 @@ there is any data to begin with. Only if there exists any data will the user be 
 Additionally, a pop-up message was chosen to be displayed for two reasons. First, it provides the user a clear visual
 indicator of the result of their command, as compared to the typical textual output they would see. Second, we would
 only know if the data was successfully downloaded after the textual response is shown to the user. Using a pop-up
-message right at the end of this operation means we can change the message depending on whether the download was a
+message right at the end of this operation means we can customise the message depending on whether the download was a
 success.
 
 ### Alternatives
 
 1. One alternative could be to not use a third-party package (`org.json`), and instead manually parse the json file and
-   write the corresponding values to a CSV file which ProgrammerError would create.
-
-We chose not to go down this route as it is much more tedious with little reward in terms of code management and code
-quality.
+   write the corresponding values to a CSV file which ProgrammerError would create. We chose not to go down this route as it is much more tedious with little reward in terms of code management and code
+   quality.
 
 2. Another alternative with respect to the user experience could be to disallow the user from selecting a folder to save
    their data to. Instead, a default location could be chosen so as to save the user some time in getting their data
-   downloaded quickly.
-
-However, since we wanted to make ProgrammerError more flexible and adaptable to different users, we opted to include the
-functionality of allowing the user to select a folder destination.
-
-_{more aspects and alternatives to be added}_
+   downloaded quickly. However, since we wanted to make ProgrammerError more flexible and adaptable to different users, we opted to include the 
+   functionality of allowing the user to select a folder destination.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -519,8 +518,7 @@ CS2100 TAs who
 
 **Value proposition**:
 
-CS2100 TAs who use ProgrammerError enjoys greater productivity and efficiency when managing his/her classes of students.
-
+CS2100 TAs who use ProgrammerError enjoys greater productivity and efficiency when managing their classes of students.
 
 ### User stories
 
@@ -539,8 +537,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | CS2100 TA                                  | be able to save the data in a CSV file| upload to LumiNUS and share with the CS2100 Instructors.
 | `* * *`  | proficient programmer / TA                 | navigate ProgrammerError seamlessly with the use of Unix command| efficiently manage my class.
 | `* * `  | CS2100 TA with multiple devices             | export the data in my ProgrammerError                                                            | import it on another device.
-| `* * `  | busy CS2100 TA                              | view students' statstics formatted in a standard form                                            | avoid sorting the information on my own.
-| `* * `  |  CS2100 TA                                  | use the app to track students' performance                                                       | identify those who need more help.
+| `* * `  | busy CS2100 TA                              | view students' statistics formatted in a standard form                                            | avoid sorting the information on my own.
+| `* * `  | CS2100 TA                                   | use the app to track students' performance                                                       | identify those who need more help.
 | `* * `  | user                                        | know that the software and data will be available 99.999 percent of the time I try to access it  | don't get frustrated and find another software to use.
 | `* *`   | CS2100 TA who is an undergradudate myself   | spend little time updating ProgrammerError                                                       | have have sufficient time for my other commitments.
 | `* *`   | CS2100 TA with overwhelming work            | be greeted with a nice interface                                                                 | enjoy the process of doing admin tasks.
@@ -556,12 +554,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`     | a TA with many students and classes         | store vital information of my students                                                           | query it when the need arises.
 | `*`     | CS2100 Teaching Staff                       | easily search and update student's contact details                                               | I can reach them throughout the module.
 
-*{More to be added}*
-
 ### Use cases
 
-(For all use cases below, the **System** is the `ProgrammerError` and the **Actor** is the
-`CS2100 Teaching Assistant (CS2100 TA in short)`, unless specified otherwise)
+For all use cases below, the **System** is the `ProgrammerError` and the **Actor** is the
+`CS2100 Teaching Assistant (CS2100 TA in short)`, unless otherwise specified.
 
 **Use case: UC1 Purge/Delete all sample student records**
 
@@ -686,7 +682,7 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
    Use case ends.
 
-**Use case: UC7 Automatic save and load student records**
+**Use case: UC7 Download student records**
 
 **MSS**
 
@@ -743,7 +739,7 @@ Use case ends.
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2. A TA with above average typing speed for code should be able to accomplish most of the tasks faster using commands
    than using the mouse.
-3. The data should be stored locally and should be in a human editable csv file.
+3. The data should be stored locally and should be in a human editable CSV file.
 4. The product should be for a single user at a time (i.e. not a multi-user product).
 5. No DBMS should be used to store data.
 6. The software should follow the Object-oriented paradigm primarily. (with the possibility of allowing a mix of other
@@ -758,9 +754,10 @@ Use case ends.
 ### Glossary
 
 - **Mainstream OS**: Windows, Linux, Unix, OS-X
-- **Student ID**: An NUS student's matriculation number (AXXXXXXY)
-- **Email**: An NUS student email (eXXXXXXX@u.nus.edu.sg)
+- **Student ID**: An NUS student's matriculation number (AXXXXXXXY)
+- **Email**: An NUS student email (eXXXXXXX@u.nus.edu)
 - **TA**: A CS2100 teaching assistant
+- **PE**: ProgrammerError
 
 --------------------------------------------------------------------------------------------------------------------
 
