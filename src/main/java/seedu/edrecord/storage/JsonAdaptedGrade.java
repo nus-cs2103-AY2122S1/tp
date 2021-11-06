@@ -23,7 +23,7 @@ public class JsonAdaptedGrade {
     private final Integer id;
 
     /**
-     * Constructs a {@code JsonAdaptedAssignment} with the given details.
+     * Constructs a {@code JsonAdaptedGrade} with the given details.
      */
     @JsonCreator
     public JsonAdaptedGrade(@JsonProperty("status") String status,
@@ -35,7 +35,7 @@ public class JsonAdaptedGrade {
     }
 
     /**
-     * Converts a given {@code Assignment} into this class for Jackson use.
+     * Converts a given {@code ID} and {@code Grade} into this class for Jackson use.
      */
     public JsonAdaptedGrade(int id, Grade source) {
         this.id = id;
@@ -44,9 +44,9 @@ public class JsonAdaptedGrade {
     }
 
     /**
-     * Converts this {@code JsonAdaptedAssignment} object into the model's {@code Assignment} object.
+     * Converts this {@code JsonAdaptedGrade} object into the model's {@code ID} and {@code Grade} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted assignment.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted Grade.
      */
     public Map.Entry<Integer, Grade> toModelType() throws IllegalValueException {
         if (id == null) {
