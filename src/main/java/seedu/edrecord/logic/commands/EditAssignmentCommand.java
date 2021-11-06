@@ -42,6 +42,8 @@ public class EditAssignmentCommand extends Command {
     public static final String MESSAGE_DUPLICATE_ASSIGNMENT = "This assignment already exists in this module.";
     public static final String MESSAGE_INVALID_ASSIGNMENT_MAX_SCORE = "The new maximum score is lower than "
             + "some existing grades.";
+    public static final String MESSAGE_TOTAL_WEIGHTAGE_EXCEEDS_100 =
+            "The edited assignment brings the total module weightage above 100%";
 
     private final Index index;
     private final EditAssignmentDescriptor editDescriptor;
@@ -81,7 +83,13 @@ public class EditAssignmentCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_ASSIGNMENT_MAX_SCORE);
         }
 
-        // TODO integrate with assignment view
+        if (editedAsg.hasHigherWeightage(asgToEdit)) {
+            Assignment delta = createDeltaAssignment(editedAsg, asgToEdit);
+            if (model.isTotalWeightageExceeded(delta)) {
+                throw new CommandException(MESSAGE_TOTAL_WEIGHTAGE_EXCEEDS_100);
+            }
+        }
+
         model.setAssignment(asgToEdit, editedAsg);
         return new CommandResult(String.format(MESSAGE_EDIT_ASSIGNMENT_SUCCESS, editedAsg));
     }
@@ -98,6 +106,16 @@ public class EditAssignmentCommand extends Command {
         Score updatedMaxScore = editDescriptor.getMaxScore().orElse(toEdit.getMaxScore());
 
         return new Assignment(updatedName, updatedWeightage, updatedMaxScore);
+    }
+
+    /**
+     * Creates an assignment whose weightage is the weightage of assignment {@code edited} minus
+     * the weightage of assignment {@code current}.
+     */
+    private static Assignment createDeltaAssignment(Assignment edited, Assignment current) {
+        Weightage deltaWeightage = new Weightage(
+                String.valueOf(edited.getWeightage().weightage - current.getWeightage().weightage));
+        return new Assignment(edited.getName(), deltaWeightage, edited.getMaxScore());
     }
 
     @Override

@@ -17,8 +17,7 @@ public class Assignment {
      * Constructs an {@code Assignment}. Every field must be present and not null.
      *
      * @param name      The assignment name, must be unique across the module.
-     * @param weightage The assignment weightage in percentage. It is <em>not</em> guaranteed that
-     *                  the total weightage of all assignments in the module sum to 100%.
+     * @param weightage The assignment weightage in percentage.
      * @param maxScore  The maximum score for the assignment.
      */
     public Assignment(Name name, Weightage weightage, Score maxScore) {
@@ -52,6 +51,13 @@ public class Assignment {
         }
         return otherAssignment != null
                 && otherAssignment.getName().equals(getName());
+    }
+
+    /**
+     * Returns true if this assignment has a higher weightage than the other assignment.
+     */
+    public boolean hasHigherWeightage(Assignment other) {
+        return weightage.compareTo(other.weightage) > 0;
     }
 
     @Override

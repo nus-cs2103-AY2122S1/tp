@@ -142,6 +142,14 @@ public class Module {
     }
 
     /**
+     * Returns true if adding the assignment {@code toAdd} will bring
+     * the total weightage of all assignments to above 100%.
+     */
+    public boolean isTotalWeightageExceeded(Assignment toAdd) {
+        return assignmentList.isTotalWeightageExceeded(toAdd);
+    }
+
+    /**
      * Returns an {@code Optional} containing the assignment with the given name, if it exists.
      */
     public Optional<Assignment> searchAssignment(Name name) {

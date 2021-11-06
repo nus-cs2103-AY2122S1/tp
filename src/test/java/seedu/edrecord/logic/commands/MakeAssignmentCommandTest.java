@@ -254,6 +254,11 @@ public class MakeAssignmentCommandTest {
         }
 
         @Override
+        public boolean isTotalWeightageExceeded(Assignment toAdd) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public List<Assignment> getAssignmentList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -332,6 +337,14 @@ public class MakeAssignmentCommandTest {
         public boolean hasAssignmentInCurrentModule(Assignment assignment) {
             requireNonNull(assignment);
             return assignmentsAdded.stream().anyMatch(assignment::isSameAssignment);
+        }
+
+        @Override
+        public boolean isTotalWeightageExceeded(Assignment toAdd) {
+            double totalWeightage = assignmentsAdded.stream()
+                    .mapToDouble(assignment -> assignment.getWeightage().weightage)
+                    .sum();
+            return totalWeightage > 100;
         }
 
         @Override
