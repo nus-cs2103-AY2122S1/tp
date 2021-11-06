@@ -462,6 +462,8 @@ After: ![images](images/MarkAfter.png)
 * After using the command `list`, `mark 2 4 6` marks the 2nd, 4th and 6th applicant listed in RecruitIn as "Done".
 * After using the command `find n/John`, `mark 1` marks the 1st applicant listed in RecruitIn's results of the `find` command.
 
+<p align="center"><a href="#table-of-contents">Click here to see the table of contents</a></p>
+
 ### Unmarking an applicant : `unmark`
 
 Every applicant in RecruitIn will have a status of either "Done" or "Not Done".
@@ -489,6 +491,8 @@ After: ![images](images/UnmarkAfter.png)
 * After using the command `list`, `unmark 2 4 6` unmarks the 2nd, 4th and 6th applicant listed in RecruitIn to "Not Done".
 * After using the command `find n/John`, `unmark 1` unmarks the 1st applicant listed in RecruitIn's results of the `find` command.
 
+<p align="center"><a href="#table-of-contents">Click here to see the table of contents</a></p>
+
 ### Deleting marked applicants: `delete_marked`
 
 The `delete_marked` command deletes all applicants that are currently marked as done.
@@ -502,11 +506,15 @@ Before: ![images](images/DeleteMarkedBefore.png)
 
 After: ![images](images/DeleteMarkedAfter.png)
 
+<p align="center"><a href="#table-of-contents">Click here to see the table of contents</a></p>
+
 ### Exiting the program : `exit`
 
 The `exit` command causes RecruitIn to close and exit.
 
 Format: `exit`
+
+<p align="center"><a href="#table-of-contents">Click here to see the table of contents</a></p>
 
 ### Saving the data
 
@@ -543,6 +551,8 @@ Example of the format of how data is saved for an applicant:
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes the data format invalid, RecruitIn will remove all saved data and start with an empty data file the next time you open the app.
 </div>
+
+<p align="center"><a href="#table-of-contents">Click here to see the table of contents</a></p>
 
 --------------------------------------------------------------------------------------------------------------------
 
