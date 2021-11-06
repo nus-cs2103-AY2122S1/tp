@@ -275,6 +275,8 @@ Find tasks whose names contain any of the given keywords.
 
 Format: `tfind KEYWORD [MORE_KEYWORDS]...`
 
+* **It is recommended to use this command only when the task list has entries** (accessible via `tlist /m MEMBER_INDEX`)
+    * Otherwise, `0 task(s) listed!` will be shown as the task list is empty, therefore no task is found.
 * The search is case-insensitive. e.g `submit` will match `Submit`
 * The order of the keywords does not matter. e.g. `submit form` will match `form submit`
 * Only the name is searched.
@@ -308,7 +310,7 @@ Marks the specified tasks of the specified member as done.
 Format: `tdone /t TASK_INDEX [/t MORE_TASK_INDEX]…​`
 
 * **Only can be used when the task list has entries** (accessible via `tlist /m MEMBER_INDEX`)
-  * Otherwise, an error message "Task X does not exist in the task list of the member" will be shown as the task list is empty.
+  * Otherwise, an error message `Task X does not exist in the task list of the member` will be shown as the task list is empty.
 * Multiple tasks can be marked as done when there is more than one `TASK_INDEX` provided.
 * Marks the task specified by `TASK_INDEX` as complete.
 
@@ -321,7 +323,7 @@ Marks the specified completed task of the specified member as undone.
 Format: `tundone /t TASK_INDEX [/t MORE_TASK_INDEX]…​`
 
 * **Only can be used when the task list has entries** (accessible via `tlist /m MEMBER_INDEX`).
-    * Otherwise, an error message "Task X does not exist in the task list of the member" will be shown as the task list is empty.
+    * Otherwise, an error message `Task X does not exist in the task list of the member` will be shown as the task list is empty.
 * Multiple completed tasks can be marked as undone when there is more than one `TASK_INDEX` provided.
 * Marks the task specified by `TASK_INDEX` as incomplete.
 
@@ -334,7 +336,7 @@ Edits an existing task within Ailurus.
 Format: `tedit /t TASK_INDEX [/n NAME] [/d DATE_TIME]`
 
 * **Only can be used when the task list has entries** (accessible via `tlist /m MEMBER_INDEX`).
-    * Otherwise, an error message "Task X does not exist in the task list of the member" will be shown as the task list is empty.
+    * Otherwise, an error message `Task X does not exist in the task list of the member` will be shown as the task list is empty.
 * Edits the task at the specified `TASK_INDEX`. 
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
@@ -350,7 +352,7 @@ Deletes the specified task of a specified member from Ailurus.
 Format: `tdel /t TASK_INDEX`
 
 * **Only can be used when the task list has entries** (accessible via `tlist /m MEMBER_INDEX`).
-    * Otherwise, an error message "Task X does not exist in the task list of the member" will be shown as the task list is empty.
+    * Otherwise, an error message `Task X does not exist in the task list of the member` will be shown as the task list is empty.
 * Deletes the task according to the specified `TASK_INDEX`.
 
 Examples:
