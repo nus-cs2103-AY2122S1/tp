@@ -84,6 +84,8 @@ public class Anime {
 
         Anime otherAnime = (Anime) other;
         return otherAnime.getName().equals(getName())
+                && otherAnime.getEpisode().equals(getEpisode())
+                && otherAnime.getStatus().equals(getStatus())
                 && otherAnime.getGenres().equals(getGenres());
     }
 
