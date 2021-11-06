@@ -63,27 +63,16 @@ public class StringUtil {
      * @throws NullPointerException if {@code s} is null.
      */
     public static boolean isNonZeroUnsignedInteger(String s) {
-        requireNonNull(s);
-        if (!isValidNumber(s)) {
-            return false;
-        }
-
-        try {
-            int value = Integer.parseInt(s);
-            return value > 0 && !s.startsWith("+"); // "+1" is successfully parsed by Integer#parseInt(String)
-        } catch (NumberFormatException nfe) {
-            return false;
-        }
+        return isIntegerInRange(s, 1, Integer.MAX_VALUE);
     }
 
     /**
-     * Returns true if {@code s} represents an unsigned integer
-     * e.g. 0, 1, 2, 3, ..., {@code Integer.MAX_VALUE} <br>
+     * Returns true if {@code s} represents an integer within {@code start} and {@code end}
      * Will return false for any other non-null string input
      * e.g. empty string, "-1", "+1", and " 2 " (untrimmed), "3 0" (contains whitespace), "1 a" (contains letters)
      * @throws NullPointerException if {@code s} is null.
      */
-    public static boolean isUnsignedInteger(String s) {
+    public static boolean isIntegerInRange(String s, int start, int end) {
         requireNonNull(s);
         if (!isValidNumber(s)) {
             return false;
@@ -91,7 +80,8 @@ public class StringUtil {
 
         try {
             int value = Integer.parseInt(s);
-            return value >= 0 && !s.startsWith("+"); // "+1" is successfully parsed by Integer#parseInt(String)
+            return start <= value && value <= end
+                && !s.startsWith("+"); // "+1" is successfully parsed by Integer#parseInt(String)
         } catch (NumberFormatException nfe) {
             return false;
         }

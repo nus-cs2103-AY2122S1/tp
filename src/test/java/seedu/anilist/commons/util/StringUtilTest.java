@@ -137,4 +137,35 @@ public class StringUtilTest {
         assertThrows(NullPointerException.class, () -> StringUtil.getDetails(null));
     }
 
+    @Test
+    public void isIntegerInRange() {
+        // EP: Within Range
+        assertTrue(StringUtil.isIntegerInRange("0", -1, 1));
+        assertTrue(StringUtil.isIntegerInRange("-1", -1, 1));
+        assertTrue(StringUtil.isIntegerInRange("1", -1, 1));
+
+        // EP: Out of Range
+        assertFalse(StringUtil.isIntegerInRange("-2", -1, 1));
+        assertFalse(StringUtil.isIntegerInRange("2", -1, 1));
+
+        // EP: Integer Overflow and Integer
+        assertFalse(StringUtil.isIntegerInRange("-9999999999999999999", -1, 1));
+        assertFalse(StringUtil.isIntegerInRange("9999999999999999999", -1, 1));
+
+        // EP: not a number
+        assertFalse(StringUtil.isIntegerInRange("a", -1, 1));
+        assertFalse(StringUtil.isIntegerInRange("aaa", -1, 1));
+
+        // EP: zero as prefix
+        assertTrue(StringUtil.isIntegerInRange("01", -1, 1));
+
+        // EP: signed numbers
+        assertTrue(StringUtil.isIntegerInRange("-1", -1, 1));
+        assertFalse(StringUtil.isIntegerInRange("+1", -1, 1));
+
+        // EP: numbers with white space
+        assertFalse(StringUtil.isIntegerInRange(" 10 ", -1, 1)); // Leading/trailing spaces
+        assertFalse(StringUtil.isIntegerInRange("1 0", -1, 1)); // Spaces in the middle
+    }
+
 }
