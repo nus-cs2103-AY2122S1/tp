@@ -114,7 +114,7 @@ Here's a (partial) class diagram of the `Logic` component:
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
+1. The command can communicate with the `Model` when it is executed (e.g. to add a contact).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
@@ -178,7 +178,7 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Implementation
 
-Tags for contacts are implemented as a `Tag` class, and are stored internally in a `Set<Tag>` within the `Person` object. Tags are parsed and created through the `add`, `edit` and `tag` commands, and removed through the `edit` and `untag` commands. Multiple **distinct** tags can also be added for each person.
+Tags for contacts are implemented as a `Tag` class, and are stored internally in a `Set<Tag>` within the `Person` object. Tags are parsed and created through the `add`, `edit` and `tag` commands, and removed through the `edit` and `untag` commands. Multiple **distinct** tags can also be added for each contact.
 
 #### Usage
 
@@ -186,7 +186,7 @@ Given below is an example usage scenario and how the Tag mechanism behaves at ea
 
 Step 1. The user launches the application for the first time.
 
-Step 2. The user executes `add ... t/friend` command to add a person tagged with `friend` into CONNECTIONS.
+Step 2. The user executes `add ... t/friend` command to add a contact tagged with `friend` into CONNECTIONS.
 
 Step 3. CONNECTIONS displays the newly added contact with the added tag.
 
@@ -212,9 +212,9 @@ Step 7. CONNECTIONS updates and removes the tag `student` from the contact.
 
 #### Proposed Implementation
 
-The proposed pin mechanism is facilitated by `UniquePersonList`. It stores all the list of people in CONNECTIONS and maintains the order of these people according to if they are pinned or not. Pinned people have a higher priority and hence are displayed first. It currently implements the following operations: 
-* `UniquePersonList#add` - adds a person into the list of stored people and stores the people according to their priority. 
-* `UniquePersonList#setPerson` - updates an edited person in the list of stored people and stores the people according to their priority. 
+The proposed pin mechanism is facilitated by `UniquePersonList`. It stores all the list of contacts in CONNECTIONS and maintains the order of these contacts according to if they are pinned or not. Pinned contacts have a higher priority and hence are displayed first. It currently implements the following operations: 
+* `UniquePersonList#add` - adds a contact into the list of stored contacts and stores the contacts according to their priority. 
+* `UniquePersonList#setPerson` - updates an edited contact in the list of stored contacts and stores the contacts according to their priority. 
 
 The operation are exposed in the `Command` interface as `Command#Execute`, specifically in `PinCommand#Execute`
 
@@ -224,27 +224,27 @@ Step 1. The user launches the application. Current `UniquePersonList` will conta
     
 ![PinUniquePersonListState0](images/PinUniquePersonListState0.png)
 
-Step 2. The user executes `add n/person3 …​` to add a new person. This person is initially unpinned and will be added to the `UniquePersonList`. It will be added to the end of the `UniquePersonList`.
+Step 2. The user executes `add n/person3 …​` to add a new contact. This contact is initially unpinned and will be added to the `UniquePersonList`. It will be added to the end of the `UniquePersonList`.
 
 ![PinUniquePersonListState1](images/PinUniquePersonListState1.png)
 
-Step 3. CONNECTIONS UI displays the new person at the end of `PersonListPanel` using a `PersonCard`.
+Step 3. CONNECTIONS UI displays the new contact at the end of `PersonListPanel` using a `PersonCard`.
 
 Step 4. The user decides that the contact will be frequently contacted and should be pinned. User executes `pin 3`.
 
-Step 5. Person's `Pin` attribute will change to indicate that the person is pinned. Person will be brought forward to `UniquePersonList`, behind `person1` that was already pinned.
+Step 5. Contact's `Pin` attribute will change to indicate that the contact is pinned. Contact will be brought forward to `UniquePersonList`, behind `person1` that was already pinned.
 
 ![PinUniquePersonListState2](images/PinUniquePersonListState2.png)
 
-Step 6. CONNECTIONS UI will update to show the new person at the top of the list using a `PinnedPersonCard` which shows a pin next the person's name. 
+Step 6. CONNECTIONS UI will update to show the new contact at the top of the list using a `PinnedPersonCard` which shows a pin next the contact's name. 
 
 Step 7. The user decides that the contact will no longer be frequently contacted and should be unpinned. User executres `unpin 2`.
 
-Step 6. Person's `Pin` attribute will change to indicate that the person is not pinned. Person will be moved behind other pinned contacts in `UniquePersonList`.
+Step 6. Contact's `Pin` attribute will change to indicate that the contact is not pinned. Contact will be moved behind other pinned contacts in `UniquePersonList`.
 
 ![PinUniquePersonListState3](images/PinUniquePersonListState3.png)
 
-Step 7. CONNECTIONS UI will update to show the person behind other pinned contacts using a `PersonCard`. 
+Step 7. CONNECTIONS UI will update to show the contact behind other pinned contacts using a `PersonCard`. 
 
 The following sequence diagram shows how the pin operation works:
 
@@ -256,11 +256,11 @@ The following sequence diagram shows how the pin operation works:
 
 **Aspect: How pin executes:**
 
-* **Alternative 1:** Person has a boolean field isPinned to indicate if the person is pinned or not.
+* **Alternative 1:** Contact has a boolean field isPinned to indicate if the contact is pinned or not.
     * Pros: Easy to implement, less memory usage
     * Cons: Less flexibility in expanding the usage of pin.
 
-* **Alternative 2 (current choice):** Person has Pin object to indicate if the person is pinned or not.
+* **Alternative 2 (current choice):** Contact has Pin object to indicate if the contact is pinned or not.
     * Pros: More flexible to expand, other methods can be added to Pin if needed.
     * Cons: Will use more memory.
 
@@ -285,11 +285,11 @@ It will be displayed in `PersonListPanel`.
 
 Given below is an example usage scenario and how the Find mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. All people are displayed at default.
+Step 1. The user launches the application for the first time. All contacts are displayed at default.
 
 Step 2. The user executes `find n/David t/friend t/football` to search for a matching entry.
 
-Step 3. A `FindPredicate`  which will only return `true` if person's name contains `David` **while also having** `friend` **and**
+Step 3. A `FindPredicate`  which will only return `true` if contact's name contains `David` **while also having** `friend` **and**
 `football` tagged to them is made.
 
 Step 4. This`FindPredicate` is passed into `ModelManager#updateFilteredPersonList`, updating the filtered list.
@@ -319,11 +319,11 @@ It will be displayed in `PersonListPanel`.
 
 Given below is an example usage scenario and how the FindAny mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. All people are displayed at default. 
+Step 1. The user launches the application for the first time. All contacts are displayed at default. 
 
 Step 2. The user executes `findAny n/David n/Henry t/friend t/footnall` to search for a matching entry.
 
-Step 3. A `FindAnyPredicate`  which will only return `true` if person's name contains **either** `David` **or** `Henry` **OR** are
+Step 3. A `FindAnyPredicate`  which will only return `true` if contact's name contains **either** `David` **or** `Henry` **OR** are
 tagged to **either** `friend` **or** `football` is made.
 
 Step 4. This`FindAnyPredicate` is passed into `ModelManager#updateFilteredPersonList`, updating the filtered list. 
@@ -368,37 +368,37 @@ Step 5. CONNECTIONS will display a detailed help message on the usage of `add` c
 
 #### Proposed Implementation
 
-Shows a list of people with upcoming birthdays. This list of birthday reminders is displayed to the user though the `UI`, specifically in `BirthdayReminderListPanel`. Each birthday is displayed as a `BirthdayReminderCard`.
+Shows a list of contacts with upcoming birthdays. This list of birthday reminders is displayed to the user though the `UI`, specifically in `BirthdayReminderListPanel`. Each birthday is displayed as a `BirthdayReminderCard`.
 The list of birthdays is generated in the `ModelManager`, which implements the following functions:
 * `getBirthdayReminderList` which returns an `ObservableList<Person>` that is ordered according to upcoming birthdays.
 
 Given below is an example usage scenario and how the Help mechanism behaves at each step.
 
-Step 1. On app startup sort people with birthday by birth month and day only into a list of people. Birthdays that are one day away are coloured green while birthdays that within one week are coloured blue.
+Step 1. On app startup sort contacts with birthday by birth month and day only into a list of contacts. Birthdays that are one day away are coloured green while birthdays that within one week are coloured blue.
 
-Step 2. The first person in the birthday reminder list will have the next birth month and day with respect 
+Step 2. The first contact in the birthday reminder list will have the next birth month and day with respect 
 to current day.
 
-Step 3. The rest of the list with birthday after this first person will be displayed in sorted order. This list is displayed in CONNECTIONS' `UI` in `BirthdayReminderListPanel`.
+Step 3. The rest of the list with birthday after this first contact will be displayed in sorted order. This list is displayed in CONNECTIONS' `UI` in `BirthdayReminderListPanel`.
 
-Step 4. The user decides to scroll through the `BirthdayReminderListPanel`. Once at the end of the list (at person with latest birthday), cycle back to the person with the 
-earliest birthday and display remaining people in sorted order. 
+Step 4. The user decides to scroll through the `BirthdayReminderListPanel`. Once at the end of the list (at contact with latest birthday), cycle back to the contact with the 
+earliest birthday and display remaining contacts in sorted order. 
 
-Step 5. The user executes `add n/person3 b/01012000 …​` to add a new person. 
+Step 5. The user executes `add n/person3 b/01012000 …​` to add a new contact. 
 
-Step 6. CONNECTIONS will store the new person. The `ObservableList<Person>` for `BirthdayReminderPanelList` will include the new person and sort it according to upcoming birthdays. 
+Step 6. CONNECTIONS will store the new contact. The `ObservableList<Person>` for `BirthdayReminderPanelList` will include the new contact and sort it according to upcoming birthdays. 
 
-Step 7. CONNECTIONS `UI` will observe a change in the `ObservableList<Person>` and update `BirthdayReminderPanelList`, displaying the new person. 
+Step 7. CONNECTIONS `UI` will observe a change in the `ObservableList<Person>` and update `BirthdayReminderPanelList`, displaying the new contact. 
 
 #### Design considerations:
 
-**Aspect: How will the `ObservableList<Person>` update with a new person:**
+**Aspect: How will the `ObservableList<Person>` update with a new contact:**
 
 * **Alternative 1 (current choice):** Clear the birthday reminders and regenerate it.
     * Pros: Straightforward.
     * Cons: Will be slower as whole list is regenerated.
 
-* **Alternative 2:** Insert the person into the list. 
+* **Alternative 2:** Insert the contact into the list. 
     * Pros: Faster than alternative.
     * Cons: Harder to implement and maintain.
     
@@ -433,11 +433,11 @@ Step 1. The user edits the data file and changes `Tag` field of the first contac
 
 Step 2. The user edits the data file and changes the `Email` field of the second contact to an invalid value.
 
-Step 3. Upon start up, `JsonAddressBookStorage` attempts to load the data file. Since the value of `Tag` (optional field) for the first person is invalid, `JsonAdaptedPerson` will not add the invalid `Tag`.
+Step 3. Upon start up, `JsonAddressBookStorage` attempts to load the data file. Since the value of `Tag` (optional field) for the first contact is invalid, `JsonAdaptedPerson` will not add the invalid `Tag`.
 
-Step 4. Since the value of `Email` (compulsory field) for the second person is invalid, `JsonAdaptedPerson` returns `null` which is not added to `JsonAddressBookStorage`.
+Step 4. Since the value of `Email` (compulsory field) for the second contact is invalid, `JsonAdaptedPerson` returns `null` which is not added to `JsonAddressBookStorage`.
 
-Step 3. CONNECTIONS will not display the first person's invalid `Tag` and will not display the second person. The other fields and contacts will be displayed as per normal.  
+Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will not display the second contact. The other fields and contacts will be displayed as per normal.  
 
 
 #### Design considerations:
@@ -477,7 +477,7 @@ Step 3. CONNECTIONS will not display the first person's invalid `Tag` and will n
 **Value proposition**:
 * view reminders about birthdays
 * retrieve contact details of all members of a group quickly and easily
-* view contact details of frequently contacted people easily
+* view contact details of frequently contacted contacts easily
 * keep track of upcoming birthdays
 
 
@@ -490,12 +490,12 @@ Step 3. CONNECTIONS will not display the first person's invalid `Tag` and will n
 | Person who loves birthdays and is forgetful    | have birthday reminders            | Avoid missing any of his/her friends’ birthdays
 | Party Organiser       | Look for contact details for all my friends      | Send out invites
 | Party Organiser       | Generate csv file of my invitees                  | Take attendance or make external notes
-| Party Organiser               | Tag people with a party           | Easily keep track of people coming for parties
-| Party Organiser               | Untag people from a party         | Easily remove people who are not coming for parties
+| Party Organiser               | Tag contacts with a party           | Easily keep track of those coming for parties
+| Party Organiser               | Untag contacts from a party         | Easily remove those who are not coming for parties
 | Party Organiser               | Search contacts by party      | Generate invite list
 | Party Organiser               | Search contacts by parties      | View who is coming for these parties
 | Party Organiser               | Delete multiple contacts at once      | Quickly delete contacts that I no longer need
-| Sociable person               | Pin frequent contacts           | Easily access people that I contact often
+| Sociable person               | Pin frequent contacts           | Easily access contacts that I contact often
 | Sociable person               | Save up to 100 contacts | Keep all my friends contacts
 | Sociable person               | Search for contacts within a reasonable timing | Avoid waiting too long for search results
 | Beginner              | See sample commands                               | See what I should be typing.
@@ -510,13 +510,13 @@ Step 3. CONNECTIONS will not display the first person's invalid `Tag` and will n
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Add a person**
+**Use case: Add a contact**
 
 **MSS**
 
-1.  User chooses to add a person
-2.  User provides the person's details
-3.  CONNECTIONS create an entry for that person's details
+1.  User chooses to add a contact
+2.  User provides the contact's details
+3.  CONNECTIONS create an entry for that contact's details
 
     Use case ends.
 
@@ -544,14 +544,14 @@ Step 3. CONNECTIONS will not display the first person's invalid `Tag` and will n
 
     Use case ends.
 
-**Use case: Delete a person**
+**Use case: Delete a contact**
 
 **MSS**
 
-1.  User requests to list people
-2.  CONNECTIONS show a list of people
-3.  User requests to delete a specific person in the list
-4.  CONNECTIONS delete the person
+1.  User requests to list contacts
+2.  CONNECTIONS show a list of contacts
+3.  User requests to delete a specific contact in the list
+4.  CONNECTIONS delete the contact
 
     Use case ends.
 
@@ -567,12 +567,12 @@ Step 3. CONNECTIONS will not display the first person's invalid `Tag` and will n
 
       Use case resumes at step 2.
 
-**Use case: Edit a person's details**
+**Use case: Edit a contact's details**
 
 **MSS**
 
-1.  User requests to list people
-2.  CONNECTIONS show a list of people
+1.  User requests to list contacts
+2.  CONNECTIONS show a list of contacts
 3.  User provides his/her index in the list along with the replacement information
 4.  CONNECTIONS reflect the edits that were made
 
@@ -601,7 +601,7 @@ Step 3. CONNECTIONS will not display the first person's invalid `Tag` and will n
 
 **Extensions**
 
-**Use case: Find a person**
+**Use case: Find a contact**
 
 **MSS**
 
@@ -629,7 +629,7 @@ Step 3. CONNECTIONS will not display the first person's invalid `Tag` and will n
     
     * 2c1. CONNECTIONS return all entries that matches any of the search terms provided.
 
-**Use case: Find people via Tags**
+**Use case: Find contacts via Tags**
 
 **MSS**
 
@@ -653,12 +653,12 @@ Step 3. CONNECTIONS will not display the first person's invalid `Tag` and will n
 
       Use case resumes at step 2.
 
-**Use case: Pin a person**
+**Use case: Pin a contact**
 
 **MSS**
 
-1.  User provides index of person to pin
-2.  CONNECTIONS pins the person to the top of the contacts
+1.  User provides index of contact to pin
+2.  CONNECTIONS pins the contact to the top of the contacts
 
     Use case ends.
 
@@ -670,18 +670,18 @@ Step 3. CONNECTIONS will not display the first person's invalid `Tag` and will n
 
       Use case ends.
 
-* 1b. Person at index is already pinned
+* 1b. Contact at index is already pinned
 
-    * 1b1. CONNECTIONS display a message to indicate person is already pinned.
+    * 1b1. CONNECTIONS display a message to indicate contact is already pinned.
 
       Use case end.
 
-**Use case: Unpin a person**
+**Use case: Unpin a contact**
 
 **MSS**
 
-1.  User provides index of person to unpin
-2.  CONNECTIONS unpins the person
+1.  User provides index of contact to unpin
+2.  CONNECTIONS unpins the contact
 
     Use case ends.
 
@@ -693,9 +693,9 @@ Step 3. CONNECTIONS will not display the first person's invalid `Tag` and will n
 
       Use case ends.
 
-* 1b. Person at index is not pinned
+* 1b. Contact at index is not pinned
 
-    * 1b1. CONNECTIONS display a message to indicate person is not pinned.
+    * 1b1. CONNECTIONS display a message to indicate contact is not pinned.
 
       Use case end.
     
@@ -733,12 +733,12 @@ Step 3. CONNECTIONS will not display the first person's invalid `Tag` and will n
       
       Use case ends.
 
-**Use case: Tag a person**
+**Use case: Tag a contact**
 
 **MSS**
 
-1.  User requests to list people
-2.  CONNECTIONS show a list of people
+1.  User requests to list contacts
+2.  CONNECTIONS show a list of contacts
 3.  User provides his index in the list along with the tags to be added
 4.  CONNECTIONS add those tags from that entry
 
@@ -762,12 +762,12 @@ Step 3. CONNECTIONS will not display the first person's invalid `Tag` and will n
     
       Use case resumes at step 2.
 
-**Use case: Untag a person**
+**Use case: Untag a contact**
 
 **MSS**
 
-1.  User requests to list people
-2.  CONNECTIONS show a list of people
+1.  User requests to list contacts
+2.  CONNECTIONS show a list of contacts
 3.  User provides his index in the list along with the tags to be removed
 4.  CONNECTIONS remove those tags from that entry
 
@@ -902,7 +902,7 @@ Step 3. CONNECTIONS will not display the first person's invalid `Tag` and will n
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 people without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 contacts without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 ### Glossary
@@ -941,17 +941,17 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a contact
 
-1. Deleting a person while all people are being shown
+1. Deleting a contact while all contacts are being shown
 
-   1. Prerequisites: List all people using the `list` command. Multiple people in the list.
+   1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
 
    1. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.

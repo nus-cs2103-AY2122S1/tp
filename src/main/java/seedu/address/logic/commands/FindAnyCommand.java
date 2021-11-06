@@ -8,13 +8,13 @@ import seedu.address.model.person.FindAnyPredicate;
 
 
 /**
- * Finds and lists all people in address book whose name contains ANY of the argument keywords provided.
+ * Finds and lists all contacts in address book whose name contains ANY of the argument keywords provided.
  * Keyword matching is case insensitive.
  */
 public class FindAnyCommand extends Command {
 
     public static final String COMMAND_WORD = "findAny";
-    public static final String COMMAND_DESCRIPTION = "Finds all people whose names contain ANY of "
+    public static final String COMMAND_DESCRIPTION = "Finds all contacts whose names contain ANY of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n";
     public static final String COMMAND_EXAMPLE = "Parameters: n/[name] ... t/[tag] ...\n"
             + "Note that Users can opt for case-sensitive search on Tags by including the 'c/' flag "

@@ -9,17 +9,17 @@ CONNECTIONS is a **desktop app for managing contacts, optimized for use via a Co
 * [Features](#features)
   * [Upcoming birthdays](#upcoming-birthdays)
   * [Viewing help : `help`](#viewing-help--help)
-  * [Adding a person: `add`](#adding-a-person-add)
-  * [Listing all people : `list`](#listing-all-people--list)
-  * [Editing a person : `edit`](#editing-a-person--edit)
+  * [Adding a contact: `add`](#adding-a-contact-add)
+  * [Listing all contacts : `list`](#listing-all-contacts--list)
+  * [Editing a contact : `edit`](#editing-a-contact--edit)
   * [Adding Tags : `tag`](#adding-tags--tag)
   * [Removing Tags : `untag`](#removing-tags--untag)
-  * [Locating people by name and tag(s): `find`](#locating-people-by-name-and-tags-find)
-  * [Locating people by name or tag(s): `findAny`](#locating-people-by-name-or-tags-findany)
-  * [Pinning a person: `pin`](#pinning-a-person--pin)
-  * [Unpinning a person: `unpin`](#unpinning-a-person--unpin)
-  * [Deleting a person : `delete`](#deleting-a-person--delete)
-  * [Deleting multiple person : `deletem`](#deleting-multiple-people--deletem)
+  * [Locating contacts by name and tag(s): `find`](#locating-contacts-by-name-and-tags-find)
+  * [Locating contacts by name or tag(s): `findAny`](#locating-contacts-by-name-or-tags-findany)
+  * [Pinning a contact: `pin`](#pinning-a-contact--pin)
+  * [Unpinning a contact: `unpin`](#unpinning-a-contact--unpin)
+  * [Deleting a contact : `delete`](#deleting-a-contact--delete)
+  * [Deleting multiple contact : `deletem`](#deleting-multiple-contacts--deletem)
   * [Exporting a mailing list of contacts: `mailingList`](#exporting-a-mailing-list-of-contacts--mailinglist)
   * [Clearing all entries : `clear`](#clearing-all-entries--clear)
   * [Exiting the program : `exit`](#exiting-the-program--exit)
@@ -111,9 +111,9 @@ Notes:
   * Opens a link to the documentation.
   ![help link](images/helpLink.png)
 
-### Adding a person: `add`
+### Adding a contact: `add`
 
-Adds a person to the address book.
+Adds a contact to the address book.
 
 #### Format:
 * `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [b/BIRTHDAY] [t/TAG]…​`
@@ -121,7 +121,7 @@ Adds a person to the address book.
 <div markdown="span" class="alert alert-primary">
 
 :bulb: **Tip:**
-A person can have any number of tags (including 0).
+A contact can have any number of tags (including 0).
 </div>
 
 <div markdown="span" class="alert alert-primary">
@@ -141,70 +141,70 @@ Notes:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison b/25121999 p/1234567 t/criminal`
 
-### Listing all people : `list`
+### Listing all contacts : `list`
 
-Shows a list of all people in the address book.
+Shows a list of all contacts in the address book.
 
 #### Format:
 * `list`
 
-### Editing a person : `edit`
+### Editing a contact : `edit`
 
-Edits an existing person in the address book.
+Edits an existing contact in the address book.
 
 #### Format:
 * `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [t/TAG]…​`
 
 Notes:
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the contact at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
+* When editing tags, the existing tags of the contact will be removed i.e. adding of tags is not cumulative.
+* You can remove all the contact’s tags by typing `t/` without
     specifying any tags after it.
 
 **Sample Usage:**
 * `edit 1 p/91234567 e/johndoe@example.com`
-  * Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+  * Edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com` respectively.
 * `edit 2 n/Betsy Crower t/`
-  * Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+  * Edits the name of the 2nd contact to be `Betsy Crower` and clears all existing tags.
 
 ### Adding Tags : `tag`
 
-Adds tag to an existing person in the address book.
+Adds tag to an existing contact in the address book.
 
 #### Format:
 * `tag INDEX t/TAG [t/MORE_TAGS]…​`
 
 Notes:
-* Adds tag to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Adds tag to the contact at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. The index **must be a positive integer** 1, 2, 3, …​
 * New tags will be added on top of existing tags i.e. tags added is cumulative.
-* Adding new tags which already exist will succeed with a warning letting you know that the person already had those tags.
+* Adding new tags which already exist will succeed with a warning letting you know that the contact already had those tags.
 * Tags have a character limit of 60.
 
 **Sample Usage:**
 * `tag 2 t/friend t/NUS`
-    * Adds the tags `friend` and `NUS` to the 2nd person.
+    * Adds the tags `friend` and `NUS` to the 2nd contact.
 
 ### Removing Tags : `untag`
 
-Removes an existing tag from an existing person in the address book.
+Removes an existing tag from an existing contact in the address book.
 
 #### Format:
 * `untag INDEX t/TAG [t/MORE_TAGS]…​`
 
 Notes:
-* Remove tags from the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Remove tags from the contact at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. The index **must be a positive integer** 1, 2, 3, …​
 * Only tags that exist will be removed.
-* If the command contains tags that the person does not have, a warning will be shown and no tags will be removed.
+* If the command contains tags that the contact does not have, a warning will be shown and no tags will be removed.
 
 **Sample Usage:**
 * `untag 2 t/friend t/NUS`
-    * Removes the tags `friend` and `NUS` from the 2nd person.
+    * Removes the tags `friend` and `NUS` from the 2nd contact.
 
-### Locating people by name and tag(s): `find`
+### Locating contacts by name and tag(s): `find`
 
-Finds all people who match **ALL** name and tag keywords provided.
+Finds all contacts who match **ALL** name and tag keywords provided.
 
 #### Format:
 * `find [c/] [n/NAME] …​ [t/TAG] …​`
@@ -218,8 +218,8 @@ Notes:
 * The order of the keywords does not matter. e.g. `find n/Hans t/football` will return the same result as `find  t/football n/Hans`.
 * Only full words will be matched for names and tags.  
   * `find n/an` will not return `Hans`, but will return `Jing An`.  
-* Only people matching all keywords will be returned (i.e. `AND` search).  
-  e.g. `find n/Hans t/Friend` will return all people with names containing the word `Hans` and who are tagged with `Friend`.  
+* Only contacts matching all keywords will be returned (i.e. `AND` search).  
+  e.g. `find n/Hans t/Friend` will return all contacts with names containing the word `Hans` and who are tagged with `Friend`.  
 
 **Sample Usage:**
 * `find n/John`
@@ -232,9 +232,9 @@ Notes:
   * returns `Shin`, who is tagged with `FRIENDS`.
     ![result for `find c/ t/FRIENDS`](images/findcFRIENDSResult.png)
 
-### Locating people by name or tag(s): `findAny`
+### Locating contacts by name or tag(s): `findAny`
 
-Finds all people who match **ANY** name and tag keywords provided.
+Finds all contacts who match **ANY** name and tag keywords provided.
 
 #### Format:
 * `findAny [c/] [n/NAME] …​ [t/TAG] …​`
@@ -248,8 +248,8 @@ Notes:
 * The order of the keywords does not matter. e.g. `findAny n/Hans t/football` will return the same result as `findAny t/football n/Hans`.
 * Only full words will be matched for names and tags.
   * `findAny n/an` will not return `Hans`, but will return `Jing An`.
-* People matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `findAny n/Hans t/Friend` will return all people with names containing the word `Hans` or who are tagged with `Friend`.
+* Contacts matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `findAny n/Hans t/Friend` will return all contacts with names containing the word `Hans` or who are tagged with `Friend`.
 
 
 **Sample Usage:**
@@ -263,74 +263,74 @@ Notes:
   * returns `Shin` who is tagged with `FRIENDS`, as well as `Carol` who is tagged with `chef`.
     ![result for `findAny c/ n/Shin t/FRIENDS t/chef`](images/findAnycShinFRIENDSchefResult.png)
 
-### Pinning a person : `pin`
+### Pinning a contact : `pin`
 
 #### Format: 
 * `pin INDEX`
   
   Notes:
-* Pins the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Pins the contact at the specified `INDEX`.
+* The index refers to the index number shown in the displayed contact list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 **Sample Usage:**
 * `list` followed by `pin 2`
-  * pins the 2nd person in the address book.
+  * pins the 2nd contact in the address book.
 * `find n/Betsy` followed by `pin 1`
-  * pins the 1st person in the results of the `find` command.
+  * pins the 1st contact in the results of the `find` command.
 
-### Unpinning a person : `unpin`
+### Unpinning a contact : `unpin`
 
 #### Format:
 * `unpin INDEX`
 
   Notes:
-* Unpins the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Unpins the contact at the specified `INDEX`.
+* The index refers to the index number shown in the displayed contact list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 **Sample Usage:**
 * `list` followed by `unpin 2`
-  * unpins the 2nd person in the address book.
+  * unpins the 2nd contact in the address book.
 * `find n/Betsy` followed by `unpin 1`
-  * unpins the 1st person in the results of the `find` command.
+  * unpins the 1st contact in the results of the `find` command.
 
-### Deleting a person : `delete`
+### Deleting a contact : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified contact from the address book.
 
 #### Format:
 * `delete INDEX`
 
 Notes:
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Deletes the contact at the specified `INDEX`.
+* The index refers to the index number shown in the displayed contact list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 **Sample Usage:**
 * `list` followed by `delete 2`
-  * deletes the 2nd person in the address book.
+  * deletes the 2nd contact in the address book.
 * `find n/Betsy` followed by `delete 1`
-  * deletes the 1st person in the results of the `find` command.
+  * deletes the 1st contact in the results of the `find` command.
 
-### Deleting multiple people : `deletem`
+### Deleting multiple contacts : `deletem`
 
-Deletes the people within the range from the address book.
+Deletes the contacts within the range from the address book.
 
 #### Format:
 * `deletem START_INDEX - END_INDEX`
 
 Notes:
-* Deletes the people within the specified range from `START_INDEX to END_INDEX`.
-* The indexes refers to the index number shown in the displayed person list.
+* Deletes the contacts within the specified range from `START_INDEX to END_INDEX`.
+* The indexes refers to the index number shown in the displayed contact list.
 * The indexes **must be a positive integer** 1, 2, 3, …​
 * The `END_INDEX` must be bigger than or equal to `START_INDEX`.
 
 **Sample Usage:**
 * `list` followed by `deletem 2 - 3`
-  * deletes the 2nd and 3rd person in the address book.
+  * deletes the 2nd and 3rd contact in the address book.
 * `find n/Betsy` followed by `deletem 1 - 5`
-  * deletes the 1st to 5th person in the results of the `find` command.
+  * deletes the 1st to 5th contact in the results of the `find` command.
 
 ### Exporting a mailing list of contacts : `mailingList`
 
@@ -341,7 +341,7 @@ Exports a CSV file of the current view containing specified fields.
 
 Notes:
 * Name is always the first column in the CSV file.
-* Including any of the arguments will export include that field in the CSV file. 
+* Including any of the arguments will include that field in the exported CSV file. 
 * Each argument represents: 
   * `p/` phone number
   * `e/` email
@@ -427,17 +427,17 @@ If your changes to the data file makes its format invalid, CONNECTIONS will disc
 Action | Summary | Format, Examples
 --------|--------|----------------
 **Help** | Displays help information | `help [COMMAND]`<br> e.g., `help`, `help add`, `help more`
-**Add** | Adds a person | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [b/BIRTHDAY] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 b/23062001 t/friend t/colleague`
-**List** | Lists all people | `list`
-**Edit** | Edits a person | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com b/30012000`
-**Tag** | Tags a person | `tag INDEX [t/TAG]…​`<br> e.g., `tag 2 t/friend t/NUS`
-**Untag** | Untags a person | `untag INDEX [t/TAG]…​`<br> e.g., `untag 2 t/colleague`
-**Find** | Locates people by name and tags (Results fulfill all search terms)| `find [c/] [n/NAME] [t/TAG]`<br> e.g., `find n/James t/friends`
-**FindAny** | Locates people by name and tags (Results fulfill at least one search term)| `findAny [c/] [n/NAME] [t/TAG]`<br> e.g., `findAny n/James t/NUS`
-**Pin** | Pins a person | `pin INDEX`<br> e.g., `pin 1`
-**Unpin** | Unpins a person | `unpin INDEX`<br> e.g., `unpin 1`
-**Delete** | Deletes a person | `delete INDEX`<br> e.g., `delete 3`
-**Deletem** | Deletes multiple people within the range | `deletem START_INDEX - END_INDEX`<br> e.g., `deletem 3 - 5`
+**Add** | Adds a contact | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [b/BIRTHDAY] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 b/23062001 t/friend t/colleague`
+**List** | Lists all contacts | `list`
+**Edit** | Edits a contact | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com b/30012000`
+**Tag** | Tags a contact | `tag INDEX [t/TAG]…​`<br> e.g., `tag 2 t/friend t/NUS`
+**Untag** | Untags a contact | `untag INDEX [t/TAG]…​`<br> e.g., `untag 2 t/colleague`
+**Find** | Locates contacts by name and tags (Results fulfill all search terms)| `find [c/] [n/NAME] [t/TAG]`<br> e.g., `find n/James t/friends`
+**FindAny** | Locates contacts by name and tags (Results fulfill at least one search term)| `findAny [c/] [n/NAME] [t/TAG]`<br> e.g., `findAny n/James t/NUS`
+**Pin** | Pins a contact | `pin INDEX`<br> e.g., `pin 1`
+**Unpin** | Unpins a contact | `unpin INDEX`<br> e.g., `unpin 1`
+**Delete** | Deletes a contact | `delete INDEX`<br> e.g., `delete 3`
+**Deletem** | Deletes multiple contacts within the range | `deletem START_INDEX - END_INDEX`<br> e.g., `deletem 3 - 5`
 **MailingList**| Exports a mailing list | `mailingList [p/] [e/] [a/] [b/] [t/]` <br> e.g., `mailingList [p/] [e/] [b/]`
 **Clear** | Clears all entries | `clear`
 **Exit** | Exits the program | `exit`
