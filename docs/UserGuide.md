@@ -458,7 +458,7 @@ Examples:
 
   Before: ![images](images/MarkBefore.png)
 
-  After: 
+  After: ![images](images/MarkAfter.png)
 
 * After using the command `list`, `mark 2 4 6` marks the 2nd, 4th and 6th applicant listed in RecruitIn as "Done".
 * After using the command `find n/John`, `mark 1` marks the 1st applicant listed in RecruitIn's results of the `find` command.
