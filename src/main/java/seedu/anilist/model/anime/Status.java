@@ -36,8 +36,10 @@ public class Status {
      * Returns true if a given string is a valid status.
      */
     public static boolean isValidStatus(String test) {
+        requireNonNull(test);
+        String testLowerCase = test.toLowerCase();
         for (String statusString: VALID_STATUS_STRING) {
-            if (test.toLowerCase().equals(statusString)) {
+            if (testLowerCase.equals(statusString)) {
                 return true;
             }
         }

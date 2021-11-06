@@ -78,7 +78,8 @@ public class UpdateEpisodeCommand extends Command {
         assert animeToEdit != null;
 
         Name name = animeToEdit.getName();
-        Episode updatedEpisode = episodeDescriptor.getEpisode().orElse(animeToEdit.getEpisode());
+        Optional<Episode> descriptorEpisode = episodeDescriptor.getEpisode();
+        Episode updatedEpisode = descriptorEpisode.orElse(animeToEdit.getEpisode());
         Status status = animeToEdit.getStatus();
         Set<Genre> genres = animeToEdit.getGenres();
 

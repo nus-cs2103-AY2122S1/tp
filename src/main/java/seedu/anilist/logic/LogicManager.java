@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -28,7 +27,7 @@ import seedu.anilist.ui.TabOption;
 public class LogicManager implements Logic {
     public static final String FILE_OPS_ERROR_MESSAGE = "Could not save data to file: ";
 
-    private Optional<Command> lastCmd;
+    private Command lastCmd;
 
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
@@ -40,27 +39,27 @@ public class LogicManager implements Logic {
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
      */
     public LogicManager(Model model, Storage storage) {
-        this.lastCmd = Optional.empty();
+        this.lastCmd = null;
         this.model = model;
         this.storage = storage;
-        animeListParser = new AnimeListParser();
+        this.animeListParser = new AnimeListParser();
     }
 
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
-        logger.info("----------------[USER COMMAND][" + commandText + "]");
+        this.logger.info("----------------[USER COMMAND][" + commandText + "]");
         CommandResult commandResult;
-        if (!this.lastCmd.isPresent() || !this.lastCmd.get().requiresConfirmation()) {
+        if (this.lastCmd == null || !this.lastCmd.requiresConfirmation()) {
             Command command = animeListParser.parseCommand(commandText);
             assert command != null;
             commandResult = command.execute(model);
-            this.lastCmd = Optional.of(command);
+            this.lastCmd = command;
         } else {
             //last command present and requires confirmation
             Command command = animeListParser.parseConfirmationCommand(commandText);
             assert command != null;
             commandResult = command.execute(model);
-            this.lastCmd = Optional.of(command);
+            this.lastCmd = command;
         }
 
         try {
