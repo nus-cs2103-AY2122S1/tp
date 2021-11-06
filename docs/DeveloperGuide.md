@@ -412,19 +412,19 @@ This feature allows Managera users to quickly add/remove participant to/from eve
 #### Implementation Details
 
 The `AddressBookParser` is responsible for determining the type of `Command` to be created from user input, 
-hence we add new `commandType` cases for `AddParticipantToEventByIndexCommand` and `RemoveParticipantFromEventByIndexCommand` in `AddressBookParser`
+hence we add new `commandType` cases for `AddParticipantToEventCommand` and `RemoveParticipantFromEventCommand` in `AddressBookParser`
 
-A `AddParticipantToEventByIndexParser` parses the user's input and obtain indexes for Participant and Event respectively. 
+A `AddParticipantToEventParser` parses the user's input and obtain indexes for Participant and Event respectively. 
 If the indexes given by the user are not zero-based indexes, a `ParseException` will be thrown before `AddParticipantByIndexParser` creates the command itself to prevent any further error. 
 If all indexes are valid, a `AddParticipantByIndexCommand` will be created by the parser.
 
-The `AddParticipantByIndexCommand` created by `AddParticipantToEventByIndexParser` contains 2 zero-based indexes. 
+The `AddParticipantByIndexCommand` created by `AddParticipantToEventParser` contains 2 zero-based indexes. 
 The first one is used to identify the `Participant` while the second is used to identify the `Event`. 
 When the command is executed, the `model` first tries to obtain Participant at specified index (if unsuccessful, a `CommandException` will be thrown accordingly) and then event will be retrieved in the same manner (if unsuccessful, a `CommmandException` will be thrown accordingly). If the Event does not already contain the `Participant` object, the participant will be added to the event accordingly.
  Otherwise, a `CommandException` will be thrown.
 
-A `RemoveParticipantFromEventByIndexParser` parses the user's input and obtain indexes for Participant and Event respectively. 
-The workflow is nearly identical to `AddParticipantToEventByIndex`. It is only that instead of throwing `CommandException` if `Participant` object already exists in the event,
+A `RemoveParticipantFromEventParser` parses the user's input and obtain indexes for Participant and Event respectively. 
+The workflow is nearly identical to `AddParticipantToEvent`. It is only that instead of throwing `CommandException` if `Participant` object already exists in the event,
 the `CommandException` will be thrown when `Participant` *doesn't* exist in the event. After all of that, the `Participant` object will be removed from the `Event`. 
 
 
