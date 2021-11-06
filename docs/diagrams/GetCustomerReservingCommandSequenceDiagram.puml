@@ -8,7 +8,6 @@ end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
-participant "pred:CutomerContainsPhonePredicate" as Predicate MODEL_COLOR
 end box
 
 [-> Command : execute("getC 1")
@@ -20,12 +19,7 @@ activate Model
 Model --> Command : lastShownList
 deactivate Model
 
-create Predicate
-Command -> Predicate : CustomerContainsPhonePredicate()
-activate Predicate
-
-Predicate --> Command : pred
-deactivate Predicate
+note right of Command : the specified reservation is retrieved and\n customer list is filtered to contains the\n corresponding customer
 
 Command -> Model : updateFilteredCustomerList(pred)
 activate Model

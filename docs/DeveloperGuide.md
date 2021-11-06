@@ -109,6 +109,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddSupplierCommandParser`, `DeleteSupplierCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
+
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-T17-1/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 ![ModelClassDiagram](images/ModelClassDiagram.png)
@@ -150,6 +151,15 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:**
+
+The lifeline for all activation bars should end at their respective destroy markers (X) but due to a limitation of PlantUML, the lifeline
+  reaches the end of diagram.
+
+</div>
+
 ### Add command
 
 In the following section, we will be going through how our add command works. Since the add command is very similar across all person types, we will be using the `AddEmployeeCommand` to illustrate how the add command works. More information on the differences in adding `Customer`, `Employee` and `Supplier` can be found in our [User Guide](https://ay2122s1-cs2103t-t17-1.github.io/tp/UserGuide.html)
@@ -169,11 +179,6 @@ The sequence Diagram below illustrates the interactions within the `Logic` compo
 
 ![AddEmployeeCommandSequenceDiagram](images/AddEmployeeCommandSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for 
-`AddEmployeeCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline 
-reaches the end of diagram.
-</div>
-
 `Parse`:
 1. When `Logic` is called upon to execute `AddEmployeeCommand`, it uses the `RhrhParser` class to parse the user command.
 2. The `RhrhParser` then creates an `AddEmployeeCommandParser` to parse the command input.
@@ -192,24 +197,25 @@ details when this command is executed
 
 #### Design Considerations
 
-* Current Design: We separated `AddCustomerCommmand`, `AddEmployeeCommmand` and `AddSupplierCommmand` as different 
+* Current Design: We separated `AddCustomerCommmand`, `AddEmployeeCommmand` and `AddSupplierCommmand` as different
   command types.
-  * Pros
-    * It is much neater as everything is divided based on the Person type and prefixes are easily separated based on whichever Person Type it is.
-    * Errors in user input is easier to identify due to the separation of Person type.
-    
-  * Cons
-    * Additional classes have to be implemented.
-    * More commands for a similar feature.
+    * Pros
+        * It is much neater as everything is divided based on the Person type and prefixes are easily separated based on whichever Person Type it is.
+        * Errors in user input is easier to identify due to the separation of Person type.
+
+    * Cons
+        * Additional classes have to be implemented.
+        * More commands for a similar feature.
 
 * Alternative Design: We could have a singular `AddCommand` and parse the user's input to see what Person Type the user wanted to add.
-  * Pros
-    * Fewer commands for the user to remember.
-      
-  * Cons
-    * Error messages would have been confusing to select.
+    * Pros
+        * Fewer commands for the user to remember.
+
+    * Cons
+        * Error messages would have been confusing to select.
     
 #### Differences regarding adding reservation command
+
 Parsing `Reservecommand` is similar to other add commands. However, since for `Reservation`, we need some logic to check for restaurant availability, then there are some differences regarding how a `Reservecommand` is executed.
 
 The class diagram below demonstrates the class structure of `Reservecommand`.
@@ -219,14 +225,6 @@ The class diagram below demonstrates the class structure of `Reservecommand`.
 The sequence diagram below shows how a valid `ReserveCommand` is executed.
 
 ![AddReservationCommandSequenceDiagram](images/AddReservationCommandSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">
-
-:information_source: **Note:** The lifeline for 
-`rm:ReservationManager` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline 
-reaches the end of diagram.
-
-</div>
 
 ### Edit command
 
@@ -247,11 +245,6 @@ The sequence Diagram below illustrates the interactions within the `Logic` compo
 
 ![EditCustomerCommandSequenceDiagram](images/EditCustomerCommandSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for 
-`EditCustomerCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline 
-reaches the end of diagram.
-</div>
-
 `Parse`:
 1. When `Logic` is called upon to execute `EditCustomerCommand`, it uses the `RhrhParser` class to parse the user command.
 2. The `RhrhParser` then creates an `EditCustomerCommandParser` to parse the command input.
@@ -270,27 +263,14 @@ details when this command is executed
 
 #### Design Considerations
 
-* Current Design: We separated `EditCustomerCommmand`, `EditEmployeeCommmand` and `EditSupplierCommmand` as different
-  command types.
-    * Pros
-        * It is much neater as everything is divided based on the Person type and prefixes are easily separated based on whichever Person Type it is.
-        * Errors in user input is easier to identify due to the separation of Person type.
-
-    * Cons
-        * Additional classes have to be implemented.
-        * More commands for a similar feature.
-
-* Alternative Design: We could have a singular `EditCommand` and parse the user's input to see what Person Type the user wanted to add.
-    * Pros
-        * Fewer commands for the user to remember.
-
-    * Cons
-        * Error messages would have been confusing to select.
+Due to the similarities of the design considerations between this command and the `Add` command, please refer to the `Design Considerations` section of the `Add` command above for more information.
 
 #### Differences regarding editing reservation command
+
 Implementation of `EditReservationcommand` is similar to other edit commands. However, to avoid clashing of the edited reservation with other reservations, only the editing of tags and remark is allowed.
 
 ### Delete Command
+
 In the following section, we will be going through how our delete command works. Since the delete command is very 
 similar across all person types, we will be using the `DeleteSupplierCommand` to illustrate how the delete 
 command 
@@ -298,6 +278,7 @@ works. More information on the differences in deleting `Customer`, `Employee` an
 [User Guide](https://ay2122s1-cs2103t-t17-1.github.io/tp/UserGuide.html)
 
 #### Current Implementation
+
 Deleting a supplier can be split into 2 steps: `Parse` and `Execute`.
 
 Here's a partial class diagram for the `DeleteSupplierCommand`. Note that to make it more comprehensible, details
@@ -305,16 +286,10 @@ not related to the `DeleteSupplierCommand` are abstracted away.
 
 ![DeleteSupplierClassDiagram](images/DeleteSupplierClassDiagram.png)
 
-
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("deleteS 1")`
 API call.
 
 ![Interactions Inside the Logic Component for the `deleteSupplier 1` Command](images/DeleteSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for 
-`DeleteSupplierCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline 
-reaches the end of diagram.
-</div>
 
 `Parse`:
 1. When `Logic` is called upon to execute a command, it uses the `RhrhParser` class to parse the user command.
@@ -335,36 +310,20 @@ details when this command is executed
 
 ![DeleteSupplierActivityDiagram](images/DeleteActivityDiagram.png)
 
+
 #### Design Considerations
 
-* Current Design: We separated `DeleteCustomerCommmand`, `DeleteEmployeeCommmand` and `DeleteSupplierCommmand` as 
-  different command types.
-
-  * Pros
-      * It is much neater as everything is divided based on the Person type and prefixes are easily separated based on whichever Person Type it is.
-      * Errors in user input is easier to identify due to the separation of Person type.
-
-  * Cons
-      * Additional classes have to be implemented.
-      * More commands for a similar feature.
-
-
-* Alternative Design: We could have a singular `DeleteCommand` and parse the user's input to see what Person Type the 
-  user wanted to delete.
-    * Pros
-        * Fewer commands for the user to remember.
-
-    * Cons
-        * Error messages would have been confusing to select.
-        * Implementation would be more difficult
+Due to the similarities of the design considerations between this command and the `Add` command, please refer to the `Design Considerations` section of the `Add` command above for more information.
 
 ### Find Command
+
 In the following section, we will be going through how our find command works. Since the find command is also very
 similar across all person types, we will be using the `FindCustomerCommand` to illustrate how the find command
 works. More information on the differences in finding `Supplier` and `Employee` can be found in our
 [User Guide](https://ay2122s1-cs2103t-t17-1.github.io/tp/UserGuide.html)
 
 #### Current Implementation
+
 Finding of customers can be divided into two steps: `Parse` and `Execute`.
 
 Below is a partial class diagram for `FindCustomerCommand`. Note that to make it more comprehensible, details not
@@ -375,11 +334,6 @@ related to `FindCustomerCommand` are abstracted away.
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("findC Chetwin")` API call.
 
 ![FindCustomerCommandSequenceDiagram](images/FindCustomerCommandSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for 
-`FindCustomerCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline 
-reaches the end of diagram.
-</div>
 
 `Parse`:
 1. When `Logic` is called upon to execute the `FindCustomerCommand`, it uses the `RhrhParser` class to parse the user command.
@@ -400,28 +354,10 @@ details when this command is executed
 
 ![FindCustomerCommandActivityDiagram](images/FindCustomerCommandActivityDiagram.png)
 
+
 #### Design Considerations
 
-* Current Design: We separated `FindCustomerCommmand`, `FindEmployeeCommmand` and `FindSupplierCommmand` as
-  different command types.
-
-    * Pros
-        * As there are different data types, and different number of optional and compulsory fields between Person types, it would be neater to separate and check for keyword matches in the different fields depending on the Person type.
-        * Errors in user input is easier to identify due to the separation of Person type.
-
-    * Cons
-        * Additional classes had to be implemented.
-        * More commands for a similar feature.
-
-
-* Alternative Design: We could have a singular `FindCommand` and parse the user's input to see what Person Type the
-  user wanted to find.
-    * Pros
-        * Fewer commands for the user to remember.
-
-    * Cons
-        * Error messages would have been confusing to select.
-        * Implementation would be more difficult
+Due to the similarities of the design considerations between this command and the `Add` command, please refer to the `Design Considerations` section of the `Add` command above for more information.
 
 
 ### Sort Command
@@ -443,11 +379,6 @@ o/a")` API call.
 
 ![SortSupplierSequenceDiagram](images/SortSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for 
-`SortSupplierCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline 
-reaches the end of diagram.
-</div>
-
 `Parse`:
 1. When `Logic` is called upon to execute the `SortSupplierCommand`, it uses the `RhrhParser` class to parse the user command.
 2. The `RhrhParser` then creates a `SortSupplierCommandParser` to parse the command input.
@@ -465,30 +396,12 @@ reaches the end of diagram.
 The activity diagram below shows the flow of execution when a user calls the `SortSupplierCommand` together with the
 details when this command is executed
 
-![SortSupplierActivityDiagram](images/SortActivityDiargam.png)
+![SortSupplierActivityDiagram](images/SortActivityDiagram.png)
+
 
 #### Design Considerations
 
-* Current Design: We separated `SortCustomerCommmand`, `SortEmployeeCommmand` and `SortSupplierCommmand` as
-  different command types.
-
-    * Pros
-        * It is much neater as everything is divided based on the Person type and prefixes are easily separated based on whichever Person Type it is.
-        * Errors in user input is easier to identify due to the separation of Person type.
-
-    * Cons
-        * Additional classes have to be implemented.
-        * More commands for a similar feature.
-
-
-* Alternative Design: We could have a singular `SortCommand` and parse the user's input to see what Person Type the
-  user wanted to delete.
-    * Pros
-        * Fewer commands for the user to remember.
-
-    * Cons
-        * Error messages would have been confusing to select.
-        * Implementation would be more difficult
+Due to the similarities of the design considerations between this command and the `Add` command, please refer to the `Design Considerations` section of the `Add` command above for more information.
 
 ### Set Tables Command
 
@@ -546,7 +459,7 @@ During the SetTablesCommand execution:
 
 3. All current reservations will be removed
     * This is because each reservation is linked to exactly one table so changing the tables in the restaurant will mess up the reservation and thus the reservations and tables will not be in sync. Hence, the design choice is to remove all reservations.
-
+    
 
 4. There is no add/remove/edit table or table list
     * Again, this is because reservations are linked to the tables themselves and if the user alters the list of tables, the reservations will not be in sync.
@@ -560,6 +473,7 @@ Checks would have to be implemented to ensure that the reservations-table pairin
 This will allow for greater flexibility for restaurant managers where they can manually assign seats to certain reservations (e.g. Assigning a big table to a small group of VIPs even though the table space is not optimized)
 
 ### Get corresponding customer command
+
 For more information about this command and its usage, please refer to our [User Guide](https://ay2122s1-cs2103t-t17-1.github.io/tp/UserGuide.html)
 
 #### Implementation
@@ -675,10 +589,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 
 
 --------------------------------------------------------------------------------------------------------------------

@@ -2,14 +2,36 @@
 'https://plantuml.com/activity-diagram-beta
 
 start
-:Execute AddEmployeeCommand in Logic Manager;
-:Adds employee in model;
-if () then ([employee exists])
+:User calls Add Employee command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([command syntax is valid])
+if () then ([input arguments are valid])
+
+    :Parse input into the various fields
+    required for Employee;
+
+    :Create Employee;
+
+    :AddEmployeeCommand is created
+    and executed by LogicManager;
+
+    :Update employee list with new employee;
+
+    :Update UI;
+
+    :Display success message to user with
+    details of edited customer;
+
+    stop
+
 else ([else])
-:Adds employee to UniqueEmployeeList;
-:Print success statement to user
-that employee has been added;
-endif
+    endif
+else ([else])
+    endif
+    :Display error to user;
 stop
 
 @enduml
