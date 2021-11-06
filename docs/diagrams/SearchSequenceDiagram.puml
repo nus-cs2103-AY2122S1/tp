@@ -5,12 +5,13 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":SearchCommandParser" as SearchCommandParser LOGIC_COLOR
-participant "predicate\n:NameContains\nKeywordsPredicate" as NameContainsKeywordsPredicate LOGIC_COLOR
 participant "searchCommand\n:SearchCommand" as SearchCommand LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
+participant "predicate\n:NameContains\nKeywordsPredicate" as NameContainsKeywordsPredicate MODEL_COLOR
+
 end box
 
 [-> LogicManager : execute("search\n -n Alex Yu")
@@ -37,7 +38,7 @@ NameContainsKeywordsPredicate --> SearchCommandParser : predicate
 deactivate NameContainsKeywordsPredicate
 
 create SearchCommand
-SearchCommandParser -> SearchCommand : SearchCommand(predicate)
+SearchCommandParser -> SearchCommand : SearchCommand(\npredicate)
 activate SearchCommand
 
 SearchCommand --> SearchCommandParser : searchCommand
