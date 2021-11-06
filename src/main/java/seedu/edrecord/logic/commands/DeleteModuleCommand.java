@@ -6,8 +6,8 @@ import static seedu.edrecord.commons.util.CollectionUtil.requireAllNonNull;
 import seedu.edrecord.logic.commands.exceptions.CommandException;
 import seedu.edrecord.model.Model;
 import seedu.edrecord.model.module.Module;
-import seedu.edrecord.model.person.PartOfModulePredicate;
 import seedu.edrecord.model.module.ModuleSet;
+import seedu.edrecord.model.person.PartOfModulePredicate;
 import seedu.edrecord.model.person.Person;
 
 /**
