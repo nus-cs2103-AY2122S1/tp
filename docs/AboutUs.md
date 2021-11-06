@@ -33,7 +33,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/moley456.png" width="200px">
 
 [[github](http://github.com/Moley456)]
-[[portfolio](team/Moley456.md)]
+[[portfolio](team/moley456.md)]
 
 * Role: Developer
 * Responsibilities: Data + Storage
