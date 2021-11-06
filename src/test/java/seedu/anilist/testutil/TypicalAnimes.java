@@ -61,9 +61,6 @@ public class TypicalAnimes {
     public static final Anime BNHA = new AnimeBuilder().withName(VALID_NAME_BNHA)
             .withGenres(VALID_GENRE_ACTION, VALID_GENRE_SCIENCE_FICTION).build();
 
-    public static final String KEYWORD_MATCHING_HUNTER = "Hunter"; // A keyword that matches HUNTER
-
-
     private TypicalAnimes() {} // prevents instantiation
 
     /**

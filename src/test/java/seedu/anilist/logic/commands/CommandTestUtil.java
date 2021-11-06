@@ -31,15 +31,23 @@ import seedu.anilist.testutil.StatusDescriptorBuilder;
  */
 public class CommandTestUtil {
 
+    // Invalid Strings
+    public static final String INVALID_STRING_SPACE = " ";
+    public static final String INVALID_STRING_EMPTY = "";
+    public static final String INVALID_STRING_NON_ASCII = "中文";
+
+
     //-----------------------------------------------------NAME---------------------------------------------------------
     // Valid Names
     public static final String VALID_NAME_AKIRA = "Akira";
     public static final String VALID_NAME_BNHA = "Boku No Hero Academia";
+    public static final String VALID_NAME_EIGHTY_SIX = "86";
+    public static final String VALID_NAME_FATE_ZERO = "Fate/Zero";
+    public static final String VALID_NAME_JOJO_GOLDEN_WIND = "JoJo's Bizarre Adventure: Golden Wind";
+    public static final String VALID_NAME_NON_ALPHANUMERIC_ASCII = "~!@#$%^&()+-=:;";
     public static final String VALID_NAME_MAX_LENGTH = "A".repeat(140);
 
     // Invalid Names
-    public static final String INVALID_NAME_BLANK = " ";
-    public static final String INVALID_NAME_NONASCII = "中文";
     public static final String INVALID_NAME_LONGER_THAN_MAX_LENGTH = "F".repeat(142);
 
     // Valid Name DESC
@@ -48,8 +56,8 @@ public class CommandTestUtil {
     public static final String NAME_DESC_MAX_LENGTH = " " + PREFIX_NAME + VALID_NAME_MAX_LENGTH;
 
     // Invalid Name DESC
-    public static final String INVALID_NAME_DESC_BLANK = " " + PREFIX_NAME + INVALID_NAME_BLANK;
-    public static final String INVALID_NAME_DESC_NONASCII = " " + PREFIX_NAME + INVALID_NAME_NONASCII;
+    public static final String INVALID_NAME_DESC_BLANK = " " + PREFIX_NAME + INVALID_STRING_SPACE;
+    public static final String INVALID_NAME_DESC_NON_ASCII = " " + PREFIX_NAME + INVALID_STRING_NON_ASCII;
     public static final String INVALID_NAME_DESC_LONGER_THAN_MAX_LENGTH = " "
             + PREFIX_NAME + INVALID_NAME_LONGER_THAN_MAX_LENGTH;
 
@@ -62,6 +70,7 @@ public class CommandTestUtil {
     public static final String VALID_EPISODE_MAX = "99999";
 
     // Invalid Episodes
+
     public static final String INVALID_EPISODE_ALPHA = "two";
     public static final String INVALID_EPISODE_NEG = "-1";
     public static final String INVALID_EPISODE_DECIMAL = "0.1";
@@ -114,6 +123,7 @@ public class CommandTestUtil {
     // Valid Genres
     public static final String VALID_GENRE_ACTION = "action";
     public static final String VALID_GENRE_SCIENCE_FICTION = "SCI FI";
+    public static final String VALID_GENRE_SUPERNATURAL = "supERNatuRAl";
 
     // Invalid Genres
     public static final String INVALID_GENRE_NON_ALPHANUMERIC = "comedy*";
@@ -139,7 +149,6 @@ public class CommandTestUtil {
     public static final String VALID_ACTION_DELETE_SHORT_FORM = "D";
 
     // Invalid Actions
-    public static final String INVALID_ACTION_EMPTY_STRING = "";
     public static final String INVALID_ACTION_ALPHA = "dancing";
     public static final String INVALID_ACTION_NUMERIC = "007";
 
@@ -150,7 +159,7 @@ public class CommandTestUtil {
     public static final String ACTION_DESC_DELETE_SHORT_FORM = " " + PREFIX_ACTION + VALID_ACTION_DELETE_SHORT_FORM;
 
     // Invalid Action DESC
-    public static final String INVALID_ACTION_DESC_EMPTY_STRING = " " + PREFIX_ACTION + INVALID_ACTION_EMPTY_STRING;
+    public static final String INVALID_ACTION_DESC_EMPTY_STRING = " " + PREFIX_ACTION + INVALID_STRING_EMPTY;
     public static final String INVALID_ACTION_DESC_ALPHA = " " + PREFIX_ACTION + INVALID_ACTION_ALPHA;
     public static final String INVALID_ACTION_DESC_NUMERIC = " " + PREFIX_ACTION + INVALID_ACTION_NUMERIC;
 

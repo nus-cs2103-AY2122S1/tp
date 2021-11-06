@@ -1,7 +1,10 @@
 package seedu.anilist.model.anime;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_STATUS_FINISHED;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_STATUS_TOWATCH;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_STATUS_WATCHING;
 
@@ -13,31 +16,31 @@ public class StatusEqualsPredicateTest {
     @Test
     public void equals() {
         Status firstStatus = new Status(VALID_STATUS_TOWATCH);
-        Status secondStatus = new Status(VALID_STATUS_WATCHING);
+        Status secondStatus = new Status(VALID_STATUS_FINISHED);
         StatusEqualsPredicate firstPredicate = new StatusEqualsPredicate(firstStatus);
         StatusEqualsPredicate secondPredicate = new StatusEqualsPredicate(secondStatus);
 
         // same object -> returns true
-        assertTrue(firstPredicate.equals(firstPredicate));
+        assertEquals(firstPredicate, firstPredicate);
 
         // same values -> returns true
         StatusEqualsPredicate firstPredicateCopy = new StatusEqualsPredicate(firstStatus);
-        assertTrue(firstPredicate.equals(firstPredicateCopy));
+        assertEquals(firstPredicate, firstPredicateCopy);
 
         // different types -> returns false
-        assertFalse(firstPredicate.equals(1));
+        assertNotEquals(1, firstPredicate);
 
         // null -> returns false
-        assertFalse(firstPredicate.equals(null));
+        assertNotEquals(null, firstPredicate);
 
         // different status -> returns false
-        assertFalse(firstPredicate.equals(secondPredicate));
+        assertNotEquals(firstPredicate, secondPredicate);
     }
 
     @Test
     public void test_statusMatches_returnsTrue() {
-        Anime animeWatching = new AnimeBuilder().withStatus(VALID_STATUS_WATCHING).build();
-        StatusEqualsPredicate predicateWatching = new StatusEqualsPredicate(new Status(VALID_STATUS_WATCHING));
+        Anime animeWatching = new AnimeBuilder().withStatus(VALID_STATUS_FINISHED).build();
+        StatusEqualsPredicate predicateWatching = new StatusEqualsPredicate(new Status(VALID_STATUS_FINISHED));
 
         assertTrue(predicateWatching.test(animeWatching));
     }

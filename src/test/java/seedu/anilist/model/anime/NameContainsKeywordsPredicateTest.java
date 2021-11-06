@@ -1,8 +1,13 @@
 package seedu.anilist.model.anime;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_STRING_EMPTY;
+import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_STRING_NON_ASCII;
+import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_STRING_SPACE;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -19,11 +24,15 @@ public class NameContainsKeywordsPredicateTest {
     public void constructor_invalidNameKeywords_throwsParseException() {
         // Empty String
         assertThrows(ParseException.class, () ->
-            new GenresContainedPredicate(Collections.singletonList("")));
+            new GenresContainedPredicate(Collections.singletonList(INVALID_STRING_EMPTY)));
+
+        // Space
+        assertThrows(ParseException.class, () ->
+                new GenresContainedPredicate(Collections.singletonList(INVALID_STRING_SPACE)));
 
         // Non-ASCII
         assertThrows(ParseException.class, () ->
-            new GenresContainedPredicate(Collections.singletonList("非ascii字符")));
+            new GenresContainedPredicate(Collections.singletonList(INVALID_STRING_NON_ASCII)));
     }
 
     @Test
@@ -35,20 +44,20 @@ public class NameContainsKeywordsPredicateTest {
         NameContainsKeywordsPredicate secondPredicate = new NameContainsKeywordsPredicate(secondPredicateKeywordList);
 
         // same object -> returns true
-        assertTrue(firstPredicate.equals(firstPredicate));
+        assertEquals(firstPredicate, firstPredicate);
 
         // same values -> returns true
         NameContainsKeywordsPredicate firstPredicateCopy = new NameContainsKeywordsPredicate(firstPredicateKeywordList);
-        assertTrue(firstPredicate.equals(firstPredicateCopy));
+        assertEquals(firstPredicate, firstPredicateCopy);
 
         // different types -> returns false
-        assertFalse(firstPredicate.equals(1));
+        assertNotEquals(1, firstPredicate);
 
         // null -> returns false
-        assertFalse(firstPredicate.equals(null));
+        assertNotEquals(null, firstPredicate);
 
         // different keyword -> returns false
-        assertFalse(firstPredicate.equals(secondPredicate));
+        assertNotEquals(firstPredicate, secondPredicate);
     }
 
     @Test
@@ -90,7 +99,7 @@ public class NameContainsKeywordsPredicateTest {
         assertFalse(predicate.test(new AnimeBuilder().withName("Attack on Titan").build()));
 
         // Non-matching keyword
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Chainsaw"));
+        predicate = new NameContainsKeywordsPredicate(List.of("Chainsaw"));
         assertFalse(predicate.test(new AnimeBuilder().withName("Black Rock Shooter").build()));
 
         // Keywords match genres, but does not match name

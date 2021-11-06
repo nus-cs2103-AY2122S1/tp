@@ -3,7 +3,7 @@ package seedu.anilist.logic.parser;
 import static seedu.anilist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.anilist.commons.core.Messages.MESSAGE_OUT_OF_RANGE_INDEX;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_NAME_DESC_BLANK;
-import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_NAME_DESC_NONASCII;
+import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_NAME_DESC_NON_ASCII;
 import static seedu.anilist.logic.commands.CommandTestUtil.NAME_DESC_AKIRA;
 import static seedu.anilist.logic.commands.CommandTestUtil.STATUS_DESC_TOWATCH;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_AKIRA;
@@ -67,7 +67,7 @@ public class RenameCommandParserTest {
     public void parse_invalidValue_failure() {
         // wrong name parameter
         assertParseFailure(parser, "1" + INVALID_NAME_DESC_BLANK, Name.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + INVALID_NAME_DESC_NONASCII, Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + INVALID_NAME_DESC_NON_ASCII, Name.MESSAGE_CONSTRAINTS);
 
         // extra wrong parameter specified
         assertParseFailure(parser, "1" + NAME_DESC_AKIRA + STATUS_DESC_TOWATCH, MESSAGE_INVALID_FORMAT);

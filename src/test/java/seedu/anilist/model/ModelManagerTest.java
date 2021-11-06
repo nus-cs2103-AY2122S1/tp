@@ -118,13 +118,13 @@ public class ModelManagerTest {
         // same values -> returns true
         modelManager = new ModelManager(animeList, userPrefs);
         ModelManager modelManagerCopy = new ModelManager(animeList, userPrefs);
-        assertTrue(modelManager.equals(modelManagerCopy));
+        assertEquals(modelManager, modelManagerCopy);
 
         // same object -> returns true
-        assertTrue(modelManager.equals(modelManager));
+        assertEquals(modelManager, modelManager);
 
         // null -> returns false
-        assertFalse(modelManager.equals(null));
+        assertFalse(modelManager == null);
 
         // different types -> returns false
         assertFalse(modelManager.equals(5));
