@@ -579,8 +579,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 (For all use cases below, the **System** is `NUS Mod Tracker` and the **Actor** is the `user`, unless specified otherwise)
 
 #### Database Features
+**UC1: Add a Module to the Database**
 
-**UC1: Delete a Module from the Database**
+**MSS**
+
+1. User requests to add a module.
+2. NUS Mod Tracker adds the module.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The given code argument is invalid.
+    * 1a1. NUS Mod Tracker shows an error message.
+
+      Use case resumes at step 1.
+
+* 2a. The given module already exists in the database.
+    * 2a1. NUS Mod Tracker shows an error message.
+
+      Use case resumes at step 1.
+
+**UC2: Delete a Module from the Database**
 
 **MSS**
 
@@ -596,7 +616,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
-**UC2: Edit a module**
+**UC3: List all modules in the Database**
+
+**MSS**
+
+1. User requests to list all modules in the database.
+2. NUS Mod Tracker show a list of all modules in the database.
+
+**UC4: Edit a module**
 
 **MSS**
 
@@ -622,7 +649,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 #### Academic Plan Features
 
-**UC3: Add a Module to the Academic Plan**
+**UC5: Add a Module to the Academic Plan**
 
 **MSS**
 
@@ -637,7 +664,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
     Use case resumes at step 1.
 
-**UC4: Remove a Module from the Academic Plan**
+**UC6: Remove a Module from the Academic Plan**
 
 **MSS**
 
@@ -656,7 +683,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
     Use case resumes at step 1.
     
-**UC5: Remove all modules in a specific semester from the academic plan**
+**UC7: Remove all modules in a specific semester from the academic plan**
 
 **MSS**
 
