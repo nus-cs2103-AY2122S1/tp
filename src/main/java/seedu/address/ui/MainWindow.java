@@ -120,6 +120,7 @@ public class MainWindow extends UiPart<Stage> {
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         schedulePanel = new WeekShiftsPane(logic.getFilteredPersonList());
+
         schedulePanelPlaceholder.getChildren().add(schedulePanel.getRoot());
 
         resultDisplay = new ResultDisplay();
