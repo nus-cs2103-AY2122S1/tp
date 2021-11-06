@@ -1,13 +1,22 @@
 {
   "persons": [ {
     "name": "Valid Person",
+    "room" : "A100",
     "phone": "9482424",
     "email": "hans@example.com",
-    "address": "4th street"
+    "vaccStatus" : "T",
+    "faculty" : "SoC",
+    "lastFetDate" : "03-10-2021",
+    "lastCollectionDate" : "03-10-2021"
   }, {
     "name": "Person With Invalid Phone Field",
+    "room" : "A100",
     "phone": "948asdf2424",
     "email": "hans@example.com",
-    "address": "4th street"
-  } ]
+    "vaccStatus" : "T",
+    "faculty" : "SoC",
+    "lastFetDate" : "03-10-2021",
+    "lastCollectionDate" : "03-10-2021"
+  } ],
+  "events": []
 }
