@@ -11,7 +11,6 @@ import static seedu.address.testutil.TypicalMembers.ALICE;
 import static seedu.address.testutil.TypicalMembers.BENSON;
 import static seedu.address.testutil.TypicalMembers.CARL;
 import static seedu.address.testutil.TypicalTasks.PROJECT;
-import static seedu.address.testutil.TypicalTasks.REHEARSAL;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
