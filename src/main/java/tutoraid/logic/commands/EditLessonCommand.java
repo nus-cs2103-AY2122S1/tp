@@ -6,7 +6,6 @@ import static tutoraid.logic.parser.CliSyntax.PREFIX_LESSON_CAPACITY;
 import static tutoraid.logic.parser.CliSyntax.PREFIX_LESSON_NAME;
 import static tutoraid.logic.parser.CliSyntax.PREFIX_LESSON_PRICE;
 import static tutoraid.logic.parser.CliSyntax.PREFIX_LESSON_TIMING;
-import static tutoraid.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,7 +21,6 @@ import tutoraid.model.lesson.LessonName;
 import tutoraid.model.lesson.Price;
 import tutoraid.model.lesson.Students;
 import tutoraid.model.lesson.Timing;
-import tutoraid.model.student.Student;
 
 public class EditLessonCommand extends EditCommand {
 
@@ -81,11 +79,10 @@ public class EditLessonCommand extends EditCommand {
         if (newCapacity.getCapacity() < currStudents.numberOfStudents()) {
             throw new CommandException(MESSAGE_CAPACITY_LESS_THAN_STUDENTS);
         }
-        model.setLesson(lessonToEdit, editedLesson);
-        model.viewLesson(editedLesson);
-        model.updateFilteredStudentList(student -> student.hasLesson(editedLesson));
-
-        return new CommandResult(String.format(MESSAGE_EDIT_LESSON_SUCCESS, editedLesson.toNameString()));
+        lessonToEdit.replace(editedLesson);
+        model.viewLesson(lessonToEdit);
+        model.updateFilteredStudentList(student -> student.hasLesson(lessonToEdit));
+        return new CommandResult(String.format(MESSAGE_EDIT_LESSON_SUCCESS, lessonToEdit.toNameString()));
     }
 
     /**

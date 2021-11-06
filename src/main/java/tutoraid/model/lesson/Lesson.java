@@ -16,13 +16,13 @@ import tutoraid.model.student.Student;
 public class Lesson {
 
     // Identity Fields
-    private final LessonName lessonName;
+    private LessonName lessonName;
 
     // Data Fields
     private Optional<Students> students;
-    private final Capacity capacity;
-    private final Price price;
-    private final Timing timing;
+    private Capacity capacity;
+    private Price price;
+    private Timing timing;
 
     /**
      * Constructor for a Lesson when the Students are not yet initialised
@@ -104,6 +104,18 @@ public class Lesson {
      */
     public void removeStudent(Student student) {
         students = Optional.of(getStudents().removeStudent(student));
+    }
+
+    /**
+     * Replaces the fields of this lesson with those of a different lesson to edit it
+     *
+     * @param lesson The lesson whose fields should replace this lesson
+     */
+    public void replace(Lesson lesson) {
+        lessonName = lesson.getLessonName();
+        timing = lesson.getTiming();
+        capacity = lesson.getCapacity();
+        price = lesson.getPrice();
     }
 
     /**

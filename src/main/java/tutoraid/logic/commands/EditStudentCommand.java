@@ -66,9 +66,7 @@ public class EditStudentCommand extends EditCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
         List<Student> lastShownStudentList = model.getFilteredStudentList();
-        List<Lesson> lessonList = model.getFilteredLessonList();
 
         if (targetIndex.getZeroBased() >= lastShownStudentList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
@@ -81,11 +79,10 @@ public class EditStudentCommand extends EditCommand {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
         }
 
-        model.setStudent(studentToEdit, editedStudent);
-        model.viewStudent(editedStudent);
-        model.updateFilteredLessonList(editedStudent::hasLesson);
-
-        return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent.toNameString()));
+        studentToEdit.replace(editedStudent);
+        model.viewStudent(studentToEdit);
+        model.updateFilteredLessonList(studentToEdit::hasLesson);
+        return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, studentToEdit.toNameString()));
     }
 
     /**
