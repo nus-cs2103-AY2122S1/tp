@@ -38,6 +38,11 @@ public class Game {
     }
 
     @Override
+    public int hashCode() {
+        return Objects.hash(gameId);
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -49,11 +54,6 @@ public class Game {
 
         Game otherGame = (Game) other;
         return otherGame.getGameId().equals(getGameId());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(gameId);
     }
 
     /**

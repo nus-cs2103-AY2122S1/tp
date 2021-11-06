@@ -22,7 +22,7 @@ public class DeleteGameCommand extends Command {
             + CMD_GAME + " " + FLAG_DELETE + "CSGO";
     public static final String MESSAGE_DELETE_GAME_SUCCESS = "Deleted Game - GAME_ID: %1$s";
 
-    private GameId gameToDeleteId;
+    private final GameId gameToDeleteId;
 
     /**
      * Command to delete a friend using the unique FRIEND_ID.

@@ -46,6 +46,7 @@ public class SkillValue {
 
     /**
      * Returns the integer skill value of the {@Code SkillValue} object.
+     *
      * @return Integer skill value.
      */
     public Integer getSkillVal() {
@@ -53,14 +54,14 @@ public class SkillValue {
     }
 
     @Override
-    public String toString() {
-        return String.valueOf(skillVal);
-    }
-
-    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof SkillValue // instanceof handles nulls
                 && this.skillVal == (((SkillValue) other).skillVal)); // state check
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(skillVal);
     }
 }

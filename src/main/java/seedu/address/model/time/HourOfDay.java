@@ -36,6 +36,7 @@ public class HourOfDay {
 
     /**
      * Get the integer value of the hour for the {@Code HourOfDay} object.
+     *
      * @return Integer value of hour.
      */
     public int getHour() {

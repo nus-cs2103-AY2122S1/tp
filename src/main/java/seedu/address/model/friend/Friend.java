@@ -81,6 +81,7 @@ public class Friend {
 
     /**
      * Links friend with the game in gameFriendLink
+     *
      * @param gameFriendLink gameFriendLink which contains the game to link to, the username and also the skill value.
      */
     public void link(GameFriendLink gameFriendLink) {
@@ -91,6 +92,7 @@ public class Friend {
 
     /**
      * Removes the link between the friend and the game provided.
+     *
      * @param game game to unlink from.
      */
     public void unlink(Game game) {
@@ -104,11 +106,13 @@ public class Friend {
 
     /**
      * Returns the number of games contained inside the friend's GameFriendLinks.
+     *
      * @return Number of games.
      */
     public int getNumberOfGames() {
         return getGameFriendLinks().size();
     }
+
     public FriendName getFriendName() {
         return friendName;
     }
@@ -146,11 +150,12 @@ public class Friend {
 
     /**
      * Checks whether a friend is available at the specified hour and day of the week.
-     * @param hour The hour to check availability.
+     *
+     * @param hour      The hour to check availability.
      * @param dayOfWeek The day of the week to check availability.
      * @return Boolean value representing the availability of the friend.
      * @throws InvalidHourOfDayException when an invalid hour is given.
-     * @throws InvalidDayTimeException when an invalid day is given.
+     * @throws InvalidDayTimeException   when an invalid day is given.
      */
     public boolean isFriendScheduleFree(HourOfDay hour, DayOfWeek dayOfWeek)
             throws InvalidHourOfDayException, InvalidDayTimeException {

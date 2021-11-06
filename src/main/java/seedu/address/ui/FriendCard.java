@@ -33,6 +33,7 @@ public class FriendCard extends UiPart<Region> {
     private Label id;
     @FXML
     private Label games;
+
     /**
      * Creates a {@code FriendCard} with the given {@code Friend} and index to display.
      */

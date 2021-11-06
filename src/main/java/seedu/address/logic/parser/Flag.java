@@ -15,10 +15,6 @@ public class Flag {
         return flag;
     }
 
-    public String toString() {
-        return getFlag();
-    }
-
     @Override
     public int hashCode() {
         return flag == null ? 0 : flag.hashCode();
@@ -35,5 +31,9 @@ public class Flag {
 
         Flag otherFlag = (Flag) obj;
         return otherFlag.getFlag().equals(getFlag());
+    }
+
+    public String toString() {
+        return getFlag();
     }
 }

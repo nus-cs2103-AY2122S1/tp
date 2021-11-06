@@ -59,6 +59,26 @@ public class ModelManager implements Model {
     //=========== UserPrefs ==================================================================================
 
     @Override
+    public boolean equals(Object obj) {
+        // short circuit if same object
+        if (obj == this) {
+            return true;
+            // instanceof handles other == null
+        } else if (!(obj instanceof ModelManager)) {
+            return false;
+        } else {
+            // state check
+            ModelManager other = (ModelManager) obj;
+            return friendsList.equals(other.friendsList)
+                    && filteredFriends.equals(other.filteredFriends)
+                    && filteredAndSortedFriends.equals(other.filteredAndSortedFriends)
+                    && gamesList.equals(other.gamesList)
+                    && filteredGames.equals(other.filteredGames)
+                    && userPrefs.equals(other.userPrefs);
+        }
+    }
+
+    @Override
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
         requireNonNull(userPrefs);
         this.userPrefs.resetData(userPrefs);
@@ -95,6 +115,7 @@ public class ModelManager implements Model {
 
     /**
      * Sets the {@Code friendsList} to the {@Code readOnlyFriendsList that is passed}.
+     *
      * @param readOnlyFriendsList The data to set the {@Code friendsList}.
      */
     @Override
@@ -104,6 +125,7 @@ public class ModelManager implements Model {
 
     /**
      * Returns the current {@Code friendsList} of the {@Code ModelManager} object.
+     *
      * @return The {@Code friendsList} of the {@Code ModelManager}.
      */
     @Override
@@ -113,6 +135,7 @@ public class ModelManager implements Model {
 
     /**
      * Checks whether the current {@Code friendsList} contains the {@Code Friend} that was passed in.
+     *
      * @param friend The {@Code Friend} to check.
      * @return Boolean value indicating whether the {@Code friendsList} contains the {@Code Friend}
      */
@@ -125,6 +148,7 @@ public class ModelManager implements Model {
     /**
      * Checks whether the current {@Code friendsList} contains the {@Code Friend} with the {@Code FriendId} that was
      * passed in.
+     *
      * @param friendId The {@Code FriendId} to check.
      * @return Boolean value indicating whether the {@Code friendsList} contains the {@Code Friend} with that
      * {@Code FriendId}.
@@ -137,6 +161,7 @@ public class ModelManager implements Model {
 
     /**
      * Returns a {@Code Friend} which has the {@Code FriendId} that is passed in.
+     *
      * @param friendId The {@Code FriendId} of the {@Code Friend} to return.
      * @return The {@Code Friend} with the specified {@Code FriendId}.
      */
@@ -148,6 +173,7 @@ public class ModelManager implements Model {
     /**
      * Deletes a {@Code Friend} which has the specified {@Code FriendId} from the {@Code ModelManager}'s
      * {@Code friendList}.
+     *
      * @param targetId The {@Code FriendId} to find the {@Code Friend} to delete.
      */
     @Override
@@ -163,6 +189,7 @@ public class ModelManager implements Model {
 
     /**
      * Adds a {@Code Friend} to the {@Code ModelManager}'s {@Code friendList}.
+     *
      * @param friend The {@Code Friend} to add.
      */
     @Override
@@ -173,7 +200,8 @@ public class ModelManager implements Model {
 
     /**
      * Sets the target {@Code Friend} to the editedFriend object, to edit the current {@Code Friend}.
-     * @param target The {@Code Friend} to be changed.
+     *
+     * @param target       The {@Code Friend} to be changed.
      * @param editedFriend The {@Code Friend} object that the target should be changed to.
      */
     @Override
@@ -186,7 +214,8 @@ public class ModelManager implements Model {
 
     /**
      * Links a {@Code Friend} object to a game by adding a {@Code GameFriendLink} object to the friend.
-     * @param toLink The {@Code Friend} to link.
+     *
+     * @param toLink         The {@Code Friend} to link.
      * @param gameFriendLink The {@Code GameFriendLink} to be added to the friend.
      */
     @Override
@@ -196,6 +225,7 @@ public class ModelManager implements Model {
 
     /**
      * Removes all {@Code GameFriendLink} objects which contains a specific {@Code Game} from all friends.
+     *
      * @param game The {@Code Game} used to find the {@Code GameFriendLink} objects to be deleted from all friends.
      */
     @Override
@@ -206,8 +236,9 @@ public class ModelManager implements Model {
     /**
      * Unlink a specific {@Code Friend} from a {@Code Game} by removing the {@Code GameFriendLink} object from the
      * friend.
+     *
      * @param toUnlink The {@Code Friend} to be unlinked form the {@Code Game}.
-     * @param game The {@Code Game} to be unlinked from the {@Code Friend}
+     * @param game     The {@Code Game} to be unlinked from the {@Code Friend}
      */
     @Override
     public void unlinkFriend(Friend toUnlink, Game game) {
@@ -228,6 +259,7 @@ public class ModelManager implements Model {
     /**
      * Updates the filteredFriends list and the filteredAndSorted friends list using the {@Code Predicate<Friend>}
      * object.
+     *
      * @param predicate The {@Code Predicate<Friend>} used to filter the friends.
      */
     @Override
@@ -241,7 +273,8 @@ public class ModelManager implements Model {
     /**
      * Updates the filteredFriends list and the filteredAndSorted friends list using the {@Code Predicate<Friend>}
      * object and sorts the lists using the {@Code Comparator<Friend>} object.
-     * @param predicate The {@Code Predicate<Friend>} used to filter the friends.
+     *
+     * @param predicate  The {@Code Predicate<Friend>} used to filter the friends.
      * @param comparator The {@Code Comparator<Friend>} used to sort the friends.
      */
     @Override
@@ -305,24 +338,6 @@ public class ModelManager implements Model {
         filteredGames.setPredicate(predicate);
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        // short circuit if same object
-        if (obj == this) {
-            return true;
-            // instanceof handles other == null
-        } else if (!(obj instanceof ModelManager)) {
-            return false;
-        } else {
-            // state check
-            ModelManager other = (ModelManager) obj;
-            return friendsList.equals(other.friendsList)
-                    && filteredFriends.equals(other.filteredFriends)
-                    && filteredAndSortedFriends.equals(other.filteredAndSortedFriends)
-                    && gamesList.equals(other.gamesList)
-                    && filteredGames.equals(other.filteredGames)
-                    && userPrefs.equals(other.userPrefs);
-        }
-    }
+
 
 }

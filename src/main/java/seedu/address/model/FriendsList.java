@@ -138,12 +138,6 @@ public class FriendsList implements ReadOnlyFriendsList {
     // util methods
 
     @Override
-    public String toString() {
-        return friends.asUnmodifiableObservableList().size() + " friends";
-        // TODO: refine later
-    }
-
-    @Override
     public ObservableList<Friend> getFriendsList() {
         return friends.asUnmodifiableObservableList();
     }
@@ -151,7 +145,13 @@ public class FriendsList implements ReadOnlyFriendsList {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-            || (other instanceof FriendsList // instanceof handles nulls
-            && friends.equals(((FriendsList) other).friends));
+                || (other instanceof FriendsList // instanceof handles nulls
+                && friends.equals(((FriendsList) other).friends));
+    }
+
+    @Override
+    public String toString() {
+        return friends.asUnmodifiableObservableList().size() + " friends";
+        // TODO: refine later
     }
 }
