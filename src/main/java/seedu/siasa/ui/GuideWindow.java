@@ -24,7 +24,7 @@ public class GuideWindow extends UiPart<Stage> {
                 new Image("file:src/main/resources/images/guide/page_one.png")),
         TWO("User Guide - Contacts", "addcontact: Adds a contact to your SIASA.\n"
                 + "Format: addcontact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]\n"
-                + "Example: addcontact n/Travis Scott p/98765454 e/travist@example.com a/Travis Park, block 123, #01-01",
+                + "Example: addcontact n/Travis Scott p/98765454 e/travist@example.com a/Travis Park, block 123,#01-01",
                 new Image("file:src/main/resources/images/guide/page_two.png")),
         THREE("User Guide - Contacts",
                 "deletecontact: Removes a contact from your SIASA based on the index provided.\n"
@@ -160,39 +160,39 @@ public class GuideWindow extends UiPart<Stage> {
     @FXML
     private void handleNext() {
         switch (currentPage) {
-            case ONE:
-                currentPage = Page.TWO;
-                showPage();
-                return;
-            case TWO:
-                currentPage = Page.THREE;
-                showPage();
-                return;
-            case THREE:
-                currentPage = Page.FOUR;
-                showPage();
-                return;
-            case FOUR:
-                currentPage = Page.FIVE;
-                showPage();
-                return;
-            case FIVE:
-                currentPage = Page.SIX;
-                showPage();
-                return;
-            case SIX:
-                currentPage = Page.SEVEN;
-                showPage();
-                return;
-            case SEVEN:
-                currentPage = Page.EIGHT;
-                showPage();
-                return;
-            case EIGHT:
-                currentPage = Page.NINE;
-                showPage();
-                return;
-            default:
+        case ONE:
+            currentPage = Page.TWO;
+            showPage();
+            return;
+        case TWO:
+            currentPage = Page.THREE;
+            showPage();
+            return;
+        case THREE:
+            currentPage = Page.FOUR;
+            showPage();
+            return;
+        case FOUR:
+            currentPage = Page.FIVE;
+            showPage();
+            return;
+        case FIVE:
+            currentPage = Page.SIX;
+            showPage();
+            return;
+        case SIX:
+            currentPage = Page.SEVEN;
+            showPage();
+            return;
+        case SEVEN:
+            currentPage = Page.EIGHT;
+            showPage();
+            return;
+        case EIGHT:
+            currentPage = Page.NINE;
+            showPage();
+            return;
+        default:
         }
 
     }
@@ -203,41 +203,41 @@ public class GuideWindow extends UiPart<Stage> {
     @FXML
     private void handleBack() {
         switch (currentPage) {
-            case ONE:
-                return;
-            case TWO:
-                currentPage = Page.ONE;
-                showPage();
-                return;
-            case THREE:
-                currentPage = Page.TWO;
-                showPage();
-                return;
-            case FOUR:
-                currentPage = Page.THREE;
-                showPage();
-                return;
-            case FIVE:
-                currentPage = Page.FOUR;
-                showPage();
-                return;
-            case SIX:
-                currentPage = Page.FIVE;
-                showPage();
-                return;
-            case SEVEN:
-                currentPage = Page.SIX;
-                showPage();
-                return;
-            case EIGHT:
-                currentPage = Page.SEVEN;
-                showPage();
-                return;
-            case NINE:
-                currentPage = Page.EIGHT;
-                showPage();
-                return;
-            default:
+        case ONE:
+            return;
+        case TWO:
+            currentPage = Page.ONE;
+            showPage();
+            return;
+        case THREE:
+            currentPage = Page.TWO;
+            showPage();
+            return;
+        case FOUR:
+            currentPage = Page.THREE;
+            showPage();
+            return;
+        case FIVE:
+            currentPage = Page.FOUR;
+            showPage();
+            return;
+        case SIX:
+            currentPage = Page.FIVE;
+            showPage();
+            return;
+        case SEVEN:
+            currentPage = Page.SIX;
+            showPage();
+            return;
+        case EIGHT:
+            currentPage = Page.SEVEN;
+            showPage();
+            return;
+        case NINE:
+            currentPage = Page.EIGHT;
+            showPage();
+            return;
+        default:
         }
 
     }
