@@ -84,7 +84,7 @@ If you can type fast, MTR can get your application management tasks done faster 
 * Visualizing a position with a pie chart: [`visualize`](#visualizing-a-position-with-a-pie-chart-visualize)
 * Get rejection rate of a specified position : [`rate`](#get-rejection-rate-of-a-specified-position--rate)
 
-### Applicant-Related Command
+### Applicant-Related Commands
 * Adding an applicant: [`add-applicant`](#adding-an-applicant-add-applicant)
 * Deleting an applicant: [`delete-applicant`](#deleting-an-applicant-delete-applicant)
 * Editing an applicant: [`edit-applicant`](#editing-an-applicant-edit-applicant)
