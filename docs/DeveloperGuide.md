@@ -86,7 +86,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-W17-2/tp/tree/master/src/main/java/seedu/tracker/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -145,13 +145,46 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.moduletracker.commons` package.
+Classes used by multiple components are in the `seedu.tracker.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Edit Module feature
+
+####Implementation
+
+The `edit` command is implemented via the `EditCommand`, `EditCommandParser` and `EditModuleDescriptor` classes.
+
+The `EditCommandParser` class implements the `Parser` interface.
+The `EditCommandParser#parse()` method is responsible for parsing the user input to retrieve the index of the module, fields user want to edit and its new value. The method will return an `EditCommand` object with parsed user input as its argument.
+
+The `EditModuleDescriptor` is responsible for storing the details to edit the module with and replacing each non-empty field value to corresponding field value of the module.
+
+The `EditCommand` class extends the `Command` class and implements the `EditCommand#execute()` method which handles the main logic of the class.
+It contains non-null `index` and `editModuleDescriptor` fields.
+When the `EditCommand#execute()` method is called,
+- The `Module` object corresponding to the `index` is found from the `Model`.
+- Create an edited copy of the module, and replace the original module.
+- A `CommandResult` is returned with the updated `Model`.
+
+Below is an example sequence diagram and an explanation on how `EditCommand` is executed.
+![EditCommand](images/EditCommandSequenceDiagram.png)
+
+**Step 1.** The user enters the command "edit 1 c/2101".
+
+**Step 2.** ModuleTrackerParser takes in the user's input, and calls `EditCommandParser#parse` to create an `EditCommand` object containing the data parsed from the user input.
+
+**Step 3.** The `EditCommand` is then executed by calling its `execute` method.
+
+**Step 4.** The module at the specified index (`2`) in the list is obtained from the `Model`.
+
+**Step 5.** A copy of this module after substituting the edited fields with new values is created.
+
+**Step 6.** The specified module in the `Model` is then replaced by the edited copy. The `Model` is updated to reflect this change in the Mod Tracker.
 
 ### Take a module feature
 
@@ -305,14 +338,31 @@ When the `FindCommand#execute()` method is called,
 The `clear` command is implemented via the `ClearCommand`, `ClearCommandParser` and `ModuleInSpecificSemesterPredicate` classes.
 
 The `ClearCommandParser` class implements the `Parser` interface.
-The `ClearCommandParser#parse()` method is responsible for parsing the user input to retrieve the `AcademicYear` and `Semester` object which specify the semester that the user want to untake all modules in it. The method will return a `ClearCommand` object with `AcadenicCalendar` as its argument.
+The `ClearCommandParser#parse()` method is responsible for parsing the user input to retrieve the `AcademicYear` and `Semester` object which specify the semester in which the user want to untake all modules. The method will return a `ClearCommand` object with `AcademicCalendar` as its argument.
 The `ClearCommandParser#arePrefixesPresent()` method is responsible to check if all fields stated in the arguments are provided.
 
 The `ClearCommand` class extends the `Command` class and implements the `ClearCommand#execute()` method which handles the main logic of the class.
 When the `ClearCommand#execute()` method is called,
 - All `Module` objects which has the corresponding `AcademicCalendar` is filtered out from the `Model` and store in a list
-- For each `Module` in the list, the `Module` is replaced by a copy of it without `AcademicCalander` field.
+- For each `Module` in the list, the `Module` is replaced by a copy of it without the `AcademicCalander` field.
 - A `CommandResult` is returned with the updated `Model`.
+
+Below is a sequence diagram, and an explanation of how `ClearCommand` is executed.
+![ClearCommand](images/ClearCommandSequenceDiagram.png)
+
+**Step 1.** The user enters the command "clear 2 y/1 s/1".
+
+**Step 2.** ModuleTrackerParser takes in the user's input, and calls `ClearCommandParser#parse` to create a `ClearCommand` object containing the data parsed from the user input.
+
+**Step 3.** The `ClearCommand` is then executed by calling its `execute` method.
+
+**Step 4.** The list of modules that are planned to take in the indicating semester is obtained from the `Model`.
+
+**Step 5.** For each module in the filtered list, the academic plan is removed from the module.
+
+**Step 6.** The `Model` is updated to reflect this change in the Mod Tracker.
+
+
 
 #### Design Considerations:
 
@@ -337,10 +387,21 @@ When the `ClearCommand#execute()` method is called,
       - All modules stored in the storage in advance will be deleted as well
       - User need to add all the modules again, once the clear command is called
       - It will be expensive, if the user accidentally use clear command
+    
+### Set current semester and MC goal feature
 
-### Set feature
 #### Implementation
-The `SetCommand` has 2 functionalities: set current semester and set MC goal. A `SetCommand` can perform one and only one of these two functionalities at a time.
+The `set` command has 2 functionalities: set current semester and set MC goal. Each `SetCommand` can perform one and only one of these two functionalities. `set` command is implemented via the `SetCommand` and `SetCommandParser` classes.
+
+The `SetCommandParser` class implements the `Parser` interface and is responsible for parsing the user input. From user input, it checks whether the user want to set current semester or MC goal, and will then retrieve the corresponding object(`AcademicCalendar` or `Mc`) from user input and create the `SetCommand`.
+
+Each `SetCommand` object has a boolean attribute `isSemChanged` indicating whether this `SetCommand` need to set current semester or MC goal. It also has a `userInfo` field to store the specified semester or MC goal that this `SetCommand` is going to update to.
+
+The `SetCommand` class extends `Command` class and implements the `SetCommand#execute()` method which handles the main logic of the class.
+When the `SetCommand#execute()` method is called,
+* The `isSemchanged` value is checked to decide whether this command need to change current semester or MC goal.
+* If this `SetCommand` is to change current semester, the `academicYear` in `SetCommand`'s `userInfo` field will be retrieved and `Model` is called to update current semester. `Model` will also be called to update `filteredModuleList` so that in the UI, the color of each module card will be updated according to the new current semester.
+* If this `SetCommand` is to change MC goal, the `mc` in `SetCommand`'s `userInfo` field will be retrieved and `Model` is called to update MC goal.
 
 Below are the sequence diagrams and explanation of how `SetCommand` is executed. The explanation uses set semester as an example, the mechanism for setting MC goal is similar.
 
@@ -352,37 +413,44 @@ Below are the sequence diagrams and explanation of how `SetCommand` is executed.
 
 **Step 3.** `SetCommandParser` will check whether there is MC prefix `m/` in the user input. If there isn't, it will then check whether there is `AcademicYear` prefix `y/` and `Semester` prefix`s/`.In this case, there is, so it will create a new `AcademicYear` and `Semester`, and use them to create a new `AcademicCalendar`.
 
-**Step 4.** `SetCommandParser` creates a `SetCommand` with the newly created `AcademicCalendar`. An inner boolean property `isSemChanged` in `SetCommand` is assigned to true indicating this is a command for setting current semester.
+**Step 4.** `SetCommandParser` creates a `SetCommand` with the newly created `AcademicCalendar`.
 
 ![Sequence diagram of executing `set` command](images/SetExecuteSequenceDiagram.png)
 
 **Step 5.** The `SetCommand` is executed by calling its `execute` method.
 
-**Step 6.** During execution, the `SetCommand` checks whether it needs to set current semester or mc goal by `isSemChanged` property. In this case, it needs to set current semester.
+**Step 6.** During execution, the `SetCommand` checks whether it needs to set current semester or mc goal by checking the `isSemChanged` property. In this case, it needs to set current semester.
 
-**Step 7.**  Since the `Model` is passed to `SetCommand#execute`, it is able to call the method `Model#setCurrentSemester` to update the current semester stored in `Model`.
+**Step 7.**  Since the `Model` is passed to `SetCommand#execute`, it is able to call the method `Model#setCurrentSemester` to update the current semester in `Model`.
 
 **Step 8.** After the current semester is changed, `SetCommand` will call the method `Model#updateFilteredModuleList()`, which will notify the `ModuleListPanel` in `UI` to update the color of all module cards.
 
 #### Design Considerations:
 
 **Aspect: How can the user set current semester**
-- **Alternative 1:** There is a button in the GUI that when user click it,it will show drop-down lists of year and semester for user to choose.
+
+- **Alternative 1(current choice)**: User set current semester through command line.
+    - Pros:
+        - For a user who is familiar with the app and CLI, they don't need to use mouse to change current semester.
+    - Cons:
+        - The command is less intuitive than drop-down list, the user might need to memorize the `set` command format.
+    
+- **Alternative 2:** There is a button in the GUI that when clicked, will show drop-down lists of year and semester for user to choose.
     - Pros:
         - It is very straight forward and intuitive.
         - For beginners, and users who are not familiar with CLI, they can change current semester easily.
     - Cons:
         - For users who are familiar with CLI, picking academic year and semester using mouse may slow down their working efficiency.
 
-- **Alternative 2(current choice)**: User set current semester through command line.
-    - Pros:
-        - For a user who is familiar with the app and CLI, they don't need to use mouse to change current semester. 
-    - Cons:
-        - The command is less intuitive than drop-down list, the user might need to memorize the `set` command format.
-
 **Aspect: How can the user set Mc goal and current semester**
 
-- **Alternative 1:** The user can use `setMcGoal` and `setCurrentSemester` command to perform the two functionalities respectively.
+- **Alternative 1(current choice)**: The user can use a single `set` command to perform both set Mc goal and change current semester functionalities.
+    - Pros:
+        - The command is short, as a user that is familiar with the app, they can execute the command quickly and are less likely to make mistakes.
+    - Cons:
+        - For beginners, the `set` command might be a bit confusing since the word "set" shows little hints on what the command does.
+    
+- **Alternative 2:** The user can use `setMcGoal` and `setCurrentSemester` command to perform the two functionalities respectively.
     - Pros:
         - The command is very clear. For beginners, they can understand the command quickly.
         - `setMcGoal` and `setCurrentSemester` gives hints to user regarding what parameters need to be filled in.
@@ -390,14 +458,21 @@ Below are the sequence diagrams and explanation of how `SetCommand` is executed.
         - The command is very long, which takes more time to type in. For a user who is familiar with the app, they might not be able to use it efficiently.
         - The command consist of capital letters and lower-case letters and is long. Thus, it might be more prone to errors.
 
-- **Alternative 2(current choice)**: The user can use a single `set` command to perform both set Mc goal and change current semester functionalities.
-    - Pros:
-        - The command is short, as a user that is familiar with the app, they can execute the command quickly and are less likely to make mistakes.
-    - Cons:
-        - For beginners, the `set` command might be a bit confusing since the word "set" shows little hints on what the command does.
-
-### View feature
+    
+### View modules taken in specific semester feature
 The `view` command results in modules taken in a specific semester being shown.
+
+The `view` command is implemented via the `ViewCommand`, `ViewCommandParser` and `ModuleInSpecificSemesterPredicate` classes.
+
+The `ViewCommandParser` class implements the `Parser` interface.
+The `ViewCommandParser#parse()` method is responsible for parsing the user input to retrieve the `AcademicYear` and `Semester` object. These 2 objects will be used to create an `AcademicCalendar` object, which will be used to create `ModuleInSpecificSemesterPredicate`.
+The method will return a `ViewCommand` object with `ModuleInSpecificSemesterPredicate` as its argument.
+
+The `ViewCommand` class extends the `Command` class and implements the `ViewCommand#execute()` method.
+When the `ViewCommand#execute()` method is called,
+- All `Module` objects in the specified semester is filtered out based on the `ModuleInSpecificSemesterPredicate` and are store in a filtered list.
+- A `CommandResult` is returned with the updated `Model`.
+
 #### Implementation
 Below is a sequence diagram and explanation of how the `view` command works.
 ![Sequence diagram of executing `view` command](images/viewSequenceDiagram.png)
@@ -427,89 +502,6 @@ Below is a sequence diagram and explanation of how the `view` command works.
         - If the specific semester is very far away from the current semester, users need to click the button many times.
         - For a user comfortable with using command line, the need to use mouse may lower their working efficiency.
     
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -524,7 +516,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
+## **Appendix A: Requirements**
 
 ### Product scope
 
@@ -606,9 +598,33 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
+**UC2: Edit a module**
+
+**MSS**
+
+1. User requests to edit a specific module in the database.
+2. NUS Mod Tracker edits the module.
+
+    Use case ends.
+
+**Extension**
+
+* 1a. The given module index or arguments are invalid.
+    * 1a1. NUS Mod Tracker shows an error message.
+    
+    Use case resumes at step 1.
+* 1b. The user failed to provide any mandatory details to be edited.
+    * 1b1. NUS Mod Tracker shows an error message.
+    
+    Use case resumes at step 1.
+* 1c. The new value that is given to the code field is already exists in the database.
+    * 1c1. NUS Mod Tracker shows an error message.
+    
+    Use case resumes at step 1.
+
 #### Academic Plan Features
 
-**UC2: Add a Module to the Academic Plan**
+**UC3: Add a Module to the Academic Plan**
 
 **MSS**
 
@@ -623,7 +639,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
     Use case resumes at step 1.
 
-**UC3: Remove a Module from the Academic Plan**
+**UC4: Remove a Module from the Academic Plan**
 
 **MSS**
 
@@ -641,12 +657,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1b1. NUS Mod Tracker shows an error message.
     
     Use case resumes at step 1.
-
-
-
-
-
-**Use case 1: Change current semester**
+    
+**UC5: Change current semester**
 
 **MSS**
 
@@ -670,16 +682,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * a. At any time, User requests to view help(UCxx)
 
 
-
-
-
-
-
-
-
-
-
-**Use case 2: Set Mc goal**
+**UC6: Set Mc goal**
 
 **MSS**
 
@@ -704,19 +707,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-**Use case 3: View modules taken in specific semester**
+**UC7: View modules taken in specific semester**
 
 **MSS**
 
@@ -729,26 +720,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. User does not specify the number the specific academic year and semester in the request.
     * 1a1. Module Tracker shows an error message.
 
-  Use case resumes at step 1.
-
-
-* 1b. There is no module selected in that specific semester.
-    * 1b1. Module Tracker shows an empty module list.
-
-  Use case ends.
-
 * a. At any time, User requests to view help(UCxx)
 
 
+**UC8: Remove all modules in a specific semester from the academic plan**
 
+**MSS**
+1. User requests to remove modules in a specific semester from the academic plan.
+2. NUS Mod Tracker removes all modules in that semester from the academic plan.
 
+    Use case ends.
 
+**Extension**
 
+* 1a. The given semester is invalid.
+    * 1a1. NUS Mod Tracker shows an error message.
+    
+    Use case resumes at step 1.
 
+**UC9: Viewing help**
 
+**MSS**
+1. User requests for help.
+2. NUS Mod Tracker shows a summary of commands and a link to user guide.
 
-
-*{More to be added}*
+   Use case ends.
 
 ### Non-Functional Requirements
 
@@ -773,10 +769,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **ClI**: Command line interface
 * **Common screen resolutions**: minimum _1024x786_, maximum _3840x2160_ 
 * **MSS**: Main Success Scenario
+* **Academic Calendar**: A generalization of academic year and semester
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **Appendix B: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 
@@ -827,4 +824,23 @@ Expected: No module is added. Error details are shown in the status message.
    
 3. Other incorrect add commands to try: `add `,`add c/ST21312132 t/abcd d/efgh m/4`, `...`
 Expected: Similar to previous.
+
+
+## **Appendix C: Instructions for manual testing**
+
+If the effort required to create AB3 is 100, we would place the effort required to implement the current version of NUS Mod Tracker at 120. We currently has over 10,000 lines of code contributed and over 300 automated tests. Below, we list some changes that need a significant amount of effort to implement.
+
+1. Modifying all AB3 components
+
+   We need to modify the entire AB3 in order to support operations on modules.
+   In `Model` component, we need to delete all models in the `person` folder and create a new folder that contains the model for module and all other attributes related to module(`Code`, `Title`, `Description`, `Mc`, ). All other classes in `model` folder need to be modified accordingly. 
+   In `Logic` component, we need to modify all command parsers in order to parser modules. All commands also need to be modified to support the operation on modules.
+   In `storage` component, we also need to modify all classes in order to store modules.
+   The `UI` component also need to be modified. 
+   All test cases need to be changed accordingly.
+   
+2. Mc progress list
+    
+3. User Information
+   
    

@@ -63,6 +63,8 @@ deactivate CommandResult
 
 DeleteCommand --> LogicManager : result
 deactivate DeleteCommand
+DeleteCommand -[hidden]-> DeleteCommandParser
+destroy DeleteCommand
 
 [<--LogicManager
 deactivate LogicManager
