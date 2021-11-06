@@ -29,13 +29,15 @@ class MailingListCommandParserTest {
 
     @Test
     public void parse_preambleExists_failure() {
-        assertParseFailure(parser, "preamble " + PREFIX_PHONE.getPrefix(), MailingListCommand.MESSAGE_USAGE);
+        assertParseFailure(parser, "preamble " + PREFIX_PHONE.getPrefix(),
+                MailingListCommand.MESSAGE_EXTRA_ARGUMENTS_FAILURE);
     }
 
     @Test
     public void parse_extraDataExists_failure() {
-        assertParseFailure(parser, INVALID_PREFIX + " " + PREFIX_PHONE.getPrefix(), MailingListCommand.MESSAGE_USAGE);
-        assertParseFailure(parser, PREFIX_PHONE.getPrefix() + " " + INVALID_PREFIX, MailingListCommand.MESSAGE_USAGE);
+        assertParseFailure(parser, INVALID_PREFIX + " " + PREFIX_PHONE.getPrefix(),
+                MailingListCommand.MESSAGE_EXTRA_ARGUMENTS_FAILURE);
+        assertParseFailure(parser, PREFIX_PHONE.getPrefix() + " " + INVALID_PREFIX,
+                MailingListCommand.MESSAGE_EXTRA_ARGUMENTS_FAILURE);
     }
-
 }
