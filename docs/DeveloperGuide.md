@@ -178,7 +178,7 @@ This section describes some noteworthy details on how certain features are imple
 
 The following activity diagram summarizes what happens when the user inputs an import command:
 
-![ImportCommandActivityDiagram](images/ImportCommandActivityDiagram.png)
+![ImportCommandActivityDiagram](images/ImportActivityDiagram.png)
 
 There are several important details left out of the activity diagram for the sake of clarity:
 
