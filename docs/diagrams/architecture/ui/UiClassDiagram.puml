@@ -42,7 +42,7 @@ MainWindow *-down-> "1" VisualizerDisplay
 MainWindow --> "0..1" HelpWindow
 
 
-StudentListPanel -up-> "*" StudentCard
+StudentListPanel -down--> "*" StudentCard
 
 MainWindow -left-|> UiPart
 AppMenu --|> UiPart
@@ -54,7 +54,15 @@ CommandBox --|> UiPart
 StatusBarFooter --|> UiPart
 StudentCard --|> UiPart
 
-StudentCard ..> VersionedModel
+MainWindow ..up> CommandExecutor
+StudentCard -up> "1" CommandExecutor
+StudentListPanel -up> "1" CommandExecutor
+CommandBox -up> "1" CommandExecutor
+AppMenu -up> "1" CommandExecutor
+
+AppMenu ...> Logic
+
+StudentCard --> VersionedModel
 UiManager -right-> Logic
 MainWindow --> Logic
 

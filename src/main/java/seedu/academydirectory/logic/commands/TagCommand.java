@@ -46,7 +46,7 @@ public class TagCommand extends Command {
             + PREFIX_TAG + "mission "
             + PREFIX_TAG + "streams";
 
-    public static final String MESSAGE_SUCCESS = "%1$s's tag(s) updated!";
+    public static final String MESSAGE_SUCCESS = "%1$s's tag(s) updated! Please use `view` to see the new details";
 
     private final Index index;
     private final Set<Tag> tag;

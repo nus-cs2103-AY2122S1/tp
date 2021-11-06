@@ -5,8 +5,6 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import seedu.academydirectory.commons.core.LogsCenter;
-import seedu.academydirectory.logic.commands.ClearCommand;
-import seedu.academydirectory.logic.commands.ExitCommand;
 import seedu.academydirectory.logic.commands.HelpCommand;
 import seedu.academydirectory.logic.commands.HistoryCommand;
 import seedu.academydirectory.logic.commands.RedoCommand;
@@ -128,22 +126,5 @@ public class AppMenu extends UiPart<Region> {
     public void showHelp() {
         logger.info("Menu for Show help clicked");
         handleButtons(HelpCommand.COMMAND_WORD);
-    }
-
-    /**
-     * A menu item that clears all entries
-     */
-    @FXML
-    public void clear() {
-        logger.info("Cleared");
-        handleButtons(ClearCommand.COMMAND_WORD);
-    }
-
-    /**
-     * A menu item that quickly executes the equivalent command `exit`
-     */
-    @FXML
-    public void exit() {
-        handleButtons(ExitCommand.COMMAND_WORD);
     }
 }
