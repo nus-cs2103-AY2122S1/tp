@@ -56,7 +56,7 @@ public class EditFolderNameCommand extends Command {
         List<Folder> lastShownFolderList = model.getFilteredFolderList();
         int indexOfFolder = lastShownFolderList.indexOf(oldFolder);
         if (indexOfFolder == -1) {
-            throw new CommandException(Messages.MESSAGE_INVALID_FOLDER_IN_UNION);
+            throw new CommandException(Messages.MESSAGE_NONEXISTENT_FOLDER_IN_CURRENT_LIST);
         }
 
         if (model.hasFolder(newFolder)) {

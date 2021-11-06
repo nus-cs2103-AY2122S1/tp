@@ -21,7 +21,7 @@ import seedu.address.model.tag.Tag;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "The person index provided is invalid";
+    public static final String MESSAGE_INVALID_INDEX = "The index '%1$s' is invalid. It should be a positive integer";
     public static final String MESSAGE_OVERFLOW_INTEGER = "UNIon is unable to handle such a large integer";
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -38,7 +38,7 @@ public class ParserUtil {
 
         //Check for - symbol or 0 as first element
         if (firstElement == 45 || firstElement == 48) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
+            throw new ParseException(String.format(MESSAGE_INVALID_INDEX, trimmedIndex));
         }
 
         //Check if all values are integers only
