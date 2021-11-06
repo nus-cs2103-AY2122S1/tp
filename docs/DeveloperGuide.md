@@ -138,6 +138,21 @@ The class diagrams of the `Student`, `Task` and `Group` classes are shown below:
 
 ![Structure of the Task Class](images/TaskClassDiagram.png)
 
+The `Task` class is an abstract class, consisting of three subclasses:
+
+1. `TodoTask` : A task that is to be completed, and is not associated with a date.
+2. `EventTask` : A task that is specified to occur at a certain date.
+3. `DeadlineTask` : A task that is to be completed by a certain date.
+
+The `Task` class, and all its subclasses,
+
+* stores information regarding a user's task as shown above.
+* stores a compulsory reference to a `TaskName` object, a `Priority` enumeration field, and a boolean `IsDone` field.
+* stores an optional reference to a `Description` object.
+* stores `Tag`, which is a class common to the `Student` and `Group` data types.
+
+In addition to the components above, the `EventTask` and `DeadlineTask` classes store a compulsory reference to a `TaskDate` object. The `TodoTask` class 
+
 #### Student and Group component
 
 ![Structure of the Student and Group Class](images/StudentGroupClassDiagram.png)
@@ -145,12 +160,12 @@ The class diagrams of the `Student`, `Task` and `Group` classes are shown below:
 The `Student` component,
 
 * stores the student's personal information as shown by composition in the diagram above.
-* stores `Tag` and `RepoName` which are clases common to both `Student` and `Group` data types. `RepoName` in this case refers to the name of the student's IP repository.
+* stores `Tag` and `RepoName` which are classes common to both `Student` and `Group` data types. `RepoName` in this case refers to the name of the student's IP repository.
 * stores a reference to the `Group` the student is a part of via a unique `groupName` from the `Group` component (composition is not valid here as a `Group` can exist with an empty `Member` component). This attribute is not modifiable via teh regular `editStudent` command, and can only be modified internally when the student is added/deleted from a `Group`, or the `GroupName` of the student's group changes.
 
 The `Group` component,
 
-* stores group related information, similarly shown by compostition in the diagram above.
+* stores group related information, similarly shown by composition in the diagram above.
 * stores `Tag` and `RepoName`. In this case, `RepoName` refers to the TP repository of the group.
 * has a `Members` subcomponent that stores references to the `Student` component. This is initialized with no references to any `Student` to allow for preemptive creation of groups before members are made known. 
 
@@ -357,21 +372,6 @@ The following steps describe the execution of the `EditGroupCommand`.
 3. `Model` then updates all `Student` objects that are part of the `Members` class of the group. This is achieved by creating new `Student` objects that have a reference to the `GroupName` of the updated group, and calling the `setStudent` method of `AddressBook` to update the `Student data`.
 4. Finally, `Model` calls the `setGroup` function of the `AddressBook` to update the `Group` data of the `AddressBook`.
 
-#### Design considerations:
-
-* Alternative 1 (selected implementation): Have `Members` save a list of `Student` and `Student` have a reference to `GroupName`
-    * Pros: Easy to implement, all relevant student information can be readily accessed and displayed in the GUI.
-    * Cons: Increases coupling between `Student` and `Group` classes.
-
-* Alternative 2: Have `Members` save the `Name` of students and `Student` have a reference to `Group`
-    * Pros: Smaller JSON file size due to smaller volume of information being referenced to.
-    * Cons: Increases coupling between `Student` and `Group` classes, need to find the relevant `Student` object given its `Name` everytime the `Group` is to be displayed in the GUI,
-      unnatural modelling of the real world since `Group` contains students and not the other way around.
-
-* Alternative 3: Have `Members` save the `Name` of students only
-    * Pros: Smaller JSON file size due to smaller volume of information being referenced to, lesser coupling due to only a unidirectional association.
-    * Cons: Unable to display the `GroupName` of a `Student` in the student display list using simple code implementation, reduction in input validation capabilities (assigning 1 student to 2 groups) since there is no direct way to determine if a `Student` is already in a group.
-
 <div style="page-break-after: always;"></div>
 
 ## Edit Task Command
@@ -421,7 +421,7 @@ The tApp is supposed to cater to TA, who are very busy. They have their own modu
 
 #### Current Implementation
 
-To adhere to Object Oriented Programming priciples, we have decided to make the `Task` class as the parent class and `TodoTasks`, `DeadlineTask` and `EventTask` classes a subclass of `Task` class. The class diagram below shows in detail how the task model is being implemented.
+To adhere to Object-Oriented Programming principles, we have decided to make the `Task` class as the parent class and `TodoTasks`, `DeadlineTask` and `EventTask` classes a subclass of `Task` class. The class diagram below shows in detail how the task model is being implemented.
 
 **Insert Tasks Class Diagram**
 
@@ -438,7 +438,7 @@ Given below is an example usage scenario and how the adding a todo task mechanis
 6. The `AddTodoTaskCommandParser` creates a new `AddTodoTaskCommand` and returns it to AddressBookParser, which in turn returns it to `LogicManager`.
 7. The LogicManager calls the `AddTodoTaskCommand#execute(Model)` method.
 8. The AddTodoTaskCommand calls the `Model#addTask(Task)` method.
-9. The tasks is added to the list of tasks and the updated list of task is displayed.
+9. The task is added to the list of tasks and the updated list of task is displayed.
 9. Lastly, the `AddTodoTaskCommand` creates a `CommandResult` with a success message and returns it to `LogicManager`.
 
 The above process is shown in the following sequence diagram:
@@ -1467,6 +1467,12 @@ testers are expected to do more *exploratory* testing.
 
 [comment]: <> (TODO)
 ## **Effort**
+Our team has put in a significant amount of effort into making our application cater to the needs of CS2103/T Teaching Assistants. While AB3 had only dealt with the `Person` entity type, tApp stores data of 3 different entity types, `Task`, `Student` and `Group`.
+Implementing this required 
+
+Moreover, classes such as `Student` and `Group` interact in order to provide more utility to the user, adding another layer of difficulty to creating out application.
+
+
 We highly recommend adding an appendix named Effort that evaluators can use to estimate the total project effort.
 Keep it brief (~1 page)
 Explain the difficulty level, challenges faced, effort required, and achievements of the project.
