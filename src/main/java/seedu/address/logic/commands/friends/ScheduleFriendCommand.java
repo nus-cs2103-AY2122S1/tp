@@ -70,7 +70,7 @@ public class ScheduleFriendCommand extends Command {
         FriendId friendId = friendToSchedule.getFriendId();
         FriendName updatedFriendName = friendToSchedule.getFriendName();
         Map<GameId, GameFriendLink> gameFriendLinks = friendToSchedule.getGameFriendLinks();
-        Schedule schedule = friendToSchedule.getSchedule();
+        Schedule schedule = new Schedule(friendToSchedule.getSchedule());
         schedule.setScheduleDay(day, startTime, endTime, isFree);
         return new Friend(friendId, updatedFriendName, gameFriendLinks, schedule);
     }

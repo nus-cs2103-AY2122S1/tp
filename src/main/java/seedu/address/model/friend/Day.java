@@ -45,6 +45,17 @@ public class Day {
     }
 
     /**
+     * Constructs a {@code Day}.
+     *
+     * @param timeSlots Timeslots of day.
+     * @param dayOfWeek A day of the week.
+     */
+    public Day(boolean[] timeSlots, DayOfWeek dayOfWeek) {
+        this.timeSlots = timeSlots;
+        this.dayOfWeek = dayOfWeek;
+    }
+
+    /**
      * Checks if the time slot for the given {@code hourOfDay} is free.
      *
      * @param hourOfDay hour to check if free.
@@ -95,6 +106,15 @@ public class Day {
      */
     public String getDayName() {
         return dayOfWeek.name();
+    }
+
+    /**
+     * Gets a copy of timeslots
+     *
+     * @return Copy of Timeslots
+     */
+    public boolean[] getTimeSlots() {
+        return timeSlots.clone();
     }
 
     /**
