@@ -57,6 +57,8 @@ EdRecord is a **desktop app for managing student contacts, optimized for use via
 - Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+* Scope of commands: All commands work within the currently selected module. If no module is selected, then the commands will work on all students across all modules.
+
 </div>
 
 ### Viewing help : `help`
@@ -117,13 +119,13 @@ Examples:
 
 ### Listing all students: `list`
 
-Shows a list of all students matching the specified tags or list of all students if no tags are specified.
+Shows a list of all students in the current module matching the specified tags or list of all students in the current module if no tags are specified.
 
 Format: `list [TAG]…​`
 
-### Listing modules: `cd`
+### Listing module's students: `cd`
 
-Change the working directory to a specific module in EdRecord.
+Change the working directory to a specific module, showing the students, in EdRecord.
 
 Format: `cd MODULE`
 
@@ -161,7 +163,7 @@ Examples:
 
 ### Toggle view: `view`
 
-Toggle the view between showing student details and showing module's assignments.
+Toggle the view between showing student details and showing module's assignments. This command works on the filtered list, toggling the view for students currently listed.
 
 Format: `view (contacts/asg)`
 
@@ -302,7 +304,7 @@ Examples:
 
 ### Locating students by name: `find`
 
-Finds students whose names contain any of the given keywords.
+Finds students whose names contain any of the given keywords *in the current module*. 
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -312,6 +314,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 - Only full words will be matched e.g. `Han` will not match `Hans`
 - Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* If no module is selected, the scope of the command would be across all modules.
 
 Examples:
 
@@ -333,10 +336,6 @@ Format: `exit`
 ### Saving the data
 
 EdRecord data is saved in the hard disk automatically (as a JSON file `[JAR file location]/data/edrecord.json`) after any command that changes the data. There is no need to save manually.
-
-### Editing the data file
-
-EdRecord data is saved as a JSON file `[JAR file location]/data/edrecord.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, EdRecord will discard all data and start with an empty data file at the next run.
@@ -369,8 +368,8 @@ If your changes to the data file makes its format invalid, EdRecord will discard
 | **Create Assigment**                    | `mkasg n/ASSIGNMENT w/WEIGHTAGE s/MAXSCORE`<br> e.g., `mkasg n/Side quest 10 w/20 s/50`                                                                               |
 | **Edit Assignment**                     | `edasg ID [n/NAME] [w/WEIGHTAGE] [s/MAXSCORE]`<br> e.g., `edasg 1 n/PE Dry Run w/12.5 s/10`                                                                           |
 | **Delete Assignment**                   | `dlasg ID`<br> e.g., `dlasg 1`                                                                                                                                        |
-| **Grade an Assignment**                 | `grade INDEX id/ID st/STATUS [s/SCORE]`<br> e.g.,`grade 4 id/2 st/Graded s/50`                                                                                         |
-| **Delete student's grade**              | `dlgrade INDEX id/ID`<br> e.g.,`dlgrade 3 id/3 Midterm`                                                                                                               |
+| **Grade an Assignment**                 | `grade INDEX id/ID st/STATUS [s/SCORE]`<br> e.g.,`grade 4 id/2 st/Graded s/50`                                                                                        |
+| **Delete student's grade**              | `dlgrade INDEX id/ID`<br> e.g.,`dlgrade 3 id/3`                                                                                                               |
 | **Toggle view**                         | `view (contacts/asg)`<br> e.g.,`view contacts`                                                                                                                        |
 | **Find**                                | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
 | **List**                                | `list [TAG]…​`                                                                                                                                                        |

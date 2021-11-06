@@ -10,7 +10,7 @@ import javafx.collections.ObservableList;
 import seedu.edrecord.commons.core.GuiSettings;
 import seedu.edrecord.model.assignment.Assignment;
 import seedu.edrecord.model.module.Module;
-import seedu.edrecord.model.module.ModuleGroupMap;
+import seedu.edrecord.model.module.ModuleSet;
 import seedu.edrecord.model.module.ReadOnlyModuleSystem;
 import seedu.edrecord.model.name.Name;
 import seedu.edrecord.model.person.PartOfModulePredicate;
@@ -116,7 +116,7 @@ public interface Model {
     /**
      * Returns true if all the modules and groups with the same code as {@code mods} exists in the module system.
      */
-    boolean hasModulesAndGroups(ModuleGroupMap mods);
+    boolean hasModulesAndGroups(ModuleSet mods);
 
     /**
      * Deletes the given module.
@@ -161,6 +161,12 @@ public interface Model {
      * Returns true if the currently selected module contains the given assignment.
      */
     boolean hasAssignmentInCurrentModule(Assignment assignment);
+
+    /**
+     * Returns true if adding the assignment {@code toAdd} will bring the total weightage
+     * of all assignments under the currently selected module to above 100%.
+     */
+    boolean isTotalWeightageExceeded(Assignment toAdd);
 
     /**
      * Returns true if any existing grade of the original assignment {@code current} is
