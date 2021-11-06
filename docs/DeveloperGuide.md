@@ -1309,9 +1309,25 @@ testers are expected to do more *exploratory* testing.
 
 #### Adding a lesson
 
-1. Successful addition of a lesson.
+1. Adding a lesson with all correct parameters 
 
-    * Prerequisites: All parameters are entered correctly as according to the DG's [Add Lesson Feature](#add-lesson-feature) 
+    * Prerequisites: All parameters are entered correctly as according to the DG's [Add Lesson Feature](#add-lesson-feature)
+and the lesson to be added does not exist in TuitiONE yet.
+
+    * Test case: `add-l s/Science g/P2 d/Wed t/1200 c/10.50`<br>
+        Expected: A new lesson `Science-P2-Wed-1200` will be added into the lesson list. Lesson list will be updated
+while there is no change ot the student list. An update message will also be shown in the message box to inform the user
+that a new lesson is successfully added.
+
+    * Incorrect addition of a lesson due to duplication: `add-l s/Science g/P2 d/Wed t/1200 c/10.50`<br>
+        Expected: Addition of the particular lesson will not be applied to TuitiONE. An alert message will be shown in 
+the message box to inform the user that the lesson already exists in TuitiONE.
+
+    * Incorrect addition of a lesson by passing in any incorrect input:<br>
+        Expected: Addition of the particular lesson will not be applied to TuitiONE. An alert message corresponds to the 
+wrongly entered parameter will be shown in the message box to remind the user of the correct input parameter 
+format.<br>_Note: Only the alert message corresponds to the first encountered incorrect parameter will be shown. User is
+expected to correct the input parameters one by one._
 
 #### Deleting a student
 
@@ -1348,8 +1364,9 @@ testers are expected to do more *exploratory* testing.
    the number of students found will also be shown in the message box. <br>_Note: both the first and last name of the student will be checked, to see if the student's name consists of `Alex`._
 
     * Test case: `find -`, `find .`, `find '`<br>
-      Expected: No student will be found since name should only contain alphanumeric characters and spaces.
-   
+      Expected: No student will be found since name should only contain alphanumeric characters and spaces. An update
+message showing that `No students found.` will also be displayed in the message box. 
+
 #### Rostering
 
 1. Rostering a lesson by `LESSON_INDEX` while all students and lessons are being shown
@@ -1366,7 +1383,7 @@ showing the number and the name of the students who are enrolled in the lesson w
 
     * Incorrect roster by passing in nothing or non-number as parameter: `roster`, `roster a`, `roster -`, 
 `roster LESSON_CODE`<br>
-        Expected: No roster will be applied. An error message will be shown in the message box, warning the user to
+        Expected: No roster will be applied. An alert message will be shown in the message box, warning the user to
 follow the command format by using `LESSON_INDEX`.
 
     * Incorrect roster by passing in a a `LESSON_INDEX` that is larger than the number of `LESSONS`: `roster 100`<br>
@@ -1407,7 +1424,7 @@ use valid `LESSON_INDEX`.
       
 1. Filtering by both grade and subject
 
-    * Note: It will be good to add more lessons of grade `S1` but of different subject (eg. English, Math etc.) to better test this feature.
+    * Note: It will be good to add more lessons of grade `S1` but of different subject (e.g. English, Math etc.) to better test this feature.
     
     * Test case: `filter s/English g/S1`<br>
       Expected: Only students of grade `S1` will be displayed in the student list. Only lessons with subject matching `English` and of grade `S1` will be displayed in the lesson list. No lessons or students shown if none have matching the given filter conditions. An update message showing the number of students and lessons found will also be shown in the message box.
