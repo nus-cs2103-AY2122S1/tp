@@ -157,5 +157,13 @@ public class ConfigTest {
         assertFalse(defaultConfig.equals(defaultConfig2));
     }
 
+    @Test
+    public void equalsMethod_twoDifferentInstanceObject() {
+        Config defaultConfig = new Config();
+        GuiSettings guiSettings = new GuiSettings();
+        assertNotNull(defaultConfig);
+        assertNotNull(guiSettings);
+        assertFalse(defaultConfig.equals(guiSettings));
+    }
 
 }

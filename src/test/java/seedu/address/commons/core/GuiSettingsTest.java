@@ -125,6 +125,17 @@ public class GuiSettingsTest {
     }
 
     @Test
+    public void equalsMethod_twoDifferentInstanceObject() {
+        Config defaultConfig = new Config();
+        Point nonDefaultPoint = new Point(0, 1);
+        GuiSettings nonDefaultGuiSettings = new GuiSettings(888.0, 500.0,
+                nonDefaultPoint.x, nonDefaultPoint.y);
+        assertNotNull(defaultConfig);
+        assertNotNull(nonDefaultGuiSettings);
+        assertFalse(nonDefaultGuiSettings.equals(defaultConfig));
+    }
+
+    @Test
     public void hashCode_twoDefaultObject_success() {
         GuiSettings defaultGuiSettings = new GuiSettings();
         GuiSettings defaultGuiSettings2 = new GuiSettings();
