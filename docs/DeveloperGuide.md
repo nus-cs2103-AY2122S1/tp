@@ -693,7 +693,9 @@ The navigating input history feature works by storing an arraylist within the cl
 
 `InputHistory` class will communicate with the class `CommandBox` to display the requested commands.
 
-The following activity diagram gives an overview of how `InputHistory` works when the User attempts to navigate through their input history:
+The following activity diagrams gives an overview of how `InputHistory` works when the User presses the up and down arrow keys to navigate through their input history:
+![Activity Diagram for Up_Arrow](images/InputHistoryUpArrowActivityDiagram.png)
+![Activity Diagram for Down_Arrow](images/InputHistoryDownArrowActivityDiagram.png)
 
 #### Design considerations:
 
@@ -703,7 +705,9 @@ The following activity diagram gives an overview of how `InputHistory` works whe
 * Pros: Provides an easy way to access `InputHistory` from anywhere in the code and enforces having only one `InputHistory` object.
 * Cons: Harder to test since Singleton objects carry data from one test to another.
 
-**Alternative 2:** .
+**Alternative 2:** Create the `InputHistory` object the upon initiation of WhereTourGo and save that object within the `CommandBox`.
+* Pros: Relatively easy to test
+* Cons: Higher chances of bugs due to having no limitation on the number of `InputHistory` objects
 
 --------------------------------------------------------------------------------------------------------------------
 

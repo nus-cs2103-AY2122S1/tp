@@ -30,7 +30,7 @@ Given below are my contributions to the project.
 
 * **Project management**:
   * Reviewed and merged Pull Requests of other teammates
-  * Contributed to on-feature-specific sections in the DG [\#197](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/197) []()
+  * Contributed to on-feature-specific sections in the DG [\#197](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/197)
   * Enhanced general code to better comply with coding standards [\#170](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/170)
   
 
@@ -48,7 +48,7 @@ Given below are my contributions to the project.
     * Assisted with the creation of the Table of Content [\#80](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/80/files)
 
   * Developer Guide:
-    * Added implementation details of the `category` and navigating input history features:[\#75](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/75) []()
+    * Added implementation details of the `category` and navigating input history features:[\#75](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/75)
     * Added use cases [\#76](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/76).
 
 

@@ -1,0 +1,14 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User presses down arrow key;
+if () then ([Presence of saved commands])
+    :Retrieve next command;
+    :Display next command in Command Box;
+else ([else])
+:Current command resets to an empty command;
+endif
+stop
+
+@enduml
