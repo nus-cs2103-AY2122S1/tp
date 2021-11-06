@@ -112,9 +112,7 @@ public class AddPositionCommandTest {
         }
 
         @Override
-        public void addToHistory(Command command) {
-            return;
-        }
+        public void addToHistory(Command command) {}
 
     }
 }

@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.commands.AddApplicantCommand.MESSAGE_NO_SUCH_POSITION;
+import static seedu.address.logic.commands.RejectionRateCommand.MESSAGE_NO_CURRENT_APPLICANTS;
 
 import javafx.scene.chart.PieChart;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -48,6 +49,10 @@ public class VisualizePositionCommand extends Command {
         }
 
         assert position != null; // Above try-catch block handles the 'Position not found' case
+
+        if (!model.hasApplicantsApplyingTo(position)) {
+            throw new CommandException(MESSAGE_NO_CURRENT_APPLICANTS);
+        }
 
         PieChart positionChart = new PositionPieChart(model.getFilteredApplicantList(), position);
         PieChartDisplayer positionChartDisplayer = new PieChartDisplayer(positionChart);

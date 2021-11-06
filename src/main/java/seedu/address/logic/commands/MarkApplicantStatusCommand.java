@@ -47,7 +47,7 @@ public class MarkApplicantStatusCommand extends Command {
 
         Applicant applicantToUpdate;
         try {
-            applicantToUpdate = model.getApplicantByName(name);
+            applicantToUpdate = model.getApplicantWithName(name);
         } catch (ApplicantNotFoundException e) {
             throw new CommandException(String.format(MESSAGE_NO_SUCH_APPLICANT_WITH_NAME, name));
         }
