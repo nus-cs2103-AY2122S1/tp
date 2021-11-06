@@ -2,8 +2,11 @@
 layout: page
 title: Developer Guide
 ---
+
 * Table of Contents
 {:toc}
+
+<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -13,11 +16,15 @@ title: Developer Guide
 * Original project: [AddressBook Level-3](https://se-education.org/addressbook-level3) project created as part of the [SE-EDU](https://se-education.org) initiative
 * Application logo: Inspired by [Source Academy](https://sourceacademy.nus.edu.sg/)
 
+<br>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
+
+<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -69,7 +76,7 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
-### UI component
+### UI Component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103T-W08-2/tp/tree/master/src/main/java/seedu/sourcecontrol/ui/Ui.java)
 
@@ -86,7 +93,7 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Student` object residing in the `Model`.
 
-### Logic component
+### Logic Component
 
 **API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-W08-2/tp/tree/master/src/main/java/seedu/sourcecontrol/logic/Logic.java)
 
@@ -115,8 +122,11 @@ How the parsing works:
 * When called upon to parse a user command, the `SourceControlParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `SourceControlParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+
 ### Model component
+
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-W08-2/tp/tree/master/src/main/java/seedu/sourcecontrol/model/Model.java)
+
 
 ![Model Class Diagram](images/ModelClassDiagram.png)
 
@@ -134,8 +144,7 @@ The `Model` component,
 
 </div>
 
-
-### Storage component
+### Storage Component
 
 **API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-W08-2/tp/tree/master/src/main/java/seedu/sourcecontrol/storage/Storage.java)
 
@@ -146,9 +155,11 @@ The `Storage` component,
 * inherits from both `SourceControlStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
-### Common classes
+### Common Classes
 
 Classes used by multiple components are in the `seedu.sourcecontrol.commons` package.
+
+<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -156,7 +167,7 @@ Classes used by multiple components are in the `seedu.sourcecontrol.commons` pac
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Import feature
+### Import : `import`
 
 The following activity diagram summarizes what happens when the user inputs an import command:
 
@@ -175,12 +186,9 @@ The user needs to provide the number of `Groups`, `Assessments`, and `Tags` sinc
 
 1. Columns can be empty, except for the assessment name columns in the header row, and the name and ID columns of each student. Empty columns are assumed to be missing data.
 
-### Add Student feature
+### Add Student : `addstudent`
 
 The add student feature adds a student with the provided name and NUSNET ID into the database. If the student comes with optionally specified groups and tags, these fields will be added accordingly.
-
-
-#### Implementation
 
 #### AddCommand class
 The `addstudent` mechanism is facilitated by the `AddCommand` class which extends the `Command` class. The `AddCommand` class overrides the `execute()` method in `Command`. In this implementation,
@@ -208,8 +216,7 @@ The following sequence diagram shows how the add student operation works:
 
 </div>
 
-
-### Add Group feature
+### Add Group : `addgroup`
 
 The `addgroup` feature allows users to create new groups, as well as specify students to be added to the group to be created.
 
@@ -221,7 +228,6 @@ The `addgroup` feature allows users to create new groups, as well as specify stu
 4. The group is added to the application if Step 3 completes without any exceptions.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** In the case where there are more than one students matched because they share the same name, an error message will be displayed to the user. The user will then have to specify the student to be added using his/her student ID.
-
 </div>
 
 The following activity diagrams summarizes what happens when a user executes a command to add a new group. In the case where the group is not added, an error message will be displayed with the reason.
@@ -233,32 +239,59 @@ The following sequence diagram summarizes what happens when the user inputs an a
 
 ![AddGroupSequenceDiagram](images/AddGroupSequenceDiagram.png)
 
-### Add Allocation feature
+### Add Allocation : `addalloc`
 
-The `addalloc` feature allocates an existing student into a group.
+The `addalloc` feature allows users to allocate a student into a group.
 
-Given below is an example usage case and how the `add alloc` command mechanism behaves at each step.
+#### How the `addalloc` command works
 
-#### Implementation
+1. The user specifies the group name, and the name or ID of the student to be allocated into the group.
+2. An `AllocDescriptor` containing info of the group and the student is created.
+3. The `AllocDescriptor` is used to find the group and the student(s) as specified.
+   * If there is only one matched student, the student is added to the group.
+   * If there are multiple matched students, the allocation is not made successfully, and the student list is updated with all matched students.
+4. The student is allocated into the group.
 
-Step 1. The user executes `add alloc -g T02 -n Alex Yeoh` command to add the student named `Alex Yeoh` to the group `T02`. The `add alloc` command creates an `AddAllocCommandParser` object to parse the user input into respective command arguments.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** In the case where there are more than one students matched because they share the same name, an error message will be displayed to the user. The user will then have to specify the student to be added using his/her student ID.
+</div>
 
-Step 2. The `AddAllocCommandParser` checks for validity of the user input and creates an `AddAllocCommand.AllocDescriptor` object to store information of the allocation which is then used to create an `AddAllocCommand` object to execute the command.
+The following activity diagram summarises what happens when a user executes the `addalloc` command to allocate a student into a group. In the case where the allocation is not made successfully, an error message will be displayed with the reason.
 
-Step 3. `AddAllocCommand#execute()` checks for validity of the command arguments, i.e. the existence of group `T02` and student `Alex Yeoh` in the database, the existence of student `Alex Yeoh` in group `T02`.
+![AddAllocActivityDiagram](images/AddAllocActivityDiagram.png)
 
-Step 4. `AddAllocCommand#execute()` calls `AddAllocCommand#createEditedStudent()` to create an instance of student `Alex Yeoh` allocated to group `T02`, and modifies the current unallocated student `Alex Yeoh` in the database with the newly allocated instance through `ReadOnlySourceControl#setStudent`.
+The following sequence diagram summarises what happens when the user inputs an `addalloc` command together with a group and a student, specified by name, to be allocated.
 
-Step 5. `AddAllocCommand#execute()` calls `Group#addStudent()` to add student `Alex Yeoh` into the group.
+![AddGroupSequenceDiagram](images/AddAllocSequenceDiagram.png)
 
-Use case ends.
+### Add Score : `addscore`
 
+The `addscore` feature allows users to add score for an assessment of a student.
 
-### Search feature
+#### How the `addscore` command works
+
+1. The user specifies the assessment name, the name or ID of the student, and the score to be added.
+2. An `ScoreDescriptor` containing info of the group, the student and the score is created.
+3. The `ScoreDescriptor` is used to find the assessment and the student(s) as specified.
+   * If there is only one matched student, the assessment of the student will be updated with the new score.
+   * If there are multiple matched students, the update is not made successfully, and the student list is updated with all matched students.
+4. The score is updated in the assessment of the student.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** In the case where there are more than one students matched because they share the same name, an error message will be displayed to the user. The user will then have to specify the student to be added using his/her student ID.
+</div>
+
+The following activity diagram summarises what happens when a user executes the `addscore` command to add score for an assessment of a student. In the case where the update is not made successfully, an error message will be displayed with the reason.
+
+![AddScoreActivityDiagram](images/AddScoreActivityDiagram.png)
+
+The following sequence diagram summarises what happens when the user inputs an `addscore` command together with an assessment, a student, specified by name, and a score to be added.
+
+![AddGroupSequenceDiagram](images/AddScoreSequenceDiagram.png)
+
+### Search : `search`
 
 The `search` feature allows user to filter student list by name, NUSNET ID, groups, or tags.
 
-#### Implementation
+#### How the `search` command works
 
 The following diagram shows the search operation after user input `search -n Alex Yu`.
 
@@ -289,7 +322,6 @@ The following diagram summarizes what happens after user input search command:
 if command is valid. Command is invalid if user input is empty, or if user entered more or less than one flag.
 </div>
 
-
 #### Design considerations
 
 **Aspect: How search executes:**
@@ -302,15 +334,45 @@ if command is valid. Command is invalid if user input is empty, or if user enter
     * Pros: More straightforward and convenient for users.
     * Cons: We need to identify the type of input given.
 
+### Show : `show`
+
+The `show` feature allows users to show the performance analysis of a student, a group or the cohort in an assessment.
+
+#### How the `show` command works
+
+1. The user specifies the student (by either name, ID or index), the group name or the assessment name.
+2. An `ScoreDescriptor` containing info of the group, the student and the score is created.
+3. The `ScoreDescriptor` is used to find the assessment and the student(s) as specified.
+   * If there is only one matched student, the assessment of the student will be updated with the new score.
+   * If there are multiple matched students, the update is not made successfully, and the student list is updated with all matched students.
+4. The performance analysis of the student, the group or the cohort in an assessment is displayed.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** In the case where the performance analysis of a student is requested by identity and there are more than one students matched because they share the same name, an error message will be displayed to the user. The user will then have to specify the student to be added using his/her student ID.
+</div>
+
+The following activity diagrams summarise what happens when a user executes the `show` command to show the performance analysis of a student, a group or the cohort in an assessment. In the case where the display is not presented successfully, an error message will be displayed with the reason.
+
+![ShowActivityDiagram](images/ShowActivityDiagram.png)
+![ShowStudentDiagram](images/ShowStudentActivityDiagram.png)
+![ShowStudentsActivityDiagram](images/ShowStudentsActivityDiagram.png)
+
+The following sequence diagram summarises what happens when the user inputs an `show` command together with a student specified by name.
+
+![ShowSequenceDiagram](images/ShowSequenceDiagram.png)
+
+<br>
+
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## **Documentation, Testing, Logging, Configuration, Dev-Ops**
 
-* [Documentation guide](Documentation.md)
-* [Testing guide](Testing.md)
-* [Logging guide](Logging.md)
-* [Configuration guide](Configuration.md)
-* [DevOps guide](DevOps.md)
+* [Documentation Guide](Documentation.md)
+* [Testing Guide](Testing.md)
+* [Logging Guide](Logging.md)
+* [Configuration Guide](Configuration.md)
+* [DevOps Guide](DevOps.md)
+
+<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -395,7 +457,6 @@ Others:
 | `*`  | Forgetful user | Have reminders about upcoming meetings | Avoid missing any important events |
 | `*`  | CS1101S Professor | Add TODO bug fixes accumulated throughout the semester | Fix them during CP3108 |
 
-
 ### Use cases
 
 (For all use cases below, the **System** is `Source Control` and the **Actor** is the `user`, unless specified otherwise)
@@ -461,6 +522,8 @@ Others:
 * **Student list**: The list of students displayed on the right panel of Source Control. Student list can be filtered to display selected students only.
 * **Flag**: Arguments flags are used to indicate different types of user inputs e.g. `-n` for student name, and `-g` for group. More about flags can be found [here](https://ay2122s1-cs2103t-w08-2.github.io/tp/UserGuide.html#glossary).
 
+<br>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -472,41 +535,114 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-### Launch and shutdown
+### Launch and Shutdown
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
 
    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+3. Shutdown
 
-### Deleting a student
+   1. Test case: `exit`<br>Expected: Source Control exits and shut down automatically. 
 
-1. Deleting a student while all students are being shown
 
-   1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+### Adding a group
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+1. Adding a group successfully.
 
-   1. Test case: `delete 0`<br>
-      Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
+   1. Prerequisites: Group should not already exist in database. Database contain a student with name `Hong Fai` and another student `A` with ID `E0123456`.
+   
+   2. Test case: `addgroup -g T01A`<br> Expected: Group `T01A` will be added to the database.
+   
+   3. Test case: `addgroup -g T02B -n Hong Fai -i E0123456`<br> Expected: Group `T02B` will be added to database with students `Hong Fai` and `A` in the group.
+   
+2. Adding a group with incorrect formats.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+   1. Test case: `addgroup`<br> Expected: No group is created. Error detail shown in the status message to inform user of the correct command format.
+   
+   2. Test case: `addgroup -g`<br> Expected: No group is created. Error detail shown in the status message to inform user that group name cannot be blank.
+   
+   3. Test case: `addgroup -g Tutorial@Wednesday`<br> Expected: No group is created. Error detail shown in the status message to inform user that group name must be alphanumeric.
 
-1. _{ more test cases …​ }_
+3. Adding a group that already exists in database.
 
-### Saving data
+   1. Prerequisite: Group specified already exists in database.
+   
+   2. Test case: `addgroup -g T01A`<br> Expected: The group will not be re-created. Error details shown in the status message to inform user group already exists.
+
+4. Adding a group with duplicated student instances.
+
+   1. Prerequisites: Database contain a student with name `Hong Fai` with the ID `E0123456`.
+   
+   2. Test case: `addgroup -g T01A -n Hong Fai -i E0123456`<br> Expected: The group will not be created. Error detail shown in the status message to inform user that the student `Hong Fai` has been specified more than once.
+
+5. Adding a group with non-existent students.
+
+   1. Prerequisites: Database does not contain a student with name `Hong Fai`.
+   
+   2. Test case: `addgroup -g T01A -n Hong Fai`<br> Expected: The group will not be created. Error detail shown in the status message to inform user that the student `Hong Fai` cannot be found in the database.
+
+
+### Deleting a Student
+
+1. Deleting a student while a list of all students are being shown.
+
+    1. Prerequisites: List all students using the `list` command. Some students are displayed in the list.
+
+    1. Test case: `delete 1`<br>
+       Expected: First student is deleted from the list. Details of the deleted student is shown in the status message. Timestamp in the status bar is updated.
+
+    1. Test case: `delete 0`<br>
+       Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
+
+    1. Other incorrect delete commands to try: `delete`, `delete x` (where x is an invalid number)<br>
+       Expected: Similar to previous.
+
+2. Deleting a student after searching.
+
+    1. Prerequisites: List selected students using the `search` command. Some students are displayed in the list.
+   
+    2. Test case: `delete 1`<br> Expected: First student displayed on the sorted list is deleted. Details of the deleted student is shown in the status message. Timestamp in the status bar is updated.
+   
+    3. Other incorrect delete commands to try: `delete`, `delete x` (where x is an invalid number)<br>
+       Expected: Similar to previous.
+
+### Adding an alias
+1. Adding an alias successfully.
+
+   1. Test case: `alias -c addstudent -as example`<br> Expected: A new alias `example` is added for `addstudent`. <br>`example -n Zhiying -i E1234567` will add student `Zhiying` to the database.
+   
+   2. Test case: `alias -c example -as example2`<br> Expected: A new alias `examples` is added for `addstudent` (the command `example` is mapped to).
+   
+   3. Test case: `alias -c addgroup -as example`<br> Expected: The alias `example` is mapped to `addgroup` and no longer represent `addgroup`. <br>`example -g T02A` will create a new group `T02A`.
+
+2. Deleting an alias successfully.
+
+   1. Prerequisites: An alias `example` exists. 
+   
+   2. Test case: `alias -c example -as example`<br> Expected: Removes the alias `example`. `example` will no longer be recognised as a command.
+
+3. Deleting an alias unsuccessfully.
+
+   1. Test case: `alias -c addstudent -as addstudent`<br> Expected: The alias `addstudent` will not be removed. 
+   Error detail shown in the status message to inform user that default command cannot be overwritten.<br>
+   <br>
+4. Adding an alias unsuccessfully.
+
+   1. Test case: `alias -c addgroup -as addstudent `<br> Expected: No alias will be created. Error detail shown in the status message to inform user that default command cannot be overwritten.
+   
+   2. Test case: `alias -c addstudent -as add student `<br> Expected: No alias will be created. Error detail shown in the status message to inform user that alias can only be one alphanumeric word.
+
+### Saving Data
 
 1. Dealing with missing/corrupted data files
 

@@ -9,6 +9,6 @@ public class Messages {
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX =
             "The student index is invalid. The number of students in the list is %1$d. ";
-    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d students listed!";
+    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$s listed!";
 
 }

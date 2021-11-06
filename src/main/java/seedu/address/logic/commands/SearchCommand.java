@@ -61,8 +61,10 @@ public class SearchCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredStudentList(predicate);
+        int numStudents = model.getFilteredStudentList().size();
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredStudentList().size()));
+                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW,
+                        numStudents + " student" + (numStudents == 1 ? "" : "s")));
     }
 
     @Override
