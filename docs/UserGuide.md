@@ -111,7 +111,7 @@ The features are categorised into the different categories as follows:
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Overview of the command format
+### Overview of the Command Format
 This section explains the command format used for TAB's commands.<br/>
 
 Commands are text that you can enter into TAB's command box to tell TAB which operation you would like to perform. Commands in TAB have several components and follow a general format as follows:<br/>
@@ -223,6 +223,8 @@ Executing any of the commands in this section will bring you to the students int
     <li>Fields that are empty will not be displayed.</li>
   </ul>
 </div>
+
+#### Student parameters
 
 <table id="student-param-table">
     <thead>
@@ -423,9 +425,7 @@ Format: `delete INDEX`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd student in TAB.
-
-* `find n/Betsy` followed by `ldelete 1 1` deletes the 1st lesson for the 1st student in the results
-  of the `find` command.
+* `find n/Betsy` followed by `ldelete 1 1` deletes the 1st lesson for the 1st student in the results of the `find` command.
 
 #### Listing all students: `list`
 
@@ -449,16 +449,16 @@ This section guides you on how to find or filter students of your choice in TAB.
 Finds all students whose fields match the given keyword(s), based on the specified find condition.
 You can find students by tags, student fields and lesson fields.
 
-Format: `find [cond/{all | any | none}] [t/TAG_KEYWORD]…​ [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS] [pp/PARENT_PHONE_KEYWORDS] [pe/PARENT_EMAIL_KEYWORDS] [sch/SCHOOL_KEYWORDS] [stream/ACAD_STREAM_KEYWORDS] [lvl/ACAD_LEVEL_KEYWORDS] [r/REMARK_KEYWORDS] [subject/SUBJECT_KEYWORDS] [date/START_DATE] [time/TIME_RANGE] [cancel/CANCELLED_DATE] [rates/LESSON_RATE_KEYWORDS] [hw/HOMEWORK_KEYWORDS]`
+Format: `find [cond/{all | any | none}] [t/TAG_KEYWORD]…​ [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS] [pp/PARENT_PHONE_KEYWORDS] [pe/PARENT_EMAIL_KEYWORDS] [sch/SCHOOL_KEYWORDS] [stream/ACAD_STREAM_KEYWORDS] [lvl/ACAD_LEVEL_KEYWORDS] [r/REMARK_KEYWORDS] [subject/SUBJECT_KEYWORDS] [date/START_DATE] [time/TIME_RANGE] [cancel/CANCELLED_DATE] [rates/LESSON_RATES_KEYWORDS] [hw/HOMEWORK_KEYWORDS]`
 
 * You must specify at least one field to search for, and provide at least one keyword.<br>
   e.g. `find cond/any` or `find n/` are invalid commands.
 
 ##### Search by tags
-* You can search by multiple tags. e.g. `t/paid t/new`
+* You can search by multiple tags. e.g. `t/paid t/new`.
 * One tag parameter can only have one keyword. e.g. `t/paid new` is invalid.
 * The search is case-insensitive. e.g. keyword `new` will match `NEW`.
-* Only whole words will be matched. e.g. keyword `paid` will not match `unpaid`
+* Only whole words will be matched. e.g. keyword `paid` will not match `unpaid`.
 
 Example:
 * `find t/unpaid t/New` will return all students with both of the tags `UNPAID` and `NEW`.
@@ -476,6 +476,7 @@ Example:
 
 ##### Search by lesson fields
 * Finds all students with at least one lesson that matches the lesson parameters.
+* The find behaviour of lesson fields are specified in the table below.
 
 <table id="find-param-table">
     <thead>
@@ -506,7 +507,7 @@ Example:
             <td>Start Date</td>
             <td>
               <ul>
-                <li>Accepts one keyword that must follow the Date format</li>
+                <li>Accepts one keyword that must follow the <a href="#lesson-date">Date</a> format</li>
                 <li>Finds students with lessons that fall on the specified date.</li>
               </ul>
             </td>
@@ -515,7 +516,7 @@ Example:
             <td>Cancelled Date</td>
             <td>
               <ul>
-                <li>Accepts one keyword that must follow the Date format</li>
+                <li>Accepts one keyword that must follow the <a href="#lesson-date">Date</a> format</li>
                 <li>Finds students with lessons that are cancelled on the specified date.</li>
               </ul>
             </td>
@@ -524,7 +525,7 @@ Example:
             <td>Time Range</td>
             <td>
               <ul>
-                <li>Accepts one keyword that must follow the Time Range format</li>
+                <li>Accepts one keyword that must follow the <a href="#lesson-time-range">Time Range</a> format</li>
                 <li>Finds students with lessons that overlaps with the time range, excluding the start and end time.<br>
                     e.g. <code>time/1200-1400</code> matches lesson with time <code>1300-1500</code>, but not <code>1400-1500</code></li>
               </ul>
@@ -532,6 +533,8 @@ Example:
         </tr>
     </tbody>
 </table>
+
+* In the future, we will allow search by lesson fees and end date.
 
 Example:
 * `find date/12 Oct 2021 time/1200-1400 subject/Math` will match a student with lesson on `12 OCT 2021`, at `1130-1230`, with the subject `Mathematics`.
@@ -593,6 +596,8 @@ A lesson can be categorised into 2 types:
 A lesson can be identified by the index number shown in the lesson list of the student. The lesson index specified for commands must be a valid index number shown in the lesson list of the student.
 </div>
 
+#### Lesson parameters
+
 <table id="lesson-param-table">
     <thead>
         <tr>
@@ -606,7 +611,7 @@ A lesson can be identified by the index number shown in the lesson list of the s
     <tbody>
         <tr>
             <td rowspan=4>Essential</td>
-            <td>Start Date</td>
+            <td id="lesson-date">Start Date</td>
             <td><code>date/</code></td>
             <td>
               <ul>
@@ -623,7 +628,7 @@ A lesson can be identified by the index number shown in the lesson list of the s
             <td><code>subject/Social studies</code></td>
         </tr>
         <tr>
-            <td>Time Range</td>
+            <td id="lesson-time-range">Time Range</td>
             <td><code>time/</code></td>
             <td><ul>
             <li>Formatted as <code>HHmm-HHmm</code></li>
@@ -673,7 +678,7 @@ A lesson can be identified by the index number shown in the lesson list of the s
     </tbody>
 </table>
 
-* Additional fields of a lesson aside from those stated in the table are used for recording cancelled dates of a lesson. More details can be found in [Editing a lesson](#editing-a-lesson--ledit).<br>
+* Additional fields of a lesson aside from those stated in the table are used for recording cancelled dates of a lesson. More details can be found in [Editing a lesson](#editing-a-lesson-ledit).<br>
 
 <div markdown="block" class="alert alert-info" id="monetary-fields">**:information_source: Monetary Fields:**<br>
 
@@ -719,20 +724,15 @@ Examples:
 
 Edits the specified lesson of the specified student in TAB with the indicated changes for specified fields.
 
-Additional fields to the ones in [Managing lessons](#managing-lessons) are listed below.
+
+Format: `ledit INDEX LESSON_INDEX [recurring/END_DATE] [date/START_DATE] [time/TIME_RANGE] [subject/SUBJECT] [rates/LESSON_RATES] [f/OUTSTANDING_FEES] [hw/HOMEWORK]… [cancel/CANCEL_DATE]… [uncancel/UNCANCEL_DATE]…​`
+
+Additional fields to the ones in [Lesson parameters](#lesson-parameters) are listed below.
 
 Field | Prefix | Constraints | Examples |
 ------------------|-------|-----------| --------|
-Cancelled Date |`cancel/`| Same constraints as other date fields.<br/> The date to be cancelled must be a valid lesson date and cannot be left blank.<br>e.g. If the start date of a recurring lesson is `1 Oct 2021`, you can cancel `8 Oct 2021` but not `2 Oct 2021`.|`cancel/20 jan 2022`|
-Uncancelled Date |`uncancel/` | Same constraints as other date fields.<br/>The date to be uncancelled must be a date that has already been cancelled and cannot be left blank.| `uncancel/20 jan 2022`|
-
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-
-If you change the start date of the lesson, the cancelled dates that become invalid will be removed.
-
-</div>
-
-Format: `ledit INDEX LESSON_INDEX [recurring/END_DATE] [date/START_DATE] [time/TIME_RANGE] [subject/SUBJECT] [rates/LESSON_RATES] [f/OUTSTANDING_FEES] [hw/HOMEWORK]… [cancel/CANCEL_DATE]… [uncancel/UNCANCEL_DATE]…​`
+Cancelled Date |`cancel/`| Follows the <a href="#lesson-date">Date</a> format.<br/> The date to be cancelled must be a valid lesson date, that has not already been cancelled, and cannot be left blank.<br>e.g. If the start date of a recurring lesson is `1 Oct 2021`, you can cancel `8 Oct 2021` but not `2 Oct 2021`.|`cancel/20 jan 2022`|
+Uncancelled Date |`uncancel/` | Follows the <a href="#lesson-date">Date</a> format.<br/>The date to be uncancelled must be a date that has already been cancelled and cannot be left blank.| `uncancel/20 jan 2022`|
 
 * Edits the lesson of specified `LESSON_INDEX` for the student at the specified `INDEX`.
 
@@ -740,6 +740,12 @@ Format: `ledit INDEX LESSON_INDEX [recurring/END_DATE] [date/START_DATE] [time/T
   e.g. `ledit 2 1 hw/As2` will erase the lesson's original pieces of homework and replace it with the new homework `As2`.
 
 * You cannot change the lesson's type (i.e. recurring and makeup).
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+
+If you change the start date of the lesson, the cancelled dates that become invalid will be removed.
+
+</div>
 
 Examples:
 * `ledit 1 1 time/1100-1200` Edits the time range of the 1st lesson of the 1st student to be `1100-1200`.
@@ -826,7 +832,7 @@ This section guides you on how to use the commands for managing the lesson fees 
 1. [Adding a lesson's outstanding fees: `ladd`](#adding-a-lessons-outstanding-fees-ladd)
 2. [Editing a Lesson's outstanding fees: `ledit`](#editing-a-lessons-outstanding-fees-ledit)
 3. [Paying a lesson's outstanding fees: `paid`](#paying-a-lessons-outstanding-fees-paid)
-4. [Behaviours of the Fees Calculator](#behaviours-of-the-fees-calculator)
+4. [Behaviour of the Fees Calculator](#behaviour-of-the-fees-calculator)
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Note:**<br>
@@ -848,12 +854,13 @@ Format: `ladd 1 COMPULSORY_FIELDS f/OUTSTANDING_AMOUNT`
 Examples:
 
 * `ladd 1 recurring/23 Nov 2022 date/30 jan 2022 time/0900-1100 subject/Math rates/37.50` adds the recurring lesson with the specified details and outstanding fees is assumed to be `$0.00`.
+
 * `ladd 1 recurring/ date/30 jan 2022 time/0900-1100 subject/Math rates/37.50 f/250`
   adds the recurring lesson with an outstanding fee of `$250.00`.
 
 #### Editing a lesson's outstanding fees: `ledit`
 
-Edits the outstanding fees to specific lesson. Uses the Lesson Edit command as seen in [Editing a lesson](#editing-a-lesson--ledit).
+Edits the outstanding fees to specific lesson. Uses the Lesson Edit command as seen in [Editing a lesson](#editing-a-lesson-ledit).
 
 In the event that you disagree with the outcomes of the Fees Calculator, you can edit outstanding fees using `ledit` command.
 Refer to [Behaviour of the Fees Calculator](#behaviour-of-the-fees-calculator) for cases the Fees Calculator will not account for.
