@@ -18,7 +18,7 @@ import tutoraid.model.student.Student;
 
 
 /**
- * Adds a student to a lesson in TutorAid.
+ * Adds students to lessons in TutorAid.
  */
 public class AddStudentToLessonCommand extends AddCommand {
 
@@ -54,15 +54,17 @@ public class AddStudentToLessonCommand extends AddCommand {
         this.lessonIndexes = lessonIndexes;
     }
 
-    public String executeSingle(Model model, Index studentIndex, Index lessonIndex) throws CommandException {
+    /**
+     * Adds the link between a single Student and Lesson.
+     *
+     * @param model The Model object containing all the data
+     * @param studentIndex The index of the Student to be linked to the Lesson
+     * @param lessonIndex The index of the Lesson to be linked to the Student
+     * @return A string containing feedback or warnings
+     */
+    public String executeSingle(Model model, Index studentIndex, Index lessonIndex) {
         List<Student> lastShownStudentList = model.getFilteredStudentList();
         List<Lesson> lastShownLessonList = model.getFilteredLessonList();
-        if (studentIndex.getZeroBased() >= lastShownStudentList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
-        }
-        if (lessonIndex.getZeroBased() >= lastShownLessonList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
-        }
         Student student = lastShownStudentList.get(studentIndex.getZeroBased());
         Lesson lesson = lastShownLessonList.get(lessonIndex.getZeroBased());
         if (student.hasLesson(lesson)) {

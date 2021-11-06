@@ -18,7 +18,7 @@ import tutoraid.model.student.Student;
 
 
 /**
- * Deletes a student from a lesson in TutorAid.
+ * Deletes students from lessons in TutorAid.
  */
 public class DeleteStudentFromLessonCommand extends DeleteCommand {
 
@@ -53,15 +53,17 @@ public class DeleteStudentFromLessonCommand extends DeleteCommand {
         this.lessonIndexes = lessonIndexes;
     }
 
+    /**
+     * Removes the link between a single Student and Lesson.
+     *
+     * @param model The Model object containing all the data
+     * @param studentIndex The index of the Student to be unlinked from the Lesson
+     * @param lessonIndex The index of the Lesson to be unlinked from the Student
+     * @return A string containing feedback or warnings
+     */
     public String executeSingle(Model model, Index studentIndex, Index lessonIndex) throws CommandException {
         List<Student> lastShownStudentList = model.getFilteredStudentList();
         List<Lesson> lastShownLessonList = model.getFilteredLessonList();
-        if (studentIndex.getZeroBased() >= lastShownStudentList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
-        }
-        if (lessonIndex.getZeroBased() >= lastShownLessonList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
-        }
         Student student = lastShownStudentList.get(studentIndex.getZeroBased());
         Lesson lesson = lastShownLessonList.get(lessonIndex.getZeroBased());
         if (!student.hasLesson(lesson)) {
