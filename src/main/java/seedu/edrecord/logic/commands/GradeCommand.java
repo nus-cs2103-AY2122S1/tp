@@ -47,7 +47,6 @@ public class GradeCommand extends Command {
             + PREFIX_SCORE + "73 ";
 
     public static final String MESSAGE_SUCCESS = "Graded student: %s \nfor assignment: %s \nwith grade: %s";
-    public static final String MESSAGE_NO_SUCH_ASSIGNMENT = "There is no assignment with this name";
     public static final String MESSAGE_SCORE_GREATER_THAN_MAX = "Student's score is greater than the "
             + "maximum score for this assignment";
     public static final String MESSAGE_STATUS_SCORE_MISMATCH = "Assignment has not been graded and should not "

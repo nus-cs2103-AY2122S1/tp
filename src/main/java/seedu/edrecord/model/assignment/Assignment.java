@@ -2,6 +2,8 @@ package seedu.edrecord.model.assignment;
 
 import static seedu.edrecord.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Objects;
+
 import seedu.edrecord.model.name.Name;
 
 /**
@@ -76,12 +78,15 @@ public class Assignment {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Assignment // instanceof handles nulls
-                && id.equals(((Assignment) other).id)); // state check
+                && name.equals(((Assignment) other).name) // state check
+                && weightage.equals(((Assignment) other).weightage)
+                && maxScore.equals(((Assignment) other).maxScore)
+                && id.equals(((Assignment) other).id));
     }
 
     @Override
     public int hashCode() {
-        return id.hashCode();
+        return Objects.hash(name, weightage, maxScore, id);
     }
 
 }
