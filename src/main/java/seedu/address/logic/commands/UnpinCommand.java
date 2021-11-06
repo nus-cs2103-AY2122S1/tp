@@ -19,14 +19,14 @@ import seedu.address.model.person.Pin;
 import seedu.address.model.tag.Tag;
 
 /**
- * Unpins a person identified using it's displayed index from the address book.
+ * Unpins a contact identified using it's displayed index from the address book.
  */
 public class UnpinCommand extends Command {
 
     public static final String COMMAND_WORD = "unpin";
 
-    public static final String COMMAND_DESCRIPTION = "Unpins the person identified by the index number "
-            + "used in the displayed person list.\n";
+    public static final String COMMAND_DESCRIPTION = "Unpins the contact identified by the index number "
+            + "used in the displayed contact list.\n";
 
     public static final String COMMAND_EXAMPLE =
             "Parameters: INDEX (must be a positive integer)\n"
@@ -34,8 +34,8 @@ public class UnpinCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": " + COMMAND_DESCRIPTION + COMMAND_EXAMPLE;
 
-    public static final String MESSAGE_UNPINNED_PERSON_SUCCESS = "Unpinned Person: %1$s";
-    public static final String MESSAGE_PERSON_NOT_PINNED_FAILURE = "Person is not pinned!";
+    public static final String MESSAGE_UNPINNED_PERSON_SUCCESS = "Unpinned contact: %1$s";
+    public static final String MESSAGE_PERSON_NOT_PINNED_FAILURE = "Contact is not pinned!";
 
     private final Index targetIndex;
 

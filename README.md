@@ -7,7 +7,7 @@ CONNECTIONS is an address book application with a text based UI built for univer
 any combination of the following traits:
   * Forgetful
   * Loves celebrating birthdays
-  * Frequently contacts a few people
+  * Frequently contacts a few contacts
   * Very sociable with multiple friend groups
   * Uses application with a smooth learning curve
 
