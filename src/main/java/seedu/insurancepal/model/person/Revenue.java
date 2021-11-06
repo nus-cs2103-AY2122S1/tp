@@ -10,8 +10,8 @@ import seedu.insurancepal.commons.core.Money;
  */
 public class Revenue {
 
-    public static final String MESSAGE_CONSTRAINTS = "Revenue can be any number with up to 2 decimal places "
-            + "but it should not be negative";
+    public static final String MESSAGE_CONSTRAINTS = "Revenue can be any positive number with up to 2 decimal places "
+            + "that is not more than 19,999,998";
 
     public final Money value;
 
@@ -30,6 +30,13 @@ public class Revenue {
      */
     public boolean isValidResultingRevenue() {
         return this.value.getInDollars() >= 0;
+    }
+
+    /**
+     * Returns true if the resulting Revenue value is Integer.MAX_VALUE.
+     */
+    public boolean isMaxRevenue() {
+        return this.value.getInDollars() >= 20000000;
     }
 
     /**
@@ -67,7 +74,7 @@ public class Revenue {
      * @return A new revenue object with its value the result of the 2 added revenues.
      */
     public Revenue addRevenue(Revenue revenueToBeAdded) {
-        int updatedValue = this.value.getCents() + revenueToBeAdded.value.getCents();
+        long updatedValue = this.value.getCents() + revenueToBeAdded.value.getCents();
         float updatedValueInDollars = updatedValue / 100f;
         Revenue revenue = new Revenue(new Money(updatedValueInDollars));
         return revenue;
