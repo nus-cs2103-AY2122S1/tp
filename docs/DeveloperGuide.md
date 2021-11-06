@@ -350,19 +350,23 @@ should not exceed the destroy marker X. This is a known limitation of PlantUML.<
 
 #### Design considerations:
 
-**Aspect 1: Finding by employment type:**
+**Aspect: Finding by each prefix:**
 
-**Aspect 2: Finding by years of experience:**
-
-**Aspect 3: Finding by expected salary:**
-
-**Aspect 4: Finding by level of education:**
-
-**Aspect 5: Finding by role:**
-
-**Aspect 6: Finding by interview:**
-
-**Aspect 7: Finding by notes:**
+* **Alternative 1 (current choice):** Implement different finding conditions for different prefixes. 
+  * For example: 
+    * ***Role***: An applicant can be matched by `role` if all parameters after `r/` are present in his `role`. 
+    * ***Employment*** Type:  An applicant can be matched by `employment type` if his `employment type` starts with any of the 
+    `employment type` parameters and the parameter matches with an existing stored `employment type`.
+    * ***Years of Experience***: An applicant can be matched by `years of experience` if he has a `years of experience` not lesser than the `year of experience` parameter.
+    * For detailed explanations of find parameters of each prefix, please visit the section of our [User Guide - Find Parameters](https://ay2122s1-cs2103t-f11-2.github.io/tp/UserGuide.html#find-parameters).
+  * Pros: 
+    Conditions to check for a match in parameters are differentiated for each prefix to allow better usability of the `find` command.
+    For example, it might be more intuitive to search for a specific expected salary within a range, rather than the exact number.
+  * Cons: 
+    May be hard for users to remember the specifications.
+* **Alternative 2 :** Use the same finding conditions for different prefixes.
+  * Pros: Users do not need to remember the differences. Easier to use and not likely to cause confusions.
+  * Cons: If users could not remember the stored data, they might want to search vaguely.
 
 
 ### Filter interview feature
