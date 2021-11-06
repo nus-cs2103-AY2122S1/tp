@@ -19,7 +19,7 @@ public class TagTest {
 
     @Test
     public void constructor_longTagName_throwsIllegalArgumentException() {
-        String invalidTagName = "qwertyuiopasdfghjkl";
+        String invalidTagName = "qwertyuiopasdfghjkl1234567890";
         assertThrows(IllegalArgumentException.class, () -> new Tag(invalidTagName));
     }
 
