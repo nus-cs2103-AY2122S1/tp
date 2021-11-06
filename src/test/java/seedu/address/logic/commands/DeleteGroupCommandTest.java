@@ -33,7 +33,7 @@ class DeleteGroupCommandTest {
 
         CommandResult commandResult = new DeleteGroupCommand(validGroup).execute(modelStub);
 
-        assertEquals(String.format(DeleteGroupCommand.MESSAGE_DELETE_CLASS_SUCCESS, validGroup),
+        assertEquals(String.format(DeleteGroupCommand.MESSAGE_DELETE_GROUP_SUCCESS, validGroup),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(), modelStub.tutorialGroupsResult);
     }

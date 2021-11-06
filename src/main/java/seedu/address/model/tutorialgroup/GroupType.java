@@ -4,6 +4,9 @@ import static java.lang.Integer.parseInt;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a TutorialGroup's type in the ClassMATE.
+ */
 public class GroupType implements Comparable<GroupType> {
 
     public static final String MESSAGE_CONSTRAINTS = "GroupType can only either be OP1 or OP2";
@@ -22,7 +25,7 @@ public class GroupType implements Comparable<GroupType> {
     }
 
     /**
-     * Returns true if a given string is a valid name.
+     * Returns true if a given string is a valid groupType.
      */
     public static boolean isValidGroupType(String test) {
         return test.matches(VALIDATION_REGEX);
@@ -31,12 +34,11 @@ public class GroupType implements Comparable<GroupType> {
     /**
      * Gets the group type in terms of its number, 1 or 2.
      *
-     * @param groupType The type of the group.
      * @return The group type in terms of its number.
      */
-    public static Integer parseGroupType(String groupType) {
-        assert groupType.length() == 3;
-        return parseInt(groupType.substring(2));
+    public Integer parseGroupType() {
+        assert value.length() == 3;
+        return parseInt(value.substring(2));
     }
 
     @Override
@@ -58,7 +60,7 @@ public class GroupType implements Comparable<GroupType> {
 
     @Override
     public int compareTo(GroupType groupType) {
-        return parseGroupType(this.value).compareTo(parseGroupType(groupType.value));
+        return parseGroupType().compareTo(groupType.parseGroupType());
     }
 
 }

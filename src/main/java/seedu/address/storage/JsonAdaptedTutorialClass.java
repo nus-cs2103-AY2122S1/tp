@@ -68,9 +68,9 @@ class JsonAdaptedTutorialClass {
      * @throws IllegalValueException if there were any data constraints violated in the adapted student.
      */
     public TutorialClass toModelType() throws IllegalValueException {
-        final List<TutorialGroup> tutorialGroupsModel = new ArrayList<>();
+        final List<TutorialGroup> modelTutorialGroups = new ArrayList<>();
         for (JsonAdaptedTutorialGroup tutorialGroup : tutorialGroups) {
-            tutorialGroupsModel.add(tutorialGroup.toModelType());
+            modelTutorialGroups.add(tutorialGroup.toModelType());
         }
 
         final List<Tag> tutorialClassTags = new ArrayList<>();
@@ -81,8 +81,8 @@ class JsonAdaptedTutorialClass {
         if (classCode == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, String.class.getSimpleName()));
         }
-        if (!Tag.isValidTagName(classCode)) {
-            throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
+        if (!ClassCode.isValidClassCode(classCode)) {
+            throw new IllegalValueException(ClassCode.MESSAGE_CONSTRAINTS);
         }
         final ClassCode modelClassCode = new ClassCode(classCode);
 
@@ -97,7 +97,7 @@ class JsonAdaptedTutorialClass {
         final Schedule modelSchedule = new Schedule(schedule);
 
         final Set<Tag> modelTags = new HashSet<>(tutorialClassTags);
-        return new TutorialClass(modelClassCode, modelSchedule, tutorialGroupsModel, modelTags);
+        return new TutorialClass(modelClassCode, modelSchedule, modelTutorialGroups, modelTags);
     }
 
 }

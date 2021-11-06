@@ -490,7 +490,7 @@ Only `OP1` and `OP2` are accepted as Group Types.
 
 Example:
 * `liststu c/G06`shows that Betsy is a student in class G06 with Index 1.
-  `deletesg 1 g/A c/G06 type/OP1` then removes Betsy from OP1 Group A in class G06
+  `deletesg 1 gn/1 c/G06 type/OP1` then removes Betsy from OP1 Group 1 in class G06
 
 
 ### Exiting the program : `exit`

@@ -14,6 +14,9 @@ import seedu.address.model.tutorialgroup.GroupNumber;
 import seedu.address.model.tutorialgroup.GroupType;
 import seedu.address.model.tutorialgroup.TutorialGroup;
 
+/**
+ * Parses input arguments and creates a new AddGroupCommand object
+ */
 public class AddGroupCommandParser implements Parser<AddGroupCommand> {
 
     /**

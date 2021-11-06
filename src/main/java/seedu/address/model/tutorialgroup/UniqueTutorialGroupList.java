@@ -1,6 +1,5 @@
 package seedu.address.model.tutorialgroup;
 
-
 import static java.util.Objects.requireNonNull;
 
 import java.util.Comparator;
@@ -11,6 +10,18 @@ import javafx.collections.ObservableList;
 import seedu.address.model.tutorialgroup.exceptions.DuplicateTutorialGroupException;
 import seedu.address.model.tutorialgroup.exceptions.TutorialGroupNotFoundException;
 
+/**
+ * A list of tutorial groups that enforces uniqueness between its elements and does not allow nulls.
+ * A tutorial group is considered unique by comparing using {@code TutorialGroup#isSameTutorialGroup(TutorialGroup)}.
+ * As such, adding of tutorial groups uses TutorialGroup#isSameTutorialGroup(TutorialGroup) for equality to ensure that
+ * the tutorial group being added is unique in terms of identity in the UniqueTutorialGroupList.
+ * The removal of a tutorial group also uses TutorialGroup#isSameTutorialGroup(TutorialGroup) to ensure that the
+ * tutorial group with all fields identical is removed.
+ *
+ * Supports a minimal set of list operations.
+ *
+ * @see TutorialGroup#isSameTutorialGroup(TutorialGroup)
+ */
 public class UniqueTutorialGroupList implements Iterable<TutorialGroup> {
 
     private final ObservableList<TutorialGroup> internalList = FXCollections.observableArrayList();
@@ -26,8 +37,8 @@ public class UniqueTutorialGroupList implements Iterable<TutorialGroup> {
     }
 
     /**
-     * Adds a tutorial class to the list.
-     * The tutorial class must not already exist in the list.
+     * Adds a tutorial group to the list.
+     * The tutorial group must not already exist in the list.
      */
     public void add(TutorialGroup toAdd) {
         requireNonNull(toAdd);
@@ -38,7 +49,7 @@ public class UniqueTutorialGroupList implements Iterable<TutorialGroup> {
     }
 
     /**
-     * Sorts the tutorial class list.
+     * Sorts the tutorial group list.
      * Sorts by ClassCode, followed by GroupType and then GroupName.
      */
     public void sort() {
@@ -50,8 +61,8 @@ public class UniqueTutorialGroupList implements Iterable<TutorialGroup> {
     }
 
     /**
-     * Removes the equivalent tutorial class from the list.
-     * The tutorial class must exist in the list.
+     * Removes the equivalent tutorial group from the list.
+     * The tutorial group must exist in the list.
      */
     public void remove(TutorialGroup toRemove) {
         requireNonNull(toRemove);

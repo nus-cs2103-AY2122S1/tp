@@ -149,9 +149,9 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String GroupName} into an {@code GroupName}.
+     * Parses a {@code String groupNumber} into an {@code GroupNumber}.
      * Leading and trailing whitespaces will be trimmed.
-     * @throws ParseException if the given {@code schedule} is invalid.
+     * @throws ParseException if the given {@code groupNumber} is invalid.
      */
     public static GroupNumber parseGroupNumber(String groupNumber) throws ParseException {
         requireNonNull(groupNumber);
@@ -163,9 +163,10 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String GroupName} into an {@code GroupName}.
+     * Parses a {@code String groupType} into an {@code GrougType}.
      * Leading and trailing whitespaces will be trimmed.
-     * @throws ParseException if the given {@code schedule} is invalid.
+     * Letters are set to uppercase.
+     * @throws ParseException if the given {@code groupType} is invalid.
      */
     public static GroupType parseGroupType(String groupType) throws ParseException {
         requireNonNull(groupType);
