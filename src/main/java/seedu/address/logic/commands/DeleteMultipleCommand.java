@@ -13,18 +13,18 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Deletes multiple people identified using the displayed index range from the address book.
+ * Deletes multiple contacts identified using the displayed index range from the address book.
  */
 public class DeleteMultipleCommand extends Command {
     public static final String COMMAND_WORD = "deletem";
     public static final String INDEX_SPLITTER = "-";
-    public static final String COMMAND_DESCRIPTION = "Deletes a range of people identified "
+    public static final String COMMAND_DESCRIPTION = "Deletes a range of contacts identified "
             + "by the index numbers ( Both inclusive ) "
             + "in the displayed person list.\n";
     public static final String COMMAND_EXAMPLE = "Parameters: START_INDEX - END_INDEX \n"
             + "Example: " + COMMAND_WORD + " 8 " + INDEX_SPLITTER + " 14";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": " + COMMAND_DESCRIPTION + COMMAND_EXAMPLE;
-    public static final String MESSAGE_DELETE_MULTIPLE_PERSON_SUCCESS = "Deleted Persons: ";
+    public static final String MESSAGE_DELETE_MULTIPLE_PERSON_SUCCESS = "Deleted contacts: ";
     public static final String MESSAGE_CONSTRAINTS = "START_INDEX cannot be larger than END_INDEX \n";
     public static final String MESSAGE_INVALID_INDEX = Index.MESSAGE_INVALID_INDEX;
 
@@ -32,10 +32,10 @@ public class DeleteMultipleCommand extends Command {
     private final Index endIndex;
 
     /**
-     * Deletes multiple people between the range of start index and end index both inclusive.
+     * Deletes multiple contacts between the range of start index and end index both inclusive.
      *
-     * @param startIndex displayed index of first person to be deleted.
-     * @param endIndex displayed index of last person to be deleted.
+     * @param startIndex displayed index of first contact to be deleted.
+     * @param endIndex displayed index of last contact to be deleted.
      */
     public DeleteMultipleCommand(Index startIndex, Index endIndex) {
         requireAllNonNull(startIndex, endIndex);
