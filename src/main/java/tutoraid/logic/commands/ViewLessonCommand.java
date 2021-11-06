@@ -20,7 +20,7 @@ public class ViewLessonCommand extends ViewCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + COMMAND_FLAG
             + ": Shows the lesson identified by the index number used in the displayed lesson list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " " + COMMAND_FLAG + " 1";
+            + "\nExample: " + COMMAND_WORD + " " + COMMAND_FLAG + " 1";
 
     public static final String MESSAGE_VIEW_LESSON_SUCCESS = "Viewing requested lesson";
 

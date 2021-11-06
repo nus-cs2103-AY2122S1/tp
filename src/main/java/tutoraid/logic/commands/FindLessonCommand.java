@@ -19,7 +19,7 @@ public class FindLessonCommand extends FindCommand {
             + ": Finds all lessons whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + FindCommand.COMMAND_WORD + COMMAND_FLAG + " alice bob charlie";
+            + "\nExample: " + COMMAND_WORD + COMMAND_FLAG + " alice bob charlie";
 
     private final LessonNameContainsSubstringsPredicate predicate;
 

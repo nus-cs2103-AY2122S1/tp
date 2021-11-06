@@ -20,7 +20,7 @@ public class DeleteLessonCommand extends DeleteCommand {
     public static final String MESSAGE_USAGE = COMMAND_FLAG
             + ": Deletes the lesson identified by the index number used in the displayed lesson list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_FLAG + " 1";
+            + "\nExample: " + COMMAND_WORD + " " + COMMAND_FLAG + " 1";
 
     public static final String MESSAGE_DELETE_LESSON_SUCCESS = "Deleted Lesson: %1$s";
 

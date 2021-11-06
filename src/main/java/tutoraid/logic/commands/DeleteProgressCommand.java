@@ -22,7 +22,7 @@ public class DeleteProgressCommand extends DeleteCommand {
     public static final String MESSAGE_USAGE = COMMAND_FLAG + ": Deletes a progress from a student in TutorAid "
             + "identified by the index number used in the last student listing.\n"
             + "Parameters: STUDENT_INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_FLAG + " 1";
+            + "\nExample: " + COMMAND_WORD + " " + COMMAND_FLAG + " 1";
 
     public static final String MESSAGE_SUCCESS = "Successfully deleted progress: %1$s from %2$s. "
             + "Showing %2$s and his/her lessons.";

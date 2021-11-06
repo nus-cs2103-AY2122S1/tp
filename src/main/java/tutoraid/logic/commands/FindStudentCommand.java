@@ -18,7 +18,7 @@ public class FindStudentCommand extends FindCommand {
             + ": Finds all students whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + FindCommand.COMMAND_WORD + COMMAND_FLAG + " alice bob charlie";
+            + "\nExample: " + FindCommand.COMMAND_WORD + COMMAND_FLAG + " alice bob charlie";
 
     private final NameContainsSubstringsPredicate predicate;
 

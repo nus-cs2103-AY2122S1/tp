@@ -36,8 +36,8 @@ public class EditStudentCommand extends EditCommand {
             + PREFIX_STUDENT_PHONE + "STUDENT PHONE "
             + PREFIX_PARENT_NAME + "PARENT NAME "
             + PREFIX_PARENT_PHONE + "PARENT PHONE "
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_STUDENT_NAME + "John Doe "
+            + "\n\nExample: " + COMMAND_WORD + " "
+            + COMMAND_FLAG + " 1 " + PREFIX_STUDENT_NAME + "John Doe "
             + PREFIX_STUDENT_PHONE + "81234567 "
             + PREFIX_PARENT_NAME + "Mrs Doe "
             + PREFIX_PARENT_PHONE + "91234567 ";

@@ -34,7 +34,7 @@ public class EditLessonCommand extends EditCommand {
             + PREFIX_LESSON_PRICE + "LESSON PRICE (non-negative number with 0 or 2 decimal places) "
             + PREFIX_LESSON_TIMING + "LESSON TIMING (any format) "
             + PREFIX_LESSON_CAPACITY + "LESSON CAPACITY (positive integer) "
-            + "Example: " + COMMAND_WORD + " "
+            + "\n\nExample: " + COMMAND_WORD + " " + COMMAND_FLAG + " 1 "
             + PREFIX_LESSON_NAME + "Math 1 "
             + PREFIX_LESSON_PRICE + "19.90 "
             + PREFIX_LESSON_TIMING + "10.00 AM to 12.00 PM every Monday "

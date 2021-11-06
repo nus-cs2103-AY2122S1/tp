@@ -24,7 +24,7 @@ public class AddProgressCommand extends AddCommand {
             + "Existing progress will be overwritten by the input.\n"
             + "Parameters: STUDENT_INDEX (must be a positive integer) "
             + "PROGRESS\n"
-            + "Example: " + COMMAND_FLAG + " 1 "
+            + "\nExample: " + COMMAND_FLAG + " 1 "
             + "Finishes Prelims.";
 
     public static final String MESSAGE_SUCCESS = "Successfully added progress: %1$s for %2$s. "

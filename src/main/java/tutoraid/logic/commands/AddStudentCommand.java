@@ -23,7 +23,7 @@ public class AddStudentCommand extends AddCommand {
             + PREFIX_STUDENT_PHONE + "STUDENT PHONE "
             + PREFIX_PARENT_NAME + "PARENT NAME "
             + PREFIX_PARENT_PHONE + "PARENT PHONE "
-            + "Example: " + COMMAND_FLAG + " "
+            + "\n\nExample: " + COMMAND_WORD + " " + COMMAND_FLAG + " "
             + PREFIX_STUDENT_NAME + "John Doe "
             + PREFIX_STUDENT_PHONE + "81234567 "
             + PREFIX_PARENT_NAME + "Mrs Doe "

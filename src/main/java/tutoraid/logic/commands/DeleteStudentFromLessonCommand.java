@@ -28,9 +28,9 @@ public class DeleteStudentFromLessonCommand extends DeleteCommand {
             + "Parameters: "
             + PREFIX_STUDENT + "STUDENT_INDEX (must be a positive integer) "
             + PREFIX_LESSON + "LESSON_INDEX (must be a positive integer) "
-            + "Example: " + COMMAND_FLAG
-            + " s/1"
-            + " l/2";
+            + "\n\nExample: " + COMMAND_FLAG
+            + PREFIX_STUDENT + "1 "
+            + PREFIX_LESSON + "2";
 
     public static final String MESSAGE_SUCCESS = "Removed student:\n%1$s\nFrom this lesson:\n%2$s";
 

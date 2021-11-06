@@ -23,7 +23,7 @@ public class AddLessonCommand extends AddCommand {
             + PREFIX_LESSON_CAPACITY + "LESSON CAPACITY "
             + PREFIX_LESSON_PRICE + "LESSON PRICE "
             + PREFIX_LESSON_TIMING + "LESSON TIMING "
-            + "Example: " + COMMAND_FLAG + " "
+            + "\n\nExample: " + COMMAND_WORD + " " + COMMAND_FLAG + " "
             + PREFIX_LESSON_NAME + "Maths 1 "
             + PREFIX_LESSON_CAPACITY + "50 "
             + PREFIX_LESSON_PRICE + "100 "
