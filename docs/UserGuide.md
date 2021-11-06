@@ -130,9 +130,8 @@ Scroll down to the bottom and click on `recruitIn.jar`.
     </div>
 
    1. Use **`clear`** command to clear the existing sample data.<br><br>
-   2. Suppose you have an applicant named `John Doe` that you have scouted from online sources and want to add him to
-      your list of applicants. `John Doe` has kindly provided you his phone number, `98765432` and email `JohnDoe@gmail.com`. He has also
-      stated that he is applying for the role of a `Teacher` and plans to work `Full time` with an expected salary of `3000`. His highest level of
+   2. Suppose you have an applicant named `John Doe` and you want to add him to
+      your list of applicants. `John Doe` has kindly provided you his phone number, `98765432` and email `JohnDoe@gmail.com`. He is applying for the role of a `Teacher` and plans to work `Full time` with an expected salary of `3000`. His highest level of
       education is `Bachelors` and has `4` years of experience as a teacher. <br><br>
       Type in **`add`**`n/John Doe p/98765432 e/JohnDoe@gmail.com r/Teacher et/Full time s/3000 l/Bachelors y/4` to add `John Doe` to your
       list of applicants.<br><br>
