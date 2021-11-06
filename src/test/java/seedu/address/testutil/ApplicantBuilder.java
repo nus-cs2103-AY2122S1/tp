@@ -2,9 +2,11 @@ package seedu.address.testutil;
 
 import seedu.address.model.applicant.Address;
 import seedu.address.model.applicant.Applicant;
+import seedu.address.model.applicant.ApplicantParticulars;
 import seedu.address.model.applicant.Email;
 import seedu.address.model.applicant.Name;
 import seedu.address.model.applicant.Phone;
+import seedu.address.model.applicant.ProfileUrl;
 import seedu.address.model.position.Position;
 
 
@@ -13,12 +15,16 @@ public class ApplicantBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final Position DEFAULT_POSITION = new PositionBuilder().build();
+    public static final String DEFAULT_URL = "https://www.github.com/SAMPLE";
+
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private Position position;
+    private ProfileUrl gitHubUrl;
 
     /**
      * Creates a {@code ApplicantBuilder} with the default details.
@@ -28,7 +34,8 @@ public class ApplicantBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        position = new PositionBuilder().build();
+        position = DEFAULT_POSITION;
+        gitHubUrl = new ProfileUrl(DEFAULT_URL);
     }
 
     /**
@@ -40,6 +47,7 @@ public class ApplicantBuilder {
         email = applicantToCopy.getEmail();
         address = applicantToCopy.getAddress();
         position = applicantToCopy.getApplication().getPosition();
+        gitHubUrl = applicantToCopy.getGitHubUrl();
     }
 
     /**
@@ -82,7 +90,11 @@ public class ApplicantBuilder {
         return this;
     }
 
+    public ApplicantParticulars getParticulars() {
+        return new ApplicantParticulars(name, phone, email, address, position.getTitle(), gitHubUrl);
+    }
+
     public Applicant build() {
-        return new Applicant(name, phone, email, address, position);
+        return new Applicant(name, phone, email, address, position, gitHubUrl);
     }
 }
