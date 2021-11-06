@@ -465,7 +465,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Listing persons
 1. List all persons
-    
+
     1. Test case: `person /list`<br>
        Expected: All persons are listed. The UI is updated with all persons.
 
@@ -484,10 +484,10 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `person 1 /list`<br>
        Expected: All persons in first group is listed. The UI is updated with all persons in the first group.
-       
+
     1. Test case: `person 0 /list`<br>
     Expected: Persons not listed. Error details shown in the status message.
-              
+
     1. Other incorrect delete commands to try: `person /lis`, `...`
        (where x is larger than the list size)<br>
        Expected: Similar to previous.
@@ -495,7 +495,7 @@ testers are expected to do more *exploratory* testing.
 ### Listing subgroups
 1. List all subgroups
     1. Similar to List all persons except `group (INDEX) /list` is used and groups are listed using `group /list` command.
-    
+
 ### Listing persons in a subgroup
 1. List all persons in a subgroup
     1. Similar to Listing persons in a group except that subgroups are listed.
@@ -512,7 +512,7 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `person 0 /delete`<br>
        Expected: No person is deleted. Error details shown in the status message.
 
-    1. Other incorrect delete commands to try: `person /delete`, `person x /delete`, `...` 
+    1. Other incorrect delete commands to try: `person /delete`, `person x /delete`, `...`
         (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
@@ -521,7 +521,7 @@ testers are expected to do more *exploratory* testing.
 1. Adding a group
     1. Test case: `group Test /create`<br>
        Expected: Group is created. If you switch to group list, you will be able to see the new group created.
-       
+
     1. Test case: `group 123 /create`<br>
        Expected: No group is created. Error details shown in the status message.
 
@@ -552,10 +552,10 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `person 1 /add g:Orbital`<br>
        Expected: Person is added to the group. Person is updated with a new group in the UI.
-       
+
     1. Test case: `person 0 /add g:Orbital`<br>
        Expected: Nothing happened. Error details shown in the status message.
-    
+
     1. Other incorrect delete commands to try: `person /add`, `person 1 /add g:NonExistent`, `...`
        (where x is larger than the list size)<br>
        Expected: Similar to previous.
@@ -591,9 +591,9 @@ testers are expected to do more *exploratory* testing.
 
 1. Prerequisites: List all groups using the `group /list` command. Multiple groups in the list. First group contains subgroup Artemis.
     1. Test case: `group 1 /delete n:Artemis`<br>
-       Expected: Confirmation window pops up. Upon confirmation, Artemis is removed from the first group. 
+       Expected: Confirmation window pops up. Upon confirmation, Artemis is removed from the first group.
        Group is updated with a subgroup removed in the UI.
-       
+
     1. Test case: `group 0 /delete n:Artemis`<br>
        Expected: No subgroup is removed. Error details shown in the status message.
 
