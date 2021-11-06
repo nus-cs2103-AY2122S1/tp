@@ -63,7 +63,6 @@ public class Genre implements Comparable<Genre> {
         if (o == null) {
             return 0;
         }
-        Genre g = (Genre) o;
-        return this.genreName.compareTo(g.genreName);
+        return this.genreName.compareTo(o.genreName);
     }
 }
