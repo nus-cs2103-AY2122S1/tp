@@ -1,5 +1,6 @@
 package seedu.siasa.model.util;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -11,7 +12,11 @@ import seedu.siasa.model.contact.Contact;
 import seedu.siasa.model.contact.Email;
 import seedu.siasa.model.contact.Name;
 import seedu.siasa.model.contact.Phone;
+import seedu.siasa.model.policy.Commission;
+import seedu.siasa.model.policy.CoverageExpiryDate;
+import seedu.siasa.model.policy.PaymentStructure;
 import seedu.siasa.model.policy.Policy;
+import seedu.siasa.model.policy.Title;
 import seedu.siasa.model.tag.Tag;
 
 /**
@@ -42,7 +47,24 @@ public class SampleDataUtil {
     }
 
     public static Policy[] getSamplePolicies() {
-        return new Policy[] {};
+        return new Policy[] {
+            new Policy(new Title("Life Policy"),
+                new PaymentStructure(400000, 1, 1),
+                new CoverageExpiryDate(LocalDate.now().plusYears(1)),
+                new Commission(10, 1),
+                new Contact(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
+                    new Address("Blk 30 Geylang Street 29, #06-40"),
+                    getTagSet("friends")),
+                getTagSet("yearly")),
+            new Policy(new Title("Critical Illness Policy"),
+                new PaymentStructure(30000, 12, 120),
+                new CoverageExpiryDate(LocalDate.now().plusYears(10)),
+                new Commission(15, 120),
+                new Contact(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
+                    new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
+                    getTagSet("colleagues", "friends")),
+                getTagSet("aviva"))
+        };
     }
 
     public static ReadOnlySiasa getSampleSiasa() {
