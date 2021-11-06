@@ -2,7 +2,7 @@
 'https://plantuml.com/activity-diagram-beta
 
 start
-:User calls Find Customer command;
+:User calls Delete Supplier command;
 
 'Since the beta syntax does not support placing the condition outside the
 'diamond we place it as the true branch instead.
@@ -10,19 +10,18 @@ start
 if () then ([command syntax is valid])
 if () then ([input arguments are valid])
 
-    :Parse input into keywords;
+    :Parse input into an Index representing the
+    index of supplier to delete from the supplier list;
 
-    :Create customer predicate;
-
-    :FindCustomerCommand is created
+    :DeleteSupplierCommand is created
     and executed by LogicManager;
 
-    :Filter customer list based on predicate;
+    :Delete the supplier from the supplier list;
 
     :Update UI;
 
-    :Display success message to user with
-    number of customers that satisfy predicate;
+    :Display success message to user
+    with details of supplier deleted;
 
     stop
 

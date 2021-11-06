@@ -2,7 +2,7 @@
 'https://plantuml.com/activity-diagram-beta
 
 start
-:User calls Find Customer command;
+:User calls Sort Supplier command;
 
 'Since the beta syntax does not support placing the condition outside the
 'diamond we place it as the true branch instead.
@@ -10,19 +10,19 @@ start
 if () then ([command syntax is valid])
 if () then ([input arguments are valid])
 
-    :Parse input into keywords;
+    :Parse input into SortBySupplier and SortOrder;
 
-    :Create customer predicate;
+    :Create supplier comparator;
 
-    :FindCustomerCommand is created
+    :SortSupplierCommand is created
     and executed by LogicManager;
 
-    :Filter customer list based on predicate;
+    :Sort supplier list based on comparator;
 
     :Update UI;
 
     :Display success message to user with
-    number of customers that satisfy predicate;
+    details of sorting type and order;
 
     stop
 

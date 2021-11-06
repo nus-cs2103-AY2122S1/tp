@@ -10,7 +10,6 @@ participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
-participant "p:CustomerClassContainsKeywordsPredicate" as CustomerClassContainsKeywordsPredicate MODEL_COLOR
 participant ":Model" as Model MODEL_COLOR
 end box
 
@@ -30,13 +29,6 @@ deactivate FindCustomerCommandParser
 RhrhParser -> FindCustomerCommandParser : parse("Chetwin")
 activate FindCustomerCommandParser
 
-create CustomerClassContainsKeywordsPredicate
-FindCustomerCommandParser -> CustomerClassContainsKeywordsPredicate
-activate CustomerClassContainsKeywordsPredicate
-
-CustomerClassContainsKeywordsPredicate --> FindCustomerCommandParser : p
-deactivate CustomerClassContainsKeywordsPredicate
-
 create FindCustomerCommand
 FindCustomerCommandParser -> FindCustomerCommand : FindCustomerCommand(p)
 activate FindCustomerCommand
@@ -51,13 +43,18 @@ RhrhParser --> LogicManager : f
 deactivate RhrhParser
 destroy FindCustomerCommandParser
 
-LogicManager -> FindCustomerCommand : execute(model)
+
+note left of Model : The Predicate p for filtering is\nis created in Model.\nDetails are not shown here
+
+
+LogicManager -> FindCustomerCommand : execute()
 activate FindCustomerCommand
 
 FindCustomerCommand -> Model : updateFilteredCustomerList(p)
 activate Model
 FindCustomerCommand <-- Model
 deactivate Model
+
 
 create CommandResult
 FindCustomerCommand -> CommandResult
@@ -68,9 +65,4 @@ deactivate CommandResult
 
 FindCustomerCommand --> LogicManager : result
 deactivate FindCustomerCommand
-
-[<--LogicManager
-deactivate LogicManager
-destroy FindCustomerCommand
-destroy CustomerClassContainsKeywordsPredicate
 @enduml

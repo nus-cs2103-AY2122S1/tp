@@ -2,9 +2,14 @@
 'https://plantuml.com/activity-diagram-beta
 
 start
-:Execute AddEmployeeCommand with created employee;
-:Adds Employee in model;
-:Adds Employee to UniqueEmployeeList;
+:Execute AddEmployeeCommand in Logic Manager;
+:Adds employee in model;
+if () then ([employee exists])
+else ([else])
+:Adds employee to UniqueEmployeeList;
+:Print success statement to user
+that employee has been added;
+endif
 stop
 
 @enduml

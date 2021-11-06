@@ -2,7 +2,7 @@
 'https://plantuml.com/activity-diagram-beta
 
 start
-:User calls Find Customer command;
+:User calls Edit Customer command;
 
 'Since the beta syntax does not support placing the condition outside the
 'diamond we place it as the true branch instead.
@@ -10,19 +10,19 @@ start
 if () then ([command syntax is valid])
 if () then ([input arguments are valid])
 
-    :Parse input into keywords;
+    :Parse input into Index and EditCustomerDescriptor;
 
-    :Create customer predicate;
+    :Create customer descriptor;
 
-    :FindCustomerCommand is created
+    :EditCustomerCommand is created
     and executed by LogicManager;
 
-    :Filter customer list based on predicate;
+    :Update customer list with edited customer;
 
     :Update UI;
 
     :Display success message to user with
-    number of customers that satisfy predicate;
+    details of edited customer;
 
     stop
 

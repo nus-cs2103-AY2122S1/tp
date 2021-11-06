@@ -75,5 +75,5 @@ restaurants.
 
 #### Contributions to the Developer Guide (DG):
 * Renamed AB3 references in the DG to fit RHRH.
-* Draw UML diagrams for [to be completed]
+* Drew [Class](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/214/commits/2fbf6aabae8eec9c463b794495f02616f1cb0914), [Sequence](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/214/commits/d154a22dda6de4c8f871ca38189e9200ef349850) and [Activity diagrams](https://github.com/AY2122S1-CS2103T-T17-1/tp/commit/04d4d1ee8c9b6c516714776345ff6aaa8b32951d) `DeleteSupplierCommand` and `SortSupplierCommand`
 * Added [use case](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/31) for `Add Reservation` in DG
