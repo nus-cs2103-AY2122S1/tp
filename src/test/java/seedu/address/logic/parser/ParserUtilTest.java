@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FREQUENCY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INCOMING_WEEK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LAST_VISIT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NORMAL_LIST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VISIT;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.logic.parser.ParserUtil.arePrefixesPresent;
