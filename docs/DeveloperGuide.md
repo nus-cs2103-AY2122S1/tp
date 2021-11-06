@@ -1204,19 +1204,19 @@ testers are expected to do more *exploratory* testing.
 ### Deleting a student
 
 **Deleting a student while all persons are being shown<br>**
-Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+Prerequisites: List all students using the `list` command. Multiple students in the list.
 
    * Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
+      Expected: First student is deleted from the list. Details of the deleted student shown in the status message.
 
    * Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message.
+      Expected: No student is deleted. Error details shown in the status message.
 
-2. Deleting a student after filtering list<br>
-   Prerequisites: Filter students with the command `find t/new`. Multiple students in the filtered list.
+**Deleting a student after a find command is executed<br>**
+Prerequisites: Filter students with the command `find t/new`. Multiple students in the filtered list.
 
   * Test case: `delete 1 1`<br>
-    Expected: First contact is removed from the filtered list and the list remains filtered. Details of the deleted contact shown in the status message.
+    Expected: The first student is removed from the filtered list and the list remains filtered. Details of the deleted contact shown in the status message.
 
 Incorrect delete commands to try: `delete...`
 1. `delete x` where x is larger than the list size
@@ -1226,14 +1226,14 @@ Expected: Error details shown in the status message.
 
 ### Editing a student
 
-1. Editing a student while all students are being shown<br>
+**Editing a student while all students are being shown<br>**
 Prerequisites: List all students using the `list` command. Multiple students in the list.
    
-    * Test case: `edit 1 n/Alex`<br>
-      Expected: First contact is edited to have the name `Alex`. Details of the edited contact shown in the status message.
-      
-    * Test case: `edit 1`<br>
-      Expected: No person is edited. Error details shown in the status message.
+  * Test case: `edit 1 n/Alex`<br>
+    Expected: First student is edited to have the name `Alex`. Details of the edited contact shown in the status message.
+    
+  * Test case: `edit 1`<br>
+    Expected: No student is edited. Error details shown in the status message.
       
 Incorrect edit commands to try: `edit...`
 1. `edit x` where x is larger than the list size
@@ -1242,26 +1242,26 @@ Incorrect edit commands to try: `edit...`
 
 ### Finding a student
 
-1. Finding a student by tag<br>
+**Finding a student by tag<br>**
 Prerequisites: List all students using the `list` command. Multiple students in the list.
 
-    * Test case: `find t/new t/unpaid cond/any`<br>
-      Expected: All students with either the `NEW` tag or the `UNPAID` tag are shown.
-      
-    * Test case: `find t/new unpaid`<br>
-      Expected: The list is not filtered. Error details shown in the status message.
-      
-2. Finding a student by student fields<br>
-   Prerequisites: List all students using the `list` command. Multiple students in the list.
-
-    * Test case: `find a/serangoon cond/none`<br>
-    Expected: All students without the address `serangoon` are shown.
-
-    * Test case: `find n/`<br>
+  * Test case: `find t/new t/unpaid cond/any`<br>
+    Expected: All students with either the `NEW` tag or the `UNPAID` tag are shown.
+    
+  * Test case: `find t/new unpaid`<br>
     Expected: The list is not filtered. Error details shown in the status message.
 
-2. Finding a student by lesson fields<br>
-   Prerequisites: List all students using the `list` command. Multiple students in the list with lessons.
+**Finding a student by student fields<br>**
+Prerequisites: List all students using the `list` command. Multiple students in the list.
+
+  * Test case: `find a/serangoon cond/none`<br>
+    Expected: All students without the address `serangoon` are shown.
+    
+  * Test case: `find n/`<br>
+    Expected: The list is not filtered. Error details shown in the status message.
+
+**Finding a student by lesson fields<br>**
+Prerequisites: List all students using the `list` command. Multiple students in the list with lessons.
 
   * Test case: `find time/1400-1900`<br>
     Expected: All students with at least one lesson overlapping with the time range `1400-1900` will be shown.
@@ -1453,14 +1453,21 @@ Expected: Error details will be shown in the status message.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files 
-Prerequisites: TAB has an initial list of students.
-   1. Change the name of a student to be empty `name: ""`
+**Dealing with missing data files<br>**
+* Test case: The data folder does not have the file `addressbook.json`. Open TAB.<br>
+  Expected: TAB shows no students. Person list has been reset to empty.
 
-   2. Open TAB.<br>
-      Expected: TAB shows no students. All person list is reset.
+**Dealing with corrupted data files<br>**
+Prerequisites: TAB has an initial list of students.
+* Test case: 
+  1. Edit `addressbook.json` such that the name of a student is empty, e.g. `name: ""`
+  2. Open TAB.<br>
+  Expected: TAB shows no students. Person list has been reset to empty.
       
-2. 
+* Test case:
+  1. Edit `addressbook.json` such that the two students have the same name.
+  2. Open TAB.<br>
+  Expected: TAB shows no students. Person list has been reset to empty.
 
 ## **Appendix D: Efforts**
 
