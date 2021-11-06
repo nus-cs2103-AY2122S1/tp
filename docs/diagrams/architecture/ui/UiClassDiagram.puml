@@ -7,6 +7,8 @@ skinparam classBackgroundColor UI_COLOR
 package UI <<Rectangle>>{
 Interface Ui <<Interface>>
 Class "{abstract}\nUiPart" as UiPart
+Class AppMenu
+Class VisualizerDisplay
 Class UiManager
 Class MainWindow
 Class HelpWindow
@@ -34,27 +36,30 @@ MainWindow *-down->  "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
 MainWindow *-down-> "1" StudentListPanel
 MainWindow *-down-> "1" StatusBarFooter
+MainWindow *-down-> "1" AppMenu
+MainWindow *-down-> "1" VisualizerDisplay
 MainWindow --> "0..1" HelpWindow
 
 StudentListPanel -down-> "*" StudentCard
 
 MainWindow -left-|> UiPart
-
-ResultDisplay --|> UiPart
-CommandBox --|> UiPart
+AppMenu --|> UiPart
 StudentListPanel --|> UiPart
-StudentCard --|> UiPart
-StatusBarFooter --|> UiPart
+ResultDisplay --|> UiPart
 HelpWindow --|> UiPart
+VisualizerDisplay --|> UiPart
+CommandBox --|> UiPart
+StatusBarFooter --|> UiPart
+StudentCard --|> UiPart
 
 StudentCard ..> VersionedModel
 UiManager -right-> Logic
-MainWindow -left-> Logic
+MainWindow --> Logic
 
 StudentListPanel -[hidden]left- HelpWindow
 HelpWindow -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
 ResultDisplay -[hidden]left- StatusBarFooter
-
-MainWindow -[hidden]-|> UiPart
+StatusBarFooter -[hidden]left- AppMenu
+AppMenu -[hidden]left- VisualizerDisplay
 @enduml
