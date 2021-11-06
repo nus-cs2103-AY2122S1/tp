@@ -118,6 +118,9 @@ public class AnimeListPanel extends UiPart<Region> {
         );
     }
 
+    /**
+     * Sets the UI of the active tab based on the value of currentTab
+     */
     public void setActiveTab() {
         if (currentTab.getCurrentTab() == TabOption.TabOptions.ALL) {
             animeListTabPane.getSelectionModel().select(0);
@@ -130,10 +133,6 @@ public class AnimeListPanel extends UiPart<Region> {
         } else {
             animeListTabPane.getSelectionModel().select(allTab);
         }
-    }
-
-    public void setCommandBox(CommandBox commandBox) {
-        this.commandBox = commandBox;
     }
 
     /**
@@ -194,6 +193,10 @@ public class AnimeListPanel extends UiPart<Region> {
         }
     }
 
+    public void setCommandBox(CommandBox commandBox) {
+        this.commandBox = commandBox;
+    }
+
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Anime} using a {@code AnimeCard}.
      */
@@ -222,4 +225,5 @@ public class AnimeListPanel extends UiPart<Region> {
          */
         CommandResult execute(String commandText) throws CommandException, ParseException;
     }
+
 }
