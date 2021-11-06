@@ -5,6 +5,8 @@ import static tutoraid.ui.DetailLevel.HIGH;
 import static tutoraid.ui.DetailLevel.MED;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -22,8 +24,8 @@ import tutoraid.ui.UiManager;
  * Represents the in-memory model of the student book data.
  */
 public class ModelManager implements Model {
+    private static final List<Student> allStudents = new ArrayList<>();
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
-
     private final StudentBook studentBook;
     private final LessonBook lessonBook;
     private final UserPrefs userPrefs;
@@ -45,10 +47,15 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredStudents = new FilteredList<>(this.studentBook.getStudentList());
         filteredLessons = new FilteredList<>(this.lessonBook.getLessonList());
+        allStudents.addAll(studentBook.getStudentList());
     }
 
     public ModelManager() {
         this(new StudentBook(), new LessonBook(), new UserPrefs());
+    }
+
+    public static List<Student> getAllStudents() {
+        return allStudents;
     }
 
     //=========== UserPrefs ==================================================================================
@@ -102,6 +109,8 @@ public class ModelManager implements Model {
     @Override
     public void setStudentBook(ReadOnlyStudentBook studentBook) {
         this.studentBook.resetData(studentBook);
+        allStudents.clear();
+        allStudents.addAll(studentBook.getStudentList());
     }
 
     @Override
@@ -118,12 +127,15 @@ public class ModelManager implements Model {
     @Override
     public void deleteStudent(Student target) {
         studentBook.removeStudent(target);
+        allStudents.remove(target);
+        updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
     }
 
     @Override
     public void addStudent(Student student) {
         studentBook.addStudent(student);
         updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+        allStudents.add(student);
     }
 
     @Override
@@ -160,7 +172,7 @@ public class ModelManager implements Model {
                 student.getLessons().deleteLesson(lesson);
             }
         }
-        studentBook.refreshStudentBook();
+        updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
     }
 
     //=========== LessonBook ================================================================================
@@ -203,8 +215,8 @@ public class ModelManager implements Model {
         requireNonNull(targetLesson);
         filteredLessons.setPredicate(lesson -> lesson.equals(targetLesson));
         filteredStudents.setPredicate(student ->
-                targetLesson.getStudents().getAllStudentNamesAsStringArrayList().contains(student.toNameString()));
-        UiManager.showFullDetails();
+                targetLesson.getStudents().hasStudent(student));
+        UiManager.showMediumDetails();
     }
 
     @Override
@@ -214,7 +226,7 @@ public class ModelManager implements Model {
                 lesson.removeStudent(student);
             }
         }
-        lessonBook.refreshLessonBook();
+        updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
     }
 
     //=========== Filtered Student List Accessors =============================================================
@@ -231,7 +243,7 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredStudentList(Predicate<Student> predicate) {
         requireNonNull(predicate);
-        studentBook.refreshStudentBook();
+        filteredStudents.setPredicate(student -> false);
         filteredStudents.setPredicate(predicate);
     }
 
@@ -249,7 +261,7 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredLessonList(Predicate<Lesson> predicate) {
         requireNonNull(predicate);
-        lessonBook.refreshLessonBook();
+        filteredLessons.setPredicate(lesson -> false);
         filteredLessons.setPredicate(predicate);
     }
 

@@ -12,6 +12,7 @@ import tutoraid.commons.exceptions.DataConversionException;
 import tutoraid.commons.exceptions.IllegalValueException;
 import tutoraid.commons.util.FileUtil;
 import tutoraid.commons.util.JsonUtil;
+import tutoraid.model.ReadOnlyLessonBook;
 import tutoraid.model.ReadOnlyStudentBook;
 
 /**
@@ -22,9 +23,17 @@ public class JsonTutorAidStudentStorage implements TutorAidStudentStorage {
     private static final Logger logger = LogsCenter.getLogger(JsonTutorAidStudentStorage.class);
 
     private Path filePath;
+    private ReadOnlyLessonBook lessonBook;
 
-    public JsonTutorAidStudentStorage(Path filePath) {
+    /**
+     * Constructor for the student storage object.
+     *
+     * @param filePath Path to the JSON file
+     * @param lessonBook Lesson book to create the Lesson-Student dependency
+     */
+    public JsonTutorAidStudentStorage(Path filePath, ReadOnlyLessonBook lessonBook) {
         this.filePath = filePath;
+        this.lessonBook = lessonBook;
     }
 
     public Path getStudentBookFilePath() {
@@ -32,27 +41,28 @@ public class JsonTutorAidStudentStorage implements TutorAidStudentStorage {
     }
 
     @Override
-    public Optional<ReadOnlyStudentBook> readStudentBook() throws DataConversionException {
-        return readStudentBook(filePath);
+    public Optional<ReadOnlyStudentBook> readStudentBook(ReadOnlyLessonBook lessonBook) throws DataConversionException {
+        return readStudentBook(filePath, lessonBook);
     }
 
     /**
-     * Similar to {@link #readStudentBook()}.
+     * Similar to {@link #readStudentBook(ReadOnlyLessonBook)}.
      *
      * @param filePath location of the data. Cannot be null.
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyStudentBook> readStudentBook(Path filePath) throws DataConversionException {
+    public Optional<ReadOnlyStudentBook> readStudentBook(Path filePath, ReadOnlyLessonBook lessonBook)
+            throws DataConversionException {
         requireNonNull(filePath);
 
         Optional<JsonSerializableStudentBook> jsonStudentBook = JsonUtil.readJsonFile(
                 filePath, JsonSerializableStudentBook.class);
-        if (!jsonStudentBook.isPresent()) {
+        if (jsonStudentBook.isEmpty()) {
             return Optional.empty();
         }
 
         try {
-            return Optional.of(jsonStudentBook.get().toModelType());
+            return Optional.of(jsonStudentBook.get().toModelType(lessonBook));
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataConversionException(ive);

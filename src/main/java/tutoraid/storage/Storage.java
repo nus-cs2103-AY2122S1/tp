@@ -25,7 +25,8 @@ public interface Storage extends TutorAidStudentStorage, TutorAidLessonStorage, 
     Path getStudentBookFilePath();
 
     @Override
-    Optional<ReadOnlyStudentBook> readStudentBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyStudentBook> readStudentBook(ReadOnlyLessonBook lessonBook)
+            throws DataConversionException, IOException;
 
     @Override
     void saveStudentBook(ReadOnlyStudentBook studentBook) throws IOException;

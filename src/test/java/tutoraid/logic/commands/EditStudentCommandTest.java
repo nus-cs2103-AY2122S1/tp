@@ -1,13 +1,16 @@
 package tutoraid.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutoraid.logic.commands.CommandTestUtil.DESC_AMY;
 import static tutoraid.logic.commands.CommandTestUtil.DESC_BOB;
+import static tutoraid.logic.commands.CommandTestUtil.VALID_PARENT_NAME_BOB;
+import static tutoraid.logic.commands.CommandTestUtil.VALID_PARENT_PHONE_AMY;
 import static tutoraid.logic.commands.CommandTestUtil.VALID_STUDENT_NAME_BOB;
-import static tutoraid.logic.commands.CommandTestUtil.VALID_STUDENT_PHONE_BOB;
+import static tutoraid.logic.commands.CommandTestUtil.VALID_STUDENT_PHONE_AMY;
 import static tutoraid.logic.commands.CommandTestUtil.assertCommandFailure;
-import static tutoraid.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutoraid.logic.commands.CommandTestUtil.showStudentAtIndex;
 import static tutoraid.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static tutoraid.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
@@ -19,9 +22,9 @@ import org.junit.jupiter.api.Test;
 import tutoraid.commons.core.Messages;
 import tutoraid.commons.core.index.Index;
 import tutoraid.logic.commands.EditStudentCommand.EditStudentDescriptor;
+import tutoraid.logic.commands.exceptions.CommandException;
 import tutoraid.model.Model;
 import tutoraid.model.ModelManager;
-import tutoraid.model.StudentBook;
 import tutoraid.model.UserPrefs;
 import tutoraid.model.student.Student;
 import tutoraid.testutil.EditStudentDescriptorBuilder;
@@ -30,94 +33,70 @@ import tutoraid.testutil.StudentBuilder;
 
 public class EditStudentCommandTest {
 
-    private Model model = new ModelManager(getTypicalStudentBook(), getTypicalLessonBook(), new UserPrefs());
-
     @Test
-    public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Student editedStudent = new StudentBuilder().build();
-        EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(editedStudent).build();
-        EditStudentCommand editCommand = new EditStudentCommand(INDEX_FIRST_ITEM, descriptor);
-
-        String expectedMessage = String.format(EditStudentCommand.MESSAGE_EDIT_STUDENT_SUCCESS,
-                editedStudent.toNameString());
-
-        Model expectedModel = new ModelManager(
-                new StudentBook(model.getStudentBook()), model.getLessonBook(), new UserPrefs());
-        expectedModel.setStudent(model.getFilteredStudentList().get(0), editedStudent);
-        expectedModel.viewStudent(editedStudent);
-        expectedModel.updateFilteredLessonList(editedStudent::hasLesson);
-
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    public void execute_allFieldsSpecifiedUnfilteredList_success() throws CommandException {
+        Model model = new ModelManager(getTypicalStudentBook(), getTypicalLessonBook(), new UserPrefs());
+        Student editedStudent = new StudentBuilder()
+                .withStudentName(VALID_STUDENT_NAME_BOB)
+                .withStudentPhone(VALID_STUDENT_PHONE_AMY)
+                .withParentName(VALID_PARENT_NAME_BOB)
+                .withParentPhone(VALID_PARENT_PHONE_AMY)
+                .build();
+        EditStudentCommand editCommand = new EditStudentCommand(INDEX_FIRST_ITEM,
+                new EditStudentDescriptorBuilder()
+                        .withStudentName(VALID_STUDENT_NAME_BOB)
+                        .withStudentPhone(VALID_STUDENT_PHONE_AMY)
+                        .withParentName(VALID_PARENT_NAME_BOB)
+                        .withParentPhone(VALID_PARENT_PHONE_AMY)
+                        .build());
+        editCommand.execute(model);
+        assertEquals(editedStudent, model.getFilteredStudentList().get(0));
     }
 
     @Test
-    public void execute_someFieldsSpecifiedUnfilteredList_success() {
-        Index indexLastStudent = Index.fromOneBased(model.getFilteredStudentList().size());
-        Student lastStudent = model.getFilteredStudentList().get(indexLastStudent.getZeroBased());
-
-        StudentBuilder personInList = new StudentBuilder(lastStudent);
-        Student editedStudent = personInList
+    public void execute_someFieldsSpecifiedUnfilteredList_success() throws CommandException {
+        Model model = new ModelManager(getTypicalStudentBook(), getTypicalLessonBook(), new UserPrefs());
+        Student editedStudent = new StudentBuilder()
                 .withStudentName(VALID_STUDENT_NAME_BOB)
-                .withStudentPhone(VALID_STUDENT_PHONE_BOB)
+                .withParentPhone(VALID_PARENT_PHONE_AMY)
                 .build();
-
-        EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder()
-                .withStudentName(VALID_STUDENT_NAME_BOB)
-                .withStudentPhone(VALID_STUDENT_PHONE_BOB)
-                .build();
-        EditStudentCommand editCommand = new EditStudentCommand(indexLastStudent, descriptor);
-        String expectedMessage = String.format(EditStudentCommand.MESSAGE_EDIT_STUDENT_SUCCESS,
-                editedStudent.toNameString());
-        Model expectedModel = new ModelManager(
-                new StudentBook(model.getStudentBook()), model.getLessonBook(), new UserPrefs());
-        expectedModel.setStudent(lastStudent, editedStudent);
-        expectedModel.viewStudent(editedStudent);
-        expectedModel.updateFilteredLessonList(editedStudent::hasLesson);
-
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        EditStudentCommand editCommand = new EditStudentCommand(INDEX_FIRST_ITEM,
+                new EditStudentDescriptorBuilder()
+                        .withStudentName(VALID_STUDENT_NAME_BOB)
+                        .withParentPhone(VALID_PARENT_PHONE_AMY)
+                        .build());
+        editCommand.execute(model);
+        assertEquals(editedStudent.getStudentName(), model.getFilteredStudentList().get(0).getStudentName());
+        assertEquals(editedStudent.getParentPhone(), model.getFilteredStudentList().get(0).getParentPhone());
     }
 
     @Test
-    public void execute_noFieldSpecifiedUnfilteredList_success() {
+    public void execute_noFieldSpecifiedUnfilteredList_failure() {
+        Model model = new ModelManager(getTypicalStudentBook(), getTypicalLessonBook(), new UserPrefs());
         EditStudentCommand editCommand = new EditStudentCommand(INDEX_FIRST_ITEM, new EditStudentDescriptor());
-        Student editedStudent = model.getFilteredStudentList().get(INDEX_FIRST_ITEM.getZeroBased());
-
-        String expectedMessage = String.format(EditStudentCommand.MESSAGE_EDIT_STUDENT_SUCCESS,
-                editedStudent.toNameString());
-
-        Model expectedModel = new ModelManager(
-                new StudentBook(model.getStudentBook()), model.getLessonBook(), new UserPrefs());
-        expectedModel.viewStudent(editedStudent);
-        expectedModel.updateFilteredLessonList(editedStudent::hasLesson);
-
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        assertThrows(CommandException.class, () -> {
+            editCommand.execute(model);
+        });
     }
 
     @Test
-    public void execute_filteredList_success() {
+    public void execute_filteredList_success() throws CommandException {
+        Model model = new ModelManager(getTypicalStudentBook(), getTypicalLessonBook(), new UserPrefs());
         showStudentAtIndex(model, INDEX_FIRST_ITEM);
-
-        Student personInFilteredList = model.getFilteredStudentList().get(INDEX_FIRST_ITEM.getZeroBased());
-        Student editedStudent = new StudentBuilder(personInFilteredList)
+        Student editedStudent = new StudentBuilder()
                 .withStudentName(VALID_STUDENT_NAME_BOB)
                 .build();
         EditStudentCommand editCommand = new EditStudentCommand(INDEX_FIRST_ITEM,
-                new EditStudentDescriptorBuilder().withStudentName(VALID_STUDENT_NAME_BOB).build());
-
-        String expectedMessage = String.format(EditStudentCommand.MESSAGE_EDIT_STUDENT_SUCCESS,
-                editedStudent.toNameString());
-
-        Model expectedModel = new ModelManager(
-                new StudentBook(model.getStudentBook()), model.getLessonBook(), new UserPrefs());
-        expectedModel.setStudent(model.getFilteredStudentList().get(0), editedStudent);
-        expectedModel.viewStudent(editedStudent);
-        expectedModel.updateFilteredLessonList(editedStudent::hasLesson);
-
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+                new EditStudentDescriptorBuilder()
+                        .withStudentName(VALID_STUDENT_NAME_BOB)
+                        .build());
+        editCommand.execute(model);
+        assertEquals(editedStudent.getStudentName(), model.getFilteredStudentList().get(0).getStudentName());
     }
 
     @Test
     public void execute_duplicateStudentUnfilteredList_failure() {
+        Model model = new ModelManager(getTypicalStudentBook(), getTypicalLessonBook(), new UserPrefs());
         Student firstStudent = model.getFilteredStudentList().get(INDEX_FIRST_ITEM.getZeroBased());
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(firstStudent).build();
         EditStudentCommand editCommand = new EditStudentCommand(INDEX_SECOND_ITEM, descriptor);
@@ -127,6 +106,7 @@ public class EditStudentCommandTest {
 
     @Test
     public void execute_duplicateStudentFilteredList_failure() {
+        Model model = new ModelManager(getTypicalStudentBook(), getTypicalLessonBook(), new UserPrefs());
         showStudentAtIndex(model, INDEX_FIRST_ITEM);
 
         // edit person in filtered list into a duplicate in address book
@@ -139,6 +119,7 @@ public class EditStudentCommandTest {
 
     @Test
     public void execute_invalidStudentIndexUnfilteredList_failure() {
+        Model model = new ModelManager(getTypicalStudentBook(), getTypicalLessonBook(), new UserPrefs());
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder()
                 .withStudentName(VALID_STUDENT_NAME_BOB)
@@ -154,6 +135,7 @@ public class EditStudentCommandTest {
      */
     @Test
     public void execute_invalidStudentIndexFilteredList_failure() {
+        Model model = new ModelManager(getTypicalStudentBook(), getTypicalLessonBook(), new UserPrefs());
         showStudentAtIndex(model, INDEX_FIRST_ITEM);
         Index outOfBoundIndex = INDEX_SECOND_ITEM;
 

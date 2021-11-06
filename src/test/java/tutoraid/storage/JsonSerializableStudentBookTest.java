@@ -11,6 +11,7 @@ import tutoraid.commons.exceptions.IllegalValueException;
 import tutoraid.commons.util.JsonUtil;
 import tutoraid.model.StudentBook;
 import tutoraid.testutil.Assert;
+import tutoraid.testutil.TypicalLessons;
 import tutoraid.testutil.TypicalStudents;
 
 public class JsonSerializableStudentBookTest {
@@ -24,7 +25,7 @@ public class JsonSerializableStudentBookTest {
     public void toModelType_typicalStudentsFile_success() throws Exception {
         JsonSerializableStudentBook dataFromFile = JsonUtil.readJsonFile(TYPICAL_STUDENTS_FILE,
                 JsonSerializableStudentBook.class).get();
-        StudentBook studentBookFromFile = dataFromFile.toModelType();
+        StudentBook studentBookFromFile = dataFromFile.toModelType(TypicalLessons.getTypicalLessonBook());
         StudentBook typicalPersonsStudentBook = TypicalStudents.getTypicalStudentBook();
         assertEquals(studentBookFromFile, typicalPersonsStudentBook);
     }
@@ -33,15 +34,18 @@ public class JsonSerializableStudentBookTest {
     public void toModelType_invalidStudentFile_throwsIllegalValueException() throws Exception {
         JsonSerializableStudentBook dataFromFile = JsonUtil.readJsonFile(INVALID_STUDENT_FILE,
                 JsonSerializableStudentBook.class).get();
-        Assert.assertThrows(IllegalValueException.class, dataFromFile::toModelType);
+        Assert.assertThrows(IllegalValueException.class, () -> dataFromFile
+                .toModelType(TypicalLessons.getTypicalLessonBook()));
     }
 
     @Test
     public void toModelType_duplicateStudents_throwsIllegalValueException() throws Exception {
         JsonSerializableStudentBook dataFromFile = JsonUtil.readJsonFile(DUPLICATE_STUDENT_FILE,
                 JsonSerializableStudentBook.class).get();
-        Assert.assertThrows(IllegalValueException.class, JsonSerializableStudentBook.MESSAGE_DUPLICATE_STUDENT,
-                dataFromFile::toModelType);
+        Assert.assertThrows(
+                IllegalValueException.class,
+                JsonSerializableStudentBook.MESSAGE_DUPLICATE_STUDENT, () -> dataFromFile.toModelType(
+                        TypicalLessons.getTypicalLessonBook()));
     }
 
 }

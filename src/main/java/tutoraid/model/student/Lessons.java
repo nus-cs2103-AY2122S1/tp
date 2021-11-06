@@ -3,10 +3,11 @@ package tutoraid.model.student;
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
+import java.util.List;
 
-import tutoraid.commons.util.AppUtil;
+import tutoraid.model.ReadOnlyLessonBook;
 import tutoraid.model.lesson.Lesson;
-import tutoraid.model.lesson.LessonName;
+import tutoraid.model.lesson.exceptions.LessonNotFoundException;
 import tutoraid.model.student.exceptions.DuplicateStudentLessonsException;
 import tutoraid.model.student.exceptions.LessonNotFoundInStudentException;
 
@@ -19,7 +20,7 @@ public class Lessons {
             "Lessons constructor either takes in no argument "
                     + "or takes in a String ArrayList";
 
-    public final ArrayList<LessonName> lessons;
+    public final ArrayList<Lesson> lessons;
 
     /**
      * Constructs a {@code Lessons}.
@@ -29,73 +30,57 @@ public class Lessons {
     }
 
     /**
-     * Constructs a {@code Lessons}.
+     * Constructor for the Lessons class for a Student.
      *
-     * @param lessonNames an arraylist of lesson names
+     * @param lessonNames Names of the lessons that the student is attending
+     * @param lessonBook List of Lesson objects to be linked to the student
      */
-    public Lessons(ArrayList<String> lessonNames) {
-        requireNonNull(lessonNames);
-        AppUtil.checkArgument(isValidLessonNames(lessonNames), MESSAGE_CONSTRAINTS);
-
-        lessons = new ArrayList<>();
-
+    public Lessons(ArrayList<String> lessonNames, ReadOnlyLessonBook lessonBook) {
+        this.lessons = new ArrayList<>();
+        List<Lesson> lessonList = lessonBook.getLessonList();
         for (String lessonName : lessonNames) {
-            LessonName currentLessonName = new LessonName(lessonName);
-            lessons.add(currentLessonName);
+            Lesson lesson = lessonList
+                    .stream()
+                    .filter(l -> l.toNameString().equals(lessonName))
+                    .findFirst()
+                    .orElseThrow(LessonNotFoundException::new);
+            lessons.add(lesson);
         }
-    }
-
-    /**
-     * Checks if a given string ArrayList is a valid list of lesson names.
-     *
-     * @param lessonNames an ArrayList of strings
-     * @return true if all elements are valid lesson names, false otherwise
-     */
-    public static boolean isValidLessonNames(ArrayList<String> lessonNames) {
-        for (String lessonName : lessonNames) {
-            if (lessonName == null || !LessonName.isValidLessonName(lessonName)) {
-                return false;
-            }
-        }
-
-        return true;
     }
 
     /**
      * Adds a new lesson name.
      *
-     * @param toAdd the lesson to be added
+     * @param lesson the lesson to be added
      * @throws DuplicateStudentLessonsException if the lesson is already in the list
      */
-    public void addLesson(Lesson toAdd) {
-        requireNonNull(toAdd);
-        LessonName lessonNameToAdd = toAdd.getLessonName();
-        if (lessons.contains(lessonNameToAdd)) {
+    public void addLesson(Lesson lesson) {
+        requireNonNull(lesson);
+        if (lessons.contains(lesson)) {
             throw new DuplicateStudentLessonsException();
         }
-        lessons.add(lessonNameToAdd);
+        lessons.add(lesson);
     }
 
     /**
      * Deletes a lesson.
      *
-     * @param toDelete the lesson to be deleted
+     * @param lesson the lesson to be deleted
      * @throws LessonNotFoundInStudentException if the lesson is not in the list
      */
-    public void deleteLesson(Lesson toDelete) {
-        requireNonNull(toDelete);
-        LessonName lessonNameToDelete = toDelete.getLessonName();
-        if (!lessons.contains(lessonNameToDelete)) {
+    public void deleteLesson(Lesson lesson) {
+        requireNonNull(lesson);
+        if (!lessons.contains(lesson)) {
             throw new LessonNotFoundInStudentException();
         }
-        lessons.remove(lessonNameToDelete);
+        lessons.remove(lesson);
     }
 
     /**
      * Returns boolean if lesson is in lessons or not.
      */
     public boolean hasLesson(Lesson lesson) {
-        return lessons.contains(lesson.getLessonName());
+        return lessons.contains(lesson);
     }
 
     /**
@@ -103,8 +88,8 @@ public class Lessons {
      */
     public ArrayList<String> getAllLessonNamesAsStringArrayList() {
         ArrayList<String> allLessonNamesAsStringArrayList = new ArrayList<>();
-        for (LessonName lesson : lessons) {
-            String currentLessonName = lesson.toString();
+        for (Lesson lesson : lessons) {
+            String currentLessonName = lesson.toNameString();
             allLessonNamesAsStringArrayList.add(currentLessonName);
         }
         return allLessonNamesAsStringArrayList;

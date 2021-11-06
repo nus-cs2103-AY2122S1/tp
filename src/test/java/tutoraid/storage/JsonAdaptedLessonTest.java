@@ -39,7 +39,7 @@ public class JsonAdaptedLessonTest {
     @Test
     public void toModelType_invalidLessonName_throwsIllegalValueException() {
         JsonAdaptedLesson lesson = new JsonAdaptedLesson(INVALID_LESSON_NAME, VALID_LESSON_CAPACITY,
-                VALID_LESSON_PRICE, VALID_LESSON_STUDENTS, VALID_LESSON_TIMING);
+                VALID_LESSON_PRICE, VALID_LESSON_TIMING);
 
         String expectedMessage = LessonName.MESSAGE_CONSTRAINTS;
         Assert.assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
@@ -48,7 +48,7 @@ public class JsonAdaptedLessonTest {
     @Test
     public void toModelType_nullLessonName_throwsIllegalValueException() {
         JsonAdaptedLesson lesson = new JsonAdaptedLesson(null, VALID_LESSON_CAPACITY,
-                VALID_LESSON_PRICE, VALID_LESSON_STUDENTS, VALID_LESSON_TIMING);
+                VALID_LESSON_PRICE, VALID_LESSON_TIMING);
 
         String expectedMessage = String.format(
                 JsonAdaptedLesson.MISSING_FIELD_MESSAGE_FORMAT, LessonName.class.getSimpleName());
@@ -58,7 +58,7 @@ public class JsonAdaptedLessonTest {
     @Test
     public void toModelType_invalidCapacity_throwsIllegalValueException() {
         JsonAdaptedLesson lesson = new JsonAdaptedLesson(VALID_LESSON_NAME, INVALID_LESSON_CAPACITY,
-                VALID_LESSON_PRICE, VALID_LESSON_STUDENTS, VALID_LESSON_TIMING);
+                VALID_LESSON_PRICE, VALID_LESSON_TIMING);
 
         String expectedMessage = Capacity.MESSAGE_CONSTRAINTS;
         Assert.assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
@@ -67,7 +67,7 @@ public class JsonAdaptedLessonTest {
     @Test
     public void toModelType_invalidPrice_throwsIllegalValueException() {
         JsonAdaptedLesson lesson = new JsonAdaptedLesson(VALID_LESSON_NAME, VALID_LESSON_CAPACITY,
-                INVALID_LESSON_PRICE, VALID_LESSON_STUDENTS, VALID_LESSON_TIMING);
+                INVALID_LESSON_PRICE, VALID_LESSON_TIMING);
 
         String expectedMessage = Price.MESSAGE_CONSTRAINTS;
         Assert.assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
@@ -76,7 +76,7 @@ public class JsonAdaptedLessonTest {
     @Test
     public void toModelType_invalidTiming_throwsIllegalValueException() {
         JsonAdaptedLesson lesson = new JsonAdaptedLesson(VALID_LESSON_NAME, VALID_LESSON_CAPACITY,
-                VALID_LESSON_PRICE, VALID_LESSON_STUDENTS, INVALID_LESSON_TIMING);
+                VALID_LESSON_PRICE, INVALID_LESSON_TIMING);
 
         String expectedMessage = Timing.MESSAGE_CONSTRAINTS;
         Assert.assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);

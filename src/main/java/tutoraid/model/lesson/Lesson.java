@@ -2,7 +2,6 @@ package tutoraid.model.lesson;
 
 import static tutoraid.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.List;
 import java.util.Objects;
 
 import tutoraid.model.lesson.exceptions.LessonExceedCapacityException;
@@ -15,39 +14,36 @@ import tutoraid.model.student.Student;
 public class Lesson {
 
     // Identity Fields
-    private final LessonName lessonName;
+    private LessonName lessonName;
 
     // Data Fields
-    private final Students students;
-    private final Capacity capacity;
-    private final Price price;
-    private final Timing timing;
+    private Students students;
+    private Capacity capacity;
+    private Price price;
+    private Timing timing;
+
+    /**
+     * Constructor for a Lesson when the Students are not yet initialised
+     */
+    public Lesson(LessonName lessonName, Capacity capacity, Price price, Timing timing) {
+        requireAllNonNull(lessonName, capacity, price, timing);
+        this.lessonName = lessonName;
+        this.capacity = capacity;
+        this.price = price;
+        this.students = new Students();
+        this.timing = timing;
+    }
 
     /**
      * Every field must be present and not null.
      */
     public Lesson(LessonName lessonName, Capacity capacity, Price price, Students students, Timing timing) {
-        requireAllNonNull(lessonName, capacity, price, students, timing);
+        requireAllNonNull(lessonName, capacity, price, timing);
         this.lessonName = lessonName;
         this.capacity = capacity;
         this.price = price;
         this.students = students;
         this.timing = timing;
-    }
-
-    /**
-     * Updates the dependency between each lesson and a student if the student gets edited
-     * @param lessonList A list containing all lessons in TutorAid
-     * @param studentToEdit The student being edited
-     * @param editedStudent The edited student
-     */
-    public static void updateStudentLessonLink(List<Lesson> lessonList, Student studentToEdit, Student editedStudent) {
-        for (Lesson lesson : lessonList) {
-            if (lesson.hasStudent(studentToEdit)) {
-                lesson.removeStudent(studentToEdit);
-                lesson.addStudent(editedStudent);
-            }
-        }
     }
 
     public LessonName getLessonName() {
@@ -56,6 +52,10 @@ public class Lesson {
 
     public Capacity getCapacity() {
         return capacity;
+    }
+
+    public int getCapacityValue() {
+        return capacity.getCapacity();
     }
 
     public Price getPrice() {
@@ -77,7 +77,7 @@ public class Lesson {
      * @return true if the student is in this lesson, false otherwise
      */
     public boolean hasStudent(Student student) {
-        return students.hasStudent(student);
+        return getStudents().hasStudent(student);
     }
 
     /**
@@ -99,15 +99,34 @@ public class Lesson {
     }
 
     /**
+     * Removes all students from this lesson.
+     */
+    public void removeAllStudents() {
+        students = new Students();
+    }
+
+    /**
+     * Replaces the fields of this lesson with those of a different lesson to edit it
+     *
+     * @param lesson The lesson whose fields should replace this lesson
+     */
+    public void replace(Lesson lesson) {
+        lessonName = lesson.getLessonName();
+        timing = lesson.getTiming();
+        capacity = lesson.getCapacity();
+        price = lesson.getPrice();
+    }
+
+    /**
      * Checks if the lesson is full.
      *
      * @throws LessonExceedCapacityException if the lesson exceeds its capacity
      */
     public boolean isFull() throws LessonExceedCapacityException {
-        if (students.numberOfStudents() > capacity.getCapacity()) {
+        if (getStudents().numberOfStudents() > capacity.getCapacity()) {
             throw new LessonExceedCapacityException();
         }
-        return students.numberOfStudents() == capacity.getCapacity();
+        return getStudents().numberOfStudents() == capacity.getCapacity();
     }
 
     /**
@@ -150,7 +169,6 @@ public class Lesson {
         return otherLesson.getLessonName().equals(getLessonName())
                 && otherLesson.getCapacity().equals(getCapacity())
                 && otherLesson.getPrice().equals(getPrice())
-                && otherLesson.getStudents().equals(getStudents())
                 && otherLesson.getTiming().equals(getTiming());
     }
 
@@ -163,41 +181,39 @@ public class Lesson {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-
-        if (lessonName != null) {
-            builder.append("\nLesson's name: ")
-                    .append(getLessonName());
-        }
-
-        if (timing != null) {
-            builder.append("\nLesson's timing: ")
-                    .append(getTiming());
-
-        }
-
-        if (capacity != null) {
-            builder.append("\nLesson's capacity: ")
-                    .append(getCapacity());
-        }
-
-        if (price != null) {
-            builder.append("\nLesson's price: ")
-                    .append(getPrice());
-        }
-
-        if (students != null) {
-            builder.append("\nLesson's students: ")
-                    .append(getStudents());
-        }
-
+        builder.append("\nLesson's name: ")
+                .append(getLessonName());
+        builder.append("\nLesson's timing: ")
+                .append(getTiming());
+        builder.append("\nLesson's capacity: ")
+                .append(getCapacity());
+        builder.append("\nLesson's price: ")
+                .append(getPrice());
+        builder.append("\nLesson's students: ")
+                .append(getStudents());
         return builder.toString();
     }
 
     /**
      * Returns the name of the lesson as a string.
+     *
      * @return Name of lesson
      */
     public String toNameString() {
         return lessonName.toString();
+    }
+
+    /**
+     * Returns a copy of the current lesson object by creating a new object with the same fields.
+     *
+     * @return Copy of this lesson object
+     */
+    public Lesson copy() {
+        return new Lesson(
+                new LessonName(getLessonName().toString()),
+                new Capacity(getCapacity().toString()),
+                new Price(getPrice().toString()),
+                new Timing(getTiming().toString())
+        );
     }
 }

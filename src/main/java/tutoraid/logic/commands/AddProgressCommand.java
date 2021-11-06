@@ -19,15 +19,17 @@ public class AddProgressCommand extends AddCommand {
 
     public static final String COMMAND_FLAG = "-p";
 
-    public static final String MESSAGE_USAGE = COMMAND_FLAG + ": Adds a progress for a student in TutorAid identified "
-            + "by the index number used in the last student listing. "
-            + "Existing progress will be overwritten by the input.\n"
-            + "Parameters: STUDENT_INDEX (must be a positive integer) "
-            + "PROGRESS\n"
-            + "Example: " + COMMAND_FLAG + " 1 "
-            + "Finishes Prelims.";
+    public static final String MESSAGE_USAGE = String.format("%1$s %2$s: Adds a progress entry for a student. "
+                    + "The 10 most recent progress entries are stored."
+                    + "\nParameters:"
+                    + "\nSTUDENT_INDEX (must be a positive integer)"
+                    + "  PROGRESS"
+                    + "\nExample:"
+                    + "\n%1$s %2$s 1 Finished Prelims",
+            COMMAND_WORD, COMMAND_FLAG);
 
-    public static final String MESSAGE_SUCCESS = "Added progress: %1$s\nFor this student: %2$s";
+    public static final String MESSAGE_SUCCESS = "Successfully added progress: %1$s for %2$s. "
+            + "\nShowing %2$s and his/her lessons.";
 
     private final Index targetIndex;
     private final Progress progress;
@@ -56,6 +58,6 @@ public class AddProgressCommand extends AddCommand {
         model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
         model.viewStudent(studentToEdit);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, progress, studentToEdit));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, progress, studentToEdit.toNameString()));
     }
 }

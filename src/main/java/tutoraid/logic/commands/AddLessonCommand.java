@@ -17,20 +17,19 @@ public class AddLessonCommand extends AddCommand {
 
     public static final String COMMAND_FLAG = "-l";
 
-    public static final String MESSAGE_USAGE = COMMAND_FLAG + ": Adds a lesson to TutorAid. "
-            + "Parameters: "
-            + PREFIX_LESSON_NAME + "LESSON NAME "
-            + PREFIX_LESSON_CAPACITY + "LESSON CAPACITY "
-            + PREFIX_LESSON_PRICE + "LESSON PRICE "
-            + PREFIX_LESSON_TIMING + "LESSON TIMING "
-            + "Example: " + COMMAND_FLAG + " "
-            + PREFIX_LESSON_NAME + "Maths 1 "
-            + PREFIX_LESSON_CAPACITY + "50 "
-            + PREFIX_LESSON_PRICE + "100 "
-            + PREFIX_LESSON_TIMING + "Mon 1000-1200 ";
+    public static final String MESSAGE_USAGE = String.format("%1$s %2$s: Adds a lesson to TutorAid. "
+                    + "\nParameters: "
+                    + "\n%3$sLESSON NAME"
+                    + "  [%4$sLESSON CAPACITY]"
+                    + "  [%5$sLESSON PRICE]"
+                    + "  [%6$sLESSON TIMING]"
+                    + "\nExample:"
+                    + "\n%1$s %2$s %3$sMaths 1 %4$s50 %5$s100 %6$sMon 1000-1200",
+            COMMAND_WORD, COMMAND_FLAG, PREFIX_LESSON_NAME, PREFIX_LESSON_CAPACITY, PREFIX_LESSON_PRICE,
+            PREFIX_LESSON_TIMING);
 
-    public static final String MESSAGE_SUCCESS = "New lesson added: %1$s";
-    public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists in TutorAid";
+    public static final String MESSAGE_SUCCESS = "Successfully added %s to TutorAid.";
+    public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists in TutorAid.";
 
     private final Lesson lesson;
 
@@ -51,7 +50,7 @@ public class AddLessonCommand extends AddCommand {
         }
 
         model.addLesson(lesson);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, lesson));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, lesson.toNameString()));
     }
 
     @Override

@@ -14,11 +14,13 @@ public class FindStudentCommand extends FindCommand {
 
     public static final String COMMAND_FLAG = "-s";
 
-    public static final String MESSAGE_USAGE = FindCommand.COMMAND_WORD + COMMAND_FLAG
-            + ": Finds all students whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + FindCommand.COMMAND_WORD + COMMAND_FLAG + " alice bob charlie";
+    public static final String MESSAGE_USAGE = String.format("%1$s %2$s: Finds all students whose names contain any of "
+                    + "the specified keywords (case-insensitive) and displays them as a list with index numbers."
+                    + "\nParameters:"
+                    + "\nKEYWORD [MORE KEYWORDS]"
+                    + "\nExample:"
+                    + "\n%1$s %2$s alice bob charlie",
+            COMMAND_WORD, COMMAND_FLAG);
 
     private final NameContainsSubstringsPredicate predicate;
 

@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static tutoraid.logic.parser.CliSyntax.PREFIX_LESSON;
 import static tutoraid.logic.parser.CliSyntax.PREFIX_STUDENT;
 
+import java.util.ArrayList;
+
 import tutoraid.commons.core.Messages;
 import tutoraid.commons.core.index.Index;
 import tutoraid.logic.commands.AddStudentToLessonCommand;
@@ -15,8 +17,8 @@ import tutoraid.logic.parser.exceptions.ParseException;
 public class AddStudentToLessonCommandParser implements Parser<AddStudentToLessonCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of AddStudentToLessonCommand
-     * and returns an AddStudentToLessonCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of AddStudentsToLessonsCommand
+     * and returns an AddStudentsToLessonsCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddStudentToLessonCommand parse(String args) throws ParseException {
@@ -25,19 +27,20 @@ public class AddStudentToLessonCommandParser implements Parser<AddStudentToLesso
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_STUDENT, PREFIX_LESSON);
 
-        // Must specify student index and lesson index so the student can be added to the lesson
+        // Must specify student indexes and lesson indexes so these students can be added to these lessons
         if (argMultimap.getValue(PREFIX_STUDENT).isEmpty()
                 || argMultimap.getValue(PREFIX_LESSON).isEmpty()
                 || !argMultimap.getPreamble().isEmpty()) {
+
             throw new ParseException(String.format(
                     Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddStudentToLessonCommand.MESSAGE_USAGE));
         }
 
-        Index studentIndex = ParserUtil.parseIndex(
+        ArrayList<Index> studentIndexes = ParserUtil.parseMultipleIndexes(
                 argMultimap.getValue(PREFIX_STUDENT).get());
-        Index lessonIndex = ParserUtil.parseIndex(
+        ArrayList<Index> lessonIndexes = ParserUtil.parseMultipleIndexes(
                 argMultimap.getValue(PREFIX_LESSON).get());
 
-        return new AddStudentToLessonCommand(studentIndex, lessonIndex);
+        return new AddStudentToLessonCommand(studentIndexes, lessonIndexes);
     }
 }
