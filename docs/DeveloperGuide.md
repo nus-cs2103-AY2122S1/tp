@@ -496,6 +496,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user                                       | delete multiple applicants at once            | so that I can delete applicants more efficiently                          |
 | `* *`    | user                                       | delete all applicants that are marked as done | so that I can focus only on applicants that I have not worked on, and easily reduce clutter in the address book |
 | `* *`    | user                                       | delete all applicants at once                 | so that I can save time clearing all data without having to manually input every single applicant via a delete command |
+| `* *`    | user                                       | find applicants with interviews that have passed | so that I can easily see the applicants with passed interviews and carry out the appropriate operations on them |
+| `* *`    | user                                       | find applicants with interviews that are upcoming | so that I can easily see the applicants with upcoming interviews and carry out the appropriate operations on them |
 
 ### Use cases
 
