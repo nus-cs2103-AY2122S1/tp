@@ -594,7 +594,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | list all applicants                           | keep track of all my applicants                                           |
 | `* * *`  | user                                       | add an applicant                              | update my list of applicants with new people                              |
 | `* * *`  | user                                       | delete an applicant                           | remove applicants I no longer need                                        |
-| `* *`    | user                                       | delete multiple applicants at once            | so that I can delete applicants more efficiently                          |
 | `* * *`  | user                                       | edit an applicant's information               | update their information without having to delete and add them again      |
 | `* * *`  | user                                       | find applicants by their name                 | locate details of applicants without having to go through the entire list |
 | `* * *`  | user                                       | find applicants by their phone number         | locate details of applicants without having to go through the entire list |
@@ -608,8 +607,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | find applicants by their interview time       | filter out applicants that match the desired interview times           |
 | `* * *`  | user                                       | find applicants by their notes                | filter out applicants that match the desired note                         |
 | `* * *`  | user                                       | find applicants by their done status          | filter out applicants that match the desire done status                   |
+| `* * *`  | user                                       | mark applicants as "Done"                     | know which applicants I have attended to                                  |
+| `* * *`  | user                                       | unmark applicants from "Done" to "Not Done"   | reflect the correct current status I have with the applicant              |
 | `* * *`  | user                                       | save applicant data                           | refer to it in the future without having to type in their data again      |
-| `* * *`  | user                                       | see all names available in the list           | check easily if a certain name is present in the list without having to go through the entire list      |
+| `* * *`  | user                                       | exit the application                          | so that I can end my session without having to force close the application by clicking the red X at the top right. |
+| `* *`    | user                                       | see all names available in the list           | check easily if a certain name is present in the list without having to go through the entire list      |
 | `* *`    | user                                       | see all phone numbers available in the list   | check easily if a certain number is present in the list without having to go through the entire list      |
 | `* *`    | user                                       | see all emails available in the list          | check easily if a certain email is present in the list without having to go through the entire list      |
 | `* *`    | user                                       | see all applied roles available in the list   | check easily if a certain role is present in the list without having to go through the entire list      |
@@ -617,17 +619,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user                                       | see all expected salaries available in the list | check easily if a certain expected salary is present in the list without having to go through the entire list      |
 | `* *`    | user                                       | see all interview times available in the list | check easily if a certain interview time is present in the list without having to go through the entire list      |
 | `* *`    | user                                       | see all tags available in the list | check easily if a certain tag is present in the list without having to go through the entire list      |
-| `* * *`  | user                                       | mark applicants as "Done"                     | know which applicants I have attended to                                  |
-| `* * *`  | user                                       | unmark applicants from "Done" to "Not Done"   | reflect the correct current status I have with the applicant              |
+| `* *`    | user                                       | delete multiple applicants at once            | so that I can delete applicants more efficiently                          |
 | `* *`    | user                                       | delete all applicants that are marked as done | so that I can focus only on applicants that I have not worked on, and easily reduce clutter in the address book |
-
-
-*{More to be added}*
+| `* *`    | user                                       | delete all applicants at once                 | so that I can save time clearing all data without having to manually input every single applicant via a delete command |
+| `* *`    | user                                       | find applicants with interviews that have passed | so that I can easily see and keep track of the applicants with passed interviews  |
+| `* *`    | user                                       | find applicants with interviews that are upcoming | so that I can easily see and keep track of the applicants with upcoming interviews |
 
 ### Use cases
 
 (For all use cases below, the **System** is the `RecruitIn` and the **Actor** is the `user`, unless specified otherwise)
-
 
 **Use case: UC01 - Asking for help**
 
@@ -668,8 +668,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. RecruitIn shows an error message.
 
       Use case resumes at step 1.
+    
+* 1b. The applicant that the user is trying to add is a duplicate of an applicant that already exists in the storage.
+    * 1b1. RecruitIn shows an error message.
+    
+      Use case resumes at step 1.
+    
+**Use case: UC04 - Editing an applicant**
 
-**Use case: UC04 - Deleting an applicant**
+**MSS**
+
+1.  User requests to edit an applicant with provided information.
+2.  RecruitIn edits the applicant in the storage.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The input format is invalid.
+    * 1a1. RecruitIn shows an error message.
+
+      Use case resumes at step 1.
+
+* 1b. The newly edited applicant is a duplicate of an applicant that already exists in the storage.
+    * 1b1. RecruitIn shows an error message.
+
+      Use case resumes at step 1.
+
+**Use case: UC05 - Deleting an applicant**
 
 **MSS**
 
@@ -682,7 +708,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. User requests to <u>find applicant (UC05)</u>.
+* 1a. User requests to <u>find applicant (UC06)</u>.
 
   Use case resumes at step 2.
 
@@ -690,12 +716,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The delete command is invalid.
+* 3a. The input format is invalid.
     * 3a1. RecruitIn shows an error message.
 
       Use case resumes at step 2.
 
-**Use case: UC05 - Finding an applicant**
+**Use case: UC06 - Finding an applicant**
 
 **MSS**
 
@@ -715,7 +741,59 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: UC06 - Showing search terms**
+**Use case: UC07 - Filtering applicants by passed interviews**
+
+**MSS**
+
+1.  User requests to <u>list applicants (UC01)</u>.
+2.  RecruitIn displays a list of applicants.
+3.  User requests to find all applicants with interviews that have already passed.
+4.  RecruitIn displays the applicants with interviews that have already passed.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User requests to <u>find applicant (UC06)</u>.
+
+  Use case resumes at step 2.
+
+* 2a. The list of applicants is empty.
+
+  Use case ends.
+
+* 3a. The input format is invalid.
+    * 3a1. RecruitIn shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: UC08 - Filtering applicants by upcoming interviews**
+
+**MSS**
+
+1.  User requests to <u>list applicants (UC01)</u>.
+2.  RecruitIn displays a list of applicants.
+3.  User requests to find all applicants with upcoming interviews in the future.
+4.  RecruitIn displays the applicants with upcoming interviews in the future.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User requests to <u>find applicant (UC06)</u>.
+
+  Use case resumes at step 2.
+
+* 2a. The list of applicants is empty.
+
+  Use case ends.
+
+* 3a. The input format is invalid.
+    * 3a1. RecruitIn shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: UC09 - Showing search terms**
 
 **MSS**
 
@@ -737,7 +815,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC07 - Marking an applicant**
+**Use case: UC010 - Marking an applicant**
 
 **MSS**
 
@@ -750,7 +828,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. User requests to <u>find applicant (UC05)</u>.
+* 1a. User requests to <u>find applicant (UC06)</u>.
 
   Use case resumes at step 2.
 
@@ -758,12 +836,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The mark command is invalid.
+* 3a. The input format is invalid.
     * 3a1. RecruitIn shows an error message.
 
       Use case resumes at step 2.
 
-**Use case: UC08 - Unmarking an applicant**
+**Use case: UC11 - Unmarking an applicant**
 
 **MSS**
 
@@ -776,7 +854,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. User requests to <u>find applicant (UC05)</u>.
+* 1a. User requests to <u>find applicant (UC06)</u>.
 
   Use case resumes at step 2.
 
@@ -784,12 +862,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The unmark command is invalid.
+* 3a. The input format is invalid.
     * 3a1. RecruitIn shows an error message.
 
       Use case resumes at step 2.
 
-**Use case: UC09 - Deleting marked applicants**
+**Use case: UC012 - Deleting marked applicants**
 
 **MSS**
 
@@ -802,7 +880,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. User requests to <u>find applicant (UC05)</u>.
+* 1a. User requests to <u>find applicant (UC06)</u>.
 
   Use case resumes at step 2.
 
@@ -810,7 +888,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The delete command is invalid.
+* 3a. The input format is invalid.
     * 3a1. RecruitIn shows an error message.
 
       Use case resumes at step 2.
@@ -820,7 +898,35 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-*{More to be added}*
+**Use case: UC013 - Deleting all applicants at once**
+
+**MSS**
+
+1.  User requests to <u>list applicants (UC01)</u>.
+2.  RecruitIn displays a list of applicants.
+3.  User requests to delete all applicants at once.
+4.  RecruitIn deletes all applicants saved in RecruitIn.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User requests to <u>find applicant (UC06)</u>.
+
+  Use case resumes at step 2.
+
+* 2a. The list of applicants is empty.
+
+  Use case ends.
+
+**Use case: UC013 - Exiting RecruitIn**
+
+**MSS**
+
+1.  User requests to exit RecruitIn.
+2.  RecruitIn closes.
+
+    Use case ends.
 
 ### Non-Functional Requirements
 
