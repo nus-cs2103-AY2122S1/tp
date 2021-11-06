@@ -307,7 +307,7 @@ the changes made to the specified lesson.<br>
 
 #### Cancelling and Uncancelling Lessons
 
-Cancelling and uncancelling of lessons is done using the `LessonEditCommand`, which allows the user to specify multiple cancel and uncancel dates in one command. 
+Cancelling and uncancelling of lessons is done using the `LessonEditCommand`, which allows the user to specify multiple dates to be cancelled and uncancelled.
 
 Cancelled dates of a lesson are stored as a field, `CancelledDates` in the lesson object. When a user specifies a valid lesson date to be cancelled, the date is added into the `CancelledDates` set. When a user specifies a valid lesson date to be uncancelled, the date is removed from `CancelledDates`.
 
