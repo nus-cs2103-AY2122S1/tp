@@ -343,91 +343,6 @@ The following activity diagram summarizes what happens when the `IncludeCommand`
     * Pros: Do not need to have the `Index` in UI to know what `Event` it is, can just reference it by its name.
     * Cons: Hard to type when the `eventName` is long, `eventName` not being unique will also cause issues.
 
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -461,51 +376,55 @@ _{Explain here how the data archiving feature will be implemented}_
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 [EPIC] Basic CRUD Functionality
+
 | Priority | As a …​                                 | I want to …​                                                                                       | So that I can…​                                                                                                                    |
 | -------- | ------------------------------------------ | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| `* * *`  | admin in a hall/ residence                 | add a resident’s information into the database                                                        | keep track of the residents' data                                                                                                     |
-| `* * *`  | admin in a hall/ residence                 | add a resident's last FET date                                                                        | track and be aware of the new residents’ FET progress                                                                                 |
+| `* * *`  | admin in a hall/ residence                 | add a new resident                                                                                    | keep track of the residents' data                                                                                                     |
 | `* * *`  | admin in a hall/ residence                 | add a new event                                                                                       | keep track of current and upcoming events happening in the hall/ residence                                                            |
-| `* * *`  | admin in a hall/ residence                 | add residents to an event                                                                             | keep track of the residents attending an event and their information                                                                  |
-| `* * *`  | admin in a hall/ residence                 | delete a resident’s information from the database                                                     | remove the data of a resident who has moved out                                                                                       |
+| `* * *`  | admin in a hall/ residence                 | add residents to an event                                                                             | keep track of the residents attending a specific hall event                                                                           |
+| `* * *`  | admin in a hall/ residence                 | delete a resident                                                                                     | remove the data of a resident who has moved out                                                                                       |
 | `* * *`  | admin in a hall/ residence                 | delete many residents in a single command                                                             | save a lot of time when deleting multiple residents                                                                                   |
 | `* * *`  | admin in a hall/ residence                 | delete an event                                                                                       | remove an event that has been cancelled                                                                                               |
+| `* * *`  | admin in a hall/ residence                 | delete many events in a single command                                                                | save a lot of time when deleting multiple events                                                                                      |
+| `* * *`  | admin in a hall/ residence                 | delete residents from an event                                                                        | remove residents who are no longer attending a specific hall event                                                                    |
 | `* * *`  | admin in a hall/ residence                 | update a resident’s details                                                                           | update and reflect any changes in the residents’ details                                                                              |
 | `* * *`  | admin in a hall/ residence                 | update the particulars of many residents in a single command                                          | save a lot of time when editing the details of multiple residents                                                                     |
-| `* * *`  | admin in a hall/ residence                 | update a resident's last FET date                                                                     | update the current residents’ last FET dates when they take a new FET                                                                 |
 | `* * *`  | admin in a hall/ residence                 | update an event's details                                                                             | update an event’s details if there are any changes                                                                                    |
+| `* * *`  | admin in a hall/ residence                 | add and update a resident's last FET date                                                             | keep track of the residents’ last FET dates and update the dates whenever they take a new FET                                         |
 
 
 [EPIC] Information Retrieval
+
 | Priority | As a …​                                 | I want to …​                                                                                       | So that I can…​                                                                                                                    |
 | -------- | ------------------------------------------ | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| `* * *`  | admin in a hall/ residence                 | view the residents’ information                                                                       | see all the information of the current residents                                                                                      |
+| `* * *`  | admin in a hall/ residence                 | view all residents                                                                                    | see all the current residents                                                                                                         |
+| `* * *`  | admin in a hall/ residence                 | view all events                                                                                       | see all the current events                                                                                                            |
+| `* * *`  | admin in a hall/ residence                 | view a list of residents who were present at an event                                                 | identify who is at risk if someone in the group catches COVID                                                                         |
 | `* * *`  | admin in a hall/ residence                 | search for the residents by their name, room, email, phone number                                     | find a resident based on the information given                                                                                        |
 | `* * *`  | admin in a hall/ residence                 | filter the residents by faculty                                                                       | easily disseminate faculty-specific information to the residents                                                                      |
 | `* * *`  | admin in a hall/ residence                 | filter the residents by block and level                                                               | easily contact a group of students in order to disseminate group-specific information                                                 |
 | `* * *`  | admin in a hall/ residence                 | filter the residents by their vaccination status                                                      | use the information to disseminate information or guidelines that may be different for vaccinated and unvaccinated individuals        |
 | `* * *`  | admin in a hall/ residence                 | immediately see residents who have missed their FET deadlines                                         | disseminate a reminder to these residents to take a new FET test                                                                      |
-| `* * *`  | admin in a hall/ residence                 | retrieve all residents whose FETs that are due within a given date                                    | ensure residents do not miss their FET deadlines by reminding them to do their FETs                                                   |
+| `* * *`  | admin in a hall/ residence                 | immediately see which events contain unvaccinated people                                              | ensure that COVID restrictions are adhered to, and that everyone attending the event is vaccinated, by removing the unvaccinated residents from the event list   |
+| `* * *`  | admin in a hall/ residence                 | retrieve all residents whose FETs are due within a given date                                         | ensure residents do not miss their FET deadlines by reminding them to do their FETs                                                   |
 | `* * *`  | admin in a hall/ residence                 | retrieve a resident's test kit collection deadlines                                                   | ensure residents do not miss their test kit collections by reminding them to collect their kits on time                               |
-| `* * *`  | admin in a hall/ residence                 | check the date of the events                                                                          | identify who was in contact with the infected person on the day of the event                                                          |
-| `* * *`  | admin in a hall/ residence                 | retrieve the event venues and its maximum capacity and the number of residents attending an event     | ensure that the number of residents attending the event will not exceed the capacity of the event venue                               |
-| `* * *`  | admin in a hall/ residence                 | view a list of residents who were present at an event                                                 | identify who is at risk if someone in the group catches COVID                                                                         |
-| `* *`    | admin in a hall/ residence                 | retrieve the vaccination statuses of the residents attending an event                                 | ensure that COVID restrictions are adhered to and everyone attending the event is vaccinated                                          |
+| `* * *`  | admin in a hall/ residence                 | retrieve the date and venue of the events                                                             | identify who was in contact with the infected person on the day of the event                                                          |
+| `* * *`  | admin in a hall/ residence                 | retrieve the maximum capacity of an event venue and the number of residents attending the event       | ensure that the number of residents attending the event will not exceed the capacity of the event venue                               |
+| `* * *`  | admin in a hall/ residence                 | easily carry out contact tracing                                                                      | quarantine can be done quickly in the case where one person in the group catches COVID                                                |
 | `*`      | admin in a hall/ residence                 | check which CCA booked a certain facility                                                             | find out which CCA is responsible in case trouble arises                                                                              |
-| `*`      | admin in a hall/ residence                 | check a resident’s prior activities (events/ CCAs)                                                    | find out which group has come into contact with the infected person                                                                   |
+| `*`      | admin in a hall/ residence                 | check a resident’s prior events                                                                       | find out which group has come into contact with the infected person                                                                   |
 
 
 [EPIC] Miscellaneous
+
 | Priority | As a …​                                 | I want to …​                                                                                       | So that I can…​                                                                                                                    |
 | -------- | ------------------------------------------ | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
 | `* * *`  | admin in a hall/ residence                 | view the help guide whenever I need to                                                                | refresh my memory on how to use the app                                                                                               |
+| `* *`    | admin in a hall/ residence                 | view a summary of the app functions                                                                   | have an overview of what the app does                                                                                                 |
 | `* *`    | admin in a hall/ residence                 | import user data from a CSV file                                                                      | input multiple residents' information into the system at once without having to add each resident's information line-by-line          |
-| `*`      | admin in a hall/ residence                 | output the emails of the residents whose FET/collection are due soon into a file                      | disseminate information to the residents more easily                                                                                  |
-| `*`      | new user of the app                        | view a detailed guide on how to use basic functions                                                   | learn how to navigate within the app and use the commands                                                                             |
-| `*`      | admin in a hall/ residence                 | easily carry out contact tracing                                                                      | quarantine can be done quickly in the case where one person in the group catches COVID                                                |
-| `*`      | admin in a hall/ residence                 | see a pop-up of the format of the command once I type it
-
-*{More to be added}*
+| `* *`    | admin in a hall/ residence                 | export the emails of the residents whose FET/collection are due soon into a file                      | disseminate information to the residents more easily                                                                                  |
+| `*`      | admin in a hall/ residence                 | view all details of a specific resident or event only when I need to                                  | easily find the specific information I am looking for, without having the large amount of information stored cluttering the app       |
+| `*`      | admin in a hall/ residence                 | see a auto-suggestion of the command format once I type it                                            | quickly refer to the correct format of the command                                                                                    |
 
 ### Use cases
 
