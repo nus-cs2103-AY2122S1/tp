@@ -159,6 +159,7 @@ public class EditCommand extends Command {
         if (targetTaskIndex == null) {
             return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
         } else {
+            model.displayPersonTaskList(editedPerson);
             return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson) + "\n"
                     + editedTaskMessage);
         }
