@@ -13,7 +13,6 @@ import static seedu.address.logic.parser.ParserUtil.INDEX_ARGS_COUNT_STUDENT;
 import static seedu.address.logic.parser.ParserUtil.STUDENT_INDEX_ZERO_BASED;
 
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -37,6 +36,8 @@ public class LessonAddCommandParser implements Parser<LessonAddCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the LessonAddCommand
      * and returns a LessonAddCommand object for execution.
+     *
+     * @param args String argument to be parsed.
      * @throws ParseException if the user input does not conform the expected format
      */
     public LessonAddCommand parse(String args) throws ParseException {
@@ -54,10 +55,8 @@ public class LessonAddCommandParser implements Parser<LessonAddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LessonAddCommand.MESSAGE_USAGE));
         }
 
-        Optional<Date> date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
-        if (date.isEmpty()) {
-            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
-        }
+        Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get())
+                .orElseThrow(() -> new ParseException(Date.MESSAGE_CONSTRAINTS));
 
         TimeRange timeRange = ParserUtil.parseTimeRange(argMultimap.getValue(PREFIX_TIME).get());
         Subject subject = ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT).get());
@@ -78,12 +77,12 @@ public class LessonAddCommandParser implements Parser<LessonAddCommand> {
             Date endDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_RECURRING).get())
                     .orElse(Date.MAX_DATE);
 
-            lesson = new RecurringLesson(date.get(), endDate,
+            lesson = new RecurringLesson(date, endDate,
                     timeRange, subject, homework, lessonRates, outstandingFees, cancelledDates);
             return new LessonAddCommand(index, lesson);
         }
 
-        lesson = new MakeUpLesson(date.get(), timeRange, subject, homework, lessonRates,
+        lesson = new MakeUpLesson(date, timeRange, subject, homework, lessonRates,
             outstandingFees, cancelledDates);
 
         return new LessonAddCommand(index, lesson);
