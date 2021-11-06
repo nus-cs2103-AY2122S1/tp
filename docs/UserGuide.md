@@ -123,7 +123,7 @@ Examples:
 
 ### Listing all students: `list`
 
-Shows a list of all students matching the specified tags or list of all students if no tags are specified.
+Shows a list of all students in the current module matching the specified tags or list of all students in the current module if no tags are specified.
 
 Format: `list [TAG]…​`
 
