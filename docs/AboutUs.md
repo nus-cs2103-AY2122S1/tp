@@ -30,7 +30,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/lingshanng.png" width="200px">
 
-[[github](http://github.com/lingshanng)]
+[[github](http://github.com/lingshanng)] [[Portfolio](team/lingshanng.html)]
 
 * Role: Developer
 * Responsibility: Code Quality
