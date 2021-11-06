@@ -476,10 +476,9 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample friends. The window size may not be 
-      optimum.
+   1. Double-click the jar file Expected: gitGud GUI launches.
 
 1. Saving window preferences
 
@@ -488,13 +487,10 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases … }_
-
 ### Adding a friend
 1. Adding a friend to gitGud
 
-    1. Prerequisites: List all friends using the `friend --list` command. There should not be a friend with 
-       `FRIEND_ID` Draco as well as friend with `FRIEND_ID` MrFeely already stored in gitGud. 
+    1. Prerequisites: There should not be a friend with `FRIEND_ID` Draco or a friend with `FRIEND_ID` MrFeely already stored in gitGud. 
 
     2. Test case: `friend --add Draco --name Marcus`<br>
        Expected: Friend with `FRIEND_ID` Draco is added. gitGud states that `FRIEND_ID` is added.
@@ -504,8 +500,6 @@ testers are expected to do more *exploratory* testing.
 
     4. Other incorrect add commands to try: `friend --name Marcus`, `friend --add`, `friend --name`, ...`
        Expected: No friend is added. Error details shown in the status message. Status bar remains the same.
-
-2. _{ more test cases … }_
 
 ### Adding a game
 1. Adding a game to gitGud
@@ -540,8 +534,6 @@ testers are expected to do more *exploratory* testing.
        Draconian`, `link --friend`, ...
        Expected: Similar to previous.
 
-2. _{ more test cases … }_
-
 ### Deleting a friend
 
 1. Deleting a friend from gitGud
@@ -557,8 +549,6 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `friend --delete`, `...` 
       Expected: Similar to previous.
 
-2. _{ more test cases … }_
-
 ### Deleting a game
 
 1. Deleting a game from gitGud
@@ -573,8 +563,6 @@ testers are expected to do more *exploratory* testing.
 
     1. Other incorrect delete commands to try: `game --delete`, `...`
        Expected: Similar to previous.
-
-1. _{ more test cases … }_
 
 ### Filtering friends in friends' list using a keyword
 
@@ -627,10 +615,10 @@ testers are expected to do more *exploratory* testing.
     4. Test case: `friend --get co`<br>
        Expected: No friend is found. Error details shown in the status message. Status bar remains the same.
 
-    5. \Other incorrect delete commands to try: `friend --get`, `...`
+    5. Other incorrect delete commands to try: `friend --get`, `...`
        Expected: Similar to previous.
    
-2. ### Viewing a game's full data
+### Viewing a game's full data
 
 1. View a game's full information, including the friends which play that game.
 
@@ -645,13 +633,5 @@ testers are expected to do more *exploratory* testing.
     4. Test case: `game --get rant`<br>
        Expected: No game is found. Error details shown in the status message. Status bar remains the same.
 
-    5. \Other incorrect delete commands to try: `game --get`, `...`
+    5. Other incorrect delete commands to try: `game --get`, `...`
        Expected: Similar to previous.
-
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases … }_
