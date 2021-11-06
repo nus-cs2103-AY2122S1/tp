@@ -2,15 +2,18 @@ package seedu.modulink.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.modulink.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.modulink.commons.core.Messages.MESSAGE_UNKNOWN_PREFIX_FORMAT;
 import static seedu.modulink.logic.parser.CliSyntax.PREFIX_MOD;
 
 import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.modulink.commons.core.Messages;
 import seedu.modulink.commons.util.StringUtil;
 import seedu.modulink.logic.commands.AddModCommand;
 import seedu.modulink.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.modulink.logic.commands.EditGroupStatusCommand;
 import seedu.modulink.logic.parser.exceptions.ParseException;
 import seedu.modulink.model.tag.Mod;
 
@@ -26,22 +29,28 @@ public class AddModCommandParser implements Parser<AddModCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_MOD);
 
         String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()
-            || parseModsToAdd(argMultimap.getAllValues(PREFIX_MOD)).isEmpty()
-            || StringUtil.countMatch(args, '/') != 1) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddModCommand.MESSAGE_USAGE));
+
+        try {
+            if (trimmedArgs.isEmpty()
+                || parseModsToAdd(argMultimap.getAllValues(PREFIX_MOD)).isEmpty()) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddModCommand.MESSAGE_USAGE));
+            }
+
+            EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
+
+            parseModsToAdd(argMultimap.getAllValues(PREFIX_MOD)).ifPresent(editPersonDescriptor::setTags);
+            if (!editPersonDescriptor.isAnyFieldEdited()) {
+                throw new ParseException(AddModCommand.MESSAGE_NO_CHANGE);
+            }
+
+            return new AddModCommand(editPersonDescriptor);
+
+        } catch (ParseException e) {
+            throw new ParseException(String.format(e.getMessage() + "%s",
+                    e.getMessage().startsWith("Unknown prefix(es)") ? AddModCommand.MESSAGE_USAGE : ""));
         }
 
-        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
-
-        parseModsToAdd(argMultimap.getAllValues(PREFIX_MOD)).ifPresent(editPersonDescriptor::setTags);
-
-        if (!editPersonDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(AddModCommand.MESSAGE_NO_CHANGE);
-        }
-
-        return new AddModCommand(editPersonDescriptor);
     }
 
     /**
@@ -56,15 +65,15 @@ public class AddModCommandParser implements Parser<AddModCommand> {
             throw new ParseException(AddModCommand.MESSAGE_NO_CHANGE);
         }
 
-        if (tags.size() == 1 && tags.contains("")) {
+        if (tags.size() > 1) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddModCommand.MESSAGE_USAGE));
+        }
+
+        if (tags.contains("")) {
             throw new ParseException(AddModCommand.MESSAGE_NO_CHANGE);
+
         } else {
-            try {
-                return Optional.of(ParserUtil.parseTags(tags));
-            } catch (ParseException e) {
-                throw new ParseException(String.format(e.getMessage(),
-                        e.getMessage().startsWith("Unknown prefix(es)") ? AddModCommand.MESSAGE_USAGE : ""));
-            }
+            return Optional.of(ParserUtil.parseTags(tags));
         }
     }
 }
