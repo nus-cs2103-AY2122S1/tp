@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Ng Jia Yuan's Project Portfolio Page
+title: Charlton Tan's Project Portfolio Page
 ---
 
 ### Project: ModuLink
