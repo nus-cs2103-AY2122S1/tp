@@ -23,7 +23,7 @@ public class AddPersonCommand extends Command {
     public static final String COMMAND_WORD = "-a";
 
     public static final String MESSAGE_USAGE = PERSON_COMMAND + " " + COMMAND_WORD
-            + ": Adds a person to the address book. "
+            + ": Adds a student to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
