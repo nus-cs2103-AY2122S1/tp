@@ -23,14 +23,18 @@ title: Developer Guide
   * [Add Score : `addscore`](#add-score--addscore)
   * [Search : `search`](#search--search)
   * [Import : `import`](#import--import)
-* [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
+* [**Documentation, Testing, Logging, Configuration, Dev-Ops**](#documentation-testing-logging-configuration-dev-ops)
+  * [Documentation Guide](#documentation-guidedocumentationmd)
+  * [Testing Guide](#testing-guidetestingmd)
+  * [Configuration Guide](#configuration-guideconfigurationmd)
+  * [Dev-Ops Guide](#devops-guidedevopsmd)
 * [**Appendix: Requirements**](#appendix-requirements)
   * [Product Scope](#product-scope)
   * [User Stories](#user-stories)
   * [Use Cases](#use-cases)
   * [Non-Functional Requirements](#non-functional-requirements)
   * [Glossary](#glossary)
-* [**Appendix: Instructions for manual testing**](#appendix-instructions-for-manual-testing)
+* [**Appendix: Instructions for Manual Testing**](#appendix-instructions-for-manual-testing)
   * [Launch and Shutdown](#launch-and-shutdown)
   * [Delete a Student](#deleting-a-student)
   * [Saving Data](#saving-data)
@@ -399,13 +403,13 @@ The following sequence diagram summarises what happens when the user inputs an `
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## **Documentation, Testing, Logging, Configuration, Dev-Ops**
 
-* [Documentation guide](Documentation.md)
-* [Testing guide](Testing.md)
-* [Logging guide](Logging.md)
-* [Configuration guide](Configuration.md)
-* [DevOps guide](DevOps.md)
+###[Documentation Guide](Documentation.md)
+###[Testing Guide](Testing.md)
+###[Logging Guide](Logging.md)
+###[Configuration Guide](Configuration.md)
+###[DevOps Guide](DevOps.md)
 
 <br>
 
