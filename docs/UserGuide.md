@@ -4,13 +4,12 @@ title: User Guide
 ---
 
 SalesNote is a **desktop app for tailors, optimized for use via a Command Line Interface** (CLI), suitable for fast
-typists. SalesNote aims to help tailors simplify their administrative tasks, with the main features
-of the application split between helping to manage:
+typists. SalesNote aims to help tailors simplify their administrative tasks, with the main features split between helping to manage:
 * Client Information (e.g. Contact details, measurements, notes)
 * Tasks to be done 
 * Sales orders and accounts
 
-This is a user guide aimed at helping all users of the application; both new and experienced. The table of contents 
+This is a user guide aimed at helping all users of SalesNote; both new and experienced. The table of contents 
 below lists all the available commands, and the link will bring you to a quick overview for more information on the
 given command. Newer users hoping to quickly get started can refer to the "quick start", in the first section of the
 user guide below.
@@ -83,7 +82,7 @@ Some example commands you can try:
 
 **:information_source: Notes about the command format:**<br>
 Here are some general notes about how to understand the documentation of the commands below. It includes examples 
-to help you better understand how the documentation translates to actual commands you might feed into the application.
+to help you better understand how the documentation translates to actual commands you might feed into SalesNote.
 
 * In the documentation, words in `UPPER_CASE` are the parameters you should supply. Some examples include:
     * In `addclient n/NAME ...`, `NAME` should be replaced by a name of your choice. e.g. `addclient n/Jacob Tan ...`
@@ -138,7 +137,7 @@ Format: `help`
 
 ## Client Commands
 
-These commands relate to helping you record and manage client information using the application. When entering a client's
+These commands relate to helping you record and manage client information using SalesNote. When entering a client's
 information into the application, there are several fields of information you can store, such as the client's gender,
 or their body measurements for clothing.
 
@@ -147,10 +146,10 @@ The following are some notes on the purpose and requirements of these fields:
 <div markdown="block" class="alert alert-info">
 **:information_source: Notes about the client commands:**<br>
 
-* The application allows you to record the gender of the client. The gender field takes accepts "M" or "Male" to
+* SalesNote allows you to record the gender of the client. The gender field takes accepts "M" or "Male" to
   indicate male gender, and "F" or "Female" to indicate female gender. </br>
   Note that this ignores case, thus "male" or "FEMALE" will also be accepted.
-* A related point, is that the application also allows you to store their measurements for easy reference. This field
+* A related point, is that SalesNote also allows you to store their measurements for easy reference. This field
   is **different depending on their gender**. Take note of the following points:
     * A male's body measurements should be of the format height_waist_shoulder in cm, and it should not be blank.
     * A female's body measurements should be of the format height_waist_shoulder_bust in cm, and it should not be blank.
@@ -172,7 +171,7 @@ The following are some notes on the purpose and requirements of these fields:
 
 ### Adding a client : `addclient`
 
-Allows you to add a client to the application. 
+Allows you to add a client to SalesNote. 
 
 Note that the application maintains a list of unique individuals! In this case two individuals are **considered equal if
 they have the same name**. Two individuals having the exact same name is quite the rare occurrence, and so we felt
@@ -183,7 +182,7 @@ and Jane Lim1).
 Format: `addclient n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS m/MEASUREMENT g/GENDER [r/REMARK] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-If you get the required format for a field wrong e.g. you key in an invalid EMAIL, the application will give you a 
+If you get the required format for a field wrong e.g. you key in an invalid EMAIL, SalesNote will give you a 
 warning, and a reminder of the requirements:
 </div>
 
@@ -195,7 +194,7 @@ Some examples of valid commands:
 
 ### Deleting a client : `deleteclient`
 
-Allows you to delete a client from the application.
+Allows you to delete a client from SalesNote.
 
 Format: `deleteclient INDEX`
 
@@ -204,15 +203,15 @@ Format: `deleteclient INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* Using `listclients` first, to display all clients in the application followed by `deleteclient 2` will 
-  delete the 2nd client in the application.
+* Using `listclients` first, to display all clients in SalesNote followed by `deleteclient 2` will 
+  delete the 2nd client in the displayed list.
 * Using `find Alice` first, followed by `deleteclient 1` will delete the 1st client in the results of the `find` command.
-  </br> This is a quick and convenient way to remove a specific client that you know is in the application, without 
+  </br> This is a quick and convenient way to remove a specific client that you know is in SalesNote, without 
   having to scroll to find them.
 
 ### Editing a client : `editclient`
 
-Edits an existing client in the application.
+Edits an existing client in SalesNote.
 
 Format: `editclient INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [m/MEASUREMENT] [g/GENDER] [r/REMARK] [t/TAG]…​`
 
@@ -255,14 +254,163 @@ Examples:
 
 ### Listing all clients : `listclients`
 
-Displays a list of all clients in the application to you. 
+Displays a list of all clients in SalesNote to you. 
 
 One common use of this command is to remove a filter; 
 for example you might have used `findclient tan` to display only clients whose names contain "Tan". 
-</br> Following with the command `listclients` allows you to refresh the client list to display all clients currently in the application.
+</br> Following with the command `listclients` allows you to refresh the client list to display all clients currently in SalesNote.
 
 Format: `listclients`
 
+--------------------------------------------------------------------------------------------------------------------
+
+## Order Commands
+These commands are for helping you to manage your incoming orders and manage accounts with SalesNote. Orders are created
+with a label describing them, a client, an amount, and a date. <br> The following are a few points to take note of:
+
+* The amount field is any number from 0 to 1 billion. 
+* The date field should follow one of the following formats:
+* The client for the order **must exist in SalesNote** to create the order. For instance <br>
+`addorder l/blue blouse c/Jane a/22.50 d/20 August 2021` will fail if the client with name "Jane" is not in SalesNote.
+* Editing a client, will also edit all the orders tied to the client. For instance, if a client's name is changed from
+"Alice" to "Alice Lin", all orders addressed to "Alice" will now be addressed to "Alice Lin".
+* Note that the name is matched regardless of capitalisation! So if you have a client named "James", your order can 
+be addressed to "james", "JAMES", "James" and so on.
+
+  Format | Example
+      --------|------------------
+  **dd mmmm yyyy** | `08 November 2001`
+  **dd mmm yyyy** | `08 Nov 2021`
+  **yyyy mm dd** | `2021 11 08`
+  **dd-mm-yyyy** | `08-11-2021`
+  **yyyy/mm/dd** | `2021/11/08`
+  **dd/mm/yyyy** | `08/11/2021`
+
+### Adding an order : `addorder`
+
+Allows you to add an order to SalesNote.
+
+Format: `addorder l/LABEL c/CUSTOMER a/AMOUNT d/DATE`
+
+Examples:
+* `addorder l/blue blouse c/Alice a/21.90 d/20 August 2021`
+* `addorder l/school uniform c/John a/15.00 d/15 October 2021`
+
+### Deleting an order : `deleteorder`
+
+Allows you to delete an order from SalesNote.
+
+Format: `deleteorder INDEX`
+
+* Deletes the order at the specified `INDEX`
+* The index refers to the index number shown in the displayed order list.
+* The index must be a positive integer 1, 2, 3
+
+Note that this will also delete all tasks tagged to the deleted order (for more information, see [Task Commands](#task-commands)).
+
+Examples:
+* `listorders` followed by `deleteorder 1` deletes the first listed task in SalesNote
+* `findorders Tan` followed by `deleteorder 1` deletes the first customer with surname "Tan" in SalesNote
+
+### Finding orders by keywords : `findorder`
+
+Searches for orders whose customer, label, date or sales id contain any of the given keywords, and 
+displays them to you in the **Orders** tab.
+
+Format: `findorder KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g. `green` will match `Green`
+* The order of the keywords does not matter. e.g. `Blue Blazer` will match `Blazer Blue`
+* Only full words will be matched. e.g. `Blazer` will not match `Blazers`
+* Orders matching at least one keyword will be returned e.g. `Blue Blazer` can return both `Blue Shirt` and `Black Blazer`.
+
+Examples:
+* `findorder blue` returns `blue blazer` and `blue shirt`
+* `findorder SO1` returns order with id of `SO1`
+
+As the purpose of the order commands in SalesNote are to help you manage accounts better, we offer a more comprehensive
+set of commands for viewing and sorting orders.
+
+### Listing all orders : `listorders`
+
+Displays a list of all orders in SalesNote to you.
+
+### Listing completed orders : `completedorders`
+
+Filters the list to show only completed orders to you.
+
+Format: `completedorders`
+
+### Listing incomplete orders : `incompleteorders`
+
+Filters the list to show only incomplete orders to you.
+
+Format: `incompleteorders`
+
+### Marking an order as complete : `markorder`
+This command is to mark an order in SalesNote as complete, meant to be used when payment has been received.
+
+Format: `markorder INDEX`
+* Marks the order at the specified `INDEX` as complete
+* The index refers to the index number shown in the displayed order list.
+* The index must be a positive integer 1, 2, 3
+
+This command can be combined with others for ease of use. Some examples:
+* Using `findorder Alice` to find all orders addressed to clients named Alice, followed by `markorder 1` to mark the first such order as complete.
+* Using `incompleteorders` to filter the list to show only the orders where payment is outstanding first, to quickly mark the correct one as complete a client is making payment.
+
+### Sorting orders : `sortorders`
+
+Allows you to sort all orders based on a chosen field and arrangement.
+
+Format: `sortorders f/FIELD [o/ORDERING]`
+
+* Your orders are sorted based on the `FIELD` chosen. You may choose between:
+    * The Date field, identified with a "d" or "date".
+    * The Amount field, identified with an "a" or "amount".
+* The direction of the arrangement depends on the `ORDERING`, which is either:
+    * Ascending, identified with an "asc" or "ascending".
+    * Descending, identified with a "desc" or "descending".
+* If the `ORDERING` parameter is not supplied, the list will be sorted in ascending order.
+
+<div markdown="block" class="alert alert-primary">
+
+**:information_source: Note:** <br>
+
+* Your orders are normally arranged in the sequence they were added.
+* When two or more orders have an identical value for the `FIELD` chosen, the normal arrangement is used as a tiebreaker.
+* Adding / Deleting an order reverts the list to the normal arrangement.
+
+</div>
+
+Examples:
+* `sortorders f/date o/descending` sorts your orders in descending order of date (orders with later dates shown first).
+* `sortorders f/d o/asc` sorts your orders in ascending order of date (orders with earlier dates shown first).
+* `sortorders f/a o/ascending` sorts your orders in ascending order of amount (orders for smaller amounts shown first).
+* `sortorders f/amount` sorts your orders in ascending order of amount (orders for smaller amounts shown first).
+
+### Viewing total orders : `totalorders`
+
+This displays the total dollar amount for each client in SalesNote to you.
+
+<div markdown="block" class="alert alert-info">
+:information_source: The total orders displayed are based on the clients in the application. However, if a client in
+SalesNote does not have any orders keyed in yet, they will not be shown.
+</div>
+
+Format: `totalorders`
+
+![TotalOrdersWindow](images/TotalOrdersWindow.png)
+<figcaption align = "center">e.g. In the figure above, the application has three clients Ng Chin Gan, Alice Seah,
+and Jacob Tan, but Jacob Tan is not shown as there are no orders from him in SalesNote yet</figcaption>
+
+
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Press the ESCAPE key to close the total orders window
+</div>
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## Task Commands
 This part of the user guide concerns commands meant to help you manage tasks. Tasks in SalesNote come with a 
@@ -278,7 +426,7 @@ as completed, and also provides you with an ability to tag tasks to sales orders
     * Some examples:
         * `addtask sew buttons t/general`
         * `addtask sew buttons t/SO1`
-        * `addtask sew buttons` (for convenience, if the tag is omitted, the application will clasify the task as "general")
+        * `addtask sew buttons` (for convenience, if the tag is omitted, SalesNote will classify the task as "general")
 * The number after the 'SO' prefix **must correspond to the id of an existing order**. 
 * The date that accompanies tasks should be keyed in one of the following formats:
   
@@ -307,7 +455,7 @@ If an order is deleted from SalesNote, all tasks that are tagged to it will also
 </div>
 
 Examples:
-* `addtask l/sew buttons onto blazer d/20 August 2021 t/SO1` adds the task to the application if there is an order with the id of SO1.
+* `addtask l/sew buttons onto blazer d/20 August 2021 t/SO1` adds the task to SalesNote if there is an order with the id of SO1.
 * `addtask l/sew buttons onto blazer d/20 Aug 2021` (the tasktag can be omitted)
 * `addtask l/sew buttons onto blazer d/2021/08/18`
 
@@ -322,20 +470,20 @@ Format: `deletetask INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `listtasks` followed by `deletetask 2` deletes the 2nd task in the application.
+* `listtasks` followed by `deletetask 2` deletes the 2nd task in SalesNote.
 * `findtask sew` followed by `deletetask 1` deletes the 1st task in the results of the `findtask` command.
 
 ### Editing a task : `edittask`
 
-Allows you to edit the information of an existing task in the application.
+Allows you to edit the information of an existing task in SalesNote.
 
 Format: `edittask INDEX [l/LABEL] [d/DATE] [t/TASKTAG]`
 
 * Edits the task at the specified `INDEX`. The index refers to the index number shown in the displayed task list on the **Tasks**'s tab. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* If you attempt to edit the `TASKTAG` field to tie the task to an order, note that the order with that id must exist in the 
-application first. <br> e.g. `edittask 2 t/SO2` will fail if there is no order with id 2 in SalesNote.
+* If you attempt to edit the `TASKTAG` field to tie the task to an order, note that the order with that id must exist in SalesNote first.
+  <br> e.g. `edittask 2 t/SO2` will fail if there is no order with id 2 in SalesNote.
 
 Examples:
 * `edittask 1 l/order cloth d/19 September 2021` edits the label and date of the 1st task to be `order cloth` and `19th September 2021` respectively.
@@ -360,7 +508,7 @@ Examples:
 
 ### Listing all tasks : `listtasks`
 
-Shows a list of all tasks in the application.
+Shows a list of all tasks in SalesNote.
 
 Format: `listtasks`
 
@@ -378,7 +526,7 @@ Format: `incompletetasks`
 
 ### Marking a task as done : `marktask`
 
-Marks a specified task from the application as done.
+Marks a specified task from SalesNote as done.
 
 Format: `marktask INDEX`
 
@@ -391,120 +539,9 @@ Examples:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Order Commands
-
-### Adding an order : `addorder`
-
-Adds an order to the application.
-
-Format: `addorder l/LABEL c/CUSTOMER a/AMOUNT d/DATE`
-
-Examples:
-* `addorder l/blue blouse c/Alice a/21.90 d/20 August 2021`
-* `addorder l/school uniform c/John a/15.00 d/15 October 2021`
-
-### Deleting an order : `deleteorder`
-
-Deletes an order from the application.
-
-Format: `deleteorder INDEX`
-
-* Deletes the order at the specified `INDEX`
-* The index refers to the index number shown in the displayed order list.
-* The index must be a positive integer 1, 2, 3
-
-Note that this will also delete all tasks tagged to the deleted order.
-
-### Finding orders by keywords : `findorder`
-
-Finds orders whose customer, label, date or sales id contain any of the given keywords.
-
-Format: `findorder KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g. `green` will match `Green`
-* The order of the keywords does not matter. e.g. `Blue Blazer` will match `Blazer Blue`
-* Only full words will be matched. e.g. `Blazer` will not match `Blazers`
-* Orders matching at least one keyword will be returned (i.e. OR search). e.g. `Blue Blazer` will return `Blue Shirt`, `Black Blazer`.
-
-Examples:
-* `findorder blue` returns `blue blazer` and `blue shirt`
-* `findorder SO1` returns order with id of `SO1`
-
-### Listing all orders : `listorders`
-
-Shows a list of all orders in the application.
-
-### Listing completed orders : `completedorders`
-
-List all the completed orders.
-
-Format: `completedorders`
-
-### Listing incomplete orders : `incompleteorders`
-
-List all the incomplete orders.
-
-Format: `incompleteorders`
-
-### Marking an order as complete : `markorder`
-
-Format: `markorder INDEX`
-* Marks the order at the specified `INDEX` as completed
-* The index refers to the index number shown in the displayed order list.
-* The index must be a positive integer 1, 2, 3
-
-### Sorting orders : `sortorders`
-
-Sorts all orders based on a chosen field and arrangement.
-
-Format: `sortorders f/FIELD [o/ORDERING]`
-
-* Your orders are sorted based on the `FIELD` chosen. You may choose between:
-  * The Date field, identified with a "d" or "date".
-  * The Amount field, identified with an "a" or "amount".
-* The direction of the arrangement depends on the `ORDERING`, which is either:
-  * Ascending, identified with an "asc" or "ascending".
-  * Descending, identified with a "desc" or "descending".
-* If the `ORDERING` parameter is not supplied, the list will be sorted in ascending order.
-
-<div markdown="block" class="alert alert-primary">
-
-**:information_source: Note:** <br>
-
-* Your orders are normally arranged in the sequence they were added. 
-* When two or more orders have an identical value for the `FIELD` chosen, the normal arrangement is used as a tiebreaker.
-* Adding / Deleting an order reverts the list to the normal arrangement.
-
-</div>
-
-Examples:
-* `sortorders f/date o/descending` sorts your orders in descending order of date (orders with later dates shown first).
-* `sortorders f/d o/asc` sorts your orders in ascending order of date (orders with earlier dates shown first).
-* `sortorders f/a o/ascending` sorts your orders in ascending order of amount (orders for smaller amounts shown first).
-* `sortorders f/amount` sorts your orders in ascending order of amount (orders for smaller amounts shown first).
-
-### Viewing total orders : `totalorders`
-
-Shows the total orders for each client in the application.
-
-<div markdown="block" class="alert alert-info">
-:information_source: The total orders displayed are based on the clients in the application.
-If the customer of an order cannot be found among the clients, the order will not be shown.
-</div>
-
-![TotalOrdersWindow](images/TotalOrdersWindow.png)
-
-Format: `totalorders`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-Press the ESCAPE key to close the total orders window
-</div>
-
---------------------------------------------------------------------------------------------------------------------
-
 ### Clearing all entries : `clear`
 
-Clears all entries (Clients, Tasks, SalesOrder) from the application.
+Clears all entries (Clients, Tasks, SalesOrder) from SalesNote.
 
 Format: `clear`
 
