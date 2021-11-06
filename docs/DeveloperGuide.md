@@ -3,6 +3,9 @@ title: Developer Guide
 ---
 
 ### Table of Contents
+* [Information About this Developer Guide](#information-about-this-developer-guide)
+  * [Purpose of User Guide](#purpose)
+  * [Target Audience of Developer Guide](#target-audience)
 * [Acknowledgements](#acknowledgements)
 * [Setting Up, Getting Started](#setting-up-getting-started)
 * [Design](#design)
@@ -36,24 +39,47 @@ title: Developer Guide
     * [RedoCommand](#redocommand)
     * [HelpCommand](#helpcommand)
 * [Guides](#guides)
-* [Appendix](#appendix-a-requirements)
-  * [Requirements](#appendix-requirements)
+* [Appendix](#appendix)
+  * [Requirement](#appendix-a-requirements)
     * [Product Scope](#product-scope)
     * [User Stories](#user-stories)
     * [Use cases](#use-cases)
     * [Non-Functional Requirements](#non-functional-requirements)
     * [Glossary](#glossary)
-  * [Manual Testing](#appendix-instructions-for-manual-testing)
+  * [Manual Testing](#appendix-b-instructions-for-manual-testing)
     * [Feature Testing](#feature-testing)
     * [UI Testing](#ui-testing)
+  * [Version Controlled Commands](#appendix-c-version-controlled-commands)
     
 --------------------------------------------------------------------------------------------------------------------
+## Information about this Developer Guide
+### Purpose
+This developer guide aims to provide information regarding design and implementation of Academy Directory. 
+To do this effectively, the following details can be found: 
+- Design considerations of certain features
+- Implementation details of certain features
+- Possible future extensions
+
+### Target Audience
+The current version of Academy Directory is specifically designed for
+**CS1101S Avengers**. Therefore, the main Target Audience of this developer guide are Java developers who 
+are or formerly were CS1101S Avengers. As such, the following assumptions are made regarding the Target Audience:
+- Is familiar with the common terms relating to Computer Science.
+- Is familiar with CS1101S module structure and teaching pedagogy.
+
+Technical background is assumed. We also provide the definitions for
+certain technical terms commonly used in this user guide [here](#glossary).
 
 ## **Acknowledgements**
 - This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org/).
 - The formatting and content of this User Guide is referenced from [AY2122S1-CS2103T-w17-1/tp](https://ay2122s1-cs2103t-w17-1.github.io/tp/).
 - Design of the internal version control system is heavily inspired by [Git](https://github.com/git/git).
-
+- Certain code implementations may have been inspired by [Baeldung tutorials](https://www.baeldung.com/)
+- Libraries used: 
+  - Junit5
+  - JavaFX
+  - [Add more]
+  
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting Up, Getting Started**
@@ -97,6 +123,10 @@ The *Sequence Diagram* below shows how the components interact with each other f
 
 ![Architecture Sequence Diagram](images/dg/architecture/ArchitectureSequenceDiagram.png)
 
+The part labeled "VersionControl" occurs because `delete` is a version controlled command. For non-version controlled
+commands the sequence diagram stays largely the same; the difference is the lack of the "VersionControl" part. 
+For a list of version controlled command, refer [here](#appendix-c-version-controlled-commands).
+
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
@@ -114,7 +144,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 ![Structure of the UI Component](images/dg/architecture/ui/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ChartDisplay`, `StudentListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `VisualizerDisplay`, `StudentListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103T-T15-3/tp/blob/master/src/main/java/seedu/academydirectory/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-T15-3/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
@@ -165,6 +195,7 @@ The `VersionedModel` component,
 * does not depend on any of the other three components (as the `VersionedModel` represents data entities of the domain, they should make sense on their own without depending on other components)
 * interfaces with `VersionControl` via the `VersionControlController`, which implements the `Version` API
 and thus gives the `VersionedModel` component the ability to interface with version control entities such as `Commit`.
+* stores a `AddtionalViewModel` that stores additional information required by the UI's `VisualizerDisplay` such as number statistic for the `Visualize` command.
 
 The above implementation is chosen because it makes _turning off_ version control relatively simple; a stub `VersionControlController`
 can be used instead.
@@ -197,12 +228,30 @@ Classes used by multiple components are in the `seedu.academydirectory.commons` 
 The internal version control system in AcademyDirectory is inspired by Git. As such, `VersionControl` 
 keeps track of AcademyDirectory data state by using `VcObject` which corresponds to Git objects.
 
+**Design Considerations:**
+
+**Aspect: How to save state changes**
+- **Alternative 1 (current choice):** Saves state changes to disk ala Git
+  - Pros:
+    - future-proof; even when AcademyDirectory supports adding and tracking many files e.g. 
+    profile pictures of students, code screenshots etc. 
+    - provides backbone for additional features e.g. regeneration of data even when data becomes 
+    corrupted, etc.
+    - Undo, redo, and history operations can be implemented easily
+    - Undo and redo operations can still be done even when application is closed and opened again
+  - Cons: Complex implementation
+    
+- **Alternative 2:** Saves state changes in memory: 
+  - Pros: Easy to implement
+  - Cons: Lacks future-proof*ness* of the first alternative
+
+
 #### VersionControl Objects
 Shown below is the corresponding class diagram:
 
 ![VCObjectClassDiagram](images/dg/architecture/version/VcObjectClassDiagram.png)
 
-Explanation of the objects shown above:
+**Explanation of the objects shown above:**
 - `Tree`: 
   - represents a snapshot of `data` directory of AcademyDirectory.  It maintains a mapping between version-controlled
 filenames and actual filename of tracked blobs.
@@ -218,33 +267,83 @@ filenames and actual filename of tracked blobs.
   - points to a `Commit` object which represents the parent of the current `Commit` object
 - `Label`:
   - labels a `Commit`
-  - relevant labels are `HEAD` which represents the current commit, `CURRENT` which represents
+  - relevant labels are `HEAD` which represents the current commit, `MAIN` which represents
 current branch, and `OLD` which represents the most recent branch before the current branch.
 
-Note that in the actual implementation, a `VcObject` does not actually hold a reference to 
+**A few implementation details:**
+- A `VcObject` does not actually hold a reference to 
 another `VcObject`; rather it has a `Supplier` of the `VcObject` that it's supposed to have
-a reference to. This is to defer read operations to avoid memory overhead. 
+a reference to. This is to defer read operations to avoid memory overhead.
+- Equality of `VcObject` is checked using its _hash_. This follows the idea that a _hash_ is 
+intended to be a reliable fingerprint, and the chosen hash function (SHA1) has a (very) low probability 
+of collision. 
+- All classes which extends `VcObject` class should have a singleton NULL private instance. This reduces headache in terms of 
+handling edge cases e.g. root of commit tree, exception handling, etc. The NULL singleton is used to indicate failure
+for whatever reason, and allows the application to remain operational.
+- Class-specific implementation details: 
+  - `Tree` supports an additional method `Tree#regenerateBlobs()`, which regenerate the files
+  maintained by the said `Tree`.
+  - `Commit` supports a few additional methods which reflect the underlying commit tree: 
+    - `Commit#findLca(Commit)` finds the lowest common ancestor of two commits, returning `Commit.emptyCommit()` 
+    if no common ancestor can be found.
+    - `Commit#getHistory()` returns all commits from given commit to the root of the commit tree.
+    - `Commit#getHighestAncestor()` returns the commit ancestor that is the furthest away,
+    limited by the given end Commit or by the root of the commit tree.
+
+**Design Considerations:**
+
+**Aspect: Which change to track**
+- **Alternative 1 (current choice):** Tracks changes at the file level
+  - Pros: Easy to implement
+  - Cons: May have performance issues in terms of disk space and memory usage
+
+- **Alternative 2:** Tracks changes at the line level of the file:
+  - Pros: Lower disk space requirements
+  - Cons: Difficult to implement
+  
+**Possible improvements in the future:** 
+- Explore implementing `VcObject` as a proper monad with the bind operator, considering the clear relationship
+between the different `VcObject`.
 
 #### Interfacing with other components
 Both the `Storage` component and `VersionedModel` component interfaces with `VersionControl`
 for different reasons:
-- `Storage`: needs to be able to write `VcObjects` to disk
+- `Storage`: needs to be able to write `VcObject`s to disk
 - `VersionedModel`:
-  - needs to be able to read `VcObjects` from disk.
-  - needs to be able to create new `VcObjects` from disk. However, this requires computing 
-  file hash i.e. `VersionedModel` needs minimum write access to disk to be able to compute hash
+  - needs to be able to read `VcObject`s from disk.
+  - needs to be able to create new `VcObject`s. However, this requires computing the `VcObject`
+  file representation's hash i.e. `VersionedModel` needs minimum write access to disk to be able to compute hash
 
-As such, `VersionControl` provides three facade classes, each represents one of the above requirements. The following
+As such, `VersionControl` provides three facade classes, each representing one of the above requirements. The following
 class diagram shows this:
 ![VersionControlClassDiagram](images/dg/architecture/version/VersionControlClassDiagram.png)
 
 The facade classes are: 
 - `VersionControlGeneralReader`: to read `VcObject` from disk
 - `VersionControlGeneralWriter`: to write `VcObject` to disk
-- `HashComputer`: to compute hash of a file or hash of a `VcObject`
+- `HashComputer`: to compute hash of a file or hash of a `VcObject`. MUST NOT expose actual
+write methods as this would allow `VersionedModel` to write to disk, breaking abstractions.
 
-To modify disk representation of a particular instance of `VcObject`, modify both its `Reader`
-and `Writer`.
+To modify disk representation of a particular class which extends from `VcObject`, modify both its `Reader`
+  and `Writer`.
+
+**Design Considerations:**
+
+**Aspect: How to represent `VcObject` in disk**
+- **Alternative 1 (current choice)**: Custom representation
+  - Pros: Smaller disk space utilisation
+  - Cons: Added layer of complexity
+- **Alternative 2**: Standard representation e.g. JSON
+  - Pros: Parsing is simple i.e. use Jackson library
+  - Cons: Larger disk space utilisation
+
+Considering that `VcObject`s are not very complicated, the added layer of complexity does not outweigh 
+the benefits of smaller disk space utilisation in our opinion. Hence, we go for alternative 1.
+
+**Possible improvements in the future:**
+- Make version control folder hidden from user
+- Make version control files read-only. This is best done if future iterations implement a login system
+- Use delta encoding to keep track of `VcObject`
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -258,14 +357,15 @@ This section describes some noteworthy details on how certain features are imple
 This command adds a new `Student` to `AcademyDirectory`.
 
 #### Implementation
-`AddCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose and is Version Controllable.
+`AddCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose. 
+The `AddCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands)
 
-`AddCommand` adds students to the `AcademyDirectory`, with prevention of duplicates by ensuring that each `Student` has a unique `NAME`. 
-`NAME` is a sufficiently unique field to identify a unique instance of a student as for the purposes of `AcademyDirectory` is scoped to 
-service CS1101S Avengers, each `Studio` has approximately 10 `Students`, with the probability of a `NAME` collision being sufficiently minimised.
+`AddCommand` adds students to the `AcademyDirectory`. This command prevents addition of duplicate students by ensuring that each `Student` has a unique `NAME`. 
+The `NAME` field is a sufficiently unique field to identify a unique instance of a student because `AcademyDirectory` is scoped to 
+service CS1101S Avengers. In the CS110S module each _Studio_ has at most 10 `Students`. Thus, the probability of a `NAME` collision being sufficiently minimised.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The responsibility of ensuring that `Student` 
-does not have unnecessary duplicate information (e.g same `PHONE`) is left to an Avenger.
+does not have unnecessary duplicate personal detail (e.g same `PHONE`) is left to the Avenger.
 </div>
 
 ### DeleteCommand
@@ -273,16 +373,16 @@ does not have unnecessary duplicate information (e.g same `PHONE`) is left to an
 This command deletes a `Student` from `AcademyDirectory`.
 
 #### Implementation
-`DeleteCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose and is Version Controllable.
+`DeleteCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
+The `DeleteCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands)
 
 `DeleteCommand` deletes `Student` based on the relative `INDEX` in the `ObservableList` which is the list of `Student` viewed by the `Avenger`. To do this, `DeleteCommand` makes a call to `VersionedModel#deleteStudent()`.
 
 ### TagCommand
-
 {Add description}
 
 #### Implementation
-
+The `TagCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands)
 {Add implementation}
 
 ### GetCommand
@@ -292,23 +392,27 @@ This command serves to retrieve a specific `PersonalDetail` of students or a stu
 `GetCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
 
 All fields of `Student` class which implements the `PersonalDetail` interface and whose prefix is present in
-the `GetCommand` class can be queried by `GetCommand`.
+`GetCommand#SUPPORTED_PREFIX` can be queried by `GetCommand`.
 
 A `GetCommand` is initialized with a list of `Prefix` objects which represents the prefix of the `PersonalDetail`
 to be retrieved, and a list of `String` which represents the keywords that will be matched with 
 the names of students in Academy Directory. List of `Prefix` cannot be empty, but list of keywords can be.
-An empty list of keywords is interpreted as retrieving personal details of all students in the model.
-The specifics are shown in the sequence diagram below:
+An empty list of keywords is interpreted as retrieving personal details of all students in the model. If 
+list of keywords is not empty, then the pattern-matching behavior for name in `GetCommand` is similar to that
+of the [`FilterCommnd`](#filtercommand).
 
-A `PersonalDetailRetriever` object can be constructed by passing a `Prefix` and a `Name
+The specifics are shown in the sequence diagram below:
 ![GetCommandSequenceDiagram](images/dg/logic/commands/getcommand/GetCommandSequenceDiagram.png)
 
-### EditCommand
+Because the output of `GetCommand` can be long, for readability reasons the result is displayed
+in the `AdditionalView` part of the UI. 
 
+### EditCommand
 This command edits a `Student`'s personal details such as their `NAME`, `PHONE`, `TELEGRAM` and `EMAIL`.
 
 #### Implementation
-`EditCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose and is Version Controllable.
+`EditCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
+The `EditCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands)
 
 Similar to `AddCommand`, `EditCommand` supports duplicate prevention by checking that the `NAME` being edited is unique in the list
 unless the `NAME` is the same  as the `Student` being edited.
@@ -326,6 +430,7 @@ This command serves to update the `Grade` of various `Assessment` that the stude
 #### Implementation
 
 `GradeCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
+The `GradeCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands)
 
 The recording of grade is facilitated by adding an `Assessment` parameter to the `Student`.
 The `Assessment` is implemented with a HashMap that stores the String representation of the assessments as the keys, and the integer `Grade` as the values.
@@ -340,7 +445,8 @@ This command serves to update the attendance status of students. A student's `At
 
 #### Implementation
 
-`AttendanceCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose and is Version Controllable.
+`AttendanceCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
+The `AttendanceCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands)
 
 The attendance mechanism is facilitated by adding a `StudioRecord` parameter to the `Student`. This `StudioRecord` has an `Attendance` object which we can use to track and update the `Attendance` of the `Student`. `Attendance` implements `Information` and the actual storing of the attendance status is done with a `boolean array`.
 
@@ -358,7 +464,8 @@ This command serves to update the `Participation` score of students. Following t
 
 #### Implementation
 
-`ParticipationCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose and is Version Controllable.
+`ParticipationCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
+The `ParticipationCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands)
 
 The implementation is similar to `AttendanceCommand`, with the same sequence diagram being applicable for Participation given that the proper refactoring to `Participation` is done.
 
@@ -411,7 +518,14 @@ This command provides a Box Plot of the performance of all `Student` in `Academy
 
 `VisualizeCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
 
-{Improve on explanation and add a possible UML Diagram}
+The grades are collated by iterating through all the students and extracting the grades from the `Assessment` HashMap using the input `Assessment` as the key.
+
+The information is returned as a HashMap with key being the `Assessment` name and value being a list containing the class' grade in that assessment.
+The information will be displayed in the AdditionalView. The success message is parsed into `CommandResult` to be returned by `VisualizeCommand`.
+
+The following sequence diagram describes what happens when `VisualizeCommand` is executed:
+
+![VisualizeCommandSequenceDiagram](images/dg/logic/commands/visualizecommand/VisualizeCommandSequenceDiagram.png)
 
 ### FilterCommand
 
@@ -429,7 +543,8 @@ This command sorts the `AcademyDirectory` student list based on their `Participa
 
 #### Implementation
 
-`SortCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose and is Version Controllable.
+`SortCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
+The `SortCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands)
 
 The sorting mechanism is based on the `List` interface as it sorts the various `FilteredList` instances using `Comparator`. Based on the `attribute` of the `SortCommand` being executed, the `Comparator` differs as shown by the sequential diagram below:
 
@@ -469,14 +584,14 @@ This command clears all `Student` entries from `AcademyDirectory`.
 
 `ClearCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose 
 and is Version Controllable. A new Academy Directory is created to replace the current one, meaning that the student list is set to empty.
+The `ClearCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands)
 
 ![GetComparatorSequenceDiagram](images/dg/logic/commands/clearcommand/ClearCommandSequenceDiagram.png)
 
-
 ### HistoryCommand
 This command shows the commit history. Each commit will be shown with its five character hash, 
-author, date, and commit message. Only commands that are _version controllable_ will result in a commit
-being created and thus shown by `HistoryCommand`. Commands which can be undone are referred to as _version controllable_ (read [here](#glossary)
+author, date, and commit message. Only commands that are _version controlled_ will result in a commit
+being created and thus shown by `HistoryCommand`. Commands which can be undone are referred to as _version controlled commands_ (read [here](#glossary)
 for details on what this means).
 
 This command is meant for:
@@ -497,8 +612,8 @@ refer to the same commit e.g. if the user reverts to a previous commit then `MAI
 different commits. 
 
 Because this set of invariance are respected, thus `HistoryCommand` can show commit history by doing the following: 
-- fetch commit labelled as `MAIN` and `OLD` from disk (methods to do this exposed by `VersionedModel`)
-- find the lowest common ancestor between `MAIN` and `OLD` (`Commit#LCA` method used here)
+- fetch the commits labelled as `MAIN` and `OLD` from disk (methods to do this exposed by `VersionedModel`)
+- find the lowest common ancestor between `MAIN` and `OLD` (`Commit#findLca` method used here)
 - show all commits from initial commit until the lowest common ancestor found above normally
 - show all commits from the lowest common ancestor until `MAIN` and `OLD` as per the desired
 formatting
@@ -516,7 +631,7 @@ arbitrary number of commit branches, the current `HistoryCommand` thus can only 
 
 ### RevertCommand
 This command reverts the underlying `AcademyDirectory` data to a previous commit, as identified by the commit's hash.
-Commands which can be undone are referred to as _version controllable_ (read [here](#glossary) 
+Commands which can be undone are referred to as _version controlled commands_ (read [here](#glossary) 
 for details on what this means). The following is true regarding `RevertCommand`:
 
 - If any of the following occurs which leads to a failure in parsing commit file in disk, no changes
@@ -552,7 +667,7 @@ of `Storage` and `VersionedModel`...
 This command undoes a change done to the underlying `AcademyDirectory` data. Note that this is
 different from the _view_ of the data e.g. when the `ViewCommand` is used, the _view_ visible to 
 the user changes, but the underlying data does not change. Commands which can be undone are referred to 
-as _version controllable_ (read [here](#glossary) for details on what this means).
+as _version controlled commands_ (read [here](#glossary) for details on what this means).
 
 #### Implementation
 `UndoCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to
@@ -563,7 +678,7 @@ Hence `UndoCommand` serves as _syntactic sugar_ for the `RevertCommand`.
 This command redoes a change done to the underlying `AcademyDirectory` data. Note that this is
 different from the _view_ of the data e.g. when the `ViewCommand` is used, the _view_ visible to
 the user changes, but the underlying data does not change. Commands which can be redone are referred to
-as _version controllable_ (read [here](#glossary) for details on what this means).
+as _version controlled commands_ (read [here](#glossary) for details on what this means).
 
 #### Implementation
 `RedoCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to
@@ -590,10 +705,6 @@ users know that the input is invalid.
 Otherwise, the HelpCommand will use conditional branch to guide users to two different scenarios, as shown above. If it is a general help, a general help command
 will be created. If it is a specific help, then a specific help command associated with a command will be created.
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -608,10 +719,9 @@ The following links to guides on: Documentation, Logging, Testing, Configuration
 * [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
-
+## **Appendix**
 
 ## Appendix A: Requirements
-
 
 ### Product scope
 
@@ -881,7 +991,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. Should be able to hold up to _3000_ student without a noticeable sluggishness in performance for typical usage.
 3. A user with above-average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. Should work in computer with `32-bit` or `64-bit` processor.
-5. Users data should be in human editable file and stored locally.
+5. User data should be in human editable file and stored locally.
 6. Should run on user computer with double-click - no installer or additional libraries required.
 7. Should not require internet connection for any of its feature.
 8. All user and app data should be stored locally, not through an online database solution.
@@ -892,24 +1002,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 ### Glossary
-Term | Definition | Comments
------| ----------- | ---------- 
-Operating System (OS) | Software that manages computer hardware and other computer software. |
-Mainstream OS | Examples of mainstream OS includes: Windows, Linux, Unix, OS-X, MacOS, etc. |
-Personal Detail | A contact detail of a student | Phone number, Telegram handle, and email address
-CS1101S | An introductory Computer Science module for year 1 students in the the National University of Singapore. |
-Studios | Tutorials held in CS1101S and are essential in aiding the students to improve their grasp on the concepts taught during the lecture. |
-Avengers | A special term to call a CS1101S tutor. An avenger organizes a Studio session to improve on CS1101S concepts taught in lecture, recording attendance and grades.
-Principle of Least-Privilege | Minimum levels of access – or permissions – needed to perform function.
-Version Controllable `Command` | a `Command` that logs a `Commit` object upon execution with the logging relying on the `Optional` field in the `CommandResult` returned from `Command#execute()`.
-Command Line Interface (CLI) | A text-based user interface, where users type commands to instruct the computer to do something.
-Graphical User Interface (GUI) | A graphics-based user interface, where users click buttons to instruct the computer to do something.
-Java | A program that allows running other programs written in Java programming language.
-Command | An instruction typed by a user to Academy Directory.
-Command Box | A part of the Academy Directory's GUI which can be used by users to type commands.
-Field | Additional information that can be provided to a command for correct command execution. | May or may not have an associated prefix
-Parameter | Part of the command which provides additional information provided by the user. | Actual values for the fields
-Prefix | An abbreviation of a field. | Always ends with a backslash ('/')
+
+| Term | Definition | Comments |
+|-----| ----------- | ---------- |
+| Operating System (OS) | Software that manages computer hardware and other computer software. | |
+| Mainstream OS | Examples of mainstream OS includes: Windows, Linux, Unix, OS-X, MacOS, etc. | |
+| Personal Detail | A contact detail of a student | Phone number, Telegram handle, and email address |
+| CS1101S | An introductory Computer Science module for year 1 students in the the National University of Singapore. | |
+| Studios | Tutorials held in CS1101S and are essential in aiding the students to improve their grasp on the concepts taught during the lecture. | < 10 students in a studio |
+| Avengers | A special term to call a CS1101S tutor. An avenger organizes a Studio session to improve on CS1101S concepts taught in lecture, recording attendance and grades. | An avenger holds at most one class. |
+| Principle of Least-Privilege | Minimum levels of access – or permissions – needed to perform function. | |
+| Command Line Interface (CLI) | A text-based user interface, where users type commands to instruct the computer to do something. | |
+| Graphical User Interface (GUI) | A graphics-based user interface, where users click buttons to instruct the computer to do something. | |
+| Java | A program that allows running other programs written in Java programming language. | |
+| `Command` | An interface representing an instruction typed by a user to Academy Directory. | |
+| Version controlled `Command` | a `Command` that logs a commit message, and thus stages at least one `VcObject` object upon execution. | Refer to the list of such commands [here](#appendix-c-version-controlled-commands) |
+| Command Box | A part of the Academy Directory's GUI which can be used by users to type commands. | |
+| Field | Additional information that can be provided to a command for correct command execution. | May or may not have an associated prefix |
+| Parameter | Part of the command which provides additional information provided by the user. | Actual values for the fields |
+| Prefix | An abbreviation of a field. | Always ends with a backslash ('/') |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1246,6 +1357,7 @@ testers are expected to do more *exploratory* testing.
          
 #### User Experience
 
+
 ### System testing
 
 #### Performance testing
@@ -1253,3 +1365,23 @@ testers are expected to do more *exploratory* testing.
 #### Compatibility testing
 #### Usability testing
 #### Portability testing
+
+1. _{ more test cases to come …​ }_
+
+## **Appendix C: Version Controlled Commands**
+The following list is a list of commands that are version controlled i.e. they can be undone and
+redone using the `UndoCommand` and the `RedoCommand` command. Furthermore, the use of these commands
+will be reflected in the commit history, using the `HistoryCommand`. More concretely, these commands _stages_
+`VcObject`/s that will be saved to disk, thus facilitating `VersionControl`
+- [`AddCommand`](#addcommand)
+- [`DeleteCommand`](#deletecommand)
+- [`TagCommand`](#tagcommand)
+- [`EditCommand`](#editcommand)
+- [`GradeCommand`](#gradecommand)
+- [`AttendanceCommand`](#attendancecommand)
+- [`ParticipationCommand`](#participationcommand)
+- [`SortCommand`](#sortcommand)
+- [`ClearCommand`](#clearcommand)
+
+Commands not shown in the above list _will not_ appear in the commit history, and thus
+cannot be reverted to and / or be undone or redone.
