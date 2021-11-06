@@ -67,9 +67,9 @@ public class StorageManagerTest {
     @Test
     public void readUserProfile_wrongPath_failure() {
         JsonUserProfileStorage userProfileStorage = new JsonUserProfileStorage();
-        Path expectedPath = Paths.get("userprofile2xx.json");
+        Path wrongPath = Paths.get("userprofile22.json");
         try {
-            assertNotEquals(storageManager.readUserProfile(), userProfileStorage.readUserProfile(expectedPath));
+            assertNotEquals(storageManager.readUserProfile(), userProfileStorage.readUserProfile(wrongPath));
         } catch (Exception e) {
             assertNull(e);
         }
