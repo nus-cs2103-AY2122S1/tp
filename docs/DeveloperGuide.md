@@ -1119,35 +1119,97 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
 
-   1. Double-click the jar file Expected: Shows the _GUI_ with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file.<br> 
+      Expected: Shows the _GUI_ with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+   2. Re-launch the app by double-clicking the jar file.<br>
+      Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+3. Closing all windows
+   
+   1. Open TAB, then open the help window and reminder window.
+  
+   2. Close the TAB window.<br>
+      Expected: All windows should close.
 
-### Deleting a person
+### Deleting a student
 
-1. Deleting a person while all persons are being shown<br>
-Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+1. Deleting a student while all students are being shown<br>
+Prerequisites: List all students using the `list` command. Multiple students in the list.
 
    * Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
    * Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-   
+      Expected: No person is deleted. Error details shown in the status message.
+
+2. Deleting a student after filtering list<br>
+   Prerequisites: Filter students with the command `find t/new`. Multiple students in the filtered list.
+
+  * Test case: `delete 1 1`<br>
+    Expected: First contact is removed from the filtered list and the list remains filtered. Details of the deleted contact shown in the status message.
+
 Incorrect delete commands to try: `delete...`
-1. `delete x` where x is larger than the list size<br>
+1. `delete x` where x is larger than the list size
 2. `delete`
 
 Expected: Error details shown in the status message.
+
+### Editing a student
+
+1. Editing a student while all students are being shown<br>
+Prerequisites: List all students using the `list` command. Multiple students in the list.
+   
+    * Test case: `edit 1 n/Alex`<br>
+      Expected: First contact is edited to have the name `Alex`. Details of the edited contact shown in the status message.
+      
+    * Test case: `edit 1`<br>
+      Expected: No person is edited. Error details shown in the status message.
+      
+Incorrect edit commands to try: `edit...`
+1. `edit x` where x is larger than the list size
+2. `edit`
+3. `edit 1 2 n/Alex`
+
+### Finding a student
+
+1. Finding a student by tag<br>
+Prerequisites: List all students using the `list` command. Multiple students in the list.
+
+    * Test case: `find t/new t/unpaid cond/any`<br>
+      Expected: All students with either the `NEW` tag or the `UNPAID` tag are shown.
+      
+    * Test case: `find t/new unpaid`<br>
+      Expected: The list is not filtered. Error details shown in the status message.
+      
+2. Finding a student by student fields<br>
+   Prerequisites: List all students using the `list` command. Multiple students in the list.
+
+    * Test case: `find a/serangoon cond/none`<br>
+    Expected: All students without the address `serangoon` are shown.
+
+    * Test case: `find n/`<br>
+    Expected: The list is not filtered. Error details shown in the status message.
+
+2. Finding a student by lesson fields<br>
+   Prerequisites: List all students using the `list` command. Multiple students in the list with lessons.
+
+  * Test case: `find time/1400-1900`<br>
+    Expected: All students with at least one lesson overlapping with the time range `1400-1900` will be shown.
+    
+  * Test case: `find date/20 oct 2021 12 nov 2021`<br>
+    Expected: The list is not filtered. Error details shown in the status message.
+
+Incorrect find commands to try: `find...`
+1. `find cond/every`
+2. `find`
+3. `find time/1200-1000`
 
 ### Adding a lesson
 
@@ -1257,8 +1319,11 @@ Expected: Error details will be shown in the status message.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing/corrupted data files 
+Prerequisites: TAB has an initial list of students.
+   1. Change the name of a student to be empty `name: ""`
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+   2. Open TAB.<br>
+      Expected: TAB shows no students. All person list is reset.
+      
+2. 
