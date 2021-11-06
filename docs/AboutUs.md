@@ -35,7 +35,7 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/norayuuu.png" width="200px">
 
 [[github](https://github.com/NoraYUuu)]
-[[portfolio](team/huaiyu.md)]
+[[portfolio](team/norayuuu.md)]
 
 * Role: Code Quality
 * Responsibilities: Looks after code quality and ensures adherence to coding standards.
