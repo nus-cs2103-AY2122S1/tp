@@ -603,8 +603,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-
+* **API**: An Application Programming Interface is a connection between computers or between computer programs. It is a type of software interface, offering a service to other pieces of software.
+* **GUI**: A Graphical User Interface (GUI) is a form of user interface through which users interact with electronic devices via visual indicator representations.
+* **CLI**: A Command Line Interface (CLI) processes commands to a computer program in the form of lines of text.
+* **FET**: Fast and Easy Test for COVID-19, which is self-administered using Antigen Rapid Test (ART) kits.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
