@@ -17,6 +17,8 @@ Email: kaushikumar99@gmail.com
 
 * Role: Developer
 
+* Responsibilities: Documentation
+
 ### Bryann Yeap Kok Keong
 
 <img src="images/bryannyeap.png" width="200px">
@@ -25,7 +27,9 @@ Email: kaushikumar99@gmail.com
 
 Email: bryannyeapkk@gmail.com
 
-* Role: Developer
+* Role: Tech Lead
+
+* Responsibilities: Testing
 
 ### Liu Chen En
 
@@ -37,6 +41,8 @@ Email: chenenliuu@gmail.com
 
 * Role: Developer
 
+* Responsibilities: UI/UX
+
 ### Toh Wei Jie
 
 <img src="images/tohweijie01.png" width="200px">
@@ -47,6 +53,8 @@ Email: tohweijie01@gmail.com
 
 * Role: Developer
 
+* Responsibilities: Scheduling & Tracking
+
 ### Yao Yi
 
 <img src="images/pulpy-y.png" width="200px">
@@ -56,3 +64,7 @@ Email: tohweijie01@gmail.com
 Email: yaoyi2000326@gmail.com
 
 * Role: Developer
+
+* Responsibilities: Deliverables & Deadlines
+
+
