@@ -46,6 +46,7 @@ This product will make recruiters’ lives easier through categorisation and fil
 
 
 ### About this guide
+[table of contents](#table-of-contents)
 
 This guide aims to help users get familiar with using RecruitIn's features.
 * **New users** can get started by following the steps under [Quick start](#quick-start).
@@ -65,24 +66,22 @@ This guide aims to help users get familiar with using RecruitIn's features.
 
 </div>
 
-<p align="center"><a href="#table-of-contents">Click here to return to the table of contents</a></p>
-
 
 ### Glossary
+[table of contents](#table-of-contents)
 
 | Term | Definition |
 | :---: | :--- |
 | **Command Line Interface (CLI)** | A **CLI** is a user interface that accepts text input to execute system functions.<br><br>RecruitIn uses a **CLI** interface to operate most of its features. |
 | **Command** | **Commands** are user text inputs that executes certain features of RecruitIn. |
 | **Prefix** | A **Prefix** is a fixed text input that indicates an applicant's detail.<br><br>For instance, `n/` is a Prefix that indicates an applicant's name.<br><br>It is used in commands to differentiate user inputs for different applicant details. |
-| **Parameter** | A **Parameter** is a user text input that usually follows after a **Prefix**.<br><br>For instance, in `n/John`, `John` is a **Parameter** of **Prefix** `n/`.<br><br>In some cases, it does not have to follow a **Prefix**.<br><br>For instance, in `delete 1`, `1` is a **Parameter** of the `delete` command. | 
-
-<p align="center"><a href="#table-of-contents">Click here to return to the table of contents</a></p>
+| **Parameter** | A **Parameter** is a user text input that usually follows after a **Prefix**.<br><br>For instance, in `n/John`, `John` is a **Parameter** of **Prefix** `n/`.<br><br>In some cases, it does not have to follow a **Prefix**.<br><br>For instance, in `delete 1`, `1` is a **Parameter** of the `delete` command. |
 
 ### Basic Command Format
+[table of contents](#table-of-contents)
 
-If you wish to skip directly to specific features, listed below are some **important** text formatting that you should take
-note of so that you may understand their descriptions better.
+Before moving on with this user guide, listed below are some **important** text formatting that you should take
+note of so that you may better understand our feature descriptions.
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in add n/NAME, NAME is a parameter which can be used as add n/John Doe.
@@ -93,11 +92,10 @@ note of so that you may understand their descriptions better.
 * Items with `...` after them can be repeated multiple times, including zero times.<br>
   e.g. `delete INDEX...` can be used as `delete 1` (i.e. `INDEX` repeated 0 times), `delete 1 2`, `delete 2 4 3` etc.
 
-<p align="center"><a href="#table-of-contents">Click here to return to the table of contents</a></p>
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
+[table of contents](#table-of-contents)
 
 1. Ensure you have Java `11` or above installed in your Computer. If not, you can install it from [here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
 Download the correct version based on your operating system (e.g. Linux, macOS, Windows) and follow the Java installation instructions.
@@ -183,7 +181,6 @@ Scroll down to the bottom and click on `recruitIn.jar`.
 7. This marks the end of the Quick Start guide. If you would like to know more about using RecruitIn's features,
    you can refer to the [Features](#features) below for details of available commands.
 
-<p align="center"><a href="#table-of-contents">Click here to see the table of contents</a></p>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -227,6 +224,7 @@ Scroll down to the bottom and click on `recruitIn.jar`.
 </div>
 
 ### Viewing help : `help`
+[table of contents](#table-of-contents)
 
 Shows a message explaining how to access the help page.
 
@@ -236,6 +234,7 @@ Format: `help`
 
 
 ### Adding an applicant: `add`
+[table of contents](#table-of-contents)
 
 Adds an applicant to RecruitIn.
 
@@ -275,6 +274,7 @@ Examples:
 </div>
 
 ### Editing an applicant : `edit`
+[table of contents](#table-of-contents)
 
 Edits an applicant's with specified index in RecruitIn.
 
@@ -319,6 +319,7 @@ Examples:
 </div>
 
 ### Listing all applicants : `list`
+[table of contents](#table-of-contents)
 
 Shows a list of all applicants in RecruitIn.
 
@@ -326,6 +327,7 @@ Format: `list`
 
 
 ### Deleting an applicant : `delete`
+[table of contents](#table-of-contents)
 
 Deletes applicants by their index from the applicants list in RecruitIn.
 
@@ -345,10 +347,10 @@ Examples:
 * After you execute the command `find n/John`, `delete 1` deletes the 1st applicant in the results of the `find` command.
 * After you execute the command `list`, `delete 2 4 7` deletes the 2nd, 4th and 7th applicants listed in RecruitIn.
 
-<p align="center"><a href="#table-of-contents">Click here to see the table of contents</a></p>
 
 
 ### Finding an applicant : `find`
+[table of contents](#table-of-contents)
 
 Finds applicants by specific prefixes.
 
@@ -400,10 +402,10 @@ Examples:
 | DONE | `d/` | [**done**](#done-d) |
 
 </div>
-
-<p align="center"><a href="#table-of-contents">Click here to see the table of contents</a></p>
         
 ### Filtering interviews : `filter_interview`
+[table of contents](#table-of-contents)
+
 Filters applicants by interview dates based on whether they are upcoming or have past current date and time.
 Differs from ```find i/``` as it is not returning you all applicants with a specific interview date but 
 rather all applicants with interviews that fall into the same group (`past` or `future`).
@@ -425,9 +427,8 @@ Examples:
 * If you type `filter_interview future` or 
  `filter_interview fUTURE` in the command box, you are able to see applicants with interviews that are after [29th October 2021, 1600].
 
-<p align="center"><a href="#table-of-contents">Click here to see the table of contents</a></p>
-
 ### Showing search terms : `show`
+[table of contents](#table-of-contents)
 
 Shows you unique search terms which you can use for a specific prefix.
 
@@ -445,9 +446,9 @@ Suppose the applicants list includes 3 applicants with name and role `John, Soft
 * `show n/` will display a list consisting of `John` and `Mary`.
 * `show r/ n/` will display a list consisting of `Software Developer`, `Cleaner` and `Cook`.
 
-<p align="center"><a href="#table-of-contents">Click here to see the table of contents</a></p>
 
 ### Marking an applicant : `mark`
+[table of contents](#table-of-contents)
 
 Every applicant in RecruitIn will have a status of either "Done" or "Not Done".
 A "Done" status means that you are done handling the applicant and no longer need to keep their details.
@@ -474,9 +475,9 @@ After: ![images](images/MarkAfter.png)
 * After using the command `list`, `mark 2 4 6` marks the 2nd, 4th and 6th applicant listed in RecruitIn as "Done".
 * After using the command `find n/John`, `mark 1` marks the 1st applicant listed in RecruitIn's results of the `find` command.
 
-<p align="center"><a href="#table-of-contents">Click here to see the table of contents</a></p>
 
 ### Unmarking an applicant : `unmark`
+[table of contents](#table-of-contents)
 
 Every applicant in RecruitIn will have a status of either "Done" or "Not Done".
 A "Not Done" status means that you are still handling the applicant and still need to keep their details.
@@ -503,9 +504,9 @@ After: ![images](images/UnmarkAfter.png)
 * After using the command `list`, `unmark 2 4 6` unmarks the 2nd, 4th and 6th applicant listed in RecruitIn to "Not Done".
 * After using the command `find n/John`, `unmark 1` unmarks the 1st applicant listed in RecruitIn's results of the `find` command.
 
-<p align="center"><a href="#table-of-contents">Click here to see the table of contents</a></p>
 
 ### Deleting marked applicants : `delete_marked`
+[table of contents](#table-of-contents)
 
 The `delete_marked` command deletes all applicants that are currently marked as done.
 This provides an easy way for you to delete the data of all applicants you no longer need.
@@ -518,15 +519,16 @@ Before: ![images](images/DeleteMarkedBefore.png)
 
 After: ![images](images/DeleteMarkedAfter.png)
 
-<p align="center"><a href="#table-of-contents">Click here to see the table of contents</a></p>
 
 ### Clearing all data : `clear`
+[table of contents](#table-of-contents)
 
 Deletes all applicants in RecruitIn.
 
 Format: `clear`
 
 ### Exiting the program : `exit`
+[table of contents](#table-of-contents)
 
 The `exit` command causes RecruitIn to close and exit.
 
@@ -534,14 +536,15 @@ Format: `exit`
 
 You can also exit RecruitIn by clicking on the 'X' button found on the top right side of the app. 
 
-<p align="center"><a href="#table-of-contents">Click here to see the table of contents</a></p>
 
 ### Saving the data
+[table of contents](#table-of-contents)
 
 Whenever you use any command which edits, updates or adds data, RecruitIn automatically saves the data.
 You do not need to manually save data with any command. The saved data also automatically loads when the application starts.
 
 ### Editing the data file
+[table of contents](#table-of-contents)
 
 RecruitIn saves the applicant data as a String in `/data/applicants.json`.
 If you are advanced enough, you are welcome to update data directly by editing this data file.
@@ -581,6 +584,7 @@ If your changes to the data file makes the data format invalid, RecruitIn will r
 **Note**: **Alphanumeric** characters refers specifically to characters a-z, A-Z and 0-9.
 
 ### Add Parameters
+[table of contents](#table-of-contents)
 
 <div markdown="block" class="alert alert-secondary">
 
@@ -672,6 +676,7 @@ If your changes to the data file makes the data format invalid, RecruitIn will r
 </div>
 
 ### Find Parameters
+[table of contents](#table-of-contents)
 
 <div markdown="block" class="alert alert-success">
 
@@ -780,6 +785,7 @@ For example, if your input is `find n/Alex Bernice`, `Alex` and `Bernice` are yo
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
+[table of contents](#table-of-contents)
 
 **Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the data file that your previous RecruitIn home folder contains.
@@ -808,6 +814,7 @@ If you do not know how to open up your terminal, refer to the next question belo
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
+[table of contents](#table-of-contents)
 
 Action | Format, Examples
 --------|------------------
