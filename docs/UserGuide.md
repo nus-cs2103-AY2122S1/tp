@@ -193,6 +193,20 @@ You can then easily add his data to TutorAid by following the steps below:
 Now, the Student Panel will be updated accordingly with John's details. If you do not see John's details on your screen, you can either scroll down the Student Panel
 to find his details, or enter the command `find -s John Yeo` to display only his details in the Student Panel.
 
+### Step 2: Adding a lesson
+{:.no_toc}
+Now that you've added your first student (and perhaps a few others too), let's add some Lessons to TutorAid. In this tutorial, we will be adding a lesson named History 1 into TutorAid by performing the steps below:
+
+1. Type `add -l n/History 1` into the command box and press enter.
+
+![](images/tutorialAddLesson1.png)
+
+2. Observe how History 1 appears in the Lesson Panel.
+3. We've added the lesson successfully, but we can continue by adding more details, such as its timing (10AM - 11AM on Mondays), price ($125.90) and capacity (10). Assuming that History 1 is the only lesson in your Lesson Panel, type the command `edit -l 1 t/10AM - 11AM on Mondays c/10`. Press Enter on your keyboard.
+4. Observe how the capacity and timing now show what you have requested.
+> :bulb: If you know what details you wish to add from the beginning, you can type `add -l n/History 1 c/10 t/10 AM - 11AM on Mondays p/125.90` to enter these details in a single command.
+5. That's it, you've added your first lesson. If you need more information, you can check out the detailed documentation of the [add lesson](#adding-a-lesson-add--l) and [edit lesson](#editing-a-lesson-edit--l) commands.
+
 ### Step 4: Adding a progress note for a student
 {:.no_toc}
 Now, imagine you have ended your 'Maths 1' lesson. You realised that one of your students, Alex Yeoh, seems to struggle with the topic 'Vectors', and you wish to take 
@@ -325,6 +339,9 @@ Format: `add -p STUDENT_INDEX PROGRESS`
 Examples:
 * `list` followed by `add -p 2 completed homework` adds `completed homework` to the 2nd student displayed in the Student Panel.
 
+> :bulb: Using this command will update the student panel to only display the edited student.
+
+
 ### Deleting progress from a student: `del -p`
 {:.no_toc}
 Removes a progress note from the student at the specified student index.
@@ -337,6 +354,8 @@ Format: `del -p STUDENT_INDEX`
 
 Examples:
 * `list` followed by `del -p 2` deletes the progress of the 2nd student displayed in the Student Panel.
+
+> :bulb: Using this command will update the student panel to only display the edited student.
 
 ## 5.2 Lesson Commands
 
