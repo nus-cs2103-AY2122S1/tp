@@ -30,7 +30,7 @@ public class AddStudentCommand extends AddCommand {
             + PREFIX_PARENT_PHONE + "91234567 ";
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
-    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in TutorAid";
+    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in TutorAid.";
 
     private final Student toAdd;
 

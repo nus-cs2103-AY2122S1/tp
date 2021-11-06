@@ -46,7 +46,7 @@ public class EditStudentCommand extends EditCommand {
     public static final String MESSAGE_NOT_CHANGED = "Warning: Attempted to edit %s but the provided field(s) did not "
             + "contain any changes.";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in TutorAid";
+    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in TutorAid.";
 
     private final Index targetIndex;
     private final EditStudentDescriptor editStudentDescriptor;
