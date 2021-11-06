@@ -1,0 +1,38 @@
+
+.list-view {
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+    -fx-background-color: -fx-main-bg-color;
+}
+
+.list-cell {
+    -fx-label-padding: 0 0 0 0;
+    -fx-graphic-text-gap : 0;
+    -fx-padding: 0 0 0 0;
+}
+
+.list-cell:filled:selected #cardPane {
+    -fx-border-color: -fx-highlight-color;
+    -fx-border-width: 1;
+}
+
+.list-cell .label {
+    -fx-text-fill: white;
+}
+
+.list-cell:empty {
+    /* Empty cells will not have alternating colours */
+    -fx-background: -fx-main-bg-color;
+}
+
+#cardPane {
+    -fx-background-color: -fx-secondary-bg-color;
+    -fx-border-width: 0;
+}
+
+#labCardPane {
+    -fx-background-color: -fx-light-bg-color;
+    -fx-border-width: 0.5;
+    -fx-border-style: solid hidden solid hidden;
+    -fx-border-color: black;
+}
