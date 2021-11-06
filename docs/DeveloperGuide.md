@@ -592,6 +592,7 @@ syntax should make it easy to fix the mistake.
 The filter operation is facilitated by `FilterCommand` and `FilterCommandParser`. `FilterCommandParser` first parses the user
 input to extract out the command and the arguments, after which the `FilterCommand#execute(model)` method is invoked in
 the `LogicManager` class to filter the `filteredStudents` and/or the `filteredLessons` list(s) in the `model` based on the given user inputs.
+
 The filter performs differently based on the inputs given (grade, subject, or both):
 * If only grade is given as input, TuitiONE filters both the student list and the lesson list based on the given grade.
 * If only subject is given as input, TuitiONE filters only the lesson list based on the given subject.
@@ -603,7 +604,7 @@ Given below is an example usage scenario and how the filter operation works.
 <u>Step 1:</u>
 
 The user launches the app with the stored student list holding the initial student data and the lesson list holding the
-initial lesson data in TuitiONE (only the fields of each object relevant to filter are shown in the diagrams below).
+initial lesson data in TuitiONE (only the fields of each object relevant to the filter feature are shown in the diagrams below).
 
 <center>
 <img alt="FilterState0" src="images/DeveloperGuideImage/FilterState0.png"/>
@@ -620,7 +621,7 @@ the `FilterCommand#execute(model)` method to be called which then filters the re
 
 <u>Step 3:</u>
 
-The user executes `list` to get back the initial lists before the filter.
+The user can execute the command `list` to get back the initial lists before the filter command.
 
 The following sequence diagram shows how the filter operation works:
 
@@ -654,10 +655,87 @@ The following activity diagram summarizes what happens when a user executes the 
     * Pros: Slightly more straightforward to implement.
     * Cons: Too many existing commands in the application, and may not be as intuitive to use.
 
-<u>Design</u>
+<ins>Decision</ins>
+
 Ultimately we chose option 1 as we felt that there are already many existing commands, and just having one filter command
 handle multiple scenarios would be less daunting to use.
 
+### Roster feature
+
+#### Implementation
+
+The roster operation is facilitated by `RosterCommand` and `RosterCommandParser`. `RosterCommandParser` first parses 
+the user input to extract out the command and the arguments, after which the `RosterCommand#execute(model)` method is 
+invoked in the `LogicManager` class to filter the `filteredStudents` and the `filteredLessons` list(s) in the `model` 
+based on the given user input (`LESSSON_INDEX`).
+
+The roster feature functions like a more specific version of the filter feature. The aim of this feature is to provide 
+the CSOs a quick way to see all the students who are enrolled in a specific lesson. Hence, in the roster feature, it 
+performs a filtering of the student list and the lesson list based on a specific lesson identified by the`LESSON_INDEX`.
+This will extract out the relevant students and display them to the GUI with the requested lesson.
+
+Given below is an example usage scenario and how the roster operation works.
+
+<u>Step 1:</u>
+
+The user launches the app with the stored student list holding the initial student data and the lesson list holding the
+initial lesson data in TuitiONE (only the fields of each object relevant to the roster feature are shown in the diagrams below).
+
+<center>
+<img alt="RosterState0" src="images/DeveloperGuideImage/RosterState0.png"/>
+</center>
+
+<u>Step 2:</u>
+
+The user executes `roster 1` to filter out and display all the corresponding students enrolled in `Math-P4-Wed-1800`.
+The `roster` command causes the `RosterCommand#execute(model)` method to be called which then filters the respective 
+lists to only show the relevant objects.
+
+<center>
+<img alt="RosterState1" src="images/DeveloperGuideImage/RosterState1.png"/>
+</center>
+
+<u>Step 3:</u>
+
+The user can execute the command `list` to get back the initial lists before the roster command.
+
+The following sequence diagram shows how the roster operation works:
+
+<center>
+<img alt="RosterSequenceDiagram0" src="images/DeveloperGuideImage/RosterSequenceDiagram0.png"/>
+</center>
+
+<center>
+<img alt="RosterSequenceDiagram1" src="images/DeveloperGuideImage/RosterSequenceDiagram1.png" width="650"/>
+</center>
+
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** The lifelines for `RosterCommandParser` and `RosterCommand` should end at destroy marker 
+(X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+The following activity diagram summarizes what happens when a user executes the roster command:
+
+<center>
+<img alt="RosterActivityDiagram" src="images/DeveloperGuideImage/RosterActivityDiagram.png"/>
+</center>
+
+#### Design considerations:
+
+<u>Aspect: How to implement roster</u>
+
+* Option 1: `roster LESSON_INDEX`
+    * Pros: Less key travels needed, user can potentially save more time in the repeated usage of this command.
+    * Cons: User may not understand the use of the `LESSON_INDEX` on the first instance.
+* Option 2: `roster l/LESSON_INDEX`
+    * Pros: With the usage of the flag `l/`, the purpose of the command is clearer.
+    * Cons: As the user gets familiar with the application, the extra `l/` could potentially result in a loss of efficiency due to extra key travels.
+
+<ins>Decision</ins>
+
+Ultimately we chose option 1 as we felt that in a long run, the time saved through a fast and easy command is more essential, in order to keep TuitiONE on the competitive edge.
 
 ### \[Proposed\] Undo/redo feature
 
@@ -1220,14 +1298,36 @@ testers are expected to do more *exploratory* testing.
 
     * Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
     * Resize the window to an optimum size. Move the window to a different location. Close the window.
 
     * Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+3. _{ more test cases …​ }_
+
+#### Adding a lesson
+
+1. Adding a lesson with all correct parameters 
+
+    * Prerequisites: All parameters are entered correctly as according to the DG's [Add Lesson Feature](#add-lesson-feature)
+and the lesson to be added does not exist in TuitiONE yet.
+
+    * Test case: `add-l s/Science g/P2 d/Wed t/1200 c/10.50`<br>
+        Expected: A new lesson `Science-P2-Wed-1200` will be added into the lesson list. Lesson list will be updated
+while there is no change to the student list. An update message will also be shown in the message box to inform the user
+that a new lesson is successfully added.
+
+    * Incorrect addition of a lesson due to duplication:<br>`add-l s/Science g/P2 d/Wed t/1200 c/10.50`<br>
+        Expected: Addition of the particular lesson will not be applied to TuitiONE. An alert message will be shown in 
+the message box to inform the user that the lesson already exists in TuitiONE.
+
+    * Incorrect addition of a lesson by passing in any incorrect input:<br>
+        Expected: Addition of the particular lesson will not be applied to TuitiONE. An alert message corresponds to the 
+wrongly entered parameter will be shown in the message box to remind the user of the correct input parameter 
+format.<br>_Note: Only the alert message corresponds to the first encountered incorrect parameter will be shown. User is
+expected to correct the input parameters one by one._
 
 #### Deleting a student
 
@@ -1246,14 +1346,58 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Filtering
+#### Finding a student
+
+1. Finding a student while all students are being shown
+   
+    * Prerequisites: List all students using the `list` command. Multiple "Students" in the list.
+
+    * Test case: `find c`<br>
+        Expected: All students whose name that starts with the letter `c` are shown in 
+   the student list. Lesson list will not be changed. No student shown if there is no student whose name starts with 
+   the letter `c`. An update message showing the number of students found will also be shown in the 
+   message box.<br>_Note: both first and last name of the student will be checked, to see if the student's name consists the letter `c`._
+   
+    * Test case: `find Alex`<br>
+        Expected: All students whose name consists of `Alex` are shown in the student list. Lesson list will not be
+   changed. No student shown if there is no student whose name consists of `Alex`. An update message showing 
+   the number of students found will also be shown in the message box. <br>_Note: both the first and last name of the student will be checked, to see if the student's name consists of `Alex`._
+
+    * Test case: `find -`, `find .`, `find '`<br>
+      Expected: No student will be found since name should only contain alphanumeric characters and spaces. An update
+message showing that `No students found.` will also be displayed in the message box. 
+
+#### View a lesson's roster 
+
+1. View a lesson's roster using `LESSON_INDEX` while all students and lessons are being shown
+
+    * Prerequisites: List all students and lessons using the `list` command. Multiple `Students` and `Lessons` in the 
+list with some `Students` already enrolled in some of the `Lessons`. For `LESSON_INDEX` used, it is within the number
+of existing `Lessons` found in TuitiONE.
+
+    * Test case: `roster 2`<br>
+        Expected: Only students who are enrolled in the lesson identified by the lesson index of `2` will be shown in 
+the student list. The lesson list will be updated to show the lesson identified by the lesson index of `2`. No student
+or lesson shown if there is no student enrolled in the lesson identified by the lesson index of `2`. An update message
+showing the number and the name of the students who are enrolled in the lesson will also be displayed in the message box.
+
+    * Incorrect roster by passing in nothing or non-number as parameter: `roster`, `roster a`, `roster -`, 
+`roster LESSON_CODE`<br>
+        Expected: No roster will be applied. An alert message will be shown in the message box, warning the user to
+follow the command format by using `LESSON_INDEX`.
+
+    * Incorrect roster by passing in a a `LESSON_INDEX` that is larger than the number of `LESSONS`: `roster 100`<br>
+        Expected: No roster will be applied. An error message will be shown in the message box, warning the user to only
+use valid `LESSON_INDEX`.
+
+#### Filtering
 
 1. Filtering by grade
 
     * Note: We will be using `S1` to conduct manual testing for positive tests, but feel free to test with any grade you wish (from `P1` to `S5`).
 
     * Test case: `filter g/S1`<br>
-      Expected: Only students and lessons of grade `S1` are shown in the student list and lesson list respectively. No students or lessons shown if there are none of grade `S1`. An update message showing the number of students and lessons found will also be shown in the message box.
+      Expected: Only students and lessons of grade `S1` are shown in the student list and lesson list respectively. No student or lesson shown if there are none of grade `S1`. An update message showing the number of students and lessons found will also be shown in the message box.
       
     * Test case: `filter g/s1`<br>
       Expected: Similar to previous.
@@ -1282,15 +1426,15 @@ testers are expected to do more *exploratory* testing.
       
 1. Filtering by both grade and subject
 
-    * Note: It will be good to add more lessons of grade `S1` but of different subject (eg. English, Math etc.) to better test this feature (you can refer to the user guide on how to use the add lesson feature).
+    * Note: It will be good to add more lessons of grade `S1` but of different subject (e.g. English, Math etc.) to better test this feature. (refer to [Add Lesson Feature](#add-lesson-feature) on how to use the add lesson feature)
     
     * Test case: `filter s/English g/S1`<br>
       Expected: Only students of grade `S1` will be displayed in the student list. Only lessons with subject matching `English` and of grade `S1` will be displayed in the lesson list. No lessons or students shown if none have matching the given filter conditions. An update message showing the number of students and lessons found will also be shown in the message box.
       
     * Test case: `filter english S1`<br>
       Expected: No filter is applied, and no change to both lists. The message box displays a message alerting the user that the command format inputted is invalid, along with a description of what the filter command does, its parameters, and an example usage.
-
-### Editing a student
+    
+#### Editing a student
 
 1. Editing a student's name
 

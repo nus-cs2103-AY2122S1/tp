@@ -1,0 +1,27 @@
+@startuml
+'https://plantuml.com/object-diagram
+
+title After command "roster 1"
+
+package Tuitione <<rectangle>> {
+
+    package lessonList <<rectangle>> {
+        object "<u>l1:Lesson" as Lesson1 {
+        lessonCode = Math-P4-Wed-1800
+        lessonListIndex = 1
+        }
+    }
+
+    package studentList <<rectangle>> {
+        object "<u>s1:Student" as Student1 {
+        name = Bernice
+        lesson(s) = Math-P4-Wed-1800
+        }
+    }
+}
+
+studentList -[hidden]up-> lessonList
+
+Lesson1 <--> Student1
+
+@end
