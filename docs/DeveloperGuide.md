@@ -1437,6 +1437,7 @@ Implementation of these features took ~4k LOC.
 The finding students feature required much consideration in designing the find constraints to ensure it is flexible and usable for users. It was challenging to implement a data structure to allow searching by multiple fields concurrently, which may each accept multiple keywords, and may have different search behaviours. In addition to student fields, lesson fields were also used in the find feature, increasing its complexity. The find feature also allows users to optionally customise the matching condition, which required more effort to implement. The large number of parameters and variations also meant that it was more susceptible to bugs, and it required intensive and careful testing. 
 
 **Lessons**
+
 Adding lesson required changes to the current model. AB3's implementation only involves a single entity `Person`, whereas TAB deals with an additional entity, `Lesson`. Handling interactions between the two different entities becomes more complicated due to their differing behaviours and interactions with the model. The difficulty came in ensuring the addition of `Lesson` can interact with the `Model` to produce the desired behaviour. For the fields in `Lesson`, we had to ensure the validity checks are accurate to prevent the application from misbehaving. This required in-depth analysis to how the commands should be parsed and is not trivial.
 
 Furthermore, we also factored in many considerations when implementing the GUI to allow users to visualise both lessons and students at the same time, conveniently. The final implementation involved a grid layout, where the list of lessons are displayed side-by-side the student's list. The displayed list of lessons are isolated to the specific student selected. Users can select a student to view the list of lessons of that student.
@@ -1455,4 +1456,9 @@ Implementation of the `Lesson` features took ~6-7k LOC, including tests.
 
 **Fee Calculator**
 
+**Viewing tags feature**
 
+There are multiple ways of implementing this enhancement. The simplest way would be to just create a method in `Addressbook` to add `Tag` objects from each `Person` in `UniquePersonList` whenever users request to view the list of tags.
+However, to abide by the Separation of Concerns (SoC) principle, the `UniqueTagList` class is created for adding distinct tags from `Person` into the tag list. 
+One of the alternative implementations is to keep a list of `Person` objects with the same `Tag` in the `Tag` object to keep track of the number of students labeled with that `Tag`. However, this could introduce circular dependencies.
+The implementation of `UniqueTagList` involved multifaceted considerations and multiple changes to ensure a balance between ease of implementation, efficiency as well as space allocation. The implementation of this feature took ~1k LOC including test cases.
