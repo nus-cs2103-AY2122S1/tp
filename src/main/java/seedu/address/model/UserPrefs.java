@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Objects;
 
 import seedu.address.commons.core.GuiSettings;
 
@@ -63,6 +62,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     }
 
     public void setGamesListFilePath(Path gamesListFilePath) {
+        requireNonNull(gamesListFilePath);
         this.gamesListFilePath = gamesListFilePath;
     }
 
@@ -78,12 +78,8 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         UserPrefs o = (UserPrefs) other;
 
         return guiSettings.equals(o.guiSettings)
-                && friendsListFilePath.equals(o.friendsListFilePath);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(guiSettings, friendsListFilePath);
+                && friendsListFilePath.equals(o.friendsListFilePath)
+                && gamesListFilePath.equals(o.gamesListFilePath);
     }
 
     @Override

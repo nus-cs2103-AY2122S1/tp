@@ -26,7 +26,6 @@ public class FriendRecommendFilterPredicateTest {
         DayOfWeek dayOfWeekMonday = DayOfWeek.of(1);
         DayOfWeek dayOfWeekSunday = DayOfWeek.of(7);
 
-
         FriendRecommendFilterPredicate friendRecommendFilterPredicateOne =
             new FriendRecommendFilterPredicate(hourZero, dayOfWeekMonday, VALORANT);
         FriendRecommendFilterPredicate friendRecommendFilterPredicateSameFields =
@@ -35,14 +34,14 @@ public class FriendRecommendFilterPredicateTest {
         // same object -> equal
         assertEquals(friendRecommendFilterPredicateOne, friendRecommendFilterPredicateOne);
 
-        // same fields -> equal
-        assertEquals(friendRecommendFilterPredicateOne, friendRecommendFilterPredicateSameFields);
+        // null -> not equal
+        assertNotEquals(friendRecommendFilterPredicateOne, null);
 
         // different types -> not equal
-        assertNotEquals(1, friendRecommendFilterPredicateOne);
+        assertNotEquals(friendRecommendFilterPredicateOne, "String");
 
-        // null -> not equal
-        assertNotEquals(null, friendRecommendFilterPredicateOne);
+        // same fields -> equal
+        assertEquals(friendRecommendFilterPredicateOne, friendRecommendFilterPredicateSameFields);
 
         // different hourOfDay -> not equal
         FriendRecommendFilterPredicate differentHourPredicate = new FriendRecommendFilterPredicate(

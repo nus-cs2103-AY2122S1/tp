@@ -80,7 +80,7 @@ public class Schedule {
      * @throws InvalidDayTimeException   thrown when dayOfWeek given exceeds valid range.
      * @throws InvalidHourOfDayException thrown when hourOfDay given exceeds valid range.
      */
-    public boolean isTimeslotAvailable(int hourOfDay, int dayOfWeek)
+    public boolean isTimeSlotAvailable(int hourOfDay, int dayOfWeek)
             throws InvalidDayTimeException, InvalidHourOfDayException {
         if (dayOfWeek < SCHEDULE_START_INDEX || dayOfWeek > SCHEDULE_END_INDEX) {
             throw new InvalidDayTimeException(MESSAGE_DAYTIME_INVALID_RANGE);
@@ -145,10 +145,5 @@ public class Schedule {
 
     private int convertToListIndex(int dayOfWeek) {
         return dayOfWeek - 1;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(daysOfWeek);
     }
 }

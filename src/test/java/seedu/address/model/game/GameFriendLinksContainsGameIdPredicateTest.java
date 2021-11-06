@@ -1,9 +1,13 @@
 package seedu.address.model.game;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.model.util.SampleDataUtil.getSampleFriends;
-import static seedu.address.model.util.SampleDataUtil.getSampleGames;
+import static seedu.address.testutil.TypicalFriends.ALICE;
+import static seedu.address.testutil.TypicalFriends.BENSON;
+import static seedu.address.testutil.TypicalGames.APEX_LEGENDS;
+import static seedu.address.testutil.TypicalGames.CSGO;
 
 import org.junit.jupiter.api.Test;
 
@@ -14,44 +18,43 @@ class GameFriendLinksContainsGameIdPredicateTest {
 
     @Test
     void getFriend() {
-        Friend friend = getSampleFriends()[0];
+        Friend friend = ALICE;
         GameFriendLinksContainsGameIdPredicate predicate =
                 new GameFriendLinksContainsGameIdPredicate(friend);
-        assertTrue(predicate.getFriend().equals(friend));
+        assertEquals(friend, predicate.getFriend());
     }
 
     @Test
     void equals() {
-        Friend friend = getSampleFriends()[0];
-        Friend otherFriend = getSampleFriends()[1];
+        Friend friend = BENSON;
+        Friend otherFriend = ALICE;
         GameFriendLinksContainsGameIdPredicate firstPredicate =
                 new GameFriendLinksContainsGameIdPredicate(friend);
         GameFriendLinksContainsGameIdPredicate secondPredicate =
                 new GameFriendLinksContainsGameIdPredicate(otherFriend);
 
         // same object -> returns true
-        assertTrue(firstPredicate.equals(firstPredicate));
+        assertEquals(firstPredicate, firstPredicate);
+
+        // null -> returns false
+        assertNotEquals(firstPredicate, null);
+
+        // different types -> returns false
+        assertNotEquals(firstPredicate, "String");
 
         // same values -> returns true
         GameFriendLinksContainsGameIdPredicate firstPredicateCopy =
-                new GameFriendLinksContainsGameIdPredicate(friend);
-        assertTrue(firstPredicate.equals(firstPredicateCopy));
-
-        // different types -> returns false
-        assertFalse(firstPredicate.equals(1));
-
-        // null -> returns false
-        assertFalse(firstPredicate.equals(null));
+                new GameFriendLinksContainsGameIdPredicate(firstPredicate.getFriend());
+        assertEquals(firstPredicate, firstPredicateCopy);
 
         // different person -> returns false
-        assertFalse(firstPredicate.equals(secondPredicate));
-
+        assertNotEquals(firstPredicate, secondPredicate);
     }
 
     @Test
     void test_gflContainsGameId_returnsTrue() {
-        Game game = getSampleGames()[1];
-        Friend friend = getSampleFriends()[0];
+        Game game = CSGO;
+        Friend friend = ALICE;
 
         // gfl contains game -> true
         GameFriendLinksContainsGameIdPredicate predicate =
@@ -61,10 +64,10 @@ class GameFriendLinksContainsGameIdPredicateTest {
 
     @Test
     void test_gflContainsGameId_returnsFalse() {
-        Game game = getSampleGames()[2];
-        Friend friend = getSampleFriends()[0];
+        Game game = APEX_LEGENDS;
+        Friend friend = ALICE;
 
-        // gfl contains game -> true
+        // gfl contains game -> false
         GameFriendLinksContainsGameIdPredicate predicate =
                 new GameFriendLinksContainsGameIdPredicate(friend);
         assertFalse(predicate.test(game));

@@ -50,10 +50,4 @@ public class UserName {
                 || (other instanceof UserName // instanceof handles nulls
                 && value.equals(((UserName) other).value)); // state check
     }
-
-    @Override
-    public int hashCode() {
-        return value.hashCode();
-    }
-
 }

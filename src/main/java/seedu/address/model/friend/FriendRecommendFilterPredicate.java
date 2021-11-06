@@ -41,13 +41,15 @@ public class FriendRecommendFilterPredicate implements Predicate<Friend> {
     public boolean equals(Object other) {
         if (this == other) {
             return true;
-        } else if (!(other instanceof FriendRecommendFilterPredicate)) {
+        }
+
+        if (!(other instanceof FriendRecommendFilterPredicate)) {
             return false;
-        } else {
-            FriendRecommendFilterPredicate otherPredicate = (FriendRecommendFilterPredicate) other;
-            return otherPredicate.game.equals(game)
+        }
+
+        FriendRecommendFilterPredicate otherPredicate = (FriendRecommendFilterPredicate) other;
+        return otherPredicate.game.equals(game)
                 && otherPredicate.day.equals(day)
                 && otherPredicate.hour.equals(hour);
-        }
     }
 }

@@ -9,7 +9,6 @@ import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 import seedu.address.model.friend.exceptions.InvalidDayTimeException;
 import seedu.address.model.time.exceptions.InvalidHourOfDayException;
@@ -149,20 +148,15 @@ public class Day {
     @Override
     public boolean equals(Object o) {
         if (this == o) {
-            return true;
+            return true; // short-circuit if same object
         }
-        if (o == null || getClass() != o.getClass()) {
+
+        if (!(o instanceof Day)) { // handles null
             return false;
         }
+
         Day day = (Day) o;
         return Arrays.equals(timeSlots, day.timeSlots) && dayOfWeek == day.dayOfWeek;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = Objects.hash(dayOfWeek);
-        result = 31 * result + Arrays.hashCode(timeSlots);
-        return result;
     }
 
     @Override
