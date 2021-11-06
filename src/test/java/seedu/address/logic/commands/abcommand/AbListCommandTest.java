@@ -48,6 +48,11 @@ public class AbListCommandTest {
         model.addAddressBookList(file2);
         model.addAddressBookList(file3);
 
+        expectedModel.addAddressBookList(file1);
+        expectedModel.addAddressBookList(file2);
+        expectedModel.addAddressBookList(file3);
+
+
         AbListCommand command = new AbListCommand();
         String result = String.format(AbListCommand.MESSAGE_SUCCESS, model.getAddressBookListString());
         CommandResult commandResult = new CommandResult(result);
