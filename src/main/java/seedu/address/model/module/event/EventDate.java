@@ -20,7 +20,8 @@ public class EventDate {
     public static final String MESSAGE_CONSTRAINTS = new StringBuilder()
             .append("Event dates should be of format: ")
             .append(DATE_TIME_FORMAT)
-            .append(". It should only contain numbers and '/', and it should not be blank.")
+            .append(", and the year should be from 1970 to 3000. ")
+            .append("It should only contain numbers, ':', and '/', and it should not be blank.")
             .toString();
 
     public final LocalDate eventDate;
@@ -41,7 +42,11 @@ public class EventDate {
      */
     public static boolean isValidEventDate(String test) {
         try {
-            DATE_TIME_FORMATTER.parse(test);
+            LocalDate date = LocalDate.parse(test, DATE_TIME_FORMATTER);
+            int year = date.getYear();
+            if (year < 1970 || year > 3000) {
+                return false;
+            }
         } catch (DateTimeParseException e) {
             return false;
         }

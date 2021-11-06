@@ -86,8 +86,8 @@ open the help window.<br>
 
 * Some commands require the user to enter the `EVENT_INDEX`, `MEMBER_INDEX` or `TASK_INDEX`. The `INDEX` refers to the order on 
   the display list.<br>
-  e.g. `Freshmen Orientation Camp Project` has a `EVENT_INDEX` of `1` and `Charlotte Oliveiro` has a `MEMBER_INDEX` 
-  of `3` according to the diagram below.
+  e.g. `Freshmen Orientation Camp Project` has a `EVENT_INDEX` of `1`, `Charlotte Tan` has a `MEMBER_INDEX` 
+  of `3`, and `submit indemnity forms` has a `TASK_INDEX` of `2` according to the diagram below.
   ![idNumberExample](images/idNumberExample.png)
 
 </div>
@@ -110,7 +110,7 @@ Parameter | Description, Constraints
 --------|------------------
 **NAME** | _Name of member_ <br> - Only alphabets, numbers and spaces allowed i.e. no special characters such as `.`, `'`, or `-`. <br> - No character limit. <br> - All names of members must be unique <br> - If there are 2 members of the same name, it is recommended to add a number behind to uniquely identify the member e.g. John Tan2.
 **POSITIONS** | _Positions of member_ <br> - Same as NAME. <br> - If `-` should be used, replace it with a space e.g. `Vice President`.
-**PHONE_NUMBER** | _Phone number of member_ <br> - Only numbers allowed. <br> - No number limit, but minimum 3 numbers.
+**PHONE_NUMBER** | _Phone number of member_ <br> - Only numbers allowed. <br> - Minimum 3 digits, maximum 15 digits. ([Reason for 15 digits](https://en.wikipedia.org/wiki/Telephone_number#Concept_and_methodology))
 **ADDRESS** | _Physical address of member_ <br> - All characters allowed with no character limit.
 **EMAIL** | _Email address of member_ <br> - Should be of format local-part@domain. e.g. johndoe@example.com
 **MEMBER_INDEX** | _Index of member in the displayed `Member List` column of the application_ <br> - **Must be a positive integer** 1, 2, 3, …​ <br> - Cannot exceed the number of members listed in the displayed `Member List`.
@@ -197,7 +197,7 @@ Format: `mtfind KEY_WORD`
   e.g. `submit meeting` will return `team meeting`, `submit form`
 
 Examples:
-* `mtfind form` returns `Alex Yeoh`, `Charlotte Oliveiro`, `David Li` and `Roy Balakrishnan` because task `submit form` was assigned to them.
+* `mtfind form` returns `Alex Yeoh`, `Charlotte Tan` and `David Li` because task `submit indemnity form` was assigned to them.
  ![result for 'mtfind form'](images/mtfind_example.png)
 
 #### Deleting a member : `mdel`
@@ -229,7 +229,7 @@ The task list and the tasks can be changed using the various commands listed bel
 Parameter | Description, Constraints
 --------|------------------
 **NAME** | _Name of task_ <br> - Only alphabets, numbers and spaces allowed i.e. no special characters such as `.`, `'`, or `-`. <br> - No character limit.
-**DATE_TIME** | _Date and time of a task_ <br> - Must be of format: `dd/MM/yyyy HH:mm` <br> - `dd: date` is a 2 digit number from 1 to 31 <br> - `MM: month` is a 2 digit number from 1 to 12 <br> - `yyyy: year` is a 4 digit number from 0001 to 9999 <br> - `HH: hour(s)` is a 2 digit number from 00 to 24 <br> -`mm: minute(s)` is a 2 digit number from 00 to 59 <br> - **NOTE**: Invalid date and time that satisfy the above conditions will be rounded down to the nearest valid date and time. <br> 1. if you specify date as `31/11/2021`, Ailurus will round it to `30/11/2021`, while `32/11/2021` will be considered as invalid date. <br> 2. if you specify date as `29/02/2021`, Ailurus will round it to `28/02/2021` because 2021 is not a leap year. <br> 3. if you specify a date and time as `10/11/2021 24:00`, Ailurus will round it to `11/11/2021 00:00` as it sees it as the next day.
+**DATE_TIME** | _Date and time of a task_ <br> - Must be of format: `dd/MM/yyyy HH:mm` <br> - `dd: date` is a 2 digit number from 01 to 31 <br> - `MM: month` is a 2 digit number from 01 to 12 <br> - `yyyy: year` is a 4 digit number from 1970 to 3000 ([Reason for 1970](https://en.wikipedia.org/wiki/Unix_time)) <br> - `HH: hour(s)` is a 2 digit number from 00 to 24 <br> - `mm: minute(s)` is a 2 digit number from 00 to 59 <br> - **NOTE**: Invalid date and time that satisfy the above conditions will be rounded down to the nearest valid date and time. <br> 1. if you specify date as `31/11/2021`, Ailurus will round it to `30/11/2021`, while `32/11/2021` will be considered as invalid date. <br> 2. if you specify date as `29/02/2021`, Ailurus will round it to `28/02/2021` because 2021 is not a leap year. <br> 3. if you specify a date and time as `10/11/2021 24:00`, Ailurus will round it to `11/11/2021 00:00` as it sees it as the next day.
 **MEMBER_INDEX** | _Index of member in the displayed `Member List` column of the application_ <br> - **Must be a positive integer** 1, 2, 3, …​ <br> - Cannot exceed the number of members listed in the displayed `Member List`.
 **TASK_INDEX** | _Index of task in the displayed `Task List` column of the application_ <br> - **Must be a positive integer** 1, 2, 3, …​ <br> - Cannot exceed the number of tasks listed in the displayed `Task List`.
 **OPTION** | _Yes or No option_ <br> - **must be either `y` or `n`** to indicate yes or no respectively.
@@ -246,6 +246,7 @@ Format: `tadd /n NAME /d DATE_TIME /m MEMBER_INDEX [/m MORE_MEMBER_INDEX]…​`
 
 * Tasks can be added to multiple members if there is more than one `MEMBER_INDEX` provided.
 * The full task list of the member is shown after the command is executed.
+* Note that tasks that are overdue (i.e. dates in the past) can be added for accounting of tasks.
 
 Examples:
 * `tadd /n Collect payment from members /d 20/11/2021 11:30 /m 3` adds task `Collect payment from members` to the third member on the  member list.
@@ -351,7 +352,7 @@ The event list and the events can be changed using the various commands listed b
 Parameter | Description, Constraints
 --------|------------------
 **NAME** | _Name of event_ <br> - Only alphabets, numbers and spaces allowed i.e. no special characters such as `.`, `'`, or `-`. <br> - No character limit.
-**DATE** | _Date of a task_ <br> - Must be of format: `dd/MM/yyyy` <br> - `dd: date` is a 2 digit number from 1 to 31 <br> - `MM: month` is a 2 digit number from 1 to 12 <br> - `yyyy: year` is a 4 digit number from 0001 to 9999 <br> - **NOTE**: Invalid date and time that satisfy the above conditions will be rounded down to the nearest valid date and time. <br> 1. if you specify date as `31/11/2021`, Ailurus will round it to `30/11/2021`, while `32/11/2021` will be considered as invalid date. <br> 2. if you specify date as `29/02/2021`, Ailurus will round it to `28/02/2021` because 2021 is not a leap year. <br>
+**DATE** | _Date of a task_ <br> - Must be of format: `dd/MM/yyyy` <br> - `dd: date` is a 2 digit number from 01 to 31 <br> - `MM: month` is a 2 digit number from 01 to 12 <br> - `yyyy: year` is a 4 digit number from 1970 to 3000 ([Reason for 1970](https://en.wikipedia.org/wiki/Unix_time)) <br> - **NOTE**: Invalid date and time that satisfy the above conditions will be rounded down to the nearest valid date and time. <br> 1. if you specify date as `31/11/2021`, Ailurus will round it to `30/11/2021`, while `32/11/2021` will be considered as invalid date. <br> 2. if you specify date as `29/02/2021`, Ailurus will round it to `28/02/2021` because 2021 is not a leap year. <br>
 **MEMBER_INDEX** | _Index of member in the displayed `Member List` column of the application_ <br> - **Must be a positive integer** 1, 2, 3, …​ <br> - Cannot exceed the number of members listed in the displayed `Member List`.
 **EVENT_INDEX** | _Index of event in the displayed `Event List` column of the application_ <br> - **Must be a positive integer** 1, 2, 3, …​ <br> - Cannot exceed the number of events listed in the displayed `Event List`.
 
@@ -366,6 +367,7 @@ You can add multiple members to an event e.g. /m 2 /m 3 /m 4...
 </div>
 
 * Multiple members can be added to an event when more than one `MEMBER_INDEX` is provided.
+* Note that events that are in the past can be added for accounting of events.
 
 Examples:
 * `eadd /n Computing Freshmen Orientation Camp 2021 /d 22/11/2021 /m 4 /m 5 /m 6` adds a `Computing Freshmen Orientation Camp 2021` event dated `22/11/2021` and has the 4th, 5th and 6th members of the member list added to it.
@@ -478,7 +480,7 @@ Format: `emdel /e EVENT_INDEX /m MEMBER_INDEX [/m MORE_MEMBER_INDEX]…​`
 Examples:
 * `emdel /e 1 /m 2 /m 3` deletes the 2nd and 3rd person in the member list from Event 1.
 
-## Other Commands
+## Other Commands and Features
 
 ### Viewing help : `help`
 
