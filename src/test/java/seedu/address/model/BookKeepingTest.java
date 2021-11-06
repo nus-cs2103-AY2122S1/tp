@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 public class BookKeepingTest {
 
-    BookKeeping bookKeeping = new BookKeeping();
+    private BookKeeping bookKeeping = new BookKeeping();
 
     @Test
     public void addCost_overflow_costKeptAtLimit() {
