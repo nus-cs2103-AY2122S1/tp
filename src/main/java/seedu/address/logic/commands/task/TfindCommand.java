@@ -36,4 +36,11 @@ public class TfindCommand extends Command {
         return new CommandResult(
                 String.format(Messages.MESSAGE_TASKS_LISTED_OVERVIEW, model.getFilteredTaskList().size()));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof TfindCommand // instanceof handles nulls
+                && predicate.equals(((NameContainsKeywordsPredicate<Task>) ((TfindCommand) other).predicate)));
+    }
 }
