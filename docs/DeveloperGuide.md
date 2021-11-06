@@ -1091,6 +1091,42 @@ testers are expected to do more *exploratory* testing.
     6. Other incorrect mark commands to try: `mark`, `mark x` (where x is larger than the list size), `mark y` (where y is any non-positive integer)<br>
        Expected: No person is marked. Error details shown in the status message.
 
+### Unmarking a person
+
+1. Unmarking a person while all persons are being shown
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list all currently `Done`.
+
+    2. Test case: `unmark 1`<br>
+       Expected: First contact is unmarked to `Not Done`. Details of the unmarked contact shown in the status message.
+
+    3. Test case: `unmark 0`<br>
+       Expected: No person is unmarked. Error details shown in the status message.
+
+    4. Test case: `unmark 2`, then `unmark 2` again<br>
+       Expected: Second contact is unmarked to `Not Done` with the first `unmark 2`. Details of the unmarked contact shown in the status message.
+                 For the second `unmark 2`, no new person is unmarked. Error details shown in the status message.
+
+    5. Test case: `unmark 3 3`<br>
+       Expected: No person is unmarked. Error details shown in the status message.
+
+    6. Other incorrect unmark commands to try: `unmark`, `unmark x` (where x is larger than the list size), `unmark y` (where y is any negative integer)<br>
+       Expected: No person is unmarked. Error details shown in the status message.
+
+    7. Test case: `unmark 4 5`<br>
+       Expected: Fifth and sixth contact is unmarked to `Not Done`. Details of the unmarked contacts shown in the status message.
+
+2. Marking a person while a filtered list of persons are being shown
+
+    1. Prerequisites: Find a valid group of persons using the `find` command with appropriate inputs. Multiple persons in the filtered list all currently `Done`.
+
+    2. Test case: Utilise the same test cases in Section 1 of Unmarking a person<br>
+       Expected: Same results as the corresponding expected test case results in Section 1 of Unmarking a person, while still in the filtered list.
+
+    3. Test case: `unmark 7`, then `list`<br>
+       Expected: For `unmark 7`, the seventh contact is unmarked to `Not Done` and details of the unmarked contacts shown in the status message.
+                 After `list`, locate the unmarked person in the list and the person should still be `Not Done`.
+    
 ### Saving data
 
 1. Dealing with missing/corrupted data files
