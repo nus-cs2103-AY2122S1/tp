@@ -222,7 +222,7 @@ After being parsed, the implementation for deleting friends and games is similar
 called, resulting in the deletion of a friend or a game.The following sequence diagram 
 illustrates the description for deleting **games**:
 
-<img src="images/DeleteGameSequenceDiagram.png" width="574" />
+<img src="images/DeleteGameSequenceDiagram.png" width="1000" />
 
 #### Special considerations:
 
@@ -244,7 +244,7 @@ friend has to a game has to be removed, before deleting the game from the list o
   calling `MainParser#parseCommand()`, who in turn calls `FriendCommandParser#parse()` as it is a `friend` command, 
   which returns a `ScheduleFriendCommand` after determining the `commandType` is `ScheduleFriendCommand.COMMAND_WORD`.
 
-<img src="images/ScheduleSequenceDiagram1.png" width="574" />
+<img src="images/ScheduleSequenceDiagram1.png" width="1000" />
   
 * `LogicManager` will then call `Command#execute()`. In `ScheduleFriendCommand`, the friend to be updated will be 
   retrieved with `Model:getfriend()`, and a new friend will be created with `createScheduledFriend()`, with the schedule
@@ -253,7 +253,7 @@ friend has to a game has to be removed, before deleting the game from the list o
 * Upon success, the `CommandResult` is created with the success message to display on the UI and the `CommandType` of
   `FRIEND_SCHEDULE`, before being returned.
 
-<img src="images/ScheduleSequenceDiagram2.png" width="574" />
+<img src="images/ScheduleSequenceDiagram2.png" width="1000" />
 
 #### Design considerations:
 * `Schedule` and `Day` were their own classes instead of storing them directly as an `ArrayList` or `boolean[]` as this
