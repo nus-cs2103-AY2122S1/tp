@@ -14,8 +14,10 @@ public class FindTaskCommand extends Command {
 
     public static final String COMMAND_WORD = "findtask";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all tasks whose label, date or tag contain any "
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Finds all tasks whose label, date or tag contain any "
             + "of the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
+            + "Keywords should be nonempty and consist only of alphanumeric characters\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " october sew buttons";
 

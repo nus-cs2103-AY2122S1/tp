@@ -23,7 +23,7 @@ public class OrderContainsKeywordsPredicate implements Predicate<Order> {
                 || keywords.stream()
                         .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(order.getDate().dateString, keyword))
                 || keywords.stream()
-                        .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(order.getCustomer().name, keyword))
+                        .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(order.getCustomer().getName(), keyword))
                 || keywords.stream()
                         .anyMatch(keyword -> StringUtil.containsWordIgnoreCase("SO" + order.getId(), keyword));
     }
@@ -36,3 +36,5 @@ public class OrderContainsKeywordsPredicate implements Predicate<Order> {
     }
 
 }
+
+// works but the orderlist is not refreshed. Ask cheng yi for help.

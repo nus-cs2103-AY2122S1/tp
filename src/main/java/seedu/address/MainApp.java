@@ -56,7 +56,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing SalesNote ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -135,7 +135,16 @@ public class MainApp extends Application {
             initialOrderBook = new OrderBook();
         }
 
-        return new ModelManager(initialAddressBook, initialTaskBook, initialOrderBook, userPrefs);
+        ModelManager modelManager = new ModelManager(initialAddressBook, initialTaskBook, initialOrderBook, userPrefs);
+        try {
+            modelManager.checkClientAndOrderRelation();
+            modelManager.checkTaskAndOrderRelation();
+        } catch (DataConversionException e) {
+            logger.warning(e.getMessage() + ". Will be starting with empty data.");
+            modelManager = modelManager.resetModelManager();
+        }
+
+        return modelManager;
     }
 
     private void initLogging(Config config) {
@@ -196,7 +205,7 @@ public class MainApp extends Application {
                     + "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            logger.warning("Problem while reading from the file. Will be starting with an empty SalesNote");
             initializedPrefs = new UserPrefs();
         }
 
@@ -212,13 +221,13 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
+        logger.info("Starting SalesNote " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Address Book ] =============================");
+        logger.info("============================ [ Stopping SalesNote ] =============================");
         try {
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {

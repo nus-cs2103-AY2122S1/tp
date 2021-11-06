@@ -4,7 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -13,6 +16,10 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.StringUtil;
+import seedu.address.model.order.Customer;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Person;
 import seedu.address.model.sort.SortDescriptor;
@@ -110,6 +117,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasPersonWithName(String name) {
+        requireNonNull(name);
+        return addressBook.hasPersonWithName(name);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }
@@ -130,7 +143,7 @@ public class ModelManager implements Model {
     //=========== Task Management ==================================================================================
 
     @Override
-    public Path getTaskListFilePath() {
+    public Path getTaskBookFilePath() {
         return userPrefs.getTaskBookPath();
     }
 
@@ -149,6 +162,7 @@ public class ModelManager implements Model {
     public ReadOnlyTaskBook getTaskBook() {
         return taskBook;
     }
+
     /**
      * Checks if taskBook has this task.
      */
@@ -209,7 +223,7 @@ public class ModelManager implements Model {
     //=========== Order Management ==================================================================================
 
     @Override
-    public Path getOrderPath() {
+    public Path getOrderBookFilePath() {
         return userPrefs.getOrderBookFilePath();
     }
 
@@ -288,33 +302,60 @@ public class ModelManager implements Model {
     /**
      * Marks an order as completed
      */
+    @Override
     public boolean markOrder(Order order) {
         return orderBook.markOrder(order);
     }
 
     /**
-     * For each person, finds orders associated with the person, and adds up the amount.
-     * Creates a ClientTotalOrder for each person.
+     * Delete tasks related to a given Order
+     */
+    @Override
+    public void deleteRelatedTasks(Order order) {
+        String keyword = Order.ID_PREFIX + String.valueOf(order.getId());
+        this.deleteTaskIf(task -> StringUtil.containsWordIgnoreCase(task.getTaskTag().tagName, keyword));
+    }
+
+    /**
+     * Deletes all tasks matching predicate from taskBook.
+     */
+    @Override
+    public void deleteOrderIf(Predicate<Order> pred) {
+        orderBook.deleteOrderIf(pred);
+    }
+
+    /**
+     * Groups and sums up all orders according to their {@code Customer}s.
+     * This method computes total orders based on the {@code Customer}s,
+     * but each {@code Customer} is supposed to map to an existing {@code Person} (Client),
+     * hence the naming of the method and local variables.
      *
      * @return an ObservableList of {@code ClientTotalOrder}.
      */
     @Override
     public ObservableList<ClientTotalOrder> getClientTotalOrders() {
+        HashMap<Customer, Double> customerTotalMap = getCustomerTotalMap();
         ObservableList<ClientTotalOrder> clientTotalOrders = FXCollections.observableArrayList();
-        for (Person client : addressBook.getPersonList()) {
-            clientTotalOrders.add(getClientTotalOrder(client));
-        }
+        customerTotalMap.forEach((customer, totalOrders)
+            -> clientTotalOrders.add(new ClientTotalOrder(customer.toString(), totalOrders)));
+        sortDescending(clientTotalOrders);
         return clientTotalOrders;
     }
 
-    private ClientTotalOrder getClientTotalOrder(Person client) {
-        String clientName = client.getName().toString();
-        Predicate<Order> correctClient = (order) -> order.getCustomer().toString().equals(clientName);
-        double totalOrder = orderBook.getOrderList().stream()
-                .filter(correctClient)
-                .mapToDouble(Order::getAmountAsDouble)
-                .sum();
-        return new ClientTotalOrder(clientName, totalOrder);
+    private HashMap<Customer, Double> getCustomerTotalMap() {
+        HashMap<Customer, Double> customerTotalMap = new HashMap<>();
+        orderBook.getOrderList().forEach(order -> {
+            Customer customer = order.getCustomer();
+            Double updatedTotal = customerTotalMap.getOrDefault(customer, 0.0) + order.getAmountAsDouble();
+            customerTotalMap.put(customer, updatedTotal);
+        });
+        return customerTotalMap;
+    }
+
+    private void sortDescending(List<ClientTotalOrder> clientTotalOrders) {
+        Comparator<? super ClientTotalOrder> comparator = Comparator.comparing(ClientTotalOrder::getTotalOrder);
+        clientTotalOrders.sort(comparator);
+        Collections.reverse(clientTotalOrders);
     }
 
 
@@ -363,6 +404,44 @@ public class ModelManager implements Model {
         Comparator<Order> defaultComparator = Order::compareTo;
         orderBook.sortOrders(defaultComparator);
         updateFilteredOrderList(PREDICATE_SHOW_ALL_ORDERS);
+    }
+
+    //=========== AddressBook & OrderBook Relation Check =======================================================
+
+    /**
+     * Checks if any order tagged to persons that don't exist.
+     */
+    public void checkClientAndOrderRelation() throws DataConversionException {
+        ObservableList<Order> orders = this.orderBook.getOrderList();
+        for (Order eachOrder : orders) {
+            String nameOfPerson = eachOrder.getCustomer().getName();
+            if (!this.addressBook.hasPersonWithName(nameOfPerson)) {
+                throw new DataConversionException(
+                        new IllegalValueException("Given customer name does not exist in the Address Book"));
+            }
+        }
+    }
+
+    //=========== AddressBook & OrderBook Relation Check =======================================================
+
+    /**
+     * Checks if any tasks tagged to order that don't exist.
+     */
+    public void checkTaskAndOrderRelation() throws DataConversionException {
+        ObservableList<Task> tasks = this.taskBook.getTaskList();
+        for (Task eachTask : tasks) {
+            Long id = eachTask.getTaskTag().getTagId();
+            if (!this.orderBook.hasOrder(id)) {
+                throw new DataConversionException(
+                        new IllegalValueException("Given Sales ID does not exist in the Order Book"));
+            }
+        }
+    }
+
+    //=========== AddressBook & OrderBook Relation Check =======================================================
+
+    public ModelManager resetModelManager() {
+        return new ModelManager(new AddressBook(), new TaskBook(), new OrderBook(), this.userPrefs);
     }
 
 }

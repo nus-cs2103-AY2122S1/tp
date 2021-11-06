@@ -99,6 +99,7 @@ public class TotalOrdersWindow extends UiPart<Stage> {
      * Formats the total column to always display amount with 2 decimal places.
      */
     private void formatTotalColumn() {
+        // Solution below adapted from https://stackoverflow.com/a/34924734/13896417
         totalCol.setCellFactory(tc -> new TableCell<>() {
             @Override
             protected void updateItem(Double value, boolean empty) {
@@ -114,6 +115,7 @@ public class TotalOrdersWindow extends UiPart<Stage> {
 
     private void setCloseOnEsc() {
         Stage stage = getRoot();
+        // Solution below adapted from https://stackoverflow.com/a/42104595/13896417
         EventHandler<KeyEvent> escHandler = event -> {
             if (event.getCode() == KeyCode.ESCAPE) {
                 stage.close();

@@ -30,7 +30,7 @@ public class TypicalOrders {
             .withDate(VALID_DATE_OCT).withAmount(VALID_AMOUNT_SALE2).build();
 
     /**
-     * Returns an {@code OrderBook} with all the typical tasks added.
+     * Returns an {@code OrderBook} with all the typical orders added.
      */
     public static OrderBook getTypicalOrderBook() {
         OrderBook sb = new OrderBook();

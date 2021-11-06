@@ -72,6 +72,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if a person with given name ignoring case exists in the address book.
+     */
+    public boolean hasPersonWithName(String name) {
+        requireNonNull(name);
+        return persons.containsWithName(name);
+    }
+
+    /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */
@@ -102,7 +110,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons";
+        return persons.asUnmodifiableObservableList().size() + " clients";
     }
 
     @Override

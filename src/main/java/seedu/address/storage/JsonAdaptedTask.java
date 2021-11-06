@@ -38,7 +38,7 @@ class JsonAdaptedTask {
      */
     public JsonAdaptedTask(Task source) {
         label = source.getLabel().toString();
-        date = source.getDate().toString();
+        date = source.getDate().dateString;
         taskTag = source.getTaskTag().toString();
         isDone = String.valueOf(source.getIsDone());
     }
@@ -77,7 +77,7 @@ class JsonAdaptedTask {
         Task newTask = new Task(modelLabel, modelDate, modelTaskTag);
 
         if (isDone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Isdone"));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "IsDone"));
         }
         if (isDone.equals("true")) {
             newTask.markDone();

@@ -35,6 +35,8 @@ public enum DatePattern {
         List<String> patterns = Arrays.stream(DatePattern.values())
                 .map(DatePattern::getPattern)
                 .collect(Collectors.toList());
-        return String.join("\n", patterns);
+        String rawPatterns = String.join("\n", patterns);
+        String toDisplay = rawPatterns.replaceAll("u", "y");
+        return toDisplay;
     }
 }
