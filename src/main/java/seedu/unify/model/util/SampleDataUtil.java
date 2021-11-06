@@ -31,13 +31,13 @@ public class SampleDataUtil {
                 new Date("2021-11-03"),
                 getTagSet("CS2101"), new Priority(Priority.ObjectPriority.HIGH)),
             new Task(new Name("Presentation 2"), new Time("16:00"),
-                new Date("2020-11-10"),
+                new Date("2021-11-10"),
                 getTagSet("ES5678"), new Priority()),
             new Task(new Name("Quiz 2"), new Time("23:59"),
-                new Date("2020-11-21"),
+                new Date("2021-11-21"),
                 getTagSet("MA4321"), new Priority()),
             new Task(new Name("Meeting"), new Time("12:00"),
-                new Date("2020-11-22"),
+                new Date("2021-11-22"),
                 getTagSet("CS2222"), new Priority())
         };
     }

@@ -112,5 +112,5 @@ public interface Model {
     /**
      * Updates the state of the weekly tasks.
      */
-    void updateWeeklyTasksState();
+    void updateWeeklyProgress();
 }
