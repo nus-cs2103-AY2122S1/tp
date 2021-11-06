@@ -6,7 +6,8 @@ title: User Guide
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
-<p style="page-break-before: always">
+
+<div style="page-break-after: always"></div>
 
 ## **Introduction**
 
