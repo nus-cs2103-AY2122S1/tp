@@ -105,7 +105,7 @@ public class AnimeListParserTest {
     }
 
     @Test
-    public void parseConfirmationCommand_abortClear() throws Exception {
+    public void parseConfirmationCommand_abortClear() {
         assertTrue(parser.parseConfirmationCommand("n") instanceof AbortClearCommand);
         assertTrue(parser.parseConfirmationCommand("X") instanceof AbortClearCommand);
         assertTrue(parser.parseConfirmationCommand("  ") instanceof AbortClearCommand);
@@ -117,7 +117,7 @@ public class AnimeListParserTest {
     }
 
     @Test
-    public void parseConfirmationCommand_confirmClear() throws Exception {
+    public void parseConfirmationCommand_confirmClear() {
         assertTrue(parser.parseConfirmationCommand("clear") instanceof ConfirmClearCommand);
         //trailing whitespace
         assertTrue(parser.parseConfirmationCommand("clear  ") instanceof ConfirmClearCommand);
@@ -131,6 +131,7 @@ public class AnimeListParserTest {
 
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, ()
+            -> parser.parseCommand("unknownCommand"));
     }
 }

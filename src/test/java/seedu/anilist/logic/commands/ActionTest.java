@@ -34,7 +34,7 @@ public class ActionTest {
     }
 
     @Test void actionFromString() {
-        assertThrows(AssertionError.class, () -> Action.actionFromString((String) null));
+        assertThrows(AssertionError.class, () -> Action.actionFromString(null));
 
         assertEquals(Action.DEFAULT, Action.actionFromString(INVALID_STRING_EMPTY));
         assertEquals(Action.ADD, Action.actionFromString(VALID_ACTION_ADD));

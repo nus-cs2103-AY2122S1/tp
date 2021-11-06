@@ -24,7 +24,7 @@ public class UpdateEpisodeCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
         String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdateEpisodeCommand.MESSAGE_USAGE);
 
-    private UpdateEpisodeCommandParser parser = new UpdateEpisodeCommandParser();
+    private final UpdateEpisodeCommandParser parser = new UpdateEpisodeCommandParser();
 
     @Test
     public void parse_missingParts_failure() {
@@ -77,7 +77,8 @@ public class UpdateEpisodeCommandParserTest {
             Episode.MESSAGE_CONSTRAINTS);
 
         // wrong param specified
-        assertParseFailure(parser, "1" + EPISODE_DESC_EPISODE_ONE + STATUS_DESC_TOWATCH, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "1" + EPISODE_DESC_EPISODE_ONE + STATUS_DESC_TOWATCH,
+                MESSAGE_INVALID_FORMAT);
     }
 
     @Test

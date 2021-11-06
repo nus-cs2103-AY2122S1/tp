@@ -36,7 +36,7 @@ import seedu.anilist.model.genre.Genre;
 import seedu.anilist.testutil.AnimeBuilder;
 
 public class AddCommandParserTest {
-    private AddCommandParser parser = new AddCommandParser();
+    private final AddCommandParser parser = new AddCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {

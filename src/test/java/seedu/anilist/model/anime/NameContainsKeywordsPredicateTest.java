@@ -8,6 +8,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_STRING_EMPTY;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_STRING_NON_ASCII;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_STRING_SPACE;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_ACTION;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_SUPERNATURAL;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_AKIRA;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_FATE_ZERO;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -96,15 +100,15 @@ public class NameContainsKeywordsPredicateTest {
     public void test_nameDoesNotContainKeywords_returnsFalse() throws ParseException {
         // Zero keywords
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new AnimeBuilder().withName("Attack on Titan").build()));
+        assertFalse(predicate.test(new AnimeBuilder().withName(VALID_NAME_AKIRA).build()));
 
         // Non-matching keyword
-        predicate = new NameContainsKeywordsPredicate(List.of("Chainsaw"));
-        assertFalse(predicate.test(new AnimeBuilder().withName("Black Rock Shooter").build()));
+        predicate = new NameContainsKeywordsPredicate(List.of(VALID_NAME_FATE_ZERO));
+        assertFalse(predicate.test(new AnimeBuilder().withName(VALID_NAME_AKIRA).build()));
 
         // Keywords match genres, but does not match name
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("action", "adventure"));
-        assertFalse(predicate.test(new AnimeBuilder().withName("Attack on Titan")
-                .withGenres("action", "adventure").build()));
+        predicate = new NameContainsKeywordsPredicate(Arrays.asList(VALID_GENRE_ACTION, VALID_GENRE_SUPERNATURAL));
+        assertFalse(predicate.test(new AnimeBuilder().withName(VALID_NAME_AKIRA)
+                .withGenres(VALID_GENRE_ACTION, VALID_GENRE_SUPERNATURAL).build()));
     }
 }

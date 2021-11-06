@@ -108,7 +108,7 @@ public class FindCommandTest {
     public void execute_multipleNameAndGenres_noAnimeFound() throws ParseException {
         String expectedMessage = String.format(MESSAGE_ANIME_LISTED_OVERVIEW, 0);
         Predicate<Anime> predicate = preparePredicate(
-            Arrays.asList("chainsaw"), Arrays.asList("action", "horror"));
+                List.of("chainsaw"), Arrays.asList("action", "horror"));
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredAnimeList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);

@@ -11,7 +11,6 @@ import static seedu.anilist.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.anilist.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import seedu.anilist.commons.core.index.Index;
@@ -53,13 +52,10 @@ public class CommandTestUtil {
     // Valid Name DESC
     public static final String NAME_DESC_AKIRA = " " + PREFIX_NAME + VALID_NAME_AKIRA;
     public static final String NAME_DESC_BNHA = " " + PREFIX_NAME + VALID_NAME_BNHA;
-    public static final String NAME_DESC_MAX_LENGTH = " " + PREFIX_NAME + VALID_NAME_MAX_LENGTH;
 
     // Invalid Name DESC
     public static final String INVALID_NAME_DESC_BLANK = " " + PREFIX_NAME + INVALID_STRING_SPACE;
     public static final String INVALID_NAME_DESC_NON_ASCII = " " + PREFIX_NAME + INVALID_STRING_NON_ASCII;
-    public static final String INVALID_NAME_DESC_LONGER_THAN_MAX_LENGTH = " "
-            + PREFIX_NAME + INVALID_NAME_LONGER_THAN_MAX_LENGTH;
 
 
     //-----------------------------------------------------EPISODE------------------------------------------------------
@@ -79,18 +75,13 @@ public class CommandTestUtil {
             Long.toString((long) Integer.MAX_VALUE + 1);
 
     // Valid Episode DESC
-    public static final String EPISODE_DESC_EPISODE_ZERO = " " + PREFIX_EPISODE + VALID_EPISODE_ZERO;
     public static final String EPISODE_DESC_EPISODE_ONE = " " + PREFIX_EPISODE + VALID_EPISODE_ONE;
     public static final String EPISODE_DESC_EPISODE_TWO = " " + PREFIX_EPISODE + VALID_EPISODE_TWO;
-    public static final String EPISODE_DESC_EPISODE_MAX = " " + PREFIX_EPISODE + VALID_EPISODE_MAX;
 
     // Invalid Episode DESC
-    public static final String INVALID_EPISODE_DESC_ALPHA = " " + PREFIX_EPISODE + INVALID_EPISODE_ALPHA;
     public static final String INVALID_EPISODE_DESC_NEG = " " + PREFIX_EPISODE + INVALID_EPISODE_NEG;
     public static final String INVALID_EPISODE_DESC_DECIMAL = " "
             + PREFIX_EPISODE + INVALID_EPISODE_DECIMAL;
-    public static final String INVALID_EPISODE_DESC_LARGER_THAN_MAX_EPISODE = " "
-            + PREFIX_EPISODE + INVALID_EPISODE_LARGER_THAN_MAX_EPISODE;
     public static final String INVALID_EPISODE_DESC_LARGER_THAN_MAX_INT = " "
             + PREFIX_EPISODE + INVALID_EPISODE_LARGER_THAN_MAX_INT;
 
@@ -109,10 +100,7 @@ public class CommandTestUtil {
 
     // Valid Status DESC
     public static final String STATUS_DESC_TOWATCH = " " + PREFIX_STATUS + VALID_STATUS_TOWATCH;
-    public static final String STATUS_DESC_TOWATCH_SHORT_FORM = " " + PREFIX_STATUS + VALID_STATUS_TOWATCH_SHORT_FORM;
     public static final String STATUS_DESC_WATCHING = " " + PREFIX_STATUS + VALID_STATUS_WATCHING;
-    public static final String STATUS_DESC_WATCHING_SHORT_FORM = " " + PREFIX_STATUS + VALID_STATUS_WATCHING_SHORT_FORM;
-    public static final String STATUS_DESC_FINISHED = " " + PREFIX_STATUS + VALID_STATUS_FINISHED;
 
     // Invalid Status DESC
     public static final String INVALID_STATUS_DESC_ALPHA = " " + PREFIX_STATUS + INVALID_STATUS_ALPHA;
@@ -137,8 +125,6 @@ public class CommandTestUtil {
     // Invalid Genre DESC
     public static final String INVALID_GENRE_DESC_NON_ALPHANUMERIC = " "
             + PREFIX_GENRE + INVALID_GENRE_NON_ALPHANUMERIC;
-    public static final String INVALID_GENRE_DESC_ALPHA = " " + PREFIX_GENRE + INVALID_GENRE_ALPHA;
-    public static final String INVALID_GENRE_DESC_NUMERIC = " " + PREFIX_GENRE + INVALID_GENRE_NUMERIC;
 
 
     //-----------------------------------------------------ACTION-------------------------------------------------------
@@ -154,14 +140,10 @@ public class CommandTestUtil {
 
     // Valid Action DESC
     public static final String ACTION_DESC_ADD = " " + PREFIX_ACTION + VALID_ACTION_ADD;
-    public static final String ACTION_DESC_ADD_SHORT_FORM = " " + PREFIX_ACTION + VALID_ACTION_ADD_SHORT_FORM;
-    public static final String ACTION_DESC_DELETE = " " + PREFIX_ACTION + VALID_ACTION_DELETE;
     public static final String ACTION_DESC_DELETE_SHORT_FORM = " " + PREFIX_ACTION + VALID_ACTION_DELETE_SHORT_FORM;
 
     // Invalid Action DESC
-    public static final String INVALID_ACTION_DESC_EMPTY_STRING = " " + PREFIX_ACTION + INVALID_STRING_EMPTY;
     public static final String INVALID_ACTION_DESC_ALPHA = " " + PREFIX_ACTION + INVALID_ACTION_ALPHA;
-    public static final String INVALID_ACTION_DESC_NUMERIC = " " + PREFIX_ACTION + INVALID_ACTION_NUMERIC;
 
 
     //-----------------------------------------------------PREAMBLES----------------------------------------------------
@@ -245,7 +227,7 @@ public class CommandTestUtil {
             final String[] splitName = anime.getName().fullName.split("\\s+");
             assertTrue(splitName.length > 0);
             assertNotNull(splitName[0]);
-            model.updateFilteredAnimeList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+            model.updateFilteredAnimeList(new NameContainsKeywordsPredicate(List.of(splitName[0])));
         } catch (ParseException pe) {
             throw new AssertionError("Error should not happen.", pe);
         }

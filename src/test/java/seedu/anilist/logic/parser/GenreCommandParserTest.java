@@ -22,7 +22,6 @@ import seedu.anilist.commons.core.index.Index;
 import seedu.anilist.logic.commands.Action;
 import seedu.anilist.logic.commands.GenreAddCommand;
 import seedu.anilist.logic.commands.GenreCommand;
-import seedu.anilist.model.anime.Anime;
 import seedu.anilist.model.genre.Genre;
 import seedu.anilist.testutil.GenresDescriptorBuilder;
 
@@ -30,7 +29,7 @@ public class GenreCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, GenreCommand.MESSAGE_USAGE);
 
-    private GenreCommandParser parser = new GenreCommandParser();
+    private final GenreCommandParser parser = new GenreCommandParser();
     @Test
     public void parse_missingParts_failure() {
         // no index specified
@@ -73,8 +72,8 @@ public class GenreCommandParserTest {
             MESSAGE_OUT_OF_RANGE_INDEX);
 
         // larger than MAX_INT index
-        assertParseFailure(parser, ((long) Integer.MAX_VALUE + 1) + ACTION_DESC_ADD + GENRE_DESC_SCIENCE_FICTION,
-            MESSAGE_OUT_OF_RANGE_INDEX);
+        assertParseFailure(parser, ((long) Integer.MAX_VALUE + 1) + ACTION_DESC_ADD
+                + GENRE_DESC_SCIENCE_FICTION, MESSAGE_OUT_OF_RANGE_INDEX);
 
     }
 
@@ -90,17 +89,16 @@ public class GenreCommandParserTest {
                 Genre.MESSAGE_CONSTRAINTS);
 
         // wrong params specified
-        assertParseFailure(parser, "1" + ACTION_DESC_DELETE_SHORT_FORM + GENRE_DESC_ACTION + STATUS_DESC_TOWATCH,
-                MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "1" + ACTION_DESC_DELETE_SHORT_FORM + GENRE_DESC_ACTION
+                + STATUS_DESC_TOWATCH, MESSAGE_INVALID_FORMAT);
     }
 
     @Test
     public void parse_validAllFieldsSpecified_success() {
         Index targetIndex = INDEX_FIRST_ANIME;
 
-        Anime anime = BNHA;
         GenreCommand.GenresDescriptor descriptor = new GenresDescriptorBuilder()
-                .withGenre(anime.getGenres())
+                .withGenre(BNHA.getGenres())
                 .build();
 
         String userInputAdd = targetIndex.getOneBased() + ACTION_DESC_ADD

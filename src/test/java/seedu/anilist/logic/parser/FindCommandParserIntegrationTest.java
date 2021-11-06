@@ -38,9 +38,9 @@ public class FindCommandParserIntegrationTest {
     private static final String MESSAGE_INVALID_FORMAT =
         String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);
 
-    private Model model = new ModelManager(getTypicalAnimeList(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAnimeList(), new UserPrefs());
-    private FindCommandParser parser = new FindCommandParser();
+    private final Model model = new ModelManager(getTypicalAnimeList(), new UserPrefs());
+    private final Model expectedModel = new ModelManager(getTypicalAnimeList(), new UserPrefs());
+    private final FindCommandParser parser = new FindCommandParser();
 
     @Test
     public void execute_zeroKeywords_throwsParseException() {
@@ -87,7 +87,7 @@ public class FindCommandParserIntegrationTest {
     public void execute_multipleNameAndGenres_noAnimeFound() throws ParseException {
         String expectedMessage = String.format(MESSAGE_ANIME_LISTED_OVERVIEW, 0);
         Predicate<Anime> predicate = preparePredicate(
-            Arrays.asList("chainsaw"), Arrays.asList("action", "horror"));
+                List.of("chainsaw"), Arrays.asList("action", "horror"));
         FindCommand command = parser.parse(" n/chainsaw g/action g/horror");
         expectedModel.updateFilteredAnimeList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);

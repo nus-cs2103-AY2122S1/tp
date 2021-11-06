@@ -20,7 +20,7 @@ import seedu.anilist.model.anime.StatusEqualsPredicate;
 public class ListCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE);
-    private ListCommandParser parser = new ListCommandParser();
+    private final ListCommandParser parser = new ListCommandParser();
 
     @Test
     public void parse_wrongFieldSpecified_failure() {
