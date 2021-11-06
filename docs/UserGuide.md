@@ -70,20 +70,20 @@ CONNECTIONS is a **desktop app for managing contacts, optimized for use via a Co
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
 * Extraneous parameters for commands that do not take in parameters (such as `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `list 123`, it will be interpreted as `list`.
+  e.g. `list 123` will be interpreted as `list`.
 
-* Phone number can be of any length, and can contain any number of digits.
+* Phone numbers can be of any length, but can only contain numerical digits.
 
 </div>
 
 ### Upcoming Birthdays
-The vertical tab provides upcoming birthdays at a glance.
-It sorts all birthdays amongst all contacts in CONNECTIONS **chronologically**, 
-with the **nearest** upcoming birthday at the **top**.
+The vertical tab provides upcoming birthdays at a glance.  
+It sorts all birthdays amongst all contacts in CONNECTIONS **chronologically**, with the **nearest** upcoming birthday at the **top**.
 
 * Contacts colour-coded in **GREEN** are celebrating their birthdays **today**.
 * Contacts colour-coded in **BLUE** will be celebrating their birthdays in **a week or less**.
-* The rest of the entries will not be colour-coded.
+* The rest of the entries will not be colour-coded.  
+  ![BirthdayColors](images/BirthdayColors.png)  
 
 ### Viewing help : `help`
 
@@ -131,8 +131,8 @@ Format birthday as `ddMMyyyy`.
 Notes:
 * Phone number must be unique and must contain only numbers.
 * Emails must contain @. (Valid emails that violate convention are accepted as well)
-* Birthdays are optional and can be added in future with `edit` command.
-* Future dates as birthdays are not allowed.
+* Birthdays are optional and can be added to existing contacts using the `edit` command.
+* Future dates are not allowed as birthdays.
 * Each tag has a character limit of 60.
 
 **Sample Usage:**
@@ -156,10 +156,9 @@ Edits an existing person in the address book.
 Notes:
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+* Existing values will be overwritten by the input values.
+* When editing tags, the existing tags of the person will be replaced i.e. editing of tags is not cumulative.
+* You can remove all the person’s tags by typing `t/` without specifying any tags after it.
 
 **Sample Usage:**
 * `edit 1 p/91234567 e/johndoe@example.com`
@@ -169,14 +168,14 @@ Notes:
 
 ### Adding Tags : `tag`
 
-Adds tag to an existing person in the address book.
+Adds one or more tags to an existing person in the address book.
 
 #### Format:
 * `tag INDEX t/TAG [t/MORE_TAGS]…​`
 
 Notes:
 * Adds tag to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* New tags will be added on top of existing tags i.e. tags added is cumulative.
+* New tags will be added on top of existing tags i.e. tags added are cumulative.
 * Adding new tags which already exist will succeed with a warning letting you know that the person already had those tags.
 * Tags have a character limit of 60.
 
@@ -186,7 +185,7 @@ Notes:
 
 ### Removing Tags : `untag`
 
-Removes an existing tag from an existing person in the address book.
+Removes one or more existing tags from an existing person in the address book.
 
 #### Format:
 * `untag INDEX t/TAG [t/MORE_TAGS]…​`
