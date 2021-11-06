@@ -47,7 +47,7 @@ public class MarkTaskDoneCommand extends Command {
             Task taskToMarkCompleted = savedStateList.get(targetIndex.getZeroBased());
             model.toggleTaskIsDone(taskToMarkCompleted);
             result.append(String.format(MESSAGE_MARK_TASK_DONE_SUCCESS,
-                    taskToMarkCompleted.getStatusString(), taskToMarkCompleted));
+                    taskToMarkCompleted.getStatusString().toLowerCase(), taskToMarkCompleted));
         }
 
         return new CommandResult(result.toString());

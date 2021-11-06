@@ -151,8 +151,8 @@ Format: `marka INDEX [MORE_INDEXES] w/WEEK_NUMBER`
 
 Examples:
 
-* `students` followed by `marka 1 2 3 w/10` marks the 1st, 2nd and 3rd student in the students list as present in week 3.
-* Another `marka 1 w/10` instance will mark the 1st student in the student list as absent in week 3.
+* `students` followed by `marka 1 2 3 w/10` marks the 1st, 2nd and 3rd student in the students list as present in week 10.
+* Another `marka 1 w/10` instance will mark the 1st student in the student list as absent in week 10.
   ![result for 'marka'](images/marka.png)
 
 ### Marking a student's participation: `markp`
@@ -171,8 +171,8 @@ Format: `markp INDEX [MORE_INDEXES] w/WEEK_NUMBER`
 
 Examples:
 
-* `students` followed by `markp 1 2 3 w/10` marks the 1st, 2nd and 3rd student in the students list as participated in week 3.
-* Another `markp 2 w/10` instance will mark the 1st student in the student list as not participated in week 3.
+* `students` followed by `markp 1 2 3 w/10` marks the 1st, 2nd and 3rd student in the students list as participated in week 10.
+* Another `markp 2 w/10` instance will mark the 1st student in the student list as not participated in week 10.
   ![result for 'markp'](images/markp.png)
 
 ### Find student by name: `findStudent`
@@ -190,8 +190,8 @@ Format: `findStudent KEYWORD [MORE_KEYWORDS]`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `findStudent Joh@` returns `john` and `John Doe`
-* `findStudent alex! davi` returns `Alex Yeoh`, `David Li`<br>
+* `findStudent Joh@` returns `john` and `John Doe`, if there are students named 'john' and 'John Doe'
+* `findStudent alex! davi` returns `Alex Yeoh`, `David Li`, if there are students named 'Alex Yeoh' and 'David Li'<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
   
 ### Clearing all entries from student list: `clearStudents`
@@ -415,23 +415,23 @@ Examples:
 
 * `deleteTask 1` removes the 1st task in the task list.
 
-### Marking a task as done: : `doneTask`
+### Marking a task as done: `doneTask`
 
-Mark the specified task from the list as complete, or mark it as pending.
+Mark the specified task(s) in the task list as completed or pending.
 
-Format: `doneTask INDEX [MORE INDEXES]`
+Format: `doneTask INDEX [MORE_INDEXES]`
 
-* If the task at the specified `INDEX` is marked as pending, using `doneTask INDEX` will mark it as complete.
-* If the task at the specified `INDEX` is marked as complete, using `doneTask INDEX` will mark it as pending.
 * The index refers to the index number shown in the task list.
 * The user is able to mark multiple tasks by providing multiple indexes.
-* The indexes must be a positive integer 1, 2, 3, …​
+* The indexes must be a positive integer 1, 2, 3, ...
 * Duplicate indexes are not accepted.
+* If the task at the specified `INDEX` is marked as pending, using `doneTask INDEX` will mark it as complete.
+* If the task at the specified `INDEX` is marked as complete, using `doneTask INDEX` will mark it as pending.
 
 Examples:
 * `doneTask 2` marks the 2nd task in the task list as completed or pending.
 * `doneTask 1 3 4` marks the 1st, 3rd and 4th tasks in the task list as completed or pending.
-![markTaskDoneCommand visual](images/MarkTaskDoneCommand_UG_visual.PNG)
+![markTaskDoneCommand](images/markTaskDone.png)
 
 ### Clearing all entries from task list: `clearTasks`
 
@@ -494,7 +494,7 @@ Commands | Format | Examples
 [**Delete Student**](#delete-a-student-deletestudent) | `deleteStudent INDEX` | e.g., `deleteStudent 1`
 [**Mark Student Attendance**](#marking-a-students-attendance-marka) | `marka INDEX w/WEEK` | e.g., `marka 1 w/10`
 [**Mark Student Participation**](#marking-a-students-participation-markp) | `markp INDEX w/WEEK` | e.g., `markp 1 w/10`
-[**Find Student**](#find-student-by-name-findstudent) | `findStudent KEYWORD [MORE_KEYWORDS]` | e.g., `findStudent John`
+[**Find Student**](#find-student-by-name-findstudent) | `findStudent KEYWORD [MORE_KEYWORDS]` | e.g., `findStudent David`
 [**Clear Students**](#clearing-all-entries-from-student-list-clearstudents) | `clearStudents`
 
 ## [Groups](#groups)

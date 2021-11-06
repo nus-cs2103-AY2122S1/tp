@@ -146,7 +146,7 @@ public class ModelManager implements Model {
      * @param target current Student to be updated
      * @param editedStudent updated Student object
      */
-    public void updateGroup(Student target, Student editedStudent) {
+    private void updateGroup(Student target, Student editedStudent) {
         requireAllNonNull(target, editedStudent);
         if (target.hasGroupName()) {
             List<Group> groupList = getFilteredGroupList();

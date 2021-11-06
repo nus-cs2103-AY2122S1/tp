@@ -62,8 +62,9 @@ public class DeadlineTask extends Task {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append("\nTaskDate: ")
+        builder.append("[DEADLINE] ")
+                .append(getName())
+                .append("\nDeadline: ")
                 .append(getDeadline().toString())
                 .append("\nStatus: ")
                 .append(getStatusString())

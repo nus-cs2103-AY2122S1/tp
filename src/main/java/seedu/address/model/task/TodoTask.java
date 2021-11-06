@@ -34,8 +34,8 @@ public class TodoTask extends Task {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append("[TODO]")
+        builder.append("[TODO] ")
+                .append(getName())
                 .append("\nStatus: ")
                 .append(getStatusString())
                 .append("\nPriority: ")

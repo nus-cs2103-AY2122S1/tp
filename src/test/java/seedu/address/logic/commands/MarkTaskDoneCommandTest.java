@@ -40,7 +40,8 @@ public class MarkTaskDoneCommandTest {
         messageCopy.toggleIsDone();
 
         String expectedMessage = String.format(
-                MarkTaskDoneCommand.MESSAGE_MARK_TASK_DONE_SUCCESS, messageCopy.getStatusString(), messageCopy);
+                MarkTaskDoneCommand.MESSAGE_MARK_TASK_DONE_SUCCESS,
+                messageCopy.getStatusString().toLowerCase(), messageCopy);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
@@ -72,7 +73,8 @@ public class MarkTaskDoneCommandTest {
         messageCopy.toggleIsDone();
 
         String expectedMessage = String.format(
-                MarkTaskDoneCommand.MESSAGE_MARK_TASK_DONE_SUCCESS, messageCopy.getStatusString(), messageCopy);
+                MarkTaskDoneCommand.MESSAGE_MARK_TASK_DONE_SUCCESS,
+                messageCopy.getStatusString().toLowerCase(), messageCopy);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         showTaskAtIndex(expectedModel, INDEX_FIRST_TASK);
