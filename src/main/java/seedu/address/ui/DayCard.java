@@ -47,12 +47,14 @@ public class DayCard extends UiPart<Region> {
     public DayCard(LocalDate firstDate, int dayCardNumber, ObservableList<Person> stafflist, Period currentPeriod) {
         super(FXML);
         this.dayCardNumber = dayCardNumber;
+
         DayOfWeek day = firstDate.getDayOfWeek().plus(dayCardNumber);
         LocalDate date = firstDate.plusDays(dayCardNumber);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy");
         String text = day.getDisplayName(TextStyle.SHORT, Locale.getDefault()) + ", "
                 + date.format(formatter);
         dayDateLabel.setText(text);
+
         SlotCard morningSlotCard = new SlotCard(day, Slot.MORNING, stafflist, currentPeriod);
         SlotCard afternoonSlotCard = new SlotCard(day, Slot.AFTERNOON, stafflist, currentPeriod);
         slotPane.getChildren().addAll(morningSlotCard.getRoot(), afternoonSlotCard.getRoot());

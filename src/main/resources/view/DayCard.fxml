@@ -4,7 +4,5 @@
 <?import javafx.scene.layout.*?>
 
 <VBox fx:id="slotPane" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Label fx:id="dayDateLabel" styleClass="big_label_white" text="\$dayDate" textAlignment="CENTER" wrapText="true" />
-   </children>
+   <Label fx:id="dayDateLabel" styleClass="big_label_white" text="\$dayDate" textAlignment="CENTER" wrapText="true"/>
 </VBox>
