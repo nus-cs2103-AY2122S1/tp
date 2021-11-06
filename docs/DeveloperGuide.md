@@ -1047,7 +1047,49 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
+
+### Marking a person
+
+1. Marking a person while all persons are being shown
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list all currently `Not Done`.
+
+    2. Test case: `mark 1`<br>
+       Expected: First contact is marked. Details of the marked contact shown in the status message.
+
+    3. Test case: `mark 0`<br>
+       Expected: No person is marked. Error details shown in the status message.
+
+    4. Test case: `mark 2`, then `mark 2` again<br>
+       Expected: Second contact is marked with the first `mark 2`. Details of the marked contact shown in the status message.
+                 For the second `mark 2`, no new person is marked. Error details shown in the status message.
+
+    5. Test case: `mark 3 3`<br>
+       Expected: No person is marked. Error details shown in the status message.
+
+    6. Other incorrect mark commands to try: `mark`, `mark x` (where x is larger than the list size), `mark y` (where y is any non-positive integer)<br>
+       Expected: No person is marked. Error details shown in the status message.
+
+2. Marking a person while a filtered list of persons are being shown
+
+    1. Prerequisites: Find a valid group of persons using the `find` command with appropriate inputs. Multiple persons in the filtered list all currently `Not Done`.
+
+    2. Test case: `mark 1`<br>
+       Expected: First contact is marked. Details of the marked contact shown in the status message.
+
+    3. Test case: `mark 0`<br>
+       Expected: No person is marked. Error details shown in the status message.
+
+    4. Test case: `mark 2`, then `mark 2` again<br>
+       Expected: Second contact is marked with the first `mark 2`. Details of the marked contact shown in the status message.
+                 For the second `mark 2`, no new person is marked. Error details shown in the status message.
+
+    5. Test case: `mark 3 3`<br>
+       Expected: No person is marked. Error details shown in the status message.
+
+    6. Other incorrect mark commands to try: `mark`, `mark x` (where x is larger than the list size), `mark y` (where y is any non-positive integer)<br>
+       Expected: No person is marked. Error details shown in the status message.
 
 ### Saving data
 
