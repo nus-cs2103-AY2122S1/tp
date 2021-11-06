@@ -30,9 +30,9 @@ public class LessonAddCommand extends UndoableCommand {
     public static final String COMMAND_WORD = "ladd";
 
     public static final String COMMAND_PARAMETERS = "INDEX "
-            + "[" + PREFIX_RECURRING + "[END_DATE]] "
-            + PREFIX_DATE + "dd MMM yyyy "
-            + PREFIX_TIME + "HHmm-HHmm "
+            + "[" + PREFIX_RECURRING + "END_DATE] "
+            + PREFIX_DATE + "START_DATE "
+            + PREFIX_TIME + "TIME_RANGE "
             + PREFIX_RATES + "RATES "
             + PREFIX_SUBJECT + "SUBJECT "
             + "[" + PREFIX_OUTSTANDING_FEES + "OUTSTANDING_FEES] "

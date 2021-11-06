@@ -47,9 +47,9 @@ public class LessonEditCommand extends UndoableCommand {
 
     public static final String COMMAND_PARAMETERS = "INDEX "
             + "LESSON_INDEX "
-            + "[" + PREFIX_RECURRING + "[END_DATE]]"
-            + "[" + PREFIX_DATE + "DATE] "
-            + "[" + PREFIX_TIME + "HHmm-HHmm] "
+            + "[" + PREFIX_RECURRING + "END_DATE]"
+            + "[" + PREFIX_DATE + "START_DATE] "
+            + "[" + PREFIX_TIME + "TIME_RANGE] "
             + "[" + PREFIX_SUBJECT + "SUBJECT] "
             + "[" + PREFIX_RATES + "RATE] "
             + "[" + PREFIX_OUTSTANDING_FEES + "OUTSTANDING FEES] "
