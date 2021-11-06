@@ -290,6 +290,7 @@ The following activity diagram summarises what happens when a Tour Guide execute
     * Pros: More accurate matches assuming Tour Guide searches for exact keywords.
     * Cons: Less likely to find contacts other than the intended one(s) that might be relevant for a themed or location-based tour itinerary.
 
+
 ### Filter feature
 
 #### Implementation
@@ -356,6 +357,55 @@ The following sequence diagram shows how the view operation works:
 * **Alternative 2:** Allow users to view any contact in the address book even if it is not shown in the current list.
     * Pros: More flexibility for users.
     * Cons: More difficult to implement. Additionally, it is impossible to view a contact not displayed in the list by index. Hence, `ViewCommandIndex` will be limited to the displayed contacts, while `ViewCommandName` will allow users to view any contact in the address book.
+
+### Sort feature
+
+#### Implementation
+
+The Sort feature modifies the internal contact list stored in the addressbook according to the preference of sorting.  
+It is implemented with the following operations:
+
+* `SortCommandName#execute()`  —  Sorts the contacts in the list based on name in lexicographical order, or
+* `SortCommandRating#execute()`  —  Sorts the contacts in the list based on rating in descending order
+
+These operations make use of the operation `Model#sortList(String sortBy)`, which calls `AddressBook#sortList(String sortBy)`
+to change the order of the contacts in the contact list. In this way, the user's sorting preference is saved.
+
+Given below is an example usage scenario and how the Sort feature behaves at each step:
+
+Step 1. The user executes the command `list` to look at all contacts.
+
+Step 2. The user executes the command `filter c/att` to filter all the attraction contacts in the addressbook.
+
+Step 3. The user executes the command `sort rating` to display the attraction contacts based on rating in descending order.
+Since user command is in the correct format, a `SortCommand` is created. Otherwise, no command is executed and a `ParseException` is thrown.
+
+Step 4. The `sort` command calls `Model#sortList()` with the String `"rating"` as an argument,
+causing the internal contact list to be sorted accordingly.
+
+
+The following sequence diagram shows how the Sort operation works to show the relevant contacts:
+
+![SortSequenceDiagram](images/SortSequenceDiagram.png)
+
+The following activity diagram summarises what happens when a user executes a new Sort command:
+
+![SortActivityDiagram](images/SortActivityDiagram.png)
+
+
+#### Design considerations:
+
+**Aspect: How Sort is implemented:**
+
+* **Alternative 1 (current choice):** Sorts the internal list of the addressbook.
+    * Pros: Sorting preference is saved internally, so any command linked to the ordering of the contact list is applicable.
+    * Cons: User is not able to display contacts based on recently added contacts once the contact list is sorted.
+
+* **Alternative 2:** Modifies the GUI to display the sorted contacts without making any changes to the actual list saved in the addressbook.
+    * Pros: No change to the data saved is required, therefore fewer method calls.
+    * Cons: Commands such as `edit INDEX` and `view INDEX` may not work in conjunction with `sort` as the sorting is only implemented in the UI
+    instead of the `filteredContacts`, which depends on the internal list of the addressbook.
+
 
 ### Ratings feature
 
@@ -739,6 +789,29 @@ Use case ends.
 
 **UC02 - Edit a Contact**
 
+**MSS**
+
+1. User decides to edit a contact
+
+2. User inputs the edit command to the interface
+
+3. WhereTourGo informs the user that the contact was edited
+
+4. WhereTourGo displays updated list of contacts and summary page
+   Use case ends.
+
+**Extensions**
+* 2a. The format is wrong
+
+  * 2a1. WhereTourGo shows an error message
+
+  Use case ends.
+
+* 2b.  Contact already exists in WhereTourGo
+
+  * 2b1. WhereTourGo shows an error message
+
+  Use case ends.
 
 **UC03 - Delete a Contact**
 
@@ -791,25 +864,52 @@ Use case ends.
 
 **MSS**
 
-1. User requests to find a contact
-2. WhereTourGo displays a list of all contacts with the given keywords
+1.  User requests to find a contact
+2.  User enters the find command with specific keywords
+3.  WhereTourGo displays a list of all contacts with the given keywords
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The keyword cannot be found
+* 2a. The keywords cannot be found. AddressBook displays no contacts.
 
   Use case ends.
 
-* 2b. No keywords are provided
+* 2b. No keywords are provided.
 
-  * 2b1. WhereTourGo shows an error message
+  * 2b1. WhereTourGo shows an error message.
 
-    Use case resumes at step 2.
+    Use case resumes at step 1.
+
+* 2c. The list is empty.
+  
+  Use case ends.
 
 **UC06 - Filter for Contacts**
+
+
 **UC07 - Sort all Contacts**
+
+**MSS**
+
+1.  User requests to sort the contacts
+2.  User enters the sort command
+3.  WhereTourGo displays a list of sorted contacts
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given sort command is in invalid format.
+
+  * 2a1. WhereTourGo shows an error message
+
+    Use case resumes at step 1.
+
+* 3a. The list is empty.
+
+  Use case ends.
 
 **UC08 - Summarising Contacts**
 
@@ -878,8 +978,6 @@ Use case ends
 1.  User requests to export all contacts in the current list.
 2.  WhereTourGo exports all contacts.
 
-    Use case ends.
-
 **Extensions**
 
 * 2a. The list is empty.
@@ -892,7 +990,7 @@ Use case ends
 
 1. User requests to clear all contacts.
 2. WhereTourGo clears all contacts.
-
+   
 Use case ends.
 
 **Extensions**
@@ -939,7 +1037,6 @@ Use case ends.
 
   Use case ends.
 
-*{More to be added}*
 
 ### Non-Functional Requirements
 
@@ -1008,6 +1105,19 @@ testers are expected to do more *exploratory* testing.
        Expected: Similar to previous.
 
 ### Editing a contact
+1. Editing a contact
+
+  1. Test case: `edit 1 n/Singapore Flyers` <br>
+     Expected: The first contact's name is changed to "Singapore Flyers". Details of the edited contact shown in the status message. Summary is updated and displayed.
+  
+  1. Test case: `edit 0`<br>
+     Expected: No contact is deleted. Error details shown in the status message. Summary is displayed.
+
+  1. Test case: `123 edit n/VALID_NAME` (Valid names should not be blank, contains only alphanumeric characters and spaces and cannot be longer than 100 characters) <br>
+     Expected: No contact is added. Error details shown in the status message. Summary is displayed.
+
+1. Other incorrect delete commands to try: `edit`, `edit x n/VALID_NAME` (where x is larger than the list size, or negative), `edit 00001 n/VALID_NAME`, `edit 1 n/`, `edit 1 n/INVALID_NAME`(invalid name that does not exist in WhereTourGo)<br>
+   Expected: Similar to previous.
 
 ### Deleting a contact
 
@@ -1039,10 +1149,79 @@ testers are expected to do more *exploratory* testing.
     
 ### Locating contacts
 
+### Finding contacts
+
+1. Finding contacts by keywords
+
+  1. Prerequisites: There are 5 contacts in the contact list. The contact details are as follows:
+      * category: ATT, name: Marina Bay Sands, phone: 66888868, email: marinabaysands@example.com,
+      address: 10 Bayfront Ave, Singapore 018956, review: amazing
+      * category: COM, name: VivoCity, phone: 63776860, email: vivocity@example.com,
+      address: 1 HarbourFront Walk, Singapore 098585, review: meh
+      * category: ATT, name: Gardens By The Bay, phone: 64206848, email: gbtb@example.com,
+      address: 18 Marina Gardens Dr, Singapore 018953, review: - No Review -
+      * category: FNB, name: HANS IM GLUCK German Burgergrill, phone: 66112233, email: Hansburgergrill@example.com,
+      address: 362 Orchard Rd, International Building, Singapore 238887, review: Excellent burgers
+      * category: FNB, name: Prive Somerset, phone: 66334422, email: privesomerset@example.com,
+      address: 313 Orchard Rd, #01-28, Singapore 238895, review: its alright
+
+  2. Test case: `find sands`<br>
+     Expected: Contacts Pane shows the contact with the name "Marina Bay Sands".
+
+  3. Test case: `find marina`<br>
+     Expected: Contacts Pane shows 2 contacts  —  the contact with the name "Marina Bay Sands" and the contact with the address "18 Marina Gardens Dr, Singapore 018953".
+
+  4. Test case: `find bay`<br>
+     Expected: Contacts Pane shows 2 contacts  —  the contact with the name "Marina Bay Sands" and the contact with the name "Gardens By The Bay".
+
+  5. Test case: `find orchard`<br>
+     Expected: Contacts Pane shows 2 contacts  —  the cnotact with the address "362 Orchard Rd, International Building, Singapore 238887"
+     and the contact with the address "313 Orchard Rd, #01-28, Singapore 238895".
+
+  6. Test case: `find 66`<br>
+     Expected: Contacts Pane shows 3 contacts  —  the contacts with the phone numbers "66888868", "66112233" and "66334422" respectively.
+
+  7. Test case: `find amazing excellent`<br>
+     Expected: Contacts Pane shows 2 contacts  —  the contacts with the reviews "amazing" and "Excellent burgers" respectively.
+
+  8. Test case: `find example`<br>
+     Expected: Contacts Pane shows all 5 contacts  —  the contacts with their emails containing the word "example".
+
+  9. Test case: `find test`<br>
+     Expected: No contact is shown in the Contacts Pane.
+
+  10. Other incorrect find commands to try: `find`, `find x`, `...` (where x is any keyword that does match any contacts'
+      names, phones, emails, addresses or reviews)<br>
+      Expected: Error details shown in Results Pane.
+      
+
 ### Filtering contacts
 
 ### Sorting contacts
 
+1. Sorting contacts by name
+
+  1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
+
+  2. Test case: `sort name`<br>
+     Expected: Contacts are sorted based on their names in lexicographical order and are shown in Contacts Pane.
+     Success message is shown in Results Pane.
+
+  3. Other incorrect sort commands to try: `sort`, `sort x`, `...` (where x is any word other than `name` and `rating`)<br>
+     Expected: Contacts are not sorted. Error details shown in Results Pane.
+
+2. Sorting contacts by rating
+
+  1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
+
+  2. Test case: `sort rating`<br>
+     Expected: Contacts are sorted based on their rating values in descending order and are shown in Contacts Pane.
+     Success message is shown in Results Pane.
+
+  3. Other incorrect sort commands to try: `sort`, `sort x`, `...` (where x is any word other than `name` and `rating`)<br>
+     Expected: Contacts are not sorted. Error details shown in Results Pane.
+     
+     
 ### Displaying Summary
 
 1. Using the `sum` command
@@ -1123,7 +1302,7 @@ testers are expected to do more *exploratory* testing.
 ### Clicking on contacts
 1. Clicking on contacts shown in the contact list
 
-    1. Prerequisites: AddressBook has at least 1 contact shown in the contact list.
+    1. Prerequisites: WhereTourGo has at least 1 contact shown in the contact list.
 
     1. Test case: Click a contact within the Contact Pane.
        Expected: Contact Card will light up for a short duration. Details will be displayed in both the display panel and the status message.
