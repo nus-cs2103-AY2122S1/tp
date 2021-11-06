@@ -37,6 +37,7 @@ Whether you're using Windows or macOS, the steps for installation are the same.
       file. On Windows, click on the `Create Shortcut` option while on macOS, click on `Make Alias`. You can then put 
       this shortcut in a convenient place (such as your Desktop) for easy access._
 
+
 4. Double-click the file to start the app. Here's what you should see in a few seconds:<br>
    ![Ui](images/UG-00.png)
    
