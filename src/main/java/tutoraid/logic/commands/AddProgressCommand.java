@@ -27,7 +27,8 @@ public class AddProgressCommand extends AddCommand {
             + "Example: " + COMMAND_FLAG + " 1 "
             + "Finishes Prelims.";
 
-    public static final String MESSAGE_SUCCESS = "Added progress: %1$s\nFor this student: %2$s";
+    public static final String MESSAGE_SUCCESS = "Successfully added progress: %1$s for %2$s. "
+            + "Showing %2$s and his/her lessons.";
 
     private final Index targetIndex;
     private final Progress progress;
@@ -56,6 +57,6 @@ public class AddProgressCommand extends AddCommand {
         model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
         model.viewStudent(studentToEdit);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, progress, studentToEdit));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, progress, studentToEdit.toNameString()));
     }
 }
