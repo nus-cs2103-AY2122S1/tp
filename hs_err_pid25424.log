@@ -1,0 +1,147 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  SIGSEGV (0xb) at pc=0x00000001196054e8, pid=25424, tid=259
+#
+# JRE version: OpenJDK Runtime Environment (11.0.12+7) (build 11.0.12+7-LTS)
+# Java VM: OpenJDK 64-Bit Server VM (11.0.12+7-LTS, mixed mode, tiered, compressed oops, g1 gc, bsd-aarch64)
+# Problematic frame:
+# J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054e8 [0x00000001196054c0+0x0000000000000028]
+#
+# No core dump will be written. Core dumps have been disabled. To enable core dumping, try "ulimit -c unlimited" before starting Java again
+#
+# If you would like to submit a bug report, please visit:
+#   https://bell-sw.com/support
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -Dfile.encoding=UTF-8 -Duser.country=SG -Duser.language=en -Duser.variant seedu.address.Main
+
+Host: MacBookAir10,1 arm64 1 MHz, 8 cores, 16G, Darwin 20.6.0
+Time: Tue Oct 12 22:12:27 2021 +08 elapsed time: 41.615659 seconds (0d 0h 0m 41s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x000000012d1e2000):  JavaThread "JavaFX Application Thread" [_thread_in_Java, id=259, stack(0x000000016b7c8000,0x000000016d7c8000)]
+
+Stack: [0x000000016b7c8000,0x000000016d7c8000],  sp=0x000000016cfdfff0,  free space=24671k
+Native frames: (J=compiled Java code, A=aot compiled Java code, j=interpreted, Vv=VM code, C=native code)
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054e8 [0x00000001196054c0+0x0000000000000028]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+J 4432 c2 seedu.address.storage.JsonAdaptedSpecialRequest.getSpecialRequestName()Ljava/lang/String; (5 bytes) @ 0x00000001196054f8 [0x00000001196054c0+0x0000000000000038]
+...<more frames>...
+
+
+siginfo: si_signo: 11 (SIGSEGV), si_code: 2 (SEGV_ACCERR), si_addr: 0x000000016cfcbff0
+
+Register to memory mapping:
+
+ x0=0x00000001769861e8 is pointing into metadata
+ x1=0x00000006cff10aa8 is an oop: seedu.address.storage.JsonAdaptedSpecialRequest 
+{0x00000006cff10aa8} - klass: 'seedu/address/storage/JsonAdaptedSpecialRequest'
+ x2=0x0000000000002330 is an unknown value
+ x3=0x00000001769863a8 is pointing into metadata
+ x4=0x0000000000000003 is an unknown value
+ x5=0x0 is NULL
+ x6=0x0 is NULL
+ x7=0x000000012d1e2000 is a thread
+ x8=0x00000001196054e0 is at entry_point+32 in (nmethod*)0x0000000119605310
+ x9=
