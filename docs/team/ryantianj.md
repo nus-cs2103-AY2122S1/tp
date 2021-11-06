@@ -24,7 +24,7 @@ Given below are my contributions to the project.
 * **New Feature**: Updated `delete` command to allow deletion by name.
     * What it does: Allows the User to delete contacts by name instead of searching for the index.
     * Justification: This feature allows the user to delete contacts more conveniently.
-    * Highlights: This feature required changing the parser, and the structure of the entire delete command.
+    * Highlights: This feature required changing the parser, edit command, and the structure of the entire delete command.
 
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=ryantianj&sort=groupTitle&sortWithin=title&since=2021-09-17&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&tabOpen=true)

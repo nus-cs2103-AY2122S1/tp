@@ -5,7 +5,7 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
-participant "d:DeleteCommandIndex" as DeleteCommandIndex LOGIC_COLOR
+participant "d:DeleteCommandName" as DeleteCommandName LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -13,10 +13,10 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("delete 1")
+[-> LogicManager : execute("delete n/VivoCity")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("delete 1")
+LogicManager -> AddressBookParser : parseCommand("delete n/VivoCity")
 activate AddressBookParser
 
 create DeleteCommandParser
@@ -26,15 +26,15 @@ activate DeleteCommandParser
 DeleteCommandParser --> AddressBookParser
 deactivate DeleteCommandParser
 
-AddressBookParser -> DeleteCommandParser : parse("1")
+AddressBookParser -> DeleteCommandParser : parse("VivoCity")
 activate DeleteCommandParser
 
-create DeleteCommandIndex
-DeleteCommandParser -> DeleteCommandIndex
-activate DeleteCommandIndex
+create DeleteCommandName
+DeleteCommandParser -> DeleteCommandName
+activate DeleteCommandName
 
-DeleteCommandIndex --> DeleteCommandParser : d
-deactivate DeleteCommandIndex
+DeleteCommandName --> DeleteCommandParser : d
+deactivate DeleteCommandName
 
 DeleteCommandParser --> AddressBookParser : d
 deactivate DeleteCommandParser
@@ -45,24 +45,24 @@ destroy DeleteCommandParser
 AddressBookParser --> LogicManager : d
 deactivate AddressBookParser
 
-LogicManager -> DeleteCommandIndex : execute(model)
-activate DeleteCommandIndex
+LogicManager -> DeleteCommandName : execute(model)
+activate DeleteCommandName
 
-DeleteCommandIndex -> Model : deleteContact(contact)
+DeleteCommandName -> Model : deleteContact(contact)
 activate Model
 
-Model --> DeleteCommandIndex
+Model --> DeleteCommandName
 deactivate Model
 
 create CommandResult
-DeleteCommandIndex -> CommandResult
+DeleteCommandName -> CommandResult
 activate CommandResult
 
-CommandResult --> DeleteCommandIndex
+CommandResult --> DeleteCommandName
 deactivate CommandResult
 
-DeleteCommandIndex --> LogicManager : result
-deactivate DeleteCommandIndex
+DeleteCommandName --> LogicManager : result
+deactivate DeleteCommandName
 
 [<--LogicManager
 deactivate LogicManager

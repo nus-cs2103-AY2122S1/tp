@@ -322,9 +322,9 @@ Format: `delete n/CONTACT_NAME`
 
 Examples:
 * `list` followed by `delete n/Singapore DUCKTours` deletes the contact with name 'Singapore DUCKTours`.
-* `find hotel` followed by `delete n/Mandarin Oriental Singapore` deletes the contact with name 'Mandarin Oriental Singapore'.
+* `filter c/fnb` followed by `delete n/Green on Earth Vegetarian Cafe` deletes the contact with name 'Earth Vegetarian Cafe'.
 
-Expected Outcome for `find hotel` followed by `delete n/Mandarin Oriental Singapore`:
+Expected Outcome for `filter c/fnb` followed by `delete n/Green on Earth Vegetarian Cafe`:
 
 <img src="images/deleteName.png" width="800">
 
@@ -477,7 +477,7 @@ Input history will be reset whenever you exit the app.
 [Back to top](#table-of-contents)
 
 ### Clicking on contacts
-Click on any contact in the [Contacts Pane](##orienting-to-wheretourgo) to view more information about the contact.
+Click on any contact in the [Contacts Pane](#orienting-to-wheretourgo) to view more information about the contact.
 This is equivalent to using a [`view`](#viewing-a-contact-view) command.
 
 [Back to top](#table-of-contents)
