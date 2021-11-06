@@ -111,14 +111,12 @@ public class DeletePersonCommand extends Command {
 
     private String deleteByModule(Model model) throws CommandException {
         model.updateFilteredPersonList(predicate);
-        if (model.getFilteredPersonList().isEmpty()) {
-            model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
-            throw new CommandException(MESSAGE_NO_SUCH_MODULE_CODE);
-        } else if (isDeleteLessonCode()) {
+        if (isDeleteLessonCode()) {
             List<Person> listOfPersonsToDelete = listOfPersonToDeleteByLessonCode(model, model.getFilteredPersonList());
             return deleteLessonCode(model, listOfPersonsToDelete);
         } else {
-            return deleteByModuleCode(model, model.getFilteredPersonList());
+            List<Person> listOfPersonsToDelete = listOfPersonToDeleteByModuleCode(model, model.getFilteredPersonList());
+            return deleteByModuleCode(model, listOfPersonsToDelete);
         }
     }
 
@@ -133,7 +131,7 @@ public class DeletePersonCommand extends Command {
         List<Person> personsToDelete = new ArrayList<>();
 
         for (Person current : list) {
-            if (!current.getModuleCodes().contains(moduleCode)) {
+            if (!current.getModuleCodes().contains(moduleCode)) { //ensure that module code exist
                 model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
                 throw new CommandException(MESSAGE_DELETE_BY_MODULE_USAGE);
             }
@@ -198,6 +196,20 @@ public class DeletePersonCommand extends Command {
         Person editedPerson = new Person(person.getName(), person.getEmail(), moduleCodes, person.getPhone(),
                 person.getTeleHandle(), person.getRemark());
         model.setPerson(person, editedPerson);
+    }
+
+    private List<Person> listOfPersonToDeleteByModuleCode(Model model, List<Person> list) throws CommandException {
+        List<Person> persons = new ArrayList<>();
+        for (Person current : list) {
+            if (current.getModuleCodes().contains(moduleCode)) {
+                persons.add(current);
+            }
+        }
+        if (persons.isEmpty()) {
+            model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+            throw new CommandException(MESSAGE_NO_SUCH_MODULE_CODE);
+        }
+        return persons;
     }
 
     private String deleteByModuleCode(Model model, List<Person> filteredList) {
