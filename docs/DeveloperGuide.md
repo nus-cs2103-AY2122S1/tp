@@ -53,7 +53,6 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Metadata**: Personal data about a `Person` object
 * **Note**: A general description of each `Person` to record their activities, with last edit timestamp attached
-* **Pin**: Fixing a `Person` to the top of the current list of `Person` objects or a `Group`
 * **Subgroup**: A child of a `Group` used to store multiple persons based on a more specific category than `Group`. A **
   Subgroup** can be created by specifying the parent group of the **Subgroup**. A person in a **Subgroup** is
   automatically in the parent `Group` as well
@@ -99,6 +98,7 @@ New Workflow for Adding Commands:
 4. Create a `XYZCommandExecutor` class that extends the same type of `Executor` as the `Command` from step 1.
 5. Implement all required methods and ensure all fields used by the methods are present.
 
+
 #### In-depth example of Command workflow, using the Find Command
 
 Notor allows you to search for groups and people, and both searches have slightly different requirements.
@@ -113,6 +113,15 @@ Let's break down what happens when you call a command, like the find command. Th
 * After the initialisation of the `FindPersonCommand` is done, the Command is returned all the way to `LogicManager`. 
 * `LogicManager` uses the Command API to call execute() on the command, which calls the execute method on the executor.
 * The executor updates the model and returns the command result, which is passed back to the `LogicManager`.
+
+
+#### In-depth example of Command Workflow, using the Person Note Command.
+
+Notor allows you to add note to a itself, a person or group in a list.
+
+The following sequence diagram shows the detail when `PersonNoteCommand` is executed to add note for a person.
+
+![PersonNoteSequenceDiagram](images/PersonNoteSequenceDiagram.png)
 
 ### Model Changes
 
@@ -175,7 +184,6 @@ This section describes some noteworthy details on how certain features are imple
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -275,7 +283,9 @@ Priorities:<p>
 #### General Use Cases
 
 ##### UC-CommandError : User enters the wrong command
+
 Precondition: User passes the wrong parameters, command, or data
+
 1. Notor detects an error in the entered data, and displays an error message
 2. User corrects their command to not have any errors. Steps 1 and 2 are repeated until the data entered are correct. Command is executed from where the use case is interrupted.
 
@@ -329,6 +339,7 @@ Precondition: User passes the wrong parameters, command, or data
 **Extensions**
 
 * 2a. User <u> makes a mistake in their request, such as specifying a person that doesn't exist </u> (UC-CommandError)
+  * Resume use case from step 2
 * 6a. User requests to save the note to the person
   * 6a1. Notor displays a message that the note has been saved. Use case resumes at step 5 or 6
 * 6b. User requests to close the note (without saving)
@@ -341,6 +352,7 @@ Precondition: User passes the wrong parameters, command, or data
 **MSS**
 
 Precondition: The person or group whose tags or notes you want to clear is visible and able to be selected
+
 1. User requests to clear all tags or notes
 2. Notor displays a confirmation window
 3. User confirms their wish to clear all tags or notes
@@ -361,7 +373,7 @@ Precondition: The person or group whose tags or notes you want to clear is visib
 1. User informs Notor to create a group, specifying its name
 2. Notor creates the group and displays a success message
 
-#### Proposed Extended Use Cases
+#### Proposed Extended Use Cases ( Not Implemented )
 
 ##### Use case: User types a command
 
@@ -403,7 +415,9 @@ Precondition: The person or group whose tags or notes you want to clear is visib
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
+<div markdown="span" class="alert alert-info">:information_source: 
+
+**Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
 
 </div>
@@ -426,24 +440,104 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+### List Commands
+
+1. Test case: `person /list`<br>
+  Expected: View list of all persons in Notor who are not archived
+2. Test case: `person /list CSENfeisvnldifosjeri`<br>
+  Expected: Same as above -- following string is ignored.
+3. Test case: `group /list`<br>
+  Expected: List all groups in your Notor
+4. Incorrect test cases to try: `grop /list` (or other typos)
+  Prerequisite: On the person list, using the command `person (INDEX) /list`. Expected: Display error message.
+5. Test case: `person /lar` <br>
+  Prerequisite: List the archived persons
+
+Prerequisites: Be in a list of groups. They can be subgroups or supergroups. Must have at least one group in the list.
+1. Test case: `person 3 /list`<br>
+  Expected: View list of all persons in the third group who are not archived
+2. Test case: `group 2 /list`<br>
+  Expected: View list of all subgroups in group 2 who are not archived
+3. Test case: `person 0 /list `<br>
+  Expected: No change in list display. Error details shown in the status message.
+
+### Find Commands
+1. Test case: `person /find n:John t:AI `<br>
+  Expected: Display all people who's names include 'John' tagged with the specific tag 'AI'.
+2. Test case: `person /find` <br>
+  Expected: Display an error message as no parameters were provided.
+
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: Be in person list. Must have at least one person in the list.
 
-    1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
-       Timestamp in the status bar is updated.
+    1. Test case: `person 1 /delete`<br>
+       Expected: First contact is deleted from the list. Details of the deleted person shown in the status message.
 
-    1. Test case: `delete 0`<br>
+    1. Test case: `person 0 /delete `<br>
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+    1. Other incorrect delete commands to try: `p /delete`, `p x /delete`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 1. _{ more test cases ... }_
 
+
+### Adding general note.
+1. Adding general note.
+
+    1. Test case: `note` <br>
+       Expected: Note window opened with title of note window named as `General Note` to add note to.
+       Within the note window, user can make use of keyboard shortcuts in **User Guide** for saving and quiting of note.
+       Upon saving of note, general note is added and displayed in left pane of Notor.
+
+### Clearing general note.
+
+1. Clearing of general note.
+    1. Test case: `clearnote` <br>
+       Expected: Warning Window opened to prompt whether to proceed with clearing of general note.
+       General note is cleared in Notor upon confirmation to continue with clearing of note.
+       General note is not cleared upon confirmation to cancel clear note.
+
+### Adding note to a person
+
+1. Adding note to a person in person list. <br>
+    Prerequisites: List all persons using the `person /list` command or already in person list.
+    Must have at least one person in the list.
+
+    1. Test case: `person 1 /note` <br>
+        Expected: Note window opened with title of note window named as the person to add note to.
+        Within the note window, user can make use of keyboard shortcuts in  **User Guide** for saving 
+        and quiting of note.
+        Upon saving of note, first three lines of note excluding empty line is shown for the first person in the list.
+
+    1. Test case: `person 0 /note `<br>
+      Expected: No note window is opened. Error details shown in the status message.
+
+    1. Other incorrect delete commands to try: `p /note`, `p x /note`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+
+### Clearing note of a person
+1. Clearing note of a person in person list. <br>
+   Prerequisites: List all persons using the `person /list` command or already in person list. 
+        Must have at least one person in the list.
+
+    1. Test case: `person 1 /clearnote` <br>
+       Expected: Warning Window opened to prompt user whether to proceed with clearing of note for the person. 
+       Note of first person is cleared in the list upon confirmation to clear note. 
+       Note of first person in the list remains upon confirmation to cancel clear note.
+       
+   1. Test case: `person 0 /clearnote `<br>
+      Expected: No warning window is opened. Error details shown in the status message.
+      
+    1. Other incorrect delete commands to try: `p /clearnote`, `p x /clearnote`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+### Tagging a person
+
+{Todo...}
 ### Saving data
 
 1. Dealing with missing/corrupted data files
@@ -451,3 +545,15 @@ testers are expected to do more *exploratory* testing.
     1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases ... }_
+
+
+## **Appendix: Effort**
+
+### GUI Test (Implemented but scrapped due to CI failure)
+
+We have initially decided to implement **Gui Testing** because many of our functionalities 
+such as clearing notes, tags and Notor, and adding notes uses a pop up window.
+
+The difficulty level of GUI Testing is moderate because there is very limited
+guides available on **TestFx** Library. Despite our best efforts to try to fix CI failure and the GUI testcases passing locally, 
+all efforts are of no avail.
