@@ -25,6 +25,7 @@ public class TfindCommand extends Command {
     private final NameContainsKeywordsPredicate<Task> predicate;
 
     public TfindCommand(NameContainsKeywordsPredicate<Task> predicate) {
+        requireNonNull(predicate);
         this.predicate = predicate;
     }
 
