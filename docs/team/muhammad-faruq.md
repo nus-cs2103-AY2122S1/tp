@@ -24,9 +24,10 @@ Given below are my contributions to the project.
 
 * **Project management**:
   * Managed releases `v1.2` - `v1.4` (3 releases) on GitHub
-
+<div style="page-break-after: always;"></div>
 * **Enhancements to existing features**:
-  * Not sure what to write here
+  * General refactoring of code to fit it to AniList specification.
+  * UI reordering and redesign.
 
 * **Documentation**:
   * User Guide:
