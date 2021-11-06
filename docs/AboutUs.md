@@ -14,6 +14,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/jonas-chow.png" width="200px">
 
 [[github](https://github.com/jonas-chow)]
+[[portfolio](team/jonas-chow.md)]
 
 * Role: Team Lead
 * Responsibilities: Testing + Scheduling and tracking
