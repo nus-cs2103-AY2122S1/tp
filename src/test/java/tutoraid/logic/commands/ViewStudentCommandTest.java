@@ -12,6 +12,7 @@ import static tutoraid.testutil.TypicalLessons.getTypicalLessonBook;
 import static tutoraid.testutil.TypicalStudents.getTypicalStudentBook;
 
 import org.junit.jupiter.api.Test;
+
 import tutoraid.commons.core.Messages;
 import tutoraid.commons.core.index.Index;
 import tutoraid.model.Model;
