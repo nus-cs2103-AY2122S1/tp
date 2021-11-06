@@ -2,13 +2,13 @@ package seedu.insurancepal.commons.core;
 
 public class Money {
     private static final float CONVERT_BETWEEN_CURRENCY = 100f;
-    private int cents;
+    private long cents;
 
     public Money(float dollars) {
-        this.cents = (int) (dollars * CONVERT_BETWEEN_CURRENCY);
+        this.cents = (long) (dollars * CONVERT_BETWEEN_CURRENCY);
     }
 
-    public int getCents() {
+    public long getCents() {
         return this.cents;
     }
 

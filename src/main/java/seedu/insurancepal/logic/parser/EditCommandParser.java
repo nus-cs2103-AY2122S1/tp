@@ -60,11 +60,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         if (argMultimap.getValue(PREFIX_REVENUE).isPresent()) {
             Revenue revenue = ParserUtil.parseRevenue(argMultimap.getValue(PREFIX_REVENUE).get());
-            if (revenue.isValidResultingRevenue()) {
-                editPersonDescriptor.setRevenue(revenue);
-            } else {
-                throw new ParseException(Revenue.MESSAGE_CONSTRAINTS);
-            }
+            checkForNegativeRevenue(editPersonDescriptor, revenue);
+            checkForOverflowRevenue(editPersonDescriptor, revenue);
         }
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
@@ -113,6 +110,24 @@ public class EditCommandParser implements Parser<EditCommand> {
         Collection<String> insuranceSet = insurances.size() == 1 && insurances.contains("")
                 ? Collections.emptySet() : insurances;
         return Optional.of(ParserUtil.parseInsurances(insuranceSet));
+    }
+
+    private void checkForNegativeRevenue(EditPersonDescriptor editPersonDescriptor, Revenue revenue)
+            throws ParseException {
+        if (revenue.isValidResultingRevenue()) {
+            editPersonDescriptor.setRevenue(revenue);
+        } else {
+            throw new ParseException(Revenue.MESSAGE_CONSTRAINTS);
+        }
+    }
+
+    private void checkForOverflowRevenue(EditPersonDescriptor editPersonDescriptor, Revenue revenue)
+        throws ParseException {
+        if (!revenue.isMaxRevenue()) {
+            editPersonDescriptor.setRevenue(revenue);
+        } else {
+            throw new ParseException(Revenue.MESSAGE_CONSTRAINTS);
+        }
     }
 
 }
