@@ -44,16 +44,16 @@ Welcome to the _TutAssistor User Guide_! Simply choose a topic below to find ans
    3.15 <a href="#315-exit-the-app-exit">Exit the program</a><br><br>
    3.16 <a href="#316-track-payment-coming-in-v20">Track payment `coming in v2.0`</a><br></details><br>
 
-5. <details open><summary><a href="#4-additional-command-format-information">Additional Command Format Information</a></summary><br>
+4. <details open><summary><a href="#4-additional-command-format-information">Additional Command Format Information</a></summary><br>
    4.1 <a href="#41-name">Name</a><br><br>
    4.2 <a href="#42-phone-number">Phone Number</a><br><br>
    4.3 <a href="#43-email">Email</a><br><br>
    4.4 <a href="#44-timeslot">Timeslot</a><br><br>
    4.5 <a href="#45-index">Index</a><br></details><br>
 
-7. [FAQ](#5-faq)
+5. [FAQ](#5-faq)
 
-8. [Command Summary](#6-command-summary)
+6. [Command Summary](#6-command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
