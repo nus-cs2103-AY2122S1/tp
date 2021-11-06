@@ -11,7 +11,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents an Employee in the address book.
+ * Represents an Employee in RHRH.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Employee extends Person {

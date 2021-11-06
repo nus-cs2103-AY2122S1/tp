@@ -10,7 +10,7 @@ import seedu.address.model.Model;
 import seedu.address.model.table.Table;
 
 /**
- * Adds a set of tables to the address book.
+ * Adds a set of tables to RHRH.
  */
 public class SetTablesCommand extends Command {
     public static final String COMMAND_WORD = "settables";

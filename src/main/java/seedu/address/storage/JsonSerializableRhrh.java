@@ -66,7 +66,7 @@ class JsonSerializableRhrh {
     }
 
     /**
-     * Converts this address book into the model's {@code Rhrh} object.
+     * Converts this RHRH into the model's {@code Rhrh} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */

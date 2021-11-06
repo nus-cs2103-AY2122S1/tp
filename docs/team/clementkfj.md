@@ -44,7 +44,7 @@ Given below are my contributions to the project.
     * Improve `Find` Employees command to search more accurately for `Shift` (Pull request [\#131](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/131))
     * Improve `Find` Suppliers and Customers command to search more accurately (Pull request [\#131](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/131))
     * Fix PE-D related bugs, changing validity checkers to enforce stricter rules for entering fields so people will not find bugs in it (Issues [\#154](https://github.com/AY2122S1-CS2103T-T17-1/tp/issues/154), [\#155](https://github.com/AY2122S1-CS2103T-T17-1/tp/issues/155) and [\#162](https://github.com/AY2122S1-CS2103T-T17-1/tp/issues/162), Pull request [\#177](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/177))
-    * Removed all instances of Address Book in RHRH (Pull requests [\#201](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/201))
+    * Removed all instances of RHRH in RHRH (Pull requests [\#201](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/201))
 
 * **Documentation**:
     * User Guide:

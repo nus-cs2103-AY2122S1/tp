@@ -8,7 +8,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.employee.EmployeeClassContainsKeywordsPredicate;
 
 /**
- * Finds and lists all employees in address book whose name contains any of the argument keywords.
+ * Finds and lists all employees in RHRH whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
 public class FindEmployeeCommand extends Command {

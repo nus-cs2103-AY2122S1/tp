@@ -8,7 +8,7 @@ import seedu.address.model.reservation.Reservation;
 import seedu.address.model.table.Table;
 
 /**
- * Unmodifiable view of an address book
+ * Unmodifiable view of an RHRH
  */
 public interface ReadOnlyRhrh {
 

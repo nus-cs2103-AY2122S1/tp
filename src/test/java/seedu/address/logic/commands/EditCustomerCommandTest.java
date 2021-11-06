@@ -114,7 +114,7 @@ public class EditCustomerCommandTest {
     public void execute_duplicateCustomerFilteredList_failure() {
         showCustomerAtIndex(model, INDEX_FIRST_CUSTOMER);
 
-        // edit customer in filtered list into a duplicate in address book
+        // edit customer in filtered list into a duplicate in RHRH
         Customer customerInList = model.getRhrh().getCustomerList().get(INDEX_SECOND_CUSTOMER.getZeroBased());
         EditCustomerCommand editCustomerCommand = new EditCustomerCommand(INDEX_FIRST_CUSTOMER,
                 new EditCustomerDescriptorBuilder(customerInList).build());
@@ -133,13 +133,13 @@ public class EditCustomerCommandTest {
 
     /**
      * Edit filtered list where index is larger than size of filtered list,
-     * but smaller than size of address book
+     * but smaller than size of RHRH
      */
     @Test
     public void execute_invalidCustomerIndexFilteredList_failure() {
         showCustomerAtIndex(model, INDEX_FIRST_CUSTOMER);
         Index outOfBoundIndex = INDEX_SECOND_CUSTOMER;
-        // ensures that outOfBoundIndex is still in bounds of address book list
+        // ensures that outOfBoundIndex is still in bounds of RHRH list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getRhrh().getCustomerList().size());
 
         EditCustomerCommand editCustomerCommand = new EditCustomerCommand(outOfBoundIndex,

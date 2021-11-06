@@ -23,7 +23,7 @@ import seedu.address.model.reservation.Reservation;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing reservation in the address book.
+ * Edits the details of an existing reservation in RHRH.
  */
 public class EditReservationCommand extends Command {
     public static final String COMMAND_WORD = "editr";
@@ -45,6 +45,7 @@ public class EditReservationCommand extends Command {
 
     /**
      * Creates a command object to edit a reservation
+     *
      * @param index of the reservation in the reservation customer list to edit
      * @param editReservationDescriptor details to edit the reservation with
      */
