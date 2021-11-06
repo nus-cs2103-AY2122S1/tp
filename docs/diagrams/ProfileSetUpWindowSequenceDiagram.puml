@@ -2,7 +2,6 @@
 !include style.puml
 
 box Ui UI_COLOR_T1
-participant ":WelcomeWindow" as WelcomeWindow UI_COLOR
 participant ":MainWindow" as MainWindow UI_COLOR
 participant ":ProfileSetUpWindow" as ProfileSetUpWindow UI_COLOR
 participant ":UiPart" as UiPart UI_COLOR
@@ -12,14 +11,8 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 end box
 
-[-> WelcomeWindow : close()
-activate WelcomeWindow
-
-WelcomeWindow -> MainWindow : show()
+[-> MainWindow : show()
 activate MainWindow
-
-<-- WelcomeWindow
-deactivate WelcomeWindow
 
 create ProfileSetUpWindow
 MainWindow -> ProfileSetUpWindow : new ProfileSetUpWindow(stage, mainWindow, logic)
@@ -37,11 +30,11 @@ activate LogicManager
 LogicManager --> ProfileSetUpWindow
 deactivate LogicManager
 
-alt profile present
+alt Profile is present
 
 ProfileSetUpWindow --> MainWindow : start()
 
-else profile not present
+else Profile is not present
 
 ProfileSetUpWindow -> UiPart : getRoot()
 activate UiPart
@@ -53,6 +46,12 @@ opt submit
 
 ProfileSetUpWindow -> ProfileSetUpWindow : submit()
 activate ProfileSetUpWindow
+
+ProfileSetUpWindow -> LogicManager : setUserProfile(user)
+activate LogicManager
+
+LogicManager --> ProfileSetUpWindow
+deactivate LogicManager
 
 ProfileSetUpWindow -> ProfileSetUpWindow : close()
 activate ProfileSetUpWindow
