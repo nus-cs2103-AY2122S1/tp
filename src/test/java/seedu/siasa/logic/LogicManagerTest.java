@@ -19,7 +19,6 @@ import org.junit.jupiter.api.io.TempDir;
 
 import seedu.siasa.logic.commands.CommandResult;
 import seedu.siasa.logic.commands.contact.AddContactCommand;
-import seedu.siasa.logic.commands.contact.ListContactCommand;
 import seedu.siasa.logic.commands.exceptions.CommandException;
 import seedu.siasa.logic.parser.exceptions.ParseException;
 import seedu.siasa.model.Model;
@@ -60,12 +59,6 @@ public class LogicManagerTest {
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "deletecontact 9";
         assertCommandException(deleteCommand, MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX);
-    }
-
-    @Test
-    public void execute_validCommand_success() throws Exception {
-        String listCommand = ListContactCommand.COMMAND_WORD;
-        assertCommandSuccess(listCommand, ListContactCommand.MESSAGE_SUCCESS, model);
     }
 
     @Test

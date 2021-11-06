@@ -53,9 +53,9 @@ public class EditPolicyCommand extends Command {
             + PREFIX_EXPIRY + "2021-06-13";
 
     public static final String MESSAGE_EDIT_POLICY_SUCCESS = "Edited Policy: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_POLICY = "This policy already exists in the SIASA.";
-    public static final String MESSAGE_NOT_FUTURE_EXPIRY_DATE = "Expiry Date is not in the future.";
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided";
+    public static final String MESSAGE_DUPLICATE_POLICY = "This policy already exists in the SIASA";
+    public static final String MESSAGE_NOT_FUTURE_EXPIRY_DATE = "Expiry Date is not in the future";
 
     private final Index index;
     private final EditPolicyDescriptor editPolicyDescriptor;

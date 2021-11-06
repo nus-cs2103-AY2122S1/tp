@@ -39,7 +39,7 @@ public class AddContactCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New contact added: %1$s";
     public static final String MESSAGE_DUPLICATE_CONTACT = "This contact already exists in the SIASA";
-    public static final String MESSAGE_SIMILAR_CONTACT = "A similar contact: %1$s already exists in the SIASA.";
+    public static final String MESSAGE_SIMILAR_CONTACT = "A similar contact: %1$s already exists in the SIASA";
 
     private final Contact toAdd;
 

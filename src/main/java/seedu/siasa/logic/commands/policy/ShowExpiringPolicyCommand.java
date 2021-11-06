@@ -19,7 +19,7 @@ public class ShowExpiringPolicyCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Showing policies that will be expiring in 1 month";
 
-    public static final String MESSAGE_NO_POLICIES = "There are no policies expiring in 1 month.";
+    public static final String MESSAGE_NO_POLICIES = "There are no policies expiring in 1 month";
 
     private static final LocalDate CUT_OFF_DATE = LocalDate.now().plusMonths(1).plusDays(1);
 
@@ -29,10 +29,11 @@ public class ShowExpiringPolicyCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPolicyList(EXPIRING_POLICIES_MONTH);
-        if (model.getFilteredPolicyList().isEmpty()) {
-            return new CommandResult(MESSAGE_NO_POLICIES);
-        } else {
+
+        if (model.getFilteredPolicyList().size() > 0) {
             return new CommandResult(MESSAGE_SUCCESS);
+        } else {
+            return new CommandResult(MESSAGE_NO_POLICIES);
         }
     }
 }
