@@ -1,6 +1,6 @@
 .background {
     -fx-background-color: derive(#1d1d1d, 20%);
-    background-color: #383838; /* Used in the default.html file */
+    background-color: #2D2d; /* Used in the default.html file */
 }
 
 .label {
@@ -87,16 +87,23 @@
     -fx-background-color: derive(#1d1d1d, 20%);
 }
 
+/*
+ * Change color of empty cells borders
+ */
 .list-view {
     -fx-background-insets: 0;
     -fx-padding: 0;
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: #e7e8c3
 }
 
+/*
+ * To change background of empty cells
+ */
 .list-cell {
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
+    -fx-background-color: #e7e8c3
 }
 
 /*
@@ -224,7 +231,7 @@
 }
 
 .menu-bar .label {
-    -fx-font-size: 16pt;
+    -fx-font-size: 11pt;
     -fx-font-family: "Verdana Light";
     -fx-text-fill: white;
     -fx-opacity: 0.9;
@@ -356,7 +363,7 @@
 #commandTextField {
     -fx-background-color: transparent #383838 transparent #383838;
     -fx-background-insets: 0;
-    -fx-border-color: #383838 #383838 #ffffff #383838;
+    -fx-border-color: #383838 #383838 #383838 #383838;
     -fx-border-insets: 0;
     -fx-border-width: 1;
     -fx-font-family: "Helvetica Light";
