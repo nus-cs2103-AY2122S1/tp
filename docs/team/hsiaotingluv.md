@@ -25,9 +25,6 @@ Socius is a desktop application that can help you, as a CS2103T Software Enginee
 * make friends and
 * find teammates!
 
-A screenshot of Socius is shown below:
-![Ui](../images/Quickstart.png)
-
 Socius is optimized for use via a *Command Line Interface (CLI)* while still having the benefits of a *Graphical User Interface (GUI)*.
 If you can type fast, Socius can get your contact management tasks done faster than traditional *GUI* apps.
 
