@@ -12,6 +12,7 @@ import java.util.stream.IntStream;
  * Helper functions for handling strings.
  */
 public class StringUtil {
+    private static final int INITIAL_SEED = 9;
 
     /**
      * Returns true if any of the phrases in {@code sentence} starts with the {@code query}.
@@ -96,6 +97,6 @@ public class StringUtil {
      * Generates a random alphanumeric string with default random seed as system time.
      */
     public static String generateRandomString() {
-        return generateRandomString(new Random().nextInt());
+        return generateRandomString(new Random(INITIAL_SEED).nextInt());
     }
 }
