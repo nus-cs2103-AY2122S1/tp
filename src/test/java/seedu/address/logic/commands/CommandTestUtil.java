@@ -100,14 +100,6 @@ public class CommandTestUtil {
             Model expectedModel) {
         try {
             CommandResult result = command.execute(actualModel);
-            System.out.println(result.isDisplaySummary());
-            System.out.println(expectedCommandResult.isDisplaySummary());
-            System.out.println(result.getSummaryToDisplay());
-            System.out.println(expectedCommandResult.getSummaryToDisplay());
-            System.out.println(result.isDisplayContact());
-            System.out.println(expectedCommandResult.isDisplayContact());
-            System.out.println(result.getContactToDisplay());
-            System.out.println(expectedCommandResult.getContactToDisplay());
             assertEquals(expectedCommandResult, result);
             assertEquals(expectedModel, actualModel);
         } catch (CommandException ce) {

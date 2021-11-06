@@ -1,0 +1,25 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User exports contact;
+:Parse command;
+if () then ([valid command])
+    :Parse index;
+    if() then ([valid index])
+        :Create Export command;
+        :Get filtered contact list;
+        :Clear export text file;
+        :Convert contact at specified
+        index to exportable format;
+        :Write formatted contact to export text file;
+        :Show command success;
+    else([else])
+        :Invalid Index Message shown on GUI;
+    endif
+else ([else])
+:Invalid Command Message shown on GUI;
+endif
+stop
+
+@enduml

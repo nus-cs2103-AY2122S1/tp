@@ -37,6 +37,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[github](https://github.com/Imerbear)]
 
+[[portfolio](team/imerbear.md)]
+
 * Role: Developer
 * Responsibilities:  Deliverables & Deadlines, Model, DG
 

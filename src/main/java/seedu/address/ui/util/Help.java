@@ -22,8 +22,8 @@ public class Help {
      */
     public void openCommandSummary() throws IOException {
         Desktop.getDesktop().browse(
-                URI.create("https://github.com/AY2122S1-CS2103T-T12-2/tp/blob/master/docs/"
-                        + "UserGuide.md#:~:text=Action-,Format%2C%20Examples,-Add"));
+                URI.create("https://ay2122s1-cs2103t-t12-2.github.io/tp/UserGuide.html#:~:text=Back%20to%20top-"
+                        + ",Command%20summary,-Action"));
     }
 
     /**
@@ -33,6 +33,6 @@ public class Help {
      */
     public void openUserGuide() throws IOException {
         Desktop.getDesktop().browse(
-                URI.create("https://github.com/AY2122S1-CS2103T-T12-2/tp/blob/master/docs/UserGuide.md"));
+                URI.create("https://ay2122s1-cs2103t-t12-2.github.io/tp/UserGuide.html"));
     }
 }

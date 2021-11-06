@@ -167,7 +167,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseRating_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseRating((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseRating(null));
     }
 
     @Test

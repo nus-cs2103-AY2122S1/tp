@@ -1,5 +1,7 @@
 package seedu.address.model.summary;
 
+import static seedu.address.model.contact.Rating.EMPTY_RATING;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,7 +11,6 @@ import javafx.collections.ObservableList;
 import javafx.scene.chart.PieChart;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.contact.Contact;
-
 
 /**
  *  This class contains the logic of retrieving data from different components
@@ -30,7 +31,7 @@ public class Summary {
     public Summary(ReadOnlyAddressBook addressBook) {
         this.contactList = addressBook.getContactList();
         numberOfContacts = setNumberOfContacts();
-        percentageCategory = setNumberCategory();
+        percentageCategory = setPercentageCategory();
         percentageRatings = setPercentageRatings();
     }
 
@@ -67,7 +68,7 @@ public class Summary {
      * Sets the total number of contacts in each category.
      * @return HashMap of total number of contacts in each category.
      */
-    private HashMap<String, Integer> setNumberCategory() {
+    private HashMap<String, Integer> setPercentageCategory() {
         HashMap<String, Integer> count = new HashMap<>();
 
         for (Contact contact : contactList) {
@@ -79,21 +80,20 @@ public class Summary {
             } else {
                 count.put(categoryString, 1);
             }
-
         }
 
         return count;
     }
 
-    public int getNumberOfContacts() {
+    private int getNumberOfContacts() {
         return numberOfContacts;
     }
 
-    public HashMap<String, Integer> getPercentageCategory() {
+    private HashMap<String, Integer> getPercentageCategory() {
         return percentageCategory;
     }
 
-    public HashMap<String, Integer> getPercentageRatings() {
+    private HashMap<String, Integer> getPercentageRatings() {
         return percentageRatings;
     }
 
@@ -108,7 +108,7 @@ public class Summary {
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
 
         for (Map.Entry<String, Integer> entry : percentageCategory.entrySet()) {
-            String key = entry.getKey().toUpperCase();
+            String key = entry.getKey().toLowerCase();
             Integer value = entry.getValue();
             pieChartData.add(new PieChart.Data(key, value));
         }
@@ -119,9 +119,13 @@ public class Summary {
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
 
         for (Map.Entry<String, Integer> entry : percentageRatings.entrySet()) {
-            String key = entry.getKey() + "\u2B50";
-            Integer value = entry.getValue();
-            pieChartData.add(new PieChart.Data(key, value));
+            String key = entry.getKey();
+            // Does not reflect empty ratings
+            if (!key.equals(EMPTY_RATING)) {
+                key = key + " *";
+                Integer value = entry.getValue();
+                pieChartData.add(new PieChart.Data(key, value));
+            }
         }
         return pieChartData;
     }
