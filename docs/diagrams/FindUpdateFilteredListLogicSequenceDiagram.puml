@@ -24,19 +24,19 @@ activate Model
 Model --> FindCommand
 deactivate Model
 
-Model -> PersonMatchesKeywordsPredicate : test
+Model -> PersonMatchesKeywordsPredicate : test(person)
 activate PersonMatchesKeywordsPredicate
 
-PersonMatchesKeywordsPredicate -> PersonMatchesKeywordsPredicate : getPredicates
+PersonMatchesKeywordsPredicate -> PersonMatchesKeywordsPredicate : getPredicates()
 activate PersonMatchesKeywordsPredicate
 
-PersonMatchesKeywordsPredicate -> PersonMatchesKeywordsPredicate : getNameMatchPredicate
+PersonMatchesKeywordsPredicate -> PersonMatchesKeywordsPredicate : getNameMatchPredicate()
 activate PersonMatchesKeywordsPredicate
 
 PersonMatchesKeywordsPredicate --> PersonMatchesKeywordsPredicate
 deactivate PersonMatchesKeywordsPredicate
 
-PersonMatchesKeywordsPredicate -> PersonMatchesKeywordsPredicate : getTagMatchPredicate
+PersonMatchesKeywordsPredicate -> PersonMatchesKeywordsPredicate : getTagMatchPredicate()
 activate PersonMatchesKeywordsPredicate
 
 PersonMatchesKeywordsPredicate --> PersonMatchesKeywordsPredicate

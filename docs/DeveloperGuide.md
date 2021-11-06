@@ -183,8 +183,8 @@ This section describes some noteworthy details on how certain features are imple
 Weekly recurring or one-off (makeup) lessons are classified as `Lesson` objects. These lessons can be added to any particular
 student in TAB. Added lessons can also be edited and deleted.<br>
 
-A `Lesson` is represented in the application as shown in the figure below. It contains a start `Date`, an end `Date`, a `TimeRange` for the
-`Lesson`, a `Subject`, a `LessonRates` and `Homework` fields. There are 2 types of `Lesson` – `RecurringLesson` and `MakeUpLesson`. `RecurringLesson`
+A `Lesson` is represented in the application as shown in the figure below. It contains a start `Date`, an end `Date`, a `CancelledDates` set,  a `TimeRange` for the
+`Lesson`, , a `Subject`, a `LessonRates` and `Homework` fields. There are 2 types of `Lesson` – `RecurringLesson` and `MakeUpLesson`. `RecurringLesson`
 represents a **weekly** recurring lesson. `MakeUpLesson` represents a one-off lesson outside the regular schedule.<br>
 
 ![LessonClassDiagram](images/LessonClassDiagram.png)
@@ -556,7 +556,7 @@ Given below is an example usage scenario and how the Find Command is executed:
 * **Step 1:** The user enters the `find` command with name keyword `John` and tag keyword `unpaid`.
 * **Step 2:** The `FindCommandParser` parses this command and creates a `PersonMatchesKeywordsPredicate` that stores the respective keywords for name and tag.
 * **Step 3:** This predicate is passed into the method `Model#updateFilteredPersonList`.
-* **Step 4:** When the `PersonMatchesKeywordsPredicate#test()` method is called, a predicate is created for each searched field, name and tag, which tests if the given person's fields contain all the specified keywords.
+* **Step 4:** When the `PersonMatchesKeywordsPredicate#test(person)` method is called, a predicate is created for each searched field, name and tag, which tests if the given person's fields contain all the specified keywords.
 * **Step 5:** All searched field predicates are composed into a single predicate, depending on the find condition. This composed predicate is then applied on the person to determine whether there is a match.
 
 ![Find Command](images/FindSequenceDiagram.png)
