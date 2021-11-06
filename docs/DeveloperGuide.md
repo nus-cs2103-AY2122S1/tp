@@ -536,7 +536,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | CS2100 TA                                  | be able to view (read) the records of individual students| know more about the student's current performance and email.
 | `* * *`  | CS2100 TA                                  | be able to update the details of a student| correct any mistakes that I have made.
 | `* * *`  | CS2100 TA                                  | be able to save the data in a CSV file| upload to LumiNUS and share with the CS2100 Instructors.
-| `* * *`  | proficient programmer / TA                 | navigate ProgrammerError seamlessly with the use of Unix command| efficiently manage my class.
+| `* * *`  | proficient programmer / CS2100 TA                 | navigate ProgrammerError seamlessly with the use of Unix command| efficiently manage my class.
 | `* * `  | CS2100 TA with multiple devices             | export the data in my ProgrammerError                                                            | import it on another device.
 | `* * `  | busy CS2100 TA                              | view students' statistics formatted in a standard form                                            | avoid sorting the information on my own.
 | `* * `  | CS2100 TA                                   | use the app to track students' performance                                                       | identify those who need more help.
@@ -550,9 +550,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`   | CS2100 admin                                | have a dashboard to have a bird eye view of my class statistics                                  | be updated quickly on my class progress.
 | `* *`   | CS2100 TA                                   | use tags to identify which labs are marked or unmarked                                           | know which what labs to mark next.
 | `*`     | CS2100 TA with multiple classes             | filter the contact list by name, classes, email  | easily identify those in the current class.                |                                                                        
-| `*`     | archive previous batch statistics           | compare current batch performance with them                                                      |
+| `*`     | CS2100 TA                                   | archive previous batch statistics           | compare current batch performance with them                                                      |
 | `*`     | expert CS2100 TA                                 | archive/hide unused data                                                                         | avoid being distracted by irrelevant data.
-| `*`     | a TA with many students and classes         | store vital information of my students                                                           | query it when the need arises.
+| `*`     | a CS2100 TA with many students and classes         | store vital information of my students                                                           | query it when the need arises.
 | `*`     | CS2100 Teaching Staff                       | easily search and update student's contact details                                               | I can reach them throughout the module.
 
 ## <a name="Use cases"></a> Use cases
