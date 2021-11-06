@@ -26,6 +26,7 @@ Class Tag
 Class GroupList
 Class Group
 Class AssessmentList
+Class Score
 
 Class Assessment {
 - scores: Map<ID, Score>
@@ -50,16 +51,18 @@ SourceControl *--> "1" GroupList
 SourceControl *--> "1" AssessmentList
 
 UniqueStudentList --> "    ~* all" Student
-Student *--> Name
-Student *--> ID
-Student *--> "*" Tag
+Student *--> "1" Name
+Student *--> "1" ID
+Student *--> "~* " Tag
 
-GroupList --> "\t~*" Group
-Group --> "\t*" ID
+GroupList --> "~* " Group
+Group --> "*" ID
 
 AssessmentList --> "~* " Assessment
 
 Name -[hidden]right-> ID
+Score -[hidden]right-> ID
+Score -[hidden]up-> Assessment
 
 ModelManager --> "filtered ~*\t" Student
 @enduml
