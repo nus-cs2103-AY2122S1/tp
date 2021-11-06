@@ -238,7 +238,7 @@ Step 5. Contact's `Pin` attribute will change to indicate that the contact is pi
 
 Step 6. CONNECTIONS UI will update to show the new contact at the top of the list using a `PinnedPersonCard` which shows a pin next the contact's name. 
 
-Step 7. The user decides that the contact will no longer be frequently contacted and should be unpinned. User executres `unpin 2`.
+Step 7. The user decides that the contact will no longer be frequently contacted and should be unpinned. User executes `unpin 2` which unpins `person3` which is second in the list.
 
 Step 6. Contact's `Pin` attribute will change to indicate that the contact is not pinned. Contact will be moved behind other pinned contacts in `UniquePersonList`.
 
