@@ -493,10 +493,6 @@ It works by utilizing the same mechanism that is used by Socius when first initi
 
 #### Usage
 
-The following activity diagram briefly summarizes what happens when a user executes the `Import` to import a JSON addressbook file:
-
-[insert diagram]
-
 Given below is an example usage scenario and how the Import mechanism behaves at each step.
 
 Step 1. The user launches the application.
