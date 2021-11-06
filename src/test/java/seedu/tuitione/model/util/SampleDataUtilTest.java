@@ -1,6 +1,7 @@
 package seedu.tuitione.model.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_SECOND_LESSON;
@@ -39,8 +40,8 @@ public class SampleDataUtilTest {
         Lesson thirdLesson = readOnlyTuitione.getLessonList().get(INDEX_THIRD_LESSON.getZeroBased());
         Lesson secondLesson = readOnlyTuitione.getLessonList().get(INDEX_SECOND_LESSON.getZeroBased());
         assertTrue(firstStudent.containsLesson(thirdLesson));
-        assertTrue(secondStudent.containsLesson(secondLesson));
+        assertFalse(secondStudent.containsLesson(secondLesson));
         assertTrue(thirdLesson.containsStudent(firstStudent));
-        assertTrue(secondLesson.containsStudent(secondStudent));
+        assertFalse(secondLesson.containsStudent(secondStudent));
     }
 }
