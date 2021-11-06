@@ -67,10 +67,14 @@ public class SortCommand extends Command {
             PREFIX_SHN_PERIOD_START, PREFIX_SHN_PERIOD_END);
     public static final Comparator<Person> COMPARATOR_PERSON_NAME = Comparator.comparing(Person::getName);
     public static final Comparator<Person> COMPARATOR_PERSON_CASE_NUMBER = Comparator.comparing(Person::getCaseNumber);
-    public static final Comparator<Person> COMPARATOR_PERSON_SHN_PERIOD_START = Comparator.comparing(person ->
+    public static final Comparator<Person> COMPARATOR_PERSON_SHN_PERIOD_START_ASC = Comparator.comparing(person ->
             person.getShnPeriod().value.map(Period::getStartDate).orElse(LocalDate.MAX));
-    public static final Comparator<Person> COMPARATOR_PERSON_SHN_PERIOD_END = Comparator.comparing(person ->
+    public static final Comparator<Person> COMPARATOR_PERSON_SHN_PERIOD_START_DSC = Comparator.comparing(person ->
+            person.getShnPeriod().value.map(Period::getStartDate).orElse(LocalDate.MIN));
+    public static final Comparator<Person> COMPARATOR_PERSON_SHN_PERIOD_END_ASC = Comparator.comparing(person ->
             person.getShnPeriod().value.map(Period::getEndDate).orElse(LocalDate.MAX));
+    public static final Comparator<Person> COMPARATOR_PERSON_SHN_PERIOD_END_DSC = Comparator.comparing(person ->
+            person.getShnPeriod().value.map(Period::getEndDate).orElse(LocalDate.MIN));
 
     public enum Direction {
         ASCENDING("asc"),
@@ -146,9 +150,13 @@ public class SortCommand extends Command {
         } else if (prefix.equals(PREFIX_CASE_NUMBER)) {
             comparator = COMPARATOR_PERSON_CASE_NUMBER;
         } else if (prefix.equals(PREFIX_SHN_PERIOD_START)) {
-            comparator = COMPARATOR_PERSON_SHN_PERIOD_START;
+            comparator = direction == Direction.ASCENDING
+                    ? COMPARATOR_PERSON_SHN_PERIOD_START_ASC
+                    : COMPARATOR_PERSON_SHN_PERIOD_START_DSC;
         } else if (prefix.equals(PREFIX_SHN_PERIOD_END)) {
-            comparator = COMPARATOR_PERSON_SHN_PERIOD_END;
+            comparator = direction == Direction.ASCENDING
+                    ? COMPARATOR_PERSON_SHN_PERIOD_END_ASC
+                    : COMPARATOR_PERSON_SHN_PERIOD_END_DSC;
         } else {
             throw new IllegalStateException("Prefix %s is not supported.");
         }
