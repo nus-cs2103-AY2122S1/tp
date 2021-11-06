@@ -76,7 +76,7 @@ public class TagComponent extends HBox {
             break;
 
         case TagUtil.LIFE_INSURANCE:
-            temp.setStyle(Colors.LIME);
+            temp.setStyle(Colors.DARK_GREEN);
             break;
 
         case TagUtil.MOTOR_INSURANCE:
@@ -92,7 +92,7 @@ public class TagComponent extends HBox {
             break;
 
         case TagUtil.INVESTMENT:
-            temp.setStyle(Colors.TEAL);
+            temp.setStyle(Colors.GREY_PURPLE);
             break;
 
         case TagUtil.SAVINGS:
