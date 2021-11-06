@@ -28,18 +28,31 @@ Given below are my contributions to the project.
     * Ensured that deadlines were met and deliverables were up to standard.
 
 * **Enhancements to existing features**:
-    * I did not provide enhancements to any existing features.
+    * Wrote additional tests for existing features to increase test coverage. (Pull requests 
+      [\#87](https://github.com/AY2122S1-CS2103T-T10-2/tp/pull/87), 
+      [\#91](https://github.com/AY2122S1-CS2103T-T10-2/tp/pull/91))
 
 * **Documentation**:
     * Developer Guide:
-        * Added user stories.
+        * Added target audience, purpose of guide, how to use guide and user stories sections to Developer Guide.
         * Added implementation for view command.
     * User Guide
-        * Added target audience, purpose of guide, glossary to User Guide.
+        * Added target audience, purpose of guide, how to use guide and glossary sections to User Guide.
         * Added screenshots of Managera to User Guide.
         * Added documentation for the features `doneEvent` and `findParticipant`.
-        * General vetting of guide and numerous enhancements to existing sections.
+        * General vetting of user guide and numerous enhancements to existing sections.
 
 * **Community**:
-
-* **Tools**:
+    * PRs reviewed (with non-trivial review comments: 
+      [\#1](https://github.com/AY2122S1-CS2103T-T10-2/tp/pull/1), 
+      [\#20](https://github.com/AY2122S1-CS2103T-T10-2/tp/pull/20), 
+      [\#51](https://github.com/AY2122S1-CS2103T-T10-2/tp/pull/51), 
+      [\#63](https://github.com/AY2122S1-CS2103T-T10-2/tp/pull/63), 
+      [\#73](https://github.com/AY2122S1-CS2103T-T10-2/tp/pull/73),
+      [\#102](https://github.com/AY2122S1-CS2103T-T10-2/tp/pull/102),
+      [\#105](https://github.com/AY2122S1-CS2103T-T10-2/tp/pull/105),
+      [\#113](https://github.com/AY2122S1-CS2103T-T10-2/tp/pull/113),
+      [\#122](https://github.com/AY2122S1-CS2103T-T10-2/tp/pull/122),
+      [\#126](https://github.com/AY2122S1-CS2103T-T10-2/tp/pull/126), 
+      [\#210](https://github.com/AY2122S1-CS2103T-T10-2/tp/pull/210), 
+      [\#215](https://github.com/AY2122S1-CS2103T-T10-2/tp/pull/215))
