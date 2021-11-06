@@ -440,20 +440,20 @@ On that root object, `requestFocus()` is called upon to request focus.
 #### Implementation
 
 The class `HelpWindow` is responsible for displaying the Help
-Window. It is showed only when the user either uses the keyboard shortcut,
-`F1`, or clicks on `File > Help` located on the top left in
+Window. It is shown when the user either uses the keyboard shortcut,
+`F1`, or clicks on `Help` located on the top left in
 the Menu Bar. It is facilitated by `HelpWindow.fxml`
 and `HelpWindow.css`. The `.fxml` file is responsible for the layout of the
-various components in this window, and the `.css` file add a style, and enhances the
-overall Ui.
+various components in this window, and the `.css` file adds a style and enhances the
+overall UI.
 
 The `HelpWindow` class extends `UiPart<Stage>`.
 
-This window can only be viewed when the app has successfully started up,
-and has the valid User Credentials.
+This window can only be viewed when the app has successfully started up and 
+has valid User Credentials.
 
-This window is initialized when the `MainWindow` is initialized. Basically, it
-is initialized in the `MainWindow` constructor. This window, to be seen, has to be
+This window is initialized when the `MainWindow` is initialized. It is
+initialized in the `MainWindow` constructor. This window, to be seen, has to be
 triggered as an event by the user. The `MainWindow` class has a method
 `handleHelpWindow()`, which is responsible for displaying this window.
 
@@ -462,7 +462,7 @@ On initializing the `HelpWindow` class, `HelpWindow#setUpCommandDetails()` and
 
 `setUpCommandDetails()` creates multiple objects of `CommandDetails`, all of them
 representing a unique command that the app supports. Those are then added to an
-`ObservableList`, which is linked to the `TableView` in the Ui.
+`ObservableList`, which is linked to the `TableView` in the UI.
 
 `setUpHelpTableView()` sets and places various restrictions on the table.
 It restricts any events or scrolling on the table. Also, It adjusts the height
