@@ -11,13 +11,14 @@ import java.nio.file.Path;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import seedu.address.model.BookKeeping;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.TransactionList;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.display.DisplayMode;
 import seedu.address.model.order.Order;
+import seedu.address.testutil.TypicalBookkeeping;
+import seedu.address.testutil.TypicalTransactions;
 
 public class EndAndTransactOrderCommandTest {
 
@@ -25,14 +26,15 @@ public class EndAndTransactOrderCommandTest {
     public Path temporaryFolder;
 
     private Model modelWithoutOrder = new ModelManager(getTypicalInventory(), new UserPrefs(),
-            new TransactionList(), new BookKeeping());
+            TypicalTransactions.getTypicalTransaction(), TypicalBookkeeping.getTypicalBookkeeping());
 
     /**
      * Returns a model with 5 donuts in its unclosed order
      */
     private Model getModelWithOrderedDonut(Path path) {
         UserPrefs userPrefs = new UserPrefs(path);
-        Model model = new ModelManager(getTypicalInventory(), userPrefs, new TransactionList(), new BookKeeping());
+        Model model = new ModelManager(getTypicalInventory(), userPrefs, TypicalTransactions.getTypicalTransaction(),
+                TypicalBookkeeping.getTypicalBookkeeping());
         model.addItem(DONUT.updateCount(5));
         model.setOrder(new Order());
         model.addToOrder(DONUT.updateCount(1));
@@ -56,11 +58,13 @@ public class EndAndTransactOrderCommandTest {
         EndAndTransactOrderCommand command = new EndAndTransactOrderCommand();
 
         Model modelWithEmptyOrder = new ModelManager(getTypicalInventory(),
-                new UserPrefs(), new TransactionList(), new BookKeeping());
+                new UserPrefs(), TypicalTransactions.getTypicalTransaction(),
+                TypicalBookkeeping.getTypicalBookkeeping());
         modelWithEmptyOrder.setOrder(new Order());
 
         Model modelWithoutOrder = new ModelManager(getTypicalInventory(),
-                new UserPrefs(), new TransactionList(), new BookKeeping());
+                new UserPrefs(), TypicalTransactions.getTypicalTransaction(),
+                TypicalBookkeeping.getTypicalBookkeeping());
         CommandResult expectedResult = new CommandResult(EndAndTransactOrderCommand.MESSAGE_EMPTY_ORDER);
         assertCommandSuccess(command, modelWithEmptyOrder, expectedResult, modelWithoutOrder);
     }
@@ -70,8 +74,13 @@ public class EndAndTransactOrderCommandTest {
         String expectedMessage = EndAndTransactOrderCommand.MESSAGE_SUCCESS;
 
         Model expectedModel = new ModelManager(getTypicalInventory(),
-                new UserPrefs(temporaryFolder.resolve("transaction.json")), new TransactionList(), new BookKeeping());
-        expectedModel.addItem(DONUT.updateCount(4));
+                new UserPrefs(temporaryFolder.resolve("transaction.json")), TypicalTransactions.getTypicalTransaction(),
+                TypicalBookkeeping.getTypicalBookkeeping());
+        expectedModel.addItem(DONUT.updateCount(5));
+        expectedModel.setOrder(new Order());
+        expectedModel.addToOrder(DONUT.updateCount(1));
+        expectedModel.transactAndCloseOrder();
+
 
         Model modelTemp = getModelWithOrderedDonut(temporaryFolder.resolve("transaction.json"));
 
@@ -86,10 +95,16 @@ public class EndAndTransactOrderCommandTest {
         EndAndTransactOrderCommand command = new EndAndTransactOrderCommand();
         String expectedMessage = EndAndTransactOrderCommand.MESSAGE_SUCCESS;
 
+        TransactionList typicalTransactions = TypicalTransactions.getTypicalTransaction();
         Model expectedModel = new ModelManager(getTypicalInventory(),
-                new UserPrefs(temporaryFolder.resolve("transaction.json")), new TransactionList(), new BookKeeping());
-        expectedModel.addItem(DONUT.updateCount(4));
+                new UserPrefs(temporaryFolder.resolve("transaction.json")), typicalTransactions,
+                TypicalBookkeeping.getTypicalBookkeeping());
+        expectedModel.addItem(DONUT.updateCount(5));
+        expectedModel.setOrder(new Order());
+        expectedModel.addToOrder(DONUT.updateCount(1));
+        expectedModel.transactAndCloseOrder();
 
-        assertCommandSuccess(new EndAndTransactOrderCommand(), modelTemp, expectedMessage, expectedModel);
+        assertCommandSuccess(command, modelTemp, expectedMessage, expectedModel);
     }
+
 }

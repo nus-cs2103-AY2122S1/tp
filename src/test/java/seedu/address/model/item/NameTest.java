@@ -54,6 +54,6 @@ public class NameTest {
         Name lower = new Name(StringUtil.generateRandomString().toLowerCase());
         Name upper = new Name(StringUtil.generateRandomString().toUpperCase());
 
-        assertFalse(lower.hasSameLower(upper));
+        assertTrue(lower.hasSameLower(upper));
     }
 }
