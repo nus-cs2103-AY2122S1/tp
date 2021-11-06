@@ -1393,8 +1393,8 @@ Enrolling a `Student` into a `Lesson`, while the students and lessons are being 
   * In this case, we will be using the sample data given when loading up **TuitiONE** for the first time (delete tuitione.json file if it is not your first time). 
   * The `Student` of index `2` (Bernice Yu of grade P4) will be enrolled into `Lesson` of `index` 2 (Math-P4-Wed-1800).
 
-* Test case: `enroll 1 l/1`<br>
-  Expected: `Student` of index `1` is enrolled in `Lesson` of index `1` . Details of the student and lesson enrolled in shown in the status message.
+* Test case: `enroll 2 l/2`<br>
+  Expected: `Student` of index `1` is enrolled in `Lesson` of index `3` . Details of the student and lesson enrolled in shown in the status message.
 
 * Test case: `enroll 0 l/0`<br>
   Expected: No student is enrolled in any lesson. Error details shown in the status message.
