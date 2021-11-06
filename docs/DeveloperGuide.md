@@ -388,18 +388,7 @@ Some knowledge of the CalendarFX `Entry` _API_ (provided [here](https://dlsc.com
 is necessary to understand the conversion that happens in [`CalendarEntryList#convertRecurringLessonToEntries(Person, Lesson)`](https://github.com/AY2122S1-CS2103T-F13-3/tp/blob/master/src/main/java/seedu/address/model/lesson/CalendarEntryList.java#L331)
 and [`CalendarEntryList#convertToMakeupEntry(Person, Lesson)`](https://github.com/AY2122S1-CS2103T-F13-3/tp/blob/master/src/main/java/seedu/address/model/lesson/CalendarEntryList.java#L384).
 
-It is important to understand the limitations of CalendarFX `Entry`. In particular, it does not support recurrence exceptions. 
-This means that we cannot modify properties of specific occurrences of a recurring `Entry`. 
-For example, suppose we have a lesson entry that recurs weekly starting from 1st Jan till 31st Dec. There is no in-built way to change the details of a single date, 
-such as cancelling a lesson only on 15th Jan. However, cancelling lessons for a particular week is a valid and common
-behaviour of a 1-to-1 private home tutor. 
-
-To circumvent this problem, [`CalendarEntryList#convertRecurringLessonToEntries(Person, Lesson)`](https://github.com/AY2122S1-CS2103T-F13-3/tp/blob/master/src/main/java/seedu/address/model/lesson/CalendarEntryList.java#L331)
-maps `RecurringLesson`s to a `List` of `Entry`s. The aforementioned example lesson would thus be converted to:
-1. A first calendar `Entry` that recurs weekly, from 1st Jan to 8th Jan (inclusive);
-2. A second calendar `Entry` that recurs weekly, from 22nd Jan to 31st Dec (inclusive).
-
-This effectively "cancels" the lesson that occurs on 15th Jan in the calendar interface.
+It is important to understand the limitations of CalendarFX `Entry`. In particular, it does not support recurrence exceptions. See [Displaying of recurring lessons with cancelled dates](#displaying-of-recurring-lessons-with-cancelled-dates) for more details.
 
 #### Design considerations
 
@@ -429,24 +418,25 @@ Alternative 1 is our preferred choice as its pros and cons seem much better than
 
 #### Displaying of recurring lessons with cancelled dates
 
-Entries of recurring lessons are displayed with the help of recurrence rules in CalendarFX. However, CalendarFX does not support exclusion of specific dates in the recurrence. This means that there is no way to represent a recurring lesson with cancelled dates as a single entry. As a work around, we create multiple entries to represent a single recurring lesson with the method `CalendarEntryList#convertRecurringLessonToEntries`.
+Entries of recurring lessons are displayed with the help of recurrence rules in CalendarFX. However, CalendarFX does not support the exclusion of specific dates in the recurrence. For example, suppose we have a lesson entry that recurs weekly starting from 1st Jan till 31st Dec. There is no in-built way to change the details of a single date, such as cancelling a lesson only on 15th Jan. However, cancelling lessons for a particular week is a valid and common behaviour of a 1-to-1 private home tutor.
+
+As a work around, we create multiple `Entry`s to represent a single `RecurringLesson` with the method [`CalendarEntryList#convertRecurringLessonToEntries(Person, Lesson)`](https://github.com/AY2122S1-CS2103T-F13-3/tp/blob/master/src/main/java/seedu/address/model/lesson/CalendarEntryList.java#L331).
 
 Example:
 * A recurring lesson has a start date of `1 Sep 2021` with no end date.
-* The lesson is cancelled on `22 Sep 2021` and `13 Oct 2021`.
-
-The figure below shows the recurring lesson displayed on the yearly calendar, where the lesson occurs on the dates marked green.
-
-![Recurring Calendar Entries](images/RecurringCalendarEntries.png)
-*Figure I.1.2: Recurring lesson displayed on the yearly calendar*
+* The user cancels the lesson on `22 Sep 2021` and `13 Oct 2021`.
 
 To represent this recurring lesson, 3 calendar entries are created:
 1. Recurring entry 1 with start date of `1 Sep 2021`, and end date of `15 Sep 2021`
 2. Recurring entry 2 with start date of `29 Sep 2021` and end date of `6 Oct 2021`
 3. Recurring entry 3 with start date of `20 Oct 2021` and no end date.
 
-In this way, the lesson will not be displayed on the cancelled dates.
+This effectively "cancels" the lesson that occurs on `22 Sep 2021` and `13 Oct 2021` in the calendar interface.
 
+The figure below shows the recurring lesson displayed on the yearly calendar, where the lesson occurs on the dates marked green.
+
+![Recurring Calendar Entries](images/RecurringCalendarEntries.png)
+*Figure I.1.2: Recurring lesson displayed on the yearly calendar*
 
 ### Upcoming lesson reminders
 The reminder feature allows users to view a list of upcoming lessons that ends in the next 48 hours.
