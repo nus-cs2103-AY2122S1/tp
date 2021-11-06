@@ -378,6 +378,16 @@ Edits the name of the 2nd person to be `Betsy Crower` and clears all existing ta
 </div>
 </div>
 
+Below is the list of flags that can be used with the `edit` command. At least one of the flags must be specified.
+
+| Flag | Long Form | Description |
+| ---- | ---------- | ----------- |
+| `-n` | `--name` | The name associated with the contact. |
+| `-p` | `--phone` | The phone number of the contact. |
+| `-e` | `--email` | The email address of the contact. |
+| `-a` | `--address` | The address of the contact. |
+| `-t` | `--tag` | The tags that are associated with the contact. |
+
 <div class="d-flex alert alert-info">
 <div class="mr-2">
     <span class="badge badge-info">INFO</span>
