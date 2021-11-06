@@ -1316,6 +1316,8 @@ testers are expected to do more *exploratory* testing.
     * Click the exit option in the dropdown menu from file. <br>
       Expected: The application will close.
 
+Note: Only the alert message corresponds to the first encountered incorrect parameter will be shown. User is expected to correct the input parameters one by one.
+
 #### Deleting a student
 
 1. Deleting a student while all students are being shown
@@ -1332,7 +1334,6 @@ testers are expected to do more *exploratory* testing.
 
     * Other incorrect delete commands to try: `delete`, `delete x`, `delete y` (where x is larger than the list size, and y is a negative integer)<br>
       Expected: Similar to previous.
-
 
 #### Editing a student
 
