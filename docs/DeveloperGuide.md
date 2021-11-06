@@ -1381,9 +1381,16 @@ testers are expected to do more *exploratory* testing.
     * Prerequisites: Multiple "Students" and "Lessons" shown in the list of students and lessons. "Students" must not currently be enrolled in the "lesson" the user wishes to enroll the student in. 
 
     * Note: We will be using index `1` to conduct manual testing for positive tests, but feel free to test with any valid index (any positive integer shown in the student and lesson lists).
+      
+    * Note: We will be assuming the following things
+        * `Student` of index `1` has the same `grade` as the `Lesson` of index `1`
+        * `Student` of index `1` is not currently enrolled in `Lesson` of index `1`
+        * `Student` of index `1` does not have any existing classes that clash with the duration in `Lesson` of index `1`
+        * `Student` of index `1` is currently enrolled in fewer than 10 lessons
+        * `Lesson` of index `1` currently has fewer than 15 students enrolled inside the lesson
 
     * Test case: `enroll 1 l/1`<br>
-      Expected: Student of index `1` is enrolled in lesson of index `1` . Details of the student and lesson enrolled in shown in the status message.
+      Expected: `Student` of index `1` is enrolled in `Lesson` of index `1` . Details of the student and lesson enrolled in shown in the status message.
 
     * Test case: `enroll 0 l/0`<br>
       Expected: No student is enrolled in any lesson. Error details shown in the status message.
@@ -1400,7 +1407,7 @@ testers are expected to do more *exploratory* testing.
     * Note: We will be using index `1` to conduct manual testing for positive tests, but feel free to test with any valid index (any positive integer shown in the student list).
 
     * Test case: `delete 1`<br>
-      Expected: Student of index `1` is deleted from the list. Details of the deleted student shown in the status message.
+      Expected: `Student` of index `1` is deleted from the list. Details of the deleted student shown in the status message.
 
     * Test case: `delete 0`<br>
       Expected: No student is deleted. Error details shown in the status message.
@@ -1418,7 +1425,7 @@ testers are expected to do more *exploratory* testing.
     * Note: We will be using index `1` to conduct manual testing for positive tests, but feel free to test with any valid index (any positive integer shown in the lesson list).
 
     * Test case: `delete-l 1`<br>
-      Expected: Students currently enrolled in lesson of index `1` would be unenrolled. Lesson `1` is deleted from the list. Details of the deleted lesson shown in the status message.
+      Expected: Students currently enrolled in `Lesson` of index `1` would be unenrolled. `Lesson` of index `1` is deleted from the list. Details of the deleted lesson shown in the status message.
 
     * Test case: `delete-l 0`<br>
       Expected: No lesson is deleted. Error details shown in the status message.
