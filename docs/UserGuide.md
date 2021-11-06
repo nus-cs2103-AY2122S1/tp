@@ -457,8 +457,8 @@ Format: `find [cond/{all | any | none}] [t/TAG_KEYWORD]…​ [n/NAME_KEYWORDS] 
 ##### Search by tags
 * You can search by multiple tags. e.g. `t/paid t/new`.
 * One tag parameter can only have one keyword. e.g. `t/paid new` is invalid.
-* The search is case-insensitive. e.g. keyword `new` will match `NEW`.
 * Only whole words will be matched. e.g. keyword `paid` will not match `unpaid`.
+* The search is case-insensitive. e.g. keyword `new` will match `NEW`.
 
 Example:
 * `find t/unpaid t/New` will return all students with both of the tags `UNPAID` and `NEW`.
