@@ -21,7 +21,6 @@ title: Developer Guide
   * [Find feature](#find-feature)
   * [Show feature](#show-feature)
   * [Unmark feature](#unmark-feature)
-
 - [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
 - [**Appendix: Requirements**](#appendix-requirements)
   * [Product scope](#product-scope)
@@ -35,10 +34,6 @@ title: Developer Guide
   * [Saving data](#saving-data)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
-
-  
- 
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
