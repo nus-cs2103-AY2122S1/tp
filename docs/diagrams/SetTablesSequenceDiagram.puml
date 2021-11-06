@@ -48,15 +48,12 @@ deactivate RhrhParser
 LogicManager -> SetTablesCommand : execute()
 activate SetTablesCommand
 
-'SetTablesCommand -> Model : resetTableCount()
-'activate Model
-'Model --> SetTablesCommand
-'
-'SetTablesCommand -> Model : resetReservations()
-'Model --> SetTablesCommand
-
 SetTablesCommand -> Model : setTableList(LIST_OF_TABLES)
 activate Model
+
+note left of Model : The tables are created\nand set in Model\nDetails are not shown here
+
+
 Model --> SetTablesCommand
 deactivate Model
 

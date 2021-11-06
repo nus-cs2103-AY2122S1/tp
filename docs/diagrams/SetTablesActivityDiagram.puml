@@ -24,9 +24,13 @@ if () then ([input arguments are valid])
 
     :Print success message to user
     with the number of tables set;
+
+    stop
+
 else ([else])
-endif
+    endif
 else ([else])
-endif
+    endif
+    :Display error to user;
 stop
 @enduml
