@@ -25,9 +25,12 @@ Given below are my contributions to the project.
   * Updated sample data that informs and guides first-time users on the functionalities of the application, for example, adding module, student, tasks with completion status and deadline.
    ([\#139](https://github.com/AY2122S1-CS2103-F09-1/tp/pull/139))
 
+* **Testing**
+  * Wrote test cases for `delete module` feature that increased test coverage by 11.70%. ([\#99](https://github.com/AY2122S1-CS2103-F09-1/tp/pull/99))
+  
 * **Team-based contributions**
-  * Updated CI build status badge and Jekyll site-settings. ([\#23](https://github.com/AY2122S1-CS2103-F09-1/tp/pull/23))
   * Created object builders used for team-wide testing purposes. ([\#99](https://github.com/AY2122S1-CS2103-F09-1/tp/pull/99))
+  * Updated CI build status badge and Jekyll site-settings. ([\#23](https://github.com/AY2122S1-CS2103-F09-1/tp/pull/23))
   
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=Ruofan1023&tabRepo=AY2122S1-CS2103-F09-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false).
 
@@ -37,7 +40,7 @@ Given below are my contributions to the project.
   * Set up [GitHub Actions](https://github.com/AY2122S1-CS2103-F09-1/tp/actions)
   * Set up team repository [Codecov](https://app.codecov.io/gh/AY2122S1-CS2103-F09-1/tp/) that enables:
     * Build automation.
-    * Continuous integration, including code coverage and respository-wide checks.
+    * Continuous integration, including code coverage and repository-wide checks.
     
 * **Documentation**:
   * User Guide:
