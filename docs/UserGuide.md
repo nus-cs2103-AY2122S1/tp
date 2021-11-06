@@ -39,13 +39,13 @@ Can't wait to get started? Check out the [Quick Start](#quick-start) to get goin
   * [Retrieving Contacts](#retrieving-contacts)
     * [Listing all contacts: `list`](#listing-all-contacts-list)
     * [Locating contacts: `find`](#locating-contacts-find)
-    * [Filtering by category: `filter`](#filtering-contacts-filter)
+    * [Filtering contacts: `filter`](#filtering-contacts-filter)
     * [Sorting contacts: `sort`](#sorting-the-contacts-sort)
     * [Summarizing contacts: `sum`](#summarizing-contacts-sum)
     * [Viewing a contact : `view`](#viewing-a-contact-view)
   * [Navigating WhereTourGo](#navigating-wheretourgo)
     * [Navigating input history](#navigating-input-history)
-    * [Clicking on Contacts](#clicking-on-contacts)
+    * [Clicking on contacts](#clicking-on-contacts)
   * [Undoing and Redoing](#undoing-and-redoing)
     * [Undoing operations : `undo`](#undoing-operations-undo)
     * [Redoing operations : `redo`](#redoing-operations-redo)
@@ -67,8 +67,9 @@ Can't wait to get started? Check out the [Quick Start](#quick-start) to get goin
 # Quick Start
 1. Ensure you have Java 11 or above installed in your Computer. You may install it
    [here](https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html)
-2. Download the latest `wheretourgo.jar` from [here](update on final)
-
+   
+2. Download the latest `WhereTourGo.jar` from [here](update on final)
+   
 3. Copy the file to the folder you want to use as the _home folder_ for your WhereTourGo
 
 **For Windows**
@@ -124,7 +125,10 @@ In the subsection [Reading this document](#reading-this-document), there are sev
 
 The following section, [Features](#features), details the features in WhereTourGo and how to use them.
 
+To make your navigation easier, click [Back to top](#table-of-contents) located throughout this document to navigate back to the table of contents.
+
 ### Orienting to WhereTourGo
+
 Below is the Home screen of WhereTourGo, with its key components marked out for easy reference:
 
 ![Ui](images/layout.png)
@@ -318,9 +322,9 @@ Format: `delete n/CONTACT_NAME`
 
 Examples:
 * `list` followed by `delete n/Singapore DUCKTours` deletes the contact with name 'Singapore DUCKTours`.
-* `find hotel` followed by `delete n/Mandarin Oriental Singapore` deletes the contact with name 'Mandarin Oriental Singapore'.
+* `filter c/fnb` followed by `delete n/Green on Earth Vegetarian Cafe` deletes the contact with name 'Earth Vegetarian Cafe'.
 
-Expected Outcome for `find hotel` followed by `delete n/Mandarin Oriental Singapore`:
+Expected Outcome for `filter c/fnb` followed by `delete n/Green on Earth Vegetarian Cafe`:
 
 <img src="images/deleteName.png" width="800">
 
@@ -473,7 +477,7 @@ Input history will be reset whenever you exit the app.
 [Back to top](#table-of-contents)
 
 ### Clicking on contacts
-Click on any contact in the [Contacts Pane](##orienting-to-wheretourgo) to view more information about the contact.
+Click on any contact in the [Contacts Pane](#orienting-to-wheretourgo) to view more information about the contact.
 This is equivalent to using a [`view`](#viewing-a-contact-view) command.
 
 [Back to top](#table-of-contents)
@@ -522,6 +526,7 @@ Usage scenario:
 Format: `export`
 * Exports the specified contact from the contact list.
 * The text file will be written with the path `data/export.txt`.
+
 -------------
 Format: `export INDEX`
 
@@ -640,7 +645,7 @@ This folder contains a file called `addressbook.json` which contains all of your
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add c/CATEGORY_CODE n/CONTACT_NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add c/att n/Singapore Flyers p/92345678 e/123@example.com a/30 Raffles Ave, Singapore 039803 t/friend t/colleague`
+**Add** | `add c/CATEGORY_CODE n/CONTACT_NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG] [rv/REVIEW] [ra/RATING]…​` <br> e.g., `add c/att n/Singapore Flyers p/92345678 e/123@example.com a/30 Raffles Ave, Singapore 039803 t/friend t/colleague rv/Great place ra/4`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`<br><br> `delete n/CONTACT_NAME`<br> e.g., `delete n/Marina Bay Sands`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/Adventure Cove e/adventurecove@example.com`

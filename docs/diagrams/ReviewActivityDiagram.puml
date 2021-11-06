@@ -9,7 +9,7 @@ if () then ([contains review field])
   if () then ([contains at least  1 character])
   :Create Review Object;
   else ([else])
-  :Create Review Object with "-No Review";
+  :Create Review Object with "-No Review-";
   endif
 
 else ([else])
