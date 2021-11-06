@@ -667,11 +667,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2. Should be able to hold at least 1000 students, 400 groups and 100 classes without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold at least 1000 students, 400 groups and 99 classes without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. Readable font, at least size 12.
 5. Should not cause noticeable lag for other applications when running.
-6. Light Mode.
+6. Dark Mode.
 7. Able to function in the background.
 8. Able to respond to user actions within three seconds.
 9. A tutorial class should be able to hold up to 20 students.

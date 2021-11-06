@@ -628,7 +628,7 @@ Action | Format, Examples
 **Delete class** | `deletec INDEX`<br> e.g., `listc` followed by `deletec 2`
 **View class** | `viewc INDEX`<br> e.g., `listc` followed by `viewc 3`
 **List all classes** | `listc`
-**Find class** | `findc KEYWORD [MORE_KEYWORDS]`<br> e.g., `findc A02`
+**Find class** | `findc KEYWORD [MORE_KEYWORDS]`<br> e.g., `findc G02`
 **Add Tutorial Group** | `addcg gn/GROUP_NUMBER c/CLASS_CODE type/TYPE` <br> e.g.,`addcg gn/1 c/G01 type/OP1`
 **Delete Tutorial Group** | `deletecg gn/GROUP_NUMBER c/CLASS_CODE type/TYPE` <br> e.g., `deletecg gn/1 c/G11 type/OP1`
 **List Tutorial Group** | `listg`
