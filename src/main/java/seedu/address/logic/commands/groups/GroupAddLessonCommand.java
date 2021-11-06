@@ -9,6 +9,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.ViewingType;
 import seedu.address.model.group.Group;
 import seedu.address.model.id.UniqueIdMapper;
 import seedu.address.model.lesson.Lesson;
@@ -18,7 +19,7 @@ import seedu.address.model.person.Person;
 public class GroupAddLessonCommand extends Command {
 
     public static final String CANNOT_ASSIGN_MESSAGE = " in the group cannot be assigned this lesson";
-    public static final String ADD_LESSON_SUCCESS = "Lesson added: %1$s";
+    public static final String ADD_LESSON_SUCCESS = "Lesson added";
 
     private final Index groupIndex;
     private final Lesson lessonToAdd;
@@ -58,6 +59,8 @@ public class GroupAddLessonCommand extends Command {
         model.setGroup(group, groupWithLesson);
         model.updateLessonWithAttendeesList();
         model.updateFilteredGroupList(Model.PREDICATE_SHOW_ALL_GROUPS);
-        return new CommandResult(String.format(ADD_LESSON_SUCCESS, lessonToAdd));
+        model.setGroupToView(groupWithLesson);
+        model.setViewingType(ViewingType.GROUP);
+        return new CommandResult(ADD_LESSON_SUCCESS);
     }
 }

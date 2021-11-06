@@ -61,7 +61,7 @@ TutorMaster is a desktop app for freelance tutors to manage their students’ de
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-  
+
 * `INDEX` parameters are very common in this application. Ensure that they are a positive integer and is less than 2,147,483,648.
 
 </div>
@@ -184,7 +184,13 @@ Format: `student -al INDEX s/SUBJECT st/START_TIME et/END_TIME d/DAY`
 * `DAY` takes in the following inputs: `Mon Tue Wed Thu Fri Sat Sun`.
 * `START_TIME` and `END_TIME` takes in the time in 24-hour, HH:MM, format. For example `08:00`
   for 8am.
-* Overlapping lessons cannot be added. These include any lessons in groups that the student is in.
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Overlapping lessons:**<br>
+* The same student cannot be allocated to multiple lessons that are overlapping. Overlap is defined as being
+  on the same day and within the same time frame.
+* However, lessons of different students can still overlap. This may be disallowed in a future version.
+</div>
 
 Example:
 * `student -al 1 s/Biology st/08:00 et/09:00 d/Mon` Adds a lesson with the subject name biology
@@ -204,6 +210,9 @@ Format: `student -dl PERSON_INDEX LESSON_INDEX`
 * Specifies the student at `PERSON_INDEX`.
 * Deletes the specified lesson at `LESSON_INDEX` of the student specified.
 * Both `PERSON_INDEX` and `LESSON_INDEX` must be a positive number.
+* The `LESSON_INDEX` can be found by using the [student viewing command](#viewing-a-student-student--v) as shown below.
+
+![studentLessonIndex](images/LessonIndex.png)
 
 Example:
 * `student -dl 1 1` deletes the first lesson from the first student.
@@ -220,6 +229,7 @@ Format: `student -ae INDEX s/SUBJECT d/DATE_TIME`
 * Adds a lesson to the student specified by the `INDEX`.
 * `SUBJECT` takes in any input with at least one alphanumeric character.
 * `DATE_TIME` takes in a date and time in the following format: `yyyy-MM-dd HH:mm`.
+* There are currently no restrictions on `DATE_TIME`, please ensure that the exam dates are correct.
 
 Example:
 * `student -ae 1 s/Math d/2021-12-20 14:00` Adds an exam with the subject name Math
@@ -237,7 +247,10 @@ Format: `student -de PERSON_INDEX EXAM_INDEX`
 * Specifies the student at `PERSON_INDEX`.
 * Deletes the specified lesson at `EXAM_INDEX` of the student specified.
 * Both `PERSON_INDEX` and `EXAM_INDEX` must be a positive number.
+* The `EXAM_INDEX` can be found by using the [student viewing command](#viewing-a-student-student--v), similarly to
+deleting lessons.
 
+Example:
 * `student -de 1 1` deletes the first exam from the first student.
 </details>
 
@@ -293,7 +306,14 @@ Format: `group -al INDEX s/SUBJECT st/START_TIME et/END_TIME d/DAY`
 * `DAY` takes in the following inputs: `Mon Tue Wed Thu Fri Sat Sun`.
 * `START_TIME` and `END_TIME` takes in the time in 24-hour, HH:MM, format. For example `08:00`
   for 8am.
-* Overlapping lessons cannot be added. This will be cross-checked with all lessons for every student in the group.
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Overlapping lessons:**<br>
+* A group cannot be allocated a lesson if any students within the group have overlapping lessons. Overlap is defined as being
+  on the same day and within the same time frame.
+* However, lessons of different students or groups can still overlap. This may be disallowed in a future version.
+</div>
 
 Example:
 * `group -al 1 s/Biology st/08:00 et/09:00 d/Mon` Adds a lesson with the subject name biology
@@ -332,7 +352,7 @@ Examples:
 * `task -a n/CS2100 Lab 1 d/2021-10-10` adds the task "CS2100 Lab 1"
 </details>
 
-### Editing a task 
+### Editing a task
 <details markdown="1">
 <summary>
 Edits a task in the task list.
@@ -369,10 +389,10 @@ Examples:
 * `task -d 1` deletes the task at index 1
 </details>
 
-### Listing all tasks 
+### Listing all tasks
 <details markdown="1">
 <summary>
-Shows a list of all the tasks in the task list. 
+Shows a list of all the tasks in the task list.
 </summary>
 
 Format: `task -l`
@@ -545,6 +565,9 @@ Action | Format, Examples
 **Add an exam to a student** | `student -ae INDEX s/SUBJECT d/DATE_TIME` <br> e.g. `student -ae 1 s/Math d/2021-12-20 14:00`
 **Remove an exam from a student** | `student -de PERSON_INDEX EXAM_INDEX` <br> e.g. `student -de 1 1`
 **Group students** | `student -g GROUPNAME INDEX1 INDEX2 INDEX3 ...​` <br> e.g., `student -g Team2 1 3 5`
+**Delete a group** | `group -d INDEX​` <br> e.g., `group -d 2`
+**Add a lesson to a group** | `group -al INDEX s/SUBJECT st/START_TIME et/END_TIME d/DAY` <br> e.g. `group -al 1 s/Chinese st/16:00 et/18:00 d/Thu`
+**Remove a lesson from a group** | `group -dl GROUP_INDEX LESSON_INDEX` <br> e.g. `group -dl 1 1`
 **Add a task** | `task -a n/NAME​` <br> e.g., `task -a n/CS2100 Lab 1`
 **Edit a task** | `task -e INDEX [n/NAME] [d/DEADLINE] [c/COMPLETED]​` <br> e.g., `task -e 4 d/20211231 c/true`
 **View a task** | `task -v INDEX​` <br> e.g., `task -v 2`

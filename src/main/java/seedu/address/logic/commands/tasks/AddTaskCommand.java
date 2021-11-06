@@ -17,11 +17,11 @@ public class AddTaskCommand extends Command {
 
     public static final String COMMAND_WORD = "-a";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the address book. "
+    public static final String MESSAGE_USAGE = "task " + COMMAND_WORD + ": Adds a task to the address book. \n"
             + "Parameters: "
             + PREFIX_DESCRIPTION + "NAME "
             + PREFIX_DEADLINE + "DEADLINE\n"
-            + "Example: " + COMMAND_WORD + " "
+            + "Example: " + " task " + COMMAND_WORD + " "
             + PREFIX_DESCRIPTION + "Report 1 "
             + PREFIX_DEADLINE + "2021-01-01";
 
