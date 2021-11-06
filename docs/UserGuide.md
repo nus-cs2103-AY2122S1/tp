@@ -45,7 +45,7 @@ Agents that aids their operations by:
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `listcontact`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `allcontact`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
@@ -66,11 +66,11 @@ Examples:
 * `addcontact n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `addcontact n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-#### Listing all contacts : `listcontact`
+#### Listing all contacts : `allcontact`
 
 Shows a list of all contacts in the application.
 
-Format: `listcontact`
+Format: `allcontact`
 
 #### Editing a contact : `editcontact`
 
@@ -100,7 +100,7 @@ Format: `deletecontact INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `listcontact` followed by `deletecontact 2` deletes the 2nd contact in the application.
+* `allcontact` followed by `deletecontact 2` deletes the 2nd contact in the application.
 * `findcontact Betsy` followed by `deletecontact 1` deletes the 1st contact in the results of the `find` command.
 
 ### Policy Management
@@ -142,11 +142,11 @@ coverage expires on 2021-12-12, tagged Aviva.
 quarterly payments of $300, 120 total payments, commission of 10% on the first 30 payments,
 belonging to the contact with index 2.
 
-#### Listing All Policies : `listpolicy`
+#### Listing All Policies : `allpolicy`
 
 Shows a list of all policies.
 
-Format: `listpolicy`
+Format: `allpolicy`
 
 #### Editing a policy : `editpolicy`
 
@@ -292,12 +292,12 @@ Action | Format, Examples
 **Add Contact** | `addcontact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `addcontact n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Delete Contact** | `deletecontact INDEX`<br> e.g., `deletecontact 3`
 **Edit Contact** | `editcontact INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`editcontact 2 n/James Lee e/jameslee@example.com`
-**List Contacts** | `listcontact`
+**List Contacts** | `allcontact`
 **Find Contacts** | `findcontact KEYWORD`
 **Add Policy** | `addpolicy n/POLICY_NAME p/PMT_AMOUNT_CENTS [PMTS_PER_YR] [NUM_OF_PMTS] c/COMMISSION_% NUM_OF_COMM cl/CONTACT_INDEX [e/COVERAGE_EXPIRY_DATE] [t/TAG]…​`
 **Delete Policy** | `deletepolicy INDEX`
 **Edit Policy** | `editpolicy INDEX [n/POLICY_NAME] [p/PMT_AMOUNT_CENTS [PMTS_PER_YR] [NUM_OF_PMTs]] [c/COMMISSION_% NUM_OF_COMM] [cl/CONTACT_INDEX] [e/COVERAGE_EXPIRY_DATE] [t/TAG]…​`
-**List Policies** | `listpolicy`
+**List Policies** | `allpolicy`
 **List Contact's Policies** | `contactpolicy CONTACT_INDEX`
 **Clear Contact's Policies** | `clearpolicy CONTACT_INDEX`
 **Show Expiring Policies** | `expiringpolicy`
