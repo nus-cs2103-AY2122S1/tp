@@ -1379,7 +1379,7 @@ of existing `Lessons` found in TuitiONE.
         Expected: Only students who are enrolled in the lesson identified by the lesson index of `2` will be shown in 
 the student list. The lesson list will be updated to show the lesson identified by the lesson index of `2`. No student
 or lesson shown if there is no student enrolled in the lesson identified by the lesson index of `2`. An update message
-showing the number and the name of the students who are enrolled in the lesson will also be shown in the message box.
+showing the number and the name of the students who are enrolled in the lesson will also be displayed in the message box.
 
     * Incorrect roster by passing in nothing or non-number as parameter: `roster`, `roster a`, `roster -`, 
 `roster LESSON_CODE`<br>
