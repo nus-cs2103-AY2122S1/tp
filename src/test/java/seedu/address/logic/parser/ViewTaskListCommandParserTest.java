@@ -26,9 +26,10 @@ public class ViewTaskListCommandParserTest {
     @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "a", String.format(
-                MESSAGE_INVALID_COMMAND_FORMAT, ViewTaskListCommand.MESSAGE_USAGE));
+                MESSAGE_INVALID_COMMAND_FORMAT, ViewTaskListCommand.MESSAGE_USAGE)
+        );
     }
-    
+
     @Test
     public void parse_validArgsWithoutFlag_success() {
         assertParseSuccess(parser, "-A", new ViewTaskListCommand());
