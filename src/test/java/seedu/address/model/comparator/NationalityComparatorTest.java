@@ -42,8 +42,8 @@ public class NationalityComparatorTest {
         Person p6 = new PersonBuilder().withNationality("").build();
 
         // If either person has null Nationality
-        assertTrue(comparator.compare(p1, p6) > 0);
-        assertTrue(comparator.compare(p6, p1) < 0);
+        assertTrue(comparator.compare(p1, p6) < 0);
+        assertTrue(comparator.compare(p6, p1) > 0);
 
         // If both have Nationality, sorted alphabetically
         assertTrue(comparator.compare(p1, p3) < 0);

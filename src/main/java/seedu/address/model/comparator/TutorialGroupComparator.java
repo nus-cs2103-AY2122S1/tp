@@ -8,13 +8,13 @@ public class TutorialGroupComparator implements Comparator<Person> {
 
     @Override
     public int compare(Person p1, Person p2) {
-        if (p1.getTutorialGroup() == null) {
-            if (p2.getTutorialGroup() == null) {
+        if (p1.getTutorialGroup().toString().isEmpty()) {
+            if (p2.getTutorialGroup().toString().isEmpty()) {
                 return 0;
             }
             return 1;
         }
-        if (p2.getTutorialGroup() == null) {
+        if (p2.getTutorialGroup().toString().isEmpty()) {
             return -1;
         }
         return p1.getTutorialGroup().toString().toLowerCase().compareTo(p2.getTutorialGroup().toString().toLowerCase());

@@ -42,8 +42,8 @@ public class PhoneComparatorTest {
         Person p6 = new PersonBuilder().withPhone("").build();
 
         // If either person has null Phone
-        assertTrue(comparator.compare(p1, p6) > 0);
-        assertTrue(comparator.compare(p6, p1) < 0);
+        assertTrue(comparator.compare(p1, p6) < 0);
+        assertTrue(comparator.compare(p6, p1) > 0);
 
         // If both have Phone, sorted alphabetically
         assertTrue(comparator.compare(p1, p3) < 0);

@@ -40,8 +40,8 @@ public class EmailComparatorTest {
         Person p4 = new PersonBuilder().withEmail("").build();
 
         // If either person has null Email
-        assertTrue(comparator.compare(p1, p4) > 0);
-        assertTrue(comparator.compare(p4, p1) < 0);
+        assertTrue(comparator.compare(p1, p4) < 0);
+        assertTrue(comparator.compare(p4, p1) > 0);
 
         // If both person have null Email
         assertTrue(comparator.compare(p4, p3) == 0);
