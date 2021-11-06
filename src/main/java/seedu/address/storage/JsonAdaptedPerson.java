@@ -36,7 +36,7 @@ public class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
-    private boolean isFavourite;
+    private boolean isFavorite;
     private final HashMap<String, Double> gitStats;
     private final Image image;
 
@@ -52,7 +52,7 @@ public class JsonAdaptedPerson {
             @JsonProperty("email") String email,
             @JsonProperty("address") String address,
             @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
-            @JsonProperty("isFavourite") boolean isFavourite,
+            @JsonProperty("isFavorite") boolean isFavorite,
             @JsonProperty("gitStats") HashMap<String, Double> gitStats,
             @JsonProperty("image") Image image) {
         this.name = name;
@@ -64,7 +64,7 @@ public class JsonAdaptedPerson {
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
-        this.isFavourite = isFavourite;
+        this.isFavorite = isFavorite;
         this.gitStats = gitStats;
         this.image = image;
     }
@@ -82,7 +82,7 @@ public class JsonAdaptedPerson {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        isFavourite = source.isFavourite();
+        isFavorite = source.isFavorite();
         image = source.getProfilePicture();
         gitStats = source.getGitStats();
     }
@@ -176,21 +176,21 @@ public class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        final boolean modelIsFavourite = isFavourite;
+        final boolean modelIsFavorite = isFavorite;
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
         if (image == null || isDefaultImage(image)) {
             return new Person(modelName, modelTelegram, modelGithub, modelPhone,
-                    modelEmail, modelAddress, modelTags, modelIsFavourite);
+                    modelEmail, modelAddress, modelTags, modelIsFavorite);
         }
 
         if (gitStats == null || gitStats.isEmpty()) {
             return new Person(modelName, modelTelegram, modelGithub, modelPhone,
-                    modelEmail, modelAddress, modelTags, modelIsFavourite, image);
+                    modelEmail, modelAddress, modelTags, modelIsFavorite, image);
         } else {
             return new Person(modelName, modelTelegram, modelGithub, modelPhone,
-                    modelEmail, modelAddress, modelTags, modelIsFavourite, image, gitStats);
+                    modelEmail, modelAddress, modelTags, modelIsFavorite, image, gitStats);
         }
     }
 

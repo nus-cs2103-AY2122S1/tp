@@ -7,7 +7,7 @@
     "email" : null,
     "address" : null,
     "tagged" : [ ],
-    "isFavourite" : false,
+    "isFavorite" : false,
     "gitStats" : null,
     "image" : null
   }

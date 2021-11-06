@@ -84,7 +84,7 @@ public class StorageManagerTest {
             userProfile = JsonUtil.readJsonFile(profileFilePath,
                     JsonSerializableUserProfile.class);
             try {
-                storageManager.saveUserProfile(userProfile.get());
+                userProfileStorage.saveUserProfile(userProfile.get());
             } catch (IOException e) {
                 assertNull(e);
             }
@@ -122,7 +122,7 @@ public class StorageManagerTest {
             userProfile = JsonUtil.readJsonFile(profileFilePath,
                     JsonSerializableUserProfile.class);
             try {
-                storageManager.saveUserProfile(userProfile.get());
+                userProfileStorage.saveUserProfile(userProfile.get());
             } catch (IOException e) {
                 assertNull(e);
             }

@@ -80,16 +80,16 @@ public interface Model {
     void deletePerson(Person target);
 
     /**
-     * Favourites the given person.
+     * Favorites the given person.
      * The person must exist in the address book.
      */
-    void favouritePerson(Person target);
+    void favoritePerson(Person target);
 
     /**
-     * Favourites the given person.
+     * Favorites the given person.
      * The person must exist in the address book.
      */
-    void unfavouritePerson(Person target);
+    void unfavoritePerson(Person target);
 
     /**
      * Adds the given person.

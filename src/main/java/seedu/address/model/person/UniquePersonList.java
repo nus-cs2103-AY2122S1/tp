@@ -82,17 +82,17 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * Favourites the equivalent person from the list.
+     * Favorites the equivalent person from the list.
      * The person must exist in the list.
      */
-    public void favourite(Person toFavourite) {
-        requireNonNull(toFavourite);
-        if (!internalList.stream().anyMatch(x -> x.equals(toFavourite))) {
+    public void favorite(Person toFavorite) {
+        requireNonNull(toFavorite);
+        if (!internalList.stream().anyMatch(x -> x.equals(toFavorite))) {
             throw new PersonNotFoundException();
         } else {
             internalList.forEach(person -> {
-                if (person.equals(toFavourite)) {
-                    person.setIsFavourite();
+                if (person.equals(toFavorite)) {
+                    person.setIsFavorite();
                 }
             }
             );
@@ -100,17 +100,17 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * Un-favourites the equivalent person from the list.
+     * Un-favorites the equivalent person from the list.
      * The person must exist in the list.
      */
-    public void unfavourite(Person toUnfavourite) {
-        requireNonNull(toUnfavourite);
-        if (!internalList.stream().anyMatch(x -> x.equals(toUnfavourite))) {
+    public void unfavorite(Person toUnfavorite) {
+        requireNonNull(toUnfavorite);
+        if (!internalList.stream().anyMatch(x -> x.equals(toUnfavorite))) {
             throw new PersonNotFoundException();
         } else {
             internalList.forEach(person -> {
-                if (person.equals(toUnfavourite)) {
-                    person.setIsNotFavourite();
+                if (person.equals(toUnfavorite)) {
+                    person.setIsNotFavorite();
                 }
             }
             );

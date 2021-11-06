@@ -104,7 +104,7 @@ public class TagCommand extends Command {
 
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getTelegram(), personToEdit.getGithub(),
                 personToEdit.getPhone(), personToEdit.getEmail(), personToEdit.getAddress(), newTags,
-                personToEdit.isFavourite(), personToEdit.getProfilePicture(), personToEdit.getGitStats());
+                personToEdit.isFavorite(), personToEdit.getProfilePicture(), personToEdit.getGitStats());
 
         model.setPerson(personToEdit, editedPerson);
         if (model.getPersonListControl() != null) {
