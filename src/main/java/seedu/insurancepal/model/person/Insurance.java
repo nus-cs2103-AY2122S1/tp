@@ -12,7 +12,7 @@ import seedu.insurancepal.commons.exceptions.IllegalValueException;
  */
 public class Insurance {
     /** The suffix that is added to the end of each insurance type */
-    public static final String INSURANCE_SUFFIX = " insurance";
+    public static final String INSURANCE_SUFFIX = " ins.";
     public static final String INVALID_ARG_SUFFIX = " is not an insurance type";
     public static final String LONG_INSURANCE_PREFIX = "Insurance '";
     public static final String LONG_INSURANCE_SUFFIX = "' is longer than 20 characters";
@@ -21,7 +21,7 @@ public class Insurance {
             + String.join(", ", Arrays.stream(InsuranceType.values())
                     .map(InsuranceType::getTypeName)
                     .collect(Collectors.toList()));
-    public static final int MAX_INSURANCE_LENGTH = 30;
+    public static final int MAX_INSURANCE_LENGTH = 24;
 
     private InsuranceType type;
     private String brand;
