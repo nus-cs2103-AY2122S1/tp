@@ -80,9 +80,12 @@ public class SampleDataUtil {
         Student[] students = getSampleStudents();
         Lesson[] lessons = getSampleLessons();
 
-        Student bernice = students[1];
-        Lesson math = lessons[1];
-        math.enrollStudent(bernice);
+        Student alex = students[0];
+//        Student bernice = students[1];
+        Lesson science = lessons[0];
+//        Lesson math = lessons[1];
+        science.enrollStudent(alex);
+//        math.enrollStudent(bernice);
 
         Tuitione sampleAb = new Tuitione();
         for (Student sampleStudent : students) {
