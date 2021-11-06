@@ -11,6 +11,9 @@ import seedu.address.commons.util.StringUtil;
 public class NameContainsKeywordsPredicate implements Predicate<Student> {
     private final List<String> keywords;
 
+    /**
+     * Creates a {@code NameContainsKeywordsPredicate} with the given list of keywords.
+     */
     public NameContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }

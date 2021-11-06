@@ -45,7 +45,7 @@ public class StudentStatistics {
      * @return array of {@code Map<String, Number>} where the first element contains the mean distribution,
      * and the second element contains the median distribution.
      */
-    private Map<String, Number>[] getDataSet() {
+    public Map<String, Number>[] getDataSet() {
         Map<String, Number> mean = new LinkedHashMap<>();
         Map<String, Number> median = new LinkedHashMap<>();
         scoreMap.forEach((assessment, score) -> {

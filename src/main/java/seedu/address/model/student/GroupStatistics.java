@@ -39,7 +39,7 @@ public class GroupStatistics {
     /**
      * Returns true if more than one student in group is graded in {@code assessment}.
      */
-    private boolean isGraded(Assessment assessment) {
+    public boolean isGraded(Assessment assessment) {
         for (ID id : studentList) {
             if (assessment.isGraded(id)) {
                 return true;
@@ -51,7 +51,7 @@ public class GroupStatistics {
     /**
      * Returns median score of students in group who are graded in {@code assessment}.
      */
-    private double getMedian(Assessment assessment) {
+    public double getMedian(Assessment assessment) {
         int count = 0;
         ArrayList<Score> scores = new ArrayList<>();
         for (ID id : studentList) {
@@ -86,7 +86,7 @@ public class GroupStatistics {
      * the second element contains the cohort mean distribution,
      * and the third element contains the cohort median distribution.
      */
-    private Map<String, Number>[] getDataSet() {
+    public Map<String, Number>[] getDataSet() {
         Map<String, Number> groupMedian = new LinkedHashMap<>();
         Map<String, Number> cohortMean = new LinkedHashMap<>();
         Map<String, Number> cohortMedian = new LinkedHashMap<>();

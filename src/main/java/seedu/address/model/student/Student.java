@@ -78,7 +78,6 @@ public class Student {
      * Adds all scores provided
      */
     public void addScores(Map<Assessment, Score> scores) {
-        // TODO: feel free to edit this as you need
         this.scores.putAll(scores);
     }
 
