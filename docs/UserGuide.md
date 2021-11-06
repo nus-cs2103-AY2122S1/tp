@@ -226,6 +226,7 @@ Scroll down to the bottom and click on `recruitIn.jar`.
 </div>
 
 ### Viewing help : `help`
+[Table of contents](#table-of-contents)
 
 Shows a message explaining how to access the help page.
 
@@ -233,8 +234,8 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-
 ### Adding an applicant: `add`
+[Table of contents](#table-of-contents)
 
 Adds an applicant to RecruitIn.
 
@@ -274,6 +275,7 @@ Examples:
 </div>
 
 ### Editing an applicant : `edit`
+[Table of contents](#table-of-contents)
 
 Edits an applicant's with specified index in RecruitIn.
 
@@ -318,6 +320,7 @@ Examples:
 </div>
 
 ### Listing all applicants : `list`
+[Table of contents](#table-of-contents)
 
 Shows a list of all applicants in RecruitIn.
 
