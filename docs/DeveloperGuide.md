@@ -314,6 +314,23 @@ When the `ClearCommand#execute()` method is called,
 - For each `Module` in the list, the `Module` is replaced by a copy of it without `AcademicCalander` field.
 - A `CommandResult` is returned with the updated `Model`.
 
+Below is a sequence diagram, and an explanation of how `ClearCommand` is executed.
+![ClearCommand](images/ClearCommandSequenceDiagram.png)
+
+**Step 1.** The user enters the command "clear 2 y/1 s/1".
+
+**Step 2.** ModuleTrackerParser takes in the user's input, and calls `ClearCommandParser#parse` to create a `ClearCommand` object containing the data parsed from the user input.
+
+**Step 3.** The `ClearCommand` is then executed by calling its `execute` method.
+
+**Step 4.** The list of modules that is planed to take in the indicating semester is obtained from the `Model`.
+
+**Step 5.** For each module in the filtered list, the academic plan is removed from the module.
+
+**Step 6.** The `Model` is updated to reflect this change in the Mod Tracker.
+
+
+
 #### Design Considerations:
 
 **Aspect: How should clear command work**
@@ -337,6 +354,40 @@ When the `ClearCommand#execute()` method is called,
       - All modules stored in the storage in advance will be deleted as well
       - User need to add all the modules again, once the clear command is called
       - It will be expensive, if the user accidentally use clear command
+
+### Edit Module feature
+
+####Implementation
+
+The `edit` command is implemented via the `EditCommand`, `EditCommandParser` and `EditModuleDescriptor` classes.
+
+The `EditCommandParser` class implements the `Parser` interface.
+The `EditCommandParser#parse()` method is responsible for parsing the user input to retrieve the index of the module, fields user want to edit and its new value. The method will return an `EditCommand` object with parsed user input as its argument.
+
+The `EditModuleDescriptor` is responsible for storing the details to edit the module with and replacing each non-empty field value to corresponding field value of the module.
+
+The `EditCommand` class extends the `Command` class and implements the `EditCommand#execute()` method which handles the main logic of the class.
+It contains non-null `index` and `editModuleDescriptor` fields.
+When the `EditCommand#execute()` method is called,
+- The `Module` object corresponding to the `index` is found from the `Model`.
+- Create an edited copy of the module, and replace the original module.  
+- A `CommandResult` is returned with the updated `Model`.
+
+Below is an example sequence diagram and an explanation on how `EditCommand` is executed.
+![EditCommand](images/EditCommandSequenceDiagram.png)
+
+**Step 1.** The user enters the command "edit 1 c/2101".
+
+**Step 2.** ModuleTrackerParser takes in the user's input, and calls `EditCommandParser#parse` to create an `EditCommand` object containing the data parsed from the user input.
+
+**Step 3.** The `EditCommand` is then executed by calling its `execute` method.
+
+**Step 4.** The module at the specified index (`2`) in the list is obtained from the `Model`.
+
+**Step 5.** A copy of this module after substituting the edited fields with new values is created. 
+
+**Step 6.** The specified module in the `Model` is then replaced by the edited copy. The `Model` is updated to reflect this change in the Mod Tracker.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -516,9 +567,33 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
+**UC2: Edit a module**
+
+**MSS**
+
+1. User requests to edit a specific module in the database.
+2. NUS Mod Tracker edits the module.
+
+    Use case ends.
+
+**Extension**
+
+* 1a. The given module index or arguments are invalid.
+    * 1a1. NUS Mod Tracker shows an error message.
+    
+    Use case resumes at step 1.
+* 1b. The user failed to provide any mandatory details to be edited.
+    * 1b1. NUS Mod Tracker shows an error message.
+    
+    Use case resumes at step 1.
+* 1c. The new value that is given to the code field is already exists in the database.
+    * 1c1. NUS Mod Tracker shows an error message.
+    
+    Use case resumes at step 1.
+
 #### Academic Plan Features
 
-**UC2: Add a Module to the Academic Plan**
+**UC3: Add a Module to the Academic Plan**
 
 **MSS**
 
@@ -533,7 +608,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
     Use case resumes at step 1.
 
-**UC3: Remove a Module from the Academic Plan**
+**UC4: Remove a Module from the Academic Plan**
 
 **MSS**
 
@@ -551,9 +626,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1b1. NUS Mod Tracker shows an error message.
     
     Use case resumes at step 1.
+    
+**UC5: Remove all modules in a specific semester from the academic plan**
 
+**MSS**
 
-*{More to be added}*
+1. User requests to remove modules in a specific semester from the academic plan.
+2. NUS Mod Tracker removes all modules in that semester from the academic plan.
+
+    Use case ends.
+
+**Extension**
+
+* 1a. The given semester is invalid.
+    * 1a1. NUS Mod Tracker shows an error message.
+    
+    Use case resumes at step 1.
 
 ### Non-Functional Requirements
 
