@@ -3,6 +3,7 @@ package seedu.address.model.client;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CLIENTID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CLIENTID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CURRENTPLAN_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DISPOSABLEINCOME_BOB;
@@ -36,7 +37,7 @@ public class ClientTest {
         // null -> returns false
         assertFalse(ALICE.isSameClient(null));
 
-        // same email and client ID, all other attributes different -> returns true
+        // same email, name and client ID, all other attributes different -> returns true
         Client editedAlice = new ClientBuilder(ALICE).withPhone(VALID_PHONE_BOB)
                 .withAddress(VALID_ADDRESS_BOB).withRiskAppetite(VALID_RISKAPPETITE_BOB)
                 .withDisposableIncome(VALID_DISPOSABLEINCOME_BOB).withCurrentPlan(VALID_CURRENTPLAN_BOB)
@@ -47,12 +48,23 @@ public class ClientTest {
         editedAlice = new ClientBuilder(ALICE).withClientId(VALID_CLIENTID_BOB).build();
         assertTrue(ALICE.isSameClient(editedAlice));
 
-        // different email, all other attributes same -> returns true
-        editedAlice = new ClientBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
-        assertTrue(ALICE.isSameClient(editedAlice));
+        // same email, all other attributes different -> returns false
+        editedAlice = new ClientBuilder(ALICE).withClientId(VALID_CLIENTID_BOB).withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB).withAddress(VALID_ADDRESS_BOB).withRiskAppetite(VALID_RISKAPPETITE_BOB)
+                .withDisposableIncome(VALID_DISPOSABLEINCOME_BOB).withCurrentPlan(VALID_CURRENTPLAN_BOB)
+                .withLastMet(VALID_LASTMET_BOB).withTags(VALID_TAG_HUSBAND).build();
+        assertFalse(ALICE.isSameClient(editedAlice));
+
+        // same name, all other attributes different -> returns false
+        editedAlice = new ClientBuilder(ALICE).withClientId(VALID_CLIENTID_BOB).withEmail(VALID_EMAIL_BOB)
+                .withPhone(VALID_PHONE_BOB).withAddress(VALID_ADDRESS_BOB).withRiskAppetite(VALID_RISKAPPETITE_BOB)
+                .withDisposableIncome(VALID_DISPOSABLEINCOME_BOB).withCurrentPlan(VALID_CURRENTPLAN_BOB)
+                .withLastMet(VALID_LASTMET_BOB).withTags(VALID_TAG_HUSBAND).build();
+        assertFalse(ALICE.isSameClient(editedAlice));
 
         // email and name differs in case, all other attributes same -> returns false
-        Client editedBob = new ClientBuilder(BOB).withEmail(VALID_EMAIL_BOB.toUpperCase()).withName("Not Bob").build();
+        Client editedBob = new ClientBuilder(BOB).withClientId(VALID_CLIENTID_AMY)
+                .withEmail(VALID_EMAIL_BOB.toUpperCase()).withName("Not Bob").build();
         assertFalse(BOB.isSameClient(editedBob));
     }
 

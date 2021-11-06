@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.client.Address;
 import seedu.address.model.client.Client;
@@ -109,7 +108,7 @@ class JsonAdaptedClient {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
 
-        final ClientId modelClientId = new ClientId(clientId);
+        final ClientId modelClientId = ParserUtil.parseClientId(clientId);
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
@@ -130,10 +129,7 @@ class JsonAdaptedClient {
         if (lastMet == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, LastMet.class.getSimpleName()));
         }
-        if (!StringUtil.isValidDate(lastMet)) {
-            throw new IllegalValueException(LastMet.MESSAGE_CONSTRAINTS);
-        }
-        final LastMet modelLastMet = new LastMet(lastMet);
+        final LastMet modelLastMet = ParserUtil.parseLastMet(lastMet);
 
         if (nextMeeting == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,

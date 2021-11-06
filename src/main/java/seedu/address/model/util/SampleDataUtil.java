@@ -1,5 +1,6 @@
 package seedu.address.model.util;
 
+import static java.lang.String.valueOf;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Arrays;
@@ -39,8 +40,8 @@ public class SampleDataUtil {
                 new Email("alexyeoh@example.com"), new Address("Blk 30 Geylang Street 29, #06-40"),
                 new RiskAppetite("1"), new DisposableIncome("500"),
                 new CurrentPlan(
-                    "Prudential PRUwealth, AIA Pro Achiever 2.0, Syfe Select, a lot more plans......."
-                        + ", Even more plans................................."),
+                    "Prudential PRUwealth, AIA Pro Achiever 2.0, Syfe Select, a lot more plans..."
+                        + ", Even more plans..."),
                 new LastMet("24-01-2021"),
                 new NextMeeting("25-12-2021", "08:00", "09:00", "Starbucks @ UTown", "Alex Yeoh"),
                 getTagSet(addressBook, "friends")),
@@ -84,6 +85,8 @@ public class SampleDataUtil {
             for (Client sampleClient : getSampleClients(sampleAb)) {
                 sampleAb.addClient(sampleClient);
             }
+            int numOfClients = getSampleClients(sampleAb).length;
+            sampleAb.setClientCounter(valueOf(numOfClients)); // indexing starts from 0
         } catch (ParseException e) {
             logger.warning("Sample data file not in the correct format. Will be starting with an empty AddressBook");
             return new AddressBook();
@@ -123,20 +126,6 @@ public class SampleDataUtil {
         }
 
         return new Tag(trimmedTag);
-    }
-
-    /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
-     */
-    private static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
-        }
-
-        return tagSet;
     }
 
     /**

@@ -38,7 +38,6 @@ public class ModelManager implements Model {
     private final SortedList<Client> sortedClients;
     private final FilteredList<Client> filteredClients;
     private final FilteredList<Client> clientToView;
-    private final SortedList<Client> sortedNextMeetings;
     private final FilteredList<Client> shownNextMeetings;
     private final FilteredList<Tag> filteredTags;
     private final AddressBookList addressBookList;
@@ -66,14 +65,13 @@ public class ModelManager implements Model {
         sortedClients = new SortedList<>(clientList);
         filteredClients = new FilteredList<>(sortedClients);
 
-        sortedNextMeetings = new SortedList<>(checkAllNextMeetings(this.addressBook.getClientList()));
-        shownNextMeetings = new FilteredList<>(sortedNextMeetings);
+        shownNextMeetings = new FilteredList<>(checkAllNextMeetings(clientList));
 
 
         // TODO: filter by colors, etc
         filteredTags = new FilteredList<>(this.addressBook.getTagList());
 
-        clientToView = new FilteredList<>(this.addressBook.getClientList());
+        clientToView = new FilteredList<>(clientList);
         clientToView.setPredicate(PREDICATE_SHOW_ALL_CLIENTS.negate());
     }
 
@@ -330,9 +328,13 @@ public class ModelManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
-            && userPrefs.equals(other.userPrefs)
-            && filteredClients.equals(other.filteredClients)
-            && filteredTags.equals(other.filteredTags)
-            && clientToView.equals(other.clientToView);
+                && userPrefs.equals(other.userPrefs)
+                && sortedClients.equals(other.sortedClients)
+                && filteredClients.equals(other.filteredClients)
+                && filteredTags.equals(other.filteredTags)
+                && clientToView.equals(other.clientToView)
+                && shownNextMeetings.equals(other.shownNextMeetings)
+                && addressBookList.equals(other.addressBookList)
+                && themeList.equals(other.themeList);
     }
 }

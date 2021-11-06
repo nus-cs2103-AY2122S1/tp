@@ -1,11 +1,11 @@
 /* VARIABLE DEFINITIONS */
 * {
-    -fx-base1: #cb997e;
-    -fx-base2: #eddcd2;
-    -fx-base3: #fff1e6;
-    -fx-base4: #f0efeb;
-    -fx-base5: #ddbea9;
-    -fx-font-color: derive(-fx-base1, -30%);
+    -fx-base1: #533747;
+    -fx-base2: #5f506b;
+    -fx-base3: #6a6b83;
+    -fx-base4: #76949f;
+    -fx-base5: #86bbbd;
+    -fx-font-color: #ffffff;
     -fx-font-color-bright: #ffffff;
     -fx-menu-color: #263238;
     -fx-menu-color-highlighted: #455a64;

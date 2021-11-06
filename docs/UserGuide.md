@@ -295,6 +295,7 @@ Finds clients whose contacts match with the given keywords.
 
 ### 5.9 Filter current list by keywords : `filter`
 
+
 Filters the current list by the given keywords.
  
 | Format | `filter KEYWORD... <attribute>/{ATTRIBUTE_KEYWORD}...` <br> <br>• `KEYWORD` will be used to match with all attribute of the client. <br> • `{ATTRIBUTE_KEYWORD}` refers to the keyword that is to be matched with the corresponding client attribute.|
