@@ -43,6 +43,11 @@ Managera is OS-independent, meaning it will work on any operating system (Window
 - [**Valid emails**](#valid-emails)    
 - [**Saving the data**](#saving-the-data)
 - [**Editing the data file**](#editing-the-data-file)
+- [**Features in the next update v1.5**](#features-in-the-next-update-v15)
+    * [Undone Event](#undo-event-undone)
+- [**Modifications in the next update v1.5**](#modifications-in-the-next-update-v15)
+    * [Event time period](#event-time-period)
+    * [Detect schedule clashes](#detect-clashes-in-schedule)
 - [**Glossary**](#glossary)
 - [**FAQ**](#faq)
 - [**Command summary**](#command-summary)
@@ -595,6 +600,40 @@ update data directly by editing that data file.
 If your changes to the data file makes its format invalid, Managera will discard all data and start with an empty data 
 file at the next run.
 </div>
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Features in the next update v1.5: 
+
+### Undo Event: `undone`
+
+Marks the specified Event in Managera as undone.
+
+Format: `undone INDEX`
+
+* Marks the completed(done) Event at the specified INDEX as undone.
+* The index refers to the index number of the Event shown in the displayed Event list.
+* The index must be a positive integer 1, 2, 3, …​
+
+Example Usage:
+
+* `undone 3` - Marks the 3rd Event in the displayed Event list as undone.
+
+
+## Modifications in the next update v1.5:
+
+### Event Time period
+
+Currently, Events only have a start datetime and does not have an ending datetime. In v1.5, Events will be revamped to
+include have an additional ending datetime. This will allow Events to occupy a period of time instead of a specific date
+and time. More details of the revamp will be made available in v1.5 Patch notes when it is released.
+
+### Detect clashes in schedule
+
+Currently, Participants can be enrolled to infinite number of Events regardless of whether there are schedule clashes.
+Enrolling Participants would require users to be aware of possible clashes. With the implementation of Event Time period,
+updates will also include a mechanism to check for schedule clashes in v1.5. This will reduce the hassle for users to
+check for possible schedule clashes.
 
 --------------------------------------------------------------------------------------------------------------------
 
