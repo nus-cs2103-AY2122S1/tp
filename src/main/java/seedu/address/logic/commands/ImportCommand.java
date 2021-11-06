@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.commons.util.FileUtil.isValidFileName;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -40,7 +42,8 @@ public class ImportCommand extends Command {
             "Problem while reading from the file";
     public static final String MESSAGE_FILE_NOT_FOUND = "File not found. Please try again";
     public static final String MESSAGE_DUPLICATE_PERSON = "Invalid file. %s";
-    public static final String MESSAGE_WRONG_FORMAT = "Imported file must be in JSON format";
+    public static final String MESSAGE_WRONG_FORMAT = "Imported file must be in JSON format and "
+            + "should not contain any special characters";
 
     private final String importedFileName; // fileName.json
 
@@ -55,6 +58,9 @@ public class ImportCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        if (!isValidFileName(importedFileName)) {
+            throw new CommandException(MESSAGE_WRONG_FORMAT);
+        }
 
         Path importedFilePath;
         int contactsAdded;

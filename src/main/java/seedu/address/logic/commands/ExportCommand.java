@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.FileUtil.isValidFileName;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -29,7 +30,8 @@ public class ExportCommand extends Command {
     public static final String MESSAGE_SUCCESS = "File successfully exported as JSON format to %s";
     public static final String MESSAGE_IO_ERROR =
             "Problem while writing to the file. Please try again";
-    public static final String MESSAGE_WRONG_FORMAT = "File can only be exported to JSON format";
+    public static final String MESSAGE_WRONG_FORMAT = "File can only be exported to JSON format "
+            + "and cannot contain any special characters";
 
     private final String outputFileName; // fileName.json
 
@@ -46,6 +48,11 @@ public class ExportCommand extends Command {
         requireNonNull(model);
         requireNonNull(model.getAddressBook());
         requireNonNull(outputFileName);
+
+        if (!isValidFileName(outputFileName)) {
+            throw new CommandException(MESSAGE_WRONG_FORMAT);
+        }
+
         Path outputFilePath;
 
         try {

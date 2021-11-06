@@ -14,6 +14,11 @@ import seedu.address.Main;
  */
 public class FileUtil {
 
+    /**
+     * Prevents file names with special characters
+     */
+    public static final String VALIDATION_REGEX = "^[\\w,\\s-]+\\.[A-Za-z]{4}$";
+
     private static final String CHARSET = "UTF-8";
 
     public static boolean isFileExists(Path file) {
@@ -86,5 +91,16 @@ public class FileUtil {
     public static String getCurrentPath() throws URISyntaxException {
         return String.valueOf(Main.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath());
     }
+
+    /**
+     * Returns true if a given string is a valid file name.
+     */
+    public static boolean isValidFileName(String test) {
+        if (test.isEmpty()) {
+            return true;
+        }
+        return test.matches(VALIDATION_REGEX);
+    }
+
 
 }
