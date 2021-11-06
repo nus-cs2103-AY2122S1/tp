@@ -91,6 +91,8 @@ Once you have attempted these commands, you're ready to go!
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Notes about the command format:**<br>
+These are general rules applying to all explanations and command formats listed below!
+
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `addstu n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -109,6 +111,10 @@ Once you have attempted these commands, you're ready to go!
 
 * If you add parameters for commands that do not take in parameters (such as `help`, `liststu`, `exit` and `clear`), they will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+* `INDEX` items must be positive integers. Negative integers, decimal values, and zero will not be accepted for any command `INDEX`. <br>
+
+  e.g. if the command `viewstu -5` is entered, it will throw an invalid command format error, telling you to enter a positive integer `INDEX` only!
 
 </div>
 
