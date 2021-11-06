@@ -28,7 +28,7 @@ public class AddStudentToLessonCommand extends AddCommand {
             + "Parameters: "
             + PREFIX_STUDENT + "STUDENT_INDEX (must be a positive integer) "
             + PREFIX_LESSON + "LESSON_INDEX (must be a positive integer) "
-            + "\n\nExample: " + COMMAND_WORD + " " + COMMAND_FLAG
+            + "\n\nExample: " + COMMAND_WORD + " " + COMMAND_FLAG + " "
             + PREFIX_STUDENT + "1 "
             + PREFIX_LESSON + "2";
 
