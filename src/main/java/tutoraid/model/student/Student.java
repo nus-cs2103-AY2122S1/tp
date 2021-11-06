@@ -23,12 +23,25 @@ public class Student {
     private final Lessons lessons;
 
     /**
+     * Constructor for a Student when the Lessons are not yet initialised
+     */
+    public Student(StudentName studentName, Phone studentPhone, ParentName parentName, Phone parentPhone,
+                   ProgressList progressList) {
+        CollectionUtil.requireAllNonNull(studentName, studentPhone, parentName, parentPhone, progressList);
+        this.studentName = studentName;
+        this.studentPhone = studentPhone;
+        this.parentName = parentName;
+        this.parentPhone = parentPhone;
+        this.progressList = progressList;
+        this.lessons = new Lessons();
+    }
+
+    /**
      * Every field must be present and not null.
      */
     public Student(StudentName studentName, Phone studentPhone, ParentName parentName, Phone parentPhone,
                    ProgressList progressList, Lessons lessons) {
-        CollectionUtil.requireAllNonNull(studentName, studentPhone, parentName, parentPhone, progressList,
-                lessons);
+        CollectionUtil.requireAllNonNull(studentName, studentPhone, parentName, parentPhone, progressList);
         this.studentName = studentName;
         this.studentPhone = studentPhone;
         this.parentName = parentName;
@@ -180,7 +193,6 @@ public class Student {
 
         builder.append("\nProgress: ")
                 .append(getLatestProgress())
-                .append("; Payment Status: ")
                 .append("; Lessons: ")
                 .append(getLessons());
 

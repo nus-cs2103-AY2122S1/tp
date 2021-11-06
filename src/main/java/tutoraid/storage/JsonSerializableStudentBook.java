@@ -9,8 +9,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import tutoraid.commons.exceptions.IllegalValueException;
+import tutoraid.model.ReadOnlyLessonBook;
 import tutoraid.model.ReadOnlyStudentBook;
 import tutoraid.model.StudentBook;
+import tutoraid.model.lesson.Lesson;
+import tutoraid.model.student.InitialStudent;
 import tutoraid.model.student.Student;
 
 /**
@@ -45,10 +48,12 @@ class JsonSerializableStudentBook {
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public StudentBook toModelType() throws IllegalValueException {
+    public StudentBook toModelType(ReadOnlyLessonBook lessonBook) throws IllegalValueException {
         StudentBook studentBook = new StudentBook();
+        List<Lesson> lessons = lessonBook.getLessonList();
         for (JsonAdaptedStudent jsonAdaptedStudent : students) {
-            Student student = jsonAdaptedStudent.toModelType();
+            InitialStudent initialStudent = jsonAdaptedStudent.toModelType();
+            Student student = initialStudent.toStudent(lessons);
             if (studentBook.hasStudent(student)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_STUDENT);
             }

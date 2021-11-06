@@ -82,7 +82,6 @@ public class EditStudentCommand extends EditCommand {
         }
 
         model.setStudent(studentToEdit, editedStudent);
-        Lesson.updateStudentLessonLink(lessonList, studentToEdit, editedStudent);
         model.viewStudent(editedStudent);
         model.updateFilteredLessonList(editedStudent::hasLesson);
 

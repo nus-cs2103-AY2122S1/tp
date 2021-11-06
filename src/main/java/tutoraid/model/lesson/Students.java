@@ -17,7 +17,14 @@ public class Students {
     public final ArrayList<Student> students;
 
     /**
-     * Constructs a {@code Students}.
+     * Constructs a {@code Students} object that is empty
+     */
+    public Students() {
+        this.students = new ArrayList<Student>();
+    }
+
+    /**
+     * Constructs an instance of {@code Students}.
      *
      * @param students Valid arraylist of Student objects.
      */
@@ -41,12 +48,13 @@ public class Students {
      * @param student a Student object to be added
      * @throws DuplicateStudentInLessonException if this arraylist of students already contains the student
      */
-    public void addStudent(Student student) {
+    public Students addStudent(Student student) {
         requireNonNull(student);
         if (students.contains(student)) {
             throw new DuplicateStudentInLessonException();
         }
         students.add(student);
+        return this;
     }
 
     /**
@@ -55,11 +63,12 @@ public class Students {
      * @param student a Student object to be removed
      * @throws StudentNotFoundInLessonException if this arraylist of students does not have the student
      */
-    public void removeStudent(Student student) {
+    public Students removeStudent(Student student) {
         requireNonNull(student);
         if (!students.remove(student)) {
             throw new StudentNotFoundInLessonException();
         }
+        return this;
     }
 
     /**

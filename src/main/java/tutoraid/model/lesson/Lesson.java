@@ -2,9 +2,10 @@ package tutoraid.model.lesson;
 
 import static tutoraid.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
+import tutoraid.model.ModelManager;
 import tutoraid.model.lesson.exceptions.LessonExceedCapacityException;
 import tutoraid.model.student.Student;
 
@@ -18,36 +19,33 @@ public class Lesson {
     private final LessonName lessonName;
 
     // Data Fields
-    private final Students students;
+    private Optional<Students> students;
     private final Capacity capacity;
     private final Price price;
     private final Timing timing;
 
     /**
-     * Every field must be present and not null.
+     * Constructor for a Lesson when the Students are not yet initialised
      */
-    public Lesson(LessonName lessonName, Capacity capacity, Price price, Students students, Timing timing) {
-        requireAllNonNull(lessonName, capacity, price, students, timing);
+    public Lesson(LessonName lessonName, Capacity capacity, Price price, Timing timing) {
+        requireAllNonNull(lessonName, capacity, price, timing);
         this.lessonName = lessonName;
         this.capacity = capacity;
         this.price = price;
-        this.students = students;
+        this.students = Optional.empty();
         this.timing = timing;
     }
 
     /**
-     * Updates the dependency between each lesson and a student if the student gets edited
-     * @param lessonList A list containing all lessons in TutorAid
-     * @param studentToEdit The student being edited
-     * @param editedStudent The edited student
+     * Every field must be present and not null.
      */
-    public static void updateStudentLessonLink(List<Lesson> lessonList, Student studentToEdit, Student editedStudent) {
-        for (Lesson lesson : lessonList) {
-            if (lesson.hasStudent(studentToEdit)) {
-                lesson.removeStudent(studentToEdit);
-                lesson.addStudent(editedStudent);
-            }
-        }
+    public Lesson(LessonName lessonName, Capacity capacity, Price price, Students students, Timing timing) {
+        requireAllNonNull(lessonName, capacity, price, timing);
+        this.lessonName = lessonName;
+        this.capacity = capacity;
+        this.price = price;
+        this.students = Optional.of(students);
+        this.timing = timing;
     }
 
     public LessonName getLessonName() {
@@ -63,7 +61,17 @@ public class Lesson {
     }
 
     public Students getStudents() {
-        return students;
+        if (students.isPresent()) {
+            return students.get();
+        }
+        Students computedStudents = new Students();
+        for (Student std : ModelManager.allStudents) {
+            if (std.hasLesson(this)) {
+                computedStudents.addStudent(std);
+            }
+        }
+        students = Optional.of(computedStudents);
+        return computedStudents;
     }
 
     public Timing getTiming() {
@@ -77,7 +85,7 @@ public class Lesson {
      * @return true if the student is in this lesson, false otherwise
      */
     public boolean hasStudent(Student student) {
-        return students.hasStudent(student);
+        return getStudents().hasStudent(student);
     }
 
     /**
@@ -86,7 +94,7 @@ public class Lesson {
      * @param student student to be added
      */
     public void addStudent(Student student) {
-        students.addStudent(student);
+        students = Optional.of(getStudents().addStudent(student));
     }
 
     /**
@@ -95,7 +103,7 @@ public class Lesson {
      * @param student student to be removed
      */
     public void removeStudent(Student student) {
-        students.removeStudent(student);
+        students = Optional.of(getStudents().removeStudent(student));
     }
 
     /**
@@ -104,10 +112,10 @@ public class Lesson {
      * @throws LessonExceedCapacityException if the lesson exceeds its capacity
      */
     public boolean isFull() throws LessonExceedCapacityException {
-        if (students.numberOfStudents() > capacity.getCapacity()) {
+        if (getStudents().numberOfStudents() > capacity.getCapacity()) {
             throw new LessonExceedCapacityException();
         }
-        return students.numberOfStudents() == capacity.getCapacity();
+        return getStudents().numberOfStudents() == capacity.getCapacity();
     }
 
     /**
@@ -150,7 +158,6 @@ public class Lesson {
         return otherLesson.getLessonName().equals(getLessonName())
                 && otherLesson.getCapacity().equals(getCapacity())
                 && otherLesson.getPrice().equals(getPrice())
-                && otherLesson.getStudents().equals(getStudents())
                 && otherLesson.getTiming().equals(getTiming());
     }
 
@@ -163,38 +170,22 @@ public class Lesson {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-
-        if (lessonName != null) {
-            builder.append("\nLesson's name: ")
-                    .append(getLessonName());
-        }
-
-        if (timing != null) {
-            builder.append("\nLesson's timing: ")
-                    .append(getTiming());
-
-        }
-
-        if (capacity != null) {
-            builder.append("\nLesson's capacity: ")
-                    .append(getCapacity());
-        }
-
-        if (price != null) {
-            builder.append("\nLesson's price: ")
-                    .append(getPrice());
-        }
-
-        if (students != null) {
-            builder.append("\nLesson's students: ")
-                    .append(getStudents());
-        }
-
+        builder.append("\nLesson's name: ")
+                .append(getLessonName());
+        builder.append("\nLesson's timing: ")
+                .append(getTiming());
+        builder.append("\nLesson's capacity: ")
+                .append(getCapacity());
+        builder.append("\nLesson's price: ")
+                .append(getPrice());
+        builder.append("\nLesson's students: ")
+                .append(getStudents());
         return builder.toString();
     }
 
     /**
      * Returns the name of the lesson as a string.
+     *
      * @return Name of lesson
      */
     public String toNameString() {

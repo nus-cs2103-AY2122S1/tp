@@ -5,6 +5,8 @@ import static tutoraid.ui.DetailLevel.HIGH;
 import static tutoraid.ui.DetailLevel.MED;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -22,8 +24,9 @@ import tutoraid.ui.UiManager;
  * Represents the in-memory model of the student book data.
  */
 public class ModelManager implements Model {
-    private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
+    public static List<Student> allStudents = new ArrayList<>();
 
+    private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
     private final StudentBook studentBook;
     private final LessonBook lessonBook;
     private final UserPrefs userPrefs;
@@ -45,6 +48,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredStudents = new FilteredList<>(this.studentBook.getStudentList());
         filteredLessons = new FilteredList<>(this.lessonBook.getLessonList());
+        allStudents = studentBook.getStudentList();
     }
 
     public ModelManager() {
@@ -102,6 +106,7 @@ public class ModelManager implements Model {
     @Override
     public void setStudentBook(ReadOnlyStudentBook studentBook) {
         this.studentBook.resetData(studentBook);
+        allStudents = studentBook.getStudentList();
     }
 
     @Override
@@ -124,6 +129,7 @@ public class ModelManager implements Model {
     public void addStudent(Student student) {
         studentBook.addStudent(student);
         updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+        allStudents = studentBook.getStudentList();
     }
 
     @Override
@@ -131,6 +137,7 @@ public class ModelManager implements Model {
         CollectionUtil.requireAllNonNull(target, editedStudent);
 
         studentBook.setStudent(target, editedStudent);
+        allStudents = studentBook.getStudentList();
     }
 
     @Override
@@ -161,6 +168,7 @@ public class ModelManager implements Model {
             }
         }
         studentBook.refreshStudentBook();
+        allStudents = studentBook.getStudentList();
     }
 
     //=========== LessonBook ================================================================================
@@ -203,7 +211,7 @@ public class ModelManager implements Model {
         requireNonNull(targetLesson);
         filteredLessons.setPredicate(lesson -> lesson.equals(targetLesson));
         filteredStudents.setPredicate(student ->
-                targetLesson.getStudents().getAllStudentNamesAsStringArrayList().contains(student.toNameString()));
+                targetLesson.getStudents().hasStudent(student));
         UiManager.showFullDetails();
     }
 

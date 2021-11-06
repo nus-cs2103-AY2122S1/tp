@@ -65,14 +65,10 @@ public class EditLessonCommand extends EditCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
-        List<Student> studentList = model.getFilteredStudentList();
         List<Lesson> lastShownLessonList = model.getFilteredLessonList();
-
         if (targetIndex.getZeroBased() >= lastShownLessonList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
         }
-
         Lesson lessonToEdit = lastShownLessonList.get(targetIndex.getZeroBased());
         Lesson editedLesson = createEditedLesson(lessonToEdit, editLessonDescriptor);
 
@@ -82,15 +78,12 @@ public class EditLessonCommand extends EditCommand {
 
         Capacity newCapacity = editedLesson.getCapacity();
         Students currStudents = lessonToEdit.getStudents();
-
         if (newCapacity.getCapacity() < currStudents.numberOfStudents()) {
             throw new CommandException(MESSAGE_CAPACITY_LESS_THAN_STUDENTS);
         }
-
         model.setLesson(lessonToEdit, editedLesson);
-        Student.updateStudentLessonLink(studentList, lessonToEdit, editedLesson);
         model.viewLesson(editedLesson);
-        model.updateFilteredStudentList(editedLesson::hasStudent);
+        model.updateFilteredStudentList(student -> student.hasLesson(editedLesson));
 
         return new CommandResult(String.format(MESSAGE_EDIT_LESSON_SUCCESS, editedLesson.toNameString()));
     }
@@ -105,9 +98,8 @@ public class EditLessonCommand extends EditCommand {
         Capacity updatedCapacity = editLessonDescriptor.getCapacity().orElse(lessonToEdit.getCapacity());
         Price updatedPrice = editLessonDescriptor.getPrice().orElse(lessonToEdit.getPrice());
         Timing updatedTiming = editLessonDescriptor.getTiming().orElse(lessonToEdit.getTiming());
-        Students students = lessonToEdit.getStudents();
 
-        return new Lesson(updatedLessonName, updatedCapacity, updatedPrice, students, updatedTiming);
+        return new Lesson(updatedLessonName, updatedCapacity, updatedPrice, updatedTiming);
     }
 
     @Override
