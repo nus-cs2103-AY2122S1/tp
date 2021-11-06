@@ -20,30 +20,30 @@ title: Developer Guide
        - [Implementation Rationale](#implementation-rationale)
     - [Remove Event feature](#remove-event-feature)
        - [Implementation Details](#implementation-details)
-       - [Design Considerations:](#design-considerations)
-          - [Aspect: Specifying Event to be Removed:](#aspect-specifying-event-to-be-removed)
+       - [Design Considerations](#design-considerations)
+          - [Aspect: Specifying Event to be Removed](#aspect-specifying-event-to-be-removed)
     - [Filter Event feature](#filter-event-feature)
       - [Implementation Details](#implementation-details)
       - [Implementation Rationale](#implementation-rationale)
-      - [Design Considerations:](#design-considerations)
-        - [Aspect: Criteria to filter by:](#aspect-criteria-to-filter-by)
-        - [Aspect: With or without prefix:](#aspect-with-or-without-prefix)
+      - [Design Considerations](#design-considerations)
+        - [Aspect: Criteria to filter by](#aspect-criteria-to-filter-by)
+        - [Aspect: With or without prefix](#aspect-with-or-without-prefix)
     - [View Participant's Details feature](#view-participants-details-feature)
       - [Implementation Details](#implementation-details-1)
       - [Implementation Rationale](#implementation-rationale-1)
-      - [Design Considerations:](#design-considerations-1)
-        - [Aspect: Similar participant IDs:](#aspect-similar-participant-ids)
+      - [Design Considerations](#design-considerations-1)
+        - [Aspect: Similar participant IDs](#aspect-similar-participant-ids)
     - [Add/Remove Participant to/from event by index](#addremove-participant-tofrom-event-by-index)
       - [Implementation Details](#implementation-details-2)
       - [Implementation Rationale](#implementation-rationale-2)
     - [View Event Details feature](#view-event-details-feature)
       - [Implementation Details](#implementation-details-3)
       - [Implementation Rationale](#implementation-rationale-3)
-      - [Design Considerations:](#design-considerations-2)
+      - [Design Considerations](#design-considerations-2)
         - [Aspect: Similar Event names:](#aspect-similar-event-names)
     - [\[Proposed\] Undo/redo feature](#proposed-undoredo-feature)
       - [Proposed Implementation](#proposed-implementation)
-      - [Design considerations:](#design-considerations-3)
+      - [Design considerations](#design-considerations-3)
     - [\[Proposed\] Data archiving](#proposed-data-archiving)
 - [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
 - [**Appendix: Requirements**](#appendix-requirements)
@@ -366,10 +366,10 @@ the given `Index` from the `FilteredList<Participant>` and displays its details.
 
 #### Implementation Rationale
 
-Since each Participant has a unique ID, it provides a convenient way for the user to look for a specific Participant if
-matching ID is used as the criterion. The `findParticipant` command provides similar functionality, but returns a list 
-of Participants instead because it uses names, which are more imprecise. Hence, a separate command was decidedly
-implemented to allow users the ability to sieve out a single Participant for a more detailed view.
+Since each Participant has a unique index in the displayed Participant list, it provides a convenient way for the user 
+to look for a specific Participant if index is used as the criterion. The `find` command provides similar functionality,
+but returns a list of Participants instead because it uses names, which are more imprecise. Hence, a separate command 
+was decidedly implemented to allow users the ability to sieve out a single Participant for a more detailed view.
 
 #### Design Considerations:
 ##### Aspect: Similar participant IDs:
