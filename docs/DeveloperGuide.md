@@ -9,8 +9,8 @@ title: Developer Guide
 
 ## About This Guide
 
-This user guide is intended for developers looking to contribute to TAB.
-It aims to contain all the information required to quickly get a calendar UI into your application. 
+This guide is intended for any developers looking to contribute to TAB.
+It aims to contain all the information required to help you quickly get started. 
 
 In the [Table of Contents](#), each item listed is a link which you can click on to go directly to that section in the guide.
 
@@ -23,8 +23,6 @@ Syntax | Meaning
 [text](#about-this-guide) | Links to other parts of the document, or links to be opened in the browser.
 _text_ | A _technical_ word with definitions provided in the [Glossary](#appendix-b-glossary), or a caption for images.
 <div markdown="block" class="alert alert-info"> :information_source: </div> | Indication that the following text is a note, which is useful in helping you understand how TAB works.
-<div markdown="block" class="alert alert-primary"> :bulb: </div> | Indication that the following text is a tip, which allows you to interact with TAB more effectively and quickly.
-<div markdown="block" class="alert alert-warning"> :exclamation: </div> | Indication that the following text is important. Missing it out may impair your user experience and may potentially cause TAB to misbehave!
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -34,34 +32,9 @@ List of sources of all reused/adapted ideas, code, documentation, and third-part
 
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 * Libraries used: [CalendarFX](https://dlsc.com/products/calendarfx/), [Jackson](https://github.com/FasterXML/jackson), [JavaFX](https://openjfx.io/), [JUnit5](https://github.com/junit-team/junit5)
-* The `SchedulePanel#createTimeThread()` method was reused with minimal changes from the CalendarFX [developer manual](http://dlsc.com/wp-content/html/calendarfx/manual.html#_quick_start).
-
-```java
-private void createTimeThread() {
-    Thread updateTimeThread = new Thread("Calendar: Update Time Thread") {
-        @Override
-        public void run() {
-            while (true) {
-                Platform.runLater(() -> {
-                    calendarView.setToday(LocalDate.now());
-                    calendarView.setTime(LocalTime.now());
-                });
-                try {
-                    // update every 60 seconds
-                    sleep(60000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    };
-    updateTimeThread.setPriority(Thread.MIN_PRIORITY);
-    updateTimeThread.setDaemon(true);
-    updateTimeThread.start();
-}
-```
-* Initialising the `CalendarView` in the `SchedulePanel` was done with reference to the CalendarFX [_API_](https://dlsc.com/wp-content/html/calendarfx/apidocs/index.html).
-* CenterPanel JavaFX solution inspired by [this StackOverflow post](https://stackoverflow.com/questions/16176701/switch-between-panes-in-javafx#:~:text=Replace%20just%20a%20specific%20pane,of%20the%20stack's%20child%20list.).
+* The [`SchedulePanel#createTimeThread()`](https://github.com/AY2122S1-CS2103T-F13-3/tp/blob/master/src/main/java/seedu/address/ui/SchedulePanel.java#L114) method was reused with minimal changes from the CalendarFX [developer manual](http://dlsc.com/wp-content/html/calendarfx/manual.html#_quick_start).
+* Initialising the `CalendarView` in the `[SchedulePanel](https://github.com/AY2122S1-CS2103T-F13-3/tp/blob/master/src/main/java/seedu/address/ui/SchedulePanel.java#L32)` was done with reference to the CalendarFX [_API_](https://dlsc.com/wp-content/html/calendarfx/apidocs/index.html).
+* The [CenterPanel](https://github.com/AY2122S1-CS2103T-F13-3/tp/blob/master/src/main/java/seedu/address/ui/CenterPanel.java#L138) JavaFX solution was inspired by [this StackOverflow post](https://stackoverflow.com/questions/16176701/switch-between-panes-in-javafx#:~:text=Replace%20just%20a%20specific%20pane,of%20the%20stack's%20child%20list.).
 * UG and DG Table cells with copy and paste and wrap-text functions reference: [Roland09](https://gist.github.com/Roland09/6fb31781a64d9cb62179#file-tableutils-java), [James_D](https://stackoverflow.com/questions/22732013/javafx-tablecolumn-text-wrapping).
 
 --------------------------------------------------------------------------------------------------------------------
@@ -220,7 +193,7 @@ Working together, the `UniquePersonList`, `CalendarEntrylist`, and `UniqueTagLis
 
 :information_source: **Note:** 
 The `UniqueTagList` stores all existing distinct tags created, `Tag` objects with the same tag name may not have the same reference.
-This means that each `Person` object still has its own `Tag` objects and the `Tag` is only added into `UniqueTagList` if a duplicate `Tag` does not already exist in the tag list.
+This means that each `Person` object still has its own `Tag` objects and the `Tag` is only added from the `Person` into `UniqueTagList` if an equivalent `Tag` (with the same tag name) does not exist in the tag list.
 <br>
 An alternative (arguably, a more OOP) model will have the `UniqueTagList` storing all `Tag` objects which `Person` references. 
 This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
@@ -390,7 +363,7 @@ we decided to put off alternative 2 for future considerations.
 
 <br/>
 
-### Calendar interface
+### Calendar View
 
 TAB uses the [CalendarFX](https://dlsc.com/products/calendarfx/) library to implement its calendar interface, allowing users to view a calendar that contains all their existing lessons, so that they can visualise their schedule and plan ahead.
 
@@ -446,70 +419,6 @@ We chose alternative 2 and integrated CalendarFX into our app as the possibility
 
 Alternative 1 is our preferred choice as its pros and cons seem much better than alternative 2, especially due to its ease of implementation. The main difficulty of alternative 1 becoming familiar with the CalendarFX _API_, but this difficulty is also present in alternative 2.
 
-### Tag list interface
-
-Viewing tag is facilitated by `UniqueTagList`.
-
-- `UniqueTagList` stores a list of alphabetically sorted unique unmodifiable tags with case-insensitive tag names.
-- `UniqueTagList` holds a private field `tagCounter` that maps `Tag` to `Integer`, where `Integer` is the number of persons labelled under each tag.
-- `Tag` objects in `UniqueTagList` may not have the same reference as the `Person` object's `Tag`, i.e. each `Person` has a set of `Tag` objects on its own.
-
-Operations include:
-- `UniqueTagList#addTagFromPerson(Person)` - Adds tags from the specified person to the tag list if the tags do not exist in the tag list. If there is already a tag with same case-insensitive name, it increments the `Integer` that this tag is mapped to in `tagCounter`.
-- `UniqueTagList#removeTagFromPerson(Person)` - Removes tags belonging to the specified person from the tag list if there is no person labelled under this tag after removal, else, decrements the `Integer` that this tag is mapped to in `tagCounter`.
-- `UniqueTagList#editTagFromPerson(Person)` - Removes the original tags belonging to the specified person from the tag list and adds the new tags labelled for the specified person to the tag list.
-
-These operations are called when a person is added, edited, or deleted with `AddCommand`, `EditCommand` and `DeleteCommand` respectively.
-
-Given below is an example usage scenario and how viewing tag is executed:
-- **Step 1:** The user launches the application. The `Model` is initialized with the saved data (or sample data if there were no saved data). Tags from each person is loaded into `UniqueTagList` and `tagCounter` will store the corresponding number of students labelled with the tags.
-- **Step 2:** The user enter the command `tag` to view all tags. `Logic` calls `AddressBookParser` to parse this command string, creating a `TagCommand`.
-- **Step 3:** `Logic` executes the `TagCommand`. During execution, `TagCommand#execute()` instantiates a `CommandResult` with the `DisplayType` of `TAGS` as a signal for `MainWindow` to switch the center panel to show the tag list.
-- **Step 4:** `MainWindow` then handles this command by calling `CenterPanel#displayTagListPanel()` to display the tag list to the user.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** Tags with duplicate case-insensitive tag names for a person is not allowed. If the user tries to adds a tag with the same tag name to the person already with that tag, the new tag will not be added and `tagCounter` will not increment the count for this tag.<br></div>
-
-Figure I.4.1 shows a sequence diagram of how the tag list is displayed to the user with UI components.<br>
-<img src="images/ViewTagSequenceDiagramUi.png" width="800" />
-
-*Figure I.4.1: View tags UI sequence diagram*
-
-#### Design considerations
-**Aspect: Data Structures to support lesson operations**
-
-* **Alternative 1 (current implementation):** Use a `UniqueTagList` to store the tags created and a class field `tagCounter` to map each unique `Tag` to the number of persons labelled under it.
-  - Pros:
-    - Quicker retrieval and update of data using a `HashMap` for `tagCounter`.
-  - Cons:
-    - Each `Person` object has its own set of `Tags` which may be repetitive and memory-consuming if there is a large number of same tags.
-    - Retrieval of all tags and calculation of the number of persons labelled under each tag during the initialization of the application requires iterating through all persons in TAB.
-
-* **Alternative 2:** Each tag stores a list of persons or number of persons labelled with that tag.
-  - Pros:
-    - Faster retrieval of the number of persons under each tag.
-  - Cons:
-    - This could result in circular dependency since a `Person` keeps reference of a set of `Tags` and a `Tag` has to keep a reference to a list of `Persons` simultaneously.
-    - Updating the tags labelled for a `Person` requires modification of the data fields of the `Person`. Since TAB objects are immutable, this means that new copies of `Person` and `Tag` have to be created after every command that modifies the data. This could slow down the application when there is a large amount of data stored.
-  
-
-### Switching between students, calendar, and tags
-
-The `CenterPanel` in the `Ui` component consists of the `PersonGridPanel`, `SchedulePanel`, and `TagListPanel` and handles the switching between each of them for users to view their list of students and lessons, schedule, and list of tags respectively.
-
-![CenterPanel Class Diagram](images/CenterPanelClassDiagram.png)
-
-The *Sequence Diagram* below shows how the `Ui` components interact with each other when user inputs the `calendar` command.
-
-![Interactions Inside the Ui Component for the `calendar` Command](images/ScheduleSequenceDiagram.png)
-
-*Figure I.1.1: Sequence Diagram of Calendar Command*
-
-When the user requests to view the calendar interface, the `displaySchedulePanel()` method of `CenterPanel` is called, which sets the current display to show the `SchedulePanel`.
-Switching to the student view and tag list is similarly achieved by calling `displayPersonGridPanel()` and `displayTagListPanel()` methods respectively.
-
-How `PersonGridPanel`, `SchedulePanel`, and `TagListPanel` work is described in detail in the
-[Displaying Lessons in the GUI](#displaying-lessons-in-the-gui), [Calendar Interface](#calendar-interface) and [Tag list interface](#tag-list-interface) sections respectively.
-
 ### Upcoming lesson reminders
 The reminder feature allows users to view a list of upcoming lessons that ends in the next 48 hours.
 
@@ -563,6 +472,69 @@ Figure I.5.3 shows a sequence diagram of how the reminder window is displayed wi
   * Cons: Higher chance of causing the app to misbehave.
 
 As Alternative 2 requires more testing and hence more time to minimize bugs, we decided to put off alternative 2 for future considerations given the limited amount of time we have.
+
+### Viewing Tags
+
+Viewing tag is facilitated by `UniqueTagList`.
+
+- `UniqueTagList` stores a list of alphabetically sorted unique unmodifiable tags with case-insensitive tag names.
+- `UniqueTagList` holds a private field `tagCounter` that maps `Tag` to `Integer`, where `Integer` is the number of persons labelled under each tag.
+- `Tag` objects in `UniqueTagList` may not have the same reference as the `Person` object's `Tag`, i.e. each `Person` has a set of `Tag` objects on its own.
+
+Operations include:
+- `UniqueTagList#addTagFromPerson(Person)` - Adds tags from the specified person to the tag list if the tags do not exist in the tag list. If there is already a tag with same case-insensitive name, it increments the `Integer` that this tag is mapped to in `tagCounter`.
+- `UniqueTagList#removeTagFromPerson(Person)` - Removes tags belonging to the specified person from the tag list if there is no person labelled under this tag after removal, else, decrements the `Integer` that this tag is mapped to in `tagCounter`.
+- `UniqueTagList#editTagFromPerson(Person)` - Removes the original tags belonging to the specified person from the tag list and adds the new tags labelled for the specified person to the tag list.
+
+These operations are called when a person is added, edited, or deleted with `AddCommand`, `EditCommand` and `DeleteCommand` respectively.
+
+Given below is an example usage scenario and how viewing tag is executed:
+- **Step 1:** The user launches the application. The `Model` is initialized with the saved data (or sample data if there were no saved data). Tags from each person is loaded into `UniqueTagList` and `tagCounter` will store the corresponding number of students labelled with the tags.
+- **Step 2:** The user enter the command `tag` to view all tags. `Logic` calls `AddressBookParser` to parse this command string, creating a `TagCommand`.
+- **Step 3:** `Logic` executes the `TagCommand`. During execution, `TagCommand#execute()` instantiates a `CommandResult` with the `DisplayType` of `TAGS` as a signal for `MainWindow` to switch the center panel to show the tag list.
+- **Step 4:** `MainWindow` then handles this command by calling `CenterPanel#displayTagListPanel()` to display the tag list to the user.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** Tags with duplicate case-insensitive tag names for a person is not allowed. If the user tries to adds a tag with the same tag name to the person already with that tag, the new tag will not be added and `tagCounter` will not increment the count for this tag.<br></div>
+
+Figure I.4.1 shows a sequence diagram of how the tag list is displayed to the user with UI components.<br>
+<img src="images/ViewTagSequenceDiagramUi.png" width="800" />
+
+*Figure I.4.1: View tags UI sequence diagram*
+
+#### Design considerations
+**Aspect: Data Structures to support lesson operations**
+
+* **Alternative 1 (current implementation):** Use a `UniqueTagList` to store the tags created and a class field `tagCounter` to map each unique `Tag` to the number of persons labelled under it.
+  - Pros:
+    - Quicker retrieval and update of data using a `HashMap` for `tagCounter`.
+  - Cons:
+    - Each `Person` object has its own set of `Tags` which may be repetitive and memory-consuming if there is a large number of same tags.
+    - Retrieval of all tags and calculation of the number of persons labelled under each tag during the initialization of the application requires iterating through all persons in TAB.
+
+* **Alternative 2:** Each tag stores a list of persons or number of persons labelled with that tag.
+  - Pros:
+    - Faster retrieval of the number of persons under each tag.
+  - Cons:
+    - This could result in circular dependency since a `Person` keeps reference of a set of `Tags` and a `Tag` has to keep a reference to a list of `Persons` simultaneously.
+    - Updating the tags labelled for a `Person` requires modification of the data fields of the `Person`. Since TAB objects are immutable, this means that new copies of `Person` and `Tag` have to be created after every command that modifies the data. This could slow down the application when there is a large amount of data stored.
+    
+### Switching between students, calendar, and tags
+
+The `CenterPanel` in the `Ui` component consists of the `PersonGridPanel`, `SchedulePanel`, and `TagListPanel` and handles the switching between each of them for users to view their list of students and lessons, schedule, and list of tags respectively.
+
+![CenterPanel Class Diagram](images/CenterPanelClassDiagram.png)
+
+The *Sequence Diagram* below shows how the `Ui` components interact with each other when user inputs the `calendar` command.
+
+![Interactions Inside the Ui Component for the `calendar` Command](images/ScheduleSequenceDiagram.png)
+
+*Figure I.1.1: Sequence Diagram of Calendar Command*
+
+When the user requests to view the calendar interface, the `displaySchedulePanel()` method of `CenterPanel` is called, which sets the current display to show the `SchedulePanel`.
+Switching to the student view and tag list is similarly achieved by calling `displayPersonGridPanel()` and `displayTagListPanel()` methods respectively.
+
+How `PersonGridPanel`, `SchedulePanel`, and `TagListPanel` work is described in detail in the
+[Displaying Lessons in the GUI](#displaying-lessons-in-the-gui), [Calendar Interface](#calendar-interface) and [Tag list interface](#tag-list-interface) sections respectively.
 
 ### Undo/redo
 
