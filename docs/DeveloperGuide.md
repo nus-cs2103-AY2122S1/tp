@@ -195,7 +195,7 @@ The following activity diagram shows what happens when a user executes the `edit
 * **Alternative 2:** Exclusive command to add Category field
   * Pros: Reduces the chance of Feature Overload for `add` and `edit` commands
   * Cons: Reduces usability due to the need to remember another command
-  
+
 ### Delete Feature
 
 #### Implementation
@@ -586,7 +586,7 @@ It is implemented with the following operation:
 * `ExportCommandIndex#execute()`  —  Exports the contacts at the specified index in the current list.
 * * `ExportCommandAll#execute()`  —  Exports all the contacts in the current list.
 
-The feature makes use of an `ExportStorage` class, which handles the manipulation of the aforementioned exported text file. It is implemented inside the Storage component and is implemented using a singleton design pattern. This class has an `addToStorage` write method which is called by the `exportContact()` method in the read-only `AddressBook` model. 
+The feature makes use of an `ExportStorage` class, which handles the manipulation of the aforementioned exported text file. It is implemented inside the Storage component and is implemented using a singleton design pattern. This class has an `addToStorage` write method which is called by the `exportContact()` method in the read-only `AddressBook` model.
 
 Given below is an example usage scenario and how the Export feature behaves at each step:
 
@@ -846,7 +846,7 @@ Use case ends
 **Extensions**
 * 1a. There is no previously entered command.
   * 1a1. The command is reset to the current command's original form.
-  
+
   Use case ends
 
 **UC11 - Undo an Operation**
@@ -922,7 +922,7 @@ Use case ends.
 **Extensions**
 * 2a. User's default browser cannot be opened.
   * 2a1. WhereTourGo will display the in-built help window
-    
+ 
   Use case ends.
 
 **UC18 - Display Commands**
@@ -936,7 +936,7 @@ Use case ends.
 **Extensions**
 * 2a. User's default browser cannot be opened.
   * 2a1. WhereTourGo will display the in-built help window
-  
+
   Use case ends.
 
 *{More to be added}*
@@ -1036,7 +1036,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Other incorrect list commands to try: `list abc`, `list 2`, `...` <br>
        Expected: All contacts will not be listed in Contact Pane, remains in its previous state. Error details shown in the status message.
-       
+    
 ### Locating contacts
 
 ### Filtering contacts
@@ -1048,7 +1048,7 @@ testers are expected to do more *exploratory* testing.
 1. Using the `sum` command
 
     1. Prerequisites: WhereTourGo has at least 1 contact. Used any command that hides summary such as:  `edit`, `view`.
-  
+
     1. Test case: `sum`<br>
        Expected: Displays summary with the correct information.
 
@@ -1058,13 +1058,13 @@ testers are expected to do more *exploratory* testing.
 1. Modifying WhereTourGo with commands that involve summary.
 
     1. Prerequisites: List all contacts using the `list` command. First contact does not have a 'fnb' category code. Multiple contacts in the list.
-  
+
     1. Test case: `add c/att n/Singapore Flyers p/92345678 e/123@example.com a/30 Raffles Ave, Singapore 039803 ra/4`<br>
        Expected: Contact with name 'Singapore Flyers', rating of 4 stars and category of attraction is added. Summary is updated and displayed (Total number of contacts, category and rating charts updated).
-  
+
     1. Test case: `edit 1 c/fnb`<br>
        Expected: Category code of first contact in the list is updated to 'fnb'. Summary is updated and displayed (Number of contacts remains the same, category code chart updated with 1 more 'fnb', and one less of the original category code).
-   
+  
     1. Test case: `clear`<br>
        Expected: Entire contact list is deleted. Summary is updated and displayed (Charts are empty, total number of contacts equals 0).
 
@@ -1126,7 +1126,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: AddressBook has at least 1 contact shown in the contact list.
 
     1. Test case: Click a contact within the Contact Pane.
-       Expected: Contact Card will light up for a short duration. Details will be displayed in both the display panel and the status message. 
+       Expected: Contact Card will light up for a short duration. Details will be displayed in both the display panel and the status message.
 
 ### Undoing operations
 1. Undoing changes consecutively
@@ -1143,7 +1143,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `undo`<br>
        Expected: No changes to address book or contact list. Error details shown in the status message.
-  
+
 ### Redoing operations
 1. Redoing changes consecutively
 
@@ -1152,7 +1152,7 @@ testers are expected to do more *exploratory* testing.
         1. `edit 1 e/123@example.com`
         1. `undo`
         1. `undo`
-   
+
      1. Test case: `redo`<br>
        Expected: Previously restored contact, `Marina Bay Sands` is deleted from address book. Redo success message shown in the status message.
 
@@ -1190,7 +1190,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `clear`<br>
        Expected: All contacts are cleared from WhereTourGo. Success message shown in the status message. Contact Pane will be empty.
-      
+ 
     1. Test case: `clear`<br> and repeat `clear` again
        Expected: Cannot be cleared twice. Error message shown in the status message. Contact Pane will remain empty.
 
@@ -1232,6 +1232,5 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect exit commands to try: `cmd abc`, `cmd 2`, `...` <br>
       Expected: WhereTourGo does not open command summary. Error details shown in the status message.
-     
 
 ## **Appendix: Effort**
