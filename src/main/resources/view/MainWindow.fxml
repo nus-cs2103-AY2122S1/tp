@@ -63,7 +63,7 @@
                               </ImageView>
                            </children>
                         </HBox>
-      
+
                           <VBox fx:id="applicantList" prefHeight="358.0" prefWidth="422.0" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
                       <padding>
                         <Insets bottom="10" left="10" right="10" top="10" />
@@ -86,7 +86,7 @@
                          </ImageView>
                            </children>
                         </HBox>
-      
+
                     <VBox fx:id="positionList" alignment="CENTER" prefHeight="382.0" prefWidth="438.0" styleClass="pane-with-border">
                       <padding>
                         <Insets bottom="10" left="10" right="10" top="10" />
