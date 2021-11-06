@@ -1553,7 +1553,7 @@ Deleting a student while all students are being shown
 * Note: We will be using index `1` to conduct manual testing for positive tests, but feel free to test with any valid index (any positive integer shown in the student list).
 
 * Test case: `delete 1`<br>
-  Expected: `Student` of index `1` is deleted from the list. Details of the deleted student shown in the status message.
+  Expected: `Student` of index `1` is deleted from the list. `Student` will be unenrolled from the `Lesson`, and `Lesson` with `Student` inside will decrease its size by `1`. Details of the deleted student shown in the status message.
 
 * Test case: `delete 0`<br>
   Expected: No student is deleted. Error details shown in the status message.
