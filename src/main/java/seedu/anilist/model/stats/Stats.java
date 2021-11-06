@@ -89,10 +89,9 @@ public class Stats {
 
     @Override
     public boolean equals(Object other) {
-        if (other == this // short circuit if same object
-                || (other instanceof Stats)) {
+        if (other == this) { // short circuit if same object
             return true;
-        } // instanceof handles nulls
+        }
 
         Stats otherStats = (Stats) other;
         assert otherStats != null;

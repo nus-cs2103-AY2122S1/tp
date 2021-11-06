@@ -1,6 +1,7 @@
 package seedu.anilist.model.stats;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.HashMap;
@@ -132,10 +133,13 @@ public class StatsTest {
             }};
         Stats stats1 = new Stats(1, 2, 3, genres1);
         Stats stats2 = new Stats(1, 2, 3, genres2);
+        Stats stats3 = new Stats(0, 0, 0, new HashMap<>());
 
         //same Stats object
         assertTrue(stats1.equals(stats1));
         //different Stats object
         assertTrue(stats1.equals(stats2));
+        //different status counts and genres
+        assertFalse(stats1.equals(stats3));
     }
 }
