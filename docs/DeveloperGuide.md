@@ -449,7 +449,7 @@ Step 2. `MarkingCommandParser` is initialized based on the parse results and `Ma
 to identify the indices present in ` 3`. `MarkingCommandParser#parse()` then initializes a
 `UnmarkCommand` with the indices present as arguments, which in this case is a single index 3.
 
-Step 3. `MarkCommand#execute()` is then called, which will in turn call `Model#checkForUnmarkedPerson()` on the applicants
+Step 3. `UnmarkCommand#execute()` is then called, which will in turn call `Model#checkForUnmarkedPerson()` on the applicants
 corresponding to the given indices. If there is no exception thrown, `Model#unmarkPerson()` is called to unmark the applicants corresponding to the given indices.
 
 Step 4. `CommandResult` is initialized with `String` containing the details of the newly unmarked applicants.
