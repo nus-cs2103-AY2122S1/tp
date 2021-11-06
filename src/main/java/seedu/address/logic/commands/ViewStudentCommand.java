@@ -19,7 +19,7 @@ public class ViewStudentCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Views the student identified by the index number used in the displayed student list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Parameters: INDEX (MUST be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_VIEW_STUDENT_SUCCESS = "Viewed Student: %1$s";

@@ -91,6 +91,8 @@ Once you have attempted these commands, you're ready to go!
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Notes about the command format:**<br>
+These are general rules applying to all explanations and command formats listed below!
+
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `addstu n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -109,6 +111,10 @@ Once you have attempted these commands, you're ready to go!
 
 * If you add parameters for commands that do not take in parameters (such as `help`, `liststu`, `exit` and `clear`), they will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+* `INDEX` items must be positive integers. Negative integers, decimal values, and zero will not be accepted for any command `INDEX`. <br>
+
+  e.g. if the command `viewstu -5` is entered, it will throw an invalid command format error, telling you to enter a positive integer `INDEX` only!
 
 </div>
 
@@ -135,17 +141,23 @@ Adds a tutorial class to ClassMATE.
 
 Entering format: `addc c/CLASS_CODE s/SCHEDULE [t/TAG]…​`
 
-<div markdown="span" class="alert alert-primary"> :bulb: **Note:**
+<div markdown="span" class="alert alert-primary"> :bulb: ** Note: ** <br>
+    Class Code should consist of 'G' followed by two numerical digits (i.e. any value from 'G01' to 'G99').<br>
+    Schedule consists of 2 weekly timeslots
+</div>
 
+* Schedule should strictly follow the format: [Day] (hh:mm)am/pm to (hh:mm)am/pm, [Day]...
 
-* Class Code should consist of 'G' followed by two numerical digits (i.e. any value from 'G01' to 'G99').
-* Schedule consists of 2 weekly timeslots
+* Incorrect timings are not checked.
+
+  <div markdown="span" class="alert alert-primary">:warning: **Warning:**
+  Entering wrong/impossible timings is possible and will not be stopped. Enter schedule timings carefully. :warning:
   </div>
 
 Examples:
 
-* `addc c/G06 s/Tuesday 2 to 4pm, Friday 2 to 4pm`
-* `addc c/G01 s/Monday 10am to 12pm, Thursday 10am to 12pm`
+* `addc c/G06 s/Tuesday 2:00pm to 4:00pm, Friday 2:00 to 4:00pm`
+* `addc c/G01 s/Monday 10:00am to 12:00pm, Thursday 10:00am to 12:00pm`
 
 ### Viewing a class: `viewc`
 
@@ -154,15 +166,16 @@ Examples:
 Views a class in ClassMATE, as shown above
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:**<br>
-`viewc` highlights the class chosen, and filters out only students in the class!
+`viewc` highlights the class at the given INDEX, and filters out only students in that class!
 </div>
+
 
 
 Entering format: `viewc INDEX`
 
 * Views the class details at the specified INDEX.
 * Details of a class includes students in the class and the class schedule.
-* The index refers to the index number shown in the displayed list of classes.
+* The index refers to the index number shown in the displayed list of classes, **not the Class Code**.
 * The index must be a positive integer 1, 2, 3, …​
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -186,12 +199,11 @@ Find classes by class codes.
 
 Entering format: `findc KEYWORD [MORE_KEYWORDS]`
 
-* The search is not absolute. e.g `G0` will match `G06`
+* The search is absolute. e.g `G0` will not match `G06`
 
 Examples:
 
-* `findc G02` returns `G02` if it exists
-* `findc G` returns `G01`, `G02`, `G03`<br>
+* `findc G02` returns `G02` if it exists<br>
 
 ### Deleting a class: `deletec`
 
@@ -229,14 +241,11 @@ Adds a student to ClassMATE.
 
 Entering format: `addstu n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLASS_CODE [t/TAG]…​`
 
-<div markdown="span" class="alert alert-info">:information_source: **Notes about addstu:** <br>
 
 * The Name of a student accommodates special characters such as hyphens, apostrophes and slashes.
 * The phone number should be at least 3 digits long.
 * The tutorial class with the given Class Code must already exist in classmate.
 * A student can have any number of tags (including 0)
-
-</div>
 
 Examples:
 * If class G06 has not been created, add the class first using `addc`.
@@ -250,9 +259,19 @@ Edits an existing student in ClassMATE.
 Entering format: `editstu INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS_CODE] [t/TAG]…​`
 
 * Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+
 * At least one of the optional fields must be provided.
+
+* The index will be checked *after* it checks for provision of at least one optional field.
+
+  <div markdown="span" class="alert alert-primary"> :information-source: **Note:**
+      An error message will be displayed to provide at least one field if no fields are provided, regardless of whether the INDEX is valid or not. The INDEX will be checked after at least one optional field is provided.
+  </div>
+
 * Existing values will be updated to the input values.
+
 * When editing tags, the existing tags of the student will be removed i.e adding of tags is not cumulative.
+
 * You can remove all the student’s tags by typing `t/` without
   specifying any tags after it.
 
@@ -372,17 +391,6 @@ Examples:
 * `liststu` followed by `addlm 2 m/Low`  and `deleteam 2` deletes all marks assigned to the 2nd student in the student list.
 * `findstu Betsy` followed by `deleteam 1` deletes all sessions' mark for 1st student in the results of `findstu`.
 
-### Clearing all students : `clear`
-
-Clears all students from ClassMATE. Below is how it would look like.
-
-![clear](images/clear.png)
-
-Entering format: `clear`
-
-<div markdown="span" class="alert alert-primary">:warning: **Warning:**
-This command deletes **ALL** students and is irreversible :warning:
-</div>
 
 ## Tutorial Class Commands
 
@@ -401,15 +409,11 @@ Adds a tutorial class to ClassMATE.
 
 Entering format: `addc c/CLASS_CODE s/SCHEDULE [t/TAG]…​`
 
-<div markdown="span" class="alert alert-primary"> :information-source: **Note:**
-
 * Class Code should consist of 'G' followed by two numerical digits (i.e. any value from `G01` to `G99`).
 
 * Schedule consists of 2 weekly timeslots. Day of the week should be capitalized. Short form for days are also accepted (e.g. Tues for Tuesday).
 
 * Time slots in Schedules should be written in the H:MM am/pm (e.g. 12:00pm)
-
-</div>
 
 Examples:
 * `addc c/G01 s/Tuesday 2:00pm to 4:00pm, Friday 2:00 to 4:00pm`
@@ -420,10 +424,16 @@ Examples:
 
 ![viewing a class](images/viewc.png)
 
-Displayes a class and its students in ClassMATE, as shown above.
+Displays a class and its students in ClassMATE, as shown above.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:**<br>
 `viewc` highlights the class chosen, and filters out only students in the class!
+</div>
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+
+
+In order to view all classes after, use the `listc` command. To view all students after, use `liststu`
+
 </div>
 
 Entering format: `viewc INDEX`
@@ -553,7 +563,7 @@ Only `OP1` and `OP2` are accepted as Group Types.
 
 
 Example:
-* `liststu c/G06`shows that Betsy is a student in class G06, with Index 1.
+* `liststu` shows that Betsy is a student in class G06, with Index 1.
   `addsg 1 gn/1 c/G06 type/OP1` then adds the student at Index 1, Betsy, to OP1 Group 1 in class G06
 
 ### Deleting Student from a group: `deletesg`
@@ -618,8 +628,8 @@ If your changes to the data file makes its format invalid, ClassMATE will discar
 Action | Format, Examples
 --------|------------------
 **Help** | `help`
-**Add student** | `addstu n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLASS_CODE [t/TAG]…​`<br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 c/G01 t/attentive`
-**Edit student** | `editstu INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS_CODE] [t/TAG]…​`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com`
+**Add student** | `addstu n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLASS_CODE [t/TAG]…​`<br> e.g., `addstu n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 c/G01 t/attentive` 
+**Edit student** | `editstu INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS_CODE] [t/TAG]…​`<br> e.g., `editstu 2 n/James Lee e/jameslee@example.com` 
 **View student** | `viewstu INDEX`<br> e.g., `liststu` followed by `viewstu 2`
 **Find student** | `findstu KEYWORD [MORE_KEYWORDS]`<br> e.g., `findstu John`
 **Delete student** | `deletestu INDEX`<br> e.g., `liststu` followed by `deletestu 3`
@@ -631,7 +641,6 @@ Action | Format, Examples
 **Find class** | `findc KEYWORD [MORE_KEYWORDS]`<br> e.g., `findc G02`
 **Add Tutorial Group** | `addcg gn/GROUP_NUMBER c/CLASS_CODE type/TYPE` <br> e.g.,`addcg gn/1 c/G01 type/OP1`
 **Delete Tutorial Group** | `deletecg gn/GROUP_NUMBER c/CLASS_CODE type/TYPE` <br> e.g., `deletecg gn/1 c/G11 type/OP1`
-**List Tutorial Group** | `listg`
 **Add Student to Group** | `addsg INDEX g/GROUP_NUMBER c/CLASSCODE type/TYPE` <br> e.g., `addsg  1 gn/1 c/G01 type/OP1`
 **Delete Student from Group** | `deletesg INDEX g/GROUP_NUMBER c/CLASSCODE type/TYPE` <br> e.g., `deletesg  1 gn/1 c/G01 type/OP1`
 **Clear all students** | `clear`
