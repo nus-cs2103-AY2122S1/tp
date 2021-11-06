@@ -95,6 +95,8 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
+    void updateFilteredPersonList();
+
     /**
      * Returns an unmodifiable view of the task list to be displayed on the GUI.
      */
