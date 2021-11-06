@@ -32,6 +32,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     *
+     * @param toBeCopied The AddressBook object that should be copied.
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
@@ -43,6 +45,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Replaces the contents of the person list with {@code persons}.
      * {@code persons} must not contain duplicate persons.
+     *
+     * @param persons The given List of persons.
      */
     public void setPersons(List<Person> persons) {
         this.persons.setPersons(persons);
@@ -50,6 +54,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     *
+     * @param newData The given AddressBook used to override this one.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
@@ -61,6 +67,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
+     *
+     * @param person The given Person.
      */
     public boolean hasPerson(Person person) {
         requireNonNull(person);
@@ -70,6 +78,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
+     *
+     * @param p The Person to be added.
      */
     public void addPerson(Person p) {
         persons.add(p);
@@ -79,6 +89,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Replaces the given person {@code target} in the list with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     *
+     * @param target The Person to be replaced.
+     * @param editedPerson The Person that is to replace {@code target}.
      */
     public void setPerson(Person target, Person editedPerson) {
         requireNonNull(editedPerson);
@@ -89,6 +102,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
+     *
+     * @param key The Person to be removed.
      */
     public void removePerson(Person key) {
         persons.remove(key);

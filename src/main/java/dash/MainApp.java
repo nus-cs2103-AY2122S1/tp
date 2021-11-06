@@ -141,6 +141,9 @@ public class MainApp extends Application {
      * Returns a {@code Config} using the file at {@code configFilePath}. <br>
      * The default file path {@code Config#DEFAULT_CONFIG_FILE} will be used instead
      * if {@code configFilePath} is null.
+     *
+     * @param configFilePath The file path to be used to initialise the Config.
+     * @return The Config generated using the file.
      */
     protected Config initConfig(Path configFilePath) {
         Config initializedConfig;
@@ -177,6 +180,9 @@ public class MainApp extends Application {
      * Returns a {@code UserPrefs} using the file at {@code storage}'s user prefs file path,
      * or a new {@code UserPrefs} with default configuration if errors occur when
      * reading from the file.
+     *
+     * @param storage The file path to be used to initialise the UserPrefs.
+     * @return The UserPrefs generated using the file.
      */
     protected UserPrefs initPrefs(UserPrefsStorage storage) {
         Path prefsFilePath = storage.getUserPrefsFilePath();

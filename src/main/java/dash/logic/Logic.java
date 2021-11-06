@@ -46,7 +46,6 @@ public interface Logic {
 
     /**
      * Returns an unmodifiable view of a list of previous valid user inputs.
-     * @return
      */
     ArrayList<String> getInternalUserInputList();
 
@@ -67,11 +66,15 @@ public interface Logic {
 
     /**
      * Set the user prefs' GUI settings.
+     *
+     * @param guiSettings A GuiSettings object that contains the GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
      * Set the current tab number for parsing commands.
+     *
+     * @param i The given tab number.
      */
     void setTabNumber(int i);
 }

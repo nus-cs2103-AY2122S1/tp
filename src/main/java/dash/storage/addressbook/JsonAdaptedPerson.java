@@ -63,6 +63,7 @@ public class JsonAdaptedPerson {
     /**
      * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
      *
+     * @return A Person object that corresponds to this JsonAdaptedPerson.
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {

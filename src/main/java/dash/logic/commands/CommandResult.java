@@ -40,6 +40,8 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
      * and other fields set to their default value.
+     *
+     * @param feedbackToUser A String containing the feedback to be shown to the user.
      */
     public CommandResult(String feedbackToUser) {
         this(feedbackToUser, false, false, false, false);
