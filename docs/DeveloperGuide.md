@@ -333,7 +333,7 @@ if command is valid. Command is invalid if user input is empty, or if user enter
 
 #### Design considerations
 
-**Aspect: How search executes:**
+**Aspect: How search executes**
 
 * **Alternative 1:** Multiple search commands to search using different identifiers.
     * Pros: Easy to implement.
@@ -394,7 +394,7 @@ Parsing of an alias command follows the following steps:
 If the command word of any future user input matches the alias, the first word of the user input will be replaced by the command word of the alias.
 The activity diagram of how a command is parsed can be found in the [Logic section of this guide](#logic-component).
 
-#### Design Considerations
+#### Design considerations
 
 **Aspect 1: How aliases are stored and parsed**
 
@@ -484,7 +484,7 @@ Furthermore, removing aliases is likely a very rare use case, and dedicating a w
 
 ### Product scope
 
-**Target user profile**:
+**Target user profile:**
 
 Targets professors of CS1101S who:
 * has a need to manage a significant number of students
@@ -494,7 +494,7 @@ Targets professors of CS1101S who:
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: This app will help CS1101S professors keep track of students' performance after each assessment,
+**Value proposition:** This app will help CS1101S professors keep track of students' performance after each assessment,
 doing so faster than a typical mouse/GUI driven app.
 It can analyse results of individual students, tutorial groups, or the whole cohort in each assessment,
 in order to identify students who may require additional help.
@@ -618,13 +618,13 @@ Others:
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X.
-* **Student**: A student in the database, identified by their name and NUSNET ID. Each student can be in multiple groups, and can have scores for multiple assessments.
-* **Group**: A group of students, identified by the group name.
-* **Assessment**: An assessment is identified by the assessment name.
-* **Score**: The score that a student has attained for an assessment, stored in percentage and can be recorded up to 2 decimal places. Each student can only have 1 score per assessment.
-* **Student list**: The list of students displayed on the right panel of Source Control. Student list can be filtered to display selected students only.
-* **Flag**: Arguments flags are used to indicate different types of user inputs e.g. `-n` for student name, and `-g` for group. More about flags can be found [here](https://ay2122s1-cs2103t-w08-2.github.io/tp/UserGuide.html#glossary).
+* **Mainstream OS:** Windows, Linux, Unix, OS-X.
+* **Student:** A student in the database, identified by their name and NUSNET ID. Each student can be in multiple groups, and can have scores for multiple assessments.
+* **Group:** A group of students, identified by the group name.
+* **Assessment:** An assessment is identified by the assessment name.
+* **Score:** The score that a student has attained for an assessment, stored in percentage and can be recorded up to 2 decimal places. Each student can only have 1 score per assessment.
+* **Student list:** The list of students displayed on the right panel of Source Control. Student list can be filtered to display selected students only.
+* **Flag:** Arguments flags are used to indicate different types of user inputs e.g. `-n` for student name, and `-g` for group. More about flags can be found [here](https://ay2122s1-cs2103t-w08-2.github.io/tp/UserGuide.html#glossary).
 
 <br>
 
