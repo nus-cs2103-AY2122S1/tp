@@ -40,16 +40,16 @@ public class LogicManager implements Logic {
     private final Model model;
     private final Storage storage;
     private final AddressBookParser addressBookParser;
-    private Encryption cryptor;
+    private Encryption token;
     private final Path encryptedFilePath;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
      */
-    public LogicManager(Model model, Storage storage, Encryption cryptor, Path encryptedFilePath) {
+    public LogicManager(Model model, Storage storage, Encryption token, Path encryptedFilePath) {
         this.model = model;
         this.storage = storage;
-        this.cryptor = cryptor;
+        this.token = token;
         this.encryptedFilePath = encryptedFilePath;
         addressBookParser = new AddressBookParser();
     }
@@ -69,7 +69,7 @@ public class LogicManager implements Logic {
                         .generateKey(((PasswordCommand) command).getNewPassword()), CIPHER_TRANSFORMATION);
                 temp.decrypt(encryptedFilePath, storage.getAddressBookFilePath());
                 newToken.encrypt(storage.getAddressBookFilePath(), encryptedFilePath);
-                cryptor = newToken;
+                token = newToken;
                 FileUtil.deleteFile(storage.getAddressBookFilePath());
             } catch (NoSuchPaddingException | InvalidAlgorithmParameterException
                     | UnsupportedPasswordException | InvalidKeyException | NoSuchAlgorithmException e) {
@@ -92,9 +92,9 @@ public class LogicManager implements Logic {
 
         commandResult = temp.orElse(command.execute(model));
         try { // decrypt -> modify -> encrypt -> delete subroutine
-            cryptor.decrypt(encryptedFilePath, storage.getAddressBookFilePath());
+            token.decrypt(encryptedFilePath, storage.getAddressBookFilePath());
             storage.saveAddressBook(model.getAddressBook());
-            cryptor.encrypt(storage.getAddressBookFilePath(), encryptedFilePath);
+            token.encrypt(storage.getAddressBookFilePath(), encryptedFilePath);
             FileUtil.deleteFile(storage.getAddressBookFilePath());
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);

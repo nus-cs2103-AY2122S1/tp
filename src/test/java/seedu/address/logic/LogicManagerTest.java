@@ -72,7 +72,7 @@ public class LogicManagerTest {
     private static final LogicManager LOGIC_MANAGER = new LogicManager(MODEL_WITH_CONTENT, null, null, null);
 
     private Logic logic;
-    private Encryption cryptor;
+    private Encryption token;
 
     @BeforeEach
     public void setUp()
@@ -80,9 +80,9 @@ public class LogicManagerTest {
         JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(MAIN_JSON_FILE_PATH);
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(MAIN_PREF_FILE_PATH);
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
-        cryptor = new EncryptionManager(EncryptionKeyGenerator.generateKey(PASSWORD), CIPHER_TRANSFORMATION);
+        token = new EncryptionManager(EncryptionKeyGenerator.generateKey(PASSWORD), CIPHER_TRANSFORMATION);
         FileUtil.createFile(MAIN_ENCRYPTED_FILE_PATH);
-        logic = new LogicManager(MODEL, storage, cryptor, MAIN_ENCRYPTED_FILE_PATH);
+        logic = new LogicManager(MODEL, storage, token, MAIN_ENCRYPTED_FILE_PATH);
     }
 
     @AfterEach
@@ -118,7 +118,7 @@ public class LogicManagerTest {
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(IO_EXCEPTION_PREF_FILE_PATH);
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
         FileUtil.createFile(IO_EXCEPTION_ENCRYPTED_FILE_PATH);
-        logic = new LogicManager(MODEL, storage, cryptor, IO_EXCEPTION_ENCRYPTED_FILE_PATH);
+        logic = new LogicManager(MODEL, storage, token, IO_EXCEPTION_ENCRYPTED_FILE_PATH);
 
         // Execute add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
@@ -136,7 +136,7 @@ public class LogicManagerTest {
     @Test
     public void execute_correctPasswordCommand_returnsEmptyOptional() throws IOException, InvalidKeyException {
         FileUtil.createFile(MAIN_JSON_FILE_PATH);
-        cryptor.encrypt(MAIN_JSON_FILE_PATH, MAIN_ENCRYPTED_FILE_PATH);
+        token.encrypt(MAIN_JSON_FILE_PATH, MAIN_ENCRYPTED_FILE_PATH);
         assertTrue(logic.executePasswordCommand(new PasswordCommand(PASSWORD, WRONG_PASSWORD)).isEmpty());
     }
 
@@ -144,7 +144,7 @@ public class LogicManagerTest {
     public void execute_incorrectPasswordCommand_returnsOptionalCommandResult() throws IOException,
             InvalidKeyException {
         FileUtil.createFile(MAIN_JSON_FILE_PATH);
-        cryptor.encrypt(MAIN_JSON_FILE_PATH, MAIN_ENCRYPTED_FILE_PATH);
+        token.encrypt(MAIN_JSON_FILE_PATH, MAIN_ENCRYPTED_FILE_PATH);
         assertFalse(logic.executePasswordCommand(new PasswordCommand(WRONG_PASSWORD, WRONG_PASSWORD)).isEmpty());
     }
 
