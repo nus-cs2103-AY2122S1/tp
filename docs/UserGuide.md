@@ -290,7 +290,7 @@ Example Usage:
 
 Adds a Next-of-Kin (NOK) to a Participant.
 
-Format: `addNok INDEX n/NAME p/PHONE tag/TAG`#
+Format: `addNok INDEX n/NAME p/PHONE tag/TAG`
 
 * Adds an NOK to the Participant at the specified `INDEX`.
 * The index refers to the index number of the Participant as shown in the displayed Participant list.
