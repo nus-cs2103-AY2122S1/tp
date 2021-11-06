@@ -140,19 +140,19 @@ The class diagrams of the `Student`, `Task` and `Group` classes are shown below:
 
 #### Student and Group component
 
-<img src="images/StudentGroupClassDiagram.png"/>
+![Structure of the Student and Group Class](images/StudentGroupClassDiagram.png)
 
 The `Student` component,
 
-* stores the student's personal information.
-* stores `Tag` and `RepoName` common to both `Student` and `Group` data types.
-* depends on `groupName` from the `Group` component.
+* stores the student's personal information as shown by composition in the diagram above.
+* stores `Tag` and `RepoName` which are clases common to both `Student` and `Group` data types. `RepoName` in this case refers to the name of the student's IP repository.
+* stores a reference to the `Group` the student is a part of via a unique `groupName` from the `Group` component (composition is not valid here as a `Group` can exist with an empty `Member` component). This attribute is not modifiable via teh regular `editStudent` command, and can only be modified internally when the student is added/deleted from a `Group`, or the `GroupName` of the student's group changes.
 
 The `Group` component,
 
-* stores group related information.
-* stores `Tag` and `RepoName` common to both `Student` and `Group` data types.
-* has a `Members` subcomponent that stores references to the `Student` component.
+* stores group related information, similarly shown by compostition in the diagram above.
+* stores `Tag` and `RepoName`. In this case, `RepoName` refers to the TP repository of the group.
+* has a `Members` subcomponent that stores references to the `Student` component. This is initialized with no references to any `Student` to allow for preemptive creation of groups before members are made known. 
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `XYZ` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `XYZ` object needing their own `Tag` objects.<br>
 
@@ -176,6 +176,7 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Implementation**
 
@@ -183,7 +184,7 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Find Command
 
-The find command can be executed for two main features in tApp: students and groups.
+The find command is generalised for two main groups of data in tApp: students and groups.
 
 #### Implementation
 
@@ -214,9 +215,69 @@ The above process is further summarised in the following sequence diagram:
 
 ![Sequence Diagram of Find Student](images/FindStudentSequenceDiagram.png)
 
-ℹ️ **Note:** The lifeline ****for `FindStudentCommandParser`, `FindStudentCommand`, `NameContainsKeywordPredicate` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+ℹ️ **Note:** The lifeline for `FindStudentCommandParser`, `FindStudentCommand`, `NameContainsKeywordPredicate` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+#### Design Considerations
+
+How can we improve search for a student?
+
+* **Alternative 1 (selected implementation):**
+    * Allow user to search through partial names. This is done through an `anyMatch` using any part of (`contains`) `String` predicate.
+    * *Pros:* Easier to implement, more convenient since there are no prefixes. Generally, this method results in a better user experience, since the user may not be exactly sure what the student name is if it is a complicated name.
+    * *Cons:* No search by different fields, e.g. email.
+  
+* **Alternative 2**:
+    * Allow search of students through different fields with multiple prefixes.
+    * *Pros:* More freedom to find a student based on different fields.
+    * *Cons:* Increases complexity in software.
+
+<div style="page-break-after: always;"></div>
+
+### Mark Attendance/Participation/Task-as-Done Command
+
+The mark command is generalised for two main groups of data in tApp: students and tasks.
+These commands can be accessed through `marka`, `markp` for students, and `doneTask` for tasks.
+
+#### Implementation
+
+Given below is an example usage scenario and how the marking mechanism behaves at each step.
+In this example, we explore the `marka` command.
+
+1. When the user executes the `marka` command, the user input is parsed to separate the command and its arguments.
+1. The format of the command is first checked, followed by the checking and separation of the individual arguments (student index(es) and week). This is done in the `MarkStudentAttCommandParser#parse(String args)` method.
+1. The student's attendance status for the particular week is retrieved and toggled. This operation is exposed in the `Model` interface as `Model#markStudenAttendance(Student student, int week)`.
+1. If the student is originally marked as absent, the method toggles his attendance to present.
+1. If the student is originally marked as present, the method toggles his attendance to absent.
+1. If the student belongs to a group, the group's student list will be updated with the updated student.
+1. Steps 3 to 6 are repeated for the next student, until all the specified students' attendance are marked as either present or absent.
+1. A new `CommandResult` is returned, switching the current display to the updated student list. 
+1. Note: An error message will be thrown if: student index out of bounds, duplicate student index in the command, invalid week, invalid command format, invalid type of argument.
+
+During the execution of `MarkStudentAttCommand`, the student list will be updated according to the arguments supplied.
+
+The following diagram shows the summarised workflow of a typical MarkStudentAtt command.
+
+![Activity Diagram of Mark Student Attendance Command](images/MarkStudentAttActivityDiagram.png)
+
+#### Design Considerations
+
+How can we improve the marking of attendance of a student?
+
+* **Alternative 1 (selected implementation):**
+    * Toggle the attendance when the `marka` command is executed for the student.
+    * *Pros:* More intuitive for the user, just call the command to mark the attendance. Easier to implement, more convenient since there are no prefixes/flags. 
+    * *Cons:* May accidentally mark the attendance wrongly (e.g. present to absent).
+
+* **Alternative 2**:
+    * Use of flags `-p` (present), `-a` (absent) to mark attendance
+    * *Pros:* Less confusing for the user when there is a larger set of students (>100). Lesser risk of mis-marking a user.
+    * *Cons:* Increases complexity, more flags for user to remember.
+
+<div style="page-break-after: always;"></div>
 
 ### Add Member to Group Command
+
+The add member command can be executed to form an association between two main data types in tApp, Groups and Students.
 
 #### Implementation
 
@@ -227,13 +288,21 @@ The main difference between the addMember command lies not in the way the `Logic
 
 When the user executes the `addMember` command, user input is parsed and the `Index` of student to be added, and the `GroupName` of the group to be added to are extracted into parameters of the `AddMemberCommand` class.
 
-The above process is shown in the following sequence diagram:
+If any errors are present in the user input, exceptions are thrown in the following components, summarised in the following activity diagram:
+
+![Activity Diagram of Add Member](images/AddMemberActivityDiagram.png)
+
+1. `AddMemberCommandParser` throws an exception if command format is invalid (negative/missing index, missing group prefix)
+1. `AddMemberCommand` throws an exception if the `Index` does not exist in the student list, `GroupName` is does not belong to any preexisting `Group`. It also throws an exception if the student is already in another group, or the student has already been added to the current group. 
+The workflow for throwing these exceptions is similar to the first two and is not shown in the activity diagram below.
+
+The interaction between the `Logic` and `Model` classes are shown in the following sequence diagram:
 
 ![Reference Sequence Diagram of Add Member](images/AddMemberRefSequenceDiagram.png)
 
 A key difference to note about this command is that gets a list of both `Students` and `Groups` from models, instead of only 1 list as per other commands.
 
-The follow steps describes the execution of the AddMember command.
+The follow steps describes the execution of the AddMember command:
 
 1. `AddMemberCommand` uses the provided `Index` and `GroupName` to obtain both a reference to the `Student` (using `Index`) and the `Group` (using `GroupName`). Since `GroupName` is unique, there will only be one `Group` selected.
 1. `AddMemberCommand` then uses these references to call the `addMembers` function of the `Model` class.
@@ -242,9 +311,10 @@ The follow steps describes the execution of the AddMember command.
 1. `Group` then calls the `addMember` function of its `Member` class, passing in the same `Student` parameter.
 1. The `Member` then stores a reference to this `Student`.
 1. `Model` then calls `setStudent` and `setGroup` to update these changes in `AddressBook`.
+1. Execution of this command then follows the usual execution path of all other commands in tApp.
 
 Unlike other commands which only changes itself in the `Model` class, `addMembers` updates both the `Student` to be added and the `Group` to which the student is added to, and saves both
-these changes in the `AddressBook`.
+these changes in the `AddressBook`. 
 
 #### Design considerations:
 
@@ -256,6 +326,12 @@ these changes in the `AddressBook`.
     * Pros: Smaller JSON file size due to smaller volume of information being referenced to.
     * Cons: Increases coupling between `Student` and `Group` classes, need to find the relevant `Student` object given its `Name` everytime the `Group` is to be displayed in the GUI,
       unnatural modelling of the real world since `Group` contains students and not the other way around.
+
+* Alternative 3: Have `Members` save the `Name` of students only
+    * Pros: Smaller JSON file size due to smaller volume of information being referenced to, lesser coupling due to only a unidirectional association.
+    * Cons: Unable to display the `GroupName` of a `Student` in the student display list using simple code implementation, reduction in input validation capabilities (assigning 1 student to 2 groups) since there is no direct way to determine if a `Student` is already in a group.
+
+<div style="page-break-after: always;"></div>
 
 ### Edit Group Command
 
@@ -358,6 +434,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 <img src=“images/AddTodoTaskCommandActivityDiagram.png”/>
 **Activity diagram showcasing the  add todo task execution flow**
 
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -387,9 +464,9 @@ This product is for CS2103/T TAs who are:
 
 **Value proposition**:
 
-TAs are required to access different platforms (LumiNUS, GitHub & CS2103/T website) and manage multiple groups and students.
+TAs are required to complete different tasks (mark attendance and participation, track tp progress) and manage multiple groups and students.
 
-This application aims to integrate different tools into a centralised platform that can improve a TA’s efficiency. It helps to ensure instructors complete all tasks on the relevant platforms by stipulated deadlines.
+This application aims to integrate different tasks into a centralised platform that can improve a TA’s efficiency. It helps to ensure instructors complete all tasks by stipulated deadlines.
 
 
 ### User stories
@@ -906,7 +983,7 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `deleteStudent 0`<br>
        Expected: No student is deleted. Error details shown in the status message.
 
-    1. Other incorrect delete commands to try: `deleteStudent`, `deleteStudent x`, `...` (where x is larger than the list size)<br>
+    1. Other incorrect delete commands to try: `deleteStudent`, `deleteStudent x`, `deleteStudent 1 2 3` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 ### Editing a student
@@ -1335,7 +1412,6 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `taskDone 1 2 3`<br>
        Expected: Tasks 1, 2 and 3 are marked as completed in the list. Status message shows details of tasks.
 
-
 ### Clearing task list
 
 1. Clearing the tasks list
@@ -1350,7 +1426,7 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `clearAll`<br>
        Expected: All students, tasks and groups cleared from the application.
 
-### Help Window
+## Help Window
 
 1. Opening the help window through command line
     1. Test case: `help`<br>
@@ -1364,7 +1440,7 @@ testers are expected to do more *exploratory* testing.
     1. Test case: click on the "COPY URL" button in the help page
        Expected: The url for the User Guide is copied.
 
-### Saving data
+## Saving data
 
 1. Dealing with missing/corrupted data files
 

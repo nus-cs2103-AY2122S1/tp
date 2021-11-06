@@ -96,7 +96,7 @@ Format: `addStudent n/NAME e/EMAIL s/STUDENTNUMBER [u/GITHUB USERNAME] [r/REPO N
 Examples:
 * `addStudent n/John Doe e/johnd@u.nus.edu s/A0123456B u/user r/ip t/friends t/owesMoney` adds John Doe to the list
   and displays a confirmation output with a proper GitHub link
-* `addStudent n/John Doe e/johnd@u.nus.edu s/A0123456B u/user` adds John Doe to the list and displays a confirmation
+* `addStudent n/Bohn Doe e/bohnd@u.nus.edu s/A0123456C u/user` adds Bohn Doe to the list and displays a confirmation
   output without a proper GitHub link, but storing the `GITHUB USERNAME` in memory nonetheless.
   ![result for 'addStudent'](images/addStudentJohnDoe.png)
 
@@ -151,8 +151,8 @@ Format: `marka INDEX [MORE_INDEXES] w/WEEK_NUMBER`
 
 Examples:
 
-* `students` followed by `marka 1 2 3 w/10` marks the 1st, 2nd and 3rd student in the students list as present in week 3.
-* Another `marka 1 w/10` instance will mark the 1st student in the student list as absent in week 3.
+* `students` followed by `marka 1 2 3 w/10` marks the 1st, 2nd and 3rd student in the students list as present in week 10.
+* Another `marka 1 w/10` instance will mark the 1st student in the student list as absent in week 10.
   ![result for 'marka'](images/marka.png)
 
 ### Marking a student's participation: `markp`
@@ -171,8 +171,8 @@ Format: `markp INDEX [MORE_INDEXES] w/WEEK_NUMBER`
 
 Examples:
 
-* `students` followed by `markp 1 2 3 w/10` marks the 1st, 2nd and 3rd student in the students list as participated in week 3.
-* Another `markp 2 w/10` instance will mark the 1st student in the student list as not participated in week 3.
+* `students` followed by `markp 1 2 3 w/10` marks the 1st, 2nd and 3rd student in the students list as participated in week 10.
+* Another `markp 2 w/10` instance will mark the 1st student in the student list as not participated in week 10.
   ![result for 'markp'](images/markp.png)
 
 ### Find student by name: `findStudent`
@@ -224,7 +224,7 @@ Format: `addGroup g/GROUP_NAME [r/REPO_NAME] [y/YEAR] [t/TAG]...`
 * `YEAR` represents the year field used in CS2103 Github links and not an actual calendar year. Input is therefore flexible to allow for changes in year formatting 
 
 Examples:
-* `addGroup g/W14-4 y/AY2122S1 r/tp t/tApp` adds group W14-4 to the list and displays a confirmation output with GitHub link and no
+* `addGroup g/W15-4 y/AY2122S1 r/tp t/tApp` adds group W15-4 to the list and displays a confirmation output with GitHub link and no
   group members
 * `addGroup g/f14-4 y/AY2122S1` adds group F14-4 to the list and displays a confirmation output with no GitHub link and group members
   ![result for 'addGroup'](images/addGroupF14-4.png)
@@ -243,7 +243,7 @@ Format: `editGroup INDEX [g/GROUP_NAME] [r/REPO_NAME] [y/YEAR] [t/TAG]…​`
 * Similiar to `editStudent` this command flags out index values less than 1 first, before missing fields, ensuring the validity of the fields, and finally the index that is greater than 0.
 
 Examples:
-* `editGroup 1 g/W14-4 r/tp` Edits the group name and repository name of the 1st group to be `W14-4` and `tp` respectively.
+* `editGroup 1 g/W11-4 r/tp2` Edits the group name and repository name of the 1st group to be `W11-4` and `tp2` respectively.
 * `editGroup 2 y/AY20212022 t/` Edits the name of the 2nd group to be `AY20212022` and clears all existing tags.
   ![result for 'editGroup'](images/editGroupF14-4.png)
 
@@ -273,7 +273,7 @@ Format: `addMember INDEX g/GROUP`
 * `GROUP` must be an existing group in the displayed group list.
 
 Examples:
-* `addMember 1 g/W14-4` adds the student with index 1 in the student list to group W14-4 and displays a confirmation output that the student has been added to the group.
+* `addMember 1 g/W10-2` adds the student with index 1 in the student list to group W10-2 and displays a confirmation output that the student has been added to the group.
   ![result for 'addMember'](images/addMemberF14-4.png)
 
 ### Delete a student from a group: `deleteMember`
