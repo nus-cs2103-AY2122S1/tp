@@ -155,20 +155,20 @@
     -fx-background-color: derive(-fx-base3, -10%);
 }
 
+.list-cell:filled:even:hover {
+    -fx-background-color: derive(-fx-base4, 0%);
+}
+
+.list-cell:filled:odd:hover {
+    -fx-background-color: derive(-fx-base3, 0%);
+}
+
 .list-cell:filled:even:selected {
     -fx-background-color: derive(-fx-base4, -15%);
 }
 
 .list-cell:filled:odd:selected {
     -fx-background-color: derive(-fx-base3, -15%);
-}
-
-.list-cell:hover {
-    -fx-border-width: 3;
-}
-
-.list-cell:selected {
-    -fx-border-width: 5;
 }
 
 .list-cell:empty {

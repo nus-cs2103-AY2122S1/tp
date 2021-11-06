@@ -30,12 +30,13 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_newClient_success() {
+        String testClientId = "7";
+
         Function<ClientId, Client> validClientFunction = new ClientBuilder().buildFunction();
-        Client validClient = new ClientBuilder().build();
+        Client validClient = new ClientBuilder().withClientId(testClientId).build();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.addClient(new ClientBuilder().build());
-
+        expectedModel.addClient(new ClientBuilder().withClientId(testClientId).build());
         assertCommandSuccess(new AddCommand(validClientFunction), model,
             String.format(AddCommand.MESSAGE_SUCCESS, validClient), expectedModel);
     }

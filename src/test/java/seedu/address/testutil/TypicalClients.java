@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import static java.lang.String.valueOf;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CURRENTPLAN_AMY;
@@ -99,6 +100,8 @@ public class TypicalClients {
         for (Client client : getTypicalClients()) {
             ab.addClient(client);
         }
+        int numOfClients = getTypicalClients().size();
+        ab.setClientCounter(valueOf(numOfClients));
         return ab;
     }
 

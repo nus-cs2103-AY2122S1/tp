@@ -72,9 +72,7 @@ public class Client {
      * Invokes this when the client is no longer referenced.
      */
     public void delete() {
-        tags.forEach(tag -> {
-            tag.removeClient(this);
-        });
+        tags.forEach(tag -> tag.removeClient(this));
     }
 
     /**
@@ -100,8 +98,8 @@ public class Client {
             return true;
         }
 
-        return otherClient.getName().equals(getName())
-            && otherClient.getEmail().equals(getEmail());
+        return otherClient.getClientId().equals(getClientId())
+            || (otherClient.getName().equals(getName()) && otherClient.getEmail().equals(getEmail()));
     }
 
     public Name getName() {
