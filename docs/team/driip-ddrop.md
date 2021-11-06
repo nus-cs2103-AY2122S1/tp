@@ -23,15 +23,15 @@ Given below are my contributions to the project.
 **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=driip-ddrop&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17)
 
 **Project management**:
-* Updated Developer Guide user stories.
+* Updated Developer Guide user stories and refactor UML Diagrams.
 * Updated README to fit our project
 
 **Testing**:
 * Wrote tests for all new and enhanced features:
-  [#57](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/57),
-* [#131](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/131),
+ ( [#57](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/57),
+  [#131](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/131),
   [#139](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/139),
-  [#145](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/145)
+  [#145](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/145) )
 
 **Documentation**:
 * User Guide:
@@ -40,8 +40,9 @@ Given below are my contributions to the project.
 
 * Developer Guide:
     * Updated the Developer Guide for the User stories: [#106](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/106)
+    * Updated documentation details for delete feature : [#219](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/219)
 
 **Community**:
-* PRs reviewed:
+* PRs reviewed (with non-trivial review comments):
   [#101](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/101),
 [#208](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/208)
