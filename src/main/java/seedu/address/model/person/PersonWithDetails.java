@@ -17,8 +17,6 @@ public class PersonWithDetails {
     private Set<GroupWithDetails> groupsWithDetails;
     private Set<Task> tasks;
 
-    //TODO add Task details?
-
     /**
      * Creates an object that holds a person with some of his other details!
      *
