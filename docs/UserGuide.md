@@ -89,11 +89,19 @@ To set up a working version of SPAM on your device, follow the steps below.
 
 #### Graphical User Interface
 
-SPAM has a graphical user interface built for you to enjoy easy interaction with the application.
+SPAM has a graphical user interface built for you to enjoy easy interaction with the application. This section describes
+each part of the graphical user interface in detail.
 
-<div class="alert alert-warning" role="alert">
-  This section is coming soon!
-</div>
+<figure class="figure">
+   <img src="images/GraphicalUserInterface.png" class="figure-img img-fluid rounded" alt="Graphical User Interface">
+</figure>
+
+| Label | Description |
+| ----- | ----------- |
+| 1     | **Toolbar**. This is where the settings that allow you to switch between light mode and dark mode is located. There is also a button to exit the application and another button to open the help window. |
+| 2     | **Command Input**. This is where you will type in the commands to be executed by the application. |
+| 3     | **Command Result**. This text box displays the string response from the application after a command is entered. |
+| 4     | **List of Contacts**. This is the list of contacts that are stored in the application. |
 
 ##### Controls
 
