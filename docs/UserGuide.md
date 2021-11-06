@@ -375,6 +375,8 @@ Examples:
 | DONE | `d/` | [**done**](#done-d) |
 
 </div>
+
+<p align="center"><a href="#table-of-contents">Click here to see the table of contents</a></p>
         
 ### Filtering interviews : `filter_interview`
 Filters applicants by interview dates based on whether they are upcoming or have past current date and time.
@@ -398,6 +400,8 @@ Examples:
 * If you type `filter_interview future` or 
  `filter_interview fUTURE` in the command box, you are able to see applicants with interviews that are after [29th October 2021, 1600].
 
+<p align="center"><a href="#table-of-contents">Click here to see the table of contents</a></p>
+
 ### Deleting an applicant : `delete`
 
 Deletes applicants by their index from the applicants list in RecruitIn.
@@ -418,6 +422,8 @@ Examples:
 * After you execute the command `find n/John`, `delete 1` deletes the 1st applicant in the results of the `find` command.
 * After you execute the command `list`, `delete 2 4 7` deletes the 2nd, 4th and 7th applicants listed in RecruitIn.
 
+<p align="center"><a href="#table-of-contents">Click here to see the table of contents</a></p>
+
 ### Showing search terms : `show`
 
 Shows you unique search terms which you can use for a specific prefix.
@@ -435,6 +441,8 @@ Examples:
 Suppose the applicants list includes 3 applicants with name and role `John, Software Developer`, `Mary, Cook` and `Mary, Cleaner`.
 * `show n/` will display a list consisting of `John` and `Mary`.
 * `show r/ n/` will display a list consisting of `Software Developer`, `Cleaner` and `Cook`.
+
+<p align="center"><a href="#table-of-contents">Click here to see the table of contents</a></p>
 
 ### Marking an applicant : `mark`
 
