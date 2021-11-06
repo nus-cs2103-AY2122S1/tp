@@ -91,6 +91,14 @@ public class AnimeListTest {
     }
 
     @Test
+    public void removeAnime_nonEmptyAnimeList_returnsTrue() {
+        animeList.addAnime(AOT);
+        animeList.removeAnime(AOT);
+        AnimeList expectedAnimeList = new AnimeList();
+        assertEquals(expectedAnimeList, animeList);
+    }
+
+    @Test
     public void fetchStats_emptyAnimeList_returnsTrue() {
         HashMap<Genre, Integer> expectedGenreCountHashmap = new HashMap<>();
         Stats expectedStats = new Stats(0, 0, 0, expectedGenreCountHashmap);
@@ -116,6 +124,16 @@ public class AnimeListTest {
         assertEquals(expectedStats, animeList.fetchUserStats());
     }
 
+    @Test
+    public void equals() {
+        assertTrue(animeList.equals(new AnimeList()));
+
+        animeList.setAnimeList(getTypicalAnime());
+        AnimeList expectedAnimeList = new AnimeList();
+        expectedAnimeList.setAnimeList(getTypicalAnime());
+
+        assertTrue(animeList.equals(expectedAnimeList));
+    }
     /**
      * A stub ReadOnlyAnimeList whose animes list can violate interface constraints.
      */
