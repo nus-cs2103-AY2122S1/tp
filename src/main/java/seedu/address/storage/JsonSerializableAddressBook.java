@@ -65,11 +65,16 @@ class JsonSerializableAddressBook {
             }
             addressBook.addClient(client);
         }
-        int highestClientId = clients.stream()
-            .map(JsonAdaptedClient::getClientId)
-            .mapToInt(Integer::parseInt)
-            .max().getAsInt();
-        addressBook.setClientCounter(String.valueOf(highestClientId + 1));
+        if (clients.size() == 0) {
+            addressBook.setClientCounter("0");
+        } else {
+            int highestClientId = clients.stream()
+                .map(JsonAdaptedClient::getClientId)
+                .mapToInt(Integer::parseInt)
+                .max().getAsInt();
+            addressBook.setClientCounter(String.valueOf(highestClientId + 1));
+        }
+
         return addressBook;
     }
 
