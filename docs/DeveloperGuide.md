@@ -217,8 +217,20 @@ Option | Default
 --- | ---
 IS_BLANK_VALUE_ALLOWED | `false`
 IS_NULL_VALUE_ALLOWED | `false`
-DEFAULT_VALUE | `""`(But not applicable here)
+DEFAULT_VALUE | `""`(But not used as value is required)
 IS_EDITABLE | `true`
+
+### 3.7.6 FieldLength interfaces
+
+<img src="images/FieldLengthDiagram.png" width="700" />
+
+There are FieldLength interfaces that contain a `MAX_LENGTH` field. This is used to help limit the number of characters that a user can input for a particular field.
+
+FieldLength type | `MAX_LENGTH` value
+--- | ---
+StandardFieldLength | 30
+ShorterFieldLength | 15
+LongerFieldLength | 100
 
 --------------------------------------------------------------------------------------------------------------------
 
