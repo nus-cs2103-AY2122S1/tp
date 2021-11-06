@@ -28,7 +28,7 @@ EdRecord is a **desktop app for managing student contacts, optimized for use via
 
    - **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
-   - **`clear`** : Deletes all contacts.
+   * **`clear`** : Deletes all contacts and modules/groups.
 
    - **`exit`** : Exits the app.
 
@@ -323,7 +323,7 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from EdRecord.
+Clears all entries, both contacts and modules/groups, from EdRecord.
 
 Format: `clear`
 
