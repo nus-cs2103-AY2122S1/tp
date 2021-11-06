@@ -514,7 +514,14 @@ This command provides a Box Plot of the performance of all `Student` in `Academy
 
 `VisualizeCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
 
-{Improve on explanation and add a possible UML Diagram}
+The grades are collated by iterating through all the students and extracting the grades from the `Assessment` HashMap using the input `Assessment` as the key.
+
+The information is returned as a HashMap with key being the `Assessment` name and value being a list containing the class' grade in that assessment.
+The information will be displayed in the AdditionalView. The success message is parsed into `CommandResult` to be returned by `VisualizeCommand`.
+
+The following sequence diagram describes what happens when `VisualizeCommand` is executed:
+
+![VisualizeCommandSequenceDiagram](images/dg/logic/commands/visualizecommand/VisualizeCommandSequenceDiagram.png)
 
 ### FilterCommand
 
