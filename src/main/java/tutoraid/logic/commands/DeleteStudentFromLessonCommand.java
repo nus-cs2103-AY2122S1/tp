@@ -26,10 +26,10 @@ public class DeleteStudentFromLessonCommand extends DeleteCommand {
 
     public static final String MESSAGE_USAGE = String.format("%1$s %2$s: Removes a student from a lesson."
                     + "\nParameters: "
-                    + "\n%3$sSTUDENT INDEX (must be a positive integer)"
-                    + "  %4$sLESSON INDEX (must be a positive integer)"
+                    + "\n%3$sSTUDENT INDEX [MORE INDEXES...] (must all be positive integers)"
+                    + "  %4$sLESSON INDEX [MORE INDEXES...] (must be a positive integer)"
                     + "\nExample:"
-                    + "\n%1$s %2$s %3$s1 %4$s2",
+                    + "\n%1$s %2$s %3$s1 2 3 4 %4$s2",
             COMMAND_WORD, COMMAND_FLAG, PREFIX_STUDENT, PREFIX_LESSON);
 
     public static final String MESSAGE_SUCCESS = "Successfully removed %s from %s.\n";
