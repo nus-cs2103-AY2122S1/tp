@@ -60,14 +60,19 @@ activate ProfileSetUpWindow
 ProfileSetUpWindow --> ProfileSetUpWindow
 deactivate ProfileSetUpWindow
 
+ProfileSetUpWindow --> MainWindow : start()
+
 ProfileSetUpWindow --> ProfileSetUpWindow
 deactivate ProfileSetUpWindow
 
-ProfileSetUpWindow --> MainWindow : start()
+ProfileSetUpWindow --> MainWindow
 deactivate ProfileSetUpWindow
 
 end
 
 end
+
+<-- MainWindow
+deactivate MainWindow
 
 @enduml
