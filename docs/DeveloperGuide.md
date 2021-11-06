@@ -234,7 +234,7 @@ This section describes some noteworthy details on how certain features are imple
 Weekly recurring or one-off (makeup) lessons are classified as `Lesson` objects. These lessons can be added to any particular
 student in TAB. Added lessons can also be edited and deleted.<br>
 
-A `Lesson` is represented in the application as shown in the figure below. It contains a start `Date`, an end `Date`, a `TimeRange` for the
+A `Lesson` is represented in the application as shown in the figure below. It contains a start `Date`, an end `Date`, a `CancelledDates` set,  a `TimeRange` for the
 `Lesson`, a `Subject`, a `LessonRates` and `Homework` fields. There are 2 types of `Lesson` – `RecurringLesson` and `MakeUpLesson`. `RecurringLesson`
 represents a **weekly** recurring lesson. `MakeUpLesson` represents a one-off lesson outside the regular schedule.<br>
 
@@ -307,7 +307,14 @@ The `executeUndoableCommand()` method of the `LessonEditCommand` uses this `edit
 The new lesson is stored in TAB in place of the old lesson. The student's list of lessons will be updated to reflect
 the changes made to the specified lesson.<br>
 
+#### Cancelling and Uncancelling Lessons
+
+Cancelling and uncancelling of lessons is done using the `LessonEditCommand`, which allows the user to specify multiple dates to be cancelled and uncancelled.
+
+Cancelled dates of a lesson are stored as a field, `CancelledDates` in the lesson object. When a user specifies a valid lesson date to be cancelled, the date is added into the `CancelledDates` set. When a user specifies a valid lesson date to be uncancelled, the date is removed from `CancelledDates`.
+
 #### Deleting lessons
+
 The `LessonDeleteCommand` deletes the lesson specified by its lesson index in the displayed list of lessons with respect to the
 student with this lesson.
 
@@ -383,18 +390,7 @@ Some knowledge of the CalendarFX `Entry` _API_ (provided [here](https://dlsc.com
 is necessary to understand the conversion that happens in [`CalendarEntryList#convertRecurringLessonToEntries(Person, Lesson)`](https://github.com/AY2122S1-CS2103T-F13-3/tp/blob/master/src/main/java/seedu/address/model/lesson/CalendarEntryList.java#L331)
 and [`CalendarEntryList#convertToMakeupEntry(Person, Lesson)`](https://github.com/AY2122S1-CS2103T-F13-3/tp/blob/master/src/main/java/seedu/address/model/lesson/CalendarEntryList.java#L384).
 
-It is important to understand the limitations of CalendarFX `Entry`. In particular, it does not support recurrence exceptions. 
-This means that we cannot modify properties of specific occurrences of a recurring `Entry`. 
-For example, suppose we have a lesson entry that recurs weekly starting from 1st Jan till 31st Dec. There is no in-built way to change the details of a single date, 
-such as cancelling a lesson only on 15th Jan. However, cancelling lessons for a particular week is a valid and common
-behaviour of a 1-to-1 private home tutor. 
-
-To circumvent this problem, [`CalendarEntryList#convertRecurringLessonToEntries(Person, Lesson)`](https://github.com/AY2122S1-CS2103T-F13-3/tp/blob/master/src/main/java/seedu/address/model/lesson/CalendarEntryList.java#L331)
-maps `RecurringLesson`s to a `List` of `Entry`s. The aforementioned example lesson would thus be converted to:
-1. A first calendar `Entry` that recurs weekly, from 1st Jan to 8th Jan (inclusive);
-2. A second calendar `Entry` that recurs weekly, from 22nd Jan to 31st Dec (inclusive).
-
-This effectively "cancels" the lesson that occurs on 15th Jan in the calendar interface.
+It is important to understand the limitations of CalendarFX `Entry`. In particular, it does not support recurrence exceptions. See [Displaying of recurring lessons with cancelled dates](#displaying-of-recurring-lessons-with-cancelled-dates) for more details.
 
 #### Design considerations
 
@@ -421,6 +417,28 @@ We chose alternative 2 and integrated CalendarFX into our app as the possibility
   * Cons: Much harder to implement, no more fancy transitions or inbuilt buttons, and GUI improvements seem marginal at best.
 
 Alternative 1 is our preferred choice as its pros and cons seem much better than alternative 2, especially due to its ease of implementation. The main difficulty of alternative 1 becoming familiar with the CalendarFX _API_, but this difficulty is also present in alternative 2.
+
+#### Displaying of recurring lessons with cancelled dates
+
+Entries of recurring lessons are displayed with the help of recurrence rules in CalendarFX. However, CalendarFX does not support the exclusion of specific dates in the recurrence. For example, suppose we have a lesson entry that recurs weekly starting from 1st Jan till 31st Dec. There is no in-built way to change the details of a single date, such as cancelling a lesson only on 15th Jan. However, cancelling lessons for a particular week is a valid and common behaviour of a 1-to-1 private home tutor.
+
+As a work around, we create multiple `Entry`s to represent a single `RecurringLesson` with the method [`CalendarEntryList#convertRecurringLessonToEntries(Person, Lesson)`](https://github.com/AY2122S1-CS2103T-F13-3/tp/blob/master/src/main/java/seedu/address/model/lesson/CalendarEntryList.java#L331).
+
+Example:
+* A recurring lesson has a start date of `1 Sep 2021` with no end date.
+* The user cancels the lesson on `22 Sep 2021` and `13 Oct 2021`.
+
+To represent this recurring lesson, 3 calendar entries are created:
+1. Recurring entry 1 with start date of `1 Sep 2021`, and end date of `15 Sep 2021`
+2. Recurring entry 2 with start date of `29 Sep 2021` and end date of `6 Oct 2021`
+3. Recurring entry 3 with start date of `20 Oct 2021` and no end date.
+
+This effectively "cancels" the lesson that occurs on `22 Sep 2021` and `13 Oct 2021` in the calendar interface.
+
+The figure below shows the recurring lesson displayed on the yearly calendar, where the lesson occurs on the dates marked green.
+
+![Recurring Calendar Entries](images/RecurringCalendarEntries.png)
+*Figure I.1.2: Recurring lesson displayed on the yearly calendar*
 
 ### Upcoming lesson reminders
 The reminder feature allows users to view a list of upcoming lessons that ends in the next 48 hours.
@@ -694,26 +712,27 @@ If the `Command` is an `UndoableCommand`, it will be pushed to the `undoStack` b
 
 ### Finding students
 
-The `FindCommand` allows users to find students based on person fields.
+The `FindCommand` allows users to find students based on person fields and lesson fields.
 
-**Current Implementation**
+Finding students is facilitated by the `PersonMatchesKeywordsPredicate`.
+* `PersonMatchesKeywordsPredicate` stores a list of keywords for each field that is being searched for.
+* It also stores a `FindCondition` which takes on one of the values `ALL`, `ANY`, or `NONE`, and defaults to `ALL`. It determines whether all, any or none of the fields specified are required to match with a given person, for the person to be returned.
+
+Given below is an example usage scenario and how the Find Command is executed:
+* **Step 1:** The user enters the `find` command with name keyword `John` and tag keyword `unpaid`.
+* **Step 2:** The `FindCommandParser` parses this command and creates a `PersonMatchesKeywordsPredicate` that stores the respective keywords for name and tag.
+* **Step 3:** This predicate is passed into the method `Model#updateFilteredPersonList`.
+* **Step 4:** When the `PersonMatchesKeywordsPredicate#test(person)` method is called, a predicate is created for each searched field, name and tag, which tests if the given person's fields contain all the specified keywords.
+* **Step 5:** All searched field predicates are composed into a single predicate, depending on the find condition. This composed predicate is then applied on the person to determine whether there is a match.
 
 ![Find Command](images/FindSequenceDiagram.png)
 
 *Figure I.5.1: Sequence Diagram of Find Command*
 
-The user can specify multiple fields to search for and each field takes in multiple keywords.
-An exception is the tag field which only accepts a single keyword. Instead, users can specify multiple tag fields.
+![Find Command Continued](images/FindUpdateFilteredListLogicSequenceDiagram.png)
+*Figure I.5.2: Continued Sequence Diagram of Find Command*
 
-The `PersonMatchesKeywordsPredicate` is used to test whether a person matches the specified keywords.
-For each searchable field, a predicate is created which tests if a given person's field contains all specified keywords.
-
-Additionally, a `FindCondition` can be specified by the user which determines whether `all`, `any` or `none` of the fields specified are required to match with a given person, for the person to be returned. The default is `all`.
-
-The `PersonMatchesKeywordsPredicate#test()` method will compose all searched field predicates into a single predicate, depending on the find condition.
-The predicate is then used to filter the list of person.
-
-#### Design considerations
+#### Design considerations:
 
 **Aspect: Data structure of predicates**
 * **Alternative 1 (current choice):** Use a single `PersonMatchesKeywordsPredicate` class to represent all fields' predicates.
@@ -1564,7 +1583,7 @@ A lot of effort was required to make this feature work as there was very a steep
 Integrating the interface into our app with JavaFX was also extremely difficult, as the learning curve was just as steep with JavaFX and FXML elements.
 It took two weeks (from v1.1 to v1.2b) of learning and trial-and-error to achieve a working prototype of a weekly calendar and the CenterPanel which houses it.
 Furthermore, additional complex calendar logic had to be added to customise behaviours to fit our target audience, such as allowing recurrence exceptions.
-Implementation of these features took ~4k Loc.
+Implementation of these features took ~4k LOC.
 
 **Undo/Redo feature**
 
@@ -1578,9 +1597,25 @@ the debugging of regression error to make undo compatible with all the new comma
 
 **Finding students**
 
+The finding students feature required much consideration in designing the find constraints to ensure it is flexible and usable for users. It was challenging to implement a data structure to allow searching by multiple fields concurrently, which may each accept multiple keywords, and may have different search behaviours. In addition to student fields, lesson fields were also used in the find feature, increasing its complexity. The find feature also allows users to optionally customise the matching condition, which required more effort to implement. The large number of parameters and variations also meant that it was more susceptible to bugs, and it required intensive and careful testing. 
+
 **Lessons**
 
+Adding lesson required changes to the current model. AB3's implementation only involves a single entity `Person`, whereas TAB deals with an additional entity, `Lesson`. Handling interactions between the two different entities becomes more complicated due to their differing behaviours and interactions with the model. The difficulty came in ensuring the addition of `Lesson` can interact with the `Model` to produce the desired behaviour. For the fields in `Lesson`, we had to ensure the validity checks are accurate to prevent the application from misbehaving. This required in-depth analysis to how the commands should be parsed and is not trivial.
+
+Furthermore, we also factored in many considerations when implementing the GUI to allow users to visualise both lessons and students at the same time, conveniently. The final implementation involved a grid layout, where the list of lessons are displayed side-by-side the student's list. The displayed list of lessons are isolated to the specific student selected. Users can select a student to view the list of lessons of that student.
+
 **Clashing Lessons**
+
+Arguably, one of the toughest part about lessons was implementing the checks for lessons with overlapping timings. Clashing lessons mean that at one point of time, one of the lessons will be happening concurrently with another lesson or lessons.<br>
+
+There were many factors we had to take into consideration:
+
+* Makeup lesson vs recurring: Do the timings overlap? Does the makeup lesson fall on the same day of week as the recurring lesson? If so, is the date of the makeup lesson before the recurring lesson's start date? Is either of the lessons cancelled on the overlapping date?
+  
+* Recurring lesson vs recurring lesson: Do the date ranges overlap? Do the timings overlap? Do they fall on the same day of week? For the overlapping regions, are the overlapping dates cancelled for the lessons in a way that there are no clashes?
+
+Implementation of the `Lesson` features took ~6-7k LOC, including tests.
 
 **Fee Calculator**
 
@@ -1592,5 +1627,9 @@ While the groundwork for `FeesCalculator` was tedious, the implementation of the
 The current method `FeesCalculator#getNumOfLessonsSinceLastUpdated()` was mainly contributed by [Eliana](http://github.com/eeliana) with earlier versions contributed by various members of the team as well ([Lingshan](http://github.com/lingshanng) and [Koon Hwee](http://github.com/angkoonhwee)). 
 The test scripts were written by multiple team members to ensure a bug-free implementation of `FeesCalculator`. The implementation of the automated fees update feature was thoroughly tested and reviewed by all members of the team due to its complexity.
 
+**Viewing tags feature**
 
-
+There are multiple ways of implementing this enhancement. The simplest way would be to just create a method in `Addressbook` to add `Tag` objects from each `Person` in `UniquePersonList` whenever users request to view the list of tags.
+However, to abide by the Separation of Concerns (SoC) principle, the `UniqueTagList` class is created for adding distinct tags from `Person` into the tag list. 
+One of the alternative implementations is to keep a list of `Person` objects with the same `Tag` in the `Tag` object to keep track of the number of students labeled with that `Tag`. However, this could introduce circular dependencies.
+The implementation of `UniqueTagList` involved multifaceted considerations and multiple changes to ensure a balance between ease of implementation, efficiency as well as space allocation. The implementation of this feature took ~1k LOC including test cases.
