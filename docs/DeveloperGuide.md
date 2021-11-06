@@ -1367,7 +1367,7 @@ expected to correct the input parameters one by one._
       Expected: No student will be found since name should only contain alphanumeric characters and spaces. An update
 message showing that `No students found.` will also be displayed in the message box. 
 
-#### View a lesson's roster 
+#### Viewing a lesson's roster 
 
 1. View a lesson's roster using `LESSON_INDEX` while all students and lessons are being shown
 
@@ -1381,12 +1381,12 @@ the student list. The lesson list will be updated to show the lesson identified 
 or lesson shown if there is no student enrolled in the lesson identified by the lesson index of `2`. An update message
 showing the number and the name of the students who are enrolled in the lesson will also be displayed in the message box.
 
-    * Incorrect roster by passing in nothing or non-number as parameter: `roster`, `roster a`, `roster -`, 
+    * Incorrect roster commands to try: `roster`, `roster a`, `roster -`, 
 `roster LESSON_CODE`<br>
         Expected: No roster will be applied. An alert message will be shown in the message box, warning the user to
 follow the command format by using `LESSON_INDEX`.
 
-    * Incorrect roster by passing in a a `LESSON_INDEX` that is larger than the number of `LESSONS`: `roster 100`<br>
+    * Other incorrect roster commands to try: `roster 100` (passing in a a `LESSON_INDEX` that is larger than the number of `LESSONS`)<br> 
         Expected: No roster will be applied. An error message will be shown in the message box, warning the user to only
 use valid `LESSON_INDEX`.
 
