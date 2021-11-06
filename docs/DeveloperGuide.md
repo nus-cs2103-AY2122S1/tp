@@ -1479,8 +1479,7 @@ testers are expected to do more *exploratory* testing.
     * `Student` must not have any existing classes that clash with the duration in `Lesson`
     * `Student` must currently be enrolled in fewer than `10` lessons
     * `Lesson` must currently have fewer than `15` students enrolled inside the lesson
-    * Should any of the above conditions not be met, the `Student` will not be able to be enrolled in the `Lesson` of interest  
-
+    * Should any of the above conditions not be met, the `Student` will not be able to be enrolled in the `Lesson` of interest
 
   * Note: 
     * We will be using index `2` to conduct manual testing for positive tests, but feel free to test with any valid index (any positive integer shown in the student and lesson lists).
@@ -1488,14 +1487,34 @@ testers are expected to do more *exploratory* testing.
     * The `Student` of index `2` (Bernice Yu of grade P4) will be enrolled into `Lesson` of `index` 2 (Math-P4-Wed-1800).
 
   * Test case: `enroll 2 l/2`<br>
-    Expected: `Student` of index `1` is enrolled in `Lesson` of index `3` . Details of the student and lesson enrolled in shown in the status message.
+    Expected: `Student` of index `2` is enrolled in `Lesson` of index `2` . Details of the student and lesson enrolled in shown in the status message.
 
   * Test case: `enroll 0 l/0`<br>
     Expected: No student is enrolled in any lesson. Error details shown in the status message.
 
-  * Other incorrect delete commands to try: `enroll`, `enroll 1`, `enroll 1 l/0`, `enroll 0 l/1`, `enroll x l/y`, `enroll y l/x` (where x is larger than the list size, and y is a negative integer)<br>
+  * Other incorrect enroll commands to try: `enroll`, `enroll 1`, `enroll 1 l/0`, `enroll 0 l/1`, `enroll x l/y`, `enroll y l/x` (where x is larger than the list size, and y is a negative integer)<br>
     Expected: Similar to previous.
-  
+
+#### Unenrolling a student
+
+1. Unenrolling a `Student` from a `Lesson`, while all students and lessons are being shown
+
+    * Prerequisites: List all students and lessons using the `list` command. Multiple "Students" and "Lessons" in the list.
+
+    * Note:
+        * We will be using index `1` to conduct manual testing for positive tests, but feel free to test with any valid index (any positive integer shown in the student and lesson lists).
+        * In this case, we will be using the sample data given when loading up **TuitiONE** for the first time (delete tuitione.json file if it is not your first time).
+        * The `Student` of index `1` (Alex Yeoh of grade S1) is enrolled in the `Lesson` of `index` 3 (Science-S1-Fri-1330).
+        * The `Lesson` of index `1` is (English-P2-Mon-0900).
+
+    * Test case: `unenroll 1 l/3`<br>
+      Expected: The `Student` of index `1` (Alex Yeoh of grade S1) is unenrolled the `Lesson` of `index` 3 (Science-S1-Fri-1330). The details of the unenroll is displayed in the status message.
+
+    * Test case: `unenroll 1 l/1`<br>
+      Expected: The `Student` of index `1` (Alex Yeoh of grade S1) is unable to be unenrolled from The `Lesson` of index `1` (English-P2-Mon-0900). Status message stating student is not enrolled in the lesson is displayed.
+
+    * Other incorrect enroll commands to try: `unenroll`, `unenroll 1`, `unenroll 1 l/0`, `unenroll 0 l/1`, `unenroll x l/y`, `unenroll y l/x` (where x is larger than the list size, and y is a negative integer)<br>
+      Expected: An error message corresponding to the incorrect field or an error message showing the correct command format is displayed.
 
 #### Finding a student
 
