@@ -129,7 +129,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     public void handleMouseClicked(String inputCommand) {
         try {
-            executeCommand(inputCommand);
+            executeCommand(inputCommand, true);
         } catch (ParseException | CommandException e) {
             logger.warning("HandleMouseClicked caught an exception when not supposed to:\n"
                     + e.getMessage());
@@ -170,7 +170,7 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        commandBox = new CommandBox(this::executeCommand, this::executeInternalCommand);
+        commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
@@ -232,11 +232,12 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Executes the command and returns the result.
      *
-     * @see seedu.address.logic.Logic#execute(String)
+     * @see seedu.address.logic.Logic#execute(String, boolean)
      */
-    private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
+    private CommandResult executeCommand(String commandText, boolean isInternal)
+            throws CommandException, ParseException {
         try {
-            CommandResult commandResult = logic.execute(commandText);
+            CommandResult commandResult = logic.execute(commandText, isInternal);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
@@ -255,26 +256,6 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isWriteCommand()) {
                 allTaskListPanel.updateTreeView(logic.getObservablePersonList());
             }
-
-            return commandResult;
-        } catch (CommandException | ParseException e) {
-            logger.info("Invalid command: " + commandText);
-            resultDisplay.setFeedbackToUser(e.getMessage());
-            throw e;
-        }
-    }
-
-    /**
-     * Executes the command and returns the result.
-     *
-     * @see seedu.address.logic.Logic#executeInternal(String)
-     */
-    private CommandResult executeInternalCommand(String commandText) throws CommandException, ParseException {
-        try {
-            CommandResult commandResult = logic.executeInternal(commandText);
-            logger.info("Result: " + commandResult.getFeedbackToUser());
-            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-
             if (commandResult.isChangeCommandBox()) {
                 commandBox.setText(commandResult.getAdditionalText());
             }

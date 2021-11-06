@@ -1,13 +1,10 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -15,75 +12,57 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.PieChart;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskListManager;
-import seedu.address.testutil.PersonBuilder;
 
-public class AddCommandTest {
+public class AccessCacheCommandTest {
+
+    private final Model model = new AccessCacheCommandTest.ModelStub();
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
+    public void constructor_nullCommand_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AccessCacheCommand(null));
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
-
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
-
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS,
-                validPerson,
-                validPerson.getTasks().size(),
-                StringUtil.singularOrPlural("task", validPerson.getTasks().size())
-            ), commandResult.getFeedbackToUser()
-        );
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+    public void upKey_givesBefore() throws Exception {
+        CommandResult command = new AccessCacheCommand("UP").execute(model);
+        assertEquals("Before", command.getAdditionalText());
+        assertEquals("", command.getFeedbackToUser());
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Person validPerson = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson);
-
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+    public void downKey_givesAfter() throws Exception {
+        CommandResult command = new AccessCacheCommand("DOWN").execute(model);
+        assertEquals("After", command.getAdditionalText());
+        assertEquals("", command.getFeedbackToUser());
     }
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        AccessCacheCommand command = new AccessCacheCommand("DOWN");
+        AccessCacheCommand commandSame = new AccessCacheCommand("DOWN");
+        AccessCacheCommand commandDifferent = new AccessCacheCommand("UP");
 
-        // same object -> returns true
-        assertEquals(addAliceCommand, addAliceCommand);
+        //null
+        assertNotEquals(null, command);
 
-        // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertEquals(addAliceCommand, addAliceCommandCopy);
+        //same object
+        assertEquals(command, command);
 
-        // different types -> returns false
-        assertNotEquals(1, addAliceCommand);
+        //same direction
+        assertEquals(command, commandSame);
 
-        // null -> returns false
-        assertNotEquals(null, addAliceCommand);
-
-        // different person -> returns false
-        assertNotEquals(addAliceCommand, addBobCommand);
+        //different direction
+        assertNotEquals(command, commandDifferent);
     }
 
     /**
-     * A default model stub that have all the methods failing.
+     * A default model stub that have all themethods failing.
      */
     private class ModelStub implements Model {
         @Override
@@ -198,12 +177,12 @@ public class AddCommandTest {
 
         @Override
         public String getBefore() {
-            throw new AssertionError("This method should not be called.");
+            return "Before";
         }
 
         @Override
         public String getAfter() {
-            throw new AssertionError("This method should not be called.");
+            return "After";
         }
 
         @Override
@@ -231,47 +210,4 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
     }
-
-    /**
-     * A Model stub that contains a single person.
-     */
-    private class ModelStubWithPerson extends ModelStub {
-        private final Person person;
-
-        ModelStubWithPerson(Person person) {
-            requireNonNull(person);
-            this.person = person;
-        }
-
-        @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return this.person.isSamePerson(person);
-        }
-    }
-
-    /**
-     * A Model stub that always accept the person being added.
-     */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Person> personsAdded = new ArrayList<>();
-
-        @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSamePerson);
-        }
-
-        @Override
-        public void addPerson(Person person) {
-            requireNonNull(person);
-            personsAdded.add(person);
-        }
-
-        @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
-        }
-    }
-
 }

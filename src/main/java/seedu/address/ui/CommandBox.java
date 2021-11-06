@@ -21,7 +21,6 @@ public class CommandBox extends UiPart<Region> {
     private static final String FXML = "CommandBox.fxml";
 
     private final CommandExecutor commandExecutor;
-    private final InternalCommandExecutor internalCommandExecutor;
 
     @FXML
     private TextField commandTextField;
@@ -29,10 +28,9 @@ public class CommandBox extends UiPart<Region> {
     /**
      * Creates a {@code CommandBox} with the given {@code CommandExecutor}.
      */
-    public CommandBox(CommandExecutor commandExecutor, InternalCommandExecutor internalCommandExecutor) {
+    public CommandBox(CommandExecutor commandExecutor) {
         super(FXML);
         this.commandExecutor = commandExecutor;
-        this.internalCommandExecutor = internalCommandExecutor;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
     }
@@ -45,9 +43,9 @@ public class CommandBox extends UiPart<Region> {
     private void keyPressed(KeyEvent key) {
         try {
             if (key.getCode().equals(KeyCode.UP)) {
-                internalCommandExecutor.executeInternal("accesscache -qqUP");
+                commandExecutor.execute("accesscache -qqUP", true);
             } else if (key.getCode().equals(KeyCode.DOWN)) {
-                internalCommandExecutor.executeInternal("accesscache -qqDOWN");
+                commandExecutor.execute("accesscache -qqDOWN", true);
             } else {
                 //Do Nothing
             }
@@ -72,7 +70,7 @@ public class CommandBox extends UiPart<Region> {
         }
 
         try {
-            commandExecutor.execute(commandText);
+            commandExecutor.execute(commandText, false);
             commandTextField.setText("");
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
@@ -107,22 +105,8 @@ public class CommandBox extends UiPart<Region> {
         /**
          * Executes the command and returns the result.
          *
-         * @see seedu.address.logic.Logic#execute(String)
+         * @see seedu.address.logic.Logic#execute(String, boolean)
          */
-        CommandResult execute(String commandText) throws CommandException, ParseException;
+        CommandResult execute(String commandText, boolean isInternal) throws CommandException, ParseException;
     }
-
-    /**
-     * Represents a function that can execute commands.
-     */
-    @FunctionalInterface
-    public interface InternalCommandExecutor {
-        /**
-         * Executes the command and returns the result.
-         *
-         * @see seedu.address.logic.Logic#executeInternal(String)
-         */
-        CommandResult executeInternal(String commandText) throws CommandException, ParseException;
-    }
-
 }

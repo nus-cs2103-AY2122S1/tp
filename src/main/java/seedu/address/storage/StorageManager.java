@@ -9,8 +9,9 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.UserCommandCache;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.cache.UserCommandCache;
+
 
 /**
  * Manages storage of AddressBook data in local storage.
@@ -29,7 +30,7 @@ public class StorageManager implements Storage {
         super();
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
-        this.userCommandCache = userCommandCache.getInstance();
+        this.userCommandCache = UserCommandCache.getInstance();
     }
 
     // ================ UserPrefs methods ==============================

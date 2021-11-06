@@ -108,5 +108,5 @@ public class JsonAdaptedTask {
         Task.setDaysPriorToTaskDate(modelDaysPriorToTaskDate);
 
         return newTask;
-    };
+    }
 }
