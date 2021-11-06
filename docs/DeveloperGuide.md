@@ -1618,6 +1618,27 @@ use valid `LESSON_INDEX`.
     * Test case: `filter english S1`<br>
       Expected: No filter is applied, and no change to both lists. The message box displays a message alerting the user that the command format inputted is invalid, along with a description of what the filter command does, its parameters, and an example usage.
 
+#### Help
+
+1. Getting help by entering help command
+
+    * Test case: `help` <br>
+      Expected: Status message should inform you that a help window is opened. A help window that displays all the commands of TuitiONE will appear.
+
+2. Getting help by using the help button
+
+    * Test case: Click on the help button in the top left of the TuitiONE application. A dropdown list with the option "Help F1" will appear. Click on the "Help F1" option.
+      <center>
+      <img src="images/DeveloperGuideImage/help_ui.png"/>
+      </center><br>
+    Expected: A help window that displays all the commands of TuitiONE will appear.
+
+3. Getting help by pressing the F1 key
+
+    * Prerequisite: TuitiONE is the active window on your computer. If you are unsure, click on the TuitiONE application to make it the active window.
+
+    * Test case: Press the F1 key on your keyboard.
+      Expected: A help window that displays all the commands of TuitiONE will appear.
 
 #### Clearing data
 
