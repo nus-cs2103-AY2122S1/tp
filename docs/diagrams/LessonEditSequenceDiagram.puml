@@ -53,7 +53,7 @@ destroy LessonEditCommandParser
 AddressBookParser --> LogicManager : le
 deactivate AddressBookParser
 
-LogicManager -> LessonEditCommand : execute()
+LogicManager -> LessonEditCommand : executeUndoableCommand()
 activate LessonEditCommand
 
 LessonEditCommand -> Model : handle Lesson Edit logic

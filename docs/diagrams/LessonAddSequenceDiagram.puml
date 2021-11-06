@@ -45,7 +45,7 @@ destroy LessonAddCommandParser
 AddressBookParser --> LogicManager : la
 deactivate AddressBookParser
 
-LogicManager -> LessonAddCommand : execute()
+LogicManager -> LessonAddCommand : executeUndoableCommand()
 activate LessonAddCommand
 
 LessonAddCommand -> Model : handle Lesson Add logic
