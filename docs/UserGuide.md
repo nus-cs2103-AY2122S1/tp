@@ -179,31 +179,23 @@ Lists residents whose ART collection or FET tests are either:
 | Note | The given `DATE2` must be a date later than the given `DATE1`<br>`DATE1` is the start date and `DATE2` is the last date inclusive | Anyone whose fet and collection is due before but not on `DATE1` is outputted
 
 Here's a step by step guide for `Normal Keyword`:<br>
-1. Navigate to the `Resident` Tab
-   ![Step1](images/logic/commands/deadlinecommand/step1.png)
-
-
-2. Type the `deadline` command with the `normal keyword`, `f` for fet or `c` for collection, `d1`, the start date and
+1. Type the `deadline` command with the `normal keyword`, `f` for fet or `c` for collection, `d1`, the start date and
    `d2`, the end date.
+   ![Step1](images/logic/commands/deadlinecommand/step1a.png)
+
+
+2. The event list will now show the filtered list of residents.
    ![Step2](images/logic/commands/deadlinecommand/step2a.png)
 
 
-3. The event list will now show the filtered list of residents.
-   ![Step3](images/logic/commands/deadlinecommand/step3a.png)
-
-
 Here's a step by step guide for `Late Keyword`:<br>
-1. Navigate to the `Resident` Tab
-   ![Step1](images/logic/commands/deadlinecommand/step1.png)
-
-
-2. Type the `deadline` command with the `late keyword`, `lf` for late fet or `lc` for late collection, `d1`, the 
+1. Type the `deadline` command with the `late keyword`, `lf` for late fet or `lc` for late collection, `d1`, the 
    end date
+   ![Step1](images/logic/commands/deadlinecommand/step1b.png)
+
+
+2. The event list will now show the filtered list of residents.
    ![Step2](images/logic/commands/deadlinecommand/step2b.png)
-
-
-3. The event list will now show the filtered list of residents.
-   ![Step3](images/logic/commands/deadlinecommand/step3b.png)
    
 
 Examples:
@@ -459,21 +451,13 @@ Format: `include INDEX r/RESIDENTS`
 </div>
 
 Here's a step by step guide:<br>
-1. Navigate to the `Event` Tab
-   ![Step1](images/logic/commands/includecommand/step1.png)
-   
-
-2. View the event to add residents to, either through the `view` command or by clicking on the desired event
-   ![Step2](images/logic/commands/includecommand/step2.png)
-
-
-3. Type the `include` command with the `index` of the event, and the `names/rooms` of the residents to include to
+1. Type the `include` command with the `index` of the event, and the `names/rooms` of the residents to include to
    the event. When adding multiple `names/rooms`, remember to separate the `names/rooms` by a comma.
-   ![Step3](images/logic/commands/includecommand/step3.png)
+   ![Step1](images/logic/commands/includecommand/step1.png)
 
 
-4. The sidebar will now show the updated list of residents in the event.
-   ![Step2](images/logic/commands/includecommand/step4.png)
+2. The sidebar will now show the updated list of residents in the event.
+   ![Step2](images/logic/commands/includecommand/step2.png)
    
 
 Examples:
@@ -501,21 +485,13 @@ Format: `exclude INDEX r/RESIDENTS`
 </div>
 
 Here's a step by step guide:<br>
-1. Navigate to the `Event` Tab
+1. Type the `exclude` command with the `index` of the event, and the `names/rooms` of the residents to exclude from
+   the event. When removing multiple `names/rooms`, remember to separate the `names/rooms` by a comma.
    ![Step1](images/logic/commands/excludecommand/step1.png)
 
 
-2. View the event to remove residents from, either through the `view` command or by clicking on the desired event
+2. The sidebar will now show the updated list of residents in the event.
    ![Step2](images/logic/commands/excludecommand/step2.png)
-
-
-3. Type the `exclude` command with the `index` of the event, and the `names/rooms` of the residents to exclude from
-   the event. When removing multiple `names/rooms`, remember to separate the `names/rooms` by a comma.
-   ![Step3](images/logic/commands/excludecommand/step3.png)
-
-
-4. The sidebar will now show the updated list of residents in the event.
-   ![Step2](images/logic/commands/excludecommand/step4.png)
 
 Examples:
 * `exclude 1 r/A101` removes the resident who stays in room A101 from the first event in the address book
