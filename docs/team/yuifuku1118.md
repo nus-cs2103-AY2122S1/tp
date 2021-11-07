@@ -1,4 +1,3 @@
--
 layout: page
 title: Yuichiro Fukushima's Project Portfolio Page
 ---
@@ -30,7 +29,5 @@ Given below are my contributions to the project.
         * Added the all the user stories   [\#35]()
 
 * **Community**:
-    * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
-    * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
-    * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
+    * PRs reviewed (with non-trivial review comments): [\#119](), [\#120](), [\#51](), [\#50]()
 
