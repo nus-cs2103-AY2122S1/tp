@@ -39,7 +39,7 @@ user to quickly return to the table of contents conveniently at sensible places.
   commands were meant to behave
   
 * Given that the changes are general and are all over the entire document, I thought it was easiest to provide a link
-to the relevant PR, instead of trying to copy and paste snippets: https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/287
+to the [relevant PR](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/287) 
 
 #### Contributions to the DG
 * I wrote up a few sections of the "Implementation" portion of the developer guide, to explain various design decisions
