@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.commons.core.Messages.MESSAGE_ORDERS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.SortOrdersCommandTest.DATE_DESC;
 import static seedu.address.model.Model.PREDICATE_SHOW_COMPLETED_ORDERS;
 import static seedu.address.testutil.TypicalOrders.getTypicalOrderBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -79,7 +80,22 @@ class ShowCompletedOrdersTest {
 
         ShowCompletedOrders command = new ShowCompletedOrders();
         expectedModel.updateFilteredOrderList(PREDICATE_SHOW_COMPLETED_ORDERS);
-        String expectedMessage = String.format(MESSAGE_ORDERS_LISTED_OVERVIEW, 2);
+        String expectedMessage = String.format(MESSAGE_ORDERS_LISTED_OVERVIEW, 3);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_sortedOrders_remainsSorted() {
+        OrderBook typicalOrderBook = getTypicalOrderBook();
+        model.setOrderBook(typicalOrderBook);
+        expectedModel.setOrderBook(typicalOrderBook);
+
+        model.sortOrderList(DATE_DESC);
+        expectedModel.sortOrderList(DATE_DESC);
+        expectedModel.updateFilteredOrderList(PREDICATE_SHOW_COMPLETED_ORDERS);
+
+        ShowCompletedOrders command = new ShowCompletedOrders();
+        String expectedMessage = String.format(MESSAGE_ORDERS_LISTED_OVERVIEW, 3);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
 

@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.SortOrdersCommand;
+import seedu.address.model.sort.SortDescriptor;
 import seedu.address.model.sort.SortField;
 import seedu.address.model.sort.SortOrdering;
 
@@ -24,10 +25,12 @@ public class SortOrdersCommandParserTest {
     @Test
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
-        SortOrdersCommand expectedSortOrdersCommand =
-                new SortOrdersCommand(new SortField("amount"), new SortOrdering("desc"));
+        SortDescriptor descriptor =
+                new SortDescriptor(new SortField("amount"), new SortOrdering("desc"));
+        SortOrdersCommand expectedSortOrdersCommand = new SortOrdersCommand(descriptor);
+
         assertParseSuccess(parser, " " + PREFIX_SORT_FIELD + "amount " + PREFIX_SORT_ORDERING + "desc",
-                expectedSortOrdersCommand);
+            expectedSortOrdersCommand);
 
         // multiple whitespaces between keywords
         assertParseSuccess(parser, " \n " + PREFIX_SORT_FIELD + "amount "
