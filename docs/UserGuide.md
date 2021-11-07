@@ -66,18 +66,21 @@ Let's try adding a student with the following details:
    * You will now be able to see __David__ at the entry in the person panel on the left,
    as shown in the image below.
    ![Add David](images/imagesInUG/student-addDavid.png)
-
+<br>
+     
 2. Now lets try editing his address. Note the index number beside his name in the person panel, in this case it is 5.<br>
    Type the following command `student -e 5 a/Kent Ridge` and hit `Enter`.
    * This updates the address of David, who is at index __5__ to "Kent Ridge".
    * Note that the other details are unchanged, you can choose which fields you want to edit.
-    
+<br>
+
 
 3. You can add a lesson to David. Let's assign a __Math__ lesson from __10:00__ to __12:00__ on __Friday__. <br>
    Type the following command `student -al 5 s/Math st/10:00 et/12:00 d/Fri` and hit `Enter`.
    * This adds a lesson to David with the given details.
    * You can view your schedule for the week by entering `schedule`, try it!
-
+<br>
+     
 
 4. If you wish to view more details of a student, you can use the student view command.<br>
    Type `student -v 5` in the Command Panel and hit `Enter`.
@@ -411,10 +414,11 @@ Example:
 Deletes a lesson from the specified group
 </summary>
 
-Format: `student -dl GROUP_INDEX LESSON_INDEX`
+Format: `group -dl GROUP_INDEX LESSON_INDEX`
 
 * Specifies the group at `GROUP_INDEX`.
 * Deletes the specified lesson at `LESSON_INDEX` of the group specified.
+  The `LESSON_INDEX` can be found using the [group viewing command](#viewing-a-group-group--v).
 * Both `GROUP_INDEX` and `LESSON_INDEX` must be a positive number.
 
 Example:
