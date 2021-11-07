@@ -8,7 +8,6 @@ title: User Guide
 contHACKS is a **desktop app to help Teaching Assistants (TAs) in managing contacts. It is optimized for use via a Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). contHACKS **streamlines the creation, reading, updating and deleting operations of contacts** to make it fast and efficient for TAs, easing your workload to focus on the more important task - teaching.
 
 <div style="page-break-after: always;"></div>
-
 ## Table of Contents <a name="table-of-contents"></a>
 * [Quick start](#quick-start)
 
@@ -41,7 +40,6 @@ contHACKS is a **desktop app to help Teaching Assistants (TAs) in managing conta
 * [Command Summary](#summary)
 
 <div style="page-break-after: always;"></div>
-
 ## Quick start <a name="quick-start"></a>
 
 1. Ensure you have Java `11` or above installed in your computer
@@ -57,7 +55,6 @@ contHACKS is a **desktop app to help Teaching Assistants (TAs) in managing conta
 <img src="images/MainApp.png" width="800px">
 
 <div style="page-break-after: always;"></div>
-
 ## How to use this User Guide <a name="how-to-use"></a>
 
 This section provides tips on reading this document, as well as how to navigate it.
@@ -100,6 +97,7 @@ Refer to the image below for more information on the different components of Con
 
 <img src="images/Walkthrough_2.png" width="1000px">
 
+<div style="page-break-after: always;"></div>
 #### Lesson List Panel
 
 <img src="images/Walkthrough_3.png" width="1000px">
@@ -138,9 +136,7 @@ Some example commands you can try:
    * `exit` : Exits the app
 
 <div style="page-break-after: always;"></div>
-
 ## Features <a name="features"></a>
-
 ### General <a name="general"></a>
 
 #### Accessing the help page : `help` <a name="help"></a>
@@ -160,8 +156,6 @@ Exits the program.
 Format: `exit`
 
 Command aliases: `quit` `q`
-
-***
 
 ### Managing contacts <a name="managing-contacts"></a>
 
@@ -204,6 +198,7 @@ Format: `edit INDEX [n/NAME] [e/EMAIL] [m/MODULE_CODE LESSON_CODE(S)] [p/PHONE] 
 To remove an existing phone number/telegram handle/remark from a contact, simply input `p/``h/``r/` respectively.
 </div>
 
+<div style="page-break-after: always;"></div>
 Examples:
 * `edit 1 e/ben321@gmail.com p/91234567`: Edits the email and phone number of the 1st contact to be `ben321@gmail.com` and `91234567`respectively
 * `edit 2 m/CS2100 T09 B09 m/CS2103T T01`: Edits the modules of the 2nd contact to be `[CS2100 T09 B09], [CS2103T T01]`
@@ -239,8 +234,7 @@ Command aliases: `del` `rm` `d`
 
 <img src="images/DeleteCommand.png" width="800px">
 
-***
-
+<div style="page-break-after: always;"></div>
 #### Finding contacts by name / module code: `find` <a name="find"></a>
 
 Finds a contact by specifying either the name/module code(s).
@@ -249,7 +243,7 @@ Format: `find n/NAME`/`find m/MODULE_CODE(S)`
 * Can only search by name or module code(s), but not both at once <br> i.e. You cannot perform `find n/Ben m/CS2040S`
 * The search is case-insensitive <br> e.g `ben` will match `Ben`
 * The order of the keywords does not matter <br> e.g. `Ben Tan` will match `Tan Ben`
-* Partial words will also be matched <br> e.g. `Ben` will match `Benjamin`
+* Partial words will also be matched, for both name and module code searches. <br> e.g. `Ben` will match `Benjamin`
 
 <div markdown="span" class="alert alert-primary">:exclamation: **Important:**
 If multiple words are specified for the name search, only results matching all the words specified will be returned <br>
@@ -266,8 +260,6 @@ Examples:
 Command alias: `f`
 
 <img src="images/FindCommand.png" width="800px">
-
-***
 
 #### Listing all contacts : `list` <a name="list"></a>
 
@@ -294,7 +286,6 @@ Command aliases: `clr` `c`
 <img src="images/ClearCommand.png" width="800px">
 
 <div style="page-break-after: always;"></div>
-
 ### Managing lessons <a name="managing-lessons"></a>
 
 #### Adding a lesson: `addc` <a name="addc"></a>
@@ -378,6 +369,7 @@ Finds a contact by specifying the module code(s)/day(s)/start time(s).
 Format: `findc m/MODULE_CODE(S)`/`findc d/DAY(S)`/`findc t/START_TIME(S)`
 * Can only search using one prefix at a time <br> i.e. You cannot perform `findc m/CS2040S d/2`
 * The search is case-insensitive <br> e.g `cs2040` will match `CS2040`
+* Only for module codes, partial word matches will also be matched. <br> e.g. `S123` will match `CS1231`
 * Day input is only accepted in integer form <br> e.g. `1` for Monday, `7` for Sunday
 * Start time input is only accepted in the `HH:mm` format <br> e.g. `15:00` `09:00`
 
@@ -423,8 +415,6 @@ Command aliases: `clrc` `cc`
 
 <img src="images/ClearLessonCommand.png" width="800px">
 
-***
-
 ### Managing Data <a name="managing-data"></a>
 
 #### Saving the data <a name="saving-data"></a>
@@ -444,7 +434,6 @@ If your changes to the data file makes its format invalid, contHACKS will discar
 </div>
 
 <div style="page-break-after: always;"></div>
-
 ## Command Summary <a name="summary"></a>
 
 <table>

@@ -562,17 +562,56 @@ testers are expected to do more *exploratory* testing.
 
 ### Adding a person
 
+1. Prerequisites: None.
+
+2. Test case: `add n/Ben e/ben@example.com m/CS2103T T11 B04 p/9123456 h/@Benny`<br>
+      Expected: The person with the fields entered should be added into the contact list panel. The module code `CS2103T [T11 B04]` should be rendered.
+
+3. Test case: `add n/Casey e/casey@example.com m/CS2103T p/81234567 h/@caaaasey`<br>
+      Expected: The person with the fields entered should be added into the displayed contacts. The module code `CS2103T` should be rendered.
+
+4. Incorrect `add` command to try: `add add n/Ben e/ben@example.com m/CS2103T T11 B04 p/9123456 h/@Benny`<br>
+      Expected: No person is added because the `add` command is provided twice.
+
 ### Adding a lesson
+
+1. Prerequisites: None.
+
+2. Test case: `addc m/CS2103T T12 d/4 t/09:00 10:00 r/Online`<br>
+   Expected: The lesson with the fields entered would be added into the lesson list panel.
+
+3. Incorrect `addc` command: `addc addc addc m/CS2103T T12 d/4 t/09:00 10:00`<br>
+   Expected: No lesson is added because the `addc` command is provided twice.
 
 ### Finding a person
 
+1. Prerequisites: There exists a contact named `Alex Yeoh` in the contact list, and no `Alexander` exists in the contact list.
+
+2. Test case: `find n/le Y`<br>
+   Expected: Contact with name `Alex Yeoh` is listed. 
+
+3. Test case: `find n/alexander`<br>
+   Expected: No contact is listed. No error is shown.
+
+4. Incorrect find commands to try: `find`, `find alex`, `find n/`<br>
+   Expected: No contact is listed. Error details shown in the result display. Text in the command box turns red.
+
 ### Finding a lesson
 
+   1. Prerequisites: There exists a lesson with module code `CS1231` in the contact list, and no `CS1231S` exists in the contact list.
+
+   2. Test case: `findc m/S123`<br>
+         Expected: Lesson with module code `CS1231` is listed.
+
+   3. Test case: `findc m/cs1231s`<br>
+         Expected: No lesson is listed. No error is shown.
+
+   4. Incorrect find commands to try: `findc`, `findc cs1231`, `findc m/`<br>
+            Expected: No contact is listed. Error details shown in the result display. Text in the command box turns red.
+       
 ### Editing a person
 
 ### Editing a lesson
-
-Editing some fields in the lesson saved in contHACKS.
 
 1. Prerequisites: The lesson must exist in contHACKS and could be access via a valid index.
 
@@ -583,8 +622,6 @@ Editing some fields in the lesson saved in contHACKS.
    Expected: An error message will be shown in the result display, showing that the index provided is invalid. The words in the command box will turn red.
 
 ### Deleting a person
-
-1. Deleting a person while all persons are being shown
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
