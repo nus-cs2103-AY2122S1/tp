@@ -31,8 +31,8 @@ public class Order implements Comparable<Order> {
      * Confirms the id when the application is sure the order is valid.
      */
     public void confirmId() {
-        this.id = id;
-        id++;
+        this.id = count;
+        count++;
     }
 
     public boolean getIsComplete() {

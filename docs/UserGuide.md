@@ -191,7 +191,7 @@ Allows you to delete a client from SalesNote.
 Examples:
 * Using `listclients` first, to display all clients in SalesNote followed by `deleteclient 2` will 
   delete the 2nd client in the displayed list.
-* Using `find Alice` first, followed by `deleteclient 1` will delete the 1st client in the results of the `find` command.
+* Using `findclient Alice` first, followed by `deleteclient 1` will delete the 1st client in the results of the `findclient` command.
   </br> This is a quick and convenient way to remove a specific client that you know is in SalesNote, without 
   having to scroll to find them.
 
@@ -637,10 +637,10 @@ If your changes to the data file make its format invalid, SalesNote will discard
 Action | Format, Examples
 --------|------------------
 **ListClients** | `listclients`
-**AddClient** | `addclient n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS m/MEASUREMENT g/GENDER [r/REMARK] [t/TAG]…​` <br> e.g., `add n/John Doe p/98765432 e/johnd@example.com a/John street Blk 92 g/M m/170_100_40 t/friend`
-**DeleteClient** | `deleteclient INDEX`<br> e.g., `delete 3`
-**EditClient** | `editclient INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [m/MEASUREMENT] [g/GENDER] [r/REMARK] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**FindClients** | `findclient KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**AddClient** | `addclient n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS m/MEASUREMENT g/GENDER [r/REMARK] [t/TAG]…​` <br> e.g., `addclient n/John Doe p/98765432 e/johnd@example.com a/John street Blk 92 g/M m/170_100_40 t/friend`
+**DeleteClient** | `deleteclient INDEX`<br> e.g., `deleteclient 3`
+**EditClient** | `editclient INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [m/MEASUREMENT] [g/GENDER] [r/REMARK] [t/TAG]…​`<br> e.g.,`editclient 2 n/James Lee e/jameslee@example.com`
+**FindClients** | `findclient KEYWORD [MORE_KEYWORDS]`<br> e.g., `findclient James Jake`
 
 ### Task Commands
 
