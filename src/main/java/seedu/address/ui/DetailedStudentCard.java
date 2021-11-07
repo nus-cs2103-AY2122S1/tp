@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -39,7 +40,7 @@ public class DetailedStudentCard extends UiPart<Region> {
         super(FXML);
         this.student = student;
         setName(student);
-        groupName.setText(student.getGroupName().toString());
+        setGroupName(student);
         telegramHandle.setText(student.getTelegramHandle().value);
         email.setText(student.getEmail().value);
         notes.setText(student.getNote().toString());
@@ -68,14 +69,26 @@ public class DetailedStudentCard extends UiPart<Region> {
         double txtWidth = txt.getLayoutBounds().getWidth();
         double ratio = 200 / txtWidth;
         if (txtWidth > 200) {
-            System.out.println(ratio);
             double newFontSize = 70 * ratio;
             if (ratio < 0.2) {
                 newFontSize *= (1 - 1 / ratio);
             }
             name.setStyle(String.format("-fx-font-size:%f;", newFontSize));
         }
-        name.setText(student.getName().fullName);
+        name.setText(studentName);
+    }
+
+    private void setGroupName(Student student) {
+        String studentGroup = student.getGroupName().toString();
+        Text text = new Text(studentGroup);
+        double txtWidth = text.getLayoutBounds().getWidth();
+        ObservableList<String> styleClass = groupName.getStyleClass();
+        if (txtWidth > 200) {
+            styleClass.add("smaller_group_name");
+        } else {
+            styleClass.add("bigger_group_name");
+        }
+        groupName.setText(studentGroup);
     }
 }
 

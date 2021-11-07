@@ -98,14 +98,6 @@ public class StudentBuilder {
     }
 
     /**
-     * Sets the {@code GroupName} of the {@code Student} that we are building.
-     */
-    public StudentBuilder withGroupName(GroupName groupName) {
-        this.groupName = new GroupName(groupName.toString());
-        return this;
-    }
-
-    /**
      * Add an {@code Assessment} to the {@code UniqueAssessmentList} of the {@code Student} that we are building.
      */
     public StudentBuilder withAssessment(Assessment assessment) {

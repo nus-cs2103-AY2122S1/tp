@@ -32,6 +32,9 @@ public class NoteCommand extends Command {
      * Constructor of the NoteCommand with the given student name and note.
      */
     public NoteCommand(Name studentName, Note note) {
+        requireNonNull(studentName);
+        requireNonNull(note);
+
         this.studentName = studentName;
         this.note = note;
     }
@@ -47,5 +50,23 @@ public class NoteCommand extends Command {
         Student editedStudent = model.updateStudentNote(student, note);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, studentName, note), false, false, editedStudent);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof NoteCommand)) {
+            return false;
+        }
+
+        // state check
+        NoteCommand n = (NoteCommand) other;
+        return studentName.equals(n.studentName)
+                && note.equals(n.note);
     }
 }

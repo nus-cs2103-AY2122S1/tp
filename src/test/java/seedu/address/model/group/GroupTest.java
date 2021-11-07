@@ -6,8 +6,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_DESCRIPTION_CS1101S;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_NAME_CS1101S;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_NAME_CS2103T;
-import static seedu.address.testutil.TypicalGroup.CS1231S;
-import static seedu.address.testutil.TypicalGroup.DEFAULT_GROUP;
+import static seedu.address.testutil.TypicalGroups.TYPICAL_GROUP_CS2101;
+import static seedu.address.testutil.TypicalGroups.TYPICAL_GROUP_CS2103T;
 
 import org.junit.jupiter.api.Test;
 
@@ -19,47 +19,49 @@ public class GroupTest {
     @Test
     public void isSameGroup() {
         // same object -> returns true
-        assertTrue(DEFAULT_GROUP.isSameGroup(DEFAULT_GROUP));
+        assertTrue(TYPICAL_GROUP_CS2103T.isSameGroup(TYPICAL_GROUP_CS2103T));
 
         // null -> returns false
-        assertFalse(DEFAULT_GROUP.isSameGroup(null));
+        assertFalse(TYPICAL_GROUP_CS2103T.isSameGroup(null));
 
         // same name, all other attributes different -> returns true
-        Group editedDefaultGroup = new GroupBuilder(DEFAULT_GROUP).withDescription(VALID_DESC_BOB).build();
-        assertTrue(DEFAULT_GROUP.isSameGroup(editedDefaultGroup));
+        Group editedDefaultGroup = new GroupBuilder(TYPICAL_GROUP_CS2103T).withDescription(VALID_DESC_BOB).build();
+        assertTrue(TYPICAL_GROUP_CS2103T.isSameGroup(editedDefaultGroup));
 
         // name differs in case, all other attributes same -> returns false
-        editedDefaultGroup = new GroupBuilder(DEFAULT_GROUP)
+        editedDefaultGroup = new GroupBuilder(TYPICAL_GROUP_CS2103T)
                 .withGroupName(VALID_GROUP_NAME_CS2103T.toLowerCase()).build();
-        assertFalse(DEFAULT_GROUP.isSameGroup(editedDefaultGroup));
+        assertFalse(TYPICAL_GROUP_CS2103T.isSameGroup(editedDefaultGroup));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_GROUP_NAME_CS2103T + " ";
-        editedDefaultGroup = new GroupBuilder(DEFAULT_GROUP).withGroupName(nameWithTrailingSpaces).build();
-        assertFalse(DEFAULT_GROUP.isSameGroup(editedDefaultGroup));
+        editedDefaultGroup = new GroupBuilder(TYPICAL_GROUP_CS2103T).withGroupName(nameWithTrailingSpaces).build();
+        assertFalse(TYPICAL_GROUP_CS2103T.isSameGroup(editedDefaultGroup));
     }
 
     @Test
     public void equals() {
         // same values -> returns true
-        Group defaultCopy = new GroupBuilder(DEFAULT_GROUP).build();
-        assertTrue(DEFAULT_GROUP.equals(defaultCopy));
+        Group defaultCopy = new GroupBuilder(TYPICAL_GROUP_CS2103T).build();
+        assertTrue(TYPICAL_GROUP_CS2103T.equals(defaultCopy));
 
         // same object -> returns true
-        assertTrue(DEFAULT_GROUP.equals(DEFAULT_GROUP));
+        assertTrue(TYPICAL_GROUP_CS2103T.equals(TYPICAL_GROUP_CS2103T));
 
         // null -> returns false
-        assertFalse(DEFAULT_GROUP.equals(null));
+        assertFalse(TYPICAL_GROUP_CS2103T.equals(null));
 
         // different group -> returns false
-        assertFalse(DEFAULT_GROUP.equals(CS1231S));
+        assertFalse(TYPICAL_GROUP_CS2103T.equals(TYPICAL_GROUP_CS2101));
 
         // different name -> returns false
-        Group editedDefaultGroup = new GroupBuilder(DEFAULT_GROUP).withGroupName(VALID_GROUP_NAME_CS1101S).build();
-        assertFalse(DEFAULT_GROUP.equals(editedDefaultGroup));
+        Group editedDefaultGroup = new GroupBuilder(TYPICAL_GROUP_CS2103T)
+                .withGroupName(VALID_GROUP_NAME_CS1101S).build();
+        assertFalse(TYPICAL_GROUP_CS2103T.equals(editedDefaultGroup));
 
         // different description -> returns false
-        editedDefaultGroup = new GroupBuilder(DEFAULT_GROUP).withDescription(VALID_GROUP_DESCRIPTION_CS1101S).build();
-        assertFalse(DEFAULT_GROUP.equals(editedDefaultGroup));
+        editedDefaultGroup = new GroupBuilder(TYPICAL_GROUP_CS2103T)
+                .withDescription(VALID_GROUP_DESCRIPTION_CS1101S).build();
+        assertFalse(TYPICAL_GROUP_CS2103T.equals(editedDefaultGroup));
     }
 }
