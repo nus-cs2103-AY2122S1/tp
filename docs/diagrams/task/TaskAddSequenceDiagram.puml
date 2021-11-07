@@ -10,6 +10,7 @@ end box
 
 box Model MODEL_COLOR_T1
 participant "taskToAdd : Task" as Task MODEL_COLOR
+participant "model:Model" as Model MODEL_COLOR
 end box
 
 [-> LogicManager : execute("tadd ...")
@@ -55,5 +56,5 @@ destroy TaddCommandParser
 AddressBookParser --> LogicManager
 deactivate AddressBookParser
 
-ref over LogicManager, Task : TaddCommand Execution
+ref over LogicManager, Model : TaddCommand Execution
 @enduml
