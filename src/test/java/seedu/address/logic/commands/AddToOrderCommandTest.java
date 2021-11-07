@@ -1,8 +1,13 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.commands.AddToOrderCommand.MESSAGE_EXTRA_PRICE_FLAG;
+import static seedu.address.logic.commands.AddToOrderCommand.MESSAGE_EXTRA_TAG_FLAG;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COSTPRICE_DONUT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_DONUT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DONUT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_BAKED;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.model.display.DisplayMode.DISPLAY_INVENTORY;
@@ -149,6 +154,73 @@ public class AddToOrderCommandTest {
         String expectedMessage = AddToOrderCommand.MESSAGE_MULTIPLE_MATCHES;
 
         assertCommandFailure(addCommand, modelWithOrder, expectedModel, expectedMessage);
+    }
+
+    @Test
+    public void execute_eitherNameOrIdExistsNotBoth_throwCommandException() {
+        ItemDescriptor toAddDescriptorCorrectName = new ItemDescriptorBuilder()
+                .withName(VALID_NAME_DONUT)
+                .withId(VALID_ID_BAGEL)
+                .withCount(1)
+                .build();
+
+        ItemDescriptor toAddDescriptorCorrectId = new ItemDescriptorBuilder()
+                .withName(VALID_NAME_BAGEL)
+                .withId(VALID_ID_DONUT)
+                .withCount(1)
+                .build();
+
+        AddToOrderCommand addCommandCorrectName = new AddToOrderCommand(toAddDescriptorCorrectName);
+        AddToOrderCommand addCommandCorrectId = new AddToOrderCommand(toAddDescriptorCorrectId);
+
+        Model expectedModel = getModelWithOrder();
+
+        String expectedMessageCorrectName = AddToOrderCommand.MESSAGE_ID_NOT_FOUND;
+
+        String expectedMessageCorrectId = AddToOrderCommand.MESSAGE_NAME_NOT_FOUND;
+
+        assertCommandFailure(addCommandCorrectName, modelWithOrder, expectedModel, expectedMessageCorrectName);
+        assertCommandFailure(addCommandCorrectId, modelWithOrder, expectedModel, expectedMessageCorrectId);
+    }
+
+    @Test
+    public void execute_extraPriceFlag_itemAddedToOrder() {
+        ItemDescriptor toAddDescriptor = new ItemDescriptorBuilder()
+                .withName(VALID_NAME_DONUT)
+                .withCount(DONUT.getCount())
+                .withCostPrice(VALID_COSTPRICE_DONUT)
+                .build();
+
+        AddToOrderCommand addCommand = new AddToOrderCommand(toAddDescriptor);
+        CommandResult expectedResult = new CommandResult(
+                String.format(AddToOrderCommand.MESSAGE_SUCCESS + "\n" + MESSAGE_EXTRA_PRICE_FLAG,
+                        DONUT.getCount(), VALID_NAME_DONUT));
+
+        // Item not in order
+        Model expectedModel = getModelWithOrder();
+        expectedModel.addToOrder(DONUT);
+
+        assertCommandSuccess(addCommand, modelWithOrder, expectedResult, expectedModel);
+    }
+
+    @Test
+    public void execute_extraTagFlag_itemAddedToOrder() {
+        ItemDescriptor toAddDescriptor = new ItemDescriptorBuilder()
+                .withName(VALID_NAME_DONUT)
+                .withCount(DONUT.getCount())
+                .withTags(VALID_TAG_BAKED)
+                .build();
+
+        AddToOrderCommand addCommand = new AddToOrderCommand(toAddDescriptor);
+        CommandResult expectedResult = new CommandResult(
+                String.format(AddToOrderCommand.MESSAGE_SUCCESS + "\n" + MESSAGE_EXTRA_TAG_FLAG,
+                        DONUT.getCount(), VALID_NAME_DONUT));
+
+        // Item not in order
+        Model expectedModel = getModelWithOrder();
+        expectedModel.addToOrder(DONUT);
+
+        assertCommandSuccess(addCommand, modelWithOrder, expectedResult, expectedModel);
     }
 
 }

@@ -45,4 +45,13 @@ public class CommandResultTest {
         // different exit value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", true).hashCode());
     }
+
+    @Test
+    public void exitTest() {
+        CommandResult commandResultExit = new CommandResult("feedback", true);
+        CommandResult commandResultNotExit = new CommandResult("feedback", false);
+
+        assertTrue(commandResultExit.isExit());
+        assertFalse(commandResultNotExit.isExit());
+    }
 }

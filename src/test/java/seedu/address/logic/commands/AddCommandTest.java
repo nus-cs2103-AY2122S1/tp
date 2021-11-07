@@ -194,11 +194,15 @@ public class AddCommandTest {
 
         assertCommandFailure(addCommand, model, expectedModel, expectedMessage);
     }
+
     @Test
     public void execute_extraPriceFlags_restockSuccessful() {
         model.addItem(BAGEL);
         ItemDescriptor bagelDescriptor = new ItemDescriptorBuilder()
-                .withName(VALID_NAME_BAGEL).withCount(VALID_COUNT_BAGEL).withSalesPrice(VALID_SALESPRICE_BAGEL).build();
+                .withName(VALID_NAME_BAGEL).withCount(VALID_COUNT_BAGEL)
+                .withSalesPrice(VALID_SALESPRICE_BAGEL)
+                .withCostPrice(VALID_COSTPRICE_BAGEL)
+                .build();
 
         AddCommand addCommand = new AddCommand(bagelDescriptor);
         String replenishMessage = String.format(AddCommand.MESSAGE_SUCCESS_REPLENISH, 5, VALID_NAME_BAGEL);

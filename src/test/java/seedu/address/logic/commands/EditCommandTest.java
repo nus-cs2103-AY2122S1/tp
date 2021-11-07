@@ -156,6 +156,16 @@ public class EditCommandTest {
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
     }
 
+    @Test
+    public void execute_editCount_failure() {
+        Item firstItem = model.getInventory().getItemList().get(INDEX_FIRST_ITEM.getZeroBased());
+        ItemDescriptor descriptor = new ItemDescriptorBuilder()
+                .withCount(firstItem.getCount() + 1).build();
+        EditCommand editCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_ITEM, descriptor);
+
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_COUNT_CNT_BE_EDITED);
+    }
+
     /**
      * Edit filtered list where index is larger than size of filtered list,
      * but smaller than size of inventory

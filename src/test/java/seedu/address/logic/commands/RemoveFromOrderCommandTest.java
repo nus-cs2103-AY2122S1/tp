@@ -2,9 +2,12 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_DONUT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DONUT;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.RemoveFromOrderCommand.MESSAGE_ID_NOT_FOUND;
+import static seedu.address.logic.commands.RemoveFromOrderCommand.MESSAGE_NAME_NOT_FOUND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalItems.BAGEL;
 import static seedu.address.testutil.TypicalItems.DONUT;
@@ -51,9 +54,9 @@ public class RemoveFromOrderCommandTest {
     public void execute_modelHasNoUnclosedOrder_giveNoUnclosedOrderMessage() {
         ItemDescriptor toAddDescriptor = new ItemDescriptor(DONUT);
 
-        AddToOrderCommand command = new AddToOrderCommand(toAddDescriptor);
+        RemoveFromOrderCommand command = new RemoveFromOrderCommand(toAddDescriptor);
 
-        assertCommandFailure(command, modelWithoutOrder, AddToOrderCommand.MESSAGE_NO_UNCLOSED_ORDER);
+        assertCommandFailure(command, modelWithoutOrder, RemoveFromOrderCommand.MESSAGE_NO_UNCLOSED_ORDER);
     }
 
     @Test
@@ -103,6 +106,36 @@ public class RemoveFromOrderCommandTest {
         expectedModel.removeFromOrder(DONUT, 1);
 
         assertCommandSuccess(command, modelWithOrder, expectedResult, expectedModel);
+    }
+
+    @Test
+    public void execute_nameExistsIdDoesNot_commandFailure() {
+        ItemDescriptor toRemoveDescriptor = new ItemDescriptorBuilder()
+                .withName(VALID_NAME_DONUT)
+                .withId(VALID_ID_BAGEL)
+                .withCount(1)
+                .build();
+        RemoveFromOrderCommand command = new RemoveFromOrderCommand(toRemoveDescriptor);
+
+        Model expectedModel = getModelWithOrderedDonut();
+        expectedModel.removeFromOrder(DONUT, 1);
+
+        assertCommandFailure(command, modelWithOrder, MESSAGE_ID_NOT_FOUND);
+    }
+
+    @Test
+    public void execute_idExistsNameDoesNot_commandFailure() {
+        ItemDescriptor toRemoveDescriptor = new ItemDescriptorBuilder()
+                .withName(VALID_NAME_BAGEL)
+                .withId(VALID_ID_DONUT)
+                .withCount(1)
+                .build();
+        RemoveFromOrderCommand command = new RemoveFromOrderCommand(toRemoveDescriptor);
+
+        Model expectedModel = getModelWithOrderedDonut();
+        expectedModel.removeFromOrder(DONUT, 1);
+
+        assertCommandFailure(command, modelWithOrder, MESSAGE_NAME_NOT_FOUND);
     }
 
     @Test
