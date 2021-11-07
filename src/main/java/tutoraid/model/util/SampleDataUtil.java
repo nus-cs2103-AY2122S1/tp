@@ -1,7 +1,7 @@
 package tutoraid.model.util;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 
 import tutoraid.model.LessonBook;
 import tutoraid.model.ReadOnlyLessonBook;
@@ -11,7 +11,6 @@ import tutoraid.model.lesson.Capacity;
 import tutoraid.model.lesson.Lesson;
 import tutoraid.model.lesson.LessonName;
 import tutoraid.model.lesson.Price;
-import tutoraid.model.lesson.Students;
 import tutoraid.model.lesson.Timing;
 import tutoraid.model.student.Lessons;
 import tutoraid.model.student.ParentName;
@@ -25,13 +24,13 @@ import tutoraid.model.student.StudentName;
  */
 public class SampleDataUtil {
 
-    public static Student[] getSampleStudents() {
+    public static Student[] getSampleStudents(ReadOnlyLessonBook lessonBook) {
         return new Student[] {
             // All details available
             new Student(new StudentName("Alex Yeoh"), new Phone("87438807"),
                     new ParentName("Mr Yeoh"), new Phone("93726483"),
                     new ProgressList(),
-                    new Lessons(new ArrayList<>(Arrays.asList("Maths 1")))),
+                    new Lessons(new ArrayList<>(List.of("Maths 1")), lessonBook)),
             new Student(new StudentName("Bernice Yu"), new Phone("99272758"),
                     new ParentName("Mrs Yu"), new Phone("83548274"),
                     new ProgressList(), new Lessons()),
@@ -54,25 +53,18 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyStudentBook getSampleStudentBook() {
+    public static ReadOnlyStudentBook getSampleStudentBook(ReadOnlyLessonBook lessonBook) {
         StudentBook sampleSb = new StudentBook();
-        for (Student sampleStudent : getSampleStudents()) {
+        for (Student sampleStudent : getSampleStudents(lessonBook)) {
             sampleSb.addStudent(sampleStudent);
         }
         return sampleSb;
     }
 
     public static Lesson[] getSampleLessons() {
-        ArrayList<Student> sampleStudentInLesson = new ArrayList<>();
-        Student sampleStudent = new Student(new StudentName("Alex Yeoh"), new Phone("87438807"),
-                new ParentName("Mr Yeoh"), new Phone("93726483"),
-                new ProgressList(),
-                new Lessons(new ArrayList<>(Arrays.asList("Maths 1"))));
-        sampleStudentInLesson.add(sampleStudent);
-
         return new Lesson[] {
             new Lesson(new LessonName("Maths 1"), new Capacity("50"),
-                    new Price("100"), new Students(sampleStudentInLesson),
+                    new Price("100"),
                     new Timing("1000-1200"))
         };
     }

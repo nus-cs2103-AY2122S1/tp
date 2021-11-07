@@ -4,6 +4,9 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
+
+
+
 package Lesson <<Rectangle>>{
 Class Lesson
 Class Capacity
@@ -14,15 +17,13 @@ Class Timing
 Class Student
 }
 
-Class HiddenOutside #FFFFFF
-HiddenOutside --> Lesson
-
 Lesson *--> "1" Capacity
 Lesson *--> "1" LessonName
 Lesson *--> "1" Price
 Lesson *--> "1" Students
 Lesson *--> "1" Timing
 
-Students *--> "*" Student
+Students --> "*" Student
+
 
 @enduml

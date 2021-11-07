@@ -85,13 +85,6 @@ public class LessonBook implements ReadOnlyLessonBook {
     }
 
     /**
-     * Refreshes the lesson book.
-     */
-    public void refreshLessonBook() {
-        lessons.refreshUniqueLessonList();
-    }
-
-    /**
      * Removes {@code key} from this {@code LessonBook}.
      * {@code key} must exist in the lesson book.
      */

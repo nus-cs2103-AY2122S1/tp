@@ -9,6 +9,11 @@ import static tutoraid.commons.core.HelpGuide.ADD_P_DESC;
 import static tutoraid.commons.core.HelpGuide.ADD_P_EXAMPLE;
 import static tutoraid.commons.core.HelpGuide.ADD_P_EXAMPLE_DESC;
 import static tutoraid.commons.core.HelpGuide.ADD_P_TITLE;
+import static tutoraid.commons.core.HelpGuide.ADD_SL_COMMAND;
+import static tutoraid.commons.core.HelpGuide.ADD_SL_DESC;
+import static tutoraid.commons.core.HelpGuide.ADD_SL_EXAMPLE;
+import static tutoraid.commons.core.HelpGuide.ADD_SL_EXAMPLE_DESC;
+import static tutoraid.commons.core.HelpGuide.ADD_SL_TITLE;
 import static tutoraid.commons.core.HelpGuide.ADD_S_COMMAND;
 import static tutoraid.commons.core.HelpGuide.ADD_S_DESC;
 import static tutoraid.commons.core.HelpGuide.ADD_S_EXAMPLE;
@@ -26,6 +31,11 @@ import static tutoraid.commons.core.HelpGuide.DEL_P_DESC;
 import static tutoraid.commons.core.HelpGuide.DEL_P_EXAMPLE;
 import static tutoraid.commons.core.HelpGuide.DEL_P_EXAMPLE_DESC;
 import static tutoraid.commons.core.HelpGuide.DEL_P_TITLE;
+import static tutoraid.commons.core.HelpGuide.DEL_SL_COMMAND;
+import static tutoraid.commons.core.HelpGuide.DEL_SL_DESC;
+import static tutoraid.commons.core.HelpGuide.DEL_SL_EXAMPLE;
+import static tutoraid.commons.core.HelpGuide.DEL_SL_EXAMPLE_DESC;
+import static tutoraid.commons.core.HelpGuide.DEL_SL_TITLE;
 import static tutoraid.commons.core.HelpGuide.DEL_S_COMMAND;
 import static tutoraid.commons.core.HelpGuide.DEL_S_DESC;
 import static tutoraid.commons.core.HelpGuide.DEL_S_EXAMPLE;
@@ -34,13 +44,15 @@ import static tutoraid.commons.core.HelpGuide.DEL_S_TITLE;
 import static tutoraid.commons.core.HelpGuide.EDIT_CAUTION;
 import static tutoraid.commons.core.HelpGuide.EDIT_DATA_DESC1;
 import static tutoraid.commons.core.HelpGuide.EDIT_DATA_DESC2;
+import static tutoraid.commons.core.HelpGuide.EDIT_DATA_DESC3;
 import static tutoraid.commons.core.HelpGuide.EDIT_DATA_TITLE;
-import static tutoraid.commons.core.HelpGuide.EDIT_FILEPATH;
+import static tutoraid.commons.core.HelpGuide.EDIT_LESSONS_FILEPATH;
 import static tutoraid.commons.core.HelpGuide.EDIT_L_COMMAND;
 import static tutoraid.commons.core.HelpGuide.EDIT_L_DESC;
 import static tutoraid.commons.core.HelpGuide.EDIT_L_EXAMPLE;
 import static tutoraid.commons.core.HelpGuide.EDIT_L_EXAMPLE_DESC;
 import static tutoraid.commons.core.HelpGuide.EDIT_L_TITLE;
+import static tutoraid.commons.core.HelpGuide.EDIT_STUDENTS_FILEPATH;
 import static tutoraid.commons.core.HelpGuide.EDIT_S_COMMAND;
 import static tutoraid.commons.core.HelpGuide.EDIT_S_DESC;
 import static tutoraid.commons.core.HelpGuide.EDIT_S_EXAMPLE;
@@ -103,6 +115,7 @@ import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import tutoraid.commons.core.LogsCenter;
+
 /**
  * Controller for a help page
  */
@@ -166,6 +179,10 @@ public class HelpWindow extends UiPart<Stage> {
     private Label format15;
     @FXML
     private Label format16;
+    @FXML
+    private Label format17;
+    @FXML
+    private Label format18;
 
     @FXML
     private Label example;
@@ -195,6 +212,10 @@ public class HelpWindow extends UiPart<Stage> {
     private Label example12;
     @FXML
     private Label example13;
+    @FXML
+    private Label example14;
+    @FXML
+    private Label example15;
 
 
     @FXML
@@ -350,6 +371,27 @@ public class HelpWindow extends UiPart<Stage> {
     @FXML
     private Label viewLExampleDesc;
 
+    @FXML
+    private Label addSlTitle;
+    @FXML
+    private Label addSlCommand;
+    @FXML
+    private Label addSlDesc;
+    @FXML
+    private Label addSlExample;
+    @FXML
+    private Label addSlExampleDesc;
+
+    @FXML
+    private Label delSlTitle;
+    @FXML
+    private Label delSlCommand;
+    @FXML
+    private Label delSlDesc;
+    @FXML
+    private Label delSlExample;
+    @FXML
+    private Label delSlExampleDesc;
 
     @FXML
     private Label clearTitle;
@@ -377,7 +419,11 @@ public class HelpWindow extends UiPart<Stage> {
     @FXML
     private Label editDataDesc2;
     @FXML
-    private Label editFilePath;
+    private Label editDataDesc3;
+    @FXML
+    private Label editStudentsFilePath;
+    @FXML
+    private Label editLessonsFilePath;
     @FXML
     private Label editCaution;
 
@@ -417,6 +463,8 @@ public class HelpWindow extends UiPart<Stage> {
         deleteLessonFeature();
         editLessonFeature();
         viewLessonFeature();
+        addStudentsToLessonsFeature();
+        deleteStudentsFromLessonsFeature();
         clearFeature();
         exitFeature();
         findFeature();
@@ -709,6 +757,34 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     /**
+     * Create the 'add student(s) to lesson(s) feature' section.
+     */
+    public void addStudentsToLessonsFeature() {
+        format17.setText(FORMAT);
+        example14.setText(EXAMPLE);
+
+        addSlTitle.setText(ADD_SL_TITLE);
+        addSlDesc.setText(ADD_SL_DESC);
+        addSlCommand.setText(ADD_SL_COMMAND);
+        addSlExample.setText(ADD_SL_EXAMPLE);
+        addSlExampleDesc.setText(ADD_SL_EXAMPLE_DESC);
+    }
+
+    /**
+     * Create the 'delete student(s) from lesson(s) feature' section.
+     */
+    public void deleteStudentsFromLessonsFeature() {
+        format18.setText(FORMAT);
+        example15.setText(EXAMPLE);
+
+        delSlTitle.setText(DEL_SL_TITLE);
+        delSlDesc.setText(DEL_SL_DESC);
+        delSlCommand.setText(DEL_SL_COMMAND);
+        delSlExample.setText(DEL_SL_EXAMPLE);
+        delSlExampleDesc.setText(DEL_SL_EXAMPLE_DESC);
+    }
+
+    /**
      * Creates the 'clear feature' section.
      */
     public void clearFeature() {
@@ -745,7 +821,9 @@ public class HelpWindow extends UiPart<Stage> {
         editDataTitle.setText(EDIT_DATA_TITLE);
         editDataDesc1.setText(EDIT_DATA_DESC1);
         editDataDesc2.setText(EDIT_DATA_DESC2);
-        editFilePath.setText(EDIT_FILEPATH);
+        editDataDesc3.setText(EDIT_DATA_DESC3);
+        editStudentsFilePath.setText(EDIT_STUDENTS_FILEPATH);
+        editLessonsFilePath.setText(EDIT_LESSONS_FILEPATH);
         editCaution.setText(EDIT_CAUTION);
     }
 
