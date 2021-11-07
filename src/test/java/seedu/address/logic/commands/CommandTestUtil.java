@@ -80,6 +80,8 @@ public class CommandTestUtil {
     public static final String INVALID_POSITION_DESC = " " + PREFIX_POSITION + "hubby*"; // '*' not allowed in positions
     public static final String INVALID_TASK_NAME_DESC =
             " " + CliSyntax.PREFIX_NAME + ""; // an empty string is not allowed in names
+    public static final String INVALID_TASK_DEADLINE_DESC =
+            " " + PREFIX_DATE + "21-01-2011 23&59"; //incorrect format of deadline
     public static final String INVALID_TASK_INDEX_DESC =
             " " + PREFIX_TASK_INDEX + "abs"; // 'abs' not allowed in id
     public static final String INVALID_MEMBER_INDEX_DESC =

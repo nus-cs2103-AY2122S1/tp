@@ -50,7 +50,7 @@ public class TeditCommand extends Command {
     private final EditTaskDescriptor editTaskDescriptor;
 
     /**
-     * @param targetTaskIndex of the task in the filtered task list to edit.
+     * @param targetTaskIndex    of the task in the filtered task list to edit.
      * @param editTaskDescriptor details to edit the task with.
      */
     public TeditCommand(Index targetTaskIndex, EditTaskDescriptor editTaskDescriptor) {
@@ -100,7 +100,6 @@ public class TeditCommand extends Command {
         private Name name;
         private Boolean isDone;
         private TaskDeadline deadline;
-
 
         public EditTaskDescriptor() {
         }
@@ -162,5 +161,14 @@ public class TeditCommand extends Command {
         public int hashCode() {
             return Objects.hash(name, isDone, deadline);
         }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof TeditCommand
+                && editTaskDescriptor.equals(((TeditCommand) other).editTaskDescriptor)
+                && targetTaskIndex.equals(((TeditCommand) other).targetTaskIndex));
+
     }
 }
