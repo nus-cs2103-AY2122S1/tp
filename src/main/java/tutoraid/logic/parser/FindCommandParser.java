@@ -1,6 +1,7 @@
 package tutoraid.logic.parser;
 
 import static tutoraid.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static tutoraid.commons.core.Messages.MESSAGE_INVALID_FIND_COMMAND;
 
 import java.util.Arrays;
 import java.util.regex.Matcher;
@@ -37,8 +38,7 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
-            throw new ParseException(String.format(
-                    Messages.MESSAGE_INVALID_FIND_COMMAND, HelpCommand.MESSAGE_USAGE));
+            throw new ParseException(Messages.MESSAGE_INVALID_FIND_COMMAND);
         }
         commandFlag = matcher.group("commandFlag");
         arguments = matcher.group("arguments");
@@ -52,8 +52,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindLessonCommand.MESSAGE_USAGE));
             } else {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+                throw new ParseException(MESSAGE_INVALID_FIND_COMMAND);
             }
         }
 
