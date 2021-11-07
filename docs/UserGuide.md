@@ -276,7 +276,7 @@ Executing any of the commands in this section will bring you to the students int
         <tr>
             <td id="email-field">Email</td>
             <td><code>e/</code></td>
-            <td>Must be of the format <em>xxx@yyy</em>.</td>
+            <td>Refer to <a href="#email-format">Email Format</a> for more details.</td>
             <td><ul>
               <li><code>e/jane@gmail.com</code></li>
               <li><code>e/</code> set the email field to empty.</li>
@@ -285,7 +285,7 @@ Executing any of the commands in this section will bring you to the students int
         <tr>
             <td>Parent Phone</td>
             <td><code>pp/</code></td>
-            <td>Refer to the constraints for <a href="#phone-field">Phone</a> above.</td>
+            <td>Minimum 3 numeric characters.</td>
             <td><ul>
               <li><code>pp/81234567</code></li>
               <li><code>pp/</code> sets the parent phone field to empty.</li>
@@ -294,7 +294,7 @@ Executing any of the commands in this section will bring you to the students int
         <tr>
             <td>Parent Email</td>
             <td><code>pe/</code></td>
-            <td>Refer to the constraints for <a href="#email-field">Email</a> above.</td>
+            <td>Refer to <a href="#email-format">Email Format</a> for more details.</td>
             <td><ul>
               <li><code>pe/john@gmail.com</code></li>
               <li><code>pe/</code> sets the parent email field to empty.</li>
@@ -322,9 +322,7 @@ Executing any of the commands in this section will bring you to the students int
         <tr>
             <td>Academic Level</td>
             <td><code>lvl/</code></td>
-            <td><ul>
-              <li>Maximum 15 characters, including space(s).</li>
-            </ul></td>
+            <td>Maximum 15 characters, including space(s).</td>
             <td><ul>
               <li><code>lvl/J1</code></li>
               <li><code>lvl/</code> sets the academic level field to empty.</li>
@@ -369,6 +367,20 @@ Executing any of the commands in this section will bring you to the students int
         </tr>
     </tbody>
 </table>
+
+<div markdown="block" class="alert alert-info" id="email-format">**:information_source: Email Format:**<br>
+
+Emails should be of the format **local-part@domain** and adhere to the following constraints:
+
+1. The local-part should only contain alphanumeric characters and these special characters, **+_.-**. The local-part may not start or end with any special characters.
+2. This is followed by a **@** and then a domain name. 
+3. The domain name is made up of domain labels separated by periods. 
+4. The domain name must:
+    - end with a domain label at least 2 characters long
+    - have each domain label start and end with alphanumeric characters
+    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
