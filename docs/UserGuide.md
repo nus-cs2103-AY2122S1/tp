@@ -195,7 +195,7 @@ Format: `edit INDEX [n/NAME] [e/EMAIL] [m/MODULE_CODE LESSON_CODE(S)] [p/PHONE] 
 * At least one of the parameters must be provided
 * Existing values of the parameters specified will be erased and updated to the input values
 * You can input multiple module codes, and can have multiple lesson codes for a single module code
-* You will not be able to edit a person into a given email/phone number/telegram handle if it already exists in contHACKS
+* Edited person should not contain the same email/phone number/telegram handle as another existing contact in contHACKS
 * If you provide multiple module codes that are the same, only the first one would be considered
 
 <div markdown="span" class="alert alert-primary">:information_source: **Note:**
