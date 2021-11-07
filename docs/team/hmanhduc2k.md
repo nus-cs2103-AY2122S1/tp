@@ -5,7 +5,7 @@ title: Hoang Manh Duc's Project Portfolio Page
 
 ### Project: Academy Directory
 
-Academy Directory is a desktop application that aims to assist CS1101S tutors in the process of teaching Programming Methodology I in NUS, with features of recording student personal contacts, recording student participation and grades, visualizing and analyzing student datafrom the grades recorded
+Academy Directory is a desktop application that aims to assist CS1101S tutors in the process of teaching Programming Methodology I in NUS.
 
 Given below are my contributions to the project.
 
@@ -15,7 +15,7 @@ Given below are my contributions to the project.
   * What it does: Allows user to view a general help page or a specific help page relating to each command.
   * Justification: To allow new users and existing users a shortcut way of viewing usage instruction for better insights into using Academy Directory.
   * Highlights: This features allow users to view a table (in Markdown) that summarizes command format and usage for quick referencing, or view general help of each command.
-  * Credits: In process of implementing HelpCommand, I have used MDFX, a library that parses Markdown input and rendering it to the JavaFX GUI.
+  * Credits: I have used MDFX, a library that parses Markdown input and rendering it to the JavaFX GUI.
 
 * **New Feature**: Add the ability to view details of each students
   * What it does: This features allow users to see all related details to one student - contact information, grades, participation, tags, and others...
@@ -26,7 +26,6 @@ Given below are my contributions to the project.
   * What it does: Refactor and implement most of Academy Directory GUI, with central theme of science fiction and space.
   * Justification: Refactoring Academy Direcotry is necessary to restructure how data are shown to users, how command results are displayed either as a log message or as a result shown. In addition, it separates Academy Directory from Address Book 3 completely.
   * Highlights: The major points of GUI refactoring includes:
-    * Changing the style and functionality of Menu Bar to add more clickable menu items.
     * Changing the background color, image, and logo of Academy Directory, and restructure front-end components for better usage.
     * Refactor style, opacity, border color, size, stretch, and other appearance-related attributes of the various components in Academy Directory to improve user experience.
     * Changing how list and student cards look like, how View Command will be shown, and how Help Window should look.
