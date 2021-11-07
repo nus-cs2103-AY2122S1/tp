@@ -102,17 +102,27 @@ The sections below give more details of each component.
 The **API** of this component is specified
 in [`Ui.java`](https://github.com/AY2122S1-CS2103-F09-3/tp/blob/master/src/main/java/seedu/programmer/ui/Ui.java)
 
-![Structure of the UI Component](images/UiClassDiagram.png)
+At a high level, the `MainWindow` component interacts with 3 other main components: `Logic`, `PopupManager` and `FileManager`.
 
-The main UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `StudentListPanel`
-, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures
-the commonalities between classes that represent parts of the visible GUI.
+![Structure of the UI Component](images/ui/UiClassDiagramOverview.png)
+
+1. Firstly, `MainWindow` interacts with the `Logic` component to determine which data to display to the user.
+2. Secondly, `MainWindow` conducts file operations on the Ui through a `FileManager`.
+   For instance, the `FileManager` handles situations where the user is required to select files or directories.
+3. Thirdly, to manage the display of popup windows to the user, `MainWindow` interacts with a `PopupManager` which handles
+   the configuration, creation and showing of popups on the Ui.
 
 In addition, there are two additional windows that the UI can display: `HelpWindow` and `DashboardWindow`. They inherit
 from the abstract class `PopupWindow`, which captures the commonalities between classes that represent popup information
 to be displayed to the user.
 
-The `UI` component uses the JavaFx UI framework.
+Taking a closer look at the `MainWindow` component, it consists of a number of parts e.g.`CommandBox`, `ResultDisplay`, `StudentListPanel`
+, `StatusBarFooter` etc. These components, including the `MainWindow`, inherit from the abstract `UiPart` class which captures
+the commonalities between classes that represent parts of the visible GUI. The following is a summary of the parts of the `MainWindow`.
+
+![Structure of the UI Component](images/ui/UiClassDiagramMainComponents.png)
+
+Note that the `UI` component uses the JavaFx UI framework.
 
 - The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder.
   For example, the layout of
@@ -131,8 +141,7 @@ The `UI` component,
 
 ## <a name="Logic component"></a> Logic component
 
-**
-API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
