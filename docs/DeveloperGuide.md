@@ -27,7 +27,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 <div markdown="span" class="alert alert-primary">
 
 :bulb: The `.puml` files used to create diagrams in this document can be found in the 
-[diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. 
+[diagrams](https://github.com/AY2122S1-CS2103T-W15-2/tp/tree/master/docs/diagrams) folder. 
 Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn 
 how to create and edit diagrams.
 
@@ -44,8 +44,8 @@ Given below is a quick overview of main components and how they interact with ea
 **Main components of the architecture**
 
 **`Main`** has two classes called 
-[`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and 
-[`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). 
+[`Main`](https://github.com/AY2122S1-CS2103T-W15-2/tp/blob/master/src/main/java/dash/Main.java) and 
+[`MainApp`](https://github.com/AY2122S1-CS2103T-W15-2/tp/blob/master/src/main/java/dash/MainApp.java). 
 
 It is responsible for:
 
@@ -86,7 +86,7 @@ The sections below give more details of each component.
 ### UI component
 
 The **API** of this component is specified in 
-[`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java).
+[`Ui.java`](https://github.com/AY2122S1-CS2103T-W15-2/tp/blob/master/src/main/java/dash/ui/Ui.java).
 
 <img src="images/UiClassDiagram.png" width="750"/>
 
@@ -102,9 +102,9 @@ between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files 
 that are in the `src/main/resources/view` folder. For example, the layout of the 
-[`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) 
+[`MainWindow`](https://github.com/AY2122S1-CS2103T-W15-2/tp/blob/master/src/main/java/dash/ui/MainWindow.java) 
 is specified in 
-[`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml).
+[`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-W15-2/tp/blob/master/src/main/resources/view/MainWindow.fxml).
 
 The `UI` component:
 
@@ -184,7 +184,7 @@ The `Model` component:
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-W15-2/tp/blob/master/src/main/java/dash/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="750" />
 
@@ -872,6 +872,8 @@ Use case resumes at step 1.
 
 * 1c. A given person index is invalid
   * 1c1. Dash shows an error message
+
+Use case resumes at step 1.
 
 * 1d. User did not specify at least 1 person to be assigned
   * 1d1. Dash shows an error message
