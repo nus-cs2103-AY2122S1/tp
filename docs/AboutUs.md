@@ -15,6 +15,8 @@ You can reach us at our [github issues](https://github.com/AY2122S1-CS2103T-T10-
 
 [[github](https://github.com/moreTriangles)]
 
+[[portfolio](https://github.com/AY2122S1-CS2103T-T10-1/tp/blob/master/docs/team/moretriangles.md)]
+
 * Role: Team Lead
 * Responsibilities: Data & Storage
 
@@ -23,6 +25,9 @@ You can reach us at our [github issues](https://github.com/AY2122S1-CS2103T-T10-
 <img src="images/aishh12.png" width="200px">
 
 [[github](http://github.com/aishh12)]
+
+[[portfolio](https://github.com/AY2122S1-CS2103T-T10-1/tp/blob/master/docs/team/aishh12.md)]
+
 
 * Role: Code Quality
 * Responsibilities: Commands
@@ -33,6 +38,8 @@ You can reach us at our [github issues](https://github.com/AY2122S1-CS2103T-T10-
 
 [[github](http://github.com/crypto-code)]
 
+[[portfolio](https://github.com/AY2122S1-CS2103T-T10-1/tp/blob/master/docs/team/crypto-code.md)]
+
 * Role: Integration
 * Responsibilities: Commands
 
@@ -41,6 +48,9 @@ You can reach us at our [github issues](https://github.com/AY2122S1-CS2103T-T10-
 <img src="images/cheongyeeming.png" width="200px">
 
 [[github](http://github.com/CheongYeeMing)]
+
+[[portfolio](https://github.com/AY2122S1-CS2103T-T10-1/tp/blob/master/docs/team/cheongyeeming.md)]
+
 
 * Role: Testing
 * Responsibilities: Model
@@ -51,6 +61,8 @@ You can reach us at our [github issues](https://github.com/AY2122S1-CS2103T-T10-
 <img src="images/jai2501.png" width="200px">
 
 [[github](http://github.com/jai2501)]
+
+[[portfolio](https://github.com/AY2122S1-CS2103T-T10-1/tp/blob/master/docs/team/jai2501.md)]
 
 * Role: Deliverables and Deadlines
 * Responsibilities: UI
