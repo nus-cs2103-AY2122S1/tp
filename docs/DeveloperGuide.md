@@ -381,7 +381,7 @@ The following activity diagram summarizes what happens when a CS2100 TA executes
   - Cons: 
     - The strict checks on the `UniqueStudentList` will affect `EditCommand` when the user tries to edit an existing student. 
     This will happen when the user only wants to edit one of the attribute. (For example, studentId.)
-    This newly edited student will have an old copy of the email. This side effect will casue the newly created `student` to clash with its old instance in `UniqueStudentList`, 
+    This newly edited student will have an old copy of the email. This side effect will cause the newly created `student` to clash with its old instance in `UniqueStudentList`, 
     causing the command to fail, even though it should be valid. As such, it makes it hard to implement, as we have to 
     ensure that it works with `EditCommand` as well.
 
@@ -572,6 +572,14 @@ success.
    their data to. Instead, a default location could be chosen so as to save the CS2100 TA some time in getting their data
    downloaded quickly. However, since we wanted to make ProgrammerError more flexible and adaptable to different users, we opted to include the
    functionality of allowing the CS2100 TA to select a folder destination.
+
+
+### Purge Feature 
+
+
+This sequence diagram shows how the `purge` command works:
+![PurgeSequenceDiagram](images/commands/PurgeCommand/PurgeCommandSequenceDiagram.png)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
