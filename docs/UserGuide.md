@@ -159,8 +159,8 @@ Format: `delete {INDEX | -a | -f}`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find n/ Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-* `find n/ Betsy` followed by `delete -f` deletes all the entries of the results of the `find` command.
+* `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `find n/Betsy` followed by `delete -f` deletes all the entries of the results of the `find` command.
 * `delete -a` deletes all entries in the address book.
 
 ### Bulk Tag Persons : `bulk_tag`
@@ -170,7 +170,7 @@ Adds a tag to the filtered list of Persons.
 Format: `bulk_tag t/TAGNAME [t/TAGNAME…​]`
 
 Examples:
-* `find Alice` followed by `bulk_tag t/friends` adds the tag `friends` to all the persons in the filtered person list.
+* `find n/Alice` followed by `bulk_tag t/friends` adds the tag `friends` to all the persons in the filtered person list.
 * `bulk_tag t/friends` adds the tag `friends` in the filtered person list.
 
 ### Sort contacts by attribute: `sort`
@@ -291,7 +291,7 @@ Action | Format, Examples
 **Add** | `add n/NAME S/STUDENT_ID N/NUSNet_ID g/GITHUB_ID T/TUTORIAL_ID {r/student \| r/tutor} [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]...` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Delete** | `delete {INDEX \| -a \| -f}`  <br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [s/STUDENT_ID] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find FIELD KEYWORD`<br> e.g., `find name James`
+**Find** | `find {n/|s/|N/|g/|T/|r/|p/|a/|t/full/|t/partial/}KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/Alex`
 **List** | `list`
 **Import** | `import FILENAME` <br> e.g., `import tutors.json`
 **Export** | `export FILENAME` <br> e.g., `export t01students.json`
