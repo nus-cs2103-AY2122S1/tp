@@ -1063,10 +1063,10 @@ testers are expected to do more *exploratory* testing.
        Expected: A new applicant named John Doe with all of the above details is added to the list. Details of the added contact shown in 
        result display. 
        
-    1. Test case: Ensure that you have completed the first test case under this section, then input the command `add Bob p/98765432 e/bob@gmail.com r/Lawyer et/Full time s/7000 l/Bachelors y/4`
+    1. Test case: Ensure that you have completed the first test case under this section, then input the command `add Bob p/98765432 e/bob@gmail.com r/Lawyer et/Full time s/7000 l/Bachelors y/4`<br>
        Expected: No new applicant is added. Error details shown in the result display stating that Bob shares the same phone number as John Doe. 
     
-    1. Test case: Ensure that you have completed the first test case under this section, then input the command `add Jack Smith p/97865321 e/JohnDoe@gmail.com r/Doctor et/Full time s/9000 l/Bachelors y/4`
+    1. Test case: Ensure that you have completed the first test case under this section, then input the command `add Jack Smith p/97865321 e/JohnDoe@gmail.com r/Doctor et/Full time s/9000 l/Bachelors y/4`<br>
        Expected: No new applicant is added. Error details shown in the result display stating that Bob shares the same email as John Doe.
        
     1. Other incorrect add commands to try: `add`, `add John`, `add n/John p/98765432 e/JohnDoe@gmail.com r/Teacher`
