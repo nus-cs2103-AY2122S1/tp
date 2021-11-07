@@ -201,7 +201,7 @@ is represented as `Alias`. The class diagram for `AliasMap` is shown below.
 
 ![AliasClassDiagram](images/AliasClassDiagram.png)
 
-AliasMap` implements the following operations:
+`AliasMap` implements the following operations:
 
 * `AliasMap#add(Alias)` — Adds an alias to the mapping.
 * `AliasMap#remove(Shortcut)` — Removes an alias from the mapping.
@@ -276,38 +276,52 @@ likely to be repeated, we decided that it was sufficient to allow users to creat
 The split mechanism is facilitated by `ModelManager` and `SportsPa`. <br>`ModelManager` stores a list of
 filtered members as `filteredMembers`. Each `Member` in the list has an `Availability`, which is implemented internally as a `List<DayOfWeek>`.
 <br>
-`Address Book`stores a list of all facilities as `facilities`. Each `Facility` in the list has an `AllocationMap`, which is implemented internally as an `EnumMap<DayOfWeek, List<Member>>`. This `EnumMap` is initialized
+`SportsPa` stores a list of all facilities in `UniqueFacilityList` as `facilities`. Each `Facility` in the list has an `AllocationMap`, which is implemented internally as an `EnumMap<DayOfWeek, List<Member>>`. This `EnumMap` is initialized
 with 7 key-value pairs, of which the keys are all the enums of the
 `java.time.DayOfWeek` (`{MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY}`) and the values are all initialized
-as an empty `ArrayList`. This is based on the assumption that facilities are available on every day of the week.
+as an empty `ArrayList` to hold the members allocated. This is based on the assumption that facilities are available on every day of the week.
 <br>
-When the `split` command is executed with a given `DAY` parameter, all members available on that `DAY` are filtered and the `List<Member>` of all facilities for that `DAY` is cleared.
-The available members are then added to the `List<Member>` of the corresponding `DayOfWeek` in the `EnumMap` of the facilities using a Greedy algorithm. <br>
-i.e. The filtered members list and facility list are iterated and each Member is allocated to the first facility which is not at max capacity. After
-a facility is at max capacity, any remaining members are allocated to the next available facility and so on.
+When the `split` command is executed with a given `DAY` parameter, all members available on that `DAY` are filtered and the `ArrayList<Member>` of all facilities for that `DAY` is cleared.
+The available members are then added to the `List<Member>` of the corresponding `DayOfWeek` in the `EnumMap` of the facilities using a greedy algorithm. 
+<br>
+i.e. The filtered members list and facility list are iterated and each `Member` is allocated to the first `Facility` which is not at max capacity. After
+a `Facility` is at max capacity, any remaining `Member`s are allocated to the next available `Facility` and so on.
 
-`ModelManager` implements the following operations:
-* `split(Predicate<Member> predicate, int dayNumber)` —  Filters the list of all members according to the given `predicate`.
-When the `split` command is executed, `MemberAvailableOnDayPredicate` is passed to `predicate`, allowing a filtered list of members available
-on the given `dayNumber` to be created and passed to the `split` method of `SportsPa`.
+`ModelManager` implements the following operation:
+* `ModelManager#split(Predicate<Member>, int)` —  Filters the list of all members according to the given `predicate`.
 
-`SportsPa` implements the following operations:
-* `split(FilteredList<Member> membersFilteredList, int dayNumber)` — Splits the members in the given filtered member list into facilities on the given day.
-Returns -1 if no members are available, the number of members that exceed the total capacity if the number of members is
-more than the total capacity on the given day and 0 if members can be split successfully.
+`SportsPa` implements the following operation:
+* `SportsPa#split(FilteredList<Member>, int)` — Splits the members in the given filtered member list into facilities on the given day.
 
-Additionally, `UniqueFacilityList` implements the following operations:
-* `allocateMembersToFacilitiesOnDay(FilteredList<Member> members, int dayNumber)` — Clears the `AllocationMap` of each `Facility`
+Additionally, <br>
+`UniqueFacilityList` implements the following operation:
+* `UniqueFacilityList#allocateMembersToFacilitiesOnDay(FilteredList<Member>, int)` — Clears the `AllocationMap` of each `Facility`
 and allocates the members in the given filtered member list to facilities greedily.
+* 
+`Facility` implements the following operation:
+* `Facility#addMemberToFacilityOnDay(Member, DayOfWeek)` — Adds the given member to `AllocationMap` on the given day.
 
 Given below is an example usage scenario and how the split feature behaves at each step.
 
-Step 1.
+Step 1. The user launches the application for the first time. The user then adds 5 members into an empty SportsPA
+by executing the `addm` command 5 times with the parameter `d/1` (all required parameters are provided as well but not specified here).
+Each `Member` in the `filteredMembers` list will have an availability of Monday.
+The user then adds 1 facility into SportsPA by executing the `addf` command with the parameter `c/5`
+(all required parameters are provided as well but not specified here). The `Facility` in the `facilities` list will 
+have a capacity of 5 and an `AllocationMap` with all the values initialized as an empty `ArrayList`.
+
+Step2. The user executes `split 1` command to split the 5 members in the filtered list to facilities on Monday. The `split` command
+creates a `MemberAvailableOnDayPredicate` with the given day and passes it and the given day to `ModelManager#split(Predicate<Member>, int)`.
+`ModelManager` then creates a filtered list of members who are available on Monday. It then calls `SportsPa#split(FilteredList<Member>, int)`, passing to it
+the filtered list and the given day. `SportsPA` then iterates through the 5 members in the filtered member list and the 1 facility in its `UniqueFacilityList`, calling
+`Facility#addMemberToFacilityOnDay(Member, DayOfWeek)`. This adds the 5 members to the `ArrayList` of the `AllocationMap` of the `Facility` for Monday.
 
 The following sequence diagram shows how the split mechanism works.
 
+![SplitSequenceDiagram](images/SplitSequenceDiagram.png)
+
 <div markdown="span" class="alert alert-info">:information_source: **Note:** 
-The lifeline for `SplitCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+The lifelines should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 #### Design considerations:
@@ -591,7 +605,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to <span style="text-decoration: underline">list members (UC03)</span>
-   or <span style="text-decoration: underline">search for members (UC04)</span>.
+   or <span style="text-decoration: underline">search for members (UC04)</span>
 2. User requests to delete a specific member in the list
 3. SportsPA deletes the member
 
@@ -615,8 +629,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to <span style="text-decoration: underline">list members (UC03)</span>
    or <span style="text-decoration: underline">search for members (UC04)</span>
-2. User requests to edit the details of specific member in the list.
-3. SportsPA edits the details of the member.
+2. User requests to edit the details of specific member in the list
+3. SportsPA edits the details of the member
 
    Use case ends.
 
@@ -642,8 +656,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to sort all the members by a field.
-2. SportsPA sorts the members accordingly.
+1. User requests to sort all the members by a field
+2. SportsPA sorts the members accordingly
     
     Use case ends.
 
@@ -660,9 +674,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to <span style="text-decoration: underline">list members (UC03)</span>
-   or <span style="text-decoration: underline">search for members (UC04)</span>.
-2. User requests to set availability of specific member(s) in the list.
-3. SportsPA updates the availability of the given member(s).
+   or <span style="text-decoration: underline">search for members (UC04)</span>
+2. User requests to set availability of specific member(s) in the list
+3. SportsPA updates the availability of the given member(s)
 
    Use case ends.
 
@@ -672,7 +686,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 2a. The given index/indices is/are invalid
+* 2a. One or more of the given member index is invalid
 
     * 2a1. SportsPA shows an error message
 
@@ -689,9 +703,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to <span style="text-decoration: underline">list members (UC03)</span>
-   or <span style="text-decoration: underline">search for members (UC04)</span>.
-2. User requests to mark the attendance of specific member(s) in the list.
-3. SportsPA marks the attendance of the specified member(s).
+   or <span style="text-decoration: underline">search for members (UC04)</span>
+2. User requests to mark the attendance of specific member(s) in the list
+3. SportsPA marks the attendance of the specified member(s)
 
     Use case ends.
 
@@ -701,7 +715,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 2a. The index/indices given is/are invalid.
+* 2a. The index/indices given is/are invalid
 
     * 2a1. SportsPA shows an error message
   
@@ -814,8 +828,8 @@ This use case is similar to that of <span style="text-decoration: underline">mar
 
 1. User requests to <span style="text-decoration: underline">list facilities (UC14)</span>
    or <span style="text-decoration: underline">search for facilities (UC15)</span>
-2. User requests to edit the details of specific facility in the list.
-3. SportsPA edits the details of the facility.
+2. User requests to edit the details of specific facility in the list
+3. SportsPA edits the details of the facility
         
     Use case ends.
 
@@ -841,7 +855,7 @@ This use case is similar to that of <span style="text-decoration: underline">mar
 
 **MSS**
 
-1. User requests to split available members into the facilities
+1. User requests to split available members into the facilities on a specified day
 2. SportsPA shows the allocation results
 
    Use case ends.
@@ -854,9 +868,9 @@ This use case is similar to that of <span style="text-decoration: underline">mar
 
       Use case ends.
 
-* 1a. SportsPA detects no available members
+* 1b. SportsPA detects no available members
 
-    * 1a1. SportsPA shows an error message
+    * 1b1. SportsPA shows an error message
 
       Use case ends.
 
@@ -868,20 +882,26 @@ This use case is similar to that of <span style="text-decoration: underline">mar
    or <span style="text-decoration: underline">search for members (UC04)</span>
 2. User requests to <span style="text-decoration: underline">list facilities (UC14)</span>
    or <span style="text-decoration: underline">search for facilities (UC15)</span>
-3. User requests to deallocate a specified member from a specified facility.
-4. SportsPA deallocates the specified member from the specified facility.
+3. User requests to deallocate a specified member from a specified facility on a specified day.
+4. SportsPA deallocates the specified member from the specified facility on a specified day.
 
     Use case ends.
 
 **Extensions**
 
-* 3a. The given index/indices is/are invalid
+* 3a. Any of the given indices are invalid
 
     * 3a1. SportsPA shows an error message
       
       Use case resumes from step 3.
-  
-* 3b. The specified member is not allocated to the specified facility.
+
+* 3b. The given day is invalid
+
+    * 3b1. SportsPA shows an error message
+
+      Use case resumes from step 3.
+
+* 3c. The specified member is not allocated to the specified facility
 
     * 3b1. SportsPA shows an error message
 
@@ -894,30 +914,36 @@ This use case is similar to that of <span style="text-decoration: underline">mar
    or <span style="text-decoration: underline">search for members (UC04)</span>
 2. User requests to <span style="text-decoration: underline">list facilities (UC14)</span>
    or <span style="text-decoration: underline">search for facilities (UC15)</span>
-3. User requests to allocate a specified member to a specified facility.
-4. SportsPA allocates the specified member to the specified facility.
+3. User requests to allocate a specified member to a specified facility on a specified day
+4. SportsPA allocates the specified member to the specified facility on a specified day
 
     Use case ends.
 
 **Extensions**
 
-* 3a. The given index/indices is/are invalid
+* 3a. Any of the given indices are invalid
 
     * 3a1. SportsPA shows an error message
 
       Use case resumes from step 3.
 
-* 3b. The specified member is already allocated to the specified facility.
+* 3b. The given day is invalid
 
     * 3b1. SportsPA shows an error message
+
+      Use case resumes from step 3.
+
+* 3c. The specified member is already allocated to the specified facility.
+
+    * 3c1. SportsPA shows an error message
 
       Use case resumes from step 3.
     
 **Use case: UC21 - Export facility details and member allocations**
 
 **MSS**
-1. User requests to export facility details and member allocations.
-2. SportsPA exports the facility details and member allocations to a CSV file.
+1. User requests to export facility details and member allocations
+2. SportsPA exports the facility details and member allocations to a CSV file
 
    Use case ends.
 
@@ -1046,7 +1072,7 @@ testers are expected to do more *exploratory* testing.
 ### Setting member availability
 1. Set the availability of one or more members 
     
-    1. Prerequisites: List all members using the `listf` command. One or more members ar ein the list.
+    1. Prerequisites: List all members using the `listf` command. One or more members are in the list.
    
     2. Test case: `setm 1 2 3 d/1 2`<br>
         Expected: The availability of the first 3 members are changed to Monday and Tuesday. The names of members
@@ -1104,11 +1130,11 @@ The test cases are similar to those of [Deleting a member](#deleting-a-member).
 
 ### Splitting members into facilities
 
-1. Allocating all the members into the allocation lists of the facilities.
+1. Allocating all the members into the allocation maps of the facilities on a given day.
 
     1. Test case: `split 1`<br>
-       Expected: All members that have Monday as one of their available days will be allocated to facility. Their names
-       will be shown in the facility list under Monday.
+       Expected: All members that have Monday as one of their available days will be allocated to a facility if 
+       there is sufficient capacity. Their names will be shown in the facilities' allocation maps under Monday.
    
     2. Test case: `split`<br>
        Expected: No members are allocated to any facility. Error details are shown in the status message.

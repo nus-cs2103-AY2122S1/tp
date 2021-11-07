@@ -154,7 +154,9 @@ public class CommandTestUtil {
                 || command instanceof EditFacilityCommand
                 || command instanceof FindFacilityCommand
                 || command instanceof ListFacilityCommand
-                || command instanceof SplitCommand;
+                || command instanceof SplitCommand
+                || command instanceof AllocateMemberCommand
+                || command instanceof DeallocateMemberCommand;
     }
 
     /**
