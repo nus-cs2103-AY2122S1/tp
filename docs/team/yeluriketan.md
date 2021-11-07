@@ -1,6 +1,6 @@
 ---
 layout: page
-title: [Yeluri Ketan](https://github.com/YeluriKetan) 's Project Portfolio Page
+title: Yeluri Ketan's Project Portfolio Page
 ---
 
 ### Project: gitGud
