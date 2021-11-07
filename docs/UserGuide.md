@@ -385,11 +385,15 @@ ModuLink's data is saved in the hard disk automatically after any command that c
 
 ### Editing the data file
 
-ModuLink's data are saved as a JSON file `[JAR file location]/data/modulink.json`. Advanced users are welcome to update data directly by editing that data file.
+ModuLink's data are saved as a JSON file `[JAR file location]/data/modulink.json`.
 
 <div markdown="span" class="alert alert-warning">:warning: Caution:
 If your changes to the data file makes its format invalid, ModuLink will discard all data and start with an empty data file at the next run.
-In this event, please locate the data file, delete it, and relaunch the app.
+In this event, please locate the data file, delete it, and relaunch the app. 
+</div>
+
+<div markdown="span" class="alert alert-warning">:warning: Caution:
+We advise against changing the `isMyProfile` and `isFavourite` fields of your own profile should you wish to edit the JSON file directly. 
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
