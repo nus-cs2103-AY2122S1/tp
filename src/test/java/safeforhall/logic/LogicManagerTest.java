@@ -69,13 +69,13 @@ public class LogicManagerTest {
 
     @Test
     public void execute_validFetCommand_success() throws Exception {
-        String deadlineCommand = "deadline k/f d1/10-10-2021";
+        String deadlineCommand = "deadline k/f d1/10-10-2021 d2/13-10-2021";
         assertCommandSuccess(deadlineCommand, DeadlineCommand.MESSAGE_SUCCESS_FET, model, true);
     }
 
     @Test
     public void execute_validArtCommand_success() throws Exception {
-        String deadlineCommand = "deadline k/c d1/10-10-2021";
+        String deadlineCommand = "deadline k/c d1/10-10-2021 d2/14-10-2021";
         assertCommandSuccess(deadlineCommand, DeadlineCommand.MESSAGE_SUCCESS_ART, model, true);
     }
 

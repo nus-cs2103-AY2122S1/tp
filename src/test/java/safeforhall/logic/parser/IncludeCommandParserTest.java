@@ -74,6 +74,6 @@ public class IncludeCommandParserTest {
                 + CliSyntax.PREFIX_RESIDENTS + "e417 a213", ResidentList.MESSAGE_CONSTRAINTS); // no comma
         assertParseFailure(parser, " " + DEFAULT_INDEX + " "
                 + CliSyntax.PREFIX_RESIDENTS + "e417, roy",
-                ResidentList.MESSAGE_CONSTRAINTS_ROOM_AND_NAME); // room and name
+                ResidentList.MESSAGE_CONSTRAINTS); // room and name
     }
 }

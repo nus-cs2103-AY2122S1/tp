@@ -120,7 +120,7 @@ public class ImportCommandTest {
         AddressBook addressBook = TypicalPersons.getTypicalAddressBook();
         Event event = new Event(new EventName("Gymming"), new EventDate("09-09-2021"),
                 new EventTime("0830"), new Venue("Gym"), new Capacity("10"),
-                new ResidentList(TypicalPersons.AMY.toString()));
+                new ResidentList(TypicalPersons.AMY.getName().toString(), TypicalPersons.AMY.toString()));
         ArrayList<Event> events = new ArrayList<>();
         events.add(event);
         addressBook.setEvents(events);
