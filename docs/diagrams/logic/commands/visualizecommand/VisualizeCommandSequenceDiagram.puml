@@ -13,7 +13,8 @@ Participant ":Assessment" as as MODEL_COLOR
 end box
 
 -> vc ++ :execute
-vc -> mm :updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS)
+vc -> mm ++:updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS)
+deactivate
 vc -> mm ++ :getFilteredStudentList()
 return studentList
 loop all students in studentList
@@ -23,8 +24,10 @@ loop all students in studentList
     return
 end
 
-vc -> mm :setAdditionalViewType(VISUALIZE)
-vc -> mm :setAdditionalInfo(classAssessmentResults)
+vc -> mm ++ :setAdditionalViewType(VISUALIZE)
+deactivate
+vc -> mm ++ :setAdditionalInfo(classAssessmentResults)
+deactivate
 
 create result
 vc -> result ++ :CommandResult(MESSAGE_VISUALIZE_SUCCESS)
