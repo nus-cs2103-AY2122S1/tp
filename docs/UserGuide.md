@@ -46,11 +46,11 @@ You might have to give your device permission to open BogoBogo.
 
 6. Let's try adding a new item! Enter the command in the command box.<br>
 
-    - **`add`** `Apple id/139827 c/3 cp/1.3 sp/2.4` : Adds an apple with id 139827, cost price 1.3, and sales price 2.4,
+    - **`add`** `Apple id/139827 c/3 cp/1.3 sp/2.4` : Adds an apple with id 139827, cost price $1.3, and sales price $2.4,
       into the inventory.
 
-7. Congrats on setting up BogoBogo! Read our [features](#managing-inventory) to learn about the different things you can
-   do on the application.
+7. Congrats on setting up BogoBogo! Read our [features](#managing-inventory) to learn about the different commands you can
+   do with the application.
 
 <div class="code-example bg-grey-lt-000">:bulb:
 Ready to jump right into recording your inventory? Use <code>clear</code> to clear the sample data!
@@ -87,7 +87,7 @@ Ready to jump right into recording your inventory? Use <code>clear</code> to cle
     </li>
     <li>
       <p>Prefixed parameters can be in any order.<br>
-      e.g. <code>id/{id number} cp/{cost price}</code> and <code>cp/{cost price} id/{id number}</code> mean the same thing.</p>
+      e.g. <code>id/{id number} cp/{cost price}</code> and <code>cp/{cost price} id/{id number}</code> are interpretted as the same thing.</p>
     </li>
     <li>
       <p>If a parameter is expected only once in the command is specified multiple times, only the last occurrence of
@@ -141,7 +141,7 @@ Examples:
 
 - `add apple` adds an apple into the inventory
 - `add id/111111 c/2` adds 2 of item with id #111111 into the inventory
-- `add banana id/192023 cp/1.0 sp/2.2` adds a banana (#192023) with cost price $1 and sales price $2.20 into the
+- `add banana id/192023 cp/1.0 sp/2.2` adds a banana (#192023) with cost price $1.0 and sales price $2.2 into the
   inventory.
 
 <div class="code-example bg-grey-lt-000">
@@ -163,7 +163,7 @@ Prefix  |  Argument      | Description                  | Remarks
 `id/`   | id number      | Id number of item to delete. | Must be an integer with no more than 6 digits.
 
 - Delete the specified item entirely from the inventory.
-- An item can be specified by name,{id number , or both.
+- An item can be specified by name, id number , or both.
 
 
 - `delete Apple` deletes by name
@@ -219,7 +219,7 @@ Flag    |  Argument     | Description                     | Remarks
 Examples:
 
 - `edit 1 id/192028` edits first item's id to #192028
-- `edit 2 n/Panadol cp/2`  edits second item's name to "Panadol" and cost price to $2
+- `edit 2 n/Panadol cp/2`  edits second item's name to "Panadol" and cost price to $2.0
 
 ![edit](images/screenshots/edit_item.png)
 
@@ -274,7 +274,7 @@ Clears the entire inventory.
 Format: `clear`
 
 <div class="code-example bg-grey-lt-000">
-:exclamation: Be careful with this command! Clearing an inventory will not only clear the inventory but delete data regarding items' details. 
+:exclamation: Be careful with this command! Clearing an inventory will not only clear the inventory but delete memory regarding items' details.
 </div>
 
 ![clear](images/screenshots/clear.png)
@@ -282,7 +282,7 @@ Format: `clear`
 ## Managing orders
 
 Orders is BogoBogo's way of tracking sold items. Users can create orders, process, and save them for later review. By
-processing an order, the revenue attained will be added into total revenue.
+processing an order, the revenue attained will be added into total revenue which can then be used to calculate profits.
 
 <div class="code-example bg-grey-lt-000">
 :exclamation: Be sure not to close BogoBogo without saving your order! Any unsaved order will be lost. 
@@ -335,7 +335,7 @@ Examples:
 Cancels the specified order from the current order.
 
 Format:
-`corder [ {name} | id/{id} ] (c/COUNT)`
+`corder [ {name} | id/{id} ] (c/count)`
 
 Flag    |  Argument      | Description                                 | Remarks                                         |
 --------|----------------|---------------------------------------------|-------------------------------------------------|
@@ -364,7 +364,7 @@ Format: `eorder`
 
 **Q**: What is total profit, cost and revenue?<br>
 **A**: Total cost is the total amount of money incurred from adding items to the inventory. Revenue is the total amount
-of money gained from successfully selling items. Profit = Revenue - Cost.
+of money gained from successfully receiving orders and selling items. Profit = Revenue - Cost.
 
 **Q**: I have edited the cost price of my item. Why isn't the change reflected in my total cost?<br>
 **A**: BogoBogo adds the cost of an item to the total cost only upon the addition of the item into the inventory. Any
