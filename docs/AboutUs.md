@@ -14,7 +14,8 @@ You can reach us at the email `e0559779@u.nus.edu`
 <img src="images/greyguy21.png" width="200px">
 
 
-[[github](https://github.com/greyguy21)]
+[[github](https://github.com/greyguy21)] 
+[[portfolio](team/greyguy21.md)]
 
 * Role: Team Lead
 * Responsibilities: UI
@@ -23,7 +24,8 @@ You can reach us at the email `e0559779@u.nus.edu`
 
 <img src="images/junwei26.png" width="200px">
 
-[[github](https://github.com/junwei26/)]
+[[github](https://github.com/junwei26/)] 
+[[portfolio](team/junwei26.md)]
 
 
 * Role: Developer
@@ -33,7 +35,8 @@ You can reach us at the email `e0559779@u.nus.edu`
 
 <img src="images/yttruire.png" width="200px">
 
-[[github](https://github.com/Yttruire)]
+[[github](https://github.com/Yttruire)] 
+[[portfolio](team/yttruire.md)]
 
 * Role: Developer
 * Responsibilities: Data management and Integration
@@ -42,7 +45,8 @@ You can reach us at the email `e0559779@u.nus.edu`
 
 <img src="images/skcheongbrian.png" width="200px">
 
-[[github](https://github.com/SKCheongBrian)]
+[[github](https://github.com/SKCheongBrian)] 
+[[portfolio](team/skcheongbrian.md)]
 
 * Role: Developer
 * Responsibilities: Testing and documentation

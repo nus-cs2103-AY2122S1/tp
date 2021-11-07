@@ -5,8 +5,7 @@ title: Cheong Sze Kai, Brian's Project Portfolio Page
 
 ### Project: CSBook
 
-CSBook is a desktop student managing application designed for Computer Science Teaching Assistants (CS TAs) to quickly track and manage their students more efficiently and more robustly than other solutions. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has almost 15 kLoC.
-
+CSBook is a desktop application for Computer Science (CS) Teaching Assistants (TAs) to manage their students. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 15 kLoC.
 Given below are my contributions to the project.
 
 * **New Feature**: Added groups and descriptions of the groups to the project.

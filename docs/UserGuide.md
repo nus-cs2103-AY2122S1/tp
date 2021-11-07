@@ -15,8 +15,8 @@ If you are interested by what we have said thus far, jump right to the [How to u
 
 ## Table of Contents
 
-- Table of Contents
-  {:toc}
+- Table of Contents 
+{:toc}
 
 ---
 
@@ -85,12 +85,117 @@ Should you face any difficulties while following the user guide, do refer to the
 
 These icons will appear within coloured boxes to indicate information related to section or features.
 
-| &nbsp; &nbsp; &nbsp; Icon &nbsp; &nbsp; &nbsp; | Meaning                                                                                              | Box colour |
-| ---------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------- |
-| :information_source:**Note**                   | This icon serves to give an additional note or remark about the current feature                      | Blue       |
-| :bulb:**Tip**                                  | This icon serves to give a quick recommendation on how to use the feature in the most beneficial way | Blue       |
-| :exclamation:**Caution**                       | This icon serves to give a note on an unexpected behaviour of the application                        | Yellow     |
-| :warning:**Warning**                           | This icon serves to warn you against using a feature in some unintended manner                       | Yellow     |
+| <img width="200"> Icon <img width="200"> | Meaning                                                                                              | Box colour |
+| ---------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------- |
+| :information_source:**Note**             | This icon serves to give an additional note or remark about the current feature                      | Blue       |
+| :bulb:**Tip**                            | This icon serves to give a quick recommendation on how to use the feature in the most beneficial way | Blue       |
+| :exclamation:**Caution**                 | This icon serves to give a note on an unexpected behaviour of the application                        | Yellow     |
+| :warning:**Warning**                     | This icon serves to warn you against using a feature in some unintended manner                       | Yellow     |
+
+## Glossary of parameters
+
+<table>
+  <tbody>
+    <tr>
+      <th>Parameter</th>
+      <th>Required format</th>
+    </tr>
+    <tr>
+      <td>ASSESSMENT_NAME</td>
+      <td>
+        <ul>
+          <li>Alphanumeric and space allowed</li>
+          <li>Should not be blank</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>DESCRIPTION</td>
+      <td>
+        <ul>
+          <li>Alphanumeric and space allowed</li>
+          <li>Should not be blank</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>EMAIL</td>
+      <td>Emails should be of the format local-part@domain
+        <ul>
+          <li>local-part</li>
+            <ul>
+              <li>Alphanumeric and the special characters +_.-</li>
+              <li>Special characters cannot be used consecutively</li>
+              <li>May not start or end with any special characters</li>
+            </ul>
+          <li>domain</li>
+            <ul>
+              <li>Made up of domain labels separated by periods</li>
+              <li>End with a domain label at least 2 characters long</li>
+              <li>Have each domain label start and end with alphanumeric characters</li>
+              <li>Each domain label consist of alphanumeric characters, separated only by hyphens, if any</li>
+            </ul>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>GROUPNAME</td>
+      <td>
+        <ul>
+          <li>Alphanumeric and space allowed</li>
+          <li>Should not be blank</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>INDEX</td>
+      <td>
+        <ul>
+          <li>Positive integer e.g. 1, 2, 3, ...</li>
+          <li>Index value should not exceed Java's maximum integer value: 2147483647</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>NAME</td>
+      <td>
+        <ul>
+          <li>Alphanumeric and space allowed</li>
+          <li>Should not be blank</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>NOTE</td>
+      <td>
+        <ul>
+          <li>Any character in the <a href="https://www.fileformat.info/info/charset/UTF-8/list.htm">UTF-8 character set</a></li>
+          <li>No length restriction</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>SCORE</td>
+      <td>Score should be of the format actual-score/total-score
+        <ul>
+          <li>The actual-score should be an integer greater than or equal to 0</li>
+          <li>The total-score should be an integer greater than 0</li>
+          <li>The actual-score should be less than or equal to the total-score</li>
+          <li>actual-score and total-score should not exceed Java's maximum integer value: 2147483647</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>TELEGRAM_HANDLE</td>
+      <td>
+        <ul>
+          <li>Start with an '@', followed by lowercase letters, numbers or underscores</li>
+          <li>Minimum length is 5</li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ---
 
@@ -99,7 +204,7 @@ These icons will appear within coloured boxes to indicate information related to
 This section will provide you with a brief introduction of our GUI.
 
 <div markdown="block" class="alert alert-info">
-**:information_source: GUI is optimised when window is maximised to full screen. Names may appear truncated for smaller screen sizes.**
+**:information_source: GUI is optimised when window is maximised to full screen. Names and error messages may appear truncated for smaller screen sizes.**
 </div>
 
 ### Main Screen
@@ -129,7 +234,6 @@ For assessments, the assessment name, score the student received and percentage 
 <div markdown="block" class="alert alert-info">
 **:information_source: An assessment would be flagged red if the student’s score falls below the passing threshold of 50%.**
 </div>
-
 ---
 
 ## Feature List
@@ -144,8 +248,8 @@ For assessments, the assessment name, score the student received and percentage 
 - Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME t/TELEGRAM_HANDLE`, `t/TELEGRAM_HANDLE n/NAME` is also acceptable.
 
-- Optional parameters/fields will be indicated within square brackets.
-  e.g. if the command specifies `edit INDEX [n/NAME] [t/TELEGRAM_HANDLE] [e/EMAIL] [g/GROUP_NAME]`, `edit 1 n/Jiaxian` or `edit 1 n/Jiaxian t/@albino_monkey e/e0540014X@u.nus.edu g/CS2103T` are both acceptable commands
+* Optional parameters/fields will be indicated within square brackets.
+  e.g. if the command specifies `edit INDEX [n/NAME] [t/TELEGRAM_HANDLE] [e/EMAIL]`, `edit 1 n/Jia Xian` or `edit 1 n/Jia Xian t/@albino_monkey e/e0540014X@u.nus.edu` are both acceptable commands.
 
 - For parameters that expect a number value, such as `INDEX` of a student or `SCORE` for assessments, if you try to enter an extremely large value, CSBook will not behave as expected. This is because for assessments to have total scores above a few hundreds or for a TA to have more than a few thousand students is considered unrealistic.
 
@@ -168,7 +272,7 @@ e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 #### Viewing help : `help`
 
-Displays a pop-up message explaining how to access the user guide.
+Displays a pop-up message with a link to access the user guide.
 
 **Format:** `help`
 
@@ -234,7 +338,7 @@ CSBook data is saved as an JSON file at `[JAR file location]/data/csbook`. If yo
 Note that if you have enabled the encrypt function, the data will be saved in an encrypted JSON format. In which case, you are highly advised to decrypt the data file with the `decrypt` command before editing the data file directly.
 
 <div markdown="span" class="alert alert-warning">
-:exclamation: **Caution:** If there are changes to the data file that makes its format invalid, CSBook will discard all data and start with an empty data file on the next run.<br/><br/>
+:exclamation: **Caution:** If there are changes to the data file that makes its format invalid or if the data has invalid values, CSBook will discard all data and start with an empty data file on the next run.<br/><br/>
 
 :warning: **Warning**: Do not intentionally change the data file in order to restart CSBook afresh with an empty data file. You should use the `clear` command instead if you want to clear all currently stored data.
 
@@ -263,6 +367,10 @@ Adds a student to the CSBook.
 - The `EMAIL` used can be any email; it need not be an NUS email.
 - Each student **MUST** belong to a group. The group name must correspond to that of an existing group, which means that the group should be added to CSBook before the student is created.
 - Each student can only belong to one group.
+
+:bulb: **Tip**:
+
+- If you have two students with the exact name, you may use numbers to differentiate them. e.g. `Lim Jun Wei 1` and `Lim Jun Wei 2`
 </div>
 
 <div markdown="block" class="alert alert-info">
@@ -290,8 +398,13 @@ Shows a list of all students and groups in the CSBook.
 
 **Steps:**
 
-1. Type `list` into the command box.
+1. Type the command into the command box.
 2. All students and groups are displayed.
+
+<div markdown="block" class="alert alert-info">
+:information_source: **Note on command use:**: 
+- The student is flagged red if their latest assessment falls below the passing threshold of 50%.
+</div>
 
 #### Editing a student : `edit`
 
@@ -661,6 +774,11 @@ Deletes the group with the specified group name as well as all students associat
 ## FAQ
 
 1. How do I check that I have Java `11` or above installed on my computer?
+
    - You may run the `java -version` command on your respective operating system's (OS) terminal window.
    - Alternatively, if the above does not work, you may follow [this guide](https://www.java.com/en/download/help/version_manual.html) to determine the version of Java installed on your Computer
-   - Note: Either versions of Java released by [Oracle](https://www.oracle.com/java/) or [OpenJDK](https://openjdk.java.net/) are compatible
+   - Note: Either versions of Java released by [Oracle](https://www.oracle.com/java/) or [OpenJDK](https://openjdk.java.net/) are compatible.
+
+2. The names of the students and groups are not rendered correctly.
+   ![incorrect rendering](images/faq0.png)
+   - Ensure that the current version of Java used is Java `11` as other versions of Java may cause issues with font rendering.
