@@ -12,7 +12,7 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/charliemoweng.png" width="200px">
 
 [[github](http://github.com/charliemoweng)]
-[[portfolio](team/wangmengzhe.md)]
+[[portfolio](team/charliemoweng.md)]
 
 * Role: Developer
 * Responsibilities: Task
