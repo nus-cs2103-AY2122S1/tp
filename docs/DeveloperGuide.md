@@ -30,17 +30,18 @@ This product will make recruiters’ lives easier through categorisation and fil
 - [**Implementation**](#implementation)
   * [Add feature](#add-feature)
   * [Edit feature](#edit-feature)
-    + [Design considerations:](#design-considerations)
-  * [Find feature](#find-feature)
-    + [Design considerations:](#design-considerations-1)
-  * [Filter interview feature](#filter-interview-feature)
-    + [Design considerations:](#design-considerations-2)
   * [Delete feature](#delete-feature)
+  * [Find feature](#find-feature)
+    + [Design considerations for find:](#design-considerations-for-find)
+  * [Filter interview feature](#filter-interview-feature)
+    + [Design considerations for filter interview:](#design-considerations-for-filter-interview)
   * [Show feature](#show-feature)
-    + [Design considerations:](#design-considerations-3)
+    + [Design considerations for show:](#design-considerations-for-show)
   * [Mark feature](#mark-feature)
   * [Unmark feature](#unmark-feature)
+    + [Design considerations for mark and unmark:](#design-considerations-for-mark-and-unmark)
   * [Delete marked feature](#delete-marked-feature)
+    + [Design considerations for delete marked:](#design-considerations-for-delete-marked)
   * [Datetime for interview](#datetime-for-interview)
 - [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
 - [**Appendix: Requirements**](#appendix-requirements)
@@ -360,7 +361,7 @@ The following sequence diagram shows how the find operation works.
  **Note:** The lifeline for `FindCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
-#### Design considerations:
+#### Design considerations for find:
 
 **Aspect: Finding by each prefix:**
 
@@ -421,7 +422,7 @@ The following sequence diagram shows how the filter interview operation works.
  **Note:** The lifeline for `FilterInterviewCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
-#### Design considerations:
+#### Design considerations for filter interview:
 
 **Aspect: User command to use in filtering interviews:**
 
@@ -471,7 +472,7 @@ The following sequence diagram shows how the show operation works.
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ShowCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
-#### Design considerations:
+#### Design considerations for show:
 
 **Aspect: Finding search terms:**
 
@@ -559,7 +560,7 @@ The following sequence diagram shows how the unmark operation works.
  **Note:** The lifeline for `MarkingCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
-#### Design considerations:
+#### Design considerations for mark and unmark:
 
 **Aspect: User command to use in marking and unmarking applicants:**
 
@@ -598,7 +599,7 @@ and returned.
 The following sequence diagram shows how the delete marked operation works.
 ![images](images/DeleteMarkedCommandSequenceDiagram.png)
 
-#### Design considerations:
+#### Design considerations for delete marked:
 
 **Aspect: User command to use in deleting marked applicants:**
 
