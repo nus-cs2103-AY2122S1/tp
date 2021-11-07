@@ -659,7 +659,7 @@ The following activity diagram summarizes what happens when a user executes an d
 In LeadsForce, we put a strong emphasis on ensuring not only the quality but also the extensibility and customizability of our product.
 If you are wondering about how you can easily customise or add extensions to LeadsForce without worrying about the underlying implementations,
 you are at the right place.
-This section details the workflows and features that we have developed that can help you to tweak certain features
+This section details the workflows and features that we have developed that can help you tweak certain features
 in LeadsForce without the need for you to delve too deeply into the codebase.
 
 #### 5.1.1 Change the look of an existing theme
