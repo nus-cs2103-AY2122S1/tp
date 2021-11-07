@@ -20,7 +20,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 <img src="images/meerian.png" width="200px">
 
-[[github](http://github.com/meerian)]
+[[github](http://github.com/meerian) [[portfolio](team/meerian.md)]
 
 * Role: Developer
 * Responsibilities: Models IC

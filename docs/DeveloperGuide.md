@@ -280,7 +280,6 @@ it breaks the structure of ```MainWindow``` being the main UI components to mana
 Our target audience is a student who,
 -   is working as a financial advisor
 -   has a need to quickly and easily keep track of their:
-
     1. contacts
     2. financial policies sold
 
