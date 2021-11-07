@@ -64,7 +64,7 @@ public class VersionControlController implements Version {
         Label oldLabel = versionControlReader.fetchLabelByName(OLD_LABEL_STRING);
         Label currLabel = versionControlReader.fetchLabelByName(CURRENT_LABEL_STRING);
 
-        oldLabel = handleCommitBranch(oldLabel, currLabel);
+        oldLabel = handleCommitBranch(oldLabel, currLabel, parentCommit);
         currLabel = versionControlReader.createNewLabel(CURRENT_LABEL_STRING, this.headCommit);
 
         stageArea.resetStage();
@@ -85,9 +85,9 @@ public class VersionControlController implements Version {
         }
     }
 
-    private Label handleCommitBranch(Label oldLabel, Label currLabel) {
+    private Label handleCommitBranch(Label oldLabel, Label currLabel, Commit parentCommit) {
         Commit currCommit = currLabel.getCommitSupplier().get();
-        if (!currCommit.isEmpty() && !currCommit.equals(this.headCommit)) {
+        if (!currCommit.isEmpty() && !currCommit.equals(parentCommit)) {
             // Branching occurs => label currCommit as "old"
             return versionControlReader.createNewLabel(OLD_LABEL_STRING, currCommit);
         }
