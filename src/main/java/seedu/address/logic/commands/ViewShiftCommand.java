@@ -1,8 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.DATE_RANGE_INPUT;
-import static seedu.address.commons.core.Messages.SHIFT_PERIOD_PARSING_DEFAULT;
 import static seedu.address.logic.commands.CommandUtil.checkDateForDayOfWeek;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_DAY_SHIFT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_TIME;
@@ -31,11 +29,13 @@ public class ViewShiftCommand extends Command {
 
     public static final String COMMAND_WORD = "viewShift";
     public static final String HELP_MESSAGE = COMMAND_WORD + ": find the staff working at the specified shift. "
-            + SHIFT_PERIOD_PARSING_DEFAULT + "\n\n"
+            + "Takes in one optional date input, the shift viewed will be for the next date that shift occurs."
+            + "For instance, the shift viewed given a date of sunday for da/2021-11-06 (a saturday) "
+            + "will be for the date 2021-11-07, the next date. Date input expected in YYYY-MM-DD\n\n"
             + "Parameters:\n"
-            + PREFIX_DASH_DAY_SHIFT + " day-slot_number\n"
-            + PREFIX_DASH_TIME + " day-time" + " (time is in format HH:mm)"
-            + DATE_RANGE_INPUT + "\n\n"
+            + PREFIX_DASH_DAY_SHIFT + " DAYOFWEEK-SHIFT_NUMBER\n"
+            + PREFIX_DASH_TIME + " DAYOFWEEK-HH:mm" + " (time is in format HH:mm)\n"
+            + "[" + PREFIX_DATE + "DATE]" + "\n\n"
             + "Examples:\n"
             + COMMAND_WORD + " " + PREFIX_DASH_DAY_SHIFT + " monday-0\n"
             + COMMAND_WORD + " " + PREFIX_DASH_DAY_SHIFT + " TUESDAY-1\n"

@@ -17,7 +17,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Slot;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays information of a {@code SlotCard}.
  */
 public class SlotCard extends UiPart<Region> {
 
@@ -46,7 +46,8 @@ public class SlotCard extends UiPart<Region> {
 
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code SlotCard} with the given {@code ObservableList<Person> staffList}
+     * and index to display.
      */
     public SlotCard(DayOfWeek day, Slot slot, ObservableList<Person> stafflist, Period period, LocalDate date) {
         super(FXML);
@@ -63,7 +64,7 @@ public class SlotCard extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Person} with just the name.
      */
     class PersonNameCell extends ListCell<Person> {
         @Override

@@ -16,7 +16,7 @@ end box
 [-> LogicManager : execute("addShift -n Steve d/Monday-0")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("addShift -n Steve d/Monday-0")
+LogicManager -> AddressBookParser : parseCommand()
 activate AddressBookParser
 
 create AddShiftCommandParser
@@ -26,17 +26,17 @@ activate AddShiftCommandParser
 AddShiftCommandParser --> AddressBookParser
 deactivate AddShiftCommandParser
 
-AddressBookParser -> AddShiftCommandParser : parse("-n Steve d/Monday-0")
+AddressBookParser -> AddShiftCommandParser : parse()
 activate AddShiftCommandParser
 
 create AddShiftCommand
 AddShiftCommandParser -> AddShiftCommand
 activate AddShiftCommand
 
-AddShiftCommand --> AddShiftCommandParser : command
+AddShiftCommand --> AddShiftCommandParser
 deactivate AddShiftCommand
 
-AddShiftCommandParser --> AddressBookParser : command
+AddShiftCommandParser --> AddressBookParser
 deactivate AddShiftCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
 AddShiftCommandParser -[hidden]-> AddressBookParser
@@ -48,11 +48,13 @@ deactivate AddressBookParser
 LogicManager -> AddShiftCommand : execute()
 activate AddShiftCommand
 
-AddShiftCommand -> Model : findPersonByName(new Name("Steve"))
+AddShiftCommand -> Model : findPersonByName()
 activate Model
 
 Model --> AddShiftCommand : staff
-AddShiftCommand -> Model : addShift(staff, DayOfWeek.Monday, Slot.MORNING)
+
+AddShiftCommand -> Model : addShift()
+
 Model --> AddShiftCommand
 deactivate Model
 
@@ -60,10 +62,10 @@ create CommandResult
 AddShiftCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> AddShiftCommand : result
+CommandResult --> AddShiftCommand
 deactivate CommandResult
 
-AddShiftCommand --> LogicManager : result
+AddShiftCommand --> LogicManager
 deactivate AddShiftCommand
 
 [<--LogicManager
