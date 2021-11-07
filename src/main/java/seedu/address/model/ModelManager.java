@@ -125,7 +125,7 @@ public class ModelManager implements Model {
         requireNonNull(target);
         addressBook.deleteStudent(target);
         if (target.hasGroupName()) {
-            List<Group> groupList = getFilteredGroupList();
+            List<Group> groupList = getAllGroupList();
             Group group = groupList.stream()
                                           .filter(g -> g.getName().equals(target.getGroupName()))
                                           .findAny()
@@ -149,7 +149,7 @@ public class ModelManager implements Model {
     private void updateGroup(Student target, Student editedStudent) {
         requireAllNonNull(target, editedStudent);
         if (target.hasGroupName()) {
-            List<Group> groupList = getFilteredGroupList();
+            List<Group> groupList = getAllGroupList();
             Group updatedGroup = groupList.stream()
                     .filter(g -> g.getName().equals(target.getGroupName()))
                     .findAny()
@@ -290,7 +290,7 @@ public class ModelManager implements Model {
     }
 
     public ObservableList<Student> getAllStudentList() {
-        updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+        filteredStudents.setPredicate(PREDICATE_SHOW_ALL_STUDENTS);
         return filteredStudents;
     }
 
@@ -332,7 +332,7 @@ public class ModelManager implements Model {
 
     @Override
     public ObservableList<Group> getAllGroupList() {
-        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+        filteredGroups.setPredicate(PREDICATE_SHOW_ALL_GROUPS);
         return filteredGroups;
     }
 
