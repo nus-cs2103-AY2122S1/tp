@@ -316,8 +316,8 @@ LeadsForce allows users to view client info in the `ClientViewPanel` in the `Sid
 
 #### Implementation
 
-1. The `LogicManager` starts to parses the given input text using `AddressBookParser`.
-2. The `AddressBookParser` invoke the respective `Parser` based on the first word of the input text.
+1. The `LogicManager` starts to parse the given input text using `AddressBookParser`.
+2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
 3. The remaining input text will be passed to the `ViewCommandParser` to parse.
 4. The `ViewCommandParser` will parse the `ClientId` from the remaining input text. In our implementation, a valid `ClientId` is any non-negative integer.
 5. The `ViewCommandParser` will then create a new `ClientHasId` using the `ClientId` parsed.
@@ -344,8 +344,8 @@ LeadsForce allows users to edit client info.
 
 #### Implementation
 
-1. The `LogicManager` starts to parses the given input text using `AddressBookParser`.
-2. The `AddressBookParser` invoke the respective `Parser` based on the first word of the input text.
+1. The `LogicManager` starts to parse the given input text using `AddressBookParser`.
+2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
 3. The remaining input text will be passed to the `EditCommandParser` to parse.
 4. The `EditCommandParser` will tokenize the remaining input text using the `ArgumentTokenizer` into an `ArgumentMultiMap`.
 5. The `EditCommandParser` will then create a new `clientId` which contains the list of client Ids.
@@ -375,8 +375,8 @@ with any client's attribute or specifically with the specified attributes
 
 #### Implementation
 
-1. The `LogicManager` starts to parses the given input text using `AddressBookParser`.
-2. The `AddressBookParser` invoke the respective `Parser` based on the first word of the input text.
+1. The `LogicManager` starts to parse the given input text using `AddressBookParser`.
+2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
 3. The remaining input text will be passed to the `SearchCommandParser` to parse.
 4. The `SearchCommandParser` will tokenize the remaining input text using the `ArgumentTokenizer` into an `ArgumentMultiMap`.
 5. The `SearchCommandParser` will then create a new `ClientContainsKeywordPredicate` using the `ArgumentMultiMap`.
@@ -412,8 +412,8 @@ for multiple `filter` to be stacked, which allows for user to look for clients i
 
 #### Implementation
 
-1. The `LogicManager` starts to parses the given input text using `AddressBookParser`
-2. The `AddressBookParser` invoke the respective `Parser` based on the first word of the input text.
+1. The `LogicManager` starts to parse the given input text using `AddressBookParser`
+2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
 3. The remaining input text will be passed to the `FilterCommandParser` to parse.
 4. The `FilterCommandParser` will tokenize the remaining input text using the `ArgumentTokenizer` into an `ArgumentMultiMap`.
 5. The `FilterCommandParser` will then create a new `ClientContainsKeywordPredicate` using the `ArgumentMultiMap`.
@@ -439,8 +439,8 @@ See the above description in `Search Clients`.
 LeadsForce allows the user to `sort` clients according to client fields. LeadsForce give clients the option to sort it in ascending or descending order.
 
 #### Implementation
-1. The `LogicManager` starts to parses the given input text using `AddressBookParser`
-2. The `AddressBookParser` invoke the respective `Parser` based on the first word of the input text.
+1. The `LogicManager` starts to parse the given input text using `AddressBookParser`
+2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
 3. The remaining input text will be passed to the `SortCommandParser` to parse.
 4. The `SortCommandParser` will tokenize the remaining input text using the `ArgumentTokenizer` into an `ArgumentMultiMap`.
 5. The `SortCommandParser` will then create a new `SortByAttribute` based off the parsed field with the corresponding `SortDirection` using the `ArgumentMultiMap`.
