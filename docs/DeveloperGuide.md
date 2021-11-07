@@ -672,17 +672,17 @@ testers are expected to do more *exploratory* testing.
 ### Adding a person
 1. Adding a person to the address book
 
-    1. Test case: `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 $/100` <br>
+    1. Test case: `add n/John Doe p/98765432 e/johnd@example.com $/100` <br>
        Expected: If there is already a person called `John Doe` in the address book, then an error message will appear
        at the left output box. Otherwise, a new staff will be added to the list in the right output box, with name `John Doe`,
-       phone number `98765432`, email `johnd@example.com`, address `311, Clementi Ave 2, #02-25` and salary `100`.
+       phone number `98765432`, email `johnd@example.com`, and salary `100`.
        
     1. Test case: `add n/John Doe p/98765432`<br>
        Expected: No person is added. Error details shown in the status message. 
        Status bar remains the same.
        
-    1. Other incorrect add commands to try: `add p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 $/100`,
-       `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25`, `...` (where one or more attributes
+    1. Other incorrect add commands to try: `add p/98765432 e/johnd@example.com $/100`,
+       `add n/John Doe p/98765432 e/johnd@example.com`, `...` (where one or more attributes
        are missing in the command)
        Expected: A wrong message of `Invalid command format` will be shown in the status message.
        
