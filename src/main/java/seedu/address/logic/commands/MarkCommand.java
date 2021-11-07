@@ -48,11 +48,11 @@ public class MarkCommand extends Command {
             + COMMAND_WORD + " " + PREFIX_DASH_NAME + "Jace "
             + PREFIX_DATE + "2021-11-11" + " " + PREFIX_DATE + "2021-11-13";
 
-    public static final String DEFAULT_EXECUTION = "For the period: \n%2$s\n\n%1$d staff have been marked:\n"
+    public static final String DEFAULT_EXECUTION = "For the period: \n%2$s\n\n%1$d staff(s) have been marked:\n"
             + "%3$s";
 
     public static final String NOTHING_CHANGED = "For the input duration: "
-            + "\n%1$s\n\nThe staff \"%2$s\" has already been marked.";
+            + "\n%1$s\n\nThe staff(s) have already been marked, no change has been done:\n%2$s";
     public static final String NO_ONE_SATISFIES_QUERY = "The field(s) indicated is/are not "
             + "satisfied by any staff in Staff'd";
 
