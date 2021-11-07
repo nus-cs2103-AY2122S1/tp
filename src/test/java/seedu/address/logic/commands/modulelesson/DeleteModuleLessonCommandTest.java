@@ -15,7 +15,6 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.person.DeletePersonCommand;
 import seedu.address.model.Model;
@@ -77,15 +76,19 @@ public class DeleteModuleLessonCommandTest {
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredModuleLessonList().size() + 1);
         DeleteModuleLessonCommand deleteModuleLessonCommand = new DeleteModuleLessonCommand(outOfBoundIndex);
+        String expectedMessage = DeleteModuleLessonCommand.MESSAGE_INVALID_FORMAT
+                + DeleteModuleLessonCommand.MESSAGE_USAGE;
 
-        assertCommandFailure(deleteModuleLessonCommand, model, Messages.MESSAGE_INVALID_MODULE_LESSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteModuleLessonCommand, model, expectedMessage);
     }
 
     @Test
     public void execute_invalidRangeUnfilteredList_throwsCommandException() {
         DeleteModuleLessonCommand deleteModuleLessonCommand = new DeleteModuleLessonCommand(INDEX_SECOND, INDEX_FIRST);
+        String expectedMessage = DeleteModuleLessonCommand.MESSAGE_INVALID_FORMAT
+                + DeleteModuleLessonCommand.MESSAGE_USAGE;
 
-        assertCommandFailure(deleteModuleLessonCommand, model, Messages.MESSAGE_INVALID_RANGE);
+        assertCommandFailure(deleteModuleLessonCommand, model, expectedMessage);
     }
 
     @Test
@@ -94,7 +97,10 @@ public class DeleteModuleLessonCommandTest {
         DeleteModuleLessonCommand deleteModuleLessonCommand =
                 new DeleteModuleLessonCommand(INDEX_SECOND, outOfBoundIndex);
 
-        assertCommandFailure(deleteModuleLessonCommand, model, Messages.MESSAGE_INVALID_RANGE);
+        String expectedMessage = DeleteModuleLessonCommand.MESSAGE_INVALID_FORMAT
+                + DeleteModuleLessonCommand.MESSAGE_USAGE;
+
+        assertCommandFailure(deleteModuleLessonCommand, model, expectedMessage);
     }
 
     @Test

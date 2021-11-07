@@ -51,7 +51,7 @@ public class FindPersonCommandParserTest {
         FindPersonCommand expectedFindPersonCommand =
                 new FindPersonCommand(new ModuleCodesContainsKeywordsPredicate(
                         Arrays.asList(
-                                String.format("[%s]", VALID_MODULE_CODE_CS2040)
+                                String.format("%s", VALID_MODULE_CODE_CS2040)
                         )
                 ));
         String userInput = String.format(" m/%s", VALID_MODULE_CODE_CS2040);

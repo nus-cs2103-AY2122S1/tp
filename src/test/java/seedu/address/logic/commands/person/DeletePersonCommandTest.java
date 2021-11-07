@@ -7,7 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtMultipleIndex;
+import static seedu.address.logic.commands.CommandTestUtil.showPersonsWithModuleCode;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_HENRY;
 import static seedu.address.testutil.TypicalIndexes.INDEX_ISAAC;
@@ -21,7 +21,6 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -80,7 +79,7 @@ public class DeletePersonCommandTest {
         Person newPerson2 = new PersonBuilder(person2).withModuleCodes(VALID_MODULE_CODE_CS2106).build();
 
         DeletePersonCommand deletePersonCommand = new DeletePersonCommand(new ModuleCodesContainsKeywordsPredicate(
-                Arrays.asList(String.format("[%s]", VALID_MODULE_CODE_CS2100))),
+                Arrays.asList(String.format("%s", VALID_MODULE_CODE_CS2100))),
                 new ModuleCode(VALID_MODULE_CODE_CS2100, new HashSet<>()));
 
         String expectedMessage = String.format(DeletePersonCommand.MESSAGE_NUMBER_DELETED_PERSON, 1)
@@ -102,7 +101,7 @@ public class DeletePersonCommandTest {
         Set<LessonCode> lessonCodeToDelete = new HashSet<>();
         lessonCodeToDelete.add(new LessonCode("T12"));
         DeletePersonCommand deletePersonCommand = new DeletePersonCommand(new ModuleCodesContainsKeywordsPredicate(
-                Arrays.asList(String.format("[%s]", VALID_MODULE_CODE_CS2100 + " T12"))),
+                Arrays.asList(String.format("%s", VALID_MODULE_CODE_CS2100))),
                 new ModuleCode(VALID_MODULE_CODE_CS2100, lessonCodeToDelete));
 
         String expectedMessage = String.format(DeletePersonCommand.MESSAGE_NUMBER_DELETED_PERSON, 1)
@@ -123,7 +122,7 @@ public class DeletePersonCommandTest {
         Set<LessonCode> lessonCodeToDelete = new HashSet<>();
         lessonCodeToDelete.add(new LessonCode("T12"));
         DeletePersonCommand deletePersonCommand = new DeletePersonCommand(new ModuleCodesContainsKeywordsPredicate(
-                Arrays.asList(String.format("[%s]", VALID_MODULE_CODE_CS2106 + " T12"))),
+                Arrays.asList(String.format("%s", VALID_MODULE_CODE_CS2106))),
                 new ModuleCode(VALID_MODULE_CODE_CS2106, lessonCodeToDelete));
 
         String expectedMessage = String.format(DeletePersonCommand.MESSAGE_NUMBER_DELETED_PERSON, 0)
@@ -145,7 +144,7 @@ public class DeletePersonCommandTest {
         Set<LessonCode> lessonCodeToDelete = new HashSet<>();
         lessonCodeToDelete.add(new LessonCode("L08"));
         DeletePersonCommand deletePersonCommand = new DeletePersonCommand(new ModuleCodesContainsKeywordsPredicate(
-                Arrays.asList(String.format("[%s]", VALID_MODULE_CODE_CS2100 + " L08"))),
+                Arrays.asList(String.format("%s", VALID_MODULE_CODE_CS2100))),
                 new ModuleCode(VALID_MODULE_CODE_CS2100, lessonCodeToDelete));
 
         String expectedMessage = String.format(DeletePersonCommand.MESSAGE_NUMBER_DELETED_PERSON, 0)
@@ -163,7 +162,8 @@ public class DeletePersonCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         DeletePersonCommand deletePersonCommand = new DeletePersonCommand(outOfBoundIndex);
 
-        assertCommandFailure(deletePersonCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deletePersonCommand, model,
+                DeletePersonCommand.MESSAGE_INVALID_FORMAT + DeletePersonCommand.MESSAGE_USAGE);
     }
 
     @Test
@@ -172,7 +172,8 @@ public class DeletePersonCommandTest {
         Index invalidEndIndex = Index.fromOneBased(model.getFilteredPersonList().size() - 4);
         DeletePersonCommand deletePersonCommand = new DeletePersonCommand(invalidStartIndex, invalidEndIndex);
 
-        assertCommandFailure(deletePersonCommand, model, Messages.MESSAGE_INVALID_RANGE);
+        assertCommandFailure(deletePersonCommand, model,
+                DeletePersonCommand.MESSAGE_INVALID_FORMAT + DeletePersonCommand.MESSAGE_USAGE);
     }
 
     @Test
@@ -186,21 +187,9 @@ public class DeletePersonCommandTest {
     }
 
     @Test
-    public void execute_invalidMultipleModuleCodeUnfilteredList_throwsCommandException() {
-        ModuleCodesContainsKeywordsPredicate predicate = new ModuleCodesContainsKeywordsPredicate(
-                Arrays.asList(String.format("[CS2040S CS2030S]")));
-        Set<LessonCode> lessonCodeSet = new HashSet<>();
-        lessonCodeSet.add(new LessonCode("CS2030S"));
-        DeletePersonCommand deletePersonCommand = new DeletePersonCommand(predicate,
-                new ModuleCode("CS2040S", lessonCodeSet));
-
-        assertCommandFailure(deletePersonCommand, model, DeletePersonCommand.MESSAGE_DELETE_BY_MODULE_USAGE);
-    }
-
-    @Test
     public void execute_invalidLessonCodeUnfilteredList_throwsCommandException() {
         ModuleCodesContainsKeywordsPredicate predicate = new ModuleCodesContainsKeywordsPredicate(
-                Arrays.asList(String.format("[CS2030S T1]")));
+                Arrays.asList(String.format("CS2030S")));
         Set<LessonCode> lessonCodeSet = new HashSet<>();
         lessonCodeSet.add(new LessonCode("T1"));
         DeletePersonCommand deletePersonCommand = new DeletePersonCommand(predicate,
@@ -229,7 +218,8 @@ public class DeletePersonCommandTest {
     @Test
     public void execute_validRangeFilteredList_success() {
         //Deletes 2 person in the filtered list
-        showPersonAtMultipleIndex(model, INDEX_FIRST, INDEX_SECOND);
+        showPersonsWithModuleCode(model, new ModuleCode(VALID_MODULE_CODE_CS2100, new HashSet<>()));
+        assert model.getFilteredPersonList().size() == 2; //Only 2 persons in TypicalPersonList has CS2100
 
         Person personToDelete1 = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
         Person personToDelete2 = model.getFilteredPersonList().get(INDEX_SECOND.getZeroBased());
@@ -249,12 +239,14 @@ public class DeletePersonCommandTest {
     @Test
     public void execute_validModuleCodeFilteredList_success() {
         //Deletes 0 persons in filtered list, only deletes module code
-        showPersonAtMultipleIndex(model, INDEX_FIRST, INDEX_ISAAC);
+        showPersonsWithModuleCode(model, new ModuleCode(VALID_MODULE_CODE_CS2100, new HashSet<>()));
+        assert model.getFilteredPersonList().size() == 2; //Only 2 persons in TypicalPersonList has CS2100
+
         Person person = model.getFilteredPersonList().get(INDEX_SECOND.getZeroBased());
         Person newPerson = new PersonBuilder(person).withModuleCodes(VALID_MODULE_CODE_CS2100).build();
 
         ModuleCodesContainsKeywordsPredicate predicate = new ModuleCodesContainsKeywordsPredicate(
-                Arrays.asList(String.format("[%s]", VALID_MODULE_CODE_CS2106)));
+                Arrays.asList(String.format("%s", VALID_MODULE_CODE_CS2106)));
 
         DeletePersonCommand deletePersonCommand = new DeletePersonCommand(predicate,
                 new ModuleCode(VALID_MODULE_CODE_CS2106, new HashSet<>()));
@@ -279,12 +271,14 @@ public class DeletePersonCommandTest {
 
         DeletePersonCommand deletePersonCommand = new DeletePersonCommand(outOfBoundIndex);
 
-        assertCommandFailure(deletePersonCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deletePersonCommand, model,
+                DeletePersonCommand.MESSAGE_INVALID_FORMAT + DeletePersonCommand.MESSAGE_USAGE);
     }
 
     @Test
     public void execute_invalidRangeFilteredList_throwsCommandException() {
-        showPersonAtMultipleIndex(model, INDEX_FIRST, INDEX_SECOND);
+        showPersonsWithModuleCode(model, new ModuleCode(VALID_MODULE_CODE_CS2100, new HashSet<>()));
+        assert model.getFilteredPersonList().size() == 2; //Only 2 persons in TypicalPersonList has CS2100
 
         Index invalidStartIndex = INDEX_SECOND;
         Index invalidEndIndex = INDEX_THIRD;
@@ -294,7 +288,8 @@ public class DeletePersonCommandTest {
 
         DeletePersonCommand deletePersonCommand = new DeletePersonCommand(invalidStartIndex, invalidEndIndex);
 
-        assertCommandFailure(deletePersonCommand, model, Messages.MESSAGE_INVALID_RANGE);
+        assertCommandFailure(deletePersonCommand, model,
+                DeletePersonCommand.MESSAGE_INVALID_FORMAT + DeletePersonCommand.MESSAGE_USAGE);
     }
 
     @Test

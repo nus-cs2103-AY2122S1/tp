@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
-import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -28,11 +27,11 @@ public class DeletePersonCommand extends Command {
     public static final String MESSAGE_USAGE = "delete: "
             + "Deletes the person identified by the index number used in the displayed person list "
             + "or by module code.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_MODULE_CODE + "MODULE CODE\n"
+            + "Ensure that INDEX is a positive integer and exists in contHACKS.\n"
             + "Example: delete 1 , delete 1-3 , delete "
             + PREFIX_MODULE_CODE + "CS2040S, "
-            + "delete " + PREFIX_MODULE_CODE + "CS2040S T09";
+            + "delete " + PREFIX_MODULE_CODE + "CS2040S T09\n"
+            + "Click on the Help button at the top for more detailed information";
 
     public static final String MESSAGE_DELETE_BY_MODULE_USAGE = "delete: "
             + "Delete only accepts one batch delete by Module Code at a time\n"
@@ -47,6 +46,7 @@ public class DeletePersonCommand extends Command {
     public static final String MESSAGE_DELETE_SUCCESS = "%1$s \n";
     public static final String MESSAGE_NO_SUCH_MODULE_CODE = "No such Module Code";
     public static final String MESSAGE_NO_SUCH_LESSON_CODE = "No such Lesson Code";
+    public static final String MESSAGE_INVALID_FORMAT = "Invalid command format! \n";
 
     private final Index targetIndex;
     private final Index endIndex;
@@ -98,10 +98,10 @@ public class DeletePersonCommand extends Command {
         if (predicate != Model.PREDICATE_SHOW_ALL_PERSONS) {
             successMessage = deleteByModule(model);
         } else if (targetIndex.getZeroBased() >= sizeOfPersonList) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_FORMAT + MESSAGE_USAGE);
         } else if (targetIndex.getZeroBased() > endIndex.getZeroBased()
                 || endIndex.getZeroBased() >= sizeOfPersonList) {
-            throw new CommandException(Messages.MESSAGE_INVALID_RANGE);
+            throw new CommandException(MESSAGE_INVALID_FORMAT + MESSAGE_USAGE);
         } else {
             successMessage = deleteAll(model);
         }
@@ -111,14 +111,12 @@ public class DeletePersonCommand extends Command {
 
     private String deleteByModule(Model model) throws CommandException {
         model.updateFilteredPersonList(predicate);
-        if (model.getFilteredPersonList().isEmpty()) {
-            model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
-            throw new CommandException(MESSAGE_NO_SUCH_MODULE_CODE);
-        } else if (isDeleteLessonCode()) {
+        if (isDeleteLessonCode()) {
             List<Person> listOfPersonsToDelete = listOfPersonToDeleteByLessonCode(model, model.getFilteredPersonList());
             return deleteLessonCode(model, listOfPersonsToDelete);
         } else {
-            return deleteByModuleCode(model, model.getFilteredPersonList());
+            List<Person> listOfPersonsToDelete = listOfPersonToDeleteByModuleCode(model, model.getFilteredPersonList());
+            return deleteByModuleCode(model, listOfPersonsToDelete);
         }
     }
 
@@ -133,9 +131,9 @@ public class DeletePersonCommand extends Command {
         List<Person> personsToDelete = new ArrayList<>();
 
         for (Person current : list) {
-            if (!current.getModuleCodes().contains(moduleCode)) {
+            if (!current.getModuleCodes().contains(moduleCode)) { //ensure that module code exist
                 model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
-                throw new CommandException(MESSAGE_DELETE_BY_MODULE_USAGE);
+                throw new CommandException(MESSAGE_NO_SUCH_MODULE_CODE);
             }
             if (current.get(moduleCode).getLessonCodes().contains(lessonCodeToRemove)) {
                 personsToDelete.add(current);
@@ -198,6 +196,20 @@ public class DeletePersonCommand extends Command {
         Person editedPerson = new Person(person.getName(), person.getEmail(), moduleCodes, person.getPhone(),
                 person.getTeleHandle(), person.getRemark());
         model.setPerson(person, editedPerson);
+    }
+
+    private List<Person> listOfPersonToDeleteByModuleCode(Model model, List<Person> list) throws CommandException {
+        List<Person> persons = new ArrayList<>();
+        for (Person current : list) {
+            if (current.getModuleCodes().contains(moduleCode)) {
+                persons.add(current);
+            }
+        }
+        if (persons.isEmpty()) {
+            model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+            throw new CommandException(MESSAGE_NO_SUCH_MODULE_CODE);
+        }
+        return persons;
     }
 
     private String deleteByModuleCode(Model model, List<Person> filteredList) {

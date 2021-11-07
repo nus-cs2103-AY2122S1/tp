@@ -39,6 +39,16 @@ public class TeleHandle {
         return test.equals("") || test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns true if the other Telegram handle is similar to this Telegram handle.
+     */
+    public boolean isSimilarTo(TeleHandle other) {
+        if (other == null || other.value.equals("")) {
+            return false;
+        }
+
+        return value.equalsIgnoreCase(other.value);
+    }
     @Override
     public String toString() {
         return value;
@@ -48,7 +58,7 @@ public class TeleHandle {
     public boolean equals(Object other) {
         return other == this
                 || (other instanceof TeleHandle
-                && value.equals(((TeleHandle) other).value));
+                && value.equalsIgnoreCase(((TeleHandle) other).value));
     }
 
     @Override
