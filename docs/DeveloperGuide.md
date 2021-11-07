@@ -197,11 +197,14 @@ This section describes noteworthy details on how certain features are implemente
 
 #### Implementation
 
-The telegram handle field is facilitated by the `Telegram` class. It is stored internally as a `String` in the data file `addressbook.json` and is then initialized as a `Telegram` object. 
+The telegram handle field is facilitated by the `Telegram` class.
+It is stored internally as a `String` in the data file `addressbook.json`
+and is then initialized as a `Telegram` object. 
 
 The `Telegram` class implements the following operation:
 
-* `Telegram#isValidTelegram(String test)` — Returns true if a given string is a valid telegram handle with the help of a validation regex.
+* `Telegram#isValidTelegram(String test)` — Returns true if a given
+string is a valid telegram handle with the help of a validation regex.
 
 Regex used in verifying the validity of telegram handle:
 
@@ -211,7 +214,9 @@ Regex used in verifying the validity of telegram handle:
 
 #### Design considerations
 
-The `Telegram` class is first integrated into the `Person` class and added as a new field to the `Person` class. This is illustrated by the class diagram below, where every field, including the `Telegram` field, is compulsory except the `Tag` field.
+The `Telegram` class is first integrated into the `Person` class and added as
+a new field to the `Person` class. This is illustrated by the class diagram below,
+where every field, including the `Telegram` field, is compulsory except the `Tag` field.
 
 ![PersonWithTelegramClassDiagram](images/PersonWithTelegramClassDiagram.png)
 
@@ -219,11 +224,16 @@ The `Telegram` class is first integrated into the `Person` class and added as a 
 
 #### Implementation
 
-The `Phone`, `Email` and `Address` fields were modified such that these fields are no longer compulsory. The class diagram below illustrates the `Person` class after the addition of the `Telegram` field. The `Name` and `Telegram` fields are compulsory while the rest are optional.
+The `Phone`, `Email` and `Address` fields are modified such that these fields are
+no longer compulsory. The class diagram below illustrates the `Person` class after
+the addition of the `Telegram` field. The `Name` and `Telegram` fields are compulsory
+while the rest are optional.
 
 ![PersonOptionalFieldClassDiagram](images/PersonOptionalFieldClassDiagram.png)
 
-In order to accomodate to the above mentioned new optional fields, the respective constructors were modified such that the following examples are considered valid inputs.
+In order to accomodate to the above mentioned new optional fields,
+the respective constructors were modified such that the following examples
+are considered valid inputs.
 
 Example 1: Adding new contact without email and address.
 
@@ -245,7 +255,9 @@ Example 3: Adding new contact without email and address but with empty phone inp
 add n/John Doe te/@johndoe123 p/
 ```
 
-In such a case, the constructors are modified such that the above input is also deemed as valid. The rationale behind this is that there is nothing for the `VALIDATION_REGEX` to verify, unlike in the following example.
+In such a case, the constructors are modified such that the above input is also deemed
+as valid. The rationale behind this is that there is nothing for the `VALIDATION_REGEX`
+to verify, unlike in the following example.
 
 Example 4: Adding new contact without email and address but with invalid phone input.
 
@@ -257,44 +269,91 @@ For the case above, the respective constructors will carry out validation on the
 
 #### Design considerations
 
-In order to allow for optional fields, the `AddCommandParser` also has to be modified. In particular, the following methods are modified
-* `AddCommandParser#arePrefixesPresent(argumentMultimap, prefixes)` — Returns true if none of the prefixes contains empty `Optional` values in the given `ArgumentMultimap`.
-* `AddCommandParser#parse(args)` — Parses the given `String` of arguments in the context of the `AddCommand` and returns an `AddCommand` object for execution. Throws `ParseException` if the user input does not conform the expected format
+In order to allow for optional fields, the `AddCommandParser` also has to be modified.
+In particular, the following methods are modified
+* `AddCommandParser#arePrefixesPresent(argumentMultimap, prefixes)` — 
+Returns true if none of the prefixes contains empty `Optional` values in the
+given `ArgumentMultimap`.
+* `AddCommandParser#parse(args)` — Parses the given `String` of arguments
+in the context of the `AddCommand` and returns an `AddCommand` object for execution.
+Throws `ParseException` if the user input does not conform the expected format.
 
-For the `arePrefixesPresent` method, the prefixes provided were changed to only include the following mandatory fields:
+For the `arePrefixesPresent` method, the prefixes provided were changed to only
+include the following mandatory fields:
 * `PREFIX_NAME`
 * `PREFIX_TELEGRAM`
 * `PREFIX_GITHUB`
 
-`AddCommandParser#arePrefixesPresent(argumentMultimap, prefixes)` uses the static parsing methods in `ParserUtil` to parse the different fields in `Person`. The individual fields are first initialised with an empty string, which is now a valid input. The method then calls the `arePrefixesPresent` method to check if the provided prefix is present. If present, the method will then call the respective static parsing methods in `ParserUtil`.
+`AddCommandParser#arePrefixesPresent(argumentMultimap, prefixes)` uses the static
+parsing methods in `ParserUtil` to parse the different fields in `Person`.
+The individual fields are first initialised with an empty string, which is now
+a valid input. The method then calls the `arePrefixesPresent` method to check if
+the provided prefix is present. If present, the method will then call the respective
+static parsing methods in `ParserUtil`.
 
 ### GitHub
 
 #### Implementation
 
-The GitHub field is facilitated by the `Github` class. It is stored internally as a `String` in the data file `addressbook.json` and is then initialized as a `Github` object. 
+The GitHub field is facilitated by the `Github` class. It is stored internally
+as a `String` in the data file `addressbook.json` and is then initialized as a
+`Github` object. 
 
 The `Github` class implements the following operation:
 
-* `Github#isValidGithub(String test)` — Returns true if a given string is a valid GitHub username with the help of a validation regex.
+* `Github#isValidGithub(String test)` — Returns true if a given string is
+a valid GitHub username with the help of a validation regex.
 
 Regex used in verifying the validity of GitHub username:
 
 `public static final String VALIDATION_REGEX = "[a-zA-Z\d](?:[a-zA-Z\d]|-(?=[a-zA-Z\d])){0,38}";`
 * `[a-zA-Z\d]` — **Character set**. Match any character in the set.
-* `a-z` — **Range**. Matches a character in the range "a" to "z" (char code 97 to 122). Case sensitive.
-* `A-Z` — **Range**. Matches a character in the range "A" to "Z" (char code 65 to 90). Case sensitive.
+* `a-z` — **Range**. Matches a character in the range "a" to "z"
+(char code 97 to 122). Case sensitive.
+* `A-Z` — **Range**. Matches a character in the range "A" to "Z"
+(char code 65 to 90). Case sensitive.
 * `\d` — **Digit**. Matches any digit character (0-9).
-* `(?:[a-zA-Z\d]|-(?=[a-zA-Z\d]))` — **Non-capturing group**. Groups multiple tokens together without creating a capture group.
-* `|` — **Alternation**. Acts like a boolean OR. Matches the expression before or after the sign.
+* `(?:[a-zA-Z\d]|-(?=[a-zA-Z\d]))` — **Non-capturing group**.
+Groups multiple tokens together without creating a capture group.
+* `|` — **Alternation**. Acts like a boolean OR.
+Matches the expression before or after the sign.
 * `-` — **Character**. Matches a "-" character (char code 45).
 * `{0,38}` — **Quantifier**. Match between 0 and 38 of the preceding token.
 
 #### Design considerations
 
-The `Github` class is first integrated into the `Person` class and added as a new field to the `Person` class. This is illustrated by the class diagram below, where only the `Name`, `Telegram` and `Github` fields are compulsory.
+The `Github` class is first integrated into the `Person` class and added as
+a new field to the `Person` class. This is illustrated by the class diagram below,
+where only the `Name`, `Telegram` and `Github` fields are compulsory.
 
 ![PersonWithGithubClassDiagram](images/PersonWithGithubClassDiagram.png)
+
+### Favorite command
+
+#### Implementation
+
+The Favorite command favorites a non-favorited contact from the current list of contacts.
+
+In order to distinguish whether a contact has been favorited or unfavorited,
+a boolean flag, `isFavorite` is added into the `Person` class and initialised as `false`.
+The
+
+Favoriting contacts is facilitated by the `IsFavoritePredicate`.
+* `IsFavoritePredicate` stores a boolean flag for comparison with a `Person` object.
+* It also has a `IsFavoritePredicate#test(Person person)` to determine if the `Person`
+input into the test is currently favorited or unfavorited.
+
+### Unfavorite command
+
+#### Implementation
+
+The Unfavorite command unfavorites a favorited contact from the current list of contacts.
+
+Similar to Favoriting contacts, Unfavoriting contacts is also facilitated by the
+`IsFavoritePredicate`.
+* `IsFavoritePredicate` stores a boolean flag for comparison with a `Person` object.
+* It also has a `IsFavoritePredicate#test(Person person)` to determine if the `Person`
+input into the test is currently favorited or unfavorited.
 
 ### Export command
 
