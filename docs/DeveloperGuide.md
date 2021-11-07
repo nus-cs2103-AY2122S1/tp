@@ -1424,7 +1424,7 @@ testers are expected to do more *exploratory* testing.
        Expected: No appointment is edited. Error details are shown in the status message.
 
     9. Test case: Edit a patient/doctor's appointment to clash with their existing appointments (edit the date and time to be the same or overlapping with an existing appointment).<br>
-        Expected: No appointment is edited. Error details are shown in the status message indicating a clash in appointments.
+        Expected: No appointment is edited. Error details are shown in the status message indicating a clash between appointments.
 
 2. Editing an appointment while some appointments are being shown
 
