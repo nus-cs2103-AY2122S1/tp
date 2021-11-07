@@ -1032,6 +1032,13 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+### Listing all applicants 
+
+  1. Test case: `list`<br>
+     Expected: All applicants listed without omission.
+     Command success message shown in the status message.
+     
+
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
@@ -1048,6 +1055,9 @@ testers are expected to do more *exploratory* testing.
        Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
+
+
+
 
 ### Saving data
 
