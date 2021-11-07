@@ -942,7 +942,7 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `add n/James p/32323232 e/james@gmail.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney b/04071999`<br>
        Expected: No contact is added due to duplicated phone number. Error details shown in the status message.
 
-    1. Other incorrect add commands to try: `add <other valid params> b/<future date>`, `add <other valid params> p/hp:1200123`, `...`.
+    1. Other incorrect add commands to try: `add <other valid params> b/<future date>`, `add <other valid params> p/hp:1200123`, `...`.<br>
        Expected: No contact is added. Error details shown in the status message.
        
 1. Adding a contact without optional fields
@@ -1121,5 +1121,5 @@ testers are expected to do more *exploratory* testing.
     1. Test Case: edit the first contact email to `hellogmail` and launch CONNECTIONS<br>
         Expected: CONNECTIONS launches successfully with 0 contacts. 
        
-    1. Other incorrect formatting of data or invalid fields: birthday to `00000000`, phone to `mynumber`, `...`
+    1. Other incorrect formatting of data or invalid fields: birthday to `00000000`, phone to `mynumber`, `...`<br>
         Expected: CONNECTIONS launches successfully with 0 contacts.
