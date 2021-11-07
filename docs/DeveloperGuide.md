@@ -29,7 +29,8 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-  * [Opencsv](http://opencsv.sourceforge.net/)
+* [Opencsv](http://opencsv.sourceforge.net/) is used when creating the CSV file in `mailingList` command.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
