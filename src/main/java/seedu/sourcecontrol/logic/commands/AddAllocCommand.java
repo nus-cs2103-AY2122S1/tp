@@ -162,6 +162,22 @@ public class AddAllocCommand extends Command {
         public AllocDescriptor() {}
 
         /**
+         * Creates a new {@code AllocDescriptor} with the specified {@code Group} and {@code Id}.
+         */
+        public AllocDescriptor(Group group, Id id) {
+            setGroup(group);
+            setId(id);
+        }
+
+        /**
+         * Creates a new {@code AllocDescriptor} with the specified {@code Group} and {@code Name}.
+         */
+        public AllocDescriptor(Group group, Name name) {
+            setGroup(group);
+            setName(name);
+        }
+
+        /**
          * Copy constructor.
          */
         public AllocDescriptor(AllocDescriptor toCopy) {

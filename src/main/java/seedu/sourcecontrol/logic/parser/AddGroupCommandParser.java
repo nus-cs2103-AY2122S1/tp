@@ -40,18 +40,13 @@ public class AddGroupCommandParser implements Parser<AddGroupCommand> {
 
         List<Name> names = ParserUtil.parseNames(argMultimap.getAllValues(PREFIX_NAME));
         for (Name name : names) {
-            AllocDescriptor allocDescriptor = new AllocDescriptor();
-            allocDescriptor.setGroup(group);
-            allocDescriptor.setName(name);
-            allocDescriptors.add(allocDescriptor);
+            allocDescriptors.add(new AllocDescriptor(group, name));
+
         }
 
         List<Id> ids = ParserUtil.parseIds(argMultimap.getAllValues(PREFIX_ID));
         for (Id id : ids) {
-            AllocDescriptor allocDescriptor = new AllocDescriptor();
-            allocDescriptor.setGroup(group);
-            allocDescriptor.setId(id);
-            allocDescriptors.add(allocDescriptor);
+            allocDescriptors.add(new AllocDescriptor(group, id));
         }
 
         return new AddGroupCommand(group, allocDescriptors);
