@@ -13,12 +13,12 @@ import static seedu.address.logic.parser.PrefixSyntax.PREFIX_PHONE_SYNTAX;
 import static seedu.address.logic.parser.PrefixSyntax.PREFIX_ROLE_SYNTAX;
 import static seedu.address.logic.parser.PrefixSyntax.PREFIX_TAG_SYNTAX;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
+import javafx.util.Pair;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -74,55 +74,13 @@ public class ShowCommand extends Command {
         ObservableList<Person> ol = addressBook.getPersonList();
 
         String prefixString = prefix.getPrefix();
+        Pair<String, List<String>> results = parsePrefix(prefixString, ol);
+
+        assert results.getKey() != null : "Prefix given should not be invalid";
 
         // temporary variables to hold unique search terms and part of UI message to user
-        List<String> uniqueInputs = new ArrayList<>();
-        String userText = "";
-
-        switch (prefixString) {
-        case PREFIX_NAME_SYNTAX:
-            userText = "names";
-            uniqueInputs = getUniqueNameInputs(ol);
-            break;
-        case PREFIX_PHONE_SYNTAX:
-            userText = "phone numbers";
-            uniqueInputs = getUniquePhoneInputs(ol);
-            break;
-        case PREFIX_EMAIL_SYNTAX:
-            userText = "emails";
-            uniqueInputs = getUniqueEmailInputs(ol);
-            break;
-        case PREFIX_ROLE_SYNTAX:
-            userText = "roles";
-            uniqueInputs = getUniqueRoleInputs(ol);
-            break;
-        case PREFIX_EMPLOYMENT_TYPE_SYNTAX:
-            userText = "employment types";
-            uniqueInputs = getUniqueEmploymentTypeInputs(ol);
-            break;
-        case PREFIX_EXPECTED_SALARY_SYNTAX:
-            userText = "expected salaries";
-            uniqueInputs = getUniqueExpectedSalaryInputs(ol);
-            break;
-        case PREFIX_LEVEL_OF_EDUCATION_SYNTAX:
-            userText = "levels of education";
-            uniqueInputs = getUniqueLevelOfEducationInputs(ol);
-            break;
-        case PREFIX_EXPERIENCE_SYNTAX:
-            userText = "years of experience";
-            uniqueInputs = getUniqueExperienceInputs(ol);
-            break;
-        case PREFIX_TAG_SYNTAX:
-            userText = "tags";
-            uniqueInputs = getUniqueTagInputs(ol);
-            break;
-        case PREFIX_INTERVIEW_SYNTAX:
-            userText = "interview";
-            uniqueInputs = getUniqueInterviewInputs(ol);
-            break;
-        default:
-            return "No search terms exist for unknown prefix " + prefixString;
-        }
+        List<String> uniqueInputs = results.getValue();
+        String userText = results.getKey();
 
         if (!uniqueInputs.isEmpty()) {
             StringBuilder sb = new StringBuilder("Here are all the " + userText + " present:\n");
@@ -133,6 +91,40 @@ public class ShowCommand extends Command {
             return sb.toString();
         } else {
             return "No search terms exist for " + userText;
+        }
+    }
+
+    /**
+     * Parses {@code prefixString} into a pair containing the user text for display as key and a list of
+     * strings representing unique prefix values as value.
+     *
+     * @param prefixString prefix to be parsed
+     * @param ol list of all applicants
+     */
+    private Pair<String, List<String>> parsePrefix(String prefixString, ObservableList<Person> ol) {
+        switch (prefixString) {
+        case PREFIX_NAME_SYNTAX:
+            return new Pair<>("names", getUniqueNameInputs(ol));
+        case PREFIX_PHONE_SYNTAX:
+            return new Pair<>("phone numbers", getUniquePhoneInputs(ol));
+        case PREFIX_EMAIL_SYNTAX:
+            return new Pair<>("emails", getUniqueEmailInputs(ol));
+        case PREFIX_ROLE_SYNTAX:
+            return new Pair<>("roles", getUniqueRoleInputs(ol));
+        case PREFIX_EMPLOYMENT_TYPE_SYNTAX:
+            return new Pair<>("employment types", getUniqueEmploymentTypeInputs(ol));
+        case PREFIX_EXPECTED_SALARY_SYNTAX:
+            return new Pair<>("expected salaries", getUniqueExpectedSalaryInputs(ol));
+        case PREFIX_LEVEL_OF_EDUCATION_SYNTAX:
+            return new Pair<>("levels of education", getUniqueLevelOfEducationInputs(ol));
+        case PREFIX_EXPERIENCE_SYNTAX:
+            return new Pair<>("years of experience", getUniqueExperienceInputs(ol));
+        case PREFIX_TAG_SYNTAX:
+            return new Pair<>("tags", getUniqueTagInputs(ol));
+        case PREFIX_INTERVIEW_SYNTAX:
+            return new Pair<>("interview", getUniqueInterviewInputs(ol));
+        default:
+            return new Pair<>(null, null);
         }
     }
 
