@@ -40,7 +40,7 @@ title: Developer Guide
         7.3 <a href="#73-deleting-a-clientproduct">Deleting a Client/Product</a><br>
         7.4 <a href="#74-adding-a-clientproduct">Adding a Client/Product</a><br>
         7.5 <a href="#75-editing-a-clientproduct">Editing a Client/Product</a><br>
-        7.6 <a href="#76-listing-clientproduct">Listing Clients/Products</a><br>
+        7.6 <a href="#76-listing-clientsproducts">Listing Clients/Products</a><br>
         7.7 <a href="#77-finding-a-clientproduct">Finding a Client/Product</a><br>
         7.8 <a href="#78-viewing-a-clientproduct">Viewing a Client/Product</a><br>
         7.9 <a href="#710-saving-data">Saving Data</a><br>
