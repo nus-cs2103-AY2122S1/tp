@@ -27,7 +27,9 @@ Given below are my contributions to the project.
 
 * **Testing**:
   * Wrote test cases for `delete module` feature that increased test coverage by 11.70%. ([\#99](https://github.com/AY2122S1-CS2103-F09-1/tp/pull/99))
-  
+
+<div style="page-break-after: always;"></div>
+
 * **Team-based contributions**:
   * Created object builders used for team-wide testing purposes. ([\#99](https://github.com/AY2122S1-CS2103-F09-1/tp/pull/99))
   * Updated CI build status badge and Jekyll site-settings. ([\#23](https://github.com/AY2122S1-CS2103-F09-1/tp/pull/23))

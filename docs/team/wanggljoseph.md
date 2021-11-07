@@ -17,24 +17,26 @@ Given below are my contributions to the project.
       using the ModuleName that is unique to each module.
 
 * **New Feature**: Added the ability to edit Tasks of Students and Modules. (Pull request [\#117](https://github.com/AY2122S1-CS2103-F09-1/tp/pull/117))
-    * What it does: This features allows the user to edit a specific task's information.
+    * What it does: This feature allows the user to edit a specific task's information.
     * Justification: Since the specific details (such as its deadline) of a module's task may change in the real world, 
       this feature will allow TAs to update or correct inaccurate details about the specific task. 
     * Highlights: This feature will edit the task's information for all students under the module, sparing the user from
       having to edit the task's information separately for every student of the module.
 
 * **New Feature**: Added the UI for Students and Tasks. (Pull request [\#76](https://github.com/AY2122S1-CS2103-F09-1/tp/pull/76)) 
-    * What it does: Displays the graphical representation of Students and Tasks belonging to a Module.
+    * What it does: Display the graphical representation of Students and Tasks belonging to a Module.
     * Justification: Since TAB is aimed at helping TAs manage their students' progress, being able to view the information
       of a Module's Students and Tasks in an orderly fashion can greatly improve the TA's experience of tracking and updating
       their students' progress.
+
+<div style="page-break-after: always;"></div>
 
 * **Enhancements to existing features**:
     * Styled UI to display done and undone Tasks using intuitive colors. (Pull request [\#137](https://github.com/AY2122S1-CS2103-F09-1/tp/pull/137))
       * What it does: Display a done Task with a green border and description, and display an undone Task with a red border and description
       * Justification: This feature enhancement makes it easier for the user to quickly determine whether a Task is done or
         undone, reducing the time required to track and update students' progress.
-    * Standardize format of Command Result returned upon executing a Command. (Pull request [\#220](https://github.com/AY2122S1-CS2103-F09-1/tp/pull/220))
+    * Standardized the format of Command Result returned upon executing a Command. (Pull request [\#220](https://github.com/AY2122S1-CS2103-F09-1/tp/pull/220))
       * What it does: Reduce the amount of horizontal scrolling a user needs to perform to check out the Command Result message.
       * Justification: This feature enhancement standardized the format of the Command Result received when the user executes a Command.
         The new format is easier to read and makes it easier for new users to learn more about TAB's commands.
