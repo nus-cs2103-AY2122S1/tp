@@ -1,0 +1,93 @@
+@startuml
+!include style.puml
+
+box Ui UI_COLOR_T1
+participant ":UiManager" as UiManager UI_COLOR
+participant ":MainWindow" as MainWindow UI_COLOR
+participant ":UserProfileWindow" as UserProfileWindow UI_COLOR
+participant ":UiPart" as UiPart UI_COLOR
+end box
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+end box
+
+[-> UiManager : start()
+activate UiManager
+
+create MainWindow
+UiManager -> MainWindow : new MainWindow(primaryStage, logic)
+activate MainWindow
+
+create UserProfileWindow
+MainWindow -> UserProfileWindow : new UserProfileWindow(logic)
+activate UserProfileWindow
+
+UserProfileWindow --> MainWindow
+deactivate UserProfileWindow
+
+MainWindow --> UiManager
+deactivate MainWindow
+
+<-- UiManager
+deactivate UiManager
+
+opt When the User Would Like to see the Profile Window
+
+-> MainWindow : handleUserProfileWindow()
+activate MainWindow
+
+MainWindow -> UserProfileWindow : isShowing()
+activate UserProfileWindow
+
+UserProfileWindow --> MainWindow
+deactivate UserProfileWindow
+
+alt Showing
+
+MainWindow -> UserProfileWindow : focus()
+activate UserProfileWindow
+
+UserProfileWindow -> UiPart : getRoot()
+activate UiPart
+
+UiPart --> UserProfileWindow
+deactivate UiPart
+
+UserProfileWindow --> MainWindow
+deactivate UserProfileWindow
+
+else not Showing
+
+MainWindow -> UserProfileWindow : show()
+activate UserProfileWindow
+
+UserProfileWindow -> UserProfileWindow : initializeFields()
+activate UserProfileWindow
+
+UserProfileWindow -> LogicManager : getUserProfile()
+activate LogicManager
+
+LogicManager --> UserProfileWindow
+deactivate LogicManager
+
+UserProfileWindow --> UserProfileWindow
+deactivate UserProfileWindow
+
+UserProfileWindow --> UiPart : getRoot()
+activate UiPart
+
+UiPart --> UserProfileWindow
+deactivate UiPart
+
+UserProfileWindow --> MainWindow
+deactivate UserProfileWindow
+
+end
+
+<-- MainWindow
+deactivate MainWindow
+
+end
+
+@enduml

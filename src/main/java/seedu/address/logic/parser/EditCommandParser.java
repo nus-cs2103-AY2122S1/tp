@@ -1,7 +1,10 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.EditCommand.MESSAGE_EDIT_PROFILE_GITHUB_CANNOT_BE_EMPTY;
+import static seedu.address.logic.commands.EditCommand.MESSAGE_EDIT_PROFILE_NAME_CANNOT_BE_EMPTY;
+import static seedu.address.logic.commands.EditCommand.MESSAGE_EDIT_PROFILE_PARAMETERS_CANNOT_BE_EMPTY;
+import static seedu.address.logic.commands.EditCommand.MESSAGE_EDIT_PROFILE_TELEGRAM_CANNOT_BE_EMPTY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GITHUB;
@@ -26,6 +29,31 @@ import seedu.address.model.tag.Tag;
  */
 public class EditCommandParser implements Parser<EditCommand> {
 
+    private void checkEditProfileInputFormat(String args, ArgumentMultimap argMultimap) throws ParseException {
+        assert(!args.isEmpty());
+        boolean isNameEdited = args.contains(PREFIX_NAME.getPrefix());
+        boolean isTelegramEdited = args.contains(PREFIX_TELEGRAM.getPrefix());
+        boolean isGithubEdited = args.contains(PREFIX_GITHUB.getPrefix());
+        boolean isNameArgEmpty = argMultimap.getAllValues(PREFIX_NAME).size() == 1
+                && argMultimap.getAllValues(PREFIX_NAME).indexOf("") == 0;
+        boolean isTelegramArgEmpty = argMultimap.getAllValues(PREFIX_TELEGRAM).size() == 1
+                && argMultimap.getAllValues(PREFIX_TELEGRAM).indexOf("") == 0;
+        boolean isGithubArgEmpty = argMultimap.getAllValues(PREFIX_GITHUB).size() == 1
+                && argMultimap.getAllValues(PREFIX_GITHUB).indexOf("") == 0;
+        if (isNameEdited && isNameArgEmpty && isGithubEdited && isGithubArgEmpty
+                && isTelegramEdited && isTelegramArgEmpty) {
+            throw new ParseException(MESSAGE_EDIT_PROFILE_PARAMETERS_CANNOT_BE_EMPTY);
+        } else if (args.contains(PREFIX_NAME.getPrefix()) && isNameArgEmpty) {
+            throw new ParseException(MESSAGE_EDIT_PROFILE_NAME_CANNOT_BE_EMPTY);
+        } else if (args.contains(PREFIX_TELEGRAM.getPrefix()) && isTelegramArgEmpty) {
+            throw new ParseException(MESSAGE_EDIT_PROFILE_TELEGRAM_CANNOT_BE_EMPTY);
+        } else if (args.contains(PREFIX_GITHUB.getPrefix()) && isGithubArgEmpty) {
+            throw new ParseException(MESSAGE_EDIT_PROFILE_GITHUB_CANNOT_BE_EMPTY);
+        } else {
+            return;
+        }
+    }
+
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
@@ -45,8 +73,9 @@ public class EditCommandParser implements Parser<EditCommand> {
         } catch (ParseException pe) {
             if (argMultimap.getPreamble().equals("profile")) {
                 isProfile = true;
+                checkEditProfileInputFormat(args, argMultimap);
             } else {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+                throw new ParseException(pe.getMessage() + " \n" + EditCommand.MESSAGE_USAGE);
             }
         }
 

@@ -1,0 +1,17 @@
+@startuml
+start
+:User presses DOWN;
+
+if ([Next Command Exists])
+    :return next command;
+elseif ([At Latest Command])
+    :return empty string;
+else ([No Command History])
+    :return empty string;
+endif
+
+stop
+
+@enduml
+
+
