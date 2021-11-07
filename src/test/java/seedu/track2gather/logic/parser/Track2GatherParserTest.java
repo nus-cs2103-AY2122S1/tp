@@ -120,6 +120,9 @@ public class Track2GatherParserTest {
     public void parseCommand_tshift() throws Exception {
         assertTrue(parser.parseCommand(TShiftCommand.COMMAND_WORD + " 3") instanceof TShiftCommand);
         assertTrue(parser.parseCommand(TShiftCommand.COMMAND_WORD + " -3") instanceof TShiftCommand);
+
+        assertEquals(parser.parseCommand(TShiftCommand.COMMAND_WORD + " 3"), new TShiftCommand(3));
+        assertEquals(parser.parseCommand(TShiftCommand.COMMAND_WORD + " -3"), new TShiftCommand(-3));
     }
 
     @Test
