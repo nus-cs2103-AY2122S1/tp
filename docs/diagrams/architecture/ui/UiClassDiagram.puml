@@ -62,10 +62,9 @@ AppMenu -up> "1" CommandExecutor
 
 AppMenu ...> Logic
 
-StudentCard --> VersionedModel
+StudentCard ..> VersionedModel
 UiManager -right-> Logic
 MainWindow --> Logic
-
 
 StudentListPanel -[hidden]left- HelpWindow
 HelpWindow -[hidden]left- CommandBox

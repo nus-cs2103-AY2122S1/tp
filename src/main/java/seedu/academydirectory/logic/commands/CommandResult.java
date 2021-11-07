@@ -73,6 +73,12 @@ public class CommandResult {
         return commitMessage;
     }
 
+    /**
+     * Note that Optional commit message is "optional" and not necessary to compare two command results,
+     * as they do not interfere with overall results and functionality of command execution.
+     * @param other other object
+     * @return whether two objects are equal in the context of Command Result
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
