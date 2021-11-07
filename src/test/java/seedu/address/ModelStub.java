@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ClientTotalOrder;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -219,8 +220,34 @@ public class ModelStub implements Model {
     public void resetOrderView() {
         throw new AssertionError("This method should not be called.");
     }
+
     @Override
     public void deleteTaskIf(Predicate<Task> pred) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void deleteOrderIf(Predicate<Order> pred) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void checkClientAndOrderRelation() throws DataConversionException {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void checkTaskAndOrderRelation() throws DataConversionException {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void deleteRelatedTasks(Order order) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public boolean hasPersonWithName(String name) {
         throw new AssertionError("This method should not be called.");
     }
 }

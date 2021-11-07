@@ -1,0 +1,83 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":SalesNoteParser" as SalesNoteParser LOGIC_COLOR
+participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
+participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("editclient 1 n/[new name]")
+activate LogicManager
+
+LogicManager -> SalesNoteParser : parseCommand("editclient 1 n/[new name]")
+activate SalesNoteParser
+
+create DeleteCommandParser
+SalesNoteParser -> DeleteCommandParser
+activate DeleteCommandParser
+
+DeleteCommandParser --> SalesNoteParser
+deactivate DeleteCommandParser
+
+SalesNoteParser -> DeleteCommandParser : parse("n/[new name]")
+activate DeleteCommandParser
+
+create DeleteCommand
+DeleteCommandParser -> DeleteCommand
+activate DeleteCommand
+
+DeleteCommand --> DeleteCommandParser : d
+deactivate DeleteCommand
+
+DeleteCommandParser --> SalesNoteParser : d
+deactivate DeleteCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+DeleteCommandParser -[hidden]-> SalesNoteParser
+destroy DeleteCommandParser
+
+SalesNoteParser --> LogicManager : d
+deactivate SalesNoteParser
+
+LogicManager -> DeleteCommand : execute()
+activate DeleteCommand
+
+DeleteCommand -> Model : getRelatedOrders([old name])
+activate Model
+
+Model --> DeleteCommand
+deactivate Model
+
+loop through list of related orders
+    DeleteCommand -> Model: setName([new name])
+    activate Model
+
+    Model --> DeleteCommand:
+    deactivate Model
+end
+
+DeleteCommand -> Model : setPerson(person, EditedPerson)
+activate Model
+
+Model --> DeleteCommand
+deactivate Model
+
+create CommandResult
+DeleteCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> DeleteCommand
+deactivate CommandResult
+
+DeleteCommand --> LogicManager : result
+deactivate DeleteCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

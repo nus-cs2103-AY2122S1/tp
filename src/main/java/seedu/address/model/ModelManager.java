@@ -16,6 +16,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.StringUtil;
 import seedu.address.model.order.Customer;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Person;
@@ -110,6 +113,12 @@ public class ModelManager implements Model {
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return addressBook.hasPerson(person);
+    }
+
+    @Override
+    public boolean hasPersonWithName(String name) {
+        requireNonNull(name);
+        return addressBook.hasPersonWithName(name);
     }
 
     @Override
@@ -290,8 +299,26 @@ public class ModelManager implements Model {
     /**
      * Marks an order as completed
      */
+    @Override
     public boolean markOrder(Order order) {
         return orderBook.markOrder(order);
+    }
+
+    /**
+     * Delete tasks related to a given Order
+     */
+    @Override
+    public void deleteRelatedTasks(Order order) {
+        String keyword = Order.ID_PREFIX + String.valueOf(order.getId());
+        this.deleteTaskIf(task -> StringUtil.containsWordIgnoreCase(task.getTaskTag().tagName, keyword));
+    }
+
+    /**
+     * Deletes all tasks matching predicate from taskBook.
+     */
+    @Override
+    public void deleteOrderIf(Predicate<Order> pred) {
+        orderBook.deleteOrderIf(pred);
     }
 
     /**
@@ -374,6 +401,44 @@ public class ModelManager implements Model {
         Comparator<Order> defaultComparator = Order::compareTo;
         orderBook.sortOrders(defaultComparator);
         updateFilteredOrderList(PREDICATE_SHOW_ALL_ORDERS);
+    }
+
+    //=========== AddressBook & OrderBook Relation Check =======================================================
+
+    /**
+     * Checks if any order tagged to persons that don't exist.
+     */
+    public void checkClientAndOrderRelation() throws DataConversionException {
+        ObservableList<Order> orders = this.orderBook.getOrderList();
+        for (Order eachOrder : orders) {
+            String nameOfPerson = eachOrder.getCustomer().getName();
+            if (!this.addressBook.hasPersonWithName(nameOfPerson)) {
+                throw new DataConversionException(
+                        new IllegalValueException("Given customer name does not exist in the Address Book"));
+            }
+        }
+    }
+
+    //=========== AddressBook & OrderBook Relation Check =======================================================
+
+    /**
+     * Checks if any tasks tagged to order that don't exist.
+     */
+    public void checkTaskAndOrderRelation() throws DataConversionException {
+        ObservableList<Task> tasks = this.taskBook.getTaskList();
+        for (Task eachTask : tasks) {
+            Long id = eachTask.getTaskTag().getTagId();
+            if (!this.orderBook.hasOrder(id)) {
+                throw new DataConversionException(
+                        new IllegalValueException("Given Sales ID does not exist in the Order Book"));
+            }
+        }
+    }
+
+    //=========== AddressBook & OrderBook Relation Check =======================================================
+
+    public ModelManager resetModelManager() {
+        return new ModelManager(new AddressBook(), new TaskBook(), new OrderBook(), this.userPrefs);
     }
 
 }

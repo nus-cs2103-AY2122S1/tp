@@ -1,0 +1,42 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":SalesNoteParser" as SalesNoteParser LOGIC_COLOR
+participant "TotalOrdersCommand" as TotalOrdersCommand LOGIC_COLOR
+participant "CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+[-> LogicManager : execute("totalorders")
+activate LogicManager
+
+LogicManager -> SalesNoteParser : parseCommand("totalorders")
+activate SalesNoteParser
+
+create TotalOrdersCommand
+SalesNoteParser -> TotalOrdersCommand
+activate TotalOrdersCommand
+
+TotalOrdersCommand --> SalesNoteParser
+deactivate TotalOrdersCommand
+
+SalesNoteParser --> LogicManager
+deactivate SalesNoteParser
+
+LogicManager -> TotalOrdersCommand : execute()
+activate TotalOrdersCommand
+
+create CommandResult
+TotalOrdersCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> TotalOrdersCommand
+deactivate CommandResult
+
+TotalOrdersCommand --> LogicManager
+deactivate TotalOrdersCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

@@ -5,7 +5,7 @@ import seedu.address.model.Label;
 
 public class Order implements Comparable<Order> {
 
-    private static final String idPrefix = "SO";
+    public static final String ID_PREFIX = "SO";
     private static long count = 1;
 
     private final Customer customer;
@@ -93,7 +93,7 @@ public class Order implements Comparable<Order> {
      * @return Prefixed order id
      */
     public String getDisplayId() {
-        return idPrefix + this.id;
+        return ID_PREFIX + this.id;
     }
 
     /**
@@ -106,7 +106,7 @@ public class Order implements Comparable<Order> {
     }
 
     /**
-     * Returns true if both orders have the same customer, date and amount.
+     * Returns true if both orders have the same customer, date, amount and label.
      * This defines a weaker notion of equality between two orders.
      */
     public boolean isSameOrder(Order otherOrder) {
@@ -130,7 +130,7 @@ public class Order implements Comparable<Order> {
         } else {
             builder.append("[ ] ");
         }
-        builder.append("ID: " + idPrefix)
+        builder.append("ID: " + ID_PREFIX)
                 .append(getId())
                 .append("; Label: ")
                 .append(getLabel())
@@ -144,7 +144,7 @@ public class Order implements Comparable<Order> {
         return builder.toString();
     }
 
-    // Required for OrderList to check if an Order exists, before marking it.
+    // Required for UniqueOrderList to check if an Order exists, before marking it.
     @Override
     public boolean equals(Object other) {
         if (other == this) {

@@ -30,8 +30,9 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
-*  Application logo - Copyright by **[yupiramos](https://www.canva.com/media/MADeEQ5DO1Y)**
+* Application logo - Copyright by **[yupiramos](https://www.canva.com/media/MADeEQ5DO1Y)**
+* Adapted code - [`formatTotalColumn`](https://stackoverflow.com/a/34924734/13896417) and [`setCloseOnEsc`](https://stackoverflow.com/a/42104595/13896417)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -119,11 +120,11 @@ How the `Logic` component works:
 1. The command can communicate with the `Model` when it is executed (e.g. to add a client).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
-The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("deletetask 1")` API call.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+![Interactions Inside the Logic Component for the `deletetask 1` Command](images/DeleteTaskSequenceDiagram.png)
+    
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteTaskCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
@@ -137,26 +138,30 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-W08-3/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="550" />
 
+Class Diagram of the `Person`'s entity:
+
+<img src="images/PersonClassDiagram.png" />
+
+Class Diagram of the `Task`'s entity:
+
+<img src="images/TaskClassDiagram.png" />
+
+Class Diagram of the `Order`'s entity:
+
+<img src="images/OrderClassDiagram.png" />
 
 The `Model` component,
 
-* ModelManager class stores these four components.
+* stores these three types of data in SalesNote
   * Address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-  * Task book data i.e., all `Tasks` objects (which are contained in a `TaskList` object).
-  * Order book data i.e., all `Orders` objects (which are contained in a `OrderList` object).
-  * `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+  * Task book data i.e., all `Task` objects (which are contained in a `UniqueTaskList` object).
+  * Order book data i.e., all `Order` objects (which are contained in a `UniqueOrderList` object).
 
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the currently 'selected' `Person`, `Tasks`, and `Orders` objects (e.g., results of a search query) as separate _filtered_ lists which are exposed to outsiders as unmodifiable `ObservableList<Person>`, `ObservableList<Task>` and `ObservableList<Order>` respectively  that can be 'observed' e.g. the UI can be bound to these lists so that the UI automatically updates when the data in the lists change.
+* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `SalesNote`, which `Person` references. This allows `SalesNote` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
-
 
 ### Storage component
 
@@ -164,16 +169,20 @@ The `Model` component,
 
 <img src="images/StorageClassDiagram.png" width="600" />
 
-The `Storage` component,
-* can save address book data, task book data, sales order book data
+How the Storage component works:
+* Saves address book data, task book data, sales order book data
   and user preference data in json format, and read them back into corresponding objects.
-* inherits from all of `AddressBookStorage`, `TaskBookStorage`, `OrderBookStorage`,
+* The main storage class inherits from all of `AddressBookStorage`, `TaskBookStorage`, `OrderBookStorage`,
   and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
-
+* Each Book Storage component (`AddressBookStorage`, `TaskBookStorage`, `OrderBookStorage`) has a `JsonSerializable` class which is in charge of converting the model's data into correct json file and retrieving the data from 
+  the json file to convert it to a model data.
+* Each `JsonSerializable` class implements its own `JsonAdapted` class which specifies methods to convert model Object
+  (i.e `Person`, `Task`, `Order`) into json object and vise versa. 
+* The `JsonSerializable` class and `JsonAdapted` class also checks the correctness of the json files format, and in the 
+  case when any of the format is wrong, it will then throw a `DataConversionException` and  `IllegalValueException`
 ### Common classes
 
-Classes used by multiple components are in the `seedu.salesnote.commons` package.
+Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 ## **Implementation - Shawn **
@@ -236,18 +245,39 @@ is below:
 * marktask
 * markorder
 
-
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Sort orders by amount feature
+### Update Person Changes in Order List and Task List
 
-#### Implementation
+SalesNote's clients are directly referenced in orders. Any changes in the clients through user commands should be propagated to the Order list.
+
+* When a client is deleted, their orders and the tasks linked to the orders will be deleted as well.
+* When a client name is modified, this change will be updated in their existing orders.
+
+#### Execution
+
+The sequence diagram below shows the interaction within the Logic component for a delete command is executed.
+
+![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+
+1. `DeleteCommand::execute` is called and deletes the client from the list.
+2. Related orders are obtained by matching the client's name and the customer of the existing orders.
+3. Tasks linked to the orders and the orders themselves are deleted.
+
+![Interactions Inside the Logic Component for the `edit 1 n/[new name]` command ](images/EditSequenceDiagram.png)
+
+1. `EditCommand::execute` is called and the client's details are modified.
+2. Related orders are obtained by matching the client's **old** name and the customer of the existing orders.
+3. The related orders' customer's name are updated.
+
+#### Result
+The changes in person objects are updated in their order and task objects.
+
+### Sort orders by amount feature
 
 The feature sorts all the orders in the addressbook by their amount in descending order. 
 
@@ -258,93 +288,28 @@ Order uses its `id` field to produce the default ordering of the `OrderList`.
 
 ### Display client's total orders feature
 
-#### Implementation
+The feature displays the total orders for all clients except those without orders in a new window. 
+Its mechanism is a mix of the mechanisms for `MainWindow` and `HelpWindow`.
 
-The feature displays the total orders for each client in a new window. Its mechanism is a mix of the mechanisms for `MainWindow` and `HelpWindow`. 
+Similar to `help` and `exit`, `CommandResult` has a dedicated `boolean` field to indicate whether the command is a 
+`totalorders` command. There is also a dedicated method to handle `totalorders` command in `MainWindow` class.
+By calling this method, the data of total orders is reloaded similar to loading other data (`Client/Task/Order`) in the Main Window, i.e. 
+through the `Logic` component. After reloading data, that method shows or focuses the total orders window similar to that of the 
+help window.
 
-### \[Proposed\] Undo/redo feature
+#### Execution
 
-#### Proposed Implementation
+The sequence diagram below shows the interaction within the `UI` component when a `totalorders` command is executed.
 
-The proposed undo/redo mechanism is facilitated by `VersionedSalesNote`. It extends `SalesNote` with an undo/redo history, stored internally as an `salesNoteStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+![Interactions Inside the Logic and Model Component for the `totalorders` Command](images/TotalOrdersSequenceDiagram2.png)
 
-* `VersionedSalesNote#commit()` — Saves the current address book state in its history.
-* `VersionedSalesNote#undo()` — Restores the previous address book state from its history.
-* `VersionedSalesNote#redo()` — Restores a previously undone address book state from its history.
+The sequence diagram below shows the interaction within the `Logic` component when the `UI` component calls 
+`execute("totalorders")`. Note that there is no need to have a `TotalOrdersCommandParser`. This is because the 
+`SalesNoteParser` can directly create and return a `TotalOrdersCommand`, similar to that of `help` and `exit` commands.  
 
-These operations are exposed in the `Model` interface as `Model#commitSalesNote()`, `Model#undoSalesNote()` and `Model#redoSalesNote()` respectively.
+![Interactions Inside the Logic and Model Component for the `totalorders` Command](images/TotalOrdersSequenceDiagram1.png)
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedSalesNote` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th client in the address book. The `delete` command calls `Model#commitSalesNote()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `SalesNoteStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new client. The `add` command also calls `Model#commitSalesNote()`, causing another modified address book state to be saved into the `SalesNoteStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitSalesNote()`, so the address book state will not be saved into the `SalesNoteStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the client was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoSalesNote()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial SalesNote state, then there are no previous SalesNote states to restore. The `undo` command uses `Model#canUndoSalesNote()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoSalesNote()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `SalesNoteStateList.size() - 1`, pointing to the latest address book state, then there are no undone SalesNote states to restore. The `redo` command uses `Model#canRedoSalesNote()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitSalesNote()`, `Model#undoSalesNote()` or `Model#redoSalesNote()`. Thus, the `SalesNoteStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitSalesNote()`. Since the `currentStatePointer` is not pointing at the end of the `SalesNoteStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the client being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 
 
 --------------------------------------------------------------------------------------------------------------------

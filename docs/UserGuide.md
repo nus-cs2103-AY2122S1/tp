@@ -3,9 +3,10 @@ layout: page
 title: User Guide
 ---
 
-SalesNote is a **desktop app for managing contacts and tasks, optimized for use via a Command Line Interface** (CLI) 
-while still having the benefits of a Graphical User Interface (GUI). Fast typists can get more out of the application 
-than from traditional GUI apps. The application and guide are based on AB3 with new added features.
+SalesNote is a desktop app for Singapore-based tailors to manage local sales and clients, so that they can focus on 
+producing great work. SalesNote is optimized for use via a Command Line Interface (CLI) while still having the 
+benefits of a Graphical User Interface (GUI). Fast typists can get more out of the application than from traditional 
+GUI apps.
 
 This project is based on the AB3 project created by the [SE-EDU initiative](https://se-education.org).
 
@@ -408,8 +409,10 @@ Examples:
 Shows the total orders for each client in the application.
 
 <div markdown="block" class="alert alert-info">
-:information_source: The total orders displayed are based on the clients in the application.
-If the customer of an order cannot be found among the clients, the order will not be shown.
+:information_source:
+
+* Clients without orders will not be displayed.
+* After adding/deleting orders, you might want to run this command again to refresh the window.
 </div>
 
 ![TotalOrdersWindow](images/TotalOrdersWindow.png)
