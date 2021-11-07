@@ -71,6 +71,7 @@ public class SlotCard extends UiPart<Region> {
             super.updateItem(staff, empty);
             if (empty || staff == null) {
                 setText(null);
+                setStyle("");
             } else {
                 setText(staff.getName().toString());
                 if (staff.wasAbsent(date)) {
