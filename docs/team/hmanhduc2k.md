@@ -36,9 +36,8 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=T15&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&zFR=false&tabAuthor=hmanhduc2k&tabRepo=AY2122S1-CS2103T-T15-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
 
 * **Enhancements to existing features**:
-  * Assist with implementing AdditionalViewModel, AddiionalViewType, and AdditionalInfo and incorporate it to the UI section.
   * Ensure that singular commands like `list` or `clear` do not have any arguments to follow.
-  * Assist with refactoring some important classes like VersionedModel or CommandResult to match with the UI component.
+  * Assist with refactoring some important classes like VersionedModel, CommandResult, or AdditionalViewModel to match with the UI component.
 
 * **Team-based tasks**:
   * Created CS2103T-G15-T3 team organization on behalf of the team.
