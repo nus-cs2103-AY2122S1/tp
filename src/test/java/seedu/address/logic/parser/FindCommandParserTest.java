@@ -108,4 +108,10 @@ public class FindCommandParserTest {
         assertParseFailure(parser, INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS);
     }
 
+    @Test
+    public void parse_itemUnspecified_throwsParseException() {
+        assertParseFailure(parser, "gibberish",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+    }
+
 }

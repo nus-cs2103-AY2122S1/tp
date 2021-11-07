@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.COSTPRICE_DESC_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.COUNT_DESC_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.ID_DESC_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ID_NEGATIVE_NUMBER;
@@ -60,5 +61,12 @@ public class DeleteCommandParserTest {
         // invalid id with negative number
         assertParseFailure(parser, VALID_NAME_BAGEL + INVALID_ID_NEGATIVE_NUMBER,
                 Messages.MESSAGE_INVALID_ID_LENGTH_AND_SIGN);
+    }
+
+    @Test
+    public void parse_extraFlag_failure() {
+        // extra Flag
+        assertParseFailure(parser, VALID_NAME_BAGEL + ID_DESC_BAGEL + COSTPRICE_DESC_BAGEL,
+                DeleteCommandParser.EXTRA_FLAGS_PRESENT);
     }
 }

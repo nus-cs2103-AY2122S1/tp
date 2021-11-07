@@ -30,7 +30,7 @@ public class ParserUtilTest {
     private static final String INVALID_ID_LONGER = "1232343";
     private static final String INVALID_PRICE_FORMAT = "abc";
     private static final String INVALID_PRICE_NEGATIVE = "-1";
-    private static final String INVALID_PRICE_OVERFLOW = "9999999.1";
+    private static final String INVALID_PRICE_OVERFLOW = "99999999.1";
 
     private static final String VALID_NAME = "Pudding";
     private static final String VALID_NAME_NUMERIC = "100";
@@ -276,16 +276,16 @@ public class ParserUtilTest {
 
     @Test
     public void parsePrice_negativePrice_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseId(INVALID_PRICE_NEGATIVE));
+        assertThrows(ParseException.class, () -> ParserUtil.parsePrice(INVALID_PRICE_NEGATIVE));
     }
 
     @Test
     public void parsePrice_largePrice_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseId(INVALID_PRICE_OVERFLOW));
+        assertThrows(ParseException.class, () -> ParserUtil.parsePrice(INVALID_PRICE_OVERFLOW));
     }
 
     @Test
     public void parsePrice_notNumbers_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseId(INVALID_PRICE_FORMAT));
+        assertThrows(ParseException.class, () -> ParserUtil.parsePrice(INVALID_PRICE_FORMAT));
     }
 }
