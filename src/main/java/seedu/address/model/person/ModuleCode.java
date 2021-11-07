@@ -53,8 +53,8 @@ public class ModuleCode {
         return Collections.unmodifiableSet(lessonCodes);
     }
 
-    /*
-     * Returns a formatted String for use in UI.
+    /**
+     * Returns formatted String for use in UI.
      */
     public String formattedToString() {
         if (lessonCodes.isEmpty()) {
