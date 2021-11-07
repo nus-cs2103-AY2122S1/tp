@@ -22,7 +22,7 @@ public class AddProgressCommand extends AddCommand {
     public static final String MESSAGE_USAGE = String.format("%1$s %2$s: Adds a progress entry for a student. "
                     + "The 10 most recent progress entries are stored."
                     + "\nParameters:"
-                    + "\nSTUDENT_INDEX (must be a positive integer)"
+                    + "\nINDEX (must be a positive integer)"
                     + "  PROGRESS"
                     + "\nExample:"
                     + "\n%1$s %2$s 1 Finished Prelims",
