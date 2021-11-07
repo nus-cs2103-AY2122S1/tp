@@ -5,7 +5,7 @@ title: Atin Sakkeer's Project Portfolio Page
 
 ## Project: CohortConnect
 
-CohortConnect is an advanced desktop address book which facilitates networking among Computer Science (CS) students. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+CohortConnect is an advanced desktop address book which facilitates networking among Computer Science (CS) students. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 15 kLoC.
 
 Given below are my contributions to the project.
 
@@ -18,13 +18,26 @@ Given below are my contributions to the project.
     * Highlights: The implementation too was challenging as it required interconnecting the ModelManager with the PersonListPanel.
 
 
-* **Added the Find A Buddy Feature**
+* **GitHubUtil Class**
+    * Pull requests [\#98](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/98)
+    * What it does: Contains the methods necessary for web scraping GitHub for data.
+    * Highlights: This class helps with gathering data on the contacts including Profile Picture, Repository count and Language contributions.
+
+
+* **Find A Buddy Feature**
     * Pull request [\#137](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/137)
     * What it does: Allows user to get the top 5 matches based on GitHub similarities.
     * Justification: This feature improves the product significantly because the user will be able to find teammates with similarities.
     * Highlights: This enhancement is central to the app's use. It required an in-depth analysis of similarity metrics. The implementation too was challenging as it required applying Euclidean Distance, Manhattan Distance and Cosine Similarity.
     * Credits: The distance metrics were researched [here](https://towardsdatascience.com/17-types-of-similarity-and-dissimilarity-measures-used-in-data-science-3eb914d2681)
     
+
+* **LangColorUtil**
+    * Pull request [\#248](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/248)
+    * What it does: Helps display common languages to improve testability of the Find A Buddy Feature
+    * Highlights: This was challenging since there were lots of languages and manually adding each would be time-consuming. To overcome this, I wrote a Python program to write the Java code to add to each color to the Hashmap, hence automating the process.
+    * Credits: The color data was obtained from this [source](https://github.com/ozh/github-colors/blob/master/colors.json)
+
 
 ### UI Enhancements
 
