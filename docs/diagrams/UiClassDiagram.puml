@@ -13,6 +13,9 @@ Class HelpWindow
 Class ResultDisplay
 Class TaskListPanel
 Class TaskCard
+Class WeeklyPanel
+Class DailyPanel
+Class DayCard
 Class StatusBarFooter
 Class CommandBox
 }
@@ -33,10 +36,13 @@ UiManager -down-> "1" MainWindow
 MainWindow *-down->  "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
 MainWindow *-down-> "1" TaskListPanel
+MainWindow *-down-> "1" WeeklyPanel
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
 
-TaskListPanel -down-> "*" TaskCard
+TaskListPanel --down-> "*" TaskCard
+WeeklyPanel -down-> "7" DailyPanel
+DailyPanel -down-> "*" DayCard
 
 MainWindow -left-|> UiPart
 
@@ -46,8 +52,12 @@ TaskListPanel --|> UiPart
 TaskCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
+DayCard --|> UiPart
+DailyPanel --|> UiPart
+WeeklyPanel --|> UiPart
 
 TaskCard ..> Model
+
 UiManager -right-> Logic
 MainWindow -left-> Logic
 
