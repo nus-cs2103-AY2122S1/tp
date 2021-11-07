@@ -239,8 +239,6 @@ Classes used by multiple components are in the `seedu.plannermd.commons` package
 
 This section describes some noteworthy details on how certain features are implemented.
 
-<div style="page-break-after: always;"></div>
-
 ### Stateful PlannerMD <a name="stateful-plannermd"/>
 With the introduction of two types of `Person` (`Patient` and `Doctor`) and their respective lists,
 a state is used to determine which list should be interacted with.
@@ -406,6 +404,8 @@ The diagram below illustrates the flow of deleting an appointment:<br>
    success message as a `CommandResult` object.
 4. The UI will then display the result
 
+<div style="page-break-after: always;"></div>
+
 ### Editing an appointment <a name="editing-an-appointment"/> 
 
 Edits the details of an existing appointment.
@@ -416,6 +416,8 @@ The edit appointment command accepts at least one of the following parameters:
 * Start date and time
 * Duration (in minutes)
 * Remark
+
+<div style="page-break-after: always;"></div>
 
 #### Implementation
 
@@ -430,6 +432,8 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AppointmentCommandParser` and `EditAppointmentCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ### Filtering appointments <a name="filtering-appointments"/>
 
 Filters through the appointment records in PlannerMD and shows the appointments that matches the filter parameters.
@@ -441,6 +445,8 @@ There are 4 possible parameters provided to a filter appointment command are:
 * End date (Filters appointment which has a starting date lesser or equal to the end date provided)
 
 If no parameters are provided, the command simply lists all appointments in the appointment records.
+
+<div style="page-break-after: always;"></div>
 
 #### Implementation
 
@@ -456,6 +462,7 @@ A clearer view of this sequence diagram can be found [here](https://github.com/A
 
 ![ConfigureAppointmentFilters](images/ConfigureAppointmentFilters.png)
 
+<div style="page-break-after: always;"></div>
 
 ### Storing an appointment <a name="storing-an-appointment"/>
 
@@ -482,6 +489,7 @@ The Sequence Diagram below illustrates the interactions within the Storage compo
 <img src="images/AppointmentStorageSequenceDiagram.png" width="550" />
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Documentation, logging, testing, configuration, dev-ops**  <a name="documentation"/>
 
@@ -492,6 +500,7 @@ The Sequence Diagram below illustrates the interactions within the Storage compo
 * [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Requirements**  <a name="appendix-requirements"/>
 
@@ -508,6 +517,7 @@ The Sequence Diagram below illustrates the interactions within the Storage compo
 
 **Value proposition**: easily manage patients' information and doctors' appointments faster than a typical mouse/GUI driven app
 
+<div style="page-break-after: always;"></div>
 
 ### User stories  <a name="user-stories"/>
 These are some user stories we took into account when designing PlannerMD:
@@ -539,7 +549,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | clinic receptionist | edit remarks for a doctor | change any additional information about the doctor    |
 | `*`      | clinic receptionist | write tags for a patient  | easily identify important things to note about the patient             |
 | `*`      | clinic receptionist | write tags for a doctor  | easily identify important things to note about the doctor      |
- 
+
+<div style="page-break-after: always;"></div>
+
 ### Use cases  <a name="use-cases"/>
 These are some use cases to familiarise with the flow of our application: 
 
@@ -572,6 +584,8 @@ These are some use cases to familiarise with the flow of our application:
 
 Same as UC01P but references to patient is replaced with doctor instead.
 
+<div style="page-break-after: always;"></div>
+
 **Use case: UC02P Listing all patient**
 
 **MSS**
@@ -584,6 +598,8 @@ Same as UC01P but references to patient is replaced with doctor instead.
 **Use case: UC02D Listing all patient** <br>
 
 Same as UC02P but references to patient is replaced with doctor instead.
+
+<div style="page-break-after: always;"></div>
 
 **Use case: UC03P Finding patients** <br>
 
@@ -604,6 +620,8 @@ Same as UC02P but references to patient is replaced with doctor instead.
 **Use case: UC03D Finding doctors** <br>
 
 Same as UC03P but references to patient is replaced with doctor instead.
+
+<div style="page-break-after: always;"></div>
 
 **Use case: UC04P Deleting a patient** <br>
 
@@ -635,6 +653,8 @@ Same as UC04P but with the following changes:
 * Replace references of <u>listing patients (UC02P)</u> with <u>listing doctors (UC02D)</u>
 * Replace references of <u>finding patients (UC03P)</u> with <u>finding doctors (UC03D)</u>
 
+<div style="page-break-after: always;"></div>
+
 **Use case: UC05P Editing personal details of a patient**
 
 **MSS**
@@ -665,6 +685,8 @@ Same as UC05P but with the following changes:
 * Replace references of <u>listing patients (UC02P)</u> with <u>listing doctors (UC02D)</u>
 * Replace references of <u>finding patients (UC03P)</u> with <u>finding doctors (UC03D)</u>
 
+<div style="page-break-after: always;"></div>
+
 **Use case: UC06P Editing the remark of a patient** <br>
 
 **MSS**
@@ -694,6 +716,8 @@ Same as UC06P but with the following changes:
 * Replace references of patients with doctors
 * Replace references of <u>listing patients (UC02P)</u> with <u>listing doctors (UC02D)</u>
 * Replace references of <u>finding patients (UC03P)</u> with <u>finding doctors (UC03D)</u>
+
+<div style="page-break-after: always;"></div>
 
 **Use case: UC07P Adding a tag to a patient**<br>
 
@@ -737,6 +761,8 @@ Same as UC07P but with the following changes:
 * Replace references of <u>listing patients (UC02P)</u> with <u>listing doctors (UC02D)</u>
 * Replace references of <u>finding patients (UC03P)</u> with <u>finding doctors (UC03D)</u>
 
+<div style="page-break-after: always;"></div>
+
 **Use case: UC08P Deleting a tag from a patient**<br>
 
 **MSS**
@@ -772,6 +798,8 @@ Same as UC08P but with the following changes:
 * Replace references of patients with doctors
 * Replace references of <u>listing patients (UC02P)</u> with <u>listing doctors (UC02D)</u>
 * Replace references of <u>finding patients (UC03P)</u> with <u>finding doctors (UC03D)</u>
+
+<div style="page-break-after: always;"></div>
 
 **Use case: UC09 Scheduling an appointment**
 
@@ -818,6 +846,8 @@ Same as UC08P but with the following changes:
 
       Use case ends.
 
+<div style="page-break-after: always;"></div>
+
 **Use case: UC10 Listing today's appointments**
 
 **MSS**
@@ -832,6 +862,8 @@ Same as UC08P but with the following changes:
     * 1a1. A message is shown informing the user that there are no appointments for the current day.
 
       Use case ends.
+
+<div style="page-break-after: always;"></div>
 
 **Use case: UC11 Filtering appointments**
 
@@ -855,7 +887,9 @@ Same as UC08P but with the following changes:
       Steps 1b1-1b2 are repeated until the new parameters entered are valid.
 
       Use case resumes from step 2.
-    
+
+<div style="page-break-after: always;"></div>
+
 **Use case: UC12 Deleting an appointment**
 
 **MSS**
@@ -873,6 +907,8 @@ Same as UC08P but with the following changes:
     * 2a1. PlannerMD shows an error message.
 
       Use case resumes at step 2.
+
+<div style="page-break-after: always;"></div>
 
 **Use case: UC13 Editing an appointment**
 
@@ -907,7 +943,9 @@ Same as UC08P but with the following changes:
     * 3c1. PlannerMD shows an error message and lists the clashing appointment(s).
 
       Use case resumes at step 1.
-    
+
+<div style="page-break-after: always;"></div>
+
 ### Non-Functional Requirements  <a name="nfr"/>
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -918,6 +956,8 @@ Same as UC08P but with the following changes:
 6. The data should be available for backup and portable to another computer.
 7. The user interface should be simple and intuitive enough for any users.
 8. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+
+<div style="page-break-after: always;"></div>
 
 ### Glossary <a name="glossary"/>
 
@@ -933,6 +973,7 @@ Same as UC08P but with the following changes:
 * **Extensions**: "Add-ons" to the MSS that describes an exceptional/alternative flow of events. 
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Instructions for manual testing** <a name="appendix-instructions-for-manual-testing"/>
 
@@ -962,6 +1003,8 @@ testers are expected to do more *exploratory* testing.
     1. While the app is still open, enter `exit` in the command box or click on the close window button. 
        <br>Expected: The application closes.
 
+<div style="page-break-after: always;"></div>
+
 ### Adding a patient <a name="add-patient-manual-testing"/>
 1. Adding a patient
     1. Prerequisites: `toggle` to the `Patients` tab. The following patient must already exists:
@@ -980,6 +1023,8 @@ testers are expected to do more *exploratory* testing.
     5. Other incorrect add commands to try: `add`, `add n/Bob hp/`, `add n/` (not all fields, except tags and risk, are filled)<br>
        Expected: No Patient is added. Error details are shown in the status message.
 
+<div style="page-break-after: always;"></div>
+
 ### Listing all patients <a name="list-patients-manual-testing"/>
 
 1. List all patients
@@ -991,6 +1036,8 @@ testers are expected to do more *exploratory* testing.
 
     3. Test case: `list extra-parameters`<br>
        Expected: All existing patients are listed.
+
+<div style="page-break-after: always;"></div>
 
 ### Finding patients <a name="find-patient-manual-testing"/>
 
@@ -1013,6 +1060,7 @@ testers are expected to do more *exploratory* testing.
    6. Test case: `find Alex`<br>
       Expected: Patient list shows that no patients are found. Status message shows that 0 patients are listed.
 
+<div style="page-break-after: always;"></div>
 
 ### Deleting a patient  <a name="delete-patient-manual-testing"/>
 
@@ -1033,6 +1081,8 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: `toggle` to the `Patients` tab. There must be existing patients. List some patients using `find XYZ` (XYZ is the name of an existing patient).
 
      2. Test cases are similar to those above.
+
+<div style="page-break-after: always;"></div>
 
 ### Editing a patient <a name="edit-patient-manual-testing"/>
 
@@ -1084,7 +1134,9 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: `toggle` to the `Patients` tab. There must be existing patients. List some patients using `find XYZ` (XYZ is the name of an existing patient).
 
     2. Test cases are similar to those above.
-    
+
+<div style="page-break-after: always;"></div>
+
 ### Editing a patient's remark <a name="remark-patient-manual-testing"/>
 
 1. Editing a patient's remark while all patient are being shown
@@ -1111,6 +1163,8 @@ testers are expected to do more *exploratory* testing.
 
     2. Test cases are similar to those above.
 
+<div style="page-break-after: always;"></div>
+
 ### Adding a tag to a patient <a name="add-tag-patient-manual-testing"/>
 
 1. Adding a tag to a patient while all patient are being shown
@@ -1136,6 +1190,8 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: `toggle` to the `Patients` tab. There must be existing patients. List some patient using `find XYZ` (XYZ is the name of an existing patient).
    
     2. Test cases are similar to those above.
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting a tag of a patient <a name="delete-tag-patient-manual-testing"/>
 
@@ -1164,7 +1220,9 @@ testers are expected to do more *exploratory* testing.
        First patient has `Immunocompromised` tag. Tag can be added using the following command: `tag -a 1 t/Immunocompromised`.
    
     2. Test cases are similar to those above.
-    
+
+<div style="page-break-after: always;"></div>
+
 ### Adding a doctor <a name="add-doctor-manual-testing"/>
 
 1. Adding a doctor
@@ -1183,6 +1241,8 @@ testers are expected to do more *exploratory* testing.
     5. Other incorrect add commands to try: `add`, `add n/Bob hp/`, `add n/` (not all fields, except tags, are filled)<br>
         Expected: No doctor is added. Error details are shown in the status message.
 
+<div style="page-break-after: always;"></div>
+
 ### Listing all doctors <a name="list-doctors-manual-testing"/>
 
 1. List all doctors
@@ -1194,6 +1254,8 @@ testers are expected to do more *exploratory* testing.
 
     3. Test case: `list extra-parameters`<br>
        Expected: All existing doctors are listed.
+
+<div style="page-break-after: always;"></div>
 
 ### Finding doctors <a name="find-doctor-manual-testing"/>
 
@@ -1215,7 +1277,9 @@ testers are expected to do more *exploratory* testing.
 
    6. Test case: `find Aaron`<br>
       Expected: Doctor list shows that no doctors are found. Status message shows that 0 doctors are listed.
-   
+
+<div style="page-break-after: always;"></div>
+
 ### Deleting a doctor  <a name="delete-doctor-manual-testing"/>
 1. Deleting a doctor while all doctors are being shown
     1. Prerequisites: `toggle` to the `Doctors` tab. There must be existing doctors. List all doctors using the `list` command. There must be multiple doctors. 
@@ -1234,7 +1298,9 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: `toggle` to the `Doctors` tab. There must be existing doctors. List some doctors using `find XYZ` (XYZ is the name of an existing doctor).
 
     2. Test cases are similar to those above.
-    
+
+<div style="page-break-after: always;"></div>
+
 ### Editing a doctor <a name="edit-doctor-manual-testing"/>
 
 1. Editing a doctor while all doctors are being shown
@@ -1279,7 +1345,9 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: `toggle` to the `Doctors` tab. There must be existing doctors. List some doctors using `find XYZ` (XYZ is the name of an existing doctor).
 
     2. Test cases are similar to those above.
-    
+
+<div style="page-break-after: always;"></div>
+   
 ### Editing a doctor's remark <a name="remark-doctor-manual-testing"/>
 
 1. Editing a doctor's remark while all doctors are being shown
@@ -1306,6 +1374,8 @@ testers are expected to do more *exploratory* testing.
 
     2. Test cases are similar to those above.
 
+<div style="page-break-after: always;"></div>
+
 ### Adding a tag to a doctor <a name="add-tag-doctor-manual-testing"/>
 
 1. Adding a tag to a doctor while all doctors are being shown
@@ -1331,6 +1401,8 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: `toggle` to the `Patients` tab. There must be existing doctors. List some doctor using `find XYZ` (XYZ is the name of an existing doctor).
       
     2. Test cases are similar to those above.
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting a tag of a doctor <a name="delete-tag-doctor-manual-testing"/>
 
@@ -1359,7 +1431,8 @@ testers are expected to do more *exploratory* testing.
        First doctor has `Pediatrician` tag. Tag can be added using the following command: `tag -a 1 t/Pediatrician`.
 
     2. Test cases are similar to those above.
-    
+
+<div style="page-break-after: always;"></div>
 
 ### Adding an appointment <a name="add-appointment-manual-testing"/>
 
@@ -1403,6 +1476,7 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `appt -a p/1 d/1 s/30/02/2021 dur/0 r/Patient wants a blood test`<br>
       Expected: No appointment is added. Error details are shown in the status message that the format of the duration exceeds the limit.
 
+<div style="page-break-after: always;"></div>
 
 ### Deleting an appointment  <a name="deleting-appointment-manual-testing"/>
 
@@ -1425,6 +1499,8 @@ testers are expected to do more *exploratory* testing.
         1. Prerequisites: List some appointment using `appt -f [p/PATIENT_KEYWORD] [d/DOCTOR_KEYWORD] [s/START_DATE] [e/END_DATE]`. E.g., `appt -f s/01/11/2021` to list only appointments `01/11/2021` onwards. There must be existing appointments in the list.
 
         2. Test cases are similar to those above.
+
+<div style="page-break-after: always;"></div>
 
 ### Editing an appointment <a name="edit-appointment-manual-testing"/>
 
@@ -1462,6 +1538,8 @@ testers are expected to do more *exploratory* testing.
 
     2. Test cases are similar to those above.
 
+<div style="page-break-after: always;"></div>
+
 ### Filtering all appointments <a name="filter-all-manual-testing"/>
 
 1. Searches through all appointment based on the filter parameters provided.
@@ -1498,6 +1576,7 @@ testers are expected to do more *exploratory* testing.
     11. Test case: `appt -f d/`<br>
         Expected: Displayed appointments are not changed. Error details are shown in the status message indicating that there is an empty parameter.
 
+<div style="page-break-after: always;"></div>
 
 ### Filtering upcoming appointments <a name="filter-upcoming-appointments"/>
 
@@ -1526,6 +1605,8 @@ testers are expected to do more *exploratory* testing.
     8. Test case: `appt -u d/`<br>
        Expected: Displayed appointments are not changed. Error details are shown in the status message indicating that there is an empty parameter.
 
+<div style="page-break-after: always;"></div>
+
 ### Listing all appointments for today <a name="list-all-manual-testing"/>
 
 1. List all appointments for the current day in the appointment list.
@@ -1536,6 +1617,8 @@ testers are expected to do more *exploratory* testing.
           
        2. If there are appointments for the current day<br>
         Expected: All of today's appointments are displayed in the appointment list
+
+<div style="page-break-after: always;"></div>
 
 ### Saving data  <a name="saving-data"/>
 
