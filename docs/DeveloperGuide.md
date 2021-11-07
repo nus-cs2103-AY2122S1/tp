@@ -607,7 +607,6 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **5. Documentation, logging, testing, configuration, dev-ops**
@@ -617,6 +616,51 @@ _{Explain here how the data archiving feature will be implemented}_
 * [Logging guide](Logging.md)
 * [Configuration guide](Configuration.md)
 * [DevOps guide](DevOps.md)
+
+### 5.1 Extensions and customisations
+In LeadsForce, we put a strong emphasis on ensuring not only the quality but also the extensibility and customizability of our product.
+If you are wondering about how you can easily customise or add extensions to LeadsForce without worrying about the underlying implementations, 
+you are at the right place.
+This section details the workflows and features that we have developed that can help you to tweak certain features 
+in LeadsForce without the need for you to delve too deeply into the codebase.
+
+#### 5.1.1 Change the look of an existing theme
+Let's say you dislike the look of our current `BookTheme`: you want the background to be dark brown instead of the current light brown.
+Here's what you should do: 
+1. cd to `tp/src/main/resources/view`.
+2. Open `BookTheme.css`.
+3. On the top of the css file, you will see that all the [css variables](https://www.w3schools.com/css/css3_variables.asp) are nicely organised and defined for you.
+Here's the css snippet (The comment briefly describes what each of the variables does):
+````
+* {
+    -fx-base1: #cb997e; // base color 1 (preferably the darkest tone) (the main background color of LeadsForce)
+    -fx-base2: #eddcd2; // base color 2 
+    -fx-base3: #fff1e6; // base color 3
+    -fx-base4: #f0efeb; // base color 4
+    -fx-base5: #ddbea9; // base color 5 (preferably the lightest tone)
+    -fx-font-color: derive(-fx-base1, -30%); // the color of a generic font in LeadsForce
+    -fx-font-color-bright: #ffffff; // the color of `bright` font in LeadsForce (for fonts that overlay component of base color 1) 
+    -fx-menu-color: #263238; // color of the menu
+    -fx-menu-color-highlighted: #455a64; // color of the menu when highlighted
+    -fx-menu-font-color: #ffffff; // color of the font
+    -fx-menu-font-color-highlighted: #ffffff; // color of the font when highlighted
+}
+````
+4. Let's change the value of `-fx-base-1` to `#5C4033` instead (the color code for dark brown).
+5. Save the file and boot up LeadsForce. You will see that the change in the background color of `BookTheme` is reflected immediately.
+
+#### 5.1.2 Give LeadsForce a new theme
+If you want to add more themes on top of our existing themes, here's what you should do: 
+1. cd to `tp/src/main/resources/view`.
+2. Create a copy of `BookTheme.css`.
+3. Rename the file to you preferred theme name and open it. e.g. `RainbowTheme.css`.
+4. Similar to 5.1.1, tweak the css variables to suit your needs. 
+5. Save the file and cd to `tp/src/main/java/seedu/address/storage/ThemeList.java`.
+6. Add `RainbowTheme.css` to the static variable `THEMES` like so:
+````
+private static final List<String> THEMES = List.of("BookTheme", "TwilightTheme", "DarkTheme", "SpaceTheme", "RainbowTheme");
+````
+7. Now boot up LeadsForce and you should see that your newly added theme is available in the menu bar. Hooray!
 
 --------------------------------------------------------------------------------------------------------------------
 
