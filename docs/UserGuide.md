@@ -1,5 +1,6 @@
 ---
-layout: page title: User Guide
+layout: page
+title: User Guide
 ---
 
 <h1 align="center"> LeadsForce User Guide </h1>
@@ -31,9 +32,10 @@ Welcome to LeadsForce's User Guide! Find answers and step-by-step instructions t
     * [5.8 Locating clients by keywords: search](#58-locating-clients-by-keywords--search)
     * [5.9 Filter current list: filter](#59-filter-current-list-by-keywords--filter)
     * [5.10 Clearing all entries: clear](#510-clearing-all-entries--clear)
-    * [5.11 Exiting the program: exit](#511-exiting-the-program--exit)
-    * [5.12 Saving data](#512-saving-the-data)
-    * [5.13 Edit data file](#513-edit-data-file)
+    * [5.11 Getting help](#511-getting-help--help)
+    * [5.12 Exiting the program: exit](#512-exiting-the-program--exit)
+    * [5.13 Saving data](#513-saving-the-data)
+    * [5.14 Edit data file](#514-edit-data-file)
 * [**6. Multiple Address Books Features**](#6-multiple-address-books-feature)
     * [6.1 Create new address book: ab create](#61-create-new-address-book--ab-create)
     * [6.2 Delete existing address book: ab delete](#62-delete-existing-address-book-ab-delete--ab-delete)
@@ -96,7 +98,7 @@ When reading our User Guide, here are some important information to take note of
 
     * **`exit`** : Exits the app.
 
-6. Refer to the [Features](#4-features) below for details of each command.
+6. Refer to the [Features](#5-features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -171,7 +173,7 @@ application. An overview of LeadsForce's interface is shown below.
 <br> 
 The command view is where you will be able to input commands into LeadsForce. The command view consist of the following components: <br> 
 
-1. **Toolsbar** <br>
+1. **Toolbar** <br>
    • help bar that directs users to LeadsForce's user guide <br>
    • File bar where users can exit the app <br>
    • Address Book bar which allows users to switch between address books <br>
@@ -322,8 +324,7 @@ Filters the current list by the given keywords.
 
 | Format | `filter KEYWORD... [<attribute>/ATTRIBUTE_KEYWORD]...` <br> <br>• `KEYWORD` will be used to match with all attribute of the client. <br> • `{ATTRIBUTE_KEYWORD` refers to the keyword that is to be matched with the corresponding client attribute.|
 | :---: | :--- |
-| **
-Examples** | • `filter John` returns `john` and `John Doe` <br> • `filter alex david` returns `Alex Yeoh`, `David Li` |
+| **Examples** | • `filter John` returns `john` and `John Doe` <br> • `filter alex david` returns `Alex Yeoh`, `David Li` |
 | <img src="images/info_icon.png" width="50"/> | • Works similar to `search` but `filter` works based on the current list shown as opposed to entire lists of contacts. <br> • If no `KEYWORD` is provided, then filter will be based on `<attribute>/ATTRIBUTE_KEYWORD` <br> • The filter is case-insensitive. e.g `keith` will match `Keith`. <br> • The order of the keywords does not matter. e.g. `John Doe` will match `Doe John`. <br> • Clients matching at least one keyword will be returned). <br> e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`. <br> • If attribute keyword is provided, only clients whose attribute matches with the attribute keyword will be returned. <br> e.g. `Tom Tim e/@gmail.com` will return `Tom Lee e/Tom@gmail.com` and not `Tim Shum e/Tim@yahoo.com`.|
 | <img src="images/tip_icon.png" width="50"/> | • Use the tags found under the command box to quickly filter clients by their tags. Simply click on a tag and press enter to filter clients with the specific tag. <br> eg. Pressing the `classmate` button allows you to filter clients with the `classmate` tag. <br> <img src=images/FilterTagCommand.png width="300">| 
 
@@ -333,8 +334,7 @@ Clears all entries from the address book.
 
 | Format | `clear`|
 | :---: | :--- |
-| <img src="images/info_icon.png" width="50"/> | • As long as the first word in the command is `clear`, the command will still work regardless of the additional inputs. <br> eg. the command `clear asdknkjsaf` will still work. <br> • This command clears all clients in the **
-current** address book <br> • After inputting `clear`, another prompt will appear requesting for confirmation to clear the address book. The input required for the confirmation will either be: <br>    • `yes`: to confirm and proceed with the clear command. <br>    •`no`: to cancel the clear command.|
+| <img src="images/info_icon.png" width="50"/> | • As long as the first word in the command is `clear`, the command will still work regardless of the additional inputs. <br> eg. the command `clear asdknkjsaf` will still work. <br> • This command clears all clients in the **current** address book <br> • After inputting `clear`, another prompt will appear requesting for confirmation to clear the address book. The input required for the confirmation will either be: <br>    • `yes`: to confirm and proceed with the clear command. <br>    •`no`: to cancel the clear command.|
 | <img src="images/warn_icon.png" width="50"/> | • This action is irreversible. Once you have clear all client information from the current address book, this information will be removed from the storage file and will not be retrievable.|
 
 ### 5.11 Getting help : `help`
@@ -363,12 +363,13 @@ save manually.
 LeadsForce's data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to
 update data directly by editing that data file.
 
-| <img src="images/warn_icon.png" width="50"/> | If your changes to the data file makes its format invalid, LeadsForce will discard all data and start with an empty data file at the next run.  |
-| --- | --- |
+<div markdown="block" class="alert alert-warning">
+ <p><img src="images/warn_icon.png" width="30"/><b>If your changes to the data file makes its format invalid, LeadsForce will discard all data and start with an empty data file at the next run.</b></p>
+</div>
 
 ## 6. Multiple Address Books Feature
 
-This section details the multiple address book feature in LeadsForce. Seperate your clients into different address books
+This section details the multiple address book feature in LeadsForce. Separate your clients into different address books
 to better manage your clients!
 
 ### 6.1 Create new address book : `ab create`
@@ -404,6 +405,8 @@ List all the name of all the existing address books
 
 | Format | `ab list` |
 | --- | --- |
+| <img src="images/info_icon.png" width="50"/> | • As long as the first two word in the command is `ab list`, the command will still work regardless of the additional inputs. <br> eg. the command `ab list asdknkjsaf` will still work |
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -423,7 +426,7 @@ vulnerabilities.
 **Q**: Will LeadsForce be consistently updated? <br>
 **A**: Yes, our team is consistently updating LeadsForce to better meet the needs of our user.
 
-**Q**: Can i use LeadsForce on a mobile device? <br>
+**Q**: Can I use LeadsForce on a mobile device? <br>
 **A**: Unfortunately, LeadsForce is only available for use on computers. The team is thinking of implementing a mobile
 version of LeadsForce in the near future so do tuned in to our updates. 🙂
 
