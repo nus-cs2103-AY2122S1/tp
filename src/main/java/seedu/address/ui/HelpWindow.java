@@ -73,6 +73,10 @@ public class HelpWindow extends UiPart<Stage> {
     private static final String EXPORT_CONTACT_CSV_FEATURE_COMMAND = "export <FILENAME>.csv";
     private static final String EXPORT_CONTACT_JSON_FEATURE_NAME = "Export Contacts to JSON file";
     private static final String EXPORT_CONTACT_JSON_FEATURE_COMMAND = "export <FILENAME>.json";
+    private static final String OPEN_CONTACT_TELEGRAM_FEATURE_NAME = "Open Current Contact's Telegram Link";
+    private static final String OPEN_CONTACT_TELEGRAM_FEATURE_COMMAND = "te";
+    private static final String OPEN_CONTACT_GITHUB_FEATURE_NAME = "Open Current Contact's GitHub Profile";
+    private static final String OPEN_CONTACT_GITHUB_FEATURE_COMMAND = "g";
     private static final String HELP_FEATURE_NAME = "Launch this Help Window";
     private static final String HELP_FEATURE_COMMAND = "help";
     private static final String EXIT_APP_FEATURE_NAME = "Exit the App";
@@ -232,6 +236,10 @@ public class HelpWindow extends UiPart<Stage> {
                 EXPORT_CONTACT_CSV_FEATURE_COMMAND);
         CommandDetails exportContactJsonCommandDetails = new CommandDetails(EXPORT_CONTACT_JSON_FEATURE_NAME,
                 EXPORT_CONTACT_JSON_FEATURE_COMMAND);
+        CommandDetails openContactsTelegramCommandDetails = new CommandDetails(OPEN_CONTACT_TELEGRAM_FEATURE_NAME,
+                OPEN_CONTACT_TELEGRAM_FEATURE_COMMAND);
+        CommandDetails openContactsGitHubCommandDetails = new CommandDetails(OPEN_CONTACT_GITHUB_FEATURE_NAME,
+                OPEN_CONTACT_GITHUB_FEATURE_COMMAND);
         CommandDetails helpWindowCommandDetails = new CommandDetails(HELP_FEATURE_NAME,
                 HELP_FEATURE_COMMAND);
         CommandDetails exitAppCommandDetails = new CommandDetails(EXIT_APP_FEATURE_NAME,
@@ -258,6 +266,8 @@ public class HelpWindow extends UiPart<Stage> {
         helpSectionCommandDetails.add(importContactJsonCommandDetails);
         helpSectionCommandDetails.add(exportContactCsvCommandDetails);
         helpSectionCommandDetails.add(exportContactJsonCommandDetails);
+        helpSectionCommandDetails.add(openContactsTelegramCommandDetails);
+        helpSectionCommandDetails.add(openContactsGitHubCommandDetails);
         helpSectionCommandDetails.add(helpWindowCommandDetails);
         helpSectionCommandDetails.add(exitAppCommandDetails);
     }
