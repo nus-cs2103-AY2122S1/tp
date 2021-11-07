@@ -790,7 +790,9 @@ In `MainWindow`, if the command result `isGithub()` or `isTelegram()`, the GitHu
 
 ### Find A Buddy Feature
 
-![FAB](images/Find%20A%20Buddy.png)
+<p align="center">
+  <img src="https://github.com/AY2122S1-CS2103T-T10-1/tp/blob/master/docs/images/Find%20A%20Buddy.png?raw=true">
+</p>
 
 By switching to the Find A Buddy tab, the user can retrieve the top 5 matches to the user based on the GitHub data gathered.
 
@@ -804,17 +806,17 @@ A similarity score is calculated based on the following three metrics:
 
 - Euclidean Distance
 <p align="left">
-  <img width="400" src="https://miro.medium.com/max/1400/1*9pSSh4QM7whgtJUD6X2vsQ.png"\>
+  <img width="400" src="https://miro.medium.com/max/1400/1*9pSSh4QM7whgtJUD6X2vsQ.png">
 </p>
 
 - Manhattan Distance
 <p align="left">
-  <img width="400" src="https://miro.medium.com/max/1400/1*SU-KZ_Ui8FVbQ7ZKjkiQZg.png"\>
+  <img width="400" src="https://miro.medium.com/max/1400/1*SU-KZ_Ui8FVbQ7ZKjkiQZg.png">
 </p>
 
 - Cosine Distance
 <p align="left">
-  <img width="400" src="https://miro.medium.com/max/1174/1*gDCDATwjt2hAjd72O8HvbA.png"\>
+  <img width="400" src="https://miro.medium.com/max/1174/1*gDCDATwjt2hAjd72O8HvbA.png">
 </p>
 
 
