@@ -44,8 +44,7 @@ Given below are my contributions to the project.
 * **Team-based tasks**:
   * Created CS2103T-G15-T3 team organization on behalf of the team.
   * Manage [releases `v1.3`](https://github.com/AY2122S1-CS2103T-T15-3/tp/releases/tag/v1.3.complete) to GitHub on behalf of the team.
-  * Help with maintaining issue trackers for v1.2 and v1.3 task board and write meeting notes.
-  * Track and record bugs relating to visual display for all commands.
+  * Help with maintaining issue trackers for v1.2 and v1.3 task board, tracking UI bugs, and write meeting notes.
   * Create and added application logo and icon for the team.
 
 * **Documentation**:
