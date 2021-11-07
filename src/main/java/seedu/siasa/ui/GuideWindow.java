@@ -18,53 +18,53 @@ public class GuideWindow extends UiPart<Stage> {
      */
     private enum Page {
         ONE("User Guide",
-                "Welcome to SIASA! "
-                        + "This is a guide that teaches you all the basic commands to use this application.\n"
-                        + "For a more detailed guide, visit the user guide on our github repository.",
-                new Image("file:src/main/resources/images/guide/page_one.png")),
+            "Welcome to SIASA! "
+                + "This is a guide that teaches you all the basic commands to use this application.\n"
+                + "For a more detailed guide, visit the user guide on our github repository.",
+            "/images/guide/page_one.png"),
         TWO("User Guide - Contacts", "addcontact: Adds a contact to your SIASA.\n"
-                + "Format: addcontact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]\n"
-                + "Example: addcontact n/Travis Scott p/98765454 e/travist@example.com a/Travis Park, block 123,#01-01",
-                new Image("file:src/main/resources/images/guide/page_two.png")),
+            + "Format: addcontact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]\n"
+            + "Example: addcontact n/Travis Scott p/98765454 e/travist@example.com a/Travis Park, block 123, #01-01",
+           "/images/guide/page_two.png"),
         THREE("User Guide - Contacts",
                 "deletecontact: Removes a contact from your SIASA based on the index provided.\n"
                         + "Format: deletecontact INDEX\n"
                         + "Example: deletecontact 2",
                 new Image("file:src/main/resources/images/guide/page_three.png")),
         FOUR("User Guide - Contacts",
-                "editcontact: Edit a contact from your SIASA based on the index provided. "
-                        + "At least one of the optional fields should be filled.\n"
-                        + "Format: editcontact INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…\n"
-                        + "Example: editcontact 3 p/91234567 e/johndoe@example.com",
-                new Image("file:src/main/resources/images/guide/page_four.png")),
+            "editcontact: Edit a contact from your SIASA based on the index provided. "
+                + "At least one of the optional fields should be filled.\n"
+                + "Format: editcontact INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…\n"
+                + "Example: editcontact 3 p/91234567 e/johndoe@example.com",
+            "/images/guide/page_four.png"),
         FIVE("User Guide - Policies",
-                "addpolicy: Adds a policy that is linked to a contact to your SIASA.\n"
-                        + "addpolicy n/POLICY_NAME p/PMT_AMOUNT_CENTS [PMTS_PER_YR] [NUM_OF_PMTS] "
-                        + "c/COMMISSION_% NUM_OF_COMM cl/CONTACT_INDEX [e/COVERAGE_EXPIRY_DATE] [t/TAG]…\n"
-                        + "Example: addpolicy n/full life p/10050 c/10 1 cl/1 e/2021-12-12 t/Aviva ",
-                new Image("file:src/main/resources/images/guide/page_five.png")),
+            "addpolicy: Adds a policy that is linked to a contact to your SIASA.\n"
+                + "addpolicy n/POLICY_NAME p/PMT_AMOUNT_CENTS [PMTS_PER_YR] [NUM_OF_PMTS] "
+                + "c/COMMISSION_% NUM_OF_COMM cl/CONTACT_INDEX [e/COVERAGE_EXPIRY_DATE] [t/TAG]…\n"
+                + "Example: addpolicy n/full life p/10050 c/10 1 cl/1 e/2021-12-12 t/Aviva ",
+            "/images/guide/page_five.png"),
         SIX("User Guide - Policies",
                 "deletepolicy: Removes a policy from your SIASA based on the index provided.\n"
                         + "deletepolicy INDEX\n"
                         + "Example: deletepolicy 2",
-                new Image("file:src/main/resources/images/guide/page_six.png")),
+                "/images/guide/page_six.png"),
         SEVEN("User Guide - Policies",
                 "editpolicy: Edits a policy from your SIASA based on the index provided. "
-                        + "At least one of the optional fields should be filled.\n"
-                        + "Format: editpolicy INDEX [n/NAME_OF_POLICY] [p/PMT_AMOUNT [PMT_FREQ] [NUM_OF_PMT]] "
-                        + "[c/COMMISSION_% [NUM_OF_PMT]] [cl/PERSON_INDEX] [t/TAGS] [e/COVERAGE_EXPIRY_DATE]\n"
-                        + "Example: editpolicy 2 n/Life Policy 2 e/2022-10-22",
-                new Image("file:src/main/resources/images/guide/page_seven.png")),
+                + "At least one of the optional fields should be filled.\n"
+                + "Format: editpolicy INDEX [n/NAME_OF_POLICY] [p/PMT_AMOUNT [PMT_FREQ] [NUM_OF_PMT]] "
+                + "[c/COMMISSION_% [NUM_OF_PMT]] [cl/PERSON_INDEX] [t/TAGS] [e/COVERAGE_EXPIRY_DATE]\n"
+                + "Example: editpolicy 2 n/Life Policy 2 e/2022-10-22",
+            "/images/guide/page_seven.png"),
         EIGHT("User Guide - Policies",
                 "contactpolicy: List the policies belonging to the contact based on the index provided.\n"
                         + "contactpolicy INDEX\n"
                         + "Example: contactpolicy 1",
-                new Image("file:src/main/resources/images/guide/page_eight.png")),
+               "/images/guide/page_eight.png"),
         NINE("User Guide - Policies",
-                "allpolicy: List all policies in your SIASA.\n"
-                        + "allpolicy\n"
-                        + "Example: allpolicy",
-                new Image("file:src/main/resources/images/guide/page_nine.png"));
+            "allpolicy: List all policies in your SIASA.\n"
+                + "allpolicy\n"
+                + "Example: allpolicy",
+            "/images/guide/page_nine.png");
 
         private final String title;
         private final String description;
