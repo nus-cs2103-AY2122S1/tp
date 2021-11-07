@@ -11,14 +11,13 @@ participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
-participant "e:EventNamePredicate" as EventNamePredicate MODEL_COLOR
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("showDetails Dinner")
+[-> LogicManager : execute("showDetails 1")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("showDetails Dinner")
+LogicManager -> AddressBookParser : parseCommand("showDetails 1")
 activate AddressBookParser
 
 create ShowEventDetailsCommandParser
@@ -28,19 +27,12 @@ activate ShowEventDetailsCommandParser
 ShowEventDetailsCommandParser --> AddressBookParser
 deactivate ShowEventDetailsCommandParser
 
-AddressBookParser -> ShowEventDetailsCommandParser : parse(" Dinner")
+AddressBookParser -> ShowEventDetailsCommandParser : parse(" 1")
 activate ShowEventDetailsCommandParser
 
 create ShowEventDetailsCommand
 ShowEventDetailsCommandParser -> ShowEventDetailsCommand
 activate ShowEventDetailsCommand
-
-create EventNamePredicate
-ShowEventDetailsCommand -> EventNamePredicate
-activate EventNamePredicate
-
-EventNamePredicate --> ShowEventDetailsCommand : e
-deactivate EventNamePredicate
 
 ShowEventDetailsCommand --> ShowEventDetailsCommandParser : s
 deactivate ShowEventDetailsCommand
@@ -75,7 +67,6 @@ deactivate ShowEventDetailsCommand
 
 ShowEventDetailsCommand -[hidden]> LogicManager : result
 destroy ShowEventDetailsCommand
-destroy EventNamePredicate
 
 [<- LogicManager
 deactivate LogicManager

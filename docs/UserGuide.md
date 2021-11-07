@@ -3,8 +3,8 @@ layout: page
 title: User Guide
 ---
 
-Managera is a **desktop app that provides event organisers with a convenient method of keeping track of upcoming 
-[events](#glossary) and the details of their [Participants](#glossary)**. It does not handle communication between the event organiser and the 
+Managera is a **desktop app that _provides event organisers with a convenient method of keeping track of upcoming 
+[events](#glossary) and the details of their [Participants](#glossary)**_. It does not handle communication between the event organiser and the 
 Participants.
 
 Managera is OS-independent, meaning it will work on any operating system (Windows, MacOS, Linux).
@@ -100,7 +100,7 @@ You can quickly jump to any of the sections by using the [Table of Contents](#ta
 
 5. Double-click `managera.jar` to start the app. The GUI similar to the one below should appear in a few seconds. Note 
    how the app contains some sample data.<br>
-   ![Ui](images/UG screenshots/Ui_labelled.png)
+   ![Ui](images/UG-screenshots/Ui_labelled.png)
 
 6. Type the command in the command box and press Enter to execute it. e.g., typing **`help`** and pressing Enter will 
    open the help window. <br>
@@ -192,7 +192,7 @@ Examples:
 * `add n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567` - Adds a Participant whose name is Betsy 
   Crowe with given phone number, email and address to the Participant list.
 
-<br>![result for 'add n/Betsy Crowe ...'](images/UG screenshots/addBetsyResult.png)
+<br>![result for 'add n/Betsy Crowe ...'](images/UG-screenshots/addBetsyResult.png)
 
 ### Deleting a Participant : `delete`
 
@@ -259,7 +259,7 @@ Examples:
 * `find alex david` - Finds any Participants with "Alex" or "David" in their names. Some
   possible matches are: `Alex Yeoh` and `David Li`.<br>
   
-<br>![result for 'find alex david'](images/UG screenshots/findAlexDavidResult.png)
+<br>![result for 'find alex david'](images/UG-screenshots/findAlexDavidResult.png)
 
 ### Listing all Participants : `list`
 
@@ -284,7 +284,7 @@ Example Usage:
 * `find Betsy` followed by `view 1` - Displays the details of the 1st Participant in the results of the 
   `find` command. Find out more about `find` [here](#locating-participants-by-name-find).
 
-<br>![result for 'view 1'](images/UG screenshots/viewFirstResult.png)
+<br>![result for 'view 1'](images/UG-screenshots/viewFirstResult.png)
 
 ## Adding a Next-of-Kin to a Participant: `addNok`
 
@@ -320,7 +320,7 @@ Format: `deleteNok NOK_INDEX PARTICIPANT_INDEX`
 Example Usage:
 * `deleteNok 2 1` - Deletes the 2nd NOK of the 1st Participant.
 
-<br>![result for 'deleteNok 1 2'](images/UG screenshots/deleteNokSecondFirstResult.png)
+<br>![result for 'deleteNok 1 2'](images/UG-screenshots/deleteNokSecondFirstResult.png)
 
 ## Event
 
@@ -405,7 +405,7 @@ Example Usage:
 * `editEvent 2 n/2103T milestone d/2021-10-21 t/2359` - Edits the event name, event date and event time of the 
   2nd Event in the displayed Event list to be `2103T milestone`, `2021-10-21` and `2359` respectively.
 
-<br>![result for 'editEvent 2 n/2103T milestone ...'](images/UG screenshots/editEventSecondResult.png)
+<br>![result for 'editEvent 2 n/2103T milestone ...'](images/UG-screenshots/editEventSecondResult.png)
 
 ### Marking an Event as done: `done`
 
@@ -461,7 +461,7 @@ Example Usage:
 Sorts the displayed Event list in chronological order with earlier Events at the top and later Events 
 at the bottom.
 
-<br>![result for 'sortEvents'](images/UG screenshots/sortEventsResult.png)
+<br>![result for 'sortEvents'](images/UG-screenshots/sortEventsResult.png)
 
 Format: `sortEvents`
 
@@ -504,7 +504,7 @@ Example Usage:
 * `enroll 1 2` - Adds the 1st Participant in the displayed Participant list to the 2nd Event in the displayed Event
   list.
 
-<br>![result for 'enroll 1 2'](images/UG screenshots/enrollFirstSecondResult.png)
+<br>![result for 'enroll 1 2'](images/UG-screenshots/enrollFirstSecondResult.png)
 
 ### Removing a Participant from an Event: `expel`
 
@@ -535,7 +535,7 @@ Format: `showParticipants INDEX`
 Example Usage:
 * `showParticipants 4` - Displays the list of Participants of the 4th Event in the displayed Event list.
 
-<br>![result for 'showParticipants 4'](images/UG screenshots/showParticipantsFourthResult.png)
+<br>![result for 'showParticipants 4'](images/UG-screenshots/showParticipantsFourthResult.png)
 
 ## Miscellaneous
 
@@ -561,7 +561,7 @@ entering this command.
 
 Format: `clear`
 
-<br>![result for 'clear'](images/UG screenshots/clearResult.png)
+<br>![result for 'clear'](images/UG-screenshots/clearResult.png)
 
 ### Exiting the program : `exit`
 
