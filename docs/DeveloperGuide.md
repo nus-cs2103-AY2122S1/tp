@@ -227,7 +227,8 @@ The following sequence diagram shows how the add student operation works:
 
 The `addgroup` feature allows users to create new groups, as well as specify students to be added to the group to be created.
 
-#### How the `addgroup` command works:
+#### How the `addgroup` command works
+
 1. The user specifies the group name, as well as a list of names and/or IDs of the students to be added into the group.
 2. For each of the names and IDs, an `AllocDescriptor` is created.
 3. For each of the `AllocDescriptors`, a search is done against the current `StudentList` to find students that match the descriptors.
