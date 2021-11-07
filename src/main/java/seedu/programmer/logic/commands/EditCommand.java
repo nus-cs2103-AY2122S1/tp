@@ -49,9 +49,11 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_NO_NEW_FIELDS = "There is no fields to be edited. Student's information are "
+            + "already the same as what you have asked to be edited to.";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the ProgrammerError.";
     public static final String MESSAGE_INVALID_LAB_NUMBER = "The lab does not exist!";
-    public static final String MESSAGE_DUPLICATE_STUDENT_ID = "This student with the same Student Id "
+    public static final String MESSAGE_DUPLICATE_STUDENT_ID = "This student with the same Student ID "
             + "already exists in the ProgrammerError";
     public static final String MESSAGE_DUPLICATE_STUDENT_EMAIL = "This student with the same Email "
             + "already exists in the ProgrammerError";
@@ -89,11 +91,10 @@ public class EditCommand extends Command {
         Student studentToEditCopy = studentToEdit.copy();
         Student editedStudent = createEditedStudent(studentToEditCopy, editStudentDescriptor);
 
-        //Check if the user edits any field.
-        //Different from the one in EditCommandParser: at this stage user can enter an input
-        //that is identical to the existing field.
+        //Check if the user edited any fields.
+        //Throws CommandException if no fields are changed.
         if (studentToEdit.isIdenticalStudent(editedStudent)) {
-            throw new CommandException(MESSAGE_NOT_EDITED);
+            throw new CommandException(MESSAGE_NO_NEW_FIELDS);
         }
 
         if (model.hasOtherStudent(studentToEdit, editedStudent)) {
