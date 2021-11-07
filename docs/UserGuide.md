@@ -257,6 +257,7 @@ Format: `list`
 
 [Return to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 
 ### Searching for students : `search`
 
@@ -311,14 +312,17 @@ Examples:
 * `show -n Hong Fai`
   * displays the following line chart of `Hong Fai`'s performance in all his assessments. <br>
     ![showStudentExample](images/UGExamples/showstu.png)
+
     <br>
 * `show -n Hong Fai -f`
   * exports the following line chart of `Hong Fai`'s performance in all his assessments. <br>
     ![showExportExample](images/UGExamples/showexport.png)
+
     <br>
 * `show -g T02A`
   * displays line chart of group `T02A`'s performance in their assessments. <br>
     ![showGroupExample](images/UGExamples/showgrp.png)
+
     <br>
 * `show -a Midterm Examination`
   * displays histogram of the distribution of scores in the `Midterm Examination` assessment.<br>
