@@ -121,7 +121,6 @@ public class UniquePersonList implements Iterable<Person> {
         Person markedPerson = internalList.get(index);
         markedPerson.getDone().setAsDone();
         internalList.set(index, markedPerson);
-
     }
 
     /**
@@ -138,7 +137,6 @@ public class UniquePersonList implements Iterable<Person> {
 
         Person markedPerson = internalList.get(index);
         return markedPerson.getDone().equals(Done.DONE);
-
     }
 
     /**
@@ -155,7 +153,6 @@ public class UniquePersonList implements Iterable<Person> {
         Person unmarkedPerson = internalList.get(index);
         unmarkedPerson.getDone().setAsUndone();
         internalList.set(index, unmarkedPerson);
-
     }
 
     /**
@@ -172,7 +169,6 @@ public class UniquePersonList implements Iterable<Person> {
 
         Person markedPerson = internalList.get(index);
         return markedPerson.getDone().equals(Done.UNDONE);
-
     }
 
     /**

@@ -101,18 +101,32 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    /**
+     * Marks the status of the person in the list to "Done".
+     */
     public void markPerson(Person toMark) {
         persons.markPerson(toMark);
     }
 
+    /**
+     * Checks the status of the person in the list.
+     * If the status of the person is "Done" returns true; false otherwise.
+     */
     public boolean checkForMarkedPerson(Person toCheck) {
         return persons.checkForMarkedPerson(toCheck);
     }
 
+    /**
+     * Unmarks the status of the person in the list to "Not Done".
+     */
     public void unmarkPerson(Person toUnmark) {
         persons.unmarkPerson(toUnmark);
     }
 
+    /**
+     * Checks the status of the person in the list.
+     * If the status of the person is "Not Done" returns true; false otherwise.
+     */
     public boolean checkForUnmarkedPerson(Person toCheck) {
         return persons.checkForUnmarkedPerson(toCheck);
     }

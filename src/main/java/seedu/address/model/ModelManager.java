@@ -156,6 +156,7 @@ public class ModelManager implements Model {
     }
 
     //=========== Changing Person Done Status Accessors =============================================================
+
     @Override
     public void markPerson(Person target) {
         requireAllNonNull(target);
