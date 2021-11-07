@@ -297,7 +297,7 @@ The tuition class is then updated with the help of the following methods:
 * `TuitionClass#sameClassDetails()` - Checks if any field of the tuition class has been updated. 
 * `Timeslot#checkTimetableConflicts` - Checks if the updated time slot has been taken or overlaps with another class's timselot.
 * `ModelManager#setTuition(TuitionClass, TuitionClass)` - Updates the tuition class.
-<br>
+
 Given below is an example usage scenario of how an `editclass` command is executed.
 #### Steps
 Step 1: The user enters `editclass 1 l/5 ts/Mon 10:00-11:00` command.
