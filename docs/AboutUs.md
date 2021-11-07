@@ -26,7 +26,6 @@ You can reach us at our [github issues](https://github.com/AY2122S1-CS2103T-T10-
 [[github](http://github.com/aishh12)]
 [[portfolio](https://ay2122s1-cs2103t-t10-1.github.io/tp/team/aishh12.html)]
 
-
 * Role: Code Quality
 * Responsibilities: Commands
 
@@ -46,7 +45,6 @@ You can reach us at our [github issues](https://github.com/AY2122S1-CS2103T-T10-
 
 [[github](http://github.com/CheongYeeMing)]
 [[portfolio](https://ay2122s1-cs2103t-t10-1.github.io/tp/team/cheongyeeming.html)]
-
 
 * Role: Testing
 * Responsibilities: Model
