@@ -207,7 +207,7 @@ Format:
 
 Parameters:
 * `NAME`: No constraints on name used. Cannot be left blank.
-* `PASSPORT_NUMBER` Should only contain alphanumeric characters, and is case insensitive (all passport numbers are capitalised).
+* `PASSPORT_NUMBER`: Should only contain alphanumeric characters, and is case insensitive (all passport numbers are capitalised).
 * `EMAIL`: A valid email address should be used.
 * `ROOM_NUMBER`: Only numbers greater than 0 are valid.
 * `TAG`: An optional field, more than one can be included in the command.
@@ -254,7 +254,7 @@ Format:
 <br>`checkout pn/<PASSPORT_NUMBER>`
 
 Parameters:
-* `PASSPORT_NUMBER` Should only contain alphanumeric characters, and is case insensitive (all passport numbers are capitalised).
+* `PASSPORT_NUMBER`: Should only contain alphanumeric characters, and is case insensitive (all passport numbers are capitalised).
 
 Example:
 
@@ -280,7 +280,7 @@ Format:
 
 Parameters:
 
-* `PASSPORT_NUMBER` Should only contain alphanumeric characters, and is case insensitive (all passport numbers are capitalised).
+* `PASSPORT_NUMBER`: Should only contain alphanumeric characters, and is case insensitive (all passport numbers are capitalised).
 * `NAME`: No constraints on name used. Cannot be left blank.
 * `EMAIL`: A valid email address should be used.
 * `ROOM_NUMBER`: Only numbers greater than 0 are valid.
@@ -364,7 +364,7 @@ Format:
 <br>`chargeguest pn/<PASSPORT_NUMBER> vid/<VENDOR_ID>`
 
 Parameters:
-* `PASSPORT_NUMBER` Should only contain alphanumeric characters, and is case insensitive (all passport numbers are capitalised).
+* `PASSPORT_NUMBER`: Should only contain alphanumeric characters, and is case insensitive (all passport numbers are capitalised).
 * `VENDOR_ID`: Should only contain alphanumeric characters.
   * The `VENDOR_ID` must be from one of the existing vendors in the **PH**
 
@@ -383,7 +383,7 @@ Format:
 `filterguest [<FILTER_FIELD_NAME>/<FILTER_FIELD_VALUE>]`
 
 Parameters:
-* `PASSPORT_NUMBER` Should only contain alphanumeric characters, and is case insensitive (all passport numbers are capitalised).
+* `PASSPORT_NUMBER`: Should only contain alphanumeric characters, and is case insensitive (all passport numbers are capitalised).
   * The passport number specified by you must _match the guest passport's number exactly_ to be filtered.
   * E.g. a guest with a `PASSPORT_NUMBER` of `SE1239182` will not be shown in your **GUI** if you run the command `filterguest pn/SE123`
 * `NAME`: No constraints on name used.
