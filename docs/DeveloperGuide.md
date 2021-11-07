@@ -547,31 +547,29 @@ testers are expected to do more *exploratory* testing.
 
 ### Finding a person
 
-1. Finding a person
+1. Prerequisites: There exists a contact named `Alex Yeoh` in the contact list, and no `Alexander` exists in the contact list.
 
-    1. Prerequisites: There exists a contact named `Alex Yeoh` in the contact list, and no `Alexander` exists in the contact list.
+2. Test case: `find n/le Y`<br>
+   Expected: Contact with name `Alex Yeoh` is listed. 
 
-    2. Test case: `find n/le Y`<br>
-       Expected: Contact with name `Alex Yeoh` is listed. 
+3. Test case: `find n/alexander`<br>
+   Expected: No contact is listed. No error is shown.
 
-    3. Test case: `find n/alexander`<br>
-       Expected: No contact is listed. No error is shown.
-
-    4. Incorrect find commands to try: `find`, `find alex`, `find n/`<br>
-       Expected: No contact is listed. Error details shown in the result display. Text in the command box turns red.
+4. Incorrect find commands to try: `find`, `find alex`, `find n/`<br>
+   Expected: No contact is listed. Error details shown in the result display. Text in the command box turns red.
 
 ### Finding a lesson
 
-    1. Prerequisites: There exists a lesson with module code `CS1231` in the contact list, and no `CS1231S` exists in the contact list.
+   1. Prerequisites: There exists a lesson with module code `CS1231` in the contact list, and no `CS1231S` exists in the contact list.
 
-    2. Test case: `findc m/S123`<br>
-       Expected: Lesson with module code `CS1231` is listed.
+   2. Test case: `findc m/S123`<br>
+         Expected: Lesson with module code `CS1231` is listed.
 
-    3. Test case: `findc m/cs1231s`<br>
-       Expected: No lesson is listed. No error is shown.
+   3. Test case: `findc m/cs1231s`<br>
+         Expected: No lesson is listed. No error is shown.
 
-    4. Incorrect find commands to try: `findc`, `findc cs1231`, `findc m/`<br>
-       Expected: No contact is listed. Error details shown in the result display. Text in the command box turns red.
+   4. Incorrect find commands to try: `findc`, `findc cs1231`, `findc m/`<br>
+            Expected: No contact is listed. Error details shown in the result display. Text in the command box turns red.
        
 ### Editing a person
 
