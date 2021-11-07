@@ -1,7 +1,6 @@
 package tutoraid.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -56,7 +55,7 @@ public class JsonStudentBookStorageTest {
     @Test
     public void readStudentBook_invalidAndValidPersonStudentBook_throwDataConversionException() {
         Assert.assertThrows(
-            DataConversionException.class, () -> readStudentBook("invalidAndValidPersonStudentBook.json"));
+                DataConversionException.class, () -> readStudentBook("invalidAndValidPersonStudentBook.json"));
     }
 
     @Test
