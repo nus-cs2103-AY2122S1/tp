@@ -362,17 +362,19 @@ As shown, the recommend feature execution makes use of an instance of `FriendRec
 if the friend plays the specified game and schedule is available during the specified timing and
 an instance `Comparator` which is used to sort friends in order of the highest skill value for the specified game.
 
-Next, the continuation to the sequence diagram below shows how the `FriendRecommendFilterPredicate` and `Comparator` instances are 
-used to filter and sort the friends list to produce the recommendations friends list.
+Next, the continuation to the sequence diagram below shows how the `ModelManager#updateFilteredAndSortedFriendsList(Predicate, Comparator)`
+interacts with the `FriendRecommendFilterPredicate` and `Comparator` instances. 
 
 <img src="images/RecommendCommandSequenceDiagram2.png" width="1000" />
 
 <ins>Step 3: Displaying the recommended friends</ins> 
 
-Finally, the UI is updated to display the filtered and sorted recommendations friends list whenever the 
-`FilteredList#setPredicate(Predicate)` or `SortedList#setComparator(Comparator)` methods are invoked. This is achieved due
-to the use of JavaFX's `FilteredList` and `SortedList`, which listens for and tracks the above-mentioned changes 
-which is then used to trigger updates to the displayed friends list.
+Due to the use of JavaFX's `FilteredList` and `SortedList`, which listens for and tracks for changes whenever the
+`FilteredList#setPredicate(Predicate)` or `SortedList#setComparator(Comparator)` methods are invoked, the UI is updated 
+to display the filtered and sorted friends list based on the newly set `FriendRecommendFilterPredicate` 
+and `Comparator` instances. 
+
+This completes the display of the recommendations friends list to the user. 
 
 #### Design considerations:
 
