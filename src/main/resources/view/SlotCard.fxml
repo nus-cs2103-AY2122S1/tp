@@ -5,7 +5,11 @@
 
 <VBox fx:id="slotCard" styleClass="slotCard" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-       <Label fx:id="shiftName" contentDisplay="CENTER" styleClass="big_label_white" text="\$shiftName" wrapText="true" VBox.vgrow="NEVER"/>
+      <BorderPane>
+         <center>
+             <Label fx:id="shiftName" contentDisplay="CENTER" styleClass="big_label_white" text="\$shiftName" wrapText="true" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
        <ListView fx:id="staffWorkingList" VBox.vgrow="ALWAYS" />
    </children>
 </VBox>
