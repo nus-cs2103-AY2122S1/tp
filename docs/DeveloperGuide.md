@@ -1126,8 +1126,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ## **Appendix B: Instructions for manual testing**
 
 
-Manual testing was conducted internally by the team as of the time of writing. 
-The details of the test can be found here: [Manual Testing](ManualTesting.md)
+Manual testing was conducted internally by the team as of the time of writing.
+
+
+The details of the testing procedure can be found here: [Manual Testing](ManualTesting.md)
 
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
