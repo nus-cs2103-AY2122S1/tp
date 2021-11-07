@@ -1341,12 +1341,12 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a student while all students are being shown
 
-    * Prerequisites: Multiple "Students" shown in the list of students.
+    * Prerequisites: Multiple students shown in the list of students.
 
     * Note: We will be using index `1` to conduct manual testing for positive tests, but feel free to test with any valid index (any positive integer shown in the student list).
 
     * Test case: `delete 1`<br>
-      Expected: `Student` of index `1` is deleted from the list. `Student` will be unenrolled from the `Lesson`, and `Lesson` with `Student` inside will decrease its size by `1`. Details of the deleted student shown in the status message.
+      Expected: The student at index `1` is deleted from the list. The student will be unenrolled from the lessons they are enrolled in, and the mentioned lessons will decrease its size by 1. Details of the deleted student shown in the status message.
 
     * Test case: `delete 0`<br>
       Expected: No student is deleted. Error details shown in the status message.
@@ -1473,24 +1473,24 @@ testers are expected to do more *exploratory* testing.
 
 #### Enrolling a student into a lesson
 
-1. Enrolling a `Student` into a `Lesson`, while the students and lessons are being shown
+1. Enrolling a student into a lesson, while the students and lessons are being shown
 
     * Prerequisites: 
-        * Multiple `Students` and `Lessons` shown in the list of students and lessons. `Students` must not currently be enrolled in the `Lesson` the user wishes to enroll the student in.
-        * `Student` must have the same `grade` as the `Lesson` to be enrolled in
-        * `Student` must not currently be enrolled in `Lesson` of interest
-        * `Student` must not have any existing classes that clash with the duration in `Lesson`
-        * `Student` must currently be enrolled in fewer than `10` lessons
-        * `Lesson` must currently have fewer than `15` students enrolled inside the lesson
-        * Should any of the above conditions not be met, the `Student` will not be able to be enrolled in the `Lesson` of interest
+        * Multiple students and lessons shown in the list of students and lessons. Students must not currently be enrolled in the lesson the user wishes to enroll the student in.
+        * The student must have the same `grade` as the lesson to be enrolled in
+        * The student must not currently be enrolled in the lesson of interest
+        * The student must not have any existing classes that clash with the duration in the lesson
+        * The student must currently be enrolled in fewer than **10** lessons
+        * The lesson must currently have fewer than **15** students enrolled inside the lesson
+        * Should any of the above conditions not be met, the student will not be able to be enrolled in the lesson of interest
 
     * Note: 
         * We will be using index `2` to conduct manual testing for positive tests, but feel free to test with any valid index (any positive integer shown in the student and lesson lists).
         * In this case, we will be using the sample data given when loading up **TuitiONE** for the first time (delete tuitione.json file if it is not your first time). 
-        * The `Student` of index `2` (Bernice Yu of grade P4) will be enrolled into `Lesson` of `index` 2 (Math-P4-Wed-1800).<br>
+        * The student of index `2` (Bernice Yu of grade P4) will be enrolled into the lesson of index `2` (Math-P4-Wed-1800).<br>
 
     * Test case: `enroll 2 l/2`<br>
-    Expected: `Student` of index `2` is enrolled in `Lesson` of index `2` . Details of the student and lesson enrolled in shown in the status message.
+    Expected: The student of index `2` is enrolled in the lesson of index `2` . Details of the student and lesson enrolled in shown in the status message.
 
     * Test case: `enroll 0 l/0`<br>
     Expected: No student is enrolled in any lesson. Error details shown in the status message.
@@ -1500,21 +1500,21 @@ testers are expected to do more *exploratory* testing.
 
 #### Unenrolling a student
 
-1. Unenrolling a `Student` from a `Lesson`, while all students and lessons are being shown
+1. Unenrolling a student from a lesson, while all students and lessons are being shown
 
-    * Prerequisites: List all students and lessons using the `list` command. Multiple "Students" and "Lessons" in the list.
+    * Prerequisites: List all students and lessons using the `list` command. Multiple students and lessons in the student and lesson list respectively.
 
     * Note:
         * We will be using index `1` to conduct manual testing for positive tests, but feel free to test with any valid index (any positive integer shown in the student and lesson lists).
         * In this case, we will be using the sample data given when loading up **TuitiONE** for the first time (delete tuitione.json file if it is not your first time).
-        * The `Student` of index `1` (Alex Yeoh of grade S1) is enrolled in the `Lesson` of `index` 3 (Science-S1-Fri-1330).
-        * The `Lesson` of index `1` is (English-P2-Mon-0900).<br>
+        * The student of index `1` (Alex Yeoh of grade S1) is enrolled in the lesson of `index` 3 (Science-S1-Fri-1330).
+        * The lesson of index `1` is (English-P2-Mon-0900).<br>
 
     * Test case: `unenroll 1 l/3`<br>
-      Expected: The `Student` of index `1` (Alex Yeoh of grade S1) is unenrolled the `Lesson` of `index` 3 (Science-S1-Fri-1330). The details of the unenroll is displayed in the status message.
+      Expected: The student of index `1` (Alex Yeoh of grade S1) is unenrolled the lesson of index `3` (Science-S1-Fri-1330). The details of the unenroll is displayed in the status message.
 
     * Test case: `unenroll 1 l/1`<br>
-      Expected: The `Student` of index `1` (Alex Yeoh of grade S1) is unable to be unenrolled from The `Lesson` of index `1` (English-P2-Mon-0900). Status message stating student is not enrolled in the lesson is displayed.
+      Expected: The student of index `1` (Alex Yeoh of grade S1) is unable to be unenrolled from the lesson of index `1` (English-P2-Mon-0900). Status message stating student is not enrolled in the lesson is displayed.
 
     * Other incorrect enroll commands to try: `unenroll`, `unenroll 1`, `unenroll 1 l/0`, `unenroll 0 l/1`, `unenroll x l/y`, `unenroll y l/x` (where x is larger than the list size, and y is a negative integer)<br>
       Expected: An error message corresponding to the incorrect field or an error message showing the correct command format is displayed.
@@ -1523,7 +1523,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Finding a student while all students are being shown
    
-    * Prerequisites: List all students using the `list` command. Multiple "Students" in the list.
+    * Prerequisites: List all students using the `list` command. Multiple students in the list.
 
     * Test case: `find c`<br>
         Expected: All students whose name that starts with the letter `c` are shown in 
@@ -1545,8 +1545,7 @@ message showing that `No students found.` will also be displayed in the message 
 
 1. Adding a new lesson
 
-    * Prerequisites: All parameters are entered correctly as according to the DG's [Add Lesson Feature](#add-lesson-feature)
-and the lesson to be added does not exist in TuitiONE yet.
+    * Prerequisites: The lesson to be added does not exist in TuitiONE yet.
 
     * Test case: `add-l s/Science g/P2 d/Wed t/1200 c/10.50`<br>
       Expected: A new lesson `Science-P2-Wed-1200` will be added into the lesson list. Lesson list will be updated
@@ -1591,10 +1590,9 @@ the message box to inform the user that the lesson already exists in TuitiONE.
 
 #### Viewing a lesson's roster 
 
-1. View a lesson's roster using `LESSON_INDEX` while all students and lessons are being shown
+1. View a lesson's roster while all students and lessons are being shown
 
-    * Prerequisites: List all students and lessons using the `list` command. Multiple `Students` and `Lessons` in the 
-list with some `Students` already enrolled in some of the `Lessons`.
+    * Prerequisites: Multiple lessons shown in the lesson list. Some of the students should be enrolled in the some of the lessons (see [enroll](#enrolling-a-student-into-a-lesson) testing for more information).
 
     * Test case: `roster 2`<br>
         Expected: Only students who are enrolled in the lesson identified by the lesson index of `2` will be shown in 
@@ -1602,13 +1600,13 @@ the student list. The lesson list will be updated to show the lesson identified 
 or lesson shown if there is no student enrolled in the lesson identified by the lesson index of `2`. An update message
 showing the number and the name of the students who are enrolled in the lesson will also be displayed in the message box.
 
-    * Test case: `roster 100` (passing in a a `LESSON_INDEX` that is larger than the number of `LESSONS`)<br> 
-      Expected: No roster will be applied. An error message will be shown in the message box, warning the user to only
+    * Test case: `roster 100` (passing in a `LESSON_INDEX` that is larger than the number of displayed lessons)<br> 
+      Expected: An error message will be shown in the message box, warning the user to only
 use a valid `LESSON_INDEX`.
 
     * Incorrect roster commands to try: `roster`, `roster a`, `roster -`, 
 `roster LESSON_CODE`<br>
-        Expected: No roster will be applied. An alert message will be shown in the message box, warning the user to
+        Expected: An alert message will be shown in the message box, warning the user to
 follow the command format by using `LESSON_INDEX`.
 
 
