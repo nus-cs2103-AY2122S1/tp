@@ -332,9 +332,11 @@ The implementation of `Model#unlinkFriend()` is as follows:
 
 #### Description: 
 
-The recommend feature provides the user a with a command to enter into the gitGud text box which causes gitGud to display 
-only friends who are available during a specified time for a specified game and ordered by the highest skill value at the 
-specified game. 
+The recommend feature provides the user a with a command (Format: `recommend -g GAME_ID -t HOUR DAY`) to enter into 
+the gitGud text box which causes gitGud to display a list of friends who are: 
+* available during the specified time 
+* are linked to the specified game 
+* and are ordered by the highest skill value
 
 This command allows the user to easily find the highest-skilled available friends who play the specified game to coordinate 
 gaming sessions with from the recommendations friends list displayed after the command is executed. 
