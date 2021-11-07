@@ -267,7 +267,8 @@ Screenshot:
 `RocketLeague`</ins></center>
 
 ![Friend unlink screenshot](images/ui-screenshots/friend-unlink.png)
-<br><center><ins>Image: gitGud after running `friend --get marcustxk`, after unlinking a game `DOTA` from a friend 
+<br><center><ins>Image: gitGud after running `friend --get marcustxk`, after unlinking a game `RocketLeague` from a 
+friend 
 `marcustxk`</ins></center>
 
 #### Assigning a skill value for a linked game : `friend --skill`
