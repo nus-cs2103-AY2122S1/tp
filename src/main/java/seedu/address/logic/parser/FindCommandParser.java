@@ -32,6 +32,10 @@ public class FindCommandParser implements Parser<FindCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
+        if (extractSearchTerms(args).contains("c/")) {
+            throw new ParseException(FindCommand.CASE_SENSITIVE_FLAG_FORMAT_MESSAGE);
+        }
+
         boolean isCaseSensitive = false;
         if (trimmedArgs.contains(PREFIX_CASE_SENSITIVE.toString())) {
             isCaseSensitive = true;
@@ -83,5 +87,19 @@ public class FindCommandParser implements Parser<FindCommand> {
             }
         }
         return false;
+    }
+
+    private static String extractSearchTerms(String args) {
+        int indexOfN = args.indexOf("n/");
+        int indexOfT = args.indexOf("t/");
+        int finalIndex;
+        if (indexOfN == -1) {
+            finalIndex = indexOfT;
+        } else if (indexOfT == -1) {
+            finalIndex = indexOfN;
+        } else {
+            finalIndex = Math.min(indexOfN, indexOfT);
+        }
+        return args.substring(finalIndex);
     }
 }

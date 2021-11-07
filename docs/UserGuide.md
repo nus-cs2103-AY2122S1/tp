@@ -32,7 +32,7 @@ CONNECTIONS is a **desktop app for managing contacts, optimized for use via a Co
 
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have Java `11` or above installed on your computer.
 
 1. Download the latest `CONNECTIONS.jar` from [here](https://github.com/AY2122S1-CS2103-F09-4/tp/releases).
 
@@ -74,7 +74,7 @@ CONNECTIONS is a **desktop app for managing contacts, optimized for use via a Co
 
 * Phone numbers can be of any length, but can only contain numerical digits.
 
-* Command words are case sensitive. e.g. `findany` will not be intepreted as `findAny`.
+* Command words are case-sensitive. e.g. `findany` will not be interpreted as `findAny`.
 
 </div>
 
@@ -89,7 +89,7 @@ It sorts all birthdays amongst all contacts in CONNECTIONS **chronologically**, 
 
 ### Viewing help : `help`
 
-Shows help message explaining each command.
+Shows a help message that explains the purpose and method of usage for each command.
 
 #### Format:
 * `help` - List out all available commands.
@@ -113,7 +113,7 @@ Notes:
 
 ### Adding a contact: `add`
 
-Adds a contact to the address book.
+Adds a contact to CONNECTIONS.
 
 #### Format:
 * `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [b/BIRTHDAY] [t/TAG]…​`
@@ -131,11 +131,11 @@ Format birthday as `ddMMyyyy`.
 </div>
 
 Notes:
-* Phone number must be unique and must contain only numbers.
+* Phone numbers must be unique and must contain only numbers.
 * Emails must contain @. (Valid emails that violate convention are accepted as well)
 * Birthdays are optional and can be added to existing contacts using the `edit` command.
 * Future dates are not allowed as birthdays.
-* Each tag has a character limit of 60.
+* Tag names are limited to 60 characters.
 
 **Sample Usage:**
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
@@ -143,43 +143,43 @@ Notes:
 
 ### Listing all contacts : `list`
 
-Shows a list of all contacts in the address book.
+Shows a list of all contacts in CONNECTIONS.
 
 #### Format:
 * `list`
 
 ### Editing a contact : `edit`
 
-Edits an existing contact in the address book.
+Edits an existing contact in CONNECTIONS.
 
 #### Format:
 * `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [t/TAG]…​`
 
 Notes:
 * Edits the contact at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
+* There must be at least one of the optional fields provided alongside the edit command.
 
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the contact will be removed i.e. editing of tags is not cumulative.
-* You can remove all the contact’s tags by typing `t/` without specifying any tags after it.
+* The existing set of tags that belongs to a contact will be updated to the new set of tags inputted. i.e. The edits made to a set of tags are not cumulative.
+* You can remove all tags of a particular contact using `edit INDEX t/` (without providing anything after `t/`).
 
 
 **Sample Usage:**
 * `edit 1 p/91234567 e/johndoe@example.com`
-  * Edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com` respectively.
+  * Edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com`, respectively.
 * `edit 2 n/Betsy Crower t/`
   * Edits the name of the 2nd contact to be `Betsy Crower` and clears all existing tags.
 
 ### Adding Tags : `tag`
 
-Adds one or more tags to an existing contact in the address book.
+Adds one or more tags to an existing contact in CONNECTIONS.
 
 #### Format:
 * `tag INDEX t/TAG [t/MORE_TAGS]…​`
 
 Notes:
-* Adds tag to the contact at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. The index **must be a positive integer** 1, 2, 3, …​
-* New tags will be added on top of existing tags i.e. tags added are cumulative.
+* Adds tag(s) to the contact at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. The index **must be a positive integer** 1, 2, 3, …​
+* New tags are added on top of existing tags i.e., tags added are cumulative.
 * Adding new tags which already exist will succeed with a warning letting you know that the contact already had those tags.
 * Tags have a character limit of 60.
 
@@ -189,7 +189,7 @@ Notes:
 
 ### Removing Tags : `untag`
 
-Removes one or more existing tags from an existing contact in the address book.
+Removes one or more existing tags from an existing contact in CONNECTIONS.
 
 #### Format:
 * `untag INDEX t/TAG [t/MORE_TAGS]…​`
@@ -197,7 +197,7 @@ Removes one or more existing tags from an existing contact in the address book.
 Notes:
 * Remove tags from the contact at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. The index **must be a positive integer** 1, 2, 3, …​
 * Only tags that exist will be removed.
-* If the command contains tags that the contact does not have, a warning will be shown and no tags will be removed.
+* CONNECTIONS displays a warning and will not remove any tags if the user tries to remove a non-existent tag.
 
 **Sample Usage:**
 * `untag 2 t/friend t/NUS`
@@ -212,15 +212,15 @@ Finds all contacts who match **ALL** name and tag keywords provided.
   * Note that `find` must have at least one `[n/NAME]` or `[t/TAG]`.
 
 Notes:  
-* `find` is case-insensitive for names. e.g. `find n/hans` will match a contact with name `Hans`.  
+* `find` is case-insensitive for names. e.g. `find n/hans` will match contacts named `Hans`.  
 * `find` is case-insensitive for tags by default. e.g. `find t/friend` will match a contact with tags `Friend` or `friend`.  
   * Adding the `c/` flag **after** the command word will make tag matching case-sensitive.  
     e.g. `find c/ t/friend` will match a contact with tag `friend` but not `Friend`.
 * The order of the keywords does not matter. e.g. `find n/Hans t/football` will return the same result as `find  t/football n/Hans`.
 * Only full words will be matched for names and tags.  
   * `find n/an` will not return `Hans`, but will return `Jing An`.  
-* Only contacts matching all keywords will be returned (i.e. `AND` search).  
-  e.g. `find n/Hans t/Friend` will return all contacts with names containing the word `Hans` and who are tagged with `Friend`.  
+* Only contacts that matched all keywords provided will be returned as search results (i.e. `AND` search).  
+  e.g. `find n/Hans t/Friend` will return all contacts with names containing the word `Hans` and are tagged with `Friend`.
 
 **Sample Usage:**
 * `find n/John`
@@ -242,15 +242,15 @@ Finds all contacts who match **ANY** name and tag keywords provided.
   * Note that `findAny` must have at least one `[n/NAME]` or `[t/TAG]`.
 
 Notes:
-* `findAny` is case-insensitive for names. e.g. `findAny n/hans` will match a contact with name `Hans`.
+* `findAny` is case-insensitive for names. e.g. `findAny n/hans` will match contacts named `Hans`.
 * `findAny` is case-insensitive for tags by default. e.g. `findAny t/friend` will match a contact with tags `Friend` or `friend`.
   * Adding the `c/` flag **after** the command word will make tag matching case-sensitive.  
     e.g. `findAny c/ t/friend` will match a contact with tag `friend` but not `Friend`.
 * The order of the keywords does not matter. e.g. `findAny n/Hans t/football` will return the same result as `findAny t/football n/Hans`.
 * Only full words will be matched for names and tags.
   * `findAny n/an` will not return `Hans`, but will return `Jing An`.
-* Contacts matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `findAny n/Hans t/Friend` will return all contacts with names containing the word `Hans` or who are tagged with `Friend`.
+* Only contacts that match at least one of the keywords provided will be returned as search results (i.e., `OR` search)
+  e.g. `findAny n/Hans t/Friend` will return all contacts with names containing the word `Hans` or are tagged with `Friend`.
 
 
 **Sample Usage:**
@@ -269,14 +269,14 @@ Notes:
 #### Format: 
 * `pin INDEX`
   
-  Notes:
+Notes:
 * Pins the contact at the specified `INDEX`.
 * The index refers to the index number shown in the displayed contact list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 **Sample Usage:**
 * `list` followed by `pin 2`
-  * pins the 2nd contact in the address book.
+  * pins the 2nd contact in CONNECTIONS.
 * `find n/Betsy` followed by `pin 1`
   * pins the 1st contact in the results of the `find` command.
 
@@ -284,15 +284,15 @@ Notes:
 
 #### Format:
 * `unpin INDEX`
-
-  Notes:
+  
+Notes:
 * Unpins the contact at the specified `INDEX`.
 * The index refers to the index number shown in the displayed contact list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 **Sample Usage:**
 * `list` followed by `unpin 2`
-  * unpins the 2nd contact in the address book.
+  * unpins the 2nd contact in CONNECTIONS.
 * `find n/Betsy` followed by `unpin 1`
   * unpins the 1st contact in the results of the `find` command.
 
@@ -310,26 +310,26 @@ Notes:
 
 **Sample Usage:**
 * `list` followed by `delete 2`
-  * deletes the 2nd contact in the address book.
+  * deletes the 2nd contact in CONNECTIONS.
 * `find n/Betsy` followed by `delete 1`
   * deletes the 1st contact in the results of the `find` command.
 
 ### Deleting multiple contacts : `deletem`
 
-Deletes the contacts within the range from the address book.
+Deletes the contacts within the range from CONNECTIONS.
 
 #### Format:
 * `deletem START_INDEX - END_INDEX`
 
 Notes:
 * Deletes the contacts within the specified range from `START_INDEX to END_INDEX`.
-* The indexes refers to the index number shown in the displayed contact list.
+* The indexes refer to index numbers shown in the displayed contact list.
 * The indexes **must be a positive integer** 1, 2, 3, …​
-* The `END_INDEX` must be bigger than or equal to `START_INDEX`.
+* `END_INDEX` must be greater than or equal to `START_INDEX`.
 
 **Sample Usage:**
 * `list` followed by `deletem 2 - 3`
-  * deletes the 2nd and 3rd contact in the address book.
+  * deletes the 2nd and 3rd contact in the CONNECTIONS.
 * `find n/Betsy` followed by `deletem 1 - 5`
   * deletes the 1st to 5th contact in the results of the `find` command.
 
@@ -361,7 +361,7 @@ Notes:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from CONNECTIONS.
 
 #### Format:
 * `clear`
@@ -392,7 +392,7 @@ Shows command format and example as the command is entered.
 View and use previously called commands.
 
 Notes:
-* Only commands from the current program run can be viewed. Commands from previous runs are not stored.
+* Only commands that have been used in the current program run can be viewed. Commands used in previous runs are not stored.
 
 #### Sample Usage:
 * Up Arrow

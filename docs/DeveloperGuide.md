@@ -29,7 +29,8 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-  * [Opencsv](http://opencsv.sourceforge.net/)
+* [Opencsv](http://opencsv.sourceforge.net/) is used when creating the CSV file in `mailingList` command.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -51,7 +52,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
-Given below is a quick overview of main components and how they interact with each other.
+Given below is a quick overview of the main components and how they interact with each other.
 
 **Main components of the architecture**
 
@@ -94,7 +95,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, `BirthdayReminderListPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103-F09-4/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103-F09-4/tp/blob/master/src/main/resources/view/MainWindow.fxml).
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts is defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103-F09-4/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103-F09-4/tp/blob/master/src/main/resources/view/MainWindow.fxml).
 
 The `UI` component,
 
@@ -129,7 +130,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create an `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
@@ -143,7 +144,7 @@ The `Model` component,
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores and sorts the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change. The `Person` objects are sorted according to how they should be displayed.
 * stores and sorts the `Person` objects as a separate _sorted_ list according to their birthday which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` object.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
@@ -178,7 +179,7 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Implementation
 
-Tags for contacts are implemented as a `Tag` class, and are stored internally in a `Set<Tag>` within the `Person` object. Tags are parsed and created through the `add`, `edit` and `tag` commands, and removed through the `edit` and `untag` commands. Multiple **distinct** tags can also be added for each contact.
+Tags for contacts are implemented as a `Tag` class and are stored internally in a `Set<Tag>` within the `Person` object. Tags are parsed and created through the `add`, `edit` and `tag` commands, and removed through the `edit` and `untag` commands. Multiple **distinct** tags can also be added for each contact.
 
 #### Usage
 
@@ -186,7 +187,7 @@ Given below is an example usage scenario and how the Tag mechanism behaves at ea
 
 Step 1. The user launches the application for the first time.
 
-Step 2. The user executes `add ... t/friend` command to add a contact tagged with `friend` into CONNECTIONS.
+Step 2. The user executes the `add ... t/friend` command to add a contact tagged with `friend` into CONNECTIONS.
 
 Step 3. CONNECTIONS displays the newly added contact with the added tag.
 
@@ -217,7 +218,7 @@ The pin mechanism is facilitated by `UniquePersonList`. It stores all the list o
 * `UniquePersonList#add` - adds a contact into the list of stored contacts and stores the contacts according to their priority. 
 * `UniquePersonList#setPerson` - updates an edited contact in the list of stored contacts and stores the contacts according to their priority. 
 
-The operation are exposed in the `Command` interface as `Command#Execute`, specifically in `PinCommand#Execute`.
+The operation is exposed in the `Command` interface as `Command#Execute`, specifically in `PinCommand#Execute`.
 
 Given below is an example usage scenario and how the pin mechanism behaves at each step.
 
@@ -231,21 +232,21 @@ Step 2. The user executes `add n/person3 …​` to add a new contact. This cont
 
 Step 3. CONNECTIONS UI displays the new contact at the end of `PersonListPanel` using a `PersonCard`.
 
-Step 4. The user decides that `person3` will be frequently contacted and should be pinned. User executes `pin 3`.
+Step 4. The user decides that `person3` will be frequently contacted and should be pinned. The user executes `pin 3`.
 
 Step 5. Contact's `Pin` attribute will change to indicate that the contact is pinned. Contact will be brought forward in `UniquePersonList`, behind `person1` that was already pinned.
 
 ![PinUniquePersonListState2](images/PinUniquePersonListState2.png)
 
-Step 6. CONNECTIONS UI will update to show the new contact at the top of the list using a `PinnedPersonCard` which shows a pin next the contact's name. 
+Step 6. CONNECTIONS UI will update to show the new contact at the top of the list using a `PinnedPersonCard` which shows a pin next to the contact's name. 
 
-Step 7. The user decides that `person3` will no longer be frequently contacted and should be unpinned. User executes `unpin 2` which unpins `person3` which is second in the list.
+Step 7. The user decides that `person3` will no longer be frequently contacted and should be unpinned. The user executes `unpin 2` which unpins `person3` which is second in the list.
 
-Step 6. Contact's `Pin` attribute will change to indicate that the contact is not pinned. Contact will be moved behind other pinned contacts in `UniquePersonList`.
+Step 8. Contact's `Pin` attribute will change to indicate that the contact is not pinned. Contact will be moved behind other pinned contacts in `UniquePersonList`.
 
 ![PinUniquePersonListState3](images/PinUniquePersonListState3.png)
 
-Step 7. CONNECTIONS UI will update to show the contact behind other pinned contacts using a `PersonCard`. 
+Step 9. CONNECTIONS UI will update to show the contact behind other pinned contacts using a `PersonCard`. 
 
 The following sequence diagram shows how the pin operation works:
 
@@ -267,7 +268,7 @@ The following sequence diagram shows how the pin operation works:
 
 **Aspect: How each pinned contact is displayed:**
 
-* **Option 1 (current choice):** Have two seperate cards, `PersonCard` and `PinnedPersonCard`, for a pinned contact and unpinned contact respectively.
+* **Option 1 (current choice):** Have two separate cards, `PersonCard` and `PinnedPersonCard`, for a pinned contact and unpinned contact respectively.
     * Pros: Easier to implement.
     * Cons: More code duplication.
 
@@ -279,16 +280,16 @@ The following sequence diagram shows how the pin operation works:
 
 #### Implementation
 
-The operation are exposed in the `Command` interface as `Command#Execute`, specifically in `FindCommand#Execute`.
+The operation is exposed in the `Command` interface as `Command#Execute`, specifically in `FindCommand#Execute`.
 
-The filtered list will be updated using `ModelManager#updateFilteredPersonList`. A `FindPredicate` is generated according to the user's command and passed as a argument into `ModelManager#updateFilteredPersonList`.
+The filtered list will be updated using `ModelManager#updateFilteredPersonList`. A `FindPredicate` is generated according to the user's command and passed as an argument into `ModelManager#updateFilteredPersonList`.
 It will be displayed in `PersonListPanel`.
 
 Given below is an example usage scenario and how the Find mechanism behaves at each step.
 
 Step 1. The user launches the application for the first time. All contacts are displayed at default.
 
-Step 2. The user executes `find n/David t/friend t/football` to search for a matching entry.
+Step 2. The user executes `find n/David t/friend t/football` to search for a matching contact.
 
 Step 3. A `FindPredicate`  which will only return `true` if contact's name contains `David` **while also having** `friend` **and**
 `football` tagged to them is made.
@@ -313,16 +314,16 @@ Step 5. CONNECTIONS' `UI` observes the filtered list is updated and displayed th
 
 #### Implementation
 
-The operation are exposed in the `Command` interface as `Command#Execute`, specifically in `FindAnyCommand#Execute`.
+The operation is exposed in the `Command` interface as `Command#Execute`, specifically in `FindAnyCommand#Execute`.
 
-The filtered list will be updated using `ModelManager#updateFilteredPersonList`. A `FindAnyPredicate` is generated according to the user's command and passed as a argument into `ModelManager#updateFilteredPersonList`.
+The filtered list will be updated using `ModelManager#updateFilteredPersonList`. A `FindAnyPredicate` is generated according to the user's command and passed as an argument into `ModelManager#updateFilteredPersonList`.
 It will be displayed in `PersonListPanel`.
 
 Given below is an example usage scenario and how the FindAny mechanism behaves at each step.
 
 Step 1. The user launches the application for the first time. All contacts are displayed at default. 
 
-Step 2. The user executes `findAny n/David n/Henry t/friend t/football` to search for a matching entry.
+Step 2. The user executes `findAny n/David n/Henry t/friend t/football` to search for a matching contact.
 
 Step 3. A `FindAnyPredicate`  which will only return `true` if contact's name contains **either** `David` **or** `Henry` **OR** are
 tagged to **either** `friend` **or** `football` is made.
@@ -348,7 +349,7 @@ Step 5. CONNECTIONS' `UI` observes the filtered list is updated and displayed th
 
 #### Implementation
 
-The operation are exposed in the `Command` interface as `Command#Execute`, specifically in `HelpCommand#Execute`.
+The operation is exposed in the `Command` interface as `Command#Execute`, specifically in `HelpCommand#Execute`.
 
 Help messages will be displayed in the CONNECTIONS' `UI` through the `ResultDisplay`.
 
@@ -362,22 +363,22 @@ Step 3. CONNECTIONS displays a list of available commands in `ResultDisplay`.
 
 Step 4. The user decides to view the usage of `add` to learn to add a contact, and executes `help add`.
 
-Step 5. CONNECTIONS will display a detailed help message on the usage of `add` command in `ResultDisplay`.
+Step 5. CONNECTIONS will display a detailed help message on the usage of the `add` command in `ResultDisplay`.
 
 
 ### Birthday Reminder feature
 
 #### Implementation
 
-Shows a list of contacts with upcoming birthdays. This list of birthday reminders is displayed to the user though the `UI`, specifically in `BirthdayReminderListPanel`. Each birthday is displayed as a `BirthdayReminderCard`.
+Shows a list of contacts with upcoming birthdays. This list of birthday reminders is displayed to the user through the `UI`, specifically in `BirthdayReminderListPanel`. Each birthday is displayed as a `BirthdayReminderCard`.
 The list of birthdays is generated in the `ModelManager`, which implements the following functions:
 * `ModelManager#getBirthdayReminderList` returns an `ObservableList<Person> birthdayReminders` that is ordered according to upcoming birthdays.
 
 Given below is an example usage scenario and how the birthday reminders mechanism behaves at each step.
 
-Step 1. On app startup sort contacts with birthday by birth month and day only. Contacts with birthdays that fall on the present day are coloured green while birthdays that are within one week are coloured blue. Additionally, a customised message with each contact's phone number and age is displayed in the birthday reminder list.
+Step 1. On app startup, contacts with a birthday are sorted by birth month and day. Contacts with birthdays that fall on the present day are coloured green while birthdays that are within one week are coloured blue. Additionally, a customised message with each contact's phone number and age will be displayed in the birthday reminder list.
 
-Step 2. The `BirthdayReminderListPanel` in CONNECTIONS' `UI` displays birthday reminders in sorted order, starting with the earliest upcoming birthday to the latest upcoming birthday for the year, afterwhich displays birthdays that have pass for the current year in sorted order.
+Step 2. The `BirthdayReminderListPanel` in CONNECTIONS' `UI` displays birthday reminders in sorted order, starting with the earliest upcoming birthday to the latest upcoming birthday for the year, after which displays birthdays that have passed for the current year in sorted order.
 
 Step 3. The user executes `add n/person3 b/01012000 …​` to add a new contact. 
 
@@ -389,16 +390,16 @@ Step 5. CONNECTIONS `UI` will observe for changes in the `ObservableList<Person>
 
 **Aspect: How will the `ObservableList<Person> birthdayReminders` update with a new contact:**
 
-* **Option 1 (current choice):** Clear the birthday reminders and regenerate it.
+* **Option 1 (current choice):** Clear the birthday reminders and regenerate them.
     * Pros: Straightforward.
-    * Cons: Will be slower as whole list is regenerated.
+    * Cons: It will be slower as the whole list is regenerated.
 
 * **Option 2:** Insert the contact into the list. 
-    * Pros: Faster than alternative.
+    * Pros: Faster than the alternative.
     * Cons: Harder to implement and maintain.
     
 ### Mailing List feature
-Allows user to download a CSV file mailing list of the current view.  
+Allows users to download a CSV file mailing list of the current view.  
 Users can use arguments to specify which fields to include in their download.
 
 #### Implementation
@@ -409,7 +410,7 @@ Step 2. The `FilteredList` in `Model` is updated.
 Step 3. The UI is updated to reflect this new state.  
 Step 4. The user provides a series of prefixes to `mailingList` to pick the fields. If no arguments are provided, default selectors are used.  
 Step 5. These `Prefix` arguments are stored in `Model`.  
-Step 6. The user is prompted to pick the name and download location of their generated CSV file.  
+Step 6. The user is prompted to pick a name and the download location for their generated CSV file.  
 Step 7. The `FilteredList`, `Prefixes` and `Path` are passed to `CsvUtil#modelToCsv`, which will serialize and write the CSV file.   
 ![MailingListSequenceDiagram](images/MailingListSequenceDiagram.png)
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `MailingListCommandParser` and MailingListCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
@@ -427,16 +428,16 @@ Step 10. The headers and rows are written to the CSV file that is specified by t
 * Balancing between simplicity of use when no arguments are provided, and flexibility for users who might want additional information.
 
 ### [Proposed] Partial data recovery feature
-Allows user to recover partial data in event of corruption in data file. 
+Allows the user to recover partial data if the data file becomes corrupted. 
 
 #### Proposed Implementation
-If data file is corrupt, CONNECTIONS will use an empty data file upon start up. 
+If the data file is corrupted, CONNECTIONS will use an empty data file upon start up. 
 The proposed implementation can be facilitated by `JsonAdaptedPerson` and `JsonAddressBookStorage`. Upon getting an invalid data format for compulsory fields, `JsonAdaptedPerson` can return `null` and 
 not be added to `JsonAddressBookStorage`. If optional fields are corrupt, default values can be used. This allows other contacts and the other fields of the corrupt contact to be recovered. 
 
 Given below is an example usage scenario and how the Help mechanism behaves at each step.
 
-Step 1. The user edits the data file and changes `Tag` field of the first contact to an invalid value.
+Step 1. The user edits the data file and changes the `Tag` field of the first contact to an invalid value.
 
 Step 2. The user edits the data file and changes the `Email` field of the second contact to an invalid value.
 
@@ -503,7 +504,7 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 | Party Organiser               | Search contacts by parties      | View who is coming for these parties
 | Party Organiser               | Delete multiple contacts at once      | Quickly delete contacts that I no longer need
 | Sociable person               | Pin frequent contacts           | Easily access contacts that I contact often
-| Sociable person               | Save up to 100 contacts | Keep all my friends contacts
+| Sociable person               | Save up to 100 contacts | Keep all my friends' contacts
 | Sociable person               | Search for contacts within a reasonable timing | Avoid waiting too long for search results
 | Beginner              | See sample commands                               | See what I should be typing
 | Beginner              | View helpful prompts                              | See what can be done with the app
@@ -521,7 +522,7 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 
 1.  User chooses to add a contact.
 2.  User provides the contact's details.
-3.  CONNECTIONS create an entry for that contact's details
+3.  CONNECTIONS create a contact entry for that contact's details
 
     Use case ends.
 
@@ -533,19 +534,19 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
       
       Use case resumes at step 2.
     
-* 2b. User provides details identical to an existing entry in CONNECTIONS
+* 2b. User provides details identical to an existing contact in CONNECTIONS
 
     * 2b1. CONNECTIONS informs user that this is a duplicate.
     
       Use case resumes at Step 1.
     
 
-**Use case: Clear all entries**
+**Use case: Clear all contacts**
 
 **MSS**
 
-1.  User request to clear all entries.
-2.  CONNECTIONS deletes all entries.
+1.  User request to clear all contacts.
+2.  CONNECTIONS deletes all contacts.
 
     Use case ends.
 
@@ -610,9 +611,9 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 
 **MSS**
 
-1.  User chooses to look for an entry.
+1.  User chooses to look for a contact.
 2.  Use provides the search term.
-3.  CONNECTIONS returns all entries that matches all search terms provided.
+3.  CONNECTIONS returns all contacts that match all search terms provided.
 
     Use case ends.
 
@@ -620,19 +621,19 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 
 * 2a. CONNECTIONS is empty.
 
-    * 2a1. CONNECTIONS display a message to indicate no entries.
+    * 2a1. CONNECTIONS display a message to indicate no contacts.
     
       Use case ends.
 
-* 2b. No existing entries match the search term provided.
+* 2b. No existing contact match the search term provided.
     
-    * 2b1. CONNECTIONS display a message to indicate no matching entries.
+    * 2b1. CONNECTIONS display a message to indicate no matching contacts.
     
       Use case resumes at step 2.
     
 * 2c. User requests for `or` search (at least one search term is matches).
     
-    * 2c1. CONNECTIONS return all entries that matches any of the search terms provided.
+    * 2c1. CONNECTIONS return all contacts that match any of the search terms provided.
     
       Use case ends.
 
@@ -640,9 +641,9 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 
 **MSS**
 
-1.  User choose to look for an entry.
+1.  User choose to look for a contact.
 2.  User provides the tag.
-3.  CONNECTIONS return all entries that matches the tag.
+3.  CONNECTIONS return all contacts that match the tag.
 
     Use case ends.
 
@@ -650,13 +651,13 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 
 * 2a. CONNECTIONS is empty.
 
-    * 2a1. CONNECTIONS display a message to indicate no entries.
+    * 2a1. CONNECTIONS display a message to indicate no contacts.
 
       Use case ends.
 
-* 2a. No existing entries match the tag provided.
+* 2a. No existing contacts match the tag provided.
 
-    * 2a1. CONNECTIONS display a message to indicate no matching entries.
+    * 2a1. CONNECTIONS display a message to indicate no matching contacts.
 
       Use case resumes at step 2.
 
@@ -664,7 +665,7 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 
 **MSS**
 
-1.  User provides index of contact to pin.
+1.  User provides the index of contact to pin.
 2.  CONNECTIONS pins the contact to the top of the displayed list.
 
     Use case ends.
@@ -673,7 +674,7 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 
 * 1a. Index provided is invalid.
 
-    * 1a1. CONNECTIONS display a message to indicate index is invalid.
+    * 1a1. CONNECTIONS display a message to indicate the index is invalid.
 
       Use case ends.
 
@@ -687,7 +688,7 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 
 **MSS**
 
-1.  User provides index of contact to unpin.
+1.  User provides the index of contact to unpin.
 2.  CONNECTIONS unpins the contact.
 
     Use case ends.
@@ -696,7 +697,7 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 
 * 1a. Index provided is invalid.
 
-    * 1a1. CONNECTIONS display a message to indicate index is invalid.
+    * 1a1. CONNECTIONS display a message to indicate that the index is invalid.
 
       Use case ends.
 
@@ -711,8 +712,8 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 
 **MSS**
 
-1.  User requests to list all entries
-2.  CONNECTIONS display all entries
+1.  User requests to list all contacts.
+2.  CONNECTIONS display all contacts.
     
     Use case ends.
 
@@ -729,7 +730,7 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 1.  User requests to list contacts.
 2.  CONNECTIONS shows a list of contacts.
 3.  User provides his index in the list along with the tags to be added.
-4.  CONNECTIONS add those tags to that entry.
+4.  CONNECTIONS add those tags to that contact.
 
     Use case ends.
 
@@ -745,7 +746,7 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
     
       Use case resumes at step 2.
     
-* 3b. Target entry already has the tag specified.
+* 3b. Target contact already has the tag specified.
 
     * 3b1. CONNECTIONS displays an error message.
     
@@ -758,7 +759,7 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 1.  User requests to list contacts.
 2.  CONNECTIONS show a list of contacts.
 3.  User provides his index in the list along with the tags to be removed.
-4.  CONNECTIONS remove those tags from that entry.
+4.  CONNECTIONS remove those tags from that contact.
 
     Use case ends.
 
@@ -774,7 +775,7 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 
       Use case resumes at step 2.
 
-* 3b. Target entry do not have the tag specified.
+* 3b. Target contact do not have the tag specified.
 
     * 3b1. CONNECTIONS display an error message.
 
@@ -802,7 +803,7 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
       Use case ends.
 
 * 1c. Command provided is invalid.
-  * 1c1. CONNNECTIONS displays an error message followed by a list of valid commands.
+  * 1c1. CONNECTIONS displays an error message followed by a list of valid commands.
 
       Use case ends.
 
@@ -812,9 +813,9 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 **MSS**
 
 1. User requests to generate a CSV file containing selected data fields of the contacts displayed.
-2. CONNECTIONS requests for user to input export location and file name.
-3. User selects export location and file name.
-4. CONNECTIONS generates CSV file in export location with file name.
+2. CONNECTIONS requests for the user to input export location and file name.
+3. User selects an export location and file name.
+4. CONNECTIONS generates a CSV file in the export location with the specified file name.
 
     Use case ends.
 
@@ -825,7 +826,7 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
     
       Use case ends.
     
-* 2a. User fails to choose export location.
+* 2a. User fails to choose an export location.
     * 2a1. CONNECTIONS does not export the CSV file.
       
       Use case ends.
@@ -860,15 +861,15 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 
 **MSS**
 
-1. User starts typing command.
-2. CONNECTIONS displays a prompt to help user write command.
+1. User starts typing a command.
+2. CONNECTIONS displays a prompt to help the user write the command.
 
    Use case ends.
 
 **Extensions**
 
 * 1a. User is not writing a valid command.
-    * 1a1. CONNETIONS will not display prompt.
+    * 1a1. CONNECTIONS will not display a prompt.
 
       Use case ends.
 
@@ -884,7 +885,7 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 **Extensions**
 
 * 1a. There is no previous command history.
-    * 1a1. CONNETIONS will not display command.
+    * 1a1. CONNECTIONS will not display any commands.
 
       Use case ends.
 
@@ -892,12 +893,12 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 100 contacts without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+3.  A user with above-average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 ### Glossary
 * **CONNECTIONS**: The name of our product
-* **Entry**: An item written or printed in a diary, list, account book, or reference book.
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Contact**: An item written or printed in a diary, list, account book, or reference book.
+* **Mainstream OS**: Windows, Linux, Unix, macOS
 * **Search Term**: A search term is what users key in when they want to find something specific
 * **Tag**: A label attached to someone or something for the purpose of identification or to give other information.
 
@@ -916,10 +917,10 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder.
+   1. Download the jar file and copy it into an empty folder.
 
-   1. Launch the jar file using the `java -jar connections.jar` in powershell for Windows users and terminal for Linux user. Double-click the jar file as last resort.<br>
-      Expected: Shows the GUI with a set of sample contacts. The birthday reminder list shows a birthday reminder message for each contact with non-empty birthday field. 
+   1. Launch the jar file using the `java -jar connections.jar` in powershell for Windows users and terminal for macOS and Linux users. Double-click the jar file as last resort.<br>
+      Expected: Shows the GUI with a set of sample contacts. The birthday reminder list shows a birthday reminder message for each contact with a non-empty birthday field. 
       The window size may not be optimum.
 
 1. Saving window preferences
@@ -991,16 +992,16 @@ testers are expected to do more *exploratory* testing.
       Expected: First contact is deleted from the list. If deleted contact has a birthday, it's birthday reminder message is deleted from the birthday reminder list. Details of the deleted contact are shown in the status message.
 
    1. Test case: `delete 0`<br>
-      Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No contact is deleted. Error details are shown in the status message. The status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
        
 1. Deleting a contact while some contacts are being shown
-    1. Prerequisites: Viewing only some contacts using the `find` or `findAny` command. Multiple contacts in the list.
+    1. Prerequisites: View only some contacts using the `find` or `findAny` command. Multiple contacts in the list.
     
     1. Test Case: `delete 1`<br>
-       Expected: First contact that is being viewed is deleted from the list. Details of the deleted contact shown in the status message.
+       Expected: First contact that is being viewed is deleted from the list. Details of the deleted contact are shown in the status message.
 
    1. Test case: `delete 0`<br>
       Expected: No contact is deleted. Error details shown in the status message.
@@ -1010,28 +1011,28 @@ testers are expected to do more *exploratory* testing.
 
 ### Deleting multiple contacts
 
-1. Deleting multiple contact while all contacts are being shown
+1. Deleting multiple contacts while all contacts are being shown
     1. Prerequisites: List all contacts using the `list` command. At least 10 contacts in the list.
     
     1. Test case: `deletem 8 - 10`<br>
-       Expected: Eighth, ninth and tenth contact deleted from the list. If deleted contact has birthday, it's birthday reminder message is deleted from the birthday reminder list. Details of the deleted contact shown in the status message.
+       Expected: Eighth, ninth and tenth contact deleted from the list. If deleted contact has a birthday, its birthday reminder message is deleted from the birthday reminder list. Details of the deleted contact are shown in the status message.
 
     1. Test case: `deletem 6 - 4`<br>
-       Expected: No contact is deleted since end index smaller than start index. Error details shown in the status message. Status bar remains the same.
+       Expected: No contact is deleted since the end index is smaller than the start index. Error details are shown in the status message. The status bar remains the same.
 
     1. Other incorrect delete commands to try: `deletem`, `deletem -2 - -1 `, `deletem x - y`, `...` (where x is not less than y, either x or y is not a positive integer within list size currently being viewed).<br>
        Expected: Similar to previous.
 
 1. Deleting a contact while some contacts are being shown
-    1. Prerequisites: Viewing only some contacts using the `find` or `findAny` command. At least 10 contacts in the list displayed.
+    1. Prerequisites: View only some contacts using the `find` or `findAny` command. At least 10 contacts in the list are displayed.
     
     1. Test case: `deletem 8 - 10`<br>
-       Expected: Eighth, ninth and tenth contact deleted from the list. If deleted contact has birthday, it's birthday reminder message is deleted from the birthday reminder list. Details of the deleted contact shown in the status message.
+       Expected: Eighth, ninth and tenth contact deleted from the list. If deleted contact has a birthday, its birthday reminder message is deleted from the birthday reminder list. Details of the deleted contact are shown in the status message.
 
     1. Test case: `deletem 6 - 4`<br>
-       Expected: No contact is deleted since end index smaller than start index. Error details shown in the status message. Status bar remains the same.
+       Expected: No contact is deleted since the end index is smaller than the start index. Error details are shown in the status message. The status bar remains the same.
 
-    1. Other incorrect delete commands to try: `deletem`, `deletem -2 - -1 `, `deletem x - y`, `...` (where x is not less than y, either of x or y is not a positive integer within list size currently being viewed).<br>
+    1. Other incorrect delete commands to try: `deletem`, `deletem -2 - -1 `, `deletem x - y`, `...` (where x is not less than y, either of x or y is not a positive integer within the list size currently being viewed).<br>
        Expected: Similar to previous.
 
 ### Pinning a contact
@@ -1041,7 +1042,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: Contact at index 1 pinned and index 2 not pinned.
 
     1. Test case: `pin 2`<br>
-       Expected: Contact at index 2 pinned. Details of the recently pinned contact shown in the status message.
+       Expected: Contact at index 2 pinned. Details of the recently pinned contact are shown in the status message.
     
     1. Test case: `pin 1`<br>
        Expected: No changes made. Error details shown in the status message.
@@ -1095,11 +1096,15 @@ testers are expected to do more *exploratory* testing.
 ### Export Mailing List Command
 1.  Export list with default attributes   
     1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
+   
     1. Test case: `mailingList`<br>
        Expected: Generate CSV file with name phone and email of all contacts displayed in the list.
+   
     1. Test case: `mailingList b/ a/`<br>
        Expected: Generate CSV file with name, phone, email, birthday and address of all contacts displayed in the list.
-
+  
+    1. Test case: `mailingList k/`<br>
+       Expected: No changes made. Error details shown in the status message.
        
 ### Saving data
 
@@ -1110,9 +1115,9 @@ testers are expected to do more *exploratory* testing.
         Expected: CONNECTIONS launches successfully. The first contact's name is changed to `Alice Lee`.
        
     1. Test Case: edit the first contact email to `hellogmail` and launch CONNECTIONS<br>
-        Expected: CONNECTIONS launches successfully with 0 entries. 
+        Expected: CONNECTIONS launches successfully with 0 contacts. 
        
     1. Other incorrect formatting of data or invalid fields: birthday to `00000000`, phone to `mynumber`, `...`
-        Expected: Similar to previous.
+        Expected: Similar to previous
 
 1. _{ more test cases …​ }_

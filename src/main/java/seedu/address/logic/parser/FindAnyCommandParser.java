@@ -33,6 +33,13 @@ public class FindAnyCommandParser implements Parser<FindAnyCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindAnyCommand.MESSAGE_USAGE));
         }
 
+        if (extractSearchTerms(args).contains("c/")) {
+            String caseSensitiveFlagFormatMessage = "The case-sensitive flag `c/` must come right after the "
+                    + "command word!\n" + "For example, rather than 'findAny n/NAME c/ t/TAG' or "
+                    + "'findAny n/NAME t/TAG c/', " + "it should be 'findAny c/ n/NAME t/TAG' instead.";
+            throw new ParseException(caseSensitiveFlagFormatMessage);
+        }
+
         boolean isCaseSensitive = false;
         if (trimmedArgs.contains(PREFIX_CASE_SENSITIVE.toString())) {
             isCaseSensitive = true;
@@ -47,10 +54,7 @@ public class FindAnyCommandParser implements Parser<FindAnyCommand> {
 
         List<String> nameStringList = argMultimap.getAllValues(PREFIX_NAME);
         if (areBlanksPresent(nameStringList)) {
-            String nameFormatRequirementMessage = "There should not be any blanks in name.\n" + "For example, "
-                    + "if you are " + "searching for " + "'n/John Doe', split them into 'n/John' "
-                    + "and 'n/Doe' instead.";
-            throw new ParseException(nameFormatRequirementMessage);
+            throw new ParseException(FindAnyCommand.CASE_SENSITIVE_FLAG_FORMAT_MESSAGE);
         }
 
         List<String> tagStringList = argMultimap.getAllValues(PREFIX_TAG);
@@ -83,6 +87,20 @@ public class FindAnyCommandParser implements Parser<FindAnyCommand> {
             }
         }
         return false;
+    }
+
+    private static String extractSearchTerms(String args) {
+        int indexOfN = args.indexOf("n/");
+        int indexOfT = args.indexOf("t/");
+        int finalIndex;
+        if (indexOfN == -1) {
+            finalIndex = indexOfT;
+        } else if (indexOfT == -1) {
+            finalIndex = indexOfN;
+        } else {
+            finalIndex = Math.min(indexOfN, indexOfT);
+        }
+        return args.substring(finalIndex);
     }
 }
 
