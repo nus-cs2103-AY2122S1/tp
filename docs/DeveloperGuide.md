@@ -3,6 +3,7 @@ layout: page
 title: Developer Guide
 nav-text: Developer Guide
 ---
+
 ![](images/sportsPA_logo.png)
 
 <span style = "font-size: 32px; color: #e46c0a">
