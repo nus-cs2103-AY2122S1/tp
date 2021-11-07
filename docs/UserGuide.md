@@ -13,7 +13,7 @@ Source Control can also give you both a quick overview and a closer look of how 
 This application **provides in-depth data analysis** of the performance of your students in each assessment,
 giving you timely feedback on the pace and difficulty level of the module.
 
-Source Control is **optimised for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
+Source Control is **optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 If you can type fast, Source Control can help you track your students' performance faster than traditional GUI apps!
 
 This guide takes you through all the _latest features_ of Source Control. If you are a new user, this guide provides you
@@ -23,6 +23,8 @@ feel free to skip to the [command summary](#command-summary) and experiment with
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Table of Contents**
 
@@ -54,7 +56,7 @@ feel free to skip to the [command summary](#command-summary) and experiment with
     * [Viewing help : `help`](#viewing-help--help)
     * [Accessing command history](#accessing-command-history)
   * Advanced Features
-    * [Setting customised aliases for commands: `alias`](#setting-customised-aliases-for-commands--alias)
+    * [Setting customized aliases for commands: `alias`](#setting-customized-aliases-for-commands--alias)
     * [Editing the data file](#editing-the-data-file)
 * [**FAQ**](#faq)
 * [**Glossary**](#glossary)
@@ -63,6 +65,8 @@ feel free to skip to the [command summary](#command-summary) and experiment with
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Quick Start**
 
@@ -95,6 +99,8 @@ feel free to skip to the [command summary](#command-summary) and experiment with
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Features**
 
@@ -131,6 +137,7 @@ feel free to skip to the [command summary](#command-summary) and experiment with
 
 [Return to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 
 ### Adding a student : `addstudent`
 
@@ -211,6 +218,8 @@ Format: `addassessment -a <assessment_name>`
 * The assessment should not already exist in database.
 * Assessment name can be any number of alphanumeric words.
 
+<div style="page-break-after: always;"></div>
+
 Examples:
 * `addassessment -a P01`
   * creates a new assessment `P01`.
@@ -250,6 +259,7 @@ Format: `list`
 
 [Return to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 
 ### Searching for students : `search`
 
@@ -282,6 +292,7 @@ Examples:
 
 [Return to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 
 ### Showing assessment result analysis : `show`
 
@@ -300,22 +311,28 @@ Format: `show (<index> | -n <student_name> | -i <student_id> | -g <group_name> |
 * Keywords are case-sensitive and only allows exact match. E.g. `T01` does not match `T01A`, `jonas` will not match `Jonas`.
 * Entering `-f` exports the graph produced from the command to a `.png` file in the same directory as your JAR file.
 
+<div style="page-break-after: always;"></div>
+
 Examples:
 * `show -n Hong Fai`
   * displays the following line chart of `Hong Fai`'s performance in all his assessments. <br>
     ![showStudentExample](images/UGExamples/showstu.png)
+  
 * `show -n Hong Fai -f`
   * exports the following line chart of `Hong Fai`'s performance in all his assessments. <br>
     ![showExportExample](images/UGExamples/showexport.png)
+  
 * `show -g T02A`
   * displays line chart of group `T02A`'s performance in their assessments. <br>
     ![showGroupExample](images/UGExamples/showgrp.png)
+
 * `show -a Midterm Examination`
   * displays histogram of the distribution of scores in the `Midterm Examination` assessment.<br>
     ![showAssessmentExample](images/UGExamples/showasses.png)
 
 [Return to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 
 ### Editing a student : `edit`
 
@@ -349,6 +366,8 @@ Format: `delete <index>`
 
 * Deletes the student at the specified `<index>`.
 * The `<index>` refers to the index number shown in the displayed student list. The `<index>` **must be a positive integer** 1, 2, 3, …
+
+<div style="page-break-after: always;"></div>
 
 Examples:
 * `list` followed by `delete 2`
@@ -386,6 +405,8 @@ The similar applies for `<number_of_tag_columns>`.
 * If the student does not have a grade for some assessment, you should leave the corresponding assessment column blank.
 
 </div>
+
+<div style="page-break-after: always;"></div>
 
 An example of how the CSV should be formatted is shown below:
 
@@ -468,7 +489,7 @@ Retrieves past command lines input.
 [Return to Table of Contents](#table-of-contents)
 
 
-### Setting customised aliases for commands : `alias`
+### Setting customized aliases for commands : `alias`
 
 Sets up an alias that can be used instead of a command.
 
@@ -500,10 +521,11 @@ Examples:
 * `alias -c example -as example2`
   * adds the alias `example2` to the command that `example` currently maps to, i.e. `example2` functions as `addgroup`.
 * `alias -c example -as example`
-  * removes the alias `example`. `example` will no longer be recognised as a command.
+  * removes the alias `example`. `example` will no longer be recognized as a command.
 
 [Return to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 
 ### Editing the data file
 
@@ -520,6 +542,8 @@ If your changes to the data file makes its format invalid, Source Control will d
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **FAQ**
 
@@ -554,6 +578,8 @@ as well as you alias preferences.
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Glossary**
 
 Below is a table of the argument flags used in our document.
@@ -581,6 +607,7 @@ Import command description.
 [Return to Table of Contents](#table-of-contents)
 
 <br>
+<div style="page-break-after: always;"></div>
 
 Below is a table of the restrictions of data fields used in our application.
 
@@ -602,7 +629,7 @@ Below is a table explaining some terms used in this document.
 
 Word | Meaning
 -------|--------
-Alphanumeric | A character that is either an alphabet (capitalised and non-capitalised) or a numerical number.
+Alphanumeric | A character that is either an alphabet (capitalized and non-capitalized) or a numerical number.
 Command | Instruction entered by the user e.g. `list`, `exit`.
 Command Line Interface (CLI) | A text-based interface that is used to operate software, allowing the user to respond to visual prompts via typing commands.
 Graphic User Interface (GUI) | A system of interactive visual components for computer software, which allows users to interact via many visual components.
@@ -618,6 +645,8 @@ Path | A string of characters to uniquely identify the location in the computer.
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Command Summary**
 
