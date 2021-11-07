@@ -73,6 +73,6 @@ It does not handle communication between the event organiser and the participant
   * Create product icon and product name
 * **Community**:
   * PRs reviewed (with non-trivial review comments: [\#20](https://github.com/AY2122S1-CS2103T-T10-2/tp/pull/20), [\#91](https://github.com/AY2122S1-CS2103T-T10-2/tp/pull/91), [\#102](https://github.com/AY2122S1-CS2103T-T10-2/tp/pull/102), [\#145](https://github.com/AY2122S1-CS2103T-T10-2/tp/pull/145))
-* **Tools**:
+
   
 
