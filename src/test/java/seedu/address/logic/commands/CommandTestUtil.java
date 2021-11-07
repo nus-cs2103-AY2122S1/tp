@@ -204,7 +204,6 @@ public class CommandTestUtil {
         model.updateFilteredModuleLessonList(
                 new ModuleCodeContainsKeywordsPredicate(Collections.singletonList(moduleCode))
         );
-        System.out.println(model.getFilteredModuleLessonList());
 
         assertEquals(1, model.getFilteredModuleLessonList().size());
     }

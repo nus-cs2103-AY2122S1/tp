@@ -84,11 +84,10 @@ public class EditModuleLessonCommand extends Command {
 
         CommandResult result;
 
-        // delete such that it won't be checking against itself
+        // delete  such that it won't be checking against itself
         model.deleteLesson(lessonToEdit);
         if (model.hasModuleLessonClashingWith(editedModuleLesson)) {
             result = new CommandResult(String.format(MESSAGE_OVERLAPPING_LESSON, editedModuleLesson));
-            model.addLesson(lessonToEdit);
         } else {
             result = new CommandResult(String.format(MESSAGE_EDIT_LESSON_SUCCESS, editedModuleLesson));
         }
