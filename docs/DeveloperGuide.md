@@ -256,12 +256,13 @@ The `EditCommand` receives an index that indicates the student to be edited and 
 editable `EditStudentDescriptor` class which consists of the updated fields of the student.
 The student is then updated with the help of the following methods:
 
-* `Student#sameStudent(Student)` - Checks if the name of the student has been changed
-* `ModelManager#hasStudent(Student)` - Checks if the updated name already exists in the database
-* `Student#equals(Student)` - Checks if any of the four fields have been changed
-* `TuitionClass#updateStudent(Student)` - Updates the student's name in the class
-* `ModelManager#setStudent(Student)` - Updates the student's details in database
+* `Student#sameStudent(Student)` - Checks if the name of the student has been changed.
+* `ModelManager#hasStudent(Student)` - Checks if the updated name already exists in the database.
+* `Student#equals(Student)` - Checks if any of the four fields have been changed.
+* `TuitionClass#updateStudent(Student)` - Updates the student's name in the class.
+* `ModelManager#setStudent(Student)` - Updates the student's details in database.
 
+<br>
 Given below is an example usage scenario of how an `edit` command is executed.
 
 #### Steps
@@ -276,14 +277,11 @@ the edited values for `Phone` and `Name` as well as the existing values for the 
 
 Step 4: An `EditCommand` object is then constructed with the student index and the `EditStudentDescriptor` object.
 
-Step 5: The `EditCommand` object checks if any of the fields have been updated using `Student#equals(Student)`. 
-If none of the four fields are updated, a `CommandException` is thrown to alert the user that the details are up-to-date.
+Step 5: The `EditCommand` object checks if any of the fields have been updated using `Student#equals(Student)`. If none of the four fields are updated a `CommandException` is thrown to alert the user that the details are up-to-date.
 
-Step 6: Otherwise, it proceeds to check if the student name has been changed using `Student#sameStudent(Student)`.
-If the name has been changed, it ensures that the name does not exist in the database using `ModelManager#hasStudent(Student)`
+Step 6: Otherwise, it proceeds to check if the student name has been changed using `Student#sameStudent(Student)`. If the name has been changed, it ensures that the name does not exist in the database using `ModelManager#hasStudent(Student)`.
 
-Step 7: Tf the updated name is valid, the name of the student is updated in all the tuition classes he/she is enrolled in using
-`TuitionClass#updateStudent(Student)`
+Step 7: If the updated name is valid, the name of the student is updated in all the tuition classes he/she is enrolled in using `TuitionClass#updateStudent(Student)`.
 
 Step 8: Finally, the student is updated in the database using `ModelManager#setStudent(Student)`.
 
@@ -292,14 +290,14 @@ Users can edit tuition classes by editing the following fields: limit, name and 
 This is implemented using the `EditClassCommand`, `EditClassDescriptor` and `EditClassCommandParser` classes.
 
 #### Current Implementation 
-Similar to `EditCommand`, the `EditClassCommand` receives an index that indicates the class to be edited and an 
-editable `EditClassDescriptor` class which contains the updated fields of the class. 
+Similar to `EditCommand`, the `EditClassCommand` receives an index that indicates the class to be edited and an editable `EditClassDescriptor` class which contains the updated fields of the class.
+
 The tuition class is then updated with the help of the following methods: 
 
 * `TuitionClass#sameClassDetails()` - Checks if any field of the tuition class has been updated. 
-* `Timeslot#checkTimetableConflicts` - Checks if the updated time slot has been taken or overlaps with another class's timselot
-* `ModelManager#setTuition(TuitionClass, TuitionClass)` - Updates the tuition class
-
+* `Timeslot#checkTimetableConflicts` - Checks if the updated time slot has been taken or overlaps with another class's timselot.
+* `ModelManager#setTuition(TuitionClass, TuitionClass)` - Updates the tuition class.
+<br>
 Given below is an example usage scenario of how an `editclass` command is executed.
 #### Steps
 Step 1: The user enters `editclass 1 l/5 ts/Mon 10:00-11:00` command.
@@ -312,10 +310,9 @@ Step 3: Upon ensuring that the limit is valid, it checks for potential conflicts
 against those of other classes using the `Timeslot#checkTimetableConflicts` method.
 If there are conflicts, a `CommandException` will be thrown to the user to alert the class that the slot has been taken.
 
-Step 4: If there are no conflicts, the class tag of the students enrolled in the class which shows the `ClassName` and 
-`Timeslot` of the updated class.
+Step 4: If there are no conflicts, the class tag of the students enrolled in the class which shows the `ClassName` and`Timeslot` of the updated class.
 
-Step 5: Finally, it replaces the existing class with the updated class in the database using `ModelManager#setTuition(TuitionClass, TuitionClass)`
+Step 5: Finally, it replaces the existing class with the updated class in the database using `ModelManager#setTuition(TuitionClass, TuitionClass)`.
 
 ### [Developed] Deleting Students
 This feature allows students to be deleted using the `deletestudent` or `del` command.
@@ -325,9 +322,9 @@ This is facilitated by the `DeleteStudentCommand` and `DeleteStudentCommandParse
 The `DeleteStudentCommandParser` parses the input from user to ensure that the student indices are valid. Then,
 students are removed from the database with the help of the following methods:
 
-* `ModelManager#getStudent(Student)` - Retrieves the `Student` indicated by its index from `UniqueStudentList`
-* `TuitionClass#removeStudent(Student)` - Removes the student's name from  the `StudentList` of the class
-* `ModelManager#getStudent(Student)` - Deletes the `Student` indicated by its index from `UniqueStudentList`
+* `ModelManager#getStudent(Student)` - Retrieves the `Student` indicated by its index from `UniqueStudentList`.
+* `TuitionClass#removeStudent(Student)` - Removes the student's name from  the `StudentList` of the class.
+* `ModelManager#getStudent(Student)` - Deletes the `Student` indicated by its index from `UniqueStudentList`.
 
 Given below is an example usage of how a `DeleteStudentCommand` is executed.
 
@@ -337,7 +334,7 @@ Step 1: The user enters `deletestudent 1 2` command.
 Step 2: The `DeleteStudentCommandParser` will parse the student indices to ensure that they are valid.
 Additionally, the parser removes any duplicates among the student indices and sorts the indices in descending order.
 
-<div markdown="span" class="alert alert-info">:information_source:**Note:** 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** 
 Removing duplicate indices ensures that only one student is deleted at a particular index. 
 Sorting ensures that the students at the indices are deleted in the correct order - which is important as the student list uses an internal
 `ObservableList` that tracks the changes to the list while students are being deleted.
@@ -348,7 +345,7 @@ A `DeleteStudentCommand` object with the student indices as arguments is constru
 Step 3: The `DeleteStudentCommand` is executed. Student indices - 1 and 2, are used to retrieve the students by calling the `ModelManager#getStudent(Index)` method.
 If the student exists, then the student is deleted by calling `ModelManager#getStudent(Student)`.
 
-Step 6:`CommandResult` is returned informing the user of the students that have been deleted successfully.
+Step 4:`CommandResult` is returned informing the user of the students that have been deleted successfully.
 
 ### [Developed] Deleting Tuition Classes
 This feature allows tuition classes to be deleted using the `deleteclass` or `delc` command.
@@ -358,8 +355,8 @@ This is facilitated by the `DeleteClassCommand` and `DeleteClassCommandParser` c
 The `DeleteClassCommandParser` parses the input from user to ensure that the class indices are valid. Then,
 classes are removed from the database with the help of the following methods:
 
-* `ModelManager#getTuitionClass(Index)` - Retrieves the `TuitionClass` indicated by its index from `UniqueTuitionList`
-* `Student#removeClass(TuitionClass)` - Removes the class identified by an internal id and the class tag from the enrolled students
+* `ModelManager#getTuitionClass(Index)` - Retrieves the `TuitionClass` indicated by its index from `UniqueTuitionList`.
+* `Student#removeClass(TuitionClass)` - Removes the class identified by an internal id and the class tag from the enrolled students.
 * `ModelManager#deleteTuition(TuitionClass)` - Removes the tuition class from `UniqueTuitionList`.
 
 Given below is an example usage of how a `DeleteClassCommand` is executed.
@@ -367,9 +364,7 @@ Given below is an example usage of how a `DeleteClassCommand` is executed.
 #### Steps
 Step 1: The user enters `deleteclass 1` command.
 
-Step 2: The `DeleteClassCommandParser` will parse the class index to ensure that it is valid.
- 
-A `DeleteClassCommand` object with the class index as arguments is constructed.
+Step 2: The `DeleteClassCommandParser` will parse the class index to ensure that it is valid. A `DeleteClassCommand` object with the class index as arguments is constructed.
 
 Step 3: The `DeleteClassCommand` is executed. Class index - 1, is used to retrieve the class by calling the `ModelManager#getTuitionClass(Index)` method.
 
@@ -395,8 +390,8 @@ This is facilitated by the `RemoveStudentCommand` and `RemoveStudentCommandParse
 The `RemoveStudentCommandParser` parses the input from user to ensure that the indices are valid. Then, 
 students are removed from the respective tuition class with the help of the following methods:
 
-* `TuitionClass#containsStudent(Student)` - Checks if the student exists in the class before removing
-* `TuitionClass#removeStudent(Student)` - Removes an existing student from a class
+* `TuitionClass#containsStudent(Student)` - Checks if the student is enrolled in the class.
+* `TuitionClass#removeStudent(Student)` - Removes an existing student from a class.
 * `RemoveStudentCommand#updateInvalidStudents(Student)` - Updates the list of invalid students who do not exist in the class.
 
 Given below is an example usage of how a `RemoveStudentCommand` is executed.
@@ -419,8 +414,7 @@ Step 4: `TuitionClass#containsStudent(Student)` is called to confirm that the st
 Step 5: If the student exists, the student is removed from the class using TuitionClass#removeStudent(Student). The tuition class is also removed the particular student using
 `Student#removeClass(TuitionClass)`. Otherwise, the names of the invalid students are tracked using `RemoveStudentCommand#updateInvalidStudents(Student)`
 
-Step 6: `CommandResult` is returned informing the user of both the students that have been removed successfully and the students who could not be 
-removed as they do not exist in the tuition class.
+Step 6: `CommandResult` is returned informing the user of both the students that have been removed successfully and the students who could not be removed as they do not exist in the tuition class.
 
 
 #### Design considerations
