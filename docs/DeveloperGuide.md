@@ -1033,9 +1033,11 @@ testers should do more exploratory testing.
     
 ### Challenges
     1. How to morph from `Person` of AB3 to `Item` of BogoBogo.
-       The `Item` object has `count` attribute which means duplicate is possible and needed to be handled differently.
+       The `Item` object has `count` attribute which means duplicate is possible and needed 
+       to be handled differently.
 
-       Effort on this: Handle it from the perspective of aggregation and re-design and implement the interactions between `Item` and other classes.
+       Effort on this: Handle it from the perspective of aggregation and re-design and 
+       implement the interactions between `Item` and other classes.
 
     2. How to implement order system so that it is de-coupled with other classes and interact 
        smoothly with them.
@@ -1048,25 +1050,33 @@ testers should do more exploratory testing.
        Effort on this: Trace and research on the Ui component to understand its structure.
        Propose possible solutions to alter Ui and add new customized components.
        Design the new Ui cards of Transactions.
-       Design and implement Observer pattern on these classes to ensure Ui interaction with other components.
+       Design and implement Observer pattern on these classes to ensure Ui interaction with 
+       other components.
 
-    4. How to store the `Inventory`, `Order`, `Transaction` and `BookKeeping` data to persistent data (i.e. to data file).
-       The storage of `Inventory` is similar to how AB3 stores `PersonList` but the other classes have different internal structure and attributes.
+    4. How to store the `Inventory`, `Order`, `Transaction` and `BookKeeping` data to 
+       persistent data (i.e. to data file).
+    
+       The storage of `Inventory` is similar to how AB3 stores `PersonList` but the other 
+       classes have different internal structure and attributes.
 
        Effort on this: Trace and reseach on the Storage component to understand its structure.
-       Design storage scheme of `Order`, `Transaction` and `BookKeeping` and implement them to be compatible to JSON.
+       Design storage scheme of `Order`, `Transaction` and `BookKeeping` and implement them 
+       to be compatible to JSON.
 
-    5. How to maintain abstractions between major compoents while newly added classes interacts across multiple components.
+    5. How to maintain abstractions between major compoents while newly added classes interacts 
+       across multiple components.
 
        Effort on this: Implement facet interfaces between major components to de-couple classes.
 
 ### Achievements
 
-    1. The inventory management and order system works smoothly together which enables user not only item logging funtionalities but also order and transaction tracking and bookkeepings.
+    1. The inventory management and order system works smoothly together which enables user 
+       not only item logging funtionalities but also order and transaction tracking and bookkeepings.
     
     2. The Ui is prettier and new class's Ui merge perfectly with the ones previous developed.
 
-    3. The code base is extensible and implementation notes are available in code comments as well as developer guides.
+    3. The code base is extensible and implementation notes are available in code comments as 
+       well as developer guides.
 
     4. The app can save and load more extensive and complex data files than AB3.
 
