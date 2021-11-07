@@ -316,7 +316,7 @@ Below is a sequence diagram, and an explanation of how `FindCommand` is executed
     - Cons:
         - User might want to view a general set of modules.
         - Might be troublesome for the user to memorise all the optional parameters.
-    
+
 - **Alternative 2:** User uses a separate command (`find`) to take a module, without the use of additional optional parameters.
     - Pros:
         - Easier for the user to use as there is no need to memorise all the optional parameters.
@@ -543,7 +543,7 @@ Below are the sequence diagrams and explanation of how `SetCommand` is executed.
     - Cons:
         - The command is very long, which takes more time to type in. For a user who is familiar with the app, they might not be able to use it efficiently.
         - The command consist of capital letters and lower-case letters and is long. Thus, it might be more prone to errors.
-    
+
 ### View modules taken in specific semester feature
 The `view` command results in modules taken in a specific semester being shown.
 
@@ -783,7 +783,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case resumes at step 1.
 * 1b. The specified module is not in the academic plan.
   * 1b1. NUS Mod Tracker shows an error message.
-    
+
     Use case resumes at step 1.
 
 **UC8: Change current semester**
@@ -895,7 +895,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **GUI**: Graphical user interface
 * **ClI**: Command line interface
-* **Common screen resolutions**: minimum _1024x786_, maximum _3840x2160_ 
+* **Common screen resolutions**: minimum _1024x786_, maximum _3840x2160_
 * **MSS**: Main Success Scenario
 * **Academic Calendar**: A generalization of academic year and semester
 
@@ -989,13 +989,13 @@ testers are expected to do more *exploratory* testing.
         Expected: The module is not taken. Error details shown in the status message.
 
 ### Removing a module from the academic plan
-
+N
 1. Prerequisites: The specified module has been taken.
 
 2. Test case: `untake 1`<br>
        Expected: The first module is removed from the academic plan. The color of this module is changed to grey.
 
-### Changing settings of MC goal and current semester 
+### Changing settings of MC goal and current semester
 
 1. Resetting MC goal.
 
@@ -1047,10 +1047,10 @@ If the effort required to create AB3 is 100, we would place the effort required 
    All other classes in `model` folder had to be modified accordingly.
 
    In the `Logic` component, we need to modify all command parsers in order to parse modules. All commands also needed to be modified to support the operations on modules.
-   
+
    In the `Storage` component, we also needed to modify all classes in order to store modules.
 
-   The `UI` component also needed to be modified to display all the attributes of a module clearly, 
+   The `UI` component also needed to be modified to display all the attributes of a module clearly,
    and the test cases changed accordingly.
 
 
