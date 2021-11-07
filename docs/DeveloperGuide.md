@@ -14,7 +14,7 @@ title: Developer Guide
 ## **Acknowledgements**
 
 * Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
-* Original project: [AddressBook Level-3](https://se-education.org/addressbook-level3) project created as part of the [SE-EDU](https://se-education.org) initiative
+* Original project: [AddressBook Level-3](https://se-education.org/addressbook-level3) Project created as part of the [SE-EDU](https://se-education.org) initiative
 * Application logo: Inspired by [Source Academy](https://sourceacademy.nus.edu.sg/)
 * Code snippet for getting jar file directory: Taken from [this Stackoverflow post](https://stackoverflow.com/questions/320542/how-to-get-the-path-of-a-running-jar-file)
 * PlantUML sprite for rake symbol: Taken from [this PlantUML forum post](https://forum.plantuml.net/195/is-there-any-support-for-subactivity-or-the-rake-symbol)
@@ -25,7 +25,7 @@ title: Developer Guide
 
 ## **Setting Up and Getting Started**
 
-Refer to the guide [_Setting up and getting started_](SettingUp.md).
+Refer to the guide [_Setting Up and Getting Started_](SettingUp.md).
 
 <br>
 
@@ -42,29 +42,29 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ![Architecture Diagram](images/ArchitectureDiagram.png)
 
-The ***Architecture Diagram*** given above explains the high-level design of the App.
+The ***Architecture Diagram*** given above explains the high-level design of Source Control.
 
 Given below is a quick overview of main components and how they interact with each other.
 
 **Main components of the architecture**
 
 **`Main`** has two classes called [`Main`](https://github.com/AY2122S1-CS2103T-W08-2/tp/tree/master/src/main/java/seedu/sourcecontrol/Main.java) and [`MainApp`](https://github.com/AY2122S1-CS2103T-W08-2/tp/tree/master/src/main/java/seedu/sourcecontrol/MainApp.java). It is responsible for,
-* At app launch: Initialises the components in the correct sequence, and connects them up with each other.
+* At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
-The rest of the App consists of four components.
+The rest of Source Control consists of four components.
 
-* [**`UI`**](#ui-component): The UI of the App.
+* [**`UI`**](#ui-component): The UI.
 * [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
+* [**`Model`**](#model-component): Holds the data of Source Control in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user executes the command `delete 1`.
 
 ![Architecture Sequence Diagram](images/ArchitectureSequenceDiagram.png)
 
@@ -87,7 +87,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `StudentListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103T-W08-2/tp/tree/master/src/main/java/seedu/sourcecontrol/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-W08-2/tp/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFX UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103T-W08-2/tp/tree/master/src/main/java/seedu/sourcecontrol/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-W08-2/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -106,7 +106,7 @@ Here's a (partial) class diagram of the `Logic` component:
 
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `SourceControlParser` class to parse the user command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g. `AddCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a student).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -140,8 +140,8 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the application data i.e., all `Student` objects (which are contained in a `UniqueStudentList` object).
-* stores the currently 'selected' `Student` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Student>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the application data i.e. all `Student` objects (which are contained in a `UniqueStudentList` object).
+* stores the currently 'selected' `Student` objects (e.g. results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Student>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -176,27 +176,28 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Adding a student
 
-
 The `addstudent` feature adds a student with the provided name and NUSNET ID into the database. If the student comes with optionally specified groups and tags, these fields will be added accordingly.
-### How the `addstudent` feature works
-1. The user specifies the student name, NUSNET ID, and if applicable, the groups and tags the student has too.
+
+#### How the `addstudent` command works
+
+1. The user specifies the student name, NUSNET ID, and if applicable, the groups and tags belonging to the student.
 2. If the name or NUSNET ID is not provided, the user will be prompted to enter them via an error message.
 3. The ID is cross-referenced with the current students in the database, and an error is thrown if the student to add has the same ID as a pre-existing student.
 4. If the student to add has a unique NUSNET ID, the groups, if provided, will be parsed individually.
     * If the provided group exists, the student will be added into that group.
     * If the provided group does not exist, a new group will be added, and the student will be added into that group subsequently.
-5. A new `Student` object is created with the given name, NUSNET ID, groups, and tags.
+5. A new `Student` object is created with the given name, NUSNET ID, groups, and tags and added into the database.
 
 
-The following activity diagram summarises what happens when a user executes the `addstudent` command to add a new student. In the case where the student is not added, an error message will be displayed with the reason.
+The following activity diagram summarizes what happens when a user executes the `addstudent` command to add a new student. In the case where the student is not added, an error message will be displayed with the reason.
 
 ![AddStudentActivityDiagram](images/AddStudentActivityDiagram.png)
 
-The following sequence diagram summarises what happens when the user inputs an `addstudent` command together with the name and NUSNET ID of the student to be added.
+The following sequence diagram summarizes what happens when the user inputs an `addstudent` command together with the name and NUSNET ID of the student to be added.
 
 ![AddStudentSequenceDiagram](images/AddStudentSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram. This is also applicable to other sequence diagrams in this guide.
 </div>
 
 ### Creating a new group
@@ -214,12 +215,12 @@ The `addgroup` feature allows users to create new groups, as well as specify stu
 <div markdown="span" class="alert alert-info">:information_source: **Note:** In the case where there are more than one students matched because they share the same name, an error message will be displayed to the user. The user will then have to specify the student to be added using his/her NUSNET ID.
 </div>
 
-The following activity diagrams summarises what happens when a user executes the `addgroup` command to add a new group. In the case where the group is not added, an error message will be displayed with the reason.
+The following activity diagrams summarizes what happens when a user executes the `addgroup` command to add a new group. In the case where the group is not added, an error message will be displayed with the reason.
 
 ![AddGroupActivityDiagram](images/AddGroupActivityDiagram.png)
 ![AddStudentToGroupActivityDiagram](images/AddStudentsToGroupActivityDiagram.png)
 
-The following sequence diagram summarises what happens when the user inputs an `addgroup` command together with a student to be added.
+The following sequence diagram summarizes what happens when the user inputs an `addgroup` command together with a student to be added.
 
 ![AddGroupSequenceDiagram](images/AddGroupSequenceDiagram.png)
 ![AddGroupToModelSequenceDiagram](images/AddGroupToModelSequenceDiagram.png)
@@ -240,11 +241,11 @@ The `addalloc` feature allows users to allocate a student into a group.
 <div markdown="span" class="alert alert-info">:information_source: **Note:** In the case where there are more than one students matched because they share the same name, an error message will be displayed to the user. The user will then have to specify the student to be added using his/her NUSNET ID.
 </div>
 
-The following activity diagram summarises what happens when a user executes the `addalloc` command to allocate a student into a group. In the case where the student is not added into the group, an error message will be displayed with the reason.
+The following activity diagram summarizes what happens when a user executes the `addalloc` command to allocate a student into a group. In the case where the student is not added into the group, an error message will be displayed with the reason.
 
 ![AddAllocActivityDiagram](images/AddAllocActivityDiagram.png)
 
-The following sequence diagram summarises what happens when the user inputs an `addalloc` command together with a group and a student, specified by name, to be allocated.
+The following sequence diagram summarizes what happens when the user inputs an `addalloc` command together with a group and a student, specified by name, to be allocated.
 
 ![AddAllocSequenceDiagram](images/AddAllocSequenceDiagram.png)
 ![AddAllocToModelSequenceDiagram](images/AddAllocToModelSequenceDiagram.png)
@@ -265,11 +266,11 @@ The `addscore` feature allows users to add score for an assessment of a student.
 <div markdown="span" class="alert alert-info">:information_source: **Note:** In the case where there are more than one students matched because they share the same name, an error message will be displayed to the user. The user will then have to specify the student to be added using his/her NUSNET ID.
 </div>
 
-The following activity diagram summarises what happens when a user executes the `addscore` command to add score for an assessment of a student. In the case where the score is not added/updated, an error message will be displayed with the reason.
+The following activity diagram summarizes what happens when a user executes the `addscore` command to add score for an assessment of a student. In the case where the score is not added/updated, an error message will be displayed with the reason.
 
 ![AddScoreActivityDiagram](images/AddScoreActivityDiagram.png)
 
-The following sequence diagram summarises what happens when the user inputs an `addscore` command together with an assessment, a student, specified by name, and a score to be added.
+The following sequence diagram summarizes what happens when the user inputs an `addscore` command together with an assessment, a student, specified by name, and a score to be added.
 
 ![AddScoreSequenceDiagram](images/AddScoreSequenceDiagram.png)
 ![AddScoreToModelSequenceDiagram](images/AddScoreToModelSequenceDiagram.png)
@@ -280,7 +281,7 @@ The `search` feature allows user to filter student list by name, NUSNET ID, grou
 
 #### How the `search` command works
 
-The following sequence diagram summarises what happens when the user inputs an `search` command together with a name to be searched for.
+The following sequence diagram summarizes what happens when the user inputs an `search` command together with a name to be searched for.
 
 ![SearchSequenceDiagram](images/SearchSequenceDiagram.png)
 
@@ -301,7 +302,7 @@ each with different implementation of the `test(Student student)` function.
 * `TagContainsKeywordsPredicate`: checks if the tag of student contains any word in the given keywords.
   Partial search is supported. e.g. `beginner` will match `beginners`.
 
-The following activity diagrams summarises what happens when a user executes the `search` command to search for students with different filters.
+The following activity diagrams summarizes what happens when a user executes the `search` command to search for students with different filters.
 
 ![SearchActivityDiagram](images/SearchActivityDiagram.png)
 
@@ -327,7 +328,7 @@ The `import` feature allows users to load data as specified in the provided CSV 
 
 #### How the `import` command works
 
-The following activity diagram summarises what happens when a user executes the `import` command to import a CSV data file. In the case where the file is not imported, an error message will be displayed with the reason.
+The following activity diagram summarizes what happens when a user executes the `import` command to import a CSV data file. In the case where the file is not imported, an error message will be displayed with the reason.
 
 ![ImportCommandActivityDiagram](images/ImportActivityDiagram.png)
 
@@ -360,18 +361,18 @@ The `show` feature allows users to show the performance analysis of a student, a
 <div markdown="span" class="alert alert-info">:information_source: **Note:** In the case where the performance analysis of a student is requested by identity and there are more than one students matched because they share the same name, an error message will be displayed to the user. The user will then have to specify the student to be added using his/her NUSNET ID.
 </div>
 
-The following activity diagrams summarise what happens when a user executes the `show` command to show the performance analysis of a student, a group or the cohort in an assessment. In the case where the display is not presented successfully, an error message will be displayed with the reason.
+The following activity diagrams summarize what happens when a user executes the `show` command to show the performance analysis of a student, a group or the cohort in an assessment. In the case where the display is not presented successfully, an error message will be displayed with the reason.
 
 ![ShowActivityDiagram](images/ShowActivityDiagram.png)
 ![ShowStudentDiagram](images/ShowStudentActivityDiagram.png)
 ![ShowStudentsActivityDiagram](images/ShowStudentsActivityDiagram.png)
 
-The following sequence diagram summarises what happens when the user inputs an `show` command together with a student specified by name.
+The following sequence diagram summarizes what happens when the user inputs an `show` command together with a student specified by name.
 
 ![ShowSequenceDiagram](images/ShowSequenceDiagram.png)
 ![ShowStatsFromModelSequenceDiagram](images/ShowStatsFromModelSequenceDiagram.png)
 
-### Setting customised aliases for commands
+### Setting customized aliases for commands
 
 The `alias` feature allows users to define their own aliases for commands. This is useful to shorten the input for commands that the user uses often. 
 
@@ -383,7 +384,7 @@ An alias contains two strings: An `aliasWord` which is the new user-defined word
 Parsing of an alias command follows the following steps:
 1. The alias word is checked to ensure that it is one word long.
 1. The alias word is also checked to ensure that it does not overlap with any default command word. This is to prevent the re-mapping of any default command words and potentially losing the functionality of the application.
-1. The command word is checked for validity by attempting to parse the command word. If the parser does not recognise the command word, it is not valid.
+1. The command word is checked for validity by attempting to parse the command word. If the parser does not recognize the command word, it is not valid.
 1. If the command word is an alias, it is replaced with the command word that the alias maps to.
 1. The new `Alias` and `AliasCommand` is created, and executed.
 1. The alias is added to both the parser, and the model (so that it can be saved in the `UserPrefs`)
@@ -517,7 +518,7 @@ Adding and editing data fields:
 | `* * *`  | CS1101S Professor                          | Add a new assessment        | Keep track of assessment scores of students           |
 | `* * *`  | CS1101S Professor                          | Add a new student        | Add a new student without having to make a new file               |
 | `* * *`  | CS1101S Professor                          | Allocate a student into existing group       | Allocate groupings without having to make a new file                  |
-| `* * *`  | CS1101S Professor                          | Organise students into groups      | Encourage peer learning          |
+| `* * *`  | CS1101S Professor                          | Organize students into groups      | Encourage peer learning          |
 | `* *`  | CS1101S Professor | Remove a specific student   | Update the system accordingly when a student drops the module  |
 | `* *`  | CS1101S Professor | Annotate a student with a tag  | See categories of students quickly |
 | `* *`  | CS1101S Professor | Add remarks to particular students | Be aware of any special conditions the student is facing |
@@ -807,7 +808,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: An alias `example` exists. 
    
-   2. Test case: `alias -c example -as example`<br> Expected: Removes the alias `example`. `example` will no longer be recognised as a command.
+   2. Test case: `alias -c example -as example`<br> Expected: Removes the alias `example`. `example` will no longer be recognized as a command.
 
 3. Deleting an alias unsuccessfully.
 
@@ -853,8 +854,8 @@ We also managed to keep the code coverage reasonably high at 76%, and there was 
 
 The following features were relatively hard to implement:
 1. JavaFX Charts are a part of the JavaFX library which we had to learn how to use from scratch. However, it was an essential part of our goals for the application.
-    * It was not easy to customise the chart styles (such as the colour scheme) to fit with the overall design of the application.
-    * Many things about the format of the charts were difficult to customise, such as the direction and layout of axis labels.
+    * It was not easy to customize the chart styles (such as the colour scheme) to fit with the overall design of the application.
+    * Many things about the format of the charts were difficult to customize, such as the direction and layout of axis labels.
 
 1. Aliases were deceptively hard to implement, and took more time than expected.
     * Even though Jonas implemented an alias feature for his iP, the implementation had to be completely different since the parser was using a completely different design.
@@ -872,7 +873,7 @@ The following features were relatively hard to implement:
 
 The following features were scrapped due to the high difficulty or error-prone nature of their implementations.
 1. Allowing the user to specify their file path to export data or graphs
-    * From the feedback received from the PE-D, we realised how easy it was to exploit the ability to specify your file path through user input.
+    * From the feedback received from the PE-D, we realized how easy it was to exploit the ability to specify your file path through user input.
     * One problem was how different OSes handled file paths. Some paths were valid only on some OSes, and checking the user input was non-trivial.
     * Java's `Path` and `File` felt insufficient to properly check all possible user inputs for validity. Through testing, it seemed like some invalid file names were still leaking through any checks we had implemented.
     * These problems were discovered too late to settle with a good, bug-free solution. As such, we decided to drop the ability for users to specify files to write to.
@@ -880,7 +881,7 @@ The following features were scrapped due to the high difficulty or error-prone n
     
 2. Commands longer than one word in length
     * Initially, `addstudent` was `add student` (the same goes for other similar commands in the `add` family). This required some minor tweaking of the parser which was relatively straightforward.
-    * However, when it came to implementing aliases, we realised that it was difficult to ensure that the aliases don't overlap with the multiworded commands without drastically changing the parser.
+    * However, when it came to implementing aliases, we realized that it was difficult to ensure that the aliases don't overlap with the multi-worded commands without drastically changing the parser.
     * Thankfully, the simple solution was to just enforce everything to be one word long.
 
 3. Allowing non-alphanumeric characters in student names
