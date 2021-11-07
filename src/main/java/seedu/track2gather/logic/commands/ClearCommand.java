@@ -19,8 +19,8 @@ public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
     public static final String MESSAGE_SUCCESS = "Contacts with completed SHN periods have been cleared. "
-            + "Note that SHN periods with end dates that fall on the current day are not cleared.\n"
-            + MESSAGE_PREDICATE_SHOW_ALL_PERSONS;
+        + "Note that SHN periods with end dates that fall on the current day are not cleared.\n"
+        + MESSAGE_PREDICATE_SHOW_ALL_PERSONS;
 
     private Clock clock;
 
@@ -52,5 +52,12 @@ public class ClearCommand extends Command {
             }
         }
         return new CommandResult(MESSAGE_SUCCESS);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+            || (other instanceof ClearCommand // instanceof handles nulls
+            && clock.equals(((ClearCommand) other).clock)); // state check
     }
 }
