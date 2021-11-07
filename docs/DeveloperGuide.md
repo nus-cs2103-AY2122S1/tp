@@ -1005,7 +1005,7 @@ Prerequisites: The tests for finding patients uses the sample data from `SampleD
 
 
 ### Deleting a patient  <a name="delete-patient-manual-testing"/>
-1. Deleting a patient while all doctors are being shown
+1. Deleting a patient while all patients are being shown
     1. Prerequisites: `toggle` to the `Patients` tab. List all patients using the `list` command. There must be multiple patients. 
 
     2. Test case: `delete 1`<br>
