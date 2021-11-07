@@ -1287,7 +1287,7 @@ Use case ends.
   
   Use case ends.
 
-**Use case: UC14 - Payment**
+**Use case: UC15 - Payment**
 
 1. User requests to view students.
 2. User requests to view lessons of a particular student.
