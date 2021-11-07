@@ -16,8 +16,8 @@ title: Developer Guide
 * Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 * Original project: [AddressBook Level-3](https://se-education.org/addressbook-level3) project created as part of the [SE-EDU](https://se-education.org) initiative
 * Application logo: Inspired by [Source Academy](https://sourceacademy.nus.edu.sg/)
-* Code snippet for getting jar file directory: Taken from [this post](https://stackoverflow.com/questions/320542/how-to-get-the-path-of-a-running-jar-file)
-
+* Code snippet for getting jar file directory: Taken from [this Stackoverflow post](https://stackoverflow.com/questions/320542/how-to-get-the-path-of-a-running-jar-file)
+* PlantUML sprite for rake symbol: Taken from [this PlantUML forum post](https://forum.plantuml.net/195/is-there-any-support-for-subactivity-or-the-rake-symbol)
 
 <br>
 
@@ -176,6 +176,7 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Adding a student
 
+
 The `addstudent` feature adds a student with the provided name and NUSNET ID into the database. If the student comes with optionally specified groups and tags, these fields will be added accordingly.
 ### How the `addstudent` feature works
 1. The user specifies the student name, NUSNET ID, and if applicable, the groups and tags the student has too.
@@ -185,6 +186,7 @@ The `addstudent` feature adds a student with the provided name and NUSNET ID int
     * If the provided group exists, the student will be added into that group.
     * If the provided group does not exist, a new group will be added, and the student will be added into that group subsequently.
 5. A new `Student` object is created with the given name, NUSNET ID, groups, and tags.
+
 
 The following activity diagram summarises what happens when a user executes the `addstudent` command to add a new student. In the case where the student is not added, an error message will be displayed with the reason.
 
@@ -209,7 +211,7 @@ The `addgroup` feature allows users to create new groups, as well as specify stu
    * If there is one and only one match, the student is added to the group.
 4. The group is added to the application if Step 3 completes without any exceptions.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** In the case where there are more than one students matched because they share the same name, an error message will be displayed to the user. The user will then have to specify the student to be added using his/her student ID.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** In the case where there are more than one students matched because they share the same name, an error message will be displayed to the user. The user will then have to specify the student to be added using his/her NUSNET ID.
 </div>
 
 The following activity diagrams summarises what happens when a user executes the `addgroup` command to add a new group. In the case where the group is not added, an error message will be displayed with the reason.
@@ -220,6 +222,7 @@ The following activity diagrams summarises what happens when a user executes the
 The following sequence diagram summarises what happens when the user inputs an `addgroup` command together with a student to be added.
 
 ![AddGroupSequenceDiagram](images/AddGroupSequenceDiagram.png)
+![AddGroupToModelSequenceDiagram](images/AddGroupToModelSequenceDiagram.png)
 
 ### Adding a student into a group
 
@@ -234,7 +237,7 @@ The `addalloc` feature allows users to allocate a student into a group.
    * If there are multiple matched students, the allocation is not made successfully, and the student list is updated with all matched students.
 4. The student is allocated into the group.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** In the case where there are more than one students matched because they share the same name, an error message will be displayed to the user. The user will then have to specify the student to be added using his/her student ID.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** In the case where there are more than one students matched because they share the same name, an error message will be displayed to the user. The user will then have to specify the student to be added using his/her NUSNET ID.
 </div>
 
 The following activity diagram summarises what happens when a user executes the `addalloc` command to allocate a student into a group. In the case where the student is not added into the group, an error message will be displayed with the reason.
@@ -259,7 +262,7 @@ The `addscore` feature allows users to add score for an assessment of a student.
    * If there are multiple matched students, the update is not made successfully, and the student list is updated with all matched students.
 4. The score is updated in the assessment of the student.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** In the case where there are more than one students matched because they share the same name, an error message will be displayed to the user. The user will then have to specify the student to be added using his/her student ID.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** In the case where there are more than one students matched because they share the same name, an error message will be displayed to the user. The user will then have to specify the student to be added using his/her NUSNET ID.
 </div>
 
 The following activity diagram summarises what happens when a user executes the `addscore` command to add score for an assessment of a student. In the case where the score is not added/updated, an error message will be displayed with the reason.
@@ -354,7 +357,7 @@ The `show` feature allows users to show the performance analysis of a student, a
    * If there are multiple matched students, the update is not made successfully, and the student list is updated with all matched students.
 4. The performance analysis of the student, the group or the cohort in an assessment is displayed.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** In the case where the performance analysis of a student is requested by identity and there are more than one students matched because they share the same name, an error message will be displayed to the user. The user will then have to specify the student to be added using his/her student ID.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** In the case where the performance analysis of a student is requested by identity and there are more than one students matched because they share the same name, an error message will be displayed to the user. The user will then have to specify the student to be added using his/her NUSNET ID.
 </div>
 
 The following activity diagrams summarise what happens when a user executes the `show` command to show the performance analysis of a student, a group or the cohort in an assessment. In the case where the display is not presented successfully, an error message will be displayed with the reason.
@@ -584,7 +587,7 @@ Others:
 
 **MSS**
 
-1.  User requests to create a new group and enters the group name and optionally the students' names or student IDs.
+1.  User requests to create a new group and enters the group name and optionally the students' names or NUSNET IDs.
 2.  Source Control creates the group with the specified students.
 
     Use case ends.
@@ -600,7 +603,7 @@ Others:
     
 * 1b. User specifies student names which match with multiple students in the Source Control database.
 
-    * 1b1. Source Control shows the list of students with matching names, and prompts the user to resolve the conflict by specifying the student ID instead.
+    * 1b1. Source Control shows the list of students with matching names, and prompts the user to resolve the conflict by specifying the NUSNET ID instead.
       
       Use case resumes at step 1.
 
@@ -609,7 +612,7 @@ Others:
 
 **MSS**
 
-1.  User requests to view the performance of a specified student by providing the index of the student in the list, or the student's name or student ID.
+1.  User requests to view the performance of a specified student by providing the index of the student in the list, or the student's name or NUSNET ID.
 2.  Source Control displays a line chart showing the specified student's performance against the cohort performance for each assessment.
     Use case ends.
 
