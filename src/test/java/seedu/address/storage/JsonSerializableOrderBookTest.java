@@ -23,10 +23,10 @@ public class JsonSerializableOrderBookTest {
 
     @Test
     public void toModelType_typicalOrderFile_success() throws Exception {
+        OrderBook typicalOrdersOrderBook = TypicalOrders.getTypicalOrderBook();
         JsonSerializableOrderBook dataFromFile = JsonUtil.readJsonFile(TYPICAL_ORDERS_FILE,
                 JsonSerializableOrderBook.class).get();
         OrderBook orderBookBookFromFile = dataFromFile.toModelType();
-        OrderBook typicalOrdersOrderBook = TypicalOrders.getTypicalOrderBook();
         assertEquals(orderBookBookFromFile, typicalOrdersOrderBook);
     }
 

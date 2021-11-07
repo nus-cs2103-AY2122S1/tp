@@ -4,9 +4,15 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.SortOrdersCommandTest.AMOUNT_ASC;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalOrders.SALESORDER4;
+import static seedu.address.testutil.TypicalOrders.getTypicalOrderBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalTasks.getTypicalTaskBook;
 
 import java.util.Arrays;
 import java.util.function.Predicate;
@@ -19,6 +25,9 @@ import seedu.address.ModelStub;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.order.Order;
 import seedu.address.model.task.Task;
 import seedu.address.testutil.OrderBuilder;
@@ -33,8 +42,8 @@ public class DeleteOrderCommandTest {
 
         CommandResult commandResult = new DeleteOrderCommand(targetIndex).execute(modelStub);
 
-        assertEquals(String.format(DeleteOrderCommand.MESSAGE_DELETE_ORDER_SUCCESS, testOrder),
-                commandResult.getFeedbackToUser());
+        String expectedMessage = String.format(DeleteOrderCommand.MESSAGE_DELETE_ORDER_SUCCESS, testOrder);
+        assertEquals(expectedMessage, commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(), modelStub.listWithOneOrder);
     }
 
@@ -46,6 +55,27 @@ public class DeleteOrderCommandTest {
 
         assertThrows(CommandException.class, Messages.MESSAGE_INVALID_ORDER_DISPLAYED_INDEX, (
                 ) -> deleteOrderCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_sortedOrders_remainsSorted() {
+        Model model = new ModelManager(getTypicalAddressBook(), getTypicalTaskBook(),
+                getTypicalOrderBook(), new UserPrefs());
+
+        Model expectedModel = new ModelManager(getTypicalAddressBook(), getTypicalTaskBook(),
+                getTypicalOrderBook(), new UserPrefs());
+
+        Order toDelete = SALESORDER4;
+        DeleteOrderCommand command = new DeleteOrderCommand(Index.fromOneBased(5));
+
+        model.sortOrderList(AMOUNT_ASC);
+
+        expectedModel.deleteOrder(toDelete);
+        expectedModel.sortOrderList(AMOUNT_ASC);
+
+        String expectedMessage = String.format(DeleteOrderCommand.MESSAGE_DELETE_ORDER_SUCCESS, toDelete);
+
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
 
     @Test
