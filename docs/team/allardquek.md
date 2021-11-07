@@ -1,6 +1,5 @@
 ---
-layout: page 
-title: Allard Quek's Project Portfolio Page
+layout: page title: Allard Quek's Project Portfolio Page
 ---
 
 [ProgrammerError](https://github.com/AY2122S1-CS2103-F09-3/tp) is a desktop application which helps CS2100 tutors manage
@@ -33,9 +32,9 @@ project. ([View Reposense](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/#b
       for each class
     - Justification: So that the TA can track their progress in marking their students' labs conveniently, especially
       when they have many students
-    - Highlights: This feature required a unique solution to overcome the project constraint of not using a database
-      by using a TreeMap to store and retrieve students' lab data. Additionally, this feature required
-      learning more about javafx components and CSS properties to make the dashboard interface more user-friendly.
+    - Highlights: This feature required a unique solution to overcome the project constraint of not using a database by
+      using a TreeMap to store and retrieve students' lab data. Additionally, this feature required learning more about
+      javafx components and CSS properties to make the dashboard interface more user-friendly.
 
 #### Other Contributions
 
