@@ -52,7 +52,7 @@ public class SlotCard extends UiPart<Region> {
         this.day = day;
         this.slot = slot;
         this.stafflist = stafflist;
-        shiftName.setText(slot.toString());
+        shiftName.setText("Shift-" + slot.getOrder());
         ObservableList<Person> filteredList =
                 stafflist.filtered(p -> p.isWorking(day, slot.getOrder(), period));
         staffWorkingList.setItems(filteredList);

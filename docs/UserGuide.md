@@ -213,6 +213,29 @@ If your changes to the data file makes its format invalid, Staff'd will discard 
 
 ### Basic management of Staff Details
 
+
+#### Viewing overall staff statistics : `stats`
+
+Command to display the staff statistics for all the staff. Displays the total working hour
+and salary for this month.
+
+Format: `stats`
+
+#### Viewing individual staff statistics: `istaff`
+
+Command to display the staff statistics for an individual staff or a group of staffs for this month.
+If the today is 2021-11-01, the statistics will be shown for the month of november.
+
+Format:
+
+`istaff [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]...`
+
+Example:
+
+`istaff -i 1`
+`istaff -p 999`
+`istaff -n Joe`
+
 #### Adding a staff : `add`
 
 Adds a staff to the system. 
@@ -242,18 +265,14 @@ as present for all shifts.
 * If only one date input is provided, the next occurrence of that shift, after the provided date is marked. For instance,
   if the shift is on Monday 1/11/2021, with `da/2021-10-27` as the date input, the shift on 1/10/2021 would be marked.
 * Will not indicate if there is a shift in the period provided, even if there isn't a shift, the staff will be marked absent for that period.
+* Mark command marks that the staff is absent for a shift, and does not remove the shift from being tracked. Use [deleteShift](#deleting-a-shift-from-a-staff--deleteshift) instead if the shift is to be removed from the schedule entirely.
 
 Format:  
 
 Marking a period:  
 
-`mark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [da/DATE] [da/END DATE]`  
+`mark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [da/START_DATE] [da/END DATE]`  
 
-
-Possible to mark a single date:
-
-`mark -t TAG da/DATE`  
-`mark -n NAME da/DATE`
 
 Examples:  
 `mark -i 1 da/2020-01-03 da/2021-01-03`  
@@ -271,7 +290,7 @@ The format of the input date is in: `YYYY-MM-DD`.
   if the shift is on Monday 1/11/2021, with `da/2021-10-27` as the date input, the shift on 1/10/2021 would be unmarked.
 
 Format:  
-`unmark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [da/DATE] [da/END DATE]`
+`unmark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [da/START_DATE] [da/END_DATE]`
 
 Examples:  
 `unmark -i 1 da/2020-01-03 da/2021-01-03`  
@@ -552,6 +571,7 @@ Action | Format, Examples
 **Delete** | `delete -n NAME` <br> `delete -i INDEX` <br> `delete -r role` <br> `delete -s STATUS`
 **Edit** | `edit -n NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [$/SALARY] [s/STATUS] [r/ROLE]... [t/TAG]...` <br> `edit -i INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [$/SALARY] [s/STATUS] [r/ROLE]... [t/TAG]...`
 **Find** | `find -n KEYWORD [MORE_KEYWORDS] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]`<br> `find -i [INDEX]` <br> e.g., `find -n James Jake`
+**View staff(s) statistics** | `istaff [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]...`
 **View staff schedule** | `viewSchedule [-n NAME] [-i INDEX] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [-t TAG]... [da/START_DATE] [da/END_DATE]`
 **Add staff to shift** | `addShift -n NAME d/DAYOFWEEK-SHIFTNUMBER [da/START_DATE] [da/END_DATE]` <br> `addShift -i INDEX d/DAYOFWEEK-SHIFTNUMBER [da/START_DATE] [da/END_DATE]`
 **Swap shifts** | `swapShift -n NAME -n NAME d/day-shift_number d/day-shift_number [da/START_DATE] [da/END_DATE]` <br> `swapShift -n NAME d/day-shift_number -n NAME d/day-shift_number [da/START_DATE] [da/END_DATE]`
@@ -563,6 +583,7 @@ Action | Format, Examples
 **Change schedule** | `change da/START_DATE`
 **Set role requirements** | `setRoleReq r/ROLE-NUMBER_REQUIRED...`
 **Set default shift timings** | `setDefaultShiftTimings MORNING_START_TIME MORNING_END_TIME AFTERNOON_START_TIME AFTERNOON_END_TIME`
+**View overall statistics** | `stats`
 **List** | `list`
 **Tab** | `tab`
 **Help** | `help`
