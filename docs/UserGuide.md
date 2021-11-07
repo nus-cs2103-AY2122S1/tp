@@ -29,9 +29,9 @@ This product will make recruiters’ lives easier through categorisation and fil
     + [Adding an applicant: `add`](#adding-an-applicant-add)
     + [Editing an applicant: `edit`](#editing-an-applicant--edit)
     + [Listing all applicants : `list`](#listing-all-applicants--list)
+    + [Deleting an applicant : `delete`](#deleting-an-applicant--delete)
     + [Finding an applicant : `find`](#finding-an-applicant--find)
     + [Filtering interviews : `filter_interview`](#filtering-interviews--filter_interview)
-    + [Deleting an applicant : `delete`](#deleting-an-applicant--delete)
     + [Showing search terms : `show`](#showing-search-terms--show)
     + [Marking an applicant : `mark`](#marking-an-applicant--mark)
     + [Unmarking an applicant : `unmark`](#unmarking-an-applicant--unmark)
@@ -327,6 +327,31 @@ Shows a list of all applicants in RecruitIn.
 Format: `list`
 
 
+### Deleting an applicant : `delete`
+[Table of contents](#table-of-contents)
+
+The `delete` command deletes applicants by their index from the applicants list in RecruitIn.
+
+Format: `delete INDEX...`
+
+***Note:*** *As mentioned in [Basic Command Format](#basic-command-format), you can delete multiple applicants by including one or more indexes here.*
+
+* The `INDEX` refers to the index number shown in the displayed applicants list.
+* `INDEX` **must be a positive integer** such as 1, 2, 3, …​
+* `INDEX` in RecruitIn **starts from one**.
+*  You should type at least one `INDEX`. (i.e. `delete ` is not a valid command)
+*  You should not type duplicate `INDEX`s. (i.e. `delete 2 2` is not a valid command)
+* You should not type`INDEX` which exceeds the total number of applicants in the displayed applicants list.
+
+Examples:
+* After you execute the command `list`, `delete 1` deletes the 1st applicant listed in RecruitIn.
+* After you execute the command `find n/John`, `delete 1` deletes the 1st applicant in the results of the `find` command.
+* After you execute the command `list`, `delete 1 2` deletes the 1st and 2nd applicants listed in RecruitIn.
+
+Before: ![DeleteBefore](images/features/DeleteBefore.png)
+After: ![DeleteAfter](images/features/DeleteAfter.png)
+
+
 ### Finding an applicant : `find`
 [Table of contents](#table-of-contents)
 
@@ -412,32 +437,6 @@ Examples:
 * If you type `filter_interview future` or 
  `filter_interview fUTURE` in the command box, you are able to see applicants with interviews that are after [29th October 2021, 1600].
   
-
-### Deleting an applicant : `delete`
-[Table of contents](#table-of-contents)
-
-The `delete` command deletes applicants by their index from the applicants list in RecruitIn.
-
-Format: `delete INDEX...`
-
-***Note:*** *As mentioned in [Basic Command Format](#basic-command-format), you can delete multiple applicants by including one or more indexes here.*
-
-* The `INDEX` refers to the index number shown in the displayed applicants list.
-* `INDEX` **must be a positive integer** such as 1, 2, 3, …​
-* `INDEX` in RecruitIn **starts from one**.
-*  You should type at least one `INDEX`. (i.e. `delete ` is not a valid command)
-*  You should not type duplicate `INDEX`s. (i.e. `delete 2 2` is not a valid command)
-* You should not type`INDEX` which exceeds the total number of applicants in the displayed applicants list.
-
-Examples:
-* After you execute the command `list`, `delete 1` deletes the 1st applicant listed in RecruitIn.
-* After you execute the command `find n/John`, `delete 1` deletes the 1st applicant in the results of the `find` command.
-* After you execute the command `list`, `delete 1 2` deletes the 1st and 2nd applicants listed in RecruitIn.
-  
-Before: ![DeleteBefore](images/features/DeleteBefore.png)
-After: ![DeleteAfter](images/features/DeleteAfter.png)
-
-
 
 ### Showing search terms : `show`
 [Table of contents](#table-of-contents)
