@@ -50,7 +50,7 @@ public class TeditCommand extends Command {
     private final EditTaskDescriptor editTaskDescriptor;
 
     /**
-     * @param targetTaskIndex    of the task in the filtered task list to edit.
+     * @param targetTaskIndex of the task in the filtered task list to edit.
      * @param editTaskDescriptor details to edit the task with.
      */
     public TeditCommand(Index targetTaskIndex, EditTaskDescriptor editTaskDescriptor) {

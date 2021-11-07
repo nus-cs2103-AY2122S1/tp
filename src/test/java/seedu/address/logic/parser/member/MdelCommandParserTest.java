@@ -1,4 +1,4 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.member;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -8,7 +8,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.member.MdelCommand;
-import seedu.address.logic.parser.member.MdelCommandParser;
+import seedu.address.logic.parser.CliSyntax;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
