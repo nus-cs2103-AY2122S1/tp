@@ -30,12 +30,15 @@ Given below are my contributions to the project.
 
 * **Project management**:
   * Reviewed and merged Pull Requests of other teammates
+  * Contributed to on-feature-specific sections in the DG [\#197](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/197)
   * Enhanced general code to better comply with coding standards [\#170](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/170)
   
 
 * **Enhancements to existing features**:
   * Upgraded the `help` command to open the User Guide in the browser
   * Tweaked the in-built help window to follow the overall colour scheme of the app [\#70](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/70/files)
+  * Updated `edit` and `add` commands [/#45](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/45/files) [\#57](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/57)
+  * Wrote additional tests for existing and new features to increase coverage. [\#98](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/98/files) [\#57](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/57/files)
 
 
 * **Documentation**:
@@ -45,7 +48,7 @@ Given below are my contributions to the project.
     * Assisted with the creation of the Table of Content [\#80](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/80/files)
 
   * Developer Guide:
-    * Added implementation details of the `category` feature:[\#75](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/75)
+    * Added implementation details of the `category` and navigating input history features:[\#75](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/75)
     * Added use cases [\#76](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/76).
 
 

@@ -164,8 +164,8 @@ The category feature adds to the attributes of the `Contact` object. Similar to 
 it can be added and edited by calling the relevant `add` and `edit` commands by using `c/` prefix.
 
 Additionally, it implements the following operations:
-* `isValidCategory()`  — Determines if the input is a valid category
-* `stringToCategory()`  — Converts the input into a constant
+* `isValidCategory()`  —  Determines if the input is a valid category
+* `stringToCategory()`  —  Converts the input into a constant
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The category field is compulsory and requires
 one of the available category codes (att, fnb, com, acc, tpt, oth). In the absence or invalidity of the category code,
@@ -636,7 +636,7 @@ The Export feature works such that it export the contacts specified into a text 
 It is implemented with the following operation:
 
 * `ExportCommandIndex#execute()`  —  Exports the contacts at the specified index in the current list.
-* * `ExportCommandAll#execute()`  —  Exports all the contacts in the current list.
+* `ExportCommandAll#execute()`  —  Exports all the contacts in the current list.
 
 The feature makes use of an `ExportStorage` class, which handles the manipulation of the aforementioned exported text file. It is implemented inside the Storage component and is implemented using a singleton design pattern. This class has an `addToStorage` write method which is called by the `exportContact()` method in the read-only `AddressBook` model.
 
@@ -680,6 +680,37 @@ The following activity diagram summarises what happens when a Tour Guide execute
 * **Alternative 2:** Single `ExportCommand` takes an index as argument and is repeatedly called for exporting all contacts
     * Pros: All export commands are handled in one class.
     * Cons: The one ExportCommandParser will be extremely complex, has to handle parsing as well as recursively calling another `ExportCommand` for each index.
+
+### Navigating Input History Feature
+
+#### Implementation
+The navigating input history feature works by storing an arraylist within the class `InputHistory` which stores and retrieves string commands. It is implemented with the following operations:
+* `getInstance()`  — Retrieves the singleton object InputHistory.
+* `addToHistory(String inputCommand)`  — Adds the string "inputCommand" into the list containing all past commands.
+* `resetRecentIndex()`  — Resets the position of the pointer(determining current command in the array) to the size of the array.
+* `getPreviousInput()`  — Gets the previous input based on the current pointer in the class `InputHistory`
+* `getNextInput()`  — Gets the next input based on the current pointer in the class `InputHistory`
+* `isNotLeastRecentInput()`  — Used to determine if pointer within the class `InputHistory` is not pointing to the last item within its list storing previous commands.
+* `isNotMostRecentInput()`  — Used to determine if pointer within the class `InputHistory` is not pointing to the first item within its list storing previous commands.
+
+`InputHistory` class will communicate with the class `CommandBox` to display the requested commands.
+
+The following activity diagrams gives an overview of how `InputHistory` works when the User presses the up and down arrow keys to navigate through their input history:
+![Activity Diagram for Up_Arrow](images/InputHistoryUpArrowActivityDiagram.png)
+![Activity Diagram for Down_Arrow](images/InputHistoryDownArrowActivityDiagram.png)
+
+#### Design considerations:
+
+**Aspect: How `InputHistory` is created and accessed.**
+
+**Alternative 1 (current choice):** Adopt the Singleton pattern as the design pattern for `InputHistory`
+* Pros: Provides an easy way to access `InputHistory` from anywhere in the code and enforces having only one `InputHistory` object.
+* Cons: Harder to test since Singleton objects carry data from one test to another.
+
+**Alternative 2:** Create the `InputHistory` object the upon initiation of WhereTourGo and save that object within the `CommandBox`.
+* Pros: Relatively easy to test
+* Cons: Higher chances of bugs due to having no limitation on the number of `InputHistory` objects
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
