@@ -943,7 +943,8 @@ testers are expected to do more *exploratory* testing.
        Expected: No contact is added due to duplicated phone number. Error details shown in the status message.
 
     1. Other incorrect add commands to try: `add <other valid params> b/<future date>`, `add <other valid params> p/hp:1200123`, `...`.
-
+       Expected: No contact is added. Error details shown in the status message.
+       
 1. Adding a contact without optional fields
     1. Prerequisites: No existing contact with phone number 98989898.
 
@@ -954,7 +955,7 @@ testers are expected to do more *exploratory* testing.
        Expected: No contact is added due to invalid email format. Error details shown in the status message.
 
     1. Other incorrect add commands to try: `add n/James! <other valid params>`, `add <one invalid param amongst other valid params>`, `...`.<br>
-       Expected: Similar to previous.
+       Expected: No contact is added. Error details shown in the status message.
 
 ### Find a contact
 1. Find a contact by name
@@ -967,7 +968,7 @@ testers are expected to do more *exploratory* testing.
        Expected: No changes made. Error details shown in the status message.
 
     1. Other incorrect untag commands to try: `find`, `find n/<non existent name>`, `...`.<br>
-       Expected: Similar to previous.
+       Expected: No changes made. Error details shown in the status message.
 
 1. Find a contact by tag
     1. Prerequisites: Multiple contacts in the list with one contact having tag name colleagues and one with tag name Colleagues.
@@ -980,7 +981,7 @@ testers are expected to do more *exploratory* testing.
        Expected: No changes made. Error details shown in the status message.
 
     1. Other incorrect untag commands to try: `find`, `find t/<non existent tag>`, `find t/<non existent tag> c/`, `...`.<br>
-       Expected: Similar to previous.
+       Expected: No changes made. Error details shown in the status message.
 
 ### Deleting a contact
 
@@ -995,7 +996,7 @@ testers are expected to do more *exploratory* testing.
       Expected: No contact is deleted. Error details are shown in the status message. The status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+      Expected: No contact is deleted. Error details are shown in the status message. The status bar remains the same.
        
 1. Deleting a contact while some contacts are being shown
     1. Prerequisites: View only some contacts using the `find` or `findAny` command. Multiple contacts in the list.
@@ -1007,7 +1008,7 @@ testers are expected to do more *exploratory* testing.
       Expected: No contact is deleted. Error details shown in the status message.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the size of the contacts that are currently being viewed).<br>
-      Expected: Similar to previous.
+      Expected: No contact is deleted. Error details shown in the status message.
 
 ### Deleting multiple contacts
 
@@ -1021,7 +1022,7 @@ testers are expected to do more *exploratory* testing.
        Expected: No contact is deleted since the end index is smaller than the start index. Error details are shown in the status message. The status bar remains the same.
 
     1. Other incorrect delete commands to try: `deletem`, `deletem -2 - -1 `, `deletem x - y`, `...` (where x is not less than y, either x or y is not a positive integer within list size currently being viewed).<br>
-       Expected: Similar to previous.
+       Expected: No contact is deleted. Error details are shown in the status message. The status bar remains the same.
 
 1. Deleting a contact while some contacts are being shown
     1. Prerequisites: View only some contacts using the `find` or `findAny` command. At least 10 contacts in the list are displayed.
@@ -1033,7 +1034,7 @@ testers are expected to do more *exploratory* testing.
        Expected: No contact is deleted since the end index is smaller than the start index. Error details are shown in the status message. The status bar remains the same.
 
     1. Other incorrect delete commands to try: `deletem`, `deletem -2 - -1 `, `deletem x - y`, `...` (where x is not less than y, either of x or y is not a positive integer within the list size currently being viewed).<br>
-       Expected: Similar to previous.
+       Expected: No changes made. Error details shown in the status message.
 
 ### Pinning a contact
 
@@ -1048,7 +1049,7 @@ testers are expected to do more *exploratory* testing.
        Expected: No changes made. Error details shown in the status message.
 
     1. Other incorrect pin commands to try: `pin`, `pin -1`, `pin x`, `...` (where x is larger than the size of the contacts that are currently being viewed).<br>
-       Expected: Similar to previous. 
+       Expected: No changes made. Error details shown in the status message.
 
 ### Unpinning a contact
 1. Unpin a contact
@@ -1062,7 +1063,7 @@ testers are expected to do more *exploratory* testing.
        Expected: No changes made. Error details shown in the status message.
 
     1. Other incorrect unpin commands to try: `unpin`, `unpin -1`, `unpin x`, `...` (where x is larger than the size of the contacts that are currently being viewed).<br>
-       Expected: Similar to previous.
+       Expected: No changes made. Error details shown in the status message.
 
 ### Tag a contact
 
@@ -1074,13 +1075,13 @@ testers are expected to do more *exploratory* testing.
        Expected: Tags added to contact at index 1. Details of the tags added to contact shown in the status message.
 
     1. Test case: `tag 2 t/<existing tag in contact at index 2>`<br>
-       Expected: No changes made. Error details shown in the status message.
+       Expected: No changes to the contact. Warning details shown in the status message.
        
     1. Test case: `tag 2 t/<tag not in contact at index 2 > t/<existing tag in contact at index 2>`<br>
         Expected: New tag is added to the contact. Warning details shown in the status message.
 
     1. Other incorrect tag commands to try: `tag`, `tag -1 t/<valid tag name>`, `tag <tag name longer than 60 characters>`, `...`.<br>
-       Expected: Similar to previous.
+       Expected: No changes to contacts. Error details in status message.
 
 ### Untag a contact
 1. Untag a contact
@@ -1094,7 +1095,7 @@ testers are expected to do more *exploratory* testing.
        Expected: No changes made. Error details shown in the status message.
        
     1. Other incorrect untag commands to try: `untag`, `untag -1 t/<valid tag name>`, `...`.<br>
-       Expected: Similar to previous.
+       Expected: No changes made. Error details shown in the status message.
 
 ### Export Mailing List Command
 1.  Export contact list 
@@ -1121,5 +1122,4 @@ testers are expected to do more *exploratory* testing.
         Expected: CONNECTIONS launches successfully with 0 contacts. 
        
     1. Other incorrect formatting of data or invalid fields: birthday to `00000000`, phone to `mynumber`, `...`
-        Expected: Similar to previous
-
+        Expected: CONNECTIONS launches successfully with 0 contacts.
