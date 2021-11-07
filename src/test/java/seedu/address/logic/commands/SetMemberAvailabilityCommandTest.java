@@ -46,7 +46,7 @@ public class SetMemberAvailabilityCommandTest {
         Availability expectedAvailability = new Availability(List.of(DayOfWeek.of(6), DayOfWeek.of(7)));
         SetMemberAvailabilityCommand command = new SetMemberAvailabilityCommand(List.of(INDEX_FIRST, INDEX_SECOND),
                 expectedAvailability);
-        String expectedNames = AMY.getName() + ", " + BOB.getName() + ", ";
+        String expectedNames = AMY.getName() + ", " + BOB.getName();
         String expectedMessage = String.format(SetMemberAvailabilityCommand.MESSAGE_SET_AVAILABILITY_SUCCESS,
                 expectedNames, expectedAvailability);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
