@@ -54,7 +54,7 @@ Given below are my contributions to the project.
   * Developer Guide:
     * Documented `Use Cases`, `Non-functional requirements` and `Glossary`. (Pull request [\#19](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/19))
     * Documented `find` and `findAny` (Pull request [\#101](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/101))
-  * Polishing (Pull request [\#205](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/205))
+  * Polished User & Developer Guide (Pull request [\#205](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/205))
   <br></br>
 
 * **Community**:
