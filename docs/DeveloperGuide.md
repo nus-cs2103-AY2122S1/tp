@@ -9,7 +9,8 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -116,10 +117,10 @@ How the parsing works:
 **Note:** Command objects which have simpler syntax, e.g. `ClearCommand`, may be created directly within the `Track2GatherParser` class without the use of a `XYZCommandParser` class.
 
 ### Model component
+
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103-W14-2/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="1000" />
-
 
 The `Model` component:
 
@@ -145,97 +146,6 @@ Classes used by multiple components are in the `seedu.Track2Gather.commons` pack
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Implementation**
-
-This section describes some noteworthy details on how certain features are implemented.
-
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedTrack2Gather`. It extends `Track2Gather` with an undo/redo history, stored internally as an `Track2GatherStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedTrack2Gather#commit()` — Saves the current Track2Gather state in its history.
-* `VersionedTrack2Gather#undo()` — Restores the previous Track2Gather state from its history.
-* `VersionedTrack2Gather#redo()` — Restores a previously undone Track2Gather state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitTrack2Gather()`, `Model#undoTrack2Gather()` and `Model#redoTrack2Gather()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedTrack2Gather` will be initialized with the initial Track2Gather state, and the `currentStatePointer` pointing to that single Track2Gather state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the contacts list. The `delete` command calls `Model#commitTrack2Gather()`, causing the modified state of the contacts list after the `delete 5` command executes to be saved in the `Track2GatherStateList`, and the `currentStatePointer` is shifted to the newly inserted Track2Gather state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitTrack2Gather()`, causing another modified Track2Gather state to be saved into the `Track2GatherStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitTrack2Gather()`, so the Track2Gather state will not be saved into the `Track2GatherStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoTrack2Gather()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous Track2Gather state, and restores Track2Gather to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial Track2Gather state, then there are no previous Track2Gather states to restore. The `undo` command uses `Model#canUndoTrack2Gather()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoTrack2Gather()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores Track2Gather to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `Track2GatherStateList.size() - 1`, pointing to the latest Track2Gather state, then there are no undone Track2Gather states to restore. The `redo` command uses `Model#canRedoTrack2Gather()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the contacts list, such as `list`, will usually not call `Model#commitTrack2Gather()`, `Model#undoTrack2Gather()` or `Model#redoTrack2Gather()`. Thus, the `Track2GatherStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitTrack2Gather()`. Since the `currentStatePointer` is not pointing at the end of the `Track2GatherStateList`, all Track2Gather states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire contacts list.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
---------------------------------------------------------------------------------------------------------------------
-
 ## **Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
@@ -257,9 +167,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefer desktop apps over other types
 * prefer CLI over GUI
 
-
 **Value proposition**: The app will manage up to a few thousand contacts, providing basic features for contact tracing personnel to organise and search through them according to personal information (limited to English names and Singaporean contact numbers and addresses), case numbers and Stay-Home-Notice (SHN) periods.
-
 
 ### User stories
 
@@ -276,7 +184,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                | update a person's personal information and SHN period without re-adding that person  | avoid re-entering existing data |
 | `* *`    | user                | update the SHN periods of all persons      | postpone or bring forward the SHN end dates according to government regulations    |
 | `* *`    | user                | remove persons whose SHN period has been completed | quickly and easily clear outdated contacts           |
-| `* * `  | user                 | find person(s) by name, phone number, case number, SHN start date or SHN end date          | locate specific person(s) without having to go through the entire list  |
+| `* *`    | user                | find person(s) by name, phone number, case number, SHN start date or SHN end date          | locate specific person(s) without having to go through the entire list  |
 | `* *`    | user                | sort contacts by name, case number, SHN start date or SHN end date | more easily browse through the contacts |
 | `* *`    | user                | see the number of search results | estimate how much additional filtering I would need to do          |
 | `* *`    | user                | view a dynamically filtered list of persons who have not been called in the current SHN enforcement session | know which persons need to be called next |
@@ -334,7 +242,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 2.
 
-
 #### Use case: UC03 - Edit details of an existing person
 
 **MSS:**
@@ -362,13 +269,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes from step 2.
 
-#### Use case: UC04 - Update SHN end dates of all persons
+#### Use case: UC04 - Shift SHN end dates of all persons
 
 **MSS:**
 
 1.  User chooses to list persons.
 2.  Track2Gather shows a list of persons.
-3.  User chooses to update the SHN end dates of all persons.
+3.  User chooses to shift the SHN end dates of all persons.
 4.  Track2Gather requests for the number of days to shift the SHN end dates.
 5.  User enters the number of days.
 6.  Track2Gather updates all persons' SHN end dates.
@@ -414,7 +321,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  User chooses to find person(s).
 4.  Track2Gather requests for the search keyword(s).
 5.  User enters the search keyword(s).
-6.  Track2Gather shows the person(s) containing keyword(s) in the field.
+6.  Track2Gather shows the matched person(s) based on the search keyword(s).
 
     Use case ends.
 
@@ -500,13 +407,13 @@ Use case ends.
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Graphical User Interface (GUI)**: Type of user interface through which users interact with electronic devices via visual indicator representations
-* **Command Line Interface (CLI)**: Type of user interface through which users interact with a system or application by typing in text (commands)
-* **Stay-Home-Notice (SHN)**: The notice involves a stipulated period consisting of a start and end date a person would have to remain in their place of residence or dedicated facility
-* **SHN enforcement mode**: Refer to [User Guide](UserGuide.md#shn-enforcement-mode)
-* **Case number**: The unique identifier assigned to each person in Track2Gather
+* **Mainstream OS**: Windows, Linux, Unix, OS-X.
+* **Private contact detail**: A contact detail that is not meant to be shared with others.
+* **Graphical User Interface (GUI)**: Type of user interface through which users interact with electronic devices via visual indicator representations.
+* **Command Line Interface (CLI)**: Type of user interface through which users interact with a system or application by typing in text (commands).
+* **Stay-Home-Notice (SHN)**: The notice involves a stipulated period consisting of a start and end date, for which a person would have to remain in their place of residence or dedicated facility.
+* **SHN enforcement mode**: Refer to [User Guide](UserGuide.md#shn-enforcement-mode).
+* **Case number**: The unique identifier assigned to each person in Track2Gather.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -523,69 +430,73 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
 
-   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file.
+      
+      Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   2. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+   2. Re-launch the app by double-clicking the jar file.
+      
+      Expected: The most recent window size and location is retained.
 
-### Adding a new Person
+### Adding a new person
 
 1. Adding a person
 
-   1. Test case: `add n/John Doe p/91234567 e/johndoe@gmail.com cn/7 ha/123 Waterloo`<br>
-       Expected: New person is added with the given details. Details of the added person shown in the
-       status message.
+   1. Test case: `add n/John Doe p/91234567 e/johndoe@gmail.com cn/7 ha/123 Waterloo`
+      
+      Expected: New person is added with the given details. Details of the added person shown in the status message.
 
-   2. Test case: `add n/Jane Doe p/98765432 e/janedoe@gmail.com cn/8 ha/123 Toronto wa/456 Toronto qa/789 Toronto sh/2000-01-01 2000-02-02 kn/Mary Jane kp/12345678 ka/555 Montreal`<br>
-       Expected: New person is added with the given details. Details of the added person shown in the 
-       status message.
+   2. Test case: `add n/Jane Doe p/98765432 e/janedoe@gmail.com cn/8 ha/123 Toronto wa/456 Toronto qa/789 Toronto sh/2000-01-01 2000-02-02 kn/Mary Jane kp/12345678 ka/555 Montreal`
+      
+      Expected: New person is added with the given details. Details of the added person shown in the status message.
 
-   3. Test case: `add n/John Doe cn/12`<br>
-      Expected: No person will be added as not all mandatory details are given. Error details shown in the status message. Status bar
-      remains the same.
+   3. Test case: `add n/John Doe cn/12`
+      
+      Expected: No person will be added as not all mandatory details are given. Error details shown in the status message. Status bar remains the same.
 
-   4. Test case: `add` <br>
-      Expected: No person will be added. Error details shown in the status message. Status bar
-      remains the same.
+   4. Test case: `add`
+      
+      Expected: No person will be added. Error details shown in the status message. Status bar remains the same.
 
-   5. Test case: `add INVALID_PREFIX/EXAMPLE`<br>
-      Expected: No person will be added. Error details shown in the status message. Status bar
-      remains the same.
+   5. Test case: `add INVALID_PREFIX/EXAMPLE`
+      
+      Expected: No person will be added. Error details shown in the status message. Status bar remains the same.
 
-   6. Test case: `add VALID_PREFIX/INVALID_INPUT`<br>
-      Expected: No person will be added. Error details shown in the status message. Status bar
-      remains the same.
+   6. Test case: `add VALID_PREFIX/INVALID_INPUT`
+      
+      Expected: No person will be added. Error details shown in the status message. Status bar remains the same.
 
 ### Editing a Person
 
 1. Editing a person while all persons are being shown
+   
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   2. Test case: `edit 1 n/John Doe`<br>
-      Expected: First person in the list has their name edited to `John Doe`. Details of the edited field(s) are shown in the
-      status message.
+   2. Test case: `edit 1 n/John Doe`
+      
+      Expected: First person in the list has their name edited to `John Doe`. Details of the edited field(s) are shown in the status message.
 
-   3. Test case: `edit 1 n/John Doe cn/12`<br>
-      Expected: First person in the list has their name edited to `John Doe` and their case number edited to `12`.
-      Details of the edited field(s) are shown in the status message.
+   3. Test case: `edit 1 n/John Doe cn/12`
+      
+      Expected: First person in the list has their name edited to `John Doe` and their case number edited to `12`. Details of the edited field(s) are shown in the status message.
 
-   4. Test case: `edit 1`<br>
-      Expected: No persons' contact details will be edited. Error details shown in the status message. Status bar
-      remains the same.
+   4. Test case: `edit 1`
+      
+      Expected: No persons' contact details will be edited. Error details shown in the status message. Status bar remains the same.
 
-   5. Test case: `edit 1 INVALID_PREFIX/EXAMPLE`<br>
-      Expected: No persons' contact details will be edited. Error details shown in the status message. Status bar
-      remains the same.
+   5. Test case: `edit 1 INVALID_PREFIX/EXAMPLE`
+      
+      Expected: No persons' contact details will be edited. Error details shown in the status message. Status bar remains the same.
 
-   6. Test case: `edit 1 VALID_PREFIX/INVALID_INPUT`<br>
-      Expected: No persons' contact details will be edited. Error details shown in the status message. Status bar
-      remains the same.
+   6. Test case: `edit 1 VALID_PREFIX/INVALID_INPUT`
+      
+      Expected: No persons' contact details will be edited. Error details shown in the status message. Status bar remains the same.
 
 2. Editing a person while search results are being shown
 
@@ -597,22 +508,28 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-    2. Test case: `delete 1`<br>
+    2. Test case: `delete 1`
+       
        Expected: First person is deleted from the list. Details of the deleted person shown in the status message.
 
-    3. Test case: `delete 1 2`<br>
+    3. Test case: `delete 1 2`
+       
        Expected: First and second persons are deleted from the list. Details of the deleted persons shown in the status message.
 
-    4. Test case: `delete 3 1 2`<br>
+    4. Test case: `delete 3 1 2`
+       
        Expected: First, second and third persons are deleted from the list. Details of the deleted persons shown in the status message.
 
-    5. Test case: `delete 1 1 1 2 2 2`<br>
+    5. Test case: `delete 1 1 1 2 2 2`
+       
        Expected: First and second persons are deleted from the list. Details of the deleted persons shown in the status message.
 
-    6. Test case: `delete 0`<br>
+    6. Test case: `delete 0`
+       
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-    7. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size), `...` <br>
+    7. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size)
+       
        Expected: Similar to previous.
 
 2. Deleting a person while search results are being shown
@@ -622,61 +539,79 @@ testers are expected to do more *exploratory* testing.
 ### Updating SHN end dates of all persons
 
 1. Batch-updating SHN periods while all persons are being shown
+   
     1. Prerequisites: List all persons using the `list` command. Multiple persons with an SHN period.
 
-    2. Test case: `tshift 3` or `tshift +3`<br>
+    2. Test case: `tshift 3` or `tshift +3`
+       
        Expected: All persons' SHN end dates will be postponed by `3` days. Details of the batch-update will be displayed as the status message.
 
-    3. Test case: `tshift -3`<br>
+    3. Test case: `tshift -3`
+       
        Expected: All persons' SHN end dates will be brought forward by `3` days. Details of the batch-update will be displayed as the status message.
 
-    4. Test case: `tshift 91`<br>
-       Expected: Unable to shift beyond the limit of `90` days. No persons' SHN end dates will be shifted. Error details shown in the status message.
+    4. Test case: `tshift 91`
+       
+       Expected: Unable to shift beyond the limit of `90` days. No persons' SHN end dates will be shifted. Error details shown in the status message. Status bar remains the same.
 
-    5. Test case: `tshift 0`<br>
-       Expected: Unable to shift by `0` days. No persons' SHN end dates will be shifted. Error details shown in the status message.
+    5. Test case: `tshift 0`
+       
+       Expected: Unable to shift by `0` days. No persons' SHN end dates will be shifted. Error details shown in the status message. Status bar remains the same.
 
 ### Clearing person(s) with completed SHN periods
 
 1. Clearing person(s) while all persons are being shown
+   
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   2. Test case: `clear`<br>
+   2. Test case: `clear`
+      
       Expected: All persons with completed SHN periods are deleted from the list. Success message is shown.
     
-   3. Test case: `clear x` (where x is any character)<br>
+   3. Test case: `clear x` (where x is any character)
+      
       Expected: Similar to previous. All trailing characters or whitespaces are ignored.
 
 ### Finding persons by field
 
 1. Find person(s) while all persons are being shown
+   
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-    2. Test case: `find n/Alex`<br>
+    2. Test case: `find n/Alex`
+       
        Expected: Only persons whose name contains `Alex` will be shown.
     
-    3. Test case: `find n/Alex Alice`<br>
-        Expected: Only persons whose name contains `Alex` or `Alice` will be shown.
+    3. Test case: `find n/Alex Alice`
+       
+       Expected: Only persons whose name contains `Alex` or `Alice` will be shown.
 
-    4. Test case: `find p/123`<br>
+    4. Test case: `find p/123`
+       
        Expected: Only persons whose phone number starts with `123` will be shown.
 
-    5. Test case: `find p/123 234`<br>
+    5. Test case: `find p/123 234`
+       
        Expected: Only persons whose phone number starts with `123` or `234` will be shown.
 
-    6. Test case: `find cn/1 2 3`<br>
-       Expected: Only persons with case number `1` `2` or `3` will be shown.
+    6. Test case: `find cn/1 2 3`
+       
+       Expected: Only persons with case number `1`, `2` or `3` will be shown.
 
-    8. Test case: `find sh/start:2021-01-01 2021-01-02`<br>
+    7. Test case: `find sh/start:2021-01-01 2021-01-02`
+       
        Expected: Only persons with SHN start date of `2021-01-01` or `2021-01-02` will be shown.
     
-    10. Test case: `find sh/end:2021-01-01 2021-01-02`<br>
-        Expected: Only persons with SHN end date of `2021-01-01` or `2021-01-02` will be shown.
+    8. Test case: `find sh/end:2021-01-01 2021-01-02`
+        
+       Expected: Only persons with SHN end date of `2021-01-01` or `2021-01-02` will be shown.
 
-    12. Test case: `find INVALID_PREFIX/EXAMPLE`<br>
-        Expected: The list is unchanged. Error details shown in the status message. Status bar remains the same.
+    9. Test case: `find INVALID_PREFIX/EXAMPLE`
+       
+       Expected: The list is unchanged. Error details shown in the status message. Status bar remains the same.
 
-    13. Test case: `find VALID_PREFIX/INVALID_INPUT`<br>
+    10. Test case: `find VALID_PREFIX/INVALID_INPUT`
+        
         Expected: The list is unchanged. Error details shown in the status message. Status bar remains the same.
     
 ### Sorting persons
@@ -685,22 +620,28 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   2. Test case: `sort n/`<br>
+   2. Test case: `sort n/`
+      
       Expected: The list of persons is sorted by name (in ascending order by default).
 
-   3. Test case: `sort sh/start:dsc`<br>
+   3. Test case: `sort sh/start:dsc`
+      
       Expected: The list of persons is sorted by SHN start date in descending order.
 
-   4. Test case: `sort sh/end: cn/asc`<br>
+   4. Test case: `sort sh/end: cn/asc`
+      
       Expected: The list of persons is sorted by SHN end date (in ascending order by default), then by case number in ascending order.
 
-   5. Test case: `sort`<br>
+   5. Test case: `sort`
+      
       Expected: The list is unchanged. Error details shown in the status message. Status bar remains the same.
 
-   6. Test case: `sort INVALID_PREFIX/VALID_DIRECTION`<br>
+   6. Test case: `sort INVALID_PREFIX/VALID_DIRECTION`
+      
       Expected: The list is unchanged. Error details shown in the status message. Status bar remains the same. 
 
-   7. Test case: `sort VALID_PREFIX/INVALID_DIRECTION`<br>
+   7. Test case: `sort VALID_PREFIX/INVALID_DIRECTION`
+      
       Expected: The list is unchanged. Error details shown in the status message. Status bar remains the same.
 
 2. Sorting persons while search results are being shown
@@ -711,62 +652,84 @@ testers are expected to do more *exploratory* testing.
 
 1. Starting a new SHN enforcement session
 
-   1. Test case: `session`<br>
+   1. Test case: `session`
+      
       Expected: All persons in the list are updated to be 'not called' status.
        
-   2. Test case: `session x` (where x is any character)<br>
+   2. Test case: `session x` (where x is any character)
+      
       Expected: Similar to previous. All trailing characters or whitespaces are ignored.
 
 2. Showing a dynamically filtered list of all persons who have not been called in the current SHN enforcement session
 
-   1. Test case: `schedule`<br>
+   1. Test case: `schedule`
+      
       Expected: The list is updated to display only persons who have not been called in the current SHN enforcement session.
 
-   2. Test case: `schedule x` (where x is any character)<br>
+   2. Test case: `schedule x` (where x is any character)
+      
       Expected: Similar to previous. All trailing characters or whitespaces are ignored.
 
 3. Updating a person's call status to successful in the current SHN enforcement session
-   1. Prerequisites: SHN enforcement mode is activated.<br>
+   
+   1. Prerequisites: SHN enforcement mode is activated.
 
-   2. Test case: `scall 1`<br>
+   2. Test case: `scall 1`
+      
       Expected: First person displayed in the list is updated as successfully called. The name, case number, and number of failed call attempts of the updated person is shown in the status message. The person disappears from the display.
 
-   3. Test case: `scall 3`<br>
+   3. Test case: `scall 3`
+      
       Expected: Third person displayed in the list is updated as successfully called. The name, case number, and number of failed call attempts of the updated person is shown in the status message. The person disappears from the display.
 
-   4. Test case: `scall 0`<br>
+   4. Test case: `scall 0`
+      
       Expected: No person is updated. Error details shown in the status message. Status bar remains the same.
 
-   5. Other incorrect scall commands to try: `scall`, `scall x` (where x is larger than the list size), `...` <br>
+   5. Other incorrect scall commands to try: `scall`, `scall x` (where x is larger than the list size)
+      
       Expected: Similar to previous.
 
 4. Updating a person's call status to successful in the current SHN enforcement session
-   1. Prerequisites: SHN enforcement mode is not activated.<br>
+   
+   1. Prerequisites: SHN enforcement mode is not activated.
+      
       Expected: Similar to previous, except the updated person does not disappear from the display.
 
 5. Updating that a failed call was made to a person in the current SHN enforcement session
+   
    1. Prerequisites: SHN enforcement mode is activated.
 
-   2. Test case: `fcall 1`<br>
+   2. Test case: `fcall 1`
+      
       Expected: First person displayed in the list is updated as unsuccessfully called. The name, case number, and number of failed call attempts of the updated person is shown in the status message. The person disappears from the display.
 
-   3. Test case: `fcall 3`<br>
+   3. Test case: `fcall 3`
+      
       Expected: Third person displayed in the list is updated as unsuccessfully called. The name, case number, and number of failed call attempts of the updated person is shown in the status message. The person disappears from the display.
 
-   4. Test case: `fcall 0`<br>
+   4. Test case: `fcall 0`
+      
       Expected: No person is updated. Error details shown in the status message. Status bar remains the same.
     
-   5. Other incorrect fcall commands to try: `fcall`, `fcall x` (where x is larger than the list size), `...` <br>
+   5. Other incorrect fcall commands to try: `fcall`, `fcall x` (where x is larger than the list size)
+      
       Expected: Similar to previous.
 
 6. Updating that a failed call was made to a person in the current SHN enforcement session
-    1. Prerequisites: SHN enforcement mode is not activated.<br>
-       Expected: Similar to previous, except the updated person does not disappear from the display.
+   
+   1. Prerequisites: SHN enforcement mode is not activated.
+      
+      Expected: Similar to previous, except the updated person does not disappear from the display.
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
-    1. Test case: Missing JSON file.  
+   
+    1. Test case: Missing JSON file.
+       
        Expected: Sample Track2Gather persons list will be generated with sample persons' information.
-    2. Test case: Corrupted JSON file.  
+       
+    2. Test case: Corrupted JSON file.
+       
        Expected: Empty Track2Gather persons list will be generated.
