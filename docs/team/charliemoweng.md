@@ -39,7 +39,7 @@ Given below are my contributions to the project.
 * **New Feature**: Added in the feature to mark a task under a student as undone (not done yet). (Pull request [#129](https://github.com/AY2122S1-CS2103-F09-1/tp/pull/129))
     * What it does: It does just the opposite of what the previous feature does - it marks a task under a student as 
       undone, which means that the student has not completed the task yet.
-    * Justification: We all make mistakes. Students do, TA do, sometimes even professors do. This feature provideds 
+    * Justification: We all make mistakes. Students do, TA do, sometimes even professors do. This feature provides 
       a way to right the wrong. If a task has been accidentally marked as done but in fact the student has not done 
       it yet, this feature allows TAs to revert it back to default (tasks are set as undone by default).
 
@@ -55,7 +55,7 @@ Given below are my contributions to the project.
       times to make sure the test cases that I modified or added will work and improve coverage.
 
 
-* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/#breakdown=true&search=charliemoweng)
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&since=2021-09-17&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&tabOpen=true&tabType=authorship&tabAuthor=charliemoweng&tabRepo=AY2122S1-CS2103-F09-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false&checkedFileTypes=docs~functional-code~test-code~other)
 
 
 * **Documentation**:
