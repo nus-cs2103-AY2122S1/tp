@@ -277,7 +277,7 @@ Format: `cat INDEX [-f KEYWORDS]`
    Examples:
 
    * `cat 1` Displays the list of tasks attached to the 1st person.
-   ![result for `cat 1`](images/catAlexResult.png)
+   ![result for `cat 1`]()
 
 2. Displays a filtered list of tasks that has been attached to a specific person.
 
@@ -290,12 +290,12 @@ Format: `cat INDEX [-f KEYWORDS]`
 
    * Alex is the first person in the address book and has the tasks [Work, project meeting at NUS]. `cat 1 -f work` will display the task "work"
    * `cat 1 -f work` Displays the list of tasks attached to the 1st person that match the given keywords(s).
-   ![result for `cat 1 -f work`](images/cat-fResult.png)
+   ![result for `cat 1 -f work`]()
 
 3. Displays the task list of all persons in ContactSH.
 
    Format: `cat -A`
-   ![result for `cat -A`](images/catAllResult.png)
+   ![result for `cat -A`]()
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
     Alternatively, you could also click on the person in the GUI to open said person's tasks!

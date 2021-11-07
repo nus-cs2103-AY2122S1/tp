@@ -17,17 +17,21 @@ Given below are my contributions to the project.
 * **Project management**:
 
 * **Enhancements to existing features**:
+    * Added `man` feature
+    * Improved `find` feature to allow users to find people based on different attributes of a person, such as name and address
+    * Improved `delete` feature to allow users to delete multiple people at once
+    * Improved `cat` feature to allow users to filter tasks from a task list based on keywords
 
 * **Documentation**:
     * User Guide:
-        * Added documentation for the feature `help` [\#34](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/34)
+        * Added documentation for the feature `man` [\#34](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/34)
+        * Added documentation for the feature `cat` [\#205](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/205)
     * Developer Guide:
         * Updated documentation for non-functional requirements [\#35](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/35)
+        * Added implementation details for the feature `find` [\#117](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/117)
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments):
-    [\#72](https://github.com/nus-cs2103-AY2122S1/ip/pull/72),
-    [\#103](https://github.com/nus-cs2103-AY2122S1/ip/pull/103)
 
 * **Tools**:
 
