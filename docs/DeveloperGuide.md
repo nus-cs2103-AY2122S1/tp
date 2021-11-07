@@ -402,6 +402,36 @@ the `execute("find te/alex_1")` API call.
 
 ![FindSequenceDiagram](images/FindSequenceDiagram.png)
 
+### Tag command
+
+#### Implementation
+
+The Tag command allows users to directly add or remove tags from a specific contact. This command was introduced to 
+overcome the following limitations:
+1. Editing a contact's tag field using `edit <INDEX> t/<TAG>` will replace the existing tag with the specified one 
+instead of adding on to it.
+2. No way to remove tags from a contact directly.
+
+It is facilitated by the `TagCommandParser` class, which implements `Parser<TagCommand>`.
+It implements the `parse()` method, which parses the index of the contact to which tags are to be added or from which 
+tags are to be removed. Moreover, checking the validity of the user input (i.e. ensuring the presence of arguments for the `Tag` command like tags to add where the prefix `a/` is present and the
+presence of tags to remove where the prefix `r/` is present) is handled by the `checkInputFormat` method. Once the input is confirmed to be valid, `parse()` returns a `TagCommand`, to be executed in
+`LogicManager`. 
+
+The `TagCommand` class extends `Command`. Its instance is created by providing the `targetIndex` of the contact to which 
+tags are to be added or from which tags are to be removed (of type `Index`), an ArrayList containing the tags to be 
+added (`toAdd`) and an ArrayList containing the tags to be removed (`toRemove`). Its implementation of `Command#execute()` is where the updation of the `FilteredPersonList` to reflect the search performed on the contacts in the address book.
+
+The Sequence Diagram below illustrates the interactions within the `Logic` and `Model` components for
+the `execute("tag 1 a/friends")` API call.
+
+![TagSequenceDiagramForAdd](images/TagSequenceDiagramForAdd.png)
+
+The Sequence Diagram below illustrates the interactions within the `Logic` and `Model` components for
+the `execute("tag 1 a/friends r/family")` API call.
+
+![TagSequenceDiagramForAddAndRemove](images/TagSequenceDiagramForAddAndRemove.png)
+
 ### Welcome Window
 
 #### Implementation
