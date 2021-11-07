@@ -71,12 +71,14 @@ Given below are my contributions to the project.
     * Links to PR:
       [\#203](https://github.com/AY2122S1-CS2103-F10-2/tp/issues/203)
   * Developer Guide:
-    * Add implementation features for Sort, Find and Mutating Inventory
+    * Add implementation features for Mutating Inventory
       [\#164](https://github.com/AY2122S1-CS2103-F10-2/tp/issues/164)
-    * Update use cases for commands 
+    * Add manual testing under appendix
+      [\#207](https://github.com/AY2122S1-CS2103-F10-2/tp/issues/207)
+    * Update use cases for commands
       [\#181](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/181)
       [\#146](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/146)
-    * Proofread and Fix inconsistency, ambiguity, and errors. 
+    * Proofread and Fix inconsistency, ambiguity, and errors.
       [\#186](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/186)
     
 
