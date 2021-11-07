@@ -296,9 +296,11 @@ or
 ```
 e 1 n/Jason Tan a/221b Baker Street
 ```
+
 <div markdown="span" class="alert alert-primary">
 :information_source: Note: The edited name must be unique and should not be the same name of another existing student.
 </div>
+
 
 #### Editing a class: `editclass` | `ec`
 Format: `editclass INDEX [n/NAME] [l/LIMIT] [ts/TIMESLOT]`
@@ -340,6 +342,9 @@ or
 ```
 del 1 2
 ```
+An example output is shown below: <br>
+![DeleteCommand example](images/DeleteStudentUG.png)
+<p align="center"><i>Figure 4: Example of executing `delete 1 2` command</i></p>
 
 #### Deleting tuition classes: `deleteclass` | `delc`
 
@@ -417,7 +422,7 @@ Users can add, remove, or edit remarks through the editor window.
 </div>
 
 ![Remark editor](images/remark_editor_student.png)
-<p align="center"><i>Figure 4: Editing remarks with editor window</i></p>
+<p align="center"><i>Figure 5: Editing remarks with editor window</i></p>
 
 <div markdown="span" class="alert alert-primary">
 :warning: For MacOS users, the remarks editor may open as a new tab instead of a window, which can cause a UI bug where the buttons are not displayed correctly. To open as a new window instead, go to System preferences > General > Prefer tabs and choose never. 
@@ -498,7 +503,7 @@ TutAssistor will display a list of all classes with `physics` or `chemistry` in 
 
 The filtered list should look similar to the example shown below: <br>
 ![FindCommand example](images/find_screenshot.png)
-<p align="center"><i>Figure 5: Example of executing `find alice tan` command</i></p>
+<p align="center"><i>Figure 6: Example of executing `find alice tan` command</i></p>
 
 ### 3.8 List all students/tuition classes
 Shows the full list of students or classes.
@@ -554,11 +559,11 @@ timetable
   
   If a lesson is shorter than one hour, the timetable may not display its details properly, such as using smaller font size or omitting the details completely due to limited space in the time block.
   
-  For example, in Figure 6 below, the class on Monday, 15:00-15:15 is only 15 minutes and thus not displayed with details.
+  For example, in Figure 7 below, the class on Monday, 15:00-15:15 is only 15 minutes and thus not displayed with details.
 </div>
 
 ![Timetable](images/time_table.png)
-<p align="center"><i>Figure 6: A timetable view of all tuition classes in a week</i></p>
+<p align="center"><i>Figure 7: A timetable view of all tuition classes in a week</i></p>
 
 ### 3.11 View today's classes: `today` | `td`
 Displays an overview of all classes happening today. <br>
@@ -566,7 +571,7 @@ Also, a reminder of classes happening today will be displayed
 when the TutAssistor is reopened.
 
 ![Today view](images/today_view.png)
-<p align="center"><i>Figure 7: List view of all the classes scheduled today</i></p>
+<p align="center"><i>Figure 8: List view of all the classes scheduled today</i></p>
 
 ### 3.12 View help: `help` | `h`
 
@@ -575,7 +580,7 @@ Shows a command summary, as well as a link to the user guide. <br>
 Format: `help`
 
 ![Help window](images/helpWindow.png)
-<p align="center"><i>Figure 8: The help window</i></p>
+<p align="center"><i>Figure 9: The help window</i></p>
 
 ### 3.13 Navigate input history
 

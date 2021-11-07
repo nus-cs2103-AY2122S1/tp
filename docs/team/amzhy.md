@@ -49,9 +49,10 @@ repeating similar commands multiple times.
 * **Testing**: Create tests for the `EditClassCommand`, `EditCommand`, `DeleteCommand`, `DeleteClassCommand` and `RemoveStudentCommand` as well as their related classes to increase coverage. (Pull Request [\#216](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/216))
 
 #### Contributions to the User Guide
-Added to the FAQ and Introduction, formatted figures and enabled quicklinks for the command summary.(Pull Request [\#139](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/139))
-Added implementation details for `EditClassCommand`, `EditCommand`, `DeleteCommand`, `DeleteClassCommand` and `RemoveStudentCommand` (Pull Request [\#217](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/217))
-Fix some documentation bugs from PE-D (Pull Request [\#187](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/187))
+* Added to the FAQ and Introduction, formatted figures and enabled quicklinks for the command summary.(Pull Request [\#139](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/139))
+* Added implementation details for `EditClassCommand`, `EditCommand`, `DeleteClassCommand` (Pull Request [\#217](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/217))
+* Fix some documentation bugs from PE-D (Pull Request [\#187](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/187))
+* Added screenshots for the `DeleteCommand` (Pull Request [\#217](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/217))
 
 #### Contributions to the Developer Guide
 Added the implementation details of `EditClassCommand` (Pull Request [\#135](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/135))
