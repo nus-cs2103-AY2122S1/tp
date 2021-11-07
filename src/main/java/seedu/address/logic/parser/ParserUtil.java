@@ -35,13 +35,15 @@ import seedu.address.model.tag.Tag;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer,"
-            + "and it should not be blank.";
-    private static final String MESSAGE_INVALID_TODAY_ATTENDANCE = "Today Attendance should be 'true' or false',"
-            + "and it should not be blank.";
-    private static final String MESSAGE_INVALID_TOTAL_ATTENDANCE = "Total Attendance should be a "
+    public static final String MESSAGE_INVALID_INDEX = "Index should be a positive unsigned integer,"
+            + " and it should not be blank.";
+    public static final String MESSAGE_INVALID_TODAY_ATTENDANCE = "Today Attendance should be 'true' or 'false',"
+            + " and it should not be blank.";
+    public static final String MESSAGE_INVALID_TOTAL_ATTENDANCE = "Total Attendance should be a "
             + "non-negative unsigned integer, and it should not be blank.";
 
+    public static final String MESSAGE_INVALID_DAY = "Day should be an integer from 1 to 7\n"
+            + "where 1 represents Monday, 2 represents Tuesday ... and 7 represents Sunday.";
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -282,7 +284,7 @@ public class ParserUtil {
         requireNonNull(dayString);
         String validationRegex = "[1-7]";
         if (!dayString.matches(validationRegex)) {
-            throw new ParseException(CommandWord.MESSAGE_CONSTRAINTS);
+            throw new ParseException(MESSAGE_INVALID_DAY);
         }
         int dayNumber = Integer.parseInt(dayString);
         return DayOfWeek.of(dayNumber);

@@ -15,11 +15,10 @@ import seedu.address.model.member.exceptions.DuplicateMemberException;
 import seedu.address.model.member.exceptions.MemberNotFoundException;
 import seedu.address.model.tag.Tag;
 
-
 /**
- * A list of persons that enforces uniqueness between its elements and does not allow nulls.
+ * A list of members that enforces uniqueness between its elements and does not allow nulls.
  * A member is considered unique by comparing using {@code Member#isSameMember(Member)}. As such, adding and updating of
- * persons uses Member#isSameMember(Member) for equality so as to ensure that the member being added or updated is
+ * members uses Member#isSameMember(Member) for equality so as to ensure that the member being added or updated is
  * unique in terms of identity in the UniqueMemberList. However, the removal of a member uses Member#equals(Object) so
  * as to ensure that the member with exactly the same fields will be removed.
  *

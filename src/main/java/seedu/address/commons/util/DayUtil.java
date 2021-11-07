@@ -17,4 +17,14 @@ public class DayUtil {
     public static String displayDay(int dayNumber) {
         return DayOfWeek.of(dayNumber).getDisplayName(TextStyle.FULL, Locale.getDefault());
     }
+
+    /**
+     * Returns the day of the week given the day number.
+     *
+     * @param day the day-of-week to display.
+     * @return String representing the day of the week.
+     */
+    public static String displayDay(DayOfWeek day) {
+        return day.getDisplayName(TextStyle.FULL, Locale.getDefault());
+    }
 }

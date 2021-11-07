@@ -5,11 +5,10 @@ import static seedu.address.commons.core.Messages.MESSAGE_EMPTY_LIST;
 import static seedu.address.commons.core.Messages.MESSAGE_FACILITY;
 import static seedu.address.commons.core.Messages.MESSAGE_MEMBER;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.commons.util.DayUtil.displayDay;
 
 import java.time.DayOfWeek;
-import java.time.format.TextStyle;
 import java.util.List;
-import java.util.Locale;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -69,8 +68,9 @@ public class AllocateMemberCommand extends Command {
 
         handleAllocation(toBeAllocated, toAllocateTo, model);
 
-        String dayName = day.getDisplayName(TextStyle.FULL, Locale.getDefault());
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toBeAllocated.getName(), toAllocateTo.getName(), dayName));
+        String dayName = displayDay(day);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toBeAllocated.getName(), toAllocateTo.getName(), dayName)
+                , false, true, false);
     }
 
     /**

@@ -343,5 +343,4 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredFacilities.setPredicate(predicate);
     }
-
 }

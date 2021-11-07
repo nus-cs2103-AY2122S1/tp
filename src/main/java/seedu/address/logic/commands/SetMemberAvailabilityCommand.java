@@ -22,7 +22,7 @@ public class SetMemberAvailabilityCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sets the availability of the members identified "
-            + "by the indices used in the last member listing. "
+            + "by the indices used in the currently displayed member list. "
             + "Existing availability will be overwritten by the input.\n"
             + "Parameters: INDEX [MORE_INDICES]... (must be positive integers) "
             + "d/DAY(S) (where 1 represents Monday, 2 represents Tuesday ... and 7 represents Sunday\n"

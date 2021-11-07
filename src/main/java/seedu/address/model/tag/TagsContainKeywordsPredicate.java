@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 import seedu.address.model.member.Member;
 
 /**
- * Tests that a {@code Person}'s {@code Tag} matches any of the tag keywords given.
+ * Tests that a {@code Member}'s {@code Tag} matches any of the tag keywords given.
  */
 public class TagsContainKeywordsPredicate implements Predicate<Member> {
     private final List<Tag> tags;

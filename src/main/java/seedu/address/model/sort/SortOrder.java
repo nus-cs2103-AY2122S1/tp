@@ -5,6 +5,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.List;
 
+/**
+ * Represents a valid sort order in SportsPA.
+ */
 public class SortOrder {
     public static final String MESSAGE_CONSTRAINTS =
             "Sort Order should be 'name' or 'tag', and it should not be blank";

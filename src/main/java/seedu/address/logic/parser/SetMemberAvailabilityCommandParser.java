@@ -36,17 +36,12 @@ public class SetMemberAvailabilityCommandParser implements Parser<SetMemberAvail
         }
 
         List<Index> indices;
-        try {
-            indices = new ArrayList<>();
-            String indicesString = argMultimap.getPreamble();
-            List<String> indicesWithNoDuplicates =
-                    Arrays.stream(indicesString.split(" ")).distinct().collect(Collectors.toList());
-            for (String s : indicesWithNoDuplicates) {
-                indices.add(ParserUtil.parseIndex(s));
-            }
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    SetMemberAvailabilityCommand.MESSAGE_USAGE), pe);
+        indices = new ArrayList<>();
+        String indicesString = argMultimap.getPreamble();
+        List<String> indicesWithNoDuplicates =
+                Arrays.stream(indicesString.split("\\s+")).distinct().collect(Collectors.toList());
+        for (String s : indicesWithNoDuplicates) {
+            indices.add(ParserUtil.parseIndex(s));
         }
 
         Availability availability = ParserUtil.parseAvailability(argMultimap.getValue(PREFIX_AVAILABILITY).get());
