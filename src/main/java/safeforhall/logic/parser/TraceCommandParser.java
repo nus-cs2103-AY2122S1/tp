@@ -45,6 +45,12 @@ public class TraceCommandParser implements Parser<TraceCommand> {
         }
 
         // Optional fields
+        Integer[] result = parseDepthDuration(argMultimap);
+
+        return new TraceCommand(inputForResident, result[0], result[1]);
+    }
+
+    private Integer[] parseDepthDuration(ArgumentMultimap argMultimap) throws ParseException {
         Integer depth;
         Integer duration;
         try {
@@ -52,11 +58,18 @@ public class TraceCommandParser implements Parser<TraceCommand> {
                     .orElse(TraceCommand.DEFAULT_DEPTH.toString()));
             duration = Integer.parseInt(argMultimap.getValue(CliSyntax.PREFIX_DURATION)
                     .orElse(TraceCommand.DEFAULT_DURATION.toString()));
+            if (depth < 1 || depth > 5) {
+                throw new ParseException("Depth must be greater than 0 and less than 6\n"
+                        + TraceCommand.MESSAGE_USAGE);
+            }
+            if (duration < 1 || duration > 31) {
+                throw new ParseException("Duration must be greater than 0 and less than 32\n"
+                        + TraceCommand.MESSAGE_USAGE);
+            }
         } catch (NumberFormatException e) {
             throw new ParseException("Depth and duration must be integers\n" + TraceCommand.MESSAGE_USAGE);
         }
-
-        return new TraceCommand(inputForResident, depth, duration);
+        return new Integer[]{depth, duration};
     }
 
     /**

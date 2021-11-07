@@ -32,8 +32,8 @@ public class TraceCommand extends Command {
             + "Note: \n"
             + "     1. A resident can be identified either by full name or room \n"
             + "     2. Depth refers to the number of maximum links to reach resident in question \n"
-            + "     3. Depth should be an integer >= 1 and will default to 1 \n"
-            + "     4. Duration is in days and will default to 7\n";
+            + "     3. Depth should be an integer, 1 <= depth <= 5 and will default to 1 \n"
+            + "     4. Duration is in days, 1 <= duration <= 31 and will default to 7\n";
 
     public static final String MESSAGE_FOUND_CONTACTS = "Found %1d close contacts at this depth: ";
 
@@ -76,6 +76,8 @@ public class TraceCommand extends Command {
      * @param duration The number of days to trace back to (for events)
      */
     public TraceCommand(String person, Integer depth, Integer duration) {
+        assert depth > 0;
+        assert duration > 0;
         this.personInput = person;
         this.depth = depth;
         this.duration = duration;

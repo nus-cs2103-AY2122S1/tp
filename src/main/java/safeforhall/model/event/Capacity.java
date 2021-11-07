@@ -4,7 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static safeforhall.commons.util.AppUtil.checkArgument;
 
 public class Capacity implements Comparable<Capacity> {
-    public static final String MESSAGE_CONSTRAINTS = "Capacity should be an integer greater than 0";
+    public static final String MESSAGE_CONSTRAINTS = "Capacity should be an integer greater than 0. Maximum allowed"
+        + " capacity is 2147483647";
 
     public static final String DESC = "Capacity: ";
     public static final String FIELD = "c";

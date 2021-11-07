@@ -30,7 +30,6 @@ public class DeadlineCommandParser implements Parser<DeadlineCommand> {
         }
 
         if ((keyword.equals("c") || keyword.equals("f")) && !arePrefixesPresent(argMultimap, CliSyntax.PREFIX_DATE2)) {
-            System.out.println("here");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeadlineCommand.MESSAGE_USAGE));
         }
 

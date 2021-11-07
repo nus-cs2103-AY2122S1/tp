@@ -8,10 +8,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
 
+import safeforhall.commons.core.LogsCenter;
 import safeforhall.logic.commands.exceptions.CommandException;
 import safeforhall.model.AddressBook;
 import safeforhall.model.Model;
@@ -62,6 +64,7 @@ public class ImportCommand extends Command {
     public static final String MESSAGE_CONSTRAINTS = "Filename should be a single word";
     public static final String DEFAULT_FILENAME = "safeforhall";
 
+    private final Logger logger = LogsCenter.getLogger(ImportCommand.class);
     private final Path filepath;
     private final String filename;
 
@@ -90,6 +93,7 @@ public class ImportCommand extends Command {
         requireNonNull(model);
         AddressBook newAddressBook = readCsv();
         if (newAddressBook.getPersonList().isEmpty()) {
+            logger.warning("Unable to read a single valid resident: Importing aborted!");
             throw new CommandException(MESSAGE_NO_RESIDENTS);
         }
         List<Event> eventList = model.getAddressBook().getEventList();
