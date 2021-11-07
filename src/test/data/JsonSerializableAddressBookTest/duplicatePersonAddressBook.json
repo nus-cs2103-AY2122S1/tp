@@ -4,7 +4,7 @@
     "phone": "94351253",
     "email": "alice@example.com",
     "role": [ "floor" ],
-    "salary": "900000",
+    "salary": "900",
     "status": "fulltime",
     "tagged": [ "friends" ],
     "schedule": {
@@ -15,7 +15,7 @@
     "phone": "94351253",
     "email": "pauline@example.com",
     "role": [ "bartender" ],
-    "salary": "850000",
+    "salary": "850",
     "status": "fulltime",
     "schedule": {
       "shifts" : [ [ null, null ], [ null, null ], [ null, null ], [ null, null ], [ null, null ], [ null, null ], [ null, null ] ]

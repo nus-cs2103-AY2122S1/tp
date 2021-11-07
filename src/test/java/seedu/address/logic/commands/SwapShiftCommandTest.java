@@ -28,7 +28,7 @@ public class SwapShiftCommandTest {
         Model model = new ModelManager();
 
         Person alice = new PersonBuilder().withName("Alice Pauline")
-                .withEmail("alice@example.com").withPhone("94351253").withRoles("floor").withSalary("1000000")
+                .withEmail("alice@example.com").withPhone("94351253").withRoles("floor").withSalary("1000")
                 .withStatus("fulltime").withTags("friends").build();
 
         model.addPerson(alice);
@@ -45,12 +45,12 @@ public class SwapShiftCommandTest {
         Model model = new ModelManager();
 
         Person alice = new PersonBuilder().withName("Alice Pauline")
-                .withEmail("alice@example.com").withPhone("94351253").withRoles("floor").withSalary("1000000")
+                .withEmail("alice@example.com").withPhone("94351253").withRoles("floor").withSalary("1000")
                 .withStatus("fulltime").withTags("friends").build();
 
 
         Person alex = new PersonBuilder().withName("Alex Yeoh")
-                .withEmail("alex@example.com").withPhone("94384736").withRoles("kitchen").withSalary("4500000")
+                .withEmail("alex@example.com").withPhone("94384736").withRoles("kitchen").withSalary("4500")
                 .withStatus("parttime").withTags("friends").build();
 
 
@@ -76,11 +76,11 @@ public class SwapShiftCommandTest {
         Model model = new ModelManager();
 
         Person alice = new PersonBuilder().withName("Alice Pauline")
-                .withEmail("alice@example.com").withPhone("94351253").withRoles("floor").withSalary("1000000")
+                .withEmail("alice@example.com").withPhone("94351253").withRoles("floor").withSalary("1000")
                 .withStatus("fulltime").withTags("friends").withSchedule(new ScheduleBuilder(aliceSchedule)).build();
 
         Person alex = new PersonBuilder().withName("Alex Yeoh")
-                .withEmail("alex@example.com").withPhone("94384736").withRoles("kitchen").withSalary("4500000")
+                .withEmail("alex@example.com").withPhone("94384736").withRoles("kitchen").withSalary("4500")
                 .withStatus("parttime").withTags("friends").withSchedule(new ScheduleBuilder(alexSchedule)).build();
 
         model.addPerson(alice);

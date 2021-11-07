@@ -13,6 +13,7 @@ import static seedu.address.logic.parser.ParserUtil.testByAllFieldsExceptName;
 
 import java.util.Arrays;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
@@ -36,7 +37,11 @@ public class FindCommandParser implements Parser<FindCommand> {
                 PREFIX_DASH_ROLE, PREFIX_DASH_SALARY);
 
         PersonContainsFieldsPredicate predicate = testByAllFieldsExceptName(argMultimap);
+
         if (argMultimap.getValue(PREFIX_DASH_INDEX).isPresent()) {
+            if (!ParserUtil.isValidInt(argMultimap.getValue(PREFIX_DASH_INDEX).get())) {
+                throw new ParseException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
             return new FindCommand(ParserUtil
                     .parseIndex(argMultimap.getValue(PREFIX_DASH_INDEX).get()).getZeroBased());
         }

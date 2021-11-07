@@ -60,8 +60,9 @@ public class Person {
         this.schedule = new Schedule();
         this.fields.addAll(tags);
         this.absentDates.addAll(absentDates);
-        this.fields.addAll(roles);
+        this.fields.addAll(this.roles);
         addToFieldSet(fields, name, phone, email, salary, status);
+
     }
 
     /**
@@ -285,25 +286,25 @@ public class Person {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append("; Phone: ")
-                .append(getPhone())
-                .append("; Email: ")
-                .append(getEmail())
-                .append("; Salary: ")
-                .append(getSalary().convertToDollars())
-                .append("; Status: ")
-                .append(getStatus());
+        builder.append(getName()).append("\n")
+                .append("Phone: ").append(getPhone()).append("\n")
+                .append("Email: ").append(getEmail()).append("\n")
+                .append("Salary: ").append(getSalary().convertToDollars()).append("\n")
+                .append("Status: ").append(getStatus()).append("\n");
 
         Set<Role> roles = getRoles();
         if (!roles.isEmpty()) {
-            builder.append("; Roles: ");
-            roles.forEach(builder::append);
+            builder.append("Roles: ");
+            for (Role r : roles) {
+                builder.append(r.toString()).append(" ");
+            }
+            builder.append("\n");
         }
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
-            builder.append("; Tags: ");
+            builder.append("Tags: ");
             tags.forEach(builder::append);
+            builder.append("\n");
         }
         return builder.toString();
     }
