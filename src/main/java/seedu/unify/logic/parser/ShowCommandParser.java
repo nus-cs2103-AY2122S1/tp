@@ -40,7 +40,7 @@ public class ShowCommandParser implements Parser<ShowCommand> {
         }
     }
 
-    public static boolean isParsable(String input) {
+    private static boolean isParsable(String input) {
         try {
             Integer.parseInt(input);
             return true;
