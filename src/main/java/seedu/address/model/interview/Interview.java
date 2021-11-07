@@ -27,7 +27,7 @@ public class Interview implements Comparable<Interview> {
     /**
      * Constructs an {@code Interview}.
      *
-     * @param time A valid interview time.
+     * @param time An input for interview time.
      */
     public Interview(String time) {
         if (time.isEmpty()) {
@@ -40,7 +40,8 @@ public class Interview implements Comparable<Interview> {
     }
 
     /**
-     * Returns true if a given string is a valid interview time which follows the timing format.
+     * Returns true if a given string is a valid interview time which either (1) is empty
+     * or (2) follows the parsed time format.
      */
     public static boolean isValidInterviewTime(String test) {
         if (test.equals(EMPTY_TIME)) {
@@ -126,6 +127,7 @@ public class Interview implements Comparable<Interview> {
      * @return Formatted time.
      */
     public String displayTime() {
+        assert isValidInterviewTime(parseTime) : "Not a valid interview time";
         String formatted = parseTime;
         if (!isEmptyInterview()) {
             try {
