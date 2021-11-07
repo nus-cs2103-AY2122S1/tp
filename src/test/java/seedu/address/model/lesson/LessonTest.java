@@ -9,9 +9,8 @@ import static seedu.address.testutil.TypicalLessons.MON_11_13_MATH;
 import static seedu.address.testutil.TypicalLessons.MON_16_18_MATH;
 import static seedu.address.testutil.TypicalLessons.TUE_16_18_ENGLISH;
 
-import java.time.DayOfWeek;
-
 import org.junit.jupiter.api.Test;
+
 import seedu.address.testutil.LessonBuilder;
 
 class LessonTest {
