@@ -2,7 +2,6 @@
 layout: page 
 title: Erwin Quek's Project Portfolio Page
 ---
-
 ### Project: ProgrammerError
 
 [ProgrammerError](https://github.com/AY2122S1-CS2103-F09-3/tp) is a desktop application which helps CS2100 tutors manage
@@ -15,7 +14,7 @@ project. ([View Reposense](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?s
 ### Features
 
 1. **New Feature**: Automatic sorting of the student list.
-    * What it does: it helps to ensure that the student list is always sorted whenever an add or command is executed. It
+    * What it does: it helps to ensure that the student list is always sorted whenever an add or edit command is executed. It
       first sorts the students based on their class ID than by name.
     * Justification: This feature improves the product significantly as it helps to simulate a real-life nominal roll
       where the students will always be sorted by class and name, allowing the user to have an organized set of data to
@@ -75,20 +74,19 @@ project. ([View Reposense](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?s
       message [#324](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/324) [#328](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/328)
     * Fix duplicate email [#427](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/427)
 
-4. **Reviews**
-    * PRs reviewed:
-        * [#98](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/98)
-          , [#100](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/100)
-          , [#108](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/108),
-          [#109](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/109)
-          , [#110](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/110)
-          , [#152](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/152),
-          [#153](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/153)
-          , [#252](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/252)
-          , [#413](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/413),
-          [#417](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/417)
-          , [#460](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/460/files),
-         [#541](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/541#pullrequestreview-799559192)
+4. **PRs Reviews**
+   * [#98](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/98)
+             , [#100](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/100)
+             , [#108](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/108),
+             [#109](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/109)
+             , [#110](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/110)
+             , [#152](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/152),
+             [#153](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/153)
+             , [#252](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/252)
+             , [#413](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/413),
+             [#417](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/417)
+             , [#460](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/460/files),
+            [#541](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/541#pullrequestreview-799559192)
 
 5. **Documentation**:
     * Updated documentations for user guide and developer's
