@@ -219,6 +219,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Implementation**
+[Table of contents](#table-of-contents)
 
 This section describes some noteworthy details on how certain features are implemented.
 
