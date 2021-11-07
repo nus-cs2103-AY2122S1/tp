@@ -16,7 +16,7 @@ title: Developer Guide
 9. [Appendix: Requirements](#Appendix Requirements)
 9. [Common classes](#Common classes)
 10. [User Stories](#User Stories)
-11. [Use case](#Use Cases)
+11. [Use cases](#Use Cases)
 12. [Non-Functional Requirements](#Non-Functional Requirements)
 13. [Glossary](#Glossary) 
 14. [Appendix: Instructions for manual testing](#Appendix)
