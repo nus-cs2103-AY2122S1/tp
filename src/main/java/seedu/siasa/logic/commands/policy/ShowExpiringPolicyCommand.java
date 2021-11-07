@@ -17,11 +17,17 @@ public class ShowExpiringPolicyCommand extends Command {
 
     public static final String COMMAND_WORD = "expiringpolicy";
 
-    public static final String MESSAGE_SUCCESS = "Showing policies that will be expiring in 1 month";
+    public static final int NUM_MONTHS_CUT_OFF = 1;
 
-    public static final String MESSAGE_NO_POLICIES = "There are no policies expiring in 1 month";
+    public static final LocalDate CUT_OFF_DATE = LocalDate.now().plusMonths(NUM_MONTHS_CUT_OFF).plusDays(1);
 
-    private static final LocalDate CUT_OFF_DATE = LocalDate.now().plusMonths(1).plusDays(1);
+    public static final String MESSAGE_SUCCESS = "Showing policies that have expired or will be expiring "
+            + NUM_MONTHS_CUT_OFF + " month.";
+
+    public static final String MESSAGE_NO_POLICIES = "There are no policies expired or expiring in "
+            + NUM_MONTHS_CUT_OFF + " month.";
+
+
 
     public static final Predicate<Policy> EXPIRING_POLICIES_MONTH = (p) -> p.isExpiringBefore(CUT_OFF_DATE);
 
