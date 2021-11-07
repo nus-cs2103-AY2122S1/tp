@@ -285,7 +285,6 @@ The following sequence diagram shows how the edit operation works.
 ![images](images/EditCommandSequenceDiagram.png)
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `EditCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
-<<<<<<< HEAD
 
 ### Delete feature
 
@@ -308,8 +307,8 @@ Step 2. `DeleteCommandParser` is initialized based on the parse results and `Del
 to identify the indices present in ``` 1```. `DeleteCommandParser#parse()` then initializes a
 `DeleteCommand` with the indices present as arguments.
 
-Step 3. `DeleteCommand#execute()` is then called, which will check the validity of the given indices.
-If there is no exception thrown, `Model#deletePerson()` is called to delete the applicants corresponding to the
+Step 3. `DeleteCommand#execute()` is then called, which will check the validity of the given indices. 
+If there is no exception thrown, `Model#deletePerson()` is called to delete the applicants corresponding to the 
 given indices.
 
 Step 4. `CommandResult` is initialized with `String` containing the details of the deleted applicant.
