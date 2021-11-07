@@ -89,7 +89,7 @@ Section | Representation
 Menu Bar | The area where you can click to navigate and view some of TAB's features (e.g. help, reminder and calendar). See [Menu Bar Shortcuts](#menu-bar-shortcuts) for more details.
 Menu Item | A button that you can click to view the stated feature, or to quit TAB (for <kbd>Exit</kbd>).
 Command Box | The text field where you key in commands that are meant to be processed by TAB. TAB will execute the command after you press <kbd>Enter</kbd>.
-Result Display | The area that shows the result of the execution of the command. If the command entered has been executed successfully, it will display the relevant success message. Otherwise, it will show an error message indicating the cause of the error.
+Result Display | The area that shows the result of the execution of commands typed in the Command Box. If the command entered has been executed successfully, it will display the relevant success message. Otherwise, it will show an error message indicating the cause of the error.
 Student List | The panel that shows the list of students you have in TAB.
 Student Card | The area that shows the details of a student. See [Managing Students](#managing-students) for more details.
 Lesson List | The panel that shows the name of the student you have selected together with a list of lessons that the student has.
@@ -197,7 +197,9 @@ Format: `help`
 - You can click <kbd>Copy URL</kbd> button to copy the link to this user guide.
 - You can click the right end to each column to sort the rows alphabetically.
 
-![help](images/help.png)
+<div align="center">
+  <img src="images/help.png" width="650" />
+</div>
 <div class="caption">Help window interface.</div>
 
 <br />
@@ -667,7 +669,7 @@ A lesson can be identified by the index number shown in the lesson list of the s
             <td><ul>
               <li>Fee of the lesson per hour</li>
               <li>Used in the calculation of fees due after each lesson</li>
-              <li>Refer to <a href="#monetary-fields">Monetary fields</a> for more details.</li>
+              <li>Refer to <a href="#monetary-fields">Monetary fields</a> for more details</li>
             </ul></td>
             <td><code>rates/50</code></td>
         </tr>
@@ -693,7 +695,12 @@ A lesson can be identified by the index number shown in the lesson list of the s
         <tr>
             <td>Homework</td>
             <td><code>hw/</code></td>
-            <td>Maximum of 50 characters</td>
+            <td><ul>
+                <li>Case sensitive</li>
+                <li>Add multiple homework with <code>hw/</code> before each homework</li>
+                <li>Identical homework for the same lesson will be considered as one homework</li>
+                <li>Maximum of 50 characters</li>
+            </ul></td>
             <td><ul>
               <li><code>hw/Test 2</code> is valid</li>
               <li><code>hw/</code> clears <strong>all</strong> existing pieces of homework.</li>
@@ -941,8 +948,6 @@ This value would be used to calculate and flag out which lesson's fees are due b
 
 --------------------------------------------------------------------------------------------------------------------
 
-<div style="page-break-after: always;"></div>
-
 ### Managing Your Schedule
 
 This section guides you on how to use TAB's calendar interface. Typing any of the commands in this section will bring you to the calendar interface. Any command from other sections, such as `list` or `tag`, will bring you right out.
@@ -972,9 +977,11 @@ All the other commands in this [Managing Your Schedule](#managing-your-schedule)
 For example, the `day` command below opens the calendar, **and** goes to the day page. You can skip typing `calendar`! 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 #### Viewing your daily calendar: `day`
 
-Displays the daily calendar, which shows your scheduled lessons for the day.
+Displays the daily calendar.
 
 Format: `day`
 
@@ -982,9 +989,11 @@ Format: `day`
 
 <div class="caption">Day view for calendar interface.</div>
 
+<div style="page-break-after: always;"></div>
+
 #### Viewing your weekly calendar: `week`
 
-Shows the weekly calendar for you to see all the lessons you have for the week
+Shows the weekly calendar.
 
 Format: `week`
 
@@ -992,9 +1001,11 @@ Format: `week`
 
 <div class="caption">Week view for calendar interface.</div>
 
+<div style="page-break-after: always;"></div>
+
 #### Viewing your monthly calendar: `month`
 
-Displays the monthly calendar, allowing you to visualise your lessons for the month.
+Displays the monthly calendar.
 
 Format: `month`
 
@@ -1002,9 +1013,11 @@ Format: `month`
 
 <div class="caption">Month view for calendar interface.</div>
 
+<div style="page-break-after: always;"></div>
+
 #### Viewing your yearly calendar: `year`
 
-Shows the yearly calendar. You can see which days of the year you have lessons in this view.
+Shows the yearly calendar.
 
 Format: `year`
 
@@ -1148,15 +1161,15 @@ TAB has a menu bar which you can click to easily navigate between its various vi
 Menu Item | Shortcut | Action | Description
 ----------|--------|---------|---------
 <kbd>Help</kbd> | <kbd>F1</kbd> | View Help | Opens the help window.
-<kbd>View</kbd> → <kbd>Students</kbd> | <kbd>F2</kbd> | <span id="view-students">View Students </span> | Brings you to the last displayed list of students. <br> e.g. if you used `find` to filter the list of students, and then switched to the calendar view, clicking <kbd>View</kbd> → <kbd>Students</kbd> or pressing <kbd>F2</kbd> brings you back to the filtered list.
+<kbd>View</kbd> → <kbd>Students</kbd> | <kbd>F2</kbd> | <span id="view-students">View Students </span> | Brings you to the last displayed list of students. <br> e.g. if you used `find` to filter the list of students, and then switched to the calendar view, clicking <kbd>View</kbd> → <kbd>Students</kbd> or pressing <kbd>F2</kbd> brings you back to the filtered list (and refreshes the student lessons).
 <kbd>View</kbd> → <kbd>Calendar</kbd> | <kbd>F3</kbd> | View Calendar | Brings you to the calendar interface.
 <kbd>View</kbd> → <kbd>Tags</kbd> | <kbd>F4</kbd> | View Tags | Brings you to your list of tags.
 <kbd>Reminder</kbd> | <kbd>F5</kbd> | View Reminder | Opens or updates the reminder window with the list of upcoming lessons that ends within the next 48 hours.
 <kbd>File</kbd> → <kbd>Exit</kbd> | N.A. | Exit | Quits TAB.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-You can immediately go back to typing commands from anywhere in TAB even if your cursor is not in the Command Box.
-This means that after clicking any button in the GUI, you do not have to click in the Command Box again to continue. Just type away!
+The Command Box intelligently recognises when you're typing a command even if your cursor is somewhere else in the main window.
+This means that after clicking any button in the main window, you do not have to click in the Command Box again to continue. Just type away!
 </div>
 
 <br />
