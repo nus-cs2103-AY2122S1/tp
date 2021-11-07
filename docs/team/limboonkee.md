@@ -36,24 +36,12 @@ Our team consists of Hsiao Ting, Choon Yong, Kevin, Boon Kee and Nathan. We are 
 
 #### 1.2 About the project
 
-The team project (tP) uses a generic application called [AddressBook-Level3 (AB3)](https://se-education.org) as the starting point.
-
-Accordingly, the tP is structured to resemble an intermediate stage of a non-trivial real-life brownfield software project in which we will,
-* conceptualize and implement enhancements to a given product, and,
-* have it ready to be continued by future developers
-
-Our team has decided to evolve AB3 into a more powerful or more optimized contact management app, Socius.
-
-Socius is a desktop application that can help you, as a CS2103T Software Engineering student, to
-* manage your classmates’ contacts
-* make friends and
-* find teammates!
+Socius is a contact management desktop application used for CS2103T module takers. Socius is a platform to help students
+find potential project group mates for CS2103T. The user interacts with it using a CLI, and it has a GUI created with
+JavaFX. Socius is written in Java, and has about 12 kLoC.
 
 A screenshot of Socius is shown below:
 ![Ui](../images/Quickstart.png)
-
-Socius is optimized for use via a *Command Line Interface (CLI)* while still having the benefits of a *Graphical User Interface (GUI)*.
-If you can type fast, Socius can get your contact management tasks done faster than traditional *GUI* apps.
 
 ### 2. Summary of contributions
 

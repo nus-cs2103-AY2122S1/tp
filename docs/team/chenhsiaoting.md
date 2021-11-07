@@ -2,6 +2,11 @@
 layout: page
 title: Chen Hsiao Ting's Project Portfolio Page
 ---
+### Project: Socius
+
+Socius is a contact management desktop application used for CS2103T module takers. Socius is a platform to help students
+find potential project group mates for CS2103T. The user interacts with it using a CLI, and it has a GUI created with
+JavaFX. Socius is written in Java, and has about 12 kLoC.
 
 ## Chen Hsiao Ting - Project Portfolio for Socius (tP)
 
