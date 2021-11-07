@@ -182,6 +182,14 @@ helper classes to parse the text into various attributes `XYZ` of `Person`, whic
 `AddCommandParser` then creates an `AddCommand` based on created objects, 
 as well as an empty `Appointment` object and an empty `HashSet` of `Claims`.
 
+**Step 2**: Execution of `AddCommand`
+
+![AddCommandActivityDiagram](images/AddCommandActivityDiagram.png)
+
+There are 2 possible outcomes of an `AddCommand`:
+1. The addition is rejected since a `Person` with the same name already exists. 
+2. The person is added to `InsurancePal`.
+
 ###  Revenue feature
 
 #### Current Implementation
