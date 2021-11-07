@@ -107,11 +107,19 @@
     -fx-background-color: derive(#1d1d1d, 20%);
 }
 
-.list-cell {
+#staffWorkingList .list-cell {
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
     -fx-text-fill: white;
+}
+
+#personListView .list-cell {
+    -fx-label-padding: 0 0 0 0;
+    -fx-graphic-text-gap : 0;
+    -fx-padding: 0 0 0 0;
+    -fx-text-fill: white;
+    -fx-alignment: center;
 }
 
 .list-cell:filled:even {
@@ -144,7 +152,7 @@
 .cell_big_label_centered {
     -fx-font-family: "Open Sans Semibold";
     -fx-font-size: 16px;
-    -fx-text-fill: #010504;
+    -fx-text-fill: white;
     -fx-text-alignment: center;
 }
 
@@ -383,11 +391,11 @@
     -fx-vgap: 3;
 }
 
-#tags .label {
+#roles .label {
     -fx-text-fill: white;
     -fx-background-color: #3e7b91;
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
-    -fx-font-size: 11;
+    -fx-font-size: 12;
 }

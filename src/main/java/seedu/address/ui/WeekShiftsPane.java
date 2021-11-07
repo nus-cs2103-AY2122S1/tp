@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Period;
@@ -32,13 +33,10 @@ public class WeekShiftsPane extends UiPart<Region> {
     public void setChildren(ObservableList<Person> staffList, Period period) {
         LocalDate firstDay = period.getStartDate();
         weekShiftsPane.getChildren().clear();
-        weekShiftsPane.getChildren().addAll(new DayCard(firstDay, 0, staffList, period).getRoot(),
-                new DayCard(firstDay, 1, staffList, period).getRoot(),
-                new DayCard(firstDay, 2, staffList, period).getRoot(),
-                new DayCard(firstDay, 3, staffList, period).getRoot(),
-                new DayCard(firstDay, 4, staffList, period).getRoot(),
-                new DayCard(firstDay, 5, staffList, period).getRoot(),
-                new DayCard(firstDay, 6, staffList, period).getRoot());
+        for (int i = 0; i < 7; i++) {
+            DayCard nextDayCard = new DayCard(firstDay, i, staffList, period);
+            weekShiftsPane.getChildren().add(nextDayCard.getRoot());
+            HBox.setHgrow(nextDayCard.getRoot(), Priority.ALWAYS);
+        }
     }
-
 }
