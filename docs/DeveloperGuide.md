@@ -24,7 +24,6 @@ title: Developer Guide
         4.6 <a href="#46-stats-feature">Stats Feature</a><br>
         4.7 <a href="#47-command-history-feature">Command History Feature</a><br>
         4.8 <a href="#48-proposed-undoredo-feature">[Proposed] Undo/Redo Feature</a><br>
-        4.9 <a href="#49-proposed-data-archiving">[Proposed] Data Archiving</a><br>
    </details>
 1. [Documentation, logging, testing, configuration, dev-ops](#5-documentation-logging-testing-configuration-dev-ops)
 1. <details><summary><a href="#6-appendix-requirements">Appendix: Requirements</a></summary>
@@ -559,10 +558,6 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
-
-### 4.9 \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 
 
 --------------------------------------------------------------------------------------------------------------------
