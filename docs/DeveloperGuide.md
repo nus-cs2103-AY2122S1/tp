@@ -1465,10 +1465,10 @@ testers are expected to do more *exploratory* testing.
         Expected: Searches for appointments that has a patient with a name that contains the keyword `Aaron` in it, a doctor with a name that contains the keyword `Irfan` in it and has a starting date after `01/11/2021` [inclusive] and before `30/11/2021` [inclusive]. The search results are then displayed in the appointment list.
        
     10. Test case: `appt -f s/01/14/2021`<br>
-        Expected: Displayed appointments are not changed. Error details are shown in the status message.
+        Expected: Displayed appointments are not changed. Error details are shown in the status message indicating an invalid date.
         
     11. Test case: `appt -f d/`<br>
-        Expected: Displayed appointments are not changed. Error details are shown in the status message.
+        Expected: Displayed appointments are not changed. Error details are shown in the status message indicating that there is an empty parameter.
 
 
 ### Filtering upcoming appointments <a name="filter-upcoming-appointments"/>
@@ -1493,10 +1493,10 @@ testers are expected to do more *exploratory* testing.
       Expected: Searches for appointments that has a doctor with a name that contains the keyword `Irfan` **or** `Ibrahim` in it and displays the results in the appointment list.
       
     7. Test case: `appt -u d/Aaron s/21/10/2021`<br>
-        Expected: Displayed appointments are not changed. Error details are shown in the status message.
+        Expected: Displayed appointments are not changed. Error details are shown in the status message indicating that the command should not be used with a date parameter.
 
     8. Test case: `appt -u d/`<br>
-       Expected: Displayed appointments are not changed. Error details are shown in the status message.
+       Expected: Displayed appointments are not changed. Error details are shown in the status message indicating that there is an empty parameter.
 
 ### Listing all appointments for today <a name="list-all-manual-testing"/>
 
