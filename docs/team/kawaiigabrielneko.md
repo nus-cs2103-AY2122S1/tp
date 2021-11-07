@@ -28,5 +28,6 @@ Given below are my contributions to the project.
   * Added Glossary
 
 * **Community**:
-
-* **Tools**:
+  * Found bugs in the module website ([1](https://github.com/nus-cs2103-AY2122S1/forum/issues/346),
+      [2](https://github.com/nus-cs2103-AY2122S1/forum/issues/304))
+  
