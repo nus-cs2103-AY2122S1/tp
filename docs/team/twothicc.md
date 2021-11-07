@@ -14,8 +14,9 @@ Given below are my contributions to the project.
 
 * **New Features Implemented**: Added `show` command
 [\#145](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/145),
-[\#146](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/156),
-[\#146](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/166)
+[\#156](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/156),
+[\#166](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/166),
+[\#380](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/380)
   * What it does: The `show` command parses the user input and only returns unique search terms for the first prefix
   provided by the user.
   * Justification: As we expect users to add a large number of applicants to RecruitIn, this command will assist
@@ -84,6 +85,7 @@ Given below are my contributions to the project.
     [\#320](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/320)
     * Updated UI picture:
     [\#183](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/183)
+    [\#355](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/355)
     * Added Table of Contents and Quick Introduction. Also introduced `{Advanced}` formatting:
     [\#189](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/189),
     [\#294](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/294),
@@ -105,15 +107,27 @@ Given below are my contributions to the project.
     [\#335](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/335)
     * Added RecruitIn icon:
     [\#335](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/335)
+    * Added warning against editing `preferences.json`:
+    [\#407](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/407)
 
   * Developer Guide:
     * Added implementation details for the feature `show`:
     [\#203](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/203)
+    * Updated activity diagrams for feature `add` and `edit`:
+    [\#347](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/347)
+    * Added design considerations for feature `show`:
+    [\#347](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/347)
+    * Added manual testing for feature `show`:
+    [\#378](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/378)
+    * Updated links to code and acknowledgements:
+    [\#401](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/401)
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments):
   [\#160](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/160#discussion_r732770997),
-  [\#160](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/160#discussion_r732779286)
+  [\#160](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/160#discussion_r732779286),
+  [\#337](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/337#discussion_r744070318),
+  [\#337](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/337#discussion_r744070540)
 
   * Reported bugs for other team during PE Dry Run:
   [\#146](https://github.com/AY2122S1-CS2103-W14-3/tp/issues/146),
