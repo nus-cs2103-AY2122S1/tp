@@ -205,8 +205,13 @@ The above information is also applicable for the edit feature.
 </div>
 
 ### Find feature 
+Users are able to execute a command to find an existing person in contHACKS. 
+contHACKS will parse the find command for keywords, and filters the list of contacts to be displayed. 
+Upon a successful search, the person card will be returned and listed in the GUI. 
 
-#### Implementation
+![Interactions for  `find n/Alex` Command](images/FindPersonSequenceDiagram.png)
+
+### Implementation
 The find command returns contacts that matches the input keywords. Initially, it only returns contacts that fully matches the keywords.
 Given the following example contact book:
 * Contact #1: Jason
