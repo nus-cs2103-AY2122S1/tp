@@ -118,8 +118,8 @@ public class MainWindow extends UiPart<Stage> {
         setWindowDefaultSize(logic.getGuiSettings());
 
         // Fix dimension based on screen resolution
-        primaryStage.setMinHeight(800);
-        primaryStage.setMaxHeight(800);
+        primaryStage.setMinHeight(850);
+        primaryStage.setMaxHeight(850);
         primaryStage.setMinWidth(950);
 
         // Configure all keyboard shortcuts

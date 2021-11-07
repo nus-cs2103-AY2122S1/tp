@@ -7,8 +7,10 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -77,6 +79,7 @@ public class StorageManagerTest {
                     JsonSerializableUserProfile.class);
             try {
                 userProfileStorage.saveUserProfile(userProfile.get());
+                Files.write(profileFilePath, System.lineSeparator().getBytes(), StandardOpenOption.APPEND);
             } catch (IOException e) {
                 assertNull(e);
             }

@@ -267,7 +267,7 @@ For the `arePrefixesPresent` method, the prefixes provided were changed to only 
 
 #### Implementation
 
-The GitHub field is facilitated by the `Github` class. It is stored interally as a `String` in the data file `addressbook.json` and is then initialized as a `Github` object. 
+The GitHub field is facilitated by the `Github` class. It is stored internally as a `String` in the data file `addressbook.json` and is then initialized as a `Github` object. 
 
 The `Github` class implements the following operation:
 
@@ -327,18 +327,6 @@ Next, The `ExportCommand` is then executed in `LogicManager`. The `ExportCommand
     2. `FileUtil#createIfMissing(Path)` creates the JSON file.
     3. The current `ReadOnlyAddressBook` is used to instantiate a new `JsonSerializableAddressBook`, a JSON-friendly equivalent of `ReadOnlyAddressBook` containing Jackson annotations. It stores a list of `JsonAdaptedPerson` instead of `Person`, which is also JSON-friendly.
     4. `JsonUtil#saveJsonFile(T, Path)` serializes the address book and writes to the file, using `ObjectMapper`, a Jackson class.
-    ```
-    /**
-     * Converts a given instance of a class into its JSON data string representation.
-     *
-     * @param instance The T object to be converted into the JSON string
-     * @param <T> The generic type to create an instance of
-     * @return JSON data representation of the given class instance, in string
-     */
-    public static <T> String toJsonString(T instance) throws JsonProcessingException {
-        return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(instance);
-    }
-    ```
 
 2. `exportAddressBookToCsv(ReadOnlyAddressBook)`
 
@@ -497,8 +485,9 @@ class to achieve the fading image and character typing effect, respectively.
 #### Implementation
 
 The class `ProfileSetUpWindow` is responsible for displaying the Profile SetUp Window. 
-It is only shown once when the User launches the app for the first time and has input 
-their credentials as required. It is facilitated by `ProfileSetUpWindow.fxml` and 
+It is only shown once when the User launches the app for the first time, and their 
+credentials are not present. They have to input their valid credentials here.
+It is facilitated by `ProfileSetUpWindow.fxml` and 
 `ProfileSetUpWindow.css`. The `.fxml` file is responsible for the layout of the 
 various components in this window, and the `.css` file adds a style and enhances 
 the overall UI.
@@ -512,7 +501,7 @@ method of the `ProfileSetUpWindow`, the `ProfileSetUpWindow` with the help of
 a `Logic` object (which is obtained during initialization) checks, if a 
 User Profile is present. If it is present, it 
 again hands over the control to the `MainWindow` by calling the `start()` method 
-of the `MainWindow` Object. Else, It displays the Profile SetUp Window and 
+of the `MainWindow`. Else, It displays the Profile SetUp Window and 
 waits for a response from the User.
 
 After the User has input their credentials in the text fields, they are expected to 
@@ -520,7 +509,7 @@ click the `Submit` button. When that button is clicked upon, the `submit()` meth
 invoked. This method calls the `areUserCredentialsValid()` method to verify if the
 entered credentials are valid or not. If they are valid, the User Profile is deemed 
 complete and is set up with the help of the `Logic` object obtained during
-the object's initialization. If the credentials are not valid, an error message
+the initialization. If the credentials are not valid, an error message
 is shown in the Window, highlighting which credential is invalid. The User cannot proceed
 forward without entering all valid Credentials.
 
@@ -534,8 +523,19 @@ and the GitHub Username are valid.
 3. Class level method `isValidGithub()`, of `Github` class
    verifies the GitHub Username entered.
 
-This method is also responsible for displaying the appropriate error message
-in the Window.
+If either of the credentials is not valid, the `setErrorMessageText(MESSAGE)` is
+called with the appropriate error message. This method is responsible for displaying 
+this error message in the Window.
+
+> A Typical Scenario Would be like:
+
+![ProfileSetUpWindowTypicalScenarioSequenceDiagram](images/ProfileSetUpWindowTypicalScenarioSequenceDiagram.png)
+
+> If The User Enters an Invalid Telegram Credential:
+
+![ProfileSetUpWindowInvalidCredentialsSequenceDiagram](images/ProfileSetUpWindowInvalidCredentialsSequenceDiagram.png)
+
+> The Big Picture (High Level Diagram):
 
 ![ProfileSetUpWindowSequenceDiagram](images/ProfileSetUpWindowSequenceDiagram.png)
 
@@ -573,8 +573,8 @@ to initialize all the fields with the latest User Profile Credentials. This woul
 also call `UserProfileWindow#setFields()`, to set them up in the UI. After all the setting
 up is done, the User Profile Window is shown.
 
-The `UserProfileWindow#focus()`, calls the `getRoot()` method to obtain the root object.
-On that root object, `requestFocus()` is called upon to request focus.
+The `UserProfileWindow#focus()`, calls the `getRoot()` method and on that `requestFocus()` 
+is called upon to request focus.
 
 ![UserProfileWindowSequenceDiagram](images/UserProfileWindowSequenceDiagram.png)
 
@@ -618,6 +618,12 @@ the object initialized earlier. If it is not showing, the `show()` method of the
 minimized by the User, `HelpWindow#getRoot()#toFront()` is called to
 bring the window to the maximized state.
 
+There is also a button present in the window, `Visit URL`, which upon 
+clicking, takes the User to the UserGuide. It opens the UserGuide in the
+Users systems default browser.
+
+![HelpWindowVisitURLButton](images/HelpWindowVisitURLButton.png)
+
 ![HelpWindowSequenceDiagram](images/HelpWindowSequenceDiagram.png)
 
 ### User Profile in Menu Bar
@@ -628,7 +634,9 @@ The class `UserProfileInMenuBar` is responsible for displaying the User
 Profile in the Menu Bar. It is shown in the Main Window, in the top right
 of the Menu Bar beside the Bell icon. It is facilitated by `UserProfileInMenuBar.fxml`.
 The `.fxml` file is responsible for the layout of the various components inside
-this Region.
+this Region. On clicking this, the `UserProfileWindow` is shown.
+
+![UserProfileInMenuBarPictureHighlight](images/UserProfileInMenuBarPictureHighlight.png)
 
 The `UserProfileInMenuBar` class extends `UiPart<Region>` and implements
 `UserProfileWatcher`.
@@ -694,6 +702,88 @@ The Sequence Diagram below illustrates the interactions within the `Logic`, `Mod
 the `execute("show alex")` API call.
 
 ![ExportSequenceDiagram](images/ShowWithNameSequenceDiagram.png)
+
+### Command History (Keyboard Shortcut)
+
+In the Command Box, users can use up and down arrow keys to navigate through previous commands, similar to the Command Line. This is achieved by interactions between `CommandHistory` and `CommandBox`.
+
+The `CommandHistory` class contains these key variables and methods:
+* An `ArrayList<String>` which stores previous user commands
+* An `int` which indicates the current index
+* Methods `add(String)`, `getPrevious()`, `getNext()`, `resetIndex()`
+
+When CohortConnect UI is initialized, the `CommandBox` class representing the Command Box is created, containing a single instance of `CommandHistory`. It interacts with `CommandHistory` in 3 ways:
+1. If `KeyCode.UP` is detected in the `TextField`, `CommandHistory#getPrevious()` is called, and the returned String is set to the text field.
+
+<div markdown="span" class="alert alert-primary">
+:bulb: **Note:** If the history is empty, UP will return an empty string. If the current index is at the earliest command, it will continue to return the same command. 
+</div>
+
+The activity diagram below illustrates what happens when a user presses the UP arrow key.
+
+![CommandHistoryActivityDiagramUp](images/CommandHistoryActivityDiagramUp.png)
+
+2. If `KeyCode.DOWN` is detected in the `TextField`, `CommandHistory#getNext()` is called, and the returned String is set to the text field.
+
+<div markdown="span" class="alert alert-primary">
+:bulb: **Note:** If the history is empty or the current index is at the latest command, DOWN will return an empty string.   
+</div>
+
+The activity diagram below illustrates what happens when a user presses the DOWN arrow key.
+
+![CommandHistoryActivityDiagramDown](images/CommandHistoryActivityDiagramDown.png)
+
+3. When the user presses enter to execute a command, the command is saved using `CommandHistory#add(String)`, and the current index is reset using `CommandHistory#resetIndex()`.
+
+### Switching Between Tabs (Keyboard Shortcut)
+
+![WindowMenu](images/WindowMenu.png)
+
+**Accelerators** are shortcuts to Menu Items, which can be associated with `KeyCombinations`. To switch between the 4 tabs, a new Menu Window was added in the MenuBar, containing 4 Menu Items which can be accessed using Cmd/Ctrl + 1/2/3/4. Each of the Menu Items have an `onAction` method declared in their FXML files, and defined in `MainWindow.java`.
+
+1. Accelerators for the 4 Menu Items are set during initialization of `MainWindow.java`.
+
+```
+private void setAccelerators() {
+    setAccelerator(contactsMenuItem, KeyCombination.valueOf("Shortcut+1"));
+    setAccelerator(favoritesMenuItem, KeyCombination.valueOf("Shortcut+2"));
+    setAccelerator(eventsMenuItem, KeyCombination.valueOf("Shortcut+3"));
+    setAccelerator(findABuddyMenuItem, KeyCombination.valueOf("Shortcut+4"));
+    ...
+}
+```
+
+<div markdown="span" class="alert alert-primary">
+:bulb: **Note:** When detecting KeyCombination, Javafx automatically switches its interpretation of "Shortcut" as "Ctrl" for Windows and "Cmd" for macOS. The symbols in the MenuItem (shown above) change as well.
+</div>
+
+2. When their respective key combinations are detected, the MenuItem's onAction methods are called. For example, the following method is called when Cmd/Ctrl + 4 is detected.
+
+```
+@FXML
+public void handleFindABuddy() {
+    tabPaneHeader.activateFindABuddy(logic);
+}
+```
+
+3. `TabPaneHeader` then switches to the Find A Buddy tab using `tabPane.getSelectionModel().select(3)`.
+
+
+### GitHub and Telegram Commands
+
+In the Command Box, users can enter `g` or `te` to open the currently selected user's GitHub or Telegram in a browser, using their respective username.
+
+The following links are used
+- GitHub: `https://github.com/{username}`
+- Telegram: `https://t.me/{username}`
+
+Similar to other commands, the commands `g` and `te` are parsed in `AddressBookParser`, where it is checked that there are no other arguments.
+
+During their execution, it is checked that there is a current user selected, using `Model#getSelectedIndex()`. If the returned value is `-1`, then a `CommandException` is thrown.
+
+The CommandResult returned indicates whether it is triggered by a GitHub or Telegram command using booleans variables.
+
+In `MainWindow`, if the command result `isGithub()` or `isTelegram()`, the GitHub and Telegram links in `PersonDetails` will be triggered using `PersonDetails#openTelegram()` and `PersonDetails#openGithub()`. 
 
 --------------------------------------------------------------------------------------------------------------------
 

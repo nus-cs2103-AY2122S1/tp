@@ -73,12 +73,12 @@ public class FindCommandTest {
 
     @Test
     public void execute_oneGithubUsername_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         GithubContainsKeywordsPredicate predicate = prepareGithubUsernamePredicate("g/me");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(DANIEL, ELLE), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(BENSON, DANIEL, ELLE), model.getFilteredPersonList());
     }
 
     @Test

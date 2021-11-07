@@ -69,6 +69,7 @@ public class PersonCard extends UiPart<Region> {
         String[] tagClasses = new String[] {"tag-general", "tag-event", "tag-mod"};
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
+                .limit(5)
                 .forEach(tag -> {
                     Label temp = new Label(tag.tagName);
                     temp.setId(tagClasses[tag.getIntType()]);
