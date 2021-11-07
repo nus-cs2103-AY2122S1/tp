@@ -251,11 +251,10 @@ The `NoteCommandParser` uses the parsed data classes to create a `NoteCommand`. 
 
 <img src="images/NoteCommandExecuteActivityDiagram.png" width="300" />
 
-There are 3 possible outcomes from the execution of a `NoteCommand`.
+There are 2 possible outcomes from the execution of a `NoteCommand`.
 
 1. Add a new Note to the client
-2. Edit an existing Note of the client
-3. Delete an existing Note of the client
+2. Delete an existing Note of the client
 
 #### Design considerations
 {:.no_toc}
