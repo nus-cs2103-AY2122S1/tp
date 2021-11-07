@@ -104,6 +104,7 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withNusNetworkId(String nusNetworkId) {
         descriptor.setNusNetworkId(new NusNetworkId(nusNetworkId));
+        descriptor.setEmail(new Email(nusNetworkId + "@u.nus.edu"));
         return this;
     }
 

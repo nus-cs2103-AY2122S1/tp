@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GITHUB_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NUS_NETWORK_ID;
@@ -47,18 +46,16 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_GITHUB_ID + "GITHUB_ID]"
-            + "[" + PREFIX_NUS_NETWORK_ID + "NUS_NETWORK_ID]"
-            + "[" + PREFIX_TYPE + "TYPE]"
-            + "[" + PREFIX_STUDENT_ID + "STUDENT_ID]"
-            + "[" + PREFIX_TUTORIAL_ID + "TUTORIAL_ID]"
+            + "[" + PREFIX_GITHUB_ID + "GITHUB_ID] "
+            + "[" + PREFIX_NUS_NETWORK_ID + "NUS_NETWORK_ID] "
+            + "[{" + PREFIX_TYPE + "student|" + PREFIX_TYPE + "tutor}] "
+            + "[" + PREFIX_STUDENT_ID + "STUDENT_ID] "
+            + "[" + PREFIX_TUTORIAL_ID + "TUTORIAL_ID] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "e1234567@u.nus.edu";
+            + PREFIX_PHONE + "91234567 ";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
