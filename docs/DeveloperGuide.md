@@ -335,13 +335,43 @@ where only the `Name`, `Telegram` and `Github` fields are compulsory.
 The Favorite command favorites a non-favorited contact from the current list of contacts.
 
 In order to distinguish whether a contact has been favorited or unfavorited,
-a boolean flag, `isFavorite` is added into the `Person` class and initialised as `false`.
-The
+a boolean flag, an `isFavorite` field is added into the `Person` class and
+is initialised as `false` when adding new contacts to the address book.
+
+The following methods are added to `Person` to help identify and toggle the `isFavorite`
+field within a `Person` object:
+* `Person#isFavorite()` — Returns a boolean flag to tell whether the `Person`
+object is Favorited or not.
+* `Person#SetIsFavorite()` — Sets the `Person` objects' `isFavorite` field to
+`true`, which basically favorites the contact of this `Person` object.
+* `Person#SetNotIsFavorite()` — Sets the `Person` objects' `isFavorite` field to
+`false`, which basically unfavorites the contact of this `Person` object.
 
 Favoriting contacts is facilitated by the `IsFavoritePredicate`.
 * `IsFavoritePredicate` stores a boolean flag for comparison with a `Person` object.
 * It also has a `IsFavoritePredicate#test(Person person)` to determine if the `Person`
 input into the test is currently favorited or unfavorited.
+
+Given below is an example usage scenario and how the `FavoriteCommand` is executed:
+* **Step 1:** The user enters favorite command keyword followed by the index
+of the contact to be favorited `fav 1`.
+* **Step 2:** The `LogicManager` executes the input command text calling the method
+`LogicManager#execute(String commandText)`.
+* **Step 3:** The `LogicManager#execute(String commandText)` method calls the following
+method from `AddressBookParser`, `AddressBookParser#parseCommand(String userInput)`.
+* **Step 4:** Since the command input is a command with description, the command
+word `fav` and argument `1` is passed into
+`AddressBookParser#parseCommandWithDescription(String commandWord, String arguments)`
+which creates a new `FavoriteCommandParser`.
+* **Step 5:** `FavoriteCommandParser#parse(String args)` is then called.
+Since the argument provided here, `1`, is a valid argument for the favorite command,
+a `FavoriteCommand(1)` is returned.
+* **Step 6:** The `FavoriteCommand#execute(Model model)` method is then finally called,
+favoriting the contact at index `1` through the `model` provided as input argument by
+calling `ModelManager#favoritePerson(Person target)`.
+
+The Sequence Diagrams below illustrates how the components interact with each other
+for the scenario where the user issues the command `fav 1`.
 
 ### Unfavorite command
 
@@ -349,11 +379,46 @@ input into the test is currently favorited or unfavorited.
 
 The Unfavorite command unfavorites a favorited contact from the current list of contacts.
 
+Similar to Favorite command, in order to distinguish whether a contact has
+been favorited or unfavorited, a boolean flag, an `isFavorite` field is added
+into the `Person` class and is initialised as `false` when adding new contacts
+to the address book.
+
+The following methods are added to `Person` to help identify and toggle the `isFavorite`
+field within a `Person` object:
+* `Person#isFavorite()` — Returns a boolean flag to tell whether the `Person`
+object is Favorited or not.
+* `Person#SetIsFavorite()` — Sets the `Person` objects' `isFavorite` field to
+`true`, which basically favorites the contact of this `Person` object.
+* `Person#SetNotIsFavorite()` — Sets the `Person` objects' `isFavorite` field to
+`false`, which basically unfavorites the contact of this `Person` object.
+
 Similar to Favoriting contacts, Unfavoriting contacts is also facilitated by the
 `IsFavoritePredicate`.
 * `IsFavoritePredicate` stores a boolean flag for comparison with a `Person` object.
 * It also has a `IsFavoritePredicate#test(Person person)` to determine if the `Person`
 input into the test is currently favorited or unfavorited.
+
+Given below is an example usage scenario and how the `UnfavoriteCommand` is executed:
+* **Step 1:** The user enters unfavorite command keyword followed by the index
+of the contact to be unfavorited `unfav 1`.
+* **Step 2:** The `LogicManager` executes the input command text calling the method
+`LogicManager#execute(String commandText)`.
+* **Step 3:** The `LogicManager#execute(String commandText)` method calls the following
+method from `AddressBookParser`, `AddressBookParser#parseCommand(String userInput)`.
+* **Step 4:** Since the command input is a command with description, the command
+word `unfav` and argument `1` is passed into
+`AddressBookParser#parseCommandWithDescription(String commandWord, String arguments)`
+which creates a new `UnfavoriteCommandParser`.
+* **Step 5:** `UnfavoriteCommandParser#parse(String args)` is then called.
+Since the argument provided here, `1`, is a valid argument for the unfavorite command,
+a `UnfavoriteCommand(1)` is returned.
+* **Step 6:** The `UnfavoriteCommand#execute(Model model)` method is then finally called,
+unfavoriting the contact at index `1` through the `model` provided as input argument by
+calling `ModelManager#unfavoritePerson(Person target)`.
+
+The Sequence Diagrams below illustrates how the components interact with each other
+for the scenario where the user issues the command `unfav 1`.
 
 ### Export command
 
