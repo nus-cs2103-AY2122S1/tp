@@ -355,12 +355,12 @@ based on the given `SORT DIRECTION`.
 
 
 **Expected Outcome:** <br>
-For instance, the command `sort r/ASC` sorts users by their risk appetite in ascending order. <br> <p align="center" >
-   <img src="images/ExpectedSortCommand.png" width="600"/> </p> <br> 
-On the other hand, using the command `sort r/dsc` will sort users by their risk appetite in descending order instead as shown. <br>
-<p align="center" >
-   <img src="images/ExpectedSortCommand_DSC.png" width="600"/>
-</p><br>
+For instance, if you were to sort clients by risk appetite. 
+
+| `sort r/asc`| `sort r/dsc |  
+| :---: | :--- |
+| <img src="images/ExpectedSortCommand.png" width="400"/> | <img src="images/ExpectedSortCommand_DSC.png" width="400"/> |
+
 
 ### 5.7 Find meeting schedule : `schedule`
 
@@ -373,9 +373,10 @@ Finds the meeting schedule on a specified date.
 
 **Expected Outcome:** <br>
 For instance, using `schedule 30-11-2021` will produce the following result. <br>
+
 | Before | After |
 | --- | --- |
-| <img src="images/ExpectedScheduleCommand.png" width="500"/> | <img src="images/ExpectedScheduleCommand_AFTER.png" width="500"/> |
+| <img src="images/ExpectedScheduleCommand.png" width="400"/> | <img src="images/ExpectedScheduleCommand_AFTER.png" width="400"/> |
 
 ### 5.8 Locating clients by keywords : `search`
 
@@ -388,9 +389,10 @@ Finds clients whose contacts match with the given keywords.
 
 **Expected Outcome:** <br>
 For instance, using `search Alex` will produce the following result. <br>
+   
 | Before | After |
 | --- | --- |
-| <img src="images/ExpectedSearchCommand.png" width="500"/> | <img src="images/ExpectedSearchCommand_AFTER.png" width="500"/> |
+| <img src="images/ExpectedSearchCommand.png" width="400"/> | <img src="images/ExpectedSearchCommand_AFTER.png" width="400"/> |
 
 ### 5.9 Filter current list by keywords : `filter`
 
@@ -404,9 +406,10 @@ Filters the current list by the given keywords.
 
 **Expected Outcome:** <br>
 For instance, using `filter t/colleagues` will produce the following result.
+
 | Before | After |
 | --- | --- |
-| <img src="images/ExpectedFilterCommand.png" width="500"/> | <img src="images/ExpectedFilterCommand_AFTER.png" width="500"/> |
+| <img src="images/ExpectedFilterCommand.png" width="400"/> | <img src="images/ExpectedFilterCommand_AFTER.png" width="400"/> |
 
 ### 5.10 Clearing all entries : `clear`
 
