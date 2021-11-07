@@ -3,7 +3,9 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Contact;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Timestamp;
 import seedu.address.model.util.SampleDataUtil;
@@ -11,9 +13,9 @@ import seedu.address.model.util.SampleDataUtil;
 public class TaskBuilder {
     public static final String DEFAULT_TITLE = "Buy groceries";
     public static final String DEFAULT_DESCRIPTION = "Two eggs, one carton of milk and five tomatoes";
-    public static final Timestamp DEFAULT_TIMESTAMP = new Timestamp("Tomorrow");
     public static final Set<Tag> DEFAULT_TAGS = new HashSet<>();
     public static final boolean DEFAULT_IS_DONE = false;
+    public static final Set<Contact> DEFAULT_CONTACTS = new HashSet<>();
 
 
     private String title;
@@ -21,6 +23,7 @@ public class TaskBuilder {
     private Timestamp timestamp;
     private Set<Tag> tags;
     private boolean isDone;
+    private Set<Contact> contacts;
 
     /**
      * Creates a new {@code TaskBuilder} instance initialized with default values.
@@ -28,9 +31,15 @@ public class TaskBuilder {
     public TaskBuilder() {
         this.title = DEFAULT_TITLE;
         this.description = DEFAULT_DESCRIPTION;
-        this.timestamp = DEFAULT_TIMESTAMP;
+        try {
+            this.timestamp = Timestamp.of("2021-10-27");
+        } catch (ParseException pe) {
+            //Never occurs
+            this.timestamp = null;
+        }
         this.tags = DEFAULT_TAGS;
         this.isDone = DEFAULT_IS_DONE;
+        this.contacts = DEFAULT_CONTACTS;
     }
 
     /**
@@ -40,8 +49,9 @@ public class TaskBuilder {
         title = taskToCopy.getTitle();
         description = taskToCopy.getDescription().orElse(null);
         timestamp = taskToCopy.getTimestamp().orElse(null);
-        isDone = taskToCopy.getIsDone();
+        isDone = taskToCopy.isDone();
         tags = new HashSet<>(taskToCopy.getTags());
+        contacts = new HashSet<>(taskToCopy.getContacts());
     }
 
     /**
@@ -84,7 +94,15 @@ public class TaskBuilder {
         return this;
     }
 
+    /**
+     * Parses the {@code contacts} into a {@code Set<Contact>} and set it to the {@code Task} that we are building.
+     */
+    public TaskBuilder withContacts(String ... contacts) {
+        this.contacts = SampleDataUtil.getContactSet(contacts);
+        return this;
+    }
+
     public Task build() {
-        return new Task(title, description, timestamp, tags, isDone);
+        return new Task(title, description, timestamp, tags, isDone, contacts);
     }
 }

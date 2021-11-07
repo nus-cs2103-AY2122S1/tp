@@ -2,6 +2,8 @@ package seedu.address.model.task;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Optional;
@@ -23,6 +25,7 @@ public class Task {
     private final Timestamp timestamp;
     private final Set<Tag> tags = new HashSet<>();
     private final boolean isDone;
+    private final Set<Contact> contacts = new HashSet<>();
 
     /**
      * Creates a task with a given title, and optionally a description, timestamp and a set of tags.
@@ -31,8 +34,8 @@ public class Task {
      * @param timestamp The optional timestamp of the task
      * @param tags The tags of the task
      */
-    public Task(String title, String description, Timestamp timestamp, Set<Tag> tags) {
-        this(title, description, timestamp, tags, false);
+    public Task(String title, String description, Timestamp timestamp, Set<Tag> tags, Set<Contact> contacts) {
+        this(title, description, timestamp, tags, false, contacts);
     }
 
     /**
@@ -44,18 +47,20 @@ public class Task {
      * @param tags The tags of the task
      * @param isDone The completion status of the task
      */
-    public Task(String title, String description, Timestamp timestamp, Set<Tag> tags, boolean isDone) {
-        requireAllNonNull(title, tags);
+    public Task(String title, String description, Timestamp timestamp,
+                Set<Tag> tags, boolean isDone, Set<Contact> contacts) {
+        requireAllNonNull(title, tags, contacts);
         this.title = title;
         this.description = description;
         this.timestamp = timestamp;
         this.tags.addAll(tags);
         this.isDone = isDone;
+        this.contacts.addAll(contacts);
     }
 
 
     public String getTitle() {
-        return title;
+        return this.title;
     }
 
     public Optional<String> getDescription() {
@@ -67,12 +72,30 @@ public class Task {
     }
 
     public Set<Tag> getTags() {
-        return tags;
+        return Collections.unmodifiableSet(tags);
     }
 
-    public boolean getIsDone() {
+    /**
+     * Checks if timestamp of task occurs before local date.
+     *
+     * @return boolean True if task is overdue
+     */
+    public boolean isOverdue() {
+        if (timestamp == null) {
+            return false;
+        } else {
+            return LocalDate.now().isAfter(timestamp.getDate());
+        }
+    }
+
+    public boolean isDone() {
         return isDone;
     }
+
+    public Set<Contact> getContacts() {
+        return contacts;
+    }
+
 
     /**
      * Returns whether this task has the same fields as the other task.
@@ -87,11 +110,12 @@ public class Task {
                 && Objects.equals(description, otherTask.description)
                 && Objects.equals(timestamp, otherTask.timestamp)
                 && Objects.equals(tags, otherTask.tags)
-                && Objects.equals(isDone, otherTask.isDone);
+                && Objects.equals(isDone, otherTask.isDone)
+                && Objects.equals(contacts, otherTask.contacts);
     }
 
     @Override
     public String toString() {
-        return title;
+        return this.title;
     }
 }

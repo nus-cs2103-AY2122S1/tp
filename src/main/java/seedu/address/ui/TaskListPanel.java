@@ -1,18 +1,21 @@
 package seedu.address.ui;
 
+import java.util.Optional;
 import java.util.function.Consumer;
 
 import javafx.application.Platform;
 import javafx.beans.Observable;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
+import seedu.address.logic.commands.Command;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.filters.TaskFilter;
-import seedu.address.ui.exceptions.GuiException;
 
 public class TaskListPanel extends UiPart<Region> {
 
@@ -25,6 +28,9 @@ public class TaskListPanel extends UiPart<Region> {
     @FXML
     private FlowPane filterFlowPane;
 
+    @FXML
+    private Button newTaskButton;
+
     private final ObservableList<TaskFilter> availableTaskFilters;
     private final ObservableList<TaskFilter> selectedTaskFilters;
 
@@ -34,29 +40,35 @@ public class TaskListPanel extends UiPart<Region> {
      */
     public TaskListPanel(
             ObservableList<Task> taskList,
-            ObservableList<TaskFilter> availableTaskFilters,
+            ObservableList<TaskFilter> selectableTaskFilters,
             ObservableList<TaskFilter> selectedTaskFilters,
             Consumer<TaskFilter> addTaskFilter,
             Consumer<TaskFilter> removeTaskFilter,
-            TaskEditor taskEditor) {
+            Consumer<Task> addTask,
+            Consumer<? super Command> commandExecutor) {
         super("TaskListPanel.fxml");
-        this.availableTaskFilters = availableTaskFilters;
+        this.availableTaskFilters = selectableTaskFilters;
         this.selectedTaskFilters = selectedTaskFilters;
 
         // Initialize task list
         taskListView.setItems(taskList);
-        taskListView.setCellFactory(tasks -> new TaskListViewCell(taskEditor));
+        taskListView.setCellFactory(tasks -> new TaskListViewCell(commandExecutor));
 
-        // Initialize list of available filters
-        filterComboBox.setItems(availableTaskFilters);
+        // Initialize list of selectable filters
         filterComboBox.setCellFactory(taskFilters -> new TaskFilterCell());
         filterComboBox.setPromptText(null);
+        Label placeholder = new Label("No more filters");
+        placeholder.getStyleClass().add("italics");
+        filterComboBox.setPlaceholder(placeholder);
+        filterComboBox.setItems(selectableTaskFilters);
         filterComboBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
-                addTaskFilter.accept(newValue);
-
                 // When a filter is selected, reset the combo box's current selection
-                Platform.runLater(filterComboBox.getSelectionModel()::clearSelection);
+                Platform.runLater(() -> {
+                    filterComboBox.getSelectionModel().clearSelection();
+                    filterComboBox.hide();
+                    addTaskFilter.accept(newValue);
+                });
             }
         });
 
@@ -64,13 +76,15 @@ public class TaskListPanel extends UiPart<Region> {
         selectedTaskFilters.addListener((Observable observable) -> {
             filterFlowPane.getChildren().clear();
             selectedTaskFilters.stream()
-                    .map(taskFilter -> new TaskFilterChip(taskFilter, removeTaskFilter).getRoot())
+                    .map(taskFilter -> new DeletableChip(taskFilter.toDisplayString(), () ->
+                            removeTaskFilter.accept(taskFilter)).getRoot())
                     .forEach(filterFlowPane.getChildren()::add);
         });
-    }
 
-    @FunctionalInterface
-    interface TaskEditor {
-        void updateTask(Task oldTask, Task newTask) throws GuiException;
+        newTaskButton.setOnAction(event -> {
+            EditTaskDialog editTaskDialog = new EditTaskDialog(null);
+            Optional<Task> newTask = editTaskDialog.getDialog().showAndWait();
+            newTask.ifPresent(addTask);
+        });
     }
 }

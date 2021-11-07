@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -39,6 +40,8 @@ public class CommandTestUtil {
     public static final String VALID_PHONE_BOB = "22222222";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
+    public static final Timestamp VALID_TIMESTAMP_INTERVIEW = Timestamp.tryParse("05-07-2021");
+    public static final Timestamp VALID_TIMESTAMP_REPORT = Timestamp.tryParse("31-12-2021");
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
@@ -72,8 +75,6 @@ public class CommandTestUtil {
     public static final String VALID_TITLE_INTERVIEW = "Attend internship interview";
     public static final String VALID_DESCRIPTION_REPORT = "Report for ES2770";
     public static final String VALID_DESCRIPTION_INTERVIEW = "ABC company";
-    public static final Timestamp VALID_TIMESTAMP_REPORT = new Timestamp("31-12-2021");
-    public static final Timestamp VALID_TIMESTAMP_INTERVIEW = new Timestamp("5-7-2021");
     public static final String VALID_TAG_MODULE = "module";
     public static final String VALID_TAG_CAREER = "career";
 
@@ -81,6 +82,9 @@ public class CommandTestUtil {
     public static final String DESCRIPTION_DESC_REPORT = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_REPORT;
     public static final String TIMESTAMP_DESC_REPORT = " " + PREFIX_TIMESTAMP + "31-12-2021";
     public static final String TITLE_DESC_REPORT = " " + PREFIX_TITLE + VALID_TITLE_REPORT;
+
+    public static final String CONTACT_DESC_AMY = " " + PREFIX_CONTACT + VALID_NAME_AMY;
+    public static final String CONTACT_DESC_BOB = " " + PREFIX_CONTACT + VALID_NAME_BOB;
 
     public static final EditTaskCommand.EditTaskDescriptor DESC_REPORT;
     public static final EditTaskCommand.EditTaskDescriptor DESC_INTERVIEW;
@@ -155,5 +159,4 @@ public class CommandTestUtil {
 
         assertEquals(1, model.getFilteredPersonList().size());
     }
-
 }

@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.util.function.Consumer;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -15,11 +17,11 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.task.AddTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.TaskList;
 import seedu.address.model.task.Task;
 
 /**
@@ -56,9 +58,6 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane resultDisplayPlaceholder;
 
-    @FXML
-    private StackPane statusBarPlaceholder;
-
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
@@ -93,10 +92,31 @@ public class MainWindow extends UiPart<Stage> {
             }
         });
         primaryStage.addEventFilter(KeyEvent.KEY_PRESSED, e -> {
-            if (e.getCode() == KeyCode.Z && e.isShortcutDown()) {
+            if (e.getCode() == KeyCode.Y && e.isShortcutDown()
+                    || e.isShortcutDown() && e.isShiftDown() && e.getCode() == KeyCode.Z) {
+                CommandResult result = this.logic.redoCommand();
+                resultDisplay.setFeedbackToUser(result.getFeedbackToUser());
+                e.consume();
+            } else if (e.getCode() == KeyCode.Z && e.isShortcutDown()) {
                 CommandResult result = this.logic.undoCommand();
                 resultDisplay.setFeedbackToUser(result.getFeedbackToUser());
                 e.consume();
+            }
+        });
+
+        primaryStage.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            EventTarget target = event.getTarget();
+            boolean isTargetEditableTextInput = (target instanceof TextInputControl) && ((TextInputControl) target)
+                    .isEditable();
+            String currentString = commandBox.getContent();
+            if (isTargetEditableTextInput && event.getCode() == KeyCode.UP) {
+                commandBox.setCommandText(logic.getHistoryCommand(false, currentString));
+                event.consume();
+            } else if (isTargetEditableTextInput && event.getCode() == KeyCode.DOWN) {
+                commandBox.setCommandText(logic.getHistoryCommand(true, currentString));
+                event.consume();
+            } else if (commandBox.isEmpty()) {
+                logic.resetHistoryPosition();
             }
         });
     }
@@ -136,19 +156,32 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        TaskListPanel.TaskEditor taskEditor = (Task oldTask, Task newTask) -> {
-            logic.executeGuiAction((AddressBook addressBook, TaskList taskList) -> {
-                taskList.setTask(oldTask, newTask);
-            });
+        Consumer<Task> addTask = task -> {
+            try {
+                logic.executeCommand(new AddTaskCommand(task));
+            } catch (CommandException e) {
+                e.printStackTrace();
+                logger.log(Level.SEVERE, "Error occurred when adding task", e);
+            }
+        };
+
+        Consumer<Command> commandExecutor = command -> {
+            try {
+                logic.executeCommand(command);
+            } catch (CommandException e) {
+                e.printStackTrace();
+                logger.log(Level.SEVERE, "Error occurred when doing GUI action", e);
+            }
         };
 
         TaskListPanel taskListPanel = new TaskListPanel(
                 logic.getFilteredTaskList(),
-                logic.getAvailableTaskFilters(),
+                logic.getSelectableTaskFilters(),
                 logic.getSelectedTaskFilters(),
                 logic::addTaskFilter,
                 logic::removeTaskFilter,
-                taskEditor
+                addTask,
+                commandExecutor
         );
         taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
 
@@ -157,9 +190,6 @@ public class MainWindow extends UiPart<Stage> {
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
-
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
-        statusBarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());

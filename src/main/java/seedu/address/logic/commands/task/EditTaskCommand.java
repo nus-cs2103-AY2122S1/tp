@@ -2,9 +2,14 @@ package seedu.address.logic.commands.task;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PREAMBLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMESTAMP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TITLE;
+import static seedu.address.logic.parser.CommandArgument.filled;
+import static seedu.address.logic.parser.CommandArgument.optionalMultiple;
+import static seedu.address.logic.parser.CommandArgument.optionalSingle;
+import static seedu.address.logic.parser.CommandArgument.requiredSingle;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -18,8 +23,10 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.TaskCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.CommandSpecification;
 import seedu.address.model.Model;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Contact;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Timestamp;
 
@@ -27,20 +34,24 @@ import seedu.address.model.task.Timestamp;
  * Edits the details of an existing task in the address book.
  */
 public class EditTaskCommand extends TaskCommand {
-
     public static final String COMMAND_WORD = "edit";
     public static final String FULL_COMMAND_WORD = TaskCommand.COMMAND_WORD + " " + COMMAND_WORD;
-    public static final String MESSAGE_USAGE =
-            COMMAND_WORD + ": Edits the details of the task identified "
-                    + "by the index number used in the displayed task list. "
-                    + "Existing values will be overwritten by the input values.\n"
-                    + "Parameters: INDEX (must be a positive integer) "
-                    + "[" + PREFIX_TITLE + "TITLE] "
-                    + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] "
-                    + "[" + PREFIX_TIMESTAMP + "TIMESTAMP] "
-                    + "[" + PREFIX_TAG + "TAG]...\n" + "Example: "
-                    + FULL_COMMAND_WORD + " 1 " + PREFIX_DESCRIPTION
-                    + "Physics assignment " + PREFIX_TIMESTAMP + "25/12/2020";
+
+    public static final CommandSpecification COMMAND_SPECS = new CommandSpecification(
+            FULL_COMMAND_WORD,
+            "Edits the details of the task identified by the index number used in the displayed task list.\n"
+            + "Existing values will be overwritten by the input values.",
+            requiredSingle(PREFIX_PREAMBLE, "index"),
+            optionalSingle(PREFIX_TITLE, "title"),
+            optionalSingle(PREFIX_DESCRIPTION, "description"),
+            optionalSingle(PREFIX_TIMESTAMP, "timestamp"),
+            optionalMultiple(PREFIX_TAG, "tag")
+    ).withExample(
+            filled(PREFIX_PREAMBLE, "1"),
+            filled(PREFIX_DESCRIPTION, "Physics assignment"),
+            filled(PREFIX_TIMESTAMP, "25-12-2020")
+    );
+
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -74,25 +85,28 @@ public class EditTaskCommand extends TaskCommand {
                 .or(taskToEdit::getDescription).orElse(null);
         Timestamp updatedTimestamp = editTaskDescriptor.getTimestamp()
                 .or(taskToEdit::getTimestamp).orElse(null);
+        boolean updatedDone = editTaskDescriptor.isDone().orElse(taskToEdit.isDone());
         Set<Tag> updatedTags = editTaskDescriptor.getTags()
                 .orElse(taskToEdit.getTags());
+        Set<Contact> updatedContacts = editTaskDescriptor.getContacts()
+                .orElse(taskToEdit.getContacts());
 
         return new Task(updatedTitle,
                 updatedDescription,
                 updatedTimestamp,
                 updatedTags,
-                taskToEdit.getIsDone());
+                updatedDone,
+                updatedContacts);
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    protected CommandResult executeDo(Model model) throws CommandException {
         requireNonNull(model);
         List<Task> taskList = model.getFilteredTaskList();
 
         if (index.getZeroBased() >= taskList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
-        super.canExecute();
 
         Task taskToEdit = taskList.get(index.getZeroBased());
         this.oldTask = taskToEdit;
@@ -109,8 +123,7 @@ public class EditTaskCommand extends TaskCommand {
     }
 
     @Override
-    public CommandResult undo(Model model) throws CommandException {
-        super.canUndo();
+    protected CommandResult executeUndo(Model model) throws CommandException {
         EditTaskDescriptor oldTaskDescriptor = EditTaskDescriptor.from(this.oldTask);
         List<Task> taskList = model.getFilteredTaskList();
         Task taskToEdit = taskList.get(index.getZeroBased());
@@ -118,7 +131,6 @@ public class EditTaskCommand extends TaskCommand {
                 oldTaskDescriptor);
         model.setTask(taskToEdit,
                 previousEditTask);
-        this.canExecute = true;
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS,
                 taskToEdit));
     }
@@ -148,7 +160,9 @@ public class EditTaskCommand extends TaskCommand {
         private String title;
         private String description;
         private Timestamp timestamp;
+        private Boolean isDone;
         private Set<Tag> tags;
+        private Set<Contact> contacts;
 
         public EditTaskDescriptor() {
         }
@@ -161,7 +175,9 @@ public class EditTaskCommand extends TaskCommand {
             setTitle(toCopy.title);
             setDescription(toCopy.description);
             setTimestamp(toCopy.timestamp);
+            setDone(toCopy.isDone);
             setTags(toCopy.tags);
+            setContacts(toCopy.contacts);
         }
 
         /**
@@ -176,6 +192,8 @@ public class EditTaskCommand extends TaskCommand {
             descriptor.setTimestamp(toCopy.getTimestamp().orElse(null));
             descriptor.setTags(toCopy.getTags());
             descriptor.setDescription(toCopy.getDescription().orElse(null));
+            descriptor.setContacts(toCopy.getContacts());
+            descriptor.setDone(toCopy.isDone());
             return descriptor;
         }
 
@@ -186,7 +204,8 @@ public class EditTaskCommand extends TaskCommand {
             return CollectionUtil.isAnyNonNull(title,
                     description,
                     timestamp,
-                    tags);
+                    tags,
+                    contacts);
         }
 
         public Optional<String> getTitle() {
@@ -203,6 +222,14 @@ public class EditTaskCommand extends TaskCommand {
 
         public void setDescription(String description) {
             this.description = description;
+        }
+
+        public Optional<Boolean> isDone() {
+            return Optional.ofNullable(isDone);
+        }
+
+        public void setDone(Boolean done) {
+            isDone = done;
         }
 
         public Optional<Timestamp> getTimestamp() {
@@ -230,6 +257,23 @@ public class EditTaskCommand extends TaskCommand {
             this.tags = (tags != null) ? new HashSet<>(tags) : null;
         }
 
+        /**
+         * Returns an unmodifiable contact set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code contacts} is null.
+         */
+        public Optional<Set<Contact>> getContacts() {
+            return (contacts != null) ? Optional.of(Collections.unmodifiableSet(contacts)) : Optional.empty();
+        }
+
+        /**
+         * Sets {@code contacts} to this object's {@code contacts}.
+         * A defensive copy of {@code contacts} is used internally.
+         */
+        public void setContacts(Set<Contact> contacts) {
+            this.contacts = (contacts != null) ? new HashSet<>(contacts) : null;
+        }
+
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -248,7 +292,8 @@ public class EditTaskCommand extends TaskCommand {
             return getTitle().equals(e.getTitle())
                     && getDescription().equals(e.getDescription())
                     && getTimestamp().equals(e.getTimestamp())
-                    && getTags().equals(e.getTags());
+                    && getTags().equals(e.getTags())
+                    && getContacts().equals(e.getContacts());
         }
     }
 }

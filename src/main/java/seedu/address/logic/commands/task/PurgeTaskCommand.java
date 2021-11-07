@@ -2,13 +2,17 @@ package seedu.address.logic.commands.task;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeMap;
 
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.TaskCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.CommandSpecification;
 import seedu.address.model.Model;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.filters.TaskFilter;
 
 /**
  * Purges all tasks currently in the task list
@@ -16,11 +20,16 @@ import seedu.address.model.task.Task;
 public class PurgeTaskCommand extends TaskCommand {
     public static final String COMMAND_WORD = "purge";
     public static final String FULL_COMMAND_WORD = TaskCommand.COMMAND_WORD + " " + COMMAND_WORD;
+    public static final CommandSpecification COMMAND_SPECS = new CommandSpecification(
+            FULL_COMMAND_WORD,
+            "Purges all tasks in the displayed task list."
+    );
+
     public static final String MESSAGE_SUCCESS = "Tasks purged!";
     public static final String MESSAGE_NO_TASK_TO_PURGE = "There are no tasks to purge.";
-    public static final String MESSAGE_USAGE = FULL_COMMAND_WORD
-            + ": Purges all tasks in the displayed task list.\n"
-            + "Example: " + FULL_COMMAND_WORD;
+
+    private TreeMap<Integer, Task> deletedTasks;
+    private ArrayList<TaskFilter> deletedFilters;
 
     /**
      * Executes the command and returns the result message.
@@ -30,7 +39,7 @@ public class PurgeTaskCommand extends TaskCommand {
      * @throws CommandException If an error occurs during command execution.
      */
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    protected CommandResult executeDo(Model model) throws CommandException {
         requireNonNull(model);
         List<Task> taskList = model.getFilteredTaskList();
 
@@ -38,9 +47,28 @@ public class PurgeTaskCommand extends TaskCommand {
             throw new CommandException(MESSAGE_NO_TASK_TO_PURGE);
         }
 
-        // Create a copy of the list and deletes all tasks from the original
-        Task[] tasksToDelete = taskList.toArray(new Task[0]);
-        model.deleteAllInFilteredTaskList(tasksToDelete);
+        // Create a copy of the list for undo with their respective indexes
+        deletedTasks = new TreeMap<>();
+        for (Task deletedTask : taskList) {
+            int index = model.indexOf(deletedTask);
+            deletedTasks.put(index, deletedTask);
+        }
+
+        deletedFilters = new ArrayList<>();
+        deletedFilters.addAll(model.getSelectedTaskFilters());
+
+        model.deleteAllInFilteredTaskList();
+        return new CommandResult(MESSAGE_SUCCESS);
+    }
+
+    @Override
+    protected CommandResult executeUndo(Model model) throws CommandException {
+        model.setTaskFilters(deletedFilters);
+        for (int index : deletedTasks.keySet()) {
+            Task task = deletedTasks.get(index);
+            model.insertTask(task, index);
+        }
+
         return new CommandResult(MESSAGE_SUCCESS);
     }
 

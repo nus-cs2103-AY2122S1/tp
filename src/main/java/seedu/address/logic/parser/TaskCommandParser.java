@@ -36,11 +36,13 @@ public class TaskCommandParser implements Parser<TaskCommand> {
     public TaskCommand parse(String userInput) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    HelpCommand.COMMAND_SPECS.getUsageMessage()));
         }
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
+
         switch (commandWord) {
         case AddTaskCommand.COMMAND_WORD:
             return new AddTaskCommandParser().parse(arguments);
@@ -58,7 +60,8 @@ public class TaskCommandParser implements Parser<TaskCommand> {
             return new ListTaskCommandParser().parse(arguments);
 
         case PurgeTaskCommand.COMMAND_WORD:
-            return new PurgeTaskCommand();
+            return new NoArgumentCommandParser<>(PurgeTaskCommand.class, PurgeTaskCommand.COMMAND_SPECS)
+                    .parse(arguments);
 
         case FindTaskCommand.COMMAND_WORD:
             return new FindTaskCommandParser().parse(arguments);

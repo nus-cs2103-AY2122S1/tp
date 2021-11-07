@@ -10,8 +10,10 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.UndoableCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.guiactions.GuiAction;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -21,7 +23,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.filters.TaskFilter;
 import seedu.address.storage.Storage;
-import seedu.address.ui.exceptions.GuiException;
 
 /**
  * The main LogicManager of the app.
@@ -46,11 +47,19 @@ public class LogicManager implements Logic {
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
+        Command command = addressBookParser.parse(commandText);
+        // If successfully parsed, add to history
+        model.addCommandToHistory(commandText);
+        return executeCommand(command);
+    }
 
-        CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText);
-        commandResult = command.execute(model);
-        model.getCommandHistory().pushCommand(command);
+    @Override
+    public CommandResult executeCommand(Command command) throws CommandException {
+        CommandResult commandResult = command.execute(model);
+
+        if (command instanceof UndoableCommand) {
+            model.getCommandHistory().pushCommand((UndoableCommand) command);
+        }
 
         try {
             storage.saveAddressBook(model.getAddressBook());
@@ -60,18 +69,6 @@ public class LogicManager implements Logic {
         }
 
         return commandResult;
-    }
-
-    @Override
-    public void executeGuiAction(GuiAction action) throws GuiException {
-        model.executeGuiAction(action);
-
-        try {
-            storage.saveAddressBook(model.getAddressBook());
-            storage.saveTaskList(model.getTaskList());
-        } catch (IOException ioe) {
-            throw new GuiException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
-        }
     }
 
     @Override
@@ -90,8 +87,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<TaskFilter> getAvailableTaskFilters() {
-        return model.getAvailableTaskFilters();
+    public ObservableList<TaskFilter> getSelectableTaskFilters() {
+        return model.getSelectableTaskFilters();
     }
 
     @Override
@@ -137,9 +134,28 @@ public class LogicManager implements Logic {
     @Override
     public CommandResult undoCommand() {
         try {
-            return this.execute("undo");
-        } catch (CommandException | ParseException e) {
+            return executeCommand(new UndoCommand());
+        } catch (CommandException e) {
             return new CommandResult(e.getMessage());
         }
+    }
+
+    @Override
+    public CommandResult redoCommand() {
+        try {
+            return executeCommand(new RedoCommand());
+        } catch (CommandException e) {
+            return new CommandResult(e.getMessage());
+        }
+    }
+
+    @Override
+    public String getHistoryCommand(boolean isNext, String currentString) {
+        return model.getHistoryCommand(isNext, currentString);
+    }
+
+    @Override
+    public void resetHistoryPosition() {
+        model.resetHistoryPosition();
     }
 }

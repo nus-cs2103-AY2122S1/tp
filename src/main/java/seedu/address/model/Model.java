@@ -6,7 +6,6 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.guiactions.GuiAction;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.filters.TaskFilter;
@@ -104,10 +103,14 @@ public interface Model {
     void deleteTask(Task deletedTask);
 
     /**
-     * Deletes a list of given tasks. The tasks must exist in the task list.
-     * @param tasksToDelete List of tasks to delete.
+     * Deletes the task at index. Bypass due to object inequality.
      */
-    void deleteAllInFilteredTaskList(Task... tasksToDelete);
+    void deleteTaskAtLastIndex();
+
+    /**
+     * Deletes the list of Filtered Tasks and their filters.
+     */
+    void deleteAllInFilteredTaskList();
 
     /**
      * Adds the given task to the task list.
@@ -122,15 +125,22 @@ public interface Model {
      */
     void insertTask(Task task, int index);
 
+    /**
+     * Checks the index of the given task in the task list.
+     * @param task Task to check the index of.
+     * @return The 0-based index of the task.
+     */
+    int indexOf(Task task);
+
     /** Returns an unmodifiable view of the task list */
     ObservableList<Task> getFilteredTaskList();
 
 
     /**
-     * Returns a list of available task filters.
-     * @return The list of available task filters.
+     * Returns a list of selectable task filters.
+     * @return The list of selectable task filters.
      */
-    ObservableList<TaskFilter> getAvailableTaskFilters();
+    ObservableList<TaskFilter> getSelectableTaskFilters();
 
     /**
      * Returns the list of selected filters to filter tasks by.
@@ -181,14 +191,36 @@ public interface Model {
      * Replaces the given task {@code target} with {@code editedTask}.
      * {@code target} must exist in the task list.
      * setTask uses targetIndex rather than target Person; This is because tasks may not be unique, unlike persons
+     *
+     * @return The edited task with updated contact information
      */
-    void setTask(Task target, Task editedTask);
+    Task setTask(Task target, Task editedTask);
 
     /**
-     * Executes the given GUI action with the model context.
-     * @param action The GUI action to execute
+     * Returns the command history instance.
+     *
+     * @return Command history instance.
      */
-    void executeGuiAction(GuiAction action);
-
     CommandHistory getCommandHistory();
+
+    /**
+     * Get the next or previous command in the command history.
+     *
+     * @param isNext produces the next command in the stack if true, else the previous
+     * @param currentString the string to be cached
+     * @return string representation of the executed command in order.
+     */
+    String getHistoryCommand(boolean isNext, String currentString);
+
+    /**
+     * Adds a command to the the history stack
+     *
+     * @param command String representation of the executed command
+     */
+    void addCommandToHistory(String command);
+
+    /**
+     * Resets the history position to the top of the stack
+     */
+    void resetHistoryPosition();
 }

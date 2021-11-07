@@ -17,7 +17,6 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.guiactions.GuiAction;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -165,7 +164,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public ObservableList<TaskFilter> getAvailableTaskFilters() {
+        public ObservableList<TaskFilter> getSelectableTaskFilters() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -205,18 +204,17 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setTask(Task target, Task task) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void executeGuiAction(GuiAction action) {
+        public Task setTask(Task target, Task task) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void deleteTask(Task task) {
+            throw new AssertionError("This method should not be called.");
+        }
 
+        @Override
+        public void deleteTaskAtLastIndex() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -241,7 +239,27 @@ public class AddCommandTest {
         }
 
         @Override
-        public void deleteAllInFilteredTaskList(Task... tasksToDelete) {
+        public String getHistoryCommand(boolean isNext, String currentString) {
+            return null;
+        }
+
+        @Override
+        public void deleteAllInFilteredTaskList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int indexOf(Task task) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addCommandToHistory(String command) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void resetHistoryPosition() {
             throw new AssertionError("This method should not be called.");
         }
     }

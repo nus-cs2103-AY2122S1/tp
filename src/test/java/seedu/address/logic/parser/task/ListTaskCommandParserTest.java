@@ -1,6 +1,6 @@
 package seedu.address.logic.parser.task;
 
-import static seedu.address.logic.commands.task.ListTaskCommand.MESSAGE_USAGE;
+import static seedu.address.logic.commands.task.ListTaskCommand.COMMAND_SPECS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNDONE;
@@ -13,12 +13,14 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.task.ListTaskCommand;
+import seedu.address.logic.parser.exceptions.UnwantedPreambleException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.filters.TaskFilter;
 import seedu.address.model.task.filters.TaskFilters;
 
 public class ListTaskCommandParserTest {
     private final ListTaskCommandParser parser = new ListTaskCommandParser();
+
     @Test
     void parse_emptyArguments_noTaskFilters() {
         assertParseSuccess(parser, "", new ListTaskCommand(new ArrayList<>()));
@@ -31,7 +33,7 @@ public class ListTaskCommandParserTest {
 
     @Test
     void parse_showUndone_showUndoneTasks() {
-        assertParseSuccess(parser, " " + PREFIX_UNDONE, new ListTaskCommand(List.of(TaskFilters.FILTER_DONE.invert())));
+        assertParseSuccess(parser, " " + PREFIX_UNDONE, new ListTaskCommand(List.of(TaskFilters.FILTER_UNDONE)));
     }
 
     @Test
@@ -45,6 +47,8 @@ public class ListTaskCommandParserTest {
 
     @Test
     void parse_withPreamble_failure() {
-        assertParseFailure(parser, " preamble", MESSAGE_USAGE);
+        assertParseFailure(parser, " preamble",
+                String.format(new UnwantedPreambleException("preamble", COMMAND_SPECS).getMessage(),
+                        COMMAND_SPECS.getUsageMessage()));
     }
 }
