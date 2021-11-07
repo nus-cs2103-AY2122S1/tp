@@ -319,46 +319,38 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *` | potential user | be able to download the app | use it to keep track of my contacts |
-| `* * *` | potential user | be able to start the app | see how the app would look like |
+| `* * *` | user | have access to a help page | know how to navigate the app |
 | `* * *` | user | be able to create a new contact in the address book | save a contact |
-| `* * *` | user | be able to retrieve an existing contact in the address book | retrieve more details about the contact |
+| `* * *` | user | be able to find an existing contact in the address book | retrieve details about the contact |
 | `* * *` | user | be able to update an existing contact in the address book | change information about my student if I made a mistake when adding them |
 | `* * *` | user | be able to delete an old contact in the address book | delete contacts whom I am not in contact with anymore |
-| `* * *` | user | be able to see their contact details | copy the contact details to contact them |
-| `* * *` | new user | be able to find out what kind of commands are available | use the app as intended |
-| `* * *` | user | be able to close the app | stop using it |
+| `* * *` | user | be able to see their contact details | refer the contact details to contact them |
 | `* *` | user | be able to purge all current data | get rid of sample/experimental data I used for exploring the app |
 | `* *` | user | be able to view my contacts in alphabetical order | see the contacts in more intuitive way |
 | `* *` | user | be able to delete by module | delete all contacts linked to that module |
 | `* *` | user | be able to delete contacts by groups | delete many contacts in one go |
-| `* *` | user | be able to see the group a contact belongs to | recall how I know the particular person |
+| `* *` | user | be able to see the group a contact belongs to | know which lesson this person belongs to |
 | `* *` | user | be able to search for contacts | save time have to scroll the entire contact list |
 | `* *` | user | be able to retrieve data fast | get the contact in the fastest time possible |
 | `* *` | user | be able to search by categories | ignore unrelated contacts |
 | `* *` | user | be able to add a description about a contact | add more details about the contact |
-| `* *` | user | have access to a help page | know how to navigate the app |
 | `* *` | user | be able to create a class card | see my current classes |
 | `* *` | user | be able to see class details | recall the specifics of the class |
 | `* *` | user | be able to update class details | ensure my class details are correct |
 | `* *` | user | be able to delete a class | remove the classes that are irrelevant |
-| `* *` | potential user exploring the app | be able to see the app populated with sample data | easily see how the app works |
-| `*` | forgetful user | be able to have reminders about upcoming classes | conduct classes punctually |
-| `*` | user | be able to set up profile picture for the contact | recognise the person |
-| `*` | user | be able to set up profile picture for myself | add a personal touch to the application |
-| `*` | Expert user | be able to set up shortcuts | do things faster |
+| `*` | expert user | be able to set up my own aliases | use the alias that I am more comfortable with |
 
 
 ### Use cases
 
 (For all use cases below, the **System** is `contHACKS` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Creating a contact**
+**Use case `UC01`: Adding a contact**
 
 **MSS**
 
 1. User requests to create a contact and inputs contact details
-2. contHACKS creates the contact and displays the newly added contact
+2. contHACKS creates the contact and displays information of the newly added contact
 
 Use case ends
 
@@ -373,7 +365,7 @@ Use case ends
     Use case ends
 
 
-**Use case: Finding a contact**
+**Use case `UC02`: Finding a contact**
 
 **MSS**
 
@@ -403,7 +395,7 @@ Use case ends
     Use case ends
 
 
-**Use case: Updating a contact**
+**Use case `UC03`: Updating a contact**
 
 **MSS**
 
@@ -422,28 +414,7 @@ Use case ends
     * 1b1. contHACKS shows an error message<br />
     Use case ends
 
-
-**Use case: Adding remark to a contact**
-
-**MSS**
-
-1. User requests to add a remark to a specific contact
-2. contHACKS updates the contact with the inputted remark and displays the updated contact
-
-Use case ends
-
-**Extensions**
-* 1a. Contact does not exist
-    * 1a1. contHACKS shows an error message<br />
-      Use case ends
-
-
-* 1b. User input the remark in a wrong format
-    * 1b1. contHACKS shows an error message<br />
-      Use case ends
-
-
-**Use case: Deleting a contact**
+**Use case `UC04`: Deleting a contact**
 
 **MSS**
 
@@ -458,7 +429,7 @@ Use case ends
       Use case ends
 
 
-**Use case: Listing the contact list**
+**Use case `UC05`: Listing the contact list**
 
 **MSS**
 
@@ -468,7 +439,7 @@ Use case ends
 Use case ends
 
 
-**Use case: Clear all contacts**
+**Use case `UC06`: Clear all contacts**
 
 **MSS**
 
@@ -477,8 +448,7 @@ Use case ends
 
 Use case ends
 
-
-**Use case: Getting help manual**
+**Use case `UC07`: Getting help manual**
 
 **MSS**
 
@@ -488,7 +458,7 @@ Use case ends
 Use case ends
 
 
-**Use case: Exiting the application**
+**Use case `UC08`: Exiting the application**
 
 **MSS**
 
