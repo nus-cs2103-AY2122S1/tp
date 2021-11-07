@@ -85,6 +85,7 @@ The sections below provide more details on the following components: `UI`, `Logi
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103T-W16-3/tp/blob/master/src/main/java/tutoraid/ui/Ui.java)
 
+Here is an image of the `Model` class diagram:
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `StudentListPanel`, `LessonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
@@ -102,11 +103,21 @@ The `UI` component,
 
 **API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-W16-3/tp/blob/master/src/main/java/tutoraid/logic/Logic.java)
 
-Here's a (partial) class diagram of the `Logic` component:
+Here is an image of the (partial) `Logic` class diagram:
 
-<img src="images/LogicClassDiagram.png" width="550"/>
+<img src="images/LogicClassDiagram0.png" width="550"/>
 
-The `Logic` component mainly works in 2 different ways for 2 different types of commands:
+The `Logic` component,
+
+* executes users' commands.
+* depends on some classes in the `Model` to modify the current list of `Student` and `Lesson` objects.
+* depends on some classes in `Storage` to retrieve any relevant and existing data.
+
+Below is the class diagram that depicts the `Logic` component's dependencies on the `Model` and `Storage` components:
+
+![](images/LogicClassDiagram1.png)
+
+When it comes to execution of user comamnds, the `Logic` component mainly works in 2 different ways for 2 different types of commands:
 
 **Commands with a unique command word**
 
@@ -124,7 +135,7 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
   
 **Commands with non-unique command word**
 
-Commands that have the same command word as (at least) 1 other command (e.g. `add -s` and `add -l`) is known to have a non-unique command word.
+Commands that have the same command word as (at least) 1 other command is known to have a non-unique command word (e.g. `add -s`, `add -l`, `add -p` and `add -sl` share the command word `add`).
 This applies to all the commands in TutorAid apart from those mentioned in the section above.
 
 The process of parsing for commands with non-unique command words differs from those with unique command words as an additional step is required to differentiate between commands that share the same command word.
@@ -135,14 +146,15 @@ Below are the other classes in `Logic` (omitted from the class diagram above) th
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: All `XYCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing
+:bulb: All `XYCommandParser` and `XYCommandParser` classes (e.g., `AddCommandParser`, `AddStudentCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing
 </div>
 
 The `Logic` component works as such:
 1. When `Logic` is called upon to execute a command, it uses the `TutorAidParser` class to parse the user command.
-2. The result of the above step is then **further parsed** by another `Parser` class (specifically a class named after a command word e.g., `AddCommandParser`).
-3. A `Command` object (or more precisely, an object of one of its subclasses e.g., `AddStudentCommand`) is then created and is executed by the `LogicManager`.
-4. The command can communicate with the `Model` when it is executed (e.g. to add a student).
+2. The result of the above step is then **additionally parsed** by another `Parser` class (specifically a class named after a command word e.g., `AddCommandParser`).
+3. The parameters of the command are then further parsed by a `Parser` class that is specific to each command (e.g. `AddStudentCommandPaser`, `AddProgressCommandParser`, etc.)   
+4. A `Command` object (or more precisely, an object of one of its subclasses e.g., `AddStudentCommand`) is then created and is executed by the `LogicManager`.
+5. The command can communicate with the `Model` when it is executed (e.g. to add a student).
 6. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
 
 Here's a Sequence Diagram that illustrates the interactions within the `Logic` component for the `execute("del -s 1")` API call.
@@ -151,7 +163,6 @@ Here's a Sequence Diagram that illustrates the interactions within the `Logic` c
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
-
 
 <div markdown="span" class="alert alert-primary">
 

@@ -30,6 +30,23 @@ deactivate storage
 storage --[STORAGE_COLOR]> logic
 deactivate storage
 
+logic -[LOGIC_COLOR]> model : deleteStudentFromLessons(s)
+activate model MODEL_COLOR
+
+model -[MODEL_COLOR]-> logic
+deactivate model
+
+logic -[LOGIC_COLOR]> storage : saveLessonBook(lessonBook)
+activate storage STORAGE_COLOR
+
+storage -[STORAGE_COLOR]> storage : Save to file
+activate storage STORAGE_COLOR_T1
+storage --[STORAGE_COLOR]> storage
+deactivate storage
+
+storage --[STORAGE_COLOR]> logic
+deactivate storage
+
 logic --[LOGIC_COLOR]> ui
 deactivate logic
 
