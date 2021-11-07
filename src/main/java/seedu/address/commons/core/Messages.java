@@ -25,7 +25,8 @@ public class Messages {
     // Facility-specific Messages
     public static final String MESSAGE_FACILITY = "Facility";
     public static final String MESSAGE_FACILITIES_LISTED_OVERVIEW = "%1$d facilities listed!";
-    public static final String MESSAGE_INVALID_FACILITY_DISPLAYED_INDEX = "The facility index provided is out of range of the currently displayed list";
+    public static final String MESSAGE_INVALID_FACILITY_DISPLAYED_INDEX = "The facility index provided is out"
+            + "of range of the currently displayed list";
     public static final String MESSAGE_FACILITY_AT_MAX_CAPACITY = "The facility provided is already at max capacity";
 
 }

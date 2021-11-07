@@ -7,7 +7,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 /**
- * Clears today's attendance for all members in list.
+ * Clears today's attendance for all members in SportsPA.
  */
 public class ClearAttendanceCommand extends Command {
     public static final String COMMAND_WORD = "cleara";

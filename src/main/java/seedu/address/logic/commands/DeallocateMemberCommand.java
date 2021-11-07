@@ -8,9 +8,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.commons.util.DayUtil.displayDay;
 
 import java.time.DayOfWeek;
-import java.time.format.TextStyle;
 import java.util.List;
-import java.util.Locale;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -71,8 +69,8 @@ public class DeallocateMemberCommand extends Command {
         handleDeallocation(toBeDeallocated, toDeallocateFrom, model);
 
         String dayName = displayDay(day);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toBeDeallocated.getName(), toDeallocateFrom.getName(), dayName)
-                , false, true, false);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toBeDeallocated.getName(),
+                toDeallocateFrom.getName(), dayName), false, true, false);
     }
 
     /**
@@ -81,7 +79,8 @@ public class DeallocateMemberCommand extends Command {
      * @param toDeallocateFrom Facility to deallocate the member from.
      * @throws CommandException if deallocation of the member from the facility is not feasible.
      */
-    private void handleDeallocation(Member toBeDeallocated, Facility toDeallocateFrom, Model model) throws CommandException {
+    private void handleDeallocation(Member toBeDeallocated,
+                                    Facility toDeallocateFrom, Model model) throws CommandException {
         if (!toDeallocateFrom.isMemberAllocatedOnDay(toBeDeallocated, day)) {
             throw new CommandException(Messages.MESSAGE_MEMBER_NOT_ALLOCATED);
         } else {

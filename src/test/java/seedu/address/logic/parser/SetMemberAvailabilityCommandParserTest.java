@@ -65,7 +65,7 @@ public class SetMemberAvailabilityCommandParserTest {
                 SetMemberAvailabilityCommand.MESSAGE_USAGE);
 
         // missing index/indices
-        assertParseFailure(parser, AVAILABILITY_DESC_BOB, expectedMessage);
+        assertParseFailure(parser, AVAILABILITY_DESC_BOB, ParserUtil.MESSAGE_INVALID_INDEX);
 
         // missing availability prefix
         assertParseFailure(parser, "1 2 3" + NAME_DESC_BOB, expectedMessage);

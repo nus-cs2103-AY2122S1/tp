@@ -69,8 +69,8 @@ public class AllocateMemberCommand extends Command {
         handleAllocation(toBeAllocated, toAllocateTo, model);
 
         String dayName = displayDay(day);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toBeAllocated.getName(), toAllocateTo.getName(), dayName)
-                , false, true, false);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toBeAllocated.getName(),
+                toAllocateTo.getName(), dayName), false, true, false);
     }
 
     /**
