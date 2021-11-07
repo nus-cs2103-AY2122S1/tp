@@ -14,6 +14,7 @@ public class Done {
     public static final Done UNDONE = new Done(STATUS_UNDONE);
 
     public static final String FIND_MESSAGE_CONSTRAINTS = "You can only search for Done or Not Done";
+
     private String doneStatus;
 
     /**
@@ -36,10 +37,16 @@ public class Done {
         return doneStatus;
     }
 
+    /**
+     * Sets the doneStatus of a Done to "Done".
+     */
     public void setAsDone() {
         this.doneStatus = STATUS_DONE;
     }
 
+    /**
+     * Sets the doneStatus of a Done to "Not Done".
+     */
     public void setAsUndone() {
         this.doneStatus = STATUS_UNDONE;
     }

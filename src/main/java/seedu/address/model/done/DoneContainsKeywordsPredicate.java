@@ -9,6 +9,11 @@ public class DoneContainsKeywordsPredicate implements Predicate<Person> {
 
     private final List<String> keywords;
 
+    /**
+     * Constructor for DoneContainsKeywordsPredicate.
+     *
+     * @param keywords List of words to match against the Done of every applicant.
+     */
     public DoneContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
