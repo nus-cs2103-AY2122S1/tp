@@ -360,7 +360,6 @@ Examples:
   <img src="images/deletePatientTag.png" width="600">  
 
 ---
-<div style="page-break-after: always;"></div>
 
 ## Managing Doctors <a name="managing-doctors"/>
 <div markdown="span" class="alert alert-info">:information_source: **Note:**
@@ -370,6 +369,7 @@ More information about the `toggle` command [here](#toggle).
 
 <img src="images/doctorTab.png" width="600">
 
+<div style="page-break-after: always;"></div>
 
 ### Adding a doctor: `add` <a name="add-doctor"/>
 
@@ -395,6 +395,8 @@ Shows a list of all doctors in the doctor records.
 
 Format: `list`
 
+<div style="page-break-after: always;"></div>
+
 ### Editing a doctor's information : `edit` <a name="edit-doctor"/>
 
 Edits an existing doctor in the doctor records.
@@ -416,8 +418,7 @@ Examples:
 
 <img src="images/editDoctor.png" width="600">
 
-
-  
+<div style="page-break-after: always;"></div>
 
 ### Adding a remark to a doctor's information : `remark` <a name="remark-doctor"/>
 
@@ -451,6 +452,8 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting a doctor : `delete` <a name="delete-doctor"/>
 
 Deletes a doctor record from the list.
@@ -464,6 +467,8 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd doctor in the doctor records.
 * `find Betsy` followed by `delete 1` deletes the 1st doctor in the results of the `find` command.
+
+<div style="page-break-after: always;"></div>
 
 ### Managing Tags `tag` <a name="managing-doctor-tag"/>
 
