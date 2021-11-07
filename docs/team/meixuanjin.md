@@ -15,7 +15,8 @@ Given below are my contributions to the project.
   * Improved the find feature to allow for partial search by attribute type, and partial and full searching for tags
     (Pull requests [\#92](https://github.com/AY2122S1-CS2103-T16-2/tp/pull/92), [\#54](https://github.com/AY2122S1-CS2103-T16-2/tp/pull/54),
     [\#180](https://github.com/AY2122S1-CS2103-T16-2/tp/pull/180))
-  * Added testcases for find feature, including for partial searching (Pull  request [\#57](https://github.com/AY2122S1-CS2103-T16-2/tp/pull/57))
+  * Added testcases for find feature, including for partial searching (Pull  request [\#57](https://github.com/AY2122S1-CS2103-T16-2/tp/pull/57),
+    [\#189](https://github.com/AY2122S1-CS2103-T16-2/tp/pull/189))
   * Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests [\#36](), [\#38]())
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=meixuanjin&tabRepo=AY2122S1-CS2103-T16-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
