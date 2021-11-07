@@ -357,11 +357,15 @@ of which its `RecommendCommand#execute(model)` method will then be invoked by an
 The sequence diagram below illustrates the interactions made in detail used to produce the desired recommendations friends list:
 
 <img src="images/RecommendCommandSequenceDiagram1.png" width="1000" /><br> 
-<img src="images/RecommendCommandSequenceDiagram2.png" width="1000" />
 
-As shown, the recommend feature execution makes use of an instance of `FriendRecommendFilterPredicate` which returns true 
-if the friend plays the specified game and schedule is available during the specified timing and 
-a `Comparator` which is used to sort friends in order of the highest skill value for the specified game. 
+As shown, the recommend feature execution makes use of an instance of `FriendRecommendFilterPredicate` which returns true
+if the friend plays the specified game and schedule is available during the specified timing and
+an instance `Comparator` which is used to sort friends in order of the highest skill value for the specified game.
+
+Next, the continuation to the sequence diagram below shows how the `FriendRecommendFilterPredicate` and `Comparator` instances are 
+used to filter and sort the friends list to produce the recommendations friends list.
+
+<img src="images/RecommendCommandSequenceDiagram2.png" width="1000" />
 
 <ins>Step 3: Displaying the recommended friends</ins> 
 
