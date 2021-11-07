@@ -275,8 +275,8 @@ Priorities:<p>
 
 **MSS**
 
-1. User requests to view list of persons/groups/archived persons
-2. Notor shows the list selected
+1. User requests to view list of persons/groups/archived persons.
+2. Notor shows the list selected.
 
 **Extensions**
 
@@ -286,18 +286,27 @@ Priorities:<p>
 
 **MSS**
 
-1. User requests for Notor to return the persons/groups which fit a certain criteria
-2. Notor returns a list filtered by said criteria
+1. User requests for Notor to return the persons/groups which fit a certain criteria.
+2. Notor returns a list filtered by said criteria.
 
    Use case ends.
 
 #### General Use Cases
+    
+##### Use case: Export Data
+
+**MSS**
+
+1. User requests to export data.
+2. Notor exports the data in CSV format to the directory where Notor belongs.
+
+   Use case ends.
 
 ##### UC-CommandError : User enters the wrong command
 
 Precondition: User passes the wrong parameters, command, or data
 
-1. Notor detects an error in the entered data, and displays an error message
+1. Notor detects an error in the entered data, and displays an error message.
 2. User corrects their command to not have any errors. Steps 1 and 2 are repeated until the data entered are correct. Command is executed from where the use case is interrupted.
 
 #### Basic Person Use Cases
@@ -306,91 +315,122 @@ Precondition: User passes the wrong parameters, command, or data
 
 **MSS**
 
-1. User requests to add a person to Notor, specifying their name and optional parameters for their personal details
-2. Notor adds said person to the storage, and displays a success message
+1. User requests to add a person to Notor, specifying their name and optional parameters for their personal details.
+2. Notor adds said person to the storage, and displays a success message.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. User <u> commands Notor to display the list of groups</u> (UC1)
+* 1a. User <u> commands Notor to display the list of groups</u> (UC1).
     * 1a1. User requests to add a person to Notor, specifying their name and optional parameters for their personal details, as well as the group they want to add them to
-    * Resume usecase at 2
+    * Resume usecase at 2.
 * 1b. User enters the <u> wrong parameters for their request to add person, resulting in </u> (UC-CommandError).
-  * Resume usecase at 2
+  * Resume usecase at 2.
 
 ##### Use case: Edit Person, Tag Person, or Add/remove person to a group
 
 **MSS**
 
-1. User commands <u> Notor to display the list of persons </u> (UC1)
+1. User commands <u> Notor to display the list of persons </u> (UC1).
 2. User specifies a person they want to change, and informs Notor of which fields they want changed and to what values.
-3. Notor changes the fields, displaying the correct fields and a success message
+3. Notor changes the fields, displaying the correct fields and a success message.
 
 **Extensions**
 
 * 2a. User tries to add person to a group that does not exist.
-  * Notor informs the user that the group does not exist
-    * User decides to <u> create the group</u> first (UC)
-    * Resume use case from step 1.
+  * Notor informs the user that the group does not exist.
+    * User decides to <u> create the group</u> first (UC).
+    * Resume use case from step 1..
 
 ##### Use case: Add a note to a person
 
 **MSS**
 
-1. User <u> commands Notor to display the list of persons </u> (UC1)
-2. User requests to add a note to a specific person in the list
-3. Notor opens up a pop up window for the user to type the note for the person
+1. User <u> commands Notor to display the list of persons </u> (UC1).
+2. User requests to add a note to a specific person in the list.
+3. Notor opens up a pop up window for the user to type the note for the person.
 4. User types in their notes.
-5. User requests to save and close the note
+5. User requests to save and close the note.
 6. Notor closes the note window and displays a success message that note has been saved.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. User <u> makes a mistake in their request, such as specifying a person that doesn't exist </u> (UC-CommandError)
-  * Resume use case from step 2
+* 2a. User <u> makes a mistake in their request, such as specifying a person that doesn't exist </u> (UC-CommandError).
+  * Resume use case from step 2.
 * 6a. User requests to save the note to the person
-  * 6a1. Notor displays a message that the note has been saved. Use case resumes at step 5 or 6
-* 6b. User requests to close the note (without saving)
+  * 6a1. Notor displays a message that the note has been saved. Use case resumes at step 5 or 6.
+* 6b. User requests to close the note (without saving).
   * 6b1. Notor shows a warning window.
-    * 6b2.1 : User cancels the request to close the note. Use case resumes at step 5 or 6
+    * 6b2.1 : User cancels the request to close the note. Use case resumes at step 5 or 6.
     * 6b2.2 : User accepts to close the note without saving. Notor closes the note window. Not shown that note is saved.
 
-**Use case: Add a note to a Group**<br>
-**MSS**
-1. Similar to Add a note to a person except Notor shows a list of groups in step 1
 
-**Use case: Add a note to a Subgroup**<br>
-**MSS**
-1. Similar to Add a note to a person except Notor shows a list of subgroups in step 1
 
 ##### Use Case: Clear tags or notes
 
 **MSS**
 
-Precondition: The person or group whose tags or notes you want to clear is visible and able to be selected
+Precondition: The person or group whose tags or notes you want to clear is visible and able to be selected.
 
-1. User requests to clear all tags or notes
-2. Notor displays a confirmation window
-3. User confirms their wish to clear all tags or notes
+1. User requests to clear all tags or notes.
+2. Notor displays a confirmation window.
+3. User confirms their wish to clear all tags or notes.
 4. Notor clears tags or notes, then displays a success message.
 
    Use case ends.
 
 **Extensions**
 
-* 3a. User cancels their request
+* 3a. User cancels their request.
   * 3a1. Notor displays a confirmation of the cancelling of the request
     Use case ends.
-
+    
 #### Basic Group Commands
+
+##### Use case: Add a note to a Group
+
+**MSS**
+
+1. Similar to Add a note to a person except Notor shows a list of groups in step 1.
+
+##### Use case: Add a note to a Subgroup
+
+**MSS**
+
+1. Similar to Add a note to a person except Notor shows a list of subgroups in step 1.
 
 ##### Use Case : Create Group
 
-1. User informs Notor to create a group, specifying its name
-2. Notor creates the group and displays a success message
+**MSS**
+
+1. User informs Notor to create a group, specifying its name.
+2. Notor creates the group and displays a success message.
+    
+    Use case ends.
+**Extensions**
+
+* 1a. Group already exists.
+  * 1a1. Resume use case from step 1.
+* 1b. Group name is invalid.
+  * 1b1. Resume use case from step 1.
+    
+##### Use Case : Create Subgroup
+
+**MSS**
+
+1. User informs Notor to create a subgroup, specifying its name and the name of the group that the subgroup will be in.
+2. Notor creates the group and displays a success message.
+    
+    Use case ends.
+**Extensions**
+
+* 1a. Group already exists.
+  * 1a1. Resume use case from step 1.
+* 1b. Group name is invalid.
+  * 1b1. Resume use case from step 1.
 
 #### Proposed Extended Use Cases ( Not Implemented )
 
@@ -398,49 +438,14 @@ Precondition: The person or group whose tags or notes you want to clear is visib
 
 **MSS**
 
-1. User starts typing a command in Notor
-2. Notor shows possible commands starting with what user has typed
-3. User presses tab to select the right command
-4. User presses enter to execute the selected command
-5. Notor <u>runs command (UC1)</u>
+1. User starts typing a command in Notor.
+2. Notor shows possible commands starting with what user has typed.
+3. User presses tab to select the right command.
+4. User presses enter to execute the selected command.
+5. Notor <u>runs command (UC1)</u>.
 
    Use case ends.
 
-**Use case: Add a person to a group**<br>
-**MSS**
-
-1. User requests to add a person to a group
-2. Notor shows a list of persons
-3. User requests to add a specific person in the list to a specified group
-4. Notor adds the person to group
-
-**Extensions**
-
-* 2a. The list is empty. Use case ends.
-
-* 3a. The given index is invalid.
-    * 3a1. Notor shows an error message. Use case resumes at step 2.
-
-* 3b. The specified group is not found in Notor.
-    * 3b1. Notor shows an error message. Use case resumes at step 2.
-
-* 3c. The person is already in the group specified.
-    * 3c1. Notor shows an error message. Use case resumes at step 2.
-
-
-**Use case: Add a person to a subgroup**<br>
-**MSS**
-1. Similar to Add a person to a group except User requeststo add person to a subgroup instead.
-
-   Use case ends.
-
-**Use case: Export data**<br>
-**MSS**
-
-1. User requests to export data
-2. Notor exports the data in CSV format to the directory where Notor belongs.
-
-   Use case ends.
 
 ### Non-Functional Requirements
 
