@@ -1131,10 +1131,10 @@ testers are expected to do more *exploratory* testing.
 ### Setting the tables
 
 1. Test case: `settables 10x4,2,2,1`<br>
-   Expected: Status message says 7 tables are set and all reservations are removed.
+   Expected: Result display shows 7 tables are set and all reservations are removed.
 
 2. Test case: `settables 10x0`/`settables 0x10`/`settables 0`/`settables abc`<br>
-   Expected: No tables set. Error details are shown in the status message
+   Expected: No tables set. Error details shown in the result display, with a result message `Invalid Command Format! ...`
       
 ### Checking for reservations 
 
@@ -1142,37 +1142,37 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: Date time has at least 1 reservation
     2. Test case: `check 2021-12-24 2000`<br>
-       Expected: Reservations on 24 Dec 2021, 8pm are displayed, status bar shows how many reservations there are on 24 Dec 2021, 8pm
+       Expected: Reservations on 24 Dec 2021, 8pm are displayed, result display shows how many reservations there are on 24 Dec 2021, 8pm
 
 2. Getting the reservations that are for the specified date time, when the date time has no reservations
 
     1. Prerequisites: Date time has no reservations
     2. Test case: `check 2021-12-24 0400`<br>
-       Expected: No Reservations are displayed since no reservations are on 24 Dec 2021, 4am, status bar shows 0 reservations
+       Expected: No Reservations are displayed since no reservations are on 24 Dec 2021, 4am, result display shows 0 reservations
 
 3. Getting the reservations that are for the specified date, when the date has at least 1 reservation
 
     1. Prerequisites: Date has at least 1 reservation
     2. Test case: `check 2021-12-24`<br>
-       Expected: Reservations on 24 Dec 2021 are displayed, status bar shows how many reservations there are on 24 Dec 2021
+       Expected: Reservations on 24 Dec 2021 are displayed, result display shows how many reservations there are on 24 Dec 2021
 
 4. Getting the reservations that are for the specified date, when the date has no reservations
 
     1. Prerequisites: Date has no reservations
     2. Test case: `check 2021-12-01`<br>
-       Expected: No Reservations are displayed since no reservations are on 1 Dec 2021, status bar shows 0 reservations
+       Expected: No Reservations are displayed since no reservations are on 1 Dec 2021, result display shows 0 reservations
 
 5. Getting the reservations that are for the current date at a specified time, when the time has at least 1 reservation
 
     1. Prerequisites: Time has at least 1 reservation
     2. Test case: `check 2000`<br>
-       Expected: Reservations on 24 Dec 2021 are displayed, status bar shows how many reservations there are on 24 Dec 2021
+       Expected: Reservations on 24 Dec 2021 are displayed, result display shows how many reservations there are on 24 Dec 2021
 
 6. Getting the reservations that are for the current date at a specified time, when the time has no reservations
 
     1. Prerequisites: Time has no reservations
     2. Test case: `check 0400`<br>
-       Expected: No Reservations are displayed since no reservations are on the current date at 4am, status bar shows 0 reservations
+       Expected: No Reservations are displayed since no reservations are on the current date at 4am, result display shows 0 reservations
     
 7. Other incorrect commands to try: `check 2500`, `check abc`, `check`
-   Expected: Error details shown in the status message. Status bar remains the same.
+   Expected: Error details shown in the result display, with a result message `Invalid Command Format! ...`
