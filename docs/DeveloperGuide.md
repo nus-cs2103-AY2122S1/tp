@@ -80,7 +80,7 @@ certain technical terms commonly used in this user guide [here](#glossary).
   - [Jackson](https://github.com/FasterXML/jackson) to save your data
   - [JUnit5](https://github.com/junit-team/junit5) so that we can deliver to you bug-free!
   - [MDFX](https://github.com/JPro-one/markdown-javafx-renderer) so that you can see User Guide in help without internet
-  
+  - [JFreeChart](https://www.jfree.org/jfreechart/) for the amazing graph and data visualization tools!
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting Up, Getting Started**
@@ -443,6 +443,10 @@ unless the `NAME` is the same  as the `Student` being edited.
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The responsibility of ensuring that `Student` 
 does not have unnecessary duplicate information (e.g same `PHONE`) is left to an Avenger.
 </div>
+
+The following sequence diagram describes what happens when `GradeCommand` is executed:
+
+![EditCommandSequenceDiagram](images/dg/logic/commands/editcommand/EditCommandSequenceDiagram.png)
 
 ### Track Students' Grades, Studio Attendance, and Participation
 
