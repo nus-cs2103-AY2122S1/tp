@@ -3,8 +3,9 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":MrTechRecruiterParser" as MrTechRecruiterParser LOGIC_COLOR
 participant "u:UndoCommand" as UndoCommand LOGIC_COLOR
+participant ":History" as History LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
@@ -14,23 +15,23 @@ end box
 [-> LogicManager : execute(undo)
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand(undo)
-activate AddressBookParser
+LogicManager -> MrTechRecruiterParser : parseCommand(undo)
+activate MrTechRecruiterParser
 
 create UndoCommand
-AddressBookParser -> UndoCommand
+MrTechRecruiterParser -> UndoCommand
 activate UndoCommand
 
-UndoCommand --> AddressBookParser
+UndoCommand --> MrTechRecruiterParser
 deactivate UndoCommand
 
-AddressBookParser --> LogicManager : u
-deactivate AddressBookParser
+MrTechRecruiterParser --> LogicManager : u
+deactivate MrTechRecruiterParser
 
 LogicManager -> UndoCommand : execute()
 activate UndoCommand
 
-UndoCommand -> Model : undoAddressBook()
+UndoCommand -> Model : recoverHistory()
 activate Model
 
 Model -> VersionedAddressBook : undo()
