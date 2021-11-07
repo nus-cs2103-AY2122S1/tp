@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.COSTPRICE_DESC_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.COUNT_DESC_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.COUNT_DESC_DONUT;
 import static seedu.address.logic.commands.CommandTestUtil.ID_DESC_BAGEL;
@@ -10,9 +11,12 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_COUNT_NEGATIV
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_COUNT_ZERO;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ID_NEGATIVE_NUMBER;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_SPECIAL_CHAR;
+import static seedu.address.logic.commands.CommandTestUtil.SALESPRICE_DESC_BAGEL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COSTPRICE_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COUNT_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BAGEL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SALESPRICE_BAGEL;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -30,19 +34,28 @@ public class RemoveCommandParserTest {
     @Test
     public void parse_allFieldsPresent_success() {
         ItemDescriptor expectedDescriptor = new ItemDescriptorBuilder()
-                .withName(VALID_NAME_BAGEL).withId(VALID_ID_BAGEL).withCount(VALID_COUNT_BAGEL).build();
+                .withName(VALID_NAME_BAGEL).withId(VALID_ID_BAGEL).withCount(VALID_COUNT_BAGEL)
+                        .withCostPrice(VALID_COSTPRICE_BAGEL).withSalesPrice(VALID_SALESPRICE_BAGEL).build();
 
         // All fields
-        assertParseSuccess(parser, VALID_NAME_BAGEL + ID_DESC_BAGEL + COUNT_DESC_BAGEL,
+        assertParseSuccess(parser, VALID_NAME_BAGEL + ID_DESC_BAGEL + COUNT_DESC_BAGEL
+                        + COSTPRICE_DESC_BAGEL + SALESPRICE_DESC_BAGEL,
+                new RemoveCommand(expectedDescriptor));
+
+        // Extraneous flags
+        assertParseSuccess(parser, VALID_NAME_BAGEL + ID_DESC_BAGEL + COUNT_DESC_BAGEL
+                        + COSTPRICE_DESC_BAGEL + SALESPRICE_DESC_BAGEL,
                 new RemoveCommand(expectedDescriptor));
 
         // multiple id - last id accepted
-        assertParseSuccess(parser, VALID_NAME_BAGEL + ID_DESC_DONUT + ID_DESC_BAGEL + COUNT_DESC_BAGEL,
+        assertParseSuccess(parser, VALID_NAME_BAGEL + ID_DESC_DONUT + ID_DESC_BAGEL + COUNT_DESC_BAGEL
+                        + COSTPRICE_DESC_BAGEL + SALESPRICE_DESC_BAGEL,
                 new RemoveCommand(expectedDescriptor));
 
         // multiple count - last count accepted
         assertParseSuccess(parser, VALID_NAME_BAGEL + ID_DESC_BAGEL + COUNT_DESC_DONUT
-                + COUNT_DESC_BAGEL, new RemoveCommand(expectedDescriptor));
+                + COUNT_DESC_BAGEL + COSTPRICE_DESC_BAGEL + SALESPRICE_DESC_BAGEL,
+                new RemoveCommand(expectedDescriptor));
     }
 
     @Test

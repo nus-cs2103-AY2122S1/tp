@@ -17,6 +17,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListInventoryCommand;
@@ -68,6 +69,28 @@ public class LogicManagerTest {
     }
 
     @Test
+    public void getInventoryFilePathTest() {
+        Path logicPath = logic.getInventoryFilePath().getFileName();
+        Path modelPath = model.getInventoryFilePath().getFileName();
+        assertEquals(logicPath, modelPath);
+    }
+
+    @Test
+    public void getGuiSettingsTest() {
+        GuiSettings logicGuiSettings = logic.getGuiSettings();
+        GuiSettings modelGuiSettings = model.getGuiSettings();
+        assertEquals(logicGuiSettings, modelGuiSettings);
+    }
+
+    @Test
+    public void setGuiSettingsTest() {
+        GuiSettings logicGuiSettings = logic.getGuiSettings();
+        logic.setGuiSettings(new GuiSettings());
+        GuiSettings modelGuiSettings = model.getGuiSettings();
+        assertEquals(logicGuiSettings, modelGuiSettings);
+    }
+
+    @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String removeCommand = "remove apple pie";
         assertCommandException(removeCommand, String.format(RemoveCommand.MESSAGE_ITEM_NOT_FOUND, "apple pie"));
@@ -110,6 +133,11 @@ public class LogicManagerTest {
     @Test
     public void getFilteredItemList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredDisplayList().remove(0));
+    }
+
+    @Test
+    public void getInventory_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getInventory().getItemList().add(BAGEL));
     }
 
     /**

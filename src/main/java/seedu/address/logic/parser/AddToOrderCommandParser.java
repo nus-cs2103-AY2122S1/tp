@@ -55,7 +55,7 @@ public class AddToOrderCommandParser implements Parser<AddToOrderCommand> {
         }
         // Parse tag
         if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
-            toAddDescriptor.setTags(ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_SALESPRICE)));
+            toAddDescriptor.setTags(ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG)));
         }
         return new AddToOrderCommand(toAddDescriptor);
     }
