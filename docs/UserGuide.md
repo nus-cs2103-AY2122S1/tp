@@ -1,5 +1,6 @@
 ---
-layout: page title: User Guide
+layout: page
+title: User Guide
 ---
 
 <h1 align="center"> LeadsForce User Guide </h1>
