@@ -248,7 +248,7 @@ before the correct `Predicate` is instantiated and used for finding the contact.
     * Pros: Faster searches with just partial keywords.
     * Cons: Contacts you did not mean to retrieve are also displayed.
 
-### Delete by batch feature
+### Delete contact by batch feature
 
 Users are able to execute a command to delete an existing module code in contHACKS. Upon successful deletion of the module code,
 the module code will not exist in contHACKS thus all lesson codes, if any, under the module code will be deleted (module and lesson have a composition relationship).
@@ -290,6 +290,10 @@ The following sequence diagrams show how the delete by module code feature works
 * **Alternative 2 (current version):** Delete supports batch deletion by module code as well.
     * Pros: Faster deletion while still supporting deletion by one index.
     * Cons: Not able to undo the deletion if the user deletes the wrong batch, it would take a long time to key all the information back in.
+
+<div markdown="span" class="alert alert-primary">:information_source: **Note:**
+The above information is also applicable for the delete lesson by batch feature.
+</div>
 
 ### Aliases for different commands:
 
@@ -756,22 +760,33 @@ testers are expected to do more *exploratory* testing.
    Expected: The day of the first lesson shown in contHACKS will be changed to `Wednesday`
 
 3. Test case: `editc -1 d/3`<br>
-   Expected: An error message will be shown in the result display, showing that the index provided is invalid. The words in the command box will turn red.
+   Expected: An error message will be shown in the result display, showing that the index provided is invalid. Text in the command box turns red.
 
 ### Deleting a person
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
    2. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the result display.
 
    3. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No person is deleted. Error details shown in the result display. Text in the command box turns red.
 
-   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 ### Deleting a lesson
+
+  1. Prerequisites: List all lessons using `listc`command . Multiple lessons in the list.
+
+  2. Test case: `deletec 1`<br>
+     Expected: First lesson is deleted from the list. Details of the deleted lesson shown in the result display.
+
+  3. Test case: `deletec 0` <br>
+     Expected: No lesson is deleted. Error details shown in the result display. Text in the command box turns red.
+
+  4. Other incorrect delete commands to try: `deletec`, `deletec x` (where x is larger than the list size)<br>
+     Expected: Similar to previous.
    
 ### Saving data
 
