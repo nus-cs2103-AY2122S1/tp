@@ -32,14 +32,22 @@ Manual Testing was focused mainly on Testing Features and the Graphical User Int
     * [Help](#help)
     * [Saving Data](#saving-data)
 * [GUI Testing](#graphical-user-interface-gui-testing)
-* [System Testing](#system-testing)
+  * [Visual Design](#visual-design)
+  * [User Interface Functionality](#user-interface-functionality)
 * [Performance Testing](#performance-testing)
+  * [Visualization with large `AcademyDirectory`](#visualization-with-large-academydirectory-_coming-soon_)
+  * [Limit test `AcademyDirectory` capacity](#limit-test-academydirectory-capacity-_coming-soon_)
 * [Compatability Testing](#compatibility-testing)
+  * [Cross-OS Compatibility](#cross-os-compatibility-_coming-soon_)
 * [Portability Testing](#portability-testing)
+  * [Transfer of AcademyDirectory](#transfer-of-academydirectory-_coming-soon_)
 
 
 
 ## Feature Testing
+
+In this section, testing focused on testing the features implemented and their basic functionality. These tests are
+primarily to detect potential unintended results that unit testing for the respective commands failed to detect.
 
 ***
 
@@ -684,6 +692,10 @@ and open the "View Test Score" tab to view the changes in the grade.
 
 ## Graphical User Interface (GUI) Testing
 
+These tests are primarily focused on testing both the appearance and the functionality of the GUI when used by the user.
+
+### Visual Design
+
 1. Test application visual design
     1. Prerequisite: Application is started, the Main Window is opened, users have not entered any command or cleared any data previously, and there are
        some students on the records.
@@ -707,6 +719,8 @@ and open the "View Test Score" tab to view the changes in the grade.
        1. Shrink Academy Directory to the smallest possible size <br>
           Expected: Academy Directory is not minimized completely as there is a minimal size for users to still see the data
 
+
+### User Interface Functionality
 
 2. Test Main Window User Interface functionality
     1. Test cases:
@@ -734,21 +748,44 @@ and open the "View Test Score" tab to view the changes in the grade.
           Expected: The equivalent to user input `show RA1` will be executed on Academy Directory
        1. Click on the first student card of the student list <br>
           Expected: A visualized view of the student is shown in the bottom right corner.
-    
-***
-
-## System testing
 
 ***
 
 ## Performance testing
 
+### Visualization with large `AcademyDirectory` _[Coming soon]_
+
+* Testing of large number of the `Visualize` function with a large number of students in `AcademyDirectory`
+  * Potentially affects runtime and if so, `AcademyDirectory` might require optimization.
+
+### Limit test `AcademyDirectory` capacity _[Coming soon]_
+
+* Testing the `Student` capacity that `AcademyDirectory` can handle
+  * Things to look out for: 
+    * Potential general loss in performance e.g less responsive buttons, longer startup time, longer time taken to process commands
+
 ***
 
-Purpose: Test and record the average time of which Academy Directory execute users' command
-
 ## Compatibility testing
+
+### Cross-OS Compatibility _[Coming soon]_
+
+* Testing of `AcademyDirectory` on all mainstream OS such as `Windows`, `MacOS` and `Linux`.
+
+
+* Testing of `AcademyDirectory` on more obscure OS such as different `Linux` distributions e.g `Kali Linux`.
+
 
 ***
 
 ## Portability testing
+
+### Transfer of `AcademyDirectory` _[Coming soon]_
+
+* Testing transfer of `AcademyDirectory` between identical mainstream OS e.g from `MacOS` to `MacOS`.
+
+* Testing transfer of `AcademyDirectory` between different mainstream OS e.g from `MacOS` to `Windows`.
+  * Things to look out for: 
+    * Hypothetically, a potential increase in time taken to execute `Visualize` after transfer e.g `Macbook A` to `Macbook B` and back to `Macbook A` without changing any files.
+
+
