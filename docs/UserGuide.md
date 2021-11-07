@@ -169,7 +169,8 @@ Format: `view (contacts/asg)`
 
 - The default view when the application launches is the student details.
 - The only valid parameters are `contacts` or `asg`
-
+- When no module is selected, the assignment view only shows submissions of each student. When a module is selected, the assignment view also include assignments under that module that each student has yet to submit.
+ 
 Examples:
 
 - `view contacts`: toggles the view to display the student's contact details for each student listed.
