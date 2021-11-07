@@ -18,7 +18,6 @@ title: Developer Guide
 * Application logo: Inspired by [Source Academy](https://sourceacademy.nus.edu.sg/)
 * [This](https://stackoverflow.com/questions/320542/how-to-get-the-path-of-a-running-jar-file) StackOverflow post on how to get the folder the JAR file is in.
 
-
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -174,26 +173,7 @@ Classes used by multiple components are in the `seedu.sourcecontrol.commons` pac
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Importing feature
-
-The following activity diagram summarises what happens when the user inputs an import command:
-
-![ImportCommandActivityDiagram](images/ImportActivityDiagram.png)
-
-There are several important details left out of the activity diagram for the sake of clarity:
-
-1. The import feature is reliant on having a correctly formatted csv file (which is to be exported from sites like lumiNUS and Source Academy, and modified to fit the format).
-The user needs to provide the number of `Groups`, `Assessments`, and `Tags` since we can't detect this automatically from the format of the file. The proper format of the file can be found in the user guide.
-
-1. A `CommandException` will be thrown if any input does not follow the formatting specified in the respective classes such as `Name`, `ID`, and `Score`.
-
-1. When reading a student's groups, the command will try to use an existing `Group` if possible, to ensure that the `Group` holds a reference to all `Students` in the group. A new `Group` will only be created in the case where the group hasn't already been created.
-
-1. When reading a student's scores, the command will add the score to the `Student`, as well as the `Assessment` created from reading the first row.
-
-1. Columns can be empty, except for the assessment name columns in the header row, and the name and ID columns of each student. Empty columns are assumed to be missing data.
-
-### Adding student feature
+### Adding a student
 
 The add student feature adds a student with the provided name and NUSNET ID into the database. If the student comes with optionally specified groups and tags, these fields will be added accordingly.
 
@@ -223,7 +203,7 @@ The following sequence diagram shows how the add student operation works:
 
 </div>
 
-### Adding group feature
+### Creating a new group
 
 The `addgroup` feature allows users to create new groups, as well as specify students to be added to the group to be created.
 
@@ -247,7 +227,7 @@ The following sequence diagram summarises what happens when the user inputs an a
 
 ![AddGroupSequenceDiagram](images/AddGroupSequenceDiagram.png)
 
-### Adding allocation feature
+### Adding a student into a group
 
 The `addalloc` feature allows users to allocate a student into a group.
 
@@ -272,7 +252,7 @@ The following sequence diagram summarises what happens when the user inputs an `
 ![AddAllocSequenceDiagram](images/AddAllocSequenceDiagram.png)
 ![AddAllocToModelSequenceDiagram](images/AddAllocToModelSequenceDiagram.png)
 
-### Adding score feature
+### Adding a score
 
 The `addscore` feature allows users to add score for an assessment of a student.
 
@@ -297,7 +277,7 @@ The following sequence diagram summarises what happens when the user inputs an `
 ![AddScoreSequenceDiagram](images/AddScoreSequenceDiagram.png)
 ![AddScoreToModelSequenceDiagram](images/AddScoreToModelSequenceDiagram.png)
 
-### Searching feature
+### Searching for students
 
 The `search` feature allows user to filter student list by name, NUSNET ID, groups, or tags.
 
@@ -344,8 +324,26 @@ if the command input is valid. The command is invalid if the user input is empty
     * Pros: More straightforward and convenient for users.
     * Cons: We need to identify the type of input given.
 
+### Importing data
 
-### Showing analysis feature
+The following activity diagram summarises what happens when the user inputs an import command:
+
+![ImportCommandActivityDiagram](images/ImportActivityDiagram.png)
+
+There are several important details left out of the activity diagram for the sake of clarity:
+
+1. The import feature is reliant on having a correctly formatted csv file (which is to be exported from sites like lumiNUS and Source Academy, and modified to fit the format).
+   The user needs to provide the number of `Groups`, `Assessments`, and `Tags` since we can't detect this automatically from the format of the file. The proper format of the file can be found in the user guide.
+
+1. A `CommandException` will be thrown if any input does not follow the formatting specified in the respective classes such as `Name`, `ID`, and `Score`.
+
+1. When reading a student's groups, the command will try to use an existing `Group` if possible, to ensure that the `Group` holds a reference to all `Students` in the group. A new `Group` will only be created in the case where the group hasn't already been created.
+
+1. When reading a student's scores, the command will add the score to the `Student`, as well as the `Assessment` created from reading the first row.
+
+1. Columns can be empty, except for the assessment name columns in the header row, and the name and ID columns of each student. Empty columns are assumed to be missing data.
+
+### Showing assessment result analysis
 
 The `show` feature allows users to show the performance analysis of a student, a group or the cohort in an assessment.
 
@@ -372,10 +370,7 @@ The following sequence diagram summarises what happens when the user inputs an `
 ![ShowSequenceDiagram](images/ShowSequenceDiagram.png)
 ![ShowStatsFromModelSequenceDiagram](images/ShowStatsFromModelSequenceDiagram.png)
 
-<br>
-
-
-### Adding alias feature
+### Setting customised aliases for commands
 
 The `alias` feature allows users to define their own aliases for commands. This is useful to shorten the input for commands that the user uses often. 
 
@@ -414,7 +409,6 @@ There were two ideas on how this could be done:
     
 We decided to go with the easier implementation of storing each alias as two strings. However, there were still more aspects to be considered.
 
-
 **Aspect 2: How to handle aliases of aliases**
 
 That is, what happens when the user does `alias -c <existing_alias> -as <new_alias>`? There are two choices for this: 
@@ -442,7 +436,6 @@ That is, what happens when the user does `alias -c <existing_alias> -as <new_ali
     
 We decided to go with implementation 2 due to its ability to naturally handle infinite loops and better performance. Our target audience is also Computer Science professors, who should be very familiar with this style of referencing, since that is exactly how names refer to primitive values in programming.
 
-
 **Aspect 3: Removing aliases**
 
 We believe that there needs to be a way to remove aliases. Otherwise, there will eventually be a very large amount of aliases, and some typo might lead to executing a command you didn't intend to execute. Hopefully, that command isn't `clear`.
@@ -466,6 +459,7 @@ We ended up going with the second approach since the alias functionality was a v
 
 Furthermore, removing aliases is likely a very rare use case, and dedicating a whole command to it does feel like a bit of a waste.
 
+<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -657,8 +651,7 @@ testers are expected to do more *exploratory* testing.
 
 3. Shutdown
 
-   1. Test case: `exit`<br>Expected: Source Control exits and shut down automatically. 
-
+   1. Test case: `exit`<br>Expected: Source Control exits and shut down automatically.
 
 ### Adding a group
 
@@ -696,7 +689,6 @@ testers are expected to do more *exploratory* testing.
    
    2. Test case: `addgroup -g T01A -n Hong Fai`<br> Expected: The group will not be created. Error detail shown in the status message to inform user that the student `Hong Fai` cannot be found in the database.
 
-
 ### Deleting a Student
 
 1. Deleting a student while a list of all students are being shown.
@@ -722,6 +714,7 @@ testers are expected to do more *exploratory* testing.
        Expected: Similar to previous.
 
 ### Adding an alias
+
 1. Adding an alias successfully.
 
    1. Test case: `alias -c addstudent -as example`<br> Expected: A new alias `example` is added for `addstudent`. <br>`example -n Zhiying -i E1234567` will add student `Zhiying` to the database.
