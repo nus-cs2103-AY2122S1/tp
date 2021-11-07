@@ -9,10 +9,10 @@ Interface Ui <<Interface>>
 Class "{abstract}\nUiPart" as UiPart
 Class UiManager
 Class MainWindow
-Class HelpWindow
+Class GuideWindow
 Class ResultDisplay
-Class PersonListPanel
-Class PersonCard
+Class ContactListPanel
+Class ContactCard
 Class PolicyListPanel
 Class PolicyCard
 Class StatusBarFooter
@@ -34,30 +34,35 @@ UiManager .left.|> Ui
 UiManager -down-> "1" MainWindow
 MainWindow *-down->  "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
-MainWindow *-down-> "1" PersonListPanel
+MainWindow *-down-> "1" ContactListPanel
 MainWindow *-down-> "1" StatusBarFooter
-MainWindow --> "0..1" HelpWindow
+MainWindow --> "0..1" GuideWindow
+MainWindow --> "0..1" WarningWindow
 MainWindow *-down-> "1" PolicyListPanel
 
-PersonListPanel -down-> "*" PersonCard
+ContactListPanel -down-> "*" ContactCard
 PolicyListPanel -down-> "*" PolicyCard
 
 MainWindow -left-|> UiPart
 
 ResultDisplay --|> UiPart
 CommandBox --|> UiPart
-PersonListPanel --|> UiPart
-PersonCard --|> UiPart
+ContactListPanel --|> UiPart
+ContactCard --|> UiPart
+PolicyListPanel --|> UiPart
+PolicyCard --|> UiPart
 StatusBarFooter --|> UiPart
-HelpWindow --|> UiPart
+GuideWindow --|> UiPart
+WarningWindow --|> UiPart
 
-PersonCard ..> Model
+ContactCard ..> Model
 PolicyCard ..> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
+Logic -right-> MainWindow
 
-PersonListPanel -[hidden]left- HelpWindow
-HelpWindow -[hidden]left- CommandBox
+ContactListPanel -[hidden]left- GuideWindow
+GuideWindow -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
 ResultDisplay -[hidden]left- StatusBarFooter
 
