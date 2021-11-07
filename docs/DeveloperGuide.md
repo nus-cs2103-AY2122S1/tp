@@ -4,7 +4,7 @@ title: Developer Guide
 ---
 * Table of Contents
 {:toc}
-  
+
 --------------------------------------------------------------------------------------------------------------------
 ## **Introduction**
 MrTechRecruiter (MTR) is a standalone desktop app aimed in helping technology-related company recruiters overlook and administer job positions and applicants applying for various jobs in their companies.
@@ -1353,14 +1353,15 @@ were predominantly based off of AB3 and enhanced to a great extent; others were 
 the overall project is still doable.
 
 
-**<u>Challenges faced:</u>** Understanding base code from AB3, deciding how to go forth and implement features.
+**<u>Challenges faced:</u>** Implementing multiple entity types, improving existing CRUD features.
 
-Understanding AB3's code was definitely challenging because it is our first time encountering a software engineering project with many layers of logic and programming.
-Especially with the integration of UI and many sections of code segregated and made in very fine detail, the learning curve was definitely steep.
-The other challenge is deciding how we wanted to code some of our features - the final product of many of these commands came after many iterations of changing and 
-decisions we made as a team, which is vastly different from how we initially wanted to implement it. Along the way with many bugs being discovered and wanting to keep methods
-inaccessible to certain classes, additional layers of defensive coding and how we accessed the various classes and methods were also converted.
+Our project was harder than AB3 because we needed to have both `Position` and `Applicant` be part our product. Since `Applicant` and `Position` are dissimilar, we had to create separate logic
+for these classes on top of adapting the existing `Person` class to fit our `Applicant` class better. While `Position` does not have as many fields as an `Applicant`, the difficulty came in linking it back
+to the `ModelManager` as we had to add an additional `PositionBook` which further complicated the code base logic.
 
+Also since Applicant and Position are associated, when implementing the CRUD commands for both classes, we had to carefully consider the relationship between the two entities & 
+implement additional logic wherever it made sense for our target user (e.g. when we delete a Position, all Applicants to that Position are deleted as well to avoid 
+Applicants to a non-existing Position).
 
 **<u>Effort required:</u>** 110 - 120%
 
