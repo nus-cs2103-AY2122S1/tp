@@ -110,16 +110,6 @@ public class FindModuleLessonCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywords_noLessonFound() {
-        String expectedMessage = String.format(MESSAGE_LESSONS_LISTED_OVERVIEW, 0);
-        ModuleCodeContainsKeywordsPredicate predicate = prepareModulePredicate(" ");
-        FindModuleLessonCommand command = new FindModuleLessonCommand(predicate);
-        expectedModel.updateFilteredModuleLessonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredModuleLessonList());
-    }
-
-    @Test
     public void execute_multipleModuleCodes_noLessonFound() {
         String expectedMessage = String.format(MESSAGE_LESSONS_LISTED_OVERVIEW, 0);
         ModuleCodeContainsKeywordsPredicate predicate = prepareModulePredicate("MA1521, MA1101");
