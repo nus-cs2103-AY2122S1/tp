@@ -1459,9 +1459,18 @@ testers are expected to do more *exploratory* testing.
 
 ## Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing data files
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Test case: delete the `addressbook.json` file from the folder that contains the `.jar` file of the application. Then, execute the `.jar` file.
+       Expected: tApp application opens with the sample data provided in [SampleDataUtil.java](https://github.com/AY2122S1-CS2103-W14-4/tp/blob/master/src/main/java/seedu/address/model/util/SampleDataUtil.java).
+
+1. Dealing with corrupted data files
+
+    1. Test case: delete the `tasks` section of the `addressbook.json` file. Then, execute the `.jar` file.
+       Expected: tApp application opens with no data.
+
+    2. Test case: edit the `addressbook.json` file so that some properties are invalid (e.g Changing the `isComplete` property of a `Task` to contain a String instead of a boolean).
+       Expected: tApp application opens with no data.
 
 --------------------------------------------------------------------------------------------------------------------
 
