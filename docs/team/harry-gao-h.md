@@ -6,7 +6,7 @@ title: Gao Haochun's Project Portfolio Page
 ## Project: MrTechRecruiter
 
 ### Overview
-MrTechRecruiter (MTR) is a desktop applicant management application designed for tech companies to keep track of job applicants. 
+MrTechRecruiter (MTR) is a desktop applicant management application designed for tech companies to keep track of job applicants.
 The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
 
 Given below are my contributions to the project.
@@ -64,6 +64,3 @@ Given below are my contributions to the project.
 * PRs reviewed (with non-trivial review comments): [\#77](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/77), [\#24](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/24), [\#81](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/81)
 * Contributed to forum discussions (examples: [1](https://github.com/nus-cs2103-AY2122S1/forum/issues/25), [2](https://github.com/nus-cs2103-AY2122S1/forum/issues/49))
 * Reported bugs and suggestions for other teams in the class in the mock PE.
-  
-
-  
