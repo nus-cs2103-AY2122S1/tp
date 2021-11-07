@@ -26,7 +26,7 @@ public class TaskTimeTest {
         // invalid time
         assertFalse(TaskTime.isValidTaskTime("30:59")); // invalid hour
         assertFalse(TaskTime.isValidTaskTime("22:70")); // invalid minutes
-        assertFalse(TaskTime.isValidTaskTime("20-10-10")); // invalid seperators
+        assertFalse(TaskTime.isValidTaskTime("20-10")); // invalid seperators
         assertFalse(TaskTime.isValidTaskTime("30:2")); // no padding for numbers
 
         // valid time
