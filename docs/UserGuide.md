@@ -4,7 +4,7 @@ title: User Guide
 ---
 
 
-Are you having trouble with administrative work as a CS2101 tutor? Does current tools like Excel sheets or the pen and paper cause a lot of pain when trying to organize and search for students or recording class participation? Could there be a way to streamline this process while providing you a better way to visualise the information? Well, ClassMATE has it all covered! 
+Are you having trouble with administrative work as a CS2101 tutor? Does current tools like Excel sheets or the pen and paper cause a lot of pain when trying to organize and search for students or recording class participation? Could there be a way to streamline this process while providing you a better way to visualise the information? Well, ClassMATE has it all covered!
 
 ClassMATE is a **desktop app designed for you to manage student contacts and organize them into their tutorial classes and groups neatly, as well as recording of students' class participation without much hassle. Having both a Command Line Interface** (CLI) and a Graphical User Interface (GUI), it saves you time on your CS2101 administrative work while providing a pleasant experience at the same time.
 
@@ -153,7 +153,7 @@ Entering format: `addc c/CLASS_CODE s/SCHEDULE [t/TAG]…​`
 * Schedule consists of only 2 weekly timeslots. Each time slot should be written in the format `Day H:MM am/pm to H:MM am/pm` (e.g. `Wed 12:00pm to 2:00pm`)
 
 * The `Day` should be start with a capital letter. Short form for days are also accepted (e.g. Tues for Tuesday).
-  
+
 <div markdown="span" class="alert alert-primary">:warning: **Warning:**
   Entering wrong/impossible timings is possible and will not be stopped. Enter schedule timings carefully. :warning:
   </div>

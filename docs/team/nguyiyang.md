@@ -39,11 +39,9 @@ Given below are my contributions to the project.
 * **Team-based tasks**:
   * Updated the link of the GitHub Actions build status badge
   * Tested features and reported bugs between project iterations [\#123](https://github.com/AY2122S1-CS2103T-W15-1/tp/issues/123)
-  * Bug fixing [\#237](https://github.com/AY2122S1-CS2103T-W15-1/tp/pull/236), [\#200](https://github.com/AY2122S1-CS2103T-W15-1/tp/pull/200)
-    Some bugs include:
-    * Tutorial group of student not removed after tutorial class of a student is changed [\#224](https://github.com/AY2122S1-CS2103T-W15-1/tp/issues/224)
-    * Tutorial groups of a student not removed after deleting a tutorial class [\#237](https://github.com/AY2122S1-CS2103T-W15-1/tp/issues/237)
-    * Adding students to a group in non-existent class [\#228](https://github.com/AY2122S1-CS2103T-W15-1/tp/issues/228)
+  * Bug fixing. Pull Requests: [\#237](https://github.com/AY2122S1-CS2103T-W15-1/tp/pull/236), [\#200](https://github.com/AY2122S1-CS2103T-W15-1/tp/pull/200)
+    * Tutorial group bugs [\#218](https://github.com/AY2122S1-CS2103T-W15-1/tp/issues/218), [\#224](https://github.com/AY2122S1-CS2103T-W15-1/tp/issues/224), [\#228](https://github.com/AY2122S1-CS2103T-W15-1/tp/issues/228), [\#237](https://github.com/AY2122S1-CS2103T-W15-1/tp/issues/237)
+    * Documentation bugs
 
 * **Review/mentoring contributions**:
   * PRs reviewed: Suggested an alternative implementation to reduce code repetition [\#198](https://github.com/AY2122S1-CS2103T-W15-1/tp/pull/198)
@@ -51,3 +49,4 @@ Given below are my contributions to the project.
 * **Contributions beyond the project team**:
   * Reporting bugs in other team's products. Some examples include: [1](https://github.com/AY2122S1-CS2103T-T15-4/tp/issues/222), [2](https://github.com/AY2122S1-CS2103T-T15-4/tp/issues/221)
   * Reviewing the User Guides and Developer Guides of two peer teams
+  
