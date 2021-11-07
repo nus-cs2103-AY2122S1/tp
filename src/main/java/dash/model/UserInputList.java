@@ -35,6 +35,7 @@ public class UserInputList implements Iterable<String> {
      */
     public UserInputList(List<String> userInputs) {
         internalList.addAll(userInputs);
+        trimInternalList();
     }
 
     /**
@@ -43,27 +44,36 @@ public class UserInputList implements Iterable<String> {
     public void resetData(UserInputList newData) {
         requireNonNull(newData);
         setUserInputs(newData.getInternalUserInputList());
+        trimInternalList();
     }
 
     /**
      * Adds a user input String to the start of the list.
+     * Trims the internal list to {@code LIST_MAX_LENGTH}
      */
     public void add(String toAdd) {
         requireNonNull(toAdd);
         internalList.add(0, toAdd);
-        assert !(internalList.size() > LIST_MAX_LENGTH);
-        if (internalList.size() == LIST_MAX_LENGTH) {
-            internalList.remove(LIST_MAX_LENGTH);
-        }
+        trimInternalList();
     }
 
     /**
-     * Replaces the contents of this list with {@code tasks}.
+     * Replaces the contents of this list with {@code userInputs}.
      */
     public void setUserInputs(List<String> userInputs) {
         CollectionUtil.requireAllNonNull(userInputs);
         internalList.clear();
         internalList.addAll(userInputs);
+        trimInternalList();
+    }
+
+    /**
+     * Trims the internal list of user inputs to {@code LIST_MAX_LENGTH}
+     */
+    public void trimInternalList() {
+        if (internalList.size() > LIST_MAX_LENGTH) {
+            internalList.subList(LIST_MAX_LENGTH, internalList.size()).clear();
+        }
     }
 
     /**
