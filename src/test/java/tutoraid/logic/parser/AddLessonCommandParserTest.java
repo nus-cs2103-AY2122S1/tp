@@ -6,7 +6,6 @@ import static tutoraid.logic.commands.CommandTestUtil.CAPACITY_DESC_SCIENCE;
 import static tutoraid.logic.commands.CommandTestUtil.INVALID_CAPACITY_DESC;
 import static tutoraid.logic.commands.CommandTestUtil.INVALID_LESSON_NAME_DESC;
 import static tutoraid.logic.commands.CommandTestUtil.INVALID_PRICE_DESC;
-import static tutoraid.logic.commands.CommandTestUtil.INVALID_TIMING_DESC;
 import static tutoraid.logic.commands.CommandTestUtil.LESSON_NAME_DESC_MATH;
 import static tutoraid.logic.commands.CommandTestUtil.LESSON_NAME_DESC_SCIENCE;
 import static tutoraid.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
@@ -26,7 +25,6 @@ import tutoraid.model.lesson.Capacity;
 import tutoraid.model.lesson.Lesson;
 import tutoraid.model.lesson.LessonName;
 import tutoraid.model.lesson.Price;
-import tutoraid.model.lesson.Timing;
 import tutoraid.testutil.LessonBuilder;
 
 public class AddLessonCommandParserTest {
@@ -99,10 +97,6 @@ public class AddLessonCommandParserTest {
         // invalid price
         CommandParserTestUtil.assertParseFailure(parser, LESSON_NAME_DESC_SCIENCE + CAPACITY_DESC_SCIENCE
                 + INVALID_PRICE_DESC + TIMING_DESC_SCIENCE, Price.MESSAGE_CONSTRAINTS);
-
-        // invalid timing
-        CommandParserTestUtil.assertParseFailure(parser, LESSON_NAME_DESC_SCIENCE + CAPACITY_DESC_SCIENCE
-                + PRICE_DESC_SCIENCE + INVALID_TIMING_DESC, Timing.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         CommandParserTestUtil.assertParseFailure(parser, INVALID_LESSON_NAME_DESC + INVALID_CAPACITY_DESC

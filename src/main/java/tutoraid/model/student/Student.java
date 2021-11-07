@@ -180,9 +180,9 @@ public class Student {
 
         builder.append("\nProgress: ")
                 .append(getLatestProgress())
-                .append("; Payment Status: ")
-                .append("; Lessons: ")
-                .append(getLessons());
+                .append("\nLessons: ")
+                .append(getLessons())
+                .append("\n");
 
         return builder.toString();
     }
