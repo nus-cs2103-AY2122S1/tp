@@ -306,7 +306,7 @@ Update the attributes of existing users using the prefix of the client’s attri
 * Multiple clients can be edited at the same time with the provided attributes by indicating their ids separated by a
   space.
 
-| Format | `edit CLIENT_ID... [<attribute>/CHANGED_VALUE]...`|
+| Format | `edit CLIENT_ID... <attribute>/CHANGED_VALUE...`|
 | :---: | :--- |
 | **Example** | • `edit 3 p/12345678 r/5` command changes client 3's contact number to “12345678” and the risk appetite to 5. <br> • `edit 15 13 r/3` command changes the risk appetite of client 13 & 15 to “3”. <br> • `edit 3 4 5 m/21-09-2021 (09:00~10:00), McDonald's` sets a meeting for clients 3, 4 and 5 to be on 21st September 2021 from 9am to 10 am at McDonald's |
 | <img src="images/info_icon.png" width="50"/> | • Client ID cannot be changed. |
@@ -348,7 +348,7 @@ All clients in an address book would be shown in the client view list.
 Sorts clients in order based on the inputted attribute. Clients can be sorted in ascending or descending order, and is
 based on the given `SORT DIRECTION`.
 
-| Format | `sort [<attribute>/SORT_DIRECTION]...` <br> <br> • `SORT DIRECTION` can take on the values `asc` or `dsc`, and will sort the clients based on the given attribute in an ascending and descending order respectively. |
+| Format | `sort <attribute>/SORT_DIRECTION...` <br> <br> • `SORT DIRECTION` can take on the values `asc` or `dsc`, and will sort the clients based on the given attribute in an ascending and descending order respectively. |
 | :---: | :--- |
 | **Examples** | • `sort r/ASC` will sort the list by ascending risk-appetite <br> • `sort i/dsc` will sort the list by descending client id |
 | <img src="images/info_icon.png" width="50"/> | • If multiple attributes are provided, then the clients will be sorted by the attributes sequentially. <br> e.g. `sort d/asc m/dsc`, this will sort the clients by disposable income in ascending order first, then for those clients whose disposable income are the same, they will be sorted by next meeting in descending order. <br> • Sorting by the attribute Tag (t/) is not supported. <br> • The tags are case-insensitive. (ASC and asc are both okay.) |
@@ -603,13 +603,13 @@ Action | Format | Examples
 --------|---------|---------
 **Create** | `add n/CLIENT_NAME e/EMAIL [<attribute>/VALUE]...`| add n/benedict e/benedict@gmail.com p/90909898 r/3
 **View** | `view CLIENT_ID` | view 123
-**Edit** | `edit CLIENT_ID... [<attribute>/CHANGED_VALUE]...` | edit 12 n/Dominic p/12345678
+**Edit** | `edit CLIENT_ID... <attribute>/CHANGED_VALUE...` | edit 12 n/Dominic p/12345678
 **Delete** | `delete CLIENT_ID...` | delete 4
 **List** | `list` | -
-**Sort** | `sort [<attribute>/SORT_DIRECTION]...` | sort r/asc
+**Sort** | `sort <attribute>/SORT_DIRECTION...` | sort r/asc
 **Schedule** | `schedule [DATE]` | schedule 25-12-2021
-**Search** | `search KEYWORD... [<attribute>/KEYWORD]...` | search e/doe@gmail.com r/5
-**Filter** | `filter KEYWORD... [<attribute>/VALUE]...` | filter e/doe@gmail.com p/9
+**Search** | `search KEYWORD... [<attribute>/ATTRIBUTE_KEYWORD]...` | search e/doe@gmail.com r/5
+**Filter** | `filter KEYWORD... [<attribute>/ATTRIBUTE_KEYWORD]...` | filter e/doe@gmail.com p/9
 **Clear** | `clear` | -
 **Help** | `help` | -
 **Exit** | `exit` | -
