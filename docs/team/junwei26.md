@@ -5,8 +5,7 @@ title: Jun Wei's Project Portfolio Page
 
 ### Project: CSBook
 
-CSBook is a desktop application for teaching assistants (TAs) to manage their students. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
-
+CSBook is a desktop application for Computer Science (CS) Teaching Assistants (TAs) to manage their students. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 15 kLoC.
 Given below are my contributions to the project.
 
 * **New Feature**: Added the ability to view all students in a particular group.
@@ -26,13 +25,15 @@ Given below are my contributions to the project.
   * Managed triaging of issues for `v1.4`.
 
 * **Enhancements to existing features**:
-    * Enhanced the GUI by adding pop ups for result messages, made GUI responsive, restructured main view of application (Pull requests [\#114](https://github.com/AY2122S1-CS2103T-T09-3/tp/pull/114))
+    * Enhanced the GUI by adding pop ups for result messages, made GUI responsive, restructured main view of application (Pull request [\#114](https://github.com/AY2122S1-CS2103T-T09-3/tp/pull/114))
+    * Added test cases for `AddGroupCommand`, `AddGroupCommandParser`, `ChangeGroupCommand`, `ChangeGroupCommandParser` , `DecryptCommand` and
+      `EncryptCommand`(Pull request [\#204](https://github.com/AY2122S1-CS2103T-T09-3/tp/pull/204))
 
 * **Documentation**:
     * User Guide:
-        * Added documentation for the `find`, `delete`, `clear` and `viewgroup` features. [\#35](https://github.com/AY2122S1-CS2103T-T09-3/tp/pull/35)
+        * Added documentation for the `find`, `delete`, `clear` and `viewgroup` features. (Pull request [\#35](https://github.com/AY2122S1-CS2103T-T09-3/tp/pull/35))
     * Developer Guide:
-        * Added implementation details and UML diagrams for loading data in the Implementations section. [\#91](https://github.com/AY2122S1-CS2103T-T09-3/tp/pull/91)
+        * Added implementation details and UML diagrams for loading data in the Implementations section. (Pull request [\#91](https://github.com/AY2122S1-CS2103T-T09-3/tp/pull/91))
 
 * **Community**:
     * Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/junwei26/ped/issues/6), [2](https://github.com/junwei26/ped/issues/1), [3](https://github.com/junwei26/ped/issues/9))
