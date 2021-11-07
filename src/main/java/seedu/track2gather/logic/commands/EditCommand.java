@@ -63,7 +63,8 @@ public class EditCommand extends Command {
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Fields%1$s\n"
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited the following fields: \n"
+            + "%1$s\n"
             + MESSAGE_PREDICATE_SHOW_ALL_PERSONS;
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This case number already exists in the contacts list.";

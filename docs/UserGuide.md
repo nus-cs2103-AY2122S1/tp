@@ -85,7 +85,7 @@ Refer to the [Features](#features) below for details of each command.
 
 Field | Format
 ------|------------------
-`NAME` | Names should only contain alphanumeric characters and spaces, and should not be blank.
+`NAME` | Names should only contain alphanumeric characters separated by spaces, and it should not be blank.
 `PHONE_NUMBER` | Phone numbers should be positive integers with no leading zeros, and should be 3 to 11 digits long.
 `EMAIL` | Emails should be of the format local-part@domain. <br> The local-part should only contain alphanumeric characters and these special characters: (+_.-), excluding the parentheses. The local-part may not start or end with any special characters. This is followed by a '@' and then a domain name. <br> The domain name is made up of domain labels separated by periods. The domain name must end with a domain label at least 2 characters long, have each domain label start and end with alphanumeric characters and must have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
 `CASE_NUMBER` | Case numbers should be positive integers with no leading zeros, and should be between 1 to 6 digits long. Note that case numbers are displayed in a fixed format of 6 digits, padded with zeros on the left, if needed.
@@ -203,6 +203,7 @@ Format: `sort [n/DIRECTION] [cn/DIRECTION] [sh/start:DIRECTION] [sh/end:DIRECTIO
 * Direction `asc` indicates ascending sort order and `dsc` indicates descending sort order
 * Sorts the persons list from the first to the last specified field prefix
 * At least one field prefix must be provided
+* Letter case is ignored when sorting by name.
 * Specifying the sort direction is optional
   * By default, field prefixes are sorted in ascending order
 

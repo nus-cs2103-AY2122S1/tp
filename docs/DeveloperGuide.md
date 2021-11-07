@@ -538,11 +538,11 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding a person
 
-   1. Test case: `add n/John Doe p/91234567 e/johndoe@gmail.com cn/1 ha/123 Waterloo`<br>
+   1. Test case: `add n/John Doe p/91234567 e/johndoe@gmail.com cn/7 ha/123 Waterloo`<br>
        Expected: New person is added with the given details. Details of the added person shown in the
        status message.
 
-   2. Test case: `add n/John Doe p/91234567 e/johndoe@gmail.com cn/3 ha/123 Waterloo wa/456 Waterloo`<br>
+   2. Test case: `add n/Jane Doe p/98765432 e/janedoe@gmail.com cn/8 ha/123 Toronto wa/456 Toronto qa/789 Toronto sh/2000-01-01 2000-02-02 kn/Mary Jane kp/12345678 ka/555 Montreal`<br>
        Expected: New person is added with the given details. Details of the added person shown in the 
        status message.
 
@@ -568,12 +568,12 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
    2. Test case: `edit 1 n/John Doe`<br>
-      Expected: First person in the list has their name edited to `John Doe`. Details of the edited person shown in the
+      Expected: First person in the list has their name edited to `John Doe`. Details of the edited field(s) are shown in the
       status message.
 
    3. Test case: `edit 1 n/John Doe cn/12`<br>
       Expected: First person in the list has their name edited to `John Doe` and their case number edited to `12`.
-      Details of the edited person shown in the status message.
+      Details of the edited field(s) are shown in the status message.
 
    4. Test case: `edit 1`<br>
       Expected: No persons' contact details will be edited. Error details shown in the status message. Status bar
@@ -589,7 +589,7 @@ testers are expected to do more *exploratory* testing.
 
 2. Editing a person while search results are being shown
 
-    Expected: Similar to previous, but person(s) are deleted based on their index(s) in the search results instead of the list.
+    Expected: Similar to previous, but person(s) are edited based on their index(s) in the search results instead of the list.
 
 ### Deleting a person
 
@@ -766,7 +766,7 @@ testers are expected to do more *exploratory* testing.
 ### Saving data
 
 1. Dealing with missing/corrupted data files
-    1. Test case: Empty JSON file.  
+    1. Test case: Missing JSON file.  
        Expected: Sample Track2Gather person list will be generated with sample persons' information.
     2. Test case: Corrupted JSON file.  
-       Expected: Sample Track2Gather person list will be generated with sample persons' information.
+       Expected: Empty Track2Gather person list will be generated.
