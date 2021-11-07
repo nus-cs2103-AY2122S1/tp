@@ -99,6 +99,7 @@ Adds a person to the address book.
 Format: `add n/NAME g/GITHUB_ID N/NUS_NETWORK_ID {r/student|r/tutor} s/STUDENT_ID T/TUTORIAL_ID p/PHONE a/ADDRESS [t/TAG]…​`
 
 * A person cannot be added if he or she already exists in ProfBook, i.e. they are the same person.
+* The email field is automatically created depending on the NUSNET_ID entered.
 * 2 persons are considered similar if they share the exact same name, e.g. if John Doe already exists in ProfBook, `add n/John Doe s/A0222530X N/E0560062 g/meixuanjin T/01 p/98159386 a/John Street, block 456, #01-01` would not add a new John Doe to ProfBook.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -131,11 +132,11 @@ Format: `edit INDEX [n/NAME] [g/GITHUB_ID] [N/NUS_NETWORK_ID] [{r/student|r/tuto
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * When editing tags, the existing tags of the person will be removed and new tags will be added i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+* You can remove all the person’s tags by typing `t/` without specifying any tags after it.
+* The Editing of NUSNET_ID also changes the Email automatically.
 
 Examples:
-* `edit 1 p/91234567` Edits the phone number of the 1st person to be `91234567`.
+* `edit 1 p/91234567 N/e0000000` Edits the phone number of the 1st person to be `91234567` and the NUSNET_ID to be `E0000000` and the email to become `e0000000@u.nus.edu`.
 * `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 * `edit 1 n/Siddharth Srivastava t/IncompleteIP` Edits the name of the 1st person to be `Siddharth Srivastava` and replaces all existing tags with the tag `IncompleteIP`.
 
@@ -305,10 +306,10 @@ contains the data of your previous ProfBook home folder.
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME S/STUDENT_ID N/NUSNet_ID g/GITHUB_ID T/TUTORIAL_ID {r/student \| r/tutor} [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]...` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Delete** | `delete {INDEX \| -a \| -f}`  <br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [s/STUDENT_ID] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find {n/|s/|N/|g/|T/|r/|p/|a/|t/full/|t/partial/}KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/Alex`
+**Add** | <code>add n/NAME S/STUDENT_ID N/NUSNet_ID g/GITHUB_ID T/TUTORIAL_ID {r/student &#124; r/tutor} [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]...</code> e.g., `add n/John Doe p/98765432 a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney g/john-doe N/e0123456 r/student s/A0123456X T/11 `
+**Delete** | <code>delete {INDEX &#124; -a &#124; -f}</code> e.g., `delete 3`
+**Edit** | <code> edit INDEX [n/NAME] [g/GITHUB_ID] [N/NUS_NETWORK_ID] [{r/student &#124; r/tutor}] [s/STUDENT_ID] [T/TUTORIAL_ID] [p/PHONE] [a/ADDRESS] [t/TAG]…​ </code> e.g.,`edit 2 n/John Doe`
+**Find** | <code> find {n/ &#124; s/ &#124; N/ &#124; g/ &#124; T/ &#124; r/ &#124; p/ &#124; a/ &#124; t/full/ &#124; t/partial/} KEYWORD [MORE_KEYWORDS]</code> e.g., `find n/Alex`
 **List** | `list`
 **Import** | `import FILENAME` <br> e.g., `import tutors.json`
 **Export** | `export FILENAME` <br> e.g., `export t01students.json`
