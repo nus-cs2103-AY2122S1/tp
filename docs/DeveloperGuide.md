@@ -121,7 +121,7 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` and `DeleteCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
@@ -250,7 +250,7 @@ Step 7. CONNECTIONS UI will update to show the contact behind other pinned conta
 The following sequence diagram shows how the pin operation works:
 
 ![PinSequenceDiagram](images/PinSequenceDiagram.png)
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `PinCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `PinCommandParser` and `PinCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 #### Design considerations:
@@ -411,7 +411,10 @@ Step 4. The user provides a series of prefixes to `mailingList` to pick the fiel
 Step 5. These `Prefix` arguments are stored in `Model`.  
 Step 6. The user is prompted to pick the name and download location of their generated CSV file.  
 Step 7. The `FilteredList`, `Prefixes` and `Path` are passed to `CsvUtil#modelToCsv`, which will serialize and write the CSV file.   
-![MailingListSequenceDiagram](images/MailingListSequenceDiagram.png)  
+![MailingListSequenceDiagram](images/MailingListSequenceDiagram.png)
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `MailingListCommandParser` and MailingListCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
 Step 8. The header row is created based on `Prefix` arguments stored in `Model`, based on a mapping in `CsvUtil`.  
 Step 9. Individual rows are generated based on the `Prefix` arguments stored in `Model` and the `FilteredPerson` in `ModelManager`, based on a mapping in `CsvUtil`.  
 Step 10. The headers and rows are written to the CSV file that is specified by the user.  
@@ -609,7 +612,7 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 
 1.  User chooses to look for an entry.
 2.  Use provides the search term.
-3.  CONNECTIONS returns all entries that matches all search terms provided
+3.  CONNECTIONS returns all entries that matches all search terms provided.
 
     Use case ends.
 
