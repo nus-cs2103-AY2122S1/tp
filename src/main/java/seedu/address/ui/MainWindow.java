@@ -218,11 +218,12 @@ public class MainWindow extends UiPart<Stage> {
         personListView.getSelectionModel().selectedItemProperty()
                 .addListener((obs, oldVal, newVal) -> {
                     if (newVal != null) {
+                        logger.info("Showing lessons for " + newVal.getName());
                         handlePersonGridPanel(newVal);
                     }
                 });
-        personListView.setOnMouseClicked(event -> handlePersonGridPanel(personListView
-                .getSelectionModel().getSelectedItem()));
+        personListView.setOnMouseClicked(event -> handlePersonGridPanel(
+                personListView.getSelectionModel().getSelectedItem()));
     }
 
     /**
@@ -359,6 +360,7 @@ public class MainWindow extends UiPart<Stage> {
         if (commandResult.getStudent().isPresent()) {
             Person student = commandResult.getStudent().get();
             handlePersonGridPanel(student);
+            centerPanel.getPersonListView().scrollTo(student);
         } else {
             handlePersonGridPanel();
         }

@@ -2,7 +2,7 @@
 layout: page
 title: User Guide
 ---
-
+<span id="toc"/>
 * Table of Contents
 {:toc}
 
@@ -12,8 +12,7 @@ title: User Guide
 
 **Tuition Address Book (TAB)** is an all-in-one desktop application that helps private 1-to-1 home tutors like you keep track of the large number of students and your respective lesson information, and empower you to provide the best quality home tuition service.
 
-TAB is a Command Line Interface (CLI) application which allows you to interact with it with just text inputs. On top of that, TAB also 
-comes with a clean and aesthetic Graphical User Interface (GUI), allowing you to view your data easily.
+TAB is a Command Line Interface (CLI) application which allows you to interact with it with just text inputs. On top of that, TAB also comes with a clean and aesthetic Graphical User Interface (GUI), allowing you to view your data easily.
 
 With TAB, you can effortlessly manage your students' contact details faster than a typical mouse/GUI driven app.
 
@@ -21,13 +20,19 @@ With TAB, you can effortlessly manage your students' contact details faster than
 
 ## About This Guide
 
-This user guide is intended for any user of TAB. It provides installation instructions to help get you started with using TAB, and describes in detail the features available in TAB.
+This user guide aims to help new users become familiar with TAB. If this is your first time using TAB, we recommend reading this User Guide in order.
+
+It provides [installation instructions](#quick-start) to help get you started with using TAB, and describes in detail the [features](#features) available in TAB. 
+
+If there are any terms used in this user guide which you are unfamiliar with, their definitions may be found in the [Glossary](#glossary).
 
 **Navigation**
 
-In the [Table of Contents](), each item listed is a link which you can click on to go directly to that section in the guide.
+In the [Table of Contents](#toc), each item listed is a link which you can click on to go directly to that section in the guide. At the end of every section, there will be a link which says [back to table of contents](#toc) which you can click on to return to the Table of Contents.
 
 **Conventions Used**
+
+As you read this user guide, you may also encounter these syntax and symbols. 
 
 Syntax | Meaning
 --------|------------------
@@ -72,7 +77,7 @@ _text_ | Caption for images.
 
 <div style="page-break-after: always;"></div>
 
-## Graphical User Interface (GUI)
+## Overview of the Graphical User Interface (GUI)
 
 This section briefly explains the various section of TAB's GUI.
 
@@ -81,8 +86,8 @@ This section briefly explains the various section of TAB's GUI.
 
 Section | Representation
 ---------|---------
-Menu Bar | The area where you can click to navigate and view some of TAB's features (e.g. help, reminder and calendar). See [Features](#features) for more details.
-Menu Item | A button that you can click to view the stated feature, or to quit TAB (for <kbd>Exit</kbd>).<br> - Clicking on <kbd>View</kbd> → <kbd>Students</kbd> brings you to the last displayed list of students and not the full list of students. See [View Students](#view-students) for more details.
+Menu Bar | The area where you can click to navigate and view some of TAB's features (e.g. help, reminder and calendar). See [Menu Bar Shortcuts](#menu-bar-shortcuts) for more details.
+Menu Item | A button that you can click to view the stated feature, or to quit TAB (for <kbd>Exit</kbd>).
 Command Box | The text field where you key in commands that are meant to be processed by TAB. TAB will execute the command after you press <kbd>Enter</kbd>.
 Result Display | The area that shows the result of the execution of the command. If the command entered has been executed successfully, it will display the relevant success message. Otherwise, it will show an error message indicating the cause of the error.
 Student List | The panel that shows the list of students you have in TAB.
@@ -91,7 +96,6 @@ Lesson List | The panel that shows the name of the student you have selected tog
 Lesson Card | The area that shows the details of a lesson. See [Managing Lessons](#managing-lessons) for more details.
 Center Panel | The region that displays the lists of students and lessons, calendar or the list of tags depending on the command you have entered. See [Features](#features) for more details.
 Footer | The area which shows where TAB saves your student details to. <br> e.g. **./data/addressbook.json** means that TAB saves your data to the sub-folder **data** in the home folder (where TAB located in) with file name **addressbook.json** as shown in the following screenshot: <br> ![fileStorage](images/annotatedFileStorage.png)
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -103,6 +107,7 @@ The features are categorised into the different categories as follows:
 
 * [Getting Help](#getting-help)
 * [Managing Students](#managing-students)
+* [Finding Students](#finding-students)
 * [Managing Lessons](#managing-lessons)
 * [Managing Lesson Fees](#managing-lesson-fees)
 * [Managing Your Schedule](#managing-your-schedule)
@@ -111,7 +116,7 @@ The features are categorised into the different categories as follows:
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Overview of the command format
+### Overview of the Command Format
 This section explains the command format used for TAB's commands.<br/>
 
 Commands are text that you can enter into TAB's command box to tell TAB which operation you would like to perform. Commands in TAB have several components and follow a general format as follows:<br/>
@@ -136,7 +141,6 @@ Commands are text that you can enter into TAB's command box to tell TAB which op
 
 An example of a command in TAB:
 ![Command format](images/CommandFormat.png)
-
 
 #### Command format notation
 
@@ -171,9 +175,12 @@ An example of a command in TAB:
 * There are constraints in place to determine whether the value you provided for a field is valid. 
   TAB will inform you if you gave an invalid input for a field.
 
-<div style="page-break-after: always;"></div>
+<br />
+
+[back to table of contents](#toc)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### Getting Help 
 This section tells you what to do if you require help while using TAB.
@@ -192,6 +199,12 @@ Format: `help`
 
 ![help](images/help.png)
 <div class="caption">Help window interface.</div>
+
+<br />
+
+[back to table of contents](#toc)
+
+--------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
@@ -216,6 +229,8 @@ Executing any of the commands in this section will bring you to the students int
     <li>Fields that are empty will not be displayed.</li>
   </ul>
 </div>
+
+#### Student parameters
 
 <table id="student-param-table">
     <thead>
@@ -355,8 +370,6 @@ Executing any of the commands in this section will bring you to the students int
     </tbody>
 </table>
 
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 #### Adding a student: `add`
@@ -426,9 +439,9 @@ Format: `list`
 
 <br />
 
-[back to table of contents](#)
+[back to table of contents](#toc)
 
-<br />
+--------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
@@ -440,79 +453,123 @@ This section guides you on how to find or filter students of your choice in TAB.
 #### Finding students by fields: `find`
 
 Finds all students whose fields match the given keyword(s), based on the specified find condition.
+You can find students by tags, student fields and lesson fields.
 
-Format: `find [cond/{all | any | none}] [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS] [pp/PARENT_PHONE_KEYWORDS] [pe/PARENT_EMAIL_KEYWORDS] [sch/SCHOOL_KEYWORDS] [stream/ACAD_STREAM_KEYWORDS] [lvl/ACAD_LEVEL_KEYWORDS] [r/REMARK_KEYWORDS] [t/TAG_KEYWORD]…​ [subject/LESSON_SUBJECT_KEYWORDS] [time/LESSON_TIME] [date/LESSON_DATE] [cancel/CANCELLED_DATE] [rates/LESSON_RATE_KEYWORDS] [hw/LESSON_HOMEWORK_KEYWORDS]`
+Format: `find [cond/{all | any | none}] [t/TAG_KEYWORD]…​ [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS] [pp/PARENT_PHONE_KEYWORDS] [pe/PARENT_EMAIL_KEYWORDS] [sch/SCHOOL_KEYWORDS] [stream/ACAD_STREAM_KEYWORDS] [lvl/ACAD_LEVEL_KEYWORDS] [r/REMARK_KEYWORDS] [subject/SUBJECT_KEYWORDS] [date/START_DATE] [time/TIME_RANGE] [cancel/CANCELLED_DATE] [rates/LESSON_RATES_KEYWORDS] [hw/HOMEWORK_KEYWORDS]`
 
-The fields that you can search for are:
+* You must specify at least one field to search for, and provide at least one keyword.<br>
+  e.g. `find cond/any` or `find n/` are invalid commands.
 
-Field            | Parameter                   | Result                                              
------------------|-----------------------------|---------------------------------------------------------
-Student Name     | n/NAME_KEYWORDS             | Students whose name contains all the keywords
-Student Address  | a/ADDRESS_KEYWORDS          | Students whose address contains all the keywords
-Student Phone    | p/PHONE_KEYWORDS            | Students whose phone number contains all the keywords
-Student Email    | e/EMAIL_KEYWORDS            | Students whose email contains all the keywords
-Parent Phone     | pp/PARENT_PHONE_KEYWORDS    | Students whose parent phone number contains all the keywords
-Parent Email     | pe/PARENT_EMAIL_KEYWORDS    | Students whose parent email contains all the keywords
-School           | sch/SCHOOL_KEYWORDS         | Students whose school contains all the keywords
-Academic Stream  | stream/ACAD_STREAM_KEYWORDS | Students whose academic stream contains all the keywords
-Academic Level   | lvl/ACAD_LEVEL_KEYWORDS     | Students whose academic level contains all the keywords
-Remarks          | r/REMARK_KEYWORDS               | Students whose remarks contains all the keywords
-Tags             | t/TAG                           | Students who have the specified tag
-Lesson Subject   | subject/LESSON_SUBJECT_KEYWORDS | Students who have lessons with subject that contains all the keywords
-Lesson Date      | date/LESSON_DATE | Students with lessons that fall on the specified date
-Lesson Time      | time/LESSON_TIME | Students with lessons that fall in the specified time range
-Cancelled Dates  | cancel/CANCELLED_DATE     | Students who have lessons cancelled on the specified date
-Lesson Rates     | rates/LESSON_RATE_KEYWORDS | Students whose lessons have rates that contain the keyword
-Lesson Homework  | hw/LESSON_HOMEWORK_KEYWORDS | Students who have homework that contains all the keywords
+##### Search by tags
+* You can search by multiple tags. e.g. `t/paid t/new`.
+* One tag parameter can only have one keyword. e.g. `t/paid new` is invalid.
+* Only whole words will be matched. e.g. keyword `paid` will not match `unpaid`.
+* The search is case-insensitive. e.g. keyword `new` will match `NEW`.
 
-Notes about the find condition:
+Example:
+* `find t/unpaid t/New` will return all students with both of the tags `UNPAID` and `NEW`.
 
-* The find condition indicates that a student is only considered a match when `all`, `any` or `none`
-  of the fields which you are searching for match the student.<br>
-  e.g. 
-    * `find n/John t/math cond/all` will return students with both the name `John` and the tag `math`.
-    * `find n/John t/math cond/any` will return students with only the name `John`, or only the tag `math`, or both.
-    * `find n/John t/math cond/none` will return students without the name `John` and the tag `math`.
-    
-* The find condition is optional and defaults to `all` if not specified. <br>
-  e.g. `find date/10 Oct 2021 time/1000-1400` will return students with lessons that occur between `1000-1400` on `10 Oct 2021`.
-  
-Notes about search keywords:
-
-* You must provide at least one field to search.<br>
-  e.g. entering just `find` or `find cond/any` alone is not a valid command. You need to include the fields you wish to search for.
-
-* You must provide at least one keyword to search for.<br>
-  e.g. entering just `find n/` alone is not a valid command as the keyword is empty.
-
-* Tags must only have one keyword.<br>
-  e.g. `find t/zoom math` is invalid. To search by multiple tags, you can do `find t/zoom t/math`.
-
-* The search is case-insensitive.<br>
-  e.g. keyword `hans` will match `Hans`.
-
-* A keyword can match a word partially.<br>
-  e.g. keyword `math` will match `mathematics`.
-
-* The order of the keywords do not matter.<br>
-  e.g. keyword `west jurong` will match `jurong west`.
-  
+##### Search by other student fields
+* You can specify one or more keywords for each parameter. e.g. `find n/Amad Ali`.
 * A field needs to contain all specified keywords to be matched.<br>
-  e.g. keywords `Amad Ali` will not match `Amad` or `Ali Abdul`, but it will match `Amad bin Ali`.
+  e.g. keywords `Amad Ali` will not match `Amad`, but it will match `Amad bin Ali`.
+* If you specify multiple keywords with the same prefix, only the last prefix will be used to search that field.
+* A keyword can match a word partially. e.g. keyword `uni` will match `university`.
+* The search is case-insensitive.
+
+Example:
+* `find n/John a/west coast` will return students with name that contains `John`, and address that contains `west` and `coast`.
+
+##### Search by lesson fields
+* Finds all students with at least one lesson that matches the lesson parameters.
+* The find behaviour of lesson fields are specified in the table below.
+
+<table id="find-param-table">
+    <thead>
+        <tr>
+            <th style="text-align:center">Fields</th>
+            <th style="text-align:center">Find behaviour</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Subject <br> Lesson Rates</td>
+            <td>
+              <ul>
+                <li>The same constraints for student fields apply.</li>
+              </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>Homework</td>
+            <td>
+              <ul>
+                <li>Finds students with lessons that have at least one piece of homework matching all the keywords.</li>
+                <li>The same constraints for student fields apply.</li>
+              </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>Start Date</td>
+            <td>
+              <ul>
+                <li>Accepts one keyword that must follow the <a href="#lesson-date">Date</a> format</li>
+                <li>Finds students with lessons that fall on the specified date.</li>
+              </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>Cancelled Date</td>
+            <td>
+              <ul>
+                <li>Accepts one keyword that must follow the <a href="#lesson-date">Date</a> format</li>
+                <li>Finds students with lessons that are cancelled on the specified date.</li>
+              </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>Time Range</td>
+            <td>
+              <ul>
+                <li>Accepts one keyword that must follow the <a href="#lesson-time-range">Time Range</a> format</li>
+                <li>Finds students with lessons that overlaps with the time range, excluding the start and end time.<br>
+                    e.g. <code>time/1200-1400</code> matches lesson with time <code>1300-1500</code>, but not <code>1400-1500</code></li>
+              </ul>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+* In the future, we will allow search by lesson fees and end date.
+
+Example:
+* `find date/12 Oct 2021 time/1200-1400 subject/Math` will match a student with lesson on `12 OCT 2021`, at `1130-1230`, with the subject `Mathematics`.
+
+##### Search with match condition
+
+* You can specify an optional match condition which indicates the type of matching to be applied. 
+  A student is considered a match only when `all`, `any` or `none` of the fields which you are searching for match the student.
+* The match condition is optional and defaults to `all` if not specified.
 
 Examples:
+  * `find n/John t/zoom cond/all` returns students with both the name `John` and the tag `zoom`.
+  * `find n/John t/zoom cond/any` returns students with only the name `John`, or only the tag `zoom`, or both.
+  * `find n/John t/zoom cond/none` returns students without the name `John` and the tag `zoom`.
 
-To find a student, you may enter `find a/serangoon n/Bern` into the command box.
+<br>
+**Example of finding by different types of fields**
 
-All students in TAB whose address matches `serangoon` and whose name matches `Bern` will be returned. The figure below shows the list after the find command is executed.
+To find students with the tag `new` or with lessons between `1100-1300`, you may type the command `find cond/any t/new time/1100-1300`. The figure below shows the list after this find command is executed.
 
-![findAll](images/findAll.png)
-<div class="caption">TAB displays one student after the find command.</div>
+![find](images/find.png)
 
-To find students without the `unpaid` tag and whose school is not `NYJC`, you may enter the command `find cond/none t/unpaid sch/NYJC`. The figure below shows the list after this find command is executed.
+<div class="caption">TAB displays two students after the find command.</div>
 
-![findNone](images/findNone.png)
-<div class="caption">TAB displays three students after the find command.</div>
+<br />
+
+[back to table of contents](#toc)
+
+--------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
@@ -548,6 +605,10 @@ A lesson can be categorised into 2 types:
 A lesson can be identified by the index number shown in the lesson list of the student. The lesson index specified for commands must be a valid index number shown in the lesson list of the student.
 </div>
 
+<div style="page-break-after: always;"></div>
+
+#### Lesson parameters
+
 <table id="lesson-param-table">
     <thead>
         <tr>
@@ -561,7 +622,7 @@ A lesson can be identified by the index number shown in the lesson list of the s
     <tbody>
         <tr>
             <td rowspan=4>Essential</td>
-            <td>Start Date</td>
+            <td id="lesson-date">Start Date</td>
             <td><code>date/</code></td>
             <td>
               <ul>
@@ -578,7 +639,7 @@ A lesson can be identified by the index number shown in the lesson list of the s
             <td><code>subject/Social studies</code></td>
         </tr>
         <tr>
-            <td>Time Range</td>
+            <td id="lesson-time-range">Time Range</td>
             <td><code>time/</code></td>
             <td><ul>
             <li>Formatted as <code>HHmm-HHmm</code></li>
@@ -628,7 +689,7 @@ A lesson can be identified by the index number shown in the lesson list of the s
     </tbody>
 </table>
 
-* Additional fields of a lesson aside from those stated in the table are used for recording cancelled dates of a lesson. More details can be found in [Editing a lesson](#editing-a-lesson--ledit).<br>
+* Additional fields of a lesson aside from those stated in the table are used for recording cancelled dates of a lesson. More details can be found in [Editing a lesson](#editing-a-lesson-ledit).<br>
 
 <div markdown="block" class="alert alert-info" id="monetary-fields">**:information_source: Monetary Fields:**<br>
 
@@ -659,8 +720,7 @@ You can add multiple pieces of homework to a lesson in TAB.
 
 Examples:
 
-* `ladd 1 recurring/23 Nov 2022 date/30 jan 2022 time/0900-1100 subject/Math rates/37.50` adds a recurring lesson that
-starts on 30 Jan 2022 and ends on 23 Nov 2022 to the 1st student in the displayed student list.
+* `ladd 1 recurring/23 Nov 2022 date/30 jan 2022 time/0900-1100 subject/Math rates/37.50` adds a recurring lesson that starts on 30 Jan 2022 and ends on 23 Nov 2022 to the 1st student in the displayed student list.
 
 * `list` followed by `ladd 1 recurring/ date/30 jan 2022 time/0900-1100 subject/Math rates/37.50`
   adds the recurring lesson to the 1st student in the displayed student list.
@@ -671,24 +731,20 @@ starts on 30 Jan 2022 and ends on 23 Nov 2022 to the 1st student in the displaye
 * `find n/john` followed by `ladd 1 date/30 MAR 2021 time/1630-1745 subject/Physics hw/Worksheet 1 rates/25.00`
   adds the makeup lesson to the 1st student in the results of the `find` command.
 
+<div style="page-break-after: always;"></div>
+
 #### Editing a lesson: `ledit`
 
 Edits the specified lesson of the specified student in TAB with the indicated changes for specified fields.
 
-Additional fields to the ones in [Managing lessons](#managing-lessons) are listed below.
+Format: `ledit INDEX LESSON_INDEX [recurring/END_DATE] [date/START_DATE] [time/TIME_RANGE] [subject/SUBJECT] [rates/LESSON_RATES] [f/OUTSTANDING_FEES] [hw/HOMEWORK]… [cancel/CANCEL_DATE]… [uncancel/UNCANCEL_DATE]…​`
+
+Additional fields to the ones in [Lesson parameters](#lesson-parameters) are listed below.<br>
 
 Field | Prefix | Constraints | Examples |
 ------------------|-------|-----------| --------|
-Cancelled Date |`cancel/`| Same constraints as other date fields.<br/> The date to be cancelled must be a valid lesson date and cannot be left blank.<br>e.g. If the start date of a recurring lesson is `1 Oct 2021`, you can cancel `8 Oct 2021` but not `2 Oct 2021`.|`cancel/20 jan 2022`|
-Uncancelled Date |`uncancel/` | Same constraints as other date fields.<br/>The date to be uncancelled must be a date that has already been cancelled and cannot be left blank.| `uncancel/20 jan 2022`|
-
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-
-If you change the start date of the lesson, the cancelled dates that become invalid will be removed.
-
-</div>
-
-Format: `ledit INDEX LESSON_INDEX [recurring/END_DATE] [date/START_DATE] [time/TIME_RANGE] [subject/SUBJECT] [rates/LESSON_RATES] [f/OUTSTANDING_FEES] [hw/HOMEWORK]… [cancel/CANCEL_DATE]… [uncancel/UNCANCEL_DATE]…​`
+Cancelled Date |`cancel/`| Follows the <a href="#lesson-date">Date</a> format.<br/> The date to be cancelled must be a valid lesson date, that has not already been cancelled, and cannot be left blank.<br>e.g. If the start date of a recurring lesson is `1 Oct 2021`, you can cancel `8 Oct 2021` but not `2 Oct 2021`.|`cancel/20 jan 2022`|
+Uncancelled Date |`uncancel/` | Follows the <a href="#lesson-date">Date</a> format.<br/>The date to be uncancelled must be a date that has already been cancelled and cannot be left blank.| `uncancel/20 jan 2022`|
 
 * Edits the lesson of specified `LESSON_INDEX` for the student at the specified `INDEX`.
 
@@ -696,6 +752,12 @@ Format: `ledit INDEX LESSON_INDEX [recurring/END_DATE] [date/START_DATE] [time/T
   e.g. `ledit 2 1 hw/As2` will erase the lesson's original pieces of homework and replace it with the new homework `As2`.
 
 * You cannot change the lesson's type (i.e. recurring and makeup).
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+
+If you change the start date of the lesson, the cancelled dates that become invalid will be removed.
+
+</div>
 
 Examples:
 * `ledit 1 1 time/1100-1200` Edits the time range of the 1st lesson of the 1st student to be `1100-1200`.
@@ -716,10 +778,10 @@ Format: `ldelete INDEX LESSON_INDEX`
 
 Examples:
 * `list` followed by `ldelete 2 1` deletes the 1st lesson for the 2nd student in TAB.
-  
-* `find n/Betsy` followed by `ldelete 1 1` deletes the 1st lesson for the 1st student in the results 
-  of the `find` command.
-  
+
+* `find n/Betsy` followed by `ldelete 1 1` deletes the 1st lesson for the 1st student in the results of the `find` command.
+
+
 #### Viewing a student's lessons: `view`
 
 Views all the lessons for the specified student in TAB.
@@ -729,10 +791,10 @@ Format: `view INDEX`
 * Views the list of lessons belonging to the student of the specified `INDEX`.
 
 Examples:
-
 * `view 1` displays the list of lessons for the 1st student in the displayed student list.
-  ![viewLessons](images/viewLessons.png)
-  <div class="caption">A list of lessons for the 1st student is shown on the lesson panel.</div>
+  
+![viewLessons](images/viewLessons.png)
+<div class="caption">A list of lessons for the 1st student is shown on the lesson panel.</div>
 
 * `find n/Betsy` followed by `view 1` displays the list of lessons for the 1st student in the results of the `find` command.
 
@@ -743,7 +805,9 @@ Displays a list of upcoming lessons that ends within the next 48 hours.
 
 Format: `remind`
 
-![remind](images/remind.png)
+<div align="center">
+  <img src="images/remind.png" width="450" />
+</div>
 
 <div class="caption">Reminder window interface.</div>
 
@@ -772,9 +836,9 @@ Example: Suppose the date today is 1 Nov 2021 and current time is 1500h,
 
 <br />
 
-[back to table of contents](#)
+[back to table of contents](#toc)
 
-<br />
+--------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
@@ -785,7 +849,7 @@ This section guides you on how to use the commands for managing the lesson fees 
 1. [Adding a lesson's outstanding fees: `ladd`](#adding-a-lessons-outstanding-fees-ladd)
 2. [Editing a Lesson's outstanding fees: `ledit`](#editing-a-lessons-outstanding-fees-ledit)
 3. [Paying a lesson's outstanding fees: `paid`](#paying-a-lessons-outstanding-fees-paid)
-4. [Behaviours of the Fees Calculator](#behaviours-of-the-fees-calculator)
+4. [Behaviour of the Fees Calculator](#behaviour-of-the-fees-calculator)
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Note:**<br>
@@ -813,7 +877,7 @@ Examples:
 
 #### Editing a lesson's outstanding fees: `ledit`
 
-Edits the outstanding fees to specific lesson. Uses the Lesson Edit command as seen in [Editing a lesson](#editing-a-lesson--ledit).
+Edits the outstanding fees to specific lesson. Uses the Lesson Edit command as seen in [Editing a lesson](#editing-a-lesson-ledit).
 
 In the event that you disagree with the outcomes of the Fees Calculator, you can edit outstanding fees using `ledit` command.
 Refer to [Behaviour of the Fees Calculator](#behaviour-of-the-fees-calculator) for cases the Fees Calculator will not account for.
@@ -859,9 +923,9 @@ This value would be used to calculate and flag out which lesson's fees are due b
 
 <br />
 
-[back to table of contents](#)
+[back to table of contents](#toc)
 
-<br />
+--------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
@@ -889,7 +953,8 @@ Brings you to TAB's calendar interface for you to see all your scheduled lessons
 Format: `calendar`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-All the other commands in this [Viewing your Calendar](#viewing-your-calendar) section act as a shortcut that opens the calendar as well!
+
+All the other commands in this [Managing Your Schedule](#managing-your-schedule) section act as a shortcut that opens the calendar as well!
 For example, the `day` command below opens the calendar, **and** goes to the day page. You can skip typing `calendar`! 
 </div>
 
@@ -953,12 +1018,11 @@ Format: `today`
 
 <br />
 
-[back to table of contents](#)
+[back to table of contents](#toc)
 
-<br />
+--------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
-
 
 ### Miscellaneous Commands
 
@@ -999,7 +1063,9 @@ Format: `undo`
 #### Redoing undone commands: `redo`
 
 Redo the previous command that has been undone. 
-The undone command can only be redone if `redo` was executed immediately after `undo` or after the `undo` command, only commands that do not modify any data are executed.<br>
+The undone command can only be redone if
+1. `redo` is executed immediately after `undo`
+2. Between the execution of `undo` and `redo`, only commands that do not modify any data were executed.<br>
 e.g. `view`, `day`, `calendar`, `tags` etc.
 
 Format: `redo`
@@ -1026,9 +1092,9 @@ Format: `exit`
 
 <br />
 
-[back to table of contents](#)
+[back to table of contents](#toc)
 
-<br />
+--------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
@@ -1055,15 +1121,15 @@ If your changes to the data file makes its format invalid, TAB will discard all 
 
 <br />
 
-[back to table of contents](#)
+[back to table of contents](#toc)
 
-<br />
+--------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
 ### Menu Bar Shortcuts
 
-TAB has keyboard shortcuts for navigating between its various views to help you stay more productive by keeping your hands on the keyboard.
+TAB has a menu bar which you can click to easily navigate between its various views. Additionally, TAB provides keyboard shortcuts for these menu items to help you stay more productive by keeping your hands on the keyboard.
 
 Menu Item | Shortcut | Action | Description
 ----------|--------|---------|---------
@@ -1072,6 +1138,7 @@ Menu Item | Shortcut | Action | Description
 <kbd>View</kbd> → <kbd>Calendar</kbd> | <kbd>F3</kbd> | View Calendar | Brings you to the calendar interface.
 <kbd>View</kbd> → <kbd>Tags</kbd> | <kbd>F4</kbd> | View Tags | Brings you to your list of tags.
 <kbd>Reminder</kbd> | <kbd>F5</kbd> | View Reminder | Opens or updates the reminder window with the list of upcoming lessons that ends within the next 48 hours.
+<kbd>File</kbd> → <kbd>Exit</kbd> | N.A. | Exit | Quits TAB.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You can immediately go back to typing commands from anywhere in TAB even if your cursor is not in the Command Box.
@@ -1080,9 +1147,7 @@ This means that after clicking any button in the GUI, you do not have to click i
 
 <br />
 
-[back to table of contents](#)
-
-<br />
+[back to table of contents](#toc)
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -1102,9 +1167,7 @@ This section records frequently asked questions from users of TAB.
 
 <br />
 
-[back to table of contents](#)
-
-<br />
+[back to table of contents](#toc)
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -1130,9 +1193,7 @@ UX | User Experience - The experience a user has when using the app.
 
 <br />
 
-[back to table of contents](#)
-
-<br />
+[back to table of contents](#toc)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1145,6 +1206,7 @@ The commands are categorised into 4 different categories:
 * [Lessons](#lessons)
 * [Navigating the UI](#navigating-the-ui)
 * [General](#general)
+
 <br/>
 
 ### Students
@@ -1154,7 +1216,7 @@ Action | Format & Examples
 [**Add Student**](#adding-a-student-add) | `add n/NAME a/ADDRESS [p/PHONE_NUMBER] [e/EMAIL] [pp/PARENT_PHONE_NUMBER] [pe/PARENT_EMAIL] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [r/REMARKS] [t/TAG]…`<br><br> e.g. `add n/James Ho a/123, Clementi Rd, 1234665 p/22224444 e/jamesho@example.com pp/33335555 pe/danielho@example.com sch/DHS lvl/Y1 r/retainee t/cousin`
 [**Edit Student**](#editing-a-student-edit) | `edit INDEX [n/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [pp/PARENT_PHONE_NUMBER] [pe/PARENT_EMAIL] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [r/REMARK] [t/TAG]…`<br><br> e.g. `edit 2 n/James Lee e/jameslee@example.com`
 [**Delete Student**](#deleting-a-student-delete) | `delete INDEX`<br><br> e.g. `delete 3`
-[**Find Students**](#finding-students) | `find [cond/{all &#124; any &#124; none}] [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS] [pp/PARENT_PHONE_KEYWORDS] [pe/PARENT_EMAIL_KEYWORDS] [sch/SCHOOL_KEYWORDS] [stream/ACAD_STREAM_KEYWORDS] [lvl/ACAD_LEVEL_KEYWORDS] [t/TAG_KEYWORD]…​`
+[**Find Students**](#finding-students) | `find [cond/{all &#124; any &#124; none}] [t/TAG_KEYWORD]…​ [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS] [pp/PARENT_PHONE_KEYWORDS] [pe/PARENT_EMAIL_KEYWORDS] [sch/SCHOOL_KEYWORDS] [stream/ACAD_STREAM_KEYWORDS] [lvl/ACAD_LEVEL_KEYWORDS] [subject/SUBJECT_KEYWORDS] [time/TIME_RANGE] [date/START_DATE] [cancel/CANCELLED_DATE] [rates/LESSON_RATES_KEYWORDS] [hw/HOMEWORK_KEYWORDS]`<br><br> e.g. `find cond/any n/Alex Yeo t/unpaid time/1500-1600`
 
 ### Lessons
 
@@ -1194,6 +1256,7 @@ Action | Format
 
 <br />
 
-[back to table of contents](#)
+[back to table of contents](#toc)
 
-<br />
+--------------------------------------------------------------------------------------------------------------------
+

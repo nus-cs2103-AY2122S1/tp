@@ -45,7 +45,6 @@ public class PersonGridPanel extends UiPart<Region> {
      * @param lessons Lessons of the student.
      */
     public void fillListPanels(Person student, ObservableList<Lesson> lessons) {
-        // logger.info("Showing the student list with lessons.");
         lessonListPanel = new LessonListPanel(lessons, student);
     }
 
@@ -55,7 +54,7 @@ public class PersonGridPanel extends UiPart<Region> {
      * @param lessons Lessons of the student.
      */
     public void fillListPanels(ObservableList<Lesson> lessons) {
-        // logger.info("Showing the student list without lessons.");
+        logger.info("Showing the student list without lessons.");
         lessonListPanel = new LessonListPanel(lessons);
     }
 
