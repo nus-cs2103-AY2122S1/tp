@@ -66,7 +66,7 @@ title: Developer Guide
 ## **Acknowledgements**
 
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
-* `isValidDate` method of EventDate and BirthDate are adapted from stackoverflow [here](https://stackoverflow.com/a/29038060/13624758).
+* `isValidDate` method of EventDate and BirthDate are adapted from StackOverflow [here](https://stackoverflow.com/a/29038060/13624758).
 
 --------------------------------------------------------------------------------------------------------------------
 
