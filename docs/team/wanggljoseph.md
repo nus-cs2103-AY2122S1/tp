@@ -5,10 +5,7 @@ title: Wang Guanlin (Joseph)'s Project Portfolio Page
 
 ### Project: Teaching Assistant's Buddy (TAB)
 
-TAB is a desktop address book application that can help Teaching Assistants (TAs) manage their students'
-progress.
-The user interacts with it using a CLI, and it has a GUI created with JavaFX.
-It is written in Java, and has about 23 kLoC.
+TAB is a desktop address book application that can help Teaching Assistants (TAs) manage their students' progress. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 24 kLoC.
 
 Given below are my contributions to the project.
 
@@ -51,7 +48,7 @@ Given below are my contributions to the project.
     * Documented the target user profile in the User Guide (Pull request [\#214](https://github.com/AY2122S1-CS2103-F09-1/tp/pull/214))
 
 * **Project management**:
-    * Managed releases `v1.3-trial` - `v1.3.0` (2 releases) on GitHub ([Github releases](https://github.com/AY2122S1-CS2103-F09-1/tp/releases))
+    * Managed releases `v1.3-trial` - `v1.4.0` (3 releases) on GitHub ([Github releases](https://github.com/AY2122S1-CS2103-F09-1/tp/releases))
 
 * **Documentation**:
     * README:

@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This project is evolved from the [AddressBook Level 3 (AB3)](https://se-education.org/addressbook-level3/UserGuide.html), a desktop app for managing contacts, optimized for use via a Command Line Interface (CLI).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -23,7 +23,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S1-CS2103-F09-1/tp/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
 ### Architecture
@@ -141,7 +141,7 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -291,99 +291,6 @@ This section describes some noteworthy details on how certain features are imple
 10. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
 
 ![How the command `delete task m/CS2103 ti/T1` is executed](images/DeleteTaskSequenceDiagram2.png)
-
-[comment]: <> (### \[Proposed\] Undo/redo feature)
-
-[comment]: <> (#### Proposed Implementation)
-
-[comment]: <> (The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:)
-
-[comment]: <> (* `VersionedAddressBook#commit&#40;&#41;` — Saves the current address book state in its history.)
-
-[comment]: <> (* `VersionedAddressBook#undo&#40;&#41;` — Restores the previous address book state from its history.)
-
-[comment]: <> (* `VersionedAddressBook#redo&#40;&#41;` — Restores a previously undone address book state from its history.)
-
-[comment]: <> (These operations are exposed in the `Model` interface as `Model#commitAddressBook&#40;&#41;`, `Model#undoAddressBook&#40;&#41;` and `Model#redoAddressBook&#40;&#41;` respectively.)
-
-[comment]: <> (Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.)
-
-[comment]: <> (Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.)
-
-[comment]: <> (![UndoRedoState0]&#40;images/UndoRedoState0.png&#41;)
-
-[comment]: <> (Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook&#40;&#41;`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.)
-
-[comment]: <> (![UndoRedoState1]&#40;images/UndoRedoState1.png&#41;)
-
-[comment]: <> (Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook&#40;&#41;`, causing another modified address book state to be saved into the `addressBookStateList`.)
-
-[comment]: <> (![UndoRedoState2]&#40;images/UndoRedoState2.png&#41;)
-
-[comment]: <> (<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook&#40;&#41;`, so the address book state will not be saved into the `addressBookStateList`.)
-
-[comment]: <> (</div>)
-
-[comment]: <> (Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook&#40;&#41;`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.)
-
-[comment]: <> (![UndoRedoState3]&#40;images/UndoRedoState3.png&#41;)
-
-[comment]: <> (<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook&#40;&#41;` to check if this is the case. If so, it will return an error to the user rather)
-
-[comment]: <> (than attempting to perform the undo.)
-
-[comment]: <> (</div>)
-
-[comment]: <> (The following sequence diagram shows how the undo operation works:)
-
-[comment]: <> (![UndoSequenceDiagram]&#40;images/UndoSequenceDiagram.png&#41;)
-
-[comment]: <> (<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker &#40;X&#41; but due to a limitation of PlantUML, the lifeline reaches the end of diagram.)
-
-[comment]: <> (</div>)
-
-[comment]: <> (The `redo` command does the opposite — it calls `Model#redoAddressBook&#40;&#41;`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.)
-
-[comment]: <> (<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size&#40;&#41; - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook&#40;&#41;` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.)
-
-[comment]: <> (</div>)
-
-[comment]: <> (Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook&#40;&#41;`, `Model#undoAddressBook&#40;&#41;` or `Model#redoAddressBook&#40;&#41;`. Thus, the `addressBookStateList` remains unchanged.)
-
-[comment]: <> (![UndoRedoState4]&#40;images/UndoRedoState4.png&#41;)
-
-[comment]: <> (Step 6. The user executes `clear`, which calls `Model#commitAddressBook&#40;&#41;`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.)
-
-[comment]: <> (![UndoRedoState5]&#40;images/UndoRedoState5.png&#41;)
-
-[comment]: <> (The following activity diagram summarizes what happens when a user executes a new command:)
-
-[comment]: <> (<img src="images/CommitActivityDiagram.png" width="250" />)
-
-[comment]: <> (#### Design considerations:)
-
-[comment]: <> (**Aspect: How undo & redo executes:**)
-
-[comment]: <> (* **Alternative 1 &#40;current choice&#41;:** Saves the entire address book.)
-
-[comment]: <> (  * Pros: Easy to implement.)
-
-[comment]: <> (  * Cons: May have performance issues in terms of memory usage.)
-
-[comment]: <> (* **Alternative 2:** Individual command knows how to undo/redo by)
-
-[comment]: <> (  itself.)
-
-[comment]: <> (  * Pros: Will use less memory &#40;e.g. for `delete`, just save the person being deleted&#41;.)
-
-[comment]: <> (  * Cons: We must ensure that the implementation of each individual command are correct.)
-
-[comment]: <> (_{more aspects and alternatives to be added}_)
-
-[comment]: <> (### \[Proposed\] Data archiving)
-
-[comment]: <> (_{Explain here how the data archiving feature will be implemented}_)
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -724,8 +631,6 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-[comment]: <> (1. _{ more test cases …​ }_)
-
 ### Deleting a module
 
 1. Deleting a module while all modules are being shown
@@ -740,13 +645,10 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete module`, `delete tutor`, `...`<br>
       Expected: Similar to previous.
-
-[comment]: <> (1. _{ more test cases …​ }_)
-
+   
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
    1. When the data file is missing or not in the correct format, the application will be starting with an empty TeachingAssistantBuddy.
 
-[comment]: <> (1. _{ more test cases …​ }_)

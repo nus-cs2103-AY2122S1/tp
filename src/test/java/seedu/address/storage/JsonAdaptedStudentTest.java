@@ -33,9 +33,9 @@ public class JsonAdaptedStudentTest {
             .collect(Collectors.toList());
 
     @Test
-    public void toModelType_validPersonDetails_returnsPerson() throws Exception {
-        JsonAdaptedStudent person = new JsonAdaptedStudent(AMY);
-        assertEquals(AMY, person.toModelType());
+    public void toModelType_validStudentDetails_returnsStudent() throws Exception {
+        JsonAdaptedStudent student = new JsonAdaptedStudent(AMY);
+        assertEquals(AMY, student.toModelType());
     }
 
     @Test

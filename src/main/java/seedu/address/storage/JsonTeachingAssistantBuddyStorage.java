@@ -46,14 +46,14 @@ public class JsonTeachingAssistantBuddyStorage implements TeachingAssistantBuddy
             throws DataConversionException {
         requireNonNull(filePath);
 
-        Optional<JsonSerializableAssistantBuddy> jsonAddressBook = JsonUtil.readJsonFile(
+        Optional<JsonSerializableAssistantBuddy> jsonTeachingAssistantBuddy = JsonUtil.readJsonFile(
                 filePath, JsonSerializableAssistantBuddy.class);
-        if (!jsonAddressBook.isPresent()) {
+        if (!jsonTeachingAssistantBuddy.isPresent()) {
             return Optional.empty();
         }
 
         try {
-            return Optional.of(jsonAddressBook.get().toModelType());
+            return Optional.of(jsonTeachingAssistantBuddy.get().toModelType());
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataConversionException(ive);

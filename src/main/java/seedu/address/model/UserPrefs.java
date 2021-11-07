@@ -51,9 +51,9 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         return assistantBuddyFilePath;
     }
 
-    public void setAssistantBuddyFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        this.assistantBuddyFilePath = addressBookFilePath;
+    public void setAssistantBuddyFilePath(Path assistantBuddyFilePath) {
+        requireNonNull(assistantBuddyFilePath);
+        this.assistantBuddyFilePath = assistantBuddyFilePath;
     }
 
     @Override
