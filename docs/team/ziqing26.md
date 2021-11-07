@@ -23,7 +23,7 @@ Given below are my contributions to the project.
 - **New Feature**: Added the classes of `Frequency` and `Occurrence` for a visit.
 
   - What it does: expands the functionality of visit by including frequency (such as weekly or monthly) and the number of occurrence.
-  - Justification: This feature enhances the functionality of visits in SeniorLove by enabling recurring visit as social workers ususally visit seniors regularly.
+  - Justification: This feature enhances the functionality of visits in SeniorLove by enabling recurring visit as social workers usually visit seniors regularly.
   - Highlights: This enhancement required an in-depth OOP analysis of design alternatives. It also required changes from scratch and thorough consideration of test cases.
 
 - **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=ziqing26&tabRepo=AY2122S1-CS2103-T14-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
