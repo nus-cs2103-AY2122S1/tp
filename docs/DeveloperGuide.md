@@ -591,6 +591,8 @@ Business rules:
 
 1. The status of an employee only has two.
 1. The role of an employee is only active during the scheduled time period.
+1. There can be a maximum of 1000 employees.
+1. The salary of an employee cannot exceed $9999999 an hour.
 
 Quality requirements:
 
@@ -615,7 +617,7 @@ Project scope:
   downloaded [here](https://www.oracle.com/java/technologies/downloads/#java11).
 * **Gradle**: Gradle is a build automation tool for multi-language software development.
   Installation [here](https://gradle.org/install/).
-* **Time Period**: A time period in the staff's schedule.
+* **Time Period**: A time period from one date to another.
 * **Status**: The working status of the staff. i.e. A part-timer or a full-timer.
 * **Schedule**: The staffs work schedule with a description of the work carried out.
 * **Role**: The role(s) of the staff. i.e. Bartender.
