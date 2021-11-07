@@ -71,7 +71,7 @@ run {
 }
 
 shadowJar {
-    archiveName = 'addressbook.jar'
+    archiveName = 'rhrh.jar'
 }
 
 defaultTasks 'clean', 'test'

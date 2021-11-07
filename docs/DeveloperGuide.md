@@ -1263,14 +1263,20 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file <br>
+   Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
+
+3. Exiting the app
+
+    1. While the app is still running, enter the `exit` command. <br>
+       Expected: The app closes.
       
 ### Adding a customer/employee/supplier
 
@@ -1348,11 +1354,16 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all customers/employees/suppliers/reservations using the `listC`/`listE`/`listS`/`listR` command.
    2. Test case: `deleteC 1`/`deleteE 1`/`deleteS 1`/`deleteR 1` <br>
-      Expected: First customer/employee/supplier/reservation is deleted from the list. Details of the deleted customer/employee/supplier/reservation shown in the status message. Timestamp in the status bar is updated.
-   1. Test case: `deleteC 0`/`deleteE 0`/`deleteS 0`/`deleteR 0`<br>
-      Expected: Nobody is deleted. Error details shown in the status message. Status bar remains the same.
-   2. Other incorrect delete commands to try: `deleteS`, `delete 1`, `deleteC x` (where x is larger than the customer list size), `...` <br>
-      Expected: Similar to previous.
+      Expected: First customer/employee/supplier/reservation is deleted from the list. Details of the deleted 
+      customer/employee/supplier/reservation shown in the results display.
+   3. Test case: `deleteC 0`/`deleteE -1`/`deleteS -50`/`deleteR 0`<br>
+      Expected: Nobody is deleted. Error details shown in the results display with a result message `Invalid comamnd 
+      format...`
+   4. Other incorrect delete commands to try: `deleteS`, `deleteC x`, `delete 1` (where x is larger than the customer 
+      list size) <br>
+      Expected: Nobody is deleted. Error details shown in the results display. Entering the first 2 commands will 
+      produce the same error message as test case 1.3 while entering `delete 1` will produce the result message 
+      `Unknown command`
       
 2. Deleting a customer/employee/supplier/reservation while customer list is filtered.
    
@@ -1374,5 +1385,91 @@ testers are expected to do more *exploratory* testing.
       
 1. Getting the corresponding customer of a reservation while reservation list is filtered.
 
-    1. Prerequisites: Filter display reservation list using `check DATE`, where there must be at least 1 resevation on `DATE`.
+    1. Prerequisites: Filter display reservation list using `check DATE`, where there must be at least 1 reservation 
+       on `DATE`.
     2. Repeat the same test cases as 1.2 to 1.4. 
+
+### Sorting the customer list
+
+1. Sorting the customer list while all customers are being shown
+
+    1. Prerequisites: List all customers using `listC` and use `resetC` to reset any previous sorting that you may 
+       have applied. Note that customers are sorted by name in ascending order by default.
+    2. Test case: `sortC by/n o/d` <br>
+        Expected: The customer list is sorted by name in descending order. Success message shown in results display.
+    3. Test case: `sortC by/lp o/a` <br>
+       Expected: The customer list is sorted by loyalty points in ascending order. Success message shown in results display.
+    4. Test case: `sortC by/n o/a by/lp` <br>
+       Expected: The customer list is sorted by loyalty points in ascending order. Success message shown in results display.
+    5. Test case: `sortC by/lp o/a o/d`
+       Expected: The customer list is sorted by loyalty points in descending order. Success message shown in results display.
+    6. Test case: `sortC by/lp o/n` <br>
+       Expected: Customer list is not sorted. Error details shown in the result display, with a result message `Sorting order can only be either ascending or descending, and it should not be blank`
+    7. Test case: `sortC by/dd o/d` <br>
+       Expected: Customer list not sorted. Error details shown in the result display, with a result message `Sort by 
+       can only be 1 of the customer fields...`
+   
+2. Sorting the customer list while the customer list is filtered.
+   1. Prerequisites: Filter and display the customer list using `findC KEYWORDS`
+   2. Test case: `sortC by/n o/d` when filtered customer list is `empty` <br>
+      Expected: Customer list is not sorted. Error details shown in the result display, with a result message 
+      `Customer list is currently empty!`
+   3. Repeat the same test cases as 1.2 to 1.7. The filtered customer list will sort as per expected in test cases 1.2 to 1.7
+
+### Sorting the employee list
+
+1. Sorting the employee list while all employees are being shown
+
+    1. Prerequisites: List all employees using `listE` and use `resetE` to reset any previous sorting that you may
+       have applied. Note that employees are sorted by name in ascending order by default.
+    2. Test case: `sortE by/sal o/a` <br>
+       Expected: The employee list is sorted by salary in ascending order. Success message shown in results display.
+    3. Test case: `sortE by/n o/d` <br>
+       Expected: The employee list is sorted by name in descending order. Success message shown in results display.
+    4. Test case: `sortE by/n o/a by/sal` <br>
+       Expected: The employee list is sorted by salary in ascending order. Success message shown in results display.
+    5. Test case: `sortE by/n o/a o/d`
+       Expected: The employee list is sorted by name in descending order. Success message shown in results display.
+    6. Test case: `sortE by/e o/n` <br>
+       Expected: Employee list is not sorted. Error details shown in the result display, with a result message 
+       `Sorting order can only be either ascending or descending, and it should not be blank`
+    7. Test case: `sortE by/dd o/d` <br>
+       Expected: Employee list not sorted. Error details shown in the result display, with a result message `Sort by
+       can only be 1 of the employee fields...`
+
+2. Sorting the employee list while the employee list is filtered.
+    1. Prerequisites: Filter and display the employee list using `findE KEYWORDS`
+    2. Test case: `sortE by/n o/d` when filtered employee list is `empty` <br>
+       Expected: Employee list is not sorted. Error details shown in the result display, with a result message
+       `Employee list is currently empty!`
+    3. Repeat the same test cases as 1.2 to 1.7. The filtered employee list will sort as per expected in test cases 
+       1.2 to 1.7
+
+### Sorting the Supplier list
+
+1. Sorting the supplier list while all suppliers are being shown
+
+    1. Prerequisites: List all suppliers using `listS` and use `resetS` to reset any previous sorting that you may
+       have applied. Note that suppliers are sorted by name in ascending order by default.
+    2. Test case: `sortS by/dd o/d` <br>
+       Expected: The supplier list is sorted by delivery details in descending order. Success message shown in results display.
+    3. Test case: `sortS by/st o/a` <br>
+       Expected: The supplier list is sorted by supply type in name order. Success message shown in results display.
+    4. Test case: `sortS by/n o/a by/dd` <br>
+       Expected: The supplier list is sorted by delivery details in ascending order. Success message shown in results display.
+    5. Test case: `sortS by/n o/a o/d`
+       Expected: The supplier list is sorted by name in descending order. Success message shown in results display.
+    6. Test case: `sortS by/a o/n` <br>
+       Expected: Supplier list is not sorted. Error details shown in the result display, with a result message
+       `Sorting order can only be either ascending or descending, and it should not be blank`
+    7. Test case: `sortS by/lp o/d` <br>
+       Expected: Supplier list not sorted. Error details shown in the result display, with a result message `Sort by
+       can only be 1 of the supplier fields...`
+
+2. Sorting the supplier list while the supplier list is filtered.
+    1. Prerequisites: Filter and display the supplier list using `findE KEYWORDS`
+    2. Test case: `sortS by/dd o/a` when filtered supplier list is `empty` <br>
+       Expected: Supplier list is not sorted. Error details shown in the result display, with a result message
+       `Supplier list is currently empty!`
+    3. Repeat the same test cases as 1.2 to 1.7. The filtered supplier list will sort as per expected in test cases
+       1.2 to 1.7
