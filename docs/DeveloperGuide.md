@@ -1220,7 +1220,7 @@ Priorities: High - must have; Medium - nice to have;  Low - unlikely to have.
 
 <br/>
 
-**Use case: UC11 - Redo an undone modification**
+**Use case: UC11 - Redo an undone command**
 
 **MSS**
 
@@ -1270,6 +1270,43 @@ Use case ends.
 * 1a. There are no tags.
 
   Use case ends.
+
+**Use case: UC14 - Fees Update**
+
+**MSS**
+
+1. User launches TAB.
+2. TAB displays updated outstanding fees.
+
+Use case ends.
+
+**Extension**
+
+* 1a. There was an error in saving address book.
+  * 1a1. TAB displays the outstanding fees from the last session without being updated.
+  
+  Use case ends.
+
+**Use case: UC14 - Payment**
+
+1. User requests to view students.
+2. User requests to view lessons of a particular student.
+3. User requests to pay for a specific lesson.
+4. TAB updates and displays the updated outstanding fees after payment for that lesson.
+
+Use case ends.
+
+**Extension**
+
+* 3a. The user specifies an invalid index. 
+  * 3a1. TAB displays an error message 
+  
+  Use case resumes at step 3.
+
+* 3b. The user specifies an invalid amount for payment.
+  * 3ab. TAB displays an error message
+
+  Use case resumes at step 3.
 
 <br/>
 
