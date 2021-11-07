@@ -1289,8 +1289,10 @@ Use case ends.
 
 **Use case: UC15 - Payment**
 
-1. User requests to view students.
-2. User requests to view lessons of a particular student.
+**MSS**
+
+1. User requests to view lessons of a particular student.
+2. TAB displays list of lessons for the student.
 3. User requests to pay for a specific lesson.
 4. TAB updates and displays the updated outstanding fees after payment for that lesson.
 
