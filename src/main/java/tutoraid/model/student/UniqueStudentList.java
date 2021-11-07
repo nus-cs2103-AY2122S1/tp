@@ -69,15 +69,6 @@ public class UniqueStudentList implements Iterable<Student> {
     }
 
     /**
-     * Refreshes this Unique Student List.
-     */
-    public void refreshUniqueStudentList() {
-        for (Student student : internalList) {
-            setStudent(student, student);
-        }
-    }
-
-    /**
      * Removes the equivalent student from the list.
      * The student must exist in the list.
      */

@@ -3,7 +3,7 @@ package tutoraid.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static tutoraid.logic.parser.CliSyntax.PREFIX_LESSON;
 import static tutoraid.logic.parser.CliSyntax.PREFIX_STUDENT;
-import static tutoraid.ui.DetailLevel.HIGH;
+import static tutoraid.ui.DetailLevel.MED;
 
 import java.util.List;
 
@@ -22,17 +22,15 @@ public class AddStudentToLessonCommand extends AddCommand {
 
     public static final String COMMAND_FLAG = "-sl";
 
-    public static final String MESSAGE_USAGE = COMMAND_FLAG + ": Adds a student to a lesson "
-            + "by the student index number used in the last student listing "
-            + "and the lesson index used in the last lesson listing.\n"
-            + "Parameters: "
-            + PREFIX_STUDENT + "STUDENT_INDEX (must be a positive integer) "
-            + PREFIX_LESSON + "LESSON_INDEX (must be a positive integer) "
-            + "Example: " + COMMAND_FLAG
-            + " s/1"
-            + " l/2";
+    public static final String MESSAGE_USAGE = String.format("%1$s %2$s: Adds a student to a lesson. "
+                    + "\nParameters:"
+                    + "\n%3$sSTUDENT INDEX (must be a positive integer)"
+                    + "  %4$sLESSON_INDEX (must be a positive integer)"
+                    + "\nExample:"
+                    + "\n%1$s %2$s %3$s1 %4$s2",
+            COMMAND_WORD, COMMAND_FLAG, PREFIX_STUDENT, PREFIX_LESSON);
 
-    public static final String MESSAGE_SUCCESS = "Added student:\n%1$s\nTo this lesson:\n%2$s";
+    public static final String MESSAGE_SUCCESS = "Successfully added %s to %s.";
 
     private final Index studentIndex;
     private final Index lessonIndex;
@@ -82,8 +80,10 @@ public class AddStudentToLessonCommand extends AddCommand {
 
         model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
         model.updateFilteredLessonList(Model.PREDICATE_SHOW_ALL_LESSONS);
-        model.viewList(HIGH);
+        model.viewList(MED);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, studentToAddToLesson, lessonToAddToStudent));
+        return new CommandResult(String.format(MESSAGE_SUCCESS,
+                studentToAddToLesson.toNameString(),
+                lessonToAddToStudent.toNameString()));
     }
 }

@@ -86,13 +86,6 @@ public class StudentBook implements ReadOnlyStudentBook {
     }
 
     /**
-     * Refreshes the lesson book.
-     */
-    public void refreshStudentBook() {
-        students.refreshUniqueStudentList();
-    }
-
-    /**
      * Removes {@code key} from this {@code StudentBook}.
      * {@code key} must exist in the student book.
      */
