@@ -914,7 +914,7 @@ Similar to UC8 (Clear student list), except we are clearing the whole address bo
 * Should be able to hold up to 100 students without a noticeable sluggishness in performance for typical usage.
 * A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 * Commands used should be intuitive, and should not exceed 80 characters.
-* System should respond almost immediately (max: 2 seconds) upon entering a command.
+* System should respond almost immediately (max: 3 seconds) upon entering a command.
 * Error messages shown should inform the user of what is wrong and what the correct command syntax should be.
 
 
