@@ -1,0 +1,75 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package Model <<Rectangle>>{
+Interface ReadOnlyAddressBook <<Interface>>
+Interface ReadOnlyUserPrefs <<Interface>>
+Interface Model <<Interface>>
+Class AddressBook
+Class ReadOnlyAddressBook
+Class Model
+Class ModelManager
+Class UserPrefs
+Class ReadOnlyUserPrefs
+Class Module
+
+Class UniqueMemberList
+Class Member
+Class Address
+Class Email
+Class Name
+Class Phone
+Class Position
+
+Class UniqueEventList
+Class Event
+Class EventDate
+
+Class UniqueTaskList
+Class Task
+Class TaskDeadline
+
+}
+
+Class HiddenOutside #FFFFFF
+HiddenOutside ..> Model
+
+AddressBook .up.|> ReadOnlyAddressBook
+
+ModelManager .up.|> Model
+Model .right.> ReadOnlyUserPrefs
+Model ..left.> ReadOnlyAddressBook
+ModelManager --left-> "1" AddressBook
+ModelManager -right-> "1" UserPrefs
+UserPrefs .up.|> ReadOnlyUserPrefs
+
+AddressBook *--> "1" UniqueMemberList
+UniqueMemberList --> "~* all" Member
+Member .up.|> Module
+Member *--> Phone
+Member *--> Email
+Member *--> Address
+Member *--> "*" Position
+Member *--> "*" Task
+
+AddressBook *--> "1" UniqueEventList
+UniqueEventList --> "~*" Event
+Event .up.|> Module
+Module *--> Name
+Event *--> EventDate
+Event --> "~*" Member
+
+Phone -[hidden]right-> Address
+Address -[hidden]right-> Email
+
+ModelManager -->"~* filtered" Member
+
+AddressBook *--> "1" UniqueTaskList
+ModelManager -->"~* filtered" Task
+UniqueTaskList *--> "~* all"Task
+Task .up.|> Module
+Task --> "1" TaskDeadline
+@enduml

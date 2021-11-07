@@ -5,7 +5,7 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":TaddCommandParser" as TaddCommandParser LOGIC_COLOR
-participant "ta:TaddCommand" as TaddCommand LOGIC_COLOR
+participant ":TaddCommand" as TaddCommand LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
@@ -43,16 +43,16 @@ create TaddCommand
 TaddCommandParser -> TaddCommand
 activate TaddCommand
 
-TaddCommand --> TaddCommandParser : ta
+TaddCommand --> TaddCommandParser
 deactivate TaddCommand
 
-TaddCommandParser --> AddressBookParser : ta
+TaddCommandParser --> AddressBookParser
 deactivate TaddCommandParser
 
 TaddCommandParser -[hidden]-> AddressBookParser
 destroy TaddCommandParser
 
-AddressBookParser --> LogicManager : ta
+AddressBookParser --> LogicManager
 deactivate AddressBookParser
 
 ref over LogicManager, Task : TaddCommand Execution

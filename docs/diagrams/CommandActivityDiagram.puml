@@ -4,29 +4,31 @@ repeat
 :User chooses to look into one of the modules;
 switch ()
 case ([Event chosen])
-    :list events;
     if () then ([select events of a member])
-        :list members of specific event;
+        :Ailurus lists members of specific event;
     else ([else])
-        :list all events;
+        :Ailurus lists all events;
     endif
-    :User chooses what to do with events;
-    :User executes event command;
+    :User types in event commands;
+    :Ailurus executes event command;
 case ([Member chosen])
-    :list members;
     if () then ([select members of an event])
-        :list members of specific event;
+        :Ailurus lists members of specific event;
     else ([else])
-        :list all members;
+        :Ailurus lists all members;
     endif
-    :User chooses what to do with the members;
-    :User executes member command;
+    :User types in member commands;
+    :Ailurus executes member command;
 case ([Task chosen])
-    :list all tasks of a member;
-    :User chooses what to do with the tasks;
-    :User executes task command;
+    if () then ([select done/undone/overdue task])
+        :Ailurus lists corresponding tasks of a member;
+    else ([else])
+        :Ailurus lists all tasks of a member;
+    endif
+    :User types in task commands;
+    :Ailurus executes task command;
 endswitch
-:AddressBook saves changes to Storage;
+:Ailurus saves changes to Storage;
 repeat while () is ([else])
 ->//[Program exited?]//;
 stop
