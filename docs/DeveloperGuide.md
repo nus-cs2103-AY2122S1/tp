@@ -545,34 +545,36 @@ be changed.
     lecture or tutorial)
 
 **Value proposition**:
- * Manage contacts and tasks faster than a typical mouse/GUI driven app.
+ * Dash manages contacts and tasks on a single system faster than a typical mouse/GUI driven app.
+ * It is PC-based, so it is less likely to distract users with pop-up notifications compared to a mobile-based app.
+ * Dash does not link with any other external programs and is only used for recording information. 
 
 ### User stories
 
 | Priority | As a(n) ...                                | I want to ...                                 | So that I can ...                                               |
 |----------|--------------------------------------------|-----------------------------------------------|-----------------------------------------------------------------|
-| * * *    | university student who prefers typing      | use a CLI over a GUI                          | manage tasks and contacts more efficiently                        |
-| * * *    | university student                         | add contacts of                               | store them for later reference                                  |
-| * * *    | user                                       | delete contacts                               | remove contacts when I want to                                  |
-| * * *    | user                                       | view all contacts                             | keep track of all my contacts                                   |
-| * * *    | user                                       | edit contacts                                 | change them later when my contacts update their contact details |
-| * * *    | user                                       | tag contacts                                  | keep track of who they are                                      |
+| * * *    | university student who prefers typing      | use a CLI over a GUI                          | manage tasks and contacts more efficiently                      |
+| * * *    | student                                    | add contacts of people I know                 | store them for later reference                                  |
+| * * *    | senior student                             | delete contacts                               | remove my groupmates' contacts when I have completed the module |
+| * * *    | student                                    | view all contacts                             | keep track of all my contacts                                   |
+| * * *    | careless student                           | edit contacts                                 | amend my mistakes                                               |
+| * * *    | student with many acquaintances            | tag contacts                                  | keep track of who they are                                      |
 | * * *    | new user                                   | view a list of available commands             | refer to them easily                                            |
-| * * *    | user                                       | add tasks                                     | record the tasks I need to do                                   |
-| * * *    | user                                       | delete tasks                                  | clear my list of tasks if it gets too cluttered                 |
-| * * *    | user                                       | view all tasks                                | see all the tasks I have at the moment                          |
-| * * *    | user                                       | edit tasks                                    | keep track of changing real-life requirements                   |
-| * * *    | university student                         | mark a task as completed                      | keep track of which tasks I have completed                      |
+| * * *    | busy student                               | add tasks                                     | record the tasks I need to do                                   |
+| * * *    | student                                    | delete tasks                                  | remove tasks that I no longer have to get done                  |
+| * * *    | student                                    | view all tasks                                | see all the tasks I have at the moment                          |
+| * * *    | attentive student                          | edit tasks                                    | keep track of changing real-life requirements                   |
+| * * *    | productive student                         | mark a task as completed                      | keep track of which tasks I have completed                      |
 | * *      | stressed student with many tasks to handle | view all upcoming tasks                       | see which tasks are most urgent                                 |
-| * *      | lazy student                               | go back to previously used full command lines | waste less time typing the lines all over again                 |
-| * *      | student with many contacts                 | assign contacts to tasks                      | keep track of who is involved with which tasks                  |
+| * *      | student who values efficiency              | go back to previously used full command lines | waste less time typing the lines all over again                 |
+| * *      | student with many group projects           | assign contacts to tasks                      | keep track of who is involved with which projects               |
 | * *      | student with many CCAs                     | tag tasks with CCA tags                       | easily identify what I need to do for a particular CCA          |
 | * *      | student taking many modules                | tag tasks with module tags                    | easily identify what I need to do for a particular module       |
-| * *      | organized student                          | clear all completed tasks                     | declutter and focus on the tasks I have yet to complete         |
+| * *      | organized student                          | clear all completed tasks                     | focus on the tasks I have yet to complete                       |
 
 ### Use cases
 
-(The System is Dash and the Actor is the user for all Use Cases, unless specified otherwise.)
+(The System is Dash and the Actor is the user for all Use Cases, unless specified otherwise.)         
 
 #### Use case 01: Add a task
 
