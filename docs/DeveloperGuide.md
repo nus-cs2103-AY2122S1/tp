@@ -213,6 +213,7 @@ This section describes some noteworthy details on how certain features are imple
 ### \[Implemented\] Tabs System
 
 #### Implementation
+
 The tab system is implemented using the JavaFX `javafx.scene.control.Tab` class. It is
 encapsulated in its own class `TabMenu` within the `dash.ui` package as a UI component.
 
@@ -286,6 +287,7 @@ Possible use cases:
 - Assigning which prof to email after completing a piece of work.
 
 #### Implementation
+
 In the `Task.java` class, `people` is a Set of `Person` objects that represents a task being assigned people, similar to
 `tags`. A user can assign people to a task in 2 ways:
 - The `assign` command, which adds more `Person` objects to the existing `people` set.
@@ -334,17 +336,18 @@ Possible use cases:
 
 The `TaskDate.java` class is created to represent a date/time object of a task, which is stored inside a `Task` object
 upon creating a `Task` through an `add` command. Inside `TaskDate.java` class, date and time are represented by Java 
-class objects `LocalDate` and `LocalTime`. As the user can choose to either omit both date and time or have time as optional
-information, both of these objects are wrapped in Java `Optional` objects as `Optional<LocalDate>` and `Optional<LocalTime>`.
-This makes handling of a `TaskDate` object safer as the date and time objects do not exist in a `TaskDate` of a `Task` which
-the user adds in without stating date/time information. 
+class objects `LocalDate` and `LocalTime`. As the user can choose to either omit both date and time or have time as 
+optional information, both of these objects are wrapped in Java `Optional` objects as `Optional<LocalDate>` and 
+`Optional<LocalTime>`. This makes handling of a `TaskDate` object safer as the date and time objects do not exist in a 
+`TaskDate` of a `Task` which the user adds in without stating date/time information. 
 
-When the user states the time of a task only, this will be detected in the constructor of `TaskDate` and the current date will
-be stored instead through the use of `LocalDate#now`. When the user states the date of a task only, this will also be detected 
-in the constructor and time will be left as empty.
+When the user states the time of a task only, this will be detected in the constructor of `TaskDate` and the current 
+date will be stored instead through the use of `LocalDate#now`. When the user states the date of a task only, this will 
+also be detected in the constructor and time will be left as empty.
 
-The user is also required to follow a specific date and time format which the validity is checked by `DateTask#isValidTaskDate`.
-Java `LocalDate#parse` and `LocalTime#parse` are used to help verify validity of the format keyed in by the user.
+The user is also required to follow a specific date and time format which the validity is checked by 
+`DateTask#isValidTaskDate`. Java `LocalDate#parse` and `LocalTime#parse` are used to help verify validity of the format 
+keyed in by the user.
 
 Example usage of `add` command to add date/time is as follows:
 - `add d/Homework dt/21/11/2021` - Adds a task "Homework" that is due on 21/11/2021 at an unspecified time.
@@ -377,32 +380,33 @@ The following activity diagram summarises what happens when a user executes an a
 
 #### Challenges
 
-`TaskDate` class was initially implemented with only `add` command in mind but there were some changes that had to be made
-when `edit` command was implemented to allow editing of date and time. There are several cases to consider when a task has
-to be edited.
+`TaskDate` class was initially implemented with only `add` command in mind but there were some changes that had to be 
+made when `edit` command was implemented to allow editing of date and time. There are several cases to consider when a 
+task has to be edited.
 
 - Case 1: A task has no date and no time.
 - Case 2: A task has date only.
 - Case 3: A task has date and time.
 
-Keep in mind the special condition that a task cannot have a time without a date. Editing a task's date/time also has 3 cases,
-where a user can input date only, time only, or both at once. 
+Keep in mind the special condition that a task cannot have a time without a date. Editing a task's date/time also has 3 
+cases, where a user can input date only, time only, or both at once. 
 
-In the first case, no problem is encountered as all the 3 possible types of inputs result in successful outcomes when editing
-a task with no date or time. When only date is input in the `edit` command, the edited task will now have the input date. When
-only time is input, the edited task will now have the input time and current date. When both are input, the edited task will now have
-both of the input date and time.
+In the first case, no problem is encountered as all the 3 possible types of inputs result in successful outcomes when 
+editing a task with no date or time. When only date is input in the `edit` command, the edited task will now have the 
+input date. When only time is input, the edited task will now have the input time and current date. When both are 
+input, the edited task will now have both of the input date and time.
 
-In the second case however, a problem is encountered when only time is input in the `edit` command. With the initial implementation of
-the constructor of `TaskDate`, this will result in the edited task having the current date and the input time. This is an undesirable side
-effect where the current date overwrites the existing date of the task to be edited. There are no issues with other two possible input types.
+In the second case however, a problem is encountered when only time is input in the `edit` command. With the initial 
+implementation of the constructor of `TaskDate`, this will result in the edited task having the current date and the 
+input time. This is an undesirable side effect where the current date overwrites the existing date of the task to be 
+edited. There are no issues with other two possible input types.
 
-In the third case, there is also a problem encountered when only time is input in the `edit` command. Similar to the second case, this will
-result in the current date overwriting the existing date of the task to be edited.
+In the third case, there is also a problem encountered when only time is input in the `edit` command. Similar to the 
+second case, this will result in the current date overwriting the existing date of the task to be edited.
 
-To differentiate between an `edit` command and `add` command involving `TaskDate`, a new boolean argument was added to `ParserUtil#parseTaskDate`.
-This boolean is propagated down as another additional argument of `TaskDate` constructor and using that, a new `TaskDate` will be created without
-using `LocalDate#now` if it is used for editing purposes. 
+To differentiate between an `edit` command and `add` command involving `TaskDate`, a new boolean argument was added to 
+`ParserUtil#parseTaskDate`. This boolean is propagated down as another additional argument of `TaskDate` constructor 
+and using that, a new `TaskDate` will be created without using `LocalDate#now` if it is used for editing purposes. 
 
 
 ### \[Implemented\] Viewing all Upcoming Tasks
@@ -410,6 +414,7 @@ using `LocalDate#now` if it is used for editing purposes.
 With the implementation of `TaskDate.java`, we can easily look up upcoming tasks by comparing dates and times.
 
 #### Implementation
+
 In `UpcomingTaskCommand.java`, a field of type `Predicate<Task>` named `TaskDateAfterCurrentDatePredicate` is used to 
 encapsulate the logic of determining whether or not a task is upcoming. It contains fields that store the current date 
 and time via `LocalDateTime.now()`, and the current date via `LocalDate.now()`. The overridden 
@@ -474,8 +479,7 @@ implementation details are not shown above. In summary, when the app is started,
 the `userinputlist.json` file in the `data` folder. Conversely, when the app is closed, the `userinputlist.json` file 
 is updated using the `UserInputList`.
 
-On startup and after any successful command execution, the `CommandBox` is reinitialised with an updated list of user 
-input strings from the `Model`. 
+On start-up, the `CommandBox` is initialised with a reference to the `UserInputList` in `Model`.
 
 In order to allow the user to look through their past inputs to select a particular one, we must keep track of which 
 input string the CLI is currently displaying. This is implemented in `CommandBox` by keeping track of the index of the 
@@ -545,6 +549,7 @@ be changed.
     lecture or tutorial)
 
 **Value proposition**:
+
  * Dash manages contacts and tasks on a single system faster than a typical mouse/GUI driven app.
  * It is PC-based, so it is less likely to distract users with pop-up notifications compared to a mobile-based app.
  * Dash does not link with any other external programs and is only used for recording information. 
@@ -950,7 +955,8 @@ Use case ends.
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2. Should be able to hold up to 250 persons and tasks without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to 250 persons and tasks without a noticeable sluggishness in performance for typical 
+   usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) 
    should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. Should be lightweight.
@@ -1026,7 +1032,8 @@ point for testers to work on; testers are expected to do more *exploratory* test
    1. Prerequisites: Go to task tab using the `tasks` command.
    
    2. Test case: `add d/Test Task dt/21/10/2021, 1900 t/Important`<br>
-      Expected: A task with the given details is added on the GUI of task tab. Details of added task shown in the status message.
+      Expected: A task with the given details is added on the GUI of task tab. Details of added task shown in the 
+      status message.
 
 2. Adding a task with incorrect formats of description, date/time, person or tag
     
@@ -1045,7 +1052,8 @@ point for testers to work on; testers are expected to do more *exploratory* test
        Expected: No task is added. Error details stating 'The person index provided is invalid.' is shown.
     
     6. Test case: `add d/Test Task t/an extremely long tag`<br>
-       Expected: No task is added. Error details stating how Tag names should be one word, alphanumeric and limited to 15 characters is shown.
+       Expected: No task is added. Error details stating how Tag names should be one word, alphanumeric and limited to 
+       15 characters is shown.
 
 ### Editing a task
 
@@ -1054,7 +1062,8 @@ point for testers to work on; testers are expected to do more *exploratory* test
     1. Prerequisites: List all tasks using the `list` command. Multiple tasks in the list.
     
     2. Test case: `edit 1 d/Changed Description`<br>
-       Expected: First task has description changed to the stated description. Details of the new edited task shown in the status message.
+       Expected: First task has description changed to the stated description. Details of the new edited task shown in 
+       the status message.
 
     3. Test case: `edit 0 d/Changed Description`<br>
        Expected: No task has been edited. Error details stating 'The task index provided is invalid.' is shown.
@@ -1064,28 +1073,34 @@ point for testers to work on; testers are expected to do more *exploratory* test
     1. Prerequisites: List all tasks using the `list` command. Multiple tasks in the list.
     
     2. Test case: `edit 1 dt/20/10/2021`<br>
-       Expected: First task has Date only changed to the stated Date. Details of the new edited task shown in the status message.
+       Expected: First task has Date only changed to the stated Date. Details of the new edited task shown in the 
+       status message.
 
     3. Test case: `edit 1 dt/1900` <br>
-       Expected: If First task has Date and Time or Date only, it has Time only changed to the stated Time. Details of the new edited task shown in the status message.
-       If First task has neither Date nor Time, the stated Time will be added along with current day's Date. 
+       Expected: If First task has Date and Time or Date only, it has Time only changed to the stated Time. Details of 
+       the new edited task shown in the status message. If First task has neither Date nor Time, the stated Time will 
+       be added along with current day's Date. 
 
 3. Editing a task's tag
     
     1. Prerequisites: List all tasks using the `list` command. Multiple tasks in the list.
 
     2. Test case: `edit 2 t/Test` <br>
-       Expected: Second task has all of its existing tags (even if none) changed to the stated tag. Details of the new edited task shown in the status message. 
+       Expected: Second task has all of its existing tags (even if none) changed to the stated tag. Details of the new 
+       edited task shown in the status message. 
 
     3. Test case: `edit 1 t/` <br>
-       Expected: First task has all of its existing tags removed. Details of the new edited task shown in the status message.
+       Expected: First task has all of its existing tags removed. Details of the new edited task shown in the status 
+       message.
 
 4. Editing a task's assigned person
 
-    1. Prerequisites: List all tasks using the `list` command. Multiple tasks in the list. Multiple assignees in the list at the right-hand side.
+    1. Prerequisites: List all tasks using the `list` command. Multiple tasks in the list. Multiple assignees in the 
+       list at the right-hand side.
 
     2. Test case: `edit 1 p/1 p/2` <br>
-       Expected: First task has first and second assignees added to the current list of person of the task. Details of the new edited task shown in the status message.
+       Expected: First task has first and second assignees added to the current list of person of the task. Details of 
+       the new edited task shown in the status message.
 
     3. Test case: `edit 1 p/` <br>
        Expected: No task has been edited. Error details stating 'Arguments cannot be empty' is shown.
@@ -1097,11 +1112,13 @@ point for testers to work on; testers are expected to do more *exploratory* test
     1. Prerequisites: List all tasks using the `list` command. Multiple tasks in the list.
     
     2. Test case: `tag 1 t/Important` <br>
-       Expected: First task has the new tag 'Important' added as a tag in addition to its existing list of tags. If it already has the same existing tag, no additional tag is added.
+       Expected: First task has the new tag 'Important' added as a tag in addition to its existing list of tags. If it 
+       already has the same existing tag, no additional tag is added.
        Details of the task with added tag shown in the status message for both cases.
 
     3. Test case: `tag 0 t/Important` <br>
-        Expected: No task has been added a tag. Error details stating 'The task index provided is invalid.' is shown with a description of how to use tag command with proper format.
+       Expected: No task has been added a tag. Error details stating 'The task index provided is invalid.' is shown 
+       with a description of how to use tag command with proper format.
 
     4. Test case: `tag 1 t/` <br>
        Expected: No task has been added a tag. Error details stating 'Arguments cannot be empty' is shown.
@@ -1111,7 +1128,8 @@ point for testers to work on; testers are expected to do more *exploratory* test
     1. Prerequisites: List all tasks using the `list` command. Multiple tasks in the list.
 
     2. Test case: `tag 1 t/Important t/Assignment` <br>
-       Expected: First task has the new tags 'Important' and 'Assignment added as tags in addition to its existing list of tags. If it already has same existing tags, no additional tag is added.
+       Expected: First task has the new tags 'Important' and 'Assignment' added as tags in addition to its existing 
+       list of tags. If it already has same existing tags, no additional tag is added. 
        Details of the task with added tag shown in the status message for both cases.
     
     3. Test case: `tag 1 t/ t/` <br>
@@ -1121,47 +1139,58 @@ point for testers to work on; testers are expected to do more *exploratory* test
 
 1. Assigning one person to a task
     
-    1. Prerequisites: List all tasks using the `list` command. Multiple tasks in the list. Multiple assignees in the list at the right-hand side.
+    1. Prerequisites: List all tasks using the `list` command. Multiple tasks in the list. Multiple assignees in the 
+       list at the right-hand side.
 
     2. Test case: `assign 1 p/1` <br>
-       Expected: First task has the first person under assignees list assigned in addition to its existing list of people. If that person is already assigned, no additional person is assigned.
+       Expected: First task has the first person under assignees list assigned in addition to its existing list of 
+       people. If that person is already assigned, no additional person is assigned.
        Details of the task with assigned person shown in the status message for both cases.
 
     3. Test case: `assign 0 p/1` <br>
-       Expected: No task has been assigned a person. Error details stating 'The task index provided is invalid.' is shown with a description of how to use assign command with proper format.
+       Expected: No task has been assigned a person. Error details stating 'The task index provided is invalid.' is 
+       shown with a description of how to use assign command with proper format.
 
 2. Assigning multiple people to a task
 
-    1. Prerequisites: List all tasks using the `list` command. Multiple tasks in the list. Multiple assignees in the list at the right-hand side.
+    1. Prerequisites: List all tasks using the `list` command. Multiple tasks in the list. Multiple assignees in the 
+       list at the right-hand side.
 
     2. Test case: `assign 1 p/1 p/3` <br>
-       Expected: First task has the first and third person under assignees list assigned in addition to its existing list of people. If the people are already assigned, no additional person is assigned.
+       Expected: First task has the first and third person under assignees list assigned in addition to its existing 
+       list of people. If the people are already assigned, no additional person is assigned.
        Details of the task with assigned people shown in the status message for both cases.
 
 ### Completing a task
 
 1. Completing a task (Note there is currently no way to mark the task as incomplete)
 
-    1. Prerequisites: List all tasks using the `list` command. Multiple tasks in the list, second task is marked completed, first task is not.
+    1. Prerequisites: List all tasks using the `list` command. Multiple tasks in the list, second task is marked 
+       completed, first task is not.
 
     2. Test case: `complete 1` <br>
-       Expected: First task has been marked as completed. Details of task that is just marked completed shown in the status message.
+       Expected: First task has been marked as completed. Details of task that is just marked completed shown in the 
+       status message.
 
     3. Test case: `complete 0` <br>
-       Expected: No task has been marked as completed. Error details stating 'The task index provided is invalid.' is shown with a description of how to use complete command with proper format.
+       Expected: No task has been marked as completed. Error details stating 'The task index provided is invalid.' is 
+       shown with a description of how to use complete command with proper format.
 
     4. Test case: `complete 2` <br>
-       Expected: Third task has been marked as completed. Details of task that is just marked completed shown in the status message.
+       Expected: Third task has been marked as completed. Details of task that is just marked completed shown in the 
+       status message.
 
        
 ### Finding tasks of sample data through task description
 
 1. Finding a task containing the stated one word
 
-    1. Prerequisites: Sample data is loaded for the first time without any modification. List all tasks using the `list` command. Multiple tasks in the list.
+    1. Prerequisites: Sample data is loaded for the first time without any modification. List all tasks using the 
+       `list` command. Multiple tasks in the list.
 
     2. Test case: `find review` <br>
-       Expected: Task with description "Do PR review" shown as the only task in the task list. Number of task listed shown in status message.
+       Expected: Task with description "Do PR review" shown as the only task in the task list. Number of task listed 
+       shown in status message.
 
     3. Test case: `find task` <br>
        Expected: No task shows up on the task list. Number of task listed shown in status message.
@@ -1171,10 +1200,12 @@ point for testers to work on; testers are expected to do more *exploratory* test
     1. Prerequisites: Sample data is loaded for the first time without any modification. List all tasks using the `list` command. Multiple tasks in the list.
 
     2. Test case: `find before friday` <br>
-       Expected: Task with description "ST2334 quiz before Friday" shown as the only task in the list. Number of task listed shown in status message.
+       Expected: Task with description "ST2334 quiz before Friday" shown as the only task in the list. Number of task 
+       listed shown in status message.
 
     3. Test case: `find with catch` <br>
-       Expected: Task with description "Catch up with ST lectures" shown as the only task in the list. Number of task listed shown in status message.
+       Expected: Task with description "Catch up with ST lectures" shown as the only task in the list. Number of task
+       listed shown in status message.
     
 ### Finding task through searching one or more specific fields
 
@@ -1183,33 +1214,41 @@ point for testers to work on; testers are expected to do more *exploratory* test
    1. Prerequisites: List all tasks using the `list` command. Multiple tasks in the list.
 
    2. Test case: `find dt/1900` <br>
-      Expected: Tasks with 7:00 PM as time shown as tasks in the list. None shown if no matching time. Number of task listed shown in status message.
+      Expected: Tasks with 7:00 PM as time shown as tasks in the list. None shown if no matching time. Number of task 
+      listed shown in status message.
 
    3. Test case: `find dt/05/10/2021` <br>
-      Expected: Tasks with 05 Oct 2021 as date shown as tasks in the list. None shown if no matching date. Number of task listed shown in status message.
+      Expected: Tasks with 05 Oct 2021 as date shown as tasks in the list. None shown if no matching date. Number of 
+      task listed shown in status message.
 
    4. Test case: `find dt/05/10/2021 dt/1900 dt/2000` <br>
-      Expected: Tasks with 8:00 PM as time shown as tasks in the list. None shown if no matching time of the time stated in second command. Number of task listed shown in status message.
+      Expected: Tasks with 8:00 PM as time shown as tasks in the list. None shown if no matching time of the time 
+      stated in second command. Number of task listed shown in status message.
 
 2. Finding a task containing a person
 
-    1. Prerequisites: List all tasks using the `list` command. Multiple tasks in the list. Multiple assignees in the list at the right-hand side.
+    1. Prerequisites: List all tasks using the `list` command. Multiple tasks in the list. Multiple assignees in the 
+       list at the right-hand side.
     
     2. Test case: `find p/1` <br>
-       Expected: Tasks assigned with first person in the assignee list shown as tasks in the list. None shown if no matching assignee. Number of task listed shown in status message.
+       Expected: Tasks assigned with first person in the assignee list shown as tasks in the list. None shown if no 
+       matching assignee. Number of task listed shown in status message.
     
     3. Test case: `find p/1 p/2` <br>
-       Expected: Tasks assigned with first and second person in the assignee list shown as tasks in the list. None shown if no matching both assignees. Number of task listed shown in status message.
+       Expected: Tasks assigned with first and second person in the assignee list shown as tasks in the list. None 
+       shown if no matching both assignees. Number of task listed shown in status message.
 
 3. Finding a task containing a tag
 
     1. Prerequisites: List all tasks using the `list` command. Multiple tasks in the list.
 
     2. Test case: `find t/homework` <br>
-       Expected: Tasks tagged with "homework" shown as tasks in the list. None shown if no matching tag. Number of task listed shown in status message.
+       Expected: Tasks tagged with "homework" shown as tasks in the list. None shown if no matching tag. Number of task 
+       listed shown in status message.
 
     3. Test case: `find t/homework t/assignment`<br>
-       Expected: Tasks tagged with both "homework" and "assignment" show as tasks in the list. None shown if no matching tag. Number of task listed shown in status message.
+       Expected: Tasks tagged with both "homework" and "assignment" show as tasks in the list. None shown if no 
+       matching tag. Number of task listed shown in status message.
 
 ### Find all upcoming tasks:
 
@@ -1218,8 +1257,9 @@ point for testers to work on; testers are expected to do more *exploratory* test
     1. Prerequisites: List all tasks using the `list` command. Multiple tasks in the list.
 
     2. Test case: `upcoming` <br>
-       Expected: Incomplete tasks that have Date/Time after the current Date/Time as determined by your PC shown as tasks in the list, sorted by the closest Date/Time
-       to current Date/Time appearing at the top. None shown if no upcoming tasks. Number of task listed shown in status message.
+       Expected: Incomplete tasks that have Date/Time after the current Date/Time as determined by your PC shown as 
+       tasks in the list, sorted by the closest Date/Time to current Date/Time appearing at the top. None shown if no 
+       upcoming tasks. Number of task listed shown in status message.
 
     3. Test case: `upcoming random text` <br>
        Expected: Same behaviour as above test case.
