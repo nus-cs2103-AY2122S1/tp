@@ -31,7 +31,7 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/developerPhotos/ethanwong6362.png" width="200px">
 
 [[github](http://github.com/ethanwong6362)]
-[[portfolio](team/ethanwong6363.md)]
+[[portfolio](team/ethanwong6362.md)]
 
 * Role: Developer
 * Responsibilities: Logic flow
