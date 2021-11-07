@@ -13,7 +13,7 @@ import seedu.academydirectory.model.VersionedModel;
 public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
-    public static final String HELP_MESSAGE = "### Clearing all entries : `clear`\n"
+    public static final String HELP_MESSAGE = "#### Clearing all entries : `clear`\n"
             + "\n"
             + "Clears all entries from the academy directory.\n"
             + "\n"

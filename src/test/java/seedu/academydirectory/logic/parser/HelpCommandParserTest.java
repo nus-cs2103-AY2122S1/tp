@@ -18,11 +18,16 @@ import seedu.academydirectory.logic.commands.FilterCommand;
 import seedu.academydirectory.logic.commands.GetCommand;
 import seedu.academydirectory.logic.commands.GradeCommand;
 import seedu.academydirectory.logic.commands.HelpCommand;
+import seedu.academydirectory.logic.commands.HistoryCommand;
 import seedu.academydirectory.logic.commands.ListCommand;
 import seedu.academydirectory.logic.commands.ParticipationCommand;
+import seedu.academydirectory.logic.commands.RedoCommand;
+import seedu.academydirectory.logic.commands.RevertCommand;
 import seedu.academydirectory.logic.commands.ShowCommand;
 import seedu.academydirectory.logic.commands.SortCommand;
 import seedu.academydirectory.logic.commands.TagCommand;
+import seedu.academydirectory.logic.commands.UndoCommand;
+import seedu.academydirectory.logic.commands.ViewCommand;
 import seedu.academydirectory.logic.commands.VisualizeCommand;
 
 public class HelpCommandParserTest {
@@ -32,8 +37,9 @@ public class HelpCommandParserTest {
     private final String[] validInputs = {
         "add", "attendance", "clear", "delete",
         "edit", "exit", "filter", "get",
-        "grade", "list", "participation",
-        "show", "sort", "tag", "visualize"
+        "grade", "list", "participation", "view",
+        "show", "sort", "tag", "visualize",
+        "revert", "history", "undo", "redo"
     };
 
     private final HashMap<String, String> mapInputsToCorrectHelpMessage = new HashMap<>();
@@ -63,6 +69,11 @@ public class HelpCommandParserTest {
         mapInputsToCorrectHelpMessage.put("sort", SortCommand.HELP_MESSAGE);
         mapInputsToCorrectHelpMessage.put("tag", TagCommand.HELP_MESSAGE);
         mapInputsToCorrectHelpMessage.put("visualize", VisualizeCommand.HELP_MESSAGE);
+        mapInputsToCorrectHelpMessage.put("view", ViewCommand.HELP_MESSAGE);
+        mapInputsToCorrectHelpMessage.put("revert", RevertCommand.HELP_MESSAGE);
+        mapInputsToCorrectHelpMessage.put("history", HistoryCommand.HELP_MESSAGE);
+        mapInputsToCorrectHelpMessage.put("undo", UndoCommand.HELP_MESSAGE);
+        mapInputsToCorrectHelpMessage.put("redo", RedoCommand.HELP_MESSAGE);
 
         // help works for all valid input command
         for (String keyword : validInputs) {

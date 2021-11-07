@@ -22,7 +22,7 @@ import seedu.academydirectory.model.tag.Tag;
 public class TagCommand extends Command {
     public static final String COMMAND_WORD = "tag";
 
-    public static final String HELP_MESSAGE = "### Assigns tag(s) to a student: `tag`\\\n"
+    public static final String HELP_MESSAGE = "#### Assigns tag(s) to a student: `tag`\\\n"
             + "Tutors will be able to tag a student with relevant information.\\\n"
             + "Format: `tag INDEX t/tag [t/tag] . . . `\\\n"
             + "Recommended use of tags:\n"
@@ -41,10 +41,7 @@ public class TagCommand extends Command {
             + "Parameters: "
             + "INDEX "
             + PREFIX_TAG + "TAG...\n"
-            + "Example: " + COMMAND_WORD + " "
-            + "1 "
-            + PREFIX_TAG + "mission "
-            + PREFIX_TAG + "streams";
+            + "Type in `help tag` for more details";
 
     public static final String MESSAGE_SUCCESS = "%1$s's tag(s) updated! Please use `view` to see the new details";
 

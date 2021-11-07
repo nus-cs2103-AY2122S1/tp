@@ -7,7 +7,7 @@ import seedu.academydirectory.versioncontrol.objects.Commit;
 public class UndoCommand extends Command {
     public static final String COMMAND_WORD = "undo";
 
-    public static final String HELP_MESSAGE = "### Undo changes : `undo`\n"
+    public static final String HELP_MESSAGE = "#### Undo changes : `undo`\n"
             + "\n"
             + "Undo changes done to Academy Directory. Use the history command to preview what undo will do\n"
             + "\n"

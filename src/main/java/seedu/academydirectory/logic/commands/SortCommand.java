@@ -24,16 +24,21 @@ public class SortCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
 
-    public static final String HELP_MESSAGE = "### Sorts students by specific attribute:  `sort`\n"
+    public static final String HELP_MESSAGE = "#### Sorts students by specific attribute:  `sort`\n"
             + "Avengers will be able to sort their AcademyDirectory by the specified attribute.\n"
             + "\n"
             + "Format: `sort attr/ATTRIBUTE ord/ORDER`\n"
             + "\n"
-            + "Sorts AcademyDirectory in `ORDER` order by their `ATTRIBUTE`.\n"
-            + "The input `ATTRIBUTE` must be a valid attribute: name, participation,"
-            + " RA1, MIDTERM, RA2, PE, FINAL, AVERAGE.\n"
-            + "The input `ORDER` must be a valid order: asc, desc"
-            + "\n"
+            + "* The sort can be done on some `ATTRIBUTE`  in either ascending order or descending order.\n"
+            + "* `ATTRIBUTE` can only be `Name`, `Participation`, `RA1`, `Midterm`, `RA2`, `Final` and `Average`.\n"
+            + "* `ATTRIBUTE` is case-insensitive. e.g. `name` and `NAME` will both sort the list by `Name`.\n"
+            + "* `Average` here refers to the average score of all `Assessments`.\n"
+            + "* `Participation` is sorted based on the average"
+            + " `Participation` of a `Student` across all Studio sessions.\n"
+            + "* `Name` is sorted _lexicographically_. \n"
+            + "* `ORDER` can only be `asc` and `desc` which indicate either ascending or descending sort.\n"
+            + "* `ORDER` is case-insensitive. e.g. `ASC` and `Asc` will both sort the list in ascending order\n"
+            + "* Both `ATTRIBUTE` and `ORDER` are required for the sorting to work.\n"
             + "Example:\n"
             + "* `sort attr/name ord/asc`"
             + "* `sort attr/RA1 ord/desc`";
@@ -41,10 +46,8 @@ public class SortCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts student by the specified attribute. "
             + "\nParameters: "
             + PREFIX_ATTRIBUTE + "ATTRIBUTE "
-            + PREFIX_ORDER + " ORDER "
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_ATTRIBUTE + "name "
-            + PREFIX_ORDER + "asc";
+            + PREFIX_ORDER + " ORDER\n"
+            + "Type in `help sort` for more details";
 
     private final String attribute;
     private final boolean isAscendingOrder;

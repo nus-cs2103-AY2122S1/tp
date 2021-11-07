@@ -18,11 +18,15 @@ import seedu.academydirectory.versioncontrol.objects.Commit;
 public class RevertCommand extends Command {
     public static final String COMMAND_WORD = "revert";
 
-    public static final String HELP_MESSAGE = "### Revert to a history : `revert`\n"
+    public static final String HELP_MESSAGE = "#### Revert to a history : `revert`\n"
             + "\n"
             + "Reverts storage to an old history in the Academy Directory.\n"
             + "\n"
-            + "Format: `revert KEYWORD`";
+            + "Format: `revert KEYWORD`"
+            + "- `HASH` refers to the commit hash of the commit to be reverted to\n"
+            + "- `HASH` can be obtained using the `history` command\n"
+            + "- Error message will be shown if attempting to revert to the current commit. "
+            + "This is because reverting to current commit is unlikely to be intentional. ";
 
     public static final String MESSAGE_SUCCESS = "Successfully reverted Academy"
             + " Directory as requested!";
@@ -32,7 +36,7 @@ public class RevertCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Reverts Academy Directory to the stage given by "
             + "the five character hash\n"
             + "Parameters: KEYWORD ...\n"
-            + "Example: " + COMMAND_WORD + " 6dfdx";
+            + "Type in `help revert` for more details";
 
     private final String fiveDigitHash;
     public RevertCommand(String hash) {

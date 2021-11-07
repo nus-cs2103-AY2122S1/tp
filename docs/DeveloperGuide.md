@@ -1187,7 +1187,9 @@ Our team has put in a significant amount of effort to get AcademyDirectory to th
 
 2. **Redesigned GUI**
 
-   Compared to AB3, AcademyDirectory <TO BE ADDED> 
+   Compared to AB3, AcademyDirectory completely revamps the User Interface to bring out the best usage experiences to users. In that regard, we have updated Academy and make everything about it space-themed,
+   allowing users the various options (primarily CLI, but GUI is also offered) to interact with our system, and reorganize the appearance to make Academy Directory look more neat and stylish, thus enhancing user's experience.
+   One of the most notable change to UI was the differentiation of result display into two categories - status message and result visualized. 
 
 ### Notable Features
 

@@ -22,7 +22,7 @@ public class GradeCommand extends Command {
 
     public static final String COMMAND_WORD = "grade";
 
-    public static final String HELP_MESSAGE = "### Adding grades for an assessment:  `grade`\n"
+    public static final String HELP_MESSAGE = "#### Adding grades for an assessment:  `grade`\n"
             + "Avengers will be able to add a student’s grade for a particular assessment.\n"
             + "\n"
             + "Format: `grade INDEX as/ASSESSMENT g/GRADE`\n"
@@ -33,15 +33,12 @@ public class GradeCommand extends Command {
             + "Example:\n"
             + "* `grade 1 as/RA1 g/15`";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Record the Student's grade for an assessment. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Record the Student's grade for an assessment.\n"
             + "Parameters: "
             + "INDEX "
             + PREFIX_ASSESSMENT + "ASSESSMENT "
             + PREFIX_GRADE + "GRADE \n"
-            + "Example: " + COMMAND_WORD + " "
-            + "1 "
-            + PREFIX_ASSESSMENT + "RA1 "
-            + PREFIX_GRADE + "16";
+            + "Type in `help grade` for more details\n";
 
     public static final String MESSAGE_SUCCESS = "%1$s's %2$s grade updated!";
 

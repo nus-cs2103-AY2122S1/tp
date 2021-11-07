@@ -18,7 +18,7 @@ public class ParticipationCommand extends Command {
 
     public static final String COMMAND_WORD = "participation";
 
-    public static final String HELP_MESSAGE = "### Editing a student’s Studio participation: `participation`\n"
+    public static final String HELP_MESSAGE = "#### Editing a student’s Studio participation: `participation`\n"
             + "Avengers will be able to track the participation of their students during the relevant studios. "
             + "\n"
             + "We will be keeping track of Studio participation with a counter system which starts at 0 by default.\n"
@@ -43,14 +43,11 @@ public class ParticipationCommand extends Command {
             + "* `participation 4 ses/9 add/1`";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edits the participation count of the student(s) identified "
-            + "by the index number used in the last person listing as well "
-            + "as the index of the Studio session. Existing participation will "
-            + "be overwritten by the input or incremented/decremented depending on the flag.\n"
+            + ": Edits the participation count of the student(s)\n"
             + "Parameters: INDEX(ES) (positive integer) "
             + "ses/ STUDIO_SESSION_INDEX (positive integer within range) "
             + "add/ PARTICIPATION_TO_ADD\n"
-            + "Example: " + COMMAND_WORD + " 1 ses/ 7 add/ 1";
+            + "Type in `help participation` for more details";
 
     public static final String MESSAGE_UPDATE_PARTICIPATION_SUCCESS = "Participation updated!";
 

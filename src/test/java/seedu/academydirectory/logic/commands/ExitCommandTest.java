@@ -22,6 +22,7 @@ public class ExitCommandTest {
     @Test
     public void testEqual() {
         ExitCommand exitCommand = new ExitCommand();
+        assertEquals(exitCommand, exitCommand);
         assertEquals(exitCommand, new ExitCommand());
     }
 }

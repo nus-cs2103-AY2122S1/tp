@@ -31,16 +31,22 @@ public class ViewCommandTest {
         ViewCommand viewCommand2 = new ViewCommand(INDEX_SECOND_STUDENT);
         ViewCommand viewCommand3 = new ViewCommand(INDEX_THIRD_STUDENT);
 
-        // assert that two view commands are equal
+        // assert that two view commands are equal if the indices are equal
         assertEquals(viewCommand1, new ViewCommand(INDEX_FIRST_STUDENT));
         assertEquals(viewCommand2, new ViewCommand(INDEX_SECOND_STUDENT));
 
-        // assert that two view commands are not equal
+        // assert that view command is equal to itself
+        assertEquals(viewCommand3, viewCommand3);
+
+        // assert that two view commands are not equal if indices are different
         assertNotEquals(viewCommand3, new ViewCommand(INDEX_FIRST_STUDENT));
         assertNotEquals(viewCommand1, viewCommand2);
 
-        // assert that a view command is not equal to a differnt type
+        // assert that a view command is not equal to a different type
         assertNotEquals(viewCommand2, "Life is good");
+
+        // assert that view command is not equal to null
+        assertNotEquals(viewCommand3, null);
     }
 
     @Test

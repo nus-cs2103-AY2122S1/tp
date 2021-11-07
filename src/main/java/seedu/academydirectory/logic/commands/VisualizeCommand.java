@@ -18,7 +18,7 @@ public class VisualizeCommand extends Command {
 
     public static final String COMMAND_WORD = "visualize";
 
-    public static final String HELP_MESSAGE = "### Visualize class assessment statistic : `visualize`\n"
+    public static final String HELP_MESSAGE = "#### Visualize class assessment statistic : `visualize`\n"
             + "\n"
             + "Tutors will be able to visualize class performance in assessment with box and whisker plot.\n"
             + "\n"
