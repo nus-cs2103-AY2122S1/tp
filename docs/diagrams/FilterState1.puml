@@ -4,14 +4,14 @@
 title After command "filter g/S2 s/English"
 
 package Tuitione <<rectangle>> {
-    package lessonList <<rectangle>> {
+    package filteredLessonList <<rectangle>> {
         object "<u>l1:Lesson" as Lesson1 {
         subject = "English"
         grade = "S2"
         }
 
     }
-    package studentList <<rectangle>> {
+    package filteredStudentList <<rectangle>> {
         object "<u>s1:Student" as Student1 {
         grade = "S2"
         }
