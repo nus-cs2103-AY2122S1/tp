@@ -742,7 +742,7 @@ testers are expected to do more *exploratory* testing.
    1. Download the jar file and copy into an empty folder.
 
    1. Double-click the jar file.<br>
-      Expected: Shows the GUI with a set of sample clients, tasks and orders. The window size may not be optimum.
+      Expected: Shows the GUI with sample clients, tasks and orders. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -788,14 +788,17 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisite: The folder containing the jar file contains a `data` folder.
 
    1. Delete the `data` folder then launch the app by double-clicking the jar file.<br>
-      Expected: Shows the GUI with a set of clients, tasks and orders. The window size may not be optimum.
+      Expected: Shows the GUI with sample clients, tasks and orders. The window size may not be optimum.
 
 1. Dealing with corrupted data files
 
-   1. Prerequisite: The folder containing the jar file contains a `data` folder, which contains `addressbook.json`, `salesBook.json` and `taskBook.json`. 
+   1. Prerequisite: The folder containing the jar file contains a `data` folder, which contains `addressBook.json`, `taskBook.json` and `salesBook.json`. 
 
-   1. Test case: Corrupt the `addressbook.json` file by deleting a closing curly bracket (`}`) or any other brackets.<br>
-      Expected: Shows the GUI with no clients, but with a previously saved set of tasks and orders.
+   1. Test case: Corrupt the `addressBook.json` file by deleting a closing curly bracket (`}`) or any other brackets.<br>
+      Expected: Shows the GUI without any data.
       
-   1. Other files to corrupt: `salesBook.json` and `taskBook.json`<br>
-      Expected: Similar to previous.
+   1. Test case: Corrupt the `taskBook.json` file by deleting a closing curly bracket (`}`) or any other brackets.<br>
+      Expected: Shows the GUI without any tasks, but with previously saved clients and orders.
+
+   1. Test case: Corrupt the `salesBook.json` file by deleting a closing curly bracket (`}`) or any other brackets.<br>
+      Expected: Shows the GUI without any data.
