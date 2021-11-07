@@ -29,7 +29,7 @@ public class TagCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ":Adds tags to the task identified "
             + "by the index number used in the displayed task list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Index numbers must be positive integers.\n"
+            + "Index number must be positive integer less than length of Task lists.\n"
             + "Parameters: task_id "
             + "(" + PREFIX_TAG + "tagName)\n"
             + "Example: " + COMMAND_WORD + " 1 "
