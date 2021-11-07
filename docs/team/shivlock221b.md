@@ -28,18 +28,17 @@ Given below are my contributions to the project.
 
 * **Enhancements to existing features**:
     * Updated the GUI to accommodate both contact list and organisation list.
-
 * **Documentation**:
-    * User Guide:
-        * Added documentation for the `delete` feature [\#35](https://github.com/AY2122S1-CS2103T-W10-3/tp/pull/35)
-        * Added documentation for the `Add orgaisation` feature [\#68](https://github.com/AY2122S1-CS2103T-W10-3/tp/pull/68)
-        * Did cosmetic tweaks to existing documentation of features like `deleteorg` and enhanced the `value proposition`: [\#113](https://github.com/AY2122S1-CS2103T-W10-3/tp/pull/113)
-        * Added `organisation specific commands` summary table [\#113](https://github.com/AY2122S1-CS2103T-W10-3/tp/pull/113)
-    * Developer Guide:
-        * Added use cases of the `delete` feature.
-        * Added use cases of the `filter` feature.
-        * Added use cases of the `addorg` feature.
-        * Added implementation details of `filter` command
+  * User Guide:
+      * Added documentation for the `delete` feature [\#35](https://github.com/AY2122S1-CS2103T-W10-3/tp/pull/35)
+      * Added documentation for the `Add orgaisation` feature [\#68](https://github.com/AY2122S1-CS2103T-W10-3/tp/pull/68)
+      * Did cosmetic tweaks to existing documentation of features like `deleteorg` and enhanced the `value proposition`: [\#113](https://github.com/AY2122S1-CS2103T-W10-3/tp/pull/113)
+      * Added `organisation specific commands` summary table [\#113](https://github.com/AY2122S1-CS2103T-W10-3/tp/pull/113)
+  * Developer Guide:
+      * Added use cases of the `delete` feature.
+      * Added use cases of the `filter` feature.
+      * Added use cases of the `addorg` feature.
+      * Added implementation details of `filter` command
 
 * **Community**:
     * PRs reviewed: [\#187](https://github.com/AY2122S1-CS2103T-W10-3/tp/pull/187), [\#186](https://github.com/AY2122S1-CS2103T-W10-3/tp/pull/186), [\#185](https://github.com/AY2122S1-CS2103T-W10-3/tp/pull/185), [\#172](https://github.com/AY2122S1-CS2103T-W10-3/tp/pull/172), [\#117](https://github.com/AY2122S1-CS2103T-W10-3/tp/pull/117), [\#99](https://github.com/AY2122S1-CS2103T-W10-3/tp/pull/99), [\#86](https://github.com/AY2122S1-CS2103T-W10-3/tp/pull/86), [\#80](https://github.com/AY2122S1-CS2103T-W10-3/tp/pull/80)
