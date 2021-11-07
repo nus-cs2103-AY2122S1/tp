@@ -39,6 +39,8 @@ public class TypicalTasks {
             .withDate("2021-12-23").build();
     public static final Task INTERNSHIP_SEMINAR = new TaskBuilder().withName("Internship Seminar").withTime("13:44")
             .withDate("2021-10-25").build();
+    public static final Task CS2101_DEMO_DONE = new TaskBuilder().withName("DEMO").withTime("12:59")
+            .withDate("2022-01-15").withTags("CS2101").withState("DONE").build();
 
     // Manually added
     public static final Task BUY_GROCERIES = new TaskBuilder().withName("Buy Groceries").withTime("11:22")
@@ -75,6 +77,7 @@ public class TypicalTasks {
                         GE1234_LAB,
                         CS4321_GROUP_MEETING,
                         GYM_TRAINING_2,
+                        CS2101_DEMO_DONE,
                         INTERNSHIP_SEMINAR));
     }
 }
