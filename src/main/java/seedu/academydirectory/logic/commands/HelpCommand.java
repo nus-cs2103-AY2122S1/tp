@@ -27,7 +27,7 @@ public class HelpCommand extends Command {
     private final boolean isGeneralHelp;
 
     /**
-     * Default constructor of help, resulting in a summary table on the help window.
+     * Default constructor of help, resulting in a summary table of all command formats on the help window.
      */
     public HelpCommand() {
         this.commandWord = COMMAND_WORD;

@@ -9,7 +9,6 @@ end box
 box VersionedModel MODEL_COLOR_T1
 participant ":VersionedModel" as versionedModel MODEL_COLOR
 participant "studentToView:Student" as student MODEL_COLOR
-participant ":AdditionalViewModel" as addViewModel MODEL_COLOR
 end box
 
 -> viewCommand ++ : execute(model)
@@ -25,10 +24,8 @@ student --> viewCommand: studentToView
 deactivate student
 
 viewCommand -> versionedModel : setAdditionalViewType(AdditionalViewType.VIEW)
-versionedModel -> addViewModel: setAdditionalViewType(VIEW)
 
 viewCommand -> versionedModel : setAdditionalInfo(AdditionalInfo.of(studentToView))
-versionedModel -> addViewModel: setAdditionalInfo(AdditionalInfo.of(studentToView))
 
 create commandResult
 viewCommand -> commandResult: new CommandResult(MESSAGE_SUCCESS)

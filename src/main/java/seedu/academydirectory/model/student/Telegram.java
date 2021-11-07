@@ -57,5 +57,4 @@ public class Telegram implements PersonalDetail {
     public int hashCode() {
         return value.hashCode();
     }
-
 }
