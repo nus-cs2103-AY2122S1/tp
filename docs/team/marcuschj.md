@@ -32,7 +32,7 @@ Given below are my contributions to the project.
 
 * **Project management**:
   * Tracked team progress to meet deadlines
-  * Reviewed and merged Pull Requests of other teammates 
+  * Reviewed and merged Pull Requests of other teammates
   * Organised issues on GitHub, managing issue tracker
   * Managed quality and progress of User Guide and Developer Guide
   * Managed the different pages of the project. (index.md, README etc.)
@@ -55,6 +55,8 @@ Given below are my contributions to the project.
   * Developer Guide:
     * Added implementation details of the `ratings` field and `export` command [\#69](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/69) [\#191](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/191).
     * Added use cases [\#19](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/19).
+    * Add Effort section [\#201](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/201).
+    * Did final proofread [\#201](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/201).
 
 
 * **Community**:
