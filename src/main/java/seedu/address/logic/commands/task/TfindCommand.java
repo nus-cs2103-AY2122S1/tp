@@ -24,7 +24,12 @@ public class TfindCommand extends Command {
 
     private final NameContainsKeywordsPredicate<Task> predicate;
 
+    /**
+     * Creates an TfindCommand to display the specified {@code Tasks}
+     * belonging to the current member with the specified keywords {@code predicate}.
+     */
     public TfindCommand(NameContainsKeywordsPredicate<Task> predicate) {
+        requireNonNull(predicate);
         this.predicate = predicate;
     }
 
@@ -34,5 +39,12 @@ public class TfindCommand extends Command {
         model.updateFilteredTaskList(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_TASKS_LISTED_OVERVIEW, model.getFilteredTaskList().size()));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof TfindCommand // instanceof handles nulls
+                && predicate.equals(((NameContainsKeywordsPredicate<Task>) ((TfindCommand) other).predicate)));
     }
 }

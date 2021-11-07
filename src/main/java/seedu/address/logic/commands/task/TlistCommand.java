@@ -25,7 +25,7 @@ public class TlistCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Listed all tasks";
 
-    public static final String MESSAGE_MEMBER_NOT_FOUND = "This member does not exist in the member list";
+    public static final String MESSAGE_MEMBER_NOT_FOUND = "This member does not exist in the member list.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows the task list of a member. \n"
             + "Only one of " + PREFIX_DONE + "or " + PREFIX_OVERDUE + "may be present\n"
