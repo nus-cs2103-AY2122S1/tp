@@ -103,9 +103,7 @@ Parameter | What it means | Constraints
 
 Shows a message explaining how to access the help page.
 
-![help message](images/commands/HelpCommand/help.png)
-
-### <a name="view-dashboard"></a>1.2 Dashboard: `dashboard`
+### <a name="view-dashboard"></a>1.2 View Dashboard: `dashboard`
 
 ![dashboard](images/commands/DashboardCommand/dashboard.png)
 
