@@ -119,10 +119,10 @@ Attribute | Prefix | Value
 -----------------|-----------------|-----------------
 ID | i/ | `CLIENT_ID`<br><br>• `CLIENT_ID`: A non-negative integer `e.g. 0, 1, 2, 3, …​`.
 Name | n/ | `NAME`<br><br>• `NAME`: should only contain alphanumeric characters and spaces, and it should not be blank (Character limit: 30) `e.g. John Doe`.
-Email | e/ | `EMAIL`<br><br>• `Email`: should be of the format `local-part@domain` `e.g. johnd@example.com`.
+Email | e/ | `EMAIL`<br><br>• `Email`: should be of the format `local-part@domain` `e.g. johnd@example.com` (Character limit: 100).
 Address | a/ | `ADDRESS`<br><br>• `ADDRESS`: can take any value, and it can be blank (Character limit: 100) `e.g. John street, block 123, #01-01`.
 Current financial plans | c/ | `CURRENT_PLAN`<br><br>• `CURRENT_PLAN`: can take any value, and it can be blank (Character limit: 100) `e.g. Prudential PRUwealth`.
-Disposable Income | d/ | `INCOME`<br><br>• `INCOME`: A non-negative number (Character limit: 15) `e.g. 0.00, 1000.00, 3500.50, …​`.
+Disposable Income | d/ | `INCOME`<br><br>• `INCOME`: A non-negative number (Character limit: 15) `e.g. 0.00, 1000.00, 3500.50, …​`. <br>• If no value is given, default Disposable Income for a client will be set to `0.00`.
 Next Meeting | m/ | `DATE (START_TIME~END_TIME), LOCATION`<br><br>• `DATE`: is in the format `dd-MM-yyyy`, where day, month and year are numerical values. <br>• `START_TIME` and `END_TIME`: are in `hh:mm` (24 hour format). <br>• `LOCATION`: can take any value, but it cannot be blank.<br>• More information [below](#32-next-meeting-attribute).
 Last met | l/ | `DATE`<br><br>• `DATE`: should be of the format `dd-MM-yyyy` `e.g. 24-10-2021`.<br>• More information [below](#33-last-met-attribute).
 Contact number | p/ | `PHONE_NUMBER`<br><br>• `PHONE_NUMBER`: should only contain numbers, and it should be at least 3 digits long `e.g. 8743 8807`.
@@ -152,7 +152,7 @@ Each `Next Meeting` consists of a `DATE`, `START_TIME`, `END_TIME` and a `LOCATI
 | Parameter Format | `[m/DATE (START_TIME~END_TIME), LOCATION]` |
 :---: | ---
 | Example | `m/25-12-2021 (00:00~23:59), Santa's Workshop` |
-| <img src="images/info_icon.png" width="50"/> | • `DATE` is in the format `dd-MM-yyyy`, where day, month and year are numerical values. <br>• `START_TIME` and `END_TIME` are in `hh:mm` (24 hour format). <br>• `LOCATION` can take any value, but it cannot be blank. • `Next Meeting` will automatically be updated to null when the current time passes the date and end time of the meeting and this happens whenever the application is booted up. At the same time, the `Last Met` attribute will be updated to take on the current date. |
+| <img src="images/info_icon.png" width="50"/> | • `DATE` is in the format `dd-MM-yyyy`, where day, month and year are numerical values. <br>• `START_TIME` and `END_TIME` are in `hh:mm` (24 hour format). <br>• `LOCATION` can take any value, but it cannot be blank. <br>• `Next Meeting` will automatically be updated to null when the current time passes the date and end time of the meeting and this happens whenever the application is booted up. At the same time, the `Last Met` attribute will be updated to take on the current date. |
 
 ### 3.3 Last Met Attribute
 
@@ -357,7 +357,7 @@ based on the given `SORT DIRECTION`.
 **Expected Outcome:** <br>
 For instance, if you were to sort clients by risk appetite. 
 
-| `sort r/asc`| `sort r/dsc |  
+| `sort r/asc`| `sort r/dsc` |  
 | :---: | :--- |
 | <img src="images/ExpectedSortCommand.png" width="400"/> | <img src="images/ExpectedSortCommand_DSC.png" width="400"/> |
 
@@ -402,7 +402,7 @@ Filters the current list by the given keywords.
 | :---: | :--- |
 | **Examples** | • `filter John` returns `john` and `John Doe` <br> • `filter alex david` returns `Alex Yeoh`, `David Li` |
 | <img src="images/info_icon.png" width="50"/> | • Works similar to `search` but `filter` works based on the current list shown as opposed to entire lists of contacts. <br> • If no `KEYWORD` is provided, then filter will be based on `<attribute>/ATTRIBUTE_KEYWORD` <br> • The filter is case-insensitive. e.g `keith` will match `Keith`. <br> • The order of the keywords does not matter. e.g. `John Doe` will match `Doe John`. <br> • Clients matching at least one keyword will be returned). <br> e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`. <br> • If attribute keyword is provided, only clients whose attribute matches with the attribute keyword will be returned. <br> e.g. `Tom Tim e/@gmail.com` will return `Tom Lee e/Tom@gmail.com` and not `Tim Shum e/Tim@yahoo.com`.|
-| <img src="images/tip_icon.png" width="50"/> | • Use the tags found under the command box to quickly filter clients by their tags. Simply click on a tag and press enter to filter clients with the specific tag. <br> eg. Pressing the `classmate` button allows you to filter clients with the `classmate` tag. <br> <img src="images/FilterTagCommand.png" width="300">|
+| <img src="images/tip_icon.png" width="50"/> | • Use the tags found under the command box to quickly filter clients by their tags. Simply click on a tag and press enter to filter clients with the specific tag. <br> eg. Pressing the `classmate` button allows you to filter clients with the `classmate` tag. <br> <img src="images/FilterTagCommand.png" width="400">|
 
 **Expected Outcome:** <br>
 For instance, using `filter t/colleagues` will produce the following result.
@@ -490,7 +490,7 @@ Switch to a different address book that currently exists.
 | Format | `ab switch ADDRESSBOOK_NAME` <br> <br> • `ADDRESSBOOK_NAME` refers to the name of the address book to switched to .|
 | :---: | :--- |
 | **Example** | `ab switch other` will switch over to the address book named `other` |
-| <img src="images/tip_icon.png" width="50"/> | • Switch between different address books by toggling the address book tab (which is the 3rd tab from the left) <br> <img src="images/MultipleAddressBookTab.jpg" width="300"/> |
+| <img src="images/tip_icon.png" width="50"/> | • Switch between different address books by toggling the address book tab (which is the 3rd tab from the left) <br> <img src="images/MultipleAddressBookTab.jpg" width="400"/> |
 
 **Expected Outcome:** <br>
 For instance, using `ab switch youngadults` when on the `newAddressBook` address book will produce the following result.
