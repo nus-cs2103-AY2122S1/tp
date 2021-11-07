@@ -288,6 +288,11 @@ public class ModelManager implements Model {
         return filteredStudents;
     }
 
+    public ObservableList<Student> getAllStudentList() {
+        updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+        return filteredStudents;
+    }
+
     @Override
     public void updateFilteredStudentList(Predicate<Student> predicate) {
         displayType = STUDENTS;
@@ -325,12 +330,17 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Group> getAllGroupList() {
+        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+        return filteredGroups;
+    }
+
+    @Override
     public void updateFilteredGroupList(Predicate<Group> predicate) {
         displayType = GROUPS;
         requireNonNull(predicate);
         filteredGroups.setPredicate(predicate);
     }
-
 
     @Override
     public boolean equals(Object obj) {

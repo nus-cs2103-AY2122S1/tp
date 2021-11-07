@@ -19,8 +19,8 @@ public class ClearGroupsCommand extends Command {
 
         AddressBook newAddressBook = new AddressBook();
         newAddressBook.setTasks(model.getFilteredTaskList());
-        newAddressBook.setStudents(model.getFilteredStudentList());
-        newAddressBook.clearGroupFromStudents(model.getFilteredStudentList());
+        newAddressBook.setStudents(model.getAllStudentList());
+        newAddressBook.clearGroupFromStudents(model.getAllStudentList());
 
         model.setAddressBook(newAddressBook);
         return new CommandResult(MESSAGE_SUCCESS);
