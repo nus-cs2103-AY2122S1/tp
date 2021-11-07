@@ -30,7 +30,6 @@
                 <Label fx:id="phone" alignment="CENTER" contentDisplay="CENTER" styleClass="cell_small_label_centered" text="\$phone" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                 <Label fx:id="email" alignment="CENTER" contentDisplay="CENTER" styleClass="cell_small_label_centered" text="\$email" wrapText="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                 <ListView fx:id="periodListView" GridPane.columnIndex="4"/>
-
                 <FlowPane fx:id="roles" alignment="CENTER" columnHalignment="CENTER" orientation="VERTICAL" prefHeight="94.0" prefWidth="64.0" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                 <Label fx:id="status" alignment="CENTER" contentDisplay="CENTER" styleClass="cell_small_label_centered" text="\$status" wrapText="true" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                 <Label fx:id="salary" alignment="CENTER" contentDisplay="CENTER" styleClass="cell_small_label_centered" text="\$salary" wrapText="true" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />

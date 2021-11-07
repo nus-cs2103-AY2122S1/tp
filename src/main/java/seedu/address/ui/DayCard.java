@@ -54,8 +54,8 @@ public class DayCard extends UiPart<Region> {
         String text = day.getDisplayName(TextStyle.SHORT, Locale.getDefault()) + ", "
                 + date.format(formatter);
         dayDateLabel.setText(text);
-        SlotCard morningSlotCard = new SlotCard(day, Slot.MORNING, stafflist, currentPeriod);
-        SlotCard afternoonSlotCard = new SlotCard(day, Slot.AFTERNOON, stafflist, currentPeriod);
+        SlotCard morningSlotCard = new SlotCard(day, Slot.MORNING, stafflist, currentPeriod, date);
+        SlotCard afternoonSlotCard = new SlotCard(day, Slot.AFTERNOON, stafflist, currentPeriod, date);
         slotPane.getChildren().addAll(morningSlotCard.getRoot(), afternoonSlotCard.getRoot());
         VBox.setVgrow(morningSlotCard.getRoot(), Priority.ALWAYS);
         VBox.setVgrow(afternoonSlotCard.getRoot(), Priority.ALWAYS);
