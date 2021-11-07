@@ -17,35 +17,35 @@ title: Developer Guide
   - [Storage component](#storage-component)
   - [Common classes](#common-classes)
 - [**Implementation**](#implementation)
-    - [Add Event feature - addevent](#add-event-feature---addevent)
+    - [Add event feature - addevent](#add-event-feature---addevent)
        - [Implementation Details](#implementation-details)
        - [Implementation Rationale](#implementation-rationale)
-    - [Delete Event feature - deleteEvent](#delete-event-feature---deleteevent)
+    - [Delete event feature - deleteEvent](#delete-event-feature---deleteevent)
        - [Implementation Details](#implementation-details-1)
        - [Design Considerations](#design-considerations)
           - [Aspect: Specifying event to be deleted](#aspect-specifying-event-to-be-deleted)
-    - [Filter Event feature - filterEvents](#filter-event-feature---filterevents)
+    - [Filter event feature - filterEvents](#filter-event-feature---filterevents)
       - [Implementation Details](#implementation-details-2)
       - [Implementation Rationale](#implementation-rationale-1)
       - [Design Considerations](#design-considerations-1)
         - [Aspect: Criteria to filter by](#aspect-criteria-to-filter-by)
         - [Aspect: With or without prefix](#aspect-with-or-without-prefix)
-    - [View Participant's Details feature - view](#view-participants-details-feature---view)
+    - [View participant's details feature - view](#view-participants-details-feature---view)
       - [Implementation Details](#implementation-details-3)
       - [Implementation Rationale](#implementation-rationale-2)
       - [Design Considerations](#design-considerations-2)
         - [Aspect: Method of finding a participant](#aspect-method-of-finding-a-participant)
-    - [Add/Remove Participant to/from Event feature - enroll/expel](#addremove-participant-tofrom-event-feature---enrollexpel)
+    - [Add/Remove participant to/from event feature - enroll/expel](#addremove-participant-tofrom-event-feature---enrollexpel)
       - [Implementation Details](#implementation-details-4)
       - [Implementation Rationale](#implementation-rationale-3)
-    - [View Event Details feature - showDetails](#view-event-details-feature---showdetails)
+    - [View event's details feature - showDetails](#view-events-details-feature---showdetails)
       - [Implementation Details](#implementation-details-5)
       - [Implementation Rationale](#implementation-rationale-4)
       - [Design Considerations](#design-considerations-3)
         - [Aspect: Similar event names](#aspect-similar-event-names)
-    - [\[Proposed\] Undone Event feature](#proposed-undone-event-feature)
+    - [\[Proposed\] Undone event feature](#proposed-undone-event-feature)
       - [Proposed Implementation](#proposed-implementation)
-    - [\[Proposed\] Enroll and Expel multiple Participants from multiple Events feature](#proposed-enroll-and-expel-multiple-participants-from-multiple-events-feature)
+    - [\[Proposed\] Enroll and expel multiple participants from multiple events feature](#proposed-enroll-and-expel-multiple-participants-from-multiple-events-feature)
       - [Proposed Implementation](#proposed-implementation-1)
 - [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
 - [**Appendix: Requirements**](#appendix-requirements)
@@ -278,7 +278,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Add Event feature - addEvent
+### Add event feature - addEvent
 
 This feature allows Managera users to create an event at the specified date and time.
 
@@ -288,7 +288,7 @@ Since the `AddressBookParser` is responsible for determining the type of `Comman
 we can simply add a new `commandType` case for `AddEventCommand` in `AddressBookParser`. 
 
 The `AddEventCommandParser` reads the user's input and passes it to `ParserUtil` to ensure that the event's name, 
-date and time are valid. Then, an Event is created with the returned `EventName`, `EventDate` and `EventTime` objects. 
+date and time are valid. Then, an `Event` is created with the returned `EventName`, `EventDate` and `EventTime` objects. 
 This event will be supplied to the `addEventCommand` to be executed.
 
 Since Managera employs a UniqueEventList, it should not have more than one event with the same name and date. The 
@@ -305,7 +305,7 @@ new classes such as `EventName`, `EventDate` and `EventTime` were also implement
 for the name, date and time of an `Event` respectively. These abstractions are helpful in ensuring reliability of 
 the program by hiding the underlying details.
 
-### Delete Event feature - deleteEvent
+### Delete event feature - deleteEvent
 
 This feature allows Managera users to delete an existing event at a particular index of the displayed event list.
 
@@ -339,7 +339,7 @@ execution will continue, and the respective event at the index is deleted.
     * Cons:
         1. The user has to fully match the event name, which is much more cumbersome.
 
-### Filter Event feature - filterEvents
+### Filter event feature - filterEvents
 
 This feature allows Managera users to filter the event list by date and time. Only the events that fall on the 
 specified date and time will be left in the filtered list.
@@ -413,7 +413,7 @@ The following is the sequence diagram for how a `FilterEventCommand` works inter
 
 ![FilterEventSequenceDiagram](images/DG-images/FilterEventSequenceDiagram.png)
 
-### View Participant's Details feature - view
+### View participant's details feature - view
 
 This feature allows Managera users to look for a specific participant and view their details. The search is done using
 the participant's index in the displayed participant list.
@@ -452,7 +452,7 @@ was decidedly implemented to allow users the ability to sieve out a single parti
         1. The user has to know the index of the participant, which can be troublesome with a long list of participants.
            However, the user can use the `find` function to filter their search, making this process slightly easier.
 
-* **Alternative 2**: Find by Participant ID:
+* **Alternative 2**: Find by participant's ID:
     * Pros:
         1. The details of the specific participant are returned immediately, provided that the user's input is an exact
            match of the participant's ID.
@@ -470,7 +470,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ![ViewCommandActivityDiagram](images/DG-images/ViewCommandActivityDiagram.png)
 
-### Add/Remove Participant to/from Event feature - enroll/expel
+### Add/Remove participant to/from event feature - enroll/expel
 
 This feature allows Managera users to quickly add/remove a participant to/from an event according to the current 
 filtered list of events and participants visible to the user.
@@ -520,7 +520,7 @@ The command keywords to add/remove participant to/from events are `enroll` and `
 found `addParticipant` and `removeParticipant` to be too long. This problem becomes apparent since these commands are 
 used regularly and are core features of Managera.
 
-### View Event Details feature - showDetails
+### View event's details feature - showDetails
 
 This feature allows Managera users to find an event by name and view its details. The search is done using the event's 
 index in the displayed event list.
@@ -590,7 +590,7 @@ The following activity diagram summarises what happens when a user executes a ne
 
 ![ShowEventDetailsActivityDiagram](images/DG-images/ShowEventDetailsActivityDiagram.png)
 
-### \[Proposed\] Undone Event feature
+### \[Proposed\] Undone event feature
 
 #### Proposed Implementation
 
@@ -603,7 +603,7 @@ the event in the event list. The `UndoneEventCommand` created by `UndoneEventCom
 of the event in the displayed event list to be undone. When the command is executed, the `model` will retrieve the 
 `Event` at the specified `Index` and change the completion status of the `Event`.
 
-### \[Proposed\] Enroll and Expel multiple Participants from multiple Events feature
+### \[Proposed\] Enroll and expel multiple participants from multiple events feature
 
 #### Proposed Implementation
 
@@ -665,7 +665,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is `Managera` and the **Actor** is an `Event Organiser`, unless specified otherwise)
 
-**Use case: UC01 - Add an Event**
+**Use case: UC01 - Add an event**
 
 **MSS**
 
@@ -683,7 +683,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 1.
 
 
-**Use case: UC02 - Add Participant to Event**
+**Use case: UC02 - Add participant to event**
 
 Preconditions: At least one event and one participant have been added to Managera.
 
@@ -714,7 +714,7 @@ Preconditions: At least one event and one participant have been added to Manager
 
       Use case resumes at step 1.
 
-**Use case: UC03 - Remove an Event**
+**Use case: UC03 - Remove an event**
 
 Preconditions: At least one event has been added to Managera.
 
@@ -734,7 +734,7 @@ Preconditions: At least one event has been added to Managera.
       Use case resumes at step 1.
 
 
-**Use case: UC04 - Remove Participant from Event**
+**Use case: UC04 - Remove participant from event**
 
 Preconditions: At least one event and one participant have been added to Managera. 
 
@@ -765,7 +765,7 @@ Preconditions: At least one event and one participant have been added to Manager
 
       Use case resumes at step 1.
 
-**Use case: UC05 - Mark Event as done**
+**Use case: UC05 - Mark event as done**
 
 Preconditions: At least one event has been added to Managera.
 
@@ -791,7 +791,7 @@ Preconditions: At least one event has been added to Managera.
       Use case resumes at step 1.
 
 
-**Use case: UC06 - Sort Events by time**
+**Use case: UC06 - Sort events by time**
 
 Preconditions: At least one event has been added to Managera.
 
@@ -802,7 +802,7 @@ Preconditions: At least one event has been added to Managera.
 
     Use case ends.
 
-**Use case: UC07 - Find Participant and access details**
+**Use case: UC07 - Find participant and access details**
 
 **Preconditions: At least one participant has been added to Managera.**
 
@@ -827,7 +827,7 @@ Preconditions: At least one event has been added to Managera.
 
       Use case resumes at step 1.
 
-**Use case: UC08 - Filter Events by date**
+**Use case: UC08 - Filter events by date**
 
 Preconditions: At least one event has been added to Managera.
 
@@ -846,7 +846,7 @@ Preconditions: At least one event has been added to Managera.
 
       Use case resumes at step 1.
 
-**Use case: UC09 - Show Event details**
+**Use case: UC09 - Show event details**
 
 Preconditions: At least one event has been added to Managera.
 
@@ -871,7 +871,7 @@ Preconditions: At least one event has been added to Managera.
 
       Use case resumes at step 1.
 
-**Use case: UC10 - Show Event Participants**
+**Use case: UC10 - Show event participants**
 
 Preconditions: At least one event has been added to Managera.
 
@@ -961,24 +961,24 @@ testers are expected to do more *exploratory* testing.
        Expected: The most recent window size and location is retained.
 
 
-### Deleting a Participant
+### Deleting a participant
 
-1. Deleting a Participant while all Participants are being shown
+1. Deleting a participant while all participants are being shown
 
-   1. Prerequisites: List all Participants using the `list` command. Multiple Participants in the list.
+   1. Prerequisites: List all participants using the `list` command. Multiple participants in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First Participant is deleted from the list. Details of the deleted Participant shown in the status 
+      Expected: First participant is deleted from the list. Details of the deleted participant shown in the status 
       message.
 
    1. Test case: `delete 0`<br>
-      Expected: No Participant is deleted. Error details shown in the status message.
+      Expected: No participant is deleted. Error details shown in the status message.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 
-###  Deleting an Event
+###  Deleting an event
 
 1. Deleting an event while all events are being shown
 
@@ -1006,4 +1006,4 @@ testers are expected to do more *exploratory* testing.
    
    3. Restart Managera.
 
-   4. Managera will start with no events and Participants.
+   4. Managera will start with no events and participants.
