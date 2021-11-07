@@ -3,11 +3,16 @@
     -fx-text-fill: -fx-highlight-color;
 }
 
-#copyButton, #helpMessage {
+#copyButton, #helpMessage, #description {
     -fx-font-family: "Open Sans";
-    -fx-text-fill: red;
+    -fx-text-fill: -fx-light-text-color;
 }
 
-#description {
-    -fx-text-fill: white;
+#copyButton {
+    -fx-background-color: -fx-highlight-color;
+    -fx-text-fill: -fx-main-bg-color;
+}
+
+#copyButton:hover {
+    -fx-background-color: -fx-light-text-color;
 }
