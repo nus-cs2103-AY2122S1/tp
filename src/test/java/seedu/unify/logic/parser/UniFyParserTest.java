@@ -14,8 +14,17 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.unify.logic.commands.*;
+import seedu.unify.logic.commands.AddCommand;
+import seedu.unify.logic.commands.ClearCommand;
+import seedu.unify.logic.commands.DeleteCommand;
+import seedu.unify.logic.commands.DoneCommand;
+import seedu.unify.logic.commands.EditCommand;
 import seedu.unify.logic.commands.EditCommand.EditTaskDescriptor;
+import seedu.unify.logic.commands.ExitCommand;
+import seedu.unify.logic.commands.FindCommand;
+import seedu.unify.logic.commands.HelpCommand;
+import seedu.unify.logic.commands.ListCommand;
+import seedu.unify.logic.commands.UndoneCommand;
 import seedu.unify.logic.parser.exceptions.ParseException;
 import seedu.unify.model.task.NameContainsKeywordsPredicate;
 import seedu.unify.model.task.Task;
