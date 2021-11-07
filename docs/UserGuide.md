@@ -116,7 +116,7 @@ Email | e/ | `EMAIL`<br><br>• `Email`: should be of the format `local-part@dom
 Address | a/ | `ADDRESS`<br><br>• `ADDRESS`: can take any value, and it can be blank (Character limit: 100) `e.g. John street, block 123, #01-01`.
 Current financial plans | c/ | `CURRENT_PLAN`<br><br>• `CURRENT_PLAN`: can take any value, and it can be blank (Character limit: 100) `e.g. Prudential PRUwealth`.
 Disposable Income | d/ | `INCOME`<br><br>• `INCOME`: A non-negative number (Character limit: 15) `e.g. 0.00, 1000.00, 3500.50, …​`.
-Next Meeting | m/ | `DATE (START_TIME~END_TIME), LOCATION`<br><br>• `DATE`: is in the format `dd-MM-yyyy`, where day, month and year are numerical values. <br>• `START_TIME` and `END_TIME`: are in `hh:mm` (24 hour format). <br>• `LOCATION`: can take any value, but it cannot be blank.<br>• More information [below](#32-next-meeting-attribute)
+Next Meeting | m/ | `DATE (START_TIME~END_TIME), LOCATION`<br><br>• `DATE`: is in the format `dd-MM-yyyy`, where day, month and year are numerical values. <br>• `START_TIME` and `END_TIME`: are in `hh:mm` (24 hour format). <br>• `LOCATION`: can take any value, but it cannot be blank.<br>• More information [below](#32-next-meeting-attribute).
 Last met | l/ | `DATE`<br><br>• `DATE`: should be of the format `dd-MM-yyyy` `e.g. 24-10-2021`.
 Contact number | p/ | `PHONE_NUMBER`<br><br>• `PHONE_NUMBER`: should only contain numbers, and it should be at least 3 digits long `e.g. 8743 8807`.
 Risk appetite | r/ | `RISK_APPETITE`<br><br>• `RISK_APPETITE`: An integer from 1-5, where 1 is very low risk tolerance and 5 is very high risk tolerance.
@@ -129,7 +129,7 @@ A client is considered to be the same as another client if they share the same *
 LeadsForce has checks that prevent users from creating duplicated contacts.
 
 <div markdown="block" class="alert alert-info">
- <p><img src="images/info_icon.png" width="30"/><b>Notes about having the same client information for various attributes:</b></p>
+ <p><img src="images/info_icon.png" width="30"/> <b>Notes about having the same client information for various attributes:</b></p>
 
 * Users have the flexibility to give the same name, email, phone number or any other attributes to multiple users, as
   long as 2 separate clients do not end up with the same name and email.
@@ -221,7 +221,7 @@ This section details the various features available in a single address book in 
 used in the management of client information and client meetings.
 
 <div markdown="block" class="alert alert-info">
- <p><img src="images/info_icon.png" width="30"/><b>Notes about the command format:</b></p>
+ <p><img src="images/info_icon.png" width="30"/> <b>Notes about the command format:</b></p>
 
 * In the format for the commands provided, words which are in `UPPERCASE` refers to the `input` that the user must key
   in.
@@ -366,7 +366,7 @@ LeadsForce's data are saved as a JSON file `[JAR file location]/data/addressbook
 update data directly by editing that data file.
 
 <div markdown="block" class="alert alert-warning">
- <p><img src="images/warn_icon.png" width="30"/><b>If your changes to the data file makes its format invalid, LeadsForce will discard all data and start with an empty data file at the next run.</b></p>
+ <p><img src="images/warn_icon.png" width="30"/> <b>If your changes to the data file makes its format invalid, LeadsForce will discard all data and start with an empty data file at the next run.</b></p>
 </div>
 
 ## 6. Multiple Address Books Feature
