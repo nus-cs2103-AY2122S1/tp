@@ -238,7 +238,7 @@ Format: `list CRITERION_FOR_LISTING`
 
 <div markdown="block" class="alert alert-info">
 :exclamation: Take note!
-* Exactly one of the `n/`, `w/` and `m/` fields need to be present.
+* Exactly one of the `all/`, `w/` and `m/` fields need to be present.
 </div>
 
 Examples:
