@@ -91,7 +91,7 @@ Examples:
 
 #### Deleting a contact : `deletecontact`
 
-Deletes the specified contact from the application.
+Deletes the specified contact and all of his/her policies from the application.
 
 Format: `deletecontact INDEX`
 
