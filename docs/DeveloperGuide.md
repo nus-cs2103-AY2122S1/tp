@@ -2,6 +2,15 @@
 layout: page
 title: Developer Guide
 ---
+
+SalesNote is a **desktop app for tailors, optimized for use via a Command Line Interface** (CLI), suitable for fast
+typists. SalesNote aims to help tailors simplify their administrative tasks, with the main features split between helping to manage:
+* Client Information (e.g. Contact details, measurements, notes)
+* Tasks to be done
+* Sales orders and accounts
+
+The purpose of the Developer Guide is to guide you through our application's architecture, so you are familiar with the underlying structure.
+
 ## Table of Contents
 
 - [Acknowledgements](#acknowledgements)
