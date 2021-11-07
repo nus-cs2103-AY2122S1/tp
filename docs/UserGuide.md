@@ -227,11 +227,9 @@ used in the management of client information and client meetings.
   in.
 * Items in square brackets are optional.
   e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-* Items with `...` after them can be used multiple times including zero times.
-e.g. `[t/TAG]...` can be used as ` `(i.e. 0 times), `t/friend`, `t/friend t/family`, etc.
-* Items with `...*` after them can be used multiple times excluding zero times. (i.e. at least one time)
-e.g. `edit CLIENT_ID...*` can be used as `edit 1`, `edit 1 2`, `edit 1 2 3`, etc.
-* `<attribute>` refers to an arbitrary attribute prefix. (i.e. any attribute can be substituted unless otherwise stated). For a comprehensive list of client's attributes available, please refer to this [section](#3-client-information). 
+* `<attribute>` refers to an arbitrary attribute prefix. (i.e. any attribute can be substituted unless otherwise stated). For a comprehensive list of client's attributes available, please refer to this [section](#3-client-information).
+* Items with `...` after them can be used multiple times, including zero times if it is also optional.
+e.g. `KEYWORD...` can be used as `John`, `alex david` etc. Whereas, `[t/TAG]...` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 </div>
 
@@ -268,7 +266,7 @@ Update the attributes of existing users using the prefix of the client’s attri
 * Multiple clients can be edited at the same time with the provided attributes by indicating their ids separated by a
   space.
 
-| Format | `edit CLIENT_ID...* [<attribute>/CHANGED_VALUE]...`|
+| Format | `edit CLIENT_ID... [<attribute>/CHANGED_VALUE]...`|
 | :---: | :--- |
 | **Example** | • `edit 3 p/12345678 r/5` command changes client 3's contact number to “12345678” and the risk appetite to 5. <br> • `edit 15 13 r/3` command changes the risk appetite of client 13 & 15 to “3”. <br> • `edit 3 4 5 m/21-09-2021 (09:00~10:00), McDonald's` sets a meeting for clients 3, 4 and 5 to be on 21st September 2021 from 9am to 10 am at McDonald's |
 | <img src="images/info_icon.png" width="50"/> | • Client ID cannot be changed. |
@@ -278,7 +276,7 @@ Update the attributes of existing users using the prefix of the client’s attri
 
 Deletes an existing client from the address book using their client id.
 
-| Format | `delete CLIENT_ID...*`|
+| Format | `delete CLIENT_ID...`|
 | :---: | :--- |
 | **Example** | • `delete 7` will deletes client with client id 7 <br> • `delete 4 8 6` will deletes the clients whose client id is 4, 6 and 8 |
 | <img src="images/info_icon.png" width="50"/> | • Multiple clients can be deleted with one `delete` command |
@@ -489,8 +487,8 @@ Action | Format | Examples
 --------|---------|---------
 **Create** | `add n/CLIENT_NAME e/EMAIL [<attribute>/VALUE]...`| add n/benedict e/benedict@gmail.com p/90909898 r/3
 **View** | `view CLIENT_ID` | view 123
-**Edit** | `edit CLIENT_ID...* [<attribute>/CHANGED_VALUE]...` | edit 12 n/Dominic p/12345678
-**Delete** | `delete CLIENT_ID...*` | delete 4
+**Edit** | `edit CLIENT_ID... [<attribute>/CHANGED_VALUE]...` | edit 12 n/Dominic p/12345678
+**Delete** | `delete CLIENT_ID...` | delete 4
 **List** | `list` | -
 **Sort** | `sort [<attribute>/SORT_DIRECTION]...` | sort r/asc
 **Schedule** | `schedule [DATE]` | schedule 25-12-2021
