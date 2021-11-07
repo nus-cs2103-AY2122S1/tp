@@ -247,6 +247,7 @@ To achieve the best possible experience, avoid adding excessively long input to 
 
 #### `EMAIL`
 * The email address of your client
+* Should not be more than **100** characters
 * Should be in this format: `local-part@domain`
 * `local-part`: 
   * should only contain *alphanumeric characters* and these *special characters* excluding parentheses (!#$%&'*+/=?\{\}\|~^.-`).
@@ -303,6 +304,7 @@ the earliest time to the latest time.
 
 #### `NAME`
 * The name of your client
+* Should not be more than **50** characters
 * Should only contain alphanumeric characters and spaces (should not be blank)
    <div markdown="block" class="alert alert-info">
    :information_source: FAST does not allow duplicate names, but you may use numbers to differentiate between 2 clients with
