@@ -18,7 +18,7 @@ public class ScheduleCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": showcases the meetings that the financial advisor has on the day. \n"
-            + "Parameters: Day-Month-Year \n"
+            + "Parameters: [DATE] \n"
             + "Example: " + COMMAND_WORD + " 01-01-2021";
 
     public static final String MESSAGE_SCHEDULE_SUCCESS = "Found Schedule for %1$s";

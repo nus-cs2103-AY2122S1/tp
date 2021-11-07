@@ -23,7 +23,7 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the client identified by the client id used in the displayed client list.\n"
             + "Parameters: "
-            + "CLIENT ID "
+            + "CLIENT_ID... "
             + "\n"
             + "Example: " + COMMAND_WORD + " 1";
 
