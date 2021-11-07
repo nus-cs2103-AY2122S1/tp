@@ -90,11 +90,11 @@ public class SetShiftTimeCommandTest {
 
         Person alice = new PersonBuilder().withName("Alice Pauline")
                 .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-                .withPhone("94351253").withRoles("floor").withSalary("1000000").withStatus("fulltime")
+                .withPhone("94351253").withRoles("floor").withSalary("1000").withStatus("fulltime")
                 .withTags("friends").build();
         Person copyOfAlice = new PersonBuilder().withName("Alice Pauline")
                 .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-                .withPhone("94351253").withRoles("floor").withSalary("1000000").withStatus("fulltime")
+                .withPhone("94351253").withRoles("floor").withSalary("1000").withStatus("fulltime")
                 .withTags("friends").build();
 
         model.addPerson(alice);
@@ -116,11 +116,11 @@ public class SetShiftTimeCommandTest {
 
         Person alice = new PersonBuilder().withName("Alice Pauline")
                 .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-                .withPhone("94351253").withRoles("floor").withSalary("1000000").withStatus("fulltime")
+                .withPhone("94351253").withRoles("floor").withSalary("1000").withStatus("fulltime")
                 .withTags("friends").build();
         Person copyOfAlice = new PersonBuilder().withName("Alice Pauline")
                 .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-                .withPhone("94351253").withRoles("floor").withSalary("1000000").withStatus("fulltime")
+                .withPhone("94351253").withRoles("floor").withSalary("1000").withStatus("fulltime")
                 .withTags("friends").build();
 
         model.addPerson(alice);
@@ -141,7 +141,7 @@ public class SetShiftTimeCommandTest {
 
         Person alice = new PersonBuilder().withName("Alice Pauline")
                 .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-                .withPhone("94351253").withRoles("floor").withSalary("1000000").withStatus("fulltime")
+                .withPhone("94351253").withRoles("floor").withSalary("1000").withStatus("fulltime")
                 .withTags("friends").build();
         model.addPerson(alice);
 

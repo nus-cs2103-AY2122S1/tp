@@ -5,7 +5,7 @@
     "email": "invalid@email!3e",
     "address": "123, Jurong West Ave 6, #08-111",
     "role": [ "floor" ],
-    "salary": "900000",
+    "salary": "900",
     "status": "fulltime",
     "tagged": [ "friends" ],
     "schedule": {

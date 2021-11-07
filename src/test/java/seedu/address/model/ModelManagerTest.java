@@ -108,7 +108,7 @@ public class ModelManagerTest {
     public void getPersonTest() {
         Person alice = new PersonBuilder().withName("Alice Pauline")
                 .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-                .withPhone("94351253").withRoles("floor").withSalary("1000000").withStatus("fulltime")
+                .withPhone("94351253").withRoles("floor").withSalary("1000").withStatus("fulltime")
                 .withTags("friends").build();
 
         modelManager.addPerson(alice);
@@ -120,7 +120,7 @@ public class ModelManagerTest {
     public void addShift_throwsDuplicateShiftException() {
         Person alice = new PersonBuilder().withName("Alice Pauline")
                 .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-                .withPhone("94351253").withRoles("floor").withSalary("1000000").withStatus("fulltime")
+                .withPhone("94351253").withRoles("floor").withSalary("1000").withStatus("fulltime")
                 .withTags("friends").build();
         modelManager.addPerson(alice);
         modelManager.addShift(alice, DayOfWeek.MONDAY, Slot.AFTERNOON, START_DATE, END_DATE);
@@ -132,7 +132,7 @@ public class ModelManagerTest {
     public void addShift_success() {
         Person alice = new PersonBuilder().withName("Alice Pauline")
                 .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-                .withPhone("94351253").withRoles("floor").withSalary("1000000").withStatus("fulltime")
+                .withPhone("94351253").withRoles("floor").withSalary("1000").withStatus("fulltime")
                 .withTags("friends").build();
         modelManager.addPerson(alice);
         modelManager.addShift(alice, DayOfWeek.MONDAY, Slot.AFTERNOON, START_DATE, END_DATE);
@@ -145,7 +145,7 @@ public class ModelManagerTest {
         LocalDate testDate = END_DATE.plusDays(7);
         Person alice = new PersonBuilder().withName("Alice Pauline")
                 .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-                .withPhone("94351253").withRoles("floor").withSalary("1000000").withStatus("fulltime")
+                .withPhone("94351253").withRoles("floor").withSalary("1000").withStatus("fulltime")
                 .withTags("friends").build();
         modelManager.addPerson(alice);
         modelManager.addShift(alice, DayOfWeek.MONDAY, Slot.AFTERNOON, START_DATE, END_DATE);

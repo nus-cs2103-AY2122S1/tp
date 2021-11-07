@@ -29,7 +29,7 @@ public class SwapShiftCommandTest {
 
         Person alice = new PersonBuilder().withName("Alice Pauline")
                 .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-                .withPhone("94351253").withRoles("floor").withSalary("1000000").withStatus("fulltime")
+                .withPhone("94351253").withRoles("floor").withSalary("1000").withStatus("fulltime")
                 .withTags("friends").build();
 
         model.addPerson(alice);
@@ -47,12 +47,12 @@ public class SwapShiftCommandTest {
 
         Person alice = new PersonBuilder().withName("Alice Pauline")
                 .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-                .withPhone("94351253").withRoles("floor").withSalary("1000000").withStatus("fulltime")
+                .withPhone("94351253").withRoles("floor").withSalary("1000").withStatus("fulltime")
                 .withTags("friends").build();
 
         Person alex = new PersonBuilder().withName("Alex Yeoh")
                 .withAddress("124, Yishun West Ave 6, #08-111").withEmail("alex@example.com")
-                .withPhone("94384736").withRoles("kitchen").withSalary("4500000").withStatus("parttime")
+                .withPhone("94384736").withRoles("kitchen").withSalary("4500").withStatus("parttime")
                 .withTags("friends").build();
 
         model.addPerson(alice);
@@ -78,12 +78,12 @@ public class SwapShiftCommandTest {
 
         Person alice = new PersonBuilder().withName("Alice Pauline")
                 .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-                .withPhone("94351253").withRoles("floor").withSalary("1000000").withStatus("fulltime")
+                .withPhone("94351253").withRoles("floor").withSalary("1000").withStatus("fulltime")
                 .withTags("friends").withSchedule(new ScheduleBuilder(aliceSchedule)).build();
 
         Person alex = new PersonBuilder().withName("Alex Yeoh")
                 .withAddress("124, Yishun West Ave 6, #08-111").withEmail("alex@example.com")
-                .withPhone("94384736").withRoles("kitchen").withSalary("4500000").withStatus("parttime")
+                .withPhone("94384736").withRoles("kitchen").withSalary("4500").withStatus("parttime")
                 .withTags("friends").withSchedule(new ScheduleBuilder(alexSchedule)).build();
 
         model.addPerson(alice);
