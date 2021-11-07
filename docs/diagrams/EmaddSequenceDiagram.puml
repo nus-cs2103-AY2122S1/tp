@@ -32,16 +32,16 @@ create EmaddCommand
 EmaddCommandParser -> EmaddCommand
 activate EmaddCommand
 
-EmaddCommand --> EmaddCommandParser : 
+EmaddCommand --> EmaddCommandParser
 deactivate EmaddCommand
 
-EmaddCommandParser --> AddressBookParser : 
+EmaddCommandParser --> AddressBookParser
 deactivate EmaddCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
 EmaddCommandParser -[hidden]-> AddressBookParser
 destroy EmaddCommandParser
 
-AddressBookParser --> LogicManager : 
+AddressBookParser --> LogicManager
 deactivate AddressBookParser
 
 ref over LogicManager, Model : EmaddCommand Execution

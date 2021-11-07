@@ -32,16 +32,16 @@ create MlistCommand
 MlistCommandParser -> MlistCommand
 activate MlistCommand
 
-MlistCommand --> MlistCommandParser : 
+MlistCommand --> MlistCommandParser
 deactivate MlistCommand
 
-MlistCommandParser --> AddressBookParser : 
+MlistCommandParser --> AddressBookParser
 deactivate MlistCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
 MlistCommandParser -[hidden]-> AddressBookParser
 destroy MlistCommandParser
 
-AddressBookParser --> LogicManager : 
+AddressBookParser --> LogicManager
 deactivate AddressBookParser
 
 ref over LogicManager, Model : MlistCommand Execution
