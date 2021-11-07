@@ -3,7 +3,6 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.WRONG_NUMBER_OF_DATES;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_PHONE;
@@ -28,10 +27,8 @@ import java.util.stream.Stream;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.commands.SetDefaultShiftTimingsCommand;
 import seedu.address.logic.commands.SetRoleReqCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Period;
@@ -92,21 +89,6 @@ public class ParserUtil {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
         }
         return new Phone(trimmedPhone);
-    }
-
-    /**
-     * Parses a {@code String address} into an {@code Address}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code address} is invalid.
-     */
-    public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
-        }
-        return new Address(trimmedAddress);
     }
 
     /**
@@ -359,7 +341,6 @@ public class ParserUtil {
         predicate.addFieldToTest(argMultimap.getValue(PREFIX_DASH_NAME), ParserUtil::parseName);
         predicate.addFieldToTest(argMultimap.getValue(PREFIX_DASH_PHONE), ParserUtil::parsePhone);
         predicate.addFieldToTest(argMultimap.getValue(PREFIX_DASH_EMAIL), ParserUtil::parseEmail);
-        predicate.addFieldToTest(argMultimap.getValue(PREFIX_DASH_ADDRESS), ParserUtil::parseAddress);
         predicate.addFieldToTest(argMultimap.getAllValues(PREFIX_DASH_TAG), ParserUtil::parseTag);
         try {
             predicate.addFieldToTest(argMultimap.getAllValues(PREFIX_DASH_ROLE), Role::translateStringToRole);
@@ -382,7 +363,6 @@ public class ParserUtil {
         PersonContainsFieldsPredicate predicate = new PersonContainsFieldsPredicate();
         predicate.addFieldToTest(argMultimap.getValue(PREFIX_DASH_PHONE), ParserUtil::parsePhone);
         predicate.addFieldToTest(argMultimap.getValue(PREFIX_DASH_EMAIL), ParserUtil::parseEmail);
-        predicate.addFieldToTest(argMultimap.getValue(PREFIX_DASH_ADDRESS), ParserUtil::parseAddress);
         predicate.addFieldToTest(argMultimap.getValue(PREFIX_DASH_TAG), ParserUtil::parseTag);
         try {
             predicate.addFieldToTest(argMultimap.getValue(PREFIX_DASH_ROLE), Role::translateStringToRole);
@@ -476,52 +456,6 @@ public class ParserUtil {
     public static Period extractPeriodDates(ArgumentMultimap argMultimap) throws ParseException {
         LocalDate[] dates = extractTupleDates(argMultimap);
         return new Period(dates[0], dates[1]);
-    }
-
-    /**
-     * Parses a String array of timings to form a LocalTime array of those timings.
-     *
-     * @param stringTimings The String array of timings to be parsed.
-     * @return A corresponding array of timings as LocalTime.
-     */
-    public static LocalTime[] parseTimingsArr(String[] stringTimings) throws ParseException {
-
-        if (stringTimings.length != 4) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetDefaultShiftTimingsCommand.HELP_MESSAGE));
-        }
-
-        // Check if the duration of the morning and afternoon shifts is non-zero
-        if (stringTimings[0].equals(stringTimings[1]) || stringTimings[2].equals(stringTimings[3])) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetDefaultShiftTimingsCommand.HELP_MESSAGE));
-        }
-
-        LocalTime[] timings = new LocalTime[4];
-        try {
-            for (int i = 0; i < 4; i++) {
-                timings[i] = LocalTime.parse(stringTimings[i], TIME_FORMATTER);
-            }
-        } catch (DateTimeParseException e) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetDefaultShiftTimingsCommand.HELP_MESSAGE));
-        }
-
-        // Check that the morning shift starts before on or before noon,
-        // and the afternoon shift starts after or on noon
-        if (timings[0].compareTo(LocalTime.NOON) > 0 || timings[2].compareTo(LocalTime.NOON) < 0) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetDefaultShiftTimingsCommand.HELP_MESSAGE));
-        }
-
-        for (int i = 0; i < 3; i++) {
-            // if check if the timings are in increasing order
-            if (timings[i].compareTo(timings[i + 1]) > 0) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetDefaultShiftTimingsCommand.HELP_MESSAGE));
-            }
-        }
-        return timings;
     }
 
     /**

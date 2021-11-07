@@ -30,7 +30,6 @@ public class Person {
     private final Email email;
 
     // Data fields
-    private final Address address;
     private final Set<Role> roles = new HashSet<>();
     private final Salary salary;
     private final Status status;
@@ -43,14 +42,13 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address,
-                  Set<Role> roles, Salary salary, Status status, Set<Tag> tags, Set<Period> absentDates) {
-        requireAllNonNull(name, phone, email, address, tags, roles);
+    public Person(Name name, Phone phone, Email email, Set<Role> roles,
+                   Salary salary, Status status, Set<Tag> tags, Set<Period> absentDates) {
+        requireAllNonNull(name, phone, email, tags, roles);
 
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
         if (roles.isEmpty()) {
             this.roles.add(Role.NO_ROLE);
         } else {
@@ -63,7 +61,7 @@ public class Person {
         this.fields.addAll(tags);
         this.absentDates.addAll(absentDates);
         this.fields.addAll(roles);
-        addToFieldSet(fields, name, phone, email, address, salary, status);
+        addToFieldSet(fields, name, phone, email, salary, status);
     }
 
     /**
@@ -76,7 +74,7 @@ public class Person {
         if (p == null) {
             return null;
         }
-        return new Person(p.getName(), p.getPhone(), p.getEmail(), p.getAddress(), p.getRoles(), p.getSalary(),
+        return new Person(p.getName(), p.getPhone(), p.getEmail(), p.getRoles(), p.getSalary(),
                 p.getStatus(), p.getTags(), p.getAbsentDates());
     }
 
@@ -90,10 +88,6 @@ public class Person {
 
     public Email getEmail() {
         return email;
-    }
-
-    public Address getAddress() {
-        return address;
     }
 
     public Set<Role> getRoles() {
@@ -139,8 +133,7 @@ public class Person {
         Set<Period> periods = period.union(this.getAbsentDates())
                 .stream()
                 .collect(Collectors.toUnmodifiableSet());
-        Person person = new Person(name, phone, email, address,
-                roles, salary, status, tags, periods);
+        Person person = new Person(name, phone, email, roles, salary, status, tags, periods);
         person.setSchedule(getSchedule());
         return person;
 
@@ -173,8 +166,7 @@ public class Person {
         Set<Period> result = getAbsentDates().stream()
                 .flatMap(p -> p.complement(period).stream())
                 .collect(Collectors.toSet());
-        Person person = new Person(name, phone, email, address,
-                roles, salary, status, tags, result);
+        Person person = new Person(name, phone, email, roles, salary, status, tags, result);
         person.setSchedule(getSchedule());
         return person;
     }
@@ -275,7 +267,6 @@ public class Person {
         return otherStaff.getName().equals(getName())
                 && otherStaff.getPhone().equals(getPhone())
                 && otherStaff.getEmail().equals(getEmail())
-                && otherStaff.getAddress().equals(getAddress())
                 && otherStaff.getRoles().equals(getRoles())
                 && otherStaff.getSalary().equals(getSalary())
                 && otherStaff.getStatus().equals(getStatus())
@@ -288,7 +279,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, tags);
     }
 
     @Override
@@ -297,7 +288,6 @@ public class Person {
         builder.append(getName()).append("\n")
                 .append("Phone: ").append(getPhone()).append("\n")
                 .append("Email: ").append(getEmail()).append("\n")
-                .append("Address: ").append(getAddress()).append("\n")
                 .append("Salary: ").append(getSalary().convertToDollars()).append("\n")
                 .append("Status: ").append(getStatus()).append("\n");
 

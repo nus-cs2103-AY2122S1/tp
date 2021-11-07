@@ -23,7 +23,6 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
-import seedu.address.storage.DefaultShiftTimingsStorage;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.RoleReqStorage;
@@ -70,7 +69,6 @@ public class MainApp extends Application {
         ui = new UiManager(logic);
 
         RoleReqStorage.load();
-        DefaultShiftTimingsStorage.load();
     }
 
     /**

@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -24,7 +23,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Period;
@@ -57,7 +55,6 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_SALARY + "SALARY] "
             + "[" + PREFIX_STATUS + "STATUS] "
             + "[" + PREFIX_ROLE + "ROLE]... "
@@ -170,7 +167,6 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(staffToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(staffToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(staffToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(staffToEdit.getAddress());
         Set<Role> updatedRoles = editPersonDescriptor.getRoles().orElse(staffToEdit.getRoles());
         Salary updatedSalary = editPersonDescriptor.getSalary().orElse(staffToEdit.getSalary());
         Status updatedStatus = editPersonDescriptor.getStatus().orElse(staffToEdit.getStatus());
@@ -181,7 +177,7 @@ public class EditCommand extends Command {
         Schedule sameSchedule = staffToEdit.getSchedule();
 
 
-        Person updatedPerson = new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRoles,
+        Person updatedPerson = new Person(updatedName, updatedPhone, updatedEmail, updatedRoles,
                 updatedSalary, updatedStatus, updatedTags, updatedPeriod);
         updatedPerson.setSchedule(sameSchedule);
         return updatedPerson;
@@ -213,7 +209,6 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
-        private Address address;
         private Set<Role> roles;
         private Salary salary;
         private Status status;
@@ -232,7 +227,6 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
-            setAddress(toCopy.address);
             setRoles(toCopy.roles);
             setSalary(toCopy.salary);
             setStatus(toCopy.status);
@@ -245,7 +239,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, roles, salary, status, tags, absentPeriods);
+            return CollectionUtil.isAnyNonNull(name, phone, email, roles, salary, status, tags, absentPeriods);
         }
 
         public void setName(Name name) {
@@ -278,14 +272,6 @@ public class EditCommand extends Command {
 
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
-        }
-
-        public void setAddress(Address address) {
-            this.address = address;
-        }
-
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
         }
 
         /**
@@ -376,7 +362,6 @@ public class EditCommand extends Command {
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
-                    && getAddress().equals(e.getAddress())
                     && getRoles().equals(e.getRoles())
                     && getSalary().equals(e.getSalary())
                     && getStatus().equals(e.getStatus())

@@ -7,8 +7,11 @@ public enum Role implements Field {
     //Can add more later
     KITCHEN("kitchen"), BARTENDER("bartender"), FLOOR("floor"), NO_ROLE("norole");
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "List of valid Roles: kitchen, bartender, floor, (norole if no role is assigned).";
+    public static final String STORAGE_WRONG_ROLE_MESSAGE =
+            "List of valid Roles: kitchen, bartender, floor. (norole if no role is assigned). The role norole"
+            + " cannot be together with other roles.";
+
+    public static final String MESSAGE_CONSTRAINTS = "List of valid Roles: kitchen, bartender, floor.";
 
     private final String role;
 
@@ -26,13 +29,29 @@ public enum Role implements Field {
     }
 
     /**
+     * Translate a string into a Role enum if the string matches any Role values except for norole.
+     * Trims string.
+     * @param string String to be translated.
+     * @return The translated Role if the string is valid.
+     * @throws IllegalArgumentException if the string is invalid.
+     */
+    public static Role translateStringToRole(String string) throws IllegalArgumentException {
+        Role result = translateStringToRoleWithNoRole(string);
+        if (result.equals(Role.NO_ROLE)) {
+            throw new IllegalArgumentException("String provided does not match any of the valid roles. "
+                    + MESSAGE_CONSTRAINTS);
+        }
+        return result;
+    }
+
+    /**
      * Translate a string into a Role enum if the string matches any Role values. Trims string.
      *
      * @param string String to be translated.
      * @return The translated Role if the string is valid.
      * @throws IllegalArgumentException if the string is invalid.
      */
-    public static Role translateStringToRole(String string) throws IllegalArgumentException {
+    public static Role translateStringToRoleWithNoRole(String string) throws IllegalArgumentException {
         String trimmedString = string.trim();
         Role resultRole = null;
         for (Role r : Role.values()) {
@@ -41,7 +60,7 @@ public enum Role implements Field {
             }
         }
         if (resultRole == null) {
-            throw new IllegalArgumentException("String provided does not match any roles.");
+            throw new IllegalArgumentException("String provided does not match any roles. " + MESSAGE_CONSTRAINTS);
         } else {
             return resultRole;
         }
