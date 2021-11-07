@@ -290,6 +290,7 @@ The implementation of `Model#unlinkFriend()` is as follows:
 ### Schedule Feature
 
 #### Implementation
+
 * To enable storing the schedule of a friend, two new fields had to be added: `Schedule` and `Day`
     * `Schedule` contains a list of 7 `Day`s.
     * `Day` contains:
@@ -314,6 +315,7 @@ The implementation of `Model#unlinkFriend()` is as follows:
 <img src="images/ScheduleSequenceDiagram2.png" width="1000" />
 
 #### Design considerations:
+
 * `Schedule` and `Day` were their own classes instead of storing them directly as an `ArrayList` or `boolean[]` as this
   would set a layer of abstraction, allowing us to change the data structure utilised to store the `Schedule` or `Day`.
   * Among other reasons, this also allows us to create custom methods, such as:
@@ -370,22 +372,16 @@ which is then used to trigger updates to the displayed friends list.
 
 #### Design considerations:
 
-Consideration #1:
-Recommend command allows users to filter by hour and day instead of filtering by minute and day.
+* The recommend command allows users to filter by hour and day instead of filtering by minute and day.
+  * We decided to limit the filtering to a **chosen hour of a chosen day** in order to both be consistent with 
+  the [schedule](#schedule-feature) feature and as we find that accuracy to the exact minute is not necessary as our 
+  target users (students) usually have weekly schedules based on hourly blocks.
 
-Decision #1:
-We decided to limit the filtering to a **chosen hour of a chosen day** in order to both be consistent with 
-the [schedule](#schedule-feature) feature and as we find that accuracy to the exact minute is not necessary as our 
-target users (students) usually have weekly schedules based on hourly blocks.
-
-Consideration #2:
-Usage of predicates and comparators for filtering and ordering the filtered and sorted friends list.
-
-Decision #2: 
-We decided to implement predicates and comparators for the implementation of Recommend command which reduces the coupling 
-between the `RecommendCommand` and the `Model` component. Hence, we have implemented general methods 
-such as `ModelManager#updateFilteredAndSortedFriendsList(Predicate, Comparator)` which are not dependent 
-on the expected behaviour of Recommend, allowing us to change the Recommend feature without affecting the `Model` component.
+* Usage of predicates and comparators for filtering and ordering the filtered and sorted friends list.
+  * We decided to implement predicates and comparators for the implementation of Recommend command which reduces the coupling 
+  between the `RecommendCommand` and the `Model` component. Hence, we have implemented general methods 
+  such as `ModelManager#updateFilteredAndSortedFriendsList(Predicate, Comparator)` which are not dependent 
+  on the expected behaviour of Recommend, allowing us to change the Recommend feature without affecting the `Model` component.
 
 --------------------------------------------------------------------------------------------------------------------
 
