@@ -366,6 +366,34 @@ The sequence diagram for the first step is similar to the Export Command. The fo
 In both scenarios, a new `JsonAddressBookStorage` or `CsvAddressBookStorage` is created. The `AddressBookStorage` method `readAddressBook()` then reads the respective file using `JsonUtil#readJsonFile()` or `CsvUtil#readCsvFile()`. In both cases, the files are read using Jackson's `ObjectMapper` or `CsvMapper` classes respectively.
 
 
+### Edit Profile command
+
+#### Implementation
+
+Edits the user's profile linked to the Address Book.
+
+The user's profile contains details such as their name, Telegram Handle and GitHub username, which need to be kept up to date.
+This is especially important as the user's GitHub username is crucial for the Find a Buddy feature which matches them
+with a potential teammate using the GitHub metadata.
+
+The edit profile feature allows edit to change their name, Telegram handle and GitHub username.
+
+The implementation for editing the user profile is similar to that of editing a student contact. 
+It is facilitated by the `EditCommandParser` class, which implements `Parser<EditCommand>`.
+It implements the `parse()` method, which determines whether what's being edited is a contact or the user profile, checks for 
+the validity of user input (through the `checkEditProfileInputFormat()` method) and returns an `EditCommand`, to be executed in
+`LogicManager`.
+
+The `EditCommand` class extends `Command`. Its instance is created by providing an `index` (since a contact isn't being edited here, 
+the index passed is 1 by default and will not affect the process), and an `editPersonDescriptor` (which represents the updated user profile).
+Its implementation of `Command#execute()` calls the `executeEditProfile()` method which edits the user profile as necessary.
+
+The Sequence Diagram below illustrates the interactions within the `Logic` and `Model` components for
+the `execute("edit profile te/john_doe g/john-codes")` API call.
+
+![EditProfileSequenceDiagram](images/EditProfileSequenceDiagram.png)
+
+
 ### Find command
 
 #### Implementation
@@ -386,9 +414,54 @@ the `FilteredPersonList` that contains the contact(s) matching the find paramete
 `Command#execute()` is where the updation of the `FilteredPersonList` to reflect the search performed on the contacts in the address book.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` and `Model` components for
+the `execute("find Bob Joe")` API call.
+
+![FindNameSequenceDiagram](images/FindNameSequenceDiagram.png)
+
+The Sequence Diagram below illustrates the interactions within the `Logic` and `Model` components for
+the `execute("find t/friends teammates")` API call.
+
+![FindTagsSequenceDiagram](images/FindTagsSequenceDiagram.png)
+
+The Sequence Diagram below illustrates the interactions within the `Logic` and `Model` components for
 the `execute("find te/alex_1")` API call.
 
-![FindSequenceDiagram](images/FindSequenceDiagram.png)
+![FindTelegramSequenceDiagram](images/FindSequenceDiagram.png)
+
+The Sequence Diagram below illustrates the interactions within the `Logic` and `Model` components for
+the `execute("find g/alex-coder")` API call.
+
+![FindGithubSequenceDiagram](images/FindGithubSequenceDiagram.png)
+
+### Tag command
+
+#### Implementation
+
+The Tag command allows users to directly add or remove tags from a specific contact. This command was introduced to 
+overcome the following limitations:
+1. Editing a contact's tag field using `edit <INDEX> t/<TAG>` will replace the existing tag with the specified one 
+instead of adding on to it.
+2. No way to remove tags from a contact directly.
+
+It is facilitated by the `TagCommandParser` class, which implements `Parser<TagCommand>`.
+It implements the `parse()` method, which parses the index of the contact to which tags are to be added or from which 
+tags are to be removed. Moreover, checking the validity of the user input (i.e. ensuring the presence of arguments for the `Tag` command like tags to add where the prefix `a/` is present and the
+presence of tags to remove where the prefix `r/` is present) is handled by the `checkInputFormat` method. Once the input is confirmed to be valid, `parse()` returns a `TagCommand`, to be executed in
+`LogicManager`. 
+
+The `TagCommand` class extends `Command`. Its instance is created by providing the `targetIndex` of the contact to which 
+tags are to be added or from which tags are to be removed (of type `Index`), an ArrayList containing the tags to be 
+added (`toAdd`) and an ArrayList containing the tags to be removed (`toRemove`). Its implementation of `Command#execute()` is where the updation of the `FilteredPersonList` to reflect the search performed on the contacts in the address book.
+
+The Sequence Diagram below illustrates the interactions within the `Logic` and `Model` components for
+the `execute("tag 1 a/friends")` API call.
+
+![TagSequenceDiagramForAdd](images/TagSequenceDiagramForAdd.png)
+
+The Sequence Diagram below illustrates the interactions within the `Logic` and `Model` components for
+the `execute("tag 1 a/friends r/family")` API call.
+
+![TagSequenceDiagramForAddAndRemove](images/TagSequenceDiagramForAddAndRemove.png)
 
 ### Welcome Window
 
