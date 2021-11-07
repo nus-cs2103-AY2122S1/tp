@@ -1,11 +1,14 @@
 package seedu.programmer.model.student;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.programmer.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a student's name in the ProgrammerError.
  */
 public class LabNum {
+    public static final String MESSAGE_CONSTRAINT =
+            " Lab number should be between 1 and 13 (inclusive)";
 
     private final Integer labNum;
 
@@ -16,12 +19,19 @@ public class LabNum {
      */
     public LabNum(Integer labNum) {
         requireNonNull(labNum);
-        //checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidLabNum(labNum), MESSAGE_CONSTRAINT);
         this.labNum = labNum;
     }
 
     public Integer getLabNum() {
         return this.labNum;
+    }
+
+    /**
+     * Returns true if a given string is a valid labNum.
+     */
+    public static boolean isValidLabNum (Integer test) {
+        return test.compareTo(0) > 0 && test.compareTo(14) < 0;
     }
 
     @Override
