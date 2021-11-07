@@ -137,11 +137,14 @@ In the example above, `sn/Matthew Judge` tells TutorAid that the third student s
 In this guide, the syntax / format of a command is shown like this:
 
 `edit -s INDEX_NUMBER [sn/STUDENT_NAME] [sp/STUDENT_PHONE] [pn/PARENT_NAME] [pp/PARENT_PHONE]`
+`add -sl s/STUDENT_INDEX... n/LESSON_INDEX...`
 
 * Words in `UPPER_CASE` are the parameters that are to be supplied by you. They can contain spaces.
 * Items in square brackets are optional.
 * Parameters can be in any order.
 * If a parameter is expected only once in the command, and you specify it multiple times, only the last occurrence of the parameter will be taken.
+* `...` signals that multiple parameters of this type can be accepted(separated by a space), but there must be at least one parameter present.
+  e.g. if the format of a command has `s/STUDENT_INDEX...` then both `s/1 2 3` and `s/1` are acceptable inputs, but not `s/ `.
 * Extraneous parameters for commands that do not take in parameters will be ignored.
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
