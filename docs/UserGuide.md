@@ -404,12 +404,21 @@ Format: `import CSV_FILE_PATH`
   4. Tags
 * In the CSV file, parameters' formats follows that of the `addm` command 
 (see [Adding a Member](#adding-a-member-addm))
+* You can add multiple tags by separating each tag with a comma in the CSV file.
 * `CSV_FILE_PATH` should be relative to the JAR file location
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If there are duplicate members (i.e. members with the same name or same phone number) being imported using the CSV file, 
 the details from the CSV file will overwrite the existing details, except for the attendance data. 
 This action is **irreversible**.
+</div>
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:** If any members being imported is deemed invalid, those members will be skipped.
+A member being imported will be invalid if the member being imported has the same name an existing member in SportsPA 
+**AND** has the same phone as another existing member in SportsPA.
+
 </div>
 
 Examples:
