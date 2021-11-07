@@ -206,8 +206,8 @@ The command view is where you will be able to input commands into LeadsForce. Th
    • This is where LeadsForce will display details of the commands from the app <br>
 
 4. **Filter tag panel** <br>
-   • For tags that clients have, they will show up here in the filter tag panel. By clicking on one of these tags and
-   pressing `enter`, LeadsForce can filter out clients with based on the tag that is chosen. Further details of
+   • This panel provides an at-a-glance view of the tags that all the clients have. By clicking on one of these tags and
+   pressing `enter`, LeadsForce can filter out clients based on the tag that is chosen. Further details of
    the `filter` command can be found [here](#59-filter-current-list-by-keywords--filter)
 
 ### 4.2 Client List View
