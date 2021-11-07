@@ -696,6 +696,7 @@ The navigating input history feature works by storing an arraylist within the cl
 `InputHistory` class will communicate with the class `CommandBox` to display the requested commands.
 
 The following activity diagrams gives an overview of how `InputHistory` works when the User presses the up and down arrow keys to navigate through their input history:
+
 ![Activity Diagram for Up_Arrow](images/InputHistoryUpArrowActivityDiagram.png)
 ![Activity Diagram for Down_Arrow](images/InputHistoryDownArrowActivityDiagram.png)
 
