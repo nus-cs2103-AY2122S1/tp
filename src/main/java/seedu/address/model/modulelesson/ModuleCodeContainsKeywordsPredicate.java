@@ -3,6 +3,9 @@ package seedu.address.model.modulelesson;
 import java.util.List;
 import java.util.function.Predicate;
 
+import seedu.address.commons.util.StringUtil;
+
+
 /**
  * Tests that a {@code ModuleLesson}'s {@code ModuleCode}s matches the keyword given.
  */
@@ -17,7 +20,9 @@ public class ModuleCodeContainsKeywordsPredicate implements Predicate<ModuleLess
     @Override
     public boolean test(ModuleLesson moduleLesson) {
         return keywords.stream()
-                .anyMatch(keyword -> moduleLesson.getModuleCode().getModuleCodeName().equalsIgnoreCase(keyword));
+                .anyMatch(keyword ->
+                        StringUtil.containsWordIgnoreCase(moduleLesson.getModuleCode().getModuleCodeName(), keyword)
+                );
     }
 
     @Override
