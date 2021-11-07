@@ -788,6 +788,45 @@ The CommandResult returned indicates whether it is triggered by a GitHub or Tele
 
 In `MainWindow`, if the command result `isGithub()` or `isTelegram()`, the GitHub and Telegram links in `PersonDetails` will be triggered using `PersonDetails#openTelegram()` and `PersonDetails#openGithub()`. 
 
+### Find A Buddy Feature
+
+<p align="center">
+  <img src="https://github.com/AY2122S1-CS2103T-T10-1/tp/blob/master/docs/images/Find%20A%20Buddy.png?raw=true">
+</p>
+
+By switching to the Find A Buddy tab, the user can retrieve the top 5 matches to the user based on the GitHub data gathered.
+
+#### Implementation
+
+For the feature, the data gathered includes
+- Number of Repositories
+- Percentage of Contributions by Language
+
+A similarity score is calculated based on the following three metrics:
+
+- Euclidean Distance
+<p align="left">
+  <img width="400" src="https://miro.medium.com/max/1400/1*9pSSh4QM7whgtJUD6X2vsQ.png">
+</p>
+
+- Manhattan Distance
+<p align="left">
+  <img width="400" src="https://miro.medium.com/max/1400/1*SU-KZ_Ui8FVbQ7ZKjkiQZg.png">
+</p>
+
+- Cosine Distance
+<p align="left">
+  <img width="400" src="https://miro.medium.com/max/1174/1*gDCDATwjt2hAjd72O8HvbA.png">
+</p>
+
+
+The similarity is calculated using the following formula:
+
+`Similarity Score = 1 - Normalize((Euclidean Distance + Manhattan Distance + Cosine Distance) / 3.0)`
+
+
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Documentation, logging, testing, configuration, dev-ops
@@ -995,7 +1034,7 @@ Extensions
   * Use case ends.
 
 
-**Use Case 6: Show a person's details using Index**
+**Use Case 12: Show a person's details using Index**
 
 MSS
 
@@ -1013,17 +1052,17 @@ Extensions
 
 * 3a. The given index is invalid.
   * 3a1. CohortConnect shows an error message.
-  * Use case resumes at step 2.
+  * Use case resumes at step 3.
     
 
-**Use Case 7: Show a person's details using Name**
+**Use Case 13: Show a person's details using Name**
 
 MSS
 
 1.  User requests to list persons.
 2.  CohortConnect shows a list of persons.
-3.  User requests to show details of a specific person in the list.
-4.  CohortConnect shows a pop-up with the person's details.
+3.  User requests to show details of a specific person in the list using the name.
+4.  CohortConnect shows the person's details in the detail pane.
     
     Use case ends.
 
@@ -1034,12 +1073,63 @@ Extensions
 
 * 3a. The given name is not present.
   * 3a1. CohortConnect shows an error message.
-  * Use case resumes at step 2.
+  * Use case resumes at step 3.
 
 * 3b. Multiple matching names.
   * 3b1. CohortConnect shows an error message.
-  * 3b2. Displays list of users with the same name.
-  * Use case resumes at step 2.
+  * 3b2. Displays list of users with names containing the keyword.
+  * Use case resumes at step 3.
+
+**Use Case 14: Show a person's details using Github Username**
+
+MSS
+
+1.  User requests to list persons.
+2.  CohortConnect shows a list of persons.
+3.  User requests to show details of a specific person in the list using Github usernam.
+4.  CohortConnect shows the person's details in the detail pane.
+    
+    Use case ends.
+
+Extensions
+
+* 2a. The list is empty.
+  * Use case ends.
+
+* 3a. The given github username is not present.
+  * 3a1. CohortConnect shows an error message.
+  * Use case resumes at step 3.
+
+* 3b. Multiple matching github usernames.
+  * 3b1. CohortConnect shows an error message.
+  * 3b2. Displays list of users with github usernames containing the keyword.
+  * Use case resumes at step 3.
+
+
+**Use Case 15: Show a person's details using Telegram Id**
+
+MSS
+
+1.  User requests to list persons.
+2.  CohortConnect shows a list of persons.
+3.  User requests to show details of a specific person in the list using Telegram Id.
+4.  CohortConnect shows the person's details in the detail pane.
+    
+    Use case ends.
+
+Extensions
+
+* 2a. The list is empty.
+  * Use case ends.
+
+* 3a. The given telegram id is not present.
+  * 3a1. CohortConnect shows an error message.
+  * Use case resumes at step 3.
+
+* 3b. Multiple matching telegram ids.
+  * 3b1. CohortConnect shows an error message.
+  * 3b2. Displays list of users with telegram ids containing the keyword.
+  * Use case resumes at step 3.
 
 **Use Case 18: Import contacts from JSON or CSV file**
 
@@ -1137,7 +1227,19 @@ Extensions
     * 2c1. The invalid Telegram profile is shown in the browser window, and Telegram shows an error message when opening the profile in the Telegram application.
     
       Use case ends.
+      
+**Use Case 22: Using the Find A Buddy Feature**
 
+MSS
+
+1. User switches to the Find A Buddy Tab
+2. CohortConnect gives the top 5 matches to your data
+
+Extensions
+
+* 1a. GitHub data is still being gathered.
+  * 1a1. CohortConnect shows a loading screen while gathering data in the background.
+  * 1a2. Once loaded, Use case resumes at Step 2
 
 **Use Case 23: Opening the Help Window**
 
@@ -1145,10 +1247,12 @@ MSS
 
 1. User uses the keyboard shortcut, or types in the command, or clicks on help in the Menu Bar.
 2. CohortConnect shows the Help Window.
+     Use case ends.
+
+Extensions
 
 * 1a. At any time, the User chooses to close the app.
    * 1a1. CohortConnect closes.
-   
      Use case ends.
 
 ### Non-Functional Requirements
