@@ -370,9 +370,9 @@ should not exceed the destroy marker X. This is a known limitation of PlantUML.<
 * **Alternative 1 (current choice):** Implement different finding conditions for different prefixes. 
   * For example: 
     * ***Role***: An applicant can be matched by `role` if all parameters after `r/` are present in his `role`. 
-    * ***Employment*** Type:  An applicant can be matched by `employment type` if his `employment type` starts with any of the 
-    `employment type` parameters and the parameter matches with an existing stored `employment type`.
-    * ***Years of Experience***: An applicant can be matched by `years of experience` if he has a `years of experience` not lesser than the `year of experience` parameter.
+    * ***Employment Type***:  An applicant can be matched by `employment_type` if his `employment_type` starts with any of the 
+    `employment_type` parameters, and the parameter matches with an existing stored `employment_type`.
+    * ***Years of Experience***: An applicant can be matched by `years_of_experience` if he has a `years_of_experience` not lesser than the `year_of_experience` parameter.
     * For detailed explanations of find parameters of each prefix, please visit the section of our [User Guide - Find Parameters](https://ay2122s1-cs2103t-f11-2.github.io/tp/UserGuide.html#find-parameters).
   * Pros: 
     Conditions to check for a match in parameters are differentiated for each prefix to allow better usability of the `find` command.
