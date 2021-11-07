@@ -49,22 +49,22 @@ public class IncludeCommand extends Command {
      */
     public void checkForDuplicates(ArrayList<Person> toAdd, ArrayList<Person> currentResidents)
             throws CommandException {
-        int foundDuplicate = 0;
         StringBuilder names = new StringBuilder();
-        for (Person p : toAdd) {
-            if (currentResidents.contains(p)) {
-                if (foundDuplicate == 0) {
-                    names.append(p.getName());
-                } else {
-                    names.append(", ").append(p.getName());
-                }
-                foundDuplicate++;
-            }
-        }
+
+        int foundDuplicate = (int) toAdd.stream()
+                .filter(currentResidents::contains)
+                .count();
+
+        toAdd.stream()
+                .filter(currentResidents::contains)
+                .forEach(person -> names.append(person.getName()).append(", "));
+
+        String duplicates = names.toString().replaceAll(", $", "");
+
         if (foundDuplicate == 1) {
-            throw new CommandException(names.toString() + " is already in this event");
+            throw new CommandException(duplicates + " is already in this event");
         } else if (foundDuplicate > 1) {
-            throw new CommandException(names.toString() + " are already in this event");
+            throw new CommandException(duplicates + " are already in this event");
         }
     }
 
@@ -78,26 +78,17 @@ public class IncludeCommand extends Command {
         } catch (IndexOutOfBoundsException e) {
             throw new CommandException("Index given is invalid");
         }
+
         if (residentList.isEmpty()) {
             throw new CommandException("No person with this information '" + residentList.getResidentsDisplay()
                     + "' could be found");
         }
+
         ArrayList<Person> toAdd = model.toPersonList(residentList);
         ArrayList<Person> currentResidents = model.getCurrentEventResidents(event.getResidentList());
-
         checkForDuplicates(toAdd, currentResidents);
 
-        String combinedDisplayString = event.getCombinedDisplayString(toAdd);
-        String combinedStorageString = event.getCombinedStorageString(toAdd);
-
-        if (new ResidentList(combinedDisplayString,
-                combinedStorageString).getResidents().size() > event.getCapacity().capacity) {
-            throw new CommandException(MESSAGE_EXCEED_CAPACITY);
-        }
-
-        Event editedEvent = new Event(event.getEventName(), event.getEventDate(), event.getEventTime(),
-                event.getVenue(), event.getCapacity(), new ResidentList(combinedDisplayString,
-                combinedStorageString));
+        Event editedEvent = createEditedEvent(event, toAdd);
         model.setEvent(event, editedEvent);
         model.updateFilteredEventList(Model.PREDICATE_SHOW_ALL_EVENTS);
 
@@ -111,5 +102,23 @@ public class IncludeCommand extends Command {
         return other == this // short circuit if same object
                 || (other instanceof IncludeCommand // instanceof handles nulls
                 && index.equals(((IncludeCommand) other).index));
+    }
+
+    /**
+     * Creates a new edited {@code Event} with the same fields as the given event, except residents which combine the
+     * current residents and the new residents from {@code toAdd}
+     */
+    public Event createEditedEvent(Event event, ArrayList<Person> toAdd) throws CommandException {
+        String combinedDisplayString = event.getCombinedDisplayString(toAdd);
+        String combinedStorageString = event.getCombinedStorageString(toAdd);
+
+        if (new ResidentList(combinedDisplayString,
+                combinedStorageString).getResidents().size() > event.getCapacity().capacity) {
+            throw new CommandException(MESSAGE_EXCEED_CAPACITY);
+        }
+
+        return new Event(event.getEventName(), event.getEventDate(), event.getEventTime(),
+                event.getVenue(), event.getCapacity(), new ResidentList(combinedDisplayString,
+                combinedStorageString));
     }
 }
