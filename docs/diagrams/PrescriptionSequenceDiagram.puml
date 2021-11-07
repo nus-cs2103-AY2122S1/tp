@@ -1,6 +1,7 @@
 @startuml
 !include style.puml
 
+<<<<<<< HEAD
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
@@ -65,4 +66,22 @@ DeletePatientCommand --> LogicManager : result
 deactivate DeletePatientCommand
 [<--LogicManager
 deactivate LogicManager
+=======
+Participant ":Logic" as logic LOGIC_COLOR
+Participant ":Model" as model MODEL_COLOR
+Participant ":Storage" as storage STORAGE_COLOR
+Participant ":JsonUtil" as jsonutil USER_COLOR
+
+
+[-> logic: execute()
+
+logic -> model : getAppointmentBook()
+model -> model : addPrescription()
+
+logic -> storage : saveAppointmentBook(appointmentBook, addressBook)
+
+
+
+storage -> jsonutil : Save JSON File
+>>>>>>> d829266c8955cf764435dd1d4a08d70fa49fb8af
 @enduml

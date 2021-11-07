@@ -14,6 +14,7 @@ if () then ([command is valid])
 else ([else])
     :Show error
     message to user;
+
 endif
 stop
 @enduml

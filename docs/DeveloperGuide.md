@@ -310,6 +310,9 @@ The Add Medical Entry feature is implemented via the `AddMedicalEntryCommand`, w
 
 Below is a sequence diagram illustrating the interactions between the `Logic` and `Model` components when the user inputs `pt ma 1 m/diabetes` command. Note that the full command string has been abbreviated to `...`.
 
+
+![Sequence diagram of Add Medical Entry Feature](diagrams/AddMedicalEntryFeatureSequenceDiagram.png)
+
 The following activity diagram summarises what happens within `AddMedicalEntryCommandParser` when the user executes an Add Medical Entry command.
 
 ![Activity diagram of Add Medical Entry Feature](diagrams/AddMedicalEntryFeatureActivityDiagram.png)
@@ -344,6 +347,9 @@ The Delete Medical Entry feature is implemented via the `DeleteMedicalEntryComma
 8. The `DeleteMedicalEntryCommand` returns a `CommandResult`, which will be returned to the `LogicManager`.
 
 Below is a sequence diagram illustrating the interactions between the `Logic` and `Model` components when the user inputs `pt md 1 i/1` command. Note that the full command string has been abbreviated to `...`.
+
+
+![Sequence diagram of Delete Medical Entry Feature](diagrams/DeleteMedicalEntryFeatureSequenceDiagram.png)
 
 The following activity diagram summarises what happens within `DeleteMedicalEntryCommandParser` when the user executes a DeleteMedicalEntry command.
 

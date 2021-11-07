@@ -1,12 +1,16 @@
 @startuml
 !include ./style.puml
-package Model{
-Class Appointment MODEL_COLOR_T3
 
+
+Package Model <<Rectangle>>{
+
+Class Appointment MODEL_COLOR_T3
 Class Prescription MODEL_COLOR_T3
+
 }
 
 Appointment "1" *--> "*"Prescription
+
 
 
 @enduml
