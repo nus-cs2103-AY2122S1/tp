@@ -14,6 +14,7 @@ package "Lesson" {
     Class Subject
     Class Homework
     Class LessonRates
+    Class OutstandingFees
 }
 
 Lesson *-up-> "cancelledDates \n *" Date
@@ -21,7 +22,8 @@ Lesson *-up-> "endDate \n 1" Date
 Lesson *-up-> "startDate \n 1" Date
 Lesson *-up-> TimeRange
 Lesson *-up-> Subject
-Lesson *-up-> LessonRates
+Lesson *-up-> "1" LessonRates
+Lesson *-up-> "1" OutstandingFees
 Lesson *-up-> "*" Homework
 
 Homework -[hidden]left-> Date

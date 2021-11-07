@@ -1,11 +1,13 @@
 @startuml
 !include ./style.puml
 
+box Logic LOGIC_COLOR_T1
 Participant ":LogicManager" as logic LOGIC_COLOR
 Participant ":AddressBookParser" as abp LOGIC_COLOR
 Participant "u:UndoCommand" as u LOGIC_COLOR
 Participant ":UndoRedoStack" as urs LOGIC_COLOR
 Participant "x:XYZCommand" as x LOGIC_COLOR
+end box
 
 [-> logic : execute("undo")
 activate logic

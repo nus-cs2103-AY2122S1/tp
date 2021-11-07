@@ -19,7 +19,9 @@ Given below are my contributions to the project.
   * Justification: This feature allows user to be able to select students to view their lessons without having to use the mouse. This isolates the lessons with respect to the student for tutors to manage the lessons of each student better.
   * Highlights: This enhancement required a good understanding of the UI and how to incorporate a new component to the existing UI of the application.
 
-* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/#breakdown=true&search=eeliana) (Relevant pull requests [\#25](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/25), [\#89](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/89), [\#118](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/118), [\#184](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/184), [\#186](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/186), [\#250](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/250))
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=eeliana&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&zFR=false&tabAuthor=eeliana&tabRepo=AY2122S1-CS2103T-F13-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false) 
+  
+(Relevant pull requests [\#25](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/25), [\#89](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/89), [\#118](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/118), [\#184](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/184), [\#186](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/186), [\#250](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/250))
 
 * **Project management**:
   * Managed releases `v1.2` (1 release) on GitHub
@@ -59,7 +61,7 @@ Minor contributions:<br>
 The following contributions listed are made with the help of my teammates and their valuable contributions.
 
 Major contributions:<br>
-* Majority of the [Lesson Management](../DeveloperGuide.md#lesson-management-features) section
+* Majority of the [Lesson management features](../DeveloperGuide.md#lesson-management-features) section
 * [Manual Testing - Adding a lesson](../DeveloperGuide.md#adding-a-lesson)
 * [Manual Testing - Editing a lesson of a student](../DeveloperGuide.md#editing-a-lesson-of-a-student)
 * [Manual Testing - Deleting a lesson from a student](../DeveloperGuide.md#deleting-a-lesson-from-a-student)
