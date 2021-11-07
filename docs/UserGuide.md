@@ -83,7 +83,7 @@ AniList currently supports some hotkeys to allow for ease of use for CLI users.
 
 <div markdown="block" class="alert alert-info">
 
-* The hotkeys only work when the focus is on the main window. The hotkey for closing the statistics window is an exception as it can also be used when the focus is on the stats window
+* The hotkeys only work when the focus is on the main window. The hotkey for closing the statistics window is an exception as it can only be used when the focus is on the stats window
 
 </div>
 
@@ -99,8 +99,9 @@ Squid Girl Theme           |  Wonder Egg Priority Theme
 
 ___
 
-* **Tab Switching:** `CTRL-S` and `CTRL-D`. To cycle through the tabs to the right, use `CTRL-D`. To cycle through the tabs to the left, use `CTRL-S`.
+<div style="page-break-after: always;"></div>
 
+* **Tab Switching:** `CTRL-S` and `CTRL-D`. To cycle through the tabs to the right, use `CTRL-D`. To cycle through the tabs to the left, use `CTRL-S`.
 
 All Tab  |  Watching Tab
 :-------------------------:|:-------------------------:
@@ -112,7 +113,7 @@ To Watch Tab           |  Finished Tab
 
 ---
 
-* **Stats Window** `CTRL-Q` To close the statistics window.
+* **Closing Stats Window** `CTRL-Q` To close the statistics window.
 
 ___
 
@@ -460,6 +461,8 @@ Stats Window           |
 :-------------------------:|
 ![](images/UG-images/stats2.png)  |
 
+<div style="page-break-after: always;"></div>
+
 Main Window when the Stats Window is on display |
 :-------------------------:|
 ![](images/UG-images/stats1.JPG)  |
@@ -525,6 +528,8 @@ ___
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 | Command | Usage |
 | :--------: | -------- |
 | [add](#adding-an-anime-add)     | `add n/NAME [e/EPISODE] [s/STATUS] [g/GENRE1] [g/GENRE2] ...` |
@@ -573,7 +578,7 @@ ___
 <div style="page-break-after: always;"></div>
 
 ## List of Available Genres
-These are the current list of available Genres in the genrelist:
+These are the current list of available Genres in the genre list:
 *  Action
 *  Adventure
 *  Comedy
