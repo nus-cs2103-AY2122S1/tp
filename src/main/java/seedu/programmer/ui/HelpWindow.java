@@ -16,16 +16,16 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 /**
- * Controller for a help page
+ * Controller for a help window
  */
 public class HelpWindow extends PopupWindow {
 
     public static final String USER_GUIDE_URL = "https://ay2122s1-cs2103-f09-3.github.io/tp/UserGuide.html";
     public static final String HELP_MESSAGE = "Full user guide: " + USER_GUIDE_URL;
     private static final String DESCRIPTION = "Here's a list of ProgrammerError's features:";
-    public static final int FEATURE_COL_WIDTH = 1200;
 
     private static final String FXML = "HelpWindow.fxml";
+    private static final int FEATURE_COL_WIDTH = 1200;
     private static final Double FRACTION_OF_WINDOW = 0.95;
     private static final double HELP_WINDOW_WIDTH = Screen.getPrimary().getBounds().getWidth() * FRACTION_OF_WINDOW;
 
