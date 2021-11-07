@@ -45,12 +45,14 @@ deactivate AddressBookParser
 
 LogicManager -> ViewShiftCommand : execute()
 
-
-
 activate ViewShiftCommand
+ref over ViewShiftCommand : View Shift Command Execution
+
 note right  : Refer to the View Shift Command Execution \nfor details on this function
 
 ViewShiftCommand --> LogicManager
+
+
 deactivate ViewShiftCommand
 
 [<--LogicManager
