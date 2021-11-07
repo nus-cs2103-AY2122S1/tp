@@ -1465,16 +1465,9 @@ testers are expected to do more *exploratory* testing.
 
 --------------------------------------------------------------------------------------------------------------------
 
-[comment]: <> (TODO)
 ## **Effort**
 Our team has put in a significant amount of effort into making our application cater to the needs of CS2103/T Teaching Assistants. While AB3 had only dealt with the `Person` entity type, tApp stores data of 3 different entity types, `Task`, `Student` and `Group`.
-Implementing this required 
+Implementing this required a deep understanding of how AB3 was structured and implemented, in order to expand on its functionality.
+Moreover, classes such as `Student` and `Group` interact in order to provide more utility to the user, adding another layer of difficulty to the implementation.
 
-Moreover, classes such as `Student` and `Group` interact in order to provide more utility to the user, adding another layer of difficulty to creating out application.
-
-
-We highly recommend adding an appendix named Effort that evaluators can use to estimate the total project effort.
-Keep it brief (~1 page)
-Explain the difficulty level, challenges faced, effort required, and achievements of the project.
-If a significant part (e.g., more than 5%) of the effort was saved through reuse, mention what you reused and how it affected the effort e.g., the feature X is implemented using library Foo -- our work on adapting Foo to our product is contained in class FooAdapter.java.
-Use AB3 as a reference point e.g., you can explain that while AB3 deals with only one entity type, your project was harder because it deals with multiple entity types.
+In addition, our group has added many commands in addition to the ones implemented by AB3. While AB3 had a total of 8 available commands, tApp has a total of 27 in order to accommodate for all the different entity types and features. This required significant time and effort, as well as a good understanding of the `Logic` component of AB3.
