@@ -139,7 +139,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Map<Contact, Integer> getCommissionPerContact() {
+    public Map<Contact, Double> getCommissionPerContact() {
         return siasa.getCommissionPerContact();
     }
 
@@ -181,7 +181,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public int getTotalCommission() {
+    public double getTotalCommission() {
         return siasa.getTotalCommission();
     }
 

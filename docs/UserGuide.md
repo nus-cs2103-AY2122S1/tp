@@ -105,6 +105,29 @@ Examples:
 
 ### Policy Management
 
+#### Common - Policy Details
+* **Name** - `n/POLICY_NAME`
+  * Should be unique
+* **Payment structure of the policy** -`p/PMT_AMOUNT_CENTS [PMTS_PER_YR] [NUM_OF_PMT]`:
+
+| Payment Type                                       | Sample Command| Represents                                     |
+|----------------------------------------------------|-----------------------|---------------------------------------------|
+| Single lump sum                                    | /p 10000               | Single payment of $100                      |
+| X payments per year, indefinite number of payments | /p 10000 12            | Monthly payments of $100, indefinitely       |
+| X payments per year, definite number of payments   | /p 10000 12 120        | Monthly payments of $100, 120 total payments |
+
+* **Commission structure of the policy** - `c/COMMISSION_% NUM_OF_COMM`:
+  * Receives a percentage commission (`COMMISSION_%`) from the payment amount (`PMT_AMOUNT_CENTS`) for the first number of payments (`NUM_OF_COMM`) in the payment structure.
+  * `COMMISSION_%`: percentage of each payment that goes to commission
+  * `NUM_OF_COMM`: the number of payments that the agent will receive commission for
+  *  E.g. `/c 6 5` Receives 6% commission for the first 5 payments.
+* **Contact that the policy belongs to** - `cl/CONTACT_INDEX`
+  * Current index of that contact in the contact list.
+  * The index **must be a positive integer** 1, 2, 3, …​
+* **Coverage expiry** - `e/COVERAGE_EXPIRY_DATE`
+  * Date that the coverage expires in YYYY-MM-DD format, optional.
+* **Tags** - `t/TAG...`
+  * can have more than one tag
 #### Creating A Policy : `addpolicy`
 
 Adds a policy to the policy list.
@@ -117,42 +140,19 @@ cl/CONTACT_INDEX [e/COVERAGE_EXPIRY_DATE] [t/TAG]…​`
 A policy should not have less payments than the number of commissions, since every commission is tied to one payment!
 </div>
 
-* Payment structure of the policy -`p/PMT_AMOUNT_CENTS [PMTS_PER_YR] [NUM_OF_PMT]`:
-
-| Payment Type                                       | Payment Structure tag | Represents                                     |
-|----------------------------------------------------|-----------------------|---------------------------------------------|
-| Single lump sum                                    | /p 10000               | Single payment of $100                      |
-| X payments per year, indefinite number of payments | /p 10000 12            | Monthly payments of $100, indefinitely       |
-| X payments per year, definite number of payments   | /p 10000 12 120        | Monthly payments of $100, 120 total payments |
-
-* Commission structure of the policy - `c/COMMISSION_% NUM_OF_COMM`:
-  * Receives a percentage commission (`COMMISSION_%`) from the payment amount (`PMT_AMOUNT_CENTS`) for the first number of payments (`NUM_OF_COMM`) in the payment structure.
-  * `COMMISSION_%`: percentage of each payment that goes to commission
-  * `NUM_OF_COMM`: the number of payments that the agent will receive commission for
-  *  E.g. `/c 6 5` Receives 6% commission for the first 5 payments.
-* `CONTACT_INDEX` refers to the current index of the contact in the contact list that this policy belongs to.
-* `COVERAGE_EXPIRY_DATE` refers to the date that the coverage expires in YYYY-MM-DD format, optional.
-
-
 Examples:
-* `addpolicy n/full life p/10050 c/10 1 cl/1 e/2021-12-12 t/Aviva` Adds a policy named full life,
+* `addpolicy n/Aviva full life plan B p/10050 c/10 1 cl/1 e/2021-12-12 t/Life Insurance` Adds a policy named Aviva full life plan B,
 single payment of $100.50, commission of 10% on first payment, belonging to the contact with index 1,
-coverage expires on 2021-12-12, tagged Aviva.
-* `addpolicy n/critical illness p/30000 4 120 c/10 30 cl/2` Adds a policy titled critical illness,
+coverage expires on 2021-12-12, tagged Life Insurance.
+* `addpolicy n/AIA diabetes care  p/30000 4 120 c/10 30 cl/2` Adds a policy titled AIA diabetes care,
 quarterly payments of $300, 120 total payments, commission of 10% on the first 30 payments,
 belonging to the contact with index 2.
-
-#### Listing All Policies : `allpolicy`
-
-Shows a list of all policies.
-
-Format: `allpolicy`
 
 #### Editing a policy : `editpolicy`
 
 Edits an existing policy in the application.
 
-Format: `editpolicy INDEX [n/POLICY_NAME] [p/PMT_AMOUNT_CENTS [PMTS_PER_YR] [NUM_OF_PMTs]] [c/COMMISSION_% NUM_OF_COMM] 
+Format: `editpolicy INDEX [n/POLICY_NAME] [p/PMT_AMOUNT_CENTS [PMTS_PER_YR] [NUM_OF_PMTs]] [c/COMMISSION_% NUM_OF_COMM]
 [cl/CONTACT_INDEX] [e/COVERAGE_EXPIRY_DATE] [t/TAG]…​`
 
 <div markdown="block" class="alert alert-warning">
@@ -160,7 +160,7 @@ Format: `editpolicy INDEX [n/POLICY_NAME] [p/PMT_AMOUNT_CENTS [PMTS_PER_YR] [NUM
 Careful changing the number of commissions or payments. A policy should not have less payments than the number of commissions.
 </div>
 
-* Edits the policy at the specified `INDEX`. The index refers to the index number shown in the displayed policy list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the policy at the specified `INDEX`. The index refers to the index number shown in the displayed policy list. 
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the policy will be removed i.e adding of tags is not cumulative.
@@ -168,9 +168,15 @@ Careful changing the number of commissions or payments. A policy should not have
   specifying any tags after it.
 
 Examples:
-* `editpolicy 1 p/1000 12 c/20 5` Edits the payment structure to be indefinite monthly payments of $10 and 
-the commission structure to be 20% for the first 5 payments.
-* `editpolicy 2 n/Life Policy t/` Edits the name of the 2nd policy to be `Life Policy` and clears all existing tags.
+* `editpolicy 1 p/1000 12 c/20 5` Edits the payment structure to be indefinite monthly payments of $10 and
+  the commission structure to be 20% for the first 5 payments.
+* `editpolicy 2 n/AIA Gold Health t/` Edits the name of the 2nd policy to be `AIA Gold Health` and clears all existing tags.
+
+#### Listing All Policies : `allpolicy`
+
+Shows a list of all policies.
+
+Format: `allpolicy`
 
 #### Deleting A Policy : `deletepolicy`
 
