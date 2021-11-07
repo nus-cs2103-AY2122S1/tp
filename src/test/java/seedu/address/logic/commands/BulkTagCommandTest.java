@@ -62,8 +62,7 @@ public class BulkTagCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(), new UserPrefs());
         expectedModel.setAddressBook(new AddressBook());
-        System.out.println(model.equals(expectedModel));
-
+        
         model.addPerson(new PersonBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY)
                 .withEmail(VALID_EMAIL_AMY)
