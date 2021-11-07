@@ -179,8 +179,10 @@ How the parsing works:
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/plannermd/model/Model.java)
 
 ![ModelClassDiagram](images/ModelClassDiagram.png)
+
 Here's the class diagram of the `Person` component within `Model`:
 ![PersonClassDiagram](images/PersonClassDiagram.png)
+
 Heres the class diagram of the `Appointment` component within `Model`:
 ![AppointmentClassDiagram](images/AppointmentClassDiagram.png)
 
@@ -215,7 +217,7 @@ Classes used by multiple components are in the `seedu.plannermd.commons` package
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Stateful PlannerMd <a name="stateful-plannermd"/>
+### Stateful PlannerMD <a name="stateful-plannermd"/>
 With the introduction of two types of `Person` (`Patient` and `Doctor`) and their respective lists,
 a state is used to determine which list should be interacted with.
 
@@ -243,7 +245,7 @@ The Activity Diagram below illustrates the execution flow when the user executes
    * If the currently displayed tab is the doctor tab, it is toggled to the patient tab.
 3. The GUI displays a success message.
 
-#### Execution
+#### Implementation
 The Sequence Diagram below illustrates the interactions within the Logic component for the execute("toggle") API call in Patient state.
 
 ![ToggleCommandSequenceDiagram](images/ToggleCommandSequenceDiagram.png)
@@ -255,7 +257,6 @@ The Sequence Diagram below illustrates the interactions within the Logic compone
    3.2. A `CommandResult` instance is instantiated with a success message.
 3. The `CommandResult` is then returned
 
-#### Result
 The GUI updates the list according to the current state(eg. displays patient list if `Model.state` is `State.Patient`) and display the success message given by `CommandResult`.
 
 ### Remark <a name="remark"/>
@@ -283,7 +284,7 @@ The activity Diagram below illustrates the execution flow when the user executes
     * If remark input is not empty, effectively deletes the remark, generate successful edit remark message.
 4. The GUI displays a success message.
 
-#### Execution
+#### Implementation
 The Sequence Diagram below illustrates the interactions within the Logic component for the execute("remark 1 r/bad cough") API call. <br>
 
 ![RemarkSequenceDiagram](images/RemarkSequenceDiagram.png)
@@ -297,7 +298,7 @@ The Sequence Diagram below illustrates the interactions within the Logic compone
    3.2. A `CommandResult` instance is instantiated with a success message.
 4. The `CommandResult` is then returned
 
-#### Result
+
 The GUI updates the patient record in the displayed list and displays a success message.
 
 ### Propagating Person Changes to Appointment List  <a name="propagating-person-changes-to-appointment-list"/>
@@ -308,7 +309,7 @@ changes in patients and doctors through user command or otherwise needs to be pr
 * When patients or doctor details are changed, these changes will be reflected in appointments they are a part of.
   * `RemarkCommand`, `EditCommand` and `TagCommand`
 
-#### Execution
+#### Implementation
 The Sequence Diagram below illustrates the interactions within the Model component for the deletePatient(target) API call.
 
 ![PropagateChangesDiagram](images/PropagateChangesDiagram.png)
@@ -325,7 +326,7 @@ The Sequence Diagram below illustrates the interactions within the Model compone
 2. `UniqueAppointmentList::editAppointmentWithPerson` is called <br>
     * Loops through `UniqueAppointmentList` and replaces `appointment` which references `patientToEdit` with a new `editedAppointment` which has the same fields as `appointment` but references `editedPatient`.
     
-#### Result
+
 GUI is updated to display the propagated changes in the appointment list.
 
 #### Design considerations
@@ -410,7 +411,7 @@ After that, the filter is used to create a `FilterAppointmentCommand`. When exec
 
 Given below, is an example of a filter appointment command with the patient keywords and start date parameter provided.
 
-A clearer view of this sequence diagram can be found [here](images/AppointmentFilterSequenceDiagram.png).
+A clearer view of this sequence diagram can be found [here](https://github.com/AY2122S1-CS2103T-T11-3/tp/blob/master/docs/images/AppointmentFilterSequenceDiagram.png).
 
 ![FilterAppointmentCommand](images/AppointmentFilterSequenceDiagram.png)
 
@@ -785,6 +786,56 @@ These are some use cases to familiarise with the flow of our application:
     * 3c1. PlannerMD shows an error message and lists the clashing appointment(s).
 
       Use case resumes at step 2.
+    
+**Use case: Filtering appointments**
+
+**MSS**
+1. Clinic receptionist wishes to filter through all appointments.
+2. Clinic receptionist enters the parameters to filter through the appointment records.
+3. The filtered results are displayed in the appointment list.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The user does not specify any parameters when filtering through the appointment records.
+  
+    * 2a1. All appointments in the appointment records are displayed in the appointment list.
+    
+        Use case ends.
+    
+* 2b. The users enters a parameter that is invalid.
+  
+    * 2b1. An error message is shown, informing the user of an invalid parameter.
+    * 2b2. User enters the new parameters.
+    
+        Steps 2b1-2b2 are repeated until the new parameters entered are valid.
+      
+        Use case resumes from step 3.  
+    
+**Use case: Listing today's appointments**
+
+**MSS**
+1. Clinic receptionists wishes to view all of today's appointments.
+2. Clinic receptionists enters the `appt -l` command.
+3. All of today's appointments are displayed in the appointment list.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given command is invalid.
+
+    * 2a1. An error message is shown to the user.
+  
+        Use case resumes at step 2.
+    
+* 2b. There are no appointments for the current day.
+
+    * 2b1. A message is shown informing the user that there are no appointments for the current day.
+    
+        Use case ends.
+
 
 ### Non-Functional Requirements  <a name="nfr"/>
 
@@ -943,6 +994,38 @@ testers are expected to do more *exploratory* testing.
 
 ### Finding a patient <a name="find-patient-manual-testing"/>
 
+Prerequisites: The tests for finding patients uses the sample data from `SampleDataUtil#getSamplePatients`. This is the sample data loaded at initial launch of the application, or in the absence of the `data/plannermd.json` file.
+
+1. Finding patients while all patients are being shown
+
+    1. Prerequisites:
+        1. Ensure the active tab is the "Patients" tab, else use the `toggle` command to toggle to the "Patients" tab. 
+        1. List all patients using the `list` command. Multiple patients in the list.
+    
+    1. Test case: `find Aaron`<br>
+       Expected: Patient list shows only one patient "Aaron Yeoh". Status message shown says "1 patients listed!".
+
+    1. Test case: `find aaron`<br>
+       Expected: `find` command is case-insensitive. Patient list shows only one patient "Aaron Yeoh". Status message shown says "1 patients listed!".
+
+    1. Test case: `find aaron Bobby`<br>
+       Expected: `find` command is able to search multiple patients using multiple keywords. Patient list shows two patients "Aaron Yeoh" and "Bobby Yu". Status message shown says "2 patients listed!".
+
+    1. Test case: `find aar`<br>
+       Expected: Patient list shows "No patients found". Status message shown says "0 patients listed!".
+       
+    1. Test case: `find Alex`<br>
+       Expected: Patient list shows "No patients found". Status message shown says "0 patients listed!".
+
+2. Finding patients while some patients are being shown
+
+    2. Prerequisites:
+        2. Ensure the active tab is the "Patients" tab, else use the `toggle` command to toggle to the "Patients" tab.
+        2. List all patients using the `list` command. Multiple patients in the list.
+        2. List some patients using `find xyz` (xyz is the name of an existing patient).
+
+    2. Test cases are similar to those above.
+
 ### Listing all patients <a name="list-patients-manual-testing"/>
 
 1. List all patients while none/some patients are being shown
@@ -954,7 +1037,84 @@ testers are expected to do more *exploratory* testing.
 
     3. Test case: `list extra-parameters`<br>
        Expected: All existing patients are listed.
+    
+### Editing a patient's remark <a name="remark-patient"/>
+1. Editing a patient's remark while all patient are being shown
 
+    1. Prerequisites: `toggle` to the `Patient` tab. List all patients using the `list` command.
+
+    2. Test case: `remark 1 r/Prefers Dr. Mok`<br>
+        1. If the first patient had no remarks initially,
+           Expected: A new remark field displaying `Prefers Dr. Mok` is added to the first patient's fields. Details of the edited contact are shown in the status message.
+        2. If the first patient had remarks initially,
+           Expected: First patient's remarks are edited to `Prefers Dr. Mok`. Details of the edited contact are shown in the status message.
+
+    3. Test case: `remark 1 r/`<br>
+       Expected: First patient's remarks are deleted and the remark field is no longer displayed for the patient. Details of the edited contact are shown in the status message.
+
+    4. Test case: `remark 0 r/Prefers Dr. Mok`<br>
+       Expected: No patient's remarks are edited. Response box displays error message: "Invalid command format! ..."
+
+    5. Other incorrect edit commands to try: `remark`, `remark x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous test case.
+
+2. Editing a patient's remark while some patients are being shown
+    1. Prerequisites: `toggle` to the `Patient` tab. List some patient using `find XYZ` (XYZ is the name of an existing patient).
+
+    2. Test cases are similar to those above.
+
+### Adding a tag to a patient <a name="add-tag-patient"/>
+1. Adding a tag to a patient while all patient are being shown
+
+    1. Prerequisites: `toggle` to the `Patient` tab. List all patients using the `list` command.
+
+    2. Test case: `tag -a 1 t/Immunocompromised`<br>
+       1. If the patient does not have a `Immunocompromised` tag
+          Expected: A new tag `Immunocompromised` is added to the first patient. Details of the edited contact are shown in the status message.
+       2. If the patient has a `Immunocompromised` tag
+          Expected: No tag is added to the patient. Response box displays error message: "The tag already exists."
+       
+    3. Test case: `tag -a 1 t/`<br>
+       Expected: No tag is added to the patient. Response box displays error message: "A tag must be provided."
+
+    4. Test case: `tag -a 0 t/Immunocompromised`<br>
+       Expected: No tag is added to any patient. Response box displays error message: "Invalid command format! ..."
+
+    5. Other incorrect edit commands to try: `tag`, `tag -a t/`, `tag -a x t/`, `tag -e`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous test case.
+
+2. Adding a tag to a patient while some patients are being shown
+    1. Prerequisites: `toggle` to the `Patient` tab. List some patient using `find XYZ` (XYZ is the name of an existing patient).
+   
+    2. Test cases are similar to those above.
+
+### Deleting a tag of a patient <a name="delete-tag-patient"/>
+1. Deleting a tag of a patient while all patient are being shown
+
+    1. Prerequisites: `toggle` to the `Patient` tab. List all patients using the `list` command.<br>
+       First patient has `Immunocompromised` tag. Tag can be added using the following command: `tag -a 1 t/Immunocompromised`.
+
+    2. Test case: `tag -d 1 t/Immunocompromised`<br>
+       Expected: First patient's `Immunocompromised` tag is deleted. Details of the edited contact are shown in the status message.
+   
+    3. Test case: `tag -d 1 t/Osteopath`<br>
+       Expected: No tag is deleted from the patient. Response box displays error message: "The tag does not exist."
+
+    4. Test case: `tag -d 1 t/`<br>
+       Expected: No tag is deleted from the patient. Response box displays error message: "A tag must be provided."
+
+    5. Test case: `tag -d 0 t/Immunocompromised`<br>
+       Expected: No tag is deleted from any patient. Response box displays error message: "Invalid command format! ..."
+
+    6. Other incorrect edit commands to try: `tag`, `tag -d t/`, `tag -d x t/`, `tag -e`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous test case.
+
+2. Deleting a tag of a patient while some patients are being shown
+    1. Prerequisites: `toggle` to the `Patient` tab. List some patient using `find XYZ` (XYZ is the name of an existing patient). <br>
+       First patient has `Immunocompromised` tag. Tag can be added using the following command: `tag -a 1 t/Immunocompromised`.
+   
+    2. Test cases are similar to those above.
+    
 ### Adding a doctor <a name="add-doctor-manual-testing"/>
 1. Adding a doctor
     1. Prerequisites: `toggle` to the `Doctors` tab. The following doctor must already exists:
@@ -1045,7 +1205,39 @@ testers are expected to do more *exploratory* testing.
 
     2. Test cases are similar to those above.
 
-### Finding a doctor <a name="find-doctor-manual-testing"/>
+### Finding doctors <a name="find-doctor"/>
+
+Prerequisites: The tests for finding doctors uses the sample data from `SampleDataUtil#getSampleDoctors`. This is the sample data loaded at initial launch of the application, or in the absence of the `data/plannermd.json` file.
+
+1. Finding doctors while all doctors are being shown
+
+    1. Prerequisites:
+        1. Ensure the active tab is the "Doctors" tab, else use the `toggle` command to toggle to the "Doctors" tab.
+        1. List all doctors using the `list` command. Multiple doctors in the list.
+
+    1. Test case: `find Alex`<br>
+       Expected: Doctor list shows only one doctor "Alex Yeoh". Status message shown says "1 doctors listed!".
+
+    1. Test case: `find alex`<br>
+       Expected: `find` command is case-insensitive. Doctor list shows only one doctor "Alex Yeoh". Status message shown says "1 doctors listed!".
+
+    1. Test case: `find alex bernice`<br>
+       Expected: `find` command is able to search multiple doctors using multiple keywords. Doctor list shows two doctors "Alex Yeoh" and "Bernice Yu". Status message shown says "2 doctors listed!".
+
+    1. Test case: `find ale`<br>
+       Expected: Doctor list shows "No doctors found". Status message shown says "0 doctors listed!".
+
+    1. Test case: `find Aaron`<br>
+       Expected: Doctor list shows "No doctors found". Status message shown says "0 doctors listed!".
+
+2. Finding doctors while some doctors are being shown
+
+    2. Prerequisites:
+        2. Ensure the active tab is the "Doctors" tab, else use the `toggle` command to toggle to the "Doctors" tab.
+        2. List all doctors using the `list` command. Multiple doctors in the list.
+        2. List some doctors using `find xyz` (xyz is the name of an existing doctor).
+
+    2. Test cases are similar to those above.
 
 ### Listing all doctors <a name="list-doctors-manual-testing"/>
 
@@ -1058,6 +1250,81 @@ testers are expected to do more *exploratory* testing.
 
     3. Test case: `list extra-parameters`<br>
        Expected: All existing doctors are listed.
+
+### Editing a doctor's remark <a name="remark-doctor"/>
+1. Editing a doctor's remark while all doctors are being shown
+
+    1. Prerequisites: `toggle` to the `Doctors` tab. List all doctors using the `list` command.
+
+    2. Test case: `remark 1 r/Comes at 8am`<br>
+       Expected: First doctor's remarks are edited to `Orthopedic`. Details of the edited contact are shown in the status message.
+   
+    3. Test case: `remark 1 r/`<br>
+       Expected: First doctor's remarks are deleted. Details of the edited contact are shown in the status message.
+
+    4. Test case: `remark 0 r/Comes at 8am`<br>
+       Expected: No doctor's remarks are edited. Response box displays error message: "Invalid command format! ..."
+
+    5. Other incorrect edit commands to try: `remark`, `remark x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous test case.
+
+2. Editing a doctor while some doctors are being shown
+    1. Prerequisites: `toggle` to the `Doctors` tab. List some doctors using `find XYZ` (XYZ is the name of an existing doctor).
+
+    2. Test cases are similar to those above.
+
+### Adding a tag to a doctor <a name="add-tag-doctor"/>
+1. Adding a tag to a doctor while all doctors are being shown
+
+    1. Prerequisites: `toggle` to the `Doctor` tab. List all doctor using the `list` command.
+
+    2. Test case: `tag -a 1 t/Pediatrician`<br>
+        1. If the first doctor does not have a `Pediatrician` tag
+           Expected: A new tag `Pediatrician` is added to the first doctor. Details of the edited contact are shown in the status message.
+        2. If the first doctor has a `Pediatrician` tag
+           Expected: No tag is added to the doctor. Response box displays error message: "The tag already exists."
+
+    3. Test case: `tag -a 1 t/`<br>
+       Expected: No tag is added to the doctor. Response box displays error message: "A tag must be provided."
+
+    4. Test case: `tag -a 0 t/Pediatrician`<br>
+       Expected: No tag is added to any doctor. Response box displays error message: "Invalid command format! ..."
+
+    5. Other incorrect edit commands to try: `tag`, `tag -a t/`, `tag -a x t/`, `tag -e`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous test case.
+
+2. Adding a tag to a doctor while some doctors are being shown
+    1. Prerequisites: `toggle` to the `Patient` tab. List some doctor using `find XYZ` (XYZ is the name of an existing doctor).
+      
+    2. Test cases are similar to those above.
+
+### Deleting a tag of a doctor <a name="delete-tag-doctor"/>
+1. Deleting a tag of a doctor while all doctors are being shown
+
+    1. Prerequisites: `toggle` to the `Doctor` tab. List all doctors using the `list` command.<br>
+       First doctor has `Pediatrician` tag. Tag can be added using the following command: `tag -a 1 t/Pediatrician`.
+
+    2. Test case: `tag -d 1 t/Pediatrician`<br>
+       Expected: First doctor's `Pediatrician` tag is deleted. Details of the edited contact are shown in the status message.
+   
+    3. Test case: `tag -d 1 t/Osteopath`<br>
+       Expected: No tag is deleted from the doctor. Response box displays error message: "The tag does not exist."
+
+    4. Test case: `tag -d 1 t/`<br>
+       Expected: No tag is deleted from the doctor. Response box displays error message: "A tag must be provided."
+
+    5. Test case: `tag -d 0 t/Pediatrician`<br>
+       Expected: No tag is deleted from any doctor. Response box displays error message: "Invalid command format! ..."
+
+    6. Other incorrect edit commands to try: `tag`, `tag -d t/`, `tag -d x t/`, `tag -e`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous test case.
+
+2. Deleting a tag of a doctor while some doctors are being shown
+    1. Prerequisites: `toggle` to the `Patient` tab. List some doctor using `find XYZ` (XYZ is the name of an existing doctor). <br>
+       First doctor has `Pediatrician` tag. Tag can be added using the following command: `tag -a 1 t/Pediatrician`.
+
+    2. Test cases are similar to those above.
+    
 
 ### Adding an appointment <a name="add-appointment-manual-testing"/>
 1. Add an appointment 
@@ -1164,14 +1431,90 @@ testers are expected to do more *exploratory* testing.
 
 ### Filtering all appointments <a name="filter-all-manual-testing"/>
 
-### Filtering upcoming appointments <a name="filter-upcoming-manual-testing"/>
+1. Searches through all appointment based on the filter parameters provided.
+   
+    1. Prerequisites: None, but if there are no appointments added, upcoming filter searches will not return any results.
+
+    2. Test case: `appt -f`<br>
+       Expected: All appointments in the appointment records will be listed in the appointment list.
+
+    3. Test case: `appt -f p/Aaron`<br>
+       Expected: Searches for appointments that has a patient with a name that contains the keyword `Aaron` in it and displays the results in the appointment list.
+       
+    4. Test case: `appt -f p/Aaron Yeoh`<br>
+        Expected: Searches for appointments that has a patient with a name that contains the keyword `Aaron` **or** `Yeoh` in it and displays the results in the appointment list.
+
+    5. Test case: `appt -f d/Irfan`<br>
+       Expected: Searches for appointments that has a doctor with a name that contains the keyword `Irfan` in it and displays the results in the appointment list.
+       
+    6. Test case: `appt -f d/Irfan Ibrahim`<br>
+        Expected: Searches for appointments that has a doctor with a name that contains the keyword `Irfan` **or** `Ibrahim` in it and displays the results in the appointment list.
+        
+    7. Test case: `appt -f s/01/11/2021`<br>
+        Expected: Searches for appointments that has a starting date after `01/11/2021` [inclusive] and displays the results in the appointment list.
+    
+    8. Test case: `appt -f e/30/11/2021`<br>
+        Expected: Searches for appointments that has a starting date before `31/11/2021` [inclusive] and displays the results in the appointment list.
+    
+    9. Test case: `appt -f p/Aaron e/Irfan s/01/11/2021 e/30/11/2021`<br>
+        Expected: Searches for appointments that has a patient with a name that contains the keyword `Aaron` in it, a doctor with a name that contains the keyword `Irfan` in it and has a starting date after `01/11/2021` [inclusive] and before `30/11/2021` [inclusive].
+       
+    10. Test case: `appt -f s/01/14/2021`<br>
+        Expected: Displays an error message telling the user that the date entered has to be valid.
+        
+    11. Test case: `appt -f d/`<br>
+        Expected: Displays an error message telling the user that a specified parameter cannot be empty.
+
+
+### Filtering upcoming appointments <a name="filter-upcoming-appointments"/>
+
+1. Searches for upcoming appointment based on the filter parameters provided. An appointment is considered upcoming if it has a date and time greater or equal than the current date and time.
+   
+    1. Prerequisites: None, but if there are no upcoming appointments in the appointment records, upcoming filter searches will not return any results.
+       
+    2. Test case: `appt -u`<br>
+       Expected: All upcoming appointments in the appointment records will be listed in the appointment list.
+       
+    3. Test case: `appt -u p/Aaron`<br>
+       Expected: Searches for upcoming appointments that has a patient name with `aaron` in it and displays the results in the appointment list.
+
+    4. Test case: `appt -u p/Aaron Yeoh`<br>
+      Expected: Searches for upcoming appointments that has a patient with a name that contains the keyword `Aaron` **or** `Yeoh` in it and displays the results in the appointment list.
+      
+    5. Test case: `appt -u d/Irfan`<br>
+       Expected: Searches for appointments that has a patient name with `aaron` in it and displays the results in the appointment list.
+
+    6. Test case: `appt -u d/Irfan Ibrahim`<br>
+      Expected: Searches for appointments that has a doctor with a name that contains the keyword `Irfan` **or** `Ibrahim` in it and displays the results in the appointment list.
+      
+    7. Test case: `appt -u d/Aaron s/21/10/2021`<br>
+        Expected: An error is displayed telling the user that a `FilterUpcomingAppointmentCommand` should not have any date parameters in it.
+
+    8. Test case: `appt -u d/`<br>
+       Expected: Displays an error message telling the user that a specified parameter cannot be empty.
 
 ### Listing all appointments for today <a name="list-all-manual-testing"/>
 
+1. Displays all appointments for the current day in the appointment list.
+   
+    1. Test case: `appt -l` when there are no appointments for the current day (when `appt -f` does not show any appointment for the current day)<br>
+        Expected: No appointments are displayed in the appointment list.
+       
+    2. Test case: `appt -l` when there are appointments for the current day<br>
+        Expected: All of today's appointments are displayed in the appointment list
+
 ### Saving data  <a name="saving-data"/>
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing data files
+   
+    1. Prerequisites: If there is a plannermd.json file in the data folder at the root of the application directory, delete the plannermd.json file.
+    
+    1. Test case: Double-click on the jar file to run the application.
+        Expected: Application runs and loads the sample data from `SampleDataUtil#getSamplePlannerMd`.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+1. Dealing with corrupted data files
 
-1. _{ more test cases …​ }_
+    1. Prerequisites: Modify the plannermd.json file to be an illegal format, such as deleting the "name" field of a patient.
+    
+    1. Test case: Double-click on the jar file to run the application.
+       Expected: Application runs and has no data on initial load. Running the next command overwrites the current corrupted plannermd.json file.
