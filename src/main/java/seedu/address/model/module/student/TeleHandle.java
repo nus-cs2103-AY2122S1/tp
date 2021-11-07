@@ -43,7 +43,7 @@ public class TeleHandle {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof TeleHandle // instanceof handles nulls
-                && value.equals(((TeleHandle) other).value)); // state check
+                && value.equalsIgnoreCase(((TeleHandle) other).value)); // state check
     }
 
     @Override
