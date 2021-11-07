@@ -1,0 +1,48 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":MlistCommandParser" as MlistCommandParser LOGIC_COLOR
+participant "ml:MlistCommand" as MlistCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "model:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("mlist /e 1 /att")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("mlist /e 1 /att")
+activate AddressBookParser
+
+create MlistCommandParser
+AddressBookParser -> MlistCommandParser
+activate MlistCommandParser
+
+MlistCommandParser --> AddressBookParser
+deactivate MlistCommandParser
+
+AddressBookParser -> MlistCommandParser : parse("/e 1 /att")
+activate MlistCommandParser
+
+create MlistCommand
+MlistCommandParser -> MlistCommand
+activate MlistCommand
+
+MlistCommand --> MlistCommandParser : ml
+deactivate MlistCommand
+
+MlistCommandParser --> AddressBookParser : ml
+deactivate MlistCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+MlistCommandParser -[hidden]-> AddressBookParser
+destroy MlistCommandParser
+
+AddressBookParser --> LogicManager : ml
+deactivate AddressBookParser
+
+ref over LogicManager, Model : MlistCommand Execution
+@enduml

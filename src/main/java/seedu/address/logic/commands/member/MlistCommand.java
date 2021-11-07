@@ -81,8 +81,6 @@ public class MlistCommand extends Command {
             model.setCurrentEvent(eventToList);
             model.updateFilteredMemberList(member -> memberList.contains(member));
 
-            String attend;
-
             return new CommandResult(String.format(MESSAGE_SUCCESS, model.getFilteredMemberList().size(),
                     "for the event: " + eventToList));
         }

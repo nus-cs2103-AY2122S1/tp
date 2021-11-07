@@ -1,0 +1,58 @@
+@startuml
+!include style.puml
+mainframe **sd** MlistCommand Execution
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":MlistCommand" as MlistCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "model:Model" as Model MODEL_COLOR
+participant "eventToList:Event" as Event MODEL_COLOR
+end box
+
+LogicManager -> MlistCommand : execute(:Model)
+activate MlistCommand
+
+MlistCommand -> Model : getFilteredEventList()
+activate Model
+
+Model --> MlistCommand : filteredEventList
+deactivate Model
+
+MlistCommand --> Event : getParticipants(true)
+activate Event
+
+Event --> MlistCommand : memberList
+deactivate Event
+
+MlistCommand -> Model : setCurrentEvent(eventToList)
+activate Model
+
+MlistCommand -> Model : updateFilteredMemberList(...)
+note right
+    the ... implies the predicate
+    used to filter only members in
+    the participantList provided
+end note
+Model --> MlistCommand
+deactivate Model
+
+create CommandResult
+MlistCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> MlistCommand
+deactivate CommandResult
+
+MlistCommand --> LogicManager : result
+deactivate MlistCommand
+
+MlistCommand -[hidden]-> LogicManager
+destroy MlistCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

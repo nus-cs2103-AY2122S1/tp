@@ -784,3 +784,18 @@ The difficulty lies in the increased complexity of the application as it grows. 
 We also faced difficulties in deciding our architecture for our `Model` component, as we had different iterations of possible UML class diagram of the proposed `Model` component ([overview idea](https://ay2122s1-cs2103t-t15-2.github.io/tp/images/modeloverview.png), [v1](https://ay2122s1-cs2103t-t15-2.github.io/tp/images/modelv1.png), [v2](https://ay2122s1-cs2103t-t15-2.github.io/tp/images/modelv2.png), [final version](https://ay2122s1-cs2103t-t15-2.github.io/tp/images/ModelClassDiagram.png)). At first, there was the idea that events have multiple members, but members should also have many events, and therefore they could have a many-to-many relationship. However, we realised that this was not a trivial case, as our storage uses JSON objects, which in itself is limited as it is unlike relational databases like [SQL](https://en.wikipedia.org/wiki/SQL). Therefore, having no foreign keys in such a database requires a lot of duplication of data, which we felt was unnecessary considering the simplicity of our product, hence we decided not to go forth with the idea.
 
 ### Achievements in the project
+
+* To implement the 3 columns for `Event List`, `Member List` and `Task List`, we had to learn about [SplitPane](https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/SplitPane.html) and made it such that the positions are approximately a third of the whole size and that the columns are resizable to a certain degree.
+
+* We also learnt about the property of `textwrap` to allow larger words and names to be stored and shown. The `textwrap` property also allows dynamic text wrapping with different width of the column, to ensure that the data is fully visible by the user.
+
+* The `CRUD` commands for `Event`, `Member` and `Task` were mostly referred from AB3’s `Person` commands and classes. However, some fields were created and tested by the team, such as the use of `LocalDateTime` and `LocalDate` from the Java library for `Event` and `Task` respectively, to capture the date and time parsed as string by user.
+
+* We increased user experience by color coding the tasks of members and members of events with red and green, red being undone tasks or absent members, while red being done tasks or present members who attended the event.
+
+* We enforced commands to require a space between the prefix and the parameter, to allow easier readability of parameter, and it is also more intuitive to use `/prefix` commands with `/` before the prefix, similar to chatbots and UNIX commands usually have the symbol before the flag or prefix.
+
+* We showed the number of members / tasks / events listed for most listing and finding command, except those commands which show the full list.
+
+* We customized our UI to produce blue highlighting of cards if you click on them for selecting of a specific card if the list gets very long.
+
