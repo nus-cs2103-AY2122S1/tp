@@ -35,7 +35,6 @@ public class ParserUtil {
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
-        System.out.println("empty" + trimmedIndex.isEmpty());
         if (trimmedIndex.isEmpty()) {
             throw new ParseException(MESSAGE_MISSING_INDEX);
         } else {
