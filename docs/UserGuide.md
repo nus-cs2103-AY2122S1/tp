@@ -415,6 +415,7 @@ Command aliases: `clrc` `cc`
 
 <img src="images/ClearLessonCommand.png" width="800px">
 
+<div style="page-break-after: always;"></div>
 ### Managing Data <a name="managing-data"></a>
 
 #### Saving the data <a name="saving-data"></a>
