@@ -52,6 +52,9 @@ Given below are my contributions to the project.
           (Pull requests
           [\#116](https://github.com/AY2122S1-CS2103T-W11-2/tp/pull/116)
           [\#120](https://github.com/AY2122S1-CS2103T-W11-2/tp/pull/120))
+        * Add documentation for acknowledgement, manual testing, and proposed future features
+          (Pull requests
+          [\#292](https://github.com/AY2122S1-CS2103T-W11-2/tp/pull/292))
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments):
