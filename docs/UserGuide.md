@@ -1200,7 +1200,6 @@ Mainstream OS | Windows, Linux, Unix, OS-X.
 Parameter | User input required to specify the data to be saved into the application.
 Recurring lesson | A lesson that will occur more than once in patterned intervals.
 UI | User Interface - the means by which the user and the app interact.
-UTC+8 | The UTC offset used by Singapore Standard Time (SST), 8 hours ahead of UTC. Historically also referred to as GMT+8. UTC, or Coordinated Universal Time, is the primary time standard by which the world regulates clocks and time.
 UX | User Experience - The experience a user has when using the app.
 
 <br />
