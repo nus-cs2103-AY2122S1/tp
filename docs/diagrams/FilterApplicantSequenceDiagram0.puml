@@ -1,0 +1,34 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":MrTechRecruiterParser" as MrTechRecruiterParser LOGIC_COLOR
+participant ":FilterApplicantCommandParser" as FilterApplicantCommandParser LOGIC_COLOR
+participant "d:FilterApplicantDescriptor" as FilterApplicantDescriptor LOGIC_COLOR
+participant "f:FilterApplicantCommand" as FilterApplicantCommand LOGIC_COLOR
+end box
+
+[-> LogicManager : execute()
+activate LogicManager
+
+LogicManager -> MrTechRecruiterParser : parseCommand()
+activate MrTechRecruiterParser
+
+MrTechRecruiterParser -> FilterApplicantCommandParser **
+
+MrTechRecruiterParser -> FilterApplicantCommandParser ++ : parse()
+
+FilterApplicantCommandParser -> FilterApplicantDescriptor **
+
+FilterApplicantCommandParser -> FilterApplicantCommand ** : new FilterApplicantCommand(d)
+
+FilterApplicantCommandParser -> MrTechRecruiterParser -- : f
+destroy FilterApplicantCommandParser
+
+MrTechRecruiterParser -> LogicManager -- : f
+deactivate MrTechRecruiterParser
+|||
+ref over LogicManager : execution continues
+
+@enduml

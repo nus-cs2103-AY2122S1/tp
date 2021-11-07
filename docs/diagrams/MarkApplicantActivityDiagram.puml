@@ -1,0 +1,27 @@
+@startuml
+start
+:User executes command;
+:Check if valid status specified;
+
+if () then ([valid status])
+    :Fetch specified applicant;
+    if () then ([applicant found])
+        :Check if new status
+        differs from current;
+        if () then ([status changed])
+            :Update applicant status;
+        else ([else])
+            :'No change to status'
+            error message shown;
+        endif
+    else ([else])
+        :'Applicant not found'
+        error message shown;
+    endif
+
+else ([else])
+    :'Invalid status'
+    error message shown;
+endif
+stop
+@enduml

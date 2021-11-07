@@ -9,7 +9,7 @@ end box
 
 box UI UI_COLOR_T1
 participant "p:PositionPieChart" as PositionPieChart UI_COLOR
-participant "d:PieChartDisplayer" as PieChartDisplayer UI_COLOR
+participant ":PieChartDisplayer" as PieChartDisplayer UI_COLOR
 end box
 
 activate VisualizePositionCommand

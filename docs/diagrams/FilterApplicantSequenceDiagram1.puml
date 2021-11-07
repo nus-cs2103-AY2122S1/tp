@@ -1,0 +1,29 @@
+@startuml
+!include style.puml
+
+mainframe **sd**  execution continues
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant "f:FilterApplicantCommand" as FilterApplicantCommand LOGIC_COLOR
+participant "d:FilterApplicantDescriptor" as FilterApplicantDescriptor LOGIC_COLOR
+participant ":FilterApplicantDescriptorVerifier" as FilterApplicantDescriptorVerifier LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "p:ApplicantMatchesFiltersPredicate" as ApplicantMatchesFiltersPredicate MODEL_COLOR
+participant "m:Model" as Model MODEL_COLOR
+end box
+[-> LogicManager : execute()
+activate LogicManager
+
+LogicManager -> FilterApplicantCommand ++ : execute(m)
+
+FilterApplicantCommand -> FilterApplicantDescriptorVerifier ** : new FilterApplicantDescriptorVerifier(m, d)
+
+FilterApplicantCommand -> ApplicantMatchesFiltersPredicate ** : new ApplicantMatchesFiltersPredicate(d)
+
+FilterApplicantCommand -> Model : updateApplicantFilteredList(p)
+deactivate FilterApplicantCommand
+
+@enduml
