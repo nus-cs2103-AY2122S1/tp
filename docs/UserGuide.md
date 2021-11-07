@@ -576,6 +576,8 @@ Examples:
 * `appt -f s/24/08/2021 e/24/09/2021` will list all appointments in the appointment records that has a starting date between 24 Aug 2021(inclusive) and 24 Sep 2021(inclusive).
 * `appt -f s/24/08/2021 e/24/09/2021 p/Alice d/Carl` will list all appointments in the appointment records which contains patients with the name `Alice`, doctors with the name `Carl` and has a starting date between 24 Aug 2021(inclusive) and 24 Sep 2021(inclusive).
 
+<div style="page-break-after: always;"></div>
+
 ### Filtering upcoming appointments: `appt -u` <a name="upcoming-appointments"/>
 
 Searches and lists all upcoming appointments in the appointment records that match the given filter conditions.
@@ -597,6 +599,8 @@ Show all of today's appointments.
 
 Format: `appt -l`
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting an appointment: `appt -d` <a name="delete-appointment"/>
 Deletes an appointment from the list.
 
@@ -611,6 +615,8 @@ Examples:
 * `appt -f p/Betsy` followed by `appt -d 1` deletes the 1st appointment in the results of the filter command.
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 ### Saving the data <a name="save-data"/>
 
@@ -632,6 +638,7 @@ If your changes to the data file makes its format invalid, PlannerMD will discar
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous PlannerMD home folder.
 
 --------------------------------------------------------------------------------------------------------------------
+
 <div style="page-break-after: always;"></div>
 
 ## Command summary <a name="command-summary"/>
