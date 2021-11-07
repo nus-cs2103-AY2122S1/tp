@@ -601,7 +601,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `LeadsForce` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC01 Add a client to the client list**
+### 6.3.1 UC01 Add a client to the client list
 
 **MSS**
 
@@ -616,7 +616,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. LeadsForce shows an invalid command error message. 
       Use case ends. 
 
-**Use case: UC02 View a client's information**
+### 6.3.2 UC02 View a client's information
 
 **MSS**
 
@@ -628,8 +628,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a.  User inputs an invalid client Id
     * 2a1. LeadsForce shows an invalid command error to user.
       Use case ends.
-      
-**Use case: UC03 Edit client information**
+
+### 6.3.3 UC03 Edit client information
 
 **MSS**
 
@@ -642,8 +642,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a.  User inputs invalid attributes
     * 1a1. LeadsForce shows an error to user, and informs the user of the valid attribute format. 
       Use case ends.
-      
-**Use case: UC04 Delete a client**
+
+### 6.3.4 UC04 Delete a client
 
 **MSS**
 
@@ -662,15 +662,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3a. The given client id is invalid.
     * 3a1. LeadsForce shows an error message, informing the user that there is no client with the given client Id .
       Use case resumes at step 2.
-      
-**Use case: UC05 Showcases list of clients**
+
+### 6.3.5 UC05 Showcases list of clients
 
 **MSS**
 
 1. User request to view the full list of clients 
 2. LeadsForce showcases the client's information.
 
-**Use case: UC06 Search for a client**
+### 6.3.6 UC06 Search for a client
 
 **MSS**
 
@@ -687,9 +687,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. LeadsForce returns an empty list since there is no client who fits the inputted keyword
   Use case ends.
-  
 
-**Use case: UC07 Setting a meeting with clients**
+
+### 6.3.7 UC07 Setting a meeting with clients
 
 **MSS**
 
@@ -702,7 +702,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. LeadsForce shows an error to user, and informs the user of the valid command format. 
       Use case ends.
 
-**Use case: UC08 showing schedule for the day**
+### 6.3.8 UC08 showing schedule for the day
 
 **MSS**
 
@@ -718,7 +718,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The meeting schedule is empty as the user has no meetings on the day
   Use case ends.
 
-**Use case: UC09 Clearing a client list**
+### 6.3.9 UC09 Clearing a client list
 
 **MSS**
 
@@ -736,8 +736,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3b.  User inputs invalid commands
     * 3b1. LeadsForce shows an error to user, and informs the user of the valid commands. 
       Use case resumes at step 3.
-      
-**Use case: UC10 Create a new address book**
+
+### 6.3.10 UC10 Create a new address book
 
 **MSS**
 
@@ -749,8 +749,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a.  User inputs name that is the same as an existing address book
     * 1a1. LeadsForce shows an error to user, and informs the user that an address book with the same name already exists.
       Use case ends.
-      
-**Use case: UC11 clear an address book of clients**
+
+### 6.3.11 UC11 clear an address book of clients
 
 **MSS**
 
@@ -793,7 +793,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Address Book**: the list of clients where all clients inserted are kept
 --------------------------------------------------------------------------------------------------------------------
 
-## **7. Appendix: Instructions for manual testing**
+## 7. Appendix: Instructions for manual testing
 
 Given below are instructions to test the app manually.
 
