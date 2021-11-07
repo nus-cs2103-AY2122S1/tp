@@ -46,8 +46,9 @@ public class UniqueTagList {
     public void addTag(Tag toAdd) {
         requireNonNull(toAdd);
         if (containsTag(toAdd)) {
-            int count = tagCounter.get(toAdd) + 1;
-            tagCounter.put(toAdd, count);
+            Integer count = tagCounter.get(toAdd);
+            assert count != null && count > 0;
+            tagCounter.put(toAdd, count + 1);
         } else {
             tagCounter.put(toAdd, 1);
             internalList.add(toAdd);
