@@ -36,6 +36,14 @@ public class CommandResultTest {
     }
 
     @Test
+    public void exitAndHelp() {
+        String message = "Exiting Address Book as requested";
+        CommandResult exitAndHelpCommand = new CommandResult(message, false, true);
+        assertTrue(exitAndHelpCommand.isExit());
+        assertFalse(exitAndHelpCommand.isShowHelp());
+    }
+
+    @Test
     public void hashcode() {
         CommandResult commandResult = new CommandResult("feedback");
 
