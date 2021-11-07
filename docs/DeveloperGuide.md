@@ -340,16 +340,14 @@ The following sequence diagram show how the parsing of alias works, using the ex
 ### Product scope
 
 **Target user profile**:
-* student
-* tech savvy
+* NUS student
+* Tech savvy and familiar with command line interface
 * is a Teaching Assistant (TA)
-* does not have much time and wants to get things done fast
-* lazy and do not want complicated steps
+* does not have much time and wants to get manage student contacts efficiently without hassle
 
 
 **Value proposition**:<br />
-manage contacts faster than a typical mouse/GUI driven app<br />
-with a categorization ability and streamlined creation/reading/updating/deleting processes.
+Manage contacts faster than a typical mouse/GUI driven app with a categorisation ability and streamlined creation/reading/updating/deletion processes.
 
 
 ### User stories
