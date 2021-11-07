@@ -213,7 +213,7 @@ The `Storage` component,
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
   that belong to the `Model`)
 
-<img src="images/StoragePersonDiagram.png" width="550" />
+<img src="images/StoragePersonDiagram.png" />
 
 The storage of `Person`,
 
