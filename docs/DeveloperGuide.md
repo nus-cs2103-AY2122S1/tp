@@ -1485,15 +1485,15 @@ testers are expected to do more *exploratory* testing.
     * Note: 
         * We will be using index `2` to conduct manual testing for positive tests, but feel free to test with any valid index (any positive integer shown in the student and lesson lists).
         * In this case, we will be using the sample data given when loading up **TuitiONE** for the first time (delete tuitione.json file if it is not your first time). 
-        * The `Student` of index `2` (Bernice Yu of grade P4) will be enrolled into `Lesson` of `index` 2 (Math-P4-Wed-1800).
+        * The `Student` of index `2` (Bernice Yu of grade P4) will be enrolled into `Lesson` of `index` 2 (Math-P4-Wed-1800).<br>
 
-  * Test case: `enroll 2 l/2`<br>
+    * Test case: `enroll 2 l/2`<br>
     Expected: `Student` of index `2` is enrolled in `Lesson` of index `2` . Details of the student and lesson enrolled in shown in the status message.
 
-  * Test case: `enroll 0 l/0`<br>
+    * Test case: `enroll 0 l/0`<br>
     Expected: No student is enrolled in any lesson. Error details shown in the status message.
 
-  * Other incorrect enroll commands to try: `enroll`, `enroll 1`, `enroll 1 l/0`, `enroll 0 l/1`, `enroll x l/y`, `enroll y l/x` (where x is larger than the list size, and y is a negative integer)<br>
+    * Other incorrect enroll commands to try: `enroll`, `enroll 1`, `enroll 1 l/0`, `enroll 0 l/1`, `enroll x l/y`, `enroll y l/x` (where x is larger than the list size, and y is a negative integer)<br>
     Expected: Similar to previous.
 
 #### Unenrolling a student
@@ -1506,7 +1506,7 @@ testers are expected to do more *exploratory* testing.
         * We will be using index `1` to conduct manual testing for positive tests, but feel free to test with any valid index (any positive integer shown in the student and lesson lists).
         * In this case, we will be using the sample data given when loading up **TuitiONE** for the first time (delete tuitione.json file if it is not your first time).
         * The `Student` of index `1` (Alex Yeoh of grade S1) is enrolled in the `Lesson` of `index` 3 (Science-S1-Fri-1330).
-        * The `Lesson` of index `1` is (English-P2-Mon-0900).
+        * The `Lesson` of index `1` is (English-P2-Mon-0900).<br>
 
     * Test case: `unenroll 1 l/3`<br>
       Expected: The `Student` of index `1` (Alex Yeoh of grade S1) is unenrolled the `Lesson` of `index` 3 (Science-S1-Fri-1330). The details of the unenroll is displayed in the status message.
