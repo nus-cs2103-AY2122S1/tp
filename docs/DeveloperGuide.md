@@ -81,6 +81,8 @@ certain technical terms commonly used in this user guide [here](#glossary).
   - [JUnit5](https://github.com/junit-team/junit5) so that we can deliver to you bug-free!
   - [MDFX](https://github.com/JPro-one/markdown-javafx-renderer) so that you can see User Guide in help without internet
   - [JFreeChart](https://www.jfree.org/jfreechart/) for the amazing graph and data visualization tools!
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting Up, Getting Started**
@@ -1062,6 +1064,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 10. Logs and previous commits should be recoverable even when `AcademyDirectory` itself is deleted.
 11. Logs and previous commits should be transferable and functional after transfer onto other computers.
 12. Users should be able to undo up to at least _100_ commands.
+13. Software default file size should not exceed _50_ Megabytes.
 
 ### Glossary
 
@@ -1121,10 +1124,42 @@ testers are expected to do more *exploratory* testing.
 #### Add Student
 
 1. Adding a student while all students are being shown
+
+   1. Prerequisites: List all students using the `list` command. All students are shown in the list.
+
+   2. Test cases:
+      1. `add n/Charles Ng te/@charles e/e0123434@u.nus.edu p/90390421`<br>
+      Expected: One new student will be added to the list. Details of the added student shown in the status message. Result display remains the same. Students can be found in Student Panel List on the left.
+      2. `add n/Charles Ng te/@charles e/e0123434@u.nus.edu`<br>
+      Expected: One new student will be added to the list. Phone Number is not supplied and will be defaulted to `NA`. Details of the added student shown in the status message. Result display remains the same. Students can be found in Student Panel List on the left.
+      3. `add n/Charles Ng te/@charles`<br>
+      Expected: Required field `EMAIL` is not supplied. No student is added. Error `Invalid command format!` will be shown alongside with a proper usage of command. Result display remains the same.
+      4. `add n/Charles Ng te/@charles e/e0123434@u.nus.edu p/90`<br>
+      Expected: `PHONE` field must be number with at least 3 digits or string `NA`. No new student is added. Error will be shown alongside with a proper usage of command. Result display remains the same.
+      5. `add n/Charles Ng te/@charles e/e0123434@u.nus.edu` followed by `add n/Charles Ng te/@charles e/e0123434@u.nus.edu`<br>
+      Expected: Student with existing name exists. No new student is added. Error `This student already exists ...` will be shown. Result display remains the same.
+
+   3. Other incorrect delete commands to try:
+      1. `add`<br>
+      Expected: Similar to cases of missing required field.
+      2. `add n/Charles`<br>
+      Expected: Similar to cases of missing required field.
+      
 2. Adding a student while only one student is being shown, with there being more than one student in the list
 
-1. _{ more test cases to come …​ }_
+   1. Prerequisites: Filter students by their tag `streams` using the `filter streams` command. A subset of students shown.
 
+   2. Test cases:
+      1. `add n/Charles Ng te/@charles e/e0123434@u.nus.edu p/90390421`<br>
+      Expected: One new student will be added. Details of the added student shown in the status message. Result display remains the same. Students can be found in Student Panel List on the left. This student will also be added to the actual list of students.
+      2. `add n/Charles Ng te/@charles e/e0123434@u.nus.edu` followed by `filter streams` followed by `add n/Charles Ng te/@charles e/e0123434@u.nus.edu`<br>
+      Expected: Student with the same found in full list of students. Duplicate detection is done on the full list of students, not on the current list in student list panel. No new student is added. Error `This student already exists ...` will be shown. Result display remains the same.
+       
+   3. Other incorrect delete commands to try:
+      1. `add`<br>
+      Expected: Similar to cases of missing required field.
+      2. `add n/Charles`<br>
+      Expected: Similar to cases of missing required field.
 ***
 
 #### Delete Student
@@ -1133,19 +1168,32 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
-   2. Test case: `delete 1`<br>
+   2. Test cases:
+      1. `delete 1`<br>
       Expected: First student is deleted from the list. Details of the deleted student shown in the status message. Result display remains the same.
-
-   3. Test case: `delete 0`<br>
+      2. `delete 0`<br>
       Expected: No student is deleted. Error details shown in the status message. Result display remains the same.
 
-   4. Other incorrect delete commands to try: 
-      1. `delete`
-      2. `delete x` (where x is larger than the list size)<br>
+   3. Other incorrect delete commands to try: 
+      1. `delete`<br>
+      2. `delete -1`<br>
+      3. `delete x` (where x is larger than the list size)<br>
          Expected: Similar to previous.
 
 
-1. _{ more test cases to come …​ }_
+2. Deleting a student while a selected group of students is being shown
+   1. Prerequisites: Filter students by their tag `streams` using the `filter streams` command. A subset of students shown.
+
+   2. Test cases:
+      1. `delete 1`<br>
+      Expected: First student is deleted from the list. Details of the deleted student shown in the status message. Result display remains the same. This student will also be deleted in the main list. 
+      2. `delete 0`<br>
+      Expected: No student is deleted. Error details shown in the status message. Result display remains the same.
+
+   3. Other incorrect delete commands to try:
+      1. `delete`<br>
+      2. `delete x` (where x is larger than the current list size)<br>
+      Expected: Similar to previous.
 
 ***
 
@@ -1312,7 +1360,45 @@ is present in AcademyDirectory. Said student/s have no phone numbers.
 
 #### Edit Personal Detail
 
-1. _{ more test cases to come …​ }_
+1. Edit a student while all students are being shown
+
+   1. Prerequisites: List all students using the `list` command. All students are shown in the list.
+
+   2. Test cases:
+      1. `edit 1 te/@charles`<br>
+      Expected: The first student in the list will have their telegram changed to `@charles`. Details of the added student shown in the status message. Result display remains the same. Changes in that student can be viewed immediately in Student Panel List on the left.
+      2. `delete 0 te/@charles`<br>
+      Expected: No student is edited. Error details shown in the status message. Result display remains the same.
+      3. `edit 1 as/@charles`<br>
+      Expected: Edit command only works with personal details such as `NAME`(`n/`), `PHONE`(`p/`), `EMAIL`(`e/`) and `TELEGRAM`(`te/`). Assessment (`as/`) can not be edited by this edit command. No student will be edited. Error `Invalid command format!` will be shown alongside with a proper usage of command. Result display remains the same.
+      4. `edit 1 p/90`<br>
+      Expected: `PHONE` field must be number with at least 3 digits or string `NA`. The first student is edited. Error will be shown alongside with a proper usage of command. Result display remains the same.
+      5. `edit 1 n/Charles` followed by `edit 2 n/@charles`<br>
+      Expected: Student with existing name exists. First student is successfully edited. The second student is not edited. Error `This student already exists ...` will be shown. Result display remains the same.
+
+   3. Other incorrect delete commands to try:
+      1. `edit`<br>
+      Expected: No `INDEX` is supplied. Error `invalid command format!` will be shown.
+      2. `edit -1`<br>
+      Expected: Similar to cases of invalid `INDEX` field.
+      3. `edit 1 t/streams`<br>
+      Expected: Similar to cases of editing non-personal details.
+
+2. Editing a student while a selected group of students is being shown
+
+   1. Prerequisites: Filter students by their tag `streams` using the `filter streams` command. A subset of students shown.
+
+   2. Test cases:
+      1. `edit 1 n/Charles`<br>
+      Expected: The first student's name will be added. Details of the edited student shown in the status message. Result display remains the same. Changes in that student can be viewed immediately in Student Panel List on the left. This student information will also be updated to in the full list of students.
+      2. `edit 2 n/Charles` <br>
+      Expected: Student with the same found in full list of students. Duplicate detection is done on the full list of students, not on the current list in student list panel. No student is edited. Error `This student already exists ...` will be shown. Result display remains the same.
+
+   3. Other incorrect delete commands to try:
+      1. `edit`<br>
+      Expected: No `INDEX` is supplied. Error `invalid command format!` will be shown.
+      2. `edit -2`<br>
+      Expected: No `INDEX` is supplied. Error `invalid command format!` will be shown.
 
 ***
 
@@ -1498,8 +1584,25 @@ and open the "View Test Score" tab to view the changes in the grade.
 
 #### Visualize all Grades
 
-1. _{ more test cases to come …​ }_
+1. Visualize class performance when all students grades are entered
+   1. Prerequisites: All students grade from all assessments are entered
+   2. Test case: `visualize`
+      Expected: Box and Whisker plot shown in Result Display. The box includes median, 25%, 75%, max and min grades of all assessments.
 
+2. Visualize class performance when there are no grade.
+   1. Prerequisites: No grade from any students or assessments are entered.
+   2. Test case: `visualize`
+      Expected: Box and Whisker plot shown in Result Display. The plot axis are shown without the data bar.
+
+3. Visualize class performance when some students' grade are not entered.
+   1. Prerequisites: There are grades from all assessments, however there are some students' grades that are not entered yet.
+   2. Test case: `visualize`
+   Expected: Box and Whisker plot shown in Result Display. The box includes median, 25%, 75%, max and min grades of all assessments for **the group of students with grades**.
+
+4. Visualize class performance when some assessments' grades are not entered. 
+   1. Prerequisites: There are some assessments' grades that are not entered yet.
+   2. Test case: `visualize`
+      Expected: Box and Whisker plot shown in Result Display. The box includes median, 25%, 75%, max and min grades of assessments with grades. Assessments without grade will not show the data bar.
 ***
 
 #### Filter Academy Directory
