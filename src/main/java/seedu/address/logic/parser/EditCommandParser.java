@@ -81,6 +81,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                 if (!ParserUtil.isValidInt(argMultimap.getValue(PREFIX_DASH_INDEX).get())) {
                     throw new ParseException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
                 }
+
                 Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_DASH_INDEX).get());
                 return new EditCommand(index, editPersonDescriptor);
             }
@@ -90,6 +91,9 @@ public class EditCommandParser implements Parser<EditCommand> {
             }
 
         } catch (ParseException e) {
+            if (e.getMessage().equals(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX)) {
+                throw e;
+            }
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), e);
         }
         throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));

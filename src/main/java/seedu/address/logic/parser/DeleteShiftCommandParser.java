@@ -65,7 +65,7 @@ public class DeleteShiftCommandParser implements Parser<DeleteShiftCommand> {
             }
         } catch (ParseException pe) {
             if (pe.getMessage().equals(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX)) {
-                throw new ParseException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                throw pe;
             }
 
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,

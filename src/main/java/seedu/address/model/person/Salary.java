@@ -9,11 +9,13 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Salary implements Field {
 
+    private static final int MAX_SALARY = 9999;
+
     public static final String MESSAGE_CONSTRAINTS =
             "Salaries have to be a non-negative integer representing the pay in dollars. Cents can be added by "
-            + "adding one or two number digits after a \".\" The salary cannot exceed $9999999.99 per hour.";
+            + "adding one or two number digits after a \".\".\n\nThe salary cannot exceed $" + MAX_SALARY + ".99.";
 
-    public final Integer value; //
+    public final Integer value;
 
     /**
      * Constructs an {@code Salary}.
@@ -70,7 +72,7 @@ public class Salary implements Field {
             return false;
         }
 
-        if (dollarInt > 9999999) {
+        if (dollarInt > MAX_SALARY) {
             return false;
         }
         return dollarInt >= 0;

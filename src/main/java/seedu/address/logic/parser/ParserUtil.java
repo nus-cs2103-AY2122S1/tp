@@ -543,6 +543,6 @@ public class ParserUtil {
             return false;
         }
 
-        return true;
+        return Integer.parseInt(test) > 0;
     }
 }
