@@ -1,46 +1,52 @@
 {
-  "_comment": "AddressBook save file which contains the same Task values as in TypicalTasks#getTypicalAddressBook()",
+  "_comment": "Uni-fy save file which contains the same Task values as in TypicalTasks#getTypicalUniFy()",
   "tasks" : [ {
-    "name" : "Alice Pauline",
-    "time" : "12:45",
-    "email" : "alice@example.com",
-    "date" : "2021-12-11",
-    "tagged" : [ "friends" ]
+    "name" : "Homework",
+    "time" : "12:00",
+    "date" : "2021-01-04",
+    "state" : "DONE",
+    "priority" : "MEDIUM",
+    "tagged" : [ "CS2103T" ]
   }, {
-    "name" : "Benson Meier",
-    "time" : "23:41",
-    "email" : "johnd@example.com",
-    "date" : "2021-11-23",
-    "tagged" : [ "owesMoney", "friends" ]
+    "name" : "Assignment 1",
+    "time" : "14:00",
+    "date" : "2021-01-05",
+    "state" : "TODO",
+    "priority" : "HIGH",
+    "tagged" : [ "CS2100" ]
   }, {
-    "name" : "Carl Kurz",
-    "time" : "23:41",
-    "email" : "heinz@example.com",
-    "date" : "2021-10-25",
-    "tagged" : [ ]
+    "name" : "Assignment 2",
+    "time" : "16:00",
+    "date" : "2021-01-06",
+    "state" : "TODO",
+    "priority" : "HIGH",
+    "tagged" : [ "CS2106" ]
   }, {
-    "name" : "Daniel Meier",
-    "time" : "07:24",
-    "email" : "cornelia@example.com",
-    "date" : "2021-12-11",
-    "tagged" : [ "friends" ]
+    "name" : "Training",
+    "time" : "15:00",
+    "date" : "2021-01-07",
+    "state" : "TODO",
+    "priority" : "HIGH",
+    "tagged" : [ "CCA" ]
   }, {
-    "name" : "Elle Meyer",
-    "time" : "12:33",
-    "email" : "werner@example.com",
-    "date" : "2021-12-25",
-    "tagged" : [ ]
+    "name" : "Tutorial",
+    "time" : "14:50",
+    "date" : "2021-01-08",
+    "state" : "DONE",
+    "priority" : "LOW"
   }, {
-    "name" : "Fiona Kunz",
-    "time" : "03:40",
-    "email" : "lydia@example.com",
-    "date" : "2021-12-23",
-    "tagged" : [ ]
+    "name" : "Commentary",
+    "time" : "23:59",
+    "date" : "2021-01-10",
+    "state" : "DONE",
+    "priority" : "HIGH",
+    "tagged" : [ "ES2660" ]
   }, {
-    "name" : "George Best",
-    "time" : "13:44",
-    "email" : "anna@example.com",
-    "date" : "2021-10-25",
-    "tagged" : [ ]
+    "name" : "Project",
+    "time" : "23:59",
+    "date" : "2021-01-11",
+    "state" : "TODO",
+    "priority" : "LOW",
+    "tagged" : [ "GEQ1000" ]
   } ]
 }
