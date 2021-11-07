@@ -362,11 +362,16 @@ Use case ends.
 
 * 1b. User inputs details in a wrong format
     * 1b1. contHACKS shows an error message <br/>
+    * 1b2. User enters new input <br>
+    Steps 1b1 - 1b2 are repeated until the input is in a correct format. <br>
+    Use case resumes from step 2. <br>
     Use case ends.
 
 
 * 1c. User inputs details with the same email/phone number/telegram handle as another existing contact in contHACKS.
   * 1c1. contHACKS disallow this operation and shows an error message <br>
+  * 1c2. User enters new input <br>
+  Steps 1c1 - 1c2 are repeated until the email/phone number/telegram handle is unique in the list of contacts. <br>
   Use case ends.
 
 
@@ -397,6 +402,9 @@ Use case ends.
 
 * 1d. User inputs details in a wrong format
     * 1d1. contHACKS shows an error message <br/>
+    * 1d2. User enters new input <br>
+    Steps 1d1 - 1d2 are repeated until the input is in a correct format. <br>
+    Use case resumes from step 2. <br>
     Use case ends.
 
 
@@ -417,6 +425,9 @@ Use case ends
 
 * 1b. User inputs details in a wrong format
     * 1b1. contHACKS shows an error message <br>
+    * 1b2. User enters new input
+    Steps 1b1 - 1b2 are repeated until the input is in a correct format. <br>
+    Use case resumes from step 2.
     Use case ends.
 
 
@@ -428,7 +439,7 @@ Use case ends
 
 **MSS**
 
-1. User requests to delete a specific contact
+1. User requests to delete specific contact(s)
 2. contHACKS deletes the contact and displays the updated contact list
 
 Use case ends
@@ -458,7 +469,130 @@ Use case ends.
 
 Use case ends.
 
-**Use case `UC07`: Accessing help manual**
+**Use case `UC06`: Adding a lesson**
+
+**MSS**
+
+1. User requests to create a lesson and inputs lesson details
+2. contHACKS creates the contact and displays information of the newly added lesson
+
+Use case ends.
+
+**Extensions**
+* 1a. User fails to provide compulsory field
+    * 1a1. contHACKS shows an error message <br/>
+      Use case ends.
+
+
+* 1b. User inputs details in a wrong format
+    * 1b1. contHACKS shows an error message <br/>
+    * 1b2. User enters new input <br>
+      Steps 1b1 - 1b2 are repeated until the input is in a correct format. <br>
+      Use case resumes from step 2. <br>
+      Use case ends.
+
+
+* 1c. User inputs details with the same module code and lesson code as another existing lesson in contHACKS.
+    * 1c1. contHACKS disallow this operation and shows an error message <br>
+    * 1c2. User enters new input <br>
+      Steps 1c1 - 1c2 are repeated until module code/lesson code is unique in the list of lessons. <br>
+      Use case ends.
+
+
+**Use case `UC07`: Finding a lesson**
+
+**MSS**
+
+1. User requests to find a lesson based on inputs details
+2. contHACKS shows a list of contacts that matches input details
+
+Use case ends.
+
+**Extensions**
+* 1a. There are no lessons that matches the input details
+    * 1a1. contHACKS displays an empty list <br/>
+      Use case ends.
+
+
+* 1b. User finds by module code
+    * 1b1. contHACKS displays a list of lessons that are tagged with the module code <br/>
+      Use case ends.
+
+* 1c. User finds by day 
+  * 1c1. contHACKS displays a list of lessons that are on this day
+
+
+* 1d. User inputs details in a wrong format
+    * 1d1. contHACKS shows an error message <br/>
+    * 1d2. User enters new input <br>
+      Steps 1d1 - 1d2 are repeated until the input is in a correct format. <br>
+      Use case resumes from step 2. <br>
+      Use case ends.
+
+
+**Use case `UC08`: Editing a lesson**
+
+**MSS**
+
+1. User requests to update a specific lesson and inputs the new lesson details
+2. contHACKS updates the contact with the input details and displays the updated lesson
+
+Use case ends.
+
+**Extensions**
+* 1a. Lesson does not exist
+    * 1a1. contHACKS shows an error message <br/>
+      Use case ends.
+
+
+* 1b. User inputs details in a wrong format
+    * 1b1. contHACKS shows an error message <br>
+    * 1b2. User enters new input
+      Steps 1b1 - 1b2 are repeated until the input is in a correct format. <br>
+      Use case resumes from step 2.
+      Use case ends.
+
+
+* 1c. User inputs module code and lesson code that is the same as another existing lesson in contHACKS
+    * 1c1. contHACKS disallows this operation and shows an error message <br>
+      Use case ends.
+
+**Use case `UC09`: Deleting a lesson**
+
+**MSS**
+
+1. User requests to delete specific lesson(s).
+2. contHACKS deletes the contact and displays the updated lesson list
+
+Use case ends
+
+**Extensions**
+* 1a. Lesson does not exist
+    * 1a1. contHACKS shows an error message <br/>
+      Use case ends.
+
+
+**Use case `UC10`: Listing the lesson list**
+
+**MSS**
+
+1. User requests to for the whole lesson list
+2. contHACKS displays the whole lesson list
+
+Use case ends.
+
+
+**Use case `UC11`: Clearing all lessons**
+
+**MSS**
+
+1. User requests to clear all lessons
+2. contHACKS delete all the lessons and displays an empty lesson list
+
+Use case ends.
+
+
+**Use case `UC12`: Accessing help manual**
 
 **MSS**
 
@@ -467,7 +601,7 @@ Use case ends.
 
 Use case ends.
 
-**Use case `UC08`: Exiting the application**
+**Use case `UC13`: Exiting the application**
 
 **MSS**
 
