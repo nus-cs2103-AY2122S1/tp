@@ -5,7 +5,8 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.ListTransactionCommand.MESSAGE_TXN_NOT_FOUND;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
-import static seedu.address.model.display.DisplayMode.*;
+import static seedu.address.model.display.DisplayMode.DISPLAY_INVENTORY;
+import static seedu.address.model.display.DisplayMode.DISPLAY_TRANSACTION_LIST;
 import static seedu.address.testutil.TypicalItems.getTypicalInventory;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -16,7 +17,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.TransactionList;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.order.TransactionRecord;
 import seedu.address.testutil.TypicalOrders;
 import seedu.address.testutil.TypicalTransactions;
 

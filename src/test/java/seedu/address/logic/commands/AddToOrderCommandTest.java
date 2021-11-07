@@ -2,7 +2,14 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.AddToOrderCommand.MESSAGE_EXTRA_PRICE_FLAG;
 import static seedu.address.logic.commands.AddToOrderCommand.MESSAGE_EXTRA_TAG_FLAG;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COSTPRICE_DONUT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BAGEL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_DONUT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BAGEL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DONUT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_BAKED;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.model.display.DisplayMode.DISPLAY_INVENTORY;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalItems.BAGEL;

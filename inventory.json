@@ -2,7 +2,7 @@
   "items" : [ {
     "name" : "Oatmeal Cookie",
     "id" : 140121,
-    "count" : 8,
+    "count" : 9,
     "costPrice" : 1.0,
     "salesPrice" : 3.0,
     "tagged" : [ "baked" ]
@@ -41,5 +41,12 @@
     "costPrice" : 3.2,
     "salesPrice" : 4.4,
     "tagged" : [ "beverage" ]
+  }, {
+    "name" : "Panadol",
+    "id" : 192837,
+    "count" : 3,
+    "costPrice" : 1.2,
+    "salesPrice" : 2.3,
+    "tagged" : [ ]
   } ]
 }
