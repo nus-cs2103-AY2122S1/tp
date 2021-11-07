@@ -1,0 +1,19 @@
+@startuml
+start
+:User executes prescription command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([command is valid])
+    :Add/remove prescription
+    from model;
+    :Save prescription to
+    corresponding appointment;
+    :Write to file;
+else ([else])
+    :Show error
+    message to user;
+endif
+stop
+@enduml
