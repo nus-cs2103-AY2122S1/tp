@@ -39,7 +39,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         PersonContainsFieldsPredicate predicate = testByAllFieldsExceptName(argMultimap);
         if (argMultimap.getValue(PREFIX_DASH_INDEX).isPresent()) {
             return new FindCommand(ParserUtil
-                    .parseIndex(argMultimap.getValue(PREFIX_DASH_INDEX).get()).getZeroBased());
+                    .parseIndex(argMultimap.getValue(PREFIX_DASH_INDEX).get()).getZeroBased(), predicate);
         }
         if (argMultimap.getValue(PREFIX_DASH_NAME).isPresent()) {
             String[] nameKeywords = argMultimap.getValue(PREFIX_DASH_NAME).get()

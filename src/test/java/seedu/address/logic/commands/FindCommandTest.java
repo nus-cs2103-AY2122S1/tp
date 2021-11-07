@@ -40,8 +40,8 @@ public class FindCommandTest {
 
         FindCommand findFirstCommand = new FindCommand(firstPredicate, emptyPredicate);
         FindCommand findSecondCommand = new FindCommand(secondPredicate, emptyPredicate);
-        FindCommand findThirdCommand = new FindCommand(1);
-        FindCommand findFourthCommand = new FindCommand(2);
+        FindCommand findThirdCommand = new FindCommand(1, new PersonContainsFieldsPredicate());
+        FindCommand findFourthCommand = new FindCommand(2, new PersonContainsFieldsPredicate());
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
@@ -60,7 +60,7 @@ public class FindCommandTest {
         assertFalse(findFirstCommand.equals(findSecondCommand));
 
         // Test equals() method for Find Commands that search by index
-        assertTrue(findThirdCommand.equals(new FindCommand(1)));
+        assertTrue(findThirdCommand.equals(new FindCommand(1, new PersonContainsFieldsPredicate())));
         assertFalse(findThirdCommand.equals(findFourthCommand));
         assertFalse(findFirstCommand.equals(findThirdCommand));
         assertFalse(findFourthCommand.equals(findFirstCommand));
@@ -81,7 +81,7 @@ public class FindCommandTest {
     public void execute_indexSearchWithinRange() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
         StaffHasCorrectIndexPredicate predicate = prepareIndexPredicate(2);
-        FindCommand command = new FindCommand(2);
+        FindCommand command = new FindCommand(2, new PersonContainsFieldsPredicate());
         expectedModel.updateFilteredPersonList(predicate);
         // assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL), expectedModel.getFilteredPersonList());
@@ -90,7 +90,7 @@ public class FindCommandTest {
     @Test
     public void execute_indexSearchOutOfRange() {
         int outOfBoundIndex = model.getFilteredPersonList().size() + 1;
-        FindCommand command = new FindCommand(outOfBoundIndex);
+        FindCommand command = new FindCommand(outOfBoundIndex, new PersonContainsFieldsPredicate());
         assertCommandFailure(command, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
