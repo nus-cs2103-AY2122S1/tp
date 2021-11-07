@@ -187,6 +187,7 @@ Format: `toggle`
 
 <img src="images/toggleTabs.png" width="600">
 
+<div style="page-break-after: always;"></div>
 
 ### Clearing all entries : `IWANTTOCLEAREVERYTHING` <a name="clear"/>
 
@@ -249,6 +250,8 @@ Shows a list of all patients in the patient records.
 
 Format: `list`
 
+<div style="page-break-after: always;"></div>
+
 ### Editing a patient's information : `edit` <a name="edit-patient"/>
 
 Edits an existing patient in the patient records.
@@ -268,6 +271,8 @@ Examples:
 *  `edit 1 hp/91234567 eml/johndoe@example.com` Edits the phone number and email address of the 1st patient to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower dob/20/07/1964 risk/ t/` Edits the name and date of birth of the 2nd patient to be `Betsy Crower` and `20/07/1964` respectively, and clears all existing tags and risk.
 
+<div style="page-break-after: always;"></div>
+
 ### Adding a remark to a patient's information : `remark` <a name="remark-patient"/>
 
 Adds a remark to an existing patient in the patient records.
@@ -281,6 +286,8 @@ Format: `remark INDEX r/REMARK`
 Examples:
 *  `remark 1 r/` edits the remark of the 1st patient to be blank.
 *  `remark 2 r/Chronic diabetic, monthly insulin pick up` edits the remark of the 2nd patient to be `Chronic diabetic, monthly insulin pick up`.
+
+<div style="page-break-after: always;"></div>
 
 ### Locating patients by name: `find` <a name="find-patient"/>
 
@@ -301,6 +308,7 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   <img src="images/findAlexDavidResult.png" width="600">
 
+<div style="page-break-after: always;"></div>
 
 ### Deleting a patient : `delete` <a name="delete-patient"/>
 
@@ -315,6 +323,8 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd patient in the patient records.
 * `find Betsy` followed by `delete 1` deletes the 1st patient in the results of the `find` command.
+
+<div style="page-break-after: always;"></div>
 
 ### Managing Tags `tag` <a name="managing-patient-tag"/>
 
