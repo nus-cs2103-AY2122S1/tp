@@ -606,7 +606,7 @@ testers are expected to do more *exploratory* testing.
     4. Test case: `friend --get co`<br>
        Expected: No friend is found. Error details shown in the status message. Status bar remains the same.
 
-    5. Other incorrect delete commands to try: `friend --get`
+    5. Other incorrect get commands to try: `friend --get`
        Expected: Similar to previous.
    
 ### Viewing a game's full data
