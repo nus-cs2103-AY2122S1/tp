@@ -231,21 +231,38 @@ as a confirmation message instead.
 #### Implementation
 
 The proposed find mechanism is implemented through the use of 2 `Predicate<Anime>`, one for the tab options and one for
-regular filter.
+the regular search filter. For multiple categories, the `and` method from `Predicate<Anime>` is used to create a conjunctive search. For multiple keywords within categories, a
 
-{To be added later}
+![Interactions Inside the Logic Component for the `findCommand`](images/FindSequenceDiagram.png)
 
 #### Design considerations:
 
-**Aspect: How find executes:**
+**Aspect: Executing find:**
 
-* **Alternative 1 (current choice):** Search the keywords with the prefixes `/g` and `/n`. Does not reset tab and resets after each search.
-    * Pros: Allow for search with multiple spaces in between, allow for searching within tabs.
+* **Alternative 1 (current choice):** Search the keywords with the prefixes `g/` and `n/`. Does not reset tab and resets after each search.
+    * Pros: Allows for search with multiple spaces in between, searching within tabs and a more granular search.
     * Cons: Complicated to implement.
 
-* **Alternative 2:** Search each keyword split by whitespace. Resets tab after each search.
+* **Alternative 2:** Search the keywords with the prefixes `g/` and `n/`. Does not reset tab and does
+not reset after each search.
+    * Pros: Provides all of the benefits of the current implementation and an even more granular search.
+    * Cons: Added complexity of having a command to remove previous searches or reset searches, less optimized for CLI
+    as it requires an additional command.
+
+* **Alternative 3:** Search each keyword split by whitespace. Resets tab after each search.
     * Pros: Less complicated and less coupling.
     * Cons: Does not allow for searches with specific criteria nor keywords with whitespaces in between, does not allow searching within tabs.
+
+**Aspect: Handling search terms:**
+
+* **Alternative 1 (current choice):** Parses it into a valid object before searching.
+    * Pros: Ensures that the search term is a valid term for the particular category before searching.
+    * Cons: Less efficient search as an additional parsing is required.
+
+* **Alternative 2:** Handles it as a string without parsing.
+    * Pros: More efficient search as no additional parsing is not required.
+    * Cons: Allows for invalid search terms, which are somewhat problematic for `genres` as it has
+    a fixed list of terms.
 
 ### Themes Feature
 
