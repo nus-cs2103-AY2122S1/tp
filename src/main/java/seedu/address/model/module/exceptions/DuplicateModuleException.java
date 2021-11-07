@@ -2,7 +2,7 @@ package seedu.address.model.module.exceptions;
 
 /**
  * Signals that the operation will result in duplicate Modules (Modules are considered duplicates if they have the
- * same Module ID).
+ * same ModuleName).
  */
 public class DuplicateModuleException extends RuntimeException {
     public DuplicateModuleException() {

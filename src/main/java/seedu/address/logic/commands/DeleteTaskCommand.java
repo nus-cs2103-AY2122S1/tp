@@ -20,7 +20,7 @@ import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskId;
 
 /**
- * Deletes a task identified using it's displayed index from the address book.
+ * Deletes a task identified using it's displayed index from a module in TAB.
  */
 public class DeleteTaskCommand extends DeleteCommand {
 
@@ -42,7 +42,10 @@ public class DeleteTaskCommand extends DeleteCommand {
     private final ModuleName moduleName;
 
     /**
+     * Deletes a task identified using its task ID from a module in TAB.
      *
+     * @param targetTaskId The task ID of the task to be deleted.
+     * @param moduleName The name of the module that the task will be deleted from.
      */
     public DeleteTaskCommand(TaskId targetTaskId, ModuleName moduleName) {
         requireAllNonNull(targetTaskId, moduleName);
@@ -71,6 +74,7 @@ public class DeleteTaskCommand extends DeleteCommand {
      * Deletes task from student's taskList.
      *
      * @param student The student with the task to be deleted.
+     * @throws CommandException if the task is not found in the student's taskList.
      */
     public void deleteTaskFromStudent(Student student) throws CommandException {
         for (Task task : student.getTaskList()) {

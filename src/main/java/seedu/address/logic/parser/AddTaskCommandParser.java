@@ -16,7 +16,9 @@ import seedu.address.model.task.TaskDeadline;
 import seedu.address.model.task.TaskId;
 import seedu.address.model.task.TaskName;
 
-
+/**
+ * Parses input arguments and creates a new AddTaskCommand object
+ */
 public class AddTaskCommandParser implements Parser<AddTaskCommand> {
 
     /**

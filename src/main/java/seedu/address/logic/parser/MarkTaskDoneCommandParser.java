@@ -24,7 +24,7 @@ public class MarkTaskDoneCommandParser implements Parser<MarkTaskDoneCommand> {
      *
      * @param args Args for marking a task as done.
      * @return MarkTaskDoneCommand object.
-     * @throws ParseException if the user input does not conform the expected format
+     * @throws ParseException if the user input does not conform the expected format.
      */
     public MarkTaskDoneCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =

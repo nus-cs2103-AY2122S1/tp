@@ -16,7 +16,7 @@ import seedu.address.model.module.ModuleName;
 import seedu.address.model.task.TaskId;
 
 /**
- * Parses input arguments and creates a new EditCommand object
+ * Parses input arguments and creates a new EditTaskCommand object.
  */
 public class EditTaskCommandParser implements Parser<EditTaskCommand> {
 

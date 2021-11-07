@@ -25,7 +25,7 @@ import seedu.address.model.task.TaskName;
 import seedu.address.model.task.UniqueTaskList;
 
 /**
- * Adds a student to the address book.
+ * Adds a student to a module in TAB.
  */
 public class AddStudentCommand extends AddCommand {
 
@@ -48,15 +48,16 @@ public class AddStudentCommand extends AddCommand {
     public static final String MESSAGE_ADD_STUDENT_SUCCESS = "New student added to the module: %1$s";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the module";
     public static final String MESSAGE_DUPLICATE_TELE_HANDLE = "This Telegram Handle belongs to someone "
-            + "existing in TAB. \n" + "Please input another Telegram Handle.";
-    public static final String MESSAGE_DUPLICATE_EMAIL = "This Email belongs to someone existing in TAB. \n"
+            + "existing in the Module. \n" + "Please input another Telegram Handle.";
+    public static final String MESSAGE_DUPLICATE_EMAIL = "This Email belongs to someone existing in the Module. \n"
             + "Please input another Email.";
 
     private final Student studentToAdd;
     private ModuleName moduleName;
 
     /**
-     * Creates an AddCommand to add the specified {@code Student}
+     * Creates an AddStudentCommand to add the specified {@code Student} to a module with the
+     * specified {@code ModuleName}.
      *
      * @param student The student to be added to a module.
      * @param moduleName The name of the module the student will be added to.
@@ -71,22 +72,17 @@ public class AddStudentCommand extends AddCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Module> lastShownList = model.getFilteredModuleList();
-        Module module;
-        for (Module mod : lastShownList) {
-            if (mod.getName().equals(moduleName)) {
-                module = mod;
+        for (Module module : lastShownList) {
+            if (module.getName().equals(moduleName)) {
                 if (module.hasStudent(studentToAdd)) {
                     throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
                 }
-
                 if (isDuplicateTeleHandleInModule(studentToAdd.getTeleHandle(), module)) {
                     throw new CommandException(MESSAGE_DUPLICATE_TELE_HANDLE);
                 }
-
                 if (isDuplicateEmailInModule(studentToAdd.getEmail(), module)) {
                     throw new CommandException(MESSAGE_DUPLICATE_EMAIL);
                 }
-
                 // for each task in this module's taskList, add it to a new UniqueTaskList
                 // give the new UniqueTaskList to student after all tasks have been added
                 UniqueTaskList thisModuleTaskList = module.getTaskList();
@@ -96,8 +92,7 @@ public class AddStudentCommand extends AddCommand {
                     TaskId taskId = task.getTaskId();
                     TaskName taskName = task.getTaskName();
                     TaskDeadline taskDeadline = task.getTaskDeadline();
-                    Task taskToAdd = new Task(moduleName, taskId, taskName, taskDeadline);
-                    newStudentTaskList.add(taskToAdd);
+                    newStudentTaskList.add(new Task(moduleName, taskId, taskName, taskDeadline));
                 }
                 studentToAdd.setTaskList(newStudentTaskList);
                 module.addStudent(studentToAdd);

@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Module's name in the address book.
+ * Represents a Module's name in TAB.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
 public class ModuleName {
@@ -23,9 +23,9 @@ public class ModuleName {
     private final String moduleName;
 
     /**
-     * Constructs a {@code Name}.
+     * Constructs a {@code ModuleName}.
      *
-     * @param name A valid name.
+     * @param name A valid module name.
      */
     public ModuleName(String name) {
         requireNonNull(name);

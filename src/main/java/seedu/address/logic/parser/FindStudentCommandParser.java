@@ -12,17 +12,17 @@ import seedu.address.model.module.ModuleName;
 import seedu.address.model.module.student.StudentId;
 
 /**
- * Parses input arguments and creates a new FindCommand object
+ * Parses input arguments and creates a new FindStudentCommand object.
  */
 public class FindStudentCommandParser implements Parser<FindStudentCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the FindCommand
-     * and returns a FindCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the FindStudentCommand
+     * and returns a FindStudentCommand object for execution.
      *
      * @param args Args for finding a student.
      * @return FindStudentCommand object.
-     * @throws ParseException if the user input does not conform the expected format
+     * @throws ParseException if the user input does not conform the expected format.
      */
     public FindStudentCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =

@@ -17,7 +17,7 @@ import seedu.address.model.module.student.Student;
 import seedu.address.model.module.student.StudentId;
 
 /**
- * Deletes a student identified using it's displayed index from the address book.
+ * Deletes a student identified using his/her studentId from a module.
  */
 public class DeleteStudentCommand extends DeleteCommand {
 
@@ -41,6 +41,9 @@ public class DeleteStudentCommand extends DeleteCommand {
 
     /**
      * Deletes a student identified using its student ID from a module.
+     *
+     * @param studentId The student ID of the student to be deleted.
+     * @param moduleName The name of the module that the student will be deleted from.
      */
     public DeleteStudentCommand(StudentId studentId, ModuleName moduleName) {
         this.studentId = studentId;
@@ -65,7 +68,7 @@ public class DeleteStudentCommand extends DeleteCommand {
      *
      * @param module The module the student will be deleted from.
      * @return Statement indicating that the deletion is successful.
-     * @throws CommandException Exception thrown when student is not found.
+     * @throws CommandException if student is not found.
      */
     public CommandResult deleteStudentFromModule(Module module) throws CommandException {
         List<Student> studentList = module.getFilteredStudentList();

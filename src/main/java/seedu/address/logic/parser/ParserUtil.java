@@ -8,7 +8,6 @@ import seedu.address.model.module.student.Email;
 import seedu.address.model.module.student.Name;
 import seedu.address.model.module.student.StudentId;
 import seedu.address.model.module.student.TeleHandle;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.task.TaskDeadline;
 import seedu.address.model.task.TaskId;
 import seedu.address.model.task.TaskName;
@@ -18,9 +17,6 @@ import seedu.address.model.task.TaskName;
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
 public class ParserUtil {
-
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-
     /**
      * Parses a {@code String name} into a {@code Name}.
      * Leading and trailing whitespaces will be trimmed.
@@ -79,21 +75,6 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
-    }
-
-    /**
-     * Parses a {@code String tag} into a {@code Tag}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code tag} is invalid.
-     */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
-        }
-        return new Tag(trimmedTag);
     }
 
     /**

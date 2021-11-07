@@ -156,6 +156,7 @@ public class Module {
     /**
      * Adds a task to this module and add the task to all students in this module.
      * The task must not already exist in this module.
+     *
      * @param task The task to be added.
      */
     public void addTask(Task task) {
@@ -165,6 +166,7 @@ public class Module {
 
     /**
      * Add a task to a given student.
+     *
      * @param student The student to receive the task.
      * @param task The task to be added to the student.
      */
@@ -186,6 +188,7 @@ public class Module {
 
     /**
      * Returns the UniqueTaskList containing the tasks for this module.
+     *
      * @return UniqueTaskList containing the tasks for this module.
      */
     public UniqueTaskList getTaskList() {
@@ -194,6 +197,7 @@ public class Module {
 
     /**
      * Sets the UniqueTaskList of this Student to be the input {@code taskList} taskList.
+     *
      * @param taskList the taskList to set this Student's UniqueTaskList to.
      */
     public void setTaskList(UniqueTaskList taskList) {

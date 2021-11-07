@@ -9,10 +9,13 @@ import seedu.address.logic.commands.DeleteModuleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.ModuleName;
 
+/**
+ * Parses input arguments and creates a new DeleteModuleCommand object.
+ */
 public class DeleteModuleCommandParser implements Parser<DeleteModuleCommand> {
 
     /**
-     * Parses {@code userInput} into a command and returns it.
+     * Parses {@code String} into a command and returns it.
      *
      * @param args Args for deleting a module.
      * @return DeleteModuleCommand object created from user input.

@@ -18,7 +18,7 @@ import seedu.address.model.module.student.StudentId;
 import seedu.address.model.module.student.StudentIdEqualsKeywordPredicate;
 
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
+ * Finds and lists the student in a module that that has the specified student ID.
  * Keyword matching is case insensitive.
  */
 public class FindStudentCommand extends Command {
@@ -68,6 +68,7 @@ public class FindStudentCommand extends Command {
      * Find a student from the specified module.
      *
      * @param module The module the student will be searched from.
+     * @param model The TAB model.
      * @throws CommandException Exception thrown when student is not found.
      */
     public void findStudentFromModule(Module module, Model model) throws CommandException {

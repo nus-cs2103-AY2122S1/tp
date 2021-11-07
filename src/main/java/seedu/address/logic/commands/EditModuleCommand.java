@@ -17,7 +17,7 @@ import seedu.address.model.task.UniqueTaskList;
 
 
 /**
- * Edits the module's name
+ * Edits the module's name.
  */
 public class EditModuleCommand extends EditCommand {
 
@@ -39,7 +39,7 @@ public class EditModuleCommand extends EditCommand {
     private ModuleName moduleName;
 
     /**
-     * Creates an EditModuleCommand to edit the specified {@code Module}
+     * Creates an EditModuleCommand to edit the specified {@code Module}.
      *
      * @param moduleName The name of the module to edit.
      * @param editModuleDescriptor The edited module descriptor.
@@ -71,11 +71,11 @@ public class EditModuleCommand extends EditCommand {
     }
 
     /**
-     * Edits a module's information from TAB
-     * Error checking for module not found is handled by {@code this.execute()}
+     * Edits a module's information from TAB.
+     * Error checking for module not found is handled by {@code this.execute()}.
      *
-     * @param module The module to be edited
-     * @param model The TAB model that stores the list of modules
+     * @param module The module to be edited.
+     * @param model The TAB model that stores the list of modules.
      * @return Statement indicating that the edition is successful.
      */
     public CommandResult editModuleInformation(Model model, Module module) {
@@ -85,6 +85,13 @@ public class EditModuleCommand extends EditCommand {
                 module.getName().getModuleName()));
     }
 
+    /**
+     * Creates the edited module.
+     *
+     * @param moduleToEdit The module to be edited.
+     * @param editModuleDescriptor The EditModuleDescriptor object which contains the edited information.
+     * @return The edited module.
+     */
     private static Module createEditedModule(Module moduleToEdit,
                                              EditModuleCommand.EditModuleDescriptor editModuleDescriptor) {
         assert moduleToEdit != null;
@@ -117,7 +124,7 @@ public class EditModuleCommand extends EditCommand {
 
     /**
      * Stores the details to edit the module with. Each non-empty field value will replace the
-     * corresponding field value of the student.
+     * corresponding field value of the module.
      */
     public static class EditModuleDescriptor {
         private ModuleName name;
@@ -127,7 +134,7 @@ public class EditModuleCommand extends EditCommand {
         /**
          * Copy constructor.
          *
-         * @param  toCopy The edit student descriptor to be copied.
+         * @param  toCopy The edit module descriptor to be copied.
          */
         public EditModuleDescriptor(EditModuleCommand.EditModuleDescriptor toCopy) {
             setModuleName(toCopy.name);
@@ -135,6 +142,8 @@ public class EditModuleCommand extends EditCommand {
 
         /**
          * Returns true if at least one field is edited.
+         *
+         * @return A boolean stating whether there is any edited field.
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name);

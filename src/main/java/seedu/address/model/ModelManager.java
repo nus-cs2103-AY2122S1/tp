@@ -19,7 +19,7 @@ import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskId;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the TAB data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -99,7 +99,7 @@ public class ModelManager implements Model {
      * Deletes the given module.
      * The module must exist in the TAB.
      *
-     * @param target
+     * @param target The module to be deleted.
      */
     @Override
     public void deleteModule(Module target) {
@@ -113,8 +113,10 @@ public class ModelManager implements Model {
     }
 
     /**
-     * @param student
-     * @return true if current teachingAssistantBuddy has specified student
+     * Checks whether the specified student is inside the TAB model.
+     *
+     * @param student The students to be found.
+     * @return True if current teachingAssistantBuddy has specified student.
      */
     public boolean hasStudent(Student student) {
         requireNonNull(student);

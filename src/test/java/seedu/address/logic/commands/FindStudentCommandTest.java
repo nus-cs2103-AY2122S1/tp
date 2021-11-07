@@ -19,11 +19,14 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.ObservableList;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleName;
 import seedu.address.model.module.ModuleNameEqualsKeywordPredicate;
+import seedu.address.model.module.student.Student;
 import seedu.address.model.module.student.StudentId;
 import seedu.address.model.module.student.StudentIdEqualsKeywordPredicate;
 import seedu.address.testutil.TypicalModules;
@@ -101,11 +104,16 @@ public class FindStudentCommandTest {
         StudentIdEqualsKeywordPredicate predicate = new StudentIdEqualsKeywordPredicate(VALID_STUDENT_ID_AMY);
         FindStudentCommand command = new FindStudentCommand(new ModuleName(MODULE_NAME_0),
                 new StudentId(VALID_STUDENT_ID_AMY));
-        expectedModel.getFilteredModuleList().get(0).updateFilteredStudentList(predicate);
+        ObservableList<Module> moduleListInExpectedModel = expectedModel.getFilteredModuleList();
+        Module firstModuleInExpectedModel = moduleListInExpectedModel.get(0);
+        firstModuleInExpectedModel.updateFilteredStudentList(predicate);
         expectedModel.updateFilteredModuleList(new ModuleNameEqualsKeywordPredicate(MODULE_NAME_0));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(TypicalModules.getTypicalModules().get(0).getFilteredStudentList().get(0)),
-                model.getFilteredModuleList().get(0).getFilteredStudentList()
-        );
+
+        Module expectedModule = TypicalModules.getTypicalModules().get(0);
+        ObservableList<Student> expectedStudentList = expectedModule.getFilteredStudentList();
+        ObservableList<Module> actualModuleList = model.getFilteredModuleList();
+        Module actualModule = actualModuleList.get(0);
+        assertEquals(Arrays.asList(expectedStudentList.get(0)), actualModule.getFilteredStudentList());
     }
 }
