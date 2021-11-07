@@ -36,14 +36,16 @@ public class MainWindow extends UiPart<Stage> {
     private GroupListPanel groupListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
-
-    private ViewingPanelManager viewingPanelManager;
+    private ViewingPanel viewingPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
 
     @FXML
     private MenuItem helpMenuItem;
+
+    @FXML
+    private StackPane resultDisplayPlaceholder;
 
     @FXML
     private StackPane personListPanelPlaceholder;
@@ -55,7 +57,7 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane groupListPanelPlaceholder;
 
     @FXML
-    private StackPane resultDisplayPlaceholder;
+    private StackPane viewingPanelPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
@@ -123,15 +125,18 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        taskListPanel = new TaskListPanel(logic.getAddressBook().getTaskList());
+        taskListPanel = new TaskListPanel(logic.getFilteredTaskList());
         taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
 
-        groupListPanel = new GroupListPanel(logic.getAddressBook().getGroupList());
+        groupListPanel = new GroupListPanel(logic.getFilteredGroupList());
         groupListPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
-        viewingPanelManager = new ViewingPanelManager(resultDisplay.getRoot());
+
+        viewingPanel = new ViewingPanel(logic.getViewingType(), logic.getViewingPersonWithDetails(),
+                logic.getSortedLessonsWithAttendees(), logic.getViewingGroupWithDetails());
+        viewingPanelPlaceholder.getChildren().add(viewingPanel.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
@@ -202,7 +207,6 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-            viewingPanelManager.setViewingPanel(resultDisplayPlaceholder, commandResult.getViewType(), logic);
             if (commandResult.isShowHelp()) {
                 handleHelp();
             }

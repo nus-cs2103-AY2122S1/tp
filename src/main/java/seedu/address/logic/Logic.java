@@ -1,16 +1,21 @@
 package seedu.address.logic;
 
 import java.nio.file.Path;
-import java.util.List;
 
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ViewingType;
+import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupWithDetails;
 import seedu.address.model.lesson.LessonWithAttendees;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonWithDetails;
+import seedu.address.model.task.Task;
 
 /**
  * API of the Logic component
@@ -35,8 +40,24 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
 
+    /** Returns an unmodifiable view of the filtered list of tasks */
+    ObservableList<Task> getFilteredTaskList();
+
+
+    /** Returns an unmodifiable view of the filtered list of groups */
+    ObservableList<Group> getFilteredGroupList();
+
     /** Returns a list of lessons with the corresponding attendees */
-    List<LessonWithAttendees> getSortedLessonsWithAttendees();
+    ObservableList<LessonWithAttendees> getSortedLessonsWithAttendees();
+
+    /** Returns the viewing type currently */
+    ObservableValue<ViewingType> getViewingType();
+
+    /** Returns the currently viewing person */
+    ObservableValue<PersonWithDetails> getViewingPersonWithDetails();
+
+    /** Returns the currently viewing group */
+    ObservableValue<GroupWithDetails> getViewingGroupWithDetails();
 
     /**
      * Returns the user prefs' address book file path.

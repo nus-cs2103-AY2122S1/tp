@@ -10,12 +10,13 @@
     "uniqueId": "05404585-7339-4fb4-9899-c470e0068829",
     "name": "Alice Pauline",
     "phone": "94351253",
-    "email": "pauline@example.com",
+    "email": "alice@example.com",
     "address": "4th street"
   } ],
   "tasks" : [ {
     "name" : "Report 1",
     "deadline" : "2021-10-10",
     "uniqueId" : "f31648db-5619-4bad-99d2-87367a2b5f28"
-  } ]
+  } ],
+  "groups": []
 }

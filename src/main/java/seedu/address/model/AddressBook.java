@@ -4,14 +4,23 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupWithDetails;
 import seedu.address.model.group.UniqueGroupList;
 import seedu.address.model.id.UniqueId;
+import seedu.address.model.id.UniqueIdMapper;
+import seedu.address.model.lesson.Attendee;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonWithAttendees;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonWithDetails;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
@@ -63,11 +72,20 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Replaces the contents of the task list with {@code tasks}.
-     * {@code tasks} must not contain duplicate persons.
+     * {@code tasks} must not contain duplicate tasks.
      */
     public void setTasks(List<Task> tasks) {
         this.tasks.setTasks(tasks);
     }
+
+    /**
+     * Replaces the contents of the group list with {@code groups}.
+     * {@code groups} must not contain duplicate groups.
+     */
+    public void setGroups(List<Group> groups) {
+        this.groups.setGroups(groups);
+    }
+
 
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
@@ -77,6 +95,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         setPersons(newData.getPersonList());
         setTasks(newData.getTaskList());
+        setGroups(newData.getGroupList());
     }
 
     //// person-level operations
@@ -192,7 +211,40 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code key} must exist in the address book.
      */
     public void removeGroup(Group key) {
+        UniqueId groupId = key.getId();
         groups.remove(key);
+        assert !groups.contains(key); // assert removal first, before cleaning up.
+        persons.cleanUpGroupId(groupId);
+    }
+
+    public UniqueIdMapper<Person> getPersonMapper() {
+        return persons;
+    }
+
+    public UniqueIdMapper<Group> getGroupMapper() {
+        return groups;
+    }
+
+    public PersonWithDetails getPersonWithDetails(Person person) {
+        Set<GroupWithDetails> groupsPersonIsIn = groups.getFromUniqueIds(person.getAssignedGroupIds()).stream()
+                .map(this::getGroupWithDetails)
+                .collect(Collectors.toSet());
+        Set<Task> tasksPersonHas = tasks.getFromUniqueIds(person.getAssignedTaskIds());
+        Map<Task, Boolean> tasksCompletion = new HashMap<>();
+        Map<UniqueId, Boolean> tasksCompletionId = person.getTasksCompletion();
+        tasksPersonHas.forEach(task -> {
+            UniqueId taskId = task.getId();
+            Boolean isDone = tasksCompletionId.get(taskId);
+            assert !isDone.equals(null);
+            tasksCompletion.put(task, isDone);
+        });
+        return new PersonWithDetails(person, groupsPersonIsIn, tasksPersonHas, tasksCompletion);
+    }
+
+    public GroupWithDetails getGroupWithDetails(Group group) {
+        Set<Person> studentsInGroup = persons.getFromUniqueIds(group.getAssignedPersonIds());
+        Set<Task> tasksInGroup = tasks.getFromUniqueIds(group.getAssignedTaskIds());
+        return new GroupWithDetails(group, studentsInGroup, tasksInGroup);
     }
 
     //// util methods
@@ -200,7 +252,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public String toString() {
         return persons.asUnmodifiableObservableList().size() + " persons"
-                + tasks.asUnmodifiableObservableList().size() + " tasks";
+                + tasks.asUnmodifiableObservableList().size() + " tasks"
+                + groups.asUnmodifiableObservableList().size() + " groups";
         // TODO: refine later
     }
 
@@ -222,8 +275,18 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public List<LessonWithAttendees> getSortedLessonsWithAttendees() {
         List<LessonWithAttendees> lessons = new ArrayList<>();
-        for (Person p : persons) {
-            lessons.addAll(p.getLessonsWithAttendees());
+        for (Person person : persons) {
+            List<Attendee> newList = new ArrayList<>();
+            newList.add(person);
+            for (Lesson lesson : person.getLessons()) {
+                lessons.add(new LessonWithAttendees(lesson, newList));
+            }
+        }
+        for (Group group : groups) {
+            List<Attendee> newList = new ArrayList<>(persons.getFromUniqueIds(group.getAssignedPersonIds()));
+            for (Lesson lesson : group.getLessons()) {
+                lessons.add(new LessonWithAttendees(lesson, newList));
+            }
         }
         Collections.sort(lessons, new LessonWithAttendees.SortByLesson());
         return lessons;

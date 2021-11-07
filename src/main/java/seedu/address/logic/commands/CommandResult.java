@@ -4,8 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
-import seedu.address.ui.ViewingPanelManager;
-
 /**
  * Represents the result of a command execution.
  */
@@ -19,24 +17,13 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
-    private final ViewingPanelManager.ViewType viewType;
-
-    /**
-     * Constructs a {@code CommandResult} with the specified fields.
-     */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit,
-            ViewingPanelManager.ViewType viewType) {
-        this.feedbackToUser = requireNonNull(feedbackToUser);
-        this.showHelp = showHelp;
-        this.exit = exit;
-        this.viewType = viewType;
-    }
-
     /**
      * Constructs a {@code CommandResult} with the specified fields but with a default ViewType
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
-        this(feedbackToUser, showHelp, exit, ViewingPanelManager.ViewType.DEFAULT);
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showHelp = showHelp;
+        this.exit = exit;
     }
 
     /**
@@ -59,10 +46,6 @@ public class CommandResult {
         return exit;
     }
 
-    public ViewingPanelManager.ViewType getViewType() {
-        return viewType;
-    }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -77,13 +60,12 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit
-                && viewType.equals(viewType);
+                && exit == otherCommandResult.exit;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit, viewType);
+        return Objects.hash(feedbackToUser, showHelp, exit);
     }
 
 }

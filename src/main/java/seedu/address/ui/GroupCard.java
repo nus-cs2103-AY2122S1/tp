@@ -37,8 +37,7 @@ public class GroupCard extends UiPart<Region> {
         super(FXML);
         this.group = group;
         id.setText(displayedIndex + ". ");
-        //name.setText(group.getName().name);
-        name.setText(group.getAssignedPersonIds().toString());
+        name.setText(group.getName().name);
     }
 
     @Override

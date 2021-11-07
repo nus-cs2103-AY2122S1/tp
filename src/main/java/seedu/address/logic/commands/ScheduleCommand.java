@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.ui.ViewingPanelManager;
+import seedu.address.model.ViewingType;
 
 public class ScheduleCommand extends Command {
 
@@ -15,6 +15,8 @@ public class ScheduleCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        return new CommandResult(MESSAGE_SUCCESS, false, false, ViewingPanelManager.ViewType.SCHEDULE);
+        model.updateLessonWithAttendeesList();
+        model.setViewingType(ViewingType.SCHEDULE);
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 }

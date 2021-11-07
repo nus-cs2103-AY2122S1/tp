@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.persons;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PERSON_COMMAND;
 
 import java.util.List;
 
@@ -10,22 +11,23 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.ViewingType;
 import seedu.address.model.person.Person;
 
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Views a person identified using it's displayed index from the address book.
  */
 public class ViewPersonCommand extends Command {
 
     public static final String COMMAND_WORD = "-v";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Views a person in the persons list.\n"
+    public static final String MESSAGE_USAGE = PERSON_COMMAND + " " + COMMAND_WORD
+            + ": Views a student in the students list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Example: " + PERSON_COMMAND + " " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_VIEW_PERSON_SUCCESS = "View Person: %1$s";
+    public static final String MESSAGE_VIEW_PERSON_SUCCESS = "View Student: %1$s";
 
     private final Index targetIndex;
 
@@ -43,6 +45,8 @@ public class ViewPersonCommand extends Command {
         }
 
         Person personToView = lastShownList.get(targetIndex.getZeroBased());
+        model.setPersonToView(personToView);
+        model.setViewingType(ViewingType.PERSON);
         return new CommandResult(String.format(MESSAGE_VIEW_PERSON_SUCCESS, personToView));
     }
 

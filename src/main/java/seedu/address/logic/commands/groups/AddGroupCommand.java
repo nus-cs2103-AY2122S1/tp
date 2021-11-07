@@ -3,6 +3,7 @@ package seedu.address.logic.commands.groups;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.core.Messages;
@@ -11,6 +12,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.ViewingType;
 import seedu.address.model.group.Group;
 import seedu.address.model.id.UniqueId;
 import seedu.address.model.person.Person;
@@ -28,7 +30,8 @@ public class AddGroupCommand extends Command {
 
     /**
      * Constructs a {@code AddGroupCommand} with the given parameters
-     * @param toAdd Group to add
+     *
+     * @param toAdd        Group to add
      * @param personsIndex List of indexes of persons to add
      */
     public AddGroupCommand(Group toAdd, List<Index> personsIndex) {
@@ -66,6 +69,27 @@ public class AddGroupCommand extends Command {
         Group withIds = toAdd.updateAssignedPersonIds(personsId);
         model.addGroup(withIds);
 
+        model.setGroupToView(withIds);
+        model.setViewingType(ViewingType.GROUP);
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, withIds));
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || !(o instanceof AddGroupCommand)) {
+            return false;
+        }
+        AddGroupCommand that = (AddGroupCommand) o;
+        return toAdd.isSameGroup(that.toAdd) && Objects.equals(personsIndex, that.personsIndex);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(toAdd, personsIndex);
+    }
+
 }

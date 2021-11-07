@@ -6,12 +6,15 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.group.exceptions.DuplicateGroupException;
 import seedu.address.model.group.exceptions.GroupNotFoundException;
 import seedu.address.model.id.UniqueId;
+import seedu.address.model.id.UniqueIdMapper;
+import seedu.address.model.id.exceptions.IdNotFoundException;
 
 
 /**
@@ -25,7 +28,7 @@ import seedu.address.model.id.UniqueId;
  *
  * @see Group#isSameGroup(Group)
  */
-public class UniqueGroupList implements Iterable<Group> {
+public class UniqueGroupList implements Iterable<Group>, UniqueIdMapper<Group> {
 
     private final ObservableList<Group> internalList = FXCollections.observableArrayList();
     private final ObservableList<Group> internalUnmodifiableList =
@@ -152,5 +155,10 @@ public class UniqueGroupList implements Iterable<Group> {
             }
         }
         return true;
+    }
+
+    @Override
+    public Set<Group> getFromUniqueIds(Set<UniqueId> ids) throws IdNotFoundException {
+        return UniqueIdMapper.<Group>getFromUniqueIdsAndItemList(ids, internalList);
     }
 }

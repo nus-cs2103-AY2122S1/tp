@@ -3,7 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -12,7 +12,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.id.UniqueId;
 import seedu.address.model.id.UniqueIdMapper;
-import seedu.address.model.id.exceptions.IdNotFoundException;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -102,6 +101,21 @@ public class UniquePersonList implements Iterable<Person>, UniqueIdMapper<Person
     }
 
     /**
+     * Removes the groupId from all persons
+     * @param toRemove id to remove
+     */
+    public void cleanUpGroupId(UniqueId toRemove) {
+        List<Person> persons = new ArrayList<>(internalList);
+        for (int i = 0; i < persons.size(); i++) {
+            Person current = persons.get(i);
+            if (current.containsGroupId(toRemove)) {
+                Person withoutId = current.removeGroupId(toRemove);
+                internalList.set(i , withoutId);
+            }
+        }
+    }
+
+    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Person> asUnmodifiableObservableList() {
@@ -141,12 +155,6 @@ public class UniquePersonList implements Iterable<Person>, UniqueIdMapper<Person
 
     @Override
     public Set<Person> getFromUniqueIds(Set<UniqueId> ids) {
-        Set<Person> toReturn = new HashSet<>();
-        for (UniqueId id : ids) {
-            toReturn.add(internalList.stream().filter(person -> id.equals(person.getId()))
-                    .findFirst()
-                    .orElseThrow(() -> new IdNotFoundException(id)));
-        }
-        return toReturn;
+        return UniqueIdMapper.<Person>getFromUniqueIdsAndItemList(ids, internalList);
     }
 }
