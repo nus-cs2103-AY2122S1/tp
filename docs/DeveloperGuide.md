@@ -1030,8 +1030,31 @@ testers are expected to do more *exploratory* testing.
     1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Editing an applicant
 
+1. Editing an applicant while all applicants are being shown
+
+    1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list.
+
+    1. Test case: `edit 1 n/Alexander p/87654321 e/alexander@gmail.com`<br>
+       Expected: First applicant is edited such that his new name is Alexander with the phone number 87654321 and email alexander@gmail.com. 
+       Details of the edited applicant shown in the result display.
+
+    1. Test case: `edit 2 n/Alice p/87654321`<br>
+       Expected: No applicants are edited. Error details shown in the result display stating that the new edited applicant Alice shares either 
+       the same phone number or same email as Alexander.
+
+    1. Test case: `edit 2 n/Alice e/alexander@gmail.com`<br>
+       Expected: No applicants are edited. Error details shown in the result display stating that the new edited applicant Alice shares either 
+       the same phone number or same email as Alexander.
+
+    1. Test case: `edit 2 n/&a#lly`<br>
+       Expected: No applicants are edited. Error details shown in the result display stating that names should only contain alphanumeric characters and spaces.
+   
+    1. Other incorrect edit commands to try: `edit`, `edit Alexander`, `edit 1`, `edit 1 n/`
+       (where incomplete or invalid details are given for the applicant being edited)<br>
+       Expected: Error messages displaying the cause of error is shown in the result display.
+     
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
@@ -1042,17 +1065,26 @@ testers are expected to do more *exploratory* testing.
        Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
     1. Test case: `delete 0`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
+       Expected: No applicant is deleted. Error details shown in the result display where indexes should be non-zero unsigned integers.
+       
+    1. Test case: `delete 1 1`<br>
+       Expected: No applicant is deleted. Error details shown in the result display where there should not be any duplicate indexes.
+       
+    1. Other incorrect delete commands to try: `delete`, `delete x`(where x is larger than the list size), `delete Alexander`<br>
+       Expected: Similar to previous two test cases.
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Prerequisites: There is already an existing saved `addressbook.json` file located in the data file of your home RecruitIn directory.
+  
+    1. Test case: Ensure RecruitIn is closed. Corrupt the `addressbook.json` file by typing random letters into it before running RecruitIn.<br>
+       Expected: RecruitIn will run normally, but with an empty list of applicants.
 
-1. _{ more test cases …​ }_
+    1. Test case: Ensure RecruitIn is closed. Delete the `addressbook.json` file before running RecruitIn.<br>
+       Expected: RecruitIn will run normally, but with the sample list applicants displayed.
+
+   1. Other incorrect test cases to try: The above two test cases can be tried without closing RecruitIn beforehand.<br>
+      Expected: RecruitIn will run normally without any side-effects.
+
