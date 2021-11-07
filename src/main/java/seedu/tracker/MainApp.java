@@ -17,7 +17,6 @@ import seedu.tracker.logic.Logic;
 import seedu.tracker.logic.LogicManager;
 import seedu.tracker.model.Model;
 import seedu.tracker.model.ModelManager;
-import seedu.tracker.model.ModuleTracker;
 import seedu.tracker.model.ReadOnlyModuleTracker;
 import seedu.tracker.model.ReadOnlyUserInfo;
 import seedu.tracker.model.ReadOnlyUserPrefs;

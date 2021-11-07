@@ -46,3 +46,4 @@ Given below are my contributions to the project.
     * PRs reviewed (with non-trivial review comments): [\#183](https://github.com/AY2122S1-CS2103T-W17-2/tp/pull/183#pullrequestreview-799494859))
     * Contributed to forum discussions (examples: [1](https://github.com/nus-cs2103-AY2122S1/forum/issues/337), [2](https://github.com/nus-cs2103-AY2122S1/forum/issues/249))
     * Reported bugs and suggestions for other teams in the class
+    
