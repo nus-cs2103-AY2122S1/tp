@@ -42,4 +42,7 @@ Given below are my contributions to the project.
     * Added implementation section of `friend --link` and `friend --unlink` feature.
 
 * **Contribution to team-based tasks:**
-  * Work closely with teammates to fully revamp the UI and kept them up to date about changes to the logic in the UI, so they could continue working on the UI in parallel.
+  * Added glossary for gitGud in the developer guide.
+  * Edited the introduction of the user guide to make it more user-focused and gamer-themed.
+* **Review/mentoring contributions:**
+  * Worked closely with teammates to fully revamp the UI, keeping them up to date about changes to the logic in the UI and answering any questions they had, so they could continue working on the UI in parallel.
