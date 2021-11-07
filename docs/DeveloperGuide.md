@@ -1,3 +1,4 @@
+
 ---
 layout: page
 title: Developer Guide
@@ -116,7 +117,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-T09-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="600" />
 
 
 The `Model` component,
@@ -147,7 +148,61 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Find feature
+### Add feature (With `ModuleCode`)
+The add feature allows user to add a `Person` or `ModuleLesson` into contHACKS. Both `Person` and `ModuleLesson` contains the member `ModuleCode`. This section elaborates on the implementation of `ModuleCode` and how it affects the add feature. 
+
+#### About ModuleCode
+`ModuleCode` is one of the parameters that must be included when adding a `Person` or `ModuleLesson`. `ModuleCode` contains the following members:
+```Java
+public final String value;
+public final Set<LessonCode> lessonCodes;
+```
+The `value` refers to the module code of a NUS module `e.g. "CS2100"`.
+`LessonCode` also has a `value` that refers to the code of the lesson: tutorials, labs, sectionals, etc `e.g. "T12"`
+`ModuleCode` has a set of `LessonCode` because a module in NUS can indeed have many lessons.
+
+<div markdown="span" class="alert alert-primary">:information_source: **Note:**
+There is a need to associate `LessonCode` with `ModuleCode` as we need to be able to identify which `ModuleCode` a `LessonCode` belongs to.
+</div>
+
+#### Implementation
+There are some distinctions between a `Person` and `ModuleLesson`. A `Person` can have many `ModuleCode`, with each `ModuleCode` having multiple `LessonCode` while a `ModuleLesson` lesson can only have one `ModuleCode`, with that `ModuleCode` having one `LessonCode`.
+
+##### Implementation for adding `Person`
+Since a `Person` can have many `ModuleCode`, an input like: `add ... m/CS2100 T19 B04 m/CS2103T T09` is valid. The following sequence diagram shows how parsing the input `add ... m/CS2100 T19 B04 m/CS2103T T09` works successfully to return a `AddPersonCommand`:
+
+![Sequence diagram for parsing Person](images/ParseAddPersonSequenceDiagram.png)
+
+Notice that the `AddPersonCommandParser` uses the method `parseModuleCodes()` to get a collection of `ModuleCode`.
+
+##### Implementation for adding `ModuleLesson`
+Since a `ModuleLesson` can only have one `ModuleCode` and one `LessonCode`, we need a way to enforce `lessonCodes.size() == 1` in `ModuleCode`. To achieve this, we only take the first `LessonCode` as the desired one. For example, the input `addc ... m/CS2100 T19 B09` would take `T19` as the `LessonCode` and ignore `B09`. On a similar note, to enforce having only one `ModuleCode`, we only consider the last occurrence of the parameter `m/`. For example, the input `addc ... m/CS2103T B04 m/CS2100 T19` would only consider `m/CS2100 T19` and ignore `m/CS2103T B04`. The following sequence diagram shows how parsing the input `addc ... m/CS2103T B04 m/CS2100 T19 B09` works successfully to return a `AddModuleLessonCommand` despite the extra `ModuleCode` and `LessonCode`:
+
+![Sequence diagram for parsing ModuleLesson](images/ParseAddModuleLessonSequenceDiagram.png)
+
+Notice that the `AddModuleLessonCommandParser` uses the method `parseModuleCodeForModuleLesson()` instead of `parseModuleCodes()` used by `AddPersonCommandParser`. This is where the distinction lies between adding `Person` and `ModuleLesson` with `ModuleCode`.
+
+#### Design considerations:
+
+**Aspect: What should be associated with the `ModuleCode`:**
+
+* **Alternative 1 (initial idea):** Have both `ModuleCode` and `LessonCode` be standalone classes associate with `Person` and `ModuleLesson`.
+    * Pros: Easier to implement
+    * Pros: Reduced coupling.
+    * Cons: Unable to tell which `ModuleCode` a `LessonCode` belongs to when there are more than one `ModuleCode` and `LessonCode`. Have to find another way to make the association which would introduce dependencies and remove the pros of reduced coupling.
+
+* **Alternative 2 (current version):** Have `ModuleCode` be associated with a set of `LessonCode`
+    * Pros: Able to tell which `ModuleCode` a `LessonCode` belongs to
+    * Pros: Some level of code reuse
+    * Cons: Have to introduce checks to ensure `ModuleCode` only has one `LessonCode` when it is a member of `ModuleLesson`
+
+* **Alternative 3:** Implement `ModuleCodeForPerson` and `ModuleCodeForModuleLesson`
+    * Pros: No checks are required as `ModuleCodeForModuleLesson` can be implemented to only have one `LessonCode`
+    * Cons: Low level of code reuse
+    * Cons: Not extensible
+
+
+### Find feature 
 
 #### Implementation
 The find command returns contacts that matches the input keywords. Initially, it only returns contacts that fully matches the keywords.
