@@ -37,8 +37,8 @@ Given below are my contributions to the project.
       * Revise the UG partially for v1.3 and Mock PE [\#101](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/101/files)
       * Include screenshots for the UG [\#105](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/105)
    * Developer Guide
-      * Wrote the implementation details of `Ordering` [\#161](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/161/files)
-      * Helped a team member with the implementation details of `Mutating Inventory` [\#185](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/185/files)
+      * Wrote the implementation details of `Ordering` and drew the required UMLs [\#161](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/161/files)
+      * Helped a team member with the implementation details of `Mutating Inventory` and drew the required UMLs [\#185](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/185/files)
       * Wrote part of use cases [\#73](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/73)
 
 * **Community**:
