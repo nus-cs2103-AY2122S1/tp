@@ -345,10 +345,12 @@ with the newly created student.
 in the `resultDisplay`, informing the user that the add operation is valid. 
 
 
-The following sequence diagram shows how the add command works: 
+The following (partial) sequence diagram shows how the add command works:
+- Note: toAdd in the sequence diagram represents the new `Student` object to be added.
+- Refer to [Logic component](#Logic component) for a review of the Logic Component.
 
-Note: `CommandText` in the sequence diagram will represent "add -n erwin -sid A0212121H -cid B18 -email e0528551@u.nus.edu"
-![AddCommandActivityDiagram](images/commands/AddCommand/AddCommandSequenceDiagram.png)
+
+ ![AddCommandActivityDiagram](images/commands/AddCommand/AddCommandAbstractSequenceDiagram.png)
 
 
 The following activity diagram summarizes what happens when a CS2100 TA executes a new command:
