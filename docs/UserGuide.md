@@ -99,8 +99,9 @@ Squid Girl Theme           |  Wonder Egg Priority Theme
 
 ___
 
-* **Tab Switching:** `CTRL-S` and `CTRL-D`. To cycle through the tabs to the right, use `CTRL-D`. To cycle through the tabs to the left, use `CTRL-S`.
+<div style="page-break-after: always;"></div>
 
+* **Tab Switching:** `CTRL-S` and `CTRL-D`. To cycle through the tabs to the right, use `CTRL-D`. To cycle through the tabs to the left, use `CTRL-S`.
 
 All Tab  |  Watching Tab
 :-------------------------:|:-------------------------:
@@ -112,7 +113,7 @@ To Watch Tab           |  Finished Tab
 
 ---
 
-* **Stats Window** `CTRL-Q` To close the statistics window.
+* **Closing Stats Window** `CTRL-Q` To close the statistics window.
 
 ___
 
@@ -460,6 +461,8 @@ Stats Window           |
 :-------------------------:|
 ![](images/UG-images/stats2.png)  |
 
+<div style="page-break-after: always;"></div>
+
 Main Window when the Stats Window is on display |
 :-------------------------:|
 ![](images/UG-images/stats1.JPG)  |
@@ -524,6 +527,8 @@ ___
   <br/> e.g. `genre c/add 1 g/comedy` will not work as `1` is not a prefixed parameter
 
 </div>
+
+<div style="page-break-after: always;"></div>
 
 | Command | Usage |
 | :--------: | -------- |
