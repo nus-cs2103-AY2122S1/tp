@@ -1,7 +1,6 @@
 package seedu.unify.ui;
 
 import java.util.logging.Logger;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -118,6 +117,12 @@ public class MainWindow extends UiPart<Stage> {
                 } catch (CommandException | ParseException e) {
                     e.printStackTrace();
                 }
+            } else if (event.getCode() == KeyCode.DOWN) {
+                try {
+                    executeCommand("/next");
+                } catch (CommandException | ParseException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
@@ -205,6 +210,15 @@ public class MainWindow extends UiPart<Stage> {
                 commandBox.setCommandTextField(result);
                 return new CommandResult("");
             }
+
+            if (commandText.trim().startsWith("/next")) {
+                CommandHistory commandHistory = CommandHistory.getInstance();
+                String result = commandHistory.retrieveNextCommand();
+                resultDisplay.setFeedbackToUser("");
+                commandBox.setCommandTextField(result);
+                return new CommandResult("");
+            }
+
             CommandHistory.getInstance().addCommandToHistory(commandText);
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());

@@ -7,9 +7,9 @@ import seedu.unify.logic.commands.exceptions.CommandException;
 
 public class CommandHistory {
 
-    public static final String MESSAGE_NO_MORE_HISTORY = "";
+    public static final String MESSAGE_NO_MORE_HISTORY = "The command history ends here.";
     private static CommandHistory chInstance;
-    private ArrayList<String> previousCommands;
+    private final ArrayList<String> previousCommands;
     private int counter;
 
     private CommandHistory() {
@@ -26,12 +26,22 @@ public class CommandHistory {
 
     /**
      * Add command to history
+     *
      * @param command
      */
     public void addCommandToHistory(String command) {
         previousCommands.add(command);
         LogsCenter.getLogger(CommandHistory.class).info("Added command : " + command);
         resetCounter();
+    }
+
+    /**
+     * safsfs
+     * @return sfsdf
+     * @throws CommandException sfasfsd
+     */
+    public String retrieveNextCommand() throws CommandException {
+        return retrievePreviousCommand(--counter);
     }
 
     /**
@@ -44,6 +54,7 @@ public class CommandHistory {
         return retrievePreviousCommand(counter++);
     }
 
+
     /**
      * some function
      *
@@ -53,6 +64,9 @@ public class CommandHistory {
      */
     public String retrievePreviousCommand(int previousIndex) throws CommandException {
         if (previousIndex >= previousCommands.size()) {
+            throw new CommandException(MESSAGE_NO_MORE_HISTORY);
+        }
+        if (previousIndex < 0) {
             throw new CommandException(MESSAGE_NO_MORE_HISTORY);
         }
 
