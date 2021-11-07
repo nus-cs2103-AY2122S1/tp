@@ -62,44 +62,6 @@ class TundoneCommandTest {
     }
 
     @Test
-    void execute_markMultipleTasksAsUndone_markSuccessful() throws Exception {
-        Index validMemberId = Index.fromOneBased(1);
-        Set<Index> validMemberIdList = new HashSet<>();
-        validMemberIdList.add(validMemberId);
-        Index validTaskId = Index.fromOneBased(1);
-        Index validTaskId2 = Index.fromOneBased(2);
-        Index validTaskId3 = Index.fromOneBased(3);
-        Set<Index> validTaskIdList = new HashSet<>();
-        validTaskIdList.add(validTaskId2);
-        validTaskIdList.add(validTaskId3);
-        validTaskIdList.add(validTaskId);
-        Task validTask = new TaskBuilder().build();
-        Task validTask2 = new TaskBuilder().withName("Test2").withDeadline("19/02/2022 23:59").build();
-        Task validTask3 = new TaskBuilder().withName("Test3").withDeadline("19/02/2022 23:59").build();
-        Member validMember = new MemberBuilder().build();
-        AddressBook addressBook = new AddressBookBuilder().withMember(validMember).build();
-        TaddCommand tAddCommand = new TaddCommand(validMemberIdList, validTask);
-        TaddCommand tAddCommand2 = new TaddCommand(validMemberIdList, validTask2);
-        TaddCommand tAddCommand3 = new TaddCommand(validMemberIdList, validTask3);
-        TlistCommand tlistCommand = new TlistCommand(validMemberId);
-        TdoneCommand tdoneCommand = new TdoneCommand(validTaskIdList);
-        ModelStubAcceptingWithOneTask modelStub =
-                new ModelStubAcceptingWithOneTask(addressBook, validTask, validMemberIdList);
-        tAddCommand.execute(modelStub);
-        tAddCommand2.execute(modelStub);
-        tAddCommand3.execute(modelStub);
-        tlistCommand.execute(modelStub);
-        tdoneCommand.execute(modelStub);
-
-        CommandResult commandResult = new TundoneCommand(validTaskIdList).execute(modelStub);
-
-        String expectedMessage = String.format(TundoneCommand.MESSAGE_UNDONE_TASK_SUCCESS, validTask)
-                + String.format(TundoneCommand.MESSAGE_UNDONE_TASK_SUCCESS, validTask2)
-                + String.format(TundoneCommand.MESSAGE_UNDONE_TASK_SUCCESS, validTask3);
-        assertEquals(expectedMessage, commandResult.getFeedbackToUser());
-    }
-
-    @Test
     void execute_markOneTaskAndItDoesNotExist_throwsCommandException() throws Exception {
         Index validMemberId = Index.fromOneBased(1);
         Set<Index> validMemberIdList = new HashSet<>();
@@ -275,25 +237,12 @@ class TundoneCommandTest {
         }
 
         @Override
-        public void deleteTask(Member member, Task task) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void deleteTask(Member member, int index) {
+        public void deleteTask(Task task) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void setTask(Task target, Task editedTask) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        /**
-         * Replaces the task specified by {@code index} with {@code editedTask} in the given {@code member}'s task list.
-         */
-        @Override
-        public void setTask(int index, Task editedTask) {
             throw new AssertionError("This method should not be called.");
         }
 
