@@ -1094,18 +1094,18 @@ testers are expected to do more *exploratory* testing.
        Expected: Similar to previous.
 
 ### Export Mailing List Command
-1.  Export list with default attributes   
-    1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
-   
+1.  Export unfiltered contact list 
+    1. Prerequisites: List all contacts using the `list` command.
+
     1. Test case: `mailingList`<br>
-       Expected: Generate CSV file with name phone and email of all contacts displayed in the list.
-   
+       Expected: Generate CSV file with name, phone and email of all contacts displayed in the list.
+
     1. Test case: `mailingList b/ a/`<br>
-       Expected: Generate CSV file with name, phone, email, birthday and address of all contacts displayed in the list.
-  
+       Expected: Generate CSV file with name, birthday and address of all contacts displayed in the list.
+
     1. Test case: `mailingList k/`<br>
        Expected: No changes made. Error details shown in the status message.
-       
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files
