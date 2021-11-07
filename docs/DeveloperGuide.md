@@ -683,24 +683,24 @@ Priorities: High, Low
 
 **Extensions**
 
-* 1a. System detects invalid command format
+* 1a. System detects invalid command format.
     * 1a1. System displays an error, showing unknown command.
-    * 1a2. User enters command again
+    * 1a2. User enters command again.
 
 Steps 1a1 - 1a2 are repeated until the command is correctly formatted. <br>
 Use case resumes from step 2.
 
 * 1b. System detects invalid command arguments
   * 1b1. System displays error corresponding to the invalid argument and provides an example on the accepted format 
-    and arguments
-  * 1b2. User enters command arguments again
+    and arguments.
+  * 1b2. User enters command arguments again.
 
 Steps 1b1 - 1b2 are repeated until all command arguments are valid. <br>
 Use case resumes from step 2.
 
 * 2a. Customer to add already exists in RHRH.
     * 2a1. System displays an error, and that the customer already exists in RHRH.
-    * 2a2. User enters customer details again
+    * 2a2. User enters customer details again.
 
 Steps 2a1 - 2a2 are repeated until the customer to be added is unique. <br>
 Use case resumes from step 3.
@@ -721,24 +721,24 @@ Use case resumes from step 3.
 
 **Extensions**
 
-* 1a. System detects invalid command format
+* 1a. System detects invalid command format.
     * 1a1. System displays an error, showing unknown command.
-    * 1a2. User enters command again
+    * 1a2. User enters command again.
 
 Steps 1a1 - 1a2 are repeated until the command is correctly formatted. <br>
 Use case resumes from step 2.
 
-* 1b. System detects invalid command arguments
+* 1b. System detects invalid command arguments.
     * 1b1. System displays error corresponding to the invalid argument and provides an example on the accepted format
-      and arguments
-    * 1b2. User enters command arguments again
+      and arguments.
+    * 1b2. User enters command arguments again.
 
 Steps 1b1 - 1b2 are repeated until all command arguments are valid. <br>
 Use case resumes from step 2.
 
 * 2a. Employee to add already exists in RHRH.
     * 2a1. System displays an error, and that the employee already exists in RHRH.
-    * 2a2. User enters employee details again
+    * 2a2. User enters employee details again.
 
 Steps 2a1 - 2a2 are repeated until the employee to be added is unique. <br>
 Use case resumes from step 3.
@@ -759,24 +759,24 @@ Use case resumes from step 3.
 
 **Extensions**
 
-* 1a. System detects invalid command format
+* 1a. System detects invalid command format.
     * 1a1. System displays an error, showing unknown command.
     * 1a2. User enters command again
 
 Steps 1a1 - 1a2 are repeated until the command is correctly formatted. <br>
 Use case resumes from step 2.
 
-* 1b. System detects invalid command arguments
+* 1b. System detects invalid command arguments.
     * 1b1. System displays error corresponding to the invalid argument and provides an example on the accepted format
-      and arguments
-    * 1b2. User enters command arguments again
+      and arguments.
+    * 1b2. User enters command arguments again.
 
 Steps 1b1 - 1b2 are repeated until all command arguments are valid. <br>
 Use case resumes from step 2.
 
-* 2a. Supplier to add already exists in RHRH.
+* 2a. System detects that supplier to add already exists in RHRH.
     * 2a1. System displays an error, and that the supplier already exists in RHRH.
-    * 2a2. User enters supplier details again
+    * 2a2. User enters supplier details again.
 
 Steps 2a1 - 2a2 are repeated until the supplier to be added is unique. <br>
 Use case resumes from step 3.
@@ -786,29 +786,29 @@ Use case resumes from step 3.
 **MSS**
 
 1. User enters add reservation command and keys in reservations details.
-2. Reservation with the given details is added.
+2. System confirms that reservation with the given details is added.
 
    Use case ends
 
 **Extensions**
 
-* 1a. Tables are not set yet
+* 1a. Tables are not set yet.
     * 1a1. System requests user to set the tables.
     * 1a2. User <u>sets the tables (UC <span style="color:red">{{FILL IN LATER}}</span>)</u>
 
     Use case resumes from step 1.
 
-* 1b. System detects invalid command format
+* 1b. System detects invalid command format.
     * 1b1. System displays an error, showing unknown command.
-    * 1b2. User enters command again
+    * 1b2. User enters command again.
 
 Steps 1b1 - 1b2 are repeated until the command is correctly formatted. <br>
 Use case resumes from step 2.
 
-* 1c. System detects invalid command arguments
+* 1c. System detects invalid command arguments.
     * 1c1. System displays error corresponding to the invalid argument and provides an example on the accepted format
-      and arguments
-    * 1c2. User enters command arguments again
+      and arguments.
+    * 1c2. User enters command arguments again.
 
 Steps 1c1 - 1c2 are repeated until the command arguments are valid. <br>
 Use case resumes from step 2.
@@ -827,37 +827,38 @@ Use case resumes from step 2.
 **MSS**
 
 1. User enters the command to edit a customer and details of the customer to be edited.
-2. System confirms that customer has been edited and show the edited customer.
+2. The specified customer is edited in RHRH.
+3. System confirms that customer has been edited.
 
-   Use case ends
+   Use case ends.
 
 **Extensions**
 
-* 1a. System detects invalid command format
+* 1a. System detects invalid command format.
     * 1a1. System displays an error, showing unknown command.
-    * 1a2. User enters command again
+    * 1a2. User enters command again.
 
 Steps 1a1 - 1a2 are repeated until the command is correctly formatted. <br>
 Use case resumes from step 2.
 
-* 1b. System detects invalid command arguments
+* 1b. System detects invalid command arguments.
     * 1b1. System displays error corresponding to the invalid argument and provides an example on the accepted format
-      and arguments
-    * 1b2. User enters command arguments again
+      and arguments.
+    * 1b2. User enters command arguments again.
 
 Steps 1b1 - 1b2 are repeated until all command arguments are valid. <br>
 Use case resumes from step 2.
 
 * 1c. System detects that customer to edit does not exist in RHRH.
     * 1c1. System displays an error that no such customer index exist in RHRH.
-    * 1c2. User enters customer index again
+    * 1c2. User enters customer index again.
 
 Steps 1c1 - 1c2 are repeated until the employee to be added is unique. <br>
 Use case resumes from step 2.
 
 * 1d. System detects that editing of current customer would cause duplicate customers in RHRH.
     * 1d1. System displays an error that customer already exists in RHRH.
-    * 1d2. User enters customer index again
+    * 1d2. User enters customer index again.
 
 Steps 1d1 - 1d2 are repeated until the employee to be added is unique. <br>
 Use case resumes from step 2.
@@ -869,40 +870,41 @@ Use case resumes from step 2.
 **MSS**
 
 1. User enters the command to edit an employee and details of the employee to be edited.
-2. System confirms that employee has been edited and shows the edited employee.
+2. The specified employee is edited in RHRH.
+3. System confirms that employee has been edited.
 
-   Use case ends
+   Use case ends.
 
 **Extensions**
 
-* 1a. System detects invalid command format
+* 1a. System detects invalid command format.
     * 1a1. System displays an error, showing unknown command.
-    * 1a2. User enters command again
+    * 1a2. User enters command again.
 
 Steps 1a1 - 1a2 are repeated until the command is correctly formatted. <br>
 Use case resumes from step 2.
 
-* 1b. System detects invalid command arguments
+* 1b. System detects invalid command arguments.
     * 1b1. System displays error corresponding to the invalid argument and provides an example on the accepted format
       and arguments
-    * 1b2. User enters command arguments again
+    * 1b2. User enters command arguments again.
 
 Steps 1b1 - 1b2 are repeated until all command arguments are valid. <br>
 Use case resumes from step 2.
 
 * 1c. System detects that employee to edit does not exist in RHRH.
     * 1c1. System displays an error that no such employee index exist in RHRH.
-    * 1c2. User enters customer index again
+    * 1c2. User enters employee index again.
 
 Steps 1c1 - 1c2 are repeated until the employee to be added is unique. <br>
 Use case resumes from step 2.
 
 * 1d. System detects that editing of current employee would cause duplicate employees in RHRH.
     * 1d1. System displays an error that employee already exists in RHRH.
-    * 1d2. User enters customer index again
+    * 1d2. User enters employee index again.
 
 Steps 1d1 - 1d2 are repeated until the employee to be added is unique. <br>
-Use case resumes from step 2
+Use case resumes from step 2.
 
 **Use case (UC07): Edit a Supplier**
 
@@ -911,87 +913,167 @@ Use case resumes from step 2
 **MSS**
 
 1. User enters the command to edit a supplier and details of the supplier to be edited.
-2. System confirms that supplier has been edited and shows the edited supplier.
+2. The specified supplier is edited in RHRH.
+3. System confirms that supplier has been edited.
 
-   Use case ends
+   Use case ends.
 
 **Extensions**
 
-* 1a. System detects invalid command format
+* 1a. System detects invalid command format.
     * 1a1. System displays an error, showing unknown command.
-    * 1a2. User enters command again
+    * 1a2. User enters command again.
 
 Steps 1a1 - 1a2 are repeated until the command is correctly formatted. <br>
 Use case resumes from step 2.
 
-* 1b. System detects invalid command arguments
+* 1b. System detects invalid command arguments.
     * 1b1. System displays error corresponding to the invalid argument and provides an example on the accepted format
-      and arguments
-    * 1b2. User enters command arguments again
+      and arguments.
+    * 1b2. User enters command arguments again.
 
 Steps 1b1 - 1b2 are repeated until all command arguments are valid. <br>
 Use case resumes from step 2.
 
 * 1c. System detects that supplier to edit does not exist in RHRH.
     * 1c1. System displays an error that no such supplier index exist in RHRH.
-    * 1c2. User enters customer index again
+    * 1c2. User enters supplier index again.
 
 Steps 1c1 - 1c2 are repeated until the employee to be added is unique. <br>
 Use case resumes from step 2.
 
 * 1d. System detects that editing of current supplier would cause duplicate suppliers in RHRH.
     * 1d1. System displays an error that supplier already exists in RHRH.
-    * 1d2. User enters customer index again
+    * 1d2. User enters supplier index again.
 
-Steps 1d1 - 1d2 are repeated until the employee to be added is unique. <br>
-Use case resumes from step 2
+Steps 1d1 - 1d2 are repeated until the supplier to be added is unique. <br>
+Use case resumes from step 2.
 
 **Use case (UC08): Edit a reservation**
 
 **MSS**
 
 1. User enters the command to edit reservation fields.
-2. System confirms that the reservation has been edited and shows the edited reservation.
+2. The specified reservation is edited in RHRH.
+3. System confirms that the reservation has been edited and shows the edited reservation.
 
    Use case ends
 
 **Extensions**
 
-* 1a. User keys in invalid format
+* 1a. User keys in invalid format.
     * 1a1. System displays an error, and the recommended format for editing a reservation.
     
-    Use case ends
+    Use case ends.
 
-* 1b. User keys in command without prefix
+* 1b. User keys in command without prefix.
     * 1b1. System displays an error that says that at least 1 field must be provided.
 
-      Use case ends
+      Use case ends.
 
 **Use case (UC09): Delete a Customer**
 
 **MSS**
 
-1. User enters the command to delete a customer
-2. System confirms that the customer has been deleted
+1. User enters the command to delete a customer.
+2. The specified customer is deleted from RHRH.
+3. System confirms that the customer has been deleted.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. User keys in invalid command format
-  * 1a1. System displays an error, and the recommended format for editing a reservation.
+* 1a. System detects invalid command format.
+    * 1a1. System displays an error, showing unknown command.
+    * 1a2. User enters command again.
 
-Use case ends.
+Steps 1a1 - 1a2 are repeated until the command is correctly formatted. <br>
+Use case resumes from step 2.
 
-* 1b. User keys in invalid command arguments
+* 1b. System detects invalid customer index.
+    * 1b1. System displays error corresponding to the invalid index and provides an example on the accepted format
+      and arguments.
+    * 1b2. User enters customer index again.
+
+Steps 1b1 - 1b2 are repeated until all command arguments are valid. <br>
+Use case resumes from step 2.
+
+* 1c. System detects that customer to delete does not exist in RHRH.
+    * 1c1. System displays an error that no such customer index exist in RHRH.
+    * 1c2. User enters customer index again
+
+Steps 1c1 - 1c2 are repeated until the customer to delete exists in RHRH. <br>
+Use case resumes from step 2.
 
 **Use case (UC10): Delete an Employee**
 
 **MSS**
 
+1. User enters the command to delete an employee.
+2. The specified employee is deleted from RHRH.
+3. System confirms that the employee has been deleted.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. System detects invalid command format.
+    * 1a1. System displays an error, showing unknown command.
+    * 1a2. User enters command again.
+
+Steps 1a1 - 1a2 are repeated until the command is correctly formatted. <br>
+Use case resumes from step 2.
+
+* 1b. System detects invalid employee index.
+    * 1b1. System displays error corresponding to the invalid index and provides an example on the accepted 
+      format and arguments.
+    * 1b2. User enters employee index again.
+
+Steps 1b1 - 1b2 are repeated until all command arguments are valid. <br>
+Use case resumes from step 2.
+
+* 1c. System detects that customer to delete does not exist in RHRH.
+    * 1c1. System displays an error that no such employee index exist in RHRH.
+    * 1c2. User enters employee index again
+
+Steps 1c1 - 1c2 are repeated until the employee to delete exists in RHRH. <br>
+Use case resumes from step 2.
+
+
 **Use case (UC11): Delete a Supplier**
 
 **MSS**
+
+1. User enters the command to delete a supplier.
+2. The specified supplier is deleted from RHRH.
+3. System confirms that the supplier has been deleted.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. System detects invalid command format.
+    * 1a1. System displays an error, showing unknown command.
+    * 1a2. User enters command again.
+
+Steps 1a1 - 1a2 are repeated until the command is correctly formatted. <br>
+Use case resumes from step 2.
+
+* 1b. System detects invalid supplier index.
+    * 1b1. System displays error corresponding to the invalid index and provides an example on the accepted format
+      and arguments.
+    * 1b2. User enters supplier index again.
+
+Steps 1b1 - 1b2 are repeated until all command arguments are valid. <br>
+Use case resumes from step 2.
+
+* 1c. System detects that supplier to delete does not exist in RHRH.
+    * 1c1. System displays an error that no such supplier index exist in RHRH.
+    * 1c2. User enters supplier index again
+
+Steps 1c1 - 1c2 are repeated until the supplier to delete exists in RHRH. <br>
+Use case resumes from step 2.
+
 
 **Use case (UC012): Search for reservation availability**
 
@@ -1011,7 +1093,7 @@ Use case ends.
 
 
 * 1b. User requests to search for reservation availability at a time.
-    * 1b1. RHRH shows the availability for the indicated time today
+    * 1b1. RHRH shows the availability for the indicated time today.
       
     Use case ends.
 
@@ -1032,11 +1114,103 @@ Use case ends.
 
     Use case resumes from step 2.
 
-**Use case (UC13): Sort Customer in RHRH*
+**Use case (UC13): Sort Customers in RHRH*
+
+**MSS**
+
+1. User enters the command to sort the customer list in RHRH based on a sorting type and order.
+2. The customer list is sorted in RHRH according to specified sorting type and order.
+3. System confirms that the customers have been sorted.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. System detects invalid command format.
+    * 1a1. System displays an error, showing unknown command.
+    * 1a2. User enters command again.
+
+Steps 1a1 - 1a2 are repeated until the command is correctly formatted. <br>
+Use case resumes from step 2.
+
+* 1b. System detects invalid customer sorting type and order.
+    * 1b1. System displays error corresponding to the invalid argument and provides an example on the accepted format
+      and arguments.
+    * 1b2. User enters command arguments again.
+
+Steps 1b1 - 1b2 are repeated until all command arguments are valid. <br>
+Use case resumes from step 2.
+
+* 1c. System detects that there are no customers to sort in the current list.
+    * 1c1. System displays an error that there are no customers to sort in the current list.
+    
+    Use case ends.
 
 **Use case (UC14): Sort Employees in RHRH**
 
-**Use case (UC15): Sort SupplierS in RHRH**
+**MSS**
+
+1. User enters the command to sort the employee list in RHRH based on a sorting type and order.
+2. The employee list is sorted in RHRH according to specified sorting type and order.
+3. System confirms that the employees have been sorted.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. System detects invalid command format.
+    * 1a1. System displays an error, showing unknown command.
+    * 1a2. User enters command again.
+
+Steps 1a1 - 1a2 are repeated until the command is correctly formatted. <br>
+Use case resumes from step 2.
+
+* 1b. System detects invalid employee sorting type and order.
+    * 1b1. System displays error corresponding to the invalid argument and provides an example on the accepted format
+      and arguments.
+    * 1b2. User enters command arguments again.
+
+Steps 1b1 - 1b2 are repeated until all command arguments are valid. <br>
+Use case resumes from step 2.
+
+* 1c. System detects that there are no employees to sort in the current list.
+    * 1c1. System displays an error that there are no employees to sort in the current list.
+
+  Use case ends.
+
+**Use case (UC15): Sort Suppliers in RHRH**
+
+**MSS**
+
+1. User enters the command to sort the supplier list in RHRH based on a sorting type and order.
+2. The employee list is sorted in RHRH according to specified sorting type and order.
+3. System confirms that the employees have been sorted.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. System detects invalid command format.
+    * 1a1. System displays an error, showing unknown command.
+    * 1a2. User enters command again.
+
+Steps 1a1 - 1a2 are repeated until the command is correctly formatted. <br>
+Use case resumes from step 2.
+
+* 1b. System detects invalid supplier sorting type and order.
+    * 1b1. System displays error corresponding to the invalid argument and provides an example on the accepted format
+      and arguments.
+    * 1b2. User enters command arguments again.
+
+Steps 1b1 - 1b2 are repeated until all command arguments are valid. <br>
+Use case resumes from step 2.
+
+* 1c. System detects that there are no suppliers to sort in the current list.
+    * 1c1. System displays an error that there are no suppliers to sort in the current list.
+
+  Use case ends.
+
+
 
 *{More to be added}*
 
