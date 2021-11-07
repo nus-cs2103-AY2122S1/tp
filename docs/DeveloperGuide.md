@@ -563,52 +563,53 @@ Others:
 
 (For all use cases below, the **System** is `Source Control` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Import student roster**
+#### Use case: Import student roster
 
 **MSS**
 
 1.  User has a comma-separated values (`.csv`) file of the student roster.
 2.  User requests to import the file into Source Control.
 3.  Source Control shows the list of students parsed and imported.
-
     Use case ends.
 
 **Extensions**
 
 * 2a. User enters an incorrectly formatted csv file.
-
-    * 2a1. Source Control shows an error message displaying the bad input.
-
+    * 2a1. Source Control shows an error message.
     * 2a2. User fixes the csv file.
-
       Use case resumes at step 2.
 
-**Use case: Create a new group**
+      
+#### Use case: Create a new group
 
 **MSS**
 
 1.  User requests to create a new group and enters the group name and optionally the students' names or NUSNET IDs.
 2.  Source Control creates the group with the specified students.
-
     Use case ends.
 
 **Extensions**
 
-* 1a. User enters a group name which coincides with that of an existing group.
+* 1a. User enters an invalid group name.
+  * 1a1. Source Control shows an error message.
+    Use case resumes at step 1.
 
-    * 1a1. Source Control shows an error message.
 
+* 1b. User enters a group name which coincides with an existing group in the database.
+    * 1b1. Source Control shows an error message.
       Use case resumes at step 1.
     
-    
-* 1b. User specifies student names which match with multiple students in the Source Control database.
-
-    * 1b1. Source Control shows the list of students with matching names, and prompts the user to resolve the conflict by specifying the NUSNET ID instead.
-      
+* 1c. User enters a student name which match with multiple students in the Source Control database.
+    * 1c1. Source Control shows the list of students with matching names, and prompts the user to resolve the conflict by specifying the target student's NUSNET ID instead.
       Use case resumes at step 1.
 
 
-**Use case: Showing a student's performance**
+* 1d. User enters a list of student name contains duplicated students.
+    * 1d1. Source Control shows an error message to inform user of the duplicates.
+      Use case resumes at step 1.
+
+
+#### Use case: Showing a student's performance
 
 **MSS**
 
@@ -618,52 +619,46 @@ Others:
 
 **Extensions**
 
-* 1a. User enters a student name or ID that does not match with any student stored in Source Control.
-
+* 1a. User enters a student name or ID that does not exist in the database.
     * 1a1. Source Control shows an error message.
-
       Use case resumes at step 1.
-    
 
 * 1b. User enters an invalid index.
-
     * 1b1. Source Control shows an error message.
-
       Use case resumes at step 1.
-    
-**Use case: Showing a group's performance**
+
+
+#### Use case: Showing a group's performance
 
 **MSS**
 
 1. User requests to view the performance of a specified group by providing the group name.
-2. Source Control displays a line chart showing the specified student's performance against the cohort performance for each assessment.
+2. Source Control displays a line chart showing the specified group's performance against the cohort performance for each assessment.
    Use case ends.
    
 **Extensions**
 
-* 1a. User enters a group name that does not match any existing group in Source Control.
-
+* 1a. User enters a group name that does not exist in the database.
     * 1a1. Source Control shows an error message.
-
       Use case resumes at step 1.
 
-**Use case: Showing cohort performance for an assessment**
+
+#### Use case: Showing cohort performance for an assessment
 
 **MSS**
 
 1. User requests to view the cohort performance for a specified assessment.
-2. Source Control displays a histogram showing the specified student's performance against the cohort performance for each assessment.
+2. Source Control displays a histogram showing the score distribution of the cohort in the specified assessment. 
    Use case ends.
 
 **Extensions**
 
-* 1a. User enters an assessment that does not match any existing assessment in Source Control.
-
+* 1a. User enters an assessment that does not exist in the database.
     * 1a1. Source Control shows an error message.
-
       Use case resumes at step 1.
 
-**Use case: Creating an alias for an existing command**
+
+#### Use case: Creating an alias for an existing command
 
 **MSS**
 
@@ -672,18 +667,20 @@ Others:
 
 **Extensions**
 
-* 1a. User enters a command that does not exist to create an alias for.
-
+* 1a. User enters a command that does not exist.
     * 1a1. Source Control shows an error message.
-
       Use case resumes at step 1.
+    
 
-
-* 1b. User tries to create an alias using a pre-existing default command.
-
+* 1b. User tries to create an alias using a default command.
     * 1b1. Source Control shows an error message.
-
       Use case resumes at step 1.
+
+
+* 1c. User enters an invalid alias name. 
+  * 1c1. Source Control shows an error message.
+    Use case resumes at step 1.
+
 
 ### Non-functional requirements
 
