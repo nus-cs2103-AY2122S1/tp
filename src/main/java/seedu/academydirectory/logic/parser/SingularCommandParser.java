@@ -37,25 +37,25 @@ public class SingularCommandParser implements Parser<Command> {
         assertSingularCommand(userInput);
         assert (userInput.isEmpty());
         switch (commandWord) {
-            
+
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
-            
+
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
-            
+
         case HistoryCommand.COMMAND_WORD:
             return new HistoryCommand();
-            
+
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
-            
+
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
-            
+
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
-            
+
         case VisualizeCommand.COMMAND_WORD:
             return new VisualizeCommand();
 
