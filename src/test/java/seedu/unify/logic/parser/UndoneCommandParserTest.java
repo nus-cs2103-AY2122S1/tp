@@ -7,7 +7,6 @@ import static seedu.unify.testutil.TypicalIndexes.INDEX_FIRST_TASK;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.unify.logic.commands.DeleteCommand;
 import seedu.unify.logic.commands.UndoneCommand;
 
 public class UndoneCommandParserTest {
