@@ -8,23 +8,24 @@ CONNECTIONS is a **desktop app for managing contacts, optimized for use via a Co
 * [Quick Start](#quick-start)
 * [Features](#features)
   * [Upcoming birthdays](#upcoming-birthdays)
-  * [Viewing help : `help`](#viewing-help--help)
-  * [Adding a contact: `add`](#adding-a-contact-add)
-  * [Listing all contacts : `list`](#listing-all-contacts--list)
-  * [Editing a contact : `edit`](#editing-a-contact--edit)
-  * [Adding Tags : `tag`](#adding-tags--tag)
-  * [Removing Tags : `untag`](#removing-tags--untag)
-  * [Locating contacts by name and tag(s): `find`](#locating-contacts-by-name-and-tags-find)
-  * [Locating contacts by name or tag(s): `findAny`](#locating-contacts-by-name-or-tags-findany)
-  * [Pinning a contact: `pin`](#pinning-a-contact--pin)
-  * [Unpinning a contact: `unpin`](#unpinning-a-contact--unpin)
-  * [Deleting a contact : `delete`](#deleting-a-contact--delete)
-  * [Deleting multiple contact : `deletem`](#deleting-multiple-contacts--deletem)
-  * [Exporting a mailing list of contacts: `mailingList`](#exporting-a-mailing-list-of-contacts--mailinglist)
-  * [Clearing all entries : `clear`](#clearing-all-entries--clear)
-  * [Exiting the program : `exit`](#exiting-the-program--exit)
   * [Command Assistant](#command-assistant)
   * [Command History](#command-history)
+  * [Commands](#commands)
+    * [Viewing help : `help`](#viewing-help--help)
+    * [Adding a contact: `add`](#adding-a-contact-add)
+    * [Listing all contacts : `list`](#listing-all-contacts--list)
+    * [Editing a contact : `edit`](#editing-a-contact--edit)
+    * [Adding Tags : `tag`](#adding-tags--tag)
+    * [Removing Tags : `untag`](#removing-tags--untag)
+    * [Locating contacts by name and tag(s): `find`](#locating-contacts-by-name-and-tags-find)
+    * [Locating contacts by name or tag(s): `findAny`](#locating-contacts-by-name-or-tags-findany)
+    * [Pinning a contact: `pin`](#pinning-a-contact--pin)
+    * [Unpinning a contact: `unpin`](#unpinning-a-contact--unpin)
+    * [Deleting a contact : `delete`](#deleting-a-contact--delete)
+    * [Deleting multiple contact : `deletem`](#deleting-multiple-contacts--deletem)
+    * [Exporting a mailing list of contacts: `mailingList`](#exporting-a-mailing-list-of-contacts--mailinglist)
+    * [Clearing all entries : `clear`](#clearing-all-entries--clear)
+    * [Exiting the program : `exit`](#exiting-the-program--exit)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
 
@@ -86,6 +87,37 @@ It sorts all birthdays amongst all contacts in CONNECTIONS **chronologically**, 
 * Contacts colour-coded in **BLUE** will be celebrating their birthdays in **a week or less**.
 * The rest of the entries will not be colour-coded.  
   ![BirthdayColors](images/BirthdayColors.png)  
+
+### Command Assistant
+
+Shows command format and example as the command is entered.
+
+#### Sample Usage:
+
+* `edit` is entered in the command box.
+  * CONNECTIONS shows command format and sample for `edit`.
+    ![Tag_Command_Assistant](images/commandAssistantEdit.png)
+
+* `tag` is entered in the command box.
+  * CONNECTIONS shows command format and sample for `tag`.
+  ![Tag_Command_Assistant](images/commandAssistantTag.png)
+
+### Command History
+
+View and use previously called commands.
+
+Notes:
+* Only commands that have been used in the current program run can be viewed. Commands used in previous runs are not stored.
+
+#### Sample Usage:
+* Up Arrow
+  * Shows the previous command called in the command box, or the earliest command called if there are no earlier commands.
+* Down Arrow
+  * Shows the next command called in the command box, or an empty command box if there are no later commands.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Commands
 
 ### Viewing help : `help`
 
@@ -372,33 +404,6 @@ Exits the program.
 
 #### Format:
 * `exit`
-
-### Command Assistant
-
-Shows command format and example as the command is entered.
-
-#### Sample Usage:
-
-* `edit` is entered in the command box.
-  * CONNECTIONS shows command format and sample for `edit`.
-    ![Tag_Command_Assistant](images/commandAssistantEdit.png)
-
-* `tag` is entered in the command box.
-  * CONNECTIONS shows command format and sample for `tag`.
-  ![Tag_Command_Assistant](images/commandAssistantTag.png)
-
-### Command History
-
-View and use previously called commands.
-
-Notes:
-* Only commands that have been used in the current program run can be viewed. Commands used in previous runs are not stored.
-
-#### Sample Usage:
-* Up Arrow
-  * Shows the previous command called in the command box, or the earliest command called if there are no earlier commands.
-* Down Arrow
-  * Shows the next command called in the command box, or an empty command box if there are no later commands.
 
 ### Saving the data
 
