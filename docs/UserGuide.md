@@ -357,7 +357,7 @@ based on the given `SORT DIRECTION`.
 **Expected Outcome:** <br>
 For instance, if you were to sort clients by risk appetite. 
 
-| `sort r/asc`| `sort r/dsc |  
+| `sort r/asc`| `sort r/dsc` |  
 | :---: | :--- |
 | <img src="images/ExpectedSortCommand.png" width="400"/> | <img src="images/ExpectedSortCommand_DSC.png" width="400"/> |
 
