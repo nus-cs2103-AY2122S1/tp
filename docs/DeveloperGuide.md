@@ -1087,16 +1087,27 @@ testers are expected to do more *exploratory* testing.
 
 1. Editing an applicant while all applicants are being shown
 
-    1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list. 
-       There is no applicant with the phone number 87654321 and email alexander@gmail.com
+  1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list.
+     There is no applicant with the phone number 87654321 and email alexander@gmail.com
 
-    1. Test case: `edit 1 n/Alexander p/87654321 e/alexander@gmail.com`<br>
-       Expected: First applicant is edited such that his new name is Alexander with the phone number 87654321 and email alexander@gmail.com.
-       Details of the edited applicant shown in the result display.
+  1. Test case: `edit 1 n/Alexander p/87654321 e/alexander@gmail.com`<br>
+     Expected: First applicant is edited such that his new name is Alexander with the phone number 87654321 and email alexander@gmail.com.
+     Details of the edited applicant shown in the result display.
 
-    1. Test case: Ensure that you have completed the first test case under this section, then input the command `edit 2 n/Alice p/87654321`<br>
-       Expected: No applicants are edited. Error details shown in the result display stating that the new edited applicant Alice shares either
-       the same phone number or same email as Alexander.
+  1. Test case: Ensure that you have completed the first test case under this section, then input the command `edit 2 n/Alice p/87654321`<br>
+     Expected: No applicants are edited. Error details shown in the result display stating that the new edited applicant Alice shares either
+     the same phone number or same email as Alexander.
+
+  1. Test case: Ensure that you have completed the first test case under this section, then input the command `edit 2 n/Alice e/alexander@gmail.com`<br>
+     Expected: No applicants are edited. Error details shown in the result display stating that the new edited applicant Alice shares either
+     the same phone number or same email as Alexander.
+
+  1. Test case: `edit 2 n/&a#lly`<br>
+     Expected: No applicants are edited. Error details shown in the result display stating that names should only contain alphanumeric characters and spaces.
+
+  1. Other incorrect edit commands to try: `edit`, `edit Alexander`, `edit 1`, `edit 1 n/`
+     (where incomplete or invalid details are given for the applicant being edited)<br>
+     Expected: Error messages displaying the cause of error is shown in the result display.
        
 ### Deleting an applicant
 
