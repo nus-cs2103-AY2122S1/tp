@@ -98,6 +98,7 @@ Refer to the image below for more information on the different components of Con
 <img src="images/Walkthrough_2.png" width="1000px">
 
 <div style="page-break-after: always;"></div>
+
 #### Lesson List Panel
 
 <img src="images/Walkthrough_3.png" width="1000px">
