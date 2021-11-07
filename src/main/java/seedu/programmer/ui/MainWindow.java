@@ -10,13 +10,11 @@ import org.json.JSONArray;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.StackPane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
 import seedu.programmer.commons.core.GuiSettings;
 import seedu.programmer.commons.core.LogsCenter;
@@ -43,8 +41,6 @@ import seedu.programmer.model.student.exceptions.DuplicateStudentException;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
-    private static final Double NINETY_PERCENT = 0.9;
-
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -57,7 +53,7 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private DashboardWindow dashboardWindow;
-    private Popup popup = new Popup();
+    private PopupManager popupManager;
 
     @FXML
     private Scene primaryScene;
@@ -111,7 +107,7 @@ public class MainWindow extends UiPart<Stage> {
 
         helpWindow = new HelpWindow();
         dashboardWindow = new DashboardWindow(logic);
-
+        popupManager = new PopupManager(primaryStage);
     }
 
 
@@ -244,10 +240,10 @@ public class MainWindow extends UiPart<Stage> {
             logic.replaceExistingStudents(stuList);
         } catch (DuplicateStudentException e) {
             logger.info("Aborting: file contains duplicate student");
-            displayPopup("Upload failed: " + e.getMessage());
+            popupManager.displayPopup("Upload failed: " + e.getMessage());
         }
 
-        displayPopup("Upload success! All past students have been deleted. You now have "
+        popupManager.displayPopup("Upload success! All past students have been deleted. You now have "
                     + stuList.size() + " students.");
         logger.info("Uploaded CSV data successfully!");
     }
@@ -261,7 +257,7 @@ public class MainWindow extends UiPart<Stage> {
         assert (jsonData != null);
 
         if (jsonData.length() == 0) {
-            displayPopup("No data to download!");
+            popupManager.displayPopup("No data to download!");
             return;
         }
 
@@ -271,7 +267,7 @@ public class MainWindow extends UiPart<Stage> {
         }
 
         JsonUtil.writeJsonToCsv(jsonData, destinationFile);
-        displayPopup("Your data has been downloaded to " + destinationFile + "!");
+        popupManager.displayPopup("Your data has been downloaded to " + destinationFile + "!");
         logger.info("Data successfully downloaded as CSV.");
     }
 
@@ -302,69 +298,20 @@ public class MainWindow extends UiPart<Stage> {
         try {
             stuList = FileUtil.getStudentsFromCsv(chosenFile);
         } catch (IllegalArgumentException | IOException e) {
-            displayPopup("Upload failed: " + e.getMessage()); // Error with file data
+            popupManager.displayPopup("Upload failed: " + e.getMessage()); // Error with file data
             return null;
         } catch (IllegalValueException e) {
-            displayPopup(e.getMessage()); // Error with file headers
+            popupManager.displayPopup(e.getMessage()); // Error with file headers
             return null;
         }
 
         if (stuList.size() == 0) {
-            displayPopup("Upload failed: No students were found in your file. "
+            popupManager.displayPopup("Upload failed: No students were found in your file. "
                         + "Use the purge command if you want to remove all students.");
             return null;
         }
 
         return stuList;
-    }
-
-    /**
-     * Displays a popup message at the top-center with respect to the primaryStage.
-     *
-     * @param message to be displayed in the popup object on the primaryStage
-     */
-    private void displayPopup(String message) {
-        // We should not display an empty popup
-        assert (message != null);
-        double tenPercent = 1 - NINETY_PERCENT;
-        configurePopup(message);
-
-        // Add some left padding according to primaryStage's width
-        popup.setX(primaryStage.getX() + primaryStage.getWidth() * tenPercent / 2);
-
-        // Set Y coordinate scaled according to primaryStage's height
-        popup.setY(primaryStage.getY() + primaryStage.getHeight() * tenPercent);
-        popup.show(primaryStage);
-    }
-
-    /**
-     * Creates a Popup object with a message.
-     *
-     * @param message The text to display to the user
-     */
-    private void configurePopup(String message) {
-        popup.setAutoFix(true);
-        popup.setHideOnEscape(true);
-        Label label = createLabelForPopup(message);
-        popup.getContent().clear();
-        popup.getContent().add(label);
-    }
-
-    /**
-     * Creates a Label object with a message and styling.
-     *
-     * @param message to be displayed in the label
-     * @return a Label object with the message and styling
-     */
-    private Label createLabelForPopup(String message) {
-        Label label = new Label(message);
-        label.setWrapText(true);
-        label.setMaxWidth(primaryStage.getWidth() * NINETY_PERCENT);
-        label.getStyleClass().add("popup-label");
-
-        // Hide popup when the user clicks on it
-        label.setOnMouseReleased(e -> popup.hide());
-        return label;
     }
 
     /**
