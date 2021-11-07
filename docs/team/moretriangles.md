@@ -51,7 +51,7 @@ Credits: [jackson-dataformat-csv](https://github.com/FasterXML/jackson-dataforma
 
 * Managed all releases from `v1.1` to `v1.4`.
 * Ensured project deliverables were done correctly and on time.
-* Studied [Material Design's Dark Theme Guide](https://material.io/design/color/dark-theme.html) and created the UI mockup on Figma to kick-start the GUI re-work.
+* Studied [Material Design's Dark Theme Guide](https://material.io/design/color/dark-theme.html) and created the UI mockup on [Figma](https://www.figma.com/file/fPck5czcFsQp1gKdfhB9ee/CohortConnect?node-id=0%3A1) to kick-start the GUI re-work.
 
 **Review Contributions**
 
