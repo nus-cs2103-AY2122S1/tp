@@ -32,6 +32,8 @@ Given below are my contributions to the project.
   * Added toggle command documentation ([#136](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/136), [#197](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/197))
   * Added stateful PlannerMD documentation ([#136](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/136), [#197](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/197))
 
+<div style="page-break-after: always;"></div>
+
 * **Contributions to the DG**:
   * Updated Model component and model class diagrams ([#114](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/114), [#208](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/208))
   * Added implementation details for toggle command ([#114](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/114), [#208](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/208))
