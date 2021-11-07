@@ -23,7 +23,7 @@ title: Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up and getting started**
+## **Setting Up and Getting Started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
@@ -108,7 +108,7 @@ How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `SourceControlParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a student).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.~~~~
+1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 The Activity Diagram below illustrates how user input is parsed by the `Logic` component.
 
@@ -174,7 +174,7 @@ Classes used by multiple components are in the `seedu.sourcecontrol.commons` pac
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Import : `import`
+### Importing feature : `import`
 
 The following activity diagram summarises what happens when the user inputs an import command:
 
@@ -193,7 +193,7 @@ The user needs to provide the number of `Groups`, `Assessments`, and `Tags` sinc
 
 1. Columns can be empty, except for the assessment name columns in the header row, and the name and ID columns of each student. Empty columns are assumed to be missing data.
 
-### Add Student : `addstudent`
+### Adding student feature : `addstudent`
 
 The add student feature adds a student with the provided name and NUSNET ID into the database. If the student comes with optionally specified groups and tags, these fields will be added accordingly.
 
@@ -223,7 +223,7 @@ The following sequence diagram shows how the add student operation works:
 
 </div>
 
-### Add Group : `addgroup`
+### Adding group feature : `addgroup`
 
 The `addgroup` feature allows users to create new groups, as well as specify students to be added to the group to be created.
 
@@ -246,7 +246,7 @@ The following sequence diagram summarises what happens when the user inputs an a
 
 ![AddGroupSequenceDiagram](images/AddGroupSequenceDiagram.png)
 
-### Add Allocation : `addalloc`
+### Adding allocation feature : `addalloc`
 
 The `addalloc` feature allows users to allocate a student into a group.
 
@@ -271,7 +271,7 @@ The following sequence diagram summarises what happens when the user inputs an `
 ![AddAllocSequenceDiagram](images/AddAllocSequenceDiagram.png)
 ![AddAllocToModelSequenceDiagram](images/AddAllocToModelSequenceDiagram.png)
 
-### Add Score : `addscore`
+### Adding score feature : `addscore`
 
 The `addscore` feature allows users to add score for an assessment of a student.
 
@@ -296,7 +296,7 @@ The following sequence diagram summarises what happens when the user inputs an `
 ![AddScoreSequenceDiagram](images/AddScoreSequenceDiagram.png)
 ![AddScoreToModelSequenceDiagram](images/AddScoreToModelSequenceDiagram.png)
 
-### Search : `search`
+### Searching feature : `search`
 
 The `search` feature allows user to filter student list by name, NUSNET ID, groups, or tags.
 
@@ -344,7 +344,7 @@ if the command input is valid. The command is invalid if the user input is empty
     * Cons: We need to identify the type of input given.
 
 
-### Show : `show`
+### Showing analysis feature : `show`
 
 The `show` feature allows users to show the performance analysis of a student, a group or the cohort in an assessment.
 
@@ -374,7 +374,7 @@ The following sequence diagram summarises what happens when the user inputs an `
 <br>
 
 
-### Alias : `alias`
+### Adding alias feature : `alias`
 
 The `alias` feature allows users to define their own aliases for commands. This is useful to shorten the input for commands that the user uses often. 
 
