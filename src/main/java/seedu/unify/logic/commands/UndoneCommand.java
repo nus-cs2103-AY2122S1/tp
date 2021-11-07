@@ -51,7 +51,6 @@ public class UndoneCommand extends Command {
                         new State(State.ObjectState.TODO),
                         taskToUnMark.getPriority()));
         model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
-        model.updateWeeklyTasksState();
         return new CommandResult(String.format(MESSAGE_UNDONE_TASK_SUCCESS, taskToUnMark));
     }
 

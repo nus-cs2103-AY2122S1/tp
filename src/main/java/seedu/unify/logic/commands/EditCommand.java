@@ -23,6 +23,7 @@ import seedu.unify.model.tag.Tag;
 import seedu.unify.model.task.Date;
 import seedu.unify.model.task.Name;
 import seedu.unify.model.task.Priority;
+import seedu.unify.model.task.State;
 import seedu.unify.model.task.Task;
 import seedu.unify.model.task.Time;
 /**
@@ -96,9 +97,10 @@ public class EditCommand extends Command {
         Time updatedTime = editTaskDescriptor.getTime().orElse(taskToEdit.getTime());
         Date updatedDate = editTaskDescriptor.getDate().orElse(taskToEdit.getDate());
         Set<Tag> updatedTags = editTaskDescriptor.getTags().orElse(taskToEdit.getTags());
+        State updatedState = editTaskDescriptor.getState().orElse(taskToEdit.getState());
         Priority updatedPriority = editTaskDescriptor.getPriority().orElse(taskToEdit.getPriority());
 
-        return new Task(updatedName, updatedTime, updatedDate, updatedTags, updatedPriority);
+        return new Task(updatedName, updatedTime, updatedDate, updatedTags, updatedState, updatedPriority);
     }
 
     @Override
@@ -128,6 +130,7 @@ public class EditCommand extends Command {
         private Time time;
         private Date date;
         private Set<Tag> tags;
+        private State state;
         private Priority priority;
 
         public EditTaskDescriptor() {}
@@ -141,6 +144,7 @@ public class EditCommand extends Command {
             setTime(toCopy.time);
             setDate(toCopy.date);
             setTags(toCopy.tags);
+            setState(toCopy.state);
             setPriority(toCopy.priority);
         }
 
@@ -183,6 +187,14 @@ public class EditCommand extends Command {
         public Optional<Set<Tag>> getTags() {
 
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        }
+
+        public void setState(State state) {
+            this.state = state;
+        }
+
+        public Optional<State> getState() {
+            return Optional.ofNullable(state);
         }
 
         public void setPriority(Priority priority) {

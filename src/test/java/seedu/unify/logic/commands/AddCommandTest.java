@@ -168,7 +168,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void updateWeeklyTasksState() {
+        public void updateWeeklyProgress() {
 
         }
     }

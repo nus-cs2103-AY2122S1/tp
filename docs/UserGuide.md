@@ -248,7 +248,17 @@ After running the find command, the tasks having the mentioned keyword are displ
 ![find_command_after](images/findCommandAfter.jpeg)
 
 
-### 4.6 Showing Tasks: `show`
+### 4.6 Listing all tasks : `list`
+
+Shows a list of all tasks in the task list.
+
+<div markdown="block" class="alert alert-primary">
+
+**:clipboard: Format:**<br>
+- `list`
+</div>
+
+### 4.7 Showing Tasks: `show`
 
 Show all tasks that have been added to the app in a specific week.
 
@@ -283,7 +293,7 @@ Examples:
 ![show_command](images/showCommand41.jpeg)
 
 
-### 4.7 Sorting the tasks : `sort`
+### 4.8 Sorting the tasks : `sort`
 
 Sorts the tasks in the task list of Uni-Fy.
 
@@ -310,7 +320,7 @@ Sorts the tasks in the task list of Uni-Fy.
 </div>
 
 
-### 4.8 Deleting tasks : `delete`
+### 4.9 Deleting tasks : `delete`
 
 Removes a specific task that has been added to your app.
 
@@ -355,7 +365,7 @@ After running the delete command, the task at that particular index gets deleted
 ![delete_command_after](images/userguide/deleteCommandAfter.png)
 
 
-### 4.9 Deleting all tasks : `clear`
+### 4.10 Deleting all tasks : `clear`
 
 Clears all entries from the Uni-Fy app.
 
@@ -374,7 +384,7 @@ When you run the clear command, all the tasks in the task list of Uni-Fy get del
 ![clear_command_after](images/clearCommandAfter.jpeg)
 
 
-### 4.10 Retrieving past commands
+### 4.11 Retrieving past commands
 
 Shows the previous commands run on **Uni-Fy**. The user can either type the command or use the up arrow key to go through all the pass commands.
 
@@ -391,7 +401,7 @@ Your history is erased when you close and reopen the app. Do not close the app i
 </div>
 
 
-### 4.11 Viewing help : `help`
+### 4.12 Viewing help : `help`
 
 Shows a message explaining how to access the help page.
 
@@ -400,12 +410,12 @@ Shows a message explaining how to access the help page.
 Format: `help`
 
 
-### 4.12 Saving the data
+### 4.13 Saving the data
 
 **Uni-Fy** data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 
-### 4.13 Editing the data file
+### 4.14 Editing the data file
 
 **Uni-Fy** data are saved as a JSON file `[JAR file location]/data/unify.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -414,7 +424,7 @@ If your changes to the data file makes its format invalid, Uni-Fy will discard a
 </div>
 
 
-### 4.14 Archiving data files `[coming in v2.0]`
+### 4.15 Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
 
@@ -450,6 +460,7 @@ Action | Format, Examples
 **Undone** | <code>undone <i>task_id</i></code> <br>e.g `undone 1`
 **Edit** | <code>edit <i>task_id (n/task_name) (d/date) (t/time) (tg/tag) (p/level)</i></code> <br>e.g `edit 2 n/Task4 d/2021-11-11`
 **Find** | <code>find <i>keyword (more_keywords)... (d/date) (tg/tag)...</i></code> <br> e.g. `find quiz` <br> e.g. `find quiz d/2021-12-12` <br> e.g. `find quiz tg/GEQ1000` <br> e.g. `find quiz d/2021-12-12 tg/GEQ1000`
+**List** | <code>list</code>
 **Show** | <code>show <i>week_number</i></code> <br>e.g `show 13`
 **Sort** | <code>sort <i>x/SortBy o/SortOrder</i></code> <br>e.g `sort x/time o/asc` <br>e.g `sort x/priority o/desc`
 **Delete** | <code>delete <i>task_id (task_id)</i></code> <br> e.g. <code>delete 1 3 4 </code>

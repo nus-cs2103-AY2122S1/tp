@@ -15,7 +15,7 @@ import javafx.collections.transformation.FilteredList;
  * Supports a minimal set of list operations.
  */
 public class WeeklyTasks implements Iterable<Task> {
-    private static final Integer ACADEMIC_WEEK_OFFSET = 32;
+    private static final Integer ACADEMIC_WEEK_OFFSET = 0;
     private static final Integer INITIAL_WEEK = 1;
     private static final Integer YEAR = 2021;
     private static final Integer YEAR_OFFSET = 3; // The first full week of 2021 begins on the 4th
@@ -130,7 +130,7 @@ public class WeeklyTasks implements Iterable<Task> {
         totalWeeklyTasks.set(totalTasksTemp);
         totalDoneTasks.set(doneTasksTemp);
         if (totalTasksTemp == 0) {
-            weeklyProgress.set(1);
+            weeklyProgress.set(0);
         } else {
             weeklyProgress.set(getTotalDoneTasks().doubleValue() / getTotalWeeklyTasks().doubleValue());
         }

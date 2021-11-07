@@ -85,6 +85,7 @@ public class ModelManager implements Model {
     @Override
     public void setUniFy(ReadOnlyUniFy uniFy) {
         this.uniFy.resetData(uniFy);
+        updateWeeklyProgress();
     }
 
     @Override
@@ -101,6 +102,7 @@ public class ModelManager implements Model {
     @Override
     public void deleteTask(Task target) {
         uniFy.removeTask(target);
+        updateWeeklyProgress();
     }
 
     @Override
@@ -140,7 +142,7 @@ public class ModelManager implements Model {
     public void updateFilteredTaskList(Predicate<Task> predicate) {
         requireNonNull(predicate);
         filteredTask.setPredicate(predicate);
-        weeklyTasks.updateWeeklyProgress();
+        updateWeeklyProgress();
     }
 
     @Override
@@ -150,7 +152,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateWeeklyTasksState() {
+    public void updateWeeklyProgress() {
         weeklyTasks.updateWeeklyProgress();
     }
 
