@@ -22,6 +22,6 @@ CurrentPlan .up.|> OptionalStringBasedField
 DisposableIncome .up.|> OptionalStringBasedField
 RiskAppetite .up.|> OptionalStringBasedField
 LastMet .up.|> OptionalNonStringBasedField
-NextMeeeting .up.|> OptionalNonStringBasedField
+NextMeeting .up.|> OptionalNonStringBasedField
 
 @enduml

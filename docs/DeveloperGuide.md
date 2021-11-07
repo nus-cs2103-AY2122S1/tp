@@ -20,6 +20,7 @@ LeadsForce is a desktop app that is optimized for use via a Command Line Interfa
 LeadsForce's developer Guide is written for developers who wish to contribute to or extend our project. It is technical, and explains the inner workings of LeadsForce and how the different components of our application work together.
 
 **Reading this Developer Guide**
+
 | icon | remark |
 | --- | --- |
 | 💡 | This icon denotes useful tips to note of during development. |
@@ -74,8 +75,9 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
+<p align="center">
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
-
+</p>
 The sections below give more details of each component.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -111,7 +113,9 @@ The `SideBar` also has a `MeetingListPanel`, which holds a list of `NextMeetingC
 
 Here's a (partial) class diagram of the `Logic` component:
 
+<p align="center">
 <img src="images/LogicClassDiagram.png" width="550"/>
+</p>
 
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
@@ -128,7 +132,9 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
+<p align="center">
 <img src="images/ParserClasses.png" width="600"/>
+</p>
 
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
@@ -138,8 +144,9 @@ How the parsing works:
 ### 3.4 Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
-
+<p align="center">
+<img src="images/ModelClassDiagram.png" width="600" />
+</p>
 
 The `Model` component,
 
@@ -158,7 +165,9 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
+<p align="center">
 <img src="images/StorageClassDiagram.png" width="550" />
+</p>
 
 The `Storage` component,
 * can save both address book data and user preference data in json format, and read them back into corresponding objects.
@@ -170,6 +179,7 @@ The `Storage` component,
 
 Classes used by multiple components are in the `seedu.address.commons` package.
 
+--------------------------------------------------------------------------------------------------------------------
 ### 3.7 Client Fields
 
 As client attributes often share a few similarities in their constraints, some with their own differences, we provide interfaces for developers to customise the constraints of client attributes.
@@ -189,7 +199,9 @@ IS_EDITABLE | If set to `true`, the field is editable by the user through edit c
 
 ### 3.7.2 Field interfaces
 
-<img src="images/FieldClassDiagram.png" width="700" />
+<p align="center">
+<img src="images/FieldClassDiagram.png" width="900" />
+</p>
 
 The following concrete interfaces inherit the `Field` interface. You can alternatively define your own interface or provide a concrete implementation of the field options within the `attribute` classes if they don't suit your needs.
 
@@ -217,8 +229,22 @@ Option | Default
 --- | ---
 IS_BLANK_VALUE_ALLOWED | `false`
 IS_NULL_VALUE_ALLOWED | `false`
-DEFAULT_VALUE | `""`(But not applicable here)
+DEFAULT_VALUE | `""`(But not used as value is required)
 IS_EDITABLE | `true`
+
+### 3.7.6 FieldLength interfaces
+
+<p align="center">
+<img src="images/FieldLengthDiagram.png" width="700" />
+</p>
+
+There are FieldLength interfaces that contain a `MAX_LENGTH` field. This is used to help limit the number of characters that a user can input for a particular field.
+
+FieldLength type | `MAX_LENGTH` value
+--- | ---
+StandardFieldLength | 30
+ShorterFieldLength | 15
+LongerFieldLength | 100
 
 ### 3.8 Comparable Client Attribute
 
@@ -302,7 +328,9 @@ LeadsForce allows users to view client info in the `ClientViewPanel` in the `Sid
 
 The following sequence diagram shows how the view operation works:
 
+<p align="center">
 <img src="images/ViewCommandSequenceDiagram.png" />
+</p>
 
 #### Implementation of ClientHasId
 
@@ -330,7 +358,9 @@ LeadsForce allows users to edit client info.
 
 The following sequence diagram shows how the view operation works:
 
+<p align="center">
 <img src="images/tracing/EditCommandSequenceDiagram.png" />
+</p>
 
 #### Implementation of EditClientDescriptor 
 
@@ -357,7 +387,9 @@ with any client's attribute or specifically with the specified attributes
 
 The following sequence diagram shows how the search operation works:
 
+<p align="center">
 <img src="images/tracing/SearchCommandSequenceDiagram.png" />
+</p>
 
 #### Implementation of ClientContainsKeywordPredicate
 
@@ -392,7 +424,9 @@ for multiple `filter` to be stacked, which allows for user to look for clients i
 
 The following sequence diagram shows how the filter operation works:
 
+<p align="center">
 <img src="images/tracing/FilterCommandSequenceDiagram.png" />
+</p>
 
 #### Implementation of ClientContainsKeywordPredicate
 
@@ -417,7 +451,9 @@ LeadsForce allows the user to `sort` clients according to client fields. LeadsFo
 
 The following sequence diagram shows how the sort operation works:
 
+<p align="center">
 <img src="images/tracing/SortCommandSequenceDiagram.png" />
+</p>
 
 ### 4.6 Multiple Address Book
 
@@ -441,9 +477,11 @@ Also, details with regard to AddressBookList has been omitted for simplicity if 
 6. The `LogicManger` then call setAddressBook method of `ModelManager` with the new `AddressBook` which will reset the `AddressBook` to a new `AddressBook`.
 7. The `LogicManger` will also call switchAddressBook method of `StorageManager` with the new `AddressBookStorage`.
 
-The following sequence diagram shows how the sort operation works:
+The following sequence diagram shows how the ab create operation works:
 
-<img src="images\AbCreateCommandSequenceDiagram.png" />
+<p align="center">
+<img src="images/AbCreateCommandSequenceDiagram.png" />
+</p>
 
 ### 4.6.2 Switch Address Book
 
@@ -547,7 +585,9 @@ Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Sinc
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
+<p align="center">
 <img src="images/CommitActivityDiagram.png" width="250" />
+</p>
 
 #### 4.7.2 Design considerations:
 
@@ -628,7 +668,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `LeadsForce` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC01 Add a client to the client list**
+#### 6.3.1 UC01 Add a client to the client list
 
 **MSS**
 
@@ -643,7 +683,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. LeadsForce shows an invalid command error message. 
       Use case ends. 
 
-**Use case: UC02 View a client's information**
+#### 6.3.2 UC02 View a client's information
 
 **MSS**
 
@@ -655,8 +695,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a.  User inputs an invalid client Id
     * 2a1. LeadsForce shows an invalid command error to user.
       Use case ends.
-      
-**Use case: UC03 Edit client information**
+
+#### 6.3.3 UC03 Edit client information
 
 **MSS**
 
@@ -669,8 +709,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a.  User inputs invalid attributes
     * 1a1. LeadsForce shows an error to user, and informs the user of the valid attribute format. 
       Use case ends.
-      
-**Use case: UC04 Delete a client**
+
+#### 6.3.4 UC04 Delete a client
 
 **MSS**
 
@@ -689,15 +729,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3a. The given client id is invalid.
     * 3a1. LeadsForce shows an error message, informing the user that there is no client with the given client Id .
       Use case resumes at step 2.
-      
-**Use case: UC05 Showcases list of clients**
+
+#### 6.3.5 UC05 Showcases list of clients
 
 **MSS**
 
 1. User request to view the full list of clients 
 2. LeadsForce showcases the client's information.
 
-**Use case: UC06 Search for a client**
+#### 6.3.6 UC06 Search for a client
 
 **MSS**
 
@@ -714,9 +754,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. LeadsForce returns an empty list since there is no client who fits the inputted keyword
   Use case ends.
-  
 
-**Use case: UC07 Setting a meeting with clients**
+
+#### 6.3.7 UC07 Setting a meeting with clients
 
 **MSS**
 
@@ -729,7 +769,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. LeadsForce shows an error to user, and informs the user of the valid command format. 
       Use case ends.
 
-**Use case: UC08 showing schedule for the day**
+#### 6.3.8 UC08 showing schedule for the day
 
 **MSS**
 
@@ -745,7 +785,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The meeting schedule is empty as the user has no meetings on the day
   Use case ends.
 
-**Use case: UC09 Clearing a client list**
+#### 6.3.9 UC09 Clearing a client list
 
 **MSS**
 
@@ -763,8 +803,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3b.  User inputs invalid commands
     * 3b1. LeadsForce shows an error to user, and informs the user of the valid commands. 
       Use case resumes at step 3.
-      
-**Use case: UC10 Create a new address book**
+
+#### 6.3.10 UC10 Create a new address book
 
 **MSS**
 
@@ -776,8 +816,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a.  User inputs name that is the same as an existing address book
     * 1a1. LeadsForce shows an error to user, and informs the user that an address book with the same name already exists.
       Use case ends.
-      
-**Use case: UC11 clear an address book of clients**
+
+#### 6.3.11 UC11 clear an address book of clients
 
 **MSS**
 
@@ -820,7 +860,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Address Book**: the list of clients where all clients inserted are kept
 --------------------------------------------------------------------------------------------------------------------
 
-## **7. Appendix: Instructions for manual testing**
+## 7. Appendix: Instructions for manual testing
 
 Given below are instructions to test the app manually.
 
@@ -851,16 +891,16 @@ In this section, you can test general commands in LeadsForce. Below is a summary
 
 Action | Format | Examples
 --------|---------|---------
-**Create** | `add <name>/{CLIENT'S NAME} <email>/{EMAIL} <phone-no>/{PHONE NUMBER} <risk-appetite>/{RISK-APPETITE} ...`| add n/benedict e/benedict@gmail.com p/90909898 r/3 |
-**View** | `view CLIENT'S ID` | view 123 |
-**Edit** | `edit CLIENT'S ID... <attribute>/{CHANGED VALUE OF ATTRIBUTE}...` | edit 1234 n/Dominic p/12345678 |
-**Delete** | `delete CLIENT'S ID...` | delete 4  |
-**List** | `list` | - |
-**Sort** | `sort <attribute>/{ASC/DESC}...` | sort r/asc |
-**Schedule** | `schedule DATE` | schedule 22-09-2021 |
-**Search** | `search KEYWORD... <attribute>/{ATTRIBUTE_KEYWORD}...` | search * e/doe@gmail.com r/5 |
-**Filter** | `filter KEYWORD... <attribute>/{ATTRIBUTE_KEYWORD}...` | filter * e/doe@gmail.com p/9 |
-**Clear** | `clear` | - |
+**Create** | `add n/{CLIENT_NAME} e/{EMAIL} <attribute>/{OTHER ATTRIBUTES}...`| add n/benedict e/benedict@gmail.com p/90909898 r/3
+**View** | `view CLIENT_ID` | view 123
+**Edit** | `edit CLIENT_ID... <attribute>/{CHANGED VALUE OF ATTRIBUTE}...` | edit 12 n/Dominic p/12345678
+**Delete** | `delete CLIENT_ID...` | delete 4
+**List** | `list` | -
+**Sort** | `sort <attribute>/{ASC/DESC}...` | sort r/asc
+**Schedule** | `schedule [DATE]` | schedule 25-12-2021
+**Search** | `search KEYWORD... <attribute>/{ATTRIBUTE_KEYWORD}...` | search e/doe@gmail.com r/5
+**Filter** | `filter KEYWORD... <attribute>/{ATTRIBUTE_KEYWORD}...` | filter e/doe@gmail.com p/9
+**Clear** | `clear` | -
 
 #### 7.2.1 Adding a client
 
@@ -1022,10 +1062,11 @@ Action | Format | Examples
        
 
 #### 7.2.11 General commands 
-Action | Format | 
-| --- | --- | 
-**help** | `help` |
-**Exit** | `exit` | 
+
+Action | Format
+--- | ---
+**Help** | `help`
+**Exit** | `exit` 
 
 **Help command** 
  1. Getting help information 
@@ -1100,4 +1141,4 @@ Action | Format | Examples
 
 1. Dealing with missing/corrupted data files
 
-    1. The data files can be found in the `data` folder of the repository, and are named accordingly to the name of the address books in your application (For instance, if you have an address book that's called `Young Adults`, there will be a JSON file called `Young Adults.json` in the data folder). Remove the `client id` for one of the clients in the corrupted data file, and restart the application <br> Expected: LeadsForce should display an empty client list for the address book with the same name as the corrupted data file.
+    1. The data files can be found in the `data` folder of the repository, and are named accordingly to the name of the address books in your application (For instance, if you have an address book that's called `Young Adults`, there will be a JSON file called `Young Adults.json` in the data folder). Remove the `clientId` for one of the clients in the corrupted data file, and restart the application <br> Expected: LeadsForce should display an empty client list for the address book with the same name as the corrupted data file.
