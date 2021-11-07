@@ -21,7 +21,6 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -163,7 +162,8 @@ public class DeletePersonCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         DeletePersonCommand deletePersonCommand = new DeletePersonCommand(outOfBoundIndex);
 
-        assertCommandFailure(deletePersonCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deletePersonCommand, model,
+                DeletePersonCommand.MESSAGE_INVALID_FORMAT + DeletePersonCommand.MESSAGE_USAGE);
     }
 
     @Test
@@ -172,7 +172,8 @@ public class DeletePersonCommandTest {
         Index invalidEndIndex = Index.fromOneBased(model.getFilteredPersonList().size() - 4);
         DeletePersonCommand deletePersonCommand = new DeletePersonCommand(invalidStartIndex, invalidEndIndex);
 
-        assertCommandFailure(deletePersonCommand, model, Messages.MESSAGE_INVALID_RANGE);
+        assertCommandFailure(deletePersonCommand, model,
+                DeletePersonCommand.MESSAGE_INVALID_FORMAT + DeletePersonCommand.MESSAGE_USAGE);
     }
 
     @Test
@@ -270,7 +271,8 @@ public class DeletePersonCommandTest {
 
         DeletePersonCommand deletePersonCommand = new DeletePersonCommand(outOfBoundIndex);
 
-        assertCommandFailure(deletePersonCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deletePersonCommand, model,
+                DeletePersonCommand.MESSAGE_INVALID_FORMAT + DeletePersonCommand.MESSAGE_USAGE);
     }
 
     @Test
@@ -286,7 +288,8 @@ public class DeletePersonCommandTest {
 
         DeletePersonCommand deletePersonCommand = new DeletePersonCommand(invalidStartIndex, invalidEndIndex);
 
-        assertCommandFailure(deletePersonCommand, model, Messages.MESSAGE_INVALID_RANGE);
+        assertCommandFailure(deletePersonCommand, model,
+                DeletePersonCommand.MESSAGE_INVALID_FORMAT + DeletePersonCommand.MESSAGE_USAGE);
     }
 
     @Test
