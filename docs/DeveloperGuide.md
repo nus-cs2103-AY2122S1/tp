@@ -993,8 +993,8 @@ Steps 3a1-3a2 are repeated until the command entered is correct.
 Use case resumes from Step 4.
 
 * 4a. TutorAid detects that some specified student(s) already attend some specified lesson(s).
-    * 4a1. TutorAid still adds all the specified student(s) to all the specified lesson(s) except for when a duplicate happens.
-    * 4a2. TutorAid displays warning(s) that some specified student(s) already attend some specified lesson(s), while also displays message(s) of successful addition(s). 
+    * 4a1. TutorAid still adds all the specified student(s) to all the specified lesson(s) while avoiding duplicate students in lessons.
+    * 4a2. TutorAid displays warning(s) that some specified student(s) already attend some specified lesson(s), while also displays a message for each successful addition of a student to a lesson. 
 
 Use case ends.
 
@@ -1034,8 +1034,8 @@ Steps 3a1-3a2 are repeated until the command entered is correct.
 Use case resumes from Step 4.
 
 * 4a. TutorAid detects that some specified student(s) are not attending some specified lesson(s).
-    * 4a1. TutorAid still deletes all the specified student(s) from all the specified lesson(s) except for when a student is not attending a lesson.
-    * 4a2. TutorAid displays warning(s) that some specified student(s) are not attending some specified lesson(s), while also displays message(s) of successful deletion(s).
+    * 4a1. TutorAid still deletes all the specified student(s) from all the specified lesson(s).
+    * 4a2. TutorAid displays warning(s) that some specified student(s) are not attending some specified lesson(s), while also displaying a message for each successful deletion of a student from a lesson.
 
 Use case ends.
 
