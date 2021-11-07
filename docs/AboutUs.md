@@ -34,7 +34,7 @@ Hi, this is AcademyDirectory!
 <img src="images/cheweejia.png" width="200px">
 
 [[github](https://github.com/cheweejia)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/cheweejia.md)]
 
 * Role: Minion
 * Responsibilities: Everything

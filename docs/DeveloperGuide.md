@@ -468,7 +468,7 @@ unless the `NAME` is the same  as the `Student` being edited.
 does not have unnecessary duplicate information (e.g same `PHONE`) is left to an Avenger.
 </div>
 
-The following sequence diagram describes what happens when `GradeCommand` is executed:
+The following sequence diagram describes what happens when `EditCommand` is executed:
 
 ![EditCommandSequenceDiagram](images/dg/logic/commands/editcommand/EditCommandSequenceDiagram.png)
 
@@ -1046,7 +1046,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User enters a command to retrieve information
-2. Academy Directory obtain the queried information from the students.
+2. Academy Directory obtains the queried information from the students.
 3. Academy Directory displays the list of information queried.
 
    Use case ends.
@@ -1134,6 +1134,7 @@ The details of the testing procedure can be found here: [Manual Testing](ManualT
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
 testers are encouraged to do more *exploratory* testing.
+</div>
 
 
 In the future, we aim to expand testing to be done by external testers to improve the testing rigour.
