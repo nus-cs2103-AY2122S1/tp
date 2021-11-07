@@ -1,0 +1,23 @@
+@startuml
+
+start
+:User inputs a returncheckin command;
+:CheckInReturningGuestCommandParser parses and validates the user input;
+    if () then ([arguments are valid])
+      :Parser instantiates a GuestPredicate;
+      :CheckInReturningGuestCommand is created \n  containing the GuestPredicate;
+      :Archive checks if a guest with the same passport number as GuestPredicate exists;
+        if () then ([guest exists])
+            :Model updates the guest list \n  using the archived guest;
+            :A success message is shown to the user;
+        else ([guest does not exist])
+            :CommandException gets thrown;
+            :An error message is shown to the user;
+        endif
+    else ([arguments are invalid])
+      :ParseException gets thrown;
+      :An error message is shown to the user;
+    endif
+stop
+
+@enduml

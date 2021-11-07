@@ -15,6 +15,8 @@ public class Messages {
             "The vendor you are trying to edit does not exist!";
     public static final String MESSAGE_GUEST_TO_CHECK_OUT_DOES_NOT_EXIST =
             "The guest you are trying to check out does not exist!";
+    public static final String MESSAGE_GUEST_TO_CHECK_OUT_IS_IN_ARCHIVE =
+            "You cannot edit a guest that has been archived!";
     public static final String MESSAGE_GUEST_IS_IN_ARCHIVE =
             "You cannot edit a guest that has been archived!";
     public static final String MESSAGE_INVALID_VENDORID =

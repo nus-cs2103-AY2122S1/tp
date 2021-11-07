@@ -16,8 +16,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/alyssa-savier)]
 [[portfolio](team/alyssa-savier.md)]
 
-* Role:
-* Responsibilities:
+* Role: Developer
+* Responsibilities: Testing, Code Quality
 
 ### Jeremy Yeo Zhi Chen
 
@@ -26,8 +26,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/rgbpokka)]
 [[portfolio](team/rgbpokka.md)]
 
-* Role:
-* Responsibilities:
+* Role: Developer
+* Responsibilities: Deliverables and Deadlines, Documentation
 
 ### Calvin Tan
 
@@ -36,8 +36,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/calvintanwj)]
 [[portfolio](team/calvintanwj.md)]
 
-* Role:
-* Responsibilities:
+* Role: Team lead
+* Responsibilities: Integration, Model 
 
 ### Nicolas Chang
 
@@ -46,8 +46,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/NicolasCwy)]
 [[portfolio](team/nicolascwy.md)]
 
-* Role:
-* Responsibilities:
+* Role: Developer
+* Responsibilities: Documentation, Scheduling and Tracking
 
 ### Toh Bing Cheng
 

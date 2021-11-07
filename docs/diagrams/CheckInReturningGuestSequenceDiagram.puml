@@ -1,0 +1,70 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ": PocketHotelParser" as  PocketHotelParser LOGIC_COLOR
+participant ": CheckInReturningGuestCommandParser" as  CheckInReturningGuestCommandParser LOGIC_COLOR
+participant "d: CheckInReturningGuestCommand" as  CheckInReturningGuestCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("returncheckin pn/1234D r/551")
+activate LogicManager
+
+LogicManager ->  PocketHotelParser : parseCommand("returncheckin pn/1234D r/551")
+activate PocketHotelParser
+
+create CheckInReturningGuestCommandParser
+PocketHotelParser -> CheckInReturningGuestCommandParser
+activate CheckInReturningGuestCommandParser
+
+CheckInReturningGuestCommandParser --> PocketHotelParser
+deactivate CheckInReturningGuestCommandParser
+
+PocketHotelParser ->  CheckInReturningGuestCommandParser : parse("pn/1234D r/551")
+activate CheckInReturningGuestCommandParser
+
+create CheckInReturningGuestCommand
+CheckInReturningGuestCommandParser -> CheckInReturningGuestCommand
+activate CheckInReturningGuestCommand
+
+CheckInReturningGuestCommand -->  CheckInReturningGuestCommandParser : d
+deactivate CheckInReturningGuestCommand
+
+CheckInReturningGuestCommandParser -->  PocketHotelParser : d
+deactivate CheckInReturningGuestCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+CheckInReturningGuestCommandParser -[hidden]-> PocketHotelParser
+destroy CheckInReturningGuestCommandParser
+
+PocketHotelParser --> LogicManager : d
+deactivate PocketHotelParser
+
+LogicManager ->  CheckInReturningGuestCommand : execute()
+activate CheckInReturningGuestCommand
+
+CheckInReturningGuestCommand -> Model : returnCheckIn Guest with pn = 1234D
+activate Model
+
+Model --> CheckInReturningGuestCommand
+deactivate Model
+
+create CommandResult
+CheckInReturningGuestCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> CheckInReturningGuestCommand
+deactivate CommandResult
+
+CheckInReturningGuestCommand --> LogicManager : result
+deactivate CheckInReturningGuestCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
+

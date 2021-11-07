@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSPORT_NUMBER;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.Command;
@@ -45,12 +46,17 @@ public class CheckOutCommand extends Command {
 
         requireNonNull(model);
         List<Guest> lastShownList = model.getFilteredGuestList();
+        Guest guestToCheckOut;
 
-        Guest guestToCheckOut =
-                lastShownList.stream().filter(p -> p.getPassportNumber().equals(passportNumber)).findAny().orElse(null);
-
-        if (guestToCheckOut == null) {
-            throw new CommandException(Messages.MESSAGE_GUEST_TO_CHECK_OUT_DOES_NOT_EXIST);
+        Optional<Guest> guestToLocateInArchive = model.getArchivedGuest(passportNumber);
+        if (guestToLocateInArchive.isPresent()) {
+            throw new CommandException(Messages.MESSAGE_GUEST_TO_CHECK_OUT_IS_IN_ARCHIVE);
+        } else {
+            guestToCheckOut = lastShownList.stream().filter(p ->
+                    p.getPassportNumber().equals(passportNumber)).findAny().orElse(null);
+            if (guestToCheckOut == null) {
+                throw new CommandException(Messages.MESSAGE_GUEST_TO_CHECK_OUT_DOES_NOT_EXIST);
+            }
         }
 
         if (guestToCheckOut.hasChargeables()) {

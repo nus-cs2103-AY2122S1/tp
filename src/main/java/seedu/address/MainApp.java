@@ -20,6 +20,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.guest.Archive;
+import seedu.address.model.guest.Guest;
 import seedu.address.model.guest.GuestBook;
 import seedu.address.model.guest.ReadOnlyGuestBook;
 import seedu.address.model.util.SampleDataUtil;
@@ -103,11 +104,27 @@ public class MainApp extends Application {
                 logger.info("Data file not found. Will be starting with a sample GuestBook");
             }
 
-            initialData = guestBookOptional.orElseGet(() -> SampleDataUtil.getSampleGuestBook(archive));
+            initialData = guestBookOptional.orElseGet(() -> SampleDataUtil.getSampleGuestBook());
+
+            ReadOnlyGuestBook verifiedGuestBook = new GuestBook();
+
+            for (Guest guest : initialData.getGuestList()) {
+                boolean containPassportNumber = false;
+                for (Guest archivedGuest : archive.getGuestList()) {
+                    if (archivedGuest.getPassportNumber().equals(guest.getPassportNumber())) {
+                        containPassportNumber = true;
+                    }
+                }
+                if (!containPassportNumber) {
+                    verifiedGuestBook.getGuestList().add(guest);
+                }
+            }
+
+            initialData = verifiedGuestBook;
 
             if (initialData.getGuestList().size() == 0) {
-                logger.info("Passport numbers of all sample guests are used in the archive. "
-                        + "Will be starting with an empty GuestBook");
+                logger.info("Passport numbers of all sample guests are used in the archive or data file has been "
+                        + "corrupted" + "Will be starting with an empty GuestBook");
             }
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty GuestBook");
