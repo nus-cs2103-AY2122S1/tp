@@ -20,6 +20,7 @@ LeadsForce is a desktop app that is optimized for use via a Command Line Interfa
 LeadsForce's developer Guide is written for developers who wish to contribute to or extend our project. It is technical, and explains the inner workings of LeadsForce and how the different components of our application work together.
 
 **Reading this Developer Guide**
+
 | icon | remark |
 | --- | --- |
 | 💡 | This icon denotes useful tips to note of during development. |
@@ -425,7 +426,7 @@ Also, details with regard to AddressBookList has been omitted for simplicity if 
 The following sequence diagram shows how the ab create operation works:
 
 <p align="center">
-<img src="images\AbCreateCommandSequenceDiagram.png" />
+<img src="images/AbCreateCommandSequenceDiagram.png" />
 </p>
 
 ### 4.6.2 Switch Address Book
@@ -519,7 +520,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <p align="center">
 <img src="images/CommitActivityDiagram.png" width="250" />
-<p align="center">
+</p>
 
 #### 4.7.2 Design considerations:
 
@@ -994,6 +995,7 @@ Action | Format | Examples
        
 
 #### 7.2.11 General commands 
+
 Action | Format
 --- | ---
 **Help** | `help`
