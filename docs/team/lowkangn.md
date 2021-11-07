@@ -35,7 +35,9 @@ Given below are my contributions to the project.
 * **Documentation**:
     * Developer Guide:
         * Added target audience, purpose of guide, how to use guide and user stories sections to Developer Guide.
-        * Added implementation for view command.
+        * Added implementation for view command, including diagrams.
+        * General vetting of developer guide.
+        
     * User Guide
         * Added target audience, purpose of guide, how to use guide and glossary sections to User Guide.
         * Added screenshots of Managera to User Guide.
