@@ -385,8 +385,31 @@ A student can have any number of tags (including 0).
 * **At least one** [contact field](#student-contact) is required.<br>
 * `lvl/ACADEMIC_LEVEL` field allows only a maximum of 15 characters (including spaces).
 
-Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pp/92345678 pe/jackdoe@example.com sch/John's School stream/John stream lvl/J1`
+Example:
+
+Suppose you have got a new student named "John Doe" with the following details:
+
+- address: Sengkang Ave 2, Block 123, #02-01
+- phone: 98765432
+- email: john@gmail.com
+- parent phone: 92345678
+- parent email: jackdoe@gmail.com
+- school: Seng Kang Secondary School
+- academic stream: O-Level
+- academic level: S1
+
+Let's see how you can record these details in TAB in just two steps!
+
+1. Type `add n/John Doe p/98765432 e/johnd@gmail.com a/Sengkang Ave 2, Block 123, #02-01 pp/92345678 pe/jackdoe@gmail.com sch/Seng Kang Secondary School stream/O-Level stream lvl/S1` into the command box as shown.
+
+2. Press <kbd>Enter</kbd> and you will see John Doe's details in the student list in just an instant!
+
+3. If you mistakenly keyed in invalid parameters or prefixes, the command would be highlighted red, and an error message will be displayed in the command result box. In the following example, `p/12` is an invalid phone number. TAB requires phone numbers to be at least 3 characters long.
+
+add
+
+s:
+*  `add n/John Doe p/98765432 e/johnd@gmail.com a/Sengkang Ave 2, Block 123, #02-01 pp/92345678 pe/jackdoe@gmail.com sch/Seng Kang Secondary School stream/O-Level stream lvl/S1` Adds a `S1` student named `John Doe` who is studying `O-Level` at `Seng Kang Secondary School` and lives at `Sengkang Ave 2, Block 123, #02-01`, with phone number `98765432`, email `johnd@gmail.com`, parent contact number `92345678` and parent email `jackdoe@gmail.com`.
 * `add n/Betsy Crowe t/cousin a/Newgate p/91234567 r/hasnt pay tuition fee for Aug t/retainee`
 
 #### Editing a student: `edit`
