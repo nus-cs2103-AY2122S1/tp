@@ -46,7 +46,7 @@ using the existing Java API.
   * Justification: Improve efficiency so that the user is able to remove multiple students or classes using one command instead of 
 repeating similar commands multiple times.
 
-* **Testing**: Create tests for the `EditClassCommand`, `EditCommand`, `DeleteCommand`, `DeleteClassCommand` and `RemoveStudentCommand` as well as their related classes to increase coverage. (Pull Request [\#216](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/216))
+* **Testing**: Create tests for the `EditClassCommandParser`, `EditCommandParser`, `DeleteCommandParser`, `DeleteClassCommandParser` and `RemoveStudentCommandParser` as well as their related classes to increase coverage. (Pull Request [\#216](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/216))
 
 #### Contributions to the User Guide
 * Added to the FAQ and Introduction, formatted figures and enabled quicklinks for the command summary.(Pull Request [\#139](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/139))
@@ -55,10 +55,10 @@ repeating similar commands multiple times.
 * Added screenshots for the `DeleteCommand` (Pull Request [\#217](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/217))
 
 #### Contributions to the Developer Guide
-Added the implementation details of `EditClassCommand` (Pull Request [\#135](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/135))
-Added UML diagrams for `RemoveStudent` , `DeleteClassCommand` features (Pull Request [\#209](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/209))
-Added implementation details of `EditCommand` (Pull Request [\#217](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/217))
-Added use cases for TutAssistor
+* Added the implementation details of `EditClassCommand` (Pull Request [\#135](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/135))
+* Added UML diagrams for `RemoveStudent` , `DeleteClassCommand` features (Pull Request [\#209](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/209))
+* Added implementation details of `EditCommand`, `DeleteCommand` (Pull Request [\#217](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/217))
+* Added use cases for TutAssistor
 
 <div style="page-break-after: always;"></div>
 
