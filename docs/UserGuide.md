@@ -124,7 +124,9 @@ In the example above, `edit` tells TutorAid to perform an _edit_ operation.
 #### Command Flag
 {:.no_toc}
 The flag is used to differentiate between commands with the same command word. For example, the `edit` command word can be used to edit the details of a student or a lesson. 
-To differentiate between these usages, you need to additionally pass in a Command Flag to TutorAid. In most commands, the `-s` and `-l` command flags are used to denote operations that are to be performed on students and lessons respectively.
+To differentiate between these usages, you need to additionally pass in a Command Flag to TutorAid. 
+
+In most commands, the `-s` and `-l` command flags are used to denote operations that are to be performed on students and lessons respectively.
 
 In the example above, the command flag `-s` tells TutorAid to perform the edit operation on _students_.
 
@@ -139,10 +141,10 @@ In the example above, `3` tells TutorAid to perform the edit operation on the _t
 Parameter typically refers to additional details that you need to provide in order to successfully execute a command. There can be **multiple** parameters for a single command, depending on the type of command that you wish to perform. 
 A Parameter can be further divided into 2 components:
 
-* Prefix: Prefix refers to the starting few characters of a parameter (up till and including the `/`). These prefixes act as labels for you and for TutorAid to differentiate between various details that you add in a command. 
+* Prefix: Prefix refers to the starting few characters of a parameter (up till and including the `/`). These prefixes act as labels for you and for TutorAid to differentiate between various details that you add in a command.<br><br> 
   In the example above, `sn/` and `sp` help to distinguish between the _student name_ and the _student phone number_ respectively. 
   
-* Argument: Argument refers to the sequence of character that follow immediately after the `/` and before the start of the next prefix (if any). They are the information that you pass into a command and act as values for Prefixes.
+* Argument: Argument refers to the sequence of character that follow immediately after the `/` and before the start of the next prefix (if any). They are the information that you pass into a command and act as values for Prefixes.<br><br>
   In the example above, `Matthew Judge` is the value for the _student name_.
 
 Putting together both the prefix and the argument, `sn/Matthew Judge` tells TutorAid that the name of the third student should updated to _Matthew Judge_. Similarly, `sp/91263740` tells TutorAid that the phone number of the third student should be updated to _91263740_.
@@ -616,8 +618,8 @@ TutorAid student data are saved as a JSON file `[JAR file location]/data/tutorAi
 
 # 6. Glossary
 
-**CLI**: CLI (also known as a _Command Line Interface_) refers to a form of interface that processes a user's input in the form of text.
-**GUI**: GUI (also known as a _Graphical User Interface_) refers to a form of user interface that allows user to interact with the application through graphical icons, such as buttons.
+**CLI**: CLI (also known as a _Command Line Interface_) refers to a form of interface that processes a user's input in the form of text.<br>
+**GUI**: GUI (also known as a _Graphical User Interface_) refers to a form of user interface that allows user to interact with the application through graphical icons, such as buttons.<br>
 **Progress**: Refers to any remark you may want to add for a specific student, such as their performance in class and their homework progression.
 
 ***
