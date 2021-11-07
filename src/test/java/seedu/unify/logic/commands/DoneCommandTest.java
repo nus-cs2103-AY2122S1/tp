@@ -3,34 +3,38 @@ package seedu.unify.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.unify.testutil.TypicalIndexes.INDEX_FIRST_TASK;
+import static seedu.unify.testutil.TypicalIndexes.INDEX_SECOND_TASK;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.unify.commons.core.index.Index;
 
 public class DoneCommandTest {
 
     @Test
+    public void execute_doneCommand_success() {
+
+    }
+
+    @Test
     public void equals() {
-        Index firstIndex = Index.fromOneBased(1);
-        Index secondIndex = Index.fromOneBased(2);
-        DoneCommand firstDoneCommand = new DoneCommand(firstIndex);
-        DoneCommand secondDoneCommand = new DoneCommand(secondIndex);
+        DoneCommand firstDoneCommand = new DoneCommand(INDEX_FIRST_TASK);
+        DoneCommand secondDoneCommand = new DoneCommand(INDEX_SECOND_TASK);
 
         // same object -> returns true
         assertTrue(firstDoneCommand.equals(firstDoneCommand));
 
-        // same value -> returns true
-        DoneCommand firstCopy = new DoneCommand(firstIndex);
+        // same values -> returns true
+        DoneCommand firstCopy = new DoneCommand(INDEX_FIRST_TASK);
         assertTrue(firstDoneCommand.equals(firstCopy));
 
-        // different type -> returns false
-        assertFalse(firstDoneCommand.equals(firstIndex));
+        // different types -> returns false
+        assertFalse(firstDoneCommand.equals(INDEX_FIRST_TASK));
 
         // null -> returns false
         assertFalse(firstDoneCommand.equals(null));
 
-        // different commands with different index -> returns false
+        // different tasks -> returns false
         assertFalse(firstDoneCommand.equals(secondDoneCommand));
     }
 }
