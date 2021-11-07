@@ -138,11 +138,28 @@ The class diagrams of the `Student`, `Task` and `Group` classes are shown below:
 
 ![Structure of the Task Class](images/TaskClassDiagram.png)
 
-The `Task` class is an abstract class, consisting of three subclasses:
+tApp allows TAs to manage their tasks for his or her professional or personal use.
 
-1. `TodoTask` : A task that is to be completed, and is not associated with a date.
-2. `EventTask` : A task that is specified to occur at a certain date.
-3. `DeadlineTask` : A task that is to be completed by a certain date.
+The different types of lists include:
+1. Todo Tasks - Just a task to be completed in the future
+2. Deadline - A task to be completed in the future by a specified deadline
+3. Event - A task to be completed on a specified date
+
+Common commands for the task model:
+
+* `add` - Creates a new task item
+* `edit` - Modifies an existing task
+* `delete` - Removes an existing task from the list of tasks
+* `list` - Shows all tasks in the list
+* `clear` - Removes all the tasks in the list
+
+#### Rationale
+
+The tApp is supposed to cater to TA, who are very busy. They have their own modules to prepare for and as well as prepare for weekly tutorial sessions. Hence, they have lots of things to keep track and a task manager feature is necessary. And there are primarily 3 types of tasks - todos, deadlines and events. tApp has supports all of these features to assist TAs in performing their tasks more efficiently and accurately.
+
+#### Current Implementation
+
+To adhere to Object Oriented Programming principles, we have decided to make the `Task` class as the parent class and `TodoTasks`, `DeadlineTask` and `EventTask` classes a subclass of `Task` class. The class diagram below shows in detail how the task model is being implemented.
 
 The `Task` class, and all its subclasses,
 
@@ -151,7 +168,14 @@ The `Task` class, and all its subclasses,
 * stores an optional reference to a `Description` object.
 * stores `Tag`, which is a class common to the `Student` and `Group` data types.
 
-In addition to the components above, the `EventTask` and `DeadlineTask` classes store a compulsory reference to a `TaskDate` object. The `TodoTask` class 
+In addition to the components above, the `EventTask` and `DeadlineTask` classes store a compulsory reference to a `TaskDate` object. The `TodoTask` class.
+
+
+The `Task` class is an abstract class, consisting of three subclasses:
+
+1. `TodoTask` : A task that is to be completed, and is not associated with a date.
+2. `EventTask` : A task that is specified to occur at a certain date.
+3. `DeadlineTask` : A task that is to be completed by a certain date.
 
 #### Student and Group component
 
@@ -348,6 +372,7 @@ these changes in the `AddressBook`.
 
 <div style="page-break-after: always;"></div>
 
+
 ### Edit Group Command
 
 #### Implementation
@@ -398,31 +423,6 @@ The following steps describe the execution of the `EditTaskCommand`.
 3. Finally, `Model` calls the `setTask` function of the `AddressBook` to update the `Task` data.
 
 
-### Tasks
-
-tApp allows TAs to manage their tasks for his or her professional or personal use.
-
-The different types of lists include:
-1. Todo Tasks - Just a task to be completed in the future
-2. Deadline - A task to be completed in the future by a specified deadline
-3. Event - A task to be completed on a specified date
-
-Common commands for the task model:
-
-* `add` - Creates a new task item
-* `edit` - Modifies an existing task
-* `delete` - Removes an existing task from the list of tasks
-* `list` - Shows all tasks in the list
-* `clear` - Removes all the tasks in the list
-
-#### Rationale
-
-The tApp is supposed to cater to TA, who are very busy. They have their own modules to prepare for and as well as prepare for weekly tutorial sessions. Hence, they have lots of things to keep track and a task manager feature is necessary. And there are primarily 3 types of tasks - todos, deadlines and events. tApp has supports all of these features to assist TAs in performing their tasks more efficiently and accurately.
-
-#### Current Implementation
-
-To adhere to Object-Oriented Programming principles, we have decided to make the `Task` class as the parent class and `TodoTasks`, `DeadlineTask` and `EventTask` classes a subclass of `Task` class. The class diagram below shows in detail how the task model is being implemented.
-
 **Insert Tasks Class Diagram**
 
 #### Adding Todo Task
@@ -443,12 +443,12 @@ Given below is an example usage scenario and how the adding a todo task mechanis
 
 The above process is shown in the following sequence diagram:
 
-<img src=“images/AddTodoTaskSequenceDiagram.png”/>
+![Reference Sequence Diagram of AddTodoTaskCommand](images/AddTodoTaskSequenceDiagram.png)
 **Sequence diagram showcasing the add todo task process**
 
 The following activity diagram summarizes what happens when a user executes a new command to find the members by keywords:
 
-<img src=“images/AddTodoTaskCommandActivityDiagram.png”/>
+![Reference Activity Diagram of AddTodoTaskCommand](images/AddTodoTaskCommandActivityDiagram.png)
 **Activity diagram showcasing the  add todo task execution flow**
 
 <div style="page-break-after: always;"></div>
