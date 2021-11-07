@@ -35,7 +35,7 @@ Given below are my contributions to the project.
     * Added user stories for versions 1.1 and 1.2 (Pull requests [\#13](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/13), [\#35](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/35))
     * Product scope for version 1.2 (Pull request [#39](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/39))
     * Added implementation details of the `mailingList` feature.
-
+<div style="page-break-after: always;"></div>
 * **Tools**:
   * Integrated a third party library (OpenCSV) to the project ([\#91](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/91), 
   * Improved `TestUtils` by adding the ability to create different AddressBook states for testing ([\#52](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/52))
