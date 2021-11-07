@@ -31,11 +31,11 @@ It does not handle communication between the event organiser and the participant
     
     AB3 uses the Person class as the class for dealing with abstraction of Person on the addressbook. For our 
     application, our team decided to shift from Person to Participant class in which I was responsible for 
-    refactoring the application to fit the criteria.
+    refactoring the application to fit the criteria on [Pull request #51](https://github.com/AY2122S1-CS2103T-T10-2/tp/pull/51).
     
     * **JSON Serialization/Deserialization** - Participant, Next Of Kin, and Event classes come with multiple information to be 
       stored in the JSON file. I was one of the teammates for dealing with serialization and deserialization of 
-      object/string
+      object/string on [Pull request #51](https://github.com/AY2122S1-CS2103T-T10-2/tp/pull/51).
 
 * **Enhancement to and Implementation of new features**:
   * **New model**: `ParticipantId`
@@ -67,10 +67,12 @@ It does not handle communication between the event organiser and the participant
     * Added FAQ for Managera inspiration and the origin of the name    - parts of the FAQ initially added was scraped by teammates to make the FAQ overall more concise
   * Developer Guide:
     * Added documentation for features - `addParticipant - enroll` and `removeParticipant - expel`
+      * Includes implementation details, implementation rationale, and 2 activity diagrams
 
-
+* **Team based Task**:
+  * Create product icon and product name
 * **Community**:
-  
+  * PRs reviewed (with non-trivial review comments: [\#20](https://github.com/AY2122S1-CS2103T-T10-2/tp/pull/20), [\#91](https://github.com/AY2122S1-CS2103T-T10-2/tp/pull/91), [\#102](https://github.com/AY2122S1-CS2103T-T10-2/tp/pull/102), [\#145](https://github.com/AY2122S1-CS2103T-T10-2/tp/pull/145))
 * **Tools**:
   
 
