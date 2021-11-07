@@ -15,7 +15,7 @@ import seedu.programmer.model.student.Lab;
 import seedu.programmer.model.student.Student;
 
 /**
- * A default model stub that have all of the methods failing.
+ * A default model stub that has all of its methods failing.
  */
 public class ModelStub implements Model {
 
@@ -116,6 +116,11 @@ public class ModelStub implements Model {
 
     @Override
     public ObservableList<Student> getAllStudents() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public boolean hasNoStudents() {
         throw new AssertionError("This method should not be called.");
     }
 

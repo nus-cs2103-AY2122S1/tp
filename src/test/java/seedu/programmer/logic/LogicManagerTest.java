@@ -52,7 +52,7 @@ public class LogicManagerTest {
 
     @Test
     public void execute_invalidCommandFormat_throwsParseException() {
-        String invalidCommand = "uicfhmowqewca";
+        String invalidCommand = "inavlid command";
         assertParseException(invalidCommand, MESSAGE_UNKNOWN_COMMAND);
     }
 
@@ -63,8 +63,15 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_validCommand_success() throws Exception {
+    public void execute_validCommandEmptyModel_returnsNoStudentsMessage() throws Exception {
         String listCommand = ListCommand.COMMAND_WORD;
+        assertCommandSuccess(listCommand, ListCommand.MESSAGE_NO_STUDENTS, model);
+    }
+
+    @Test
+    public void execute_validCommandFilledModel_returnsSuccessMessage() throws Exception {
+        String listCommand = ListCommand.COMMAND_WORD;
+        model.addStudent(new StudentBuilder().build());
         assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
     }
 
