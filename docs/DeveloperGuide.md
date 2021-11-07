@@ -368,7 +368,7 @@ The following activity diagram summarizes what happens when a CS2100 TA executes
   - Cons: 
     - The strict checks on the `UniqueStudentList` will affect `EditCommand` when the user tries to edit an existing student. 
     This will happen when the user only wants to edit one of the attribute. (For example, studentId.)
-    This newly edited student will have an old copy of the email. This side effect will casue the newly created `student` to clash with its old instance in `UniqueStudentList`, 
+    This newly edited student will have an old copy of the email. This side effect will cause the newly created `student` to clash with its old instance in `UniqueStudentList`, 
     causing the command to fail, even though it should be valid. As such, it makes it hard to implement, as we have to 
     ensure that it works with `EditCommand` as well.
 
