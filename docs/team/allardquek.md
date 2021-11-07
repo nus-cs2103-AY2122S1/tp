@@ -1,5 +1,5 @@
----
-layout: page title: Allard Quek's Project Portfolio Page
+layout: page
+title: Allard Quek's Project Portfolio Page
 ---
 
 [ProgrammerError](https://github.com/AY2122S1-CS2103-F09-3/tp) is a desktop application which helps CS2100 tutors manage

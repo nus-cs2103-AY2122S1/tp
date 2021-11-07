@@ -12,26 +12,26 @@ classes. If you are familiar with Unix commands, this is definitely for you!
 
 - [Quick Start](#quick-start)
 - [Features](#features)
-  1. [General Features](#general-features)
+    1. [General Features](#general-features)
         1. [View Help: `help`](#view-help)
         2. [View Dashboard `dashboard`](#view-dashboard)
         3. [Exit: `exit`](#exit)
-  2. [Data Features](#data-features)
-      1. [Fill Sample Data: `fill`](#fill-sample-data)
-      2. [Purge All Data: `purge`](#purge-all-data)
-      3. [Download Data: `download`](#download-data)
-      4. [Upload Data: `upload`](#upload-data)
-  3. [Student Features](#student-features)
-      1. [Add Student: `add`](#add-student)
-      2. [Edit Student Details: `edit`](#edit-student)
-      3. [Delete Student: `delete`](#delete-student)
-      4. [Filter Students: `filter`](#filter-student)
-      5. [Show Student Details: `show`](#show-student)
-      6. [List All Students: `list`](#list-students)
-  4. [Lab Features](#lab-features)
-      1. [Add Lab: `addlab`](#add-lab)
-      2. [Edit Lab: `editlab`](#edit-lab)
-      3. [Delete Lab: `dellab`](#delete-lab)
+    2. [Data Features](#data-features)
+        1. [Fill Sample Data: `fill`](#fill-sample-data)
+        2. [Purge All Data: `purge`](#purge-all-data)
+        3. [Download Data: `download`](#download-data)
+        4. [Upload Data: `upload`](#upload-data)
+    3. [Student Features](#student-features)
+        1. [Add Student: `add`](#add-student)
+        2. [Edit Student Details: `edit`](#edit-student)
+        3. [Delete Student: `delete`](#delete-student)
+        4. [Filter Students: `filter`](#filter-student)
+        5. [Show Student Details: `show`](#show-student)
+        6. [List All Students: `list`](#list-students)
+    4. [Lab Features](#lab-features)
+        1. [Add Lab: `addlab`](#add-lab)
+        2. [Edit Lab: `editlab`](#edit-lab)
+        3. [Delete Lab: `dellab`](#delete-lab)
 - [Command Summary](#command-summary)
 
 ## <a name="quick-start"></a>Quick Start
@@ -52,8 +52,8 @@ classes. If you are familiar with Unix commands, this is definitely for you!
     * `delete 1`: Deletes the student at index 1 of the displayed list (1-indexed)
     * `filter -sid A1234567X`: Filters the list of students to display the student(s) whose student ID contains `
       A1234567X' (case-insensitive)
-6. Refer to the [Features](#features) below for details on all available commands.
-Take note that command parameters wrapped with `[` `]` listed in this guide signifies that the parameter is optional.
+6. Refer to the [Features](#features) below for details on all available commands. Take note that command parameters
+   wrapped with `[` `]` listed in this guide signifies that the parameter is optional.
 
 ## <a name="features"></a>Features
 

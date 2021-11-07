@@ -1,5 +1,5 @@
----
-layout: page title: Zhao Peiduo's Project Portfolio Page
+layout: page
+title: Zhao Peiduo's Project Portfolio Page
 ---
 
 ### Project: ProgrammerError

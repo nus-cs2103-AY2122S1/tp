@@ -12,14 +12,15 @@ title: Developer Guide
 5. [UI](#UI component)
 6. [Logic component](#Logic component)
 7. [Storage component](#Storage component)
-8. [Documentation, logging, testing, configuration, dev-ops](#Documentation)
-9. [Appendix: Requirements](#Appendix Requirements)
-9. [Common classes](#Common classes)
-10. [User Stories](#User Stories)
-11. [Use case](#Use Cases)
-12. [Non-Functional Requirements](#Non-Functional Requirements)
-13. [Glossary](#Glossary)
-14. [Appendix: Instructions for manual testing](#Appendix)
+8. [Implementations](#Implementations)
+9. [Documentation, logging, testing, configuration, dev-ops](#Documentation)
+10. [Appendix: Requirements](#Appendix Requirements)
+11. [Common classes](#Common classes)
+12. [User Stories](#User Stories)
+13. [Use cases](#Use Cases)
+14. [Non-Functional Requirements](#Non-Functional Requirements)
+15. [Glossary](#Glossary)
+16. [Appendix: Instructions for manual testing](#Appendix)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -118,6 +119,7 @@ The `UI` component uses the JavaFx UI framework.
   the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java)
   is specified
   in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+
 - The styling of the UI components are defined in the `src/main/resources/view/css` folder.
 
 The `UI` component,
@@ -176,7 +178,7 @@ API** : [`Model.java`](https://github.com/AY2122S1-CS2103-F09-3/tp/blob/master/s
 
 The `Model` component,
 
-* stores the address book data i.e., all `Student` objects (which are contained in a `UniqueStudentList` object).
+* stores the ProgrammerError data i.e., all `Student` objects (which are contained in a `UniqueStudentList` object).
 * stores the currently 'selected' `Student` objects (e.g., results of a search query) as a separate _filtered_ list
   which is exposed to outsiders as an unmodifiable `ObservableList<Student>` that can be 'observed' e.g. the UI can be
   bound to this list so that the UI automatically updates when the data in the list change.
@@ -200,7 +202,7 @@ API** : [`Storage.java`](https://github.com/AY2122S1-CS2103-F09-3/tp/blob/master
 
 The `Storage` component,
 
-* can save both address book data and user preference data in json format, and read them back into corresponding
+* can save both ProgrammerError data and user preference data in json format, and read them back into corresponding
   objects.
 * inherits from both `ProgrammerErrorStorage` and `UserPrefStorage`, which means it can be treated as either one (if
   only the functionality of only one is needed).
@@ -213,7 +215,7 @@ Classes used by multiple components are in the `seedu.programmer.commons` packag
 
 --------------------------------------------------------------------------------------------------------------------
 
-## <a name="Implementation"></a> **Implementation**
+## <a name="Implementations"></a> **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
 
@@ -225,46 +227,47 @@ The proposed undo/redo mechanism is facilitated by `VersionedProgrammerError`. I
 undo/redo history, stored internally as an `programmerErrorStateList` and `currentStatePointer`. Additionally, it
 implements the following operations:
 
-* `VersionedProgrammerError#commit()` — Saves the current address book state in its history.
-* `VersionedProgrammerError#undo()` — Restores the previous address book state from its history.
+* `VersionedProgrammerError#commit()` — Saves the current ProgrammerError state in its history.
+* `VersionedProgrammerError#undo()` — Restores the previous ProgrammerError state from its history.
 * `VersionedProgrammerError#redo()`
-* ores a previously undone address book state from its history.
+* ores a previously undone ProgrammerError state from its history.
 
 These operations are exposed in the `Model` interface as `Model#commitProgrammerError()`, `Model#undoProgrammerError()`
 and `Model#redoProgrammerError()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedProgrammerError` will be initialized with
-the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+
+Step 1. The user launches the application for the first time. The `VersionedProgrammerError` will be initialized with the
+initial ProgrammerErrorstate, and the `currentStatePointer` pointing to that single ProgrammerError state.
 
 ![UndoRedoState0](images/commands/UndoCommand/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th student in the address book. The `delete` command
-calls `Model#commitProgrammerError()`, causing the modified state of the address book after the `delete 5` command
-executes to be saved in the `programmerErrorStateList`, and the `currentStatePointer` is shifted to the newly inserted
-address book state.
+Step 2. The user executes `delete 5` command to delete the 5th student in the ProgrammerError. The `delete` command
+calls `Model#commitProgrammerError()`, causing the modified state of the ProgrammerError after the `delete 5` command executes
+to be saved in the `programmerErrorStateList`, and the `currentStatePointer` is shifted to the newly inserted ProgrammerError
+state.
+
 
 ![UndoRedoState1](images/commands/UndoCommand/UndoRedoState1.png)
 
 Step 3. The user executes `add n/David …​` to add a new student. The `add` command also
-calls `Model#commitProgrammerError()`, causing another modified address book state to be saved into
+calls `Model#commitProgrammerError()`, causing another modified ProgrammerError state to be saved into
 the `programmerErrorStateList`.
 
 ![UndoRedoState2](images/commands/UndoCommand/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitProgrammerError()`, so the ProgrammerError state will not be saved into the `programmerErrorStateList`.
 
 </div>
 
 Step 4. The user now decides that adding the student was a mistake, and decides to undo that action by executing
-the `undo` command. The `undo` command will call `Model#undoProgrammerError()`, which will shift
-the `currentStatePointer`
-once to the left, pointing it to the previous address book state, and restores the address book to that state.
+the `undo` command. The `undo` command will call `Model#undoProgrammerError()`, which will shift the `currentStatePointer`
+once to the left, pointing it to the previous ProgrammerError state, and restores the ProgrammerError to that state.
 
 ![UndoRedoState3](images/commands/UndoCommand/UndoRedoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial ProgrammerError state, then there are no previous ProgrammerError states to restore. The `undo` command uses `Model#canUndoProgrammerError()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
 </div>
@@ -277,35 +280,36 @@ The following sequence diagram shows how the undo operation works:
 
 </div>
 
-The `redo` command does the opposite — it calls `Model#redoProgrammerError()`, which shifts the `currentStatePointer`
-once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redoProgrammerError()`, which shifts the `currentStatePointer` once
+to the right, pointing to the previously undone state, and restores the ProgrammerError to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the CS2100 TA rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `pProgrammerErrorStateList.size() - 1`, pointing to the latest ProgrammerError state, then there are no undone ProgrammerError states to restore. The `redo` command uses `Model#canRedoProgrammerError()` to check if this is the case. If so, it will return an error to the CS2100 TA rather than attempting to perform the redo.
 
 </div>
 
-Step 5. The CS2100 TA then decides to execute the command `list`. Commands that do not modify the address book, such
-as `list`, will usually not call `Model#commitProgrammerError()`, `Model#undoProgrammerError()`
-or `Model#redoProgrammerError()`. Thus, the `programmerErrorStateList` remains unchanged.
+Step 5. The CS2100 TA then decides to execute the command `list`. Commands that do not modify the ProgrammerError, such
+as `list`, will usually not call `Model#commitProgrammerError()`, `Model#undoProgrammerError()` or `Model#redoProgrammerError()`.
+Thus, the `programmerErrorStateList` remains unchanged.
 
 ![UndoRedoState4](images/commands/UndoCommand/UndoRedoState4.png)
 
-Step 6. The CS2100 TA executes `purge`, which calls `Model#commitProgrammerError()`. Since the `currentStatePointer` is
-not pointing at the end of the `programmerErrorStateList`, all address book states after the `currentStatePointer` will
-be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern
+Step 6. The CS2100 TA executes `purge`, which calls `Model#commitProgrammerError()`. Since the `currentStatePointer` is not
+pointing at the end of the `programmerErrorStateList`, all ProgrammerError states after the `currentStatePointer` will be
+purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern
 desktop applications follow.
 
 ![UndoRedoState5](images/commands/UndoCommand/UndoRedoState5.png)
 
 The following activity diagram summarizes what happens when a CS2100 TA executes a new command:
 
-<img src="images/CommitActivityDiagram.png" width="250" />
+![CommitActivityDiagram](images/CommitActivityDiagram.png)
+
 
 #### Design considerations:
 
 **Aspect: How undo & redo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Alternative 1 (current choice):** Saves the entire ProgrammerError.
     * Pros: Easy to implement.
     * Cons: May have performance issues in terms of memory usage.
 
@@ -468,6 +472,7 @@ related to the UI. In addition, the following classes are utilised:
 In the `Logic` components, the `download` command works in a similar fashion to the `show` command, except that it does
 not require its own parser.
 
+
 This sequence diagram shows how the `download` command works at a lower level:
 
 ![DownloadSequenceDiagram](images/commands/DownloadCommand/DownloadSequenceDiagram.png)
@@ -494,10 +499,11 @@ success.
    write the corresponding values to a CSV file which ProgrammerError would create. We chose not to go down this route
    as it is much more tedious with little reward in terms of code management and code quality.
 
-2. Another alternative with respect to the CS2100 TA experience could be to disallow the user from selecting a folder to
-   save their data to. Instead, a default location could be chosen so as to save the CS2100 TA some time in getting
-   their data downloaded quickly. However, since we wanted to make ProgrammerError more flexible and adaptable to
-   different users, we opted to include the functionality of allowing the CS2100 TA to select a folder destination.
+
+2. Another alternative with respect to the CS2100 TA experience could be to disallow the user from selecting a folder to save
+   their data to. Instead, a default location could be chosen so as to save the CS2100 TA some time in getting their data
+   downloaded quickly. However, since we wanted to make ProgrammerError more flexible and adaptable to different users, we opted to include the
+   functionality of allowing the CS2100 TA to select a folder destination.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -604,13 +610,13 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
     * 3a.1. ProgrammerError shows an error message.
 
-      Use case resumes at step 3.
+    Use case resumes at step 3.
 
 * 3b. The student email or ID given are not unique.
 
     * 3a.1. ProgrammerError shows an error message.
 
-      Use case resumes at step 3.
+    Use case resumes at step 3.
 
 **Use case: UC3 View a student record**
 
@@ -633,7 +639,7 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
     * 3a1. ProgrammerError shows an error message.
 
-      Use case resumes at step 2.
+    Use case resumes at step 2.
 
 **Use case: UC4 Delete a student record**
 
@@ -656,7 +662,7 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
     * 3a1. ProgrammerError shows an error message.
 
-      Use case resumes at step 2.
+    Use case resumes at step 2.
 
 **Use case: UC5 Update a student record**
 
@@ -679,13 +685,14 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
     * 3a.1. ProgrammerError shows an error message.
 
-      Use case resumes at step 2.
+    Use case resumes at step 2.
 
 * 3b. The given email or student id is not unique
 
     * 3b.1. ProgrammerError shows an error message.
 
-      Use case resumes at step 2.
+
+    Use case resumes at step 2.
 
 **Use case: UC6 Download student records**
 
@@ -713,9 +720,10 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 **Extensions**
 
 * 3a. The given lab name is not unique or lab score < 0
-    * 3a.1 ProgrammerError shows an error message. Use case resumes at 2
+  * 3a.1 ProgrammerError shows an error message.
+  Use case resumes at 2
 
-Use case ends.
+  Use case ends.
 
 **Use case: UC8 Edit a lab record**
 
@@ -726,7 +734,7 @@ Use case ends.
 3. CS2100 TA specifies lab number and actual score or total score
 4. ProgrammerError updates the student's record
 
-Use case ends.
+  Use case ends.
 
 **Extensions**
 
@@ -734,9 +742,8 @@ Use case ends.
     * 3a.1 ProgrammerError shows an error message.
 * Use case resumes at 2
 
-Use case ends.
+  Use case ends.
 
-{More to be added}
 
 ## <a name="Non-Functional Requirements"></a> Non-Functional Requirements
 
