@@ -135,6 +135,9 @@ file to.
 
 Uploads student data via a CSV file with **only** the following fields: student ID, class ID, name, email
 
+Here is an [example CSV file](https://github.com/AY2122S1-CS2103-F09-3/tp/blob/master/sample_upload/validDataForUpload.csv).
+You may download files from GitHub following the instructions [here](https://stackoverflow.com/questions/4604663/download-single-files-from-github).
+
 <div markdown="block" class="alert alert-warning">:exclamation: **Note:**
 the CSV should *not* contain students' lab results since this functionality is only meant for the TA to automate the adding of students to PE.
 
