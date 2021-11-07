@@ -15,8 +15,8 @@ If you are interested by what we have said thus far, jump right to the [How to u
 
 ## Table of Contents
 
-- Table of Contents
-  {:toc}
+- Table of Contents 
+{:toc}
 
 ---
 
