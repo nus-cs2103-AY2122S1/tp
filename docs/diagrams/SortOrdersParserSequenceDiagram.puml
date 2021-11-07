@@ -1,0 +1,66 @@
+@startuml
+
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":SalesNoteParser" as SalesNoteParser LOGIC_COLOR
+participant ":SortOrdersCommandParser" as SortOrdersCommandParser LOGIC_COLOR
+participant ":SortDescriptor" as SortDescriptor LOGIC_COLOR
+participant "<<class>>\nParserUtil" as ParserUtil LOGIC_COLOR
+participant "d:SortOrdersCommand" as SortOrderCommand LOGIC_COLOR
+end box
+
+-> SalesNoteParser : parseCommand("sortorders f/a o/asc")
+activate SalesNoteParser
+
+create SortOrdersCommandParser
+SalesNoteParser -> SortOrdersCommandParser
+activate SortOrdersCommandParser
+
+SortOrdersCommandParser --> SalesNoteParser
+deactivate SortOrdersCommandParser
+
+SalesNoteParser -> SortOrdersCommandParser : parse("f/a o/asc")
+activate SortOrdersCommandParser
+
+SortOrdersCommandParser -> ParserUtil  : parseSortField("a")
+activate ParserUtil
+
+ParserUtil --> SortOrdersCommandParser : sortField
+deactivate ParserUtil
+
+SortOrdersCommandParser -> ParserUtil  : parseSortOrdering("asc")
+activate ParserUtil
+
+ParserUtil --> SortOrdersCommandParser : sortOrdering
+deactivate ParserUtil
+
+create SortDescriptor
+SortOrdersCommandParser -> SortDescriptor  : SortDescriptor(sortField, sortOrdering)
+activate SortDescriptor
+
+SortDescriptor --> SortOrdersCommandParser : sortDescriptor
+deactivate SortDescriptor
+
+create SortOrderCommand
+SortOrdersCommandParser -> SortOrderCommand  : SortOrderCommand(sortDescriptor)
+activate SortOrderCommand
+
+SortOrderCommand --> SortOrdersCommandParser : sortOrdersCommand
+deactivate SortOrderCommand
+
+SortOrdersCommandParser --> SalesNoteParser : sortOrdersCommand
+deactivate SortOrdersCommandParser
+
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+SortOrdersCommandParser -[hidden]-> SalesNoteParser
+destroy SortOrdersCommandParser
+
+<-- SalesNoteParser : sortOrdersCommand
+deactivate SalesNoteParser
+
+@enduml
+
+
+
+
