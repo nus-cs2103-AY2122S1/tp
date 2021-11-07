@@ -767,6 +767,6 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
     1. Test case: Missing JSON file.  
-       Expected: Sample Track2Gather person list will be generated with sample persons' information.
+       Expected: Sample Track2Gather persons list will be generated with sample persons' information.
     2. Test case: Corrupted JSON file.  
-       Expected: Empty Track2Gather person list will be generated.
+       Expected: Empty Track2Gather persons list will be generated.

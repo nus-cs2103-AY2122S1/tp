@@ -14,11 +14,11 @@ Track2Gather is a **desktop app for contact tracing personnel at the [Ministry o
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `track2gather.jar` from [here](https://github.com/AY2122S1-CS2103-W14-2/tp/releases).
+2. Download the latest `Track2Gather.jar` from [here](https://github.com/AY2122S1-CS2103-W14-2/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your Track2Gather.
 
-4. To start the app, double-click the file or enter `java -jar track2gather.jar` into the terminal in the _home folder_.
+4. To start the app, double-click the file or enter `java -jar Track2Gather.jar` into the terminal in the _home folder_.
 
 5. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
@@ -102,7 +102,7 @@ Field | Format
 Adds a person to the persons list for tracking.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL cn/CASE_NUMBER ha/HOME_ADDRESS [wa/WORK_ADDRESS] [qa/QUARANTINE_ADDRESS] [sh/SHN_PERIOD] [kn/NEXT_OF_KIN_NAME] [kp/NEXT_OF_KIN_PHONE] [ka/NEXT_OF_KIN_ADDRESS]`
-* There cannot be multiple persons with the same case number
+* There cannot be multiple persons with the same case number.
 
 Examples:
 * `add n/Alex p/98765432 e/alex@email.com cn/200 ha/123 Orchard Road #01-100 800123`
@@ -111,63 +111,65 @@ Examples:
 
 ### Editing a person : `edit`
 
-Edits the details of the person identified by the index number used in the displayed person list. Existing values will be overwritten by the input values.
+Edits the details of the person identified by the index number used in the displayed persons list. Existing values will be overwritten by the input values.
 
 Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [cn/CASE_NUMBER] [ha/HOME_ADDRESS] [wa/WORK_ADDRESS] [qa/QUARANTINE_ADDRESS] [sh/SHN_PERIOD] [kn/NEXT_OF_KIN_NAME] [kp/NEXT_OF_KIN_PHONE] [ka/NEXT_OF_KIN_ADDRESS]`
-* Edits the person at the specified `INDEX`
-* The index **must be a positive integer** (e.g. 1, 2, 3, ..)
-* The index **must not exceed the total number of persons** in the persons list
-* There cannot be multiple persons with the same case number
-* At least one field to edit must be provided
-* Editing a field that was previously blank will add the field to the person with the given input
+* Edits the person at the specified `INDEX`.
+* The index **must be a positive integer** (e.g. 1, 2, 3, ..).
+* The index **must not exceed the total number of persons** in the persons list.
+* There cannot be multiple persons with the same case number.
+* At least one field to edit must be provided.
+* Editing a field that was previously blank will add the field to the person with the given input.
 
 Examples:
-* `edit 1 n/Henry Hugh` edits the name of the first person in the list to be `Henry Hugh`
+* `edit 1 n/Henry Hugh` edits the name of the first person in the list to be `Henry Hugh`.
+* `edit 2 qa/123 Apple Street` edits the quarantine address of the second person in the list to be `123 Apple Street`.
+* `edit 3 n/Charlie p/12345678 e/charlie@email.com cn/2103` edits the name, phone number, email and case number of the third person in the list to be `Charlie`, `12345678`, `charlie@email.com` and `2103` respectively.
 
 ### Finding persons by a field: `find`
 
 Finds person(s) based on the field specified by the user.
 
 Format: `find [n/NAME] [p/PHONE_NUMBER] [cn/CASE_NUMBER] [sh/start:SHN_START_DATE] [sh/end:SHN_END_DATE]`
-* Exactly one field can be searched at a time
+* You can search by only one field at a time.
 * For each field, multiple keywords can be provided.
   * Keywords are separated by spaces.
   * The order of the keywords does not matter.
   * Persons matching at least one keyword will be returned (i.e. `OR` search). <br> 
-    Example: `Hans Bo` will be interpreted as two separate keywords, `Hans` and `Bo`, and thus return `Hans Gruber`, `Bo Yang`
+    Example: `Hans Bo` will be interpreted as two separate keywords, `Hans` and `Bo`, and thus return `Hans Gruber`, `Bo Yang`.
 * Field must be one of the following:
 
 Field (`FIELD_PREFIX`) | Description
 ------|------------------
-Name (`n/`) |{::nomarkdown}<ul><li>Search is case-insensitive. e.g `hans` will match `Hans`</li><li>Full words will be matched e.g. `Han` will not match `Hans`</li><li>Name keywords must be entered as <a href="#format-for-person-details">valid names</a></li></ul>{:/}
-Phone number (`p/`) |{::nomarkdown}<ul><li>Phone numbers that start with the specified number(s) will be matched e.g. `123` and `1234` will match `12345678`</li><li>Phone number keywords must be positive integers with no leading zeros, and should be 1 to 11 digits long</li></ul>{:/}
-Case number (`cn/`) |{::nomarkdown}<ul><li> Search will only match if case number is equal, e.g. `123` will match `123` but will not match `1234`</li><li>Case number keywords must be entered as <a href="#format-for-person-details">valid case numbers</a></li></ul>{:/}
-SHN start date (`sh/start:`) |{::nomarkdown}<ul><li>Search will only match if SHN start date is equal, e.g. `2021-01-01` will match `2021-01-01`</li><li>SHN start date keywords must be entered in <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO-8601 format</a> (i.e. yyyy-MM-dd)</li></ul>{:/}
-SHN end date (`sh/end:`) |{::nomarkdown}<ul><li>Search will only match if SHN end date is equal, e.g. `2021-01-02` will match `2021-01-02`</li><li>SHN end date keywords must be entered in <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO-8601 format</a> (i.e. yyyy-MM-dd)</li></ul>{:/}
+Name (`n/`) |{::nomarkdown}<ul><li>Search is case-insensitive. e.g `hans` will match `Hans`.</li><li>Full words will be matched e.g. `Han` will not match `Hans`.</li><li>Name keywords must be entered as <a href="#format-for-person-details">valid names.</a></li></ul>{:/}
+Phone number (`p/`) |{::nomarkdown}<ul><li>Phone numbers that start with the specified number(s) will be matched e.g. `123` and `1234` will match `12345678`.</li><li>Phone number keywords must be positive integers with no leading zeros, and should be 1 to 11 digits long.</li></ul>{:/}
+Case number (`cn/`) |{::nomarkdown}<ul><li> Search will only match if case number is equal, e.g. `123` will match `123` but will not match `1234`.</li><li>Case number keywords must be entered as <a href="#format-for-person-details">valid case numbers.</a></li></ul>{:/}
+SHN start date (`sh/start:`) |{::nomarkdown}<ul><li>Search will only match if SHN start date is equal, e.g. `2021-01-01` will match `2021-01-01`.</li><li>SHN start date keywords must be entered in <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO-8601 format</a> (i.e. yyyy-MM-dd).</li></ul>{:/}
+SHN end date (`sh/end:`) |{::nomarkdown}<ul><li>Search will only match if SHN end date is equal, e.g. `2021-01-02` will match `2021-01-02`.</li><li>SHN end date keywords must be entered in <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO-8601 format</a> (i.e. yyyy-MM-dd).</li></ul>{:/}
 
 Examples:
-* `find n/John` will match the following names: `john` and `John Doe` 
-* `find n/alex david` will match the following names: `Alex Yeoh` and `David Li` 
-* `find p/123` will match the following phone numbers: `12345678` and `12387654` 
-* `find p/123 234` will match the following phone numbers: `12345678`, `23456778` and `12387654`
-* `find cn/1` will only match the following case number: `1`
-* `find sh/start:2021-01-01` will only match the following SHN start date: `2021-01-01` 
-* `find sh/end:2021-01-02` will only match the following SHN end date: `2021-01-02` 
+* `find n/John` will match the following names: `john` and `John Doe`.
+* `find n/alex david` will match the following names: `Alex Yeoh` and `David Li`.
+* `find p/123` will match the following phone numbers: `12345678` and `12387654`.
+* `find p/123 234` will match the following phone numbers: `12345678`, `23456778` and `12387654`.
+* `find cn/1` will only match the following case number: `1`.
+* `find sh/start:2021-01-01` will only match the following SHN start date: `2021-01-01`.
+* `find sh/end:2021-01-02` will only match the following SHN end date: `2021-01-02`.
 
 ### Shifting SHN End Dates: `tshift`
 
 Shifts all persons' SHN end dates by the specified number of days.
 
 Format: `tshift [PLUS_MINUS_SIGN]DAYS`
-* `DAYS` should be a number between `1` and `90` inclusive
-* The shift will only be applied to the persons which are currently displayed in the UI
-* Postpones the SHN end date if the evaluated value is positive
-* Brings forward the SHN end date if the evaluated value is negative
-* The SHN end dates will only be brought forward up to and including a day after the person's SHN start date
+* `DAYS` should be a number between `1` and `90` inclusive.
+* The shift will only be applied to the persons which are currently displayed in the UI.
+* Postpones the SHN end date if the evaluated value is positive.
+* Brings forward the SHN end date if the evaluated value is negative.
+* The SHN end dates will only be brought forward up to and including a day after the person's SHN start date.
 
 Examples:
-* `tshift 3` postpones all SHN end dates by 3 days. This is identical to `tshift +3`
-* `tshift -3` brings forward all SHN end dates by up to 3 days
+* `tshift 3` postpones all SHN end dates by 3 days. This is identical to `tshift +3`.
+* `tshift -3` brings forward all SHN end dates by up to 3 days.
 
 ### Deleting a person : `delete`
 
@@ -176,16 +178,15 @@ Deletes the person(s) identified by the specified index number(s) used in the di
 Format: `delete INDEX [MORE_INDICES]`
 
 * Deletes the person(s) at the specified `INDEX`(s).
-* The index(s) **must be a positive integer** (e.g. 1, 2, 3, ..)
+* The index(s) **must be a positive integer** (e.g. 1, 2, 3, ..).
 * The index(s) **must not exceed the total number of persons** in the contacts list
-* The index(s) **can be given in any order** (e.g. `delete 1 4 5`, `delete 5 1 4`)
-* Repeated indices will be ignored i.e. `delete 1 1 2 2` will be interpreted as `delete 1 2`
+* The index(s) **can be given in any order** (e.g. `delete 1 4 5`, `delete 5 1 4`).
+* Repeated indices will be ignored i.e. `delete 1 1 2 2` will be interpreted as `delete 1 2`.
 
 Examples:
 * `sort n/` followed by `delete 2` deletes the 2nd person in the persons list when sorted by name. 
-* `sort cn/` followed by `delete 1 4 5` deletes the 1st, 4th and 5th persons in the persons list when sorted by case
-  number.
-* `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command, if any.
+* `sort cn/` followed by `delete 1 4 5` deletes the 1st, 4th and 5th persons in the persons list when sorted by case number.
+* `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 ### Listing all persons : `list`
 
@@ -199,13 +200,13 @@ Sorts the persons list based on the field specified by the user.
 
 Format: `sort [n/DIRECTION] [cn/DIRECTION] [sh/start:DIRECTION] [sh/end:DIRECTION]`
 
-* `DIRECTION` can either be `asc` or `dsc`
-* Direction `asc` indicates ascending sort order and `dsc` indicates descending sort order
-* Sorts the persons list from the first to the last specified field prefix
-* At least one field prefix must be provided
+* `DIRECTION` can either be `asc` or `dsc`.
+* Direction `asc` indicates ascending sort order and `dsc` indicates descending sort order.
+* Sorts the persons list from the first to the last specified field prefix.
+* At least one field prefix must be provided.
 * Letter case is ignored when sorting by name.
-* Specifying the sort direction is optional
-  * By default, field prefixes are sorted in ascending order
+* Specifying the sort direction is optional.
+  * By default, field prefixes are sorted in ascending order.
 
 Examples:
 * `sort n/` sorts the persons list by name (in ascending order by default).
@@ -241,9 +242,9 @@ Under `Call Status` for each person, there are two components:
   * Displayed as `Called:` followed by a red cross or green tick.
   * Red cross indicates that a person has not been called for the current SHN enforcement session.
   * Green tick indicates that a person has been called for the current SHN enforcement session, *regardless of whether the call was successful*.
-* Non-compliance counter 
-  * Represents the number of failed attempts that have been made to call the person 
-  * Displayed as `Failed: X time(s)` where X is the number of failed call attempts 
+* Non-compliance counter
+  * Represents the number of failed attempts that have been made to call the person. 
+  * Displayed as `Failed: X time(s)` where X is the number of failed call attempts.
   * The number of failed call attempts recorded is cumulative over the entire period of Track2Gather usage. It does not reset to zero when a new SHN enforcement session is created.
 
 #### Important notes
@@ -279,8 +280,8 @@ Updates a person as successfully called in the current SHN enforcement session.
 Format: `scall INDEX`
 
 * Updates the person at the specified `INDEX` as called.
-* The index **must be a positive integer** (e.g. 1, 2, 3, ..)
-* The index **must not exceed the total number of persons** in the contacts list
+* The index **must be a positive integer** (e.g. 1, 2, 3, ..).
+* The index **must not exceed the total number of persons** in the contacts list.
 * If Track2Gather is in enforcement mode, the person at the specified index will be removed from the schedule and thus the display.
   * Note that the person at the specified index will have its call status indicator changed to a green tick.
 * If Track2Gather is not in enforcement mode, the person at the specified index will have its call status indicator changed to a green tick.
@@ -298,8 +299,8 @@ Updates that a failed call was made to a person in the current SHN enforcement s
 
 Format: `fcall INDEX`
 * Updates the person at the specified `INDEX` as called, and increments the person's non-compliance counter by 1.
-* The index **must be a positive integer** (e.g. 1, 2, 3, ..)
-* The index **must not exceed the total number of persons** in the contacts list
+* The index **must be a positive integer** (e.g. 1, 2, 3, ..).
+* The index **must not exceed the total number of persons** in the contacts list.
 * If Track2Gather is in SHN enforcement mode, the person at the specified index will be removed from the schedule and thus the display.
   * Note that the person at the specified index will have its call status indicator changed to a green tick and its non-compliance counter incremented by 1.
 * If Track2Gather is not in SHN enforcement mode, the person at the specified index will have its call status indicator changed to a green tick, and non-compliance counter incremented by 1.
@@ -347,7 +348,7 @@ Action | Format, Examples
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL cn/CASE_NUMBER ha/HOME_ADDRESS [wa/WORK_ADDRESS] [qa/QUARANTINE_ADDRESS] [sh/SHN_PERIOD] [kn/NEXT_OF_KIN_NAME] [kp/NEXT_OF_KIN_PHONE] [ka/NEXT_OF_KIN_ADDRESS]`<br> e.g. `add n/Charlie p/12345678 e/charlie@email.com cn/2103 ha/123 Changi Road #01-100 700123 wa/50 Jurong Road 120050 qa/12 Harbourfront Ring 123012 sh/2021-01-01 2021-01-14 kn/Peter kp/90011234 ka/73 Yishun Drive #10-301 310073`
 **Delete** | `delete INDEX [MORE_INDICES]`<br> e.g. `delete 3` `delete 1 4`
 **List** | `list`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [cn/CASE_NUMBER] [ha/HOME_ADDRESS] [wa/WORK_ADDRESS] [qa/QUARANTINE_ADDRESS] [sh/SHN_PERIOD] [kn/NEXT_OF_KIN_NAME] [kp/NEXT_OF_KIN_PHONE] [ka/NEXT_OF_KIN_ADDRESS]`<br> e.g. `edit 1 n/Henry Hugh`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [cn/CASE_NUMBER] [ha/HOME_ADDRESS] [wa/WORK_ADDRESS] [qa/QUARANTINE_ADDRESS] [sh/SHN_PERIOD] [kn/NEXT_OF_KIN_NAME] [kp/NEXT_OF_KIN_PHONE] [ka/NEXT_OF_KIN_ADDRESS]`<br> e.g. `edit 1 n/Henry Hugh` `edit 2 kn/John Doe` `edit 3 n/Charlie p/12345678 e/charlie@email.com cn/2103`
 **TShift** | `tshift [PLUS_MINUS_SIGN]DAYS`<br> e.g. `tshift 3`
 **Clear** | `clear`
 **Find** | `find [n/NAME] [p/PHONE_NUMBER] [cn/CASE_NUMBER] [sh/start:SHN_START_DATE] [sh/end:SHN_END_DATE]`<br> e.g. `find n/James Jake` `find p/123` `find cn/111` `find sh/start:2000-01-01` `find sh/end: 2000-01-02`
