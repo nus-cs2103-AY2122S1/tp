@@ -73,7 +73,7 @@ Take note of some syntax we will frequently use throughout the Developer Guide:
 
 ## **Acknowledgements** <a name="acknowledgements"/> 
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org/).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -194,7 +194,7 @@ Heres the class diagram of the `Appointment` component within `Model`:
 
 The `Model` component,
 
-* stores the plannerMd data  
+* stores the plannerMD data  
   * all `Patient` and `Doctor` objects (which are contained in `UniquePersonList<Patient>` and `UniquePersonList<Doctor>` respectively).
   * all `Appointment` objects (which are contained in `UniqueAppointmentList<Patient>`).
 * stores the currently active `State` (which determines which list of Person, `Patient` or `Doctor`, to interact with)
@@ -399,7 +399,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 #### What it is
 
-Filters through the appointment records in PlannerMd and shows the appointments that matches the filter parameters.
+Filters through the appointment records in PlannerMD and shows the appointments that matches the filter parameters.
 
 There are 4 possible parameters provided to a filter appointment command are:
 * Patient keywords (Filters appointments whose patient's name contains one of the keywords provided)
@@ -513,7 +513,6 @@ These are some use cases to familiarise with the flow of our application:
 (For all use cases below, the **System** is `PlannerMD` and the **Actor** is the `receptionist`, unless specified otherwise)
 
 **Use case: UC01P Adding a patient** <br>
-**Precondition:** PlannerMD is displaying the patient tab.
 
 **MSS**
 
@@ -537,7 +536,6 @@ These are some use cases to familiarise with the flow of our application:
   Use case resumes at step 1.
 
 **Use case: UC01D Adding a doctor** <br>
-**Precondition:** PlannerMD is displaying the doctor tab.
 
 Same as UC01P but references to patient is replaced with doctor instead.
 
@@ -551,12 +549,10 @@ Same as UC01P but references to patient is replaced with doctor instead.
    Use case ends.
 
 **Use case: UC02D Listing all patient** <br>
-**Precondition:** PlannerMD is displaying the doctor tab.
 
 Same as UC02P but references to patient is replaced with doctor instead.
 
 **Use case: UC03P Finding patients** <br>
-**Precondition:** PlannerMD is displaying the patient tab.
 
 **MSS**
 
@@ -573,35 +569,33 @@ Same as UC02P but references to patient is replaced with doctor instead.
        Use case ends.
 
 **Use case: UC03D Finding doctors** <br>
-**Precondition:** PlannerMD is displaying the doctor tab.
 
 Same as UC03P but references to patient is replaced with doctor instead.
 
 **Use case: UC04P Deleting a patient** <br>
-**Precondition:** PlannerMD is displaying the patient tab.
 
 **MSS**
 
 1. Receptionist <u>lists (UC02P)</u> or <u>finds (UC03P)</u> relevant patients.
-2. Receptionist requests to delete a specific patient/doctor in the list
-3. PlannerMD deletes the patient/doctor which is reflected immediately in the list
+2. Receptionist shows the list of relevant patients.
+3. Receptionist requests to delete a specific patient/doctor in the list
+4. PlannerMD deletes the patient/doctor which is reflected immediately in the list
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The list is empty.
+* 2a. The list is empty.
 
   Use case ends.
 
-* 2a. The given index is invalid.
+* 3a. The given index is invalid.
 
-    * 2a1. PlannerMD shows an error message.
+    * 3a1. PlannerMD shows an error message.
 
-      Use case resumes at step 1.
+      Use case resumes at step 2.
 
 **Use case: UC04D Deleting a doctor** <br>
-**Precondition:** PlannerMD is displaying the doctor tab.
 
 Same as UC04P but with the following changes:
 * Replace references of patients with doctors
@@ -609,30 +603,29 @@ Same as UC04P but with the following changes:
 * Replace references of <u>finding patients (UC03P)</u> with <u>finding doctors (UC03D)</u>
 
 **Use case: UC05P Editing personal details of a patient**
-**Precondition:** PlannerMD is displaying the patient tab.
 
 **MSS**
 
 1. Receptionist <u>lists (UC02P)</u> or <u>finds (UC03P)</u> relevant patients.
-2. Receptionist requests to edit the personal details of a specific patient in the list
-3. PlannerMD edits the patient's personal details which is reflected immediately
+2. Receptionist shows the list of relevant patients.
+3. Receptionist requests to edit the personal details of a specific patient in the list
+4. PlannerMD edits the patient's personal details which is reflected immediately
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The list is empty.
+* 2a. The list is empty.
 
   Use case ends.
 
-* 2a. The given index is invalid.
+* 3a. The given index is invalid.
 
-    * 2a1. PlannerMD shows an error message.
+    * 3a1. PlannerMD shows an error message.
 
       Use case resumes at step 2.
 
 **Use case: UC05D Editing personal details of a doctor** <br>
-**Precondition:** PlannerMD is displaying the doctor tab.
 
 Same as UC05P but with the following changes:
 * Replace references of patients with doctors
@@ -640,30 +633,29 @@ Same as UC05P but with the following changes:
 * Replace references of <u>finding patients (UC03P)</u> with <u>finding doctors (UC03D)</u>
 
 **Use case: UC06P Editing the remark of a patient** <br>
-**Precondition:** PlannerMD is displaying the patient tab.
 
 **MSS**
 
 1. Receptionist <u>lists (UC02P)</u> or <u>finds (UC03P)</u> relevant patients.
-2. Receptionist requests to edit the remark of a specific person in the list
-3. PlannerMD edits the remark which is reflected immediately in the list
+2. Receptionist shows the list of relevant patients.
+3. Receptionist requests to edit the remark of a specific person in the list
+4. PlannerMD edits the remark which is reflected immediately in the list
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The list is empty.
+* 2a. The list is empty.
 
   Use case ends.
 
-* 2a. The given index is invalid.
+* 3a. The given index is invalid.
 
-    * 2a1. PlannerMD shows an error message.
+    * 3a1. PlannerMD shows an error message.
 
       Use case resumes at step 2.
 
 **Use case: UC06D Editing the remark of a patient** <br>
-**Precondition:** PlannerMD is displaying the doctor tab.
 
 Same as UC06P but with the following changes:
 * Replace references of patients with doctors
@@ -671,42 +663,41 @@ Same as UC06P but with the following changes:
 * Replace references of <u>finding patients (UC03P)</u> with <u>finding doctors (UC03D)</u>
 
 **Use case: UC07P Adding a tag to a patient**<br>
-**Precondition:** PlannerMD is displaying the patient tab.
 
 **MSS**
 
 1. Receptionist <u>lists (UC02P)</u> or <u>finds (UC03P)</u> relevant patients.
-2. Receptionist requests to add a tag to a specific person in the list
-3. PlannerMD adds the tag which is reflected immediately in the list
+2. Receptionist shows the list of relevant patients.
+3. Receptionist requests to add a tag to a specific person in the list
+4. PlannerMD adds the tag which is reflected immediately in the list
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The list is empty.
+* 2a. The list is empty.
 
   Use case ends.
 
-* 2a. The given index is invalid.
+* 3a. The given index is invalid.
 
-    * 2a1. PlannerMD shows an error message.
+    * 3a1. PlannerMD shows an error message.
 
       Use case resumes at step 2.
 
-* 2b. The given tag is invalid.
+* 3b. The given tag is invalid.
 
-    * 2b1. PlannerMD shows an error message.
+    * 3b1. PlannerMD shows an error message.
 
       Use case resumes at step 2.
   
-* 2c. The given tag already exists.
+* 3c. The given tag already exists.
 
-    * 2c1. PlannerMD shows an error message.
+    * 3c1. PlannerMD shows an error message.
 
       Use case resumes at step 2.
 
 **Use case: UC07D Adding a tag to a doctor** <br>
-**Precondition:** PlannerMD is displaying the doctor tab.
 
 Same as UC07P but with the following changes:
 * Replace references of patients with doctors
@@ -714,36 +705,35 @@ Same as UC07P but with the following changes:
 * Replace references of <u>finding patients (UC03P)</u> with <u>finding doctors (UC03D)</u>
 
 **Use case: UC08P Deleting a tag from a patient**<br>
-**Precondition:** PlannerMD is displaying the patient tab.
 
 **MSS**
 
 1. Receptionist <u>lists (UC02P)</u> or <u>finds (UC03P)</u> relevant patients.
-2. Receptionist requests to delete a tag from a specific person in the list
-3. PlannerMD deletes the tag which is reflected immediately in the list
+2. Receptionist shows the list of relevant patients.
+3. Receptionist requests to delete a tag from a specific person in the list
+4. PlannerMD deletes the tag which is reflected immediately in the list
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The list is empty.
+* 2a. The list is empty.
 
   Use case ends.
 
-* 2a. The given index is invalid.
+* 3a. The given index is invalid.
 
-    * 2a1. PlannerMD shows an error message.
+    * 3a1. PlannerMD shows an error message.
 
       Use case resumes at step 2.
 
-* 2b. The given tag is non-existent.
+* 3b. The given tag is non-existent.
 
-    * 2b1. PlannerMD shows an error message.
+    * 3b1. PlannerMD shows an error message.
 
       Use case resumes at step 2.
 
 **Use case: UC08D Deleting a tag from a doctor** <br>
-**Precondition:** PlannerMD is displaying the doctor tab.
 
 Same as UC08P but with the following changes:
 * Replace references of patients with doctors
@@ -755,33 +745,43 @@ Same as UC08P but with the following changes:
 **MSS**
 
 1. Receptionist <u>lists (UC02P)</u> or <u>finds (UC03P)</u> relevant patients.
-2. Receptionist <u>lists (UC02D)</u> or <u>finds (UC03D)</u> relevant doctors.
-3. Receptionist requests to schedule the appointment with patients and doctors listed.
-4. PlannerMD updates the doctor's schedule which is reflected immediately
+2. Receptionist shows the list of relevant patients.
+3. Receptionist <u>lists (UC02D)</u> or <u>finds (UC03D)</u> relevant doctors.
+4. Receptionist shows the list of relevant doctors.
+5. Receptionist requests to schedule the appointment with patients and doctors listed.
+6. PlannerMD updates the doctor's schedule which is reflected immediately
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The list is empty.
-
-  Use case ends.
-
 * 2a. The list is empty.
 
   Use case ends.
 
-* 3a. The given index for patient/doctor is invalid.
+* 4a. The list is empty.
 
-    * 3a1. PlannerMD shows an error message.
+  Use case ends.
+
+* 5a. The given index for patient is invalid.
+
+    * 5a1. PlannerMD shows an error message.
 
       Use case resumes at step 2.
 
-* 3a. The appointment time clashes with the doctor's schedule
+* 5b. The given index for doctor is invalid.
 
-    * 3a1. Receptionist decides to reschedule to a different time.
-    * 3a2. Receptionist requests to reschedule to a different time.
-    * 3a3. PlannerMD updates the doctor's schedule which is reflected immediately.
+    * 5b1. PlannerMD shows an error message.
+
+      Use case resumes at step 4.
+
+* 5c. The appointment time clashes with the doctor's schedule
+
+    * 5c1. Receptionist requests to reschedule to a different time. 
+    
+      Step 5c1 is repeated until the appointment does not clash.
+
+    * 5c2. PlannerMD updates the doctor's schedule which is reflected immediately.
 
       Use case ends.
 
@@ -827,8 +827,9 @@ Same as UC08P but with the following changes:
 
 **MSS**
 1. Receptionist <u>lists (UC10)</u> or <u>filters (UC11)</u> for relevant appointments .
-2. Receptionist requests to delete an appointment
-3. PlannerMD deletes the appointment from the appointment list which is reflected immediately
+2. Receptionist shows the list of relevant appointments.
+3. Receptionist requests to delete an appointment
+4. PlannerMD deletes the appointment from the appointment list which is reflected immediately
 
     Use case ends.
 
@@ -843,9 +844,10 @@ Same as UC08P but with the following changes:
 **Use case: UC13 Editing an appointment**
 
 **MSS**
-1. Receptionist <u>lists (UC10)</u> or <u>filters (UC11)</u> for relevant appointments .
-2. Receptionist requests to edit a specific appointment
-3. PlannerMD edits the appointment which is reflected immediately
+1. Receptionist <u>lists (UC10)</u> or <u>filters (UC11)</u> for relevant appointments.
+2. Receptionist shows the list of relevant appointments.
+3. Receptionist requests to edit a specific appointment
+4. PlannerMD edits the appointment which is reflected immediately
 
     Use case ends.
 
