@@ -14,6 +14,7 @@ contents [below](#table-of-contents). If you're a new user, the Quick Start guid
 you're an intermediate user looking to get more out of Dash, all supported commands are listed below.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## <u>Table of Contents</u>
 
@@ -21,6 +22,7 @@ you're an intermediate user looking to get more out of Dash, all supported comma
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## <u>Setting up Dash</u>
 
@@ -65,7 +67,8 @@ Whether you're using Windows or macOS, the steps for installation are the same.
 
 
 --------------------------------------------------------------------------------------------------------------------
-   
+<div style="page-break-after: always;"></div>
+
 ## <u>Getting Started</u>
 
 Dash supports contact and task management in several ways. 
@@ -111,6 +114,7 @@ you a lot of time!
 Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## <u>Features</u>
 
@@ -185,6 +189,7 @@ be saved.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### <u>Contacts</u>
 
@@ -349,6 +354,7 @@ This command is **irreversible** and your contact list will be **permanently** d
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### <u>Tasks</u>
 
@@ -614,6 +620,7 @@ This command is **irreversible** and your task list will be **permanently** dele
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 <div markdown="block" class="alert alert-info">
 
@@ -655,6 +662,8 @@ Format | Example
 **hh:mm a** | `10:00 PM`, `02:00 AM` (AM and PM must be capitalised)
 
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ## <u>Command summary</u>
 
