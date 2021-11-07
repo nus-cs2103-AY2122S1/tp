@@ -485,8 +485,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`  | user                                         | change the theme of the application         | personalise the application                                            |
 
 
-*{More to be added}*
-
 ### Use cases
 
 (For all use cases below, the **System** is the `Anilist` and the **Actor** is the `user`, unless specified otherwise)
@@ -823,8 +821,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  Should be able to hold up to 1000 anime without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  Should be able to work offline.
-
-*{More to be added}*
 
 ### Glossary
 
