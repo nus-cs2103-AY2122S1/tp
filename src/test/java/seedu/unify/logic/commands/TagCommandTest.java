@@ -1,6 +1,5 @@
 package seedu.unify.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.unify.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -9,22 +8,18 @@ import static seedu.unify.testutil.TypicalIndexes.INDEX_FIRST_TASK;
 import static seedu.unify.testutil.TypicalIndexes.INDEX_SECOND_TASK;
 import static seedu.unify.testutil.TypicalTasks.getTypicalUniFy;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.unify.commons.core.Messages;
 import seedu.unify.commons.core.index.Index;
-import seedu.unify.logic.commands.exceptions.CommandException;
 import seedu.unify.model.Model;
 import seedu.unify.model.ModelManager;
-import seedu.unify.model.UniFy;
 import seedu.unify.model.UserPrefs;
-import seedu.unify.model.task.State;
-import seedu.unify.model.task.Task;
 import seedu.unify.model.tag.Tag;
-import seedu.unify.testutil.TaskBuilder;
-
-import java.util.HashSet;
-import java.util.Set;
+import seedu.unify.model.task.Task;
 
 public class TagCommandTest {
 
@@ -40,7 +35,7 @@ public class TagCommandTest {
         Task taggedTask = model.getFilteredTaskList().get(INDEX_FIRST_TASK.getZeroBased());
         TagCommand tagCommand = new TagCommand(INDEX_FIRST_TASK, tagTaskDescriptor);
 
-        Task expectedTask =  new Task(
+        Task expectedTask = new Task(
                 taggedTask.getName(),
                 taggedTask.getTime(),
                 taggedTask.getDate(),
