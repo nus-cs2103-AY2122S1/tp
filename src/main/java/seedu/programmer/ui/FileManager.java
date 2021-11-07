@@ -39,7 +39,7 @@ public class FileManager {
      *
      * @return chosen CSV file
      */
-     File promptUserForCsvFile() {
+    File promptUserForCsvFile() {
         FileChooser fileChooser = new FileChooser();
         configureFileChooser(fileChooser);
         return fileChooser.showOpenDialog(primaryStage);
