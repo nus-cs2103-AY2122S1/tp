@@ -10,6 +10,7 @@ import static seedu.unify.testutil.TypicalIndexes.INDEX_SECOND_TASK;
 import static seedu.unify.testutil.TypicalTasks.getTypicalUniFy;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.unify.commons.core.Messages;
 import seedu.unify.commons.core.index.Index;
 import seedu.unify.model.Model;
@@ -28,7 +29,7 @@ public class DoneCommandTest {
         Task taskToMark = model.getFilteredTaskList().get(INDEX_FIRST_TASK.getZeroBased());
         DoneCommand doneCommand = new DoneCommand(INDEX_FIRST_TASK);
 
-        String expectedMessage = String.format(DoneCommand.MESSAGE_DONE_TASK_SUCCESS,taskToMark);
+        String expectedMessage = String.format(DoneCommand.MESSAGE_DONE_TASK_SUCCESS, taskToMark);
 
         ModelManager expectedModel = new ModelManager(model.getUniFy(), new UserPrefs());
         expectedModel.setTask(taskToMark,

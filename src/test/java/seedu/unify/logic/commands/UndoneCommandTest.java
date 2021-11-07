@@ -4,10 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.unify.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.unify.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.unify.testutil.TypicalIndexes.*;
+import static seedu.unify.testutil.TypicalIndexes.INDEX_DONE_TASK;
+import static seedu.unify.testutil.TypicalIndexes.INDEX_FIRST_TASK;
+import static seedu.unify.testutil.TypicalIndexes.INDEX_SECOND_TASK;
 import static seedu.unify.testutil.TypicalTasks.getTypicalUniFy;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.unify.commons.core.Messages;
 import seedu.unify.commons.core.index.Index;
 import seedu.unify.model.Model;
@@ -25,7 +28,7 @@ public class UndoneCommandTest {
         Task taskToMark = model.getFilteredTaskList().get(INDEX_DONE_TASK.getZeroBased());
         UndoneCommand undoneCommand = new UndoneCommand(INDEX_DONE_TASK);
 
-        String expectedMessage = String.format(UndoneCommand.MESSAGE_UNDONE_TASK_SUCCESS,taskToMark);
+        String expectedMessage = String.format(UndoneCommand.MESSAGE_UNDONE_TASK_SUCCESS, taskToMark);
 
         ModelManager expectedModel = new ModelManager(model.getUniFy(), new UserPrefs());
         expectedModel.setTask(taskToMark,
