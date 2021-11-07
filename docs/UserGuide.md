@@ -77,7 +77,7 @@ Take note of some syntax we will frequently use throughout the User Guide:
 
 4. Double-click the file to start the app. The GUI similar to the image displayed below should appear in a few seconds. Note how the app contains some sample data.<br>
 
-   <img src="images/Ui.png" width="200">
+   <img src="images/Ui.png" width="500">
  
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
