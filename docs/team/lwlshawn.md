@@ -37,6 +37,9 @@ now more directly addresses the user, and I fixed several formatting errors that
 user to quickly return to the table of contents conveniently at sensible places. I also included many more examples of
   how to use commands and what behavior to expect, in addition to several images to help the user understand exactly how
   commands were meant to behave
+  
+* Given that the changes are general and are all over the entire document, I thought it was easiest to provide a link
+to the relevant PR, instead of trying to copy and paste snippets: https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/287
 
 #### Contributions to the DG
 * I wrote up a few sections of the "Implementation" portion of the developer guide, to explain various design decisions
@@ -53,8 +56,25 @@ all types of objects to be unique for instance, I changed our TaskList and Order
   respectively, with the other necessary edits to their functionality.
 
 #### Review/mentoring contributions
-* PRs reviewed [\#262](), [\#260](), [\#249](), [\#247](), [\#229](), [\#228](), [\#122](), [\#119](), [\#99](),
-[\#87](), [\#74](), [\#41](), [\#36](), [\#35](), [\#34](), [\#32](), [\#26](), [\#22]()
+* PRs reviewed 
+  [\#262](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/262), 
+  [\#260](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/260), 
+  [\#249](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/249), 
+  [\#247](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/247), 
+  [\#229](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/229), 
+  [\#228](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/228), 
+  [\#122](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/122), 
+  [\#119](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/119), 
+  [\#99](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/99),
+  [\#87](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/87), 
+  [\#74](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/74), 
+  [\#41](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/41), 
+  [\#36](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/36), 
+  [\#35](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/35), 
+  [\#34](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/34), 
+  [\#32](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/32), 
+  [\#26](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/26), 
+  [\#22](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/22)
   
 
 
