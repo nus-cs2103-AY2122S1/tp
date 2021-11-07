@@ -9,12 +9,16 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Salary implements Field {
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "Salaries have to be a positive integer (or 0) representing the pay in dollars. Cents can be added by "
-            + "adding it after a \".\", but a positive integer (or 0) is required after the period if it is "
-            + "included.";
+    private static final int MAX_SALARY = 9999;
 
-    public final Integer value; //
+    public static final String MESSAGE_CONSTRAINTS =
+            "Salaries have to be a non-negative integer representing the hourly pay in dollars.\n"
+            + "Cents can be added by adding one or two numeric characters after a \".\".\n\n"
+            + "For example, \"0.1\" and \"0.10\" both represent $0.10 per hour.\n"
+            + "However, \"0.\" and \"0.001\" are not acceptable.\n\n"
+            + "Note that the salary cannot exceed $" + MAX_SALARY + ".99.";
+
+    public final Integer value;
 
     /**
      * Constructs an {@code Salary}.
@@ -62,7 +66,18 @@ public class Salary implements Field {
         if (!test.matches("\\d+") || test.equals("")) {
             return false;
         }
-        int dollarInt = Integer.parseInt(test);
+
+        int dollarInt;
+        try {
+            dollarInt = Integer.parseInt(test);
+        // This exception will be caught if the integer exceeds max integer
+        } catch (NumberFormatException e) {
+            return false;
+        }
+
+        if (dollarInt > MAX_SALARY) {
+            return false;
+        }
         return dollarInt >= 0;
     }
 
@@ -71,10 +86,16 @@ public class Salary implements Field {
      */
     public static boolean isValidCents(String test) {
         test = test.trim();
-        if (!test.matches("\\d+") || test.equals("")) {
+        if (!test.matches("\\d+") || test.equals("") || test.length() > 2) {
             return false;
         }
-        int dollarInt = Integer.parseInt(test);
+        int dollarInt;
+        try {
+            dollarInt = Integer.parseInt(test);
+            // This exception will be caught if the integer exceeds max integer
+        } catch (NumberFormatException e) {
+            return false;
+        }
         return dollarInt >= 0;
     }
 

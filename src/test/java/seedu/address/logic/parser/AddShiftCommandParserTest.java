@@ -15,7 +15,7 @@ import seedu.address.model.person.Name;
 
 public class AddShiftCommandParserTest {
     private static final LocalDate START_DATE = LocalDate.of(2021, 10, 1);
-    private static final LocalDate DEFAULT_END_DATE = START_DATE.plusDays(7);
+    private static final LocalDate DEFAULT_END_DATE = START_DATE.plusDays(6);
     private static final LocalDate END_DATE = LocalDate.of(2021, 11, 1);
 
     private AddShiftCommandParser parser = new AddShiftCommandParser();

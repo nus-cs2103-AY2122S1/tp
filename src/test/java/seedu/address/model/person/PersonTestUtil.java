@@ -1,8 +1,11 @@
 package seedu.address.model.person;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import seedu.address.model.RecurrencePeriod;
 
 public abstract class PersonTestUtil {
 
@@ -33,5 +36,23 @@ public abstract class PersonTestUtil {
 
     private static boolean isValidInt(int val) {
         return val <= 28 && val > 0;
+    }
+
+    /**
+     * Creates a {@code RecurrencePeriod} in the morning with test dates within the range
+     * 1 and 28.
+     */
+    public static RecurrencePeriod createRecurrencePeriod(int i, int j) {
+        return new RecurrencePeriod(createPeriod(i, j), Slot.MORNING);
+    }
+
+    /**
+     * Creates a {@code RecurrencePeriod} in the time range in between {@code LocalTime startTime}
+     * and {@code LocalTime endTime}.
+     *
+     */
+    public static RecurrencePeriod createRecurrencePeriod(int i, int j, LocalTime startTime, LocalTime endTime) {
+        assert endTime.isAfter(startTime);
+        return new RecurrencePeriod(createPeriod(i, j), startTime, endTime);
     }
 }

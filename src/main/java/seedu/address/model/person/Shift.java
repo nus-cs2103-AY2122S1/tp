@@ -1,7 +1,5 @@
 package seedu.address.model.person;
 
-import static java.util.Objects.requireNonNull;
-
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -38,7 +36,6 @@ public class Shift {
     public Shift(DayOfWeek dayOfWeek, Slot slot) {
         this.dayOfWeek = dayOfWeek;
         this.slot = slot;
-
     }
 
     /**
@@ -49,9 +46,7 @@ public class Shift {
         this.dayOfWeek = dayOfWeek;
         this.slot = slot;
         this.recurrences.addAll(recurrences);
-
     }
-
 
     public Slot getSlot() {
         return this.slot;
@@ -60,7 +55,6 @@ public class Shift {
     public DayOfWeek getDayOfWeek() {
         return this.dayOfWeek;
     }
-
 
     public List<RecurrencePeriod> getRecurrences() {
         return Collections.unmodifiableList(recurrences);
@@ -73,7 +67,6 @@ public class Shift {
     public boolean isEmpty() {
         return false;
     }
-
 
     /**
      * Returns whether the shift is happening in the morning.
@@ -118,10 +111,8 @@ public class Shift {
         if (this.recurrences.size() == 0) {
             return false;
         }
-
         return countOfOccurrences(period) != 0;
     }
-
 
     /**
      * Returns whether the shift is working during {@code period}
@@ -134,9 +125,7 @@ public class Shift {
                 .stream()
                 .filter(p -> p.getDayOfWeek().equals(dayOfWeek))
                 .count();
-
         return countOfOccurrences(period) == numOfDates;
-
     }
 
     /**
@@ -148,7 +137,6 @@ public class Shift {
                 .stream()
                 .filter(p -> p.getDayOfWeek().equals(dayOfWeek))
                 .collect(Collectors.toList());
-
         return recurrences.stream()
                 .mapToLong(p -> dates.stream()
                                 .filter(date -> p.contains(date)) //find any date within the period
@@ -157,7 +145,6 @@ public class Shift {
                 .sum();
     }
 
-
     public long getWorkingHour(Period period) {
         return recurrences.stream()
                 .mapToLong(p -> p.getWorkingHour(dayOfWeek, period))
@@ -165,10 +152,6 @@ public class Shift {
 
 
     }
-
-
-
-
 
     /**
      * Removes the shift that is withing the input dates.
@@ -195,15 +178,6 @@ public class Shift {
                 .collect(Collectors.toList());
     }
 
-    /**
-     * Checks if the input date is already logged.
-     */
-    public boolean isRegistered(LocalDate date) {
-        long val = this.recurrences.stream()
-                .filter(p -> p.getPeriod().contains(date))
-                .count();
-        return val != 0;
-    }
 
     /**
      * Makes this shift a working shift.
@@ -228,7 +202,6 @@ public class Shift {
         return new Shift(dayOfWeek, slot, recurrences);
     }
 
-
     /**
      * Returns if a given string is a valid DayOfWeek.
      */
@@ -240,7 +213,6 @@ public class Shift {
         }
         return false;
     }
-
 
     /**
      * Check if the timing for a shift is valid, and then update them.
@@ -254,7 +226,6 @@ public class Shift {
                         LocalDate startDate, LocalDate endDate) throws InvalidShiftTimeException {
         checkTimeOrder(startTime, endTime, order);
 
-
         Period period = new Period(startDate, endDate);
         Collection<Period> intersects = period.intersect(recurrences);
         List<RecurrencePeriod> result = new ArrayList<>();
@@ -267,8 +238,6 @@ public class Shift {
                 .collect(Collectors.toList()));
 
         return new Shift(dayOfWeek, slot, result);
-
-
     }
 
     /**
@@ -317,39 +286,8 @@ public class Shift {
                 && Slot.isValidSlot(slotString)
                 && DateTimeUtil.isValidTime(startTimeString)
                 && DateTimeUtil.isValidTime(endTimeString);
-
     }
 
-    /**
-     * Returns the recurrences that occur during {@code Period period}.
-     *
-     */
-    public String toRecurrenceString(Period period) {
-        requireNonNull(period);
-        if (!isWorking(period)) {
-            return "";
-        }
-        List<LocalDate> dates = period.toList() //get the dates that are within the period of this day.
-                .stream()
-                .filter(p -> p.getDayOfWeek().equals(dayOfWeek))
-                .collect(Collectors.toList());
-
-        List<RecurrencePeriod> result = recurrences.stream()
-                .filter(p ->
-                        0 != dates.stream()
-                                .filter(date -> p.contains(date)) //find any date within the period
-                                .count() //that is in recurrence
-                ).collect(Collectors.toList());
-        return toShiftString() + "\n" + getRecurrenceString(result);
-    }
-
-    /**
-     * Returns a string displaying the day of week and slot the shift is at.
-     */
-    private String toShiftString() {
-        return String.format(DEFAULT_SHIFT_DISPLAY_STRING, dayOfWeek, slot);
-
-    }
 
     /**
      * Takes in a {@code Collection<RecurrencePeriod> periods} and formats it to a string for the
@@ -397,7 +335,8 @@ public class Shift {
         }
         Shift otherShift = (Shift) other;
         return slot.equals(otherShift.slot) && dayOfWeek.equals(otherShift.dayOfWeek)
-                && this.recurrences.equals(otherShift.recurrences);
+                && this.recurrences.containsAll(otherShift.recurrences)
+                && otherShift.recurrences.containsAll(this.recurrences);
     }
 
     @Override
@@ -405,7 +344,4 @@ public class Shift {
         String resultString = getRecurrenceString(recurrences);
         return resultString;
     }
-
-
-
 }
