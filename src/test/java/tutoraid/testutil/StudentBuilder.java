@@ -2,7 +2,6 @@ package tutoraid.testutil;
 
 import java.util.ArrayList;
 
-import tutoraid.model.student.Lessons;
 import tutoraid.model.student.ParentName;
 import tutoraid.model.student.Phone;
 import tutoraid.model.student.ProgressList;
@@ -19,14 +18,12 @@ public class StudentBuilder {
     public static final String DEFAULT_PARENT_PHONE = "85355255";
     public static final ArrayList<String> DEFAULT_PROGRESS_LIST = new ArrayList<>();
     public static final boolean DEFAULT_PAYMENT_STATUS = false;
-    public static final ArrayList<String> DEFAULT_LESSONS = new ArrayList<>();
 
     private StudentName studentName;
     private Phone studentPhone;
     private ParentName parentName;
     private Phone parentPhone;
     private ProgressList progressList;
-    private Lessons lessons;
 
     /**
      * Creates a {@code StudentBuilder} with the default details.
@@ -37,7 +34,6 @@ public class StudentBuilder {
         parentName = new ParentName(DEFAULT_PARENT_NAME);
         parentPhone = new Phone(DEFAULT_PARENT_PHONE);
         progressList = new ProgressList(DEFAULT_PROGRESS_LIST);
-        lessons = new Lessons(DEFAULT_LESSONS);
     }
 
     /**
@@ -49,7 +45,6 @@ public class StudentBuilder {
         parentName = studentToCopy.getParentName();
         parentPhone = studentToCopy.getParentPhone();
         progressList = studentToCopy.getProgressList();
-        lessons = studentToCopy.getLessons();
     }
 
     /**
@@ -92,13 +87,6 @@ public class StudentBuilder {
         return this;
     }
 
-    /**
-     * Sets the {@code Lessons} of the {@code Student} that we are building.
-     */
-    public StudentBuilder withLessons(ArrayList<String> lessons) {
-        this.lessons = new Lessons(lessons);
-        return this;
-    }
 
     /**
      * Builds the student.
@@ -107,6 +95,6 @@ public class StudentBuilder {
      */
     public Student build() {
         return new Student(studentName, studentPhone, parentName, parentPhone,
-                progressList, lessons);
+                progressList);
     }
 }

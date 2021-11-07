@@ -26,7 +26,9 @@ public class HelpGuide {
             + "3. Parameters can be in any order.\n"
             + "4. If a parameter is expected only once in the command but if you specify it multiple times, only the "
             + "last occurrence of the parameter will be taken.\n"
-            + "5. Extraneous parameters for commands that do not take in parameters will be ignored.";
+            + "5. ... signals that multiple parameters of this type can be accepted (separated by a space), but there "
+            + "must be at least one parameter present.\n"
+            + "6. Extraneous parameters for commands that do not take in parameters will be ignored.";
 
     public static final String HELP_TITLE = "Viewing help";
     public static final String HELP_COMMAND = "help";
@@ -123,6 +125,22 @@ public class HelpGuide {
     public static final String FIND_L_EXAMPLE = "find -l Maths";
     public static final String FIND_L_EXAMPLE_DESC = " returns lessons that have the word 'maths' in their names.";
 
+    public static final String ADD_SL_TITLE = "Adding student(s) to lesson(s)";
+    public static final String ADD_SL_DESC = "Tells TutorAid that the specified student(s) attend "
+            + "the specified lesson(s).";
+    public static final String ADD_SL_COMMAND = "add -sl s/STUDENT_INDEX... l/LESSON_INDEX...";
+    public static final String ADD_SL_EXAMPLE = "add -sl s/1 2 3 l/1 2";
+    public static final String ADD_SL_EXAMPLE_DESC = " adds students with indexes 1, 2, 3 into lessons "
+            + "with indexes 1, 2.";
+
+    public static final String DEL_SL_TITLE = "Deleting student(s) from lesson(s)";
+    public static final String DEL_SL_DESC = "Tells TutorAid that the specified student(s) no longer attend "
+            + "the specified lesson(s).";
+    public static final String DEL_SL_COMMAND = "del -sl s/STUDENT_INDEX... l/LESSON_INDEX...";
+    public static final String DEL_SL_EXAMPLE = "del -sl s/1 2 3 l/1 2";
+    public static final String DEL_SL_EXAMPLE_DESC = " deletes students with indexes 1, 2, 3 from lessons "
+            + "with indexes 1, 2.";
+
     public static final String CLEAR_TITLE = "Clearing all entries";
     public static final String CLEAR_DESC = "Clears all student and lesson entries from TutorAid.";
     public static final String CLEAR_COMMAND = "clear";
@@ -136,12 +154,15 @@ public class HelpGuide {
             + "command that changes the data. There is no need to save manually.";
 
     public static final String EDIT_DATA_TITLE = "Editing the data file";
-    public static final String EDIT_DATA_DESC1 = "TutorAid data are saved as a JSON file ";
-    public static final String EDIT_FILEPATH = "[JAR file location]/data/tutoraid.json";
-    public static final String EDIT_DATA_DESC2 = "Advanced users are welcome to update data directly by editing "
-            + "that data file.";
-    public static final String EDIT_CAUTION = "Caution: If your changes to the data file makes its format invalid, "
-            + "TutorAid will discard all data and start with an empty data file at the next run.";
+    public static final String EDIT_DATA_DESC1 = "TutorAid student data are saved as a JSON file ";
+    public static final String EDIT_STUDENTS_FILEPATH = "[JAR file location]/data/tutorAidStudents.json";
+    public static final String EDIT_DATA_DESC2 = ", while TutorAid lesson data are saved as a JSON file ";
+    public static final String EDIT_LESSONS_FILEPATH = "[JAR file location]/data/tutorAidLessons.json";
+    public static final String EDIT_DATA_DESC3 = "Advanced users are welcome to update data directly by editing "
+            + "any of the two data files.";
+    public static final String EDIT_CAUTION = "Caution: If your changes to any of the two data files make its "
+            + "format or data invalid, TutorAid will discard the invalid data file and replace it with "
+            + "an empty data file at the next run.";
 
     public static final String FAQ_TITLE = "FAQ";
     public static final String FAQ = "Q: How do I transfer my data to another Computer?\n"

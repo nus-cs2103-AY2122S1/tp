@@ -42,8 +42,4 @@ deactivate AddStudentCommand
 <-- LogicManager
 deactivate LogicManager
 
-destroy CommandResult
-
-destroy AddStudentCommand
-
 @enduml

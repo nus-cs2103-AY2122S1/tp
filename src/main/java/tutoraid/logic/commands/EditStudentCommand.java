@@ -5,7 +5,6 @@ import static tutoraid.logic.parser.CliSyntax.PREFIX_PARENT_NAME;
 import static tutoraid.logic.parser.CliSyntax.PREFIX_PARENT_PHONE;
 import static tutoraid.logic.parser.CliSyntax.PREFIX_STUDENT_NAME;
 import static tutoraid.logic.parser.CliSyntax.PREFIX_STUDENT_PHONE;
-import static tutoraid.model.Model.PREDICATE_SHOW_ALL_LESSONS;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,7 +14,6 @@ import tutoraid.commons.core.index.Index;
 import tutoraid.commons.util.CollectionUtil;
 import tutoraid.logic.commands.exceptions.CommandException;
 import tutoraid.model.Model;
-import tutoraid.model.lesson.Lesson;
 import tutoraid.model.student.Lessons;
 import tutoraid.model.student.ParentName;
 import tutoraid.model.student.Phone;
@@ -30,23 +28,23 @@ public class EditStudentCommand extends EditCommand {
 
     public static final String COMMAND_FLAG = "-s";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the student identified "
-            + "by the index number used in the Student Panel. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_STUDENT_NAME + "STUDENT NAME "
-            + PREFIX_STUDENT_PHONE + "STUDENT PHONE "
-            + PREFIX_PARENT_NAME + "PARENT NAME "
-            + PREFIX_PARENT_PHONE + "PARENT PHONE "
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_STUDENT_NAME + "John Doe "
-            + PREFIX_STUDENT_PHONE + "81234567 "
-            + PREFIX_PARENT_NAME + "Mrs Doe "
-            + PREFIX_PARENT_PHONE + "91234567 ";
-
-    public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edit successful. Displaying %s and his/her lessons.";
+    public static final String MESSAGE_USAGE = String.format("%1$s %2$s: Edits the details of the student."
+                    + "Existing values will be overwritten by the input values."
+                    + "\nParameters:"
+                    + "\nSTUDENT INDEX (must be a positive integer)"
+                    + "  [%3$sSTUDENT NAME]"
+                    + "  [%4$sSTUDENT PHONE]"
+                    + "  [%5$sPARENT NAME]"
+                    + "  [%6$sPARENT PHONE]"
+                    + "\nExample:"
+                    + "\n%1$s %2$s 1 %3$sJon Poh %4$s87654321 %5$sMr Po %6$s98765432",
+            COMMAND_WORD, COMMAND_FLAG, PREFIX_STUDENT_NAME, PREFIX_STUDENT_PHONE, PREFIX_PARENT_NAME,
+            PREFIX_PARENT_PHONE);
+    public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edit successful. Showing %s and his/her lessons.";
+    public static final String MESSAGE_NOT_CHANGED = "Warning: Attempted to edit %s but the provided field(s) did not "
+            + "contain any changes.";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in TutorAid";
+    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in TutorAid.";
 
     private final Index targetIndex;
     private final EditStudentDescriptor editStudentDescriptor;
@@ -66,9 +64,7 @@ public class EditStudentCommand extends EditCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
         List<Student> lastShownStudentList = model.getFilteredStudentList();
-        List<Lesson> lessonList = model.getFilteredLessonList();
 
         if (targetIndex.getZeroBased() >= lastShownStudentList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
@@ -81,12 +77,14 @@ public class EditStudentCommand extends EditCommand {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
         }
 
-        model.setStudent(studentToEdit, editedStudent);
-        Lesson.updateStudentLessonLink(lessonList, studentToEdit, editedStudent);
-        model.viewStudent(editedStudent);
-        model.updateFilteredLessonList(editedStudent::hasLesson);
+        if (studentToEdit.equals(editedStudent)) {
+            throw new CommandException(String.format(MESSAGE_NOT_CHANGED, editedStudent.toNameString()));
+        }
 
-        return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent.toNameString()));
+        studentToEdit.replace(editedStudent);
+        model.viewStudent(studentToEdit);
+        model.updateFilteredLessonList(studentToEdit::hasLesson);
+        return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, studentToEdit.toNameString()));
     }
 
     /**

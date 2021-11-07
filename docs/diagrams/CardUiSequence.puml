@@ -6,19 +6,19 @@ Participant ":ModelManager" as mm MODEL_COLOR
 Participant ":UiManager" as ui UI_COLOR
 Participant ":MainWindow" as main STORAGE_COLOR
 
-user -[LOGIC_COLOR]> mm : viewList(true)
+user -[LOGIC_COLOR]> mm : viewList(MED)
 activate mm MODEL_COLOR
 
-mm -[MODEL_COLOR]> ui : showViewWindow()
+mm -[MODEL_COLOR]> ui : showDetails(MED)
 activate ui UI_COLOR
 
-ui -[UI_COLOR]> main : fillStudentCard(true)
+ui -[UI_COLOR]> main : fillStudentCard(MED)
 activate main STORAGE_COLOR
 
 main -[STORAGE_COLOR]-> ui
 deactivate main
 
-ui -[UI_COLOR]> main : fillLessonCard(true)
+ui -[UI_COLOR]> main : fillLessonCard(MED)
 activate main STORAGE_COLOR
 
 main -[STORAGE_COLOR]-> ui

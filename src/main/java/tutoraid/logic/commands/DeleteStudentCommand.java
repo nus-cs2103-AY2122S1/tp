@@ -17,12 +17,14 @@ public class DeleteStudentCommand extends DeleteCommand {
 
     public static final String COMMAND_FLAG = "-s";
 
-    public static final String MESSAGE_USAGE = COMMAND_FLAG
-            + ": Deletes the student identified by the index number used in the displayed student list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_FLAG + " 1";
+    public static final String MESSAGE_USAGE = String.format("%1$s %2$s: Deletes a student from TutorAid."
+                    + "\nParameters: "
+                    + "\nINDEX (must be a positive integer)"
+                    + "\nExample:"
+                    + "\n%1$s %2$s 1",
+            COMMAND_WORD, COMMAND_FLAG);
 
-    public static final String MESSAGE_DELETE_STUDENT_SUCCESS = "Deleted Student: %1$s";
+    public static final String MESSAGE_DELETE_STUDENT_SUCCESS = "Successfully deleted %s.";
 
     private final Index targetIndex;
 
@@ -43,7 +45,7 @@ public class DeleteStudentCommand extends DeleteCommand {
         model.deleteStudent(studentToDelete);
         model.deleteStudentFromLessons(studentToDelete);
 
-        return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, studentToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, studentToDelete.toNameString()));
     }
 
     @Override
