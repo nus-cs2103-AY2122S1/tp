@@ -357,7 +357,8 @@ The diagram below illustrates the flow of adding an appointment:
 
 ### Deleting an appointment <a name="deleting-an-appointment"/>
 Deleting an appointment requires the user to input a valid index of the desired appointment in the appointment list.
-The diagram below illustrates the flow of deleting an appointment:
+The diagram below illustrates the flow of deleting an appointment:<br>
+
 ![DeleteAppointment](images/DeleteAppointmentActivityDiagram.png)
 
 ![DeleteAppointment](images/DeleteAppointmentSequenceDiagram.png)
@@ -485,27 +486,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use an instruction              |
-| `* * *`  | clinic receptionist                        | add a new patient              |                                                                        |
-| `* * *`  | clinic receptionist                        | delete a patient               | remove entries that I no longer need                                   |
-| `* * *`  | clinic receptionist                        | view a patient's personal details| view his/her personal details to better understand him/her and contact him/her |
-| `* * *`  | clinic receptionist                        | view a patient's risk profile| view his/her risk |
-| `* * *`  | clinic receptionist                        | edit a patient's personal details| change his/her personal details should it change|
-| `* * *`  | clinic receptionist                        | edit a patient's risk profile| change his/her risk profile should it change |
-| `* * *`  | clinic receptionist                        | find a patient by name         | locate details of patients without having to go through the entire list |
-| `* * *`  | clinic receptionist                        | add a doctor |     |
-| `* * *`  | clinic receptionist                        | view a doctor's personal details| view his/her personal details to contact him/her |
-| `* * *`  | clinic receptionist                        | edit a doctor's personal details| edit his/her details should it change |
-| `* * *`  | clinic receptionist                        | delete a doctor | remove entries that I no longer need |
-| `* * *`  | clinic receptionist                        | view a doctor's schedule | schedule appointments during available times                                  |
-| `* * *`  | clinic receptionist                        | add an appointment |                                                 |
-| `* * *`  | clinic receptionist                        | delete an appointment | cancel the appointment |
-| `* * *`  | clinic receptionist                        | edit an appointment | reschedule the appointment when the patient or doctor asks for it |
-| `* * *`  | clinic receptionist                        | view the appointments that have been scheduled | see what appointments the clinic has at any time|
+| `* * *`  | new user            | see usage instructions         | refer to instructions when I forget how to use an instruction              |
+| `* * *`  | clinic receptionist | add patients' personal details | better understand them and have a way of easily contacting them                                                                       |
+| `* * *`  | clinic receptionist | delete a patient from the patient records  | remove entries that I no longer need and keep my database clean   |
+| `* * *`  | clinic receptionist | view a patient's personal details | contact him/her |
+| `* * *`  | clinic receptionist | view a patient's risk profile| decide whether or not the patient should be given priority to see the doctor |
+| `* * *`  | clinic receptionist | edit a patient's personal details | change his/her personal details should it change and keep my database updated|
+| `* * *`  | clinic receptionist | edit a patient's risk profile| change his/her risk profile should it change and keep my database updated |
+| `* * *`  | clinic receptionist | find a patient by name | locate details of patients without having to go through the entire list |
+| `* * *`  | clinic receptionist | add doctors' personal details | easily contact the doctor when the need arises|
+| `* * *`  | clinic receptionist | delete a doctor from the doctors records | remove entries that I no longer need and keep my database clean |
+| `* * *`  | clinic receptionist | view a doctor's personal details | contact him/her |
+| `* * *`  | clinic receptionist | edit a doctor's personal details| edit his/her details should it change and keep my database updated |
+| `* * *`  | clinic receptionist | add an appointment | so that I can easily manage my schedule without having to rely on a physical planner |
+| `* * *`  | clinic receptionist | delete an appointment | cancel the appointment and keep my schedule updated |
+| `* * *`  | clinic receptionist | edit an appointment | reschedule the appointment when the patient or doctor asks for it |
+| `* * *`  | clinic receptionist | search and filter through all my scheduled appointments | see what appointments a particular patient or doctor has at a particular point in time  |
+| `* * *`  | clinic receptionist | list the appointments that have been scheduled today | see what appointments the clinic has today|
 | `* *`    | clinic receptionist | add remarks for a patient | add additional information about the patient |            |
-| `* *`    | clinic receptionist | edit remarks for a patient| change any additional information about the patient                                             |
-| `*`      | clinic receptionist                        | write tags for a patient  | easily identify him/her or provide additional information                |
-| `*`      | clinic receptionist                        | write tags for a doctor  | easily identify him/her or provide additional information       |
+| `* *`    | clinic receptionist | edit remarks for a patient| change any additional information about the patient    |
+| `* *`    | clinic receptionist | add remarks for a doctor | add additional information about the doctor |            |
+| `* *`    | clinic receptionist | edit remarks for a doctor | change any additional information about the doctor    |
+| `*`      | clinic receptionist | write tags for a patient  | easily identify important things to note about the patient             |
+| `*`      | clinic receptionist | write tags for a doctor  | easily identify important things to note about the doctor      |
  
 ### Use cases  <a name="use-cases"/>
 These are some use cases to familiarise with the flow of our application: 
@@ -934,29 +937,17 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: `toggle` to the `Patients` tab. The following patient must already exists:
        John Doe; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Date of Birth: 20/7/1964; Tags: vaccinated; Risk: LOW
        
-    2. Test case: `add n/Bob Doe hp/98765432 eml/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/vaccinated risk/LOW`
+    2. Test case: `add n/Bob Doe hp/99999999 eml/bobdoe@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/vaccinated risk/LOW`
        <br>
-       Expected: Patient named Bob Doe is added successfully. Details of the added patient are shown in the status message.
+        Expected: Patient named Bob Doe is added successfully. Details of the added patient are shown in the status message.
 
-    3. Test case: `add n/Bobby Doe hp/98765432 eml/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964`
-       <br>
-        Expected: Patient named Bobby Doe is added successfully. Details of the added patient are shown in the status message.
-
-    4. Test case: `add n/John Doe hp/999 eml/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/vaccinated risk/LOW`
-       <br>
-        Expected: Patient named John Doe is added successfully. Details of the added patient are shown in the status message.
-
-    5. Test case: `add n/John Doe hp/98765432 eml/johndoeeeee@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/vaccinated risk/LOW`
-       <br>
-        Expected: Patient named John Doe is added successfully. Details of the added patient are shown in the status message.
-
-    6. Test case: `add n/John Doe hp/98765432 eml/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/vaccinated risk/LOW`
+    3. Test case: `add n/John Doe hp/98765432 eml/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/vaccinated risk/LOW`
        <br>Expected: No Patient is added. Error message is shown in the response box: "This patient already exists in PlannerMD"
 
-    7. Test case: `add n/John Doe hp/98765432 eml/johnd@example.com a/311, Kent Ridge Ave 2, #02-25 dob/25/12/0000 t/vaccinated risk/LOW`
-       Expected: No Patient is added. Error message is shown in the response box: "This patient already exists in PlannerMD"
+    4. Test case: `add n/John Doe hp/98765432 eml/johnd@example.com a/311, Kent Ridge Ave 2, #02-25 dob/25/12/0000 t/vaccinated risk/LOW`
+       <br>Expected: No Patient is added. Error message is shown in the response box: "This patient already exists in PlannerMD"
 
-    8. Other incorrect add commands to try: `add`, `add n/Bob hp/`, `add n/` (not all fields, except tags and risk, are filled)<br>
+    5. Other incorrect add commands to try: `add`, `add n/Bob hp/`, `add n/` (not all fields, except tags and risk, are filled)<br>
        Expected: No Patient is added. Error message is shown in the response box: "Invalid command format!..."
 
 ### Listing all patients <a name="list-patients-manual-testing"/>
@@ -1150,25 +1141,16 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: `toggle` to the `Doctors` tab. The following doctor must already exists:
        John Doe; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Date of Birth: 20/7/1964; Tags: experienced
     
-    2. Test case: `add n/Bob Doe hp/98765432 eml/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/experienced`
+    2. Test case: `add n/Bob Doe hp/99999999 eml/bobd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/experienced`
        <br> Expected: Doctor named Bob Doe is added successfully. Details of the added doctor are shown in the status message.
-
-    3. Test case: `add n/Joe Doe hp/98765432 eml/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964`
-       <br>Expected: Doctor named Joe Doe is added successfully. Details of the added doctor are shown in the status message.
        
-    4. Test case: `add n/John Doe hp/999 eml/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/experienced`
-       <br>Expected: Doctor named John Doe is added successfully. Details of the added doctor are shown in the status message.
-
-    5. Test case: `add n/John Doe hp/98765432 eml/johndoeeeee@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/experienced`
-       <br> Expected: Doctor named John Doe is added successfully. Details of the added doctor are shown in the status message.
-       
-    6. Test case: `add n/John Doe hp/98765432 eml/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/experienced`
+    3. Test case: `add n/John Doe hp/98765432 eml/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/experienced`
        <br> Expected: No doctor is added. Error message is shown in the response box: "This doctor already exists in PlannerMD"
        
-    7. Test case: `add n/John Doe hp/98765432 eml/johnd@example.com a/311, Kent Ridge Ave 2, #02-25 dob/25/12/0000 t/experienced`
+    4. Test case: `add n/John Doe hp/98765432 eml/johnd@example.com a/311, Kent Ridge Ave 2, #02-25 dob/25/12/0000 t/experienced`
        <br> Expected: No doctor is added. Error message is shown in the response box: "This doctor already exists in PlannerMD"
 
-    8. Other incorrect add commands to try: `add`, `add n/Bob hp/`, `add n/` (not all fields, except tags, are filled)<br>
+    5. Other incorrect add commands to try: `add`, `add n/Bob hp/`, `add n/` (not all fields, except tags, are filled)<br>
         Expected: No doctor is added. Error message is shown in the response box: "Invalid command format!..."
 
 ### Listing all doctors <a name="list-doctors-manual-testing"/>
@@ -1473,7 +1455,7 @@ testers are expected to do more *exploratory* testing.
         Expected: Searches for appointments that has a starting date before `31/11/2021` [inclusive] and displays the results in the appointment list.
     
     9. Test case: `appt -f p/Aaron e/Irfan s/01/11/2021 e/30/11/2021`<br>
-        Expected: Searches for appointments that has a patient with a name that contains the keyword `Aaron` in it, a doctor with a name that contains the keyword `Irfan` in it and has a starting date after `01/11/2021` [inclusive] and before `30/11/2021` [inclusive].
+        Expected: Searches for appointments that has a patient with a name that contains the keyword `Aaron` in it, a doctor with a name that contains the keyword `Irfan` in it and has a starting date after `01/11/2021` [inclusive] and before `30/11/2021` [inclusive]. The search results are then displayed in the appointment list.
        
     10. Test case: `appt -f s/01/14/2021`<br>
         Expected: Displays an error message telling the user that the date entered has to be valid.

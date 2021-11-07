@@ -17,22 +17,44 @@ create LogicManager
 [-> LogicManager : execute("appt -d\n 1")
 activate LogicManager
 
-create PlannerMdParser
+LogicManager -> Model : getState()
+activate Model
+
+Model --> LogicManager : state
+deactivate Model
+
 LogicManager -> PlannerMdParser : parseCommand("appt -d 1, \n State.PATIENT")
 activate PlannerMdParser
 
+
+
 create AppointmentCommandParser
+PlannerMdParser -> AppointmentCommandParser
+activate AppointmentCommandParser
+
+AppointmentCommandParser --> PlannerMdParser
+deactivate AppointmentCommandParser
+
 PlannerMdParser -> AppointmentCommandParser : parseAppointmentCommand("-d 1")
 activate AppointmentCommandParser
 
+
 create DeleteAppointmentCommandParser
+AppointmentCommandParser -> DeleteAppointmentCommandParser
+activate DeleteAppointmentCommandParser
+DeleteAppointmentCommandParser --> AppointmentCommandParser
+deactivate
+
 AppointmentCommandParser -> DeleteAppointmentCommandParser : parse("1")
 activate DeleteAppointmentCommandParser
+
+
+AppointmentCommandParser --> PlannerMdParser
+deactivate AppointmentCommandParser
 
 create DeleteAppointmentCommand
 DeleteAppointmentCommandParser -> DeleteAppointmentCommand : "1"
 activate DeleteAppointmentCommand
-
 
 DeleteAppointmentCommandParser<--DeleteAppointmentCommand : d
 deactivate DeleteAppointmentCommand
