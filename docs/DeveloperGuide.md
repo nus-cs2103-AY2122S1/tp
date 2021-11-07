@@ -400,19 +400,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 For all use cases below, the **System** is the `Bogo Bogo` and the **Actor** is the `user`, unless specified otherwise.
 
-
 <div class="code-example bg-grey-lt-000">
-:information_source: Click on any of the use cases to view them.
 </div>
 
 *Mutating the Inventory*{: .text-purple-000 }
 
-<details markdown="block">
-  <summary>
-    <b>UC01 - Adding Item(s)</b>
-  </summary>
-  {: .text-delta }
-
+### Adding Item
 ```
 MSS:
 1. User requests to add a certain amount of an item into the inventory.
@@ -439,15 +432,8 @@ Extensions:
     1d2. User reenters the corrected details.
     Use case resumes at step 2.
 ```
-</details>
 
-
-<details markdown="block">
-  <summary>
-    <b>UC02 - Deleting an Item</b>
-  </summary>
-  {: .text-delta }
-
+### Deleting Item
 ```
 MSS:
 1. User requests to delete an item from the inventory.
@@ -475,14 +461,7 @@ Extensions:
     Use case resumes at step 2.
 ```
 
-</details>
-
-<details markdown="block">
-  <summary>
-    <b>UC03 - Removing Item(s)</b>
-  </summary>
-  {: .text-delta }
-
+### Removing Item
 ```
 MSS:
 1. User requests to remove a certain amount of an item from the inventory.
@@ -516,16 +495,9 @@ Extensions:
 1f. The specified amount is greater than what the inventory has.
     1f1. BogoBogo notifies user of the actual amount of item in the inventory.
     Use case ends.
-
 ```
-</details>
 
-<details markdown="block">
-  <summary>
-    <b>UC04 - Editing an Item</b>
-  </summary>
-  {: .text-delta }
-
+### Editing Item
 ```
 Precondition: BogoBogo is displaying the inventory.
 MSS:
@@ -546,44 +518,24 @@ Extensions:
     1c1.  BogoBogo notifies the user that directly editing count is not supported.
     Use case ends.
 ```
-</details>
 
-<details markdown="block">
-  <summary>
-    <b>UC05 - Clearing the Inventory</b>
-  </summary>
-  {: .text-delta }
-
+### Clearing the Inventory
 ```
 MSS:
 1. User requests to clear the inventory.
 2. BogoBogo acknowledges the request and clears the inventory.
    Use case ends.
 ```
-</details>
 
-*Navigating the Inventory*{: .text-purple-000 .text-gamma }
-
-<details markdown="block">
-  <summary>
-    <b>UC06 - Finding an Item</b>
-  </summary>
-  {: .text-delta }
-
+### Finding an Item
 ```
 MSS:
 1. User searches for an item in the inventory by specifying possible id(s), name(s) or tag(s).
 2. BogoBogo finds all items in the inventory that matches any of the descriptors.
    Use case ends.
 ```
-</details>
 
-<details markdown="block">
-  <summary>
-    <b>UC07 - Sorting the Inventory</b>
-  </summary>
-  {: .text-delta }
-
+### Sorting the Inventory
 ```
 Precondition: BogoBogo is displaying the inventory.
 MSS:
@@ -596,14 +548,8 @@ Extensions:
     1a1. BogoBogo notifies user that user can only sort by either name or count, not both.
     Use case ends.
 ```
-</details>
 
-<details markdown="block">
-  <summary>
-    <b>UC08 - Listing the Inventory</b>
-  </summary>
-  {: .text-delta }
-
+### Listing the Inventory
 ```
 MSS:
 1. User requests to list out all items in the inventory
@@ -611,16 +557,9 @@ MSS:
    Use case ends.
 ```
 
-</details>
-
 *Managing Orders*{: .text-purple-000 }
 
-<details markdown="block">
-  <summary>
-    <b>UC09 - Placing an Order</b>
-  </summary>
-  {: .text-delta }
-
+### Placing an Order
 ```
 MSS:
 1. User requests to start an order.
@@ -669,14 +608,8 @@ Extensions:
     5a1. BogoBogo notifies user that the order is empty and closes the order.
     Use case ends.
 ```
-</details>
 
-<details markdown="block">
-  <summary>
-    <b>UC10 - Removing an item from Order</b>
-  </summary>
-  {: .text-delta }
-
+### Removing Item from Order
 ```
 Precondition: The user has started an order.
 MSS:
@@ -705,14 +638,7 @@ Extensions:
     Use case resumes at step 2.
 ```
 
-</details>
-
-<details markdown="block">
-  <summary>
-    <b>UC11 - Listing the current Order</b>
-  </summary>
-  {: .text-delta }
-
+### Listing the Current Order
 ```
 MSS:
 1. User requests to list out current order.
@@ -724,14 +650,8 @@ Extensions:
     1a1. BogoBogo notifies user there is currently no open order.
     Use case ends.
 ```
-</details>
 
-<details markdown="block">
-  <summary>
-    <b>UC12 - Viewing Past Transactions</b>
-  </summary>
-  {: .text-delta }
-
+### Viewing Past Transactions
 ```
 MSS:
 1. User requests to view list of past transactions.
@@ -745,16 +665,10 @@ Extensions:
     3a1. BogoBogo notifies the user the transaction does not exist.
     Use case ends.
 ```
-</details>
 
 *Others*{: .text-purple-000 .text-gamma }
 
-<details markdown="block">
-  <summary>
-    <b>UC13 - Seeking Help</b>
-  </summary>
-  {: .text-delta }
-
+### Seeking Help
 ```
 MSS:
 1. User requests for guidance in using BogoBogo.
@@ -770,14 +684,8 @@ Extensions:
     1b1. BogoBogo notifies the user that the command does not exist.
     Use case resumes at step 2.
 ```
-</details>
 
-<details markdown="block">
-  <summary>
-    <b>UC14 - Exiting the Application</b>
-  </summary>
-  {: .text-delta }
-
+### Exiting the Application
 ```
 MSS:
 1. User requests to exit the application
@@ -785,7 +693,6 @@ MSS:
 2. BogoBogo exits.
    Use case ends.
 ```
-</details>
 
 ### Non-Functional Requirements
 
@@ -832,18 +739,11 @@ testers are expected to do more *exploratory* testing.
 
 
 <div class="code-example bg-grey-lt-000">
-:information_source: Click on any of the test cases to view them.
 </div>
 
 *Mutating the Inventory*{: .text-purple-000 }
 
-<details markdown="block">
-  <summary>
-    <b>Adding Item(s)</b>
-  </summary>
-  {: .text-delta }
-
-```
+## Adding Item
     1. Test case: `add milk id/232433 c/4 cp/3.0 sp/3.0`
        <br>Expected: Milk item is successfully added into the inventory.
     2. Test case: `add milk id/232433 c/4 sp/3.0`
@@ -852,17 +752,8 @@ testers are expected to do more *exploratory* testing.
        <br>Expected: Milk item is replenished by count 1 in the inventory.
     4. Test case: `add id/247937`
        <br>Expected: Item with the specified id is replenished by count 1 in the inventory.
-```
-</details>
 
-
-<details markdown="block">
-  <summary>
-    <b>Deleting an Item</b>
-  </summary>
-  {: .text-delta }
-
-```
+### Deleting Item
     1. Test case: `delete milk id/232433`
        <br>Expected: Milk item is successfully deleted from the inventory.
     2. Test case: `delete milk`
@@ -870,18 +761,10 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `delete id/232433`
        <br>Expected: Milk item is successfully deleted from the inventory.
     4. Test case: `delete milk cp/3.0`
-       <br>Expected: Milk is not deleted. Bogobogo outputs error that DeleteCommand does not require costprice, salesprice and tag fields.
-```
+       <br>Expected: Milk is not deleted. Bogobogo outputs error that DeleteCommand does not require costprice, 
+       salesprice and tag fields.
 
-</details>
-
-<details markdown="block">
-  <summary>
-    <b>Removing Item(s)</b>
-  </summary>
-  {: .text-delta }
-
-```
+### Removing Item
     1. Test case: `remove milk id/232433`
        <br>Expected: Milk item is successfully removed from the inventory.
     2. Test case: `remove milk`
@@ -892,16 +775,8 @@ testers are expected to do more *exploratory* testing.
        <br>Expected: x5 Milk item is successfully removed from the inventory.
     5. Test case: `remove milk cp/3.0`
        <br>Expected: Milk is removed. Bogobogo outputs message that extra price fields are ignored.
-```
-</details>
 
-<details markdown="block">
-  <summary>
-    <b>Editing an Item</b>
-  </summary>
-  {: .text-delta }
-
-```
+### Editing Item
     1. Test case: `edit 0 n/milk`
        <br>Expected: Bogobogo outputs error as index is 1 based.
     2. Test case: `edit 1 n/milk`
@@ -912,32 +787,14 @@ testers are expected to do more *exploratory* testing.
        <br>Expected: Costprice and Salesprice of the first item in the inventory is edited to $3.0.
     5. Test case: `edit 1 c/5`
        <br>Expected: First item is not edited. Bogobogo outputs error that count cannot be edited directly.
-```
-</details>
 
-<details markdown="block">
-  <summary>
-    <b>Clearing the Inventory</b>
-  </summary>
-  {: .text-delta }
-
-```
+### Clearing the Inventory
     1. Test case: `clear`
        <br>Expected: Bogobogo clears the entire inventory.
     2. Test case: `clear milkandcookie`
        <br>Expected: Extra words are ignored. Bogobogo clears the entire inventory.
-```
-</details>
 
-*Navigating the Inventory*{: .text-purple-000 .text-gamma }
-
-<details markdown="block">
-  <summary>
-    <b>Finding an Item</b>
-  </summary>
-  {: .text-delta }
-
-```
+### Finding Item
     1. Test case: `find n/milk`
        <br>Expected: Bogobogo outputs the list of items that matches the field specified.
     2. Test case: `find n/milk n/cookie`
@@ -950,16 +807,8 @@ testers are expected to do more *exploratory* testing.
        <br>Expected: Bogobogo outputs error that there is unexpected prefix identified.
     6. Test case: `find cookie`
        <br>Expected: Bogobogo outputs error that the command format is invalid.
-```
-</details>
 
-<details markdown="block">
-  <summary>
-    <b>Sorting the Inventory</b>
-  </summary>
-  {: .text-delta }
-
-```
+### Sorting the Inventory
     1. Test case: `sort`
        <br>Expected: Bogobogo outputs error that the command format is invalid.
     2. Test case: `sort n/`
@@ -968,49 +817,24 @@ testers are expected to do more *exploratory* testing.
        <br>Expected: Bogobogo outputs error that the command format is invalid.
     4. Test case: `sort hello`
        <br>Expected: Bogobogo outputs error that the command format is invalid.
-```
-</details>
 
-<details markdown="block">
-  <summary>
-    <b>Listing the Inventory</b>
-  </summary>
-  {: .text-delta }
-
-```
+### Listing an Inventory
     1. Test case: `list`
        <br>Expected: Bogobogo outputs the list of items in the inventory.
     2. Test case: `list oo`
        <br>Expected: Bogobogo outputs error that the command format is invalid.
     3. Test case: `list n/milk`
        <br>Expected: Bogobogo outputs error that the command format is invalid.
-```
 
-</details>
+*Managing Order*{: .text-purple-000 }
 
-*Managing Orders*{: .text-purple-000 }
-
-<details markdown="block">
-  <summary>
-    <b>Starting an Order</b>
-  </summary>
-  {: .text-delta }
-
-```
+### Starting Order
     1. Test case: `sorder`
        <br>Expected: Bogobogo starts a new order and enters ordering mode.
     2. Test case: `sorder milkandcookie`
        <br>Expected: Extra words are ignored. Bogobogo starts a new order and enters ordering mode.
-```
-</details>
 
-<details markdown="block">
-  <summary>
-    <b>Adding an item into order</b>
-  </summary>
-  {: .text-delta }
-
-```
+### Adding Item into Order
     1. Test case: `iorder milk`
        <br>Expected: Bogobogo inputs milk into the order.
     2. Test case: `iroder id/276434`
@@ -1021,95 +845,46 @@ testers are expected to do more *exploratory* testing.
        <br>Expected: Bogobogo inputs milk into the order. Bogobogo outputs message that extra tag flags are ignored.
     5. Test case: `iorder g/`
        <br>Expected: Bogobogo outputs error that there is unexpected prefix identified.
-```
 
-</details>
-
-<details markdown="block">
-  <summary>
-    <b>Removing an item from Order</b>
-  </summary>
-  {: .text-delta }
-
-```
+### Removing Item from Order
     1. Test case: `corder milk`
        <br>Expected: Bogobogo inputs milk into the order.
     2. Test case: `croder id/276434`
        <br>Expected: Bogobogo inputs item with id 276434 into the order.
     3. Test case: `corder g/`
        <br>Expected: Bogobogo outputs error that there is unexpected prefix identified.
-```
-</details>
 
-<details markdown="block">
-  <summary>
-    <b>Ending order</b>
-  </summary>
-  {: .text-delta }
-
-```
+### Ending Order
     1. Test case: `eorder`
        <br>Expected: Bogobogo processes the current order and saves it.
     2. Test case: `eorder oo`
        <br>Expected: Bogobogo ignores the extra paramaters and process the current order to save it.
-```
 
-</details>
-
-<details markdown="block">
-  <summary>
-    <b>Listing the current order</b>
-  </summary>
-  {: .text-delta }
-
-```
+### Listing the Current Order
     1. Test case: `list order`
        <br>Expected: Bogobogo outputs the list of items in the current order.
     2. Test case: `list oo`
        <br>Expected: Bogobogo outputs error that the command format is invalid.
-```
-</details>
 
-<details markdown="block">
-  <summary>
-    <b>Viewing Past Transactions</b>
-  </summary>
-  {: .text-delta }
-
-```
+### Viewing Past Transactions
     1. Test case: `list txns`
        <br>Expected: Bogobogo outputs the list of past transactions together with total cost, profit and revenue.
     2. Test case: `list txns bchfirwvb`
-       <br>Expected: Bogobogo outputs the list of past transaction with id bchfirwvb together with total cost, profit and revenue.
-```
-</details>
+       <br>Expected: Bogobogo outputs the list of past transaction with id bchfirwvb together with total cost, profit 
+    and revenue.
 
-*Others*{: .text-purple-000 .text-gamma }
+*Others*{: .text-purple-000 }
 
-<details markdown="block">
-  <summary>
-    <b>Seeking Help</b>
-  </summary>
-  {: .text-delta }
-
-```
+### Seeking Help
     1. Test case: `help`
        <br>Expected: Bogobogo userguide is displayed in the feedback box. 
     2. Test case: `help add`
        <br>Expected: Message usage of AddCommand is displayed in the feedback box.
-```
-</details>
 
-<details markdown="block">
-  <summary>
-    <b>Exiting the Application</b>
-  </summary>
-  {: .text-delta }
-
-```
+### Exiting the Application
     1. Test case: `exit`
        <br>Expected: Bogobogo exits the application.
     2. Test case: `exit oo`
        <br>Expected: Bogogbogo ignores the extra parameters and exits the application.
-```
-</details>
+
+
