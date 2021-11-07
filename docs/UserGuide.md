@@ -114,7 +114,7 @@ In [Glossary](#glossary), you will find useful descriptions and meanings of term
 1. Ensure you have Java `11` or above installed in your Computer. FAST can be used 
 on any operating system including Windows, macOS or Linux
 
-1. Download the latest `fast.jar` from [here](https://github.com/AY2122S1-CS2103T-T09-4/tp/releases).
+1. Download the latest `FAST.jar` from [here](https://github.com/AY2122S1-CS2103T-T09-4/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your FAST.
 
@@ -247,6 +247,7 @@ To achieve the best possible experience, avoid adding excessively long input to 
 
 #### `EMAIL`
 * The email address of your client
+* Should not be more than **100** characters
 * Should be in this format: `local-part@domain`
 * `local-part`: 
   * should only contain *alphanumeric characters* and these *special characters* excluding parentheses (!#$%&'*+/=?\{\}\|~^.-`).
@@ -303,6 +304,7 @@ the earliest time to the latest time.
 
 #### `NAME`
 * The name of your client
+* Should not be more than **50** characters
 * Should only contain alphanumeric characters and spaces (should not be blank)
    <div markdown="block" class="alert alert-info">
    :information_source: FAST does not allow duplicate names, but you may use numbers to differentiate between 2 clients with
