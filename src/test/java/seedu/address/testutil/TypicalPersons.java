@@ -10,12 +10,14 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.testutil.TypicalLessons.MON_10_12_BIOLOGY;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.lesson.NoOverlapLessonList;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
 
@@ -27,11 +29,21 @@ public class TypicalPersons {
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253")
-            .withTags("friends").withId("05404585-7339-4fb4-9899-c470e0068829").build();
+            .withTags("friends")
+            .withId("05404585-7339-4fb4-9899-c470e0068829")
+            .build();
+    public static final Person ALICE_WITH_LESSON = new PersonBuilder().withName("Alice Pauline")
+            .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
+            .withPhone("94351253")
+            .withTags("friends")
+            .withLessonsList((new NoOverlapLessonList()).addLesson(MON_10_12_BIOLOGY))
+            .withId("05404585-7339-4fb4-9899-c470e0068829")
+            .build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withTags("owesMoney", "friends").withId("99f5ad00-6e1b-49c8-98d8-5ae3459bb262").build();
+            .withTags("owesMoney", "friends").withId("99f5ad00-6e1b-49c8-98d8-5ae3459bb262")
+            .build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street")
             .withId("984c2915-9d24-4931-917c-03b98c621f39").build();
@@ -86,7 +98,12 @@ public class TypicalPersons {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 
+    public static List<Person> getTypicalPersonsWithLesson() {
+        return new ArrayList<>(Arrays.asList(ALICE_WITH_LESSON, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    }
+
     public static List<Task> getTypicalTasks() {
         return new ArrayList<>(List.of(REPORT_1));
     }
+
 }

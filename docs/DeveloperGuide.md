@@ -242,13 +242,13 @@ _{Explain here how the data archiving feature will be implemented}_
 
 #### Implementation
 
-We identify different persons/groups/tasks ("elements" for simplicity) by assigning them unique ids. This is done by 
+We identify different persons/groups/tasks ("elements" for simplicity) by assigning them unique ids. This is done by
 the `UniqueId` class. Each `UniqueId` instance stores a randomly-generated UUID and the owner of the id. When an element
 is created, the constructors can call `UniqueId#generateId()` to generate a new `UniqueId`.
 
-The interface `HasUniqueId` is created for classes whose instances may need to be uniquely identified. `HasUniqueId` 
-includes a method `getId` that should be overridden by its subclasses. `HasUniqueId#getId()` should return the 
-`UniqueId` of the object. By implementing `HasUniqueId`, other classes can deal with id-related operations without 
+The interface `HasUniqueId` is created for classes whose instances may need to be uniquely identified. `HasUniqueId`
+includes a method `getId` that should be overridden by its subclasses. `HasUniqueId#getId()` should return the
+`UniqueId` of the object. By implementing `HasUniqueId`, other classes can deal with id-related operations without
 exhausting all classes that have `UniqueId` as instance.
 
 When storing references of `HasUniqueId`, we can simply store their id, instead of storing the entire object.
@@ -276,14 +276,14 @@ When storing references of `HasUniqueId`, we can simply store their id, instead 
 
 #### Implementation
 
-Task assignment to each student is facilitated through the `UniqueId` class. Each `Person` object and each `Task` 
-object has a `UniqueId` to identify them. Task assignment is stored as a set of `UniqueId`s in both the `Person` object 
+Task assignment to each student is facilitated through the `UniqueId` class. Each `Person` object and each `Task`
+object has a `UniqueId` to identify them. Task assignment is stored as a set of `UniqueId`s in both the `Person` object
 and the `Task` object.
 
 ![TaskAssignment](images/TaskAssignmentDiagram.png)
 
 The implementation currently supports two task commands:
-- `AssignTaskToPersonCommand`: when executed, adds the `UniqueId` representing the `Task` to the set of `UniqueId`s stored in the `Person` object, 
+- `AssignTaskToPersonCommand`: when executed, adds the `UniqueId` representing the `Task` to the set of `UniqueId`s stored in the `Person` object,
 and adds the `UniqueId` representing the `Person` to the set of `UniqueId`s stored in the `Task` object
 - `UnassignTaskToPersonCommand`: when executed, removes the `UniqueId` representing the `Task` from the set of `UniqueId`s stored in the `Person` object,
 and removes the `UniqueId` representing the `Person` from the set of `UniqueId`s stored in the `Task` object
@@ -329,6 +329,99 @@ assigning and unassigning tasks to the students.
 ### Alternatives considered
 An alternative considered was to edit the list of uniqueIds of tasks assigned to each student after editing a particular
 task. However, this seemed inefficient and hence, we went with the current implementation.
+
+### View a student
+
+#### Implementation
+
+The command to view a student is facilitated through the `PersonCommandsParser` class. The `PersonCommandsParser` class
+checks the command word given by the user and creates a `ViewPersonCommandParser` object which also creates a `ViewPersonCommand`
+object. The `ViewPersonCommand` object returns the command back to the `LogicManager` class which allows the 'view command' to be
+executed. The `ViewPersonCommand` object gets the list of students via `Model#getfilteredPersonsList()`. It then obtains the
+target student via `AddressBook#get(index)` to return the respective `Person` at the index, hence displaying the details of the student in the 'Result Display'.
+
+#### Implementation rationale
+* `PersonCommandParser` helps filter out `ViewPersonCommandParser` as it helps differentiate the various commands
+  related to student.
+
+#### Alternatives considered
+View the student from the persons list itself as it also displays the students' details. This may not include other details
+relating to the student, such as the different `Task` object they have, and the `Group` they are in.
+
+The following sequence diagram shows how the view operation works.
+
+![ViewDiagram](images/ViewStudentDiagram.png)
+
+### Changing View Panel
+
+On the right side of the GUI, there exists a panel with contents that change depending on the user's selected view. For example
+it can show the current schedule or more details of a person.
+
+#### Implementation
+
+![ViewTypeDiagram](images/ViewTypes.png)
+
+The UI listens to changes in the Model via an ObservableProperty within the ModelManager. It does this by
+registering a ChangeListener on initialisation.
+
+If a Viewing Panel should be updated when the Command executes, the Command will set the appropriate ViewingType within the Model.
+This will update the ObservableProperty that the UI is listening on, hence updating the UI with the correct ViewingType.
+
+The contents of the ViewingType are obtained through other Observables in the Model as well. These are updated independently
+of the ViewingType.
+
+#### Implementation Rationale
+
+This method of using a ChangeListener is in line with the overall architecture of the application, where the UI responds to any
+changes in the Model. This also removes the need for Model and Logic packages to be dependent on the UI.
+
+#### Alternatives Considered
+
+We had considered using CommandResult to inform the UI what the ViewingType should be, which the UI can obtain after executing
+the command. This works well, but could get complicated if we used the CommandResult for all sorts of feedback to the UI. Using
+event listeners was more convenient and allowed us to store less information in the CommandResult itself.
+
+### Lessons
+
+#### Implementation
+
+Lessons and all related classes are inside the `seedu.address.model.lesson` package. A `Lesson` consists of a `java.time.DayOfWeek`,
+a `Subject` and a `Timeslot`, which describes a Lesson well.
+
+A `NoOverlapLessonList` contains a list of lessons, in which the lessons within must not overlap. Overlap is defined as falling on the
+same day and with timings that run within each other.
+
+`LessonWithAttendees` is a useful wrapper class to hold a list of attendees and lessons. This is used in particular for transporting lesson information around.
+
+The interfaces `Attendee` and `LessonAssignable` is to be implemented by classes of other packages that wish to use lessons.
+For example, a `Person` is both an `Attendee` and a `LessonAssignable`, while a `Group` is only
+a `LessonAssignable`.
+
+![LessonDiagram](images/LessonDiagram.png)
+
+#### Implementation Rationale
+
+`NoOverlapLessonList` is useful in cases such as students where they should not have lessons that overlap. `LessonWithAttendees`
+is a useful wrapper class to obtain the full details of a lesson (the lesson details and the details of attendees), since a lesson
+does not have a direct reference to its attendee.
+
+Lessons were created to be held by other classes, and thus does not hold information about its attendees. We acknowledge that a
+`Lesson` can hold reference to its `Attendee` and vice versa. However, for the sake of simplicity, we have decided to let other classes be
+in charge of knowing who _attends_ each `Lesson`.
+
+#### Alternatives considered
+
+When `Lesson` was implemented, the `Person` class was already in place. We had originally considered a two-way reference, in which
+a `Person` had multiple `Lesson` and a `Lesson` had multiple `Person`. However, given that this app was mainly for tuition, in which
+most lessons would be 1:1, it made more sense to assign `Lesson` under a `Person` instead, and if multiple `Person` was attending
+the same `Lesson`, they would be assigned through a `Group`. The avoidance of a two-way reference was also due to the immutability
+of `Person`, in which any updates to a `Person` could cause any references to it to be invalid.
+
+#### \[Proposed\] Future implementation
+
+Add support for a custom recurrence of lessons. Right now it is guaranteed that a lesson would occur weekly, which is in line with
+what many of our users require, but the ability to customise can be useful.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -366,10 +459,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​                                    | I want to …​                           | So that I can…​                                                     |
 | -------- | ------------------------------------------ | -------------------------------------------- | ---------------------------------------------------------------------- |
 | `* * *`  | new user                                   | see usage instructions                       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new student                            |                                                                        |
+| `* * *`  | user                                       | add a new student                            | manage students I have that are not present in the app                 |
 | `* * *`  | user                                       | delete a student                             | remove entries that I no longer need                                   |
 | `* * *`  | user                                       | find a student by name                       | locate details of persons without having to go through the entire list |
-| `* * *`  | user                                       | group students together                      | locate similar through their groupings easily                          |
+| `* * *`  | user                                       | group students together                      | locate similar students through their groupings easily                          |
 | `* * *`  | tutor                                      | add a new task                               | remember tasks I have created easily                                   |
 | `* * *`  | tutor                                      | assign tasks to students                     | reuse similar tasks for my students                                    |
 | `* * *`  | tutor                                      | mark tasks as completed                      | track my students' task progress                                       |
@@ -415,6 +508,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: Adding a lesson**
+
+1. User requests to list all students
+2. TutorMaster shows a list of students in the students list
+3. User requests to add a specific lesson to the student
+4. TutorMaster adds the lesson to the specific student
+5. TutorMaster displays the specific student in the viewing panel
+
+**Extensions**
+
+* 2a. The list is empty. <br>
+    Use case ends
+* 3a. The request details are incorrect or insufficient.<br>
+    * 3a1. TutorMaster displays an error message. <br>
+    Use case resumes at step 3.
+* 3b. The lesson overlaps with other lessons that the student has. <br>
+    * 3b1. TutorMaster displays an error message. <br>
+    Use case ends.
 
 **Use case: Delete a task**
 
@@ -512,22 +623,49 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a student
 
-1. Deleting a person while all persons are being shown
+1. Deleting a student while all students are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   1. Test case: `student -d 1`<br>
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
-   1. Test case: `delete 0`<br>
+   1. Test case: `student -d 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   1. Other incorrect delete commands to try: `student -d`, `student -d x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
+
+### Adding a lesson to a student
+
+1. Adding a lesson while all students are being shown
+    1. Prerequisites: List all students using the list command. Multiple students in the list.
+    1. Test case: `student -al 1 s/Biology st/23:00 et/23:59 d/Fri` <br>
+    Expected: Lesson is added to first student in the list. Student details are shown in the viewing panel on the right.
+    Lesson can be seen under "Lessons" in the viewing panel.
+    1. Test case: Repeat `student -al 1 s/Biology st/23:00 et/23:59 d/Fri` after previous test case. <br>
+    Expected: Lesson cannot be added to first student because it overlaps with the lesson from previous test case. Error
+    message is shown.
+    1. Test case: Use `student -al s/Biology st/23:00 et/23:59 d/Fri` <br>
+    Expected: Error message is shown as no index is specified.
+    
+
+### Grouping students
+
+1. Adding students to a group while all students are being shown
+
+    1. Prerequisites: List all students using the `list` command. At least 2 students in the list.
+    1. Successful test case: `group -a 1 2 n/New Group` <br>
+    Expected: First two students are added into the group. Group details appear in the viewing panel on the right.
+    Using `student -v 1` and `student -v 2` shows that the group name __New Group__ shows up in the student view.
+    1. Test case: `group -a 1 2` <br>
+    Expected: No new group is created, error message is shown as there is no group name specified.
+    1. Test case: `group -a 0 1 n/New Group` <br>
+    Expected: No new group is created, error message is shown as the index __0__ is invalid.
 
 ### Saving data
 

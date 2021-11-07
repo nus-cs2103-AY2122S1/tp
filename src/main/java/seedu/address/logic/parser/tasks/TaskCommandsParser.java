@@ -9,8 +9,15 @@ import java.util.regex.Pattern;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.tasks.AddTaskCommand;
+import seedu.address.logic.commands.tasks.AssignTaskToGroupCommand;
 import seedu.address.logic.commands.tasks.AssignTaskToPersonCommand;
+import seedu.address.logic.commands.tasks.DeleteTaskCommand;
 import seedu.address.logic.commands.tasks.EditTaskCommand;
+import seedu.address.logic.commands.tasks.FindTaskCommand;
+import seedu.address.logic.commands.tasks.ListTaskCommand;
+import seedu.address.logic.commands.tasks.MarkTaskDoneStudentCommand;
+import seedu.address.logic.commands.tasks.MarkTaskUndoneStudentCommand;
+import seedu.address.logic.commands.tasks.UnassignTaskFromGroupCommand;
 import seedu.address.logic.commands.tasks.UnassignTaskFromPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -47,11 +54,32 @@ public class TaskCommandsParser {
         case EditTaskCommand.COMMAND_WORD:
             return new EditTaskCommandParser().parse(arguments);
 
+        case DeleteTaskCommand.COMMAND_WORD:
+            return new DeleteTaskCommandParser().parse(arguments);
+
         case AssignTaskToPersonCommand.COMMAND_WORD:
             return new AssignTaskToPersonCommandParser().parse(arguments);
 
+        case AssignTaskToGroupCommand.COMMAND_WORD:
+            return new AssignTaskToGroupCommandParser().parse(arguments);
+
         case UnassignTaskFromPersonCommand.COMMAND_WORD:
             return new UnassignTaskFromPersonCommandParser().parse(arguments);
+
+        case UnassignTaskFromGroupCommand.COMMAND_WORD:
+            return new UnassignTaskFromGroupCommandParser().parse(arguments);
+
+        case MarkTaskDoneStudentCommand.COMMAND_WORD:
+            return new MarkTaskDoneStudentCommandParser().parse(arguments);
+
+        case MarkTaskUndoneStudentCommand.COMMAND_WORD:
+            return new MarkTaskUndoneStudentCommandParser().parse(arguments);
+
+        case FindTaskCommand.COMMAND_WORD:
+            return new FindTaskCommandParser().parse(arguments);
+
+        case ListTaskCommand.COMMAND_WORD:
+            return new ListTaskCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

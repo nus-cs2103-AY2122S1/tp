@@ -6,6 +6,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.persons.EditPersonCommandParser.MESSAGE_EDIT_PERSON_SUCCESS;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_GROUP;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
@@ -18,6 +19,7 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.groups.ViewGroupCommand;
 import seedu.address.logic.commands.persons.AddPersonCommand;
 import seedu.address.logic.commands.persons.DeletePersonCommand;
 import seedu.address.logic.commands.persons.EditPersonCommand;
@@ -25,7 +27,6 @@ import seedu.address.logic.commands.persons.EditPersonCommand.EditPersonDescript
 import seedu.address.logic.commands.persons.FindPersonCommand;
 import seedu.address.logic.commands.persons.ViewPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.logic.parser.persons.PersonCommandsParser;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -52,23 +53,26 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_delete() throws Exception {
-        DeletePersonCommand command = (DeletePersonCommand) parser.parseCommand(PersonCommandsParser.COMMAND_WORD + " "
+        DeletePersonCommand command = (DeletePersonCommand) parser.parseCommand(CliSyntax.PERSON_COMMAND + " "
                 + DeletePersonCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DeletePersonCommand(INDEX_FIRST_PERSON), command);
     }
 
     @Test
     public void parseCommand_view() throws Exception {
-        ViewPersonCommand command = (ViewPersonCommand) parser.parseCommand(PersonCommandsParser.COMMAND_WORD + " "
+        ViewPersonCommand command = (ViewPersonCommand) parser.parseCommand(CliSyntax.PERSON_COMMAND + " "
                 + ViewPersonCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        ViewGroupCommand groupCommand = (ViewGroupCommand) parser.parseCommand(CliSyntax.GROUP_COMMAND + " "
+                + ViewGroupCommand.COMMAND_WORD + " " + INDEX_FIRST_GROUP.getOneBased());
         assertEquals(new ViewPersonCommand(INDEX_FIRST_PERSON), command);
+        assertEquals(new ViewGroupCommand(INDEX_FIRST_GROUP), groupCommand);
     }
 
     @Test
     public void parseCommand_edit() throws Exception {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
-        EditPersonCommand command = (EditPersonCommand) parser.parseCommand(PersonCommandsParser.COMMAND_WORD + " "
+        EditPersonCommand command = (EditPersonCommand) parser.parseCommand(CliSyntax.PERSON_COMMAND + " "
                 + EditPersonCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " "
                 + PersonUtil.getEditPersonDescriptorDetails(descriptor));
         assertEquals(new EditPersonCommand(INDEX_FIRST_PERSON, descriptor, MESSAGE_EDIT_PERSON_SUCCESS), command);
@@ -83,7 +87,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindPersonCommand command = (FindPersonCommand) parser.parseCommand(PersonCommandsParser.COMMAND_WORD + " "
+        FindPersonCommand command = (FindPersonCommand) parser.parseCommand(CliSyntax.PERSON_COMMAND + " "
                 + FindPersonCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindPersonCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }

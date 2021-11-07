@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.ScrollPane?>
+<VBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <Label id="panelHeader" text="Student" maxWidth="Infinity" alignment="CENTER"/>
+    <ScrollPane id="personScroll" fx:id="personScroll" VBox.vgrow="ALWAYS" prefWidth="300">
+        <VBox id="personBox" fx:id="personBox" alignment="TOP_LEFT" minHeight="400" prefWidth="300" maxWidth="Infinity">
+            <padding>
+                <Insets top="5" right="5" bottom="5" left="12" />
+            </padding>
+            <HBox spacing="5" alignment="CENTER_LEFT">
+                <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
+            </HBox>
+            <FlowPane fx:id="tags"/>
+            <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
+            <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
+            <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+            <Label text="" styleClass="cell_small_label"/>
+            <Label styleClass="cell_big_label" text="Lessons:"/>
+            <VBox fx:id="lessons"/>
+            <Label fx:id="groupLessonsLabel"  styleClass="cell_big_label" text="Group Lessons:"/>
+            <VBox fx:id="groupLessons"/>
+            <Label text="" styleClass="cell_small_label"/> <!--empty row!-->
+            <Label styleClass="cell_big_label" text="Tasks:"/>
+            <VBox fx:id="tasks"/>
+            <Label fx:id="groupTasksLabel" styleClass="cell_big_label" text="Group Tasks:"/>
+            <VBox fx:id="groupTasks"/>
+            <Label text="" styleClass="cell_small_label"/> <!--empty row!-->
+            <Label styleClass="cell_big_label" text="Exams:"/>
+            <VBox fx:id="exams"/>
+            <Label text="" styleClass="cell_small_label"/> <!--empty row!-->
+            <Label styleClass="cell_big_label" text="Groups:"/>
+            <VBox fx:id="groups"/>
+        </VBox>
+    </ScrollPane>
+</VBox>

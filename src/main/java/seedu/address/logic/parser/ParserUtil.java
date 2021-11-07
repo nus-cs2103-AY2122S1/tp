@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_INDEX_GIVEN;
 import static seedu.address.logic.parser.CliSyntax.FRIDAY;
 import static seedu.address.logic.parser.CliSyntax.MONDAY;
 import static seedu.address.logic.parser.CliSyntax.SATURDAY;
@@ -8,6 +10,8 @@ import static seedu.address.logic.parser.CliSyntax.SUNDAY;
 import static seedu.address.logic.parser.CliSyntax.THURSDAY;
 import static seedu.address.logic.parser.CliSyntax.TUESDAY;
 import static seedu.address.logic.parser.CliSyntax.WEDNESDAY;
+import static seedu.address.logic.parser.ValidateUtil.hasExpectedSeparatedSegments;
+import static seedu.address.logic.parser.ValidateUtil.isEmptyOrOnlyWhitespace;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
@@ -23,6 +27,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.group.GroupName;
 import seedu.address.model.lesson.Subject;
 import seedu.address.model.lesson.Timeslot;
 import seedu.address.model.person.Address;
@@ -104,6 +109,34 @@ public class ParserUtil {
             list.add(Index.fromOneBased(Integer.parseInt(splittedIndexes[i])));
         }
         return list;
+    }
+
+    /**
+     * Method for parsing indexes and throwing the relevant exceptions.
+     * The user input provided must only contain indexes.
+     * @param userInput to parse.
+     * @param indexNumExpected number of indexes expected in the user input.
+     * @param messageUsage message usage to throw if something goes wrong.
+     * @return a list of indexes, in the order that they were placed.
+     * @throws ParseException
+     */
+    public static List<Index> parseOnlyIndexString(String userInput, int indexNumExpected, String messageUsage)
+            throws ParseException {
+        if (isEmptyOrOnlyWhitespace(userInput) || !hasExpectedSeparatedSegments(userInput, indexNumExpected)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    messageUsage));
+        }
+
+        List<Index> indexes;
+
+        try {
+            indexes = parseAllIndex(userInput);
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    MESSAGE_INVALID_INDEX_GIVEN), pe);
+        }
+
+        return indexes;
     }
 
     /**
@@ -314,5 +347,20 @@ public class ParserUtil {
 
     public static String localDateTimeAsString(LocalDateTime dateTime) {
         return dateTime.format(DateTimeFormatter.ofPattern(DATE_TIME_FORMAT));
+    }
+
+    /**
+     * Parses a {@code String name} into a {@code GroupName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static GroupName parseGroupName(String name) throws ParseException {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        if (!GroupName.isValidName(trimmedName)) {
+            throw new ParseException(GroupName.MESSAGE_CONSTRAINTS);
+        }
+        return new GroupName(trimmedName);
     }
 }
