@@ -1,3 +1,7 @@
+//@@author anonymxtrix-reused
+// Stylesheet was taken from Bootstrap (https://getbootstrap.com/) so that we can make use of their components in our
+// documentation.
+
 // Variables
 //
 // Variables should follow the `$component-state-property-size` formula for
@@ -892,3 +896,5 @@ $pre-scrollable-max-height:         340px !default;
 // Printing
 $print-page-size:                   a3 !default;
 $print-body-min-width:              map-get($grid-breakpoints, "lg") !default;
+
+//@@author

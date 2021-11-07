@@ -1,3 +1,7 @@
+//@@author anonymxtrix-reused
+// Stylesheet was taken from Bootstrap (https://getbootstrap.com/) so that we can make use of their components in our
+// documentation.
+
 // Base class
 .tooltip {
   position: absolute;
@@ -113,3 +117,5 @@
   background-color: $tooltip-bg;
   @include border-radius($tooltip-border-radius);
 }
+
+//@@author

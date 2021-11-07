@@ -1,6 +1,12 @@
+//@@author anonymxtrix-reused
+// Stylesheet was taken from Bootstrap (https://getbootstrap.com/) so that we can make use of their components in our
+// documentation.
+
 // Sizing shortcuts
 
 @mixin size($width, $height: $width) {
   width: $width;
   height: $height;
 }
+
+//@@author

@@ -1,3 +1,7 @@
+//@@author anonymxtrix-reused
+// Stylesheet was taken from Bootstrap (https://getbootstrap.com/) so that we can make use of their components in our
+// documentation.
+
 :root {
   // Custom variable values only support SassScript inside `#{}`.
   @each $color, $value in $colors {
@@ -17,3 +21,5 @@
   --font-family-sans-serif: #{inspect($font-family-sans-serif)};
   --font-family-monospace: #{inspect($font-family-monospace)};
 }
+
+//@@author

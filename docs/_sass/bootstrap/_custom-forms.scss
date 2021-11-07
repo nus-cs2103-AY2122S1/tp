@@ -1,3 +1,7 @@
+//@@author anonymxtrix-reused
+// Stylesheet was taken from Bootstrap (https://getbootstrap.com/) so that we can make use of their components in our
+// documentation.
+
 // Embedded icons from Open Iconic.
 // Released under MIT and copyright 2014 Waybury.
 // https://useiconic.com/open
@@ -295,3 +299,5 @@
     @include border-radius(0 $custom-file-border-radius $custom-file-border-radius 0);
   }
 }
+
+//@@author
