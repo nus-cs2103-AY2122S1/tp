@@ -12,7 +12,7 @@ DiamondBorderColor #gold
 
 start
 :User executes delete command;
-:Delete old Client object;
+:Delete Client;
 :UniqueClientList fires an update event;
 :AddressBook Listener purges unreferenced tags;
 :AddressBook Listener adds new tags to UniqueTagList;
