@@ -1063,13 +1063,11 @@ testers are expected to do more *exploratory* testing.
        Expected: A new applicant named John Doe with all of the above details is added to the list. Details of the added contact shown in 
        result display. 
        
-    1. Test case: Ensure that you have completed the first test case in this section, then input the command `add Bob p/98765432 e/bob@gmail.com r/Lawyer et/Full time s/7000 l/Bachelors y/4`
-       Expected: No new applicant is added. Error details shown in the result display stating that Bob shares the 
-       same phone number as John Doe. 
+    1. Test case: Ensure that you have completed the first test case under this section, then input the command `add Bob p/98765432 e/bob@gmail.com r/Lawyer et/Full time s/7000 l/Bachelors y/4`
+       Expected: No new applicant is added. Error details shown in the result display stating that Bob shares the same phone number as John Doe. 
     
-    1. Test case: Ensure that you have completed the first test case in this section, then input the command `add Jack Smith p/97865321 e/JohnDoe@gmail.com r/Doctor et/Full time s/9000 l/Bachelors y/4`
-       Expected: No new applicant is added. Error details shown in the result display stating that Bob shares the 
-       same email as John Doe.
+    1. Test case: Ensure that you have completed the first test case under this section, then input the command `add Jack Smith p/97865321 e/JohnDoe@gmail.com r/Doctor et/Full time s/9000 l/Bachelors y/4`
+       Expected: No new applicant is added. Error details shown in the result display stating that Bob shares the same email as John Doe.
        
     1. Other incorrect add commands to try: `add`, `add John`, `add n/John p/98765432 e/JohnDoe@gmail.com r/Teacher`
     (where incomplete details are given for the applicant being added).
@@ -1086,11 +1084,11 @@ testers are expected to do more *exploratory* testing.
        Expected: First applicant is edited such that his new name is Alexander with the phone number 87654321 and email alexander@gmail.com.
        Details of the edited applicant shown in the result display.
 
-    1. Test case: Ensure that you have completed the first test case in this section, then input the command `edit 2 n/Alice p/87654321`<br>
+    1. Test case: Ensure that you have completed the first test case under this section, then input the command `edit 2 n/Alice p/87654321`<br>
        Expected: No applicants are edited. Error details shown in the result display stating that the new edited applicant Alice shares either
        the same phone number or same email as Alexander.
 
-    1. Test case: Ensure that you have completed the first test case in this section, then input the command `edit 2 n/Alice e/alexander@gmail.com`<br>
+    1. Test case: Ensure that you have completed the first test case under this section, then input the command `edit 2 n/Alice e/alexander@gmail.com`<br>
        Expected: No applicants are edited. Error details shown in the result display stating that the new edited applicant Alice shares either
        the same phone number or same email as Alexander.
 
@@ -1122,11 +1120,13 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect delete commands to try: `delete`, `delete x`(where x is larger than the list size), `delete y`(where y is a negative integer), `delete Alexander`<br>
        Expected: Similar to previous test cases.
 
-<<<<<<< HEAD
 1. Deleting a person from a filtered list of applicants being shown
-=======
-2. _{ more test cases …​ }_
 
+    1. Prerequisites: Find a valid group of applicants using the `find` command with appropriate inputs. Multiple applicants in the filtered list.
+
+    1. Test case: `delete 1 2` <br>
+       Expected: First and second applicants of the shown filtered list are deleted. Details of the deleted applicant shown in the result display.
+       
 ### Marking an applicant
 
 1. Marking applicants while all applicants are being shown
@@ -1215,12 +1215,6 @@ testers are expected to do more *exploratory* testing.
 
     2. Test case: `delete_marked`<br>
        Expected: All the applicants with `Done` are deleted from the list, not just those found in the filtered list. Details of the deleted applicants shown in the result display.
->>>>>>> 538fc3ff6bf079d560ee9467095978a523f77506
-
-    1. Prerequisites: Find a valid group of applicants using the `find` command with appropriate inputs. Multiple applicants in the filtered list.
-
-    1. Test case: `delete 1 2` <br>
-       Expected: First and second applicants of the shown filtered list are deleted. Details of the deleted applicant shown in the result display.
   
 ### Saving data
 
