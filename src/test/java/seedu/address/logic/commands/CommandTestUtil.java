@@ -162,8 +162,6 @@ public class CommandTestUtil {
         List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
-        //assertEquals(expectedConthacks, actualModel.getConthacks());
-        //assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
     }
 
     /**
