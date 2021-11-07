@@ -18,17 +18,16 @@ Class ReadOnlyUserPrefs
 
 Class UniquePersonList
 Class Person
-Class Address
-Class Email
 Class Name
 Class Phone
+Class Email
+Class Address
 Class Appointment
 Class Revenue
 Class Note
+Class Insurance
 Class Tag
 Class Claim
-Class Insurance
-
 }
 
 Class HiddenOutside #FFFFFF
@@ -48,13 +47,13 @@ UniquePersonList --> "~* all" Person
 Person *--> Name
 Person *--> Phone
 Person *--> Email
-Person *--> Address
-Person *--> Appointment
-Person *--> Revenue
-Person *--> Note
-Person *--> "*" Insurance
-Person *--> "*" Tag
-Person *--> "*" Claim
+Person *---> Address
+Person *---> Appointment
+Person *----> Revenue
+Person *----> Note
+Person *-----> "*" Insurance
+Person *-----> "*" Tag
+Person *-----> "*" Claim
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address

@@ -86,7 +86,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-T17-4/tp/tree/master/src/main/java/seedu/insurancepal/logic/Logic.java) //TODO update link
+**API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-T17-4/tp/tree/master/src/main/java/seedu/insurancepal/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -114,9 +114,9 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-T17-4/tp/tree/master/src/main/java/seedu/insurancepal/model/Model.java) //TODO update link
+**API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-T17-4/tp/tree/master/src/main/java/seedu/insurancepal/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="600" />
 
 
 The `Model` component,
@@ -135,7 +135,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-T17-4/tp/tree/master/src/main/java/seedu/insurancepal/storage/Storage.java) //TODO update link
+**API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-T17-4/tp/tree/master/src/main/java/seedu/insurancepal/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -357,19 +357,30 @@ parse the text into the data classes `Index` and `Appointment`.
 
 <img src="images/ScheduleCommandParserSequenceDiagram.png" width="800" />
 
+During this process, the Appointment object is being created using the user input.
+Depending on the input, there are 2 possible outcomes:
+1. A valid appointment containing a meeting time is created.
+2. An empty appointment is created. This happens when the user input for `m/` is an empty string.
+
+This process is illustrated by this diagram:
+
+<img src="images/AppointmentConstructorActivityDiagram.png" width="600" />
+
 `ScheduleCommandParser` then creates a `ScheduleCommand` using the `Index` and `Appointment` objects created.
 
 **Step 2:** Executing the ScheduleCommand
 
-<img src="images/ScheduleCommandExecuteActivityDiagram.png" width="400" />
+<img src="images/ScheduleCommandExecuteActivityDiagram.png" width="600" />
 
-There are 3 possible outcomes from the execution of a ScheduleCommand.
+There are 4 possible outcomes from the execution of a ScheduleCommand.
 1. Schedule a new appointment with the client
 2. Reschedule an appointment with the client
 3. Delete an existing appointment with the client
+4. Do nothing.
 
 #### Design considerations
 {:.no_toc}
+* Appointments with expired dates are not automatically deleted and scheduling appointments that are expired are permitted. This is because the user might want to check how long it has since they met a specific client.
 
 *Aspect*: User interface of adding, editing and deleting appointments
 
