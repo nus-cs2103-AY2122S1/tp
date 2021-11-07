@@ -62,7 +62,7 @@ project. ([View Reposense](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?s
         [#417](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/417), [#460](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/460/files)
 
 5. **Documentation**:
-   * Update documentation user guide, developer's guide [#165](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/165), [#240](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/240), [#246](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/246), 
+   * Updated documentations: user guide, developer's guide [#165](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/165), [#240](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/240), [#246](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/246), 
       [#474](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/474), [#482](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/482)
 
 6. **Community Contributions**: 
