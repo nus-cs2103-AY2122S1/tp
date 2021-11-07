@@ -121,7 +121,7 @@ incomplete tasks whose Date/Time are after the current Date/Time.
 >The user is then able to view their upcoming tasks, in chronological order.
 >
 >A sequence diagram is provided below:
->![UpcomingTaskCommandSequenceDiagram](images/UpcomingTaskCommandSequenceDiagram.png)
+>![UpcomingTaskCommandSequenceDiagram](../images/UpcomingTaskCommandSequenceDiagram.png)
 >
 >#### Alternative Considered and Design Considerations
 >* Changing the syntax of the `upcoming` command to include a number i.e. `upcoming 7` to indicate upcoming tasks in the
