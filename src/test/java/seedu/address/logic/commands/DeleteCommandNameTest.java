@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showContactAtIndex;
-import static seedu.address.testutil.TypicalContacts.ALICE;
+import static seedu.address.testutil.TypicalContacts.AIRZONE;
 import static seedu.address.testutil.TypicalContacts.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalContacts.getTypicalContacts;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CONTACT;
@@ -31,7 +31,7 @@ public class DeleteCommandNameTest {
 
     @Test
     public void execute_validNameUnfilteredList_success() {
-        DeleteCommandName deleteCommandName = new DeleteCommandName(ALICE.getName());
+        DeleteCommandName deleteCommandName = new DeleteCommandName(AIRZONE.getName());
 
         List<Contact> contactList = model.getFilteredContactList();
 
@@ -39,7 +39,7 @@ public class DeleteCommandNameTest {
 
         for (Contact contact : contactList) {
             String fullName = contact.getName().fullName;
-            if (fullName.equals(ALICE.getName().fullName.trim())) {
+            if (fullName.equals(AIRZONE.getName().fullName.trim())) {
                 contactToDelete = contact;
                 break;
             }

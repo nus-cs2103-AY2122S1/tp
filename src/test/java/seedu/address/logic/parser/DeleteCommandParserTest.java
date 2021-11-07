@@ -3,7 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalContacts.ALICE;
+import static seedu.address.testutil.TypicalContacts.AIRZONE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CONTACT;
 
 import org.junit.jupiter.api.Test;
@@ -30,18 +30,18 @@ public class DeleteCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteCommandName() {
-        assertParseSuccess(parser, " n/  Alice Pauline", new DeleteCommandName(ALICE.getName()));
+        assertParseSuccess(parser, " n/  AIRZONE", new DeleteCommandName(AIRZONE.getName()));
     }
 
     @Test
     public void parse_invalidArgsName_throwsParseException() {
-        assertParseFailure(parser, " n/  Alice Pauline p/1234", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        assertParseFailure(parser, " n/  AIRZONE p/1234", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 DeleteCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_inValidArgsIndex_throwsParseException() {
-        assertParseFailure(parser, "1 n/  Alice Pauline", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        assertParseFailure(parser, "1 n/  AIRZONE", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 DeleteCommand.MESSAGE_USAGE));
     }
 

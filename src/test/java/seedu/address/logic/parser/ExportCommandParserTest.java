@@ -27,7 +27,7 @@ public class ExportCommandParserTest {
 
     @Test
     public void parse_invalidArgsType_throwsParseException() {
-        assertParseFailure(parser, "Alice Pauline",
+        assertParseFailure(parser, "AIRZONE",
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExportCommand.MESSAGE_USAGE));
     }
 
