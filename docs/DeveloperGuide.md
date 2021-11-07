@@ -445,7 +445,7 @@ An invoice has 5 components:
 
 Given below is the sequence diagram of how the invoice is created by `Invoice#generatePdfInvoice`.
 
-<img src="images/GeneratePdfInvoiceSequenceDiagram.png.png" width="800" />
+<img src="images/GeneratePdfInvoiceSequenceDiagram.png" width="800" />
 
 Referring back to the components that we have to include in the invoice. The `InvoiceNewPageHandler` would add
 the invoice header and the page number. The `addGuestBillingDetailsToPdf` adds the billing details, `addInvoiceTableToPdf`
