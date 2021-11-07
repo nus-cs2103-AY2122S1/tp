@@ -17,7 +17,7 @@ title: Developer Guide
   - [Storage component](#storage-component)
   - [Common classes](#common-classes)
 - [**Implementation**](#implementation)
-    - [Add event feature - addevent](#add-event-feature---addevent)
+    - [Add event feature - addEvent](#add-event-feature---addevent)
        - [Implementation Details](#implementation-details)
        - [Implementation Rationale](#implementation-rationale)
     - [Delete event feature - deleteEvent](#delete-event-feature---deleteevent)
@@ -299,13 +299,11 @@ we can simply add a new `commandType` case for `AddEventCommand` in `AddressBook
 
 The `AddEventCommandParser` reads the user's input and passes it to `ParserUtil` to ensure that the event's name, 
 date and time are valid. Then, an `Event` is created with the returned `EventName`, `EventDate` and `EventTime` objects. 
-This event will be supplied to the `addEventCommand` to be executed.
+This event will be supplied to the `AddEventCommand` to be executed.
 
 Since Managera employs a UniqueEventList, it should not have more than one event with the same name and date. The 
-`addressBook` 
-will check if the given event already exists. If not, it will be successfully added to the `addressBook` through 
-the model. 
-Otherwise, an exception will be thrown, and an error message will be displayed to the user.
+`AddressBook` will check if the given event already exists. If not, it will be successfully added to the `AddressBook` 
+through the model. Otherwise, an exception will be thrown, and an error message will be displayed to the user.
 
 #### Implementation Rationale
 
@@ -356,7 +354,7 @@ specified date and time will be left in the filtered list.
 
 #### Implementation Details
 
-Since the `AddressBookParser` is responsible for determining the type of `Command` to be created from user input, 
+Since the `AddressBookParser` is responsible for determining the type of `Command` to be created from the user's input, 
 we can simply add a new `commandType` case for `FilterEventCommand` in `AddressBookParser`. 
 
 Since this feature requires Managera to take in user input and determine if the filter is by:
@@ -364,8 +362,8 @@ Since this feature requires Managera to take in user input and determine if the 
 1. Date only, or
 2. Date and Time,
 
-a `FilterEventCommandParser` is made to be responsible for this purpose. The `FilterEventCommandParser` parses user's 
-input and creates the `EventDateTimePredicate` which the `FilterEventCommand` will use to execute the filtering.
+a `FilterEventCommandParser` is made to be responsible for this purpose. The `FilterEventCommandParser` parses the 
+user's input and creates the `EventDateTimePredicate` which the `FilterEventCommand` will use to execute the filtering.
 `EventDateTimePredicate` implements `Predicate<Event>` which can be passed to a `FilteredList<Event>` to filter the 
 event list. 
 
@@ -693,7 +691,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 1.
 
 
-**Use case: UC02 - Add participant to event**
+**Use case: UC02 - Add a participant to an event**
 
 Preconditions: At least one event and one participant have been added to Managera.
 
@@ -744,7 +742,7 @@ Preconditions: At least one event has been added to Managera.
       Use case resumes at step 1.
 
 
-**Use case: UC04 - Remove participant from an event**
+**Use case: UC04 - Remove a participant from an event**
 
 Preconditions: At least one event and one participant have been added to Managera. 
 
@@ -775,7 +773,7 @@ Preconditions: At least one event and one participant have been added to Manager
 
       Use case resumes at step 1.
 
-**Use case: UC05 - Mark event as done**
+**Use case: UC05 - Mark an event as done**
 
 Preconditions: At least one event has been added to Managera.
 
@@ -812,7 +810,7 @@ Preconditions: At least one event has been added to Managera.
 
     Use case ends.
 
-**Use case: UC07 - Find participant and access details**
+**Use case: UC07 - Find a participant and access their details**
 
 **Preconditions: At least one participant has been added to Managera.**
 

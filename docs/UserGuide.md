@@ -38,7 +38,7 @@ Managera is OS-independent, meaning it will work on any operating system (Window
         * [Showing an event's participants: `showParticipants`](#showing-an-events-participants-showparticipants)
     * [Miscellaneous](#miscellaneous)
         * [Viewing help: `help`](#viewing-help--help)
-        * [Clearing all Data: `clear`](#clearing-all-data--clear)
+        * [Clearing all data: `clear`](#clearing-all-data--clear)
         * [Exiting the program: `exit`](#exiting-the-program--exit)
 - [**Valid emails**](#valid-emails)    
 - [**Saving the data**](#saving-the-data)
@@ -550,7 +550,7 @@ or just want to learn more about Managera.
 
 Format: `help`
 
-### Clearing all Data : `clear`
+### Clearing all data : `clear`
 
 Clears all events and participants from Managera.
 
