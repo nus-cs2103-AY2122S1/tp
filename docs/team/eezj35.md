@@ -11,7 +11,7 @@ Given below are my contributions to the project.
 
 * **New Feature**: Added the ability to filter student and lesson lists.
   * What it does: Allows the user to filter the student and lesson lists if a grade condition is specified. If a subject is specified, the lesson list will also filter based on that. It allows filtering by either grade, subject or both together.
-  * Justification: This allows the user to see only relevant students based on the specified grade or subject conditions, instead of having to scroll through long lists of students and lessons.
+  * Justification: This allows the user to see only relevant students and lessons based on the specified grade or subject conditions, instead of having to scroll a lot.
   * Highlights: This enhancement requires the creating more predicate classes to filter the lists, as well as creating a parser and a 'Grade' class with relevant checks to ensure a valid grade is inputted. No checks on subject as there can be a wide variety of subjects.
 
 * **New Feature**: Added the ability to add on remarks to students, and to delete individual remarks.
@@ -36,7 +36,7 @@ Given below are my contributions to the project.
   * Updated the GUI (Pull requests [\#286](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/286), [\#282](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/282))
   * Wrote additional tests for existing features to increase coverage (Pull requests [\#94](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/94), [\#181](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/181))
   * Updated validity checks and constraints for existing features (Pull requests [\#282](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/282), [\#203](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/203), [\#187](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/187))
-  * Created 'Grade' class and integrated it with 'Student' class, which was refactored from 'Person' class, and updated commands related to 'Student' class (Pull requests [\#65](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/65), [\#29](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/29))
+  * Refactored 'Student' class from 'Person' class, and updated related commands (Pull requests [\#65](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/65), [\#29](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/29))
   * Implemented base code for delete lesson feature, which was later further refined (Pull requests [\#94](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/94))
   * Updated edit feature to ensure components that have associations with each other work as expected together. (Pull requests [\#148](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/148))
 
