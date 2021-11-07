@@ -351,33 +351,37 @@ gitGud undergoes to display the recommendations friends list to the user:
 <ins>Step 1: Parsing and triggering recommend command execution</ins><br>
 
 Similar to [delete](#delete-feature) and [link](#link-feature) features above, the parse and execute actions shown in the activity 
-diagrams are implemented via invoking`RecommendCommandParser#parse(String)`, which will construct a `RecommendCommand` instance
-of which its `RecommendCommand#execute(model)` method will then be invoked by an instance of the `LogicManager` class. 
+diagram are implemented via invoking`RecommendCommandParser#parse(String)`, which extracts a specified game and timing from the 
+user input and constructs a `RecommendCommand` instance with the extracted data. 
+
+Then, the `RecommendCommand#execute(model)` method is invoked by an instance of the `LogicManager` class which uses the extracted
+data to produce a list of friend recommendations to the user.
 
 <ins>Step 2: Filtering and sorting the friends list to get recommendations friends list</ins><br> 
 
-The sequence diagram below illustrates the interactions made in detail used to produce the desired recommendations friends list:
+The sequence diagram below illustrates the interactions made in detail used to produce the desired list of friend recommendations:
 
 <img src="images/RecommendCommandSequenceDiagram1.png" width="1000" /><br> 
 
-As shown, the recommend feature execution makes use of an instance of `FriendRecommendFilterPredicate` which returns true
-if the friend plays the specified game and schedule is available during the specified timing based on the parsed user input and
-an instance `Comparator` which is used to sort friends in order of the highest skill value for the specified game.
+As shown, the recommend feature makes constructs instance of `FriendRecommendFilterPredicate` which returns true
+if the friend plays the specified game and whose schedule is available during the specified timing based on the extracted data. 
+It also constructs an instance of `Comparator` which is used to sort friends in order of the highest skill value for the specified game.
 
 Next, the continuation to the sequence diagram below shows the `ModelManager#updateFilteredAndSortedFriendsList(Predicate, Comparator)`
 setting the predicate of `FilteredList` and comparator of `SortedList` instances managed by the `ModelManager` with 
-the new `FriendRecommendFilterPredicate` and `Comparator` instances. 
+the new `FriendRecommendFilterPredicate` and `Comparator` instances, cuaisng filtering and sorting of the list to produce the 
+list of friend recommendations. 
 
 <img src="images/RecommendCommandSequenceDiagram2.png" width="1000" />
 
 <ins>Step 3: Displaying the recommended friends</ins> 
 
 Due to the use of JavaFX's `FilteredList` and `SortedList`, which listens for and tracks for changes whenever the
-`FilteredList#setPredicate(Predicate)` or `SortedList#setComparator(Comparator)` methods are invoked, the UI is updated 
-to display the filtered and sorted friends list based on the newly set `FriendRecommendFilterPredicate` 
-and `Comparator` instances. 
+`FilteredList#setPredicate(Predicate)` or `SortedList#setComparator(Comparator)` methods are invoked, the UI is triggered and
+updated to display the filtered and sorted friends list based on the produced list of friend recommendations in step 2. 
 
-This completes the display of the recommendations friends list to the user. 
+Hence, the user sees the displayed list of friend recommendations and this completes the implementation of the 
+recommendations feature.  
 
 #### Design considerations:
 
