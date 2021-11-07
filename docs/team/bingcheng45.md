@@ -7,9 +7,8 @@ title: Toh Bing Cheng's Project Portfolio Page
 
 ### Project: Pocket Hotel
 
+**Pocket Hotel (PH)** is a desktop app for hotel front-desk receptionists that provides a centralized location to manage their guests and vendors, and helps to automate front-desk operations.
 
-**Pocket Hotel (PH)** is a specialized contact management desktop app targeted towards hotel managers who have many
-guests and staff to handle.
 
 
 Given below are my contributions to the project.

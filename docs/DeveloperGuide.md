@@ -1,5 +1,6 @@
 ---
-layout: page title: Developer Guide
+layout: page
+title: Developer Guide
 ---
 
 ## **Table of Contents**
@@ -972,9 +973,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-    1. Download the jar file and copy into an empty folder
-
-   Perform one of the steps (Option 2 recommended for mac)
+    1. Download the jar file and copy into an empty folder<br><br>Perform one of the steps (Option 2 recommended for mac)
 
     1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be
        optimum.
@@ -1196,7 +1195,6 @@ testers are expected to do more *exploratory* testing.
 
    ii. Rename `data\addressbook.json` to something else like `data\addressbook.json` would cause the addressbook to be
    not found and load the sample contacts into the addressbook.
-2. _{ more test cases …​ }_
 
 --------------------------------------------------------------------------------------------------------------------
 

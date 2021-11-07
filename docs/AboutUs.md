@@ -17,7 +17,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/alyssa-savier.md)]
 
 * Role: Developer
-* Responsibilities: Testing and Code Quality
+* Responsibilities: Testing, Code Quality
 
 ### Jeremy Yeo Zhi Chen
 
@@ -47,7 +47,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/nicolascwy.md)]
 
 * Role: Developer
-* Responsibilities: User Guide Documentation & Scheduling and tracking
+* Responsibilities: Documentation, Scheduling and Tracking
 
 ### Toh Bing Cheng
 
