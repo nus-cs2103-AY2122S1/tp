@@ -52,14 +52,28 @@ public class DeleteTaskCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = getLastShownList(model);
+        List<Person> lastShownList = model.getFilteredPersonList();
 
         if (targetPersonIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Person personToEdit = model.getFilteredPersonList().get(targetPersonIndex.getZeroBased());
-        checkPersonToEditTasksDisplayed(model, personToEdit);
+        List<Task> taskListToModify = null;
+
+        if (model.getIsViewAllTasks()) {
+            for (Person person : model.getViewAllTaskListPersons()) {
+                if ((person.getName()).equals(personToEdit.getName())) {
+                    taskListToModify = person.getTasks();
+                    break;
+                }
+            }
+        } else {
+            checkPersonToEditTasksDisplayed(model, personToEdit);
+            taskListToModify = model.getDisplayTaskList();
+        }
+
+        assert taskListToModify != null : "view all task list functionality not implemented correctly!";
 
         //Make new copy for defensive programming.
         List<Task> tasks = new ArrayList<>(personToEdit.getTasks());
@@ -67,7 +81,6 @@ public class DeleteTaskCommand extends Command {
 
         copyOfIndexList.sort(Collections.reverseOrder());
 
-        List<Task> taskListToModify = getTaskListToModify(model);
         checkTargetIndexesValidity(personToEdit, taskListToModify);
         List<Task> tasksToRemove = extractTaskToRemove(copyOfIndexList, taskListToModify);
         removeSelectedTasks(tasks, tasksToRemove);

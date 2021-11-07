@@ -190,7 +190,7 @@ public class ModelManager implements Model {
         }
 
         viewAllTaskListPersons = FXCollections.observableArrayList(personList);
-        viewAllTaskListPersons = viewAllTaskListPersons.filtered(person -> !person.getTasks().isEmpty());
+        //viewAllTaskListPersons = viewAllTaskListPersons.filtered(person -> !person.getTasks().isEmpty());
     }
 
     @Override
@@ -250,6 +250,9 @@ public class ModelManager implements Model {
     @Override
     public void displayFilteredTaskList(Predicate<Task> predicate) {
         taskListManager.setFilteredTasksPredicate(predicate);
+        taskListManager.setNameOfChosenPerson(null);
+        taskListManager.setIsPersonSelected(false);
+        viewAllTaskListPersons = FXCollections.emptyObservableList();
     }
 
     @Override

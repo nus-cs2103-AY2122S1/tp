@@ -240,6 +240,14 @@ public class TaskListManager {
         return new double[]{taskDone, taskNotDone, taskOverdue, taskDueSoon, totalTask};
     }
 
+    public void setNameOfChosenPerson(Name nameOfChosenPerson) {
+        this.nameOfChosenPerson = nameOfChosenPerson;
+    }
+
+    public void setIsPersonSelected(boolean isPersonSelected) {
+        this.isPersonSelected = isPersonSelected;
+    }
+
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object
