@@ -306,9 +306,9 @@ contains the data of your previous ProfBook home folder.
 
 Action | Format, Examples
 --------|------------------
-**Add** | <code>add n/NAME S/STUDENT_ID N/NUSNet_ID g/GITHUB_ID T/TUTORIAL_ID {r/student &#124; r/tutor} [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]...</code> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add** | <code>add n/NAME S/STUDENT_ID N/NUSNet_ID g/GITHUB_ID T/TUTORIAL_ID {r/student &#124; r/tutor} [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]...</code> e.g., `add n/John Doe p/98765432 a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney g/john-doe N/e0123456 r/student s/A0123456X T/11 `
 **Delete** | <code>delete {INDEX &#124; -a &#124; -f}</code> e.g., `delete 3`
-**Edit** | <code> edit INDEX [n/NAME] [g/GITHUB_ID] [N/NUS_NETWORK_ID] [{r/student &#124; r/tutor}] [s/STUDENT_ID] [T/TUTORIAL_ID] [p/PHONE] [a/ADDRESS] [t/TAG]…​ </code> e.g.,`edit 2 n/James Lee`
+**Edit** | <code> edit INDEX [n/NAME] [g/GITHUB_ID] [N/NUS_NETWORK_ID] [{r/student &#124; r/tutor}] [s/STUDENT_ID] [T/TUTORIAL_ID] [p/PHONE] [a/ADDRESS] [t/TAG]…​ </code> e.g.,`edit 2 n/John Doe`
 **Find** | <code> find {n/ &#124; s/ &#124; N/ &#124; g/ &#124; T/ &#124; r/ &#124; p/ &#124; a/ &#124; t/full/ &#124; t/partial/} KEYWORD [MORE_KEYWORDS]</code> e.g., `find n/Alex`
 **List** | `list`
 **Import** | `import FILENAME` <br> e.g., `import tutors.json`
