@@ -97,15 +97,12 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Member` and `Event` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Member`, `Event` and `Task` object residing in the `Model`.
 
 #### Current Implementations of UI
 
-The GUI currently reflects the entered events and members recorded in Ailurus. Currently, there are two main windows 
-that reflect the `Event` and `Member` objects that are residing in the `Model`. Directly adding or removing `Event` 
-or `Member` would update the `EventListPanel` and `MemberListPanel` to show their respective `EventCard` 
-and `MemberCard` accordingly. Each of the `EventCard` and `MemberCard` would display the fields under the 
-corresponding `Event` and `Member` objects as discussed under [Model Component](#model-component).
+The GUI currently reflects the entered events, members and tasks recorded in Ailurus. Currently, there are three main columns that reflect the `Event`, `Member` and `Task` objects that are residing in the `Model`. Directly adding or removing `Event`, `Member` or `Task` would update the `EventListPanel`, `MemberListPanel` and `TaskListPanel` to show their respective `EventListCard`, `MemberListCard` and `TaskListCard` respectively. Each of the `EventListCard`, `MemberListCard` and `TaskListCard` would display the fields under the 
+corresponding `Event`, `Member` and `Task` objects as discussed under [Model Component](#model-component).
 
 ### Logic component
 
