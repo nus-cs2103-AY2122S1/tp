@@ -49,14 +49,17 @@ Action | Parameters| Description
 **Command Box:** You should enter your commands in this input box. More information about the commands can be found in [features](#features)<br>
 **Response Box:** You can see the outcomes of your commands in this text box. <br>
 **Client List:** You can see client information in this list. <br>
-**Upcoming Appointments List:** You can see upcoming appointments in this list. This list is sorted in chronological order. <br>
-**Claims List:** You can see the information about client's claims in this list. 
+**Upcoming Appointments List:** You can see upcoming appointments in this list. This list is sorted in chronological order. Expired appointments <em>are not</em> shown on this list<br>
+**Claims List:** You can see the information about client's claims in this list. Pending claims are placed before completed claims. The list is <em>not sorted</em> in any other way.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
 The client list, upcoming appointments list and claims list are linked. For example, if you filtered for Alex Yeoh using the [find](#locating-clients-by-name-find) command, only Alex Yeoh's appointments and claims would show up in their respective lists. 
 </div>
 
 ## How to use this guide
+
+In this section, you will find the information you need to use this guide. This section will teach you
+how to interpret the command format and access the parameter constraints for each command
 
 ### Command Format
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
@@ -89,10 +92,12 @@ This is a sample dropdown.
 </details>
 <br>
 * The response box will also display the parameter constraints if an invalid input is provided.
-![Response Box ](images/ResponseBoxInvalidInput.png){:width="550px"}
+![Response Box](images/ResponseBoxInvalidInput.png){:width="550px"}
 
 
 ## Features
+
+In this section, you will find information about the commands available for use in InsurancePal. 
 
 ### Viewing help : `help`
 
@@ -254,7 +259,9 @@ You can add a claim by providing the client index, a title, description and stat
 Format: `claim INDEX n/TITLE d/DESCRIPTION s/STATUS`
 
 Example:
-* If the first client <em>does not</em> have a claim titled "Heart Surgery", <br>`claim 1 n/Heart Surgery d/At TTSH s/Pending` will add a new claim with the corresponding values. 
+* If the first client <em>does not</em> have a claim titled "Heart Surgery", <br>`claim 1 n/Heart Surgery d/At TTSH s/Pending` will add a new claim with the corresponding values.
+  
+![AddClaimExample](images/AddClaimExample.png){:width="650px" .center-image}
 
 #### Editing a claim
 You can edit a claim by providing the client index, the title of the client's existing claim, followed by any modifications to the description and/or status you wish to make. 
@@ -265,6 +272,8 @@ Format: `claim INDEX n/TITLE [d/DESCRIPTION] [s/STATUS]`
 Example:
 * If the first client has a claim titled "Knee Surgery", <br> `claim 1 n/Knee Surgery d/Due to a fall` will change the description of the claim to "Due to a fall" while leaving the claim's status unmodified. 
 
+![EditClaimExample](images/EditClaimExample.png){:width="650px" .center-image}
+
 #### Deleting a claim
 You can delete a claim by providing the client index and the title of the client's existing claim.
 
@@ -273,6 +282,7 @@ Format `claim INDEX n/TITLE`
 Example:
 * If the first client has a claim titled "Knee Surgery", <br>`claim 1 n/Knee Surgery` will delete that claim.
 
+![DeleteClaimExample](images/DeleteClaimExample.png){:width="650px" .center-image}
 
 ### Add/Edit/Delete a note: `note`
 You can use the `note` command to add, edit or delete notes. You can view the parameter constraints below.
@@ -296,6 +306,8 @@ Format: `note INDEX no/NOTE`
 Example: 
 * If the first client does not have a note,  `note 1 no/Meet for lunch` will add a note to first client with the contents of "Meet for lunch".
 
+![AddNoteExampele](images/AddNoteExample.png){:width="650px" .center-image}
+
 #### Editing a note
 You can edit a note by providing a client index and the new contents of the note. 
 
@@ -304,6 +316,8 @@ Format: `note INDEX no/NOTE`
 Example:
 * If the first client has an existing note, `note 1 no/Cannot meet during weekends` will update the contents of the existing note to be "Cannot meet during weekends"
 
+![EditNoteExampele](images/EditNoteExample.png){:width="650px" .center-image}
+
 #### Deleting a note
 You can delete a note by providing a client index and an empty note field. 
 
@@ -311,6 +325,8 @@ Format: `note INDEX no/`
 
 Example:
 * If the first client has an existing note, `note 1 no/` will remove that note.
+
+![DeleteNoteExampele](images/DeleteNoteExample.png){:width="650px" .center-image}
 
 ### Add/Edit/Delete appointments: `schedule`
 You can use the `schedule` command to add, edit or delete appointments. You can view the parameter constraints below
@@ -334,6 +350,8 @@ Format: `schedule INDEX m/MEETING_TIME`
 Example: 
 * If the first client does not have an appointment, `schedule 1 m/05-feb-2022 15:30` will add an appointment to the first client with a meeting time on 5th February 2022 at 3.30pm.
 
+![AddScheduleExample](images/AddScheduleExample.png){:width="700px" .center-image}
+
 #### Editing an appointment
 You can edit an appointment by providing a client index and the new meeting time. 
 
@@ -342,6 +360,8 @@ Format: `schedule INDEX m/MEETING_TIME`
 Example: 
 * If the first client has an existing appointment, `schedule 1 m/05-Dec-2021 20:00` will update the appointment time to 5th December 2021 8pm
 
+![EditScheduleExample](images/EditScheduleExample.png){:width="700px" .center-image}
+
 #### Deleting an appointment
 You can delete an appointment by providing a client index and an empty meeting time field.
 
@@ -349,6 +369,8 @@ Format: `schedule INDEX m/`
 
 Examples:
 * If the first client has an existing appointment, `schedule 1 m/` will delete that appointment. 
+
+![DeleteScheduleExample](images/DeleteScheduleExample.png){:width="700px" .center-image}
 
 
 ### Modifying revenue: `revenue`
@@ -363,9 +385,14 @@ Format: `revenue INDEX r/AMOUNT`
 Examples:
 * `revenue 1 r/100.95` will update the revenue of first client in the contact list to be `100.95`. (Assuming revenue of
 the first client in the contact list was 0).
+
+![RevenueExample1](images/RevenueExample1.png){:width="650px" .center-image}
+
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal` (Assuming Betsy Crowe is
 the second client in the contact list) followed by `revenue 2 r/350` and followed by `revenue 2 r/-100.11` will update the
 revenue of Betsy Crowe to be `249.89`.
+
+![RevenueExample2](images/RevenueExample2.png){:width="700px" .center-image}
 
 <details markdown="1">
 

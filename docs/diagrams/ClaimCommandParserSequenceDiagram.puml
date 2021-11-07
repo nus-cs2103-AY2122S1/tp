@@ -1,7 +1,7 @@
 @startuml
 !include style.puml
 
-Participant ":AddressBookParser" as addressBookParser LOGIC_COLOR_T2
+Participant ":InsurancePalParser" as addressBookParser LOGIC_COLOR_T2
 Participant ":ClaimCommandParser" as claimCommandParser LOGIC_COLOR
 Participant "<<class>>\nParserUtil" as util MODEL_COLOR
 Participant ":EditClaimDescriptor" as descriptor STORAGE_COLOR
