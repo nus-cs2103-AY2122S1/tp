@@ -306,11 +306,11 @@ The following sequence diagram show how the parsing of alias works, using the ex
 
 **Aspect: Previous and current version of commandWord:**
 
-* **Previous version:** The `commandWord` string for a `XYZCommand` is stored as an attribute in the `XYZCommand` class.
+* **Alternative 1 (previous version):** The `commandWord` string for a `XYZCommand` is stored as an attribute in the `XYZCommand` class.
     * Pros: Simple implementation for `ConthacksParser` to check which `XYZCommandParser` to call.
-    * Cons: Very difficult to add more `commandWord` for any `XYZCommand`. If the `XYZCommand` has multiple possible `commandWord` to parse, we will need to add all to the attributes of `XYZCommand` and checking one by one is very difficult. 
+    * Cons: Very difficult to add more `commandWord` for any `XYZCommand`. If the `XYZCommand` has multiple possible `commandWord`, we will need to add all to the attributes of `XYZCommand` and checking one by one is very difficult. 
 
-* **Current version:** Shift all the `commandWord` string of every `XYZCommand` into a `CommandWord` enum class. One enum in the `CommandWord` can contains multiple `commandWord` string. 
+* **Alternative 2 (current version):** Shift all the `commandWord` string of every `XYZCommand` into a `CommandWord` enum class. One enum in the `CommandWord` can contains multiple `commandWord` string. 
     * Pros: Easy to add a new alias (new commandWord) for any of the command. 
     * Cons: The implementation is more complex than alternative 1.
 
