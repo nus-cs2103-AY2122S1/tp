@@ -14,7 +14,7 @@ Given below are my contributions to the project.
 
 * **New Feature**: Added the ability to sort clients based off different client fields. (Pull requests: [\#64]())
   * What it does: allows the user to sort clients in ascending or descending order based off a declared client field
-  * Justification: This feature improves the user experience for FAs significantly when managing a large address book as it allows them to identify key clients 
+  * Justification: This feature improves the user experience for FAs significantly when managing a large address book as it allows them to identify key clients
   * Highlights: This implementation was challenging as there were numerous client fields to take account for. This required a comparator that took into account the values of the fields as well as take into account that certain fields might be empty as they are optional fields.
 
 * **New Feature**: Added meeting list GUI (Pull requests: [\#120](), [\#136]())

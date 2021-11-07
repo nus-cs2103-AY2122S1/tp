@@ -13,16 +13,16 @@ Given below are my contributions to the project.
   * Allows financial advisors to keep track of current financial plans, so that they can have a more comprehensive idea of the financial state of their clients
   * Client ID is used extensive throughout LeadsForce, such that commands no longer have to rely on the client list.
   * Amended the `edit`, `add` commands to allow the app to take in these attributes
-  * Highlights: this feature involved changing many features throughout the application since alot of the features relies on these attributes. Since the attributes are quite pervasive throughout the application, I had the chance to work with every component of the application and learn their logic. 
+  * Highlights: this feature involved changing many features throughout the application since alot of the features relies on these attributes. Since the attributes are quite pervasive throughout the application, I had the chance to work with every component of the application and learn their logic.
 
 * **New Command: `Schedule` (Pull Request: [#111](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/111), [#145](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/145))**
   * What it does: the command allows financial advisors to see the schedule of meetings they have with clients
   * Justification: For instance, if the client has many numerous meetings that's added into LeadsForce, they can simply use this command to determine the schedule of meetings that they have on the day.
-  * Highlights: this feature was implemented with several team mates. Since I was doing the backend portion, the implementation came with several challenges in understanding my team mates portion (the GUI portion) and how it can be linked to my implementation of schedule. 
+  * Highlights: this feature was implemented with several team mates. Since I was doing the backend portion, the implementation came with several challenges in understanding my team mates portion (the GUI portion) and how it can be linked to my implementation of schedule.
 
 * **New Command: `View` (Pull Request: [#45](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/45/files))**
   * What it does: view in-depth information of a client
-  * Justification: To be able to view the client's in-depth information 
+  * Justification: To be able to view the client's in-depth information
   * Mainly did the backend of the `view` command
 
 * **Enhancements to existing features**:
@@ -36,7 +36,7 @@ Given below are my contributions to the project.
     * Overhauled the User Guide to using icons and tables to increase readability
     * Removed bugs and misunderstandings from user guide
     * Wrote the `edit` and `view` commands in the user guide, the QnA portion, troubleshooting portion, client information portion, bugs reporting portion and the introduction.
-    * Added the expected outcomes of commands and 
+    * Added the expected outcomes of commands and
     * Organisation and dividing of the user guide
   * Developer Guide (Pull Request: [#205](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/205)):
     * Added implementation details of the `edit` and `view` command ([#24](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/24))
