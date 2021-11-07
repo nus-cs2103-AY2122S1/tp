@@ -71,6 +71,7 @@ public class Money {
         return test.matches(VALIDATION_REGEX);
     }
 
+    //@@author angkoonhwee
     /**
      * Get the value in Money object such that it can be used for calculations in {@code FeesCalculator}.
      *
@@ -80,6 +81,7 @@ public class Money {
         return valueInBigDec;
     }
 
+    //@@author Chesterwongz
     @Override
     public String toString() {
         return value;
