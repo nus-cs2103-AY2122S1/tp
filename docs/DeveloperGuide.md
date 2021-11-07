@@ -35,7 +35,7 @@ title: Developer Guide
       - [Implementation Rationale](#implementation-rationale-2)
       - [Design Considerations](#design-considerations-2)
         - [Aspect: Method of finding a participant](#aspect-method-of-finding-a-participant)
-    - [Add/Remove Participant to/from event - enroll/expel](#addremove-participant-tofrom-event---enrollexpel)
+    - [Add/Remove Participant to/from Event - enroll/expel](#addremove-participant-tofrom-event---enrollexpel)
       - [Implementation Details](#implementation-details-4)
       - [Implementation Rationale](#implementation-rationale-3)
     - [View Event Details feature - showDetails](#view-event-details-feature---showdetails)
@@ -45,7 +45,7 @@ title: Developer Guide
         - [Aspect: Similar event names](#aspect-similar-event-names)
     - [\[Proposed\] Undone Event feature](#proposed-undone-event-feature)
       - [Proposed Implementation](#proposed-implementation)
-    - [\[Proposed\] Enroll and Expel multiple Participants from multiple events](#proposed-enroll-and-expel-multiple-participants-from-multiple-events)
+    - [\[Proposed\] Enroll and Expel multiple Participants from multiple Events](#proposed-enroll-and-expel-multiple-participants-from-multiple-events)
       - [Proposed Implementation](#proposed-implementation-1)
 - [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
 - [**Appendix: Requirements**](#appendix-requirements)
@@ -470,7 +470,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ![ViewCommandActivityDiagram](images/DG-images/ViewCommandActivityDiagram.png)
 
-### Add/Remove Participant to/from event - enroll/expel
+### Add/Remove Participant to/from Event - enroll/expel
 
 This feature allows Managera users to quickly add/remove a participant to/from an event according to the current 
 filtered list of events and participants visible to the user.
@@ -603,7 +603,7 @@ the event in the event list. The `UndoneEventCommand` created by `UndoneEventCom
 of the event in the displayed event list to be undone. When the command is executed, the `model` will retrieve the 
 `Event` at the specified `Index` and change the completion status of the `Event`.
 
-### \[Proposed\] Enroll and Expel multiple Participants from multiple events
+### \[Proposed\] Enroll and Expel multiple Participants from multiple Events
 
 #### Proposed Implementation
 
@@ -901,7 +901,8 @@ Preconditions: At least one Event has been added to Managera.
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 Participants without a noticeable sluggishness in performance for typical usage. 
 3.  Should be able to hold up to 100 events without a noticeable sluggishness in performance for typical usage.
-4.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should 
+    be able to accomplish most of the tasks faster using commands than using the mouse.
 5.  Should work without having to use an installer or compiler.
 6.  Should work without requiring an internet connection.
 7.  Saved data should be kept in a single file to allow for easy transfer to a different device.
@@ -911,10 +912,14 @@ Preconditions: At least one Event has been added to Managera.
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X. <br>
-* **Command Line Interface (CLI)**: A CLI is a text-based interface that processes commands to a computer program in the form of lines of text.<br>
-* **Graphical User Interface (GUI)**: A GUI is a form of user interface through which users interact with electronic devices via visual indicator representations.<br>
-* **API**: The Application Programming Interface specifies the interface through which software and other programs interact.<br>
-* **Main Success Scenario (MSS)**: The most straightforward interaction for a given use case, which assumes that nothing goes wrong.<br>
+* **Command Line Interface (CLI)**: A CLI is a text-based interface that processes commands to a computer program in 
+  the form of lines of text.<br>
+* **Graphical User Interface (GUI)**: A GUI is a form of user interface through which users interact with electronic 
+  devices via visual indicator representations.<br>
+* **API**: The Application Programming Interface specifies the interface through which software and other programs 
+  interact.<br>
+* **Main Success Scenario (MSS)**: The most straightforward interaction for a given use case, which assumes that 
+  nothing goes wrong.<br>
 * **JSON**: JavaScript Object Notation, is a common file format which stores data in key-value pairs and arrays.<br>
 * **Participant**: A person that is participating in or attending some given event.<br>
 * **Event**: An event that will be conducted in real life e.g., a competition, meeting, social activity etc.<br>
@@ -933,7 +938,8 @@ Preconditions: At least one Event has been added to Managera.
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
+<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a 
+starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
 
 </div>
@@ -944,7 +950,8 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be 
+      optimum.
 
 1. Saving window preferences
 
@@ -961,7 +968,8 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all Participants using the `list` command. Multiple Participants in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First Participant is deleted from the list. Details of the deleted Participant shown in the status message.
+      Expected: First Participant is deleted from the list. Details of the deleted Participant shown in the status 
+      message.
 
    1. Test case: `delete 0`<br>
       Expected: No Participant is deleted. Error details shown in the status message.
@@ -982,7 +990,8 @@ testers are expected to do more *exploratory* testing.
    3. Test case: `deleteEvent 0`<br>
       Expected: No event is deleted. Error details shown in the status message.
 
-   4. Other incorrect deleteEvent commands to try: `deleteEvent`, `deleteEvent x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect deleteEvent commands to try: `deleteEvent`, `deleteEvent x`, `...` (where x is larger than the 
+      list size)<br>
       Expected: Similar to previous.
 
 
