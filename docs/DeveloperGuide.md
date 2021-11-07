@@ -459,11 +459,11 @@ Below is a sequence diagram and explanation of how the `DeleteCommand` is execut
 
 **Step 3.** The `DeleteCommand` is then executed by calling its `execute` method.
 
-**Step 4.** Since the `Model` is passed to `DeleteCommand#execute`, it is able to call a method `Model#getFilteredModuleList` to get the last module list shown.
+**Step 4.** Since the `Model` is passed to `DeleteCommand#execute`, it is able to call a method `Model#getFilteredModuleList` to get the filtered list.
 
 **Step 5.** From this module list, we can find the correct `Module` to be deleted by calling `get` function with the specified `index`.
 
-**Step 6.** The `Module` will be removed from the `ModulTracker` by calling the `deleteModule` method in `Model` and the `removeModule` method in `ModuleTracker` one after another.
+**Step 6.** The `Module` will be removed by calling the `deleteModule` method in `Model`.
 
 
 ### \[Proposed\] Undo/redo feature
