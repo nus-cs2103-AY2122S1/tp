@@ -16,9 +16,8 @@ public class HelpCommand extends Command {
 
     public static final String COMMAND_WORD = "help";
     public static final String DEFAULT_MESSAGE = Messages.GENERAL_HELP_MESSAGE;
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Shows program usage instructions for the command in query\n"
-            + "Example: " + COMMAND_WORD + "add";
+    public static final String MESSAGE_USAGE = "Use `help` to show a summary table, "
+            + "or `help + COMMAND_WORD` for a specific command instruction\n";
     public static final String MESSAGE_HELP_SUCCESS_GENERAL = "Showing summary help.";
     public static final String MESSAGE_HELP_SUCCESS_SPECIFIC = "Show help for command: %1$s.";
 

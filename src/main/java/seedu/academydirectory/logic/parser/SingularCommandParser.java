@@ -14,7 +14,7 @@ import seedu.academydirectory.logic.parser.exceptions.ParseException;
 public class SingularCommandParser implements Parser<Command> {
 
     public static final String MESSAGE_NO_ARGUMENT_SHOULD_FOLLOW = "Invalid usage detected. No other keyword "
-            + "should follow the command %1$s";
+            + "should follow the command `%1$s`";
 
     private final String commandWord;
 

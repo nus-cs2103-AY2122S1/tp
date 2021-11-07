@@ -41,10 +41,7 @@ public class TagCommand extends Command {
             + "Parameters: "
             + "INDEX "
             + PREFIX_TAG + "TAG...\n"
-            + "Example: " + COMMAND_WORD + " "
-            + "1 "
-            + PREFIX_TAG + "mission "
-            + PREFIX_TAG + "streams";
+            + "Type in `help tag` for more details";
 
     public static final String MESSAGE_SUCCESS = "%1$s's tag(s) updated! Please use `view` to see the new details";
 

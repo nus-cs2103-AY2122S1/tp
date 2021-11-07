@@ -32,7 +32,7 @@ public class RevertCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Reverts Academy Directory to the stage given by "
             + "the five character hash\n"
             + "Parameters: KEYWORD ...\n"
-            + "Example: " + COMMAND_WORD + " 6dfdx";
+            + "Type in `help revert` for more details";
 
     private final String fiveDigitHash;
     public RevertCommand(String hash) {

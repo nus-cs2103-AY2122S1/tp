@@ -40,14 +40,11 @@ public class AttendanceCommand extends Command {
             + "* `attendance s/33 k/Chan a/1 i/7`";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edits the attendance status of the student(s) identified "
-            + "by the index number used in the last person listing as well "
-            + "as the index of the Studio session. Existing attendance will "
-            + "be overwritten by the input.\n"
+            + ": Edits the attendance status of the student(s)\n"
             + "Parameters: INDEX(ES) (positive integer) "
             + "ses/ STUDIO_SESSION_INDEX (positive integer within range) "
             + "att/ ATTENDANCE_STATUS (0 or 1)\n"
-            + "Example: " + COMMAND_WORD + " 1 ses/ 7 att/ 1";
+            + "Type in `help attendance` for more details\n";
 
     public static final String MESSAGE_UPDATE_ATTENDANCE_SUCCESS = "Attendance updated!";
 

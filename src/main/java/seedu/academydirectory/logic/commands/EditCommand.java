@@ -47,18 +47,13 @@ public class EditCommand extends Command {
             + "of the 1st student to be `91234567` and `e0425205@u.nus.edu` respectively.\n"
             + "* `edit 2 " + PREFIX_NAME + "Aaron Tan`  Edits the name of the 2nd student to be Aaron Tan.\n";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the student identified "
-            + "by the index number used in the displayed student list. "
-            + "Existing values will be overwritten by the input values.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the personal details of the student\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_TELEGRAM + "TELEGRAM] "
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com "
-            + PREFIX_TELEGRAM + "@johndoe";
+            + "[" + PREFIX_TELEGRAM + "TELEGRAM]\n"
+            + "Type in `help edit` for more details\n";
 
     public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student: %1$s\n"
             + "Please use `view` to see the new details";

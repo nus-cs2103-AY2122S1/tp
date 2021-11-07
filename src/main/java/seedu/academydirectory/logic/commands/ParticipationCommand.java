@@ -43,14 +43,11 @@ public class ParticipationCommand extends Command {
             + "* `participation 4 ses/9 add/1`";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edits the participation count of the student(s) identified "
-            + "by the index number used in the last person listing as well "
-            + "as the index of the Studio session. Existing participation will "
-            + "be overwritten by the input or incremented/decremented depending on the flag.\n"
+            + ": Edits the participation count of the student(s)\n"
             + "Parameters: INDEX(ES) (positive integer) "
             + "ses/ STUDIO_SESSION_INDEX (positive integer within range) "
             + "add/ PARTICIPATION_TO_ADD\n"
-            + "Example: " + COMMAND_WORD + " 1 ses/ 7 add/ 1";
+            + "Type in `help participation` for more details";
 
     public static final String MESSAGE_UPDATE_PARTICIPATION_SUCCESS = "Participation updated!";
 

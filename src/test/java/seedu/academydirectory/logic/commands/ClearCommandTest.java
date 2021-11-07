@@ -33,6 +33,7 @@ public class ClearCommandTest {
     @Test
     public void validClearCommand() {
         ClearCommand clearCommand = new ClearCommand();
+        assertEquals(clearCommand, clearCommand);
         assertEquals(clearCommand, new ClearCommand());
     }
 }

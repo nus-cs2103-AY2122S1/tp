@@ -32,10 +32,9 @@ public class FilterCommand extends Command {
             + "* `filter John` returns `john` and `John Doe`\n"
             + "* `filter alex mission` returns `Alex Yeoh` and students with `mission` tag<br>";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all students whose names or tags contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all students by names or tags.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob mission";
+            + "Type in `help filter` for more details\n";
 
     private final InformationContainsKeywordsPredicate predicate;
 

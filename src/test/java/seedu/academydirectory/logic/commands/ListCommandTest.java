@@ -41,6 +41,7 @@ public class ListCommandTest {
     @Test
     public void equalTest() {
         ListCommand listCommand = new ListCommand();
+        assertEquals(listCommand, listCommand);
         assertEquals(listCommand, new ListCommand());
     }
 }

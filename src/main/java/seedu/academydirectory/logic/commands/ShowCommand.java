@@ -28,9 +28,8 @@ public class ShowCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Show students' grades for an assessment. "
             + "\nParameters: "
-            + "ASSESSMENT "
-            + "Example: " + COMMAND_WORD + " "
-            + "RA1";
+            + "ASSESSMENT\n"
+            + "Type in `help show` for more details";
 
     public static final String MESSAGE_SUCCESS = "Grades for %1$s displayed.";
 

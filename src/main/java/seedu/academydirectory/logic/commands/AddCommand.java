@@ -43,20 +43,14 @@ public class AddCommand extends Command {
             + "* `add n/Aaron Tan t/@sausage e/e0123456@u.nus.edu p/90312311`\n"
             + "* `add n/Betsy Lim t/@unislave e/e0123456@u.nus.edu`";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to the Academy Directory. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to Academy Directory.\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_TELEGRAM + "TELEGRAM "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe "
-            + PREFIX_PHONE + "98765432 "
-            + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_TELEGRAM + "@johnd "
-            + PREFIX_TAG + "recursion "
-            + PREFIX_TAG + "streams";
+            + "Type in `help add` for more details.\n";
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s\nPlease use `view` for more details";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the Academy Directory";

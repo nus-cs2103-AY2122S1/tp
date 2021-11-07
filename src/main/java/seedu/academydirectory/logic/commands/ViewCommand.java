@@ -32,7 +32,7 @@ public class ViewCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": View full information about the student.\n"
             + "Parameters: INDEX\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Type in `help view` for more details";
 
     public static final String MESSAGE_SUCCESS = "View information related to %1$s";
 

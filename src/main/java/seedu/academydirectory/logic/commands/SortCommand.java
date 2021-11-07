@@ -41,10 +41,8 @@ public class SortCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts student by the specified attribute. "
             + "\nParameters: "
             + PREFIX_ATTRIBUTE + "ATTRIBUTE "
-            + PREFIX_ORDER + " ORDER "
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_ATTRIBUTE + "name "
-            + PREFIX_ORDER + "asc";
+            + PREFIX_ORDER + " ORDER\n"
+            + "Type in `help sort` for more details";
 
     private final String attribute;
     private final boolean isAscendingOrder;

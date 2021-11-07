@@ -39,11 +39,10 @@ public class GetCommand extends Command {
             + "\n"
             + "Format: `get INFORMATION [MORE INFORMATION] [STUDENT_NAME]`";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Get personal details of students "
-            + "and displays them as a list\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Get and display the personal details of students.\n"
             + "Parameters: " + PREFIX_EMAIL + " | "
             + PREFIX_TELEGRAM + " | " + PREFIX_PHONE + "\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_PHONE + " " + PREFIX_NAME + "Alex";
+            + "Type in `help get` for more details.\n";
     public static final String MESSAGE_SUCCESS = "Personal details retrieval is successful";
     public static final String MESSAGE_FAILED = "Failed to receive one or more personal details. Showing what I can...";
     public static final String MESSAGE_NOTHING_TO_SHOW = "Nothing to show...";
