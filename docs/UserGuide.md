@@ -218,7 +218,6 @@ Entering format: `deletec INDEX`
 * Deletes the class at the specified INDEX.
 * The index refers to the index number shown in the displayed list of classes.
 
-
 **:information_source: Note:**<br>
 * The index **must be a positive integer** 1, 2, 3, …​
 * Students formerly belonging to the deleted class would now be assigned to `No Class`. Groups that students were assigned to in the class will no longer exist and students will have no groups.
