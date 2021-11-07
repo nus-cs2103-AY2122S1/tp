@@ -31,17 +31,22 @@ deactivate Timetable
 TimetableInfoPage -[UI_COLOR_T2]> Timetable: showTimetable()
 activate Timetable MODEL_COLOR
 Timetable -> Timetable: parseTime()
-Timetable -> TimetableInfoPage: setTimetable()
+activate Timetable MODEL_COLOR_T4
+Timetable --> Timetable:
+deactivate Timetable
+Timetable -> TimetableInfoPage: setTimetable(start, end)
 activate TimetableInfoPage UI_COLOR_T3
 TimetableInfoPage -[UI_COLOR_T3]-> Timetable
 deactivate TimetableInfoPage
 
 Timetable -> Timetable: insertSlot()
 activate Timetable MODEL_COLOR_T4
+loop for each tuition class
 Timetable -> TimetableInfoPage : addLesson()
 activate TimetableInfoPage UI_COLOR_T3
 TimetableInfoPage -[UI_COLOR_T3]-> Timetable
 deactivate TimetableInfoPage
+end
 
 Timetable --> Timetable
 deactivate Timetable
