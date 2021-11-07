@@ -467,7 +467,7 @@ unless the `NAME` is the same  as the `Student` being edited.
 does not have unnecessary duplicate information (e.g same `PHONE`) is left to an Avenger.
 </div>
 
-The following sequence diagram describes what happens when `GradeCommand` is executed:
+The following sequence diagram describes what happens when `EditCommand` is executed:
 
 ![EditCommandSequenceDiagram](images/dg/logic/commands/editcommand/EditCommandSequenceDiagram.png)
 
