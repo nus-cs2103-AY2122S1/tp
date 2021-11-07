@@ -58,26 +58,8 @@ public class FindModuleLessonCommandParser implements Parser<FindModuleLessonCom
         if (isModulePrefixPresent) {
             return getFindModuleCommand(argMultimap);
         } else if (isDayPrefixPresent) {
-            try {
-                int dayValue = Integer.parseInt(argMultimap.getValue(PREFIX_LESSON_DAY).get());
-                if (dayValue < 0 || dayValue > 7) {
-                    throw new ParseException(
-                            String.format(MESSAGE_INVALID_DAY, FindModuleLessonCommand.MESSAGE_SINGLE_PREFIX_SEARCH)
-                    );
-                }
-            } catch (NumberFormatException e) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_DAY, FindModuleLessonCommand.MESSAGE_USAGE)
-                );
-            }
-
             return getFindDayCommand(argMultimap);
         } else if (isTimePrefixPresent) {
-            if (!isValidTime(argMultimap.getValue(PREFIX_LESSON_TIME).get())) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_TIME, FindModuleLessonCommand.MESSAGE_USAGE)
-                );
-            }
             return getFindTimeCommand(argMultimap);
         }
         throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindModuleLessonCommand.MESSAGE_USAGE));
@@ -107,11 +89,26 @@ public class FindModuleLessonCommandParser implements Parser<FindModuleLessonCom
         String days = searchInput.get().trim();
         if (days.isEmpty()) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindModuleLessonCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_DAY, FindModuleLessonCommand.MESSAGE_USAGE));
         }
 
         List<String> lessonDayKeywordsList = Arrays.stream(days.split("\\s+"))
                 .collect(Collectors.toList());
+
+        for (String day : lessonDayKeywordsList) {
+            try {
+                int dayValue = Integer.parseInt(day);
+                if (dayValue < 0 || dayValue > 7) {
+                    throw new ParseException(
+                            String.format(MESSAGE_INVALID_DAY, FindModuleLessonCommand.MESSAGE_SINGLE_PREFIX_SEARCH)
+                    );
+                }
+            } catch (NumberFormatException e) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_DAY, FindModuleLessonCommand.MESSAGE_USAGE)
+                );
+            }
+        }
 
         return new FindModuleLessonCommand(new LessonDayContainsKeywordsPredicate(lessonDayKeywordsList));
     }
@@ -121,11 +118,19 @@ public class FindModuleLessonCommandParser implements Parser<FindModuleLessonCom
         String times = searchInput.get().trim();
         if (times.isEmpty()) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindModuleLessonCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_TIME, FindModuleLessonCommand.MESSAGE_USAGE));
         }
 
         List<String> lessonTimeKeywordsList = Arrays.stream(times.split("\\s+"))
                 .collect(Collectors.toList());
+
+        for (String time : lessonTimeKeywordsList) {
+            if (!isValidTime(time)) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_TIME, FindModuleLessonCommand.MESSAGE_USAGE)
+                );
+            }
+        }
 
         return new FindModuleLessonCommand(new LessonTimeContainsKeywordsPredicate(lessonTimeKeywordsList));
     }
