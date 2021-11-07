@@ -39,6 +39,11 @@ import seedu.programmer.model.student.exceptions.DuplicateStudentException;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+    private static final String UPLOAD_SUCCESS_MESSAGE = "Upload success! All past students have been deleted. "
+                                                       + "You now have %s students.";
+    private static final String UPLOAD_FAIL_MESSAGE = "Upload failed: %s";
+    private static final String DOWNLOAD_NO_DATA_MESSAGE = "No data to download!";
+    private static final String DOWNLOAD_SUCCESS_MESSAGE = "Your data has been downloaded to %s !";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -238,11 +243,10 @@ public class MainWindow extends UiPart<Stage> {
             logic.replaceExistingStudents(stuList);
         } catch (DuplicateStudentException e) {
             logger.info("Aborting: file contains duplicate student");
-            popupManager.displayPopup("Upload failed: " + e.getMessage());
+            popupManager.displayPopup(String.format(UPLOAD_FAIL_MESSAGE, e.getMessage()));
         }
 
-        popupManager.displayPopup("Upload success! All past students have been deleted. You now have "
-                    + stuList.size() + " students.");
+        popupManager.displayPopup(String.format(UPLOAD_SUCCESS_MESSAGE, stuList.size()));
         logger.info("Uploaded CSV data successfully!");
     }
 
@@ -255,7 +259,7 @@ public class MainWindow extends UiPart<Stage> {
         assert (jsonData != null);
 
         if (jsonData.length() == 0) {
-            popupManager.displayPopup("No data to download!");
+            popupManager.displayPopup(DOWNLOAD_NO_DATA_MESSAGE);
             return;
         }
 
@@ -265,7 +269,7 @@ public class MainWindow extends UiPart<Stage> {
         }
 
         JsonUtil.writeJsonToCsv(jsonData, destinationFile);
-        popupManager.displayPopup("Your data has been downloaded to " + destinationFile + "!");
+        popupManager.displayPopup(String.format(DOWNLOAD_SUCCESS_MESSAGE, destinationFile));
         logger.info("Data successfully downloaded as CSV.");
     }
 
@@ -279,17 +283,16 @@ public class MainWindow extends UiPart<Stage> {
         List<Student> stuList;
         try {
             stuList = FileUtil.getStudentsFromCsv(chosenFile);
-        } catch (IllegalArgumentException | IOException e) {
-            popupManager.displayPopup("Upload failed: " + e.getMessage()); // Error with file data
-            return null;
-        } catch (IllegalValueException e) {
-            popupManager.displayPopup(e.getMessage()); // Error with file headers
+        } catch (IllegalArgumentException | IOException | IllegalValueException e) {
+            // Error with file data or file headers
+            popupManager.displayPopup(String.format(UPLOAD_FAIL_MESSAGE, e.getMessage()));
             return null;
         }
 
         if (stuList.size() == 0) {
-            popupManager.displayPopup("Upload failed: No students were found in your file. "
-                    + "Use the purge command if you want to remove all students.");
+            String helpfulErrorMessage = "No students were found in your file. "
+                                       + "Use the purge command if you want to remove all students.";
+            popupManager.displayPopup(String.format(UPLOAD_FAIL_MESSAGE, helpfulErrorMessage));
             return null;
         }
 
