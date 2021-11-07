@@ -153,16 +153,39 @@ public class FindCommandTest {
     @Test
     public void execute_timeRangeOverlapping_multiplePersonsFound() {
         PersonMatchesKeywordsPredicate predicate = new PersonMatchesKeywordsPredicateBuilder()
-                .withTimeRange("1000-1400").build();
+                .withTimeRange("1200-1500").build();
 
         Person personWtihLesson = new PersonBuilder(firstPerson).withLessons(new LessonBuilder()
-                .withTimeRange("1000-1400")
+                .withTimeRange("1000-1300")
                 .buildRecurring())
                 .build();
-        model.setPerson(firstPerson, personWtihLesson); // Ensure at least one lesson to find
+        // Ensure at least one lesson to find
+        model.setPerson(firstPerson, personWtihLesson);
+        expectedModel.setPerson(firstPerson, personWtihLesson);
 
         List<Person> expectedPersons = Arrays.asList(personWtihLesson);
         String expectedMessage = String.format(MESSAGE_FIND_RESULTS, 1, predicate);
+        FindCommand command = prepareFindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(expectedPersons, model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_timeRangeNotOverlapping_noPersonsFound() {
+        PersonMatchesKeywordsPredicate predicate = new PersonMatchesKeywordsPredicateBuilder()
+                .withTimeRange("1200-1500").build();
+
+        Person personWtihLesson = new PersonBuilder(firstPerson).withLessons(new LessonBuilder()
+                .withTimeRange("1000-1200")
+                .buildRecurring())
+                .build();
+        // Ensure at least one lesson to find
+        model.setPerson(firstPerson, personWtihLesson);
+        expectedModel.setPerson(firstPerson, personWtihLesson);
+
+        List<Person> expectedPersons = Arrays.asList();
+        String expectedMessage = String.format(MESSAGE_FIND_RESULTS, 0, predicate);
         FindCommand command = prepareFindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
