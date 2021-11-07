@@ -121,7 +121,7 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` and `ModuleLesson` objects (which are contained in a `UniquePersonList` and `UniqueModuleLessonList` object respectively).
+* stores contHACKS data i.e., all `Person` and `ModuleLesson` objects (which are contained in a `UniquePersonList` and `UniqueModuleLessonList` object respectively).
 * stores the currently 'selected' `Person` and `ModuleLesson` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` and `ObservableList<ModuleLesson>` that can be 'observed' e.g. the UI can be bound to those lists so that the UI automatically updates when the data in the lists change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
@@ -133,13 +133,13 @@ The `Model` component,
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
+* can save both contHACKS data and user preference data in json format, and read them back into corresponding objects.
 * inherits from both `ConthacksStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -200,6 +200,9 @@ Notice that the `AddModuleLessonCommandParser` uses the method `parseModuleCodeF
     * Cons: Low level of code reuse
     * Cons: Not extensible
 
+<div markdown="span" class="alert alert-primary">:information_source: **Note:**
+The above information is also applicable for the edit feature.
+</div>
 
 ### Find feature 
 
@@ -283,6 +286,23 @@ The following sequence diagrams show how the delete by module code feature works
     * Pros: Faster deletion while still supporting deletion by one index.
     * Cons: Not able to undo the deletion if the user deletes the wrong batch, it would take a long time to key all the information back in.
 
+### Aliases for different commands:
+
+Aliases are alternative words that you can use to perform the same command. There are a few default aliases provided for every command.
+Users can choose to use their most preferred alias to perform the command they want.
+
+#### Implementation
+
+How the alias work is as such:
+
+1. When `Logic` is called upon to execute a command, it uses the `ConthacksParser` class to parse the user command.
+2. During the parsing of the user command in `ConthackParser`, `ConthacksParser` separates out the `commandWord` string from the rest of the arguments inside the user command string.
+3. ConthacksParser will pass this `commandWord` string into `CommandWord` enum which contains all the aliases for the different commands, and `CommandWord` class will check if the `commandWord` string is an alias for any of our implemented commands.
+4. If the alias is a legitimate alias for any of the `XYZCommand`, `CommandWord` class will return the respective `CommandWord` enum back to ConthacksParser, and ConthacksParser will use this enum to call the respective `XYZCommandParser` to call and creates the respective `XYZCommand` object.
+
+The following sequence diagram show how the parsing of alias works, using the example `ec 1 m/CS2100 T19` 
+
+![Sequence diagram for parsing of alias](images/ParseAliasSequenceDiagram.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -321,10 +341,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *` | potential user | be able to download the app | use it to keep track of my contacts |
 | `* * *` | potential user | be able to start the app | see how the app would look like |
-| `* * *` | user | be able to create a new contact in the address book | save a contact |
-| `* * *` | user | be able to retrieve an existing contact in the address book | retrieve more details about the contact |
-| `* * *` | user | be able to update an existing contact in the address book | change information about my student if I made a mistake when adding them |
-| `* * *` | user | be able to delete an old contact in the address book | delete contacts whom I am not in contact with anymore |
+| `* * *` | user | be able to create a new contact in contHACKS | save a contact |
+| `* * *` | user | be able to retrieve an existing contact in contHACKS | retrieve more details about the contact |
+| `* * *` | user | be able to update an existing contact in contHACKS | change information about my student if I made a mistake when adding them |
+| `* * *` | user | be able to delete an old contact in contHACKS | delete contacts whom I am not in contact with anymore |
 | `* * *` | user | be able to see their contact details | copy the contact details to contact them |
 | `* * *` | new user | be able to find out what kind of commands are available | use the app as intended |
 | `* * *` | user | be able to close the app | stop using it |
@@ -556,10 +576,10 @@ Editing some fields in the lesson saved in contHACKS.
 
 1. Prerequisites: The lesson must exist in contHACKS and could be access via a valid index.
 
-2. Test case: `editc 1 d/3`
+2. Test case: `editc 1 d/3`<br>
    Expected: The day of the first lesson shown in contHACKS will be changed to `Wednesday`
 
-3. Test case: `editc -1 d/3`
+3. Test case: `editc -1 d/3`<br>
    Expected: An error message will be shown in the result display, showing that the index provided is invalid. The words in the command box will turn red.
 
 ### Deleting a person
