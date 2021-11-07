@@ -94,8 +94,7 @@ public class Interview implements Comparable<Interview> {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-        assert result != 0;
+        
         return result;
     }
 
