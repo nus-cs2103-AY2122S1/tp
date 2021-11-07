@@ -311,8 +311,6 @@ The proposed theme mechanism is simply done by completely altering the base css 
 If `preferences.json` is empty or the theme css file given is not valid, the default theme will be used instead and
 will replace the invalid css file specification in `preferences.json`.
 
-#### Design Consideration
-
 #### Design Considerations
 
 **Aspect: Customizability of CSS file**
