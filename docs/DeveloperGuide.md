@@ -233,7 +233,7 @@ illustrates the description for deleting **games**:
 The games of each friend is stored inside a `Map<GameId, GameFriendLinks>`. Before deleting a game, the links a 
 friend has to a game has to be removed, before deleting the game from the list of games.
 
-### Link
+### Link Feature
 
 #### Implementation
 
@@ -263,7 +263,7 @@ The implementation of `Model#linkFriend()` is as follows:
 - Each `Friend` object has a `Map<GameId, GameFriendLink>`, which represents the links to the games it is associated with. However, each `Game` object does not
   have a corresponding data structure to the friends it is linked to. This reduces coupling between the two components such the implementation of the link feature does not require modification whenever the `Game` class is changed.
 
-### Unlink
+### Unlink Feature
 
 #### Implementation
 
@@ -339,8 +339,8 @@ gaming sessions with from the recommendations friends list displayed after the c
 
 #### Implementation: 
 
-To understand how the recommendation functionality is implemented, the activity diagram below summarises the actions 
-gitGud requires to display the recommendations friends list to the user: 
+To help you understand how the recommendation functionality is implemented, the activity diagram below summarises the actions 
+gitGud undergoes to display the recommendations friends list to the user: 
 
 <img src="images/RecommendCommandActivityDiagram.png" width="1000" />
 
