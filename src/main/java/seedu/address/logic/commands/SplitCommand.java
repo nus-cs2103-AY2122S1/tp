@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.util.DayUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.MemberAvailableOnDayPredicate;
+import seedu.address.model.member.MemberAvailableOnDayPredicate;
 
 /**
  * Splits members available on particular day to different Facilities.
