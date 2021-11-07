@@ -1,5 +1,6 @@
 ---
-layout: page title: Developer Guide
+layout: page
+title: Developer Guide
 ---
 
 ## **Table of Contents**
@@ -558,7 +559,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`   | CS2100 TA                                   | generate weekly feedbacks via email for my students with ease                                    |
 | `* *`   | CS2100 admin                                | have a dashboard to have a bird eye view of my class statistics                                  | be updated quickly on my class progress.
 | `* *`   | CS2100 TA                                   | use tags to identify which labs are marked or unmarked                                           | know which what labs to mark next.
-| `*`     | CS2100 TA with multiple classes             | filter the contact list by name, classes, email  | easily identify those in the current class.                |                                                                        
+| `*`     | CS2100 TA with multiple classes             | filter the contact list by name, classes, email  | easily identify those in the current class.                |
 | `*`     | CS2100 TA                                   | archive previous batch statistics           | compare current batch performance with them                                                      |
 | `*`     | expert CS2100 TA                                 | archive/hide unused data                                                                         | avoid being distracted by irrelevant data.
 | `*`     | a CS2100 TA with many students and classes         | store vital information of my students                                                           | query it when the need arises.
@@ -821,4 +822,4 @@ testers are expected to do more *exploratory* testing.
 1. Enter dashboard as a command or press F5 to view the dashboard.
 
     1. CS2100 TA will be able to view the number of students, number of classes, number of labs.
-    2. CS2100 TA will also be able to see the number of labs left to mark. 
+    2. CS2100 TA will also be able to see the number of labs left to mark.

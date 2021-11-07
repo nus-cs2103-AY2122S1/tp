@@ -1,5 +1,6 @@
 ---
-layout: page title: User Guide
+layout: page
+title: User Guide
 ---
 
 ProgrammerError (P|E) is a desktop app for managing students' information, optimized for use via a Command Line
@@ -172,7 +173,7 @@ Edits the details or grade of an existing student's in the PE. Both the student 
 1-indexing is used here as according to the displayed list. Any combination of the optional arguments can be provided.
 Take note that the parameters `-ln` and `-s` needs to be specified together.
 
-Format: `edit <INDEX_IN_LIST> [-n <NAME>] [-sid <STUDENT_ID>] [-cid <CLASS_ID>] [-email <EMAIL>] [-ln <LAB_NUMBER> -s <ACTUAL_SCORE>]`
+Format:`edit <INDEX_IN_LIST> [-n <NAME>] [-sid <STUDENT_ID>] [-cid <CLASS_ID>] [-email <EMAIL>] [-ln <LAB_NUMBER> -s <ACTUAL_SCORE>]`
 
 - Updates the student with at the given `INDEX_IN_LIST' with the arguments provided.
 - Existing values will be updated to the input flag arguments.
