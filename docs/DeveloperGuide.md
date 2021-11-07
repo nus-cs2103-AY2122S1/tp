@@ -174,7 +174,7 @@ Classes used by multiple components are in the `seedu.sourcecontrol.commons` pac
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Importing feature : `import`
+### Importing feature
 
 The following activity diagram summarises what happens when the user inputs an import command:
 
@@ -193,7 +193,7 @@ The user needs to provide the number of `Groups`, `Assessments`, and `Tags` sinc
 
 1. Columns can be empty, except for the assessment name columns in the header row, and the name and ID columns of each student. Empty columns are assumed to be missing data.
 
-### Adding student feature : `addstudent`
+### Adding student feature
 
 The add student feature adds a student with the provided name and NUSNET ID into the database. If the student comes with optionally specified groups and tags, these fields will be added accordingly.
 
@@ -223,11 +223,11 @@ The following sequence diagram shows how the add student operation works:
 
 </div>
 
-### Adding group feature : `addgroup`
+### Adding group feature
 
 The `addgroup` feature allows users to create new groups, as well as specify students to be added to the group to be created.
 
-#### How the `AddGroupCommand` works:
+#### How the `addgroup` command works:
 1. The user specifies the group name, as well as a list of names and/or IDs of the students to be added into the group.
 2. For each of the names and IDs, an `AllocDescriptor` is created.
 3. For each of the `AllocDescriptors`, a search is done against the current `StudentList` to find students that match the descriptors.
@@ -246,7 +246,7 @@ The following sequence diagram summarises what happens when the user inputs an a
 
 ![AddGroupSequenceDiagram](images/AddGroupSequenceDiagram.png)
 
-### Adding allocation feature : `addalloc`
+### Adding allocation feature
 
 The `addalloc` feature allows users to allocate a student into a group.
 
@@ -271,7 +271,7 @@ The following sequence diagram summarises what happens when the user inputs an `
 ![AddAllocSequenceDiagram](images/AddAllocSequenceDiagram.png)
 ![AddAllocToModelSequenceDiagram](images/AddAllocToModelSequenceDiagram.png)
 
-### Adding score feature : `addscore`
+### Adding score feature
 
 The `addscore` feature allows users to add score for an assessment of a student.
 
@@ -296,7 +296,7 @@ The following sequence diagram summarises what happens when the user inputs an `
 ![AddScoreSequenceDiagram](images/AddScoreSequenceDiagram.png)
 ![AddScoreToModelSequenceDiagram](images/AddScoreToModelSequenceDiagram.png)
 
-### Searching feature : `search`
+### Searching feature
 
 The `search` feature allows user to filter student list by name, NUSNET ID, groups, or tags.
 
@@ -344,7 +344,7 @@ if the command input is valid. The command is invalid if the user input is empty
     * Cons: We need to identify the type of input given.
 
 
-### Showing analysis feature : `show`
+### Showing analysis feature
 
 The `show` feature allows users to show the performance analysis of a student, a group or the cohort in an assessment.
 
@@ -374,7 +374,7 @@ The following sequence diagram summarises what happens when the user inputs an `
 <br>
 
 
-### Adding alias feature : `alias`
+### Adding alias feature
 
 The `alias` feature allows users to define their own aliases for commands. This is useful to shorten the input for commands that the user uses often. 
 
