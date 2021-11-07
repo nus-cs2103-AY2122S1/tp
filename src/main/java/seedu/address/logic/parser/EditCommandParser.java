@@ -53,57 +53,109 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
-        }
-        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            editPersonDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
-        }
-        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
-        }
+        parseNameIfAny(argMultimap, editPersonDescriptor);
 
-        if (argMultimap.getValue(PREFIX_ROLE).isPresent()) {
-            editPersonDescriptor.setRole(ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).get()));
-        }
+        parsePhoneIfAny(argMultimap, editPersonDescriptor);
 
-        if (argMultimap.getValue(PREFIX_EMPLOYMENT_TYPE).isPresent()) {
-            editPersonDescriptor.setEmploymentType(
-                    ParserUtil.parseEmploymentType(argMultimap.getValue(PREFIX_EMPLOYMENT_TYPE).get()));
-        }
+        parseEmailIfAny(argMultimap, editPersonDescriptor);
 
-        if (argMultimap.getValue(PREFIX_EXPECTED_SALARY).isPresent()) {
-            editPersonDescriptor.setExpectedSalary(ParserUtil.parseExpectedSalary(argMultimap
-                    .getValue(PREFIX_EXPECTED_SALARY).get()));
-        }
+        parseRoleIfAny(argMultimap, editPersonDescriptor);
 
-        if (argMultimap.getValue(PREFIX_LEVEL_OF_EDUCATION).isPresent()) {
-            editPersonDescriptor.setLevelOfEducation(
-                    ParserUtil.parseLevelOfEducation(argMultimap.getValue(PREFIX_LEVEL_OF_EDUCATION).get()));
-        }
+        parseEmploymentTypeIfAny(argMultimap, editPersonDescriptor);
 
-        if (argMultimap.getValue(PREFIX_EXPERIENCE).isPresent()) {
-            editPersonDescriptor.setExperience(
-                    ParserUtil.parseExperience(argMultimap.getValue(PREFIX_EXPERIENCE).get()));
-        }
+        parseExpectedSalaryIfAny(argMultimap, editPersonDescriptor);
+
+        parseLevelOfEducationIfAny(argMultimap, editPersonDescriptor);
+
+        parseExperienceIfAny(argMultimap, editPersonDescriptor);
 
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 
-        if (argMultimap.getValue(PREFIX_INTERVIEW).isPresent()) {
-            editPersonDescriptor.setInterview(
-                    ParserUtil.parseInterview(argMultimap.getValue(PREFIX_INTERVIEW).orElse("")));
-        }
+        parseInterviewIfAny(argMultimap, editPersonDescriptor);
 
-        if (argMultimap.getValue(PREFIX_NOTES).isPresent()) {
-            editPersonDescriptor.setNotes(
-                    ParserUtil.parseNotes(argMultimap.getValue(PREFIX_NOTES).orElse("")));
-        }
+        parseNotesIfAny(argMultimap, editPersonDescriptor);
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
         return new EditCommand(index, editPersonDescriptor);
+    }
+
+    private void parseNotesIfAny(ArgumentMultimap argMultimap, EditPersonDescriptor editPersonDescriptor)
+            throws ParseException {
+        if (argMultimap.getValue(PREFIX_NOTES).isPresent()) {
+            editPersonDescriptor.setNotes(
+                    ParserUtil.parseNotes(argMultimap.getValue(PREFIX_NOTES).orElse("")));
+        }
+    }
+
+    private void parseInterviewIfAny(ArgumentMultimap argMultimap, EditPersonDescriptor editPersonDescriptor)
+            throws ParseException {
+        if (argMultimap.getValue(PREFIX_INTERVIEW).isPresent()) {
+            editPersonDescriptor.setInterview(
+                    ParserUtil.parseInterview(argMultimap.getValue(PREFIX_INTERVIEW).orElse("")));
+        }
+    }
+
+    private void parseExperienceIfAny(ArgumentMultimap argMultimap, EditPersonDescriptor editPersonDescriptor)
+            throws ParseException {
+        if (argMultimap.getValue(PREFIX_EXPERIENCE).isPresent()) {
+            editPersonDescriptor.setExperience(
+                    ParserUtil.parseExperience(argMultimap.getValue(PREFIX_EXPERIENCE).get()));
+        }
+    }
+
+    private void parseLevelOfEducationIfAny(ArgumentMultimap argMultimap, EditPersonDescriptor editPersonDescriptor)
+            throws ParseException {
+        if (argMultimap.getValue(PREFIX_LEVEL_OF_EDUCATION).isPresent()) {
+            editPersonDescriptor.setLevelOfEducation(
+                    ParserUtil.parseLevelOfEducation(argMultimap.getValue(PREFIX_LEVEL_OF_EDUCATION).get()));
+        }
+    }
+
+    private void parseExpectedSalaryIfAny(ArgumentMultimap argMultimap, EditPersonDescriptor editPersonDescriptor)
+            throws ParseException {
+        if (argMultimap.getValue(PREFIX_EXPECTED_SALARY).isPresent()) {
+            editPersonDescriptor.setExpectedSalary(ParserUtil.parseExpectedSalary(argMultimap
+                    .getValue(PREFIX_EXPECTED_SALARY).get()));
+        }
+    }
+
+    private void parseEmploymentTypeIfAny(ArgumentMultimap argMultimap, EditPersonDescriptor editPersonDescriptor)
+            throws ParseException {
+        if (argMultimap.getValue(PREFIX_EMPLOYMENT_TYPE).isPresent()) {
+            editPersonDescriptor.setEmploymentType(
+                    ParserUtil.parseEmploymentType(argMultimap.getValue(PREFIX_EMPLOYMENT_TYPE).get()));
+        }
+    }
+
+    private void parseRoleIfAny(ArgumentMultimap argMultimap, EditPersonDescriptor editPersonDescriptor)
+            throws ParseException {
+        if (argMultimap.getValue(PREFIX_ROLE).isPresent()) {
+            editPersonDescriptor.setRole(ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).get()));
+        }
+    }
+
+    private void parseEmailIfAny(ArgumentMultimap argMultimap, EditPersonDescriptor editPersonDescriptor)
+            throws ParseException {
+        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
+            editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
+        }
+    }
+
+    private void parsePhoneIfAny(ArgumentMultimap argMultimap, EditPersonDescriptor editPersonDescriptor)
+            throws ParseException {
+        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
+            editPersonDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
+        }
+    }
+
+    private void parseNameIfAny(ArgumentMultimap argMultimap, EditPersonDescriptor editPersonDescriptor)
+            throws ParseException {
+        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+        }
     }
 
     /**
