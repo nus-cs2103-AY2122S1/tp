@@ -15,6 +15,8 @@ title: Track2Gather
     * Stay-Home-Notice period
     * next-of-kin information
 
+* In addition, Track2Gather offers features for the enforcement of Stay-Home-Notices by contact tracing personnel.
+
 * If you are interested in using Track2Gather, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.md#quick-start).
 * If you are interested about developing Track2Gather, the [**Developer Guide**](DeveloperGuide.md) is a good place to start.
 
