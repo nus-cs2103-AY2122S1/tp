@@ -99,6 +99,7 @@ Adds a person to the address book.
 Format: `add n/NAME g/GITHUB_ID N/NUS_NETWORK_ID {r/student|r/tutor} s/STUDENT_ID T/TUTORIAL_ID p/PHONE a/ADDRESS [t/TAG]…​`
 
 * A person cannot be added if he or she already exists in ProfBook, i.e. they are the same person.
+* The email field is automatically created depending on the NUSNET_ID entered.
 * 2 persons are considered similar if they share the exact same name, e.g. if John Doe already exists in ProfBook, `add n/John Doe s/A0222530X N/E0560062 g/meixuanjin T/01 p/98159386 a/John Street, block 456, #01-01` would not add a new John Doe to ProfBook.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -131,11 +132,11 @@ Format: `edit INDEX [n/NAME] [g/GITHUB_ID] [N/NUS_NETWORK_ID] [{r/student|r/tuto
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * When editing tags, the existing tags of the person will be removed and new tags will be added i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+* You can remove all the person’s tags by typing `t/` without specifying any tags after it.
+* The Editing of NUSNET_ID also changes the Email automatically.
 
 Examples:
-* `edit 1 p/91234567` Edits the phone number of the 1st person to be `91234567`.
+* `edit 1 p/91234567 N/e0000000` Edits the phone number of the 1st person to be `91234567` and the NUSNET_ID to be `E0000000` and the email to become `e0000000@u.nus.edu`.
 * `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 * `edit 1 n/Siddharth Srivastava t/IncompleteIP` Edits the name of the 1st person to be `Siddharth Srivastava` and replaces all existing tags with the tag `IncompleteIP`.
 
