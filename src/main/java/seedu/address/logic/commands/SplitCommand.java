@@ -6,6 +6,7 @@ import java.time.DayOfWeek;
 import java.time.format.TextStyle;
 import java.util.Locale;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.member.MemberAvailableOnDayPredicate;
@@ -40,6 +41,12 @@ public class SplitCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        if (model.getInternalMemberList().isEmpty()) {
+            throw new CommandException(String.format(Messages.MESSAGE_EMPTY_LIST, Messages.MESSAGE_MEMBER));
+        }
+        if (model.getInternalFacilityList().isEmpty()) {
+            throw new CommandException(String.format(Messages.MESSAGE_EMPTY_LIST, Messages.MESSAGE_FACILITY));
+        }
         MemberAvailableOnDayPredicate predicate = new MemberAvailableOnDayPredicate(dayNumber);
 
         int result = model.split(predicate, dayNumber);
