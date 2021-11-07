@@ -489,7 +489,6 @@ The Sequence Diagram below illustrates the interactions within the Storage compo
 <img src="images/AppointmentStorageSequenceDiagram.png" width="550" />
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
 
 ## **Documentation, logging, testing, configuration, dev-ops**  <a name="documentation"/>
 
