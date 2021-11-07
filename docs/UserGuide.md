@@ -59,23 +59,19 @@ ________________________________________________________________________________
 
 4. Double-click the file to start the app. You should see a graphical interface similar to the image below appear in a few seconds. SportsPA
    provides some sample data for you to play around with and familiarize yourself with the commands.
-
-<p align="center">
+  <p align="center">
    <img src="images/FirstLook.png" height="500" align="center"/>
+  </p>
+
+5. If you are on MacOS and encounter this issue when launching SportsPA, follow [this](https://support.apple.com/en-sg/guide/mac-help/mh40616/mac).
+<p align="center">
+   <img src="images/mac_error" height="300" align="center"/>
 </p>
 
 
-<div markdown="span" class="alert alert-primary">
 
-**:bulb: Tip for Mac users:**
 
-  <p align="center">
-     <img src="images/mac_error.png"/>
-  </p>
 
-If you are on MacOS and encounter this issue when launching SportsPA, follow [this](https://support.apple.com/en-sg/guide/mac-help/mh40616/mac).
-
-</div>
 
 [Back to Table of Contents](#table-of-contents)
 ____________________________________________________________________________________________________________
