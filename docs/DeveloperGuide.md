@@ -1068,13 +1068,16 @@ testers are expected to do more *exploratory* testing.
 
 1. Tag a contact with multiple tags
 
-    1. Prerequisites: Contact at index 1 no tag and contact at index 2 has no tag.
+    1. Prerequisites: Contact at index 1 has no tags and contact at index 2 has no tags.
 
     1. Test case: `tag 1 t/johnBirthday t/party`<br>
        Expected: Tags added to contact at index 1. Details of the tags added to contact shown in the status message.
 
     1. Test case: `tag 2 t/<existing tag in contact at index 2>`<br>
        Expected: No changes made. Error details shown in the status message.
+       
+    1. Test case: `tag 2 t/<tag not in contact at index 2 > t/<existing tag in contact at index 2>`<br>
+        Expected: New tag is added to the contact. Warning details shown in the status message.
 
     1. Other incorrect tag commands to try: `tag`, `tag -1 t/<valid tag name>`, `tag <tag name longer than 60 characters>`, `...`.<br>
        Expected: Similar to previous.
