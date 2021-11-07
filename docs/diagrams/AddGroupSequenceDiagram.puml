@@ -13,12 +13,17 @@ end box
 
 note right
 ""tc"" is the TutorialClass
-that the TutorialGroup
-being added to ClassMate
+that the TutorialGroup ""tg""
+being added to ClassMATE
 belongs to
 end note
 
 UniqueTutorialClassList -> TutorialClass : ""check for matching tutorial class""
+
+note right
+using streams and
+""isSameTutorialClass"" method
+end note
 
 [-> UniqueTutorialClassList : ""contains(tg)""
 

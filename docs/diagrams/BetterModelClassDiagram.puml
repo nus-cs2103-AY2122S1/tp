@@ -4,7 +4,6 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-Classmate *-right-> "1" UniqueTutorialGroupList
 Classmate *-right-> "1" UniqueTutorialClassList
 Classmate *-right-> "1" UniqueStudentList
 Classmate *-right-> "1" UniqueTagList
@@ -17,11 +16,13 @@ UniqueTagList *-right-> "*" Tag
 UniqueStudentList -right-> Student
 UniqueTutorialGroupList -right-> TutorialGroup
 
+TutorialClass *-right-> "1" UniqueTutorialGroupList
 TutorialGroup *-down-> GroupName
 TutorialGroup *-down-> ClassCode
 TutorialGroup *-down-> GroupType
 TutorialClass *-down-> ClassCode
 TutorialClass *-down-> "*" Tag
+
 Student *-up-> ClassCode
 Student *-up-> "*" Tag
 Tag -[hidden]right- ClassCode
