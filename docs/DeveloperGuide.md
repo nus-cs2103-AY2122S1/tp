@@ -306,27 +306,28 @@ entire set from the `AddressBook` and look up the persons and tasks in the set.
 
 ### Edit a task
 
-### Implementation
+#### Implementation
 This command is implemented to allow tutors to edit the details of the tasks stored in TutorMaster.
 
 The tutor's input to edit a particular task is executed by the Logic Manager. The logic manager passes the input to the
 `AddressBookParser` class which checks for the matching command. The arguments of the input are passed to `TaskCommandsParser`
 class which will then check for the matching action word. In this case, the action word will be '-e' and the arguments will be
-passed to `EditTaskCommandParser` class which will create an `EditTaskCommand` object. This command object is return to the
+passed to `EditTaskCommandParser` class which will create an `EditTaskCommand` object. This command object is returned to the
 `LogicManager` class to be executed. The `EditTaskCommand` object will create a newly edited task with the edited details and
 set the edited task in place of the original task in the model. It also returns a `CommandResult` object that is returned
-to the `LogicManager` class.
+to the `LogicManager` class. The `AddressBookParser` class and `EditTaskCommandParser` class were not added in the below
+diagram for simplicity. 
 
 ![EditTask](images/EditTaskSequenceDiagram.png)
 
-### Implementation Rationale
+#### Implementation Rationale
 When a new task is created with the details input by the user, the uniqueId of the task also changes. This implies that
 the list of uniqueIds of tasks assigned to each student will have to be edited so store the newly created task in place of
 the original task. To tackle this issue, we created a new constructor for the `Task` class such that we can pass in the
 uniqueId of the original task so that the id is retained and does not change. This simplifies matters when it comes to
 assigning and unassigning tasks to the students.
 
-### Alternatives considered
+#### Alternatives considered
 An alternative considered was to edit the list of uniqueIds of tasks assigned to each student after editing a particular
 task. However, this seemed inefficient and hence, we went with the current implementation.
 
