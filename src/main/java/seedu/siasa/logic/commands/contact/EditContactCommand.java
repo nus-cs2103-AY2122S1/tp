@@ -29,7 +29,6 @@ import seedu.siasa.model.contact.Email;
 import seedu.siasa.model.contact.Name;
 import seedu.siasa.model.contact.Phone;
 import seedu.siasa.model.policy.Policy;
-import seedu.siasa.model.policy.PolicyIsOwnedByPredicate;
 import seedu.siasa.model.tag.Tag;
 
 /**
