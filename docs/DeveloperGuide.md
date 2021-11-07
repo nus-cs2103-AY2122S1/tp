@@ -108,7 +108,7 @@ How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `SourceControlParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a student).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.~~~~
 
 The Activity Diagram below illustrates how user input is parsed by the `Logic` component.
 
@@ -470,11 +470,11 @@ Furthermore, removing aliases is likely a very rare use case, and dedicating a w
 
 ## **Documentation, Testing, Logging, Configuration, Dev-Ops**
 
-* [Documentation Guide](Documentation.md)
-* [Testing Guide](Testing.md)
-* [Logging Guide](Logging.md)
-* [Configuration Guide](Configuration.md)
-* [DevOps Guide](DevOps.md)
+* [Documentation guide](Documentation.md)
+* [Testing guide](Testing.md)
+* [Logging guide](Logging.md)
+* [Configuration guide](Configuration.md)
+* [DevOps guide](DevOps.md)
 
 <br>
 
