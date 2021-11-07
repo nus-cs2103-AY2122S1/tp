@@ -334,7 +334,7 @@ staff, `AddShiftCommand` passes the staff,
 Step 5. `Modelmanager#addShift()` updates the schedule of the target staff with a new `Shift` created with the
 given `DayOfWeek` and `Slot`.
 
-The activity diagram of this `addShift` command is shown below:
+The sequence diagram of this `addShift` command is shown below:
 
 ![AddShiftActivity](images/AddShiftSequenceDiagram.png)
 
@@ -395,7 +395,7 @@ for staff whose names match the keywords.
 
 Step 5. Following this, the displayed staff list will display the updated filtered list. 
 
-The activity diagram of this `Find` command is shown below:
+The sequence diagram of this `Find` command is shown below:
 
 ![Find Command Sequence Diagram](images/findCommand/FindSequenceDiagram.png)
 
@@ -448,7 +448,7 @@ for staff who are working at that particular timing.
 Step 5. Following this, the displayed staff list will display the updated filtered list, and the names of those working will
 also be outputted on the left of the GUI.
 
-The activity diagram of this `viewShift` command is shown below:
+The sequence diagram of this `viewShift` command is shown below:
 
 ![ViewShift Command Sequence Diagram](images/viewShiftCommand/ViewShiftSequenceDiagram.png)
 ![ViewShiftCommand Execution Diagram](images/viewShiftCommand/ViewShiftCommandExecutionSequenceDiagram.png)
