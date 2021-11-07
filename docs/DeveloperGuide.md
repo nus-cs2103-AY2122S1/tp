@@ -168,9 +168,10 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
+
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="600" />
 
 
 The `Model` component,
@@ -182,7 +183,7 @@ The `Model` component,
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+<img src="images/BetterModelClassDiagram.png" width="600" />
 
 </div>
 
@@ -288,19 +289,40 @@ The following sequence diagram shows how the edit operation works.
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `EditCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
-#### Design considerations:
+### Delete feature
 
-**Aspect: User command to use in deleting marked applicants:**
+The ```delete``` command is facilitated by creating a ```DeleteCommand``` depending on the given input.
+This command then updates the ```model``` accordingly.
 
-* **Alternative 1 (current choice):** Separate command for deleting marked applicants
-    * Pros: Command has single responsibility of deleting marked applicants based.
-    * Pros: Easy to use for user, does not take any additional input.
-    * Cons: User might be confused between `delete` command for general deletion and `delete_marked` command.
+The following activity diagram summarizes what happens when a user executes an ```delete``` command:
+![images](images/DeleteActivityDiagram.png)
 
-* **Alternative 2:** Part of `delete` command functionality
-    * Pros: Intuitive for user to use `delete` command for all deletion purposes
-    * Cons: Breaks the single responsibility principle as deleting marked applicants does not delete applicants at specific indices
-    like the rest of the `delete` command, but rather a certain group of applicants at once. 
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** There should only be one arrowhead at the end of every line 
+in the Activity Diagram. This is a known limitation of PlantUML.</div>
+
+Given below is an example usage scenario illustrated by a sequence diagram for ```delete``` command.
+
+Step 1. A valid command `delete 1` is given as user input. This invokes `LogicManager#execute()`, which calls
+`AddressBookParser#parseCommand()` to parse `delete 1` into command word `delete` and command argument ``` 1```.
+
+Step 2. `DeleteCommandParser` is initialized based on the parse results and `DeleteCommandParser#parse()` is called
+to identify the indices present in ``` 1```. `DeleteCommandParser#parse()` then initializes a
+`DeleteCommand` with the indices present as arguments.
+
+Step 3. `DeleteCommand#execute()` is then called, which will check the validity of the given indices. 
+If there is no exception thrown, `Model#deletePerson()` is called to delete the applicants corresponding to the 
+given indices.
+
+Step 4. `CommandResult` is initialized with `String` containing the details of the deleted applicant.
+This `CommandResult` is then returned.
+
+The following sequence diagram shows how the delete operation works.
+![images](images/DeleteSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** The lifeline for `DeleteCommandParser`
+should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
 ### Find feature
 
@@ -413,41 +435,6 @@ should not exceed the destroy marker X. This is a known limitation of PlantUML.<
   * Pros: Intuitive for user to use `find` command to find certain types of interviews (past or future)
   * Cons: Breaks the single responsibility principle as it does not find a specific input for a prefix, but rather
     types of inputs.
-    
-### Delete feature
-
-The ```delete``` command is facilitated by creating a ```DeleteCommand``` depending on the given input.
-This command then updates the ```model``` accordingly.
-
-The following activity diagram summarizes what happens when a user executes an ```delete``` command:
-![images](images/DeleteActivityDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source:
- **Note:** There should only be one arrowhead at the end of every line 
-in the Activity Diagram. This is a known limitation of PlantUML.</div>
-
-Given below is an example usage scenario illustrated by a sequence diagram for ```delete``` command.
-
-Step 1. A valid command `delete 1` is given as user input. This invokes `LogicManager#execute()`, which calls
-`AddressBookParser#parseCommand()` to parse `delete 1` into command word `delete` and command argument ``` 1```.
-
-Step 2. `DeleteCommandParser` is initialized based on the parse results and `DeleteCommandParser#parse()` is called
-to identify the indices present in ``` 1```. `DeleteCommandParser#parse()` then initializes a
-`DeleteCommand` with the indices present as arguments.
-
-Step 3. `DeleteCommand#execute()` is then called, which will check the validity of the given indices. 
-If there is no exception thrown, `Model#deletePerson()` is called to delete the applicants corresponding to the 
-given indices.
-
-Step 4. `CommandResult` is initialized with `String` containing the details of the deleted applicant.
-This `CommandResult` is then returned.
-
-The following sequence diagram shows how the delete operation works.
-![images](images/DeleteSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source:
- **Note:** The lifeline for `DeleteCommandParser`
-should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
 ### Show feature
 
@@ -571,6 +558,18 @@ The following sequence diagram shows how the unmark operation works.
  **Note:** The lifeline for `MarkingCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
+#### Design considerations:
+
+**Aspect: User command to use in marking and unmarking applicants:**
+
+* **Alternative 1 (current choice):** Separate command for `mark` and `unmark`
+  * Pros: Command has single responsibility of marking or unmarking applicants.
+  * Pros: Easy and intuitive to use for user, does not take any additional input to differentiate the two commands from each other.
+  * Cons: Certain amount of repeat in code for both mark and unmark commands.
+
+* **Alternative 2:** Implement both `mark` and `unmark` as one singular command
+  * Pros: Reduces code duplication in implementation.
+  * Cons: Breaks the single responsibility principle as marking does a relatively different task from unmarking.
 
 ### Delete marked feature
 
@@ -597,6 +596,20 @@ and returned.
 
 The following sequence diagram shows how the delete marked operation works.
 ![images](images/DeleteMarkedCommandSequenceDiagram.png)
+
+#### Design considerations:
+
+**Aspect: User command to use in deleting marked applicants:**
+
+* **Alternative 1 (current choice):** Separate command for deleting marked applicants
+  * Pros: Command has single responsibility of deleting marked applicants based.
+  * Pros: Easy to use for user, does not take any additional input.
+  * Cons: User might be confused between `delete` command for general deletion and `delete_marked` command.
+
+* **Alternative 2:** Part of `delete` command functionality
+  * Pros: Intuitive for user to use `delete` command for all deletion purposes
+  * Cons: Breaks the single responsibility principle as deleting marked applicants does not delete applicants at specific indices
+    like the rest of the `delete` command, but rather a certain group of applicants at once.
 
 ### Datetime for interview 
 
