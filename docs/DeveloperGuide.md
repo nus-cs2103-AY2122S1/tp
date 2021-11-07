@@ -201,13 +201,15 @@ The telegram handle field is facilitated by the `Telegram` class. It is stored i
 
 The `Telegram` class implements the following operation:
 
-* `Telegram#isValidTelegram(String test)` — Returns true if a given string is a valid telegram handle.
+* `Telegram#isValidTelegram(String test)` — Returns true if a given string is a valid telegram handle with the help of a validation regex.
 
 Regex used in verifying the validity of telegram handle:
 
 `public static final String VALIDATION_REGEX = "\\w{5,32}";`
 * `\w` — **Word**. Any word character (alphanumeric & underscore)
 * `{5,32}` — **Quantifier**. Match between 5 and 32 of the preceding token.
+
+#### Design considerations
 
 The `Telegram` class is first integrated into the `Person` class and added as a new field to the `Person` class. This is illustrated by the class diagram below, where every field, including the `Telegram` field, is compulsory except the `Tag` field.
 
@@ -253,13 +255,16 @@ add n/John Doe te/@johndoe123 p/invalidPhoneNumber
 
 For the case above, the respective constructors will carry out validation on the given input.
 
+#### Design considerations
+
 In order to allow for optional fields, the `AddCommandParser` also has to be modified. In particular, the following methods are modified
-* `AddCommandParser#arePrefixesPresent(argumentMultimap, prefixes)`
-* `AddCommandParser#parse(args)`
+* `AddCommandParser#arePrefixesPresent(argumentMultimap, prefixes)` — Returns true if none of the prefixes contains empty `Optional` values in the given `ArgumentMultimap`.
+* `AddCommandParser#parse(args)` — Parses the given `String` of arguments in the context of the `AddCommand` and returns an `AddCommand` object for execution. Throws `ParseException` if the user input does not conform the expected format
 
 For the `arePrefixesPresent` method, the prefixes provided were changed to only include the following mandatory fields:
 * `PREFIX_NAME`
 * `PREFIX_TELEGRAM`
+* `PREFIX_GITHUB`
 
 `AddCommandParser#arePrefixesPresent(argumentMultimap, prefixes)` uses the static parsing methods in `ParserUtil` to parse the different fields in `Person`. The individual fields are first initialised with an empty string, which is now a valid input. The method then calls the `arePrefixesPresent` method to check if the provided prefix is present. If present, the method will then call the respective static parsing methods in `ParserUtil`.
 
@@ -271,7 +276,7 @@ The GitHub field is facilitated by the `Github` class. It is stored internally a
 
 The `Github` class implements the following operation:
 
-* `Github#isValidGithub(String test)` — Returns true if a given string is a valid GitHub username.
+* `Github#isValidGithub(String test)` — Returns true if a given string is a valid GitHub username with the help of a validation regex.
 
 Regex used in verifying the validity of GitHub username:
 
@@ -284,6 +289,8 @@ Regex used in verifying the validity of GitHub username:
 * `|` — **Alternation**. Acts like a boolean OR. Matches the expression before or after the sign.
 * `-` — **Character**. Matches a "-" character (char code 45).
 * `{0,38}` — **Quantifier**. Match between 0 and 38 of the preceding token.
+
+#### Design considerations
 
 The `Github` class is first integrated into the `Person` class and added as a new field to the `Person` class. This is illustrated by the class diagram below, where only the `Name`, `Telegram` and `Github` fields are compulsory.
 
