@@ -21,7 +21,7 @@ Class StudentCard
 Class FullStudentCard
 Class MinimalLessonCard
 Class LessonCard
-Class DetailLevel
+Enum DetailLevel <<Enumeration>>
 }
 
 package Model <<Rectangle>> {
