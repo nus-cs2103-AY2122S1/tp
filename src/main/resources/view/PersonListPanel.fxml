@@ -14,8 +14,8 @@
             <ColumnConstraints hgrow="SOMETIMES" prefWidth="50.0" />
             <ColumnConstraints hgrow="ALWAYS" prefWidth="100.0" />
             <ColumnConstraints hgrow="NEVER" prefWidth="100.0" />
+            <ColumnConstraints hgrow="ALWAYS" prefWidth="90.0" />
             <ColumnConstraints hgrow="NEVER" prefWidth="180.0" />
-            <ColumnConstraints hgrow="NEVER" prefWidth="90.0" />
             <ColumnConstraints hgrow="NEVER" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" prefWidth="55.0" />
             <ColumnConstraints hgrow="NEVER" prefWidth="100.0" />
@@ -28,8 +28,9 @@
             <Label alignment="CENTER" contentDisplay="CENTER" styleClass="cell_big_label_centered" text="Index" wrapText="true" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
             <Label alignment="CENTER" contentDisplay="CENTER" styleClass="cell_big_label_centered" text="Name" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
             <Label alignment="CENTER" contentDisplay="CENTER" styleClass="cell_big_label_centered" text="Phone" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <Label alignment="CENTER" contentDisplay="CENTER" styleClass="cell_big_label_centered" text="Absent Period" wrapText="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <Label alignment="CENTER" contentDisplay="CENTER" styleClass="cell_big_label_centered" text="Email" wrapText="true" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Label alignment="CENTER" contentDisplay="CENTER" styleClass="cell_big_label_centered" text="Email" wrapText="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Label alignment="CENTER" contentDisplay="CENTER" styleClass="cell_big_label_centered" text="Absent Period" wrapText="true" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+
             <Label alignment="CENTER" contentDisplay="CENTER" styleClass="cell_big_label_centered" text="Roles" wrapText="true" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
             <Label alignment="CENTER" contentDisplay="CENTER" styleClass="cell_big_label_centered" text="Status" wrapText="true" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
             <Label alignment="CENTER" contentDisplay="CENTER" styleClass="cell_big_label_centered" text="Salary" wrapText="true" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />

@@ -316,6 +316,6 @@ public class Period {
      * Returns string representation of this period in a more readable format.
      */
     public String toDisplayString() {
-        return ("[" + startDate + "] ~ [" + endDate + "]" );
+        return ("[" + startDate + "] ~ [" + endDate + "]");
     }
 }

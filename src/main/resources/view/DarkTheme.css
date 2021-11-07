@@ -107,7 +107,14 @@
     -fx-background-color: derive(#1d1d1d, 20%);
 }
 
-.list-cell {
+#staffWorkingList .list-cell {
+    -fx-label-padding: 0 0 0 0;
+    -fx-graphic-text-gap : 0;
+    -fx-padding: 0 0 0 0;
+    -fx-text-fill: white;
+}
+
+#personListView .list-cell {
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;

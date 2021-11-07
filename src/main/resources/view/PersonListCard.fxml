@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<HBox id="dayPanel" fx:id="cardPane" prefHeight="105.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<HBox id="dayPanel" fx:id="cardPane" prefHeight="105.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
     <VBox alignment="CENTER_LEFT" minHeight="6.0" prefHeight="105.0" prefWidth="841.0" HBox.hgrow="ALWAYS">
         <padding>
             <Insets bottom="5" left="5" right="5" top="5" />
@@ -14,8 +14,8 @@
                 <ColumnConstraints hgrow="SOMETIMES" prefWidth="50.0" />
                 <ColumnConstraints hgrow="ALWAYS" prefWidth="100.0" />
                 <ColumnConstraints hgrow="NEVER" prefWidth="100.0" />
+                <ColumnConstraints hgrow="ALWAYS" prefWidth="90.0" />
                 <ColumnConstraints hgrow="NEVER" prefWidth="180.0" />
-                <ColumnConstraints hgrow="NEVER" prefWidth="90.0" />
                 <ColumnConstraints hgrow="NEVER" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" prefWidth="55.0" />
                 <ColumnConstraints hgrow="NEVER" prefWidth="100.0" />
@@ -28,8 +28,9 @@
                 <Label fx:id="index" alignment="CENTER" contentDisplay="CENTER" styleClass="cell_big_label_centered" text="Index" wrapText="true" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                 <Label fx:id="name" alignment="CENTER" contentDisplay="CENTER" styleClass="cell_big_label_centered" text="\$name" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                 <Label fx:id="phone" alignment="CENTER" contentDisplay="CENTER" styleClass="cell_small_label_centered" text="\$phone" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                <ListView fx:id="periodListView" GridPane.columnIndex="3"/>
-                <Label fx:id="email" alignment="CENTER" contentDisplay="CENTER" styleClass="cell_small_label_centered" text="\$email" wrapText="true" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                <Label fx:id="email" alignment="CENTER" contentDisplay="CENTER" styleClass="cell_small_label_centered" text="\$email" wrapText="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                <ListView fx:id="periodListView" GridPane.columnIndex="4"/>
+
                 <FlowPane fx:id="roles" alignment="CENTER" columnHalignment="CENTER" orientation="VERTICAL" prefHeight="94.0" prefWidth="64.0" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                 <Label fx:id="status" alignment="CENTER" contentDisplay="CENTER" styleClass="cell_small_label_centered" text="\$status" wrapText="true" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                 <Label fx:id="salary" alignment="CENTER" contentDisplay="CENTER" styleClass="cell_small_label_centered" text="\$salary" wrapText="true" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />

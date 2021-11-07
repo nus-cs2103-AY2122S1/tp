@@ -38,7 +38,7 @@ public class SlotCard extends UiPart<Region> {
     private ObservableList<Person> stafflist;
 
     @FXML
-    private VBox slotPane;
+    private VBox slotCard;
     @FXML
     private Label shiftName;
     @FXML

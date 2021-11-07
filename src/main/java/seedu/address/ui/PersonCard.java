@@ -3,7 +3,6 @@ package seedu.address.ui;
 import java.util.Comparator;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -13,7 +12,6 @@ import javafx.scene.layout.Region;
 import seedu.address.model.person.Period;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Role;
-import seedu.address.model.tag.Tag;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -75,7 +73,7 @@ public class PersonCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(Role::toString))
                 .forEach(role -> roles.getChildren().add(new Label(role.toString())));
 
-        String[] tagArray =staff.getTags().stream().map(tag -> tag.tagName).toArray(String[]::new);
+        String[] tagArray = staff.getTags().stream().map(tag -> tag.tagName).toArray(String[]::new);
         tagsListView.setItems(FXCollections.observableArrayList(tagArray));
     }
 
