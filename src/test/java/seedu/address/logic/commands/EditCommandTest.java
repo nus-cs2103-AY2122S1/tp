@@ -321,40 +321,6 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_allPersonAndTaskFieldsSpecifiedUnfilteredList_success() {
-        Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder().build();
-        model.displayPersonTaskList(personToEdit);
-
-        List<Task> tasks = new ArrayList<>(personToEdit.getTasks());
-        Task newTask = new Task(new TaskName("walk"), new TaskDate("2022-12-12"),
-                new TaskTime("23:59"), new Venue("Park"));
-        editTaskDescriptor.setTaskName(new TaskName("walk"));
-        editTaskDescriptor.setTaskDate(new TaskDate("2022-12-12"));
-        editTaskDescriptor.setTaskTime(new TaskTime("23:59"));
-        editTaskDescriptor.setTaskVenue(new Venue("Park"));
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
-        tasks.set(0, newTask);
-        editedPerson = new Person(
-                editedPerson.getName(), editedPerson.getPhone(), editedPerson.getEmail(),
-                editedPerson.getAddress(), editedPerson.getTags(), tasks, editedPerson.getDescription(),
-                editedPerson.isImportant()
-        );
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor, INDEX_FIRST_TASK, editTaskDescriptor);
-
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson) + "\n"
-                + String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, newTask);
-
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(
-                expectedModel.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()), editedPerson);
-        expectedModel.displayPersonTaskList(
-                expectedModel.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()));
-
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
     public void equals() {
         EditCommand standardCommand = new EditCommand(INDEX_FIRST_PERSON, DESC_AMY);
         EditCommand editTaskCommandOne =
