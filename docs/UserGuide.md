@@ -147,8 +147,8 @@ An example of a command in TAB:
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-* Items in square brackets are optional.<br>
-  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+* Items in square brackets are optional. They can be left out, or left empty (e.g. `t/`)<br>
+  e.g. `n/NAME [t/TAG]` : `n/John Doe t/` is equivalent to `n/John Doe`.
 
 * Items in curly brackets separated by the pipe character `|` indicates that you must select exactly one parameter from the list of choices.<br>
   e.g. `cond/{all | any | none}` can be used as `cond/all` or `cond/any` or `cond/none`.
@@ -1202,7 +1202,6 @@ Mainstream OS | Windows, Linux, Unix, OS-X.
 Parameter | User input required to specify the data to be saved into the application.
 Recurring lesson | A lesson that will occur more than once in patterned intervals.
 UI | User Interface - the means by which the user and the app interact.
-UTC+8 | The UTC offset used by Singapore Standard Time (SST), 8 hours ahead of UTC. Historically also referred to as GMT+8. UTC, or Coordinated Universal Time, is the primary time standard by which the world regulates clocks and time.
 UX | User Experience - The experience a user has when using the app.
 
 <br />
