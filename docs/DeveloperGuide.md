@@ -1007,4 +1007,3 @@ testers are expected to do more *exploratory* testing.
    3. Restart Managera.
 
    4. Managera will start with no events and Participants.
-    
