@@ -211,6 +211,7 @@ public class ModelManager implements Model {
         logger.info("ModelManager:setFriend - " + editedFriend);
         friendsList.setFriend(target, editedFriend);
     }
+    //=========== Filtered Friend List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Friend}s filtered by the provided predicate and sorted

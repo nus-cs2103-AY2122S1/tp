@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -18,7 +17,6 @@ import seedu.address.model.gamefriendlink.GameFriendLink;
 public class FriendMainCardTable extends UiPart<Region> {
 
     private static final String FXML = "FriendMainCardTable.fxml";
-    private ObservableList<Friend> friendList;
 
     @FXML
     private TableView<GameFriendLink> tableView;
