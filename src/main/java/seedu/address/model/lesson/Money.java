@@ -62,6 +62,8 @@ public class Money {
     }
 
     /**
+     * Returns true if a given string is a valid format for monetary fields.
+     *
      * @param test The string to check for.
      * @return Returns true if a given string is a valid format for monetary fields.
      */
@@ -71,7 +73,8 @@ public class Money {
 
     /**
      * Get the value in Money object such that it can be used for calculations in {@code FeesCalculator}.
-     * @return Value in Big Decimal
+     *
+     * @return Value in Big Decimal.
      */
     public BigDecimal getMonetaryValue() {
         return valueInBigDec;

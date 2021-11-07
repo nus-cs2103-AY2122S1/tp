@@ -210,6 +210,8 @@ public class ModelManager implements Model {
     //=========== Last Updated Accessors =============================================================
 
     /**
+     * Returns an immutable last updated date of the address book.
+     * 
      * @return An immutable {@code LastUpdatedDate}.
      */
     @Override

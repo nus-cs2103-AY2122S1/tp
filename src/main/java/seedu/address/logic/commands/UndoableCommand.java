@@ -34,6 +34,7 @@ public abstract class UndoableCommand extends Command {
 
     /**
      * Gets the Index of the person to undo in the UniquePersonsList.
+     *
      * @param personToUndo Person the undo command should execute on.
      * @return The index of the person on the UniquePersonsList.
      */

@@ -41,6 +41,8 @@ public class LastUpdatedDate {
     }
 
     /**
+     * Returns immutable LastUpdatedDate.
+     *
      * @return An immutable LastUpdatedDate.
      */
     public LastUpdatedDate getLastUpdatedDate() {

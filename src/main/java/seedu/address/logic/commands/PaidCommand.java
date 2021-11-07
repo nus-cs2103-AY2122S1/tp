@@ -128,6 +128,10 @@ public class PaidCommand extends UndoableCommand {
     /**
      * Creates and returns a {@code Lesson} with the details of {@code lessonToEdit}
      * paid with {@code payment}.
+     *
+     * @param lessonToEdit Lesson to be updated.
+     * @param payment Amount to be paid.
+     * @return Updated lesson with all the correct amount for outstanding fees.
      */
     private static Lesson createEditedLesson(Lesson lessonToEdit, Money payment) throws CommandException {
         assert lessonToEdit != null;
