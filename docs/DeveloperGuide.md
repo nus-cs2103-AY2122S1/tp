@@ -51,8 +51,9 @@ This product will make recruiters’ lives easier through categorisation and fil
   * [Glossary](#glossary)
 - [**Appendix: Instructions for manual testing**](#appendix-instructions-for-manual-testing--)
   * [Launch and shutdown](#launch-and-shutdown)
-  * [Adding an applicant](#adding-an-applicant)
-  * [Deleting an applicant](#deleting-an-applicant)
+  * [Adding a person](#adding-a-person)
+  * [Editing an applicant](#editing-an-applicant)
+  * [Deleting a person](#deleting-a-person)
   * [Marking an applicant](#marking-an-applicant)
   * [Unmarking an applicant](#unmarking-an-applicant)
   * [Deleting marked applicants](#deleting-marked-applicants)
@@ -1052,8 +1053,6 @@ testers are expected to do more *exploratory* testing.
     1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 ### Adding an applicant 
 
 1. Adding an applicant while all applicants are being shown 
@@ -1064,18 +1063,42 @@ testers are expected to do more *exploratory* testing.
        Expected: A new applicant named John Doe with all of the above details is added to the list. Details of the added contact shown in 
        result display. 
        
-    1. Test case: `add Bob p/98765432 e/bob@gmail.com r/Lawyer et/Full time s/7000 l/Bachelors y/4`
-       Expected: No new applicant is added. Error details shown in the result display stating that Bob shares the 
-       same phone number as John Doe. 
+    1. Test case: Ensure that you have completed the first test case under this section, then input the command `add Bob p/98765432 e/bob@gmail.com r/Lawyer et/Full time s/7000 l/Bachelors y/4`<br>
+       Expected: No new applicant is added. Error details shown in the result display stating that Bob shares the same phone number as John Doe. 
     
-    1. Test case: `add Jack Smith p/97865321 e/JohnDoe@gmail.com r/Doctor et/Full time s/9000 l/Bachelors y/4`
-       Expected: No new applicant is added. Error details shown in the result display stating that Bob shares the 
-       same email as John Doe.
+    1. Test case: Ensure that you have completed the first test case under this section, then input the command `add Jack Smith p/97865321 e/JohnDoe@gmail.com r/Doctor et/Full time s/9000 l/Bachelors y/4`<br>
+       Expected: No new applicant is added. Error details shown in the result display stating that Bob shares the same email as John Doe.
        
     1. Other incorrect add commands to try: `add`, `add John`, `add n/John p/98765432 e/JohnDoe@gmail.com r/Teacher`
     (where incomplete details are given for the applicant being added).
     Expected: Error messages displaying the cause of error is shown in the result display.  
 
+### Editing an applicant
+
+1. Editing an applicant while all applicants are being shown
+
+    1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list. 
+       There is no applicant with the phone number 87654321 and email alexander@gmail.com
+
+    1. Test case: `edit 1 n/Alexander p/87654321 e/alexander@gmail.com`<br>
+       Expected: First applicant is edited such that his new name is Alexander with the phone number 87654321 and email alexander@gmail.com.
+       Details of the edited applicant shown in the result display.
+
+    1. Test case: Ensure that you have completed the first test case under this section, then input the command `edit 2 n/Alice p/87654321`<br>
+       Expected: No applicants are edited. Error details shown in the result display stating that the new edited applicant Alice shares either
+       the same phone number or same email as Alexander.
+
+    1. Test case: Ensure that you have completed the first test case under this section, then input the command `edit 2 n/Alice e/alexander@gmail.com`<br>
+       Expected: No applicants are edited. Error details shown in the result display stating that the new edited applicant Alice shares either
+       the same phone number or same email as Alexander.
+
+    1. Test case: `edit 2 n/&a#lly`<br>
+       Expected: No applicants are edited. Error details shown in the result display stating that names should only contain alphanumeric characters and spaces.
+
+    1. Other incorrect edit commands to try: `edit`, `edit Alexander`, `edit 1`, `edit 1 n/`
+       (where incomplete or invalid details are given for the applicant being edited)<br>
+       Expected: Error messages displaying the cause of error is shown in the result display.
+     
 ### Deleting an applicant
 
 1. Deleting an applicant while all applicants are being shown
@@ -1086,13 +1109,24 @@ testers are expected to do more *exploratory* testing.
        Expected: First applicant is deleted from the list. Details of the deleted applicant shown in the result display. 
 
     1. Test case: `delete 0`<br>
-       Expected: No applicant is deleted. Error details shown in the result display.
+       Expected: No applicant is deleted. Error details shown in the result display where indexes should be non-zero unsigned integers.
+       
+    1. Test case: `delete 1 1`<br>
+       Expected: No applicant is deleted. Error details shown in the result display where there should not be any duplicate indexes.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+    1. Test case: `delete 1 2`<br>
+       Expected: First and second applicants are deleted. Details of the deleted contact shown in the result display.
+      
+    1. Other incorrect delete commands to try: `delete`, `delete x`(where x is larger than the list size), `delete y`(where y is a negative integer), `delete Alexander`<br>
+       Expected: Similar to previous test cases.
 
-2. _{ more test cases …​ }_
+1. Deleting a person from a filtered list of applicants being shown
 
+    1. Prerequisites: Find a valid group of applicants using the `find` command with appropriate inputs. Multiple applicants in the filtered list.
+
+    1. Test case: `delete 1 2` <br>
+       Expected: First and second applicants of the shown filtered list are deleted. Details of the deleted applicant shown in the result display.
+       
 ### Marking an applicant
 
 1. Marking applicants while all applicants are being shown
@@ -1181,11 +1215,19 @@ testers are expected to do more *exploratory* testing.
 
     2. Test case: `delete_marked`<br>
        Expected: All the applicants with `Done` are deleted from the list, not just those found in the filtered list. Details of the deleted applicants shown in the result display.
-
+  
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Prerequisites: There is already an existing saved `addressbook.json` file located in the data file of your home RecruitIn directory.
+  
+    1. Test case: Ensure RecruitIn is closed. Corrupt the `addressbook.json` file by typing random letters into it before running RecruitIn.<br>
+       Expected: RecruitIn will run normally, but with an empty list of applicants.
 
-1. _{ more test cases …​ }_
+    1. Test case: Ensure RecruitIn is closed. Delete the `addressbook.json` file before running RecruitIn.<br>
+       Expected: RecruitIn will run normally, but with the sample list applicants displayed.
+
+    1. Other incorrect test cases to try: The above two test cases can be tried without closing RecruitIn beforehand.<br>
+      Expected: RecruitIn will run normally without any side-effects.
+
