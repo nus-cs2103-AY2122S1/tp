@@ -105,7 +105,7 @@ Some example commands you can try:
 
 <div markdown="block" class="alert alert-info">
 
-:bulb: You can press the up and down arrow keys in the command box to retrieve your previous commands. This can save 
+:bulb: You can press the up and down arrow keys in the command box to retrieve your 10 previous commands. This can save 
 you a lot of time!
 
 </div>
@@ -218,7 +218,7 @@ your contact list:
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Name limitations:**<br>
-Names should be no longer than 30 characters.
+Names must be unique, and should be no longer than 30 characters.
 
 </div>
 
@@ -236,15 +236,22 @@ Names should be no longer than 30 characters.
 
 :scroll: Notes:
 
+* At least one of the optional fields must be provided.
 * Edits the contact at the specified `INDEX`.
   * The `INDEX` refers to the position of the contact in the displayed contact list as indicated by the number next to 
-    their name.
+  their name.
   * The `INDEX` must be a positive integer (1, 2, 3,...).
-* At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the contact will be removed i.e. adding of tags is not cumulative.
   * To add tags without removing existing tags, refer to the Tag command in the [next section](#tagging-a-contact-tag).
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Name limitations:**<br>
+Names must be unique, and should be no longer than 30 characters.
+
+</div>
+  
 <div markdown="block" class="alert alert-info">
 
 :bulb: You can remove all tags from a contact by typing `edit INDEX t/`.
@@ -303,9 +310,9 @@ Tags should be no longer than 15 characters.
 
 :scroll: Notes:
 
+* At least one of the optional fields must be provided.
 * The search is case-insensitive. e.g. `find e/hans@gmail.com` will match `Hans@gmail.com`.
 * The order of the keywords does not matter. e.g. `find a/tampines 111` will match `Blk 111 Tampines Street 11, #02-345`.
-* At least one of the fields must be present.
 * Contacts matching all keywords will be returned (i.e. AND search). 
   * e.g. `find n/Hans Bo` will return only `Hans Bo` and `Hans Bo the Second`. It will not return `Hans Gruber` or
     `Bo Yang`.
@@ -397,17 +404,17 @@ task list:
 
 :orange_book: If you want to modify the details of a specific task, you can use the _Edit_ command.
 
-:camera: The above screenshot shows how the _Edit_ command can be used to edit the date/time and assignee of a task.
+:camera: The above screenshot shows how the _Edit_ command can be used to edit the Date, Time and assignee of a task.
 
 :page_with_curl: Format: `edit INDEX [d/DESCRIPTION] [dt/DATE] [dt/TIME] [dt/DATE, TIME] [p/PERSON_INDEX]... [t/TAG]...`
 
 :scroll: Notes:
 
+* At least one of the optional fields must be provided.
 * Edits the task at the specified `INDEX`.
   * The `INDEX` refers to the position of the task in the displayed task list as indicated by the number next to 
-    its description.
+  its description.
   * The `INDEX` must be a positive integer (1, 2, 3,...).
-* At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the contact will be removed i.e. adding of tags is not cumulative.
   * To add tags without removing existing tags, refer to the Tag command in the [next section](#tagging-a-task-tag).
@@ -526,9 +533,9 @@ you can use the _Find_ command.
 
 :scroll: Notes:
 
+* At least one of the optional fields must be provided.
 * The search is case-insensitive. e.g `find t/HOMEWORK` will match the `homework` tag.
 * The order of the keywords does not matter. e.g. `find d/lectures ST` will match `ST Lectures`.
-* At least one of the fields must be present.
 * `COMPLETION_STATUS` must be either `true` (for completed tasks) or `false` (for incomplete tasks). 
 * Tasks matching all keywords will be returned (i.e. AND search). 
   * e.g. `find d/Math Quiz` will return only `Math Quiz` and `Math Quiz 8`. 
@@ -604,7 +611,7 @@ This command is **irreversible** and your task list will be **permanently** dele
 <div markdown="block" class="alert alert-info">
 
 <a name="date-time-info"></a>
-**:information_source: Notes about specifying date and time:**
+**:information_source: Notes about specifying Date and Time:**
 A task can optionally have a Date, or both a Date and a Time.
 
 `add [dt/DATE] [dt/TIME] [dt/DATE, TIME]`
@@ -619,7 +626,7 @@ A task can optionally have a Date, or both a Date and a Time.
 * When only Time is specified in the `edit` command, a task will only have its Time changed to the specified Time.
 * When both Date and Time are specified in the `edit` command, a task will have both of its Date and Time changed to the specified Date and Time.
 
-**:warning: Multiple date and time parameters:**<br>
+**:warning: Multiple Date and Time parameters:**<br>
 If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
 e.g. if you specify `dt/12/02/2021 dt/1900`, only `dt/1900` will be taken.
 
