@@ -66,6 +66,9 @@ Given below are my contributions to the project.
         * Added implementation details of the `view` feature (Pull requests
         [\#53](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/53),
       [\#131](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/131))
+        * Added manual testing section for `stat` and `view` feature (Pull requests
+        [\#340](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/340)
+      )
 
 * **Community**:
   * Reported bugs and suggestions for other teams in the class([link](https://github.com/benluiwj/ped/issues))
