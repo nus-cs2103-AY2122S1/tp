@@ -500,7 +500,7 @@ Examples :
 Redoes the last change undone on the list of contacts stored.
 
 Usage scenario:
-* You want to delete all contacts after the seventh contact. You can execute `delete 8` once, and then repeatedly execute `redo` until there are no more contacts after the seventh one.
+* You edited a contact's rating and used `undo` to revert your changes. However, you decided that you want to edit the contact's rating again.
 
 Format: `redo`
 
@@ -525,7 +525,7 @@ Usage scenario:
 
 Format: `export`
 * Exports the specified contact from the contact list.
-* The text file will be written with the path `data/export.txt`.
+* The text file will be written with the path `[JAR file location]/data/export.txt`.
 
 -------------
 Format: `export INDEX`

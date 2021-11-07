@@ -43,7 +43,7 @@ Given below are my contributions to the project.
     * Modified all commands that have no parameters (e.g. list, undo, redo, summary, view) to reject all additional inputs.
     * Modified Parser to not accept integers that have leading zeros (e.g. 000001 is not accepted).
     * Modified Summary class to update only when needed.
-    * Modified Command Box to display results when clicking on the Contacts pane.*
+    * Modified Command Box to display results when clicking on the Contacts pane.
     * Modified Storage file locations, all in one file (data).
     * Tweaked error messages to be more readable.
 
@@ -55,8 +55,8 @@ Given below are my contributions to the project.
         * Added screenshots throughout the User Guide [\#183](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/183).
     * Developer Guide:
         * Added implementation details of the `sum` feature: [\#68](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/68).
-        * Added implementation details of the `review` feature. [\#68](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/68).
-        * Added implementation details of the `delete` (by name) feature.
+        * Added implementation details of the `review` feature: [\#68](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/68).
+        * Added implementation details of the `delete` (by name) feature: [\#190](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/190)
 
 
 * **Community**:
