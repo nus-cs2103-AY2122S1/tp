@@ -17,11 +17,13 @@ Given below are my contributions to the project.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=t17&sort=groupTitle&sortWithin=title&since=2021-09-17&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=kawaiigabrielneko&tabRepo=AY2122S1-CS2103T-T17-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
 
-* **Project management**:
+* **Mentoring contributions**:
+  * Fixed an unhandled exception bug in Revenue ([#187](https://github.com/AY2122S1-CS2103T-T17-4/tp/pull/187))
+  * Found a floating point error in Revenue, and taught teammate why the bug occured
+    ([#188](https://github.com/AY2122S1-CS2103T-T17-4/tp/issues/188))
 
 * **Enhancements to existing features**:
   * Tag: Limit to 20 characters so as to prevent InsuancePal window from cutting off tag
-  * Revenue: Fixed a bug
 
 * **Documentation**:
   * Added Insurance feature to UG and DG
