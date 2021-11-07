@@ -53,7 +53,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane studentListPanelPlaceholder;
+    private StackPane listPanelPlaceholder;
 
     @FXML
     private ScrollPane terminalScrollPane;
@@ -128,7 +128,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         studentListPanel = new StudentListPanel(logic.getFilteredStudentList());
-        studentListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
+        listPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
 
         listName.setText(STUDENTS_LIST_NAME);
 
@@ -139,18 +139,21 @@ public class MainWindow extends UiPart<Stage> {
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
+    /**
+     * Update the data lists.
+     */
     void updateInnerParts() {
         if (logic.getDisplayType().equals(STUDENTS)) {
             studentListPanel = new StudentListPanel(logic.getFilteredStudentList());
-            studentListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
+            listPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
             listName.setText(STUDENTS_LIST_NAME);
         } else if (logic.getDisplayType().equals(TASKS)) {
             taskListPanel = new TaskListPanel(logic.getFilteredTaskList());
-            studentListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
+            listPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
             listName.setText(TASKS_LIST_NAME);
         } else if (logic.getDisplayType().equals(GROUPS)) {
             groupListPanel = new GroupListPanel(logic.getFilteredGroupList());
-            studentListPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
+            listPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
             listName.setText(GROUPS_LIST_NAME);
         }
     }
@@ -212,9 +215,7 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
-            }
-
-            if (commandResult.isExit()) {
+            } else if (commandResult.isExit()) {
                 handleExit();
             }
 
