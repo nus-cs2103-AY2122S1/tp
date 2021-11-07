@@ -62,11 +62,11 @@ Managing your leads has never been easier.
 When reading our User Guide, here are some important information to take note of. 
 
 ### 1.1.1 Icons and its meaning
-| **Icon** | **Meaning of icons** |
+**Icon** | **Meaning of icons**
 --- | ---
-| <img src="images/info_icon.png" width="50"/> | Notes are specific conditions or behaviours of a feature. |
-| <img src="images/tip_icon.png" width="50"/> | tips are suggestions that can help LeadsForce run faster. |
-| <img src="images/warn_icon.png" width="50"/> | warnings are important information to take note of when using LeadsForce. When these warnings are not followed, this can result in LeadsForce crashing or have corrupted data files. |
+<img src="images/info_icon.png" width="50"/> | Notes are specific conditions or behaviours of a feature.
+<img src="images/tip_icon.png" width="50"/> | tips are suggestions that can help LeadsForce run faster.
+<img src="images/warn_icon.png" width="50"/> | warnings are important information to take note of when using LeadsForce. When these warnings are not followed, this can result in LeadsForce crashing or have corrupted data files.
  
 ## 2. Quick start
 
@@ -100,7 +100,7 @@ When reading our User Guide, here are some important information to take note of
 This section details the client information that financial advisors can keep track of with LeadsForce. Every client that is registered in LeadsForce have the following attributes that has the corresponding type and attribute tag. The attribute tags specified here will be used in the commands of several [features](#4-features). 
 
 Client Attribute | Type of Attribute | Attribute tag
------------------|-----------------|-----------------
+-----------------|-----------------|:-----------------:
 Client ID (**Unique**) | Integer (assigned on creation of new contact) | i/
 Name (**Compulsory**) | String | n/
 Email (**Compulsory**)| String (email address)| e/
@@ -139,7 +139,7 @@ where
 * *location* is a non-empty string
 
 | Example | `m/25-12-2021 (00:00~23:59), Santa's Workshop`|
---- | ---
+| :---: | --- |
 | <img src="images/info_icon.png" width="50"/> | • `Next Meeting` will automatically be updated to null when the current time passes the date and end time of the meeting and this happens whenever the application is booted up. At the same time, the `Last Met` attribute will be updated to take on the current date. |
 
 ### 3.3 Last Met Attribute 
@@ -147,7 +147,7 @@ where
 The `Last Met` attribute refers to the last date the user have met the client. 
 
 | Example | `l/25-10-2021`|
---- | ---
+:---: | ---
 | <img src="images/info_icon.png" width="50"/> | • `Last Met` cannot take dates in the future, but any other past dates up to today's date is OK. |
 
 --------------------------------------------------------------------------------------------------------------------
@@ -222,8 +222,9 @@ This section details the various features available in a single address book in 
 ### 5.1 Create New Contact : `add`
 
 Adds a new client to the address book.
+
 | Format | `add n/{CLIENT_NAME} e/{EMAIL} <attribute>/{OTHER ATTRIBUTES}...`|
-| :-: | :-- |
+| :---: | --- |
 | **Example** | • `add n/Benedict Chua e/benchua@hotmail.com` <br> • `add n/Keith e/keithtan@ymail.com p/12345678 d/10000 r/4`|
 | <img src="images/info_icon.png" width="50"/> | • A client must have minimally the name and email tag filled during creation <br> • Any other tags are optional, except for Client ID as client ID cannot be given to the client.  <br> • Tags that can be added are as seen in the client information in the Client Info Section |
 
@@ -232,7 +233,7 @@ Adds a new client to the address book.
 View client's information in detail. 
 
 | Format | `view CLIENT_ID` |
-| :-: | :-- |
+| :---: | :--- |
 | **Example** | • `view 1` would be used to view client 1's information|
 
 **Expected Outcome:** <br> 
@@ -248,7 +249,7 @@ Update the attributes of existing users using the tag of the client’s attribut
 * Multiple clients can be edited at the same time with the provided attributes by indicating their ids separated by a space.
  
 | Format | `edit CLIENT_ID... <attribute>/{CHANGED VALUE OF ATTRIBUTE}...`|
-| :-: | :-- |
+| :---: | :--- |
 | **Example** | • `edit 3 p/12345678 r/5` command changes client 3's contact number to “12345678” and the risk appetite to 5. <br> • `edit 15 13 r/3` command changes the risk appetite of client 13 & 15 to “3”. <br> • `edit 3 4 5 m/21-09-2021 (09:00~10:00), McDonald's` sets a meeting for clients 3, 4 and 5 to be on 21st September 2021 from 9am to 10 am at McDonald's |
 | <img src="images/info_icon.png" width="50"/> | • Client ID cannot be changed. |
 | <img src="images/tip_icon.png" width="50"/> | • multiple clients and their attributes can be updated with one `edit` command! For instance, if you're planning to organise a meeting with several clients, you could simply use this feature to do so. |
@@ -258,7 +259,7 @@ Update the attributes of existing users using the tag of the client’s attribut
 Deletes an existing client from the address book using their client id.
 
 | Format | `delete CLIENT_ID...`|
-| :-: | :-- |
+| :---: | :--- |
 | **Example** | • `delete 7` will deletes client with client id 7 <br> • `delete 4 8 6` will deletes the clients whose client id is 4, 6 and 8 |
 | <img src="images/info_icon.png" width="50"/> | • Multiple clients can be deleted with one `delete` command |
 | <img src="images/warn_icon.png" width="50"/> | • This action is irreversible. Once you have deleted a client, the client and his/her corresponding information will be removed from the storage file. |
@@ -266,8 +267,9 @@ Deletes an existing client from the address book using their client id.
 ### 5.5 List all contacts : `list`
 
 Shows the full list of all clients in the address book.
+
 | Format | `list` |
-| --- | :--|
+| --- | :--- |
 | <img src="images/info_icon.png" width="50"/> | • As long as the first word in the command is `list`, the command will still work regardless of the additional inputs. <br> eg. the command `list asdknkjsaf` will still work | 
 
 ### 5.6 Sort Contacts : `sort`
@@ -275,7 +277,7 @@ Shows the full list of all clients in the address book.
 Sorts clients in order based on the inputted attribute. Clients can be sorted in ascending or descending order, and is based on the given `SORT DIRECTION`. 
 
 | Format | `sort <attribute>/{SORT DIRECTION}...` <br> <br> • `SORT DIRECTION` can take on the values `asc` or `dsc`, and will sort the clients based on the given attribute in an ascending and descending order respectively. |
-| :-: | :-- |
+| :---: | :--- |
 | **Examples** | • `sort r/ASC` will sort the list by ascending risk-appetite <br> • `sort i/dsc` will sort the list by descending client id |
 | <img src="images/info_icon.png" width="50"/> | • If multiple attributes are provided, then the clients will be sorted by the attributes sequentially. <br> e.g. `sort d/asc m/dsc`, this will sort the clients by disposable income in ascending order first, then for those clients whose disposable income are the same, they will be sorted by next meeting in descending order. <br> • Sorting by the attribute Tag (t/) is not supported. <br> • The tags are case-insensitive. (ASC and asc are both okay.) |
 
@@ -284,7 +286,7 @@ Sorts clients in order based on the inputted attribute. Clients can be sorted in
 Finds the meeting schedule on a specified date.
 
  | Format | `schedule [DATE]`|
-| :-: | :-- |
+| :---: | :--- |
 | **Examples** | • `schedule 22-09-2021` allows the user to view the schedule that the user has on the 22nd September 2021. <br>  • `schedule` displays all meetings|
 | <img src="images/info_icon.png" width="50"/> | • `DATE` has to be in the format of dd-MM-yyyy. <br> • if the `DATE` is not specified, all meetings will be displayed.|
  
@@ -293,7 +295,7 @@ Finds the meeting schedule on a specified date.
 Finds clients whose contacts match with the given keywords.
 
 | Format | `search KEYWORD... <attribute>/{ATTRIBUTE_KEYWORD}...` <br> <br>• `KEYWORD` will be used to match with all attribute of the client. <br> • `{ATTRIBUTE_KEYWORD}` refers to the keyword that is to be matched with the corresponding client attribute.|
-| :-: | :-- |
+| :---: | :--- |
 | **Examples** | • `search John` returns *john* and *John Doe* <br> • `search alex david` returns *Alex Yeoh*, *David Li* |
 | <img src="images/info_icon.png" width="50"/> | • If no `KEYWORD` is provided, search will be based on `<attribute>/{ATTRIBUTE_KEYWORD}` only. <br> • The search is case-insensitive. e.g `keith` will match `Keith`. <br> • The order of the keywords does not matter. e.g. `John Doe` will match `Doe John`.<br> • Clients matching at least one keyword will be returned). <br> e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`. <br> • If attribute keyword is provided, only clients whose attribute matches with the attribute keyword will be returned. <br> e.g. `Tom Tim e/@gmail.com` will return `Tom Lee e/Tom@gmail.com` and not `Tim Shum e/Tim@yahoo.com`. |
 
@@ -303,7 +305,7 @@ Finds clients whose contacts match with the given keywords.
 Filters the current list by the given keywords.
  
 | Format | `filter KEYWORD... <attribute>/{ATTRIBUTE_KEYWORD}...` <br> <br>• `KEYWORD` will be used to match with all attribute of the client. <br> • `{ATTRIBUTE_KEYWORD}` refers to the keyword that is to be matched with the corresponding client attribute.|
-| :-: | :-- |
+| :---: | :--- |
 | **Examples** | • `filter John` returns `john` and `John Doe` <br> • `filter alex david` returns `Alex Yeoh`, `David Li` |
 | <img src="images/info_icon.png" width="50"/> | • Works similar to `search` but `filter` works based on the current list shown as opposed to entire lists of contacts. <br> • If no `KEYWORD` is provided, then filter will be based on `<attribute>/{ATTRIBUTE_KEYWORD}` <br> • The filter is case-insensitive. e.g `keith` will match `Keith`. <br> • The order of the keywords does not matter. e.g. `John Doe` will match `Doe John`. <br> • Clients matching at least one keyword will be returned). <br> e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`. <br> • If attribute keyword is provided, only clients whose attribute matches with the attribute keyword will be returned. <br> e.g. `Tom Tim e/@gmail.com` will return `Tom Lee e/Tom@gmail.com` and not `Tim Shum e/Tim@yahoo.com`.|
 | <img src="images/tip_icon.png" width="50"/> | • Use the tags found under the command box to quickly filter clients by their tags. Simply click on a tag and press enter to filter clients with the specific tag. <br> eg. Pressing the `classmate` button allows you to filter clients with the `classmate` tag. <br> <img src=images/FilterTagCommand.png width="300">| 
@@ -313,7 +315,7 @@ Filters the current list by the given keywords.
 Clears all entries from the address book.
 
 | Format | `clear`|
-| :-: | :-- |
+| :---: | :--- |
 | <img src="images/info_icon.png" width="50"/> | • As long as the first word in the command is `clear`, the command will still work regardless of the additional inputs. <br> eg. the command `clear asdknkjsaf` will still work. <br> • This command clears all clients in the **current** address book <br> • After inputting `clear`, another prompt will appear requesting for confirmation to clear the address book. The input required for the confirmation will either be: <br>    • `yes`: to confirm and proceed with the clear command. <br>    •`no`: to cancel the clear command.|
 | <img src="images/warn_icon.png" width="50"/> | •  This action is irreversible. Once you have clear all client information from the current address book, this information will be removed from the storage file and will not be retrievable.|
 
@@ -322,7 +324,7 @@ Clears all entries from the address book.
 Opens a popup displaying the URL for our User Guide. Users can copy the URL to visit this User Guide.
 
 | Format | `help` |
-| --- | --- |
+| :---: | --- |
 | <img src="images/info_icon.png" width="50"/> | • As long as the first word in the command is `help`, the command will still work regardless of the additional inputs. <br> eg. the command `help asdknkjsaf` will still work |
 
 ### 5.12 Exiting the program : `exit`
@@ -330,7 +332,7 @@ Opens a popup displaying the URL for our User Guide. Users can copy the URL to v
 Exits LeadsForce. 
 
 | Format | `exit` |
-| --- | --- |
+| :---: | --- |
 | <img src="images/info_icon.png" width="50"/> | • As long as the first word in the command is `exit`, the command will still work regardless of the additional inputs. <br> eg. the command `exit asdknkjsaf` will still work | 
 
 ### 5.13 Saving the data
@@ -352,7 +354,7 @@ This section details the multiple address book feature in LeadsForce. Seperate y
 Create a new address book by the name provided and switches to it.
 
 | Format | `ab create ADDRESSBOOK_NAME` <br> <br> • `ADDRESSBOOK_NAME` refers to the name to be given to the new address book.|
-| :-: | :-- |
+| :---: | :--- |
 | **Example** | `ab create vip clients` will create a new address book named `vip clients` |
 | <img src="images/info_icon.png" width="50"/> | • The name of the addressbook cannot be the same as an existing address book.|
 
@@ -361,7 +363,7 @@ Create a new address book by the name provided and switches to it.
 Delete an address book that currently exists.
 
 | Format | `ab delete ADDRESSBOOK_NAME`<br> <br> • `ADDRESSBOOK_NAME` refers to the name of the address book to be deleted.|
-| :-: | :-- |
+| :---: | :--- |
 | **Example** | `ab delete test` will delete the address book named `test` |
 | <img src="images/info_icon.png" width="50"/> | • The current address book cannot be deleted, switch to another address book first before deleting the address book.|
 
@@ -370,7 +372,7 @@ Delete an address book that currently exists.
 Switch to a different address book that currently exists.
  
 | Format | `ab switch ADDRESSBOOK_NAME` <br> <br> • `ADDRESSBOOK_NAME` refers to the name of the address book to switched to .|
-| :-: | :-- |
+| :---: | :--- |
 | **Example** | `ab switch other` will switch over to the address book named `other` |
 | <img src="images/tip_icon.png" width="50"/> | • Switch between different address books by toggling the address book tab (which is the 3rd tab from the left) <br> <img src="images/MultipleAddressBookTab.jpg" width="300"/> |
  
@@ -379,8 +381,8 @@ Switch to a different address book that currently exists.
 
 List all the name of all the existing address books
 
-Format | `ab list`
---- | --- 
+| Format | `ab list` |
+| --- | --- |
 
 --------------------------------------------------------------------------------------------------------------------
 
