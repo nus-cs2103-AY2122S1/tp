@@ -1042,7 +1042,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding an applicant while all applicants are being shown 
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. 
+    1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list. 
     
     1. Test case: `add n/John Doe p/98765432 e/JohnDoe@gmail.com r/Teacher et/Full time s/3000 l/Bachelors y/4`<br>
        Expected: A new applicant named John Doe with all of the above details is added to the list. Details of the added contact shown in 
@@ -1060,11 +1060,11 @@ testers are expected to do more *exploratory* testing.
     (where incomplete details are given for the applicant being added).
     Expected: Error messages displaying the cause of error is shown in the result display.  
 
-### Deleting a person
+### Deleting an applicant
 
 1. Deleting an applicant while all applicants are being shown
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list.
 
     1. Test case: `delete 1`<br>
        Expected: First applicant is deleted from the list. Details of the deleted applicant shown in the result display. 
