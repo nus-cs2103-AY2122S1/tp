@@ -2,7 +2,7 @@
 !include ../../../style.puml
 
 box Logic LOGIC_COLOR_T1
-Participant ":AddCommand" as ac LOGIC_COLOR
+Participant ":DeleteCommand" as ac LOGIC_COLOR
 Participant ":CommandResult" as result LOGIC_COLOR
 end box
 
@@ -13,7 +13,7 @@ end box
 
 -> ac ++ :execute
 ac -> mm ++ :getFilteredStudentList()
-deactivate
+return studentList
 ac -> mm ++ :deleteStudent(targetStudent)
 mm -> ad ++ :removeStudent(targetStudent)
 deactivate
