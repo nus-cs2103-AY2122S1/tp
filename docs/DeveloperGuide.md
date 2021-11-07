@@ -232,6 +232,9 @@ Recording this information together with appointment information helps clinic st
 Past prescriptions can also be viewed with past appointments.
 
 #### How Prescription is implemented
+Prescription derives from the original Tags class from AB3 and is modified with extra fields and checks.
+ * Each `Prescription` class contains fields recording `Medicine`, `Volume` and `Duration`. 
+ * Each `Appointment` class contains 0 or more `Prescription` objects.
 
 ![Class diagram of Prescription](diagrams/PrescriptionClassDiagram.png)
 
@@ -255,7 +258,7 @@ The following commands are available from the ```Appointment``` class to interac
 
 This method was considered at first to improve separation of concerns. However, the increased complexity of adapting storage to work with nested composite data structures was deemed to be too high and infeasible.
 #### Input validation
-As with all other 
+As with all other commands, prescription related commands have their own parsers and 
 
 ### Medical History
 
