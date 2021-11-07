@@ -141,7 +141,7 @@ public class ShowCommandTest {
         // null -> returns false
         assertFalse(showFirstCommand.equals(null));
 
-        // different Id -> returns false
+        // different ID -> returns false
         showSecondCommand = new ShowCommand(INDEX_SECOND_STUDENT, Path.of("abc.csv"));
         assertFalse(showFirstCommand.equals(showSecondCommand));
 

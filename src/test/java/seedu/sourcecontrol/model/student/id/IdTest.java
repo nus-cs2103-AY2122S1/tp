@@ -30,10 +30,10 @@ public class IdTest {
 
     @Test
     public void isValidID() {
-        // null Id number
+        // null ID number
         assertThrows(NullPointerException.class, () -> Id.isValidID(null));
 
-        // invalid Id numbers
+        // invalid ID numbers
         assertFalse(Id.isValidID("")); // empty string
         assertFalse(Id.isValidID(" ")); // spaces only
         assertFalse(Id.isValidID("1231231")); // missing starting character
@@ -43,7 +43,7 @@ public class IdTest {
         assertFalse(Id.isValidID("E123m231")); // alphabets within digits
         assertFalse(Id.isValidID("E123 456")); // spaces within digits
 
-        // valid Id numbers
+        // valid ID numbers
         assertTrue(Id.isValidID("E1234567")); // upper case
         assertTrue(Id.isValidID("e7654321")); // lower case
     }

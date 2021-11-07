@@ -13,7 +13,7 @@ import seedu.sourcecontrol.model.student.Student;
 /**
  * Adds a student to the Source Control application.
  */
-public class AddCommand extends Command {
+public class AddStudentCommand extends Command {
 
     public static final String COMMAND_WORD = "addstudent";
 
@@ -31,14 +31,14 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "beginner";
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
-    public static final String MESSAGE_DUPLICATE_STUDENT = "This student Id already exists in Source Control. ";
+    public static final String MESSAGE_DUPLICATE_STUDENT = "This student ID already exists in Source Control. ";
 
     private final Student toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Student}
+     * Creates an AddStudentCommand to add the specified {@code Student}
      */
-    public AddCommand(Student student) {
+    public AddStudentCommand(Student student) {
         requireNonNull(student);
         toAdd = student;
     }
@@ -58,7 +58,7 @@ public class AddCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddCommand // instanceof handles nulls
-                && toAdd.equals(((AddCommand) other).toAdd));
+                || (other instanceof AddStudentCommand // instanceof handles nulls
+                && toAdd.equals(((AddStudentCommand) other).toAdd));
     }
 }

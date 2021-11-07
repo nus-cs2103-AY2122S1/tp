@@ -40,7 +40,7 @@ public class AddGroupCommandParserTest {
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + GROUP_DESC_TUTORIAL,
                 new AddGroupCommand(expectedEmptyGroup, new ArrayList<>()));
 
-        // 1 name and 1 Id - both accepted
+        // 1 name and 1 ID - both accepted
         Group expectedGroup = new GroupBuilder().withName(VALID_GROUP_TUTORIAL).build();
         AllocDescriptor descriptorWithAmyId = new AllocDescriptorBuilder()
                 .withGroup(VALID_GROUP_TUTORIAL)
@@ -55,7 +55,7 @@ public class AddGroupCommandParserTest {
 
     @Test
     public void parse_optionalFieldsMissing_success() {
-        // without any name or Id
+        // without any name or ID
         Group expectedEmptyGroup = new GroupBuilder().withName(VALID_GROUP_TUTORIAL).build();
         assertParseSuccess(parser, GROUP_DESC_TUTORIAL, new AddGroupCommand(expectedEmptyGroup, new ArrayList<>()));
 
@@ -96,7 +96,7 @@ public class AddGroupCommandParserTest {
         // invalid group name
         assertParseFailure(parser, INVALID_GROUP_DESC, Group.MESSAGE_CONSTRAINTS);
 
-        // invalid Id
+        // invalid ID
         assertParseFailure(parser, GROUP_DESC_TUTORIAL + INVALID_ID_DESC, Id.MESSAGE_CONSTRAINTS);
     }
 }

@@ -8,7 +8,7 @@ import static seedu.sourcecontrol.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.List;
 import java.util.Set;
 
-import seedu.sourcecontrol.logic.commands.AddCommand;
+import seedu.sourcecontrol.logic.commands.AddStudentCommand;
 import seedu.sourcecontrol.logic.commands.EditCommand.EditStudentDescriptor;
 import seedu.sourcecontrol.model.student.Student;
 import seedu.sourcecontrol.model.student.group.Group;
@@ -23,7 +23,7 @@ public class StudentUtil {
      * Returns an add command string for adding the {@code student}.
      */
     public static String getAddCommand(Student student) {
-        return AddCommand.COMMAND_WORD + " " + getStudentDetails(student);
+        return AddStudentCommand.COMMAND_WORD + " " + getStudentDetails(student);
     }
 
     /**

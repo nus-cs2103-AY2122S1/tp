@@ -44,7 +44,7 @@ public class ScoreDescriptorTest {
                 .withName(VALID_NAME_BOB).build();
         assertNotEquals(SCORE_DESCRIPTOR_AMY, editedAmy);
 
-        // different Id -> returns false
+        // different ID -> returns false
         editedAmy = new ScoreDescriptorBuilder(SCORE_DESCRIPTOR_AMY)
                 .withId(VALID_ID_BOB).build();
         assertNotEquals(SCORE_DESCRIPTOR_AMY, editedAmy);

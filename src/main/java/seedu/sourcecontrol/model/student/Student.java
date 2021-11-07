@@ -95,7 +95,7 @@ public class Student {
     }
 
     /**
-     * Returns true if both students have the same Id.
+     * Returns true if both students have the same ID.
      * This defines a weaker notion of equality between two students.
      */
     public boolean isSameStudent(Student otherStudent) {
@@ -152,7 +152,7 @@ public class Student {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append("; NUSNET Id: ")
+                .append("; NUSNET ID: ")
                 .append(getId());
 
         List<Group> groups = getGroups();

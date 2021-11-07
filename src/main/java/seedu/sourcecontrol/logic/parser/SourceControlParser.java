@@ -13,9 +13,9 @@ import java.util.regex.Pattern;
 
 import seedu.sourcecontrol.logic.commands.AddAllocCommand;
 import seedu.sourcecontrol.logic.commands.AddAssessmentCommand;
-import seedu.sourcecontrol.logic.commands.AddCommand;
 import seedu.sourcecontrol.logic.commands.AddGroupCommand;
 import seedu.sourcecontrol.logic.commands.AddScoreCommand;
+import seedu.sourcecontrol.logic.commands.AddStudentCommand;
 import seedu.sourcecontrol.logic.commands.AliasCommand;
 import seedu.sourcecontrol.logic.commands.ClearCommand;
 import seedu.sourcecontrol.logic.commands.Command;
@@ -106,8 +106,8 @@ public class SourceControlParser {
         case AddAssessmentCommand.COMMAND_WORD:
             return new AddAssessmentCommandParser().parse(arguments);
 
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+        case AddStudentCommand.COMMAND_WORD:
+            return new AddStudentCommandParser().parse(arguments);
 
         case AddScoreCommand.COMMAND_WORD:
             return new AddScoreCommandParser().parse(arguments);

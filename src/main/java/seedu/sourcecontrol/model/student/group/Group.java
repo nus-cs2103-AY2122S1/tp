@@ -61,7 +61,7 @@ public class Group {
     }
 
     /**
-     * Returns true if the given Id {@code id} specifies a student in the group.
+     * Returns true if the given ID {@code id} specifies a student in the group.
      */
     public boolean hasStudent(Id id) {
         requireNonNull(id);
@@ -69,7 +69,7 @@ public class Group {
     }
 
     /**
-     * Adds student with Id {@code Id} to this {@code Group}.
+     * Adds student with ID {@code id} to this {@code Group}.
      * {@code id} must not already exist in the group.
      */
     public void addStudent(Id id) {
@@ -80,7 +80,7 @@ public class Group {
     }
 
     /**
-     * Removes student with Id {@code key} from this {@code Group}.
+     * Removes student with ID {@code key} from this {@code Group}.
      * {@code key} must exist in the group.
      */
     public void removeStudent(Id key) {

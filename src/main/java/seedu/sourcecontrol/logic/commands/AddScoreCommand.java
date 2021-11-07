@@ -49,7 +49,7 @@ public class AddScoreCommand extends Command {
     public static final String MESSAGE_NONEXISTENT_ASSESSMENT = "This assessment does not exist.";
     public static final String MESSAGE_NONEXISTENT_STUDENT = "This student does not exist.";
     public static final String MESSAGE_DUPLICATE_STUDENT_NAME =
-            "Score needs to be added through Id for this student due to duplicate naming.";
+            "Score needs to be added through ID for this student due to duplicate naming.";
 
     private final ScoreDescriptor scoreDescriptor;
 
@@ -224,7 +224,7 @@ public class AddScoreCommand extends Command {
         }
 
         /**
-         * Returns a {@code Predicate} checking if a student have a matched name or Id.
+         * Returns a {@code Predicate} checking if a student have a matched name or ID.
          */
         public Predicate<Student> isToEditStudent() {
             return toCheck -> toCheck.getName().equals(name)

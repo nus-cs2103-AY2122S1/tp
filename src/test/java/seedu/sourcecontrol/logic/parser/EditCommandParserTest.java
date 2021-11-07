@@ -85,14 +85,14 @@ public class EditCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
-        assertParseFailure(parser, "1" + INVALID_ID_DESC, Id.MESSAGE_CONSTRAINTS); // invalid Id
+        assertParseFailure(parser, "1" + INVALID_ID_DESC, Id.MESSAGE_CONSTRAINTS); // invalid ID
         assertParseFailure(parser, "1" + INVALID_GROUP_DESC, Group.MESSAGE_CONSTRAINTS); // invalid group
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
 
-        // invalid Id followed by valid group
+        // invalid ID followed by valid group
         assertParseFailure(parser, "1" + INVALID_ID_DESC + GROUP_DESC_TUTORIAL, Id.MESSAGE_CONSTRAINTS);
 
-        // valid Id followed by invalid Id. The test case for invalid phone followed by valid phone
+        // valid ID followed by invalid ID. The test case for invalid phone followed by valid phone
         // is tested at {@code parse_invalidValueFollowedByValidValue_success()}
         assertParseFailure(parser, "1" + ID_DESC_BOB + INVALID_ID_DESC, Id.MESSAGE_CONSTRAINTS);
 
@@ -142,7 +142,7 @@ public class EditCommandParserTest {
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // Id
+        // ID
         userInput = targetIndex.getOneBased() + ID_DESC_AMY;
         descriptor = new EditStudentDescriptorBuilder().withId(VALID_ID_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);

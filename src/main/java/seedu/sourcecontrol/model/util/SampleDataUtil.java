@@ -93,7 +93,7 @@ public class SampleDataUtil {
         String studentId = "E" + String.format("%07d", randomSixDigitNumber);
 
         if (TAKEN_IDS.contains(studentId)) {
-            // If the generated student Id has already been taken, generate a new student Id.
+            // If the generated student ID has already been taken, generate a new student ID.
             return getRandomStudentId();
         }
 

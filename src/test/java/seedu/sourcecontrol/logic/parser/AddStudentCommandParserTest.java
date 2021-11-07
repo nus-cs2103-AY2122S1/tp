@@ -30,7 +30,7 @@ import java.util.LinkedHashMap;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.sourcecontrol.logic.commands.AddCommand;
+import seedu.sourcecontrol.logic.commands.AddStudentCommand;
 import seedu.sourcecontrol.model.student.Student;
 import seedu.sourcecontrol.model.student.group.Group;
 import seedu.sourcecontrol.model.student.id.Id;
@@ -38,8 +38,8 @@ import seedu.sourcecontrol.model.student.name.Name;
 import seedu.sourcecontrol.model.student.tag.Tag;
 import seedu.sourcecontrol.testutil.StudentBuilder;
 
-public class AddCommandParserTest {
-    private AddCommandParser parser = new AddCommandParser();
+public class AddStudentCommandParserTest {
+    private AddStudentCommandParser parser = new AddStudentCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
@@ -50,15 +50,15 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + ID_DESC_BOB + GROUP_DESC_TUTORIAL
-                + TAG_DESC_FRIEND, new AddCommand(expectedStudent));
+                + TAG_DESC_FRIEND, new AddStudentCommand(expectedStudent));
 
         // multiple names - last name accepted
         assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + ID_DESC_BOB + GROUP_DESC_TUTORIAL
-                + TAG_DESC_FRIEND, new AddCommand(expectedStudent));
+                + TAG_DESC_FRIEND, new AddStudentCommand(expectedStudent));
 
         // multiple IDs - last Id accepted
         assertParseSuccess(parser, NAME_DESC_BOB + ID_DESC_AMY + ID_DESC_BOB + GROUP_DESC_TUTORIAL
-                + TAG_DESC_FRIEND, new AddCommand(expectedStudent));
+                + TAG_DESC_FRIEND, new AddStudentCommand(expectedStudent));
 
         // multiple groups - all accepted
         Student expectedStudentMultipleGroups = new StudentBuilder(BOB)
@@ -66,7 +66,7 @@ public class AddCommandParserTest {
                 .withGroups(VALID_GROUP_TUTORIAL, VALID_GROUP_RECITATION)
                 .withTags(VALID_TAG_FRIEND).build();
         assertParseSuccess(parser, NAME_DESC_BOB + ID_DESC_BOB + GROUP_DESC_TUTORIAL + GROUP_DESC_RECITATION
-                + TAG_DESC_FRIEND, new AddCommand(expectedStudentMultipleGroups));
+                + TAG_DESC_FRIEND, new AddStudentCommand(expectedStudentMultipleGroups));
 
         //multiple similar groups - only one unique instance accepted
         Student expectedStudentWithMultipleSimilarGroups = new StudentBuilder(BOB)
@@ -76,7 +76,7 @@ public class AddCommandParserTest {
                 .build();
         assertParseSuccess(parser, NAME_DESC_BOB + ID_DESC_BOB + GROUP_DESC_RECITATION
                 + GROUP_DESC_RECITATION + TAG_DESC_FRIEND,
-                new AddCommand(expectedStudentWithMultipleSimilarGroups));
+                new AddStudentCommand(expectedStudentWithMultipleSimilarGroups));
 
         // multiple tags - all accepted
         Student expectedStudentMultipleTags = new StudentBuilder(BOB)
@@ -84,7 +84,7 @@ public class AddCommandParserTest {
                 .withGroups(VALID_GROUP_TUTORIAL)
                 .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND).build();
         assertParseSuccess(parser, NAME_DESC_BOB + ID_DESC_BOB + GROUP_DESC_TUTORIAL
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, new AddCommand(expectedStudentMultipleTags));
+                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, new AddStudentCommand(expectedStudentMultipleTags));
     }
 
     @Test
@@ -92,23 +92,23 @@ public class AddCommandParserTest {
         // zero tags
         Student expectedStudent = new StudentBuilder(AMY).withTags().withScores(new LinkedHashMap<>()).build();
         assertParseSuccess(parser, NAME_DESC_AMY + ID_DESC_AMY + GROUP_DESC_TUTORIAL,
-                new AddCommand(expectedStudent));
+                new AddStudentCommand(expectedStudent));
 
         // zero groups
         Student expectedStudentWithNoGroups = new StudentBuilder(AMY).withScores(new LinkedHashMap<>())
                 .withGroups().build();
         assertParseSuccess(parser, NAME_DESC_AMY + ID_DESC_AMY + TAG_DESC_FRIEND,
-                new AddCommand(expectedStudentWithNoGroups));
+                new AddStudentCommand(expectedStudentWithNoGroups));
     }
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddStudentCommand.MESSAGE_USAGE);
 
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_BOB + ID_DESC_BOB , expectedMessage);
 
-        // missing Id prefix
+        // missing ID prefix
         assertParseFailure(parser, NAME_DESC_BOB + VALID_ID_BOB, expectedMessage);
 
         // all prefixes missing
@@ -121,7 +121,7 @@ public class AddCommandParserTest {
         assertParseFailure(parser, INVALID_NAME_DESC + ID_DESC_BOB + GROUP_DESC_TUTORIAL
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS);
 
-        // invalid nusNetId
+        // invalid ID
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_ID_DESC + GROUP_DESC_TUTORIAL
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Id.MESSAGE_CONSTRAINTS);
 
@@ -139,6 +139,6 @@ public class AddCommandParserTest {
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + ID_DESC_BOB + GROUP_DESC_TUTORIAL
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddStudentCommand.MESSAGE_USAGE));
     }
 }

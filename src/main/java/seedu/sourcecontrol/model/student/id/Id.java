@@ -13,7 +13,7 @@ public class Id {
     /**
      * Constructs a {@code Id}.
      *
-     * @param id A valid NUSNET Id.
+     * @param id A valid NUSNET ID.
      */
     public Id(String id) {
         requireNonNull(id);
@@ -34,10 +34,10 @@ public class Id {
     }
 
     /**
-     * Reformats valid Id to uppercase.
+     * Reformats valid ID to uppercase.
      */
     public static String reformatId(String name) {
-        assert name.length() == 8; // Id should already be validated
+        assert name.length() == 8; // ID should already be validated
         char upperCase = Character.toUpperCase(name.charAt(0));
         return upperCase + name.substring(1);
     }

@@ -41,7 +41,7 @@ public class ExportCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         StringBuilder writeContent = new StringBuilder();
-        writeContent.append("Name,Id,");
+        writeContent.append("Name,ID,");
 
         List<Student> students = model.getSourceControl().getStudentList();
         appendGroupHeaders(writeContent, students);

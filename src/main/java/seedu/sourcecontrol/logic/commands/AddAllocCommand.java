@@ -45,7 +45,7 @@ public class AddAllocCommand extends Command {
     public static final String MESSAGE_NONEXISTENT_GROUP = "This group does not exist.";
     public static final String MESSAGE_NONEXISTENT_STUDENT = "This student does not exist.";
     public static final String MESSAGE_DUPLICATE_STUDENT_NAME =
-            "This student needs to be allocated using Id due to duplicate naming.";
+            "This student needs to be allocated using ID due to duplicate naming.";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the group.";
 
     private final AllocDescriptor allocDescriptor;
@@ -202,7 +202,7 @@ public class AddAllocCommand extends Command {
         }
 
         /**
-         * Returns a {@code Predicate} checking if a student have a matched name or Id.
+         * Returns a {@code Predicate} checking if a student have a matched name or ID.
          */
         public Predicate<Student> isAllocStudent() {
             return toCheck -> toCheck.getName().equals(name)

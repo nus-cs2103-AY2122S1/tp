@@ -71,7 +71,7 @@ public class InfoDisplay extends UiPart<Region> {
      */
     public void setStudentInfo(Student student) {
         name.setText(student.getName().fullName);
-        info1.setText("Id: " + student.getId().value);
+        info1.setText("ID: " + student.getId().value);
 
         String groupsString = student.getGroups().stream()
                 .map(Group::toString).collect(Collectors.joining(", "));

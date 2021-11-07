@@ -56,7 +56,7 @@ public class ShowCommand extends Command {
     public static final String MESSAGE_NONEXISTENT_ASSESSMENT = "This assessment does not exist.";
     public static final String MESSAGE_NONEXISTENT_GROUP = "This group does not exist.";
     public static final String MESSAGE_DUPLICATE_STUDENT_NAME =
-            "This student needs to be specified using INDEX or Id due to duplicate naming.";
+            "This student needs to be specified using INDEX or ID due to duplicate naming.";
 
     public static final String BASE_PATH = "graph%1$s.png";
 

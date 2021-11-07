@@ -67,7 +67,7 @@ public class IdContainsKeywordsPredicateTest {
         predicate = new IdContainsKeywordsPredicate(Arrays.asList("E6666666"));
         assertFalse(predicate.test(new StudentBuilder().withId("E0123456").build()));
 
-        // Keywords match tag, but does not match Id
+        // Keywords match tag, but does not match ID
         predicate = new IdContainsKeywordsPredicate(Arrays.asList("E0123456"));
         assertFalse(predicate.test(new StudentBuilder().withId("E6666666").withTags("E0123456").build()));
     }

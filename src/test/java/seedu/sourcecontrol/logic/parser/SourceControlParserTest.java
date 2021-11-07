@@ -35,9 +35,9 @@ import org.junit.jupiter.api.Test;
 import seedu.sourcecontrol.logic.commands.AddAllocCommand;
 import seedu.sourcecontrol.logic.commands.AddAllocCommand.AllocDescriptor;
 import seedu.sourcecontrol.logic.commands.AddAssessmentCommand;
-import seedu.sourcecontrol.logic.commands.AddCommand;
 import seedu.sourcecontrol.logic.commands.AddGroupCommand;
 import seedu.sourcecontrol.logic.commands.AddScoreCommand;
+import seedu.sourcecontrol.logic.commands.AddStudentCommand;
 import seedu.sourcecontrol.logic.commands.AliasCommand;
 import seedu.sourcecontrol.logic.commands.ClearCommand;
 import seedu.sourcecontrol.logic.commands.DeleteCommand;
@@ -70,8 +70,8 @@ public class SourceControlParserTest {
     @Test
     public void parseCommand_add() throws Exception {
         Student student = new StudentBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(StudentUtil.getAddCommand(student));
-        assertEquals(new AddCommand(student), command);
+        AddStudentCommand command = (AddStudentCommand) parser.parseCommand(StudentUtil.getAddCommand(student));
+        assertEquals(new AddStudentCommand(student), command);
     }
 
     @Test

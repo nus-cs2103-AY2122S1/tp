@@ -49,7 +49,7 @@ public class ImportCommand extends Command {
     public static final String MESSAGE_INVALID_NUMBER = "Number of columns should be a non-negative integer. ";
     public static final String MESSAGE_OUT_OF_BOUNDS = "Reached unexpected end of line while reading from file. ";
     public static final String MESSAGE_DUPLICATE_ASSESSMENT = "Duplicate assessment found in file. ";
-    public static final String MESSAGE_DUPLICATE_ID = "Duplicate student Id found in file. ";
+    public static final String MESSAGE_DUPLICATE_ID = "Duplicate student ID found in file. ";
 
 
     private final int groupCount;
