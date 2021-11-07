@@ -153,10 +153,10 @@ Scroll down to the bottom and click on `recruitIn.jar`.
    6. Fast forward the time. Your company informs you that `John Doe` has
       passed his interview and is hired.<br><br>
       Type in **`find`**`n/John Doe p/98765432` to find `John Doe`.<br>
-      Type in **`mark`**`1` to mark `John Doe` as done.<br><br>
+      Type in **`mark`**`1` to mark `John Doe` as Done.<br><br>
       ![After mark](./images/SampleWorkflow4.png)<br><br>
    7. Type in **`list`** to go back to your list of applicants.<br><br>
-      Type in **`delete_marked`** to remove all applicants marked as done, such as `John Doe`.<br><br>
+      Type in **`delete_marked`** to remove all applicants marked as Done, such as `John Doe`.<br><br>
       Now `John Doe` is removed from your list of applicants.<br><br>
 
 6. Aside from the commands shown in the sample workflow above, you may also find these useful:
