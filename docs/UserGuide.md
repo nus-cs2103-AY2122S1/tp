@@ -106,7 +106,7 @@ When reading our User Guide, here are some important information to take note of
 
 This section details the client information that financial advisors can keep track of with LeadsForce. Every client that
 is registered in LeadsForce have the following attributes that has the corresponding attribute prefix and value(s). The
-attribute prefixes specified here will be used in the commands of several [features](#4-features).
+attribute prefixes specified here will be used in the commands of several [features](#5-features).
 
 Attribute | Prefix | Value
 -----------------|-----------------|-----------------
