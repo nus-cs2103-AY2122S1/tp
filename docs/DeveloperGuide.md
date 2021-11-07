@@ -1063,6 +1063,7 @@ testers are expected to do more *exploratory* testing.
 1. Editing an applicant while all applicants are being shown
 
   1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list.
+     There is no applicant with the phone number 87654321 and email alexander@gmail.com
 
   1. Test case: `edit 1 n/Alexander p/87654321 e/alexander@gmail.com`<br>
      Expected: First applicant is edited such that his new name is Alexander with the phone number 87654321 and email alexander@gmail.com.
