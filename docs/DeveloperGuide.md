@@ -942,12 +942,10 @@ testers are expected to do more *exploratory* testing.
         Expected: Patient named Bob Doe is added successfully. Details of the added patient are shown in the status message.
 
     3. Test case: `add n/John Doe hp/98765432 eml/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/vaccinated risk/LOW`
-
       <br>Expected: No Patient is added. Error details are shown in the status message that the patient already exists.
 
     4. Test case: `add n/John Doe hp/98765432 eml/johnd@example.com a/311, Kent Ridge Ave 2, #02-25 dob/25/12/0000 t/vaccinated risk/LOW`
        <br>Expected: No Patient is added. Error details are shown in the status message that the patient already exists.
-
 
     5. Other incorrect add commands to try: `add`, `add n/Bob hp/`, `add n/` (not all fields, except tags and risk, are filled)<br>
        Expected: No Patient is added. Error details are shown in the status message.
@@ -1019,10 +1017,10 @@ testers are expected to do more *exploratory* testing.
        Expected: First patient's phone and email are edited to `91234567` and `johndoe@example.com` respectively. Details of the edited patient are shown in the status message.
 
     4. Test case: `edit 1 hp/abc`<br>
-       Expected: No patient is edited. Error details are shown in the status message.
+       Expected: No patient is edited. Error details are shown in the status message indicating an invalid phone number.
 
     5. Test case: `edit 1 eml/xyz`<br>
-       Expected: No patient is edited. Error details are shown in the status message.
+       Expected: No patient is edited. Error details are shown in the status message indicating an invalid email.
 
     6. Test case: `edit 1 a/Blk 50, Clementi Ave 2`<br>
        Expected: First patient's address is edited to `Blk 50, Clementi Ave 2`. Details of the edited doctor are shown in the status message.
@@ -1031,7 +1029,7 @@ testers are expected to do more *exploratory* testing.
        Expected: First patient's date of birth is edited to `1960-12-20`. Details of the edited patient are shown in the status message.
 
     8. Test case: `edit 1 dob/20/14/1960`<br>
-       Expected: No patient is edited. Error details are shown in the status message.
+       Expected: No patient is edited. Error details are shown in the status message indicating an invalid date.
 
     9. Test case: `edit 1 t/covid`<br>
        Expected: First patient's tag is edited to `covid`. Details of the edited patient are shown in the status message.
@@ -1043,10 +1041,10 @@ testers are expected to do more *exploratory* testing.
         Expected: First patient's risk is edited to `HIGH`. Details of the edited patient are shown in the status message.
 
     12. Test case: `edit 1 risk/ABC`<br>
-        Expected: No patient is edited. Error details are shown in the status message.
+        Expected: No patient is edited. Error details are shown in the status message indicating an invalid risk.
 
     13. Test case: `edit 0 hp/91234567`<br>
-        Expected: No patient is edited. Error details are shown in the status message.
+        Expected: No patient is edited. Error details are shown in the status message indicating an invalid index.
 
     14. Other incorrect edit commands to try: `edit`, `edit x`, `...` (where x is larger than the list size)<br>
         Expected: No patient is edited. Error details are shown in the status message.
@@ -1147,12 +1145,10 @@ testers are expected to do more *exploratory* testing.
        <br> Expected: Doctor named Bob Doe is added successfully. Details of the added doctor are shown in the status message.
        
     3. Test case: `add n/John Doe hp/98765432 eml/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/experienced`
-
        <br> Expected: No doctor is added. Error details are shown in the status message that the doctor already exists.
        
     4. Test case: `add n/John Doe hp/98765432 eml/johnd@example.com a/311, Kent Ridge Ave 2, #02-25 dob/25/12/0000 t/experienced`
        <br> Expected: No doctor is added. Error details are shown in the status message that the doctor already exists.
-
 
     5. Other incorrect add commands to try: `add`, `add n/Bob hp/`, `add n/` (not all fields, except tags, are filled)<br>
         Expected: No doctor is added. Error details are shown in the status message.
@@ -1222,10 +1218,10 @@ testers are expected to do more *exploratory* testing.
        Expected: First doctor's phone and email are edited to `91234567` and `johndoe@example.com` respectively. Details of the edited doctor are shown in the status message.
 
     4. Test case: `edit 1 hp/abc`<br>
-       Expected: No doctor is edited. Error details are shown in the status message.
+       Expected: No doctor is edited. Error details are shown in the status message indicating an invalid phone number.
 
     5. Test case: `edit 1 eml/xyz`<br>
-       Expected: No doctor is edited. Error details are shown in the status message.
+       Expected: No doctor is edited. Error details are shown in the status message indicating an invalid email.
 
     6. Test case: `edit 1 a/Blk 30, Clementi Ave 2`<br>
        Expected: First doctor's address is edited to `Blk 30, Clementi Ave 2`. Details of the edited doctor are shown in the status message.
@@ -1234,7 +1230,7 @@ testers are expected to do more *exploratory* testing.
        Expected: First doctor's date of birth is edited to `1960-12-20`. Details of the edited doctor are shown in the status message.
 
     8. Test case: `edit 1 dob/20/14/1960`<br>
-       Expected: No doctor is edited. Error details are shown in the status message.
+       Expected: No doctor is edited. Error details are shown in the status message indicating an invalid date.
 
     9. Test case: `edit 1 t/experienced`<br>
        Expected: First doctor's tag is edited to `experienced`. Details of the edited doctor are shown in the status message.
@@ -1243,7 +1239,7 @@ testers are expected to do more *exploratory* testing.
         Expected: First doctor's tags are deleted. Details of the edited doctor are shown in the status message.
 
     11. Test case: `edit 0 hp/91234567`<br>
-        Expected: No doctor is edited. Error details are shown in the status message.
+        Expected: No doctor is edited. Error details are shown in the status message indicating an invalid index.
 
     12. Other incorrect edit commands to try: `edit`, `edit x`, `...` (where x is larger than the list size)<br>
         Expected: No doctor is edited. Error details are shown in the status message.
@@ -1390,8 +1386,7 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `appt -d 0`<br>
 
        Expected: No appointment is deleted. Error details are shown in the status message that the format is invalid
-
-
+    
     4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the appointment list size)<br>
        Expected: No appointment is deleted. Error details are shown in the status message.
 
@@ -1414,22 +1409,22 @@ testers are expected to do more *exploratory* testing.
        Expected: First appointment's doctor is edited to the first doctor in the filtered doctor list. The remark is edited to `blood test`. Details of the edited appointment are shown in the status message.
 
     4. Test case: `appt -e 1 s/31/12/2021`<br>
-       Expected: No appointment is edited. Error details are shown in the status message.
+       Expected: No appointment is edited. Error details are shown in the status message indicating an invalid format for date and time.
 
     5. Test case: `appt -e 1 s/10:00`<br>
-       Expected: No appointment is edited. Error details are shown in the status message.
+       Expected: No appointment is edited. Error details are shown in the status message indicating an invalid format for date and time.
 
     6. Test case: `appt -e 1 dur/1000`<br>
-       Expected: No appointment is edited. Error details are shown in the status message.
+       Expected: No appointment is edited. Error details are shown in the status message indicating an invalid duration.
 
     7. Test case: `appt -e 0 dur/30`<br>
-       Expected: No appointment is edited. Error details are shown in the status message.
+       Expected: No appointment is edited. Error details are shown in the status message indicating an invalid index.
 
     8. Other incorrect edit appointment commands to try: `appt -e`, `appt -e x`, `...` (where x is larger than the list size)<br>
        Expected: No appointment is edited. Error details are shown in the status message.
 
     9. Test case: Edit a patient/doctor's appointment to clash with their existing appointments (edit the date and time to be the same or overlapping with an existing appointment).<br>
-        Expected: No appointment is edited. Error details are shown in the status message.
+        Expected: No appointment is edited. Error details are shown in the status message indicating a clash between appointments.
 
 2. Editing an appointment while some appointments are being shown
 
@@ -1518,12 +1513,12 @@ testers are expected to do more *exploratory* testing.
    
     1. Prerequisites: If there is a plannermd.json file in the data folder at the root of the application directory, delete the plannermd.json file.
     
-    1. Test case: Double-click on the jar file to run the application.
+    1. Test case: Double-click on the jar file to run the application.<br>
         Expected: Application runs and loads the sample data from `SampleDataUtil#getSamplePlannerMd`.
 
 1. Dealing with corrupted data files
 
     1. Prerequisites: Modify the plannermd.json file to be an illegal format, such as deleting the "name" field of a patient.
     
-    1. Test case: Double-click on the jar file to run the application.
+    1. Test case: Double-click on the jar file to run the application.<br>
        Expected: Application runs and has no data on initial load. Running the next command overwrites the current corrupted plannermd.json file.
