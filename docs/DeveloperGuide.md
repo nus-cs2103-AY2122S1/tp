@@ -351,7 +351,7 @@ gitGud undergoes to display the recommendations friends list to the user:
 <ins>Step 1: Parsing and triggering recommend command execution</ins><br>
 
 Similar to [delete](#delete-feature) and [link](#link-feature) features above, the parse and execute actions shown in the activity 
-diagrams are implemented via invoking`RecommendCommandParser#parse(String)`, which will construct a `RecommendCommand` instance 
+diagrams are implemented via invoking`RecommendCommandParser#parse(String)`, which will construct a `RecommendCommand` instance
 of which its `RecommendCommand#execute(model)` method will then be invoked by an instance of the `LogicManager` class. 
 
 <ins>Step 2: Filtering and sorting the friends list to get recommendations friends list</ins><br> 
@@ -361,11 +361,12 @@ The sequence diagram below illustrates the interactions made in detail used to p
 <img src="images/RecommendCommandSequenceDiagram1.png" width="1000" /><br> 
 
 As shown, the recommend feature execution makes use of an instance of `FriendRecommendFilterPredicate` which returns true
-if the friend plays the specified game and schedule is available during the specified timing and
+if the friend plays the specified game and schedule is available during the specified timing based on the parsed user input and
 an instance `Comparator` which is used to sort friends in order of the highest skill value for the specified game.
 
-Next, the continuation to the sequence diagram below shows how the `ModelManager#updateFilteredAndSortedFriendsList(Predicate, Comparator)`
-interacts with the `FriendRecommendFilterPredicate` and `Comparator` instances. 
+Next, the continuation to the sequence diagram below shows the `ModelManager#updateFilteredAndSortedFriendsList(Predicate, Comparator)`
+setting the predicate of `FilteredList` and comparator of `SortedList` instances managed by the `ModelManager` with 
+the new `FriendRecommendFilterPredicate` and `Comparator` instances. 
 
 <img src="images/RecommendCommandSequenceDiagram2.png" width="1000" />
 
