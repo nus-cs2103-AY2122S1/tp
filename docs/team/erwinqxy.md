@@ -14,15 +14,14 @@ project. ([View Reposense](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?s
 ### Features
 
 1. **New Feature**: Automatic sorting of the student list.
-    * What it does: it helps to ensure that the student list is always sorted whenever an add or edit command is executed. It
-      first sorts the students based on their class ID than by name.
+    * What it does: it helps to ensure that the student list is always sorted whenever an add or edit command is executed - sorts the students based on their Class ID than by Name.
     * Justification: This feature improves the product significantly as it helps to simulate a real-life nominal roll
       where the students will always be sorted by class and name, giving the user an organized set of student data.
     * Highlights: This enhancement provides the user with a more convenient and accessible experience in finding his /
       her students.
 2. **Improved Feature**: Added Student ID, Class ID, and Email
     * What it does: it provides important information to identify the student by.
-    * Justification: This feature improves the product by providing vital important to identify the student.
+    * Justification: This feature improves the product by providing important information to identify the student by.
     * Highlights: This feature will be used in other commands such as add, edit, and filter. This feature was tedious as
       it required an overhaul of the existing AB3 features and test cases. This feature also overlaps with the sample
       data.
@@ -34,7 +33,7 @@ project. ([View Reposense](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?s
     * What it does: it helps to populate the students in the sample data with randomized lab scores.
     * Justification This feature improves the testability of the product, providing, randomized lab scores to the user.
     * Highlight: This feature requires getting the total lab score of a particular lab as an upper bound for the
-      randomization to work so that it does not generate an invalid score.
+      randomization to work to avoid generating an invalid score.
 5. **Improved Feature**: Implement unique email.
     * What it does: it ensures that only unique email inputs are valid when executing add or edit student commands.
     * Justification: simulating a real-world constraint, there will never be two students with the same email address.
@@ -56,8 +55,7 @@ project. ([View Reposense](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?s
 1. **Code
    contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=erwinqxy&tabRepo=AY2122S1-CS2103-F09-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
 
-2. **Project management**:
-    * Managed releases `v1.2a, v1.4` (2 releases) on GitHub
+2. **Project management**: Managed releases `v1.2a`, `v1.4` (2 releases) on GitHub
 
 3. **Enhancements to existing features**:
     * Refactor the entire project structure to fit our
@@ -73,7 +71,7 @@ project. ([View Reposense](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?s
       message [#324](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/324) [#328](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/328)
     * Fix duplicate email [#427](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/427)
 
-4. **PRs Reviews**
+4. **PRs Reviewed:**
    * [#98](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/98)
              , [#100](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/100)
              , [#108](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/108),
