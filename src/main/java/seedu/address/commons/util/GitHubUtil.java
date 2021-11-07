@@ -306,7 +306,6 @@ public class GitHubUtil {
         ArrayList<String> repos = getRepoNames(userName);
         HashMap<String, Double> stats = getLanguageStats(userName, repos);
         stats.put("repo-count", (double) getRepoCount(userName));
-        
         return stats;
     }
 }
