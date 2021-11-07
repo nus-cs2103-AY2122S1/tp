@@ -8,6 +8,7 @@ import dash.logic.commands.taskcommand.EditTaskCommand;
 import dash.model.person.Person;
 import dash.model.tag.Tag;
 import dash.model.task.Task;
+import dash.model.task.TaskDate;
 import dash.model.task.TaskDescription;
 
 public class EditTaskDescriptorBuilder {
@@ -58,6 +59,14 @@ public class EditTaskDescriptorBuilder {
     public EditTaskDescriptorBuilder withPeople(Person... people) {
         Set<Person> personSet = Stream.of(people).collect(Collectors.toSet());
         descriptor.setPeople(personSet);
+        return this;
+    }
+
+    /**
+     * Sets the {@code TaskDate} of the {@code EditTaskDescriptor} that we are building.
+     */
+    public EditTaskDescriptorBuilder withTaskDate(String taskDate) {
+        descriptor.setTaskDate(new TaskDate(taskDate, false));
         return this;
     }
 
