@@ -185,18 +185,19 @@ application. An overview of LeadsForce's interface is shown below.
 The command view is where you will be able to input commands into LeadsForce. The command view consist of the following components: <br> 
 
 1. **Toolbar** <br>
-   • help bar that directs users to LeadsForce's user guide <br>
+   • Help bar that directs users to LeadsForce's user guide <br>
    • File bar where users can exit the app <br>
    • Address Book bar which allows users to switch between address books <br>
    • Themes bar which allows users to switch between different themes <br>
+
 2. **Command Box** <br>
    • This is where users can input their commands into LeadsForce <br>
 
 3. **Command Result Display** <br>
    • This is where LeadsForce will display details of the commands from the app <br>
 
-4. **Filter tag** <br>
-   • For tags that clients have, they will show up here in the filter tag. By clicking on one of these tags and
+4. **Filter tag panel** <br>
+   • For tags that clients have, they will show up here in the filter tag panel. By clicking on one of these tags and
    pressing `enter`, LeadsForce can filter out clients with based on the tag that is chosen. Further details of
    the `filter` command can be found [here](#59-filter-current-list-by-keywords--filter)
 
@@ -209,6 +210,7 @@ The client list view consist of the list of clients from the user's address book
 
 • This list will change according to the commands used such as `list` and `search`. <br>
 • When opening the application, all clients in an address book will be shown. <br>
+• Apart from the filter tag panel on top, you can also click on the tag here to filter clients based on the tag name.
 
 ### 4.3 Client Info View
 

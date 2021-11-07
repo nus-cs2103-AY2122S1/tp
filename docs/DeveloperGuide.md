@@ -892,15 +892,15 @@ In this section, you can test general commands in LeadsForce. Below is a summary
 
 Action | Format | Examples
 --------|---------|---------
-**Create** | `add n/{CLIENT_NAME} e/{EMAIL} <attribute>/{OTHER ATTRIBUTES}...`| add n/benedict e/benedict@gmail.com p/90909898 r/3
+**Create** | `add n/CLIENT_NAME e/EMAIL [<attribute>/VALUE]...`| add n/benedict e/benedict@gmail.com p/90909898 r/3
 **View** | `view CLIENT_ID` | view 123
-**Edit** | `edit CLIENT_ID... <attribute>/{CHANGED VALUE OF ATTRIBUTE}...` | edit 12 n/Dominic p/12345678
+**Edit** | `edit CLIENT_ID... [<attribute>/CHANGED_VALUE]...` | edit 12 n/Dominic p/12345678
 **Delete** | `delete CLIENT_ID...` | delete 4
 **List** | `list` | -
-**Sort** | `sort <attribute>/{ASC/DESC}...` | sort r/asc
+**Sort** | `sort [<attribute>/SORT_DIRECTION]...` | sort r/asc
 **Schedule** | `schedule [DATE]` | schedule 25-12-2021
-**Search** | `search KEYWORD... <attribute>/{ATTRIBUTE_KEYWORD}...` | search e/doe@gmail.com r/5
-**Filter** | `filter KEYWORD... <attribute>/{ATTRIBUTE_KEYWORD}...` | filter e/doe@gmail.com p/9
+**Search** | `search KEYWORD... [<attribute>/ATTRIBUTE_KEYWORD]...` | search e/doe@gmail.com r/5
+**Filter** | `filter KEYWORD[... <attribute>/ATTRIBUTE_KEYWORD]...` | filter e/doe@gmail.com p/9
 **Clear** | `clear` | -
 
 #### 7.2.1 Adding a client
