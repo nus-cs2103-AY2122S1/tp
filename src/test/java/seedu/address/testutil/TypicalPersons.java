@@ -48,7 +48,7 @@ public class TypicalPersons {
                     .build();
     public static final String BENSON_NAME = "Benson Meier";
     public static final String BENSON_TELEGRAM = "benson_meier";
-    public static final String BENSON_GITHUB = "benson";
+    public static final String BENSON_GITHUB = "benson-meier";
     public static final String BENSON_PHONE = "98765432";
     public static final String BENSON_EMAIL = "johnd@example.com";
     public static final String BENSON_ADDRESS = "311, Clementi Ave 2, #02-25";
