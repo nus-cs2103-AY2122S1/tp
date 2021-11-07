@@ -1473,19 +1473,19 @@ testers are expected to do more *exploratory* testing.
 
 1. Enrolling a `Student` into a `Lesson`, while the students and lessons are being shown
 
-  * Prerequisites: 
-      * Multiple `Students` and `Lessons` shown in the list of students and lessons. `Students` must not currently be enrolled in the `Lesson` the user wishes to enroll the student in.
-      * `Student` must have the same `grade` as the `Lesson` to be enrolled in
-      * `Student` must not currently be enrolled in `Lesson` of interest
-      * `Student` must not have any existing classes that clash with the duration in `Lesson`
-      * `Student` must currently be enrolled in fewer than `10` lessons
-      * `Lesson` must currently have fewer than `15` students enrolled inside the lesson
-      * Should any of the above conditions not be met, the `Student` will not be able to be enrolled in the `Lesson` of interest
+    * Prerequisites: 
+        * Multiple `Students` and `Lessons` shown in the list of students and lessons. `Students` must not currently be enrolled in the `Lesson` the user wishes to enroll the student in.
+        * `Student` must have the same `grade` as the `Lesson` to be enrolled in
+        * `Student` must not currently be enrolled in `Lesson` of interest
+        * `Student` must not have any existing classes that clash with the duration in `Lesson`
+        * `Student` must currently be enrolled in fewer than `10` lessons
+        * `Lesson` must currently have fewer than `15` students enrolled inside the lesson
+        * Should any of the above conditions not be met, the `Student` will not be able to be enrolled in the `Lesson` of interest
 
-  * Note: 
-      * We will be using index `2` to conduct manual testing for positive tests, but feel free to test with any valid index (any positive integer shown in the student and lesson lists).
-      * In this case, we will be using the sample data given when loading up **TuitiONE** for the first time (delete tuitione.json file if it is not your first time). 
-      * The `Student` of index `2` (Bernice Yu of grade P4) will be enrolled into `Lesson` of `index` 2 (Math-P4-Wed-1800).
+    * Note: 
+        * We will be using index `2` to conduct manual testing for positive tests, but feel free to test with any valid index (any positive integer shown in the student and lesson lists).
+        * In this case, we will be using the sample data given when loading up **TuitiONE** for the first time (delete tuitione.json file if it is not your first time). 
+        * The `Student` of index `2` (Bernice Yu of grade P4) will be enrolled into `Lesson` of `index` 2 (Math-P4-Wed-1800).
 
   * Test case: `enroll 2 l/2`<br>
     Expected: `Student` of index `2` is enrolled in `Lesson` of index `2` . Details of the student and lesson enrolled in shown in the status message.
