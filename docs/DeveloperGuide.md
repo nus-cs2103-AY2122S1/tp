@@ -239,14 +239,14 @@ represent 1/1/2001 to 2/1/2001
 
 
 Step 2. The user executes the command `mark -i 1 d/2001-01-04`. The `mark` command
-calls `ParserUtil#parsePeriod()`, to obtain the period to mark, and `Person#mark()` to mark this period on this person. This method uses
-`Period#union()` to union the period with the set.
+calls `ParserUtil#parsePeriod()`, to obtain the time period to mark, and `Person#mark()` to mark this time period on this person. This method uses
+`Period#union()` to union the time period with the set.
 
 
 ![state1](images/MarkState1.png)
 
 Step 3. The user executes the command `mark -i 1 d/2001-01-03`. The `mark` command
-calls `ParserUtil#parsePeriod()`, to obtain the period to mark as before. As this period makes the current range, 1/1/2001 to 2/1/2001 and 4/1/2001
+calls `ParserUtil#parsePeriod()`, to obtain the period to mark as before. As this time period makes the current range, 1/1/2001 to 2/1/2001 and 4/1/2001
 become a single range, `Period#union()` that is called, merges the two `Period`
 objects into one.
 
@@ -693,7 +693,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: Place _staffd.jar_ in an empty _home folder_.
 
     1. Test case: `addShift -i 1 d/monday-0`<br>
-       Expected: _staffd.json_ appears in _data_ folder inside _home folder_. Staff with name `Alex Yeoh` has a field history in _staffd.json_ whereas the other staff do not. Sample output [here](sample/addShift.json). Note the period output will be different with date.
+       Expected: _staffd.json_ appears in _data_ folder inside _home folder_. Staff with name `Alex Yeoh` has a field history in _staffd.json_ whereas the other staff do not. Sample output [here](sample/addShift.json). Note the time period output will be different with date.
 
     1. Test case: `delete -i 1`<br>
        Expected: _staffd.json_ is updated with `Alex Yeoh removed`. Sample output [here](sample/deleteAlex.json). 
