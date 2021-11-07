@@ -542,13 +542,26 @@ testers are expected to do more *exploratory* testing.
 
 ### Adding a person
 
-1. Adding a person into contHACKS
-   1. Prerequisites: Nons.
-   2. Test case: `add n/Ben e/ben@example.com m/CS2103T T11 B04 p/9123456 h/@Benny`<br>Expected: The person with the fields entered should be added into the displayed contacts. The module code `CS2103T [T11 B04]` should be rendered.
-   3. Test case: `add n/Casey e/casey@example.com m/CS2103T p/81234567 h/@caaaasey`<br>Expected: The person with the fields entered should be added into the displayed contacts. The module code `CS2103T` should be rendered.
-   4. Test case: `add add n/Ben e/ben@example.com m/CS2103T T11 B04 p/9123456 h/@Benny`<br>Expected: No person is added because the `add` command is provided twice.
+   1. Prerequisites: None.
+
+   2. Test case: `add n/Ben e/ben@example.com m/CS2103T T11 B04 p/9123456 h/@Benny`<br>
+      Expected: The person with the fields entered should be added into the contact list panel. The module code `CS2103T [T11 B04]` should be rendered.
+
+   3. Test case: `add n/Casey e/casey@example.com m/CS2103T p/81234567 h/@caaaasey`<br>
+      Expected: The person with the fields entered should be added into the displayed contacts. The module code `CS2103T` should be rendered.
+
+   4. Incorrect `add` command to try: `add add n/Ben e/ben@example.com m/CS2103T T11 B04 p/9123456 h/@Benny`<br>
+      Expected: No person is added because the `add` command is provided twice.
 
 ### Adding a lesson
+
+1. Prerequisites: None.
+
+2. Test case: `addc m/CS2103T T12 d/4 t/09:00 10:00 r/Online`<br>
+   Expected: The lesson with the fields entered would be added into the lesson list panel.
+
+3. Incorrect `addc` command: `addc addc addc m/CS2103T T12 d/4 t/09:00 10:00`<br>
+   Expected: No lesson is added because the `addc` command is provided twice.
 
 ### Finding a person
 
