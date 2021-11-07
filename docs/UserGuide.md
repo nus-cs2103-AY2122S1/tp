@@ -498,7 +498,7 @@ which should mostly be one or two words.<br>
 * [`REMARK`](#remark)
 
 <div markdown="span" class="alert alert-primary">:bulb: Tip:
-To delete a remark, leave the remark parameter `[r/[`REMARK`](#REMARK)]` empty.
+To delete a remark, leave the remark parameter `[r/[`REMARK`](#remark)]` empty.
 </div>
 
 **Examples**:
@@ -538,7 +538,7 @@ for an appointment.
 * [`TIME`](#time)
 * [`VENUE`](#venue)
 
-![Appointment](images/UG-Screenshots/AppointmentUGScreenshot.PNG)
+![Appointment](images/addappointment.png)
 
 <div markdown="span" class="alert alert-primary">:warning:
 The `DATE` of the appointment must at least be specified.
@@ -549,7 +549,7 @@ The `DATE` of the appointment must at least be specified.
 * `aa 1 d/2022-03-27` adds an appointment with date `27 Mar 2022` to the first client in FAST.
 ![result for `aa 1 d/2022-03-27`](images/appointment.png)
 * `aa 3 d/2022-03-27 t/18:00` adds an appointment with date `27 Mar 2022` and time `1800hrs` to the third client in FAST.
-* `find Matthew John` followed by `aa 3 d/2022-03-27 t/18:00 v/Velocity` adds an appointment with date `27 Mar 2022`, 
+* `find Stuart Brown` followed by `aa 3 d/2022-03-27 t/18:00 v/Velocity` adds an appointment with date `27 Mar 2022`, 
   time `1800hrs` and venue `Velocity` to the third client in the results of the `find` command.
    <div markdown="block" class="alert alert-info">
    :information_source: This command will not work if the client has already been assigned an appointment. You will have to
@@ -617,7 +617,7 @@ This CANNOT be undone!
 You can mark the appointment with your client as completed.
 This also allows you to keep track of the number of completed appointments with your client.
 
-![markAppointment](images/UG-Screenshots/MarkAppointmentUGScreenshot.PNG)
+![markAppointment](images/markappointment.png)
 
 **Format**: `ma INDEX`
 * Update the completed appointment count with the client at the specified `INDEX` if the appointment exist.
