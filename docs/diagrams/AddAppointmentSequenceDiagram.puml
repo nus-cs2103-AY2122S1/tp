@@ -23,7 +23,6 @@ activate Model
 Model --> LogicManager : state
 deactivate Model
 
-create PlannerMdParser
 LogicManager -> PlannerMdParser : parseCommand("appt -a \np/1 d/1..., \nState.PATIENT")
 activate PlannerMdParser
 
