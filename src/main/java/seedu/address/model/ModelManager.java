@@ -242,6 +242,7 @@ public class ModelManager implements Model {
         requireAllNonNull(target, target);
         target.toggleIsDone();
         addressBook.sortTasks();
+        displayType = TASKS;
     }
 
     @Override

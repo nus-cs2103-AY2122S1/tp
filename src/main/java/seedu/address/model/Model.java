@@ -23,7 +23,7 @@ public interface Model {
     Predicate<Group> PREDICATE_SHOW_ALL_GROUPS = unused -> true;
 
     enum DisplayType {
-        STUDENTS, TASKS, GROUPS, TASK_HISTORY
+        STUDENTS, TASKS, GROUPS
     }
 
     /**
