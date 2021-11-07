@@ -62,8 +62,9 @@ Managing your leads has never been easier.
 When reading our User Guide, here are some important information to take note of. 
 
 ### 1.1.1 Icons and its meaning
+
 **Icon** | **Meaning of icons**
---- | ---
+:---: | :---
 <img src="images/info_icon.png" width="50"/> | Notes are specific conditions or behaviours of a feature.
 <img src="images/tip_icon.png" width="50"/> | tips are suggestions that can help LeadsForce run faster.
 <img src="images/warn_icon.png" width="50"/> | warnings are important information to take note of when using LeadsForce. When these warnings are not followed, this can result in LeadsForce crashing or have corrupted data files.
@@ -100,7 +101,7 @@ When reading our User Guide, here are some important information to take note of
 This section details the client information that financial advisors can keep track of with LeadsForce. Every client that is registered in LeadsForce have the following attributes that has the corresponding type and attribute tag. The attribute tags specified here will be used in the commands of several [features](#4-features). 
 
 Client Attribute | Type of Attribute | Attribute tag
------------------|-----------------|:-----------------:
+-----------------|-----------------|-----------------:
 Client ID (**Unique**) | Integer (assigned on creation of new contact) | i/
 Name (**Compulsory**) | String | n/
 Email (**Compulsory**)| String (email address)| e/
@@ -238,7 +239,10 @@ View client's information in detail.
 
 **Expected Outcome:** <br> 
 For instance, if `Alex Yeoh` is the client with client ID 1, the following will be shown in the client info view of LeadsForce. <br> 
-<img src="images/ClientInfoView.png" width="300"/>
+
+<p align="center">
+<img src="images/ClientInfoView.png" width="400"/>
+</p>
 
  
 ### 5.3 Update Existing Contact : `edit`
@@ -269,7 +273,7 @@ Deletes an existing client from the address book using their client id.
 Shows the full list of all clients in the address book.
 
 | Format | `list` |
-| --- | :--- |
+| :---: | :--- |
 | <img src="images/info_icon.png" width="50"/> | • As long as the first word in the command is `list`, the command will still work regardless of the additional inputs. <br> eg. the command `list asdknkjsaf` will still work | 
 
 ### 5.6 Sort Contacts : `sort`
