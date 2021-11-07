@@ -143,15 +143,16 @@ Examples:
 
 Finds persons with the given search criteria and value.
 
-Format: `find {n/|s/|N/|g/|T/|r/|p/|a/|t/} KEYWORD [MORE_KEYWORDS]`
+Format: `find {n/|s/|N/|g/|T/|r/|p/|a/|t/full/|t/}KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g friend will also match Friend or FrIend or FRIEND.
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 * All attributes can be searched, by specifying the prefix before the keyword.
 * Partial matching can be done for all attributes except Tutorial ID and Role e.g. for name, Han will match Hans.
 * Partial matching is performed from the first letter of each value, i.e. `find n/o` will return Charlotte Oliveiro since Oliveiro starts with 'o', but will not return Alex Yeoh or Roy Balakrishnan since they do not contain values starting with the specified key.
+* Tags can be searched either using full or partial matching, using `t/full/` for full keyword matching and `t/` for partial matching. The first key to be searched should appear right after the prefix, e.g. `find t/full/friends`.
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+ e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
 * `find n/Hans Bo` will return `Hans Gruber`, and `Bo Yang`
@@ -175,8 +176,8 @@ Format: `delete {INDEX | -a | -f}`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find n/ Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-* `find n/ Betsy` followed by `delete -f` deletes all the entries of the results of the `find` command.
+* `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `find n/Betsy` followed by `delete -f` deletes all the entries of the results of the `find` command.
 * `delete -a` deletes all entries in the address book.
 
 ### Bulk Tag Persons : `bulk_tag`
@@ -186,7 +187,7 @@ Adds a tag to the filtered list of Persons.
 Format: `bulk_tag t/TAGNAME [t/TAGNAME…​]`
 
 Examples:
-* `find Alice` followed by `bulk_tag t/friends` adds the tag `friends` to all the persons in the filtered person list.
+* `find n/Alice` followed by `bulk_tag t/friends` adds the tag `friends` to all the persons in the filtered person list.
 * `bulk_tag t/friends` adds the tag `friends` in the filtered person list.
 
 ### Sort contacts by attribute: `sort`
@@ -307,7 +308,7 @@ Action | Format, Examples
 **Add** | `add n/NAME S/STUDENT_ID N/NUSNet_ID g/GITHUB_ID T/TUTORIAL_ID {r/student \| r/tutor} [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]...` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Delete** | `delete {INDEX \| -a \| -f}`  <br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [s/STUDENT_ID] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find FIELD KEYWORD`<br> e.g., `find name James`
+**Find** | `find {n/|s/|N/|g/|T/|r/|p/|a/|t/full/|t/partial/}KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/Alex`
 **List** | `list`
 **Import** | `import FILENAME` <br> e.g., `import tutors.json`
 **Export** | `export FILENAME` <br> e.g., `export t01students.json`
