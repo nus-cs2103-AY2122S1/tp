@@ -332,6 +332,24 @@ the `editvendor` command is the same as the `editguest` command, but only the `V
 
 ![EditSequenceDiagramVendor](images/EditSequenceDiagramVendor.png)
 
+### Charging a guest
+
+#### Implementation
+
+The implementation of the `chargeguest` is a new command implemented for the invoice to work nicely together.
+The `chargeguest` would identity the guest by their passport number and vendor by their vendor id.
+The service provided by the vendor would be charged to the assigned guest with the important information such as
+ServiceName, Quantity, Cost, CompanyName.
+
+The `chargeguest` command would increment the quantity for duplicate items.
+
+The `chargeguest` command is facilitated by the `ChargeGuestCommandParser` and `ChargeGuestCommand` of **PH**. The
+following sequence diagram shows how the `chargeguest` operation works:
+
+![ChargeguestSequenceDiagram](images/ChargeGuestSequenceDiagram.png)
+
+![ChargeguestActivityDiagram](images/ChargeGuestActivityDiagram.png)
+
 ### Checking out a Guest
 
 #### Implementation
@@ -417,6 +435,26 @@ the `deletevendor` command is the same as the `deleteguest` command, but only th
 (the `GuestBook` equivalent for vendors) has to be searched.
 
 <img src="images/DeleteSequenceDiagramVendor.png" width="800" />
+
+### Clear all Guest
+
+#### Implementation
+
+The implementation of the `clearguest` command was largely based off the original AB3 implementation.
+The `clearguest` command makes use
+of the `GuestBook` and removes all guest on the list.
+
+<img src="images/ClearGuestSequenceDiagram.png" width="800" />
+
+### Clear all Vendors
+
+#### Implementation
+
+The implementation of the `clearvendor` command was largely based off the original AB3 implementation.
+The `clearvendor` command makes use
+of the `VendorBook` and removes all Vendors on the list.
+
+<img src="images/ClearVendorSequenceDiagram.png" width="800" />
 
 ### Invoice Generation
 
