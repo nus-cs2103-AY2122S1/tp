@@ -19,6 +19,7 @@ title: ModuLink - Developer Guide
 
 * [Favourite Star Icon](https://imgbin.com/png/X9hfA1CP/five-pointed-star-yellow-png)
 * [Profile Icon](http://www.stickpng.com/img/icons-logos-emojis/users/simple-user-icon)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
