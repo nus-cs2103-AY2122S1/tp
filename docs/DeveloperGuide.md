@@ -4,7 +4,7 @@ title: Developer Guide
 ---
 * Table of Contents
 {:toc}
-  
+
 --------------------------------------------------------------------------------------------------------------------
 ## **Introduction**
 MrTechRecruiter (MTR) is a standalone desktop app aimed in helping technology-related company recruiters overlook and administer job positions and applicants applying for various jobs in their companies.
@@ -1344,3 +1344,35 @@ testers are expected to do more *exploratory* testing.
        box. A sample json file will be created. Then repeat the steps as above.
 
     1. The steps for data/positionbook.json is similar.
+
+## **Appendix: Effort**
+**<u>Difficulty: Medium to Hard</u>**
+
+We felt that our project overall is not extremely difficult to implement but requires a fair amount of understanding of the code base. Many commands created and classes implemented
+were predominantly based off of AB3 and enhanced to a great extent; others were freshly added in to be in tune with our product. Hence despite having different features from AB3,
+the overall project is still doable.
+
+
+**<u>Challenges faced:</u>** Implementing multiple entity types, improving existing CRUD features.
+
+Our project was harder than AB3 because we needed to have both `Position` and `Applicant` be part our product. Since `Applicant` and `Position` are dissimilar, we had to create separate logic
+for these classes on top of adapting the existing `Person` class to fit our `Applicant` class better. While `Position` does not have as many fields as an `Applicant`, the difficulty came in linking it back
+to the `ModelManager` as we had to add an additional `PositionBook` which further complicated the code base logic.
+
+Also since Applicant and Position are associated, when implementing the CRUD commands for both classes, we had to carefully consider the relationship between the two entities & 
+implement additional logic wherever it made sense for our target user (e.g. when we delete a Position, all Applicants to that Position are deleted as well to avoid 
+Applicants to a non-existing Position).
+
+**<u>Effort required:</u>** 110 - 120%
+
+Many commands are adaptations of the original AB3 code (e.g. `add-applicant`, `delete-applicant`) so not much work was needed to adapt it to what we wanted. However, besides our weekly 
+inputs of coding, we had to brainstorm and constantly adapt our code to better fit our user's needs. The challenges faced as mentioned also delayed many features into later weeks, 
+requiring more effort to be put into the project. But overall, our product is not strikingly outstanding with fancy UI, "clever" logical code or AI-integrated but rather maintaining
+a realistic, simplistic code base for future developers to further improve on. 
+
+
+**<u>Achievements:</u>** Better understood JavaFX, interweaving code bases, planning and delivering, software engineering on a whole
+We feel that many of the initial outcomes of the project were achieved, such as integrating software engineering related principles into our project while at the same
+keeping to our deadlines and planning ahead for future iterations of the project. We better understood how to link various classes together despite their differences and segregate them
+to better fit how we wanted the classes and methods to be accessed. A side benefit would be learning JavaFX because this is a completely new interface and tool used in helping design
+UI and seeing how our code works with the UI greatly benefitted us as well.
