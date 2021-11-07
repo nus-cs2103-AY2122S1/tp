@@ -11,30 +11,32 @@ interacts with it using a CLI, and it has a GUI created with JavaFX. It is writt
 
 Given below are my contributions to the project.
 
-* **Enhancement**: Extended the observer pattern between `model` and `ui`.
+* **New feature**: Listing transactions, a particular transaction, or the current order.
     * What it does: Allows BogoBogo to switch what is displayed on the main display panel upon the user's request (e.g. display transactions).
     * Justification: This feature allows commands to indirectly control `ui` without introducing any additional coupling.
-    * Highlights: This enhancement required a major revamp to AB3's existing observer pattern. 
-      In AB3, the observer (`DisplayListPanel`) is bound to the observed (`UniqueItemList`) at initialisation.
-      To allow the switching of the observed list (e.g. from inventory items to order items) within `model`, there was a need for a separate class to handle the logic.
-      Keeping future extension in mind, a `Displayable` interface has also been implemented. This allows future developers to display
-      any new object in the panel without much change to the `ui` or `model` component. [More details here](https://ay2122s1-cs2103-f10-2.github.io/tp/DeveloperGuide.html#controlling-the-display-panel-in-ui)
+    * Highlights: This enhancement required a major revamp to AB3's existing observer pattern.
+      To allow the switching of the observed list (e.g. from inventory items to order items) within `model`, there was a need for a separate class to handle the logic. [More details here](https://ay2122s1-cs2103-f10-2.github.io/tp/DeveloperGuide.html#controlling-the-display-panel-in-ui)
     * Links to PRs: [\#96](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/96), [\#100](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/100)
 
-* **Enhancement**: Implemented more robust responses by BogoBogo.
-    * What it does: BogoBogo will respond to the user more appropriately under more niche scenarios.
-                    For example, when there's ambiguity in the item specified by the user, or when the user has specified an overly large amount of item.
-    * Justification: This feature makes BogoBogo much more user-friendly. With robust responses, even a careless user will have a pleasant experience with BogoBogo.
-    * Highlights: This enhancement is a huge one as it is enforced across most commands. After my teammates have implemented the core components of a feature,
-                  I add on by adding checks and appropriate response messages. Along the way, I have added utility classes such as `ItemDescriptor` to help me with this.
-    * Links to PRs: [\#44](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/44), [\#53](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/53). [\#74](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/74)
-    
 * **New Feature**: Delete and Remove Commands.
     * What it does: Allows the user to either remove an item from the inventory or delete the item data entirely.
     * Justification: AB3 only supports deletion of an item. However, business owners might either want to remove an unsold item
-      from the inventory (e.g. expired goods), or delete an incorrectly entered item. Spawning 2 distinct commands from AB3's 
+      from the inventory (e.g. expired goods), or delete an incorrectly entered item. Spawning 2 distinct commands from AB3's
       original `DeleteCommand` enables this.
     * Links to PRs: [\#44](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/44), [\#63](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/63)
+
+* **Enhancement**: Improve finding of items.
+    * What it does: Instead of searching for exact word matches, BogoBogo searches for partial word matches. (e.g. "Po" shoul match "Potato" but not "Hippo).
+    * Justification: Searching by name mirrors the conventional search bars which users are likely used to. Finding would have been very clunky otherwise.
+      Searching with multiple fields is also now supported, making the search experience feel much more familiar and user-friendly.
+    * Highlights: This required major refactoring of `FindCommand` and `StringUtil`. Implementing an intuitive search style required algorithmic thinking too.
+    * Links to PRs: [\#165](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/165)
+
+* **Enhancement**: Implemented more robust responses by BogoBogo.
+    * What it does: BogoBogo will respond to the user more appropriately under more niche scenarios.
+    * Justification: This feature makes BogoBogo much more user-friendly. With robust responses, even a careless user will have a pleasant experience with BogoBogo.
+    * Highlights: After my teammates have implemented the core components of a feature, I add on by refactoring. Along the way, I have added utility classes such as `ItemDescriptor` and refactored `ArgMultimap` to help me with this.
+    * Links to PRs: [\#44](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/44), [\#53](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/53). [\#74](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/74), [\#192](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/192)
 
 * **Testing**: Added and maintain testing for features other than my own:
     * Tests for storage component [\#188](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/188)
@@ -48,8 +50,11 @@ Given below are my contributions to the project.
       * Wrote the final version of the UG [\#159](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/159)
       * Integrated a new Jekyll theme [\#159](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/159)
     * Developer Guide:
+      * Vetted high-level architectural diagrams
       * Wrote the implementation details of `DisplayList` [\#179](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/76)
+      * Wrote the proposal for a autocomplete feature [\#211](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/211)
       * Consolidated and formatted use cases. [\#183](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/183)
+      * Formatted the Developer's Guide [\#211](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/211)
 
 * **Community**:
     * Generally assisted the team with advice on implementation of features and architectural patterns. 

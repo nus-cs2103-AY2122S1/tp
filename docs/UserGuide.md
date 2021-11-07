@@ -1,5 +1,8 @@
 ---
-layout: page title: User Guide parent: For Users nav_order: 2
+layout: page 
+title: User Guide 
+parent: For Users 
+nav_order: 2
 ---
 
 **BogoBogo User Guide**{: .text-purple-000 .text-alpha }

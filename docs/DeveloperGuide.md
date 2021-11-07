@@ -34,7 +34,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div class="code-example bg-grey-lt-000">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in
+:bulb: The `.puml` files used to create diagrams in this document can be found in
 the [diagrams](https://github.com/AY2122S1-CS2103-F10-2/tp/blob/master/docs/diagrams) folder. Refer to the [_PlantUML
 Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit
 diagrams.
@@ -135,7 +135,7 @@ call.
 ![Interactions Inside the Logic Component for the `delete Milk c/5` Command](images/DeleteSequenceDiagram.png)
 
 <div class="code-example bg-grey-lt-000">
-:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+:information_source: The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
@@ -161,21 +161,20 @@ in [`Model.java`](https://github.com/AY2122S1-CS2103-F10-2/tp/blob/master/src/ma
 The `Model` component:
 
 - stores an `Inventory` object that encapsulates the inventory data.
-- stores an optional `Order` object that encapsulates the current order data.
+- stores an optional `Order` object that encapsulates the data of current order.
 - stores a `TransactionList` object that encapsulates the history of past transactions.
 - stores a `UserPref` object that encapsulates the user’s preferences.
 - does not depend on any of the other three components (as the Model represents data entities of the domain, they should
   make sense on their own without depending on other components)
 
-- The `Model` component interacts with `Ui` component through a `Displayable` interface.
 
 ![Model Low Level class diagram](images/ModelLowLevelClassDiagram.png)
 
 Lower level details of `Model` component:
 
-- `Inventory` and `Order` are each consists of an `UniqueItemList` which contains `Items`.
-- The `TransactionList` stores `TransactionRecord` which are the records of history orders.
-- Each `TransactionRecord` has a unique id and timestamp, with a list of `Item` transacted in the history order.
+- `Inventory` and `Order` each has a `UniqueItemList` which contains a collection of `Item`.
+- A `TransactionRecord` represents a past order that has been transacted, with timestamp of occurrence.
+- The `TransactionList` stores the history of all `TransactionRecord`.
 
 ### Storage component
 
@@ -210,7 +209,10 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Ordering
 
-When ModelManager is initialised, optionalOrder is set to Optional.empty(). At this point, the user has 1 order record
+Placing an order occurs across multiple user commands (`sorder`, `iorder`, `eorder`).
+Here is an example of how each command changes the state of `Model`.
+
+When ModelManager is initialised, `optionalOrder` is set to an empty `Optional`. At this point, the user has 1 order record
 with 2 items in his transaction list.
 
 ![Initial_State](images/OrderInitialState.png)
@@ -266,7 +268,7 @@ between Remove and Delete command.
 ### Controlling the Display Panel in UI
 
 The main panel of displayed items in the UI is managed by `DisplayListPanel` in the UI component. 
-This panel is dependent on changes made by command logic and should be able to be toggled to display different items 
+This panel is dependent on changes made by command logic and should be able to be toggled to display different lists. 
 (e.g. inventory items, items in current order, list of transactions, etc.).
 
 To minimise coupling between the logic and UI component, `DisplayListPanel` adopts an **observer pattern**.
@@ -277,27 +279,26 @@ To minimise coupling between the logic and UI component, `DisplayListPanel` adop
 This way, any changes to model can be propagated to the ui without having to explicitly have knowledge about the ui component.
 
 `DisplayList` is composed of 3 lists.
-1. `DisplayList#filtered` A filtered list that is observed by `DisplayListPanel`.
-2. `DisplayList#displayed` An observable list that acts as the base for `DisplayList#filtered`. 
+1. `DisplayList#filtered` —  A filtered list that is observed by `DisplayListPanel`.
+2. `DisplayList#displayed` —  An observable list that acts as the base for `DisplayList#filtered`. 
 Observes the current `DisplayList#source`.
-3. `DisplayList#source` An observable list that acts as the base for `DisplayList#displayed`.
+3. `DisplayList#source` —  An observable list that acts as the base for `DisplayList#displayed`.
 
-To propagate any changes to the filtered list, to be reflected to the ui, `DisplayList` can:
+To propagate any changes to the filtered list, to be reflected to the ui, we can:
 
-1. **Set a predicate**. 
+1 . **Filter the displayed list**. `DisplayList#setPredicate()`
 
 Set a predicate on the filtered list. This is done when items to be displayed already exists in `DisplayList#source`.
 
-2. **Edit the source**.
+2 . **Mutate the displayed list**. 
 
 When the source is edited outside `DisplayList`, it will notify `DisplayList#displayed`, which will then copy and reflect all changes.
 This, resultantly updates the `DisplayList#filtered` and the display panel.
 
-3. **Update the source**.
+3 . **Update the source**. `DisplayList#setItems()`
 
-Call `DisplayList#setItems` which takes in an observable list of items. 
 `DisplayList` removes the listener from the previous source and adds a new listener to the new source.
-It also updates `DisplayList#displayed` to reflect the new source.
+`DisplayList#displayed` is updated to reflect the new source.
 This is done when we want to switch between lists to display. (e.g. displaying transactions instead of inventory)
 
 <div class="code-example bg-grey-lt-000">:information_source:
@@ -305,14 +306,14 @@ This is done when we want to switch between lists to display. (e.g. displaying t
 `FilteredList` is bound to a `ObservableList` which is bound to a regular `List`. 
 </div>
 
-### Displaying an object
+*Displaying an object*{: .text-purple-000 }
 
 Any object can be displayed in the display panel by implementing the `Displayable` interface. 
 The object must implement `Displayable#asDisplayCard()` which should return a `UIPart<Region>` that will act as the object's list cell.
 
 ![DisplayList3](images/ModelDisplayableClassDiagram.png)
 
-### Design Considerations
+*Design Considerations*{: .text-purple-000 }
 
 **Time complexity**
 
@@ -323,9 +324,72 @@ This is definitely inefficient since updates usually involve appending or removi
 This inefficiency does not create observable latency given the envisioned scale of BogoBogo (1000 items).
 However, if BogoBogo is to be scaled up in the future, there might be a need for a more advanced implementation.
 
-Proposed upgrade: 
+Proposed upgrade:
+<div class="code-example bg-grey-lt-000">:bulb: <b>Proposed Upgrade:</b>
 Instead of relying on JavaFX's `ObservableList`, we can create a customised observable list that can reference multiple sources.
 From there, we should be able to toggle which source we want to be displaying on the `filteredlist`. This way, copying is no longer required.
+</div>
+
+### [Proposed Feature] Autocompleting commands
+
+BogoBogo is optimised for users that prefer the speed of CLI-based applications. 
+The application will be more attractive to typists if there is an **autocompleting feature**.
+With the feature, the user doesn't need to type entire command keywords or product names.
+
+```
+System: BogoBogo
+Sugggested Use Case —  Autocompleting a command
+Actor: User
+MSS:
+  1. User types half a command.
+  2. User requests for BogoBogo to autocomplete the command.
+  3. BogoBogo suggests to the user a complete command.
+     Step 2 - 3 is repeated until User finds the intended command.
+  4. User submits the autocompleted command.
+  5. BogoBogo processes the command.
+
+Extensions:
+  2a. BogoBogo cannot guess the user's command.
+    2a1. BogoBogo notifies the user it cannot autocomplete the command.
+    2a2. User enters the entire command.
+         Use case resumes from step 5.
+```
+
+The user can request for an autocomplete by hitting the `tab` character.
+
+*Lower level details*{: .text-purple-000 }
+
+Autocompletion can be facilitated by a `Wordbank` class which contains:
+* A trie for command keywords
+* A trie for existing item names.
+
+A `CompleteCommand` can then query `Wordbank` to complete either a command keyword or item name. 
+`Wordbank` also has to be updated when the user adds or removes a unique item name.
+
+![WordbankUML](images/WordbankUML.png)
+
+*Higher level details*{: .text-purple-000 }
+
+BogoBogo will have 2 different ways to react to a command.
+
+![AutocompleteActivityDiagram](images/AutocompleteActivityDiagram.png)
+
+1. The user hits the `enter` key: the command is processed normally.
+2. The user hits the `tab` key: the command is autocompleted.
+
+For the ui to distinguish the 2, we will need to implement a `CommandSuggestion` class that extends `CommandResult`.
+Should `CommandBox` detect a `CommandSuggestion` class when executing a command, it will adopt the suggestion stored in the result.
+
+Here's an example of how BogoBogo can react to the command text "add noo" followed by the user hitting the `tab` character.
+![AutocompleteSequenceDiagram](images/AutocompleteSequenceDiagram.png)
+
+*Design considerations*{: .text-purple-000 }
+
+BogoBogo adopts an [MVC pattern](https://nus-cs2103-ay2021s1.github.io/website/se-book-adapted/chapters/designPatterns.html#model-view-controller-mvc-pattern). 
+By utilising a `CommandSuggestion` class to store the autocompleted command, the partition between view and controller is retained.
+
+Alternatively, `CommandBox` can give `Logic` a callback to edit its text field. 
+However, implementing auxiliary methods to support the callback pattern will likely require more effort.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -357,28 +421,35 @@ From there, we should be able to toggle which source we want to be displaying on
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                         | I want to …​                                               | So that I can…​                                      |
+| Priority | As a …​                      | I want to …​                                            | So that I can…​                                   |
 | -------- | ------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------- |
 | `* * *`  | small business owner            | add items into the inventory list                          | account for newly stocked items                      |
 | `* * *`  | small business owner            | record item related information (name, price, cost, id)    | record and track items' details easily               |
-| `* * *`  | small business owner            | delete items from the inventory                            | account for discarded or sold items                  |
-| `* * *`  | small business owner            | look at all my inventory items, with their count           | review and track my inventory                        |
+| `* * *`  | careless business owner         | delete items from the inventory                            | remove wrongly added items and not incur any cost    |
+| `* * *`  | small business owner            | remove items from the inventory                            | account for discarded or sold items                  |
+| `* * *`  | small business owner            | look at all my inventory items, and their information      | review and track my inventory                        |
 | `* * *`  | small business owner            | record new orders and update the inventory accordingly     | account for newly confirmed orders                   |
-| `* * *`  | small business owner            | list past transactions                                     | review verify transaction details                    |
-| `* * *`  | budget-savvy business owner     | track the cost that each item incurs                       | manage business costs closely                        |
-
-*{More to be added}*
+| `* * *`  | small business owner            | search for item details quickly                            | respond to client or my own queries promptly         |
+| `* *`    | small business owner            | list past transactions                                     | review and verify transaction details                |
+| `* *`    | budget-savvy business owner     | track the cost and profit that each item incurs            | manage business costs and revenue closely            |
+| `* *`    | organised business owner        | sort my inventory by name                                  | keep my inventory easy to navigate                   |
+| `* *`    | small business owner            | identify items that are running low in inventory           | track which items need to be restocked               |
+| `* *`    | first time user                 | seek help on how to utilise the application                |                                                      |
+| `*`      | prudent business owner          | identify my bestsellers and flops                          | reprice my items and optimise profits                |
+| `*`      | risk-averse business owner      | password protect my application                            | my data is kept private                              |
 
 ### Use cases
 
 For all use cases below, the **System** is the `Bogo Bogo` and the **Actor** is the `user`, unless specified otherwise.
 
-<div class="code-example bg-grey-lt-000">
-</div>
-
 *Mutating the Inventory*{: .text-purple-000 }
 
-### Adding Item
+<details open markdown="block">
+  <summary>
+    <b>UC01 - Adding Item(s)</b>
+  </summary>
+  {: .text-delta }
+
 ```
 MSS:
 1. User requests to add a certain amount of an item into the inventory.
@@ -386,7 +457,8 @@ MSS:
    Use case ends.
 
 Extensions:
-1a. User is adding the item for the first time, and did not specify the id, cost price or sell price of the item.
+1a. User is adding the item for the first time, 
+    and did not specify the id, cost price or sell price of the item.
     1a1. BogoBogo informs user of the missing details.
     1a2. User reenters the missing details.
     Use case resumes at step 2.
@@ -405,6 +477,14 @@ Extensions:
     1d2. User reenters the corrected details.
     Use case resumes at step 2.
 ```
+
+</details>
+
+<details open markdown="block">
+  <summary>
+    <b>UC02 - Deleting an Item</b>
+  </summary>
+  {: .text-delta }
 
 ### Deleting Item
 ```
@@ -434,7 +514,14 @@ Extensions:
     Use case resumes at step 2.
 ```
 
-### Removing Item
+</details>
+
+<details open markdown="block">
+  <summary>
+    <b>UC03 - Removing Item(s)</b>
+  </summary>
+  {: .text-delta }
+
 ```
 MSS:
 1. User requests to remove a certain amount of an item from the inventory.
@@ -470,11 +557,19 @@ Extensions:
     Use case ends.
 ```
 
-### Editing Item
+</details>
+
+<details open markdown="block">
+  <summary>
+    <b>UC04 - Editing an Item</b>
+  </summary>
+  {: .text-delta }
+
 ```
 Precondition: BogoBogo is displaying the inventory.
 MSS:
-1. User requests to edit an item, specifying an item by index, with the fields and values to change.
+1. User requests to edit an item, specifying an item by index, 
+   with the fields and values to change.
 2. BogoBogo updates the fields of the item at the specified index with the new values given.
    Use case ends.
 
@@ -492,23 +587,45 @@ Extensions:
     Use case ends.
 ```
 
-### Clearing the Inventory
+</details>
+
+<details open markdown="block">
+  <summary>
+    <b>UC05 - Clearing the Inventory</b>
+  </summary>
+  {: .text-delta }
+
 ```
 MSS:
 1. User requests to clear the inventory.
 2. BogoBogo acknowledges the request and clears the inventory.
    Use case ends.
 ```
+</details>
 
-### Finding an Item
+*Navigating the Inventory*{: .text-purple-000 .text-gamma }
+
+<details open markdown="block">
+  <summary>
+    <b>UC06 - Finding an Item</b>
+  </summary>
+  {: .text-delta }
+
 ```
 MSS:
-1. User searches for an item in the inventory by specifying possible id(s), name(s) or tag(s).
+1. User searches for an item in the inventory 
+   by specifying possible id(s), name(s) or tag(s).
 2. BogoBogo finds all items in the inventory that matches any of the descriptors.
    Use case ends.
 ```
+</details>
 
-### Sorting the Inventory
+<details open markdown="block">
+  <summary>
+    <b>UC07 - Sorting the Inventory</b>
+  </summary>
+  {: .text-delta }
+
 ```
 Precondition: BogoBogo is displaying the inventory.
 MSS:
@@ -521,18 +638,30 @@ Extensions:
     1a1. BogoBogo notifies user that user can only sort by either name or count, not both.
     Use case ends.
 ```
+</details>
 
-### Listing the Inventory
+<details open markdown="block">
+  <summary>
+    <b>UC08 - Listing the Inventory</b>
+  </summary>
+  {: .text-delta }
+
 ```
 MSS:
 1. User requests to list out all items in the inventory
 2. BogoBogo lists out all items in inventory.
    Use case ends.
 ```
+</details>
 
 *Managing Orders*{: .text-purple-000 }
 
-### Placing an Order
+<details open markdown="block">
+  <summary>
+    <b>UC09 - Placing an Order</b>
+  </summary>
+  {: .text-delta }
+
 ```
 MSS:
 1. User requests to start an order.
@@ -582,7 +711,14 @@ Extensions:
     Use case ends.
 ```
 
-### Removing Item from Order
+</details>
+
+<details open markdown="block">
+  <summary>
+    <b>UC10 - Removing an item from Order</b>
+  </summary>
+  {: .text-delta }
+
 ```
 Precondition: The user has started an order.
 MSS:
@@ -611,7 +747,14 @@ Extensions:
     Use case resumes at step 2.
 ```
 
-### Listing the Current Order
+</details>
+
+<details open markdown="block">
+  <summary>
+    <b>UC11 - Listing the current Order</b>
+  </summary>
+  {: .text-delta }
+
 ```
 MSS:
 1. User requests to list out current order.
@@ -624,7 +767,14 @@ Extensions:
     Use case ends.
 ```
 
-### Viewing Past Transactions
+</details>
+
+<details open markdown="block">
+  <summary>
+    <b>UC12 - Viewing Past Transactions</b>
+  </summary>
+  {: .text-delta }
+
 ```
 MSS:
 1. User requests to view list of past transactions.
@@ -638,10 +788,16 @@ Extensions:
     3a1. BogoBogo notifies the user the transaction does not exist.
     Use case ends.
 ```
+</details>
 
 *Others*{: .text-purple-000 .text-gamma }
 
-### Seeking Help
+<details open markdown="block">
+  <summary>
+    <b>UC13 - Seeking Help</b>
+  </summary>
+  {: .text-delta }
+
 ```
 MSS:
 1. User requests for guidance in using BogoBogo.
@@ -658,7 +814,14 @@ Extensions:
     Use case resumes at step 2.
 ```
 
-### Exiting the Application
+</details>
+
+<details open markdown="block">
+  <summary>
+    <b>UC14 - Exiting the Application</b>
+  </summary>
+  {: .text-delta }
+
 ```
 MSS:
 1. User requests to exit the application
@@ -666,6 +829,7 @@ MSS:
 2. BogoBogo exits.
    Use case ends.
 ```
+</details>
 
 ### Non-Functional Requirements
 
@@ -675,13 +839,13 @@ MSS:
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be
    able to accomplish most of the tasks faster using commands than using the mouse.
 
-*{More to be added}*
-
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Item**: An inventory good that the business owner is/was selling
-* **Order**: Information regarding a transaction whereby the business sells a list of items to a customerfor revenue
+* **Item**: An inventory good that the user is/was selling
+* **Order**: Information regarding the items a customer is buying from the user.
+* **Open/current order**: An unconfirmed order that the user is in the midst of entering into BogoBogo.
+* **Transaction**: A confirmed order whereby the transaction of money for items has occurred.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -689,12 +853,12 @@ MSS:
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
-testers are expected to do more *exploratory* testing.
+<div class="code-example bg-grey-lt-000">:information_source: These instructions only provide a starting point for testers to work on;
+testers should do more exploratory testing.
 
 </div>
 
-### Launch and shutdown
+*Launch and shutdown*{: .text-beta : .text-purple-000 }
 
 1. Initial launch
 
@@ -711,153 +875,155 @@ testers are expected to do more *exploratory* testing.
    Expected: The most recent window size and location is retained.
 
 
-<div class="code-example bg-grey-lt-000">
-</div>
+*Mutating the Inventory*{: .text-beta : .text-purple-000 }
 
-*Mutating the Inventory*{: .text-purple-000 }
-
-## Adding Item
+### Adding Item
     1. Test case: `add milk id/232433 c/4 cp/3.0 sp/3.0`
-       <br>Expected: Milk item is successfully added into the inventory.
+       Expected: Milk item is successfully added into the inventory.
     2. Test case: `add milk id/232433 c/4 sp/3.0`
-       <br>Expected: Bogobogo displays error saying that name, id, costprice and salesprice must all be provided.
+       Expected: Bogobogo displays error saying that name, id, costprice and salesprice 
+       must all be provided.
     3. Test case: `add milk`
-       <br>Expected: Milk item is replenished by count 1 in the inventory.
+       Expected: Milk item is replenished by count 1 in the inventory.
     4. Test case: `add id/247937`
-       <br>Expected: Item with the specified id is replenished by count 1 in the inventory.
+       Expected: Item with the specified id is replenished by count 1 in the inventory.
 
 ### Deleting Item
     1. Test case: `delete milk id/232433`
-       <br>Expected: Milk item is successfully deleted from the inventory.
+       Expected: Milk item is successfully deleted from the inventory.
     2. Test case: `delete milk`
-       <br>Expected: Milk item is successfully deleted from the inventory.
+       Expected: Milk item is successfully deleted from the inventory.
     3. Test case: `delete id/232433`
-       <br>Expected: Milk item is successfully deleted from the inventory.
+       Expected: Milk item is successfully deleted from the inventory.
     4. Test case: `delete milk cp/3.0`
-       <br>Expected: Milk is not deleted. Bogobogo outputs error that DeleteCommand does not require costprice, 
-       salesprice and tag fields.
+       Expected: Milk is not deleted. Bogobogo outputs error that DeleteCommand
+       does not require costprice, salesprice and tag fields.
 
 ### Removing Item
     1. Test case: `remove milk id/232433`
-       <br>Expected: Milk item is successfully removed from the inventory.
+       Expected: Milk item is successfully removed from the inventory.
     2. Test case: `remove milk`
-       <br>Expected: Milk item is successfully removed from the inventory.
+       Expected: Milk item is successfully removed from the inventory.
     3. Test case: `remove id/232433`
-       <br>Expected: Milk item is successfully removed from the inventory.
+       Expected: Milk item is successfully removed from the inventory.
     4. Test case: `remove id/232433 c/5`
-       <br>Expected: x5 Milk item is successfully removed from the inventory.
+       Expected: x5 Milk item is successfully removed from the inventory.
     5. Test case: `remove milk cp/3.0`
-       <br>Expected: Milk is removed. Bogobogo outputs message that extra price fields are ignored.
+       Expected: Milk is removed. Bogobogo outputs message that extra price fields are ignored.
 
 ### Editing Item
     1. Test case: `edit 0 n/milk`
-       <br>Expected: Bogobogo outputs error as index is 1 based.
+       Expected: Bogobogo outputs error as index is 1 based.
     2. Test case: `edit 1 n/milk`
-       <br>Expected: Name of the first item in the inventory is edited to milk.
+       Expected: Name of the first item in the inventory is edited to milk.
     3. Test case: `edit 1 id/329749`
-       <br>Expected: Id of the first item in the inventory is edited to 329749.
+       Expected: Id of the first item in the inventory is edited to 329749.
     4. Test case: `edit 1 cp/3.0 sp/3.0`
-       <br>Expected: Costprice and Salesprice of the first item in the inventory is edited to $3.0.
+       Expected: Costprice and Salesprice of the first item in the inventory is edited to $3.0.
     5. Test case: `edit 1 c/5`
-       <br>Expected: First item is not edited. Bogobogo outputs error that count cannot be edited directly.
+       Expected: First item is not edited. Bogobogo outputs error that count
+       cannot be edited directly.
 
 ### Clearing the Inventory
     1. Test case: `clear`
-       <br>Expected: Bogobogo clears the entire inventory.
+       Expected: Bogobogo clears the entire inventory.
     2. Test case: `clear milkandcookie`
-       <br>Expected: Extra words are ignored. Bogobogo clears the entire inventory.
+       Expected: Extra words are ignored. Bogobogo clears the entire inventory.
 
 ### Finding Item
     1. Test case: `find n/milk`
-       <br>Expected: Bogobogo outputs the list of items that matches the field specified.
+       Expected: Bogobogo outputs the list of items that matches the field specified.
     2. Test case: `find n/milk n/cookie`
-       <br>Expected: Bogobogo outputs the list of items that matches the field specified.
+       Expected: Bogobogo outputs the list of items that matches the field specified.
     3. Test case: `find id/329749`
-       <br>Expected: Bogobogo outputs the list of items that matches the field specified.
+       Expected: Bogobogo outputs the list of items that matches the field specified.
     4. Test case: `find t/popular`
-       <br>Expected: Bogobogo outputs the list of items that matches the field specified.
+       Expected: Bogobogo outputs the list of items that matches the field specified.
     5. Test case: `find cp/3.0`
-       <br>Expected: Bogobogo outputs error that there is unexpected prefix identified.
+       Expected: Bogobogo outputs error that there is unexpected prefix identified.
     6. Test case: `find cookie`
-       <br>Expected: Bogobogo outputs error that the command format is invalid.
+       Expected: Bogobogo outputs error that the command format is invalid.
 
 ### Sorting the Inventory
     1. Test case: `sort`
-       <br>Expected: Bogobogo outputs error that the command format is invalid.
+       Expected: Bogobogo outputs error that the command format is invalid.
     2. Test case: `sort n/`
-       <br>Expected: Bogobogo outputs the list of items sorted by name in alphabetical order.
+       Expected: Bogobogo outputs the list of items sorted by name in alphabetical order.
     3. Test case: `sort n/milk`
-       <br>Expected: Bogobogo outputs error that the command format is invalid.
+       Expected: Bogobogo outputs error that the command format is invalid.
     4. Test case: `sort hello`
-       <br>Expected: Bogobogo outputs error that the command format is invalid.
+       Expected: Bogobogo outputs error that the command format is invalid.
 
 ### Listing an Inventory
     1. Test case: `list`
-       <br>Expected: Bogobogo outputs the list of items in the inventory.
+       Expected: Bogobogo outputs the list of items in the inventory.
     2. Test case: `list oo`
-       <br>Expected: Bogobogo outputs error that the command format is invalid.
+       Expected: Bogobogo outputs error that the command format is invalid.
     3. Test case: `list n/milk`
-       <br>Expected: Bogobogo outputs error that the command format is invalid.
+       Expected: Bogobogo outputs error that the command format is invalid.
 
-*Managing Order*{: .text-purple-000 }
+*Managing Order*{: .text-beta : .text-purple-000 }
 
 ### Starting Order
     1. Test case: `sorder`
-       <br>Expected: Bogobogo starts a new order and enters ordering mode.
+       Expected: Bogobogo starts a new order and enters ordering mode.
     2. Test case: `sorder milkandcookie`
-       <br>Expected: Extra words are ignored. Bogobogo starts a new order and enters ordering mode.
+       Expected: Extra words are ignored. Bogobogo starts a new order and enters ordering mode.
 
 ### Adding Item into Order
     1. Test case: `iorder milk`
-       <br>Expected: Bogobogo inputs milk into the order.
+       Expected: Bogobogo inputs milk into the order.
     2. Test case: `iroder id/276434`
-       <br>Expected: Bogobogo inputs item with id 276434 into the order.
+       Expected: Bogobogo inputs item with id 276434 into the order.
     3. Test case: `iorder milk cp/3.0`
-       <br>Expected: Bogobogo inputs milk into the order. Bogobogo outputs message that extra price flags are ignored.
+       Expected: Bogobogo inputs milk into the order. Bogobogo outputs message that 
+       extra price flags are ignored.
     4. Test case: `iorder milk t/baked`
-       <br>Expected: Bogobogo inputs milk into the order. Bogobogo outputs message that extra tag flags are ignored.
+       Expected: Bogobogo inputs milk into the order. Bogobogo outputs message that 
+       extra tag flags are ignored.
     5. Test case: `iorder g/`
-       <br>Expected: Bogobogo outputs error that there is unexpected prefix identified.
+       Expected: Bogobogo outputs error that there is unexpected prefix identified.
 
 ### Removing Item from Order
     1. Test case: `corder milk`
-       <br>Expected: Bogobogo inputs milk into the order.
+       Expected: Bogobogo inputs milk into the order.
     2. Test case: `croder id/276434`
-       <br>Expected: Bogobogo inputs item with id 276434 into the order.
+       Expected: Bogobogo inputs item with id 276434 into the order.
     3. Test case: `corder g/`
-       <br>Expected: Bogobogo outputs error that there is unexpected prefix identified.
+       Expected: Bogobogo outputs error that there is unexpected prefix identified.
 
 ### Ending Order
     1. Test case: `eorder`
-       <br>Expected: Bogobogo processes the current order and saves it.
+       Expected: Bogobogo processes the current order and saves it.
     2. Test case: `eorder oo`
-       <br>Expected: Bogobogo ignores the extra paramaters and process the current order to save it.
+       Expected: Bogobogo ignores the extra paramaters and process the current order to save it.
 
 ### Listing the Current Order
     1. Test case: `list order`
-       <br>Expected: Bogobogo outputs the list of items in the current order.
+       Expected: Bogobogo outputs the list of items in the current order.
     2. Test case: `list oo`
-       <br>Expected: Bogobogo outputs error that the command format is invalid.
+       Expected: Bogobogo outputs error that the command format is invalid.
 
 ### Viewing Past Transactions
     1. Test case: `list txns`
-       <br>Expected: Bogobogo outputs the list of past transactions together with total cost, profit and revenue.
+       Expected: Bogobogo outputs the list of past transactions together with 
+       total cost, profit and revenue.
     2. Test case: `list txns bchfirwvb`
-       <br>Expected: Bogobogo outputs the list of past transaction with id bchfirwvb together with total cost, profit 
-    and revenue.
+       Expected: Bogobogo outputs the list of past transaction with id bchfirwvb together with 
+       total cost, profit and revenue.
 
-*Others*{: .text-purple-000 }
+*Others*{: .text-beta : : .text-purple-000 }
 
 ### Seeking Help
     1. Test case: `help`
-       <br>Expected: Bogobogo userguide is displayed in the feedback box. 
+       Expected: Bogobogo userguide is displayed in the feedback box. 
     2. Test case: `help add`
-       <br>Expected: Message usage of AddCommand is displayed in the feedback box.
+       Expected: Message usage of AddCommand is displayed in the feedback box.
 
 ### Exiting the Application
     1. Test case: `exit`
-       <br>Expected: Bogobogo exits the application.
+       Expected: Bogobogo exits the application.
     2. Test case: `exit oo`
-       <br>Expected: Bogogbogo ignores the extra parameters and exits the application.
+       Expected: Bogogbogo ignores the extra parameters and exits the application.
 
 

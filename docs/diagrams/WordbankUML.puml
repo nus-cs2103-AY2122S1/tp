@@ -1,0 +1,32 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package Logic <<Rectangle>> LOGIC_COLOR_T1 {
+Abstract Class Command LOGIC_COLOR
+Class CompleteCommand LOGIC_COLOR
+}
+
+Package Model <<Rectangle>> MODEL_COLOR_T1 {
+Class ModelManager
+Class WordBank{
++ queryWord() : String
++ addWord() : void
++ removeWord() : void
+}
+
+Class WordTrie {
+}
+
+}
+
+CompleteCommand -|> Command LOGIC_COLOR
+CompleteCommand --> ModelManager LOGIC_COLOR : queries >
+
+ModelManager *--> "1" WordBank : queries / updates >
+WordBank *--> "2" WordTrie : queries / updates >
+note on link: 1 trie for command keywords\n1 trie for item names
+
+@enduml

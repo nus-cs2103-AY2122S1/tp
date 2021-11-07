@@ -1,0 +1,41 @@
+@startuml
+!include style.puml
+
+box UI UI_COLOR_T1
+participant ":CommandBox" as CommandBox UI_COLOR
+endbox
+
+participant ":Logic" as Logic LOGIC_COLOR
+
+box Model MODEL_COLOR_T1
+participant ":ModelManager" as Model MODEL_COLOR
+participant ":Wordbank" as Wordbank MODEL_COLOR
+endbox
+
+activate CommandBox
+
+CommandBox --> Logic : execute("add noo[tab]")
+activate Logic
+
+Logic --> Model : queryWord("add noo")
+activate Model
+
+Model --> Wordbank : queryWord("add noo")
+activate Wordbank
+
+Wordbank --> Model : "add noodles"
+deactivate Wordbank
+
+Model --> Logic : "add noodles"
+deactivate Model
+
+Logic --> CommandBox : CommandSuggestion\n("add noodles")
+deactivate Logic
+
+CommandBox --> CommandBox : setText("add noodles)"
+activate CommandBox
+
+CommandBox --> CommandBox
+deactivate CommandBox
+
+@enduml
