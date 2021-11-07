@@ -1,8 +1,6 @@
 package seedu.anilist.model.anime;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_GENRE_ALPHA;
@@ -12,8 +10,8 @@ import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_STRING_EMPTY;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_STRING_NON_ASCII;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_STRING_SPACE;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_ACTION;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_SCIENCE_FICTION;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_SUPERNATURAL;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_SCIENCE_FICTION_UPPER_CASE;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_SUPERNATURAL_MIXED_CASE;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -36,25 +34,25 @@ public class GenresContainedPredicateTest {
     @Test
     public void equals() throws ParseException {
         List<String> firstGenreKeywordList = Collections.singletonList(VALID_GENRE_ACTION);
-        List<String> secondGenreKeywordList = Arrays.asList(VALID_GENRE_SUPERNATURAL, VALID_GENRE_HORROR);
+        List<String> secondGenreKeywordList = Arrays.asList(VALID_GENRE_SUPERNATURAL_MIXED_CASE, VALID_GENRE_HORROR);
         GenresContainedPredicate firstPredicate = new GenresContainedPredicate(firstGenreKeywordList);
         GenresContainedPredicate secondPredicate = new GenresContainedPredicate(secondGenreKeywordList);
 
         // same object -> returns true
-        assertEquals(firstPredicate, firstPredicate);
+        assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
         GenresContainedPredicate secondPredicateCopy = new GenresContainedPredicate(secondGenreKeywordList);
-        assertEquals(secondPredicateCopy, secondPredicateCopy);
+        assertTrue(secondPredicateCopy.equals(secondPredicateCopy));
 
         // different types -> returns false
-        assertNotEquals(1, firstPredicate);
+        assertFalse(firstPredicate.equals(1));
 
         // null -> returns false
-        assertNotEquals(null, firstPredicate);
+        assertFalse(firstPredicate.equals(null));
 
         // different keyword -> returns false
-        assertNotEquals(firstPredicate, secondPredicate);
+        assertFalse(firstPredicate.equals(secondPredicate));
     }
 
     @Test
@@ -110,7 +108,7 @@ public class GenresContainedPredicateTest {
 
         // Only one matching keyword
         predicate = new GenresContainedPredicate(Arrays.asList(VALID_GENRE_COMEDY_MIXED_CASE,
-                VALID_GENRE_SUPERNATURAL));
+                VALID_GENRE_SUPERNATURAL_MIXED_CASE));
         assertTrue(predicate.test(new AnimeBuilder().withGenres(VALID_GENRE_HORROR, VALID_GENRE_COMEDY).build()));
     }
 
@@ -123,11 +121,12 @@ public class GenresContainedPredicateTest {
         assertFalse(predicate.test(new AnimeBuilder().withGenres(VALID_GENRE_HORROR, VALID_GENRE_COMEDY).build()));
 
         // Non-matching keyword
-        predicate = new GenresContainedPredicate(List.of(VALID_GENRE_SUPERNATURAL));
+        predicate = new GenresContainedPredicate(List.of(VALID_GENRE_SUPERNATURAL_MIXED_CASE));
         assertFalse(predicate.test(new AnimeBuilder().withGenres(VALID_GENRE_HORROR, VALID_GENRE_COMEDY).build()));
 
         // Keywords match names, but does not match genre
-        predicate = new GenresContainedPredicate(Arrays.asList(VALID_GENRE_SCIENCE_FICTION, VALID_GENRE_ACTION));
+        predicate = new GenresContainedPredicate(Arrays.asList(VALID_GENRE_SCIENCE_FICTION_UPPER_CASE,
+                VALID_GENRE_ACTION));
         assertFalse(predicate.test(new AnimeBuilder().withName(VALID_NAME_AOT)
             .withGenres(VALID_GENRE_HORROR, VALID_GENRE_COMEDY).build()));
     }

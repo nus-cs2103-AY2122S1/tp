@@ -1,14 +1,12 @@
 package seedu.anilist.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.anilist.logic.commands.CommandTestUtil.DESC_GENRE_ACTION;
 import static seedu.anilist.logic.commands.CommandTestUtil.DESC_GENRE_SCIENCE_FICTION;
 import static seedu.anilist.logic.commands.CommandTestUtil.DESC_NAME_AKIRA;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_ACTION;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_SCIENCE_FICTION;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_SCIENCE_FICTION_UPPER_CASE;
 
 import java.util.HashSet;
 
@@ -24,25 +22,25 @@ public class GenresDescriptorTest {
         GenreCommand.GenresDescriptor descriptorWithSameValues =
                 new GenresDescriptorBuilder()
                         .withGenre(VALID_GENRE_ACTION).build();
-        assertEquals(DESC_GENRE_ACTION, descriptorWithSameValues);
+        assertTrue(DESC_GENRE_ACTION.equals(descriptorWithSameValues));
 
         // same object -> returns true
-        assertEquals(DESC_GENRE_ACTION, DESC_GENRE_ACTION);
+        assertTrue(DESC_GENRE_ACTION.equals(DESC_GENRE_ACTION));
 
         // null -> returns false
-        assertNotEquals(null, DESC_GENRE_ACTION);
+        assertFalse(DESC_GENRE_ACTION.equals(null));
 
         // different types -> returns false
-        assertNotEquals(5, DESC_GENRE_ACTION);
+        assertFalse(DESC_GENRE_ACTION.equals(5));
 
         // different genres -> returns false
-        assertNotEquals(DESC_GENRE_ACTION, DESC_GENRE_SCIENCE_FICTION);
+        assertFalse(DESC_GENRE_ACTION.equals(DESC_GENRE_SCIENCE_FICTION));
 
         // partial genre matches -> returns false
         GenreCommand.GenresDescriptor descriptorWithMultipleGenres =
                 new GenresDescriptorBuilder()
-                        .withGenre(VALID_GENRE_ACTION, VALID_GENRE_SCIENCE_FICTION).build();
-        assertNotEquals(DESC_NAME_AKIRA, descriptorWithMultipleGenres);
+                        .withGenre(VALID_GENRE_ACTION, VALID_GENRE_SCIENCE_FICTION_UPPER_CASE).build();
+        assertFalse(DESC_NAME_AKIRA.equals(descriptorWithMultipleGenres));
     }
 
     @Test

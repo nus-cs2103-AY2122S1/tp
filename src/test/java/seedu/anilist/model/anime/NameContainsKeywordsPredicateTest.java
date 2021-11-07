@@ -1,15 +1,13 @@
 package seedu.anilist.model.anime;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_STRING_EMPTY;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_STRING_NON_ASCII;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_STRING_SPACE;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_ACTION;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_SUPERNATURAL;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_SUPERNATURAL_MIXED_CASE;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_AKIRA;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_FATE_ZERO;
 
@@ -48,20 +46,20 @@ public class NameContainsKeywordsPredicateTest {
         NameContainsKeywordsPredicate secondPredicate = new NameContainsKeywordsPredicate(secondPredicateKeywordList);
 
         // same object -> returns true
-        assertEquals(firstPredicate, firstPredicate);
+        assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
         NameContainsKeywordsPredicate firstPredicateCopy = new NameContainsKeywordsPredicate(firstPredicateKeywordList);
-        assertEquals(firstPredicate, firstPredicateCopy);
+        assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
-        assertNotEquals(1, firstPredicate);
+        assertFalse(firstPredicate.equals(1));
 
         // null -> returns false
-        assertNotEquals(null, firstPredicate);
+        assertFalse(firstPredicate.equals(null));
 
         // different keyword -> returns false
-        assertNotEquals(firstPredicate, secondPredicate);
+        assertFalse(firstPredicate.equals(secondPredicate));
     }
 
     @Test
@@ -107,8 +105,9 @@ public class NameContainsKeywordsPredicateTest {
         assertFalse(predicate.test(new AnimeBuilder().withName(VALID_NAME_AKIRA).build()));
 
         // Keywords match genres, but does not match name
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList(VALID_GENRE_ACTION, VALID_GENRE_SUPERNATURAL));
+        predicate = new NameContainsKeywordsPredicate(Arrays.asList(VALID_GENRE_ACTION,
+                VALID_GENRE_SUPERNATURAL_MIXED_CASE));
         assertFalse(predicate.test(new AnimeBuilder().withName(VALID_NAME_AKIRA)
-                .withGenres(VALID_GENRE_ACTION, VALID_GENRE_SUPERNATURAL).build()));
+                .withGenres(VALID_GENRE_ACTION, VALID_GENRE_SUPERNATURAL_MIXED_CASE).build()));
     }
 }

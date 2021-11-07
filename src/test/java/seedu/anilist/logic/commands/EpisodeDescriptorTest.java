@@ -1,10 +1,10 @@
 package seedu.anilist.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.anilist.logic.commands.CommandTestUtil.DESC_EPISODE_ONE;
 import static seedu.anilist.logic.commands.CommandTestUtil.DESC_EPISODE_ZERO;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_EPISODE_TWO;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_EPISODE_TWO_WITH_ZEROS_PADDED;
 
 import org.junit.jupiter.api.Test;
 
@@ -16,23 +16,23 @@ public class EpisodeDescriptorTest {
         // same values -> returns true
         UpdateEpisodeCommand.EpisodeDescriptor descriptorWithSameValues =
             new UpdateEpisodeCommand.EpisodeDescriptor(DESC_EPISODE_ONE);
-        assertEquals(DESC_EPISODE_ONE, descriptorWithSameValues);
+        assertTrue(DESC_EPISODE_ONE.equals(descriptorWithSameValues));
 
         // same object -> returns true
-        assertEquals(DESC_EPISODE_ONE, DESC_EPISODE_ONE);
+        assertTrue(DESC_EPISODE_ONE.equals(DESC_EPISODE_ONE));
 
         // null -> returns false
-        assertNotEquals(null, DESC_EPISODE_ONE);
+        assertFalse(DESC_EPISODE_ONE.equals(null));
 
         // different types -> returns false
-        assertNotEquals(5, DESC_EPISODE_ONE);
+        assertFalse(DESC_EPISODE_ONE.equals(5));
 
         // different values -> returns false
-        assertNotEquals(DESC_EPISODE_ONE, DESC_EPISODE_ZERO);
+        assertFalse(DESC_EPISODE_ONE.equals(DESC_EPISODE_ZERO));
 
         // different episode -> returns false
         UpdateEpisodeCommand.EpisodeDescriptor editedEpisodeDesc =
-            new EpisodeDescriptorBuilder(DESC_EPISODE_ONE).withEpisode(VALID_EPISODE_TWO).build();
-        assertNotEquals(DESC_EPISODE_ONE, editedEpisodeDesc);
+            new EpisodeDescriptorBuilder(DESC_EPISODE_ONE).withEpisode(VALID_EPISODE_TWO_WITH_ZEROS_PADDED).build();
+        assertFalse(DESC_EPISODE_ONE.equals(editedEpisodeDesc));
     }
 }

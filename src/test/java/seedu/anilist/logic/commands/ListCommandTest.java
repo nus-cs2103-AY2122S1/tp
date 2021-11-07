@@ -1,10 +1,11 @@
 package seedu.anilist.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.anilist.commons.core.Messages.MESSAGE_ANIME_LISTED_OVERVIEW;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_STATUS_TOWATCH;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_STATUS_WATCHING;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_STATUS_WATCHING_MIXED_CASE;
 import static seedu.anilist.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.anilist.logic.commands.CommandTestUtil.showAnimeAtIndex;
 import static seedu.anilist.model.Model.PREDICATE_SHOW_ALL_ANIME;
@@ -70,29 +71,29 @@ public class ListCommandTest {
     @Test
     public void equals() {
         Predicate<Anime> firstPredicate =
-                new StatusEqualsPredicate(new Status(VALID_STATUS_WATCHING));
+                new StatusEqualsPredicate(new Status(VALID_STATUS_WATCHING_MIXED_CASE));
         Predicate<Anime> secondPredicate = PREDICATE_SHOW_ALL_ANIME;
 
         ListCommand listFirstCommand = new ListCommand(firstPredicate);
         ListCommand listSecondCommand = new ListCommand(secondPredicate);
 
         // same object -> returns true
-        assertEquals(listFirstCommand, listFirstCommand);
+        assertTrue(listFirstCommand.equals(listFirstCommand));
 
         // same values -> returns true
         ListCommand listFirstCommandCopy = new ListCommand(firstPredicate);
-        assertEquals(listFirstCommand, listFirstCommandCopy);
+        assertTrue(listFirstCommand.equals(listFirstCommandCopy));
 
         ListCommand listSecondCommandCopy = new ListCommand(secondPredicate);
-        assertEquals(listSecondCommand, listSecondCommandCopy);
+        assertTrue(listSecondCommand.equals(listSecondCommandCopy));
 
         // different types -> returns false
-        assertNotEquals(1, listFirstCommand);
+        assertFalse(listFirstCommand.equals(1));
 
         // null -> returns false
-        assertNotEquals(null, listFirstCommand);
+        assertFalse(listFirstCommand.equals(null));
 
         // different anime -> returns false
-        assertNotEquals(listFirstCommand, listSecondCommand);
+        assertFalse(listFirstCommand.equals(listSecondCommand));
     }
 }

@@ -85,14 +85,11 @@ public class Anime {
         }
 
         Anime otherAnime = (Anime) other;
-        Name otherAnimeName = otherAnime.getName();
-        Episode otherAnimeEpisode = otherAnime.getEpisode();
-        Status otherAnimeStatus = otherAnime.getStatus();
-        Set<Genre> otherAnimeGenres = otherAnime.getGenres();
-        return otherAnimeName.equals(this.getName())
-                && otherAnimeEpisode.equals(this.getEpisode())
-                && otherAnimeStatus.equals(this.getStatus())
-                && otherAnimeGenres.equals(this.getGenres());
+
+        return hasSameName(otherAnime)
+                && hasSameEpisode(otherAnime)
+                && hasSameStatus(otherAnime)
+                && hasSameGenres(otherAnime);
     }
 
     @Override
@@ -117,6 +114,22 @@ public class Anime {
         }
         builder.append(String.format("; (Status: %s)", getStatus()));
         return builder.toString();
+    }
+
+    private boolean hasSameName(Anime other) {
+        return this.name.equals(other.name);
+    }
+
+    private boolean hasSameEpisode(Anime other) {
+        return this.episode.equals(other.episode);
+    }
+
+    private boolean hasSameStatus(Anime other) {
+        return this.status.equals(other.status);
+    }
+
+    private boolean hasSameGenres(Anime other) {
+        return this.genres.equals(other.genres);
     }
 
 }

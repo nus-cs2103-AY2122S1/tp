@@ -10,8 +10,8 @@ import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_STRING_EMPTY;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_STRING_NON_ASCII;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_STRING_SPACE;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_ACTION;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_SCIENCE_FICTION;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_SUPERNATURAL;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_SCIENCE_FICTION_UPPER_CASE;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_SUPERNATURAL_MIXED_CASE;
 import static seedu.anilist.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -48,15 +48,15 @@ public class GenreTest {
 
         // valid genres
         assertTrue(Genre.isValidGenreName(VALID_GENRE_ACTION));
-        assertTrue(Genre.isValidGenreName(VALID_GENRE_SCIENCE_FICTION));
-        assertTrue(Genre.isValidGenreName(VALID_GENRE_SUPERNATURAL));
+        assertTrue(Genre.isValidGenreName(VALID_GENRE_SCIENCE_FICTION_UPPER_CASE));
+        assertTrue(Genre.isValidGenreName(VALID_GENRE_SUPERNATURAL_MIXED_CASE));
     }
 
     @Test
     public void compareTo() {
         Genre genreOne = new Genre(VALID_GENRE_ACTION);
         Genre genreOneCopy = new Genre(VALID_GENRE_ACTION);
-        Genre genreTwo = new Genre(VALID_GENRE_SUPERNATURAL);
+        Genre genreTwo = new Genre(VALID_GENRE_SUPERNATURAL_MIXED_CASE);
 
         // null input
         assertEquals(0, genreOne.compareTo(null));

@@ -19,6 +19,8 @@ import seedu.anilist.logic.parser.exceptions.ParseException;
 import seedu.anilist.model.AnimeList;
 import seedu.anilist.model.Model;
 import seedu.anilist.model.anime.Anime;
+import seedu.anilist.model.anime.Episode;
+import seedu.anilist.model.anime.Name;
 import seedu.anilist.model.anime.NameContainsKeywordsPredicate;
 import seedu.anilist.testutil.EpisodeDescriptorBuilder;
 import seedu.anilist.testutil.GenresDescriptorBuilder;
@@ -42,12 +44,10 @@ public class CommandTestUtil {
     public static final String VALID_NAME_BNHA = "Boku No Hero Academia";
     public static final String VALID_NAME_EIGHTY_SIX = "86";
     public static final String VALID_NAME_FATE_ZERO = "Fate/Zero";
-    public static final String VALID_NAME_JOJO_GOLDEN_WIND = "JoJo's Bizarre Adventure: Golden Wind";
-    public static final String VALID_NAME_NON_ALPHANUMERIC_ASCII = "~!@#$%^&()+-=:;";
-    public static final String VALID_NAME_MAX_LENGTH = "A".repeat(140);
+    public static final String VALID_NAME_MAX_LENGTH = "A".repeat(Name.MAX_LEN);
 
     // Invalid Names
-    public static final String INVALID_NAME_LONGER_THAN_MAX_LENGTH = "F".repeat(142);
+    public static final String INVALID_NAME_LONGER_THAN_MAX_LENGTH = "F".repeat(Name.MAX_LEN + 1);
 
     // Valid Name DESC
     public static final String NAME_DESC_AKIRA = " " + PREFIX_NAME + VALID_NAME_AKIRA;
@@ -62,21 +62,21 @@ public class CommandTestUtil {
     // Valid Episodes
     public static final String VALID_EPISODE_ZERO = "0";
     public static final String VALID_EPISODE_ONE = "1";
-    public static final String VALID_EPISODE_TWO = "0000002";
-    public static final String VALID_EPISODE_MAX = "99999";
+    public static final String VALID_EPISODE_TWO_WITH_ZEROS_PADDED = "0000002";
+    public static final String VALID_EPISODE_MAX = String.valueOf(Episode.MAX_EPISODE);
 
     // Invalid Episodes
 
     public static final String INVALID_EPISODE_ALPHA = "two";
     public static final String INVALID_EPISODE_NEG = "-1";
     public static final String INVALID_EPISODE_DECIMAL = "0.1";
-    public static final String INVALID_EPISODE_LARGER_THAN_MAX_EPISODE = "100000";
+    public static final String INVALID_EPISODE_LARGER_THAN_MAX_EPISODE = String.valueOf(Episode.MAX_EPISODE + 1);
     public static final String INVALID_EPISODE_LARGER_THAN_MAX_INT =
             Long.toString((long) Integer.MAX_VALUE + 1);
 
     // Valid Episode DESC
     public static final String EPISODE_DESC_EPISODE_ONE = " " + PREFIX_EPISODE + VALID_EPISODE_ONE;
-    public static final String EPISODE_DESC_EPISODE_TWO = " " + PREFIX_EPISODE + VALID_EPISODE_TWO;
+    public static final String EPISODE_DESC_EPISODE_TWO = " " + PREFIX_EPISODE + VALID_EPISODE_TWO_WITH_ZEROS_PADDED;
 
     // Invalid Episode DESC
     public static final String INVALID_EPISODE_DESC_NEG = " " + PREFIX_EPISODE + INVALID_EPISODE_NEG;
@@ -90,9 +90,9 @@ public class CommandTestUtil {
     // Valid Statuses
     public static final String VALID_STATUS_TOWATCH = "towatch";
     public static final String VALID_STATUS_TOWATCH_SHORT_FORM = "t";
-    public static final String VALID_STATUS_WATCHING = "WAtcHinG";
-    public static final String VALID_STATUS_WATCHING_SHORT_FORM = "W";
-    public static final String VALID_STATUS_FINISHED = "FINISHED";
+    public static final String VALID_STATUS_WATCHING_MIXED_CASE = "WAtcHinG";
+    public static final String VALID_STATUS_WATCHING_SHORT_FORM_UPPER_CASE = "W";
+    public static final String VALID_STATUS_FINISHED_UPPER_CASE = "FINISHED";
 
     // Invalid Statuses
     public static final String INVALID_STATUS_ALPHA = "TOWATCHINGG";
@@ -100,7 +100,7 @@ public class CommandTestUtil {
 
     // Valid Status DESC
     public static final String STATUS_DESC_TOWATCH = " " + PREFIX_STATUS + VALID_STATUS_TOWATCH;
-    public static final String STATUS_DESC_WATCHING = " " + PREFIX_STATUS + VALID_STATUS_WATCHING;
+    public static final String STATUS_DESC_WATCHING = " " + PREFIX_STATUS + VALID_STATUS_WATCHING_MIXED_CASE;
 
     // Invalid Status DESC
     public static final String INVALID_STATUS_DESC_ALPHA = " " + PREFIX_STATUS + INVALID_STATUS_ALPHA;
@@ -110,8 +110,8 @@ public class CommandTestUtil {
     //-----------------------------------------------------GENRE--------------------------------------------------------
     // Valid Genres
     public static final String VALID_GENRE_ACTION = "action";
-    public static final String VALID_GENRE_SCIENCE_FICTION = "SCI FI";
-    public static final String VALID_GENRE_SUPERNATURAL = "supERNatuRAl";
+    public static final String VALID_GENRE_SCIENCE_FICTION_UPPER_CASE = "SCI FI";
+    public static final String VALID_GENRE_SUPERNATURAL_MIXED_CASE = "supERNatuRAl";
 
     // Invalid Genres
     public static final String INVALID_GENRE_NON_ALPHANUMERIC = "comedy*";
@@ -120,7 +120,7 @@ public class CommandTestUtil {
 
     // Valid Genre DESC
     public static final String GENRE_DESC_ACTION = " " + PREFIX_GENRE + VALID_GENRE_ACTION;
-    public static final String GENRE_DESC_SCIENCE_FICTION = " " + PREFIX_GENRE + VALID_GENRE_SCIENCE_FICTION;
+    public static final String GENRE_DESC_SCIENCE_FICTION = " " + PREFIX_GENRE + VALID_GENRE_SCIENCE_FICTION_UPPER_CASE;
 
     // Invalid Genre DESC
     public static final String INVALID_GENRE_DESC_NON_ALPHANUMERIC = " "
@@ -131,8 +131,8 @@ public class CommandTestUtil {
     // Valid Actions
     public static final String VALID_ACTION_ADD = "add";
     public static final String VALID_ACTION_ADD_SHORT_FORM = "a";
-    public static final String VALID_ACTION_DELETE = "DeleTE";
-    public static final String VALID_ACTION_DELETE_SHORT_FORM = "D";
+    public static final String VALID_ACTION_DELETE_MIXED_CASE = "DeleTE";
+    public static final String VALID_ACTION_DELETE_SHORT_FORM_UPPER_CASE = "D";
 
     // Invalid Actions
     public static final String INVALID_ACTION_ALPHA = "dancing";
@@ -140,7 +140,8 @@ public class CommandTestUtil {
 
     // Valid Action DESC
     public static final String ACTION_DESC_ADD = " " + PREFIX_ACTION + VALID_ACTION_ADD;
-    public static final String ACTION_DESC_DELETE_SHORT_FORM = " " + PREFIX_ACTION + VALID_ACTION_DELETE_SHORT_FORM;
+    public static final String ACTION_DESC_DELETE_SHORT_FORM = " " + PREFIX_ACTION
+            + VALID_ACTION_DELETE_SHORT_FORM_UPPER_CASE;
 
     // Invalid Action DESC
     public static final String INVALID_ACTION_DESC_ALPHA = " " + PREFIX_ACTION + INVALID_ACTION_ALPHA;
@@ -168,10 +169,12 @@ public class CommandTestUtil {
         DESC_EPISODE_ZERO = new EpisodeDescriptorBuilder().withEpisode(VALID_EPISODE_ZERO).build();
         DESC_EPISODE_ONE = new EpisodeDescriptorBuilder().withEpisode(VALID_EPISODE_ONE).build();
         DESC_TOWATCH = new StatusDescriptorBuilder().withStatus(VALID_STATUS_TOWATCH).build();
-        DESC_WATCHING = new StatusDescriptorBuilder().withStatus(VALID_STATUS_WATCHING).build();
-        DESC_WATCHING_SHORTFORM = new StatusDescriptorBuilder().withStatus(VALID_STATUS_WATCHING_SHORT_FORM).build();
+        DESC_WATCHING = new StatusDescriptorBuilder().withStatus(VALID_STATUS_WATCHING_MIXED_CASE).build();
+        DESC_WATCHING_SHORTFORM = new StatusDescriptorBuilder().withStatus(VALID_STATUS_WATCHING_SHORT_FORM_UPPER_CASE)
+                .build();
         DESC_GENRE_ACTION = new GenresDescriptorBuilder().withGenre(VALID_GENRE_ACTION).build();
-        DESC_GENRE_SCIENCE_FICTION = new GenresDescriptorBuilder().withGenre(VALID_GENRE_SCIENCE_FICTION).build();
+        DESC_GENRE_SCIENCE_FICTION = new GenresDescriptorBuilder().withGenre(VALID_GENRE_SCIENCE_FICTION_UPPER_CASE)
+                .build();
     }
 
     /**

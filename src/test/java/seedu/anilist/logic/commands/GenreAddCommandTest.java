@@ -1,7 +1,6 @@
 package seedu.anilist.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.anilist.logic.commands.CommandTestUtil.DESC_GENRE_ACTION;
 import static seedu.anilist.logic.commands.CommandTestUtil.DESC_GENRE_SCIENCE_FICTION;
@@ -165,22 +164,22 @@ public class GenreAddCommandTest {
         // same values -> returns true
         GenreAddCommand.GenresDescriptor copyDescriptor = new GenreCommand.GenresDescriptor(descriptor);
         GenreAddCommand commandWithSameValues = new GenreAddCommand(INDEX_FIRST_ANIME, copyDescriptor);
-        assertEquals(standardCommand, commandWithSameValues);
+        assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
-        assertEquals(standardCommand, standardCommand);
+        assertTrue(standardCommand.equals(standardCommand));
 
         // null -> returns false
-        assertNotEquals(null, standardCommand);
+        assertFalse(standardCommand.equals(null));
 
         // different types -> returns false
-        assertNotEquals(standardCommand, new ClearCommand());
+        assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertNotEquals(standardCommand, new GenreAddCommand(INDEX_SECOND_ANIME, descriptor));
+        assertFalse(standardCommand.equals(new GenreAddCommand(INDEX_SECOND_ANIME, descriptor)));
 
         // different descriptor -> returns false
-        assertNotEquals(standardCommand, new GenreAddCommand(INDEX_FIRST_ANIME, DESC_GENRE_SCIENCE_FICTION));
+        assertFalse(standardCommand.equals(new GenreAddCommand(INDEX_FIRST_ANIME, DESC_GENRE_SCIENCE_FICTION)));
     }
 
     /**

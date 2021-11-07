@@ -8,7 +8,7 @@ import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_EPISODE_DESC_
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_EPISODE_DESC_LARGER_THAN_MAX_INT;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_EPISODE_DESC_NEG;
 import static seedu.anilist.logic.commands.CommandTestUtil.STATUS_DESC_TOWATCH;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_EPISODE_TWO;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_EPISODE_TWO_WITH_ZEROS_PADDED;
 import static seedu.anilist.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.anilist.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.anilist.testutil.TypicalIndexes.INDEX_FIRST_ANIME;
@@ -87,7 +87,7 @@ public class UpdateEpisodeCommandParserTest {
         String userInput = targetIndex.getOneBased() + EPISODE_DESC_EPISODE_TWO;
 
         UpdateEpisodeCommand.EpisodeDescriptor descriptor = new EpisodeDescriptorBuilder()
-            .withEpisode(VALID_EPISODE_TWO)
+            .withEpisode(VALID_EPISODE_TWO_WITH_ZEROS_PADDED)
             .build();
         UpdateEpisodeCommand expectedCommand = new UpdateEpisodeCommand(targetIndex, descriptor);
 

@@ -6,9 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_EPISODE_ONE;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_ACTION;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_SCIENCE_FICTION;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_SCIENCE_FICTION_UPPER_CASE;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_BNHA;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_STATUS_FINISHED;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_STATUS_FINISHED_UPPER_CASE;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_STATUS_TOWATCH;
 import static seedu.anilist.testutil.Assert.assertThrows;
 import static seedu.anilist.testutil.TypicalAnimes.AOT;
@@ -37,7 +37,7 @@ public class AnimeTest {
         // same name, all other attributes different -> returns true
         Anime editedAot = new AnimeBuilder(AOT)
                 .withEpisode(VALID_EPISODE_ONE)
-                .withStatus(VALID_STATUS_FINISHED)
+                .withStatus(VALID_STATUS_FINISHED_UPPER_CASE)
                 .withGenres(VALID_GENRE_ACTION).build();
         assertTrue(AOT.isSameAnime(editedAot));
 
@@ -86,7 +86,7 @@ public class AnimeTest {
         assertNotEquals(AOT, editedAot);
 
         // different genres -> returns false
-        editedAot = new AnimeBuilder(AOT).withGenres(VALID_GENRE_SCIENCE_FICTION).build();
+        editedAot = new AnimeBuilder(AOT).withGenres(VALID_GENRE_SCIENCE_FICTION_UPPER_CASE).build();
         assertNotEquals(AOT, editedAot);
     }
 }

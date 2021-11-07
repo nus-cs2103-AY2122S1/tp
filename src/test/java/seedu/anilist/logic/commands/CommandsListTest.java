@@ -40,9 +40,9 @@ public class CommandsListTest {
      */
     private String listOfCommandsToString(String[] listOfCommands) {
         String result = "";
-        for (String listOfCommand : listOfCommands) {
+        for (String command : listOfCommands) {
             result += "    - ";
-            result += listOfCommand;
+            result += command;
             result += "\n";
         }
         result = result.substring(0, result.length() - 1);

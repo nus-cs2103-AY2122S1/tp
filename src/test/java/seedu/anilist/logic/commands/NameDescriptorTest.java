@@ -1,7 +1,7 @@
 package seedu.anilist.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.anilist.logic.commands.CommandTestUtil.DESC_NAME_AKIRA;
 import static seedu.anilist.logic.commands.CommandTestUtil.DESC_NAME_BNHA;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_BNHA;
@@ -16,23 +16,23 @@ public class NameDescriptorTest {
         // same values -> returns true
         RenameCommand.NameDescriptor descriptorWithSameValues =
             new RenameCommand.NameDescriptor(DESC_NAME_AKIRA);
-        assertEquals(DESC_NAME_AKIRA, descriptorWithSameValues);
+        assertTrue(DESC_NAME_AKIRA.equals(descriptorWithSameValues));
 
         // same object -> returns true
-        assertEquals(DESC_NAME_AKIRA, DESC_NAME_AKIRA);
+        assertTrue(DESC_NAME_AKIRA.equals(DESC_NAME_AKIRA));
 
         // null -> returns false
-        assertNotEquals(null, DESC_NAME_AKIRA);
+        assertFalse(DESC_NAME_AKIRA.equals(null));
 
         // different types -> returns false
-        assertNotEquals(5, DESC_NAME_AKIRA);
+        assertFalse(DESC_NAME_AKIRA.equals(5));
 
         // different values -> returns false
-        assertNotEquals(DESC_NAME_AKIRA, DESC_NAME_BNHA);
+        assertFalse(DESC_NAME_AKIRA.equals(DESC_NAME_BNHA));
 
         // different names -> returns false
         RenameCommand.NameDescriptor renamedDesc =
             new NameDescriptorBuilder(DESC_NAME_AKIRA).withName(VALID_NAME_BNHA).build();
-        assertNotEquals(DESC_NAME_AKIRA, renamedDesc);
+        assertFalse(DESC_NAME_AKIRA.equals(renamedDesc));
     }
 }

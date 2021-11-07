@@ -12,7 +12,7 @@ import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_STRING_NON_AS
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_STRING_SPACE;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_EPISODE_MAX;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_EPISODE_ONE;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_EPISODE_TWO;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_EPISODE_TWO_WITH_ZEROS_PADDED;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_EPISODE_ZERO;
 import static seedu.anilist.testutil.Assert.assertThrows;
 
@@ -26,36 +26,50 @@ public class EpisodeTest {
 
     @Test
     public void constructor_invalidEpisode_throwsIllegalArgumentException() {
+        // Non Numbers
         assertThrows(IllegalArgumentException.class, () -> new Episode(INVALID_STRING_SPACE));
-        assertThrows(IllegalArgumentException.class, () -> new Episode(INVALID_STRING_EMPTY));
         assertThrows(IllegalArgumentException.class, () -> new Episode(INVALID_STRING_NON_ASCII));
-        assertThrows(IllegalArgumentException.class, () -> new Episode(INVALID_EPISODE_ALPHA));
+
+        // Decimals
         assertThrows(IllegalArgumentException.class, () -> new Episode(INVALID_EPISODE_DECIMAL));
+
+        // Negative int
         assertThrows(IllegalArgumentException.class, () -> new Episode(INVALID_EPISODE_NEG));
+
+        // Larger than max episode
         assertThrows(IllegalArgumentException.class, () -> new Episode(INVALID_EPISODE_LARGER_THAN_MAX_EPISODE));
+
+        // Larger than max int
         assertThrows(IllegalArgumentException.class, () -> new Episode(INVALID_EPISODE_LARGER_THAN_MAX_INT));
     }
 
     @Test
     public void isValidEpisode() {
-        // null episode
+        // Null episode
         assertThrows(NullPointerException.class, () -> Episode.isValidEpisode(null));
 
-        // invalid episode
-        assertFalse(Episode.isValidEpisode(INVALID_STRING_SPACE));
+        // Non Numbers
         assertFalse(Episode.isValidEpisode(INVALID_STRING_EMPTY));
-        assertFalse(Episode.isValidEpisode(INVALID_STRING_NON_ASCII));
         assertFalse(Episode.isValidEpisode(INVALID_EPISODE_ALPHA));
+
+        // Decimals
         assertFalse(Episode.isValidEpisode(INVALID_EPISODE_DECIMAL));
+
+        // Negative int
         assertFalse(Episode.isValidEpisode(INVALID_EPISODE_NEG));
+
+        // Larger than max episode
         assertFalse(Episode.isValidEpisode(INVALID_EPISODE_LARGER_THAN_MAX_EPISODE));
+
+        // Larger than max int
         assertFalse(Episode.isValidEpisode(INVALID_EPISODE_LARGER_THAN_MAX_INT));
 
-        // valid episodes
+        // Valid episodes
         assertTrue(Episode.isValidEpisode(VALID_EPISODE_ZERO));
         assertTrue(Episode.isValidEpisode(VALID_EPISODE_ONE));
-        assertTrue(Episode.isValidEpisode(VALID_EPISODE_TWO));
+        assertTrue(Episode.isValidEpisode(VALID_EPISODE_TWO_WITH_ZEROS_PADDED));
         assertTrue(Episode.isValidEpisode(VALID_EPISODE_MAX));
+
 
     }
 }

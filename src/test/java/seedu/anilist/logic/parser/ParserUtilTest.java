@@ -15,7 +15,7 @@ import static seedu.anilist.logic.commands.CommandTestUtil.NAME_DESC_AKIRA;
 import static seedu.anilist.logic.commands.CommandTestUtil.STATUS_DESC_WATCHING;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_ACTION_ADD;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_ACTION;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_SCIENCE_FICTION;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_SCIENCE_FICTION_UPPER_CASE;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_AKIRA;
 import static seedu.anilist.logic.parser.CliSyntax.PREFIX_ACTION;
 import static seedu.anilist.logic.parser.CliSyntax.PREFIX_STATUS;
@@ -187,12 +187,11 @@ public class ParserUtilTest {
     @Test
     public void parseGenres_collectionWithValidGenres_returnsGenreSet() throws Exception {
         Set<Genre> actualGenreSet = ParserUtil.parseGenres(Arrays.asList(VALID_GENRE_ACTION,
-                VALID_GENRE_SCIENCE_FICTION));
+                VALID_GENRE_SCIENCE_FICTION_UPPER_CASE));
         Set<Genre> expectedGenreSet = new HashSet<>(
                 Arrays.asList(new Genre(VALID_GENRE_ACTION),
-                        new Genre(VALID_GENRE_SCIENCE_FICTION.toLowerCase()))
+                        new Genre(VALID_GENRE_SCIENCE_FICTION_UPPER_CASE.toLowerCase()))
         );
-        System.out.println("A: ");
         assertEquals(expectedGenreSet, actualGenreSet);
     }
 

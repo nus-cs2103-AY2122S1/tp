@@ -2,7 +2,8 @@ package seedu.anilist.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_AKIRA;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_BNHA;
 import static seedu.anilist.testutil.Assert.assertThrows;
@@ -62,20 +63,20 @@ public class AddCommandTest {
         AddCommand addAkiraCommand = new AddCommand(akira);
 
         // same object -> returns true
-        assertEquals(addAkiraCommand, addAkiraCommand);
+        assertTrue(addAkiraCommand.equals(addAkiraCommand));
 
         // same values -> returns true
         AddCommand addAkiraCommandCopy = new AddCommand(akira);
-        assertEquals(addAkiraCommand, addAkiraCommandCopy);
+        assertTrue(addAkiraCommand.equals(addAkiraCommandCopy));
 
         // different types -> returns false
-        assertNotEquals(1, addAkiraCommand);
+        assertFalse(addAkiraCommand.equals(1));
 
         // null -> returns false
-        assertNotEquals(null, addAkiraCommand);
+        assertFalse(addAkiraCommand.equals(null));
 
         // different anime -> returns false
-        assertNotEquals(addAkiraCommand, addBnhaCommand);
+        assertFalse(addAkiraCommand.equals(addBnhaCommand));
     }
 
     /**
