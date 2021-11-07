@@ -250,8 +250,8 @@ Finds a contact by specifying either the name/module code(s).
 
 Format: `find n/NAME(S)`/`find m/MODULE_CODE(S)`
 * Can only search by name(s) or module code(s), but not both at once <br> i.e. You cannot perform `find n/Ben m/CS2040S`
-* The search is case-insensitive <br> e.g `ben` will match `Ben`
-* The order of the keywords does not matter <br> e.g. `Ben Tan` will match `Tan Ben`
+* The search is case-insensitive <br> e.g `alex` will match `Alex`
+* The order of the keywords does not matter <br> e.g. `Yeoh Alex` will match `Alex Yeoh`
 * Partial words will also be matched, for both name and module code searches. <br> e.g. `Ben` will match `Benjamin`, `S123` will match `CS1231`
 
 <div markdown="span" class="alert alert-primary">:exclamation: **Important:**
@@ -262,9 +262,9 @@ e.g. `find m/CS2030S CS2040S` will only return contacts that have both `CS2030S`
 </div>
 
 Examples:
-* `find n/Ben`: Search contacts that have names that contain `Ben`
-* `find n/Ben Bernice Mary`: Search contacts with names containing all of `Ben`, `Bernice` and `Mary`
-* `find m/CS2103T CS2100`: Search contacts that has both module codes `CS2103T` and `CS2100`
+* `find n/Alex`: Search contacts that have names that contain `Alex`
+* `find n/Charlotte Oliveiro`: Search contacts with names containing all of `Charlotte` and `Oliveiro`
+* `find m/CS1231 CS2030S`: Search contacts that have both module codes `CS1231` and `CS2030S`
 
 Command alias: `f`
 
@@ -379,22 +379,22 @@ Finds a contact by specifying the module code(s)/day(s)/start time(s).
 
 Format: `findc m/MODULE_CODE(S)`/`findc d/DAY(S)`/`findc t/START_TIME(S)`
 * Can only search using one prefix at a time <br> i.e. You cannot perform `findc m/CS2040S d/2`
-* The search is case-insensitive <br> e.g `cs2040` will match `CS2040`
+* The search is case-insensitive <br> e.g `cs1231` will match `CS1231`
 * Only for module codes, partial word matches will also be matched. <br> e.g. `S123` will match `CS1231`
 * Day input is only accepted in integer form <br> e.g. `1` for Monday, `7` for Sunday
 * Start time input is only accepted in the `HH:mm` format <br> e.g. `15:00` `09:00`
 
 <div markdown="span" class="alert alert-primary">:exclamation: **Important:**
 If multiple keywords are specified for the search, any lesson that matches at least one of the keywords will be returned <br>
-e.g. `findc m/CS2030 CS2040` will return lessons that are of module `CS2030` or `CS2040` <br>
+e.g. `findc m/CS1231 CS2030S` will return lessons that are of module `CS1231` or `CS2030S` <br>
 e.g. `findc d/2 3` will return lessons that are on Tuesday or Wednesday <br>
 e.g. `findc t/10:00 15:00` will return lessons that start at either timings `10:00` or `15:00`
 </div>
 
 Examples:
-* `findc m/CS2030 CS2040`: Search lessons of modules `CS2030` or `CS2040`
+* `findc m/CS1231 CS2030S`: Search lessons of modules `CS1231` or `CS2030S`
 * `findc d/2`: Search lessons that fall on Tuesdays
-* `findc t/14:00`: Search lessons that start at `14:00`
+* `findc t/10:00`: Search lessons that start at `10:00`
 
 Command alias: `fc`
 
