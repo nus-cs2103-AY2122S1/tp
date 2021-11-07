@@ -552,7 +552,6 @@ testers are expected to do more *exploratory* testing.
 
 ### Editing a lesson
 
-
 1. Prerequisites: The lesson must exist in contHACKS and could be access via a valid index.
 
 2. Test case: `editc 1 d/3`
