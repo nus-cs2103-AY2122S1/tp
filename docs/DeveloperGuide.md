@@ -563,8 +563,6 @@ testers are expected to do more *exploratory* testing.
 
 ### Finding a lesson
 
-1. Finding a lesson 
-
     1. Prerequisites: There exists a lesson with module code `CS1231` in the contact list, and no `CS1231S` exists in the contact list.
 
     2. Test case: `findc m/S123`<br>
@@ -581,8 +579,6 @@ testers are expected to do more *exploratory* testing.
 ### Editing a lesson
    
 ### Deleting a person
-
-1. Deleting a person while all persons are being shown
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
