@@ -197,7 +197,7 @@ Classes used by multiple components are in the [`seedu.tuitione.commons`](https:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Implementation**
+## **Implementation of features**
 
 This section describes some noteworthy details on how certain features are implemented.
 
@@ -281,7 +281,7 @@ The following sequence diagram shows how add lesson operation works:
 <img alt="AddLessonActivityDiagram" src="images/DeveloperGuideImage/AddLessonActivityDiagram.png"/>
 </center>
 
-#### Design considerations:
+#### Design considerations
 
 <ins>Aspect: How to design the syntax</ins>
 * Command Word Style
@@ -378,7 +378,7 @@ The following activity diagram summarizes what happens when a user executes the 
 <img alt="DeleteLessonActivityDiagram" src="images/DeveloperGuideImage/DeleteLessonActivityDiagram.png"/>
 </center>
 
-#### Design considerations:
+#### Design considerations
 
 <ins>Aspect: How to design the syntax</ins>
 * Option 1: `delete-l LESSON_INDEX`
@@ -470,7 +470,7 @@ happens when a user executes the enroll lesson command:
 <img alt="EnrollLessonActivityDiagram" src="images/DeveloperGuideImage/EnrollLessonActivityDiagram.png"/>
 </center>
 
-#### Design considerations:
+#### Design considerations
 
 <ins>Aspect: How to design the syntax</ins>
 * Option 1: `enroll STUDENT_INDEX l/LESSON_CODE`
@@ -563,7 +563,7 @@ The following activity diagram summarizes what happens when a user executes the 
 <img alt="UnenrollActivityDiagram" src="images/DeveloperGuideImage/UnenrollActivityDiagram.png"/>
 </center>
 
-#### Design considerations:
+#### Design considerations
 
 <ins>Aspect: How to design the syntax</ins>
 * Option 1: `unenroll STUDENT_INDEX l/LESSON_CODE`
@@ -645,7 +645,7 @@ The following activity diagram summarizes what happens when a user executes the 
 <img alt="FilterActivityDiagram" src="images/DeveloperGuideImage/FilterActivityDiagram.png"/>
 </center>
 
-#### Design considerations:
+#### Design considerations
 
 <u>Aspect: How to implement filter</u>
 * Option 1: one filter command that handles both grade and subject filtering
@@ -722,7 +722,7 @@ The following activity diagram summarizes what happens when a user executes the 
 <img alt="RosterActivityDiagram" src="images/DeveloperGuideImage/RosterActivityDiagram.png"/>
 </center>
 
-#### Design considerations:
+#### Design considerations
 
 <u>Aspect: How to implement roster</u>
 
@@ -829,7 +829,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 <img src="images/DeveloperGuideImage/CommitActivityDiagram.png" width="250" />
 </center>
 
-#### Design considerations:
+#### Design considerations
 
 <ins> Aspect: How undo & redo executes:</ins>
 
@@ -855,7 +855,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendices**
+## **Appendix**
 
 ### **Appendix A: Requirements**
 
