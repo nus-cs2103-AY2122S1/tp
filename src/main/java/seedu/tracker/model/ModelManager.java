@@ -181,6 +181,14 @@ public class ModelManager implements Model {
         filteredModules.setPredicate(predicate);
     }
 
+
+    @Override
+    public void updateFilteredModuleList() {
+        for (Module m : filteredModules) {
+            setModule(m, m);
+        }
+    }
+
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object

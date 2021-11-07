@@ -2,17 +2,17 @@
 
 !include Style.puml
 
-box Logic LOGIC_COLOR_T2
+box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":ModuleTrackerParser" as ModuleTrackerParser LOGIC_COLOR
 participant ":ViewCommandParser" as ViewCommandParser LOGIC_COLOR
-participant ":ViewCommand" as ViewCommand LOGIC_COLOR
+participant "v:ViewCommand" as ViewCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
-box Model MODEL_COLOR_T2
+box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
-participant ":AcademicCalendar" as AcademicCalendar MODEL_COLOR
+participant "a:AcademicCalendar" as AcademicCalendar MODEL_COLOR
 participant ":ModuleInSpecificSemesterPredicate" as ModuleInSpecificSemesterPredicate MODEL_COLOR
 end box
 
@@ -23,40 +23,42 @@ LogicManager -> ModuleTrackerParser++ : parseCommand("view y/2 s/1")
 create ViewCommandParser
 ModuleTrackerParser -> ViewCommandParser++
 
-ViewCommandParser -> ModuleTrackerParser--
+ViewCommandParser --> ModuleTrackerParser--
 
 ModuleTrackerParser -> ViewCommandParser++ : parse("y/2 s/1")
 
 create AcademicCalendar
 ViewCommandParser -> AcademicCalendar++
 
-AcademicCalendar -> ViewCommandParser-- :
+AcademicCalendar --> ViewCommandParser-- : a
 
 create ModuleInSpecificSemesterPredicate
 ViewCommandParser -> ModuleInSpecificSemesterPredicate++
 
-ModuleInSpecificSemesterPredicate -> ViewCommandParser-- : predicate
+ModuleInSpecificSemesterPredicate --> ViewCommandParser--
 
 create ViewCommand
 ViewCommandParser -> ViewCommand++
-ViewCommand ->ViewCommandParser-- : ViewCommand
+ViewCommand -->ViewCommandParser-- : v
 
-ViewCommandParser -> ModuleTrackerParser-- : ViewCommand
+ViewCommandParser --> ModuleTrackerParser-- : v
 destroy ViewCommandParser
 
-ModuleTrackerParser -> LogicManager-- : ViewCommand
+ModuleTrackerParser --> LogicManager-- : v
 
 LogicManager -> ViewCommand++ : execute()
 
 ViewCommand -> Model++ : updateFilteredModuleList( predicate )
 
-Model -> ViewCommand--
+Model --> ViewCommand--
 
 create CommandResult
 ViewCommand -> CommandResult++
-CommandResult -> ViewCommand--
+CommandResult --> ViewCommand--
 
-ViewCommand -> LogicManager--
-LogicManager ->[
+ViewCommand --> LogicManager-- : commandResult
+
+destroy ViewCommand
+LogicManager -->[
 
 @enduml

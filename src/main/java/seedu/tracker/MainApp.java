@@ -17,7 +17,6 @@ import seedu.tracker.logic.Logic;
 import seedu.tracker.logic.LogicManager;
 import seedu.tracker.model.Model;
 import seedu.tracker.model.ModelManager;
-import seedu.tracker.model.ModuleTracker;
 import seedu.tracker.model.ReadOnlyModuleTracker;
 import seedu.tracker.model.ReadOnlyUserInfo;
 import seedu.tracker.model.ReadOnlyUserPrefs;
@@ -91,10 +90,10 @@ public class MainApp extends Application {
             initialData = moduleTrackerOptional.orElseGet(SampleDataUtil::getSampleModuleTracker);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty ModuleTracker");
-            initialData = new ModuleTracker();
+            initialData = SampleDataUtil.getSampleModuleTracker();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty ModuleTracker");
-            initialData = new ModuleTracker();
+            initialData = SampleDataUtil.getSampleModuleTracker();
         }
 
         return new ModelManager(initialData, userPrefs, userInfo);

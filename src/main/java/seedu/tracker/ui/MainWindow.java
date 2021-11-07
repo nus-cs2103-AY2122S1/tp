@@ -132,7 +132,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Updates the footer semester and Mc goal.
+     * Updates the semester and Mc goal in the footer.
      */
     void updateFooter() {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getModuleTrackerFilePath(), logic.getUserInfo());

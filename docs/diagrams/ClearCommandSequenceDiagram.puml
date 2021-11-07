@@ -34,7 +34,7 @@ create ClearCommand
 ClearCommandParser -> ClearCommand
 activate ClearCommand
 create ModuleInSpecificSemesterPredicate
-ClearCommandParser --> ModuleInSpecificSemesterPredicate :
+ClearCommand-> ModuleInSpecificSemesterPredicate :
 activate ModuleInSpecificSemesterPredicate
 ModuleInSpecificSemesterPredicate --> ClearCommand : predicate
 deactivate ModuleInSpecificSemesterPredicate
@@ -77,7 +77,7 @@ activate CommandResult
 CommandResult --> ClearCommand
 deactivate CommandResult
 
-ClearCommand --> LogicManager : result
+ClearCommand --> LogicManager : commandResult
 deactivate ClearCommand
 
 [<--LogicManager

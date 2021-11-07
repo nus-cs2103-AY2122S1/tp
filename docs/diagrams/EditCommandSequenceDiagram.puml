@@ -79,7 +79,7 @@ activate CommandResult
 CommandResult --> EditCommand
 deactivate CommandResult
 
-EditCommand --> LogicManager : result
+EditCommand --> LogicManager : commandResult
 deactivate EditCommand
 
 [<--LogicManager

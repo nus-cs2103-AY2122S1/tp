@@ -134,7 +134,7 @@ The user's progress is displayed in the form of:
 
 ![requirements MCs Display](images/CourseRequirementsDisplay.png)
 * Shows the total number of MCs taken for that requirement, over the number of MCs needed to satisfy the requirement.
-* The total number of MCs taken is calculated from modules taken before the current semester, which have been tagged with the specific tags.
+* The total number of MCs taken for a requirement is calculated from modules taken before the current semester, which have been tagged with the specific tags.
     * For example: MCs for modules taken which are tagged with "ge" (`tag/ge`) will be counted into the total number of MCs taken for the GE requirement.
 * Modules with the following tags will be used in calculating the MCs completed for the corresponding requirement:
 
@@ -213,6 +213,7 @@ A module can have 4 different colour codes:
 * Inputs for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+
 </div>
 
 ### 3.5 Command Terminology
@@ -229,7 +230,7 @@ Tip: Do take a good look at this section to understand the common terminologies 
 #### `academic plan`
 * Refers to modules that you have assigned with a specific semester and year.
 * Contributes to the calculation of the MC requirements.<br>
-  ![requirements MCs Display](images/CourseRequirementsDisplay.png)
+  ![requirements MCs Display](images/McProgressDisplayFilled.png)
 
 #### `INDEX`
 * The `INDEX` refers to the index number of a module shown in the [database](#database).
@@ -240,12 +241,13 @@ Tip: Do take a good look at this section to understand the common terminologies 
 #### `CODE`
 * Represents the `module`'s code component.
 * `CODE` must follow the NUSMods module code format.
-* `CODE` should start with 2-3 capital letters, followed by 4 numerical digits, and end with an optional capital letter.
-* Valid Examples: CJ1101K, CH1001, NMB1234
-* Invalid Examples: CA300M, GEY10005, G1234M
+  * `CODE` should start with 2-3 capital letters, followed by 4 numerical digits, and end with 1-2 optional capital letters.
+  * Valid Examples: CJ1101K, CH1001, NMB1234, UIS3911EL
+  * Invalid Examples: CA300M, GEY10005, G1234M, GA1000MLC
 
 #### `TITLE`
 * Represents the `module`'s title component.
+* Titles should not be more than 60 characters.
 
 #### `DESCRIPTION`
 * Represents the `module`'s description component.
@@ -337,6 +339,7 @@ Do take note that the format is slightly different compared to the other feature
 
 Format: `FORMAT: find [c/] [t/] [d/] [m/] [tag/] [y/] [s/] KEYWORDS`
 * `KEYWORDS` refers to the words that the application will search the modules by.
+* `KEYWORDS` cannot be left blank.
 * If no optional parameters are entered, the application will search within all [components](#33-module-explanation) of the modules
   for matching `KEYWORDS`.
 * If optional parameters are entered, the application will search within the modules'
@@ -486,6 +489,12 @@ This section gives you the solutions to commonly asked questions.
 
 **Q**: Why is the module not included in the [MC Goal Progress](#325-mc-goal-progress) even though I have added it to my academic plan using the [take](#421-adding-a-module-to-the-academic-plan--take) command<br>
 **A**: Make sure that the module has the appropriate tag. Also make sure that the module is colour coded in green as specified [here](#33-module-explanation). Do remember that our MC Goal Progress only takes into account the modules that you have taken.
+
+**Q**: What should I do if I want to edit my data file directly? <br>
+**A**: Your data is saved as a JSON file `[JAR file location]/data/moduletracker.json`, you may directly access the file to edit your data. 
+<div markdown="span" class="alert alert-info">:information_source:
+Do note that if you edit your data file and NUS Mod Tracker deems it as an invalid data file, your data will be discarded and you will start with the default database modules.
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 

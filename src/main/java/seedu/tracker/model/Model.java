@@ -111,4 +111,8 @@ public interface Model {
      */
     void updateFilteredModuleList(Predicate<Module> predicate);
 
+    /**
+     * Updates all elements in filteredModuleList, but with no contents in filteredModuleList changed.
+     */
+    void updateFilteredModuleList();
 }

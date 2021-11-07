@@ -29,7 +29,7 @@
                     </minWidth>
                 </Label>
                 <Label fx:id="code" text="\$first" styleClass="cell_big_label"/>
-                <Label fx:id="title" styleClass="cell_small_label" text="\$title"/>
+                <Label fx:id="title" styleClass="cell_small_label" text="\$title" wrapText="true"/>
                 <Label fx:id="mc" styleClass="cell_small_label" text="\$mc"/>
             </FlowPane>
             <FlowPane fx:id="tags">
