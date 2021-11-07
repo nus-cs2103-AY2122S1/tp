@@ -59,7 +59,7 @@ contHACKS is a **desktop app to help Teaching Assistants (TAs) in managing conta
 
 This section provides tips on reading this document, as well as how to navigate it.
 
-This User Guide is structured so that it is easy for you to find what you need. If this is your first time using contHACKS, we recommend reading the User Guide in order, starting from this section. If you are ever lost, head over to [table of contents](#table-of-contents) to orientate yourself.
+This User Guide is structured so that it is easy for you to find what you need. If this is your first time using contHACKS, we recommend reading the User Guide in order, starting from this section. If you are ever lost, head over to the [table of contents](#table-of-contents) to orientate yourself.
 
 Here are some of the things you will need to know before you get started!
 ### Meaning of icons <a name="meaning-of-icons"></a>
