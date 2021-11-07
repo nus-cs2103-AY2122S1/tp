@@ -377,8 +377,8 @@ produces the list of friend recommendations.
 <ins>Step 3: Displaying the recommended friends</ins> 
 
 Due to the use of JavaFX's `FilteredList` and `SortedList`, which listens for and tracks for changes whenever the
-`FilteredList#setPredicate(Predicate)` or `SortedList#setComparator(Comparator)` methods are invoked, the UI is triggered and
-updated to display the filtered and sorted friends list based on the produced list of friend recommendations in step 2. 
+`FilteredList#setPredicate(Predicate)` or `SortedList#setComparator(Comparator)` methods are invoked, the user interface is
+notified and updated to display the filtered and sorted friends list based on the produced list of friend recommendations in step 2. 
 
 Hence, the user sees the displayed list of friend recommendations and this completes the implementation of the 
 recommend feature.  
