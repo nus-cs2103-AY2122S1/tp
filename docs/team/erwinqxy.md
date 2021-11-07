@@ -66,7 +66,7 @@ project. ([View Reposense](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?s
       [#474](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/474), [#482](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/482)
 
 6. **Community Contributions**: 
-   * Provide some feedback and bug reports to other teams during PED: [#1](https://github.com/erwinqxy/ped/issues/1),
+   * Provide some feedback and bug reporting to another team during PED: [#1](https://github.com/erwinqxy/ped/issues/1),
       [#2](https://github.com/erwinqxy/ped/issues/2), [#3](https://github.com/erwinqxy/ped/issues/3),
       [#4](https://github.com/erwinqxy/ped/issues/4), [#5](https://github.com/erwinqxy/ped/issues/5),
       [#6](https://github.com/erwinqxy/ped/issues/6), [#7](https://github.com/erwinqxy/ped/issues/7),
