@@ -1390,7 +1390,7 @@ testers are expected to do more *exploratory* testing.
 
 
     4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the appointment list size)<br>
-       Expected: No appointment is deleted. Errors details are shown in the status message.
+       Expected: No appointment is deleted. Error details are shown in the status message.
 
     5. Delete an appointment while some appointments are being shown
 
