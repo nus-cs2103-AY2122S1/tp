@@ -355,7 +355,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 Use case ends.
 
 **Extensions**
-* 1a. User fails to provide compulsory field
+* 1a. User fails to provide any of the compulsory fields
     * 1a1. contHACKS shows an error message <br/>
     Use case ends.
 
@@ -379,8 +379,8 @@ Use case ends.
 
 **MSS**
 
-1. User requests to find a contact based on inputs details
-2. contHACKS shows a list of contacts that matches input details
+1. User requests to find a contact based on input details
+2. contHACKS shows a list of contacts that matches the input details
 
 Use case ends.
 
@@ -458,7 +458,7 @@ Use case ends.
 
 **MSS**
 
-1. User requests to for the whole contact list
+1. User requests to list the whole contact list
 2. contHACKS displays the whole contact list
 
 Use case ends.
@@ -469,7 +469,7 @@ Use case ends.
 **MSS**
 
 1. User requests to clear all contacts
-2. contHACKS delete all the contacts and displays an empty contact list
+2. contHACKS deletes all the contacts and displays an empty contact list
 
 Use case ends.
 
@@ -478,12 +478,12 @@ Use case ends.
 **MSS**
 
 1. User requests to create a lesson and inputs lesson details
-2. contHACKS creates the contact and displays information of the newly added lesson
+2. contHACKS creates the lesson and displays information of the newly added lesson
 
 Use case ends.
 
 **Extensions**
-* 1a. User fails to provide compulsory field
+* 1a. User fails to provide any of the compulsory fields
     * 1a1. contHACKS shows an error message <br/>
       Use case ends.
 
@@ -507,8 +507,8 @@ Use case ends.
 
 **MSS**
 
-1. User requests to find a lesson based on inputs details
-2. contHACKS shows a list of lessons that matches input details
+1. User requests to find a lesson based on input details
+2. contHACKS shows a list of lessons that matches the input details
 
 Use case ends.
 
@@ -585,7 +585,7 @@ Use case ends
 
 **MSS**
 
-1. User requests to for the whole lesson list
+1. User requests to list the whole lesson list
 2. contHACKS displays the whole lesson list
 
 Use case ends.
@@ -596,7 +596,7 @@ Use case ends.
 **MSS**
 
 1. User requests to clear all lessons
-2. contHACKS delete all the lessons and displays an empty lesson list
+2. contHACKS deletes all the lessons and displays an empty lesson list
 
 Use case ends.
 
@@ -605,7 +605,7 @@ Use case ends.
 
 **MSS**
 
-1. User requests to for a help manual
+1. User requests for a help manual
 2. contHACKS displays the help manual
 
 Use case ends.
