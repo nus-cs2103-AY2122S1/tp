@@ -1,0 +1,42 @@
+@startuml
+!include ../style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor UI_COLOR_T4
+skinparam classBackgroundColor UI_COLOR_T4
+
+
+package UI <<Rectangle>> UI_COLOR_T1 {
+    Interface Ui <<Interface>>
+    Class "{abstract}\nUiPart<Stage>" as UiPart UI_COLOR_T4
+    Class "{abstract}\nUiPart<Region>" as UiPartRegion UI_COLOR_T4
+    Class UiManager
+    Class MainWindow
+    Class "{abstract}\nPopupWindow" as PopupWindow
+    Class HelpWindow
+    Class DashboardWindow
+    Class PopupManager UI_COLOR_T3
+    Class FileManager UI_COLOR_T3
+    package MainComponents YELLOW_COLOR {}
+}
+
+package Logic LOGIC_COLOR_T1 {}
+
+Class HiddenOutside #FFFFFF
+HiddenOutside ..> Ui
+
+UiManager .left.|> Ui
+UiManager -down-> "\t1" MainWindow
+HelpWindow -up-|> PopupWindow
+DashboardWindow -up-|> PopupWindow
+MainWindow *-down-> "*" MainComponents
+PopupWindow -up-|> "\t\t\t*" UiPart
+MainComponents -down-|> "\t\t*" UiPartRegion
+MainWindow -up-|> UiPart
+
+UiManager -right-> Logic
+MainWindow -up-> Logic
+MainWindow -down-> "\t1" PopupManager
+MainWindow -down-> "\t1" FileManager
+DashboardWindow -up-> Logic
+
+@enduml

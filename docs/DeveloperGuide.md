@@ -11,20 +11,21 @@ title: Developer Guide
 4. [Architecture](#Architecture)
 5. [UI components](#UI component)
 6. [Logic component](#Logic component)
-7. [Storage component](#Storage component)
-8. [Implementations](#Implementations)
-9. [Documentation, logging, testing, configuration, dev-ops](#Documentation)
-10. [Appendix: Requirements](#Appendix Requirements)
-11. [Common classes](#Common classes)
-12. [User Stories](#User Stories)
-13. [Use cases](#Use Cases)
-14. [Non-Functional Requirements](#Non-Functional Requirements)
-15. [Glossary](#Glossary)
-16. [Appendix: Instructions for manual testing](#Appendix)
+7. [Model](#Model component)
+8. [Storage component](#Storage component)
+9. [Common classes](#Common classes)
+10. [Implementations](#Implementations)
+11. [Documentation, logging, testing, configuration, dev-ops](#Documentation)
+12. [Appendix: Requirements](#Appendix Requirements)
+13. [User Stories](#User Stories)
+14. [Use cases](#Use Cases)
+15. [Non-Functional Requirements](#Non-Functional Requirements)
+16. [Glossary](#Glossary)
+17. [Appendix: Instructions for manual testing](#Appendix)
 
 --------------------------------------------------------------------------------------------------------------------
 
-## <a name="Acknowledgements"></a> **Acknowledgements**
+## <a name="Acknowledgements"></a> **1. Acknowledgements**
 
 ProgrammerError makes use of the following third-party libraries:
 
@@ -34,13 +35,13 @@ ProgrammerError makes use of the following third-party libraries:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## <a name="Setting up"></a> **Setting up, getting started**
+## <a name="Setting up"></a> **2. Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
-## <a name="Design"></a> **Design**
+## <a name="Design"></a> **3. Design**
 
 <div markdown="span" class="alert alert-primary">
 
@@ -48,7 +49,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 the [diagrams](https://github.com/AY2122S1-CS2103-F09-3/tp/tree/master/docs/diagrams) folder.
 </div>
 
-## <a name="Architecture"></a> Architecture
+## <a name="Architecture"></a> **4. Architecture**
 
 <img src="images/ArchitectureDiagram.png" width="280"/>
 
@@ -97,22 +98,39 @@ implementation of a component), as illustrated in the (partial) class diagram be
 
 The sections below give more details of each component.
 
-## <a name="UI component"></a> UI component
+## <a name="UI component"></a> **5. UI component**
 
 The **API** of this component is specified
 in [`Ui.java`](https://github.com/AY2122S1-CS2103-F09-3/tp/blob/master/src/main/java/seedu/programmer/ui/Ui.java)
 
-![Structure of the UI Component](images/UiClassDiagram.png)
+At a high level, the `MainWindow` component interacts with 3 other main components: `Logic`, `PopupManager` and `FileManager` (Figure 4.1).
+Note that the components under `MainWindow` have been omitted for simplicity and will be shown in greater detail in the next diagram.
 
-The main UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `StudentListPanel`
-, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures
-the commonalities between classes that represent parts of the visible GUI.
+![Structure of the UI Component](images/ui/UiClassDiagramOverview.png)
+<div style="text-align: center">
+    <em>Figure 5.1: Overview of Ui components</em>
+</div>
+<br>
+1. Firstly, `MainWindow` interacts with the `Logic` component to determine which data to display to the user.
+2. Secondly, `MainWindow` conducts file operations on the Ui through a `FileManager`.
+   For instance, the `FileManager` handles situations where the user is required to select files or directories.
+3. Thirdly, to manage the display of popup windows to the user, `MainWindow` interacts with a `PopupManager` which handles
+   the configuration, creation and showing of popups on the Ui.
 
 In addition, there are two additional windows that the UI can display: `HelpWindow` and `DashboardWindow`. They inherit
 from the abstract class `PopupWindow`, which captures the commonalities between classes that represent popup information
 to be displayed to the user.
 
-The `UI` component uses the JavaFx UI framework.
+Now taking a closer look at the `MainWindow` component, it consists of a number of parts e.g.`CommandBox`, `ResultDisplay`, `StudentListPanel`
+, `StatusBarFooter` etc. (Figure 5.2). These components, including the `MainWindow`, inherit from the abstract `UiPart` class which captures
+the commonalities between classes that represent parts of the visible GUI. The following is a summary of the parts of the `MainWindow`.
+
+![Structure of the UI Component](images/ui/UiClassDiagramMainComponents.png)
+<div style="text-align: center">
+    <em>Figure 5.2: MainWindow Ui components</em>
+</div>
+<br>
+Note that the `UI` component uses the JavaFx UI framework.
 
 - The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder.
   For example, the layout of
@@ -129,7 +147,7 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Student` object residing in the `Model`.
 
-## <a name="Logic component"></a> Logic component
+## <a name="Logic component"></a> **6. Logic component**
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
@@ -167,10 +185,9 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser`
   interface so that they can be treated similarly where possible e.g, during testing.
 
-## <a name="Model component"></a> Model component
+## <a name="Model component"></a> **7. Model component**
 
-**
-API** : [`Model.java`](https://github.com/AY2122S1-CS2103-F09-3/tp/blob/master/src/main/java/seedu/programmer/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2122S1-CS2103-F09-3/tp/blob/master/src/main/java/seedu/programmer/model/Model.java)
 
 ![Model Component](images/ModelClassDiagram.png)
 
@@ -192,7 +209,7 @@ The `Model` component,
 
 </div>
 
-## <a name="Storage component"></a> Storage component
+## <a name="Storage component"></a> **8. Storage component**
 
 **API** : [`Storage.java`](https://github.com/AY2122S1-CS2103-F09-3/tp/blob/master/src/main/java/seedu/programmer/storage/Storage.java)
 
@@ -207,13 +224,13 @@ The `Storage` component,
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
   that belong to the `Model`)
 
-## <a name="Common classes"></a> Common classes
+## <a name="Common classes"></a> **9. Common classes**
 
 Classes used by multiple components are in the `seedu.programmer.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## <a name="Implementations"></a> **Implementation**
+## <a name="Implementations"></a> **10. Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
 
@@ -365,7 +382,7 @@ The following activity diagram summarizes what happens when a CS2100 TA executes
   - Cons: 
     - The strict checks on the `UniqueStudentList` will affect `EditCommand` when the user tries to edit an existing student. 
     This will happen when the user only wants to edit one of the attribute. (For example, studentId.)
-    This newly edited student will have an old copy of the email. This side effect will casue the newly created `student` to clash with its old instance in `UniqueStudentList`, 
+    This newly edited student will have an old copy of the email. This side effect will cause the newly created `student` to clash with its old instance in `UniqueStudentList`, 
     causing the command to fail, even though it should be valid. As such, it makes it hard to implement, as we have to 
     ensure that it works with `EditCommand` as well.
 
@@ -564,9 +581,17 @@ success.
    downloaded quickly. However, since we wanted to make ProgrammerError more flexible and adaptable to different users, we opted to include the
    functionality of allowing the CS2100 TA to select a folder destination.
 
+
+### Purge Feature 
+
+
+This sequence diagram shows how the `purge` command works:
+![PurgeSequenceDiagram](images/commands/PurgeCommand/PurgeCommandSequenceDiagram.png)
+
+
 --------------------------------------------------------------------------------------------------------------------
 
-## <a name="Documentation"></a> **Documentation, logging, testing, configuration, dev-ops**
+## <a name="Documentation"></a> **11. Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -576,7 +601,7 @@ success.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## <a name="Appendix Requirements"></a> **Appendix: Requirements**
+## <a name="Appendix Requirements"></a> **12. Appendix: Requirements**
 
 ### Product scope
 
@@ -596,7 +621,7 @@ CS2100 Lab TAs who
 
 CS2100 Lab TAs who use ProgrammerError enjoys greater productivity and efficiency when managing their classes of students.
 
-## <a name="User Stories"></a> User Stories
+## <a name="User Stories"></a> **13. User Stories**
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
@@ -630,7 +655,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`     | a CS2100 TA with many students and classes         | store vital information of my students                                                           | query it when the need arises.
 | `*`     | CS2100 Teaching Staff                       | easily search and update student's contact details                                               | I can reach them throughout the module.
 
-## <a name="Use Cases"></a> Use Cases
+## <a name="Use Cases"></a> **14. Use Cases**
 
 For all use cases below, the **System** is the `ProgrammerError` and the **Actor** is the
 `CS2100 Teaching Assistant (CS2100 TA in short)`, unless otherwise specified.
@@ -804,7 +829,7 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
   Use case ends.
 
 
-## <a name="Non-Functional Requirements"></a> Non-Functional Requirements
+## <a name="Non-Functional Requirements"></a> **15. Non-Functional Requirements**
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2. A TA with above average typing speed for code should be able to accomplish most of the tasks faster using commands
@@ -821,7 +846,7 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 9. the GUI should be usable (i.e., all functions can be used even if the user experience is not optimal) for resolutions
    1280x720 and higher, and screen scales 150%.
 
-## <a name="Glossary"></a> Glossary
+## <a name="Glossary"></a> **16. Glossary**
 
 - **Mainstream OS**: Windows, Linux, Unix, OS-X
 - **Student ID**: An NUS student's matriculation number (AXXXXXXXY)
@@ -831,7 +856,7 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
 --------------------------------------------------------------------------------------------------------------------
 
-## <a name="Appendix"></a> **Appendix: Instructions for manual testing**
+## <a name="Appendix"></a> **17. Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 

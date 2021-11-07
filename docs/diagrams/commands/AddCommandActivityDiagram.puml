@@ -3,9 +3,9 @@ AddCommandActivityDiagram.puml@startuml
 
 start
 :User executes add command with Name, Student ID, Class ID, Email;
-if () then ([Valid inputs])
+if () then ([Invalid inputs])
   :Display error message in result;
-else ([Invalid inputs])
+else ([Valid inputs])
     : Creates a new Student object with the user inputs;
 endif
 
