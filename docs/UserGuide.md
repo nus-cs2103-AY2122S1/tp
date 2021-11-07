@@ -199,6 +199,8 @@ Format: `exit`
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 ## Managing Patients <a name="managing-patients"/>
 <div markdown="span" class="alert alert-info">:information_source: **Note:**
 To use commands for managing patients, toggle the displayed list to the patient list using the toggle command.
