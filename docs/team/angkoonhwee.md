@@ -64,6 +64,6 @@ Major contributions:<br>
 * [Manual Testing - Fees Calculator](../DeveloperGuide.md#fees-calculator)
 
 Minor contributions:<br>
-* [Use cases](../DeveloperGuide.md#use-cases) 10 and 11
+* [Use cases](../DeveloperGuide.md#use-cases) 10 11, 14 and 15.
 * Labelling the majority of the diagrams
     
