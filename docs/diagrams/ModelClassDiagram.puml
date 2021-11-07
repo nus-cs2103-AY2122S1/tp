@@ -32,6 +32,10 @@ package "Lesson" {
     Class "{abstract}\nLesson" as Lesson
 }
 
+package "LastUpdatedDate" {
+    Class LocalDateTime
+}
+
 }
 
 Class HiddenOutside #FFFFFF
@@ -45,6 +49,8 @@ Model .left.> ReadOnlyAddressBook
 ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
+
+AddressBook *--> "1" LocalDateTime
 
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
