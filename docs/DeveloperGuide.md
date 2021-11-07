@@ -573,7 +573,15 @@ testers are expected to do more *exploratory* testing.
 ### Editing a person
 
 ### Editing a lesson
-   
+
+1. Prerequisites: The lesson must exist in contHACKS and could be access via a valid index.
+
+2. Test case: `editc 1 d/3`
+   Expected: The day of the first lesson shown in contHACKS will be changed to `Wednesday`
+
+3. Test case: `editc -1 d/3`
+   Expected: An error message will be shown in the result display, showing that the index provided is invalid. The words in the command box will turn red.
+
 ### Deleting a person
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
