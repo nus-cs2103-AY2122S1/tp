@@ -13,10 +13,10 @@ public class Name {
             "Names should only contain up to 50 alphanumeric characters and spaces, and it should not be blank";
 
     /*
-     * The first character of the address must not be a whitespace,
+     * The first character of the name must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum} ]{1,50}";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]{0,49}";
 
     public final String fullName;
 
