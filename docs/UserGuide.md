@@ -79,8 +79,6 @@ Otherwise, if Java `11` is not installed, you may follow the installation instru
 e.g. typing **`help`** and pressing `Enter` will open the help window.<br>
    Here are some example commands you can try:
 
-   * **`friend --list`** : Lists all friends.
-
    * **`friend --add Draco -n Marcus`** : Adds a friend __Marcus__ with gitGud `FRIEND_ID` of __Draco__ to the application.
 
    * **`friend --delete Draco`** : Deletes friend with gitGud `FRIEND_ID` of __Draco__.
@@ -137,7 +135,8 @@ Adds a new friend to gitGud friend’s list with an associated **unique** friend
 
 **:information_source: What is the friend identifier?**
 
-The friend identifier (`FRIEND_ID`) is a name you assign to a friend to refer to each unique friend for use within the gitGud application, 
+The friend identifier (`FRIEND_ID`) is an ID you assign to a friend to refer to each unique friend for use within the 
+gitGud application, 
 it must also be unique and not previously exist in the friends list.
 gitGud has imposed the command constraints listed below on the friend identifier to ensure it is easy for you to remember and type.
 </div>
@@ -171,7 +170,7 @@ Examples:
 Screenshot:
 
 ![Friend add Screenshot](images/ui-screenshots/friend-add.png)
-<br><center><ins>Image: gitGud after adding a friend `Draco`</ins></center>
+<br><center><ins>Image: Command feedback box after adding a friend `Draco`</ins></center>
 
 #### Editing a friend: `friend --edit` 
 
@@ -186,8 +185,9 @@ Examples:
 * `friend --edit Draco -n Kevin` Sets the name of existing friend with the `FRIEND_ID` "Draco" to "Kevin".
 
 Screenshot: 
+
 ![Friend edit Screenshot](images/ui-screenshots/friend-edit.png)
-<br><center><ins>Image: gitGud after editing an existing friend `kevcool`'s name to `Kevin Foong`</ins></center>
+<br><center><ins>Image: Command feedback box after editing an existing friend `kevcool`'s name to `Kevin Foong`</ins></center>
 
 #### Deleting a friend: `friend --delete`
 
@@ -204,7 +204,7 @@ Examples:
 Screenshot:
 
 ![Friend delete Screenshot](images/ui-screenshots/friend-delete.png)
-<br><center><ins>Image: gitGud after deleting a friend `Draco`</ins></center>
+<br><center><ins>Image: Command feedback box after deleting a friend `Draco`</ins></center>
 
 #### Link a game to a friend: `friend --link`
 
@@ -239,8 +239,12 @@ Examples:
 
 Screenshot:
 
+![Friend link Screenshot](images/ui-screenshots/link-feedback.png)
+<br><center><ins>Image: Command feedback box after linking a friend `marcustxk` to a game `RocketLeague`</ins></center>
+
 ![Friend link Screenshot](images/ui-screenshots/friend-link.png)
-<br><center><ins>Image: gitGud after linking a friend to a game</ins></center>
+<br><center><ins>Image: gitGud after running `friend --get marcustxk`, after linking a friend `marcustxk` 
+to a game `RocketLeague`</ins></center>
 
 #### Unlinking a game from a friend: `friend --unlink`
 
@@ -258,8 +262,14 @@ Examples:
 
 Screenshot:
 
+![Friend unlink Screenshot](images/ui-screenshots/unlink-feedback.png)
+<br><center><ins>Image: Command feedback box after unlinking a friend `marcustxk` from a game 
+`RocketLeague`</ins></center>
+
 ![Friend unlink screenshot](images/ui-screenshots/friend-unlink.png)
-<br><center><ins>Image: gitGud after unlinking a game `DOTA` from friend `Draco`</ins></center>
+<br><center><ins>Image: gitGud after running `friend --get marcustxk`, after unlinking a game `RocketLeague` from a 
+friend 
+`marcustxk`</ins></center>
 
 #### Assigning a skill value for a linked game : `friend --skill`
 
@@ -281,7 +291,12 @@ Examples:
 Screenshot:
 
 ![Ui after assigning skill value](images/ui-screenshots/friend-skill-success.png)
-<br><center><ins>Image: gitGud after assigning skill value to game linked to friend</ins></center>
+<br><center><ins>Image: Command feedback box after assigning skill value `7` to a game `Valorant` linked to a
+friend `Draco`</ins></center>
+
+![Friend skill screenshot](images/ui-screenshots/friend-skill-then-get.png)
+<br><center><ins>Image: gitGud after running `friend --get Draco`, after adding a skill value `7` for a 
+friend `Draco` for a game `Valorant`</ins></center>
 
 #### Scheduling a friend: `friend --schedule`
 
@@ -317,8 +332,12 @@ Examples:
 
 Screenshot:
 
+![Ui after adding schedule](images/ui-screenshots/schedule-feedback.png)
+<br><center><ins>Image: Command feedback box after scheduling a friend's `Draco` availability</ins></center>
+
 ![Ui](images/ui-screenshots/friend-schedule.png)
-<br><center><ins>Image: gitGud after scheduling a friend's availability</ins></center>
+<br><center><ins>Image: gitGud after running `friend --get Draco`, after scheduling a friend's `Draco` 
+availability</ins></center>
 
 #### Recommending friends available to play with - `recommend`
 
@@ -421,7 +440,7 @@ Examples:
 Screenshot:
 
 ![Ui](images/ui-screenshots/game-add.png)
-<br><center><ins>Image: gitGud after adding a game</ins></center>
+<br><center><ins>Image: Command feedback box after adding a game</ins></center>
 
 #### Deleting a game: `game --delete`
 
