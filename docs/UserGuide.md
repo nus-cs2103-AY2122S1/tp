@@ -109,7 +109,7 @@ The Status Bar shows the path where you can find the saved file for TutorAid.
 
 ## 2.3 Command Format
 
-Commands are text that you can enter into the Command Box to tell TutorAid to perform an operation. Some commands can be divided into a few componenets, each of which serve different a purpose. The following diagram depicts the components of a command:
+Commands are text that you can enter into the Command Box to tell TutorAid to perform an operation. Some commands can be divided into a few components, each of which serve different a purpose. The following diagram depicts the components of a command:
 
 ![](images/command-syntax.png)
 
@@ -156,14 +156,14 @@ edit -s INDEX_NUMBER [sn/STUDENT_NAME] [sp/STUDENT_PHONE] [pn/PARENT_NAME] [pp/P
 add -sl s/STUDENT_INDEX... n/LESSON_INDEX...
 ```
 
-* Words in `UPPER_CASE` are the parameters that are to be supplied by you. They can contain spaces.
+* Words in `UPPER_CASE` are the parameters that you need to supply. They can contain spaces.
 * Items in square brackets are optional.
 * Parameters can be in any order.
 * If a parameter is expected only once in the command, and you specify it multiple times, only the last occurrence of the parameter will be taken.
 * `...` signals that multiple parameters of this type can be accepted(separated by a space), but there must be at least one parameter present.
   e.g. If the format of a command has `s/STUDENT_INDEX...` then both `s/1 2 3` and `s/1` are acceptable inputs, but not `s/ `.
 * Extraneous parameters for commands that do not take in parameters will be ignored.
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+  e.g. If the command specifies `help 123`, it will be interpreted as `help`.
 
 ***
 
@@ -204,11 +204,11 @@ add -sl s/STUDENT_INDEX... n/LESSON_INDEX...
 
 Welcome to TutorAid's beginner's tutorial! Here, you will learn how you can use some of our commands to manage the details of your students and lessons on a day-to-day basis :smile:
 
-If this is your first time launching TutorAid, you will be able to see that some sample data has been provided to you. For this tutorial, let's assume that you tutor the student(s) shown in the Student Panel and that you offer the lesson(s) shown in the Lesson Panel. 
+If this is your first time launching TutorAid, you will be able to see that some sample data has been provided to you.
 
   > :bulb: As you follow the tutorial, we also encourage you to further experiment with the various commands on your own to understand the ways in which TutorAid can help you!
 
-### 4.1: Adding a student and editing a student's details
+### 4.1: Adding a student and editing his/her details
 {:.no_toc}
 Imagine that a new student, John Yeo, has just approached you for your tutoring services. He has also provided you with the following contact details for your own reference:
 * John's phone number: 98765432
@@ -240,7 +240,7 @@ Now, John has just informed you that he has changed his contact number to 846329
 
    > :bulb: For more information on changing the viewing modes in TutorAid, you can refer to the detailed documentation for [List](#listing-all-students-and-lessons-list) commands.
 
-### 4.2: Adding a lesson and editing a lesson's details
+### 4.2: Adding a lesson and editing its details
 {:.no_toc}
 Now that you have added your first student (and perhaps a few others too), let us add some lessons to TutorAid. We will start by adding a lesson named _History 1_ into TutorAid with the following details:
 * Lesson timing: 10AM - 11AM on Mondays
@@ -285,7 +285,7 @@ Now that you have set up the lesson _History 1_, let us add one of your existing
 ### 4.4: Adding a progress note for a student
 {:.no_toc}
 Now, imagine you have ended your 'Maths 1' lesson. You realised that one of your students, Alex Yeoh, seems to struggle with the topic 'Vectors', and you wish to take 
-note of it so that you can provide him extra practice. To do so, you can easily add a progress note for Alex on TutorAid by following the steps below: 
+note of it so that you can provide him with extra practice. To do so, you can easily add a progress note for Alex on TutorAid by following the steps below: 
 
 1. Key in `add -p 1 Requires extra practice for Vectors` into the Command Box and press ENTER. 
 
@@ -306,7 +306,7 @@ Now, the next time you open TutorAid, you will be able to see Alex's latest prog
 
 ### 4.5: Deleting a student
 {:.no_toc}
-Lastly, imagine that your student, Alex Yeoh, has graduated from secondary school and wishes to discontinue his lessons. Thus, would like to remove his student details since he is no longer your student. 
+Lastly, imagine that your student, Alex Yeoh, has graduated from secondary school and wishes to discontinue his lessons. Since he is no longer your student, you would like to remove his details from TutorAid. 
 You can easily delete his data from TutorAid by following the steps below:
    
 1. Type `del -s 1` into the command box. 
@@ -542,13 +542,14 @@ Examples:
 
 ### Adding student(s) to lesson(s): `add -sl`
 {:.no_toc}
-Tells TutorAid that a student attends a particular lesson.
+Adds student(s) into the lesson(s) they are enrolled in.
 
 Format: `add -sl s/STUDENT_INDEX... l/LESSON_INDEX...`
 
-* Adds the students at the specified student indexes to the lessons at the specified lesson indexes.
+* Adds every specified student to every specified lesson.
 * The index refers to the index number shown in the displayed student list and lesson list.
 * The index must be a **positive integer** 1, 2, 3, ...
+* Minimally the indexes of 1 student and 1 lesson must be provided.
 
 Examples:
 * `add -sl s/1 2 3 l/2` adds the students with indexes 1, 2 and 3 into the lesson with index 2.
@@ -557,11 +558,11 @@ Examples:
 
 ### Deleting student(s) from lesson(s): `del -sl`
 {:.no_toc}
-Tells TutorAid that a student no longer attends a particular lesson.
+Removes student(s) from the lesson(s) they are no longer enrolled in.
 
 Format: `del -sl s/STUDENT_INDEX... l/LESSON_INDEX...`
 
-* Deletes the students at the specified student indexes from the lessons at the specified lesson indexes.
+* Removes every specified student from every specified lesson.
 * The index refers to the index number shown in the displayed student list and lesson list.
 * The index must be a **positive integer** 1, 2, 3, ...
 * Multiple indexes are allowed for both students and lessons if you would like to remove multiple students from multiple lessons at one go.
@@ -627,7 +628,7 @@ TutorAid student data are saved as a JSON file `[JAR file location]/data/tutorAi
 |---
 Action | Format and Examples
 --------|------------------
-**[Add student](#adding-a-student-add--s)** | `add -s sn/STUDENT_NAME [sp/STUDENT_PHONE] [pn/PARENT_NAME] [pp/PARENT_PHONE]…​` <br> e.g., `add -s sn/John Does sp/81234567 pn/Mrs Doe pp/91234567`
+**[Add student](#adding-a-student-add--s)** | `add -s sn/STUDENT_NAME [sp/STUDENT_PHONE] [pn/PARENT_NAME] [pp/PARENT_PHONE]` <br> e.g., `add -s sn/John Does sp/81234567 pn/Mrs Doe pp/91234567`
 **[Delete student](#deleting-a-student-del--s)** | `del -s STUDENT_INDEX`<br> e.g., `delete 3`
 **[Edit student](#editing-a-student-edit--s)** | `edit -s STUDENT_INDEX [sn/STUDENT_NAME] [sp/STUDENT_PHONE] [pn/PARENT_NAME] [pp/PARENT_PHONE]`<br>e.g., `edit -s 2 pp/91112222`
 **[View student](#viewing-a-student-view--s)** | `view -s STUDENT_INDEX`<br> e.g., `view -s 2`
@@ -640,7 +641,7 @@ Action | Format and Examples
 |---
 Action | Format and Examples
 --------|------------------
-**[Add lesson](#adding-a-lesson-add--l)** | `add -l n/P6 Maths c/20 p/80 t/Monday 1200-1400`<br>e.g.,`add -l n/P6 Maths c/20 p/80 t/Monday 1200-1400`
+**[Add lesson](#adding-a-lesson-add--l)** | `add n/LESSON_NAME [c/LESSON_CAPACITY] [p/LESSON_PRICE] [t/LESSON_TIMING]`<br>e.g.,`add -l n/P6 Maths c/20 p/80 t/Monday 1200-1400`
 **[Delete lesson](#deleting-a-lesson-del--l)** | `del -l LESSON_INDEX` <br>e.g.,`del -l 3`
 **[Edit lesson](#editing-a-lesson-edit--l)** | `edit -l LESSON_INDEX [n/LESSON_NAME] [c/LESSON_CAPACITY] [p/LESSON_PRICE] [t/LESSON_TIMING]`<br>e.g., `edit -l c/20 p/80`
 **[View lesson](#viewing-a-lesson-view--l)** | `view -l LESSON_INDEX`<br> e.g., `view -l 2`
