@@ -1,5 +1,5 @@
 ---
-layout: page 
+layout: page
 title: Samay Sagar's Project Portfolio Page
 ---
 

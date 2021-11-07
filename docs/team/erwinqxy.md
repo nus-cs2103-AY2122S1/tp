@@ -1,5 +1,5 @@
 ---
-layout: page 
+layout: page
 title: Erwin Quek's Project Portfolio Page
 ---
 
