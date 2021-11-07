@@ -12,9 +12,11 @@ Participant ":AcademyDirectory" as ad MODEL_COLOR
 end box
 
 -> ac ++ :execute
-ac -> mm :getFilteredStudentList()
-ac -> mm ++:deleteStudent(targetStudent)
-mm -> ad :removeStudent(targetStudent)
+ac -> mm ++ :getFilteredStudentList()
+deactivate
+ac -> mm ++ :deleteStudent(targetStudent)
+mm -> ad ++ :removeStudent(targetStudent)
+deactivate
 deactivate
 
 create result
