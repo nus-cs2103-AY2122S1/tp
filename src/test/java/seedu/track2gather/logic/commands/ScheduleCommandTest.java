@@ -20,36 +20,44 @@ import seedu.track2gather.model.person.Person;
 import seedu.track2gather.testutil.TestUtil;
 
 public class ScheduleCommandTest {
-    private Model model = new ModelManager(getTypicalTrack2Gather(), new UserPrefs());
-    private Model expectedModel = new ModelManager(model.getTrack2Gather(), new UserPrefs());
 
     @Test
     public void execute_emptyTrack2Gather_success() {
-        ScheduleCommand command = new ScheduleCommand();
-        String expectedMessage = String.format(ScheduleCommand.MESSAGE_SUCCESS);
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
+
+        ScheduleCommand command = new ScheduleCommand();
+        String expectedMessage = String.format(ScheduleCommand.MESSAGE_SUCCESS);
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_allNonCalledUnfilteredList_showsSameSchedule() {
+    public void execute_allNonCalledUnfilteredList_success() {
+        Model model = new ModelManager(getTypicalTrack2Gather(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getTrack2Gather(), new UserPrefs());
         model.resetAllCallStatuses();
         expectedModel.resetAllCallStatuses();
+
         assertCommandSuccess(new ScheduleCommand(), model, ScheduleCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
-    public void execute_allNonCalledFilteredList_showsAllUncalled() {
+    public void execute_allNonCalledFilteredList_success() {
+        Model model = new ModelManager(getTypicalTrack2Gather(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getTrack2Gather(), new UserPrefs());
         model.resetAllCallStatuses();
         expectedModel.resetAllCallStatuses();
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
+
         assertCommandSuccess(new ScheduleCommand(), model, ScheduleCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
     public void execute_differentCallStatusUnfilteredList_showsDifferentSchedule() {
+        Model model = new ModelManager(getTypicalTrack2Gather(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getTrack2Gather(), new UserPrefs());
+
         // Contains one called person
         Person personToCall = TestUtil.getPerson(model, INDEX_FIRST_PERSON);
         Person calledPerson = new Person(personToCall, personToCall.getCallStatus().call());
@@ -67,6 +75,8 @@ public class ScheduleCommandTest {
 
     @Test
     public void execute_differentCallStatusFilteredList_showsDifferentSchedule() {
+        Model model = new ModelManager(getTypicalTrack2Gather(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getTrack2Gather(), new UserPrefs());
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         // Contains one called person
@@ -88,6 +98,7 @@ public class ScheduleCommandTest {
     public void execute_allCalledUnfilteredList_showEmptySchedule() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
+
         // Contains one called person only
         model.addPerson(new Person(BOB, BOB.getCallStatus().call()));
 
@@ -102,6 +113,7 @@ public class ScheduleCommandTest {
     public void execute_allCalledFilteredList_showEmptySchedule() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
+
         // Contains called persons only
         model.addPerson(new Person(BOB, BOB.getCallStatus().call()));
         model.addPerson(new Person(ALICE, ALICE.getCallStatus().call()));
@@ -112,5 +124,21 @@ public class ScheduleCommandTest {
 
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
         assertEquals(expectedModel.getFilteredPersonList(), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_allCalledPersonsNotShownInSchedule() {
+        Model model = new ModelManager(getTypicalTrack2Gather(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getTrack2Gather(), new UserPrefs());
+
+        // One person called
+        model.addPerson(new Person(BOB, BOB.getCallStatus().call()));
+        expectedModel.addPerson(new Person(BOB, BOB.getCallStatus().call()));
+
+        ScheduleCommand command = new ScheduleCommand();
+        command.execute(model);
+        expectedModel.updateFilteredPersonList(Model.PREDICATE_SHOW_NON_CALLED);
+
+        assertEquals(model.getFilteredPersonList(), expectedModel.getFilteredPersonList());
     }
 }
