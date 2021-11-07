@@ -102,7 +102,7 @@ Examples:
 
 ### Edit a student : `editStudent`
 
-Edits an existing student in the students list.
+Edits an existing student in the last displayed student list.
 
 Format: `editStudent INDEX [n/NAME] [s/STUDENT_NUMBER] [e/EMAIL] [r/REPO_NAME] [u/USERNAME] [t/TAG]…​`
 
@@ -121,12 +121,12 @@ Examples:
   
 ### Delete a student: `deleteStudent`
 
-Deletes the specified student from the student list.
+Deletes the specified student from the last displayed student list.
 
 Format: `deleteStudent INDEX`
 
 * Deletes the student at the specified `INDEX`.
-* The index must refer to the index number shown in the displayed students list.
+* The index must refer to the index number shown in the last displayed students list.
 * The index number must be a positive number: 1, 2, 3…
 * Duplicate and multiple indexes are not allowed.
 
@@ -137,12 +137,12 @@ Examples:
 
 ### Marking a student's attendance: `marka`
 
-Marks the specified student(s) in the student list as present or absent.
+Marks the specified student(s) in the last displayed student list as present or absent.
 
 Format: `marka INDEX [MORE_INDEXES] w/WEEK_NUMBER`
 
 * Marks the student(s) as present (or absent) in the specified `INDEX(ES)`.
-* The index must refer to the index number shown in the displayed students list.
+* The index must refer to the index number shown in the last displayed students list.
 * The index and week number must be a positive number, and must correspond to the tutorial weeks of the semester: 3, 4... 12.
 * Duplicate indexes are not allowed.
 * Only one week number should be specified after the `w/` prefix.
@@ -157,12 +157,12 @@ Examples:
 
 ### Marking a student's participation: `markp`
 
-Marks the specified student(s) in the student list as participated or not participated.
+Marks the specified student(s) in the last displayed student list as participated or not participated.
 
 Format: `markp INDEX [MORE_INDEXES] w/WEEK_NUMBER`
 
 * Marks the student(s) as participated in the specified `INDEX` for that week.
-* The index must refer to the index number shown in the displayed students list.
+* The index must refer to the index number shown in the last displayed students list.
 * The index and week number must be a positive number, and must correspond to the tutorial weeks of the semester: 3, 4... 12.
 * Duplicate indexes are not allowed.
 * Only one week number should be specified after the `w/` prefix.
@@ -231,9 +231,12 @@ Examples:
   
 ### Editing a group : `editGroup`
 
+Edits a group from the last displayed group list.
+
 Format: `editGroup INDEX [g/GROUP_NAME] [r/REPO_NAME] [y/YEAR] [t/TAG]…​`
 
-* Edits the group at the specified `INDEX`. The index refers to the index number shown in the displayed group list.
+* Edits the group at the specified `INDEX`.
+* The index refers to the index number shown in the last displayed group list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
@@ -249,13 +252,14 @@ Examples:
 
 ### Delete a group: `deleteGroup`
 
-Deletes the specified group from the group list.
+Deletes the specified group from the last displayed group list.
 
 Format: `deleteGroup INDEX`
 
 * Deletes the student at the specified `INDEX`.
-* The index refers to the index number shown in the displayed group list.
+* The index refers to the index number shown in the last displayed group list.
 * The index must be a positive integer 1, 2, 3, …​
+* Duplicate and multiple indexes are not allowed.
 
 Examples:
 * `deleteGroup 1` deletes the group with index 1 in group list and displays a confirmation output with the group members and GitHub link of the group deleted.
@@ -263,14 +267,14 @@ Examples:
   
 ### Add a student to a group: `addMember`
 
-Adds a student in student list to an existing group in the group list.
+Adds a student in the last displayed student list to an existing group in the group list.
 
 Format: `addMember INDEX g/GROUP`
 
 * Adds the student specified at `INDEX` to the group with name specified by `GROUP`.
-* The index refers to the index number shown in the displayed student list.
+* The index refers to the index number shown in the last displayed student list.
 * The index must be a positive integer 1, 2, 3, …​
-* `GROUP` must be an existing group in the displayed group list.
+* `GROUP` must be an existing group in the group list.
 
 Examples:
 * `addMember 1 g/W10-2` adds the student with index 1 in the student list to group W10-2 and displays a confirmation output that the student has been added to the group.
@@ -278,16 +282,16 @@ Examples:
 
 ### Delete a student from a group: `deleteMember`
 
-Deletes the specified group from the group list.
+Deletes the specified member from the last displayed group list.
 
 Format: `deleteMember GROUP_INDEX STUDENT_INDEX`
 
 * Deletes the student at the specified `STUDENT_INDEX` in the group at the specified `GROUP_INDEX`.
-* The index refers to the index number shown in the respective displayed group list and group member list.
-* The index must be a positive integer 1, 2, 3, …​
+* The indexes refer respectively, to the index number shown in the last displayed group list and group member list.
+* The indexes must be a positive integer 1, 2, 3, …​
 
 Examples:
-* `deleteMember 1 2` deletes the member with index 2 in the group member list of the  group with index 1 in group list and displays a confirmation output with the affected group member and group name.
+* `deleteMember 1 2` deletes the member with index 2 in the group member list of the group with index 1 in group list and displays a confirmation output with the affected group member and group name.
   ![result for 'deleteMember'](images/deleteMemberF14-4.png)
 
 ### Locating group by name: `findGroup`
@@ -328,7 +332,7 @@ Format: `tasks`
 
 ### Add a todo task: `todo`
 
-Adds a todo task with the given TASK_NAME.
+Adds a todo task.
 
 Format: `todo n/TASK_NAME [d/DESCRIPTION] [p/TASK_PRIORITY] [t/TAG]…​`
 
@@ -366,7 +370,7 @@ Examples:
 
 ### Add a deadline task: `deadline`
 
-Adds a deadline task with the given name, and a specified deadline.
+Adds a deadline task with a specified deadline.
 
 Format: `event n/TASK_NAME by/DEADLINE [d/DESCRIPTION] [p/TASK_PRIORITY] [t/TAG]…​`
 
@@ -377,7 +381,7 @@ Format: `event n/TASK_NAME by/DEADLINE [d/DESCRIPTION] [p/TASK_PRIORITY] [t/TAG]
 
 Examples:
 * `deadline n/tutorial participation by/2021-09-23 p/H` creates the deadline task "tutorial participation",
-  with deadline "2021-09-23" with High Priority.
+  with deadline "2021-09-23" with HIGH Priority.
 * `deadline n/assignment submission by/2021-10-04` creates the deadline task "assignment submission",
   with the deadline "2021-10-04" with LOW Priority.
 
