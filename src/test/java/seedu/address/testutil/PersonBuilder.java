@@ -8,6 +8,7 @@ import java.util.Set;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Description;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Importance;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -33,7 +34,7 @@ public class PersonBuilder {
     private Set<Tag> tags;
     private List<Task> tasks;
     private Description description;
-    private boolean isImportant;
+    private Importance importance;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -46,7 +47,7 @@ public class PersonBuilder {
         description = new Description(DEFAULT_DESCRIPTION);
         tags = new HashSet<>();
         tasks = new ArrayList<>();
-        isImportant = false;
+        importance = new Importance(false);
     }
 
     /**
@@ -60,7 +61,7 @@ public class PersonBuilder {
         description = personToCopy.getDescription();
         tags = new HashSet<>(personToCopy.getTags());
         tasks = personToCopy.getTasks();
-        isImportant = personToCopy.isImportant();
+        importance = personToCopy.getImportance();
     }
 
     /**
@@ -122,13 +123,13 @@ public class PersonBuilder {
     /**
      * Sets the {@code Description} of the {@code Person} that we are building.
      */
-    public PersonBuilder withImportance(boolean importance) {
-        this.isImportant = importance;
+    public PersonBuilder withImportance(boolean isImportant) {
+        this.importance = new Importance(isImportant);
         return this;
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, tags, tasks, description, isImportant);
+        return new Person(name, phone, email, address, tags, tasks, description, importance);
     }
 
 }

@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_IMPORTANCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -28,6 +29,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Description;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Importance;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -57,7 +59,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]"
-            + "[" + PREFIX_DESCRIPTION + "Description]"
+            + "[" + PREFIX_DESCRIPTION + "DESCRIPTION]"
+            + "[" + PREFIX_IMPORTANCE + "IMPORTANCE]"
             + "[" + PREFIX_TASK_INDEX + " TASK_INDEX (must be a positive integer less than or equal to "
             + Integer.MAX_VALUE + ")\n"
             + "[" + PREFIX_TASK_DESCRIPTION + " TASK_NAME] "
@@ -163,7 +166,7 @@ public class EditCommand extends Command {
         editedPerson = new Person(
                 editedPerson.getName(), editedPerson.getPhone(), editedPerson.getEmail(),
                 editedPerson.getAddress(), editedPerson.getTags(), tasks, editedPerson.getDescription(),
-                editedPerson.isImportant()
+                editedPerson.getImportance()
         );
         return editedPerson;
     }
@@ -223,10 +226,10 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Description updatedDescription = editPersonDescriptor.getDescription().orElse(personToEdit.getDescription());
         List<Task> tasks = editPersonDescriptor.getTasks().orElse(personToEdit.getTasks());
-        Boolean updatedisImportant = editPersonDescriptor.getImportance().orElse(personToEdit.isImportant());
+        Importance updatedImportance = editPersonDescriptor.getImportance().orElse(personToEdit.getImportance());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, tasks,
-                updatedDescription, updatedisImportant);
+                updatedDescription, updatedImportance);
     }
 
     private static Task createEditedTask(Task taskToEdit, EditTaskDescriptor editTaskDescriptor) {
@@ -266,7 +269,7 @@ public class EditCommand extends Command {
         private Set<Tag> tags;
         private Description description;
         private List<Task> tasks;
-        private Boolean isImportant;
+        private Importance importance;
         public EditPersonDescriptor() {}
         /**
          * Copy constructor.
@@ -280,14 +283,14 @@ public class EditCommand extends Command {
             setTags(toCopy.tags);
             setDescription(toCopy.description);
             setTasks(toCopy.tasks);
-            setImportance(toCopy.isImportant);
+            setImportance(toCopy.importance);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, tasks, description, isImportant);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, tasks, description, importance);
         }
 
         public void setName(Name name) {
@@ -338,12 +341,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(tasks);
         }
 
-        public void setImportance(Boolean isImportant) {
-            this.isImportant = isImportant;
+        public void setImportance(Importance importance) {
+            this.importance = importance;
         }
 
-        public Optional<Boolean> getImportance() {
-            return Optional.ofNullable(isImportant);
+        public Optional<Importance> getImportance() {
+            return Optional.ofNullable(importance);
         }
 
         /**

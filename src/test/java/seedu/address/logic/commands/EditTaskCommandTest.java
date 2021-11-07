@@ -50,7 +50,7 @@ public class EditTaskCommandTest {
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getTags(), tasks, personToEdit.getDescription(),
-                personToEdit.isImportant()
+                personToEdit.getImportance()
         );
         EditTaskCommand editTaskCommand = new EditTaskCommand(INDEX_FIRST_PERSON, INDEX_FIRST_TASK, editTaskDescriptor);
 

@@ -59,7 +59,7 @@ public class AddTaskCommandTest {
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getTags(), tasks, personToEdit.getDescription(),
-                personToEdit.isImportant()
+                personToEdit.getImportance()
         );
         AddTaskCommand addTaskCommand = new AddTaskCommand(INDEX_FIRST_PERSON, newTasks);
 

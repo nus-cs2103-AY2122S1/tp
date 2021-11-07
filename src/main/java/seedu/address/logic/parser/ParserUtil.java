@@ -19,8 +19,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Description;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Importance;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
@@ -266,13 +266,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code desc} is invalid.
      */
-    public static Boolean parseImportance(String importance) throws ParseException {
+    public static Importance parseImportance(String importance) throws ParseException {
         requireNonNull(importance);
         String trimmedImportance = importance.trim();
-        if (!Person.isValidImportance(trimmedImportance)) {
-            throw new ParseException(Description.MESSAGE_CONSTRAINTS);
+        if (!Importance.isValidImportance(trimmedImportance)) {
+            throw new ParseException(Importance.MESSAGE_CONSTRAINTS);
         }
-        return Boolean.parseBoolean(trimmedImportance);
+        return new Importance(Boolean.parseBoolean(trimmedImportance));
     }
 
     /**

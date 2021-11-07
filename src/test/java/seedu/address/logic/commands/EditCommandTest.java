@@ -180,7 +180,7 @@ public class EditCommandTest {
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getTags(), tasks, personToEdit.getDescription(),
-                personToEdit.isImportant()
+                personToEdit.getImportance()
         );
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor, INDEX_FIRST_TASK, editTaskDescriptor);
 
@@ -209,7 +209,7 @@ public class EditCommandTest {
         Person editedPerson = new Person(
                 new Name(VALID_NAME_BOB), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getTags(), tasks, personToEdit.getDescription(),
-                personToEdit.isImportant()
+                personToEdit.getImportance()
         );
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor, INDEX_FIRST_TASK, editTaskDescriptor);
 
@@ -274,7 +274,7 @@ public class EditCommandTest {
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getTags(), tasks, personToEdit.getDescription(),
-                personToEdit.isImportant()
+                personToEdit.getImportance()
         );
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor, INDEX_FIRST_TASK, editTaskDescriptor);
 
@@ -304,7 +304,7 @@ public class EditCommandTest {
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getTags(), tasks, personToEdit.getDescription(),
-                personToEdit.isImportant()
+                personToEdit.getImportance()
         );
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor, INDEX_FIRST_TASK, editTaskDescriptor);
 

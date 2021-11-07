@@ -50,7 +50,7 @@ public class UserCommandCache {
         }
 
         commandCache.add(command);
-        index = commandCache.size() - 1;
+        index = commandCache.size();
     }
 
     /**
@@ -60,11 +60,11 @@ public class UserCommandCache {
      */
     public String getBefore() {
         requireNonNull(commandCache);
+        index = Math.max(0, index - 1);
         if (commandCache.size() == 0) {
             return "";
         }
         String lastCommand = commandCache.get(index);
-        index = Math.max(0, index - 1);
         return lastCommand;
     }
 
@@ -78,14 +78,13 @@ public class UserCommandCache {
         if (commandCache.size() == 0) {
             return "";
         }
-        index += 1;
+        index = Math.min(commandCache.size(), index + 1);
         String lastCommand;
         if (index == commandCache.size()) {
             lastCommand = "";
         } else {
             lastCommand = commandCache.get(index);
         }
-        index = Math.min(commandCache.size() - 1, index);
         return lastCommand;
     }
 
