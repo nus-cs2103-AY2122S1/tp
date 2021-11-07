@@ -1,17 +1,15 @@
 package seedu.unify.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.unify.testutil.TypicalIndexes.INDEX_FIRST_TASK;
+
 import java.util.HashSet;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.unify.model.tag.Tag;
-
-
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.unify.testutil.TypicalIndexes.INDEX_FIRST_TASK;
-import static seedu.unify.testutil.TypicalIndexes.INDEX_SECOND_TASK;
 
 public class TagTaskDescriptorTest {
 
