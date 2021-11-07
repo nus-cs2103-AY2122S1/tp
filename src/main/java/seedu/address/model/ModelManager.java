@@ -171,9 +171,6 @@ public class ModelManager implements Model {
         addressBook.updateUpcomingLessons();
     }
 
-    /**
-     * Returns an unmodifiable view of the observable tag list.
-     */
     @Override
     public ObservableList<Tag> getObservableTagList() {
         return addressBook.getTagList();
