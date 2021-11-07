@@ -207,7 +207,7 @@ Format:
 
 Parameters:
 * `NAME`: No constraints on name used. Cannot be left blank.
-* `PASSPORT_NUMBER`: Should only contain alphanumeric characters.
+* `PASSPORT_NUMBER`: Should only contain alphanumeric characters, and is case insensitive (all passport numbers are capitalised).
 * `EMAIL`: A valid email address should be used.
 * `ROOM_NUMBER`: Only numbers greater than 0 are valid.
 * `TAG`: An optional field, more than one can be included in the command.
@@ -235,7 +235,7 @@ Format:
 <br>`returncheckin pn/<PASSPORT_NUMBER> r/<ROOM_NUMBER>`
 
 Parameters:
-* `PASSPORT_NUMBER`: Should only contain alphanumeric characters.
+* `PASSPORT_NUMBER`: Should only contain alphanumeric characters, is case insensitive.
 * `ROOM_NUMBER`: Only numbers greater than 0 are valid.
 
 <div markdown="block" class="alert alert-info">
@@ -254,7 +254,7 @@ Format:
 <br>`checkout pn/<PASSPORT_NUMBER>`
 
 Parameters:
-* `PASSPORT_NUMBER`: Should only contain alphanumeric characters.
+* `PASSPORT_NUMBER`: Should only contain alphanumeric characters, and is case insensitive (all passport numbers are capitalised).
 
 Example:
 
@@ -280,7 +280,7 @@ Format:
 
 Parameters:
 
-* `PASSPORT_NUMBER`: Should only contain alphanumeric characters.
+* `PASSPORT_NUMBER`: Should only contain alphanumeric characters, and is case insensitive (all passport numbers are capitalised).
 * `NAME`: No constraints on name used. Cannot be left blank.
 * `EMAIL`: A valid email address should be used.
 * `ROOM_NUMBER`: Only numbers greater than 0 are valid.
@@ -364,7 +364,7 @@ Format:
 <br>`chargeguest pn/<PASSPORT_NUMBER> vid/<VENDOR_ID>`
 
 Parameters:
-* `PASSPORT_NUMBER`: Should only contain alphanumeric characters.
+* `PASSPORT_NUMBER`: Should only contain alphanumeric characters, and is case insensitive (all passport numbers are capitalised).
 * `VENDOR_ID`: Should only contain alphanumeric characters.
   * The `VENDOR_ID` must be from one of the existing vendors in the **PH**
 
@@ -383,7 +383,7 @@ Format:
 `filterguest [<FILTER_FIELD_NAME>/<FILTER_FIELD_VALUE>]`
 
 Parameters:
-* `PASSPORT_NUMBER`: Should only contain alphanumeric characters.
+* `PASSPORT_NUMBER`: Should only contain alphanumeric characters, and is case insensitive (all passport numbers are capitalised).
   * The passport number specified by you must _match the guest passport's number exactly_ to be filtered.
   * E.g. a guest with a `PASSPORT_NUMBER` of `SE1239182` will not be shown in your **GUI** if you run the command `filterguest pn/SE123`
 * `NAME`: No constraints on name used.
@@ -437,7 +437,7 @@ Parameters:
 * `PHONE_NUMBER`: At least 3 digits long, should only contain numbers.
 * `SERVICE_NAME`: Alphabetical characters and spaces are allowed.
 * `SERVICE_COST`: Number greater than 0, will be rounded to 2 decimal places.
-* `OPERATING_HOURS`: Duplicates are allowed. <br>Format: `DAYS STARTTIME-ENDTIME`<br>Monday is represented using a 1 and Sunday is represented by 7.<br>Example:<br>`1234567 0800-2359`: Monday to Sunday 8am to 11:59pm<br>`1321 0800-0900`: Monday to Wednesday 7am to 9am
+* `OPERATING_HOURS`: Duplicates are allowed. <br>Format: `DAYS STARTTIME-ENDTIME`<br>Monday is represented using a 1 and Sunday is represented by 7.<br>Example:<br>`1234567 0800-2359`: Monday to Sunday 8am to 11:59pm<br>`1321 0700-0900`: Monday to Wednesday 7am to 9am
 * `TAG`: An optional field, more than one can be included in each command.
 
 Example:
@@ -698,7 +698,7 @@ Action | Format, Examples
 
 Parameter | Prefix | Constraints, Examples
 ----------|--------|-----------------------
-**PASSPORT_NUMBER** | `pn/` | Blank inputs are not allowed.<br>Should only contain alphanumeric characters.<br>Example: `pn/X12345678A`
+**PASSPORT_NUMBER** | `pn/` | Blank inputs are not allowed.<br>Not case sensitive<br>Should only contain alphanumeric characters.<br>Example: `pn/X12345678A`
 **NAME** | `n/` | Blank inputs are not allowed.<br>Example: `n/Bing Cheng`
 **EMAIL** | `e/` | Blanks inputs are not allowed.<br>A valid email address should be used.<br>Example: `e/BingCheng@email.com`
 **ROOM_NUMBER** | `r/` | Blank inputs are not allowed.<br>Only numbers greater than 0 are valid.<br>Example: `r/500`
@@ -715,7 +715,7 @@ Parameter | Prefix | Constraints, Examples
 **ADDRESS** | `a/` | Blank inputs are not allowed.<br>Example: `a/Geylang Street 31`
 **SERVICE_NAME** | `sn/` | Blank inputs are not allowed.<br>Alphabetical characters and spaces are allowed.<br>Example: `sn/Satay`
 **SERVICE_COST** | `c/` | Blank inputs are not allowed.<br>Number greater than 0, will be rounded to 2 decimal places.<br>Example: `c/5`
-**OPERATING_HOURS** | `oh/` | Blank inputs are not allowed.<br>Duplicates are allowed.<br>Format: `DAYS STARTTIME-ENDTIME`<br>Monday is represented using a 1 and Sunday is represented by 7.<br>Example:<br>`1234567 0800-2359`: Monday to Sunday 8am to 11:59pm<br>`1321 0800-0900`: Monday to Wednesday 7am to 9am
+**OPERATING_HOURS** | `oh/` | Blank inputs are not allowed.<br>Duplicates are allowed.<br>Format: `DAYS STARTTIME-ENDTIME`<br>Monday is represented using a 1 and Sunday is represented by 7.<br>Example:<br>`1234567 0800-2359`: Monday to Sunday 8am to 11:59pm<br>`1321 0700-0900`: Monday to Wednesday 7am to 9am
 **TAG** | `t/` | Blank inputs are not allowed.<br>An optional field, more than one can be included in each command.<br>Example: `t/Halal t/Free flow`
 
 [Back to Table of Contents](#table-of-contents)
