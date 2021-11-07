@@ -195,7 +195,6 @@ Exits the program.
 Format: `exit`
 
 ---
-<div style="page-break-after: always;"></div>
 
 ## Managing Patients <a name="managing-patients"/>
 <div markdown="span" class="alert alert-info">:information_source: **Note:**
@@ -590,6 +589,7 @@ If your changes to the data file makes its format invalid, PlannerMD will discar
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous PlannerMD home folder.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Command summary <a name="command-summary"/>
 
