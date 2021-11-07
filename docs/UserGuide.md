@@ -420,8 +420,8 @@ Action | Format, Examples
 
 ## Flag summary
 
-Description | Flag | Input constraints
-------------|------|-------
+Description | Flag Formats | Input constraints
+------------|:------------:|-------
 Name of Person | `-n` | Name should consist of alphanumeric characters and spaces only. <br>Cannot be blank.
 Phone number of Person | `-p` | Phone number should consist of numbers only. <br>Minimum 3 digits long
 Email of Person | `-e` | Email should be of format `local-part@domain`. <br>1) The local-part should only contain alphanumeric characters and these special characters, `+_.-`. <br>2) The domain is made up of domain labels seperated by `.`.<br>3) Each domain label must be at least 2 characters long, start and end with alphanumeric characters and can contain `-`.
