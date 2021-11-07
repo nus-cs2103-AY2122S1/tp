@@ -68,7 +68,6 @@ public class PersonCard extends UiPart<Region> {
             note.setManaged(false);
             noteLastModified.setManaged(false);
         }
-        // TODO: Messy Code here
         String groupsDisplayText = getGroupsDisplayText();
         if (groupsDisplayText.toString().equals("")) {
             groups.setManaged(false);

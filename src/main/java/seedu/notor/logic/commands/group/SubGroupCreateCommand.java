@@ -39,4 +39,21 @@ public class SubGroupCreateCommand extends GroupCommand {
     @Override public CommandResult execute() throws CommandException, ExecuteException {
         return executor.execute();
     }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof SubGroupCreateCommand)) {
+            return false;
+        }
+
+        SubGroupCreateCommand c = (SubGroupCreateCommand) other;
+        // state check
+        return super.equals(other) && executor.equals(c.executor);
+    }
 }

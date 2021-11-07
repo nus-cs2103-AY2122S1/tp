@@ -7,17 +7,15 @@ import seedu.notor.model.common.Name;
 import seedu.notor.model.group.SuperGroup;
 
 public class TypicalGroups {
-    public static final SuperGroup ORBITAL = new SuperGroup(new Name("Orbital"));
-    public static final SuperGroup CS2103 = new SuperGroup(new Name("CS2103"));
-
-
-    public static final List<SuperGroup> getSuperGroups() {
-        if (ORBITAL.findSubGroup("Group1") == null) {
-            ORBITAL.addSubGroup(TypicalSubGroups.ORBITAL_GROUP1);
+    public static List<SuperGroup> getSuperGroups() {
+        SuperGroup orbital = new SuperGroup(new Name("Orbital"));
+        SuperGroup cs2103 = new SuperGroup(new Name("CS2103"));
+        if (orbital.findSubGroup("Group1") == null) {
+            orbital.addSubGroup(TypicalSubGroups.ORBITAL_GROUP1);
         }
         ArrayList<SuperGroup> temp = new ArrayList<>();
-        temp.add(ORBITAL);
-        temp.add(CS2103);
+        temp.add(orbital);
+        temp.add(cs2103);
         return temp;
     }
 }

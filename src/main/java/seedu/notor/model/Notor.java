@@ -6,10 +6,12 @@ import java.time.LocalDate;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.notor.logic.executors.exceptions.ExecuteException;
 import seedu.notor.logic.parser.ParserUtil;
 import seedu.notor.logic.parser.exceptions.ParseException;
 import seedu.notor.model.common.Note;
 import seedu.notor.model.group.Group;
+import seedu.notor.model.group.SubGroup;
 import seedu.notor.model.group.SuperGroup;
 import seedu.notor.model.person.Person;
 import seedu.notor.model.util.UniqueList;
@@ -24,7 +26,7 @@ public class Notor implements ReadOnlyNotor {
             + "If you need help, you can refer to the help page!\n\n"
             + "Some things this application can do are: \n"
             + "person /list : Lists all contacts.\n"
-            + "person 3 /delete : Deletes the 3rd contact (contact with\nindex number 3) shown in the current list.\n"
+            + "person 3 /delete : Deletes the 3rd contact listed.\n"
             + "note: Edit this note here to whatever you wish!"
             + "\n\n\n ...and much more!";
 
@@ -158,6 +160,28 @@ public class Notor implements ReadOnlyNotor {
             }
         }
         return null;
+    }
+
+    /**
+     * Adds mutliple Person to SuperGroup, and SuperGroup to multiple Person.
+     */
+    public void addPersonToSuperGroup(SuperGroup superGroup, String... personNames) {
+        for (String personName: personNames) {
+            Person person = findPerson(personName);
+            person.addSuperGroup(superGroup);
+            superGroup.addPerson(person);
+        }
+    }
+
+    /**
+     * Adds multiple persons to subGroup, and subGroup to multiple Person.
+     */
+    public void addPersonToSubGroup(SubGroup subGroup, String... personNames) throws ExecuteException {
+        for (String personName: personNames) {
+            Person person = findPerson(personName);
+            person.addSubGroup(subGroup);
+            subGroup.addPerson(person);
+        }
     }
 
     /**

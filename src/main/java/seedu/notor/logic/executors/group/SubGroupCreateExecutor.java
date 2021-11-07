@@ -5,9 +5,7 @@ import seedu.notor.commons.core.index.Index;
 import seedu.notor.logic.commands.CommandResult;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
 import seedu.notor.model.exceptions.DuplicateItemException;
-import seedu.notor.model.group.Group;
 import seedu.notor.model.group.SubGroup;
-import seedu.notor.model.group.SuperGroup;
 
 public class SubGroupCreateExecutor extends GroupExecutor {
     public static final String MESSAGE_SUCCESS = "Subgroup %s created.";
@@ -30,12 +28,7 @@ public class SubGroupCreateExecutor extends GroupExecutor {
         try {
             if (model.isSuperGroupList()) {
                 if (model.getFilteredGroupList().size() >= index.getOneBased()) {
-                    Group group = model.getFilteredGroupList().get(index.getZeroBased());
-                    // Make it return its own type of error.
-                    SuperGroup superGroup = (SuperGroup) group;
-                    subGroup.setParent(superGroup);
-                    superGroup.addSubGroup(subGroup);
-                    assert superGroup.getSubGroups().contains(subGroup);
+                    model.addSubGroup(index, subGroup);
                     return new CommandResult(String.format(MESSAGE_SUCCESS, subGroup));
                 } else {
                     throw new ExecuteException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);

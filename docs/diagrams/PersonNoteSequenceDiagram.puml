@@ -1,0 +1,119 @@
+@startuml
+!include style.puml
+
+Actor "Mentor" as Mentor
+
+box UI UI_COLOR_T1
+participant ":MainWindow" as MainWindow UI_COLOR
+participant ":PersonNoteWindow" as NoteWindow UI_COLOR
+end box
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":NotorParser" as NotorParser LOGIC_COLOR
+participant ":PersonNoteCommandParser" as PersonNoteCommandParser LOGIC_COLOR
+participant ":PersonNoteCommand" as PersonNoteCommand LOGIC_COLOR
+participant ":PersonNoteExecutor" as PersonNoteExecutor LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+activate MainWindow
+[-> MainWindow : executeCommand("person 1 /note")
+
+MainWindow -> LogicManager : execute("person 1 /note")
+activate LogicManager
+
+LogicManager -> NotorParser : parseCommand("person 1 /note")
+activate NotorParser
+
+create PersonNoteCommandParser
+NotorParser -> PersonNoteCommandParser
+activate PersonNoteCommandParser
+
+PersonNoteCommandParser --> NotorParser
+deactivate PersonNoteCommandParser
+
+
+NotorParser --> LogicManager
+deactivate NotorParser
+
+NotorParser -> PersonNoteCommandParser : parse()
+activate NotorParser
+activate PersonNoteCommandParser
+create PersonNoteCommand
+PersonNoteCommandParser -> PersonNoteCommand
+
+activate PersonNoteCommand
+create PersonNoteExecutor
+PersonNoteCommand -> PersonNoteExecutor
+activate PersonNoteExecutor
+PersonNoteExecutor --> PersonNoteCommand
+deactivate PersonNoteExecutor
+PersonNoteCommand --> PersonNoteCommandParser
+
+deactivate PersonNoteCommand
+PersonNoteCommandParser --> NotorParser
+deactivate NotorParser
+
+deactivate PersonNoteCommandParser
+
+PersonNoteCommandParser -[hidden]-> PersonNoteCommandParser
+destroy PersonNoteCommandParser
+
+LogicManager -> PersonNoteCommand: execute()
+activate PersonNoteCommand
+
+PersonNoteCommand --> PersonNoteExecutor: execute()
+activate PersonNoteExecutor
+
+create CommandResult
+PersonNoteExecutor -> CommandResult
+activate CommandResult
+CommandResult -->PersonNoteExecutor
+deactivate CommandResult
+PersonNoteExecutor --> PersonNoteCommand
+deactivate PersonNoteExecutor
+
+PersonNoteCommand --> LogicManager
+deactivate PersonNoteCommand
+LogicManager --> MainWindow
+
+
+create NoteWindow
+MainWindow -> NoteWindow
+activate NoteWindow
+NoteWindow --> MainWindow
+deactivate NoteWindow
+deactivate MainWindow
+
+
+Mentor -> NoteWindow :Type note and save
+activate Mentor
+activate NoteWindow
+NoteWindow -> LogicManager: executeSaveNote()
+
+
+
+LogicManager -> Model
+activate Model
+Model --> LogicManager
+deactivate Model
+LogicManager --> NoteWindow
+deactivate LogicManager
+
+NoteWindow --> Mentor
+deactivate NoteWindow
+
+
+Mentor -> NoteWindow: Close NoteWindow
+activate NoteWindow
+NoteWindow --> Mentor
+deactivate NoteWindow
+NoteWindow -[hidden]-> Mentor
+destroy NoteWindow
+
+
+@enduml
