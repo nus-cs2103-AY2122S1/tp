@@ -67,6 +67,9 @@ LogicManager -> AddAppointmentCommand : execute()
 activate AddAppointmentCommand
 
 AddAppointmentCommand -> Model : addAppointment(appointmentToAdd)
+activate Model
+Model --> AddAppointmentCommand
+deactivate Model
 
 create CommandResult
 AddAppointmentCommand -> CommandResult : message
