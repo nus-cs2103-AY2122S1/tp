@@ -330,7 +330,7 @@ Format: `list`
 ### Finding an applicant : `find`
 [Table of contents](#table-of-contents)
 
-Finds applicants by specific prefixes.
+The `find` command finds applicants by specific prefixes.
 
 Format: `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMPLOYMENT_TYPE] [s/EXPECTED_SALARY] [l/LEVEL_OF_EDUCATION] [y/YEARS_OF_EXPERIENCE]  [t/TAG]  [i/INTERVIEW] [nt/NOTES] [d/DONE]`
 
@@ -388,7 +388,7 @@ After: ![FindAfter](images/features/FindAfter.png)
 ### Filtering interviews : `filter_interview`
 [Table of contents](#table-of-contents)
 
-Filters applicants by interview dates based on whether they are upcoming or have past current date and time.
+The `filter_interview` command filters applicants by interview dates based on whether they are upcoming or have past current date and time.
 Differs from ```find i/``` as it is not returning you all applicants with a specific interview date but 
 rather all applicants with interviews that fall into the same group (`past` or `future`).
 
@@ -416,7 +416,7 @@ Examples:
 ### Deleting an applicant : `delete`
 [Table of contents](#table-of-contents)
 
-Deletes applicants by their index from the applicants list in RecruitIn.
+The `delete` command deletes applicants by their index from the applicants list in RecruitIn.
 
 Format: `delete INDEX...`
 
@@ -439,12 +439,10 @@ After: ![DeleteAfter](images/features/DeleteAfter.png)
 
 
 
-
-
 ### Showing search terms : `show`
 [Table of contents](#table-of-contents)
 
-Shows you unique search terms which you can use for a specific prefix.
+The `show` command shows you unique search terms which you can use for a specific prefix.
 
 Format: `show [n/] [p/] [e/] [r/] [et/] [s/] [l/] [y/] [t/]`
 
