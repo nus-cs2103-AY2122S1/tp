@@ -89,11 +89,21 @@ To set up a working version of SPAM on your device, follow the steps below.
 
 #### Graphical User Interface
 
-SPAM has a graphical user interface built for you to enjoy easy interaction with the application.
+SPAM has a graphical user interface built for you to enjoy easy interaction with the application. This section describes
+each part of the graphical user interface in detail.
 
-<div class="alert alert-warning" role="alert">
-  This section is coming soon!
-</div>
+<figure class="figure">
+   <img src="images/GraphicalUserInterface.png" class="figure-img img-fluid rounded" alt="Graphical User Interface">
+</figure>
+
+| Label | Description |
+| ----- | ----------- |
+| 1     | **Toolbar**. This is where the settings that allow you to switch between light mode and dark mode is located. There is also a button to exit the application and another button to open the help window. |
+| 2     | **Command Input**. This is where you will type in the commands to be executed by the application. |
+| 3     | **Command Result**. This text box displays the string response from the application after a command is entered. |
+| 4     | **List of Contacts**. This is the list of contacts that are stored in the application. |
+
+<div style="page-break-after: always;"></div>
 
 ##### Controls
 
@@ -175,6 +185,8 @@ on any command below to learn more about that particular command.
 | [`exit`](#exit)  | Exits the application |
 | [`password`](#password)  | Changes the password of the application |
 | [`help`](#help)  | Opens up a window that contains this user guide |
+
+<div style="page-break-after: always;"></div>
 
 <div class="d-flex alert alert-info pb-0">
 <div class="mr-2">
@@ -369,6 +381,16 @@ Edits the name of the 2nd person to be `Betsy Crower` and clears all existing ta
 
 </div>
 </div>
+
+Below is the list of flags that can be used with the `edit` command. At least one of the flags must be specified.
+
+| Flag | Long Form | Description |
+| ---- | ---------- | ----------- |
+| `-n` | `--name` | The name associated with the contact. |
+| `-p` | `--phone` | The phone number of the contact. |
+| `-e` | `--email` | The email address of the contact. |
+| `-a` | `--address` | The address of the contact. |
+| `-t` | `--tag` | The tags that are associated with the contact. |
 
 <div class="d-flex alert alert-info">
 <div class="mr-2">
