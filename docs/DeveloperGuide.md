@@ -163,7 +163,7 @@ ClassMATE allows the user to manage information relevant to the TutorialClass. A
 2. Delete an existing tutorial class
 3. List all existing tutorial class
 4. Find all tutorial classes containing a keyword in their classcodes
-5. View Class Details 
+5. View Class Details
 
 #### Current Implementation
 
@@ -191,7 +191,7 @@ initial ClassMATE state, and all tutorial classes stored will be displayed.
 
 Step 2. The user executes an `addc c/G01 s/Tuesday 12:00pm to 2:00pm, Friday 12:00pm to 2:00pm` command. The `addc` command calls `Model#addTutorialClass()`, adding a new tutorial class to ClassMATE. This modifies and saves the
 state of ClassMATE. The updated `UniqueTutorialClassList` will be displayed in the `ClassListPanel`
-to the user. 
+to the user.
 
 Step 3. The user executes a `findc G01` command. The `findc` command calls the `Model#updateFilteredTutorialClassList()`, modifying the state of the filtered list
 of tutorial classes. The updated filtered list consisting of te results of the search query will be displayed to the user.
@@ -211,7 +211,7 @@ to contain all tutorial classes in ClassMATE. This updated list will be displaye
 
 Using the example of the `AddClassCommand`,
 when the user enters the `addc` command to add a tutorial class, the user input command undergoes the same command parsing as described in [Logic component](#logic-component).
-During the parsing, a new TutorialClass instance is created. This `TutorialClass` instance will be received by the `AddClassCommand` when it is created. 
+During the parsing, a new TutorialClass instance is created. This `TutorialClass` instance will be received by the `AddClassCommand` when it is created.
 The command is then executed, adding the new class to ClassMATE
 
 The *Sequence Diagram* below summarises the aforementioned steps in the execution of the command.
@@ -257,9 +257,9 @@ ClassMATE allows the user to manage information about Students. The user is able
 
 #### Current Implementation
 
-`Classmate` facilitates all operations related to students. It maintains a `UniqueStudentList` consisting of all students as well as a 
-seperate `FilteredList` of students in `ModelManager` that reflect the current state of the student list to be displayed to the user. `Classmate` contains the logic related to 
-managing students, and summarises the various student realted commands. 
+`Classmate` facilitates all operations related to students. It maintains a `UniqueStudentList` consisting of all students as well as a
+seperate `FilteredList` of students in `ModelManager` that reflect the current state of the student list to be displayed to the user. `Classmate` contains the logic related to
+managing students, and summarises the various student realted commands.
 
 The following operations are supported by ClassMATE:
 
@@ -267,24 +267,24 @@ The following operations are supported by ClassMATE:
 * `Classmate#addStudent(Student student)` - Adds a student to ClassMATE
 * `Classmate#setStudent(Student student, Student editedStudent)` - Edits a student's details
 * `Classmate#removeStudent(Student student)` - Deletes existing student from ClassMATE
-* `Model#updateFilteredStudentList(Predicate<Student> predicate)` - Searches for a student by given keyword and displays filtered list. 
+* `Model#updateFilteredStudentList(Predicate<Student> predicate)` - Searches for a student by given keyword and displays filtered list.
 
 These operations are exposed in the `Model` interface, which call methods of `Classmate` and `FilteredList`.
 
 Given below is an example of how the student features could be used by the user:
 
-Step 1. The user launches the application for the first time. The `UniqueStudentList` would be derived from the initial ClassMATE state, and 
+Step 1. The user launches the application for the first time. The `UniqueStudentList` would be derived from the initial ClassMATE state, and
 all students stored will be displayed with their details.
 
 Step 2. The user creates a tutorial class by using the `addc` command, for example `addc c/G01 s/Tuesday 12:00pm to 2:00pm, Friday 12:00pm to 2:00pm`.
 The newly created tutorial class will be displayed in the `ClassListPanel` to the user. Refer to [Tutorial Class Management Features](#tutorial-class-management-features)
 section for more information on tutorial classes.
 
-Step 3. The user executes a `addstu n/Johnny Tay p/98989898 a/26 Clementi Avenue 6 e/johnnytay@email.com c/G01` command. The `addstu` command executes the 
-`AddStudentCommand`, which in turn calls the `Model#addStudent()` command to add a new student to ClassMATE. The student is added to the recently create `G01` class. 
+Step 3. The user executes a `addstu n/Johnny Tay p/98989898 a/26 Clementi Avenue 6 e/johnnytay@email.com c/G01` command. The `addstu` command executes the
+`AddStudentCommand`, which in turn calls the `Model#addStudent()` command to add a new student to ClassMATE. The student is added to the recently create `G01` class.
 The updated `UniqueStudentList` will be displayed to users on the `StudentListPanel`.
 
-Step 4. The user executes a `findstu Johnny` command. The `findstu` command calls the `Model#updateFilteredStudentList()` method which 
+Step 4. The user executes a `findstu Johnny` command. The `findstu` command calls the `Model#updateFilteredStudentList()` method which
 modifies the state of the `FilteredList` of students. The updated filtered list containing the students whose names match the query keywords will
 be displayed to the user. Users will have to type one of the student's names to find a particular student (e.g. `findstu Tay` will also filter our newly added student)
 
@@ -292,14 +292,14 @@ Step 5. The user executes a `viewstu 1` command. The `viewstu` command causes a 
 groups the student is in and the class participation marks for previous lessons. Any movements to the main screen would result in this window closing.
 
 Step 6. The user executes a `deletestu 2` command. The `deletestu` command calls the `Model#deleteStudent()` function. This executes a `DeleteStudentCommand`,
-which deletes a student curretnly in the second index of the `FitleredList`. This modifies and saves the state of ClassMATE, displaying the updated list of students 
+which deletes a student curretnly in the second index of the `FitleredList`. This modifies and saves the state of ClassMATE, displaying the updated list of students
 to the user.
 
-Step 7. the user executes a `liststu` command. The command calls the `Model#updateFilteredStudentList()` function by setting the predicate of the 
+Step 7. the user executes a `liststu` command. The command calls the `Model#updateFilteredStudentList()` function by setting the predicate of the
 `FilteredList` to `true` for all students. The updated list consisting of all students in ClassMATE is then displayed to the user.
 
 The logic flow of executing a student command can be best illustrated using the `FindStudentCommand`. When the enters the `findstu`
-command to find a Student whose name matches the given keyword, the user input undergoes the same command parsing 
+command to find a Student whose name matches the given keyword, the user input undergoes the same command parsing
 as described in the [Logic component](#logic-component) section. During the parsing, a new `NameCOntainsKeywordsPredicate` is created,
 which will be received by the `FindStudentCommand`. The execution of a command sets the`Predicate` of the `FilteredList` of students
 to the parsed predicate, updating the list that is displayed.
@@ -314,9 +314,9 @@ Execution of the `FindStudentCommand`
 #### Aspect: Adding Students to ClassMATE
 
 * Alternative 1 (current choice): Add a student with a compulsory classcode parameter
-    * Pros: This was the most intuitive option, as users only need add students assigned to their classes. Therefore, requiring users 
+    * Pros: This was the most intuitive option, as users only need add students assigned to their classes. Therefore, requiring users
       to create a class before adding a student prevents the case where students are added without a class
-    * Cons: This increases the command length for the user, increasing the time taken for the user to type the command. 
+    * Cons: This increases the command length for the user, increasing the time taken for the user to type the command.
 * Alternative 2: Add a student independent of whether the tutorial class has been created
     * Pros: Users are able to create a student without having to take the additional step of creating a class, and shorter command
     length means higher typing speeds for users.
@@ -325,7 +325,7 @@ Execution of the `FindStudentCommand`
 #### Aspect: Display of Student Information
 
 * Alternative 1 (current choice): Display a summary of user information in the List and more details upon viewing the student.
-    * Pros: This reduces cluttering in the student display panel and presents the necessary information to the user in the list. User has the option to 
+    * Pros: This reduces cluttering in the student display panel and presents the necessary information to the user in the list. User has the option to
     focus on a particular student and view additional details if they need to.
     * Cons: This necessiates the creation of an additional `viewc` command for users to be able to view this data.
 

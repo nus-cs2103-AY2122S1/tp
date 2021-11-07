@@ -62,6 +62,7 @@ Given below are my contributions to the project.
     * **Bug Fixes**:
         * Empty ClassCode bugs [\#185](https://github.com/AY2122S1-CS2103T-W15-1/tp/issues/185), Schedule Format Bugs [\#162](https://github.com/AY2122S1-CS2103T-W15-1/tp/issues/162), [\#187](https://github.com/AY2122S1-CS2103T-W15-1/tp/issues/187) and UI whitespace bugs [\#173](https://github.com/AY2122S1-CS2103T-W15-1/tp/issues/173)
         * PR [\#198](https://github.com/AY2122S1-CS2103T-W15-1/tp/pull/198) covers bug fixes and implementation of test cases to check these specific cases (if applicable).
+        * Documentation Bugs
     * Added summary of follow-up action following the PE-D to each issue raised by reviewers.
 
 * **Review Contributions**
