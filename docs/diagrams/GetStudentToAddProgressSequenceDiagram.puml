@@ -40,7 +40,7 @@ deactivate Student
 AddProgressCommand -> Model : viewStudent(studentToEdit)
 activate Model
 
-Model -> AddProgressCommand
+Model --> AddProgressCommand
 deactivate Model
 
 create CommandResult

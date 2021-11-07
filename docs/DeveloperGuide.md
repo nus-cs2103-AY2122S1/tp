@@ -249,6 +249,9 @@ by entering a command:
 
 `add -p 2 Did Homework​`
 
+Below is the sequence diagram that depicts the parsing of the `add -p` command:
+![ParseAddProgress](images/ParseAddProgressSequenceDiagram.png)
+
 1. `LogicManager#execute()` is executed, where the above user input is passed into `TutorAidParser#parseCommand()`.
 
 2. `TutorAidParser#parseCommand()` then extracts the first keyword of every command. Since the keyword `add` would be
@@ -265,14 +268,12 @@ by entering a command:
 At this point, if `AddProgressCommandParser#parse()` detects that invalid input has been supplied, the command will fail 
 its execution and `ParseException` will be thrown.</div>
 
-Below is the sequence diagram that depicts the parsing of the `add -p` command:
-![ParseAddProgress](images/ParseAddProgressSequenceDiagram.png)
+Below is the sequence diagram that depicts how `AddProgressCommand` gets the student to edit and then add the progress
+to the student:
+![GetStudentToAddProgress](images/GetStudentToAddProgressSequenceDiagram.png)
 
 5. `LogicManager#execute()` then calls upon `AddProgressCommand#execute()`. It communicates with the `Model` to get the
    index-specified `Student` instance.
-
-Below is the sequence diagram that depicts how `AddProgressCommand` gets the student to edit:
-![GetStudentToAddProgress](images/GetStudentToAddProgressSequenceDiagram.png)
 
 6. `AddProgressCommand` calls the `Student#addProgress()` to add the new progress to the specified student.
 
@@ -281,9 +282,6 @@ Below is the sequence diagram that depicts how `AddProgressCommand` gets the stu
 
 8. The result of the `AddProgressCommand` execution is then encapsulated as a `CommandResult` object, which is
    returned to `LogicManager`.
-
-Below is the sequence diagram that depicts the process of the adding a progress to a student:
-![AddProgressToStudent](images/AddProgressToStudentSequenceDiagram.png)
 
 #### Design considerations:
 
