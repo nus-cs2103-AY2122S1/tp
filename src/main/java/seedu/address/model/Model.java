@@ -83,7 +83,7 @@ public interface Model {
     ReadOnlySportsPa getSportsPa();
 
     /**
-     * Returns true if a member with the same identity as {@code member} exists in SportsPA.
+     * Returns true if a member with the same name or phone as {@code member} exists in SportsPA.
      */
     boolean hasMember(Member member);
 

@@ -340,7 +340,7 @@ The lifeline for `SplitCommand` should end at the destroy marker (X) but due to 
 
 #### Implementation
 
-The proposed mark/unmark attendance mechanism is facilitated by `ModelManager`. The `ModelManager` stores a list of filtered members
+The mark/unmark attendance mechanism is facilitated by `ModelManager`. The `ModelManager` stores a list of filtered members
 as `filteredMembers`. Each `Member` in the list internally stores `totalAttendance` and `todayAttendance`
 which will be updated accordingly when the attendance of that `Member` is marked or unmarked.
 
@@ -447,9 +447,80 @@ The following activity diagram summarizes what happens when a user enters and ex
 * **Alternative 1 (current choice):** The find member command can search for members with multiple attributes.
     * Pros: Allows users to find members in a more precise manner e.g. Users can find members who are available on Monday and are EXCO members.
     * Cons: More complex implementation due to parsing multiple prefixes and chaining predicates, thus this alternative is more prone to bugs.
-* ** Alternative 2: The find member command can search for members with only one attribute.
+* **Alternative 2**: The find member command can search for members with only one attribute.
     * Pros: Simpler to parse a single prefix and thus less prone to bugs
     * Cons: Compromising user experience as finding a member with only one attribute may generate a large list if there are many matching members.
+
+### Import members feature
+
+####Implementation
+
+The import member mechanism is facilitated by `ModelManager` and `SportsPa`. `ModelManager` has access to SportsPA's
+data from the `SportsPa` object, from which member data will be read from when the `import` command is requested by the user.
+
+**Before going further, here are some terms used that you should take note of:**
+* "invalid import" in this context refers to an imported member having the same name as an 
+existing member AND the same phone number as another existing member.
+* "valid import" in this context refers to an imported member not having the same name as an
+  existing member AND the same phone number as another existing member.
+
+`ModelManager` implements the following relevant operations:
+* `ModelManager#isValidImport(Member)` — Checks if the member being imported is a valid import.
+* `ModelManager#hasMember(Member)` — Returns true if a member with the same name or phone as the given member exists in SportsPA.
+* `ModelManager#setMember(Member target, Member editedMember)` — Replaces the target member in the list with an edited member.
+
+Given below is an example usage scenario and how the import mechanism behaves.
+
+Step 1. The user launches the application for the first time. The user then executes the command `addm n/Bob p/12345678`,
+which adds a member called Bob with a phone number 12345678 into the member list.
+
+![ImportStep1ObjectDiagram](images/ImportStep1ObjectDiagram.png)
+
+Step 2. The user then realises he has many more members to add and wants to use the `import` command. He prepares a CSV file
+called `myFile.csv` to import the members from. 
+
+![CSVFileScreenShot](images/ImportImplementationCsv.png)
+
+Step 3. The user executes the command `import myFile.csv` to import the members from the CSV file. The `import` command first 
+parses the CSV file using a private method `ImportCommand#parseCsv()`, which returns a list of `Member` objects to be imported.
+
+After which, the command iterates through the list of `Member` objects. Each iteration goes as such:
+
+I. A check is done to see if each `Member` is a valid import by calling `ModelManager#isValidImport(Member)`. If it is a
+valid import, go to the next step. Else, the current iteration is skipped and a list of skipped members is kept and will be
+shown to the user via the GUI.<br>
+
+In this case, both `Member` objects are valid imports and can be imported.
+
+II. Then, `ModelManager#hasMember(Member)` is called to check if there are any members in SportsPA with the same name 
+or phone as the member being imported. If there is such a member in SportsPA, Then the existing member details in SportsPA
+will be updated by the imported member details by calling `ModelManager#setMember(Member target, Member editedMember)`. 
+Else, the imported member is simply added into SportsPA.<br>
+    
+In this case, there is 1 member being imported named Bob while there already exists a member called Bob in SportsPA.
+So, the existing member, Bob's details will be updated to the details from the CSV file.
+As for Amy, the details would be added into SportsPA.
+
+![ImportStep3ObjectDiagram](images/ImportStep3ObjectDiagram.png)
+
+The following sequence diagram shows how the import command works.
+
+![ImportSequenceDiagram](images/ImportSequenceDiagram.png)
+
+The following activity diagram summarizes what happens when a user executes the `import` command:
+
+<img src="images/ImportActivityDiagram.png" width="250" />
+
+#### Design Considerations:
+
+**Aspect: how to deal with invalid imports:**
+* **Alternative 1 (current choice):** Skip the invalid imports and notify the user of the invalid imports.
+  * Pros: Easy to implement and users will be able to know which imports they need to rectify.
+  * Cons: Might not be the desired interaction users want.
+
+* **Alternative 2:** Treat the command as an invalid command.
+  * Pros: Easy to implement
+  * Cons: User might want to import the valid imports and the invalid imports might just be an error on their part.
 
 --------------------------------------------------------------------------------------------------------------------
 
