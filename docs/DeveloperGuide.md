@@ -680,8 +680,8 @@ Here's the css snippet (The comment briefly describes what each of the variables
     -fx-font-color-bright: #ffffff; // the color of `bright` font in LeadsForce (for fonts that overlay component of base color 1)
     -fx-menu-color: #263238; // color of the menu
     -fx-menu-color-highlighted: #455a64; // color of the menu when highlighted
-    -fx-menu-font-color: #ffffff; // color of the font
-    -fx-menu-font-color-highlighted: #ffffff; // color of the font when highlighted
+    -fx-menu-font-color: #ffffff; // color of the menu font
+    -fx-menu-font-color-highlighted: #ffffff; // color of the menu font when highlighted
 }
 ````
 4. Let's change the value of `-fx-base-1` to `#5C4033` instead (the color code for dark brown).
