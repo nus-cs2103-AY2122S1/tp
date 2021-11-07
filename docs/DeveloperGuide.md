@@ -667,7 +667,7 @@ The following activity diagram summarises what happens when a Tour Guide execute
     * Pros: Easier to implement, guaranteed to not edit the internals.
     * Cons: Exposing internal workings of `AddressBook`.
 
-* **Alternative 2:** Gets data directly from `Contact`, `Review` etc.
+* **Alternative 2:** Gets data directly from `Contact`.
     * Pros: Data is kept directly with the low-level classes and pulled from there.
     * Cons: Extremely complex, especially after user adds, deletes or edits a contact.
 
