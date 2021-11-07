@@ -83,7 +83,7 @@ AniList currently supports some hotkeys to allow for ease of use for CLI users.
 
 <div markdown="block" class="alert alert-info">
 
-* The hotkeys only work when the focus is on the main window. The hotkey for closing the statistics window is an exception as it can also be used when the focus is on the stats window
+* The hotkeys only work when the focus is on the main window. The hotkey for closing the statistics window is an exception as it can only be used when the focus is on the stats window
 
 </div>
 
@@ -578,7 +578,7 @@ ___
 <div style="page-break-after: always;"></div>
 
 ## List of Available Genres
-These are the current list of available Genres in the genrelist:
+These are the current list of available Genres in the genre list:
 *  Action
 *  Adventure
 *  Comedy
