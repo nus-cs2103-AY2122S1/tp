@@ -116,8 +116,8 @@ public class FindCommandParserTest {
         findDescriptor = new FindDescriptor(argMultimap);
         assertFalse(findDescriptor.getPredicates().isEmpty());
 
-        String validInterviewPrefixInputOne = " i/2021-10-29, 20:00";
-        argMultimap = ArgumentTokenizer.tokenizeWithoutPreamble(validInterviewPrefixInputOne,
+        String validInterviewPrefixInput = " i/2021-10-29, 20:00";
+        argMultimap = ArgumentTokenizer.tokenizeWithoutPreamble(validInterviewPrefixInput,
                 PREFIX_INTERVIEW);
         findDescriptor = new FindDescriptor(argMultimap);
         assertFalse(findDescriptor.getPredicates().isEmpty());
