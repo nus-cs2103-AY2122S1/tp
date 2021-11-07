@@ -29,29 +29,29 @@ Given below are my contributions to the project.
 
 
 * **Project management**:
-  * Reviewed and merged Pull Requests of other teammates
-  * Contributed to on-feature-specific sections in the DG [\#197](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/197)
-  * Enhanced general code to better comply with coding standards [\#170](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/170)
+  * Reviewed and merged Pull Requests of other teammates.
+  * Contributed to on-feature-specific sections in the DG [\#197](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/197).
+  * Enhanced general code to better comply with coding standards [\#170](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/170).
 
 
 * **Enhancements to existing features**:
-  * Upgraded the `help` command to open the User Guide in the browser
-  * Tweaked the in-built help window to follow the overall colour scheme of the app [\#70](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/70/files)
-  * Updated `edit` and `add` commands [/#45](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/45/files) [\#57](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/57)
-  * Wrote additional tests for existing and new features to increase coverage. [\#98](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/98/files) [\#57](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/57/files)
+  * Upgraded the `help` command to open the User Guide in the browser [\#70](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/70).
+  * Tweaked the in-built help window to follow the overall colour scheme of the app [\#70](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/70/files).
+  * Updated `edit` and `add` commands [/#45](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/45/files) [\#57](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/57).
+  * Wrote additional tests for existing and new features to increase coverage. [\#98](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/98/files) [\#57](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/57/files).
 
 
 * **Documentation**:
   * User Guide:
     * Added documentation for the features `add`, `help`, `cmd` and navigating input history.
-    * Contributed to FAQ
-    * Assisted with the creation of the Table of Content [\#80](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/80/files)
+    * Contributed to FAQ [\#173](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/173/files).
+    * Assisted with the creation of the Table of Content [\#80](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/80/files).
 
   * Developer Guide:
-    * Added implementation details of the `category` and navigating input history features:[\#75](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/75)
+    * Added implementation details of the `category` and navigating input history features:[\#75](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/75) [\#199](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/199/files).
     * Added use cases [\#76](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/76).
 
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#92](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/92), [\#71](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/71)
-  * Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/Imerbear/ped/issues/4), [2](https://github.com/Imerbear/ped/issues/2))
+  * PRs reviewed (with non-trivial review comments): [\#92](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/92), [\#71](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/71).
+  * Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/Imerbear/ped/issues/4), [2](https://github.com/Imerbear/ped/issues/2)).
