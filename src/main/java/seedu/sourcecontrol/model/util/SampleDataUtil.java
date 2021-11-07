@@ -47,6 +47,8 @@ public class SampleDataUtil {
         "Reading Assessment 1", "Reading Assessment 2", "Midterm Examination", "Practical Assessment",
         "Final Examination"
     };
+    private static final double MEAN_SCORE = 60.0;
+    private static final double SCORE_STANDARD_DEVIATION = 15.0;
 
     //// Shared instances
     private static final List<Group> SAMPLE_TUTORIAL_GROUPS = getRandomGroups("T");
@@ -152,7 +154,7 @@ public class SampleDataUtil {
      * Generates a random score, following a normal distribution with mean = 60 and standard deviation = 15.
      */
     public static double getRandomScore() {
-        double randomScore = 60 + random.nextGaussian() * 15;
+        double randomScore = MEAN_SCORE + random.nextGaussian() * SCORE_STANDARD_DEVIATION;
         randomScore = Math.min(randomScore, Score.MAX_SCORE);
         randomScore = Math.max(randomScore, Score.MIN_SCORE);
         return randomScore;
