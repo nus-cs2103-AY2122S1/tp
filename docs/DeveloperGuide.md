@@ -1162,8 +1162,48 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `find` <br>
        Expected: No change to applicant listed. Invalid command format error and usage message for `find` shown in result display.
-  
-       
+
+### Showing search terms
+
+1. Showing unique applicant names when multiple applicants exist in the list
+
+   1. Prerequisites: Multiple applicants in the list.
+
+   2. Test case: `show n/`<br>
+      Expected: Result display shows a list of unique names belonging to your list of **all** applicants.
+
+   3. Test case: `show n/John`<br>
+      Expected: `John` input for name prefix `n/` is ignored. Result display shows a list of unique names belonging
+      to your list of **all** applicants.
+
+2. Showing unique applicant emails when no applicants exist in the list
+
+   1. Prerequisites: Clear all applicants using the `clear` command. No applicants in the list.
+
+   2. Test case: `show e/`<br>
+      Expected: Result display should show `No search terms exists for emails`.
+
+3. Showing unique applicant phone numbers with multiple prefix inputs in command given
+
+   1. Prerequisites: Multiple applicants in the list.
+
+   2. Test case: `show p/ n/ e/ r/`<br>
+      Expected: Result display shows a list of unique phone numbers belonging to your list of **all** applicants.
+
+   3. Test case: `show p/ u/ z/`<br>
+      Expected: Invalid prefixes `u/` and `z/` ignored. Result display shows a list of unique phone numbers belonging
+      to your list of **all** applicants.
+
+4. Using show command without prefixes or with invalid prefixes
+
+   1. Test case: `show`<br>
+      Expected: No search terms are shown on result display. Error details shown in the result display.
+
+   2. Other incorrect show commands to try: `show u/`, `show z/ u/`, `...` (where prefix provided is not allowed by
+      show command)<br>
+      Expected: Similar to previous.
+
+
 ### Marking an applicant
 
 1. Marking applicants while all applicants are being shown
