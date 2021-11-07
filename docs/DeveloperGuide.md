@@ -1455,10 +1455,10 @@ Expected: Error details will be shown in the status message.
 
 **Dealing with missing data files<br>**
 * Test case: The data folder does not have the file `addressbook.json`. Open TAB.<br>
-  Expected: TAB shows no students. Person list has been reset to empty.
+  Expected: TAB creates the `addressbook.json` file with sample data.
 
 **Dealing with corrupted data files<br>**
-Prerequisites: TAB has an initial list of students.
+Prerequisites: `addressbook.json` has an initial list of students.
 * Test case: 
   1. Edit `addressbook.json` such that the name of a student is empty, e.g. `name: ""`
   2. Open TAB.<br>
