@@ -180,16 +180,47 @@ edit 1 n/John te/john_123 t/TA
 
 Edits the Profile linked to the Address Book.
 
+
 Format:
 
 ```
 edit profile [n/<NAME>] [te/<TELEGRAM>] [g/<GITHUB>]
 ```
 
-Example:
-```
-edit profile te/bob_osum
-```
+:bulb: TIP:
+<br/>
+
+1. Name Conventions:  
+   • Should only contain alphabetical characters.
+   <br/>
+2. GitHub Username Conventions:
+   <br/>
+   • May only contain alphanumeric characters or hyphens.
+   <br/>
+   • Cannot have multiple consecutive hyphens.
+   <br/>
+   • Cannot begin or end with a hyphen.
+   <br/>
+   • Must be between 4 to 39 characters long
+   <br/>
+3. Telegram Handle Conventions:
+   <br/>
+   • Can contain the letters a-z, digits 0-9 and underscores.
+   <br/>
+   • Must be 5 to 39 characters long.
+   <br/>
+* Edits name, Telegram and GitHub fields of user's profile.
+* If the prefix of the field to be edited is mentioned, then its parameters cannot be left empty.
+E.g. `edit profile te/` and `edit profile n/Bob te/` would result in an error because the updated Telegram handle 
+has not been specified. 
+* If multiple prefixes are missing parameters, then the user is notified of the first missing parameter.
+E.g. `edit profile n/ te/ ` would result in an error saying that the name to be edited is missing.
+
+Examples:
+* `edit profile te/bob_osum`
+* `edit profile n/Bob g/bob-codes`
+* `edit profile n/Alex te/alex_1 g/alex123`
+
 
 ### Find a Student - `find`
 
