@@ -163,8 +163,6 @@ Here's a Sequence Diagram that illustrates the interactions within the `Logic` c
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
-![](images/ModelClassDiagram.png)
-
 The `Model` component,
 
 * stores the student and lesson data i.e., all `Student` objects (which are contained in a `UniqueStudentList` object) and `Lesson` objects (which are contained in a `UniqueLessonList` object).
