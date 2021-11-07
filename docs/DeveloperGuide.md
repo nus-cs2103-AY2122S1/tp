@@ -21,10 +21,6 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## **Design**
 
-<div markdown="span" clapss="alert alert-primary">
-
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
-</div>
 
 ### Architecture
 
@@ -186,7 +182,7 @@ The following sequence diagram shows how modifying the category field with `edit
 The following activity diagram shows what happens when a user executes the `edit` command with category specified
 ![EditCategoryActivityDiagram](images/EditCategoryActivityDiagram.png)
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: How Category is called by the user:**
 
@@ -227,7 +223,7 @@ Deleting a contact by name e.g. `delete n/VALID_NAME` results in the Parser retu
 
 The only difference between the 2 diagrams is the `DeleteCommand` (Name or Index) called and returned to the `Parser` and `LogicManager`.
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: How Delete is implemented:**
 
@@ -280,7 +276,7 @@ The following activity diagram summarises what happens when a Tour Guide execute
 ![FindActivityDiagram](images/FindActivityDiagram.png)
 
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: How Find functions:**
 
@@ -318,7 +314,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ![FilterActivityDiagram](images/FilterActivityDiagram.png)
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: Functionality of Filter feature**
 
@@ -348,7 +344,7 @@ The following sequence diagram shows how the view operation works:
 
 ![ViewSequenceDiagram](images/ViewSequenceDiagram.png)
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: Functionality of View feature**
 
@@ -395,7 +391,7 @@ The following activity diagram summarises what happens when a user executes a ne
 ![SortActivityDiagram](images/SortActivityDiagram.png)
 
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: How Sort is implemented:**
 
@@ -443,7 +439,7 @@ The following activity diagram summarizes what happens when a user executes an `
 
 ![img.png](images/RatingActivityDiagram.png)
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: How user modifies rating field:**
 
@@ -520,7 +516,7 @@ The following activity diagram summarizes what happens when a user executes a co
 ![img.png](images/CommitActivityDiagram.png)
 <img src="images/CommitActivityDiagram.png" width="250" />
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: How undo & redo executes:**
 
@@ -562,7 +558,7 @@ The following activity diagram shows how the review operation works:
 ![Activity Diagram for Review](images/ReviewActivityDiagram.png)
 
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: How Review is called by the user:**
 
@@ -585,19 +581,17 @@ obtain a read-only copy of `AddressBook` to summarise the data within. It implem
 * `setPercentageRatings()`  — Calculates and sets the percentage of contacts that have a rating (unrated not included).
 * `setNumberCategory()`  — Calculates and sets the number of contacts in each category defined by `CatergoryCode`.
 * `getNumberOfContactsGui()`  — Returns the total number of contacts to display on the GUI.
-* `getPercentageRatingsGui()`  — Returns the Pie Chart data for the proportions/percentage of `Rating`.
+* `getPercentageRatingsGui()`  — Returns the Pie Chart data for the proportions/percentage for `Rating`.
 * `getPercentageCategoryGui()`  — Returns the Pie Chart data for the proportions/percentage for `CatergoryCode`.
 
 
-Additionally, `Summary` will communicate with `UI`, specifically `MainWindow` to display the summarised results.
+Additionally, `Summary` will communicate with `Ui`, specifically `MainWindow` to display the summarised results.
 
 The following sequence diagram gives an overview of how `Summary` works when the app launches:
 
 ![Sequence Diagram for Summary](images/SummarySequenceDiagram.png)
 
-`Summary` updates when certain commands are executed:
-
-These commands include:
+`Summary` updates when certain commands are executed. These commands include:
 1. Add
 2. Clear
 3. Delete
@@ -616,7 +610,7 @@ The following sequence diagram shows how `Summary` updates when these commands a
 The above sequence diagrams describe how Summary pulls data from `AddressBook` to summarise data.
 `Summary` uses `JavaFx chart` to display data, on top of the text.
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: How Summary summarises data from the internal AddressBook:**
 
@@ -659,7 +653,7 @@ The following activity diagram summarises what happens when a Tour Guide execute
 
 ![Activity Diagram for Export](images/ExportActivityDiagram.png)
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: How Export retrieves data from the internal AddressBook**
 
@@ -700,7 +694,7 @@ The following activity diagrams gives an overview of how `InputHistory` works wh
 ![Activity Diagram for Up_Arrow](images/InputHistoryUpArrowActivityDiagram.png)
 ![Activity Diagram for Down_Arrow](images/InputHistoryDownArrowActivityDiagram.png)
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: How `InputHistory` is created and accessed.**
 
