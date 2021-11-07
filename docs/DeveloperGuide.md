@@ -177,6 +177,10 @@ and ```UI``` components.
 
 ![WarningSequenceDiagram](images/WarningSequenceDiagram.png)
 
+The activity diagram below summarizes how a ```Warning``` should be used within execution of a ```Command```.
+
+![WarningActivityDiagram](images/WarningActivityDiagram.png)
+
 #### Design Considerations
 
 Typically, displaying the UI involves executing the command text in ```MainWindow#executeCommand``` and then interpreting the 
