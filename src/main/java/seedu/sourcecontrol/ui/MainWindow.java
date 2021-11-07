@@ -225,6 +225,7 @@ public class MainWindow extends UiPart<Stage> {
                 Chart chart = commandResult.getChart();
                 assert chart != null;
                 graphDisplay.setChart(chart);
+                logger.info("Graph displayed");
                 if (commandResult.hasSavePath()) {
                     saveGraph(commandResult.getSavePath());
                 }
@@ -275,5 +276,6 @@ public class MainWindow extends UiPart<Stage> {
         }
 
         resultDisplay.setFeedbackToUser("Graph saved successfully at " + savePath);
+        logger.info("Graph exported to " + savePath);
     }
 }
