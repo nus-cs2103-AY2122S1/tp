@@ -19,7 +19,7 @@ Given below are how to use Gradle for some important project tasks.
 * **`clean`**: Deletes the files created during the previous build tasks (e.g. files in the `build` folder).<br>
   e.g. `./gradlew clean`
 
-* **`shadowJar`**: Uses the ShadowJar plugin to creat a fat JAR file in the `build/lib` folder, *if the current file is outdated*.<br>
+* **`shadowJar`**: Uses the ShadowJar plugin to create a fat JAR file in the `build/lib` folder, *if the current file is outdated*.<br>
   e.g. `./gradlew shadowJar`.
 
 * **`run`**: Builds and runs the application.<br>
@@ -73,7 +73,7 @@ Any warnings or errors will be printed out to the console.
 
 Here are the steps to create a new release.
 
-1. Update the version number in [`MainApp.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java).
+1. Update the version number in [`MainApp.java`](https://github.com/AY2122S1-CS2103-W14-4/tp/blob/master/src/main/java/seedu/address/MainApp.java).
 1. Generate a fat JAR file using Gradle (i.e., `gradlew shadowJar`).
 1. Tag the repo with the version number. e.g. `v0.1`
 1. [Create a new release using GitHub](https://help.github.com/articles/creating-releases/). Upload the JAR file you created.

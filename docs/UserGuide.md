@@ -520,7 +520,7 @@ Commands | Format | Examples
 [**Add Deadline Task**](#add-a-deadline-task-deadline) | `deadline n/TASK_NAME by/DEADLINE [t/TAG]…​` | e.g., `deadline n/Finish tP by/2021-10-31 t/W14-4`
 [**Edit Task**](#editing-a-task-edittask) | `editTask INDEX [n/TASK_NAME] [by/DATE] [t/TAG]…​`| e.g.,`editTask 2 n/study by/2012-10-31 t/W14-4`
 [**Delete Task**](#deleting-a-task-deletetask) | `deleteTask INDEX`| e.g., `deleteTask 3`
-[**Mark Done Task**](#marking-a-task-as-done--donetask) | `doneTask INDEX [MORE INDEXES]` | e.g., `doneTask 1 2 3`
+[**Mark Done Task**](#marking-a-task-as-done-donetask) | `doneTask INDEX [MORE INDEXES]` | e.g., `doneTask 1 2 3`
 [**Clear Tasks**](#clearing-all-entries-from-task-list-cleartasks) | `clearTasks`
 
 ## General

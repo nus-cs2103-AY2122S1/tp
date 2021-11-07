@@ -32,7 +32,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S1-CS2103-W14-4/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2122S1-CS2103-W14-4/tp/blob/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -65,15 +65,15 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103-W14-4/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ListPanelPlaceholder`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of multiple parts e.g.`CommandBox`, `ListPanelPlaceholder`, `StatusBarFooter`, `HelpWindow` etc. These parts, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `XYZListPanel` is in turn made up of other parts e.g. `StudentListPanel`, `TaskListPanel`, `GroupListPanel`.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103-W14-4/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103-W14-4/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -88,12 +88,12 @@ The `XYZListPanel` consists of either a `StudentListPanel`, `TaskListPanel` or `
 
 Each of these `XYZListPanel`s consists of their own `XYZCard` components which make up the final GUI.
 
-The layout of these `XYZListPanel`s are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The layout of these `XYZListPanel`s are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103-W14-4/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103-W14-4/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S1-CS2103-W14-4/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -121,7 +121,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddStudentCommandParser`, `DeleteStudentCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`]
+**API** : [`Model.java`](https://github.com/AY2122S1-CS2103-W14-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 ![Structure of the Model Component](images/ModelClassDiagram.png)
 
@@ -134,7 +134,9 @@ The `Model` component,
 
 The class diagrams of the `Student`, `Task` and `Group` classes are shown below:
 
-#####Task Component
+#### Task Component
+
+![Structure of the Task Class](images/TaskClassDiagram.png)
 
 tApp allows TAs to manage their tasks for his or her professional or personal use.
 
@@ -157,10 +159,23 @@ The tApp is supposed to cater to TA, who are very busy. They have their own modu
 
 #### Current Implementation
 
-To adhere to Object Oriented Programming priciples, we have decided to make the `Task` class as the parent class and `TodoTasks`, `DeadlineTask` and `EventTask` classes a subclass of `Task` class. The class diagram below shows in detail how the task model is being implemented.
+To adhere to Object Oriented Programming principles, we have decided to make the `Task` class as the parent class and `TodoTasks`, `DeadlineTask` and `EventTask` classes a subclass of `Task` class. The class diagram below shows in detail how the task model is being implemented.
+
+The `Task` class, and all its subclasses,
+
+* stores information regarding a user's task as shown above.
+* stores a compulsory reference to a `TaskName` object, a `Priority` enumeration field, and a boolean `isDone` field.
+* stores an optional reference to a `Description` object.
+* stores `Tag`, which is a class common to the `Student` and `Group` data types.
+
+In addition to the components above, the `EventTask` and `DeadlineTask` classes store a compulsory reference to a `TaskDate` object. The `TodoTask` class.
 
 
-![Structure of the Task Class](images/TaskClassDiagram.png)
+The `Task` class is an abstract class, consisting of three subclasses:
+
+1. `TodoTask` : A task that is to be completed, and is not associated with a date.
+2. `EventTask` : A task that is specified to occur at a certain date.
+3. `DeadlineTask` : A task that is to be completed by a certain date.
 
 #### Student and Group component
 
@@ -169,12 +184,12 @@ To adhere to Object Oriented Programming priciples, we have decided to make the 
 The `Student` component,
 
 * stores the student's personal information as shown by composition in the diagram above.
-* stores `Tag` and `RepoName` which are clases common to both `Student` and `Group` data types. `RepoName` in this case refers to the name of the student's IP repository.
+* stores `Tag` and `RepoName` which are classes common to both `Student` and `Group` data types. `RepoName` in this case refers to the name of the student's IP repository.
 * stores a reference to the `Group` the student is a part of via a unique `groupName` from the `Group` component (composition is not valid here as a `Group` can exist with an empty `Member` component). This attribute is not modifiable via teh regular `editStudent` command, and can only be modified internally when the student is added/deleted from a `Group`, or the `GroupName` of the student's group changes.
 
 The `Group` component,
 
-* stores group related information, similarly shown by compostition in the diagram above.
+* stores group related information, similarly shown by composition in the diagram above.
 * stores `Tag` and `RepoName`. In this case, `RepoName` refers to the TP repository of the group.
 * has a `Members` subcomponent that stores references to the `Student` component. This is initialized with no references to any `Student` to allow for preemptive creation of groups before members are made known. 
 
@@ -186,7 +201,7 @@ The `Group` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S1-CS2103-W14-4/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -197,7 +212,7 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -378,9 +393,11 @@ This process is shown in the following sequence diagram:
 The following steps describe the execution of the `EditGroupCommand`.
 
 1. `EditGroupCommand` uses the provided `Index` and `EditGroupDescriptor` to create the updated `Group` object.
-2. `EditGroupCommand` then calls the `setGroup` method of the `Model` class to replace the previous `Group` object with the newly updated one.
-3. `Model` then updates all `Student` objects that are part of the `Members` class of the group. This is achieved by creating new `Student` objects that have the updated `Group` object as a field, and calling the `setStudent` method of `AddressBook` to update the `Student data`.
-4. Finally, `Model` calls the `setGroup` function of the `AddressBook` to update the `Group` data.
+2. `EditGroupCommand` calls the `setGroup` method of the `Model` class to replace the previous `Group` object with the newly updated one.
+3. `Model` then updates all `Student` objects that are part of the `Members` class of the group. This is achieved by creating new `Student` objects that have a reference to the `GroupName` of the updated group, and calling the `setStudent` method of `AddressBook` to update the `Student data`.
+4. Finally, `Model` calls the `setGroup` function of the `AddressBook` to update the `Group` data of the `AddressBook`.
+
+<div style="page-break-after: always;"></div>
 
 ## Edit Task Command
 
@@ -421,7 +438,7 @@ Given below is an example usage scenario and how the adding a todo task mechanis
 6. The `AddTodoTaskCommandParser` creates a new `AddTodoTaskCommand` and returns it to AddressBookParser, which in turn returns it to `LogicManager`.
 7. The LogicManager calls the `AddTodoTaskCommand#execute(Model)` method.
 8. The AddTodoTaskCommand calls the `Model#addTask(Task)` method.
-9. The tasks is added to the list of tasks and the updated list of task is displayed.
+9. The task is added to the list of tasks and the updated list of task is displayed.
 9. Lastly, the `AddTodoTaskCommand` creates a `CommandResult` with a success message and returns it to `LogicManager`.
 
 The above process is shown in the following sequence diagram:
@@ -778,7 +795,7 @@ Similar to UC11 (Edit a group), except the group is deleted instead of edited.
     * 3d1. tApp displays an error message stating that the student already has a group
 
       Use case ends.
- 
+
 **Use case: UC13 - Delete student from group**
 
 Similar to UC12 (Add student to group), except we are deleting the student from the group, and group index and member list index is used instead of group name and student list index.
@@ -1442,16 +1459,24 @@ testers are expected to do more *exploratory* testing.
 
 ## Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing data files
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Test case: delete the `addressbook.json` file from the folder that contains the `.jar` file of the application. Then, execute the `.jar` file.
+       Expected: tApp application opens with the sample data provided in [SampleDataUtil.java](https://github.com/AY2122S1-CS2103-W14-4/tp/blob/master/src/main/java/seedu/address/model/util/SampleDataUtil.java).
+
+1. Dealing with corrupted data files
+
+    1. Test case: delete the `tasks` section of the `addressbook.json` file. Then, execute the `.jar` file.
+       Expected: tApp application opens with no data.
+
+    2. Test case: edit the `addressbook.json` file so that some properties are invalid (e.g Changing the `isComplete` property of a `Task` to contain a String instead of a boolean).
+       Expected: tApp application opens with no data.
 
 --------------------------------------------------------------------------------------------------------------------
 
-[comment]: <> (TODO)
 ## **Effort**
-We highly recommend adding an appendix named Effort that evaluators can use to estimate the total project effort.
-Keep it brief (~1 page)
-Explain the difficulty level, challenges faced, effort required, and achievements of the project.
-If a significant part (e.g., more than 5%) of the effort was saved through reuse, mention what you reused and how it affected the effort e.g., the feature X is implemented using library Foo -- our work on adapting Foo to our product is contained in class FooAdapter.java.
-Use AB3 as a reference point e.g., you can explain that while AB3 deals with only one entity type, your project was harder because it deals with multiple entity types.
+Our team has put in a significant amount of effort into making our application cater to the needs of CS2103/T Teaching Assistants. While AB3 had only dealt with the `Person` entity type, tApp stores data of 3 different entity types, `Task`, `Student` and `Group`.
+Implementing this required a deep understanding of how AB3 was structured and implemented, in order to expand on its functionality.
+Moreover, classes such as `Student` and `Group` interact in order to provide more utility to the user, adding another layer of difficulty to the implementation.
+
+In addition, our group has added many commands in addition to the ones implemented by AB3. While AB3 had a total of 8 available commands, tApp has a total of 27 in order to accommodate for all the different entity types and features. This required significant time and effort, as well as a good understanding of the `Logic` component of AB3.
