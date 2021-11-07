@@ -22,8 +22,8 @@ Given below are my contributions to the project.
 
 * **New Feature**: Added the `delete_marked` command and wrote tests for it:
     [\#175](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/175)
-  * What it does: It allows recruiters to perform a mass delete on all applicants whose status are "Done".
-  * Justification: This feature improves the product significantly because it saves a huge amount of time for the recruiters. Recruiters no longer need to search for **and** manually delete applicants whose status are "Done" individually.
+  * What it does: It allows recruiters to perform a mass delete on all applicants whose status are `Done`.
+  * Justification: This feature improves the product significantly because it saves a huge amount of time for the recruiters. Recruiters no longer need to search for **and** manually delete applicants whose status are `Done` individually.
 
 * **Enhancements to existing features**:
   * Modified `delete` command to allow for deletion of multiple indexes at the same time, and wrote tests for it:
