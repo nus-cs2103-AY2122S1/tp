@@ -211,7 +211,7 @@ public class ModelManager implements Model {
 
     /**
      * Returns an immutable last updated date of the address book.
-     * 
+     *
      * @return An immutable {@code LastUpdatedDate}.
      */
     @Override
