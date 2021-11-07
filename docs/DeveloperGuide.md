@@ -153,8 +153,7 @@ The UI consists of a `MainWindow` that is made up of parts smaller UI-part compo
 except for the Help Window which can be shown or hide depending on the results of user command.
 
 Some classes of the UI, notably `CommandBox` and `AppMenu`, keeps a reference of a functional interface called `CommandExecutor` that
-executes a Command from the Logic `component`. In consideration of this design - it is done allow components of UI to execute user commands 
-while still maximizing abstraction and reducing reliance of UI on the Logic component - rather it will be dependent on an intermediate component within UI.
+executes a Command from the Logic `component`.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in their respective matching `.fxml` files stored in the `src/main/resources/view` folder. For example, the layout of the 
 [`MainWindow`](https://github.com/AY2122S1-CS2103T-T15-3/tp/blob/master/src/main/java/seedu/academydirectory/ui/MainWindow.java) is 
@@ -162,8 +161,8 @@ specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-T15-3/tp/bl
 
 The `UI` component,
 
-* executes user commands using the `Logic` component.
-* listens for changes to `VersionedModel` data so that the UI can be updated with the modified data.
+* executes user commands using the `Logic` component, through the MainWindow object.
+* listens for changes in `VersionedModel` data so that the UI can be updated with the modified data.
 * keeps a reference (for Main Window) or depends (for AppMenu) on the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * keeps a reference of some classes in the `VersionedModel` component, particularly the Student class, as it displays `Student` object residing in 
   the `VersionedModel` and requires grades statistics from `Student` object in the `VersionedModel`.
@@ -171,8 +170,20 @@ The `UI` component,
 ![Creator Class Diagram](images/dg/architecture/ui/CreatorClassDiagram.png)
 
 One important component of the UI is the specialized Creator class which extends the abstract class UiPart - for the purpose of reusing the Visualizer Display
-to show users the result of a command execution. The Creator class takes in an AdditionalInfo object from Versioned Model, and convert it to the specific view
-for displaying to users in the Visualizer Display.
+to show users the result of a command execution. After information is sent from Main Window to the Visualizer Display, the Visualizer Display then send the Additional
+Info Object to the Creator classes, which will be used to convert it for user view in the Visualizer Display itself.
+
+**Design Considerations**
+
+CommandExecutor Functional Interface
+   * Initial design of AB3: Keeping the CommandExecutor functional Interface inside CommandBox
+     - Cons: This design initially is supposed to encapsulate the CommandBox UI object, that the command box is able to execute user's command on behalf of the 
+       Logic component. However, the disadvantage of this design is that if there are future extensions requiring more components that can execute commands, like another
+       input box or GUI functionalities, then another interface must be used.
+   * Current design: Separate CommandExecutor from CommandBox
+     - Pros: Allows other components of the UI to use the CommandExecutor interface for command execution, and better abstract out the design of Academy Directory, hence making CommandExecutor a medium
+       of communication between the Logic and the UI component. In addition, it serves as a basis for any future extension of Academy Directory.
+     - Cons: It makes the implementation of the UI segment more complicated in return.
 
 ### Logic component
 
@@ -433,7 +444,7 @@ to be retrieved, and a list of `String` which represents the keywords that will 
 the names of students in Academy Directory. List of `Prefix` cannot be empty, but list of keywords can be.
 An empty list of keywords is interpreted as retrieving personal details of all students in the model. If 
 list of keywords is not empty, then the pattern-matching behavior for name in `GetCommand` is similar to that
-of the [`FilterCommnd`](#filtercommand).
+of the [`FilterCommand`](#filtercommand).
 
 The specifics are shown in the sequence diagram below:
 
@@ -824,10 +835,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | CS1101S Avenger           | retrieve specific details of a student                             | view and analyse the data                                              |
 | `* * *`  | CS1101S Avenger           | keep track of my students' tutorial performance                    | accurately reward class participation marks                            |
 | `* * *`  | CS1101S Avenger           | record my students' assessment results                             | monitor my students' progress and provide timely assistance to them    |
-| `* * *`  | first time user           | access the relevant commands with a "help" command                 | learn how to use the app more easily                                   |
+| `* * *`  | First time user           | access the relevant commands with a "help" command                 | learn how to use the app more easily                                   |
 | `* *`    | CS1101S Avenger           | view the average scores of my students for specific assessments    | focus on the aspects to improve on during tutorial                     |
 | `* *`    | CS1101S Avenger           | visualize the class scores for specific assessments                | gauge how well my students are doing in assessments                    |
 | `* *`    | CS1101S Avenger           | add tags to certain students to take note of their weaker topics   | focus on topics that they are struggling with                          |
+| `* *`    | CS1101S Avenger           | view all information relating to one student in one go             | have an overview of my student status                                  |
 | `* * `   | CS1101S Avenger           | see history of changes to Academy Directory data                   | easily revert accidental changes to data                               |
 | `* * `   | CS1101S Avenger           | undo changes made to Academy Directory data                        | easily revert accidental changes to data                               |
 | `* * `   | CS1101S Avenger           | redo changes made to Academy Directory data                        | easily revert accidental undos to data                                 |
@@ -851,7 +863,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3b. User requests for help in a command that does not exist
   * 3b1. Academy Directory shows an error message
     
-    Use case resumes at step 2.
+    Use case resumes at step 3.
 
 **Use case: Delete a student**
 
@@ -1056,19 +1068,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User enter a command to view all information of one student
+1. User enter a command to view all information of one student by index
 2. Academy Directory fetches all related data of one student
-3. Academy Directory displays all these information to users.
+3. Academy Directory displays all information to users.
 
 **Extensions**
-* 1a. The index number entered exceeds the size of the list
+* 1a. Users request information of a student whose index exceeds the student list size
     * 1a1. Academy Directory informs users that the index is invalid via an error message
-    
-    Use case resumes at step 1
-* 1a. The argument followed is not a positive integer
-    * 1a1. Academy Directory informs users that the index must be a positive integer for the command to be executed
+      
+      Use case resumes at step 1
+  
+* 1a. The index number is invalid (not a positive integer)
+    * 1a1. Academy Directory informs users that the index is invalid and must be a positive integer for the command to be executed
      
-    Use case resumes at step 1
+      Use case resumes at step 1
 
 ### Non-Functional Requirements
 
@@ -1115,12 +1128,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 Manual testing was conducted internally by the team as of the time of writing. 
 The details of the test can be found here: [Manual Testing](ManualTesting.md)
 
+
 <div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
 testers are encouraged to do more *exploratory* testing.
 
+
 In the future, we aim to expand testing to be done by external testers to improve the testing rigour.
 
-</div>
 
 ## **Appendix C: Version Controlled Commands**
 The following list is a list of commands that are version controlled i.e. they can be undone and
