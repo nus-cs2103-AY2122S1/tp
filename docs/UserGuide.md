@@ -15,7 +15,7 @@ you're an intermediate user looking to get more out of Dash, all supported comma
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Table of Contents
+## <u>Table of Contents</u>
 
 * Table of Contents
 {:toc}
@@ -27,7 +27,7 @@ you're an intermediate user looking to get more out of Dash, all supported comma
 Whether you're using Windows or macOS, the steps for installation are the same.
 
 1. Ensure you have Java `11` or above installed in your Computer. 
-   [Not sure what Java is? Click here!](https://java.com/en/download/help/download_options.html).
+   [Not sure what Java is? Click here!](https://java.com/en/download/help/download_options.html)
 
 2. Download the latest `dash.jar` from [this website](https://github.com/AY2122S1-CS2103T-W15-2/tp/releases/tag/v1.3.1).
 
@@ -85,8 +85,6 @@ Finally, the help tab provides you with a quick summary of Dash's features and h
 Dash uses a Command Line Interface (CLI) to optimize speed. This means that you use mostly your keyboard to interact 
 with Dash, instead of relying on your mouse to click on options. For example, you can switch tabs by typing in a 
 command; you cannot do so by clicking the tab.
-
-![Using the CLI](images/CLITutorialGif.gif)
 
 Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open 
 the help window.
@@ -146,7 +144,7 @@ Refer to the [Features](#features) below for details of each command.
   will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
   
-* Here is the meaning of some icons used in this section:
+Here is the meaning of some icons used in this section:
 
 :orange_book: Brief description of what the command does.
 
