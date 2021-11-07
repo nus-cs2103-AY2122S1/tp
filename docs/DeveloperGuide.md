@@ -825,7 +825,7 @@ testers are expected to do more *exploratory* testing.
        Expected: The most recent window size and location is retained.
        
 
-### Basic functionality
+### Deleting an anime
 
 1. Deleting an anime while all animes are being shown
 
@@ -848,6 +848,35 @@ testers are expected to do more *exploratory* testing.
       Expected: First anime is deleted from the list. Details of the deleted anime shown in the status message. Timestamp in the status bar is updated.
       
    3. Use `list` to list out all animes, make sure that the deleted anime is not shown here
+    
+### Genres
+
+1. Adding Genres
+
+    1. List all animes using the `list` command. Multiple animes in the list
+
+    2. Add in a new anime without any genres using `add n/test`
+    
+    3. Use command `genre 1 c/add g/action`
+    Expected: The `action` genre will be added to the test anime
+       
+    4. After the previous command, use command `genre 1 c/add g/action g/fantasy`
+    Expected: The `fantasy` genre will be added to the test anime, while a message tells the user that the `action` genre is already present
+   
+2. Deleting Genres
+
+   1. List all animes using the `list` command. Multiple animes in the list
+
+   2. Add in a new anime with two genres using `add n/test g/action g/fantasy`
+
+   3. Use command `genre 1 c/delete g/action`
+      Expected: The `action` genre will be deleted from the anime
+
+   4. After the previous command, use command `genre 1 c/delete g/action g/fantasy`
+      Expected: The `fantasy` genre will be deleted to the test anime, while a message tells the user that the `action` genre is not present
+
+
+
 
 ### Saving data
 
