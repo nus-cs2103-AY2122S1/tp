@@ -1,0 +1,32 @@
+@startuml
+title EditLabCommand
+start
+:      User executes editlab
+command with a lab number;
+
+if () then ([Valid lab number])
+    if (Valid new lab number
+and/or new total score) then (true)
+        if () then ([both fields
+specified])
+            : Change lab number and
+            total score for all students;
+        else if () then ([only new
+lab number])
+            : Change lab number
+                 for all students;
+        else ([only new
+total score])
+            : Change total score
+               for all students;
+        endif
+    else (false)
+        : Display error message
+              in resultDisplay;
+    endif
+else ([Invalid lab number])
+    : Display error message
+          in resultDisplay;
+endif
+stop
+@enduml
