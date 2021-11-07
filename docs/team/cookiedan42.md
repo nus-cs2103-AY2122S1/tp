@@ -37,9 +37,9 @@ Given below are my contributions to the project.
     * Added implementation details of the `mailingList` feature.
 
 * **Tools**:
-  * Integrated a third party library (OpenCSV) to the project ([1](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/91), [2](https://github.com/cookiedan42/ped/issues/6), [3](https://github.com/cookiedan42/ped/issues/7))
+  * Integrated a third party library (OpenCSV) to the project ([\#91](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/91), 
   * Improved `TestUtils` by adding the ability to create different AddressBook states for testing ([\#52](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/52))
   
 * **Community**:
-  * Reported bugs and suggestions for other teams in the class ([examples](https://github.com/cookiedan42/ped/issues/9))
+  * Reported bugs and suggestions for other teams in the class ([1](https://github.com/cookiedan42/ped/issues/6), [2](https://github.com/cookiedan42/ped/issues/7), [3](https://github.com/cookiedan42/ped/issues/9))
   * PRs reviewed (with non-trivial review comments): [\#42](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/42), [\#53](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/53)
