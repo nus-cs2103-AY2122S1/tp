@@ -170,6 +170,10 @@
     -fx-text-fill: black !important;
 }
 
+.text-area .scroll-pane .corner {
+    -fx-background-color: transparent ;
+}
+
 .status-bar .label {
     -fx-font-family: "Open Sans Light";
     -fx-text-fill: white;
