@@ -19,7 +19,7 @@ public abstract class FilterInterviewCommand extends Command {
          * Constructs a {@code ValidFilterInterviewArgs}.
          *
          * @param arg {@code String} of the valid argument input
-         * @param filterInterviewCommand appropriate subclass of {@code FilterInterviewCommand} corresponding to the argument
+         * @param filterInterviewCommand subclass of {@code FilterInterviewCommand} corresponding to the argument
          */
         ValidFilterInterviewArgs(String arg, FilterInterviewCommand filterInterviewCommand) {
             this.arg = arg;
