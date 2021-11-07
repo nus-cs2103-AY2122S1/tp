@@ -12,10 +12,6 @@ Welcome to the SportsPA Developer Guide!
 
 <div style="page-break-after: always;"></div>
 
-<a name="table-of-contents"></a>
-<span style = "font-size: 32px; color: #e46c0a">
-Table of Contents
-</span>
 * Table of Contents
   {:toc}
 
