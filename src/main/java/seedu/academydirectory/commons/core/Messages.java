@@ -28,6 +28,7 @@ public class Messages {
             + "[**Edit Participation**](#editing-a-students-studio-participation-participation) | "
             + "`participation INDEX ses/STUDIO_SESSION add/PARTICIPATION_TO_ADD`\n"
             + "[**Show Grades**](#displaying-the-grades-for-an-assessment--show) | `show ASSESSMENT`\n"
+            + "[**View student full details**](#view-student-details) | `view INDEX`\n"
             + "[**Visualize all grades**](#visualizing-assessments-grades-of-the-entire-class-visualize) "
             + "| `visualize`\n"
             + "[**Filter Academy Directory**](#filtering-academy-directory-by-name-or-tag-filter) | `filter KEYWORD "

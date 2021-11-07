@@ -6,6 +6,7 @@ skinparam classBackgroundColor UI_COLOR
 
 package UI <<Rectangle>>{
 Interface Ui <<Interface>>
+Interface CommandExecutor <<Interface>>
 Class "{abstract}\nUiPart" as UiPart
 Class AppMenu
 Class VisualizerDisplay
@@ -40,7 +41,8 @@ MainWindow *-down-> "1" AppMenu
 MainWindow *-down-> "1" VisualizerDisplay
 MainWindow --> "0..1" HelpWindow
 
-StudentListPanel -down-> "*" StudentCard
+
+StudentListPanel -down--> "*" StudentCard
 
 MainWindow -left-|> UiPart
 AppMenu --|> UiPart
@@ -52,9 +54,18 @@ CommandBox --|> UiPart
 StatusBarFooter --|> UiPart
 StudentCard --|> UiPart
 
-StudentCard ..> VersionedModel
+MainWindow ..up> CommandExecutor
+StudentCard -up> "1" CommandExecutor
+StudentListPanel -up> "1" CommandExecutor
+CommandBox -up> "1" CommandExecutor
+AppMenu -up> "1" CommandExecutor
+
+AppMenu ...> Logic
+
+StudentCard --> VersionedModel
 UiManager -right-> Logic
 MainWindow --> Logic
+
 
 StudentListPanel -[hidden]left- HelpWindow
 HelpWindow -[hidden]left- CommandBox

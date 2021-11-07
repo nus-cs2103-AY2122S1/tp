@@ -80,7 +80,7 @@ public class StudentCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         // Studio Record and Assessment will be removed for better aesthetics
-        container.getChildren().removeAll(studioRecord, assessment);
+        container.getChildren().removeAll(studioRecord, assessment, telegram);
         image.setImage(new Image("/images/student.png"));
         this.commandExecutor = commandExecutor;
     }

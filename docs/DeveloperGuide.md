@@ -48,7 +48,7 @@ title: Developer Guide
     * [Glossary](#glossary)
   * [Manual Testing](#appendix-b-instructions-for-manual-testing)
     * [Feature Testing](#feature-testing)
-    * [UI Testing](#ui-testing)
+    * [GUI Testing](#graphical-user-interface-gui-testing)
   * [Version Controlled Commands](#appendix-c-version-controlled-commands)
     
 --------------------------------------------------------------------------------------------------------------------
@@ -75,10 +75,11 @@ certain technical terms commonly used in this user guide [here](#glossary).
 - The formatting and content of this User Guide is referenced from [AY2122S1-CS2103T-w17-1/tp](https://ay2122s1-cs2103t-w17-1.github.io/tp/).
 - Design of the internal version control system is heavily inspired by [Git](https://github.com/git/git).
 - Certain code implementations may have been inspired by [Baeldung tutorials](https://www.baeldung.com/)
-- Libraries used: 
-  - Junit5
-  - JavaFX
-  - [Add more]
+- Libraries used:
+  - [JavaFX](https://openjfx.io/) for the amazing GUI
+  - [Jackson](https://github.com/FasterXML/jackson) to save your data
+  - [JUnit5](https://github.com/junit-team/junit5) so that we can deliver to you bug-free!
+  - [MDFX](https://github.com/JPro-one/markdown-javafx-renderer) so that you can see User Guide in help without internet
   
 --------------------------------------------------------------------------------------------------------------------
 
@@ -144,16 +145,32 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 ![Structure of the UI Component](images/dg/architecture/ui/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `VisualizerDisplay`, `StudentListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts smaller UI-part components, including `CommandBox`, `ResultDisplay`, 
+`VisualizerDisplay`, `StudentListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract 
+`UiPart` class which captures the commonalities between classes that represent smaller parts of the visible GUI. Of these, all components are always presented,
+except for the Help Window which can be shown or hide depending on the results of user command.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103T-T15-3/tp/blob/master/src/main/java/seedu/academydirectory/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-T15-3/tp/blob/master/src/main/resources/view/MainWindow.fxml)
+Some classes of the UI, notably `CommandBox` and `AppMenu`, keeps a reference of a functional interface called `CommandExecutor` that
+executes a Command from the Logic `component`. In consideration of this design - it is done allow components of UI to execute user commands 
+while still maximizing abstraction and reducing reliance of UI on the Logic component - rather it will be dependent on an intermediate component within UI.
+
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in their respective matching `.fxml` files stored in the `src/main/resources/view` folder. For example, the layout of the 
+[`MainWindow`](https://github.com/AY2122S1-CS2103T-T15-3/tp/blob/master/src/main/java/seedu/academydirectory/ui/MainWindow.java) is 
+specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-T15-3/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
 * executes user commands using the `Logic` component.
 * listens for changes to `VersionedModel` data so that the UI can be updated with the modified data.
-* keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `VersionedModel` component, as it displays `Student` object residing in the `VersionedModel` and requires grades statistics from `Student` object in the `VersionedModel`.
+* keeps a reference (for Main Window) or depends (for AppMenu) on the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
+* keeps a reference of some classes in the `VersionedModel` component, particularly the Student class, as it displays `Student` object residing in 
+  the `VersionedModel` and requires grades statistics from `Student` object in the `VersionedModel`.
+  
+![Creator Class Diagram](images/dg/architecture/ui/CreatorClassDiagram.png)
+
+One important component of the UI is the specialized Creator class which extends the abstract class UiPart - for the purpose of reusing the Visualizer Display
+to show users the result of a command execution. The Creator class takes in an AdditionalInfo object from Versioned Model, and convert it to the specific view
+for displaying to users in the Visualizer Display.
 
 ### Logic component
 
@@ -635,7 +652,9 @@ formatting
 
 The following sequence diagram shows the above implementation:
 
-{Add IMAGE}
+![HistoryCommandSequenceDiagram](images/dg/logic/commands/historycommand/HistoryCommandSequenceDiagram.png)
+
+Note that the above diagram is omits several details but should be sufficient to grasp how `HistoryCommand` works.
 
 #### Limitation
 The current implementation can only show two commit branches: `MAIN` and `OLD`. While this is
@@ -669,14 +688,19 @@ serve the aforementioned purpose.
 
 The following sequence diagram shows the above implementation:
 
-{Add IMAGE}
+![RevertCommandSequenceDiagram](images/dg/logic/commands/revertcommand/RevertCommandSequenceDiagram.png)
+
+Note that the above diagram is incomplete; it is approximately accurate but is sufficient to help explain the limitation
+of `RevertCommand`, as in below. 
 
 #### Limitation
 Because `RevertCommand` has to restore academy directory data which is the responsibility of the
-`Storage` component, `RevertCommand` reinitialize a `Storage` and `VersionedModel` and changes the 
-current `VersionedModel` reference to the newly created `VersionedModel`. This is (highly) not 
-ideal, but the implementer has no idea how to do this properly without the ungodly reinitialization
-of `Storage` and `VersionedModel`...
+`Storage` component, `RevertCommand` creates a `StorageManager` and uses it to load data from disk 
+and set the current `VersionedModel` internal data to the newly reloaded data. This is indicated in the sequence diagram
+as the sudden use of `Storage` component directly from `RevertCommand`. This is (highly) not 
+ideal, but the implementer has no idea how to do this properly i.e. without sudden creation of a new `StorageManager`
+... Right now the solution is to ensure that this newly created `StorageManager` is destroyed immediately to prevent
+access from elsewhere, and to put this limitation in this documentation to be solved one day. 
 
 ### UndoCommand
 This command undoes a change done to the underlying `AcademyDirectory` data. Note that this is
@@ -792,10 +816,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    Use case ends
 
 **Extensions**
-* 3a. User requests for the syntax of all commands
-  *  3a1. Academy Directory shows a list of all the commands and their associated syntax.
-    
-     Use case ends
 * 3b. User requests for help in a command that does not exist
   * 3b1. Academy Directory shows an error message
     
@@ -999,6 +1019,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a2. Academy Directory requests for the user to try another information.
   
         Use case ends.
+  
+**Use case: View student information**
+
+**MSS**
+
+1. User enter a command to view all information of one student
+2. Academy Directory fetches all related data of one student
+3. Academy Directory displays all these information to users.
+
+**Extensions**
+* 1a. The index number entered exceeds the size of the list
+    * 1a1. Academy Directory informs users that the index is invalid via an error message
+    
+    Use case resumes at step 1
+* 1a. The argument followed is not a positive integer
+    * 1a1. Academy Directory informs users that the index must be a positive integer for the command to be executed
+     
+    Use case resumes at step 1
 
 ### Non-Functional Requirements
 
@@ -1013,8 +1051,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 9. Logs and previous commits stored should be based on the _Principle of Least-Privilege_.
 10. Logs and previous commits should be recoverable even when `AcademyDirectory` itself is deleted.
 11. Logs and previous commits should be transferable and functional after transfer onto other computers.
-12. Users should be able to undo up to at least _100_ commands. 
-
+12. Users should be able to undo up to at least _100_ commands.
 
 ### Glossary
 
@@ -1114,8 +1151,127 @@ testers are expected to do more *exploratory* testing.
 ***
 
 #### Get Personal Detail
+List of invariance to guide additional test case generation:
+- At least one of `p/`, `e/`, or `te/` must be provided
+- Name tag `n/` is optional; its use indicates intention to get personal detail of students whose name matches
+  the given keywords
+- Lack of phone number will not be explicitly shown, unless there are no other information to show.
+- Current view of AcademyDirectory does not affect result
+- View of AcademyDirectory always resets to the view that will be obtained when running [`ListCommand`](#listcommand)
+- Order of tags present to `GetCommand` does not matter. `GetCommand` will prioritise showing phone number, followed
+  by email address, followed by telegram handle.
+- If duplicates of the same tag is given, the last tag will be used regardless of its validity.
 
-1. _{ more test cases to come …​ }_
+Below are a few test cases which checks for the above. The test cases are by no means exhaustive. 
+
+1. Retrieving personal detail of all students while all students have a phone number. 
+   1. Prerequisites:
+       - All students in the list must have a phone number 
+       - Run each test case twice, the first time by having all students listed using the `list` command, 
+      and the second time by having the view only show some students e.g. by using `filter` command 
+      on the tags. Expected outcome is the same in both cases for all test cases
+   2. Test cases:
+      1. `get p/`<br>
+      Expected: Phone number of all students are shown in the result display. 
+      2. `get e/`<br>
+      Expected: Email address of all students are shown in the result display.
+      3. `get te/` <br>
+      Expected: Telegram handle of all students are shown in the result display.
+      4. `get p/ e/` <br>
+      Expected: Phone number of all students are shown in the result display, followed by email address
+      of all students.
+      5. `get e/ p/` <br>
+      Expected: Phone number of all students are shown in the result display, followed by email address
+      of all students.
+      6. `get e/ p/ te/` <br>
+      Expected: Phone number of all students are shown in the result display, followed by email address
+      and then by telegram handle. 
+2. Retrieving personal detail of all students. At least one student has no phone number and
+at least one student has a phone number.
+   1. Prerequisites:
+      - At least one student has no phone number and at least one student has a phone number.
+      - Run each test case twice, the first time by having all students listed using the `list` command,
+        and the second time by having the view only show some students e.g. by using `filter` command
+        on the tags. Expected outcome is the same in both cases for all test cases
+   2. Test Cases: Same as point 1 <br>
+      Expected: Same as point 1, but only students who have phone numbers will have their phone numbers displayed.
+      No change in email address results and/or telegram handle results
+3. Retrieving personal detail of all students. No student has a phone number. 
+   1. Prerequisites:
+       - No student has a phone number.
+       - Run each test case twice, the first time by having all students listed using the `list` command,
+         and the second time by having the view only show some students e.g. by using `filter` command
+         on the tags. Expected outcome is the same in both cases for all test cases
+   2. Test Cases: Same as point 1 <br>
+      Expected: Same as point 1, with the following (minor) changes 
+         1. Feedback box will always say "Failed to receive one or more personal details. Showing what I can..." for all 
+         test cases.
+         2. For test cases with tags `e/` and/or `te/`, result display will still show email addresses and/or telegram handles
+         3. For test cases without the above tags, result display will show "Nothing to show..."
+4. Retrieving personal detail of all students. No students are present in AcademyDirectory
+   1. Prerequisites: Use `clear` command before beginning testing to make sure no students are present in AcademyDirectory 
+   2. Test Cases: Same as point 1 <br>
+      Expected:
+         1. Feedback box will always say "Failed to receive one or more personal details. Showing what I can..." for all 
+            test cases.
+         2. Result display will always show "Nothing to show..."
+5. Retrieving personal detail of a student by keyword. At least one student whose name
+matches the given keyword is present in AcademyDirectory. Said student has a phone number.
+   1. Prerequisites:
+       - At least one student has a name matches `alex`. By match, we mean a case-insensitive keyword match i.e. both "Alex"
+   and "aLeX" will match to `alex`. See this matching behavior in [`FilterCommand`](#filtercommand) for more details.
+       - Matched students have a phone number.
+       - Run each test case twice, the first time by having all students listed using the `list` command, 
+      and the second time by having the view only show some students e.g. by using `filter` command
+      on the tags. Expected outcome is the same in both cases for all test cases
+   2. Test cases:
+       1. `get p/ n/alex`<br>
+        Expected: Phone number of all students whose name matches `alex` are shown in the result display.
+       2. `get e/ n/alex`<br>
+        Expected: Email address of all students whose name matches `alex` are shown in the result display.
+       3. `get te/ n/alex` <br>
+        Expected: Telegram handle of all students whose name matches `alex` are shown in the result display.
+       4. `get p/ e/ n/alex` <br>
+        Expected: Phone number of all students whose name matches `alex` are shown in the result display, followed by email address
+        of all students.
+       5. `get e/ p/ te/ n/alex` <br>
+        Expected: Phone number of all students whose name matches `alex` are shown in the result display, followed by email address
+        and then by telegram handle.
+       6. `get e/ n/alex p/ te/` <br>
+      Expected: Phone number of all students whose name matches `alex` are shown in the result display, followed by email address
+      and then by telegram handle.
+       7. `get n/alex e/ p/ te/` <br>
+      Expected: Phone number of all students whose name matches `alex` are shown in the result display, followed by email address
+      and then by telegram handle.
+
+6. Retrieving personal detail of a student by keyword. At least one student whose name matches the given keyword 
+is present in AcademyDirectory. Said student/s have no phone numbers.
+   1. Prerequisites:
+       - At least one student has a name matches `alex`. By match, we mean a case-insensitive keyword match i.e. both "Alex"
+       and "aLeX" will match to `alex`. See this matching behavior in [`FilterCommand`](#filtercommand) for more details.
+       - Matched students have no phone numbers.
+       - Run each test case twice, the first time by having all students listed using the `list` command,
+       and the second time by having the view only show some students e.g. by using `filter` command
+       on the tags. Expected outcome is the same in both cases for all test cases
+   2. Test cases: Same as point 5 <br>
+      Expected: Same as point 5, with the following (minor) changes
+       1. Feedback box will always say "Failed to receive one or more personal details. Showing what I can..." for all
+        test cases.
+       2. For test cases with tags `e/` and/or `te/`, result display will still show email addresses and/or telegram handles
+       3. For test cases without the above tags, result display will show "Nothing to show..."
+
+7. Retrieving personal detail of a student by keyword. No student whose name matches the given keyword is present in AcademyDirectory. 
+   1. Prerequisites:
+        - No student has a name which matches `alex`. By match, we mean a case-insensitive keyword match i.e. both "Alex"
+        and "aLeX" will match to `alex`. See this matching behavior in [`FilterCommand`](#filtercommand) for more details.
+        - Run each test case twice, the first time by having all students listed using the `list` command,
+        and the second time by having the view only show some students e.g. by using `filter` command
+        on the tags. Expected outcome is the same in both cases for all test cases
+   2. Test cases: Same as point 5 <br>
+      Expected: Same as point 5, with the following (minor) changes
+      1. Feedback box will always say "Failed to receive one or more personal details. Showing what I can..." for all
+         test cases.
+      2. Result display will always show "Nothing to show..."
 
 ***
 
@@ -1292,14 +1448,24 @@ testers are expected to do more *exploratory* testing.
 
 #### List All Students
 
-1. _{ more test cases to come …​ }_
-
+1. List all students on Academy Directory
+   1. Prerequisite: Application database is not empty (meaning that the `clear` command has not been executed, or that there are student entries on the student list)
+   2. Test case: `list`
+      Expected: All students are shown on the student list panel
+   3. Test case: `list 3`
+      Expected: Error message is shown on the status message display stating that there is an invalid usage detected, no other argument should follow, and that the command is highlighted in red.
+   4. Test case: `list 02it0hg204`
+      Expected: Error message is shown on the status message display, stating that there is an invalid usage detected, no other argument should follow, and that the command is highlighted in red.
 ***
 
 #### Clear Student List
 
-1. _{ more test cases to come …​ }_
-
+1. List all students on Academy Directory
+  1. Prerequisite: Application database is not empty (meaning that the `clear` command has not been executed, or that there are student entries on the student list)
+  2. Test case: `clear`
+     Expected: Student list panel on the left is emptied, with a status message stating that the entries have been cleared.
+  3. Test case: `clear 3`
+     Expected: Error message is shown on the status message display stating that there is an invalid usage detected, no other argument should follow, and that the command is highlighted in red.
 ***
 
 #### Undo Changes
@@ -1320,8 +1486,8 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisite: Application is started
    2. Test case: `help`
       Expected: A pop-up window is shown summarizing the format of all commands for users, as well as a link to the web User Guide of Academy Directory
-   3. Test case: `help    `
-      Expected: A pop-up window is shown summarizing the format of all commands for users, as well as a link to the web User Guide of Academy Directory
+      Expected: All commands used in Academy Directory are shown, and the summary table does not lack any command. To assert this, compare the table to the
+      actual User Guide web version and see the matched commands.
 2. Test specific help
    1. Prerequisite: Application is started
    2. Test case: `help edit`
@@ -1329,13 +1495,16 @@ testers are expected to do more *exploratory* testing.
    3. Test case: `help visualize`
       Expected: A pop-up window is shown with a customized help message (based on the User Guide of `visualize` command) on how to use `visualize`, including significance, format, and example.
    4. Test case: `help ad`, `help addd`
-      Expected: No pop-up window is shown, and an error message is shown as status message explaining that there exists no instruction for command `ad`. Significance of the test case is that specific `help` can only be useful when the command is typed in full rather than in partial
+      Expected: No pop-up window is shown, and an error message is shown as status message explaining that there exists no instruction for command `ad`. 
+      Significance of the test case is that specific `help` can only be useful when the command is typed in full rather than in partial - to view help for command `add`, users need to type in `help add` exactly.
    5. Test case: `help r230thg4b0p2nnbtpbgetbi03`
       Expected: No pop-up window is shown, and an error message is shown as status message explaining that there exists no instruction for the command.
 3. Test functionality of pop-up window
    1. Prerequisite: Help window is already opened before by any mean, and is kept opened for testing
    2. Test case: Focus on the Main Window, do not close Help Window, and type in `help add` or any other equivalent command
       Expected: The help window is refocused with its content change to the new `help` instead.
+   3. Test case: Click on the `Copy UG Guide` button on the right side, and access the link
+      Expected: The User Guide web-version of Academy Directory can be accessed, meaning that the link is indeed copied.
 ***
 
 #### Saving data
@@ -1348,7 +1517,7 @@ testers are expected to do more *exploratory* testing.
 
 ***
 
-### Graphic User Interface Testing
+### Graphical User Interface (GUI) Testing
 
 #### Menus
    1. Test the 5 menu items on the bar
@@ -1362,28 +1531,57 @@ testers are expected to do more *exploratory* testing.
       2. Test case: Click on entry `Show RA1`
          Expected: The command `show RA1` is executed as an equivalent command-button
          
-#### User Interface
+#### User Interface and Experience
    1. Test application user interface
-      1. Prerequisite: Application is started
-      2. Test case: Expand Academy Directory to full screen
+      1. Prerequisite: Application is started, application has not been cleared of data and has student records inside
+      2. Test case: Ensure that Academy Directory has a student list with the various student cards inside.
+         Expected: Student list and student cards are shown, if the list is not empty
+         Expected: Student cards are clickable
+      3. Test case: Ensure that Academy Directory has an opaque rectangle in the top-right corner of the Main Window.
+         Expected: The rectangle is shown to the user, and users cannot edit it or remove it.
+      4. Test case: Ensure that Academy Directory has an opaque rectangle in the bottom-right corner of the Main Window.
+         Expected: The rectangle is shown to the user, and users cannot edit it or remove it.
+      5. Test case: Ensure that Academy Directory has a command box at the bottom of Main Window that users can enter something in
+         Expected: The command box is shown, users can enter something in and see what they have typed in.
+      6. Test case: Expand Academy Directory to full screen
          Expected: Background image also expanded, alongside other components of the internal controls (result display, student list, and status message)
          Expected: No other visual misbehavior of the User Interface (image is cropped or lacking in any visual design)
-      3. Test case: Shrink Academy Directory to the smallest possible size
+      7. Test case: Shrink Academy Directory to the smallest possible size
          Expected: Academy Directory is not minimized completely as there is a minimal size for users to still see the data
-      4. Test case: Enter keywords to the command bar.
-         
-#### User Experience
-
+      8. Test case: Enter `help` to the command box
+         Expected: The word `help` is shown on the command box for users to see
+      9. Test case: Press Enter to execute the command
+         Expected: Status logger displays a message that informs user a general help message is being shown
+         Expected: Help Window is pop-up
+      10. Test case: Resize the Help Window by expand it to full screen
+         Expected: Help Window is expanded to full screen without compromising the content inside (the message is not being minimized or expanded, users are able to view the message regardless of the size).
+         Expected: All commands are inside the help message. To check, scroll the window and see whether commands `participation`, or `revert`, or `visualize` are in the table
+      11. Test case: Close the help window
+         Expected: Help Window is closed successfully, without the Main Window being closed or affected as well
+      12. Test case: Click on the logger display and try to edit the message
+         Expected: Users cannot edit the message or remove the message. Reason is to avoid confusion in usage of the application
+      13. Test case: Enter `visualize` to the command box, and press enter.
+         Expected: A box-whisker plot is shown to the users visualizing relative performance on student exam.
+      14. Test case: Attempt to click on the bottom-right rectangle and remove the data visualization
+         Expected: Users cannot remove the data.
+      15. Test case: Enter `view 1` to the command box, and press enter
+         Expected: A visualized view of the student is shown in the bottom-right corner
+      16. Test case: Click on the drop-down menu with "View Participation" on the current view
+         Expected: The menu is dropped, and users can see the summary of student participation and attendance of CS1101S studio
+      17. Test case: Click on the drop-down menu with "View Test Score" on the current view
+         Expected: The previous menu is closed, the clicked menu is dropped, and users can see the summary of student test score of CS1101S
+      18. Test case: Enter `list` to the command box, and press enter
+         Expected: The `view` visualization of student information does not disappear even though the application is still functioning good enough.
+          
 
 ### System testing
 
 #### Performance testing
-#### Load testing
-#### Compatibility testing
-#### Usability testing
-#### Portability testing
+    
+Purpose: Test and record the average time of which Academy Directory execute users' command
 
-1. _{ more test cases to come …​ }_
+#### Compatibility testing
+#### Portability testing
 
 ## **Appendix C: Version Controlled Commands**
 The following list is a list of commands that are version controlled i.e. they can be undone and

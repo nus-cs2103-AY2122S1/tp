@@ -1,0 +1,48 @@
+@startuml
+!include ../../../style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":RevertCommand" as revertCommand LOGIC_COLOR
+end box
+
+box VersionedModel MODEL_COLOR_T1
+participant "model:VersionedModel" as versionedModel MODEL_COLOR
+participant ":VersionControlController" as versionControlController MODEL_COLOR
+participant "relevantCommit:Commit" as relevantCommit MODEL_COLOR
+participant "relevantTree:Tree" as relevantTree MODEL_COLOR
+end box
+
+box Storage STORAGE_COLOR_T1
+participant "storage:StorageManager" as StorageManager STORAGE_COLOR
+end box
+
+-> revertCommand: execute(model)
+revertCommand -> versionedModel ++ : revert(hash)
+versionedModel -> versionControlController ++ : revert(hash)
+
+versionControlController -> relevantCommit ++ : getTreeSupplier()
+relevantCommit --> versionControlController --: relevantTree
+versionControlController --> relevantTree ++ : regenerateBlobs()
+relevantTree --> versionControlController --
+destroy relevantTree
+
+versionControlController --> versionedModel --: relevantCommit
+versionedModel --> revertCommand : relevantCommit
+
+revertCommand -> versionedModel : getAcademyDirectoryFilePath()
+versionedModel --> revertCommand -- : filepath
+create StorageManager
+revertCommand -> StorageManager ++ : StorageManager(academyDirectoryStorage)
+
+revertCommand -> StorageManager : readAcademyDirectory()
+StorageManager --> revertCommand -- : academyDirectoryOptional
+destroy StorageManager
+
+alt DataConversionException || IOException || academyDirectoryOptional is empty
+    revertCommand -> versionedModel ++ : setAcademyDirectory(emptyData)
+    deactivate versionedModel
+else
+    revertCommand -> versionedModel ++ : setAcademyDirectory(academyDirectoryOptional.get())
+    deactivate versionedModel
+end
+@enduml

@@ -101,6 +101,10 @@
     -fx-padding: 0 0 0 0;
 }
 
+/*
+Acknowledgement: Inspired from stackoverflow:
+https://stackoverflow.com/questions/53574916/javafx-change-gradient-background-opacity-without-affecting-children
+*/
 /* Even cells */
 .list-cell:filled:even {
     -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #818192, #303035);

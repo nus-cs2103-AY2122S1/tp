@@ -10,7 +10,6 @@ import seedu.academydirectory.logic.commands.exceptions.CommandException;
 import seedu.academydirectory.model.AcademyDirectory;
 import seedu.academydirectory.model.ReadOnlyAcademyDirectory;
 import seedu.academydirectory.model.VersionedModel;
-import seedu.academydirectory.model.util.SampleDataUtil;
 import seedu.academydirectory.storage.AcademyDirectoryStorage;
 import seedu.academydirectory.storage.JsonAcademyDirectoryStorage;
 import seedu.academydirectory.storage.StorageManager;
@@ -62,7 +61,7 @@ public class RevertCommand extends Command {
 
         try {
             academyDirectoryOptional = storage.readAcademyDirectory();
-            initialData = academyDirectoryOptional.orElseGet(SampleDataUtil::getSampleAcademyDirectory);
+            initialData = academyDirectoryOptional.orElseGet(AcademyDirectory::new);
         } catch (DataConversionException | IOException e) {
             initialData = new AcademyDirectory();
         }

@@ -1,0 +1,26 @@
+@startuml
+!include ../../style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor UI_COLOR_T4
+skinparam classBackgroundColor UI_COLOR
+
+Class VisualizerDisplay
+Class "{abstract}\nUiPart" as UiPart
+
+package Creator <<Rectangle>>{
+Class "{abstract}\nCreator" as Creator
+Class XYZCreator
+}
+
+package VersionedModel <<Rectangle>> {
+Class HiddenModel #FFFFFF
+}
+
+Creator ..> VersionedModel
+
+XYZCreator --up|> Creator
+
+Creator --up|> UiPart
+
+XYZCreator .up.> VisualizerDisplay : returns >
+@enduml

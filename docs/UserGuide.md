@@ -82,9 +82,7 @@ onto their system.
 
 While some technical background is assumed, we also provide the definitions for
 certain technical terms commonly used in this user guide [here](#glossary).
-
 --------------------------------------------------------------------------------------------------------------------
-
 ## Quick Start
 This section provides instructions to begin using Academy Directory.
 
@@ -113,6 +111,26 @@ related files to be saved to an indeterminate location on the computer. As such,
 for beginners. 
 - The `clear` command can be used to remove the sample data in Academy Directory.
 - Changes to Academy Directory are automatically saved into the database.
+
+
+## Preview
+
+Have you installed Academy Directory successfully? Let us now walk you through you how Academy Directory works, by starting off with a tutorial on how to interpret our User Interface design.
+
+![Ui](images/ui-explained.png)
+
+Point of View: You are an Avenger sitting behind the control table, supervising your students through the transparent glass while physically interacting with the system to manage your tutee's grades and participation.
+
+Don't get us wrong though. We are not mad space scientists doing controlled
+experiment on students. *Or are we?...*
+
+Components of UI | Functionality
+--- | ---
+Menu bar | Provides an immediate mean to execute commands relating to student academic data, or relating to usage history. There are 4 menus for you to choose from.
+Student list | Shows the current list of students in your class, along with their tags
+Command box | This is where you will enter your command and press Enter to use Academy Directory CLI
+Status message display | This is where Academy Directory will inform you of what has happened after your command
+Result visualizer display | This is where Academy Directory will visualize your data or results for better usage.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -631,6 +649,7 @@ cannot be reverted to and / or be undone or redone.
 - Design of the internal version control system is heavily inspired by [Git](https://github.com/git/git).
 - Certain code implementations may have been inspired by [Baeldung tutorials](https://www.baeldung.com/)
 - Libraries used:
-  - Junit5
-  - JavaFX
-  - [Add more]
+  - [JavaFX](https://openjfx.io/) for the amazing GUI
+  - [Jackson](https://github.com/FasterXML/jackson) to save your data
+  - [JUnit5](https://github.com/junit-team/junit5) so that we can deliver to you bug-free!
+  - [MDFX](https://github.com/JPro-one/markdown-javafx-renderer) so that you can see User Guide in help without internet
