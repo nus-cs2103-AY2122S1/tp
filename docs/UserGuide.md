@@ -110,17 +110,17 @@ attribute prefixes specified here will be used in the commands of several [featu
 
 Attribute | Prefix | Value
 -----------------|-----------------|-----------------
-ID | i/ | `CLIENT_ID`<br>• CLIENT_ID: A non-negative integer `e.g. 0, 1, 2, 3, …​`.
-Name | n/ | `NAME`<br>• `NAME`: should only contains alphanumeric characters and spaces, and it should not be blank (Character limit: 30) `e.g. John Doe`.
-Email | e/ | `EMAIL`<br>• `Email`: should be of the format `local-part@domain` `e.g. johnd@example.com`.
-Address | a/ | `ADDRESS`<br>• `ADDRESS`: can take any value, and it can be blank (Character limit: 100) `e.g. John street, block 123, #01-01`.
-Current financial plans | c/ | `CURRENT_PLAN`<br>• `CURRENT_PLAN`: can take any value, and it can be blank (Character limit: 100) `e.g. Prudential PRUwealth`.
-Disposable Income | d/ | `INCOME`<br>• `INCOME`: A non-negative number (Character limit: 15) `e.g. 0.00, 1000.00, 3500.50, …​`.
-Next Meeting | m/ | `DATE (START_TIME~END_TIME), LOCATION`<br>• `DATE`: is in the format `dd-MM-yyyy`, where day, month and year are numerical values. <br>• `START_TIME` and `END_TIME`: are in `hh:mm` (24 hour format). <br>• `LOCATION`: can take any value, but it cannot be blank.<br>• More information [below](#32-next-meeting-attribute)
-Last met | l/ | `DATE`<br>• `DATE`: should be of the format `dd-MM-yyyy` `e.g. 24-10-2021`.
-Contact number | p/ | `PHONE_NUMBER`<br>• `PHONE_NUMBER`: should only contain numbers, and it should be at least 3 digits long `e.g. 8743 8807`.
-Risk appetite | r/ | `RISK_APPETITE`<br>• `RISK_APPETITE`: An integer from 1-5, where 1 is very low risk tolerance and 5 is very high risk tolerance.
-Tag | t/ | `TAG_NAME`<br>• `TAG_NAME`: Tag name should be alphanumeric `e.g. friends`.
+ID | i/ | `CLIENT_ID`<br><br>• `CLIENT_ID`: A non-negative integer `e.g. 0, 1, 2, 3, …​`.
+Name | n/ | `NAME`<br><br>• `NAME`: should only contains alphanumeric characters and spaces, and it should not be blank (Character limit: 30) `e.g. John Doe`.
+Email | e/ | `EMAIL`<br><br>• `Email`: should be of the format `local-part@domain` `e.g. johnd@example.com`.
+Address | a/ | `ADDRESS`<br><br>• `ADDRESS`: can take any value, and it can be blank (Character limit: 100) `e.g. John street, block 123, #01-01`.
+Current financial plans | c/ | `CURRENT_PLAN`<br><br>• `CURRENT_PLAN`: can take any value, and it can be blank (Character limit: 100) `e.g. Prudential PRUwealth`.
+Disposable Income | d/ | `INCOME`<br><br>• `INCOME`: A non-negative number (Character limit: 15) `e.g. 0.00, 1000.00, 3500.50, …​`.
+Next Meeting | m/ | `DATE (START_TIME~END_TIME), LOCATION`<br><br>• `DATE`: is in the format `dd-MM-yyyy`, where day, month and year are numerical values. <br>• `START_TIME` and `END_TIME`: are in `hh:mm` (24 hour format). <br>• `LOCATION`: can take any value, but it cannot be blank.<br>• More information [below](#32-next-meeting-attribute)
+Last met | l/ | `DATE`<br><br>• `DATE`: should be of the format `dd-MM-yyyy` `e.g. 24-10-2021`.
+Contact number | p/ | `PHONE_NUMBER`<br><br>• `PHONE_NUMBER`: should only contain numbers, and it should be at least 3 digits long `e.g. 8743 8807`.
+Risk appetite | r/ | `RISK_APPETITE`<br><br>• `RISK_APPETITE`: An integer from 1-5, where 1 is very low risk tolerance and 5 is very high risk tolerance.
+Tag | t/ | `TAG_NAME`<br><br>• `TAG_NAME`: Tag name should be alphanumeric `e.g. friends`.
 
 ### 3.1 Duplicate Clients
 
