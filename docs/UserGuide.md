@@ -14,6 +14,7 @@ contents [below](#table-of-contents). If you're a new user, the Quick Start guid
 you're an intermediate user looking to get more out of Dash, all supported commands are listed below.
 
 --------------------------------------------------------------------------------------------------------------------
+
 <div style="page-break-after: always;"></div>
 
 ## <u>Table of Contents</u>
@@ -47,6 +48,8 @@ Whether you're using Windows or macOS, the steps for installation are the same.
    [below](#getting-started).
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 ## <u>How to use this User Guide</u>
 
 * Go to the [Getting Started](#getting-started) section for an overview of Dash.
@@ -654,6 +657,8 @@ Format | Example
 **yyyy-MM-dd** | `2021-10-02`
 **dd MMM yyyy** | `02 Oct 2021` (First letter of Month must be capitalised)
 
+<div style="page-break-after: always;"></div>
+
 **Time Formats**
 
 Format | Example
@@ -687,6 +692,8 @@ Action | Format
 **Find** | `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 **List** | `list`
 **Clear** | `clear`
+
+<div style="page-break-after: always;"></div>
 
 ### Tasks Tab
 
