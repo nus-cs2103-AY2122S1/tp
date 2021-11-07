@@ -151,21 +151,23 @@ public class MainWindow extends UiPart<Stage> {
         Model.DisplayType type = logic.getDisplayType();
         if (currentDisplay != type) {
             switch (type) {
-                case STUDENTS:
-                    listPanelPlaceholder.getChildren().remove(studentListPanel.getRegion());
-                    listPanelPlaceholder.getChildren().add(studentListPanel.getRegion());
-                    listName.setText(STUDENTS_LIST_NAME);
-                    break;
-                case GROUPS:
-                    listPanelPlaceholder.getChildren().remove(groupListPanel.getRegion());
-                    listPanelPlaceholder.getChildren().add(groupListPanel.getRegion());
-                    listName.setText(GROUPS_LIST_NAME);
-                    break;
-                case TASKS:
-                    listPanelPlaceholder.getChildren().remove(taskListPanel.getRegion());
-                    listPanelPlaceholder.getChildren().add(taskListPanel.getRegion());
-                    listName.setText(TASKS_LIST_NAME);
-                    break;
+            case STUDENTS:
+                listPanelPlaceholder.getChildren().remove(studentListPanel.getRegion());
+                listPanelPlaceholder.getChildren().add(studentListPanel.getRegion());
+                listName.setText(STUDENTS_LIST_NAME);
+                break;
+            case GROUPS:
+                listPanelPlaceholder.getChildren().remove(groupListPanel.getRegion());
+                listPanelPlaceholder.getChildren().add(groupListPanel.getRegion());
+                listName.setText(GROUPS_LIST_NAME);
+                break;
+            case TASKS:
+                listPanelPlaceholder.getChildren().remove(taskListPanel.getRegion());
+                listPanelPlaceholder.getChildren().add(taskListPanel.getRegion());
+                listName.setText(TASKS_LIST_NAME);
+                break;
+            default:
+                break;
             }
             currentDisplay = type;
         }
