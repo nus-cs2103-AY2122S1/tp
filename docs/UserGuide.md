@@ -771,6 +771,7 @@ For example, if your input is `find n/Alex Bernice`, `Alex` and `Bernice` are yo
 * ##### INTERVIEW `i/`
     * An INTERVIEW parameter matches with an existing stored ***Interview*** only if the keyword is a whole word (i.e. separated by space) contained in the ***Interview***.
     * All the keywords that you provide in your INTERVIEW parameter must comply with the displayed format (e.g. 20 Mar 2021, 10:30).
+      ![InterviewDisplayFormat](images/features/InterviewDisplay.png)
     * For example:
         * A `2021` parameter can match with applicants that have their ***Interview***s in the year 2021.
         * A `20:21` parameter can match with applicants that have their ***Interview***s at the time 20:21 on any date.
