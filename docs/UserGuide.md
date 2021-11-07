@@ -644,7 +644,7 @@ The flags used in `password` are as follows:
 password
 ```
 
-Do note that the password needs to be between **8** and **32** characters (inclusive) long.
+Do note that the password needs to be between **8** and **32** (inclusive) ASCII characters.
 
 The prohibited characters are : `/`, `-`. Note that password cannot contain blank space.
 

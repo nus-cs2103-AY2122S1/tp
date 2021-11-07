@@ -469,9 +469,15 @@ The system first checks if the password is valid. This is due to the fact that t
 
 The user can change the password if they wish. The diagram below summarises the workflow.
 
-![Change password diagram](images/FlowChangePassword.png)
+![Change password activity diagram](images/FlowChangePassword.png)
 
 The `PasswordCommandParser` checks the format and the validity of the new password. Then, the `LogicManager` will check if the old password supplied is correct. If the old password is correct, the `Encryption` in `LogicManager` will be updated and the data file will be encrypted with the new `Encryption`. This enables the changing of password.
+
+The Sequence Diagram below illustrates the interactions within the Logic component for changing a password. Note that some parts are omitted for simplicity.
+
+![PasswordCommand diagram](images/PasswordCommandSequenceDiagram.png)
+
+The PasswordCommand is executed by a special `executePasswordCommand` method. Two `EncryptionManager` are created, each corresponds to one password. The one for the old password will be used to decrypt the data file. The one for the new password will be used to encrypt the decrypted data file. The decrypted data file is then removed. This completes the process of changing password.
 
 ### Find feature
 
