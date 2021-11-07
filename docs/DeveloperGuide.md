@@ -617,28 +617,28 @@ _{Explain here how the data archiving feature will be implemented}_
 We will use this section to document implementation details regarding GUI-related features. 
 
 #### 4.9.1 Filter tag panel
-Filter tag panel involves the use of a listener to watch for any changes in the UniqueTagList. Once a change 
-is detected, it will update the UI accordingly. The tricky part is to get UniqueTagList to work with the TagPanel
-listener. We also have to constantly monitor the reference states of UniqueTagList so that tags panel automatically removes 
+Filter tag panel involves the use of a listener to watch for any changes in the `UniqueTagList`. Once a change 
+is detected, it will update the UI accordingly. The tricky part is to get `UniqueTagList` to work with the `TagPanel`
+listener. We also have to constantly monitor the reference states of `UniqueTagList` so that tags panel automatically removes 
 tags that are no longer referenced by any clients. For this, some sort of Garbage collection mechanism must exist.
 
-Below, we will see how creating and modifying the client have an effect on the UniqueTagList. Client modification can be 
-seen as the entry point that triggers the chain of tag modification operations and thus the UI update of the TagPanel.
-#####4.9.1.1 Add a new client
+Below, we will see how creating and modifying the client have an effect on the `UniqueTagList`. Client modification can be 
+seen as the entry point that triggers the chain of tag modification operations and thus the UI update of the `TagPanel`.
+##### 4.9.1.1 Add a new client
 The following activity diagram summarizes what happens when a user executes an add command:
 
 <p align="center">
 <img src="images/AddUserTagActivityDiagram.png" width="250" />
 </p>
 
-#####4.9.1.1 Edit a client
+##### 4.9.1.1 Edit a client
 The following activity diagram summarizes what happens when a user executes an edit command:
 
 <p align="center">
 <img src="images/EditUserTagActivityDiagram.png" width="250" />
 </p>
 
-#####4.9.1.1 Delete a client
+##### 4.9.1.1 Delete a client
 The following activity diagram summarizes what happens when a user executes an delete command:
 
 <p align="center">
@@ -687,7 +687,7 @@ Here's the css snippet (The comment briefly describes what each of the variables
 4. Let's change the value of `-fx-base-1` to `#5C4033` instead (the color code for dark brown).
 5. Save the file and boot up LeadsForce. You will see that the change in the background color of `BookTheme` is reflected immediately.
 <p align="center">
-<img src="images/BookThemeModified.png" width="250" />
+<img src="images/BookThemeModified.png" width="500" />
 </p>
 
 #### 5.1.2 Give LeadsForce a new theme
@@ -703,7 +703,7 @@ private static final List<String> THEMES = List.of("BookTheme", "TwilightTheme",
 ````
 7. Now boot up LeadsForce and you should see that your newly added theme is available in the menu bar. Hooray!
 <p align="center">
-<img src="images/RainbowTheme.png" width="250" />
+<img src="images/RainbowTheme.png" width="500" />
 </p>
 
 --------------------------------------------------------------------------------------------------------------------
