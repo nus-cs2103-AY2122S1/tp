@@ -100,6 +100,16 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getClientTotalOrders_emptyOrderBook_returnsEmptyList() {
+        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        TaskBook taskBook = new TaskBookBuilder().withTask(TASK1).withTask(TASK2).build();
+        OrderBook orderBook = new OrderBookBuilder().build();
+        UserPrefs userPrefs = new UserPrefs();
+        ModelManager modelManager = new ModelManager(addressBook, taskBook, orderBook, userPrefs);
+        assertEquals(0, modelManager.getClientTotalOrders().size());
+    }
+
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();

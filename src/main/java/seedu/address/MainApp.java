@@ -135,7 +135,16 @@ public class MainApp extends Application {
             initialOrderBook = new OrderBook();
         }
 
-        return new ModelManager(initialAddressBook, initialTaskBook, initialOrderBook, userPrefs);
+        ModelManager modelManager = new ModelManager(initialAddressBook, initialTaskBook, initialOrderBook, userPrefs);
+        try {
+            modelManager.checkClientAndOrderRelation();
+            modelManager.checkTaskAndOrderRelation();
+        } catch (DataConversionException e) {
+            logger.warning(e.getMessage() + ". Will be starting with empty data.");
+            modelManager = modelManager.resetModelManager();
+        }
+
+        return modelManager;
     }
 
     private void initLogging(Config config) {

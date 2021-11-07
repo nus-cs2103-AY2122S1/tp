@@ -3,7 +3,6 @@ package seedu.address.model.task;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_OCT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LABEL_SEW;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalTasks.TASK1;
@@ -45,7 +44,7 @@ class UniqueTaskListTest {
     @Test
     public void contains_taskWithSameDateField_returnsTrue() {
         uniqueTaskList.add(TASK1);
-        Task editedTask = new TaskBuilder(TASK1).withDate(VALID_DATE_OCT).build();
+        Task editedTask = new TaskBuilder(TASK1).withIsDone(true).build();
         assertTrue(uniqueTaskList.hasTask(editedTask));
     }
 
