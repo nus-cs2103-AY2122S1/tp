@@ -74,10 +74,10 @@ Given below are my contributions to the project.
       [\#242](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/242/files)
     * Updated implementation details of the `filter_interview` feature:
       [\#287](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/287)
-    * Added implementation details of the `add` and `edit` feature:
+    * Added implementation details of the `add` and `edit` features:
       [\#308](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/308)
-    * Added manual testing details for `edit` feature:
-      [\#369](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/369)
+    * Added manual test cases for `edit`, `delete` and `missing / corrupted save files`:
+      [\#372](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/372)
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments):
@@ -89,7 +89,8 @@ Given below are my contributions to the project.
     [\#300](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/300),
     [\#301](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/301),
     [\#309](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/309),
-    [\#322](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/322)
+    [\#322](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/322),
+    [\#362](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/362)
     
   * Reported bugs for other team during PE Dry Run:
     [\#199](https://github.com/AY2122S1-CS2103T-W12-3/tp/issues/199),
