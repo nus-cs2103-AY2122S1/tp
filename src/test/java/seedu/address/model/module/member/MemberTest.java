@@ -88,8 +88,8 @@ public class MemberTest {
         editedAlice = new MemberBuilder(ALICE).withPositions(VALID_POSITION_HUSBAND).build();
         Assertions.assertFalse(ALICE.equals(editedAlice));
 
-        // different task list -> return false
+        // different task list -> return true (do not count tasks as part of member)
         editedAlice = new MemberBuilder(ALICE).withTaskList(TypicalTasks.getTypicalTasksDone()).build();
-        Assertions.assertFalse(ALICE.equals(editedAlice));
+        Assertions.assertTrue(ALICE.equals(editedAlice));
     }
 }
