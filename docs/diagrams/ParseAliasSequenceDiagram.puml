@@ -1,0 +1,50 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ConthacksParser" as ConthacksParser LOGIC_COLOR
+participant "<<enumeration>>\nCommandWord" as CommandWord LOGIC_COLOR
+participant ":EditModuleLessonCommandParser" as EditModuleLessonCommandParser LOGIC_COLOR
+participant ":EditModuleLessonCommand" as EditModuleLessonCommand LOGIC_COLOR
+participant "<<class>>\nParserUtil" as ParserUtil LOGIC_COLOR
+end box
+
+[-> LogicManager : execute("ec 1 m/CS2100 T19")
+activate LogicManager
+
+LogicManager -> ConthacksParser : parseCommand("ec 1 m/CS2100 T19")
+activate ConthacksParser
+
+ConthacksParser -> CommandWord : getCommandType("ec)
+activate CommandWord
+CommandWord -> ConthacksParser : EDIT_MODULE_LESSON
+note right of ConthacksParser : EDIT_MODULE_LESSON is a CommandWord enum\n to be used in ConthacksParser to call the respective parser
+deactivate CommandWord
+
+ConthacksParser -> EditModuleLessonCommandParser : parse(" 1 m/CS2100 T19")
+activate EditModuleLessonCommandParser
+
+EditModuleLessonCommandParser -> ParserUtil : parseModuleCodes()
+activate ParserUtil
+ParserUtil -> EditModuleLessonCommandParser : moduleCodes
+deactivate ParserUtil
+note right of EditModuleLessonCommandParser : modulecode = [CS2100 T19]
+
+
+create EditModuleLessonCommand
+EditModuleLessonCommandParser -> EditModuleLessonCommand
+activate EditModuleLessonCommand
+
+EditModuleLessonCommand --> EditModuleLessonCommandParser : ec
+deactivate EditModuleLessonCommand
+
+EditModuleLessonCommandParser --> ConthacksParser : ec
+deactivate EditModuleLessonCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+EditModuleLessonCommandParser -[hidden]-> ConthacksParser
+destroy EditModuleLessonCommandParser
+
+ConthacksParser --> LogicManager : ec
+deactivate ConthacksParser
+@enduml
