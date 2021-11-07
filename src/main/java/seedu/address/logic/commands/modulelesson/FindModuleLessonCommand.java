@@ -35,6 +35,9 @@ public class FindModuleLessonCommand extends Command {
             + "3) search by lesson start time(s) using the prefix '" + PREFIX_LESSON_TIME
             + "' e.g. " + COMMAND_WORD + " " + PREFIX_LESSON_TIME + "14:00\n";
     public static final String MESSAGE_SINGLE_PREFIX_SEARCH = "You can only search with a single prefix.";
+    public static final String MESSAGE_INVALID_DAY = "Input day should only be between 1 (Monday) and 7 (Sunday).";
+    public static final String MESSAGE_INVALID_TIME = "Input time is in an invalid format!"
+            + "It must be in the HH:mm format.";
 
     private final Predicate<ModuleLesson> predicate;
 

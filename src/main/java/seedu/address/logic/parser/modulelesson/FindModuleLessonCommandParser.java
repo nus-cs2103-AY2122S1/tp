@@ -1,9 +1,12 @@
 package seedu.address.logic.parser.modulelesson;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.modulelesson.FindModuleLessonCommand.MESSAGE_INVALID_DAY;
+import static seedu.address.logic.commands.modulelesson.FindModuleLessonCommand.MESSAGE_INVALID_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_DAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
+import static seedu.address.model.modulelesson.LessonTime.isValidTime;
 
 import java.util.Arrays;
 import java.util.List;
@@ -55,8 +58,26 @@ public class FindModuleLessonCommandParser implements Parser<FindModuleLessonCom
         if (isModulePrefixPresent) {
             return getFindModuleCommand(argMultimap);
         } else if (isDayPrefixPresent) {
+            try {
+                int dayValue = Integer.parseInt(argMultimap.getValue(PREFIX_LESSON_DAY).get());
+                if (dayValue < 0 || dayValue > 7) {
+                    throw new ParseException(
+                            String.format(MESSAGE_INVALID_DAY, FindModuleLessonCommand.MESSAGE_SINGLE_PREFIX_SEARCH)
+                    );
+                }
+            } catch (NumberFormatException e) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_DAY, FindModuleLessonCommand.MESSAGE_USAGE)
+                );
+            }
+
             return getFindDayCommand(argMultimap);
         } else if (isTimePrefixPresent) {
+            if (!isValidTime(argMultimap.getValue(PREFIX_LESSON_TIME).get())) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_TIME, FindModuleLessonCommand.MESSAGE_USAGE)
+                );
+            }
             return getFindTimeCommand(argMultimap);
         }
         throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindModuleLessonCommand.MESSAGE_USAGE));
