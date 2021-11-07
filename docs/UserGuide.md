@@ -152,7 +152,7 @@ Format: `allpolicy`
 
 Edits an existing policy in the application.
 
-Format: `editpolicy INDEX [n/POLICY_NAME] [p/PMT_AMOUNT_CENTS [PMTS_PER_YR] [NUM_OF_PMTs]] [c/COMMISSION_% NUM_OF_COMM] 
+Format: `editpolicy INDEX [n/POLICY_NAME] [p/PMT_AMOUNT_CENTS [PMTS_PER_YR] [NUM_OF_PMTs]] [c/COMMISSION_% NUM_OF_COMM]
 [cl/CONTACT_INDEX] [e/COVERAGE_EXPIRY_DATE] [t/TAG]…​`
 
 <div markdown="block" class="alert alert-warning">
@@ -168,7 +168,7 @@ Careful changing the number of commissions or payments. A policy should not have
   specifying any tags after it.
 
 Examples:
-* `editpolicy 1 p/1000 12 c/20 5` Edits the payment structure to be indefinite monthly payments of $10 and 
+* `editpolicy 1 p/1000 12 c/20 5` Edits the payment structure to be indefinite monthly payments of $10 and
 the commission structure to be 20% for the first 5 payments.
 * `editpolicy 2 n/Life Policy t/` Edits the name of the 2nd policy to be `Life Policy` and clears all existing tags.
 
