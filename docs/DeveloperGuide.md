@@ -196,89 +196,70 @@ Given below is an example usage scenario and how the mechanism behaves at each s
 
 ### \[Proposed\] Undo/redo feature
 
-#### Proposed Implementation
+### Download Command
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+This section explains the mechanism behind ```DownloadCommand``` used to download a TXT file containing useful statistics. These include:
+- total commission
+- commission earned per contact
+- number of policies per contact,
+- the average number of policies per contact
 
--   `VersionedAddressBook#commit()` — Saves the current address book state in its history.
--   `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
--   `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+The command requires no parameters. ```DownloadCommand``` implements ```DownloadCommand#execute```, that calls
+the relevant methods in ```Model``` to obtain the various statistics. The method ```DownloadCommand#stringListBuilderForTxt```
+is then invoked, to convert the statistics information as a list of strings. The list of strings is then written to
+the file via ```DownloadCommand#writeToTxt```.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+This is the sequence diagram of the interactions between ```Logic``` and ```Model``` component for the command.
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+![DownloadSequenceDiagram](images/DownloadSequenceDiagram.png)
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+### Warning
 
-![UndoRedoState0](images/UndoRedoState0.png)
+This section explains the use of ```Warning```, a class which encapsulates a warning that a ```Command``` can give. Specifically,
+it displays a warning dialog to the user, and returns the user's decision to proceed as a boolean value. The ```Command``` triggering
+the ```Warning```  can then decide what to do with the user's decision.
 
-Step 2. The user executes `delete 5` command to delete the 5th contact in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+```Warning``` has a static method ```Warning#isUserConfirmingCommand``` that requires a description of the warning as a
+String, and returns the decision of the user's decision. When ```Warning#isUserConfirmingCommand``` is invoked, it calls
+```MainWindow#showWarning```, that will create a new ```WarningWindow``` to display. ```WarningWindow``` has the
+command ```WarningWindow#isUserConfirmingCommand``` that will return the user's decision.
 
-![UndoRedoState1](images/UndoRedoState1.png)
+This is the sequence diagram of how a ```Command ``` might call a ```Warning```, and the interactions between the ```Logic```
+and ```UI``` components.
 
-Step 3. The user executes `add n/David …​` to add a new contact. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+![WarningSequenceDiagram](images/WarningSequenceDiagram.png)
 
-![UndoRedoState2](images/UndoRedoState2.png)
+The activity diagram below summarizes how a ```Warning``` should be used within execution of a ```Command```.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+![WarningActivityDiagram](images/WarningActivityDiagram.png)
 
-</div>
+#### Design Considerations
 
-Step 4. The user now decides that adding the contact was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Typically, displaying the UI involves executing the command text in ```MainWindow#executeCommand``` and then interpreting the
+```CommandResult``` to decide what UI changes to make.
 
-![UndoRedoState3](images/UndoRedoState3.png)
+However for the implementation of ```Warning```, the user input in ```UI``` component has to be sent back to the ```Logic```
+component, so that the ```Command``` can decide whether to execute or abort. Displaying ```Warning``` in ```MainWindow#executeCommand```
+will then be too late.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+##### Aspect: How to obtain User Response from a UI WarningWindow Component
 
-</div>
+**Alternative 1 (current choice):** create a static method ```MainWindow#showWarning``` to handle ```WarningWindow```
+operations.
+- Pros:
+    - Maintains the UI structure of ```MainWindow``` controlling all the smaller UI parts.
+- Cons:
+    - A more complex implementation to control ```WanringWindow```
+**Alternative 2:** Have the ```Command``` call a method in ```WarningWindow``` directly.
+- Pros:
+    - A more straightforward implementation.
+- Cons:
+    - Violates the structure of ```MainWindow``` being the controller of other UI parts.
 
-The following sequence diagram shows how the undo operation works:
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
--   **Alternative 1 (current choice):** Saves the entire address book.
-
-    -   Pros: Easy to implement.
-    -   Cons: May have performance issues in terms of memory usage.
-
--   **Alternative 2:** Individual command knows how to undo/redo by
-    itself.
-    -   Pros: Will use less memory (e.g. for `delete`, just save the contact being deleted).
-    -   Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
+Therefore, we decided on a static ```MainWindow#showWarning``` to allow for a return value that can be used by methods
+in ```Logic``` component. While it may have been simpler for ```Logic``` to interact directly with ```WarningWindow```,
+it breaks the structure of ```MainWindow``` being the main UI components to manage smaller components.
 ---
 
 ## **Documentation, logging, testing, configuration, dev-ops**

@@ -1,0 +1,15 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User executes possibly invalid command;
+:Command triggers a warning;
+if (Confirm to proceed with command?) then (true)
+  :Command executes;
+
+else (false)
+endif
+:Command returns CommandResult;
+stop
+
+@enduml

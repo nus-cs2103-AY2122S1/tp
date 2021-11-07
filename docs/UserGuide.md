@@ -176,7 +176,7 @@ Format: `editpolicy INDEX [n/POLICY_NAME] [p/PMT_AMOUNT_CENTS [PMTS_PER_YR] [NUM
 Careful changing the number of commissions or payments. A policy should not have less payments than the number of commissions.
 </div>
 
-* Edits the policy at the specified `INDEX`. The index refers to the index number shown in the displayed policy list. 
+* Edits the policy at the specified `INDEX`. The index refers to the index number shown in the displayed policy list.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the policy will be removed i.e adding of tags is not cumulative.
@@ -262,9 +262,9 @@ These are the current sorters implemented:
 
 ### Statistics
 
-#### Download useful statistics as CSV : `download`
+#### Download useful statistics as TXT : `download`
 
-Download a CSV file containing useful statistics for the user. This includes
+Download a .txt file containing useful statistics for the user. This includes
 - Most valuable contacts + total commission from each of them
 - Number of policies for each contact
 - Average number of policies per contact
