@@ -47,7 +47,6 @@ public class SampleDataUtil {
                 new Address("Blk 45 Aljunied Street 85, #11-31"),
                     getRoleSet("floor"), new Salary("7"), Status.PART_TIME,
                     getTagSet("colleagues"), getPeriodSet())
-
         };
     }
 
@@ -83,7 +82,7 @@ public class SampleDataUtil {
      */
     public static Set<Role> getRoleSet(String... strings) {
         return Arrays.stream(strings)
-                .map(Role::translateStringToRole)
+                .map(Role::translateStringToRoleWithNoRole)
                 .collect(Collectors.toSet());
     }
 }

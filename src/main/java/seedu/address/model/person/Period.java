@@ -111,7 +111,6 @@ public class Period {
     public boolean contains(Period period) {
         return this.contains(period.startDate)
                 && this.contains(period.endDate);
-
     }
 
     /**
@@ -311,5 +310,12 @@ public class Period {
                 && ((Period) o).startDate.equals(startDate)
                 && ((Period) o).endDate.equals(endDate);
 
+    }
+
+    /**
+     * Returns string representation of this period in a more readable format.
+     */
+    public String toDisplayString() {
+        return ("[" + startDate + "] ~ [" + endDate + "]");
     }
 }

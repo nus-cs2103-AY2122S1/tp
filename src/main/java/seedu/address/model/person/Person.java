@@ -139,8 +139,10 @@ public class Person {
         Set<Period> periods = period.union(this.getAbsentDates())
                 .stream()
                 .collect(Collectors.toUnmodifiableSet());
-        return new Person(name, phone, email, address,
+        Person person = new Person(name, phone, email, address,
                 roles, salary, status, tags, periods);
+        person.setSchedule(getSchedule());
+        return person;
 
     }
 
@@ -171,8 +173,10 @@ public class Person {
         Set<Period> result = getAbsentDates().stream()
                 .flatMap(p -> p.complement(period).stream())
                 .collect(Collectors.toSet());
-        return new Person(name, phone, email, address,
+        Person person = new Person(name, phone, email, address,
                 roles, salary, status, tags, result);
+        person.setSchedule(getSchedule());
+        return person;
     }
 
 
@@ -182,6 +186,21 @@ public class Person {
      */
     public Set<Period> getAbsentDates() {
         return Collections.unmodifiableSet(this.absentDates);
+    }
+
+    /**
+     * Checks if this staff was absent on the date provided.
+     *
+     * @param checkDate The date of the shift to be checked.
+     *
+     */
+    public boolean wasAbsent(LocalDate checkDate) {
+        for (Period period : absentDates) {
+            if (period.contains(checkDate)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -196,7 +215,6 @@ public class Person {
                          LocalDate startDate, LocalDate endDate) throws DuplicateShiftException {
         schedule.addShift(dayOfWeek, slot, startDate, endDate);
     }
-
 
     public void setSchedule(Schedule schedule) {
         this.schedule = schedule;
@@ -300,7 +318,4 @@ public class Person {
         }
         return builder.toString();
     }
-
-
-
 }
