@@ -181,6 +181,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Policy> getPoliciesBelongingTo(Contact target) {
+        return siasa.getPoliciesBelongingTo(target);
+    }
+
+    @Override
     public double getTotalCommission() {
         return siasa.getTotalCommission();
     }

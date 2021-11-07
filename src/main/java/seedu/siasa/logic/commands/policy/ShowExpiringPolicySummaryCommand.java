@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.text.ChoiceFormat;
 import java.text.Format;
 import java.text.MessageFormat;
-import java.time.LocalDate;
 
 import seedu.siasa.logic.commands.Command;
 import seedu.siasa.logic.commands.CommandResult;
@@ -19,7 +18,8 @@ public class ShowExpiringPolicySummaryCommand extends Command {
 
     public static final String COMMAND_WORD = "expiringpolicysummary";
 
-    private static final String pattern = "There {0} expiring\nUse the expiringpolicy command to see more";
+    private static final String pattern = "There {0} expired or expiring\nUse the "
+            + ShowExpiringPolicyCommand.COMMAND_WORD + " command to see more";
     private static final double[] policyLimits = {0, 1, 2};
     private static final String[] policyStrings = {
         "are no policies that are",
@@ -30,8 +30,6 @@ public class ShowExpiringPolicySummaryCommand extends Command {
     private static final Format[] formats = {choiceForm, null};
     public static final MessageFormat MESSAGE_FORM = new MessageFormat(pattern);
 
-    private static final LocalDate CUT_OFF_DATE = LocalDate.now().plusMonths(1).plusDays(1);
-
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
@@ -40,7 +38,7 @@ public class ShowExpiringPolicySummaryCommand extends Command {
 
         int noOfExpiringPolicies = 0;
         for (Policy p : model.getFilteredPolicyList()) {
-            if (p.isExpiringBefore(CUT_OFF_DATE)) {
+            if (p.isExpiringBefore(ShowExpiringPolicyCommand.CUT_OFF_DATE)) {
                 noOfExpiringPolicies++;
             }
         }

@@ -19,8 +19,21 @@ Agents that aids their operations by:
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
+This section provides instructions to begin using Siasa.
+1. Ensure you have Java `11` or above installed in your Computer. Siasa has been tested on Java `11` and running it on other versions might result in bugs.
+2. Download the latest release [here](https://github.com/AY2122S1-CS2103-F10-4/tp/releases) and move it to the folder you wish to use as the home folder for Siasa.
+3. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
+   
+![First Startup UI Image](images/Ui.png)
 
-1. Refer to the [Features](#features) below for details of each command.
+4. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.
+   Some example commands you can try:
+   * `addcontact n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`: Adds a contact named John Doe to the contacts list.
+   * `deletecontact 2`: Deletes the 2nd contact shown in the current contact list.
+   * `clear`: Deletes all contacts and policies.
+   * `exit`: Exits the app.
+  
+5. Refer to the [Features](#features) below for details of each command. 
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -91,7 +104,7 @@ Examples:
 
 #### Deleting a contact : `deletecontact`
 
-Deletes the specified contact from the application.
+Deletes the specified contact and all of his/her policies from the application.
 
 Format: `deletecontact INDEX`
 
@@ -116,11 +129,13 @@ Examples:
 | X payments per year, indefinite number of payments | /p 10000 12            | Monthly payments of $100, indefinitely       |
 | X payments per year, definite number of payments   | /p 10000 12 120        | Monthly payments of $100, 120 total payments |
 
+
 * **Commission structure of the policy** - `c/COMMISSION_% NUM_OF_COMM`:
   * Receives a percentage commission (`COMMISSION_%`) from the payment amount (`PMT_AMOUNT_CENTS`) for the first number of payments (`NUM_OF_COMM`) in the payment structure.
   * `COMMISSION_%`: percentage of each payment that goes to commission
   * `NUM_OF_COMM`: the number of payments that the agent will receive commission for
   *  E.g. `/c 6 5` Receives 6% commission for the first 5 payments.
+  
 * **Contact that the policy belongs to** - `cl/CONTACT_INDEX`
   * Current index of that contact in the contact list.
   * The index **must be a positive integer** 1, 2, 3, …​
@@ -128,6 +143,7 @@ Examples:
   * Date that the coverage expires in YYYY-MM-DD format, optional.
 * **Tags** - `t/TAG...`
   * can have more than one tag
+
 #### Creating A Policy : `addpolicy`
 
 Adds a policy to the policy list.
@@ -160,7 +176,7 @@ Format: `editpolicy INDEX [n/POLICY_NAME] [p/PMT_AMOUNT_CENTS [PMTS_PER_YR] [NUM
 Careful changing the number of commissions or payments. A policy should not have less payments than the number of commissions.
 </div>
 
-* Edits the policy at the specified `INDEX`. The index refers to the index number shown in the displayed policy list. 
+* Edits the policy at the specified `INDEX`. The index refers to the index number shown in the displayed policy list.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the policy will be removed i.e adding of tags is not cumulative.
@@ -212,9 +228,9 @@ Format: `findcontact KEYWORD`
 Example:
 * `findcontact john` returns a list with all the contacts containing the name john.
 
-#### Show Expiring Policies: `expiringpolicy`
+#### Show Expired/Expiring Policies: `expiringpolicy`
 
-Show policies that are expiring in a month.
+Show policies that are expired or expiring in a month.
 
 Format: `expiringpolicy`
 
@@ -225,8 +241,8 @@ Sorts the contact list alphabetically by the order specified. Case-insensitive.
 Format: `sortcontact SORTER`
 
 These are the current sorters implemented:
-* `asc`: Sorts the contacts in ascending order alphabetically based on the saved name
-* `dsc`: Sorts the contacts in descending order alphabetically based on the saved name
+* `asc`: Sorts the contacts in ascending order alphabetically based on the saved name.
+* `dsc`: Sorts the contacts in descending order alphabetically based on the saved name.
 
 #### Sorting policies: `sortpolicy`
 
@@ -246,7 +262,7 @@ These are the current sorters implemented:
 
 ### Statistics
 
-#### Download useful statistics as CSV : `download`
+#### Download useful statistics as TXT : `download`
 
 Download CSV files containing useful statistics for the user. This includes
 - Most valuable contacts + total commission from each of contact
@@ -304,7 +320,7 @@ Action | Format, Examples
 **List Policies** | `allpolicy`
 **List Contact's Policies** | `contactpolicy CONTACT_INDEX`
 **Clear Contact's Policies** | `clearpolicy CONTACT_INDEX`
-**Show Expiring Policies** | `expiringpolicy`
+**Show Expired/Expiring Policies** | `expiringpolicy`
 **Sort Policies** | `sortpolicy SORTER`
 **Sort Contacts** | `sortcontact SORTER`
 **Clear All** | `clear`

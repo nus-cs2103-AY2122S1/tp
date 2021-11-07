@@ -1,0 +1,76 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":SiasaParser" as SiasaParser LOGIC_COLOR
+participant "d:DownloadCommand" as DownloadCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("download")
+activate LogicManager
+
+LogicManager -> SiasaParser : parseCommand("download")
+activate SiasaParser
+
+create DownloadCommand
+SiasaParser -> DownloadCommand
+activate DownloadCommand
+
+DownloadCommand --> SiasaParser : d
+deactivate DownloadCommand
+
+SiasaParser --> LogicManager : d
+deactivate SiasaParser
+
+LogicManager -> DownloadCommand : execute()
+activate DownloadCommand
+
+DownloadCommand -> Model : getTotalCommission()
+activate Model
+
+Model --> DownloadCommand : total commission
+deactivate Model
+
+DownloadCommand -> Model : getNumberPoliciesPerContact()
+activate Model
+
+Model --> DownloadCommand : numberPoliciesPerContact
+deactivate Model
+
+DownloadCommand -> Model : getCommissionPerContact()
+activate Model
+
+Model --> DownloadCommand : commissionPerContact
+deactivate Model
+
+DownloadCommand -> DownloadCommand : stringListBuilderForTxt(totalCommission, \n commissionPerContact, numberPoliciesPerContact)
+activate DownloadCommand
+
+DownloadCommand --> DownloadCommand : listStringForTxt
+deactivate DownloadCommand
+
+DownloadCommand -> DownloadCommand : writeToTxt(listStringForTxt)
+activate DownloadCommand
+
+DownloadCommand --> DownloadCommand
+deactivate DownloadCommand
+
+create CommandResult
+DownloadCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> DownloadCommand
+deactivate CommandResult
+
+DownloadCommand --> LogicManager : result
+deactivate DownloadCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
