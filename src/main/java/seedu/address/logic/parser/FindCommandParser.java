@@ -79,6 +79,9 @@ public class FindCommandParser implements Parser<FindCommand> {
         return new FindCommand(findDescriptor.getPredicates());
     }
 
+    /**
+     * Parses keywords for each prefix into a list of predicates to be used for filtering.
+     */
     public static class FindDescriptor {
         private ArrayList<Predicate<Person>> predicateList = new ArrayList<>();
 
@@ -377,8 +380,6 @@ public class FindCommandParser implements Parser<FindCommand> {
             }
             return null;
         }
-
-
 
         public ArrayList<Predicate<Person>> getPredicates() {
             return predicateList;

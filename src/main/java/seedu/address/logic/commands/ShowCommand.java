@@ -2,6 +2,17 @@ package seedu.address.logic.commands;
 
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMPLOYMENT_TYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPECTED_SALARY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPERIENCE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERVIEW;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL_OF_EDUCATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTES;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.PrefixSyntax.PREFIX_EMAIL_SYNTAX;
 import static seedu.address.logic.parser.PrefixSyntax.PREFIX_EMPLOYMENT_TYPE_SYNTAX;
 import static seedu.address.logic.parser.PrefixSyntax.PREFIX_EXPECTED_SALARY_SYNTAX;
@@ -37,7 +48,17 @@ public class ShowCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows all inputs for a specific category, "
             + "based on the given prefix "
             + "and displays them as a list.\n"
-            + "Parameters: PREFIX/KEYWORDS \n"
+            + "At least one of these Prefixes must be provided: "
+            + "[" + PREFIX_NAME + "] "
+            + "[" + PREFIX_PHONE + "] "
+            + "[" + PREFIX_EMAIL + "] "
+            + "[" + PREFIX_ROLE + "] "
+            + "[" + PREFIX_EMPLOYMENT_TYPE + "] "
+            + "[" + PREFIX_EXPECTED_SALARY + "] "
+            + "[" + PREFIX_LEVEL_OF_EDUCATION + "] "
+            + "[" + PREFIX_EXPERIENCE + "] "
+            + "[" + PREFIX_TAG + "] "
+            + "[" + PREFIX_INTERVIEW + "] ...\n"
             + "Example: " + COMMAND_WORD + " r/";
 
     private final Prefix prefix;

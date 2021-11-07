@@ -5,6 +5,11 @@ import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
 
+/**
+ * Tests that a {@code Person}'s {@code Role} matches all the keywords given.
+ *
+ * If no keywords are provided, then there is no match.
+ */
 public class RoleContainsKeywordsPredicate implements Predicate<Person> {
 
     private final List<String> keywords;
