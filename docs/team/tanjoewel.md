@@ -5,10 +5,7 @@ title: Tan Joe Wel's Project Portfolio Page
 
 ### Project: TAB
 
-TeachingAssistantBuddy(TAB) is a desktop address book application that can help
-Teaching Assistants (TAs) manage their students' progress.
-The user interacts with it using a CLI, and it has a GUI created with JavaFX.
-It is written in Java, and has about 13 kLoC.
+TeachingAssistantBuddy(TAB) is a desktop address book application that can help Teaching Assistants (TAs) manage their students' progress. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 24 kLoC.
 
 Given below are my contributions to the project.
 
