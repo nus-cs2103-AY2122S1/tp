@@ -1,0 +1,32 @@
+@startuml
+
+start
+:User executes Delete Command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([command is valid with
+non-duplicated index/indexes])
+
+    if () then ([index is within the range])
+    :Delete the specified Person(s) from the AddressBook;
+
+
+    :GUI updated with deleted applicant(s) no longer present;
+
+    else ([else])
+    : GUI display shows
+         error message
+    for index out of range;
+
+    endif
+
+else([else])
+: GUI display shows error
+message for invalid format;
+
+endif
+stop
+
+@enduml

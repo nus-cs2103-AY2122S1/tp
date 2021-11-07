@@ -20,5 +20,5 @@
 - - -
 * It comes with a **reasonable level of user and developer documentation**.
 * It is named `RecruitIn` because it functions like LinkedIn as a tool for recruiters to manage employers and applicants.
-* For the detailed documentation of this project, see the **[RecruitIn Product Website](https://se-education.org/addressbook-level3)**.
+* For the detailed documentation of this project, see the **[RecruitIn Product Website](https://ay2122s1-cs2103t-f11-2.github.io/tp/)**.
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).

@@ -1,16 +1,16 @@
 @startuml
 start
-:User inputs Find Command;
-:Logic executes Find Command;
-:Find Command Parser extracts present prefixes;
+:User executes Find Command;
 'Since the beta syntax does not support placing the condition outside the
 'diamond we place it as the true branch instead.
 
-if () then ([Keywords are valid])
+if () then ([command is valid with valid prefixes])
 
-    :Model filters a list of persons;
-    :GUI updates filtered person list;
+    :List of applicants filtered for those who match search terms;
+    :GUI Applicant Panel updates with filtered applicants;
 else ([else])
+:GUI updates with error message
+indicating invalid input;
 endif
 stop
 @enduml

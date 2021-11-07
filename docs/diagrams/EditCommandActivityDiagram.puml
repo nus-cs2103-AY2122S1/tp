@@ -15,6 +15,9 @@ valid])
     if () then ([new edited Person already
     exists in the AddressBook])
 
+        :GUI Result Display shows error message
+        containing duplicate Person(s);
+
         stop
 
     else ([else])
@@ -23,9 +26,13 @@ valid])
     :Replace the specified Person in the
     AddressBook with the new edited Person;
 
-    :GUI Result Display updated with
+    :GUI updates with
     new correct list of applicants;
 else ([else])
+
+:GUI Result Display shows invalid command error message;
+
 endif
 stop
 @enduml
+

@@ -59,8 +59,8 @@ public class LevelOfEducation {
             "Level of Education should only be one of the following: Elementary, Middle School,"
                     + " High School, University, Bachelors, Masters or PhD";
 
-    public static final String FIND_MESSAGE_CONSTRAINTS = "You can only search for keywords that start with "
-            + "one or more of the following levels of education: Elementary, Middle School, High School, University,"
+    public static final String FIND_MESSAGE_CONSTRAINTS = "You can only search for keywords that one or more of "
+            + "the following levels of education start with: Elementary, Middle School, High School, University,"
             + " Bachelors, Masters or PhD";
 
     public final String levelOfEducation;
