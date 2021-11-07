@@ -108,3 +108,21 @@ project. ([View Reposense](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?s
       [#10](https://github.com/erwinqxy/ped/issues/10), [#11](https://github.com/erwinqxy/ped/issues/11),
       [#12](https://github.com/erwinqxy/ped/issues/12), [#13](https://github.com/erwinqxy/ped/issues/13),
       [#14](https://github.com/erwinqxy/ped/issues/13)
+
+7. **Contributions to the Developer Guide (Extracts) - Diagrams**
+
+- Add Command Activity Diagram 
+   
+![Add Command Activity Diagram](commands/AddCommand/AddCommandActivityDiagram.png)
+
+- Add Command Sequence Diagram 
+![Add Command Sequence Diagram](commands/AddCommand/AddCommandAbstractSequenceDiagram.png)
+
+- Delete Command Sequence Diagram
+![Delete Command Sequence Diagram](commands/DeleteCommand/DeleteCommandSequenceDiagram.png)
+
+- Purge Command Sequence Diagram 
+![Purge Command Sequence Diagram](commands/PurgeCommand/PurgeCommandSequenceDiagram.png)
+
+
+
