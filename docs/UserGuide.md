@@ -27,15 +27,15 @@ Managera is OS-independent, meaning it will work on any operating system (Window
         * [Adding an event: `addEvent`](#adding-an-event-addevent)
         * [Deleting an event: `deleteEvent`](#deleting-an-event--deleteevent)
         * [Editing an event: `editEvent`](#editing-an-event--editevent)
-        * [Marking an Event as done: `done`](#marking-an-event-as-done-done)
-        * [Locating Events by name: `findEvent`](#locating-events-by-name-findevent)
-        * [Filtering Events by time: `filterEvents`](#filtering-events-by-time-filterevents)
-        * [Sorting Events by time: `sortEvents`](#sorting-events-by-time-sortevents)
-        * [Listing all Events: `listEvents`](#listing-all-events-listevents)
-        * [Showing an Event's details: `showDetails`](#showing-an-events-details-showdetails)
-        * [Adding a Participant to an Event: `enroll`](#adding-a-participant-to-an-event-enroll)
-        * [Remove a Participant from an Event: `expel`](#removing-a-participant-from-an-event-expel)
-        * [Showing an Event's Participants: `showParticipants`](#showing-an-events-participants-showparticipants)
+        * [Marking an event as done: `done`](#marking-an-event-as-done-done)
+        * [Locating events by name: `findEvent`](#locating-events-by-name-findevent)
+        * [Filtering events by time: `filterEvents`](#filtering-events-by-time-filterevents)
+        * [Sorting events by time: `sortEvents`](#sorting-events-by-time-sortevents)
+        * [Listing all events: `listEvents`](#listing-all-events-listevents)
+        * [Showing an event's details: `showDetails`](#showing-an-events-details-showdetails)
+        * [Adding a Participant to an event: `enroll`](#adding-a-participant-to-an-event-enroll)
+        * [Remove a Participant from an event: `expel`](#removing-a-participant-from-an-event-expel)
+        * [Showing an event's Participants: `showParticipants`](#showing-an-events-participants-showparticipants)
     * [Miscellaneous](#miscellaneous)
         * [Viewing help: `help`](#viewing-help--help)
         * [Clearing all Data: `clear`](#clearing-all-data--clear)
@@ -44,7 +44,7 @@ Managera is OS-independent, meaning it will work on any operating system (Window
 - [**Saving the data**](#saving-the-data)
 - [**Editing the data file**](#editing-the-data-file)
 - [**Features in the next update v1.5**](#features-in-the-next-update-v15)
-    * [Undone Event](#undo-event-undone)
+    * [Undone event](#undo-event-undone)
 - [**Modifications in the next update v1.5**](#modifications-in-the-next-update-v15)
     * [Event time period](#event-time-period)
     * [Detect schedule clashes](#detect-clashes-in-schedule)
@@ -113,11 +113,11 @@ You can quickly jump to any of the sections by using the [Table of Contents](#ta
 
    * **`delete 3`** : Deletes the 3rd Participant shown in the current list.
 
-   * **`clear`** : Deletes all Participants and Events.
+   * **`clear`** : Deletes all Participants and events.
      
-   * **`addEvent n/My First Event d/2021-01-01`** : Adds a new Event to the list called 'My First Event'.
+   * **`addEvent n/My First Event d/2021-01-01`** : Adds a new event to the list called 'My First Event'.
      
-   * **`sortEvents`** : Sorts the current list of Events in chronological order.
+   * **`sortEvents`** : Sorts the current list of events in chronological order.
 
    * **`exit`** : Exits the app.
 
@@ -324,19 +324,19 @@ Example Usage:
 
 ## Event
 
-The following commands deal with the handling of Events in Managera. They can help you:
-* [Add an Event](#adding-an-event-addevent), 
-* [Delete an Event](#deleting-an-event--deleteevent), 
-* [Edit an Event](#editing-an-event--editevent),
-* [Mark an Event as done](#marking-an-event-as-done-done), 
-* [Locate Events by name](#locating-events-by-name-findevent), 
-* [Filter Events by time](#filtering-events-by-time-filterevents), 
-* [Sort Events by time](#sorting-events-by-time-sortevents), 
-* [List all Events](#listing-all-participants--list), 
-* [Show an Event's details](#showing-an-events-details-showdetails),
-* [Add a Participant to an Event](#adding-a-participant-to-an-event-enroll), 
-* [Remove a Participant from an Event](#removing-a-participant-from-an-event-expel) and 
-* [Show Participants of an Event](#showing-an-events-participants-showparticipants).
+The following commands deal with the handling of events in Managera. They can help you:
+* [Add an event](#adding-an-event-addevent), 
+* [Delete an event](#deleting-an-event--deleteevent), 
+* [Edit an event](#editing-an-event--editevent),
+* [Mark an event as done](#marking-an-event-as-done-done), 
+* [Locate events by name](#locating-events-by-name-findevent), 
+* [Filter events by time](#filtering-events-by-time-filterevents), 
+* [Sort events by time](#sorting-events-by-time-sortevents), 
+* [List all events](#listing-all-participants--list), 
+* [Show an event's details](#showing-an-events-details-showdetails),
+* [Add a Participant to an event](#adding-a-participant-to-an-event-enroll), 
+* [Remove a Participant from an event](#removing-a-participant-from-an-event-expel) and 
+* [Show Participants of an event](#showing-an-events-participants-showparticipants).
 
 ### Adding an event: `addEvent`
 

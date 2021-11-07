@@ -276,7 +276,17 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 ## **Implementation**
 
-This section describes some noteworthy details on how certain features are implemented.
+This section describes some noteworthy details on how certain features are implemented. The features covered in this 
+guide are:
+
+* [Add event feature - addEvent](#add-event-feature---addevent)
+* [Delete event feature - deleteEvent](#delete-event-feature---deleteevent)
+* [Filter event feature - filterEvents](#filter-event-feature---filterevents)
+* [View participant's details feature - view](#view-participants-details-feature---view)
+* [Add/Remove participant to/from event feature - enroll/expel](#addremove-participant-tofrom-event-feature---enrollexpel)
+* [View event's details feature - showDetails](#view-events-details-feature---showdetails)
+
+The end of this section also includes suggestions on how newly proposed features can be implemented.
 
 ### Add event feature - addEvent
 
