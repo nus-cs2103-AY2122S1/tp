@@ -357,7 +357,7 @@ A similar execution scenario can be expected for view lesson mechanism.
     
 ### Card-like UI Elements
 
-Card-like UI elements are objects that are shown to the user in their respective list panels, such as `StudentCard` which is displayed in the `StudentListPanel`. The Student Cards come in three flavours: `FullStudentCard` displays all fields to the user, `StudentCard` is the same but only displays the most recent `Progress` entry, and `MinimalStudentCard` only displays the index. Lesson Cards come in 2 flavours: `LessonCard` (fully-detailed) and `MinimalLessonCard` (only index and timing). Having minimally-detailed variants keeps the list compact and allows the user to view more entries. 
+Card-like UI elements are objects that are shown to the user in their respective list panels, such as `StudentCard` which is displayed in the `StudentListPanel`. The Student Cards come in three flavours: `FullStudentCard` displays all fields to the user, `StudentCard` is the same but only displays the most recent `Progress` entry, and `MinimalStudentCard` only displays the index and the student's name. Lesson Cards come in 2 flavours: `LessonCard` (fully-detailed) and `MinimalLessonCard` (only index, name and timing). Having minimally-detailed variants keeps the list compact and allows the user to view more entries. 
 
 These UI elements inherit the `Card` class, which in turn inherits `UiPart<Region>`. 
 
