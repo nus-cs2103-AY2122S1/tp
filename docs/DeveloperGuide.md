@@ -837,3 +837,35 @@ testers are expected to do more *exploratory* testing.
     1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 2. _{ more test cases …​ }_
+
+### Clearing all data
+
+1. Clearing all data in AniList
+   1. Prerequisites: List all animes using the `list` command. There are animes in the list.
+   2. Test case: Clear all animes in the application. Run `list`, `clear`, `clear` one after the other. <br/>
+   Expected: First command will switch the current tab to the `all tab`. Second command will result in the application prompting the user for confirmation. 
+   Third command will be the confirmation and **ALL** animes will be deleted from the application.
+   3. Test case: Cancelled clear. Run `clear`, `ANYTHING_BUT_CLEAR` one after the other. <br/>
+            Expected: The user will be prompted for confirmation after the first `clear` command. On running any other string besides `clear`, the `clear` command will be cancelled. If the string was a command, the command will not be executed.
+   
+2. Clearing animes from a specific tab
+   1. Prerequisites: List all anime in the chosen tab using the `list s/CHOSEN_TAB` command.
+   2. Test case: Clear animes in a specific tab. Run `list s/f`, `clear`, `clear` one after the other. <br/>
+         Expected: All animes in the `finished` tab will be deleted. All animes in `towatch` and `watching` tab should still remain.
+
+### Listing animes
+
+2. List all animes in AniList
+   1. Test case: `list` <br/>
+   Expected: The current tab will switch to `all tab` and all animes will be listed.
+   2. Test case: `LisT`<br/>
+   Expected: Error stating unknown command. AniList commands are case sensitive.
+3. List animes based on their watch status
+   1. Test case: `list s/w`, `list s/watching`<br/>
+   Expected: The current tab will switch to `watching tab` and all animes with watch status `watching` will be listed.
+   2. Test case: `list s/t`, `list s/towatch`<br/>
+      Expected: The current tab will switch to `towatch tab` and all animes with watch status `towatch` will be listed.
+   3. Test case: `list s/w`, `list s/finished`<br/>
+      Expected: The current tab will switch to `finished tab` and all animes with watch status `finished` will be listed.
+   4. Test case: `list s/tw` <br/>
+      Expected: Error message stating that an invalid status was provided.
