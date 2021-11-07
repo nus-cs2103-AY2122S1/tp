@@ -8,9 +8,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a TutorialGroup's number in the ClassMATE.
  */
 public class GroupNumber implements Comparable<GroupNumber> {
-    public static final String MESSAGE_CONSTRAINTS = "Group number must be a single digit, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Group number must be a single digit between 1 and 4, "
+            + "and it should not be blank";
 
-    private static final String GROUP_NUMBER_REGEX = "\\d";
+    private static final String GROUP_NUMBER_REGEX = "[1-4]";
 
     public final String value;
 

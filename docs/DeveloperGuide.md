@@ -617,6 +617,44 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
+**Use case: Add a Student to a Tutorial Group**
+
+**MSS**
+
+1. User lists all the students with `liststu`
+
+2. ClassMATE shows a list of students
+
+3. User requests to add a Student to a Tutorial Group using the parameters INDEX of the Student, Group Number, ClassCode, and Group Type
+
+4. ClassMATE adds the Student to the Tutorial Group
+
+**Extensions**
+
+* 2a. The list is empty.
+  
+  Use case ends.
+
+* 3a. The given Index is invalid.
+  * 3a1. ClassMATE shows an error message.
+    
+  Use case resumes at step 2. 
+
+* 3b. Tutorial Group does not exist.
+  * 3b1. ClassMATE shows an error message.
+    
+  Use case ends.
+
+* 3c. A parameter is invalid.
+  * 3c1. ClassMATE shows an error message.
+    
+  Use case resumes at step 2.
+
+* 3d. Student already belongs to a group of Group Type (i.e. OP1 or OP2).
+  * 3d1. ClassMATE shows an error message.
+
+  Use case resumes at step 2. 
+
 **Use case: Delete Latest Mark from Student**
 
 **MSS**
