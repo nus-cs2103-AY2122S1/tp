@@ -366,6 +366,34 @@ The sequence diagram for the first step is similar to the Export Command. The fo
 In both scenarios, a new `JsonAddressBookStorage` or `CsvAddressBookStorage` is created. The `AddressBookStorage` method `readAddressBook()` then reads the respective file using `JsonUtil#readJsonFile()` or `CsvUtil#readCsvFile()`. In both cases, the files are read using Jackson's `ObjectMapper` or `CsvMapper` classes respectively.
 
 
+### Edit Profile command
+
+#### Implementation
+
+Edits the user's profile linked to the Address Book.
+
+The user's profile contains details such as their name, Telegram Handle and GitHub username, which need to be kept up to date.
+This is especially important as the user's GitHub username is crucial for the Find a Buddy feature which matches them
+with a potential teammate using the GitHub metadata.
+
+The edit profile feature allows edit to change their name, Telegram handle and GitHub username.
+
+The implementation for editing the user profile is similar to that of editing a student contact. 
+It is facilitated by the `EditCommandParser` class, which implements `Parser<EditCommand>`.
+It implements the `parse()` method, which determines whether what's being edited is a contact or the user profile, checks for 
+the validity of user input (through the `checkEditProfileInputFormat()` method) and returns an `EditCommand`, to be executed in
+`LogicManager`.
+
+The `EditCommand` class extends `Command`. Its instance is created by providing an `index` (since a contact isn't being edited here, 
+the index passed is 1 by default and will not affect the process), and an `editPersonDescriptor` (which represents the updated user profile).
+Its implementation of `Command#execute()` calls the `executeEditProfile()` method which edits the user profile as necessary.
+
+The Sequence Diagram below illustrates the interactions within the `Logic` and `Model` components for
+the `execute("edit profile te/john_doe g/john-codes")` API call.
+
+![EditProfileSequenceDiagram](images/EditProfileSequenceDiagram.png)
+
+
 ### Find command
 
 #### Implementation
@@ -386,9 +414,54 @@ the `FilteredPersonList` that contains the contact(s) matching the find paramete
 `Command#execute()` is where the updation of the `FilteredPersonList` to reflect the search performed on the contacts in the address book.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` and `Model` components for
+the `execute("find Bob Joe")` API call.
+
+![FindNameSequenceDiagram](images/FindNameSequenceDiagram.png)
+
+The Sequence Diagram below illustrates the interactions within the `Logic` and `Model` components for
+the `execute("find t/friends teammates")` API call.
+
+![FindTagsSequenceDiagram](images/FindTagsSequenceDiagram.png)
+
+The Sequence Diagram below illustrates the interactions within the `Logic` and `Model` components for
 the `execute("find te/alex_1")` API call.
 
-![FindSequenceDiagram](images/FindSequenceDiagram.png)
+![FindTelegramSequenceDiagram](images/FindSequenceDiagram.png)
+
+The Sequence Diagram below illustrates the interactions within the `Logic` and `Model` components for
+the `execute("find g/alex-coder")` API call.
+
+![FindGithubSequenceDiagram](images/FindGithubSequenceDiagram.png)
+
+### Tag command
+
+#### Implementation
+
+The Tag command allows users to directly add or remove tags from a specific contact. This command was introduced to 
+overcome the following limitations:
+1. Editing a contact's tag field using `edit <INDEX> t/<TAG>` will replace the existing tag with the specified one 
+instead of adding on to it.
+2. No way to remove tags from a contact directly.
+
+It is facilitated by the `TagCommandParser` class, which implements `Parser<TagCommand>`.
+It implements the `parse()` method, which parses the index of the contact to which tags are to be added or from which 
+tags are to be removed. Moreover, checking the validity of the user input (i.e. ensuring the presence of arguments for the `Tag` command like tags to add where the prefix `a/` is present and the
+presence of tags to remove where the prefix `r/` is present) is handled by the `checkInputFormat` method. Once the input is confirmed to be valid, `parse()` returns a `TagCommand`, to be executed in
+`LogicManager`. 
+
+The `TagCommand` class extends `Command`. Its instance is created by providing the `targetIndex` of the contact to which 
+tags are to be added or from which tags are to be removed (of type `Index`), an ArrayList containing the tags to be 
+added (`toAdd`) and an ArrayList containing the tags to be removed (`toRemove`). Its implementation of `Command#execute()` is where the updation of the `FilteredPersonList` to reflect the search performed on the contacts in the address book.
+
+The Sequence Diagram below illustrates the interactions within the `Logic` and `Model` components for
+the `execute("tag 1 a/friends")` API call.
+
+![TagSequenceDiagramForAdd](images/TagSequenceDiagramForAdd.png)
+
+The Sequence Diagram below illustrates the interactions within the `Logic` and `Model` components for
+the `execute("tag 1 a/friends r/family")` API call.
+
+![TagSequenceDiagramForAddAndRemove](images/TagSequenceDiagramForAddAndRemove.png)
 
 ### Welcome Window
 
@@ -715,6 +788,45 @@ The CommandResult returned indicates whether it is triggered by a GitHub or Tele
 
 In `MainWindow`, if the command result `isGithub()` or `isTelegram()`, the GitHub and Telegram links in `PersonDetails` will be triggered using `PersonDetails#openTelegram()` and `PersonDetails#openGithub()`. 
 
+### Find A Buddy Feature
+
+<p align="center">
+<img src="https://github.com/AY2122S1-CS2103T-T10-1/tp/blob/master/docs/images/Find%20A%20Buddy.png?raw=true"\>
+</p>
+
+By switching to the Find A Buddy tab, the user can retrieve the top 5 matches to the user based on the GitHub data gathered.
+
+#### Implementation
+
+For the feature, the data gathered includes
+- Number of Repositories
+- Percentage of Contributions by Language
+
+A similarity score is calculated based on the following three metrics:
+
+- Euclidean Distance
+<p align="left">
+  <img width="400" src="https://miro.medium.com/max/1400/1*9pSSh4QM7whgtJUD6X2vsQ.png"\>
+</p>
+
+- Manhattan Distance
+<p align="left">
+  <img width="400" src="https://miro.medium.com/max/1400/1*SU-KZ_Ui8FVbQ7ZKjkiQZg.png"\>
+</p>
+
+- Cosine Distance
+<p align="left">
+  <img width="400" src="https://miro.medium.com/max/1174/1*gDCDATwjt2hAjd72O8HvbA.png"\>
+</p>
+
+
+The similarity is calculated using the following formula:
+
+`Similarity Score = 1 - Normalize((Euclidean Distance + Manhattan Distance + Cosine Distance) / 3.0)`
+
+
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Documentation, logging, testing, configuration, dev-ops
@@ -733,14 +845,15 @@ In `MainWindow`, if the command result `isGithub()` or `isTelegram()`, the GitHu
 
 **Target user profile**:
 
-* Students, Professors and Teaching Assistants
-* has a need to manage a significant number of contacts
+* Computer Science students
+* needs to manage a significant number of contacts
+* needs help finding teammates
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: Helps to improve connectivity among students and teaching staff
+**Value proposition**: Facilitates networking among Computer Science students.
 
 
 ### User stories
@@ -755,22 +868,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user                                       | search for contact(s) by tag(s)| contact them based on their grouping                                   |
 | `* *`    | user                                       | search for contact(s) by Telegram handles(s)| contact them conveniently                                 |
 | `* *`    | user                                       | search for contact(s) by GitHub username(s)| contact them conveniently                                 |
-| `* * *`  | Prof                                       | be able to export a set of contacts | let other professors, TAs and students get a set of contacts quickly |
+| `* * *`  | professor                                  | be able to export a set of contacts | let other professors, TAs and students get a set of contacts quickly |
 | `* * *`  | new user                                   | be able to import a set of contacts          | have some to begin with                                  |
 | `* * *`  | new user                                   | have an introduction splash screen           | utilise the app and its feature well                     |
 | `* * *`  | CLI user                                   | avoid using my mouse as much as possible     | -                                                        |
 | `* * *`  | user                                       | group/tag people into teammates, classmates, TA's and Profs | easily manage my contacts                 |
 | `* * *`  | user                                       | connect with seniors who have taken the same module         | have more guidance                        |
-| `* * *`  | TA                                         | be able to get in touch with the students in my class through Telegram handles | -                          |
+| `* * *`  | Teaching assistant                         | be able to get in touch with the students in my class through Telegram handles | -                          |
 | `* * *`  | new user                                   | know all the different commands                             | fully utilise the tools available         |
 | `* * *`  | new user                                   | learn the command formats                                   | perform tasks quickly and efficiently     |
-| `* * *`  | new user                                   | save contacts                                               | contact these people in the future        |
 | `* * *`  | user                                       | be able to store my contact omitting certain fields         | save contact without having to include email or address |
 | `* *`    | user                                       | have a clean and uncluttered GUI                           | navigate easily between different functions in the application |
-| `* *`    | user                                       | retrieve previous and next commands with up and down arrow key | browse my command history to retype misspelled commands |
-| `* * *`  | CS student                                 | sync my data with GitHub account | identify my colleagues by their profiles and connect with other users |
-| `* * *`  | CS student                                 | view the profiles of my contacts | learn more about them and connect with them |
-| `* *`    | user                                       | navigate to a contact's Telegram or GitHub in a single click | easily contact and interact with them |
+| `*`      | user                                       | retrieve previous and next commands with up and down arrow key | browse my command history to retype misspelled commands |
+| `* * *`  | user                                       | sync my data with GitHub account | identify my colleagues by their profiles and connect with other users |
+| `* * *`  | user                                       | view the profiles of my contacts | learn more about them and connect with them |
+| `* * *`  | user                                       | navigate to a contact's Telegram or GitHub in a single click | easily contact and interact with them |
+| `* * *`  | professor                                  | import and export contacts using CSV files | easily create list of contacts using Excel, for my students to import |
+| `* * *`  | user                                       | favorite and unfavorite my contacts | easily identify important people |
+| `* * *`  | user                                       | enter my details | make use of the Find A Buddy feature |  
+| `* * *`  | user                                       | find a buddy | work with them for group projects or as a study buddy |
+| `* *`    | user                                       | switch between tabs using keyboard shortcuts | navigate between tabs quickly |
+| `* *`    | user                                       | edit my profile | modify my details is they are misspelled during set up |
+| `* *`    | user                                       | see my profile | verify that my details are correct |
+| `* * *`  | user                                       | open a contact's Github or Telegram with a single command | easily browse their Github page or reach them on Telegram |
+
 
 ### Use cases
 
@@ -915,7 +1036,7 @@ Extensions
   * Use case ends.
 
 
-**Use Case 6: Show a person's details using Index**
+**Use Case 12: Show a person's details using Index**
 
 MSS
 
@@ -933,17 +1054,17 @@ Extensions
 
 * 3a. The given index is invalid.
   * 3a1. CohortConnect shows an error message.
-  * Use case resumes at step 2.
+  * Use case resumes at step 3.
     
 
-**Use Case 7: Show a person's details using Name**
+**Use Case 13: Show a person's details using Name**
 
 MSS
 
 1.  User requests to list persons.
 2.  CohortConnect shows a list of persons.
-3.  User requests to show details of a specific person in the list.
-4.  CohortConnect shows a pop-up with the person's details.
+3.  User requests to show details of a specific person in the list using the name.
+4.  CohortConnect shows the person's details in the detail pane.
     
     Use case ends.
 
@@ -954,40 +1075,95 @@ Extensions
 
 * 3a. The given name is not present.
   * 3a1. CohortConnect shows an error message.
-  * Use case resumes at step 2.
+  * Use case resumes at step 3.
 
 * 3b. Multiple matching names.
   * 3b1. CohortConnect shows an error message.
-  * 3b2. Displays list of users with the same name.
-  * Use case resumes at step 2.
+  * 3b2. Displays list of users with names containing the keyword.
+  * Use case resumes at step 3.
 
-**Use Case 8: Import contacts from JSON file**
+**Use Case 14: Show a person's details using Github Username**
 
 MSS
 
-1. User enters command to import from a JSON file.
-2. CohortConnect shows a list of persons to be imported.
-3. User confirms the import.
-4. CohortConnect shows the updated list of contacts.
+1.  User requests to list persons.
+2.  CohortConnect shows a list of persons.
+3.  User requests to show details of a specific person in the list using Github usernam.
+4.  CohortConnect shows the person's details in the detail pane.
+    
+    Use case ends.
+
+Extensions
+
+* 2a. The list is empty.
+  * Use case ends.
+
+* 3a. The given github username is not present.
+  * 3a1. CohortConnect shows an error message.
+  * Use case resumes at step 3.
+
+* 3b. Multiple matching github usernames.
+  * 3b1. CohortConnect shows an error message.
+  * 3b2. Displays list of users with github usernames containing the keyword.
+  * Use case resumes at step 3.
+
+
+**Use Case 15: Show a person's details using Telegram Id**
+
+MSS
+
+1.  User requests to list persons.
+2.  CohortConnect shows a list of persons.
+3.  User requests to show details of a specific person in the list using Telegram Id.
+4.  CohortConnect shows the person's details in the detail pane.
+    
+    Use case ends.
+
+Extensions
+
+* 2a. The list is empty.
+  * Use case ends.
+
+* 3a. The given telegram id is not present.
+  * 3a1. CohortConnect shows an error message.
+  * Use case resumes at step 3.
+
+* 3b. Multiple matching telegram ids.
+  * 3b1. CohortConnect shows an error message.
+  * 3b2. Displays list of users with telegram ids containing the keyword.
+  * Use case resumes at step 3.
+
+**Use Case 18: Import contacts from JSON or CSV file**
+
+MSS
+
+1. User enters command to import from a JSON or CSV file.
+2. CohortConnect shows the updated list of contacts.
    
    Use case ends.
 
 Extensions
 
-* 1a. CohortConnect cannot find the JSON file.
+* 1a. CohortConnect cannot find the JSON or CSV file.
   * 1a1. CohortConnect shows an error message.
-  * 1a2. CohortConnect prompts for new filename.
-  * 1a3. User enters new filename.
-  * Steps 1a1-1a3 are repeated until the filename received is valid.
+  * 1a2. User enters new filename.
+  * Steps 1a1-1a2 are repeated until the filename received is valid.
 
-* 2a. User decides to cancel the import.
-  * Use case ends.
+* 1b. Filename entered does not end with `.json` or `.csv`
+    * 1b1. CohortConnect shows an error message.
+    * 1b3. User enters new filename.
+    * Steps 1b1-1b2 are repeated until the filename received is valid.
 
-**Use Case 9: Export contacts to JSON file**
+* 1c. The JSON or CSV file is formatted wrongly. 
+    * 1c1. CohortConnect shows an error message.
+    
+    Use case ends.
+
+**Use Case 19: Export contacts to JSON or CSV file**
 
 MSS
 
-1. User enters command to export contacts to a named JSON file.
+1. User enters command to export contacts to a named JSON or CSV file.
 2. CohortConnect shows a success message.
    
    Use case ends.
@@ -999,6 +1175,73 @@ Extensions
   * 1a2. CohortConnect prompts for new filename.
   * 1a3. User enters new filename.
   * Steps 1a1-1a3 are repeated until the filename received is valid.
+
+**Use Case 20: Opening a contact's GitHub**
+
+MSS
+
+1. User navigates to the contact using Find (UC8-11) and / or Show command (UC12-15).
+2. User clicks on the contact's GitHub username, or enters the command to open GitHub page.
+3. The contact's GitHub profile is shown in a new browser.
+
+   Use case ends.
+
+Extensions
+
+* 2a. The contact list is empty and the user enters the GitHub command.
+  * 2a1. CohortConnect shows an error message prompting the user to select a user.
+  
+  Use case ends.
+
+* 2b. The contact list is empty and the user tries to click the GitHub username.
+  * 2b1. The contact details will be empty and there will be nothing for the user to click.
+  
+  Use case ends.
+
+* 2c. The contact has an invalid GitHub username.
+  * 2c1. The browser shows GitHub's 404 page.
+  
+  Use case ends. 
+
+**Use Case 21: Opening a contact's Telegram**
+
+MSS
+
+1. User navigates to the contact using Find (UC8-11) and / or Show command (UC12-15).
+2. User clicks on the contact's Telegram username, or enters the command to open Telegram.
+3. The contact's Telegram profile is shown in a browser window, and redirected to the Telegram app if it is installed.
+
+   Use case ends.
+
+Extensions
+
+* 2a. The contact list is empty and the user enters the Telegram command.
+    * 2a1. CohortConnect shows an error message prompting the user to select a user.
+    
+      Use case ends.
+
+* 2b. The contact list is empty and the user tries to click the Telegram username.
+    * 2b1. The contact details will be empty and there will be nothing for the user to click.
+    
+      Use case ends.
+
+* 2c. The contact has an invalid Telegram username.
+    * 2c1. The invalid Telegram profile is shown in the browser window, and Telegram shows an error message when opening the profile in the Telegram application.
+    
+      Use case ends.
+      
+**Use Case 22: Using the Find A Buddy Feature**
+
+MSS
+
+1. User switches to the Find A Buddy Tab
+2. CohortConnect gives the top 5 matches to your data
+
+Extensions
+
+* 1a. GitHub data is still being gathered.
+  * 1a1. CohortConnect shows a loading screen while gathering data in the background.
+  * 1a2. Once loaded, Use case resumes at Step 2
 
 **Use Case 23: Opening the Help Window**
 
@@ -1013,7 +1256,7 @@ Extensions
 
 * *a. At any time, the User chooses to close the app.
    * *a1. CohortConnect closes.
-  
+
      Use case ends.
 
 ### Non-Functional Requirements
