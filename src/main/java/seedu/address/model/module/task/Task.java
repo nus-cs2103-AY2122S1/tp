@@ -100,6 +100,6 @@ public class Task extends Module {
 
     @Override
     public String toString() {
-        return super.getName().toString() + " by " + getTaskDeadline().toString();
+        return super.getName().toString() + " by " + getTaskDeadline().toString() + " ";
     }
 }

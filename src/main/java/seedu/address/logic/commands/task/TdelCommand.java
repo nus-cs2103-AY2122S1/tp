@@ -5,16 +5,15 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_INDEX_DEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_INDEX;
 
-import javafx.collections.ObservableList;
+import java.util.List;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.module.Name;
-import seedu.address.model.module.member.Member;
 import seedu.address.model.module.task.Task;
-import seedu.address.model.module.task.TaskList;
 
 /**
  * Deletes a task from the task list of a person.
@@ -46,20 +45,15 @@ public class TdelCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        Member targetMember = model.getCurrentMember().get();
-
-        int taskId = targetTaskId.getZeroBased();
-        TaskList taskList = targetMember.getTaskList();
-        ObservableList<Task> tasks = taskList.asUnmodifiableObservableList();
-        System.out.println(taskId);
-        if (taskId >= tasks.size()) {
+        List<Task> lastShownTaskList = model.getFilteredTaskList();
+        if (targetTaskId.getZeroBased() >= lastShownTaskList.size()) {
             throw new CommandException(String.format(MESSAGE_TASK_NOT_FOUND, targetTaskId.getOneBased()));
         }
-        Task targetTask = tasks.get(targetTaskId.getZeroBased());
+        Task targetTask = lastShownTaskList.get(targetTaskId.getZeroBased());
         Name deletedTaskName = targetTask.getName();
-        model.deleteTask(targetMember, taskId);
+        model.deleteTask(targetTask);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, targetMember.getName().toString(),
+        return new CommandResult(String.format(MESSAGE_SUCCESS, model.getCurrentMember().get().getName().toString(),
                 deletedTaskName.toString()));
     }
 

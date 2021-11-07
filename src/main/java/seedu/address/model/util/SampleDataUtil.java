@@ -34,7 +34,7 @@ public class SampleDataUtil {
                 new Email("berniceyu@example.com"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
                 getPositionSet("Vice President", "Manpower Head")),
-            new Member(new Name("Charlotte Oliveiro"), new Phone("93210283"),
+            new Member(new Name("Charlotte Tan"), new Phone("93210283"),
                 new Email("charlotte@example.com"),
                 new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
                 getPositionSet("Logistics Head")),
@@ -56,9 +56,9 @@ public class SampleDataUtil {
     public static TaskList getSampleTaskList() {
         TaskList result = new TaskList();
         result.setTasks(Arrays.asList(
-                new Task(new Name("team meeting"), new TaskDeadline("31/10/2021 20:00")),
-                new Task(new Name("submit form"), new TaskDeadline("02/11/2021 23:59")),
-                new Task(new Name("write report"), new TaskDeadline("05/11/2021 14:00"))
+                new Task(new Name("create interview slots"), new TaskDeadline("31/10/2021 20:00")),
+                new Task(new Name("submit indemnity forms"), new TaskDeadline("02/11/2021 23:59")),
+                new Task(new Name("submit project draft report"), new TaskDeadline("05/11/2021 14:00"))
         ));
         return result;
     }
@@ -69,18 +69,17 @@ public class SampleDataUtil {
             if (sampleMember.getName().equals(new Name("Alex Yeoh"))) {
                 sampleMember.setTaskList(getSampleTaskList());
             }
-            if (sampleMember.getName().equals(new Name("Roy Balakrishnan"))) {
-                sampleMember.setTaskList(getSampleTaskList());
-            }
             sampleAb.addMember(sampleMember);
         }
         Set<Member> set = new HashSet<>();
-        set.add(new Member(new seedu.address.model.module.Name("Roy Balakrishnan"), new Phone("92624417"),
-                        new Email("royb@example.com"),
-                        new Address("Blk 45 Aljunied Street 85, #11-31"),
-                        getPositionSet("Program Head")));
-        sampleAb.addEvent(new Event(new Name("Freshmen Orientation Camp Project"), new EventDate("11/07/2021"),
+
+        set.addAll(sampleAb.getMemberList());
+        sampleAb.addEvent(new Event(new Name("Freshmen Orientation Camp Project"), new EventDate("11/07/2022"),
                         set));
+        sampleAb.addEvent(new Event(new Name("October Monthly Meeting 2021"), new EventDate("03/10/2021"),
+                set));
+        sampleAb.addEvent(new Event(new Name("November Monthly Meeting 2021"), new EventDate("07/11/2021"),
+                set));
         return sampleAb;
     }
 

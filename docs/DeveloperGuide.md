@@ -3,9 +3,10 @@ layout: page
 title: Developer Guide
 ---
 
-Ailurus is a **desktop app** that helps to organise committees account for details of their members. It provides users with convenient viewing and editing access to all information, thus providing much convenience in their work.
+Ailurus is a **desktop application** designed to aid Organising Committees from the Computing Faculty in managing and accounting for their administrative concerns. It provides users with the ability to plan and manage events and tasks for their members. 
 
-The Developer Guide seeks to provide detailed documentation for developers to set up their environment, and understand the architecture and the different components, as well as their implementations in various commands. It also informs developers of the requirements and instructions for manual testing for the Ailurus product.
+The Developer Guide seeks to provide detailed documentation for developers to set up their environment, and understand the architecture and the different components, as well as their implementations in various commands.
+It also informs developers of the requirements and instructions for manual testing for Ailurus.
 
 * Table of Contents
 {:toc}
@@ -13,7 +14,10 @@ The Developer Guide seeks to provide detailed documentation for developers to se
 
 ## **Acknowledgements**
 
-* [SE-EDU AddressBook Level-3](https://se-education.org/addressbook-level3/)
+* This project is an extension of [SE-EDU AddressBook Level-3](https://se-education.org/addressbook-level3/)
+* Our document formatting and content is referenced from [AY2122S1-CS2103T-T15-1](https://ay2122s1-cs2103t-t15-1.github.io/tp)
+* Our project uses Scene Builder for UI components
+* Libraries included: [JavaFX 8](https://docs.oracle.com/javase/8/javafx), [Jackson](https://github.com/FasterXML/jackson), [Junit5](https://github.com/junit-team/junit5)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -56,7 +60,7 @@ The rest of the App consists of four components.
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `mdel 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `mdel /m 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -73,12 +77,14 @@ The sections below give more details of each component.
 
 ### UI component
 
+[comment]: <> (TODO: LEEROY)
+
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `MemberListPanel`, 
-`EventListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` 
+`EventListPanel`, `TasKListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` 
 class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files 
@@ -101,22 +107,9 @@ or `Member` would update the `EventListPanel` and `MemberListPanel` to show thei
 and `MemberCard` accordingly. Each of the `EventCard` and `MemberCard` would display the fields under the 
 corresponding `Event` and `Member` objects as discussed under [Model Component](#model-component).
 
-However, there are problems faced when the fields inside `Event` and `Member` are being changed. There seems to be 
-some difficulty in updating the `MemberCard` when a `Task` object is being created under the `Member` object, or is 
-removed. Similarly, the same problem also lies in `EventCard` not updating when a `Member` object associated with 
-the `Event` object is being removed.
-
-#### Future Plans for UI
-
-To address the above-mentioned bug where the `EventCard` and `MemberCard` are not updated spontaneously, we decided 
-to implement a third column featuring `Task` objects. As such, we are able to totally remove the `Member` and `Task` 
-from `EventCard` and `MemberCard` respectively. 
-
-We plan to support this implementation by using the `elist`, `mlist` and `tlist` commands to determine what is being 
-displayed in the `MainWindow`.
-
 ### Logic component
 
+[comment]: <> (TODO: LEEROY)
 **API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
@@ -127,11 +120,12 @@ How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `MaddCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a member).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+1. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
 
-The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("mdel 1")` API call.
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("mdel /m 1")` 
+API call.
 
-![Interactions Inside the Logic Component for the `mdel 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `mdel /m 1` Command](images/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -144,79 +138,9 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
-Here is the Activity Diagram for a User when choosing the module and command to interact with in Ailurus:
-
-![Activity Diagram for User Commands](images/CommandActivityDiagram.jpg)
-
-#### Current Implementation of Event
-
-New feature: Events
-* Events can be added and deleted from event list via `eadd` and `edel` commands
-* The participating members can be listed using the command `mlist /v EVENT_INDEX`
-* New events created can have many participants selected from member list.
-* <u>Design Decision</u>: Instead of only allowing adding of events and creating a command
-for adding participants separately, eadd command allows creation of complete event to
-minimise commands required to add them individually. The format is similar to `mdel` and `mlist` commands
-for familiarity with similar commands for other modules.
-
-
-#### Future Plans for Event
-
-Future plans for Events
-* Include adding and deleting of participants, as well as marking whether a participant has attended the event.
-* Include updating of event with participants and different name
-* Include searching for the list of events for a participant
-* Include filtering of events by month or events that are happening today.
-* Include sorting of events by date, name or number of participants.
-  * Dates should be in reverse chronological order so that upcoming events are shown first
-* Include additional remarks or description for an event
-
-### Add a task feature for a member or several members
-
-#### Current Implementation for adding tasks
-
-The proposed feature is achieved by getting the member(s) from the filtered member list
-and use API from the model manager to add the task with given task name to each of the members.
-
-The operations are exposed in the `Model` interface as `Model#getFilteredMemberlist()` and `Model#addTask()`.
-
-Given below is an example usage scenario:
-
-The user executes `tadd /n take attendance /m 1 /m 2`. The parser will be called upon to create a TaddCommandParser.
-The parser will then parse the input to create a TaddCommand with task name as "take attendance" and member ids 1 and 2.
-This command will add the task "take attendance" to the first and second member of the member list.
-
-### Delete a task feature for a member
-
-#### Current Implementation for deleting tasks
-
-The proposed feature is achieved by getting the member(s) from the filtered member list
-and use API from the model manager to delete the task with given task id from the member with given member id.
-
-The operations are exposed in the `Model` interface as `Model#getFilteredMemberlist()` and `Model#deleteTask()`.
-
-Given below is an example usage scenario:
-
-The user executes `tdel /t 1 /m 1`. The parser will be called upon to create a TdelCommandParser.
-The parser will then parse the input to create a TdelCommand with task id as 1 and member id as 1.
-This command will delete the first task from the task list of the first member of the member list.
-
-### List tasks feature for a member
-
-#### Current Implementation for lists
-
-The proposed feature is achieved by getting the member with given member id from the filtered member list
-and use API from the model manager to list all the tasks of the member.
-
-The operations are exposed in the `Model` interface as `Model#getFilteredMemberlist()` and `Model#updateFilteredTaskList()`.
-
-Given below is an example usage scenario:
-
-The user executes `tlist /m 1`. The parser will be called upon to create a TlistCommandParser.
-The parser will then parse the input to create a TlistCommand with member id as 1.
-This command will display all the tasks of the first member of the member list.
-
 ### Model component
+
+[comment]: <> (TODO: CHIXU &#40;DESIGN CONSIDERATIONS&#41;)
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
@@ -237,6 +161,7 @@ The `Model` component,
 
 </div>
 
+[comment]: <> (TODO: CHIXU)
 #### Current Implementations
 
 The model that we implemented currently has `Event`, `Task` and `Member`. `Member` has a field with `TaskList` which contains
@@ -265,6 +190,7 @@ The `Storage` component,
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
+[comment]: <> (TODO: SAMUEL)
 #### Current Implementation
 
 `JsonAdaptedTask` allows `Task` to be stored in a json format and `JsonAdaptedMember` allows `Member` to store an array of `Task`
@@ -282,9 +208,124 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 --------------------------------------------------------------------------------------------------------------------
 
+## **Workflow**
+
+[comment]: <> (TODO: CHI XU)
+Here is the Activity Diagram for a User when choosing the module and command to interact with in Ailurus:
+
+![Activity Diagram for User Commands](images/CommandActivityDiagram.jpg)
+
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+
+<!--- TODO
+#### Current Implementation of Event
+New feature: Events
+* Events can be added and deleted from event list via `eadd` and `edel` commands
+* The participating members can be listed using the command `mlist /e EVENT_INDEX`
+* New events created can have many participants selected from member list.
+* <u>Design Decision</u>: Instead of only allowing adding of events and creating a command
+  for adding participants separately, eadd command allows creation of complete event to
+  minimise commands required to add them individually. The format is similar to `mdel` and `mlist` commands
+  for familiarity with similar commands for other modules.
+
+#### Future Plans for Event
+Future plans for Events
+* Include searching for the list of events for a participant
+* Include filtering of events by month or events that are happening today.
+* Include sorting of events by date, name or number of participants.
+    * Dates should be in reverse chronological order so that upcoming events are shown first
+* Include additional remarks or description for an event
+#### Current Implementation for adding tasks
+The proposed feature is achieved by getting the member(s) from the filtered member list
+and use API from the model manager to add the task with given task name to each of the members.
+The operations are exposed in the `Model` interface as `Model#getFilteredMemberlist()` and `Model#addTask()`.
+Given below is an example usage scenario:
+The user executes `tadd /n Take Attendance /d 21/10/2021 23:59 /m 1 /m 2`. The parser will be called upon to create a TaddCommandParser.
+The parser will then parse the input to create a TaddCommand with task name as "Take Attendance", task deadline of "21/10/2021 23:59" and member indexes 1 and 2.
+This command will add the task "Take Attendance" to the first and second member of the member list.
+#### Current Implementation for deleting tasks
+The proposed feature is achieved by getting the member(s) from the filtered member list
+and use API from the model manager to delete the task with given task index from the member with given member index.
+The operations are exposed in the `Model` interface as `Model#getFilteredMemberlist()` and `Model#deleteTask()`.
+Given below is an example usage scenario:
+The user executes `tdel /t 1`. The parser will be called upon to create a TdelCommandParser.
+The parser will then parse the input to create a TdelCommand with task index as 1.
+This command will delete the first task from the task list.
+### List tasks feature for a member
+#### Current Implementation for lists
+The proposed feature is achieved by getting the member with given member index from the filtered member list
+and use API from the model manager to list all the tasks of the member.
+The operations are exposed in the `Model` interface as `Model#getFilteredMemberlist()` and `Model#updateFilteredTaskList()`.
+Given below is an example usage scenario:
+The user executes `tlist /m 1`. The parser will be called upon to create a TlistCommandParser.
+The parser will then parse the input to create a TlistCommand with member index as 1.
+This command will display all the tasks of the first member of the member list.
+-->
+
+### List members who attended event
+
+[comment]: <> (TODO: Leeroy)
+
+### Add member to an event
+
+[comment]: <> (TODO: Leeroy)
+
+### Add event to Event List
+
+[comment]: <> (TODO: SAMUEL)
+
+### Mark event members as attended
+
+[comment]: <> (TODO: SAMUEL)
+
+### Task add command: `tadd`
+This feature allows Ailurus users to add a new task for multiple members identified by their `MEMBER_INDEX` displayed in the currently shown member list.
+
+This feature can be accessed by using `tadd` command with parameters of
+* `/n NAME`: the name of the task to add
+* `/d DATE_TIME`: the deadline of the task to add
+* multiple `/m MEMBER_INDEX`: multiple target members identified by the index displayed in the currently shown member list
+
+Given below is the sequence diagram when a user provides a valid `tadd` command: `tadd /n meeting /d 11/11/2021 20:00 /m 1 /m 2`
+to add a new task with its name and deadline to the first and second member displayed in the currently shown member list.
+
+<img src="images/task/TaskAddSequenceDiagram.png" width="600" />
+
+As seen in the diagram above, once the user entered the `tadd` command,
+the `Logic` component will parse the parameters and create a `Task` object based on the parameters and a `TaddCommand` object.
+
+<img src="images/task/TaskAddExecutionSequenceDiagram.png" width = "600" />
+
+After `LogicManager` receives the `TaddCommand` object, 
+1. `LogicManager` will call the `execute` method of `TaddCommand`.
+2. `TaddCommand` will call `Model#getFilteredMemberList` to get the last shown member list.
+3. `TaddCommand` will get the list of target members based on the `MEMBER_INDEX` list and the last shown member list.
+4. `TaddCommand` will call `Model#addTask(targetMember, taskToAdd)` to add the new task to each target member .
+5. `TaddCommand` will create a `CommandResult` object and return it to `LogicManager`.
+
+### Mark a task as done command: `tdone`
+This feature allows Ailurus users to mark multiple tasks as done. These tasks are identified by their `TASK_INDEX` displayed in the currently shown task list.
+
+This feature can be accessed by using `tdone` command with multiple `/t TASK_INDEX` parameters.
+
+Given below is the sequence diagram when a user provides a valid `tdone` command: `tdone /t 1 /t 2` to mark the first and second tasks in the task list as done.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The diagram below does not include the details of the construction of `TdoneCommand` object,
+because its implementation is similar to the construction of `TaddCommand` shown in the previous example.
+
+</div>
+
+<img src="images/task/TaskDoneSequenceDiagram.png" width = "600" />
+
+After `LogicManager` receives the `TdoneCommand` object,
+1. `LogicManager` will call the `execute` method of `TdonedCommand`.
+2. `TdoneCommand` will call `Model#getFilteredTaskList` to get the last shown task list.
+3. `TdoneCommand` will get the list of target tasks based on the `TASK_INDEX` list and the last shown task list.
+4. `TdoneCommand` will construct a completed `Task` object based on each target task.
+5. `TdoneCommand` will call `Model#setTask(targetTask, completedTask)` to set each original target task to a completed task.
+6. `TdoneCommand` will create a `CommandResult` object and return it to `LogicManager`.
 
 ### \[Proposed\] Undo/redo feature
 
@@ -304,7 +345,7 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `mdel 5` command to delete the 5th member in the address book. The `mdel` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `mdel 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `mdel /m 5` command to delete the 5th member in the address book. The `mdel` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `mdel /m 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
@@ -339,13 +380,10 @@ The `redo` command does the opposite — it calls `Model#redoAddressBook()`,
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `mlist`. Commands that do not modify the address book, such as `mlist`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. 
+Thus, the `addressBookStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add /n David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
@@ -430,24 +468,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 #### Storage Functions
+
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | user                                       | load members from other files | access and manage different sets of data |
 | `* * *`  | user                                       | write my data to a file as save data | access them and resume at a later date |
 
+
 #### Event Functions
+
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | user                                       | add all members of a particular event to one group | send notifications to only those involved |
 
 
 #### Other miscellaneous Functions
+
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
 | `* * *`  | user                                       | find a member by name          | locate details of members without having to go through the entire list |
 | `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
 | `*`      | user with many members in the address book | sort members by name           | locate a member easily                                                 |
+
 
 *{More to be added}*
 
@@ -656,38 +699,82 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file. If unable to double click, running `java -jar ailurus.jar` may be required, at the directory where `ailurus.jar` is in. Expected: Shows the GUI with a set of sample events and members. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Member tests
 
-### Deleting a member
+#### Adding a member
+
+#### Deleting a member
 
 1. Deleting a member while all members are being shown
 
-   1. Prerequisites: List all members using the `list` command. Multiple members in the list.
+   1. Prerequisites: List all members using the `mlist` command. Multiple members in the list.
 
-   1. Test case: `mdel 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   2. Test case: `mdel /m 1`<br>
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
-   1. Test case: `mdel 0`<br>
+   3. Test case: `mdel /m 0`<br>
       Expected: No member is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `mdel`, `mdel x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `mdel`, `mdel /m x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+#### Listing members of an event
+
+#### Finding all members with a task
+
+### Event tests
+
+#### Adding an event
+
+#### Deleting event
+
+#### Editing an event
+
+#### Adding a member to an event
+
+#### Deleting a member from an event
+
+#### Mark all members of event as attended
+
+#### Mark specific members of event as attended
+
+#### Unmark specific members of event
+
+### Task tests
+
+#### Adding a task
+
+#### Deleting a task
+
+#### Marking a task as completed
+
+#### Marking a task as incomplete
+
+#### Editing a task
+
+#### Listing of tasks
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Test case: Add invalid characters such as `@` to the file, such as after any `{`.
+   Expected: Ailurus launches with no data.
+   Solution: remove data file and restart ailurus application.
 
-1. _{ more test cases …​ }_
+## **Appendix: Effort**
+
+[comment]: <> (https://docs.google.com/document/d/10rPMnwmrThbKavWpjAlYiz8w-_u1WaiaiBqwbc30VcA/edit)
+
+### Challenges faced
+
+### Achievements in the project

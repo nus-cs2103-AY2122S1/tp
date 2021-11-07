@@ -256,25 +256,12 @@ class TaddCommandTest {
         }
 
         @Override
-        public void deleteTask(Member member, Task task) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void deleteTask(Member member, int index) {
+        public void deleteTask(Task task) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void setTask(Task target, Task editedTask) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        /**
-         * Replaces the task specified by {@code index} with {@code editedTask} in the given {@code member}'s task list.
-         */
-        @Override
-        public void setTask(int index, Task editedTask) {
             throw new AssertionError("This method should not be called.");
         }
 

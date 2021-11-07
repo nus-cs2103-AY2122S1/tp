@@ -3,7 +3,7 @@ package seedu.address.logic.commands.member;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showMemberAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MEMBER;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalMembers.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -35,7 +35,7 @@ public class MlistCommandTest {
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
-        showMemberAtIndex(model, INDEX_FIRST_MEMBER);
+        showMemberAtIndex(model, INDEX_FIRST);
         assertCommandSuccess(new MlistCommand(), model,
                 String.format(MlistCommand.MESSAGE_SUCCESS, expectedModel.getFilteredMemberList().size(), ""),
                 expectedModel);

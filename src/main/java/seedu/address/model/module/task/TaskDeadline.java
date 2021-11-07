@@ -20,7 +20,8 @@ public class TaskDeadline {
     public static final String MESSAGE_CONSTRAINTS = new StringBuilder()
             .append("Task deadline should be of format: ")
             .append(DEADLINE_FORMAT)
-            .append(". It should only contain numbers, ':', and '/', and it should not be blank.")
+            .append(", and the year should be from 1970 to 3000. ")
+            .append("It should only contain numbers, ':', and '/', and it should not be blank.")
             .toString();
 
     private final LocalDateTime deadline;
@@ -39,7 +40,11 @@ public class TaskDeadline {
      */
     public static boolean isValidTaskDeadline(String time) {
         try {
-            DEADLINE_DATE_TIME_FORMATTER.parse(time);
+            LocalDateTime dateTime = LocalDateTime.parse(time, DEADLINE_DATE_TIME_FORMATTER);
+            int year = dateTime.getYear();
+            if (year < 1970 || year > 3000) {
+                return false;
+            }
         } catch (DateTimeParseException e) {
             return false;
         }

@@ -1,0 +1,59 @@
+@startuml
+!include ../style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":TaddCommandParser" as TaddCommandParser LOGIC_COLOR
+participant "ta:TaddCommand" as TaddCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "taskToAdd : Task" as Task MODEL_COLOR
+end box
+
+[-> LogicManager : execute("tadd ...")
+note right
+    the ... implies the parameters being supplied:
+    /n meeting /d 11/11/2021 20:00 /m 1 /m 2
+end note
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("tadd ...")
+activate AddressBookParser
+
+create TaddCommandParser
+AddressBookParser -> TaddCommandParser
+activate TaddCommandParser
+
+TaddCommandParser --> AddressBookParser
+deactivate TaddCommandParser
+
+AddressBookParser -> TaddCommandParser : parse("...")
+activate TaddCommandParser
+
+create Task
+TaddCommandParser -> Task
+activate Task
+
+Task --> TaddCommandParser : taskToAdd
+deactivate Task
+
+create TaddCommand
+TaddCommandParser -> TaddCommand
+activate TaddCommand
+
+TaddCommand --> TaddCommandParser : ta
+deactivate TaddCommand
+
+TaddCommandParser --> AddressBookParser : ta
+deactivate TaddCommandParser
+
+TaddCommandParser -[hidden]-> AddressBookParser
+destroy TaddCommandParser
+
+AddressBookParser --> LogicManager : ta
+deactivate AddressBookParser
+
+ref over LogicManager, Task : TaddCommand Execution
+@enduml

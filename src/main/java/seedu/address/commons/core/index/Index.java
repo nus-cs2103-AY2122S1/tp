@@ -1,5 +1,7 @@
 package seedu.address.commons.core.index;
 
+import java.util.Objects;
+
 /**
  * Represents a zero-based or one-based index.
  *
@@ -54,6 +56,6 @@ public class Index {
 
     @Override
     public int hashCode() {
-        return zeroBasedIndex;
+        return Objects.hash(zeroBasedIndex);
     }
 }
