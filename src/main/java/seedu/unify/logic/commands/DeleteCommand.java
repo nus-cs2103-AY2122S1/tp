@@ -53,7 +53,7 @@ public class DeleteCommand extends Command {
 
         // Deletes from the last item to prevent future deletes operating on wrong indexes
         for (int i = targetIndexes.size() - 1; i >= 0; i--) {
-            if (targetIndexes.get(i).getZeroBased() >= lastShownList.size() || targetIndexes.get(i).getOneBased() < 1) {
+            if (targetIndexes.get(i).getZeroBased() >= lastShownList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
             }
 
