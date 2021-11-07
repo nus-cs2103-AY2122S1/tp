@@ -26,8 +26,8 @@ public class AddStudentToLessonCommand extends AddCommand {
 
     public static final String MESSAGE_USAGE = String.format("%1$s %2$s: Adds student(s) to lesson(s). "
                     + "\nParameters:"
-                    + "\n%3$sSTUDENT INDEX [MORE INDEXES] (must all be positive integers)"
-                    + "  %4$sLESSON INDEX [MORE INDEXES] (must all be positive integers)"
+                    + "\n%3$sSTUDENT INDEX(ES)... (must all be positive integers)"
+                    + "  %4$sLESSON INDEX(ES)... (must all be positive integers)"
                     + "\nExample:"
                     + "\n%1$s %2$s %3$s1 2 3 4 %4$s2",
             COMMAND_WORD, COMMAND_FLAG, PREFIX_STUDENT, PREFIX_LESSON);
