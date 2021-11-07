@@ -190,7 +190,6 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 * [Unlink Feature](#unlink-feature)
 * [Schedule Feature](#schedule-feature)
 * [Recommendation Feature](#recommend-feature)
-* [Data saving Feature](#data-saving-feature)
 
 --- 
 
