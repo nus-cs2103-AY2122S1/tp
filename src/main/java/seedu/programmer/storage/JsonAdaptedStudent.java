@@ -115,15 +115,15 @@ class JsonAdaptedStudent {
                 int labTotal = adaptedLab.getLabTotal();
 
 
-                if (LabNum.isValidLabNum(labNum)) {
+                if (!LabNum.isValidLabNum(labNum)) {
                     throw new IllegalValueException(LabNum.MESSAGE_CONSTRAINT);
                 }
 
-                if (LabResult.isValidLabResult(labResult)) {
+                if (!LabResult.isValidLabResult(labResult)) {
                     throw new IllegalValueException(LabResult.MESSAGE_CONSTRAINT);
                 }
 
-                if (LabTotal.isValidLabTotalScore(labTotal)) {
+                if (!LabTotal.isValidLabTotalScore(labTotal)) {
                     throw new IllegalValueException(LabTotal.MESSAGE_CONSTRAINT);
                 }
 
