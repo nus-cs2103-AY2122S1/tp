@@ -3,10 +3,10 @@
 
 start
 :Check input string is valid;
-if () then (is empty string)
+if () then ([is empty string])
   :Create empty appointment object;
 
-else (else)
+else ([else])
   :Convert string to match formatter requirements;
   :Parse string into LocalDateTime object;
   :Create new appointment object containing meeting time;
