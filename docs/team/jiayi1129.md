@@ -27,6 +27,7 @@ PlannerMD is an all-in-one desktop application to help clinic receptionists mana
 * **Contributions to the UG**:
   * Added the Delete Appointment Command section [#147](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/147)
   * Reviewed, raised and fixed issues throughout the UG [#226](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/226) [#277](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/277)
+  * Formatted the document and optimize for PDF conversion [#278](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/278)
 
 * **Contributions to the DG**:
   * Updated the Storage Class Diagram [#113](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/113)
@@ -34,7 +35,8 @@ PlannerMD is an all-in-one desktop application to help clinic receptionists mana
   * Added a sequence diagram to illustrate how an appointment is stored [#198](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/198)
   * Added the Find Patients/Doctors manual testing [#237](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/237)
   * Added Saving data manual testing [#237](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/237)
-  
+  * Formatted the document and optimize for PDF conversion [#278](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/278)
+
 * **Contributions to team-based tasks**:
   * Set up the GitHub team org/repo
   * Updated the README file to match current project [#10](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/10)
