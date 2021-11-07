@@ -63,6 +63,9 @@ deactivate MailingListCommand
 
 UI <--LogicManager: result
 deactivate LogicManager
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+MailingListCommand -[hidden]-> LogicManager
+destroy MailingListCommand
 
 UI --> Model : getFilteredPersonList()
 activate Model

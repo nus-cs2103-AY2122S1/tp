@@ -122,7 +122,7 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` and `DeleteCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
@@ -251,7 +251,7 @@ Step 9. CONNECTIONS UI will update to show the contact behind other pinned conta
 The following sequence diagram shows how the pin operation works:
 
 ![PinSequenceDiagram](images/PinSequenceDiagram.png)
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `PinCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `PinCommandParser` and `PinCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 #### Design considerations:
@@ -412,7 +412,10 @@ Step 4. The user provides a series of prefixes to `mailingList` to pick the fiel
 Step 5. These `Prefix` arguments are stored in `Model`.  
 Step 6. The user is prompted to pick a name and the download location for their generated CSV file.  
 Step 7. The `FilteredList`, `Prefixes` and `Path` are passed to `CsvUtil#modelToCsv`, which will serialize and write the CSV file.   
-![MailingListSequenceDiagram](images/MailingListSequenceDiagram.png)  
+![MailingListSequenceDiagram](images/MailingListSequenceDiagram.png)
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `MailingListCommandParser` and MailingListCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
 Step 8. The header row is created based on `Prefix` arguments stored in `Model`, based on a mapping in `CsvUtil`.  
 Step 9. Individual rows are generated based on the `Prefix` arguments stored in `Model` and the `FilteredPerson` in `ModelManager`, based on a mapping in `CsvUtil`.  
 Step 10. The headers and rows are written to the CSV file that is specified by the user.  
@@ -610,7 +613,7 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 
 1.  User chooses to look for a contact.
 2.  Use provides the search term.
-3.  CONNECTIONS returns all contacts that match all search terms provided
+3.  CONNECTIONS returns all contacts that match all search terms provided.
 
     Use case ends.
 
@@ -849,7 +852,7 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 
       Use case ends.
     
-* 1c. User inputs start index that is bigger than end index.
+* 1c. User inputs start index that is bigger then end index.
     * 1c1. CONNECTIONS display an error message.
 
       Use case ends.
@@ -952,7 +955,33 @@ testers are expected to do more *exploratory* testing.
 
     1. Other incorrect add commands to try: `add n/James! <other valid params>`, `add <one invalid param amongst other valid params>`, `...`.<br>
        Expected: Similar to previous.
-       
+
+### Find a contact
+1. Find a contact by name
+
+    1. Prerequisites: Multiple contacts in the list with at least one contact named Roy.
+
+    1. Test case: `find n/Roy`<br>
+       Expected: Display contacts with name Roy. Number of contacts found shown in the status message.
+    1. Test case: `find n/roy!`<br>
+       Expected: No changes made. Error details shown in the status message.
+
+    1. Other incorrect untag commands to try: `find`, `find n/<non existent name>`, `...`.<br>
+       Expected: Similar to previous.
+
+1. Find a contact by tag
+    1. Prerequisites: Multiple contacts in the list with one contact having tag name colleagues and one with tag name Colleagues.
+
+    1. Test case: `find t/Colleagues`<br>
+       Expected: Display contacts with tag colleagues. Number of contacts found shown in the status message.
+    1. Test case: `find c/ t/Colleagues`<br>
+       Expected: Display contacts with tag Colleagues (case-sensitive). Number of contacts found shown in the status message.
+    1. Test case: `find t/123!`<br>
+       Expected: No changes made. Error details shown in the status message.
+
+    1. Other incorrect untag commands to try: `find`, `find t/<non existent tag>`, `find t/<non existent tag> c/`, `...`.<br>
+       Expected: Similar to previous.
+
 ### Deleting a contact
 
 1. Deleting a contact while all contacts are being shown
@@ -1063,6 +1092,19 @@ testers are expected to do more *exploratory* testing.
        
     1. Other incorrect untag commands to try: `untag`, `untag -1 t/<valid tag name>`, `...`.<br>
        Expected: Similar to previous.
+
+### Export Mailing List Command
+1.  Export list with default attributes   
+    1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
+   
+    1. Test case: `mailingList`<br>
+       Expected: Generate CSV file with name phone and email of all contacts displayed in the list.
+   
+    1. Test case: `mailingList b/ a/`<br>
+       Expected: Generate CSV file with name, phone, email, birthday and address of all contacts displayed in the list.
+  
+    1. Test case: `mailingList k/`<br>
+       Expected: No changes made. Error details shown in the status message.
        
 ### Saving data
 
