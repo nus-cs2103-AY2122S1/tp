@@ -205,7 +205,7 @@ IS_EDITABLE | If set to `true`, the field is editable by the user through edit c
 
 The following concrete interfaces inherit the `Field` interface. You can alternatively define your own interface or provide a concrete implementation of the field options within the `attribute` classes if they don't suit your needs.
 
-#### 3.7.3 OptionalStringBasedField
+#### 3.7.2.1 OptionalStringBasedField
 
 Option | Default
 --- | ---
@@ -214,7 +214,7 @@ IS_NULL_VALUE_ALLOWED | `false`
 DEFAULT_VALUE | `""`
 IS_EDITABLE | `true`
 
-#### 3.7.4 OptionalNonStringBasedField
+#### 3.7.2.2 OptionalNonStringBasedField
 
 Option | Default
 --- | ---
@@ -223,7 +223,7 @@ IS_NULL_VALUE_ALLOWED | `true`
 DEFAULT_VALUE | `""`
 IS_EDITABLE | `true`
 
-#### 3.7.5 RequiredField
+#### 3.7.2.3 RequiredField
 
 Option | Default
 --- | ---
@@ -232,7 +232,7 @@ IS_NULL_VALUE_ALLOWED | `false`
 DEFAULT_VALUE | `""`(But not used as value is required)
 IS_EDITABLE | `true`
 
-### 3.7.6 FieldLength interfaces
+### 3.7.3 FieldLength interfaces
 
 <p align="center">
 <img src="images/FieldLengthDiagram.png" width="700" />
