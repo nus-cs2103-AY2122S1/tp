@@ -115,9 +115,6 @@ public class EditApplicantDescriptor {
         return Optional.ofNullable(gitHubUrl);
     }
 
-    public void setLinkedInProfile(ProfileUrl linkedInUrl) {
-    }
-
     /**
      * Creates and returns a {@code Applicant} with the details of {@code applicantToEdit}
      * edited with {@code editApplicantDescriptor}.
@@ -142,7 +139,6 @@ public class EditApplicantDescriptor {
      * This version has only title information.
      */
     public Applicant createEditedApplicant(Applicant applicantToEdit, Model model) {
-        assert getApplication().isEmpty() : "This method is used when there is no application information";
 
         requireNonNull(applicantToEdit);
         Name updatedName = getName().orElse(applicantToEdit.getName());

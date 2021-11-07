@@ -4,7 +4,7 @@ title: Developer Guide
 ---
 * Table of Contents
 {:toc}
-  
+
 --------------------------------------------------------------------------------------------------------------------
 ## **Introduction**
 MrTechRecruiter (MTR) is a standalone desktop app aimed in helping technology-related company recruiters overlook and administer job positions and applicants applying for various jobs in their companies.
@@ -43,7 +43,9 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S1-CS2103-F10-1/tp/blob/master/src/main/java/seedu/address/Main.java)
+and [`MainApp`](https://github.com/AY2122S1-CS2103-F10-1/tp/blob/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -101,16 +103,17 @@ Here's a (partial) class diagram of the `Logic` component:
 
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `MrTechRecruiterParser` class to parse the user command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
-1. While this command is happening, a record of the command's message and the original state of the model before the command occurred is recorded in the separate `Memento` class.
-1. In the event the user wants to undo the changes from the command, the user can simply pass `undo` into the user command, which uses the `Undo` class. 
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddPositionCommand`) which is executed by the `LogicManager`.
+1. The command can communicate with the `Model` when it is executed (e.g. to add a position).
+1. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
+1. While a modification command is happening, a record of the command's message and the original state of the model before the command occurred is recorded in the separate `Memento` class.
 1. The abstract class `Command` is then called to return the `Memento` instance (via `Command#getMomento`) of that state of the model and restores the original state of the model.
 
-The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete-position 1")` API call.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete-position 1` Command](images/DeleteSequenceDiagram.png)
+[this sequence diagram needs update to include the model.record() method]
+
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -120,8 +123,8 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `MrTechRecruiterParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddPositionCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `MrTechRecruiterParser` returns back as a `Command` object.
+* All `XYZCommandParser` classes (e.g., `AddPositionCommandParser`, `DeleteApplicantCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103-F10-1/tp/blob/master/src/main/java/seedu/address/model/Model.java)
@@ -131,16 +134,11 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the position book and applicant book data i.e., all `Applicant` and `Position` objects (which are contained in a `UniquePositionList` and `UniqueApplicantList` object).
+* stores the currently 'selected' `Position` and `Applicant` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Applicant>` or `ObservableList<Position>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
 
 
 ### Storage component
@@ -150,8 +148,8 @@ The `Model` component,
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save both applicant book data, position book data and user preference data in json format, and read them back into corresponding objects.
+* inherits from both `ApplicantBookStorage`, `PositionBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
@@ -168,9 +166,8 @@ This section describes some noteworthy details on how certain features are imple
 
 **:information_source: Note:** <br>
 
-* All commands that modify the `ApplicantBook` or `PositionBook` using the `undo` command. This is due to the introduction of the `Memento` class which captures the 
-  existing model and success message from a command and stands by in the event of an `undo` scenario.
-  
+* All commands that modify the `ApplicantBook` or `PositionBook` will keep track of the state of the model before the modification using `Memento` class. 
+* The `Memento` class captures the existing model and success message from a command and stands by in the event of an `undo` scenario.
 * All such commands will have a :heavy_check_mark: symbol beside it. Others will have no symbol displayed beside it.
 
 * Such commands include add-applicant, add-position, delete-applicant & delete-position.
@@ -182,7 +179,7 @@ This section describes some noteworthy details on how certain features are imple
 The implementation of the add applicant feature is achieved by the `AddApplicantCommand` class. Just like all other
 commands in MTR, it extends the Command class. The most important attribute that it has, is the `ApplicantParticulars`
 attribute, which contains all the details of the applicant (Name, Phone, Email, Address,
-Title of Position Applying to), parsed straight from the user input.
+Title of Position Applying to, GithubLink), parsed straight from the user input.
 
 The `AddApplicantCommand#execute(Model model)` method will use guard clauses to check whether there is a duplicate
 applicant, and whether the position (that this applicant is applying to) input by the user actually exists in
@@ -194,16 +191,17 @@ Preconditions: The app is already launched and the appropriate position that the
 exist.
 
 Step 1. The user inputs the command `add-applicant n/John Doe p/98765432 e/johnd@example.com a/John street,
-block 123, #01-01 pos/software engineer`. The app parser will store all the user-input parameters into an
+block 123, #01-01 pos/software engineer github/https://github.com/johndoe`. The app parser will store all the user-input parameters into an
 `applicantParticulars` object, and return the `AddApplicantCommand` instance.
 
 The following sequence diagram shows the method invocation in this step.
 ![AddApplicantSequenceDiagram1](images/add-applicant/AddApplicantSequenceDiagram1.png)
+[** this diagram also lacks the memento part. **]
 
 Step 2. LogicManager will execute this `AddApplicantCommand` instance. This will invoke the
 `Model#addApplicantWithParticulars` method.
 
-Step 3. Here, we will retrieve the `position` object from `positionBook`, using the `positionTitle` that the user
+Step 3. Here, we will retrieve the `position` object from `positionBook` if the position exists, using the `positionTitle` that the user
 input as argument, and create a new applicant instance using the `applicantParticulars` and `position` object. Then
 we will add it to the `applicantBook`.
 
@@ -668,11 +666,11 @@ The following activity diagram summarizes the actions taken when LogicManager ex
 ![ActivityDiagram](images/rejection-rates/ActivityDiagram.png)
 
 
-### Undo/redo feature
+### Undo feature
 
-#### Proposed Implementation
+#### Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The proposed undo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
 * `VersionedAddressBook#commit()` — Saves the current address book state in its history.
 * `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
@@ -837,9 +835,9 @@ Guarantees: New position is saved with information displayed.
 
 **<u>Use Case: UC2 - Delete a position</u>** 
 
-Preconditions: NA
+Preconditions: The specified position exists.
 
-Guarantees: Position is deleted from MTR and display is updated.
+Guarantees: Position and applicants applying to the position are deleted from MTR and display is updated.
 
 **MSS:**
 
@@ -850,18 +848,18 @@ Guarantees: Position is deleted from MTR and display is updated.
 
 **Extensions:**
 
-* 1a. The index provided is invalid (negative or larger than positionBook size)
+* 1a. The format provided is invalid or the index is negative.
     * 1a1. MrTechRecruiter shows an error message for invalid format. <br>
       Use case ends.
 
-* 1b. The position book is empty.
+* 1b. The index provided is larger than the number of displayed positions.
     * 1b1. MrTechRecruiter displays a message that there are no current positions. <br>
       Use case ends.
 
 
 **<u>Use Case: UC3 - Edit a position</u>**
 
-Preconditions: NA
+Preconditions: The specified position exists.
 
 Guarantees: Position in MTR is changed and display is updated.
 
@@ -911,6 +909,9 @@ Guarantees: Applicant is added to MTR and display is updated.
 * 1b. The applicant to be added already exists in MrTechRecruiter.
     * 1b1. MrTechRecruiter shows an error message indicating duplicate applicant. <br>
       Use case ends.
+
+* 1c. The position specified in parameters does not exist in MTR.
+    * 1c1. MrTechRecruiter shows an error message indicating that position does not exist. 
 
 
 **<u>Use Case: UC5 - Delete an applicant</u>**
@@ -965,6 +966,9 @@ Guarantees: Applicant in MTR is edited and display is updated.
   * 1d1. MrTechRecruiter shows an error message saying that the edited applicant is the same. <br>
     Use case ends.
 
+* 1e. The position specified in parameters does not exist in MTR.
+  * 1e1. MrTechRecruiter shows an error message indicating that position does not exist.
+
 
 **<u>Use Case: UC7 - Listing current positions</u>**
 
@@ -977,11 +981,6 @@ Guarantees: NA
 1. User requests to view all current positions.
 2. MrTechRecruiter refreshes the UI and reflects all existing positions. <br>
    Use case ends.
-
-**Extensions:**
-* 1a. There are no positions yet in MrTechRecruiter.
-  * 1a1. MrTechRecruiter shows an message indicating no current positions. <br>
-    Use case ends.
 
 
 **<u>Use Case: UC8 - Listing current applicants</u>**
@@ -996,10 +995,6 @@ Guarantees: NA
 2. MrTechRecruiter refreshes the UI and reflects all existing applicants. <br>
    Use case ends.
 
-**Extensions:**
-* 1a. There are no applicants yet in MrTechRecruiter.
-  * 1a1. MrTechRecruiter shows a message indicating no current applicants. <br>
-    Use case ends.
 
 
 **<u>Use Case: UC9 - Finding applicants by name</u>**
@@ -1247,17 +1242,34 @@ testers are expected to do more *exploratory* testing.
        Expected: The most recent window size and location is retained.
 
 
-### Deleting an applicant
 
-1. Deleting an applicant from MrTechRecruiter
+### Adding a new position
 
-    1. Prerequisites: There are 2 applicants within MTR. At index `1` we have `John Doe`, and at index `2` we have Mary Jane.
+1. Adding a position to MrTechRecruiter
+   1. Prerequisites: -
+   2. Test case: `add-position tit/tester desc/test codes`<br>
+      Expected: The position `tester` is added to MTR. The detailed information is shown in the status message.
+   3. Test case (followed by the previous test case): `add-position tit/tester desc/testing`<br>
+      Expected: An error message will show, indicating that the position `tester` already exists in MTR.
 
-    1. Test case: `delete-applicant 1`<br>
-       Expected: John Doe is deleted from the list. Details of the deleted contact shown in the status message.
+### Editing a position
+1. Editing a position in MrTechRecruiter. 
+   1. Prerequisites: There is at least one position in MTR. Assume there are two positions, `software engineer` at index `1` and `tester` at index `2`
+   2. Test case: `edit-position 1 tit/data engineer desc/create data pipeline`<br>
+      Expected: The title of the position is changed to `data engineer`, and the description is also changed. 
+   3. Test case: `edit-position 1 tit/tester`<br>
+      Expected: An error message will show, indicating that the position `tester` already exists in MTR.
 
-    1. Test case: `delete-applicant 3`<br>
-       Expected: No person is deleted. Error details depicting index out of bounds is shown.
+### Deleting a position
+
+1. Deleting a position from MrTechRecruiter 
+   1. Prerequisites: There is at least one position in MTR. Assume there are two positions, `software engineer` at index `1` and `tester` at index `2`
+   2. Test case: `delete-position 1`<br>
+      Expected: `tester` is deleted from the position list. The detailed information is shown in the status message. 
+   3. Test case: `delete-applicant 3`<br>
+      Expected: An error message will show, indicating that the index is invalid.
+
+      
 
 
 ### Adding a new applicant
@@ -1273,9 +1285,37 @@ testers are expected to do more *exploratory* testing.
        Expected: An error message will show, indicating that the github url passed is not a valid gitHub profile url (because it is the gitHub homepage).
 
 
-### View average rate of a job
+### Editing an applicant
 
-1. View average rate of a job in MrTechRecruiter
+1. Editing an applicant in MrTechRecruiter
+   1. Prerequisites: There is at least one applicant in MTR. Assume there are two positions `software engineer` and `tester` in MTR and for applicants, at index `1` we have `John Doe`, and at index `2` we have Mary Jane.
+   2. Test case: `edit-applicant 1 p/89385853 pos/tester`<br>
+      Expected: The phone and the position of `John Doe` are successfully edited. A success message will show. 
+   3. Test case: `edit-applicant 2 n/Mary`<br>
+      Expected: The name of the applicant at index `2` is successfully edited. A success message will show.
+   4. Other incorrect command to try: `edit-applicant 5`
+      Expected: An error message will show, indicating that the index is invalid. 
+
+
+### Deleting an applicant
+
+1. Deleting an applicant from MrTechRecruiter
+
+  1. Prerequisites: There are 2 applicants within MTR. At index `1` we have `John Doe`, and at index `2` we have Mary Jane.
+
+  1. Test case: `delete-applicant 1`<br>
+     Expected: John Doe is deleted from the list. Details of the deleted contact shown in the status message.
+
+  1. Test case: `delete-applicant 3`<br>
+     Expected: No applicant is deleted. Error details depicting index out of bounds is shown.
+  
+
+
+
+
+### Viewing average rate of a job
+
+1. Viewing average rate of a job in MrTechRecruiter
 
     1. Prerequisites: <br>
        a. Job must exist in address book. <br>
@@ -1283,6 +1323,14 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `rate pos/software engineer`<br>
        Expected: Text indicating the rejection rate will be displayed in the status bar. E.g. `Rejection rate for software engineer = 10.00%`
+
+
+### Undoing 
+
+1. Undoing the previous modification in MrTechRecruiter
+   1. Test case: `undo`
+      Expected: If modification has been made to MTR, the previous modification will be reverted. 
+        Otherwise, an error message will be shown, indicating that there is no modification to undo. 
 
 
 ### Saving data
@@ -1296,3 +1344,35 @@ testers are expected to do more *exploratory* testing.
        box. A sample json file will be created. Then repeat the steps as above.
 
     1. The steps for data/positionbook.json is similar.
+
+## **Appendix: Effort**
+**<u>Difficulty: Medium to Hard</u>**
+
+We felt that our project overall is not extremely difficult to implement but requires a fair amount of understanding of the code base. Many commands created and classes implemented
+were predominantly based off of AB3 and enhanced to a great extent; others were freshly added in to be in tune with our product. Hence despite having different features from AB3,
+the overall project is still doable.
+
+
+**<u>Challenges faced:</u>** Implementing multiple entity types, improving existing CRUD features.
+
+Our project was harder than AB3 because we needed to have both `Position` and `Applicant` be part our product. Since `Applicant` and `Position` are dissimilar, we had to create separate logic
+for these classes on top of adapting the existing `Person` class to fit our `Applicant` class better. While `Position` does not have as many fields as an `Applicant`, the difficulty came in linking it back
+to the `ModelManager` as we had to add an additional `PositionBook` which further complicated the code base logic.
+
+Also since Applicant and Position are associated, when implementing the CRUD commands for both classes, we had to carefully consider the relationship between the two entities & 
+implement additional logic wherever it made sense for our target user (e.g. when we delete a Position, all Applicants to that Position are deleted as well to avoid 
+Applicants to a non-existing Position).
+
+**<u>Effort required:</u>** 110 - 120%
+
+Many commands are adaptations of the original AB3 code (e.g. `add-applicant`, `delete-applicant`) so not much work was needed to adapt it to what we wanted. However, besides our weekly 
+inputs of coding, we had to brainstorm and constantly adapt our code to better fit our user's needs. The challenges faced as mentioned also delayed many features into later weeks, 
+requiring more effort to be put into the project. But overall, our product is not strikingly outstanding with fancy UI, "clever" logical code or AI-integrated but rather maintaining
+a realistic, simplistic code base for future developers to further improve on. 
+
+
+**<u>Achievements:</u>** Better understood JavaFX, interweaving code bases, planning and delivering, software engineering on a whole
+We feel that many of the initial outcomes of the project were achieved, such as integrating software engineering related principles into our project while at the same
+keeping to our deadlines and planning ahead for future iterations of the project. We better understood how to link various classes together despite their differences and segregate them
+to better fit how we wanted the classes and methods to be accessed. A side benefit would be learning JavaFX because this is a completely new interface and tool used in helping design
+UI and seeing how our code works with the UI greatly benefitted us as well.
