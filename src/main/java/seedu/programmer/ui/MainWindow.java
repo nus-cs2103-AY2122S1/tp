@@ -166,6 +166,9 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.setY(guiSettings.getWindowCoordinates().getY());
     }
 
+    /**
+     * Shows the primary stage to the user.
+     */
     void show() {
         primaryStage.show();
     }
@@ -232,7 +235,7 @@ public class MainWindow extends UiPart<Stage> {
             return;
         }
 
-        List<Student> stuList = getStudentList(chosenFile);
+        List<Student> stuList = getStudentListFromCsv(chosenFile);
         if (stuList == null) {
             return;
         }
@@ -272,17 +275,29 @@ public class MainWindow extends UiPart<Stage> {
         logger.info("Data successfully downloaded as CSV.");
     }
 
+    /**
+     * Sets the hovered background colour for the exit button.
+     */
     @FXML
     private void handleHover() {
         exitButton.setStyle("-fx-background-color: -fx-light-bg-color;");
     }
 
+    /**
+     * Sets the default background colour for exit button.
+     */
     @FXML
     private void handleUnhover() {
         exitButton.setStyle("-fx-background-color: -fx-main-bg-color;");
     }
 
-    private List<Student> getStudentList(File chosenFile) {
+    /**
+     * Retrieves the list of students from the CSV file.
+     *
+     * @param chosenFile the CSV file to read from
+     * @return the list of Students
+     */
+    private List<Student> getStudentListFromCsv(File chosenFile) {
         List<Student> stuList;
         try {
             stuList = FileUtil.getStudentsFromCsv(chosenFile);
@@ -309,7 +324,7 @@ public class MainWindow extends UiPart<Stage> {
      * @param message to be displayed in the popup object on the primaryStage
      */
     private void displayPopup(String message) {
-        // We should not need to display an empty popup
+        // We should not display an empty popup
         assert (message != null);
         double tenPercent = 1 - NINETY_PERCENT;
         configurePopup(message);
