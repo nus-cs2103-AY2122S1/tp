@@ -112,6 +112,7 @@
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
     -fx-text-fill: white;
+    -fx-font-size: 14px;
 }
 
 #personListView .list-cell {
