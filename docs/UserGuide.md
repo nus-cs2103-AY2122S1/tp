@@ -16,7 +16,7 @@ If you are already familiar with Unix commands, then UNIon will be easy for you 
 ## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
-1. Download the latest JAR file` from [here](https://github.com/AY2122S1-CS2103-T16-1/tp/releases).
+1. Download the latest JAR file from [here](https://github.com/AY2122S1-CS2103-T16-1/tp/releases).
 1. Copy the file to the folder you want to use as the _home folder_ for your UNIon.
 1. Double-click the file to start the app. The GUI should appear in a few seconds, and it should look similar to this image below. Note how the app contains some sample contacts.<br>
    

@@ -19,6 +19,8 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Design**
 
 <div markdown="span" class="alert alert-primary">
@@ -42,6 +44,8 @@ Given below is a quick overview of main components and how they interact with ea
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
+<div style="page-break-after: always;"></div>
+
 The rest of the App consists of four components.
 
 * [**`UI`**](#ui-component): The UI of the App.
@@ -61,11 +65,15 @@ Each of the four main components (also shown in the diagram above),
 * defines its *API* in an `interface` with the same name as the Component.
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
 
+<div style="page-break-after: always;"></div>
+
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
 <img src="images/ComponentManagers.png" width="300" />
 
 The sections below give more details of each component.
+
+<div style="page-break-after: always;"></div>
 
 ### UI component
 
@@ -84,6 +92,8 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
+<div style="page-break-after: always;"></div>
+
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
@@ -98,12 +108,16 @@ How the `Logic` component works:
 1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
+<div style="page-break-after: always;"></div>
+
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
+
+<div style="page-break-after: always;"></div>
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -113,11 +127,12 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<div style="page-break-after: always;"></div>
+
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
-
 
 The `Model` component,
 
@@ -127,12 +142,15 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
+<div style="page-break-after: always;"></div>
+
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
 </div>
 
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 
@@ -150,6 +168,8 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Implementation**
 
@@ -183,6 +203,8 @@ Diagram:
 
 ![CreateFolderAlternative2](images/CreateFolderAlternative2.png)
 
+--------------------------------------------------------------------------------------------------------------------
+
 ### View list of folders: `ls -folders`
 
 #### Implementation
@@ -204,6 +226,10 @@ Alternative 1 is selected, implemented using additional`StackPane` on top of the
 for the list of contacts placed vertically. This additional `StackPane` is placed under a `VBox`
 component in `MainWindow`.
 
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
 ### Add contacts to folder: `echo index1 ... indexN >> Folder`
 
 #### Implementation
@@ -222,6 +248,8 @@ A new `Folder` object is created containing the new `Person` and replaces the ol
 Alternative 2 is selected, as it is more user-friendly and intuitive.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ### Locate folders by name: `find -folders`
 
@@ -246,6 +274,10 @@ However, one use case we wanted to cater to was students who group their contact
 
 Alternative 1 was chosen, and the new method is under `StringUtil.containsTextIgnoreCase`.
 
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
 ### Edit folder name: `mv OLD_FOLDER_NAME | NEW_FOLDER_NAME`
 
 #### Implementation
@@ -268,6 +300,8 @@ The following diagram shows how `mv` works:
     * Pros: Easy to distinguish between the folder to be replaced and the new incoming folder name considering how folder name can have blank spaces in between
     * Cons: More difficult to implement
 
+<div style="page-break-after: always;"></div>
+
 ## **Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
@@ -277,6 +311,8 @@ The following diagram shows how `mv` works:
 * [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Requirements**
 
@@ -319,25 +355,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `UNIon` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC01 - Add a new folder**\
+**Use case: UC01 - Add a new folder**
+
 **Guarantees:**
-   * A new folder with the specified name is created as part of the application only if the input format is valid.
-   * The folder added as per mentioned is empty.
+   * A new folder with the specified name is created only if the input format is valid.
+   * The newly-created folder is empty.
+
 **MSS:**
-   1. User requests to add new folder.
-   2. UNIon accepts input and a new folder is created.
+   1. User requests to add a new folder.
+   2. UNIon accepts input, and a new folder is created.
 
    Use case ends.
 
 **Extensions:**
-* 1a. The folder specified contains non-alphanumeric characters or wrong command format. 
+* 1a. The folder name specified contains non-alphanumeric characters or wrong command format is used. 
   * 1a1. No new folder is created.
-  * 1a2. User requests to add new folder.
+  * 1a2. User requests to add a new folder.
   * Steps 1a1-1a2 are repeated until the data entered are correct.
     
-**Use case: UC02 - Add a new contact to UNIon**\
+**Use case: UC02 - Add a new contact to UNIon**
+
 **Guarantees:**
-   * A new contact with the specified details is stored as a standalone in the application only if the input format is valid.
+   * A new contact with the specified details is added to the contact list only if the input format is valid.
 
 **MSS:**
    1. User requests to add new contact.
@@ -347,27 +386,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions:**
 * 1a. The given input has missing fields.
-  * 1a1. No new contact is registered by UNIon.\
-  * 1a2. User requests to add new contact.\
+  * 1a1. No new contact is created by UNIon.
+  * 1a2. User requests to add new contact.
   * Steps 1a1-1a2 are repeated until the data format entered are correct.
 
 * 1b. Name supplied exceeds character limit.
-    * 1b1. No new contact is registered by UNIon\
-    * 1b2. User requests to add new contact.\
+    * 1b1. No new contact is created by UNIon
+    * 1b2. User requests to add new contact.
     * Steps 1b1-1b2 are repeated until the data format entered are correct.
 
 * 1c. Name supplied already exists in UNIon.
-    * 1c1. No new contact is registered by UNIon\
-    * 1c2. User requests to add new contact.\
+    * 1c1. No new contact is created by UNIon
+    * 1c2. User requests to add new contact.
     * Steps 1c1-1c2 are repeated until the data format entered are correct.
     
-**Use case: UC03 - Add existing contact to an existing folder**\
-**Preconditions:** Folder and contact already exists in UNIon\
+**Use case: UC03 - Add existing contact to an existing folder**
+
+**Preconditions:** Folder and contact already exists in UNIon
+
 **MSS:**
 
    1. <u> User adds a new folder named A (UC01) </u>
    2. <u> User adds a new contact named Clarence (UC02) </u>
-   3. User request contacts to be added to the named folder.
+   3. User requests to add contact(s) to a named folder.
    4. UNIon adds the contact specified into the respective folder.
 
    Use case ends.
@@ -384,17 +425,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 3b2. User request contacts to be added to the named folder.
   * Steps 3b1-3b2 are repeated until the data format entered are correct.
     
-**Use case: UC04 - Delete specified folder**\
+**Use case: UC04 - Delete specified folder**
+
 **Guarantees:** 
    * Folder specified is deleted from UNIon only if the input format is valid.
    * Contacts in the specified folder is removed as well.
-**Preconditions:** Folder must already exist in UNIon\
+
+**Preconditions:** Folder must already exist in UNIon
+
 **MSS:**
    1. User requests to delete folder.
    2. UNIon removes the specified folder from its system.
 
 Use case ends.
-
 
 **Extensions**
 * 1a. Folder specified does not exist in UNIon.
@@ -407,7 +450,8 @@ Use case ends.
     * 1b2. User requests to delete folder.
     * Steps 1b1 - 1b2 are repeated until data format is correct.
     
-**Use case: UC05 - Remove all contacts**\
+**Use case: UC05 - Remove all contacts**
+
 **Guarantees:** All contacts are removed from UNIon only if the input format is valid.
 
 **MSS:**
@@ -423,20 +467,22 @@ Use case ends.
   * Steps 1a1 - 1a2 are repeated until data format is correct.
 
 
-**Use case: UC06 - Remove specified contact from folder**\
-**Guarantees:** Contact specified is removed from folder\
+**Use case: UC06 - Remove specified contact from folder**
+
+**Guarantees:** Contact specified is removed from folder
+
 **Preconditions:** 
    * Contact must already exist in contact list and within the specified folder.
    * Folder must already exist in folder list.
 
 **MSS:**
 1. User requests the index of contact from contact list to be removed.
-2. UNIon removes specified contact from folder.
+2. UNIon removes the specified contact from the folder.
 
 Use case ends.
 
 **Extensions**
-* 1a. Contact does not exist in folder.
+* 1a. Contact does not exist in the folder.
     * 1a1. Folder remains unchanged.
     * 1a2. User requests the index of contact from contact list to be removed.
     * Steps 1a1 - 1a2 are repeated until data format is correct.
@@ -446,7 +492,8 @@ Use case ends.
     * 1b2. User requests the index of contact from contact list to be removed.
     * Steps 1b1 - 1b2 are repeated until data format is correct.    
     
-**Use case: UC07 - Remove all folders**\
+**Use case: UC07 - Remove all folders**
+
 **Guarantees:** All folders are deleted from UNIon
 
 **MSS:**
@@ -460,7 +507,9 @@ Use case ends.
     * 1a1. All folders remain in UNIon.
     * 1a2. User requests to remove all folders.
     * Steps 1a1 - 1a2 are repeated until data format is correct.
-    
+
+<div style="page-break-after: always;"></div>
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -474,13 +523,14 @@ Project scope
 - The app is not required to handle communication with people, only keeping track of metadata associated with contacts
 - The app is not required to handle integration with message apps like Telegram and WhatsApp
 
-
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Experienced Computing Student**: A student that has already completed introductory module in their respective universities.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Instructions for manual testing**
 
@@ -599,6 +649,8 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: Run a search using the `find -folders` command. Multiple folders in the filtered list.
     1. Similar to point 1 but folder that is being added to must be present in the filtered list
 
+<div style="page-break-after: always;"></div>
+
 #### Deleting a contact from folder: `rm`
 
 1. Removing contacts from a folder while all contacts and all folders are being shown
@@ -636,6 +688,8 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisite: Run a search using the `find -folders` command. Multiple folders in the filtered list.
     1. Similar to previous, but folder to be edited must be in the filtered list.
 
+<div style="page-break-after: always;"></div>
+
 #### Locating folders by name: `find -folders`
 
 1. Finding folders
@@ -651,12 +705,18 @@ testers are expected to do more *exploratory* testing.
     1. Incorrect delete commands to try: `rmdir`, `rmdir X` where the folder `X` does not exist<br>
        Expected: Similar to previous.
 
+1. Deleting a folder while there is a filter in place for folders
+    1. Prerequisites: Run a search using the `find -folders` command. Multiple folders in the filtered list.
+    1. Similar to point 1 but folder that is being deleted must be present in the filtered list
+
 #### Clearing all folders: `rm -folders`
 
 1. Clearing all folders
     1. Prerequisites: Multiple folders in the list.
     1. Test case: `rm -folders`<br>
        Expected: all folders are removed.
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Effort**
 
