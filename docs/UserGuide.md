@@ -221,7 +221,7 @@ Format: `addGroup g/GROUP_NAME [r/REPO_NAME] [y/YEAR] [t/TAG]...`
 * Similar to `addStudent`, GitHub link will only be shown if both `YEAR` and `REPO NAME` are specified, but either field will still be saved if specified alone.
 * `GROUP_NAME` must be contain a character, followed by 2 digits, a dash (-), followed by another digit.
   The case of the character does not matter.
-* `YEAR` represents the year field used in CS2103 Github links and not an actual calendar year. Input is therefore flexible to allow for changes in year formatting 
+* `YEAR` represents the year field used in CS2103 GitHub links and not an actual calendar year. Input is therefore flexible to allow for changes in year formatting 
 
 Examples:
 * `addGroup g/W15-4 y/AY2122S1 r/tp t/tApp` adds group W15-4 to the list and displays a confirmation output with GitHub link and no
@@ -240,7 +240,7 @@ Format: `editGroup INDEX [g/GROUP_NAME] [r/REPO_NAME] [y/YEAR] [t/TAG]…​`
 * When editing tags, the existing tags of the group will be removed i.e adding of tags is not cumulative.
 * You can remove all the group’s tags by typing `t/` without
   specifying any tags after it.
-* Similiar to `editStudent` this command flags out index values less than 1 first, before missing fields, ensuring the validity of the fields, and finally the index that is greater than 0.
+* Similar to `editStudent` this command flags out index values less than 1 first, before missing fields, ensuring the validity of the fields, and finally the index that is greater than 0.
 
 Examples:
 * `editGroup 1 g/W11-4 r/tp2` Edits the group name and repository name of the 1st group to be `W11-4` and `tp2` respectively.

@@ -55,7 +55,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -159,7 +159,7 @@ The tApp is supposed to cater to TA, who are very busy. They have their own modu
 
 #### Current Implementation
 
-To adhere to Object Oriented Programming principles, we have decided to make the `Task` class as the parent class and `TodoTasks`, `DeadlineTask` and `EventTask` classes a subclass of `Task` class. The class diagram below shows in detail how the task model is being implemented.
+To adhere to Object-Oriented Programming principles, we have decided to make the `Task` class as an abstract parent class and `TodoTasks`, `DeadlineTask` and `EventTask` classes a subclass of `Task` class. The class diagram below shows in detail how the task model is being implemented.
 
 The `Task` class, and all its subclasses,
 
@@ -168,14 +168,8 @@ The `Task` class, and all its subclasses,
 * stores an optional reference to a `Description` object.
 * stores `Tag`, which is a class common to the `Student` and `Group` data types.
 
-In addition to the components above, the `EventTask` and `DeadlineTask` classes store a compulsory reference to a `TaskDate` object. The `TodoTask` class.
+In addition to the components above, the `EventTask` and `DeadlineTask` classes store a compulsory reference to a `TaskDate` object.
 
-
-The `Task` class is an abstract class, consisting of three subclasses:
-
-1. `TodoTask` : A task that is to be completed, and is not associated with a date.
-2. `EventTask` : A task that is specified to occur at a certain date.
-3. `DeadlineTask` : A task that is to be completed by a certain date.
 
 #### Student and Group component
 
@@ -254,7 +248,7 @@ The above process is further summarised in the following sequence diagram:
 
 ![Sequence Diagram of Find Student](images/FindStudentSequenceDiagram.png)
 
-ℹ️ **Note:** The lifeline for `FindStudentCommandParser`, `FindStudentCommand`, `NameContainsKeywordPredicate` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+ℹ️ **Note:** The lifeline for `FindStudentCommandParser`, `FindStudentCommand`, `NameContainsKeywordPredicate` should end at the Destroy Marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 #### Design Considerations
 
@@ -422,8 +416,6 @@ The following steps describe the execution of the `EditTaskCommand`.
 2. `EditTaskCommand` then calls the `setTask` method of the `Model` class to replace the previous `Task` object with the newly updated one.
 3. Finally, `Model` calls the `setTask` function of the `AddressBook` to update the `Task` data.
 
-
-**Insert Tasks Class Diagram**
 
 #### Adding Todo Task
 
@@ -737,7 +729,7 @@ Similar to UC5, except the student's participation is marked instead of attendan
 
 1.  User requests to view the list of groups
 2.  tApp displays all groups
-3.  User requests to edits a specific group from the list of groups
+3.  User requests to edit a specific group from the list of groups
 4.  tApp edits the group
 5.  tApp displays all groups with the edited group
 
@@ -849,7 +841,7 @@ Similar to UC8 (Clear student list), except we are clearing the group list.
 
   Use case ends.
 
-**Use case: UC18 - Add a task with a specified deadliine**
+**Use case: UC18 - Add a task with a specified deadline**
 
 **MSS**
 
@@ -969,7 +961,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all students using the `students` command. Multiple students in the list.
     
     1. Test case: `addStudent n/John Doe e/john@u.nus.edu s/a0000001b u/johndoee r/ip`<br>
-       Expected: A student is added to the bottom of the list, with Github link shown. Details of the student is shown in the status message. Letters in student number are automatically capitalized.
+       Expected: A student is added to the bottom of the list, with GitHub link shown. Details of the student is shown in the status message. Letters in student number are automatically capitalized.
 
     1. Test case: `addStudent n/John Doe e/jondoe@u.nus.edu s/a0000002b u/jondoee r/ip`<br>
        Expected: Similar to previous, no error thrown, student with same name added.
@@ -1132,7 +1124,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all groups using the `groups` command. Multiple groups in the list.
 
     1. Test case: `addGroup g/w14-4 y/AY2122S1 r/tp`<br>
-       Expected: A group is added to the bottom of the list, with Github link shown. Details of the group is shown in the status message. Letter in group name is automatically capitalized.
+       Expected: A group is added to the bottom of the list, with GitHub link shown. Details of the group is shown in the status message. Letter in group name is automatically capitalized.
 
     1. Test case: `addGroup g/w14-4` or any other group with conflicting name<br>
        Expected: No group is added. Error message of duplicate group shown in status message.
@@ -1320,7 +1312,7 @@ testers are expected to do more *exploratory* testing.
        `event`, `event !` <br>
        Expected: No new todo task created. Error details shown in the status message.
 
-1. Adding a event task while in another directory
+1. Adding an event task while in another directory
 
    Expected: Similar to previous.
 
@@ -1469,7 +1461,7 @@ testers are expected to do more *exploratory* testing.
     1. Test case: delete the `tasks` section of the `addressbook.json` file. Then, execute the `.jar` file.
        Expected: tApp application opens with no data.
 
-    2. Test case: edit the `addressbook.json` file so that some properties are invalid (e.g Changing the `isComplete` property of a `Task` to contain a String instead of a boolean).
+    2. Test case: edit the `addressbook.json` file so that some properties are invalid (e.g. Changing the `isComplete` property of a `Task` to contain a String instead of a boolean).
        Expected: tApp application opens with no data.
 
 --------------------------------------------------------------------------------------------------------------------
