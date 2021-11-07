@@ -158,7 +158,9 @@ Shows a message explaining how to access the help page.
 Alternatively, you can click on the help button in the top left
 corner.
 
-![help button](images/user-guide/helpButton.png)
+<img src="images/user-guide/helpButton.png" width="600">
+
+
 
 Format: `help`
 
@@ -172,7 +174,8 @@ Commands enters only applies on the currently displayed tab. (eg. If the current
 Format: `toggle`
 * toggles to the other tab (eg. if the currently displayed tab is the patient tab, `toggle` switches the displayed tab to the doctor tab)
 
-![toggleTabs](images/toggleTabs.png)
+<img src="images/toggleTabs.png" width="600">
+
 
 ### Clearing all entries : `IWANTTOCLEAREVERYTHING` <a name="clear"/>
 
@@ -202,7 +205,8 @@ To use commands for managing patients, toggle the displayed list to the patient 
 </div>
 More information about the `toggle` command [here](#toggle).
 
-![patient tab](images/patientTab.png)
+<img src="images/patientTab.png" width="600">
+
 
 
 ### Adding a patient: `add` <a name="add-patient"/>
@@ -329,7 +333,8 @@ Format: `tag -d INDEX t/TAG`
 
 Examples:
 * `tag -d 1 t/Covid` deletes the *Covid* tag from first patient.
-![deletePatientTag](images/deletePatientTag.png)
+
+  <img src="images/deletePatientTag.png" width="600">  
 
 ---
 <div style="page-break-after: always;"></div>
@@ -340,7 +345,8 @@ To use commands for managing doctors, toggle the displayed list to the doctor li
 </div>
 More information about the `toggle` command [here](#toggle).
 
-![doctor tab'](images/doctorTab.png)
+<img src="images/doctorTab.png" width="600">
+
 
 ### Adding a doctor: `add` <a name="add-doctor"/>
 
@@ -384,7 +390,10 @@ Examples:
 * `edit 1 hp/91234567 eml/johndoe@example.com` Edits the phone number and email address of the 1st doctor to be `91234567` and `johndoe@example.com` respectively.
 * `edit 2 n/Betsy Crower dob/20/07/1964 t/` Edits the name and date of birth of the 2nd doctor to be `Betsy Crower` and `20/07/1964` respectively, and clears all existing tags.
 * After executing `edit 2 n/Betsy Crower dob/20/07/1964 t/`:
-![editDoctor](images/editDoctor.png)
+
+<img src="images/editDoctor.png" width="600">
+
+
   
 
 ### Adding a remark to a doctor's information : `remark` <a name="remark-doctor"/>
