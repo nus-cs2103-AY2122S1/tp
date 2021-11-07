@@ -2,12 +2,15 @@ package seedu.address.logic.parser.abcommandparser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 
 import java.nio.file.Path;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.util.FileUtil;
+import seedu.address.logic.commands.abcommand.AbCommand;
 import seedu.address.logic.commands.abcommand.AbCreateCommand;
 import seedu.address.logic.commands.abcommand.AbDeleteCommand;
 import seedu.address.logic.commands.abcommand.AbListCommand;
@@ -52,5 +55,17 @@ public class AbCommandParserTest {
     @Test
     public void parseCommand_ablist() throws Exception {
         assertTrue(abCommandParser.parse(AbListCommand.COMMAND_WORD, model) instanceof AbListCommand);
+    }
+
+    @Test
+    public void parse_fail_wrongFormat() {
+        assertParseFailure(abCommandParser, "",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AbCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_fail_unknownCommand() {
+        assertParseFailure(abCommandParser, "notany",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AbCommand.MESSAGE_USAGE));
     }
 }

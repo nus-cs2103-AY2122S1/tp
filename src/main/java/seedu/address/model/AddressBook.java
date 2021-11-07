@@ -12,8 +12,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.EditCommand.EditClientDescriptor;
 import seedu.address.model.client.Client;
+import seedu.address.model.client.Client.EditClientDescriptor;
 import seedu.address.model.client.ClientId;
 import seedu.address.model.client.UniqueClientList;
 import seedu.address.model.tag.Tag;
@@ -238,6 +238,10 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     @Override
     public String getClientCounter() {
+        if (this.clientCounter == null) {
+            this.clientCounter = "0";
+        }
+
         return this.clientCounter;
     }
 

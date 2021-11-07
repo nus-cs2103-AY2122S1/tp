@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_FIELDS_EMPTY;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -22,6 +23,12 @@ public class FilterCommandParserTest {
     public void parse_emptyArg_throwsParseException() {
         assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 FilterCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_emptyPrefixArg_throwsParseException() {
+        assertParseFailure(parser, " t/ ", String.format(MESSAGE_FIELDS_EMPTY, "Tag"));
+        assertParseFailure(parser, " t/ a/ p/ e/", String.format(MESSAGE_FIELDS_EMPTY, "Tag, Address, Phone, Email"));
     }
 
     @Test

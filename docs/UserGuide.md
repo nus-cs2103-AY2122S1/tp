@@ -17,34 +17,35 @@ Welcome to LeadsForce's User Guide! Find answers and step-by-step instructions t
   * [1.1 Reading this User Guide](#11-reading-this-user-guide)
 * [**2. Quick Start**](#2-quick-start)
 * [**3. Client Information**](#3-client-information)
-    * [3.1 Duplicate Clients](#31-nextmeeting) 
+    * [3.1 Duplicate Clients](#31-duplicate-clients) 
     * [3.2 Next Meeting Attribute](#32-next-meeting-attribute) 
-    * [3.3 Last Meeting Attribute](#33-last-meeting-attribute) 
-* [**4. Features**](#4-features)
-    * [4.1 Create new contact: add](#41-create-new-contact--add)
-    * [4.2 Retrieve particular contact: view](#42-retrieve-particular-contact--view)
-    * [4.3 Update existing contact: edit](#43-update-existing-contact--edit)
-    * [4.4 Delete particular contact: delete](#44-delete-particular-contact--delete)
-    * [4.5 List all contacts: list](#45-list-all-contacts--list)
-    * [4.6 Sort Contacts: sort](#46-sort-contacts--sort)
-    * [4.7 Find meeting schedule: schedule](#47-find-meeting-schedule--schedule)
-    * [4.8 Locating clients by keywords: search](#48-locating-clients-by-keywords--search)
-    * [4.9 Filter current list: filter](#49-filter-current-list-by-keywords--filter)
-    * [4.10 Clearing all entries: clear](#410-clearing-all-entries--clear)
-    * [4.11 Exiting the program: exit](#411-exiting-the-program--exit)
-    * [4.12 Saving data](#412-saving-the-data)
-    * [4.13 Edit data file](#413-edit-data-file)
-* [**5. Multiple Address Books Features**](#5-multiple-address-books-feature)
-    * [5.1 Create new address book: ab create](#51-create-new-address-book--ab-create)
-    * [5.2 Delete existing address book: ab delete](#52-delete-existing-address-book-ab-delete--ab-delete)
-    * [5.3 Switch to different address book: ab switch](#53-switch-to-different-address-book--ab-switch)
-    * [5.4 List all address book: ab list](#54-list-all-address-book--ab-list)
-* [**6. FAQ**](#6-faq)
-* [**7. Troubleshooting**](#7-troubleshooting)
-* [**8. Bugs Reporting**](#8-bugs-reporting)
-* [**9. Command Summary**](#9-command-summary)
-    * [10.1 Address Book Specific Commands](#91-client-specific-commands)
-    * [10.2 Multiple Address Book Commands](#92-multiple-address-book-commands)
+    * [3.3 Last Met Attribute](#33-last-met-attribute)
+* [**4. Navigating LeadsForce**](#4-navigating-leadsforce)
+* [**5. Features**](#5-features)
+    * [5.1 Create new contact: add](#51-create-new-contact--add)
+    * [5.2 Retrieve particular contact: view](#52-retrieve-particular-contact--view)
+    * [5.3 Update existing contact: edit](#53-update-existing-contact--edit)
+    * [5.4 Delete particular contact: delete](#54-delete-particular-contact--delete)
+    * [5.5 List all contacts: list](#55-list-all-contacts--list)
+    * [5.6 Sort Contacts: sort](#56-sort-contacts--sort)
+    * [5.7 Find meeting schedule: schedule](#57-find-meeting-schedule--schedule)
+    * [5.8 Locating clients by keywords: search](#58-locating-clients-by-keywords--search)
+    * [5.9 Filter current list: filter](#59-filter-current-list-by-keywords--filter)
+    * [5.10 Clearing all entries: clear](#510-clearing-all-entries--clear)
+    * [5.11 Exiting the program: exit](#511-exiting-the-program--exit)
+    * [5.12 Saving data](#512-saving-the-data)
+    * [5.13 Edit data file](#513-edit-data-file)
+* [**6. Multiple Address Books Features**](#6-multiple-address-books-feature)
+    * [6.1 Create new address book: ab create](#61-create-new-address-book--ab-create)
+    * [6.2 Delete existing address book: ab delete](#62-delete-existing-address-book-ab-delete--ab-delete)
+    * [6.3 Switch to different address book: ab switch](#63-switch-to-different-address-book--ab-switch)
+    * [6.4 List all address book: ab list](#64-list-all-address-book--ab-list)
+* [**7. FAQ**](#7-faq)
+* [**8. Troubleshooting**](#8-troubleshooting)
+* [**9. Bugs Reporting**](#9-bugs-reporting)
+* [**10. Command Summary**](#10-command-summary)
+    * [10.1 Client Management Commands](#101-client-management-commands)
+    * [10.2 Multiple Address Book Commands](#102-multiple-address-book-commands)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -84,7 +85,7 @@ When reading our User Guide, here are some important information to take note of
 
     * **`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`** : Creates a contact named `John Doe` to the Address Book.
 
-    * **`delete 3`** : Deletes the 3rd contact shown in the current list.
+    * **`delete 3`** : Deletes the contact with the client ID 3.
 
     * **`clear`** : Deletes all contacts.
 
@@ -130,7 +131,7 @@ The `Next Meeting` attribute refers to the next meeting that the financial advis
 
 A NextMeeting needs to be inputted in the following format:
 
-`m/dd-MM-yyyy (hh:mm~hh:mm), {non-empty location string)`
+`m/dd-MM-yyyy (hh:mm~hh:mm), (non-empty location string)`
 
 where
 * *date* is in the format `dd-MM-yyyy`, where day, month and year are numerical values
@@ -141,13 +142,60 @@ where
 | :-: | :-- |
 | <img src=images/info_icon.png width="50"> | • `Next Meeting` will automatically be updated to null when the current time passes the date and end time of the meeting and this happens whenever the application is booted up. At the same time, the `Last Met` attribute will be updated to take on the current date. |
 
-### 3.3 Last Meeting Attribute 
+### 3.3 Last Met Attribute 
 
 The `Last Met` attribute refers to the last date the user (typically a financial advisor) have met the client. 
 
+| <img src=images/info_icon.png width="50"> | • `Last Met` can take on any date, including dates which are in the future to provide users the flexiblity in tailoring their address book to their liking. |
+| :-: | :-- |
+
 --------------------------------------------------------------------------------------------------------------------
 
-## 4. Features
+## 4. Navigating LeadsForce
+This section details the various components of LeadsForce's interface and how you could go about navigating our application. An overview of LeadsForce's interface is shown below.
+<img src=images/NavigatingLeadsForce.png />
+
+### 4.1 Command View
+<p align="center">
+<img src=images/CommandViewInterface.png width="500"/>
+</p>
+<br> 
+The command view is where you will be able to input commands into LeadsForce. The command view consist of the following components: <br> 
+
+1. **Toolsbar** <br> 
+   • help bar that directs users to LeadsForce's user guide <br> 
+   • File bar where users can exit the app <br> 
+   • Address Book bar which allows users to switch between address books <br> 
+   • Themes bar which allows users to switch between different themes <br> 
+2. **Command Box** <br>
+   • This is where users can input their commands into LeadsForce <br> 
+   
+3. **Command Result Display** <br>
+   • This is where LeadsForce will display details of the commands from the app <br> 
+   
+4. **Filter tag** <br>
+   • For tags that clients have, they will show up here in the filter tag. By clicking on one of these tags and pressing `enter`, LeadsForce can filter out clients with based on the tag that is chosen. Further details of the `filter` command can be found [here](#59-filter-current-list-by-keywords--filter)
+
+### 4.2 Client List View 
+<p align="center">
+<img src=images/ClientListView.png width="500"/>
+</p>
+The client list view consist of the list of clients from the user's address book,and provides an overview of their clients' infomation.
+
+  • This list will change according to the commands used such as `list` and `search`. <br> 
+  • When opening the application, all clients in an address book will be shown. <br>
+  
+### 4.3 Client Info View 
+<p align="center">
+<img src=images/ClientInfoView.png width="500"/>
+</p>
+
+The client information view provides in-depth information about the client's attributes. Using the [`View`](#52-retrieve-particular-contact--view) command, users can view the client information in the client info view. 
+
+### 4.3 Meeting Schedule View
+The meeting schedule view showcases the upcoming meetings that the client has, and they are sorted from the earliest to the latest meeting that the client has. When first booting up the application, all meetings will be shown. Using the [`Schedule`](#57-find-meeting-schedule--schedule) command can change the list of meetings shown to the user.
+
+## 5. Features
 
 This section details the various features available in a single address book in LeadsForce. These features are generally used in the management of client information and client meetings. 
 
@@ -167,7 +215,7 @@ This section details the various features available in a single address book in 
 </div>
 
 
-### 4.1 Create New Contact : `add`
+### 5.1 Create New Contact : `add`
 
 Adds a new client to the address book.
 | Format | `add n/{CLIENT'S NAME} e/{EMAIL} <attribute>/{OTHER ATTRIBUTES}...`|
@@ -175,15 +223,20 @@ Adds a new client to the address book.
 | **example** | • `add n/Benedict Chua e/benchua@hotmail.com` <br> • `add n/Keith e/keithtan@ymail.com p/12345678 r/4`|
 | <img src=images/info_icon.png width="50"> | • A client must have minimally the name and email tag filled during creation <br> • Any other tags are optional, except for Client ID as client ID cannot be given to the client.  <br> • Tags that can be added are as seen in the client information in the Client Info Section |
 
-### 4.2 Retrieve Particular Contact : `view`
+### 5.2 Retrieve Particular Contact : `view`
 
 View client's information in detail. 
 
 | Format | `view CLIENT'S ID` |
 | :-: | :-- |
-| **example** | • `view 2` would be used to view client 2's information|
+| **example** | • `view 1` would be used to view client 1's information|
+
+**Expected Outcome:** <br> 
+For instance, if `Alex Yeoh` is the client with client ID 1, the following will be shown in the client info view of LeadsForce. <br> 
+<img src=images/ClientInfoView.png width="300"/>
+
  
-### 4.3 Update Existing Contact : `edit`
+### 5.3 Update Existing Contact : `edit`
 
 Update the attributes of existing users using the tag of the client’s attribute, and set/edit meetings with clients.  
 
@@ -196,24 +249,24 @@ Update the attributes of existing users using the tag of the client’s attribut
 | <img src=images/info_icon.png width="50"> | • Client Id cannot be changed. |
 | <img src=images/tip_icon.png width="50"> | • multiple clients and their attributes can be updated with one `edit` command! For instance, if you're planning to organise a meeting with several different clients, you could simply use this feature to do so. |
  
-### 4.4 Delete particular contact : `delete`
+### 5.4 Delete particular contact : `delete`
 
 Deletes an existing client from the address book using their client id.
 
-| Format | `delete CLIENT'S ID...`|
+| Format | `delete CLIENT_ID...`|
 | :-: | :-- |
 | **example** | • `delete 7` will deletes client with client id 7 <br> • `delete 4 8 6` will deletes the clients whose client id is 4, 6 and 8 |
 | <img src=images/info_icon.png width="50"> | • Multiple clients can be deleted with one `delete` command |
 | <img src=images/warn_icon.png width="50"> | • This action is irreversible. Once you have deleted a client, the client and his/her corresponding information will be removed from the storage file. |
  
-### 4.5 List all contacts : `list`
+### 5.5 List all contacts : `list`
 
 Shows the full list of all clients in the address book.
 | Format | `list` |
 | --- | :--|
 | <img src=images/info_icon.png width="50"> | • As long as the first word in the command is `list`, the command will still work regardless of the additional inputs. <br> eg. the command `list asdknkjsaf` will still work | 
 
-### 4.6 Sort Contacts : `sort`
+### 5.6 Sort Contacts : `sort`
 
 Sorts clients in order based on the inputted attribute. Clients can be sorted ascendingly or descendingly, and is based on the given `SORT DIRECTION`. 
 
@@ -222,7 +275,7 @@ Sorts clients in order based on the inputted attribute. Clients can be sorted as
 | **examples** | • `sort r/ASC` will sort the list by ascending risk-appetite <br> • `sort i/dsc` will sort the list by descending client id |
 | <img src=images/info_icon.png width="50"> | • If multiple attributes are provided, then the clients will be sorted by the attributes sequentially. <br> e.g. `sort d/asc m/dsc`, this will sort the clients by disposable income in ascending order first, then for those clients whose disposable income are the same, they will be sorted by next meeting in descending order. <br> • Sorting by the attribute Tag (t/) is not supported. <br> • The tags are case-insensitive. (ASC and asc are both okay.) |
 
-### 4.7 Find meeting schedule : `schedule`
+### 5.7 Find meeting schedule : `schedule`
 
 Finds the meeting schedule on a specified date.
 
@@ -231,7 +284,7 @@ Finds the meeting schedule on a specified date.
 | **examples** | • `schedule 22-09-2021` allows the user to view the schedule that the user has on the 22nd September 2021. <br>  • `schedule` displays all meetings|
 | <img src=images/info_icon.png width="50"> | • `DATE` has to be in the format of dd-MM-yyyy. <br> • if the `DATE` is not specified, all meetings will be displayed.|
  
-### 4.8 Locating clients by keywords : `search`
+### 5.8 Locating clients by keywords : `search`
 
 Finds clients whose contacts match with the given keywords.
 
@@ -240,11 +293,12 @@ Finds clients whose contacts match with the given keywords.
 | **examples** | • `search John` returns *john* and *John Doe* <br> • `search alex david` returns *Alex Yeoh*, *David Li* |
 | <img src=images/info_icon.png width="50"> | • If no `KEYWORD` is provided, search will be based on `<attribute>/{ATTRIBUTE_KEYWORD}` only. <br> • The search is case-insensitive. e.g `keith` will match `Keith`. <br> • The order of the keywords does not matter. e.g. `John Doe` will match `Doe John`.<br> • Clients matching at least one keyword will be returned). <br> e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`. <br> • If attribute keyword is provided, only clients whose attribute matches with the attribute keyword will be returned. <br> e.g. `Tom Tim e/@gmail.com` will return `Tom Lee e/Tom@gmail.com` and not `Tim Shum e/Tim@yahoo.com`. |
 
-### 4.9 Filter current list by keywords : `filter`
+### 5.9 Filter current list by keywords : `filter`
+
 
 Filters the current list by the given keywords.
  
-| Format | `filter {KEYWORD}... <attribute>/{ATTRIBUTE_KEYWORD}...` <br> <br>• `KEYWORD` will be used to match with all attribute of the client. <br> • `{ATTRIBUTE_KEYWORD}` refers to the keyword that is to be matched with the corresponding client attribute.|
+| Format | `filter KEYWORD... <attribute>/{ATTRIBUTE_KEYWORD}...` <br> <br>• `KEYWORD` will be used to match with all attribute of the client. <br> • `{ATTRIBUTE_KEYWORD}` refers to the keyword that is to be matched with the corresponding client attribute.|
 | :-: | :-- |
 | **examples** | • `filter John` returns `john` and `John Doe` <br> • `filter alex david` returns `Alex Yeoh`, `David Li` |
 | <img src=images/info_icon.png width="50"> | • Works similar to `search` but `filter` works based on the current list shown as opposed to entire lists of contacts. <br> • If no `KEYWORD` is provided, then filter will be based on `<attribute>/{ATTRIBUTE_KEYWORD}` <br> • The filter is case-insensitive. e.g `keith` will match `Keith`. <br> • The order of the keywords does not matter. e.g. `John Doe` will match `Doe John`. <br> • Clients matching at least one keyword will be returned). <br> e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`. <br> • If attribute keyword is provided, only clients whose attribute matches with the attribute keyword will be returned. <br> e.g. `Tom Tim e/@gmail.com` will return `Tom Lee e/Tom@gmail.com` and not `Tim Shum e/Tim@yahoo.com`.|
@@ -259,7 +313,7 @@ Clears all entries from the address book.
 | <img src=images/info_icon.png width="50"> | • As long as the first word in the command is `clear`, the command will still work regardless of the additional inputs. <br> eg. the command `clear asdknkjsaf` will still work. <br> • This command clears all clients in the **current** address book <br> • After inputting `clear`, another prompt will appear requesting for confirmation to clear the address book. The input required for the confirmation will either be: <br>    • `yes`: to confirm and proceed with the clear command. <br>    •`no`: to cancel the clear command.|
 | <img src=images/warn_icon.png width="50"> | •  This action is irreversible. Once you have clear all client information from the current address book, this information will be removed from the storage file and will not be retrievable.|
 
-### 4.11 Exiting the program : `exit`
+### 5.11 Exiting the program : `exit`
 
 Exits LeadsForce. 
 | Format | `exit` |
@@ -272,17 +326,17 @@ Examples:
 
 LeadsForce's data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### 4.13 Edit data file
+### 5.13 Edit data file
 
 LeadsForce's data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 | <img src=images/warn_icon.png width="50"> | If your changes to the data file makes its format invalid, LeadsForce will discard all data and start with an empty data file at the next run.  |
 | --- | :-- |
 
-## 5. Multiple Address Books Feature 
+## 6. Multiple Address Books Feature 
 This section details the multiple address book feature in LeadsForce. Seperate your clients into different address books to better manage your clients! 
 
-### 5.1 Create new address book : `ab create`
+### 6.1 Create new address book : `ab create`
 
 Create a new address book by the name provided and switches to it.
 
@@ -291,7 +345,7 @@ Create a new address book by the name provided and switches to it.
 | Example | `ab create vip clients` will create a new address book named `vip clients` |
 | <img src=images/info_icon.png width="50"> | • The name of the addressbook cannot be the same as an existing address book.|
 
-### 5.2 Delete existing address book: ab delete : `ab delete`
+### 6.2 Delete existing address book: ab delete : `ab delete`
 
 Delete an address book that currently exists.
 
@@ -300,7 +354,7 @@ Delete an address book that currently exists.
 | Example | `ab delete test` will delete the address book named `test` |
 | <img src=images/info_icon.png width="50"> | • The current address book cannot be deleted, switch to another address book first before deleting the address book.|
 
-### 5.3 Switch to different address book : `ab switch`
+### 6.3 Switch to different address book : `ab switch`
 
 Switch to a different address book that currently exists.
  
@@ -310,7 +364,7 @@ Switch to a different address book that currently exists.
 | <img src=images/tip_icon.png width="50"> | • Switch between different address books by toggling the address book tab (which is the 3rd tab from the left) <br> <img src=images/MultipleAddressBookTab.jpg width="300"> |
  
 
-### 5.4 List all address book : `ab list`
+### 6.4 List all address book : `ab list`
 
 List all the name of all the existing address books
 
@@ -319,7 +373,7 @@ List all the name of all the existing address books
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 6. FAQ
+## 7. FAQ
 
 **Q**: Is LeadsForce free to use? <br>
 **A**: Yes, LeadsForce is free for use as long as you have a computer with you. <br> 
@@ -344,7 +398,7 @@ List all the name of all the existing address books
 
 --------------------------------------------------------------------------------------------------------------------
  
-## 7. Troubleshooting
+## 8. Troubleshooting
 
 ### Unable to launch LeadsForce
 * Do check that you indeed have Java 11 or above installed in your computer. 
@@ -355,7 +409,6 @@ List all the name of all the existing address books
 2. If you get the version information, and have made sure that the java version is `11` and above. You have downloaded the correct java version, and can skip the rest of this tutorial.
 3. Otherwise, head to the Oracle website [here](https://www.oracle.com/java/technologies/downloads/#java11-mac) to download the mac version of the java JDK.
  
- 
 **For Windows users,**
  
 1. Open the command prompt, and type `java -version`, and press `enter`. 
@@ -363,17 +416,17 @@ List all the name of all the existing address books
 3. Go to `start menu` → `System` → `Advanced` → `Environment Variable`. Set the `JAVA_HOME` to the path of your JDK, and press `update`. For more details, the link to a more in-depth guide can be found [here](https://javatutorial.net/set-java-home-windows-10). 
 4. If none of the above worked, do search your system for the `javac.exe` file. If it cannot be found, head to the Oracle website [here](https://www.oracle.com/java/technologies/downloads/#java11-mac) to download the PC version of the java JDK.
  
-## 8. Bugs Reporting
+## 9. Bugs Reporting
 
 The latest version of LeadsForce (version 1.4) is currently undergoing rigorous testing. This version would serve as the public beta testing of LeadsForce. We have done comprehensive tests on the application, including integration and unit testing. In addition, several students from NUS School of Computing have also contributed towards the rigorous testing of LeadsForce. 
  
 However, if you do happen to encounter any bugs while using LeadsForce, please go to LeadsForce's [issue page](https://github.com/AY2122S1-CS2103T-T17-3/tp/issues) to issue the bug with the steps to recreate the bug.  
  
-## 9. Command summary
+## 10. Command summary
 
 This section details all commands in using the features in LeadsForce.
 
-### 9.1 Address Book Specific Commands
+### 10.1 Client Management Commands
 Action | Format | Examples
 --------|---------|---------
 **Create** | `add n/{CLIENT'S NAME} e/{EMAIL} <attribute>/{OTHER ATTRIBUTES}...`| add n/benedict e/benedict@gmail.com p/90909898 r/3 |
@@ -388,7 +441,7 @@ Action | Format | Examples
 **Clear** | `clear` | - |
 **Exit** | `exit` | - |
  
-### 9.2 Multiple Address Book Commands
+### 10.2 Multiple Address Book Commands
  
 Action | Format | Examples
 --------|---------|---------

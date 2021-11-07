@@ -37,20 +37,8 @@ public class SortByAttribute implements Comparator<Client> {
         this(prefix, SortDirection.SORT_ASCENDING);
     }
 
-    @Override
-    public String toString() {
-        Iterator<Prefix> prefixIterator = this.prefixList.listIterator();
-        Iterator<SortDirection> sortDirectionIterator = this.sortDirectionList.iterator();
-        List<String> resultList = new ArrayList<>();
-        while (prefixIterator.hasNext() && sortDirectionIterator.hasNext()) {
-            resultList.add(getName(prefixIterator.next()) + " in " + sortDirectionIterator.next().toString());
-        }
-
-        return StringUtil.joinListToString(resultList, StringUtil.COMMA_DELIMITER);
-    }
-
     /**
-     * {@see thenCompareByAttribute}
+     * @see #thenCompareByAttribute(Prefix, SortDirection)
      */
     public SortByAttribute thenCompareByAttribute(Prefix prefix) {
         return this.thenCompareByAttribute(prefix, SortDirection.SORT_ASCENDING);
@@ -82,5 +70,32 @@ public class SortByAttribute implements Comparator<Client> {
             result = compareFunction.apply(a, b);
         }
         return result;
+    }
+
+    @Override
+    public String toString() {
+        Iterator<Prefix> prefixIterator = this.prefixList.listIterator();
+        Iterator<SortDirection> sortDirectionIterator = this.sortDirectionList.iterator();
+        List<String> resultList = new ArrayList<>();
+        while (prefixIterator.hasNext() && sortDirectionIterator.hasNext()) {
+            resultList.add(getName(prefixIterator.next()) + " in " + sortDirectionIterator.next().toString());
+        }
+
+        return StringUtil.joinListToString(resultList, StringUtil.COMMA_DELIMITER);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+
+        if (!(o instanceof SortByAttribute)) {
+            return false;
+        }
+
+        SortByAttribute otherSorter = (SortByAttribute) o;
+        return this.prefixList.equals(otherSorter.prefixList)
+                && this.sortDirectionList.equals(otherSorter.sortDirectionList);
     }
 }

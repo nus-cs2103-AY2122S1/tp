@@ -1,37 +1,22 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.commons.mapper.PrefixMapper.parseAndEditSetDefaultFunction;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLIENTID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CURRENTPLAN;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DISPOSABLEINCOME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_LASTMET;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXTMEETING;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_RISKAPPETITE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.allPrefixLess;
 import static seedu.address.logic.parser.CliSyntax.allPrefixesPresent;
 
+import java.util.Optional;
 import java.util.Set;
-import java.util.function.Function;
+import java.util.function.BiConsumer;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
-import seedu.address.model.client.Address;
-import seedu.address.model.client.Client;
-import seedu.address.model.client.ClientId;
-import seedu.address.model.client.CurrentPlan;
-import seedu.address.model.client.DisposableIncome;
-import seedu.address.model.client.Email;
-import seedu.address.model.client.LastMet;
-import seedu.address.model.client.Name;
-import seedu.address.model.client.NextMeeting;
-import seedu.address.model.client.Phone;
-import seedu.address.model.client.RiskAppetite;
+import seedu.address.model.client.Client.EditClientDescriptor;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -58,26 +43,18 @@ public class AddCommandParser implements Parser<AddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
-        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).orElse(Name.DEFAULT_VALUE));
-        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).orElse(Email.DEFAULT_VALUE));
-        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).orElse(Phone.DEFAULT_VALUE));
-        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).orElse(Address.DEFAULT_VALUE));
-        RiskAppetite riskAppetite = ParserUtil.parseRiskAppetite(argMultimap
-            .getValue(PREFIX_RISKAPPETITE).orElse(RiskAppetite.DEFAULT_VALUE));
-        DisposableIncome disposableIncome = ParserUtil.parseDisposableIncome(argMultimap
-            .getValue(PREFIX_DISPOSABLEINCOME).orElse(DisposableIncome.DEFAULT_VALUE));
-        LastMet lastMet = ParserUtil.parseLastMet(argMultimap.getValue(PREFIX_LASTMET).orElse(LastMet.DEFAULT_VALUE));
-        CurrentPlan currentPlan = ParserUtil.parseCurrentPlan(argMultimap.getValue(PREFIX_CURRENTPLAN)
-            .orElse(CurrentPlan.DEFAULT_VALUE));
-        NextMeeting nextMeeting = ParserUtil.parseNextMeeting(argMultimap.getValue(PREFIX_NEXTMEETING)
-            .orElse(NextMeeting.NO_NEXT_MEETING));
-        nextMeeting.setWithWho(name);
+        EditClientDescriptor editClientDescriptor = new EditClientDescriptor();
+
+        for (Prefix prefix: allPrefixLess(PREFIX_CLIENTID, PREFIX_TAG)) {
+            BiConsumer<EditClientDescriptor, Optional<String>> parseEditSetDefaultFunction =
+                    parseAndEditSetDefaultFunction(prefix);
+            Optional<String> attributeString = argMultimap.getValue(prefix);
+            parseEditSetDefaultFunction.accept(editClientDescriptor, attributeString);
+        }
+
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG), model);
+        editClientDescriptor.setTags(tagList);
 
-
-        Function<ClientId, Client> client = clientId -> new Client(clientId, name, phone, email, address, riskAppetite,
-            disposableIncome, currentPlan, lastMet, nextMeeting, tagList);
-
-        return new AddCommand(client);
+        return new AddCommand(editClientDescriptor);
     }
 }

@@ -18,8 +18,8 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.EditCommand.EditClientDescriptor;
 import seedu.address.model.client.Client;
+import seedu.address.model.client.Client.EditClientDescriptor;
 import seedu.address.model.client.ClientId;
 import seedu.address.model.client.SortByAttribute;
 import seedu.address.model.tag.Tag;
@@ -170,12 +170,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasClient(Client client) {
-        requireNonNull(client);
-        return addressBook.hasClient(client);
-    }
-
-    @Override
     public boolean hasClientId(ClientId clientId) {
         requireNonNull(clientId);
         return addressBook.hasClientId(clientId);
@@ -190,6 +184,19 @@ public class ModelManager implements Model {
     public void addClient(Client client) {
         addressBook.addClient(client);
         updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
+    }
+
+    @Override
+    public Client createClient(EditClientDescriptor clientDescriptor) {
+        ClientId clientId = new ClientId(addressBook.getClientCounter());
+        Client client = clientDescriptor.createClient(clientId);
+        if (addressBook.hasClient(client)) {
+            return null;
+        }
+
+        addressBook.addClient(client);
+        addressBook.incrementClientCounter();
+        return client;
     }
 
     @Override
@@ -208,11 +215,6 @@ public class ModelManager implements Model {
     public boolean hasTagName(String tagName) {
         requireNonNull(tagName);
         return addressBook.hasTagName(tagName);
-    }
-
-    @Override
-    public void addTag(Tag tag) {
-        addressBook.addTag(tag);
     }
 
     @Override

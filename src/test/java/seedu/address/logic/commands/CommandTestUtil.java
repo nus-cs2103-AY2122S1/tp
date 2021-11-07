@@ -20,6 +20,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.client.Client;
+import seedu.address.model.client.Client.EditClientDescriptor;
 import seedu.address.testutil.EditClientDescriptorBuilder;
 
 /**
@@ -88,8 +89,8 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditClientDescriptor DESC_AMY;
-    public static final EditCommand.EditClientDescriptor DESC_BOB;
+    public static final EditClientDescriptor DESC_AMY;
+    public static final EditClientDescriptor DESC_BOB;
 
     static {
         DESC_AMY = new EditClientDescriptorBuilder().withName(VALID_NAME_AMY)

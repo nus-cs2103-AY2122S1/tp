@@ -19,34 +19,12 @@ import java.util.Locale;
  * Helper functions for handling strings.
  */
 public class StringUtil {
-    public static final String DATE_VALIDATION_REGEX =
-        "^([1-2][0-9]|3[0-1]|0?[1-9])[-]([1][0-2]|0?[1-9])[-](\\d{4})";
+    public static final String DATE_VALIDATION_REGEX = "^([1-2][0-9]|3[0-1]|0?[1-9])[-]([1][0-2]|0?[1-9])[-](\\d{4})";
     public static final String TIME_VALIDATION_REGEX =
         "([01]?[0-9]|2[0-3]):[0-5][0-9]";
     public static final String CLIENT_DELIMITER = "\n";
     public static final String COMMA_DELIMITER = ", ";
     public static final String JSON_FILE_PREFIX = ".json";
-
-
-    /**
-     * Returns true if the {@code string1} is equals to {@code string2}, ignoring case.
-     * <br>examples:<pre>
-     *       isEqualIgnoreCase("ABc def", "abc def") == true
-     *       isEqualIgnoreCase("ABc def", "ABC DEF") == true
-     *       isEqualIgnoreCase("ABc def", "ABc") == false //not equal
-     *       </pre>
-     *
-     * @param string1 cannot be null
-     * @param string2 cannot be null
-     */
-    public static boolean isEqualIgnoreCase(String string1, String string2) {
-        requireNonNull(string1);
-        requireNonNull(string2);
-
-        String preppedWord = string1;
-
-        return string1.toLowerCase().equals(string2.toLowerCase());
-    }
 
     /**
      * Returns true if the {@code sentence} contains the {@code word}.
