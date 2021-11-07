@@ -339,6 +339,7 @@ Do take note that the format is slightly different compared to the other feature
 
 Format: `FORMAT: find [c/] [t/] [d/] [m/] [tag/] [y/] [s/] KEYWORDS`
 * `KEYWORDS` refers to the words that the application will search the modules by.
+* `KEYWORDS` cannot be left blank.
 * If no optional parameters are entered, the application will search within all [components](#33-module-explanation) of the modules
   for matching `KEYWORDS`.
 * If optional parameters are entered, the application will search within the modules'

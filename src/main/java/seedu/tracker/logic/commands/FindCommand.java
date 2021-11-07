@@ -18,6 +18,8 @@ public class FindCommand extends Command {
         + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
         + "Parameters: [c/] [t/] [d/] [m/] [tag/] [y/] [s/] KEYWORDS\n"
         + "Example: " + COMMAND_WORD + " c/ m/ CS2103t";
+    public static final String MESSAGE_EMPTY_KEYWORD = "KEYWORDS cannot be blank."
+        + "Example: " + COMMAND_WORD + " c/ m/ CS2103t";
 
     private final ModuleContainsKeywordsPredicate predicate;
 
