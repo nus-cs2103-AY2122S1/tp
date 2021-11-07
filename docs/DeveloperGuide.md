@@ -127,7 +127,7 @@ How the parsing works:
 ### 3.4 Model component
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-W13-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="600" />
+<img src="images/ModelClassDiagram.png" width="800" />
 
 
 The `Model` component is made up of the following subpackages,
@@ -187,11 +187,11 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 ## **4. Implementation**
 
-* [Delete Feature](#delete-feature)
-* [Link feature](#link-feature)
-* [Unlink feature](#unlink-feature)
-* [Schedule Feature](#schedule-feature)
-* [Get Feature](#get-feature)
+* [Delete Feature](#4.1-delete-feature)
+* [Link feature](#4.2-link-feature)
+* [Unlink feature](#4.3-unlink-feature)
+* [Schedule Feature](#4.4-schedule-feature)
+* [Get Feature](#4.5-get-feature)
 
 ### 4.1 Delete Feature
 
@@ -332,7 +332,7 @@ The implementation of `Model#unlinkFriend()` is as follows:
 
 When called by the `MainWindow#executeCommand`, the `LogicManager#execute` method proceeds to call the `MainParser#parseCommand` method, which returns a `Command` object based on the workflow shown in the activity diagram below.
 
-<img src="images/GetCommandWorkflowActivityDiagram.png" width="500">
+<img src="images/GetCommandWorkflowActivityDiagram.png" width="1000">
 <br><center><ins>Image: Activity diagram showing the workflow of a '--get' command.</ins></center>
 
 The `--get` command is parsed using the following classes:
@@ -360,7 +360,7 @@ After the `LogicManager#execute` receives a `GetFriendCommand` or `GetGameComman
 
 An example execution of a `GetFriendCommand` is shown in the sequence diagram below.
 
-<img src="images/GetSequenceDiagram.png" width="600">
+<img src="images/GetSequenceDiagram.png" width="1000">
 <br><center><ins>Image: Sequence diagram showing the interaction between various entities<br>of 'Logic' and 'Model' component during the execution of a 'friend --get FRIEND_ID' command.</ins></center>
 
 `GetGameCommand` is executed similarly, but it deals with games and game lists.
