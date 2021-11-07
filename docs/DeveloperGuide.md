@@ -591,7 +591,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to <span style="text-decoration: underline">list members (UC03)</span>
-   or <span style="text-decoration: underline">search for members (UC04)</span>.
+   or <span style="text-decoration: underline">search for members (UC04)</span>
 2. User requests to delete a specific member in the list
 3. SportsPA deletes the member
 
@@ -615,8 +615,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to <span style="text-decoration: underline">list members (UC03)</span>
    or <span style="text-decoration: underline">search for members (UC04)</span>
-2. User requests to edit the details of specific member in the list.
-3. SportsPA edits the details of the member.
+2. User requests to edit the details of specific member in the list
+3. SportsPA edits the details of the member
 
    Use case ends.
 
@@ -642,8 +642,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to sort all the members by a field.
-2. SportsPA sorts the members accordingly.
+1. User requests to sort all the members by a field
+2. SportsPA sorts the members accordingly
     
     Use case ends.
 
@@ -660,9 +660,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to <span style="text-decoration: underline">list members (UC03)</span>
-   or <span style="text-decoration: underline">search for members (UC04)</span>.
-2. User requests to set availability of specific member(s) in the list.
-3. SportsPA updates the availability of the given member(s).
+   or <span style="text-decoration: underline">search for members (UC04)</span>
+2. User requests to set availability of specific member(s) in the list
+3. SportsPA updates the availability of the given member(s)
 
    Use case ends.
 
@@ -672,7 +672,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 2a. The given index/indices is/are invalid
+* 2a. One or more of the given member index is invalid
 
     * 2a1. SportsPA shows an error message
 
@@ -689,9 +689,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to <span style="text-decoration: underline">list members (UC03)</span>
-   or <span style="text-decoration: underline">search for members (UC04)</span>.
-2. User requests to mark the attendance of specific member(s) in the list.
-3. SportsPA marks the attendance of the specified member(s).
+   or <span style="text-decoration: underline">search for members (UC04)</span>
+2. User requests to mark the attendance of specific member(s) in the list
+3. SportsPA marks the attendance of the specified member(s)
 
     Use case ends.
 
@@ -701,7 +701,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 2a. The index/indices given is/are invalid.
+* 2a. The index/indices given is/are invalid
 
     * 2a1. SportsPA shows an error message
   
@@ -814,8 +814,8 @@ This use case is similar to that of <span style="text-decoration: underline">mar
 
 1. User requests to <span style="text-decoration: underline">list facilities (UC14)</span>
    or <span style="text-decoration: underline">search for facilities (UC15)</span>
-2. User requests to edit the details of specific facility in the list.
-3. SportsPA edits the details of the facility.
+2. User requests to edit the details of specific facility in the list
+3. SportsPA edits the details of the facility
         
     Use case ends.
 
@@ -841,7 +841,7 @@ This use case is similar to that of <span style="text-decoration: underline">mar
 
 **MSS**
 
-1. User requests to split available members into the facilities
+1. User requests to split available members into the facilities on a specified day
 2. SportsPA shows the allocation results
 
    Use case ends.
@@ -854,9 +854,9 @@ This use case is similar to that of <span style="text-decoration: underline">mar
 
       Use case ends.
 
-* 1a. SportsPA detects no available members
+* 1b. SportsPA detects no available members
 
-    * 1a1. SportsPA shows an error message
+    * 1b1. SportsPA shows an error message
 
       Use case ends.
 
@@ -868,20 +868,26 @@ This use case is similar to that of <span style="text-decoration: underline">mar
    or <span style="text-decoration: underline">search for members (UC04)</span>
 2. User requests to <span style="text-decoration: underline">list facilities (UC14)</span>
    or <span style="text-decoration: underline">search for facilities (UC15)</span>
-3. User requests to deallocate a specified member from a specified facility.
-4. SportsPA deallocates the specified member from the specified facility.
+3. User requests to deallocate a specified member from a specified facility on a specified day.
+4. SportsPA deallocates the specified member from the specified facility on a specified day.
 
     Use case ends.
 
 **Extensions**
 
-* 3a. The given index/indices is/are invalid
+* 3a. Any of the given indices are invalid
 
     * 3a1. SportsPA shows an error message
       
       Use case resumes from step 3.
-  
-* 3b. The specified member is not allocated to the specified facility.
+
+* 3b. The given day is invalid
+
+    * 3b1. SportsPA shows an error message
+
+      Use case resumes from step 3.
+
+* 3c. The specified member is not allocated to the specified facility
 
     * 3b1. SportsPA shows an error message
 
@@ -894,30 +900,36 @@ This use case is similar to that of <span style="text-decoration: underline">mar
    or <span style="text-decoration: underline">search for members (UC04)</span>
 2. User requests to <span style="text-decoration: underline">list facilities (UC14)</span>
    or <span style="text-decoration: underline">search for facilities (UC15)</span>
-3. User requests to allocate a specified member to a specified facility.
-4. SportsPA allocates the specified member to the specified facility.
+3. User requests to allocate a specified member to a specified facility on a specified day
+4. SportsPA allocates the specified member to the specified facility on a specified day
 
     Use case ends.
 
 **Extensions**
 
-* 3a. The given index/indices is/are invalid
+* 3a. Any of the given indices are invalid
 
     * 3a1. SportsPA shows an error message
 
       Use case resumes from step 3.
 
-* 3b. The specified member is already allocated to the specified facility.
+* 3b. The given day is invalid
 
     * 3b1. SportsPA shows an error message
+
+      Use case resumes from step 3.
+
+* 3c. The specified member is already allocated to the specified facility.
+
+    * 3c1. SportsPA shows an error message
 
       Use case resumes from step 3.
     
 **Use case: UC21 - Export facility details and member allocations**
 
 **MSS**
-1. User requests to export facility details and member allocations.
-2. SportsPA exports the facility details and member allocations to a CSV file.
+1. User requests to export facility details and member allocations
+2. SportsPA exports the facility details and member allocations to a CSV file
 
    Use case ends.
 
@@ -1046,7 +1058,7 @@ testers are expected to do more *exploratory* testing.
 ### Setting member availability
 1. Set the availability of one or more members 
     
-    1. Prerequisites: List all members using the `listf` command. One or more members ar ein the list.
+    1. Prerequisites: List all members using the `listf` command. One or more members are in the list.
    
     2. Test case: `setm 1 2 3 d/1 2`<br>
         Expected: The availability of the first 3 members are changed to Monday and Tuesday. The names of members
@@ -1104,11 +1116,11 @@ The test cases are similar to those of [Deleting a member](#deleting-a-member).
 
 ### Splitting members into facilities
 
-1. Allocating all the members into the allocation lists of the facilities.
+1. Allocating all the members into the allocation maps of the facilities on a given day.
 
     1. Test case: `split 1`<br>
-       Expected: All members that have Monday as one of their available days will be allocated to facility. Their names
-       will be shown in the facility list under Monday.
+       Expected: All members that have Monday as one of their available days will be allocated to a facility if 
+       there is sufficient capacity. Their names will be shown in the facilities' allocation maps under Monday.
    
     2. Test case: `split`<br>
        Expected: No members are allocated to any facility. Error details are shown in the status message.
