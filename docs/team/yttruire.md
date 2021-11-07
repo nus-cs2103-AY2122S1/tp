@@ -5,8 +5,7 @@ title: Teo Zhi Hao's Project Portfolio Page
 
 ### Project: CSBook
 
-CSBook is a desktop application for Computer Science (CS) Teaching Assistants (TAs) to manage the students that they teach. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
-
+CSBook is a desktop application for Computer Science (CS) Teaching Assistants (TAs) to manage their students. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 15 kLoC.
 Given below are my contributions to the project.
 
 * **New Feature**: Added the ability to delete groups and their associated students from CSBook
