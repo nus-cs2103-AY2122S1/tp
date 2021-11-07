@@ -1331,7 +1331,8 @@ testers are expected to do more *exploratory* testing.
 
 3. Adding a new student with any incorrect input
 
-    * Expected: No student is added. An alert message corresponding to the wrongly entered parameter will be shown in the message box to remind the user of the correct command format. <br>
+    * Test case: `add n/Jane Doe p/222 e/jd4000@gmail.com a/Jane street, block 500, #02-02 g/S5`<br>
+    Expected: No student is added. An alert message corresponding to the wrongly entered parameter (in this case, parent contact number) will be shown in the message box to remind the user of the correct command format. <br>
       _Note: Only the alert message corresponds to the first encountered incorrect parameter will be shown. User is expected to correct the input parameters one by one._
 
 #### Deleting a student
@@ -1473,18 +1474,18 @@ testers are expected to do more *exploratory* testing.
 1. Enrolling a `Student` into a `Lesson`, while the students and lessons are being shown
 
   * Prerequisites: 
-    * Multiple `Students` and `Lessons` shown in the list of students and lessons. `Students` must not currently be enrolled in the `Lesson` the user wishes to enroll the student in.
-    * `Student` must have the same `grade` as the `Lesson` to be enrolled in
-    * `Student` must not currently be enrolled in `Lesson` of interest
-    * `Student` must not have any existing classes that clash with the duration in `Lesson`
-    * `Student` must currently be enrolled in fewer than `10` lessons
-    * `Lesson` must currently have fewer than `15` students enrolled inside the lesson
-    * Should any of the above conditions not be met, the `Student` will not be able to be enrolled in the `Lesson` of interest
+      * Multiple `Students` and `Lessons` shown in the list of students and lessons. `Students` must not currently be enrolled in the `Lesson` the user wishes to enroll the student in.
+      * `Student` must have the same `grade` as the `Lesson` to be enrolled in
+      * `Student` must not currently be enrolled in `Lesson` of interest
+      * `Student` must not have any existing classes that clash with the duration in `Lesson`
+      * `Student` must currently be enrolled in fewer than `10` lessons
+      * `Lesson` must currently have fewer than `15` students enrolled inside the lesson
+      * Should any of the above conditions not be met, the `Student` will not be able to be enrolled in the `Lesson` of interest
 
   * Note: 
-    * We will be using index `2` to conduct manual testing for positive tests, but feel free to test with any valid index (any positive integer shown in the student and lesson lists).
-    * In this case, we will be using the sample data given when loading up **TuitiONE** for the first time (delete tuitione.json file if it is not your first time). 
-    * The `Student` of index `2` (Bernice Yu of grade P4) will be enrolled into `Lesson` of `index` 2 (Math-P4-Wed-1800).
+      * We will be using index `2` to conduct manual testing for positive tests, but feel free to test with any valid index (any positive integer shown in the student and lesson lists).
+      * In this case, we will be using the sample data given when loading up **TuitiONE** for the first time (delete tuitione.json file if it is not your first time). 
+      * The `Student` of index `2` (Bernice Yu of grade P4) will be enrolled into `Lesson` of `index` 2 (Math-P4-Wed-1800).
 
   * Test case: `enroll 2 l/2`<br>
     Expected: `Student` of index `2` is enrolled in `Lesson` of index `2` . Details of the student and lesson enrolled in shown in the status message.
@@ -1540,28 +1541,32 @@ message showing that `No students found.` will also be displayed in the message 
 
 #### Adding a lesson
 
-1. Adding a lesson with all correct parameters 
+1. Adding a new lesson
 
     * Prerequisites: All parameters are entered correctly as according to the DG's [Add Lesson Feature](#add-lesson-feature)
 and the lesson to be added does not exist in TuitiONE yet.
 
     * Test case: `add-l s/Science g/P2 d/Wed t/1200 c/10.50`<br>
-        Expected: A new lesson `Science-P2-Wed-1200` will be added into the lesson list. Lesson list will be updated
+      Expected: A new lesson `Science-P2-Wed-1200` will be added into the lesson list. Lesson list will be updated
 while there is no change to the student list. An update message will also be shown in the message box to inform the user
 that a new lesson is successfully added.
 
-1. Incorrect addition of a lesson due to duplication
+    * Other incorrect add lesson commands to try: use the `add-l` command while missing out one of the following required fields (`s/`, `g/`, `d/`, `t/` and `c/`). <br>
+      Expected: No lesson is added. Proper command format is shown in the status message.
+
+1. Addition of a duplicate lesson
+
+    * Prerequisites: The lesson to be added already exists in TuitiONE. Follow the instructions from 'Adding a new lesson' above  if the lesson has not been added.
 
     * Test case: `add-l s/Science g/P2 d/Wed t/1200 c/10.50`<br>
-        Expected: Addition of the particular lesson will not be applied to TuitiONE. An alert message will be shown in 
+        Expected: The lesson will not be added. An alert message will be shown in 
 the message box to inform the user that the lesson already exists in TuitiONE.
 
-1. Incorrect addition of a lesson by passing in any incorrect input
+1. Addition of a lesson by passing in any incorrect input
 
-    * Expected: Addition of the particular lesson will not be applied to TuitiONE. An alert message corresponding to the 
-wrongly entered parameter will be shown in the message box to remind the user of the correct input parameter 
-format.<br>_Note: Only the alert message corresponding to the first encountered incorrect parameter will be shown. User is
-expected to correct the input parameters one by one._
+    * Test case: `add-l s/Math g/A1 d/Fri t/1500 c/10.50`<br>
+    Expected: No lesson is added. An alert message corresponding to the wrongly entered parameter (in this case, grade) will be shown in the message box to remind the user of the correct command format. <br>
+      _Note: Only the alert message corresponds to the first encountered incorrect parameter will be shown. User is expected to correct the input parameters one by one._
 
 
 #### Deleting a lesson
@@ -1587,8 +1592,7 @@ expected to correct the input parameters one by one._
 1. View a lesson's roster using `LESSON_INDEX` while all students and lessons are being shown
 
     * Prerequisites: List all students and lessons using the `list` command. Multiple `Students` and `Lessons` in the 
-list with some `Students` already enrolled in some of the `Lessons`. For `LESSON_INDEX` used, it is within the number
-of existing `Lessons` found in TuitiONE.
+list with some `Students` already enrolled in some of the `Lessons`.
 
     * Test case: `roster 2`<br>
         Expected: Only students who are enrolled in the lesson identified by the lesson index of `2` will be shown in 
@@ -1596,14 +1600,14 @@ the student list. The lesson list will be updated to show the lesson identified 
 or lesson shown if there is no student enrolled in the lesson identified by the lesson index of `2`. An update message
 showing the number and the name of the students who are enrolled in the lesson will also be displayed in the message box.
 
+    * Test case: `roster 100` (passing in a a `LESSON_INDEX` that is larger than the number of `LESSONS`)<br> 
+      Expected: No roster will be applied. An error message will be shown in the message box, warning the user to only
+use a valid `LESSON_INDEX`.
+
     * Incorrect roster commands to try: `roster`, `roster a`, `roster -`, 
 `roster LESSON_CODE`<br>
         Expected: No roster will be applied. An alert message will be shown in the message box, warning the user to
 follow the command format by using `LESSON_INDEX`.
-
-    * Other incorrect roster commands to try: `roster 100` (passing in a a `LESSON_INDEX` that is larger than the number of `LESSONS`)<br> 
-        Expected: No roster will be applied. An error message will be shown in the message box, warning the user to only
-use valid `LESSON_INDEX`.
 
 
 #### Filtering
