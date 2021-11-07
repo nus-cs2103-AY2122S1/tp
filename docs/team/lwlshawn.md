@@ -90,13 +90,13 @@ Following this structure and outline, we had a `task` class, stored in a `Unique
 `order` class, stored in a `UniqueOrderList` stored in a `OrderBook`. Below is an updated model diagram reflecting these
 changes:
 
-![`Updated Model Diagram`](images/ModelClassDiagram.png)
+![`Updated Model Diagram`](../images/ModelClassDiagram.png)
 
 Similar to the `Person` class, the `Task` and `Order` classes have fields, as seen here:
 
-![`Order Class Diagram`](images/OrderClassDiagram.png)
+![`Order Class Diagram`](../images/OrderClassDiagram.png)
 
-![`Task Class Diagram`](images/TaskClassDiagram.png))
+![`Task Class Diagram`](../images/TaskClassDiagram.png))
 
 These fields satisfy the following conditions:
 * Both:
