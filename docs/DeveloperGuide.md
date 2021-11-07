@@ -110,7 +110,7 @@ Note that the components under `MainWindow` have been omitted for simplicity and
 <div style="text-align: center">
     <em>Figure 5.1: Overview of Ui components</em>
 </div>
-
+<br>
 1. Firstly, `MainWindow` interacts with the `Logic` component to determine which data to display to the user.
 2. Secondly, `MainWindow` conducts file operations on the Ui through a `FileManager`.
    For instance, the `FileManager` handles situations where the user is required to select files or directories.
@@ -129,7 +129,7 @@ the commonalities between classes that represent parts of the visible GUI. The f
 <div style="text-align: center">
     <em>Figure 5.2: MainWindow Ui components</em>
 </div>
-
+<br>
 Note that the `UI` component uses the JavaFx UI framework.
 
 - The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder.
