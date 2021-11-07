@@ -161,7 +161,7 @@ Scroll down to the bottom and click on `recruitIn.jar`.
 6. Aside from the commands shown in the sample workflow above, you may also find these useful:
 
     <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-    The commands given below are not related to the above sample workflow and are given strictly as example usages.
+    The commands given below are not related to the sample workflow given above and are given strictly as example usages.
     </div>
    
       * **`delete`**`2` : Deletes the second applicant in your currently displayed list.
