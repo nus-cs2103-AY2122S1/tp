@@ -31,7 +31,6 @@ public class DoneCommandTest {
 
         // same value -> returns true
         DoneCommand firstCopy = new DoneCommand(firstIndex);
-        System.out.println(firstCopy);
         assertTrue(firstDoneCommand.equals(firstCopy));
 
         // different type -> returns false
