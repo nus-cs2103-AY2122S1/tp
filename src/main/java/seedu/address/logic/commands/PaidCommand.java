@@ -151,8 +151,7 @@ public class PaidCommand extends UndoableCommand {
      * @return A set of updated lessons with the lesson edited.
      * @throws CommandException If the edited lesson results in a clash.
      */
-    private Set<Lesson> createUpdatedLessons(List<Lesson> lessonList, Lesson paidLesson, Lesson lessonToPay)
-            throws CommandException {
+    private Set<Lesson> createUpdatedLessons(List<Lesson> lessonList, Lesson paidLesson, Lesson lessonToPay) {
         lessonList.remove(lessonToPay);
         lessonList.add(paidLesson);
         Set<Lesson> updatedLessonSet = new TreeSet<>(lessonList);
