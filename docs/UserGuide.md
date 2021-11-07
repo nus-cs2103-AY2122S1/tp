@@ -168,7 +168,7 @@ Format: `add n/NAME e/EMAIL m/MODULE_CODE [LESSON_CODE(S)] [p/PHONE] [h/TELEGRAM
 * Name, email and module code are **compulsory**
 * Lesson code, phone number, telegram handle and remarks are **optional**
 * You can add multiple module codes, and can have multiple lesson codes for a single module code
-* You will not be able to add a person with the same email/phone number/telegram handle
+* You will not be able to add a person with the same email/phone number/telegram handle as another existing contact in contHACKS
 * If you add multiple module codes that are the same, only the first one would be considered
 
 <div markdown="span" class="alert alert-primary">:information_source: **Note:**
