@@ -47,7 +47,7 @@ public class ShowCommandTest {
     @Test
     public void execute_phonePrefix_phonesListed() {
 
-        StringBuilder expectedMessageSB = new StringBuilder("Here are all the contact numbers present:\n");
+        StringBuilder expectedMessageSB = new StringBuilder("Here are all the phone numbers present:\n");
         List<String> phones = getTypicalPersons().stream().map(x -> x.getPhone().toString())
                 .distinct().sorted().collect(Collectors.toList());
         for (String name: phones) {
@@ -173,7 +173,7 @@ public class ShowCommandTest {
 
         StringBuilder expectedMessageSB = new StringBuilder("Here are all the tags present:\n");
         List<String> tags = getTypicalPersons().stream()
-                .flatMap(person -> person.getTags().stream().map(Tag::toString))
+                .flatMap(person -> person.getTags().stream().map(Tag::toShowString))
                 .distinct().sorted().collect(Collectors.toList());
         for (String tag: tags) {
             expectedMessageSB.append(tag);
