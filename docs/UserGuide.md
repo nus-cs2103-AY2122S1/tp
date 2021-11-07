@@ -255,7 +255,7 @@ find <TAG> [MORE_TAGS]
 
 * Searches for contacts with matching tags.
 * Matches students with the **exact** tag name. e.g. `find t/friend` will only display student contacts with the tag `friend` and not `friends`.
-* The search **is case-insensitive**. e.g `find t/Friends` will match contacts with the tag `friends` too.
+* The search **is case-insensitive**. e.g. `find t/Friends` will match contacts with the tag `friends` too.
 
 Examples:
 
@@ -271,8 +271,8 @@ find te/<TELEGRAM_HANDLE> [MORE_TELEGRAM_HANDLES]
 
 
 * Searches for a student contact by telegram handle.
-* Matches student contacts with the exact Telegram handle or Telegram handle that contain the keyword as a substring. e.g `find te/Al` will display student contacts with the Telegram handles `al_x1` and `randall_xo`.
-* The search **is case-insensitive**. e.g `find te/Al` will find the contact with the Telegram handle `alex` too.
+* Matches student contacts with the exact Telegram handle or Telegram handle that contain the keyword as a substring. e.g. `find te/Al` will display student contacts with the Telegram handles `al_x1` and `randall_xo`.
+* The search **is case-insensitive**. e.g. `find te/Al` will find the contact with the Telegram handle `alex` too.
 
 Examples:
 
@@ -287,8 +287,8 @@ find g/GITHUB_USERNAME [MORE_GITHUB_USERNAMES]
 ```
 
 * Searches for a student contact by GitHub username.
-* Matches student contacts with the exact GitHub username or GitHub username that contain the keyword as a substring. e.g `find g/ai` will display student contacts with the GitHub usernames `ai-coder` and `kaira1208`.
-* The search **is case-insensitive**. e.g `find g/Al` will find the contact with the github username `Alex`.
+* Matches student contacts with the exact GitHub username or GitHub username that contain the keyword as a substring. e.g. `find g/ai` will display student contacts with the GitHub usernames `ai-coder` and `kaira1208`.
+* The search **is case-insensitive**. e.g. `find g/Al` will find the contact with the GitHub username `Alex`.
 
 Examples:
 
@@ -319,7 +319,7 @@ On clicking a student, you can view the similarity score and the languages you h
 ### Show a Student Contact - `show`
 
 Shows detailed information of a Student Contact. This can be done using the name 
-of the contact, github username, telegram id or the index. It shows the student with the corresponding detail containing the keyword.
+of the contact, GitHub username, telegram id or the index. It shows the student with the corresponding detail containing the keyword.
 
 <div markdown="span" class="alert alert-primary">
 
