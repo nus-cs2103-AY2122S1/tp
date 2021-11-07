@@ -47,6 +47,7 @@ to quickly navigate to the command of your choice.
 
 [FAQ](#faq)<br>
 [Command Summary](#command-summary)
+[Flag summary](#flag-summary)
 
 ---
 
@@ -272,7 +273,7 @@ Format: `cat INDEX [-f KEYWORDS]`
 
 1. Displays the list of tasks attached to the person at the specified `INDEX`.
    * `INDEX` refers to the index number shown in the displayed person list.
-   * `INDEX` **must be a positive integer** 1, 2, 3, ...
+   * `INDEX` **must be a positive integer less than or equal to 2147483647:** 1, 2, 3, …​, 2147483647
 
    Examples:
 
@@ -288,7 +289,7 @@ Format: `cat INDEX [-f KEYWORDS]`
 
    Examples:
 
-   * Alex is the first person in the address book and has the tasks [Work, project meeting at NUS]. `cat 1 -f work` will display the task "work"
+   * Alex is the first person in the person list and has the tasks [Work, project meeting at NUS]. `cat 1 -f work` will display the task "work"
    * `cat 1 -f work` Displays the list of tasks attached to the 1st person that match the given keywords(s).
    ![result for `cat 1 -f work`](images/cat-fResult.png)
 
@@ -377,7 +378,7 @@ Example:
 
 ### Editing the data file
 
-* ContactSH data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+* ContactSH data are saved as a JSON file `[JAR file location]/data/contactsh.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, ContactSH will discard all data and start with an empty data file at the next run.
@@ -416,3 +417,23 @@ Action | Format, Examples
 **View Tasks** | `cat INDEX`<br>e.g.,`cat 4`<br><br>`cat -A`
 **View Reminder Days** | `reminder`
 **Set Reminder Days** | `reminder -s DAYS`<br>e.g., `reminder -s 21`
+
+## Flag summary
+
+Description | Flag | Input constraints
+------------|------|-------
+Name of Person | `-n` | Name should consist of alphanumeric characters and spaces only. <br>Cannot be blank.
+Phone number of Person | `-p` | Phone number should consist of numbers only. <br>Minimum 3 digits long
+Email of Person | `-e` | Email should be of format `local-part@domain`. <br>1) The local-part should only contain alphanumeric characters and these special characters, `+_.-`. <br>2) The domain is made up of domain labels seperated by `.`.<br>3) Each domain label must be at least 2 characters long, start and end with alphanumeric characters and can contain `-`.
+Address of Person | `-a` | Address can take any values, but must not be blank.
+Description of Person | `-d` | Description can take any values, but must not be more than 500 characters long.
+Label of Person | `-l` | Labels should consists of alphanumeric characters only. <br>Cannot be blank.
+Denotes if a Person is important | `-impt` | Input should be `true` or `false`, case of the words does not matter. 
+Task Index of the Task | `-ti` | Task Index should be a positive integer less than or equal to 2147483647: 1, 2, 3, …​, 2147483647.<br>
+Name of the Task | `-tn` | Task name should contain at least one non-whitespace character.
+Date of the Task | `-td` | Task date should follow the format: `YYYY-MM-DD`.
+Time of the Task | `-tt` | Task time should follow the format: `HH:MM`.
+Address of the Task | `-ta` | Task address should contain at least one non-whitespace character.
+Reverse flag for `sort` command | `-r` | `-r` flag does not take in any input and should be used as a standalone flag.
+All flag for `cat` command | `-A` | `-A` flag does not take in any input and should be used as a standalone flag.
+Number of days before a task is considered as due soon. | `-s` | Number of days should be a positive integer less than or equal to 2147483647: 1, 2, 3, …​, 2147483647.

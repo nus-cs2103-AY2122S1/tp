@@ -24,17 +24,12 @@ public class TaskTimeTest {
         assertThrows(NullPointerException.class, () -> TaskTime.isValidTaskTime(null));
 
         // invalid time
-        assertFalse(TaskTime.isValidTaskTime("30:59:30.12")); // invalid hour
-        assertFalse(TaskTime.isValidTaskTime("22:70:30.12")); // invalid minutes
-        assertFalse(TaskTime.isValidTaskTime("23:59:99.12")); // invalid seconds
-        assertFalse(TaskTime.isValidTaskTime("10:30:22.9999999999")); // invalid nanoseconds
+        assertFalse(TaskTime.isValidTaskTime("30:59")); // invalid hour
+        assertFalse(TaskTime.isValidTaskTime("22:70")); // invalid minutes
         assertFalse(TaskTime.isValidTaskTime("20-10-10")); // invalid seperators
-        assertFalse(TaskTime.isValidTaskTime("30:2:20")); // no padding for numbers
+        assertFalse(TaskTime.isValidTaskTime("30:2")); // no padding for numbers
 
         // valid time
-        assertTrue(TaskTime.isValidTaskTime("23:59:59")); // valid time
-        assertTrue(TaskTime.isValidTaskTime("23:59")); // Hours and Minutes only
-        assertTrue(TaskTime.isValidTaskTime("23:59:59")); // Hour, Min, Seconds
-        assertTrue(TaskTime.isValidTaskTime("23:59:59.999")); // Hour, Min, Sec, NanoSec
+        assertTrue(TaskTime.isValidTaskTime("23:59")); // valid time
     }
 }
