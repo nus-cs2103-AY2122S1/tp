@@ -10,6 +10,10 @@ Class "{abstract}\nUiPart" as UiPart
 Class UiManager
 Class MainWindow
 Class HelpWindow
+Class ProfileSetUpWindow
+Class UserProfileWindow
+Class WelcomeWindow
+Class UserProfileInMenuBar
 Class ResultDisplay
 Class PersonListPanel
 Class PersonCard
@@ -32,13 +36,17 @@ HiddenOutside ..> Ui
 
 UiManager .left.|> Ui
 UiManager -down-> "1" MainWindow
+UiManager -down-> "1" WelcomeWindow
 MainWindow *-down->  "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
 MainWindow *-down-> "1" PersonListPanel
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow *-down-> "1" TabPaneHeader
 MainWindow *-down-> "1" PersonDetails
-MainWindow --> "0..1" HelpWindow
+MainWindow *-down-> "1" HelpWindow
+MainWindow *-down-> "1" ProfileSetUpWindow
+MainWindow *-down-> "1" UserProfileWindow
+MainWindow *-down-> "1" UserProfileInMenuBar
 PersonListPanel --> "*" PersonCard
 PersonListPanel -left-> PersonDetails
 PersonListPanel -down-> TabPaneHeader
@@ -51,6 +59,10 @@ PersonListPanel --|> UiPart
 PersonCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
+ProfileSetUpWindow --|> UiPart
+UserProfileWindow --|> UiPart
+WelcomeWindow --|> UiPart
+UserProfileInMenuBar --|> UiPart
 PersonCard --|> UiPart
 PersonDetails --|> UiPart
 TabPaneHeader --|> UiPart

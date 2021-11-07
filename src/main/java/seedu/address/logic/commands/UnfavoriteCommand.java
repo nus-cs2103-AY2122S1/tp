@@ -11,21 +11,21 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 
-public class UnfavouriteCommand extends Command {
+public class UnfavoriteCommand extends Command {
     public static final String COMMAND_WORD = "unfav";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Unfavourites the person identified by the index number used in the displayed person list.\n"
+            + ": Unfavorites the person identified by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_UNFAVOURITE_PERSON_SUCCESS = " has been unfavourited successfully!";
+    public static final String MESSAGE_UNFAVORITE_PERSON_SUCCESS = " has been unfavorited successfully!";
 
-    public static final String MESSAGE_ALREADY_UNFAVOURITE_PERSON = " has already been unfavourited.";
+    public static final String MESSAGE_ALREADY_UNFAVORITE_PERSON = " has already been unfavorited.";
 
     private final Index targetIndex;
 
-    public UnfavouriteCommand(Index targetIndex) {
+    public UnfavoriteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -38,25 +38,26 @@ public class UnfavouriteCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToUnfavourite = lastShownList.get(targetIndex.getZeroBased());
-        if (!personToUnfavourite.isFavourite()) {
-            String errorMessage = personToUnfavourite.getName().toString()
-                    + MESSAGE_ALREADY_UNFAVOURITE_PERSON;
+        Person personToUnfavorite = lastShownList.get(targetIndex.getZeroBased());
+        if (!personToUnfavorite.isFavorite()) {
+            String errorMessage = personToUnfavorite.getName().toString()
+                    + MESSAGE_ALREADY_UNFAVORITE_PERSON;
             throw new CommandException(errorMessage);
         }
-        model.unfavouritePerson(personToUnfavourite);
+        model.unfavoritePerson(personToUnfavorite);
         if (model.getPersonListControl() != null) {
+            model.setSelectedIndex(model.getFilteredPersonList().indexOf(personToUnfavorite));
             model.getPersonListControl().refreshPersonListUI();
         }
-        String successMessage = personToUnfavourite.getName().toString()
-                + MESSAGE_UNFAVOURITE_PERSON_SUCCESS;
+        String successMessage = personToUnfavorite.getName().toString()
+                + MESSAGE_UNFAVORITE_PERSON_SUCCESS;
         return new CommandResult(successMessage);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof UnfavouriteCommand // instanceof handles nulls
-                && targetIndex.equals(((UnfavouriteCommand) other).targetIndex)); // state check
+                || (other instanceof UnfavoriteCommand // instanceof handles nulls
+                && targetIndex.equals(((UnfavoriteCommand) other).targetIndex)); // state check
     }
 }

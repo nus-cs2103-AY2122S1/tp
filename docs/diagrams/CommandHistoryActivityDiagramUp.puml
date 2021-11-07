@@ -1,0 +1,17 @@
+@startuml
+start
+:User presses UP;
+
+if ([Previous Command Exists])
+    :return previous command;
+elseif ([At Earliest Command])
+    :return same command;
+else ([No Command History])
+    :return empty string;
+endif
+
+stop
+
+@enduml
+
+

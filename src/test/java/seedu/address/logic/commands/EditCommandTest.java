@@ -10,9 +10,12 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.EditCommand.MESSAGE_EDIT_PROFILE_SUCCESS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
+import java.util.HashSet;
 
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +26,13 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Github;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Telegram;
 import seedu.address.model.util.UserProfileWatcher;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -144,6 +153,26 @@ public class EditCommandTest {
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    /**
+     * User edits profile correctly, i.e. leaves none of the fields to be edited blank
+     */
+    @Test
+    public void executeEditProfile_success() {
+        Model modelWithUserProfile = new ModelManager(getTypicalAddressBook(), new UserPrefs(), null);
+        Person userProfile = new Person(new Name("Dave"),
+                new Telegram("davex_1"), new Github("dave-codes"), new Phone(""), new Email(""), new Address(""),
+                new HashSet<>());
+        modelWithUserProfile.setUserProfile(userProfile);
+        Person editedUserProfile = new Person(new Name("Dave"),
+                new Telegram("daveyyy"), new Github("dave-codes"), new Phone(""), new Email(""), new Address(""),
+                new HashSet<>());
+        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), editedUserProfile);
+        EditCommand editCommand = new EditCommand(Index.fromOneBased(1),
+                new EditPersonDescriptorBuilder().withTelegram("daveyyy").withIsProfile(true).build());
+        assertCommandSuccess(editCommand, modelWithUserProfile, String.format(MESSAGE_EDIT_PROFILE_SUCCESS,
+                editedUserProfile), expectedModel);
     }
 
     @Test

@@ -118,8 +118,8 @@ public class MainWindow extends UiPart<Stage> {
         setWindowDefaultSize(logic.getGuiSettings());
 
         // Fix dimension based on screen resolution
-        primaryStage.setMinHeight(800);
-        primaryStage.setMaxHeight(800);
+        primaryStage.setMinHeight(850);
+        primaryStage.setMaxHeight(850);
         primaryStage.setMinWidth(950);
 
         // Configure all keyboard shortcuts
@@ -240,7 +240,7 @@ public class MainWindow extends UiPart<Stage> {
      * Opens the help window or focuses on it if it's already opened.
      */
     @FXML
-    public void handleHelp() {
+    public void handleHelpWindow() {
         if (!helpWindow.isShowing()) {
             helpWindow.show();
         } else {
@@ -370,7 +370,7 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (commandResult.isShowHelp()) {
-                handleHelp();
+                handleHelpWindow();
             }
 
             if (commandResult.isExit()) {

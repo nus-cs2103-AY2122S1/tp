@@ -13,8 +13,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.ScrollEvent;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
@@ -53,10 +51,10 @@ public class HelpWindow extends UiPart<Stage> {
     private static final String SHOW_CONTACT_FEATURE_COMMAND_V2 = "show <INDEX>";
     private static final String LIST_CONTACTS_FEATURE_NAME = "List all Contacts present";
     private static final String LIST_CONTACTS_FEATURE_COMMAND = "list";
-    private static final String FAVOURITE_CONTACT_FEATURE_NAME = "Mark a Contact as Favourite";
-    private static final String FAVOURITE_CONTACT_FEATURE_COMMAND = "fav <INDEX>";
-    private static final String UNFAVOURITE_CONTACT_FEATURE_NAME = "Mark a Contact as UnFavourite";
-    private static final String UNFAVOURITE_CONTACT_FEATURE_COMMAND = "unfav <INDEX>";
+    private static final String FAVORITE_CONTACT_FEATURE_NAME = "Mark a Contact as Favorite";
+    private static final String FAVORITE_CONTACT_FEATURE_COMMAND = "fav <INDEX>";
+    private static final String UNFAVORITE_CONTACT_FEATURE_NAME = "Mark a Contact as UnFavorite";
+    private static final String UNFAVORITE_CONTACT_FEATURE_COMMAND = "unfav <INDEX>";
     private static final String ADD_TAGS_FEATURE_NAME = "To Add Tag(s)";
     private static final String ADD_TAGS_FEATURE_COMMAND = "tag <INDEX> a/<TAG> [MORE_TAGS]";
     private static final String REMOVE_TAGS_FEATURE_NAME = "To Remove Tag(s)";
@@ -173,17 +171,6 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     /**
-     * Copies the URL to the user guide to the clipboard.
-     */
-    @FXML
-    private void copyUrl() {
-        final Clipboard clipboard = Clipboard.getSystemClipboard();
-        final ClipboardContent url = new ClipboardContent();
-        url.putString(USERGUIDE_URL);
-        clipboard.setContent(url);
-    }
-
-    /**
      * Sets up the items (commands) to be showed in the
      * help section table.
      */
@@ -215,10 +202,10 @@ public class HelpWindow extends UiPart<Stage> {
                 SHOW_CONTACT_FEATURE_COMMAND_V2);
         CommandDetails listAllContactsCommandDetails = new CommandDetails(LIST_CONTACTS_FEATURE_NAME,
                 LIST_CONTACTS_FEATURE_COMMAND);
-        CommandDetails favouriteContactCommandDetails = new CommandDetails(FAVOURITE_CONTACT_FEATURE_NAME,
-                FAVOURITE_CONTACT_FEATURE_COMMAND);
-        CommandDetails unFavouriteContactCommandDetails = new CommandDetails(UNFAVOURITE_CONTACT_FEATURE_NAME,
-                UNFAVOURITE_CONTACT_FEATURE_COMMAND);
+        CommandDetails favoriteContactCommandDetails = new CommandDetails(FAVORITE_CONTACT_FEATURE_NAME,
+                FAVORITE_CONTACT_FEATURE_COMMAND);
+        CommandDetails unFavoriteContactCommandDetails = new CommandDetails(UNFAVORITE_CONTACT_FEATURE_NAME,
+                UNFAVORITE_CONTACT_FEATURE_COMMAND);
         CommandDetails addTagsCommandDetails = new CommandDetails(ADD_TAGS_FEATURE_NAME, ADD_TAGS_FEATURE_COMMAND);
         CommandDetails removeTagsCommandDetails = new CommandDetails(REMOVE_TAGS_FEATURE_NAME,
                 REMOVE_TAGS_FEATURE_COMMAND);
@@ -249,8 +236,8 @@ public class HelpWindow extends UiPart<Stage> {
         helpSectionCommandDetails.add(showContactByNameCommandDetails);
         helpSectionCommandDetails.add(showContactByIndexCommandDetails);
         helpSectionCommandDetails.add(listAllContactsCommandDetails);
-        helpSectionCommandDetails.add(favouriteContactCommandDetails);
-        helpSectionCommandDetails.add(unFavouriteContactCommandDetails);
+        helpSectionCommandDetails.add(favoriteContactCommandDetails);
+        helpSectionCommandDetails.add(unFavoriteContactCommandDetails);
         helpSectionCommandDetails.add(addTagsCommandDetails);
         helpSectionCommandDetails.add(removeTagsCommandDetails);
         helpSectionCommandDetails.add(addAndRemoveTagsSimultaneouslyCommandDetails);

@@ -1,0 +1,107 @@
+@startuml
+!include style.puml
+
+box Ui UI_COLOR_T1
+participant ":UiManager" as UiManager UI_COLOR
+participant ":MainWindow" as MainWindow UI_COLOR
+participant ":HelpWindow" as HelpWindow UI_COLOR
+participant ":UiPart" as UiPart UI_COLOR
+end box
+
+box Logic LOGIC_COLOR_T1
+participant ":CommandDetails" as CommandDetails LOGIC_COLOR
+
+end box
+
+[-> UiManager : start()
+activate UiManager
+
+create MainWindow
+UiManager -> MainWindow : new MainWindow(primaryStage, logic)
+activate MainWindow
+
+create HelpWindow
+MainWindow -> HelpWindow : new HelpWindow()
+activate HelpWindow
+
+HelpWindow -> HelpWindow : setUpCommandDetails()
+activate HelpWindow
+
+create CommandDetails
+HelpWindow -> CommandDetails
+activate CommandDetails
+
+CommandDetails --> HelpWindow
+deactivate CommandDetails
+
+HelpWindow --> HelpWindow
+deactivate HelpWindow
+
+HelpWindow -> HelpWindow : setUpHelpTableView()
+activate HelpWindow
+
+HelpWindow --> HelpWindow
+deactivate HelpWindow
+
+HelpWindow --> MainWindow
+deactivate HelpWindow
+
+MainWindow --> UiManager
+deactivate MainWindow
+
+<-- UiManager
+deactivate UiManager
+
+opt When the User Would Like to see the Help Window
+
+-> MainWindow : handleHelp()
+activate MainWindow
+
+MainWindow -> HelpWindow : isShowing()
+activate HelpWindow
+
+HelpWindow --> MainWindow
+deactivate HelpWindow
+
+alt Showing
+
+MainWindow -> HelpWindow : focus()
+activate HelpWindow
+
+HelpWindow -> UiPart : getRoot()
+activate UiPart
+
+UiPart --> HelpWindow
+deactivate UiPart
+
+HelpWindow --> MainWindow
+deactivate HelpWindow
+
+else not Showing
+
+MainWindow -> HelpWindow : show()
+activate HelpWindow
+
+HelpWindow -> UiPart : getRoot()
+activate UiPart
+
+UiPart --> HelpWindow
+deactivate UiPart
+
+HelpWindow -> UiPart : getRoot()
+activate UiPart
+
+UiPart --> HelpWindow
+deactivate UiPart
+
+HelpWindow --> MainWindow
+deactivate HelpWindow
+
+end
+
+<-- MainWindow
+deactivate MainWindow
+
+end
+
+@enduml
