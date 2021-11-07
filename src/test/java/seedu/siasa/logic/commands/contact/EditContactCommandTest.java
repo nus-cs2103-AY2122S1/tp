@@ -30,7 +30,6 @@ import seedu.siasa.model.Siasa;
 import seedu.siasa.model.UserPrefs;
 import seedu.siasa.model.contact.Contact;
 import seedu.siasa.model.policy.Policy;
-import seedu.siasa.model.policy.PolicyIsOwnedByPredicate;
 import seedu.siasa.testutil.ContactBuilder;
 import seedu.siasa.testutil.EditContactDescriptorBuilder;
 
@@ -53,8 +52,7 @@ public class EditContactCommandTest {
     }
 
     private static void updateModelAfterContactUpdate(Model model, Contact contactToEdit, Contact editedContact) {
-        model.updateFilteredPolicyList(new PolicyIsOwnedByPredicate(contactToEdit));
-        List<Policy> policyList = model.getFilteredPolicyList();
+        List<Policy> policyList = model.getPoliciesBelongingTo(contactToEdit);
         ArrayList<Pair<Policy, Policy>> policiesToBeUpdated = new ArrayList<>();
         for (Policy p : policyList) {
             policiesToBeUpdated.add(new Pair<>(p, newPolicyWithNewOwner(p, editedContact)));
@@ -62,7 +60,6 @@ public class EditContactCommandTest {
         for (Pair<Policy, Policy> pair : policiesToBeUpdated) {
             model.setPolicy(pair.getKey(), pair.getValue());
         }
-        model.updateFilteredPolicyList(new PolicyIsOwnedByPredicate(editedContact));
     }
 
     @Test

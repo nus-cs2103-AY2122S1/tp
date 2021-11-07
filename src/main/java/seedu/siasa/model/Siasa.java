@@ -15,6 +15,7 @@ import javafx.collections.ObservableList;
 import seedu.siasa.model.contact.Contact;
 import seedu.siasa.model.contact.UniqueContactList;
 import seedu.siasa.model.policy.Policy;
+import seedu.siasa.model.policy.PolicyIsOwnedByPredicate;
 import seedu.siasa.model.policy.UniquePolicyList;
 
 /**
@@ -227,6 +228,9 @@ public class Siasa implements ReadOnlySiasa {
         return policies.getTotalCommission();
     }
 
+    public ObservableList<Policy> getPoliciesBelongingTo(Contact target) {
+        return policies.asUnmodifiableObservableList().filtered(new PolicyIsOwnedByPredicate(target));
+    }
     //// util methods
 
     @Override
@@ -244,6 +248,8 @@ public class Siasa implements ReadOnlySiasa {
     public ObservableList<Policy> getPolicyList() {
         return policies.asUnmodifiableObservableList();
     }
+
+
 
     @Override
     public boolean equals(Object other) {

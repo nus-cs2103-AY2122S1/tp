@@ -126,6 +126,11 @@ public class AddContactCommandTest {
         }
 
         @Override
+        public ObservableList<Policy> getPoliciesBelongingTo(Contact target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deleteContact(Contact target) {
             throw new AssertionError("This method should not be called.");
         }

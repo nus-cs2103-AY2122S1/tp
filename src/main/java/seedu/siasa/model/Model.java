@@ -158,6 +158,7 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered policy list */
     ObservableList<Policy> getFilteredPolicyList();
 
+    ObservableList<Policy> getPoliciesBelongingTo(Contact target);
     /**
      * Updates the filter of the policy list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
