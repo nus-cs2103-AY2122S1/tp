@@ -17,8 +17,10 @@ mm -> ad ++ :hasStudent(student)
 return
 return
 ac -> mm ++ :addStudent(student)
-mm -> ad :addStudent(student)
-mm -> mm : updateFilteredStudentList(predicate)
+mm -> ad ++ :addStudent(student)
+deactivate
+mm -> mm ++: updateFilteredStudentList(predicate)
+deactivate
 deactivate
 
 create result
