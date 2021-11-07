@@ -8,6 +8,10 @@
     -fx-text-fill: -fx-light-text-color;
 }
 
+#featureTable {
+    -fx-font-size: 14;
+}
+
 #copyButton {
     -fx-background-color: -fx-highlight-color;
     -fx-text-fill: -fx-main-bg-color;
@@ -15,4 +19,14 @@
 
 #copyButton:hover {
     -fx-background-color: -fx-light-text-color;
+}
+
+/*
+@@author AllardQuek-reused
+Reused with modifications from https://stackoverflow.com/questions/51265872/
+*/
+.table-view:focused .table-row-cell:focused {
+    -fx-border-color: derive(-fx-main-bg-color, 20%);
+    -fx-background-insets: 0 0 0 0;
+    -fx-table-cell-border-color: transparent;
 }
