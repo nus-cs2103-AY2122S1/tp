@@ -17,8 +17,7 @@ project. ([View Reposense](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?s
     * What it does: it helps to ensure that the student list is always sorted whenever an add or edit command is executed. It
       first sorts the students based on their class ID than by name.
     * Justification: This feature improves the product significantly as it helps to simulate a real-life nominal roll
-      where the students will always be sorted by class and name, allowing the user to have an organized set of data to
-      work with.
+      where the students will always be sorted by class and name, giving the user an organized set of student data.
     * Highlights: This enhancement provides the user with a more convenient and accessible experience in finding his /
       her students.
 2. **Improved Feature**: Added Student ID, Class ID, and Email
@@ -88,14 +87,13 @@ project. ([View Reposense](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?s
              , [#460](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/460/files),
             [#541](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/541#pullrequestreview-799559192)
 
-5. **Documentation**:
-    * Updated documentations for user guide and developer's
-      guide [#165](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/165)
-      , [#240](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/240)
-      , [#246](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/246),
-      [#474](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/474)
-      , [#482](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/482) , [#496](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/496),
-      [#522](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/522), [#533](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/533)
+5. **Documentation - Updated documentations for user guide and developer's guide:**
+   - [#165](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/165)
+         , [#240](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/240)
+         , [#246](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/246),
+         [#474](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/474)
+         , [#482](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/482) , [#496](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/496),
+         [#522](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/522), [#533](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/533)
 
 6. **Community Contributions**:
     * Provided some feedback and bug reporting to another team during
