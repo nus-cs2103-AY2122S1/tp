@@ -53,6 +53,9 @@ This product will make recruiters’ lives easier through categorisation and fil
   * [Launch and shutdown](#launch-and-shutdown)
   * [Adding an applicant](#adding-an-applicant)
   * [Deleting an applicant](#deleting-an-applicant)
+  * [Marking an applicant](#marking-an-applicant)
+  * [Unmarking an applicant](#unmarking-an-applicant)
+  * [Deleting marked applicants](#deleting-marked-applicants)
   * [Saving data](#saving-data)
 
 
@@ -1075,7 +1078,96 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
+
+### Marking an applicant
+
+1. Marking applicants while all applicants are being shown
+
+    1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list all currently `Not Done`.
+
+    2. Test case: `mark 1`<br>
+       Expected: First applicant is marked to `Done`. Details of the marked applicant shown in the result display.
+
+    3. Test case: `mark 0`<br>
+       Expected: No applicant is marked. Error details shown in the result display stating that the index is invalid.
+
+    4. Test case: `mark 2`, then `mark 2` again<br>
+       Expected: Second applicant is marked to `Done` with the first `mark 2`. Details of the marked applicant shown in the result display.
+                 For the second `mark 2`, no new applicant is marked. Error details shown in the result display stating that an applicant that is `Done` cannot be marked.
+
+    5. Test case: `mark 3 3`<br>
+       Expected: No applicant is marked. Error details shown in the result display stating that there should not be duplicate indexes.
+
+    6. Other incorrect mark commands to try: `mark`, `mark x` (where x is larger than the list size), `mark y` (where y is any non-positive integer)<br>
+       Expected: No applicant is marked. Error messages displaying the cause of error is shown in the results display.
+
+    7. Test case: `mark 4 5`<br>
+       Expected: Fourth and fifth applicant are marked to `Done`. Details of the marked applicants shown in the result display.
+
+
+2. Marking applicants while a filtered list of applicants are being shown
+
+    1. Prerequisites: Find a valid group of applicants using the `find` command with appropriate inputs. Multiple applicants in the filtered list all currently `Not Done`.
+    
+    2. Test case: Utilise the same test cases in Section 1 of Marking an applicant<br>
+       Expected: Same results as the corresponding expected test case results in Section 1 of Marking an applicant, while still in the filtered list.
+
+    3. Test case: `mark 6`, then `list`<br>
+       Expected: For `mark 6`, the sixth applicant is marked to `Done` and details of the marked applicant shown in the result display.
+                 After `list`, locate the marked applicant in the list and the applicant should still be `Done`.
+
+### Unmarking an applicant
+
+1. Unmarking applicants while all applicants are being shown
+
+    1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list all currently `Done`.
+
+    2. Test case: `unmark 1`<br>
+       Expected: First applicant is unmarked to `Not Done`. Details of the unmarked applicant shown in the result display.
+
+    3. Test case: `unmark 0`<br>
+       Expected: No applicant is unmarked. Error details shown in the result display stating that the index is invalid.
+
+    4. Test case: `unmark 2`, then `unmark 2` again<br>
+       Expected: Second applicant is unmarked to `Not Done` with the first `unmark 2`. Details of the unmarked applicant shown in the result display.
+                 For the second `unmark 2`, no new applicant is unmarked. Error details shown in the result display stating that an applicant that is `Not Done` cannot be unmarked.
+
+    5. Test case: `unmark 3 3`<br>
+       Expected: No applicant is unmarked. Error details shown in the result display stating that there should not be duplicate indexes.
+
+    6. Other incorrect unmark commands to try: `unmark`, `unmark x` (where x is larger than the list size), `unmark y` (where y is any negative integer)<br>
+       Expected: No applicant is unmarked. Error messages displaying the cause of error is shown in the results display.
+
+    7. Test case: `unmark 4 5`<br>
+       Expected: Fourth and fifth applicant are unmarked to `Not Done`. Details of the unmarked applicant shown in the result display.
+
+2. Marking applicants while a filtered list of applicants are being shown
+
+    1. Prerequisites: Find a valid group of applicants using the `find` command with appropriate inputs. Multiple applicants in the filtered list all currently `Done`.
+
+    2. Test case: Utilise the same test cases in Section 1 of Unmarking an applicant<br>
+       Expected: Same results as the corresponding expected test case results in Section 1 of Unmarking an applicant, while still in the filtered list.
+
+    3. Test case: `unmark 6`, then `list`<br>
+       Expected: For `unmark 6`, the sixth applicant is unmarked to `Not Done` and details of the unmarked applicant shown in the result display.
+                 After `list`, locate the unmarked applicant in the list and the applicant should still be `Not Done`.
+    
+### Deleting marked applicants
+
+1. Deleting marked applicants while all applicants are being shown
+
+    1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list. Some applicants are currently `Done`.
+
+    2. Test case: `delete_marked`<br>
+       Expected: All the applicants with `Done` are deleted from the list. Details of the deleted applicants shown in the result display.
+
+2. Deleting marked applicants while a filtered list of applicants are being shown
+
+    1. Prerequisites: Find a valid group of applicants using the `find` command with appropriate inputs. Multiple applicants in the filtered list. Some applicants are currently `Done`.
+
+    2. Test case: `delete_marked`<br>
+       Expected: All the applicants with `Done` are deleted from the list, not just those found in the filtered list. Details of the deleted applicants shown in the result display.
 
 ### Saving data
 
