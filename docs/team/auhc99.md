@@ -50,7 +50,7 @@ Given below are my contributions to the project.
     * Updated the details for most features (PR [\#194](https://github.com/AY2122S1-CS2103T-T10-4/tp/pull/194))
   * Developer Guide:
     * Updated the UML diagrams to fit AniList specification (PR [\#117](https://github.com/AY2122S1-CS2103T-T10-4/tp/pull/117))
-    * Added implementation details of the `list` feature (PR [\#117](https://github.com/AY2122S1-CS2103T-T10-4/tp/pull/117))
+    * Added implementation details of the `Tabs` feature (PR [\#117](https://github.com/AY2122S1-CS2103T-T10-4/tp/pull/117))
     * Updated the user stories and use cases for all features (PR [\#117](https://github.com/AY2122S1-CS2103T-T10-4/tp/pull/117))
 
 
