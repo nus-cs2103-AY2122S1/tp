@@ -52,7 +52,6 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NO_NEW_FIELDS = "There is no fields to be edited. Student's information are "
             + "already the same as what you have asked to be edited to.";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the ProgrammerError.";
-    public static final String MESSAGE_INVALID_LAB_NUMBER = "The lab does not exist!";
     public static final String MESSAGE_DUPLICATE_STUDENT_ID = "This student with the same Student ID "
             + "already exists in the ProgrammerError";
     public static final String MESSAGE_DUPLICATE_STUDENT_EMAIL = "This student with the same Email "
@@ -140,7 +139,7 @@ public class EditCommand extends Command {
             try {
                 currTotalScore = studentToEdit.getLab(labNum).getLabTotal();
             } catch (NullPointerException e) { //when getLab does not find anything
-                throw new CommandException(MESSAGE_INVALID_LAB_NUMBER);
+                throw new CommandException(Lab.MESSAGE_LAB_NOT_EXISTS);
             }
             labNum2 = labNum;
             updatedLab.updateTotal(currTotalScore);

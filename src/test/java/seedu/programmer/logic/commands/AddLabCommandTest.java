@@ -45,7 +45,7 @@ public class AddLabCommandTest {
         Lab labToAdd = getTypicalLabList().get(NUMBER_FIRST_LAB);
         AddLabCommand addLabCommand = new AddLabCommand(labToAdd);
 
-        String expectedMessage = String.format(AddLabCommand.MESSAGE_LAB_ALREADY_EXISTS, labToAdd);
+        String expectedMessage = String.format(Lab.MESSAGE_LAB_ALREADY_EXISTS, labToAdd);
 
         assertCommandFailure(addLabCommand, model, expectedMessage);
     }
