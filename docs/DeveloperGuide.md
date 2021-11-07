@@ -265,7 +265,7 @@ state.
 
 ![UndoRedoState1](images/commands/UndoCommand/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new student. The `add` command also
+Step 3. The user executes `add -n David …​` to add a new student. The `add` command also
 calls `Model#commitProgrammerError()`, causing another modified ProgrammerError state to be saved into
 the `programmerErrorStateList`.
 
@@ -309,7 +309,7 @@ Thus, the `programmerErrorStateList` remains unchanged.
 
 Step 6. The CS2100 TA executes `purge`, which calls `Model#commitProgrammerError()`. Since the `currentStatePointer` is not
 pointing at the end of the `programmerErrorStateList`, all ProgrammerError states after the `currentStatePointer` will be
-purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern
+purged. Reason: It no longer makes sense to redo the `add -n David …​` command. This is the behavior that most modern
 desktop applications follow.
 
 ![UndoRedoState5](images/commands/UndoCommand/UndoRedoState5.png)
