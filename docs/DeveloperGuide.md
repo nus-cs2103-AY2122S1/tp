@@ -1,13 +1,57 @@
 ---
 layout: page
 title: Developer Guide
+nav-text: Developer Guide
 ---
 
+<p align="center">
+  <img src="images/sportspa_logo.png" />
+</p>
+
+# SportsPA Developer Guide
+
+<div style="page-break-after: always;"></div>
+
+## Table of Contents
+{: .no_toc}
 * Table of Contents
-{:toc}
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+## **Introduction**
 
+SportsPA is a desktop application for NUS sports CCA Leaders to manage membership and
+training sessions, optimized for use via a *Command Line Interface* (CLI), while still preserving the benefits of a *Graphical User Interface* (GUI).
+
+SportsPA is highly optimized for *fast typists* and can be fully operated through keyboard commands.
+
+This developer guide is intended to be a one-stop source for anyone interested in extending and modifying `SportsPA`.
+For certain terms that are unique to `SportsPA`, a [glossary](#glossary) has been provided for readers.
+
+--------------------------------------------------------------------------------------------------------------------
+## Using this Developer Guide
+
+You can click on the links in the [Table of Contents](#table-of-contents) to quickly navigate to your desired location in
+this Developer Guide. A link to return to the [Table of Contents](#table-of-contents) is also provided at the end of every section.
+<br>
+The table below summarizes the meaning of the icons and text styles used throughout this Developer Guide.
+<br>
+
+Syntax | Description
+----------------- | ------------------
+**bold**        | Highlights important information such as components of SportsPA or constraints of command parameters
+*italics* | Terms to be defined in the [glossary](#glossary)  
+`Codeblock`          | Represents distinct classes, and their methods
+[link](#table-of-contents) | Represents links that can be clicked on to navigate to a relevant section of the User Guide or a different website
+**:information_source: Notes:** | Represents important information to note
+**:bulb: Tip:**| Represents useful tips that we would like to share
+
+[Back to Table of Contents](#table-of-contents)
+
+
+<div style="page-break-after: always;"></div>
+
+--------------------------------------------------------------------------------------------------------------------
 ## **Acknowledgements**
 
 * Based on AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org/).
@@ -17,6 +61,11 @@ title: Developer Guide
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:** Readers are advised to [download](https://github.com/AY2122S1-CS2103T-W12-1/tp/releases) SportsPA's latest release to test the application.
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -57,13 +106,6 @@ The rest of the App consists of four components.
 * [**`Model`**](#model-component): Holds the data of the App in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
-**How the architecture components interact with each other**
-
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues
-the command `deletem 1`.
-
-<img src="images/ArchitectureSequenceDiagram.png" width="574" />
-
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
@@ -76,6 +118,13 @@ through its interface rather than the concrete class (reason: to prevent outside
 implementation of a component), as illustrated in the (partial) class diagram below.
 
 <img src="images/ComponentManagers.png" width="300" />
+
+**How the architecture components interact with each other**
+
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues
+the command `deletem 1`.
+
+<img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
 The sections below give more details of each component.
 
@@ -110,6 +159,8 @@ The `UI` component,
 Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
+
+<div style="page-break-after: always;"></div>
 
 How the `Logic` component works:
 
@@ -981,7 +1032,7 @@ This use case is similar to that of <span style="text-decoration: underline">mar
   users to interact with
 * **Command Line Interface (CLI)**: A text-based user interface that the user interacts with by typing in commands
 * **Group size regulations**: Maximum allowable group size for sporting activities as specified by Covid-19 regulations
-* **Above average typing speed**: faster than 40wpm (words per minute)
+* **Fast typists**: Types faster than 40wpm (words per minute)
 
 --------------------------------------------------------------------------------------------------------------------
 
