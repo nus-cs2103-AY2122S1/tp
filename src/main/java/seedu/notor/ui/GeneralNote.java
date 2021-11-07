@@ -1,15 +1,14 @@
-package seedu.notor.ui.view;
+package seedu.notor.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Region;
 import seedu.notor.model.common.Note;
-import seedu.notor.ui.UiPart;
 
 /**
  * Panel containing the list of T.
  */
-public class ViewPanel extends UiPart<Region> {
+public class GeneralNote extends UiPart<Region> {
     private static final String FXML = "GeneralNoteViewPanel.fxml";
 
     @FXML
@@ -17,9 +16,9 @@ public class ViewPanel extends UiPart<Region> {
 
     /**
      * Creates a {@code ListPanel}.
-     * @param note
+     * @param note the Note that will be displayed.
      */
-    public ViewPanel(Note note) {
+    public GeneralNote(Note note) {
         super(FXML);
         generalNote.setText(note.value);
         generalNote.setEditable(false);

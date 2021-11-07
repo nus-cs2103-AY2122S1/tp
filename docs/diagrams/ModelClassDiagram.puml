@@ -1,8 +1,9 @@
 @startuml
 !include style.puml
 skinparam arrowThickness 1.1
-skinparam arrowColor MODEL_COLOR
-skinparam classBackgroundColor MODEL_COLOR
+skinparam arrowColor #8B008B
+skinparam classBackgroundColor #8B008B
+
 
 Package Model <<Rectangle>>{
 Interface ReadOnlyNotor <<Interface>>
@@ -15,9 +16,9 @@ Class ModelManager
 Class UserPrefs
 Class ReadOnlyUserPrefs
 
-
+class "HashSet<String>" as DisplaySuperGroups #8B008B
+class "HashSet<String>" as DisplaySubGroups #8B008B
 Class UniquePersonList
-Class UniqueSuperGroupsList
 Class Person
 Class Email
 Class Name
@@ -25,15 +26,16 @@ Class Phone
 Class Tag
 Class Note
 Class UniqueSuperGroupList
-Class DisplaySuperGroup
-Class DisplaySubGroup
 Class Group
 Class SuperGroup
 Class SubGroup
 }
 
+
 Class HiddenOutside #FFFFFF
+
 HiddenOutside ..> Model
+
 
 Notor .up.|> ReadOnlyNotor
 
@@ -53,8 +55,8 @@ Person *--> Phone
 Person *--> Email
 Person *--> Note
 Person *--> "*" Tag
-Person *--> "*" DisplaySuperGroup
-Person *--> "*" DisplaySubGroup
+Person *--> "*" DisplaySuperGroups
+Person *--> "*" DisplaySubGroups
 
 UniqueSuperGroupList *--> "*" SuperGroup
 SuperGroup *--> "*" SubGroup

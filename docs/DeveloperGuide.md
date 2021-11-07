@@ -123,6 +123,17 @@ The following sequence diagram shows the detail when `PersonNoteCommand` is exec
 
 ![PersonNoteSequenceDiagram](images/PersonNoteSequenceDiagram.png)
 
+### UI Changes
+
+*(placeholder API for now, will update to our own link later when implemented.)*
+
+![Structure of the UI Component](images/UiClassDiagram.png)
+
+* `MainWindow` does not contain PersonListPanel anymore.
+Now it contains ListPanel which can be a PersonListPanel, GroupListPanel or SubgroupListPanel.
+* `MainWindow` contains a new GeneralNote which displays the general note.
+
+
 ### Model Changes
 
 *(placeholder API for now, will update to our own link later when implemented.)*
@@ -264,8 +275,8 @@ Priorities:<p>
 
 **MSS**
 
-1. User requests to view list of persons/groups/archived persons
-2. Notor shows the list selected
+1. User requests to view list of persons/groups/archived persons.
+2. Notor shows the list selected.
 
 **Extensions**
 
@@ -275,18 +286,27 @@ Priorities:<p>
 
 **MSS**
 
-1. User requests for Notor to return the persons/groups which fit a certain criteria
-2. Notor returns a list filtered by said criteria
+1. User requests for Notor to return the persons/groups which fit a certain criteria.
+2. Notor returns a list filtered by said criteria.
 
    Use case ends.
 
 #### General Use Cases
+    
+##### Use case: Export Data
+
+**MSS**
+
+1. User requests to export data.
+2. Notor exports the data in CSV format to the directory where Notor belongs.
+
+   Use case ends.
 
 ##### UC-CommandError : User enters the wrong command
 
 Precondition: User passes the wrong parameters, command, or data
 
-1. Notor detects an error in the entered data, and displays an error message
+1. Notor detects an error in the entered data, and displays an error message.
 2. User corrects their command to not have any errors. Steps 1 and 2 are repeated until the data entered are correct. Command is executed from where the use case is interrupted.
 
 #### Basic Person Use Cases
@@ -295,83 +315,122 @@ Precondition: User passes the wrong parameters, command, or data
 
 **MSS**
 
-1. User requests to add a person to Notor, specifying their name and optional parameters for their personal details
-2. Notor adds said person to the storage, and displays a success message
+1. User requests to add a person to Notor, specifying their name and optional parameters for their personal details.
+2. Notor adds said person to the storage, and displays a success message.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. User <u> commands Notor to display the list of groups</u> (UC1)
+* 1a. User <u> commands Notor to display the list of groups</u> (UC1).
     * 1a1. User requests to add a person to Notor, specifying their name and optional parameters for their personal details, as well as the group they want to add them to
-    * Resume usecase at 2
+    * Resume usecase at 2.
 * 1b. User enters the <u> wrong parameters for their request to add person, resulting in </u> (UC-CommandError).
-  * Resume usecase at 2
+  * Resume usecase at 2.
 
 ##### Use case: Edit Person, Tag Person, or Add/remove person to a group
 
 **MSS**
 
-1. User commands <u> Notor to display the list of persons </u> (UC1)
+1. User commands <u> Notor to display the list of persons </u> (UC1).
 2. User specifies a person they want to change, and informs Notor of which fields they want changed and to what values.
-3. Notor changes the fields, displaying the correct fields and a success message
+3. Notor changes the fields, displaying the correct fields and a success message.
 
 **Extensions**
 
 * 2a. User tries to add person to a group that does not exist.
-  * Notor informs the user that the group does not exist
-    * User decides to <u> create the group</u> first (UC)
-    * Resume use case from step 1.
+  * Notor informs the user that the group does not exist.
+    * User decides to <u> create the group</u> first (UC).
+    * Resume use case from step 1..
 
 ##### Use case: Add a note to a person
 
 **MSS**
 
-1. User <u> commands Notor to display the list of persons </u> (UC1)
-2. User requests to add a note to a specific person in the list
-3. Notor opens up a pop up window for the user to type the note for the person
+1. User <u> commands Notor to display the list of persons </u> (UC1).
+2. User requests to add a note to a specific person in the list.
+3. Notor opens up a pop up window for the user to type the note for the person.
 4. User types in their notes.
-5. User requests to save and close the note
+5. User requests to save and close the note.
 6. Notor closes the note window and displays a success message that note has been saved.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. User <u> makes a mistake in their request, such as specifying a person that doesn't exist </u> (UC-CommandError)
-  * Resume use case from step 2
+* 2a. User <u> makes a mistake in their request, such as specifying a person that doesn't exist </u> (UC-CommandError).
+  * Resume use case from step 2.
 * 6a. User requests to save the note to the person
-  * 6a1. Notor displays a message that the note has been saved. Use case resumes at step 5 or 6
-* 6b. User requests to close the note (without saving)
+  * 6a1. Notor displays a message that the note has been saved. Use case resumes at step 5 or 6.
+* 6b. User requests to close the note (without saving).
   * 6b1. Notor shows a warning window.
-    * 6b2.1 : User cancels the request to close the note. Use case resumes at step 5 or 6
+    * 6b2.1 : User cancels the request to close the note. Use case resumes at step 5 or 6.
     * 6b2.2 : User accepts to close the note without saving. Notor closes the note window. Not shown that note is saved.
+
+
 
 ##### Use Case: Clear tags or notes
 
 **MSS**
 
-Precondition: The person or group whose tags or notes you want to clear is visible and able to be selected
+Precondition: The person or group whose tags or notes you want to clear is visible and able to be selected.
 
-1. User requests to clear all tags or notes
-2. Notor displays a confirmation window
-3. User confirms their wish to clear all tags or notes
+1. User requests to clear all tags or notes.
+2. Notor displays a confirmation window.
+3. User confirms their wish to clear all tags or notes.
 4. Notor clears tags or notes, then displays a success message.
 
    Use case ends.
 
 **Extensions**
 
-* 3a. User cancels their request
+* 3a. User cancels their request.
   * 3a1. Notor displays a confirmation of the cancelling of the request
     Use case ends.
-
+    
 #### Basic Group Commands
+
+##### Use case: Add a note to a Group
+
+**MSS**
+
+1. Similar to Add a note to a person except Notor shows a list of groups in step 1.
+
+##### Use case: Add a note to a Subgroup
+
+**MSS**
+
+1. Similar to Add a note to a person except Notor shows a list of subgroups in step 1.
 
 ##### Use Case : Create Group
 
-1. User informs Notor to create a group, specifying its name
-2. Notor creates the group and displays a success message
+**MSS**
+
+1. User informs Notor to create a group, specifying its name.
+2. Notor creates the group and displays a success message.
+    
+    Use case ends.
+**Extensions**
+
+* 1a. Group already exists.
+  * 1a1. Resume use case from step 1.
+* 1b. Group name is invalid.
+  * 1b1. Resume use case from step 1.
+    
+##### Use Case : Create Subgroup
+
+**MSS**
+
+1. User informs Notor to create a subgroup, specifying its name and the name of the group that the subgroup will be in.
+2. Notor creates the group and displays a success message.
+    
+    Use case ends.
+**Extensions**
+
+* 1a. Group already exists.
+  * 1a1. Resume use case from step 1.
+* 1b. Group name is invalid.
+  * 1b1. Resume use case from step 1.
 
 #### Proposed Extended Use Cases ( Not Implemented )
 
@@ -379,18 +438,14 @@ Precondition: The person or group whose tags or notes you want to clear is visib
 
 **MSS**
 
-1. User starts typing a command in Notor
-2. Notor shows possible commands starting with what user has typed
-3. User presses tab to select the right command
-4. User presses enter to execute the selected command
-5. Notor <u>runs command (UC1)</u>
+1. User starts typing a command in Notor.
+2. Notor shows possible commands starting with what user has typed.
+3. User presses tab to select the right command.
+4. User presses enter to execute the selected command.
+5. Notor <u>runs command (UC1)</u>.
 
    Use case ends.
 
-**Extensions**
-
-* 2a. The typed string is not in any command.
-    * 2a1. Notor displays no commands. Use case resumes at step 1.
 
 ### Non-Functional Requirements
 
@@ -482,7 +537,91 @@ Prerequisites: Be in a list of groups. They can be subgroups or supergroups. Mus
     1. Other incorrect delete commands to try: `p /delete`, `p x /delete`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-1. _{ more test cases ... }_
+### Adding a group
+
+1. Adding a group
+    1. Test case: `group Test /create`<br>
+       Expected: Group is created. If you switch to group list, you will be able to see the new group created.
+
+    1. Test case: `group 123 /create`<br>
+       Expected: No group is created. Error details shown in the status message.
+
+    1. Other incorrect delete commands to try: `group /create`, `group group_1 /create`, `...`
+       (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+### Deleting a group
+
+1. Deleting a group while all groups are being shown
+
+    1. Prerequisites: List all groups using the `group /list` command. Multiple groups in the list.
+
+    1. Test case: `group 1 /delete`<br>
+       Expected: A confirmation window popped. Upon confirmation, first group is deleted from the list.
+
+    1. Test case: `group 0 /delete`<br>
+       Expected: No group is deleted. Error details shown in the status message.
+
+    1. Other incorrect delete commands to try: `group /delete`, `group x /delete`, `...`
+       (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+
+### Adding person to a group
+
+1. Prerequisites: List all persons using the `person /list` command. Multiple persons in the list. Only the group Orbital is created.
+
+    1. Test case: `person 1 /add g:Orbital`<br>
+       Expected: Person is added to the group. Person is updated with a new group in the UI.
+
+    1. Test case: `person 0 /add g:Orbital`<br>
+       Expected: Nothing happened. Error details shown in the status message.
+
+    1. Other incorrect delete commands to try: `person /add`, `person 1 /add g:NonExistent`, `...`
+       (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+### Removing a person from a group
+
+1. Prerequisites: List all persons using the `person /list` command. Multiple persons in the list. First person is added to group Orbital.
+    1. Test case: `person 1 /remove g:Orbital`<br>
+           Expected: Person is removed to the group. Person is updated with group removed in the UI.
+
+    1. Test case: `person 0 /remove g:Orbital`<br>
+       Expected: No person is removed. Error details shown in the status message.
+
+    1. Other incorrect delete commands to try: `person /remove`, `person 1 /remove g:NonExistent`, `...`
+       (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+### Adding subgroup to a group
+
+1. Prerequisites: List all groups using the `group /list` command. Multiple groups in the list.
+
+    1. Test case: `group 1 /create n:Artemis`<br>
+       Expected: Artemis is added to the first group. Group is updated with a new subgroup in the UI.
+
+    1. Test case: `group 0 /create n:Artemis`<br>
+       Expected: No group is created. Error details shown in the status message.
+
+    1. Other incorrect delete commands to try: `group /create`, `...`
+       (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+### Removing a subgroup from a group
+
+1. Prerequisites: List all groups using the `group /list` command. Multiple groups in the list. First group contains subgroup Artemis.
+    1. Test case: `group 1 /delete n:Artemis`<br>
+       Expected: Confirmation window pops up. Upon confirmation, Artemis is removed from the first group.
+       Group is updated with a subgroup removed in the UI.
+
+    1. Test case: `group 0 /delete n:Artemis`<br>
+       Expected: No subgroup is removed. Error details shown in the status message.
+
+    1. Other incorrect delete commands to try: `group /delete`, `group 1 /delete n:NonExistent`, `...`
+       (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
 
 
 ### Adding general note.

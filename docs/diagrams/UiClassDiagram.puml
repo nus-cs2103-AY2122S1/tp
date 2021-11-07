@@ -2,7 +2,7 @@
 !include style.puml
 skinparam arrowThickness 1.1
 skinparam arrowColor UI_COLOR_T4
-skinparam classBackgroundColor UI_COLOR
+skinparam classBackgroundColor UI_COLOR_T3
 
 package UI <<Rectangle>>{
 Interface Ui <<Interface>>
@@ -11,14 +11,16 @@ Class UiManager
 Class MainWindow
 Class HelpWindow
 Class ResultDisplay
-Class PersonListPanel
+Class ListPanel
 Class PersonCard
+Class GroupCard
+Class SubGroupCard
 Class StatusBarFooter
 Class CommandBox
-Class GeneralNoteWindow
-Class PersonNoteWindow
-Class GroupNoteWindow
-Class "{abstract}\nNoteWindow" as NoteWindow
+Class PersonListPanel
+Class GroupListPanel
+Class SubGroupListPanel
+Class GeneralNote
 }
 
 package Model <<Rectangle>> {
@@ -36,37 +38,40 @@ UiManager .left.|> Ui
 UiManager -down-> "1" MainWindow
 MainWindow *-down->  "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
-MainWindow *-down-> "1" PersonListPanel
+MainWindow *-down-> "1" ListPanel
 MainWindow *-down-> "1" StatusBarFooter
+MainWindow *-down->  "1" GeneralNote
 MainWindow --> "0..1" HelpWindow
-MainWindow --> "0..1" GeneralNoteWindow
-MainWindow --> "0..*" PersonNoteWindow
-MainWindow --> "0..*" GroupNoteWindow
 
-GroupNoteWindow --|> NoteWindow
-PersonNoteWindow --|> NoteWindow
-GeneralNoteWindow --|> NoteWindow
-PersonListPanel -down-> "*" PersonCard
+ListPanel <|-- PersonListPanel
+ListPanel <|-- GroupListPanel
+ListPanel <|-- SubGroupListPanel
+
+PersonListPanel --> "*" PersonCard
+GroupListPanel --> "*" GroupCard
+SubGroupListPanel --> "*" SubGroupCard
 
 MainWindow -left-|> UiPart
 
 ResultDisplay --|> UiPart
 CommandBox --|> UiPart
-PersonListPanel --|> UiPart
+ListPanel --|> UiPart
 PersonCard --|> UiPart
+GroupCard --|> UiPart
+SubGroupCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
-NoteWindow --|> UiPart
+GeneralNote --|> UiPart
+
 
 PersonCard ..> Model
+GroupCard ..> Model
+SubGroupCard ..> Model
+GeneralNote ..> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
-NoteWindow --> Logic
-GeneralNoteWindow --> Logic
-PersonNoteWindow --> Logic
-GroupNoteWindow --> Logic
 
-PersonListPanel -[hidden]left- HelpWindow
+ListPanel -[hidden]left- HelpWindow
 HelpWindow -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
 ResultDisplay -[hidden]left- StatusBarFooter
