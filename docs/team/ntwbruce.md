@@ -35,7 +35,7 @@ Given below are my contributions to the project.
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments): 
-        [\#51](https://github.com/AY2122S1-CS2103T-T10-2/tp/pull/51)
-        [\#154](https://github.com/AY2122S1-CS2103T-T10-2/tp/pull/154)
+        [\#51](https://github.com/AY2122S1-CS2103T-T10-2/tp/pull/51),
+        [\#154](https://github.com/AY2122S1-CS2103T-T10-2/tp/pull/154),
         [\#227](https://github.com/AY2122S1-CS2103T-T10-2/tp/pull/227)
 
