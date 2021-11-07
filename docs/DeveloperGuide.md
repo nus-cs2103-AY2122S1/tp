@@ -188,16 +188,16 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 * [Delete Feature](#delete-feature)
-* [Get Feature](#get-feature)
 * [Link feature](#link-feature)
 * [Unlink feature](#unlink-feature)
 * [Schedule Feature](#schedule-feature)
+* [Get Feature](#get-feature)
 
 ### Delete Feature
 
 #### Implementation
 The `MainWindow#executeCommand()` calls `LogicManager#execute()` method, which proceeds 
-to call `MainParser#parseCommand()` method, which them calls either `FriendCommandParser#parse()` or 
+to call `MainParser#parseCommand()` method, which then calls either `FriendCommandParser#parse()` or 
 `GameCommandParser#parse()`, and returns a `Command` object.
 
 The delete command is parsed using the following classes:
@@ -233,7 +233,7 @@ illustrates the description for deleting **games**:
 The games of each friend is stored inside a `Map<GameId, GameFriendLinks>`. Before deleting a game, the links a 
 friend has to a game has to be removed, before deleting the game from the list of games.
 
-### Link
+### Link Feature
 
 #### Implementation
 
@@ -263,7 +263,7 @@ The implementation of `Model#linkFriend()` is as follows:
 - Each `Friend` object has a `Map<GameId, GameFriendLink>`, which represents the links to the games it is associated with. However, each `Game` object does not
   have a corresponding data structure to the friends it is linked to. This reduces coupling between the two components such the implementation of the link feature does not require modification whenever the `Game` class is changed.
 
-### Unlink
+### Unlink Feature
 
 #### Implementation
 
@@ -286,10 +286,6 @@ The implementation of `Model#unlinkFriend()` is as follows:
 - `UniqueFriendsList#setFriend()` then replaces `friendToUnlink` with the edited `friendToEdit`, so that the `Friend` in the model is updated.
 
 ![Implementation of unlink command in model](images/UnlinkSequenceDiagram.png)
-
-### Get Feature
-
-#### Implementation
 
 ### Schedule Feature
 
@@ -329,7 +325,54 @@ The implementation of `Model#unlinkFriend()` is as follows:
   accurate to the minute.
 * A `Friend` is initialised with all busy timeslots in `Day` as our targer user profile is busy and would more often be 
   busy than free, so it would be easier for the user to just set when their friend is free.
-  
+
+### Get Feature
+
+#### Implementation
+
+When called by the `MainWindow#executeCommand`, the `LogicManager#execute` method proceeds to call the `MainParser#parseCommand` method, which returns a `Command` object based on the workflow shown in the activity diagram below.
+
+<img src="images/GetCommandWorkflowActivityDiagram.png" width="500">
+<br><center><ins>Image: Activity diagram showing the workflow of a '--get' command.</ins></center>
+
+The `--get` command is parsed using the following classes:
+* For friends:
+    * `FriendCommandParser` - Checks that the command contains the `GetFriendCommand.COMMAND_WORD` i.e., '--get '.
+    * Calls the `parse()` method of a newly created instance of `GetFriendCommandParser`.
+        * `GetFriendCommandParser` - Parses the command to isolate the string representing the friendId and creates a `FriendId` object with that string.
+        * A new `GetFriendCommand` object is created with the aforementioned `FriendId` object.
+            * `GetFriendCommand` - Represents `friend --get` command that is to be executed by gitGud.
+            * Takes in a `FriendId` object, used to find the friend from the Model.
+            * Due to the unique nature of the `FriendId` objects, where no two friends have the same `FriendId`, it is
+          sufficient to search for the friend using the `FriendId`.
+
+* For games:
+    * `GameCommandParser` - Checks that the command contains the `GetGameCommand.COMMAND_WORD` i.e., '--get '.
+    * Calls the `parse()` method of a newly created instance of `GetGameCommandParser`.
+        * `GetGameCommandParser` - Parses the command to isolate the string representing the gameId and creates a `GameId` object with that string.
+        * A new `GetGameCommand` object is created with the aforementioned `GameId` object.
+            * `GetGameCommand` - Represents `game --get` command that is to be executed by gitGud.
+            * Takes in a `GameId` object, used to find the game from the Model.
+            * Due to the unique nature of the `GameId` objects, where no two games have the same `GameId`, it is
+              sufficient to search for the game using the `GameId`.
+
+After the `LogicManager#execute` receives a `GetFriendCommand` or `GetGameCommand` based on the user input, it executes the command object using the `GetXXXCommand#execute` method.
+
+An example execution of a `GetFriendCommand` is shown in the sequence diagram below.
+
+<img src="images/GetSequenceDiagram.png" width="600">
+<br><center><ins>Image: Sequence diagram showing the interaction between various entities<br>of 'Logic' and 'Model' component during the execution of a 'friend --get FRIEND_ID' command.</ins></center>
+
+`GetGameCommand` is executed similarly, but it deals with games and game lists.
+
+#### Special Consideration:
+
+Once a `CommandResult` is created with the correct `Friend` or `Game`, its passed on to the `Ui`, which then in turn takes care of filtering and displaying the right information of the object in focus.
+* `CommandResult` with a `Friend` object
+  * `Ui` creates a `FriendMainCard` that displays all the information of a friend like the `FriendId`, `Name`, `Schedule` and all the `GameFriendLink`s held in the `Friend` object.
+* `CommandResult` with a `Game` object
+  * `Ui` creates a `GameMainCard` that displays all the information of a game like the `GameId` and a list of `Friend`s that play the `Game` in focus, along with their gaming information.
+  * To achieve the above list of `Friend`s, the `Ui` has to check all the friends if they contain a `GameFriendLink` made from the `GameId` of the `Game` in focus, and then use it to display the gaming information like `UserName` and `SkillValue`.
 
 --------------------------------------------------------------------------------------------------------------------
 
