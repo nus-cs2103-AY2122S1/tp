@@ -239,14 +239,14 @@ This part of the guide covers all the commands you can use to manage student inf
 
 These features include the ability to:
 1. Add new students
-1. Edit and existing student
+1. Edit an existing student
 1. View a student's details
 1. Delete a student
 1. List all students
 1. Find students by name
 1. Add class participation marks
-1. Removing class participation marks
-1. Delete all students
+1. Remove class participation marks
+
 
 ### Adding a student: `addstu`
 

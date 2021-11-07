@@ -87,8 +87,8 @@ public class Classmate implements ReadOnlyClassmate {
      * Adds a student to the ClassMATE.
      * The student must not already exist in the ClassMATE.
      */
-    public void addStudent(Student p) {
-        students.add(p);
+    public void addStudent(Student student) {
+        students.add(student);
     }
 
     /**
@@ -130,17 +130,6 @@ public class Classmate implements ReadOnlyClassmate {
         tutorialClasses.add(c);
     }
 
-    /**
-     * Replaces the given tutorialClass {@code target} in the list with {@code editedTutorialClass}.
-     * {@code target} must exist in the ClassMATE.
-     * The tutorialClass identity of {@code editedTutorialClass} must not be the same
-     * as another existing tutorialClass in ClassMATE.
-     */
-    public void setTutorialClass(TutorialClass target, TutorialClass editedTutorialClass) {
-        requireNonNull(editedTutorialClass);
-
-        tutorialClasses.setTutorialClass(target, editedTutorialClass);
-    }
 
     /**
      * Removes {@code key} from this {@code Classmate}.

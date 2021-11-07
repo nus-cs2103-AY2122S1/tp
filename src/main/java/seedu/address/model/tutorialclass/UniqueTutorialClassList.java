@@ -13,6 +13,7 @@ import seedu.address.model.tutorialclass.exceptions.DuplicateTutorialClassExcept
 import seedu.address.model.tutorialclass.exceptions.TutorialClassNotFoundException;
 import seedu.address.model.tutorialgroup.TutorialGroup;
 import seedu.address.model.tutorialgroup.exceptions.DuplicateTutorialGroupException;
+import seedu.address.model.tutorialgroup.exceptions.TutorialGroupNotFoundException;
 
 /**
  * A list of tutorial classes that enforces uniqueness between its elements and does not allow nulls.
@@ -93,27 +94,6 @@ public class UniqueTutorialClassList implements Iterable<TutorialClass> {
     }
 
     /**
-     * Replaces the tutorial class {@code target} in the list with {@code editedTutorialClass}.
-     * {@code target} must exist in the list.
-     * The student identity of {@code editedTutorialClass} must not be the same as another
-     * existing tutorial class in the list.
-     */
-    public void setTutorialClass(TutorialClass target, TutorialClass editedTutorialClass) {
-        requireAllNonNull(target, editedTutorialClass);
-
-        int index = internalList.indexOf(target);
-        if (index == -1) {
-            throw new TutorialClassNotFoundException();
-        }
-
-        if (!target.isSameTutorialClass(editedTutorialClass) && contains(editedTutorialClass)) {
-            throw new DuplicateTutorialClassException();
-        }
-
-        internalList.set(index, editedTutorialClass);
-    }
-
-    /**
      * Removes the equivalent tutorial class from the list.
      * The tutorial class must exist in the list.
      */
@@ -131,12 +111,16 @@ public class UniqueTutorialClassList implements Iterable<TutorialClass> {
     public void remove(TutorialGroup toRemove) {
         requireNonNull(toRemove);
 
+        if (!internalList.remove(toRemove)) {
+            throw new TutorialGroupNotFoundException();
+        }
+
         // finds the tutorial class that the tutorial group belongs to
         TutorialClass toCheckTutorialClass = TutorialClass.createTestTutorialClass(toRemove.getClassCode());
         Optional<TutorialClass> result = internalList.stream()
                 .filter(toCheckTutorialClass::isSameTutorialClass).findFirst();
 
-        // removes the tutorial group frmo the tutorial class found
+        // removes the tutorial group from the tutorial class found
         result.get().removeTutorialGroup(toRemove);
     }
 

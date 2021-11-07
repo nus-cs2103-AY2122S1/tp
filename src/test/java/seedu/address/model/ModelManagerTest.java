@@ -7,6 +7,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalStudents.ALICE;
 import static seedu.address.testutil.TypicalStudents.BENSON;
+import static seedu.address.testutil.TypicalTutorialClasses.G01;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -86,6 +87,17 @@ public class ModelManagerTest {
     public void hasStudent_studentInClassmate_returnsTrue() {
         modelManager.addStudent(ALICE);
         assertTrue(modelManager.hasStudent(ALICE));
+    }
+
+    @Test
+    public void hasTutorialClass_tutorialClassNotInClassmate_returnsFalse() {
+        assertFalse(modelManager.hasTutorialClass(G01));
+    }
+
+    @Test
+    public void hasTutorialClass_tutorialClassInClassmate_returnsTrue() {
+        modelManager.addTutorialClass(G01);
+        assertTrue(modelManager.hasTutorialClass(G01));
     }
 
     @Test
