@@ -75,8 +75,6 @@ _text_ | Caption for images.
 
 --------------------------------------------------------------------------------------------------------------------
 
-<div style="page-break-after: always;"></div>
-
 ## Overview of the Graphical User Interface (GUI)
 
 This section briefly explains the various section of TAB's GUI.
@@ -156,6 +154,8 @@ An example of a command in TAB:
 * Items with `…` after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
+<div style="page-break-after: always;"></div>
+
 #### Notes about parameters
 
 * Parameters can be in any order.<br>
@@ -207,7 +207,6 @@ Format: `help`
 [back to table of contents](#toc)
 
 --------------------------------------------------------------------------------------------------------------------
-
 <div style="page-break-after: always;"></div>
 
 ### Managing Students
@@ -231,6 +230,8 @@ Executing any of the commands in this section will bring you to the students int
     <li>Fields that are empty will not be displayed.</li>
   </ul>
 </div>
+
+<div style="page-break-after: always;"></div>
 
 #### Student parameters
 
@@ -458,7 +459,6 @@ Format: `list`
 [back to table of contents](#toc)
 
 --------------------------------------------------------------------------------------------------------------------
-
 <div style="page-break-after: always;"></div>
 
 ### Finding Students
@@ -561,6 +561,8 @@ Example:
 Example:
 * `find date/12 Oct 2021 time/1200-1400 subject/Math` will match a student with lesson on `12 OCT 2021`, at `1130-1230`, with the subject `Mathematics`.
 
+<div style="page-break-after: always;"></div>
+
 ##### Search with match condition
 
 * You can specify an optional match condition which indicates the type of matching to be applied. 
@@ -572,7 +574,6 @@ Examples:
   * `find n/John t/zoom cond/any` returns students with only the name `John`, or only the tag `zoom`, or both.
   * `find n/John t/zoom cond/none` returns students without the name `John` and the tag `zoom`.
 
-<br>
 **Example of finding by different types of fields**
 
 To find students with the tag `new` or with lessons between `1100-1300`, you may type the command `find cond/any t/new time/1100-1300`. The figure below shows the list after this find command is executed.
@@ -586,7 +587,6 @@ To find students with the tag `new` or with lessons between `1100-1300`, you may
 [back to table of contents](#toc)
 
 --------------------------------------------------------------------------------------------------------------------
-
 <div style="page-break-after: always;"></div>
 
 ### Managing Lessons
@@ -696,8 +696,8 @@ A lesson can be identified by the index number shown in the lesson list of the s
             <td>Homework</td>
             <td><code>hw/</code></td>
             <td><ul>
-                <li>Case sensitive</li>
-                <li>Add multiple homework with <code>hw/</code> before each homework</li>
+                <li>Case-sensitive</li>
+                <li>Add multiple pieces of homework with <code>hw/</code> before each piece</li>
                 <li>Identical homework for the same lesson will be considered as one homework</li>
                 <li>Maximum of 50 characters</li>
             </ul></td>
@@ -728,6 +728,7 @@ Additionally, we will allow you to toggle these checks on and off, just in case 
 Do look forward to these features!
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 #### Adding a lesson: `ladd`
 
@@ -774,6 +775,8 @@ Uncancelled Date |`uncancel/` | Follows the <a href="#lesson-date">Date</a> form
 
 * You cannot change the lesson's type (i.e. recurring and makeup).
 
+<div style="page-break-after: always;"></div>
+
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 
 If you change the start date of the lesson, the cancelled dates that become invalid will be removed.
@@ -802,6 +805,7 @@ Examples:
 
 * `find n/Betsy` followed by `ldelete 1 1` deletes the 1st lesson for the 1st student in the results of the `find` command.
 
+<div style="page-break-after: always;"></div>
 
 #### Viewing a student's lessons: `view`
 
@@ -818,6 +822,8 @@ Examples:
 <div class="caption">A list of lessons for the 1st student is shown on the lesson panel.</div>
 
 * `find n/Betsy` followed by `view 1` displays the list of lessons for the 1st student in the results of the `find` command.
+
+<div style="page-break-after: always;"></div>
 
 #### Viewing upcoming lessons: `remind`
 
@@ -861,8 +867,6 @@ Example: Suppose the date today is 1 Nov 2021 and current time is 1500h,
 
 --------------------------------------------------------------------------------------------------------------------
 
-<div style="page-break-after: always;"></div>
-
 ### Managing Lesson Fees
 
 This section guides you on how to use the commands for managing the lesson fees of your students in TAB and the behaviour of the Fees Calculator feature of TAB.
@@ -903,10 +907,10 @@ Edits the outstanding fees to specific lesson. Uses the Lesson Edit command as s
 In the event that you disagree with the outcomes of the Fees Calculator, you can edit outstanding fees using `ledit` command.
 Refer to [Behaviour of the Fees Calculator](#behaviour-of-the-fees-calculator) for cases the Fees Calculator will not account for.
 
-Format: `ledit INDEX LESSON_INDEX OTHER_FIElDS_TO_EDIT f/OUTSTANDING_AMOUNT`
+Format: `ledit INDEX LESSON_INDEX OTHER_FIELDS_TO_EDIT f/OUTSTANDING_AMOUNT`
 
 Examples:
-* `ledit 2 1 f/250` Edits the outstanding fees to `$100.00`.
+* `ledit 2 1 f/250` Edits the outstanding fees to `$250.00`.
 * `ledit 1 1 time/1100-1200 f/100` Edits the time range to `1100-1200` and outstanding fees to `$100.00`.
 * `ledit 1 1 rates/50 f/0` Edits the rates to be `$50.00` and outstanding fees to be `$0.00`.
 
@@ -921,6 +925,8 @@ Format: `paid INDEX LESSON_INDEX amt/AMOUNT_PAID`
 Examples:
 * `paid 1 1 amt/70` The 1st student has paid `$70.00` for his or her 1st lesson.
 * `paid 3 2 amt/480.50` The 3rd student has paid `$480.50` for his or her 2nd lesson.
+
+<div style="page-break-after: always;"></div>
 
 #### Behaviour of the Fees Calculator
 
@@ -947,6 +953,7 @@ This value would be used to calculate and flag out which lesson's fees are due b
 [back to table of contents](#toc)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### Managing Your Schedule
 
@@ -1049,25 +1056,17 @@ Format: `today`
 
 --------------------------------------------------------------------------------------------------------------------
 
-<div style="page-break-after: always;"></div>
-
 ### Miscellaneous Commands
 
 This section describes the other miscellaneous commands available in TAB.
 
-1. [Clearing all entries: `clear`](#clearing-all-entries-clear)
-2. [Viewing all tags: `tag`](#viewing-all-tags-tag)
+1. [Viewing all tags: `tag`](#viewing-all-tags-tag)
+2. [Clearing all entries: `clear`](#clearing-all-entries-clear)
 3. [Undoing previous commands: `undo`](#undoing-previous-commands-undo)
 4. [Redoing undone commands: `redo`](#redoing-undone-commands-redo)
 5. [Exiting the program: `exit`](#exiting-the-program-exit)
 
 --------------------------------------------------------------------------------------------------------------------
-
-#### Clearing all entries: `clear`
-
-Clears all entries from TAB.
-
-Format: `clear`
 
 #### Viewing all tags: `tag`
 
@@ -1079,7 +1078,11 @@ Format: `tag`
 
 <div class="caption">The text on the left shows the tag names created and the number on the right indicates the number of students labelled with each tag.</div>
 
-<div style="page-break-after: always;"></div>
+#### Clearing all entries: `clear`
+
+Clears all entries from TAB.
+
+Format: `clear`
 
 #### Undoing previous commands: `undo`
 
@@ -1109,7 +1112,8 @@ Example:
    2. `undo` undoes the modification. Name of first student returns to original name before `edit` command.
    3. `ledit 2 1 date/3 Nov 2021` modifies the start date of the first lesson of the second student. This command **modifies data**.
    4. `redo` is invalid. TAB shows that there are no commands to be redone.
-   
+    
+<div style="page-break-after: always;"></div>
 
 #### Exiting the program: `exit`
 
@@ -1122,8 +1126,6 @@ Format: `exit`
 [back to table of contents](#toc)
 
 --------------------------------------------------------------------------------------------------------------------
-
-<div style="page-break-after: always;"></div>
 
 ### Managing Data
 
@@ -1177,7 +1179,6 @@ This means that after clicking any button in the main window, you do not have to
 [back to table of contents](#toc)
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
 
 ## FAQ
 
@@ -1189,7 +1190,9 @@ This section records frequently asked questions from users of TAB.
 **Q**: I am using a Mac and when I tried to open **TAB.jar**, Mac shows “TAB.jar cannot be opened because it is from an unidentified developer". How do I resolve this issue? <br>
 **A**: Go to <kbd>System Preferences</kbd> → <kbd>Security & Privacy</kbd> → <kbd>General</kbd> and click <kbd>Open Anyway</kbd> at the bottom as shown in the following screenshot.
 
-![macSecurity](images/macSecurity.png)
+<div align="center">
+  <img src="images/macSecurity.png" width="600" />
+</div>
 <div style="text-align:center"><i>The arrow indicates where you should click to open the app.</i></div>
 
 <br />
@@ -1222,8 +1225,6 @@ UX | User Experience - The experience a user has when using the app.
 [back to table of contents](#toc)
 
 --------------------------------------------------------------------------------------------------------------------
-
-<div style="page-break-after: always;"></div>
 
 ## Command Summary
 This section lists all the available commands in TAB, along with examples on how you can use them.
@@ -1269,6 +1270,8 @@ Action | Format
 [**Navigate Forward in Calendar**](#navigating-forward-in-the-calendar-next) | `next`
 [**Navigate Backward in Calendar**](#navigating-backwards-in-the-calendar-back) | `back`
 [**View Reminders**](#viewing-upcoming-lessons-remind) | `remind`
+
+<div style="page-break-after: always;"></div>
 
 ### General
 
