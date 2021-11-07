@@ -89,10 +89,10 @@ public class SetShiftTimeCommandTest {
         Model expectedModel = new ModelManager();
 
         Person alice = new PersonBuilder().withName("Alice Pauline")
-                .withEmail("alice@example.com").withPhone("94351253").withRoles("floor").withSalary("1000000")
+                .withEmail("alice@example.com").withPhone("94351253").withRoles("floor").withSalary("1000")
                 .withStatus("fulltime").withTags("friends").build();
         Person copyOfAlice = new PersonBuilder().withName("Alice Pauline")
-                .withEmail("alice@example.com").withPhone("94351253").withRoles("floor").withSalary("1000000")
+                .withEmail("alice@example.com").withPhone("94351253").withRoles("floor").withSalary("1000")
                 .withStatus("fulltime").withTags("friends").build();
 
         model.addPerson(alice);
@@ -113,11 +113,11 @@ public class SetShiftTimeCommandTest {
         Model expectedModel = new ModelManager();
 
         Person alice = new PersonBuilder().withName("Alice Pauline")
-                .withEmail("alice@example.com").withPhone("94351253").withRoles("floor").withSalary("1000000")
+                .withEmail("alice@example.com").withPhone("94351253").withRoles("floor").withSalary("1000")
                 .withStatus("fulltime").withTags("friends").build();
 
         Person copyOfAlice = new PersonBuilder().withName("Alice Pauline")
-                .withEmail("alice@example.com").withPhone("94351253").withRoles("floor").withSalary("1000000")
+                .withEmail("alice@example.com").withPhone("94351253").withRoles("floor").withSalary("1000")
                 .withStatus("fulltime").withTags("friends").build();
 
         model.addPerson(alice);
@@ -137,7 +137,7 @@ public class SetShiftTimeCommandTest {
         Model model = new ModelManager();
 
         Person alice = new PersonBuilder().withName("Alice Pauline")
-                .withEmail("alice@example.com").withPhone("94351253").withRoles("floor").withSalary("1000000")
+                .withEmail("alice@example.com").withPhone("94351253").withRoles("floor").withSalary("1000")
                 .withStatus("fulltime").withTags("friends").build();
         model.addPerson(alice);
 
