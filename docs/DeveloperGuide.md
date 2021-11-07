@@ -29,13 +29,19 @@ This product will make recruiters’ lives easier through categorisation and fil
   * [Common classes](#common-classes)
 - [**Implementation**](#implementation)
   * [Add feature](#add-feature)
-  * [Datetime for interview](#datetime-for-interview)
   * [Edit feature](#edit-feature)
-  * [Filter interview feature](#filter-interview-feature)
     + [Design considerations:](#design-considerations)
   * [Find feature](#find-feature)
+    + [Design considerations:](#design-considerations-1)
+  * [Filter interview feature](#filter-interview-feature)
+    + [Design considerations:](#design-considerations-2)
+  * [Delete feature](#delete-feature)
   * [Show feature](#show-feature)
+    + [Design considerations:](#design-considerations-3)
+  * [Mark feature](#mark-feature)
   * [Unmark feature](#unmark-feature)
+  * [Delete marked feature](#delete-marked-feature)
+  * [Datetime for interview](#datetime-for-interview)
 - [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
 - [**Appendix: Requirements**](#appendix-requirements)
   * [Product scope](#product-scope)
@@ -43,8 +49,9 @@ This product will make recruiters’ lives easier through categorisation and fil
   * [Use cases](#use-cases)
   * [Non-Functional Requirements](#non-functional-requirements)
   * [Glossary](#glossary)
-- [**Appendix: Instructions for manual testing**](#appendix-instructions-for-manual-testing)
+- [**Appendix: Instructions for manual testing**](#appendix-instructions-for-manual-testing--)
   * [Launch and shutdown](#launch-and-shutdown)
+  * [Adding a person](#adding-a-person)
   * [Deleting a person](#deleting-a-person)
   * [Saving data](#saving-data)
 
@@ -278,7 +285,8 @@ The following sequence diagram shows how the edit operation works.
 ![images](images/EditCommandSequenceDiagram.png)
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `EditCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
-      
+<<<<<<< HEAD
+
 ### Delete feature
 
 The ```delete``` command is facilitated by creating a ```DeleteCommand``` depending on the given input.
@@ -300,8 +308,8 @@ Step 2. `DeleteCommandParser` is initialized based on the parse results and `Del
 to identify the indices present in ``` 1```. `DeleteCommandParser#parse()` then initializes a
 `DeleteCommand` with the indices present as arguments.
 
-Step 3. `DeleteCommand#execute()` is then called, which will check the validity of the given indices. 
-If there is no exception thrown, `Model#deletePerson()` is called to delete the applicants corresponding to the 
+Step 3. `DeleteCommand#execute()` is then called, which will check the validity of the given indices.
+If there is no exception thrown, `Model#deletePerson()` is called to delete the applicants corresponding to the
 given indices.
 
 Step 4. `CommandResult` is initialized with `String` containing the details of the deleted applicant.
@@ -1044,17 +1052,39 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Adding an applicant 
 
-1. Deleting a person while all persons are being shown
+1. Adding an applicant while all applicants are being shown 
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list. 
+    
+    1. Test case: `add n/John Doe p/98765432 e/JohnDoe@gmail.com r/Teacher et/Full time s/3000 l/Bachelors y/4`<br>
+       Expected: A new applicant named John Doe with all of the above details is added to the list. Details of the added contact shown in 
+       result display. 
+       
+    1. Test case: `add Bob p/98765432 e/bob@gmail.com r/Lawyer et/Full time s/7000 l/Bachelors y/4`
+       Expected: No new applicant is added. Error details shown in the result display stating that Bob shares the 
+       same phone number as John Doe. 
+    
+    1. Test case: `add Jack Smith p/97865321 e/JohnDoe@gmail.com r/Doctor et/Full time s/9000 l/Bachelors y/4`
+       Expected: No new applicant is added. Error details shown in the result display stating that Bob shares the 
+       same email as John Doe.
+       
+    1. Other incorrect add commands to try: `add`, `add John`, `add n/John p/98765432 e/JohnDoe@gmail.com r/Teacher`
+    (where incomplete details are given for the applicant being added).
+    Expected: Error messages displaying the cause of error is shown in the result display.  
+
+### Deleting an applicant
+
+1. Deleting an applicant while all applicants are being shown
+
+    1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list.
 
     1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+       Expected: First applicant is deleted from the list. Details of the deleted applicant shown in the result display. 
 
     1. Test case: `delete 0`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+       Expected: No applicant is deleted. Error details shown in the result display.
 
     1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
