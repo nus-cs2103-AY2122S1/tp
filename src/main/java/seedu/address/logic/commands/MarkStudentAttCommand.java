@@ -26,8 +26,8 @@ public class MarkStudentAttCommand extends Command {
             + "Marking a student who is present will change his attendance to absent.\n"
             + "Parameters: INDEX [MORE_INDEXES] (must be positive integers)"
             + " [" + PREFIX_WEEK + "WEEK]\n"
-            + "Example: " + COMMAND_WORD + " 3 4 5 "
-            + PREFIX_WEEK + "1";
+            + "Example: " + COMMAND_WORD + " 1 2 3 "
+            + PREFIX_WEEK + "3";
 
     public static final String MESSAGE_MARK_STUDENT_SUCCESS = "Student: %1$s is marked as %2$s for week %3$s!\n";
 

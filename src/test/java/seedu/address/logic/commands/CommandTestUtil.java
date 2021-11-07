@@ -356,6 +356,11 @@ public class CommandTestUtil {
         }
 
         @Override
+        public ObservableList<Student> getAllStudentList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredStudentList(Predicate<Student> predicate) {
             throw new AssertionError("This method should not be called.");
         }
@@ -387,6 +392,11 @@ public class CommandTestUtil {
 
         @Override
         public ObservableList<Group> getFilteredGroupList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Group> getAllGroupList() {
             throw new AssertionError("This method should not be called.");
         }
 

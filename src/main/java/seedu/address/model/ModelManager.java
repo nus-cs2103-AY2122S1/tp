@@ -125,7 +125,7 @@ public class ModelManager implements Model {
         requireNonNull(target);
         addressBook.deleteStudent(target);
         if (target.hasGroupName()) {
-            List<Group> groupList = getFilteredGroupList();
+            List<Group> groupList = getAllGroupList();
             Group group = groupList.stream()
                                           .filter(g -> g.getName().equals(target.getGroupName()))
                                           .findAny()
@@ -149,7 +149,7 @@ public class ModelManager implements Model {
     private void updateGroup(Student target, Student editedStudent) {
         requireAllNonNull(target, editedStudent);
         if (target.hasGroupName()) {
-            List<Group> groupList = getFilteredGroupList();
+            List<Group> groupList = getAllGroupList();
             Group updatedGroup = groupList.stream()
                     .filter(g -> g.getName().equals(target.getGroupName()))
                     .findAny()
@@ -242,6 +242,7 @@ public class ModelManager implements Model {
         requireAllNonNull(target, target);
         target.toggleIsDone();
         addressBook.sortTasks();
+        displayType = TASKS;
     }
 
     @Override
@@ -288,6 +289,11 @@ public class ModelManager implements Model {
         return filteredStudents;
     }
 
+    public ObservableList<Student> getAllStudentList() {
+        filteredStudents.setPredicate(PREDICATE_SHOW_ALL_STUDENTS);
+        return filteredStudents;
+    }
+
     @Override
     public void updateFilteredStudentList(Predicate<Student> predicate) {
         displayType = STUDENTS;
@@ -325,12 +331,17 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Group> getAllGroupList() {
+        filteredGroups.setPredicate(PREDICATE_SHOW_ALL_GROUPS);
+        return filteredGroups;
+    }
+
+    @Override
     public void updateFilteredGroupList(Predicate<Group> predicate) {
         displayType = GROUPS;
         requireNonNull(predicate);
         filteredGroups.setPredicate(predicate);
     }
-
 
     @Override
     public boolean equals(Object obj) {

@@ -23,7 +23,7 @@ public interface Model {
     Predicate<Group> PREDICATE_SHOW_ALL_GROUPS = unused -> true;
 
     enum DisplayType {
-        STUDENTS, TASKS, GROUPS, TASK_HISTORY
+        STUDENTS, TASKS, GROUPS
     }
 
     /**
@@ -138,6 +138,9 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered student list */
     ObservableList<Student> getFilteredStudentList();
 
+    /** Returns an unmodifiable view of all students in student list */
+    ObservableList<Student> getAllStudentList();
+
     /**
      * Updates the filter of the filtered student list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
@@ -176,6 +179,9 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredGroupList(Predicate<Group> predicate);
+
+    /** Returns an unmodifiable view of all groups in group list */
+    ObservableList<Group> getAllGroupList();
 
     /**
      * Returns true if a task with the same identity as {@code task} exists in the address book.
