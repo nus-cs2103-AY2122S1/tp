@@ -31,10 +31,10 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/tanjoewel.png" width="200px">
 
 [[github](http://github.com/tanjoewel)]
-[[portfolio](team/joewel.md)]
+[[portfolio](team/tanjoewel.md)]
 
 * Role: Developer
-* Responsibilities: Module
+* Responsibilities: Module, Storage
 
 ### Wang Guanlin (Joseph)
 
