@@ -560,6 +560,14 @@ success.
    downloaded quickly. However, since we wanted to make ProgrammerError more flexible and adaptable to different users, we opted to include the
    functionality of allowing the CS2100 TA to select a folder destination.
 
+
+### Purge Feature 
+
+
+This sequence diagram shows how the `purge` command works:
+![PurgeSequenceDiagram](images/commands/PurgeCommand/PurgeCommandSequenceDiagram.png)
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## <a name="Documentation"></a> **Documentation, logging, testing, configuration, dev-ops**

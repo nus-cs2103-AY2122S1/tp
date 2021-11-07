@@ -1,0 +1,61 @@
+@startuml
+!include ../style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ProgrammerErrorParser" as ProgrammerErrorParser LOGIC_COLOR
+participant "p:PurgeCommand" as PurgeCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : 'purge'
+activate LogicManager
+
+LogicManager -> ProgrammerErrorParser : parseCommand('purge')
+activate ProgrammerErrorParser
+
+create PurgeCommand
+ProgrammerErrorParser -> PurgeCommand : parse(CommandText)
+activate PurgeCommand
+
+PurgeCommand --> ProgrammerErrorParser : p
+deactivate PurgeCommand
+
+ProgrammerErrorParser --> LogicManager : p
+deactivate ProgrammerErrorParser
+
+LogicManager -> PurgeCommand : execute()
+activate PurgeCommand
+
+PurgeCommand -> Model : setProgrammerError
+activate Model
+Model --> PurgeCommand
+
+PurgeCommand -> Model : updateFilteredStudentList
+Model --> PurgeCommand
+
+PurgeCommand -> Model : clearSelectedInformation()
+Model --> PurgeCommand
+
+PurgeCommand -> Model : clearLabsTracker()
+Model --> PurgeCommand
+deactivate Model
+
+
+create CommandResult
+PurgeCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> PurgeCommand
+deactivate CommandResult
+
+PurgeCommand --> LogicManager : result
+deactivate PurgeCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
