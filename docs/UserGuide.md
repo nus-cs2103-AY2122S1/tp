@@ -61,22 +61,22 @@ This User Guide is intended for basic to advanced users of CohortConnect. It pro
 <br/>
 
 1. Telegram Handle Conventions:  
-• Handles can use a-z, 0-9 and underscores.
+• Can only contain the letters a-z or A-Z, digits 0-9 and underscores.
 <br/>
-• Handles are case-insensitive.
+• Is case-insensitive.
 <br/>
-• Handles must be at least five characters long, and maximum is 39 characters.
+• Must be 5 to 32 characters long.
 <br/>
 <br/>  
 2. GitHub Username Conventions:
 <br/>
-• GitHub username may only contain alphanumeric characters or hyphens.
+• Can only contain alphanumeric characters or hyphens.
 <br/>
-• GitHub username cannot have multiple consecutive hyphens. 
+• Cannot have multiple consecutive hyphens. 
 <br/>
-• GitHub username cannot begin or end with a hyphen. 
+• Cannot begin or end with a hyphen. 
 <br/>
-• Maximum is 39 characters.
+• Can have a maximum of 39 characters.
 <br/>
 
 </div>
@@ -201,13 +201,13 @@ edit profile [n/<NAME>] [te/<TELEGRAM>] [g/<GITHUB>]
    <br/>
    • Cannot begin or end with a hyphen.
    <br/>
-   • Must be between 4 to 39 characters long
+   • Must be 5 to 32 characters long
    <br/>
 3. Telegram Handle Conventions:
    <br/>
-   • Can contain the letters a-z, digits 0-9 and underscores.
+   • Can contain the letters a-z or A-Z, digits 0-9 and underscores.
    <br/>
-   • Must be 5 to 39 characters long.
+   • Must be 5 to 32 characters long.
    <br/>
 * Edits name, Telegram and GitHub fields of user's profile.
 * If the prefix of the field to be edited is mentioned, then its parameters cannot be left empty.
