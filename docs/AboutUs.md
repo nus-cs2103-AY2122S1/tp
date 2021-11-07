@@ -19,10 +19,10 @@ You can reach us at the email `e0559714@u.nus.edu`
 
 * Role: Team lead
 * Responsibilities:
-  1. Team lead: Responsible for overall project coordination
-  2. Scheduling and tracking: In charge of defining, assigning, and tracking project tasks
-  3. Deliverables and deadlines: Ensure project deliverables are done on time and in the right format
-  4. Logic package gatekeeper: In charge of merging any commits related Logic package on main repo
+  1. Team lead: Responsible for overall project coordination.
+  2. Scheduling and tracking: In charge of defining, assigning, and tracking project tasks.
+  3. Deliverables and deadlines: Ensure project deliverables are done on time and in the right format.
+  4. Logic package gatekeeper: In charge of merging any commits related Logic package on main repo.
 
 
 ### Chan Choon Yong
@@ -32,11 +32,11 @@ You can reach us at the email `e0559714@u.nus.edu`
 [[github](https://github.com/choonyongchan)]
 [[portfolio](team/chanchoonyong.md)]
 
-* Role: Tester, Manager
+* Role: Developer, Tester, Manager
 * Responsibilities:
   1. Quality Assurance (QA) Analyst [Testing]: Ensures the testing of the project is done properly and on time.
-  2. Progress Manager: Check weekly tp progress
-  3. Test package gatekeeper: In charge of merging any commits related Test package on main repo
+  2. Progress Manager: Check weekly tp progress.
+  3. Test package gatekeeper: In charge of merging any commits related Test package on main repo.
 
 
 
@@ -51,7 +51,7 @@ You can reach us at the email `e0559714@u.nus.edu`
 * Responsibilities:
   1. Code Quality Assurance (QA) Analyst [Code quality]: Looks after code quality, ensures adherence to coding standards, etc.
   2. Integration: In charge of versioning of the code, maintaining the code repository, integrating various parts of the software to create a whole.
-  3. Model package gatekeeper: In charge of merging any commits related to Model package on main repo
+  3. Model package gatekeeper: In charge of merging any commits related to Model package on main repo.
 
 
 
@@ -60,12 +60,12 @@ You can reach us at the email `e0559714@u.nus.edu`
 <img src="images/bklimey.png" width="200px">
 
 [[github](https://github.com/bklimey)]
-[[portfolio](team/limboonkee.md)]
+[[portfolio](team/bklimey.md)]
 
-* Role: Documentation
+* Role: Developer, Documenter
 * Responsibilities:
   1. Team Documentation (Meeting minutes, planning, brainstorm materials): Responsible for the quality of various team documents.
-  2. Storage package gatekeeper: In charge of merging any commits related to Storage package on main repo
+  2. Storage package gatekeeper: In charge of merging any commits related to Storage package on main repo.
 
 
 ### Nathan Wong Hung Rui
@@ -75,9 +75,9 @@ You can reach us at the email `e0559714@u.nus.edu`
 [[github](https://github.com/e0543978)]
 [[portfolio](team/nathanwonghungrui.md)]
 
-* Role: Documentation, Tool Expert
+* Role: Developer, Documenter, Tool Expert
 * Responsibilities:
   1. Project Documentation (UG & DG): Responsible for the quality of various project documents.
-  2. UI (JavaFX): In-charged of UI direction
+  2. UI (JavaFX): In-charged of UI direction.
   3. Tool expert: e.g. Intellij expert, Git expert, etc. Helps other team members with matters related to the specific tool.
-  4. UI package gatekeeper: In charge of merging any commits related Logic package on main repo
+  4. UI package gatekeeper: In charge of merging any commits related UI package on main repo.
