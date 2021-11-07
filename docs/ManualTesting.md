@@ -80,7 +80,7 @@ Manual Testing was focused mainly on Testing Features and the Graphical User Int
           Expected: Similar to cases of missing required field.
        2. `add n/Charles`<br>
           Expected: Similar to cases of missing required field.
-***
+
 
 #### Delete Student
 
@@ -114,8 +114,7 @@ Manual Testing was focused mainly on Testing Features and the Graphical User Int
         1. `delete`<br>
         2. `delete x` (where x is larger than the current list size)<br>
            Expected: Similar to previous.
-
-***
+        
 
 #### Tag Student
 
@@ -142,7 +141,7 @@ Manual Testing was focused mainly on Testing Features and the Graphical User Int
     2. The test cases mirror `Test 1`, with he student being viewed in the result display still being viewed in the same
        state after execution of the command regardless if the execution of the command is successful or not.
        To view the changes in `Tag` for the student being viewed in the result display, use `view 1` after the tag command.
-***
+
 
 #### Get Personal Detail
 List of invariance to guide additional test case generation:
@@ -276,8 +275,7 @@ Below are a few test cases which checks for the above. The test cases are by no 
         1. Feedback box will always say "Failed to receive one or more personal details. Showing what I can..." for all
            test cases.
         2. Result display will always show "Nothing to show..."
-
-***
+        
 
 #### Edit Personal Detail
 
@@ -355,7 +353,7 @@ and open the "View Test Score" tab to view the changes in the grade.
 3. Record the grade of a single student's assessment, while all students are shown in list and a student is being viewed with the "View Test Score" open
     1. Prerequisites: List all students using the list command. Multiple students in the list. View a single student using view 1. Click on "View Participation" in the result display.
     2. The test cases mirror Test 1, with the student being viewed in the result display in the state with no tabs open after successful execution of the command. If the execution of the command fails, the result display still shows the student with the "View Test Score" tab open.
-***
+
 
 #### Edit Attendance
 
@@ -393,8 +391,7 @@ and open the "View Test Score" tab to view the changes in the grade.
 4. Marking a single student's attendance while all students are shown in list and a student is being viewed with the "View Test Score" open
     1. Prerequisites: List all students using the `list` command. Multiple students in the list. View a single student using `view 1`. Click on "View Test Score" in the result display.
     2. The test cases mirror `Test 1`, with the student being viewed in the result display in the state with no tabs open after successful execution of the command. If the execution of the command fails, the result display still shows the student with the "View Test Score" tab open.
-
-***
+    
 
 #### Edit Participation
 
@@ -462,8 +459,7 @@ and open the "View Test Score" tab to view the changes in the grade.
    1. `view 2` <br>
       Expected: No view is shown on the result display. An error message is shown stating that index number is invalid. <br>
       Significance: View works for the current index number shown on the student list only.
-
-***
+   
 
 #### Show Grade
 
@@ -508,8 +504,7 @@ and open the "View Test Score" tab to view the changes in the grade.
    2. Test case: `show ra1` <br>
       Expected: Scores displayed for the students should match the input grades, the number of students recorded should be "3", and the
       average should be "16".
-
-***
+   
 
 #### Visualize all Grades
 
@@ -535,8 +530,7 @@ and open the "View Test Score" tab to view the changes in the grade.
     1. Prerequisites: There are some assessments' grades that are not entered yet.
     2. Test case: `visualize` <br>
        Expected: Box and Whisker plot shown in Result Display. The box includes median, 25%, 75%, max and min grades of assessments with grades. Assessments without grade will not show the data bar.
-
-***
+    
 
 #### Filter Academy Directory
 
@@ -561,8 +555,7 @@ and open the "View Test Score" tab to view the changes in the grade.
           Expected: Student list should not show Student 1 and/or Student 2.
        7. `filter` <br>
           Expected: Student list should remain unchanged. Error details are shown in the status message indicating invalid command format. Result display remains the same.
-
-***
+       
 
 #### Sort Student List
 
@@ -618,8 +611,7 @@ and open the "View Test Score" tab to view the changes in the grade.
     1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-
-***
+       
 
 #### List All Students
 
@@ -632,7 +624,7 @@ and open the "View Test Score" tab to view the changes in the grade.
           Expected: Error message is shown on the status message display stating that there is an invalid usage detected, no other argument should follow, and that the command is highlighted in red.
        1. `list 02it0hg204`
           Expected: Error message is shown on the status message display, stating that there is an invalid usage detected, no other argument should follow, and that the command is highlighted in red.
-***
+
 
 #### Clear Student List
 
@@ -644,7 +636,6 @@ and open the "View Test Score" tab to view the changes in the grade.
    1. `clear 3` <br>
       Expected: Error message is shown on the status message display stating that there is an invalid usage detected, no other argument should follow, and that the command is highlighted in red.
 
-***
 
 #### Help
 
@@ -677,7 +668,7 @@ and open the "View Test Score" tab to view the changes in the grade.
           Expected: The help window is refocused with its content change to the new `help` instead.
        1. Click on the `Copy UG Guide` button on the right side, and access the link <br>
           Expected: The User Guide web-version of Academy Directory can be accessed, meaning that the link is indeed copied.
-***
+
 
 #### Saving data
 
@@ -687,6 +678,7 @@ and open the "View Test Score" tab to view the changes in the grade.
 
 
 2. _{ more test cases to come …​ }_
+
 
 ***
 
