@@ -7,9 +7,6 @@ import static seedu.programmer.commons.util.AppUtil.checkArgument;
  * Represents a student's name in the ProgrammerError.
  */
 public class LabNum {
-    public static final String MESSAGE_CONSTRAINT =
-            " Lab number should be between 0 and 13 (inclusive)";
-
     private final Integer labNum;
 
     /**
@@ -19,7 +16,7 @@ public class LabNum {
      */
     public LabNum(Integer labNum) {
         requireNonNull(labNum);
-        checkArgument(isValidLabNum(labNum), MESSAGE_CONSTRAINT);
+        checkArgument(isValidLabNum(labNum), Lab.MESSAGE_LAB_NUMBER_CONSTRAINT);
         this.labNum = labNum;
     }
 

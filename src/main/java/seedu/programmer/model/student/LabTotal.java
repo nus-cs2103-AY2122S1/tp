@@ -7,9 +7,6 @@ import static seedu.programmer.commons.util.AppUtil.checkArgument;
  * Represents a student's name in the ProgrammerError.
  */
 public class LabTotal {
-    public static final String MESSAGE_CONSTRAINT =
-            "Lab total score should be between 1 and 100 (inclusive)";
-
     private final Integer labTotalScore;
 
     /**
@@ -19,7 +16,7 @@ public class LabTotal {
      */
     public LabTotal(Integer labTotalScore) {
         requireNonNull(labTotalScore);
-        checkArgument(isValidLabTotalScore(labTotalScore), MESSAGE_CONSTRAINT);
+        checkArgument(isValidLabTotalScore(labTotalScore), Lab.MESSAGE_LAB_TOTAL_SCORE_CONSTRAINT);
         this.labTotalScore = labTotalScore;
     }
 

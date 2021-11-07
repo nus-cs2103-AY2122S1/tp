@@ -116,15 +116,15 @@ class JsonAdaptedStudent {
 
 
                 if (!LabNum.isValidLabNum(labNum)) {
-                    throw new IllegalValueException(LabNum.MESSAGE_CONSTRAINT);
+                    throw new IllegalValueException(Lab.MESSAGE_LAB_NUMBER_CONSTRAINT);
                 }
 
                 if (!LabResult.isValidLabResult(labResult)) {
-                    throw new IllegalValueException(LabResult.MESSAGE_CONSTRAINT);
+                    throw new IllegalValueException(Lab.MESSAGE_LAB_SCORE_CONSTRAINT);
                 }
 
                 if (!LabTotal.isValidLabTotalScore(labTotal)) {
-                    throw new IllegalValueException(LabTotal.MESSAGE_CONSTRAINT);
+                    throw new IllegalValueException(Lab.MESSAGE_LAB_TOTAL_SCORE_CONSTRAINT);
                 }
 
                 if (labResult > labTotal) {

@@ -7,8 +7,6 @@ import static seedu.programmer.commons.util.AppUtil.checkArgument;
  * Represents a student's name in the ProgrammerError.
  */
 public class LabResult {
-    public static final String MESSAGE_CONSTRAINT =
-            " Lab result should be a non-negative number or a unmarked placeholder(-1)";
     private static final Integer UNMARKED_ACTUAL_SCORE_PLACEHOLDER = -1;
     private final Integer labResult;
 
@@ -20,7 +18,7 @@ public class LabResult {
      */
     public LabResult(Integer labResult) {
         requireNonNull(labResult);
-        checkArgument(isValidLabResult(labResult), MESSAGE_CONSTRAINT);
+        checkArgument(isValidLabResult(labResult), Lab.MESSAGE_LAB_SCORE_CONSTRAINT);
         if (labResult == -1) {
             this.labResult = UNMARKED_ACTUAL_SCORE_PLACEHOLDER;
         } else {
