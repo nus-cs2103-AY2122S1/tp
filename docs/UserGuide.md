@@ -158,7 +158,7 @@ Format: `addm n/NAME p/PHONE_NUMBER [d/DAY(S)] [t/TAG]...`
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Note:** You will not be able to add members with the same `NAME` into the member list as they are
+**:information_source: Note:** You will not be able to add members with the same `NAME` or `PHONE_NUMBER` into the member list as they are
 considered duplicates.
 </div>
 
