@@ -348,7 +348,7 @@ Step 3. UI-wise, the applicant should now appear with the updated application st
 
 The following activity diagram summarizes the actions taken when LogicManager executes the MarkApplicantStatusCommand:
 
-![MarkApplicantActivityDiagram](images/markapplicantactivitydiagram.png)
+![MarkApplicantActivityDiagram](images/MarkApplicantActivityDiagram.png)
 
 #### Design considerations:
 
@@ -1352,34 +1352,87 @@ testers are expected to do more *exploratory* testing.
    4. Other incorrect command to try: `edit-applicant 5`
       Expected: An error message will show, indicating that the index is invalid. 
 
+### Marking an applicant's status
+
+1. Updating an applicant's status successfully
+
+   1. Prerequisites: There is at least one applicant in MTR. List all applicants and positions using the `list-applicant` and `list-position` commands respectively. Assume there is a position `software engineer` and an applicant `John Doe` to that position, with status `Pending`.
+
+   2. Test case: `mark john doe status/accepted`
+      Expected: Applicant `John Doe`'s position is updated as 'Accepted'.
+      A success message is shown.
+
+   3. Test case: `mark john doe status/rejected`
+      Expected: Applicant `John Doe`'s position is updated as 'Rejected'.
+      A success message is shown.
+
+2. Attempting to update a non-existent applicant's status
+
+   1. Prerequisites: List all applicants and positions using the `list-applicant` and `list-position` commands respectively. There is no applicant with the name 'John Cena'.
+
+   2. Test case: `mark john cena status/rejected`
+      Expected: An error message is shown, indicating that there is no such applicant.
 
 ### Deleting an applicant
 
 1. Deleting an applicant from MrTechRecruiter
 
-  1. Prerequisites: There are 2 applicants within MTR. At index `1` we have `John Doe`, and at index `2` we have Mary Jane.
+   1. Prerequisites: There are 2 applicants within MTR. At index `1` we have `John Doe`, and at index `2` we have Mary Jane.
 
-  1. Test case: `delete-applicant 1`<br>
-     Expected: John Doe is deleted from the list. Details of the deleted contact shown in the status message.
+   2. Test case: `delete-applicant 1`<br>
+      Expected: John Doe is deleted from the list. Details of the deleted contact shown in the status message.
 
-  1. Test case: `delete-applicant 3`<br>
-     Expected: No applicant is deleted. Error details depicting index out of bounds is shown.
-  
+   3. Test case: `delete-applicant 3`<br>
+      Expected: No applicant is deleted. Error details depicting index out of bounds is shown.
 
+### Filtering applicants
 
+1. Specifying valid filtering criteria.
 
+   1. Prerequisites: List all applicants and positions using the `list-applicant` and `list-position` commands respectively. Assume there is a position `software engineer`, and at least two applicants to that position. Assume also that there is a position `database administrator`, and there is one applicant to that position.
 
-### Viewing average rate of a job
+   2. Test case: `filter-applicant pos/software engineer`
+      Expected: A success message is shown. Only the two applicants under the `software engineer` position now show.
 
-1. Viewing average rate of a job in MrTechRecruiter
+   3. Test case: `filter-applicant pos/database administrator`
+      Expected: A success message is shown. Only the one applicant under the `database administrator` position now shows.
+
+2. Attempting to filter by invalid criteria.
+
+   1. Prerequisites: List all applicants and positions using the `list-applicant` and `list-position` commands respectively. There is no position with the title 'pilot'.
+
+   2. Test case: `filter-applicant pos/pilot`
+      Expected: An error message is shown, indicating that the 'pilot' filter is invalid.
+
+### Viewing rejection rate of a job
+
+1. Viewing rejection rate of a job in MrTechRecruiter
 
     1. Prerequisites: <br>
        a. Job must exist in address book. <br>
-       b. Average rate already tabulated for the job.
+       b. Rejection rate already tabulated for the job.
 
-    1. Test case: `rate pos/software engineer`<br>
+    2. Test case: `rate pos/software engineer`<br>
        Expected: Text indicating the rejection rate will be displayed in the status bar. E.g. `Rejection rate for software engineer = 10.00%`
 
+### Visualizing a position
+
+1. Visualizing an existing position.
+
+   1. Prerequisites: List all applicants and positions using the `list-applicant` and `list-position` commands respectively. Assume there is a position `software engineer`, and at least two applicants to that position. Assume also that there is a position `database administrator`, and there are no applicants to that position.
+  
+   2. Test case: `visualize software engineer`
+      Expected: A success message is shown. A new window opens, showing a visual representation of the position, its applicants and the breakdown of their various statuses.
+
+   3. Test case: `visualize database administrator`
+      Expected: An error message is shown, indicating that there are no applicants to the position.
+
+2. Attempting to visualize a non-existent position.
+
+   1. Prerequisites: List all applicants and positions using the `list-applicant` and `list-position` commands respectively. There is no position with the title 'super spy'.
+
+   2. Test case: `visualize super spy`
+      Expected: An error message is shown, indicating that there is no such position.
 
 ### Undoing 
 
