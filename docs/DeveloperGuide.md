@@ -1104,8 +1104,7 @@ Action | Format | Examples
        
     1. Test case: `clear`, and then `no` when prompted by *Are you sure that you wish to clear the Address Book*
        Expected: Clients in the client list will not be cleared and the client list and address book will remain the same. Details of the command is shown in the status message. 
-       
-
+    
 #### 7.2.11 General commands 
 
 Action | Format
