@@ -19,7 +19,7 @@ import seedu.address.model.person.Person;
  */
 public class AddPersonCommand extends Command {
 
-    public static final String MESSAGE_USAGE = "add: Adds a person to the address book.\n"
+    public static final String MESSAGE_USAGE = "add: Adds a person to contHACKS.\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_EMAIL + "EMAIL "
@@ -37,7 +37,8 @@ public class AddPersonCommand extends Command {
             + PREFIX_REMARK + "Overseas\n";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_SAME_PERSON = "Unable to add: "
+                    + "A person with either the same email/telegram handle/phone number already exists in contHACKS";
 
     private final Person toAdd;
 
@@ -54,7 +55,7 @@ public class AddPersonCommand extends Command {
         requireNonNull(model);
 
         if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_SAME_PERSON);
         }
 
         model.addPerson(toAdd);

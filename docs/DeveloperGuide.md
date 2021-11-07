@@ -116,7 +116,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-T09-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="600" />
 
 
 The `Model` component,
@@ -147,7 +147,61 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Find feature
+### Add feature (With `ModuleCode`)
+The add feature allows user to add a `Person` or `ModuleLesson` into contHACKS. Both `Person` and `ModuleLesson` contains the member `ModuleCode`. This section elaborates on the implementation of `ModuleCode` and how it affects the add feature. 
+
+#### About ModuleCode
+`ModuleCode` is one of the parameters that must be included when adding a `Person` or `ModuleLesson`. `ModuleCode` contains the following members:
+```Java
+public final String value;
+public final Set<LessonCode> lessonCodes;
+```
+The `value` refers to the module code of a NUS module `e.g. "CS2100"`.
+`LessonCode` also has a `value` that refers to the code of the lesson: tutorials, labs, sectionals, etc `e.g. "T12"`
+`ModuleCode` has a set of `LessonCode` because a module in NUS can indeed have many lessons.
+
+<div markdown="span" class="alert alert-primary">:information_source: **Note:**
+There is a need to associate `LessonCode` with `ModuleCode` as we need to be able to identify which `ModuleCode` a `LessonCode` belongs to.
+</div>
+
+#### Implementation
+There are some distinctions between a `Person` and `ModuleLesson`. A `Person` can have many `ModuleCode`, with each `ModuleCode` having multiple `LessonCode` while a `ModuleLesson` lesson can only have one `ModuleCode`, with that `ModuleCode` having one `LessonCode`.
+
+##### Implementation for adding `Person`
+Since a `Person` can have many `ModuleCode`, an input like: `add ... m/CS2100 T19 B04 m/CS2103T T09` is valid. The following sequence diagram shows how parsing the input `add ... m/CS2100 T19 B04 m/CS2103T T09` works successfully to return a `AddPersonCommand`:
+
+![Sequence diagram for parsing Person](images/ParseAddPersonSequenceDiagram.png)
+
+Notice that the `AddPersonCommandParser` uses the method `parseModuleCodes()` to get a collection of `ModuleCode`.
+
+##### Implementation for adding `ModuleLesson`
+Since a `ModuleLesson` can only have one `ModuleCode` and one `LessonCode`, we need a way to enforce `lessonCodes.size() == 1` in `ModuleCode`. To achieve this, we only take the first `LessonCode` as the desired one. For example, the input `addc ... m/CS2100 T19 B09` would take `T19` as the `LessonCode` and ignore `B09`. On a similar note, to enforce having only one `ModuleCode`, we only consider the last occurrence of the parameter `m/`. For example, the input `addc ... m/CS2103T B04 m/CS2100 T19` would only consider `m/CS2100 T19` and ignore `m/CS2103T B04`. The following sequence diagram shows how parsing the input `addc ... m/CS2103T B04 m/CS2100 T19 B09` works successfully to return a `AddModuleLessonCommand` despite the extra `ModuleCode` and `LessonCode`:
+
+![Sequence diagram for parsing ModuleLesson](images/ParseAddModuleLessonSequenceDiagram.png)
+
+Notice that the `AddModuleLessonCommandParser` uses the method `parseModuleCodeForModuleLesson()` instead of `parseModuleCodes()` used by `AddPersonCommandParser`. This is where the distinction lies between adding `Person` and `ModuleLesson` with `ModuleCode`.
+
+#### Design considerations:
+
+**Aspect: What should be associated with the `ModuleCode`:**
+
+* **Alternative 1 (initial idea):** Have both `ModuleCode` and `LessonCode` be standalone classes associate with `Person` and `ModuleLesson`.
+    * Pros: Easier to implement
+    * Pros: Reduced coupling.
+    * Cons: Unable to tell which `ModuleCode` a `LessonCode` belongs to when there are more than one `ModuleCode` and `LessonCode`. Have to find another way to make the association which would introduce dependencies and remove the pros of reduced coupling.
+
+* **Alternative 2 (current version):** Have `ModuleCode` be associated with a set of `LessonCode`
+    * Pros: Able to tell which `ModuleCode` a `LessonCode` belongs to
+    * Pros: Some level of code reuse
+    * Cons: Have to introduce checks to ensure `ModuleCode` only has one `LessonCode` when it is a member of `ModuleLesson`
+
+* **Alternative 3:** Implement `ModuleCodeForPerson` and `ModuleCodeForModuleLesson`
+    * Pros: No checks are required as `ModuleCodeForModuleLesson` can be implemented to only have one `LessonCode`
+    * Cons: Low level of code reuse
+    * Cons: Not extensible
+
+
+### Find feature 
 
 #### Implementation
 The find command returns contacts that matches the input keywords. Initially, it only returns contacts that fully matches the keywords.
@@ -483,10 +537,8 @@ testers are expected to do more *exploratory* testing.
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
-
-3. _{ more test cases …​ }_
 
 ### Adding a person
 
@@ -496,27 +548,63 @@ testers are expected to do more *exploratory* testing.
    3. Test case: `add n/Casey e/casey@example.com m/CS2103T p/81234567 h/@caaaasey`<br>Expected: The person with the fields entered should be added into the displayed contacts. The module code `CS2103T` should be rendered.
    4. Test case: `add add n/Ben e/ben@example.com m/CS2103T T11 B04 p/9123456 h/@Benny`<br>Expected: No person is added because the `add` command is provided twice.
 
-### Deleting a person
+### Adding a lesson
 
-1. Deleting a person while all persons are being shown
+### Finding a person
+
+1. Prerequisites: There exists a contact named `Alex Yeoh` in the contact list, and no `Alexander` exists in the contact list.
+
+2. Test case: `find n/le Y`<br>
+   Expected: Contact with name `Alex Yeoh` is listed. 
+
+3. Test case: `find n/alexander`<br>
+   Expected: No contact is listed. No error is shown.
+
+4. Incorrect find commands to try: `find`, `find alex`, `find n/`<br>
+   Expected: No contact is listed. Error details shown in the result display. Text in the command box turns red.
+
+### Finding a lesson
+
+   1. Prerequisites: There exists a lesson with module code `CS1231` in the contact list, and no `CS1231S` exists in the contact list.
+
+   2. Test case: `findc m/S123`<br>
+         Expected: Lesson with module code `CS1231` is listed.
+
+   3. Test case: `findc m/cs1231s`<br>
+         Expected: No lesson is listed. No error is shown.
+
+   4. Incorrect find commands to try: `findc`, `findc cs1231`, `findc m/`<br>
+            Expected: No contact is listed. Error details shown in the result display. Text in the command box turns red.
+       
+### Editing a person
+
+### Editing a lesson
+   
+### Deleting a person
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
+   2. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   3. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
-
+### Deleting a lesson
+   
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Go to `conthacks.json` under the `data` folder and add random symbols to any `moduleCode` fields. This is to corrupt the current save file.
 
-1. _{ more test cases …​ }_
+   2. Double-click the jar file
+   Expected: Shows the GUI with no data.
+   
+   3. Delete the `conthacks.json` file under the `data` folder.
+   
+   4. Double-click the jar file 
+   Expected: Shows the GUI with newly populated sample data.

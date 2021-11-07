@@ -4,7 +4,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 
 import java.util.function.Predicate;
 
-import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -21,9 +20,9 @@ public class DeleteModuleLessonCommand extends Command {
     public static final String MESSAGE_USAGE = "deletec: "
             + "Deletes the Lesson identified by the index number used in the displayed Lesson list "
             + "or by module code \n"
-            + "Parameters: INDEX (must be a positive integer), "
-            + PREFIX_MODULE_CODE + "MODULE CODE\n"
-            + "Example: deletec 1, deletec 1-3, deletec m/CS2040";
+            + "Ensure that INDEX is a positive integer and exists in ContHACKS.\n"
+            + "Example: deletec 1, deletec 1-3, deletec m/CS2040\n"
+            + "Click on the Help button at the top for more detailed information";
 
     public static final String MESSAGE_NUMBER_DELETED_LESSONS = "%d Deleted Lessons: \n";
     public static final String MESSAGE_DELETE_LESSON_SUCCESS = "%1$s \n";
@@ -31,6 +30,7 @@ public class DeleteModuleLessonCommand extends Command {
             + "Delete only accepts one batch delete by Module Code at a time\n"
             + "Example: deletec " + PREFIX_MODULE_CODE + "CS2040S";
     public static final String MESSAGE_NO_SUCH_MODULE_CODE = "No such Module Code";
+    public static final String MESSAGE_INVALID_FORMAT = "Invalid command format! \n";
 
     private final Index targetIndex;
     private final Index endIndex;
@@ -86,10 +86,10 @@ public class DeleteModuleLessonCommand extends Command {
             successMessage = deleteByModuleCode(model);
             model.updateFilteredModuleLessonList(Model.PREDICATE_SHOW_ALL_LESSONS);
         } else if (targetIndex.getZeroBased() >= sizeOfModuleLessonList) {
-            throw new CommandException(Messages.MESSAGE_INVALID_MODULE_LESSON_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_FORMAT + MESSAGE_USAGE);
         } else if (targetIndex.getZeroBased() > endIndex.getZeroBased()
                 || endIndex.getZeroBased() >= sizeOfModuleLessonList) {
-            throw new CommandException(Messages.MESSAGE_INVALID_RANGE);
+            throw new CommandException(MESSAGE_INVALID_FORMAT + MESSAGE_USAGE);
         } else {
             successMessage = deleteAll(model, targetIndex.getZeroBased(), endIndex.getZeroBased());
         }

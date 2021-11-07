@@ -3,8 +3,8 @@ package seedu.address.logic.parser.person;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.person.DeletePersonCommand;
@@ -57,20 +57,9 @@ public class DeletePersonCommandParser implements Parser<DeletePersonCommand> {
     }
 
     private DeletePersonCommand deleteByModuleCode(List<String> moduleCodes) throws ParseException {
-        List<String> stringListOfModuleCodes = ParserUtil.parseModuleCodes(moduleCodes).stream()
-                .map(moduleCode -> moduleCode.toString())
-                .map(string -> {
-                    String temp = string;
-                    if (string.contains("[")) {
-                        temp = temp.substring(temp.indexOf("[") + 1);
-                    }
-                    if (string.contains("]")) {
-                        temp = temp.substring(0, temp.indexOf("]"));
-                    }
-                    return temp;
-                })
-                .collect(Collectors.toList());
+        List<String> stringListOfModuleCode = new ArrayList<>();
         ModuleCode moduleCode = ParserUtil.parseModuleCode(moduleCodes.get(0));
+        stringListOfModuleCode.add(moduleCode.getModuleCodeName());
         if (moduleCodes.size() > 1) {
             throw new ParseException(DeletePersonCommand.MESSAGE_DELETE_BY_MODULE_USAGE);
         }
@@ -78,6 +67,6 @@ public class DeletePersonCommandParser implements Parser<DeletePersonCommand> {
             throw new ParseException(DeletePersonCommand.MESSAGE_DELETE_BY_LESSON_CODE_USAGE);
         }
         return new DeletePersonCommand(
-                new ModuleCodesContainsKeywordsPredicate(stringListOfModuleCodes), moduleCode);
+                new ModuleCodesContainsKeywordsPredicate(stringListOfModuleCode), moduleCode);
     }
 }
