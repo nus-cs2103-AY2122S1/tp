@@ -34,10 +34,13 @@ Manual Testing was focused mainly on Testing Features and the Graphical User Int
 * [GUI Testing](#graphical-user-interface-gui-testing)
   * [Visual Design](#visual-design)
   * [User Interface Functionality](#user-interface-functionality)
-* [System Testing](#system-testing)
 * [Performance Testing](#performance-testing)
+  * [Visualization with large `AcademyDirectory`](#visualization-with-large-academydirectory-_coming-soon_)
+  * [Limit test `AcademyDirectory` capacity](#limit-test-academydirectory-capacity-_coming-soon_)
 * [Compatability Testing](#compatibility-testing)
+  * [Cross-OS Compatibility](#cross-os-compatibility-_coming-soon_)
 * [Portability Testing](#portability-testing)
+  * [Transfer of AcademyDirectory](#transfer-of-academydirectory-_coming-soon_)
 
 
 
@@ -750,7 +753,7 @@ These tests are primarily focused on testing both the appearance and the functio
 
 ## Performance testing
 
-### Visualize with large `AcademyDirectory` _[Coming soon]_
+### Visualization with large `AcademyDirectory` _[Coming soon]_
 
 * Testing of large number of the `Visualize` function with a large number of students in `AcademyDirectory`
   * Potentially affects runtime and if so, `AcademyDirectory` might require optimization.
@@ -777,7 +780,7 @@ These tests are primarily focused on testing both the appearance and the functio
 
 ## Portability testing
 
-### Transfer of AcademyDirectory _[Coming soon]_
+### Transfer of `AcademyDirectory` _[Coming soon]_
 
 * Testing transfer of `AcademyDirectory` between identical mainstream OS e.g from `MacOS` to `MacOS`.
 
