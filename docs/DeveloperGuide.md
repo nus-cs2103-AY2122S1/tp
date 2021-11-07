@@ -179,8 +179,6 @@ The respective parsers would construct the commands with the correct `Predicate`
 
 Given below is an example usage scenario and how the mechanism behaves at each step.
 
-<div style="text-align: left">
-
 **Step 1.** The user executes the command `sortpolicy titledsc`.
 
 **Step 2.** User input is passed to the `SiasaParser` and `SiasaParser` will call `SortPolicyCommandParser#parse`, which creates a new `SortPolicyCommand` with the `SORT_POLICY_BY_TITLE_DSC` Comparator.
@@ -190,8 +188,6 @@ Given below is an example usage scenario and how the mechanism behaves at each s
 **Step 4.** Since the `Model` is passed to `SortPolicyCommand#execute`, it is able to call a method `Model#updateFilteredPolicyList` to update the Comparator for the Policy `FilteredList`.
 
 **Step 5.** After the Comparator is applied, the Policy List view on the UI will automatically display the list with the correct sorting order.
-
-</div>
 
 #### Special Notes
 
