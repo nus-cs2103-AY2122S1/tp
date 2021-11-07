@@ -40,6 +40,23 @@ public class StudentBuilder {
     }
 
     /**
+     * Initializes the StudentBuilder with the data of {@code studentToCopy}.
+     *
+     * @param studentToCopy The student used to initialize the StudentBuilder.
+     */
+    public StudentBuilder(Student studentToCopy) {
+        name = studentToCopy.getName();
+        teleHandle = studentToCopy.getTeleHandle();
+        email = studentToCopy.getEmail();
+        studentId = studentToCopy.getStudentId();
+        List<Task> taskListToCopy = new ArrayList<>();
+        for (Task task : studentToCopy.getTaskList()) {
+            taskListToCopy.add(task);
+        }
+        this.taskList = taskListToCopy;
+    }
+
+    /**
      * Sets the {@code Name} of the {@code Student} that we are building.
      */
     public StudentBuilder withName(String name) {
