@@ -40,7 +40,6 @@ import seedu.programmer.model.student.Name;
 import seedu.programmer.model.student.StudentId;
 import seedu.programmer.testutil.EditStudentDescriptorBuilder;
 
-//TODO
 public class EditCommandParserTest {
 
     private static final String MESSAGE_INVALID_FORMAT =

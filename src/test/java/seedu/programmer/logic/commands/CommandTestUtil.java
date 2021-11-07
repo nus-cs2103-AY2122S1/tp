@@ -65,7 +65,6 @@ public class CommandTestUtil {
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
 
-    //todo
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_STUDENT_ID_DESC = " " + PREFIX_STUDENT_ID + "911a"; // 'a' not allowed in phones
     public static final String INVALID_CLASS_ID_DESC = " " + PREFIX_CLASS_ID + "bob!yahoo"; // missing '@' symbol

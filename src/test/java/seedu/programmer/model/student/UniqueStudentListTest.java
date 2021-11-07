@@ -103,7 +103,6 @@ public class UniqueStudentListTest {
     }
 
     //todo
-
     //    @Test
     //    public void setStudentEditedStudentHasNonUniqueIdentity_throwsDuplicateStudentException() {
     //        uniqueStudentList.add(ALICE);

@@ -195,8 +195,6 @@ public class ProgrammerError implements ReadOnlyProgrammerError {
         students.clearLabsTracker();
     }
 
-    //// util methods
-
     @Override
     public String toString() {
         return students.asUnmodifiableObservableList().size() + " students";

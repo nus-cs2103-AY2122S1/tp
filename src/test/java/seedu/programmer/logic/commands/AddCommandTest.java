@@ -62,8 +62,6 @@ public class AddCommandTest {
         assertEquals(expectedSelectedInformation, modelStub.getSelectedInformation());
     }
 
-    // todo
-
     @Test
     public void execute_duplicateStudent_throwsCommandException() {
         AddCommand addCommand = new AddCommand(validStudent);
@@ -72,8 +70,6 @@ public class AddCommandTest {
             addCommand.execute(modelStub));
     }
 
-
-    //todo
     @Test
     public void execute_invalidName_throwsCommandException() {
         AddCommand addCommand = new AddCommand(validStudent);

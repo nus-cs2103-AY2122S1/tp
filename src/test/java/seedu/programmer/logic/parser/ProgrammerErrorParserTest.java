@@ -47,7 +47,6 @@ class ProgrammerErrorParserTest {
         assertEquals(new DeleteCommand(INDEX_FIRST_STUDENT), command);
     }
 
-    //TODO
     @Test
     public void parseCommand_edit() throws Exception {
         Student student = new StudentBuilder().build();
