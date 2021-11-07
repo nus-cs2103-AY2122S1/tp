@@ -1577,13 +1577,23 @@ the most used page.
 
 ### Shortcuts
 
-**Typing from anywhere in Tab:**
-  
+**Typing from anywhere in Tab:**<br>
+Prerequisites: The main window of TAB is in focus.
+
    * Test case: 
      1. Click anywhere on the main window outside the CommandBox, such that it is no longer in focus.
-     2. Begin typing any command.
-   * Expected: CommandBox shifts back to focus, allowing you to type in it without having to click on it again.
-   
+     2. Begin a command, e.g., `view 2`.
+   * Expected: Alphabets, numeric keys, punctuations, spaces and backspaces will cause the CommandBox to shift back to focus, 
+     allowing you to type in it without having to click on it again.
+
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Note:**
+It is expected that special keys that have functions other than for typing will **NOT** cause the CommandBox to grab focus.
+We only grab focus when you're undoubtedly typing a valid string. E.g., <kbd>Enter</kbd> presses a button if it is in focus.
+We do **not** want to take focus away from that button.
+</div>
+
 **Going back to the previous commands:**<br>
 Prerequisites: Have a previous command entered, and an empty CommandBox in focus.
    
@@ -1596,7 +1606,8 @@ Prerequisites: Have a previous command entered, and an empty CommandBox in focus
 <kbd>Ctrl</kbd> + <kbd>z</kbd> is **NOT** a shortcut for the `undo` command.
 </div>
 
-**Function Key Accelerators:**
+**Function Key Accelerators:**<br>
+Prerequisites: The main window of TAB is in focus.
 
   * Test case: <kbd>F1</kbd>
   * Expected: Help window gets opened/focused.
