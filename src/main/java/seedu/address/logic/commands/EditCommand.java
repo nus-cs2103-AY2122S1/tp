@@ -128,44 +128,84 @@ public class EditCommand extends Command {
         }
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
-
         String editedTaskMessage = "";
 
         if (targetTaskIndex != null) {
             List<Task> tasks = new ArrayList<>(personToEdit.getTasks());
+            List<Task> taskListToModify = getTaskListToModify(model, personToEdit);
+            assert taskListToModify != null : "view all task list functionality not implemented correctly!";
 
-            if (targetTaskIndex.getZeroBased() >= tasks.size()) {
+            if (targetTaskIndex.getZeroBased() >= taskListToModify.size()) {
                 throw new CommandException(String.format(MESSAGE_INVALID_TASK, personToEdit.getName()));
             }
 
-            Task taskToEdit = tasks.get(targetTaskIndex.getZeroBased());
+            Task taskToEdit = taskListToModify.get(targetTaskIndex.getZeroBased());
             Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+            replaceTaskToEditWithEditedTask(tasks, taskToEdit, editedTask);
 
-            if (taskToEdit.equals(editedTask)) {
-                throw new CommandException(MESSAGE_DUPLICATE_TASK);
-            }
-
-            tasks.set(targetTaskIndex.getZeroBased(), editedTask);
-            editedPerson = new Person(
-                    editedPerson.getName(), editedPerson.getPhone(), editedPerson.getEmail(),
-                    editedPerson.getAddress(), editedPerson.getTags(), tasks, editedPerson.getDescription(),
-                    editedPerson.isImportant()
-            );
-
+            editedPerson = replacePersonTasks(editedPerson, tasks);
             editedTaskMessage = String.format(MESSAGE_EDIT_TASK_SUCCESS, editedTask);
         }
-        // If the edited details result in a duplicate person, throw an exception.
+        checkEditedPersonIsNotDuplicate(model, personToEdit, editedPerson);
+        model.setPerson(personToEdit, editedPerson);
+
+        return generateWriteCommandResult(model, editedPerson, editedTaskMessage);
+    }
+
+    private void checkEditedPersonIsNotDuplicate(Model model, Person personToEdit, Person editedPerson)
+            throws CommandException {
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
-        model.setPerson(personToEdit, editedPerson);
+    }
 
-        if (targetTaskIndex == null) {
-            return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+    private Person replacePersonTasks(Person editedPerson, List<Task> tasks) {
+        editedPerson = new Person(
+                editedPerson.getName(), editedPerson.getPhone(), editedPerson.getEmail(),
+                editedPerson.getAddress(), editedPerson.getTags(), tasks, editedPerson.getDescription(),
+                editedPerson.isImportant()
+        );
+        return editedPerson;
+    }
+
+    private void replaceTaskToEditWithEditedTask(List<Task> tasks, Task taskToEdit, Task editedTask)
+            throws CommandException {
+        if (taskToEdit.equals(editedTask)) {
+            throw new CommandException(MESSAGE_DUPLICATE_TASK);
+        }
+        for (int i = 0; i < tasks.size(); i++) {
+            if (taskToEdit.equals(tasks.get(i))) {
+                tasks.set(i, editedTask);
+            }
+        }
+    }
+
+    private List<Task> getTaskListToModify(Model model, Person personToEdit) throws CommandException {
+        List<Task> taskListToModify = null;
+        if (model.getIsViewAllTasks()) {
+            for (Person person : model.getViewAllTaskListPersons()) {
+                if ((person.getName()).equals(personToEdit.getName())) {
+                    taskListToModify = person.getTasks();
+                    break;
+                }
+            }
         } else {
-            model.displayPersonTaskList(editedPerson);
-            return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson) + "\n"
-                    + editedTaskMessage);
+            checkPersonToEditTasksDisplayed(model, personToEdit);
+            taskListToModify = model.getDisplayTaskList();
+        }
+        return taskListToModify;
+    }
+
+    private CommandResult generateWriteCommandResult(Model model, Person editedPerson, String editedTaskMessage) {
+        if (targetTaskIndex == null) {
+            CommandResult commandResult = new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+            commandResult.setWriteCommand();
+            return commandResult;
+        } else {
+            CommandResult commandResult = new CommandResult(
+                    String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson) + "\n" + editedTaskMessage);
+            commandResult.setWriteCommand();
+            return commandResult;
         }
     }
 
@@ -198,6 +238,18 @@ public class EditCommand extends Command {
         Venue updatedVenue = editTaskDescriptor.getTaskVenue().orElse(taskToEdit.getVenue());
 
         return new Task(updatedName, updatedDate, updatedTime, updatedVenue);
+    }
+
+    /**
+     * Checks if the person whose task(s) is selected for modification has their task list displayed
+     * on the task list panel.
+     */
+    private void checkPersonToEditTasksDisplayed(Model model, Person personToEdit) throws CommandException {
+        boolean isPersonToEditTaskDisplayed = personToEdit.getName().equals(model.getTaskListManager()
+                .getNameOfChosenPerson());
+        if (!isPersonToEditTaskDisplayed && !model.getIsViewAllTasks()) {
+            throw new CommandException(Messages.MESSAGE_PERSON_TO_EDIT_TASK_NOT_DISPLAYED);
+        }
     }
 
     /**

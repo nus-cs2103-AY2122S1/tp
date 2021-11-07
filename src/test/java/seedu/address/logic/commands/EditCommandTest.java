@@ -217,10 +217,10 @@ public class EditCommandTest {
                 + String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, newTask);
 
         ModelManager expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel.setPerson(
-                expectedModel.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()), editedPerson);
         expectedModel.displayPersonTaskList(
                 expectedModel.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()));
+        expectedModel.setPerson(
+                expectedModel.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()), editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
