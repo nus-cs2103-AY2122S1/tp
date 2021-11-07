@@ -1273,6 +1273,8 @@ Action | Format
 [**Navigate Backward in Calendar**](#navigating-backwards-in-the-calendar-back) | `back`
 [**View Reminders**](#viewing-upcoming-lessons-remind) | `remind`
 
+<div style="page-break-after: always;"></div>
+
 ### General
 
 Action | Format
