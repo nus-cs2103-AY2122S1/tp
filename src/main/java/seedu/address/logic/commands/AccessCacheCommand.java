@@ -13,6 +13,8 @@ public class AccessCacheCommand extends Command {
     public final String key;
 
     /**
+     * Constructor for a AccessCacheCommand to access the cache.
+     *
      * @param key The key pressed.
      */
     public AccessCacheCommand(String key) {
@@ -35,9 +37,10 @@ public class AccessCacheCommand extends Command {
     }
 
     /**
-     * Check if a key is valid
-     * @param key
-     * @return
+     * Check if a key is valid.
+     *
+     * @param key The key to check.
+     * @return A boolean that shows whether the key is valid.
      */
     public static boolean isValidKey(String key) {
         return (key.equals("UP") || key.equals("DOWN"));

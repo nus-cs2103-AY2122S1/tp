@@ -17,6 +17,8 @@ Class PersonCard
 Class StatusBarFooter
 Class CommandBox
 Class TaskCard
+Class AllTaskListPanel
+Class StatisticsDisplay
 }
 
 package Model <<Rectangle>> {
@@ -32,6 +34,9 @@ HiddenOutside ..> Ui
 
 UiManager .left.|> Ui
 UiManager -down-> "1" MainWindow
+PersonCard ----> "1" MainWindow
+MainWindow *-down-> "1" AllTaskListPanel
+MainWindow *-down-> "1" StatisticsDisplay
 MainWindow *-down--> "1" TaskListPanel
 MainWindow *-down->  "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
@@ -41,6 +46,7 @@ MainWindow --> "0..1" HelpWindow
 
 PersonListPanel -down-> "*" PersonCard
 TaskListPanel --> "*" TaskCard
+AllTaskListPanel -down-> "*" TaskCard
 
 MainWindow -down-|> UiPart
 
@@ -52,9 +58,13 @@ StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
 TaskListPanel ---|> UiPart
 TaskCard ---|> UiPart
+AllTaskListPanel --|> UiPart
+StatisticsDisplay --|> UiPart
 
 PersonCard ..> Model
 TaskCard ..> Model
+StatisticsDisplay ..> Model
+
 UiManager -right-> Logic
 MainWindow -left-> Logic
 

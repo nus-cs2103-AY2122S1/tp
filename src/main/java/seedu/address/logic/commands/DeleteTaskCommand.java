@@ -39,8 +39,8 @@ public class DeleteTaskCommand extends Command {
     /**
      * Constructor for a DeleteTaskCommand to delete a task from a person.
      *
-     * @param targetPersonIndex The Index of the target person.
-     * @param targetTaskIndexes The Index of the target Task that belongs to target person.
+     * @param targetPersonIndex The {@code Index} of the target person.
+     * @param targetTaskIndexes The {@code Index} of the target Task that belongs to target person.
      */
     public DeleteTaskCommand(Index targetPersonIndex, List<Index> targetTaskIndexes) {
         requireNonNull(targetPersonIndex);
@@ -122,7 +122,7 @@ public class DeleteTaskCommand extends Command {
     private List<Task> getTaskListToModify(Model model) {
         List<Task> taskListToModify;
         if (model.getIsViewAllTasks()) {
-            taskListToModify = model.getObservablePersonList().get(targetPersonIndex.getZeroBased()).getTasks();
+            taskListToModify = model.getViewAllTaskListPersons().get(targetPersonIndex.getZeroBased()).getTasks();
         } else {
             taskListToModify = model.getDisplayTaskList();
         }
@@ -141,19 +141,11 @@ public class DeleteTaskCommand extends Command {
     private List<Person> getLastShownList(Model model) {
         List<Person> lastShownList;
         if (model.getIsViewAllTasks()) {
-            lastShownList = model.getObservablePersonList();
+            lastShownList = model.getViewAllTaskListPersons();
         } else {
             lastShownList = model.getFilteredPersonList();
         }
         return lastShownList;
-    }
-
-    public String getCommand() {
-        return COMMAND_WORD;
-    }
-
-    public String getDescription() {
-        return DESCRIPTION;
     }
 
     /**
@@ -183,5 +175,13 @@ public class DeleteTaskCommand extends Command {
                 || (other instanceof DeleteTaskCommand // instanceof handles nulls
                 && targetPersonIndex.equals(((DeleteTaskCommand) other).targetPersonIndex)
                 && targetTaskIndexes.equals(((DeleteTaskCommand) other).targetTaskIndexes)); // state check
+    }
+
+    public String getCommand() {
+        return COMMAND_WORD;
+    }
+
+    public String getDescription() {
+        return DESCRIPTION;
     }
 }

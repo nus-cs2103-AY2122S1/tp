@@ -6,8 +6,16 @@ import java.util.List;
 
 import seedu.address.commons.util.StringUtil;
 
+/**
+ * Tests that a {@code Person}'s importance matches any of the keywords given.
+ */
 public class IsImportantPredicate extends AttributeContainsKeywordsPredicate {
 
+    /**
+     * Constructor for an IsImportantPredicate.
+     *
+     * @param keywords The {@code List<String>} that contains keywords used to find a person.
+     */
     public IsImportantPredicate(List<String> keywords) {
         super(keywords);
     }

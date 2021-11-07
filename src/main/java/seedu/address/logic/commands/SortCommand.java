@@ -23,6 +23,11 @@ public class SortCommand extends Command {
 
     private final boolean isReverseOrder;
 
+    /**
+     * Constructor for a SortCommand to sort the list of persons.
+     *
+     * @param isReverseOrder The boolean that determines the sorted order of the list of persons.
+     */
     public SortCommand(boolean isReverseOrder) {
         this.isReverseOrder = isReverseOrder;
     }

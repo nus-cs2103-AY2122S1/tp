@@ -207,12 +207,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public ObservableList<Person> getObservablePersonList() {
+        public ObservableList<Person> getViewAllTaskListPersons() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateObservablePersonList() {
+        public void updateViewAllTaskListPersons() {
             throw new AssertionError("This method should not be called.");
         }
 

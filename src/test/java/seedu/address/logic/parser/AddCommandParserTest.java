@@ -32,15 +32,20 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddTaskCommand;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Task;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandParserTest {
@@ -88,6 +93,13 @@ public class AddCommandParserTest {
     }
 
     @Test
+    public void parse_optionalFieldsPresent_success() {
+        String validArguments = " 1 -tn work -td 2021-12-12 -tt 23:59 -ta dummy";
+        assertParseSuccess(parser, validArguments, new AddTaskCommand(Index.fromZeroBased(0),
+                List.of(new Task("work"))));
+    }
+
+    @Test
     public void parse_compulsoryFieldMissing_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
 
@@ -115,6 +127,9 @@ public class AddCommandParserTest {
         assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB
                 + VALID_DESCRIPTION_BOB,
                 expectedMessage);
+
+        // every argument missing
+        assertParseFailure(parser, "", expectedMessage);
     }
 
     @Test

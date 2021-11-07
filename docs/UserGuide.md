@@ -93,7 +93,7 @@ to quickly navigate to the command of your choice.
   e.g. if the command format is `-n NAME -p PHONE_NUMBER`, `-p PHONE_NUMBER -n NAME` is also acceptable.
 
 * If a parameter is expected only once in the command format but you specified it multiple times, only the last occurrence of the parameter will be accepted.<br>
-  e.g. if you specify `-p 12341234 -p 56785678`, only `-p 56785678` will be accepted.
+  e.g. if you specify `-p 12341234 -p 56785678`, only `-p 56785678` will be accepted.<br> There are a few exceptions to this such as the find command. In such cases, if a parameter is expected only once, an error message will appear.
 
 * Extraneous parameters for commands that do not take in parameters (such as `ls`, `exit` and `clear`) will be ignored.<br>
   e.g. if you specifiy `ls 123`, the command will be interpreted as `ls`.
@@ -112,13 +112,7 @@ Format: `man [COMMAND_NAME]`
 
 Examples:
 * `man sort` Shows the full details of `sort` command as below.
-
-
-```
-sort: Sorts the list of persons by the alphabetical order of their name.
-Parameters: [-r]
-Example: sort -r
-```
+![result for `man sort`](images/mansortResult.png)
 
 ### Adding a person: `add`
 
@@ -193,7 +187,7 @@ Format: `sort [-r]`
 * The default sort with no options provided displays a list of persons sorted in ascending ASCII alphabetical order of their name.
 * If the optional `-r` flag is provided, a list of persons sorted in reverse order is displayed.
 
-### Locating persons by name: `find`
+### Locating persons: `find`
 
 Finds persons whose attribute contains any of the given keywords.
 
@@ -203,6 +197,7 @@ Format: `find [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-d DESCRIPTION] [-l 
 * The search is case-insensitive. e.g. hans will match Hans
 * The order of the keywords matters. e.g. Hans Bo will not match Bo Hans
 * Only the specified attribute is searched.
+* At least one of the optional fields is required.
 * Abbreviations will be matched e.g. Han will match Hans
 * Persons matching **ALL** the keywords will be returned. e.g. A Y will return Alex Yeoh, Alexandra Yee, but not Aileen
 
@@ -210,7 +205,7 @@ Examples:
 
 * `find -n Alex` Finds all people whose name matches the keyword "Alex".
 
-![result for find -n Alex](images/findResult.png)
+![result for `find -n Alex`](images/findAlexResult.png)
 
 ### Adding a task: `add`
 
@@ -263,18 +258,24 @@ Examples:
 
 ### Viewing tasks: `cat`
 
-1. Displays a list of tasks that has been attached to a specific person.
+Displays a list of tasks that has been attached to a specific person.
 
-   Format: `cat INDEX`
+Format: `cat INDEX`
 
-   * Displays the list of tasks attached to the person at the specified `INDEX`.
+### Viewing list of tasks of a person: `cat`
+
+Shows you a list of tasks that has been attached to a specific person.
+
+Format: `cat INDEX [-f KEYWORDS]`
+
+1. Displays the list of tasks attached to the person at the specified `INDEX`.
    * `INDEX` refers to the index number shown in the displayed person list.
    * `INDEX` **must be a positive integer** 1, 2, 3, ...
 
    Examples:
 
-   * `cat 2` Displays the list of tasks of the second person in the person list.
-
+   * `cat 1` Displays the list of tasks attached to the 1st person.
+   ![result for `cat 1`](images/catAlexResult.png)
 
 2. Displays a filtered list of tasks that has been attached to a specific person.
 
@@ -285,12 +286,14 @@ Examples:
 
    Examples:
 
-   * Alex is the first person in the address book and has the tasks [Work, project meeting at NUS]. `cat 1 -f nus` will display the task "project meeting at NUS"
-
+   * Alex is the first person in the address book and has the tasks [Work, project meeting at NUS]. `cat 1 -f work` will display the task "work"
+   * `cat 1 -f work` Displays the list of tasks attached to the 1st person that match the given keywords(s).
+   ![result for `cat 1 -f work`](images/cat-fResult.png)
 
 3. Displays the task list of all persons in ContactSH.
 
    Format: `cat -A`
+   ![result for `cat -A`](images/catAllResult.png)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
     Alternatively, you could also click on the person in the GUI to open said person's tasks!
@@ -325,7 +328,7 @@ Examples:
 
 ### Setting the number of days before tasks are considered due soon: `reminder`
 
-1. Displays the current number of days prior to the date of tasks for them to be considered due soon. 
+1. Displays the current number of days prior to the date of tasks for them to be considered due soon.
 
    Format: `reminder`
 
@@ -355,8 +358,8 @@ Clears the persons list and task list displayed. Does not delete any persons or 
 
 Format: `clear`
 
-Example: 
-* `clear` Clears the persons list and task list in the GUI 
+Example:
+* `clear` Clears the persons list and task list in the GUI
 
 ### Accessing the cache
 

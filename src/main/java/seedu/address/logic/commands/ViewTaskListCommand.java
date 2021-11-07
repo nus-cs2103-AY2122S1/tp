@@ -44,32 +44,43 @@ public class ViewTaskListCommand extends Command {
 
     /** Constructor used if user wants to view all task lists. */
     public ViewTaskListCommand() {
-        isDisplayAll = true;
         targetIndex = Index.fromOneBased(1);
+        isDisplayAll = true;
     }
 
     /**
      * Constructor used if user wants to find within the view all task list panel.
+     *
+     * @param keywords The {@code List<String>} of keywords to find specific tasks among all the tasks.
      */
     public ViewTaskListCommand(List<String> keywords) {
-        isDisplayAll = true;
-        hasFilter = true;
-        this.keywords = keywords;
         targetIndex = Index.fromOneBased(1);
+        isDisplayAll = true;
+        this.keywords = keywords;
+        hasFilter = true;
     }
 
-    /** Constructor used if user wants to view a specific {@code Person}'s task list . */
+    /**
+     * Constructor used if user wants to view a specific {@code Person}'s task list.
+     *
+     * @param targetIndex The {@code Index} of the person in the list of persons.
+     */
     public ViewTaskListCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
         isDisplayAll = false;
     }
 
-    /** Constructor for ViewTaskListCommand. */
+    /**
+     * Constructor for ViewTaskListCommand if user wants to view certain tasks in a specific {@code Person}'s task list.
+     *
+     * @param targetIndex The {@code Index} of the person.
+     * @param keywords The {@code List<String>} of keywords to find specific tasks among the person's task list.
+     */
     public ViewTaskListCommand(Index targetIndex, List<String> keywords) {
         this.targetIndex = targetIndex;
+        isDisplayAll = false;
         this.keywords = keywords;
         this.hasFilter = true;
-        isDisplayAll = false;
     }
 
     @Override
@@ -112,6 +123,7 @@ public class ViewTaskListCommand extends Command {
         return other == this // short circuit if same object
                 || (other instanceof ViewTaskListCommand // instanceof handles nulls
                 && targetIndex.equals(((ViewTaskListCommand) other).targetIndex)
+                && isDisplayAll == ((ViewTaskListCommand) other).isDisplayAll
                 && keywords.equals(((ViewTaskListCommand) other).keywords)
                 && hasFilter == ((ViewTaskListCommand) other).hasFilter); // state check
     }

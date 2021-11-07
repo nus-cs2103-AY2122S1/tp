@@ -20,8 +20,6 @@ public class ListCommand extends Command {
             + ": " + DESCRIPTION + "\n"
             + "Example: " + COMMAND_WORD;
 
-
-
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);

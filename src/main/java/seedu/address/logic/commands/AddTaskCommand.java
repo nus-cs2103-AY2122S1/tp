@@ -19,7 +19,9 @@ import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
 
 
-
+/**
+ * Adds tasks to a person in the address book
+ */
 public class AddTaskCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
@@ -46,8 +48,10 @@ public class AddTaskCommand extends Command {
     private final List<Task> newTasks;
 
     /**
-     * @param index of the person in the filtered person list to edit the task List of
-     * @param newTasks to add to the person's task list
+     * Constructor for an AddTaskCommand to add a new task to a person.
+     *
+     * @param index The {@code Index} of the person in the filtered person list whose task list is to be edited.
+     * @param newTasks A {@code List<Task>} to add to the person's task list.
      */
     public AddTaskCommand(Index index, List<Task> newTasks) {
         requireAllNonNull(index, newTasks);
@@ -83,6 +87,16 @@ public class AddTaskCommand extends Command {
         return commandResult;
     }
 
+    /**
+     * Generates a command execution success message based on the number
+     * of tasks given and person name.
+     */
+    private String generateSuccessMessage(Person personToEdit) {
+        int size = newTasks.size();
+        String taskOrTasks = StringUtil.singularOrPlural("task", size);
+        return String.format(MESSAGE_SUCCESS, size, taskOrTasks, personToEdit.getName());
+    }
+
     @Override
     public boolean equals(Object other) {
         //Return true if same object
@@ -106,16 +120,5 @@ public class AddTaskCommand extends Command {
 
     public String getDescription() {
         return DESCRIPTION;
-    }
-
-    /**
-     * Generates a command execution success message based on the number
-     * of tasks given and person name.
-     * {@code personToEdit}.
-     */
-    private String generateSuccessMessage(Person personToEdit) {
-        int size = newTasks.size();
-        String taskOrTasks = StringUtil.singularOrPlural("task", size);
-        return String.format(MESSAGE_SUCCESS, size, taskOrTasks, personToEdit.getName());
     }
 }

@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_IMPORTANCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -70,6 +71,7 @@ public class CommandTestUtil {
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String DESCRIPTION_DESC_AMY = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_AMY;
     public static final String DESCRIPTION_DESC_BOB = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_BOB;
+    public static final String IMPORTANCE_DESC_AMY = " " + PREFIX_IMPORTANCE + "true";
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -91,6 +93,10 @@ public class CommandTestUtil {
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
 
+    public static final EditCommand.EditTaskDescriptor DESC_TASK_ONE;
+    public static final EditCommand.EditTaskDescriptor DESC_TASK_TWO;
+
+
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
@@ -98,10 +104,14 @@ public class CommandTestUtil {
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withDescription(VALID_DESCRIPTION_BOB).build();
+        DESC_TASK_ONE = new EditCommand.EditTaskDescriptor();
+        DESC_TASK_ONE.setTaskName(new TaskName("Work"));
+        DESC_TASK_TWO = new EditCommand.EditTaskDescriptor();
+        DESC_TASK_TWO.setTaskName(new TaskName("Sleep"));
     }
-
     public static final EditTaskDescriptor DESC_MEETING;
     public static final EditTaskDescriptor DESC_RUN;
+
 
     static {
         DESC_MEETING = new EditTaskDescriptorBuilder().withTaskName("Meeting").withTaskDate("2021-11-30")
@@ -109,7 +119,6 @@ public class CommandTestUtil {
         DESC_RUN = new EditTaskDescriptorBuilder().withTaskName("Run").withTaskDate("2021-12-30")
                 .withTaskTime("18:00").withVenue("Clementi Stadium").build();
     }
-
 
     /**
      * Executes the given {@code command}, confirms that <br>
@@ -120,8 +129,8 @@ public class CommandTestUtil {
             Model expectedModel) {
         try {
             CommandResult result = command.execute(actualModel);
-            System.out.println(result.getFeedbackToUser());
             System.out.println(expectedCommandResult.getFeedbackToUser());
+            System.out.println(result.getFeedbackToUser());
             assertEquals(expectedCommandResult, result);
             assertEquals(expectedModel, actualModel);
         } catch (CommandException ce) {

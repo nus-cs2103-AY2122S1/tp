@@ -51,6 +51,10 @@ public class Task {
     public Task(String taskName) {
         requireNonNull(taskName);
 
+        this.isDone = new SimpleBooleanProperty();
+        this.isOverdue = new SimpleBooleanProperty();
+        this.isDueSoon = new SimpleBooleanProperty();
+
         this.taskName = new TaskName(taskName);
         this.date = new TaskDate("2021-12-12");
         this.time = new TaskTime("23:59");

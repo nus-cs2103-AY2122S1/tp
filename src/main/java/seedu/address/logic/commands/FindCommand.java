@@ -40,6 +40,11 @@ public class FindCommand extends Command {
 
     private final AttributeContainsKeywordsPredicate predicate;
 
+    /**
+     * Constructor for a FindCommand to find a person based on a predicate.
+     *
+     * @param predicate The predicate that checks whether a person's attribute matches the keywords.
+     */
     public FindCommand(AttributeContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }

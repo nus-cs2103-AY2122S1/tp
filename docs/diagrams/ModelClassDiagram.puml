@@ -25,6 +25,7 @@ Class Phone
 Class Tag
 Class Task
 Class Description
+Class TaskListManager
 }
 
 Class HiddenOutside #FFFFFF
@@ -54,6 +55,8 @@ Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
 ModelManager -down--> "1" UserCommandCache
+ModelManager -down-> "1" TaskListManager
 
+TaskListManager -down-> "1" Name
 ModelManager -->"~* filtered" Person
 @enduml

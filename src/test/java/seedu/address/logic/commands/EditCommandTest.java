@@ -1,9 +1,12 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_TASK_ONE;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_TASK_TWO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -368,27 +371,55 @@ public class EditCommandTest {
 
     @Test
     public void equals() {
-        final EditCommand standardCommand = new EditCommand(INDEX_FIRST_PERSON, DESC_AMY);
+        EditCommand standardCommand = new EditCommand(INDEX_FIRST_PERSON, DESC_AMY);
+        EditCommand editTaskCommandOne =
+                new EditCommand(INDEX_FIRST_PERSON, DESC_AMY, Index.fromZeroBased(0), DESC_TASK_ONE);
+        EditCommand editTaskCommandTwo =
+                new EditCommand(INDEX_FIRST_PERSON, DESC_AMY, Index.fromZeroBased(1), DESC_TASK_TWO);
+        EditCommand.EditTaskDescriptor editTaskDescriptorOne = new EditCommand.EditTaskDescriptor();
+        editTaskDescriptorOne.setTaskName(new TaskName("work"));
+        editTaskDescriptorOne.setTaskDate(new TaskDate("2017-12-12"));
+        editTaskDescriptorOne.setTaskTime(new TaskTime("15:30"));
+        editTaskDescriptorOne.setTaskVenue(new Venue("dummy"));
+        EditCommand.EditTaskDescriptor editTaskDescriptorTwo = new EditCommand.EditTaskDescriptor();
+        editTaskDescriptorTwo.setTaskName(new TaskName("sleep"));
+        editTaskDescriptorTwo.setTaskDate(new TaskDate("2017-12-12"));
+        editTaskDescriptorTwo.setTaskTime(new TaskTime("15:30"));
+        editTaskDescriptorTwo.setTaskVenue(new Venue("dummy"));
 
         // same values -> returns true
-        EditPersonDescriptor copyDescriptor = new EditPersonDescriptor(DESC_AMY);
-        EditCommand commandWithSameValues = new EditCommand(INDEX_FIRST_PERSON, copyDescriptor);
-        assertTrue(standardCommand.equals(commandWithSameValues));
+        EditCommand commandWithSameValues = new EditCommand(INDEX_FIRST_PERSON, DESC_AMY);
+        EditCommand.EditTaskDescriptor editTaskDescriptorOneCopy =
+                new EditCommand.EditTaskDescriptor(editTaskDescriptorOne);
+
+        assertEquals(standardCommand, commandWithSameValues);
+        assertEquals(editTaskDescriptorOne, editTaskDescriptorOneCopy);
 
         // same object -> returns true
-        assertTrue(standardCommand.equals(standardCommand));
+        assertEquals(standardCommand, standardCommand);
+        assertEquals(editTaskDescriptorOne, editTaskDescriptorOne);
 
         // null -> returns false
-        assertFalse(standardCommand.equals(null));
+        assertNotEquals(null, standardCommand);
+        assertNotEquals(null, editTaskDescriptorOne);
 
         // different types -> returns false
-        assertFalse(standardCommand.equals(new ClearCommand()));
+        Command otherCommand = new ClearCommand();
+        assertNotEquals(standardCommand, otherCommand);
+        assertNotEquals(editTaskDescriptorOne, editTaskCommandOne);
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND_PERSON, DESC_AMY)));
+        assertNotEquals(standardCommand, new EditCommand(INDEX_SECOND_PERSON, DESC_AMY));
 
-        // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_PERSON, DESC_BOB)));
+        // different person descriptor -> returns false
+        assertNotEquals(standardCommand, new EditCommand(INDEX_FIRST_PERSON, DESC_BOB));
+
+        // different task descriptor -> returns false
+        assertNotEquals(editTaskCommandOne, standardCommand);
+        assertNotEquals(editTaskDescriptorOne, editTaskDescriptorTwo);
+
+        // different target task index -> returns false
+        assertNotEquals(editTaskCommandTwo, editTaskCommandOne);
     }
 
 }

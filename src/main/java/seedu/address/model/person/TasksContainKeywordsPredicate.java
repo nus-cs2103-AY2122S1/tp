@@ -9,7 +9,16 @@ import java.util.List;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.model.task.Task;
 
+/**
+ * Tests that a {@code Person}'s {@code List<Task>} matches any of the keywords given.
+ */
 public class TasksContainKeywordsPredicate extends AttributeContainsKeywordsPredicate {
+
+    /**
+     * Constructor for a TasksContainKeywordsPredicate.
+     *
+     * @param keywords The {@code List<String>} that contains keywords used to find a person.
+     */
     public TasksContainKeywordsPredicate(List<String> keywords) {
         super(keywords);
     }

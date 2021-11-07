@@ -112,6 +112,13 @@ public class EditPersonDescriptorBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Importance} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withImportance(String importance) {
+        descriptor.setImportance(Boolean.parseBoolean(importance));
+        return this;
+    }
 
     public EditPersonDescriptor build() {
         return descriptor;

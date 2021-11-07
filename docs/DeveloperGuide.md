@@ -83,7 +83,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Person` and `Task` objects residing in the `Model`.
 
 ### Logic component
 
@@ -126,6 +126,7 @@ The `Model` component,
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores the previous user input into the `UserCommandCache`
+* stores a `TaskListManager` object which is responsible of managing task display operations. It maintains a `Name` object of the person whose tasks is currently displayed.  
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -206,7 +207,8 @@ The following activity diagram summarises what happens when a user executes a `c
 
 * **Alternative 2:** Have only one panel. The person list gets replaced by task list when cat is executed.
 
-  * Pros: More convenient to implement.
+  * Pros:
+    * More convenient to implement.
 
   * Cons:
     * `list` has to be executed again if user wants to redirect back to the person list (extra overhead
@@ -320,6 +322,40 @@ The following activity diagram summarises what happens when a user executes a `f
 
         - Keywords provided must be exact, so even if the user is missing one letter, it will not display the expected person
 
+### Mark Tasks as done/not done feature
+
+Marks the task specified by the user as done or not done. Tasks that are marked as done are coloured green in the `tasklistpanel`. Tasks marked as done will not show up as overdue or soon to be due.
+
+Given below is an example usage scenario:
+
+Step 1: The user launches the ContactSH application.  Data will be loaded from the storage to the application memory. The `PersonListPanel` will be populated with a `PersonCard` for every person from memory.
+
+Step 2: The user executes `donetask 2 -ti3` to mark the 3rd task of the second person in the list as done.
+
+Step 3: If the specified person and their corresponding tasks exists, the tasks will be marked as done. Else, an error message will be displayed indicating that the parameters are wrong.
+If the tasks are already marked as done, it will not be marked again. A message will then be displayed showing how many tasks are marked as done, and how many are already marked as done.
+
+The following sequence diagram shows how the mark task as done operation works:
+
+![MarkTaskAsDoneSequenceDiagram](images/DoneTaskSequenceDiagram.png)
+
+The following activity diagram summarizes what happens when a user executes `donetask 2 -ti3`:
+
+![MarkTaskAsDoneActivityDiagram](images/DoneTaskActivityDiagram.png)
+
+The `undotask` command does the opposite - it marks the specified tasks as not done. Tasks that were previously marked as done have their colour in the `tasklistpanel` changed from green to orange, red or gray, depending if they are soon to be due, overdue, or neither, respectively.
+
+#### Design consideration:
+
+##### Aspect: How to mark tasks as done or not done
+
+- **Alternative 1 (current choice):** Have separate commands for marking a task as done or not done.
+  - Pros: Easy to implement, commands have singular purpose.
+  - Cons: Users need to be use another command to mark task as done.
+- **Alternative 2:** Add another flag to `edit` command to edit if a task is done or not done.
+  - Pros: Tasks can be marked as done and edited at the same time.
+  - Cons: Harder to implement, more flags to take note of in the edit command.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -424,7 +460,7 @@ _{Explain here how the data archiving feature will be implemented}_
 **Target user profile**:
 
 * NUS Student Entrepreneurs
-* Proficient in Unix CLI
+* Proficient in Linux style CLIs
 * Has many meetings and is in contact with different people (students, mentors,
   stakeholders, clients, partners)
 * Carries Laptop around (prefers Laptop)
@@ -438,44 +474,58 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### User stories
 
+<div markdown="span" class="alert alert-primary">
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+
+:memo: **Bolded** user stories are `epics`.
+</div>
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `***` | user | update contact details | keep track of their details |
-| `***` | user | delete contacts | get rid of contacts who are no longer relevant |
-| | **general user** | | |
-| `**` | general CLI user| use commands from cli | exclude the need to learn new commands |
-| `**` | student entrepreneur | categorize my business contacts | organize them better |
-| `**` | student entrepreneur | differentiate between business and student contacts | differentiate easily |
-| `***` | student entrepreneur | view my contacts in an organized manner | have a better overview |
-| `***` | new user | save contacts | keep track of them |
+| | **general user** | **have essential functionalities**| |
+| `***` | general user | update contact details | keep track of up to date details |
+| `***` | general user | delete contacts | get rid of contacts who are no longer relevant |
+| `***` | general user | save contacts | keep track of them |
+| `***` | general user | look through the list of contacts| see the contacts I have added |
+| | **new user** | **start using the app normally as soon as possible**| |
 | `***` | new user | purge all example contacts | start adding my own contacts |
-| | **beginner user** | **learn commands fast** | **spend less time on learning** |
+| | **Linux CLI user** | **have a CLI similar to Linux CLI** | |
+| `***` | Linux CLI user | use similar commands to Linux CLI | reduce the need to learn new commands |
+| `***` | Linux CLI user | backtrack commands i have entered before | save time on retyping them |
+| | **student entrepreneur** | **categorize my business contacts** | **organize them better** |
+| `**` | student entrepreneur | differentiate between business and student contacts | differentiate easily |
+| `*` | student entrepreneur | organise my contacts according to specific groups | find the ones i want easily |
+| `**` | student entrepreneur | mark my contacts as important | know which contacts i prioritize |
+| | **student entrepreneur** | **have statistics and indicators for my tasks** | **improve my tasks management** |
+| `**` | student entrepreneur | view the overall statistics of all my tasks | have an idea of my tasks progression |
+| `**` | student entrepreneur | be reminded when tasks are due or due soon | be aware and take necessary actions to deal with them |
+| | **beginner user** | **learn how to use the app fast** | **spend less time on learning** |
 | `***` | beginner user | view the user guide easily | learn the commands as and when I need |
 | `***` | beginner user | view the list of instructions | know what instructions are available |
 | `***` | beginner user | see examples of contacts | have an idea of how contacts will be presented |
-| | **student entrepreneur** | **organise my contacts according to specific groups** | **find the ones i want easily** |
 | | **intermediate user** | **sort and filter my contacts** | **sieve out irrelevant contacts** |
-| `***` | intermediate user | look through the list of contacts| see the contacts I have added |
-| `***` | intermediate user | search for contact names | directly find the contact of a person in mind |
+| `***` | intermediate user | search for contacts with the attribute of my choice | find my contacts faster and more accurately |
+| `**` | intermediate user | sort contacts by tasks | identify connections between contacts |
+| `*` | intermediate user | choose what information about my contacts to view | read the information easier |
+| `**` | intermediate user | search for contacts using abbreviations | improve my work efficiency |
+| | **intermediate user** | **keep track of tasks related to my contacts** |  |
 | `***` | intermediate user | assign tasks to contacts | know what I should contact them for |
 | `***` | intermediate user | delete tasks from contacts | remove task which are done |
-| `**` | intermediate user | sort contacts by tasks | identify connections between contacts |
-| `**` | intermediate user | choose what information about my contacts to view | read the information easier |
-| `***` | intermediate user | view task from contacts | see what tasks are connected to said contact |
+| `**` | intermediate user | mark a task as complete | still keep the task but know that it has been done |
+| `***` | intermediate user | view tasks of a specific contact | see what tasks are connected to said contact |
+| `***` | intermediate user | view every contact's tasks in a form of a list | an overview of all my tasks |
+| `**` | intermediate user | filter what tasks i view using keywords | narrow down tasks that i am looking for |
 | | **experienced user** |	**manipulate multiple contacts with one command** | **improve my work efficiency** |
 | `**` | experienced user | delete multiple contacts using only one command | improve my work efficiency |
-| `**` | experienced user |	move multiple contacts using only one command | improve my work efficiency |
+| `*` | experienced user |	move multiple contacts using only one command | improve my work efficiency |
 | `**` | experienced user |	add multiple contacts using only one command | improve my work efficiency |
-| `**` | experienced user |	search for contacts using abbreviations | improve my work efficiency |
 | | **experienced user** | **update large number of contacts at once** | **exclude manually adding them myself** |
 | `**` | experienced user | import a list of contacts | add a large number of contacts at once |
 | `**` | experienced user | export a list of contacts | send them to other people |
-| | **expert CL user** | **use high-level CLI instructions** | **directly use the app at a high-level** |
-| `**` | expert CL user | make command combinations | execute multiple instructions in one line |
-| `**` | expert CL user | redirect input/output | input/output from/to files instead of stdin |
-| `**` | expert CL user | create scripts | automate specific tasks |
+| | **expert Linux CLI user** | **use high-level CLI instructions** | **directly use the app at a high-level** |
+| `*` | expert Linux CLI user | make command combinations | execute multiple instructions in one line |
+| `*` | expert Linux CLI user | redirect input/output | input/output from/to files instead of stdin |
+| `*` | expert Linux CLI user | create scripts | automate specific tasks |
 
 ### Use cases
 
@@ -533,7 +583,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to list contacts
 2.  ContactSH shows a list of contacts
-3.  User requests to delete a specific contact in the list
+3.  User requests to delete contacts in the list
 4.  ContactSH deletes the contact
 
     Use case ends.
@@ -549,6 +599,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. ContactSH shows an error message.
 
       Use case resumes at step 2.
+
+* 3b. User requests to delete all contacts in the list.
+
+    * 3b1. ContactSH deletes all contacts in the list.
+
+      Use case ends.
 
 **Use case: Find contact(s) by a criterion**
 
@@ -609,6 +665,41 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. ContactSH returns a reverse sorted list of contacts.
 
     Use case ends.
+
+**Use case: Edit a task**
+
+**MSS**
+
+1. User requests for a list of contacts.
+2. ContactSh returns a list a contacts.
+3. User requests for a list of tasks of a contact.
+4. ContactSH returns a list of tasks of that contact.
+5. User provides parameters to edit tasks.
+6. ContactSH edits tasks.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+* 3a. User requests for list of tasks of all users.
+
+    * 3a1. ContactSH returns list of tasks of all users.
+
+      Use case resumes at step 5.
+
+* 3b. The list is empty.
+
+  Use case ends.
+
+* 5a. The given edit information is invalid.
+
+    * 5a1. ContactSH shows an error message.
+
+      Use case resumes at step 5.
 
 *{More to be added}*
 

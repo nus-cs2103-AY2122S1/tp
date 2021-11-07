@@ -33,8 +33,8 @@ public class ModelManager implements Model {
     private final FilteredList<Person> onlyFilteredPersons;
     private final SortedList<Person> filteredPersons;
 
-    /** ObservableList used in viewing all task list. */
-    private ObservableList<Person> observablePersons;
+    /** ObservableList of {@code Person}s used in viewing all task list. */
+    private ObservableList<Person> viewAllTaskListPersons;
 
     private final UserCommandCache userCommandCache;
 
@@ -63,7 +63,7 @@ public class ModelManager implements Model {
 
         onlyFilteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredPersons = new SortedList<>(onlyFilteredPersons);
-        observablePersons = FXCollections.observableArrayList(addressBook.getPersonList());
+        viewAllTaskListPersons = FXCollections.observableArrayList(addressBook.getPersonList());
     }
 
     public ModelManager() {
@@ -128,7 +128,7 @@ public class ModelManager implements Model {
         addressBook.removePerson(target);
         taskListManager.deleteEntry(target.getName());
         taskListManager.updateStatistics();
-        updateObservablePersonList();
+        updateViewAllTaskListPersons();
     }
 
     @Override
@@ -136,7 +136,7 @@ public class ModelManager implements Model {
         addressBook.addPerson(person);
         taskListManager.createNewEntry(person);
         taskListManager.updateStatistics();
-        updateObservablePersonList();
+        updateViewAllTaskListPersons();
     }
 
     @Override
@@ -146,7 +146,7 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
         taskListManager.updateEntry(target, editedPerson);
         taskListManager.updateStatistics();
-        updateObservablePersonList();
+        updateViewAllTaskListPersons();
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -168,18 +168,18 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ObservableList<Person> getObservablePersonList() {
-        return observablePersons;
+    public ObservableList<Person> getViewAllTaskListPersons() {
+        return viewAllTaskListPersons;
     }
 
     @Override
     public void setViewAllTasksFindPred(Predicate<Task> predicate) {
         this.viewAllTasksFindPred = predicate;
-        updateObservablePersonList();
+        updateViewAllTaskListPersons();
     }
 
     @Override
-    public void updateObservablePersonList() {
+    public void updateViewAllTaskListPersons() {
         setIsViewAllTasks(true);
         List<Person> personList = new ArrayList<>();
         for (Person person : addressBook.getPersonList()) {
@@ -189,8 +189,8 @@ public class ModelManager implements Model {
             personList.add(personClone);
         }
 
-        observablePersons = FXCollections.observableArrayList(personList);
-        observablePersons = observablePersons.filtered(person -> !person.getTasks().isEmpty());
+        viewAllTaskListPersons = FXCollections.observableArrayList(personList);
+        viewAllTaskListPersons = viewAllTaskListPersons.filtered(person -> !person.getTasks().isEmpty());
     }
 
     @Override
