@@ -164,7 +164,7 @@ To adhere to Object Oriented Programming principles, we have decided to make the
 The `Task` class, and all its subclasses,
 
 * stores information regarding a user's task as shown above.
-* stores a compulsory reference to a `TaskName` object, a `Priority` enumeration field, and a boolean `IsDone` field.
+* stores a compulsory reference to a `TaskName` object, a `Priority` enumeration field, and a boolean `isDone` field.
 * stores an optional reference to a `Description` object.
 * stores `Tag`, which is a class common to the `Student` and `Group` data types.
 
