@@ -845,29 +845,17 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: `toggle` to the `Patients` tab. The following patient must already exists:
        John Doe; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Date of Birth: 20/7/1964; Tags: vaccinated; Risk: LOW
        
-    2. Test case: `add n/Bob Doe hp/98765432 eml/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/vaccinated risk/LOW`
-       <br>
-       Expected: Patient named Bob Doe is added successfully. Details of the added patient are shown in the status message.
-
-    3. Test case: `add n/Bobby Doe hp/98765432 eml/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964`
-       <br>
-        Expected: Patient named Bobby Doe is added successfully. Details of the added patient are shown in the status message.
-
-    4. Test case: `add n/John Doe hp/999 eml/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/vaccinated risk/LOW`
+    2. Test case: `add n/John Doe hp/98765432 eml/johndoeeeee@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/vaccinated risk/LOW`
        <br>
         Expected: Patient named John Doe is added successfully. Details of the added patient are shown in the status message.
 
-    5. Test case: `add n/John Doe hp/98765432 eml/johndoeeeee@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/vaccinated risk/LOW`
-       <br>
-        Expected: Patient named John Doe is added successfully. Details of the added patient are shown in the status message.
-
-    6. Test case: `add n/John Doe hp/98765432 eml/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/vaccinated risk/LOW`
+    3. Test case: `add n/John Doe hp/98765432 eml/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/vaccinated risk/LOW`
        <br>Expected: No Patient is added. Error message is shown in the response box: "This patient already exists in PlannerMD"
 
-    7. Test case: `add n/John Doe hp/98765432 eml/johnd@example.com a/311, Kent Ridge Ave 2, #02-25 dob/25/12/0000 t/vaccinated risk/LOW`
-       Expected: No Patient is added. Error message is shown in the response box: "This patient already exists in PlannerMD"
+    4. Test case: `add n/John Doe hp/98765432 eml/johnd@example.com a/311, Kent Ridge Ave 2, #02-25 dob/25/12/0000 t/vaccinated risk/LOW`
+       <br>Expected: No Patient is added. Error message is shown in the response box: "This patient already exists in PlannerMD"
 
-    8. Other incorrect add commands to try: `add`, `add n/Bob hp/`, `add n/` (not all fields, except tags and risk, are filled)<br>
+    5. Other incorrect add commands to try: `add`, `add n/Bob hp/`, `add n/` (not all fields, except tags and risk, are filled)<br>
        Expected: No Patient is added. Error message is shown in the response box: "Invalid command format!..."
 
 ### Deleting a patient  <a name="delete-patient-manual-testing"/>
@@ -962,23 +950,14 @@ testers are expected to do more *exploratory* testing.
     
     2. Test case: `add n/Bob Doe hp/98765432 eml/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/experienced`
        <br> Expected: Doctor named Bob Doe is added successfully. Details of the added doctor are shown in the status message.
-
-    3. Test case: `add n/Joe Doe hp/98765432 eml/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964`
-       <br>Expected: Doctor named Joe Doe is added successfully. Details of the added doctor are shown in the status message.
        
-    4. Test case: `add n/John Doe hp/999 eml/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/experienced`
-       <br>Expected: Doctor named John Doe is added successfully. Details of the added doctor are shown in the status message.
-
-    5. Test case: `add n/John Doe hp/98765432 eml/johndoeeeee@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/experienced`
-       <br> Expected: Doctor named John Doe is added successfully. Details of the added doctor are shown in the status message.
-       
-    6. Test case: `add n/John Doe hp/98765432 eml/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/experienced`
+    3. Test case: `add n/John Doe hp/98765432 eml/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/experienced`
        <br> Expected: No doctor is added. Error message is shown in the response box: "This doctor already exists in PlannerMD"
        
-    7. Test case: `add n/John Doe hp/98765432 eml/johnd@example.com a/311, Kent Ridge Ave 2, #02-25 dob/25/12/0000 t/experienced`
+    4. Test case: `add n/John Doe hp/98765432 eml/johnd@example.com a/311, Kent Ridge Ave 2, #02-25 dob/25/12/0000 t/experienced`
        <br> Expected: No doctor is added. Error message is shown in the response box: "This doctor already exists in PlannerMD"
 
-    8. Other incorrect add commands to try: `add`, `add n/Bob hp/`, `add n/` (not all fields, except tags, are filled)<br>
+    5. Other incorrect add commands to try: `add`, `add n/Bob hp/`, `add n/` (not all fields, except tags, are filled)<br>
         Expected: No doctor is added. Error message is shown in the response box: "Invalid command format!..."
 
 ### Deleting a doctor  <a name="delete-doctor-manual-testing"/>
