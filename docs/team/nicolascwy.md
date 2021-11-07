@@ -5,8 +5,8 @@ title: Nicolas Chang's Project Portfolio Page
 
 ### Project: Pocket Hotel
 
-**Pocket Hotel (PH)** is a specialized contact management desktop app targeted towards hotel managers who have many
-guests and staff to handle.
+**Pocket Hotel (PH)** is a desktop app for hotel front-desk receptionists that provides a centralized location to manage their guests and vendors, and helps to automate front-desk operations.
+
 Given below are my contributions to the project.
 
 * **New Feature**: Extended ability to delete guest details from the archive and contact book.

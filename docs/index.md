@@ -10,8 +10,8 @@ title: Pocket Hotel
 
 **Pocket Hotel (PH) is a desktop application for managing your contact details, specialized with a focus on hotel management.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 
-* If you are interested in using PH, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
-* If you are interested about developing PH, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
+* If you are interested in using PH, head over to the [_Quick Start_ section of the **User Guide**](https://ay2122s1-cs2103t-w12-3.github.io/tp/UserGuide.html#quick-start).
+* If you are interested about developing PH, the [**Developer Guide**](https://ay2122s1-cs2103t-w12-3.github.io/tp/DeveloperGuide.html) is a good place to start.
 
 
 **Acknowledgements**

@@ -1,10 +1,12 @@
 ---
-layout: page title: Developer Guide
+layout: page
+title: Developer Guide
 ---
 
 ## **Table of Contents**
 
-* Table of Contents {:toc}
+* Table of Contents
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -113,8 +115,7 @@ The `UI` component,
 
 ### Logic component
 
-**
-API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-W12-3/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-W12-3/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -152,8 +153,7 @@ How the parsing works:
 
 ### Model component
 
-**
-API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-W12-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-W12-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 ![ModelClassDiagram](images/ModelClassDiagram.png)
 
@@ -177,8 +177,7 @@ The `Model` component,
 
 ### Storage component
 
-**
-API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-W12-3/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-W12-3/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="600" />
 
@@ -977,9 +976,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-    1. Download the jar file and copy into an empty folder
-
-   Perform one of the steps (Option 2 recommended for mac)
+    1. Download the jar file and copy into an empty folder<br><br>Perform one of the steps (Option 2 recommended for mac)
 
     1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be
        optimum.
@@ -1201,7 +1198,6 @@ testers are expected to do more *exploratory* testing.
 
    ii. Rename `data\addressbook.json` to something else like `data\addressbook.json` would cause the addressbook to be
    not found and load the sample contacts into the addressbook.
-2. _{ more test cases …​ }_
 
 --------------------------------------------------------------------------------------------------------------------
 
