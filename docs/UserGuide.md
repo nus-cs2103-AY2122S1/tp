@@ -195,6 +195,7 @@ Exits the program.
 Format: `exit`
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## Managing Patients <a name="managing-patients"/>
 <div markdown="span" class="alert alert-info">:information_source: **Note:**
@@ -331,6 +332,7 @@ Examples:
 ![deletePatientTag](images/deletePatientTag.png)
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## Managing Doctors <a name="managing-doctors"/>
 <div markdown="span" class="alert alert-info">:information_source: **Note:**
@@ -462,6 +464,7 @@ Examples:
 `tag -d 1 t/Pediatrician` deletes the *Pediatrician* tag from the first doctor.
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## Managing Appointments `appt` <a name="managing-appointments"/>
 
