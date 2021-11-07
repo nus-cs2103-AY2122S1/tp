@@ -14,7 +14,7 @@ import seedu.unify.model.task.Date;
  */
 public class ShowCommand extends Command {
 
-    public static final Integer WEEKS =Calendar
+    public static final Integer WEEKS = Calendar
             .getInstance()
             .getActualMaximum(Calendar.WEEK_OF_YEAR);
     public static final String COMMAND_WORD = "show";
