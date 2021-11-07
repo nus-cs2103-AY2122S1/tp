@@ -70,12 +70,15 @@ Given below are my contributions to the project.
           [\#334](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/334)
 
 * **Contributions to team-based tasks**:
+    * User Guide:
+        * Updated screenshots of all the features in the User Guide
+          [\#338](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/338)
     * Developer Guide:
         * Updated sequence diagrams for all features after changing code structure
           [\#183](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/183)
         * Corrected mistakes in document for all features
           [\#184](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/184)
-    * Hosted online team meetings
+    * Hosted some of the online team meetings
 
 * **Community**:
     * Contributed to forum discussions (examples: [\#24](https://github.com/nus-cs2103-AY2122S1/forum/issues/24))
