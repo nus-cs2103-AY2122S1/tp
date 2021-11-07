@@ -53,7 +53,7 @@ public class TagComponent extends HBox {
     public Label colorSelector(String tagName) {
         Label temp = new Label(tagName);
 
-        switch (tagName.toUpperCase()) { //Todo: add more color tags & abstract out case names
+        switch (tagName.toUpperCase()) {
 
         case TagUtil.FRIENDS:
             temp.setStyle(Colors.BLUE);
