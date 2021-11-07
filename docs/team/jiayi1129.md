@@ -26,7 +26,7 @@ PlannerMD is an all-in-one desktop application to help clinic receptionists mana
 
 * **Contributions to the UG**:
   * Added the Delete Appointment Command section [#147](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/147)
-  * Reviewed, raised and fixed issues throughout the UG
+  * Reviewed, raised and fixed issues throughout the UG [#226](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/226) [#277](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/277)
 
 * **Contributions to the DG**:
   * Updated the Storage Class Diagram [#113](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/113)
