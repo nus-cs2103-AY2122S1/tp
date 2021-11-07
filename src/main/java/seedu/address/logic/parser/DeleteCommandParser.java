@@ -36,6 +36,11 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         }
 
         if (argMultimap.getValue(PREFIX_DASH_INDEX).isPresent()) {
+            if (argMultimap.getValue(PREFIX_DASH_INDEX).get() == "") {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+            }
+
             Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_DASH_INDEX).get());
             return new DeleteCommand(index);
         }

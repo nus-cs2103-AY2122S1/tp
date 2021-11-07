@@ -50,7 +50,8 @@ public class MarkCommandTest {
         MarkCommand defaultCommand = new MarkCommand(predicate, DEFAULT_TEST_PERIOD);
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel.setPerson(DEFAULT_TEST_PERSON, DEFAULT_TEST_PERSON.mark(DEFAULT_TEST_PERIOD));
-        assertCommandFailure(defaultCommand, model, String.format(MarkCommand.NOTHING_CHANGED, ALICE));
+        assertCommandFailure(defaultCommand, model, String.format(MarkCommand.NOTHING_CHANGED,
+                DEFAULT_TEST_PERIOD, ALICE.getName()));
     }
 
 }

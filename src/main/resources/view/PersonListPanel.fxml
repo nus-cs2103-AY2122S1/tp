@@ -1,8 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<VBox xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
-   <ListView fx:id="personListView" VBox.vgrow="ALWAYS" />
+<?import javafx.geometry.Insets?>
+<VBox alignment="CENTER_LEFT" minHeight="6.0" prefHeight="105.0" prefWidth="841.0" HBox.hgrow="ALWAYS" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+   <padding>
+      <Insets bottom="5" left="5" right="5" top="5" />
+   </padding>
+   <children>
+      <GridPane alignment="CENTER" prefWidth="370.0" HBox.hgrow="ALWAYS">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" prefWidth="50.0" />
+            <ColumnConstraints hgrow="ALWAYS" prefWidth="100.0" />
+            <ColumnConstraints hgrow="NEVER" prefWidth="100.0" />
+            <ColumnConstraints hgrow="ALWAYS" prefWidth="90.0" />
+            <ColumnConstraints hgrow="NEVER" prefWidth="180.0" />
+            <ColumnConstraints hgrow="NEVER" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" prefWidth="55.0" />
+            <ColumnConstraints hgrow="NEVER" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" styleClass="cell_big_label_centered" text="Index" wrapText="true" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Label alignment="CENTER" contentDisplay="CENTER" styleClass="cell_big_label_centered" text="Name" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Label alignment="CENTER" contentDisplay="CENTER" styleClass="cell_big_label_centered" text="Phone" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Label alignment="CENTER" contentDisplay="CENTER" styleClass="cell_big_label_centered" text="Email" wrapText="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Label alignment="CENTER" contentDisplay="CENTER" styleClass="cell_big_label_centered" text="Absent Period" wrapText="true" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Label alignment="CENTER" contentDisplay="CENTER" styleClass="cell_big_label_centered" text="Roles" wrapText="true" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Label alignment="CENTER" contentDisplay="CENTER" styleClass="cell_big_label_centered" text="Status" wrapText="true" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Label alignment="CENTER" contentDisplay="CENTER" styleClass="cell_big_label_centered" text="Salary" wrapText="true" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Label alignment="CENTER" contentDisplay="CENTER" styleClass="cell_big_label_centered" text="Tags" wrapText="true" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+         </children>
+      </GridPane>
+      <ListView fx:id="personListView" VBox.vgrow="ALWAYS" />
+   </children>
+
 </VBox>
