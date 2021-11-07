@@ -490,10 +490,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                | mark tasks as complete                               | know which tasks have already been done                                |
 | `* * *`  | user                | view my todo list                                    | know what tasks I have to do                                           |
 | `* * *`  | user                | view my student list                                 | know what students I have                                              |
-| `* * *`  | user                | add a student contact                                | add my student into the list                                           |
-| `* * *`  | user                | delete a student contact                             | remove my student if he quits the course                               |
+| `* * *`  | user                | add a student                                | add my student into the list                                           |
+| `* * *`  | user                | delete a student                             | remove my student if he quits the course                               |
 | `* * *`  | user                | store my data in a file                              | easily export data from the application                                |
-| `* * *`  | user                | add GitHub links for each student contact            | easily access their Github to check their progress                     |
+| `* * *`  | user                | add GitHub links for each student            | easily access their Github to check their progress                     |
 | `* * *`  | user                | add GitHub links for each student group              | easily access their Github to check their progress                     |
 | `* * *`  | user                | record participation during tutorials                | accurately award participation marks to students                       |
 | `* * *`  | user                | add descriptions to the tasks                        | see the extra detail pertaining to the task                            |
@@ -555,7 +555,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to view students (UC1)
 2.  tApp displays the list of students
-3.  User requests to add a student contact
+3.  User requests to add a student
 4.  tApp adds the student
 
     Use case ends.
@@ -911,19 +911,20 @@ Similar to UC8 (Clear student list), except we are clearing the whole address bo
 
 ### Non-Functional Requirements
 * Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-* Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
+* Should be able to hold up to 100 students without a noticeable sluggishness in performance for typical usage.
 * A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 * Commands used should be intuitive, and should not exceed 80 characters.
-* System should respond almost immediately upon entering a command.
+* System should respond almost immediately (max: 2 seconds) upon entering a command.
 * Error messages shown should inform the user of what is wrong and what the correct command syntax should be.
 
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Student contact**: A student entry with the corresponding student’s name, tutorial attendance, and tutorial participation.
-* **Task**: An entry with a textual description of a piece of work to do, and a time that specifies the date that piece of work should be completed by
-* **Directory**: The list commands entered will be applied to (either student or task)
+* **Student**: A student contact.
+* **Group**: A CS2103 group consisting of multiple students.
+* **Task**: A todo task, a deadline task (task with a deadline) or an event task (task with an event date).
+* **Directory**: The list of students, groups or tasks.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -987,7 +988,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all students using the `students` command. Multiple students in the list.
 
     1. Test case: `deleteStudent 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
+       Expected: First student is deleted from the list. Details of the deleted student shown in the status message.
 
     1. Test case: `deleteStudent 0`<br>
        Expected: No student is deleted. Error details shown in the status message.
@@ -1030,7 +1031,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all students using the `students` command. Multiple students in the list.
 
     1. Test case: `marka 1 w/1`<br>
-       Expected: First contact is marked as present in the list. Status message shows details of his week 1 attendance.
+       Expected: First student is marked as present in the list. Status message shows details of his week 1 attendance.
 
     1. Test case: `marka 0 w/1`<br>
        Expected: No student is marked. Error details shown in the status message.
@@ -1043,10 +1044,10 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: Perform a `findStudent` command: e.g. `find David`.
 
     1. Test case: `marka 1 w/1`<br>
-       Expected: First contact in the last filtered students list (David) is marked as present. Status message shows details of student's week 1 attendance. Updated students list is shown.
+       Expected: First student in the last filtered students list (David) is marked as present. Status message shows details of student's week 1 attendance. Updated students list is shown.
 
     1. Test case: `marka 1 w/1`<br>
-       Expected: First contact in student list (Alex) is marked as present/absent depending on his last attendance status. Status message shows details of student's week 1 attendance. Updated students list is shown.
+       Expected: First student in student list (Alex) is marked as present/absent depending on his last attendance status. Status message shows details of student's week 1 attendance. Updated students list is shown.
 
 1. Marking multiple students
 
@@ -1063,7 +1064,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all students using the `students` command. Multiple students in the list.
 
     1. Test case: `markp 1 w/1`<br>
-       Expected: First contact is marked as participated in the list. Status message shows details of his week 1 participation.
+       Expected: First student is marked as participated in the list. Status message shows details of his week 1 participation.
 
     1. Test case: `markp 0 w/1`<br>
        Expected: No student is marked. Error details shown in the status message.
@@ -1076,10 +1077,10 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: Perform a `findStudent` command: e.g. `find David`.
 
     1. Test case: `markp 1 w/1`<br>
-       Expected: First contact in the last filtered students list (David) is marked as participated. Status message shows details of student's week 1 participation. Updated students list is shown.
+       Expected: First student in the last filtered students list (David) is marked as participated. Status message shows details of student's week 1 participation. Updated students list is shown.
 
     1. Test case: `markp 1 w/1`<br>
-       Expected: First contact in student list (Alex) is marked as participated/not participated depending on his last participation status. Status message shows details of student's week 1 participation. Updated students list is shown.
+       Expected: First student in student list (Alex) is marked as participated/not participated depending on his last participation status. Status message shows details of student's week 1 participation. Updated students list is shown.
 
 1. Marking multiple students
 

@@ -58,7 +58,6 @@ public class DeleteStudentCommandTest {
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deleteStudent(studentToDelete);
-        showNoStudent(expectedModel);
 
         assertCommandSuccess(deleteStudentCommand, model, expectedMessage, expectedModel);
     }
@@ -96,14 +95,5 @@ public class DeleteStudentCommandTest {
 
         // different student -> returns false
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
-    }
-
-    /**
-     * Updates {@code model}'s filtered list to show no one.
-     */
-    private void showNoStudent(Model model) {
-        model.updateFilteredStudentList(p -> false);
-
-        assertTrue(model.getFilteredStudentList().isEmpty());
     }
 }
