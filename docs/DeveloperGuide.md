@@ -693,7 +693,7 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 **MSS**
 
 1. CS2100 TA requests to create a new lab record
-2. ProgrammerError requests for lab details 
+2. ProgrammerError requests for lab details
 3. CS2100 TA specifies the lab name and total score
 4. ProgrammerError creates a lab record for every student
 

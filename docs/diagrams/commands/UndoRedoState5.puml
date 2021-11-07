@@ -18,4 +18,5 @@ class Pointer as "Current State" #FFF
 
 Pointer -up-> State3
 note right on link: State pe2 deleted.
+
 @enduml
