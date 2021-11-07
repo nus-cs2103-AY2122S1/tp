@@ -114,7 +114,7 @@ In [Glossary](#glossary), you will find useful descriptions and meanings of term
 1. Ensure you have Java `11` or above installed in your Computer. FAST can be used 
 on any operating system including Windows, macOS or Linux
 
-1. Download the latest `fast.jar` from [here](https://github.com/AY2122S1-CS2103T-T09-4/tp/releases).
+1. Download the latest `FAST.jar` from [here](https://github.com/AY2122S1-CS2103T-T09-4/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your FAST.
 
