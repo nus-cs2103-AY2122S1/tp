@@ -4,7 +4,7 @@ skinparam ClassBorderColor #000000
 
 title Final state
 
-package Tuitione <<rectangle>> {
+package TuitiONE <<rectangle>> {
     package <b>Lessons</b> as Lessons <<rectangle>> {
     }
     package Students <<rectangle>> {

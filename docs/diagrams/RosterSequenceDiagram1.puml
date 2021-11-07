@@ -19,9 +19,10 @@ activate RosterCommand
 RosterCommand -> Model
 activate Model
 
-alt "the lesson index provided is valid \n&& within the range"
-    Model -> Model : Find the specified lesson to display \nand filter the corresponding students \nwho are enrolled in the specified lesson.
-end
+
+Model -> Model : updateFilteredLessonList()
+Model -> Model : updateFilteredStudentList()
+
 
 Model --> RosterCommand
 deactivate Model

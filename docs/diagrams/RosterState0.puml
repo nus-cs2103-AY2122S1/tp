@@ -3,7 +3,7 @@
 
 title Initial state
 
-package Tuitione <<rectangle>> {
+package TuitiONE <<rectangle>> {
     package lessonList <<rectangle>> {
         object "<u>l1:Lesson" as Lesson1 {
         lessonCode = Math-P4-Wed-1800
@@ -32,6 +32,7 @@ package Tuitione <<rectangle>> {
 studentList -[hidden]up-> lessonList
 
 Lesson1 <--> Student1
+
 Lesson2 <--> Student2
 
 @end

@@ -3,16 +3,16 @@
 
 title After command "roster 1"
 
-package Tuitione <<rectangle>> {
+package TuitiONE <<rectangle>> {
 
-    package lessonList <<rectangle>> {
+    package filteredLessonList <<rectangle>> {
         object "<u>l1:Lesson" as Lesson1 {
         lessonCode = Math-P4-Wed-1800
         lessonListIndex = 1
         }
     }
 
-    package studentList <<rectangle>> {
+    package filteredStudentList <<rectangle>> {
         object "<u>s1:Student" as Student1 {
         name = Bernice
         lesson(s) = Math-P4-Wed-1800
@@ -20,7 +20,7 @@ package Tuitione <<rectangle>> {
     }
 }
 
-studentList -[hidden]up-> lessonList
+filteredStudentList -[hidden]up-> filteredLessonList
 
 Lesson1 <--> Student1
 

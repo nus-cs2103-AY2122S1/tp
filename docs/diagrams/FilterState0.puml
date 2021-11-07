@@ -3,7 +3,7 @@
 
 title Initial state
 
-package Tuitione <<rectangle>> {
+package TuitiONE <<rectangle>> {
     package lessonList <<rectangle>> {
         object "<u>l1:Lesson" as Lesson1 {
         subject = "English"
