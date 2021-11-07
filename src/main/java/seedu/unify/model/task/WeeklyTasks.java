@@ -124,7 +124,7 @@ public class WeeklyTasks implements Iterable<Task> {
         for (int i = 0; i < DAYS_IN_WEEK; i++) {
             FilteredList<Task> tempList = new FilteredList<>(weeklyTaskList.get(i));
             totalTasksTemp += tempList.size();
-            tempList.setPredicate(new TaskContainsStatePredicate(new State(State.ObjectState.DONE)));
+            tempList.setPredicate(new TaskIsDonePredicate());
             doneTasksTemp += tempList.size();
         }
         totalWeeklyTasks.set(totalTasksTemp);
