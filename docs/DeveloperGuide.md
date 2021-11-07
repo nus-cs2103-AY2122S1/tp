@@ -39,7 +39,8 @@ The purpose of the Developer Guide is to guide you through our application's arc
 
 ## **Acknowledgements**
 
-* Application logo - Copyright by **[yupiramos](https://www.canva.com/media/MADeEQ5DO1Y)**
+* This project is based on the AB3 project created by the [SE-EDU initiative](https://se-education.org).
+* Application logo - Copyright by [yupiramos](https://www.canva.com/media/MADeEQ5DO1Y)
 * Adapted code - [`formatTotalColumn`](https://stackoverflow.com/a/34924734/13896417) and [`setCloseOnEsc`](https://stackoverflow.com/a/42104595/13896417)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -145,6 +146,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
+
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-W08-3/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="550" />
@@ -189,6 +191,7 @@ How the Storage component works:
   (i.e `Person`, `Task`, `Order`) into json object and vise versa. 
 * The `JsonSerializable` class and `JsonAdapted` class also checks the correctness of the json files format, and in the 
   case when any of the format is wrong, it will then throw a `DataConversionException` and  `IllegalValueException`
+
 ### Common classes
 
 Classes used by multiple components are in the `seedu.address.commons` package.
@@ -260,7 +263,7 @@ is below:
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Update Person Changes in Order List and Task List
+### Updating person changes in order list and task list
 
 SalesNote's clients are directly referenced in orders. Any changes in the clients through user commands should be propagated to the Order list.
 
@@ -286,7 +289,7 @@ The sequence diagram below shows the interaction within the Logic component for 
 #### Result
 The changes in person objects are updated in their order and task objects.
 
-### Sort Order Feature
+### Sorting orders feature
 
 #### Implementation
 
@@ -350,7 +353,7 @@ Step 3.  the UI proceeds to display the sorted list of orders.
       * Ensures that the sorting arrangement is always preserved, even another command e.g. `addorder` mutates the underlying list.
     * Cons: More difficult to implement since it entails more coupling with the `FilteredList` of orders.
     
-### Display client's total orders feature
+### Displaying clients' total orders feature
 
 The feature displays the total orders for all clients except those without orders in a new window. 
 Its mechanism is a mix of the mechanisms for `MainWindow` and `HelpWindow`.
