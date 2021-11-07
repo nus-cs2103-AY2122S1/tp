@@ -10,9 +10,9 @@ import static seedu.programmer.commons.util.AppUtil.checkArgument;
 public class StudentId {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Student ID should be of the form AXXXXXXXY where X is a non-negative integer "
-                    + "and Y is the last character of your student ID."
-                    + "\nFor example: A0212345T";
+            "Student ID should be of the form AXXXXXXXY where X is a digit from 0 to 9 "
+            + "and Y is the last alphabet of your student ID."
+            + "\nFor example: A0212345T";
 
     /*
      * A student ID must start and end with an alphabet, and has exactly 7 numbers between the two letters

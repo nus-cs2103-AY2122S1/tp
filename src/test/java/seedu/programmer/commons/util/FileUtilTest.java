@@ -12,7 +12,9 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.programmer.commons.exceptions.IllegalValueException;
+import seedu.programmer.model.student.ClassId;
 import seedu.programmer.model.student.Student;
+import seedu.programmer.model.student.StudentId;
 
 public class FileUtilTest {
 
@@ -55,17 +57,14 @@ public class FileUtilTest {
 
     @Test
     public void getStudentsFromCsv_invalidField_throwsIllegalArgumentException() {
-        String expectedMessage = "Student ID should be of the form AXXXXXXXY where X is a non-negative integer "
-                + "and Y is the last character of your student ID."
-                + "\nFor example: A0212345T";
+        String expectedMessage = StudentId.MESSAGE_CONSTRAINTS;
         File testFile = new File(INVALID_FIELD_CSV);
         assertThrows(IllegalArgumentException.class, expectedMessage, () -> FileUtil.getStudentsFromCsv(testFile));
     }
 
     @Test
     public void getStudentsFromCsv_missingField_throwsIllegalArgumentException() {
-        String expectedMessage = "Class ID should only contain 3 alphanumeric characters that begins with B"
-                + " followed by class number (eg. B01 or B11), and it should not be blank";
+        String expectedMessage = ClassId.MESSAGE_CONSTRAINTS;
         File testFile = new File(MISSING_FIELD_CSV);
         assertThrows(IllegalArgumentException.class, expectedMessage, () -> FileUtil.getStudentsFromCsv(testFile));
     }

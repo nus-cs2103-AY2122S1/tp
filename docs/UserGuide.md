@@ -12,26 +12,27 @@ classes. If you are familiar with Unix commands, this is definitely for you!
 
 - [Quick Start](#quick-start)
 - [Features](#features)
-    1. [General Features](#general-features)
+  1. [Parameter Summary](#parameter-summary)
+  2. [General Features](#general-features)
         1. [View Help: `help`](#view-help)
         2. [View Dashboard `dashboard`](#view-dashboard)
         3. [Exit: `exit`](#exit)
-    2. [Data Features](#data-features)
-        1. [Fill Sample Data: `fill`](#fill-sample-data)
-        2. [Purge All Data: `purge`](#purge-all-data)
-        3. [Download Data: `download`](#download-data)
-        4. [Upload Data: `upload`](#upload-data)
-    3. [Student Features](#student-features)
-        1. [Add Student: `add`](#add-student)
-        2. [Edit Student Details: `edit`](#edit-student)
-        3. [Delete Student: `delete`](#delete-student)
-        4. [Filter Students: `filter`](#filter-student)
-        5. [Show Student Details: `show`](#show-student)
-        6. [List All Students: `list`](#list-students)
-    4. [Lab Features](#lab-features)
-        1. [Add Lab: `addlab`](#add-lab)
-        2. [Edit Lab: `editlab`](#edit-lab)
-        3. [Delete Lab: `dellab`](#delete-lab)
+  3. [Data Features](#data-features)
+      1. [Fill Sample Data: `fill`](#fill-sample-data)
+      2. [Purge All Data: `purge`](#purge-all-data)
+      3. [Download Data: `download`](#download-data)
+      4. [Upload Data: `upload`](#upload-data)
+  4. [Student Features](#student-features)
+      1. [Add Student: `add`](#add-student)
+      2. [Edit Student Details: `edit`](#edit-student)
+      3. [Delete Student: `delete`](#delete-student)
+      4. [Filter Students: `filter`](#filter-student)
+      5. [Show Student Details: `show`](#show-student)
+      6. [List All Students: `list`](#list-students)
+  5. [Lab Features](#lab-features)
+      1. [Add Lab: `addlab`](#add-lab)
+      2. [Edit Lab: `editlab`](#edit-lab)
+      3. [Delete Lab: `dellab`](#delete-lab)
 - [Command Summary](#command-summary)
 
 ## <a name="quick-start"></a>Quick Start
@@ -76,18 +77,25 @@ classes. If you are familiar with Unix commands, this is definitely for you!
 
 </div>
 
-## Parameter Summary
+## <a name="parameter-summary"></a>Parameter Summary
+<div markdown="span" class="alert alert-warning">
 
-Parameter | What it means
---------| ----------------------
-**-n** | Name of Student
-**-sid** | Student ID of Student
-**-cid** | Class ID of Student
-**-email** | Email of Student
-**-ln** | Lab Number
-**-nln** | New Lab Number (used for `editlab` command only)
-**-ts** | Lab Total Score
-**-s** | Lab Score of Student
+:exclamation: **Note:**
+Take note that all the commands that require the corresponding parameter follows the constraints as specified in the table below, apart from `filter` command.
+<br/>
+`filter` command filters the list based on partial character sequence matching and hence does not have to follow the constraints strictly.
+</div>
+
+Parameter | What it means | Constraints
+--------| ---------------------- | -------
+**-n** | Name of Student | Alphanumeric characters and spaces
+**-sid** | Student ID of Student | AXXXXXXXY, where X is a digit from 0 to 9 and Y is an alphabet
+**-cid** | Class ID of Student | BXX, where X is a digit from 0 to 9
+**-email** | Email of Student | eXXXXXXX@u.nus.edu, where X is a digit from 0 to 9
+**-ln** | Lab Number | An integer between 1 and 13 (inclusive)
+**-nln** | New Lab Number | An integer between 1 and 13 (inclusive)
+**-ts** | Lab Total Score | A non-negative integer between 1 and 100 (inclusive)
+**-s** | Lab Score of Student | A non-negative integer, not greater than the corresponding lab total score
 
 ## <a name="general-features"></a>1. General Features
 
@@ -217,6 +225,7 @@ Filter the students in ProgrammerError based on the specified arguments provided
 * ProgrammerError will display the filtered list of students whose details matches all the specified arguments.
 * The arguments are matched to the corresponding details as long as the details of the students contains the
 sequence of characters provided in the argument string.
+* `filter` command does not follow the constraints as specified in [parameter summary](#parameter-summary).
 
 Format: `filter [-n <NAME>] [-sid <STUDENT_ID>] [-cid <CLASS_ID>] [-email <EMAIL>]`
 
