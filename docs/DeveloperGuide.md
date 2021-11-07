@@ -295,7 +295,7 @@ The following sequence diagrams show how the delete by module code feature works
 The above information is also applicable for the delete lesson by batch feature.
 </div>
 
-### Aliases for different commands:
+### Aliases for different commands
 
 Aliases are alternative words that you can use to perform the same command. There are a few default aliases provided for every command.
 Users can choose to use their most preferred alias to perform the command they want.
