@@ -167,7 +167,7 @@ Each step will be described in the sections below.
 
 **Step 1**: Parsing of user input
 
-Parsing of the user input is primarily handled by the `RevenueCommandParser` which calls other
+Parsing of the user input is primarily handled by the `AddCommandParser` which calls other
 helper classes to parse the text into various attributes `XYZ` of `Person`, which are: 
 * `Name`
 * `Phone`
@@ -177,9 +177,10 @@ helper classes to parse the text into various attributes `XYZ` of `Person`, whic
 * `Insurances`
 * `Notes` (optional)
 
-Additionally, an empty `Appointment` object is added. 
-
 ![AddCommandSequenceDiagram](images/AddCommandSequenceDiagram.png)
+
+`AddCommandParser` then creates an `AddCommand` based on created objects, 
+as well as an empty `Appointment` object and an empty `HashSet` of `Claims`.
 
 ###  Revenue feature
 
