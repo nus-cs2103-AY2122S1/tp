@@ -1288,23 +1288,51 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-#### Launch and shutdown
+#### Launch and Preferences
 
 1. Initial launch
 
     * Download the jar file and copy into an empty folder
 
-    * Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    * Double-click the jar file<br>
+      Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 2. Saving window preferences
 
     * Resize the window to an optimum size. Move the window to a different location. Close the window.
 
     * Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+      Expected: The most recent window size and location is retained.
 
-3. _{ more test cases …​ }_
+#### Adding a student
 
+1. Adding a new student with a unique name
+
+    * Prerequisites: There is no student with the name "John Doe" in the TuitiONE application.
+
+    * Test case: `add n/John Doe p/91234567 e/jd@gmail.com a/John street, block 123, #01-01 g/P2`<br>
+      Expected: New student with specified details is added to the student list. Details of the added student are shown in the status message.
+
+    * Test case: `add n/Peter Parker p/92345678 e/pp@gmail.com a/Peter street, block 123, #01-01`<br>
+      Expected: No student is added. Proper command format is shown in the status message.
+
+    * Other incorrect add commands to try: use the `add` command while missing out one of the following required fields (`n/`, `p/`, `e/`, `a/` and `g/`). <br>
+      Expected: No student is added. Proper command format is shown in the status message.
+
+2. Adding a new student with a duplicate name
+
+    * Prerequisite: There is a student with the name "John Doe" in the TuitiONE application. Otherwise, replace the name "John Doe" in the test case with a name of a student that is already added to the TuitiONE application.
+
+    * Test case: `add n/John Doe p/93456789 e/jd@gmail.com a/John street, block 123, #01-01 g/P2`<br>
+      Expected: No student is added. Error message stating the student already exists is displayed in the status message.
+
+    * Test case: `add n/John Doe p/99999999 e/jd3000@gmail.com a/John street, block 500, #02-02 g/S5`<br>
+      Expected: No student is added. Error message stating the student already exists is displayed in the status message.
+
+3. Adding a new student with any incorrect input
+
+    * Expected: No student is added. An alert message corresponding to the wrongly entered parameter will be shown in the message box to remind the user of the correct command format. <br>
+      _Note: Only the alert message corresponds to the first encountered incorrect parameter will be shown. User is expected to correct the input parameters one by one._
 
 #### Deleting a student
 
@@ -1323,6 +1351,19 @@ testers are expected to do more *exploratory* testing.
     * Other incorrect delete commands to try: `delete`, `delete x`, `delete y` (where x is larger than the list size, and y is a negative integer)<br>
       Expected: Similar to previous.
 
+#### Listing all students and lessons
+
+1. Listing all students and lessons when a filtered list of students is shown
+
+    * Prerequisites: A filtered list of students is shown
+
+    * Test case: `list`<br>
+      Exptected: Status message will state that all students and lessons are listed. The student and lesson list will refresh and show all students and lessons.
+
+2. Listing all students and lessons when all students and lessons are shown 
+
+   * Test case: `list`<br>
+      Exptected: Status message will state that all students and lessons are listed. The student and lesson list will refresh and show all students and lessons.
 
 #### Editing a student
 
@@ -1438,8 +1479,7 @@ testers are expected to do more *exploratory* testing.
     * `Student` must not have any existing classes that clash with the duration in `Lesson`
     * `Student` must currently be enrolled in fewer than `10` lessons
     * `Lesson` must currently have fewer than `15` students enrolled inside the lesson
-    * Should any of the above conditions not be met, the `Student` will not be able to be enrolled in the `Lesson` of interest  
-
+    * Should any of the above conditions not be met, the `Student` will not be able to be enrolled in the `Lesson` of interest
 
   * Note: 
     * We will be using index `2` to conduct manual testing for positive tests, but feel free to test with any valid index (any positive integer shown in the student and lesson lists).
@@ -1447,14 +1487,34 @@ testers are expected to do more *exploratory* testing.
     * The `Student` of index `2` (Bernice Yu of grade P4) will be enrolled into `Lesson` of `index` 2 (Math-P4-Wed-1800).
 
   * Test case: `enroll 2 l/2`<br>
-    Expected: `Student` of index `1` is enrolled in `Lesson` of index `3` . Details of the student and lesson enrolled in shown in the status message.
+    Expected: `Student` of index `2` is enrolled in `Lesson` of index `2` . Details of the student and lesson enrolled in shown in the status message.
 
   * Test case: `enroll 0 l/0`<br>
     Expected: No student is enrolled in any lesson. Error details shown in the status message.
 
-  * Other incorrect delete commands to try: `enroll`, `enroll 1`, `enroll 1 l/0`, `enroll 0 l/1`, `enroll x l/y`, `enroll y l/x` (where x is larger than the list size, and y is a negative integer)<br>
+  * Other incorrect enroll commands to try: `enroll`, `enroll 1`, `enroll 1 l/0`, `enroll 0 l/1`, `enroll x l/y`, `enroll y l/x` (where x is larger than the list size, and y is a negative integer)<br>
     Expected: Similar to previous.
-  
+
+#### Unenrolling a student
+
+1. Unenrolling a `Student` from a `Lesson`, while all students and lessons are being shown
+
+    * Prerequisites: List all students and lessons using the `list` command. Multiple "Students" and "Lessons" in the list.
+
+    * Note:
+        * We will be using index `1` to conduct manual testing for positive tests, but feel free to test with any valid index (any positive integer shown in the student and lesson lists).
+        * In this case, we will be using the sample data given when loading up **TuitiONE** for the first time (delete tuitione.json file if it is not your first time).
+        * The `Student` of index `1` (Alex Yeoh of grade S1) is enrolled in the `Lesson` of `index` 3 (Science-S1-Fri-1330).
+        * The `Lesson` of index `1` is (English-P2-Mon-0900).
+
+    * Test case: `unenroll 1 l/3`<br>
+      Expected: The `Student` of index `1` (Alex Yeoh of grade S1) is unenrolled the `Lesson` of `index` 3 (Science-S1-Fri-1330). The details of the unenroll is displayed in the status message.
+
+    * Test case: `unenroll 1 l/1`<br>
+      Expected: The `Student` of index `1` (Alex Yeoh of grade S1) is unable to be unenrolled from The `Lesson` of index `1` (English-P2-Mon-0900). Status message stating student is not enrolled in the lesson is displayed.
+
+    * Other incorrect enroll commands to try: `unenroll`, `unenroll 1`, `unenroll 1 l/0`, `unenroll 0 l/1`, `unenroll x l/y`, `unenroll y l/x` (where x is larger than the list size, and y is a negative integer)<br>
+      Expected: An error message corresponding to the incorrect field or an error message showing the correct command format is displayed.
 
 #### Finding a student
 
@@ -1498,9 +1558,9 @@ the message box to inform the user that the lesson already exists in TuitiONE.
 
 1. Incorrect addition of a lesson by passing in any incorrect input
 
-    * Expected: Addition of the particular lesson will not be applied to TuitiONE. An alert message corresponds to the 
+    * Expected: Addition of the particular lesson will not be applied to TuitiONE. An alert message corresponding to the 
 wrongly entered parameter will be shown in the message box to remind the user of the correct input parameter 
-format.<br>_Note: Only the alert message corresponds to the first encountered incorrect parameter will be shown. User is
+format.<br>_Note: Only the alert message corresponding to the first encountered incorrect parameter will be shown. User is
 expected to correct the input parameters one by one._
 
 
@@ -1590,6 +1650,27 @@ use valid `LESSON_INDEX`.
     * Test case: `filter english S1`<br>
       Expected: No filter is applied, and no change to both lists. The message box displays a message alerting the user that the command format inputted is invalid, along with a description of what the filter command does, its parameters, and an example usage.
 
+#### Help
+
+1. Getting help by entering help command
+
+    * Test case: `help` <br>
+      Expected: Status message should inform you that a help window is opened. A help window that displays all the commands of TuitiONE will appear.
+
+2. Getting help by using the help button
+
+    * Test case: Click on the help button in the top left of the TuitiONE application. A dropdown list with the option "Help F1" will appear. Click on the "Help F1" option.
+      <center>
+      <img src="images/DeveloperGuideImage/help_ui.png"/>
+      </center><br>
+    Expected: A help window that displays all the commands of TuitiONE will appear.
+
+3. Getting help by pressing the F1 key
+
+    * Prerequisite: TuitiONE is the active window on your computer. If you are unsure, click on the TuitiONE application to make it the active window.
+
+    * Test case: Press the F1 key on your keyboard.
+      Expected: A help window that displays all the commands of TuitiONE will appear.
 
 #### Clearing data
 
