@@ -267,7 +267,7 @@ For the `arePrefixesPresent` method, the prefixes provided were changed to only 
 
 #### Implementation
 
-The GitHub field is facilitated by the `Github` class. It is stored interally as a `String` in the data file `addressbook.json` and is then initialized as a `Github` object. 
+The GitHub field is facilitated by the `Github` class. It is stored internally as a `String` in the data file `addressbook.json` and is then initialized as a `Github` object. 
 
 The `Github` class implements the following operation:
 
@@ -327,18 +327,6 @@ Next, The `ExportCommand` is then executed in `LogicManager`. The `ExportCommand
     2. `FileUtil#createIfMissing(Path)` creates the JSON file.
     3. The current `ReadOnlyAddressBook` is used to instantiate a new `JsonSerializableAddressBook`, a JSON-friendly equivalent of `ReadOnlyAddressBook` containing Jackson annotations. It stores a list of `JsonAdaptedPerson` instead of `Person`, which is also JSON-friendly.
     4. `JsonUtil#saveJsonFile(T, Path)` serializes the address book and writes to the file, using `ObjectMapper`, a Jackson class.
-    ```
-    /**
-     * Converts a given instance of a class into its JSON data string representation.
-     *
-     * @param instance The T object to be converted into the JSON string
-     * @param <T> The generic type to create an instance of
-     * @return JSON data representation of the given class instance, in string
-     */
-    public static <T> String toJsonString(T instance) throws JsonProcessingException {
-        return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(instance);
-    }
-    ```
 
 2. `exportAddressBookToCsv(ReadOnlyAddressBook)`
 
@@ -641,6 +629,88 @@ The Sequence Diagram below illustrates the interactions within the `Logic`, `Mod
 the `execute("show alex")` API call.
 
 ![ExportSequenceDiagram](images/ShowWithNameSequenceDiagram.png)
+
+### Command History (Keyboard Shortcut)
+
+In the Command Box, users can use up and down arrow keys to navigate through previous commands, similar to the Command Line. This is achieved by interactions between `CommandHistory` and `CommandBox`.
+
+The `CommandHistory` class contains these key variables and methods:
+* An `ArrayList<String>` which stores previous user commands
+* An `int` which indicates the current index
+* Methods `add(String)`, `getPrevious()`, `getNext()`, `resetIndex()`
+
+When CohortConnect UI is initialized, the `CommandBox` class representing the Command Box is created, containing a single instance of `CommandHistory`. It interacts with `CommandHistory` in 3 ways:
+1. If `KeyCode.UP` is detected in the `TextField`, `CommandHistory#getPrevious()` is called, and the returned String is set to the text field.
+
+<div markdown="span" class="alert alert-primary">
+:bulb: **Note:** If the history is empty, UP will return an empty string. If the current index is at the earliest command, it will continue to return the same command. 
+</div>
+
+The activity diagram below illustrates what happens when a user presses the UP arrow key.
+
+![CommandHistoryActivityDiagramUp](images/CommandHistoryActivityDiagramUp.png)
+
+2. If `KeyCode.DOWN` is detected in the `TextField`, `CommandHistory#getNext()` is called, and the returned String is set to the text field.
+
+<div markdown="span" class="alert alert-primary">
+:bulb: **Note:** If the history is empty or the current index is at the latest command, DOWN will return an empty string.   
+</div>
+
+The activity diagram below illustrates what happens when a user presses the DOWN arrow key.
+
+![CommandHistoryActivityDiagramDown](images/CommandHistoryActivityDiagramDown.png)
+
+3. When the user presses enter to execute a command, the command is saved using `CommandHistory#add(String)`, and the current index is reset using `CommandHistory#resetIndex()`.
+
+### Switching Between Tabs (Keyboard Shortcut)
+
+![WindowMenu](images/WindowMenu.png)
+
+**Accelerators** are shortcuts to Menu Items, which can be associated with `KeyCombinations`. To switch between the 4 tabs, a new Menu Window was added in the MenuBar, containing 4 Menu Items which can be accessed using Cmd/Ctrl + 1/2/3/4. Each of the Menu Items have an `onAction` method declared in their FXML files, and defined in `MainWindow.java`.
+
+1. Accelerators for the 4 Menu Items are set during initialization of `MainWindow.java`.
+
+```
+private void setAccelerators() {
+    setAccelerator(contactsMenuItem, KeyCombination.valueOf("Shortcut+1"));
+    setAccelerator(favoritesMenuItem, KeyCombination.valueOf("Shortcut+2"));
+    setAccelerator(eventsMenuItem, KeyCombination.valueOf("Shortcut+3"));
+    setAccelerator(findABuddyMenuItem, KeyCombination.valueOf("Shortcut+4"));
+    ...
+}
+```
+
+<div markdown="span" class="alert alert-primary">
+:bulb: **Note:** When detecting KeyCombination, Javafx automatically switches its interpretation of "Shortcut" as "Ctrl" for Windows and "Cmd" for macOS. The symbols in the MenuItem (shown above) change as well.
+</div>
+
+2. When their respective key combinations are detected, the MenuItem's onAction methods are called. For example, the following method is called when Cmd/Ctrl + 4 is detected.
+
+```
+@FXML
+public void handleFindABuddy() {
+    tabPaneHeader.activateFindABuddy(logic);
+}
+```
+
+3. `TabPaneHeader` then switches to the Find A Buddy tab using `tabPane.getSelectionModel().select(3)`.
+
+
+### GitHub and Telegram Commands
+
+In the Command Box, users can enter `g` or `te` to open the currently selected user's GitHub or Telegram in a browser, using their respective username.
+
+The following links are used
+- GitHub: `https://github.com/{username}`
+- Telegram: `https://t.me/{username}`
+
+Similar to other commands, the commands `g` and `te` are parsed in `AddressBookParser`, where it is checked that there are no other arguments.
+
+During their execution, it is checked that there is a current user selected, using `Model#getSelectedIndex()`. If the returned value is `-1`, then a `CommandException` is thrown.
+
+The CommandResult returned indicates whether it is triggered by a GitHub or Telegram command using booleans variables.
+
+In `MainWindow`, if the command result `isGithub()` or `isTelegram()`, the GitHub and Telegram links in `PersonDetails` will be triggered using `PersonDetails#openTelegram()` and `PersonDetails#openGithub()`. 
 
 --------------------------------------------------------------------------------------------------------------------
 
