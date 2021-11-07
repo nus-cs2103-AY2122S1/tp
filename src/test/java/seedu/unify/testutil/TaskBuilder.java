@@ -17,7 +17,7 @@ import seedu.unify.model.util.SampleDataUtil;
  */
 public class TaskBuilder {
 
-    public static final String DEFAULT_NAME = "Amy Bee";
+    public static final String DEFAULT_NAME = "Quiz";
     public static final String DEFAULT_TIME = "16:40";
     public static final String DEFAULT_DATE = "2021-12-11";
     public static final String DEFAULT_TAG = "CS2103";
