@@ -375,21 +375,15 @@ The list of birthdays is generated in the `ModelManager`, which implements the f
 
 Given below is an example usage scenario and how the birthday reminders mechanism behaves at each step.
 
-Step 1. On app startup sort contacts with birthday by birth month and day only. Contacts with birthdays that fall on the present day are coloured green while birthdays that within one week are coloured blue. Additionally, a customised message with each contact's phone number and age is displayed in the birthday reminder list.
+Step 1. On app startup sort contacts with birthday by birth month and day only. Contacts with birthdays that fall on the present day are coloured green while birthdays that are within one week are coloured blue. Additionally, a customised message with each contact's phone number and age is displayed in the birthday reminder list.
 
-Step 2. The first contact in the birthday reminder list will have the next birth month and day with respect 
-to current day.
+Step 2. The `BirthdayReminderListPanel` in CONNECTIONS' `UI` displays birthday reminders in sorted order, starting with the earliest upcoming birthday to the latest upcoming birthday for the year, afterwhich displays birthdays that have pass for the current year in sorted order.
 
-Step 3. The rest of the list with birthday after this first contact will be displayed in sorted order. This list is displayed in CONNECTIONS' `UI` in `BirthdayReminderListPanel`.
+Step 3. The user executes `add n/person3 b/01012000 …​` to add a new contact. 
 
-Step 4. The user decides to scroll through the `BirthdayReminderListPanel`. After the contact with the latest birthday is displayed, the contact with the 
-earliest birthday and all remaining undisplayed contacts with a birthday will be displayed in sorted order. 
+Step 4. CONNECTIONS will store the new contact. The `ObservableList<Person> birthdayReminders` for `BirthdayReminderPanelList` will include the new contact and place it in the right slot, ensuring the birthday reminder list remains sorted. 
 
-Step 5. The user executes `add n/person3 b/01012000 …​` to add a new contact. 
-
-Step 6. CONNECTIONS will store the new contact. The `ObservableList<Person> birthdayReminders` for `BirthdayReminderPanelList` will include the new contact and place it in the right slot, ensuring the birthday reminder list remains sorted. 
-
-Step 7. CONNECTIONS `UI` will observe for changes in the `ObservableList<Person> birthdayReminders` and update `BirthdayReminderPanelList`, displaying the new contact. 
+Step 5. CONNECTIONS `UI` will observe for changes in the `ObservableList<Person> birthdayReminders` and update `BirthdayReminderPanelList`, displaying the new contact. 
 
 #### Design considerations:
 
@@ -958,7 +952,6 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the size of the contacts that are currently being viewed)<br>
       Expected: Similar to previous.
       
-
 ### Saving data
 
 1. Dealing with missing/corrupted data files
