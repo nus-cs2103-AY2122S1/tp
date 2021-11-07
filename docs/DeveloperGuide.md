@@ -7,9 +7,13 @@ title: Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 ## 1. Introduction 
-### 1.1 Acknowledgements
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+### 1.1 Overview
+This developer guide provides an overview and details of Uni-Fy's system architecture and implementation. We hope it provides you a useful reference should you wish to understand the technical details behind Uni-Fy's implementation. 
+
+### 1.2 Acknowledgements
+
+- Adapted from  AddressBook Level-3 project created as part of the SE-EDU initiative
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -69,7 +73,7 @@ The sections below give more details of each component.
 
 ### 2.2 UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103T-W17-4/tp/blob/master/src/main/java/seedu/unify/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
