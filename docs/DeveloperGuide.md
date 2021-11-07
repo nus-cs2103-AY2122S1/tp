@@ -681,7 +681,7 @@ testers are expected to do more *exploratory* testing.
        Expected: No person is added. Error details shown in the status message. 
        Status bar remains the same.
        
-    1. Other incorrect add commands to try: `add p/98765432 e/johnd@example.com $/100`,
+    1. Other incorrect `add` commands to try: `add p/98765432 e/johnd@example.com $/100`,
        `add n/John Doe p/98765432 e/johnd@example.com`, `...` (where one or more attributes
        are missing in the command)
        Expected: A wrong message of `Invalid command format` will be shown in the status message.
@@ -699,7 +699,7 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `delete 0`<br>
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+    1. Other incorrect `delete` commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
@@ -724,7 +724,7 @@ testers are expected to do more *exploratory* testing.
        the date of shifts will be `2021-11-08`, `2021-11-15`, `2021-11-22`, `2021-11-29`, `2021-12-06`
        and the slot is `morning`. Otherwise, no shift is added and error details will be shown in the status message.
        
-    1. Other incorrect delete commands to try: `addShift -i 0 d/Monday-0`, `addShift -i x d/Monday-0`, (where 
+    1. Other incorrect `addShift` commands to try: `addShift -i 0 d/Monday-0`, `addShift -i x d/Monday-0`, (where 
        x is larger than the list size) `addShift -i 0 d/mon-0`, `...`.
        Expected: A wrong details will be shown in the status message.
        
