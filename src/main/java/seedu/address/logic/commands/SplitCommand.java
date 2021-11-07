@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.DayUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -37,6 +38,12 @@ public class SplitCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        if (model.getInternalMemberList().isEmpty()) {
+            throw new CommandException(String.format(Messages.MESSAGE_EMPTY_LIST, Messages.MESSAGE_MEMBER));
+        }
+        if (model.getInternalFacilityList().isEmpty()) {
+            throw new CommandException(String.format(Messages.MESSAGE_EMPTY_LIST, Messages.MESSAGE_FACILITY));
+        }
         MemberAvailableOnDayPredicate predicate = new MemberAvailableOnDayPredicate(dayNumber);
 
         int result = model.split(predicate, dayNumber);
