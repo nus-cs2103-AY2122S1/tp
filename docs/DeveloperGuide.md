@@ -144,7 +144,7 @@ How the parsing works:
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <p align="center">
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="600" />
 </p>
 
 The `Model` component,
@@ -199,7 +199,7 @@ IS_EDITABLE | If set to `true`, the field is editable by the user through edit c
 ### 3.7.2 Field interfaces
 
 <p align="center">
-<img src="images/FieldClassDiagram.png" width="700" />
+<img src="images/FieldClassDiagram.png" width="900" />
 </p>
 
 The following concrete interfaces inherit the `Field` interface. You can alternatively define your own interface or provide a concrete implementation of the field options within the `attribute` classes if they don't suit your needs.
