@@ -32,4 +32,6 @@ Given below are my contributions to the project.
 * **Community**:
   * Found bugs in the module website ([1](https://github.com/nus-cs2103-AY2122S1/forum/issues/346),
       [2](https://github.com/nus-cs2103-AY2122S1/forum/issues/304))
-  
+  * Found bugs in peer's app ([1](https://github.com/AY2122S1-CS2103T-T17-4/tp/issues/188), [2](https://github.com/kawaiigabrielneko/ped/issues/10),
+      [3](https://github.com/kawaiigabrielneko/ped/issues/7))
+    and UG ([1](https://github.com/kawaiigabrielneko/ped/issues/12), [2](https://github.com/kawaiigabrielneko/ped/issues/8))
