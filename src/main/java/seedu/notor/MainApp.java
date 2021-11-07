@@ -90,13 +90,12 @@ public class MainApp extends Application {
             }
             initialData = notorOptional.orElseGet(SampleDataUtil::getSampleNotor);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty Notor");
+            logger.warning("Data file not in the correct format. Will be starting with an empty Notor.");
             initialData = new Notor();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty Notor");
+            logger.warning("Problem while reading from the file. Will be starting with an empty Notor.");
             initialData = new Notor();
         }
-
         return new ModelManager(initialData, userPrefs);
     }
 

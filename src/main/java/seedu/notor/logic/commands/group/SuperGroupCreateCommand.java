@@ -39,4 +39,21 @@ public class SuperGroupCreateCommand extends GroupCommand {
     public CommandResult execute() throws ExecuteException {
         return executor.execute();
     }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof SuperGroupCreateCommand)) {
+            return false;
+        }
+
+        SuperGroupCreateCommand c = (SuperGroupCreateCommand) other;
+        // state check
+        return super.equals(other) && executor.equals(c.executor);
+    }
 }

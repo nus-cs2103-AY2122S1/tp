@@ -19,7 +19,6 @@ public class PersonGroupListCommandParser extends PersonCommandParser {
      * @throws ParseException if the user input does not conform the expected format
      */
     public PersonCommand parse() throws ParseException {
-        // TODO: Do we want to throw errors when extra stuff is added?
         return new PersonGroupListCommand(index);
     }
 }
