@@ -18,9 +18,11 @@ Class HiddenModel #FFFFFF
 
 Creator ..> VersionedModel
 
-XYZCreator --up|> Creator
+XYZCreator --down|> Creator
 
-Creator --up|> UiPart
+Creator --down|> UiPart
 
-XYZCreator .up.> VisualizerDisplay : returns >
+VisualizerDisplay .> XYZCreator : creates >
+
+VisualizerDisplay ..> VersionedModel
 @enduml
