@@ -195,6 +195,7 @@ Finds persons whose attribute contains any of the given keywords.
 
 Format: `find [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-d DESCRIPTION] [-l LABEL] [-tn TASK_NAME]`
 
+* A space is **necessary** between a command word, a flag and a keyword.
 * Only 1 attribute can be specified per find command.
 * The search is case-insensitive. e.g. hans will match Hans
 * The order of the keywords matters. e.g. Hans Bo will not match Bo Hans
@@ -208,6 +209,13 @@ Examples:
 * `find -n Alex` Finds all people whose name matches the keyword "Alex".
 
 ![result for `find -n Alex`](images/findAlexResult.png)
+<div markdown="span" class="alert alert-primary">
+:memo:**Note**: The keywords will only be matched against the start of any word. If any of the keywords are not the 
+start of any word in a person's name or if the keywords do not appear in the same order in the persons' name as they do 
+in the given input, it will not match that particular task. For instance, `find -n alex` will match a person with 
+the name "Alex Yeoh". However, `find -n lex` and `find -n yeo alex` will not match the same person with the name 
+"Alex Yeoh".
+</div>
 
 ### Adding a task: `add`
 
@@ -277,7 +285,7 @@ Format: `cat INDEX [-f KEYWORDS]`
    Examples:
 
    * `cat 1` Displays the list of tasks attached to the 1st person.
-   ![result for `cat 1`]()
+   ![result for `cat 1`](images/catAlexResult.png)
 
 2. Displays a filtered list of tasks that has been attached to a specific person.
 
@@ -285,17 +293,25 @@ Format: `cat INDEX [-f KEYWORDS]`
 
    * Displays a filtered lists of tasks for a specific person according to the keywords provided.
    * Only tasks that matches the keywords will be shown. A task matches the keywords if the task name contains a word that starts with any of the `KEYWORDS`.
+   * A space is **necessary** between the flag and the keywords.
 
    Examples:
 
    * Alex is the first person in the address book and has the tasks [Work, project meeting at NUS]. `cat 1 -f work` will display the task "work"
    * `cat 1 -f work` Displays the list of tasks attached to the 1st person that match the given keywords(s).
-   ![result for `cat 1 -f work`]()
+   ![result for `cat 1 -f work`](images/cat-fResult.png)
+
+<div markdown="span" class="alert alert-primary">
+:memo:**Note**: The keywords will only be matched against the start of any word. If any of the keywords are not the 
+start of any word in a task name or if the keywords do not appear in the same order in the task name as they do in the
+given input, it will not match that particular task. For instance, `cat 1 -f work` will match a task with the name 
+"Work at 5pm". However, `cat 1 -f ork` and `cat 1 -f 5pm work" will not match the same task with the name "Work at 5pm".
+</div>
 
 3. Displays the task list of all persons in ContactSH.
 
    Format: `cat -A`
-   ![result for `cat -A`]()
+   ![result for `cat -A`](images/catAllResult.png)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
     Alternatively, you could also click on the person in the GUI to open said person's tasks!
