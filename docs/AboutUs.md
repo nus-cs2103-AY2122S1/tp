@@ -5,8 +5,6 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
 ### Chan Yu Cheng
@@ -16,7 +14,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/yucheng11122017)]
 [[portfolio](team/yucheng11122017.md)]
 
-* Role: In charge of Model
+* Role: Developer
+* Responsibilities: Model
 
 ### Lee Zhi Xuan
 
@@ -25,7 +24,9 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/leezhixuan)]
 [[portfolio](team/leezhixuan.md)]
 
-* Role: In charge of Logic
+* Role: Developer
+* Responsibilities: Logic
+
 
 ### Justin Hoe
 
