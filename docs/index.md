@@ -30,4 +30,5 @@ If you are interested in contacting **Source Control** team, visit the [**About 
 * Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 * Original project: [AddressBook Level-3](https://se-education.org/addressbook-level3) project created as part of the [SE-EDU](https://se-education.org) initiative
 * Application logo: Inspired by [Source Academy](https://sourceacademy.nus.edu.sg/)
-* Code snippet for getting jar file directory: Taken from [this post](https://stackoverflow.com/questions/320542/how-to-get-the-path-of-a-running-jar-file)
+* Code snippet for getting jar file directory: Taken from [this Stackoverflow post](https://stackoverflow.com/questions/320542/how-to-get-the-path-of-a-running-jar-file)
+* PlantUML sprite for rake symbol: Taken from [this PlantUML forum post](https://forum.plantuml.net/195/is-there-any-support-for-subactivity-or-the-rake-symbol)

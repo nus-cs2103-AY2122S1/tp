@@ -16,8 +16,8 @@ title: Developer Guide
 * Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 * Original project: [AddressBook Level-3](https://se-education.org/addressbook-level3) project created as part of the [SE-EDU](https://se-education.org) initiative
 * Application logo: Inspired by [Source Academy](https://sourceacademy.nus.edu.sg/)
-* Code snippet for getting jar file directory: Taken from [this post](https://stackoverflow.com/questions/320542/how-to-get-the-path-of-a-running-jar-file)
-
+* Code snippet for getting jar file directory: Taken from [this Stackoverflow post](https://stackoverflow.com/questions/320542/how-to-get-the-path-of-a-running-jar-file)
+* PlantUML sprite for rake symbol: Taken from [this PlantUML forum post](https://forum.plantuml.net/195/is-there-any-support-for-subactivity-or-the-rake-symbol)
 
 <br>
 
@@ -199,20 +199,17 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Adding a student
 
-The add student feature adds a student with the provided name and NUSNET ID into the database. If the student comes with optionally specified groups and tags, these fields will be added accordingly.
 
-#### AddCommand class
-The `addstudent` mechanism is facilitated by the `AddCommand` class which extends the `Command` class. The `AddCommand` class overrides the `execute()` method in `Command`. In this implementation,
-the method first checks if the `Student` object supplied as parameters is non-null. Then, it checks if the `Student` already exists in the database.
-If this `Student` already exists, a `CommandException` will be thrown, telling the user that a duplicate `Student` is being added. If
-the `Student` does not exist in the database yet, the `Model#addStudent()` method is called.
+The `addstudent` feature adds a student with the provided name and NUSNET ID into the database. If the student comes with optionally specified groups and tags, these fields will be added accordingly.
+### How the `addstudent` feature works
+1. The user specifies the student name, NUSNET ID, and if applicable, the groups and tags the student has too.
+2. If the name or NUSNET ID is not provided, the user will be prompted to enter them via an error message.
+3. The ID is cross-referenced with the current students in the database, and an error is thrown if the student to add has the same ID as a pre-existing student.
+4. If the student to add has a unique NUSNET ID, the groups, if provided, will be parsed individually.
+    * If the provided group exists, the student will be added into that group.
+    * If the provided group does not exist, a new group will be added, and the student will be added into that group subsequently.
+5. A new `Student` object is created with the given name, NUSNET ID, groups, and tags.
 
-#### AddCommandParser class
-The `AddCommandParser` class implements the `Parser<AddCommand>` interface. The `parse()` method checks for the presence of the compulsory prefixes corresponding to the name and NUSNET id of the `Student`, namely `-n` and `-i`.
-It also checks for the presence of the optional group and tag prefixes, namely `-g` and `-t`.
-It then retrieves the characters that follow each prefix and allocates them to the fields the `Student` object has accordingly.
-
-In the case where the compulsory prefixes `-n` and `-i` are not present, a `ParseException` is thrown, prompting the user that the wrong command format has been used.
 
 The following activity diagram summarises what happens when a user executes the `addstudent` command to add a new student. In the case where the student is not added, an error message will be displayed with the reason.
 
@@ -241,7 +238,7 @@ The `addgroup` feature allows users to create new groups, as well as specify stu
    * If there is one and only one match, the student is added to the group.
 4. The group is added to the application if Step 3 completes without any exceptions.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** In the case where there are more than one students matched because they share the same name, an error message will be displayed to the user. The user will then have to specify the student to be added using his/her student ID.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** In the case where there are more than one students matched because they share the same name, an error message will be displayed to the user. The user will then have to specify the student to be added using his/her NUSNET ID.
 </div>
 
 The following activity diagrams summarises what happens when a user executes the `addgroup` command to add a new group. In the case where the group is not added, an error message will be displayed with the reason.
@@ -258,6 +255,9 @@ The following sequence diagram summarises what happens when the user inputs an `
 <center>
     <img src="images/AddGroupSequenceDiagram.png">
 </center>
+<center>
+    <img src="images/AddGroupToModelSequenceDiagram.png">
+</center>
 
 ### Adding a student into a group
 
@@ -272,7 +272,7 @@ The `addalloc` feature allows users to allocate a student into a group.
    * If there are multiple matched students, the allocation is not made successfully, and the student list is updated with all matched students.
 4. The student is allocated into the group.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** In the case where there are more than one students matched because they share the same name, an error message will be displayed to the user. The user will then have to specify the student to be added using his/her student ID.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** In the case where there are more than one students matched because they share the same name, an error message will be displayed to the user. The user will then have to specify the student to be added using his/her NUSNET ID.
 </div>
 
 The following activity diagram summarises what happens when a user executes the `addalloc` command to allocate a student into a group. In the case where the student is not added into the group, an error message will be displayed with the reason.
@@ -306,7 +306,7 @@ The `addscore` feature allows users to add score for an assessment of a student.
    * If there are multiple matched students, the update is not made successfully, and the student list is updated with all matched students.
 4. The score is updated in the assessment of the student.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** In the case where there are more than one students matched because they share the same name, an error message will be displayed to the user. The user will then have to specify the student to be added using his/her student ID.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** In the case where there are more than one students matched because they share the same name, an error message will be displayed to the user. The user will then have to specify the student to be added using his/her NUSNET ID.
 </div>
 
 The following activity diagram summarises what happens when a user executes the `addscore` command to add score for an assessment of a student. In the case where the score is not added/updated, an error message will be displayed with the reason.
@@ -413,7 +413,7 @@ The `show` feature allows users to show the performance analysis of a student, a
    * If there are multiple matched students, the update is not made successfully, and the student list is updated with all matched students.
 4. The performance analysis of the student, the group or the cohort in an assessment is displayed.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** In the case where the performance analysis of a student is requested by identity and there are more than one students matched because they share the same name, an error message will be displayed to the user. The user will then have to specify the student to be added using his/her student ID.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** In the case where the performance analysis of a student is requested by identity and there are more than one students matched because they share the same name, an error message will be displayed to the user. The user will then have to specify the student to be added using his/her NUSNET ID.
 </div>
 
 The following activity diagrams summarise what happens when a user executes the `show` command to show the performance analysis of a student, a group or the cohort in an assessment. In the case where the display is not presented successfully, an error message will be displayed with the reason.
@@ -449,8 +449,8 @@ An alias contains two strings: An `aliasWord` which is the new user-defined word
 Parsing of an alias command follows the following steps:
 1. The alias word is checked to ensure that it is one word long.
 1. The alias word is also checked to ensure that it does not overlap with any default command word. This is to prevent the re-mapping of any default command words and potentially losing the functionality of the application.
-1. If the command word is an alias, it is replaced with the command word that the alias maps to.
 1. The command word is checked for validity by attempting to parse the command word. If the parser does not recognise the command word, it is not valid.
+1. If the command word is an alias, it is replaced with the command word that the alias maps to.
 1. The new `Alias` and `AliasCommand` is created, and executed.
 1. The alias is added to both the parser, and the model (so that it can be saved in the `UserPrefs`)
     * If the alias word is already present in the parser, the command word it is mapped to is replaced with the new command word instead.
@@ -629,107 +629,102 @@ Others:
 
 (For all use cases below, the **System** is `Source Control` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Import student roster**
+#### Use case: Import student roster
 
 **MSS**
 
 1.  User has a comma-separated values (`.csv`) file of the student roster.
 2.  User requests to import the file into Source Control.
 3.  Source Control shows the list of students parsed and imported.
-
     Use case ends.
 
 **Extensions**
 
 * 2a. User enters an incorrectly formatted csv file.
-
-    * 2a1. Source Control shows an error message displaying the bad input.
-
+    * 2a1. Source Control shows an error message.
     * 2a2. User fixes the csv file.
-
       Use case resumes at step 2.
 
-**Use case: Create a new group**
+      
+#### Use case: Create a new group
 
 **MSS**
 
-1.  User requests to create a new group and enters the group name and optionally the students' names or student IDs.
+1.  User requests to create a new group and enters the group name and optionally the students' names or NUSNET IDs.
 2.  Source Control creates the group with the specified students.
-
     Use case ends.
 
 **Extensions**
 
-* 1a. User enters a group name which coincides with that of an existing group.
+* 1a. User enters an invalid group name.
+  * 1a1. Source Control shows an error message.
+    Use case resumes at step 1.
 
-    * 1a1. Source Control shows an error message.
 
+* 1b. User enters a group name which coincides with an existing group in the database.
+    * 1b1. Source Control shows an error message.
       Use case resumes at step 1.
     
-    
-* 1b. User specifies student names which match with multiple students in the Source Control database.
-
-    * 1b1. Source Control shows the list of students with matching names, and prompts the user to resolve the conflict by specifying the student ID instead.
-      
+* 1c. User enters a student name which match with multiple students in the Source Control database.
+    * 1c1. Source Control shows the list of students with matching names, and prompts the user to resolve the conflict by specifying the target student's NUSNET ID instead.
       Use case resumes at step 1.
 
 
-**Use case: Showing a student's performance**
+* 1d. User enters a list of student name contains duplicated students.
+    * 1d1. Source Control shows an error message to inform user of the duplicates.
+      Use case resumes at step 1.
+
+
+#### Use case: Showing a student's performance
 
 **MSS**
 
-1.  User requests to view the performance of a specified student by providing the index of the student in the list, or the student's name or student ID.
+1.  User requests to view the performance of a specified student by providing the index of the student in the list, or the student's name or NUSNET ID.
 2.  Source Control displays a line chart showing the specified student's performance against the cohort performance for each assessment.
     Use case ends.
 
 **Extensions**
 
-* 1a. User enters a student name or ID that does not match with any student stored in Source Control.
-
+* 1a. User enters a student name or ID that does not exist in the database.
     * 1a1. Source Control shows an error message.
-
       Use case resumes at step 1.
-    
 
 * 1b. User enters an invalid index.
-
     * 1b1. Source Control shows an error message.
-
       Use case resumes at step 1.
-    
-**Use case: Showing a group's performance**
+
+
+#### Use case: Showing a group's performance
 
 **MSS**
 
 1. User requests to view the performance of a specified group by providing the group name.
-2. Source Control displays a line chart showing the specified student's performance against the cohort performance for each assessment.
+2. Source Control displays a line chart showing the specified group's performance against the cohort performance for each assessment.
    Use case ends.
    
 **Extensions**
 
-* 1a. User enters a group name that does not match any existing group in Source Control.
-
+* 1a. User enters a group name that does not exist in the database.
     * 1a1. Source Control shows an error message.
-
       Use case resumes at step 1.
 
-**Use case: Showing cohort performance for an assessment**
+
+#### Use case: Showing cohort performance for an assessment
 
 **MSS**
 
 1. User requests to view the cohort performance for a specified assessment.
-2. Source Control displays a histogram showing the specified student's performance against the cohort performance for each assessment.
+2. Source Control displays a histogram showing the score distribution of the cohort in the specified assessment. 
    Use case ends.
 
 **Extensions**
 
-* 1a. User enters an assessment that does not match any existing assessment in Source Control.
-
+* 1a. User enters an assessment that does not exist in the database.
     * 1a1. Source Control shows an error message.
-
       Use case resumes at step 1.
 
-**Use case: Creating an alias for an existing command**
+
+#### Use case: Creating an alias for an existing command
 
 **MSS**
 
@@ -738,18 +733,20 @@ Others:
 
 **Extensions**
 
-* 1a. User enters a command that does not exist to create an alias for.
-
+* 1a. User enters a command that does not exist.
     * 1a1. Source Control shows an error message.
-
       Use case resumes at step 1.
+    
 
-
-* 1b. User tries to create an alias using a pre-existing default command.
-
+* 1b. User tries to create an alias using a default command.
     * 1b1. Source Control shows an error message.
-
       Use case resumes at step 1.
+
+
+* 1c. User enters an invalid alias name. 
+  * 1c1. Source Control shows an error message.
+    Use case resumes at step 1.
+
 
 ### Non-functional requirements
 

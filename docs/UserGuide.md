@@ -416,7 +416,7 @@ Format: `export`
 
 :bulb: **Tips:**<br>
 
-* The exported CSV file can be imported again to restore the state of the application when the data was exported
+* The exported CSV file can be imported again to restore the state of the application when the data was exported.
 
 </div>
 
@@ -630,7 +630,7 @@ Action | Format | Examples
 **Add Score** | `addscore -a <assessment_name> (-n <student_name> | -i <student_id>) -s <score>` | `addscore -a Midterm -n Van Nhi -s 75`, `addscore -a Finals -i E0123456 -s 87.65`
 **List** | `list` |
 **Search** | `search (-n <student_name> | -i <student_id> | -g <group_name> | -t <tag>)` | `search -n Zhiying`, `search -g T02B R04D`
-**Show Analysis** | `show (<index> | -n <student_name> | -i <student_id> | -g <group_name> | -a <assessment_name>) [-f]` | `show -n Jonas Chow`, `show -a Midterm Examination`
+**Show Analysis** | `show (<index> | -n <student_name> | -i <student_id> | -g <group_name> | -a <assessment_name>) [-f]` | `show -n Jonas Chow`, `show -a Midterm Examination -f`
 **Edit Student** | `edit <index> [-n <student_name>] [-i <student_id>] [-g <group_name>]... [-t <tag>]...` | `edit 1 -n Hong Fai -i E1234567 -g T01 -g R01`
 **Delete Student** | `delete <index>` | `delete 2`
 **Import Data** | `import -f <file_path> [-g <number_of_group_columns>] [-a <number_of_assessment_columns>] [-t <number_of_tag_columns>]` | `import -f student_data.csv -g 2 -a 10 -t 1`

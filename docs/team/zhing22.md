@@ -27,7 +27,7 @@ Given below are my contributions to the project.
 * **Enhancements to existing features**:
   * Enable wrapping of long chart axis names. [\#248](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/248)
   * Improve console return messages. [\#252](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/252)
-  * Wrote additional tests for existing features: [\#254](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/254)
+  * Wrote additional tests for existing features: [\#254](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/254), [\#275](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/275)
   
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=zhing22&tabRepo=AY2122S1-CS2103T-W08-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
@@ -46,6 +46,7 @@ Given below are my contributions to the project.
   * Developer Guide:
     * Updated target user profile, value proposition and user stories [\#34](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/34)
     * Added implementation details of the `search` feature. [\#152](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/152)
+    * Updated Appendix sections. [\#276](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/276), [\#268](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/268), [\#292](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/292)
   * Others: 
     * Update README and index.md. [\#196](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/196)
     
