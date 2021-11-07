@@ -240,9 +240,9 @@ These are the current sorters implemented:
 
 ### Statistics
 
-#### Download useful statistics as CSV : `download`
+#### Download useful statistics as TXT : `download`
 
-Download a CSV file containing useful statistics for the user. This includes
+Download a .txt file containing useful statistics for the user. This includes
 - Most valuable contacts + total commission from each of them
 - Number of policies for each contact
 - Average number of policies per contact
