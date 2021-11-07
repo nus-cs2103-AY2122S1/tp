@@ -727,16 +727,28 @@ For the feature, the data gathered includes
 - Percentage of Contributions by Language
 
 A similarity score is calculated based on the following three metrics:
+
 - Euclidean Distance
-  <img width=400 src="https://miro.medium.com/max/1400/1*9pSSh4QM7whgtJUD6X2vsQ.png"\>
+<p align="left">
+  <img width="400" src="https://miro.medium.com/max/1400/1*9pSSh4QM7whgtJUD6X2vsQ.png"\>
+</p>
+
 - Manhattan Distance
-  <img width=400 src="https://miro.medium.com/max/1400/1*SU-KZ_Ui8FVbQ7ZKjkiQZg.png"\>
+<p align="left">
+  <img width="400" src="https://miro.medium.com/max/1400/1*SU-KZ_Ui8FVbQ7ZKjkiQZg.png"\>
+</p>
+
 - Cosine Distance
-  <img width=400 src="https://miro.medium.com/max/1174/1*gDCDATwjt2hAjd72O8HvbA.png"\>
+<p align="left">
+  <img width="400" src="https://miro.medium.com/max/1174/1*gDCDATwjt2hAjd72O8HvbA.png"\>
+</p>
 
 
 The similarity is calculated using the following formula:
-`Similarity Score = (Euclidean Distance + Manhattan Distance + Cosine Distance) / 3.0`
+
+`Similarity Score = 1 - Normalize((Euclidean Distance + Manhattan Distance + Cosine Distance) / 3.0)`
+
+
 
 
 --------------------------------------------------------------------------------------------------------------------
