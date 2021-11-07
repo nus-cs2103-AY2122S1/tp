@@ -285,6 +285,9 @@ public class ModelManager implements Model {
         return filteredMembers;
     }
 
+    public ObservableList<Member> getInternalMemberList() {
+        return sportsPa.getMemberList();
+    }
     @Override
     public void updateFilteredMemberList(Predicate<Member> predicate) {
         requireNonNull(predicate);
@@ -316,6 +319,11 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Facility> getFilteredFacilityList() {
         return filteredFacilities;
+    }
+
+    @Override
+    public ObservableList<Facility> getInternalFacilityList() {
+        return sportsPa.getFacilityList();
     }
 
     @Override
