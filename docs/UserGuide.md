@@ -168,6 +168,8 @@ Format: `add n/NAME e/EMAIL m/MODULE_CODE [LESSON_CODE(S)] [p/PHONE] [h/TELEGRAM
 * Name, email and module code are **compulsory**
 * Lesson code, phone number, telegram handle and remarks are **optional**
 * You can add multiple module codes, and can have multiple lesson codes for a single module code
+* You will not be able to add a person with the same email/phone number/telegram handle as another existing contact in contHACKS
+* If you add multiple module codes that are the same, only the first one would be considered
 
 <div markdown="span" class="alert alert-primary">:information_source: **Note:**
 Module code and lesson code are separated by white spaces.
@@ -176,7 +178,7 @@ Module code and lesson code are separated by white spaces.
 Examples:
 * `add n/Ben e/ben123@gmail.com m/CS2103T T12 m/CS2100 T11 B05 p/91238456 h/@BenIsHere r/Overseas`: Adds a contact using all parameters, with multiple module code and multiple lesson code
 * `add n/Mary e/mary123@gmail.com m/CS2103T`: Adds a contact using only the compulsory parameters
-* `add n/Tim e/timothy@gmail.com m/CS2101 G09 h/@Teeeeeeeemo r/Needs more help for CS2103T`: Adds a contact using some optional parameters
+* `add n/Tim e/timothy@gmail.com m/CS2101 G09 m/CS2101 T11 h/@Teeeeeeeemo`: Adds a contact with multiple module codes that are the same, only `CS2101 G09` is considered
 
 Command alias: `a`
 
@@ -193,6 +195,8 @@ Format: `edit INDEX [n/NAME] [e/EMAIL] [m/MODULE_CODE LESSON_CODE(S)] [p/PHONE] 
 * At least one of the parameters must be provided
 * Existing values of the parameters specified will be erased and updated to the input values
 * You can input multiple module codes, and can have multiple lesson codes for a single module code
+* Edited person should not contain the same email/phone number/telegram handle as another existing contact in contHACKS
+* If you provide multiple module codes that are the same, only the first one would be considered
 
 <div markdown="span" class="alert alert-primary">:information_source: **Note:**
 To remove an existing phone number/telegram handle/remark from a contact, simply input `p/``h/``r/` respectively.
@@ -201,7 +205,7 @@ To remove an existing phone number/telegram handle/remark from a contact, simply
 <div style="page-break-after: always;"></div>
 Examples:
 * `edit 1 e/ben321@gmail.com p/91234567`: Edits the email and phone number of the 1st contact to be `ben321@gmail.com` and `91234567`respectively
-* `edit 2 m/CS2100 T09 B09 m/CS2103T T01`: Edits the modules of the 2nd contact to be `[CS2100 T09 B09], [CS2103T T01]`
+* `edit 2 m/CS2100 T09 B09 m/CS2100 T01`: Edits the modules of the 2nd contact to be `[CS2100 T09 B09]` because multiple module codes that are the same is provided
 * `edit 3 r/`: Removes the remark of the 3rd contact
 
 Command aliases: `update` `e`
@@ -297,6 +301,7 @@ Format: `addc m/MODULE_CODE LESSON_CODE d/DAY t/START_TIME END_TIME [r/REMARK]`
 * All the parameters are **compulsory** except for remark
 * Day input is only accepted in integer form <br> e.g. `1` for Monday, `7` for Sunday
 * Start and end time input is only accepted in the `HH:mm` format <br> e.g. `09:00`
+* You will not be able to add a lesson with the same module and lesson code as another existing lesson in contHACKS
 
 <div markdown="span" class="alert alert-primary">:information_source: **Note:**
 Module code and lesson code are separated by white spaces. Lesson start time and end time are separated by white spaces as well.
@@ -320,6 +325,7 @@ Format: `editc INDEX [m/MODULE_CODE LESSON_CODE] [d/DAY] [t/START_TIME END_TIME]
 
 * At least one of the parameters must be provided.
 * Existing values of the parameters specified will be erased and updated to the input values
+* Edited lesson should not contain the same module and lesson code as another existing lesson in contHACKS
 
 <div markdown="span" class="alert alert-primary">:information_source: **Note:**
 To remove a remark from a lesson, simply input `r/`.
@@ -415,6 +421,7 @@ Command aliases: `clrc` `cc`
 
 <img src="images/ClearLessonCommand.png" width="800px">
 
+<div style="page-break-after: always;"></div>
 ### Managing Data <a name="managing-data"></a>
 
 #### Saving the data <a name="saving-data"></a>

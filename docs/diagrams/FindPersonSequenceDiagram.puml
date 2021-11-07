@@ -1,0 +1,69 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ConthacksParser" as ConthacksParser LOGIC_COLOR
+participant ":FindPersonCommandParser" as FindPersonCommandParser LOGIC_COLOR
+participant "f:FindPersonCommand" as FindPersonCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("find n/Alex")
+activate LogicManager
+
+LogicManager -> ConthacksParser : parseCommand("find n/Alex")
+activate ConthacksParser
+
+create FindPersonCommandParser
+ConthacksParser -> FindPersonCommandParser
+activate FindPersonCommandParser
+
+FindPersonCommandParser --> ConthacksParser
+deactivate FindPersonCommandParser
+
+ConthacksParser -> FindPersonCommandParser : parse(" n/Alex")
+activate FindPersonCommandParser
+
+create FindPersonCommand
+FindPersonCommandParser -> FindPersonCommand
+activate FindPersonCommand
+
+FindPersonCommand --> FindPersonCommandParser : f
+deactivate FindPersonCommand
+
+FindPersonCommandParser --> ConthacksParser : f
+deactivate FindPersonCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+FindPersonCommandParser -[hidden]-> ConthacksParser
+destroy FindPersonCommandParser
+
+ConthacksParser --> LogicManager : f
+deactivate ConthacksParser
+
+LogicManager -> FindPersonCommand : execute()
+activate FindPersonCommand
+
+FindPersonCommand -> Model : findPerson("Alex")
+activate Model
+
+Model --> FindPersonCommand
+deactivate Model
+
+create CommandResult
+FindPersonCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> FindPersonCommand
+deactivate CommandResult
+
+FindPersonCommand --> LogicManager : result
+deactivate FindPersonCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

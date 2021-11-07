@@ -121,7 +121,7 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` and `ModuleLesson` objects (which are contained in a `UniquePersonList` and `UniqueModuleLessonList` object respectively).
+* stores contHACKS data i.e., all `Person` and `ModuleLesson` objects (which are contained in a `UniquePersonList` and `UniqueModuleLessonList` object respectively).
 * stores the currently 'selected' `Person` and `ModuleLesson` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` and `ObservableList<ModuleLesson>` that can be 'observed' e.g. the UI can be bound to those lists so that the UI automatically updates when the data in the lists change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
@@ -133,13 +133,13 @@ The `Model` component,
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
+* can save both contHACKS data and user preference data in json format, and read them back into corresponding objects.
 * inherits from both `ConthacksStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -200,10 +200,18 @@ Notice that the `AddModuleLessonCommandParser` uses the method `parseModuleCodeF
     * Cons: Low level of code reuse
     * Cons: Not extensible
 
+<div markdown="span" class="alert alert-primary">:information_source: **Note:**
+The above information is also applicable for the edit feature.
+</div>
 
 ### Find feature 
+Users are able to execute a command to find an existing person in contHACKS. 
+contHACKS will parse the find command for keywords, and filters the list of contacts to be displayed. 
+Upon a successful search, the person card will be returned and listed in the GUI. 
 
-#### Implementation
+![Interactions for  `find n/Alex` Command](images/FindPersonSequenceDiagram.png)
+
+### Implementation
 The find command returns contacts that matches the input keywords. Initially, it only returns contacts that fully matches the keywords.
 Given the following example contact book:
 * Contact #1: Jason
@@ -283,6 +291,33 @@ The following sequence diagrams show how the delete by module code feature works
     * Pros: Faster deletion while still supporting deletion by one index.
     * Cons: Not able to undo the deletion if the user deletes the wrong batch, it would take a long time to key all the information back in.
 
+### Aliases for different commands:
+
+Aliases are alternative words that you can use to perform the same command. There are a few default aliases provided for every command.
+Users can choose to use their most preferred alias to perform the command they want.
+
+#### Implementation
+
+How the alias work is as such:
+
+1. When `Logic` is called upon to execute a command, it calls the `ConthacksParser` class to parse the user command.
+2. As `ConthacksParser` parses the user command, `ConthacksParser` separates the `commandWord` string from the rest of the arguments inside the user command string.
+3. `ConthacksParser` will pass this `commandWord` string into `CommandWord` enum class which contains all the aliases for the different commands. Then, `CommandWord` will check if the `commandWord` string is an alias for any of our implemented commands.
+4. If the alias is a legitimate alias for any of the `XYZCommand`, `CommandWord` class will return the respective `CommandWord` enum back to ConthacksParser, and ConthacksParser will use this enum to call the respective `XYZCommandParser` to call and creates the respective `XYZCommand` object.
+
+The following sequence diagram show how the parsing of alias works, using the example `ec 1 m/CS2100 T19` 
+
+![Sequence diagram for parsing of alias](images/ParseAliasSequenceDiagram.png)
+
+**Aspect: Previous and current version of commandWord:**
+
+* **Alternative 1 (previous version):** The `commandWord` string for a `XYZCommand` is stored as an attribute in the `XYZCommand` class.
+    * Pros: Simple implementation for `ConthacksParser` to check which `XYZCommandParser` to call.
+    * Cons: Very difficult to add more `commandWord` for any `XYZCommand`. If the `XYZCommand` has multiple possible `commandWord`, we will need to add all to the attributes of `XYZCommand` and checking one by one is very difficult. 
+
+* **Alternative 2 (current version):** Shift all the `commandWord` string of every `XYZCommand` into a `CommandWord` enum class. One enum in the `CommandWord` can contains multiple `commandWord` string. 
+    * Pros: Easy to add a new alias (new commandWord) for any of the command. 
+    * Cons: The implementation is more complex than alternative 1.
 
 --------------------------------------------------------------------------------------------------------------------
 
