@@ -280,7 +280,7 @@ Deletes an existing client from the address book using their client id.
 
 | Format | `delete CLIENT_ID...*`|
 | :---: | :--- |
-| **Example** | • `delete 7` will deletes client with client id 7 <br> • `delete 4 8 6` will deletes the clients whose client id is 4, 6 and 8 |
+| **Example** | • `delete 7` will delete client with client id 7 <br> • `delete 4 8 6` will delete the clients whose client id is 4, 6 and 8 |
 | <img src="images/info_icon.png" width="50"/> | • Multiple clients can be deleted with one `delete` command |
 | <img src="images/warn_icon.png" width="50"/> | • This action is irreversible. Once you have deleted a client, the client and his/her corresponding information will be removed from the storage file. |
 

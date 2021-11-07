@@ -9,8 +9,8 @@ import static seedu.address.logic.commands.abcommand.AbDeleteCommand.MESSAGE_ADD
 import static seedu.address.logic.commands.abcommand.AbDeleteCommand.MESSAGE_ADDRESSBOOK_DOES_NOT_EXISTS;
 import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
 
-import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 
 import org.junit.jupiter.api.Test;
@@ -61,28 +61,27 @@ public class AbDeleteCommandTest {
     public void execute_success() throws IOException {
         String newFilePathName = "testingfile";
         Path newFilePath = testFolder.resolve(newFilePathName + ".json");
-        File file = newFilePath.toFile();
-        file.createNewFile();
+        Files.createFile(newFilePath);
         AbDeleteCommand abDeleteCommand = new AbDeleteCommand(newFilePathName, newFilePath);
         CommandResult result = new CommandResult(String.format(MESSAGE_DELETE_ADDRESSBOOK_SUCCESS, newFilePathName));
         assertCommandSuccess(abDeleteCommand, model, result, expectedModel);
-        assertFalse(file.exists());
+        assertFalse(Files.exists(newFilePath));
     }
 
     @Test
     public void execute_failure_doesNotExist() {
         String newFilePathName = "testingfile";
         Path newFilePath = testFolder.resolve(newFilePathName + ".json");
-        AbDeleteCommand abDeleteCommand1 = new AbDeleteCommand(newFilePathName, newFilePath);
+        AbDeleteCommand abDeleteCommand = new AbDeleteCommand(newFilePathName, newFilePath);
         String result = String.format(MESSAGE_ADDRESSBOOK_DOES_NOT_EXISTS, newFilePathName);
-        assertCommandFailure(abDeleteCommand1, model, result);
+        assertCommandFailure(abDeleteCommand, model, result);
     }
 
     @Test
     public void execute_failure_currentAddressBook() throws IOException {
         String newFilePathName = "testingfile";
         Path newFilePath = testFolder.resolve(newFilePathName + ".json");
-        newFilePath.toFile().createNewFile();
+        Files.createFile(newFilePath);
         model.setAddressBookFilePath(newFilePath);
         AbDeleteCommand abDeleteCommand1 = new AbDeleteCommand(newFilePathName, newFilePath);
         String result = String.format(MESSAGE_ADDRESSBOOK_DELETE_CURRENT, newFilePathName);

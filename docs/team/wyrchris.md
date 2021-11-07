@@ -22,7 +22,7 @@ Given below are my contributions to the project.
   * Highlights: This implementation uses the same predicate from the search command to check if the client should be filtered.
 
 * **New Feature**: Added the ability to manage multiple addressbook. (Pull requests: [\#110](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/110), [\#129](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/129))
-  * What it does: allows the user to create/delete/switch between different addressbook. 
+  * What it does: allows the user to create/delete/switch between different addressbook.
   * Justification: This feature will allow the FAs to manage different group of clients under separate addressbook that can also be easily ported over to other devices.
   * Highlights: This feature was particularly difficult to implement as it requires changes to both the model and storage as well the GUI.
 
@@ -41,7 +41,7 @@ Given below are my contributions to the project.
     3) simplifying the comparator usage ([\#84](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/84))
   * Simplify prefix usage by (Pull request: [\#84](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/84))
     1) providing support for handling multiple prefix usage,
-    2) simplify logic which requires the use of specific methods dependent on the prefix with PrefixMapper class 
+    2) simplify logic which requires the use of specific methods dependent on the prefix with PrefixMapper class
   * Allowed for the toggling between different themes (Pull requests: [\#137](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/137), [\#197](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/197))
   * Update the clear command to display a prompt for confirmation before clearing the addressbook (Pull request: [\#123](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/123), [\#194](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/194))
 

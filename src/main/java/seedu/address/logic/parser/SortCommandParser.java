@@ -41,9 +41,7 @@ public class SortCommandParser implements Parser<SortCommand> {
 
         for (Prefix prefix: argMultimap.getPrefixOrdering()) {
             Optional<String> value = argMultimap.getValue(prefix);
-            if (value.isEmpty()) {
-                continue;
-            }
+
 
             if (prefix.equals(PREFIX_TAG)) {
                 throw new ParseException(String.format(MESSAGE_INVALID_PREFIX, PrefixMapper.getName(PREFIX_TAG)));

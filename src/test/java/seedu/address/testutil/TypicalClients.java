@@ -97,8 +97,10 @@ public class TypicalClients {
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
+        ab.setClientCounter("0");
         for (Client client : getTypicalClients()) {
             ab.addClient(client);
+            ab.incrementClientCounter();
         }
         int numOfClients = getTypicalClients().size();
         ab.setClientCounter(valueOf(numOfClients));

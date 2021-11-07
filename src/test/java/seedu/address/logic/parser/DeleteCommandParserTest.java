@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_TOO_MANY_FIELDS;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -31,6 +32,13 @@ public class DeleteCommandParserTest {
     @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, " ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_invalidPrefix_throwsParseException() {
+        assertParseFailure(parser, "2 t/ff", String.format(MESSAGE_TOO_MANY_FIELDS, DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "4 5 i/4 p/33 c/next", String.format(MESSAGE_TOO_MANY_FIELDS,
+                DeleteCommand.MESSAGE_USAGE));
     }
 
 }

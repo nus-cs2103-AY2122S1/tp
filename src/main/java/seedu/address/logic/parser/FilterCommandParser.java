@@ -4,7 +4,6 @@ import static seedu.address.commons.core.Messages.MESSAGE_FIELDS_EMPTY;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.ALL_PREFIXES;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,8 +25,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
     public FilterCommand parse(String args, Model model) throws ParseException {
         String trimmedArgs = args.trim().replaceAll("\\s+", " ");
         if (trimmedArgs.isEmpty()) {
-            throw new ParseException(
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
 
         // appends " " in front as Filter Command can accept arguments without a preamble
@@ -35,7 +33,8 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer
             .tokenize(preparedArgs, ALL_PREFIXES);
 
-        List<String> emptyInputPrefixes = Arrays.stream(ALL_PREFIXES)
+        List<String> emptyInputPrefixes = argMultimap.getPrefixOrdering()
+                .stream()
                 .filter(prefix -> argMultimap.getValue(prefix)
                         .map(String::isBlank)
                         .orElse(false))

@@ -126,7 +126,7 @@ public class NextMeeting implements OptionalNonStringBasedField, IgnoreNullCompa
      */
     public static boolean isValidNextMeeting(String test) {
         return (IS_NULL_VALUE_ALLOWED && test.isEmpty())
-            || (test.matches(VALID_MEETING_STRING) && isWithinLengthLimit(test, MAX_LENGTH));
+                || (test.matches(VALID_MEETING_STRING) && isWithinLengthLimit(test, MAX_LENGTH));
     }
 
     public void setWithWho(Name withWho) {

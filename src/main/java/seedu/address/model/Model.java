@@ -9,8 +9,8 @@ import java.util.function.Predicate;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.commands.EditCommand.EditClientDescriptor;
 import seedu.address.model.client.Client;
+import seedu.address.model.client.Client.EditClientDescriptor;
 import seedu.address.model.client.ClientId;
 import seedu.address.model.tag.Tag;
 import seedu.address.ui.ThemeType;
@@ -115,11 +115,6 @@ public interface Model {
     void setAddressBook(ReadOnlyAddressBook addressBook);
 
     /**
-     * Returns true if a client with the same identity as {@code client} exists in the address book.
-     */
-    boolean hasClient(Client client);
-
-    /**
      * Returns true if a client with the same identity as {@code clientId} exists in the address book.
      */
     boolean hasClientId(ClientId clientId);
@@ -134,6 +129,12 @@ public interface Model {
      * {@code client} must not already exist in the address book.
      */
     void addClient(Client client);
+
+    /**
+     * Adds the given client.
+     * {@code client} must not already exist in the address book.
+     */
+    Client createClient(EditClientDescriptor client);
 
     /**
      * Replaces the given client {@code target} with {@code editedClient}.
@@ -154,12 +155,6 @@ public interface Model {
      * Returns true if a tag with the same identity as {@code tagName} exists in the address book.
      */
     boolean hasTagName(String tagName);
-
-    /**
-     * Adds the given Tag.
-     * {@code Tag} must not already exist in the address book.
-     */
-    void addTag(Tag tag);
 
     /**
      * Returns Tag with corresponding tagName.
