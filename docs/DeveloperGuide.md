@@ -319,25 +319,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `UNIon` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC01 - Add a new folder**\
+**Use case: UC01 - Add a new folder**
+
 **Guarantees:**
-   * A new folder with the specified name is created as part of the application only if the input format is valid.
-   * The folder added as per mentioned is empty.
+   * A new folder with the specified name is created only if the input format is valid.
+   * The newly-created folder is empty.
+
 **MSS:**
-   1. User requests to add new folder.
-   2. UNIon accepts input and a new folder is created.
+   1. User requests to add a new folder.
+   2. UNIon accepts input, and a new folder is created.
 
    Use case ends.
 
 **Extensions:**
-* 1a. The folder specified contains non-alphanumeric characters or wrong command format. 
+* 1a. The folder name specified contains non-alphanumeric characters or wrong command format is used. 
   * 1a1. No new folder is created.
-  * 1a2. User requests to add new folder.
+  * 1a2. User requests to add a new folder.
   * Steps 1a1-1a2 are repeated until the data entered are correct.
     
-**Use case: UC02 - Add a new contact to UNIon**\
+**Use case: UC02 - Add a new contact to UNIon**
+
 **Guarantees:**
-   * A new contact with the specified details is stored as a standalone in the application only if the input format is valid.
+   * A new contact with the specified details is added to the contact list only if the input format is valid.
 
 **MSS:**
    1. User requests to add new contact.
@@ -347,27 +350,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions:**
 * 1a. The given input has missing fields.
-  * 1a1. No new contact is registered by UNIon.\
-  * 1a2. User requests to add new contact.\
+  * 1a1. No new contact is created by UNIon.
+  * 1a2. User requests to add new contact.
   * Steps 1a1-1a2 are repeated until the data format entered are correct.
 
 * 1b. Name supplied exceeds character limit.
-    * 1b1. No new contact is registered by UNIon\
-    * 1b2. User requests to add new contact.\
+    * 1b1. No new contact is created by UNIon
+    * 1b2. User requests to add new contact.
     * Steps 1b1-1b2 are repeated until the data format entered are correct.
 
 * 1c. Name supplied already exists in UNIon.
-    * 1c1. No new contact is registered by UNIon\
-    * 1c2. User requests to add new contact.\
+    * 1c1. No new contact is created by UNIon
+    * 1c2. User requests to add new contact.
     * Steps 1c1-1c2 are repeated until the data format entered are correct.
     
-**Use case: UC03 - Add existing contact to an existing folder**\
-**Preconditions:** Folder and contact already exists in UNIon\
+**Use case: UC03 - Add existing contact to an existing folder**
+
+**Preconditions:** Folder and contact already exists in UNIon
+
 **MSS:**
 
    1. <u> User adds a new folder named A (UC01) </u>
    2. <u> User adds a new contact named Clarence (UC02) </u>
-   3. User request contacts to be added to the named folder.
+   3. User requests to add contact(s) to a named folder.
    4. UNIon adds the contact specified into the respective folder.
 
    Use case ends.
@@ -384,17 +389,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 3b2. User request contacts to be added to the named folder.
   * Steps 3b1-3b2 are repeated until the data format entered are correct.
     
-**Use case: UC04 - Delete specified folder**\
+**Use case: UC04 - Delete specified folder**
+
 **Guarantees:** 
    * Folder specified is deleted from UNIon only if the input format is valid.
    * Contacts in the specified folder is removed as well.
-**Preconditions:** Folder must already exist in UNIon\
+
+**Preconditions:** Folder must already exist in UNIon
+
 **MSS:**
    1. User requests to delete folder.
    2. UNIon removes the specified folder from its system.
 
 Use case ends.
-
 
 **Extensions**
 * 1a. Folder specified does not exist in UNIon.
@@ -407,7 +414,8 @@ Use case ends.
     * 1b2. User requests to delete folder.
     * Steps 1b1 - 1b2 are repeated until data format is correct.
     
-**Use case: UC05 - Remove all contacts**\
+**Use case: UC05 - Remove all contacts**
+
 **Guarantees:** All contacts are removed from UNIon only if the input format is valid.
 
 **MSS:**
@@ -423,20 +431,22 @@ Use case ends.
   * Steps 1a1 - 1a2 are repeated until data format is correct.
 
 
-**Use case: UC06 - Remove specified contact from folder**\
-**Guarantees:** Contact specified is removed from folder\
+**Use case: UC06 - Remove specified contact from folder**
+
+**Guarantees:** Contact specified is removed from folder
+
 **Preconditions:** 
    * Contact must already exist in contact list and within the specified folder.
    * Folder must already exist in folder list.
 
 **MSS:**
 1. User requests the index of contact from contact list to be removed.
-2. UNIon removes specified contact from folder.
+2. UNIon removes the specified contact from the folder.
 
 Use case ends.
 
 **Extensions**
-* 1a. Contact does not exist in folder.
+* 1a. Contact does not exist in the folder.
     * 1a1. Folder remains unchanged.
     * 1a2. User requests the index of contact from contact list to be removed.
     * Steps 1a1 - 1a2 are repeated until data format is correct.
@@ -446,7 +456,8 @@ Use case ends.
     * 1b2. User requests the index of contact from contact list to be removed.
     * Steps 1b1 - 1b2 are repeated until data format is correct.    
     
-**Use case: UC07 - Remove all folders**\
+**Use case: UC07 - Remove all folders**
+
 **Guarantees:** All folders are deleted from UNIon
 
 **MSS:**
