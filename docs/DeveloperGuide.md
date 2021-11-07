@@ -257,52 +257,56 @@ This feature allows Managera users to create an event at the specified date and 
 
 #### Implementation Details
 
-The `AddressBookParser` is responsible for determining the type of `Command` to be created from user input,
+Since the `AddressBookParser` is responsible for determining the type of `Command` to be created from user input,
 we can simply add a new `commandType` case for `AddEventCommand` in `AddressBookParser`. 
 
 The `AddEventCommandParser` reads the user's input and passes it to `ParserUtil` to ensure that the event's name, 
 date and time are valid. Then, an Event is created with the returned `EventName`, `EventDate` and `EventTime` objects. 
 This event will be supplied to the `addEventCommand` to be executed.
 
-Since Managera employs a UniqueEventList, it should not have more than one Event with the same name and same date. The `addressBook` 
-will check if the given event already exists. If not, it will be successfully added to the `addressBook` through the model.
+Since Managera employs a UniqueEventList, it should not have more than one Event with the same name and date. The `addressBook` 
+will check if the given event already exists. If not, it will be successfully added to the `addressBook` through the model. 
+Otherwise, an exception will be thrown, and an error message will be displayed to the user.
 
 #### Implementation Rationale
 
-As events may span a full day, we decided to implement time as an optional attribute of the Event. However, to accommodate
-this, Event is implemented with abstractions EventName, EventDate and EventTime. These abstractions are helpful in ensuring
-reliability of the program.
+As events may span a full day, we decided to implement time as an optional attribute of the Event. If a time is not 
+specified for an event, Managera will assume it as a full-day event. To accommodate the addition of events to Managera, 
+new classes such as EventName, EventDate and EventTime were also implemented. These classes function as abstractions 
+for the name, date and time of an Event object respectively. These abstractions are helpful in ensuring reliability of 
+the program by hiding the underlying details.
 
+### Delete Event feature
 
-### Remove Event feature
-
-This feature allows Managera users to remove an existing event at a particular index of the displayed list.
+This feature allows Managera users to delete an existing event at a particular index of the displayed list.
 
 #### Implementation Details
 
-The `AddressBookParser` is responsible for determining the type of `Command` to be created from user input,
-we can simply add a new `commandType` case for `RemoveEventCommand` in `AddressBookParser`.
+Since the `AddressBookParser` is responsible for determining the type of `Command` to be created from user input,
+we can simply add a new `commandType` case for `DeleteEventCommand` in `AddressBookParser`.
 
-The `RemoveEventCommandParser` reads the user's input and passes it to `ParserUtil` which returns an `Index`. This 
-`Index` will be supplied to the `removeEventCommand` to be executed. 
+The `DeleteEventCommandParser` reads the user's input and passes it to `ParserUtil` which returns an `Index`. This 
+`Index` will be supplied to the `DeleteEventCommand` to be executed. 
 
-When the command is executed, there is a check to ensure the index is within the range of the displayed list. 
+When the command is executed, there is a check to ensure the index is within the range of the displayed list. If the 
+index is out of range, then an exception is thrown, and an error message is displayed to the user. Otherwise, the 
+execution will continue, and the respective Event at the index is deleted.
 
 #### Design Considerations:
-##### Aspect: Specifying Event to be Removed: 
+##### Aspect: Specifying Event to be Deleted: 
 
-* **Alternative 1 (Current Choice)**: Remove by Index:
+* **Alternative 1 (Current Choice)**: Delete by Index:
     * Pros:
         1. The index of the event in the currently displayed list can be directly used.
         2. Faster and more intuitive for users.
     * Cons:
         1. The index is independent of the Event, which may lead to an inconsistent user experience.
          
-* **Alternative 2**: Remove by Event Name:
+* **Alternative 2**: Delete by Event Name:
     * Pros:
         1. User can be more sure of the event they are removing, since it is referencing the Event name.
     * Cons:
-        1. The user has to fully match the Event name, which is much more cumbersome. 
+        1. The user has to fully match the Event name, which is much more cumbersome.
 
 ### Filter Event feature
 
