@@ -21,10 +21,10 @@ We are a team based in the [School of Computing, National University of Singapor
 
 <img src="images/ruofan1023.png" width="200px">
 
-[[github](http://github.com/ruofan1023)] [[portfolio](team/ruofan.md)]
+[[github](http://github.com/ruofan1023)] [[portfolio](team/ruofan1023.md)]
 
 * Role: Developer
-* Responsibilities: Student
+* Responsibilities: UI, Module
 
 ### Joe Wel
 
