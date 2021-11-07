@@ -11,7 +11,6 @@ participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
-participant "e:EventDateTimePredicate" as EventDateTimePredicate MODEL_COLOR
 participant ":Model" as Model MODEL_COLOR
 end box
 
@@ -34,13 +33,6 @@ activate FilterEventCommandParser
 create FilterEventCommand
 FilterEventCommandParser -> FilterEventCommand
 activate FilterEventCommand
-
-create EventDateTimePredicate
-FilterEventCommand --> EventDateTimePredicate
-activate EventDateTimePredicate
-
-EventDateTimePredicate --> FilterEventCommand : e
-deactivate EventDateTimePredicate
 
 FilterEventCommand --> FilterEventCommandParser : f
 deactivate FilterEventCommand
@@ -75,7 +67,6 @@ FilterEventCommand --> LogicManager : result
 deactivate
 FilterEventCommand -[hidden]-> LogicManager : result
 destroy FilterEventCommand
-destroy EventDateTimePredicate
 
 [<--LogicManager
 deactivate LogicManager
