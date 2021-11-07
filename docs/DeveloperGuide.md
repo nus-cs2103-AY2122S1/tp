@@ -1038,7 +1038,7 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Adding a person 
+### Adding an applicant 
 
 1. Adding an applicant while all applicants are being shown 
 
