@@ -113,6 +113,8 @@ public class EditCommand extends Command {
         Address updatedAddress = editStudentDescriptor.getAddress().orElse(studentToEdit.getAddress());
         ClassCode updatedClassCode = editStudentDescriptor.getClassCode().orElse(studentToEdit.getClassCode());
         Set<Tag> updatedTags = editStudentDescriptor.getTags().orElse(studentToEdit.getTags());
+        Set<TutorialGroup> updatedTutorialGroups = editStudentDescriptor.getTutorialGroups()
+                .orElse(studentToEdit.getTutorialGroups());
 
         return new Student(
                 updatedName,
@@ -122,7 +124,7 @@ public class EditCommand extends Command {
                 updatedClassCode,
                 updatedTags,
                 studentToEdit.getMarks(),
-                studentToEdit.getTutorialGroups());
+                updatedTutorialGroups);
     }
 
     @Override
@@ -171,7 +173,7 @@ public class EditCommand extends Command {
             setClassCode(toCopy.classCode);
             setTags(toCopy.tags);
             setMarks(toCopy.marks);
-            setTutorialGroups(toCopy.tutorialGroups);
+            setTutorialGroups(new HashSet<TutorialGroup>());
         }
 
         /**

@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.student.ClassCode;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.tutorialgroup.GroupNumber;
 import seedu.address.model.tutorialgroup.GroupType;
 import seedu.address.model.tutorialgroup.TutorialGroup;
@@ -18,7 +17,7 @@ public class JsonAdaptedTutorialGroup {
     private final String groupType;
 
     /**
-     * Constructs a {@code JsonAdaptedTutorialClass} with the given student details.
+     * Constructs a {@code JsonAdaptedTutorialGroup} with the given tutorial group details.
      */
     @JsonCreator
     public JsonAdaptedTutorialGroup(@JsonProperty("groupNumber") String groupNumber,
@@ -49,8 +48,8 @@ public class JsonAdaptedTutorialGroup {
         if (classCode == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, String.class.getSimpleName()));
         }
-        if (!Tag.isValidTagName(classCode)) {
-            throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
+        if (!ClassCode.isValidClassCode(classCode)) {
+            throw new IllegalValueException(ClassCode.MESSAGE_CONSTRAINTS);
         }
         final ClassCode modelClassCode = new ClassCode(classCode);
 
@@ -59,11 +58,17 @@ public class JsonAdaptedTutorialGroup {
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, GroupNumber.class.getSimpleName())
             );
         }
+        if (!GroupNumber.isValidGroupNumber(groupNumber)) {
+            throw new IllegalValueException(GroupNumber.MESSAGE_CONSTRAINTS);
+        }
 
         final GroupNumber modelGroupNumber = new GroupNumber(groupNumber);
 
         if (groupType == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, String.class.getSimpleName()));
+        }
+        if (!GroupType.isValidGroupType(groupType)) {
+            throw new IllegalValueException(GroupType.MESSAGE_CONSTRAINTS);
         }
 
         final GroupType modelGroupType = new GroupType(groupType);

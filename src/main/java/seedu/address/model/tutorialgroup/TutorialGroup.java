@@ -4,6 +4,10 @@ import java.util.Objects;
 
 import seedu.address.model.student.ClassCode;
 
+/**
+ * Represents a Tutorial in the ClassMATE.
+ * Guarantees: details are present and not null, field values are validated, immutable.
+ */
 public class TutorialGroup {
 
     private final GroupNumber groupNumber;
@@ -11,8 +15,8 @@ public class TutorialGroup {
     private final GroupType groupType;
 
     /**
-     * @param groupNumber GroupName of Tutorial Group.
-     * @param classCode ClassCode of Tutorial Group.
+     * @param groupNumber GroupNumber of TutorialGroup.
+     * @param classCode ClassCode of TutorialGroup.
      */
     public TutorialGroup(GroupNumber groupNumber, ClassCode classCode, GroupType groupType) {
         this.groupNumber = groupNumber;
@@ -34,8 +38,7 @@ public class TutorialGroup {
     }
 
     /**
-     * Returns true if both tutorial classes have the same name.
-     * This defines a weaker notion of equality between two tutorial groups.
+     * Returns true if both tutorial groups have the same group number, class code and group type.
      */
     public boolean isSameTutorialGroup(TutorialGroup otherGroup) {
         if (otherGroup == this) {
@@ -46,7 +49,6 @@ public class TutorialGroup {
                 && otherGroup.getGroupNumber().equals(getGroupNumber())
                 && otherGroup.getClassCode().equals(getClassCode())
                 && otherGroup.getGroupType().equals(getGroupType());
-
     }
 
     @Override

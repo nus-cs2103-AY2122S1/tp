@@ -12,6 +12,9 @@ import seedu.address.model.Model;
 import seedu.address.model.tutorialclass.TutorialClass;
 import seedu.address.model.tutorialgroup.TutorialGroup;
 
+/**
+ * Deletes a tutorial group from an existing tutorial class in ClassMATE.
+ */
 public class DeleteGroupCommand extends Command {
 
     public static final String COMMAND_WORD = "deletecg";
@@ -27,7 +30,7 @@ public class DeleteGroupCommand extends Command {
             + PREFIX_CLASSCODE + "G06 "
             + PREFIX_TYPE + "OP1 ";
 
-    public static final String MESSAGE_DELETE_CLASS_SUCCESS = "Deleted group: %1$s";
+    public static final String MESSAGE_DELETE_GROUP_SUCCESS = "Deleted group: %1$s";
 
     private final TutorialGroup toDelete;
     private final TutorialClass toDeleteTutorialClass;
@@ -53,15 +56,20 @@ public class DeleteGroupCommand extends Command {
             throw new CommandException(MESSAGE_CLASS_DOES_NOT_EXIST);
         }
 
+        // check if tutorial group already exists in ClassMATE
         if (!model.hasTutorialGroup(toDelete)) {
             throw new CommandException(MESSAGE_GROUP_DOES_NOT_EXIST);
         }
 
         model.deleteTutorialGroup(toDelete);
 
-        // rearrange tutorial groups in order after adding
+        // filters students that belong to that tutorial group and edits them to have the tutorial group deleted
+        model.getUnfilteredStudentList().stream().filter(x -> x.isBelongTutorialGroup(toDelete))
+                .forEach(x -> model.setStudent(x, DeleteStudentFromGroupCommand.deleteTutorialGroup(x, toDelete)));
+
+        // rearrange tutorial groups in order after deleting
         model.sortTutorialGroups();
-        return new CommandResult(String.format(MESSAGE_DELETE_CLASS_SUCCESS, toDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_GROUP_SUCCESS, toDelete));
     }
 
     @Override

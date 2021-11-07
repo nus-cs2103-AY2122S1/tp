@@ -57,7 +57,7 @@ We hope you find this User Guide helpful in using ClassMATE!
 1. Copy the file to the folder you want to use as the _home folder_ for your ClassMATE.
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui-annotated.png)
-1. Type the command in the **Command-Line Input** and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window. 
+1. Type the command in the **Command-Line Input** and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.
    Check out some examples in the [Tutorial](#CLI Tutorial)
 1. Refer to the [Features](#Features) below for details of each command.
 
@@ -222,7 +222,7 @@ Examples:
 
 ## Student Commands
 
-This part of the guide covers all the commands you can use to manage student information! 
+This part of the guide covers all the commands you can use to manage student information!
 
 These features include the ability to:
 1. Add new students
@@ -394,7 +394,7 @@ Examples:
 
 ## Tutorial Class Commands
 
-This section covers all the commands you can use to manage information pertaining to tutorial classes! 
+This section covers all the commands you can use to manage information pertaining to tutorial classes!
 
 Features include the ability to:
 1. Add a tutorial class
@@ -510,7 +510,7 @@ Entering format: `addcg gn/GROUP_NUMBER c/CLASS_CODE type/GROUP_TYPE`
 
 * The class must have already been added to ClassMATE first. If you are unsure, you can refer to
   [Adding a Tutorial Class](#adding-a-tutorial-class)
-  
+
 * Tutorial groups are identified by GROUP_NUMBER, GROUP_TYPE and CLASS_CODE. This means that
   any two tutorial groups are identical if all three fields are identical, which is not allowed.
 
@@ -581,8 +581,8 @@ Only `OP1` and `OP2` are accepted as Group Types.
 
 
 Example:
-* `liststu`shows that Betsy is a student in class G06 with Index 1.
-  `deletesg 1 g/A c/G06 type/OP1` then removes Betsy from OP1 Group A in class G06
+* `liststu c/G06`shows that Betsy is a student in class G06 with Index 1.
+  `deletesg 1 gn/1 c/G06 type/OP1` then removes Betsy from OP1 Group 1 in class G06
 
 ### Clearing all data : `clear`
 
@@ -628,8 +628,8 @@ If your changes to the data file makes its format invalid, ClassMATE will discar
 Action | Format, Examples
 --------|------------------
 **Help** | `help`
-**Add student** | `addstu n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLASS_CODE [t/TAG]…​`<br> e.g., `addstu n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 c/G01 t/attentive` 
-**Edit student** | `editstu INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS_CODE] [t/TAG]…​`<br> e.g., `editstu 2 n/James Lee e/jameslee@example.com` 
+**Add student** | `addstu n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLASS_CODE [t/TAG]…​`<br> e.g., `addstu n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 c/G01 t/attentive`
+**Edit student** | `editstu INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS_CODE] [t/TAG]…​`<br> e.g., `editstu 2 n/James Lee e/jameslee@example.com`
 **View student** | `viewstu INDEX`<br> e.g., `liststu` followed by `viewstu 2`
 **Find student** | `findstu KEYWORD [MORE_KEYWORDS]`<br> e.g., `findstu John`
 **Delete student** | `deletestu INDEX`<br> e.g., `liststu` followed by `deletestu 3`
