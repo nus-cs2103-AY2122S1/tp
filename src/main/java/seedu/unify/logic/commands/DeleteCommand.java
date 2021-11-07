@@ -23,6 +23,7 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the task(s) identified by the index number(s) used in the displayed task list.\n"
+            + "Index numbers must be positive integers.\n"
             + "Parameters: task_id (task_id)...\n"
             + "Example: " + COMMAND_WORD + " 1";
 
@@ -52,7 +53,7 @@ public class DeleteCommand extends Command {
 
         // Deletes from the last item to prevent future deletes operating on wrong indexes
         for (int i = targetIndexes.size() - 1; i >= 0; i--) {
-            if (targetIndexes.get(i).getZeroBased() >= lastShownList.size()) {
+            if (targetIndexes.get(i).getZeroBased() >= lastShownList.size() || targetIndexes.get(i).getOneBased() < 1) {
                 throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
             }
 
