@@ -790,9 +790,7 @@ In `MainWindow`, if the command result `isGithub()` or `isTelegram()`, the GitHu
 
 ### Find A Buddy Feature
 
-<p align="center">
-<img src="https://github.com/AY2122S1-CS2103T-T10-1/tp/blob/master/docs/images/Find%20A%20Buddy.png?raw=true"\>
-</p>
+![FAB](images/Find%20A%20Buddy.png)
 
 By switching to the Find A Buddy tab, the user can retrieve the top 5 matches to the user based on the GitHub data gathered.
 
