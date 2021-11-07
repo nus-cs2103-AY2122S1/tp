@@ -31,17 +31,16 @@ HiddenOutside ..> Model
 
 
 ModelManager .up.|> Model
-ModelManager --> "1" Inventory
-ModelManager --> "1" TransactionList
-ModelManager --> "0..1" Order
+ModelManager ---> "1" Inventory
+ModelManager ---> "1" TransactionList
+ModelManager ---> "0..1\nopen\n order" Order
 TransactionList o-down-> "*" TransactionRecord
 
 Inventory .right.> Order
 
 Order *--> "1" UniqueItemList
 Inventory *--> "1" UniqueItemList
-TransactionRecord .left.|> Order
-TransactionRecord *-left-> "1" UniqueItemList
+TransactionRecord -left-|> Order
 
 UniqueItemList o-down- "*" Item
 

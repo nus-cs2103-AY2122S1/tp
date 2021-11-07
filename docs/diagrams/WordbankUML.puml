@@ -5,6 +5,7 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Logic <<Rectangle>> LOGIC_COLOR_T1 {
+Abstract Class Command LOGIC_COLOR
 Class CompleteCommand LOGIC_COLOR
 }
 
@@ -21,7 +22,8 @@ Class WordTrie {
 
 }
 
-CompleteCommand --> ModelManager #black: queries >
+CompleteCommand -|> Command LOGIC_COLOR
+CompleteCommand --> ModelManager LOGIC_COLOR : queries >
 
 ModelManager *--> "1" WordBank : queries / updates >
 WordBank *--> "2" WordTrie : queries / updates >

@@ -22,6 +22,6 @@ displayListView -left- filtered: observes >
 displayed -up- filtered: updates >
 displayList *-down-> displayed: updates >
 displayList *-right-> filtered
-displayList -down- source: observes >
+displayList o-down- source: observes >
 
 @enduml
