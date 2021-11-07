@@ -245,7 +245,7 @@ public class Student implements Nameable {
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
-            builder.append("; Tags: ");
+            builder.append("; Classes: ");
             tags.forEach(builder::append);
         }
         return builder.toString();
