@@ -231,7 +231,7 @@ Executing any of the commands in this section will bring you to the students int
 
 #### Student parameters
 
-<table id="student-param-table" style="width: 100%">
+<table id="student-param-table">
     <thead>
         <tr>
             <th style="text-align:center; padding: 10px 0 10px 0; width: 15%">Category</th>
