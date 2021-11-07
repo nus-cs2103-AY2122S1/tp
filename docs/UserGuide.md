@@ -452,4 +452,5 @@ Time of the Task | `-tt` | Task time should follow the format: `HH:MM`.
 Address of the Task | `-ta` | Task address should contain at least one non-whitespace character.
 Reverse flag for `sort` command | `-r` | `-r` flag does not take in any input and should be used as a standalone flag.
 All flag for `cat` command | `-A` | `-A` flag does not take in any input and should be used as a standalone flag.
+Filter flag for `cat` command | `-f` | `-f` flag can take in any number of inputs following a space between the flag and the inputs.
 Number of days before a task is considered as due soon. | `-s` | Number of days should be a positive integer less than or equal to 2147483647: 1, 2, 3, …​, 2147483647.
