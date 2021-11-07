@@ -979,15 +979,35 @@ testers are expected to do more *exploratory* testing.
       
 ### Deleting a customer/employee/supplier/reservation
 
-1. Deleting a customer/employee/supplier/reservation while all customers/employees/suppliers/reservation are being shown
+1. Deleting a customer/employee/supplier/reservation while all customers/employees/suppliers/reservation are being shown.
 
-   1. Prerequisites: List all persons using the `listC`/`listE`/`listS`/`listR` command.
-
+   1. Prerequisites: List all customers/employees/suppliers/reservations using the `listC`/`listE`/`listS`/`listR` command.
    2. Test case: `deleteC 1`/`deleteE 1`/`deleteS 1`/`deleteR 1` <br>
       Expected: First customer/employee/supplier/reservation is deleted from the list. Details of the deleted customer/employee/supplier/reservation shown in the status message. Timestamp in the status bar is updated.
-
    1. Test case: `deleteC 0`/`deleteE 0`/`deleteS 0`/`deleteR 0`<br>
       Expected: Nobody is deleted. Error details shown in the status message. Status bar remains the same.
-
-   2. Other incorrect delete commands to try: `delete`, `deleteA x`, `...` (where x is larger than the list size)<br>
+   2. Other incorrect delete commands to try: `deleteS`, `delete 1`, `deleteC x` (where x is larger than the customer list size), `...` <br>
       Expected: Similar to previous.
+      
+2. Deleting a customer/employee/supplier/reservation while customer list is filtered.
+   
+   1. Prerequisites: Filter display list by using the `findC KEYWORD`/`findE KEYWORD`/`findS KEYWORD`/`check DATE` command,
+      where `KEYWORD` must exist in at least 1 of the customers/employees/suppliers and there must be at least 1 reservation on `DATE`.
+   2. Repeat the same test cases as the previous case.
+      
+### Get the corresponding customer of a reservation
+
+1. Getting the corresponding customer of a reservation while all reservations are shown
+    
+   1. Prerequisites: List all reservations using `listR`
+   2. Test case: `getC 1`<br>
+      Expected: The customer who made the first reservation is displayed.
+   3. Test case: `getC 0`<br>
+      Expected: No customer is shown. Error details are shown in the status message. Status bar remains the same.
+   4. Other incorrect commands to try: `getC`, `getC -1`, `getC x` (where x is larger than the customer list size), `...` <br>
+      Expected: Similar to previous.
+      
+1. Getting the corresponding customer of a reservation while reservation list is filtered.
+
+    1. Prerequisites: Filter display reservation list using `check DATE`, where there must be at least 1 resevation on `DATE`.
+    2. Repeat the same test cases as the previous case.
