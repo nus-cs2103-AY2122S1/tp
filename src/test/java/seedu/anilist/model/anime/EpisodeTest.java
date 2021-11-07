@@ -69,7 +69,5 @@ public class EpisodeTest {
         assertTrue(Episode.isValidEpisode(VALID_EPISODE_ONE));
         assertTrue(Episode.isValidEpisode(VALID_EPISODE_TWO_WITH_ZEROS_PADDED));
         assertTrue(Episode.isValidEpisode(VALID_EPISODE_MAX));
-
-
     }
 }
