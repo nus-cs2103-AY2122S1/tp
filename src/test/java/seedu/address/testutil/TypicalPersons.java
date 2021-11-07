@@ -34,7 +34,7 @@ public class TypicalPersons {
     public static final String ALICE_EMAIL = "alice@example.com";
     public static final String ALICE_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String ALICE_TAG_1 = "friends";
-    public static final boolean ALICE_IS_FAVOURITE = false;
+    public static final boolean ALICE_IS_FAVORITE = false;
     public static final Person ALICE =
             new PersonBuilder()
                     .withName(ALICE_NAME)
@@ -44,18 +44,18 @@ public class TypicalPersons {
                     .withEmail(ALICE_EMAIL)
                     .withAddress(ALICE_ADDRESS)
                     .withTags(ALICE_TAG_1)
-                    .withIsFavourite(ALICE_IS_FAVOURITE)
+                    .withIsFavorite(ALICE_IS_FAVORITE)
                     .build();
     public static final String BENSON_NAME = "Benson Meier";
     public static final String BENSON_TELEGRAM = "benson_meier";
-    public static final String BENSON_GITHUB = "benson";
+    public static final String BENSON_GITHUB = "benson-meier";
     public static final String BENSON_PHONE = "98765432";
     public static final String BENSON_EMAIL = "johnd@example.com";
     public static final String BENSON_ADDRESS = "311, Clementi Ave 2, #02-25";
     public static final String BENSON_TAG_1 = "owesmoney";
     public static final String BENSON_TAG_2 = "friends";
     public static final String BENSON_TAG_3 = "cca";
-    public static final boolean BENSON_IS_FAVOURITE = false;
+    public static final boolean BENSON_IS_FAVORITE = false;
     public static final Person BENSON =
             new PersonBuilder()
                     .withName(BENSON_NAME)
@@ -65,7 +65,7 @@ public class TypicalPersons {
                     .withEmail(BENSON_EMAIL)
                     .withAddress(BENSON_ADDRESS)
                     .withTags(BENSON_TAG_1, BENSON_TAG_2, BENSON_TAG_3)
-                    .withIsFavourite(BENSON_IS_FAVOURITE)
+                    .withIsFavorite(BENSON_IS_FAVORITE)
                     .build();
     public static final String CARL_NAME = "Carl Kurz";
     public static final String CARL_TELEGRAM = "carl_kurz";
@@ -73,7 +73,7 @@ public class TypicalPersons {
     public static final String CARL_PHONE = "95352563";
     public static final String CARL_EMAIL = "heinz@example.com";
     public static final String CARL_ADDRESS = "wall street";
-    public static final boolean CARL_IS_FAVOURITE = false;
+    public static final boolean CARL_IS_FAVORITE = false;
     public static final Person CARL =
             new PersonBuilder()
                     .withName(CARL_NAME)
@@ -82,7 +82,7 @@ public class TypicalPersons {
                     .withPhone(CARL_PHONE)
                     .withEmail(CARL_EMAIL)
                     .withAddress(CARL_ADDRESS)
-                    .withIsFavourite(CARL_IS_FAVOURITE)
+                    .withIsFavorite(CARL_IS_FAVORITE)
                     .build();
     public static final String DANIEL_NAME = "Daniel Meier";
     public static final String DANIEL_TELEGRAM = "daniel_meier";
@@ -91,7 +91,7 @@ public class TypicalPersons {
     public static final String DANIEL_EMAIL = "cornelia@example.com";
     public static final String DANIEL_ADDRESS = "10th street";
     public static final String DANIEL_TAG_1 = "friends";
-    public static final boolean DANIEL_IS_FAVOURITE = false;
+    public static final boolean DANIEL_IS_FAVORITE = false;
     public static final Person DANIEL =
             new PersonBuilder()
                     .withName(DANIEL_NAME)
@@ -101,7 +101,7 @@ public class TypicalPersons {
                     .withEmail(DANIEL_EMAIL)
                     .withAddress(DANIEL_ADDRESS)
                     .withTags(DANIEL_TAG_1)
-                    .withIsFavourite(DANIEL_IS_FAVOURITE)
+                    .withIsFavorite(DANIEL_IS_FAVORITE)
                     .build();
     public static final String ELLE_NAME = "Elle Meyer";
     public static final String ELLE_TELEGRAM = "elle_meyer";
@@ -110,7 +110,7 @@ public class TypicalPersons {
     public static final String ELLE_EMAIL = "werner@example.com";
     public static final String ELLE_ADDRESS = "michegan ave";
     public static final String ELLE_TAG_1 = "family";
-    public static final boolean ELLE_IS_FAVOURITE = false;
+    public static final boolean ELLE_IS_FAVORITE = false;
     public static final Person ELLE =
             new PersonBuilder()
                     .withName(ELLE_NAME)
@@ -120,7 +120,7 @@ public class TypicalPersons {
                     .withEmail(ELLE_EMAIL)
                     .withAddress(ELLE_ADDRESS)
                     .withTags(ELLE_TAG_1)
-                    .withIsFavourite(ELLE_IS_FAVOURITE)
+                    .withIsFavorite(ELLE_IS_FAVORITE)
                     .build();
     public static final String FIONA_NAME = "Fiona Kunz";
     public static final String FIONA_TELEGRAM = "fiona_kunz";
@@ -128,7 +128,7 @@ public class TypicalPersons {
     public static final String FIONA_PHONE = "9482427";
     public static final String FIONA_EMAIL = "lydia@example.com";
     public static final String FIONA_ADDRESS = "little tokyo";
-    public static final boolean FIONA_IS_FAVOURITE = false;
+    public static final boolean FIONA_IS_FAVORITE = false;
     public static final Person FIONA =
             new PersonBuilder()
                     .withName(FIONA_NAME)
@@ -137,7 +137,7 @@ public class TypicalPersons {
                     .withPhone(FIONA_PHONE)
                     .withEmail(FIONA_EMAIL)
                     .withAddress(FIONA_ADDRESS)
-                    .withIsFavourite(FIONA_IS_FAVOURITE)
+                    .withIsFavorite(FIONA_IS_FAVORITE)
                     .build();
     public static final String GEORGE_NAME = "George Best";
     public static final String GEORGE_TELEGRAM = "george_best";
@@ -145,7 +145,7 @@ public class TypicalPersons {
     public static final String GEORGE_PHONE = "9482442";
     public static final String GEORGE_EMAIL = "anna@example.com";
     public static final String GEORGE_ADDRESS = "4th street";
-    public static final boolean GEORGE_IS_FAVOURITE = false;
+    public static final boolean GEORGE_IS_FAVORITE = false;
     public static final Person GEORGE =
             new PersonBuilder()
                     .withName(GEORGE_NAME)
@@ -154,7 +154,7 @@ public class TypicalPersons {
                     .withPhone(GEORGE_PHONE)
                     .withEmail(GEORGE_EMAIL)
                     .withAddress(GEORGE_ADDRESS)
-                    .withIsFavourite(GEORGE_IS_FAVOURITE)
+                    .withIsFavorite(GEORGE_IS_FAVORITE)
                     .build();
 
     // Manually added

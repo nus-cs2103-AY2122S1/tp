@@ -15,7 +15,7 @@ title: Developer Guide
 
 CohortConnect is an advanced desktop address book which facilitates networking among Computer Science (CS) students. It is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
 
-Manage large groups of contacts with advanced features such as **Import** for a quick 1-step setup, marking your **Favourite** contacts, as well as finding contacts going to the same **Event**. CohortConnect also makes it easy to connect with like-minded students in your module. Our **Find A Buddy** feature matches you with students who have similar interests by leveraging GitHub’s metadata using a proprietary algorithm.
+With advanced features for managing large groups of contacts, CohortConnect is intended for use in a university setting. At the start of the semester, professors will distribute `csv` or `json` files containing a list of students. Instantly load them into CohortConnect with a single **Import** command. With data collected from students before the semester, our **Find A Buddy** feature helps you find potential groupmates by leveraging GitHub’s metadata using a proprietary algorithm. In the **Events** tab, you can identify events and hackathons that your peers will be attending.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -197,7 +197,7 @@ This section describes noteworthy details on how certain features are implemente
 
 #### Implementation
 
-The telegram handle field is facilitated by the `Telegram` class. It is stored interally as a `String` in the data file `addressbook.json` and is then initialized as a `Telegram` object. 
+The telegram handle field is facilitated by the `Telegram` class. It is stored internally as a `String` in the data file `addressbook.json` and is then initialized as a `Telegram` object. 
 
 The `Telegram` class implements the following operation:
 
@@ -267,7 +267,7 @@ For the `arePrefixesPresent` method, the prefixes provided were changed to only 
 
 #### Implementation
 
-The GitHub field is facilitated by the `Github` class. It is stored interally as a `String` in the data file `addressbook.json` and is then initialized as a `Github` object. 
+The GitHub field is facilitated by the `Github` class. It is stored internally as a `String` in the data file `addressbook.json` and is then initialized as a `Github` object. 
 
 The `Github` class implements the following operation:
 
@@ -293,20 +293,78 @@ The `Github` class is first integrated into the `Person` class and added as a ne
 
 #### Implementation
 
-The Export command accepts the name of a JSON file as a parameter, and exports the current list of contacts to the 
-specified file. It is facilitated by the `ExportCommandParser` class, which implements `Parser<ExportCommand>`. 
-It implements the `parse()` method, which parses the filename and returns an `ExportCommand`, to be executed in 
-`LogicManager`.
- 
-The `ExportCommand` class extends `Command`. It stores the filename as a class variable and its implementation of
-`Command#execute()` is where the generation of the JSON file begins. The current addressbook, is obtained by 
-`Model#getAddressBook()`. A temporary instance of `JsonAddressBookStorage` is created by passing in the filename, and it
-saves the current addressbook to the specified file name using the method `exportToJson()`.
+The Export command exports the current list of contacts to the specified JSON or CSV file, with help from [Jackson](https://github.com/FasterXML/jackson), an external library. It does not overwrite existing files.
 
-The Sequence Diagram below illustrates the interactions within the `Logic`, `Storage` and `Model` components for 
-the `execute("export newfriends.json")` API call.
+Executing an Export Command can be summarized with the following steps:
+1. User command is handed over to `ExportCommandParser`. After verification of arguments, an ExportCommand is generated.
+2. Upon executing the `ExportCommand`, one of the 2 methods are called, depending on the file type specified.
+   * `ImportCommand#exportAddressBookToJson(ReadOnlyAddressBook)`
+   * `ImportCommand#exportAddressBookToCsv(ReadOnlyAddressBook)`
 
-![ExportSequenceDiagram](images/ExportSequenceDiagram.png)
+Firstly, the user command is handed over to `ExportCommandParser`. `ExportCommandParser` implements `Parser<ExportCommand>`. It implements the `parse()` method, which parses the user's command and returns an `ExportCommand` with the filename. In `parse()`, it verifies 3 requirements:
+* Arguments are not empty
+* Not more than 1 argument
+* Filename provided is a .csv or .json file
+
+The Sequence Diagram below illustrates the interactions within the `Logic` component during the first step of executing `execute("export cs2103t.json")`.
+
+![ExportSequenceDiagram](images/ExportSequenceDiagramStep1.png)
+
+Next, The `ExportCommand` is then executed in `LogicManager`. The `ExportCommand` class extends `Command`. It stores the filename as a class variable and its implementation of `Command#execute()`. Here, the filename is checked again to verify that it is a .csv or .json file. The current address book is obtained by `Model#getAddressBook()`. Then, depending on the file type, one of the following methods are called:
+
+1. `exportAddressBookToJson(ReadOnlyAddressBook)`
+
+   A temporary instance of `JsonAddressBookStorage` is created by passing in the filename, and `saveAddressBook(ReadOnlyAddressBook)` saves the current address book to the specified file.
+    ```
+   temporaryStorage.saveAddressBook(currentAddressBook, filePath, true);
+   ```
+   <div markdown="span" class="alert alert-primary">
+    :bulb: **Note:** The third argument `true` indicates that `saveAddressBook(ReadOnlyAddressBook)` is triggered by an export command. This distinction is necessary as default saving of contact data to the address book is performed with the same method, but requires overwriting of the storage file, whereas the export command does not overwrite files.
+    </div>
+
+   In the Storage component, utility classes are used to check, create and write to the JSON file.
+    1. `FileUtil#isFileExists(Path)` checks if there exists a file with the specified name. If there is, a `FileAlreadyExistsException` is thrown.
+    2. `FileUtil#createIfMissing(Path)` creates the JSON file.
+    3. The current `ReadOnlyAddressBook` is used to instantiate a new `JsonSerializableAddressBook`, a JSON-friendly equivalent of `ReadOnlyAddressBook` containing Jackson annotations. It stores a list of `JsonAdaptedPerson` instead of `Person`, which is also JSON-friendly.
+    4. `JsonUtil#saveJsonFile(T, Path)` serializes the address book and writes to the file, using `ObjectMapper`, a Jackson class.
+
+2. `exportAddressBookToCsv(ReadOnlyAddressBook)`
+
+   A temporary instance of `CsvAddressBookStorage` is created by passing in the filename, and `saveAddressBook(ReadOnlyAddressBook)` saves the current address book to the specified file.
+    ```
+   temporaryStorage.saveAddressBook(currentAddressBook, filePath);
+   ```
+   In the Storage component, utility classes are used to check, create and write to the JSON file.
+    1. `FileUtil#isFileExists(Path)` checks if there exists a file with the specified name. If there is, a `FileAlreadyExistsException` is thrown.
+    2. `FileUtil#createIfMissing(Path)` creates the CSV file.
+    3. The current `ReadOnlyAddressBook` is used to instantiate a new `CsvSerializableAddressBook`, a CSV-friendly equivalent of `ReadOnlyAddressBook` containing Jackson annotations. It stores a list of `CsvAdaptedPerson` instead of `Person`, which is also CSV-friendly.
+    4. `CsvUtil#saveCsvFile(T, Path)` serializes the address book and writes to the file, using `CsvMapper`, a Jackson class.
+
+
+The Sequence Diagram below illustrates the interactions during the second step of executing `execute("export cs2103t.json")`.
+
+![ExportSequenceDiagram](images/ExportSequenceDiagramStep2.png)
+
+### Import command
+
+The Import command imports contacts from a JSON or CSV file and adds them to the current contact list, with help from [Jackson](https://github.com/FasterXML/jackson), an external library. Import does not remove existing contacts, and ignores duplicate contacts.
+
+Executing an Import command can be summarized with the following steps:
+1. Similar to Export, the first step is parsing the user command, which is done in `ImportCommandParser`. After verification, an `ImportCommand` is generated.
+2. Upon executing the `ImportCommand`, one of the 2 methods are called to obtain a `List<Person>` from the specified file.
+   * `ImportCommand#getImportedPersonsFromJson()`
+   * `ImportCommand#getImportedPersonsFromCsv()`
+3. By iterating through the list, each person is added to the current contact list in `Model`, skipping duplicates.
+4. Command Result with success message is returned.
+
+The sequence diagram for the first step is similar to the Export Command. The following sequence diagram illustrates the execution of an import command from part 2 onwards.
+
+![ImportSequenceDiagram](images/ImportSequenceDiagram.png)
+
+#### Reading JSON / CSV file
+
+In both scenarios, a new `JsonAddressBookStorage` or `CsvAddressBookStorage` is created. The `AddressBookStorage` method `readAddressBook()` then reads the respective file using `JsonUtil#readJsonFile()` or `CsvUtil#readCsvFile()`. In both cases, the files are read using Jackson's `ObjectMapper` or `CsvMapper` classes respectively.
+
 
 ### Find command
 
@@ -571,6 +629,88 @@ The Sequence Diagram below illustrates the interactions within the `Logic`, `Mod
 the `execute("show alex")` API call.
 
 ![ExportSequenceDiagram](images/ShowWithNameSequenceDiagram.png)
+
+### Command History (Keyboard Shortcut)
+
+In the Command Box, users can use up and down arrow keys to navigate through previous commands, similar to the Command Line. This is achieved by interactions between `CommandHistory` and `CommandBox`.
+
+The `CommandHistory` class contains these key variables and methods:
+* An `ArrayList<String>` which stores previous user commands
+* An `int` which indicates the current index
+* Methods `add(String)`, `getPrevious()`, `getNext()`, `resetIndex()`
+
+When CohortConnect UI is initialized, the `CommandBox` class representing the Command Box is created, containing a single instance of `CommandHistory`. It interacts with `CommandHistory` in 3 ways:
+1. If `KeyCode.UP` is detected in the `TextField`, `CommandHistory#getPrevious()` is called, and the returned String is set to the text field.
+
+<div markdown="span" class="alert alert-primary">
+:bulb: **Note:** If the history is empty, UP will return an empty string. If the current index is at the earliest command, it will continue to return the same command. 
+</div>
+
+The activity diagram below illustrates what happens when a user presses the UP arrow key.
+
+![CommandHistoryActivityDiagramUp](images/CommandHistoryActivityDiagramUp.png)
+
+2. If `KeyCode.DOWN` is detected in the `TextField`, `CommandHistory#getNext()` is called, and the returned String is set to the text field.
+
+<div markdown="span" class="alert alert-primary">
+:bulb: **Note:** If the history is empty or the current index is at the latest command, DOWN will return an empty string.   
+</div>
+
+The activity diagram below illustrates what happens when a user presses the DOWN arrow key.
+
+![CommandHistoryActivityDiagramDown](images/CommandHistoryActivityDiagramDown.png)
+
+3. When the user presses enter to execute a command, the command is saved using `CommandHistory#add(String)`, and the current index is reset using `CommandHistory#resetIndex()`.
+
+### Switching Between Tabs (Keyboard Shortcut)
+
+![WindowMenu](images/WindowMenu.png)
+
+**Accelerators** are shortcuts to Menu Items, which can be associated with `KeyCombinations`. To switch between the 4 tabs, a new Menu Window was added in the MenuBar, containing 4 Menu Items which can be accessed using Cmd/Ctrl + 1/2/3/4. Each of the Menu Items have an `onAction` method declared in their FXML files, and defined in `MainWindow.java`.
+
+1. Accelerators for the 4 Menu Items are set during initialization of `MainWindow.java`.
+
+```
+private void setAccelerators() {
+    setAccelerator(contactsMenuItem, KeyCombination.valueOf("Shortcut+1"));
+    setAccelerator(favoritesMenuItem, KeyCombination.valueOf("Shortcut+2"));
+    setAccelerator(eventsMenuItem, KeyCombination.valueOf("Shortcut+3"));
+    setAccelerator(findABuddyMenuItem, KeyCombination.valueOf("Shortcut+4"));
+    ...
+}
+```
+
+<div markdown="span" class="alert alert-primary">
+:bulb: **Note:** When detecting KeyCombination, Javafx automatically switches its interpretation of "Shortcut" as "Ctrl" for Windows and "Cmd" for macOS. The symbols in the MenuItem (shown above) change as well.
+</div>
+
+2. When their respective key combinations are detected, the MenuItem's onAction methods are called. For example, the following method is called when Cmd/Ctrl + 4 is detected.
+
+```
+@FXML
+public void handleFindABuddy() {
+    tabPaneHeader.activateFindABuddy(logic);
+}
+```
+
+3. `TabPaneHeader` then switches to the Find A Buddy tab using `tabPane.getSelectionModel().select(3)`.
+
+
+### GitHub and Telegram Commands
+
+In the Command Box, users can enter `g` or `te` to open the currently selected user's GitHub or Telegram in a browser, using their respective username.
+
+The following links are used
+- GitHub: `https://github.com/{username}`
+- Telegram: `https://t.me/{username}`
+
+Similar to other commands, the commands `g` and `te` are parsed in `AddressBookParser`, where it is checked that there are no other arguments.
+
+During their execution, it is checked that there is a current user selected, using `Model#getSelectedIndex()`. If the returned value is `-1`, then a `CommandException` is thrown.
+
+The CommandResult returned indicates whether it is triggered by a GitHub or Telegram command using booleans variables.
+
+In `MainWindow`, if the command result `isGithub()` or `isTelegram()`, the GitHub and Telegram links in `PersonDetails` will be triggered using `PersonDetails#openTelegram()` and `PersonDetails#openGithub()`. 
 
 --------------------------------------------------------------------------------------------------------------------
 

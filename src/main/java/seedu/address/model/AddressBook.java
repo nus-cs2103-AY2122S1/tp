@@ -93,12 +93,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
-    public void favouritePerson(Person key) {
-        persons.favourite(key);
+    public void favoritePerson(Person key) {
+        persons.favorite(key);
     }
 
-    public void unfavouritePerson(Person key) {
-        persons.unfavourite(key);
+    public void unfavoritePerson(Person key) {
+        persons.unfavorite(key);
     }
 
     //// util methods

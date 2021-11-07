@@ -252,7 +252,7 @@ public class StringUtilTest {
     }
 
     @Test
-    public void clean_twoNullInput_nullPointerException() {
+    public void clean_twoNullInputs_nullPointerException() {
         boolean nullPointerException = true;
         try {
             String s = StringUtil.clean(null, null);

@@ -58,6 +58,15 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_PROFILE_SUCCESS = "Successfully edited profile!";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_EDIT_PROFILE_DESCRIPTION_CANNOT_BE_EMPTY = "Edit profile description "
+            + "cannot be empty!";
+    public static final String MESSAGE_EDIT_PROFILE_PARAMETERS_CANNOT_BE_EMPTY = "Name, Telegram and GitHub "
+            + "parameters cannot be empty!";
+    public static final String MESSAGE_EDIT_PROFILE_NAME_CANNOT_BE_EMPTY = "Name to be edited cannot be empty!";
+    public static final String MESSAGE_EDIT_PROFILE_TELEGRAM_CANNOT_BE_EMPTY = "Telegram handle to be edited "
+            + "cannot be empty!";
+    public static final String MESSAGE_EDIT_PROFILE_GITHUB_CANNOT_BE_EMPTY = "GitHub username to be edited "
+            + "cannot be empty!";
 
     private static List<UserProfileWatcher> userProfileWatchers = new ArrayList<>();
 
@@ -132,6 +141,10 @@ public class EditCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        if (model.getPersonListControl() != null) {
+            model.setSelectedIndex(model.getFilteredPersonList().indexOf(editedPerson));
+            model.getPersonListControl().refreshPersonListUI();
+        }
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
     }
     @Override
@@ -156,10 +169,10 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        boolean updatedIsFavourite = editPersonDescriptor.getIsFavourite().orElse(personToEdit.isFavourite());
+        boolean updatedIsFavorite = editPersonDescriptor.getIsFavorite().orElse(personToEdit.isFavorite());
 
         return new Person(updatedName, updatedTelegram, updatedGithub,
-                updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedIsFavourite);
+                updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedIsFavorite);
     }
 
     @Override
@@ -192,7 +205,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
-        private boolean isFavourite;
+        private boolean isFavorite;
         private boolean isProfile;
 
         public EditPersonDescriptor() {}
@@ -209,7 +222,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
-            setIsFavourite(toCopy.isFavourite);
+            setIsFavorite(toCopy.isFavorite);
             setIsProfile(toCopy.isProfile);
         }
 
@@ -276,12 +289,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
-        public void setIsFavourite(boolean isFavourite) {
-            this.isFavourite = isFavourite;
+        public void setIsFavorite(boolean isFavorite) {
+            this.isFavorite = isFavorite;
         }
 
-        public Optional<Boolean> getIsFavourite() {
-            return Optional.ofNullable(isFavourite);
+        public Optional<Boolean> getIsFavorite() {
+            return Optional.ofNullable(isFavorite);
         }
 
         /**
@@ -323,7 +336,7 @@ public class EditCommand extends Command {
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
                     && getTags().equals(e.getTags())
-                    && getIsFavourite().equals(e.getIsFavourite());
+                    && getIsFavorite().equals(e.getIsFavorite());
         }
     }
 }

@@ -13,8 +13,6 @@ src/main/resources/docs/
 /config.json
 /preferences.json
 /userprofile.json
-*.csv
-*.json
 /*.log.*
 
 # Test sandbox files
@@ -23,4 +21,3 @@ src/test/data/sandbox/
 # MacOS custom attributes files created by Finder
 .DS_Store
 docs/_site/
-userprofile.json
