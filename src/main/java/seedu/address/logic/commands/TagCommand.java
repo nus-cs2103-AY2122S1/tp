@@ -5,6 +5,9 @@ import static seedu.address.logic.commands.CommandResult.DisplayType.TAGS;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 
+/**
+ * Displays a list of tags that have been created in TAB.
+ */
 public class TagCommand extends Command {
     public static final String COMMAND_ACTION = "View Tags";
 
