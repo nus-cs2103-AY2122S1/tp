@@ -500,7 +500,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `Anilist` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `AniList` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: UC01 - View Help**
 
@@ -902,13 +902,13 @@ testers are expected to do more *exploratory* testing.
 ### Saving data
 
 1. Dealing with missing/corrupted data files
-    1. Close all Anilist windows
+    1. Close all AniList windows
 
     2. Open data/anilist.json
 
     3. Remove the first opening brace `{`
 
-    4. Open Anilist again
+    4. Open AniList again
 
     5. Now that the data file is corrupted, the app should start out without any anime in the list
 
