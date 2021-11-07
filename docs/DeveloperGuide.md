@@ -192,16 +192,6 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 This section describes some noteworthy details on how certain features are implemented.
 
 The features mentioned are:
-<!---
-- [Adding contacts with optional arguments](#add-contacts-with-optional-arguments)
-- [Finding contacts by keywords](#find-contacts-by-keywords)
-- [Deleting multiple contacts by keywords](#delete-by-keywords)
-- [Importing a JSON file](#import-json-file)
-- [Support for multiple social handles](#support-for-multiple-social-handles)
-- [Undoing / redoing command](#proposed-undoredo-feature)
-- [Input Suggestion](#input-suggestion)
---->
-
 1. Viewing help
 2. Modify
    1. Adding a person
