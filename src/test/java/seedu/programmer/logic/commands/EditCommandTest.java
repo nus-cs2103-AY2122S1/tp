@@ -19,10 +19,13 @@ import static seedu.programmer.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
 import static seedu.programmer.testutil.TypicalStudents.getTypicalProgrammerError;
 import static seedu.programmer.testutil.TypicalStudents.getTypicalStudents;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.programmer.commons.core.Messages;
 import seedu.programmer.commons.core.index.Index;
 import seedu.programmer.logic.commands.EditCommand.EditStudentDescriptor;
@@ -41,9 +44,6 @@ import seedu.programmer.model.student.exceptions.StudentNotFoundException;
 import seedu.programmer.testutil.EditStudentDescriptorBuilder;
 import seedu.programmer.testutil.StudentBuilder;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
  */
@@ -60,14 +60,16 @@ public class EditCommandTest {
         String expectedMessage = String.format(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent) + "\n"
                 + MESSAGE_NO_LAB_EDITED, editedStudent);
         Model expectedModel = new ModelStubWithStudents(getTypicalStudents());
-        expectedModel.setStudent(expectedModel.getAllStudents().get(INDEX_FIRST_STUDENT.getZeroBased()),editedStudent);
+        expectedModel.setStudent(expectedModel.getAllStudents().get(INDEX_FIRST_STUDENT.getZeroBased()), editedStudent);
         assertCommandSuccess(editCommand, modelStubWithStudents, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_someFieldsSpecifiedUnfilteredList_success() {
-        Index indexLastStudent = Index.fromOneBased(model.getFilteredStudentList().size());
-        Student lastStudent = model.getFilteredStudentList().get(indexLastStudent.getZeroBased());
+    public void execute_someFieldsSpecified_success() {
+        Model modelStubWithStudents = new ModelStubWithStudents(getTypicalStudents());
+
+        Index indexLastStudent = Index.fromOneBased(modelStubWithStudents.getFilteredStudentList().size());
+        Student lastStudent = modelStubWithStudents.getFilteredStudentList().get(indexLastStudent.getZeroBased());
 
         StudentBuilder studentInList = new StudentBuilder(lastStudent);
         Student editedStudent = studentInList.withName(VALID_NAME_BOB).withClassId(VALID_CLASS_ID_BOB).build();
@@ -79,10 +81,10 @@ public class EditCommandTest {
         String expectedMessage = String.format(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent)
                 + "\n" + MESSAGE_NO_LAB_EDITED, editedStudent);
 
-        Model expectedModel = new ModelManager(new ProgrammerError(model.getProgrammerError()), new UserPrefs());
+        Model expectedModel = new ModelStubWithStudents(getTypicalStudents());
         expectedModel.setStudent(lastStudent, editedStudent);
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editCommand, modelStubWithStudents, expectedMessage, expectedModel);
 
     }
 
@@ -94,21 +96,6 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_NO_NEW_FIELDS, editedStudent);
 
         assertCommandFailure(editCommand, model, expectedMessage);
-    }
-
-    @Test
-    public void execute_filteredList_success() {
-        Student studentInFilteredList = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
-        Student editedStudent = new StudentBuilder(studentInFilteredList).withName(VALID_NAME_BOB).build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_STUDENT,
-                new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB).build());
-        String expectedMessage = String.format(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent)
-                + "\n" + MESSAGE_NO_LAB_EDITED, editedStudent);
-
-        Model expectedModel = new ModelManager(new ProgrammerError(model.getProgrammerError()), new UserPrefs());
-        expectedModel.setStudent(model.getFilteredStudentList().get(0), editedStudent);
-        expectedModel.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -192,7 +179,7 @@ public class EditCommandTest {
 
         ModelStubWithStudents(List<Student> students) {
             requireNonNull(students);
-            this.students = students.subList(0,1);
+            this.students = students;
         }
 
 

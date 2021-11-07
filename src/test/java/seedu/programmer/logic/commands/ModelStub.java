@@ -1,5 +1,9 @@
 package seedu.programmer.logic.commands;
 
+import java.nio.file.Path;
+import java.util.List;
+import java.util.function.Predicate;
+
 import javafx.collections.ObservableList;
 import seedu.programmer.commons.core.GuiSettings;
 import seedu.programmer.logic.commands.exceptions.CommandException;
@@ -9,10 +13,6 @@ import seedu.programmer.model.ReadOnlyUserPrefs;
 import seedu.programmer.model.student.DisplayableObject;
 import seedu.programmer.model.student.Lab;
 import seedu.programmer.model.student.Student;
-
-import java.nio.file.Path;
-import java.util.List;
-import java.util.function.Predicate;
 
 /**
  * A default model stub that have all of the methods failing.
