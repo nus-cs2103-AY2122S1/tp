@@ -9,7 +9,12 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+For providing free to use images
+* [P.A.WORKS](https://www.pa-works.jp/en/company/)
+* [Clover Works](https://en.cloverworks.co.jp/)
+* [Kyoto Animation](http://www.kyotoanimation.co.jp/en/)
+* [Spike Chunsoft](https://www.spike-chunsoft.com/)
+* [Rendracula](https://www.deviantart.com/rendracula/)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -44,10 +49,10 @@ Given below is a quick overview of main components and how they interact with ea
 
 The rest of the App consists of four components.
 
-* [**`UI`**](#ui-component): The UI of the App.
-* [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
-* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+* [**`UI`**](#ui-component): The UI of the App
+* [**`Logic`**](#logic-component): The command executor
+* [**`Model`**](#model-component): Holds the data of the App in memory
+* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk
 
 
 **How the architecture components interact with each other**
@@ -58,8 +63,8 @@ The *Sequence Diagram* below shows how the components interact with each other f
 
 Each of the four main components (also shown in the diagram above),
 
-* defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* defines its *API* in an `interface` with the same name as the Component
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -75,28 +80,28 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `AnimeListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103T-T10-4/tp/blob/master/src/main/java/seedu/anilist/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-T10-4/tp/blob/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFX UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103T-T10-4/tp/blob/master/src/main/java/seedu/anilist/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-T10-4/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
-* executes user commands using the `Logic` component.
-* listens for changes to `Model` data so that the UI can be updated with the modified data.
-* keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Anime` object residing in the `Model`.
+* executes user commands using the `Logic` component
+* listens for changes to `Model` data so that the UI can be updated with the modified data
+* keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands
+* depends on some classes in the `Model` component, as it displays `Anime` object residing in the `Model`
 
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-T10-4/tp/blob/master/src/main/java/seedu/anilist/logic/Logic.java)
 
-Here's a (partial) class diagram of the `Logic` component:
+Here's a partial class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
 How the `Logic` component works:
-1. When `Logic` is called upon to execute a command, it uses the `AnimeListParser` class to parse the user command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to add a anime).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+1. When `Logic` is called upon to execute a command, it uses the `AnimeListParser` class to parse the user command
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g. `AddCommand`) which is executed by the `LogicManager`
+3. The command can communicate with the `Model` when it is executed (e.g. to add an anime)
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
@@ -110,8 +115,8 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AnimeListParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AnimeListParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `AnimeListParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g. `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AnimeListParser` returns back as a `Command` object
+* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing
 
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-T10-4/tp/blob/master/src/main/java/seedu/anilist/model/Model.java)
@@ -121,9 +126,9 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the anime list data i.e., all `Anime` objects (which are contained in a `UniqueAnimeList` object).
-* stores the currently 'selected' `Anime` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Anime>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+* stores the anime list data i.e. all `Anime` objects (which are contained in a `UniqueAnimeList` object)
+* stores the currently 'selected' `Anime` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Anime>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change
+* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Genre` list in the `AnimeList`, which `Anime` references. This allows `AnimeList` to only require one `Genre` object per unique genre, instead of each `Anime` needing their own `Genre` objects.<br>
@@ -140,8 +145,8 @@ The `Model` component,
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both anime list data and user preference data in json format, and read them back into corresponding objects.
-* inherits from both `AnimeListStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save both anime list data and user preference data in json format, and read them back into corresponding objects
+* inherits from both `AnimeListStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed)
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
@@ -159,39 +164,39 @@ This section describes some noteworthy details on how certain features are imple
 #### Implementation
 
 There are 4 tabs in AniList:
-1. `ALL` which contains all animes in the list.
-2. `TOWATCH` which contains all animes that the user wants to watch but have not started watching.
-3. `WATCHING` which contains all animes that the user is currently watching.
-4. `FINISHED` which contains all animes that the user has finished watching.
+1. `ALL` which contains all animes in the list
+2. `TOWATCH` which contains all animes that the user wants to watch but have not started watching
+3. `WATCHING` which contains all animes that the user is currently watching
+4. `FINISHED` which contains all animes that the user has finished watching
 
 To switch between tabs, the user can use the `list` command which accepts an optional parameter `status`, representing the `status` of the animes that will be listed in the tab. If no parameter is given, the current tab will switch to the `ALL` tab.
 The user can also use the hotkeys `CTRL-S` and `CTRL-D` to cycle between tabs.
 
 <img src="images/ListSequenceDiagram.png" width="850" />
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: Determining which tab to switch to after updating the list:**
 
 * **Alternative 1 (current choice):** AniList will remain at current tab after the list is updated
-    * Pros: User will not have to input a command or use hotkeys to switch back to his previous tab. This is the more intuitive and logical solution.
-    * Cons: Harder to implement as there is a need to compound predicates to maintain a properly filtered list. Prone to more bugs.
+    * Pros: User will not have to input a command or use hotkeys to switch back to his previous tab. This is the more intuitive and logical solution
+    * Cons: Harder to implement as there is a need to compound predicates to maintain a properly filtered list. Prone to more bugs
 
-* **Alternative 2:** AniList will switch back to `all` tab after the list is updated.
-    * Pros: Allows users to view all animes after the list is updated. Easy to implement.
-    * Cons: If the user wants to remain at his previous tab, he will have to manually switch his tab back by using the list command or the tab switching hotkeys. Not very intuitive.
+* **Alternative 2:** AniList will switch back to `all` tab after the list is updated
+    * Pros: Allows users to view all animes after the list is updated. Easy to implement
+    * Cons: If the user wants to remain at his previous tab, he will have to manually switch his tab back by using the list command or the tab switching hotkeys. Not very intuitive
 
 
 **Aspect: Determining whether there should be a list maintained per tab or all tabs take reference from a single list**
-* **Alternative 1 (current choice):** All the tabs will take reference to the same `ObservableList`.
-  * Pros: Minimal complications to rendering lifecycle. Easy updating of list as there is no need to sync between lists as there is only one list.
+* **Alternative 1 (current choice):** All the tabs will take reference to the same `ObservableList`
+  * Pros: Minimal complications to rendering lifecycle. Easy updating of list as there is no need to sync between lists as there is only one list
   * Cons: The ObservableList needs to be filtered with every tab switch. This may pose as a performance issue as tab switching is expected
-to be instantaneous. With a large list of animes, filtering can take a significant amount of time.
+to be instantaneous. With a large list of animes, filtering can take a significant amount of time
 
-* **Alternative 2:** Each tab will have its own `ObservableList`.
+* **Alternative 2:** Each tab will have its own `ObservableList`
   * Pros: Switching through tabs will not require the list to be re-filtered and re-rendered. This will increase the performance
-for tab switching.
-  * Cons: Will cause complications due to changing anime watch status, adding and deleting anime, and keeping sync with the master list.
+for tab switching
+  * Cons: Will cause complications due to changing anime watch status, adding and deleting anime, and keeping sync with the master list
 
 ### Clear Feature
 
@@ -209,22 +214,22 @@ as a confirmation message instead.
 
 <img src="images/ClearActivityDiagram.png" width="850" />
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: Determining valid confirmation input messages:**
 
-* **Alternative 1 (current choice):** User enters `clear` again to actually clear displayed animes; else to abort.
+* **Alternative 1 (current choice):** User enters `clear` again to actually clear displayed animes; else to abort
     * Pros: The least ambiguous; message reflects what is to be done. Only two scenarios (user input is
-      `clear` vs user input is not `clear`) to handle.
+      `clear` vs user input is not `clear`) to handle
     * Cons: Entering regular commands such as `list` will abort the `clear` command instead of
-      executing as per normal.
+      executing as per normal
 
 * **Alternative 2:** User enters `y` to actually clear displayed animes and `n` to abort; otherwise
-  the input is deemed invalid and an exception is thrown.
-    * Pros: These are common CLI confirmation formats that the user may be familiar with.
+  the input is deemed invalid and an exception is thrown
+    * Pros: These are common CLI confirmation formats that the user may be familiar with
     * Cons: Entering `clear` again will simply result in an exception thrown, which may add to the
       confusion. In addition, if the input is invalid, the `clear` command is aborted anyway,
-      making having invalid inputs redundant.
+      making having invalid inputs redundant
 
 ### Find Feature
 
@@ -235,67 +240,67 @@ the regular search filter. For multiple categories, the `and` method from `Predi
 
 ![Interactions Inside the Logic Component for the `findCommand`](images/FindSequenceDiagram.png)
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: Executing find:**
 
-* **Alternative 1 (current choice):** Search the keywords with the prefixes `g/` and `n/`. Does not reset tab and resets after each search.
-    * Pros: Allows for search with multiple spaces in between, searching within tabs and a more granular search.
-    * Cons: Complicated to implement.
+* **Alternative 1 (current choice):** Search the keywords with the prefixes `g/` and `n/`. Does not reset tab and resets after each search
+    * Pros: Allows for search with multiple spaces in between, searching within tabs and a more granular search
+    * Cons: Complicated to implement
 
 * **Alternative 2:** Search the keywords with the prefixes `g/` and `n/`. Does not reset tab and does
-not reset after each search.
-    * Pros: Provides all of the benefits of the current implementation and an even more granular search.
+not reset after each search
+    * Pros: Provides all the benefits of the current implementation and an even more granular search
     * Cons: Added complexity of having a command to remove previous searches or reset searches, less optimized for CLI
-    as it requires an additional command.
+    as it requires an additional command
 
-* **Alternative 3:** Search each keyword split by whitespace. Resets tab after each search.
-    * Pros: Less complicated and less coupling.
-    * Cons: Does not allow for searches with specific criteria nor keywords with whitespaces in between, does not allow searching within tabs.
+* **Alternative 3:** Search each keyword split by whitespace. Resets tab after each search
+    * Pros: Less complicated and less coupling
+    * Cons: Does not allow for searches with specific criteria nor keywords with whitespaces in between, does not allow searching within tabs
 
 **Aspect: Handling search terms:**
 
-* **Alternative 1 (current choice):** Parses it into a valid object before searching.
-    * Pros: Ensures that the search term is a valid term for the particular category before searching.
-    * Cons: Less efficient search as an additional parsing is required.
+* **Alternative 1 (current choice):** Parses it into a valid object before searching
+    * Pros: Ensures that the search term is a valid term for the particular category before searching
+    * Cons: Less efficient search as an additional parsing is required
 
-* **Alternative 2:** Handles it as a string without parsing.
-    * Pros: More efficient search as no additional parsing is not required.
+* **Alternative 2:** Handles it as a string without parsing
+    * Pros: More efficient search as no additional parsing is not required
     * Cons: Allows for invalid search terms, which are somewhat problematic for `genres` as it has
-    a fixed list of terms.
+    a fixed list of terms
 
 ### Stats Feature
 
 #### Implementation
-The user statistics consists of the following fields:
-1. The number of anime(s) the user is currently watching.
-2. The number of anime(s) the user wants to watch.
-3. The number of anime(s) the user has finished watching.
-4. The number of unique anime genre(s) the user tagged animes with.
-5. The top genres watched represented by a `HashMap`, with `Genre`s as keys and `Integer`s as values.
+The user statistics consist of the following fields:
+1. The number of anime(s) the user is currently watching
+2. The number of anime(s) the user wants to watch
+3. The number of anime(s) the user has finished watching
+4. The number of unique anime genre(s) the user tagged animes with
+5. The top genres watched represented by a `HashMap`, with `Genre`s as keys and `Integer`s as values
 The value represents the number of times the corresponding genre is tagged in AniList.
 
 The proposed Stats feature is facilitated mainly by the following classes:
 1. The `Stats` class, which encapsulates the user statistics. A `Stats` field is present in `ModelManager`. `ModelManager`
-   updates it whenever the `Stats` command is executed, by creating a new immutable `Stats` object with `AnimeList#fetchUserStats`.
-2. The `StatsCommand` class, which represents a command to update the `Stats` field in `ModelManager`.
+   updates it whenever the `stats` command is executed, by creating a new immutable `Stats` object with `AnimeList#fetchUserStats`
+2. The `StatsCommand` class, which represents a command to update the `Stats` field in `ModelManager`
 3. The `StatsDisplay` class, which inherits from the abstract `UiPart` class. It is responsible for
-   displaying the statistical breakdown of anime(s) in the anime list.
+   displaying the statistical breakdown of anime(s) in the anime list
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: Determining how to store and update the user statistics:**
 
-* **Alternative 1 (current choice):** User statistics are stored in an immutable `Stats` object in `ModelManager`, recalculated every time the user executes the `stats` command.
-    * Pros: Straightforward to implement, debug and does not increase coupling among existing classes.
+* **Alternative 1 (current choice):** User statistics are stored in an immutable `Stats` object in `ModelManager`, recalculated every time the user executes the `stats` command
+    * Pros: Straightforward to implement, debug and does not increase coupling among existing classes
     * Cons: Results in more computation compared to the alternative, since the stats are recalculated for each `stats` command
-      execution even if they may not have changed from the last execution.
+      execution even if they may not have changed from the last execution
 
-* **Alternative 2:** Implement the Observer pattern where the `Stats` field observes for changes in the anime list.
-    * Pros: May result in less computation compared to Alternative 1.
+* **Alternative 2:** Implement the Observer pattern where the `Stats` field observes for changes in the anime list
+    * Pros: May result in less computation compared to Alternative 1
     * Cons: Hard to implement and test. In addition, we do not expect users to use the `stats` command as much as
       commands which alters the anime list. This may mean an excessive amount of computation for updating the user
-      statistics in the background when the `Stats` window is not up.
+      statistics in the background when the `Stats` window is not displayed
 
 ### Themes Feature
 
@@ -306,13 +311,19 @@ The proposed theme mechanism is simply done by completely altering the base css 
 If `preferences.json` is empty or the theme css file given is not valid, the default theme will be used instead and
 will replace the invalid css file specification in `preferences.json`.
 
-**Current Implementation**
+#### Design Consideration
 
-CSS files have been optimized for theme creation. Devs are only needed to edit the list of colors at the top of the CSS file
-and the source path for the background image.
-* Pros: More advanced users may be able to create their own CSS files by setting the color and changing the source of
-the background image.
-* Cons: There is a limited choice of color blocking. The bulk of the theming is made from a specified color shading.
+#### Design Considerations
+
+**Aspect: Customizability of CSS file**
+
+* **Alternative 1(current choice):** CSS files are optimized for themes creation. Only a small number of colors and background image path need to be specified to create new themes
+    * Pros: More advanced users may be able easily to create their own CSS files by setting the color and changing the source of the background image
+    * Cons: There is a limited choice of color blocking. The bulk of the theming is made from a specified color shading
+
+* **Alternative 2:** CSS files remain unchanged.
+    * Pros: Increased customizability as all colors can be individually chosen and managed
+    * Cons: Significantly more complicated to create new themes as there are many components to individually change
 
 
 ### [Proposed] Theme adding feature
@@ -345,9 +356,9 @@ Given below is an MSS of an example usage scenario of a user creating their own 
 1. User requests to add theme to the application
 2. User provides theme name, background image and color blocking
 3. New theme is created
-4. Application switches to the new theme Use case ends
+4. Application switches to the new theme 
 
-
+   Use case ends
 
 ### [Proposed] Genre adding feature
 
@@ -357,14 +368,14 @@ The `Genre` command allows the user to specify any `Genre` for an `Anime`, and s
 However, the list of `Genre` is fixed and the user cannot modify the `GenreList`.<br>
 The user can only add or delete a `Genre` from an `Anime` if the `Genre` is in the `GenreList`
 
-* Pros: Easy to implement, and easy to manage as we don't have to worry about syncing the `Genres` in multiple lists
-* Cons: Inconvenient for the user, as user can only use a `Genre` if it is in the `GenreList`.
+* Pros: Easy to implement, and easy to manage as we don't have to worry about syncing the `Genre` in multiple lists
+* Cons: Inconvenient for the user, as user can only use a `Genre` if it is in the `GenreList`
 
 #### Proposed Implementation
 
-We can allow the user to modify the `GenreList` by adding both a add `Genre` command and a delete `Genre` command.
-* Pros: User no longer restricted by the provided `Genres`, and this can use his own `Genre` definitions.
-* Cons: `Genre` must be synced in multiple locations, and deletion of a `Genre` from the `GenreList` would require the system to remove the `Genre` from all tagged `Animes`.
+We can allow the user to modify the `GenreList` by adding both an add `Genre` command and a delete `Genre` command.
+* Pros: User no longer restricted by the provided `Genres`, and this can use his own `Genre` definitions
+* Cons: `Genre` must be synced in multiple locations, and deletion of a `Genre` from the `GenreList` would require the system to remove the `Genre` from all tagged `Animes`
 
 
 Given below is an MSS of an example usage scenario of a user adding a `Genre` to an `Anime`.
@@ -372,9 +383,10 @@ Given below is an MSS of an example usage scenario of a user adding a `Genre` to
 **Use case: UCP2 - Add Genre to the GenreList**
 
 **MSS**
-1.  User requests to add a genre to the genre list
-2.  AniList adds the genre
-    Use case ends
+1. User requests to add a genre to the genre list
+2. AniList adds the genre
+
+   Use case ends
 
 **Extensions**
 
@@ -390,13 +402,13 @@ Given below is an MSS of an example usage scenario of a user adding a `Genre` to
 
       Use case resumes at step 1
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: Interaction with `find`:**
 
-* **Alternative 1** `Genre` keeps track of which anime is tagged by this `Genre`. Find searches from the `GenreList`.
-    * Pros: Very efficient, as we do not need to go through the list of anime checking each of the anime. Works well when number of `Anime` is large.
-    * Cons: More storage intensive, requires us to store the list of tagged `Anime` for every `Genre`.
+* **Alternative 1** `Genre` keeps track of which anime is tagged by this `Genre`. Find searches from the `GenreList`
+    * Pros: Very efficient, as we do not need to go through the list of anime checking each of the anime. Works well when number of `Anime` is large
+    * Cons: More storage intensive, requires us to store the list of tagged `Anime` for every `Genre`
       Could also cause problems if the save file is tempered with, as there is bi-directional referencing between `Anime` and `Genre`
 
 * **Alternative 2 (Suggested)** Find searches through the list of `Anime` and see if each `Anime` is tagged with this `Genre`
@@ -405,7 +417,7 @@ Given below is an MSS of an example usage scenario of a user adding a `Genre` to
 
 **Aspect: How to implement `GenreList`**
 * `GenreList` as a `HashSet`
-    * Pros: Prevents duplication, easy to implement.
+    * Pros: Prevents duplication, easy to implement
 
 ## **Glossary, Naming Conventions**
 
@@ -416,6 +428,7 @@ Used to provide more information to some commands, like `genre`.
 The name of our app. Only used for package name.
 
 ### Anime
+A style of Japanese film and television animation, typically aimed at adults as well as children.
 Represents a single season of an anime series.
 
 ### AnimeList
@@ -430,8 +443,10 @@ This is to distinct between a single anime and multiple animes.
 Represents a genre of an anime.
 
 ### Status
-Represents the watch status of an anime
+Represents the watch status of an anime.
 
+### Mainstream OS
+Windows, Linux, Unix, OS-X
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -481,7 +496,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`  | user                                         | delete a genre from an anime                | remove unnecessary genres from an anime                                |
 | `* *`  | user                                         | find specific animes by name                | see all animes with a specific name                                    |
 | `* *`  | user                                         | find specific animes by genres              | see all animes with specific genres                                    |
-| `* *`  | user                                         | view my watching statistics                 | know which genres I have watched the most, total number of episodes I have watched|
+| `* *`  | user                                         | view my watching statistics                 | understand my preferences better                                       |
 | `* *`  | user                                         | change the theme of the application         | personalise the application                                            |
 
 
@@ -496,7 +511,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User requests to view usage instructions
 2.  AniList shows a list of commands and a link to the UserGuide
 
-    Use case ends.
+    Use case ends
 
 **Use case: UC02 - List all anime**
 
@@ -505,7 +520,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User requests to list anime
 2.  AniList shows a list of anime
 
-    Use case ends.
+    Use case ends
 
 **Use case: UC03 - List all anime with a specific watch status**
 
@@ -514,7 +529,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User requests to list anime with a specific watch status
 2.  AniList shows a list of anime with that watch status
 
-    Use case ends.
+    Use case ends
 
 **Extensions**
 
@@ -522,7 +537,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     - 1a1. AniList shows an error message
 
-      Use case resumes at step 1
+      Use case ends
 
 **Use case: UC04 - Clear all anime from the current tab**
 
@@ -533,7 +548,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  User provides confirmation
 4.  AniList clears all anime from the current tab
 
-    Use case ends.
+    Use case ends
 
 **Extensions**
 
@@ -558,31 +573,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     - 1a1. AniList shows an error message
 
-      Use case resumes at step 1
+      Use case ends
 
 - 1b. The given episode is invalid
 
     - 1b1. AniList shows an error message
 
-      Use case resumes at step 1
+      Use case ends
 
 - 1c. The given status is invalid
 
     - 1c1. AniList shows an error message
 
-      Use case resumes at step 1
+      Use case ends
 
 - 1d. The given genre is invalid
 
     - 1d1. AniList shows an error message
 
-      Use case resumes at step 1
+      Use case ends
 
 - 1e. The given name is invalid
 
     * 1e1. AniList shows an error message
 
-      Use case resumes at step 1
+      Use case ends
 
 **Use case: UC06 - Delete an anime**
 
@@ -604,7 +619,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 2a1. AniList shows an error message
 
-      Use case resumes at step 2
+      Use case ends
 
 **Use case: UC07 - Update the episode of an anime**
 
@@ -626,13 +641,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 2a1. AniList shows an error message
 
-      Use case resumes at step 2
+      Use case ends
 
 * 2b. The given episode is invalid
 
     * 2b1. AniList shows an error message
 
-      Use case resumes at step 2
+      Use case ends
 
 **Use case: UC08 - Update the status of an anime**
 
@@ -654,13 +669,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 2a1. AniList shows an error message
 
-      Use case resumes at step 2
+      Use case ends
 
 * 2b. The given status is invalid
 
     * 2b1. AniList shows an error message
 
-      Use case resumes at step 2
+      Use case ends
 
 **Use case: UC09 - Update the name of an anime**
 
@@ -682,19 +697,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 2a1. AniList shows an error message
 
-      Use case resumes at step 2
+      Use case ends
 
 * 2b. The anime name is a duplicate
 
     * 2b1. AniList shows an error message
 
-      Use case resumes at step 2
+      Use case ends
 
 * 2c. The given name is invalid
 
     * 2c1. AniList shows an error message
 
-      Use case resumes at step 2
+      Use case ends
 
 **Use case: UC10 - List all genres**
 
@@ -709,11 +724,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 1. <ins>User lists all anime(UC02)</ins>
-2. User decides which `Anime` to add a `Genre`
+2. User decides which `Anime` to be tagged with `Genre`
 3. <ins>User lists all genres(UC10)</ins>
-4. User chooses a `Genre` to tag the `Anime` with
-5. User requests to tag an `Anime` with a `Genre`
-6. System tags the Anime with the specified `Genre`
+4. User chooses one or more `Genre` to tag the `Anime` with
+5. User requests to tag an `Anime` with those `Genre`
+6. System tags the Anime with the non-duplicate `Genre`
 
     Use case ends
 
@@ -727,28 +742,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 5a1. AniList shows an error message
 
-      Use case resumes at step 5
+      Use case ends
 
-* 5b. The given genre is invalid
+* 5b. One or more of the given genre is invalid
 
     * 5b1. AniList shows an error message
 
-      Use case resumes at step 5
-
-* 5c. The given genre is a duplicate
-
-    * 5c1. AniList shows an error message
-
-      Use case resumes at step 5
+      Use case ends
 
 **Use case: UC12 - Delete genre from an anime**
 
 **MSS**
 1. <ins>User lists all anime(UC02)</ins>
-2. User decides which `Anime` to delete a `Genre` from
-3. User chooses a `Genre` to delete
-4. User requests to delete the `Genre` from the `Anime`
-5. System deletes the specified `Genre` from the `Anime`
+2. User decides which `Anime` to delete `Genre` from
+3. User chooses one or more `Genre` to delete
+4. User requests to delete those `Genre` from the `Anime`
+5. System deletes the specified `Genre` that are tagged to the `Anime`
 
     Use case ends
 
@@ -762,19 +771,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 4a1. AniList shows an error message
 
-      Use case resumes at step 4
+      Use case ends
 
 * 4b. The given genre is invalid
 
     * 4b1. AniList shows an error message
 
-      Use case resumes at step 4
-
-* 4c. The given genre is not in the anime
-
-    * 4c1. AniList shows an error message
-
-      Use case resumes at step 4
+      Use case ends
 
 **Use case: UC13 - Find anime by name and genre**
 
@@ -790,13 +793,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. AniList shows an error message
 
-      Use case resumes at step 1
+      Use case ends
 
 * 1b. The given name is invalid
 
     * 1b1. AniList shows an error message
 
-      Use case resumes at step 1
+      Use case ends
 
 **Use case: UC14 - View user statistics**
 
@@ -813,19 +816,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends
 
-*{More to be added}*
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 anime without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  Should be able to work offline.
-
-### Glossary
-
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Anime**: a style of Japanese film and television animation, typically aimed at adults as well as children.
+1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed
+2.  Should be able to hold up to 400 anime with reasonable efficiency
+3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse
+4.  Should be able to work offline
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -844,36 +841,36 @@ testers are expected to do more *exploratory* testing.
 
     1. Download the jar file and copy into an empty folder
 
-    2. Double-click the jar file Expected: Shows the GUI with a set of sample animes. The window size may not be optimum.
+    2. Double-click the jar file Expected: Shows the GUI with a set of sample animes. The window size may not be optimum
 
 2. Saving window preferences
 
-    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window
 
-    2. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+    2. Re-launch the app by double-clicking the jar file<br>
+       Expected: The most recent window size and location is retained
 
 ### Deleting an anime
 
 1. Deleting an anime while all animes are being shown
 
-    1. List all animes using the `list` command. Multiple animes in the list.
+    1. List all animes using the `list` command. Multiple animes in the list
 
     2. Test case 1: `delete 1`<br>
-       Expected: First anime is deleted from the list. Details of the deleted anime shown in the status message. Timestamp in the status bar is updated.
+       Expected: First anime is deleted from the list. Details of the deleted anime shown in the Command Result Panel
 
     3. Test case 2: `delete 0`<br>
-       Expected: No anime is deleted. Error details shown in the status message. Status bar remains the same.
+       Expected: No anime is deleted. Error details shown in the status message
 
     4. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size), `delete n/attack on titan`<br>
-       Expected: Similar to previous.
+       Expected: Similar to previous
  
 2. Deleting an anime while not all animes are being shown
 
    1. Use `list s/watching` to list out only the animes with a `watching` status
 
    2. Use `delete 1` to delete the first anime<br>
-      Expected: First anime is deleted from the list. Details of the deleted anime shown in the status message. Timestamp in the status bar is updated.
+      Expected: First anime is deleted from the list. Details of the deleted anime shown in the Command Result Panel
 
    3. Use `list` to list out all animes, make sure that the deleted anime is not shown here
     
@@ -903,9 +900,7 @@ testers are expected to do more *exploratory* testing.
    4. After the previous command, use command `genre 1 c/delete g/action g/fantasy`
       Expected: The `fantasy` genre will be deleted to the test anime, while a message tells the user that the `action` genre is not present
 
-
-
-
+      
 ### Saving data
 
 1. Dealing with missing/corrupted data files
@@ -922,30 +917,30 @@ testers are expected to do more *exploratory* testing.
 ### Clearing all data
 
 1. Clearing all data in AniList
-   1. Prerequisites: List all animes using the `list` command. There are animes in the list.
-   2. Test case: Clear all animes in the application. Run `list`, `clear`, `clear` one after the other. <br/>
-   Expected: First command will switch the current tab to the `all tab`. Second command will result in the application prompting the user for confirmation.
-   Third command will be the confirmation and **ALL** animes will be deleted from the application.
-   3. Test case: Cancelled clear. Run `clear`, `ANYTHING_BUT_CLEAR` one after the other. <br/>
-            Expected: The user will be prompted for confirmation after the first `clear` command. On running any other string besides `clear`, the `clear` command will be cancelled. If the string was a command, the command will not be executed.
+   1. Prerequisites: List all animes using the `list` command. There are animes in the list
+   2. Test case: Clear all animes in the application. Run `list`, `clear`, `clear` one after the other <br/>
+   Expected: First command will switch the current tab to the `all tab`. Second command will result in the application prompting the user for confirmation
+   Third command will be the confirmation and all animes will be deleted from the application
+   3. Test case: Cancelled clear. Run `clear`, `ANYTHING_BUT_CLEAR` one after the other <br/>
+            Expected: The user will be prompted for confirmation after the first `clear` command. On running any other string besides `clear`, the `clear` command will be cancelled. If the string was a command, the command will not be executed
 2. Clearing animes from a specific tab
-   1. Prerequisites: List all anime in the chosen tab using the `list s/CHOSEN_TAB` command.
-   2. Test case: Clear animes in a specific tab. Run `list s/f`, `clear`, `clear` one after the other. <br/>
-         Expected: All animes in the `finished` tab will be deleted. All animes in `towatch` and `watching` tab should still remain.
+   1. Prerequisites: List all anime in the chosen tab using the `list s/CHOSEN_TAB` command
+   2. Test case: Clear animes in a specific tab. Run `list s/f`, `clear`, `clear` one after the other <br/>
+         Expected: All animes in the `finished` tab will be deleted. All animes in `towatch` and `watching` tab should still remain
 
 ### Listing animes
 
 1. List all animes in AniList
    1. Test case: `list` <br/>
-   Expected: The current tab will switch to `all tab` and all animes will be listed.
+   Expected: The current tab will switch to `all tab` and all animes will be listed
    2. Test case: `LisT`<br/>
-   Expected: Error stating unknown command. AniList commands are case sensitive.
+   Expected: Error stating unknown command. AniList commands are case sensitive
 2. List animes based on their watch status
    1. Test case: `list s/w`, `list s/watching`<br/>
-   Expected: The current tab will switch to `watching tab` and all animes with watch status `watching` will be listed.
+   Expected: The current tab will switch to `watching tab` and all animes with watch status `watching` will be listed
    2. Test case: `list s/t`, `list s/towatch`<br/>
-      Expected: The current tab will switch to `towatch tab` and all animes with watch status `towatch` will be listed.
+      Expected: The current tab will switch to `towatch tab` and all animes with watch status `towatch` will be listed
    3. Test case: `list s/w`, `list s/finished`<br/>
-      Expected: The current tab will switch to `finished tab` and all animes with watch status `finished` will be listed.
+      Expected: The current tab will switch to `finished tab` and all animes with watch status `finished` will be listed
    4. Test case: `list s/tw` <br/>
-      Expected: Error message stating that an invalid status was provided.
+      Expected: Error message stating that an invalid status was provided

@@ -86,12 +86,13 @@ activate FindCommand
 FindCommand -> Model : updateFilteredAnimeList(combinedPred)
 activate Model
 Model --> FindCommand
+deactivate Model
 
 create CommandResult
 FindCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> FindCommand
+CommandResult --> FindCommand : result
 deactivate CommandResult
 
 FindCommand --> LogicManager : result

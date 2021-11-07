@@ -48,12 +48,6 @@ deactivate AnimeListParser
 LogicManager -> DeleteCommand : execute()
 activate DeleteCommand
 
-DeleteCommand -> Model : setCurrentTab(t)
-activate Model
-
-Model --> DeleteCommand
-deactivate Model
-
 DeleteCommand -> Model : deletePerson(1)
 activate Model
 
@@ -64,7 +58,7 @@ create CommandResult
 DeleteCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> DeleteCommand
+CommandResult --> DeleteCommand : result
 deactivate CommandResult
 
 DeleteCommand --> LogicManager : result
