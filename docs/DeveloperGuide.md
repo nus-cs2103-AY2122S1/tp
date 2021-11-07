@@ -40,7 +40,9 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ### Architecture
 
-![Architecture Diagram](images/ArchitectureDiagram.png)
+<center>
+    <img src="images/ArchitectureDiagram.png">
+</center>
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
@@ -66,7 +68,9 @@ The rest of the App consists of four components.
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
-![Architecture Sequence Diagram](images/ArchitectureSequenceDiagram.png)
+<center>
+    <img src="images/ArchitectureSequenceDiagram.png">
+</center>
 
 Each of the four main components (also shown in the diagram above),
 
@@ -75,7 +79,9 @@ Each of the four main components (also shown in the diagram above),
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
-![Component Managers](images/ComponentManagers.png)
+<center>
+    <img src="images/ComponentManagers.png">
+</center>
 
 The sections below give more details of each component.
 
@@ -83,7 +89,10 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103T-W08-2/tp/tree/master/src/main/java/seedu/sourcecontrol/ui/Ui.java)
 
-![Structure of the UI Component](images/UiClassDiagram.png)
+<center>
+    <img src="images/UiClassDiagram.png">
+</center>
+
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `StudentListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
@@ -102,7 +111,9 @@ The `UI` component,
 
 Here's a (partial) class diagram of the `Logic` component:
 
-![Logic Class Diagram](images/LogicClassDiagram.png)
+<center>
+    <img src="images/LogicClassDiagram.png">
+</center>
 
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `SourceControlParser` class to parse the user command.
@@ -112,18 +123,24 @@ How the `Logic` component works:
 
 The Activity Diagram below illustrates how user input is parsed by the `Logic` component.
 
-![How the `Logic` component parses user input](images/ParseActivityDiagram.png)
+<center>
+    <img src="images/ParseActivityDiagram.png">
+</center>
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+<center>
+    <img src="images/DeleteSequenceDiagram.png">
+</center>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-![Parser Classes](images/ParserClasses.png)
+<center>
+    <img src="images/ParserClasses.png">
+</center>
 
 How the parsing works:
 * When called upon to parse a user command, the `SourceControlParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `SourceControlParser` returns back as a `Command` object.
@@ -135,7 +152,9 @@ How the parsing works:
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-W08-2/tp/tree/master/src/main/java/seedu/sourcecontrol/model/Model.java)
 
 
-![Model Class Diagram](images/ModelClassDiagram.png)
+<center>
+    <img src="images/ModelClassDiagram.png">
+</center>
 
 
 The `Model` component,
@@ -147,7 +166,9 @@ The `Model` component,
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `SourceControl`, which `Student` references. This allows `SourceControl` to only require one `Tag` object per unique tag, instead of each `Student` needing their own `Tag` objects. Note that other classes such as `Group` and `Assessment` are omitted here for brevity.<br>
 
-![Better Class Diagram](images/BetterModelClassDiagram.png)
+<center>
+    <img src="images/BetterModelClassDiagram.png">
+</center>
 
 </div>
 
@@ -155,7 +176,9 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-W08-2/tp/tree/master/src/main/java/seedu/sourcecontrol/storage/Storage.java)
 
-![Storage Class Diagram](images/StorageClassDiagram.png)
+<center>
+    <img src="images/StorageClassDiagram.png">
+</center>
 
 The `Storage` component,
 * can save both application data and user preference data in json format, and read them back into corresponding objects.
@@ -193,11 +216,15 @@ In the case where the compulsory prefixes `-n` and `-i` are not present, a `Pars
 
 The following activity diagram summarises what happens when a user executes the `addstudent` command to add a new student. In the case where the student is not added, an error message will be displayed with the reason.
 
-![AddStudentActivityDiagram](images/AddStudentActivityDiagram.png)
+<center>
+    <img src="images/AddStudentActivityDiagram.png">
+</center>
 
 The following sequence diagram summarises what happens when the user inputs an `addstudent` command together with the name and NUSNET ID of the student to be added.
 
-![AddStudentSequenceDiagram](images/AddStudentSequenceDiagram.png)
+<center>
+    <img src="images/AddStudentSequenceDiagram.png">
+</center>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -219,12 +246,18 @@ The `addgroup` feature allows users to create new groups, as well as specify stu
 
 The following activity diagrams summarises what happens when a user executes the `addgroup` command to add a new group. In the case where the group is not added, an error message will be displayed with the reason.
 
-![AddGroupActivityDiagram](images/AddGroupActivityDiagram.png)
-![AddStudentToGroupActivityDiagram](images/AddStudentsToGroupActivityDiagram.png)
+<center>
+    <img src="images/AddGroupActivityDiagram.png">
+</center>
+<center>
+    <img src="images/AddStudentsToGroupActivityDiagram.png">
+</center>
 
 The following sequence diagram summarises what happens when the user inputs an `addgroup` command together with a student to be added.
 
-![AddGroupSequenceDiagram](images/AddGroupSequenceDiagram.png)
+<center>
+    <img src="images/AddGroupSequenceDiagram.png">
+</center>
 
 ### Adding a student into a group
 
@@ -244,11 +277,15 @@ The `addalloc` feature allows users to allocate a student into a group.
 
 The following activity diagram summarises what happens when a user executes the `addalloc` command to allocate a student into a group. In the case where the student is not added into the group, an error message will be displayed with the reason.
 
-![AddAllocActivityDiagram](images/AddAllocActivityDiagram.png)
+<center>
+    <img src="images/AddAllocActivityDiagram.png">
+</center>
 
 The following sequence diagram summarises what happens when the user inputs an `addalloc` command together with a group and a student, specified by name, to be allocated.
 
-![AddAllocSequenceDiagram](images/AddAllocSequenceDiagram.png)
+<center>
+    <img src="images/AddAllocSequenceDiagram.png">
+</center>
 
 <center>
   <img src="images/AddAllocToModelSequenceDiagram.png" />
@@ -274,12 +311,18 @@ The `addscore` feature allows users to add score for an assessment of a student.
 
 The following activity diagram summarises what happens when a user executes the `addscore` command to add score for an assessment of a student. In the case where the score is not added/updated, an error message will be displayed with the reason.
 
-![AddScoreActivityDiagram](images/AddScoreActivityDiagram.png)
+<center>
+    <img src="images/AddScoreActivityDiagram.png">
+</center>
 
 The following sequence diagram summarises what happens when the user inputs an `addscore` command together with an assessment, a student, specified by name, and a score to be added.
 
-![AddScoreSequenceDiagram](images/AddScoreSequenceDiagram.png)
-![AddScoreToModelSequenceDiagram](images/AddScoreToModelSequenceDiagram.png)
+<center>
+    <img src="images/AddScoreSequenceDiagram.png">
+</center>
+<center>
+    <img src="images/AddScoreToModelSequenceDiagram.png">
+</center>
 
 ### Searching for students
 
@@ -289,7 +332,9 @@ The `search` feature allows user to filter student list by name, NUSNET ID, grou
 
 The following sequence diagram summarises what happens when the user inputs an `search` command together with a name to be searched for.
 
-![SearchSequenceDiagram](images/SearchSequenceDiagram.png)
+<center>
+    <img src="images/SearchSequenceDiagram.png">
+</center>
 
 A `Predicate<Student>` object will be created for each search command.
 It contains `test(Student student)` function which checks if the given student matches the list of keywords given.
@@ -310,7 +355,9 @@ each with different implementation of the `test(Student student)` function.
 
 The following activity diagrams summarises what happens when a user executes the `search` command to search for students with different filters.
 
-![SearchActivityDiagram](images/SearchActivityDiagram.png)
+<center>
+    <img src="images/SearchActivityDiagram.png">
+</center>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** SearchCommandParser checks
 if the command input is valid. The command is invalid if the user input is empty, or if the user entered more or less than one flag.
@@ -336,7 +383,9 @@ The `import` feature allows users to load data as specified in the provided CSV 
 
 The following activity diagram summarises what happens when a user executes the `import` command to import a CSV data file. In the case where the file is not imported, an error message will be displayed with the reason.
 
-![ImportCommandActivityDiagram](images/ImportActivityDiagram.png)
+<center>
+    <img src="images/ImportActivityDiagram.png">
+</center>
 
 There are several important details left out of the activity diagram for the sake of clarity:
 
@@ -369,14 +418,24 @@ The `show` feature allows users to show the performance analysis of a student, a
 
 The following activity diagrams summarise what happens when a user executes the `show` command to show the performance analysis of a student, a group or the cohort in an assessment. In the case where the display is not presented successfully, an error message will be displayed with the reason.
 
-![ShowActivityDiagram](images/ShowActivityDiagram.png)
-![ShowStudentDiagram](images/ShowStudentActivityDiagram.png)
-![ShowStudentsActivityDiagram](images/ShowStudentsActivityDiagram.png)
+<center>
+    <img src="images/ShowActivityDiagram.png">
+</center>
+<center>
+    <img src="images/ShowStudentActivityDiagram.png">
+</center>
+<center>
+    <img src="images/ShowStudentsActivityDiagram.png">
+</center>
 
 The following sequence diagram summarises what happens when the user inputs an `show` command together with a student specified by name.
 
-![ShowSequenceDiagram](images/ShowSequenceDiagram.png)
-![ShowStatsFromModelSequenceDiagram](images/ShowStatsFromModelSequenceDiagram.png)
+<center>
+    <img src="images/ShowSequenceDiagram.png">
+</center>
+<center>
+    <img src="images/ShowStatsFromModelSequenceDiagram.png">
+</center>
 
 ### Setting customised aliases for commands
 
