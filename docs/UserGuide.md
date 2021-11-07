@@ -253,7 +253,7 @@ Examples:
 
 Shows a sorted list of elderly and their associated details in SeniorLove either by `last visit` date (the latest first) or by next `visit` date (the earliest first).
 
-Format: `sort [FIELD_TO_BE_SORTED]`
+Format: `sort FIELD_TO_BE_SORTED`
 
 * `sort lv/` sorts elderly in descending order of their `last visit` date (the latest first).
 * `sort v/` sorts elderly in ascending order of their next `visit` date (the earliest first).
