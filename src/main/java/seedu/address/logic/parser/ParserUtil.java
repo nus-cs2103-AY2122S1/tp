@@ -363,7 +363,8 @@ public class ParserUtil {
         predicate.addFieldToTest(argMultimap.getValue(PREFIX_DASH_ADDRESS), ParserUtil::parseAddress);
         predicate.addFieldToTest(argMultimap.getAllValues(PREFIX_DASH_TAG), ParserUtil::parseTag);
         try {
-            predicate.addFieldToTest(argMultimap.getAllValues(PREFIX_DASH_ROLE), Role::translateStringToRole);
+            predicate.addFieldToTest(argMultimap.getAllValues(PREFIX_DASH_ROLE),
+                    Role::translateStringToRoleWithNoRole);
             predicate.addFieldToTest(argMultimap.getValue(PREFIX_DASH_SALARY), Salary::new);
             predicate.addFieldToTest(argMultimap.getValue(PREFIX_DASH_STATUS), Status::translateStringToStatus);
         } catch (IllegalArgumentException iae) {
@@ -386,7 +387,8 @@ public class ParserUtil {
         predicate.addFieldToTest(argMultimap.getValue(PREFIX_DASH_ADDRESS), ParserUtil::parseAddress);
         predicate.addFieldToTest(argMultimap.getValue(PREFIX_DASH_TAG), ParserUtil::parseTag);
         try {
-            predicate.addFieldToTest(argMultimap.getValue(PREFIX_DASH_ROLE), Role::translateStringToRole);
+            predicate.addFieldToTest(argMultimap.getAllValues(PREFIX_DASH_ROLE),
+                    Role::translateStringToRoleWithNoRole);
             predicate.addFieldToTest(argMultimap.getValue(PREFIX_DASH_SALARY), Salary::new);
             predicate.addFieldToTest(argMultimap.getValue(PREFIX_DASH_STATUS), Status::translateStringToStatus);
         } catch (IllegalArgumentException iae) {
