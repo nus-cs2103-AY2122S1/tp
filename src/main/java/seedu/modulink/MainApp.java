@@ -25,6 +25,7 @@ import seedu.modulink.model.UserPrefs;
 import seedu.modulink.model.person.Person;
 import seedu.modulink.model.person.StudentId;
 import seedu.modulink.model.person.exceptions.DuplicatePersonException;
+import seedu.modulink.model.person.exceptions.UserProfileIsFavouriteException;
 import seedu.modulink.model.util.SampleDataUtil;
 import seedu.modulink.storage.AddressBookStorage;
 import seedu.modulink.storage.JsonAddressBookStorage;
@@ -92,6 +93,9 @@ public class MainApp extends Application {
             int noOfPeople = allPersons.size();
             for (int i = 0; i < noOfPeople; i++) {
                 StudentId currentId = allPersons.get(i).getStudentId();
+                if (allPersons.get(i).getIsMyProfile() && allPersons.get(i).getIsFavourite()) {
+                    throw new UserProfileIsFavouriteException();
+                }
                 for (int j = i + 1; j < noOfPeople; j++) {
                     StudentId comparingId = allPersons.get(j).getStudentId();
                     if (currentId.equals(comparingId)) {
@@ -99,7 +103,11 @@ public class MainApp extends Application {
                     }
                 }
             }
-        } catch (DuplicatePersonException err) {
+        } catch (UserProfileIsFavouriteException err) {
+            logger.warning("Data file has a profile that is both the User Profile and a favourited profile.");
+            initialData = new AddressBook();
+        }
+        catch (DuplicatePersonException err) {
             logger.warning("Data file consists of duplicate StudentIds. Will be starting with an empty AddressBook");
             initialData = new AddressBook();
         } catch (DataConversionException e) {
