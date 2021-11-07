@@ -61,10 +61,10 @@ Given below are my contributions to the project.
 * **Documentation**:
   * User Guide:
     * Added all of the diagrams illustrating the features. Some examples are shown below:
-    ![Tagging a Contact](../images/UG-14.png)
-    ![Completing a Task](../images/UG-12.png)
+    ![Tagging a Contact](../images/UG-12.png)
+    ![Completing a Task](../images/UG-10.png)
     * Contributed to the write-ups of the Find commands for contacts and tasks. Excerpt shown below:
-      ![Finding a Task](../images/UG-08.png)
+      ![Finding a Task](../images/UG-07.png)
       #### Finding task through task description: [find]
 
        :orange_book: If you want to find a task through its description, the _Find Command_ can find all tasks with descriptions that match the
