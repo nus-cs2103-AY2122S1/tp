@@ -51,11 +51,16 @@ Given below are my contributions to the project.
 * Documentation:
 
     * User Guide:
-        * Added documentation for the features editguest, editvendor and checkout
+        * Added documentation for the features editguest, editvendor and checkout:
+          [#181](https://github.com/AY2122S1-CS2103T-W12-3/tp/pull/181),
+          [#122](https://github.com/AY2122S1-CS2103T-W12-3/tp/pull/122),
 
     * Developer Guide:
-        * Added implementation details of the editguest, editvendor and checkout feature
-    
+        * Added implementation details of the editguest, editvendor and checkout feature:
+          [#298](https://github.com/AY2122S1-CS2103T-W12-3/tp/pull/298),
+          [#193](https://github.com/AY2122S1-CS2103T-W12-3/tp/pull/193),
+          [#32](https://github.com/AY2122S1-CS2103T-W12-3/tp/pull/32/files)
+          
 * Community:
 
     * PRs reviewed (with non-trivial review comments): 
