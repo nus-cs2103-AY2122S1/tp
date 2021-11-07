@@ -673,7 +673,7 @@ Priorities: High, Low
 
 **MSS**
 
-1. User keys in the customer’s details.
+1. User enters add customer command and keys in the customer’s details.
 
 2. Customer is added to RHRH.
 
@@ -683,15 +683,27 @@ Priorities: High, Low
 
 **Extensions**
 
-* 1a. User keys in incorrect information or format.
-    * 1a1. System displays an error, and the recommended format for adding a customer.
-      
-      Use case ends.
+* 1a. System detects invalid command format
+    * 1a1. System displays an error, showing unknown command.
+    * 1a2. User enters command again
 
-* 2a. Customer already exists in RHRH.
+Steps 1a1 - 1a2 are repeated until the command is correctly formatted. <br>
+Use case resumes from step 2.
+
+* 1b. System detects invalid command arguments
+  * 1b1. System displays error corresponding to the invalid argument and provides an example on the accepted format 
+    and arguments
+  * 1b2. User enters command arguments again
+
+Steps 1b1 - 1b2 are repeated until all command arguments are valid. <br>
+Use case resumes from step 2.
+
+* 2a. Customer to add already exists in RHRH.
     * 2a1. System displays an error, and that the customer already exists in RHRH.
+    * 2a2. User enters customer details again
 
-      Use case ends.
+Steps 2a1 - 2a2 are repeated until the customer to be added is unique. <br>
+Use case resumes from step 3.
 
 **Use case (UC02): Add an Employee**
 
@@ -699,7 +711,7 @@ Priorities: High, Low
 
 **MSS**
 
-1. User keys in the employee’s details.
+1. User enters add employee command and keys in the employee’s details.
 
 2. Employee is added to RHRH.
 
@@ -709,17 +721,27 @@ Priorities: High, Low
 
 **Extensions**
 
-* 1a. User keys in incorrect information or format.
-    * 1a1. System displays an error, and the recommended format for adding an employee.
+* 1a. System detects invalid command format
+    * 1a1. System displays an error, showing unknown command.
+    * 1a2. User enters command again
 
-      Use case ends.
+Steps 1a1 - 1a2 are repeated until the command is correctly formatted. <br>
+Use case resumes from step 2.
 
-* 2a. Employee already exists in RHRH.
+* 1b. System detects invalid command arguments
+    * 1b1. System displays error corresponding to the invalid argument and provides an example on the accepted format
+      and arguments
+    * 1b2. User enters command arguments again
+
+Steps 1b1 - 1b2 are repeated until all command arguments are valid. <br>
+Use case resumes from step 2.
+
+* 2a. Employee to add already exists in RHRH.
     * 2a1. System displays an error, and that the employee already exists in RHRH.
+    * 2a2. User enters employee details again
 
-      Use case ends.
-
-
+Steps 2a1 - 2a2 are repeated until the employee to be added is unique. <br>
+Use case resumes from step 3.
 
 **Use case (UC03): Add a Supplier**
 
@@ -727,7 +749,7 @@ Priorities: High, Low
 
 **MSS**
 
-1. User keys in the supplier’s details.
+1. User enters add supplier command and keys in the supplier’s details.
 
 2. Supplier is added to RHRH.
 
@@ -737,21 +759,33 @@ Priorities: High, Low
 
 **Extensions**
 
-* 1a. User keys in incorrect information or format.
-    * 1a1. System displays an error, and the recommended format for adding a supplier.
+* 1a. System detects invalid command format
+    * 1a1. System displays an error, showing unknown command.
+    * 1a2. User enters command again
 
-      Use case ends.
+Steps 1a1 - 1a2 are repeated until the command is correctly formatted. <br>
+Use case resumes from step 2.
 
-* 2a. Supplier already exists in RHRH.
+* 1b. System detects invalid command arguments
+    * 1b1. System displays error corresponding to the invalid argument and provides an example on the accepted format
+      and arguments
+    * 1b2. User enters command arguments again
+
+Steps 1b1 - 1b2 are repeated until all command arguments are valid. <br>
+Use case resumes from step 2.
+
+* 2a. Supplier to add already exists in RHRH.
     * 2a1. System displays an error, and that the supplier already exists in RHRH.
+    * 2a2. User enters supplier details again
 
-      Use case ends.
+Steps 2a1 - 2a2 are repeated until the supplier to be added is unique. <br>
+Use case resumes from step 3.
 
 **Use case (UC04): Add a reservation**
 
 **MSS**
 
-1. User requests to add a new reservation and keys in reservations details.
+1. User enters add reservation command and keys in reservations details.
 2. Reservation with the given details is added.
 
    Use case ends
@@ -759,27 +793,32 @@ Priorities: High, Low
 **Extensions**
 
 * 1a. Tables are not set yet
-    * 1a1. RHRH requests user to set the tables.
+    * 1a1. System requests user to set the tables.
     * 1a2. User <u>sets the tables (UC <span style="color:red">{{FILL IN LATER}}</span>)</u>
 
     Use case resumes from step 1.
 
+* 1b. System detects invalid command format
+    * 1b1. System displays an error, showing unknown command.
+    * 1b2. User enters command again
 
-* 1b. RHRH detects missing details/incorrect format in the command entered.
-    * 1b1. RHRH requests user to enter the command again with correct and sufficient details.
-    * 1b2. User enters command again.
+Steps 1b1 - 1b2 are repeated until the command is correctly formatted. <br>
+Use case resumes from step 2.
 
-  Steps 1b1 - 1b2 are repeated until the command is correctly formatted.
+* 1c. System detects invalid command arguments
+    * 1c1. System displays error corresponding to the invalid argument and provides an example on the accepted format
+      and arguments
+    * 1c2. User enters command arguments again
 
-    Use case resumes from step 2.
+Steps 1c1 - 1c2 are repeated until the command arguments are valid. <br>
+Use case resumes from step 2.
 
-* 1c. RHRH is unable to find a reservation slot based on the date time entered.
-    * 1c1. RHRH informs the user that the reservation slot is taken.
-    * 1c2. User enters the command again with another date time.
+* 1d. System is unable to find a reservation slot based on the date time entered.
+    * 1d1. System informs the user that the reservation slot is taken.
+    * 1d2. User enters the command again with another date time.
 
-  Steps 1c1 - 1c2 are repeated until there is a reservation slot available.
-
-    Use case resumes from step 3.
+Steps 1d1 - 1d2 are repeated until there is a reservation slot available. <br>
+Use case resumes from step 2.
 
 **Use case (UC05): Edit a Customer**
 
@@ -787,21 +826,41 @@ Priorities: High, Low
 
 **MSS**
 
-1. User enters the command string to edit a customer's field.
-2. System confirms that the customer has been added and shows the current fields of the customer.
+1. User enters the command to edit a customer and details of the customer to be edited.
+2. System confirms that customer has been edited and show the edited customer.
 
    Use case ends
 
 **Extensions**
 
-* 1a. User keys in invalid format
-    * 1a1. System displays an error, and the recommended format for editing a customer.
+* 1a. System detects invalid command format
+    * 1a1. System displays an error, showing unknown command.
+    * 1a2. User enters command again
 
-      Use case ends
-* 1b. User keys in command without prefix
-    * 1b1. System displays an error that says that at least 1 field must be provided.
+Steps 1a1 - 1a2 are repeated until the command is correctly formatted. <br>
+Use case resumes from step 2.
 
-      Use case ends
+* 1b. System detects invalid command arguments
+    * 1b1. System displays error corresponding to the invalid argument and provides an example on the accepted format
+      and arguments
+    * 1b2. User enters command arguments again
+
+Steps 1b1 - 1b2 are repeated until all command arguments are valid. <br>
+Use case resumes from step 2.
+
+* 1c. System detects that customer to edit does not exist in RHRH.
+    * 1c1. System displays an error that no such customer index exist in RHRH.
+    * 1c2. User enters customer index again
+
+Steps 1c1 - 1c2 are repeated until the employee to be added is unique. <br>
+Use case resumes from step 2.
+
+* 1d. System detects that editing of current customer would cause duplicate customers in RHRH.
+    * 1d1. System displays an error that customer already exists in RHRH.
+    * 1d2. User enters customer index again
+
+Steps 1d1 - 1d2 are repeated until the employee to be added is unique. <br>
+Use case resumes from step 2.
 
 **Use case (UC06): Edit an Employee**
 
@@ -809,21 +868,41 @@ Priorities: High, Low
 
 **MSS**
 
-1. User enters the command string to edit a employee's field.
-2. System confirms that the employee has been edited and shows the current fields of the employee.
+1. User enters the command to edit an employee and details of the employee to be edited.
+2. System confirms that employee has been edited and shows the edited employee.
 
    Use case ends
 
 **Extensions**
 
-* 1a. User keys in invalid format
-    * 1a1. System displays an error, and the recommended format for editing an employee.
+* 1a. System detects invalid command format
+    * 1a1. System displays an error, showing unknown command.
+    * 1a2. User enters command again
 
-      Use case ends
-* 1b. User keys in command without prefix
-    * 1b1. System displays an error that says that at least 1 field must be provided.
+Steps 1a1 - 1a2 are repeated until the command is correctly formatted. <br>
+Use case resumes from step 2.
 
-      Use case ends
+* 1b. System detects invalid command arguments
+    * 1b1. System displays error corresponding to the invalid argument and provides an example on the accepted format
+      and arguments
+    * 1b2. User enters command arguments again
+
+Steps 1b1 - 1b2 are repeated until all command arguments are valid. <br>
+Use case resumes from step 2.
+
+* 1c. System detects that employee to edit does not exist in RHRH.
+    * 1c1. System displays an error that no such employee index exist in RHRH.
+    * 1c2. User enters customer index again
+
+Steps 1c1 - 1c2 are repeated until the employee to be added is unique. <br>
+Use case resumes from step 2.
+
+* 1d. System detects that editing of current employee would cause duplicate employees in RHRH.
+    * 1d1. System displays an error that employee already exists in RHRH.
+    * 1d2. User enters customer index again
+
+Steps 1d1 - 1d2 are repeated until the employee to be added is unique. <br>
+Use case resumes from step 2
 
 **Use case (UC07): Edit a Supplier**
 
@@ -831,28 +910,48 @@ Priorities: High, Low
 
 **MSS**
 
-1. User enters the command string to edit a supplier's field.
-2. System confirms that the supplier has been edited and shows the current fields of the supplier.
+1. User enters the command to edit a supplier and details of the supplier to be edited.
+2. System confirms that supplier has been edited and shows the edited supplier.
 
    Use case ends
 
 **Extensions**
 
-* 1a. User keys in invalid format
-    * 1a1. System displays an error, and the recommended format for editing a supplier.
+* 1a. System detects invalid command format
+    * 1a1. System displays an error, showing unknown command.
+    * 1a2. User enters command again
 
-      Use case ends
-* 1b. User keys in command without prefix
-    * 1b1. System displays an error that says that at least 1 field must be provided.
+Steps 1a1 - 1a2 are repeated until the command is correctly formatted. <br>
+Use case resumes from step 2.
 
-      Use case ends
+* 1b. System detects invalid command arguments
+    * 1b1. System displays error corresponding to the invalid argument and provides an example on the accepted format
+      and arguments
+    * 1b2. User enters command arguments again
+
+Steps 1b1 - 1b2 are repeated until all command arguments are valid. <br>
+Use case resumes from step 2.
+
+* 1c. System detects that supplier to edit does not exist in RHRH.
+    * 1c1. System displays an error that no such supplier index exist in RHRH.
+    * 1c2. User enters customer index again
+
+Steps 1c1 - 1c2 are repeated until the employee to be added is unique. <br>
+Use case resumes from step 2.
+
+* 1d. System detects that editing of current supplier would cause duplicate suppliers in RHRH.
+    * 1d1. System displays an error that supplier already exists in RHRH.
+    * 1d2. User enters customer index again
+
+Steps 1d1 - 1d2 are repeated until the employee to be added is unique. <br>
+Use case resumes from step 2
 
 **Use case (UC08): Edit a reservation**
 
 **MSS**
 
 1. User enters the command to edit reservation fields.
-2. System confirms that the supplier has been edited and shows the current fields of the supplier.
+2. System confirms that the reservation has been edited and shows the edited reservation.
 
    Use case ends
 
@@ -860,15 +959,41 @@ Priorities: High, Low
 
 * 1a. User keys in invalid format
     * 1a1. System displays an error, and the recommended format for editing a reservation.
+    
+    Use case ends
 
-
-      Use case ends
 * 1b. User keys in command without prefix
     * 1b1. System displays an error that says that at least 1 field must be provided.
 
       Use case ends
 
-**Use case (UC09): Search for reservation availability**
+**Use case (UC09): Delete a Customer**
+
+**MSS**
+
+1. User enters the command to delete a customer
+2. System confirms that the customer has been deleted
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User keys in invalid command format
+  * 1a1. System displays an error, and the recommended format for editing a reservation.
+
+Use case ends.
+
+* 1b. User keys in invalid command arguments
+
+**Use case (UC10): Delete an Employee**
+
+**MSS**
+
+**Use case (UC11): Delete a Supplier**
+
+**MSS**
+
+**Use case (UC012): Search for reservation availability**
 
 **MSS**
 
@@ -906,6 +1031,12 @@ Priorities: High, Low
     Steps 1d1 - 1d2 are repeated until the command is correctly formatted.
 
     Use case resumes from step 2.
+
+**Use case (UC13): Sort Customer in RHRH*
+
+**Use case (UC14): Sort Employees in RHRH**
+
+**Use case (UC15): Sort SupplierS in RHRH**
 
 *{More to be added}*
 
