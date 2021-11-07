@@ -96,6 +96,7 @@ class ModuleTest {
         Module differentTask = new ModuleBuilder()
                 .withName(MODULE_NAME_0)
                 .withStudents(TypicalStudents.getTypicalStudents())
+                .withTasks(taskList)
                 .build();
         Task task5 = new TaskBuilder()
                 .withModule("CS2103")
@@ -109,6 +110,7 @@ class ModuleTest {
         Module differentStudent = new ModuleBuilder()
                 .withName(MODULE_NAME_0)
                 .withStudents(TypicalStudents.getTypicalStudents())
+                .withTasks(taskList)
                 .build();
         differentStudent.addStudent(CHARLIE);
         assertTrue(MODULE_1.equals(differentStudent));
