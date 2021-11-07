@@ -20,7 +20,7 @@ public class DeleteCommand extends Command {
 
     public static final String HELP_MESSAGE = "### Deleting a student: `delete`\n"
             + "\n"
-            + "Tutors will be able to delete their tutees.\n"
+            + "Avengers can delete a student from Academy Directory.\n"
             + "\n"
             + "Format: `delete INDEX`\n"
             + "\n"

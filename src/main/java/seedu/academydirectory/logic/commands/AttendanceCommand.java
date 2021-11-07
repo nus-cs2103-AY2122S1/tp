@@ -18,26 +18,23 @@ public class AttendanceCommand extends Command {
 
     public static final String COMMAND_WORD = "attendance";
 
-    public static final String HELP_MESSAGE = "### Editing a student's Studio attendance: `attendance`\n"
-            + "Avengers will be able to edit the attendance status of their students.\n"
-            + "\n"
-            + "Format: `attendance s/STUDIO_GROUP k/KEYWORD a/ATTENDANCE_STATUS [i/INDEX]`\n"
-            + "\n"
-            + "* Edits the attendance of a student or multiple students who have the matching "
-            + "`KEYWORD` in their names and in Studio group as defined by `STUDIO_GROUP`.\n"
-            + "* Only full words will be matched e.g. `Han` will not match `Hans`.\n"
-            + "* The search is case-insensitive. e.g `hans` will match `Hans`.\n"
-            + "* If `INDEX` is not supplied, the command will edit the attendance of the student is in the "
-            + "last created Studio session. Otherwise, it will execute the edit in the specified Studio "
-            + "session if `INDEX` is valid.\n"
-            + "* The `ATTENDANCE_STATUS` field can only be a 1 or 0 to indicate whether the student "
-            + "attended the session or not.\n"
-            + "* Existing values will be updated to the input values.\n"
-            + "\n"
-            + "Examples:\n"
-            + "\n"
-            + "* `attendance s/1 k/Aaron a/0`\n"
-            + "* `attendance s/33 k/Chan a/1 i/7`";
+    public static final String HELP_MESSAGE = "#### Editing a student's Studio attendance: `attendance`\n"
+            + "Edits the attendance status of their students.\n\n"
+            + "Format: `attendance INDEX ses/STUDIO_SESSION att/ATTENDANCE_STATUS`\n\n"
+            + "* Edits the attendance of a student or multiple students based on their `INDEX`.\n"
+            + "* Modifies the student(s) at the specified `INDEX`. The index refers to the index number shown in the "
+            + "displayed student list. The index **must be a positive integer** 1, 2, 3, …\u200B\n"
+            + "* Multiple `INDEX` can be parsed in at once as long as they are all valid.\n"
+            + "* The `STUDIO_SESSION` field is a positive integer from 1 to 12 inclusive which"
+            +  " refers to the Studio Session to be modified.\n"
+            + "* The `ATTENDANCE_STATUS` field can only be a 1 or 0 to indicate whether the student attended "
+            + "the session or not where 1 marks a student as having attended while 0 marks a student as unattended.\n"
+            + "* Existing values will be updated to the input values.\n\nExamples:\n\n"
+            + "* `attendance 1 ses/1 att/1` Marks the student with index number `1` as present for studio session 1\n"
+            + "* `attendance 1, 2, 3 ses/12 att/0` Marks students with "
+            + "index numbers `1`, `2`, and `3` as absent for studio session 12\n"
+            +  "* `attendance 1, 2, 3 ses/7 att/1` Marks students with index numbers "
+            + "`1`, `2`, and `3` as present for studio session 7\n";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Edits the attendance status of the student(s)\n"

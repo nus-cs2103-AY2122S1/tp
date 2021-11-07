@@ -30,7 +30,8 @@ public class FilterCommand extends Command {
             + "\n"
             + "Examples:\n"
             + "* `filter John` returns `john` and `John Doe`\n"
-            + "* `filter alex mission` returns `Alex Yeoh` and students with `mission` tag<br>";
+            + "* `filter alex mission` returns `Alex Yeoh` and students with `mission` tag<br>"
+            + "* `filter stream` returns all students who are tagged with `stream`";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all students by names or tags.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"

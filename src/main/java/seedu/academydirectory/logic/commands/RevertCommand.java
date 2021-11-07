@@ -22,7 +22,11 @@ public class RevertCommand extends Command {
             + "\n"
             + "Reverts storage to an old history in the Academy Directory.\n"
             + "\n"
-            + "Format: `revert KEYWORD`";
+            + "Format: `revert KEYWORD`"
+            + "- `HASH` refers to the commit hash of the commit to be reverted to\n"
+            + "- `HASH` can be obtained using the `history` command\n"
+            + "- Error message will be shown if attempting to revert to the current commit. "
+            + "This is because reverting to current commit is unlikely to be intentional. ";
 
     public static final String MESSAGE_SUCCESS = "Successfully reverted Academy"
             + " Directory as requested!";

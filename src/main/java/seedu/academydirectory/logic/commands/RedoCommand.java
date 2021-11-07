@@ -11,7 +11,8 @@ public class RedoCommand extends Command {
 
     public static final String HELP_MESSAGE = "### Redo changes : `redo`\n"
             + "\n"
-            + "Redo changes done to Academy Directory. Use the history command to preview what redo will do\n"
+            + "Redo changes done to Academy Directory. Use the history command to preview what redo will do. Note that"
+            + "`redo` only revert changes made, and AD will display error message if there is no change to be redone\n"
             + "\n"
             + "Format: `redo`";
 

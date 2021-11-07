@@ -28,7 +28,7 @@ public class ViewCommand extends Command {
             + "Examples:\n"
             + "* `view 1`\n\n"
             + "**Include an interactive GUI version where Avengers can click"
-            + " on the list to view student information as well.**";
+            + " on the student card to view student information as well.**";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": View full information about the student.\n"
             + "Parameters: INDEX\n"
