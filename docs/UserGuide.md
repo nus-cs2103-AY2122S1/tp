@@ -232,14 +232,14 @@ Executing any of the commands in this section will bring you to the students int
 
 #### Student parameters
 
-<table id="student-param-table">
+<table id="student-param-table" style="width: 100%">
     <thead>
         <tr>
-            <th style="text-align:center; padding: 10px 0 10px 0">Category</th>
-            <th style="text-align:center">Field</th>
-            <th style="text-align:center">Prefix</th>
-            <th style="text-align:center">Constraints</th>
-            <th style="text-align:center">Examples</th>
+            <th style="text-align:center; padding: 10px 0 10px 0; width: 14%">Category</th>
+            <th style="text-align:center; width: 18%">Field</th>
+            <th style="text-align:center; width: 15%">Prefix</th>
+            <th style="text-align:center; width: 30%">Constraints</th>
+            <th style="text-align:center; width: 23%">Examples</th>
         </tr>
     </thead>
     <tbody>
@@ -487,8 +487,8 @@ Example:
 <table id="find-param-table">
     <thead>
         <tr>
-            <th style="text-align:center">Fields</th>
-            <th style="text-align:center">Find behaviour</th>
+            <th style="text-align:center; width: 30%">Fields</th>
+            <th style="text-align:center; width: 60%">Find behaviour</th>
         </tr>
     </thead>
     <tbody>
@@ -612,11 +612,11 @@ A lesson can be identified by the index number shown in the lesson list of the s
 <table id="lesson-param-table">
     <thead>
         <tr>
-            <th style="text-align:center; padding: 10px">Category</th>
-            <th style="text-align:center">Field</th>
-            <th style="text-align:center">Prefix</th>
-            <th style="text-align:center">Constraints</th>
-            <th style="text-align:center">Examples</th>
+            <th style="text-align:center; padding: 10px; width: 14%">Category</th>
+            <th style="text-align:center; width: 18%">Field</th>
+            <th style="text-align:center; width: 17%">Prefix</th>
+            <th style="text-align:center; width: 30%">Constraints</th>
+            <th style="text-align:center; width: 20%">Examples</th>
         </tr>
     </thead>
     <tbody>
