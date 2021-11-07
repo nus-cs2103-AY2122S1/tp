@@ -25,7 +25,6 @@ import seedu.address.model.client.NextMeeting;
 import seedu.address.model.client.OptionalNonStringBasedField;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.RiskAppetite;
-import seedu.address.model.client.SortDirection;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -143,12 +142,7 @@ class JsonAdaptedClient {
         NextMeeting tempNextMeeting = NextMeeting.NULL_MEETING;
         if (parsedMeeting.get() instanceof LastMet) {
             LastMet newLastMet = (LastMet) parsedMeeting.get();
-            if (tempLastMet.isEmpty()) {
-                tempLastMet = newLastMet;
-            }
-            if (newLastMet.compareWithDirection(tempLastMet, SortDirection.of("asc")) >= 0) {
-                tempLastMet = newLastMet;
-            }
+            tempLastMet = tempLastMet.getLaterLastMet(newLastMet);
         } else if (parsedMeeting.get() instanceof NextMeeting) {
             tempNextMeeting = (NextMeeting) parsedMeeting.get();
             tempNextMeeting.setWithWho(modelName);
