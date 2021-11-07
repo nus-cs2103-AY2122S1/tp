@@ -7,6 +7,7 @@ while () is ([has remaining student(s) to add])
 	  :Add student\nto database;
 	else ([student already exists])
 	  :Display an\nerror message;
+	  stop
 	endif
 endwhile ([else])
 stop
