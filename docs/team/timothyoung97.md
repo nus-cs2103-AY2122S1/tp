@@ -30,7 +30,7 @@ With the primary programming language written in Java, the team's contribution t
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/#breakdown=true&search=timothyoung97)
 
 * **Project management**:
-  * Managed releases `v1.3` - `v1.4` (3 releases) on GitHub
+  * Helped releases `v1.3` - `v1.4` (3 releases) on GitHub
 
 * **Enhancements to existing features**:
   * Updated the GUI color scheme (Pull requests [\#200](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/200), [\#189](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/189), [\#73](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/73), [\#97](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/97))
