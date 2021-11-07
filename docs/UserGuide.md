@@ -154,6 +154,8 @@ An example of a command in TAB:
 * Items with `…` after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
+<div style="page-break-after: always;"></div>
+
 #### Notes about parameters
 
 * Parameters can be in any order.<br>
@@ -178,6 +180,7 @@ An example of a command in TAB:
 [back to table of contents](#toc)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### Getting Help 
 This section tells you what to do if you require help while using TAB.
@@ -204,6 +207,7 @@ Format: `help`
 [back to table of contents](#toc)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### Managing Students
 This section guides you on how to use the commands for managing students in TAB.
@@ -234,11 +238,11 @@ Executing any of the commands in this section will bring you to the students int
 <table id="student-param-table">
     <thead>
         <tr>
-            <th style="text-align:center; padding: 10px 0 10px 0; width: 15%">Category</th>
-            <th style="text-align:center; width: 20%">Field</th>
-            <th style="text-align:center; width: 15%">Prefix</th>
-            <th style="text-align:center; width: 25%">Constraints</th>
-            <th style="text-align:center; width: 25%">Examples</th>
+            <th style="text-align:center; padding: 10px 0 10px 0">Category</th>
+            <th style="text-align:center">Field</th>
+            <th style="text-align:center">Prefix</th>
+            <th style="text-align:center">Constraints</th>
+            <th style="text-align:center">Examples</th>
         </tr>
     </thead>
     <tbody>
@@ -369,8 +373,6 @@ Executing any of the commands in this section will bring you to the students int
     </tbody>
 </table>
 
-<div style="page-break-after: always;"></div>
-
 <div markdown="block" class="alert alert-info" id="email-format">**:information_source: Email Format:**<br>
 
 Emails should be of the format **local-part@domain** and adhere to the following constraints:
@@ -403,8 +405,6 @@ A student can have any number of tags (including 0).
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pp/92345678 pe/jackdoe@example.com sch/John's School stream/John stream lvl/J1`
 * `add n/Betsy Crowe t/cousin a/Newgate p/91234567 r/hasnt pay tuition fee for Aug t/retainee`
-
-<div style="page-break-after: always;"></div>
 
 #### Editing a student: `edit`
 
@@ -459,6 +459,7 @@ Format: `list`
 [back to table of contents](#toc)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### Finding Students
 This section guides you on how to find or filter students of your choice in TAB.
@@ -474,8 +475,6 @@ Format: `find [cond/{all | any | none}] [t/TAG_KEYWORD]…​ [n/NAME_KEYWORDS] 
 
 * You must specify at least one field to search for, and provide at least one keyword.<br>
   e.g. `find cond/any` or `find n/` are invalid commands.
-
-<div style="page-break-after: always;"></div>
 
 ##### Search by tags
 * You can search by multiple tags. e.g. `t/paid t/new`.
@@ -562,6 +561,8 @@ Example:
 Example:
 * `find date/12 Oct 2021 time/1200-1400 subject/Math` will match a student with lesson on `12 OCT 2021`, at `1130-1230`, with the subject `Mathematics`.
 
+<div style="page-break-after: always;"></div>
+
 ##### Search with match condition
 
 * You can specify an optional match condition which indicates the type of matching to be applied. 
@@ -572,8 +573,6 @@ Examples:
   * `find n/John t/zoom cond/all` returns students with both the name `John` and the tag `zoom`.
   * `find n/John t/zoom cond/any` returns students with only the name `John`, or only the tag `zoom`, or both.
   * `find n/John t/zoom cond/none` returns students without the name `John` and the tag `zoom`.
-
-<div style="page-break-after: always;"></div>
 
 **Example of finding by different types of fields**
 
@@ -588,6 +587,7 @@ To find students with the tag `new` or with lessons between `1100-1300`, you may
 [back to table of contents](#toc)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### Managing Lessons
 
@@ -628,11 +628,11 @@ A lesson can be identified by the index number shown in the lesson list of the s
 <table id="lesson-param-table">
     <thead>
         <tr>
-            <th style="text-align:center; padding: 10px; width: 15.5%">Category</th>
-            <th style="text-align:center; width: 20%">Field</th>
-            <th style="text-align:center; width: 20.5%">Prefix</th>
-            <th style="text-align:center; width: 27%">Constraints</th>
-            <th style="text-align:center; width: 27%">Examples</th>
+            <th style="text-align:center; padding: 10px">Category</th>
+            <th style="text-align:center">Field</th>
+            <th style="text-align:center">Prefix</th>
+            <th style="text-align:center">Constraints</th>
+            <th style="text-align:center">Examples</th>
         </tr>
     </thead>
     <tbody>
@@ -712,8 +712,6 @@ A lesson can be identified by the index number shown in the lesson list of the s
 
 * Additional fields of a lesson aside from those stated in the table are used for recording cancelled dates of a lesson. More details can be found in [Editing a lesson](#editing-a-lesson-ledit).<br>
 
-<div style="page-break-after: always;"></div>
-
 <div markdown="block" class="alert alert-info" id="monetary-fields">**:information_source: Monetary Fields:**<br>
 
 For all monetary fields (lesson rates and outstanding fees), we follow the [Singapore convention](https://www.dfa.cornell.edu/treasurer/cash-management/processinginternational/intl-currency) of using a decimal point '.' to separate dollars and cents, The values of these fields should only contain numbers, with at most one decimal point, and two decimal places and should not start or end with a decimal point.
@@ -730,6 +728,7 @@ Additionally, we will allow you to toggle these checks on and off, just in case 
 Do look forward to these features!
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 #### Adding a lesson: `ladd`
 
@@ -753,6 +752,8 @@ Examples:
 
 * `find n/john` followed by `ladd 1 date/30 MAR 2021 time/1630-1745 subject/Physics hw/Worksheet 1 rates/25.00`
   adds the makeup lesson to the 1st student in the results of the `find` command.
+
+<div style="page-break-after: always;"></div>
 
 #### Editing a lesson: `ledit`
 
@@ -846,8 +847,6 @@ Example: Suppose the date today is 1 Nov 2021 and current time is 1500h,
   - dates before 1 Nov 2021 (has passed),
   - 1 Nov 2021 with end time before 1500h (has passed),
   - 3 Nov 2021 with start time after 1500h (beyond 48 hours).
-
-<div style="page-break-after: always;"></div>
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Note:**<br>
@@ -1113,7 +1112,8 @@ Example:
    2. `undo` undoes the modification. Name of first student returns to original name before `edit` command.
    3. `ledit 2 1 date/3 Nov 2021` modifies the start date of the first lesson of the second student. This command **modifies data**.
    4. `redo` is invalid. TAB shows that there are no commands to be redone.
-   
+    
+<div style="page-break-after: always;"></div>
 
 #### Exiting the program: `exit`
 
@@ -1126,8 +1126,6 @@ Format: `exit`
 [back to table of contents](#toc)
 
 --------------------------------------------------------------------------------------------------------------------
-
-<div style="page-break-after: always;"></div>
 
 ### Managing Data
 
