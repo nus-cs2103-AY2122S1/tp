@@ -17,11 +17,6 @@ public class Messages {
     public static final String MESSAGE_INVALID_LESSON_DISPLAYED_INDEX = "The lesson index provided is invalid.";
     public static final String MESSAGE_INVALID_EDIT_COMMAND = "Invalid edit command format! "
             + "Must start with 'edit -s' or 'edit -l'.";
-    public static final String MESSAGE_INVALID_STUDENT_ALREADY_ATTEND_LESSON = "The student provided"
-            + " is already attending the lesson provided.";
-    public static final String MESSAGE_INVALID_STUDENT_NOT_IN_LESSON = "The student provided"
-            + " is not attending the lesson provided.";
-    public static final String MESSAGE_INVALID_LESSON_FULL = "The lesson provided is full.";
     public static final String MESSAGE_INVALID_JSON_CAPACITY = "One or more lessons is over capacity.";
     public static final String MESSAGE_INVALID_VIEW_COMMAND = "Invalid view command format! "
             + "Must start with 'view -s' or 'view -l'.";
@@ -32,4 +27,13 @@ public class Messages {
             + " entries to delete from.";
     public static final String MESSAGE_CAPACITY_LESS_THAN_STUDENTS = "The given capacity is lower "
             + "than the number of students currently enrolled in the lesson!";
+    public static final String MESSAGE_JSON_INTEGRITY_LESSON_OVER_CAPACITY = "The save data is corrupted: One or more "
+            + "lessons has too many students. The student data will be discarded.";
+    public static final String MESSAGE_JSON_INTEGRITY_LESSON_ERROR = "The lesson save data is corrupted and will be "
+            + "discarded.";
+    public static final String MESSAGE_JSON_INTEGRITY_STUDENT_ERROR = "The student save data is corrupted and will be "
+            + "discarded.";
+    public static final String MESSAGE_NO_STUDENT_DATA = "No student data found. Starting with sample students.";
+    public static final String MESSAGE_NO_LESSON_DATA = "No lesson data found. Starting with sample lessons.";
+    public static final String WELCOME_MESSAGE = "Welcome to TutorAid! Type help if you need a quick start guide.";
 }

@@ -97,4 +97,10 @@ public class UiManager implements Ui {
             mainWindow.fillStudentCard(detailLevel);
         }
     }
+
+    public static void printMessage(String message) {
+        if (mainWindow != null) {
+            mainWindow.printMessage(message);
+        }
+    }
 }

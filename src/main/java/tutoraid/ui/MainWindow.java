@@ -4,6 +4,10 @@ import static tutoraid.ui.DetailLevel.HIGH;
 import static tutoraid.ui.DetailLevel.LOW;
 import static tutoraid.ui.DetailLevel.MED;
 
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -16,6 +20,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import tutoraid.commons.core.GuiSettings;
 import tutoraid.commons.core.LogsCenter;
+import tutoraid.commons.core.Messages;
 import tutoraid.logic.Logic;
 import tutoraid.logic.commands.CommandResult;
 import tutoraid.logic.commands.exceptions.CommandException;
@@ -36,6 +41,7 @@ public class MainWindow extends UiPart<Stage> {
 
 
     private final Logger logger = LogsCenter.getLogger(getClass());
+    private final Queue<String> messageQueue = new LinkedList<>();
 
     private Stage primaryStage;
     private Logic logic;
@@ -159,12 +165,23 @@ public class MainWindow extends UiPart<Stage> {
         fillLessonCard(MED);
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+        resultDisplay.setFeedbackToUser(getMessageFromQueue());
+
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getStudentBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
+
+    private String getMessageFromQueue() {
+        StringBuilder output = new StringBuilder();
+        while (!messageQueue.isEmpty()) {
+            output.append(messageQueue.poll());
+            output.append("\n");
+        }
+        return output.toString();
     }
 
     /**
@@ -213,6 +230,14 @@ public class MainWindow extends UiPart<Stage> {
 
     public LessonListPanel getLessonListPanel() {
         return lessonListPanel;
+    }
+
+    public void printMessage(String message) {
+        if (resultDisplay != null) {
+            resultDisplay.setFeedbackToUser(message);
+        } else {
+            messageQueue.add(message);
+        }
     }
 
     /**

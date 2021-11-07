@@ -29,8 +29,7 @@ public class SampleDataUtil {
             // All details available
             new Student(new StudentName("Alex Yeoh"), new Phone("87438807"),
                     new ParentName("Mr Yeoh"), new Phone("93726483"),
-                    new ProgressList(),
-                    new Lessons(new ArrayList<>(List.of("Maths 1")), lessonBook)),
+                    new ProgressList(), new Lessons()),
             new Student(new StudentName("Bernice Yu"), new Phone("99272758"),
                     new ParentName("Mrs Yu"), new Phone("83548274"),
                     new ProgressList(), new Lessons()),

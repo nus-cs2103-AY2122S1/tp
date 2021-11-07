@@ -9,6 +9,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import tutoraid.commons.core.Config;
 import tutoraid.commons.core.LogsCenter;
+import tutoraid.commons.core.Messages;
 import tutoraid.commons.core.Version;
 import tutoraid.commons.exceptions.DataConversionException;
 import tutoraid.commons.util.ConfigUtil;
@@ -50,6 +51,8 @@ public class MainApp extends Application {
     protected Storage storage;
     protected Model model;
     protected Config config;
+
+    private String message = String.format("%s\n", Messages.WELCOME_MESSAGE);
 
     @Override
     public void init() throws Exception {
@@ -101,28 +104,34 @@ public class MainApp extends Application {
             lessonBookOptional = storage.readLessonBook();
             if (lessonBookOptional.isEmpty()) {
                 logger.info("Data file not found. Will be starting with a sample LessonBook");
+                message += String.format("\n%s", Messages.MESSAGE_NO_LESSON_DATA);
             }
             lessonsInitialData = lessonBookOptional.orElseGet(SampleDataUtil::getSampleLessonBook);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty LessonBook");
             lessonsInitialData = new LessonBook();
+            message += String.format("\n%s", Messages.MESSAGE_JSON_INTEGRITY_LESSON_ERROR);
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty LessonBook");
             lessonsInitialData = new LessonBook();
+            message += String.format("\n%s", Messages.MESSAGE_JSON_INTEGRITY_LESSON_ERROR);
         }
 
         try {
             studentBookOptional = storage.readStudentBook(lessonsInitialData);
             if (studentBookOptional.isEmpty()) {
                 logger.info("Data file not found. Will be starting with a sample StudentBook");
+                message += String.format("\n%s", Messages.MESSAGE_NO_STUDENT_DATA);
             }
             studentsInitialData = studentBookOptional.orElseGet(() -> SampleDataUtil.getSampleStudentBook(
                     SampleDataUtil.getSampleLessonBook()));
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty StudentBook");
+            message += String.format("\n%s", Messages.MESSAGE_JSON_INTEGRITY_STUDENT_ERROR);
             studentsInitialData = new StudentBook();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty StudentBook");
+            message += String.format("\n%s", Messages.MESSAGE_JSON_INTEGRITY_STUDENT_ERROR);
             studentsInitialData = new StudentBook();
         }
 
@@ -209,6 +218,7 @@ public class MainApp extends Application {
     public void start(Stage primaryStage) {
         logger.info("Starting StudentBook and LessonBook " + MainApp.VERSION);
         ui.start(primaryStage);
+        UiManager.printMessage(message);
     }
 
     @Override
