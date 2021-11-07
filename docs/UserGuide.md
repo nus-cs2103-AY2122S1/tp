@@ -78,7 +78,7 @@ As mentioned earlier, ModuLink works as a CLI, which means you will need to type
 * **`list`**: Lists all the profiles on ModuLink.
 * **`filter mod/CS2101`**: Filters all profiles who have CS2101 as one of their module tags.
 * **`filter mod/CS2101 need group`**: Filters all profiles who have CS2101 as one of their module tags AND need to form or join a group for it.
-* **`addFav A1234567X`**: Adds the profile with the student ID A1234567X to your favorites list.
+* **`addFav A1234567R`**: Adds the profile with the student ID A1234567R to your favorites list.
 * **`listFav`**: Lists all your favorite profiles.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -193,7 +193,7 @@ Module tags are colour coded.
 
 #### 2.1 Add modules to your profile : `addMod`
 
-Adds the user-specified module(s) to your own profile.
+Adds the user-specified module to your own profile.
 
 Format: `addMod mod/MODULE [GROUP_STATUS]`
 
@@ -207,7 +207,7 @@ Examples:
 
 #### 2.2 Edit the group status of existing modules on your profile : `editGroupStatus`
 
-Edits the group status of user-specified module.
+Edits the group status of user-specified module in your module list.
 
 Format: `editGroupStatus mod/MODULE [NEW_STATUS_DESCRIPTION]`
 
@@ -266,7 +266,7 @@ Examples:
 
 ### 3.2 Remove a profile from favourites list : `remFav`
 
-Removes a user-specified profile from the favourites list.
+Removes a user-specified profile from your favourites list.
 
 Format: `remFav STUDENT_ID`
 

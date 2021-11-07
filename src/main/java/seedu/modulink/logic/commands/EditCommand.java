@@ -50,7 +50,7 @@ public class EditCommand extends Command {
             + "To edit your module list, "
             + "please use the \"addMod\", \"remMod\", or \"editGroupStatus\" commands.";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited: %1$s";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited your profile: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_STUDENT_ID = "There is already a profile with this Student ID.";
 
