@@ -25,10 +25,14 @@ Manual Testing was focused mainly on Testing Features and the Graphical User Int
     * [Visualize all Grades](#visualize-all-grades)
     * [Filter Academy Directory](#filter-academy-directory)
     * [Sort Student List](#sort-student-list)
-  * [Others](#others)
+  * [Others](#other-features)
     * [Launch and Shutdown](#launch-and-shutdown)
     * [List all Students](#list-all-students)
     * [Clear Student List](#clear-student-list)
+    * [View Commit History](#clear-student-list)
+    * [Revert Commit](#clear-student-list)
+    * [Undo](#clear-student-list)
+    * [Redo](#clear-student-list)
     * [Help](#help)
     * [Saving Data](#saving-data)
 * [GUI Testing](#graphical-user-interface-gui-testing)
@@ -37,7 +41,7 @@ Manual Testing was focused mainly on Testing Features and the Graphical User Int
 * [Performance Testing](#performance-testing)
   * [Visualization with large `AcademyDirectory`](#visualization-with-large-academydirectory-_coming-soon_)
   * [Limit test `AcademyDirectory` capacity](#limit-test-academydirectory-capacity-_coming-soon_)
-* [Compatability Testing](#compatibility-testing)
+* [Compatibility Testing](#compatibility-testing)
   * [Cross-OS Compatibility](#cross-os-compatibility-_coming-soon_)
 * [Portability Testing](#portability-testing)
   * [Transfer of AcademyDirectory](#transfer-of-academydirectory-_coming-soon_)
@@ -637,13 +641,114 @@ and open the "View Test Score" tab to view the changes in the grade.
 #### Clear Student List
 
 1. List all students on Academy Directory
-2. Prerequisite: Application database is not empty (meaning that the `clear` command has not been executed, or that there are student entries on the student list)
-3. Test cases: 
-   1. `clear` <br>
-      Expected: Student list panel on the left is emptied, with a status message stating that the entries have been cleared.
-   1. `clear 3` <br>
-      Expected: Error message is shown on the status message display stating that there is an invalid usage detected, no other argument should follow, and that the command is highlighted in red.
+   1. Prerequisite: Application database is not empty (meaning that the `clear` command has not been executed, or that there are student entries on the student list)
+   2. Test cases: 
+      1. `clear` <br>
+         Expected: Student list panel on the left is emptied, with a status message stating that the entries have been cleared.
+      1. `clear 3` <br>
+         Expected: Error message is shown on the status message display stating that there is an invalid usage detected, no other argument should follow, and that the command is highlighted in red.
 
+#### View Commit History
+
+1. View commit history when history is linear
+   1. Prerequisite: Start with an empty commit history. To achieve this, do the following: 
+      - Remove version control folder (Default is `data/vc`; refer to `preferences.json` for specific)
+      - Start the application
+   2. Test cases: 
+      1. `history` <br/>
+        Expected: Something like the following should appear </br>
+         | * [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800 (HEAD) (MAIN) </br>
+         | | 		Initial Commit </br>
+         |/ </br>
+        The following example is a correct realization of the above template: </br>
+         | * 65b8a - Mon, 8 Nov 2021 00:04:37 +0800 (HEAD) (MAIN) </br>
+         | | 		Initial Commit</br>
+         |/</br>
+        The time shown follows the GMT+8 Time zone, and should correspond to the time when the application was started.
+      2. Continuing from above, run `clear` followed by `history` </br>
+       Expected: Something like the following should appear </br>
+         | * [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800 (HEAD) (MAIN)</br>
+         | | 		Academy Directory has been cleared!</br>
+         |/</br>
+         \* [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800 (OLD)</br>
+         | 		Initial Commit</br>
+        Note a few things: 
+         - Date and time for initial commit should not change
+         - A new commit is created, and its time should correspond to the time when the command `clear` was executed
+      3. Continuing from above, run `add n/Alex e/alex@email.com te/@alex` followed by `history` </br>
+         Expected: Something like the following should appear </br>
+         | * [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800 (HEAD) (MAIN)</br>
+         | | 		New student added: Alex</br>
+         |/</br>
+         \* [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800 (OLD)</br>
+           | 		Academy Directory has been cleared!</br>
+         \* [FIVE CHAR HASH] - DDD, dd Nov YYYY hh:mm:ss +0800</br>
+         | 		Initial Commit</br>
+         Note a few things:
+         - Date and time for initial commit should not change
+         - A new commit is created, and its time should correspond to the time when the command `add` was executed
+         - The label "(OLD)" shifted to the previous commit i.e. the one that clears the Academy Directory
+2. View commit history when history branches
+   1. Prerequisite: Start with an empty commit history. To achieve this, do the following:
+       - Check that `UndoCommand` works, by following [this](#undo-changes)
+       - Remove version control folder (Default is `data/vc`; refer to `preferences.json` for specific)
+       - Start the application
+   2. Test cases:
+      1. Basic Two-way Branching: </br>
+         Execute the following commands in sequence: </br>
+         `clear` --> `undo` --> `add n/Alex e/alex@email.com te/@alex` --> `history` <br/>
+          Expected: Something like the following should appear </br>
+         | * [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800 (HEAD) (MAIN)</br>
+         | | 		New student added: Alex </br>
+         \* | [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800 (OLD)</br>
+           | | 		Academy Directory has been cleared! </br>
+           |/ </br>
+         \* [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800</br>
+           | 		Initial Commit</br></br>
+         Note a few things:
+         - Date and time for initial commit should follow the GMT+8 Time zone and should correspond to the time when the application was started.
+         - The commit corresponding with `clear` should have its time correspond to the time when the command `clear` was executed.
+         - The commit corresponding with `add` should have its time correspond to the time when the command `add` was executed.
+         - The label "(OLD)" is on the commit which clears Academy Directory.
+         - The label "(HEAD)" and "(MAIN)" is on the latest commit i.e. the commit which adds `Alex`. </br>
+      2. Maintain branches when no new branch is created: </br>
+        Continuing from above, execute `clear` followed by `history` </br>
+        Expected: Something like the following should appear </br>
+         | * [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800 (HEAD) (MAIN)</br>
+         | | 		Academy Directory has been cleared!</br>
+         | * [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800</br>
+         | | 		New student added: Alex</br>
+         \* | [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800 (OLD)</br>
+           | | 		Academy Directory has been cleared!</br>
+           |/</br>
+         \* [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800</br>
+           | 		Initial Commit</br>
+         Note a few things:
+          - Date and time for the last three commits should remain the same
+          - The label "(HEAD)" and "(MAIN)" is on the latest commit i.e. the commit which does `clear`
+          - The label "(OLD)" is on the commit in the _OLD_ branch i.e. the left branch
+      3. New branch created on top of Two-way branch -> make former MAIN branch to OLD and new branch to MAIN </br>
+         Continuing from above, execute `undo` --> `undo` --> `add n/Bob e/bob@email.com te/@bob` --> `history` </br>
+         Expected: Something like the following should appear </br>
+         | * [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800 (HEAD) (MAIN)</br>
+         | | 		New student added: Bob</br>
+         \* | [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800 (OLD)</br>
+         | | 		Academy Directory has been cleared!</br>
+         \* | [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800</br>
+         | | 		New student added: Alex</br>
+         |/</br>
+         \* [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800</br>
+         | 		Initial Commit</br>
+         Note a few things:
+          - Date and time for the last three commits should remain the same
+          - The commits in the formerly "(MAIN)" branch i.e. the right branch, are now in the "(OLD)" branch 
+            i.e. the left branch.
+          - The commit formerly labeled as "(MAIN)" is now labeled as "(OLD)"
+          - The label "(HEAD)" and "(MAIN)" is on the latest commit i.e. the commit which does `add n/Bob`
+
+The above test cases tests for correctness for the basic behaviors of `HistoryCommand`. They don't have to be 
+executed with the exact commands given; using different commands in different order may lead to slightly different
+commit message and/or date time shown. However, the general behavior as demonstrated above should remain the same.
 
 #### Help
 
