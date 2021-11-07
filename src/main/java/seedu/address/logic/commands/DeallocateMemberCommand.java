@@ -81,7 +81,7 @@ public class DeallocateMemberCommand extends Command {
 
         String dayName = day.getDisplayName(TextStyle.FULL, Locale.getDefault());
         return new CommandResult(String.format(MESSAGE_SUCCESS, toBeDeallocated.getName(),
-                toDeallocate.getName(), dayName), false, true, false);
+                toDeallocate.getName(), dayName));
     }
 
     @Override
