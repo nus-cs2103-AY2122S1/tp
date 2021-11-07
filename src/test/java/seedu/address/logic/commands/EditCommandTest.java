@@ -31,7 +31,10 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskDate;
 import seedu.address.model.task.TaskName;
+import seedu.address.model.task.TaskTime;
+import seedu.address.model.task.Venue;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 
@@ -249,6 +252,118 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor, INDEX_FIRST_TASK, editTaskDescriptor);
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_TASK);
+    }
+
+    @Test
+    public void execute_allTaskFieldsSpecifiedUnfilteredList_success() {
+        Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        model.displayPersonTaskList(personToEdit);
+
+        List<Task> tasks = new ArrayList<>(personToEdit.getTasks());
+        Task newTask = new Task(new TaskName("walk"), new TaskDate("2022-12-12"), new TaskTime("23:59"), new Venue("Park"));
+        editTaskDescriptor.setTaskName(new TaskName("walk"));
+        editTaskDescriptor.setTaskDate(new TaskDate("2022-12-12"));
+        editTaskDescriptor.setTaskTime(new TaskTime("23:59"));
+        editTaskDescriptor.setTaskVenue(new Venue("Park"));
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().build();
+        tasks.set(0, newTask);
+        Person editedPerson = new Person(
+                personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
+                personToEdit.getAddress(), personToEdit.getTags(), tasks, personToEdit.getDescription(),
+                personToEdit.isImportant()
+        );
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor, INDEX_FIRST_TASK, editTaskDescriptor);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson) + "\n"
+                + String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, newTask);
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(
+                expectedModel.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()), editedPerson);
+        expectedModel.displayPersonTaskList(
+                expectedModel.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()));
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_someTaskFieldsSpecifiedUnfilteredList_success() {
+        Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
+        Person lastPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
+
+        PersonBuilder personInList = new PersonBuilder(lastPerson);
+        Person editedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+                .withTags(VALID_TAG_HUSBAND).build();
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
+        EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(lastPerson, editedPerson);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_noTaskFieldSpecifiedUnfilteredList_success() {
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, new EditPersonDescriptor());
+        Person editedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_allPersonAndTaskFieldsSpecifiedUnfilteredList_success() {
+        Person editedPerson = new PersonBuilder().build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+        Person person = model.getFilteredPersonList().get(0);
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(person, editedPerson);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_somePersonAndTaskFieldsSpecifiedUnfilteredList_success() {
+        Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
+        Person lastPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
+
+        PersonBuilder personInList = new PersonBuilder(lastPerson);
+        Person editedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+                .withTags(VALID_TAG_HUSBAND).build();
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
+        EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(lastPerson, editedPerson);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_noPersonAndTaskFieldSpecifiedUnfilteredList_success() {
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, new EditPersonDescriptor());
+        Person editedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
