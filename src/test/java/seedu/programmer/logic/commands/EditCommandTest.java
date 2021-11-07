@@ -41,7 +41,8 @@ public class EditCommandTest {
         Student editedStudent = new StudentBuilder().build();
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(editedStudent).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_STUDENT, descriptor);
-        String expectedMessage = String.format(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent)+ "\n" + MESSAGE_NO_LAB_EDITED, editedStudent);
+        String expectedMessage = String.format(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent) + "\n"
+                + MESSAGE_NO_LAB_EDITED, editedStudent);
         Model expectedModel = new ModelManager(new ProgrammerError(model.getProgrammerError()), new UserPrefs());
         expectedModel.setStudent(model.getFilteredStudentList().get(0), editedStudent);
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -59,7 +60,8 @@ public class EditCommandTest {
                 .withClassId(VALID_CLASS_ID_BOB).build();
         EditCommand editCommand = new EditCommand(indexLastStudent, descriptor);
 
-        String expectedMessage = String.format(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent)+ "\n" + MESSAGE_NO_LAB_EDITED, editedStudent);
+        String expectedMessage = String.format(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent)
+                + "\n" + MESSAGE_NO_LAB_EDITED, editedStudent);
 
         Model expectedModel = new ModelManager(new ProgrammerError(model.getProgrammerError()), new UserPrefs());
         expectedModel.setStudent(lastStudent, editedStudent);
@@ -84,8 +86,8 @@ public class EditCommandTest {
         Student editedStudent = new StudentBuilder(studentInFilteredList).withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_STUDENT,
                 new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB).build());
-
-        String expectedMessage = String.format(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent)+ "\n" + MESSAGE_NO_LAB_EDITED, editedStudent);
+        String expectedMessage = String.format(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent)
+                + "\n" + MESSAGE_NO_LAB_EDITED, editedStudent);
 
         Model expectedModel = new ModelManager(new ProgrammerError(model.getProgrammerError()), new UserPrefs());
         expectedModel.setStudent(model.getFilteredStudentList().get(0), editedStudent);
