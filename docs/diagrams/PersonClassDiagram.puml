@@ -1,0 +1,50 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+
+Package Person <<Rectangle>>{
+
+Interface Field <<Interface>>
+
+Class Person
+Class Role
+Class Salary
+Class Schedule
+Class Status
+Class Email
+Class Name
+Class Phone
+Class Period
+Class Tag
+
+}
+
+Class HiddenOutside #FFFFFF
+
+HiddenOutside ..> Person
+
+Person *--> "1" Name
+Person *--> "1" Phone
+Person *--> "1" Email
+Person *--> "1" Schedule
+Person *--> "1" Status
+Person *--> "1" Salary
+Person *--> "*" Period
+Person *--> "*" Tag
+Person *--> "*" Role
+Person *--> "5..*" Field
+
+Name .up.|> Field
+Role .up.|> Field
+Salary .up.|> Field
+Status .up.|> Field
+Email .up.|> Field
+Phone .up.|> Field
+Tag .up.|>Field
+
+
+
+@enduml

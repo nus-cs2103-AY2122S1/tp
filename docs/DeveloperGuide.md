@@ -61,7 +61,7 @@ The rest of the App consists of four components.
 **How the architecture components interact with each other**
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues
-the command `delete 1`.
+the command `delete -i 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -104,6 +104,13 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
+<img src="images/WeekShiftsPaneClassDiagram.png" width="300" />
+
+The `Schedule view` subcomponent of the `UI` component,
+
+* displays 2 `SlotCard` for each `DayCard`
+* listens to changes in `Model` data to be updated with the modified data
+
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
@@ -120,10 +127,10 @@ How the `Logic` component works:
 1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
-The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete -i 1")` API
 call.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete -i 1` Command](images/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -145,12 +152,11 @@ How the parsing works:
 
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
-
+<img src="images/ModelClassDiagram.png" />
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the staff data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which
   is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to
   this list so that the UI automatically updates when the data in the list change.
@@ -164,6 +170,13 @@ The `Model` component,
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
 </div>
+
+<img src="images/PersonClassDiagram.png" />
+
+The `Person` subcomponent,
+
+* stores what a `Person` should have, i.e. all `Field` objects and details of employment (e.g. Schedule, dates of being absent).
+* does not depend on any of the other three components as it is part of the `Model` component.
 
 ### Storage component
 
@@ -179,6 +192,15 @@ The `Storage` component,
   the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
   that belong to the `Model`)
+
+<img src="images/StoragePersonDiagram.png" width="550" />
+
+The storage of `Person`,
+
+* can save all the details of a staff in `JsonAdaptedPerson`
+* depends on the `Model` component as it is in the `Storage` component
+
+
 
 ### Common classes
 
@@ -218,14 +240,14 @@ represent 1/1/2001 to 2/1/2001
 
 
 Step 2. The user executes the command `mark -i 1 d/2001-01-04`. The `mark` command
-calls `ParserUtil#parsePeriod()`, to obtain the period to mark, and `Person#mark()` to mark this period on this person. This method uses
-`Period#union()` to union the period with the set.
+calls `ParserUtil#parsePeriod()`, to obtain the time period to mark, and `Person#mark()` to mark this time period on this person. This method uses
+`Period#union()` to union the time period with the set.
 
 
 ![state1](images/MarkState1.png)
 
 Step 3. The user executes the command `mark -i 1 d/2001-01-03`. The `mark` command
-calls `ParserUtil#parsePeriod()`, to obtain the period to mark as before. As this period makes the current range, 1/1/2001 to 2/1/2001 and 4/1/2001
+calls `ParserUtil#parsePeriod()`, to obtain the period to mark as before. As this time period makes the current range, 1/1/2001 to 2/1/2001 and 4/1/2001
 become a single range, `Period#union()` that is called, merges the two `Period`
 objects into one.
 
@@ -314,7 +336,7 @@ staff, `AddShiftCommand` passes the `targetStaff`
 Step 5. `Modelmanager#addShift()` updates the schedule of the `targetStaff` with a new `Shift` created with the given
 `dayOfWeek`, `slot` and `startDate`, `endDate`.
 
-The activity diagram of this `addShift` command is shown below:
+The sequence diagram of this `addShift` command is shown below:
 
 ![AddShiftActivity](images/AddShiftSequenceDiagram.png)
 
@@ -347,7 +369,7 @@ Notes:
 #### Implementation
 
 `Find` is a command for the app to search for staff by a specific index or name. When the command is called,
-whether it is a search by name or search by index should be indicated with the respective tags `-n` and `-i`.
+whether it is a search by name or search by index should be indicated with the respective tags `-n` and `-i` along with any additional fields.
 
 The Find functionality is facilitated by  `ModelManager`. It uses the following operation of `ModelManager`.
 
@@ -375,9 +397,9 @@ for staff whose names match the keywords.
 
 Step 5. Following this, the displayed staff list will display the updated filtered list. 
 
-The activity diagram of this `Find` command is shown below:
+The sequence diagram of this `Find` command is shown below:
 
-![Find Command Sequence Diagram](images/findCommand/findSequenceDiagram.png)
+![Find Command Sequence Diagram](images/findCommand/FindSequenceDiagram.png)
 
 Notes:
 
@@ -404,7 +426,7 @@ The Find functionality is facilitated by  `ModelManager`. It uses the following 
 
 - `ModelManager#updateFilteredPersonList(Predicate<Person)` — Update the filtered list based on the predicate set.
 - `ModelManager#getUnFilteredPersonList()`— Retrieve the filtered list of staff
--
+
 Also, `FindCommandParser` was created to achieve this functionality.
 
 ![ViewShiftCommand](images/viewShiftCommand/ViewShiftClassDiagram.png)
@@ -428,9 +450,10 @@ for staff who are working at that particular timing.
 Step 5. Following this, the displayed staff list will display the updated filtered list, and the names of those working will
 also be outputted on the left of the GUI.
 
-The activity diagram of this `Find` command is shown below:
+The sequence diagram of this `viewShift` command is shown below:
 
-![ViewShift Command Sequence Diagram](images/viewShiftCommand/viewShiftSequenceDiagram.png)
+![ViewShift Command Sequence Diagram](images/viewShiftCommand/ViewShiftSequenceDiagram.png)
+![ViewShiftCommand Execution Diagram](images/viewShiftCommand/ViewShiftCommandExecutionSequenceDiagram.png)
 
 Notes:
 
@@ -516,7 +539,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user in charge of salary calculation       | use Staff'd to calculate the salaries  | Manage salary payments accurately and quickly                  |
 | `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
 
-*{More to be added}*
 
 ### Use cases
 
@@ -591,6 +613,8 @@ Business rules:
 
 1. The status of an employee only has two.
 1. The role of an employee is only active during the scheduled time period.
+1. There can be a maximum of 1000 employees.
+1. The salary of an employee cannot exceed $9999999 an hour.
 
 Quality requirements:
 
@@ -604,7 +628,6 @@ Project scope:
 1. Does not send out emails.
 1. Does not provide graphical representation of statistics.
 
-*{More to be added}*
 
 ### Glossary
 
@@ -616,7 +639,7 @@ Project scope:
   downloaded [here](https://www.oracle.com/java/technologies/downloads/#java11).
 * **Gradle**: Gradle is a build automation tool for multi-language software development.
   Installation [here](https://gradle.org/install/).
-* **Time Period**: A time period in the staff's schedule.
+* **Time Period**: A time period from one date to another.
 * **Status**: The working status of the staff. i.e. A part-timer or a full-timer.
 * **Schedule**: The staffs work schedule with a description of the work carried out.
 * **Role**: The role(s) of the staff. i.e. Bartender.
@@ -639,6 +662,7 @@ Project scope:
 * **User stories**: User story: User stories are short, simple descriptions of a feature told from the perspective of
   the person who desires the new capability, usually a user or customer of the
   system. [Mike Cohn](https://www.mountaingoatsoftware.com/agile/user-stories)
+* **Home folder**: The folder where _staffd.jar_ is stored at.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -655,19 +679,20 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-    1. Download the jar file and copy into an empty folder
+    1. Download the latest _staffd.jar_ file and copy into an empty folder from [latest release](https://github.com/AY2122S1-CS2103T-W11-2/tp/releases). 
 
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be
+    2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be
        optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-    1. Re-launch the app by double-clicking the jar file.<br>
+    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+
+
 
 ### Adding a person
 1. Adding a person to the address book
@@ -686,23 +711,23 @@ testers are expected to do more *exploratory* testing.
        are missing in the command)
        Expected: A wrong message of `Invalid command format` will be shown in the status message.
        
+
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
 
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-    1. Test case: `delete 1`<br>
+    1. Test case: `delete -i 1`<br>
        Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
        Timestamp in the status bar is updated.
 
-    1. Test case: `delete 0`<br>
+    1. Test case: `delete -i 0`<br>
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
     1. Other incorrect `delete` commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
 
 ### Adding a shift to a person's schedule
 1. Adding a shift to an existing person's schedule, given the target person's index in the list.
@@ -730,8 +755,30 @@ testers are expected to do more *exploratory* testing.
        
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Getting the default save file.
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Prerequisites: Place _staffd.jar_ in an empty _home folder_.
 
-1. _{ more test cases …​ }_
+    1. Test case: `addShift -i 1 d/monday-0`<br>
+       Expected: _staffd.json_ appears in _data_ folder inside _home folder_. Staff with name `Alex Yeoh` has a field history in _staffd.json_ whereas the other staff do not. Sample output [here](sample/addShift.json). Note the time period output will be different with date.
+
+    1. Test case: `delete -i 1`<br>
+       Expected: _staffd.json_ is updated with `Alex Yeoh removed`. Sample output [here](sample/deleteAlex.json). 
+
+
+1. Clearing the save file.
+
+    1. Prerequisites: Have _staffd.json_ in the _data_ folder. Perform the previous step if the file isn't there.
+
+    1. Test case: `clear`<br>
+       Expected: An empty _staffd.json_ file like [here](sample/empty.json).
+
+
+
+
+
+
+
+
+
+

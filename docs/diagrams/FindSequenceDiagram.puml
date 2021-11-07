@@ -6,19 +6,17 @@ participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":FindCommandParser" as FindCommandParser LOGIC_COLOR
 participant "command:FindCommand" as FindCommand LOGIC_COLOR
-participant "result:CommandResult" as CommandResult LOGIC_COLOR
-participant "predicate:NameContainsKeywordsPredicate" as NameContainsKeywordsPredicate LOGIC_COLOR
-participant "predicate:StaffHasCorrectIndexPredicate" as StaffHasCorrectIndexPredicate LOGIC_COLOR
+
 end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("find -n John")
+[-> LogicManager : execute()
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("find -n John")
+LogicManager -> AddressBookParser : parseCommand()
 activate AddressBookParser
 
 create FindCommandParser
@@ -28,57 +26,39 @@ activate FindCommandParser
 FindCommandParser --> AddressBookParser
 deactivate FindCommandParser
 
-AddressBookParser -> FindCommandParser : parse("find -n John")
+AddressBookParser -> FindCommandParser : parse()
 activate FindCommandParser
 
 create FindCommand
 FindCommandParser -> FindCommand
 activate FindCommand
 
-alt Search By Name
-    create NameContainsKeywordsPredicate
-    FindCommand -> NameContainsKeywordsPredicate
-else Search by Index
-    create StaffHasCorrectIndexPredicate
-    FindCommand -> StaffHasCorrectIndexPredicate
-end
 
-FindCommand --> FindCommandParser : command
+
+FindCommand --> FindCommandParser
 deactivate FindCommand
 
-FindCommandParser --> AddressBookParser : command
+FindCommandParser --> AddressBookParser
 deactivate FindCommandParser
-'Hidden arrow to position the destroy marker below the end of the activation bar.
-FindCommandParser -[hidden]-> AddressBookParser
+
+
 destroy FindCommandParser
 
-AddressBookParser --> LogicManager : command
+AddressBookParser --> LogicManager
 deactivate AddressBookParser
 
 LogicManager -> FindCommand : execute()
 activate FindCommand
 
-alt Find by Name
-    FindCommand -> Model : executeNameSearch()
-    activate Model
-    Model --> FindCommand : result
-
-else  Find by Time
-    FindCommand -> Model : executeIndexSearch()
-    Model --> FindCommand : result
-end
-
-Model --> FindCommand : ObservableList<Person> Filtered_Staff
+FindCommand -> Model : updateFilteredPersonList()
+activate Model
+Model --> FindCommand
 deactivate Model
 
-create CommandResult
-FindCommand -> CommandResult
-activate CommandResult
 
-CommandResult --> FindCommand : commandResult
-deactivate CommandResult
 
-FindCommand --> LogicManager : commandResult
+
+FindCommand --> LogicManager
 deactivate FindCommand
 
 [<--LogicManager
