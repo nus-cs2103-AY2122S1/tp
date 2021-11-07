@@ -189,7 +189,8 @@ add -sl s/STUDENT_INDEX... n/LESSON_INDEX...
     For example, if you had added `tutoraid.jar` to a folder labeled _TutorAid_ in your _Desktop_ folder, you can use the command `cd Desktop/TutorAid` to navigate to the folder. After navigating, you can key in the `ls` command into the terminal. If you are in the right folder, the `tutoraid.jar` file will appear in the list.
 
   * Lastly, key in the following command to launch `tutoraid.jar`: `java -jar tutoraid.jar`. An application window similar to the one below should appear in a few seconds. Note how the app contains some sample data. <br><br>
-![Ui](images/Ui.png)
+    
+    ![](images/blank.png)
 
 > :bulb: If you are using the second approach, it is recommended to store `tutoraid.jar` in a folder in your _Desktop_ so that it is easier to navigate to it the next time you need to launch TutorAid!
    
@@ -221,7 +222,11 @@ You can then easily add his data to TutorAid by following the steps below:
    > :bulb: You can also add John into TutorAid by keying in `add -s sn/John Yeo` into the Command Box. This is because all details other than the student's name are optional for you to note down.
    > For more information, you can refer to the detailed documentation of the [Add a Student](#adding-a-student-add--s) command.
 
-1. Upon pressing ENTER, notice how the Student Panel will be updated accordingly with John's details. If you do not see John's details on your screen, you can scroll down the Student Panel to find his details.
+1. Upon pressing ENTER, notice how the Student Panel will be updated accordingly with John's details, as show below:
+
+    ![](images/addNewStudent.png)
+
+If you do not see John's details on your screen, you can scroll down the Student Panel to find his details.
 
 Now, John has just informed you that he has changed his contact number to 84632975. You can update his contact details on TutorAid by completing the steps below:
 
@@ -229,7 +234,9 @@ Now, John has just informed you that he has changed his contact number to 846329
 
     > :bulb: The `7` in the command above refers to the index number of John Yeo in the Student Panel. For more information, you can refer to the detailed documentation for [editing a student's details](#editing-a-student-edit--s).
 
-1. You will now be able to see that John Yeo's phone number has been successfully changed to 84632975.
+1. You will now be able to see that John Yeo's phone number has been successfully changed to 84632975, as seen here:
+   
+    ![](images/editJohnYeo.png)
 
    > :bulb: For more information on changing the viewing modes in TutorAid, you can refer to the detailed documentation for [List](#listing-all-students-and-lessons-list) commands.
 
@@ -243,9 +250,9 @@ You can quickly add this information to TutorAid by performing the steps below:
 
 1. Type `add -l n/History 1 c/10 t/10AM - 11AM on Mondays` into the Command Box and press ENTER.
 
-    ![](images/tutorialAddLesson1.png)
+1. Observe how all the details of _History 1_ is reflected in the Lesson Panel:
 
-1. Observe how all the details of _History 1_ is reflected in the Lesson Panel.
+    ![](images/addHistory1.png)
 
     > :bulb: All details other than the lesson name are optional for you to key in as well. You can check out the detailed documentation of the [Add a Lesson](#adding-a-lesson-add--l) command for more information.
    
@@ -255,7 +262,11 @@ Next, let us assume that you have decided to charge your students $125.90 per mo
 
     > :bulb: The `2` in the command above refers to the index number of _History 1_ in the Lesson Panel. For more information, you can refer to the detailed documentation for [editing a lesson's details](#editing-a-lesson-edit--l).
 
-1. You will now be able to see how the lesson pricing has been updated to what you have requested. You can then key in the `list -a` into the Command Box and press ENTER to return back to your original view.
+1. You will now be able to see how the lesson pricing has been updated to what you have requested, as seen below:
+
+   ![](images/editHistory1.png)
+   
+   You can then key in the `list -a` into the Command Box and press ENTER to return back to your original view.
 
    > :bulb: For more information on changing the viewing modes in TutorAid, you can refer to the detailed documentation for [List](#listing-all-students-and-lessons-list) commands.
 
@@ -267,7 +278,9 @@ Now that you have set up the lesson _History 1_, let us add one of your existing
 
     > :bulb: The numbers `6` and `2` in the command above refer to the indexes of Roy and _History 1_ in the Student and Lesson Panels respectively. For more information, you can refer to the detailed documentation for [adding a student to a lesson](#adding-students-to-lessons-add--sl).
 
-1. You should now be able to see that in the Student Panel, the lesson _History 1_ has been added to the list of lessons taken by Roy. Similarly, in the Lesson Panel, you will be able to see that Roy has been added to the list of students attending _History 1_. 
+1. As shown in the image below, you should now be able to see that in the Student Panel, the lesson _History 1_ has been added to the list of lessons taken by Roy. Similarly, in the Lesson Panel, Roy has been added to the list of students attending _History 1_. 
+
+   ![](images/addToLesson.png)
 
 ### 4.4: Adding a progress note for a student
 {:.no_toc}
@@ -278,7 +291,11 @@ note of it so that you can provide him extra practice. To do so, you can easily 
 
     > :bulb: The `1` in the command above refers to the index number of Alex Yeoh in the Student Panel. For more information, you can refer to the detailed documentation for the [Add a Progress to a Student](#adding-progress-for-a-student-add--p) command.
    
-1. Notice that Alex's details, reflected in the Student Panel, will then be updated to display the progress note you just added. You can then key in the `list -a` into the Command Box and hit ENTER to return back to your original view.
+1. Notice that Alex's details reflected in the Student Panel have updated to display the progress note you just added, as seen here:
+
+    ![](images/addProgress.png)
+   
+   You can then key in the `list -a` into the Command Box and hit ENTER to return back to your original view.
 
    > :bulb: For more information on changing the viewing modes in TutorAid, you can refer to the detailed documentation for [List](#listing-all-students-and-lessons-list) commands.
 
@@ -296,7 +313,9 @@ You can easily delete his data from TutorAid by following the steps below:
    
     > :bulb: The `1` in the command above refers to the index number of Alex in the Student Panel. For more information, you can refer to the detailed documentation for the [Delete a Student](#deleting-a-student-del--s) command.
    
-1. Upon pressing ENTER, all of Alex's details will be removed from TutorAid. Observe how Alex's details are not found in the Student Panel and that his name has been removed from the student list for the _Maths 1_ in the Lesson Panel.
+1. Upon pressing ENTER, all of Alex's details will be removed from TutorAid. Observe how Alex's details are not found in the Student Panel and that his name has been removed from the student list for the _Maths 1_ in the Lesson Panel:
+
+   ![](images/deleteAlex.png)
 
 ### End
 {:.no_toc}
