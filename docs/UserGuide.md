@@ -300,6 +300,7 @@ Examples:
 * `edit 1 t/` will remove all ***tag***s from the applicant with index number 1
 * `edit 1 n/John t/` will change the name of the applicant with index number 1 to `John` and remove all the applicant's ***tag***s
 * `edit 1 r/Software Engineer` will change the ***role*** of the applicant with the index number 1
+
 Before: ![images](images/EditBefore.png)
 
 After: ![images](images/EditAfter.png)
