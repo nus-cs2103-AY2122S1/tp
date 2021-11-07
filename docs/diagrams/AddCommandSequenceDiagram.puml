@@ -3,6 +3,7 @@
 
 Participant ":InsurancePalParser" as InsurancePalParser LOGIC_COLOR
 Participant AddCommandParser LOGIC_COLOR
+Participant "<<class>>\nParserUtil" as ParserUtil LOGIC_COLOR
 Participant "aCom:AddCommand" as AddCommand LOGIC_COLOR
 Participant "person:Person" as Person MODEL_COLOR
 
@@ -14,10 +15,18 @@ activate AddCommandParser LOGIC_COLOR
 return
 InsurancePalParser -> AddCommandParser : parse("add ...")
 activate AddCommandParser LOGIC_COLOR
+AddCommandParser -> ParserUtil : parseXYZ(...)
+activate ParserUtil LOGIC_COLOR
+return XYZ
+alt note is present
+    AddCommandParser -> ParserUtil : parseNote(...)
+    activate ParserUtil LOGIC_COLOR
+    return note
+end alt
 create Person
-AddCommandParser -> Person
+AddCommandParser -> Person : Person(args)
 activate Person MODEL_COLOR
-return
+return person
 create AddCommand
 AddCommandParser -> AddCommand : AddCommand(person)
 activate AddCommand LOGIC_COLOR
