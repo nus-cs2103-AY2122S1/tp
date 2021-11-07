@@ -16,7 +16,8 @@ Given below are my contributions to the project.
 [\#140](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/140)
   * What it does: allows the user to see all unique inputs available for a prefix.
   * Justification: This feature improves the product significantly because a user can know what inputs are available in the first place to search for, reducing chances of searching for inputs that do not exist.
-  * Wrote tests for show command and increased code coverage by 4.28% from 72.99% to 77.28% [\#160](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/160) 
+  * Wrote tests for show command and increased code coverage by 4.28% from 72.99% to 77.28%
+   [\#160](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/160) 
 
   
 * **Enhancements to existing features**:
@@ -37,14 +38,30 @@ Given below are my contributions to the project.
 
 * **Documentation**
     * User Guide
+        * Updated loading and saving data documentation:
+        [\#23](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/23)
         * Added documentation for `filter_interview` feature:
         [\#233](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/233)
         * Added documentation for notes for `find` feature:
         [\#214](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/214) 
+        * Added documentation for `filter_interview` feature:
+        [\#233](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/233)
         * Added documentation for employment type category:
         [\#125](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/125)
+        * Updated documentation for `help`, `edit`, `add` and `list` features:
+        [\#360](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/360)
+        * General tweaks:
+        [\#201](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/201),
+        [\#206](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/206),
+        [\#311](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/311)
         
     * Developer Guide:
+        * Updated product scope, value proposition and user stories:
+        [\#45](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/45)
+        * Updated user stories for `edit, `show` and `find` features and glossary for `show` feature:
+        [\#185](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/185)
+        * Added user story for notes for `find` feature:
+        [\#210](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/212)
         * Added partial implementation details of the `show` feature:
         [\#220](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/220)
         * Added implementation details of the `filter_interview` feature:
@@ -54,15 +71,21 @@ Given below are my contributions to the project.
         [\#317](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/317)
         * Added implementation details of the `delete_marked` feature:
         [\#328](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/328)
-
-
+        * Added table of contents, manual tests for `add` feature and made minor tweaks:
+        [\#337](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/337),
+        [\#351](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/351),
+        [\#362](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/362),
+        [\#377](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/377)
+        
 * **Community**:
   * PRs reviewed (with non-trivial review comments):
    [\#294](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/294#pullrequestreview-794316065),
    [\#296](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/296#pullrequestreview-794312233),
    [\#297](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/297#pullrequestreview-794339570),
    [\#320](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/320#pullrequestreview-797982309),
-   [\#326](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/326#pullrequestreview-798438129)
+   [\#326](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/326#pullrequestreview-798438129),
+   [\#347](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/347#pullrequestreview-799431081),
+   [\#358](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/358#pullrequestreview-799452093)
  
   * Reported bugs for other team during PE Dry Run:
   [\#127](https://github.com/AY2122S1-CS2103-T14-3/tp/issues/127),
