@@ -14,7 +14,7 @@ Given below are my contributions to the project.
 * **New Feature**: Encryption integration
     * What it does: allows SPAM to read and write from the encrypted file.
     * Justification: This feature makes sure that the data file stays encrypted at all times.
-    * Credits: Pair programming with @huizhuansam.
+    * Credits: Pair programming with [@huizhuansam](https://github.com/huizhuansam).
 
 
 * **New Feature**: Password protection
