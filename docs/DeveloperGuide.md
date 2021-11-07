@@ -259,7 +259,7 @@ To use this function and create a profile, simply enter the command and the requ
 Example: `editGroupStatus mod/CS2103T group/Need member`
 
 The following sequence diagram shows how the `editGroupStatus` mechanism works:
-![FilterSequenceDiagram](images/EditGroupStatusCommandSequenceDiagram.png)
+![EditGroupStatusDiagram](images/EditGroupStatusCommandSequenceDiagram.png)
 
 
 --------------------------------------------------------------------------------------------------------------------

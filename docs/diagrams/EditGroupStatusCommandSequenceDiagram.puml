@@ -13,10 +13,10 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("editGroupStatus mod/CS2101 group/Need member")
+[-> LogicManager : execute("editGroupStatus mod/CS2101 need member")
 activate LogicManager
 
-LogicManager -> ModuLinkParser : parseCommand("editGroupStatus mod/CS2101 group/Need member")
+LogicManager -> ModuLinkParser : parseCommand("editGroupStatus mod/CS2101 need member")
 activate ModuLinkParser
 
 create EditGroupStatusCommandParser
@@ -26,7 +26,7 @@ activate EditGroupStatusCommandParser
 EditGroupStatusCommandParser --> ModuLinkParser
 deactivate EditGroupStatusCommandParser
 
-ModuLinkParser -> EditGroupStatusCommandParser : parse("mod/CS2101 group/Need Member")
+ModuLinkParser -> EditGroupStatusCommandParser : parse("mod/CS2101 need member")
 activate EditGroupStatusCommandParser
 
 create EditGroupStatusCommand
