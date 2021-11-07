@@ -6,7 +6,6 @@ title: Developer Guide
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
-
 ## **Acknowledgements**
 
 Dash is adapted from AddressBook Level 3 (or AB3 for short), a sample project for software engineering students
@@ -15,12 +14,12 @@ user and developer documentation. In developing Dash, we expanded the code base 
 the User Guide and Developer Guide.
 
 --------------------------------------------------------------------------------------------------------------------
-
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Design**
 
@@ -205,6 +204,7 @@ The `Storage` component:
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Implementation**
 
@@ -525,6 +525,7 @@ be changed.
 * [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Requirements**
 
@@ -554,6 +555,8 @@ be changed.
  * It is PC-based, so it is less likely to distract users with pop-up notifications compared to a mobile-based app.
  * Dash does not link with any other external programs and is only used for recording information. 
 
+<div style="page-break-after: always;"></div>
+
 ### User stories
 
 | Priority | As a(n) ...                                | I want to ...                                 | So that I can ...                                               |
@@ -576,6 +579,8 @@ be changed.
 | * *      | student with many CCAs                     | tag tasks with CCA tags                       | easily identify what I need to do for a particular CCA          |
 | * *      | student taking many modules                | tag tasks with module tags                    | easily identify what I need to do for a particular module       |
 | * *      | organized student                          | clear all completed tasks                     | focus on the tasks I have yet to complete                       |
+
+<div style="page-break-after: always;"></div>
 
 ### Use cases
 
@@ -973,6 +978,7 @@ Use case ends.
   components, like clickable menus.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Instructions for manual testing**
 
@@ -1263,6 +1269,8 @@ point for testers to work on; testers are expected to do more *exploratory* test
 
     3. Test case: `upcoming random text` <br>
        Expected: Same behaviour as above test case.
+
+<div style="page-break-after: always;"></div>
 
 ### Saving data
 
