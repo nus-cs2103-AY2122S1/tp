@@ -77,7 +77,7 @@ Take note of some syntax we will frequently use throughout the User Guide:
 
 4. Double-click the file to start the app. The GUI similar to the image displayed below should appear in a few seconds. Note how the app contains some sample data.<br>
 
-   <img src="images/Ui.png" width="500">
+   <img src="images/Ui.png" width="600">
  
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -282,7 +282,8 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+  <img src="images/findAlexDavidResult.png" width="600">
+
 
 ### Deleting a patient : `delete` <a name="delete-patient"/>
 
@@ -384,6 +385,7 @@ Examples:
 * `edit 2 n/Betsy Crower dob/20/07/1964 t/` Edits the name and date of birth of the 2nd doctor to be `Betsy Crower` and `20/07/1964` respectively, and clears all existing tags.
 * After executing `edit 2 n/Betsy Crower dob/20/07/1964 t/`:
 ![editDoctor](images/editDoctor.png)
+  
 
 ### Adding a remark to a doctor's information : `remark` <a name="remark-doctor"/>
 
@@ -493,8 +495,8 @@ After adding an appointment, the appointment list is updated to show all appoint
 Examples: `appt -a p/1 d/2 s/12/11/2021 20:00 dur/20 r/Patient wants a blood test` creates an appointment with the
 **first patient** in the patient list, and the **second doctor** in the doctor list, at 12 November 2021, 8pm, with the remark that the patient
 wants a blood test
-![addAppointment](images/user-guide/addAppointment.png)
 
+<img src="images/user-guide/addAppointment.png" width="600">
 
 ### Editing an appointment: `appt -e` <a name="edit-appointment"/>
 
