@@ -21,7 +21,6 @@ Given below are my contributions to the project.
   * What it does: This features allow users to see all related details to one student - contact information, grades, participation, tags, and others...
   * Justification: This feature is necessary to reorganize UI into a more compact view, while allowing Avengers to see all academic details of a student in one place.
   * Highlights: View command wraps student grades and participation in a drop-down menu that Avengers can click on to see student data
-  * Credit: None.
 
 * **New Feature**: Graphics User Interface
   * What it does: Refactor and implement most of Academy Directory GUI, with central theme of science fiction and space.
@@ -58,7 +57,7 @@ Given below are my contributions to the project.
     * Added implementation details, design considerations, use case, and user stories, and manual testings for `view`, `help`, `clear`, `exit`, and `list`
     * Added class diagram and explain the architectural implementation of the UI component
     * Added manual testing instructions to Graphics User Interface of Academy Directory<br>
-  * Manage the README.md file on, proofread and adding minor contents of other existing parts on the User Guide and Developer Guide.
+  * Manage the README.md file, proofread and adding minor contents of other existing parts on the User Guide and Developer Guide.
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#49](https://github.com/AY2122S1-CS2103T-T15-3/tp/pull/49), [#79](https://github.com/AY2122S1-CS2103T-T15-3/tp/pull/79),...
