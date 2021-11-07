@@ -246,6 +246,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL_ADDRESS r/ROLE et/EMPLOYMENT_TYPE s/E
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 Providing multiple tag values in a single `t/` prefix will lead to an error.
+
 (i.e. `add n/John p/90909090 e/john@gmail.com r/Software Tester et/Full time s/4500 l/High School y/3 t/smart helpful` will lead to an error)
 </div>
 * Parameters for each prefix is taken as a single value. (i.e. `r/software engineer` has the value `software engineer`)
@@ -296,6 +297,7 @@ remove tags from the applicant.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 Giving more than 1 tag prefix parameter with 1 or more having no value will instead lead to an error.
+
 (i.e. `edit 1 t/ t/smart` leads to an error)
 </div>
  * Parameters for each prefix is taken as a single value. (i.e. `r/software engineer` has the value `software engineer`)
