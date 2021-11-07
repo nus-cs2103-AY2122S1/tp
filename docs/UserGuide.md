@@ -29,9 +29,9 @@ This product will make recruiters’ lives easier through categorisation and fil
     + [Adding an applicant: `add`](#adding-an-applicant-add)
     + [Editing an applicant: `edit`](#editing-an-applicant--edit)
     + [Listing all applicants : `list`](#listing-all-applicants--list)
+    + [Deleting an applicant : `delete`](#deleting-an-applicant--delete)
     + [Finding an applicant : `find`](#finding-an-applicant--find)
     + [Filtering interviews : `filter_interview`](#filtering-interviews--filter_interview)
-    + [Deleting an applicant : `delete`](#deleting-an-applicant--delete)
     + [Showing search terms : `show`](#showing-search-terms--show)
     + [Marking an applicant : `mark`](#marking-an-applicant--mark)
     + [Unmarking an applicant : `unmark`](#unmarking-an-applicant--unmark)
@@ -46,7 +46,7 @@ This product will make recruiters’ lives easier through categorisation and fil
 
 
 ### About this guide
-[table of contents](#table-of-contents)
+[Table of contents](#table-of-contents)
 
 This guide aims to help users get familiar with using RecruitIn's features.
 * **New users** can get started by following the steps under [Quick start](#quick-start).
@@ -152,10 +152,10 @@ Scroll down to the bottom and click on `recruitIn.jar`.
    6. Fast forward the time. Your company informs you that `John Doe` has
       passed his interview and is hired.<br><br>
       Type in **`find`**`n/John Doe p/98765432` to find `John Doe`.<br>
-      Type in **`mark`**`1` to mark `John Doe` as done.<br><br>
+      Type in **`mark`**`1` to mark `John Doe` as Done.<br><br>
       ![After mark](./images/SampleWorkflow4.png)<br><br>
    7. Type in **`list`** to go back to your list of applicants.<br><br>
-      Type in **`delete_marked`** to remove all applicants marked as done, such as `John Doe`.<br><br>
+      Type in **`delete_marked`** to remove all applicants marked as Done, such as `John Doe`.<br><br>
       Now `John Doe` is removed from your list of applicants.<br><br>
 
 6. Aside from the commands shown in the sample workflow above, you may also find these useful:
@@ -205,7 +205,7 @@ Scroll down to the bottom and click on `recruitIn.jar`.
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
+* If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
@@ -290,8 +290,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMP
  
  * Edit command must take at least 1 prefix parameter.
  * The `INDEX` refers to the index number shown in the displayed applicants list.
- * For `t/` prefix in particular, if **only** a single tag prefix is provided like so `t/` with no values, it will erase
-remove tags from the applicant.
+ * For `t/` prefix in particular, if **only** a single tag prefix is provided like `t/` with no values, it will
+remove all tags from the applicant.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 Giving more than 1 tag prefix parameter with 1 or more having no value will instead lead to an error.
@@ -343,7 +343,7 @@ Format: `list`
 ### Deleting an applicant : `delete`
 [Table of contents](#table-of-contents)
 
-Deletes applicants by their index from the applicants list in RecruitIn.
+The `delete` command deletes applicants by their index from the applicants list in RecruitIn.
 
 Format: `delete INDEX...`
 
@@ -351,7 +351,7 @@ Format: `delete INDEX...`
 
 * The `INDEX` refers to the index number shown in the displayed applicants list.
 * `INDEX` **must be a positive integer** such as 1, 2, 3, …​
-* `INDEX` uses **1-based indexing**, which means the first applicant in the list has the `INDEX`  1.
+* `INDEX` in RecruitIn **starts from one**.
 *  You should type at least one `INDEX`. (i.e. `delete ` is not a valid command)
 *  You should not type duplicate `INDEX`s. (i.e. `delete 2 2` is not a valid command)
 * You should not type`INDEX` which exceeds the total number of applicants in the displayed applicants list.
@@ -359,14 +359,16 @@ Format: `delete INDEX...`
 Examples:
 * After you execute the command `list`, `delete 1` deletes the 1st applicant listed in RecruitIn.
 * After you execute the command `find n/John`, `delete 1` deletes the 1st applicant in the results of the `find` command.
-* After you execute the command `list`, `delete 2 4 7` deletes the 2nd, 4th and 7th applicants listed in RecruitIn.
+* After you execute the command `list`, `delete 1 2` deletes the 1st and 2nd applicants listed in RecruitIn.
 
+Before: ![DeleteBefore](images/features/DeleteBefore.png)
+After: ![DeleteAfter](images/features/DeleteAfter.png)
 
 
 ### Finding an applicant : `find`
 [Table of contents](#table-of-contents)
 
-Finds applicants by specific prefixes.
+The `find` command finds applicants by specific prefixes.
 
 Format: `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMPLOYMENT_TYPE] [s/EXPECTED_SALARY] [l/LEVEL_OF_EDUCATION] [y/YEARS_OF_EXPERIENCE]  [t/TAG]  [i/INTERVIEW] [nt/NOTES] [d/DONE]`
 
@@ -374,31 +376,35 @@ Format: `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMPLOYMEN
 
 * You can key in parameters in either UPPER CASE or small case. 
 * If you key in multiple of the same prefix (e.g. `find n/alex n/bernice`) , the program will only find you applicants based on **the last** prefix (i.e. `n/bernice`).
-  ![FindInput](./images/features/Find.png)
 * You can key in each prefix with **multiple keywords** separated by whitespace, e.g. `n/John Mary`, `t/friend colleague`
 
 <div markdown="block" class="alert alert-warning">
 
-* You can search for tags using multiple keywords by providing your keywords separated by whitespace in a `t/` prefix. (i.e. `find t/smart kind`)
-    * This is different from `add` and `edit` commands which require tag inputs to be provided separately. (i.e. `edit 1 t/smart t/kind`)
+* You can search for tags using multiple keywords by providing your parameters separated by whitespace in a `t/` prefix. (i.e. `find t/smart kind`)
+    * This is different from `add` and `edit` commands which require tag parameters to be provided separately. (i.e. `edit 1 t/smart t/kind`)
 
 </div>
 
-* You should not find applicants by prefix with empty parameters. (i.e. `find d/` will show you all applicants **unfiltered** by their ***done*** status)
+* You should not find applicants by a prefix with empty parameters. (i.e. `find d/` will show you all applicants **unfiltered** by their ***done*** status)
 
 Examples:
+* `find n/alex n/bernice` finds you all applicants with only `bernice` as values for name prefix.
+  
+Before: ![FindBefore](images/features/FindBefore.png)
+After: ![FindAfter](images/features/FindAfter.png)
+
+
 * `find n/John Mary` finds you all applicants with either `John` or `Mary` as values for name prefix.
-* `find n/John n/Mary` finds you all applicants with only `Mary` as values for name prefix.
 * `find t/friend colleague` finds you all applicants with `friend` or `colleague` as values for tag prefix.
 * `find n/John Mary t/friend colleague`
 * `find n/Bob p/87654321 e/bob@gmail.com r/Software Engineering et/Full time s/4000 l/High School y/2 nt/has the credentials d/Not Done`
 
 <div markdown="block" class="alert alert-success">
-**:information_source: Prefix parameters for `find` command must follow the following input specifications:**<br>
+**:information_source: Prefix parameters for `find` command must follow the following parameter specifications:**<br>
 
 * You may
     * refer to [**Find Parameter Specifications**](#find-parameters) for detailed parameter specifications, or
-    * refer to find parameter specifications for a specific prefix by clicking on relevant link in the table below.
+    * refer to find parameter specifications for a specific prefix by clicking on the relevant link in the table below.
 
 | Parameter | Prefix | Specifications |
 | :---: | :---: | :---: |
@@ -420,7 +426,7 @@ Examples:
 ### Filtering interviews : `filter_interview`
 [Table of contents](#table-of-contents)
 
-Filters applicants by interview dates based on whether they are upcoming or have past current date and time.
+The `filter_interview` command filters applicants by interview dates based on whether they are upcoming or have past current date and time.
 Differs from ```find i/``` as it is not returning you all applicants with a specific interview date but 
 rather all applicants with interviews that fall into the same group (`past` or `future`).
 
@@ -428,10 +434,13 @@ Format: `filter_interview past` or `filter_interview future`
 
 * `filter_interview past` shows you applicants with interviews that were in the past (compared to the current date and time).
 * `filter_interview future` shows you applicants with interviews that are coming up in the future (compared to the current date and time).
-* You should give either `past` or `future` as an input after `filter_interview`, but not both.
+
+Before: ![FilterInterviewBefore](images/features/FilterInterviewBefore.png)
+After: ![FilterInterviewAfter](images/features/FilterInterviewAfter.png)
+
+* You should give either `past` or `future` as a parameter after `filter_interview`, but not both.
 * You can type in either UPPER CASE or small case for `past` and `future`.
   
-![FindInput](./images/features/FilterInterviewPast.png)
 
 Examples:
 * Let's assume that the current time is [29th October 2021, 1600].
@@ -440,89 +449,91 @@ Examples:
   [29th October 2021, 1600].
 * If you type `filter_interview future` or 
  `filter_interview fUTURE` in the command box, you are able to see applicants with interviews that are after [29th October 2021, 1600].
+  
 
 ### Showing search terms : `show`
 [Table of contents](#table-of-contents)
 
-Shows you unique search terms which you can use for a specific prefix.
+The `show` command shows you unique search terms which you can use for a specific prefix.
 
-Format: `show [n/] [p/] [e/] [r/] [et/] [s/] [l/] [y/] [t/]`
+Format: `show [n/] [p/] [e/] [r/] [et/] [s/] [l/] [y/] [t/] [i/]`
 
 ***Note:*** *As mentioned in [Basic Command Format](#basic-command-format), you can include any one of the prefixes in square brackets  here.*
 
 * You should type **only 1** prefix that you want the program to show.
-    * If you type multiple prefixes after `show`, the program will only show you the unique search terms found for the **first** prefix input.
-      ![FindInput](./images/features/Show.png)
+    * If you type multiple prefixes after `show`, the program will only show you the unique search terms found for the **first** prefix parameter.
 
 Examples:
+* `show i/` will display a list consisting of all interview timings.
+* `show n/ i/` will display a list consisting of all names.
+    
+Before: ![ShowBefore](images/features/ShowBefore.png)
+After: ![ShowAfter](images/features/ShowAfter.png)
 
-Suppose the applicants list includes 3 applicants with name and role `John, Software Developer`, `Mary, Cook` and `Mary, Cleaner`.
-* `show n/` will display a list consisting of `John` and `Mary`.
-* `show r/ n/` will display a list consisting of `Software Developer`, `Cleaner` and `Cook`.
 
 
 ### Marking an applicant : `mark`
 [Table of contents](#table-of-contents)
 
-Every applicant in RecruitIn will have a status of either "Done" or "Not Done".
-A "Done" status means that you are done handling the applicant and no longer need to keep their details.
-The `mark` command marks the specified applicant(s) in RecruitIn by changing their status to "Done".
+Every applicant in RecruitIn will have a status of either `Done` or `Not Done`.
+A `Done` status means that you are done handling the applicant and no longer need to keep their details.
+The `mark` command marks the specified applicant(s) in RecruitIn by changing their status to `Done`.
 
 Format: `mark INDEX…​`
 
-* RecruitIn marks the applicant at the specified `INDEX`es as "Done".
+* RecruitIn marks the applicant at the specified `INDEX`es as `Done`.
 * `INDEX` refers to the number shown in RecruitIn's displayed applicants list.
 * `INDEX` **must be a positive whole number**, i.e. 1, 2, 3, …​
 * `INDEX` should not exceed the total number of applicants in RecruitIn's displayed applicants list.
 * `INDEX` in RecruitIn **starts from one**.
 * You must give at least one `INDEX`. (i.e. `mark ` is not a valid command)
 * You cannot give duplicate `INDEX`es. (i.e. `mark 2 2` is not a valid command)
-* You cannot mark an applicant that has status "Done".
+* You cannot mark an applicant that has status `Done`.
 
 Examples:
-* After using the command `list`, `mark 1` marks the 1st applicant listed in RecruitIn as "Done".
+* After using the command `list`, `mark 1` marks the 1st applicant listed in RecruitIn as `Done`.
 
 Before: ![images](images/MarkBefore.png)
 
 After: ![images](images/MarkAfter.png)
 
-* After using the command `list`, `mark 2 4 6` marks the 2nd, 4th and 6th applicant listed in RecruitIn as "Done".
-* After using the command `find n/John`, `mark 1` marks the 1st applicant listed in RecruitIn's results of the `find` command.
+* After using the command `list`, `mark 2 4 6` marks the 2nd, 4th and 6th applicant listed in RecruitIn as `Done`.
+* After using the command `find n/John`, `mark 1` marks the 1st applicant listed in RecruitIn's results of the `find` command as `Done`.
 
 
 ### Unmarking an applicant : `unmark`
 [Table of contents](#table-of-contents)
 
-Every applicant in RecruitIn will have a status of either "Done" or "Not Done".
-A "Not Done" status means that you are still handling the applicant and still need to keep their details.
-The `unmark` command unmarks the specified applicant(s) in RecruitIn by changing their status to "Not Done".
+Every applicant in RecruitIn will have a status of either `Done` or `Not Done`.
+A `Not Done` status means that you are still handling the applicant and still need to keep their details.
+The `unmark` command unmarks the specified applicant(s) in RecruitIn by changing their status to `Not Done`.
 
 Format: `unmark INDEX…​`
 
-* RecruitIn unmarks the applicant at the specified `INDEX`es to "Not Done".
+* RecruitIn unmarks the applicant at the specified `INDEX`es to `Not Done`.
 * `INDEX` refers to the number shown in RecruitIn's displayed applicants list.
 * `INDEX` **must be a positive whole number**, i.e. 1, 2, 3, …​
 * `INDEX` should not exceed the total number of applicants in RecruitIn's displayed applicants list.
 * `INDEX` in RecruitIn **starts from one**.
 * You must give at least one `INDEX`. (i.e. `unmark ` is not a valid command)
 * You cannot give duplicate `INDEX`es. (i.e. `delete 2 2` is not a valid command)
-* You cannot unmark an applicant that has status "Not Done".
+* You cannot unmark an applicant that has status `Not Done`.
 
 Examples:
-* After using the command `list`, `ummark 1` unmarks the 1st applicant listed in RecruitIn to "Not Done".
+* After using the command `list`, `ummark 1` unmarks the 1st applicant listed in RecruitIn to `Not Done`.
 
 Before: ![images](images/UnmarkBefore.png)
 
 After: ![images](images/UnmarkAfter.png)
 
-* After using the command `list`, `unmark 2 4 6` unmarks the 2nd, 4th and 6th applicant listed in RecruitIn to "Not Done".
-* After using the command `find n/John`, `unmark 1` unmarks the 1st applicant listed in RecruitIn's results of the `find` command.
+* After using the command `list`, `unmark 2 4 6` unmarks the 2nd, 4th and 6th applicant listed in RecruitIn to `Not Done`.
+* After using the command `find n/John`, `unmark 1` unmarks the 1st applicant listed in RecruitIn's results of the `find` command to `Not Done`.
 
 
 ### Deleting marked applicants : `delete_marked`
 [Table of contents](#table-of-contents)
 
-The `delete_marked` command deletes all applicants that are currently marked as done.
+The `delete_marked` command deletes all applicants that are currently marked as `Done`.
 This provides an easy way for you to delete the data of all applicants you no longer need.
 
 Format: `delete_marked`
@@ -537,7 +548,7 @@ After: ![images](images/DeleteMarkedAfter.png)
 ### Clearing all data : `clear`
 [Table of contents](#table-of-contents)
 
-Deletes all applicants in RecruitIn.
+The `clear` command deletes all applicants in RecruitIn.
 
 Format: `clear`
 
@@ -548,7 +559,8 @@ The `exit` command causes RecruitIn to close and exit.
 
 Format: `exit`
 
-You can also exit RecruitIn by clicking on the 'X' button found on the top right side of the app. 
+You can also exit RecruitIn by clicking on the 'X' button found on the top right side of the app.
+Alternatively, you can also click on the 'File' button on the upper left of the app, before clicking the pop-up 'Exit' button. 
 
 
 ### Saving the data
@@ -587,9 +599,8 @@ Example of the format of how data is saved for an applicant:
 ```
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes the data format invalid, RecruitIn will remove all saved data and start with an empty data file the next time you open the app.
+It is advised that you be careful when handling the data file directly!
 </div>
-
-<p align="center"><a href="#table-of-contents">Click here to see the table of contents</a></p>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -774,6 +785,7 @@ For example, if your input is `find n/Alex Bernice`, `Alex` and `Bernice` are yo
 * ##### INTERVIEW `i/`
     * An INTERVIEW parameter matches with an existing stored ***Interview*** only if the keyword is a whole word (i.e. separated by space) contained in the ***Interview***.
     * All the keywords that you provide in your INTERVIEW parameter must comply with the displayed format (e.g. 20 Mar 2021, 10:30).
+      ![InterviewDisplayFormat](images/features/InterviewDisplay.png)
     * For example:
         * A `2021` parameter can match with applicants that have their ***Interview***s in the year 2021.
         * A `20:21` parameter can match with applicants that have their ***Interview***s at the time 20:21 on any date.

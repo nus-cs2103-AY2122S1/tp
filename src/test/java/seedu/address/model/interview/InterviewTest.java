@@ -31,6 +31,7 @@ class InterviewTest {
 
 
         // valid interview
+        assertTrue(Interview.isValidInterviewTime("-")); // empty interview stored in database
         assertTrue(Interview.isValidInterviewTime("2020-10-29, 10:30")); // 4 digit year
         assertTrue(Interview.isValidInterviewTime("20-10-29, 10:30")); // 2 digit year
         assertTrue(Interview.isValidInterviewTime("2020-09-29, 10:30")); // 2 digit month
@@ -61,5 +62,6 @@ class InterviewTest {
         // NOT YET PASSED
         Interview notPassedInterview = new Interview("2100-08-12, 00:10");
         assertFalse(notPassedInterview.hasInterviewPassed());
+
     }
 }
