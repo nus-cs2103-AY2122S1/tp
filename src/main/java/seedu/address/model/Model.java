@@ -94,6 +94,16 @@ public interface Model {
     boolean hasMember(Member member);
 
     /**
+     * Returns true if a member with the same phone number as {@code member} exists in SportsPA.
+     */
+    boolean hasMemberWithSamePhoneNumber(Member member);
+
+    /**
+     * Returns true if a member with the same name as {@code member} exists in SportsPA.
+     */
+    boolean hasMemberWithSameName(Member member);
+
+    /**
      * Returns true if a facility with the same parameters as {@code facility} exists in SportsPA.
      */
     boolean hasFacility(Facility facility);

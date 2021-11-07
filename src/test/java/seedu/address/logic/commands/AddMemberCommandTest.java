@@ -175,6 +175,16 @@ public class AddMemberCommandTest {
         }
 
         @Override
+        public boolean hasMemberWithSamePhoneNumber(Member member) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasMemberWithSameName(Member member) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasFacility(Facility facility) {
             throw new AssertionError("This method should not be called.");
         }
