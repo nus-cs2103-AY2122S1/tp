@@ -1,5 +1,8 @@
 package seedu.programmer.logic.commands;
 
+/**
+ * A CommandResult that requires handling in the UI.
+ */
 public class UploadCommandResult extends CommandResult {
 
     /**

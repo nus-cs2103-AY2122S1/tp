@@ -4,6 +4,9 @@ import javafx.scene.control.Label;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 
+/**
+ * Popup manager for creating, configuring and displaying popups on a stage.
+ */
 public class PopupManager {
 
     private static final Double PADDING_FACTOR = 0.1;

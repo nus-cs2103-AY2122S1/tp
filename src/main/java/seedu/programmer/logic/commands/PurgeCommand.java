@@ -38,7 +38,7 @@ public class PurgeCommand extends Command {
      * @return Whether the list is empty or not.
      */
     public boolean isLastShownListEmpty(Model model) {
-        List<Student> lastShownList = model.getFilteredStudentList();
+        List<Student> lastShownList = model.getAllStudents();
         return lastShownList.size() == 0;
     }
 }
