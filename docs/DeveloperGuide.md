@@ -1123,4 +1123,3 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect formatting of data or invalid fields: birthday to `00000000`, phone to `mynumber`, `...`
         Expected: Similar to previous
 
-1. _{ more test cases …​ }_
