@@ -21,7 +21,7 @@ title: Developer Guide
         4.3 <a href="#43-edit-clientproduct-feature">Edit Client/Product Feature</a><br>
         4.4 <a href="#44-find-clientproduct-feature">Find Client/Product Feature</a><br>
         4.5 <a href="#45-view-clientproduct-feature">View Client/Product Feature</a><br>
-        4.6 <a href="#46-stat-feature">Stats Feature</a><br>
+        4.6 <a href="#46-stats-feature">Stats Feature</a><br>
         4.7 <a href="#47-command-history-feature">Command History Feature</a><br>
         4.8 <a href="#48-proposed-undoredo-feature">[Proposed] Undo/Redo Feature</a><br>
         4.9 <a href="#49-proposed-data-archiving">[Proposed] Data Archiving</a><br>
@@ -43,7 +43,7 @@ title: Developer Guide
         7.6 <a href="#76-listing-clientproduct">Listing Clients/Products</a><br>
         7.7 <a href="#77-finding-a-clientproduct">Finding a Client/Product</a><br>
         7.8 <a href="#78-viewing-a-clientproduct">Viewing a Client/Product</a><br>
-        7.9 <a href="#79-saving-data">Saving Data</a><br>
+        7.9 <a href="#710-saving-data">Saving Data</a><br>
    </details>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -379,6 +379,7 @@ the inputs and returning a `ViewClientCommand`. The command will then be execute
 * **Alternative 2** : User can view multiple clients or products
     * Pros : Easier comparisons between clients or products
     * Cons : More complex code which would lead to higher amount of error
+
 ### 4.6 Stats Feature
 
 This feature presents the statistics of the current inventory based on the orders of the `Clients`. The `Orders` are 
