@@ -256,13 +256,13 @@ Next, let us assume that you have decided to charge your students $125.90 per mo
 1. You will now be able to see how the lesson pricing has been updated to what you have requested.
 
 ### 4.3: Adding a student to a lesson
-Now that you have set up the lesson _History 1_, let us add one of your existing students who wishes to enrol in the class, Alex Yeoh. You can do this in TutorAid by following the steps below:
+Now that you have set up the lesson _History 1_, let us add one of your existing students who wishes to enrol in the class, Roy Balakrishnan. You can do this in TutorAid by following the steps below:
 
-1. Key in `add -sl s/1 l/2` into the Command Box and press ENTER.
+1. Key in `add -sl s/6 l/2` into the Command Box and press ENTER.
 
-    > :bulb: The numbers `1` and `2` in the command above refer to the indices of Alex Yeoh and _History 1_ in the Student and Lesson Panels respectively. For more information, you can refer to the detailed documentation for [adding a student to a lesson](#adding-students-to-lessons-add--sl).
+    > :bulb: The numbers `6` and `2` in the command above refer to the indices of Roy and _History 1_ in the Student and Lesson Panels respectively. For more information, you can refer to the detailed documentation for [adding a student to a lesson](#adding-students-to-lessons-add--sl).
 
-1. You should now be able to see that in the Student Panel, the lesson _History 1_ has been added to the list of lessons taken by Alex Yeoh's. Similarly, in the Lesson Panel, you will be able to see that Alex Yeoh has been added to the list of students attending _History 1_. 
+1. You should now be able to see that in the Student Panel, the lesson _History 1_ has been added to the list of lessons taken by Roy. Similarly, in the Lesson Panel, you will be able to see that Roy has been added to the list of students attending _History 1_. 
 
 ### 4.4: Adding a progress note for a student
 {:.no_toc}
