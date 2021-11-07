@@ -113,16 +113,12 @@ public class UniquePolicyList implements Iterable<Policy> {
     /**
      * Returns the total commission from the policy list.
      */
-    public int getTotalCommission() {
-        float total = 0;
+    public double getTotalCommission() {
+        double total = 0;
         for (Policy policy : internalList) {
-            int commissionPercentage = policy.getCommission().commissionPercentage;
-            int numberPayments = policy.getCommission().numberOfPayments;
-            int paymentAmt = policy.getPaymentStructure().paymentAmount;
-            total = total + ((float) commissionPercentage / 100)
-                    * numberPayments * paymentAmt;
+            total = total + policy.getTotalCommission();
         }
-        return (int) total;
+        return total;
     }
 
     /**
