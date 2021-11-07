@@ -70,12 +70,18 @@ The result of executing the input command will be displayed the lower-most box.
 
 ## Features
 
+### Command Format
+
+**Format:** `command_word Prefix/PARAMETER`
+
+* `command_word` is a word at the start of the command to specify the action to be done. <br> e.g. in `add n/NAME`, `add` is the command word.
+* `PARAMETER` are word(s) in `UPPER_CASE` to be supplied by the user.<br> e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`
+* `Prefix` are letter(s) before `PARAMETER` to denote the information supplied as parameter. <br>e.g. in `add n/NAME`, `n/` is a prefix to indicate that NAME is being supplied.
+
+
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
-
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
   e.g `add n/NAME [fd/LAST_FET_DATE]` can be used as `add n/John` or as `add n/John fd/09-09-2021`.
@@ -108,15 +114,20 @@ Adds a resident and their information to the application.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM v/VACCINATION_STATUS f/FACULTY [fd/LAST_FET_DATE] [cd/LAST_COLLECTION_DATE]`
 
+Parameter | Constraints
+|--------|-------
+**NAME** | Unique, only containing alphabetical characters and spaces
+**PHONE** | At least 3 digits long
+**ROOM** | consists of **block** + **level** + **number** <br>**block** is an alphabetical character from A to E <br>**level** is a digit from 1 to 4 <br>**number** is two digits from 00 to 29 <br>e.g. `A100`
+**VACCINATION_STATUS** | `T` or `F` (case insensitive)
+**FACULTY** | Single alphabetical word
+**LAST_FET_DATE** <br> **LAST_COLLECTION_DATE** | `dd-mm-yyyy`, `dd.mm.yyyy` or `dd/mm/yyyy` format
+
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Parameter constraints:**<br>
-* `NAME` has to be unique.
-* `PHONE` is at least 3 digits long.
-* `ROOM` is of the form `BLOCK` + `LEVEL` + `NUMBER`, where `BLOCK` is an alphabet, `LEVEL` and `NUMBER` make up 3 digits. e.g. `A100`
-* `VACCINATION_STATUS` can be `T` or `F` (case insensitive).
-* `FACULTY` has to be a single alphabetical word.
-* The dates inputted for `LAST_FET_DATE` and `LAST_COLLECTION_DATE` has to be in dd-mm-yyyy format.
+**:information_source: Note:**<br>
+
+**ROOM** is currently modelled after an existing hall in the National University of Singapore.
 
 </div>
 
@@ -290,10 +301,18 @@ Example csv:
 
 #### Exporting residents' emails : `export`
 
-Exports the emails of all the residents in the last filtered list to a filename of choice within the `data/exports/` folder.
-As they are comma-separated, a quick copy-paste allows you to send mass emails using modern email clients.
+Exports the emails of all the residents in the last filtered list to a csv file within the `data/exports/` folder.
+A quick copy-paste of the email addresses from the csv file allows you to send mass emails using modern email clients.
 
 Format: `export FILE_NAME`
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:**<br>
+
+* The file format (`.csv`) is not to be included in the `FILE_NAME`
+
+</div>
 
 Examples:
 * `export` followed by `safeforhall` creates a `safeforhall.csv` within the `data/exports/` folder, with the emails of all the residents currently displayed on the application.
@@ -446,6 +465,7 @@ FIELD | Event's field
 Examples:
 * `sort by/n o/a` sorts the events by name in ascending order
 * `sort by/d o/a` sorts the events by date and time from old to new
+* `sort by/d o/d` sorts the events by date and time from new to old
 
 ### Commons
 
