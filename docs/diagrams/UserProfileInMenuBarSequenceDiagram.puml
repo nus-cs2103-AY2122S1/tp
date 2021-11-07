@@ -63,7 +63,7 @@ activate UiPart
 UiPart --> MainWindow
 deactivate UiPart
 
-else Profile is not Present or Profile is already set up
+else Profile is not Present or Profile has already been set up
 
 end alt
 

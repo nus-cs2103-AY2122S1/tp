@@ -424,8 +424,9 @@ class to achieve the fading image and character typing effect, respectively.
 #### Implementation
 
 The class `ProfileSetUpWindow` is responsible for displaying the Profile SetUp Window. 
-It is only shown once when the User launches the app for the first time and has input 
-their credentials as required. It is facilitated by `ProfileSetUpWindow.fxml` and 
+It is only shown once when the User launches the app for the first time, and their 
+credentials are not present. They have to input their valid credentials here.
+It is facilitated by `ProfileSetUpWindow.fxml` and 
 `ProfileSetUpWindow.css`. The `.fxml` file is responsible for the layout of the 
 various components in this window, and the `.css` file adds a style and enhances 
 the overall UI.
@@ -439,7 +440,7 @@ method of the `ProfileSetUpWindow`, the `ProfileSetUpWindow` with the help of
 a `Logic` object (which is obtained during initialization) checks, if a 
 User Profile is present. If it is present, it 
 again hands over the control to the `MainWindow` by calling the `start()` method 
-of the `MainWindow` Object. Else, It displays the Profile SetUp Window and 
+of the `MainWindow`. Else, It displays the Profile SetUp Window and 
 waits for a response from the User.
 
 After the User has input their credentials in the text fields, they are expected to 
@@ -447,7 +448,7 @@ click the `Submit` button. When that button is clicked upon, the `submit()` meth
 invoked. This method calls the `areUserCredentialsValid()` method to verify if the
 entered credentials are valid or not. If they are valid, the User Profile is deemed 
 complete and is set up with the help of the `Logic` object obtained during
-the object's initialization. If the credentials are not valid, an error message
+the initialization. If the credentials are not valid, an error message
 is shown in the Window, highlighting which credential is invalid. The User cannot proceed
 forward without entering all valid Credentials.
 
@@ -461,8 +462,19 @@ and the GitHub Username are valid.
 3. Class level method `isValidGithub()`, of `Github` class
    verifies the GitHub Username entered.
 
-This method is also responsible for displaying the appropriate error message
-in the Window.
+If either of the credentials is not valid, the `setErrorMessageText(MESSAGE)` is
+called with the appropriate error message. This method is responsible for displaying 
+this error message in the Window.
+
+> A Typical Scenario Would be like:
+
+![ProfileSetUpWindowTypicalScenarioSequenceDiagram](images/ProfileSetUpWindowTypicalScenarioSequenceDiagram.png)
+
+> If The User Enters an Invalid Telegram Credential:
+
+![ProfileSetUpWindowInvalidCredentialsSequenceDiagram](images/ProfileSetUpWindowInvalidCredentialsSequenceDiagram.png)
+
+> The Big Picture (High Level Diagram):
 
 ![ProfileSetUpWindowSequenceDiagram](images/ProfileSetUpWindowSequenceDiagram.png)
 
@@ -500,8 +512,8 @@ to initialize all the fields with the latest User Profile Credentials. This woul
 also call `UserProfileWindow#setFields()`, to set them up in the UI. After all the setting
 up is done, the User Profile Window is shown.
 
-The `UserProfileWindow#focus()`, calls the `getRoot()` method to obtain the root object.
-On that root object, `requestFocus()` is called upon to request focus.
+The `UserProfileWindow#focus()`, calls the `getRoot()` method and on that `requestFocus()` 
+is called upon to request focus.
 
 ![UserProfileWindowSequenceDiagram](images/UserProfileWindowSequenceDiagram.png)
 
@@ -545,6 +557,12 @@ the object initialized earlier. If it is not showing, the `show()` method of the
 minimized by the User, `HelpWindow#getRoot()#toFront()` is called to
 bring the window to the maximized state.
 
+There is also a button present in the window, `Visit URL`, which upon 
+clicking, takes the User to the UserGuide. It opens the UserGuide in the
+Users systems default browser.
+
+![HelpWindowVisitURLButton](images/HelpWindowVisitURLButton.png)
+
 ![HelpWindowSequenceDiagram](images/HelpWindowSequenceDiagram.png)
 
 ### User Profile in Menu Bar
@@ -555,7 +573,9 @@ The class `UserProfileInMenuBar` is responsible for displaying the User
 Profile in the Menu Bar. It is shown in the Main Window, in the top right
 of the Menu Bar beside the Bell icon. It is facilitated by `UserProfileInMenuBar.fxml`.
 The `.fxml` file is responsible for the layout of the various components inside
-this Region.
+this Region. On clicking this, the `UserProfileWindow` is shown.
+
+![UserProfileInMenuBarPictureHighlight](images/UserProfileInMenuBarPictureHighlight.png)
 
 The `UserProfileInMenuBar` class extends `UiPart<Region>` and implements
 `UserProfileWatcher`.
