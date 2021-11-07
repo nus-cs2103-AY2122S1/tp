@@ -26,7 +26,7 @@ public class Notor implements ReadOnlyNotor {
             + "If you need help, you can refer to the help page!\n\n"
             + "Some things this application can do are: \n"
             + "person /list : Lists all contacts.\n"
-            + "person 3 /delete : Deletes the 3rd contact (contact with\nindex number 3) shown in the current list.\n"
+            + "person 3 /delete : Deletes the 3rd contact listed.\n"
             + "note: Edit this note here to whatever you wish!"
             + "\n\n\n ...and much more!";
 
