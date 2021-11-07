@@ -67,7 +67,7 @@ public class InitialStudent {
             throws IOException {
         for (Lesson lesson : fullLessonList) {
             if (lesson.toNameString().equals(lessonName) && lesson.isFull()) {
-                lesson.removeAllStudents();
+                fullLessonList.forEach(Lesson::removeAllStudents);
                 throw new IOException();
             } else if (lesson.toNameString().equals(lessonName)) {
                 lessons.addLesson(lesson);
