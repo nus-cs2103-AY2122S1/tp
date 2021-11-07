@@ -121,7 +121,7 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` and `ModuleLesson` objects (which are contained in a `UniquePersonList` and `UniqueModuleLessonList` object respectively).
+* stores contHACKS data i.e., all `Person` and `ModuleLesson` objects (which are contained in a `UniquePersonList` and `UniqueModuleLessonList` object respectively).
 * stores the currently 'selected' `Person` and `ModuleLesson` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` and `ObservableList<ModuleLesson>` that can be 'observed' e.g. the UI can be bound to those lists so that the UI automatically updates when the data in the lists change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
@@ -133,13 +133,13 @@ The `Model` component,
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
+* can save both contHACKS data and user preference data in json format, and read them back into corresponding objects.
 * inherits from both `ConthacksStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -200,10 +200,18 @@ Notice that the `AddModuleLessonCommandParser` uses the method `parseModuleCodeF
     * Cons: Low level of code reuse
     * Cons: Not extensible
 
+<div markdown="span" class="alert alert-primary">:information_source: **Note:**
+The above information is also applicable for the edit feature.
+</div>
 
 ### Find feature 
+Users are able to execute a command to find an existing person in contHACKS. 
+contHACKS will parse the find command for keywords, and filters the list of contacts to be displayed. 
+Upon a successful search, the person card will be returned and listed in the GUI. 
 
-#### Implementation
+![Interactions for  `find n/Alex` Command](images/FindPersonSequenceDiagram.png)
+
+### Implementation
 The find command returns contacts that matches the input keywords. Initially, it only returns contacts that fully matches the keywords.
 Given the following example contact book:
 * Contact #1: Jason
@@ -240,7 +248,7 @@ before the correct `Predicate` is instantiated and used for finding the contact.
     * Pros: Faster searches with just partial keywords.
     * Cons: Contacts you did not mean to retrieve are also displayed.
 
-### Delete by batch feature
+### Delete contact by batch feature
 
 Users are able to execute a command to delete an existing module code in contHACKS. Upon successful deletion of the module code,
 the module code will not exist in contHACKS thus all lesson codes, if any, under the module code will be deleted (module and lesson have a composition relationship).
@@ -283,6 +291,37 @@ The following sequence diagrams show how the delete by module code feature works
     * Pros: Faster deletion while still supporting deletion by one index.
     * Cons: Not able to undo the deletion if the user deletes the wrong batch, it would take a long time to key all the information back in.
 
+<div markdown="span" class="alert alert-primary">:information_source: **Note:**
+The above information is also applicable for the delete lesson by batch feature.
+</div>
+
+### Aliases for different commands
+
+Aliases are alternative words that you can use to perform the same command. There are a few default aliases provided for every command.
+Users can choose to use their most preferred alias to perform the command they want.
+
+#### Implementation
+
+How the alias work is as such:
+
+1. When `Logic` is called upon to execute a command, it calls the `ConthacksParser` class to parse the user command.
+2. As `ConthacksParser` parses the user command, `ConthacksParser` separates the `commandWord` string from the rest of the arguments inside the user command string.
+3. `ConthacksParser` will pass this `commandWord` string into `CommandWord` enum class which contains all the aliases for the different commands. Then, `CommandWord` will check if the `commandWord` string is an alias for any of our implemented commands.
+4. If the alias is a legitimate alias for any of the `XYZCommand`, `CommandWord` class will return the respective `CommandWord` enum back to ConthacksParser, and ConthacksParser will use this enum to call the respective `XYZCommandParser` to call and creates the respective `XYZCommand` object.
+
+The following sequence diagram show how the parsing of alias works, using the example `ec 1 m/CS2100 T19` 
+
+![Sequence diagram for parsing of alias](images/ParseAliasSequenceDiagram.png)
+
+**Aspect: Previous and current version of commandWord:**
+
+* **Alternative 1 (previous version):** The `commandWord` string for a `XYZCommand` is stored as an attribute in the `XYZCommand` class.
+    * Pros: Simple implementation for `ConthacksParser` to check which `XYZCommandParser` to call.
+    * Cons: Very difficult to add more `commandWord` for any `XYZCommand`. If the `XYZCommand` has multiple possible `commandWord`, we will need to add all to the attributes of `XYZCommand` and checking one by one is very difficult. 
+
+* **Alternative 2 (current version):** Shift all the `commandWord` string of every `XYZCommand` into a `CommandWord` enum class. One enum in the `CommandWord` can contains multiple `commandWord` string. 
+    * Pros: Easy to add a new alias (new commandWord) for any of the command. 
+    * Cons: The implementation is more complex than alternative 1.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -319,183 +358,305 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *` | potential user | be able to download the app | use it to keep track of my contacts |
-| `* * *` | potential user | be able to start the app | see how the app would look like |
-| `* * *` | user | be able to create a new contact in the address book | save a contact |
-| `* * *` | user | be able to retrieve an existing contact in the address book | retrieve more details about the contact |
-| `* * *` | user | be able to update an existing contact in the address book | change information about my student if I made a mistake when adding them |
-| `* * *` | user | be able to delete an old contact in the address book | delete contacts whom I am not in contact with anymore |
-| `* * *` | user | be able to see their contact details | copy the contact details to contact them |
-| `* * *` | new user | be able to find out what kind of commands are available | use the app as intended |
-| `* * *` | user | be able to close the app | stop using it |
+| `* * *` | user | have access to a help page | know how to navigate the app |
+| `* * *` | user | be able to create a new contact in contHACKS | save a contact |
+| `* * *` | user | be able to find an existing contact in contHACKS | retrieve details about the contact |
+| `* * *` | user | be able to update an existing contact in contHACKS | change information about my student if I made a mistake when adding them |
+| `* * *` | user | be able to delete an unwanted contact in contHACKS | delete contacts whom I am not in contact with anymore |
+| `* * *` | user | be able to see their contact details | refer the contact details to contact them |
 | `* *` | user | be able to purge all current data | get rid of sample/experimental data I used for exploring the app |
 | `* *` | user | be able to view my contacts in alphabetical order | see the contacts in more intuitive way |
 | `* *` | user | be able to delete by module | delete all contacts linked to that module |
 | `* *` | user | be able to delete contacts by groups | delete many contacts in one go |
-| `* *` | user | be able to see the group a contact belongs to | recall how I know the particular person |
+| `* *` | user | be able to see the group a contact belongs to | know which lesson this person belongs to |
 | `* *` | user | be able to search for contacts | save time have to scroll the entire contact list |
 | `* *` | user | be able to retrieve data fast | get the contact in the fastest time possible |
 | `* *` | user | be able to search by categories | ignore unrelated contacts |
 | `* *` | user | be able to add a description about a contact | add more details about the contact |
-| `* *` | user | have access to a help page | know how to navigate the app |
 | `* *` | user | be able to create a class card | see my current classes |
 | `* *` | user | be able to see class details | recall the specifics of the class |
 | `* *` | user | be able to update class details | ensure my class details are correct |
 | `* *` | user | be able to delete a class | remove the classes that are irrelevant |
-| `* *` | potential user exploring the app | be able to see the app populated with sample data | easily see how the app works |
-| `*` | forgetful user | be able to have reminders about upcoming classes | conduct classes punctually |
-| `*` | user | be able to set up profile picture for the contact | recognise the person |
-| `*` | user | be able to set up profile picture for myself | add a personal touch to the application |
-| `*` | Expert user | be able to set up shortcuts | do things faster |
+| `*` | expert user | be able to set up my own aliases | use the alias that I am more comfortable with |
 
 
 ### Use cases
 
 (For all use cases below, the **System** is `contHACKS` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Creating a contact**
+**Use case `UC01`: Adding a contact**
 
 **MSS**
 
 1. User requests to create a contact and inputs contact details
-2. contHACKS creates the contact and displays the newly added contact
+2. contHACKS creates the contact and displays information of the newly added contact
 
-Use case ends
+Use case ends.
 
 **Extensions**
-* 1a. User fails to provide compulsory field
-    * 1a1. contHACKS shows an error message<br />
-    Use case ends
+* 1a. User fails to provide any of the compulsory fields
+    * 1a1. contHACKS shows an error message <br/>
+    Use case ends.
 
 
-* 1b. User input details in a wrong format
-    * 1b1. contHACKS shows an error message<br />
-    Use case ends
+* 1b. User inputs details in a wrong format
+    * 1b1. contHACKS shows an error message <br/>
+    * 1b2. User enters new input <br>
+    Steps 1b1 - 1b2 are repeated until the input is in a correct format. <br>
+    Use case resumes from step 2. <br>
+    Use case ends.
 
 
-**Use case: Finding a contact**
+* 1c. User inputs details with the same email/phone number/telegram handle as another existing contact in contHACKS.
+  * 1c1. contHACKS disallow this operation and shows an error message <br>
+  * 1c2. User enters new input <br>
+  Steps 1c1 - 1c2 are repeated until the email/phone number/telegram handle is unique in the list of contacts. <br>
+  Use case ends.
+
+
+**Use case `UC02`: Finding a contact**
 
 **MSS**
 
 1. User requests to find a contact based on input details
-2. contHACKS shows a list of contacts that match input details
+2. contHACKS shows a list of contacts that matches the input details
 
-Use case ends
+Use case ends.
 
 **Extensions**
 * 1a. There are no contacts that matches the input details
-    * 1a1. contHACKS displays an empty list<br />
-    Use case ends
+    * 1a1. contHACKS displays an empty list <br/>
+    Use case ends.
 
 
 * 1b. User finds by name
-    * 1b1. contHACKS displays a list of contacts with names that match the input<br />
-    Use case ends
+    * 1b1. contHACKS displays a list of contacts with names that match the input <br/>
+    Use case ends.
 
 
 * 1c. User finds by module code
-    * 1c1. contHACKS displays a list of contacts that are tagged with the module code<br />
-    Use case ends
+    * 1c1. contHACKS displays a list of contacts that are tagged with the module code <br/>
+    Use case ends.
 
 
-* 1d. User input details in a wrong format
-    * 1d1. contHACKS shows an error message<br />
-    Use case ends
+* 1d. User inputs details in a wrong format
+    * 1d1. contHACKS shows an error message <br/>
+    * 1d2. User enters new input <br>
+    Steps 1d1 - 1d2 are repeated until the input is in a correct format. <br>
+    Use case resumes from step 2. <br>
+    Use case ends.
 
 
-**Use case: Updating a contact**
+**Use case `UC03`: Editing a contact**
 
 **MSS**
 
 1. User requests to update a specific contact and inputs the new contact details
-2. contHACKS updates the contact with the inputted details and displays the updated contact
+2. contHACKS updates the contact with the input details and displays the updated contact
 
 Use case ends
 
 **Extensions**
 * 1a. Contact does not exist
-    * 1a1. contHACKS shows an error message<br />
-    Use case ends
+    * 1a1. contHACKS shows an error message <br/>
+    Use case ends.
 
 
-* 1b. User input details in a wrong format
-    * 1b1. contHACKS shows an error message<br />
-    Use case ends
+* 1b. User inputs details in a wrong format
+    * 1b1. contHACKS shows an error message <br>
+    * 1b2. User enters new input <br>
+    Steps 1b1 - 1b2 are repeated until the input is in a correct format. <br>
+    Use case resumes from step 2. <br>
+    Use case ends.
 
 
-**Use case: Adding remark to a contact**
+* 1c. User inputs email/phone/number/telegram handle as another existing contact in contHACKS
+  * 1c1. contHACKS disallows this operation and shows an error message <br>
+  Use case ends.
+
+**Use case `UC04`: Deleting contact(s)**
 
 **MSS**
 
-1. User requests to add a remark to a specific contact
-2. contHACKS updates the contact with the inputted remark and displays the updated contact
+1. User requests to list all contacts (`UC05`) or find contacts (`UC02`) 
+2. User requests to delete specific contact(s) in the shown list
+3. contHACKS deletes the contact(s) and displays the updated contact list
 
-Use case ends
+Use case ends.
 
 **Extensions**
 * 1a. Contact does not exist
-    * 1a1. contHACKS shows an error message<br />
-      Use case ends
+    * 1a1. contHACKS shows an error message <br/>
+      Use case ends.
+* 1b. The index provided is invalid
+  * 1b1. contHACKS displays an invalid index error message. <br>
+  Use case ends.
 
 
-* 1b. User input the remark in a wrong format
-    * 1b1. contHACKS shows an error message<br />
-      Use case ends
-
-
-**Use case: Deleting a contact**
+**Use case `UC05`: Listing the contact list**
 
 **MSS**
 
-1. User requests to delete a specific contact
-2. contHACKS deletes the contact and displays the updated contact list
-
-Use case ends
-
-**Extensions**
-* 1a. Contact does not exist
-    * 1a1. contHACKS shows an error message.<br />
-      Use case ends
-
-
-**Use case: Listing the contact list**
-
-**MSS**
-
-1. User requests to for the whole contact list
+1. User requests to list the whole contact list
 2. contHACKS displays the whole contact list
 
-Use case ends
+Use case ends.
 
 
-**Use case: Clear all contacts**
+**Use case `UC06`: Clearing all contacts**
 
 **MSS**
 
 1. User requests to clear all contacts
-2. contHACKS delete all the contacts and displays an empty contact list
+2. contHACKS deletes all the contacts and displays an empty contact list
 
-Use case ends
+Use case ends.
 
-
-**Use case: Getting help manual**
+**Use case `UC06`: Adding a lesson**
 
 **MSS**
 
-1. User requests to for a help manual
-2. contHACKS displays the help manual
+1. User requests to create a lesson and inputs lesson details
+2. contHACKS creates the lesson and displays information of the newly added lesson
+
+Use case ends.
+
+**Extensions**
+* 1a. User fails to provide any of the compulsory fields
+    * 1a1. contHACKS shows an error message <br/>
+      Use case ends.
+
+
+* 1b. User inputs details in a wrong format
+    * 1b1. contHACKS shows an error message <br/>
+    * 1b2. User enters new input <br>
+      Steps 1b1 - 1b2 are repeated until the input is in a correct format. <br>
+      Use case resumes from step 2. <br>
+      Use case ends.
+
+
+* 1c. User inputs details with the same module code and lesson code as another existing lesson in contHACKS.
+    * 1c1. contHACKS disallow this operation and shows an error message <br>
+    * 1c2. User enters new input <br>
+      Steps 1c1 - 1c2 are repeated until module code/lesson code is unique in the list of lessons. <br>
+      Use case ends.
+
+
+**Use case `UC07`: Finding a lesson**
+
+**MSS**
+
+1. User requests to find a lesson based on input details
+2. contHACKS shows a list of lessons that matches the input details
+
+Use case ends.
+
+**Extensions**
+* 1a. There are no lessons that matches the input details
+    * 1a1. contHACKS displays an empty list <br/>
+      Use case ends.
+
+
+* 1b. User finds by module code
+    * 1b1. contHACKS displays a list of lessons that are tagged with the module code <br/>
+      Use case ends.
+
+* 1c. User finds by day 
+  * 1c1. contHACKS displays a list of lessons that are on this day
+
+
+* 1d. User inputs details in a wrong format
+    * 1d1. contHACKS shows an error message <br/>
+    * 1d2. User enters new input <br>
+      Steps 1d1 - 1d2 are repeated until the input is in a correct format. <br>
+      Use case resumes from step 2. <br>
+      Use case ends.
+
+
+**Use case `UC08`: Editing a lesson**
+
+**MSS**
+
+1. User requests to update a specific lesson and inputs the new lesson details
+2. contHACKS updates the lesson with the input details and displays the updated lesson
+
+Use case ends.
+
+**Extensions**
+* 1a. Lesson does not exist
+    * 1a1. contHACKS shows an error message <br/>
+      Use case ends.
+
+
+* 1b. User inputs details in a wrong format
+    * 1b1. contHACKS shows an error message <br>
+    * 1b2. User enters new input
+      Steps 1b1 - 1b2 are repeated until the input is in a correct format. <br>
+      Use case resumes from step 2.
+      Use case ends.
+
+
+* 1c. User inputs module code and lesson code that is the same as another existing lesson in contHACKS
+    * 1c1. contHACKS disallows this operation and shows an error message <br>
+      Use case ends.
+
+**Use case `UC09`: Deleting lesson(s)**
+
+**MSS**
+
+1. User requests to list all lessons (`UC10`) or find lessons (`UC07`)
+2. User requests to delete specific lesson(s) in the shown list
+3. contHACKS deletes the lesson(s) and displays the updated lesson list
 
 Use case ends
 
+**Extensions**
+* 1a. Lesson does not exist
+    * 1a1. contHACKS shows an error message <br/>
+      Use case ends.
+  
+* 1b. The index provided is invalid
+  * 1b1. contHACKS displays an invalid index error message. <br>
+    Use case ends.
 
-**Use case: Exiting the application**
+
+**Use case `UC10`: Listing the lesson list**
+
+**MSS**
+
+1. User requests to list the whole lesson list
+2. contHACKS displays the whole lesson list
+
+Use case ends.
+
+
+**Use case `UC11`: Clearing all lessons**
+
+**MSS**
+
+1. User requests to clear all lessons
+2. contHACKS deletes all the lessons and displays an empty lesson list
+
+Use case ends.
+
+
+**Use case `UC12`: Accessing help manual**
+
+**MSS**
+
+1. User requests for a help manual
+2. contHACKS displays the help manual
+
+Use case ends.
+
+**Use case `UC13`: Exiting the application**
 
 **MSS**
 
 1. User requests to exit the application
 2. contHACKS closes
 
-Use case ends
+Use case ends.
 
 
 ### Non-Functional Requirements
@@ -599,22 +760,33 @@ testers are expected to do more *exploratory* testing.
    Expected: The day of the first lesson shown in contHACKS will be changed to `Wednesday`
 
 3. Test case: `editc -1 d/3`<br>
-   Expected: An error message will be shown in the result display, showing that the index provided is invalid. The words in the command box will turn red.
+   Expected: An error message will be shown in the result display, showing that the index provided is invalid. Text in the command box turns red.
 
 ### Deleting a person
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
    2. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the result display.
 
    3. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No person is deleted. Error details shown in the result display. Text in the command box turns red.
 
-   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 ### Deleting a lesson
+
+  1. Prerequisites: List all lessons using `listc`command . Multiple lessons in the list.
+
+  2. Test case: `deletec 1`<br>
+     Expected: First lesson is deleted from the list. Details of the deleted lesson shown in the result display.
+
+  3. Test case: `deletec 0` <br>
+     Expected: No lesson is deleted. Error details shown in the result display. Text in the command box turns red.
+
+  4. Other incorrect delete commands to try: `deletec`, `deletec x` (where x is larger than the list size)<br>
+     Expected: Similar to previous.
    
 ### Saving data
 
