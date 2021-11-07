@@ -7,7 +7,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project team
 
-Hi, this is AcademyDirectory!
+Hi, this is Academy Directory!
 
 
 ### Manh Duc

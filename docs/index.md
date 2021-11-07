@@ -1,6 +1,6 @@
 ---
 layout: page
-title: AcademyDirectory
+title: Academy Directory
 ---
 
 [![CI Status](https://github.com/AY2122S1-CS2103T-T15-3/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2122S1-CS2103T-T15-3/tp/actions)
@@ -16,7 +16,7 @@ title: AcademyDirectory
 Academy Directory runs on all major operating systems! It is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
 
 ## Site Map
-* If you are interested in using AcademyDirectory, head over to our [**User Guide**](UserGuide.html).
+* If you are interested in using Academy Directory, head over to our [**User Guide**](UserGuide.html).
 * If you are interested in developing Academy Directory further, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
 
 
