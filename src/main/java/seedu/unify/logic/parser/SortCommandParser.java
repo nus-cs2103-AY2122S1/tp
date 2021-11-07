@@ -1,6 +1,7 @@
 package seedu.unify.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.unify.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.function.BiFunction;
 import java.util.function.BinaryOperator;
@@ -33,7 +34,8 @@ public class SortCommandParser implements Parser<SortCommand> {
             if (sortOrder.equalsIgnoreCase("desc")) {
                 op = (x, y) -> y - x;
             } else if (!sortOrder.equalsIgnoreCase("asc")) {
-                // throw error
+                throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
             }
         }
 
@@ -45,7 +47,8 @@ public class SortCommandParser implements Parser<SortCommand> {
             if (sortType.equalsIgnoreCase("priority")) {
                 func = x -> x.getPriority().getObjectPriority().getValue();
             } else if (!sortType.equalsIgnoreCase("time")) {
-                // throw error
+                throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
             }
         }
 
