@@ -28,6 +28,10 @@ public interface ReadOnlyAddressBook {
      */
     ObservableList<Tag> getTagList();
 
-    /** Returns an unmodifiable view of the tag counter map. */
+    /**
+     * Returns an unmodifiable view of the tag counter map.
+     *
+     * @return An unmodifiable view of the tag counter map.
+     */
     ObservableMap<Tag, Integer> getTagCounter();
 }
