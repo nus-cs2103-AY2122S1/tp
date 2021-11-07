@@ -1373,7 +1373,7 @@ Use case ends.
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed
 2. The response to any user action should become visible within 2 seconds
-3. Should be able to hold up to 50 students and 50 lessons without a noticeable sluggishness in performance for typical usage
+3. Should be able to hold up to 50 students and 50 lessons without a noticeable sluggishness in performance for typical usage (actions should not exceed 2 seconds)
 4. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse
 5. The source code should be open source
 6. The product is offered as a free service
@@ -1382,7 +1382,6 @@ Use case ends.
 9. All features should be easily testable
 10. Should be portable, i.e. user can transfer data from one device to another easily
 11. Should allow users to easily navigate the app interface
-
 
 ## Appendix B: Glossary
 
@@ -1393,7 +1392,7 @@ Use case ends.
 * **Makeup lesson**: A lesson that occurs only once, for a student who has missed a previous lesson.
 * **Mainstream OS**: Windows, Linux, Unix, OS-X.
 * **OOP**: Object-Oriented Programming - a programming paradigm that organizes software design around data, or objects, rather than functions and logic
-* **Private contact detail**: A contact detail that is not meant to be shared with others.
+* **Contact detail**: Information that can be used to make contact with a person. Such information include a person's phone number and email address. 
 * **Recurring lesson**: A lesson that will occur more than once in patterned intervals.
 * **Sequence Diagram**: A UML sequence diagram models the interactions between various entities in a system, in a specific scenario. Modelling such scenarios is useful, for example, to verify the design of the internal interactions is able to provide the expected outcomes (as defined in the Software Engineering for Self-Directed Learners CS2103/T edition [textbook](https://nus-cs2103-ay2122s1.github.io/website/se-book-adapted/index.html)).
 * **Session**: A session begins when the app is started and ends when the app is exited.
@@ -1426,9 +1425,7 @@ testers are expected to do more *exploratory* testing.
 
    2. Re-launch the app by double-clicking the jar file.<br>
           Expected: The most recent window size and location is retained.
-
-_{ more test cases …​ }_
-
+   
 ### Deleting a person
 
 **Deleting a person while all persons are being shown<br>**
@@ -1526,11 +1523,23 @@ Expected: Error details will be shown in the status message.
 
 **Navigating the Calendar**
 
+   * Test case: `day`<br>
+     Expected: `CenterPanel` displays the day page of the Calendar Interface. 
+   
    * Test case: `week`<br>
      Expected: `CenterPanel` displays the week page of the Calendar Interface. 
    
+   * Test case: `month`<br>
+     Expected: `CenterPanel` displays the month page of the Calendar Interface. 
+   
+   * Test case: `year`<br>
+     Expected: `CenterPanel` displays the year page of the Calendar Interface. 
+   
    * Test case: `next`<br>
      Expected: `CenterPanel` displays the Calendar Interface and navigates forward in the calendar.
+
+   * Test case: `back`<br>
+     Expected: `CenterPanel` displays the Calendar Interface and navigates backwards in the calendar.
    
    * Test case: `today`<br>
      Expected: `CenterPanel` displays the Calendar Interface and jumps to the current day/week/month/year.
@@ -1551,8 +1560,7 @@ the most used page.
   * Expected: `CenterPanel` displays the list of **all** students.
 
   * Test case: `view 2`
-  * Expected: If there is a second student, this command will select and shows the lessons of the second student
-    (selecting the student in the GUI should do the same thing).
+  * Expected: If there is a second student, this command will select and show the lessons of the second student.
     Otherwise, it will show an error message for trying to view a non-existent student 
     ("The student index provided is invalid!").
 
@@ -1580,7 +1588,7 @@ the most used page.
 Prerequisites: Have a previous command entered, and an empty CommandBox in focus.
    
    * Test case: <kbd>Ctrl</kbd> + <kbd>z</kbd> 
-   * Expected: Brings back the previous command entered into the CommandBox.
+   * Expected: Brings back the previous command entered into the CommandBox (if there is any in the current session).
      
 <div markdown="span" class="alert alert-primary">
 
@@ -1591,7 +1599,19 @@ Prerequisites: Have a previous command entered, and an empty CommandBox in focus
 **Function Key Accelerators:**
 
   * Test case: <kbd>F1</kbd>
-  * Expected: Help window gets opened/focused
+  * Expected: Help window gets opened/focused.
+
+  * Test case: <kbd>F2</kbd>
+  * Expected: `CenterPanel` displays the list of students and lessons (displays the `PersonGridPanel`).
+
+  * Test case: <kbd>F3</kbd>
+  * Expected: `CenterPanel` displays the calendar interface (`SchedulePanel`).
+
+  * Test case: <kbd>F4</kbd>
+  * Expected: `CenterPanel` displays the list of tags (`TagListPanel`).
+
+  * Test case: <kbd>F5</kbd>
+  * Expected: Reminder window gets opened/focused.
   
 ### Viewing reminder
 
