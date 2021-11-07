@@ -197,7 +197,7 @@ for tab switching.
 
 #### Implementation
 
-The proposed clear mechanism is facilitated by 3 `Command`s, namely `ClearCommand`,
+The current clear mechanism is facilitated by 3 `Command`s, namely `ClearCommand`,
 `AbortClearCommand` and `ConfirmClearCommand`. This results in a confirmation message to be displayed
 to the user when the user executes `clear`, after which it can either be confirmed (by entering `clear` again) or
 aborted (by entering any other input).
@@ -265,7 +265,7 @@ the background image.
 * Cons: There is a limited choice of color blocking. The bulk of the theming is made from a specified color shading.
 
 
-### [/Proposed] Theme adding feature
+### [Proposed] Theme adding feature
 #### Current Implementation
 
 Currently, users are allowed to switch between pre-defined and pre-made themes that are provided by the application. However, we 
@@ -299,7 +299,7 @@ Given below is an MSS of an example usage scenario of a user creating their own 
 
 
 
-### [/Proposed] Genre adding feature
+### [Proposed] Genre adding feature
 
 #### Current Implementation
 
@@ -310,7 +310,7 @@ The user can only add or delete a `Genre` from an `Anime` if the `Genre` is in t
 * Pros: Easy to implement, and easy to manage as we don't have to worry about syncing the `Genres` in multiple lists
 * Cons: Inconvenient for the user, as user can only use a `Genre` if it is in the `GenreList`.
 
-The Sequence Diagram below illustrates the interactions within the Logic component for the execute("genre 1 c/add g/action g/fantasy") API call.
+The Sequence Diagram below illustrates the interactions within the Logic component for the execute `genre 1 c/add g/action g/fantasy` API call.
 
 ![Interactions Inside the Logic Component for the `genre 1 c/add g/action g/fantasy` Command](images/AddGenreSequenceDiagram.png)
 
