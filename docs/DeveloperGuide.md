@@ -98,7 +98,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.)
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -108,7 +108,7 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103T-T10-1/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
@@ -135,7 +135,7 @@ How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+1. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
@@ -153,7 +153,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-T10-1/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -174,7 +174,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-T10-1/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="600" />
 
@@ -223,7 +223,7 @@ The `Phone`, `Email` and `Address` fields were modified such that these fields a
 
 ![PersonOptionalFieldClassDiagram](images/PersonOptionalFieldClassDiagram.png)
 
-In order to accomodate to the above mentioned new optional fields, the respective constructors were modified such that the following examples are considered valid inputs.
+In order to accommodate to the above-mentioned new optional fields, the respective constructors were modified such that the following examples are considered valid inputs.
 
 Example 1: Adding new contact without email and address.
 
@@ -279,8 +279,8 @@ Regex used in verifying the validity of GitHub username:
 
 `public static final String VALIDATION_REGEX = "[a-zA-Z\d](?:[a-zA-Z\d]|-(?=[a-zA-Z\d])){0,38}";`
 * `[a-zA-Z\d]` — **Character set**. Match any character in the set.
-* `a-z` — **Range**. Matches a character in the range "a" to "z" (char code 97 to 122). Case sensitive.
-* `A-Z` — **Range**. Matches a character in the range "A" to "Z" (char code 65 to 90). Case sensitive.
+* `a-z` — **Range**. Matches a character in the range "a" to "z" (char code 97 to 122). Case-sensitive.
+* `A-Z` — **Range**. Matches a character in the range "A" to "Z" (char code 65 to 90). Case-sensitive.
 * `\d` — **Digit**. Matches any digit character (0-9).
 * `(?:[a-zA-Z\d]|-(?=[a-zA-Z\d]))` — **Non-capturing group**. Groups multiple tokens together without creating a capture group.
 * `|` — **Alternation**. Acts like a boolean OR. Matches the expression before or after the sign.
@@ -408,7 +408,7 @@ The Find command accepts names, tags, Telegram handles or GitHub usernames as pa
 
 and allows users to search for contacts based on the specified criterion.
 It is facilitated by the `FindCommandParser` class, which implements `Parser<FindCommand>`.
-It implements the `parse()` method, which parses the find parameter (eg: name, tag, etc) and returns a `FindCommand`, to be executed in
+It implements the `parse()` method, which parses the find parameter (eg: name, tag, etc.) and returns a `FindCommand`, to be executed in
 `LogicManager`.
 
 The `FindCommand` class extends `Command`. Its instance is created by providing a predicate (condition to be fulfilled by the elements of 
@@ -700,7 +700,7 @@ the `execute("show 5")` API call.
 This is called if the parameter is **NOT** a parsable Integer.
 The method calls `model.setSelectedIndex(index)` with index gotten from the `filteredList` which displays the details of the contact on the Details Pane.
 If there are multiple contacts with names that contain the parameter keyword then a list of such persons are shown.
-If there is no contact with name that contain the parameter keyword in the `filteredList`, then the entire addressbook is searched.
+If there is no contact with name that contain the parameter keyword in the `filteredList`, then the entire address book is searched.
 
 
 The Sequence Diagram below illustrates the interactions within the `Logic`, `Model` and `UI` components for
@@ -1084,13 +1084,13 @@ Extensions
   * 3b2. Displays list of users with names containing the keyword.
   * Use case resumes at step 3.
 
-**Use Case 14: Show a person's details using Github Username**
+**Use Case 14: Show a person's details using GitHub Username**
 
 MSS
 
 1.  User requests to list persons.
 2.  CohortConnect shows a list of persons.
-3.  User requests to show details of a specific person in the list using Github usernam.
+3.  User requests to show details of a specific person in the list using GitHub username.
 4.  CohortConnect shows the person's details in the detail pane.
     
     Use case ends.
@@ -1100,23 +1100,23 @@ Extensions
 * 2a. The list is empty.
   * Use case ends.
 
-* 3a. The given github username is not present.
+* 3a. The given GitHub username is not present.
   * 3a1. CohortConnect shows an error message.
   * Use case resumes at step 3.
 
-* 3b. Multiple matching github usernames.
+* 3b. Multiple matching GitHub usernames.
   * 3b1. CohortConnect shows an error message.
-  * 3b2. Displays list of users with github usernames containing the keyword.
+  * 3b2. Displays list of users with GitHub usernames containing the keyword.
   * Use case resumes at step 3.
 
 
-**Use Case 15: Show a person's details using Telegram Id**
+**Use Case 15: Show a person's details using Telegram Username**
 
 MSS
 
 1.  User requests to list persons.
 2.  CohortConnect shows a list of persons.
-3.  User requests to show details of a specific person in the list using Telegram Id.
+3.  User requests to show details of a specific person in the list using Telegram Username.
 4.  CohortConnect shows the person's details in the detail pane.
     
     Use case ends.
