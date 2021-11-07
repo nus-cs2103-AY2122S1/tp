@@ -12,6 +12,7 @@ import static seedu.address.logic.parser.ParserUtil.extractTupleDates;
 import java.time.LocalDate;
 import java.util.stream.Stream;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.logic.commands.DeleteShiftCommand;
@@ -50,6 +51,9 @@ public class DeleteShiftCommandParser implements Parser<DeleteShiftCommand> {
 
         try {
             if (argMultimap.getValue(PREFIX_DASH_INDEX).isPresent()) {
+                if (!ParserUtil.isValidInt(argMultimap.getValue(PREFIX_DASH_INDEX).get())) {
+                    throw new ParseException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                }
                 index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_DASH_INDEX).get());
             }
             if (argMultimap.getValue(PREFIX_DASH_NAME).isPresent()) {
@@ -60,6 +64,10 @@ public class DeleteShiftCommandParser implements Parser<DeleteShiftCommand> {
 
             }
         } catch (ParseException pe) {
+            if (pe.getMessage().equals(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX)) {
+                throw pe;
+            }
+
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     DeleteShiftCommand.MESSAGE_USAGE), pe);
         }

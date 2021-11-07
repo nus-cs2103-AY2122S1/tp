@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
@@ -14,6 +13,7 @@ import static seedu.address.logic.parser.ParserUtil.testByAllFieldsExceptName;
 
 import java.util.Arrays;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
@@ -33,11 +33,15 @@ public class FindCommandParser implements Parser<FindCommand> {
     public FindCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
                 PREFIX_DASH_NAME, PREFIX_DASH_PHONE, PREFIX_DASH_INDEX,
-                PREFIX_DASH_EMAIL, PREFIX_DASH_ADDRESS, PREFIX_DASH_TAG,
-                PREFIX_DASH_STATUS, PREFIX_DASH_ROLE, PREFIX_DASH_SALARY);
+                PREFIX_DASH_EMAIL, PREFIX_DASH_TAG, PREFIX_DASH_STATUS,
+                PREFIX_DASH_ROLE, PREFIX_DASH_SALARY);
 
         PersonContainsFieldsPredicate predicate = testByAllFieldsExceptName(argMultimap);
+
         if (argMultimap.getValue(PREFIX_DASH_INDEX).isPresent()) {
+            if (!ParserUtil.isValidInt(argMultimap.getValue(PREFIX_DASH_INDEX).get())) {
+                throw new ParseException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
             return new FindCommand(ParserUtil
                     .parseIndex(argMultimap.getValue(PREFIX_DASH_INDEX).get()).getZeroBased());
         }

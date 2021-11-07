@@ -55,7 +55,7 @@ public class SlotCard extends UiPart<Region> {
         this.date = date;
         this.slot = slot;
         this.stafflist = stafflist;
-        shiftName.setText("Shift-" + slot.getOrder());
+        shiftName.setText(slot.toString());
         ObservableList<Person> filteredList =
                 stafflist.filtered(p -> p.isWorking(day, slot.getOrder(), period));
         staffWorkingList.setItems(filteredList);
@@ -72,10 +72,13 @@ public class SlotCard extends UiPart<Region> {
             super.updateItem(staff, empty);
             if (empty || staff == null) {
                 setText(null);
+                setStyle("");
             } else {
                 setText(staff.getName().toString());
                 if (staff.wasAbsent(date)) {
                     setStyle("-fx-background-color: #FF7F7F; -fx-text-fill: black");
+                } else {
+                    setStyle("");
                 }
             }
         }
