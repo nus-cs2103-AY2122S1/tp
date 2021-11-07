@@ -430,8 +430,8 @@ public class ModelManager implements Model {
     public void checkTaskAndOrderRelation() throws DataConversionException {
         ObservableList<Task> tasks = this.taskBook.getTaskList();
         for (Task eachTask : tasks) {
-            Long id = eachTask.getTaskTag().getTagId();
-            if (!this.orderBook.hasOrder(id)) {
+            long tagId = eachTask.getTagId();
+            if (tagId != -1 && !this.orderBook.hasOrder(tagId)) {
                 throw new DataConversionException(
                         new IllegalValueException("Given Sales ID does not exist in the Order Book"));
             }
