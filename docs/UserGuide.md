@@ -5,7 +5,9 @@ title: User Guide
 
 <h1 align="center"> LeadsForce User Guide </h1>
 <p align="center">
+
 <img src="images/LeadsForceLogo.jpg" alt="logo" width="125" /> 
+
 </p>
 <p align="center">
 Welcome to LeadsForce's User Guide! Find answers and step-by-step instructions to the features in LeadsForce, scroll down the table of contents below to get started ☺️
@@ -66,13 +68,16 @@ Managing your leads has never been easier.
 
 When reading our User Guide, here are some important information to take note of.
 
+
 ### 1.1.1 Icons and its meaning
+
 
 **Icon** | **Meaning of icons**
 :---: | :---
 <img src="images/info_icon.png" width="50"/> | Notes: specific conditions or behaviours of a feature.
 <img src="images/tip_icon.png" width="50"/> | Tips: suggestions that can help LeadsForce run faster.
 <img src="images/warn_icon.png" width="50"/> | Warnings: important information to take note of when using LeadsForce. When these warnings are not followed, this can result in LeadsForce crashing or have corrupted data files.
+
 
 ## 2. Quick start
 
@@ -109,6 +114,7 @@ This section details the client information that financial advisors can keep tra
 is registered in LeadsForce have the following attributes that has the corresponding attribute prefix and value(s). 
 The attribute prefix and value specified here constitute the parameter format to be used in the commands of several [features](#5-features).
 
+
 Attribute | Prefix | Value
 -----------------|-----------------|-----------------
 ID | i/ | `CLIENT_ID`<br><br>• `CLIENT_ID`: A non-negative integer `e.g. 0, 1, 2, 3, …​`.
@@ -134,6 +140,7 @@ LeadsForce has checks that prevent users from creating duplicated contacts.
 
 * Users have the flexibility to give the same name, email, phone number or any other attributes to multiple users, as
   long as 2 separate clients do not end up with the same name and email.
+
 
 </div>
 
@@ -176,6 +183,7 @@ application. An overview of LeadsForce's interface is shown below.
 <img src="images/NavigatingLeadsForce.png" />
 </p>
 
+
 ### 4.1 Command View
 
 <p align="center">
@@ -184,12 +192,13 @@ application. An overview of LeadsForce's interface is shown below.
 <br> 
 The command view is where you will be able to input commands into LeadsForce. The command view consist of the following components: <br> 
 
+
 1. **Toolbar** <br>
    • Help bar that directs users to LeadsForce's user guide <br>
    • File bar where users can exit the app <br>
    • Address Book bar which allows users to switch between address books <br>
    • Themes bar which allows users to switch between different themes <br>
-
+   
 2. **Command Box** <br>
    • This is where users can input their commands into LeadsForce <br>
 
@@ -222,7 +231,11 @@ The client information view provides in-depth information about the client's att
 the [`View`](#52-retrieve-particular-contact--view) command, users can view the client information in the client info
 view.
 
-### 4.3 Meeting Schedule View
+### 4.4 Meeting Schedule View
+
+<p align="center">
+<img src="images/MeetingScheduleView.png" width="500"/>
+</p>
 
 The meeting schedule view showcases the upcoming meetings that the client has, and they are sorted from the earliest to
 the latest meeting that the client has. When first booting up the application, all meetings will be shown. Using
@@ -256,11 +269,18 @@ e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 Adds a new client to the address book.
 
+
 | Format | `add n/CLIENT_NAME e/EMAIL [<attribute>/VALUE]...`|
 | :---: | --- |
 | **Example** | • `add n/Benedict Chua e/benchua@hotmail.com` <br> • `add n/Keith e/keithtan@ymail.com p/12345678 d/10000 r/4`|
 | <img src="images/info_icon.png" width="50"/> | • A client must have minimally the name and email prefix filled during creation <br> • Any other prefixes are optional, except for Client ID as Client ID cannot be given to the client.  <br> • Prefixes that can be added are as seen in the client information in the Client Info Section |
 
+**Expected Outcome:** <br>
+For instance, if the command `add n/Keith e/keithtan@ymail.com p/12345678 r/4` was used, a new client will be recorded in the client list view with the corresponding attributes. <br> 
+<p align="center" >
+<img src="images/ExpectedAddCommand.png" width="400"/>
+</p> 
+   
 ### 5.2 Retrieve Particular Contact : `view`
 
 View client's information in detail.
@@ -270,6 +290,7 @@ View client's information in detail.
 | **Example** | • `view 1` would be used to view client 1's information|
 
 **Expected Outcome:** <br>
+
 For instance, if `Alex Yeoh` is the client with Client ID 1, the following will be shown in the client info view of
 LeadsForce. <br>
 
@@ -291,6 +312,12 @@ Update the attributes of existing users using the prefix of the client’s attri
 | <img src="images/info_icon.png" width="50"/> | • Client ID cannot be changed. |
 | <img src="images/tip_icon.png" width="50"/> | • multiple clients and their attributes can be updated with one `edit` command! For instance, if you're planning to organise a meeting with several clients, you could simply use this feature to do so. |
 
+**Expected Outcome:** <br>
+The corresponding information will be changed to the attributes specified by the client. This change can be seen in the client list view. For instance, the command `edit 3 p/12345678 r/5` will change client's 3 information as such. <br>
+<p align="center" >
+<img src="images/ExpectedEditCommand.png" width="500"/>
+</p> 
+
 ### 5.4 Delete particular contact : `delete`
 
 Deletes an existing client from the address book using their client id.
@@ -301,13 +328,20 @@ Deletes an existing client from the address book using their client id.
 | <img src="images/info_icon.png" width="50"/> | • Multiple clients can be deleted with one `delete` command |
 | <img src="images/warn_icon.png" width="50"/> | • This action is irreversible. Once you have deleted a client, the client and his/her corresponding information will be removed from the storage file. |
 
+
+**Expected Outcome:** <br>
+The corresponding user will be removed from the client list view.
+
 ### 5.5 List all contacts : `list`
 
 Shows the full list of all clients in the address book.
 
 | Format | `list` |
 | :---: | :--- |
-| <img src="images/info_icon.png" width="50"/> | • As long as the first word in the command is `list`, the command will still work regardless of the additional inputs. <br> eg. the command `list asdknkjsaf` will still work | 
+| <img src="images/info_icon.png" width="50"/> | • As long as the first word in the command is `list`, the command will still work regardless of the additional inputs. <br> eg. the command `list asdknkjsaf` will still work |
+
+**Expected Outcome:** <br>
+All clients in an address book would be shown in the client view list. 
 
 ### 5.6 Sort Contacts : `sort`
 
@@ -319,6 +353,15 @@ based on the given `SORT DIRECTION`.
 | **Examples** | • `sort r/ASC` will sort the list by ascending risk-appetite <br> • `sort i/dsc` will sort the list by descending client id |
 | <img src="images/info_icon.png" width="50"/> | • If multiple attributes are provided, then the clients will be sorted by the attributes sequentially. <br> e.g. `sort d/asc m/dsc`, this will sort the clients by disposable income in ascending order first, then for those clients whose disposable income are the same, they will be sorted by next meeting in descending order. <br> • Sorting by the attribute Tag (t/) is not supported. <br> • The tags are case-insensitive. (ASC and asc are both okay.) |
 
+
+**Expected Outcome:** <br>
+For instance, the command `sort r/ASC` sorts users by their risk appetite in ascending order. <br> <p align="center" >
+   <img src="images/ExpectedSortCommand.png" width="600"/> </p> <br> 
+On the other hand, using the command `sort r/dsc` will sort users by their risk appetite in descending order instead as shown. <br>
+<p align="center" >
+   <img src="images/ExpectedSortCommand_DSC.png" width="600"/>
+</p><br>
+
 ### 5.7 Find meeting schedule : `schedule`
 
 Finds the meeting schedule on a specified date.
@@ -327,6 +370,12 @@ Finds the meeting schedule on a specified date.
 | :---: | :--- |
 | **Examples** | • `schedule 22-09-2021` allows the user to view the schedule that the user has on the 22nd September 2021. <br>  • `schedule` displays all meetings|
 | <img src="images/info_icon.png" width="50"/> | • `DATE` has to be in the format of dd-MM-yyyy. <br> • if the `DATE` is not specified, all meetings will be displayed.|
+
+**Expected Outcome:** <br>
+For instance, using `schedule 30-11-2021` will produce the following result. <br>
+| Before | After |
+| --- | --- |
+| <img src="images/ExpectedScheduleCommand.png" width="500"/> | <img src="images/ExpectedScheduleCommand_AFTER.png" width="500"/> |
 
 ### 5.8 Locating clients by keywords : `search`
 
@@ -337,6 +386,12 @@ Finds clients whose contacts match with the given keywords.
 | **Examples** | • `search John` returns *john* and *John Doe* <br> • `search alex david` returns *Alex Yeoh*, *David Li* |
 | <img src="images/info_icon.png" width="50"/> | • If no `KEYWORD` is provided, search will be based on `<attribute>/ATTRIBUTE_KEYWORD` only. <br> • The search is case-insensitive. e.g `keith` will match `Keith`. <br> • The order of the keywords does not matter. e.g. `John Doe` will match `Doe John`.<br> • Clients matching at least one keyword will be returned). <br> e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`. <br> • If attribute keyword is provided, only clients whose attribute matches with the attribute keyword will be returned. <br> e.g. `Tom Tim e/@gmail.com` will return `Tom Lee e/Tom@gmail.com` and not `Tim Shum e/Tim@yahoo.com`. |
 
+**Expected Outcome:** <br>
+For instance, using `search Alex` will produce the following result. <br>
+| Before | After |
+| --- | --- |
+| <img src="images/ExpectedSearchCommand.png" width="500"/> | <img src="images/ExpectedSearchCommand_AFTER.png" width="500"/> |
+
 ### 5.9 Filter current list by keywords : `filter`
 
 Filters the current list by the given keywords.
@@ -345,7 +400,13 @@ Filters the current list by the given keywords.
 | :---: | :--- |
 | **Examples** | • `filter John` returns `john` and `John Doe` <br> • `filter alex david` returns `Alex Yeoh`, `David Li` |
 | <img src="images/info_icon.png" width="50"/> | • Works similar to `search` but `filter` works based on the current list shown as opposed to entire lists of contacts. <br> • If no `KEYWORD` is provided, then filter will be based on `<attribute>/ATTRIBUTE_KEYWORD` <br> • The filter is case-insensitive. e.g `keith` will match `Keith`. <br> • The order of the keywords does not matter. e.g. `John Doe` will match `Doe John`. <br> • Clients matching at least one keyword will be returned). <br> e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`. <br> • If attribute keyword is provided, only clients whose attribute matches with the attribute keyword will be returned. <br> e.g. `Tom Tim e/@gmail.com` will return `Tom Lee e/Tom@gmail.com` and not `Tim Shum e/Tim@yahoo.com`.|
-| <img src="images/tip_icon.png" width="50"/> | • Use the tags found under the command box to quickly filter clients by their tags. Simply click on a tag and press enter to filter clients with the specific tag. <br> eg. Pressing the `classmate` button allows you to filter clients with the `classmate` tag. <br> <img src="images/FilterTagCommand.png" width="300">| 
+| <img src="images/tip_icon.png" width="50"/> | • Use the tags found under the command box to quickly filter clients by their tags. Simply click on a tag and press enter to filter clients with the specific tag. <br> eg. Pressing the `classmate` button allows you to filter clients with the `classmate` tag. <br> <img src="images/FilterTagCommand.png" width="300">|
+
+**Expected Outcome:** <br>
+For instance, using `filter t/colleagues` will produce the following result.
+| Before | After |
+| --- | --- |
+| <img src="images/ExpectedFilterCommand.png" width="500"/> | <img src="images/ExpectedFilterCommand_AFTER.png" width="500"/> |
 
 ### 5.10 Clearing all entries : `clear`
 
@@ -355,6 +416,9 @@ Clears all entries from the address book.
 | :---: | :--- |
 | <img src="images/info_icon.png" width="50"/> | • As long as the first word in the command is `clear`, the command will still work regardless of the additional inputs. <br> eg. the command `clear asdknkjsaf` will still work. <br> • This command clears all clients in the **current** address book <br> • After inputting `clear`, another prompt will appear requesting for confirmation to clear the address book. The input required for the confirmation will either be: <br>    • `yes`: to confirm and proceed with the clear command. <br>    •`no`: to cancel the clear command.|
 | <img src="images/warn_icon.png" width="50"/> | • This action is irreversible. Once you have clear all client information from the current address book, this information will be removed from the storage file and will not be retrievable.|
+
+**Expected Outcome:** <br>
+<img src="images/ExpectedClearCommand.png" width="600"/>
 
 ### 5.11 Getting help : `help`
 
@@ -370,7 +434,8 @@ Exits LeadsForce.
 
 | Format | `exit` |
 | :---: | --- |
-| <img src="images/info_icon.png" width="50"/> | • As long as the first word in the command is `exit`, the command will still work regardless of the additional inputs. <br> eg. the command `exit asdknkjsaf` will still work | 
+| <img src="images/info_icon.png" width="50"> | • As long as the first word in the command is `exit`, the command will still work regardless of the additional inputs. <br> eg. the command `exit asdknkjsaf` will still work |
+
 
 ### 5.13 Saving the data
 
@@ -400,6 +465,11 @@ Create a new address book by the name provided and switches to it.
 | **Example** | `ab create vip clients` will create a new address book named `vip clients` |
 | <img src="images/info_icon.png" width="50"/> | • The name of the addressbook cannot be the same as an existing address book.|
 
+**Expected Outcome:** <br>
+The command `ab create newAddressBook` creates a new address book as shown.
+<img src="images/ExpectedCreateAddressBook.png" width="600"/>
+
+
 ### 6.2 Delete existing address book: ab delete : `ab delete`
 
 Delete an address book that currently exists.
@@ -408,6 +478,7 @@ Delete an address book that currently exists.
 | :---: | :--- |
 | **Example** | `ab delete test` will delete the address book named `test` |
 | <img src="images/info_icon.png" width="50"/> | • The current address book cannot be deleted, switch to another address book first before deleting the address book.|
+
 
 ### 6.3 Switch to different address book : `ab switch`
 
@@ -418,14 +489,28 @@ Switch to a different address book that currently exists.
 | **Example** | `ab switch other` will switch over to the address book named `other` |
 | <img src="images/tip_icon.png" width="50"/> | • Switch between different address books by toggling the address book tab (which is the 3rd tab from the left) <br> <img src="images/MultipleAddressBookTab.jpg" width="300"/> |
 
+**Expected Outcome:** <br>
+For instance, using `ab switch youngadults` when on the `newAddressBook` address book will produce the following result.
+
+| Before | After |
+| --- | --- |
+| <img src="images/ExpectedSwitchAbCommand.png" width="500"/> | <img src="images/ExpectedSwitchAbCommand_AFTER.png" width="500"/> |
+
+
+
 ### 6.4 List all address book : `ab list`
 
-List all the name of all the existing address books
+List all the name of all the existing address books. 
 
 | Format | `ab list` |
 | --- | --- |
 | <img src="images/info_icon.png" width="50"/> | • As long as the first two word in the command is `ab list`, the command will still work regardless of the additional inputs. <br> eg. the command `ab list asdknkjsaf` will still work |
 
+**Expected Outcome:** <br>
+If you have 2 address books named `newAddressBook` and `YoungAdults`, here's the output from the command result view.
+<p align="center"> 
+<img src="images/ExpectedAbListCommand.png" width="500"/>
+</p><br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -453,6 +538,7 @@ version of LeadsForce in the near future so do tuned in to our updates. 🙂
 **A**: Yes, there is another way to open up LeadsForce. Open the command prompt on your computer, navigate to the
 directory where you have stored the `LeadsForce.jar` file, and type `java -jar LeadsForce.jar`.
 
+
 **Q**: How do I transfer my data to another computer?<br>
 **A**: Install LeadsForce on the other computer and overwrite the empty data file it creates with the file that contains
 the data of your previous LeadsForce home folder.
@@ -463,7 +549,7 @@ the data of your previous LeadsForce home folder.
 
 ### Unable to launch LeadsForce
 
-* Do check that you indeed have Java 11 or above installed in your computer.
+* Do check that you indeed have Java `11` or above installed in your computer.
 
 **For Mac users,**
 
@@ -472,6 +558,7 @@ the data of your previous LeadsForce home folder.
    the correct java version, and can skip the rest of this tutorial.
 3. Otherwise, head to the Oracle website [here](https://www.oracle.com/java/technologies/downloads/#java11-mac) to
    download the mac version of the java JDK.
+
 
 **For Windows users,**
 
@@ -495,6 +582,7 @@ of LeadsForce.
 However, if you do happen to encounter any bugs while using LeadsForce, please go to
 LeadsForce's [issue page](https://github.com/AY2122S1-CS2103T-T17-3/tp/issues) to issue the bug with the steps to
 recreate the bug.
+
 
 ## 10. Command summary
 
