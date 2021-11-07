@@ -1,7 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.*;
+import static seedu.address.commons.core.Messages.MESSAGE_EMPTY_LIST;
+import static seedu.address.commons.core.Messages.MESSAGE_FACILITY;
+import static seedu.address.commons.core.Messages.MESSAGE_MEMBER;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.DayOfWeek;
