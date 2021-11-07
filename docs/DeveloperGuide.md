@@ -760,7 +760,7 @@ Priorities: High, Low
 
 * 1a. Tables are not set yet
     * 1a1. RHRH requests user to set the tables.
-    * 1a2. User <u>sets the tables (UC <span style="color:red">{{FILL IN LATER}}</span>)</u>
+    * 1a2. User <u>sets the tables (UC12)</u>
 
     Use case resumes from step 1.
 
@@ -809,7 +809,7 @@ Priorities: High, Low
 
 **MSS**
 
-1. User enters the command string to edit a employee's field.
+1. User enters the command string to edit an employee's field.
 2. System confirms that the employee has been edited and shows the current fields of the employee.
 
    Use case ends
@@ -861,60 +861,108 @@ Priorities: High, Low
 * 1a. User keys in invalid format
     * 1a1. System displays an error, and the recommended format for editing a reservation.
 
-
       Use case ends
+  
 * 1b. User keys in command without prefix
     * 1b1. System displays an error that says that at least 1 field must be provided.
 
       Use case ends
 
-**Use case (UC09): Search for reservation availability**
+**Use case (UC09): Check for reservations made for a date and time**
 
 **MSS**
 
-1. User requests to search for reservation availability at a date and time.
-2. RHRH shows the availability for the indicated date time.
-   
-   Use case ends.
+1. User requests to check the reservations made for a date and time.
+2. RHRH shows the reservations that are on that date and time
+
+   Use case ends
 
 **Extensions:**
 
-* 1a. User requests to search for reservation availability at a date.
-    * 1a1. RHRH shows all the available slots on the indicated date.
-      
-    Use case ends.
+* 1a. RHRH detects an incorrect format of date/time.
+    * 1a1. RHRH requests for the format to be corrected.
+    * 1a2. User enters the command again.
 
-
-* 1b. User requests to search for reservation availability at a time.
-    * 1b1. RHRH shows the availability for the indicated time today
-      
-    Use case ends.
-
-
-* 1c. RHRH detects information missing from the command entered.
-    * 1c1. RHRH requests for the missing details to be filled in.
-    * 1c2. User enters missing data.
-
-    Steps 1c1 - 1c2 are repeated until the date/time is correctly formatted.
+    Steps 1a1 - 1a2 are repeated until the command is correctly formatted.
 
     Use case resumes from step 2.
 
-* 1d. RHRH detects an incorrect format of date/time.
-    * 1d1. RHRH requests for the format to be corrected.
-    * 1d2. User enters the command again.
+* 1b. No reservations are made for that date and time, no reservations are displayed
 
-    Steps 1d1 - 1d2 are repeated until the command is correctly formatted.
+  Use case ends
 
-    Use case resumes from step 2.
+**Use case (UC10): Check for reservations made for a date**
 
-*{More to be added}*
+**MSS**
+
+1. User requests to check the reservations made for a date.
+2. RHRH shows the reservations that are on that date
+
+   Use case ends
+
+**Extensions:**
+
+* 1a. RHRH detects an incorrect format of date.
+    * 1a1. RHRH requests for the format to be corrected.
+    * 1a2. User enters the command again.
+
+  Steps 1a1 - 1a2 are repeated until the command is correctly formatted.
+
+  Use case resumes from step 2.
+
+* 1b. No reservations are made for that date, no reservations are displayed
+
+  Use case ends
+
+**Use case (UC11): Check for reservations made for a time on the current date**
+
+**MSS**
+
+1. User requests to check the reservations made for a time on the current date.
+2. RHRH shows the reservations that are on that time on the current date
+
+   Use case ends
+
+**Extensions:**
+
+* 1a. RHRH detects an incorrect format of time.
+    * 1a1. RHRH requests for the format to be corrected.
+    * 1a2. User enters the command again.
+
+  Steps 1a1 - 1a2 are repeated until the command is correctly formatted.
+
+  Use case resumes from step 2.
+
+* 1b. No reservations are made for that time on the current date, no reservations are displayed
+
+  Use case ends
+
+**Use case (UC12): Set the tables of the restaurant inside the app**
+
+**MSS**
+
+1. User requests to set the tables.
+2. RHRH shows the number of tables set in the restaurant.
+
+   Use case ends
+
+**Extensions:**
+
+* 1a. RHRH detects an incorrect format of tables to set.
+    * 1a1. RHRH requests for the format to be corrected.
+    * 1a2. User enters the command again.
+
+  Steps 1a1 - 1a2 are repeated until the command is correctly formatted.
+
+  Use case resumes from step 2.
+
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  Should not be stored in a **Database Management system**(DBMS).
+4.  Should not be stored in a **Database Management System** (DBMS).
 5.  Should be stored *locally* and can be *manually* edited by the user.
 6.  Program should be delivered to users in a single **JAR** file.
 7.  Program should be able to run with just a *double-click* and no CLI required.
@@ -925,21 +973,29 @@ Priorities: High, Low
 12.  Developer Guide and User Guide should be *PDF-friendly*(no expandable panels, embedded videos, animated GIFs etc.).
 13.  Does not require a server component as the software will not perform automated tasks.
 
-*{More to be added}*
-
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Contact**: A contact containing details about the particular person
-* **Customer**: One of the types of contact, used to represent a customer of the restaurant
-* **Loyalty** points: Points stored by each customer
-* **Employee**: One of the types of contact, used to represent an employee of the restaurant
-* **Employment type** : Used to distinguish the different categories of employees (Part-time, Full-time etc.)
-* **Shift**: Time slot that employee is supposed to be working
-* **Supplier**: One of the types of contact, used to represent a supplier of the restaurant
-* **Table**: Contains a size and a table ID, and is used to ensure that each reservation has an available table
-* **Reservation**: Reservations can be made by customers for a specific timeslot in the restaurant
-* **Waiting list**: List of customers who are unable to get a reservation due to maxed-out reservations
+* **Address** : Address of the contact
+* **Allergies** : Any allergies of the customer
+* **Contact** : A contact containing details about the particular person
+* **Customer** : One of the types of contact, used to represent a customer of the restaurant
+* **Delivery Details** : The delivery dates/times of a supplier
+* **Leaves** : Leaves of the employee
+* **Loyalty points** : Points stored by each customer
+* **Email** : Email of the contact
+* **Employee** : One of the types of contact, used to represent an employee of the restaurant
+* **Job title** : The different job titles of employees (e.g. Part-time, Full-time etc.)
+* **Mainstream OS** : Windows, Linux, Unix, OS-X
+* **Name** : Name of the contact
+* **Phone** : Phone number of the contact
+* **Salary** : Salary of an employee
+* **Shift** : Time slot that employee is supposed to be working
+* **Special Request** : Additional information of the customer
+* **Supplier** : One of the types of contact, used to represent a supplier of the restaurant
+* **Supply Type** : The type of food supply a supplier provides
+* **Remark** : Additional information of a reservation
+* **Table** : Contains a size and a table ID, and is used to ensure that each reservation has an available table
+* **Tag** : Additional information to label a contact with
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1071,3 +1127,52 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: Filter display reservation list using `check DATE`, where there must be at least 1 resevation on `DATE`.
     2. Repeat the same test cases as 1.2 to 1.4. 
+      
+### Setting the tables
+
+1. Test case: `settables 10x4,2,2,1`<br>
+   Expected: Status message says 7 tables are set and all reservations are removed.
+
+2. Test case: `settables 10x0`/`settables 0x10`/`settables 0`/`settables abc`<br>
+   Expected: No tables set. Error details are shown in the status message
+      
+### Checking for reservations 
+
+1. Getting the reservations that are for the specified date time, when the date time has at least 1 reservation
+
+    1. Prerequisites: Date time has at least 1 reservation
+    2. Test case: `check 2021-12-24 2000`<br>
+       Expected: Reservations on 24 Dec 2021, 8pm are displayed, status bar shows how many reservations there are on 24 Dec 2021, 8pm
+
+2. Getting the reservations that are for the specified date time, when the date time has no reservations
+
+    1. Prerequisites: Date time has no reservations
+    2. Test case: `check 2021-12-24 0400`<br>
+       Expected: No Reservations are displayed since no reservations are on 24 Dec 2021, 4am, status bar shows 0 reservations
+
+3. Getting the reservations that are for the specified date, when the date has at least 1 reservation
+
+    1. Prerequisites: Date has at least 1 reservation
+    2. Test case: `check 2021-12-24`<br>
+       Expected: Reservations on 24 Dec 2021 are displayed, status bar shows how many reservations there are on 24 Dec 2021
+
+4. Getting the reservations that are for the specified date, when the date has no reservations
+
+    1. Prerequisites: Date has no reservations
+    2. Test case: `check 2021-12-01`<br>
+       Expected: No Reservations are displayed since no reservations are on 1 Dec 2021, status bar shows 0 reservations
+
+5. Getting the reservations that are for the current date at a specified time, when the time has at least 1 reservation
+
+    1. Prerequisites: Time has at least 1 reservation
+    2. Test case: `check 2000`<br>
+       Expected: Reservations on 24 Dec 2021 are displayed, status bar shows how many reservations there are on 24 Dec 2021
+
+6. Getting the reservations that are for the current date at a specified time, when the time has no reservations
+
+    1. Prerequisites: Time has no reservations
+    2. Test case: `check 0400`<br>
+       Expected: No Reservations are displayed since no reservations are on the current date at 4am, status bar shows 0 reservations
+    
+7. Other incorrect commands to try: `check 2500`, `check abc`, `check`
+   Expected: Error details shown in the status message. Status bar remains the same.
