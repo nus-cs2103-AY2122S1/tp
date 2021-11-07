@@ -79,6 +79,8 @@ hide footbox
 hide empty members
 hide circle
 
+' @@author ganhongyao-reused
+' Reused from https://forum.plantuml.net/195/is-there-any-support-for-subactivity-or-the-rake-symbol
 sprite $rake [16x16/8] {
     0000000000000000
     0000000jj0000000
