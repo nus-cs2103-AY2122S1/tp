@@ -233,6 +233,8 @@ Classes used by multiple components are in the `seedu.plannermd.commons` package
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Implementation** <a name="implementation"/>
 
 This section describes some noteworthy details on how certain features are implemented.
@@ -254,6 +256,8 @@ Since it is likely that clinic would be mainly interacting with patient records,
 would be less user-friendly. Also, since commands for records are applicable to both patients and doctors, we wanted to avoid flags for record commands and keep them as succinct as possible. <br>
 Therefore, we decided to introduce a state, allowing us to display the list the user desires and execute commands according to the state.
 
+<div style="page-break-after: always;"></div>
+
 ### Toggle Command <a name="toggle-command"/>
 Command used to toggle displayed tab and the current state of PlannerMD.
 
@@ -266,6 +270,8 @@ The Activity Diagram below illustrates the execution flow when the user executes
    * If the currently displayed tab is the patient tab, it is toggled to the doctor tab.
    * If the currently displayed tab is the doctor tab, it is toggled to the patient tab.
 3. The GUI displays a success message.
+
+<div style="page-break-after: always;"></div>
 
 #### Implementation
 The Sequence Diagram below illustrates the interactions within the Logic component for the execute("toggle") API call in Patient state.
@@ -281,6 +287,8 @@ The Sequence Diagram below illustrates the interactions within the Logic compone
 
 The GUI updates the list according to the current state(eg. displays patient list if `Model.state` is `State.Patient`) and display the success message given by `CommandResult`.
 
+<div style="page-break-after: always;"></div>
+
 ### Remark <a name="remark"/>
 
 #### Remark field
@@ -288,6 +296,8 @@ A field added for `Person` and thus applies to both `Patient` and `Doctor`. Rema
 stored as a String.
 * No restrictions, `Remark` can be any `String`, including empty.
 * `Remark` is an empty String by default.
+
+<div style="page-break-after: always;"></div>
 
 #### Remark command
 Command used to edit the `Remark` field of a Person.
@@ -306,6 +316,8 @@ The activity Diagram below illustrates the execution flow when the user executes
     * If remark input is not empty, effectively deletes the remark, generate successful edit remark message.
 4. The GUI displays a success message.
 
+<div style="page-break-after: always;"></div>
+
 #### Implementation
 The Sequence Diagram below illustrates the interactions within the Logic component for the execute("remark 1 r/bad cough") API call. <br>
 
@@ -323,6 +335,8 @@ The Sequence Diagram below illustrates the interactions within the Logic compone
 
 The GUI updates the patient record in the displayed list and displays a success message.
 
+<div style="page-break-after: always;"></div>
+
 ### Propagating Person Changes to Appointment List  <a name="propagating-person-changes-to-appointment-list"/>
 Since specific patients and doctors within the records are directly referenced in appointments,
 changes in patients and doctors through user command or otherwise needs to be propagated through the Appointment list.
@@ -330,6 +344,8 @@ changes in patients and doctors through user command or otherwise needs to be pr
   * `DeleteCommand`
 * When patients or doctor details are changed, these changes will be reflected in appointments they are a part of.
   * `RemarkCommand`, `EditCommand` and `TagCommand`
+
+<div style="page-break-after: always;"></div>
 
 #### Implementation
 The Sequence Diagram below illustrates the interactions within the Model component for the deletePatient(target) API call.
@@ -355,6 +371,8 @@ GUI is updated to display the propagated changes in the appointment list.
 Since `Appointment` unilaterally has references `Patient` and `Doctor`, the `UniqueAppointmentList` has to be iterated
 to update `Appointment` with references to `Patient` or `Doctor` which were edited or delete them when they have references to the deleted `Patient` or `Doctor`.
 
+<div style="page-break-after: always;"></div>
+
 ### Adding an appointment <a name="adding-an-appointment"/>
 Adding an appointment requires the user to input valid patient and doctor indexes, and the correct format for each prefix.
 The diagram below illustrates the flow of adding an appointment:
@@ -370,6 +388,8 @@ The diagram below illustrates the flow of adding an appointment:
    `Model#FilteredPatientList` or `Model#FilteredDoctorList`, it will throw an error, and the invalid index message will be shown.
    If not, the `Appointment` object with the is created and added to the model. The add appointment success message is then returned.
 4. The UI will then display the result
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting an appointment <a name="deleting-an-appointment"/>
 Deleting an appointment requires the user to input a valid index of the desired appointment in the appointment list.
