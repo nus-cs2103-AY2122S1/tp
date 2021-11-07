@@ -1,0 +1,26 @@
+@startuml
+
+start
+:User inputs a chargeguest command;
+:ChargeGuestCommandParser parses and validates the user input;
+    if () then ([arguments are valid])
+      :ChargeGuestCommand is created \n  containing the passport number and vendor Id;
+      :Model returns the Guest using the passport number;
+      :Model returns the Vendor using the vendor Id;
+      :Guest call charge on the Vendor;
+        if () then ([Service have been charged before])
+            :Increment the existing chargeable quantity;
+        else ([New Service])
+            :Add chargeable to guest;
+        endif
+      :A success message is shown to the user;
+    else ([arguments are invalid])
+      :ParseException gets thrown;
+      :An error message is shown to the user;
+    endif
+
+
+
+stop
+
+@enduml

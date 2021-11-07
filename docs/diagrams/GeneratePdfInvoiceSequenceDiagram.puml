@@ -1,0 +1,62 @@
+@startuml
+!include style.puml
+skinparam {
+    stereotypeColor red
+}
+
+box Invoice INVOICE_COLOR_T1
+participant "Invoice" as Invoice <<class>> INVOICE_COLOR
+participant "handler : InvoiceNewPageHandler" as PageHandler INVOICE_COLOR
+end box
+
+box iText MODEL_COLOR_T1
+participant "writer : PdfWriter" as Writer MODEL_COLOR
+participant "pdf : PdfDocument" as Pdf MODEL_COLOR
+participant "document : Document" as Document MODEL_COLOR
+end box
+
+[-> Invoice : generateInvoicePdf(Guest g)
+activate Invoice
+
+create Writer
+Invoice -> Writer
+activate Writer
+Writer --> Invoice
+deactivate Writer
+
+create Pdf
+Invoice -> Pdf
+activate Pdf
+Pdf --> Invoice
+deactivate Pdf
+
+create Document
+Invoice -> Document
+activate Document
+Document --> Invoice
+deactivate Document
+
+create PageHandler
+Invoice -> PageHandler
+activate PageHandler
+PageHandler --> Invoice
+deactivate PageHandler
+
+Invoice -> Pdf : addEventHandler(PdfDocumentEvent.END_PAGE, handler)
+activate Pdf
+Pdf -> Invoice
+deactivate Pdf
+
+Invoice -> Invoice : addGuestBillingDetailsToPdf(document, g, boldFont)
+activate Invoice
+deactivate Invoice
+
+Invoice -> Invoice : addInvoiceTableToPdf(document, g, font, boldFont)
+activate Invoice
+deactivate Invoice
+
+Invoice -> Invoice : addThankYouParagraphToPdf(document, boldFont);
+activate Invoice
+deactivate Invoice
+
+@enduml

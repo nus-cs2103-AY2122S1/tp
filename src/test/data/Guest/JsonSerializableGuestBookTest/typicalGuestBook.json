@@ -1,0 +1,35 @@
+{
+  "_comment": "GuestBook save file which contains the same Guest values as in TypicalGuests#getTypicalGuest()",
+  "guests": [
+    {
+      "name": "Alice Pauline",
+      "email": "alice@example.com",
+      "tagged": [
+        "Vip"
+      ],
+      "roomNumber": "20202",
+      "passportNumber": "E0123122G",
+      "chargeablesUsed": []
+    },
+    {
+      "name": "Benson Meier",
+      "email": "benson@example.com",
+      "tagged": [
+        "Normal room"
+      ],
+      "roomNumber": "20201",
+      "passportNumber": "T12312311A",
+      "chargeablesUsed": []
+    },
+    {
+      "name": "Carl Kurz",
+      "email": "carl@example.com",
+      "tagged": [
+        "Deluxe suite"
+      ],
+      "roomNumber": "12321",
+      "passportNumber": "M123123124D",
+      "chargeablesUsed": []
+    }
+  ]
+}

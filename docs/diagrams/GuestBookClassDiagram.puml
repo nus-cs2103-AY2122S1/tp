@@ -1,0 +1,60 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+skinparam classAttributeIconSize 0
+skinparam classAttributeFontColor #FFFFFF
+
+show member
+
+interface ReadOnlyGuestBook <<interface>>
+class GuestBook
+class UniqueGuestList
+class Guest
+
+ReadOnlyGuestBook <|.. GuestBook
+GuestBook --> "1 "UniqueGuestList
+UniqueGuestList --> " * " Guest
+
+class ReadOnlyGuestBook {
+    + getGuestList() : ObservableList<Guest>
+}
+
+class GuestBook {
+    + setGuests(guests: List<Guest>)
+    + hasGuest(guest : Guest) : boolean
+    + addGuest(guest : Guest)
+    + setGuest(target : Guest, editedGuest : Guest)
+    + getGuest(passportNumber : PassportNumber) : Optional<Guest>
+    + removeGuest(key : Guest)
+}
+
+class UniqueGuestList {
+    - internalList : ObservableList<Guest>
+    - internalUnmodifiableList : ObservableList<Guest>
+    + contains(toCheck : Guest) : boolean
+    + add(toAdd : Guest)
+    + get(passportNumber : PassportNumber) : Optional<Guest>
+    + setGuest(target : Guest, edited : Guest)
+    + remove(toRemove : Guest)
+    + setGuests(replacement : UniqueGuestList)
+}
+
+class Guest {
+    - name : Name
+    - email : Email
+    - roomNumber : RoomNumber
+    - passportNumber : PassportNumber
+    - chargeablesUsed : List<Chargeable>
+    - tags : Set<Tag>
+    + getName() : Name
+    + getEmail() : Email
+    + getRoomNumber() : RoomNumber
+    + getPassportNumber() : PassportNumber
+    + getChargeablesUsed() : List<Chargeable>
+    + getTags() : Set<Tag>
+    + charge(vendor : Vendor)
+    + isSame(otherGuest : Guest) : boolean
+}
+@enduml

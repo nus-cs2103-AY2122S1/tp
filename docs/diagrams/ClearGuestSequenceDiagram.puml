@@ -1,0 +1,54 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ": PocketHotelParser" as  PocketHotelParser LOGIC_COLOR
+participant "c: ClearGuestCommand" as  ClearGuestCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("clearguest")
+activate LogicManager
+
+LogicManager ->  PocketHotelParser : parseCommand("clearguest")
+activate PocketHotelParser
+
+
+create ClearGuestCommand
+PocketHotelParser -> ClearGuestCommand
+activate ClearGuestCommand
+
+ClearGuestCommand -->  PocketHotelParser : c
+deactivate ClearGuestCommand
+
+
+PocketHotelParser --> LogicManager : c
+deactivate PocketHotelParser
+
+LogicManager ->  ClearGuestCommand : execute()
+activate ClearGuestCommand
+
+ClearGuestCommand -> Model : setGuestBook(new GuestBook())
+activate Model
+
+Model --> ClearGuestCommand
+deactivate Model
+
+create CommandResult
+ClearGuestCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ClearGuestCommand
+deactivate CommandResult
+
+ClearGuestCommand --> LogicManager : result
+deactivate ClearGuestCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

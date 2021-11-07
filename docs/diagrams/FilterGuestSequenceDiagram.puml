@@ -1,0 +1,69 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ": PocketHotelParser" as  PocketHotelParser LOGIC_COLOR
+participant ":  FilterGuestCommandParser" as   FilterGuestCommandParser LOGIC_COLOR
+participant "f:  FilterGuestCommand" as   FilterGuestCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("filterguest t/deluxe")
+activate LogicManager
+
+LogicManager ->  PocketHotelParser : parseCommand("filterguest t/deluxe")
+activate PocketHotelParser
+
+create FilterGuestCommandParser
+PocketHotelParser -> FilterGuestCommandParser
+activate FilterGuestCommandParser
+
+FilterGuestCommandParser --> PocketHotelParser
+deactivate FilterGuestCommandParser
+
+PocketHotelParser -> FilterGuestCommandParser : parse(new GuestPredicate("t/deluxe"))
+activate FilterGuestCommandParser
+
+create FilterGuestCommand
+FilterGuestCommandParser -> FilterGuestCommand
+activate FilterGuestCommand
+
+FilterGuestCommand --> FilterGuestCommandParser : f
+deactivate FilterGuestCommand
+
+FilterGuestCommandParser -->  PocketHotelParser : f
+deactivate FilterGuestCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+FilterGuestCommandParser -[hidden]-> PocketHotelParser
+destroy FilterGuestCommandParser
+
+PocketHotelParser --> LogicManager : f
+deactivate PocketHotelParser
+
+LogicManager -> FilterGuestCommand : execute()
+activate FilterGuestCommand
+
+FilterGuestCommand -> Model : updatedFilteredGuestList(predicate)
+activate Model
+
+Model --> FilterGuestCommand
+deactivate Model
+
+create CommandResult
+FilterGuestCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> FilterGuestCommand
+deactivate CommandResult
+
+FilterGuestCommand --> LogicManager : result
+deactivate FilterGuestCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

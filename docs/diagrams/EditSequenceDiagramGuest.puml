@@ -1,0 +1,70 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ": PocketHotelParser" as  PocketHotelParser LOGIC_COLOR
+participant ": EditGuestCommandParser" as  EditGuestCommandParser LOGIC_COLOR
+participant "d: EditGuestCommand" as  EditGuestCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("editguest pn/S123A n/jerome")
+activate LogicManager
+
+LogicManager ->  PocketHotelParser : parseCommand("editguest pn/S123A n/jerome")
+activate PocketHotelParser
+
+create EditGuestCommandParser
+PocketHotelParser -> EditGuestCommandParser
+activate EditGuestCommandParser
+
+EditGuestCommandParser --> PocketHotelParser
+deactivate EditGuestCommandParser
+
+PocketHotelParser ->  EditGuestCommandParser : parse("pn/S123A n/jerome")
+activate EditGuestCommandParser
+
+create EditGuestCommand
+EditGuestCommandParser -> EditGuestCommand
+activate EditGuestCommand
+
+EditGuestCommand -->  EditGuestCommandParser : d
+deactivate EditGuestCommand
+
+EditGuestCommandParser -->  PocketHotelParser : d
+deactivate EditGuestCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+EditGuestCommandParser -[hidden]-> PocketHotelParser
+destroy EditGuestCommandParser
+
+PocketHotelParser --> LogicManager : d
+deactivate PocketHotelParser
+
+LogicManager ->  EditGuestCommand : execute()
+activate EditGuestCommand
+
+EditGuestCommand -> Model : edit Guest with pn = S123A
+activate Model
+
+Model --> EditGuestCommand
+deactivate Model
+
+create CommandResult
+EditGuestCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> EditGuestCommand
+deactivate CommandResult
+
+EditGuestCommand --> LogicManager : result
+deactivate EditGuestCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
+

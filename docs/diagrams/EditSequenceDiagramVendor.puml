@@ -1,0 +1,70 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ": PocketHotelParser" as  PocketHotelParser LOGIC_COLOR
+participant ": EditVendorCommandParser" as  EditVendorCommandParser LOGIC_COLOR
+participant "d: EditVendorCommand" as  EditVendorCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("editvendor vid/123 c/12.99")
+activate LogicManager
+
+LogicManager ->  PocketHotelParser : parseCommand("editvendor vid/123 c/12.99")
+activate PocketHotelParser
+
+create EditVendorCommandParser
+PocketHotelParser -> EditVendorCommandParser
+activate EditVendorCommandParser
+
+EditVendorCommandParser --> PocketHotelParser
+deactivate EditVendorCommandParser
+
+PocketHotelParser ->  EditVendorCommandParser : parse("vid/123 c/12.99")
+activate EditVendorCommandParser
+
+create EditVendorCommand
+EditVendorCommandParser -> EditVendorCommand
+activate EditVendorCommand
+
+EditVendorCommand -->  EditVendorCommandParser : d
+deactivate EditVendorCommand
+
+EditVendorCommandParser -->  PocketHotelParser : d
+deactivate EditVendorCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+EditVendorCommandParser -[hidden]-> PocketHotelParser
+destroy EditVendorCommandParser
+
+PocketHotelParser --> LogicManager : d
+deactivate PocketHotelParser
+
+LogicManager ->  EditVendorCommand : execute()
+activate EditVendorCommand
+
+EditVendorCommand -> Model : edit Vendor with vid = 123
+activate Model
+
+Model --> EditVendorCommand
+deactivate Model
+
+create CommandResult
+EditVendorCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> EditVendorCommand
+deactivate CommandResult
+
+EditVendorCommand --> LogicManager : result
+deactivate EditVendorCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
+

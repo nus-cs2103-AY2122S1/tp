@@ -1,0 +1,92 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ": PocketHotelParser" as  PocketHotelParser LOGIC_COLOR
+participant ": ChargeGuestCommandParser" as  ChargeGuestCommandParser LOGIC_COLOR
+participant "c: ChargeGuestCommand" as  ChargeGuestCommand LOGIC_COLOR
+participant "g:Guest" as Guest LOGIC_COLOR
+participant "v:Vendor" as Vendor LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("chargeguest pn/A1234 vid/001")
+activate LogicManager
+
+LogicManager ->  PocketHotelParser : parseCommand("chargeguest pn/A1234 vid/001")
+activate PocketHotelParser
+
+create ChargeGuestCommandParser
+PocketHotelParser -> ChargeGuestCommandParser
+activate ChargeGuestCommandParser
+
+ChargeGuestCommandParser --> PocketHotelParser
+deactivate ChargeGuestCommandParser
+
+PocketHotelParser ->  ChargeGuestCommandParser : parse("pn/A1234 vid/001")
+activate ChargeGuestCommandParser
+
+create ChargeGuestCommand
+ChargeGuestCommandParser -> ChargeGuestCommand
+activate ChargeGuestCommand
+
+ChargeGuestCommand -->  ChargeGuestCommandParser : c
+deactivate ChargeGuestCommand
+
+ChargeGuestCommandParser -->  PocketHotelParser : c
+deactivate ChargeGuestCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ChargeGuestCommandParser -[hidden]-> PocketHotelParser
+destroy ChargeGuestCommandParser
+
+PocketHotelParser --> LogicManager : c
+deactivate PocketHotelParser
+
+LogicManager ->  ChargeGuestCommand : execute()
+activate ChargeGuestCommand
+
+ChargeGuestCommand -> Model : getGuest(A1234)
+activate Model
+
+create Guest
+Model -->  Guest
+deactivate Model
+
+activate Guest
+Guest --> ChargeGuestCommand : g
+deactivate Guest
+
+ChargeGuestCommand -> Model : getVendor(001)
+activate Model
+
+create Vendor
+Model -->  Vendor
+deactivate Model
+
+activate Vendor
+Vendor --> ChargeGuestCommand : v
+deactivate Vendor
+
+ChargeGuestCommand -> Guest : charge(v)
+activate Guest
+Guest --> ChargeGuestCommand
+deactivate Guest
+
+create CommandResult
+ChargeGuestCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ChargeGuestCommand
+deactivate CommandResult
+
+ChargeGuestCommand --> LogicManager : result
+deactivate ChargeGuestCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

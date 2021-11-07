@@ -10,6 +10,15 @@
     -fx-opacity: 0.9;
 }
 
+.corner {
+    -fx-background-color: transparent;
+}
+
+.label-column-header {
+    -fx-font-size: 12pt;
+    -fx-text-fill: white;
+}
+
 .label-bright {
     -fx-font-size: 11pt;
     -fx-font-family: "Open Sans Semibold";
@@ -118,6 +127,12 @@
 
 .list-cell .label {
     -fx-text-fill: white;
+}
+
+.cell_unique_identifer {
+    -fx-font-family: "Open Sans Bold";
+    -fx-font-size: 16px;
+    -fx-text-fill: #010504;
 }
 
 .cell_big_label {
@@ -349,4 +364,23 @@
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 11;
+}
+
+.toggle-button {
+    -fx-border-radius: 5 5 0 0;
+    -fx-border-color: #2a2a2a;
+    -fx-border-width: 1 1 0 1;
+    -fx-background-color: #303030;
+    -fx-font-family: "Open Sans Regular";
+    -fx-font-size: 11pt;
+    -fx-text-fill: #7c7c7c;
+    -fx-padding: 5 22 5 22;
+    -fx-cursor: hand;
+}
+
+.toggle-button:selected {
+  -fx-background-color: #484848;
+  -fx-background-radius: 10 10 0 0;
+  -fx-text-fill: #e2e2e4;
+  -fx-focus-color: transparent;
 }

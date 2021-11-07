@@ -2,18 +2,29 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.DayOfWeek;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.commonattributes.Email;
+import seedu.address.model.commonattributes.Name;
+import seedu.address.model.guest.PassportNumber;
+import seedu.address.model.guest.RoomNumber;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.vendor.Address;
+import seedu.address.model.vendor.Cost;
+import seedu.address.model.vendor.OperatingHours;
+import seedu.address.model.vendor.Phone;
+import seedu.address.model.vendor.ServiceName;
+import seedu.address.model.vendor.VendorId;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -25,6 +36,7 @@ public class ParserUtil {
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -92,7 +104,53 @@ public class ParserUtil {
         if (!Email.isValidEmail(trimmedEmail)) {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
-        return new Email(trimmedEmail);
+        return new Email(trimmedEmail.toLowerCase());
+    }
+
+    /**
+     * Parses a {@code String vendorId} into a {@code vendorId}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code vendorId} is invalid.
+     */
+    public static VendorId parseVendorId(String vendorId) throws ParseException {
+        requireNonNull(vendorId);
+        String trimmedVendorId = vendorId.trim();
+        if (!VendorId.isValidVendorId(trimmedVendorId)) {
+            throw new ParseException(VendorId.MESSAGE_CONSTRAINTS);
+        }
+        return new VendorId(trimmedVendorId);
+    }
+
+    /**
+     * Parses a {@code String roomNumber} into a {@code roomNumber}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code roomNumber} is invalid.
+     */
+    public static RoomNumber parseRoomNumber(String roomNumber) throws ParseException {
+        requireNonNull(roomNumber);
+        String trimmedRoomNumber = roomNumber.trim();
+        trimmedRoomNumber = trimmedRoomNumber.replaceAll("^0+(?!$)", "");
+        if (!RoomNumber.isValidRoomNumber(trimmedRoomNumber)) {
+            throw new ParseException(RoomNumber.MESSAGE_CONSTRAINTS);
+        }
+        return new RoomNumber(trimmedRoomNumber);
+    }
+
+    /**
+     * Parses a {@code String passportNumber} into a {@code passportNumber}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code passportNumber} is invalid.
+     */
+    public static PassportNumber parsePassportNumber(String passportNumber) throws ParseException {
+        requireNonNull(passportNumber);
+        String trimmedPassportNumber = passportNumber.trim();
+        if (!PassportNumber.isValidPassportNumber(trimmedPassportNumber)) {
+            throw new ParseException(PassportNumber.MESSAGE_CONSTRAINTS);
+        }
+        return new PassportNumber(trimmedPassportNumber.toUpperCase());
     }
 
     /**
@@ -107,7 +165,7 @@ public class ParserUtil {
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        return new Tag(StringUtil.capitalizeFirstLetter(trimmedTag));
     }
 
     /**
@@ -121,4 +179,89 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Parses a {@code String serviceName} into a {@code ServiceName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code ServiceName} is invalid.
+     */
+    public static ServiceName parseServiceName(String serviceName) throws ParseException {
+        requireNonNull(serviceName);
+        String trimmedServiceName = serviceName.trim();
+        if (!ServiceName.isValidServiceName(trimmedServiceName)) {
+            throw new ParseException(ServiceName.MESSAGE_CONSTRAINTS);
+        }
+        return new ServiceName(StringUtil.capitalizeFirstLetter(trimmedServiceName));
+    }
+
+    /**
+     * Parses a {@code String cost} into a {@code Cost}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Cost} is invalid.
+     */
+    public static Cost parseCost(String cost) throws ParseException {
+        requireNonNull(cost);
+        String trimmedCost = cost.trim();
+        Double result;
+        try {
+            result = Math.round(Double.parseDouble(trimmedCost) * 100.0) / 100.0;
+        } catch (Exception e) {
+            throw new ParseException(Cost.INVALID_DOUBLE);
+        }
+        if (!Cost.isValidCost(result)) {
+            throw new ParseException(Cost.MESSAGE_CONSTRAINTS);
+        }
+        return new Cost(result);
+    }
+
+    /**
+     * Parses a {@code String operatingHours} into a {@code OperatingHours}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code OperatingHours} is invalid.
+     */
+    public static OperatingHours parseOperatingHours(String operatingHours) throws ParseException {
+        requireNonNull(operatingHours);
+        String trimmedOperatingHours = operatingHours.trim();
+
+        if (!OperatingHours.isValidOperatingHours(trimmedOperatingHours)) {
+            throw new ParseException(OperatingHours.MESSAGE_CONSTRAINTS);
+        }
+
+        String[] args = trimmedOperatingHours.split("\\s+");
+        String days = args[0];
+        String startTimeString = args[1].split("-")[0];
+        Integer startTimeHour = Integer.parseInt(startTimeString.substring(0, 2));
+        Integer startTimeMinutes = Integer.parseInt(startTimeString.substring(2));
+        String endTimeString = args[1].split("-")[1];
+        Integer endTimeHour = Integer.parseInt(endTimeString.substring(0, 2));
+        Integer endTimeMinutes = Integer.parseInt(endTimeString.substring(2));
+
+        LocalTime startTime = LocalTime.of(startTimeHour, startTimeMinutes);
+        LocalTime endTime = LocalTime.of(endTimeHour, endTimeMinutes);
+
+        if (!OperatingHours.isValidTimings(startTime, endTime)) {
+            throw new ParseException(OperatingHours.MESSAGE_CONSTRAINTS);
+        }
+
+        List<DayOfWeek> operatingDays = new ArrayList<>();
+
+        for (int i = 0; i < days.length(); i++) {
+            DayOfWeek day = DayOfWeek.of(Character.getNumericValue(days.charAt(i)));
+            if (!operatingDays.contains(day)) {
+                operatingDays.add(day);
+            }
+        }
+
+        operatingDays.sort(new Comparator<DayOfWeek>() {
+            public int compare(DayOfWeek d1, DayOfWeek d2) {
+                return d1.compareTo(d2);
+            }
+        });
+
+        return new OperatingHours(startTime, endTime, operatingDays, trimmedOperatingHours);
+    }
+
 }

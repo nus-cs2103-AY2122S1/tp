@@ -1,0 +1,70 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ": PocketHotelParser" as  PocketHotelParser LOGIC_COLOR
+participant ": CheckInNewGuestCommandParser" as  CheckInNewGuestCommandParser LOGIC_COLOR
+participant "d: CheckInNewGuestCommand" as  CheckInNewGuestCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("checkin n/ben pn/1234D e/hi@email.com r/551")
+activate LogicManager
+
+LogicManager ->  PocketHotelParser : parseCommand("checkin n/ben pn/1234D e/hi@email.com r/551")
+activate PocketHotelParser
+
+create CheckInNewGuestCommandParser
+PocketHotelParser -> CheckInNewGuestCommandParser
+activate CheckInNewGuestCommandParser
+
+CheckInNewGuestCommandParser --> PocketHotelParser
+deactivate CheckInNewGuestCommandParser
+
+PocketHotelParser ->  CheckInNewGuestCommandParser : parse("n/ben pn/1234D e/hi@email.com r/551")
+activate CheckInNewGuestCommandParser
+
+create CheckInNewGuestCommand
+CheckInNewGuestCommandParser -> CheckInNewGuestCommand
+activate CheckInNewGuestCommand
+
+CheckInNewGuestCommand -->  CheckInNewGuestCommandParser : d
+deactivate CheckInNewGuestCommand
+
+CheckInNewGuestCommandParser -->  PocketHotelParser : d
+deactivate CheckInNewGuestCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+CheckInNewGuestCommandParser -[hidden]-> PocketHotelParser
+destroy CheckInNewGuestCommandParser
+
+PocketHotelParser --> LogicManager : d
+deactivate PocketHotelParser
+
+LogicManager ->  CheckInNewGuestCommand : execute()
+activate CheckInNewGuestCommand
+
+CheckInNewGuestCommand -> Model : checkin Guest with pn = 1234D
+activate Model
+
+Model --> CheckInNewGuestCommand
+deactivate Model
+
+create CommandResult
+CheckInNewGuestCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> CheckInNewGuestCommand
+deactivate CommandResult
+
+CheckInNewGuestCommand --> LogicManager : result
+deactivate CheckInNewGuestCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
+

@@ -1,0 +1,17 @@
+@startuml
+
+start
+:User inputs a checkin command;
+:CheckInNewGuestCommandParser parses and validates the user input;
+    if () then ([arguments are valid])
+      :Parser instantiates a GuestPredicate;
+      :CheckInNewGuestCommand is created \n  containing the GuestPredicate;
+      :Model updates the guest list \n  using the GuestPredicate;
+      :A success message is shown to the user;
+    else ([arguments are invalid])
+      :ParseException gets thrown;
+      :An error message is shown to the user;
+    endif
+stop
+
+@enduml

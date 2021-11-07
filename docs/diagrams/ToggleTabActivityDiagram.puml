@@ -1,0 +1,24 @@
+@startuml
+
+start
+:User inputs a command into PH;
+:LogicManager executes the command and
+returns an instance of CommandResult;
+    if () then ([commandResult.tabName == "Guest"])
+      :Remove all child components of the
+      List Panel and StatusBar Panel
+                       in MainWindow;
+      :Add guest list and guests.json
+      file path as child components
+                    in MainWindow;
+    else ([commandResult.tabName == "Vendor"])
+      :Remove all child components of the
+      List Panel and StatusBar Panel
+                       in MainWindow;
+      :Add vendor list and vendors.json
+      file path as child components
+                    in MainWindow;
+    endif
+stop
+
+@enduml

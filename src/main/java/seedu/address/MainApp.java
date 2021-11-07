@@ -15,19 +15,27 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.guest.Archive;
+import seedu.address.model.guest.Guest;
+import seedu.address.model.guest.GuestBook;
+import seedu.address.model.guest.ReadOnlyGuestBook;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.storage.AddressBookStorage;
-import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.model.vendor.ReadOnlyVendorBook;
+import seedu.address.model.vendor.VendorBook;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
+import seedu.address.storage.archive.ArchiveStorage;
+import seedu.address.storage.archive.JsonArchiveStorage;
+import seedu.address.storage.guest.GuestBookStorage;
+import seedu.address.storage.guest.JsonGuestBookStorage;
+import seedu.address.storage.vendor.JsonVendorBookStorage;
+import seedu.address.storage.vendor.VendorBookStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
@@ -36,7 +44,7 @@ import seedu.address.ui.UiManager;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(0, 2, 0, true);
+    public static final Version VERSION = new Version(1, 2, 1, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
@@ -48,7 +56,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing Pocket Hotel ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -56,8 +64,10 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        GuestBookStorage guestBookStorage = new JsonGuestBookStorage(userPrefs.getGuestBookFilePath());
+        VendorBookStorage vendorBookStorage = new JsonVendorBookStorage(userPrefs.getVendorBookFilePath());
+        ArchiveStorage archiveStorage = new JsonArchiveStorage(userPrefs.getArchiveFilePath());
+        storage = new StorageManager(guestBookStorage, vendorBookStorage, userPrefsStorage, archiveStorage);
 
         initLogging(config);
 
@@ -74,24 +84,97 @@ public class MainApp extends Application {
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        ReadOnlyGuestBook archive = initArchive(storage);
+        ReadOnlyGuestBook guestManager = initGuestBook(storage, archive);
+        ReadOnlyVendorBook vendorManager = initVendorBook(storage);
+        return new ModelManager(guestManager, vendorManager, userPrefs, archive);
+    }
+
+    /**
+     * Returns a {@code ReadOnlyGuestBook} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
+     * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
+     * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
+     */
+    private ReadOnlyGuestBook initGuestBook(Storage storage, ReadOnlyGuestBook archive) {
+        ReadOnlyGuestBook initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample AddressBook");
+            Optional<ReadOnlyGuestBook> guestBookOptional = storage.readGuestBook();
+
+            if (!guestBookOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample GuestBook");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+
+            initialData = guestBookOptional.orElseGet(() -> SampleDataUtil.getSampleGuestBook());
+
+            GuestBook verifiedGuestBook = new GuestBook();
+
+            for (Guest guest : initialData.getGuestList()) {
+                boolean containPassportNumber = false;
+                for (Guest archivedGuest : archive.getGuestList()) {
+                    if (archivedGuest.getPassportNumber().equals(guest.getPassportNumber())) {
+                        containPassportNumber = true;
+                    }
+                }
+                if (!containPassportNumber) {
+                    verifiedGuestBook.addGuest(guest);
+                }
+            }
+
+            initialData = verifiedGuestBook;
+
+            if (initialData.getGuestList().size() == 0) {
+                logger.info("Passport numbers of all sample guests are used in the archive or data file has been "
+                        + "corrupted" + "Will be starting with an empty GuestBook");
+            }
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            logger.warning("Data file not in the correct format. Will be starting with an empty GuestBook");
+            initialData = new GuestBook();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            logger.warning("Problem while reading from the file. Will be starting with an empty GuestBook");
+            initialData = new GuestBook();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        return initialData;
     }
+
+    private ReadOnlyGuestBook initArchive(Storage storage) {
+        ReadOnlyGuestBook initialData = new Archive();
+        try {
+            Optional<ReadOnlyGuestBook> guestBookOptional = storage.readArchive();
+
+            initialData = guestBookOptional.orElseGet(SampleDataUtil::getSampleArchive);
+        } catch (DataConversionException e) {
+            logger.warning("Data file not in the correct format. Will be starting with an empty archive");
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty archive");
+        }
+
+        return initialData;
+    }
+
+    /**
+     * Returns a {@code ReadOnlyGuestBook} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
+     * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
+     * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
+     */
+    private ReadOnlyVendorBook initVendorBook(Storage storage) {
+        ReadOnlyVendorBook initialData;
+        try {
+            Optional<ReadOnlyVendorBook> vendorBookOptional = storage.readVendorBook();
+            if (!vendorBookOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample VendorBook");
+            }
+            initialData = vendorBookOptional.orElseGet(SampleDataUtil::getSampleVendorBook);
+        } catch (DataConversionException e) {
+            logger.warning("Data file not in the correct format. Will be starting with an empty VendorBook");
+            initialData = new VendorBook();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty VendorBook");
+            initialData = new VendorBook();
+        }
+        return initialData;
+    }
+
 
     private void initLogging(Config config) {
         LogsCenter.init(config);
@@ -167,13 +250,13 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
+        logger.info("Starting Pocket Hotel " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Address Book ] =============================");
+        logger.info("============================ [ Stopping Pocket Hotel ] =============================");
         try {
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {

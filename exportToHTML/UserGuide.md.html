@@ -1,0 +1,491 @@
+<html>
+<head>
+<title>UserGuide.md</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #808080;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #a9b7c6;}
+.s3 { color: #cc7832;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+UserGuide.md</font>
+</center></td></tr></table>
+<pre><span class="s0">---</span>
+<span class="s2">layout</span><span class="s1">: </span><span class="s2">page</span>
+<span class="s2">title</span><span class="s1">: </span><span class="s2">User Guide</span>
+<span class="s0">---</span>
+
+<span class="s2">&lt;h3&gt;&lt;i&gt;Welcome to the Pocket Hotel User Guide</span><span class="s1">!</span><span class="s2">&lt;/i&gt;&lt;/h3&gt;</span>
+
+<span class="s1">**</span><span class="s2">Pocket Hotel </span><span class="s1">(</span><span class="s2">PH</span><span class="s1">)** </span><span class="s2">is a specialized contact management desktop app targeted towards hotel front office staff such as front desk staff who</span>
+<span class="s2">frequently interact with guests.</span>
+
+<span class="s1">**</span><span class="s2">PH</span><span class="s1">** </span><span class="s2">provides a centralized location to store, organize and manage information linked to your guests and vendors employed by the hotel. </span><span class="s1">**</span><span class="s2">PH</span><span class="s1">**</span>
+<span class="s2">streamlines your workflow and is optimized for use via the </span><span class="s1">_</span><span class="s2">Command Line Interface</span><span class="s1">_ (**</span><span class="s2">CLI</span><span class="s1">**)</span><span class="s2">, whilst still embodying</span>
+<span class="s2">the benefits of a </span><span class="s1">_</span><span class="s2">Graphical User Interface</span><span class="s1">_ (**</span><span class="s2">GUI</span><span class="s1">**)</span><span class="s2">.</span>
+
+<span class="s2">This user guide serves as an entry point for users to get oriented with how </span><span class="s1">**</span><span class="s2">PH</span><span class="s1">** </span><span class="s2">operates and how you may utilize it</span>
+<span class="s2">fully to integrate it within your hotel management system.</span>
+
+<span class="s0">--------------------------------------------------------------------------------------------------------------------</span>
+
+<span class="s3">## </span><span class="s1">**</span><span class="s2">Table of Contents</span><span class="s1">**</span>
+
+<span class="s3">* </span><span class="s2">Table of Contents</span>
+<span class="s2">{</span><span class="s1">:</span><span class="s2">toc}</span>
+
+<span class="s0">--------------------------------------------------------------------------------------------------------------------</span>
+
+<span class="s3">## </span><span class="s1">**</span><span class="s2">Quick start</span><span class="s1">**</span>
+<span class="s3">1. </span><span class="s2">Ensure you have Java </span><span class="s0">`</span><span class="s2">11</span><span class="s0">` </span><span class="s2">or above installed in your Computer </span><span class="s1">([</span><span class="s2">Instructions on how to check Java version</span><span class="s1">](</span><span class="s2">#faq</span><span class="s1">))</span><span class="s2">.</span>
+
+<span class="s3">2. </span><span class="s2">Download the latest </span><span class="s0">`</span><span class="s2">PH.jar</span><span class="s0">` </span><span class="s2">from </span><span class="s1">[</span><span class="s2">here</span><span class="s1">](https://github.com/AY2122S1-CS2103T-W12-3/tp/releases)</span><span class="s2">.</span>
+
+<span class="s3">3. </span><span class="s2">Copy the file to the folder you want to use as the </span><span class="s1">_</span><span class="s2">home folder</span><span class="s1">_ </span><span class="s2">for </span><span class="s1">**</span><span class="s2">PH</span><span class="s1">**</span><span class="s2">.</span>
+
+<span class="s3">4. </span><span class="s2">To start the application, you may either</span><span class="s1">:</span>
+    <span class="s3">1. </span><span class="s2">Double-click the </span><span class="s0">`</span><span class="s2">PH.jar</span><span class="s0">` </span><span class="s2">file to boot up the app.</span>
+    <span class="s3">2. </span><span class="s2">Open up your shell terminal in the directory where </span><span class="s1">**</span><span class="s2">PH</span><span class="s1">** </span><span class="s2">resides, and run the command </span><span class="s0">`</span><span class="s2">java -jar PH.jar</span><span class="s0">`</span><span class="s2">.</span>
+<span class="s2">The </span><span class="s1">**</span><span class="s2">GUI</span><span class="s1">** </span><span class="s2">similar to the below should appear in a few seconds. Note how the app contains some sample data.</span>
+<span class="s1">![</span><span class="s2">Ui</span><span class="s1">](</span><span class="s2">images/Ui.png</span><span class="s1">)</span>
+<span class="s1">&lt;p align=&quot;center&quot;&gt;&lt;i&gt;Figure 1. Pocket Hotel GUI&lt;/i&gt;&lt;/p&gt;</span>
+<span class="s1">5. Type any command in the command box (Denoted by &quot;Enter command here&quot; text) and press Enter to execute it. e.g. typing `help` and pressing Enter will</span>
+   <span class="s1">open the help window. Click the tab for the list that you would like to view e.g click vendor to view vendors in stored in **PH**&lt;br&gt;</span>
+   <span class="s1">Some example commands you can try:</span>
+
+    <span class="s0">* **`checkin`**`n/John Doe pn/X12345678F r/123 e/johnd@example.com t/Senior Citizen` : Adds a guest</span>
+      <span class="s0">named `John Doe` to the Address Book.</span>
+
+    <span class="s0">* **`deleteguest`**`pn/X12345678F` : Deletes the guest with passport number X12345678F.</span>
+
+    <span class="s0">* **`clearguest`** : Deletes all guests from guest list.</span>
+
+    <span class="s0">* **`addvendor`**</span>
+
+    <span class="s0">* **`exit`** : Exits the app.</span>
+
+<span class="s2">You may refer to the </span><span class="s1">[</span><span class="s2">features</span><span class="s1">](</span><span class="s2">#features</span><span class="s1">) </span><span class="s2">below for details of each command and to get familiarized with the syntax of</span>
+<span class="s2">the commands.</span>
+
+<span class="s0">--------------------------------------------------------------------------------------------------------------------</span>
+
+
+<span class="s3">## </span><span class="s1">**</span><span class="s2">Features</span><span class="s1">**</span>
+
+<span class="s1">**</span><span class="s2">PH</span><span class="s1">**</span><span class="s2">’s features revolve around managing your guests and vendors. For each command, a short description of its use is</span>
+<span class="s2">given which is then followed by the format and a short example to help ensure that you have executed the command</span>
+<span class="s2">correctly.</span>
+
+<span class="s2">A quick overview of all the commands can be found in the </span><span class="s1">[</span><span class="s2">command summary</span><span class="s1">](</span><span class="s2">#command-summary</span><span class="s1">)</span><span class="s2">.</span>
+
+<span class="s2">Certain commands require parameters, which may have constraints. A quick overview of all the underlying</span>
+<span class="s2">constraints can be found in the </span><span class="s1">[</span><span class="s2">parameter constraints.</span><span class="s1">](</span><span class="s2">#parameter-constraints-summary</span><span class="s1">)</span>
+
+<span class="s1">&lt;div markdown=&quot;block&quot; class=&quot;alert alert-info&quot;&gt;</span>
+
+<span class="s1">**:</span><span class="s2">information_source</span><span class="s1">: </span><span class="s2">Notes about the command format</span><span class="s1">:**</span><span class="s2">&lt;br&gt;</span>
+
+<span class="s3">* </span><span class="s2">Words in </span><span class="s0">`</span><span class="s2">UPPER_CASE</span><span class="s0">` </span><span class="s2">are the parameters to be entered by the user.&lt;br&gt;</span>
+  <span class="s2">e.g. in </span><span class="s0">`</span><span class="s2">add n/NAME</span><span class="s0">`</span><span class="s2">, </span><span class="s0">`</span><span class="s2">NAME</span><span class="s0">` </span><span class="s2">is a parameter which can be used as </span><span class="s0">`</span><span class="s2">add n/John Doe</span><span class="s0">`</span><span class="s2">.</span>
+
+<span class="s3">* </span><span class="s2">Parameter prefixes such as </span><span class="s0">`</span><span class="s2">n/</span><span class="s0">` </span><span class="s2">and </span><span class="s0">`</span><span class="s2">pn/</span><span class="s0">` </span><span class="s2">are special keywords that indicate a start of a parameter.</span>
+
+<span class="s3">* </span><span class="s2">Fields with square brackets are optional.&lt;br&gt;</span>
+  <span class="s2">e.g </span><span class="s0">`</span><span class="s2">n/NAME </span><span class="s1">[</span><span class="s2">t/TAG</span><span class="s1">]</span><span class="s0">` </span><span class="s2">can be used as </span><span class="s0">`</span><span class="s2">n/Bing Cheng t/VIP</span><span class="s0">` </span><span class="s2">or as </span><span class="s0">`</span><span class="s2">n/Bing Cheng</span><span class="s0">`</span><span class="s2">.</span>
+
+<span class="s3">* </span><span class="s2">Parameters can be in any order.&lt;br&gt;</span>
+  <span class="s2">e.g. if the command specifies </span><span class="s0">`</span><span class="s2">n/NAME pn/PASSPORT_NUMBER</span><span class="s0">`</span><span class="s2">, </span><span class="s0">`</span><span class="s2">pn/PASSPORT_NUMBER n/NAME</span><span class="s0">` </span><span class="s2">is also acceptable.</span>
+
+<span class="s3">* </span><span class="s2">If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of</span>
+  <span class="s2">the parameter will be taken.&lt;br&gt;</span>
+  <span class="s2">e.g. if you specify </span><span class="s0">`</span><span class="s2">p/12341234 p/56785678</span><span class="s0">`</span><span class="s2">, only </span><span class="s0">`</span><span class="s2">p/56785678</span><span class="s0">` </span><span class="s2">will be taken.</span>
+
+<span class="s3">* </span><span class="s2">Extraneous parameters for commands that do not take in parameters </span><span class="s1">(</span><span class="s2">such as </span><span class="s0">`</span><span class="s2">help</span><span class="s0">`</span><span class="s2">, </span><span class="s0">`</span><span class="s2">list</span><span class="s0">`</span><span class="s2">, </span><span class="s0">`</span><span class="s2">exit</span><span class="s0">`</span><span class="s1">) </span><span class="s2">will be</span>
+  <span class="s2">ignored.&lt;br&gt;</span>
+  <span class="s2">e.g. if the command specifies </span><span class="s0">`</span><span class="s2">help 123</span><span class="s0">`</span><span class="s2">, it will be interpreted as </span><span class="s0">`</span><span class="s2">help</span><span class="s0">`</span><span class="s2">.</span>
+<span class="s3">* </span><span class="s2">All fields cannot be empty</span>
+<span class="s3">* </span><span class="s2">The tag field is optional and can be omitted entirely</span>
+<span class="s1">&lt;/div&gt;</span>
+
+<span class="s1">[</span><span class="s2">Back to Table of Contents</span><span class="s1">](</span><span class="s2">#table-of-contents</span><span class="s1">)</span>
+
+<span class="s0">--------------------------------------------------------------------------------------------------------------------</span>
+
+<span class="s3">### </span><span class="s2">Contacts in Pocket Hotel</span>
+<span class="s2">There are 2 types of contacts in </span><span class="s1">**</span><span class="s2">PH</span><span class="s1">**</span><span class="s2">, guests and vendors. Guests represent guests of the hotel, and vendors represent external companies employed by a hotel for services hotel. Guest are identified by their </span><span class="s0">`</span><span class="s2">PASSPORT_NUMBER</span><span class="s0">`</span>
+<span class="s2">and Vendors are identified by their </span><span class="s0">`</span><span class="s2">VENDOR_ID</span><span class="s0">`</span><span class="s2">. These fields are their unique identifier, and no two contacts can have the same unique identifier.</span>
+
+<span class="s2">It is possible for guests and vendors to have the same unique identifier for example, </span><span class="s0">`</span><span class="s2">VENDOR_ID</span><span class="s0">` </span><span class="s2">of a vendor is 111 and </span><span class="s0">`</span><span class="s2">PASSPORT_NUMBER</span><span class="s0">` </span><span class="s2">for a guest is 111, as they represent 2 different entities.</span>
+
+<span class="s2">Guests and vendors have different parameters, which can be found in the </span><span class="s1">[</span><span class="s2">parameter constraints table</span><span class="s1">](</span><span class="s2">#parameter-constraints-summary</span><span class="s1">) </span><span class="s2">or in the command instructions.</span>
+
+<span class="s3">### </span><span class="s2">Navigating between guest and vendor list</span>
+<span class="s2">To navigate between the guest and vendor list, click the button on the </span><span class="s1">**</span><span class="s2">GUI</span><span class="s1">** </span><span class="s2">to view the different lists</span>
+
+<span class="s1">&lt;div markdown=&quot;block&quot; class=&quot;alert alert-info&quot;&gt;</span>
+
+<span class="s1">**:</span><span class="s2">information_source</span><span class="s1">: </span><span class="s2">Notes about the command format</span><span class="s1">:**</span><span class="s2">&lt;br&gt;</span>
+<span class="s3">* </span><span class="s2">Regardless of the list currently being viewed, you are able to execute any command. e.g While viewing the guest list,</span>
+<span class="s2">you are able to add a vendor. Toggle back to the vendor list to see the reflected changes.</span>
+<span class="s1">&lt;/div&gt;</span>
+
+<span class="s3"># </span><span class="s2">Commands</span>
+
+<span class="s3">## </span><span class="s2">Manage Guests</span>
+
+<span class="s3">### </span><span class="s2">Checking in a new guest</span><span class="s1">: </span><span class="s0">`</span><span class="s2">checkin</span><span class="s0">`</span>
+
+<span class="s2">Checks in a new </span><span class="s1">**</span><span class="s2">guest</span><span class="s1">** </span><span class="s2">by adding their contact details into </span><span class="s1">**</span><span class="s2">PH</span><span class="s1">**</span><span class="s2">.</span>
+
+<span class="s2">Format</span><span class="s1">:</span>
+<span class="s2">&lt;br&gt;</span><span class="s0">`</span><span class="s2">checkin pn/</span><span class="s1">&lt;</span><span class="s2">PASSPORT_NUMBER</span><span class="s1">&gt; </span><span class="s2">n/&lt;NAME&gt; e/&lt;EMAIL&gt; r/</span><span class="s1">&lt;</span><span class="s2">ROOM_NUMBER</span><span class="s1">&gt; [</span><span class="s2">t/&lt;TAG&gt;</span><span class="s1">]</span><span class="s0">`</span>
+
+<span class="s2">Example</span><span class="s1">:</span>
+<span class="s1">![</span><span class="s2">addGuest.png</span><span class="s1">](</span><span class="s2">images/addGuest.png</span><span class="s1">)</span>
+<span class="s3">* </span><span class="s0">`</span><span class="s2">checkin n/Bing Cheng pn/T0134568D e/bc@gmail.com r/69</span><span class="s0">` </span><span class="s2">, adds a new guest, Bing Cheng to </span><span class="s1">**</span><span class="s2">PH</span><span class="s1">** </span><span class="s2">and shows the new contact</span>
+  <span class="s2">list.</span>
+
+
+<span class="s3">* </span><span class="s0">`</span><span class="s2">PASSPORT_NUMBER</span><span class="s0">`</span><span class="s1">: </span><span class="s2">Should only contain alphanumeric characters.</span>
+<span class="s3">* </span><span class="s0">`</span><span class="s2">EMAIL</span><span class="s0">`</span><span class="s1">: </span><span class="s2">A valid email address should be used.</span>
+<span class="s3">* </span><span class="s0">`</span><span class="s2">ROOM_NUMBER</span><span class="s0">`</span><span class="s1">: </span><span class="s2">Only numbers greater than 0 are valid.&lt;br&gt;Example</span>
+<span class="s3">* </span><span class="s0">`</span><span class="s2">TAG</span><span class="s0">`</span><span class="s1">: </span><span class="s2">An optional field, more than one can be included in the command.</span>
+
+<span class="s3">### </span><span class="s2">Checking in a returning guest</span><span class="s1">: </span><span class="s0">`</span><span class="s2">checkin</span><span class="s0">`</span>
+<span class="s2">Checks in a returning </span><span class="s1">**</span><span class="s2">guest</span><span class="s1">** </span><span class="s2">into </span><span class="s1">**</span><span class="s2">PH</span><span class="s1">**</span><span class="s2">, by retrieving their details from the archive.</span>
+
+<span class="s2">Format</span><span class="s1">:</span>
+<span class="s2">&lt;br&gt;</span><span class="s0">`</span><span class="s2">checkin pn/</span><span class="s1">&lt;</span><span class="s2">PASSPORT_NUMBER</span><span class="s1">&gt; </span><span class="s2">r/</span><span class="s1">&lt;</span><span class="s2">ROOM_NUMBER</span><span class="s1">&gt;</span><span class="s0">`</span>
+
+<span class="s3">* </span><span class="s0">`</span><span class="s2">ROOM_NUMBER</span><span class="s0">`</span><span class="s1">: </span><span class="s2">Only numbers greater than 0 are valid.&lt;br&gt;Example</span>
+
+<span class="s3">### </span><span class="s2">Checking out a guest</span><span class="s1">: </span><span class="s0">`</span><span class="s2">checkout</span><span class="s0">`</span>
+<span class="s2">Checks out a </span><span class="s1">**</span><span class="s2">guest</span><span class="s1">** </span><span class="s2">by archiving their details and generate an invoice of all the services used by the guest.</span>
+
+<span class="s2">Format</span><span class="s1">:</span>
+<span class="s2">&lt;br&gt;</span><span class="s0">`</span><span class="s2">checkout pn/</span><span class="s1">&lt;</span><span class="s2">PASSPORT_NUMBER</span><span class="s1">&gt;</span><span class="s0">`</span>
+
+<span class="s2">Example</span><span class="s1">:</span>
+
+<span class="s3">* </span><span class="s0">`</span><span class="s2">editguest pn/X12345678A</span><span class="s0">` </span><span class="s2">checks out the guest Bing Cheng, whose passport number is X12345678A.</span>
+
+<span class="s3">### </span><span class="s2">Editing fields of a guest </span><span class="s1">: </span><span class="s0">`</span><span class="s2">editguest</span><span class="s0">`</span>
+
+<span class="s2">Edit a </span><span class="s1">**</span><span class="s2">guest</span><span class="s1">**' </span><span class="s2">contact details. Only edits the fields that have been passed in as parameters.</span>
+
+<span class="s2">Format</span><span class="s1">:</span>
+<span class="s0">`</span><span class="s2">editguest pn/</span><span class="s1">&lt;</span><span class="s2">PASSPORT_NUMBER</span><span class="s1">&gt; &lt;</span><span class="s2">FIELD_NAME</span><span class="s1">&gt;</span><span class="s2">/</span><span class="s1">&lt;</span><span class="s2">NEW_FIELD_DETAILS</span><span class="s1">&gt;</span><span class="s0">`</span>
+
+<span class="s1">&lt;div markdown=&quot;block&quot; class=&quot;alert alert-info&quot;&gt;</span>
+<span class="s1">**:information_source: Notes:**&lt;br&gt;</span>
+
+<span class="s3">* </span><span class="s2">Existing field values will be overwritten by the newly provided field values.</span>
+
+<span class="s3">* </span><span class="s2">You can edit more than one field at a time </span><span class="s1">(</span><span class="s2">See example below</span><span class="s1">)</span><span class="s2">.</span>
+
+<span class="s3">* </span><span class="s2">Note that when changing a guest, it is important that there is no pre-existing</span>
+  <span class="s2">guest with that passport number already.</span>
+<span class="s1">&lt;/div&gt;</span>
+
+<span class="s3">* </span><span class="s0">`</span><span class="s2">PASSPORT_NUMBER</span><span class="s0">`</span><span class="s1">: </span><span class="s2">Should only contain alphanumeric characters.</span>
+<span class="s3">* </span><span class="s0">`</span><span class="s2">EMAIL</span><span class="s0">`</span><span class="s1">: </span><span class="s2">A valid email address should be used.</span>
+<span class="s3">* </span><span class="s0">`</span><span class="s2">ROOM_NUMBER</span><span class="s0">`</span><span class="s1">: </span><span class="s2">Only numbers greater than 0 are valid.&lt;br&gt;Example</span>
+<span class="s3">* </span><span class="s0">`</span><span class="s2">TAG</span><span class="s0">`</span><span class="s1">: </span><span class="s2">An optional field, more than one can be included in the command.</span>
+
+<span class="s2">Example</span><span class="s1">:</span>
+
+<span class="s3">* </span><span class="s0">`</span><span class="s2">editguest pn/X12345678A r/123</span><span class="s0">` </span><span class="s2">locates the guest Bing Cheng, by his passport number X12345678A and overwrites the</span>
+  <span class="s2">room number field with the new room number provided.</span>
+
+<span class="s3">* </span><span class="s0">`</span><span class="s2">editguest pn/X87654321A r/124 e/jj@mailer.com</span><span class="s0">` </span><span class="s2">locates the guest Jeremy, by his passport number X87654321A and overwrites the</span>
+    <span class="s2">room number field with the new room number provided, and overwrites the old email field with the new email provided.</span>
+
+<span class="s1">[</span><span class="s2">Back to Table of Contents</span><span class="s1">](</span><span class="s2">#table-of-contents</span><span class="s1">)</span>
+
+<span class="s3">### </span><span class="s2">Deleting a guest's details</span><span class="s1">: </span><span class="s0">`</span><span class="s2">deleteguest</span><span class="s0">`</span>
+
+<span class="s2">Deletes an existing </span><span class="s1">**</span><span class="s2">guest</span><span class="s1">**'</span><span class="s2">s contact details from </span><span class="s1">**</span><span class="s2">PH</span><span class="s1">**</span><span class="s2">. Guests deleted can be checked in or in the archive.</span>
+
+<span class="s2">Format</span><span class="s1">:</span>
+<span class="s2">&lt;br&gt;</span><span class="s0">`</span><span class="s2">deleteguest pn/</span><span class="s1">&lt;</span><span class="s2">PASSPORT_NUMBER</span><span class="s1">&gt;</span><span class="s0">`</span>
+
+<span class="s2">Example</span><span class="s1">:</span>
+<span class="s0">`</span><span class="s2">deleteguest pn/XNOO19390</span><span class="s0">` </span><span class="s2">deletes the guest who has passport number XNOO19390 from </span><span class="s1">**</span><span class="s2">PH</span><span class="s1">**</span><span class="s2">.</span>
+
+<span class="s1">[</span><span class="s2">Back to Table of Contents</span><span class="s1">](</span><span class="s2">#table-of-contents</span><span class="s1">)</span>
+
+<span class="s3">### </span><span class="s2">Clear all checked in guests </span><span class="s1">: </span><span class="s0">`</span><span class="s2">clearguest</span><span class="s0">`</span>
+
+<span class="s2">Deletes all guests that are currently checked in.</span>
+
+<span class="s2">Format</span><span class="s1">:</span>
+<span class="s2">&lt;br&gt;</span><span class="s0">`</span><span class="s2">clearguest</span><span class="s0">`</span>
+
+<span class="s1">&lt;div markdown=&quot;block&quot; class=&quot;alert alert-info&quot;&gt;</span>
+<span class="s1">**:information_source: Note:**&lt;br&gt;</span>
+<span class="s1">* **Archived guests** are not deleted.</span>
+<span class="s1">&lt;/div&gt;</span>
+
+<span class="s1">[</span><span class="s2">Back to Table of Contents</span><span class="s1">](</span><span class="s2">#table-of-contents</span><span class="s1">)</span>
+
+<span class="s3">### </span><span class="s2">Show all guests</span><span class="s1">: </span><span class="s0">`</span><span class="s2">listguest</span><span class="s0">`</span>
+
+<span class="s2">Removes any filters and shows all guests checked into hotel.</span>
+
+<span class="s2">Format</span><span class="s1">:</span>
+<span class="s2">&lt;br&gt;</span><span class="s0">`</span><span class="s2">listguest</span><span class="s0">`</span>
+
+<span class="s1">&lt;div markdown=&quot;block&quot; class=&quot;alert alert-info&quot;&gt;</span>
+<span class="s1">**:information_source: Notes:**&lt;br&gt;</span>
+<span class="s1">* Contacts are not arranged in any particular order</span>
+<span class="s1">&lt;/div&gt;</span>
+
+<span class="s1">[</span><span class="s2">Back to Table of Contents</span><span class="s1">](</span><span class="s2">#table-of-contents</span><span class="s1">)</span>
+
+<span class="s3">### </span><span class="s2">Charge a guest for a service</span><span class="s1">: </span><span class="s0">`</span><span class="s2">chargeguest</span><span class="s0">`</span>
+
+<span class="s2">Charges a guest for a service offered by a vendor, and adds it to the invoice that will be generated upon checkout</span>
+
+<span class="s2">Format</span><span class="s1">:</span>
+<span class="s2">&lt;br&gt;</span><span class="s0">`</span><span class="s2">chargeguest pn/</span><span class="s1">&lt;</span><span class="s2">PASSPORT_NUMBER</span><span class="s1">&gt; </span><span class="s2">vid/</span><span class="s1">&lt;</span><span class="s2">VENDOR_ID</span><span class="s1">&gt;</span><span class="s0">`</span>
+
+<span class="s1">[</span><span class="s2">Back to Table of Contents</span><span class="s1">](</span><span class="s2">#table-of-contents</span><span class="s1">)</span>
+
+<span class="s3">### </span><span class="s2">Filter guest list</span><span class="s1">: </span><span class="s0">`</span><span class="s2">filterguest</span><span class="s0">`</span>
+
+<span class="s2">Applies a filter to the guests who are checked in and displays them in the guest list.</span>
+
+<span class="s2">Format</span><span class="s1">:</span>
+<span class="s0">`</span><span class="s2">filterguest </span><span class="s1">&lt;</span><span class="s2">FILTER_FIELD_NAME</span><span class="s1">&gt;</span><span class="s2">/</span><span class="s1">&lt;</span><span class="s2">FILTER_FIELD_VALUE</span><span class="s1">&gt;</span><span class="s0">`</span>
+
+<span class="s2">Example</span><span class="s1">:</span>
+<span class="s0">`</span><span class="s2">filterguest n/boon</span><span class="s0">`</span><span class="s2">, guests with name, </span><span class="s1">&quot;</span><span class="s2">boon </span><span class="s1">&quot;</span><span class="s2">, will be filtered from </span><span class="s1">**</span><span class="s2">PH</span><span class="s1">**</span><span class="s2">.</span>
+
+<span class="s1">&lt;div markdown=&quot;block&quot; class=&quot;alert alert-info&quot;&gt;</span>
+<span class="s1">**:information_source: Note:**&lt;br&gt;</span>
+<span class="s1">* Using the filter command a second time, would clear the filters previously applied.</span>
+<span class="s1">&lt;/div&gt;</span>
+
+<span class="s1">[</span><span class="s2">Back to Table of Contents</span><span class="s1">](</span><span class="s2">#table-of-contents</span><span class="s1">)</span>
+
+<span class="s3">## </span><span class="s2">Manage Vendors</span>
+
+<span class="s3">### </span><span class="s2">Adding a vendor</span><span class="s1">: </span><span class="s0">`</span><span class="s2">addvendor</span><span class="s0">`</span>
+
+<span class="s2">Adds a vendors details to </span><span class="s1">**</span><span class="s2">PH</span><span class="s1">**</span>
+
+<span class="s2">Format</span><span class="s1">:</span>
+<span class="s2">&lt;br&gt;</span><span class="s0">`</span><span class="s2">addvendor vid/</span><span class="s1">&lt;</span><span class="s2">VENDOR_ID</span><span class="s1">&gt; </span><span class="s2">n/&lt;NAME&gt; e/&lt;EMAIL&gt; p/</span><span class="s1">&lt;</span><span class="s2">PHONE_NUMBER</span><span class="s1">&gt; </span><span class="s2">a/&lt;ADDRESS&gt; sn/</span><span class="s1">&lt;</span><span class="s2">SERVICE_NAME</span><span class="s1">&gt; </span><span class="s2">c/</span><span class="s1">&lt;</span><span class="s2">SERVICE_COST</span><span class="s1">&gt; </span><span class="s2">oh/&lt;OPERATING HOURS&gt; </span><span class="s1">[</span><span class="s2">t/TAG</span><span class="s1">]</span><span class="s0">`</span>
+
+<span class="s2">Example</span><span class="s1">:</span>
+<span class="s2">&lt;br&gt;</span><span class="s0">`</span><span class="s2">addvendor vid/123 n/Wang's Satay e/satayMan@email.com p/84711231 a/Geylang Street 31 sn/Satay c/5 oh/1 0800-2000</span><span class="s0">`</span>
+
+<span class="s1">&lt;div markdown=&quot;block&quot; class=&quot;alert alert-info&quot;&gt;</span>
+<span class="s1">**:information_source: Note on OPERATING_HOUR format:**&lt;br&gt;</span>
+<span class="s1">Format:</span>
+<span class="s1">&lt;br&gt;`DAYS STARTTIME-ENDTIME`</span>
+<span class="s1">&lt;br&gt;Monday is represented using a 1 and Sunday is represented by 7.&lt;br&gt;Example:&lt;br&gt;`1234567 0800-2359`: Monday to Sunday 8am to 11:59pm&lt;br&gt;`1321 0800-0900`: Monday to Wednesday 7am to 9am</span>
+<span class="s1">&lt;/div&gt;</span>
+
+<span class="s3">* </span><span class="s2">VENDOR_ID</span><span class="s1">: </span><span class="s2">Should only contain alphanumeric characters</span>
+<span class="s3">* </span><span class="s2">NAME</span><span class="s1">: </span><span class="s2">Should only contain alphabetical characters</span>
+<span class="s3">* </span><span class="s2">EMAIL</span><span class="s1">: </span><span class="s2">A valid email address should be used.</span>
+<span class="s3">* </span><span class="s2">PHONE_NUMBER</span><span class="s1">: </span><span class="s2">At least 3 digits long, should only contain numbers.</span>
+<span class="s3">* </span><span class="s2">SERVICE_NAME</span><span class="s1">: </span><span class="s2">Alphabetical characters and spaces are allowed.</span>
+<span class="s3">* </span><span class="s2">SERVICE_COST</span><span class="s1">: </span><span class="s2">Number greater than 0, will be rounded to 2 decimal places.</span>
+<span class="s3">* </span><span class="s2">TAG</span><span class="s1">: </span><span class="s2">An optional field, more than one can be included in each command.</span>
+
+<span class="s1">[</span><span class="s2">Back to Table of Contents</span><span class="s1">](</span><span class="s2">#table-of-contents</span><span class="s1">)</span>
+
+<span class="s3">### </span><span class="s2">Editing fields of a vendor </span><span class="s1">: </span><span class="s0">`</span><span class="s2">editvendor</span><span class="s0">`</span>
+
+<span class="s2">Edit a </span><span class="s1">**</span><span class="s2">vendors</span><span class="s1">**' </span><span class="s2">contact details. Only edits the fields that have been passed in as parameters.</span>
+
+<span class="s2">Format</span><span class="s1">:</span>
+<span class="s2">&lt;br&gt;</span><span class="s0">`</span><span class="s2">editvendor vid/</span><span class="s1">&lt;</span><span class="s2">VENDOR_ID</span><span class="s1">&gt; &lt;</span><span class="s2">FIELD_NAME</span><span class="s1">&gt;</span><span class="s2">/</span><span class="s1">&lt;</span><span class="s2">NEW_FIELD_DETAILS</span><span class="s1">&gt;</span><span class="s0">`</span>
+
+<span class="s2">Example</span><span class="s1">:</span>
+<span class="s2">&lt;br&gt;</span><span class="s0">`</span><span class="s2">edit vid/123 p/99999999 e/j@mailer.com</span><span class="s0">` </span><span class="s2">locates the vendor, Wang's Satay, with </span><span class="s0">`</span><span class="s2">VENDOR_ID</span><span class="s0">` </span><span class="s2">123 and overwrites the phone number</span>
+  <span class="s2">field with the new phone number provided, and the email field with the new email provided.</span>
+
+<span class="s1">[</span><span class="s2">Back to Table of Contents</span><span class="s1">](</span><span class="s2">#table-of-contents</span><span class="s1">)</span>
+
+<span class="s3">### </span><span class="s2">Deleting a vendor's details</span><span class="s1">: </span><span class="s0">`</span><span class="s2">deletevendor</span><span class="s0">`</span>
+
+<span class="s2">Deletes a vendors contact details from </span><span class="s1">**</span><span class="s2">PH</span><span class="s1">**</span><span class="s2">.</span>
+
+<span class="s2">Format</span><span class="s1">:</span>
+<span class="s2">&lt;br&gt;</span><span class="s0">`</span><span class="s2">deletevendor vid/</span><span class="s1">&lt;</span><span class="s2">VENDOR_ID</span><span class="s1">&gt;</span><span class="s0">`</span>
+
+<span class="s2">Example</span><span class="s1">:</span>
+<span class="s2">&lt;br&gt;</span><span class="s0">`</span><span class="s2">deletevendor vid/321</span><span class="s0">`  </span><span class="s2">deletes the vendor with </span><span class="s0">`</span><span class="s2">VENDOR_ID</span><span class="s0">` </span><span class="s2">321 from </span><span class="s1">**</span><span class="s2">PH</span><span class="s1">**</span><span class="s2">.</span>
+
+<span class="s1">[</span><span class="s2">Back to Table of Contents</span><span class="s1">](</span><span class="s2">#table-of-contents</span><span class="s1">)</span>
+
+<span class="s3">### </span><span class="s2">Clear vendor list </span><span class="s1">: </span><span class="s0">`</span><span class="s2">clearvendor</span><span class="s0">`</span>
+<span class="s2">Deletes all vendors</span>
+
+<span class="s2">Format</span><span class="s1">:</span>
+<span class="s2">&lt;br&gt;</span><span class="s0">`</span><span class="s2">clearvendor</span><span class="s0">`</span>
+
+<span class="s1">[</span><span class="s2">Back to Table of Contents</span><span class="s1">](</span><span class="s2">#table-of-contents</span><span class="s1">)</span>
+
+<span class="s3">### </span><span class="s2">Filter vendor list</span><span class="s1">: </span><span class="s0">`</span><span class="s2">filtervendor</span><span class="s0">`</span>
+
+<span class="s2">Applies a filter to all the vendors and displays them in the vendor list.</span>
+
+<span class="s2">Format</span><span class="s1">:</span>
+<span class="s0">`</span><span class="s2">filtervendor </span><span class="s1">&lt;</span><span class="s2">FILTER_FIELD_NAME</span><span class="s1">&gt;</span><span class="s2">/</span><span class="s1">&lt;</span><span class="s2">FILTER_FIELD_VALUE</span><span class="s1">&gt;</span><span class="s0">`</span>
+
+<span class="s2">Example</span><span class="s1">:</span>
+<span class="s0">`</span><span class="s2">filtervendor sn/Food</span><span class="s0">`</span><span class="s2">, vendors with the </span><span class="s0">`</span><span class="s2">SERVICE_NAME</span><span class="s0">` </span><span class="s2">food will be filtered from </span><span class="s1">**</span><span class="s2">PH</span><span class="s1">**</span>
+
+<span class="s1">&lt;div markdown=&quot;block&quot; class=&quot;alert alert-info&quot;&gt;</span>
+<span class="s1">**:information_source: Note:**&lt;br&gt;</span>
+<span class="s1">* Using the filter command a second time, would clear the filters previously applied.</span>
+<span class="s1">&lt;/div&gt;</span>
+
+<span class="s1">[</span><span class="s2">Back to Table of Contents</span><span class="s1">](</span><span class="s2">#table-of-contents</span><span class="s1">)</span>
+
+<span class="s3">## </span><span class="s2">Utility Commands</span>
+
+<span class="s3">### </span><span class="s2">Viewing help</span><span class="s1">: </span><span class="s0">`</span><span class="s2">help</span><span class="s0">`</span>
+
+<span class="s2">Shows a message explaining how to access the help page.</span>
+
+<span class="s2">Format</span><span class="s1">: </span><span class="s0">`</span><span class="s2">help</span><span class="s0">`</span>
+
+<span class="s1">[</span><span class="s2">Back to Table of Contents</span><span class="s1">](</span><span class="s2">#table-of-contents</span><span class="s1">)</span>
+
+<span class="s3">### </span><span class="s2">Exiting the program</span><span class="s1">: </span><span class="s0">`</span><span class="s2">exit</span><span class="s0">`</span>
+
+<span class="s2">Exits the program.</span>
+
+<span class="s2">Format</span><span class="s1">: </span><span class="s0">`</span><span class="s2">exit</span><span class="s0">`</span>
+
+<span class="s1">[</span><span class="s2">Back to Table of Contents</span><span class="s1">](</span><span class="s2">#table-of-contents</span><span class="s1">)</span>
+
+<span class="s3">## </span><span class="s2">Saving your Data</span>
+
+<span class="s2">Your data is saved automatically to the hard disk after every command you enter. The file is saved in </span><span class="s0">`</span><span class="s2">.json</span><span class="s0">` </span><span class="s2">format,</span>
+<span class="s2">which allows you to edit the file manually without even booting up </span><span class="s1">**</span><span class="s2">PH</span><span class="s1">**</span><span class="s2">.</span>
+
+<span class="s1">[</span><span class="s2">Back to Table of Contents</span><span class="s1">](</span><span class="s2">#table-of-contents</span><span class="s1">)</span>
+
+<span class="s3">### </span><span class="s2">Editing your data directly</span>
+
+<span class="s2">Here’s a snippet of the editable text file in JSON that is found at</span><span class="s1">:</span>
+<span class="s0">`</span><span class="s1">[</span><span class="s2">JAR file location</span><span class="s1">]</span><span class="s2">/data/addressbook.json</span><span class="s0">`</span>
+
+<span class="s1">&lt;div markdown=&quot;span&quot; class=&quot;alert alert-warning&quot;&gt;:exclamation: **Caution:**</span>
+<span class="s1">Editing the json file directly should only be done by a user experienced with .json format files.</span>
+<span class="s1">&lt;/div&gt;</span>
+
+<span class="s1">&lt;img src=&quot;images/JsonSnippet.png&quot; width=&quot;300&quot;&gt;</span>
+
+<span class="s1">[</span><span class="s2">Back to Table of Contents</span><span class="s1">](</span><span class="s2">#table-of-contents</span><span class="s1">)</span>
+
+<span class="s3">### </span><span class="s2">Guest in archive data format</span>
+
+<span class="s2">The archived guests would have the room number and services field emptied in the Json file as shown in the image above.</span>
+<span class="s2">&lt;br&gt; Archived guest are also not shown in the UI.</span>
+
+<span class="s0">--------------------------------------------------------------------------------------------------------------------</span>
+
+<span class="s3">## </span><span class="s1">**</span><span class="s2">Command Summary</span><span class="s1">**</span>
+
+
+<span class="s3">### </span><span class="s2">Guest Command Summary</span>
+<span class="s1">Action </span><span class="s0">| </span><span class="s1">Format, Examples</span>
+<span class="s0">--------|------------------</span>
+<span class="s1">**checkin(new guest)** </span><span class="s0">| </span><span class="s1">`checkin pn/&lt;PASSPORT_NUMBER&gt; n/&lt;NAME&gt; e/&lt;EMAIL&gt; r/&lt;ROOM_NUMBER&gt; [t/&lt;TAG&gt;]`&lt;br&gt;Example: `checkin pn/T0134568D n/Bing Cheng e/bingcheng@email.com r/101 t/VIP`</span>
+<span class="s1">**checkin(returning guest)** </span><span class="s0">| </span><span class="s1">`checkin pn/&lt;PASSPORT_NUMBER&gt; r/&lt;ROOM_NUMBER&gt;`&lt;br&gt;Example: `checkin pn/T0134568D r/101`</span>
+<span class="s1">**checkout** </span><span class="s0">| </span><span class="s1">`checkout pn/&lt;PASSPORT_NUMBER&gt;`&lt;br&gt;Example: `checkout pn/T0134568D`</span>
+<span class="s1">**editguest** </span><span class="s0">| </span><span class="s1">`editguest pn/&lt;PASSPORT_NUMBER&gt; &lt;FIELD_NAME&gt;/&lt;NEW_FIELD_DETAILS&gt;`&lt;br&gt;Example: `edit pn/X12345678A p/99999999`</span>
+<span class="s1">**deleteguest** </span><span class="s0">| </span><span class="s1">`deleteguest pn/&lt;PASSPORT_NUMBER&gt;`&lt;br&gt;Example: `deleteguest pn/T0134568D`</span>
+<span class="s1">**clearguest** </span><span class="s0">| </span><span class="s1">`clearguest`</span>
+<span class="s1">**listguest** </span><span class="s0">| </span><span class="s1">`listguest`</span>
+<span class="s1">**filterguest** </span><span class="s0">| </span><span class="s1">`filterguest &lt;FILTER_FIELD_NAME&gt;/&lt;FILTER_FIELD_VALUE&gt;`&lt;br&gt;Example: `filterguest n/Bing t/VIP`</span>
+<span class="s1">**chargeguest** </span><span class="s0">| </span><span class="s1">`chargeguest pn/&lt;PASSPORT_NUMBER&gt; vid/&lt;VENDOR_ID&gt;`&lt;br&gt;Example: `charge pn/T0134568D vid/3`</span>
+
+<span class="s3">### </span><span class="s2">Vendor Command Summary</span>
+<span class="s1">Action </span><span class="s0">| </span><span class="s1">Format, Examples</span>
+<span class="s0">--------|------------------</span>
+<span class="s1">**addvendor** </span><span class="s0">| </span><span class="s1">`addvendor vid/&lt;VENDOR_ID&gt; n/&lt;NAME&gt; e/&lt;EMAIL&gt; p/&lt;PHONE_NUMBER&gt; a/&lt;ADDRESS&gt; sn/&lt;SERVICE_NAME&gt; c/&lt;SERVICE_COST&gt; oh/&lt;OPERATING HOURS&gt; [t/TAG]`&lt;br&gt;Example: `addvendor vid/123 n/Wang's Satay e/satayMan@email.com p/84711231 a/Geylang Street 31 sn/Satay c/5 oh/1 0800-2000` </span>
+<span class="s1">**editvendor** </span><span class="s0">| </span><span class="s1">`editvendor vid/&lt;VENDOR_ID&gt; &lt;FIELD_NAME&gt;/&lt;NEW_FIELD_DETAILS&gt;`&lt;br&gt;Example: `edit vid/111 sn/Laundry`</span>
+<span class="s1">**deletevendor** </span><span class="s0">| </span><span class="s1">`deletevendor vid/&lt;VENDOR_ID&gt;`&lt;br&gt;Example: `deletevendor vid/112`</span>
+<span class="s1">**clearvendor** </span><span class="s0">| </span><span class="s1">`clearvendor`</span>
+<span class="s1">**listvendor** </span><span class="s0">| </span><span class="s1">`listvendor`</span>
+<span class="s1">**filtervendor** </span><span class="s0">| </span><span class="s1">`filtervendor vid/&lt;VENDOR_ID&gt; &lt;FILTER_FIELD_NAME&gt;/&lt;FILTER_FIELD_VALUE&gt;`&lt;br&gt;Example: `filtervendor sn/Food t/satay`</span>
+<span class="s1">**help** </span><span class="s0">| </span><span class="s1">`Help`</span>
+<span class="s1">**exit** </span><span class="s0">| </span><span class="s1">`exit`</span>
+
+<span class="s1">[</span><span class="s2">Back to Table of Contents</span><span class="s1">](</span><span class="s2">#table-of-contents</span><span class="s1">)</span>
+
+<span class="s0">--------------------------------------------------------------------------------------------------------------------</span>
+<span class="s3"># </span><span class="s1">**</span><span class="s2">Parameter Constraints Section</span><span class="s1">**</span>
+<span class="s3">## </span><span class="s1">**</span><span class="s2">Guest Parameter Constraints Summary</span><span class="s1">**</span>
+
+<span class="s1">Parameter </span><span class="s0">| </span><span class="s1">Prefix </span><span class="s0">| </span><span class="s1">Constraints, Examples</span>
+<span class="s0">----------|--------|-----------------------</span>
+<span class="s1">**PASSPORT_NUMBER** </span><span class="s0">| </span><span class="s1">`pn/` </span><span class="s0">| </span><span class="s1">Blank inputs are not allowed.&lt;br&gt;Should only contain alphanumeric characters.&lt;br&gt;Example: `pn/X12345678A`</span>
+<span class="s1">**NAME** </span><span class="s0">| </span><span class="s1">`n/` </span><span class="s0">| </span><span class="s1">Blank inputs are not allowed.&lt;br&gt;Example: `n/Bing Cheng`</span>
+<span class="s1">**EMAIL** </span><span class="s0">| </span><span class="s1">`e/` </span><span class="s0">| </span><span class="s1">Blanks inputs are not allowed.&lt;br&gt;A valid email address should be used.&lt;br&gt;Example: `e/BingCheng@email.com`</span>
+<span class="s1">**ROOM_NUMBER** </span><span class="s0">| </span><span class="s1">`r/` </span><span class="s0">| </span><span class="s1">Blank inputs are not allowed.&lt;br&gt;Only numbers greater than 0 are valid.&lt;br&gt;Example: `r/500`</span>
+<span class="s1">**TAG** </span><span class="s0">| </span><span class="s1">`t/` </span><span class="s0">| </span><span class="s1">Blank inputs are not allowed.&lt;br&gt;An optional field, more than one can be included in each command.&lt;br&gt;Example: `t/Vaccinated t/Vegetarian`</span>
+
+<span class="s3">## </span><span class="s1">**</span><span class="s2">Vendor Parameter Constraints Summary</span><span class="s1">**</span>
+
+<span class="s1">Parameter </span><span class="s0">| </span><span class="s1">Prefix </span><span class="s0">| </span><span class="s1">Constraints, Examples</span>
+<span class="s0">----------|--------|-----------------------</span>
+<span class="s1">**VENDOR_ID** </span><span class="s0">| </span><span class="s1">`vid/` </span><span class="s0">|  </span><span class="s1">Blank inputs are not allowed.&lt;br&gt;Should only contain alphanumeric characters.&lt;br&gt;Example: `vid/2131`</span>
+<span class="s1">**NAME** </span><span class="s0">| </span><span class="s1">`n/` </span><span class="s0">| </span><span class="s1">Blank inputs are not allowed.&lt;br&gt;Should only contain alphabetical characters.&lt;br&gt;Example: `n/Wang's Satay`</span>
+<span class="s1">**EMAIL** </span><span class="s0">| </span><span class="s1">`e/` </span><span class="s0">| </span><span class="s1">Blanks inputs are not allowed.&lt;br&gt;A valid email address should be used.&lt;br&gt;Example: `e/satayMan@email.com`</span>
+<span class="s1">**PHONE_NUMBER** </span><span class="s0">| </span><span class="s1">`p/` </span><span class="s0">| </span><span class="s1">Blank inputs are not allowed.&lt;br&gt;At least 3 digits long, should only contain numbers&lt;br&gt;Example: `p/84711231`</span>
+<span class="s1">**ADDRESS** </span><span class="s0">| </span><span class="s1">`a/` </span><span class="s0">| </span><span class="s1">Blank inputs are not allowed.&lt;br&gt;Example: `a/Geylang Street 31`</span>
+<span class="s1">**SERVICE_NAME** </span><span class="s0">| </span><span class="s1">`sn/` </span><span class="s0">| </span><span class="s1">Blank inputs are not allowed.&lt;br&gt;Alphabetical characters and spaces are allowed.&lt;br&gt;Example: `sn/Satay`</span>
+<span class="s1">**SERVICE_COST** </span><span class="s0">| </span><span class="s1">`c/` </span><span class="s0">| </span><span class="s1">Blank inputs are not allowed.&lt;br&gt;Number greater than 0, will be rounded to 2 decimal places.&lt;br&gt;Example: `c/5`</span>
+<span class="s1">**OPERATING_HOURS** </span><span class="s0">| </span><span class="s1">`oh/` </span><span class="s0">| </span><span class="s1">Blank inputs are not allowed.&lt;br&gt;Duplicates are allowed.&lt;br&gt;Format: `DAYS STARTTIME-ENDTIME`&lt;br&gt;Monday is represented using a 1 and Sunday is represented by 7.&lt;br&gt;Example:&lt;br&gt;`1234567 0800-2359`: Monday to Sunday 8am to 11:59pm&lt;br&gt;`1321 0800-0900`: Monday to Wednesday 7am to 9am</span>
+<span class="s1">**TAG** </span><span class="s0">| </span><span class="s1">`t/` </span><span class="s0">| </span><span class="s1">Blank inputs are not allowed.&lt;br&gt;An optional field, more than one can be included in each command.&lt;br&gt;Example: `t/Halal t/Free flow`</span>
+
+<span class="s1">[</span><span class="s2">Back to Table of Contents</span><span class="s1">](</span><span class="s2">#table-of-contents</span><span class="s1">)</span>
+
+<span class="s0">--------------------------------------------------------------------------------------------------------------------</span>
+
+<span class="s3">## </span><span class="s1">**</span><span class="s2">Glossary</span><span class="s1">**</span>
+
+<span class="s3">* </span><span class="s1">**</span><span class="s2">PH</span><span class="s1">**: </span><span class="s2">Acronym for Pocket Hotel</span>
+<span class="s3">* </span><span class="s1">**</span><span class="s2">CLI</span><span class="s1">**: </span><span class="s2">Command line interface</span>
+<span class="s3">* </span><span class="s1">**</span><span class="s2">GUI</span><span class="s1">**: </span><span class="s2">Graphical user interface</span>
+<span class="s3">* </span><span class="s1">**</span><span class="s2">Guest</span><span class="s1">**: </span><span class="s2">A guest at the hotel</span>
+<span class="s3">* </span><span class="s1">**</span><span class="s2">Vendor</span><span class="s1">**: </span><span class="s2">An external entity that a hotel uses for services </span>
+<span class="s3">* </span><span class="s1">**</span><span class="s2">Unique Identifier</span><span class="s1">**: </span><span class="s2">An attribute that uniquely identifies a contact in the address book.</span>
+<span class="s3">* </span><span class="s1">**</span><span class="s2">Archived Guests</span><span class="s1">**: </span><span class="s2">Guests that are not checked into the hotel and are not displayed, but whose details are stored in </span><span class="s1">**</span><span class="s2">PH</span><span class="s1">**</span><span class="s2">.</span>
+<span class="s3">* </span><span class="s1">**</span><span class="s2">Unarchived guests</span><span class="s1">**: </span><span class="s2">Guests who are currently checked into </span><span class="s1">**</span><span class="s2">PH</span><span class="s1">** </span><span class="s2">and can be viewed in the list.</span>
+
+<span class="s1">[</span><span class="s2">Back to Table of Contents</span><span class="s1">](</span><span class="s2">#table-of-contents</span><span class="s1">)</span>
+
+<span class="s0">--------------------------------------------------------------------------------------------------------------------</span>
+
+<span class="s3">## </span><span class="s1">**</span><span class="s2">FAQ</span><span class="s1">**</span>
+
+<span class="s1">**</span><span class="s2">Q</span><span class="s1">**: </span><span class="s2">How do I transfer my data to another Computer?&lt;br&gt;</span>
+<span class="s1">**</span><span class="s2">A</span><span class="s1">**: </span><span class="s2">Install the app on your other computer and run it. Overwrite the empty .json file that is created with your old</span>
+<span class="s2">.json file in your old computer.&lt;br&gt;</span>
+
+<span class="s1">**</span><span class="s2">Q</span><span class="s1">**: </span><span class="s2">How do I know if Java 11 is installed correctly on my computer?&lt;br&gt;</span>
+<span class="s1">**</span><span class="s2">A</span><span class="s1">**: </span><span class="s2">Open up your terminal and run </span><span class="s0">`</span><span class="s2">java --version</span><span class="s0">`</span><span class="s2">. The output should be java 11, if installed correctly.&lt;br&gt;</span>
+
+<span class="s1">[</span><span class="s2">Back to Table of Contents</span><span class="s1">](</span><span class="s2">#table-of-contents</span><span class="s1">)</span>
+
+<span class="s0">--------------------------------------------------------------------------------------------------------------------</span>
+
+
+</pre>
+</body>
+</html>

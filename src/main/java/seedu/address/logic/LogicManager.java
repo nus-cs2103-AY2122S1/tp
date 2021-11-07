@@ -10,11 +10,13 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.AddressBookParser;
+import seedu.address.logic.parser.PocketHotelParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
+import seedu.address.model.guest.Guest;
+import seedu.address.model.guest.ReadOnlyGuestBook;
+import seedu.address.model.vendor.ReadOnlyVendorBook;
+import seedu.address.model.vendor.Vendor;
 import seedu.address.storage.Storage;
 
 /**
@@ -26,7 +28,7 @@ public class LogicManager implements Logic {
 
     private final Model model;
     private final Storage storage;
-    private final AddressBookParser addressBookParser;
+    private final PocketHotelParser pocketHotelParser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -34,7 +36,7 @@ public class LogicManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        addressBookParser = new AddressBookParser();
+        pocketHotelParser = new PocketHotelParser();
     }
 
     @Override
@@ -42,11 +44,13 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText);
+        Command command = pocketHotelParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
         try {
-            storage.saveAddressBook(model.getAddressBook());
+            storage.saveGuestBook(model.getGuestBook());
+            storage.saveVendorBook(model.getVendorBook());
+            storage.saveArchive(model.getArchive());
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
@@ -55,18 +59,43 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return model.getAddressBook();
+    public ReadOnlyVendorBook getVendorBook() {
+        return model.getVendorBook();
     }
 
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return model.getFilteredPersonList();
+    public ObservableList<Vendor> getFilteredVendorList() {
+        return model.getFilteredVendorList();
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return model.getAddressBookFilePath();
+    public Path getVendorBookFilePath() {
+        return model.getVendorBookFilePath();
+    }
+
+    @Override
+    public ReadOnlyGuestBook getGuestBook() {
+        return model.getGuestBook();
+    }
+
+    @Override
+    public ObservableList<Guest> getFilteredGuestList() {
+        return model.getFilteredGuestList();
+    }
+
+    @Override
+    public Path getGuestBookFilePath() {
+        return model.getGuestBookFilePath();
+    }
+
+    @Override
+    public ReadOnlyGuestBook getArchive() {
+        return model.getArchive();
+    }
+
+    @Override
+    public Path getArchiveFilePath() {
+        return model.getArchiveFilePath();
     }
 
     @Override

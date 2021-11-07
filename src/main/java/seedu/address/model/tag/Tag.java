@@ -3,14 +3,16 @@ package seedu.address.model.tag;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import seedu.address.model.uniquelist.UniqueListItem;
+
 /**
  * Represents a Tag in the address book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
  */
-public class Tag {
+public class Tag extends UniqueListItem {
 
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String VALIDATION_REGEX = "^[\\w\\s]+$";
 
     public final String tagName;
 
@@ -51,4 +53,17 @@ public class Tag {
         return '[' + tagName + ']';
     }
 
+    @Override
+    public boolean isSame(UniqueListItem otherItem) {
+        if (otherItem == this) {
+            return true;
+        }
+
+        if (otherItem instanceof Tag) {
+            Tag otherTag = (Tag) otherItem;
+            return otherTag.tagName.equals(tagName);
+        }
+
+        return false;
+    }
 }

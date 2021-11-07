@@ -1,0 +1,10 @@
+{
+  "guests": [ {
+    "name": "Guest with Invalid Room Number Field",
+    "email": "invalidguest@example.com",
+    "tagged": [],
+    "roomNumber": "1*21@!!",
+    "passportNumber": "JK8912018",
+    "chargeablesUsed": []
+  } ]
+}

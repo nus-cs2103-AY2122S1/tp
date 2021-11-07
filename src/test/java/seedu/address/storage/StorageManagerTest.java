@@ -2,7 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.guest.TypicalGuests.getTypicalGuestBook;
 
 import java.nio.file.Path;
 
@@ -11,9 +11,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.guest.GuestBook;
+import seedu.address.model.guest.ReadOnlyGuestBook;
+import seedu.address.storage.archive.JsonArchiveStorage;
+import seedu.address.storage.guest.JsonGuestBookStorage;
+import seedu.address.storage.vendor.JsonVendorBookStorage;
 
 public class StorageManagerTest {
 
@@ -24,9 +27,11 @@ public class StorageManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(getTempFilePath("ab"));
+        JsonGuestBookStorage guestBookStorage = new JsonGuestBookStorage(getTempFilePath("gb"));
+        JsonVendorBookStorage vendorBookStorage = new JsonVendorBookStorage(getTempFilePath("vb"));
+        JsonArchiveStorage archiveStorage = new JsonArchiveStorage(getTempFilePath("a"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
+        storageManager = new StorageManager(guestBookStorage, vendorBookStorage, userPrefsStorage, archiveStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -48,21 +53,21 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void addressBookReadSave() throws Exception {
+    public void guestBookReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
-         * {@link JsonAddressBookStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link JsonAddressBookStorageTest} class.
+         * {@link JsonGuestBookStorage} class.
+         * More extensive testing of UserPref saving/reading is done in {@link JsonGuestBookStorageTest} class.
          */
-        AddressBook original = getTypicalAddressBook();
-        storageManager.saveAddressBook(original);
-        ReadOnlyAddressBook retrieved = storageManager.readAddressBook().get();
-        assertEquals(original, new AddressBook(retrieved));
+        GuestBook original = getTypicalGuestBook();
+        storageManager.saveGuestBook(original);
+        ReadOnlyGuestBook retrieved = storageManager.readGuestBook().get();
+        assertEquals(original, new GuestBook(retrieved));
     }
 
     @Test
-    public void getAddressBookFilePath() {
-        assertNotNull(storageManager.getAddressBookFilePath());
+    public void getGuestBookFilePath() {
+        assertNotNull(storageManager.getGuestBookFilePath());
     }
 
 }

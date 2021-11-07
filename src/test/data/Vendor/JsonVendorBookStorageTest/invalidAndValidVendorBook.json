@@ -1,0 +1,23 @@
+{
+  "vendors" : [ {
+    "name" : "Valid Vendor",
+    "email" : "validvendor@example.com",
+    "tagged" : [ "Non halal", "Chinese" ],
+    "address" : "12 Clementi Rd, 231123",
+    "vendorId" : "1",
+    "phone" : "80180880",
+    "serviceName" : "Food",
+    "cost" : 12.99,
+    "operatingHours" : "135 0800-1530"
+  }, {
+    "name" : "Vendor with Invalid phone number",
+    "email" : "invalidvendor@example.com",
+    "tagged" : [ "Foot massage", "Body massage" ],
+    "address" : "75 Clementi Rd, 211823",
+    "vendorId" : "2",
+    "phone" : "673812@!$!*@80",
+    "serviceName" : "Massage",
+    "cost" : 40.0,
+    "operatingHours" : "12345 1600-2230"
+  } ]
+}

@@ -1,0 +1,13 @@
+{
+  "vendors" : [ {
+    "name" : "Vendor with Invalid phone number",
+    "email" : "invalidvendor@example.com",
+    "tagged" : [ "Foot massage", "Body massage" ],
+    "address" : "75 Clementi Rd, 211823",
+    "vendorId" : "2",
+    "phone" : "673812@!$!*@80",
+    "serviceName" : "Massage",
+    "cost" : 40.0,
+    "operatingHours" : "12345 1600-2230"
+  } ]
+}

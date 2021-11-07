@@ -19,6 +19,12 @@
 !define LOGIC_COLOR_T3 #1616B0
 !define LOGIC_COLOR_T4 #101086
 
+!define INVOICE_COLOR #0e9688
+!define INVOICE_COLOR_T1 #87e8de
+!define INVOICE_COLOR_T2 #6A6ADC
+!define INVOICE_COLOR_T3 #1616B0
+!define INVOICE_COLOR_T4 #101086
+
 !define MODEL_COLOR #9D0012
 !define MODEL_COLOR_T1 #F97181
 !define MODEL_COLOR_T2 #E41F36
@@ -57,6 +63,7 @@ skinparam Sequence {
     BoxPadding 0
     BoxFontColor #FFFFFF
     FontName Arial
+    StereotypeFontColor #FFFFFF
 }
 
 skinparam Participant {

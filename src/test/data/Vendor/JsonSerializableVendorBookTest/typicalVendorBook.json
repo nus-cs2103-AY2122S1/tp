@@ -1,0 +1,57 @@
+{
+  "_comment": "VendorBook save file which contains the same Vendor values as in TypicalVendors#getTypicalVendor()",
+  "vendors": [
+    {
+      "name": "Daniel Meier",
+      "email": "cornelia@example.com",
+      "tagged": [
+        "Foot massage"
+      ],
+      "address": "10th street",
+      "vendorId": "123",
+      "phone": "87652533",
+      "serviceName": "Massage",
+      "cost": 20,
+      "operatingHours": "123 0800-1300"
+    },
+    {
+      "name": "Elle Meyer",
+      "email": "elle@example.com",
+      "tagged": [
+        "Halal"
+      ],
+      "address": "michegan ave",
+      "vendorId": "456",
+      "phone": "9482224",
+      "serviceName": "Food",
+      "cost": 12,
+      "operatingHours": "12345 1100-2200"
+    },
+    {
+      "name": "Fiona Kunz",
+      "email": "fiona@example.com",
+      "tagged": [
+        "Discounted"
+      ],
+      "address": "little tokyo",
+      "vendorId": "777",
+      "phone": "9482427",
+      "serviceName": "Dry Cleaning",
+      "cost": 40,
+      "operatingHours": "234567 0700-2300"
+    },
+    {
+      "name": "George Best",
+      "email": "george@example.com",
+      "tagged": [
+        "Happy hour"
+      ],
+      "address": "4th street",
+      "vendorId": "888",
+      "phone": "9482442",
+      "serviceName": "Bartending",
+      "cost": 17,
+      "operatingHours": "135 1800-2359"
+    }
+  ]
+}

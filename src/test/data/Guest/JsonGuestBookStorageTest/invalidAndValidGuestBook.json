@@ -1,0 +1,17 @@
+{
+  "guests": [ {
+    "name": "Valid Guest",
+    "email": "validguest@example.com",
+    "tagged": [],
+    "roomNumber": "123",
+    "passportNumber": "EC1232131",
+    "chargeablesUsed": []
+  }, {
+    "name": "Guest with Invalid Room Number Field",
+    "email": "invalidguest@example.com",
+    "tagged": [],
+    "roomNumber": "1*21@!!",
+    "passportNumber": "JK8912018",
+    "chargeablesUsed": []
+  } ]
+}

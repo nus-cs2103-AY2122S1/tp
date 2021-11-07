@@ -7,8 +7,10 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
+import seedu.address.model.guest.Guest;
+import seedu.address.model.guest.ReadOnlyGuestBook;
+import seedu.address.model.vendor.ReadOnlyVendorBook;
+import seedu.address.model.vendor.Vendor;
 
 /**
  * API of the Logic component
@@ -16,27 +18,60 @@ import seedu.address.model.person.Person;
 public interface Logic {
     /**
      * Executes the command and returns the result.
+     *
      * @param commandText The command as entered by the user.
      * @return the result of the command execution.
      * @throws CommandException If an error occurs during command execution.
-     * @throws ParseException If an error occurs during parsing.
+     * @throws ParseException   If an error occurs during parsing.
      */
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
+
     /**
-     * Returns the AddressBook.
+     * Returns the GuestBook.
      *
-     * @see seedu.address.model.Model#getAddressBook()
+     * @see seedu.address.model.Model#getGuestBook()
      */
-    ReadOnlyAddressBook getAddressBook();
-
-    /** Returns an unmodifiable view of the filtered list of persons */
-    ObservableList<Person> getFilteredPersonList();
+    ReadOnlyGuestBook getGuestBook();
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns an unmodifiable view of the filtered list of guests
      */
-    Path getAddressBookFilePath();
+    ObservableList<Guest> getFilteredGuestList();
+
+    /**
+     * Returns the Archive.
+     *
+     * @see seedu.address.model.Model#getArchive()
+     */
+    ReadOnlyGuestBook getArchive();
+
+    /**
+     * Returns the VendorBook.
+     *
+     * @see seedu.address.model.Model#getVendorBook()
+     */
+    ReadOnlyVendorBook getVendorBook();
+
+    /**
+     * Returns an unmodifiable view of the filtered list of vendors
+     */
+    ObservableList<Vendor> getFilteredVendorList();
+
+    /**
+     * Returns the user prefs' guest book file path.
+     */
+    Path getGuestBookFilePath();
+
+    /**
+     * Returns the user prefs' vendor book file path.
+     */
+    Path getVendorBookFilePath();
+
+    /**
+     * Returns the user prefs' archive file path.
+     */
+    Path getArchiveFilePath();
 
     /**
      * Returns the user prefs' GUI settings.

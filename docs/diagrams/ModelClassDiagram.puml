@@ -5,50 +5,52 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Model <<Rectangle>>{
-Interface ReadOnlyAddressBook <<Interface>>
+Interface ReadOnlyGuestBook <<Interface>>
 Interface ReadOnlyUserPrefs <<Interface>>
 Interface Model <<Interface>>
-Class AddressBook
-Class ReadOnlyAddressBook
+Class GuestBook
+Class ReadOnlyGuestBook
 Class Model
 Class ModelManager
 Class UserPrefs
 Class ReadOnlyUserPrefs
 
-
-Class UniquePersonList
-Class Person
-Class Address
+Class UniqueGuestList
+Class Guest
+Class RoomNumber
 Class Email
 Class Name
-Class Phone
+Class PassportNumber
 Class Tag
+Class ChargeablesUsed
 
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
+GuestBook .up.|> ReadOnlyGuestBook
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
+Model .left.> ReadOnlyGuestBook
+ModelManager -left-> "1" GuestBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+GuestBook *--> "1" UniqueGuestList
+UniqueGuestList --> "~* all" Guest
+Guest *--> Name
+Guest *--> PassportNumber
+Guest *--> Email
+Guest *--> RoomNumber
+Guest *--> "*" Tag
+Guest *--> "*" ChargeablesUsed
+note right of GuestBook: There also exists VendorBook (Vendor) \n and ArchiveBook (Archived guests)
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+Name -[hidden]right-> PassportNumber
+PassportNumber -[hidden]right-> RoomNumber
+RoomNumber -[hidden]right-> Email
 
-ModelManager -->"~* filtered" Person
+ModelManager -->"~* filtered" Guest
 @enduml
