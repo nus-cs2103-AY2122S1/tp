@@ -16,7 +16,7 @@ title: Developer Guide
 * Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 * Original project: [AddressBook Level-3](https://se-education.org/addressbook-level3) project created as part of the [SE-EDU](https://se-education.org) initiative
 * Application logo: Inspired by [Source Academy](https://sourceacademy.nus.edu.sg/)
-* [This](https://stackoverflow.com/questions/320542/how-to-get-the-path-of-a-running-jar-file) StackOverflow post on how to get the folder the JAR file is in.
+* [This](https://stackoverflow.com/questions/320542/how-to-get-the-path-of-a-running-jar-file) StackOverflow post on how to get the folder the JAR file is in
 
 <br>
 
