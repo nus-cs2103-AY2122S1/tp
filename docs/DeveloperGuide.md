@@ -33,8 +33,11 @@ title: Developer Guide
     * [FilterCommand](#filtercommand)
     * [SortCommand](#sortcommand)
   * [Others](#others)
+    * [ExitCommand](#exitcommand)
     * [ListCommand](#listcommand)
     * [ClearCommand](#clearcommand)
+    * [HistoryCommand](#historycommand)
+    * [RevertCommand](#revertcommand)
     * [UndoCommand](#undocommand)
     * [RedoCommand](#redocommand)
     * [HelpCommand](#helpcommand)
@@ -1132,7 +1135,7 @@ testers are encouraged to do more *exploratory* testing.
 
 
 In the future, we aim to expand testing to be done by external testers to improve the testing rigour.
-
+</div>
 
 ## **Appendix C: Version Controlled Commands**
 The following list is a list of commands that are version controlled i.e. they can be undone and
