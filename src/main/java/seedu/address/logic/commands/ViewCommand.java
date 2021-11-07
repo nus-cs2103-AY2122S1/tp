@@ -9,6 +9,9 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Person;
 
+/**
+ * Lists the lesson list belonging to a specified student in the address book.
+ */
 public class ViewCommand extends Command {
     public static final String COMMAND_ACTION = "View Student's Lessons";
 
@@ -30,6 +33,8 @@ public class ViewCommand extends Command {
     private final Index index;
 
     /**
+     * Constructs a ViewCommand.
+     *
      * @param index of the person in the filtered person list to view
      */
     public ViewCommand(Index index) {
