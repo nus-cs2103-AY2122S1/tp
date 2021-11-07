@@ -153,6 +153,21 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 ### Data Archiving Features
+#### Add feature
+
+The add feature is facilitated by `AddCommand`. It extends `Command` with a person as parameter where the person to be added is stored internally as a `toAdd`. The add mechanism relies on `ModelManager#addPerson()` to add the Person to be added to the `personList` in `ModelManager`.
+
+The following sequence diagram shows how the add operation works. For simplicity the command `add n/John Doe p/98765432 a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney g/john-doe N/e0123456 r/student s/A0123456X T/11` is simplified to `add {person details}`
+
+![AddSequenceDiagram](images/AddSequenceDiagram.png)
+
+#### Edit feature
+
+The edit feature is facilitated by `EditCommand`. It extends `Command` with an Index and EditPersonDescriptor as parameter where the person to be edited is stored at index in the `personList` and EditPersonDescriptor stored the details of the edited fields. The edit mechanism relies on `ModelManager#setPerson()` to edit the Person in the `personList` in `ModelManager`.
+
+The following sequence diagram shows how the edit operation works.
+
+![EditSequenceDiagram](images/EditSequenceDiagram.png)
 
 #### Import feature
 
@@ -197,11 +212,27 @@ Below is a sequence diagram for the deleting all shown Persons executed after th
 
 The `DeleteCommand` returned by `DeleteCommand#all()` uses `AddressBook#resetData()` exposed in the `Model` interface as `Model#setAddressBook()` to clear the address book by passing in an empty `AddressBook`.
 
+#### Sort Feature
+
+The sort feature is facilitated by `SortCommand`. It extends `Command` with a `Prefix` which specifies the prefix the `AddressBook` is to be sorted by, as well as a boolean `reverse` which specifies the order of the sorted list.
+This method is exposed in the `Model` interface as `Model#sortAddressBook()` This is further facilitated by  `AddressBook`, `AddressBook#sortList()`, a `PersonComparator` and a `Person#compare(Person p, Prefix prefix)` method to allow for sorting of the list by the `Prefix` specified.
+
+##### Design Considerations
+
+**Aspect: How sort executes:**
+
+* **Alternative 1 (current choice):** Sorts the list saved inside the `Model`'s `AddressBook`.
+    * Pros: Easy to implement.
+    * Cons: Users might just want a temporary sorting of the list and not a permanent sorting.
+
+* **Alternative 2:** Sorts the `filteredPersons` list shown by the `Model`.
+    * Pros: Allow users to have a temporary sorting of the list, which they can later export if they want to be permanent.
+    * Cons: Difficult to implement, as the `FilteredList` data structure used by `filteredPersons` cannot be mutated.
 
 #### Statistic Feature
-The export feature is facilitated by `StatCommand`. It overwrites the `execute` function to get a count of the various tags, types and tutorial ID of the last searched contact list.
+The statistic feature is facilitated by `StatCommand`. It overwrites the `execute` function to get a count of the various tags, types and tutorial ID of the last searched contact list.
 
-The following sequence diagram shows how the export operation works:
+The following sequence diagram shows how the statistic operation works:
 ![Sequence of the ExportEmail command](images/StatSequenceDiagram.png)
 
 
@@ -334,7 +365,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | Professor                                  | add a new person                              | keep track of all my students and TAs                                               |
 | `* * *`  | Professor                                  | tag contacts                                  | keep track of Lecture/Tutorial groups that different contacts belong to             |
 | `* * *`  | beginner user                              | see all the contacts I have at once           | easily tell who I have added and who I have not                                     |
-| `* * *`  | impatient user                             | import my existing contacts from a json file  | start using PB3 without manually inputting every piece of information              |
+| `* * *`  | impatient user                             | import my existing contacts from a json file  | start using ProfBook without manually inputting every piece of information              |
 | `* * *`  | cautious user                              | export my existing contacts to a json file    | move my address book or keep a backup                                               |
 | `* * *`  | beginner user                              | save the data to a json document              | update it manually and have the option to close the program and open it again later |
 | `* * *`  | organised user                             | delete a specific contact with a specific detail | remove entries that I no longer need                                             |
@@ -345,7 +376,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | beginner user                              | export search the set of contacts with the given tag | locate a person easily                                                       |
 | `* *`    | user in a supervising position             | export name and email to a file               | send specific emails to a select few contacts
 | `* *`    | curious user                               | view statistics about the contacts that I have added | derive more information about my contacts
-
+| `* *`    | Professor                                  | bulk tag contacts                             | I can quickly tag TAs and Students according to their groups
 
 
 *{More to be added}*
@@ -415,15 +446,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case ends.
 
 * 3a. The given index is invalid.
+  * 3a1. AddressBook shows an error message.
 
-    * 3a1. AddressBook shows an error message.
-
-      Use case resumes at step 2.
+  Use case resumes at step 2.
 
 * 3b. The attribute to be edited does not exist.
   * 3b1. AddressBook shows an error message.
-  * Use case ends
-  *
+  Use case ends
+
+* 3c. If the attribute edited is the name and results in a similar person i.e. same name as another person
+  * 3c1. AddressBook shows an error message.
+
+      Use case ends
 
 
 **Use case: Export contacts**

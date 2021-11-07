@@ -13,7 +13,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Parses input arguments and creates a new BulkTagCommand object
  */
-public class BulkTagParser implements Parser<BulkTagCommand> {
+public class BulkTagCommandParser implements Parser<BulkTagCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the BulkTagCommand

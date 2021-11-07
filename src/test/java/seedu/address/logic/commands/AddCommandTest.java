@@ -181,7 +181,7 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-        public void sortFilteredPersonList(Prefix prefix, boolean reverse) {
+        public void sortAddressBook(Prefix prefix, boolean reverse) {
             throw new AssertionError("This method should not be called.");
         }
     }

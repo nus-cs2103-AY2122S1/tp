@@ -94,7 +94,7 @@ public class AddressBookParser {
             return new UndoCommand();
 
         case BulkTagCommand.COMMAND_WORD:
-            return new BulkTagParser().parse(arguments);
+            return new BulkTagCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
