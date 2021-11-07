@@ -99,7 +99,7 @@ Here's a (partial) class diagram of the `Logic` component:
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it uses the `SiasaParser` class to parse the user command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddPolicyCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a contact).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -248,7 +248,7 @@ The set of sorting commands are `sortcontact` and `sortpolicy`, while the set of
 
 #### Design Considerations
 
-1. The sorting/filtering method has to be generic so that we can implement multiple different sorters/fliters with significant code duplication.
+1. The sorting/filtering method has to be generic so that we can implement multiple different sorters/filters without significant code duplication.
 2. The sorting functionality has to work alongside the preexisting filtering functionality.
 3. The sorting and filtering functionality has to be *stackable*; Lists should allow filtering then sorting and vice-versa.
 
@@ -336,7 +336,7 @@ operations.
 - Pros:
     - Maintains the UI structure of ```MainWindow``` controlling all the smaller UI parts.
 - Cons:
-    - A more complex implementation to control ```WanringWindow```
+    - A more complex implementation to control ```WarningWindow```
 **Alternative 2:** Have the ```Command``` call a method in ```WarningWindow``` directly.
 - Pros:
     - A more straightforward implementation.
@@ -383,7 +383,7 @@ Currently, there are no good contact applications on desktop that allow student 
 
 Siasa enables student financial advisors to quickly and easily keep track of their contacts (both potential clients and existing clients) and financial plans sold to aid their operations. The different payment structures also provide better customisation for student financial advisors, allowing them to better record any policies they may have sold.
 
-Siasa also provides valuable data and statistics in a `.txt` file for a quick summary and analysis of all the current policies, allowing such students to get the necessary information and data in a fast and efficient manner.
+Siasa also provides valuable data and statistics in `.csv` files for a quick summary and analysis of all the current policies, allowing such students to get the necessary information and data in a fast and efficient manner.
 
 ### User stories
 
@@ -631,7 +631,8 @@ testers are expected to do more *exploratory* testing.
 1.  Initial launch
 
     1.  Download the jar file and copy into an empty folder
-    1.  Double-click the jar file Expected: Shows the GUI with a set of sample contacts and policies. The window size may not be optimum.
+    1.  Double-click the jar file<br>
+        Expected: Shows the GUI with a set of sample contacts and policies. The window size may not be optimum.
 
 1.  Saving window preferences
 
