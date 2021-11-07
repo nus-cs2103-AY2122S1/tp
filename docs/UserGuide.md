@@ -213,7 +213,7 @@ The command view is where you will be able to input commands into LeadsForce. Th
 ### 4.2 Client List View
 
 <p align="center">
-<img src="images/ClientListView.png" width="500"/>
+<img src="images/ClientListView.png" width="700"/>
 </p>
 The client list view consist of the list of clients from the user's address book,and provides an overview of their clients' information.
 
@@ -421,7 +421,10 @@ Clears all entries from the address book.
 | <img src="images/warn_icon.png" width="50"/> | • This action is irreversible. Once you have clear all client information from the current address book, this information will be removed from the storage file and will not be retrievable.|
 
 **Expected Outcome:** <br>
+
+<p align="center">
 <img src="images/ExpectedClearCommand.png" width="600"/>
+</p>
 
 ### 5.11 Getting help : `help`
 
@@ -470,7 +473,10 @@ Create a new address book by the name provided and switches to it.
 
 **Expected Outcome:** <br>
 The command `ab create newAddressBook` creates a new address book as shown.
+
+<p align="center">
 <img src="images/ExpectedCreateAddressBook.png" width="600"/>
+</p>
 
 
 ### 6.2 Delete existing address book: ab delete : `ab delete`

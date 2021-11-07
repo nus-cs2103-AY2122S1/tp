@@ -496,7 +496,9 @@ The following sequence diagram shows how the ab create operation works:
 
 The following sequence diagram shows how the sort operation works:
 
-<img src="images\AbSwitchCommandSequenceDiagram.png" />
+<p align="center">
+<img src="images/AbSwitchCommandSequenceDiagram.png" />
+</p>
 
 ### 4.6.3 Delete Address Book
 
@@ -508,7 +510,9 @@ The following sequence diagram shows how the sort operation works:
 
 The following sequence diagram shows how the sort operation works:
 
-<img src="images\AbDeleteCommandSequenceDiagram.png" />
+<p align="center">
+<img src="images/AbDeleteCommandSequenceDiagram.png" />
+</p>
 
 ### 4.6.4 List Address Book
 
@@ -519,7 +523,9 @@ The following sequence diagram shows how the sort operation works:
 
 The following sequence diagram shows how the sort operation works:
 
-<img src="images\AbListCommandSequenceDiagram.png" />
+<p align="center">
+<img src="images/AbListCommandSequenceDiagram.png" />
+</p>
 
 ### 4.7 Undo/redo feature
 
