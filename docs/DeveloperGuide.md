@@ -670,167 +670,121 @@ Priorities: High, Low
 
 **Use case (UC01): Add a Customer**
 
-**MSS**
-
-1. User keys in basic information shared among different classes of people like **name, email, phone number**.
-2. RHRH prompts the user to enter the class of the person being entered into the system.
-3. User enters the keyword corresponding to the customer class.
-4. RHRH prompts the user to enter the following optional customer-specific information 1 at a time:
-   1. Customer ID
-   2. Loyalty points
-   3. Allergies
-   4. Special request
-5. Upon entering the last customer-specific information, the customer will be added successfully.
-Use case ends
-
-**Extensions**
-
-* 1a1. RHRH requests for the format to be corrected.
-     * 1a2. User enters the command again. <br/>
-
-     Steps 1a1 - 1a2 are repeated until the command is correctly formatted.
-
-
-     Use case resumes from step 2.
-
- * 1b. RHRH detects missing details in the command entered.
-     * 1b1. RHRH requests for the missing details to be filled in.
-     * 1b2. User enters missing data.
-
-     Steps 1b1 - 1b2 are repeated until the command is correctly formatted.
-
-
-     Use case resumes at step 2.
-     
-     
- * 1c. RHRH detects an incorrect format for the email/phone number entered. 
-     * 1c1. RHRH requests for the format to be corrected.
-     * 1c2. User enters the command again.
-     
-     Steps 1c1 - 1c2 are repeated until the command is correctly formatted.
-
-     
-     Use case resumes from step 2.
-
- * 3a. RHRH detects an invalid class entered. 
-   * 3a1. RHRH requests for the class to be corrected.
-   * 3a2. User enters the class again.
-
-   Steps 3a1 - 3a2 are repeated until the command is correctly formatted.
-
- 
-    Use case resumes from step 4.
-
-**Use case (UC02): Add a Supplier**
+{:no_toc}
 
 **MSS**
 
-1. User keys in basic information shared among different classes of people like **name, email, phone number**.
-2. RHRH prompts the user to enter the class of the person being entered into the system.
-3. User enters the keyword corresponding to the supplier class.
-4. RHRH prompts the user to enter the following supplier-specific information 1 at a time:
-   1. Supplier ID
-   2. Type of supply 
-5. Upon entering the last supplier-specific information, the supplier will be added successfully.
-Use case ends
+1. User keys in the customer’s details.
 
+2. Customer is added to RHRH.
+
+3. System confirms that the customer has been added.
+
+3. Use case ends.
 
 **Extensions**
 
-* 1a. RHRH detects an incorrect format command entered.
-     * 1a1. RHRH requests for the format to be corrected.
-     * 1a2. User enters the command again. <br/>
+* 1a. User keys in incorrect information or format.
+    * 1a1. System displays an error, and the recommended format for adding a customer.
 
-     Steps 1a1 - 1a2 are repeated until the command is correctly formatted.
+* 2a. Customer already exists in RHRH.
+    * 2a1. System displays an error, and that the customer already exists in RHRH.
+
+**Use case (UC02): Add an Employee**
+
+{:no_toc}
+
+**MSS**
+
+1. User keys in the employee’s details.
+
+2. Employee is added to RHRH.
+
+3. System confirms that the employee has been added.
+
+4. Use case ends.
+
+**Extensions**
+
+* 1a. User keys in incorrect information or format.
+    * 1a1. System displays an error, and the recommended format for adding an employee.
+
+* 2a. Employee already exists in RHRH.
+    * 2a1. System displays an error, and that the employee already exists in RHRH.
 
 
-     Use case resumes from step 2.
 
+**Use case (UC03): Add a Supplier**
 
- * 1b. RHRH detects missing details in the command entered.
-     * 1b1. RHRH requests for the missing details to be filled in.
-     * 1b2. User enters missing data.
+{:no_toc}
 
-     Steps 1b1 - 1b2 are repeated until the command is correctly formatted.
+**MSS**
 
+1. User keys in the supplier’s details.
 
-     Use case resumes at step 2.
-     
-     
- * 1c. RHRH detects an incorrect format for the email/phone number entered. 
-     * 1c1. RHRH requests for the format to be corrected.
-     * 1c2. User enters the command again.
-     
-     Steps 1c1 - 1c2 are repeated until the command is correctly formatted.
+2. Supplier is added to RHRH.
 
+3. System confirms that the supplier has been added.
 
-     Use case resumes from step 2.
+3. Use case ends.
 
- * 3a. RHRH detects an invalid class entered. 
-   * 3a1. RHRH requests for the class to be corrected.
-   * 3a2. User enters the class again.
+**Extensions**
 
-   Steps 3a1 - 3a2 are repeated until the command is correctly formatted.
+* 1a. User keys in incorrect information or format.
+    * 1a1. System displays an error, and the recommended format for adding a supplier.
 
- 
-    Use case resumes from step 4.
+* 2a. Supplier already exists in RHRH.
+    * 2a1. System displays an error, and that the supplier already exists in RHRH.
     
-**Use case (UC03): Add an Employee**
+**Use case (UC04): Edit a Customer**
+
+{:no_toc}
 
 **MSS**
 
-1. User keys in basic information shared among different classes of people like **name, email, phone number**.
-2. RHRH prompts the user to enter the class of the person being entered into the system.
-3. User enters the keyword corresponding to the employee class.
-4. RHRH prompts the user to enter the following employee-specific information 1 at a time:
-   1. Employee ID
-   2. Employment type
-   3. Monthly salary
-5. Upon entering the last employee-specific information, the employee will be added successfully.
-Use case ends
-
+1. User enters the command string to edit a customer's field.
+2. System confirms that the customer has been added and shows the current fields of the customer.
 
 **Extensions**
 
-* 1a. RHRH detects an incorrect format command entered.
-     * 1a1. RHRH requests for the format to be corrected.
-     * 1a2. User enters the command again. <br/>
+* 1a. User keys in invalid format
+    * 1a1. System displays an error, and the recommended format for editing a customer.
+* 1b. User keys in command without prefix
+    * 1b1. System displays an error that says that at least 1 field must be provided.
 
-     Steps 1a1 - 1a2 are repeated until the command is correctly formatted.
+**Use case (UC05): Edit an Employee**
 
+{:no_toc}
 
-     Use case resumes from step 2.
+**MSS**
 
+1. User enters the command string to edit a employee's field.
+2. System confirms that the employee has been added and shows the current fields of the employee.
 
- * 1b. RHRH detects missing details in the command entered.
-     * 1b1. RHRH requests for the missing details to be filled in.
-     * 1b2. User enters missing data.
+**Extensions**
 
-     Steps 1b1 - 1b2 are repeated until the command is correctly formatted.
+* 1a. User keys in invalid format
+    * 1a1. System displays an error, and the recommended format for editing an employee.
+* 1b. User keys in command without prefix
+    * 1b1. System displays an error that says that at least 1 field must be provided.
 
+**Use case (UC06): Edit a Supplier**
 
-     Use case resumes at step 2.
-     
-     
- * 1c. RHRH detects an incorrect format for the email/phone number entered. 
-     * 1c1. RHRH requests for the format to be corrected.
-     * 1c2. User enters the command again.
-     
-     Steps 1c1 - 1c2 are repeated until the command is correctly formatted.
+{:no_toc}
 
- 
-     Use case resumes from step 2.
+**MSS**
 
- * 3a.  RHRH detects an invalid class entered. 
-   * 3a1. RHRH requests for the class to be corrected.
-   * 3a2. User enters the class again.
+1. User enters the command string to edit a supplier's field.
+2. System confirms that the supplier has been added and shows the current fields of the supplier.
 
-   Steps 3a1 - 3a2 are repeated until the command is correctly formatted.
+**Extensions**
 
- 
-    Use case resumes from step 4.
+* 1a. User keys in invalid format
+    * 1a1. System displays an error, and the recommended format for editing a supplier.
+* 1b. User keys in command without prefix
+    * 1b1. System displays an error that says that at least 1 field must be provided.
 
-**Use case (UC04): Search for reservation availability**
+**Use case (UC07): Search for reservation availability**
 
 **MSS**
 
@@ -870,7 +824,7 @@ Use case ends
 
     Use case resumes from step 2.
 
-**Use case (UC05): Add a reservation**
+**Use case (UC08): Add a reservation**
 
 **MSS**
 
@@ -932,7 +886,6 @@ Use case ends.
 11.  Documents should not exceed **15MB** per file.
 12.  Developer Guide and User Guide should be *PDF-friendly*(no expandable panels, embedded videos, animated GIFs etc.).
 13.  Does not require a server component as the software will not perform automated tasks.
-14.  Should only allow use by **authorized** personnel.
 
 *{More to be added}*
 
@@ -975,6 +928,56 @@ testers are expected to do more *exploratory* testing.
 
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
+      
+### Adding a customer/employee/supplier/reservation
+
+1. Add a Customer to the Customer list
+    1. Test case: `addC n/John Doe p/87654321 e/e12345@u.nus.edu a/30 Geylang Drive lp/1000 alg/Kiwi sr/outdoors` <br>
+        Expected: Customer John Doe has been added to the Customer list. Details of the Customer John Doe will be shown on the result display area.
+    2. Test case: `addC n/John Doey` <br>
+        Expected: Customer will not be added, and `Invalid command format! ...` where `...` is the correct command format. Error is thrown due to missing compulsory fields.
+    3. Test case: `addC n/J@hn p/87654321 e/e12345@u.nus.edu a/30 Geylang Drive lp/1000 alg/Kiwi sr/outdoors` <br>
+        Expected: Customer will not be added, and an error message `Names should only contain alphanumeric characters and spaces, and it should not be blank` will be shown due to @ being non-alphanumeric.
+    4. Test case: `addC n/John Doe p/87a2ff e/e12345@u.nus.edu a/30 Geylang Drive lp/1000 alg/Kiwi sr/outdoors`
+        Expected: Customer will not be added, and an error message `Phone numbers should only contain numbers, and it should be at least 3 digits long` will be shown due to alphabets being in the phone number field.
+    5. Test case: `addC n/John Doe p/87654321 e/e12345.LOL a/30 Geylang Drive lp/1000 alg/Kiwi sr/outdoors` <br>
+        Expected: Customer will not be added, and an error message that tells the user the correct email format will be displayed.
+    6. Test case: `addC n/John Doe p/87654321 e/e12345@u.nus.edu a/ lp/1000 alg/Kiwi sr/outdoors` <br>
+        Expected: Customer will not be added, and an error message `Addresses can take any values, and it should not be blank` will be shown due to address being left blank.
+    7. Test case: `addC n/John Doe p/87654321 e/e12345@u.nus.edu a/30 Geylang Drive lp/-2 alg/Kiwi sr/outdoors` <br>
+        Expected: Customer will not be added, and an error message `Loyalty points must be numerical, more than or equals to 0 and less than or equals to 100000` will be displayed due to loyalty points being negative.
+    8. Test case: `addC n/John Doe p/87654321 e/e12345@u.nus.edu a/30 Geylang Drive lp/1000 alg/*Kiwi* sr/outdoors` <br>
+        Expected: Customer will not be added, and an error message `Allergies names should be alphanumeric` will be displayed due to * being non-alphanumeric.
+    9. Test case: `addC n/John Doe p/87654321 e/e12345@u.nus.edu a/30 Geylang Drive lp/1000 alg/Kiwi sr/**outdoors**` <br>
+        Expected: Customer will not be added, and an error message `SpecialRequests names should be alphanumeric` will be displayed due to * being non-alphanumeric.
+       
+2. Add an Employee to the Employee List
+    1. Test case: `addE n/John Doe p/87654321 e/e12345@u.nus.edu a/30 Geylang Drive sal/4000 jt/Head Chef l/14 sh/2021-12-08 0800` <br>
+        Expected: Employee John Doe has been added to the Employee List. Details of Employee John Doe will be shown on the result display area.
+    2. Test case: `addE n/John Doey` <br>
+        Expected: Employee will not be added, and `Invalid command format! ...` where `...` is the correct command format. Error is thrown due to missing compulsory fields.
+    3. Test case: `addE n/John Doe p/87654321 e/e12345@u.nus.edu a/30 Geylang Drive sal/4000 jt/#Head Chef l/14 sh/2021-12-08 0800` <br>
+        Expected: Employee will not be added, and an error message `job titles should only contain alphanumeric characters and spaces, and should not be left blank` will be shown due to # being non-alphanumeric.
+    4. Test case: `addE n/John Doe p/87654321 e/e12345@u.nus.edu a/30 Geylang Drive sal/-100 jt/Head Chef l/14 sh/2021-12-08 0800` <br>
+        Expected: Employee will not be added, and an error message `Salary should be numerical and more than or equal to 100 and less than or equals to 10 million` will be shown due to the salary being negative.
+    5. Test case: `addE n/John Doe p/87654321 e/e12345@u.nus.edu a/30 Geylang Drive sal/4000 jt/Head Chef l/700 sh/2021-12-08 0800` <br>
+        Expected: Employee will not be added, and an error message `Leaves should be numerical and be more than or equals to 0, less than or equals to 365` will be shown due to the number of leaves entitled exceeding 1 year.
+       Test case: `addE n/John Doe p/87654321 e/e12345@u.nus.edu a/30 Geylang Drive sal/4000 jt/Head Chef l/14 sh/2021-12-08 2pm` <br>
+        Expected: Employee will not be added, and an error message that shows the user the correct format for entering shifts will be displayed, due to the error in formatting for time.
+       
+3. Add a Supplier to the Supplier List
+    1. Test case: `addS n/John Doe p/87654321 e/e12345@u.nus.edu a/30 Geylang Drive dd/2021-12-08 1200 st/Beef` <br>
+        Expected: Supplier John Doe has been added to the Supplier List. Details of the Supplier John Doe will be shown on the result display area.
+    2. Test case: `addS n/John Doey` <br>
+        Expected: Supplier will not be added, and `Invalid command format! ...` where `...` is the correct command format. Error is thrown due to missing compulsory fields.
+    3. Test case: `addS n/John Doe p/87654321 e/e12345@u.nus.edu a/30 Geylang Drive dd/2021-12-40 1200 st/Beef` <br>
+        Expected: Supplier will not be added, and an error message that shows the user the correct format for entering delivery details will be displayed, due to the error caused by entering an invalid day.
+    4. Test case: `addS n/John Doe p/87654321 e/e12345@u.nus.edu a/30 Geylang Drive dd/2021-14-12 1200 st/Beef` <br>
+        Expected: Supplier will not be added, and an error message that shows the user the correct format for entering delivery details will be displayed, due to the error caused by entering an invalid month.
+    5. Test case: `addS n/John Doe p/87654321 e/e12345@u.nus.edu a/30 Geylang Drive dd/2021-12-08 1200 st/#@$Beef` <br>
+        Expected: Supplier will not be added, and an error message `Supply types should only contain alphanumeric characters and spaces, and it should not be blank` will be shown due to the presence of non-alphanumerical characters in the supply type.
+        
+   
 
       
 ### Deleting a customer/employee/supplier/reservation
