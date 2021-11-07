@@ -320,10 +320,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *` | user | have access to a help page | know how to navigate the app |
-| `* * *` | user | be able to create a new contact in the address book | save a contact |
-| `* * *` | user | be able to find an existing contact in the address book | retrieve details about the contact |
-| `* * *` | user | be able to update an existing contact in the address book | change information about my student if I made a mistake when adding them |
-| `* * *` | user | be able to delete an old contact in the address book | delete contacts whom I am not in contact with anymore |
+| `* * *` | user | be able to create a new contact contHACKS | save a contact |
+| `* * *` | user | be able to find an existing contact contHACKS | retrieve details about the contact |
+| `* * *` | user | be able to update an existing contact contHACKS | change information about my student if I made a mistake when adding them |
+| `* * *` | user | be able to delete an old contact in the contHACKS | delete contacts whom I am not in contact with anymore |
 | `* * *` | user | be able to see their contact details | refer the contact details to contact them |
 | `* *` | user | be able to purge all current data | get rid of sample/experimental data I used for exploring the app |
 | `* *` | user | be able to view my contacts in alphabetical order | see the contacts in more intuitive way |
