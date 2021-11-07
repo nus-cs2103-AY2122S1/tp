@@ -85,12 +85,11 @@ public class AiTest {
     @Test
     public void sortProfiles_featureList_success() {
         ObservableList<Person> list = FXCollections.observableArrayList();
-        list.addAll(TypicalPersons.BENSON, TypicalPersons.CARL);
+        list.addAll(TypicalPersons.CARL);
         if (!ThreadProcessor.isEmpty()) {
             Assertions.assertFalse(Ai.sortProfiles(TypicalPersons.ALICE, list));
         }
         while (TypicalPersons.ALICE.getGitStats().isEmpty()
-                || TypicalPersons.BENSON.getGitStats().isEmpty()
                 || TypicalPersons.CARL.getGitStats().isEmpty()) {
             try {
                 Thread.sleep(100);
@@ -99,7 +98,6 @@ public class AiTest {
             }
         }
         if (!TypicalPersons.ALICE.getGitStats().isEmpty()
-                && !TypicalPersons.BENSON.getGitStats().isEmpty()
                 && !TypicalPersons.CARL.getGitStats().isEmpty()) {
             Assertions.assertTrue(Ai.sortProfiles(TypicalPersons.ALICE, list));
         }
