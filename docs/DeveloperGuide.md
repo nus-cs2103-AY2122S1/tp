@@ -1386,7 +1386,7 @@ testers are expected to do more *exploratory* testing.
 
     3. Test case: `appt -d 0`<br>
 
-       Expected: No appointment is deleted. Errors details are shown in the status message that the format is invalid
+       Expected: No appointment is deleted. Error details are shown in the status message that the format is invalid
 
 
     4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the appointment list size)<br>
