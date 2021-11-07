@@ -1220,7 +1220,7 @@ Priorities: High - must have; Medium - nice to have;  Low - unlikely to have.
 
 <br/>
 
-**Use case: UC11 - Redo an undone command**
+**Use case: UC11 - Redo an undo command**
 
 **MSS**
 
