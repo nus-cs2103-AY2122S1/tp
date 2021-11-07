@@ -404,7 +404,7 @@ this error message in the Window.
 
 ![ProfileSetUpWindowInvalidCredentialsSequenceDiagram](images/ProfileSetUpWindowInvalidCredentialsSequenceDiagram.png)
 
-> The Big Picture (High Level Diagram)
+> The Big Picture (High Level Diagram):
 
 ![ProfileSetUpWindowSequenceDiagram](images/ProfileSetUpWindowSequenceDiagram.png)
 
@@ -487,6 +487,12 @@ the object initialized earlier. If it is not showing, the `show()` method of the
 minimized by the User, `HelpWindow#getRoot()#toFront()` is called to
 bring the window to the maximized state.
 
+There is also a button present in the window, `Visit URL`, which upon 
+clicking, takes the User to the UserGuide. It opens the UserGuide in the
+Users systems default browser.
+
+![HelpWindowVisitURLButton](images/HelpWindowVisitURLButton.png)
+
 ![HelpWindowSequenceDiagram](images/HelpWindowSequenceDiagram.png)
 
 ### User Profile in Menu Bar
@@ -497,7 +503,7 @@ The class `UserProfileInMenuBar` is responsible for displaying the User
 Profile in the Menu Bar. It is shown in the Main Window, in the top right
 of the Menu Bar beside the Bell icon. It is facilitated by `UserProfileInMenuBar.fxml`.
 The `.fxml` file is responsible for the layout of the various components inside
-this Region.
+this Region. On clicking this, the `UserProfileWindow` is shown.
 
 ![UserProfileInMenuBarPictureHighlight](images/UserProfileInMenuBarPictureHighlight.png)
 
