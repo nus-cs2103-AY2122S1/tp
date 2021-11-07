@@ -16,6 +16,8 @@ Take note of some syntax we will frequently use throughout the Developer Guide:
 | `markdown` | Classes or methods |
 | :information_source: **Note:** | Noteworthy information |
 
+<div style="page-break-after: always;"></div>
+
 * Table of Contents
     - [Acknowledgements](#acknowledgements) 
     - [Setting up, getting started](#setting-up)
@@ -83,6 +85,8 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Design** <a name="design"/>
 
 <div markdown="span" class="alert alert-primary">
@@ -131,6 +135,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+<div style="page-break-after: always;"></div>
+
 ### UI component <a name="ui"/>
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
@@ -149,6 +155,8 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+
+<div style="page-break-after: always;"></div>
 
 ### Logic component <a name="logic"/>
 
@@ -181,6 +189,8 @@ How the parsing works:
 * If the `PlannerMdParser` parses an appointment command (e.g., `appt -a`, `appt -e`, ...), it first creates an `AppointmentCommandParser` to parse the flags given (e.g., `-a`, `-e`, ...). The `AppointmentCommandParser` then creates an `XYZCommandParser` (e.g., `AddAppointmentCommandParser`) to parse the remaining user command.
 * All `XYZCommandParser` classes (e.g., `AddPatientCommandParser`, `DeleteDoctorCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<div style="page-break-after: always;"></div>
+
 ### Model component <a name="model"/>
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/plannermd/model/Model.java)
 
@@ -202,6 +212,8 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
+<div style="page-break-after: always;"></div>
+
 ### Storage component <a name="storage"/>
 
 **API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/plannermd/storage/Storage.java)
@@ -213,6 +225,8 @@ The `Storage` component,
 * inherits from both `PlannerMdStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
+<div style="page-break-after: always;"></div>
+
 ### Common classes  <a name="common-classes"/>
 
 Classes used by multiple components are in the `seedu.plannermd.commons` package.
@@ -222,6 +236,8 @@ Classes used by multiple components are in the `seedu.plannermd.commons` package
 ## **Implementation** <a name="implementation"/>
 
 This section describes some noteworthy details on how certain features are implemented.
+
+<div style="page-break-after: always;"></div>
 
 ### Stateful PlannerMD <a name="stateful-plannermd"/>
 With the introduction of two types of `Person` (`Patient` and `Doctor`) and their respective lists,
