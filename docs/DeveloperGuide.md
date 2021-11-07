@@ -283,7 +283,7 @@ The `unmark` command does the opposite — it calls `Person#mark()`, which repla
 `Period` that are contained in the `Person` with the `Period` objects representing
 the initial `Period` without the input `Period`.
 
-The following is an activity diagram showing the general activity of the mark diagram.
+The following is an activity diagram showing the general activity of the mark command.
 
 ![activity](images/MarkActivityDiagram.png)
 
