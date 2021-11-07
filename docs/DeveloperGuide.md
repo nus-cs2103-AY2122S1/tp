@@ -462,12 +462,12 @@ Step 1. The user executes command `viewShift -t monday-17:00`.
 passes the string to `LogicManager` to manipulate the command.
 
 Step 2. `LogicManager` passes the command to `AddressBookParser` to parse the command. Since the command starts
-with `viewShift`, a new `viewShiftCommand` object is created to parse the command further.
+with `viewShift`, a new `ViewShiftCommand` object is created to parse the command further.
 
 Step 3. `ViewShiftCommandParser` determines that the search is by time, due to the `-t` tag. 
 Hence, `viewShift` is created with the information. In this case, the day of the week is `MONDAY` and the time is `17:00`.
 
-Step 4. `viewShiftCommand` creates a PersonIsWorkingPredicate object which is then used as a parameter in `ModelManager#updateFilteredPersonList` to filter the list
+Step 4. `ViewShiftCommand` creates a PersonIsWorkingPredicate object which is then used as a parameter in `ModelManager#updateFilteredPersonList` to filter the list
 for staff who are working at that particular timing.
 
 Step 5. Following this, the displayed staff list will display the updated filtered list, and the names of those working will
@@ -481,13 +481,9 @@ The sequence diagram of this `viewShift` command is shown below:
 Notes:
 
 1. The process is similar for a search by slot number.
-2. A command is considered as a valid `viewShift` command if it follows these formats:
-- `viewShift -d dayofweek-slotnumber`
-- `viewShift -t dayofweek-time`
-
-3. Note that the `dayofweek` is not case-sensitive, and that time must be inputted in a `HH:mm` format.
-4. The viewShift Command operates on the overall staff list and not just the displayed list.
-5. Inputting `viewShift` alone also outputs the staff currently working.
+1. Note that the `dayofweek` is not case-sensitive, and that time must be inputted in a `HH:mm` format.
+1. The viewShift Command operates on the overall staff list and not just the displayed list.
+1. Inputting `viewShift` alone also outputs the staff currently working.
 
 --------------------------------------------------------------------------------------------------------------------
 ## **Proposed future features** ##
