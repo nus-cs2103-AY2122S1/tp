@@ -303,11 +303,11 @@ Step 5. CONNECTIONS' `UI` observes the filtered list is updated and displayed th
 
 **Aspect: How Find executes:**
 
-* **Option 1:** Utilise two predicates, one to check if name contains the keywords and one to check if tags contains the keywords
+* **Option 1:** Utilise two predicates, one to check if contact's Name contains the keywords and one to check if contact's Tag(s) contains the keywords.
     * Pros: Straightforward.
     * Cons: Introduces additional and unnecessary complexities to ModelManager.
 
-* **Option 2 (current choice):** Create a `FindPredicate` to store Name(s) and Tag(s)
+* **Option 2 (current choice):** Create a `FindPredicate` to store Name and Tag(s)
     * Pros: Cleaner implementation. Only need to modify a method to modify the functionality of `FindCommand`.
     * Cons: More code.
 
@@ -337,11 +337,11 @@ Step 5. CONNECTIONS' `UI` observes the filtered list is updated and displayed th
 
 **Aspect: How FindAny executes:**
 
-* **Option 1:** Utilise `NameContainsKeywordsPredicate` and `PersonsTagsContainsCaseInsensitiveTags`.
+* **Option 1:** Utilise two predicates, one to check if contact's Name contains the keywords and one to check if contact's Tag(s) contains the keywords.
     * Pros: Straightforward.
     * Cons: Introduces additional and unnecessary complexities to ModelManager.
 
-* **Option 2 (current choice):** Create a `FindAnyPredicate` to store Name(s) and Tag(s).
+* **Option 2 (current choice):** Create a `FindAnyPredicate` to store Name and Tag(s).
     * Pros: Cleaner implementation. Only need to modify a method to modify the functionality of `FindAnyCommand`.
     * Cons: More code.
 
@@ -920,7 +920,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy it into an empty folder.
 
-   1. Launch the jar file using the `java -jar connections.jar` in powershell for Windows users and terminal for macOS and Linux users. Double-click the jar file as last resort.<br>
+   1. Launch the jar file using the `java -jar CONNECTIONS.jar` in powershell for Windows users and terminal for macOS and Linux users. Double-click the jar file as last resort.<br>
       Expected: Shows the GUI with a set of sample contacts. The birthday reminder list shows a birthday reminder message for each contact with a non-empty birthday field. 
       The window size may not be optimum.
 
@@ -957,30 +957,102 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect add commands to try: `add n/James! <other valid params>`, `add <one invalid param amongst other valid params>`, `...`.<br>
        Expected: Similar to previous.
 
-### Find a contact
+### Find a contact (all search terms must be fulfilled)
 1. Find a contact by name
 
-    1. Prerequisites: Multiple contacts in the list with at least one contact named Roy.
+    1. Prerequisites: Multiple contacts in the list with at least one contact named Roy. No contact has the name George (case-insensitive).
 
     1. Test case: `find n/Roy`<br>
        Expected: Display contacts with name Roy. Number of contacts found shown in the status message.
+        
+    1. Test case: `find n/George`<br>
+       Expected: 0 contacts displayed. Status message indicates 0 contacts are found. 
+       
     1. Test case: `find n/roy!`<br>
        Expected: No changes made. Error details shown in the status message.
 
-    1. Other incorrect untag commands to try: `find`, `find n/<non existent name>`, `...`.<br>
+    1. Other incorrect untag commands to try: `find`, `...`.<br>
        Expected: Similar to previous.
 
 1. Find a contact by tag
-    1. Prerequisites: Multiple contacts in the list with one contact having tag name colleagues and one with tag name Colleagues.
+    1. Prerequisites: Multiple contacts in the list with one contact having tag name colleagues and one with tag name Colleagues. No contact has the tag owesMoney (case-insensitive).
 
     1. Test case: `find t/Colleagues`<br>
        Expected: Display contacts with tag colleagues. Number of contacts found shown in the status message.
+       
     1. Test case: `find c/ t/Colleagues`<br>
        Expected: Display contacts with tag Colleagues (case-sensitive). Number of contacts found shown in the status message.
+       
+    1. Test case: `find t/owesMoney`<br>
+       Expected: 0 contacts displayed. Status message indicates 0 contacts are found.
+       
     1. Test case: `find t/123!`<br>
        Expected: No changes made. Error details shown in the status message.
 
-    1. Other incorrect untag commands to try: `find`, `find t/<non existent tag>`, `find t/<non existent tag> c/`, `...`.<br>
+    1. Other incorrect untag commands to try: `find`, `find t/Colleagues c/`, `...`.<br>
+       Expected: Similar to previous.
+       
+1. Find a contact by tag and name
+    1. Prerequisites: Multiple contacts in the list with one contact with name Roy having tag name colleagues and one with name Adam having tag name Colleagues.
+
+    1. Test case: `find n/Roy t/Colleagues`<br>
+       Expected: Display contacts with tag colleagues and whose name contains Roy. Number of contacts found shown in the status message. Roy is within the list but Adam is not.
+       
+    1. Test case: `find c/ n/Roy t/Colleagues`<br>
+       Expected: Display contacts with tag Colleagues (case-sensitive) and whose name contains Roy. Number of contacts found shown in the status message. Neither Roy nor Adam is within the list.
+       
+    1. Test case: `find n/Roy t/123!`<br>
+       Expected: No changes made. Error details shown in the status message.
+       
+    1. Other incorrect untag commands to try: `find`, `find n/<valid name> t/<non existent tag>`, `find t/<non existent tag> n<valid name> c/`, `...`.<br>
+       Expected: Similar to previous. 
+
+### Find a contact (at least one search term must be fulfilled)
+1. Find a contact by name
+
+    1. Prerequisites: Multiple contacts in the list with at least one contact named Roy. None of the contacts has the name George (case-insensitive).
+
+    1. Test case: `findAny n/Roy`<br>
+       Expected: Display contacts with name Roy. Number of contacts found shown in the status message.
+
+    1. Test case: `findAny n/George`<br>
+       Expected: 0 contacts displayed. Status message indicates 0 contacts are found.
+       
+    1. Test case: `findAny n/roy!`<br>
+       Expected: No changes made. Error details shown in the status message.
+       
+    1. Other incorrect untag commands to try: `findAny`, `...`.<br>
+       Expected: Similar to previous.
+
+1. Find a contact by tag
+    1. Prerequisites: Multiple contacts in the list with one contact having tag name colleagues and one with tag name Colleagues. None of the contacts has the tag owesMoney (case-insensitive).
+
+    1. Test case: `findAny t/Colleagues`<br>
+       Expected: Display contacts with tag colleagues. Number of contacts found shown in the status message.
+       
+    1. Test case: `findAny c/ t/Colleagues`<br>
+       Expected: Display contacts with tag Colleagues (case-sensitive). Number of contacts found shown in the status message.
+        
+    1. Test case: `findAny n/owesMoney`<br>
+       Expected: 0 contacts displayed. Status message indicates 0 contacts are found.
+       
+    1. Test case: `findAny t/123!`<br>
+       Expected: No changes made. Error details shown in the status message.
+
+    1. Other incorrect untag commands to try: `findAny`, `findAny t/<non existent tag> c/`, `...`.<br>
+       Expected: Similar to previous.
+
+1. Find a contact by tag and name
+    1. Prerequisites: Multiple contacts in the list with one contact with name Roy having tag name colleagues and one with name Adam having tag name Colleagues.
+
+    1. Test case: `findAny n/Roy t/Colleagues`<br>
+       Expected: Display contacts with tag colleagues (case-insensitive) or whose name contains Roy. Number of contacts found shown in the status message. Both Adam and Roy are within the list.
+    1. Test case: `findAny c/ n/Roy t/Colleagues`<br>
+       Expected: Display contacts with tag Colleagues (case-sensitive) or whose name contains Roy. Number of contacts found shown in the status message. Both Adam and Roy are within the list.
+    1. Test case: `findAny n/Roy t/123!`<br>
+       Expected: No changes made. Error details shown in the status message.
+
+    1. Other incorrect untag commands to try: `findAny`, `findAny t/<non existent tag> n<valid name> c/`, `...`.<br>
        Expected: Similar to previous.
 
 ### Deleting a contact
