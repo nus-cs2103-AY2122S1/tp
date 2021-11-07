@@ -144,6 +144,53 @@ Classes used by multiple components are in the `seedu.siasa.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Sorting and Filtering
+
+This section explains the implementation of the Sorting and Filtering feature. They are both implemented with a similar concept.
+
+The set of sorting commands are `sortcontact` and `sortpolicy`, while the set of filtering commands are `findcontact`, `contactpolicy` and `expiringpolicy`.
+
+#### Design Considerations
+
+1. The sorting/filtering method has to be generic so that we can implement multiple different sorters/fliters with significant code duplication.
+2. The sorting functionality has to work alongside the preexisting filtering functionality.
+3. The sorting and filtering functionality has to be *stackable*; Lists should allow filtering then sorting and vice-versa.
+
+#### Implementation
+
+Initially, the `ObservableList` provided by the `ModelManager` returns a `FilteredList`. The `FilteredList` took in a `Predicate` that would be applied on the list.
+
+To implement the sorting functionality, we wrapped the `FilteredList` around a `SortedList`. The `SortedList` takes in a `Comparator` that would be applied on the list.
+
+In the constructor of `ModelManager`, the list provided by `ObservableList`s of Contacts and Policies are first passed into the constructor of the `SortedList` then the `FilteredList`.
+
+Due to the implementation of both `SortedList` and `FilteredList`, if the underlying content of the lists were to change, so would theirs.
+
+The respective parsers would construct the commands with the correct `Predicate`s or `Comparator`s depending on the arguments provided by the user. Then, the commands, when executed, will apply them to the respective lists in the model.
+
+Given below is an example usage scenario and how the mechanism behaves at each step.
+
+<div style="text-align: left">
+
+**Step 1.** The user executes the command `sortpolicy titledsc`.
+
+**Step 2.** User input is passed to the `SiasaParser` and `SiasaParser` will call `SortPolicyCommandParser#parse`, which creates a new `SortPolicyCommand` with the `SORT_POLICY_BY_TITLE_DSC` Comparator.
+
+**Step 3.** The `SortPolicyCommand` will then be executed by calling its `execute` method.
+
+**Step 4.** Since the `Model` is passed to `SortPolicyCommand#execute`, it is able to call a method `Model#updateFilteredPolicyList` to update the Comparator for the Policy `FilteredList`.
+
+**Step 5.** After the Comparator is applied, the Policy List view on the UI will automatically display the list with the correct sorting order.
+
+</div>
+
+#### Special Notes
+
+- `contactpolicy` applies a `PolicyIsOwnedBy` predicate that takes in a `Contact`. It will return `true` if the `owner` field of the `Policy` is equals to the `Contact` taken in.
+- `expiringpolicy` applies a predicate that returns true if the `ExpiryDate` of a `Policy` is within the next month.
+
+### \[Proposed\] Undo/redo feature
+
 ### Download Command
 
 This section explains the mechanism behind ```DownloadCommand``` used to download a TXT file containing useful statistics. These include:
