@@ -803,13 +803,18 @@ Pre-condition: The student's contact currently exists in TutorAid.
 
 **Extensions**
 
-* 3a. TutorAid detects that the command keyed in is incorrect. (e.g. wrong format, missing arguments, invalid indices)
+* 3a. TutorAid detects that the command keyed in is incorrect. (e.g. wrong format, missing arguments, invalid indices).
     * 3a1. TutorAid displays an error message and requests the tutor to re-enter the command.
     * 3a2. Tutor re-enters the command, along with the necessary arguments.
 
 Steps 3a1-3a2 are repeated until the command entered is correct.
 
 Use case resumes from Step 4.
+
+* 4a. TutorAid detects that the student does not have any progress note.
+    * 4a1. TutorAid displays a warning message that this student does not have any existing progress note.
+
+Use case ends.
 
 **Use case 7: Set up a lesson**
 
@@ -952,16 +957,16 @@ Steps 3a1-3a2 are repeated until the command entered is correct.
 
 Use case resumes from Step 4.
 
-**Use case 11: Add a student to a lesson**
+**Use case 11: Add student(s) to lesson(s)**
 
-Pre-conditions: The student has been added to TutorAid and the lesson has been created.
+Pre-conditions: The students have been added to TutorAid and the lessons have been created.
 
 **MSS**
 
 1. Tutor requests the list of students and lessons.
 2. TutorAid displays the list of all students and lessons.
-3. Tutor identifies the indices of the specific student and the specific lesson to which they wish to add the student to. The Tutor then requests to add this student to this lesson by providing the indices.   
-4. TutorAid adds the student to the lesson and displays a message to indicate that it has been done.
+3. Tutor identifies the student indices of the specific students and the lesson indices of the specific lessons to which they wish to add these students to. The Tutor then requests to add these students to these lessons by providing the indices.   
+4. TutorAid adds the students to the lessons and displays a success message for each successful addition.
    
 Use case ends.
 
@@ -987,16 +992,22 @@ Steps 3a1-3a2 are repeated until the command entered is correct.
 
 Use case resumes from Step 4.
 
-**Use case 12: Remove a student from a lesson**
+* 4a. TutorAid detects that some specified student(s) already attend some specified lesson(s).
+    * 4a1. TutorAid still adds all the specified student(s) to all the specified lesson(s) except for when a duplicate happens.
+    * 4a2. TutorAid displays warning(s) that some specified student(s) already attend some specified lesson(s), while also displays message(s) of successful addition(s). 
 
-Pre-conditions: The student has been added to the lesson prior to this.
+Use case ends.
+
+**Use case 12: Remove student(s) from lesson(s)**
+
+Pre-conditions: The students have been added to TutorAid and the lessons have been created.
 
 **MSS**
 
 1. Tutor requests the list of students and lessons.
 2. TutorAid displays the list of all students and lessons.
-3. Tutor identifies the indices of the specific student, and the specific lesson from which they wish to delete the student. The Tutor then requests to delete this student from this lesson by providing the indices.
-4. TutorAid delete the student from the lesson and displays a message to indicate that it has been done.
+3. Tutor identifies the student indices of the specific students, and the lesson indices of the specific lessons from which they wish to delete the students. The Tutor then requests to delete these students from these lessons by providing the indices.
+4. TutorAid delete these students from these lessons and displays a success message for each successful deletion.
 
 Use case ends.
 
@@ -1021,6 +1032,12 @@ Use case ends.
 Steps 3a1-3a2 are repeated until the command entered is correct.
 
 Use case resumes from Step 4.
+
+* 4a. TutorAid detects that some specified student(s) are not attending some specified lesson(s).
+    * 4a1. TutorAid still deletes all the specified student(s) from all the specified lesson(s) except for when a student is not attending a lesson.
+    * 4a2. TutorAid displays warning(s) that some specified student(s) are not attending some specified lesson(s), while also displays message(s) of successful deletion(s).
+
+Use case ends.
 
 **Use case 13: View which students should be present for the lesson**
 
