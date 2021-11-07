@@ -27,7 +27,7 @@
           </HBox>
           <VBox alignment="CENTER_LEFT" GridPane.columnIndex="1" HBox.hgrow="ALWAYS">
             <Label fx:id="name" styleClass="cell_big_label" text="\$first" wrapText="true" />
-            <Label fx:id="groupName" text="\$groupName" wrapText="true"/>
+            <Label fx:id="groupName" text="\$groupName" wrapText="true" styleClass="smaller_group_name"/>
           </VBox>
         </children>
       </GridPane>

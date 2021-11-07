@@ -29,7 +29,7 @@ public class AddCommandIntegrationTest {
     @Test
     public void execute_newStudent_success() {
         Student validStudent = new StudentBuilder().build();
-        Model expectedModel = new ModelManager(model.getCsBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(getTypicalCsBook(), new UserPrefs());
         expectedModel.addStudent(validStudent);
 
         assertCommandSuccess(new AddCommand(validStudent), model,
@@ -38,7 +38,6 @@ public class AddCommandIntegrationTest {
         //to ensure the other tests run smoothly
         TYPICAL_GROUP_CS2103T.removeStudentName(validStudent.getName());
     }
-
 
     @Test
     public void execute_duplicateStudent_throwsCommandException() {

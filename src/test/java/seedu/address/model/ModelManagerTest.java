@@ -2,12 +2,14 @@ package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalGroups.TYPICAL_GROUP_CS2103T;
 import static seedu.address.testutil.TypicalStudents.ALICE;
 import static seedu.address.testutil.TypicalStudents.BENSON;
+import static seedu.address.testutil.TypicalStudents.BOB;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -89,6 +91,39 @@ public class ModelManagerTest {
         modelManager.addGroup(TYPICAL_GROUP_CS2103T);
         modelManager.addStudent(ALICE);
         assertTrue(modelManager.hasStudent(ALICE));
+    }
+
+    // Extension of the previous test case. After adding student, if we delete it, it should no longer be in the model
+    @Test
+    public void hasStudent_addThenDeleteStudent_returnsFalse() {
+        modelManager.addGroup(TYPICAL_GROUP_CS2103T);
+        modelManager.addStudent(ALICE);
+        assertTrue(modelManager.hasStudent(ALICE));
+
+        modelManager.deleteStudent(ALICE);
+        assertFalse(modelManager.hasStudent(ALICE));
+    }
+
+    @Test
+    public void getStudentByName_studentExists_returnsCorrectName() {
+        modelManager.addGroup(TYPICAL_GROUP_CS2103T);
+        modelManager.addStudent(ALICE);
+        assertEquals(ALICE, modelManager.getStudentByName(ALICE.getName()));
+    }
+
+    @Test
+    public void getStudentByName_studentDoesNotExist_returnsNull() {
+        assertNull(modelManager.getStudentByName(ALICE.getName()));
+    }
+
+    @Test
+    public void setStudent_studentInCsBook_setsStudent() {
+        modelManager.addGroup(TYPICAL_GROUP_CS2103T);
+        modelManager.addStudent(ALICE);
+        modelManager.setStudent(ALICE, BOB);
+
+        assertFalse(modelManager.hasStudent(ALICE));
+        assertTrue(modelManager.hasStudent(BOB));
     }
 
     @Test

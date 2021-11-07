@@ -17,6 +17,10 @@ public class Note {
         value = note;
     }
 
+    public String getValue() {
+        return value;
+    }
+
     @Override
     public String toString() {
         return value;

@@ -73,9 +73,19 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103T-T09-3/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
-![Structure of the UI component](images/UiClassDiagram.png)
+![Structure of Ui Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `StudentListPanel`, `GroupListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts: `CommandBox`, `ResultPopup`, `StudentListPanel`, `GroupListPanel`, `DetailedStudentCard`, `AssessmentListPanel` and `StatusBarFooter`. 
+
+The `StudentListPanel` consists of a list of `StudentCard` objects, which displays the student's name and group they belong to. 
+
+The `GroupListPanel` consists of a list of `GroupCard` objects, which displays the group's name and description.
+
+The `AssessmentListPanel` consists of a list of `AssessmentCard` objects, which displays the assessment's name, score and percentage. 
+
+The `DetailedStudentCard` displays the student's name, group, telegram handle, email and notes. 
+
+All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103T-T09-3/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-T09-3/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
@@ -84,7 +94,7 @@ The `UI` component,
 - executes user commands using the `Logic` component.
 - listens for changes to `Model` data so that the UI can be updated with the modified data.
 - keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-- depends on some classes in the `Model` component, as it displays `Student` and `Group` objects residing in the `Model`.
+- depends on some classes in the `Model` component, as it displays `Student`,`Group`, `Assessment` and `Note` objects residing in the `Model`.
 
 ### Logic component
 
@@ -617,86 +627,219 @@ _{More to be added}_
 
 ### Use cases
 
-(For all use cases below, the **System** is the `CSBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `CSBook` and the **Actor** is the `user` or teaching assistant, unless specified otherwise)
 
-**Use case: Record a student's grades**
+**Use case: UC01 - Add a group**
+
+1. User creates a new group.
+2. CSBook shows the newly created group.
+
+   Use Case ends. 
+
+**Extensions**
+
+- 1a. CSBook detects that a group with the same name exists.
+
+    - 1a1. CSBook shows an error message.
+
+  Use case resumes at step 1.
+
+
+**Use case: UC02 - Add a Student**
+
+1. User creates a new student entry.
+2. CSBook shows the newly created student.
+
+   Use Case ends.
+
+**Extensions**
+- 1a. CSBook detects that the student already exists. 
+
+  - 1a1. CSBook shows an error message.
+  - 1a2. User enters new student entry.
+ 
+     Steps 1a1-1a2 are repeated until the student entered does not already exist.
+  
+  Use case resumes from Step 2. 
+
+- 1b. CSBook detects that the student details entered are invalid.
+
+  - 1b1. CSBook shows an error message. 
+  - 1b2. User enters new student data. 
+  
+    Steps 1b1-1b2 are repeated until the student details entered are valid. 
+  
+  Use Case resumes from Step 2. 
+  
+
+**Use case: UC03 - Record a student's grade for an assessment**
 
 **MSS**
 
-1. User searches for a specific student.
-2. CSBook shows the specified student.
-3. User enters the grades of the student.
-4. CSBook updates the student with the added grades.
+1. User adds an assessment to an existing student. 
+2. CSBook shows the newly created assessment. 
 
    Use case ends.
 
 **Extensions**
 
-- 1a. The student cannot be found.
+- 1a. CSBook detects that the student cannot be found.
 
   - 1a1. CSBook shows an error message.
+  - 1a2. User adds assessment to existing student.
+    
+    Steps 1a1-1a2 are repeated until given student is an existing one.
+    
+  Use case resumes from Step 2.
 
-  Use case ends.
+- 1b. CSBook detects that the assessment already exists. 
+  
+  Use Case ends. 
 
-- 3a. There is more than one student listed.
+- 1c. CSBook detects that the assessment details are of an invalid format.
+  
+  - 1c1. CSBook shows an error message. 
+  - 1c2. User enters new details for assessment. 
+  
+    Steps 1c1-1c2 are repeated until the assessment details are valid.
+  
+  Use Case resumes from Step 2. 
+  
 
-  - 3a1. CSBook shows an error message.
-
-  Use case resumes at step 2.
-
-- 3b. Grades specified is of an invalid format
-
-  - 3b1. CSBook shows an error message.
-
-  Use case resumes at step 2.
-
-**Use case: Group students together**
+**Use case: UC04 - Group students together**
 
 **MSS**
 
 1. User creates a new group.
 2. CSBook shows the newly created group.
-3. User adds students to group.
-4. CSBook updates and shows the group with the students' names.
+3. User creates student entry and assigns student to the group.
+4. CSBook updates and shows the student with the group's name.
+   Steps 3-4 are repeated until all students belonging to the group are added.
 
    Use case ends.
 
 **Extensions**
 
-- 1a. A group with the same name exists.
+- 1a. CSBook detects that a group with the same name exists.
 
   - 1a1. CSBook shows an error message.
+  
+  Use case resumes at step 3.
 
-  Use case resumes at step 1.
-
-- 3a. The given student is invalid.
+- 3a. CSBook detects that the student exists.
 
   - 3a1. CSBook shows an error message.
+  - 3a2. User changes group of the student. 
+  
+  Use case resumes at step 4. 
 
-  Use case resumes at step 2.
+**Use case: UC05 - View a particular student**
 
-**Use case: View a group**
+**MSS** 
+
+1. User requests to view a particular student. 
+2. CSBook retrieves and displays the student's information. 
+
+Use case ends. 
+
+**Extensions** 
+
+- 1a. CSBook detects that the student does not exist. 
+  
+  - 1a1. CSBook shows an error message. 
+  - 1a2. User enters the name of an existing student. 
+
+  Steps 1a1-1a2 are repeated until the name entered belongs to an existing student.
+
+  Use Case resumes at step 2.  
+
+**Use case: UC06 - View students in a specific group**
 
 **MSS**
 
-1. User requests to list groups.
-2. CSBook shows a list of available groups.
-3. User requests to show a specific group.
-4. CSBook retrieves and displays the specified group.
+1. User requests to show a specific group.
+2. CSBook retrieves and displays students in the specific group. 
 
    Use case ends.
 
 **Extensions**
 
-- 2a. There are no groups.
+- 1a. CSBook detects that a group does not exist.
+  
+  - 1a1. CSBook shows an error message. 
+  - 1a2. User enters an existing group name. 
+  
+    Steps 1a1-1a2 are repeated until the group name entered belongs to an existing group.
 
-  Use case ends.
+  Use case resumes at 2. 
 
-- 3a. The given index is invalid.
+- 1b. CSBook detects that the input provided to view group is of invalid format. 
+  
+  - 1b1. CSBook shows an error message. 
+  - 1b2. User enters correct format to view group. 
 
-  - 3a1. CSBook shows an error message.
+    Steps 1b1-1b2 are repeated until the group exists.
+
+  Use case resumes at 2.
+
+**Use case: UC07 - Change student's group to another group**
+
+**MSS**
+
+1. User creates a new group.
+2. CSBook shows the newly created group.
+3. User request to change the group of a student to the group. 
+4. CSBook updates and shows the student with the group's name.
+
+Use Case ends. 
+
+**Extensions**
+
+- 1a. CSBook detects that a group with the same name exists.
+
+    - 1a1. CSBook shows an error message.
+
+  Use case resumes at step 3.
+
+- 3a. CSBook detects that the student does not exist.
+  
+  - 3a1. CSBook shows an error message. 
+  - 3a2. User enters a student's name.
+
+    Steps 3a1-3a2 repeats until the student's name entered belongs to an existing student. 
+  
+  Use case resumes at step 4. 
+
+
+**Use case: UC08 - Add note to a particular student** 
+
+**MSS** 
+
+1. User adds note to a student.
+2. CSBook updates and shows the student's information with the new note. 
+
+Use case ends. 
+
+**Extensions**
+
+- 1a. CSBook detects that the student does not exist.
+
+    - 1a1. CSBook shows an error message.
+    - 1a2. User enters a student's name.
+
+      Steps 1a1-1a2 repeats until the student's name entered belongs to an existing student.
 
   Use case resumes at step 2.
+
+- 1b. CSBook detects that invalid format used to add note. 
+
+  - 1b1. CSBook shows an error message. 
+  - 1b2. User adds note with valid format. 
+
+    Steps 1b1-1b2 repeats until the user adds note with valid format.
+
+  Use case resumes at step 2.
+
 
 _{More to be added}_
 

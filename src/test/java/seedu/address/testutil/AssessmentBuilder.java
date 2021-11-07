@@ -5,7 +5,7 @@ import seedu.address.model.assessment.AssessmentName;
 import seedu.address.model.assessment.Score;
 
 /**
- * A utility class to help with building Student objects.
+ * A utility class to help with building Assessment objects.
  */
 public class AssessmentBuilder {
 

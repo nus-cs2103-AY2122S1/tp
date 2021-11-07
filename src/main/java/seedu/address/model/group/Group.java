@@ -56,6 +56,14 @@ public class Group {
     }
 
     /**
+     * Changes an indicated student reference (by Name) to a new one
+     */
+    public void updateStudentName(Name studentName, Name newStudentName) {
+        removeStudentName(studentName);
+        addStudentName(newStudentName);
+    }
+
+    /**
      * Returns true if both groups have the same GroupName.
      * This defines a weaker notion of equality between two groups.
      */
