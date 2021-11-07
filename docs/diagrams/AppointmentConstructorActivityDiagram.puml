@@ -11,7 +11,7 @@ else ([else])
   :Parse string into LocalDateTime object;
   :Create new appointment object containing meeting time;
 endif
-:Return new appointment object;
+:Return appointment object;
 
 stop
 
