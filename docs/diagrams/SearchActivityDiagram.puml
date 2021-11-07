@@ -2,13 +2,16 @@
 !include style.puml
 
 start
-if () then ([command is valid])
-  :Identify type of input;
-  :Process input arguments into list of words;
+
+:User executes command;
+:Identify type of input;
+
+if () then ([input is valid])
+  :Process input argument\ninto list of words;
 	:Create corresponding predicates;
 	:Update student list\nwith matched students;
 else ([else])
-	:Display an error message;
+	:Display an\nerror message;
 endif
 
 stop
