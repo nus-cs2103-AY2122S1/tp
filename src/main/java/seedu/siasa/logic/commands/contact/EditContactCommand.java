@@ -86,15 +86,10 @@ public class EditContactCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_CONTACT);
         }
 
-        ArrayList<Pair<Policy, Policy>> policiesToBeUpdated = new ArrayList<>();
         List<Policy> contactPolicies = model.getPoliciesBelongingTo(contactToEdit);
 
         for (Policy p : contactPolicies) {
-            policiesToBeUpdated.add(new Pair(p, newPolicyWithNewOwner(p, editedContact)));
-        }
-
-        for (Pair<Policy, Policy> pair : policiesToBeUpdated) {
-            model.setPolicy(pair.getKey(), pair.getValue());
+            model.setPolicy(p, newPolicyWithNewOwner(p, editedContact));
         }
 
         model.setContact(contactToEdit, editedContact);
