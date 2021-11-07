@@ -62,6 +62,8 @@ We hope you find this User Guide helpful in using ClassMATE!
    Some example commands you can try:
    * **`liststu`** : Lists all students.
 
+   * **`addcg c/G06 s/Tuesday 12pm-2pm, Friday 12pm-2pm`** : Adds a tutorial class with classCode `G06`.
+    
    * **`addstu n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/G06`**: Adds a student named `John Doe` to ClassMATE.
 
    * **`deletestu 3`**: Deletes the 3rd student shown in the current list.
