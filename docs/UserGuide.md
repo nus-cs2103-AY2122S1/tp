@@ -486,6 +486,8 @@ Examples:
 
 Displays the Help Window, which consists of a list of possible Commands, and a link to this UserGuide.
 
+When the `Visit URL` button is clicked, the UserGuide is opened in the system's default web browser.
+
 Format:
 
 ```
@@ -579,6 +581,8 @@ A: Please **strictly** follow the command format to avoid such issues.
 | Find a Student (by Telegram Handle) | `find te/<TELEGRAM>` |
 | Import Student Contacts | `import <FILENAME>.json` <br> `import <FILENAME>.csv` |
 | List all the Student Contacts Present | `list` |
+| Open Current Student's GitHub Profile in the Web Browser | `g` |
+| Open Current Student's Telegram Link in the Web Browser | `te` |
 | Show the Help Window | `help` |
 | Show a Student Contact (by Name)| `show <NAME>` |
 | Show a Student Contact (by Index) | `show <INDEX>` |
