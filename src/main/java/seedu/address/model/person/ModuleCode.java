@@ -60,15 +60,8 @@ public class ModuleCode {
         if (lessonCodes.isEmpty()) {
             return value;
         }
-        StringBuilder sb = new StringBuilder();
-        sb.append("[");
-        for (LessonCode lessonCode : lessonCodes) {
-            sb.append(value);
-            sb.append(" ");
-            sb.append(lessonCode);
-        }
-        sb.append("]");
-        return sb.toString();
+        return value + " " + lessonCodes.toString();
+
     }
 
     @Override
