@@ -37,7 +37,7 @@ public class DeleteGroupCommandTest {
 
         String expectedMessage = String.format(DeleteGroupCommand.MESSAGE_DELETE_GROUP_SUCCESS, groupToDelete);
 
-        ModelManager expectedModel = new ModelManager(model.getCsBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(getTypicalCsBook(), new UserPrefs());
         expectedModel.deleteGroup(groupToDelete);
         assertCommandSuccess(deleteGroupCommand, model, expectedMessage, expectedModel);
     }
@@ -53,7 +53,6 @@ public class DeleteGroupCommandTest {
 
         assertCommandFailure(deleteGroupCommand, model, Messages.MESSAGE_GROUP_NOT_FOUND);
     }
-
 
     @Test
     public void equals() {
