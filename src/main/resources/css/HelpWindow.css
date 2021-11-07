@@ -1,15 +1,25 @@
 * {
-    -fx-background-color: -fx-main-bg-color;
-    -fx-text-fill: -fx-highlight-color;
+    -fx-text-fill: -fx-light-text-color;
 }
 
 #copyButton, #helpMessage, #description {
     -fx-font-family: "Open Sans";
-    -fx-text-fill: -fx-light-text-color;
+    -fx-text-fill: -fx-highlight-color;
 }
 
 #featureTable {
+    -fx-background-color: -fx-main-bg-color;
     -fx-font-size: 14;
+}
+
+.table-row-cell:focused {
+    -fx-background-insets: 0 0 0 0;
+    -fx-table-cell-border-color: transparent;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: transparent;
+    -fx-table-cell-border-color: transparent;
 }
 
 #copyButton {
@@ -19,14 +29,4 @@
 
 #copyButton:hover {
     -fx-background-color: -fx-light-text-color;
-}
-
-/*
-@@author AllardQuek-reused
-Reused with modifications from https://stackoverflow.com/questions/51265872/
-*/
-.table-view:focused .table-row-cell:focused {
-    -fx-border-color: derive(-fx-main-bg-color, 20%);
-    -fx-background-insets: 0 0 0 0;
-    -fx-table-cell-border-color: transparent;
 }

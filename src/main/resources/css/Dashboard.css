@@ -5,7 +5,7 @@
 }
 
 .overall-stats {
-    -fx-text-fill: #FFD369;
+    -fx-text-fill: -fx-light-text-color;
 }
 
 .labs-unmarked {

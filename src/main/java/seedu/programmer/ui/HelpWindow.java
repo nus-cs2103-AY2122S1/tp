@@ -154,7 +154,6 @@ public class HelpWindow extends PopupWindow {
         commandColumn.setCellValueFactory(new PropertyValueFactory<>("command"));
         TableColumn<FeatureTableItem, String> descriptionColumn = new TableColumn<>("Description");
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
-
         featureTable.getColumns().add(featureColumn);
         featureTable.getColumns().add(commandColumn);
         featureTable.getColumns().add(descriptionColumn);
