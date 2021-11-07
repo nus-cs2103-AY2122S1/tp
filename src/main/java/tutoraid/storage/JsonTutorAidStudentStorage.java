@@ -14,6 +14,7 @@ import tutoraid.commons.util.FileUtil;
 import tutoraid.commons.util.JsonUtil;
 import tutoraid.model.ReadOnlyLessonBook;
 import tutoraid.model.ReadOnlyStudentBook;
+import tutoraid.model.util.SampleDataUtil;
 
 /**
  * A class to access StudentBook data stored as a json file on the hard disk.
@@ -58,7 +59,13 @@ public class JsonTutorAidStudentStorage implements TutorAidStudentStorage {
         Optional<JsonSerializableStudentBook> jsonStudentBook = JsonUtil.readJsonFile(
                 filePath, JsonSerializableStudentBook.class);
         if (jsonStudentBook.isEmpty()) {
-            return Optional.empty();
+            try {
+                return Optional.of(new JsonSerializableStudentBook(SampleDataUtil.getSampleStudentBook(lessonBook))
+                        .toModelType(lessonBook));
+            } catch (IllegalValueException ive) {
+                logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
+                throw new DataConversionException(ive);
+            }
         }
 
         try {

@@ -1,7 +1,6 @@
 package tutoraid.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -42,10 +41,6 @@ public class JsonStudentBookStorageTest {
                 : null;
     }
 
-    @Test
-    public void read_missingFile_emptyResult() throws Exception {
-        assertFalse(readStudentBook("NonExistentFile.json").isPresent());
-    }
 
     @Test
     public void read_notJsonFormat_exceptionThrown() {
@@ -60,7 +55,7 @@ public class JsonStudentBookStorageTest {
     @Test
     public void readStudentBook_invalidAndValidPersonStudentBook_throwDataConversionException() {
         Assert.assertThrows(
-            DataConversionException.class, () -> readStudentBook("invalidAndValidPersonStudentBook.json"));
+                DataConversionException.class, () -> readStudentBook("invalidAndValidPersonStudentBook.json"));
     }
 
     @Test
