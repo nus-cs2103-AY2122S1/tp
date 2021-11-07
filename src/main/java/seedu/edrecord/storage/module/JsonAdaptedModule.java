@@ -99,7 +99,6 @@ class JsonAdaptedModule {
             if (module.hasSameNameAssignment(asg)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_ASSIGNMENT);
             } else if (asg.getId() < 1 || asg.getId() > assignmentCounter) {
-                System.out.printf("asg id: %s, counter: %s", asg.getId(), assignmentCounter);
                 throw new IllegalValueException(INVALID_ID);
             }
             module.addAssignment(asg);

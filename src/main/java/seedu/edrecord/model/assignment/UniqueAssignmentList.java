@@ -26,8 +26,6 @@ import seedu.edrecord.model.name.Name;
  * @see Assignment#isSameName(Assignment)
  */
 public class UniqueAssignmentList implements Iterable<Assignment> {
-    private static final String INVALID_ID = "ID of this assignment is invalid.";
-
     private static final Weightage maximumTotalWeightage = new Weightage("100");
 
     private final ObservableList<Assignment> internalList = FXCollections.observableArrayList();
@@ -64,6 +62,7 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
         if (contains(toAdd)) {
             throw new DuplicateAssignmentException();
         }
+        assignmentCounter++;
         internalList.add(toAdd);
     }
 

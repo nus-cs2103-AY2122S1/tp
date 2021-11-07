@@ -62,7 +62,6 @@ public class MakeAssignmentCommand extends Command {
             throw new CommandException(MESSAGE_TOTAL_WEIGHTAGE_EXCEEDS_100);
         }
         model.addAssignment(toAdd);
-        model.setAssignmentCounter(id + 1);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
