@@ -67,9 +67,9 @@ Can't wait to get started? Check out the [Quick Start](#quick-start) to get goin
 # Quick Start
 1. Ensure you have Java 11 or above installed in your Computer. You may install it
    [here](https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html)
-   
+
 2. Download the latest `WhereTourGo.jar` from [here](update on final)
-   
+
 3. Copy the file to the folder you want to use as the _home folder_ for your WhereTourGo
 
 **For Windows**
@@ -189,7 +189,7 @@ More examples will be provided for each command in [Features](#features).
 
 * Duplicate contact names are not allowed
   e.g. if there exists a contact named ‘Marina Bay Sands’, adding or editing a contact with the name ‘Marina Bay Sands’ is not allowed.<br>
-  
+
 * Contact names are case-sensitive e.g. `VivoCity` is not the same as `vivocity`
 
 
@@ -348,8 +348,8 @@ Format: `list`
 
 Finds all contacts whose names, addresses, phone numbers, email addresses or reviews contain any of the given keywords.
 
-Usage scenario: 
-* You would like to find any places of interest which are along Orchard Road (have 'Orchard Road' contained within their address field). 
+Usage scenario:
+* You would like to find any places of interest which are along Orchard Road (have 'Orchard Road' contained within their address field).
 * You remember leaving a positive review on the room service of a particular hotel, but have forgotten which hotel it was for. You would like to find which contact this review was written for.
 
 
@@ -582,7 +582,7 @@ Usage scenario:
 
 Format: `help`
 
-<div markdown="span" class="alert alert-danger"> 
+<div markdown="span" class="alert alert-danger">
 :warning: Caution: If the User Guide cannot be opened in the Browser, a link to the User Guide will be provided.
 </div>
 

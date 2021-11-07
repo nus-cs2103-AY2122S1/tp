@@ -31,7 +31,7 @@ Given below are my contributions to the project.
 * **Project management**:
   * Reviewed and merged Pull Requests of other teammates
   * Enhanced general code to better comply with coding standards [\#170](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/170)
-  
+
 
 * **Enhancements to existing features**:
   * Upgraded the `help` command to open the User Guide in the browser
@@ -41,7 +41,7 @@ Given below are my contributions to the project.
 * **Documentation**:
   * User Guide:
     * Added documentation for the features `add`, `help`, `cmd` and navigating input history.
-    * Contributed to FAQ 
+    * Contributed to FAQ
     * Assisted with the creation of the Table of Content [\#80](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/80/files)
 
   * Developer Guide:

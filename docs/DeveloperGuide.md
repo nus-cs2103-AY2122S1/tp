@@ -364,7 +364,7 @@ The following sequence diagram shows how the view operation works:
 
 #### Implementation
 
-The Sort feature modifies the internal contact list stored in the addressbook according to the preference of sorting.  
+The Sort feature modifies the internal contact list stored in the addressbook according to the preference of sorting.
 It is implemented with the following operations:
 
 * `SortCommandName#execute()`  —  Sorts the contacts in the list based on name in lexicographical order, or
@@ -780,7 +780,7 @@ Use case ends.
 * 2a. The format is wrong.
 
   * 2a1. WhereTourGo shows an error message.
-  
+
      Use case ends.
 
 * 2b.  Contact already exists in WhereTourGo.
@@ -869,7 +869,7 @@ Use case ends.
 
 1. User requests to find a contact.
 
-2. User enters the find command with specific keywords. 
+2. User enters the find command with specific keywords.
 
 3. WhereTourGo displays a list of all contacts with the given keywords.
 
@@ -888,7 +888,7 @@ Use case ends.
     Use case resumes at step 1.
 
 * 2c. The list is empty.
-    
+
   Use case ends.
 
 **UC06 - Filter for Contacts**
@@ -915,7 +915,7 @@ Use case ends.
     Use case resumes at step 1.
 
 * 3a. The list is empty.
-   
+
   Use case ends.
 
 **UC08 - Summarising Contacts**
@@ -1008,7 +1008,7 @@ Use case ends.
 1. User requests to clear all contacts.
 
 2. WhereTourGo clears all contacts.
-   
+
     Use case ends.
 
 **Extensions**
@@ -1041,7 +1041,7 @@ Use case ends.
 * 2a. User's default browser cannot be opened.
 
   * 2a1. WhereTourGo will display the in-built help window.
- 
+
     Use case ends.
 
 **UC18 - Display Commands**
@@ -1172,7 +1172,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Other incorrect list commands to try: `list abc`, `list 2`, `...` <br>
        Expected: All contacts will not be listed in Contact Pane, remains in its previous state. Error details shown in the status message.
-    
+
 ### Locating contacts
 
 ### Finding contacts
@@ -1218,7 +1218,7 @@ testers are expected to do more *exploratory* testing.
     9. Other incorrect find commands to try: `find`, `find x`, `...` (where x is any keyword that does match any contacts'
        names, phones, emails, addresses or reviews)<br>
        Expected: Error details shown in Results Pane.
-      
+
 
 ### Filtering contacts
 
@@ -1245,8 +1245,8 @@ testers are expected to do more *exploratory* testing.
 
   2. Other incorrect sort commands to try: `sort`, `sort x`, `...` (where x is any word other than `name` and `rating`)<br>
      Expected: Contacts are not sorted. Error details shown in Results Pane.
-     
-     
+
+
 ### Displaying Summary
 
 1. Using the `sum` command
@@ -1268,7 +1268,7 @@ testers are expected to do more *exploratory* testing.
 
     2. Test case: `edit 1 c/fnb`<br>
        Expected: Category code of first contact in the list is updated to 'fnb'. Summary is updated and displayed (Number of contacts remains the same, category code chart updated with 1 more 'fnb', and one less of the original category code).
-  
+
     3. Test case: `clear`<br>
        Expected: Entire contact list is deleted. Summary is updated and displayed (Charts are empty, total number of contacts equals 0).
 
@@ -1393,7 +1393,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `clear`<br>
        Expected: All contacts are cleared from WhereTourGo. Success message shown in the status message. Contact Pane will be empty.
- 
+
     1. Test case: `clear`<br> and repeat `clear` again<br>
        Expected: Cannot be cleared twice. Error message shown in the status message. Contact Pane will remain empty.
 
@@ -1439,7 +1439,11 @@ testers are expected to do more *exploratory* testing.
 
 ## **Appendix: Effort**
 
-Overall, we estimate putting in 20% more effort than the original AB3 implementation in developing WhereTourGo. This is because we more or less doubled the number of features in WhereTourGo, and also augmented several of the current features. Additionally, the features we implemented were not novel and required modifications of the internals in AB3. Throughout the process of our development, we were not able to find and use any libraries to cut down on our effort either.
+Overall, we estimate putting in 20% more effort than the original AB3 implementation in developing WhereTourGo. This is because we more or less doubled the number of features in WhereTourGo, and also augmented several of the current features. 
+
+Additionally, the features we implemented were not novel and required modifications of the internals in AB3. Since certain features relied on one another, such as Ui and Summary, it proved to be a challenge modifying these features in tandem and ensuring they work well together.
+
+Throughout the process of our development, we were not able to find and use any libraries to cut down on our effort either.
 
 Some difficulties encountered in our project are elaborated upon below:
 

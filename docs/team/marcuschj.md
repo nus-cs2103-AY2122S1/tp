@@ -32,7 +32,7 @@ Given below are my contributions to the project.
 
 * **Project management**:
   * Tracked team progress to meet deadlines
-  * Reviewed and merged Pull Requests of other teammates 
+  * Reviewed and merged Pull Requests of other teammates
   * Organised issues on GitHub, managing issue tracker
   * Managed quality and progress of User Guide and Developer Guide
   * Managed the different pages of the project. (index.md, README etc.)
