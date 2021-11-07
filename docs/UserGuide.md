@@ -22,9 +22,9 @@ feel free to skip to the [command summary](#command-summary) and experiment with
 
 <br>
 
-<div style="page-break-after: always;"></div>
-
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Table of Contents**
 
@@ -64,9 +64,9 @@ feel free to skip to the [command summary](#command-summary) and experiment with
 
 <br>
 
-<div style="page-break-after: always;"></div>
-
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Quick Start**
 
@@ -98,9 +98,9 @@ feel free to skip to the [command summary](#command-summary) and experiment with
 
 <br>
 
-<div style="page-break-after: always;"></div>
-
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Features**
 
@@ -541,9 +541,9 @@ If your changes to the data file makes its format invalid, Source Control will d
 
 <br>
 
-<div style="page-break-after: always;"></div>
-
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **FAQ**
 
@@ -576,9 +576,9 @@ as well as you alias preferences.
 
 <br>
 
-<div style="page-break-after: always;"></div>
-
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Glossary**
 
@@ -643,9 +643,10 @@ Path | A string of characters to uniquely identify the location in the computer.
 [Return to Table of Contents](#table-of-contents)
 
 <br>
-<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Command Summary**
 
