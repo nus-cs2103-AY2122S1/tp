@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
 
+import java.util.function.Predicate;
+
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -111,6 +113,8 @@ public class FindCommand extends Command {
      * @return a CommandResult to be displayed.
      */
     private CommandResult executeNameAndFieldSearch(Model model) throws CommandException {
+        checkModel(model, person -> namePredicate.test(person)
+                && predicate.test(person));
         model.updateFilteredPersonList(person -> namePredicate.test(person)
                 && predicate.test(person));
         ObservableList<Person> staffs = model.getFilteredPersonList();
@@ -119,26 +123,30 @@ public class FindCommand extends Command {
             successMessage.append(counter).append(". ").append(p.getName()).append("\n");
             counter++;
         }
-        if (staffs.size() == 0) {
-            throw new CommandException(NO_ONE_SATISFIES_QUERY);
-        }
         return new CommandResult(
                 String.format(successMessage.toString(), model.getFilteredPersonList().size()));
     }
 
     private CommandResult executeFieldSearch(Model model) throws CommandException {
-        model.updateFilteredPersonList(person -> predicate.test(person));
+        checkModel(model, predicate);
+        model.updateFilteredPersonList(predicate);
         ObservableList<Person> staffs = model.getFilteredPersonList();
         int counter = 1;
         for (Person p : staffs) {
             successMessage.append(counter).append(". ").append(p.getName()).append("\n");
             counter++;
         }
-        if (staffs.size() == 0) {
-            throw new CommandException(NO_ONE_SATISFIES_QUERY);
-        }
+
         return new CommandResult(
                 String.format(successMessage.toString(), model.getFilteredPersonList().size()));
+    }
+
+    private void checkModel(Model model, Predicate<Person> predicate) throws CommandException {
+        ObservableList<Person> staffs = model.getUnFilteredPersonList();
+        if (staffs.filtered(predicate).size() == 0) {
+            throw new CommandException(NO_ONE_SATISFIES_QUERY);
+        }
+
     }
 
 
@@ -151,15 +159,13 @@ public class FindCommand extends Command {
      * @return a CommandResult to be displayed.
      */
     private CommandResult executeIndexSearch(Model model) throws CommandException {
+        checkModel(model, p -> indexPredicate.test(p) && predicate.test(p));
         model.updateFilteredPersonList(p -> indexPredicate.test(p) && predicate.test(p));
         ObservableList<Person> staffs = model.getFilteredPersonList();
         int counter = 1;
         for (Person p : staffs) {
             successMessage.append(counter).append(". ").append(p.getName()).append("\n");
             counter++;
-        }
-        if (staffs.size() == 0) {
-            throw new CommandException(NO_ONE_SATISFIES_QUERY);
         }
         return new CommandResult(
                 String.format(successMessage.toString(), model.getFilteredPersonList().size()));

@@ -12,6 +12,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,6 +23,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.PersonContainsFieldsPredicate;
 import seedu.address.model.person.predicates.StaffHasCorrectIndexPredicate;
+import seedu.address.stubs.model.FieldStub;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -85,6 +87,18 @@ public class FindCommandTest {
         expectedModel.updateFilteredPersonList(predicate);
         // assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL), expectedModel.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_nooneSatisfies() {
+        //A field that does not exist
+        FindCommand command1 = new FindCommand(1, new PersonContainsFieldsPredicate(new FieldStub(3)));
+        FindCommand command2 = new FindCommand(new NameContainsKeywordsPredicate(List.of("ndjsnfnekn")),
+                new PersonContainsFieldsPredicate());
+        assertCommandFailure(command1, model, FindCommand.NO_ONE_SATISFIES_QUERY);
+        assertCommandFailure(command2, model, FindCommand.NO_ONE_SATISFIES_QUERY);
+
+
     }
 
     @Test
