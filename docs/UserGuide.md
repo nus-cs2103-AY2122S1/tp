@@ -33,13 +33,13 @@ With BogoBogo, business owners can:
 
 ## Getting started
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1 . Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `BogoBogo.jar` from [here](https://github.com/AY2122S1-CS2103-F10-2/tp/releases).
+2 . Download the latest `BogoBogo.jar` from [here](https://github.com/AY2122S1-CS2103-F10-2/tp/releases).
 
-3. Move the file to the folder you want to use as the _home folder_ for the application.
+3 . Move the file to the folder you want to use as the _home folder_ for the application.
 
-4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app
+4 . Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app
    contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -47,19 +47,19 @@ With BogoBogo, business owners can:
 You might have to give your device permission to open BogoBogo.
 </div>
 
-6. Let's try adding a new item! Enter the command in the command box.<br>
+5 . Let's try adding a new item! Enter the command in the command box.<br>
 
     - **`add`** `Apple id/139827 c/3 cp/1.3 sp/2.4` : Adds an apple with id 139827, cost price $1.3, and sales price $2.4,
       into the inventory.
 
-7. Congrats on setting up BogoBogo! Read our [features](#managing-inventory) to learn about the different commands you can
+6 . Congrats on setting up BogoBogo! Read our [features](#managing-inventory) to learn about the different commands you can
    do with the application.
 
 <div class="code-example bg-grey-lt-000">:bulb:
 Ready to jump right into recording your inventory? Use <code>clear</code> to clear the sample data!
 </div>
 
-8. To close BogoBogo, simply enter `exit` into the command box.
+7 . To close BogoBogo, simply enter `exit` into the command box.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -270,9 +270,9 @@ Examples:
 
 ![find](images/screenshots/find_item.png)
 
-### Clearing items: `clear`
+### Clearing items and all other data: `clear`
 
-Clears the entire inventory.
+Clears the entire inventory and all other data, i.e. bookkeeping and transaction record.
 
 Format: `clear`
 
@@ -369,6 +369,10 @@ Format: `eorder`
 **A**: Total cost is the total amount of money incurred from adding items to the inventory. Revenue is the total amount
 of money gained from successfully receiving orders and selling items. Profit = Revenue - Cost.
 
+**Q**: I just started using the app. Why is there a lot of cost incurred in my bookkeeping?<br>
+**A**: When you use the app for the first time, it comes with sample inventory, and the bookkeeping will reflect the costs
+of the items inside this sample inventory. If you would like to start afresh, please use the `clear` command.
+
 **Q**: I have edited the cost price of my item. Why isn't the change reflected in my total cost?<br>
 **A**: BogoBogo adds the cost of an item to the total cost only upon the addition of the item into the inventory. Any
 changes to cost price is assumed to be for future restocking of the item.<br>
@@ -385,14 +389,14 @@ Consider hiring an accountant Mr Billionaire!
 
 ## Command summary
 
-- **Add Item**: `add [ {name} \| id/{id number} ] (c/{count}) (cp/{cost price}) (sp/{sell price}) (t/{tag})...`
-- **Delete Item**: `delete [ -n {name} \| id/{id number} ]`
-- **Remove Item**: `remove [ {name} \| id/{id number} ] (c/{count})`
-- **List**: `list [ \| order \| txns \| txns {id} ]`
+- **Add Item**: `add [{name} | id/{id number}] (c/{count}) (cp/{cost price}) (sp/{sell price}) (t/{tag})...`
+- **Delete Item**: `delete [{name} | id/{id number}]`
+- **Remove Item**: `remove [ {name} | id/{id number} ] c/{count}`
+- **List**: `list [ order | txns | txns {id} ]`
 - **Sort Items**: `sort n/` or `sort c/`
-- **Find Items**: `find [ n/{name}... \| id/{id}... \| t/{tag} ]`
+- **Find Items**: `find [ n/{name}... | id/{id}... | t/{tag}... ]`
 - **Start an order**: `sorder`
-- **Add item to order**: `iorder [ {name} \| id/{id number} ] (c/{count})`
-- **Remove item from order**: `corder [-n {name} \| id/{id number}] (c/{count}`
+- **Add item to order**: `iorder [ {name} | id/{id} ] (c/{count})`
+- **Remove item from order**: `corder [ {name} | id/{id} ] (c/count)`
 - **End the order**: `eorder`
 - **Exit BogoBogo**:`exit`
