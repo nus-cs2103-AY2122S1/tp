@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import seedu.siasa.MainApp;
 import seedu.siasa.commons.core.LogsCenter;
 
 public class GuideWindow extends UiPart<Stage> {
@@ -30,7 +31,7 @@ public class GuideWindow extends UiPart<Stage> {
                 "deletecontact: Removes a contact from your SIASA based on the index provided.\n"
                         + "Format: deletecontact INDEX\n"
                         + "Example: deletecontact 2",
-                new Image("file:src/main/resources/images/guide/page_three.png")),
+               "/images/guide/page_three.png"),
         FOUR("User Guide - Contacts",
             "editcontact: Edit a contact from your SIASA based on the index provided. "
                 + "At least one of the optional fields should be filled.\n"
@@ -68,9 +69,9 @@ public class GuideWindow extends UiPart<Stage> {
 
         private final String title;
         private final String description;
-        private final Image screenshot;
+        private final String screenshot;
 
-        Page(String title, String description, Image screenshot) {
+        Page(String title, String description, String screenshot) {
             this.title = title;
             this.description = description;
             this.screenshot = screenshot;
@@ -151,7 +152,8 @@ public class GuideWindow extends UiPart<Stage> {
     private void showPage() {
         title.setText(currentPage.title);
         textBox.setText(currentPage.description);
-        screenshot.setImage(currentPage.screenshot);
+        Image demoImage = new Image(MainApp.class.getResourceAsStream(currentPage.screenshot));
+        screenshot.setImage(demoImage);
     }
 
     /**
