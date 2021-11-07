@@ -915,8 +915,9 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder.
 
-   1. Double-click the jar file.<br>
-      Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Launch the jar file using the `java -jar connections.jar` in powershell for windows users and termnial for linux user. Double-click the jar file as last resort.<br>
+      Expected: Shows the GUI with a set of sample contacts. The birthday reminder list shows a birthday reminder message for each contact with non-empty birthday field. 
+      The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -925,6 +926,32 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
+### Adding a contact
+
+1. Adding a contact with all fields
+
+    1. Prerequisites: No existing contact with phone number 98989898 and existing contact with phone number 32323232.
+
+    1. Test case: `add n/James p/98989898 e/james@gmail.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney b/04071999`<br>
+       Expected: Contact with correct details added to contact list. Contact's birthday reminder message added to birthday reminder list in correct position. Details of the added contact shown in the status message.
+
+    1. Test case: `add n/James p/32323232 e/james@gmail.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney b/04071999`<br>
+       Expected: No contact is added since duplicate phone number. Error details shown in the status message.
+
+    1. Other incorrect add commands to try: `add <other valid params> b/<future date>`, `add <other valid params> p/hp:1200123`, `...`.
+
+1. Adding a contact without optional fields
+    1. Prerequisites: No existing contact with phone number 98989898.
+
+    1. Test Case: `add n/James p/98989898 e/james@gmail.com a/311, Clementi Ave 2, #02-25`<br>
+       Expected: Contact with correct details added to contact list. Birthday reminder list unchanged. Details of the added contact shown in the status message.
+
+    1. Test case: `add n/James p/98989898 e/jamesgmail.com a/311, Clementi Ave 2, #02-25`<br>
+       Expected: No contact is added, invalid email format. Error details shown in the status message.
+
+    1. Other incorrect add commands to try: `add n/James! <other valid params>`, `add <one invalid param amongst other valid params>`, `...`.<br>
+       Expected: Similar to previous.
+       
 ### Deleting a contact
 
 1. Deleting a contact while all contacts are being shown
@@ -932,7 +959,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is deleted from the list. If deleted contact has birthday, it's birthday reminder message is deleted from the birthday reminder list. Details of the deleted contact shown in the status message.
 
    1. Test case: `delete 0`<br>
       Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
@@ -944,26 +971,110 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: Viewing only some contacts using the `find` or `findAny` command. Multiple contacts in the list.
     
     1. Test Case: `delete 1`<br>
-       Expected: First contact that is being viewed is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+       Expected: First contact that is being viewed is deleted from the list. Details of the deleted contact shown in the status message.
 
    1. Test case: `delete 0`<br>
-      Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No contact is deleted. Error details shown in the status message.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the size of the contacts that are currently being viewed)<br>
+   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the size of the contacts that are currently being viewed).<br>
       Expected: Similar to previous.
-      
+
+### Deleting multiple contacts
+
+1. Deleting multiple contact while all contacts are being shown
+    1. Prerequisites: List all contacts using the `list` command. At least 10 contacts in the list.
+    
+    1. Test case: `deletem 8 - 10`<br>
+       Expected: Eighth, ninth and tenth contact deleted from the list. If deleted contact has birthday, it's birthday reminder message is deleted from the birthday reminder list. Details of the deleted contact shown in the status message.
+
+    1. Test case: `deletem 6 - 4`<br>
+       Expected: No contact is deleted since end index smaller than start index. Error details shown in the status message. Status bar remains the same.
+
+    1. Other incorrect delete commands to try: `deletem`, `deletem -2 - -1 `, `deletem x - y`, `...` (where x is not less than y, either x or y is not a positive integer within list size currently being viewed).<br>
+       Expected: Similar to previous.
+
+1. Deleting a contact while some contacts are being shown
+    1. Prerequisites: Viewing only some contacts using the `find` or `findAny` command. Multiple contacts in the list.
+    
+    1. Test case: `deletem 8 - 10`<br>
+       Expected: Eighth, ninth and tenth contact deleted from the list. If deleted contact has birthday, it's birthday reminder message is deleted from the birthday reminder list. Details of the deleted contact shown in the status message.
+
+    1. Test case: `deletem 6 - 4`<br>
+       Expected: No contact is deleted since end index smaller than start index. Error details shown in the status message. Status bar remains the same.
+
+    1. Other incorrect delete commands to try: `deletem`, `deletem -2 - -1 `, `deletem x - y`, `...` (where x is not less than y, either of x or y is not a positive integer within list size currently being viewed).<br>
+       Expected: Similar to previous.
+
+### Pinning a contact
+
+1. Pin a contact
+
+    1. Prerequisites: Contact at index 1 pinned and index 2 not pinned.
+
+    1. Test case: `pin 2`<br>
+       Expected: Contact at index 2 pinned. Details of the recently pinned contact shown in the status message.
+    
+    1. Test case: `pin 1`<br>
+       Expected: No changes made. Error details shown in the status message.
+
+    1. Other incorrect pin commands to try: `pin`, `pin -1`, `pin x`, `...` (where x is larger than the size of the contacts that are currently being viewed).<br>
+       Expected: Similar to previous. 
+
+### Unpinning a contact
+1. Unpin a contact
+
+    1. Prerequisites: Contact at index 1 pinned and index 2 not pinned.
+
+    1. Test case: `unpin 1`<br>
+       Expected: Contact at index 1 unpinned. Details of the recently unpinned contact shown in the status message.
+
+    1. Test case: `unpin 2`<br>
+       Expected: No changes made. Error details shown in the status message.
+
+    1. Other incorrect unpin commands to try: `unpin`, `unpin -1`, `unpin x`, `...` (where x is larger than the size of the contacts that are currently being viewed).<br>
+       Expected: Similar to previous.
+
+### Tag a contact
+
+1. Tag a contact with multiple tags
+
+    1. Prerequisites: Contact at index 1 no tag and contact at index 2 has tag.
+
+    1. Test case: `tag 1 t/johnBirthday t/party`<br>
+       Expected: Tags added to contact at index 1. Details of the tags added to contact shown in the status message.
+
+    1. Test case: `tag 2 t/<existing tag in contact at index 2>`<br>
+       Expected: No changes made. Error details shown in the status message.
+
+    1. Other incorrect tag commands to try: `tag`, `tag -1 t/<valid tag name>`, `tag <tag name longer than 60 characters>`, `...`.<br>
+       Expected: Similar to previous.
+
+### Untag a contact
+1. Untag a contact
+
+    1. Prerequisites: Contact at index 1 has tags johnBirthday and party and contact at index 2 no tags.
+
+    1. Test case: `untag 1 t/johnBirthday t/party`<br>
+       Expected: Remove specified tags from contact at index 1. Details of the removed tags shown in the status message.
+
+    1. Test case: `untag 2 t/<non-existent tag in contact at index 2>`<br>
+       Expected: No changes made. Error details shown in the status message.
+       
+    1. Other incorrect untag commands to try: `untag`, `untag -1 t/<valid tag name>`, `...`.<br>
+       Expected: Similar to previous.
+       
 ### Saving data
 
 1. Dealing with missing/corrupted data files
-    1. Prerequisite: Have some contacts saved in `[JAR file location]/data/CONNECTIONS.json`
+    1. Prerequisite: Have some contacts saved in `[JAR file location]/data/CONNECTIONS.json`.
    
     1. Test Case: edit the first contact name to `Alice Lee` and launch CONNECTIONS<br>
-        Expected: CONNECTIONS launches successfully. The first contact's name is changed to `Alice Lee`
+        Expected: CONNECTIONS launches successfully. The first contact's name is changed to `Alice Lee`.
        
     1. Test Case: edit the first contact email to `hellogmail` and launch CONNECTIONS<br>
         Expected: CONNECTIONS launches successfully with 0 entries. 
        
     1. Other incorrect formating of data or invalid fields: birthday to `00000000`, phone to `mynumber`, `...`
-        Expected: Similiar to previous
+        Expected: Similiar to previous.
 
 1. _{ more test cases …​ }_
