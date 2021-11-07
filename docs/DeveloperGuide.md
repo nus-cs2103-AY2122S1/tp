@@ -544,14 +544,15 @@ In `MainWindow`, if the command result `isGithub()` or `isTelegram()`, the GitHu
 
 **Target user profile**:
 
-* Students, Professors and Teaching Assistants
-* has a need to manage a significant number of contacts
+* Computer Science students
+* needs to manage a significant number of contacts
+* needs help finding teammates
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: Helps to improve connectivity among students and teaching staff
+**Value proposition**: Facilitates networking among Computer Science students.
 
 
 ### User stories
@@ -566,22 +567,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user                                       | search for contact(s) by tag(s)| contact them based on their grouping                                   |
 | `* *`    | user                                       | search for contact(s) by Telegram handles(s)| contact them conveniently                                 |
 | `* *`    | user                                       | search for contact(s) by GitHub username(s)| contact them conveniently                                 |
-| `* * *`  | Prof                                       | be able to export a set of contacts | let other professors, TAs and students get a set of contacts quickly |
+| `* * *`  | professor                                  | be able to export a set of contacts | let other professors, TAs and students get a set of contacts quickly |
 | `* * *`  | new user                                   | be able to import a set of contacts          | have some to begin with                                  |
 | `* * *`  | new user                                   | have an introduction splash screen           | utilise the app and its feature well                     |
 | `* * *`  | CLI user                                   | avoid using my mouse as much as possible     | -                                                        |
 | `* * *`  | user                                       | group/tag people into teammates, classmates, TA's and Profs | easily manage my contacts                 |
 | `* * *`  | user                                       | connect with seniors who have taken the same module         | have more guidance                        |
-| `* * *`  | TA                                         | be able to get in touch with the students in my class through Telegram handles | -                          |
+| `* * *`  | Teaching assistant                         | be able to get in touch with the students in my class through Telegram handles | -                          |
 | `* * *`  | new user                                   | know all the different commands                             | fully utilise the tools available         |
 | `* * *`  | new user                                   | learn the command formats                                   | perform tasks quickly and efficiently     |
-| `* * *`  | new user                                   | save contacts                                               | contact these people in the future        |
 | `* * *`  | user                                       | be able to store my contact omitting certain fields         | save contact without having to include email or address |
 | `* *`    | user                                       | have a clean and uncluttered GUI                           | navigate easily between different functions in the application |
-| `* *`    | user                                       | retrieve previous and next commands with up and down arrow key | browse my command history to retype misspelled commands |
-| `* * *`  | CS student                                 | sync my data with GitHub account | identify my colleagues by their profiles and connect with other users |
-| `* * *`  | CS student                                 | view the profiles of my contacts | learn more about them and connect with them |
-| `* *`    | user                                       | navigate to a contact's Telegram or GitHub in a single click | easily contact and interact with them |
+| `*`      | user                                       | retrieve previous and next commands with up and down arrow key | browse my command history to retype misspelled commands |
+| `* * *`  | user                                       | sync my data with GitHub account | identify my colleagues by their profiles and connect with other users |
+| `* * *`  | user                                       | view the profiles of my contacts | learn more about them and connect with them |
+| `* * *`  | user                                       | navigate to a contact's Telegram or GitHub in a single click | easily contact and interact with them |
+| `* * *`  | professor                                  | import and export contacts using CSV files | easily create list of contacts using Excel, for my students to import |
+| `* * *`  | user                                       | favorite and unfavorite my contacts | easily identify important people |
+| `* * *`  | user                                       | enter my details | make use of the Find A Buddy feature |  
+| `* * *`  | user                                       | find a buddy | work with them for group projects or as a study buddy |
+| `* *`    | user                                       | switch between tabs using keyboard shortcuts | navigate between tabs quickly |
+| `* *`    | user                                       | edit my profile | modify my details is they are misspelled during set up |
+| `* *`    | user                                       | see my profile | verify that my details are correct |
+| `* * *`  | user                                       | open a contact's Github or Telegram with a single command | easily browse their Github page or reach them on Telegram |
+
 
 ### Use cases
 
@@ -732,33 +741,36 @@ Extensions
   * 3b2. Displays list of users with the same name.
   * Use case resumes at step 2.
 
-**Use Case 8: Import contacts from JSON file**
+**Use Case 18: Import contacts from JSON or CSV file**
 
 MSS
 
-1. User enters command to import from a JSON file.
-2. CohortConnect shows a list of persons to be imported.
-3. User confirms the import.
-4. CohortConnect shows the updated list of contacts.
+1. User enters command to import from a JSON or CSV file.
+2. CohortConnect shows the updated list of contacts.
    
    Use case ends.
 
 Extensions
 
-* 1a. CohortConnect cannot find the JSON file.
+* 1a. CohortConnect cannot find the JSON or CSV file.
   * 1a1. CohortConnect shows an error message.
-  * 1a2. CohortConnect prompts for new filename.
-  * 1a3. User enters new filename.
-  * Steps 1a1-1a3 are repeated until the filename received is valid.
+  * 1a2. User enters new filename.
+  * Steps 1a1-1a2 are repeated until the filename received is valid.
 
-* 2a. User decides to cancel the import.
-  * Use case ends.
+* 1b. Filename entered does not end with `.json` or `.csv`
+    * 1b1. CohortConnect shows an error message.
+    * 1b3. User enters new filename.
+    * Steps 1b1-1b2 are repeated until the filename received is valid.
 
-**Use Case 9: Export contacts to JSON file**
+* 1c. The JSON or CSV file is formatted wrongly. 
+    * 1c1. CohortConnect shows an error message.
+    Use case ends.
+
+**Use Case 19: Export contacts to JSON or CSV file**
 
 MSS
 
-1. User enters command to export contacts to a named JSON file.
+1. User enters command to export contacts to a named JSON or CSV file.
 2. CohortConnect shows a success message.
    
    Use case ends.
@@ -770,6 +782,55 @@ Extensions
   * 1a2. CohortConnect prompts for new filename.
   * 1a3. User enters new filename.
   * Steps 1a1-1a3 are repeated until the filename received is valid.
+
+**Use Case 20: Opening a contact's GitHub**
+
+MSS
+
+1. User navigates to the contact using Find (UC8-11) and / or Show command (UC12-15).
+2. User clicks on the contact's GitHub username, or enters the command to open GitHub page.
+3. The contact's GitHub profile is shown in a new browser.
+
+   Use case ends.
+
+Extensions
+
+* 2a. The contact list is empty and the user enters the GitHub command.
+  * 2a1. CohortConnect shows an error message prompting the user to select a user.
+  Use case ends.
+
+* 2b. The contact list is empty and the user tries to click the GitHub username.
+  * 2b1. The contact details will be empty and there will be nothing for the user to click.
+  Use case ends.
+
+* 2c. The contact has an invalid GitHub username.
+  * 2c1. The browser shows GitHub's 404 page.
+  Use case ends. 
+
+**Use Case 21: Opening a contact's Telegram**
+
+MSS
+
+1. User navigates to the contact using Find (UC8-11) and / or Show command (UC12-15).
+2. User clicks on the contact's Telegram username, or enters the command to open Telegram.
+3. The contact's Telegram profile is shown in a browser window, and redirected to the Telegram app if it is installed.
+
+   Use case ends.
+
+Extensions
+
+* 2a. The contact list is empty and the user enters the Telegram command.
+    * 2a1. CohortConnect shows an error message prompting the user to select a user.
+      Use case ends.
+
+* 2b. The contact list is empty and the user tries to click the Telegram username.
+    * 2b1. The contact details will be empty and there will be nothing for the user to click.
+      Use case ends.
+
+* 2c. The contact has an invalid Telegram username.
+    * 2c1. The invalid Telegram profile is shown in the browser window, and Telegram shows an error message when opening the profile in the Telegram application.
+      Use case ends.
+
 
 ### Non-Functional Requirements
 
