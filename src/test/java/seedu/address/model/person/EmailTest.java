@@ -14,6 +14,21 @@ public class EmailTest {
     }
 
     @Test
+    public void constructor_emptyString_success() {
+        String emptyEmail = "";
+        boolean success = false;
+
+        try {
+            Email email = new Email(emptyEmail);
+            success = true;
+        } catch (Exception e) {
+            // Test Case Failed
+            success = false;
+        }
+        assertTrue(success);
+    }
+
+    @Test
     public void isValidEmail() {
         // null email
         assertThrows(NullPointerException.class, () -> Email.isValidEmail(null));
@@ -58,5 +73,44 @@ public class EmailTest {
         assertTrue(Email.isValidEmail("peter_jack@very-very-very-long-example.com")); // long domain name
         assertTrue(Email.isValidEmail("if.you.dream.it_you.can.do.it@example.com")); // long local part
         assertTrue(Email.isValidEmail("e1234567@u.nus.edu")); // more than one period in domain
+    }
+
+    @Test
+    public void equals_twoSameObjects_success() {
+        Email email = new Email("jay@gmail.com");
+        assertTrue(email.equals(email));
+    }
+
+    @Test
+    public void equals_twoDifferentObjects_falseOutput() {
+        Email email = new Email("jay@gmail.com");
+        Github github = new Github("Jai2501");
+        assertFalse(email.equals(github));
+    }
+
+    @Test
+    public void equals_twoDifferentObjectsWithSameEmail_success() {
+        Email email1 = new Email("jay@gmail.com");
+        Email email2 = new Email("jay@gmail.com");
+        assertTrue(email1.equals(email2));
+    }
+
+    @Test
+    public void equals_twoDifferentObjectsWithDifferentEmail_falseOutput() {
+        Email email1 = new Email("jay@gmail.com");
+        Email email2 = new Email("atin@gmail.com");
+        assertFalse(email1.equals(email2));
+    }
+
+    @Test
+    public void toString_aValidInput_success() {
+        Email email = new Email("jay@gmail.com");
+        assertTrue(email.toString().equals("jay@gmail.com"));
+    }
+
+    @Test
+    public void hashCode_validInput_correctOutput() {
+        Email email = new Email("jay@gmail.com");
+        assertTrue(email.hashCode() == -975207021);
     }
 }

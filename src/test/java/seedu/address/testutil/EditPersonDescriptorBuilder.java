@@ -41,7 +41,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
         descriptor.setTags(person.getTags());
-        descriptor.setIsFavourite(person.isFavourite());
+        descriptor.setIsFavorite(person.isFavorite());
     }
 
     /**
@@ -103,12 +103,21 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code isFavourite} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code isFavorite} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withIsFavourite(boolean isFavourite) {
-        descriptor.setIsFavourite(isFavourite);
+    public EditPersonDescriptorBuilder withIsFavorite(boolean isFavorite) {
+        descriptor.setIsFavorite(isFavorite);
         return this;
     }
+
+    /**
+     * Sets the {@code isProfile} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withIsProfile(boolean isProfile) {
+        descriptor.setIsProfile(isProfile);
+        return this;
+    }
+
 
     public EditPersonDescriptor build() {
         return descriptor;

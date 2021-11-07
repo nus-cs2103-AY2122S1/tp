@@ -41,4 +41,43 @@ public class GithubTest {
         assertTrue(Github.isValidGithub("a-b-123")); // two separate hyphen
         assertTrue(Github.isValidGithub("a".repeat(39))); // 39 characters
     }
+
+    @Test
+    public void equals_twoSameObjects_success() {
+        Github github = new Github("Jai2501");
+        assertTrue(github.equals(github));
+    }
+
+    @Test
+    public void equals_twoDifferentObjects_falseOutput() {
+        Github github = new Github("Jai2501");
+        Email email = new Email("jay@gmail.com");
+        assertFalse(github.equals(email));
+    }
+
+    @Test
+    public void equals_twoDifferentObjectsWithSameGitHubUsernames_success() {
+        Github github1 = new Github("Jai2501");
+        Github github2 = new Github("Jai2501");
+        assertTrue(github1.equals(github2));
+    }
+
+    @Test
+    public void equals_twoDifferentObjectsWithDifferentGitHubUsernames_falseOutput() {
+        Github github1 = new Github("Jai2501");
+        Github github2 = new Github("Atin123");
+        assertFalse(github1.equals(github2));
+    }
+
+    @Test
+    public void toString_aValidInput_success() {
+        Github github = new Github("Jai2501");
+        assertTrue(github.toString().equals("Jai2501"));
+    }
+
+    @Test
+    public void hashCode_validInput_correctOutput() {
+        Github github = new Github("Jai2501");
+        assertTrue(github.hashCode() == -168664970);
+    }
 }

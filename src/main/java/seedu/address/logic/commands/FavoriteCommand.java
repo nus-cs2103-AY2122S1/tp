@@ -10,22 +10,21 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
-
-public class UnfavouriteCommand extends Command {
-    public static final String COMMAND_WORD = "unfav";
+public class FavoriteCommand extends Command {
+    public static final String COMMAND_WORD = "fav";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Unfavourites the person identified by the index number used in the displayed person list.\n"
+            + ": Favorites the person identified by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_UNFAVOURITE_PERSON_SUCCESS = " has been unfavourited successfully!";
+    public static final String MESSAGE_FAVORITE_PERSON_SUCCESS = " has been favorited successfully!";
 
-    public static final String MESSAGE_ALREADY_UNFAVOURITE_PERSON = " has already been unfavourited.";
+    public static final String MESSAGE_ALREADY_FAVORITE_PERSON = " has already been favorited.";
 
     private final Index targetIndex;
 
-    public UnfavouriteCommand(Index targetIndex) {
+    public FavoriteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -38,25 +37,25 @@ public class UnfavouriteCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToUnfavourite = lastShownList.get(targetIndex.getZeroBased());
-        if (!personToUnfavourite.isFavourite()) {
-            String errorMessage = personToUnfavourite.getName().toString()
-                    + MESSAGE_ALREADY_UNFAVOURITE_PERSON;
+        Person personToFavorite = lastShownList.get(targetIndex.getZeroBased());
+        if (personToFavorite.isFavorite()) {
+            String errorMessage = personToFavorite.getName().toString()
+                    + MESSAGE_ALREADY_FAVORITE_PERSON;
             throw new CommandException(errorMessage);
         }
-        model.unfavouritePerson(personToUnfavourite);
+        model.favoritePerson(personToFavorite);
         if (model.getPersonListControl() != null) {
             model.getPersonListControl().refreshPersonListUI();
         }
-        String successMessage = personToUnfavourite.getName().toString()
-                + MESSAGE_UNFAVOURITE_PERSON_SUCCESS;
+        String successMessage = personToFavorite.getName().toString()
+                + MESSAGE_FAVORITE_PERSON_SUCCESS;
         return new CommandResult(successMessage);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof UnfavouriteCommand // instanceof handles nulls
-                && targetIndex.equals(((UnfavouriteCommand) other).targetIndex)); // state check
+                || (other instanceof FavoriteCommand // instanceof handles nulls
+                && targetIndex.equals(((FavoriteCommand) other).targetIndex)); // state check
     }
 }

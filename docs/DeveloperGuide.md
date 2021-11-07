@@ -15,7 +15,7 @@ title: Developer Guide
 
 CohortConnect is an advanced desktop address book which facilitates networking among Computer Science (CS) students. It is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
 
-Manage large groups of contacts with advanced features such as **Import** for a quick 1-step setup, marking your **Favourite** contacts, as well as finding contacts going to the same **Event**. CohortConnect also makes it easy to connect with like-minded students in your module. Our **Find A Buddy** feature matches you with students who have similar interests by leveraging GitHub’s metadata using a proprietary algorithm.
+With advanced features for managing large groups of contacts, CohortConnect is intended for use in a university setting. At the start of the semester, professors will distribute `csv` or `json` files containing a list of students. Instantly load them into CohortConnect with a single **Import** command. With data collected from students before the semester, our **Find A Buddy** feature helps you find potential groupmates by leveraging GitHub’s metadata using a proprietary algorithm. In the **Events** tab, you can identify events and hackathons that your peers will be attending.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -197,7 +197,7 @@ This section describes noteworthy details on how certain features are implemente
 
 #### Implementation
 
-The telegram handle field is facilitated by the `Telegram` class. It is stored interally as a `String` in the data file `addressbook.json` and is then initialized as a `Telegram` object. 
+The telegram handle field is facilitated by the `Telegram` class. It is stored internally as a `String` in the data file `addressbook.json` and is then initialized as a `Telegram` object. 
 
 The `Telegram` class implements the following operation:
 
@@ -293,20 +293,90 @@ The `Github` class is first integrated into the `Person` class and added as a ne
 
 #### Implementation
 
-The Export command accepts the name of a JSON file as a parameter, and exports the current list of contacts to the 
-specified file. It is facilitated by the `ExportCommandParser` class, which implements `Parser<ExportCommand>`. 
-It implements the `parse()` method, which parses the filename and returns an `ExportCommand`, to be executed in 
-`LogicManager`.
- 
-The `ExportCommand` class extends `Command`. It stores the filename as a class variable and its implementation of
-`Command#execute()` is where the generation of the JSON file begins. The current addressbook, is obtained by 
-`Model#getAddressBook()`. A temporary instance of `JsonAddressBookStorage` is created by passing in the filename, and it
-saves the current addressbook to the specified file name using the method `exportToJson()`.
+The Export command exports the current list of contacts to the specified JSON or CSV file, with help from [Jackson](https://github.com/FasterXML/jackson), an external library. It does not overwrite existing files.
 
-The Sequence Diagram below illustrates the interactions within the `Logic`, `Storage` and `Model` components for 
-the `execute("export newfriends.json")` API call.
+Executing an Export Command can be summarized with the following steps:
+1. User command is handed over to `ExportCommandParser`. After verification of arguments, an ExportCommand is generated.
+2. Upon executing the `ExportCommand`, one of the 2 methods are called, depending on the file type specified.
+   * `ImportCommand#exportAddressBookToJson(ReadOnlyAddressBook)`
+   * `ImportCommand#exportAddressBookToCsv(ReadOnlyAddressBook)`
 
-![ExportSequenceDiagram](images/ExportSequenceDiagram.png)
+Firstly, the user command is handed over to `ExportCommandParser`. `ExportCommandParser` implements `Parser<ExportCommand>`. It implements the `parse()` method, which parses the user's command and returns an `ExportCommand` with the filename. In `parse()`, it verifies 3 requirements:
+* Arguments are not empty
+* Not more than 1 argument
+* Filename provided is a .csv or .json file
+
+The Sequence Diagram below illustrates the interactions within the `Logic` component during the first step of executing `execute("export cs2103t.json")`.
+
+![ExportSequenceDiagram](images/ExportSequenceDiagramStep1.png)
+
+Next, The `ExportCommand` is then executed in `LogicManager`. The `ExportCommand` class extends `Command`. It stores the filename as a class variable and its implementation of `Command#execute()`. Here, the filename is checked again to verify that it is a .csv or .json file. The current address book is obtained by `Model#getAddressBook()`. Then, depending on the file type, one of the following methods are called:
+
+1. `exportAddressBookToJson(ReadOnlyAddressBook)`
+
+   A temporary instance of `JsonAddressBookStorage` is created by passing in the filename, and `saveAddressBook(ReadOnlyAddressBook)` saves the current address book to the specified file.
+    ```
+   temporaryStorage.saveAddressBook(currentAddressBook, filePath, true);
+   ```
+   <div markdown="span" class="alert alert-primary">
+    :bulb: **Note:** The third argument `true` indicates that `saveAddressBook(ReadOnlyAddressBook)` is triggered by an export command. This distinction is necessary as default saving of contact data to the address book is performed with the same method, but requires overwriting of the storage file, whereas the export command does not overwrite files.
+    </div>
+
+   In the Storage component, utility classes are used to check, create and write to the JSON file.
+    1. `FileUtil#isFileExists(Path)` checks if there exists a file with the specified name. If there is, a `FileAlreadyExistsException` is thrown.
+    2. `FileUtil#createIfMissing(Path)` creates the JSON file.
+    3. The current `ReadOnlyAddressBook` is used to instantiate a new `JsonSerializableAddressBook`, a JSON-friendly equivalent of `ReadOnlyAddressBook` containing Jackson annotations. It stores a list of `JsonAdaptedPerson` instead of `Person`, which is also JSON-friendly.
+    4. `JsonUtil#saveJsonFile(T, Path)` serializes the address book and writes to the file, using `ObjectMapper`, a Jackson class.
+    ```
+    /**
+     * Converts a given instance of a class into its JSON data string representation.
+     *
+     * @param instance The T object to be converted into the JSON string
+     * @param <T> The generic type to create an instance of
+     * @return JSON data representation of the given class instance, in string
+     */
+    public static <T> String toJsonString(T instance) throws JsonProcessingException {
+        return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(instance);
+    }
+    ```
+
+2. `exportAddressBookToCsv(ReadOnlyAddressBook)`
+
+   A temporary instance of `CsvAddressBookStorage` is created by passing in the filename, and `saveAddressBook(ReadOnlyAddressBook)` saves the current address book to the specified file.
+    ```
+   temporaryStorage.saveAddressBook(currentAddressBook, filePath);
+   ```
+   In the Storage component, utility classes are used to check, create and write to the JSON file.
+    1. `FileUtil#isFileExists(Path)` checks if there exists a file with the specified name. If there is, a `FileAlreadyExistsException` is thrown.
+    2. `FileUtil#createIfMissing(Path)` creates the CSV file.
+    3. The current `ReadOnlyAddressBook` is used to instantiate a new `CsvSerializableAddressBook`, a CSV-friendly equivalent of `ReadOnlyAddressBook` containing Jackson annotations. It stores a list of `CsvAdaptedPerson` instead of `Person`, which is also CSV-friendly.
+    4. `CsvUtil#saveCsvFile(T, Path)` serializes the address book and writes to the file, using `CsvMapper`, a Jackson class.
+
+
+The Sequence Diagram below illustrates the interactions during the second step of executing `execute("export cs2103t.json")`.
+
+![ExportSequenceDiagram](images/ExportSequenceDiagramStep2.png)
+
+### Import command
+
+The Import command imports contacts from a JSON or CSV file and adds them to the current contact list, with help from [Jackson](https://github.com/FasterXML/jackson), an external library. Import does not remove existing contacts, and ignores duplicate contacts.
+
+Executing an Import command can be summarized with the following steps:
+1. Similar to Export, the first step is parsing the user command, which is done in `ImportCommandParser`. After verification, an `ImportCommand` is generated.
+2. Upon executing the `ImportCommand`, one of the 2 methods are called to obtain a `List<Person>` from the specified file.
+   * `ImportCommand#getImportedPersonsFromJson()`
+   * `ImportCommand#getImportedPersonsFromCsv()`
+3. By iterating through the list, each person is added to the current contact list in `Model`, skipping duplicates.
+4. Command Result with success message is returned.
+
+The sequence diagram for the first step is similar to the Export Command. The following sequence diagram illustrates the execution of an import command from part 2 onwards.
+
+![ImportSequenceDiagram](images/ImportSequenceDiagram.png)
+
+#### Reading JSON / CSV file
+
+In both scenarios, a new `JsonAddressBookStorage` or `CsvAddressBookStorage` is created. The `AddressBookStorage` method `readAddressBook()` then reads the respective file using `JsonUtil#readJsonFile()` or `CsvUtil#readCsvFile()`. In both cases, the files are read using Jackson's `ObjectMapper` or `CsvMapper` classes respectively.
+
 
 ### Find command
 
@@ -336,18 +406,184 @@ the `execute("find te/alex_1")` API call.
 
 #### Implementation
 
-The class `WelcomeWindow` is responsible displaying the welcome window at the
-start, when the application is launched. It is facilitated by `WelcomeWindow.fxml` file
-which is responsible for how various components inside this window are arranged.
+The class `WelcomeWindow` is responsible for displaying the welcome window at the
+start when the application is launched. It is facilitated by the `WelcomeWindow.fxml` file, which is
+responsible for how various components inside this window are arranged.
 
 The `WelcomeWindow` class extends `UiPart<Stage>`.
 
-When the app is launched, an instance of this class is created, and the 
-`WelcomeWindow#start` is invoked to display the window. Various methods
-including `fadeTransition` and `displayAnimatedText` are used within this
-class to achieve the fading image and character typing effect respectively.
+When the app is launched, an instance of this class is created, and the
+`WelcomeWindow#start` is invoked to display the window. Various methods, including 
+`fadeTransition` and `displayAnimatedText`, are used within this
+class to achieve the fading image and character typing effect, respectively.
 
 ![WelcomeWindowSequenceDiagram](images/WelcomeWindowSequenceDiagram.png)
+
+### Profile SetUp Window
+
+#### Implementation
+
+The class `ProfileSetUpWindow` is responsible for displaying the Profile SetUp Window. 
+It is only shown once when the User launches the app for the first time and has input 
+their credentials as required. It is facilitated by `ProfileSetUpWindow.fxml` and 
+`ProfileSetUpWindow.css`. The `.fxml` file is responsible for the layout of the 
+various components in this window, and the `.css` file adds a style and enhances 
+the overall UI.
+
+The `ProfileSetUpWindow` class extends `UiPart<Stage>`.
+
+This window would only be visible after the Welcome Window Splash Screen. 
+`WelcomeWindow` hands over the control to `MainWindow` after execution, which 
+then sets up the `ProfileSetUpWindow`. On Initializing and calling `start()` 
+method of the `ProfileSetUpWindow`, the `ProfileSetUpWindow` with the help of 
+a `Logic` object (which is obtained during initialization) checks, if a 
+User Profile is present. If it is present, it 
+again hands over the control to the `MainWindow` by calling the `start()` method 
+of the `MainWindow` Object. Else, It displays the Profile SetUp Window and 
+waits for a response from the User.
+
+After the User has input their credentials in the text fields, they are expected to 
+click the `Submit` button. When that button is clicked upon, the `submit()` method is 
+invoked. This method calls the `areUserCredentialsValid()` method to verify if the
+entered credentials are valid or not. If they are valid, the User Profile is deemed 
+complete and is set up with the help of the `Logic` object obtained during
+the object's initialization. If the credentials are not valid, an error message
+is shown in the Window, highlighting which credential is invalid. The User cannot proceed
+forward without entering all valid Credentials.
+
+The `areUserCredentialsValid()` class checks if the entered Name, Telegram Handle,
+and the GitHub Username are valid. 
+
+1. Class level method `isValidName()`, of `Name` class 
+   verifies the Name entered.
+2. Class level method `isValidTelegram()`, of `Telegram` class
+   verifies the Telegram Handle entered.
+3. Class level method `isValidGithub()`, of `Github` class
+   verifies the GitHub Username entered.
+
+This method is also responsible for displaying the appropriate error message
+in the Window.
+
+![ProfileSetUpWindowSequenceDiagram](images/ProfileSetUpWindowSequenceDiagram.png)
+
+### User Profile Window
+
+#### Implementation
+
+The class `UserProfileWindow` is responsible for displaying the User Profile
+Window. It is shown when the user either uses the keyboard shortcut, 
+`Command/Control + P`, or clicks on the User Profile located in the top right in
+the Menu Bar. It is facilitated by `UserProfileWindow.fxml`
+and `UserProfileWindow.css`. The `.fxml` file is responsible for the layout of the
+various components in this window, and the `.css` file adds a style and enhances the
+overall UI.
+
+The `UserProfileWindow` class extends `UiPart<Stage>`.
+
+This window can only be viewed when the app has successfully started up and 
+has valid User Credentials.
+
+This window is initialized when the `MainWindow` is initialized. It is
+initialized in the `MainWindow` constructor. This window, to be seen, has to be 
+triggered as an event by the user. The `MainWindow` class has a method 
+`handleUserProfileWindow()`, which is responsible for displaying this window.
+
+The `handleUserProfileWindow()` when called, calls the method `isShowing()` via 
+the object initialized earlier. If it is not showing, the `show()` method of the
+`UserProfileWindow` class is called upon. Else, if it is already showing, the
+`focus()` method is called upon. Along with that, in case the window had been
+minimized by the User, `UserProfileWindow#getRoot()#toFront()` is called to
+bring the window to the maximized state.
+
+The `UserProfileWindow#show()`, first calls the `UserProfileWindow#initializeFields()`,
+to initialize all the fields with the latest User Profile Credentials. This would, in turn
+also call `UserProfileWindow#setFields()`, to set them up in the UI. After all the setting
+up is done, the User Profile Window is shown.
+
+The `UserProfileWindow#focus()`, calls the `getRoot()` method to obtain the root object.
+On that root object, `requestFocus()` is called upon to request focus.
+
+![UserProfileWindowSequenceDiagram](images/UserProfileWindowSequenceDiagram.png)
+
+### Help Window
+
+#### Implementation
+
+The class `HelpWindow` is responsible for displaying the Help
+Window. It is shown when the user either uses the keyboard shortcut,
+`F1`, or clicks on `Help` located on the top left in
+the Menu Bar. It is facilitated by `HelpWindow.fxml`
+and `HelpWindow.css`. The `.fxml` file is responsible for the layout of the
+various components in this window, and the `.css` file adds a style and enhances the
+overall UI.
+
+The `HelpWindow` class extends `UiPart<Stage>`.
+
+This window can only be viewed when the app has successfully started up and 
+has valid User Credentials.
+
+This window is initialized when the `MainWindow` is initialized. It is
+initialized in the `MainWindow` constructor. This window, to be seen, has to be
+triggered as an event by the user. The `MainWindow` class has a method
+`handleHelpWindow()`, which is responsible for displaying this window.
+
+On initializing the `HelpWindow` class, `HelpWindow#setUpCommandDetails()` and
+`HelpWindow#setUpHelpTableView()` are called.
+
+`setUpCommandDetails()` creates multiple objects of `CommandDetails`, all of them
+representing a unique command that the app supports. Those are then added to an
+`ObservableList<CommandDetails>`, which is linked to the `TableView` in the UI.
+
+`setUpHelpTableView()` sets and places various restrictions on the table.
+It restricts any events or scrolling on the table. Also, It adjusts the height
+of the table according to the number of `CommandDetails` present in it.
+
+The `handleHelpWindow()` when called, calls the method `isShowing()` via
+the object initialized earlier. If it is not showing, the `show()` method of the
+`HelpWindow` class is called upon. Else, if it is already showing, the
+`focus()` method is called upon. Along with that, in case the window had been
+minimized by the User, `HelpWindow#getRoot()#toFront()` is called to
+bring the window to the maximized state.
+
+![HelpWindowSequenceDiagram](images/HelpWindowSequenceDiagram.png)
+
+### User Profile in Menu Bar
+
+#### Implementation
+
+The class `UserProfileInMenuBar` is responsible for displaying the User
+Profile in the Menu Bar. It is shown in the Main Window, in the top right
+of the Menu Bar beside the Bell icon. It is facilitated by `UserProfileInMenuBar.fxml`.
+The `.fxml` file is responsible for the layout of the various components inside
+this Region.
+
+The `UserProfileInMenuBar` class extends `UiPart<Region>` and implements
+`UserProfileWatcher`.
+
+This Region can only be viewed when the app has successfully started up and
+has valid User Credentials.
+
+This Region is initialized when the `MainWindow#start()` is called. On 
+initializing the `UserProfileInMenuBar` class, `UserProfileInMenuBar#setUserProfileOnMenuBar()` 
+and `UserProfileInMenuBar#addToUserProfileWatcherList()` are called.
+
+`setUserProfileOnMenuBar()` is responsible for retrieving the User Credentials with
+the help of the `Logic` object obtained during initialization and setting up the 
+`ImageView` and `Label` with the User Credentials retrieved.
+
+`addToUserProfileWatcherList()` is responsible for adding `this` (UserProfileWatcher)
+to a watchers list, such that, in the scenario, the User updates their profile
+credentials, the changes are reflected immediately. As the User is able to 
+edit their Credentials via the `EditCommand`, the profile watchers list is present there.
+A static method in `EditCommand`, `addUserProfileWatcher(this)` is called upon, by
+passing `this` (UserProfileWatcher) as an argument, to add it to the profile watchers list.
+
+Whenever there is a change in the User Credentials, the `updateUserProfile()` is
+called upon in the `UserProfileInMenuBar`, which in turn calls the 
+`setUserProfileOnMenuBar()`. This method then retrieves the new User Credentials
+and sets them up.
+
+![UserProfileInMenuBarSequenceDiagram](images/UserProfileInMenuBarSequenceDiagram.png)
 
 ### Show command
 

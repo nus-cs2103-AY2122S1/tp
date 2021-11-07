@@ -14,8 +14,8 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.collections.FXCollections?>
-<?import seedu.address.logic.commands.CommandDetails?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
+
 <fx:root resizable="false" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
   <icons>
     <Image url="@/images/help_icon.png" />
@@ -28,16 +28,16 @@
         <URL value="@TableView.css" />
       </stylesheets>
 
-      <AnchorPane prefHeight="600" prefWidth="210">
+      <AnchorPane prefHeight="710" prefWidth="300">
         <children>
           <VBox>
             <TableView fx:id="helpTable" AnchorPane.topAnchor="1.0">
               <columns>
-                <TableColumn text="Feature" prefWidth="270">
+                <TableColumn text="Feature" prefWidth="300">
                   <cellValueFactory><PropertyValueFactory property="commandName" />
                   </cellValueFactory>
                 </TableColumn>
-                <TableColumn text="Command" prefWidth="260">
+                <TableColumn text="Command" prefWidth="310">
                   <cellValueFactory><PropertyValueFactory property="commandStructure" />
                   </cellValueFactory>
                 </TableColumn>
@@ -58,7 +58,7 @@
               </Label>
               <Button fx:id="copyButton" mnemonicParsing="false" onAction="#openUserGuide" text="Visit URL">
                 <HBox.margin>
-                  <Insets left="32.0" right="10.0"/>
+                  <Insets left="75.0" right="10.0"/>
                 </HBox.margin>
               </Button>
             </children>

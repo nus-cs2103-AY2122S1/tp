@@ -100,7 +100,7 @@ public class Tag {
      * Parses the tag name based on the given tag type and description.
      *
      * @param tagType Type of tag.
-     * * @param tagDescription A valid tag description.
+     * @param tagDescription A valid tag description.
      * @return Name of tag represented by tag description.
      */
     public String parseTagName(Type tagType, String tagDescription) {
