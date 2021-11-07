@@ -170,7 +170,7 @@ The `Tag` attribute refers to the tags associated with the client. A client can 
 | Parameter Format | `[t/TAG]...` |
 :---: | ---
 | Example | `t/family t/friends` |
-| <img src="images/info_icon.png" width="50"/> | • `TAG`: should be alphanumeric.<br>• For operation against multiple tags, you can specify the parameter multiple times in the command. For example, to assign multiple tags to an existing client of ID `100`, you can do `edit 100 t/friends t/family`.<br>• To clear all the tags associated to a client, you can do `edit CLIENT_ID t/`.<br>• Note that all commands that modify the tags of a client in any ways, will overwrite all existing tags of the client. For example, if a client previously had the tags: `family` and `friends`, doing the command `edit CLIENT_ID t/rejected` will wipe out all previous tags and the client now has only the `rejected` tag. |
+| <img src="images/info_icon.png" width="50"/> | • `TAG`: should be alphanumeric.<br>• For operation against multiple tags, you can specify the parameter multiple times in the command. e.g. to assign multiple tags to an existing client of ID `100`, you can do `edit 100 t/friends t/family`.<br>• To clear all the tags associated to a client, you can do `edit CLIENT_ID t/`.<br>• Note that all commands that modify the tags of a client in any ways, will overwrite all existing tags of the client. e.g. if a client previously had the tags: `family` and `friends`, doing the command `edit CLIENT_ID t/rejected` will wipe out all previous tags and the client now has only the `rejected` tag. |
 
 --------------------------------------------------------------------------------------------------------------------
 
