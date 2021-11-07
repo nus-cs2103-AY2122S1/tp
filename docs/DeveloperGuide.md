@@ -479,14 +479,22 @@ testers are expected to do more *exploratory* testing.
 
    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+3. _{ more test cases …​ }_
+
+### Adding a person
+
+1. Adding a person into contHACKS
+   1. Prerequisites: Nons.
+   2. Test case: `add n/Ben e/ben@example.com m/CS2103T T11 B04 p/9123456 h/@Benny`<br>Expected: The person with the fields entered should be added into the displayed contacts. The module code `CS2103T [T11 B04]` should be rendered.
+   3. Test case: `add n/Casey e/casey@example.com m/CS2103T p/81234567 h/@caaaasey`<br>Expected: The person with the fields entered should be added into the displayed contacts. The module code `CS2103T` should be rendered.
+   4. Test case: `add add n/Ben e/ben@example.com m/CS2103T T11 B04 p/9123456 h/@Benny`<br>Expected: No person is added because the `add` command is provided twice.
 
 ### Deleting a person
 
