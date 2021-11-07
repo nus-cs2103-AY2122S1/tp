@@ -74,7 +74,7 @@ public class Interview implements Comparable<Interview> {
 
     @Override
     public int compareTo(Interview interview) {
-        int result = 0;
+        int result;
 
         try {
             if (this.isEmptyInterview()) {
@@ -91,11 +91,14 @@ public class Interview implements Comparable<Interview> {
                         ? 1
                         : 0;
             }
+
+            return result;
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        
-        return result;
+
+        assert false : "Execution of method should not arrive here";
+        return -1;
     }
 
     /**
