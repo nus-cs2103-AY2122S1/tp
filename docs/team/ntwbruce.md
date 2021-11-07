@@ -23,7 +23,7 @@ Given below are my contributions to the project.
     * Created ParticipantCard and decouple PersonCard (Pull Request [\#59](https://github.com/AY2122S1-CS2103T-T10-2/tp/pull/59))
     * Updated ParticipantId to include numbering, for differentiation of Participants with the same alphabetical Participant ID. (Pull Requests [\#74](https://github.com/AY2122S1-CS2103T-T10-2/tp/pull/74), [\#75](https://github.com/AY2122S1-CS2103T-T10-2/tp/pull/75) and [\#80](https://github.com/AY2122S1-CS2103T-T10-2/tp/pull/80))
     * Wrote additional tests for existing features, improving test coverage by 4.93% (Pull Requests [\#85](https://github.com/AY2122S1-CS2103T-T10-2/tp/pull/85), [\#88](https://github.com/AY2122S1-CS2103T-T10-2/tp/pull/88), [\#93](https://github.com/AY2122S1-CS2103T-T10-2/tp/pull/93))
-    * Modified EditCommand to be able to edit Participant birthdates (Pull request [\#109](https://github.com/AY2122S1-CS2103T-T10-2/tp/pull/109))
+    * Modified EditCommand to be able to edit Participant birthdates (Pull Request [\#109](https://github.com/AY2122S1-CS2103T-T10-2/tp/pull/109))
     * Modified `enroll` and `expel` commands to use indexes (Pull Request [\#141](https://github.com/AY2122S1-CS2103T-T10-2/tp/pull/141))
 
 * **Documentation**:
