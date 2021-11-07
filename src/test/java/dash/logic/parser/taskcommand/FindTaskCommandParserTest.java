@@ -57,11 +57,11 @@ public class FindTaskCommandParserTest {
 
         //datetime
         FindTaskDescriptor findTaskDescriptorB = new FindTaskDescriptor();
-        findTaskDescriptorB.setDate(new TaskDate(CommandTestUtil.VALID_TASK_DATE_LECTURE, true));
+        findTaskDescriptorB.setDate(new TaskDate("21/10/2021", true));
         FindTaskCommand expectedFindTaskCommandB =
                 new FindTaskCommand(findTaskDescriptorB);
         CommandParserTestUtil.assertParseSuccessWithPersonList(parser, " " + PREFIX_TASK_DATE
-                        + CommandTestUtil.VALID_TASK_DATE_LECTURE, people, expectedFindTaskCommandB);
+                        + "21/10/2021", people, expectedFindTaskCommandB);
 
         //completionstatus
         FindTaskDescriptor findTaskDescriptorC = new FindTaskDescriptor();
