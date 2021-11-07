@@ -22,7 +22,7 @@ public class HelpWindow extends PopupWindow {
 
     public static final String USER_GUIDE_URL = "https://ay2122s1-cs2103-f09-3.github.io/tp/UserGuide.html";
     public static final String HELP_MESSAGE = "Full user guide: " + USER_GUIDE_URL;
-    private static final String DESCRIPTION = "Here's a list of ProgrammerError's features:";
+    private static final String DESCRIPTION = "  Here's a list of ProgrammerError's features:";
 
     private static final String FXML = "HelpWindow.fxml";
     private static final int FEATURE_COL_WIDTH = 1200;
