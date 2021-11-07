@@ -376,7 +376,7 @@ When you run the clear command, all the tasks in the task list of Uni-Fy get del
 
 ### 4.10 Retrieving past commands
 
-Shows the past commands run on **Uni-Fy**.
+Shows the previous commands run on **Uni-Fy**. The user can either type the command or use the up arrow key to go through all the pass commands.
 
 <div markdown="block" class="alert alert-primary">
 
