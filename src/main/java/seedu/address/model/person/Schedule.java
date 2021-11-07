@@ -150,26 +150,6 @@ public class Schedule {
     }
 
     /**
-     * Creates the shift array in a legible text output.
-     * @param shifts The shifts in to format.
-     *
-     * @return The string format to display.
-     */
-    private static String formatShiftsToString(Shift[] shifts, Period period) {
-        String result = "";
-        for (Shift shift: shifts) {
-            if (shift == null || shift.isEmpty()) {
-                continue;
-            }
-            result += "\n\t";
-            result += shift.toRecurrenceString(period);
-
-        }
-        return result;
-
-    }
-
-    /**
      * Set time for a shift a shift from a target staff's schedule.
      * {@code target} must exist in the address book.
      *
@@ -189,23 +169,6 @@ public class Schedule {
         shifts[dayOfWeek.getValue() - 1][slot.getOrder()] = shifts[dayOfWeek.getValue() - 1][slot.getOrder()]
                 .setTime(startTime, endTime, slot.getOrder(),
                         startDate, endDate);
-    }
-
-    /**
-     * Method to display the schedule in a palatable manner.
-     *
-     * @return The displayed schedule.
-     */
-    public String toViewScheduleString(Period period) {
-        return String.format(SCHEDULE_DEFAULT,
-                formatShiftsToString(shifts[0], period),
-                formatShiftsToString(shifts[1], period),
-                formatShiftsToString(shifts[2], period),
-                formatShiftsToString(shifts[3], period),
-                formatShiftsToString(shifts[4], period),
-                formatShiftsToString(shifts[5], period),
-                formatShiftsToString(shifts[6], period));
-
     }
 
     /**
