@@ -229,6 +229,7 @@ Scroll down to the bottom and click on `recruitIn.jar`.
 [Table of contents](#table-of-contents)
 
 The `help` command shows a message explaining how to access the help page.
+Alternatively, you can click on the Help button to access the help page as well.
 
 ![help message](images/helpMessage.png)
 
