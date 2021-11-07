@@ -520,7 +520,7 @@ The following links are used
 
 Similar to other commands, the commands `g` and `te` are parsed in `AddressBookParser`, where it is checked that there are no other arguments.
 
-During their execution, it is checked that there is a current user selected, using `Model#getSelectedIndex()`. If it is `-1`, then a `CommandException` is thrown.
+During their execution, it is checked that there is a current user selected, using `Model#getSelectedIndex()`. If the returned value is `-1`, then a `CommandException` is thrown.
 
 The CommandResult returned indicates whether it is triggered by a GitHub or Telegram command using booleans variables.
 
