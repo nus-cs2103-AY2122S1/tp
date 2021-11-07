@@ -8,7 +8,7 @@ import static seedu.programmer.commons.util.AppUtil.checkArgument;
  */
 public class LabNum {
     public static final String MESSAGE_CONSTRAINT =
-            " Lab number should be between 1 and 13 (inclusive)";
+            " Lab number should be between 0 and 13 (inclusive)";
 
     private final Integer labNum;
 
@@ -31,7 +31,7 @@ public class LabNum {
      * Returns true if a given string is a valid labNum.
      */
     public static boolean isValidLabNum (Integer test) {
-        return test.compareTo(0) > 0 && test.compareTo(14) < 0;
+        return test.compareTo(0) >= 0 && test.compareTo(14) < 0;
     }
 
     @Override

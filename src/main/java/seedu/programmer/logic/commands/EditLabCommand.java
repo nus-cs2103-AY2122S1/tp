@@ -57,7 +57,7 @@ public class EditLabCommand extends Command {
     public EditLabCommand(Lab original, LabTotal total) {
         this.original = original;
         this.total = total;
-        this.newLabNum = new LabNum(1);
+        this.newLabNum = new LabNum(0);
     }
 
     /**

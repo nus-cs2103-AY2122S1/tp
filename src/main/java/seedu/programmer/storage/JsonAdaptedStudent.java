@@ -133,7 +133,7 @@ class JsonAdaptedStudent {
 
                 Lab lab = new Lab(new LabNum(labNum), new LabResult(labResult), new LabTotal(labTotal));
                 studentLabResults.add(lab);
-             }
+            }
             student.setLabResultRecord(studentLabResults);
         }
 

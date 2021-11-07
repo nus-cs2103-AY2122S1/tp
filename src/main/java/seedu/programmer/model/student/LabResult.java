@@ -7,10 +7,11 @@ import static seedu.programmer.commons.util.AppUtil.checkArgument;
  * Represents a student's name in the ProgrammerError.
  */
 public class LabResult {
-    private static final Integer UNMARKED_ACTUAL_SCORE_PLACEHOLDER = -1;
-    private final Integer labResult;
     public static final String MESSAGE_CONSTRAINT =
             " Lab result should be a non-negative number or a unmarked placeholder(-1)";
+    private static final Integer UNMARKED_ACTUAL_SCORE_PLACEHOLDER = -1;
+    private final Integer labResult;
+
 
     /**
      * Constructs a {@code Name}.
