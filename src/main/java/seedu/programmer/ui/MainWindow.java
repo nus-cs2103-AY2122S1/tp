@@ -13,8 +13,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.SplitPane;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.StackPane;
-import javafx.stage.DirectoryChooser;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import seedu.programmer.commons.core.GuiSettings;
 import seedu.programmer.commons.core.LogsCenter;
@@ -44,16 +42,14 @@ public class MainWindow extends UiPart<Stage> {
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
-    private Stage primaryStage;
-    private Logic logic;
+    private final Stage primaryStage;
+    private final Logic logic;
 
-    // Independent Ui parts residing in this Ui container
-    private StudentListPanel studentListPanel;
-    private LabResultListPanel labResultListPanel;
     private ResultDisplay resultDisplay;
-    private HelpWindow helpWindow;
-    private DashboardWindow dashboardWindow;
-    private PopupManager popupManager;
+    private final HelpWindow helpWindow;
+    private final DashboardWindow dashboardWindow;
+    private final PopupManager popupManager;
+    private final FileManager fileManager;
 
     @FXML
     private Scene primaryScene;
@@ -108,6 +104,7 @@ public class MainWindow extends UiPart<Stage> {
         helpWindow = new HelpWindow();
         dashboardWindow = new DashboardWindow(logic);
         popupManager = new PopupManager(primaryStage);
+        fileManager = new FileManager(primaryStage);
     }
 
 
@@ -135,7 +132,8 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        studentListPanel = new StudentListPanel(logic.getFilteredStudentList());
+        // Independent Ui parts residing in this Ui container
+        StudentListPanel studentListPanel = new StudentListPanel(logic.getFilteredStudentList());
         studentListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -200,7 +198,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleShowResult() {
-        labResultListPanel = new LabResultListPanel(logic.getSelectedInformation());
+        LabResultListPanel labResultListPanel = new LabResultListPanel(logic.getSelectedInformation());
         labResultListPanelPlaceholder.getChildren().add(labResultListPanel.getRoot());
         logger.fine("Showing student's lab results.");
     }
@@ -225,7 +223,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleUpload() {
-        File chosenFile = promptUserForCsvFile();
+        File chosenFile = fileManager.promptUserForCsvFile();
         if (chosenFile == null) {
             logger.info("User cancelled the file upload.");
             return;
@@ -261,7 +259,7 @@ public class MainWindow extends UiPart<Stage> {
             return;
         }
 
-        File destinationFile = promptUserForFileDestination();
+        File destinationFile = fileManager.promptUserForFileDestination();
         if (destinationFile == null) {
             return;
         }
@@ -307,45 +305,11 @@ public class MainWindow extends UiPart<Stage> {
 
         if (stuList.size() == 0) {
             popupManager.displayPopup("Upload failed: No students were found in your file. "
-                        + "Use the purge command if you want to remove all students.");
+                    + "Use the purge command if you want to remove all students.");
             return null;
         }
 
         return stuList;
-    }
-
-    /**
-     * Configures file chooser to accept only CSV files.
-     *
-     * @param fileChooser FileChooser object
-     */
-    private static void configureFileChooser(final FileChooser fileChooser) {
-        fileChooser.setTitle("Select CSV file");
-        FileChooser.ExtensionFilter csvFilter = new FileChooser.ExtensionFilter("All CSVs", "*.csv");
-        fileChooser.getExtensionFilters().add(csvFilter);
-    }
-
-    /**
-     * Shows user a dialog to choose a CSV file.
-     *
-     * @return chosen CSV file
-     */
-    public File promptUserForCsvFile() {
-        FileChooser fileChooser = new FileChooser();
-        configureFileChooser(fileChooser);
-        return fileChooser.showOpenDialog(primaryStage);
-    }
-
-    /**
-     * Creates a File object based on user's chosen directory.
-     *
-     * @return File object with a file name appended to the chosen directory
-     */
-    public File promptUserForFileDestination() {
-        String destFileName = "programmerError.csv";
-        DirectoryChooser dirChooser = new DirectoryChooser();
-        File chosenDir = dirChooser.showDialog(primaryStage);
-        return chosenDir == null ? null : new File(chosenDir, destFileName);
     }
 
     /**
