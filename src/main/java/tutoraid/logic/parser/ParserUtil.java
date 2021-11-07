@@ -3,7 +3,6 @@ package tutoraid.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 import tutoraid.commons.core.index.Index;
 import tutoraid.commons.util.StringUtil;
@@ -42,6 +41,7 @@ public class ParserUtil {
     /**
      * Parses multiple {@code oneBasedIndex} into an arraylist of {@code Index} and returns it.
      * Leading and trailing whitespaces will be trimmed.
+     *
      * @throws ParseException if any of the specified indexes are invalid (not non-zero unsigned integer).
      */
     public static ArrayList<Index> parseMultipleIndexes(String multipleOneBasedIndexes) throws ParseException {
@@ -52,7 +52,17 @@ public class ParserUtil {
             Index index = parseIndex(indexInString);
             indexesToReturn.add(index);
         }
-        return indexesToReturn.stream().distinct().collect(Collectors.toCollection(ArrayList::new));
+        return getUniqueIndexes(indexesToReturn);
+    }
+
+    private static ArrayList<Index> getUniqueIndexes(ArrayList<Index> indexesToReturn) {
+        ArrayList<Index> output = new ArrayList<>();
+        for (Index index : indexesToReturn) {
+            if (!output.contains(index)) {
+                output.add(index);
+            }
+        }
+        return output;
     }
 
     /**
