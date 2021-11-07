@@ -46,7 +46,7 @@ This product will make recruiters’ lives easier through categorisation and fil
 
 
 ### About this guide
-[table of contents](#table-of-contents)
+[Table of contents](#table-of-contents)
 
 This guide aims to help users get familiar with using RecruitIn's features.
 * **New users** can get started by following the steps under [Quick start](#quick-start).
@@ -290,8 +290,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMP
  
  * Edit command must take at least 1 prefix parameter.
  * The `INDEX` refers to the index number shown in the displayed applicants list.
- * For `t/` prefix in particular, if **only** a single tag prefix is provided like so `t/` with no values, it will erase
-remove tags from the applicant.
+ * For `t/` prefix in particular, if **only** a single tag prefix is provided like `t/` with no values, it will
+remove all tags from the applicant.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 Giving more than 1 tag prefix parameter with 1 or more having no value will instead lead to an error.
@@ -456,7 +456,7 @@ Examples:
 
 The `show` command shows you unique search terms which you can use for a specific prefix.
 
-Format: `show [n/] [p/] [e/] [r/] [et/] [s/] [l/] [y/] [t/]`
+Format: `show [n/] [p/] [e/] [r/] [et/] [s/] [l/] [y/] [t/] [i/]`
 
 ***Note:*** *As mentioned in [Basic Command Format](#basic-command-format), you can include any one of the prefixes in square brackets  here.*
 
