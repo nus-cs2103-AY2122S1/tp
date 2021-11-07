@@ -129,6 +129,8 @@ This section highlights all the commands that Uni-Fy supports. These include det
    * Items with <code>tg/</code> before them represent the tag of the task
    * Items with <code>d/</code> before them represent the date of the task
    * Items with <code>t/</code> before them represent the time of the task
+   * Items with <code>p/</code> before them represent the priority level of the task
+     * The priority level can be `LOW`, `MEDIUM` or `HIGH` (**Note**: needs to be uppercase)
    * Date is represented in YYYY-MM-DD format
    * Time is represented in HH:MM format
    * Tag must be alphanumeric and contain at most 15 characters
@@ -153,6 +155,7 @@ Adds a task to the task list. The parameters for the command can be input in any
 * Adds task with the date <code><i>d/date</i></code>
   * The format should be as follows <code><i>d/yyyy-mm-dd</i></code>
 * Add task with the tag <code><i>tg/tag</i></code>
+* Add task with the priority level <code><i>p/level</i></code>
 * The task is added for that date only at the given time
   * Useful if it is an event or for marking dates for exams
 </div>
@@ -393,7 +396,7 @@ When you run the clear command, all the tasks in the task list of Uni-Fy get del
 
 ### 4.11 Retrieving past commands
 
-Shows the past commands run on **Uni-Fy**.
+Shows the previous commands run on **Uni-Fy**. The user can either type the command or use the up arrow key to go through all the pass commands.
 
 <div markdown="block" class="alert alert-primary">
 
