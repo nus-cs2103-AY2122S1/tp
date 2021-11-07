@@ -376,7 +376,7 @@ LeadsForce's data are saved as a JSON file `[JAR file location]/data/addressbook
 update data directly by editing that data file.
 
 <div markdown="block" class="alert alert-warning">
- <p><img src="images/warn_icon.png" width="30"/><b>If your changes to the data file makes its format invalid, LeadsForce will discard all data and start with an empty data file at the next run.:</b></p>
+ <p><img src="images/warn_icon.png" width="30"/><b>If your changes to the data file makes its format invalid, LeadsForce will discard all data and start with an empty data file at the next run.</b></p>
 </div>
 
 ## 6. Multiple Address Books Feature
