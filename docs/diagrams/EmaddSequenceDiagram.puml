@@ -4,45 +4,45 @@
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
-participant ":MlistCommandParser" as MlistCommandParser LOGIC_COLOR
-participant "ml:MlistCommand" as MlistCommand LOGIC_COLOR
+participant ":EmaddCommandParser" as EmaddCommandParser LOGIC_COLOR
+participant ":EmaddCommand" as EmaddCommand LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
 participant "model:Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("mlist /e 1 /att")
+[-> LogicManager : execute("emadd /e 1 /m 1 /m 2")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("mlist /e 1 /att")
+LogicManager -> AddressBookParser : parseCommand("emadd /e 1 /m 1 /m 2")
 activate AddressBookParser
 
-create MlistCommandParser
-AddressBookParser -> MlistCommandParser
-activate MlistCommandParser
+create EmaddCommandParser
+AddressBookParser -> EmaddCommandParser
+activate EmaddCommandParser
 
-MlistCommandParser --> AddressBookParser
-deactivate MlistCommandParser
+EmaddCommandParser --> AddressBookParser
+deactivate EmaddCommandParser
 
-AddressBookParser -> MlistCommandParser : parse("/e 1 /att")
-activate MlistCommandParser
+AddressBookParser -> EmaddCommandParser : parse("/e 1 /m 1 /m 2")
+activate EmaddCommandParser
 
-create MlistCommand
-MlistCommandParser -> MlistCommand
-activate MlistCommand
+create EmaddCommand
+EmaddCommandParser -> EmaddCommand
+activate EmaddCommand
 
-MlistCommand --> MlistCommandParser : ml
-deactivate MlistCommand
+EmaddCommand --> EmaddCommandParser : 
+deactivate EmaddCommand
 
-MlistCommandParser --> AddressBookParser : ml
-deactivate MlistCommandParser
+EmaddCommandParser --> AddressBookParser : 
+deactivate EmaddCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-MlistCommandParser -[hidden]-> AddressBookParser
-destroy MlistCommandParser
+EmaddCommandParser -[hidden]-> AddressBookParser
+destroy EmaddCommandParser
 
-AddressBookParser --> LogicManager : ml
+AddressBookParser --> LogicManager : 
 deactivate AddressBookParser
 
-ref over LogicManager, Model : MlistCommand Execution
+ref over LogicManager, Model : EmaddCommand Execution
 @enduml

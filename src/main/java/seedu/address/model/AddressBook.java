@@ -147,8 +147,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         for (Event event : events) {
             Set<Member> memberSet = event.getParticipants();
             if (memberSet.contains(target)) {
+                boolean attend = event.hasAttended(target);
                 event.removeParticipant(target);
-                event.addParticipant(editedMember);
+                event.addParticipant(editedMember, attend);
             }
         }
     }

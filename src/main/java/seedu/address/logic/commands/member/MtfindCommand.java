@@ -21,7 +21,7 @@ public class MtfindCommand extends Command {
     public static final String COMMAND_WORD = "mtfind";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all members whose tasks contains any of "
-            + "the specified keywords (case-insensitive) and display them as a list with index numbers.\n"
+            + "the specified keywords (case-insensitive) and display them as a list of members with index numbers.\n"
             + "Parameters: KEYWORD\n"
             + "Example: " + COMMAND_WORD + " form";
 

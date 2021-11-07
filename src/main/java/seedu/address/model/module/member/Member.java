@@ -114,8 +114,7 @@ public class Member extends Module {
                 && otherMember.getPhone().equals(getPhone())
                 && otherMember.getEmail().equals(getEmail())
                 && otherMember.getAddress().equals(getAddress())
-                && otherMember.getPositions().equals(getPositions())
-                && otherMember.getTaskList().equals(getTaskList());
+                && otherMember.getPositions().equals(getPositions());
     }
 
     @Override

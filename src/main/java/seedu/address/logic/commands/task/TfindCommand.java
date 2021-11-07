@@ -18,9 +18,9 @@ public class TfindCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Finds all tasks of the current member whose task names contain any of "
-            + "the specified keywords (case-insensitive) and display them as a list with index numbers.\n"
+            + "the specified keywords (case-insensitive) and display them as a list of tasks with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " submit consent form";
+            + "Example: " + COMMAND_WORD + " submit form";
 
     private final NameContainsKeywordsPredicate<Task> predicate;
 

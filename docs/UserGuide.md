@@ -86,7 +86,7 @@ The User Interface consists of the following components, as shown in the numberi
   * `/ovd` in `tlist`.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `/n NAME /ph PHONE_NUMBER`, `/ph PHONE_NUMBER /n NAME` is also acceptable.
+  e.g. if the command specifies `/n NAME /ph PHONE`, `/ph PHONE /n NAME` is also acceptable.
 
 * If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `/ph 12341234 /ph 56785678`, only `/ph 56785678` will be taken.
@@ -124,7 +124,7 @@ Parameter | Description, Constraints
 --------|------------------
 **NAME** | _Name of member_ <br> - Only alphabets, numbers and spaces allowed i.e. no special characters such as `.`, `'`, or `-`. <br> - No character limit. <br> - All names of members must be unique <br> - If there are 2 members of the same name, it is recommended to add a number behind to uniquely identify the member e.g. John Tan2.
 **POSITIONS** | _Positions of member_ <br> - Same as NAME. <br> - If `-` should be used, replace it with a space e.g. `Vice President`.
-**PHONE_NUMBER** | _Phone number of member_ <br> - Only numbers allowed. <br> - Minimum 3 digits, maximum 15 digits. ([Reason for 15 digits](https://en.wikipedia.org/wiki/Telephone_number#Concept_and_methodology))
+**PHONE** | _Phone number of member_ <br> - Only numbers allowed. <br> - Minimum 3 digits, maximum 15 digits. ([Reason for 15 digits](https://en.wikipedia.org/wiki/Telephone_number#Concept_and_methodology))
 **ADDRESS** | _Physical address of member_ <br> - All characters allowed with no character limit.
 **EMAIL** | _Email address of member_ <br> - Should be of format local-part@domain. e.g. johndoe@example.com
 **MEMBER_INDEX** | _Index of member in the displayed `Member List` column of the application_ <br> - **Must be a positive integer** 1, 2, 3, …​ <br> - Cannot exceed the number of members listed in the displayed `Member List`.
@@ -134,7 +134,7 @@ Parameter | Description, Constraints
 
 Adds a member to Ailurus.
 
-Format: `madd /n NAME /ph PHONE_NUMBER [/em EMAIL] [/a ADDRESS] [/p POSITION]…​`
+Format: `madd /n NAME /ph PHONE [/em EMAIL] [/a ADDRESS] [/p POSITION]…​`
 
 <div markdown="span" class="alert alert-primary"> 
 :bulb: **Tip:** A member can have any number of positions (including 0). A member MUST have a name and phone number, but email address, mailing address and positions are optional.
@@ -170,7 +170,7 @@ Example:
 
 Edits an existing member in Ailurus. 
 
-Format: `medit /m MEMBER_INDEX [/n NAME] [/ph PHONE_NUMBER] [/em EMAIL] [/a ADDRESS] [/p POSITION]…​`
+Format: `medit /m MEMBER_INDEX [/n NAME] [/ph PHONE] [/em EMAIL] [/a ADDRESS] [/p POSITION]…​`
 
 * Edits the member at the specified `MEMBER_INDEX`.
 * At least one of the optional fields must be provided.
@@ -185,7 +185,7 @@ Examples:
 
 #### Locating members by name: `mfind`
 
-Finds members whose names contain any of the given keywords.
+Finds members whose names contain any of the given keywords from all members.
 
 Format: `mfind KEYWORD [MORE_KEYWORDS]…​`
 
@@ -271,7 +271,7 @@ Examples:
 
 #### Locating tasks by name: `tfind`
 
-Find tasks whose names contain any of the given keywords.
+Find tasks whose names contain any of the given keywords for the currently selected member.
 
 Format: `tfind KEYWORD [MORE_KEYWORDS]...`
 
@@ -283,6 +283,7 @@ Format: `tfind KEYWORD [MORE_KEYWORDS]...`
 * Matching is not strict, and will find any name with word that contains `KEYWORD` e.g. `subm` keyword will match `Submit form`
 * Tasks matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Submit form` will return `Submit homework`, `Edit form`
+* Note: list may change if tasks are added, deleted or edited for the selected member, if it affects the filter.
 
 Examples:
 * `tfind form` returns `form` and `submit form`
@@ -298,6 +299,7 @@ Format: `tlist /m MEMBER_INDEX [/dn OPTION] [/ovd]`
 * Only either `/dn` or `/ovd` prefix may be present when in use.
 * `/dn` filters the list of tasks to either done tasks or undone tasks based on `OPTION`. (`/dn n` filters undone tasks, `/dn y` filters done tasks)
 * `/ovd` filters the list to tasks that are overdue (i.e. `Due` date and time has passed or is equal to the current local date and time) and are incomplete.
+* Note: list may change if tasks are added, deleted, marked or edited for the selected member, if it affects the filter.
 
 Example:
 * `tlist /m 2` lists all tasks of the member with index number 2.
@@ -305,7 +307,7 @@ Example:
 * `tlist /m 2 /dn y` lists all tasks of the member with index number 2 that are completed.
 
 #### Mark a task as done : `tdone`
-Marks the specified tasks of the specified member as done.
+Marks the specified task(s) of the currently selected member as done.
 
 Format: `tdone /t TASK_INDEX [/t MORE_TASK_INDEX]…​`
 
@@ -318,7 +320,7 @@ Example:
 * `tdone /t 1 /t 2` marks the 1st and 2nd task on the displayed task list as done in Ailurus. The task in the Member List will turn <span style="color:#3f7318">green</span>, and `Progress` will change to `Complete`. ![tdoneUI](images/tdoneUI.png)
 
 #### Mark a task as undone : `tundone`
-Marks the specified completed task of the specified member as undone. 
+Marks the specified completed task(s) of the currently selected member as undone. 
 
 Format: `tundone /t TASK_INDEX [/t MORE_TASK_INDEX]…​`
 
@@ -331,7 +333,7 @@ Example:
 * `tundone /t 1 /t 2` marks the 1st and 2nd completed task on the displayed task list as undone in Ailurus.
 
 #### Editing a task: `tedit`
-Edits an existing task within Ailurus.
+Edits an existing task within Ailurus in `Task List`.
 
 Format: `tedit /t TASK_INDEX [/n NAME] [/d DATE_TIME]`
 
@@ -347,7 +349,7 @@ Examples:
 
 #### Deleting a task belonging to a member : `tdel`
 
-Deletes the specified task of a specified member from Ailurus. 
+Deletes the specified task of the currently selected member from Ailurus. 
 
 Format: `tdel /t TASK_INDEX`
 
@@ -495,7 +497,7 @@ Examples:
 
 #### Deleting participants from an event : `emdel`
 
-Deletes selected participant(s) to a specific event.
+Deletes selected participant(s) for a specific event.
 
 Format: `emdel /e EVENT_INDEX /m MEMBER_INDEX [/m MORE_MEMBER_INDEX]…​`
 
@@ -546,16 +548,19 @@ Ailurus data are saved as a JSON file `[JAR file location]/data/Ailurus.json`. A
 ## Command summary
 
 ### Member commands
+
 Action | Format, Examples
 --------|------------------
-**madd** | `madd /n NAME /ph PHONE_NUMBER [/em EMAIL] [/a ADDRESS] [/p POSITION]…​` <br> e.g., `madd /n James Ho /ph 22224444 /em jamesho@example.com /a 123, Clementi Rd, 1234665 /p friend /p colleague`
+**madd** | `madd /n NAME /ph PHONE [/em EMAIL] [/a ADDRESS] [/p POSITION]…​` <br> e.g., `madd /n James Ho /ph 22224444 /em jamesho@example.com /a 123, Clementi Rd, 1234665 /p friend /p colleague`
 **mlist** | `mlist [/e EVENT_INDEX] [/att] [/abs]` <br> e.g., `mlist /e 3 /att`
-**medit** | `medit /m MEMBER_INDEX [/n NAME] [/ph PHONE_NUMBER] [/em EMAIL] [/a ADDRESS] [/p POSITION]…​`<br> e.g.,`medit /m 2 /n James Lee /em jameslee@example.com`
+**medit** | `medit /m MEMBER_INDEX [/n NAME] [/ph PHONE] [/em EMAIL] [/a ADDRESS] [/p POSITION]…​`<br> e.g.,`medit /m 2 /n James Lee /em jameslee@example.com`
 **mfind** | `mfind KEYWORD [MORE_KEYWORDS]…​`<br> e.g., `mfind James Jake`
 **mtfind** | `mtfind KEYWORD [MORE_KEYWORDS]…​`<br> e.g., `mtfind form`
 **mdel** | `mdel /m MEMBER_INDEX` <br> e.g., `mdel /m 5`
 
+
 ### Task commands
+
 Action | Format, Examples
 --------|------------------
 **tadd** | `tadd /n NAME /d DATE_TIME /m MEMBER_INDEX [/m MORE_MEMBER_INDEX]…​` <br> e.g., `tadd /n Collect payment from members /d 20/11/2021 11:30 /m 3`
@@ -566,7 +571,9 @@ Action | Format, Examples
 **tedit** | `tedit /t TASK_INDEX [/n NAME] [/d DATE_TIME]` <br> e.g. `tedit /t 2 /n Do OSA Quiz /d 21/10/2021 23:59`
 **tdel** | `tdel /t TASK_INDEX` <br> e.g., `tdel /t 1`
 
+
 ### Event commands
+
 Action | Format, Examples
 --------|------------------
 **eadd** | `eadd /n NAME /d DATE [/m MEMBER_INDEX]…​` <br> e.g., `eadd /n Computing Freshmen Orientation Camp 2021 /d 22/11/2021 /m 4 /m 5 /m 6`
@@ -580,8 +587,11 @@ Action | Format, Examples
 **emadd** | `emadd /e EVENT_INDEX /m MEMBER_INDEX [/m MORE_MEMBER_INDEX]…​` <br> e.g. `emadd /e 1 /m 2 /m 3`
 **emdel** | `emdel /e EVENT_INDEX /m MEMBER_INDEX [/m MORE_MEMBER_INDEX]…​` <br> e.g. `emdel /e 1 /m 2 /m 3`
 
+
 ### Other commands
+
 Action | Format, Examples
 --------|------------------
 **help** | `help`
 **exit** | `exit`
+

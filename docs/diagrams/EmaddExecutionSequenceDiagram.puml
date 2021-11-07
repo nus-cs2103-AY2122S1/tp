@@ -1,10 +1,10 @@
 @startuml
 !include style.puml
-mainframe **sd** MlistCommand Execution
+mainframe **sd** EmaddCommand Execution
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":MlistCommand" as MlistCommand LOGIC_COLOR
+participant ":EmaddCommand" as EmaddCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -13,45 +13,39 @@ participant "model:Model" as Model MODEL_COLOR
 participant "eventToList:Event" as Event MODEL_COLOR
 end box
 
-LogicManager -> MlistCommand : execute(:Model)
-activate MlistCommand
+LogicManager -> EmaddCommand : execute(:Model)
+activate EmaddCommand
 
-MlistCommand -> Model : getFilteredEventList()
+EmaddCommand -> Model : getFilteredEventList()
 activate Model
 
-Model --> MlistCommand : filteredEventList
+Model --> EmaddCommand : filteredEventList
 deactivate Model
 
-MlistCommand --> Event : getParticipants(true)
+EmaddCommand -> Model : getFilteredMemberList()
+activate Model
+
+Model --> EmaddCommand : filteredMemberList
+deactivate Model
+
+EmaddCommand -> Event : addParticipants(membersToBeAdded)
 activate Event
 
-Event --> MlistCommand : memberList
+Event --> EmaddCommand
 deactivate Event
 
-MlistCommand -> Model : setCurrentEvent(eventToList)
-activate Model
-
-MlistCommand -> Model : updateFilteredMemberList(...)
-note right
-    the ... implies the predicate
-    used to filter only members in
-    the participantList provided
-end note
-Model --> MlistCommand
-deactivate Model
-
 create CommandResult
-MlistCommand -> CommandResult
+EmaddCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> MlistCommand
+CommandResult --> EmaddCommand
 deactivate CommandResult
 
-MlistCommand --> LogicManager : result
-deactivate MlistCommand
+EmaddCommand --> LogicManager : result
+deactivate EmaddCommand
 
-MlistCommand -[hidden]-> LogicManager
-destroy MlistCommand
+EmaddCommand -[hidden]-> LogicManager
+destroy EmaddCommand
 
 [<--LogicManager
 deactivate LogicManager

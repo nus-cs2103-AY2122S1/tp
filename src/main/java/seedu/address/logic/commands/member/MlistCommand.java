@@ -26,13 +26,13 @@ public class MlistCommand extends Command {
     public static final String COMMAND_WORD = "mlist";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all members in Ailurus with filters. \n"
-            + "Only one of " + PREFIX_ATTEND + "or " + PREFIX_ABSENT + "may be present\n"
+            + "Only one of " + PREFIX_ATTEND + "or " + PREFIX_ABSENT + "may be present if EVENT_INDEX is present.\n"
             + "Parameters: [" + PREFIX_EVENT_INDEX + "EVENT_INDEX (must be a positive integer)] "
-            + "[" + PREFIX_ATTEND + "] "
-            + "[" + PREFIX_ABSENT + "] \n"
+            + "[" + PREFIX_ATTEND.toString().trim() + "] "
+            + "[" + PREFIX_ABSENT.toString().trim() + "] \n"
             + "Examples: " + COMMAND_WORD + " " + PREFIX_EVENT_INDEX + "1\n"
-            + COMMAND_WORD + " " + PREFIX_EVENT_INDEX + "1" + PREFIX_ATTEND + "\n"
-            + COMMAND_WORD + " " + PREFIX_EVENT_INDEX + "1" + PREFIX_ABSENT + "\n";
+            + COMMAND_WORD + " " + PREFIX_EVENT_INDEX + "1 " + PREFIX_ATTEND + "\n"
+            + COMMAND_WORD + " " + PREFIX_EVENT_INDEX + "1 " + PREFIX_ABSENT + "\n";
 
     public static final String MESSAGE_SUCCESS = "Member(s) listed: %1$s members %2$s";
 

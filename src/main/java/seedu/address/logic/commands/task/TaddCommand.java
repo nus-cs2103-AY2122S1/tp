@@ -23,12 +23,12 @@ import seedu.address.model.module.task.Task;
  */
 public class TaddCommand extends Command {
     public static final String COMMAND_WORD = "tadd";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task list of a member. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task list of a member.\n"
             + "Parameters: "
-            + PREFIX_NAME + "TASKNAME "
-            + PREFIX_DATE + "TASKDEADLINE "
+            + PREFIX_NAME + "NAME "
+            + PREFIX_DATE + "DATE_TIME "
             + PREFIX_MEMBER_INDEX + "MEMBER_INDEX "
-            + "[" + PREFIX_MEMBER_INDEX + "MEMBER_INDEX]...\n"
+            + "[" + PREFIX_MEMBER_INDEX + "MORE_MEMBER_INDEX]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Submit form "
             + PREFIX_DATE + "21/10/2021 23:59 "

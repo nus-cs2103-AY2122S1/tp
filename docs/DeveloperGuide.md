@@ -122,10 +122,10 @@ How the `Logic` component works:
 1. The command can communicate with the `Model` when it is executed (e.g. to add a member).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
 
-The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("mdel /m 1")` 
+The Sequence Diagram below illustrates the interactions within the `Logic` and `Model` components for the `execute("mdel /m 1")` 
 API call.
 
-![Interactions Inside the Logic Component for the `mdel /m 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic and Model Components for the `mdel /m 1` Command](images/MdelSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -272,11 +272,27 @@ This command will display all the tasks of the first member of the member list.
 
 ### List members who attended event
 
-[comment]: <> (TODO: Leeroy)
+This feature allows Ailurus users to list all members who have attended a particular event, identified by the event's `EVENT_INDEX` displayed in the current event list shown.
+
+This feature can be accessed using `mlist` command with parameters `/e EVENT_INDEX` and `/att`. Once the user enters the command, the **Sequence Diagram** below illustrates the interactions within the `Logic` and `Model` components for the `execute("mlist /e 1 /att")` API call.
+
+<img src="images/MlistSequenceDiagram.png" width = "600" />
+
+After the `LogicManager` receives the new `MlistCommand` object, `MlistCommand` would call the appropriate commands from `Model` and `Event` to get the correct index of the event from the filtered event list, get the list of members who attended the specific event, and set the current event while updating the filtered member list, as shown below.
+
+<img src="images/MlistExecutionSequenceDiagram.png" width = "600" />
 
 ### Add member to an event
 
-[comment]: <> (TODO: Leeroy)
+This feature allows Ailurus users to add a list of members, identified by the members' `MEMBER_INDEX` displayed in the current member list shown, to a specific event, identified by the event's `EVENT_INDEX` displayed in the current event list shown.
+
+This feature can be accessed using `emadd` command with parameters `/e EVENT_INDEX` and multiple `/m MEMBER_INDEX` to add multiple members to an event. Once the user enters the command, the **Sequence Diagram** below illustrates the interactions within the `Logic` and `Model` components for the `execute("emadd /e 1 /m 1 /m 2")` API call.
+
+<img src="images/EmaddSequenceDiagram.png" width = "600" />
+
+After the `LogicManager` receives the new `EmaddCommand` object, `EmaddCommand` would call the appropriate commands from `Model` and `Event` to get the indices from the current filtered event and member list, and add the members to be added in the event as shown below.
+
+<img src="images/EmaddExecutionSequenceDiagram.png" width = "600" />
 
 ### Add event to Event List
 
@@ -717,6 +733,17 @@ testers are expected to do more *exploratory* testing.
 
 #### Adding a member
 
+1. Adding a member to the `Member List`. 
+
+   1. Test case: `madd /n James Tan /ph 91234567`<br>
+   Expected: New member with name and phone number is present, but email and address are `NIL`.
+
+   2. Test case: `madd /n Amy Lee2 /ph 98765432 /em amylee89@example.com /a Amos Street 52 Blk 22 #05-12 /p Finance Assistant /p Secretary`<br>
+   Expected: New member with all fields present, including 2 positions `Finance Assistant` and `Secretary`.
+
+   3. Test case: `madd /n Jamie Lee /ph 92345678 /p Vice-President`
+   Expected: Error message that positions should only contain alphanumeric characters and spaces, so `-` character is not allowed.
+
 #### Deleting a member
 
 1. Deleting a member while all members are being shown
@@ -734,7 +761,24 @@ testers are expected to do more *exploratory* testing.
 
 #### Listing members of an event
 
+1. Listing all members participating in an event in `EVENT LIST`
+
+   1. Prerequisite: `EVENT LIST` must have at least one event, and the event should have at least one member participating.
+
+   2. Test case: `mlist /e 1`
+   Expected: List all participating members in the event in `MEMBER LIST` column
+
+   3. Test case: `mlist /e 0`
+   Expected: Error message that `MEMBER_INDEX` should be a non-zero unsigned integer.
+
 #### Finding all members with a task
+
+1. Listing all members with a task that contains specific word(s) (non-exact match)
+   1. Prerequisite: `MEMBER LIST` must have at least one member with a task with the word `form` in it
+   2. Test case: `mtfind form`
+   Expected: List only members with `form` word in the list of tasks.
+   3. Test case: `mtfind -`
+   Expected: 0 members listed, because `-` is not a valid name for task name.
 
 ### Event tests
 

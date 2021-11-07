@@ -43,7 +43,7 @@ public class EeditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_DATE + "DATE] "
             + "[" + PREFIX_MEMBER_INDEX + "MEMBER_INDEX]...\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_EVENT_INDEX + " 1 "
+            + "Example: " + COMMAND_WORD + " " + PREFIX_EVENT_INDEX + "1 "
             + PREFIX_NAME + "Freshman Orientation Week "
             + PREFIX_DATE + "11/11/2021 "
             + PREFIX_MEMBER_INDEX + "1 " + PREFIX_MEMBER_INDEX + "2";

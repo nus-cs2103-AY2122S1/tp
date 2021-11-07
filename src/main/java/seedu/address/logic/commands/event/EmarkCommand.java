@@ -29,8 +29,9 @@ public class EmarkCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Mark members identified by the corresponding index numbers.\n"
             + "Parameters: "
-            + PREFIX_EVENT_INDEX + "EVENT_INDEX (must be a positive integer)"
-            + PREFIX_MEMBER_INDEX + "MEMBER_INDEX (must be a positive integer)...\n"
+            + PREFIX_EVENT_INDEX + "EVENT_INDEX (must be a positive integer) "
+            + PREFIX_MEMBER_INDEX + "MEMBER_INDEX (must be a positive integer) ["
+            + PREFIX_MEMBER_INDEX + "MORE_MEMBER_INDEX]…\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_EVENT_INDEX + "1 "
             + PREFIX_MEMBER_INDEX + "1 " + PREFIX_MEMBER_INDEX + "2";

@@ -5,7 +5,7 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":MlistCommandParser" as MlistCommandParser LOGIC_COLOR
-participant "ml:MlistCommand" as MlistCommand LOGIC_COLOR
+participant ":MlistCommand" as MlistCommand LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
@@ -32,16 +32,16 @@ create MlistCommand
 MlistCommandParser -> MlistCommand
 activate MlistCommand
 
-MlistCommand --> MlistCommandParser : ml
+MlistCommand --> MlistCommandParser : 
 deactivate MlistCommand
 
-MlistCommandParser --> AddressBookParser : ml
+MlistCommandParser --> AddressBookParser : 
 deactivate MlistCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
 MlistCommandParser -[hidden]-> AddressBookParser
 destroy MlistCommandParser
 
-AddressBookParser --> LogicManager : ml
+AddressBookParser --> LogicManager : 
 deactivate AddressBookParser
 
 ref over LogicManager, Model : MlistCommand Execution

@@ -124,7 +124,7 @@ public class Event extends Module {
     }
 
     /**
-     * Add a set of members to the event.
+     * Add a set of members to the event with all attendance initialised as false.
      *
      * @param members to be added
      */
@@ -139,8 +139,8 @@ public class Event extends Module {
      *
      * @param member to be added
      */
-    public void addParticipant(Member member) {
-        participants.put(member, false);
+    public void addParticipant(Member member, boolean attend) {
+        participants.put(member, attend);
     }
 
     /**
