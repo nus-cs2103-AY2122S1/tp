@@ -370,20 +370,22 @@ which is then used to trigger updates to the displayed friends list.
 
 #### Design considerations:
 
-* Consideration between filtering by hour and day or by minute and day.
+Consideration #1:
+Recommend command allows users to filter by hour and day instead of filtering by minute and day.
 
-Decision:
-  * We decided to limit the filtering to a **chosen hour of a chosen day** in order to both be consistent with 
-    the [schedule](#schedule-feature) feature and as we find that accuracy to the exact minute is not necessary as our 
-    target users (students) usually have weekly schedules based on hourly blocks.
+Decision #1:
+We decided to limit the filtering to a **chosen hour of a chosen day** in order to both be consistent with 
+the [schedule](#schedule-feature) feature and as we find that accuracy to the exact minute is not necessary as our 
+target users (students) usually have weekly schedules based on hourly blocks.
 
-* Use of predicates and comparators for filtering and ordering the filtered and sorted friends list.
+Consideration #2:
+Usage of predicates and comparators for filtering and ordering the filtered and sorted friends list.
 
-Decision: 
-  * We decided to implement predicates and comparators for the implementation of Recommend command which reduces the coupling 
-    between the `RecommendCommand` and the `Model` component. Hence, we have implemented general methods 
-    such as `ModelManager#updateFilteredAndSortedFriendsList(Predicate, Comparator)` which are not dependent 
-    on the expected behaviour of Recommend, allowing us to change the Recommend feature without affecting the `Model` component.
+Decision #2: 
+We decided to implement predicates and comparators for the implementation of Recommend command which reduces the coupling 
+between the `RecommendCommand` and the `Model` component. Hence, we have implemented general methods 
+such as `ModelManager#updateFilteredAndSortedFriendsList(Predicate, Comparator)` which are not dependent 
+on the expected behaviour of Recommend, allowing us to change the Recommend feature without affecting the `Model` component.
 
 --------------------------------------------------------------------------------------------------------------------
 
