@@ -53,26 +53,26 @@ public class AddCommandTest {
 
     @Test
     public void equals() {
-        Contact alice = new ContactBuilder().withName("Alice").build();
+        Contact airzone = new ContactBuilder().withName("AIRZONE").build();
         Contact bob = new ContactBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
+        AddCommand addAirzoneCommand = new AddCommand(airzone);
         AddCommand addBobCommand = new AddCommand(bob);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertTrue(addAirzoneCommand.equals(addAirzoneCommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        AddCommand addAirzoneCommandCopy = new AddCommand(airzone);
+        assertTrue(addAirzoneCommand.equals(addAirzoneCommandCopy));
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertFalse(addAirzoneCommand.equals(1));
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertFalse(addAirzoneCommand.equals(null));
 
         // different contact -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        assertFalse(addAirzoneCommand.equals(addBobCommand));
     }
 
     /**

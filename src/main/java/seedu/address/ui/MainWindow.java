@@ -142,14 +142,36 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Opens the Online User Guide if possible, else opens the secondary internal help window.
+     * A helper method that opens either user guide or command summary in the user's default browser depending on
+     * the input {@code type}.
+     * @param type an int that determines the page to be opened.
+     * @throws IOException if the user default browser is not found, or it fails to be launched, or the default handler
+     * application failed to be launched.
      */
-    public void handleHelp() {
+    private void openSupport(int type) throws IOException {
+        if (type == 1) {
+            helpWindow.openUserGuide();
+        } else if (type == 2) {
+            helpWindow.openCommandSummary();
+        } else {
+            handleBackUpHelp();
+        }
+    }
+
+    /**
+     * A method that opens either user guide or command summary in the user's default browser depending on
+     * the input {@code type}.
+     * When type == 1, user guide will be attempted to be opened.
+     * When type == 2, command summary will be attempted to be opened.
+     * @param type an int that determines the page to be opened.
+     */
+    private void handleSupport(int type) {
+        assert type == 1 || type == 2;
         if (Desktop.isDesktopSupported()) {
             try {
-                helpWindow.openUserGuide();
+                openSupport(type);
             } catch (IOException | SecurityException | UnsupportedOperationException ex) {
-                logger.warning(ex.getMessage());
+                logger.info(ex.getMessage());
                 handleBackUpHelp();
             }
         } else {
@@ -158,19 +180,17 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Opens the Online User Guide if possible, else opens the secondary internal help window.
+     */
+    public void handleHelp() {
+        handleSupport(1);
+    }
+
+    /**
      * Opens the online Command Summary if possible, else opens the secondary internal help window.
      */
     public void handleCommandSummary() {
-        if (Desktop.isDesktopSupported()) {
-            try {
-                helpWindow.openCommandSummary();
-            } catch (IOException | SecurityException | UnsupportedOperationException ex) {
-                logger.warning(ex.getMessage());
-                handleBackUpHelp();
-            }
-        } else {
-            handleBackUpHelp();
-        }
+        handleSupport(2);
     }
 
     /**

@@ -165,7 +165,6 @@ public class AddCommandParserTest {
         assertParseFailure(parser, CATEGORY_DESC_ATT + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
             + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + INVALID_RATING_DESC, Rating.MESSAGE_CONSTRAINTS);
 
-        // Guessing there is an issue with the way it is parsed. Doesn't look out for
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + CATEGORY_DESC_ATT + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + INVALID_ADDRESS_DESC + VALID_RATING_BOB, Name.MESSAGE_CONSTRAINTS);

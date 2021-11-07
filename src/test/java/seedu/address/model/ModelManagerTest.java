@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CONTACTS;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalContacts.ALICE;
-import static seedu.address.testutil.TypicalContacts.BENSON;
+import static seedu.address.testutil.TypicalContacts.AIRZONE;
+import static seedu.address.testutil.TypicalContacts.BATTLEBOX;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -80,13 +80,13 @@ public class ModelManagerTest {
 
     @Test
     public void hasContact_contactNotInAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasContact(ALICE));
+        assertFalse(modelManager.hasContact(AIRZONE));
     }
 
     @Test
     public void hasContact_contactInAddressBook_returnsTrue() {
-        modelManager.addContact(ALICE);
-        assertTrue(modelManager.hasContact(ALICE));
+        modelManager.addContact(AIRZONE);
+        assertTrue(modelManager.hasContact(AIRZONE));
     }
 
     @Test
@@ -96,7 +96,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withContact(ALICE).withContact(BENSON).build();
+        AddressBook addressBook = new AddressBookBuilder().withContact(AIRZONE).withContact(BATTLEBOX).build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -118,7 +118,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
 
         // different filteredList -> returns false
-        String[] keywords = ALICE.getName().fullName.split("\\s+");
+        String[] keywords = AIRZONE.getName().fullName.split("\\s+");
         modelManager.updateFilteredContactList(new IsFindableContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
