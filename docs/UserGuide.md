@@ -228,7 +228,7 @@ Scroll down to the bottom and click on `recruitIn.jar`.
 ### Viewing help : `help`
 [Table of contents](#table-of-contents)
 
-Shows a message explaining how to access the help page.
+The `help` command shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -237,7 +237,7 @@ Format: `help`
 ### Adding an applicant: `add`
 [Table of contents](#table-of-contents)
 
-Adds an applicant to RecruitIn.
+The `add` command adds an applicant to RecruitIn.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL_ADDRESS r/ROLE et/EMPLOYMENT_TYPE s/EXPECTED_SALARY l/LEVEL_OF_EDUCATION y/YEARS_OF_EXPERIENCE [t/TAG] [i/INTERVIEW] [nt/NOTES]​`
 
@@ -281,7 +281,7 @@ After: ![images](images/AddAfter.png)
 ### Editing an applicant : `edit`
 [Table of contents](#table-of-contents)
 
-Edits an applicant's with specified index in RecruitIn.
+The `edit` command edits an applicant's with specified index in RecruitIn.
 
 Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMPLOYMENT_TYPE]
  [s/EXPECTED_SALARY] [l/LEVEL_OF_EDUCATION] [y/YEARS_OF_EXPERIENCE] [t/TAG] [i/INTERVIEW] [nt/NOTES]`
@@ -329,7 +329,7 @@ After: ![images](images/EditAfter.png)
 ### Listing all applicants : `list`
 [Table of contents](#table-of-contents)
 
-Shows a list of all applicants in RecruitIn.
+The `list` command shows a list of all applicants in RecruitIn.
 
 Format: `list`
 
