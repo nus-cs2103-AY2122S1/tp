@@ -22,6 +22,8 @@ import seedu.academydirectory.model.student.Student;
 public class StudentCard extends UiPart<Region> {
 
     private static final String FXML = "StudentListCard.fxml";
+    private static final String STUDENT_IMAGE = "/images/student.png";
+
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     /**
@@ -30,9 +32,7 @@ public class StudentCard extends UiPart<Region> {
      * or an exception will be thrown by JavaFX during runtime.
      *
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AcademyDirectory level 4</a>
-     * TODO: Change view layout of student card later
      */
-    private final Student student;
 
     @FXML
     private HBox cardPane;
@@ -49,10 +49,6 @@ public class StudentCard extends UiPart<Region> {
     @FXML
     private Label telegram;
     @FXML
-    private Label studioRecord;
-    @FXML
-    private Label assessment;
-    @FXML
     private FlowPane tags;
     @FXML
     private ImageView image;
@@ -67,22 +63,22 @@ public class StudentCard extends UiPart<Region> {
      */
     public StudentCard(Student student, int displayedIndex, CommandExecutor commandExecutor) {
         super(FXML);
-        this.student = student;
+        this.commandExecutor = commandExecutor;
+
+        this.name.setText(student.getName().fullName);
         this.displayedIndex = displayedIndex;
-        id.setText(displayedIndex + ". ");
-        name.setText(student.getName().fullName);
-        phone.setText(student.getPhone().toString());
-        email.setText(student.getEmail().value);
-        studioRecord.setText(student.getStudioRecord().toString());
-        telegram.setText(student.getTelegram().value);
-        assessment.setText(student.getAssessment().toString());
+        this.id.setText(displayedIndex + ". ");
+        image.setImage(new Image(STUDENT_IMAGE));
+
+        this.phone.setText(student.getPhone().toString());
+        this.email.setText(student.getEmail().toString());
+        this.telegram.setText(student.getTelegram().toString());
+
         student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        // Studio Record and Assessment will be removed for better aesthetics
-        container.getChildren().removeAll(studioRecord, assessment, telegram);
-        image.setImage(new Image("/images/student.png"));
-        this.commandExecutor = commandExecutor;
+
+        container.getChildren().remove(telegram);
     }
 
     @Override
@@ -100,7 +96,8 @@ public class StudentCard extends UiPart<Region> {
         // state check
         StudentCard card = (StudentCard) other;
         return id.getText().equals(card.id.getText())
-                && student.equals(card.student);
+                && this.name.equals(card.name) && this.phone.equals(card.phone)
+                && this.email.equals(card.email) && this.telegram.equals(card.telegram);
     }
 
     /**

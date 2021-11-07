@@ -50,11 +50,13 @@ Given below are my contributions to the project.
     
   * **Developer Guide**:
       * Added implementation details of the existing `add` and `edit` features.
-      * Added some Non-Functional Requirements (Pull request [\#201](https://github.com/AY2122S1-CS2103T-T15-3/tp/pull/201))
+      * Added Non-Functional Requirements. (Pull request [\#201](https://github.com/AY2122S1-CS2103T-T15-3/tp/pull/201))
       * Add implementation details of `participation`, `attendance` and `sort` features. (Pull requests [\#91](https://github.com/AY2122S1-CS2103T-T15-3/tp/pull/91), [\#92](https://github.com/AY2122S1-CS2103T-T15-3/tp/pull/92))
         * Designed the UML diagrams for all 3 features.
       * Refactored existing Address Book 3 diagrams to fit Academy Directory. (Pull request [\#91](https://github.com/AY2122S1-CS2103T-T15-3/tp/pull/91))
 
   * **Community**:
-      * PRs reviewed (with non-trivial review comments): [\#148](https://github.com/AY2122S1-CS2103T-T15-3/tp/pull/148), [\#198](https://github.com/AY2122S1-CS2103T-T15-3/tp/pull/198)
+      * PRs reviewed (with non-trivial review comments): [\#148](https://github.com/AY2122S1-CS2103T-T15-3/tp/pull/148), [\#198](https://github.com/AY2122S1-CS2103T-T15-3/tp/pull/198), [\#229](https://github.com/AY2122S1-CS2103T-T15-3/tp/pull/229)
+      * Actively contributed to all team meetings and discussions for all related releases.
+      * Reported bugs and suggestions for other teams in the class i.e. PED.
 

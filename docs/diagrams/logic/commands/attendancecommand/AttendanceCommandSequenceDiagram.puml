@@ -33,7 +33,6 @@ loop for each Index in indexArrayList
     ref over ac : UpdateModelAttendance
 end loop
 
-ac -> mm  : updateFilteredStudentsList(PREDICATE_SHOW_ALL_STUDENTS)
 
 
 create cr
