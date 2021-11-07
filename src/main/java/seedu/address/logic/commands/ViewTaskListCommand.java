@@ -87,15 +87,7 @@ public class ViewTaskListCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         if (isDisplayAll) {
-            if (hasFilter) {
-                model.setViewAllTasksFindPred(new TaskMatchesKeywordPredicate(keywords));
-            } else {
-                model.setViewAllTasksFindPred(task -> true);
-            }
-            CommandResult cr = new CommandResult(MESSAGE_VIEW_TASKS_ALL_SUCCESS);
-            cr.setDisplayAllTaskList();
-            cr.setWriteCommand();
-            return cr;
+            return executeViewAllTasks(model);
         }
 
         List<Person> lastShownList = model.getFilteredPersonList();
@@ -110,12 +102,24 @@ public class ViewTaskListCommand extends Command {
         } else {
             model.displayPersonTaskList(personToView);
         }
-
+        model.setIsViewAllTasks(false);
         CommandResult cr = new CommandResult(String.format(MESSAGE_VIEW_TASKS_SUCCESS, personToView.getName()));
         cr.setDisplaySingleTaskList();
         return cr;
     }
 
+    private CommandResult executeViewAllTasks(Model model) {
+        if (hasFilter) {
+            model.setViewAllTasksFindPred(new TaskMatchesKeywordPredicate(keywords));
+        } else {
+            model.setViewAllTasksFindPred(task -> true);
+        }
+        model.setIsViewAllTasks(true);
+        CommandResult cr = new CommandResult(MESSAGE_VIEW_TASKS_ALL_SUCCESS);
+        cr.setDisplayAllTaskList();
+        cr.setWriteCommand();
+        return cr;
+    }
 
 
     @Override
