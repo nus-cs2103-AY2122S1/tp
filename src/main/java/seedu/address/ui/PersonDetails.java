@@ -46,6 +46,8 @@ public class PersonDetails extends UiPart<Region> {
     @FXML
     private VBox cardPane;
     @FXML
+    private VBox addressWindow;
+    @FXML
     private Label name;
     @FXML
     private Label telegram;
@@ -111,6 +113,8 @@ public class PersonDetails extends UiPart<Region> {
             address.setText("-");
         } else {
             address.setText(person.getAddress().value);
+            address.prefWidthProperty().bind(detailOptional.widthProperty());
+            address.setWrapText(true);
         }
         if (person.getEmail().value.isBlank()) {
             email.setText("-");

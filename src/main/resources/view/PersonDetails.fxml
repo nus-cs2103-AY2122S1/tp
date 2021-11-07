@@ -78,7 +78,7 @@
                   <Insets bottom="10.0" left="5.0" />
                </VBox.margin>
             </VBox>
-            <VBox id="detailOptional" fx:id="detailOptional" prefHeight="200.0" prefWidth="100.0">
+            <VBox id="detailOptional" fx:id="detailOptional" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
                <children>
                   <VBox>
                      <VBox.margin>
@@ -98,7 +98,7 @@
                         <Line endX="200.0" startX="-100.0" stroke="#434343" strokeWidth="2.0" />
                      </children>
                   </VBox>
-                  <VBox>
+                  <VBox fx:id="addressWindow">
                      <VBox.margin>
                         <Insets bottom="10.0" left="5.0" />
                      </VBox.margin>
@@ -108,7 +108,7 @@
                               <Insets bottom="10.0" />
                            </VBox.margin>
                         </Label>
-                        <Label fx:id="address" style="-fx-text-fill: #e8e8e8#e8e8e8; -fx-font-size: 0.95em;" text="Label" textFill="#e8e8e8">
+                        <Label fx:id="address" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="10.0" style="-fx-text-fill: #e8e8e8#e8e8e8; -fx-font-size: 0.95em;" text="Label" textFill="#e8e8e8" wrapText="true">
                            <VBox.margin>
                               <Insets bottom="5.0" />
                            </VBox.margin>
@@ -126,7 +126,7 @@
                               <Insets bottom="10.0" />
                            </VBox.margin>
                         </Label>
-                        <Label fx:id="email" style="-fx-text-fill: #e8e8e8#e8e8e8; -fx-font-size: 0.95em;" text="Label" textFill="#e8e8e8">
+                        <Label fx:id="email" style="-fx-text-fill: #e8e8e8#e8e8e8; -fx-font-size: 0.95em;" text="Label" textFill="#e8e8e8" wrapText="true">
                            <VBox.margin>
                               <Insets bottom="5.0" />
                            </VBox.margin>
