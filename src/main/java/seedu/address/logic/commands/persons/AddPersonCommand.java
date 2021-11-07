@@ -23,7 +23,7 @@ public class AddPersonCommand extends Command {
     public static final String COMMAND_WORD = "-a";
 
     public static final String MESSAGE_USAGE = PERSON_COMMAND + " " + COMMAND_WORD
-            + ": Adds a person to the address book. "
+            + ": Adds a student to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -69,6 +69,6 @@ public class AddPersonCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddPersonCommand // instanceof handles nulls
-                && toAdd.equals(((AddPersonCommand) other).toAdd));
+                && toAdd.hasSameData(((AddPersonCommand) other).toAdd));
     }
 }

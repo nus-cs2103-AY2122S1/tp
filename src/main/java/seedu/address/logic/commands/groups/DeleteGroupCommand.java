@@ -24,7 +24,7 @@ public class DeleteGroupCommand extends Command {
     public static final String MESSAGE_USAGE = GROUP_COMMAND + " " + COMMAND_WORD
             + ": Deletes the group identified by the index number used in the displayed group list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Example: " + "group " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_GROUP_SUCCESS = "Deleted Group: %1$s";
 
