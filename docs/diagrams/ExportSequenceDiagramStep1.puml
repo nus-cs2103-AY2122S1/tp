@@ -31,7 +31,7 @@ activate ExportCommand
 ExportCommand --> ExportCommandParser : e
 deactivate ExportCommand
 
-ExportCommandParser --> AddressBookParser
+ExportCommandParser --> AddressBookParser : e
 deactivate ExportCommandParser
 
 AddressBookParser --> LogicManager : e

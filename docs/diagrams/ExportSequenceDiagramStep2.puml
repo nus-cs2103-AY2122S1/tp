@@ -23,6 +23,9 @@ activate ExportCommand
 ExportCommand -> Model : getAddressBook()
 activate Model
 
+Model --> ExportCommand : currentAddressBook
+deactivate Model
+
 alt .json
 ExportCommand -> ExportCommand : exportAddressBookToJson()
 activate ExportCommand
@@ -36,8 +39,7 @@ ExportCommand --> ExportCommand
 deactivate
 
 end
-Model --> ExportCommand : currentAddressBook
-deactivate Model
+
 
 create JsonAddressBookStorage
 ExportCommand -> JsonAddressBookStorage
