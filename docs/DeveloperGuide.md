@@ -830,28 +830,286 @@ testers are expected to do more *exploratory* testing.
    b. Re-launch the app by double-clicking the jar file.<br>
    Expected: The most recent window size and location is retained.
 
-3. _{ more test cases …​ }_
 
-### Adding an item
+<div class="code-example bg-grey-lt-000">
+:information_source: Click on any of the test cases to view them.
+</div>
 
-1. Adding a new item into the inventory
+*Mutating the Inventory*{: .text-purple-000 }
 
-   a. Test case: `add Milk id/111111 c/1 sp/2.4 cp/1.2`<br>
-   Expected: Item Milk is added to the list. Milk should have the id #111111, count 1, sales price $2.40, and cost price
-   $1.20.
+<details markdown="block">
+  <summary>
+    <b>Adding Item(s)</b>
+  </summary>
+  {: .text-delta }
 
-   b. Test case: `add Milk c/1 sp/2.4 sp/1.2`<br>
-   Expected: No Milk added to the inventory. BogoBogo notifies user to specify id as well.
+```
+    1. Test case: `add milk id/232433 c/4 cp/3.0 sp/3.0`
+       <br>Expected: Milk item is successfully added into the inventory.
+    2. Test case: `add milk id/232433 c/4 sp/3.0`
+       <br>Expected: Bogobogo displays error saying that name, id, costprice and salesprice must all be provided.
+    3. Test case: `add milk`
+       <br>Expected: Milk item is replenished by count 1 in the inventory.
+    4. Test case: `add id/247937`
+       <br>Expected: Item with the specified id is replenished by count 1 in the inventory.
+```
+</details>
 
-   c. Test case: `add n/Milk c/1 sp/2.4 sp/1.2`<br>
-   Expected: No Milk added to the inventory. BogoBogo notifies of incorrect command format.
 
-2. _{ more test cases …​ }_
+<details markdown="block">
+  <summary>
+    <b>Deleting an Item</b>
+  </summary>
+  {: .text-delta }
 
-### Saving data
+```
+    1. Test case: `delete milk id/232433`
+       <br>Expected: Milk item is successfully deleted from the inventory.
+    2. Test case: `delete milk`
+       <br>Expected: Milk item is successfully deleted from the inventory.
+    3. Test case: `delete id/232433`
+       <br>Expected: Milk item is successfully deleted from the inventory.
+    4. Test case: `delete milk cp/3.0`
+       <br>Expected: Milk is not deleted. Bogobogo outputs error that DeleteCommand does not require costprice, salesprice and tag fields.
+```
 
-1. Dealing with missing/corrupted data files
+</details>
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+<details markdown="block">
+  <summary>
+    <b>Removing Item(s)</b>
+  </summary>
+  {: .text-delta }
 
-1. _{ more test cases …​ }_
+```
+    1. Test case: `remove milk id/232433`
+       <br>Expected: Milk item is successfully removed from the inventory.
+    2. Test case: `remove milk`
+       <br>Expected: Milk item is successfully removed from the inventory.
+    3. Test case: `remove id/232433`
+       <br>Expected: Milk item is successfully removed from the inventory.
+    4. Test case: `remove id/232433 c/5`
+       <br>Expected: x5 Milk item is successfully removed from the inventory.
+    5. Test case: `remove milk cp/3.0`
+       <br>Expected: Milk is removed. Bogobogo outputs message that extra price fields are ignored.
+```
+</details>
+
+<details markdown="block">
+  <summary>
+    <b>Editing an Item</b>
+  </summary>
+  {: .text-delta }
+
+```
+    1. Test case: `edit 0 n/milk`
+       <br>Expected: Bogobogo outputs error as index is 1 based.
+    2. Test case: `edit 1 n/milk`
+       <br>Expected: Name of the first item in the inventory is edited to milk.
+    3. Test case: `edit 1 id/329749`
+       <br>Expected: Id of the first item in the inventory is edited to 329749.
+    4. Test case: `edit 1 cp/3.0 sp/3.0`
+       <br>Expected: Costprice and Salesprice of the first item in the inventory is edited to $3.0.
+    5. Test case: `edit 1 c/5`
+       <br>Expected: First item is not edited. Bogobogo outputs error that count cannot be edited directly.
+```
+</details>
+
+<details markdown="block">
+  <summary>
+    <b>Clearing the Inventory</b>
+  </summary>
+  {: .text-delta }
+
+```
+    1. Test case: `clear`
+       <br>Expected: Bogobogo clears the entire inventory.
+    2. Test case: `clear milkandcookie`
+       <br>Expected: Extra words are ignored. Bogobogo clears the entire inventory.
+```
+</details>
+
+*Navigating the Inventory*{: .text-purple-000 .text-gamma }
+
+<details markdown="block">
+  <summary>
+    <b>Finding an Item</b>
+  </summary>
+  {: .text-delta }
+
+```
+    1. Test case: `find n/milk`
+       <br>Expected: Bogobogo outputs the list of items that matches the field specified.
+    2. Test case: `find n/milk n/cookie`
+       <br>Expected: Bogobogo outputs the list of items that matches the field specified.
+    3. Test case: `find id/329749`
+       <br>Expected: Bogobogo outputs the list of items that matches the field specified.
+    4. Test case: `find t/popular`
+       <br>Expected: Bogobogo outputs the list of items that matches the field specified.
+    5. Test case: `find cp/3.0`
+       <br>Expected: Bogobogo outputs error that there is unexpected prefix identified.
+    6. Test case: `find cookie`
+       <br>Expected: Bogobogo outputs error that the command format is invalid.
+```
+</details>
+
+<details markdown="block">
+  <summary>
+    <b>Sorting the Inventory</b>
+  </summary>
+  {: .text-delta }
+
+```
+    1. Test case: `sort`
+       <br>Expected: Bogobogo outputs error that the command format is invalid.
+    2. Test case: `sort n/`
+       <br>Expected: Bogobogo outputs the list of items sorted by name in alphabetical order.
+    3. Test case: `sort n/milk`
+       <br>Expected: Bogobogo outputs error that the command format is invalid.
+    4. Test case: `sort hello`
+       <br>Expected: Bogobogo outputs error that the command format is invalid.
+```
+</details>
+
+<details markdown="block">
+  <summary>
+    <b>Listing the Inventory</b>
+  </summary>
+  {: .text-delta }
+
+```
+    1. Test case: `list`
+       <br>Expected: Bogobogo outputs the list of items in the inventory.
+    2. Test case: `list oo`
+       <br>Expected: Bogobogo outputs error that the command format is invalid.
+    3. Test case: `list n/milk`
+       <br>Expected: Bogobogo outputs error that the command format is invalid.
+```
+
+</details>
+
+*Managing Orders*{: .text-purple-000 }
+
+<details markdown="block">
+  <summary>
+    <b>Starting an Order</b>
+  </summary>
+  {: .text-delta }
+
+```
+    1. Test case: `sorder`
+       <br>Expected: Bogobogo starts a new order and enters ordering mode.
+    2. Test case: `sorder milkandcookie`
+       <br>Expected: Extra words are ignored. Bogobogo starts a new order and enters ordering mode.
+```
+</details>
+
+<details markdown="block">
+  <summary>
+    <b>Adding an item into order</b>
+  </summary>
+  {: .text-delta }
+
+```
+    1. Test case: `iorder milk`
+       <br>Expected: Bogobogo inputs milk into the order.
+    2. Test case: `iroder id/276434`
+       <br>Expected: Bogobogo inputs item with id 276434 into the order.
+    3. Test case: `iorder milk cp/3.0`
+       <br>Expected: Bogobogo inputs milk into the order. Bogobogo outputs message that extra price flags are ignored.
+    4. Test case: `iorder milk t/baked`
+       <br>Expected: Bogobogo inputs milk into the order. Bogobogo outputs message that extra tag flags are ignored.
+    5. Test case: `iorder g/`
+       <br>Expected: Bogobogo outputs error that there is unexpected prefix identified.
+```
+
+</details>
+
+<details markdown="block">
+  <summary>
+    <b>Removing an item from Order</b>
+  </summary>
+  {: .text-delta }
+
+```
+    1. Test case: `corder milk`
+       <br>Expected: Bogobogo inputs milk into the order.
+    2. Test case: `croder id/276434`
+       <br>Expected: Bogobogo inputs item with id 276434 into the order.
+    3. Test case: `corder g/`
+       <br>Expected: Bogobogo outputs error that there is unexpected prefix identified.
+```
+</details>
+
+<details markdown="block">
+  <summary>
+    <b>Ending order</b>
+  </summary>
+  {: .text-delta }
+
+```
+    1. Test case: `eorder`
+       <br>Expected: Bogobogo processes the current order and saves it.
+    2. Test case: `eorder oo`
+       <br>Expected: Bogobogo ignores the extra paramaters and process the current order to save it.
+```
+
+</details>
+
+<details markdown="block">
+  <summary>
+    <b>Listing the current order</b>
+  </summary>
+  {: .text-delta }
+
+```
+    1. Test case: `list order`
+       <br>Expected: Bogobogo outputs the list of items in the current order.
+    2. Test case: `list oo`
+       <br>Expected: Bogobogo outputs error that the command format is invalid.
+```
+</details>
+
+<details markdown="block">
+  <summary>
+    <b>Viewing Past Transactions</b>
+  </summary>
+  {: .text-delta }
+
+```
+    1. Test case: `list txns`
+       <br>Expected: Bogobogo outputs the list of past transactions together with total cost, profit and revenue.
+    2. Test case: `list txns bchfirwvb`
+       <br>Expected: Bogobogo outputs the list of past transaction with id bchfirwvb together with total cost, profit and revenue.
+```
+</details>
+
+*Others*{: .text-purple-000 .text-gamma }
+
+<details markdown="block">
+  <summary>
+    <b>Seeking Help</b>
+  </summary>
+  {: .text-delta }
+
+```
+    1. Test case: `help`
+       <br>Expected: Bogobogo userguide is displayed in the feedback box. 
+    2. Test case: `help add`
+       <br>Expected: Message usage of AddCommand is displayed in the feedback box.
+```
+</details>
+
+<details markdown="block">
+  <summary>
+    <b>Exiting the Application</b>
+  </summary>
+  {: .text-delta }
+
+```
+    1. Test case: `exit`
+       <br>Expected: Bogobogo exits the application.
+    2. Test case: `exit oo`
+       <br>Expected: Bogogbogo ignores the extra parameters and exits the application.
+```
+</details>
