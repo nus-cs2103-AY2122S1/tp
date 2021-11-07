@@ -5,6 +5,9 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.model.Model;
 import seedu.address.model.interview.Interview;
 
+/**
+ * Filters the displayed list to show applicants with passed interviews.
+ */
 public class FilterInterviewPastCommand extends FilterInterviewCommand {
 
     public static final String MESSAGE_SUCCESS =
