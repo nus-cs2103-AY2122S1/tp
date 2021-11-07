@@ -230,7 +230,7 @@ Examples:
 
 Shows a list of all or selected elderly and their associated details in SeniorLove address book in alphabetical order of their name.
 
-Format: `list [CRITERION_FOR_LISTING]`
+Format: `list CRITERION_FOR_LISTING`
 
 * `list all/` displays all the elderly in the alphabetical order of their names.
 * `list w/` displays all the elderly with an incoming visit in the next week.
@@ -238,7 +238,7 @@ Format: `list [CRITERION_FOR_LISTING]`
 
 <div markdown="block" class="alert alert-info">
 :exclamation: Take note!
-* Exactly one of the `n/`, `w/` and `m/` fields need to be present.
+* Exactly one of the `all/`, `w/` and `m/` fields need to be present.
 </div>
 
 Examples:
@@ -253,7 +253,7 @@ Examples:
 
 Shows a sorted list of elderly and their associated details in SeniorLove either by `last visit` date (the latest first) or by next `visit` date (the earliest first).
 
-Format: `sort [FIELD_TO_BE_SORTED]`
+Format: `sort FIELD_TO_BE_SORTED`
 
 * `sort lv/` sorts elderly in descending order of their `last visit` date (the latest first).
 * `sort v/` sorts elderly in ascending order of their next `visit` date (the earliest first).
@@ -274,7 +274,7 @@ Example:
 
 ### Find elderly by attribute : `find`
 
-Finds elderly whose names contain any of the given keywords. All elderly attributes are searched using the giving [format](#structure-of-an-elderly-contact).
+Finds elderly whose names contain any of the given keywords. All elderly attributes are searched using the given [format](#structure-of-an-elderly-contact).
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -297,7 +297,7 @@ Examples:
 
 Updates the time for the next visit to the elderly with the given index of the elderly in the address book.
 
-Format: `visit INDEX  at/VISIT [f/FREQUENCY o/OCCURRENCE]`
+Format: `visit INDEX at/VISIT [f/FREQUENCY o/OCCURRENCE]`
 
 * `INDEX` corresponds to the elderly’s index in the address book. It is a **strictly positive integer, and must be included.**
 * The `VISIT` is in the format of `yyyy-mm-dd HH:mm`, and it must be included.
