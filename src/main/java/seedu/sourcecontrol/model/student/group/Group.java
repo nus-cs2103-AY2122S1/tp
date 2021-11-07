@@ -6,7 +6,7 @@ import static seedu.sourcecontrol.commons.util.AppUtil.checkArgument;
 import java.util.ArrayList;
 import java.util.List;
 
-import seedu.sourcecontrol.model.student.id.ID;
+import seedu.sourcecontrol.model.student.id.Id;
 
 public class Group {
 
@@ -15,7 +15,7 @@ public class Group {
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     // Group student list
-    public final List<ID> students;
+    public final List<Id> students;
 
     // Group name
     public final String name;
@@ -38,7 +38,7 @@ public class Group {
      * @param name A valid Group name.
      * @param students Students to add into the group.
      */
-    public Group(String name, List<ID> students) {
+    public Group(String name, List<Id> students) {
         requireNonNull(name);
         checkArgument(isValidGroup(name), MESSAGE_CONSTRAINTS);
         this.name = name;
@@ -56,23 +56,23 @@ public class Group {
         return name;
     }
 
-    public List<ID> getStudents() {
+    public List<Id> getStudents() {
         return students;
     }
 
     /**
-     * Returns true if the given ID {@code id} specifies a student in the group.
+     * Returns true if the given Id {@code id} specifies a student in the group.
      */
-    public boolean hasStudent(ID id) {
+    public boolean hasStudent(Id id) {
         requireNonNull(id);
         return students.contains(id);
     }
 
     /**
-     * Adds student with ID {@code ID} to this {@code Group}.
+     * Adds student with Id {@code Id} to this {@code Group}.
      * {@code id} must not already exist in the group.
      */
-    public void addStudent(ID id) {
+    public void addStudent(Id id) {
         requireNonNull(id);
         if (!hasStudent(id)) {
             students.add(id);
@@ -80,10 +80,10 @@ public class Group {
     }
 
     /**
-     * Removes student with ID {@code key} from this {@code Group}.
+     * Removes student with Id {@code key} from this {@code Group}.
      * {@code key} must exist in the group.
      */
-    public void removeStudent(ID key) {
+    public void removeStudent(Id key) {
         students.remove(key);
     }
 

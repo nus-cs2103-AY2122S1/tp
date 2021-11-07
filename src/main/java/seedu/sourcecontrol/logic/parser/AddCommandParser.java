@@ -19,7 +19,7 @@ import seedu.sourcecontrol.model.student.Student;
 import seedu.sourcecontrol.model.student.assessment.Assessment;
 import seedu.sourcecontrol.model.student.assessment.Score;
 import seedu.sourcecontrol.model.student.group.Group;
-import seedu.sourcecontrol.model.student.id.ID;
+import seedu.sourcecontrol.model.student.id.Id;
 import seedu.sourcecontrol.model.student.name.Name;
 import seedu.sourcecontrol.model.student.tag.Tag;
 
@@ -43,7 +43,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        ID id = ParserUtil.parseID(argMultimap.getValue(PREFIX_ID).get());
+        Id id = ParserUtil.parseID(argMultimap.getValue(PREFIX_ID).get());
 
         List<Group> groupList = ParserUtil.parseGroups(argMultimap.getAllValues(PREFIX_GROUP));
         groupList = (groupList != null)

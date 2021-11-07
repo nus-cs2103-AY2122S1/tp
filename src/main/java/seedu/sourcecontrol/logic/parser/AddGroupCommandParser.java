@@ -13,7 +13,7 @@ import seedu.sourcecontrol.logic.commands.AddAllocCommand.AllocDescriptor;
 import seedu.sourcecontrol.logic.commands.AddGroupCommand;
 import seedu.sourcecontrol.logic.parser.exceptions.ParseException;
 import seedu.sourcecontrol.model.student.group.Group;
-import seedu.sourcecontrol.model.student.id.ID;
+import seedu.sourcecontrol.model.student.id.Id;
 import seedu.sourcecontrol.model.student.name.Name;
 
 /**
@@ -46,8 +46,8 @@ public class AddGroupCommandParser implements Parser<AddGroupCommand> {
             allocDescriptors.add(allocDescriptor);
         }
 
-        List<ID> ids = ParserUtil.parseIds(argMultimap.getAllValues(PREFIX_ID));
-        for (ID id : ids) {
+        List<Id> ids = ParserUtil.parseIds(argMultimap.getAllValues(PREFIX_ID));
+        for (Id id : ids) {
             AllocDescriptor allocDescriptor = new AllocDescriptor();
             allocDescriptor.setGroup(group);
             allocDescriptor.setId(id);

@@ -80,7 +80,7 @@ public class CommandTestUtil {
     public static final String TAG_COUNT_DESC_ABOVE_TYPICAL = " " + PREFIX_TAG + (VALID_TYPICAL_STUDENTS_TAG_COUNT + 1);
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
-    public static final String INVALID_ID_DESC = " " + PREFIX_ID + "E0123"; // ID length too short
+    public static final String INVALID_ID_DESC = " " + PREFIX_ID + "E0123"; // Id length too short
     public static final String INVALID_GROUP_DESC = " " + PREFIX_GROUP + "05&"; // '&' not allowed in names
     public static final String INVALID_ASSESSMENT_DESC = " " + PREFIX_ASSESSMENT + "P01&"; // '&' not allowed in name
     public static final String INVALID_SCORE_DESC = " " + PREFIX_SCORE + "invalid0"; // only numbers

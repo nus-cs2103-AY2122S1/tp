@@ -52,7 +52,7 @@ public class StudentCard extends UiPart<Region> {
         this.student = student;
         id.setText(displayedIndex + ". ");
         name.setText(student.getName().fullName);
-        nusNetId.setText("ID: " + student.getId().value);
+        nusNetId.setText("Id: " + student.getId().value);
 
         String groupsString = student.getGroups().stream()
                 .map(Group::toString).sorted().collect(Collectors.joining(", "));

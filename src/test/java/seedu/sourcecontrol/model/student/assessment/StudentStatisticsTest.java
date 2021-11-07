@@ -7,11 +7,11 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 
 import seedu.sourcecontrol.model.student.Student;
-import seedu.sourcecontrol.model.student.id.ID;
+import seedu.sourcecontrol.model.student.id.Id;
 import seedu.sourcecontrol.model.student.name.Name;
 
 public class StudentStatisticsTest {
-    private final Student student = new Student(new Name("Alice Wong"), new ID("E0000001"));
+    private final Student student = new Student(new Name("Alice Wong"), new Id("E0000001"));
 
     private final Map<Assessment, Score> scores = Map.of(
             new Assessment("P01"), new Score("5.5"),
@@ -26,32 +26,32 @@ public class StudentStatisticsTest {
             new Assessment("Final Examination"), new Score("100")
     );
 
-    private final Map<ID, Score> p01Score = Map.of(
-            new ID("E0000001"), new Score("5.5"),
-            new ID("E0000002"), new Score("13"),
-            new ID("E0000003"), new Score("46"),
-            new ID("E0000004"), new Score("48"),
-            new ID("E0000005"), new Score("55"),
-            new ID("E0000006"), new Score("66"),
-            new ID("E0000007"), new Score("70"),
-            new ID("E0000008"), new Score("78"),
-            new ID("E0000009"), new Score("88"),
-            new ID("E0000010"), new Score("100")
+    private final Map<Id, Score> p01Score = Map.of(
+            new Id("E0000001"), new Score("5.5"),
+            new Id("E0000002"), new Score("13"),
+            new Id("E0000003"), new Score("46"),
+            new Id("E0000004"), new Score("48"),
+            new Id("E0000005"), new Score("55"),
+            new Id("E0000006"), new Score("66"),
+            new Id("E0000007"), new Score("70"),
+            new Id("E0000008"), new Score("78"),
+            new Id("E0000009"), new Score("88"),
+            new Id("E0000010"), new Score("100")
     );
 
     private final Assessment p01 = new Assessment("P01");
 
-    private final Map<ID, Score> p02Score = Map.of(
-            new ID("E0000001"), new Score("13.3"),
-            new ID("E0000002"), new Score("44.7"),
-            new ID("E0000003"), new Score("23"),
-            new ID("E0000004"), new Score("67"),
-            new ID("E0000005"), new Score("35"),
-            new ID("E0000006"), new Score("98"),
-            new ID("E0000007"), new Score("32"),
-            new ID("E0000008"), new Score("74"),
-            new ID("E0000009"), new Score("99"),
-            new ID("E0000010"), new Score("100")
+    private final Map<Id, Score> p02Score = Map.of(
+            new Id("E0000001"), new Score("13.3"),
+            new Id("E0000002"), new Score("44.7"),
+            new Id("E0000003"), new Score("23"),
+            new Id("E0000004"), new Score("67"),
+            new Id("E0000005"), new Score("35"),
+            new Id("E0000006"), new Score("98"),
+            new Id("E0000007"), new Score("32"),
+            new Id("E0000008"), new Score("74"),
+            new Id("E0000009"), new Score("99"),
+            new Id("E0000010"), new Score("100")
     );
 
     private final Assessment p02 = new Assessment("P02");

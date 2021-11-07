@@ -12,7 +12,7 @@ import seedu.sourcecontrol.model.student.Student;
 import seedu.sourcecontrol.model.student.assessment.Assessment;
 import seedu.sourcecontrol.model.student.assessment.Score;
 import seedu.sourcecontrol.model.student.group.Group;
-import seedu.sourcecontrol.model.student.id.ID;
+import seedu.sourcecontrol.model.student.id.Id;
 import seedu.sourcecontrol.model.student.tag.Tag;
 
 
@@ -108,7 +108,7 @@ public class ExportCommand extends Command {
         }
 
         for (Assessment assessment : assessments) {
-            Map<ID, Score> scores = assessment.getScores();
+            Map<Id, Score> scores = assessment.getScores();
             if (scores.containsKey(student.getId())) {
                 writeContent.append(scores.get(student.getId()).getValue());
             }

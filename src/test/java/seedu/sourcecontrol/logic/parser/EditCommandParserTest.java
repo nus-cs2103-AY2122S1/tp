@@ -36,7 +36,7 @@ import seedu.sourcecontrol.model.Model;
 import seedu.sourcecontrol.model.ModelManager;
 import seedu.sourcecontrol.model.UserPrefs;
 import seedu.sourcecontrol.model.student.group.Group;
-import seedu.sourcecontrol.model.student.id.ID;
+import seedu.sourcecontrol.model.student.id.Id;
 import seedu.sourcecontrol.model.student.name.Name;
 import seedu.sourcecontrol.model.student.tag.Tag;
 import seedu.sourcecontrol.testutil.EditStudentDescriptorBuilder;
@@ -85,16 +85,16 @@ public class EditCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
-        assertParseFailure(parser, "1" + INVALID_ID_DESC, ID.MESSAGE_CONSTRAINTS); // invalid ID
+        assertParseFailure(parser, "1" + INVALID_ID_DESC, Id.MESSAGE_CONSTRAINTS); // invalid Id
         assertParseFailure(parser, "1" + INVALID_GROUP_DESC, Group.MESSAGE_CONSTRAINTS); // invalid group
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
 
-        // invalid ID followed by valid group
-        assertParseFailure(parser, "1" + INVALID_ID_DESC + GROUP_DESC_TUTORIAL, ID.MESSAGE_CONSTRAINTS);
+        // invalid Id followed by valid group
+        assertParseFailure(parser, "1" + INVALID_ID_DESC + GROUP_DESC_TUTORIAL, Id.MESSAGE_CONSTRAINTS);
 
-        // valid ID followed by invalid ID. The test case for invalid phone followed by valid phone
+        // valid Id followed by invalid Id. The test case for invalid phone followed by valid phone
         // is tested at {@code parse_invalidValueFollowedByValidValue_success()}
-        assertParseFailure(parser, "1" + ID_DESC_BOB + INVALID_ID_DESC, ID.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + ID_DESC_BOB + INVALID_ID_DESC, Id.MESSAGE_CONSTRAINTS);
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Student} being edited,
         // parsing it together with a valid tag results in error
@@ -142,7 +142,7 @@ public class EditCommandParserTest {
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // ID
+        // Id
         userInput = targetIndex.getOneBased() + ID_DESC_AMY;
         descriptor = new EditStudentDescriptorBuilder().withId(VALID_ID_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);

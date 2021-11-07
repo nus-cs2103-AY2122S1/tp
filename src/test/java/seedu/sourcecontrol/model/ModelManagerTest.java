@@ -43,14 +43,14 @@ public class ModelManagerTest {
     @Test
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setSourceControlFilePath(Paths.get("address/book/file/path"));
+        userPrefs.setSourceControlFilePath(Paths.get("source/control/file/path"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4, 0.5));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
         // Modifying userPrefs should not modify modelManager's userPrefs
         UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
-        userPrefs.setSourceControlFilePath(Paths.get("new/address/book/file/path"));
+        userPrefs.setSourceControlFilePath(Paths.get("new/source/control/file/path"));
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
     }
 
@@ -67,13 +67,13 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
+    public void setSourceControlFilePath_nullPath_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.setSourceControlFilePath(null));
     }
 
     @Test
-    public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
-        Path path = Paths.get("address/book/file/path");
+    public void setSourceControlFilePath_validPath_setsSourceControlFilePath() {
+        Path path = Paths.get("source/control/file/path");
         modelManager.setSourceControlFilePath(path);
         assertEquals(path, modelManager.getSourceControlFilePath());
     }
@@ -84,12 +84,12 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasStudent_studentNotInAddressBook_returnsFalse() {
+    public void hasStudent_studentNotInSourceControl_returnsFalse() {
         assertFalse(modelManager.hasStudent(ALICE));
     }
 
     @Test
-    public void hasStudent_studentInAddressBook_returnsTrue() {
+    public void hasStudent_studentInSourceControl_returnsTrue() {
         modelManager.addStudent(ALICE);
         assertTrue(modelManager.hasStudent(ALICE));
     }
@@ -146,13 +146,13 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        SourceControl addressBook = new SourceControlBuilder().withStudent(ALICE).withStudent(BENSON).build();
-        SourceControl differentAddressBook = new SourceControl();
+        SourceControl sourceControl = new SourceControlBuilder().withStudent(ALICE).withStudent(BENSON).build();
+        SourceControl differentSourceControl = new SourceControl();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs);
+        modelManager = new ModelManager(sourceControl, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(sourceControl, userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -164,13 +164,13 @@ public class ModelManagerTest {
         // different types -> returns false
         assertFalse(modelManager.equals(5));
 
-        // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
+        // different sourceControl -> returns false
+        assertFalse(modelManager.equals(new ModelManager(differentSourceControl, userPrefs)));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredStudentList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(sourceControl, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
@@ -178,6 +178,6 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setSourceControlFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(sourceControl, differentUserPrefs)));
     }
 }

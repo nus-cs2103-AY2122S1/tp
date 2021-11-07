@@ -6,7 +6,7 @@ import static seedu.sourcecontrol.commons.util.AppUtil.checkArgument;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import seedu.sourcecontrol.model.student.id.ID;
+import seedu.sourcecontrol.model.student.id.Id;
 
 /**
  * Represents a Student's assessment.
@@ -19,7 +19,7 @@ public class Assessment {
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     // Assessment score list
-    public final Map<ID, Score> scores = new LinkedHashMap<>();
+    public final Map<Id, Score> scores = new LinkedHashMap<>();
 
     // Assessment name
     public final String name;
@@ -46,22 +46,22 @@ public class Assessment {
         return name;
     }
 
-    public Map<ID, Score> getScores() {
+    public Map<Id, Score> getScores() {
         return scores;
     }
 
-    public void setScore(ID id, Score score) {
+    public void setScore(Id id, Score score) {
         scores.put(id, score);
     }
 
-    public void setScores(Map<ID, Score> scores) {
+    public void setScores(Map<Id, Score> scores) {
         this.scores.putAll(scores);
     }
 
     /**
      * Returns true if the student with the given {@code id} is already graded.
      */
-    public boolean isGraded(ID id) {
+    public boolean isGraded(Id id) {
         requireNonNull(id);
         return scores.containsKey(id);
     }

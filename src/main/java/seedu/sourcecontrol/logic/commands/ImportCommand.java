@@ -23,7 +23,7 @@ import seedu.sourcecontrol.model.student.assessment.Assessment;
 import seedu.sourcecontrol.model.student.assessment.Score;
 import seedu.sourcecontrol.model.student.exceptions.DuplicateStudentException;
 import seedu.sourcecontrol.model.student.group.Group;
-import seedu.sourcecontrol.model.student.id.ID;
+import seedu.sourcecontrol.model.student.id.Id;
 import seedu.sourcecontrol.model.student.name.Name;
 import seedu.sourcecontrol.model.student.tag.Tag;
 
@@ -49,7 +49,7 @@ public class ImportCommand extends Command {
     public static final String MESSAGE_INVALID_NUMBER = "Number of columns should be a non-negative integer. ";
     public static final String MESSAGE_OUT_OF_BOUNDS = "Reached unexpected end of line while reading from file. ";
     public static final String MESSAGE_DUPLICATE_ASSESSMENT = "Duplicate assessment found in file. ";
-    public static final String MESSAGE_DUPLICATE_ID = "Duplicate student ID found in file. ";
+    public static final String MESSAGE_DUPLICATE_ID = "Duplicate student Id found in file. ";
 
 
     private final int groupCount;
@@ -109,7 +109,7 @@ public class ImportCommand extends Command {
                                        List<Group> groupList) throws CommandException {
         String[] values = row.split(",", -1);
         Name name = makeName(readValue(values, 0));
-        ID id = makeId(readValue(values, 1));
+        Id id = makeId(readValue(values, 1));
         int readingColumn = 2;
 
         List<Group> groups = new ArrayList<>();
@@ -162,11 +162,11 @@ public class ImportCommand extends Command {
         return new Name(name);
     }
 
-    private ID makeId(String id) throws CommandException {
-        if (!ID.isValidID(id)) {
-            throw new CommandException(ID.MESSAGE_CONSTRAINTS);
+    private Id makeId(String id) throws CommandException {
+        if (!Id.isValidID(id)) {
+            throw new CommandException(Id.MESSAGE_CONSTRAINTS);
         }
-        return new ID(id);
+        return new Id(id);
     }
 
     private Group makeGroup(String groupName) throws CommandException {

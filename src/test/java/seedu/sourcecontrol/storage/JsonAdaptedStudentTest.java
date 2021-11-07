@@ -17,7 +17,7 @@ import seedu.sourcecontrol.commons.exceptions.IllegalValueException;
 import seedu.sourcecontrol.model.student.Student;
 import seedu.sourcecontrol.model.student.assessment.Assessment;
 import seedu.sourcecontrol.model.student.group.Group;
-import seedu.sourcecontrol.model.student.id.ID;
+import seedu.sourcecontrol.model.student.id.Id;
 import seedu.sourcecontrol.model.student.name.Name;
 
 public class JsonAdaptedStudentTest {
@@ -77,7 +77,7 @@ public class JsonAdaptedStudentTest {
     public void toModelType_invalidId_throwsIllegalValueException() {
         JsonAdaptedStudent student =
                 new JsonAdaptedStudent(VALID_NAME, INVALID_ID, VALID_GROUPS, VALID_ASSESSMENTS, VALID_TAGS);
-        String expectedMessage = ID.MESSAGE_CONSTRAINTS;
+        String expectedMessage = Id.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, () ->
                 student.toModelType(GROUP_LIST, ASSESSMENT_LIST));
     }
@@ -86,7 +86,7 @@ public class JsonAdaptedStudentTest {
     public void toModelType_nullId_throwsIllegalValueException() {
         JsonAdaptedStudent student =
                 new JsonAdaptedStudent(VALID_NAME, null, VALID_GROUPS, VALID_ASSESSMENTS, VALID_TAGS);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, ID.class.getSimpleName());
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Id.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, () ->
                 student.toModelType(GROUP_LIST, ASSESSMENT_LIST));
     }

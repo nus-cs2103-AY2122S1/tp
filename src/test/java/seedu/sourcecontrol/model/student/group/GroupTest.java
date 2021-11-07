@@ -14,7 +14,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.sourcecontrol.model.student.Student;
-import seedu.sourcecontrol.model.student.id.ID;
+import seedu.sourcecontrol.model.student.id.Id;
 import seedu.sourcecontrol.testutil.GroupBuilder;
 import seedu.sourcecontrol.testutil.IdBuilder;
 import seedu.sourcecontrol.testutil.StudentBuilder;
@@ -57,7 +57,7 @@ public class GroupTest {
 
     @Test
     public void getStudents() {
-        List<ID> studentList = Arrays.asList(CARL.getId(), ELLE.getId(), FIONA.getId());
+        List<Id> studentList = Arrays.asList(CARL.getId(), ELLE.getId(), FIONA.getId());
         assertEquals(new Group("T02A", studentList).getStudents(), studentList);
     }
 
@@ -77,7 +77,7 @@ public class GroupTest {
 
     @Test
     public void hasStudent_notIncluded() {
-        ID id = new IdBuilder().build();
+        Id id = new IdBuilder().build();
         Group group = new GroupBuilder().build();
         assertFalse(() -> group.hasStudent(id));
     }

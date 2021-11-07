@@ -17,7 +17,7 @@ import seedu.sourcecontrol.logic.parser.exceptions.ParseException;
 import seedu.sourcecontrol.model.student.assessment.Assessment;
 import seedu.sourcecontrol.model.student.assessment.Score;
 import seedu.sourcecontrol.model.student.group.Group;
-import seedu.sourcecontrol.model.student.id.ID;
+import seedu.sourcecontrol.model.student.id.Id;
 import seedu.sourcecontrol.model.student.name.Name;
 import seedu.sourcecontrol.model.student.tag.Tag;
 
@@ -140,15 +140,15 @@ public class ParserUtilTest {
 
     @Test
     public void parseID_validValueWithoutWhitespace_returnsID() throws Exception {
-        ID expectedID = new ID(VALID_ID);
-        assertEquals(expectedID, ParserUtil.parseID(VALID_ID));
+        Id expectedId = new Id(VALID_ID);
+        assertEquals(expectedId, ParserUtil.parseID(VALID_ID));
     }
 
     @Test
     public void parseID_validValueWithWhitespace_returnsTrimmedID() throws Exception {
         String idWithWhitespace = WHITESPACE + VALID_ID + WHITESPACE;
-        ID expectedID = new ID(VALID_ID);
-        assertEquals(expectedID, ParserUtil.parseID(idWithWhitespace));
+        Id expectedId = new Id(VALID_ID);
+        assertEquals(expectedId, ParserUtil.parseID(idWithWhitespace));
     }
 
     @Test

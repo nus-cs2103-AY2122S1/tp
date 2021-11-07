@@ -14,22 +14,22 @@ import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.sourcecontrol.model.student.id.ID;
+import seedu.sourcecontrol.model.student.id.Id;
 
 public class AssessmentStatisticsTest {
     private final Assessment assessment = new Assessment("P01");
 
-    private final Map<ID, Score> scores = Map.of(
-            new ID("E0000001"), new Score("5"),
-            new ID("E0000002"), new Score("13"),
-            new ID("E0000003"), new Score("46"),
-            new ID("E0000004"), new Score("48"),
-            new ID("E0000005"), new Score("55"),
-            new ID("E0000006"), new Score("66"),
-            new ID("E0000007"), new Score("70"),
-            new ID("E0000008"), new Score("78"),
-            new ID("E0000009"), new Score("88"),
-            new ID("E0000010"), new Score("100")
+    private final Map<Id, Score> scores = Map.of(
+            new Id("E0000001"), new Score("5"),
+            new Id("E0000002"), new Score("13"),
+            new Id("E0000003"), new Score("46"),
+            new Id("E0000004"), new Score("48"),
+            new Id("E0000005"), new Score("55"),
+            new Id("E0000006"), new Score("66"),
+            new Id("E0000007"), new Score("70"),
+            new Id("E0000008"), new Score("78"),
+            new Id("E0000009"), new Score("88"),
+            new Id("E0000010"), new Score("100")
     );
 
     private final List<Bin> bins = Arrays.asList(
@@ -162,8 +162,8 @@ public class AssessmentStatisticsTest {
 
     @Test
     public void getMedian_assessmentWithOddScores_returnsMiddleScore() {
-        Map<ID, Score> oddScores = new HashMap<>(scores);
-        oddScores.put(new ID("E0000011"), new Score("95"));
+        Map<Id, Score> oddScores = new HashMap<>(scores);
+        oddScores.put(new Id("E0000011"), new Score("95"));
         assessment.setScores(oddScores);
         AssessmentStatistics statistics = new AssessmentStatistics(assessment);
 

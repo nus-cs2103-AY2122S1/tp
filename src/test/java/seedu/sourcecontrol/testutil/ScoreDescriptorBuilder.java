@@ -3,7 +3,7 @@ package seedu.sourcecontrol.testutil;
 import seedu.sourcecontrol.logic.commands.AddScoreCommand.ScoreDescriptor;
 import seedu.sourcecontrol.model.student.assessment.Assessment;
 import seedu.sourcecontrol.model.student.assessment.Score;
-import seedu.sourcecontrol.model.student.id.ID;
+import seedu.sourcecontrol.model.student.id.Id;
 import seedu.sourcecontrol.model.student.name.Name;
 
 /**
@@ -40,7 +40,7 @@ public class ScoreDescriptorBuilder {
      * Sets the {@code id} of the {@code ScoreDescriptorBuilder} that we are building.
      */
     public ScoreDescriptorBuilder withId(String id) {
-        descriptor.setId(new ID(id));
+        descriptor.setId(new Id(id));
         return this;
     }
 

@@ -18,7 +18,7 @@ import seedu.sourcecontrol.model.ModelManager;
 import seedu.sourcecontrol.model.student.assessment.Assessment;
 import seedu.sourcecontrol.model.student.assessment.Score;
 import seedu.sourcecontrol.model.student.group.Group;
-import seedu.sourcecontrol.model.student.id.ID;
+import seedu.sourcecontrol.model.student.id.Id;
 import seedu.sourcecontrol.model.student.name.Name;
 import seedu.sourcecontrol.model.student.tag.Tag;
 import seedu.sourcecontrol.testutil.TypicalStudents;
@@ -77,7 +77,7 @@ public class ImportCommandTest {
                 VALID_TYPICAL_STUDENTS_ASSESSMENT_COUNT,
                 VALID_TYPICAL_STUDENTS_TAG_COUNT,
                 Path.of(String.format(PATH_FORMAT, "wrongId")));
-        assertCommandFailure(command, new ModelManager(), ID.MESSAGE_CONSTRAINTS);
+        assertCommandFailure(command, new ModelManager(), Id.MESSAGE_CONSTRAINTS);
 
         command = new ImportCommand(
                 VALID_TYPICAL_STUDENTS_GROUP_COUNT,
@@ -122,7 +122,7 @@ public class ImportCommandTest {
                 VALID_TYPICAL_STUDENTS_ASSESSMENT_COUNT,
                 VALID_TYPICAL_STUDENTS_TAG_COUNT,
                 Path.of(String.format(PATH_FORMAT, "missingId")));
-        assertCommandFailure(command, new ModelManager(), ID.MESSAGE_CONSTRAINTS);
+        assertCommandFailure(command, new ModelManager(), Id.MESSAGE_CONSTRAINTS);
 
         command = new ImportCommand(
                 VALID_TYPICAL_STUDENTS_GROUP_COUNT,

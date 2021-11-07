@@ -11,7 +11,7 @@ import seedu.sourcecontrol.model.student.Student;
 import seedu.sourcecontrol.model.student.assessment.Assessment;
 import seedu.sourcecontrol.model.student.assessment.Score;
 import seedu.sourcecontrol.model.student.group.Group;
-import seedu.sourcecontrol.model.student.id.ID;
+import seedu.sourcecontrol.model.student.id.Id;
 import seedu.sourcecontrol.model.student.name.Name;
 import seedu.sourcecontrol.model.student.tag.Tag;
 import seedu.sourcecontrol.model.util.SampleDataUtil;
@@ -25,7 +25,7 @@ public class StudentBuilder {
     public static final String DEFAULT_ID = "E0543947";
 
     private Name name;
-    private ID id;
+    private Id id;
     private List<Group> groups;
     private Map<Assessment, Score> scores;
     private Set<Tag> tags;
@@ -35,7 +35,7 @@ public class StudentBuilder {
      */
     public StudentBuilder() {
         name = new Name(DEFAULT_NAME);
-        id = new ID(DEFAULT_ID);
+        id = new Id(DEFAULT_ID);
         groups = new ArrayList<>();
         scores = new LinkedHashMap<>();
         tags = new HashSet<>();
@@ -61,10 +61,10 @@ public class StudentBuilder {
     }
 
     /**
-     * Sets the {@code ID} of the {@code Student} that we are building.
+     * Sets the {@code Id} of the {@code Student} that we are building.
      */
     public StudentBuilder withId(String id) {
-        this.id = new ID(id);
+        this.id = new Id(id);
         return this;
     }
 

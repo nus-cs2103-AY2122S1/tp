@@ -11,7 +11,7 @@ import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.sourcecontrol.model.student.id.ID;
+import seedu.sourcecontrol.model.student.id.Id;
 import seedu.sourcecontrol.testutil.AssessmentBuilder;
 import seedu.sourcecontrol.testutil.IdBuilder;
 
@@ -52,14 +52,14 @@ public class AssessmentTest {
 
     @Test
     public void isGraded_ungraded_returnsFalse() {
-        ID id = new IdBuilder().build();
+        Id id = new IdBuilder().build();
         Assessment assessment = new AssessmentBuilder().build();
         assertFalse(() -> assessment.isGraded(id));
     }
 
     @Test
     public void isGraded_graded_returnsTrue() {
-        ID id = new IdBuilder().withValue(VALID_ID_AMY).build();
+        Id id = new IdBuilder().withValue(VALID_ID_AMY).build();
         Assessment assessment = new AssessmentBuilder()
                 .withScores(Map.of(VALID_ID_AMY, VALID_SCORE_AMY)).build();
         assertTrue(() -> assessment.isGraded(id));

@@ -11,41 +11,41 @@ public class IdTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new ID(null));
+        assertThrows(NullPointerException.class, () -> new Id(null));
     }
 
     @Test
     public void constructor_invalidID_throwsIllegalArgumentException() {
         String invalidID = "";
-        assertThrows(IllegalArgumentException.class, () -> new ID(invalidID));
+        assertThrows(IllegalArgumentException.class, () -> new Id(invalidID));
     }
 
     @Test
     public void getValue() {
-        assertEquals(new ID("E1234567").getValue(), "E1234567");
+        assertEquals(new Id("E1234567").getValue(), "E1234567");
 
         // correctly format to capital letter
-        assertEquals(new ID("e1234567").getValue(), "E1234567");
+        assertEquals(new Id("e1234567").getValue(), "E1234567");
     }
 
     @Test
     public void isValidID() {
-        // null ID number
-        assertThrows(NullPointerException.class, () -> ID.isValidID(null));
+        // null Id number
+        assertThrows(NullPointerException.class, () -> Id.isValidID(null));
 
-        // invalid ID numbers
-        assertFalse(ID.isValidID("")); // empty string
-        assertFalse(ID.isValidID(" ")); // spaces only
-        assertFalse(ID.isValidID("1231231")); // missing starting character
-        assertFalse(ID.isValidID("A123 456")); // wrong starting character
-        assertFalse(ID.isValidID("E12345678")); // exceed length
-        assertFalse(ID.isValidID("E123456")); // below required length
-        assertFalse(ID.isValidID("E123m231")); // alphabets within digits
-        assertFalse(ID.isValidID("E123 456")); // spaces within digits
+        // invalid Id numbers
+        assertFalse(Id.isValidID("")); // empty string
+        assertFalse(Id.isValidID(" ")); // spaces only
+        assertFalse(Id.isValidID("1231231")); // missing starting character
+        assertFalse(Id.isValidID("A123 456")); // wrong starting character
+        assertFalse(Id.isValidID("E12345678")); // exceed length
+        assertFalse(Id.isValidID("E123456")); // below required length
+        assertFalse(Id.isValidID("E123m231")); // alphabets within digits
+        assertFalse(Id.isValidID("E123 456")); // spaces within digits
 
-        // valid ID numbers
-        assertTrue(ID.isValidID("E1234567")); // upper case
-        assertTrue(ID.isValidID("e7654321")); // lower case
+        // valid Id numbers
+        assertTrue(Id.isValidID("E1234567")); // upper case
+        assertTrue(Id.isValidID("e7654321")); // lower case
     }
 
 }

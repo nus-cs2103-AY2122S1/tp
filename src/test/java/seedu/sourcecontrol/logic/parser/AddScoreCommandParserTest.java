@@ -30,7 +30,7 @@ import seedu.sourcecontrol.logic.commands.AddScoreCommand;
 import seedu.sourcecontrol.logic.commands.AddScoreCommand.ScoreDescriptor;
 import seedu.sourcecontrol.model.student.assessment.Assessment;
 import seedu.sourcecontrol.model.student.assessment.Score;
-import seedu.sourcecontrol.model.student.id.ID;
+import seedu.sourcecontrol.model.student.id.Id;
 import seedu.sourcecontrol.model.student.name.Name;
 import seedu.sourcecontrol.testutil.ScoreDescriptorBuilder;
 
@@ -132,7 +132,7 @@ public class AddScoreCommandParserTest {
                 + SCORE_DESC_AMY, Name.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, ASSESSMENT_DESC_AMY
                 + INVALID_ID_DESC
-                + SCORE_DESC_AMY, ID.MESSAGE_CONSTRAINTS);
+                + SCORE_DESC_AMY, Id.MESSAGE_CONSTRAINTS);
 
         // invalid score value
         assertParseFailure(parser, ASSESSMENT_DESC_AMY
@@ -145,7 +145,7 @@ public class AddScoreCommandParserTest {
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, ASSESSMENT_DESC_AMY
                 + INVALID_ID_DESC
-                + INVALID_SCORE_DESC, ID.MESSAGE_CONSTRAINTS);
+                + INVALID_SCORE_DESC, Id.MESSAGE_CONSTRAINTS);
     }
 
     @Test

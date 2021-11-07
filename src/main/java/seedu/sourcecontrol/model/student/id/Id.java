@@ -3,7 +3,7 @@ package seedu.sourcecontrol.model.student.id;
 import static java.util.Objects.requireNonNull;
 import static seedu.sourcecontrol.commons.util.AppUtil.checkArgument;
 
-public class ID {
+public class Id {
 
     public static final String MESSAGE_CONSTRAINTS =
             "ID should start with E followed by 7 numerical numbers";
@@ -11,14 +11,14 @@ public class ID {
     public final String value;
 
     /**
-     * Constructs a {@code ID}.
+     * Constructs a {@code Id}.
      *
-     * @param id A valid NUSNET ID.
+     * @param id A valid NUSNET Id.
      */
-    public ID(String id) {
+    public Id(String id) {
         requireNonNull(id);
         checkArgument(isValidID(id), MESSAGE_CONSTRAINTS);
-        value = reformatID(id);
+        value = reformatId(id);
     }
 
     /**
@@ -34,10 +34,10 @@ public class ID {
     }
 
     /**
-     * Reformats valid ID to uppercase.
+     * Reformats valid Id to uppercase.
      */
-    public static String reformatID(String name) {
-        assert name.length() == 8; // ID should already be validated
+    public static String reformatId(String name) {
+        assert name.length() == 8; // Id should already be validated
         char upperCase = Character.toUpperCase(name.charAt(0));
         return upperCase + name.substring(1);
     }
@@ -49,8 +49,8 @@ public class ID {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ID // instanceof handles nulls
-                && value.equals(((ID) other).value)); // state check
+                || (other instanceof Id // instanceof handles nulls
+                && value.equals(((Id) other).value)); // state check
     }
 
     @Override

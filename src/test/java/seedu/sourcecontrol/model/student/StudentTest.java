@@ -35,7 +35,7 @@ public class StudentTest {
         // null -> returns false
         assertFalse(ALICE.isSameStudent(null));
 
-        // same name and ID, all other attributes different -> returns true
+        // same name and Id, all other attributes different -> returns true
         Student editedAlice = new StudentBuilder(ALICE).withGroups(VALID_GROUP_RECITATION).withScores(VALID_SCORES_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSameStudent(editedAlice));
@@ -44,7 +44,7 @@ public class StudentTest {
         editedAlice = new StudentBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertTrue(ALICE.isSameStudent(editedAlice));
 
-        // different ID, all other attributes same -> returns false
+        // different Id, all other attributes same -> returns false
         editedAlice = new StudentBuilder(ALICE).withId(VALID_ID_BOB).build();
         assertFalse(ALICE.isSameStudent(editedAlice));
 
@@ -52,7 +52,7 @@ public class StudentTest {
         Student editedBob = new StudentBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
         assertTrue(BOB.isSameStudent(editedBob));
 
-        // ID differs in case, all other attributes same -> returns true
+        // Id differs in case, all other attributes same -> returns true
         editedBob = new StudentBuilder(BOB).withId(VALID_ID_BOB.toLowerCase()).build();
         assertEquals(editedBob.getId().value, VALID_ID_BOB);
         assertTrue(BOB.isSameStudent(editedBob));
@@ -98,7 +98,7 @@ public class StudentTest {
         Student editedAlice = new StudentBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different ID -> returns false
+        // different Id -> returns false
         editedAlice = new StudentBuilder(ALICE).withId(VALID_ID_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 

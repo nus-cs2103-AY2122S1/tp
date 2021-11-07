@@ -26,7 +26,7 @@ import seedu.sourcecontrol.logic.commands.ShowCommand;
 import seedu.sourcecontrol.model.student.Student;
 import seedu.sourcecontrol.model.student.assessment.Assessment;
 import seedu.sourcecontrol.model.student.group.Group;
-import seedu.sourcecontrol.model.student.id.ID;
+import seedu.sourcecontrol.model.student.id.Id;
 import seedu.sourcecontrol.model.student.name.Name;
 import seedu.sourcecontrol.testutil.AssessmentBuilder;
 import seedu.sourcecontrol.testutil.GroupBuilder;
@@ -99,7 +99,7 @@ public class ShowCommandParserTest {
 
     @Test
     public void parseByPrefixes_invalidId_failure() {
-        assertParseFailure(parser, INVALID_ID_DESC, ID.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, INVALID_ID_DESC, Id.MESSAGE_CONSTRAINTS);
     }
 
     @Test

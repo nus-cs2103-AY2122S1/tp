@@ -1,4 +1,4 @@
-package seedu.sourcecontrol.model.student.group;
+package seedu.sourcecontrol.model.student.assessment;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -11,15 +11,14 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 
 import seedu.sourcecontrol.model.student.Student;
-import seedu.sourcecontrol.model.student.assessment.Assessment;
-import seedu.sourcecontrol.model.student.assessment.Score;
-import seedu.sourcecontrol.model.student.id.ID;
+import seedu.sourcecontrol.model.student.group.Group;
+import seedu.sourcecontrol.model.student.id.Id;
 import seedu.sourcecontrol.model.student.name.Name;
 
 public class GroupStatisticsTest {
 
-    private final ID aliceId = new ID("E0000001");
-    private final ID benId = new ID("E0000002");
+    private final Id aliceId = new Id("E0000001");
+    private final Id benId = new Id("E0000002");
 
     private final Student alice = new Student(new Name("Alice"), aliceId);
     private final Student ben = new Student(new Name("Ben"), benId);
@@ -42,26 +41,26 @@ public class GroupStatisticsTest {
             p02, new Score("90")
     );
 
-    private final Map<ID, Score> p01Score = Map.of(
+    private final Map<Id, Score> p01Score = Map.of(
             aliceId, new Score("78"),
             benId, new Score("44")
     );
 
-    private final Map<ID, Score> p02Score = Map.of(
+    private final Map<Id, Score> p02Score = Map.of(
             aliceId, new Score("66"),
             benId, new Score("90")
     );
 
-    private final Map<ID, Score> p01Score2 = Map.of(
+    private final Map<Id, Score> p01Score2 = Map.of(
             aliceId, new Score("78"),
             benId, new Score("44"),
-            new ID("E0000003"), new Score("79")
+            new Id("E0000003"), new Score("79")
     );
 
-    private final Map<ID, Score> p02Score2 = Map.of(
+    private final Map<Id, Score> p02Score2 = Map.of(
             aliceId, new Score("66"),
             benId, new Score("90"),
-            new ID("E0000003"), new Score("87")
+            new Id("E0000003"), new Score("87")
     );
 
 

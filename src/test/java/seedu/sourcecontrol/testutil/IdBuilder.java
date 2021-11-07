@@ -1,9 +1,9 @@
 package seedu.sourcecontrol.testutil;
 
-import seedu.sourcecontrol.model.student.id.ID;
+import seedu.sourcecontrol.model.student.id.Id;
 
 /**
- * A utility class to help with building ID objects.
+ * A utility class to help with building Id objects.
  */
 public class IdBuilder {
 
@@ -21,7 +21,7 @@ public class IdBuilder {
     /**
      * Initializes the IdBuilder with the data of {@code idToCopy}.
      */
-    public IdBuilder(ID idToCopy) {
+    public IdBuilder(Id idToCopy) {
         value = idToCopy.getValue();
     }
 
@@ -33,7 +33,7 @@ public class IdBuilder {
         return this;
     }
 
-    public ID build() {
-        return new ID(value);
+    public Id build() {
+        return new Id(value);
     }
 }

@@ -5,7 +5,7 @@ import java.util.Map;
 
 import seedu.sourcecontrol.model.student.assessment.Assessment;
 import seedu.sourcecontrol.model.student.assessment.Score;
-import seedu.sourcecontrol.model.student.id.ID;
+import seedu.sourcecontrol.model.student.id.Id;
 
 /**
  * A utility class to help with building Assessment object.
@@ -14,7 +14,7 @@ public class AssessmentBuilder {
 
     public static final String DEFAULT_VALUE = "P01";
 
-    private Map<ID, Score> scores;
+    private Map<Id, Score> scores;
     private String value;
 
     /**
@@ -37,9 +37,9 @@ public class AssessmentBuilder {
      * Sets the {@code scores} of the {@code assessment} that we are building.
      */
     public AssessmentBuilder withScores(Map<String, String> scores) {
-        Map<ID, Score> scoresAdapted = new LinkedHashMap<>();
+        Map<Id, Score> scoresAdapted = new LinkedHashMap<>();
         for (Map.Entry<String, String> score : scores.entrySet()) {
-            scoresAdapted.put(new ID(score.getKey()), new Score(score.getValue()));
+            scoresAdapted.put(new Id(score.getKey()), new Score(score.getValue()));
         }
         this.scores = scoresAdapted;
         return this;

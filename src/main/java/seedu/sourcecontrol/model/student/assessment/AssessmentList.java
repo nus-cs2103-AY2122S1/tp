@@ -13,7 +13,7 @@ import seedu.sourcecontrol.model.SourceControl;
 import seedu.sourcecontrol.model.student.Student;
 import seedu.sourcecontrol.model.student.exceptions.AssessmentNotFoundException;
 import seedu.sourcecontrol.model.student.exceptions.DuplicateAssessmentException;
-import seedu.sourcecontrol.model.student.id.ID;
+import seedu.sourcecontrol.model.student.id.Id;
 
 /**
  * Represents a list of assessments.
@@ -68,7 +68,7 @@ public class AssessmentList {
                 add(assessment);
             }
             int index = assessments.indexOf(assessment);
-            ID id = toUpdate.getId();
+            Id id = toUpdate.getId();
             Score score = scores.get(assessment);
             assessments.get(index).setScore(id, score);
         }

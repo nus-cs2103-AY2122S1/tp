@@ -2,7 +2,7 @@ package seedu.sourcecontrol.testutil;
 
 import seedu.sourcecontrol.logic.commands.AddAllocCommand.AllocDescriptor;
 import seedu.sourcecontrol.model.student.group.Group;
-import seedu.sourcecontrol.model.student.id.ID;
+import seedu.sourcecontrol.model.student.id.Id;
 import seedu.sourcecontrol.model.student.name.Name;
 
 /**
@@ -31,7 +31,7 @@ public class AllocDescriptorBuilder {
      * Sets the {@code id} of the {@code AllocDescriptorBuilder} that we are building.
      */
     public AllocDescriptorBuilder withId(String id) {
-        descriptor.setId(new ID(id));
+        descriptor.setId(new Id(id));
         return this;
     }
 

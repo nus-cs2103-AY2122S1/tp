@@ -26,7 +26,7 @@ import org.junit.jupiter.api.Test;
 import seedu.sourcecontrol.logic.commands.AddAllocCommand.AllocDescriptor;
 import seedu.sourcecontrol.logic.commands.AddGroupCommand;
 import seedu.sourcecontrol.model.student.group.Group;
-import seedu.sourcecontrol.model.student.id.ID;
+import seedu.sourcecontrol.model.student.id.Id;
 import seedu.sourcecontrol.testutil.AllocDescriptorBuilder;
 import seedu.sourcecontrol.testutil.GroupBuilder;
 
@@ -40,7 +40,7 @@ public class AddGroupCommandParserTest {
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + GROUP_DESC_TUTORIAL,
                 new AddGroupCommand(expectedEmptyGroup, new ArrayList<>()));
 
-        // 1 name and 1 ID - both accepted
+        // 1 name and 1 Id - both accepted
         Group expectedGroup = new GroupBuilder().withName(VALID_GROUP_TUTORIAL).build();
         AllocDescriptor descriptorWithAmyId = new AllocDescriptorBuilder()
                 .withGroup(VALID_GROUP_TUTORIAL)
@@ -55,7 +55,7 @@ public class AddGroupCommandParserTest {
 
     @Test
     public void parse_optionalFieldsMissing_success() {
-        // without any name or ID
+        // without any name or Id
         Group expectedEmptyGroup = new GroupBuilder().withName(VALID_GROUP_TUTORIAL).build();
         assertParseSuccess(parser, GROUP_DESC_TUTORIAL, new AddGroupCommand(expectedEmptyGroup, new ArrayList<>()));
 
@@ -96,7 +96,7 @@ public class AddGroupCommandParserTest {
         // invalid group name
         assertParseFailure(parser, INVALID_GROUP_DESC, Group.MESSAGE_CONSTRAINTS);
 
-        // invalid ID
-        assertParseFailure(parser, GROUP_DESC_TUTORIAL + INVALID_ID_DESC, ID.MESSAGE_CONSTRAINTS);
+        // invalid Id
+        assertParseFailure(parser, GROUP_DESC_TUTORIAL + INVALID_ID_DESC, Id.MESSAGE_CONSTRAINTS);
     }
 }

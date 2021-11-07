@@ -1,4 +1,4 @@
-package seedu.sourcecontrol.model.student.group;
+package seedu.sourcecontrol.model.student.assessment;
 
 import static java.util.Objects.requireNonNull;
 
@@ -10,10 +10,8 @@ import java.util.stream.Collectors;
 
 import javafx.scene.chart.Chart;
 import seedu.sourcecontrol.commons.util.ChartUtil;
-import seedu.sourcecontrol.model.student.assessment.Assessment;
-import seedu.sourcecontrol.model.student.assessment.AssessmentStatistics;
-import seedu.sourcecontrol.model.student.assessment.Score;
-import seedu.sourcecontrol.model.student.id.ID;
+import seedu.sourcecontrol.model.student.group.Group;
+import seedu.sourcecontrol.model.student.id.Id;
 
 /**
  * Represents statistics about a student and the students' performance in each assessment.
@@ -25,7 +23,7 @@ public class GroupStatistics {
     private static final String CHART_Y_AXIS_LABEL = "Scores";
 
     private final Group group;
-    private final List<ID> studentList;
+    private final List<Id> studentList;
     private final List<Assessment> assessmentList;
 
     /**
@@ -44,7 +42,7 @@ public class GroupStatistics {
      * Returns true if more than one student in group is graded in {@code assessment}.
      */
     public boolean isGraded(Assessment assessment) {
-        for (ID id : studentList) {
+        for (Id id : studentList) {
             if (assessment.isGraded(id)) {
                 return true;
             }
@@ -58,7 +56,7 @@ public class GroupStatistics {
     public double getMedian(Assessment assessment) {
         int count = 0;
         ArrayList<Score> scores = new ArrayList<>();
-        for (ID id : studentList) {
+        for (Id id : studentList) {
             if (!assessment.isGraded(id)) {
                 continue;
             }

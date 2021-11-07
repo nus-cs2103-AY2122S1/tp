@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 import seedu.sourcecontrol.logic.commands.EditCommand.EditStudentDescriptor;
 import seedu.sourcecontrol.model.student.Student;
 import seedu.sourcecontrol.model.student.group.Group;
-import seedu.sourcecontrol.model.student.id.ID;
+import seedu.sourcecontrol.model.student.id.Id;
 import seedu.sourcecontrol.model.student.name.Name;
 import seedu.sourcecontrol.model.student.tag.Tag;
 
@@ -50,7 +50,7 @@ public class EditStudentDescriptorBuilder {
      * Sets the {@code id} of the {@code EditStudentDescriptor} that we are building.
      */
     public EditStudentDescriptorBuilder withId(String id) {
-        descriptor.setId(new ID(id));
+        descriptor.setId(new Id(id));
         return this;
     }
 

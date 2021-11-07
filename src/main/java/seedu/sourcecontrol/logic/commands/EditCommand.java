@@ -25,7 +25,7 @@ import seedu.sourcecontrol.model.student.Student;
 import seedu.sourcecontrol.model.student.assessment.Assessment;
 import seedu.sourcecontrol.model.student.assessment.Score;
 import seedu.sourcecontrol.model.student.group.Group;
-import seedu.sourcecontrol.model.student.id.ID;
+import seedu.sourcecontrol.model.student.id.Id;
 import seedu.sourcecontrol.model.student.name.Name;
 import seedu.sourcecontrol.model.student.tag.Tag;
 
@@ -103,7 +103,7 @@ public class EditCommand extends Command {
         assert studentToEdit != null;
 
         Name updatedName = editStudentDescriptor.getName().orElse(studentToEdit.getName());
-        ID updatedId = editStudentDescriptor.getId().orElse(studentToEdit.getId());
+        Id updatedId = editStudentDescriptor.getId().orElse(studentToEdit.getId());
 
         // ensure that the groups added are the same as those in the group list
         List<Group> updatedGroups = editStudentDescriptor.getGroups().orElse(studentToEdit.getGroups());
@@ -142,7 +142,7 @@ public class EditCommand extends Command {
      */
     public static class EditStudentDescriptor {
         private Name name;
-        private ID id;
+        private Id id;
         private List<Group> groups;
         private Set<Tag> tags;
 
@@ -174,11 +174,11 @@ public class EditCommand extends Command {
             return Optional.ofNullable(name);
         }
 
-        public void setId(ID id) {
+        public void setId(Id id) {
             this.id = id;
         }
 
-        public Optional<ID> getId() {
+        public Optional<Id> getId() {
             return Optional.ofNullable(id);
         }
 

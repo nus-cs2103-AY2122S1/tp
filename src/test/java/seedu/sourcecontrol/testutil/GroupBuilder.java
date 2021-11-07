@@ -7,13 +7,13 @@ import java.util.stream.Collectors;
 
 import seedu.sourcecontrol.model.student.Student;
 import seedu.sourcecontrol.model.student.group.Group;
-import seedu.sourcecontrol.model.student.id.ID;
+import seedu.sourcecontrol.model.student.id.Id;
 
 public class GroupBuilder {
     public static final String DEFAULT_NAME = "T01A";
 
     private String name;
-    private List<ID> students;
+    private List<Id> students;
     /**
      * Creates a {@code GroupBuilder} with the default details.
      */

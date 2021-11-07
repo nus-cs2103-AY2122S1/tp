@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import seedu.sourcecontrol.commons.exceptions.IllegalValueException;
 import seedu.sourcecontrol.model.student.assessment.Assessment;
 import seedu.sourcecontrol.model.student.assessment.Score;
-import seedu.sourcecontrol.model.student.id.ID;
+import seedu.sourcecontrol.model.student.id.Id;
 
 public class JsonAdaptedAssessmentTest {
     private static final String VALID_ASSESSMENT = BENSON.getScores().keySet().iterator().next().name;
@@ -39,7 +39,7 @@ public class JsonAdaptedAssessmentTest {
         LinkedHashMap<String, String> scores = new LinkedHashMap<>();
         scores.put(INVALID_ID, VALID_SCORE);
         JsonAdaptedAssessment assessment = new JsonAdaptedAssessment(VALID_ASSESSMENT, scores);
-        String expectedMessage = ID.MESSAGE_CONSTRAINTS;
+        String expectedMessage = Id.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, assessment::toModelType);
     }
 

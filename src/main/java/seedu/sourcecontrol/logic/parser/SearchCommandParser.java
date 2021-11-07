@@ -49,7 +49,7 @@ public class SearchCommandParser implements Parser<SearchCommand> {
         }
 
         if (!argMultimap.getValue(PREFIX_ID).isEmpty()) {
-            searchType = "ID";
+            searchType = "Id";
             prefix = " -i ";
             count++;
         }
@@ -89,7 +89,7 @@ public class SearchCommandParser implements Parser<SearchCommand> {
         case "NAME":
             return new SearchCommand(new NameContainsKeywordsPredicate(keywordsList));
 
-        case "ID":
+        case "Id":
             return new SearchCommand(new IdContainsKeywordsPredicate(keywordsList));
 
         case "GROUP":

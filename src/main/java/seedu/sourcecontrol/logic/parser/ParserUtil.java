@@ -18,7 +18,7 @@ import seedu.sourcecontrol.logic.parser.exceptions.ParseException;
 import seedu.sourcecontrol.model.student.assessment.Assessment;
 import seedu.sourcecontrol.model.student.assessment.Score;
 import seedu.sourcecontrol.model.student.group.Group;
-import seedu.sourcecontrol.model.student.id.ID;
+import seedu.sourcecontrol.model.student.id.Id;
 import seedu.sourcecontrol.model.student.name.Name;
 import seedu.sourcecontrol.model.student.tag.Tag;
 
@@ -104,26 +104,26 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String ID} into an {@code ID}.
+     * Parses a {@code String Id} into an {@code Id}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code ID} is invalid.
+     * @throws ParseException if the given {@code Id} is invalid.
      */
-    public static ID parseID(String id) throws ParseException {
+    public static Id parseID(String id) throws ParseException {
         requireNonNull(id);
         String trimmedID = id.trim();
-        if (!ID.isValidID(trimmedID)) {
-            throw new ParseException(ID.MESSAGE_CONSTRAINTS);
+        if (!Id.isValidID(trimmedID)) {
+            throw new ParseException(Id.MESSAGE_CONSTRAINTS);
         }
-        return new ID(trimmedID);
+        return new Id(trimmedID);
     }
 
     /**
-     * Parses {@code Collection<String> ids} into a {@code List<ID>}.
+     * Parses {@code Collection<String> ids} into a {@code List<Id>}.
      */
-    public static List<ID> parseIds(Collection<String> ids) throws ParseException {
+    public static List<Id> parseIds(Collection<String> ids) throws ParseException {
         requireNonNull(ids);
-        final List<ID> idList = new ArrayList<>();
+        final List<Id> idList = new ArrayList<>();
         for (String id : ids) {
             idList.add(parseID(id));
         }

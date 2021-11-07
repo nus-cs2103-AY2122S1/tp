@@ -21,7 +21,7 @@ import seedu.sourcecontrol.model.student.Student;
 import seedu.sourcecontrol.model.student.assessment.Assessment;
 import seedu.sourcecontrol.model.student.assessment.Score;
 import seedu.sourcecontrol.model.student.group.Group;
-import seedu.sourcecontrol.model.student.id.ID;
+import seedu.sourcecontrol.model.student.id.Id;
 import seedu.sourcecontrol.model.student.name.Name;
 import seedu.sourcecontrol.model.student.name.NameEqualsPredicate;
 import seedu.sourcecontrol.model.student.tag.Tag;
@@ -49,7 +49,7 @@ public class AddScoreCommand extends Command {
     public static final String MESSAGE_NONEXISTENT_ASSESSMENT = "This assessment does not exist.";
     public static final String MESSAGE_NONEXISTENT_STUDENT = "This student does not exist.";
     public static final String MESSAGE_DUPLICATE_STUDENT_NAME =
-            "Score needs to be added through ID for this student due to duplicate naming.";
+            "Score needs to be added through Id for this student due to duplicate naming.";
 
     private final ScoreDescriptor scoreDescriptor;
 
@@ -142,7 +142,7 @@ public class AddScoreCommand extends Command {
         assert assessmentToEdit != null;
 
         Name name = toEditStudent.getName();
-        ID id = toEditStudent.getId();
+        Id id = toEditStudent.getId();
         List<Group> groups = toEditStudent.getGroups();
         Map<Assessment, Score> scores = toEditStudent.getScores();
         Set<Tag> tags = toEditStudent.getTags();
@@ -168,7 +168,7 @@ public class AddScoreCommand extends Command {
      */
     public static class ScoreDescriptor {
         private Name name;
-        private ID id;
+        private Id id;
         private Assessment assessment;
         private Score score;
 
@@ -192,11 +192,11 @@ public class AddScoreCommand extends Command {
             return Optional.ofNullable(name);
         }
 
-        public void setId(ID id) {
+        public void setId(Id id) {
             this.id = id;
         }
 
-        public Optional<ID> getId() {
+        public Optional<Id> getId() {
             return Optional.ofNullable(id);
         }
 
@@ -224,7 +224,7 @@ public class AddScoreCommand extends Command {
         }
 
         /**
-         * Returns a {@code Predicate} checking if a student have a matched name or ID.
+         * Returns a {@code Predicate} checking if a student have a matched name or Id.
          */
         public Predicate<Student> isToEditStudent() {
             return toCheck -> toCheck.getName().equals(name)

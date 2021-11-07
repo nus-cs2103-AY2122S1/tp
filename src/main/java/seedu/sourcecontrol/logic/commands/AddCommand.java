@@ -31,7 +31,7 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "beginner";
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
-    public static final String MESSAGE_DUPLICATE_STUDENT = "This student ID already exists in Source Control. ";
+    public static final String MESSAGE_DUPLICATE_STUDENT = "This student Id already exists in Source Control. ";
 
     private final Student toAdd;
 

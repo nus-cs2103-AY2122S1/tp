@@ -113,7 +113,7 @@ public class EditCommandTest {
     public void execute_duplicateStudentFilteredList_failure() {
         showStudentAtIndex(model, INDEX_FIRST_STUDENT);
 
-        // edit student in filtered list into a duplicate in address book
+        // edit student in filtered list into a duplicate in source control
         Student studentInList = model.getSourceControl().getStudentList().get(INDEX_SECOND_STUDENT.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_STUDENT,
                 new EditStudentDescriptorBuilder(studentInList).build());
@@ -141,13 +141,13 @@ public class EditCommandTest {
 
     /**
      * Edit filtered list where index is larger than size of filtered list,
-     * but smaller than size of address book
+     * but smaller than size of source control's student list
      */
     @Test
     public void execute_invalidStudentIndexFilteredList_failure() {
         showStudentAtIndex(model, INDEX_FIRST_STUDENT);
         Index outOfBoundIndex = INDEX_SECOND_STUDENT;
-        // ensures that outOfBoundIndex is still in bounds of address book list
+        // ensures that outOfBoundIndex is still in bounds of source control student list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getSourceControl().getStudentList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,

@@ -16,7 +16,7 @@ import seedu.sourcecontrol.model.student.Student;
 import seedu.sourcecontrol.model.student.assessment.Assessment;
 import seedu.sourcecontrol.model.student.assessment.Score;
 import seedu.sourcecontrol.model.student.group.Group;
-import seedu.sourcecontrol.model.student.id.ID;
+import seedu.sourcecontrol.model.student.id.Id;
 import seedu.sourcecontrol.model.student.name.Name;
 import seedu.sourcecontrol.model.student.tag.Tag;
 
@@ -87,12 +87,12 @@ class JsonAdaptedStudent {
         final Name modelName = new Name(name);
 
         if (id == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, ID.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Id.class.getSimpleName()));
         }
-        if (!ID.isValidID(id)) {
-            throw new IllegalValueException(ID.MESSAGE_CONSTRAINTS);
+        if (!Id.isValidID(id)) {
+            throw new IllegalValueException(Id.MESSAGE_CONSTRAINTS);
         }
-        final ID modelId = new ID(id);
+        final Id modelId = new Id(id);
 
         final Map<Assessment, Score> modelScores = new LinkedHashMap<>();
 

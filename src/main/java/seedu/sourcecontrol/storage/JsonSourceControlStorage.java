@@ -45,14 +45,14 @@ public class JsonSourceControlStorage implements SourceControlStorage {
     public Optional<ReadOnlySourceControl> readSourceControl(Path filePath) throws DataConversionException {
         requireNonNull(filePath);
 
-        Optional<JsonSerializableSourceControl> jsonAddressBook = JsonUtil.readJsonFile(
+        Optional<JsonSerializableSourceControl> jsonSourceControl = JsonUtil.readJsonFile(
                 filePath, JsonSerializableSourceControl.class);
-        if (!jsonAddressBook.isPresent()) {
+        if (!jsonSourceControl.isPresent()) {
             return Optional.empty();
         }
 
         try {
-            return Optional.of(jsonAddressBook.get().toModelType());
+            return Optional.of(jsonSourceControl.get().toModelType());
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataConversionException(ive);

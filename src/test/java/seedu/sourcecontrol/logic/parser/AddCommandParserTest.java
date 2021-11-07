@@ -33,7 +33,7 @@ import org.junit.jupiter.api.Test;
 import seedu.sourcecontrol.logic.commands.AddCommand;
 import seedu.sourcecontrol.model.student.Student;
 import seedu.sourcecontrol.model.student.group.Group;
-import seedu.sourcecontrol.model.student.id.ID;
+import seedu.sourcecontrol.model.student.id.Id;
 import seedu.sourcecontrol.model.student.name.Name;
 import seedu.sourcecontrol.model.student.tag.Tag;
 import seedu.sourcecontrol.testutil.StudentBuilder;
@@ -56,7 +56,7 @@ public class AddCommandParserTest {
         assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + ID_DESC_BOB + GROUP_DESC_TUTORIAL
                 + TAG_DESC_FRIEND, new AddCommand(expectedStudent));
 
-        // multiple IDs - last ID accepted
+        // multiple IDs - last Id accepted
         assertParseSuccess(parser, NAME_DESC_BOB + ID_DESC_AMY + ID_DESC_BOB + GROUP_DESC_TUTORIAL
                 + TAG_DESC_FRIEND, new AddCommand(expectedStudent));
 
@@ -108,7 +108,7 @@ public class AddCommandParserTest {
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_BOB + ID_DESC_BOB , expectedMessage);
 
-        // missing ID prefix
+        // missing Id prefix
         assertParseFailure(parser, NAME_DESC_BOB + VALID_ID_BOB, expectedMessage);
 
         // all prefixes missing
@@ -123,7 +123,7 @@ public class AddCommandParserTest {
 
         // invalid nusNetId
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_ID_DESC + GROUP_DESC_TUTORIAL
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, ID.MESSAGE_CONSTRAINTS);
+                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Id.MESSAGE_CONSTRAINTS);
 
         // invalid group
         assertParseFailure(parser, NAME_DESC_BOB + ID_DESC_BOB + INVALID_GROUP_DESC

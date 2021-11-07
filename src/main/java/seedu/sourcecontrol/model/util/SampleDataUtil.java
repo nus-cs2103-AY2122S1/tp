@@ -17,7 +17,7 @@ import seedu.sourcecontrol.model.student.Student;
 import seedu.sourcecontrol.model.student.assessment.Assessment;
 import seedu.sourcecontrol.model.student.assessment.Score;
 import seedu.sourcecontrol.model.student.group.Group;
-import seedu.sourcecontrol.model.student.id.ID;
+import seedu.sourcecontrol.model.student.id.Id;
 import seedu.sourcecontrol.model.student.name.Name;
 import seedu.sourcecontrol.model.student.tag.Tag;
 
@@ -63,7 +63,7 @@ public class SampleDataUtil {
         List<Student> sampleStudents = new ArrayList<>();
 
         for (String studentName : SAMPLE_STUDENT_NAMES) {
-            ID studentId = getRandomStudentId();
+            Id studentId = getRandomStudentId();
             List<Group> groups = Arrays.asList(getRandomTutorialGroup(), getRandomRecitationGroup());
             for (Group group : groups) {
                 group.addStudent(studentId);
@@ -85,20 +85,20 @@ public class SampleDataUtil {
     }
 
     /**
-     * Generates a random {@code ID}. A random six digit number is generated and a '0' is prepended to it.
+     * Generates a random {@code Id}. A random six digit number is generated and a '0' is prepended to it.
      * Ensures that only unique IDs will be generated each time.
      */
-    public static ID getRandomStudentId() {
+    public static Id getRandomStudentId() {
         int randomSixDigitNumber = random.nextInt((int) Math.pow(10, 6));
         String studentId = "E" + String.format("%07d", randomSixDigitNumber);
 
         if (TAKEN_IDS.contains(studentId)) {
-            // If the generated student ID has already been taken, generate a new student ID.
+            // If the generated student Id has already been taken, generate a new student Id.
             return getRandomStudentId();
         }
 
         TAKEN_IDS.add(studentId);
-        return new ID(studentId);
+        return new Id(studentId);
     }
 
     public static List<Group> getRandomGroups(String prefix) {

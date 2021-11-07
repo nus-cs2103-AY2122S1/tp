@@ -114,7 +114,7 @@ public class SourceControl implements ReadOnlySourceControl {
     public void setStudent(Student target, Student editedStudent) {
         requireNonNull(editedStudent);
 
-        // ID has changed, update IDs in assessments
+        // Id has changed, update IDs in assessments
         if (!target.getId().equals(editedStudent.getId())) {
             assessments.replaceStudent(target, editedStudent);
         }

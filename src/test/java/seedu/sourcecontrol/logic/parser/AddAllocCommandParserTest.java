@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
 import seedu.sourcecontrol.logic.commands.AddAllocCommand;
 import seedu.sourcecontrol.logic.commands.AddAllocCommand.AllocDescriptor;
 import seedu.sourcecontrol.model.student.group.Group;
-import seedu.sourcecontrol.model.student.id.ID;
+import seedu.sourcecontrol.model.student.id.Id;
 import seedu.sourcecontrol.model.student.name.Name;
 import seedu.sourcecontrol.testutil.AllocDescriptorBuilder;
 
@@ -76,7 +76,7 @@ public class AddAllocCommandParserTest {
 
         // invalid student identity value
         assertParseFailure(parser, GROUP_DESC_TUTORIAL + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, GROUP_DESC_TUTORIAL + INVALID_ID_DESC, ID.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, GROUP_DESC_TUTORIAL + INVALID_ID_DESC, Id.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, INVALID_GROUP_DESC + INVALID_ID_DESC, Group.MESSAGE_CONSTRAINTS);

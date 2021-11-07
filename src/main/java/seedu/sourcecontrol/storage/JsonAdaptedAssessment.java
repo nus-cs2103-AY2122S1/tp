@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.sourcecontrol.commons.exceptions.IllegalValueException;
 import seedu.sourcecontrol.model.student.assessment.Assessment;
 import seedu.sourcecontrol.model.student.assessment.Score;
-import seedu.sourcecontrol.model.student.id.ID;
+import seedu.sourcecontrol.model.student.id.Id;
 
 public class JsonAdaptedAssessment {
     private final String name;
@@ -31,7 +31,7 @@ public class JsonAdaptedAssessment {
     public JsonAdaptedAssessment(Assessment source) {
         name = source.name;
         scores = new LinkedHashMap<>();
-        for (ID id : source.scores.keySet()) {
+        for (Id id : source.scores.keySet()) {
             scores.put(id.value, source.scores.get(id).value);
         }
     }
@@ -54,13 +54,13 @@ public class JsonAdaptedAssessment {
         }
 
         for (String id : scores.keySet()) {
-            if (!ID.isValidID(id)) {
-                throw new IllegalValueException(ID.MESSAGE_CONSTRAINTS);
+            if (!Id.isValidID(id)) {
+                throw new IllegalValueException(Id.MESSAGE_CONSTRAINTS);
             }
             if (!Score.isValidScore(scores.get(id))) {
                 throw new IllegalValueException(Score.MESSAGE_CONSTRAINTS);
             }
-            assessment.scores.put(new ID(id), new Score(scores.get(id)));
+            assessment.scores.put(new Id(id), new Score(scores.get(id)));
         }
         return assessment;
     }

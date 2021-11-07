@@ -22,10 +22,10 @@ import seedu.sourcecontrol.model.Model;
 import seedu.sourcecontrol.model.student.Student;
 import seedu.sourcecontrol.model.student.assessment.Assessment;
 import seedu.sourcecontrol.model.student.assessment.AssessmentStatistics;
+import seedu.sourcecontrol.model.student.assessment.GroupStatistics;
 import seedu.sourcecontrol.model.student.assessment.StudentStatistics;
 import seedu.sourcecontrol.model.student.group.Group;
-import seedu.sourcecontrol.model.student.group.GroupStatistics;
-import seedu.sourcecontrol.model.student.id.ID;
+import seedu.sourcecontrol.model.student.id.Id;
 import seedu.sourcecontrol.model.student.id.IdContainsKeywordsPredicate;
 import seedu.sourcecontrol.model.student.name.Name;
 import seedu.sourcecontrol.model.student.name.NameEqualsPredicate;
@@ -56,13 +56,13 @@ public class ShowCommand extends Command {
     public static final String MESSAGE_NONEXISTENT_ASSESSMENT = "This assessment does not exist.";
     public static final String MESSAGE_NONEXISTENT_GROUP = "This group does not exist.";
     public static final String MESSAGE_DUPLICATE_STUDENT_NAME =
-            "This student needs to be specified using INDEX or ID due to duplicate naming.";
+            "This student needs to be specified using INDEX or Id due to duplicate naming.";
 
     public static final String BASE_PATH = "graph%1$s.png";
 
     private Index index;
     private Name name;
-    private ID id;
+    private Id id;
     private Assessment assessment;
     private Group group;
     private Path savePath;
@@ -86,9 +86,9 @@ public class ShowCommand extends Command {
     }
 
     /**
-     * Constructor for a {@code ShowCommand} with given {@code ID}.
+     * Constructor for a {@code ShowCommand} with given {@code Id}.
      */
-    public ShowCommand(ID id, Path savePath) {
+    public ShowCommand(Id id, Path savePath) {
         requireNonNull(id);
         setId(id);
         setSavePath(savePath);
@@ -145,7 +145,7 @@ public class ShowCommand extends Command {
     }
 
     /**
-     * Executes command when a {@code Student} info is requested by a {@code Name} or an {@code ID}.
+     * Executes command when a {@code Student} info is requested by a {@code Name} or an {@code Id}.
      */
     private CommandResult showStudentByPrefixes(Model model) throws CommandException {
         assert getName().isPresent() || getId().isPresent();
@@ -213,7 +213,7 @@ public class ShowCommand extends Command {
 
     /**
      * Creates a {@code Predicate} checking if a student has a matched
-     * {@code Name}, or {@code ID}, or belonging to a {@code Group}.
+     * {@code Name}, or {@code Id}, or belonging to a {@code Group}.
      */
     private Predicate<Student> createStudentPredicate() {
         if (getName().isPresent()) {
@@ -226,7 +226,7 @@ public class ShowCommand extends Command {
 
         if (getGroup().isPresent()) {
             List<String> ids = group.getStudents().stream()
-                    .map(ID::toString).collect(Collectors.toList());
+                    .map(Id::toString).collect(Collectors.toList());
             return new IdContainsKeywordsPredicate(ids);
         }
 
@@ -266,7 +266,7 @@ public class ShowCommand extends Command {
         this.name = name;
     }
 
-    public void setId(ID id) {
+    public void setId(Id id) {
         this.id = id;
     }
 
@@ -290,7 +290,7 @@ public class ShowCommand extends Command {
         return Optional.ofNullable(name);
     }
 
-    public Optional<ID> getId() {
+    public Optional<Id> getId() {
         return Optional.ofNullable(id);
     }
 

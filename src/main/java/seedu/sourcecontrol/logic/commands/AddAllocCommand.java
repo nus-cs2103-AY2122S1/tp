@@ -20,7 +20,7 @@ import seedu.sourcecontrol.model.student.Student;
 import seedu.sourcecontrol.model.student.assessment.Assessment;
 import seedu.sourcecontrol.model.student.assessment.Score;
 import seedu.sourcecontrol.model.student.group.Group;
-import seedu.sourcecontrol.model.student.id.ID;
+import seedu.sourcecontrol.model.student.id.Id;
 import seedu.sourcecontrol.model.student.name.Name;
 import seedu.sourcecontrol.model.student.name.NameEqualsPredicate;
 import seedu.sourcecontrol.model.student.tag.Tag;
@@ -45,7 +45,7 @@ public class AddAllocCommand extends Command {
     public static final String MESSAGE_NONEXISTENT_GROUP = "This group does not exist.";
     public static final String MESSAGE_NONEXISTENT_STUDENT = "This student does not exist.";
     public static final String MESSAGE_DUPLICATE_STUDENT_NAME =
-            "This student needs to be allocated using ID due to duplicate naming.";
+            "This student needs to be allocated using Id due to duplicate naming.";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the group.";
 
     private final AllocDescriptor allocDescriptor;
@@ -129,7 +129,7 @@ public class AddAllocCommand extends Command {
         assert allocDescriptor.getGroup().isPresent();
 
         Name name = toEditStudent.getName();
-        ID id = toEditStudent.getId();
+        Id id = toEditStudent.getId();
         List<Group> groups = toEditStudent.getGroups();
         Map<Assessment, Score> scores = toEditStudent.getScores();
         Set<Tag> tags = toEditStudent.getTags();
@@ -156,7 +156,7 @@ public class AddAllocCommand extends Command {
      */
     public static class AllocDescriptor {
         private Name name;
-        private ID id;
+        private Id id;
         private Group group;
 
         public AllocDescriptor() {}
@@ -178,11 +178,11 @@ public class AddAllocCommand extends Command {
             return Optional.ofNullable(name);
         }
 
-        public void setId(ID id) {
+        public void setId(Id id) {
             this.id = id;
         }
 
-        public Optional<ID> getId() {
+        public Optional<Id> getId() {
             return Optional.ofNullable(id);
         }
 
@@ -202,7 +202,7 @@ public class AddAllocCommand extends Command {
         }
 
         /**
-         * Returns a {@code Predicate} checking if a student have a matched name or ID.
+         * Returns a {@code Predicate} checking if a student have a matched name or Id.
          */
         public Predicate<Student> isAllocStudent() {
             return toCheck -> toCheck.getName().equals(name)

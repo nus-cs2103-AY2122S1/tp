@@ -14,7 +14,7 @@ import java.util.Set;
 import seedu.sourcecontrol.model.student.assessment.Assessment;
 import seedu.sourcecontrol.model.student.assessment.Score;
 import seedu.sourcecontrol.model.student.group.Group;
-import seedu.sourcecontrol.model.student.id.ID;
+import seedu.sourcecontrol.model.student.id.Id;
 import seedu.sourcecontrol.model.student.name.Name;
 import seedu.sourcecontrol.model.student.tag.Tag;
 
@@ -26,7 +26,7 @@ public class Student {
 
     // Identity fields
     private final Name name;
-    private final ID id;
+    private final Id id;
 
     // Data fields
     private final List<Group> groups = new ArrayList<>();
@@ -36,7 +36,7 @@ public class Student {
     /**
      * Constructs a {@code Student} object.
      */
-    public Student(Name name, ID id) {
+    public Student(Name name, Id id) {
         requireAllNonNull(name, id);
         this.name = name;
         this.id = id;
@@ -46,7 +46,7 @@ public class Student {
      * Constructs a {@code Student} object.
      * Every field must be present and not null.
      */
-    public Student(Name name, ID id, List<Group> groups, Map<Assessment, Score> scores, Set<Tag> tags) {
+    public Student(Name name, Id id, List<Group> groups, Map<Assessment, Score> scores, Set<Tag> tags) {
         requireAllNonNull(name, id, groups, scores, tags);
         this.name = name;
         this.id = id;
@@ -59,7 +59,7 @@ public class Student {
         return name;
     }
 
-    public ID getId() {
+    public Id getId() {
         return id;
     }
 
@@ -95,7 +95,7 @@ public class Student {
     }
 
     /**
-     * Returns true if both students have the same ID.
+     * Returns true if both students have the same Id.
      * This defines a weaker notion of equality between two students.
      */
     public boolean isSameStudent(Student otherStudent) {
@@ -152,7 +152,7 @@ public class Student {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append("; NUSNET ID: ")
+                .append("; NUSNET Id: ")
                 .append(getId());
 
         List<Group> groups = getGroups();

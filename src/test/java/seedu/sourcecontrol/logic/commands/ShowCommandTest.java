@@ -27,7 +27,7 @@ import seedu.sourcecontrol.model.UserPrefs;
 import seedu.sourcecontrol.model.student.Student;
 import seedu.sourcecontrol.model.student.assessment.Assessment;
 import seedu.sourcecontrol.model.student.group.Group;
-import seedu.sourcecontrol.model.student.id.ID;
+import seedu.sourcecontrol.model.student.id.Id;
 import seedu.sourcecontrol.model.student.id.IdContainsKeywordsPredicate;
 import seedu.sourcecontrol.model.student.name.Name;
 import seedu.sourcecontrol.model.student.name.NameEqualsPredicate;
@@ -60,7 +60,7 @@ public class ShowCommandTest {
             new ShowCommand((Index) null, path));
 
         assertThrows(NullPointerException.class, () ->
-            new ShowCommand((ID) null, path));
+            new ShowCommand((Id) null, path));
 
         assertThrows(NullPointerException.class, () ->
             new ShowCommand((Assessment) null, path));
@@ -95,7 +95,7 @@ public class ShowCommandTest {
     @Test
     public void execute_invalidId_throwsCommandException() {
         // AMY does not exist in typicalSourceControl
-        ID id = AMY.getId();
+        Id id = AMY.getId();
         String studentId = id.value;
 
         ShowCommand showCommand = new ShowCommand(id, null);
@@ -141,7 +141,7 @@ public class ShowCommandTest {
         // null -> returns false
         assertFalse(showFirstCommand.equals(null));
 
-        // different ID -> returns false
+        // different Id -> returns false
         showSecondCommand = new ShowCommand(INDEX_SECOND_STUDENT, Path.of("abc.csv"));
         assertFalse(showFirstCommand.equals(showSecondCommand));
 
