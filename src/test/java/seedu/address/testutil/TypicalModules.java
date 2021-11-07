@@ -17,6 +17,7 @@ public class TypicalModules {
     public static final String INVALID_MODULE_NAME = "Invalid module name";
 
     //some samples, can add more/modify for testing
+
     public static final Module MODULE_1 = new ModuleBuilder()
             .withName(MODULE_NAME_0)
             .withStudents(TypicalStudents.getTypicalStudents())
