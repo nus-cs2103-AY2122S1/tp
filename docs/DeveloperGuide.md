@@ -573,21 +573,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User chooses to edit the staff details.
 1. User inputs relevant details.
-1. Staff’d requests for confirmation.
-1. User confirms.
 1. Staff’d updates the new staff details.
 
    Use case ends.
 
 **Extensions**
 
-* 3a. Staff'd detects an error in the entered data.
+* 2a. Staff'd detects an error in the entered data.
 
-    * 3a1. Staff'd displays an error message.
-    * 3a2. User enters new data.
-    * 3a2. Steps 3a1-3a2 are repeated until the data entered are correct.
+    * 2a1. Staff'd displays an error message.
+    * 2a2. User enters new data.
+    * 2a3. Steps 3a1-3a2 are repeated until the data entered are correct.
 
-      Use case resumes at step 4.
+      Use case resumes at step 3.
 
 **Use case: UC02 - Edit staff schedule**
 
@@ -595,23 +593,38 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User chooses to edit a staff's schedule.
 1. User inputs relevant details.
-1. Staff’d requests for confirmation.
-1. User confirms.
 1. Staff’d updates the new staff schedule.
 
    Use case ends.
 
 **Extensions**
 
-* 3a. Staff'd detects an error in the entered data.
+* 2a. Staff'd detects an error in the entered data.
 
-    * 3a1. Staff'd displays an error message.
-    * 3a2. User enters new data.
-    * 3a2. Steps 3a1-3a2 are repeated until the data entered are correct.
+    * 2a1. Staff'd displays an error message.
+    * 2a2. User enters new data.
+    * 2a3. Steps 2a1-2a2 are repeated until the data entered are correct.
 
-      Use case resumes at step 4.
+      Use case resumes at step 3.
+    
 
-*{More to be added}*
+**Use case: UC03 - use Staff'd to calculate the salary**
+
+1. User chooses to calculate a staff's salary.
+1. User inputs relevant details.
+1. Staff'd displays the salary of staff related to details.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. Staff'd detects an error in the entered details.
+    * 2a1. Staff'd displays an error message.
+    * 2a2. User enters new data.
+    * 2a3. Steps 2a1-2a2 are repeated until data entered are correct.
+      
+        Use case resumes at step 3.
+
 
 ### Non-Functional Requirements
 
