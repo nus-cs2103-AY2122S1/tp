@@ -12,6 +12,7 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/developerPhotos/aakanshanarain.png" width="200px">
 
 [[github](https://github.com/aakanshanarain)]
+[[portfolio](team/aakanshanarain.md)]
 
 * Role: Developer
 * Responsibilities: Delivarables
@@ -20,6 +21,7 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/developerPhotos/charltonator.png" width="200px">
 
 [[github](http://github.com/charltonator)]
+[[portfolio](team/charltonator.md)]
 
 * Role: Developer
 * Responsibilities: Testing
@@ -29,6 +31,7 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/developerPhotos/ethanwong6362.png" width="200px">
 
 [[github](http://github.com/ethanwong6362)]
+[[portfolio](team/ethanwong6363.md)]
 
 * Role: Developer
 * Responsibilities: Logic flow
@@ -38,6 +41,7 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/developerPhotos/ngjiayuan.png" width="200px">
 
 [[github](http://github.com/ngjiayuan)]
+[[portfolio](team/ngjiayuan.md)]
 
 * Role: Team Lead
 * Responsibilities: Code quality and team operations
@@ -47,6 +51,7 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/developerPhotos/zacharylwy.png" width="200px">
 
 [[github](http://github.com/zacharylwy)]
+[[portfolio](team/zacharylwy.md)]
 
 * Role: Developer
 * Responsibilities: UI

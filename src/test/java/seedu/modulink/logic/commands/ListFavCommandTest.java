@@ -5,6 +5,10 @@ import static seedu.modulink.logic.commands.CommandTestUtil.assertCommandSuccess
 import static seedu.modulink.testutil.TypicalPersons.ALICE;
 import static seedu.modulink.testutil.TypicalPersons.BENSON;
 import static seedu.modulink.testutil.TypicalPersons.CARL;
+import static seedu.modulink.testutil.TypicalPersons.DANIEL;
+import static seedu.modulink.testutil.TypicalPersons.ELLE;
+import static seedu.modulink.testutil.TypicalPersons.FIONA;
+import static seedu.modulink.testutil.TypicalPersons.GEORGE;
 import static seedu.modulink.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -12,6 +16,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.modulink.commons.core.Messages;
 import seedu.modulink.model.Model;
 import seedu.modulink.model.ModelManager;
 import seedu.modulink.model.UserPrefs;
@@ -41,5 +46,26 @@ public class ListFavCommandTest {
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ALICE, BENSON, CARL), model.getFilteredPersonList());
 
+    }
+
+    @Test
+    public void execute_noFavourite_success() {
+        String expectedMessage = Messages.MESSAGE_NO_FAVOURITES;
+        ListFavCommand command = new ListFavCommand();
+
+        model.deletePerson(ALICE);
+        model.deletePerson(BENSON);
+        model.deletePerson(CARL);
+
+        expectedModel.deletePerson(ALICE);
+        expectedModel.deletePerson(BENSON);
+        expectedModel.deletePerson(CARL);
+
+        IsFavouritePredicate predicate = new IsFavouritePredicate();
+
+        expectedModel.updateFilteredPersonList(predicate);
+
+        assertEquals(Arrays.asList(DANIEL, ELLE, FIONA, GEORGE), model.getFilteredPersonList());
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
 }

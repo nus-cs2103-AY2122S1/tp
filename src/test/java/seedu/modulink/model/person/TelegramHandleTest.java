@@ -30,5 +30,6 @@ public class TelegramHandleTest {
         assertTrue(TelegramHandle.isValidHandle("peterthe2nd")); // alphanumeric characters
         assertTrue(TelegramHandle.isValidHandle("CapitalTan")); // with capital letters
         assertTrue(TelegramHandle.isValidHandle("alexa_tan_test")); // with hyphens
+        assertTrue(TelegramHandle.isValidHandle(null)); // null telegram handle
     }
 }

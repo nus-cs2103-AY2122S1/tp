@@ -1,4 +1,7 @@
-# ModuLink: User Guide
+---
+layout: page
+title: ModuLink - User Guide
+---
 ## Welcome to ModuLink!
 
 ModuLink is a **desktop-based** application for **Computer Science (CS) students** at NUS to facilitate finding teammates for group-based modules. With a powerful integrated contact management platform, connecting with peers to form project groups has never been easier. ModuLink allows you to find students taking the modules you are interested in, search by their group status (to find students available to form or join groups), and much more.

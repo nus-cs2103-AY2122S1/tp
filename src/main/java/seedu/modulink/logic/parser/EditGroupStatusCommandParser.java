@@ -2,13 +2,13 @@ package seedu.modulink.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.modulink.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.modulink.commons.core.Messages.MESSAGE_UNKNOWN_PREFIX_FORMAT;
 import static seedu.modulink.logic.parser.CliSyntax.PREFIX_MOD;
 
 import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.modulink.commons.util.StringUtil;
 import seedu.modulink.logic.commands.EditCommand;
 import seedu.modulink.logic.commands.EditGroupStatusCommand;
 import seedu.modulink.logic.parser.exceptions.ParseException;
@@ -26,15 +26,29 @@ public class EditGroupStatusCommandParser implements Parser<EditGroupStatusComma
                 ArgumentTokenizer.tokenize(args, PREFIX_MOD);
 
         String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()
-            || StringUtil.countMatch(args, '/') != 1) {
+        if (trimmedArgs.isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditGroupStatusCommand.MESSAGE_USAGE));
+        }
+
+        if (!trimmedArgs.startsWith("mod/") && trimmedArgs.contains("/")) {
+            throw new ParseException(
+                    String.format(MESSAGE_UNKNOWN_PREFIX_FORMAT, EditGroupStatusCommand.MESSAGE_USAGE));
+        }
+
+        if (!trimmedArgs.startsWith("mod/") && !trimmedArgs.contains("/")) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditGroupStatusCommand.MESSAGE_USAGE));
         }
 
         EditCommand.EditPersonDescriptor editPersonDescriptor = new EditCommand.EditPersonDescriptor();
 
-        parseModsToAdd(argMultimap.getAllValues(PREFIX_MOD)).ifPresent(editPersonDescriptor::setTags);
+        try {
+            parseModsToAdd(argMultimap.getAllValues(PREFIX_MOD)).ifPresent(editPersonDescriptor::setTags);
+        } catch (ParseException e) {
+            throw new ParseException(String.format(e.getMessage() + "%s",
+                    e.getMessage().startsWith("Unknown prefix(es)") ? EditGroupStatusCommand.MESSAGE_USAGE : ""));
+        }
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditGroupStatusCommand.MESSAGE_NO_MODULE_SPECIFIED);

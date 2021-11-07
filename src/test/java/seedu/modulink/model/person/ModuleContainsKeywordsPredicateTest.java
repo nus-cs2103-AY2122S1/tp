@@ -38,4 +38,41 @@ public class ModuleContainsKeywordsPredicateTest {
         // different person -> returns false
         assertFalse(firstPredicate.equals(secondPredicate));
     }
+
+    @Test
+    public void test() throws ParseException {
+        Set<Mod> firstPredicateKeywordList = Set.of(new Mod("CS2100 need member"));
+        Set<Mod> secondPredicateKeywordList = Set.of(new Mod("CS2100 need group"));
+
+        ModuleContainsKeywordsPredicate firstPredicate = new ModuleContainsKeywordsPredicate(firstPredicateKeywordList);
+        ModuleContainsKeywordsPredicate secondPredicate =
+                new ModuleContainsKeywordsPredicate(secondPredicateKeywordList);
+        Person person = new Person(new Name("alex"), new StudentId("A1234589R"), new Phone("12332110"),
+                new Email("alex@example.com"), new GitHubUsername("alexyeoh"),
+                null, false,
+                firstPredicateKeywordList, false);
+
+        Person personWithDifferentMod = new Person(new Name("alex"), new StudentId("A1234589R"), new Phone("12332110"),
+                new Email("alex@example.com"), new GitHubUsername("alexyeoh"),
+                null, false,
+                secondPredicateKeywordList, false);
+
+        assertTrue(firstPredicate.test(person));
+        assertTrue(secondPredicate.test(personWithDifferentMod));
+
+        assertFalse(firstPredicate.test(personWithDifferentMod));
+        assertFalse(secondPredicate.test(person));
+    }
+
+    @Test
+    public void testOnOwnProfile() throws ParseException {
+        Set<Mod> firstPredicateKeywordList = Set.of(new Mod("CS2100 need member"));
+        ModuleContainsKeywordsPredicate firstPredicate = new ModuleContainsKeywordsPredicate(firstPredicateKeywordList);
+        Person myProfile = new Person(new Name("alex"), new StudentId("A1234589R"), new Phone("12332110"),
+                new Email("alex@example.com"), new GitHubUsername("alexyeoh"),
+                null, false,
+                firstPredicateKeywordList, true);
+
+        assertFalse(firstPredicate.test(myProfile));
+    }
 }

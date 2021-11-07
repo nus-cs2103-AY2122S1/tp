@@ -30,5 +30,8 @@ public class GitHubUsernameTest {
         assertTrue(GitHubUsername.isValidUsername("peterthe2nd")); // alphanumeric characters
         assertTrue(GitHubUsername.isValidUsername("CapitalTan")); // with capital letters
         assertTrue(GitHubUsername.isValidUsername("alexa-tan-test")); // with hyphens
+
+        // valid null GitHub username
+        assertTrue(GitHubUsername.isValidUsername(null));
     }
 }
