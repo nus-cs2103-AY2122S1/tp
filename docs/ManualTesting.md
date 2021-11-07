@@ -670,7 +670,7 @@ and open the "View Test Score" tab to view the changes in the grade.
          | * [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800 (HEAD) (MAIN)</br>
          | | 		Academy Directory has been cleared!</br>
          |/</br>
-         \* [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800 (OLD)</br>
+         \* [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800 </br>
          | 		Initial Commit</br>
         Note a few things: 
          - Date and time for initial commit should not change
@@ -680,14 +680,13 @@ and open the "View Test Score" tab to view the changes in the grade.
          | * [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800 (HEAD) (MAIN)</br>
          | | 		New student added: Alex</br>
          |/</br>
-         \* [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800 (OLD)</br>
+         \* [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800 </br>
            | 		Academy Directory has been cleared!</br>
          \* [FIVE CHAR HASH] - DDD, dd Nov YYYY hh:mm:ss +0800</br>
          | 		Initial Commit</br>
          Note a few things:
          - Date and time for initial commit should not change
          - A new commit is created, and its time should correspond to the time when the command `add` was executed
-         - The label "(OLD)" shifted to the previous commit i.e. the one that clears the Academy Directory
 2. View commit history when history branches
    1. Prerequisite: Start with an empty commit history. To achieve this, do the following:
        - Check that `UndoCommand` works, by following [this](#undo-changes)
@@ -747,6 +746,53 @@ and open the "View Test Score" tab to view the changes in the grade.
           - The label "(HEAD)" and "(MAIN)" is on the latest commit i.e. the commit which does `add n/Bob`
 
 The above test cases tests for correctness for the basic behaviors of `HistoryCommand`. They don't have to be 
+executed with the exact commands given; using different commands in different order may lead to slightly different
+commit message and/or date time shown. However, the general behavior as demonstrated above should remain the same.
+
+#### Revert Commit History
+1. Revert to commit in the same branch
+    1. Prerequisite: Start with an empty commit history. To achieve this, do the following:
+        - Remove version control folder (Default is `data/vc`; refer to `preferences.json` for specific)
+        - Start the application
+    2. Test cases:
+        1. Execute the following commands in sequence: </br>
+           `clear` -> `history` -> `revert HASH`,</br>
+           where `HASH` refers to the five character hash of the latest commit as shown by `history` </br>
+           Expected: Student list should be repopulated
+        2. Continuing from above, run `history` </br>
+           Expected: Something like the following should appear </br>
+           | * [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800 (MAIN)</br>
+           | | 		Academy Directory has been cleared!</br>
+           |/</br>
+           \* [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800 (HEAD)</br>
+           | 		Initial Commit</br>
+           Note a few things:
+            - Date and time for initial commit should not change
+            - No new commit is created
+2. Revert to commit in a different branch
+   1. Prerequisite: Start with an empty commit history. To achieve this, do the following:
+        - Remove version control folder (Default is `data/vc`; refer to `preferences.json` for specific)
+        - Start the application
+   2. Test cases:
+       1. Execute the following commands in sequence: </br>
+          `clear` --> `undo` --> `add n/Alex e/alex@email.com te/@alex` --> `history` -> `revert HASH`<br/>
+          where `HASH` refers to the five character hash of the commit which executes `clear`, as shown by `history` </br>
+          Expected: Student list should be empty
+       2. Continuing from above, run `history` </br>
+          Expected: Something like the following should appear </br>
+          | * [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800 (MAIN)</br>
+          | | 		New student added: Alex </br>
+          \* | [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800 (HEAD) (OLD)</br>
+          | | 		Academy Directory has been cleared! </br>
+          |/ </br>
+          \* [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800</br>
+          | 		Initial Commit</br></br>
+          Note a few things:
+           - Date and time for initial commit should not change
+           - No new commit is created
+           - The label "(HEAD)" is now in the commit whose hash was passed to `revert`
+
+The above test cases tests for correctness for the basic behaviors of `RevertCommand`. They don't have to be
 executed with the exact commands given; using different commands in different order may lead to slightly different
 commit message and/or date time shown. However, the general behavior as demonstrated above should remain the same.
 
