@@ -173,13 +173,14 @@ The user can also use the hotkeys `CTRL-S` and `CTRL-D` to cycle between tabs.
 
 **Aspect: Determining which tab to switch to after updating the list:**
 
-* **Alternative 1 (current choice):** AniList will switch back to `all` tab after the list is updated.
-    * Pros: Allows users to view all animes after the list is updated. Easy to implement.
-    * Cons: If the user wants to remain at his previous tab, he will have to manually switch his tab back by using the list command or the tab switching hotkeys.
+* **Alternative 1 (current choice):** AniList will remain at current tab after the list is updated
+    * Pros: User will not have to input a command or use hotkeys to switch back to his previous tab. This is the more intuitive and logical solution.
+    * Cons: Harder to implement as there is a need to compound predicates to maintain a properly filtered list. Prone to more bugs.
 
-* **Alternative 2:** AniList will remain at current tab after the list is updated
-    * Pros: User will not have to input a command or use hotkeys to switch back to his previous tab.
-    * Cons: Hard to implement and test.
+* **Alternative 2:** AniList will switch back to `all` tab after the list is updated.
+    * Pros: Allows users to view all animes after the list is updated. Easy to implement.
+    * Cons: If the user wants to remain at his previous tab, he will have to manually switch his tab back by using the list command or the tab switching hotkeys. Not very intuitive.
+
 
 **Aspect: Determining whether there should be a list maintained per tab or all tabs take reference from a single list**
 * **Alternative 1 (current choice):** All the tabs will take reference to the same `ObservableList`.
@@ -196,7 +197,7 @@ for tab switching.
 
 #### Implementation
 
-The proposed clear mechanism is facilitated by 3 `Command`s, namely `ClearCommand`,
+The current clear mechanism is facilitated by 3 `Command`s, namely `ClearCommand`,
 `AbortClearCommand` and `ConfirmClearCommand`. This results in a confirmation message to be displayed
 to the user when the user executes `clear`, after which it can either be confirmed (by entering `clear` again) or
 aborted (by entering any other input).
@@ -264,7 +265,7 @@ the background image.
 * Cons: There is a limited choice of color blocking. The bulk of the theming is made from a specified color shading.
 
 
-### [/Proposed] Theme adding feature
+### [Proposed] Theme adding feature
 #### Current Implementation
 
 Currently, users are allowed to switch between pre-defined and pre-made themes that are provided by the application. However, we 
@@ -298,7 +299,7 @@ Given below is an MSS of an example usage scenario of a user creating their own 
 
 
 
-### [/Proposed] Genre adding feature
+### [Proposed] Genre adding feature
 
 #### Current Implementation
 
@@ -309,7 +310,7 @@ The user can only add or delete a `Genre` from an `Anime` if the `Genre` is in t
 * Pros: Easy to implement, and easy to manage as we don't have to worry about syncing the `Genres` in multiple lists
 * Cons: Inconvenient for the user, as user can only use a `Genre` if it is in the `GenreList`.
 
-The Sequence Diagram below illustrates the interactions within the Logic component for the execute("genre 1 c/add g/action g/fantasy") API call.
+The Sequence Diagram below illustrates the interactions within the Logic component for the execute `genre 1 c/add g/action g/fantasy` API call.
 
 ![Interactions Inside the Logic Component for the `genre 1 c/add g/action g/fantasy` Command](images/AddGenreSequenceDiagram.png)
 
