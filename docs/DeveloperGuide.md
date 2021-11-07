@@ -156,7 +156,28 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Add command
 
-A user can use the add command to add a clients. A sequence diagram of this action is as shown:
+A `Person` can be added to `InsurancePal` using the following method:
+1. Using the `AddCommand` to add a `Person` to `InsurancePal`
+
+The processing of an add command from the user can be split into 2 general steps:
+1. Parsing user input into an `AddCommand`
+2. Executing the `AddCommand`
+
+Each step will be described in the sections below.
+
+**Step 1**: Parsing of user input
+
+Parsing of the user input is primarily handled by the `RevenueCommandParser` which calls other
+helper classes to parse the text into various attributes `XYZ` of `Person`, which are: 
+* `Name`
+* `Phone`
+* `Email`
+* `Address`
+* `Tags`
+* `Insurances`
+* `Notes` (optional)
+
+Additionally, an empty `Appointment` object is added. 
 
 ![AddCommandSequenceDiagram](images/AddCommandSequenceDiagram.png)
 
