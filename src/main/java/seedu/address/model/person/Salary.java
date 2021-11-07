@@ -12,8 +12,11 @@ public class Salary implements Field {
     private static final int MAX_SALARY = 9999;
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Salaries have to be a non-negative integer representing the pay in dollars. Cents can be added by "
-            + "adding one or two number digits after a \".\".\n\nThe salary cannot exceed $" + MAX_SALARY + ".99.";
+            "Salaries have to be a non-negative integer representing the hourly pay in dollars.\n"
+            + "Cents can be added by adding one or two numeric characters after a \".\".\n\n"
+            + "For example, \"0.1\" and \"0.10\" both represent $0.10 per hour.\n"
+            + "However, \"0.\" and \"0.001\" are not acceptable.\n\n"
+            + "Note that the salary cannot exceed $" + MAX_SALARY + ".99.";
 
     public final Integer value;
 
