@@ -8,7 +8,6 @@ import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.storage.DefaultShiftTimingsStorage;
 import seedu.address.storage.RoleReqStorage;
 
 /**
@@ -29,12 +28,6 @@ public class ClearCommand extends Command {
             RoleReqStorage.reset();
         } catch (IOException e) {
             throw new CommandException(Messages.FILE_NOT_FOUND + "\n" + RoleReqStorage.FILEPATH);
-        }
-
-        try {
-            DefaultShiftTimingsStorage.reset();
-        } catch (IOException e) {
-            throw new CommandException(Messages.FILE_NOT_FOUND + "\n" + DefaultShiftTimingsStorage.FILEPATH);
         }
 
         return new CommandResult(MESSAGE_SUCCESS);

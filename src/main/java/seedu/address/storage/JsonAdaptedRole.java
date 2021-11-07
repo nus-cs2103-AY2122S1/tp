@@ -40,9 +40,9 @@ class JsonAdaptedRole {
      */
     public Role toModelType() throws IllegalValueException {
         if (!Role.isValidRole(roleName)) {
-            throw new IllegalValueException(Role.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(Role.STORAGE_WRONG_ROLE_MESSAGE);
         }
-        return Role.translateStringToRole(roleName);
+        return Role.translateStringToRoleWithNoRole(roleName);
     }
 
 }
