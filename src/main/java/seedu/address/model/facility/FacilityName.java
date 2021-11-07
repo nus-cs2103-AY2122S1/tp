@@ -13,7 +13,7 @@ public class FacilityName {
             "Facility names should only contain up to 50 alphanumeric characters and spaces,"
             + " and should not be blank.";
 
-    public static final String VALIDATION_REGEX = "[\\p{Alnum} ]{1,50}";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]{0,49}";
 
     public final String facilityName;
 

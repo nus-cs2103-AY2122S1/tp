@@ -21,7 +21,7 @@ public class DeallocateMemberCommandParser implements Parser<DeallocateMemberCom
      */
     public DeallocateMemberCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        String[] trimmedArgs = args.trim().split(" ");
+        String[] trimmedArgs = args.trim().split("\\s+");
 
         Index memberIndex;
         Index facilityIndex;
@@ -31,15 +31,10 @@ public class DeallocateMemberCommandParser implements Parser<DeallocateMemberCom
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     DeallocateMemberCommand.MESSAGE_USAGE));
         }
-        try {
-            memberIndex = ParserUtil.parseIndex(trimmedArgs[0]);
-            facilityIndex = ParserUtil.parseIndex(trimmedArgs[1]);
-            day = ParserUtil.parseDay(trimmedArgs[2]);
+        memberIndex = ParserUtil.parseIndex(trimmedArgs[0]);
+        facilityIndex = ParserUtil.parseIndex(trimmedArgs[1]);
+        day = ParserUtil.parseDay(trimmedArgs[2]);
 
-            return new DeallocateMemberCommand(memberIndex, facilityIndex, day);
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    DeallocateMemberCommand.MESSAGE_USAGE), pe);
-        }
+        return new DeallocateMemberCommand(memberIndex, facilityIndex, day);
     }
 }

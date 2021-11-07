@@ -27,7 +27,7 @@ public class AddFacilityCommand extends Command {
             + PREFIX_TIME + "1130 "
             + PREFIX_CAPACITY + "5 ";
     public static final String MESSAGE_SUCCESS = "New facility added: %1$s";
-    public static final String MESSAGE_DUPLICATE_FACILITY = "This facility already exists in the facility list.";
+    public static final String MESSAGE_DUPLICATE_FACILITY = "This facility already exists in SportsPA.";
 
     private final Facility facility;
 

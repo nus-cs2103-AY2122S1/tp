@@ -5,7 +5,7 @@ import seedu.address.model.facility.Facility;
 import seedu.address.model.member.Member;
 
 /**
- * Unmodifiable view of a SportsPa
+ * Unmodifiable view of a SportsPa.
  */
 public interface ReadOnlySportsPa {
 

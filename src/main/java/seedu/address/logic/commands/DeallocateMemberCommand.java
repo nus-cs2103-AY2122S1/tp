@@ -5,11 +5,10 @@ import static seedu.address.commons.core.Messages.MESSAGE_EMPTY_LIST;
 import static seedu.address.commons.core.Messages.MESSAGE_FACILITY;
 import static seedu.address.commons.core.Messages.MESSAGE_MEMBER;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.commons.util.DayUtil.displayDay;
 
 import java.time.DayOfWeek;
-import java.time.format.TextStyle;
 import java.util.List;
-import java.util.Locale;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -65,25 +64,36 @@ public class DeallocateMemberCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_FACILITY_DISPLAYED_INDEX);
         }
         Member toBeDeallocated = lastShownMemberList.get(memberIndex.getZeroBased());
-        Facility toDeallocate = lastShownFacilityList.get(facilityIndex.getZeroBased());
+        Facility toDeallocateFrom = lastShownFacilityList.get(facilityIndex.getZeroBased());
 
-        if (!toDeallocate.isMemberAllocatedOnDay(toBeDeallocated, day)) {
+        handleDeallocation(toBeDeallocated, toDeallocateFrom, model);
+
+        String dayName = displayDay(day);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toBeDeallocated.getName(),
+                toDeallocateFrom.getName(), dayName), false, true, false);
+    }
+
+    /**
+     * Handles the allocation of the member to the facility.
+     * @param toBeDeallocated Member to be deallocated from the facility.
+     * @param toDeallocateFrom Facility to deallocate the member from.
+     * @throws CommandException if deallocation of the member from the facility is not feasible.
+     */
+    private void handleDeallocation(Member toBeDeallocated,
+                                    Facility toDeallocateFrom, Model model) throws CommandException {
+        if (!toDeallocateFrom.isMemberAllocatedOnDay(toBeDeallocated, day)) {
             throw new CommandException(Messages.MESSAGE_MEMBER_NOT_ALLOCATED);
         } else {
-            AllocationMap updatedAllocationMap = toDeallocate.getAllocationMap();
+            AllocationMap updatedAllocationMap = toDeallocateFrom.getAllocationMap();
             updatedAllocationMap.removeMemberOnDay(toBeDeallocated, day);
             Facility afterDeallocated = new Facility(
-                    toDeallocate.getName(), toDeallocate.getLocation(), toDeallocate.getTime(),
-                    toDeallocate.getCapacity(), updatedAllocationMap);
-            model.setFacility(toDeallocate, afterDeallocated);
+                    toDeallocateFrom.getName(), toDeallocateFrom.getLocation(), toDeallocateFrom.getTime(),
+                    toDeallocateFrom.getCapacity(), updatedAllocationMap);
+            model.setFacility(toDeallocateFrom, afterDeallocated);
             model.updateFilteredFacilityList(Model.PREDICATE_SHOW_ALL_FACILITIES);
         }
 
-        String dayName = day.getDisplayName(TextStyle.FULL, Locale.getDefault());
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toBeDeallocated.getName(),
-                toDeallocate.getName(), dayName), false, true, false);
     }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {

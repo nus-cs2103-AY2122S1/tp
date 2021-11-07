@@ -24,6 +24,7 @@ public class EditMemberCommandParser implements Parser<EditMemberCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the EditMemberCommand
      * and returns an EditMemberCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditMemberCommand parse(String args) throws ParseException {
