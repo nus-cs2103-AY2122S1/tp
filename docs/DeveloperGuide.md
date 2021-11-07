@@ -173,9 +173,8 @@ In our implementation, the unique identifier is `Name` and `TaskDeadline`, which
 so we desided to use a easier implementation, which is the current one.
 
 A better implementation of the alternative design may involve using database management system like PostgreSQL,
-a proposed entity relationship model diagram for the member-task relation is given below:
+a proposed entity relationship model diagram for the member-task relation is given here:[ER_diagram](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/docs/images/ER.png)
 
-<img src="images/ER.png" width="600"/>
 
 [comment]: <> (<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative &#40;arguably, 
 a more OOP&#41; model is given below. It has a `Position` list in the `AddressBook`, which `Member` references. This allows `AddressBook` to only require one `Position` object per unique POSITION, instead of each `Member` needing their own set of `Position` objects.<br>)
@@ -759,9 +758,19 @@ testers are expected to do more *exploratory* testing.
 
 #### Adding a task
 
-
-
+1. Adding a task to one or more members while all members are being shown
+    1. Prerequisites: List all members using the `mlist` command. At least 3 members in the list.
+    2. Test case: `tadd /n group meeting /d 22/11/2021 12:00 /m 1`<br>
+    Expected: A new task will be added to the first member's task list. Details of the added task shown in the status message.
+    3. Test caseL `tadd /n submit report /d 11/11/2021 23:59 /m 2 /m 3`<br>
+    Expected: A new task will be added to the second and third members' task lists. Details of the added task shown in the status message.
+    
 #### Deleting a task
+
+1. Deleting a task from the currently selected member's task list while the task list is being shown
+   1. Prerequisites: List all members using the `tlist /m 1` command. Multiple tasks in the list.
+   2. Test cases: `tdel /t 1`<br>
+   Expected: First task is deleted from the currently shown task list. Success message will be shown in the status message.
 
 #### Marking a task as completed
 
