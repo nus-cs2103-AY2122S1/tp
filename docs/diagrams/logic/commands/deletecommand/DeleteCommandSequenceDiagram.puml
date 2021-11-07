@@ -1,0 +1,24 @@
+@startuml
+!include ../../../style.puml
+
+box Logic LOGIC_COLOR_T1
+Participant ":AddCommand" as ac LOGIC_COLOR
+Participant ":CommandResult" as result LOGIC_COLOR
+end box
+
+box VersionedModel MODEL_COLOR_T1
+Participant ":VersionedModel" as mm MODEL_COLOR
+Participant ":AcademyDirectory" as ad MODEL_COLOR
+end box
+
+-> ac ++ :execute
+ac -> mm :getFilteredStudentList()
+ac -> mm ++:deleteStudent(targetStudent)
+mm -> ad :removeStudent(targetStudent)
+deactivate
+
+create result
+ac -> result ++ :CommandResult(MESSAGE_SUCCESS, student)
+return commandResult
+return commandResult
+@enduml
