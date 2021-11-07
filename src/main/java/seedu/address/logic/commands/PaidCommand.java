@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PAID_AMOUNT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -16,6 +15,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.util.CommandUtil;
 import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.Homework;
 import seedu.address.model.lesson.Lesson;
@@ -86,43 +86,27 @@ public class PaidCommand extends UndoableCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
-        personBeforeLessonPaid = lastShownList.get(index.getZeroBased());
+        personBeforeLessonPaid = CommandUtil.getPerson(lastShownList, index);
 
-        Set<Lesson> lessons = new TreeSet<>(personBeforeLessonPaid.getLessons());
-        if (indexToEdit.getZeroBased() >= lessons.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
-        }
+        // Get lessons as a list copy
+        List<Lesson> lessonList = personBeforeLessonPaid.getLessons().stream().sorted().collect(Collectors.toList());
+        Lesson lessonToPay = CommandUtil.getLesson(lessonList, indexToEdit);
 
         if (payment.getMonetaryValue().compareTo(BigDecimal.ZERO) <= 0) {
             throw new CommandException(MESSAGE_PAID_AMT_LESS_THAN_ZERO_ERROR);
         }
 
-        List<Lesson> lessonList = new ArrayList<>(lessons);
-        Lesson toPay = lessonList.get(indexToEdit.getZeroBased());
-        Lesson paidLesson = createEditedLesson(toPay, payment);
+        Lesson paidLesson = createEditedLesson(lessonToPay, payment);
 
-        personAfterLessonPaid = createEditedPerson(personBeforeLessonPaid, toPay, paidLesson);
+        Set<Lesson> updatedLessons = createUpdatedLessons(lessonList, paidLesson, lessonToPay);
+        personAfterLessonPaid = PersonUtil.createdEditedPerson(personBeforeLessonPaid, updatedLessons);
 
         model.setPerson(personBeforeLessonPaid, personAfterLessonPaid);
         if (!model.hasPersonFilteredList(personAfterLessonPaid)) {
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         }
         return new CommandResult(String.format(MESSAGE_PAID_LESSON_SUCCESS, personAfterLessonPaid.getName(),
-                toPay, paidLesson), personAfterLessonPaid);
-    }
-
-    /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited using {@code editedLesson}.
-     */
-    private static Person createEditedPerson(Person personToEdit, Lesson toEdit, Lesson editedLesson) {
-        assert personToEdit != null;
-
-        Set<Lesson> updatedLessons = new TreeSet<>(personToEdit.getLessons().stream()
-                .map(lesson -> lesson.equals(toEdit) ? editedLesson : lesson)
-                .collect(Collectors.toSet()));
-
-        return PersonUtil.createdEditedPerson(personToEdit, updatedLessons);
+                lessonToPay, paidLesson), personAfterLessonPaid);
     }
 
     /**
@@ -156,6 +140,23 @@ public class PaidCommand extends UndoableCommand {
                 copiedLessonRates, updatedOutstandingFees, copiedCancelledDates)
                 : new MakeUpLesson(copiedDate, copiedTimeRange, copiedSubject, copiedHomeworkSet,
                 copiedLessonRates, updatedOutstandingFees, copiedCancelledDates);
+    }
+
+    /**
+     * Replaces lesson {@code toEdit} with lesson {@code edited} in {@code lessonList}.
+     *
+     * @param lessonList A list of lessons to update.
+     * @param paidLesson The paid lesson.
+     * @param lessonToPay The original lesson to be pay.
+     * @return A set of updated lessons with the lesson edited.
+     * @throws CommandException If the edited lesson results in a clash.
+     */
+    private Set<Lesson> createUpdatedLessons(List<Lesson> lessonList, Lesson paidLesson, Lesson lessonToPay) {
+        lessonList.remove(lessonToPay);
+        lessonList.add(paidLesson);
+        Set<Lesson> updatedLessonSet = new TreeSet<>(lessonList);
+
+        return updatedLessonSet;
     }
 
     @Override
