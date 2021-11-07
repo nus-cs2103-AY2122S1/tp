@@ -230,6 +230,12 @@ used in the management of client information and client meetings.
 * `<attribute>` refers to an arbitrary attribute prefix. (i.e. any attribute can be substituted unless otherwise stated). For a comprehensive list of client's attributes available, please refer to this [section](#3-client-information).
 * Items with `...` after them can be used multiple times, including zero times if it is also optional.
 e.g. `KEYWORD...` can be used as `John`, `alex david` etc. Whereas, `[t/TAG]...` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* Parameters can be in any order.
+e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.
+e.g. if you specify `p/12341234 p/56785678`, only` p/56785678` will be taken.
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.
+e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
 
