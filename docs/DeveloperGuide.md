@@ -1551,7 +1551,7 @@ and the lesson to be added does not exist in TuitiONE yet.
 while there is no change to the student list. An update message will also be shown in the message box to inform the user
 that a new lesson is successfully added.
 
-    * Other incorrect add lesson commands to try: use the `add-l` command while missing out one of the following required fields (`s/`, `g/`, `d/`, `t/` and `c/`). <br>
+    * Test case: use the `add-l` command while missing out one of the following required fields (`s/`, `g/`, `d/`, `t/` and `c/`). <br>
       Expected: No lesson is added. Proper command format is shown in the status message.
 
 1. Addition of a duplicate lesson
