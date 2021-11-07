@@ -110,6 +110,10 @@ public class TagCommand extends Command {
         if (model.getPersonListControl() != null) {
             model.getPersonListControl().refreshPersonListUI();
         }
+        if (model.getPersonListControl() != null) {
+            model.setSelectedIndex(model.getFilteredPersonList().indexOf(editedPerson));
+            model.getPersonListControl().refreshPersonListUI();
+        }
         return new CommandResult(getTagSuccessMessage(editedPerson, !toAdd.isEmpty(), !toRemove.isEmpty()));
     }
 
