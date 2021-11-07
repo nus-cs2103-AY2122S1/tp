@@ -4,7 +4,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.student.Student;
 /**
- * Unmodifiable view of an address book
+ * Unmodifiable view of a TAB.
  */
 public interface ReadOnlyTeachingAssistantBuddy {
 

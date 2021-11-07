@@ -36,7 +36,7 @@ public class ModelManager implements Model {
         super();
         requireAllNonNull(tab, userPrefs);
 
-        logger.fine("Initializing with address book: " + tab + " and user prefs " + userPrefs);
+        logger.fine("Initializing with TAB: " + tab + " and user prefs " + userPrefs);
         //The string name is hardcoded for now. Ability to change teachingAssistantBuddy name will come later
         this.teachingAssistantBuddy = new TeachingAssistantBuddy(tab);
         this.userPrefs = new UserPrefs(userPrefs);
