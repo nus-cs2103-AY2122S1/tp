@@ -11,6 +11,8 @@ AniList is optimized for use via a Command Line Interface (CLI) while still havi
 
 This User Guide is to be used by any AniList user. No technical background is required.
 
+<div style="page-break-after: always;"></div>
+
 ## Table of Content
 
 - [Quick Start](#quick-start)
@@ -23,7 +25,7 @@ This User Guide is to be used by any AniList user. No technical background is re
   * [Updating anime watch status: `status`](#updating-anime-watch-status-status)
   * [Updating anime title: `rename`](#updating-anime-title-rename)
   * [Adding/ Deleting genre from anime: `genre`](#adding-deleting-genre-from-anime-genre)
-  * [Listing all supported genres: `genrelist`](#list-of-available-genres)
+  * [Listing all supported genres: `genrelist`](#listing-all-supported-genres-genrelist)
   * [Listing anime based on watch status: `list`](#listing-anime-based-on-watch-status-list)
   * [Clearing all animes currently displayed: `clear`](#clearing-all-animes-currently-displayed-clear)
   * [Finding an anime: `find`](#finding-an-anime-find)
@@ -33,8 +35,7 @@ This User Guide is to be used by any AniList user. No technical background is re
 - [Commands Table](#commands-table)
 - [Glossary](#glossary)
 
-
-
+<div style="page-break-after: always;"></div>
 
 ## Quick Start
 1. Ensure you have `Java 11` or later installed on your computer. ([install here](https://java.com/en/download/help/download_options.html))
@@ -49,13 +50,13 @@ This User Guide is to be used by any AniList user. No technical background is re
    wish to clear the sample data, enter `list` to [list](#listing-anime-based-on-watch-status-list) all sample animes,
    and then use the [clear](#clearing-all-animes-currently-displayed-clear) command to delete them.
 
-
-
 ---
 
 ![](images/UG-images/charlottetheme.JPG)
 
 ___
+
+<div style="page-break-after: always;"></div>
 
 ## GUI Breakdown
 
@@ -73,6 +74,8 @@ the latest to be added appears last in the list
 5. **Command Result Panel:** This panel shows the result of the command based on user input in the Command Input Box
 
 6. **Command Input Box:** User inputs the desired command in this box and runs the command by pressing `enter`
+
+<div style="page-break-after: always;"></div>
 
 ## Hot-Keys
 
@@ -109,14 +112,12 @@ To Watch Tab           |  Finished Tab
 
 ---
 
-* **Stats Window** `CTRL-Q` To open or close the statistics window.
-
-Stats Window           |
-:-------------------------:|
-![](images/UG-images/stats2.png)  |
-
+* **Stats Window** `CTRL-Q` To close the statistics window.
 
 ___
+
+<div style="page-break-after: always;"></div>
+
 ## Commands
 
 <div markdown="block" class="alert alert-info">
@@ -140,6 +141,8 @@ ___
   <br/> e.g. `genre c/add 1 g/comedy` will not work as `1` is not a prefixed parameter
 
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ### Adding an anime: `add`
 
@@ -180,6 +183,8 @@ Example usages:
 
 ___
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting an anime: `delete`
 
 Deletes the user specified anime from the anime list if it exists.
@@ -201,6 +206,8 @@ Example usages:
 1. Details of the deleted anime is shown in the Command Results Panel
 
 ___
+
+<div style="page-break-after: always;"></div>
 
 ### Updating anime episode: `update`
 
@@ -228,6 +235,8 @@ Example usages:
 2. The episode number of the chosen anime is updated to the specified episode number
 
 ___
+
+<div style="page-break-after: always;"></div>
 
 ### Updating anime watch status: `status`
 
@@ -258,6 +267,8 @@ Example usages:
 
 ___
 
+<div style="page-break-after: always;"></div>
+
 ### Updating anime title: `rename`
 Updates the anime title for the user specified anime.
 
@@ -284,6 +295,7 @@ Example usages:
 
 ___
 
+<div style="page-break-after: always;"></div>
 
 ### Adding/ Deleting genre from anime: `genre`
 
@@ -316,6 +328,7 @@ Example usages:
 
 ___
 
+<div style="page-break-after: always;"></div>
 
 ### Listing all supported genres: `genrelist`
 
@@ -335,6 +348,7 @@ Example usages:
 
 ___
 
+<div style="page-break-after: always;"></div>
 
 ### Listing anime based on watch status: `list`
 
@@ -366,6 +380,8 @@ Example usages:
 
 ___
 
+<div style="page-break-after: always;"></div>
+
 ### Clearing all animes currently displayed: `clear`
 
 Removes all anime(s) currently displayed on screen, upon user confirmation <br>
@@ -389,6 +405,8 @@ Example usages:
 2. The Anime List Panel is empty as all anime(s) have been cleared
 
 ___
+
+<div style="page-break-after: always;"></div>
 
 ### Finding an anime: `find`
 
@@ -420,6 +438,8 @@ all anime with comedy genre
 
 ___
 
+<div style="page-break-after: always;"></div>
+
 ### Viewing user statistics: `stats`
 
 Displays a pop-up window that shows the statistical breakdown of anime(s) in AniList.
@@ -449,6 +469,8 @@ Main Window when the Stats Window is on display |
 
 ___
 
+<div style="page-break-after: always;"></div>
+
 ### Viewing all supported commands: `help`
 Lists all currently supported commands on the Command Results panel.
 
@@ -467,6 +489,8 @@ Example usages:
 
 ___
 
+<div style="page-break-after: always;"></div>
+
 ### Exiting application: `exit`
 
 Exits the application.
@@ -474,6 +498,8 @@ Exits the application.
 Format: `exit`
 
 ___
+
+<div style="page-break-after: always;"></div>
 
 ## Commands Table
 
@@ -514,6 +540,8 @@ ___
 | [stats](#viewing-user-statistics-stats)  | `stats` |
 | [help](#viewing-all-supported-commands-help)     | `help` |
 
+<div style="page-break-after: always;"></div>
+
 ## Glossary
 
 ### NAME
@@ -541,6 +569,8 @@ ___
 ### ACTION
 *  Used in the [`genre`](#adding-deleting-genre-from-anime-genre) command
 *  Current list of available actions: `add`, `delete`, with `a`, `d`, as their short forms respectively
+
+<div style="page-break-after: always;"></div>
 
 ## List of Available Genres
 These are the current list of available Genres in the genrelist:
