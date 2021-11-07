@@ -93,7 +93,7 @@ The `UI` component,
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<img src="images/LogicClassDiagram.png" width="600" />
+<img src="images/LogicClassDiagram.png" width="800" />
 
 How the `Logic` component works:
 
