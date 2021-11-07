@@ -1,0 +1,136 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":EditCommandParser" as EditCommandParser LOGIC_COLOR
+participant "<<class>>\nArgumentTokenizer" as ArgumentTokenizer LOGIC_COLOR
+participant "m:ArgumentMultimap" as ArgumentMultimap LOGIC_COLOR
+participant "<<class>>\nParserUtil" as ParserUtil LOGIC_COLOR
+participant "<<class>>\nEditCommand" as EditCommandClass LOGIC_COLOR
+participant "d:EditPersonDescriptor" as EditPersonDescriptor LOGIC_COLOR
+participant "e:EditCommand" as EditCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":SocialHandle" as SocialHandle MODEL_COLOR
+end box
+
+[-> LogicManager : execute("edit 1 s/tg:alex777 s/ig:a_lex_123 s/tw:alexxx00")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("edit 1 s/tg:alex777 s/ig:a_lex_123 s/tw:alexxx00")
+activate AddressBookParser
+
+create EditCommandParser
+AddressBookParser -> EditCommandParser
+activate EditCommandParser
+
+EditCommandParser --> AddressBookParser
+deactivate EditCommandParser
+
+AddressBookParser -> EditCommandParser : parse("s/tg:alex777 s/ig:a_lex_123 s/tw:alexxx00")
+activate EditCommandParser
+
+' Get ArgumentMultimap
+EditCommandParser -> ArgumentTokenizer : tokenize(args, prefixes...)
+activate ArgumentTokenizer
+create ArgumentMultimap
+ArgumentTokenizer -> ArgumentMultimap
+activate ArgumentMultimap
+ArgumentTokenizer <-- ArgumentMultimap : m
+deactivate ArgumentMultimap
+EditCommandParser <-- ArgumentTokenizer : m
+deactivate ArgumentTokenizer
+
+' Parse Index
+EditCommandParser -> ArgumentMultimap : getPreamble()
+activate ArgumentMultimap
+EditCommandParser <-- ArgumentMultimap : "1"
+deactivate ArgumentMultimap
+EditCommandParser -> ParserUtil : parseIndex("1")
+activate ParserUtil
+EditCommandParser <-- ParserUtil : 1
+deactivate ParserUtil
+
+' Create EditPersonDescriptor
+EditCommandParser -> EditCommandClass : EditPersonDescriptor()
+activate EditCommandClass
+create EditPersonDescriptor
+EditCommandClass -> EditPersonDescriptor
+activate EditPersonDescriptor
+EditCommandClass <-- EditPersonDescriptor : d
+deactivate EditPersonDescriptor
+EditCommandParser <-- EditCommandClass : d
+deactivate EditCommandClass
+
+' Get list of social handle arguments
+EditCommandParser -> ArgumentMultimap : getAllValues("s/")
+activate ArgumentMultimap
+EditCommandParser <-- ArgumentMultimap : ["tg:alex777", "ig:a_lex_123", "tw:alexxx00"]
+deactivate ArgumentMultimap
+
+' Parse social handles
+EditCommandParser -> ParserUtil : parseSocialHandles(["tg:alex777", "ig:a_lex_123", "tw:alexxx00"])
+activate ParserUtil
+loop until all social handles parsed
+    ParserUtil -> ParserUtil : parseSocialHandle(socialHandleString)
+    activate ParserUtil
+    create SocialHandle
+    ParserUtil -> SocialHandle : SocialHandle(socialHandleString)
+    activate SocialHandle
+    ParserUtil <-- SocialHandle
+    deactivate SocialHandle
+    ParserUtil --> ParserUtil
+    deactivate ParserUtil
+end
+EditCommandParser <-- ParserUtil : socialHandlesSet
+deactivate ParserUtil
+
+' Set social handles of EditPersonDescriptor
+EditCommandParser -> EditPersonDescriptor : setSocialHandles(socialHandlesSet)
+activate EditPersonDescriptor
+EditCommandParser <-- EditPersonDescriptor
+deactivate EditPersonDescriptor
+
+' Create EditCommand
+create EditCommand
+EditCommandParser -> EditCommand : EditCommand(1, d)
+activate EditCommand
+
+' Return EditCommand
+EditCommandParser <-- EditCommand : e
+deactivate EditCommand
+AddressBookParser <-- EditCommandParser: e
+deactivate EditCommandParser
+LogicManager <-- AddressBookParser: e
+deactivate AddressBookParser
+
+' Execute EditCommand
+LogicManager -> EditCommand : execute(model)
+activate EditCommand
+
+' Update Person
+EditCommand -> Model : setPerson(personToEdit, editedPerson)
+activate Model
+EditCommand <-- Model
+deactivate Model
+
+create CommandResult
+EditCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> EditCommand
+deactivate CommandResult
+
+
+EditCommand --> LogicManager : result
+deactivate EditCommand
+EditCommand -[hidden]-> LogicManager : result
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
