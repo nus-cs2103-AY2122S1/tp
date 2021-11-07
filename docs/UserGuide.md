@@ -30,8 +30,8 @@ InsurancePal is a client management software specially designed to help manage t
 
 Action | Parameters| Description
 --------|------------------|-------
-`add n/NAME p/PHONE e/EMAIL a/ADDRESS [no/NOTE] [t/TAG]… [i/INSURANCE]…` |`NAME`: Name of the client <br> `PHONE`: Phone number of the client <br> `EMAIL`: Email of the client <br> `ADDRESS`: Address of the client <br> `NOTE`: Note about the client<br>`TAG`: Tags of the client <br>`INSURANCES`: life/health/general <img>| Adds a client to InsurancePal
-`edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/REVENUE] [a/ADDRESS] [no/NOTE] [t/TAG]… [i/INSURANCE]…` | `INDEX`: Index of the client <br> `NAME`: Name of the client <br> `PHONE`: Phone number of the client <br> `EMAIL`: Email of the client <br>  `REVENUE`: Revenue of the client <br>`ADDRESS`: Address of the client <br> `NOTE`:Note about the client  <br>`TAG`: Tags of the client <br>`INSURANCES`: life/health/general | Edits a client information
+`add n/NAME p/PHONE e/EMAIL a/ADDRESS [no/NOTE] [t/TAG]… [i/INSURANCE_TYPE BRAND]…` |`NAME`: Name of the client <br> `PHONE`: Phone number of the client <br> `EMAIL`: Email of the client <br> `ADDRESS`: Address of the client <br> `NOTE`: Note about the client<br>`TAG`: Tags of the client <br>`INSURANCE_TYPE`: life/health/general<br> `BRAND`: Brand of the insurance of the client <img>| Adds a client to InsurancePal
+`edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/REVENUE] [a/ADDRESS] [no/NOTE] [t/TAG]… [i/INSURANCE_TYPE BRAND]…` | `INDEX`: Index of the client <br> `NAME`: Name of the client <br> `PHONE`: Phone number of the client <br> `EMAIL`: Email of the client <br>  `REVENUE`: Revenue of the client <br>`ADDRESS`: Address of the client <br> `NOTE`:Note about the client  <br>`TAG`: Tags of the client <br>`INSURANCE_TYPE`: life/health/general<br> `BRAND`: Brand of the insurance of the client | Edits a client information
 `revenue INDEX r/AMOUNT` |  `INDEX`: Index of the client <br> `AMOUNT`: Change in revenue | Changes the revenue of client by the specified amount
 `note INDEX no/NOTE` | `INDEX`: Index of the client <br> `NOTE`: Note about the client | Add/edit/delete a note of a client
 `schedule INDEX m/MEETING_TIME` |`INDEX` Index of the client <br> `MEETING_TIME`: Time of the meeting | Add/edit/delete a meeting with a client
@@ -107,7 +107,7 @@ Format: `help`
 
 You can add a client to InsurancePal using the `add` command
 
-Format: `add n/NAME p/PHONE e/EMAIL a/ADDRESS [no/NOTE] [t/TAG]… [i/INSURANCE]…`
+Format: `add n/NAME p/PHONE e/EMAIL a/ADDRESS [no/NOTE] [t/TAG]… [i/INSURANCE_BRAND INSURANCE_TYPE]…`
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
@@ -124,8 +124,9 @@ Parameter | Constraints
 `EMAIL` | {::nomarkdown}<ul><li>Emails should be of the format <em>local-part@domain</em></li><li><em>local-part</em> must meet the following constraints<ul><li markdown="1">Only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-)</li><li>Cannot start or end with any special characters</li></ul></li><li><em>domain</em> must meet the following constraints<ul><li>The domain name is made up of domain labels separated by periods.<li>The domain name must end with a domain label at least 2 characters long</li><li>Domain labels must consist of alphanumeric characters, separated only by hyphens, if any</li><li>Domain labels must start and end with alphanumeric characters</li></li><li>Cannot be blank</li></ul></li></ul>{:/}
 `ADDRESS` | {::nomarkdown}<ul><li>Can contain any values</li><li>Cannot be blank</li></ul>{:/}
 `NOTE` | {::nomarkdown}<ul><li>Can contain any value, including alphanumeric characters, spaces and punctuations.</li><li>Can be blank</li></ul>{:/}
-`TAG` | {::nomarkdown}<ul><li>Can only contain alphanumeric characters</li><li>Cannot be blank</li></ul>{:/}
-`INSURANCE` | {::nomarkdown}<ul><li>Limited to the following, with any capitalization: <em>life</em>, <em>health</em>, <em>general</em><em></em></li><li>Cannot be blank</li></ul>{:/}
+`TAG` | {::nomarkdown}<ul><li>Can only contain alphanumeric characters</li><li>Must be at most 20 characters long</li><li>Cannot be blank</li></ul>{:/}
+`INSURANCE_TYPE` | {::nomarkdown}<ul><li>Limited to the following, with any capitalization: <em>life</em>, <em>health</em>, <em>general</em><em></em></li><li>Cannot be blank</li></ul>{:/}
+`INSURANCE_BRAND` | {::nomarkdown}<ul><li>Total length must not exceed 24 characters, including insurance type<em></em></li><li>Can be blank</li></ul>{:/}
 
 </details>
 
@@ -144,7 +145,7 @@ Format: `list`
 
 You can edit an existing client using the `edit` command
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/REVENUE] [a/ADDRESS] [no/NOTE] [t/TAG]… [i/INSURANCE]…`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/REVENUE] [a/ADDRESS] [no/NOTE] [t/TAG]… [i/INSURANCE_TYPE INSURANCE_BRAND]…`
 
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
@@ -169,8 +170,9 @@ Parameter | Constraints
 `REVENUE` | {::nomarkdown}<ul><li>Must be a valid float</li><li>Cannot be blank</li></ul>{:/}
 `ADDRESS` | {::nomarkdown}<ul><li>Can contain any values</li><li>Cannot be blank</li></ul>{:/}
 `NOTE` | {::nomarkdown}<ul><li>Can contain any value, including alphanumeric characters, spaces and punctuations.</li><li>Can be blank</li></ul>{:/}
-`TAG` | {::nomarkdown}<ul><li>Can only contain alphanumeric characters</li><li>Cannot be blank</li></ul>{:/}
-`INSURANCE` | {::nomarkdown}<ul><li>Limited to the following, with any capitalization: <em>life</em>, <em>health</em>, <em>general</em><em></em></li><li>Cannot be blank</li></ul>{:/}
+`TAG` | {::nomarkdown}<ul><li>Can only contain alphanumeric characters</li><li>Must be at most 20 characters long</li><li>Cannot be blank</li></ul>{:/}
+`INSURANCE_TYPE` | {::nomarkdown}<ul><li>Limited to the following, with any capitalization: <em>life</em>, <em>health</em>, <em>general</em><em></em></li><li>Cannot be blank</li></ul>{:/}
+`INSURANCE_BRAND` | {::nomarkdown}<ul><li>Total length must not exceed 24 characters, including insurance type<em></em></li><li>Can be blank</li></ul>{:/}
 
 </details>
 
