@@ -1372,7 +1372,7 @@ testers are expected to do more *exploratory* testing.
       Expected: No appointment is added. Error details are shown in the status message that the format of the duration exceeds the limit.
 
    1. Test case: `appt -a p/1 d/1 s/30/02/2021 dur/0 r/Patient wants a blood test`<br>
-      Expected: No appointment is added. Errors details are shown in the status message that the format of the duration exceeds the limit.
+      Expected: No appointment is added. Error details are shown in the status message that the format of the duration exceeds the limit.
 
 
 ### Deleting an appointment  <a name="deleting-appointment-manual-testing"/>
