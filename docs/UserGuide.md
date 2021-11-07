@@ -194,7 +194,7 @@ add -sl s/STUDENT_INDEX... n/LESSON_INDEX...
 
 > :bulb: If you are using the second approach, it is recommended to store `tutoraid.jar` in a folder in your _Desktop_ so that it is easier to navigate to it the next time you need to launch TutorAid!
    
-5. If this is your first time using TutorAid, we highly encourage you to check out our [Beginner's Tutorial](#4-beginners-tutorial) so that you can practise using some of the commands and familiarise yourself with the app!
+5. If this is your first time using TutorAid, we highly encourage you to check out our [Beginner's Tutorial](#4-beginners-tutorial) so that you can practise using a few of the commands and familiarise yourself with the app!
 
 6. After completing the tutorial, refer to the [Features](#8-command-summary) below to see all the commands available in TutorAid.
 
@@ -202,11 +202,19 @@ add -sl s/STUDENT_INDEX... n/LESSON_INDEX...
 
 # 4. Beginner's Tutorial
 
-Welcome to TutorAid's beginner's tutorial! Here, you will learn how you can use some of our commands to manage the details of your students and lessons on a day-to-day basis :smile:
+Welcome to TutorAid's beginner's tutorial! Here, you will learn how you can use a few of our commands to manage the details of your students and lessons on a day-to-day basis :smile:
 
 If this is your first time launching TutorAid, you will be able to see that some sample data has been provided to you.
 
-  > :bulb: As you follow the tutorial, we also encourage you to further experiment with the various commands on your own to understand the ways in which TutorAid can help you!
+### 4.0: Tips before you get started
+
+* As you follow the tutorial, we also encourage you to further experiment with the various commands on your own to understand the ways in which TutorAid can help you!
+
+* As you try out the different commands during the tutorial, the manner in which TutorAid displays information to you may change (e.g. At times, only the details of specific students and lessons will be shown). 
+  In such cases, you can key in the `list -a` into the Command Box and press ENTER to revert back to the view that you are currently starting out with. 
+  
+  > :bulb: For more information on changing the viewing modes in TutorAid, you can refer to the detailed documentation for [List](#listing-all-students-and-lessons-list) commands.
+
 
 ### 4.1: Adding a student and editing his/her details
 {:.no_toc}
@@ -238,11 +246,11 @@ Now, John has just informed you that he has changed his contact number to 846329
    
     ![](images/editJohnYeo.png)
 
-   > :bulb: For more information on changing the viewing modes in TutorAid, you can refer to the detailed documentation for [List](#listing-all-students-and-lessons-list) commands.
+    You can then key in the `list -a` into the Command Box and press ENTER to return back to your original view.
 
 ### 4.2: Adding a lesson and editing its details
 {:.no_toc}
-Now that you have added your first student (and perhaps a few others too), let us add some lessons to TutorAid. We will start by adding a lesson named _History 1_ into TutorAid with the following details:
+Now that you have added your first student (and perhaps a few others too), it is time to add a lesson to TutorAid. Let us add a lesson named _History 1_ into TutorAid with the following details:
 * Lesson timing: 10AM - 11AM on Mondays
 * Lesson capacity: 10 students
 
@@ -266,10 +274,7 @@ Next, let us assume that you have decided to charge your students $125.90 per mo
 
    ![](images/editHistory1.png)
    
-   You can then key in the `list -a` into the Command Box and press ENTER to return back to your original view.
-
-   > :bulb: For more information on changing the viewing modes in TutorAid, you can refer to the detailed documentation for [List](#listing-all-students-and-lessons-list) commands.
-
+   You can then key in the `list -a` into the Command Box and hit ENTER if you wish to return back to your original view.
 
 ### 4.3: Adding a student to a lesson
 Now that you have set up the lesson _History 1_, let us add one of your existing students who wishes to enrol in the class, Roy Balakrishnan. You can do this in TutorAid by following the steps below:
@@ -295,9 +300,7 @@ note of it so that you can provide him with extra practice. To do so, you can ea
 
     ![](images/addProgress.png)
    
-   You can then key in the `list -a` into the Command Box and hit ENTER to return back to your original view.
-
-   > :bulb: For more information on changing the viewing modes in TutorAid, you can refer to the detailed documentation for [List](#listing-all-students-and-lessons-list) commands.
+   You can then key in the `list -a` into the Command Box and hit ENTER to if you wish to revert back to your original view.
 
 Now, the next time you open TutorAid, you will be able to see Alex's latest progress note at a glance!
 
@@ -321,10 +324,11 @@ You can easily delete his data from TutorAid by following the steps below:
 {:.no_toc}
 Congratulations on successfully completing TutorAid's beginner's tutorial :tada: <br>
 
-But why quit now? Since you have completed the tutorial, you can go ahead and key in `clear` in the Command Box to remove all the sample data and to add in some of your own students and lessons.<br>
+But why quit now? Since you have completed the tutorial, you can go ahead and key in `clear` in the Command Box to remove all the sample data and to add in a few of your own students and lessons.<br>
 
-You can also learn and experiment with some of the other TutorAid commands that we have not covered in the tutorial.<br> 
+You can also learn and experiment with a few other TutorAid commands that we have not covered in the tutorial.<br> 
 You may find the following commands particularly handy:
+* [Changing the viewing modes](#listing-all-students-and-lessons-list)
 * [Deleting a student from a lesson](#deleting-students-from-lessons-del--sl)
 * [Deleting a progress note from a student](#deleting-progress-from-a-student-del--p)
 * [Finding a student](#finding-students-by-name-find--s)
@@ -341,6 +345,8 @@ If you are new to TutorAid, we hope that you have gone through the [Beginner's T
 The commands can be split into 4 main categories: _Student_ commands, _Lesson_ commands, _Student and Lesson_ commands and _Other_ commands. This section will also be split into these 4 sub-sections for easier navigation.
 
 For more information about how to interpret any of the commands, you check out the [Command Format](#23-command-format) and [Command Syntax](#231-command-syntax-in-this-guide) sections.
+
+> :bulb: This section provides a detailed documentation of all the commands in TutorAid. Thus, it is best for users to visit this after gaining familiarity with the command format, command syntax and a few of the frequently used commands in TutorAid.
 
 ## 5.1 Student Commands
 
