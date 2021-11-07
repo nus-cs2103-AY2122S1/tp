@@ -16,7 +16,7 @@ end box
 [-> LogicManager : execute("addShift -n Steve d/Monday-0")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("addShift -n Steve d/Monday-0")
+LogicManager -> AddressBookParser : parseCommand()
 activate AddressBookParser
 
 create AddShiftCommandParser
