@@ -55,10 +55,6 @@ public class TagComponent extends HBox {
 
         switch (tagName.toUpperCase()) {
 
-        case TagUtil.FRIENDS:
-            temp.setStyle(Colors.BLUE);
-            break;
-
         case TagUtil.HIGH_PRIORITY:
             temp.setStyle(Colors.RED);
             break;
