@@ -20,6 +20,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.interaction.Interaction;
 import seedu.address.model.person.Compatibility;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Faculty;
@@ -120,6 +121,7 @@ public class AppendCommand extends Command {
         Faculty previousFaculty = personToAppendTo.getFaculty();
         Major previousMajor = personToAppendTo.getMajor();
         Compatibility previousCompatibility = personToAppendTo.getCompatibility();
+        Set<Interaction> previousInteraction = personToAppendTo.getInteractions();
 
         Set<Skill> newSkills = appendPersonDescriptor.getSkills().orElse(Set.of()); // Else, empty set
         Set<Skill> currentSkills = personToAppendTo.getSkills();
@@ -153,7 +155,7 @@ public class AppendCommand extends Command {
 
         return new Person(previousName, previousEmail, previousFaculty, previousMajor,
                 previousCompatibility, updatedSkills, updatedLanguages, updatedFrameworks,
-                updatedTags, updatedRemarks, personToAppendTo.getInteractions());
+                updatedTags, updatedRemarks, previousInteraction);
     }
 
     @Override
