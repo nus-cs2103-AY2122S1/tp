@@ -1,0 +1,12 @@
+@startuml
+!include style.puml
+start
+if () then ([Client with name already in InsurancePal])
+    :Show user error that a
+    duplicate person exists;
+else ([else])
+    :Add client to InsurnacePal;
+    :Show user success message;
+endif
+stop
+@enduml
