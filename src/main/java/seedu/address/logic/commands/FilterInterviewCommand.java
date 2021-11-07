@@ -5,6 +5,9 @@ package seedu.address.logic.commands;
  */
 public abstract class FilterInterviewCommand extends Command {
 
+    /**
+     * Contains information regarding the valid FilterInterviewCommand arguments, which are past and future.
+     */
     public enum ValidFilterInterviewArgs {
         PAST("past", new FilterInterviewPastCommand()),
         FUTURE("future", new FilterInterviewFutureCommand());
@@ -12,11 +15,22 @@ public abstract class FilterInterviewCommand extends Command {
         private final String arg;
         private final FilterInterviewCommand filterInterviewCommand;
 
+        /**
+         * Constructs a {@code ValidFilterInterviewArgs}.
+         *
+         * @param arg {@code String} of the valid argument input
+         * @param filterInterviewCommand appropriate subclass of {@code FilterInterviewCommand} corresponding to the argument
+         */
         ValidFilterInterviewArgs(String arg, FilterInterviewCommand filterInterviewCommand) {
             this.arg = arg;
             this.filterInterviewCommand = filterInterviewCommand;
         }
 
+        /**
+         * Gets the regex used to validate {@code FilterInterviewCommand} arguments.
+         *
+         * @return {@code String} used as regex to validate {@code FilterInterviewCommand} arguments.
+         */
         public static String getRegex() {
             StringBuilder regex = new StringBuilder();
             for (ValidFilterInterviewArgs validArg : ValidFilterInterviewArgs.values()) {
