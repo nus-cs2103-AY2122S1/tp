@@ -83,7 +83,7 @@ This guide aims to help users get familiar with using RecruitIn's features.
 Before moving on with this user guide, listed below are some **important** text formatting that you should take
 note of so that you may better understand our feature descriptions.
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+* Words in `UPPER_CASE` are the parameters to be supplied by you, the user.<br>
   e.g. in add n/NAME, NAME is a parameter which can be used as add n/John Doe.
 * Words that are ***bold & italicized*** refers to a stored applicant detail for a certain prefix.<br>
   e.g. ***Name*** could refer to the value `John` stored as a name in the application.
@@ -128,9 +128,8 @@ Scroll down to the bottom and click on `recruitIn.jar`.
     </div>
 
    1. Use **`clear`** command to clear the existing sample data.<br><br>
-   2. Suppose you have an applicant named `John Doe` that you have scouted from online sources and want to add him to
-      your list of applicants. `John Doe` has kindly provided you his phone number, `98765432` and email `JohnDoe@gmail.com`. He has also
-      stated that he is applying for the role of a `Teacher` and plans to work `Full time` with an expected salary of `3000`. His highest level of
+   2. Suppose you have an applicant named `John Doe` and you want to add him to
+      your list of applicants. `John Doe` has kindly provided you his phone number, `98765432` and email `JohnDoe@gmail.com`. He is applying for the role of a `Teacher` and plans to work `Full time` with an expected salary of `3000`. His highest level of
       education is `Bachelors` and has `4` years of experience as a teacher. <br><br>
       Type in **`add`**`n/John Doe p/98765432 e/JohnDoe@gmail.com r/Teacher et/Full time s/3000 l/Bachelors y/4` to add `John Doe` to your
       list of applicants.<br><br>
@@ -153,10 +152,10 @@ Scroll down to the bottom and click on `recruitIn.jar`.
    6. Fast forward the time. Your company informs you that `John Doe` has
       passed his interview and is hired.<br><br>
       Type in **`find`**`n/John Doe p/98765432` to find `John Doe`.<br>
-      Type in **`mark`**`1` to mark `John Doe` as done.<br><br>
+      Type in **`mark`**`1` to mark `John Doe` as Done.<br><br>
       ![After mark](./images/SampleWorkflow4.png)<br><br>
    7. Type in **`list`** to go back to your list of applicants.<br><br>
-      Type in **`delete_marked`** to remove all applicants marked as done, such as `John Doe`.<br><br>
+      Type in **`delete_marked`** to remove all applicants marked as Done, such as `John Doe`.<br><br>
       Now `John Doe` is removed from your list of applicants.<br><br>
 
 6. Aside from the commands shown in the sample workflow above, you may also find these useful:
@@ -227,38 +226,45 @@ Scroll down to the bottom and click on `recruitIn.jar`.
 ### Viewing help : `help`
 [Table of contents](#table-of-contents)
 
-Shows a message explaining how to access the help page.
+The `help` command shows a message explaining how to access the help page.
+Alternatively, you can click on the Help button to access the help page as well.
 
 ![help message](images/helpMessage.png)
 
 Format: `help`
 
-
 ### Adding an applicant: `add`
 [Table of contents](#table-of-contents)
 
-Adds an applicant to RecruitIn.
+The `add` command adds an applicant to RecruitIn.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL_ADDRESS r/ROLE et/EMPLOYMENT_TYPE s/EXPECTED_SALARY l/LEVEL_OF_EDUCATION y/YEARS_OF_EXPERIENCE [t/TAG] [i/INTERVIEW] [nt/NOTES]​`
 
 * To add multiple tags, multiple `t/` prefixes should be used.
+
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-Providing multiple tag values in a single `t/` prefix will lead to an error. (i.e. `add n/John p/90909090 e/john@gmail.com r/Software Tester et/Full time s/4500 l/High School y/3 t/smart helpful` will lead to an error)
+Providing multiple tag values in a single `t/` prefix will lead to an error.
+
+(i.e. `add n/John p/90909090 e/john@gmail.com r/Software Tester et/Full time s/4500 l/High School y/3 t/smart helpful` will lead to an error)
 </div>
-* Inputs for each prefix is taken as a single value. (i.e. `r/software engineer` has the value `software engineer`)
+* Parameters for each prefix is taken as a single value. (i.e. `r/software engineer` has the value `software engineer`)
 
 Examples:
 * `add n/Bob p/87654321 e/bob@gmail.com r/Software Engineering et/Full time s/4000 l/High School y/2 i/2021-10-21, 20:00 nt/This applicant has the credentials needed for this job.`
 * `add n/John p/90909090 e/john@gmail.com r/Software Tester et/Full time s/4500 l/High School y/3 t/smart t/helpful` to add a person named `John` with two tags `smart` and `helpful`
 
+Before: ![images](images/AddBefore.png)
+
+After: ![images](images/AddAfter.png)
+
 <div markdown="block" class="alert alert-secondary">
-**:information_source: Prefix inputs for `add` command must follow the following input specifications:**<br>
+**:information_source: Prefix parameters for `add` command must follow the following parameter specifications:**<br>
 
 * You may
-    * refer to [**Add Parameter Specifications**](#add-parameters) for detailed input specifications.
-    * refer to add input specifications for specific prefixes by clicking on relevant links in the table below.
+    * refer to [**Add Parameter Specifications**](#add-parameters) for detailed parameter specifications.
+    * refer to add parameter specifications for specific prefixes by clicking on relevant links in the table below.
 
-| Input | Prefix | Specifications |
+| Parameter | Prefix | Specifications |
 | :---: | :---: | :---: |
 | NAME | `n/` | [**name**](#name-n) |
 | PHONE_NUMBER | `p/` | [**phone_number**](#phonenumber-p) |
@@ -277,33 +283,40 @@ Examples:
 ### Editing an applicant : `edit`
 [Table of contents](#table-of-contents)
 
-Edits an applicant's with specified index in RecruitIn.
+The `edit` command edits an applicant's with specified index in RecruitIn.
 
 Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMPLOYMENT_TYPE]
  [s/EXPECTED_SALARY] [l/LEVEL_OF_EDUCATION] [y/YEARS_OF_EXPERIENCE] [t/TAG] [i/INTERVIEW] [nt/NOTES]`
  
- * Edit command must take at least 1 prefix input.
+ * Edit command must take at least 1 prefix parameter.
  * The `INDEX` refers to the index number shown in the displayed applicants list.
  * For `t/` prefix in particular, if **only** a single tag prefix is provided like so `t/` with no values, it will erase
 remove tags from the applicant.
+
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-Giving more than 1 tag prefix input with 1 or more having no value will instead lead to an error. (i.e. `edit 1 t/ t/smart` leads to an error)
+Giving more than 1 tag prefix parameter with 1 or more having no value will instead lead to an error.
+
+(i.e. `edit 1 t/ t/smart` leads to an error)
 </div>
- * Inputs for each prefix is taken as a single value. (i.e. `r/software engineer` has the value `software engineer`)
+ * Parameters for each prefix is taken as a single value. (i.e. `r/software engineer` has the value `software engineer`)
 
 Examples:
-* `edit 1 r/Software Engineer` will change the ***role*** of the applicant with the index number 1
-* `edit 1 t/` will remove all ***tags***s from the applicant with index number 1
+* `edit 1 t/` will remove all ***tag***s from the applicant with index number 1
 * `edit 1 n/John t/` will change the name of the applicant with index number 1 to `John` and remove all the applicant's ***tag***s
+* `edit 1 r/Software Engineer` will change the ***role*** of the applicant with the index number 1
+
+Before: ![images](images/EditBefore.png)
+
+After: ![images](images/EditAfter.png)
 
 <div markdown="block" class="alert alert-secondary">
-**:information_source: Prefix inputs for `edit` command must follow the same input specifications as `add` command:**<br>
+**:information_source: Prefix parameters for `edit` command must follow the same parameter specifications as `add` command:**<br>
 
 * You may 
-  * refer to [**Add Parameter Specifications**](#add-parameters) for detailed input specifications.
-  * refer to add input specifications for specific prefixes by clicking on relevant links in the table below.
+  * refer to [**Add Parameter Specifications**](#add-parameters) for detailed parameter specifications.
+  * refer to add parameter specifications for specific prefixes by clicking on relevant links in the table below.
 
-| Input | Prefix | Specifications |
+| Parameter | Prefix | Specifications |
 | :---: | :---: | :---: |
 | NAME | `n/` | [**name**](#name-n) |
 | PHONE_NUMBER | `p/` | [**phone_number**](#phonenumber-p) |
@@ -322,7 +335,7 @@ Examples:
 ### Listing all applicants : `list`
 [Table of contents](#table-of-contents)
 
-Shows a list of all applicants in RecruitIn.
+The `list` command shows a list of all applicants in RecruitIn.
 
 Format: `list`
 
@@ -451,65 +464,65 @@ Suppose the applicants list includes 3 applicants with name and role `John, Soft
 ### Marking an applicant : `mark`
 [Table of contents](#table-of-contents)
 
-Every applicant in RecruitIn will have a status of either "Done" or "Not Done".
-A "Done" status means that you are done handling the applicant and no longer need to keep their details.
-The `mark` command marks the specified applicant(s) in RecruitIn by changing their status to "Done".
+Every applicant in RecruitIn will have a status of either `Done` or `Not Done`.
+A `Done` status means that you are done handling the applicant and no longer need to keep their details.
+The `mark` command marks the specified applicant(s) in RecruitIn by changing their status to `Done`.
 
 Format: `mark INDEX…​`
 
-* RecruitIn marks the applicant at the specified `INDEX`es as "Done".
+* RecruitIn marks the applicant at the specified `INDEX`es as `Done`.
 * `INDEX` refers to the number shown in RecruitIn's displayed applicants list.
 * `INDEX` **must be a positive whole number**, i.e. 1, 2, 3, …​
 * `INDEX` should not exceed the total number of applicants in RecruitIn's displayed applicants list.
 * `INDEX` in RecruitIn **starts from one**.
 * You must give at least one `INDEX`. (i.e. `mark ` is not a valid command)
 * You cannot give duplicate `INDEX`es. (i.e. `mark 2 2` is not a valid command)
-* You cannot mark an applicant that has status "Done".
+* You cannot mark an applicant that has status `Done`.
 
 Examples:
-* After using the command `list`, `mark 1` marks the 1st applicant listed in RecruitIn as "Done".
+* After using the command `list`, `mark 1` marks the 1st applicant listed in RecruitIn as `Done`.
 
 Before: ![images](images/MarkBefore.png)
 
 After: ![images](images/MarkAfter.png)
 
-* After using the command `list`, `mark 2 4 6` marks the 2nd, 4th and 6th applicant listed in RecruitIn as "Done".
-* After using the command `find n/John`, `mark 1` marks the 1st applicant listed in RecruitIn's results of the `find` command.
+* After using the command `list`, `mark 2 4 6` marks the 2nd, 4th and 6th applicant listed in RecruitIn as `Done`.
+* After using the command `find n/John`, `mark 1` marks the 1st applicant listed in RecruitIn's results of the `find` command as `Done`.
 
 
 ### Unmarking an applicant : `unmark`
 [Table of contents](#table-of-contents)
 
-Every applicant in RecruitIn will have a status of either "Done" or "Not Done".
-A "Not Done" status means that you are still handling the applicant and still need to keep their details.
-The `unmark` command unmarks the specified applicant(s) in RecruitIn by changing their status to "Not Done".
+Every applicant in RecruitIn will have a status of either `Done` or `Not Done`.
+A `Not Done` status means that you are still handling the applicant and still need to keep their details.
+The `unmark` command unmarks the specified applicant(s) in RecruitIn by changing their status to `Not Done`.
 
 Format: `unmark INDEX…​`
 
-* RecruitIn unmarks the applicant at the specified `INDEX`es to "Not Done".
+* RecruitIn unmarks the applicant at the specified `INDEX`es to `Not Done`.
 * `INDEX` refers to the number shown in RecruitIn's displayed applicants list.
 * `INDEX` **must be a positive whole number**, i.e. 1, 2, 3, …​
 * `INDEX` should not exceed the total number of applicants in RecruitIn's displayed applicants list.
 * `INDEX` in RecruitIn **starts from one**.
 * You must give at least one `INDEX`. (i.e. `unmark ` is not a valid command)
 * You cannot give duplicate `INDEX`es. (i.e. `delete 2 2` is not a valid command)
-* You cannot unmark an applicant that has status "Not Done".
+* You cannot unmark an applicant that has status `Not Done`.
 
 Examples:
-* After using the command `list`, `ummark 1` unmarks the 1st applicant listed in RecruitIn to "Not Done".
+* After using the command `list`, `ummark 1` unmarks the 1st applicant listed in RecruitIn to `Not Done`.
 
 Before: ![images](images/UnmarkBefore.png)
 
 After: ![images](images/UnmarkAfter.png)
 
-* After using the command `list`, `unmark 2 4 6` unmarks the 2nd, 4th and 6th applicant listed in RecruitIn to "Not Done".
-* After using the command `find n/John`, `unmark 1` unmarks the 1st applicant listed in RecruitIn's results of the `find` command.
+* After using the command `list`, `unmark 2 4 6` unmarks the 2nd, 4th and 6th applicant listed in RecruitIn to `Not Done`.
+* After using the command `find n/John`, `unmark 1` unmarks the 1st applicant listed in RecruitIn's results of the `find` command to `Not Done`.
 
 
 ### Deleting marked applicants : `delete_marked`
 [Table of contents](#table-of-contents)
 
-The `delete_marked` command deletes all applicants that are currently marked as done.
+The `delete_marked` command deletes all applicants that are currently marked as `Done`.
 This provides an easy way for you to delete the data of all applicants you no longer need.
 
 Format: `delete_marked`
@@ -524,7 +537,7 @@ After: ![images](images/DeleteMarkedAfter.png)
 ### Clearing all data : `clear`
 [Table of contents](#table-of-contents)
 
-Deletes all applicants in RecruitIn.
+The `clear` command deletes all applicants in RecruitIn.
 
 Format: `clear`
 
@@ -535,7 +548,8 @@ The `exit` command causes RecruitIn to close and exit.
 
 Format: `exit`
 
-You can also exit RecruitIn by clicking on the 'X' button found on the top right side of the app. 
+You can also exit RecruitIn by clicking on the 'X' button found on the top right side of the app.
+Alternatively, you can also click on the 'File' button on the upper left of the app, before clicking the pop-up 'Exit' button. 
 
 
 ### Saving the data
@@ -574,9 +588,9 @@ Example of the format of how data is saved for an applicant:
 ```
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes the data format invalid, RecruitIn will remove all saved data and start with an empty data file the next time you open the app.
+It is advised that you be careful when handling the data file directly!
 </div>
 
-<p align="center"><a href="#table-of-contents">Click here to see the table of contents</a></p>
 
 --------------------------------------------------------------------------------------------------------------------
 
