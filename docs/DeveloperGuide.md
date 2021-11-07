@@ -1094,7 +1094,7 @@ testers are expected to do more *exploratory* testing.
        Expected: Similar to previous.
 
 ### Export Mailing List Command
-1.  Export unfiltered contact list 
+1.  Export contact list 
     1. Prerequisites: List all contacts using the `list` command.
 
     1. Test case: `mailingList`<br>
