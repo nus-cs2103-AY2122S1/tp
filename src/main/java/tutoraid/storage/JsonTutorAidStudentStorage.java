@@ -58,7 +58,13 @@ public class JsonTutorAidStudentStorage implements TutorAidStudentStorage {
         Optional<JsonSerializableStudentBook> jsonStudentBook = JsonUtil.readJsonFile(
                 filePath, JsonSerializableStudentBook.class);
         if (jsonStudentBook.isEmpty()) {
-            return Optional.empty();
+            try {
+                return Optional.of(new JsonSerializableStudentBook(SampleDataUtil.getSampleStudentBook(lessonBook))
+                        .toModelType(lessonBook));
+            } catch (IllegalValueException ive) {
+                logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
+                throw new DataConversionException(ive);
+            }
         }
 
         try {
