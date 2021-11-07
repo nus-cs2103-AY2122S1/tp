@@ -44,6 +44,8 @@ public class MainWindow extends UiPart<Stage> {
     private static final String UPLOAD_FAIL_MESSAGE = "Upload failed: %s";
     private static final String DOWNLOAD_NO_DATA_MESSAGE = "No data to download!";
     private static final String DOWNLOAD_SUCCESS_MESSAGE = "Your data has been downloaded to %s !";
+    private static final String UPLOAD_FAIL_NO_STUDENTS_MESSAGE = String.format(UPLOAD_FAIL_MESSAGE,
+                                                                                "No students found in your file!");
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -290,9 +292,7 @@ public class MainWindow extends UiPart<Stage> {
         }
 
         if (stuList.size() == 0) {
-            String helpfulErrorMessage = "No students were found in your file. "
-                                       + "Use the purge command if you want to remove all students.";
-            popupManager.displayPopup(String.format(UPLOAD_FAIL_MESSAGE, helpfulErrorMessage));
+            popupManager.displayPopup(UPLOAD_FAIL_NO_STUDENTS_MESSAGE);
             return null;
         }
 
