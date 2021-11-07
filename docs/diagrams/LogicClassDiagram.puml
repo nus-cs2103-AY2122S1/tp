@@ -6,11 +6,23 @@ skinparam classBackgroundColor LOGIC_COLOR
 
 package Logic {
 
+package Parser {
+Interface Parser <<Interface>>
 Class SiasaParser
+Class XYZCommandParser
+Class CliSyntax
+Class ParserUtil
+Class ArgumentMultiMap
+Class ArguemtnTokenizer
+Class Prefix
+}
+
+package Command {
 Class XYZCommand
 Class CommandResult
+Class UiCommand
 Class "{abstract}\nCommand" as Command
-
+}
 
 Interface Logic <<Interface>>
 Class LogicManager
@@ -21,26 +33,39 @@ Class HiddenModel #FFFFFF
 }
 
 package Storage{
+Class HiddenModel #FFFFFF
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Logic
 
-LogicManager .right.|> Logic
-LogicManager -right->"1" SiasaParser
-SiasaParser ..> XYZCommand : creates >
+LogicManager .up.|> Logic
+LogicManager -->"1" SiasaParser
+SiasaParser .left.> XYZCommandParser: creates >
 
-XYZCommand -up-|> Command
-LogicManager .left.> Command : executes >
+XYZCommandParser ..> XYZCommand: creates >
+XYZCommandParser .left.|> Parser
+XYZCommandParser ..> ArgumentMultiMap
+XYZCommandParser ..> CliSyntax
+CliSyntax ..> Prefix
+XYZCommandParser ..> ArguemtnTokenizer
+ArguemtnTokenizer .left.> ArgumentMultiMap
+XYZCommandParser ..> ParserUtil
+ParserUtil ..> Prefix
+ArguemtnTokenizer ..> Prefix
+
+XYZCommand .up.>Command
+LogicManager ..> Command: executes >
 
 LogicManager --> Model
 LogicManager --> Storage
-Storage --[hidden] Model
-Command .[hidden]up.> Storage
-Command .right.> Model
-note right of XYZCommand: XYZCommand = AddContactCommand, \nFindContactCommand, SortPolicyCommand, etc
+Command .up.> Storage
+Command .up.> Model
+note right of XYZCommand: XYZCommand = \nAddPolicyCommand, \nContactPolicyCommand, etc.
 
-Logic ..> CommandResult
-LogicManager .down.> CommandResult
-Command .up.> CommandResult : produces >
+Logic .right.> CommandResult
+LogicManager ..> CommandResult
+Command .up.> CommandResult
+Command .up.> UiCommand
+CommandResult -right-> UiCommand
 @enduml
