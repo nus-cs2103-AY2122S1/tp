@@ -135,7 +135,7 @@ public class AddToOrderCommandParserTest {
     @Test
     public void parse_countZero_failure() {
         assertParseFailure(parser, VALID_NAME_BAGEL + ID_DESC_BAGEL + INVALID_COUNT_ZERO,
-                Messages.MESSAGE_INVALID_COUNT_INTEGER);
+                Messages.MESSAGE_INVALID_COUNT_FORMAT);
     }
 
     @Test
@@ -158,6 +158,6 @@ public class AddToOrderCommandParserTest {
 
         // invalid count value
         assertParseFailure(parser, VALID_NAME_BAGEL + ID_DESC_BAGEL + INVALID_COUNT_NEGATIVE_VALUE + TAG_DESC_BAKED,
-                Messages.MESSAGE_INVALID_COUNT_INTEGER);
+                Messages.MESSAGE_INVALID_COUNT_FORMAT);
     }
 }

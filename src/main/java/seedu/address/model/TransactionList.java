@@ -54,7 +54,8 @@ public class TransactionList implements ReadOnlyTransactionList {
     }
 
     /**
-     * Checking whether transaction lists are the same.
+     * Checking whether transacted items are the same.
+     * Only considers transacted information (i.e. not cost nor tags)
      */
     public boolean equalTestsTransactionLists (Object obj) {
         // short circuit if same object

@@ -220,15 +220,17 @@ public interface Model {
 
     /**
      * Add a specified cost to bookKeeping.
-     * @param cost the specified cost
+     * @param cost of the item
+     * @param amount of the item
      */
-    void addCostBookKeeping(Double cost);
+    void addCostBookKeeping(Double cost, int amount);
 
     /**
      * Add a specified revenue to bookKeeping.
-     * @param revenue the specified revenue
+     * @param revenue gained when buying the item
+     * @param amount of the item
      */
-    void addRevenueBookKeeping(Double revenue);
+    void addRevenueBookKeeping(Double revenue, int amount);
 
     /**
      * Return the current BookKeeping.

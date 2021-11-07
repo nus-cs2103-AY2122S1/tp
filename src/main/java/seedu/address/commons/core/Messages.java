@@ -9,9 +9,8 @@ public class Messages {
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_ITEM_DISPLAYED_INDEX = "The item index provided is invalid";
     public static final String MESSAGE_ITEMS_LISTED_OVERVIEW = "%1$d items listed!";
-    public static final String MESSAGE_INVALID_COUNT_INTEGER = "The count provided must be positive!";
     public static final String MESSAGE_INVALID_COUNT_FORMAT = "The count provided must be an integer!\n"
-            + "Minimum: 1\n" + "Maximum: 2,147,483,647";
+            + "Minimum: 1\n" + "Maximum: 999,999";
     public static final String MESSAGE_INVALID_COUNT_INDEX = "The index provided must be a number (can't be >1 number)"
             + " and cannot be 0 or negative!";
     public static final String MESSAGE_INVALID_PRICE_FORMAT = "Prices provided must be numerical values!";

@@ -137,7 +137,7 @@ public class AddCommandTest {
         String expectedMessage = String.format(AddCommand.MESSAGE_SUCCESS_REPLENISH, 5, VALID_NAME_BAGEL);
 
         BookKeeping bookKeeping = TypicalBookkeeping.getTypicalBookkeeping();
-        bookKeeping.addCost(BAGEL.getCostPrice() * 5);
+        bookKeeping.addCost(BAGEL.getCostPrice(), 5);
         Model expectedModel = new ModelManager(getTypicalInventory(), new UserPrefs(),
                 TypicalTransactions.getTypicalTransactionList(), bookKeeping);
         expectedModel.addItem(BAGEL);
@@ -156,7 +156,7 @@ public class AddCommandTest {
         String expectedMessage = String.format(AddCommand.MESSAGE_SUCCESS_REPLENISH, 5, VALID_NAME_BAGEL);
 
         BookKeeping bookKeeping = TypicalBookkeeping.getTypicalBookkeeping();
-        bookKeeping.addCost(BAGEL.getCostPrice() * 5);
+        bookKeeping.addCost(BAGEL.getCostPrice(), 5);
         Model expectedModel = new ModelManager(getTypicalInventory(), new UserPrefs(),
                 TypicalTransactions.getTypicalTransactionList(), bookKeeping);
         expectedModel.addItem(BAGEL);
@@ -205,7 +205,7 @@ public class AddCommandTest {
         String expectedMessage = replenishMessage + "\n" + AddCommand.MESSAGE_EXTRA_PRICE_FLAGS;
 
         BookKeeping bookKeeping = TypicalBookkeeping.getTypicalBookkeeping();
-        bookKeeping.addCost(BAGEL.getCostPrice() * 5);
+        bookKeeping.addCost(BAGEL.getCostPrice(), 5);
         Model expectedModel = new ModelManager(getTypicalInventory(), new UserPrefs(),
                 TypicalTransactions.getTypicalTransactionList(), bookKeeping);
         expectedModel.addItem(BAGEL);
@@ -225,7 +225,7 @@ public class AddCommandTest {
         String expectedMessage = replenishMessage + "\n" + AddCommand.MESSAGE_EXTRA_TAG_FLAGS;
 
         BookKeeping bookKeeping = TypicalBookkeeping.getTypicalBookkeeping();
-        bookKeeping.addCost(BAGEL.getCostPrice() * 5);
+        bookKeeping.addCost(BAGEL.getCostPrice(), 5);
         Model expectedModel = new ModelManager(getTypicalInventory(), new UserPrefs(),
                 TypicalTransactions.getTypicalTransactionList(), bookKeeping);
         expectedModel.addItem(BAGEL);
@@ -334,12 +334,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addCostBookKeeping(Double cost) {
+        public void addCostBookKeeping(Double cost, int amount) {
 
         }
 
         @Override
-        public void addRevenueBookKeeping(Double revenue) {
+        public void addRevenueBookKeeping(Double revenue, int amount) {
 
         }
     }

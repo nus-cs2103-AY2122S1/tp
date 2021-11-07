@@ -53,7 +53,7 @@ public class AddCommandIntegrationTest {
 
         Model expectedModel = new ModelManager();
         expectedModel.addItem(validItem);
-        expectedModel.addCostBookKeeping(BAGEL.getCostPrice() * 5);
+        expectedModel.addCostBookKeeping(BAGEL.getCostPrice(), 5);
 
         assertCommandSuccess(addCommand, model, expectedMessage, expectedModel);
     }
@@ -127,7 +127,7 @@ public class AddCommandIntegrationTest {
         String expectedMessage = String.format(AddCommand.MESSAGE_SUCCESS_REPLENISH, 5, VALID_NAME_BAGEL);
         Model expectedModel = new ModelManager();
         expectedModel.addItem(BAGEL.updateCount(10));
-        expectedModel.addCostBookKeeping(BAGEL.getCostPrice() * 5);
+        expectedModel.addCostBookKeeping(BAGEL.getCostPrice(), 5);
 
         assertCommandSuccess(addCommand, model, expectedMessage, expectedModel);
     }
@@ -146,7 +146,7 @@ public class AddCommandIntegrationTest {
         String expectedMessage = String.format(AddCommand.MESSAGE_SUCCESS_REPLENISH, 5, VALID_NAME_BAGEL);
         ModelManager expectedModel = new ModelManager();;
         expectedModel.addItem(BAGEL.updateCount(10));
-        expectedModel.addCostBookKeeping(BAGEL.getCostPrice() * 5);
+        expectedModel.addCostBookKeeping(BAGEL.getCostPrice(), 5);
 
         assertCommandSuccess(addCommand, model, expectedMessage, expectedModel);
     }

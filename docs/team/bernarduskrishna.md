@@ -1,7 +1,7 @@
 ---
 layout: page 
-title: Bernard's Project Portfolio 
-Page parent: The Team
+title: Bernard's Project Portfolio Page
+parent: The Team
 ---
 
 ### Project: BogoBogo

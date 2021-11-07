@@ -15,22 +15,18 @@ import seedu.address.model.ReadOnlyBookKeeping;
 public class JsonSerializableBookKeeping {
     private Double revenue;
     private Double cost;
-    private Double profit;
 
     /**
      * Constructor that supports json.
      *
      * @param revenue current revenue.
      * @param cost current cost.
-     * @param profit current profit
      */
     @JsonCreator
     public JsonSerializableBookKeeping(@JsonProperty("revenue") Double revenue,
-                                       @JsonProperty("cost") Double cost,
-                                       @JsonProperty("profit") Double profit) {
+                                       @JsonProperty("cost") Double cost) {
         this.revenue = revenue;
         this.cost = cost;
-        this.profit = profit;
     }
 
     /**
@@ -41,10 +37,9 @@ public class JsonSerializableBookKeeping {
     public JsonSerializableBookKeeping(ReadOnlyBookKeeping bookKeeping) {
         this.revenue = bookKeeping.getRevenue();
         this.cost = bookKeeping.getCost();
-        this.profit = bookKeeping.getProfit();
     }
 
     public BookKeeping toModelType() throws IllegalValueException {
-        return new BookKeeping(revenue, cost, profit);
+        return new BookKeeping(revenue, cost);
     }
 }

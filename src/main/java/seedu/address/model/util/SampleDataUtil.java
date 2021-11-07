@@ -53,7 +53,7 @@ public class SampleDataUtil {
     public static ReadOnlyBookKeeping getSampleBookKeeping() {
         double cost = Arrays.stream(getSampleItems())
                 .map(item -> item.getCostPrice() * item.getCount()).reduce((a, b) -> a + b).get();
-        return new BookKeeping(0.0, cost, -cost);
+        return new BookKeeping(0.0, cost);
     }
 
 }

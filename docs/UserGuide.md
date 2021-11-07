@@ -375,6 +375,9 @@ changes to cost price is assumed to be for future restocking of the item.<br>
 Use `add` for stocking items, `delete` to delete accidentally added items, `remove` to remove unsold items (e.g. expired
 goods), and `iorder` to account for sold items.
 
+**Q**: My business is really growing lately, why does my BogoBogo calculation of revenue, profit, and cost seem wrong?<br>
+**A**: BogoBogo was built for small businesses in mind. On that note, it doesn't calculate revenue and cost beyond $999,999,999. 
+Consider hiring an accountant Mr Billionaire!
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary

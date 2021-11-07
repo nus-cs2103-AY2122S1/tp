@@ -14,6 +14,6 @@ public class TypicalBookkeeping {
      * Returns a {@code Bookkeeping} with initialised values.
      */
     public static BookKeeping getTypicalBookkeeping() {
-        return new BookKeeping(Revenue, Cost, Profit);
+        return new BookKeeping(Revenue, Cost);
     }
 }

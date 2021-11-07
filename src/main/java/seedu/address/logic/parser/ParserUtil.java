@@ -77,6 +77,7 @@ public class ParserUtil {
 
     /**
      * Parses {@code String price} into a {@code Double}.
+     * Price must be between [0, 10000000]
      */
     public static Double parsePrice(String price) throws ParseException {
         double priceValue;
@@ -126,18 +127,21 @@ public class ParserUtil {
 
     /**
      * Parses {@code String count} into a {@code Integer}.
+     * Count must be between [1, 999999]
      */
     public static Integer parseCount(String count) throws ParseException {
+        int countInteger;
         try {
-            Integer.parseInt(count);
+            countInteger = Integer.parseInt(count);
         } catch (NumberFormatException e) {
             throw new ParseException(Messages.MESSAGE_INVALID_COUNT_FORMAT);
         }
 
-        if (Integer.parseInt(count) > 0) {
-            return Integer.parseInt(count);
-        } else {
-            throw new ParseException(Messages.MESSAGE_INVALID_COUNT_INTEGER);
+        // Check range is valid
+        if (countInteger <= 0 || countInteger > 999999) {
+            throw new ParseException(Messages.MESSAGE_INVALID_COUNT_FORMAT);
         }
+
+        return countInteger;
     }
 }
