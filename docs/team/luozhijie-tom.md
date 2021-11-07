@@ -13,24 +13,24 @@ Given below are my contributions to the project.
 * **New Feature**: Added the `view` command. (Pull request [#77](https://github.com/AY2122S1-CS2103T-W17-2/tp/pull/77))
   * What is does: shows user the modules taken in a specific semester.
   * Justification: This feature improves the product significantly because it allows users to see their academic plan in each semester. Without this feature, users can only see modules they have selected in the entire module database, which is very inconvenient.
-  
+
+
 * **New Feature**: Enabled module cards to show different color in the GUI. (Pull request [#92](https://github.com/AY2122S1-CS2103T-W17-2/tp/pull/92))
   * What is does: Each module in the module list is colored based on the current semester and which semester the module is taken.
   * Justification: This feature improves the product significantly because it allows user to see the selected module status intuitively.
   * Highlights: Though the code written for this feature may not seem too much, to make this feature work correctly still needs significant efforts. For example, updating module cards' color when the current semester is changed needs a deeper understanding of the ListView class in `UI` and its link with `Model` which is not elaborated much in the original Developer guide.
 
 
-* **New Component**: Added the AcademicYear, Semester, and AcademicCalendar class. (Pull request [#57](https://github.com/AY2122S1-CS2103T-W17-2/tp/pull/57))
-  * What is does: stores the academic year and semester
-  * Justification: These 3 models are used by all features that are related to making academic plan(`take`, `untake`, `set`, `view`, `clear`).
-
-
 * **Enhancements to existing features**:
   * Fixed bugs related to GUI. (Pull request [#165](https://github.com/AY2122S1-CS2103T-W17-2/tp/pull/165))
   * Added command formats in the help window. (Pull request [#97](https://github.com/AY2122S1-CS2103T-W17-2/tp/pull/97))
+  * Added a share of default modules to NUS Mod Tracker. (Pull request [165](https://github.com/AY2122S1-CS2103T-W17-2/tp/pull/165))
+
+* **Team-based tasks**: 
+  * Updated classes `ModelManager`, `ModuleTracker` and `UserPrefs` in AB3's model component to suit NUS Mod Tracker's needs.(Pull request [#33](https://github.com/AY2122S1-CS2103T-W17-2/tp/pull/33), Pull request [#34](https://github.com/AY2122S1-CS2103T-W17-2/tp/pull/34))
+  * Added the AcademicYear, Semester, and AcademicCalendar class. (Pull request [#57](https://github.com/AY2122S1-CS2103T-W17-2/tp/pull/57))
   
-* **Team-based tasks**: Updated classes `ModelManager`, `ModuleTracker` and `UserPrefs` in AB3's model component to suit NUS Mod Tracker's needs.(Pull request [#33](https://github.com/AY2122S1-CS2103T-W17-2/tp/pull/33), Pull request [#34](https://github.com/AY2122S1-CS2103T-W17-2/tp/pull/34))
-  
+
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&since=2021-09-17&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=LuoZhijie-tom&tabRepo=AY2122S1-CS2103T-W17-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
 
 * **Project management and team tasks**:
