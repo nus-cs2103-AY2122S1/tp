@@ -203,8 +203,13 @@ Notice that the `AddModuleLessonCommandParser` uses the method `parseModuleCodeF
 
 
 ### Find feature 
+Users are able to execute a command to find an existing person in contHACKS. 
+contHACKS will parse the find command for keywords, and filters the list of contacts to be displayed. 
+Upon a successful search, the person card will be returned and listed in the GUI. 
 
-#### Implementation
+<img src="images/CompositionPersonAndModule.png" width="350" />
+
+### Implementation
 The find command returns contacts that matches the input keywords. Initially, it only returns contacts that fully matches the keywords.
 Given the following example contact book:
 * Contact #1: Jason
