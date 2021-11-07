@@ -9,7 +9,7 @@ participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
-participant ":Model" as Model MODEL_COLOR
+participant "model:Model" as Model MODEL_COLOR
 end box
 
 LogicManager -> TaddCommand : execute(:Model)
@@ -21,7 +21,7 @@ activate Model
 Model --> TaddCommand : filteredMemberList
 deactivate Model
 
-loop number of target members times
+loop for each member to be assigned the task
 TaddCommand -> Model : addTask(targetMember, taskToAdd)
 activate Model
 
