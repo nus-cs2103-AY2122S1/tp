@@ -547,8 +547,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 3a. The given `FRIEND_ID` is invalid.
-    * 3a1. gitGud shows an error message.
+* 2a. The given `FRIEND_ID` is invalid.
+    * 2a1. gitGud shows an error message.
+
+      Use case resumes at step 1.
+
+**Use case: UC07 - Get a game's complete information**
+
+**MSS**
+
+1. User <u>list games (UC04)</u> and chooses a `GAME_ID`.
+2. User requests for complete information about `GAME_ID`.
+3. gitGud displays the complete information related to  `GAME_ID`.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The given `GAME_ID` is invalid.
+    * 2a1. gitGud shows an error message.
 
       Use case resumes at step 1.
 
