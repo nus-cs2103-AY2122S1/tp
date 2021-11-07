@@ -627,40 +627,39 @@ Priorities: High, Low
 
 | As a ... | I can ...                                                                                                             | so that ...                                                                            | Category       | Priority |
 | -------- | --------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------- | -------- |
-| Manager  | log in                                                                                                                | \-                                                                                     | Administrative | High     |
-|          | View specific table capacity                                                                                          | I can assign the correct group to the correct table                                    | Administrative | High     |
-|          | Update table availability                                                                                             | I can ensure that people will not assign any more customers to that table              | Administrative | High     |
-|          | Check table availability                                                                                              | I can assign a new group to the table                                                  | Administrative | High     |
-|          | Add reservations (number of people, time, reserve table availability)                                                 | \-                                                                                     | Customer       | High     |
-|          | Check if a particular timeslot is available for reservation                                                           | Organise the customer's reservation slots                                              | Customer       | High     |
-|          | Add/View/Change/Delete particulars for customer(number, initials, allergies, special requests, number of people etc.) | I can contact the customers and also provide them with personalised dining experiences | Customer       | High     |
-|          | View the amount of unclaimed loyalty points a customer has                                                            | I can give them the option of redeeming the points for a reward                        | Customer       | High     |
-|          | Change the amount of loyalty points a customer has                                                                    | We can track the amount of loyalty points a customer has                               | Customer       | High     |
-|          | View reservations on a particular day                                                                                 | manage the reservations better                                                         | Customer       | High     |
-|          | Add customers to waiting list                                                                                         | Manage walk in customers                                                               | Customer       | Low      |
-|          | Add waiting list customers particulars                                                                                | Organise walk in customers turn to enter the restaurant                                | Customer       | Low      |
-|          | View customer's special payment method(vouchers)                                                                      | I can keep track of finances correctly                                                 | Customer       | Low      |
-|          | Add/View/Change/Delete employees' personal information                                                                | \-                                                                                     | Employee       | High     |
-|          | View/Change the number of leaves remaining a particular employee has                                                  | I can ensure he is only claiming leaves that he is entitled to                         | Employee       | High     |
-|          | View/Change who is supposed to be on shift today                                                                      | I know who is turning up for work today                                                | Employee       | High     |
-|          | View/Change who is supposed to be on shift this week                                                                  | I am aware of the week's scheduling                                                    | Employee       | High     |
-|          | View/Change who is supposed to be on shift this month                                                                 | I know who is turning up for work this month                                           | Employee       | High     |
-|          | View work shifts that have yet to be filled                                                                           | I can assign employees in to fill the manpower needs                                   | Employee       | High     |
-|          | Add employees to available slots in a work shift                                                                      | there would be no lack of personnel                                                    | Employee       | High     |
-|          | View/Change the monthly salary for a particular employee                                                              | I know if he is earning too much or too little                                         | Employee       | High     |
-|          | View/Change the job type for a particular employee (full time, part time etc)                                         | I know his payout scheme and if he deserves his pay                                    | Employee       | High     |
-|          | View which shifts a particular employee is working in a week                                                          | I know when he should be turning up                                                    | Employee       | Low      |
-|          | Add observations of an employee during a shift                                                                        | I can review them with him/her afterwards                                              | Employee       | Low      |
-|          | View/Change number of hours worked by a particular employee per period                                                | I can reward employees (employee of the month)                                         | Employee       | Low      |
-|          | Add/View/Update/Delete supplier particular(name, contact info, food type)                                             | \-                                                                                     | Supplier       | High     |
-|          | View all suppliers delivering today                                                                                   | I can know who to expect today                                                         | Supplier       | High     |
-|          | View all suppliers delivering this week                                                                               | I can know who to expect this week                                                     | Supplier       | High     |
-|          | View all deliveries for a particular supplier                                                                         | I can know the deliveries made by the supplier                                         | Supplier       | High     |
-|          | Add/View/Update/Delete delivery datetime by a particular supplier                                                     | I know what deliveries i will have for what time                                       | Supplier       | High     |
-|          | View status of deliveries                                                                                             | I know which delivies have been completed and which are outstanding                    | Supplier       | High     |
-|          | Update deliveries as done                                                                                             | I won't accidentally wait for deliveries that have already been completed              | Supplier       | High     |
-|          | View past deliveries                                                                                                  | I can keep a receipt of the deliveries made in a specific period                       | Supplier       | High     |
-|          | View all suppliers by food type                                                                                       | I can know which supplier i have for a particular food type                            | Supplier       | Low      |
+| Manager  | View specific table capacity                                                                                          | I can assign the correct group to the correct table                                    | Administrative | High     |
+| Manager  | Update table availability                                                                                             | I can ensure that people will not assign any more customers to that table              | Administrative | High     |
+| Manager  | Check table availability                                                                                              | I can assign a new group to the table                                                  | Administrative | High     |
+| Manager  | Add reservations (number of people, time, reserve table availability)                                                 | \-                                                                                     | Customer       | High     |
+| Manager  | Check if a particular timeslot is available for reservation                                                           | Organise the customer's reservation slots                                              | Customer       | High     |
+| Manager  | Add/View/Change/Delete particulars for customer(number, initials, allergies, special requests, number of people etc.) | I can contact the customers and also provide them with personalised dining experiences | Customer       | High     |
+| Manager  | View the amount of unclaimed loyalty points a customer has                                                            | I can give them the option of redeeming the points for a reward                        | Customer       | High     |
+| Manager  | Change the amount of loyalty points a customer has                                                                    | We can track the amount of loyalty points a customer has                               | Customer       | High     |
+| Manager  | View reservations on a particular day                                                                                 | manage the reservations better                                                         | Customer       | High     |
+| Manager  | Add customers to waiting list                                                                                         | Manage walk in customers                                                               | Customer       | Low      |
+| Manager  | Add waiting list customers particulars                                                                                | Organise walk in customers turn to enter the restaurant                                | Customer       | Low      |
+| Manager  | View customer's special payment method(vouchers)                                                                      | I can keep track of finances correctly                                                 | Customer       | Low      |
+| Manager  | Add/View/Change/Delete employees' personal information                                                                | \-                                                                                     | Employee       | High     |
+| Manager  | View/Change the number of leaves remaining a particular employee has                                                  | I can ensure he is only claiming leaves that he is entitled to                         | Employee       | High     |
+| Manager  | View/Change who is supposed to be on shift today                                                                      | I know who is turning up for work today                                                | Employee       | High     |
+| Manager  | View/Change who is supposed to be on shift this week                                                                  | I am aware of the week's scheduling                                                    | Employee       | High     |
+| Manager  | View/Change who is supposed to be on shift this month                                                                 | I know who is turning up for work this month                                           | Employee       | High     |
+| Manager  | View work shifts that have yet to be filled                                                                           | I can assign employees in to fill the manpower needs                                   | Employee       | High     |
+| Manager  | Add employees to available slots in a work shift                                                                      | there would be no lack of personnel                                                    | Employee       | High     |
+| Manager  | View/Change the monthly salary for a particular employee                                                              | I know if he is earning too much or too little                                         | Employee       | High     |
+| Manager  | View/Change the job type for a particular employee (full time, part time etc)                                         | I know his payout scheme and if he deserves his pay                                    | Employee       | High     |
+| Manager  | View which shifts a particular employee is working in a week                                                          | I know when he should be turning up                                                    | Employee       | Low      |
+| Manager  | Add observations of an employee during a shift                                                                        | I can review them with him/her afterwards                                              | Employee       | Low      |
+| Manager  | View/Change number of hours worked by a particular employee per period                                                | I can reward employees (employee of the month)                                         | Employee       | Low      |
+| Manager  | Add/View/Update/Delete supplier particular(name, contact info, food type)                                             | \-                                                                                     | Supplier       | High     |
+| Manager  | View all suppliers delivering today                                                                                   | I can know who to expect today                                                         | Supplier       | High     |
+| Manager  | View all suppliers delivering this week                                                                               | I can know who to expect this week                                                     | Supplier       | High     |
+| Manager  | View all deliveries for a particular supplier                                                                         | I can know the deliveries made by the supplier                                         | Supplier       | High     |
+| Manager  | Add/View/Update/Delete delivery datetime by a particular supplier                                                     | I know what deliveries i will have for what time                                       | Supplier       | High     |
+| Manager  | View status of deliveries                                                                                             | I know which deliveries have been completed and which are outstanding                  | Supplier       | High     |
+| Manager  | Update deliveries as done                                                                                             | I won't accidentally wait for deliveries that have already been completed              | Supplier       | High     |
+| Manager  | View past deliveries                                                                                                  | I can keep a receipt of the deliveries made in a specific period                       | Supplier       | High     |
+| Manager  | View all suppliers by food type                                                                                       | I can know which supplier i have for a particular food type                            | Supplier       | Low      |
 
 *{More to be added}*
 
@@ -680,15 +679,19 @@ Priorities: High, Low
 
 3. System confirms that the customer has been added.
 
-3. Use case ends.
+   Use case ends.
 
 **Extensions**
 
 * 1a. User keys in incorrect information or format.
     * 1a1. System displays an error, and the recommended format for adding a customer.
+      
+      Use case ends.
 
 * 2a. Customer already exists in RHRH.
     * 2a1. System displays an error, and that the customer already exists in RHRH.
+
+      Use case ends.
 
 **Use case (UC02): Add an Employee**
 
@@ -702,15 +705,19 @@ Priorities: High, Low
 
 3. System confirms that the employee has been added.
 
-4. Use case ends.
+   Use case ends.
 
 **Extensions**
 
 * 1a. User keys in incorrect information or format.
     * 1a1. System displays an error, and the recommended format for adding an employee.
 
+      Use case ends.
+
 * 2a. Employee already exists in RHRH.
     * 2a1. System displays an error, and that the employee already exists in RHRH.
+
+      Use case ends.
 
 
 
@@ -726,17 +733,55 @@ Priorities: High, Low
 
 3. System confirms that the supplier has been added.
 
-3. Use case ends.
+   Use case ends.
 
 **Extensions**
 
 * 1a. User keys in incorrect information or format.
     * 1a1. System displays an error, and the recommended format for adding a supplier.
 
+      Use case ends.
+
 * 2a. Supplier already exists in RHRH.
     * 2a1. System displays an error, and that the supplier already exists in RHRH.
-    
-**Use case (UC04): Edit a Customer**
+
+      Use case ends.
+
+**Use case (UC04): Add a reservation**
+
+**MSS**
+
+1. User requests to add a new reservation and keys in reservations details.
+2. Reservation with the given details is added.
+
+   Use case ends
+
+**Extensions**
+
+* 1a. Tables are not set yet
+    * 1a1. RHRH requests user to set the tables.
+    * 1a2. User <u>sets the tables (UC <span style="color:red">{{FILL IN LATER}}</span>)</u>
+
+    Use case resumes from step 1.
+
+
+* 1b. RHRH detects missing details/incorrect format in the command entered.
+    * 1b1. RHRH requests user to enter the command again with correct and sufficient details.
+    * 1b2. User enters command again.
+
+  Steps 1b1 - 1b2 are repeated until the command is correctly formatted.
+
+    Use case resumes from step 2.
+
+* 1c. RHRH is unable to find a reservation slot based on the date time entered.
+    * 1c1. RHRH informs the user that the reservation slot is taken.
+    * 1c2. User enters the command again with another date time.
+
+  Steps 1c1 - 1c2 are repeated until there is a reservation slot available.
+
+    Use case resumes from step 3.
+
+**Use case (UC05): Edit a Customer**
 
 {:no_toc}
 
@@ -745,51 +790,90 @@ Priorities: High, Low
 1. User enters the command string to edit a customer's field.
 2. System confirms that the customer has been added and shows the current fields of the customer.
 
+   Use case ends
+
 **Extensions**
 
 * 1a. User keys in invalid format
     * 1a1. System displays an error, and the recommended format for editing a customer.
+
+      Use case ends
 * 1b. User keys in command without prefix
     * 1b1. System displays an error that says that at least 1 field must be provided.
 
-**Use case (UC05): Edit an Employee**
+      Use case ends
+
+**Use case (UC06): Edit an Employee**
 
 {:no_toc}
 
 **MSS**
 
 1. User enters the command string to edit a employee's field.
-2. System confirms that the employee has been added and shows the current fields of the employee.
+2. System confirms that the employee has been edited and shows the current fields of the employee.
+
+   Use case ends
 
 **Extensions**
 
 * 1a. User keys in invalid format
     * 1a1. System displays an error, and the recommended format for editing an employee.
+
+      Use case ends
 * 1b. User keys in command without prefix
     * 1b1. System displays an error that says that at least 1 field must be provided.
 
-**Use case (UC06): Edit a Supplier**
+      Use case ends
+
+**Use case (UC07): Edit a Supplier**
 
 {:no_toc}
 
 **MSS**
 
 1. User enters the command string to edit a supplier's field.
-2. System confirms that the supplier has been added and shows the current fields of the supplier.
+2. System confirms that the supplier has been edited and shows the current fields of the supplier.
+
+   Use case ends
 
 **Extensions**
 
 * 1a. User keys in invalid format
     * 1a1. System displays an error, and the recommended format for editing a supplier.
+
+      Use case ends
 * 1b. User keys in command without prefix
     * 1b1. System displays an error that says that at least 1 field must be provided.
 
-**Use case (UC07): Search for reservation availability**
+      Use case ends
+
+**Use case (UC08): Edit a reservation**
+
+**MSS**
+
+1. User enters the command to edit reservation fields.
+2. System confirms that the supplier has been edited and shows the current fields of the supplier.
+
+   Use case ends
+
+**Extensions**
+
+* 1a. User keys in invalid format
+    * 1a1. System displays an error, and the recommended format for editing a reservation.
+
+      Use case ends
+* 1b. User keys in command without prefix
+    * 1b1. System displays an error that says that at least 1 field must be provided.
+
+      Use case ends
+
+**Use case (UC09): Search for reservation availability**
 
 **MSS**
 
 1. User requests to search for reservation availability at a date and time.
-2. RHRH shows the availability for the indicated date time.  
+2. RHRH shows the availability for the indicated date time.
+   
    Use case ends.
 
 **Extensions:**
@@ -812,7 +896,6 @@ Priorities: High, Low
 
     Steps 1c1 - 1c2 are repeated until the date/time is correctly formatted.
 
-
     Use case resumes from step 2.
 
 * 1d. RHRH detects an incorrect format of date/time.
@@ -821,53 +904,7 @@ Priorities: High, Low
 
     Steps 1d1 - 1d2 are repeated until the command is correctly formatted.
 
-
     Use case resumes from step 2.
-
-**Use case (UC08): Add a reservation**
-
-**MSS**
-
-1. User keys in reservations details.
-2. RHRH <u>finds the reservation slot based on the date and/or time entered (UC04)</U>.
-3. RHRH displays all reservation slots on that date and/or time to users.
-4. User selects the reservation slot.
-5. RHRH requests for confirmation on the selected reservation slot.
-6. User confirms.
-7. Reservation is added.
-
-Use case ends.
-
-**Extensions**
-
-* 1a. RHRH detects an incorrect format command entered.
-    * 1a1. RHRH requests for the format to be corrected.
-    * 1a2. User enters the command again. <br/>
-    
-    Steps 1a1 - 1a2 are repeated until the command is correctly formatted.
-
-
-    Use case resumes from step 2.
-      
-
-* 1b. RHRH detects missing details in the command entered.
-    * 1b1. RHRH requests for the missing details to be filled in.
-    * 1b2. User enters missing data.
-      
-    Steps 1b1 - 1b2 are repeated until the command is correctly formatted.
-
-
-    Use case resumes from step 2.
-
-* 2a. RHRH is unable to find a reservation slot based on the date and/or time entered.
-    * 2a1. RHRH informs the user that the reservation slot is taken.
-    * 2a2. RHRH prompts user to choose another date and/or time.
-    * 2a3. User enters new date and/or time. <br/>
-      
-    Steps 2a1 - 2a2 are repeated until there is a reservation slot available.
-  
-
-    Use case resumes from step 3.
 
 *{More to be added}*
 
@@ -929,7 +966,7 @@ testers are expected to do more *exploratory* testing.
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
       
-### Adding a customer/employee/supplier/reservation
+### Adding a customer/employee/supplier
 
 1. Add a Customer to the Customer list
     1. Test case: `addC n/John Doe p/87654321 e/e12345@u.nus.edu a/30 Geylang Drive lp/1000 alg/Kiwi sr/outdoors` <br>
