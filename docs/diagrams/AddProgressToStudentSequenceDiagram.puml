@@ -3,8 +3,8 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddProgressCommand" as AddProgressCommand LOGIC_COLOR
-participant ":CommandResult" as CommandResult LOGIC_COLOR
+participant "a:AddProgressCommand" as AddProgressCommand LOGIC_COLOR
+participant "commandResult:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
@@ -22,7 +22,7 @@ activate Student
 Student --> AddProgressCommand
 deactivate Student
 
-AddProgressCommand -> Model : updateFilteredStudentList(true)
+AddProgressCommand -> Model : viewStudent(studentToEdit)
 activate Model
 
 Model -> AddProgressCommand
@@ -32,9 +32,9 @@ create CommandResult
 AddProgressCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> AddProgressCommand
+CommandResult --> AddProgressCommand : commandResult
 deactivate CommandResult
 
-LogicManager <-- AddProgressCommand
+LogicManager <-- AddProgressCommand : commandResult
 deactivate AddProgressCommand
 @enduml

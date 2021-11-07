@@ -3,12 +3,14 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddProgressCommand" as AddProgressCommand LOGIC_COLOR
+participant "a:AddProgressCommand" as AddProgressCommand LOGIC_COLOR
+participant "commandResult:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
 participant "model:Model" as Model MODEL_COLOR
 participant "lastShownList:List<Student>" as List MODEL_COLOR
+participant "studentToEdit:Student" as Student MODEL_COLOR
 end box
 
 activate LogicManager
@@ -22,9 +24,32 @@ activate Model
 Model --> AddProgressCommand : lastShownList
 deactivate Model
 
-AddProgressCommand -> List : get(2)
+AddProgressCommand -> List : get(targetIndex)
 activate List
 
 List --> AddProgressCommand : studentToEdit
 deactivate List
+
+AddProgressCommand -> Student : addProgress(progress)
+activate Student
+
+Student -> Student : addProgress(progress)
+Student --> AddProgressCommand
+deactivate Student
+
+AddProgressCommand -> Model : viewStudent(studentToEdit)
+activate Model
+
+Model -> AddProgressCommand
+deactivate Model
+
+create CommandResult
+AddProgressCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddProgressCommand : commandResult
+deactivate CommandResult
+
+LogicManager <-- AddProgressCommand : commandResult
+deactivate AddProgressCommand
 @enduml

@@ -6,7 +6,7 @@ participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":TutorAidParser" as TutorAidParser LOGIC_COLOR
 participant ":AddCommandParser" as AddCommandParser LOGIC_COLOR
 participant ":AddProgressCommandParser" as AddProgressCommandParser LOGIC_COLOR
-participant ":AddProgressCommand" as AddProgressCommand LOGIC_COLOR
+participant "a:AddProgressCommand" as AddProgressCommand LOGIC_COLOR
 end box
 
 [-> LogicManager : execute("add -p 2 Did Homework")
@@ -22,17 +22,17 @@ AddCommandParser -> AddProgressCommandParser : parse("2 Did Homework")
 activate AddProgressCommandParser
 
 create AddProgressCommand
-AddProgressCommandParser -> AddProgressCommand : AddProgressCommand()
+AddProgressCommandParser -> AddProgressCommand : AddProgressCommand(targetIndex, progress)
 activate AddProgressCommand
-AddProgressCommandParser <-- AddProgressCommand
+AddProgressCommandParser <-- AddProgressCommand : a
 deactivate AddProgressCommand
 
-AddCommandParser <-- AddProgressCommandParser
+AddCommandParser <-- AddProgressCommandParser : a
 deactivate AddProgressCommandParser
 
-TutorAidParser <-- AddCommandParser
+TutorAidParser <-- AddCommandParser : a
 deactivate AddCommandParser
 
-LogicManager <-- TutorAidParser : AddProgressCommand
+LogicManager <-- TutorAidParser : a
 deactivate TutorAidParser
 @enduml
