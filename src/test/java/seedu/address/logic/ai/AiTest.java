@@ -89,10 +89,15 @@ public class AiTest {
         if (!ThreadProcessor.isEmpty()) {
             Assertions.assertFalse(Ai.sortProfiles(TypicalPersons.ALICE, list));
         }
+        int count = 0;
         while (TypicalPersons.ALICE.getGitStats().isEmpty()
                 || TypicalPersons.CARL.getGitStats().isEmpty()) {
             try {
-                Thread.sleep(100);
+                Thread.sleep(1000);
+                count += 1;
+                if (count >= 30) {
+                    break;
+                }
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
