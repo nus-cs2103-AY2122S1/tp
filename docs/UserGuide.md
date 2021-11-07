@@ -415,7 +415,7 @@ Example usages:
 
 </div>
 
-![](images/UG-images/help.JPG)
+![](images/UG-images/help.jpg)
 1. A list of all supported commands is shown in the Command Results Panel.
 2. A link to the User Guide is provided.
 ___
