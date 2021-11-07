@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.FindCommand.MESSAGE_FIND_RESULTS;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.CARL;
@@ -32,6 +33,8 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonMatchesKeywordsPredicate;
+import seedu.address.testutil.LessonBuilder;
+import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonMatchesKeywordsPredicateBuilder;
 
 /**
@@ -40,6 +43,7 @@ import seedu.address.testutil.PersonMatchesKeywordsPredicateBuilder;
 public class FindCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
     @Test
     public void equals() {
@@ -144,5 +148,24 @@ public class FindCommandTest {
         assertEquals(FindCondition.ALL, FindCondition.valueOfName("AlL"));
         assertEquals(FindCondition.ANY, FindCondition.valueOfName("aNY"));
         assertEquals(FindCondition.NONE, FindCondition.valueOfName("NoNe"));
+    }
+
+    @Test
+    public void execute_timeRangeOverlapping_multiplePersonsFound() {
+        PersonMatchesKeywordsPredicate predicate = new PersonMatchesKeywordsPredicateBuilder()
+                .withTimeRange("1000-1400").build();
+
+        Person personWtihLesson = new PersonBuilder(firstPerson).withLessons(new LessonBuilder()
+                .withTimeRange("1000-1400")
+                .buildRecurring())
+                .build();
+        model.setPerson(firstPerson, personWtihLesson); // Ensure at least one lesson to find
+
+        List<Person> expectedPersons = Arrays.asList(personWtihLesson);
+        String expectedMessage = String.format(MESSAGE_FIND_RESULTS, 1, predicate);
+        FindCommand command = prepareFindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(expectedPersons, model.getFilteredPersonList());
     }
 }

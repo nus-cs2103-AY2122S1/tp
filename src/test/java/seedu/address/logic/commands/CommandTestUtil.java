@@ -119,7 +119,9 @@ public class CommandTestUtil {
     public static final String VALID_CLASHING_TIME_RANGE = "1300-1355";
     public static final String VALID_NON_CLASHING_TIME_RANGE = "1600-1855";
     public static final String VALID_LESSON_RATES = "50.50";
+    public static final String VALID_LESSON_RATES_LARGE = "10000000000.00";
     public static final String VALID_SUBJECT = "Language Arts";
+    public static final String VALID_SUBJECT_MATH = "math";
     public static final String VALID_OUTSTANDING_FEES = "100.00";
     public static final String VALID_OUTSTANDING_FEES_AFTER_PAYMENT = "80.00";
     public static final String VALID_HOMEWORK_TEXTBOOK = "Textbook pg 21-26";
@@ -136,8 +138,10 @@ public class CommandTestUtil {
     public static final String UNCANCEL_DATE_DESC_MON = " " + PREFIX_UNCANCEL + VALID_DATE_MON;
     public static final String UNCANCEL_DATE_DESC_NEXT_MON = " " + PREFIX_UNCANCEL + VALID_DATE_NEXT_MON;
     public static final String LESSON_RATES_DESC = " " + PREFIX_RATES + VALID_LESSON_RATES;
+    public static final String LESSON_RATES_DESC_LARGE = " " + PREFIX_RATES + VALID_LESSON_RATES_LARGE;
     public static final String OUTSTANDING_FEES_DESC = " " + PREFIX_OUTSTANDING_FEES + VALID_OUTSTANDING_FEES;
     public static final String SUBJECT_DESC = " " + PREFIX_SUBJECT + VALID_SUBJECT;
+    public static final String SUBJECT_DESC_MATH = " " + PREFIX_SUBJECT + VALID_SUBJECT_MATH;
     public static final String HOMEWORK_DESC_TEXTBOOK = " " + PREFIX_HOMEWORK + VALID_HOMEWORK_TEXTBOOK;
     public static final String HOMEWORK_DESC_POETRY = " " + PREFIX_HOMEWORK + VALID_HOMEWORK_POETRY;
     public static final String PAYMENT_DESC = " " + PREFIX_PAID_AMOUNT + VALID_PAYMENT;
