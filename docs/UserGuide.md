@@ -366,6 +366,10 @@ Format: `eorder`
 **A**: Total cost is the total amount of money incurred from adding items to the inventory. Revenue is the total amount
 of money gained from successfully receiving orders and selling items. Profit = Revenue - Cost.
 
+**Q**: I just started using the app. Why is there a lot of cost incurred in my bookkeeping?<br>
+**A**: When you use the app for the first time, it comes with sample inventory, and the bookkeeping will reflect the costs
+of the items inside this sample inventory. If you would like to start afresh, please use the `clear` command.
+
 **Q**: I have edited the cost price of my item. Why isn't the change reflected in my total cost?<br>
 **A**: BogoBogo adds the cost of an item to the total cost only upon the addition of the item into the inventory. Any
 changes to cost price is assumed to be for future restocking of the item.<br>
@@ -382,14 +386,14 @@ Consider hiring an accountant Mr Billionaire!
 
 ## Command summary
 
-- **Add Item**: `add [ {name} \| id/{id number} ] (c/{count}) (cp/{cost price}) (sp/{sell price}) (t/{tag})...`
-- **Delete Item**: `delete [ -n {name} \| id/{id number} ]`
-- **Remove Item**: `remove [ {name} \| id/{id number} ] (c/{count})`
-- **List**: `list [ \| order \| txns \| txns {id} ]`
+- **Add Item**: `add [{name} | id/{id number}] (c/{count}) (cp/{cost price}) (sp/{sell price}) (t/{tag})...`
+- **Delete Item**: `delete [{name} | id/{id number}]`
+- **Remove Item**: `remove [ {name} | id/{id number} ] c/{count}`
+- **List**: `list [ order | txns | txns {id} ]`
 - **Sort Items**: `sort n/` or `sort c/`
-- **Find Items**: `find [ n/{name}... \| id/{id}... \| t/{tag} ]`
+- **Find Items**: `find [ n/{name}... | id/{id}... | t/{tag}... ]`
 - **Start an order**: `sorder`
-- **Add item to order**: `iorder [ {name} \| id/{id number} ] (c/{count})`
-- **Remove item from order**: `corder [-n {name} \| id/{id number}] (c/{count}`
+- **Add item to order**: `iorder [ {name} | id/{id} ] (c/{count})`
+- **Remove item from order**: `corder [ {name} | id/{id} ] (c/count)`
 - **End the order**: `eorder`
 - **Exit BogoBogo**:`exit`
