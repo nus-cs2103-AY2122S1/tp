@@ -655,34 +655,34 @@ and open the "View Test Score" tab to view the changes in the grade.
       - Start the application
    2. Test cases: 
       1. `history` <br/>
-        Expected: Something like the following should appear </br>
-         | * [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800 (HEAD) (MAIN) </br>
-         | | 		Initial Commit </br>
-         |/ </br>
-        The following example is a correct realization of the above template: </br>
-         | * 65b8a - Mon, 8 Nov 2021 00:04:37 +0800 (HEAD) (MAIN) </br>
-         | | 		Initial Commit</br>
-         |/</br>
+        Expected: Something like the following should appear <br/>
+         | * [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800 (HEAD) (MAIN) <br/>
+         | | 		Initial Commit <br/>
+         |/ <br/>
+        The following example is a correct realization of the above template: <br/>
+         | * 65b8a - Mon, 8 Nov 2021 00:04:37 +0800 (HEAD) (MAIN) <br/>
+         | | 		Initial Commit<br/>
+         |/<br/>
         The time shown follows the GMT+8 Time zone, and should correspond to the time when the application was started.
-      2. Continuing from above, run `clear` followed by `history` </br>
-       Expected: Something like the following should appear </br>
-         | * [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800 (HEAD) (MAIN)</br>
-         | | 		Academy Directory has been cleared!</br>
-         |/</br>
-         \* [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800 </br>
-         | 		Initial Commit</br>
+      2. Continuing from above, run `clear` followed by `history` <br/>
+       Expected: Something like the following should appear <br/>
+         | * [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800 (HEAD) (MAIN)<br/>
+         | | 		Academy Directory has been cleared!<br/>
+         |/<br/>
+         \* [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800<br/>
+         | 		Initial Commit<br/>
         Note a few things: 
          - Date and time for initial commit should not change
          - A new commit is created, and its time should correspond to the time when the command `clear` was executed
-      3. Continuing from above, run `add n/Alex e/alex@email.com te/@alex` followed by `history` </br>
-         Expected: Something like the following should appear </br>
-         | * [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800 (HEAD) (MAIN)</br>
-         | | 		New student added: Alex</br>
-         |/</br>
-         \* [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800 </br>
-           | 		Academy Directory has been cleared!</br>
-         \* [FIVE CHAR HASH] - DDD, dd Nov YYYY hh:mm:ss +0800</br>
-         | 		Initial Commit</br>
+      3. Continuing from above, run `add n/Alex e/alex@email.com te/@alex` followed by `history` <br/>
+         Expected: Something like the following should appear <br/>
+         | * [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800 (HEAD) (MAIN)<br/>
+         | | 		New student added: Alex<br/>
+         |/<br/>
+         \* [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800 <br/>
+           | 		Academy Directory has been cleared!<br/>
+         \* [FIVE CHAR HASH] - DDD, dd Nov YYYY hh:mm:ss +0800<br/>
+         | 		Initial Commit<br/>
          Note a few things:
          - Date and time for initial commit should not change
          - A new commit is created, and its time should correspond to the time when the command `add` was executed
@@ -692,51 +692,51 @@ and open the "View Test Score" tab to view the changes in the grade.
        - Remove version control folder (Default is `data/vc`; refer to `preferences.json` for specific)
        - Start the application
    2. Test cases:
-      1. Basic Two-way Branching: </br>
-         Execute the following commands in sequence: </br>
+      1. Basic Two-way Branching: <br/>
+         Execute the following commands in sequence: <br/>
          `clear` --> `undo` --> `add n/Alex e/alex@email.com te/@alex` --> `history` <br/>
-          Expected: Something like the following should appear </br>
-         | * [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800 (HEAD) (MAIN)</br>
-         | | 		New student added: Alex </br>
-         \* | [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800 (OLD)</br>
-           | | 		Academy Directory has been cleared! </br>
-           |/ </br>
-         \* [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800</br>
-           | 		Initial Commit</br></br>
+          Expected: Something like the following should appear <br/>
+         | * [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800 (HEAD) (MAIN)<br/>
+         | | 		New student added: Alex <br/>
+         \* | [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800 (OLD)<br/>
+           | | 		Academy Directory has been cleared! <br/>
+           |/ <br/>
+         \* [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800<br/>
+           | 		Initial Commit<br/><br/>
          Note a few things:
          - Date and time for initial commit should follow the GMT+8 Time zone and should correspond to the time when the application was started.
          - The commit corresponding with `clear` should have its time correspond to the time when the command `clear` was executed.
          - The commit corresponding with `add` should have its time correspond to the time when the command `add` was executed.
          - The label "(OLD)" is on the commit which clears Academy Directory.
-         - The label "(HEAD)" and "(MAIN)" is on the latest commit i.e. the commit which adds `Alex`. </br>
-      2. Maintain branches when no new branch is created: </br>
-        Continuing from above, execute `clear` followed by `history` </br>
-        Expected: Something like the following should appear </br>
-         | * [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800 (HEAD) (MAIN)</br>
-         | | 		Academy Directory has been cleared!</br>
-         | * [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800</br>
-         | | 		New student added: Alex</br>
-         \* | [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800 (OLD)</br>
-           | | 		Academy Directory has been cleared!</br>
-           |/</br>
-         \* [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800</br>
-           | 		Initial Commit</br>
+         - The label "(HEAD)" and "(MAIN)" is on the latest commit i.e. the commit which adds `Alex`. <br/><br/>
+      2. Maintain branches when no new branch is created: <br/>
+        Continuing from above, execute `clear` followed by `history` <br/>
+        Expected: Something like the following should appear <br/>
+         | * [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800 (HEAD) (MAIN)<br/>
+         | | 		Academy Directory has been cleared!<br/>
+         | * [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800<br/>
+         | | 		New student added: Alex<br/>
+         \* | [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800 (OLD)<br/>
+           | | 		Academy Directory has been cleared!<br/>
+           |/<br/>
+         \* [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800<br/>
+           | 		Initial Commit<br/>
          Note a few things:
           - Date and time for the last three commits should remain the same
           - The label "(HEAD)" and "(MAIN)" is on the latest commit i.e. the commit which does `clear`
           - The label "(OLD)" is on the commit in the _OLD_ branch i.e. the left branch
-      3. New branch created on top of Two-way branch -> make former MAIN branch to OLD and new branch to MAIN </br>
-         Continuing from above, execute `undo` --> `undo` --> `add n/Bob e/bob@email.com te/@bob` --> `history` </br>
-         Expected: Something like the following should appear </br>
-         | * [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800 (HEAD) (MAIN)</br>
-         | | 		New student added: Bob</br>
-         \* | [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800 (OLD)</br>
-         | | 		Academy Directory has been cleared!</br>
-         \* | [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800</br>
-         | | 		New student added: Alex</br>
-         |/</br>
-         \* [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800</br>
-         | 		Initial Commit</br>
+      3. New branch created on top of Two-way branch -> make former MAIN branch to OLD and new branch to MAIN <br/>
+         Continuing from above, execute `undo` --> `undo` --> `add n/Bob e/bob@email.com te/@bob` --> `history` <br/>
+         Expected: Something like the following should appear <br/>
+         | * [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800 (HEAD) (MAIN)<br/>
+         | | 		New student added: Bob<br/>
+         \* | [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800 (OLD)<br/>
+         | | 		Academy Directory has been cleared!<br/>
+         \* | [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800<br/>
+         | | 		New student added: Alex<br/>
+         |/<br/>
+         \* [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800<br/>
+         | 		Initial Commit<br/>
          Note a few things:
           - Date and time for the last three commits should remain the same
           - The commits in the formerly "(MAIN)" branch i.e. the right branch, are now in the "(OLD)" branch 
@@ -755,17 +755,17 @@ list of version controlled commands is in [here](DeveloperGuide.md).
         - Remove version control folder (Default is `data/vc`; refer to `preferences.json` for specific)
         - Start the application
     2. Test cases:
-        1. Execute the following commands in sequence: </br>
-           `clear` -> `history` -> `revert HASH`,</br>
-           where `HASH` refers to the five character hash of the latest commit as shown by `history` </br>
+        1. Execute the following commands in sequence: <br/>
+           `clear` -> `history` -> `revert HASH`,<br/>
+           where `HASH` refers to the five character hash of the latest commit as shown by `history` <br/>
            Expected: Student list should be repopulated
-        2. Continuing from above, run `history` </br>
-           Expected: Something like the following should appear </br>
-           | * [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800 (MAIN)</br>
-           | | 		Academy Directory has been cleared!</br>
-           |/</br>
-           \* [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800 (HEAD)</br>
-           | 		Initial Commit</br>
+        2. Continuing from above, run `history` <br/>
+           Expected: Something like the following should appear <br/>
+           | * [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800 (MAIN)<br/>
+           | | 		Academy Directory has been cleared!<br/>
+           |/<br/>
+           \* [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800 (HEAD)<br/>
+           | 		Initial Commit<br/>
            Note a few things:
             - Date and time for initial commit should not change
             - No new commit is created
@@ -774,19 +774,19 @@ list of version controlled commands is in [here](DeveloperGuide.md).
         - Remove version control folder (Default is `data/vc`; refer to `preferences.json` for specific)
         - Start the application
    2. Test cases:
-       1. Execute the following commands in sequence: </br>
+       1. Execute the following commands in sequence: <br/>
           `clear` --> `undo` --> `add n/Alex e/alex@email.com te/@alex` --> `history` -> `revert HASH`<br/>
-          where `HASH` refers to the five character hash of the commit which executes `clear`, as shown by `history` </br>
+          where `HASH` refers to the five character hash of the commit which executes `clear`, as shown by `history` <br/>
           Expected: Student list should be empty
-       2. Continuing from above, run `history` </br>
-          Expected: Something like the following should appear </br>
-          | * [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800 (MAIN)</br>
-          | | 		New student added: Alex </br>
-          \* | [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800 (HEAD) (OLD)</br>
-          | | 		Academy Directory has been cleared! </br>
-          |/ </br>
-          \* [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800</br>
-          | 		Initial Commit</br></br>
+       2. Continuing from above, run `history` <br/>
+          Expected: Something like the following should appear <br/>
+          | * [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800 (MAIN)<br/>
+          | | 		New student added: Alex <br/>
+          \* | [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800 (HEAD) (OLD)<br/>
+          | | 		Academy Directory has been cleared! <br/>
+          |/ <br/>
+          \* [FIVE CHAR HASH] - DDD, dd MMM YYYY hh:mm:ss +0800<br/>
+          | 		Initial Commit<br/><br/>
           Note a few things:
            - Date and time for initial commit should not change
            - No new commit is created
@@ -803,19 +803,19 @@ list of version controlled commands is in [here](DeveloperGuide.md).
         - Remove version control folder (Default is `data/vc`; refer to `preferences.json` for specific)
         - Start the application
     2. Test cases:
-        1. Execute the following commands in sequence: </br>
-           `clear` -> `undo`,</br>
+        1. Execute the following commands in sequence: <br/>
+           `clear` -> `undo`,<br/>
            Expected: Student list should be repopulated
-        2. Continuing from above, run `undo` </br>
-           Expected: The following message should appear: </br>
+        2. Continuing from above, run `undo` <br/>
+           Expected: The following message should appear: <br/>
             "Unable to undo Academy Directory as requested ... Is there anything to undo?"
 2. Redo a change
     1. Prerequisite: Completed the above two test cases for undo and made no other changes
     2. Test cases:
-        1. Continuing from point 1.2, execute `redo` </br>
+        1. Continuing from point 1.2, execute `redo` <br/>
            Expected: Student list should be cleared
-        2. Continuing from above, run `redo` </br>
-           Expected: The following message should appear: </br>
+        2. Continuing from above, run `redo` <br/>
+           Expected: The following message should appear: <br/>
            "Unable to redo Academy Directory as requested ... Is there anything to redo?"
 
 The above test cases tests for correctness for the basic behaviors of `UndoCommand` and `RedoCommand`. They don't have to be
