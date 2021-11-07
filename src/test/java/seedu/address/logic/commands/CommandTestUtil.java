@@ -23,6 +23,7 @@ import seedu.address.model.ApplicantBook;
 import seedu.address.model.Model;
 import seedu.address.model.PositionBook;
 import seedu.address.model.applicant.Applicant;
+import seedu.address.model.applicant.NameContainsKeywordsPredicate;
 import seedu.address.model.position.Position;
 import seedu.address.model.position.TitleContainsAllKeywordsPredicate;
 import seedu.address.testutil.EditPositionDescriptorBuilder;
@@ -191,6 +192,21 @@ public class CommandTestUtil {
         model.updateFilteredPositionList(new TitleContainsAllKeywordsPredicate(Arrays.asList(splitName)));
 
         assertEquals(1, model.getFilteredPositionList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the applicant at the given {@code targetIndex} in the
+     * {@code model}'s applicant book.
+     */
+    public static void showApplicantAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredPositionList().size());
+
+        Applicant applicant = model.getFilteredApplicantList().get(targetIndex.getZeroBased());
+        final String[] splitName = applicant.getName().fullName.split("\\s+");
+
+        model.updateFilteredApplicantList(new NameContainsKeywordsPredicate(Arrays.asList(splitName)));
+
+        assertEquals(1, model.getFilteredApplicantList().size());
     }
 
 }
