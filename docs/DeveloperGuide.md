@@ -805,16 +805,47 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
     1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
-       Timestamp in the status bar is updated.
+       Expected: First st is deleted from the list. Details of the deleted student shown in the result display box.
 
     1. Test case: `delete 0`<br>
-       Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
+       Expected: No student is deleted. Error details shown in the result display box.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+    1. Other incorrect delete commands to try: `delete`, `delete x`,  (where x is larger than the list size)<br>
        Expected: Similar to previous.
+       
+### Show a student's lab results
+1. Showing a student's lab results while all students are being shown
+    1.  Prerequisites: List all students using the `list` command. Multiple students in the list.
+    1.  Test case: `show 1` shows the information and list of lab results of the student with index 1 on the right panel.
+    1.  Test case: `show 0`<br>
+        Expected:  Error details shown in the result display box. The last shown student's lab results remains on the right panel.
+        
+2. Updating shown content for student-related features
+    1. Prerequisites: There is at least 1 student in ProgrammerError's storage.
+    1. Test case(AddCommand): 
+       * Add a student by keying in `add -n Sherwin -sid A1234567X -cid B01 -email e0542421@u.nus.edu`
+       * The information shown on the right panel is updated to show Sherwin's information, with a list of unmarked labs that all other students have.
+    1. Test case(DeleteCommand):
+       * Delete a student by keying in `delete 1`
+       * The information shown on the right panel is cleared.
+    1. Test case(EditCommand):
+       * Edit a student by keying in `edit 1 -n John Doe`
+       * The information shown on the right panel is updated to show the student whose name is edited to `John Doe`.
 
-1. _{ more test cases …​ }_
+2. Updating shown content for lab-related features
+    1. Prerequisites: There are at least 1 student in ProgrammerError's storage.
+    1. Test case(AddLabCommand):
+       * Add a lab for all students by keying in `addlab -ln 1 -ts 20`, assuming that Lab 1 does not exist.
+       * If the right panel is currently empty, it remains to be empty.
+       * If the right panel is showing a student's lab results, a red `Lab1`tag  and a Lab card with title `Lab1`, actual score `-` and total score `20` is added.
+    1. Test case(DeleteLabCommand):
+        * Delete a lab for all students by keying in `deleteLab -ln 1`, assuming that Lab 1 already exists.  
+        * If the right panel is currently empty, it remains to be empty.
+        * If the right panel is showing a student's lab results, the `Lab1` tag and the Lab card with title `Lab1` is deleted.
+    1. Test case(EditLabCommand):
+        * Edit a lab for all students by keying in `editlab -ln 1 -nln 2`, assuming that Lab 1 already exists.
+        * If the right panel is currently empty, it remains to be empty.
+        * If the right panel is showing a student's lab results,  the `Lab1` tag is updated to `Lab2` and the Lab card with title `Lab1` is edited to have title `Lab2`.
 
 ### Download data
 
@@ -822,6 +853,7 @@ testers are expected to do more *exploratory* testing.
 
     1. To cancel, click 'cancel' to return to the main window.
     2. In the chosen folder, ProgrammerError will save a CSV file of the students' data named `programmerError.csv`.
+    
 
 ### Dashboard
 
