@@ -11,6 +11,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.ViewingType;
 import seedu.address.model.person.Person;
 
 /**
@@ -21,7 +22,7 @@ public class DeletePersonCommand extends Command {
     public static final String COMMAND_WORD = "-d";
 
     public static final String MESSAGE_USAGE = PERSON_COMMAND + " " + COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
+            + ": Deletes the student identified by the index number used in the displayed student list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + PERSON_COMMAND + " " + COMMAND_WORD + " 1";
 
@@ -44,6 +45,8 @@ public class DeletePersonCommand extends Command {
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(personToDelete);
         model.updateLessonWithAttendeesList();
+        model.setViewingType(ViewingType.SCHEDULE);
+
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
     }
 

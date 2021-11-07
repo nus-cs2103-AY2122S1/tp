@@ -23,11 +23,11 @@ public class ViewPersonCommand extends Command {
     public static final String COMMAND_WORD = "-v";
 
     public static final String MESSAGE_USAGE = PERSON_COMMAND + " " + COMMAND_WORD
-            + ": Views a person in the persons list.\n"
+            + ": Views a student in the students list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + PERSON_COMMAND + " " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_VIEW_PERSON_SUCCESS = "View Person: %1$s";
+    public static final String MESSAGE_VIEW_PERSON_SUCCESS = "View Student: %1$s";
 
     private final Index targetIndex;
 
