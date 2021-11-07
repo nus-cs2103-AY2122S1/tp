@@ -51,7 +51,10 @@ public class UserInputList implements Iterable<String> {
     public void add(String toAdd) {
         requireNonNull(toAdd);
         internalList.add(0, toAdd);
-        internalList.subList(LIST_MAX_LENGTH, internalList.size()).clear();
+        assert !(internalList.size() > LIST_MAX_LENGTH);
+        if (internalList.size() == LIST_MAX_LENGTH) {
+            internalList.remove(LIST_MAX_LENGTH);
+        }
     }
 
     /**
