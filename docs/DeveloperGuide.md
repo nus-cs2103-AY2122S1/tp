@@ -153,6 +153,21 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 ### Data Archiving Features
+#### Add feature
+
+The add feature is facilitated by `AddCommand`. It extends `Command` with a person as parameter where the person to be added is stored internally as a `toAdd`. The add mechanism relies on `ModelManager#addPerson()` to add the Person to be added to the `personList` in `ModelManager`.
+
+The following sequence diagram shows how the add operation works. For simplicity the command `add n/John Doe p/98765432 a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney g/john-doe N/e0123456 r/student s/A0123456X T/11` is simplified to `add {person details}`
+
+![AddSequenceDiagram](images/AddSequenceDiagram.png)
+
+#### Edit feature
+
+The edit feature is facilitated by `EditCommand`. It extends `Command` with an Index and EditPersonDescriptor as parameter where the person to be edited is stored at index in the `personList` and EditPersonDescriptor stored the details of the edited fields. The edit mechanism relies on `ModelManager#setPerson()` to edit the Person in the `personList` in `ModelManager`.
+
+The following sequence diagram shows how the edit operation works.
+
+![EditSequenceDiagram](images/EditSequenceDiagram.png)
 
 #### Import feature
 
@@ -361,7 +376,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | beginner user                              | export search the set of contacts with the given tag | locate a person easily                                                       |
 | `* *`    | user in a supervising position             | export name and email to a file               | send specific emails to a select few contacts
 | `* *`    | curious user                               | view statistics about the contacts that I have added | derive more information about my contacts
-
+| `* *`    | Professor                                  | bulk tag contacts                             | I can quickly tag TAs and Students according to their groups
 
 
 *{More to be added}*
@@ -431,15 +446,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case ends.
 
 * 3a. The given index is invalid.
+  * 3a1. AddressBook shows an error message.
 
-    * 3a1. AddressBook shows an error message.
-
-      Use case resumes at step 2.
+  Use case resumes at step 2.
 
 * 3b. The attribute to be edited does not exist.
   * 3b1. AddressBook shows an error message.
-  * Use case ends
-  *
+  Use case ends
+
+* 3c. If the attribute edited is the name and results in a similar person i.e. same name as another person
+  * 3c1. AddressBook shows an error message.
+
+      Use case ends
 
 
 **Use case: Export contacts**

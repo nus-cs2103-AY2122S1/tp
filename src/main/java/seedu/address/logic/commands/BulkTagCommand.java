@@ -45,10 +45,7 @@ public class BulkTagCommand extends Command {
 
         for (Person person : personsToTag) {
             Set<Tag> newTagList = new HashSet<>(tagList);
-            for (Object o : person.getTags().toArray()) {
-                Tag tag = (Tag) o;
-                newTagList.add(tag);
-            }
+            newTagList.addAll(person.getTags());
             Person taggedPerson = new Person(person.getName(), person.getPhone(), person.getEmail(),
                     person.getAddress(), newTagList, person.getGitHubId(),
                     person.getNusNetworkId(), person.getType(), person.getStudentId(), person.getTutorialId());
@@ -59,8 +56,6 @@ public class BulkTagCommand extends Command {
     }
 
     private CommandResult getCommandResult(Set<Tag> tagList, List<Person> personsToTag) {
-        int numberOfPersonsTagged = 0;
-
         StringBuilder tagsSb = new StringBuilder();
         for (Tag tag : tagList) {
             tagsSb.append(tag.toString() + " ");
