@@ -39,7 +39,7 @@ public class FacilityName {
     public boolean equals(Object obj) {
         return (obj == this)
                 || (obj instanceof FacilityName
-                && facilityName.equals(((FacilityName) obj).facilityName));
+                && facilityName.equalsIgnoreCase(((FacilityName) obj).facilityName));
     }
 
     @Override

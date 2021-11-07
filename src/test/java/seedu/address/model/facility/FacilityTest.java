@@ -74,20 +74,17 @@ public class FacilityTest {
         editedField = new FacilityBuilder(FIELD).withLocation(VALID_LOCATION_COURT).build();
         assertFalse(FIELD.isSameFacility(editedField));
 
-        // name differs in case, all other attributes same -> returns false
-        Facility editedCourt = new FacilityBuilder(KENT_RIDGE_SPORT_HALL_5_COURT_1)
-                .withFacilityName(VALID_FACILITY_NAME_COURT.toLowerCase()).build();
-        assertFalse(KENT_RIDGE_SPORT_HALL_5_COURT_1.isSameFacility(editedCourt));
+        // name in lower case, all other attributes same -> returns true
+        editedField = new FacilityBuilder(FIELD).withFacilityName(FIELD.getName().facilityName.toLowerCase()).build();
+        assertTrue(FIELD.isSameFacility(editedField));
+
+        // location in lower case, all other attributes same -> returns true
+        editedField = new FacilityBuilder(FIELD).withLocation(FIELD.getLocation().location.toLowerCase()).build();
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_FACILITY_NAME_COURT + " ";
-        editedCourt = new FacilityBuilder(KENT_RIDGE_SPORT_HALL_5_COURT_1)
+        Facility editedCourt = new FacilityBuilder(KENT_RIDGE_SPORT_HALL_5_COURT_1)
                 .withFacilityName(nameWithTrailingSpaces).build();
-        assertFalse(KENT_RIDGE_SPORT_HALL_5_COURT_1.isSameFacility(editedCourt));
-
-        // location differs in case, all other attributes same -> returns false
-        editedCourt = new FacilityBuilder(KENT_RIDGE_SPORT_HALL_5_COURT_1)
-                .withLocation(VALID_LOCATION_COURT.toLowerCase()).build();
         assertFalse(KENT_RIDGE_SPORT_HALL_5_COURT_1.isSameFacility(editedCourt));
 
         // location has trailing spaces, all other attributes same -> returns false
