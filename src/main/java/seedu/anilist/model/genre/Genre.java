@@ -11,7 +11,7 @@ import seedu.anilist.logic.commands.GenreListCommand;
  */
 public class Genre implements Comparable<Genre> {
 
-    public static final String MESSAGE_CONSTRAINTS = "Genres must be from the list of available genres.\n"
+    public static final String MESSAGE_CONSTRAINTS = "Genre(s) must be from the list of available genres.\n"
             + "To view the list, enter: "
             + GenreListCommand.COMMAND_WORD;
 
