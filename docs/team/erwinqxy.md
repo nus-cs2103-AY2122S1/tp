@@ -44,7 +44,7 @@ project. ([View Reposense](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?s
 1. **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=erwinqxy&tabRepo=AY2122S1-CS2103-F09-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
 
 2. **Project management**:
-   * Managed releases `v1.2a, v1.4` (2 release) on GitHub
+   * Managed releases `v1.2a, v1.4` (2 releases) on GitHub
 
 3. **Enhancements to existing features**:
       * Refactor the entire project structure to fit our product [#61](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/61), [#91](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/91), [#99](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/99), [#382](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/382)
