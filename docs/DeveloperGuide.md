@@ -479,7 +479,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | user                                       | load members from other files | access and manage different sets of data |
-| `* * *`  | user                                       | write my data to a file as save data | access them and resume at a later date |
+| `*`  | user                                       | write my data to a file as save data | access them and resume at a later date |
 
 
 #### Event Functions
@@ -495,7 +495,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
 | `* * *`  | user                                       | find a member by name          | locate details of members without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
+| `*`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
 | `*`      | user with many members in the address book | sort members by name           | locate a member easily                                                 |
 
 
@@ -740,22 +740,153 @@ testers are expected to do more *exploratory* testing.
 
 ### Event tests
 
+#### Listing an event
+
+1. List all events
+
+    1. Test case: `elist`<br>
+       Expected: All events are shown in the event list. Success message shown.
+       
 #### Adding an event
 
+1. Adding an event with zero or more members while all members are being shown
+
+    1. Prerequisites: List all members using the `mlist` command. At least 3 members in the list.
+
+    2. Test case: `eadd /n Music Concert /d 11/09/2022`<br>
+       Expected: A new event will be added to the event list. Name and date of the added event is shown in the status message.
+
+    3. Test case: `eadd /n Music Concert /d 11/09/2022 /m 2 /m 3`<br>
+       Expected: A new event will be added to the event list with second and third member of the member list. Name and date of the added event is shown in the status message.
+       In the event list, in the card for the event added, two red labels representing the second and third members are present.
+       
+    4. Test case: `eadd /n boat trip /d 11/09/1800 /m 2 /m 3`<br>
+       Expected: No event is added due to wrong input for date out of range. Error details shown in the status message.
+       
 #### Deleting event
 
+1. Deleting an event while all events are being shown
+
+    1. Prerequisites: List all events using the `elist` command. Multiple events in the list.
+
+    2. Test case: `edel /e 1`<br>
+       Expected: First event is deleted from the event list. Name and date of the deleted event shown in the status message.
+
+    3. Test case: `edel /e 0`<br>
+       Expected: No event is deleted. Error details shown in the status message. Status bar remains the same.
+
+    4. Other incorrect delete commands to try: `edel`, `edel /e x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+       
 #### Editing an event
 
+1. Editing an existing event while all members and events are being shown
+
+    1. Prerequisites: List all members using the `mlist` command.
+       List all events using the `elist` command. Multiple members and events in member and event list respectively.
+       At least two events in event list and three members in member list.
+
+    2. Test case: `eedit /e 1 /n Freshman Orientation Project Discussion /d 22/11/2021`<br>
+       Expected: First event has new name and date displayed on its card in the event list.
+       New name and date of the edited event shown in the status message.
+
+    3. Test case: `eedit /e 2 /m 1 /m 2 /m 3`<br>
+       Expected: Second event now only has first, second and third member. Displayed in its own event card.
+
+    4. Test case: `eedit /e 2 /m`<br>
+       Expected: Second event now has no members. Displayed in its own event card with no labels for member present.
+       
 #### Adding a member to an event
 
+1. Adds existing members to an existing event while all members and events are being shown
+
+    1. Prerequisites: List all members using the `mlist` command.
+       List all events using the `elist` command. Multiple members and events in member and event list respectively.
+       At least two events in event list and three members in member list.
+
+    2. Test case: `emadd /e 1 /m 2 /m 3`<br>
+       Expected: First event now also has second and third members displayed on its card in the event list.
+
+    3. Test case: `emadd /e 2 /m 0`<br>
+       Expected: No member is added to the second event. Error details shown in the status message.
+
+    4. Test case: `emadd /e 2 /m 1`<br>
+       Expected: Second event now also has the first member displayed on its card in the event list.
+       
 #### Deleting a member from an event
 
+1. Deletes existing members from an existing event while all members and events are being shown
+
+    1. Prerequisites: List all members using the `mlist` command.
+       List all events using the `elist` command. Multiple members and events in member and event list respectively.
+       At least one event in event list and three members in member list.
+
+    2. Test case: `emdel /e 1 /m 2 /m 3`<br>
+       Expected: First event no longer has the second and third members displayed on its card in the event list.
+
+    3. Test case: `emdel /e 1 /m 0`<br>
+       Expected: No member is deleted from the first event. Error details shown in the status message.
+
+    4. Test case: `emdel /e 1 /m 1`<br>
+       Expected: First event no longer has the first member displayed on its card in the event list.
+       
 #### Mark all members of event as attended
 
+1. Marks all members of an event.
+
+    1. Prerequisites: List all events using the `elist` command. 
+       At least one event in the list with at least two members. If not use `eadd` and/or `emadd` to obtain this event.
+
+    2. Test case: `emarkall /e 1`<br>
+       Expected: First event has all its members marked as attended. The member labels on its card are all green
+       and no red. 
+       
 #### Mark specific members of event as attended
 
+1. Marks members of an event.
+
+    1. Prerequisites: List all members attending the first event using `mlist /e 1`.
+       At least one event in the list with at least two members. If not use `eadd` and/or `emadd` to obtain this event.
+
+    2. Test case: `emark /e 1 /m 1`<br>
+       Expected: First event has the first member marked as attended. The member label on its card for the first
+       member is green.
+       
+    2. Test case: `emark /e 1 /m 1 /m 2`<br>
+       Expected: First event has the first member and second member marked as attended.
+       The member label on its card for the first and second members are green.   
+       
+       
 #### Unmark specific members of event
 
+1. Unmarks members of an event.
+
+    1. Prerequisites: List all members attending the first event using `mlist /e 1`.
+       At least one event in the list with at least two members. If not use `eadd` and/or `emadd` to obtain this event.
+
+    2. Test case: `eunmark /e 1 /m 1`<br>
+       Expected: First event has the first member marked as absent. The member label on its card for the first
+       member is red.
+
+    2. Test case: `emark /e 1 /m 1 /m 2`<br>
+       Expected: First event has the first member and second member marked as absent.
+       The member label on its card for the first and second members are red.
+
+#### Finding an event
+
+1. Finds and list all events with names containing any of the given keywords. Matching is not strict. Case-insensitive
+search for name.
+
+    1. Prerequisites: Have an event with the name cat, and an event with the name DOG.
+
+    2. Test case: `efind ca`<br>
+       Expected: Event list has the event with the name cat in it. All other events with 'ca' as part of its name is
+       in the event list. 
+
+    3. Test case: `efind c dog`<br>
+       Expected: Event list has both the events with the name cat and dog in it. All other events with 'c' 
+       and/or 'dog 'as part of its name is in the event list.
+      
 ### Task tests
 
 #### Adding a task
