@@ -1063,7 +1063,9 @@ Format: `undo`
 #### Redoing undone commands: `redo`
 
 Redo the previous command that has been undone. 
-The undone command can only be redone if `redo` was executed immediately after `undo` or after the `undo` command, only commands that do not modify any data are executed.<br>
+The undone command can only be redone if
+1. `redo` is executed immediately after `undo`
+2. Between the execution of `undo` and `redo`, only commands that do not modify any data were executed.<br>
 e.g. `view`, `day`, `calendar`, `tags` etc.
 
 Format: `redo`
@@ -1221,9 +1223,10 @@ Action | Format & Examples
 Action | Format & Examples
 --------|------------------
 [**Add Lesson**](#adding-a-lesson-ladd) | `ladd INDEX [recurring/[END_DATE]] date/dd MMM yyyy time/HHmm-HHmm subject/SUBJECT rates/LESSON_RATES [f/OUTSTANDING_FEES] [hw/HOMEWORK]…​`<br><br> e.g. `ladd 1 recurring/ date/10 Nov 2021 time/1000-1200 subject/Math rates/50`
-[**Edit Lesson**](#editing-a-lesson-ledit) | `ledit INDEX LESSON_INDEX [recurring/[END_DATE]] [date/dd MMM yyyy] [time/HHmm-HHmm] [subject/SUBJECT] [rates/LESSON_RATES] [f/OUTSTANDING_FEES] [hw/HOMEWORK]… [cancel/CANCEL_DATE]… [uncancel/UNCANCEL_DATE]…​`
+[**Edit Lesson**](#editing-a-lesson-ledit) | `ledit INDEX LESSON_INDEX [recurring/[END_DATE]] [date/dd MMM yyyy] [time/HHmm-HHmm] [subject/SUBJECT] [rates/LESSON_RATES] [f/OUTSTANDING_FEES] [hw/HOMEWORK]… [cancel/CANCEL_DATE]… [uncancel/UNCANCEL_DATE]…​`<br><br> e.g. `ledit 2 1 cancel/10 Nov 2021`
 [**Delete Lesson**](#deleting-a-lesson-ldelete) | `ldelete INDEX LESSON_INDEX`<br><br> e.g.`ldelete 2 1`
-[**Pay Lesson**](#paying-a-lessons-outstanding-fees-paid) | `paid INDEX LESSON_INDEX amt/AMOUNT_PAID`
+[**Pay Lesson**](#paying-a-lessons-outstanding-fees-paid) | `paid INDEX LESSON_INDEX amt/AMOUNT_PAID`<br><br> e.g. `paid 2 1 amt/10`
+[**View Lessons**](#viewing-a-students-lessons-view) | `view INDEX`<br><br> e.g. `view 1`
 
 ### Navigating the UI
 
