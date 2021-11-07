@@ -29,7 +29,7 @@ feel free to skip to the [command summary](#command-summary) and experiment with
 * [**Overview**](#)
 * [**Table of Contents**](#table-of-contents)
 * [**Quick Start**](#quick-start)
-* **Features**
+* [**Features**](#features)
   * [Notes on Command Format](#features)
   * Adding Data
     * [Adding a student : `addstudent`](#adding-a-student--addstudent)
@@ -405,7 +405,7 @@ Examples:
 
 ### Exporting data : `export`
 
-Exports data into a CSV file. Can be used to backup the data, or to send the data to colleagues for them to load into their copy of Source Control.
+Exports data into a CSV file. Can be used to back up the data, or to share the data to others for them to load into their copy of Source Control.
 
 Format: `export`
 
@@ -534,7 +534,7 @@ On an OS based off of Linux, it might be necessary to run `chmod +x sourceContro
 ### How can I back up my data?
 Source Control data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-If you wish to back up the data, you can use the `export` command. The `import` command can then load the data from the CSV file created.
+If you wish to back up the data, you can use the `export` command to retrieve a CSV file containing the data. The `import` command can then load the data back into Source Control.
 
 [Return to Table of Contents](#table-of-contents)
 
