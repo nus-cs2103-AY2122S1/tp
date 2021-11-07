@@ -140,7 +140,6 @@ How the parsing works:
 
 ### Model component
 
-[comment]: <> (TODO: CHIXU &#40;DESIGN CONSIDERATIONS&#41;)
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
@@ -149,35 +148,23 @@ How the parsing works:
 The `Model` component,
 
 * stores the address book data i.e., all `Member` objects (which are contained in a `UniqueMemberList` object), all `Event` objects (which are contained in a `UniqueEventList` object).
-* stores a `TaskList` reference that points to the `TaskList` object that contains all the `Task` objects of the currently 'selected' `Member` object (e.g. result of a 'tlist' command)
+* stores a `TaskList` reference that points to the `TaskList` object that contains all the `Task` objects of the currently 'selected' `Member` object (e.g. result of a `tlist` command)
 * stores the currently 'selected' `Member`, `Event` and `Task` objects (e.g., results of a search query) as separate _filtered_ lists which are exposed to outsiders as an unmodifiable `ObservableList<Member>`, `ObservableList<Event>` and `ObservableList<Task>` respectively that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Position` list in the `AddressBook`, which `Member` references. This allows `AddressBook` to only require one `Position` object per unique POSITION, instead of each `Member` needing their own set of `Position` objects.<br>
+Within the `Model` component,
+* `Module` is the superclass of `Member`, `Event` and `Task`. `Module` has a `Name` field as the common attribute of its subclasses.
+* `Event` has a `Name` field, `EventDate` field, and a field of a `HashMap<Member, Boolean>` to serve as a participant list with attendance.
+* `Member` has its original fields from AB3 and an additional field of a `TaskList` to store all tasks assigned to the member.
+* `Task` has a `Name` field, `TaskDeadline` field, and a `Boolean` field to represent the completion status of the task.
+
+[comment]: <> (<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative &#40;arguably, a more OOP&#41; model is given below. It has a `Position` list in the `AddressBook`, which `Member` references. This allows `AddressBook` to only require one `Position` object per unique POSITION, instead of each `Member` needing their own set of `Position` objects.<br>)
 
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+[comment]: <> (<img src="images/BetterModelClassDiagram.png" width="450" />)
 
-</div>
-
-[comment]: <> (TODO: CHIXU)
-#### Current Implementations
-
-The model that we implemented currently has `Event`, `Task` and `Member`. `Member` has a field with `TaskList` which contains
-`Task` belonging to the `Member`. `Event` has a `Name` field, `EventDate` field, and a field of a HashMap<Member, Boolean>
-to serve as a participant list with attendance. Event and Member both extend from the abstract class `Module` to reduce class duplication.
-
-The `Task` model we implemented currently has a task name and a state that represents it is done or not.
-
-#### Future Plans
-
-The future plan for the model is to have `Task` extend from module. The search functions in regard to name will be greatly helped ny the `Module` class.
-We also plan to make the `Position` objects unique to reduce space cost, Each member would contain a reference to the `Position` object instead.
-
-* Make `Task` a subclass of `Module`, which involves adding `TaskName` class.
-* Add deadline field to `Task`
-
+[comment]: <> (</div>)
 
 ### Storage component
 
@@ -213,7 +200,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 [comment]: <> (TODO: CHI XU)
 Here is the Activity Diagram for a User when choosing the module and command to interact with in Ailurus:
 
-![Activity Diagram for User Commands](images/CommandActivityDiagram.jpg)
+![Activity Diagram for User Commands](images/CommandActivityDiagram.png)
 
 ## **Implementation**
 
