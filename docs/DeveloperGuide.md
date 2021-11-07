@@ -435,7 +435,7 @@ Below is a sequence diagram and explanation of how the `DeleteCommand` is execut
 ### Set current semester and MC goal feature
 
 #### Implementation
-The `set` command has 2 functionalities: set current semester and set MC goal. Each `SetCommand` can perform one and only one of these two functionalities. `set` command is implemented via the `SetCommand` and `SetCommandParser` classes.
+The `set` command has 2 functionalities: set current semester and set MC goal. Each `set` command can perform one and only one of these two functionalities. `set` command is implemented via the `SetCommand` and `SetCommandParser` classes.
 
 The `SetCommandParser` class implements the `Parser` interface and is responsible for parsing the user input. From user input, it checks whether the user want to set current semester or MC goal, and will then retrieve the corresponding object(`AcademicCalendar` or `Mc`) from user input and create the `SetCommand`.
 
@@ -500,7 +500,7 @@ Below are the sequence diagrams and explanation of how `SetCommand` is executed.
         - The command is very long, which takes more time to type in. For a user who is familiar with the app, they might not be able to use it efficiently.
         - The command consist of capital letters and lower-case letters and is long. Thus, it might be more prone to errors.
 
-### View modules taken in specific semester feature
+### View modules taken in a specific semester feature
 The `view` command results in modules taken in a specific semester being shown.
 
 The `view` command is implemented via the `ViewCommand`, `ViewCommandParser` and `ModuleInSpecificSemesterPredicate` classes.
@@ -761,9 +761,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 1.
 
-* a. At any time, User requests to view help(UCxx)
-
-
 **UC9: Set Mc goal**
 
 **MSS**
@@ -785,10 +782,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case resumes at step 1.
 
-* a. At any time, User requests to view help(UCxx)
 
-
-**UC10: View modules taken in specific semester**
+**UC10: View modules taken in a specific semester**
 
 **MSS**
 
@@ -800,9 +795,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 * 1a. User does not specify the number the specific academic year and semester in the request.
     * 1a1. Module Tracker shows an error message.
-
-* a. At any time, User requests to view help(UCxx)
-
 
 **UC11: Remove all modules in a specific semester from the academic plan**
 
@@ -831,7 +823,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * Technical requirement:
   * NUS Mod Tracker Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-  * NUS Mod Tracker should work under common screen resolutions.
+  * NUS Mod Tracker should work under _common screen resolutions_.
   * NUS Mod Tracker Should work properly no matter where the application is stored.
 
 * Performance requirements:
@@ -839,9 +831,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * Quality requirement
   * A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-  * New users can have a grasp of the core features quickly with the help of user guide(link).
-* Constraints
-  * The product is not required to handle the module timetable planning and module bidding process.
+  * New users can have a grasp of the core features quickly with the help of the [User Guide](https://ay2122s1-cs2103t-w17-2.github.io/tp/UserGuide).
 
 ### Glossary
 
@@ -870,7 +860,9 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample modules. The window size may not be optimum.
+   1. Double-click the jar file 
+      
+        Expected: Shows the GUI with a set of sample modules. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -932,7 +924,7 @@ testers are expected to do more *exploratory* testing.
 1. Finding all modules with the specified keywords.
 
     1. Test case: `find CS2103T`<br>
-       Expected: The modules that have `CS2103T` string in module code, module title, description, and tags are found.
+       Expected: Modules with the string "CS2103T" module code, module title, description, and tags are found.
 
 ### Adding a module to the academic plan
 
@@ -943,7 +935,7 @@ testers are expected to do more *exploratory* testing.
         Expected: The module is not taken. Error details shown in the status message.
 
 ### Removing a module from the academic plan
-N
+
 1. Prerequisites: The specified module has been taken.
 
 2. Test case: `untake 1`<br>
@@ -990,22 +982,21 @@ N
 
 ## **Appendix C: Effort**
 
-If the effort required to create AB3 is 100, we would place the effort required to implement the current version of NUS Mod Tracker at 120. Our team has contributed over 10,000 lines of code contributed and over 300 automated tests. Below are some changes in particular, that required a larger amount of effort to implement.
+If the effort required to create AB3 is 100, we would place the effort required to implement the current version of NUS Mod Tracker at 120. Our team has contributed over [10,000 lines of code contributed](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=AY2122S1-CS2103T-W17-2&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17) and over 300 automated tests. Below are some changes in particular, that required a larger amount of effort to implement.
 
 1. Modifying all AB3 components
 
    We needed to modify the entire AB3 in order to support operations on modules.
 
-   In the `Model` component, we needed to update all models in the `person` folder with a new folder that contains the model for module, as well as all other attributes related to a module (`Code`, `Title`, `Description`, `Mc`, ).
+   In the `Model` component, we needed to change the original `person` model to `module` and add all the attributes related to `module`(`Code`, `Title`, `Description`, `Mc`).
 
-   All other classes in `model` folder had to be modified accordingly.
+   In the `Logic` component, we need to modify all command parsers in order to parse `module`. All commands also needed to be modified to support the operations on `module`.
 
-   In the `Logic` component, we need to modify all command parsers in order to parse modules. All commands also needed to be modified to support the operations on modules.
+   In the `Storage` component, we needed to modify all classes in order to store `module`.
 
-   In the `Storage` component, we also needed to modify all classes in order to store modules.
-
-   The `UI` component also needed to be modified to display all the attributes of a module clearly,
-   and the test cases changed accordingly.
+   The `UI` component needed to be modified to display a `module`.
+   
+   The test cases also needed to be changed accordingly.
 
 
 2. Mc progress panel
