@@ -276,7 +276,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Retrieves the list of students from the CSV file.
+     * Retrieves the list of students from the CSV file for upload command.
      *
      * @param chosenFile the CSV file to read from
      * @return the list of Students

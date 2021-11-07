@@ -6,11 +6,19 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+/**
+ * File manager that provides methods for opening file dialogs on a stage.
+ */
 public class FileManager {
 
     private static final String DEFAULT_DOWNLOAD_FILE_NAME = "programmerError.csv";
     private final Stage primaryStage;
 
+    /**
+     * Creates a file manager for the given primary stage.
+     *
+     * @param primaryStage to show file dialogs on
+     */
     public FileManager(Stage primaryStage) {
         this.primaryStage = primaryStage;
     }
@@ -20,18 +28,18 @@ public class FileManager {
      *
      * @return File object with a file name appended to the chosen directory
      */
-    public File promptUserForFileDestination() {
+    File promptUserForFileDestination() {
         DirectoryChooser dirChooser = new DirectoryChooser();
         File chosenDir = dirChooser.showDialog(primaryStage);
         return chosenDir == null ? null : new File(chosenDir, DEFAULT_DOWNLOAD_FILE_NAME);
     }
 
     /**
-     * Shows user a dialog to choose a CSV file.
+     * Allows user to select a CSV file from a dialog.
      *
      * @return chosen CSV file
      */
-    public File promptUserForCsvFile() {
+     File promptUserForCsvFile() {
         FileChooser fileChooser = new FileChooser();
         configureFileChooser(fileChooser);
         return fileChooser.showOpenDialog(primaryStage);
