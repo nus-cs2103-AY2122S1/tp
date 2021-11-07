@@ -12,26 +12,27 @@ classes. If you are familiar with Unix commands, this is definitely for you!
 
 - [Quick Start](#quick-start)
 - [Features](#features)
-    1. [General Features](#general-features)
+  1. [Parameter Summary](#parameter-summary)
+  2. [General Features](#general-features)
         1. [View Help: `help`](#view-help)
         2. [View Dashboard `dashboard`](#view-dashboard)
         3. [Exit: `exit`](#exit)
-    2. [Data Features](#data-features)
-        1. [Fill Sample Data: `fill`](#fill-sample-data)
-        2. [Purge All Data: `purge`](#purge-all-data)
-        3. [Download Data: `download`](#download-data)
-        4. [Upload Data: `upload`](#upload-data)
-    3. [Student Features](#student-features)
-        1. [Add Student: `add`](#add-student)
-        2. [Edit Student Details: `edit`](#edit-student)
-        3. [Delete Student: `delete`](#delete-student)
-        4. [Filter Students: `filter`](#filter-student)
-        5. [Show Student Details: `show`](#show-student)
-        6. [List All Students: `list`](#list-students)
-    4. [Lab Features](#lab-features)
-        1. [Add Lab: `addlab`](#add-lab)
-        2. [Edit Lab: `editlab`](#edit-lab)
-        3. [Delete Lab: `dellab`](#delete-lab)
+  3. [Data Features](#data-features)
+      1. [Fill Sample Data: `fill`](#fill-sample-data)
+      2. [Purge All Data: `purge`](#purge-all-data)
+      3. [Download Data: `download`](#download-data)
+      4. [Upload Data: `upload`](#upload-data)
+  4. [Student Features](#student-features)
+      1. [Add Student: `add`](#add-student)
+      2. [Edit Student Details: `edit`](#edit-student)
+      3. [Delete Student: `delete`](#delete-student)
+      4. [Filter Students: `filter`](#filter-student)
+      5. [Show Student Details: `show`](#show-student)
+      6. [List All Students: `list`](#list-students)
+  5. [Lab Features](#lab-features)
+      1. [Add Lab: `addlab`](#add-lab)
+      2. [Edit Lab: `editlab`](#edit-lab)
+      3. [Delete Lab: `dellab`](#delete-lab)
 - [Command Summary](#command-summary)
 
 ## <a name="quick-start"></a>Quick Start
@@ -76,18 +77,25 @@ classes. If you are familiar with Unix commands, this is definitely for you!
 
 </div>
 
-## Parameter Summary
+## <a name="parameter-summary"></a>Parameter Summary
+<div markdown="span" class="alert alert-warning">
 
-Parameter | What it means
---------| ----------------------
-**-n** | Name of Student
-**-sid** | Student ID of Student
-**-cid** | Class ID of Student
-**-email** | Email of Student
-**-ln** | Lab Number
-**-nln** | New Lab Number (used for `editlab` command only)
-**-ts** | Lab Total Score
-**-s** | Lab Score of Student
+:exclamation: **Note:**
+Take note that all the commands that require the corresponding parameter follows the constraints as specified in the table below, apart from `filter` command.
+<br/>
+`filter` command filters the list based on partial character sequence matching and hence does not have to follow the constraints strictly.
+</div>
+
+Parameter | What it means | Constraints
+--------| ---------------------- | -------
+**-n** | Name of Student | Alphanumeric characters and spaces
+**-sid** | Student ID of Student | AXXXXXXXY, where X is a digit from 0 to 9 and Y is an alphabet
+**-cid** | Class ID of Student | BXX, where X is a digit from 0 to 9
+**-email** | Email of Student | eXXXXXXX@u.nus.edu, where X is a digit from 0 to 9
+**-ln** | Lab Number | An integer between 1 and 13 (inclusive)
+**-nln** | New Lab Number | An integer between 1 and 13 (inclusive)
+**-ts** | Lab Total Score | A non-negative integer between 1 and 100 (inclusive)
+**-s** | Lab Score of Student | A non-negative integer, not greater than the corresponding lab total score
 
 ## <a name="general-features"></a>1. General Features
 
@@ -95,9 +103,7 @@ Parameter | What it means
 
 Shows a message explaining how to access the help page.
 
-![help message](images/commands/HelpCommand/help.png)
-
-### <a name="view-dashboard"></a>1.2 Dashboard: `dashboard`
+### <a name="view-dashboard"></a>1.2 View Dashboard: `dashboard`
 
 ![dashboard](images/commands/DashboardCommand/dashboard.png)
 
@@ -126,7 +132,7 @@ As this is a mass operation, it might take a couple of seconds to complete.
 
 Clears all data in PE. This can be used to delete pre-existing sample data or existing user data.
 
-### <a name="download-data"></a>2.3 Download Data `download` or F3 on keyboard
+### <a name="download-data"></a>2.3 Download Data: `download` or F3 on keyboard
 
 All current students' data can be downloaded to a CSV file. The TA will need to select the directory to download the
 file to.
@@ -134,6 +140,9 @@ file to.
 ### <a name="upload-data"></a>2.4 Upload Data: `upload` or F4 on keyboard
 
 Uploads student data via a CSV file with **only** the following fields: student ID, class ID, name, email
+
+Here is an [example CSV file](https://github.com/AY2122S1-CS2103-F09-3/tp/blob/master/sample_upload/validDataForUpload.csv).
+You may download files from GitHub following the instructions [here](https://stackoverflow.com/questions/4604663/download-single-files-from-github).
 
 <div markdown="block" class="alert alert-warning">:exclamation: **Note:**
 the CSV should *not* contain students' lab results since this functionality is only meant for the TA to automate the adding of students to PE.
@@ -173,12 +182,12 @@ Format: `add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`
 
 Edits the details or grade of an existing student's in the PE.
 * Both the student ID and class ID must be unique.
-* 1-indexing is used here as according to the displayed list. 
+* 1-indexing is used here as according to the displayed list.
 * Any combination of the optional arguments can be provided.
 * At least one of the optional argument must be provided.
 * Take note that the parameters `-ln` and `-s` needs to be specified together.
 
-Format: `edit <INDEX_IN_LIST> [-n <NAME>] [-sid <STUDENT_ID>] [-cid <CLASS_ID>] [-email <EMAIL>] [-ln <LAB_NUMBER> -s <ACTUAL_SCORE>]`
+Format:`edit <INDEX_IN_LIST> [-n <NAME>] [-sid <STUDENT_ID>] [-cid <CLASS_ID>] [-email <EMAIL>] [-ln <LAB_NUMBER> -s <ACTUAL_SCORE>]`
 
 - Updates the student with at the given `INDEX_IN_LIST' with the arguments provided.
 - Existing values will be updated to the input flag arguments.
@@ -210,13 +219,14 @@ Format: `delete <INDEX_IN_LIST>`
 
 ### <a name="filter-student"></a>3.4 Filter Students: `filter`
 
-Filter the students in ProgrammerError based on the specified arguments provided (name, student ID, class ID and email). 
+Filter the students in ProgrammerError based on the specified arguments provided (name, student ID, class ID and email).
 * Any combination of the optional arguments can be provided.
 * At least one of the optional argument must be provided.
-* Arguments can be provided in any order and are **case-insensitive**. 
-* ProgrammerError will display the filtered list of students whose details matches all the specified arguments. 
+* Arguments can be provided in any order and are **case-insensitive**.
+* ProgrammerError will display the filtered list of students whose details matches all the specified arguments.
 * The arguments are matched to the corresponding details as long as the details of the students contains the
 sequence of characters provided in the argument string.
+* `filter` command does not follow the constraints as specified in [parameter summary](#parameter-summary).
 
 Format: `filter [-n <NAME>] [-sid <STUDENT_ID>] [-cid <CLASS_ID>] [-email <EMAIL>]`
 

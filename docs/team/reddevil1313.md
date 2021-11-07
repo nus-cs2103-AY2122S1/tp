@@ -1,6 +1,5 @@
 ---
-layout: page
-title: Samay Sagar's Project Portfolio Page
+layout: page title: Samay Sagar's Project Portfolio Page
 ---
 
 ### Project: ProgrammerError

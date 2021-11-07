@@ -9,7 +9,7 @@ title: Developer Guide
 2. [Setting up, getting started](#Setting up)
 3. [Design](#Design)
 4. [Architecture](#Architecture)
-5. [UI](#UI component)
+5. [UI components](#UI component)
 6. [Logic component](#Logic component)
 7. [Storage component](#Storage component)
 8. [Implementations](#Implementations)
@@ -25,8 +25,12 @@ title: Developer Guide
 --------------------------------------------------------------------------------------------------------------------
 
 ## <a name="Acknowledgements"></a> **Acknowledgements**
+
 ProgrammerError makes use of the following third-party libraries:
-* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JSON In Java](https://mvnrepository.com/artifact/org.json/json), [opencsv](http://opencsv.sourceforge.net/), [JUnit5](https://github.com/junit-team/junit5)
+
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson)
+  , [JSON In Java](https://mvnrepository.com/artifact/org.json/json), [opencsv](http://opencsv.sourceforge.net/)
+  , [JUnit5](https://github.com/junit-team/junit5)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -104,16 +108,18 @@ The main UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`
 , `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures
 the commonalities between classes that represent parts of the visible GUI.
 
-In addition, there are two additional windows that the UI can display: `HelpWindow` and `DashboardWindow`.
-They inherit from the abstract class `PopupWindow`,
-which captures the commonalities between classes that represent popup information to be displayed to the user.
+In addition, there are two additional windows that the UI can display: `HelpWindow` and `DashboardWindow`. They inherit
+from the abstract class `PopupWindow`, which captures the commonalities between classes that represent popup information
+to be displayed to the user.
 
 The `UI` component uses the JavaFx UI framework.
-- The layout of these UI parts are defined in matching `.fxml` files that
-are in the `src/main/resources/view` folder. For example, the layout of
-the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java)
-is specified
-in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+
+- The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder.
+  For example, the layout of
+  the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java)
+  is specified
+  in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+
 - The styling of the UI components are defined in the `src/main/resources/view/css` folder.
 
 The `UI` component,
@@ -125,7 +131,8 @@ The `UI` component,
 
 ## <a name="Logic component"></a> Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**
+API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -163,7 +170,8 @@ How the parsing works:
 
 ## <a name="Model component"></a> Model component
 
-**API** : [`Model.java`](https://github.com/AY2122S1-CS2103-F09-3/tp/blob/master/src/main/java/seedu/programmer/model/Model.java)
+**
+API** : [`Model.java`](https://github.com/AY2122S1-CS2103-F09-3/tp/blob/master/src/main/java/seedu/programmer/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -214,9 +222,9 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedProgrammerError`. It extends `ProgrammerError` with an undo/redo
-history, stored internally as an `programmerErrorStateList` and `currentStatePointer`. Additionally, it implements the
-following operations:
+The proposed undo/redo mechanism is facilitated by `VersionedProgrammerError`. It extends `ProgrammerError` with an
+undo/redo history, stored internally as an `programmerErrorStateList` and `currentStatePointer`. Additionally, it
+implements the following operations:
 
 * `VersionedProgrammerError#commit()` — Saves the current ProgrammerError state in its history.
 * `VersionedProgrammerError#undo()` — Restores the previous ProgrammerError state from its history.
@@ -228,6 +236,7 @@ and `Model#redoProgrammerError()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
+
 Step 1. The user launches the application for the first time. The `VersionedProgrammerError` will be initialized with the
 initial ProgrammerErrorstate, and the `currentStatePointer` pointing to that single ProgrammerError state.
 
@@ -237,6 +246,7 @@ Step 2. The user executes `delete 5` command to delete the 5th student in the Pr
 calls `Model#commitProgrammerError()`, causing the modified state of the ProgrammerError after the `delete 5` command executes
 to be saved in the `programmerErrorStateList`, and the `currentStatePointer` is shifted to the newly inserted ProgrammerError
 state.
+
 
 ![UndoRedoState1](images/commands/UndoCommand/UndoRedoState1.png)
 
@@ -363,9 +373,9 @@ The following activity diagram summarizes what happens when a CS2100 TA executes
 
 ### Student List Filtering
 
-#### Proposed Implementation
+#### Implementation
 
-The proposed filter mechanism is facilitated by the `QueryStudentDescriptor` and the
+The filter mechanism is facilitated by the `QueryStudentDescriptor` and the
 `StudentDetailContainsQueryPredicate`. The `StudentDetailContainsQueryPredicate` extends `Predicate<Student>` and
 contains a private field of type
 `QueryStudentDescriptor` that will be used to test if a given student to the predicate matches all the query fields in
@@ -438,22 +448,23 @@ The following UML activity diagram summarizes what happens when a CS2100 TA exec
 
 #### Implementation
 
-The show lab results feature allows the CS2100 TA to view the lab result list of a particular student. Its implementation
-introduces the following classes:
+The show lab results feature allows the CS2100 TA to view the lab result list of a particular student. Its
+implementation introduces the following classes:
 
 * `ShowCommand`that extends `Command`
 * `ShowCommandParser` that implements `Parser<ShowCommand>`
 * `ShowCommandResult` that extends `CommandResult`
 
-The syntax of this command is `show <INDEX_ON_LIST>`. For instance,`show 1` asks ProgrammerError to display the lab
+The syntax of this command is `show <INDEX_IN_LIST>`. For instance,`show 1` asks ProgrammerError to display the lab
 results of student at index 1 of the current list.
 
 Given below is a possible usage scenario:
 
-[Pre-Condition] There are 2 students in ProgrammerError, and the CS2100 TA has created some lab results for each of them.
+[Pre-Condition] There are 2 students in ProgrammerError, and the CS2100 TA has created some lab results for each of
+them.
 
-Step 1. The CS2100 TA keys in the command `show 1`: The information of the student at index 1 as well as his/her lab results
-are displayed on the side panel.
+Step 1. The CS2100 TA keys in the command `show 1`: The information of the student at index 1 as well as his/her lab
+results are displayed on the side panel.
 
 The mechanism is as described below:
 
@@ -467,11 +478,11 @@ The mechanism is as described below:
 
 * `MainWindow` receives the `ShowCommandResult` and displays the information and lab results of the identified student.
 
-Step 2. The CS2100 TA keys in `show 2`: The side panel is updated with the information and lab results of the student at index
-2
+Step 2. The CS2100 TA keys in `show 2`: The side panel is updated with the information and lab results of the student at
+index 2
 
-Step 3. The CS2100 TA key in `show 3`: ProgrammerError will show an error message in the `resultDisplay`, warning the user
-that the index is invalid. This is triggered by `CommandException`, which is thrown by `ShowCommand`.
+Step 3. The CS2100 TA key in `show 3`: ProgrammerError will show an error message in the `resultDisplay`, warning the
+user that the index is invalid. This is triggered by `CommandException`, which is thrown by `ShowCommand`.
 
 The following sequence diagram shows how the show command works:
 
@@ -512,7 +523,8 @@ related to the UI. In addition, the following classes are utilised:
 - `MainWindow.fxml`: for the addition of a 'Download' button on the MainWindow
 - `Popup.css`: for the customisation of styles for pop-up messages
 
-In the `Logic` components, the `download` command works in a similar fashion to the `show` command, except that it does not require its own parser.
+In the `Logic` components, the `download` command works in a similar fashion to the `show` command, except that it does
+not require its own parser.
 
 
 This sequence diagram shows how the `download` command works at a lower level:
@@ -526,7 +538,8 @@ The following activity diagram summarizes what happens when a CS2100 TA executes
 #### Design Considerations
 
 One of the main considerations was to deal with reading and writing files only when necessary. This meant checking if
-there is any data to begin with. Only if there exists any data will the CS2100 TA be prompted to select a folder destination.
+there is any data to begin with. Only if there exists any data will the CS2100 TA be prompted to select a folder
+destination.
 
 Additionally, a pop-up message was chosen to be displayed for two reasons. First, it provides the user a clear visual
 indicator of the result of their command, as compared to the typical textual output they would see. Second, we would
@@ -537,8 +550,9 @@ success.
 ### Alternatives
 
 1. One alternative could be to not use a third-party package (`org.json`), and instead manually parse the json file and
-   write the corresponding values to a CSV file which ProgrammerError would create. We chose not to go down this route as it is much more tedious with little reward in terms of code management and code
-   quality.
+   write the corresponding values to a CSV file which ProgrammerError would create. We chose not to go down this route
+   as it is much more tedious with little reward in terms of code management and code quality.
+
 
 2. Another alternative with respect to the CS2100 TA experience could be to disallow the user from selecting a folder to save
    their data to. Instead, a default location could be chosen so as to save the CS2100 TA some time in getting their data
@@ -731,13 +745,15 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
     * 3b.1. ProgrammerError shows an error message.
 
+
     Use case resumes at step 2.
 
 **Use case: UC6 Download student records**
 
 **MSS**
 
-1. CS2100 TA <ins>creates (UC2) </ins> /  <ins>views (UC3) </ins> /  <ins>delete (UC4) </ins> /  <ins>update (UC5) </ins> a student record
+1. CS2100 TA <ins>creates (UC2) </ins> /  <ins>views (UC3) </ins> /  <ins>delete (UC4) </ins> /  <ins>update (
+   UC5) </ins> a student record
 2. ProgrammerError automatically save the changed student records to hard disk
 3. CS2100 TA restarts the application
 4. ProgrammerError shows the saved data
