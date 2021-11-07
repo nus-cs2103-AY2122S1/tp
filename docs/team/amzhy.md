@@ -17,20 +17,21 @@ Access my [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?s
 #### Enhancements implemented
 * **Create edit features**: Designed and created `EditCommand`, `EditClassCommand`, `EditClassDescriptor` and its corresponding `Parser` classes. (Pull request [\#125](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/125))
   * What it does: Allows user to edit any details of a student or tuition class with the exception of remarks in **TutAssistor**
-  * Justification:  This makes the user experience much more pleasant as now they do not have to delete and recreate
-students or classes in order to change a few details.
-  * Highlights:
+  * Justification:  This makes the user experience much more pleasant as now they do not have to delete and recreate students or classes in order to change a few details.
   
 * **Create delete features**: Designed and created `DeleteCommand`, `DeleteClassCommand` and its corresponding `Parser` classes. (Pull requests [\#46](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/46))
-  * What it does: Allows user to delete a student or tuition classe in **TutAssistor**
-  * Justification:  This enables the user to remove entire records pertaining to a student or a tuition class
-entire students or classes in order to change a few details.
+  * What it does: Allows user to delete a student or tuition classes in **TutAssistor**
+  * Justification:  This enables the user to remove entire records pertaining to a student or a tuition class entire students or classes in order to change a few details.
   * Highlights:
+    * Duplicate indexes in user inputs have to be removed to ensure that only one student/class is deleted at a particular index.
+    * The order of deletion has to be considered carefully by sorting the indices before deletion, as the 
+list of students/classes changes while students/classes are being deleted respectively.
   
 * **Implement `RemoveStudent` feature**: Designed and created `RemoveStudentCommand`, `RemoveStudentCommandParser`. (Pull request [\#58](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/58))
   * What it does: Allows user to remove an existing student from a tuition class in **TutAssistor**
   * Justification:  This is more convenient for the user as now they do not have to delete and recreate a tuition class when a student drops out of a class.
-  * Highlights:
+  * Highlights: 
+    * Efforts are taken to ensure that students who are not enrolled in the class are not removed and this is conveyed to the user.
   
 * **Refactor Timeslot class**: Refactor Timeslot class to use Java `LocalTime` and `Date` for class timings instead of`String`. (Pull request [\#125](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/125))
   * What it does: Parses and saves the timing of any tuition class as `Date` and `LocalTime` to compare timeslots across classes. 
@@ -38,22 +39,25 @@ entire students or classes in order to change a few details.
 were also scheduled simultaneously due to these errors. Following the refactoring of the `Timeslot`, classes were created only at valid times and the timetable conflicts were detected more easily 
 using the existing Java API.
   * Highlights:
-    * This is a major refactor as the `Timeslot` is crucial for the logic of `Timetable` and management of tuition classes. 
+    * This is a major refactor as the `Timeslot` is crucial for the logic of `Timetable` and general management of all the tuition classes. 
 
 * **Refactor some commands to use multiple indexes**: Refactor `DeleteCommand`, `DeleteClassCommand` and `RemoveStudentCommand` to use multiple student or class indexes as arguments. (Pull request [\#65](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/65))
   * What it does: Allows user to delete multiple students or tuition classes as well as remove multiple students from a class.
   * Justification: Improve efficiency so that the user is able to remove multiple students or classes using one command instead of 
 repeating similar commands multiple times.
 
-* **Testing**: Create tests for the edit, delete commands and their related classes to increase coverage. (Pull request)
-
+* **Testing**: Create tests for the `EditClassCommand`, `EditCommand`, `DeleteCommand`, `DeleteClassCommand` and `RemoveStudentCommand` as well as their related classes to increase coverage. (Pull Request [\#216](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/216))
 
 #### Contributions to the User Guide
 Added to the FAQ and Introduction, formatted figures and enabled quicklinks for the command summary.(Pull Request [\#139](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/139))
+Added implementation details for `EditClassCommand`, `EditCommand`, `DeleteCommand`, `DeleteClassCommand` and `RemoveStudentCommand` (Pull Request [\#217](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/217))
+Fix some documentation bugs from PE-D (Pull Request [\#187](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/187))
 
 #### Contributions to the Developer Guide
-Added the implementation details of edit commands (Pull Request [\#135](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/135))
-Added UML diagrams for `RemoveStudent` command (Pull Request [\#209](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/209))
+Added the implementation details of `EditClassCommand` (Pull Request [\#135](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/135))
+Added UML diagrams for `RemoveStudent` , `DeleteClassCommand` features (Pull Request [\#209](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/209))
+Added implementation details of `EditCommand` (Pull Request [\#217](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/217))
+Added use cases for TutAssistor
 
 <div style="page-break-after: always;"></div>
 

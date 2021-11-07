@@ -292,20 +292,29 @@ Examples:
 ```
 edit 1 n/Jason Tan a/221b Baker Street
 ```
+or
 ```
-e 2 p/62353535
+e 1 n/Jason Tan a/221b Baker Street
 ```
+<div markdown="span" class="alert alert-primary">
+:information_source: Note: The edited name must be unique and should not be the same name of another existing student.
+</div>
 
 #### Editing a class: `editclass` | `ec`
 Format: `editclass INDEX [n/NAME] [l/LIMIT] [ts/TIMESLOT]`
 
 Examples:
 ```
-editclass 2 l/10
+editclass 3 n/Trigonometry ts/Sun 10:00-11:00
 ```
+or
+
 ```
 ec 3 n/Trigonometry ts/Sun 10:00-11:00
 ```
+<div markdown="span" class="alert alert-primary">
+:information_source: Note: The edited timeslot cannot conflict with an en existing timeslot of another class.
+</div>
 
 ### 3.4 Delete student/tuition class
 Deletes a student or a tuition class from TutAssistor.
@@ -326,8 +335,10 @@ Example:
 ```
 delete 1 2
 ```
+or
+
 ```
-del 1
+del 1 2
 ```
 
 #### Deleting tuition classes: `deleteclass` | `delc`
@@ -338,8 +349,10 @@ Example:
 ```
 deleteclass 1 2
 ```
+or
+
 ```
-delc 4
+delc 1 2
 ```
 
 ### 3.5 Add/Remove student from class
