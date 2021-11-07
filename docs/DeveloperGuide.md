@@ -254,41 +254,14 @@ mutated, after which the UI will be changed upon the call of a method that mutat
 The following sequence diagram shows what happens upon an addition of item to inventory until the 
 `ObservableList<Displayable>` inside DisplayList changes.
 
-<<<<<<< HEAD
-**`EditCommand:`**       
-EditCommand#execute() -> Model#setItem() -> Inventory#setItem() -> UniqueItemList#setItem() -> ObservableList<Item>
-
-# set()
-=======
 ![AddSequenceDiagram](images/AddSequenceDiagram.png)
->>>>>>> master
 
 Another design decision that we have done is that `Item` objects are strictly immutable, as seen by all the
 final fields. Thus, when any field is mutated, the previous `Item` is destroyed and a new `Item` is created. The
 following activity diagram shows some possible actions that a user might take. Take note also on the difference
 between Remove and Delete command.
 
-<<<<<<< HEAD
-**`DeleteCommand:`**      
-DeleteCommand#execute() -> Model#deleteItem() -> Inventory#deleteItems() -> UniqueItemList#removeItem() ->
-ObservableList<Item>#remove()
-
-**`SortCommand:`**      
-SortCommand#execute() -> Model#sortItem() -> Inventory#sortItems() -> UniqueItemList#sortItem() -> ObservableList<Item>
-
-# sort()
-
-#### Design considerations:
-
-**Aspect:**
-
-* **Finding Multiple Names, Ids or Tags:** The FindCommand supports finding by multiple names, ids or tags.
-  `IdContainsNumberPredicate`, `NameContainsKeywordsPredicate` and `TagContainsKeywordsPredicate` takes in a list of
-  strings which allows storing of multiple predicates. The items in the list are then matched with each predicate to
-  update the filtered list. Thus, the displayed list contains items that matches multiple predicates given.
-=======
 ![MutatingInventoryActivityDiagram](images/MutatingInventoryActivityDiagram.png)
->>>>>>> master
 
 ### Controlling the Display Panel in UI
 
