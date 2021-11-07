@@ -158,7 +158,7 @@ Format: `addm n/NAME p/PHONE_NUMBER [d/DAY(S)] [t/TAG]...`
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Note:** You will not be able to add members with the same `NAME` or `PHONE_NUMBER` into the member list as they are
+**:information_source: Note:** You will not be able to add members with the same `NAME` or `PHONE_NUMBER` as another existing member into the member list as they are
 considered duplicates.
 </div>
 
@@ -614,8 +614,8 @@ Members you choose to allocate must be available on the specified day and cannot
 </div>
 
 Examples:
-* `allocate 1 2 5` adds the member at index 1 in the displayed member list to the allocation list <br> of the facility
-  at index 2 in the displayed facility list on Friday :camera:
+* `allocate 1 1 5` adds the member at index 1 in the displayed member list to the allocation list <br> of the facility
+  at index 1 in the displayed facility list on Friday :camera:
 
 <p align="center">
    <img src="images/allocateExample.png" height="500" align="center"/>
