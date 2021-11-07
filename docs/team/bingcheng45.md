@@ -1,4 +1,3 @@
-
 ---
 layout: page
 title: Toh Bing Cheng's Project Portfolio Page
