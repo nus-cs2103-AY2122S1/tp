@@ -12,6 +12,7 @@ Class MainWindow
 Class HelpWindow
 Class ResultDisplay
 Class ContactListPanel
+Class SelectedContactCard
 Class ContactCard
 Class StatusBarFooter
 Class CommandBox
@@ -37,6 +38,7 @@ MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
 
 ContactListPanel -down-> "*" ContactCard
+ContactListPanel -down-> "1" SelectedContactCard
 
 MainWindow -left-|> UiPart
 
@@ -48,6 +50,7 @@ StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
 
 ContactCard ..> Model
+SelectedContactCard ..> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 

@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import javafx.scene.chart.PieChart;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -94,6 +95,114 @@ public class SummaryTest {
             count++;
         }
     }
+
+    @Test
+    public void execute_getPercentageRatingGui_successAfterEdit() {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        ReadOnlyAddressBook addressBook = model.getAddressBook();
+        Summary summary = new Summary(addressBook);
+        ObservableList<PieChart.Data> summaryRating = summary.getPercentageRatingsGui();
+        ObservableList<PieChart.Data> summaryCategory = summary.getPercentageCategoryGui();
+
+        String rating = ContactBuilder.DEFAULT_RATING;
+        String category = ContactBuilder.DEFAULT_CATEGORY_CODE;
+        model.addContact(new ContactBuilder().withName("Alice").build());
+
+
+        ReadOnlyAddressBook addressBookAfterAdd = model.getAddressBook();
+        Summary summaryAfterAdd = new Summary(addressBookAfterAdd);
+        ObservableList<PieChart.Data> summaryRatingAfterAdd = summaryAfterAdd.getPercentageRatingsGui();
+        ObservableList<PieChart.Data> summaryCategoryAfterAdd = summaryAfterAdd.getPercentageCategoryGui();
+
+        assertEquals(summaryRating.size(), summaryRatingAfterAdd.size());
+
+        int count = 0;
+        for (PieChart.Data i : summaryRatingAfterAdd) {
+            double afterAdd = summaryRatingAfterAdd.get(count).getPieValue();
+            double beforeAdd = summaryRating.get(count).getPieValue();
+            double afterAddAtt = afterAdd - 1;
+            if (summaryRatingAfterAdd.get(count).getName().substring(0, 1).equalsIgnoreCase(rating)) {
+                assertEquals(afterAddAtt, beforeAdd);
+            } else {
+                assertEquals(afterAdd, beforeAdd);
+            }
+            count++;
+        }
+
+        count = 0;
+        for (PieChart.Data i : summaryCategoryAfterAdd) {
+            double afterAdd = summaryCategoryAfterAdd.get(count).getPieValue();
+            double beforeAdd = summaryCategory.get(count).getPieValue();
+            double afterAddAtt = afterAdd - 1;
+            if (summaryCategoryAfterAdd.get(count).getName().equalsIgnoreCase(category)) {
+                assertEquals(afterAddAtt, beforeAdd);
+            } else {
+                assertEquals(afterAdd, beforeAdd);
+            }
+            count++;
+        }
+
+        int originalSize = addressBook.getContactList().size();
+        int updatedSize = addressBookAfterAdd.getContactList().size();
+
+        assertEquals(originalSize, updatedSize);
+
+    }
+
+    @Test
+    public void execute_getPercentageRatingGui_successAfterClear() {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        ReadOnlyAddressBook addressBook = model.getAddressBook();
+        Summary summary = new Summary(addressBook);
+        ObservableList<PieChart.Data> summaryRating = summary.getPercentageRatingsGui();
+        ObservableList<PieChart.Data> summaryCategory = summary.getPercentageCategoryGui();
+
+        String rating = ContactBuilder.DEFAULT_RATING;
+        String category = ContactBuilder.DEFAULT_CATEGORY_CODE;
+        model.addContact(new ContactBuilder().withName("Alice").build());
+
+        model.setAddressBook(new AddressBook());
+        ReadOnlyAddressBook addressBookAfterClear = model.getAddressBook();
+        Summary summaryAfterClear = new Summary(addressBookAfterClear);
+        ObservableList<PieChart.Data> summaryRatingAfterClear = summaryAfterClear.getPercentageRatingsGui();
+        ObservableList<PieChart.Data> summaryCategoryAfterClear = summaryAfterClear.getPercentageCategoryGui();
+
+        assertEquals(0, summaryRatingAfterClear.size());
+
+        int count = 0;
+        for (PieChart.Data i : summaryRatingAfterClear) {
+            double afterAdd = summaryRatingAfterClear.get(count).getPieValue();
+            double beforeAdd = summaryRating.get(count).getPieValue();
+            double afterAddAtt = afterAdd - 1;
+            if (summaryRatingAfterClear.get(count).getName().substring(0, 1).equalsIgnoreCase(rating)) {
+                assertEquals(afterAddAtt, beforeAdd);
+            } else {
+                assertEquals(afterAdd, beforeAdd);
+            }
+            count++;
+        }
+
+        count = 0;
+        for (PieChart.Data i : summaryCategoryAfterClear) {
+            double afterAdd = summaryCategoryAfterClear.get(count).getPieValue();
+            double beforeAdd = summaryCategory.get(count).getPieValue();
+            double afterAddAtt = afterAdd - 1;
+            if (summaryCategoryAfterClear.get(count).getName().equalsIgnoreCase(category)) {
+                assertEquals(afterAddAtt, beforeAdd);
+            } else {
+                assertEquals(afterAdd, beforeAdd);
+            }
+            count++;
+        }
+
+        int originalSize = addressBook.getContactList().size();
+        int updatedSize = addressBookAfterClear.getContactList().size();
+
+        assertEquals(originalSize, updatedSize);
+
+    }
+
+
 
     @Test
     public void equals() {

@@ -35,7 +35,7 @@ Given below are my contributions to the project.
     * Setting up the GitHub team org/repo.
     * Setting up tools e.g., GitHub, Gradle.
     * Managed the different pages of the project. (index.md, README etc.).
-      Reviewed and merged Pull Requests of other teammates.
+    * Reviewed and merged Pull Requests of other teammates.
 
 
 * **Enhancements to existing features**:
