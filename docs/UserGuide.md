@@ -194,24 +194,6 @@ Examples:
 * `add n/Charles Ng te/@charles e/e0123434@u.nus.edu p/NA`
 * `add n/Betsy Lim te/@unislave e/e0123456@u.nus.edu`
 
-#### Filtering Academy Directory by name or tag: `filter`
-
-Finds all students whose names or tags contain any of the specified keywords (case-insensitive) and
-displays them as a list with index numbers.
-
-Format: `filter KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g. `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only full words will be matched e.g. `stream` will not match `streams`
-* Students matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `filter John` returns `john` and `John Doe`
-* `filter alex david` returns `Alex Yeoh`, `David Li`<br>
-* `filter stream` returns all students who are tagged with `stream`
-
 #### Deleting a student: `delete`
 
 Deletes a student from Academy Directory by their index.
@@ -354,7 +336,11 @@ Format: `view INDEX`
 Examples:
 * `view 1`
 
-**Include an interactive GUI version where Avengers can click on the list to view student information as well.**
+![View Command (after)](images/ug/View%20Command%20(after).PNG)
+
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+Includes an interactive GUI version where Avengers can click on the list to view student information as well.
+</div>
 
 #### Displaying the grades for an assessment:  `show`
 Displays the grades and the average score of all the students for a particular assessment.
@@ -367,8 +353,6 @@ as the average score.
 Examples:
 * `show RA1`
 
-**Include an interactive GUI version where Avengers can click on the menu to show students' grades as well.**
-
 #### Visualizing assessments' grades of the entire class: `visualize`
 Plots the grades and the average score of all the students for all assessments.
 
@@ -377,7 +361,29 @@ Format: `visualize`
 * Visualize assessment grades of the class with Box & Whisker plot
 * Any grade of any student that is not yet entered will be counted as `0`
 
-**Include an interactive GUI version where Avengers can click on the list to view statistics as well.**
+![visualizecommand](images/ug/visualizeCommand.PNG)
+
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+Includes an interactive GUI version where Avengers can click on the list to view statistics as well.
+</div>
+
+#### Filtering Academy Directory by name or tag: `filter`
+
+Finds all students whose names or tags contain any of the specified keywords (case-insensitive) and
+displays them as a list with index numbers.
+
+Format: `filter KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g. `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only full words will be matched e.g. `stream` will not match `streams`
+* Students matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+Examples:
+* `filter John` returns `john` and `John Doe`
+* `filter alex david` returns `Alex Yeoh`, `David Li`<br>
+* `filter stream` returns all students who are tagged with `stream`
 
 #### Sorting student list : `sort`
 
@@ -418,7 +424,7 @@ Clears all students from Academy Directory. This will result in an empty Academy
 Format: `clear`
 
 #### Undo changes to Academy Directory: `undo`
-Undo changes made to Academy Directory data
+Undo changes made to Academy Directory data.
 
 Format: `undo`
 
@@ -426,10 +432,21 @@ Format: `undo`
 * `undo` will display an error message if there are no changes to be undone
 * To see the list of commands that can be undone using `undo`, read [here](#appendix-a-version-controlled-commands)
 
-**Include an interactive GUI version where Avengers can click on the menu to undo the most recent changes as well.**
+Example:
+1. `clear` command executed to clear the Academy Directory
+
+![undoCommandBefore](images/ug/undoCommandBefore.PNG)
+
+3. `undo` command executed to obtain the original Academy Directory
+
+![undoCommandAfter](images/ug/undoCommandAfter.PNG)
+
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+Includes an interactive GUI version where Avengers can click on the menu to undo the most recent changes as well.
+</div>
 
 #### Redo changes to Academy Directory: `redo`
-Redo changes made to Academy Directory data
+Redo the changes made to Academy Directory data that were undone using the `undo` command.
 
 Format: `redo`
 
@@ -437,7 +454,18 @@ Format: `redo`
 * `redo` will display an error message if there are no changes to be redone
 * To see the list of commands that can be redone using `redo`, read [here](#appendix-a-version-controlled-commands)
 
-**Include an interactive GUI version where Avengers can click on the menu to redo the most recent changes as well.**
+Example:
+1. `undo` command executed after a `clear` command to obtain the original Academy Directory
+
+![undoCommandAfter](images/ug/undoCommandAfter.PNG)
+
+2. `redo` command executed to redo the changes and clear the Academy Directory.
+
+![redoCommand](images/ug/redoCommand.PNG)
+
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+Includes an interactive GUI version where Avengers can click on the menu to redo the most recent changes as well.
+</div>
 
 #### Seeking help : `help`
 
@@ -466,7 +494,7 @@ Examples:
 * `help add`: Displays the exact same content as what is shown on this User Guide for the `add` command
   or [here](https://github.com/nus-cs2103-AY2122S1/tp/blob/master/docs/UserGuide.md#adding-a-student-add).
   
-**Include an interactive GUI version where Avengers can click on the menu to view help. Only available for general help**
+**Includes an interactive GUI version where Avengers can click on the menu to view help. Only available for general help**
 
 #### Exiting the program : `exit`
 
@@ -488,15 +516,17 @@ Format: `history`
 - Commits are sorted based on time, with the most recent commit shown at the top and the initial commit shown
   at the bottom
 - The commit corresponding to current Academy Directory state is labelled with "(HEAD)"
-- The commit corresponding to current branch is labelled with "(CURRENT)"
+- The commit corresponding to current branch is labelled with "(MAIN)"
 - The commit corresponding to old branch is labelled with "(OLD)"
 - Old branch is shown at the left, current branch at the right
 - The corresponding commit hash is the five character string displayed
 - Note that current implementation of `history` command can only show 2 branches: "OLD" and 
-"CURRENT". If there are already two branches and a third branch is going to be made, then the 
+"MAIN". If there are already two branches and a third branch is going to be made, then the 
 oldest branch will not be visible.
 
-**Include an interactive GUI version where Avengers can click on the menu to see usage history as well.**
+![historyCommand1](images/ug/historyCommand1.PNG)
+
+**Includes an interactive GUI version where Avengers can click on the menu to see usage history as well.**
 
 #### [For Advanced Users] Reverting Commit: `revert`
 Reverts state of Academy Directory to a previous commit
@@ -506,8 +536,10 @@ Format: `revert HASH`
 - `HASH` refers to the commit hash of the commit to be reverted to
 - `HASH` can be obtained using the `history` command
 
+![historyCommand](images/ug/historyCommand.PNG)
+
 Example:
-* `revert 6fdfx` reverts state of Academy Directory to the commit with hash starting with `6fdfx`
+* `revert ee5e5` reverts state of Academy Directory to the commit with hash starting with `ee5e5`
 
 --------------------------------------------------------------------------------------------------------------------
 
