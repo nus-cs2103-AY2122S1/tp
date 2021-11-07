@@ -911,7 +911,7 @@ Extensions
   * Use case ends.
 
 
-**Use Case 6: Show a person's details using Index**
+**Use Case 12: Show a person's details using Index**
 
 MSS
 
@@ -929,17 +929,17 @@ Extensions
 
 * 3a. The given index is invalid.
   * 3a1. CohortConnect shows an error message.
-  * Use case resumes at step 2.
+  * Use case resumes at step 3.
     
 
-**Use Case 7: Show a person's details using Name**
+**Use Case 13: Show a person's details using Name**
 
 MSS
 
 1.  User requests to list persons.
 2.  CohortConnect shows a list of persons.
-3.  User requests to show details of a specific person in the list.
-4.  CohortConnect shows a pop-up with the person's details.
+3.  User requests to show details of a specific person in the list using the name.
+4.  CohortConnect shows the person's details in the detail pane.
     
     Use case ends.
 
@@ -950,14 +950,66 @@ Extensions
 
 * 3a. The given name is not present.
   * 3a1. CohortConnect shows an error message.
-  * Use case resumes at step 2.
+  * Use case resumes at step 3.
 
 * 3b. Multiple matching names.
   * 3b1. CohortConnect shows an error message.
-  * 3b2. Displays list of users with the same name.
-  * Use case resumes at step 2.
+  * 3b2. Displays list of users with names containing the keyword.
+  * Use case resumes at step 3.
 
-**Use Case 8: Import contacts from JSON file**
+**Use Case 14: Show a person's details using Github Username**
+
+MSS
+
+1.  User requests to list persons.
+2.  CohortConnect shows a list of persons.
+3.  User requests to show details of a specific person in the list using Github usernam.
+4.  CohortConnect shows the person's details in the detail pane.
+    
+    Use case ends.
+
+Extensions
+
+* 2a. The list is empty.
+  * Use case ends.
+
+* 3a. The given github username is not present.
+  * 3a1. CohortConnect shows an error message.
+  * Use case resumes at step 3.
+
+* 3b. Multiple matching github usernames.
+  * 3b1. CohortConnect shows an error message.
+  * 3b2. Displays list of users with github usernames containing the keyword.
+  * Use case resumes at step 3.
+
+
+**Use Case 15: Show a person's details using Telegram Id**
+
+MSS
+
+1.  User requests to list persons.
+2.  CohortConnect shows a list of persons.
+3.  User requests to show details of a specific person in the list using Telegram Id.
+4.  CohortConnect shows the person's details in the detail pane.
+    
+    Use case ends.
+
+Extensions
+
+* 2a. The list is empty.
+  * Use case ends.
+
+* 3a. The given telegram id is not present.
+  * 3a1. CohortConnect shows an error message.
+  * Use case resumes at step 3.
+
+* 3b. Multiple matching telegram ids.
+  * 3b1. CohortConnect shows an error message.
+  * 3b2. Displays list of users with telegram ids containing the keyword.
+  * Use case resumes at step 3.
+
+
+**Use Case 18: Import contacts from JSON file**
 
 MSS
 
@@ -979,7 +1031,7 @@ Extensions
 * 2a. User decides to cancel the import.
   * Use case ends.
 
-**Use Case 9: Export contacts to JSON file**
+**Use Case 19: Export contacts to JSON file**
 
 MSS
 
@@ -995,6 +1047,23 @@ Extensions
   * 1a2. CohortConnect prompts for new filename.
   * 1a3. User enters new filename.
   * Steps 1a1-1a3 are repeated until the filename received is valid.
+
+
+**Use Case 22: Using the Find A Buddy Feature**
+
+MSS
+
+1. User switches to the Find A Buddy Tab
+2. CohortConnect gives the top 5 matches to your data
+   
+   Use case ends.
+
+Extensions
+
+* 1a. GitHub data is still being gathered.
+  * 1a1. CohortConnect shows a loading screen while gathering data in the background.
+  * 1a2. Once loaded, Use case resumes at Step 2
+
 
 ### Non-Functional Requirements
 
