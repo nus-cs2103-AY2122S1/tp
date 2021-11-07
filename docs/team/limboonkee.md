@@ -3,8 +3,124 @@ layout: page
 title: Lim Boon Kee's Project Portfolio Page
 ---
 
-### Project: AddressBook Level 3
+### Project: Socius
 
+### Table of Contents
+1. [Introduction](#1-introduction)
+  1. [About the team](#11-about-the-team)
+  2. [About the project](#12-about-the-project)
+2. [Summary of contributions](#2-summary-of-contributions)
+  1. [New features and enhancements added](#21-new-features-and-enhancements-added)
+    1. [Add remark to a person](#211-add-remark-to-a-person-feature)
+    2. [Delete multiple persons](#212-delete-multiple-persons-feature)
+    3. [Sort persons](#213-sort-persons-feature)
+    4. [Add nationality of a person](#214-add-nationality-of-a-person-enhancement)
+    5. [Command history](#215-command-history-enhancement)
+  2. [Code contributed](#22-code-contributed)
+  3. [Other contributions](#23-other-contributions)
+    1. [Project management](#231-project-management)
+    2. [Enhancements to existing features](#232-enhancements-to-existing-features)
+    3. [Documentation](#233-documentation)
+      1. [About Us](#2331-about-us)
+      2. [User Guide](#2332-user-guide)
+      3. [Developer Guide](#2333-developer-guide)
+    4. [Community](#234-community)
+
+### 1. Introduction
+
+This is my project portfolio for Socius. The document outlines my contributions to the project, including the features and enhancements that I have implemented.
+
+#### 1.1 About the team
+
+Our team consists of Hsiao Ting, Choon Yong, Kevin, Boon Kee and Nathan. We are a group of Computer Science students from the National University of Singapore, and members of AY2022S1-CS2103T-W08-4 in the CS2103T Software Engineering module.
+
+#### 1.2 About the project
+
+The team project (tP) uses a generic application called [AddressBook-Level3 (AB3)](https://se-education.org) as the starting point.
+
+Accordingly, the tP is structured to resemble an intermediate stage of a non-trivial real-life brownfield software project in which we will,
+* conceptualize and implement enhancements to a given product, and,
+* have it ready to be continued by future developers
+
+Our team has decided to evolve AB3 into a more powerful or more optimized contact management app, Socius.
+
+Socius is a desktop application that can help you, as a CS2103T Software Engineering student, to
+* manage your classmates’ contacts
+* make friends and
+* find teammates!
+
+A screenshot of Socius is shown below:
+![Ui](../images/Quickstart.png)
+
+Socius is optimized for use via a *Command Line Interface (CLI)* while still having the benefits of a *Graphical User Interface (GUI)*.
+If you can type fast, Socius can get your contact management tasks done faster than traditional *GUI* apps.
+
+### 2. Summary of contributions
+
+I served as developer for the project, and my responsibilities include:
+1. Developing features for the program
+2. 
+3. 
+
+My team responsibilities include:
+1. Creating minutes for team meeting
+
+In the following sections, I will illustrate the above-mentioned enhancements in greater detail, along with the corresponding documentation that I have written for them within the user and developer guides.
+
+#### 2.1 New features and enhancements added
+
+The following describes the enhancements and new features that I added to the project.
+
+#### 2.1.1 Add gender field to a person (Feature)
+* What it does: allows the user to view the gender of a person
+* Justification: The product is catered towards CS2103T students for finding group members and having a good mix of gender is encouraged in the course. Having a good mix of gender could also enhance group dynamics. Therefore, gender is an important piece of information for students.
+* Highlights: This enhancement affects existing commands and commands to be added in the future. The implementation was challenging as it required changes to the core Person model which lead to many changes to other classes that relied on the Person model, such as commands and GUI. Test cases and test data also have to be updated accordingly.
+
+#### 2.1.2 Add social handles field to a person (Feature)
+* What it does: allows the user to view the social handles (e.g. Telegram handle) of a person
+* Justification: This allows user to contact and know more about a person via different social platforms. For example, if a user wants to know about a person's coding style, he/she may go to the person's GitHub portfolio. If a user wants to know about a person's lifestyle, he/she could visit the person's Facebook or Instagram page.
+* Highlights: This enhancement was done in two iterations, where the first iteration only supports a single social handle and second iteration added support for more social handles. Editing social handle is cumulative, so that users will not have to retype all the social handles everytime they are edited.
+
+#### 2.1.3 Add icons for both gender and social handles (Feature)
+* What it does: displays the gender and social handle platform as icons instead of text
+* Justification: This feature improves the user experience of the product as user can see the gender and social handle platform more easily.
+* Highlights: This enhancement required knowledge how the GUI works. 
+
+#### 2.2 Code contributed
+
+Click on the following links to view the code that I have contributed:
+
+* [RepoSense](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&since=2021-09-17&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=bklimey&tabRepo=AY2122S1-CS2103T-W08-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
+
+#### 2.3. Other contributions
+
+The following describes the various other contributions that I have made to the project.
+
+#### 2.3.1 Project management
+* Help to compile and publish releases `v1.3` - `v1.4` (5 releases) on GitHub.
+* Help to create demo screenshots/videos of features for `Socius v1.3` and `Socius v1.4`
+
+#### 2.3.2 Enhancements to existing features
+
+#### 2.3.3 Documentation
+
+##### 2.3.3.1 About Us
+* Draft up the documentations for AboutUs, including roles and responsibilities of each member.
+
+##### 2.3.3.2 User Guide (UG)
+* Drafted introduction message
+* Added symbol table for showing meaning of each symbol
+* Added Parameter Constraints section
+* Formatted Command Summary
+
+##### 2.3.3.3 Developer Guide (DG)
+* Added implementation details and UML diagrams for the `Support for more social handle` section.
+* Formatted User Stories
+
+#### 2.3.4 Community
+
+
+<!---
 AddressBook - Level 3 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
 
 Given below are my contributions to the project.
@@ -38,9 +154,4 @@ Given below are my contributions to the project.
   * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
   * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
   * Some parts of the history feature I added was adopted by several other class mates ([1](), [2]())
-
-* **Tools**:
-  * Integrated a third party library (Natty) to the project ([\#42]())
-  * Integrated a new Github plugin (CircleCI) to the team repo
-
-* _{you can add/remove categories in the list above}_
+--->
