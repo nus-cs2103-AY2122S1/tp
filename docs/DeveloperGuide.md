@@ -906,6 +906,7 @@ MSS
 3. User enters their GitHub Username.
 4. User clicks on the submit button.
 5. CohortConnect shows the Main Window, signifying that the User Profile was set up.
+
    Use case ends.
 
 Extensions
@@ -933,7 +934,8 @@ Extensions
 
 * *a. At any time, the User chooses to close the app.
    * *a1. CohortConnect closes.
-     Use case ends.
+
+   Use case ends.
    
 **Use Case 2: Add user**
 
@@ -1247,12 +1249,14 @@ MSS
 
 1. User uses the keyboard shortcut, or types in the command, or clicks on help in the Menu Bar.
 2. CohortConnect shows the Help Window.
-     Use case ends.
+
+   Use case ends.
 
 Extensions
 
-* 1a. At any time, the User chooses to close the app.
-   * 1a1. CohortConnect closes.
+* *a. At any time, the User chooses to close the app.
+   * *a1. CohortConnect closes.
+
      Use case ends.
 
 ### Non-Functional Requirements
