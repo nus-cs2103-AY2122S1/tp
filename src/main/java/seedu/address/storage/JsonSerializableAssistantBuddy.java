@@ -19,7 +19,7 @@ import seedu.address.model.module.Module;
 @JsonRootName(value = "assistantbuddy")
 class JsonSerializableAssistantBuddy {
 
-    private static final String MESSAGE_DUPLICATE_MODULE = "Module list contains duplicate module(s)";
+    public static final String MESSAGE_DUPLICATE_MODULE = "Module list contains duplicate module(s)";
 
     private final List<JsonAdaptedModule> modules = new ArrayList<>();
 

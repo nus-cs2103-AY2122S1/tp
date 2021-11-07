@@ -1,0 +1,25 @@
+{
+  "modules" : [ {
+    "moduleName" : "1000",
+    "studentList" : [ {
+      "name" : "&",
+      "teleHandle" : "johndoe",
+      "email" : "johndexample.com",
+      "studentId" : "1234567A",
+      "studentTaskList" : [ {
+        "moduleName" : "1000",
+        "taskId" : "1",
+        "taskName" : "a&",
+        "taskDeadline" : "1&",
+        "isComplete" : false
+      } ]
+    } ],
+    "taskList" : [ {
+      "moduleName" : "2103",
+      "taskId" : "1",
+      "taskName" : "a&",
+      "taskDeadline" : "1&",
+      "isComplete" : false
+    } ]
+  } ]
+}
