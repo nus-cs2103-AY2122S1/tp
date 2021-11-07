@@ -382,22 +382,28 @@ There are 3 possible outcomes from the execution of a ScheduleCommand.
     
 ### Insurance feature
 
-#### Implementation
+#### Current implementation
 {:.no_toc}
 
-`Insurance` is currently composed of two objects:
+The insurance policies a client has is represented by the `insurances` field under `Person`,
+which is repreented by a `HashSet<Insurance>` object. 
 
-* `InsuranceType`, which is a `Enum` of types `Life`, `Health`, and `General`.
-* `brand`, a `String` representing the brand of insurance.
-
-A `Person` can have any number of different `Insurances`, stored as a `HashSet`.
-
-`Insurance` can be added to a `Person` through the `add` command, and edited through the `edit` command.
-
-A class diagram of `Insurance` is as shown:
+The `Insurance` object contains a `InsuranceType` object, an `Enum` with values `LIFE_INSURACE`, 
+`HEALTH_INSURANCE`, and `GENERAL_INSURANCE`, and a `brand` representing the insurance policy's brand, 
+represented as a `String`.
 
 ![InsuranceClassDiagram](images/InsuranceClassDiagram.png)
 
+#### Design considerations
+
+*Aspect*: User interface of adding insurance policies
+
+* **Alternative 1**: One `Insurance` command adds and edits insurances
+  * Pros: Easier for user to remember all insurance-related commands with one command
+  * Cons: Overkill for a lightweight object
+* **Alternative 2 (chosen)**: Integrate `Insurance` with existing `add` and `edit` commands 
+  * Pros: Easy for user to remember as a lightweight property, similar to existing `Tag` 
+  * Cons: Harder to scale in the future if more properties are added to `Insurance`
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
