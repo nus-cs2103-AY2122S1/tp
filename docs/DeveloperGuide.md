@@ -12,14 +12,15 @@ title: Developer Guide
 5. [UI](#UI component)
 6. [Logic component](#Logic component)
 7. [Storage component](#Storage component)
-8. [Documentation, logging, testing, configuration, dev-ops](#Documentation)
-9. [Appendix: Requirements](#Appendix Requirements)
-9. [Common classes](#Common classes)
-10. [User Stories](#User Stories)
-11. [Use cases](#Use Cases)
-12. [Non-Functional Requirements](#Non-Functional Requirements)
-13. [Glossary](#Glossary) 
-14. [Appendix: Instructions for manual testing](#Appendix)
+8. [Implementations](#Implementations)
+9. [Documentation, logging, testing, configuration, dev-ops](#Documentation)
+10. [Appendix: Requirements](#Appendix Requirements)
+11. [Common classes](#Common classes)
+12. [User Stories](#User Stories)
+13. [Use cases](#Use Cases)
+14. [Non-Functional Requirements](#Non-Functional Requirements)
+15. [Glossary](#Glossary) 
+16. [Appendix: Instructions for manual testing](#Appendix)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -205,7 +206,7 @@ Classes used by multiple components are in the `seedu.programmer.commons` packag
 
 --------------------------------------------------------------------------------------------------------------------
 
-## <a name="Implementation"></a> **Implementation**
+## <a name="Implementations"></a> **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
 
