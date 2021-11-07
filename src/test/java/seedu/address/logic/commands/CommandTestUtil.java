@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_INDEX_DEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -72,6 +73,7 @@ public class CommandTestUtil {
     public static final String EVENT_NAME_DESC_BADMINTON = " " + PREFIX_NAME + VALID_EVENT_NAME_BADMINTON;
     public static final String EVENT_DATE_DESC_CHESS = " " + PREFIX_DATE + VALID_EVENT_DATE_CHESS;
     public static final String EVENT_DATE_DESC_BADMINTON = " " + PREFIX_DATE + VALID_EVENT_DATE_BADMINTON;
+    public static final String EVENT_INDEX_DESC_ONE = " " + PREFIX_EVENT_INDEX + VALID_EVENT_INDEX;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -86,6 +88,8 @@ public class CommandTestUtil {
             " " + PREFIX_TASK_INDEX + "abs"; // 'abs' not allowed in id
     public static final String INVALID_MEMBER_INDEX_DESC =
             " " + PREFIX_MEMBER_INDEX + "abs"; // 'abs' not allowed in id
+    public static final String INVALID_EVENT_INDEX_DESC =
+            " " + PREFIX_EVENT_INDEX + "abs"; // 'abs' not allowed in id
     public static final String INVALID_MEMBER_INDEX_DEL_DESC =
             " " + PREFIX_MEMBER_INDEX_DEL + "abs"; // 'abs' not allowed in id
     public static final String INVALID_EVENT_NAME_DESC = " " + PREFIX_NAME + "B@DMINTON";

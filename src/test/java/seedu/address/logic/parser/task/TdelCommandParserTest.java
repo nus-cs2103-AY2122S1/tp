@@ -35,7 +35,7 @@ class TdelCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        //invalid task name (blank)
+        //invalid task id
         assertParseFailure(parser, INVALID_TASK_INDEX_DESC, MESSAGE_INVALID_INDEX);
     }
 }
