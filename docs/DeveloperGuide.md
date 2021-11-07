@@ -848,7 +848,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **GUI**: Graphical user interface
-* **ClI**: Command line interface
+* **CLI**: Command line interface
 * **Common screen resolutions**: minimum _1024x786_, maximum _3840x2160_
 * **MSS**: Main Success Scenario
 * **Academic Calendar**: A generalization of academic year and semester
