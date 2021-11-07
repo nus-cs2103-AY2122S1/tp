@@ -1112,7 +1112,7 @@ testers are expected to do more *exploratory* testing.
     1. Test Case: edit the first contact email to `hellogmail` and launch CONNECTIONS<br>
         Expected: CONNECTIONS launches successfully with 0 entries. 
        
-    1. Other incorrect formating of data or invalid fields: birthday to `00000000`, phone to `mynumber`, `...`
-        Expected: Similiar to previous.
+    1. Other incorrect formatting of data or invalid fields: birthday to `00000000`, phone to `mynumber`, `...`
+        Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
