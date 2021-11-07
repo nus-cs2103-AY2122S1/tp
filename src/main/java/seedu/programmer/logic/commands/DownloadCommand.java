@@ -14,7 +14,7 @@ public class DownloadCommand extends Command {
     public static final String SHOWING_DOWNLOAD_MESSAGE = "Download command executed.";
 
     /**
-     * Return a DownloadCommandResult with a message to indicate that the command was executed.
+     * Returns a DownloadCommandResult with a message to indicate that the command was executed.
      *
      * @param model {@code Model} which the command should operate on
      * @return DownloadCommandResult with a message

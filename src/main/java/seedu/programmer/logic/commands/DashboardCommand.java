@@ -15,7 +15,7 @@ public class DashboardCommand extends Command {
     public static final String SHOWING_DASHBOARD_MESSAGE = "Opened dashboard window.";
 
     /**
-     * Return a DashboardCommandResult with a message to indicate that the command was executed.
+     * Returns a DashboardCommandResult with a message to indicate that the command was executed.
      *
      * @param model {@code Model} which the command should operate on
      * @return a DashboardCommandResult with a message
