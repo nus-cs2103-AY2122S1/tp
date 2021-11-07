@@ -24,9 +24,10 @@ public class SortCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Sorts all contacts by a specified property in ascending order.\n"
-            + "Parameters: \n"
+    public static final String MESSAGE_USAGE = "\n" + COMMAND_WORD
+            + ": Sorts all contacts by a specified property in ascending order.\n\n"
+            + "Parameter: [FIELD_PREFIX/]\n"
+            + "FIELD_PREFIX/ can be any of the following:\n"
             + "[" + PREFIX_NAME + "] "
             + "[" + PREFIX_GENDER + "] "
             + "[" + PREFIX_PHONE + "] "
@@ -34,7 +35,7 @@ public class SortCommand extends Command {
             + "[" + PREFIX_NATIONALITY + "] "
             + "[" + PREFIX_TUTORIAL_GROUP + "] "
             + "[" + PREFIX_REMARK + "] "
-            + "\n"
+            + "\n\n"
             + "Example: " + COMMAND_WORD + " n/";
 
     public static final String MESSAGE_SUCCESS = "Sorted all persons by %s in ascending order";

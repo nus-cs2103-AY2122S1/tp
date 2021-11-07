@@ -1,36 +1,7 @@
 ---
 layout: page
-title: Chen Hsiao Ting's Project Portfolio Page
+title: Hsiao Ting's Project Portfolio Page
 ---
-### Project: Socius
-
-Socius is a contact management desktop application used for CS2103T module takers. Socius is a platform to help students
-find potential project group mates for CS2103T. The user interacts with it using a CLI, and it has a GUI created with
-JavaFX. Socius is written in Java, and has about 12 kLoC.
-
-## Chen Hsiao Ting - Project Portfolio for Socius (tP)
-
-### Table of Contents
-1. [Introduction](#1-introduction)
-   1. [About the team](#11-about-the-team)
-   2. [About the project](#12-about-the-project)
-2. [Summary of contributions](#2-summary-of-contributions)
-   1. [New features and enhancements added](#21-new-features-and-enhancements-added)
-      1. [Add remark to a person](#211-add-remark-to-a-person-feature)
-      2. [Delete multiple persons](#212-delete-multiple-persons-feature)
-      3. [Sort persons](#213-sort-persons-feature)
-      4. [Add nationality of a person](#214-add-nationality-of-a-person-enhancement)
-      5. [Command history](#215-command-history-enhancement)
-   2. [Code contributed](#22-code-contributed)
-   3. [Other contributions](#23-other-contributions)
-       1. [Project management](#231-project-management)
-       2. [Enhancements to existing features](#232-enhancements-to-existing-features)
-       3. [Documentation](#233-documentation)
-          1. [About Us](#2331-about-us)
-          2. [User Guide](#2332-user-guide)
-          3. [Developer Guide](#2333-developer-guide)
-       4. [Community](#234-community)
-
 ### 1. Introduction
 
 This is my project portfolio for Socius. The document outlines my contributions to the project, including the features and enhancements that I have implemented.
@@ -53,9 +24,6 @@ Socius is a desktop application that can help you, as a CS2103T Software Enginee
 * manage your classmates’ contacts
 * make friends and
 * find teammates!
-
-A screenshot of Socius is shown below:
-![Ui](../images/Quickstart.png)
 
 Socius is optimized for use via a *Command Line Interface (CLI)* while still having the benefits of a *Graphical User Interface (GUI)*.
 If you can type fast, Socius can get your contact management tasks done faster than traditional *GUI* apps.

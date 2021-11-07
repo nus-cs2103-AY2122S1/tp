@@ -18,11 +18,11 @@ public class AliasCommand extends Command {
 
     public static final String COMMAND_WORD = "alias";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Creates a shortcut name for a command.\n"
+    public static final String MESSAGE_USAGE = "\n" + COMMAND_WORD
+            + ": Creates a shortcut name for a command.\n\n"
             + "Parameters: "
             + PREFIX_ALIAS + "ALIAS "
-            + PREFIX_COMMAND + "COMMAND\n"
+            + PREFIX_COMMAND + "COMMAND\n\n"
             + "Example: "
             + COMMAND_WORD
             + " a/findPartner c/find g/m nat/South Korean";

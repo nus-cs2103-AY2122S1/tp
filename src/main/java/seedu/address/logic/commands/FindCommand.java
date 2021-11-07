@@ -26,21 +26,22 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose details contain every "
-            + "specified keywords and displays them as a list with index numbers.\n"
+    public static final String MESSAGE_USAGE = "\n" + COMMAND_WORD
+            + ": Finds all persons whose details contain every "
+            + "specified keywords and displays them as a list with index numbers.\n\n"
             + "Parameters: FIELD_PREFIX/KEYWORD [FIELD_PREFIX/KEYWORD]...\n"
-            + "FIELD_PREFIX/KEYWORD can be any of the following:\n"
-            + PREFIX_NAME + "NAME\n"
-            + PREFIX_GENDER + "GENDER\n"
-            + PREFIX_PHONE + "PHONE\n"
-            + PREFIX_EMAIL + "EMAIL\n"
-            + PREFIX_NATIONALITY + "NATIONALITY\n"
-            + PREFIX_TUTORIAL_GROUP + "TUTORIAL_GROUP\n"
-            + PREFIX_REMARK + "REMARK\n"
-            + PREFIX_SOCIAL_HANDLE + "SOCIAL_HANDLE_USERID\n"
-            + PREFIX_TAG + "TAG\n\n"
+            + "[FIELD_PREFIX/KEYWORD] can be any of the following:\n"
+            + "[" + PREFIX_NAME + "NAME], "
+            + "[" + PREFIX_GENDER + "GENDER], "
+            + "[" + PREFIX_PHONE + "PHONE], "
+            + "[" + PREFIX_EMAIL + "EMAIL], "
+            + "[" + PREFIX_NATIONALITY + "NATIONALITY], "
+            + "[" + PREFIX_TUTORIAL_GROUP + "TUTORIAL_GROUP], "
+            + "[" + PREFIX_REMARK + "REMARK], "
+            + "[" + PREFIX_SOCIAL_HANDLE + "SOCIAL_HANDLE_USERID], "
+            + "[" + PREFIX_TAG + "TAG]\n\n"
             + "Note: \n"
-            + " - Keywords are case-insensitive."
+            + " - Keywords are case-insensitive. \n\n"
             + "Example: " + COMMAND_WORD + " n/alice g/f p/91234567 tg/19";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_VALUE = String.format(
             MESSAGE_INVALID_COMMAND_FORMAT, "A empty %s was entered. \n%1$s");

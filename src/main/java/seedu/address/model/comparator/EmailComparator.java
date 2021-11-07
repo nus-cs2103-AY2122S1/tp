@@ -8,16 +8,16 @@ public class EmailComparator implements Comparator<Person> {
 
     @Override
     public int compare(Person p1, Person p2) {
-        if (p1.getEmail() == null) {
-            if (p2.getEmail() == null) {
+        if (p1.getEmail().toString().isEmpty()) {
+            if (p2.getEmail().toString().isEmpty()) {
                 return 0;
             }
             return 1;
         }
-        if (p2.getEmail() == null) {
+        if (p2.getEmail().toString().isEmpty()) {
             return -1;
         }
-        return p1.getEmail().toString().compareTo(p2.getEmail().toString());
+        return p1.getEmail().toString().toLowerCase().compareTo(p2.getEmail().toString().toLowerCase());
     }
 
     @Override

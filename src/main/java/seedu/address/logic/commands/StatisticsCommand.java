@@ -18,9 +18,9 @@ public class StatisticsCommand extends Command {
 
     public static final String COMMAND_WORD = "stat";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Displays statistics of the current data.\n"
-            + "Parameters: TUTORIAL_GROUP\n"
+    public static final String MESSAGE_USAGE = "\n" + COMMAND_WORD
+            + ": Displays statistics of the current data.\n\n"
+            + "Parameters: TUTORIAL_GROUP\n\n"
             + "Example: " + COMMAND_WORD + " T09";
 
     public static final String MESSAGE_STATISTICS = "Statistics: \n%s";

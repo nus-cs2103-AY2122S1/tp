@@ -20,9 +20,9 @@ public class ExportCommand extends Command {
 
     public static final String COMMAND_WORD = "export";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Exports the current contacts list into a file identified by the given filename.\n"
-            + "Parameters: FILE_NAME\n"
+    public static final String MESSAGE_USAGE = "\n" + COMMAND_WORD
+            + ": Exports the current contacts list into a file identified by the given filename.\n\n"
+            + "Parameters: FILE_NAME\n\n"
             + "Example: " + COMMAND_WORD + " friends.json";
 
     public static final String MESSAGE_SUCCESS = "File successfully exported as JSON format to %s";

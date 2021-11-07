@@ -141,34 +141,34 @@ public class Person {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("Name: ").append(getName());
+        builder.append("\nName: ").append(getName());
         if (!getGender().toString().isEmpty()) {
-            builder.append("; Gender: ").append(getGender());
+            builder.append("; \nGender: ").append(getGender());
         }
         if (!getPhone().toString().isEmpty()) {
-            builder.append("; Phone: ").append(getPhone());
+            builder.append("; \nPhone: ").append(getPhone());
         }
         if (!getEmail().toString().isEmpty()) {
-            builder.append("; Email: ").append(getEmail());
+            builder.append("; \nEmail: ").append(getEmail());
         }
         if (!getNationality().toString().isEmpty()) {
-            builder.append("; Nationality: ").append(getNationality());
+            builder.append("; \nNationality: ").append(getNationality());
         }
         if (!getTutorialGroup().toString().isEmpty()) {
-            builder.append("; Tutorial Group: ").append(getTutorialGroup());
+            builder.append("; \nTutorial Group: ").append(getTutorialGroup());
         }
         if (!getRemark().toString().isEmpty()) {
-            builder.append("; Remark: ").append(getRemark());
+            builder.append("; \nRemark: ").append(getRemark());
         }
 
         Set<SocialHandle> socialHandles = getSocialHandles();
         if (!socialHandles.isEmpty()) {
-            builder.append("; Social Handles: ");
+            builder.append("; \nSocial Handles: ");
             socialHandles.forEach(builder::append);
         }
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
-            builder.append("; Tags: ");
+            builder.append("; \nTags: ");
             tags.forEach(builder::append);
         }
 
