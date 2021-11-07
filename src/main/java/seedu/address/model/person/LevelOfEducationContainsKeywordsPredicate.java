@@ -10,6 +10,11 @@ public class LevelOfEducationContainsKeywordsPredicate implements Predicate<Pers
 
     private final List<String> keywords;
 
+    /**
+     * Constructor for LevelOfEducationContainsKeywordsPredicate.
+     *
+     * @param keywords List of words to match against the LevelOfEducation of every applicant.
+     */
     public LevelOfEducationContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }

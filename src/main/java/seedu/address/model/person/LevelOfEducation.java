@@ -34,6 +34,11 @@ public class LevelOfEducation {
             this.educationLevel = educationLevel;
         }
 
+        /**
+         * Gets all the types of educationlevel.
+         *
+         * @return An array containing all the types of educationlevel.
+         */
         public static ArrayList<String> getEducationLevels() {
             ArrayList<String> educationLevels = new ArrayList<>();
 
@@ -44,6 +49,11 @@ public class LevelOfEducation {
             return educationLevels;
         }
 
+        /**
+         * Gets the regex to compare LevelOfEducation inputs to.
+         *
+         * @return The string to compare LevelOfEducation inputs to.
+         */
         public static String getRegex() {
             StringBuilder regex = new StringBuilder("(?i)\\b(?:");
             for (Education education: Education.values()) {
@@ -109,6 +119,12 @@ public class LevelOfEducation {
         return levelOfEducation.hashCode();
     }
 
+    /**
+     * Method to convert the given input to match the same capitalisation as the Education enums.
+     *
+     * @param levelOfEducation Given input to initialise a LevelOfEducation.
+     * @return The same input string except it is capitalised as in the Education enums.
+     */
     private String getCorrectCapitalization(String levelOfEducation) {
         ArrayList<String> levelsOfEducation = LevelOfEducation.Education.getEducationLevels();
         for (String l: levelsOfEducation) {
