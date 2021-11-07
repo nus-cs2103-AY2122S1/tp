@@ -18,11 +18,13 @@ Class ReadOnlyUserPrefs
 
 Class UniquePersonList
 Class Person
-Class Address
+Class StudentId
 Class Email
 Class Name
 Class Phone
-Class Tag
+Class Telegram
+Class Github
+Class Mod
 
 }
 
@@ -43,12 +45,13 @@ UniquePersonList --> "~* all" Person
 Person *--> Name
 Person *--> Phone
 Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+Person *--> StudentId
+Person *--> "0..1" Telegram
+Person *--> "0..1" Github
+Person *--> "*" Mod
 
 Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+
 
 ModelManager -->"~* filtered" Person
 @enduml
