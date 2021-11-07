@@ -41,23 +41,25 @@ Given below are my contributions to the project.
     * Case Sensitivity to search (Find/FindAny).
       * Users can now opt for case-sensitive searches on Tags using the `c/` flag.
   * Wrote unit and integration tests for existing features.
-    * Increase coverage from 72.15% to 72.59% (+0.43%) (Pull request [\#49]())
-    * Increase coverage from 75.01% to 72.14% (+0.14%) (Pull request [\#69]())
-    * Increase coverage from 73.69% to 74.31% (+0.62%) (Pull request [\#86]())
-    * Increase coverage from 74.31% to 74.52% (+0.20%) (Pull request [\#101]())
-  <br></br>
+    * Increase coverage from 72.15% to 72.59% (+0.43%) (Pull request [\#49](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/49))
+    * Increase coverage from 75.01% to 72.14% (+0.14%) (Pull request [\#69](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/69))
+    * Increase coverage from 73.69% to 74.31% (+0.62%) (Pull request [\#86](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/86))
+    * Increase coverage from 74.31% to 74.52% (+0.20%) (Pull request [\#101](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/101))
+    * Increase coverage from 70.83% to 71.15% (+0.32%) (Pull request [\#201](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/201))
+      <br></br>
 
 * **Documentation**:
   * User Guide:
-    * Documented `Upcoming Birthdays`, `Find` as well as `findAny`. (Pull request [\#95]() [\#173]())
+    * Documented `Upcoming Birthdays`, `Find` as well as `findAny`. (Pull request [\#95](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/95), [\#173](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/173))
   * Developer Guide:
-    * Documented `Use Cases`, `Non-functional requirements` and `Glossary`. (Pull request [\#19]())
-    * Documented `find` and `findAny` (Pull request [\#101]())
+    * Documented `Use Cases`, `Non-functional requirements` and `Glossary`. (Pull request [\#19](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/19))
+    * Documented `find` and `findAny` (Pull request [\#101](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/101))
+  * Polishing (Pull request [\#205](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/205))
   <br></br>
 
 * **Community**:
   * Reported 37 bugs and suggestions for other teams in class
     * You can find the entire log [here](https://github.com/leezhixuan/ped)
   * Contributed to forum [discussion](https://github.com/nus-cs2103-AY2122S1/forum/issues/135):
-  * PRs reviewed with non-trivial comments: (Examples: [1](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/42),
+  * PRs reviewed with non-trivial comments: (Some examples: [1](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/42),
     [2](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/94), [3](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/119))
