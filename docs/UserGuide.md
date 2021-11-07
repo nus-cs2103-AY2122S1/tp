@@ -79,7 +79,7 @@ Format: `help`
 
 ### Attribute Summary:
 
-Attribute | Prefix | Format 
+Attribute | Prefix | Format
 ------|---|---------------------------------------------------------
 **Name** | `n/` | Names should only contain alphanumeric characters and spaces, and it should not be blank | `add n/NAME S/STUDENT_ID N/NUSNet_ID g/GITHUB_ID T/TUTORIAL_ID {r/student \| r/tutor} [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]...` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Phone** | `p/` | Phone numbers should only contain numbers, and it should be at least 3 digits long
