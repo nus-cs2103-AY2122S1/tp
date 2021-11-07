@@ -459,6 +459,9 @@ Valid students who are not added due to tuition class size limit or who have bee
 Step 4: Newly enrolled students are added to the tuition class. `AddToClassCommand#updateModel()` is called to change the capacity of the class. It also updates the class tag of the students enrolled to show the `ClassName` and
 `Timeslot` of the class.
 
+The following *Activity Diagram* summarizes what happens when a user executes an `addtoclass` command:
+![Ui](images/AddToClassActivityDiagram.png)
+
 #### Design considerations
 
 **Aspect: Whether to allow users to add students using names:**
