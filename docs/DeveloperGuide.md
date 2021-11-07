@@ -51,6 +51,7 @@ This product will make recruiters’ lives easier through categorisation and fil
   * [Glossary](#glossary)
 - [**Appendix: Instructions for manual testing**](#appendix-instructions-for-manual-testing--)
   * [Launch and shutdown](#launch-and-shutdown)
+  * [Adding a person](#adding-a-person)
   * [Deleting a person](#deleting-a-person)
   * [Saving data](#saving-data)
 
@@ -1037,17 +1038,39 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+### Adding a person 
+
+1. Adding an applicant while all applicants are being shown 
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. 
+    
+    1. Test case: `add n/John Doe p/98765432 e/JohnDoe@gmail.com r/Teacher et/Full time s/3000 l/Bachelors y/4`<br>
+       Expected: A new applicant named John Doe with all of the above details is added to the list. Details of the added contact shown in 
+       result display. 
+       
+    1. Test case: `add Bob p/98765432 e/bob@gmail.com r/Lawyer et/Full time s/7000 l/Bachelors y/4`
+       Expected: No new applicant is added. Error details shown in the result display stating that Bob shares the 
+       same phone number as John Doe. 
+    
+    1. Test case: `add Jack Smith p/97865321 e/JohnDoe@gmail.com r/Doctor et/Full time s/9000 l/Bachelors y/4`
+       Expected: No new applicant is added. Error details shown in the result display stating that Bob shares the 
+       same email as John Doe.
+       
+    1. Other incorrect add commands to try: `add`, `add John`, `add n/John p/98765432 e/JohnDoe@gmail.com r/Teacher`
+    (where incomplete details are given for the applicant being added).
+    Expected: Error messages displaying the cause of error is shown in the result display.  
+
 ### Deleting a person
 
-1. Deleting a person while all persons are being shown
+1. Deleting an applicant while all applicants are being shown
 
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
     1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+       Expected: First applicant is deleted from the list. Details of the deleted applicant shown in the result display. 
 
     1. Test case: `delete 0`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+       Expected: No applicant is deleted. Error details shown in the result display.
 
     1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
