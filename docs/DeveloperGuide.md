@@ -624,5 +624,5 @@ testers are expected to do more *exploratory* testing.
     4. Test case: `game --get rant`<br>
        Expected: No game is found. Error details shown in the status message. Status bar remains the same.
 
-    5. Other incorrect delete commands to try: `game --get`
+    5. Other incorrect get commands to try: `game --get`
        Expected: Similar to previous.
