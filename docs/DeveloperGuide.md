@@ -207,7 +207,7 @@ The last command executed by the user is stored internally as a `Command` in `Lo
 last command requires a user confirmation. If this is the case, the `Parser` parses the next user input
 as a confirmation message instead.
 
-{To be added later}
+<img src="images/ClearActivityDiagram.png" width="850" />
 
 #### Design considerations:
 
@@ -263,6 +263,39 @@ not reset after each search.
     * Pros: More efficient search as no additional parsing is not required.
     * Cons: Allows for invalid search terms, which are somewhat problematic for `genres` as it has
     a fixed list of terms.
+
+### Stats Feature
+
+#### Implementation
+The user statistics consists of the following fields:
+1. The number of anime(s) the user is currently watching.
+2. The number of anime(s) the user wants to watch.
+3. The number of anime(s) the user has finished watching.
+4. The number of unique anime genre(s) the user tagged animes with.
+5. The top genres watched represented by a `HashMap`, with `Genre`s as keys and `Integer`s as values.
+The value represents the number of times the corresponding genre is tagged in AniList.
+
+The proposed Stats feature is facilitated mainly by the following classes:
+1. The `Stats` class, which encapsulates the user statistics. A `Stats` field is present in `ModelManager`. `ModelManager`
+   updates it whenever the `Stats` command is executed, by creating a new immutable `Stats` object with `AnimeList#fetchUserStats`.
+2. The `StatsCommand` class, which represents a command to update the `Stats` field in `ModelManager`.
+3. The `StatsDisplay` class, which inherits from the abstract `UiPart` class. It is responsible for
+   displaying the statistical breakdown of anime(s) in the anime list.
+
+#### Design considerations:
+
+**Aspect: Determining how to store and update the user statistics:**
+
+* **Alternative 1 (current choice):** User statistics are stored in an immutable `Stats` object in `ModelManager`, recalculated every time the user executes the `stats` command.
+    * Pros: Straightforward to implement, debug and does not increase coupling among existing classes.
+    * Cons: Results in more computation compared to the alternative, since the stats are recalculated for each `stats` command
+      execution even if they may not have changed from the last execution.
+
+* **Alternative 2:** Implement the Observer pattern where the `Stats` field observes for changes in the anime list.
+    * Pros: May result in less computation compared to Alternative 1.
+    * Cons: Hard to implement and test. In addition, we do not expect users to use the `stats` command as much as
+      commands which alters the anime list. This may mean an excessive amount of computation for updating the user
+      statistics in the background when the `Stats` window is not up.
 
 ### Themes Feature
 
@@ -823,7 +856,6 @@ testers are expected to do more *exploratory* testing.
 
     2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
-       
 
 ### Deleting an anime
 
@@ -839,14 +871,14 @@ testers are expected to do more *exploratory* testing.
 
     4. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size), `delete n/attack on titan`<br>
        Expected: Similar to previous.
-        
+ 
 2. Deleting an anime while not all animes are being shown
 
    1. Use `list s/watching` to list out only the animes with a `watching` status
 
    2. Use `delete 1` to delete the first anime<br>
       Expected: First anime is deleted from the list. Details of the deleted anime shown in the status message. Timestamp in the status bar is updated.
-      
+
    3. Use `list` to list out all animes, make sure that the deleted anime is not shown here
     
 ### Genres
@@ -882,13 +914,13 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
     1. Close all Anilist windows
-       
+
     2. Open data/anilist.json
-       
+
     3. Remove the first opening brace `{`
-       
+
     4. Open Anilist again
-       
+
     5. Now that the data file is corrupted, the app should start out without any anime in the list
 
 ### Clearing all data
