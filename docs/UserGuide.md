@@ -132,7 +132,7 @@ As this is a mass operation, it might take a couple of seconds to complete.
 
 Clears all data in PE. This can be used to delete pre-existing sample data or existing user data.
 
-### <a name="download-data"></a>2.3 Download Data `download` or F3 on keyboard
+### <a name="download-data"></a>2.3 Download Data: `download` or F3 on keyboard
 
 All current students' data can be downloaded to a CSV file. The TA will need to select the directory to download the
 file to.
