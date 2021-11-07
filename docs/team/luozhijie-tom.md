@@ -48,5 +48,5 @@ Given below are my contributions to the project.
       * Added instructions for manual testing.
   
 * **Community**:
-  * Reported bugs and suggestions for other teams in the class (examples [1](https://catcher-org.github.io/CATcher/phaseBugReporting/issues/3), [2](https://github.com/LuoZhijie-tom/ped/issues/2), [3](https://github.com/LuoZhijie-tom/ped/issues/8))
+  * Reported bugs and suggestions for other teams in the class (examples [1](https://github.com/LuoZhijie-tom/ped/issues/2), [2](https://github.com/LuoZhijie-tom/ped/issues/8))
   * Contributed to forum discussions (Examples: [Issue 371](https://github.com/nus-cs2103-AY2122S1/forum/issues/371), [Issue 354](https://github.com/nus-cs2103-AY2122S1/forum/issues/354))
