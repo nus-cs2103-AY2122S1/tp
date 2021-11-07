@@ -8,8 +8,7 @@ title: Erwin Quek's Project Portfolio Page
 their students’ lab results in a simple and efficient manner, allowing them to spend less time on administrative
 processes and more time teaching students.
 
-The following is a summary of my contributions to the
-project. ([View Reposense](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17))
+The following is a summary of my contributions to the project. ([View Reposense](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17))
 
 
 ### Features
