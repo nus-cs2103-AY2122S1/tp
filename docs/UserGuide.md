@@ -334,7 +334,6 @@ Format: `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMPLOYMEN
 
 * You can key in parameters in either UPPER CASE or small case. 
 * If you key in multiple of the same prefix (e.g. `find n/alex n/bernice`) , the program will only find you applicants based on **the last** prefix (i.e. `n/bernice`).
-  ![FindInput](./images/features/Find.png)
 * You can key in each prefix with **multiple keywords** separated by whitespace, e.g. `n/John Mary`, `t/friend colleague`
 
 <div markdown="block" class="alert alert-warning">
@@ -347,8 +346,13 @@ Format: `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMPLOYMEN
 * You should not find applicants by prefix with empty parameters. (i.e. `find d/` will show you all applicants **unfiltered** by their ***done*** status)
 
 Examples:
+* `find n/alex n/bernice` finds you all applicants with only `bernice` as values for name prefix.
+  
+Before: ![FindBefore](images/features/FindBefore.png)
+After: ![FindAfter](images/features/FindAfter.png)
+
+
 * `find n/John Mary` finds you all applicants with either `John` or `Mary` as values for name prefix.
-* `find n/John n/Mary` finds you all applicants with only `Mary` as values for name prefix.
 * `find t/friend colleague` finds you all applicants with `friend` or `colleague` as values for tag prefix.
 * `find n/John Mary t/friend colleague`
 * `find n/Bob p/87654321 e/bob@gmail.com r/Software Engineering et/Full time s/4000 l/High School y/2 nt/has the credentials d/Not Done`
@@ -388,10 +392,13 @@ Format: `filter_interview past` or `filter_interview future`
 
 * `filter_interview past` shows you applicants with interviews that were in the past (compared to the current date and time).
 * `filter_interview future` shows you applicants with interviews that are coming up in the future (compared to the current date and time).
+
+Before: ![FilterInterviewBefore](images/features/FilterInterviewBefore.png)
+After: ![FilterInterviewAfter](images/features/FilterInterviewAfter.png)
+
 * You should give either `past` or `future` as a parameter after `filter_interview`, but not both.
 * You can type in either UPPER CASE or small case for `past` and `future`.
   
-![FindInput](./images/features/FilterInterviewPast.png)
 
 Examples:
 * Let's assume that the current time is [29th October 2021, 1600].
@@ -423,7 +430,11 @@ Format: `delete INDEX...`
 Examples:
 * After you execute the command `list`, `delete 1` deletes the 1st applicant listed in RecruitIn.
 * After you execute the command `find n/John`, `delete 1` deletes the 1st applicant in the results of the `find` command.
-* After you execute the command `list`, `delete 2 4 7` deletes the 2nd, 4th and 7th applicants listed in RecruitIn.
+* After you execute the command `list`, `delete 1 2` deletes the 1st and 2nd applicants listed in RecruitIn.
+  
+Before: ![DeleteBefore](images/features/DeleteBefore.png)
+After: ![DeleteAfter](images/features/DeleteAfter.png)
+
 
 <p align="center"><a href="#table-of-contents">Click here to see the table of contents</a></p>
 
@@ -439,13 +450,14 @@ Format: `show [n/] [p/] [e/] [r/] [et/] [s/] [l/] [y/] [t/]`
 
 * You should type **only 1** prefix that you want the program to show.
     * If you type multiple prefixes after `show`, the program will only show you the unique search terms found for the **first** prefix parameter.
-      ![FindInput](./images/features/Show.png)
 
 Examples:
+* `show i/` will display a list consisting of all interview timings.
+* `show n/ i/` will display a list consisting of all names.
+    
+Before: ![ShowBefore](images/features/ShowBefore.png)
+After: ![ShowAfter](images/features/ShowAfter.png)
 
-Suppose the applicants list includes 3 applicants with name and role `John, Software Developer`, `Mary, Cook` and `Mary, Cleaner`.
-* `show n/` will display a list consisting of `John` and `Mary`.
-* `show r/ n/` will display a list consisting of `Software Developer`, `Cleaner` and `Cook`.
 
 <p align="center"><a href="#table-of-contents">Click here to see the table of contents</a></p>
 
