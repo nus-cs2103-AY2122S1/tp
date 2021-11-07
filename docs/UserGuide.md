@@ -141,7 +141,7 @@ Each `Next Meeting` consists of a *date*, *start time*, *end time* and a *locati
 
 A NextMeeting needs to be inputted in the following format:
 
-`m/dd-MM-yyyy (hh:mm~hh:mm), {non-empty location string}`
+`m/DATE (START_TIME~END_TIME), LOCATION`
 
 where
 
@@ -230,18 +230,13 @@ used in the management of client information and client meetings.
 <div markdown="block" class="alert alert-info">
  <p><img src="images/info_icon.png" width="30"/><b>Notes about the command format:</b></p>
 
-* When `<attribute>` is given, it means that the any *attribute prefix* can be used, with the exception of *client id*
-  in some cases
 * In the format for the commands provided, words which are in `UPPERCASE` refers to the `input` that the user must key
   in
-* If the inputs are wrapped in curly brackets `{}`, they are inputs that are related to the preceeding attribute prefix
-
 * Inputs in square brackets are optional input:<br>
   e.g. `KEYWORD [OTHER_KEYWORD]` can be in the form of `firstName` or `firstName lastName`
-
 * Inputs with `...` at the end refers to commands that can accept multiple attribute inputs
   <br>
-  e.g. `<attribute>/{ATTRIBUTES}...` can be in the form of `e/ex@gmail.com` or `e/ex@gmail.com r/5`
+  e.g. `[<attribute>/VALUE]...` can be in the form of `e/ex@gmail.com` or `e/ex@gmail.com r/5`
 
 </div>
 
@@ -249,7 +244,7 @@ used in the management of client information and client meetings.
 
 Adds a new client to the address book.
 
-| Format | `add n/{CLIENT_NAME} e/{EMAIL} <attribute>/{OTHER ATTRIBUTES}...`|
+| Format | `add n/CLIENT_NAME e/EMAIL [<attribute>/VALUE]...`|
 | :---: | --- |
 | **
 Example** | • `add n/Benedict Chua e/benchua@hotmail.com` <br> • `add n/Keith e/keithtan@ymail.com p/12345678 d/10000 r/4`|
@@ -279,7 +274,7 @@ Update the attributes of existing users using the prefix of the client’s attri
 * Multiple clients can be edited at the same time with the provided attributes by indicating their ids separated by a
   space.
 
-| Format | `edit CLIENT_ID... <attribute>/{CHANGED VALUE OF ATTRIBUTE}...`|
+| Format | `edit CLIENT_ID... [<attribute>/CHANGED_VALUE]...`|
 | :---: | :--- |
 | **
 Example** | • `edit 3 p/12345678 r/5` command changes client 3's contact number to “12345678” and the risk appetite to 5. <br> • `edit 15 13 r/3` command changes the risk appetite of client 13 & 15 to “3”. <br> • `edit 3 4 5 m/21-09-2021 (09:00~10:00), McDonald's` sets a meeting for clients 3, 4 and 5 to be on 21st September 2021 from 9am to 10 am at McDonald's |
@@ -310,7 +305,7 @@ Shows the full list of all clients in the address book.
 Sorts clients in order based on the inputted attribute. Clients can be sorted in ascending or descending order, and is
 based on the given `SORT DIRECTION`.
 
-| Format | `sort <attribute>/{SORT DIRECTION}...` <br> <br> • `SORT DIRECTION` can take on the values `asc` or `dsc`, and will sort the clients based on the given attribute in an ascending and descending order respectively. |
+| Format | `sort [<attribute>/SORT_DIRECTION]...` <br> <br> • `SORT DIRECTION` can take on the values `asc` or `dsc`, and will sort the clients based on the given attribute in an ascending and descending order respectively. |
 | :---: | :--- |
 | **
 Examples** | • `sort r/ASC` will sort the list by ascending risk-appetite <br> • `sort i/dsc` will sort the list by descending client id |
@@ -330,21 +325,21 @@ Examples** | • `schedule 22-09-2021` allows the user to view the schedule that
 
 Finds clients whose contacts match with the given keywords.
 
-| Format | `search KEYWORD... <attribute>/{ATTRIBUTE_KEYWORD}...` <br> <br>• `KEYWORD` will be used to match with all attribute of the client. <br> • `{ATTRIBUTE_KEYWORD}` refers to the keyword that is to be matched with the corresponding client attribute.|
+| Format | `search KEYWORD... [<attribute>/ATTRIBUTE_KEYWORD]...` <br> <br>• `KEYWORD` will be used to match with all attribute of the client. <br> • `{ATTRIBUTE_KEYWORD` refers to the keyword that is to be matched with the corresponding client attribute.|
 | :---: | :--- |
 | **Examples** | • `search John` returns *john* and *John Doe* <br> • `search alex david` returns *Alex Yeoh*, *David
 Li* |
-| <img src="images/info_icon.png" width="50"/> | • If no `KEYWORD` is provided, search will be based on `<attribute>/{ATTRIBUTE_KEYWORD}` only. <br> • The search is case-insensitive. e.g `keith` will match `Keith`. <br> • The order of the keywords does not matter. e.g. `John Doe` will match `Doe John`.<br> • Clients matching at least one keyword will be returned). <br> e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`. <br> • If attribute keyword is provided, only clients whose attribute matches with the attribute keyword will be returned. <br> e.g. `Tom Tim e/@gmail.com` will return `Tom Lee e/Tom@gmail.com` and not `Tim Shum e/Tim@yahoo.com`. |
+| <img src="images/info_icon.png" width="50"/> | • If no `KEYWORD` is provided, search will be based on `<attribute>/ATTRIBUTE_KEYWORD` only. <br> • The search is case-insensitive. e.g `keith` will match `Keith`. <br> • The order of the keywords does not matter. e.g. `John Doe` will match `Doe John`.<br> • Clients matching at least one keyword will be returned). <br> e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`. <br> • If attribute keyword is provided, only clients whose attribute matches with the attribute keyword will be returned. <br> e.g. `Tom Tim e/@gmail.com` will return `Tom Lee e/Tom@gmail.com` and not `Tim Shum e/Tim@yahoo.com`. |
 
 ### 5.9 Filter current list by keywords : `filter`
 
 Filters the current list by the given keywords.
 
-| Format | `filter KEYWORD... <attribute>/{ATTRIBUTE_KEYWORD}...` <br> <br>• `KEYWORD` will be used to match with all attribute of the client. <br> • `{ATTRIBUTE_KEYWORD}` refers to the keyword that is to be matched with the corresponding client attribute.|
+| Format | `filter KEYWORD... [<attribute>/ATTRIBUTE_KEYWORD]...` <br> <br>• `KEYWORD` will be used to match with all attribute of the client. <br> • `{ATTRIBUTE_KEYWORD` refers to the keyword that is to be matched with the corresponding client attribute.|
 | :---: | :--- |
 | **
 Examples** | • `filter John` returns `john` and `John Doe` <br> • `filter alex david` returns `Alex Yeoh`, `David Li` |
-| <img src="images/info_icon.png" width="50"/> | • Works similar to `search` but `filter` works based on the current list shown as opposed to entire lists of contacts. <br> • If no `KEYWORD` is provided, then filter will be based on `<attribute>/{ATTRIBUTE_KEYWORD}` <br> • The filter is case-insensitive. e.g `keith` will match `Keith`. <br> • The order of the keywords does not matter. e.g. `John Doe` will match `Doe John`. <br> • Clients matching at least one keyword will be returned). <br> e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`. <br> • If attribute keyword is provided, only clients whose attribute matches with the attribute keyword will be returned. <br> e.g. `Tom Tim e/@gmail.com` will return `Tom Lee e/Tom@gmail.com` and not `Tim Shum e/Tim@yahoo.com`.|
+| <img src="images/info_icon.png" width="50"/> | • Works similar to `search` but `filter` works based on the current list shown as opposed to entire lists of contacts. <br> • If no `KEYWORD` is provided, then filter will be based on `<attribute>/ATTRIBUTE_KEYWORD` <br> • The filter is case-insensitive. e.g `keith` will match `Keith`. <br> • The order of the keywords does not matter. e.g. `John Doe` will match `Doe John`. <br> • Clients matching at least one keyword will be returned). <br> e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`. <br> • If attribute keyword is provided, only clients whose attribute matches with the attribute keyword will be returned. <br> e.g. `Tom Tim e/@gmail.com` will return `Tom Lee e/Tom@gmail.com` and not `Tim Shum e/Tim@yahoo.com`.|
 | <img src="images/tip_icon.png" width="50"/> | • Use the tags found under the command box to quickly filter clients by their tags. Simply click on a tag and press enter to filter clients with the specific tag. <br> eg. Pressing the `classmate` button allows you to filter clients with the `classmate` tag. <br> <img src=images/FilterTagCommand.png width="300">| 
 
 ### 5.10 Clearing all entries : `clear`
@@ -504,16 +499,15 @@ Action | Format | Examples
 --------|---------|---------
 
 **
-Create** | `add n/{CLIENT_NAME} e/{EMAIL} <attribute>/{OTHER ATTRIBUTES}...`| add n/benedict e/benedict@gmail.com
-p/90909898 r/3
+Create** | `add n/CLIENT_NAME e/EMAIL [<attribute>/VALUE]...`| add n/benedict e/benedict@gmail.com p/90909898 r/3
 **View** | `view CLIENT_ID` | view 123
-**Edit** | `edit CLIENT_ID... <attribute>/{CHANGED VALUE OF ATTRIBUTE}...` | edit 12 n/Dominic p/12345678
+**Edit** | `edit CLIENT_ID... [<attribute>/CHANGED_VALUE]...` | edit 12 n/Dominic p/12345678
 **Delete** | `delete CLIENT_ID...` | delete 4
 **List** | `list` | -
-**Sort** | `sort <attribute>/{ASC/DESC}...` | sort r/asc
+**Sort** | `sort [<attribute>/SORT_DIRECTION]...` | sort r/asc
 **Schedule** | `schedule [DATE]` | schedule 25-12-2021
-**Search** | `search KEYWORD... <attribute>/{ATTRIBUTE_KEYWORD}...` | search e/doe@gmail.com r/5
-**Filter** | `filter KEYWORD... <attribute>/{ATTRIBUTE_KEYWORD}...` | filter e/doe@gmail.com p/9
+**Search** | `search KEYWORD... [<attribute>/KEYWORD]...` | search e/doe@gmail.com r/5
+**Filter** | `filter KEYWORD... [<attribute>/VALUE]...` | filter e/doe@gmail.com p/9
 **Clear** | `clear` | -
 **Help** | `help` | -
 **Exit** | `exit` | -
