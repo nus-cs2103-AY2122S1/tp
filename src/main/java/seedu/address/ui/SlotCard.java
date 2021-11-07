@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -32,11 +33,12 @@ public class SlotCard extends UiPart<Region> {
      */
 
     private final DayOfWeek day;
+    private final LocalDate date;
     private final Slot slot;
     private ObservableList<Person> stafflist;
 
     @FXML
-    private VBox slotPane;
+    private VBox slotCard;
     @FXML
     private Label shiftName;
     @FXML
@@ -46,9 +48,10 @@ public class SlotCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public SlotCard(DayOfWeek day, Slot slot, ObservableList<Person> stafflist, Period period) {
+    public SlotCard(DayOfWeek day, Slot slot, ObservableList<Person> stafflist, Period period, LocalDate date) {
         super(FXML);
         this.day = day;
+        this.date = date;
         this.slot = slot;
         this.stafflist = stafflist;
         shiftName.setText("Shift-" + slot.getOrder());
@@ -70,6 +73,9 @@ public class SlotCard extends UiPart<Region> {
                 setText(null);
             } else {
                 setText(staff.getName().toString());
+                if (staff.wasAbsent(date)) {
+                    setStyle("-fx-background-color: #FF7F7F; -fx-text-fill: black");
+                }
             }
         }
     }
