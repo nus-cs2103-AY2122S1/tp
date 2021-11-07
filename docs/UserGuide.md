@@ -101,7 +101,7 @@ When reading our User Guide, here are some important information to take note of
 This section details the client information that financial advisors can keep track of with LeadsForce. Every client that is registered in LeadsForce have the following attributes that has the corresponding type and attribute tag. The attribute tags specified here will be used in the commands of several [features](#4-features). 
 
 Client Attribute | Type of Attribute | Attribute tag
------------------|-----------------|-----------------:
+-----------------|-----------------|-----------------
 Client ID (**Unique**) | Integer (assigned on creation of new contact) | i/
 Name (**Compulsory**) | String | n/
 Email (**Compulsory**)| String (email address)| e/
