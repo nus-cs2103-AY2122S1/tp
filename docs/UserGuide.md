@@ -393,7 +393,7 @@ ___
 ### Viewing user statistics: `stats`
 
 Displays a pop-up window that shows the statistical breakdown of anime(s) in AniList.
-User may exit the stats window by either clicking on the `X` button on the top right or by pressing 
+User may exit the stats window by either clicking on the `X` button on the top right or by pressing
 `CTRL-Q`
 
 Format: `stats`
