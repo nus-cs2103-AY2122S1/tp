@@ -62,7 +62,6 @@ This section provides tips on reading this document, as well as how to navigate 
 This User Guide is structured so that it is easy for you to find what you need. If this is your first time using contHACKS, we recommend reading the User Guide in order, starting from this section. If you are ever lost, head over to [table of contents](#table-of-contents) to orientate yourself.
 
 Here are some of the things you will need to know before you get started!
-
 ### Meaning of icons <a name="meaning-of-icons"></a>
 
 | Icon | Description |
@@ -70,7 +69,6 @@ Here are some of the things you will need to know before you get started!
 |:information_source:| This icon indicates that some extra information is provided.|
 |:exclamation:| This icon indicates that the information provided is **important**. |
 |:warning:| This icon indicates proceed with caution. |
-
 ### Key terms <a name="key-terms"></a>
 
 These are the key terms defined for the usage of the commands:
@@ -87,6 +85,7 @@ These are the key terms defined for the usage of the commands:
 
 Refer to the image below for more information on the different components of ContHACKS!
 
+<div style="page-break-after: always;"></div>
 ### GUI <a name="gui"></a>
 
 #### Top Navigation Bar
@@ -143,7 +142,6 @@ Some additional notes:
    * The contact list panel and the lesson list panel are **independent of each other**. This means that adding a contact with module and lesson code `CS2103T G09` will not create that lesson in the lesson panel list. 
    * Contacts and lessons are sorted alphabetically after every command by name and module code name respectively.  
 
-
 <div style="page-break-after: always;"></div>
 ## Features <a name="features"></a>
 ### General <a name="general"></a>
@@ -158,6 +156,7 @@ Command aliases: `man` `h`
 
 <img src="images/HelpCommand.png" width="800px">
 
+<div style="page-break-after: always;"></div>
 #### Exiting the program : `exit` <a name="exit"></a>
 
 Exits the program.
@@ -165,9 +164,7 @@ Exits the program.
 Format: `exit`
 
 Command aliases: `quit` `q`
-
 ### Managing contacts <a name="managing-contacts"></a>
-
 #### Adding a contact: `add` <a name="add"></a>
 
 Adds a contact to contHACKS.
@@ -207,7 +204,6 @@ Format: `edit INDEX [n/NAME] [e/EMAIL] [m/MODULE_CODE LESSON_CODE(S)] [p/PHONE] 
 To remove an existing phone number/telegram handle/remark from a contact, simply input `p/``h/``r/` respectively.
 </div>
 
-<div style="page-break-after: always;"></div>
 Examples:
 * `edit 1 e/ben321@gmail.com p/91234567`: Edits the email and phone number of the 1st contact to be `ben321@gmail.com` and `91234567`respectively
 * `edit 2 m/CS2100 T09 B09 m/CS2103T T01`: Edits the modules of the 2nd contact to be `[CS2100 T09 B09], [CS2103T T01]`
