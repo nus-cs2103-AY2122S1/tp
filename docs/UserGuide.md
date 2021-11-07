@@ -16,7 +16,7 @@ tasks done faster than traditional GUI apps.
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `tab-v1.3.0.jar` from [here](https://github.com/AY2122S1-CS2103-F09-1/tp/releases).
+2. Download the latest `tab-v1.4.0.jar` from [here](https://github.com/AY2122S1-CS2103-F09-1/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for TAB.
 
@@ -315,7 +315,14 @@ If your changes to the data file makes its format invalid, TAB will discard all 
 **A**: Use the `home` command to return to the homepage showing the full TAB. <br>
 
 --------------------------------------------------------------------------------------------------------------------
+## Upcoming Features planned for Future iterations
 
+1. Undo previous commands.
+2. Navigate through command history.
+3. Edit the information of a Student in multiple modules simultaneously.
+4. Remind the user when a Task's deadline draws near.
+
+--------------------------------------------------------------------------------------------------------------------
 ## Glossary
 
 **Alphanumeric**: Any characters from [0-9], [a-z], or [A-Z].<br>

@@ -51,7 +51,7 @@ Given below are my contributions to the project.
     * Documented the target user profile in the User Guide (Pull request [\#214](https://github.com/AY2122S1-CS2103-F09-1/tp/pull/214))
 
 * **Project management**:
-    * Managed releases `v1.3-trial` - `v1.3.0` (2 releases) on GitHub ([Github releases](https://github.com/AY2122S1-CS2103-F09-1/tp/releases))
+    * Managed releases `v1.3-trial` - `v1.4.0` (3 releases) on GitHub ([Github releases](https://github.com/AY2122S1-CS2103-F09-1/tp/releases))
 
 * **Documentation**:
     * README:
