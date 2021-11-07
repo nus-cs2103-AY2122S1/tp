@@ -408,8 +408,6 @@ The diagram below illustrates the flow of deleting an appointment:<br>
 
 ### Editing an appointment <a name="editing-an-appointment"/> 
 
-#### What it is
-
 Edits the details of an existing appointment.
 
 The edit appointment command accepts at least one of the following parameters:
@@ -433,8 +431,6 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 </div>
 
 ### Filtering appointments <a name="filtering-appointments"/>
-
-#### What it is
 
 Filters through the appointment records in PlannerMD and shows the appointments that matches the filter parameters.
 
@@ -462,8 +458,6 @@ A clearer view of this sequence diagram can be found [here](https://github.com/A
 
 
 ### Storing an appointment <a name="storing-an-appointment"/>
-
-#### What it is
 
 Stores an Appointment object in the Json file by first creating the `JsonAdaptedAppointment` object, which is the Json representation of the `Appointment` object. 
 Then, the `JsonAdaptedAppointment` is then contained within the `JsonSerializablePlannerMd` object and `JsonSerializablePlannerMd` is passed as parameter to `JsonUtil.saveJsonFile` to write all records,
