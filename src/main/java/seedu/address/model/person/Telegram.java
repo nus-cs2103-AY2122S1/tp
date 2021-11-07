@@ -13,7 +13,7 @@ public class Telegram {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Telegram should only contain alphabets,numbers or underscore,"
-                    + " and it should be between 5 to 64 characters long ";
+                    + " and it should be between 5 to 32 characters long ";
     public static final String VALIDATION_REGEX = "\\w{5,32}";
     public final String value;
 

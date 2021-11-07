@@ -76,7 +76,7 @@ This User Guide is intended for basic to advanced users of CohortConnect. It pro
 <br/>
 • GitHub username cannot begin or end with a hyphen. 
 <br/>
-• Maximum is 39 characters.
+• GitHub username must be at least 4 characters long, and maximum is 39 characters.
 <br/>
 
 </div>
