@@ -270,22 +270,6 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Sets the hovered background colour for the exit button.
-     */
-    @FXML
-    private void handleHover() {
-        exitButton.setStyle("-fx-background-color: -fx-light-bg-color;");
-    }
-
-    /**
-     * Sets the default background colour for exit button.
-     */
-    @FXML
-    private void handleUnhover() {
-        exitButton.setStyle("-fx-background-color: -fx-main-bg-color;");
-    }
-
-    /**
      * Retrieves the list of students from the CSV file.
      *
      * @param chosenFile the CSV file to read from
