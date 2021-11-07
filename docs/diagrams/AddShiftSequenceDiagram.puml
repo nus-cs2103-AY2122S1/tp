@@ -52,7 +52,7 @@ AddShiftCommand -> Model : findPersonByName(new Name("Steve"))
 activate Model
 
 Model --> AddShiftCommand : staff
-AddShiftCommand -> Model : addShift(staff, DayOfWeek.Monday, Slot.MORNING)
+AddShiftCommand -> Model : addShift(staff, DayOfWeek.Monday, Slot.MORNING, startDate, endDate)
 Model --> AddShiftCommand
 deactivate Model
 
