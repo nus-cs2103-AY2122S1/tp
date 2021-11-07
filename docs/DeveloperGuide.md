@@ -378,6 +378,34 @@ The sequence diagram for the first step is similar to the Export Command. The fo
 In both scenarios, a new `JsonAddressBookStorage` or `CsvAddressBookStorage` is created. The `AddressBookStorage` method `readAddressBook()` then reads the respective file using `JsonUtil#readJsonFile()` or `CsvUtil#readCsvFile()`. In both cases, the files are read using Jackson's `ObjectMapper` or `CsvMapper` classes respectively.
 
 
+### Edit Profile command
+
+#### Implementation
+
+Edits the user's profile linked to the Address Book.
+
+The user's profile contains details such as their name, Telegram Handle and GitHub username, which need to be kept up to date.
+This is especially important as the user's GitHub username is crucial for the Find a Buddy feature which matches them
+with a potential teammate using the GitHub metadata.
+
+The edit profile feature allows edit to change their name, Telegram handle and GitHub username.
+
+The implementation for editing the user profile is similar to that of editing a student contact. 
+It is facilitated by the `EditCommandParser` class, which implements `Parser<EditCommand>`.
+It implements the `parse()` method, which determines whether what's being edited is a contact or the user profile, checks for 
+the validity of user input (through the `checkEditProfileInputFormat()` method) and returns an `EditCommand`, to be executed in
+`LogicManager`.
+
+The `EditCommand` class extends `Command`. Its instance is created by providing an `index` (since a contact isn't being edited here, 
+the index passed is 1 by default and will not affect the process), and an `editPersonDescriptor` (which represents the updated user profile).
+Its implementation of `Command#execute()` calls the `executeEditProfile()` method which edits the user profile as necessary.
+
+The Sequence Diagram below illustrates the interactions within the `Logic` and `Model` components for
+the `execute("edit profile te/john_doe g/john-codes")` API call.
+
+![EditProfileSequenceDiagram](images/EditProfileSequenceDiagram.png)
+
+
 ### Find command
 
 #### Implementation
