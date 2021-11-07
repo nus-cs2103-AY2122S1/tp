@@ -13,7 +13,7 @@ import seedu.address.model.task.Task;
 public class StudentBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
-    public static final String DEFAULT_TELE = "@amybee";
+    public static final String DEFAULT_TELE = "@amy_bee";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ID = "A1234567A";
     public static final List<Task> DEFAULT_TASKS = new ArrayList<>();
