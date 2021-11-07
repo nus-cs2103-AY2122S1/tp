@@ -160,8 +160,9 @@ public class HelpGuide {
     public static final String EDIT_LESSONS_FILEPATH = "[JAR file location]/data/tutorAidLessons.json";
     public static final String EDIT_DATA_DESC3 = "Advanced users are welcome to update data directly by editing "
             + "any of the two data files.";
-    public static final String EDIT_CAUTION = "Caution: If your changes to the data file makes its format invalid, "
-            + "TutorAid will discard all data and start with an empty data file at the next run.";
+    public static final String EDIT_CAUTION = "Caution: If your changes to any of the two data files make its "
+            + "format or data invalid, TutorAid will discard the invalid data file and replace it with "
+            + "an empty data file at the next run.";
 
     public static final String FAQ_TITLE = "FAQ";
     public static final String FAQ = "Q: How do I transfer my data to another Computer?\n"
