@@ -1,5 +1,5 @@
 ---
-layout: page 
+layout: page
 title: Developer Guide
 ---
 
@@ -19,7 +19,7 @@ title: Developer Guide
 12. [User Stories](#User Stories)
 13. [Use cases](#Use Cases)
 14. [Non-Functional Requirements](#Non-Functional Requirements)
-15. [Glossary](#Glossary) 
+15. [Glossary](#Glossary)
 16. [Appendix: Instructions for manual testing](#Appendix)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -104,11 +104,11 @@ The main UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`
 , `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures
 the commonalities between classes that represent parts of the visible GUI.
 
-In addition, there are two additional windows that the UI can display: `HelpWindow` and `DashboardWindow`. 
-They inherit from the abstract class `PopupWindow`, 
+In addition, there are two additional windows that the UI can display: `HelpWindow` and `DashboardWindow`.
+They inherit from the abstract class `PopupWindow`,
 which captures the commonalities between classes that represent popup information to be displayed to the user.
 
-The `UI` component uses the JavaFx UI framework. 
+The `UI` component uses the JavaFx UI framework.
 - The layout of these UI parts are defined in matching `.fxml` files that
 are in the `src/main/resources/view` folder. For example, the layout of
 the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java)
@@ -456,7 +456,7 @@ related to the UI. In addition, the following classes are utilised:
 - `MainWindow.fxml`: for the addition of a 'Download' button on the MainWindow
 - `Popup.css`: for the customisation of styles for pop-up messages
 
-In the `Logic` components, the `download` command works in a similar fashion to the `show` command, except that it does not require its own parser. 
+In the `Logic` components, the `download` command works in a similar fashion to the `show` command, except that it does not require its own parser.
 
 
 This sequence diagram shows how the `download` command works at a lever lower:
@@ -486,7 +486,7 @@ success.
 
 2. Another alternative with respect to the CS2100 TA experience could be to disallow the user from selecting a folder to save
    their data to. Instead, a default location could be chosen so as to save the CS2100 TA some time in getting their data
-   downloaded quickly. However, since we wanted to make ProgrammerError more flexible and adaptable to different users, we opted to include the 
+   downloaded quickly. However, since we wanted to make ProgrammerError more flexible and adaptable to different users, we opted to include the
    functionality of allowing the CS2100 TA to select a folder destination.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -510,7 +510,7 @@ success.
 CS2100 TAs who
 
 * have to manage a number of students across different classes
-* keep track of the students' lab results 
+* keep track of the students' lab results
 * keep track of the students' details (eg. studentId, email)
 * prefer and comfortable with CLI tools
 * can type fast
@@ -549,7 +549,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`   | CS2100 TA                                   | generate weekly feedbacks via email for my students with ease                                    |
 | `* *`   | CS2100 admin                                | have a dashboard to have a bird eye view of my class statistics                                  | be updated quickly on my class progress.
 | `* *`   | CS2100 TA                                   | use tags to identify which labs are marked or unmarked                                           | know which what labs to mark next.
-| `*`     | CS2100 TA with multiple classes             | filter the contact list by name, classes, email  | easily identify those in the current class.                |                                                                        
+| `*`     | CS2100 TA with multiple classes             | filter the contact list by name, classes, email  | easily identify those in the current class.                |
 | `*`     | CS2100 TA                                   | archive previous batch statistics           | compare current batch performance with them                                                      |
 | `*`     | expert CS2100 TA                                 | archive/hide unused data                                                                         | avoid being distracted by irrelevant data.
 | `*`     | a CS2100 TA with many students and classes         | store vital information of my students                                                           | query it when the need arises.
@@ -590,12 +590,12 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
   Use case ends.
 
-* 3a. The student details given are incomplete. 
+* 3a. The student details given are incomplete.
 
     * 3a.1. ProgrammerError shows an error message.
 
       Use case resumes at step 3.
-  
+
 * 3b. The student email or ID given are not unique.
 
     * 3a.1. ProgrammerError shows an error message.
@@ -671,10 +671,10 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
       Use case resumes at step 2.
 
-* 3b. The given email or student id is not unique 
+* 3b. The given email or student id is not unique
 
-    * 3b.1. ProgrammerError shows an error message. 
-  
+    * 3b.1. ProgrammerError shows an error message.
+
         Use case resumes at step 2.
 
 **Use case: UC6 Download student records**
@@ -702,7 +702,7 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 **Extensions**
 
 * 3a. The given lab name is not unique or lab score < 0
-  * 3a.1 ProgrammerError shows an error message. 
+  * 3a.1 ProgrammerError shows an error message.
   Use case resumes at 2
 
 Use case ends.
@@ -720,8 +720,8 @@ Use case ends.
 
 **Extensions**
 
-* 3a. The given lab score < 0 or actual score > total score 
-    * 3a.1 ProgrammerError shows an error message. 
+* 3a. The given lab score < 0 or actual score > total score
+    * 3a.1 ProgrammerError shows an error message.
 * Use case resumes at 2
 
 Use case ends.
@@ -810,7 +810,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Dashboard
 
-1. Enter dashboard as a command or press F5 to view the dashboard.  
-    
-    1. CS2100 TA will be able to view the number of students, number of classes, number of labs. 
-    2. CS2100 TA will also be able to see the number of labs left to mark. 
+1. Enter dashboard as a command or press F5 to view the dashboard.
+
+    1. CS2100 TA will be able to view the number of students, number of classes, number of labs.
+    2. CS2100 TA will also be able to see the number of labs left to mark.

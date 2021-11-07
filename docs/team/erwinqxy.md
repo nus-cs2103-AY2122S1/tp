@@ -12,7 +12,7 @@ The following is a summary of my contributions to the
 project. ([View Reposense](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17))
 
 
-### Features  
+### Features
 
 1. **New Feature**: Automatic sorting of the student list.
    * What it does: it helps to ensure that the student list is always sorted whenever an add or command is executed. It first sorts the students based on their class ID than by name.
@@ -54,15 +54,15 @@ project. ([View Reposense](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?s
       * Fix cosmetic error message [#324](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/324) [#328](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/328)
       * Fix duplicate email [#427](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/427)
 
-4. **Reviews** 
+4. **Reviews**
       * PRs reviewed:
         * [#98](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/98), [#100](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/100), [#108](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/108),
         [#109](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/109), [#110](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/110), [#152](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/152),
-        [#153](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/153), [#252](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/252), [#413](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/413), 
+        [#153](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/153), [#252](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/252), [#413](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/413),
         [#417](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/417), [#460](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/460/files)
 
 5. **Documentation**:
-   * Updated documentations: user guide, developer's guide [#165](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/165), [#240](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/240), [#246](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/246), 
+   * Updated documentations: user guide, developer's guide [#165](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/165), [#240](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/240), [#246](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/246),
       [#474](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/474), [#482](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/482)
 
 6. **Community Contributions**: 

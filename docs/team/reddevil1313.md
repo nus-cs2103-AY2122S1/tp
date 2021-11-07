@@ -23,9 +23,9 @@ project. ([View Reposense](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/#b
     but the fill command required understanding of how the data was stored in the json file and how to perform
     checks on whether the program already had data or not.
 2. **Added the ability to add labs and edit their details for the entire student base**
-  - What it does: Allows the TA to add and edit labs ranging from 0 to 14 for the entire student base in the 
+  - What it does: Allows the TA to add and edit labs ranging from 0 to 14 for the entire student base in the
     application.
-  - Justification: Primary purpose of the application; So that the TA can keep track of the scores of 
+  - Justification: Primary purpose of the application; So that the TA can keep track of the scores of
     labs under him/her.
   - Highlights: This feature posed various challenges along the way. Earlier we had implemented the attributes
     of the Lab class using data values but then shifted to wrapper classes which required very tedious refactoring
@@ -35,8 +35,8 @@ project. ([View Reposense](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/#b
   - What it does: Allows the TA to edit individual grades for each student in the program.
   - Justification: So that the TA can keep track of how many labs he/she has marked and how many of them
     are still left to mark. 
-  - Highlights: This feature required changes to the existing edit command and thus, understanding of 
-    the command's optional inputs. One of the major highlights was solving a bug where once a newly 
+  - Highlights: This feature required changes to the existing edit command and thus, understanding of
+    the command's optional inputs. One of the major highlights was solving a bug where once a newly
     added lab was edited for one student, it was being edited to all.
 
 #### Other Contributions
