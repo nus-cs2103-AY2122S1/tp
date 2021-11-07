@@ -129,6 +129,7 @@ public class CenterPanel extends UiPart<Region> {
         personGridPanel.setListPanels();
         centerPanelPlaceholder.getChildren().setAll(personGridPanel.getRoot());
         personGridPanel.getPersonListView().getSelectionModel().select(student);
+        personGridPanel.getPersonListView().requestFocus();
     }
 
     /**

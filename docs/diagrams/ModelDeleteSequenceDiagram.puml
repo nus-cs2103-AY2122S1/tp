@@ -1,0 +1,37 @@
+@startuml
+!include style.puml
+
+box Model MODEL_COLOR_T1
+participant ":AddressBook" as AddressBook MODEL_COLOR
+participant ":UniquePersonList" as UniquePersonList MODEL_COLOR
+
+participant ":CalendarEntryList" as CalendarEntryList MODEL_COLOR
+participant ":UniqueTagList" as UniqueTagList MODEL_COLOR
+end box
+
+[--> AddressBook : removePerson(p)
+activate AddressBook
+
+AddressBook -->  UniquePersonList : remove(p)
+activate UniquePersonList
+
+AddressBook <-- UniquePersonList
+deactivate UniquePersonList
+
+AddressBook --> CalendarEntryList : removeLessons(p)
+activate CalendarEntryList
+
+AddressBook <-- CalendarEntryList
+deactivate CalendarEntryList
+
+AddressBook -->  UniqueTagList : removeTagFromPerson(p)
+activate UniqueTagList
+
+AddressBook <-- UniqueTagList
+deactivate UniqueTagList
+
+[<-- AddressBook
+deactivate AddressBook
+
+
+@enduml

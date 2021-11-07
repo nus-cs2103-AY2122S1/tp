@@ -34,31 +34,30 @@ public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
 
     public static final String COMMAND_PARAMETERS = "[" + PREFIX_FIND_CONDITION + "{all | any | none}] "
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_PARENT_PHONE + "PARENT_PHONE] "
-            + "[" + PREFIX_PARENT_EMAIL + "PARENT_EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_SCHOOL + "SCHOOL] "
-            + "[" + PREFIX_ACAD_STREAM + "ACAD_STREAM] "
-            + "[" + PREFIX_ACAD_LEVEL + "ACAD_LEVEL] "
-            + "[" + PREFIX_TAG + "TAG]... "
-            + "[" + PREFIX_SUBJECT + "LESSON_SUBJECT] "
-            + "[" + PREFIX_TIME + "LESSON_TIME] "
-            + "[" + PREFIX_DATE + "LESSON_DATE] "
+            + "[" + PREFIX_TAG + "TAG_KEYWORD]... "
+            + "[" + PREFIX_NAME + "NAME_KEYWORDS] "
+            + "[" + PREFIX_PHONE + "PHONE_KEYWORDS] "
+            + "[" + PREFIX_EMAIL + "EMAIL_KEYWORDS] "
+            + "[" + PREFIX_PARENT_PHONE + "PARENT_PHONE_KEYWORDS] "
+            + "[" + PREFIX_PARENT_EMAIL + "PARENT_EMAIL_KEYWORDS] "
+            + "[" + PREFIX_ADDRESS + "ADDRESS_KEYWORDS] "
+            + "[" + PREFIX_SCHOOL + "SCHOOL_KEYWORDS] "
+            + "[" + PREFIX_ACAD_STREAM + "ACAD_STREAM_KEYWORDS] "
+            + "[" + PREFIX_ACAD_LEVEL + "ACAD_LEVEL_KEYWORDS] "
+            + "[" + PREFIX_SUBJECT + "SUBJECT_KEYWORDS] "
+            + "[" + PREFIX_TIME + "TIME_RANGE] "
+            + "[" + PREFIX_DATE + "START_DATE] "
             + "[" + PREFIX_CANCEL + "CANCELLED_DATE] "
-            + "[" + PREFIX_RATES + "LESSON_RATE] "
-            + "[" + PREFIX_HOMEWORK + "LESSON_HOMEWORK] ";
+            + "[" + PREFIX_RATES + "LESSON_RATES_KEYWORDS] "
+            + "[" + PREFIX_HOMEWORK + "HOMEWORK_KEYWORDS] ";
 
     public static final String COMMAND_FORMAT = COMMAND_WORD + " " + COMMAND_PARAMETERS;
 
     public static final String COMMAND_EXAMPLE = COMMAND_WORD + " "
             + PREFIX_FIND_CONDITION + "any "
             + PREFIX_NAME + "Alex Yeo "
-            + PREFIX_ADDRESS + "Aljunied "
-            + PREFIX_SCHOOL + "nyjc "
-            + PREFIX_TAG + "unpaid " + PREFIX_TAG + "zoom";
+            + PREFIX_TAG + "unpaid "
+            + PREFIX_TIME + "1500-1600";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all students whose fields contain any of the "
             + "specified keywords (case-insensitive).\n"
