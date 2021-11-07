@@ -29,10 +29,9 @@ Manual Testing was focused mainly on Testing Features and the Graphical User Int
     * [Launch and Shutdown](#launch-and-shutdown)
     * [List all Students](#list-all-students)
     * [Clear Student List](#clear-student-list)
-    * [View Commit History](#clear-student-list)
-    * [Revert Commit](#clear-student-list)
-    * [Undo](#clear-student-list)
-    * [Redo](#clear-student-list)
+    * [View Commit History](#view-commit-history)
+    * [Revert Commit](#revert-commit-history)
+    * [Undo/Redo Change](#undoredo-changes)
     * [Help](#help)
     * [Saving Data](#saving-data)
 * [GUI Testing](#graphical-user-interface-gui-testing)
@@ -232,7 +231,7 @@ Below are a few test cases which checks for the above. The test cases are by no 
    matches the given keyword is present in AcademyDirectory. Said student has a phone number.
     1. Prerequisites:
         - At least one student has a name matches `alex`. By match, we mean a case-insensitive keyword match i.e. both "Alex"
-          and "aLeX" will match to `alex`. See this matching behavior in [`FilterCommand`](#filtercommand) for more details.
+          and "aLeX" will match to `alex`. See this matching behavior in [`FilterCommand`](DeveloperGuide.md) for more details.
         - Matched students have a phone number.
         - Run each test case twice, the first time by having all students listed using the `list` command,
           and the second time by having the view only show some students e.g. by using `filter` command
@@ -262,7 +261,7 @@ Below are a few test cases which checks for the above. The test cases are by no 
    is present in AcademyDirectory. Said student/s have no phone numbers.
     1. Prerequisites:
         - At least one student has a name matches `alex`. By match, we mean a case-insensitive keyword match i.e. both "Alex"
-          and "aLeX" will match to `alex`. See this matching behavior in [`FilterCommand`](#filtercommand) for more details.
+          and "aLeX" will match to `alex`. See this matching behavior in [`FilterCommand`](DeveloperGuide.md) for more details.
         - Matched students have no phone numbers.
         - Run each test case twice, the first time by having all students listed using the `list` command,
           and the second time by having the view only show some students e.g. by using `filter` command
@@ -278,7 +277,7 @@ Below are a few test cases which checks for the above. The test cases are by no 
 7. Retrieving personal detail of a student by keyword. No student whose name matches the given keyword is present in AcademyDirectory.
     1. Prerequisites:
         - No student has a name which matches `alex`. By match, we mean a case-insensitive keyword match i.e. both "Alex"
-          and "aLeX" will match to `alex`. See this matching behavior in [`FilterCommand`](#filtercommand) for more details.
+          and "aLeX" will match to `alex`. See this matching behavior in [`FilterCommand`](DeveloperGuide.md) for more details.
         - Run each test case twice, the first time by having all students listed using the `list` command,
           and the second time by having the view only show some students e.g. by using `filter` command
           on the tags. Expected outcome is the same in both cases for all test cases
@@ -689,7 +688,7 @@ and open the "View Test Score" tab to view the changes in the grade.
          - A new commit is created, and its time should correspond to the time when the command `add` was executed
 2. View commit history when history branches
    1. Prerequisite: Start with an empty commit history. To achieve this, do the following:
-       - Check that `UndoCommand` works, by following [this](#undo-changes)
+       - Check that `UndoCommand` works, by following [this](#undoredo-changes)
        - Remove version control folder (Default is `data/vc`; refer to `preferences.json` for specific)
        - Start the application
    2. Test cases:
@@ -746,8 +745,9 @@ and open the "View Test Score" tab to view the changes in the grade.
           - The label "(HEAD)" and "(MAIN)" is on the latest commit i.e. the commit which does `add n/Bob`
 
 The above test cases tests for correctness for the basic behaviors of `HistoryCommand`. They don't have to be 
-executed with the exact commands given; using different commands in different order may lead to slightly different
-commit message and/or date time shown. However, the general behavior as demonstrated above should remain the same.
+executed with the exact commands given; using different version controlled commands in different order may lead to slightly different
+commit message and/or date time shown. However, the general behavior as demonstrated above should remain the same. The 
+list of version controlled commands is in [here](DeveloperGuide.md).
 
 #### Revert Commit History
 1. Revert to commit in the same branch
@@ -793,8 +793,35 @@ commit message and/or date time shown. However, the general behavior as demonstr
            - The label "(HEAD)" is now in the commit whose hash was passed to `revert`
 
 The above test cases tests for correctness for the basic behaviors of `RevertCommand`. They don't have to be
-executed with the exact commands given; using different commands in different order may lead to slightly different
-commit message and/or date time shown. However, the general behavior as demonstrated above should remain the same.
+executed with the exact commands given; using different version controlled commands in different order may lead to slightly different
+commit message and/or date time shown. However, the general behavior as demonstrated above should remain the same. The
+list of version controlled commands is in [here](DeveloperGuide.md).
+
+#### Undo/redo changes
+1. Undo a change 
+    1. Prerequisite: Start with an empty commit history. To achieve this, do the following:
+        - Remove version control folder (Default is `data/vc`; refer to `preferences.json` for specific)
+        - Start the application
+    2. Test cases:
+        1. Execute the following commands in sequence: </br>
+           `clear` -> `undo`,</br>
+           Expected: Student list should be repopulated
+        2. Continuing from above, run `undo` </br>
+           Expected: The following message should appear: </br>
+            "Unable to undo Academy Directory as requested ... Is there anything to undo?"
+2. Redo a change
+    1. Prerequisite: Completed the above two test cases for undo and made no other changes
+    2. Test cases:
+        1. Continuing from point 1.2, execute `redo` </br>
+           Expected: Student list should be cleared
+        2. Continuing from above, run `redo` </br>
+           Expected: The following message should appear: </br>
+           "Unable to redo Academy Directory as requested ... Is there anything to redo?"
+
+The above test cases tests for correctness for the basic behaviors of `UndoCommand` and `RedoCommand`. They don't have to be
+executed with the exact commands given; using different version controlled commands may lead to slightly different
+commit message and/or date time shown. However, the general behavior as demonstrated above should remain the same. The
+list of version controlled commands is in [here](DeveloperGuide.md).
 
 #### Help
 
