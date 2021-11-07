@@ -37,7 +37,8 @@ List of sources of all reused/adapted ideas, code, documentation, and third-part
 * Initialising the `CalendarView` in the `[SchedulePanel](https://github.com/AY2122S1-CS2103T-F13-3/tp/blob/master/src/main/java/seedu/address/ui/SchedulePanel.java#L32)` was done with reference to the CalendarFX [_API_](https://dlsc.com/wp-content/html/calendarfx/apidocs/index.html).
 * The [CenterPanel](https://github.com/AY2122S1-CS2103T-F13-3/tp/blob/master/src/main/java/seedu/address/ui/CenterPanel.java#L138) JavaFX solution was inspired by [this StackOverflow post](https://stackoverflow.com/questions/16176701/switch-between-panes-in-javafx#:~:text=Replace%20just%20a%20specific%20pane,of%20the%20stack's%20child%20list.).
 * UG and DG Table cells with copy and paste and wrap-text functions reference: [Roland09](https://gist.github.com/Roland09/6fb31781a64d9cb62179#file-tableutils-java), [James_D](https://stackoverflow.com/questions/22732013/javafx-tablecolumn-text-wrapping).
-* Detection of overlapping dates: [Ole V.V.](https://stackoverflow.com/questions/60785426/)
+* Detection of overlapping dates: [Ole V.V.](https://stackoverflow.com/questions/60785426/).
+* Money parsing regex was inspired by [this StackOverflow answer](https://stackoverflow.com/a/17867041).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -240,7 +241,7 @@ represents a **weekly** recurring lesson. `MakeUpLesson` represents a one-off le
 
 ![LessonClassDiagram](images/LessonClassDiagram.png)
 
-*Figure I.3.1: Class Diagram of Lessons*<br>
+*Figure I.0.1: Class Diagram of Lessons*<br>
 
 The model checks for clashing lessons to ensure that TAB does not contain any duplicate `Lesson` objects as well as `Lesson`
 objects with overlapping time ranges.
@@ -251,7 +252,7 @@ The class diagram given below shows how these commands are part of the `Logic` C
 
 ![LessonLogicDiagram](images/LessonLogic.png)
 
-*Figure I.3.2: Class Diagram of Logic Component with Lesson implementation details*<br>
+*Figure I.0.2: Class Diagram of Logic Component with Lesson implementation details*<br>
 
 These commands are described in greater detail in the sections below.
 
@@ -262,7 +263,7 @@ A simple illustration of how TAB might interact with the user for `LessonAddComm
 
 ![LessonAddActivityDiagram](images/LessonAddActivityDiagram.png)
 
-*Figure I.3.3.1: Activity diagram of `LessonAddCommand`*<br>
+*Figure I.0.3.1: Activity diagram of `LessonAddCommand`*<br>
 
 The lesson added will be displayed in the `LessonListPanel` in TAB.<br>
 
@@ -271,11 +272,11 @@ The figure below shows the sequence diagram for adding a lesson to a student.
 
 ![LessonAddSequenceDiagram](images/LessonAddSequenceDiagram.png)
 
-*Figure I.3.3.2: Sequence Diagram of `LessonAddCommand`*<br>
+*Figure I.0.3.2: Sequence Diagram of `LessonAddCommand`*<br>
 
 ![LessonAddLogicSequenceDiagram](images/LessonAddLogicSequenceDiagram.png)
 
-*Figure I.3.3.3: Continued Sequence Diagram of `LessonAddCommand`*<br>
+*Figure I.0.3.3: Continued Sequence Diagram of `LessonAddCommand`*<br>
 
 The `LessonAddCommand#executeUndoableCommand()` method updates the `Lesson` objects in the `Person` in the `UniquePersonList` 
 by adding `toAdd` to the list of lessons the student currently has. Note that `toAdd` will not be added if there is an 
@@ -290,18 +291,18 @@ Note that edits involving dates mean that changes are made to the start or end d
 
 ![LessonEditActivityDiagram](images/LessonEditActivityDiagram.png)
 
-*Figure I.3.4.1: Activity diagram of `LessonEditCommand`*<br>
+*Figure I.0.4.1: Activity diagram of `LessonEditCommand`*<br>
 
 The figure below shows the sequence diagram for editing a lesson.
 
 ![LessonEditSequenceDiagram](images/LessonEditSequenceDiagram.png)
 
-*Figure I.3.4.2: Sequence Diagram of Lesson Edit Command*<br>
+*Figure I.0.4.2: Sequence Diagram of Lesson Edit Command*<br>
 
 In the `LessonEditCommand` class, a new class called `EditLessonDescriptor` is defined to create `Lesson` objects that will store
 the new values for the fields that have been specified to be edited. The `createEditedLesson()` method uses the `EditLessonDescriptor`
 object to create the `editedLesson` object. The detailed sequence diagram for LessonEditCommand is the similar to LessonAddCommand's
-with an additional step for retrieving the lesson to edit from the student of interest. Refer to Figure I.3.3.2 above. 
+with an additional step for retrieving the lesson to edit from the student of interest. Refer to Figure I.0.3.2 above. 
 
 The `executeUndoableCommand()` method of the `LessonEditCommand` uses this `editedLesson` object to update the `model` of TAB.
 The new lesson is stored in TAB in place of the old lesson. The student's list of lessons will be updated to reflect
@@ -334,6 +335,8 @@ into `model`-friendly `Lesson` objects.<br>
 #### Displaying lessons in the GUI
 
 ![PersonGridPanel](images/GuiPersonGridPanel.png)
+
+*Figure I.0.5.1: Sequence Diagram of Lesson Edit Command*<br>
 
 Each `Lesson` is displayed on a `LessonCard` in the `LessonListPanel`, next to the `PersonListPanel`.
 Selecting a student in the `PersonListPanel` through the `view` command or clicking on the GUI will display their lessons in the `LessonListPanel`.
@@ -379,7 +382,7 @@ TAB uses the [CalendarFX](https://dlsc.com/products/calendarfx/) library to impl
 
 ![CalendarView](images/GuiCalendarView.png)
 
-*Figure C.1.1: Integration of the CalendarView in our GUI*
+*Figure I.1.1: Integration of the CalendarView in our GUI*
 
 A CalendarFX `CalendarView` with custom display settings is integrated into our GUI through the `SchedulePanel` class in the `Ui` component.
 This `CalendarView` displays every CalendarFX `Entry` that we store in model component's `CalendarEntryList`.
@@ -462,7 +465,7 @@ Viewing a list of upcoming lessons is facilitated by `CalendarEntryList`.
 Given below is a simple illustration of how the reminder list might change with user inputs.
 <img src="images/ReminderActivityDiagram.png" /> <br>
 
-*Figure I.5.1: Reminder activity diagram for adding a lesson.*
+*Figure I.2.1: Reminder activity diagram for adding a lesson.*
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** 
 Reminder does not refresh the list of upcoming lessons automatically if no data modifications were made to lessons. Users need to enter `remind`, click <kbd>Reminder</kbd> on the menu bar or press <kbd>F5</kbd> to update the list of upcoming lessons. </div>
@@ -472,15 +475,15 @@ Given below is an example usage scenario and how viewing reminder is executed:
 - **Step 3:** `Logic` executes the `RemindCommand`. During execution, `RemindCommand#execute()` instantiates a `CommandResult` with the `DisplayType` of `REMINDER` as a signal for `MainWindow` to open the `ReminderWindow` or focus on it if it was already opened.
 - **Step 4:** `MainWindow` then handles this command by calling `MainWindow#showReminder()`. `Logic#updateUpcomingLessons()` is then called to display the updated list of upcoming lessons to the user.
 
-Figure I.5.2 shows a sequence diagram of how viewing reminder's logic works.<br>
+Figure I.2.2 shows a sequence diagram of how viewing reminder's logic works.<br>
 <img src="images/ViewRemindSequenceDiagramLogic.png" width="800" />
 
-*Figure I.5.2: View reminder logic sequence diagram*
+*Figure I.2.3: View reminder logic sequence diagram*
 
-Figure I.5.3 shows a sequence diagram of how the reminder window is displayed with the UI components.<br>
+Figure I.2.4 shows a sequence diagram of how the reminder window is displayed with the UI components.<br>
 <img src="images/ReminderSequenceDiagram.png" width="800" /> <br>
 
-*Figure I.5.3: View reminder sequence diagram.*
+*Figure I.2.5: View reminder sequence diagram.*
 
 #### Design considerations
 **Aspect: Date and time range of lessons to be considered as upcoming**
@@ -517,10 +520,10 @@ Given below is an example usage scenario and how viewing tag is executed:
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** Tags with duplicate case-insensitive tag names for a person is not allowed. If the user tries to adds a tag with the same tag name to the person already with that tag, the new tag will not be added and `tagCounter` will not increment the count for this tag.<br></div>
 
-Figure I.4.1 shows a sequence diagram of how the tag list is displayed to the user with UI components.<br>
+Figure I.3.1 shows a sequence diagram of how the tag list is displayed to the user with UI components.<br>
 <img src="images/ViewTagSequenceDiagramUi.png" width="800" />
 
-*Figure I.4.1: View tags UI sequence diagram*
+*Figure I.3.2: View tags UI sequence diagram*
 
 #### Design considerations
 **Aspect: Data Structures to support lesson operations**
@@ -545,11 +548,13 @@ The `CenterPanel` in the `Ui` component consists of the `PersonGridPanel`, `Sche
 
 ![CenterPanel Class Diagram](images/CenterPanelClassDiagram.png)
 
+*Figure I.4.1: CenterPanel Class Diagram*
+
 The *Sequence Diagram* below shows how the `Ui` components interact with each other when user inputs the `calendar` command.
 
 ![Interactions Inside the Ui Component for the `calendar` Command](images/ScheduleSequenceDiagram.png)
 
-*Figure I.1.1: Sequence Diagram of Calendar Command*
+*Figure I.4.2: Sequence Diagram of Calendar Command*
 
 When the user requests to view the calendar interface, the `displaySchedulePanel()` method of `CenterPanel` is called, which sets the current display to show the `SchedulePanel`.
 Switching to the student view and tag list is similarly achieved by calling `displayPersonGridPanel()` and `displayTagListPanel()` methods respectively.
@@ -565,7 +570,7 @@ The undo/redo mechanism is facilitated by an `UndoRedoStack`, which resides in `
 
 ![UndoableCommandInheritance](images/UndoableCommandInheritance.png)
 
-*Figure I.2.1: Class Diagram of Undoable Command*
+*Figure I.5.1: Class Diagram of Undoable Command*
 
 `UndoableCommand` adds an extra layer between the abstract `Command` class and the concrete commands that can be undone such as `AddCommand`, `DeleteCommand`.
 `UndoableCommand` makes the `Command#execute()` method concrete, while the child classes implement an `executeUndoableCommand()` method that preprocesses the Command before execution. 
@@ -610,22 +615,22 @@ The specific `UndoableCommand` called will process the command during the method
 
 For instance, the executed command is `delete 5`, to delete the 5th person in the `AddressBook` that resides in the `Model`. 
 The deleted Person, referred to in the Figure I3 as `p5` is stored in the `deletedPerson` field in `DeleteCommand`. 
-The Figure I.2.2 below shows the state of `UndoRedoStack` before and after the execution of `delete 5`.
+The Figure I.5.2 below shows the state of `UndoRedoStack` before and after the execution of `delete 5`.
 
 ![UndoRedoStackStart](images/UndoRedoStackStartDiagram.png)
 
-*Figure I.2.2: UndoRedoStack before and after executing 1 Delete Command*
+*Figure I.5.2: UndoRedoStack before and after executing 1 Delete Command*
 
-In Figure I.2.2, when `delete 5` command finishes, the command will be pushed onto the `undoStack`.
+In Figure I.5.2, when `delete 5` command finishes, the command will be pushed onto the `undoStack`.
 
 Step 3. As the user continues to use the program, more commands are added into the `undoStack`. For example, the user may execute `add n/John Doe ...` to add a new person. 
-Figure I.2.3 below shows the change in `undoStack` when `add` command is executed right after `delete 5` command.
+Figure I.5.3 below shows the change in `undoStack` when `add` command is executed right after `delete 5` command.
 
 ![UndoRedoStackAfterAdd](images/UndoRedoStack1CommandDiagram.png) 
 
-*Figure I.2.3: UndoRedoStack before and after executing 1 `AddCommand`.*
+*Figure I.5.3: UndoRedoStack before and after executing 1 `AddCommand`.*
 
-In Figure I.2.3, `undoStack` initially contains `delete 5` command alongside the specific changed portion of the `Model`, namely `deletedPerson`. 
+In Figure I.5.3, `undoStack` initially contains `delete 5` command alongside the specific changed portion of the `Model`, namely `deletedPerson`. 
 Upon executing `add` command, `add` command that has been processed such that it can undo itself is added to the `undoStack`.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not be pushed to the `UndoRedoStack` at all.<br></div>
@@ -638,20 +643,20 @@ Step 4. The user now decides that adding the person was a mistake, and decides t
 
 ![UndoRedoStackAfterUndo](images/UndoRedoStack1UndoDiagram.png) 
 
-*Figure I.2.4: UndoRedoStack before and after executing Undo Command*
+*Figure I.5.4: UndoRedoStack before and after executing Undo Command*
 
-In Figure I.2.4, `undo` results in `add` command in the `undoStack` being popped out and pushed into `redoStack`. 
+In Figure I.5.4, `undo` results in `add` command in the `undoStack` being popped out and pushed into `redoStack`. 
 At the same time, the `add` command would undo itself, restoring the `AddressBook` to the previous state.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the `undoStack` is empty, then there are no other commands left to be undone, and an `Exception` will be thrown when popping the `undoStack`.<br></div>
 
-The sequence diagram in Figure I6 shows how the undo operation works:
+The sequence diagram in Figure I.5.5 shows how the undo operation works:
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram.png) 
 
-*Figure I.2.5: Sequence diagram of executing Undo Command*
+*Figure I.5.5: Sequence diagram of executing Undo Command*
 
-In Figure I.2.5, when the user enters the command to `undo`, `AddressBookParser` will parse the given command and create an `UndoCommand` to be returned to `LogicManager`.
+In Figure I.5.5, when the user enters the command to `undo`, `AddressBookParser` will parse the given command and create an `UndoCommand` to be returned to `LogicManager`.
 `LogicManager` will call `execute()` method in `UndoCommand`, which in turn calls `popUndo()` method in `UndoRedoStack`. `UndoRedoStack` will return the most recently executed `UndoableCommand`popped from
 the `UndoRedoStack`. `UndoCommand` will call `undo()` on the `XYZCommand` so that `XYZCommand` can undo itself, restoring the `AddressBook`.
 
@@ -664,37 +669,37 @@ There are 2 cases for redoing commands - `UndoableCommand` v.s. non-`UndoableCom
 **Case 1: `UndoableCommand` called before `redo`**
 
 Continuing from the previous example, suppose that after the user undoes the `AddCommand`, the user now decides to add another student with the same name `John Doe`.
-The user executes a new command, `add`. Figure I.2.6 below shows the change in `UndoRedoStack` after executing the `add` command. Note that the `AddCommand` before and after are 2 different commands.
+The user executes a new command, `add`. Figure I.5.6 below shows the change in `UndoRedoStack` after executing the `add` command. Note that the `AddCommand` before and after are 2 different commands.
 The one before is named `a1` and the one after is named `a2` for better readability.
 
 ![UndoRedoStackClearRedoStack](images/UndoRedoStackClearRedoStack.png)
 
-*Figure I.2.6: UndoRedoStack before and after executing Add Command.*
+*Figure I.5.6: UndoRedoStack before and after executing Add Command.*
 
-In Figure I.2.6, `add` will be pushed into the `undoStack` since `add` is an `UndoableCommand`. At the same time, the `redoStack` is cleared.
+In Figure I.5.6, `add` will be pushed into the `undoStack` since `add` is an `UndoableCommand`. At the same time, the `redoStack` is cleared.
 Its contents are cleared as we no longer makes sense be able to redo `add n/John Doe ...` as it would result in duplicate students 
 (this is the behaviour that most modern desktop applications follow).
 
 **Case 2: Commands that does not modify any data called before `redo`**
 
 Continuing from the previous example, suppose that after the user undoes the `AddCommand`, the user now decides to view the calendar.
-The user executes a new command, `day`. Figure I.2.7 below shows the change in `UndoRedoStack` after executing the `day` command.
+The user executes a new command, `day`. Figure I.5.7 below shows the change in `UndoRedoStack` after executing the `day` command.
 
 ![UndoRedoStackAfterNonUndoableCommand](images/UndoRedoStackNonUndoableCommand.png)
 
-*Figure I.2.7: UndoRedoStack before and after executing Day Command.*
+*Figure I.5.7: UndoRedoStack before and after executing Day Command.*
 
-In Figure I.2.7, `day` will not be pushed into the `undoStack` since `day` is not an `UndoableCommand`. Unlike for the `add` command in Case 1,
+In Figure I.5.7, `day` will not be pushed into the `undoStack` since `day` is not an `UndoableCommand`. Unlike for the `add` command in Case 1,
 the `redoStack` is not cleared as there were no changes to the data after undoing `AddCommand`, executing `redo` would not result in any errors.
 Hence, the `UndoRedoStack` remains identical.
 
-The following activity diagram in Figure I.2.8 summarizes what happens inside the `UndoRedoStack` when a user executes a new command:
+The following activity diagram in Figure I.5.8 summarizes what happens inside the `UndoRedoStack` when a user executes a new command:
 
 ![UndoRedoStackActivityDiagram](images/UndoRedoStackActivityDiagram.png)
 
-*Figure I.2.8: Activity Diagram after a `Command` is executed.*
+*Figure I.5.8: Activity Diagram after a `Command` is executed.*
 
-In Figure I.2.8, after execution, any `Command` that is **not** an `UndoableCommand` will not change the `UndoRedoStack`.
+In Figure I.5.8, after execution, any `Command` that is **not** an `UndoableCommand` will not change the `UndoRedoStack`.
 If the `Command` is an `UndoableCommand`, it will be pushed to the `undoStack` before the control is returned to the user eventually.
 
 #### Design considerations
@@ -729,10 +734,11 @@ The Sequence Diagrams below is an example of how the components interact with ea
 
 ![Find Command](images/FindSequenceDiagram.png)
 
-*Figure I.5.1: Sequence Diagram of Find Command*
+*Figure I.6.1: Sequence Diagram of Find Command*
 
 ![Find Command Continued](images/FindUpdateFilteredListLogicSequenceDiagram.png)
-*Figure I.5.2: Continued Sequence Diagram of Find Command*
+
+*Figure I.6.2: Continued Sequence Diagram of Find Command*
 
 #### Design considerations:
 
@@ -751,11 +757,11 @@ TAB automates the updating of individual lesson fees after the lesson has ended.
 * `LastUpdatedDate` stores a `LocalDateTime` of when the `AddressBook` was last updated. `LastUpdatedDate` is stored in `AddressBook`.
 * `Money` and its subclass facilitates the payment mechanism. Each `Lesson` contains a `LessonRates` field and a `OutstandingFees` field. Both of which extend `Money`.
 
-When the user launches TAB, in `MainApp#initModelManager()`, the `FeesCalculator` would update all the outstanding lesson fees in the model. Figure I.6.1 is a sequence diagram after the user launches TAB.
+When the user launches TAB, in `MainApp#initModelManager()`, the `FeesCalculator` would update all the outstanding lesson fees in the model. Figure I.7.1 is a sequence diagram after the user launches TAB.
 
 ![UpdateFeesSequenceDiagram](images/UpdateFeesSequenceDiagram.png)
 
-*Figure I.6.1: Sequence diagram of Update Fees.*
+*Figure I.7.1: Sequence diagram of Update Fees.*
 
 In `initModelManager()`, after the `model` has been built from storage, `FeesCalculator#UpdateAllLessonOutstanding()` is called to update the lesson fees. For each person in `addressBook`, a new `updatedPerson` would be created.
 When creating the new `updatedPerson`, for each lesson that the person has, `updateLessonOutstandingFeesField()` will update all the outstanding fees fields using `lastUpdatedDate` and the current local date time.  
@@ -787,7 +793,7 @@ Then, the following depicts the logic of how to calculate the amount to be added
 
 ![UpdateFeesActivityDiagram](images/UpdateFeesActivityDiagram.png)
 
-*Figure I.6.2: Activity Diagram of Update Fees from creation of a new Lesson object onwards.*
+*Figure I.7.2: Activity Diagram of Update Fees from creation of a new Lesson object onwards.*
 
 This means that once the outstanding fees have been updated, any changes to fields that would affect outstanding fees (e.g. start date, end date, cancelling and uncancelling lessons in the past, change in lesson rates) will not be accounted for.
 
@@ -799,7 +805,7 @@ Payment of outstanding fees is facilitated by `Money` and its subclasses as well
 
 ![MoneyInheritanceDiagram](images/MoneyInheritanceDiagram.png)
 
-*Figure I.6.3: Class diagram of Money and related classes.*
+*Figure I.7.3: Class diagram of Money and related classes.*
 
 `OutstandingFees` and `LessonRates` extends `Money` whereas `Fees` field in `Person` is composed of `OutstandingFees` as it is the sum of `OutstandingFees`. Money uses `BigDecimal` for all calculations.
 
@@ -808,7 +814,7 @@ The `OutstandingFees` field would then be deducted by the paid amount. `PaidComm
 
 ![PaidCommandSequenceDiagram](images/PaidCommandSequenceDiagram.png)
 
-*Figure I.6.4: Sequence diagram of executing paid command.*
+*Figure I.7.4: Sequence diagram of executing paid command.*
 
 
 
@@ -846,7 +852,7 @@ A private 1-to-1 home tuition teacher that:
 2. has a need to manage payment details of each student
 3. has a need to keep track of lesson details for each student
 4. teaches lessons anytime between typical working hours of 8am and 10pm, on any day of the week
-5. has a need to manage a busy schedule of not more than 50 lessons
+5. has a need to manage a busy schedule of not more than 50 lessons (recurring or individual)
 6. prefers desktop apps over other types
 7. can type fast
 8. prefers keyboard interactions to mouse interactions
@@ -858,7 +864,7 @@ student and lesson information, to empower tutors to provide the best quality ho
 
 ### User stories
 
-We categorise our user stories into three main epics:
+We categorise our user stories into three main epics for users:
 1. [S] - Keeping track of student information
 2. [L] - Keeping track of lesson information
 3. [U] - Having a simple, efficient, and intuitive _UI/UX_
@@ -904,38 +910,47 @@ Priorities: High - must have; Medium - nice to have;  Low - unlikely to have.
 | S35 | `HIGH`   | user                                       | view a student's outstanding fees                                   |                                                                         |
 | S36 | `HIGH`   | user                                       | edit a student's outstanding fees                                   |                                                                         |
 | S37 | `HIGH`   | user                                       | delete a student's outstanding fees                                 |                                                                         |
-| S38 | `LOW`    | user                                       | have an archive for removed students                                | revisit the archived data if the need arises                            |
-| S39 | `LOW`    | user with many students stored in TAB      | sort students by name                                               | locate a student easily                                                 |
-| S40 | `LOW`    | user with many students stored in TAB      | sort students by tag                                                | locate a student easily                                                 |
+| S38 | `MEDIUM`    | user many students                      | have automated calculation of the fees I need to collect            | collect outstanding fees without forgetting                             |
+| S39 | `MEDIUM`    | user with many students stored in TAB   | have automated checks for potential duplicate entries               | avoid making duplicate entries in TAB                                   |
+| S40 | `LOW`    | user                                       | have an archive for removed students                                | revisit the archived data if the need arises                            |
+| S41 | `LOW`    | user with many students stored in TAB      | sort students by name                                               | locate a student easily                                                 |
+| S42 | `LOW`    | user with many students stored in TAB      | sort students by tag                                                | locate a student easily                                                 |
 | L1  | `HIGH`   | user                                       | add lessons for a student                                           | keep track of the lessons each student has                              |
 | L2  | `HIGH`   | user                                       | add recurring lessons for a student                                 | keep track of the regular lessons                                       |
 | L3  | `HIGH`   | user                                       | add makeup lessons for a student                                    | track lessons outside of my usual lesson schedule                       |
 | L4  | `HIGH`   | user                                       | delete a student's lesson                                           | remove lessons that I no longer have                                    |
-| L5  | `MEDIUM` | user                                       | add a start date for a lesson                                       | be updated with my lesson schedule                                      |
-| L6  | `MEDIUM` | user                                       | edit the start date of a lesson                                     |                                                                         |
-| L7  | `MEDIUM` | user                                       | view the start date of a lesson                                     |                                                                         |
-| L8  | `MEDIUM` | user                                       | add a time period for a lesson                                      | be updated with my lesson schedule                                      |
-| L9  | `MEDIUM` | user                                       | edit the time period of a lesson                                    |                                                                         |
-| L10 | `MEDIUM` | user                                       | view the time period of a lesson                                    |                                                                         |
-| L11 | `MEDIUM` | user                                       | delete the time period of a lesson                                  |                                                                         |
-| L12 | `MEDIUM` | user                                       | add a subject for a lesson                                          | plan and prepare for that specific subject                              |
-| L13 | `MEDIUM` | user                                       | edit the subject of a lesson                                        |                                                                         |
-| L14 | `MEDIUM` | user                                       | view the subject of a lesson                                        |                                                                         |
-| L15 | `MEDIUM` | user                                       | delete the subject of a lesson                                      |                                                                         |
-| L16 | `MEDIUM` | user                                       | add each assigned piece of homework for a particular lesson         | keep track of what I have to go through that lesson                     |
-| L17 | `MEDIUM` | user                                       | edit a student's assigned homework for a particular lesson          |                                                                         |
-| L18 | `MEDIUM` | user                                       | view the assigned homework of a particular lesson                   |                                                                         |
-| L19 | `MEDIUM` | user                                       | view a calendar of my scheduled lessons                             | plan ahead while managing my schedule                                   |
-| U1  | `HIGH`   | new user                                   | see usage instructions                                              | refer to instructions whenever I need guidance on how to use TAB    |
-| U2  | `HIGH`   | new user                                   | purge all current data                                              | remove all sample/experimental data I used while exploring TAB      |
-| U3  | `HIGH`   | user                                       | find a student by keyword                                           | locate details of students without having to go through the entire list |
+| L5  | `HIGH`   | user                                       | view a calendar of my scheduled lessons                             | plan ahead while managing my schedule                                   |
+| L6  | `HIGH`   | user                                       | add a start date for a lesson                                       | keep track of the date of the lesson                                      |
+| L7  | `HIGH`   | user                                       | edit the start date of a lesson                                     |                                                                         |
+| L8  | `HIGH`   | user                                       | view the start date of a lesson                                     |                                                                         |
+| L9  | `HIGH`   | user                                       | add a time period for a lesson                                      | keep track of the time of the lesson                                    |
+| L10 | `HIGH`   | user                                       | edit the time period of a lesson                                    |                                                                         |
+| L11 | `HIGH`   | user                                       | view the time period of a lesson                                    |                                                                         |
+| L12 | `HIGH`   | user                                       | delete the time period of a lesson                                  |                                                                         |
+| L13 | `MEDIUM` | user                                       | add a subject for a lesson                                          | plan and prepare for that specific subject                              |
+| L14 | `MEDIUM` | user                                       | edit the subject of a lesson                                        |                                                                         |
+| L15 | `MEDIUM` | user                                       | view the subject of a lesson                                        |                                                                         |
+| L16 | `MEDIUM` | user                                       | delete the subject of a lesson                                      |                                                                         |
+| L17 | `MEDIUM` | user                                       | add each assigned piece of homework for a particular lesson         | keep track of what I have to go through that lesson                     |
+| L18 | `MEDIUM` | user                                       | edit a student's assigned homework for a particular lesson          |                                                                         |
+| L19 | `MEDIUM` | user                                       | view the assigned homework of a particular lesson                   |                                                                         |
+| L20 | `MEDIUM` | busy user                                  | have automated checks for clashes in my scheduled lessons           | avoid accidentally committing to impossible schedules                   |
+| L20 | `MEDIUM` | busy user                                  | have automated checks for accidental entries outside my working hours | avoid accidentally committing to impossible schedules                 |
+| L21 | `MEDIUM` | busy user                                  | be reminded of upcoming lessons                                     | prepare for them                                                        |
+| U1  | `HIGH`   | new user                                   | see usage instructions                                              | refer to instructions whenever I need guidance on how to use TAB        |
+| U2  | `HIGH`   | new user                                   | purge all current data                                              | remove all sample/experimental data I used while exploring TAB          |
+| U3  | `HIGH`   | user                                       | easily navigate the app's UI using the CLI                          | key my hands on the keyboard and stay productive                        |
 | U4  | `HIGH`   | user                                       | undo accidental changes                                             |                                                                         |
-| U5  | `MEDIUM` | user                                       | filter students by tags                                             | view a list of all the students that feature the specified tags         |
-| U6  | `MEDIUM` | user with incomplete information           | skip less important information to add                              | update later when I have the rest of the information                    |
-| U7  | `MEDIUM` | user                                       | select and copy data to desktop clipboard                           | paste and use the data outside of TAB                               |
+| U5  | `HIGH`   | user with many students                    | be able to search for students                                      | locate my students easily                                               |
+| U6  | `HIGH`   | user with incomplete information           | skip less important information to add                              | update later when I have the rest of the information                    |
+| U7  | `LOW`    | user                                       | select and copy data to desktop clipboard                           | paste and use the data outside of TAB                                   |
 | U8  | `LOW`    | user who uses many tags                    | view all tags                                                       | remember my tags easily                                                 |
 | U9  | `LOW`    | expert user                                | customise the commands and input fields                             | choose not to follow the given template                                 |
+| U10 | `LOW`    | expert user                                | have shortcuts for frequently performed actions                     | speed up my actions in TAB                                              |
+| U11 | `LOW`    | beginner user new to CLI                   | have buttons that allows me to navigate the app                     | continue to use the app while i get more familiar with CLI commands     |
 | U10 | `LOW`    | user                                       | be reminded to update data after a lesson                           | ensure that data stays up to date                                       |
+| U10 | `LOW`    | user                                       | be reminded to update data after a lesson                           | ensure that data stays up to date                                       |
+| U10 | `LOW`    | expert user                                | customise my automations                                            | have more manual control of my workflow have the app cater to my specific needs |
 
 *{More to be added}*
 
@@ -1081,6 +1096,12 @@ Priorities: High - must have; Medium - nice to have;  Low - unlikely to have.
 
       Use case resumes at step 1.
 
+* 2c. TAB detects clashing lessons
+
+    * 2b1. TAB displays an error message and the recommended changes
+
+      Use case resumes at step 1.
+
 <br/>
 
 **Use case: UC6 – Edit a student’s lesson information**
@@ -1131,7 +1152,32 @@ Priorities: High - must have; Medium - nice to have;  Low - unlikely to have.
 
 <br/>
 
-**Use case: UC7 – Delete a student’s lesson information**
+
+**Use case: UC7 – View a student's lesson information**
+
+**MSS**
+
+1. User <ins>gets a list of students (UC1)</ins>
+2. User requests to view the lessons of a specified student in the list.
+2. TAB displays the student's list of lessons.
+
+Use case ends.
+
+**Extensions**
+
+* 2a. The specified student has no lessons
+
+  Use case ends.
+
+* 2b. The given index of the student is invalid
+
+  * 2b1. TAB displays an error message
+
+    Use case resumes at step 1.
+  
+<br/>
+
+**Use case: UC8 – Delete a student’s lesson information**
 
 **MSS**
 
@@ -1157,31 +1203,7 @@ Priorities: High - must have; Medium - nice to have;  Low - unlikely to have.
 
 <br/>
 
-**Use case: UC8 – Find student by student fields**
-
-**MSS:**
-
-1.  User requests to list students.
-2.  TAB shows a list of students.
-3.  User requests to find student with a specified name and address.
-4.  TAB shows a list of students with matching name and address.
-
-    Use case ends.
-
-**Extensions:**
-* 1a. The user specifies an invalid keyword
-    
-    * 1a1. TAB displays an error message
-
-      Use case resumes at step 1.
-    
-* 2a. The list is empty.
-
-  Use case ends.
-
-<br/>
-
-**Use Case: UC8 – View quick start instructions**
+**Use Case: UC9 – View quick start instructions**
 
 **MSS**
 
@@ -1192,7 +1214,7 @@ Priorities: High - must have; Medium - nice to have;  Low - unlikely to have.
    
 <br/>
 
-**Use case: UC9 – Get help**
+**Use case: UC10 – Get help**
 
 **MSS**
 
@@ -1203,7 +1225,7 @@ Priorities: High - must have; Medium - nice to have;  Low - unlikely to have.
 
 <br/>
 
-**Use case: UC10 - Undo an accidental modification**
+**Use case: UC11 - Undo an accidental modification**
 
 **MSS**
 
@@ -1222,7 +1244,7 @@ Priorities: High - must have; Medium - nice to have;  Low - unlikely to have.
 
 <br/>
 
-**Use case: UC11 - Redo an undone modification**
+**Use case: UC12 - Redo an undo command**
 
 **MSS**
 
@@ -1241,7 +1263,7 @@ Priorities: High - must have; Medium - nice to have;  Low - unlikely to have.
     
 <br/>
 
-**Use case: UC12 – View reminder**
+**Use case: UC13 – View reminder**
 
 **MSS**
 
@@ -1258,7 +1280,7 @@ Use case ends.
 
 <br/>
 
-**Use case: UC13 – View tags**
+**Use case: UC14 – View tags**
 
 **MSS**
 
@@ -1273,13 +1295,127 @@ Use case ends.
 
   Use case ends.
 
+**Use case: UC15 - Fees Update**
+
+**MSS**
+
+1. User launches TAB.
+2. TAB displays updated outstanding fees.
+
+Use case ends.
+
+**Extension**
+
+* 1a. There was an error in saving address book.
+  * 1a1. TAB displays the outstanding fees from the last session without being updated.
+  
+  Use case ends.
+
+**Use case: UC16 - Payment**
+
+**MSS**
+
+1. User requests to view lessons of a particular student.
+2. TAB displays list of lessons for the student.
+3. User requests to pay for a specific lesson.
+4. TAB updates and displays the updated outstanding fees after payment for that lesson.
+
+Use case ends.
+
+**Extension**
+
+* 3a. The user specifies an invalid index. 
+  * 3a1. TAB displays an error message 
+  
+  Use case resumes at step 3.
+
+* 3b. The user specifies an invalid amount for payment.
+  * 3ab. TAB displays an error message
+
+  Use case resumes at step 3.
+
+<br/>
+
+**Use case: UC17 – View calendar**
+
+**MSS**
+
+1. User requests to view the calendar.
+2. TAB displays the calendar.
+
+Use case ends.
+
+<br/>
+
+**Use case: UC18 – Navigate forward in the calendar**
+
+**MSS**
+
+1. User requests to navigate forward in the calendar.
+2. TAB moves forward in the calendar.
+
+Use case ends.
+
+**Extension**
+
+* 1a. Calendar is not displayed.
+
+  * 1a1. TAB displays the calendar
+
+  Use case resumes at step 2.
+
+**Use case: UC19 – Navigate backwards in the calendar**
+
+**MSS**
+
+1. User requests to navigate backwards in the calendar.
+2. TAB moves backwards in the calendar.
+
+Use case ends.
+
+**Extension**
+
+* 1a. Calendar is not displayed.
+
+  * 1a1. TAB displays the calendar
+
+  Use case resumes at step 2.
+
+**Use case: UC20 – Navigate to today in the calendar**
+
+**MSS**
+
+1. User requests to navigate to today in the calendar.
+2. TAB moves to today the calendar.
+
+Use case ends.
+
+**Extension**
+
+* 1a. Calendar is not displayed.
+
+  * 1a1. TAB displays the calendar
+
+  Use case resumes at step 2.
+
+<br/>
+
+**Use case: UC21 – Clear all data**
+
+**MSS**
+
+1. User requests clear all data.
+2. TAB clears all data.
+
+Use case ends.
+
 <br/>
 
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed
 2. The response to any user action should become visible within 2 seconds
-3. Should be able to hold up to 50 students and 50 lessons without a noticeable sluggishness in performance for typical usage
+3. Should be able to hold up to 50 students and 50 lessons without a noticeable sluggishness in performance for typical usage (actions should not exceed 2 seconds)
 4. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse
 5. The source code should be open source
 6. The product is offered as a free service
@@ -1288,7 +1424,6 @@ Use case ends.
 9. All features should be easily testable
 10. Should be portable, i.e. user can transfer data from one device to another easily
 11. Should allow users to easily navigate the app interface
-
 
 ## Appendix B: Glossary
 
@@ -1299,7 +1434,7 @@ Use case ends.
 * **Makeup lesson**: A lesson that occurs only once, for a student who has missed a previous lesson.
 * **Mainstream OS**: Windows, Linux, Unix, OS-X.
 * **OOP**: Object-Oriented Programming - a programming paradigm that organizes software design around data, or objects, rather than functions and logic
-* **Private contact detail**: A contact detail that is not meant to be shared with others.
+* **Contact detail**: Information that can be used to make contact with a person. Such information include a person's phone number and email address. 
 * **Recurring lesson**: A lesson that will occur more than once in patterned intervals.
 * **Sequence Diagram**: A UML sequence diagram models the interactions between various entities in a system, in a specific scenario. Modelling such scenarios is useful, for example, to verify the design of the internal interactions is able to provide the expected outcomes (as defined in the Software Engineering for Self-Directed Learners CS2103/T edition [textbook](https://nus-cs2103-ay2122s1.github.io/website/se-book-adapted/index.html)).
 * **Session**: A session begins when the app is started and ends when the app is exited.
@@ -1322,7 +1457,7 @@ testers are expected to do more *exploratory* testing.
 
 **Initial launch**
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
 
    2. Double-click the jar file Expected: Shows the _GUI_ with a set of sample contacts. The window size may not be optimum.
 
@@ -1331,26 +1466,87 @@ testers are expected to do more *exploratory* testing.
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
    2. Re-launch the app by double-clicking the jar file.<br>
-          Expected: The most recent window size and location is retained.
+      Expected: The most recent window size and location is retained.
 
-_{ more test cases …​ }_
+3. Closing all windows
+   
+   1. Open TAB, then open the help window and reminder window.
+  
+   2. Close the TAB window.<br>
+      Expected: All windows should close.
 
-### Deleting a person
+### Deleting a student
 
-**Deleting a person while all persons are being shown<br>**
-Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+**Deleting a student while all persons are being shown<br>**
+Prerequisites: List all students using the `list` command. Multiple students in the list.
 
    * Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First student is deleted from the list. Details of the deleted student shown in the status message.
 
    * Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-   
+      Expected: No student is deleted. Error details shown in the status message.
+
+**Deleting a student after a find command is executed<br>**
+Prerequisites: Filter students with the command `find t/new`. Multiple students in the filtered list.
+
+  * Test case: `delete 1 1`<br>
+    Expected: The first student is removed from the filtered list and the list remains filtered. Details of the deleted contact shown in the status message.
+
 Incorrect delete commands to try: `delete...`
-1. `delete x` where x is larger than the list size<br>
+1. `delete x` where x is larger than the list size
 2. `delete`
 
 Expected: Error details shown in the status message.
+
+### Editing a student
+
+**Editing a student while all students are being shown<br>**
+Prerequisites: List all students using the `list` command. Multiple students in the list.
+   
+  * Test case: `edit 1 n/Alex`<br>
+    Expected: First student is edited to have the name `Alex`. Details of the edited contact shown in the status message.
+    
+  * Test case: `edit 1`<br>
+    Expected: No student is edited. Error details shown in the status message.
+      
+Incorrect edit commands to try: `edit...`
+1. `edit x` where x is larger than the list size
+2. `edit`
+3. `edit 1 2 n/Alex`
+
+### Finding a student
+
+**Finding a student by tag<br>**
+Prerequisites: List all students using the `list` command. Multiple students in the list.
+
+  * Test case: `find t/new t/unpaid cond/any`<br>
+    Expected: All students with either the `NEW` tag or the `UNPAID` tag are shown.
+    
+  * Test case: `find t/new unpaid`<br>
+    Expected: The list is not filtered. Error details shown in the status message.
+
+**Finding a student by student fields<br>**
+Prerequisites: List all students using the `list` command. Multiple students in the list.
+
+  * Test case: `find a/serangoon cond/none`<br>
+    Expected: All students without the address `serangoon` are shown.
+    
+  * Test case: `find n/`<br>
+    Expected: The list is not filtered. Error details shown in the status message.
+
+**Finding a student by lesson fields<br>**
+Prerequisites: List all students using the `list` command. Multiple students in the list with lessons.
+
+  * Test case: `find time/1400-1900`<br>
+    Expected: All students with at least one lesson overlapping with the time range `1400-1900` will be shown.
+    
+  * Test case: `find date/20 oct 2021 12 nov 2021`<br>
+    Expected: The list is not filtered. Error details shown in the status message.
+
+Incorrect find commands to try: `find...`
+1. `find cond/every`
+2. `find`
+3. `find time/1200-1000`
 
 ### Adding a lesson
 
@@ -1432,11 +1628,23 @@ Expected: Error details will be shown in the status message.
 
 **Navigating the Calendar**
 
+   * Test case: `day`<br>
+     Expected: `CenterPanel` displays the day page of the Calendar Interface. 
+   
    * Test case: `week`<br>
      Expected: `CenterPanel` displays the week page of the Calendar Interface. 
    
+   * Test case: `month`<br>
+     Expected: `CenterPanel` displays the month page of the Calendar Interface. 
+   
+   * Test case: `year`<br>
+     Expected: `CenterPanel` displays the year page of the Calendar Interface. 
+   
    * Test case: `next`<br>
      Expected: `CenterPanel` displays the Calendar Interface and navigates forward in the calendar.
+
+   * Test case: `back`<br>
+     Expected: `CenterPanel` displays the Calendar Interface and navigates backwards in the calendar.
    
    * Test case: `today`<br>
      Expected: `CenterPanel` displays the Calendar Interface and jumps to the current day/week/month/year.
@@ -1457,8 +1665,7 @@ the most used page.
   * Expected: `CenterPanel` displays the list of **all** students.
 
   * Test case: `view 2`
-  * Expected: If there is a second student, this command will select and shows the lessons of the second student
-    (selecting the student in the GUI should do the same thing).
+  * Expected: If there is a second student, this command will select and show the lessons of the second student.
     Otherwise, it will show an error message for trying to view a non-existent student 
     ("The student index provided is invalid!").
 
@@ -1475,18 +1682,28 @@ the most used page.
 
 ### Shortcuts
 
-**Typing from anywhere in Tab:**
-  
+**Typing from anywhere in Tab:**<br>
+Prerequisites: The main window of TAB is in focus.
+
    * Test case: 
      1. Click anywhere on the main window outside the CommandBox, such that it is no longer in focus.
-     2. Begin typing any command.
-   * Expected: CommandBox shifts back to focus, allowing you to type in it without having to click on it again.
-   
+     2. Begin a command, e.g., `view 2`.
+   * Expected: Alphabets, numeric keys, punctuations, spaces and backspaces will cause the CommandBox to shift back to focus, 
+     allowing you to type in it without having to click on it again.
+
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Note:**
+It is expected that special keys that have functions other than for typing will **NOT** cause the CommandBox to grab focus.
+We only grab focus when you're undoubtedly typing a valid string. E.g., <kbd>Enter</kbd> presses a button if it is in focus.
+We do **not** want to take focus away from that button.
+</div>
+
 **Going back to the previous commands:**<br>
 Prerequisites: Have a previous command entered, and an empty CommandBox in focus.
    
    * Test case: <kbd>Ctrl</kbd> + <kbd>z</kbd> 
-   * Expected: Brings back the previous command entered into the CommandBox.
+   * Expected: Brings back the previous command entered into the CommandBox (if there is any in the current session).
      
 <div markdown="span" class="alert alert-primary">
 
@@ -1494,10 +1711,23 @@ Prerequisites: Have a previous command entered, and an empty CommandBox in focus
 <kbd>Ctrl</kbd> + <kbd>z</kbd> is **NOT** a shortcut for the `undo` command.
 </div>
 
-**Function Key Accelerators:**
+**Function Key Accelerators:**<br>
+Prerequisites: The main window of TAB is in focus.
 
   * Test case: <kbd>F1</kbd>
-  * Expected: Help window gets opened/focused
+  * Expected: Help window gets opened/focused.
+
+  * Test case: <kbd>F2</kbd>
+  * Expected: `CenterPanel` displays the list of students and lessons (displays the `PersonGridPanel`).
+
+  * Test case: <kbd>F3</kbd>
+  * Expected: `CenterPanel` displays the calendar interface (`SchedulePanel`).
+
+  * Test case: <kbd>F4</kbd>
+  * Expected: `CenterPanel` displays the list of tags (`TagListPanel`).
+
+  * Test case: <kbd>F5</kbd>
+  * Expected: Reminder window gets opened/focused.
   
 ### Viewing reminder
 
@@ -1568,11 +1798,21 @@ Suppose the date today is 6 Nov 2021 and current time is 1800 hours,
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+**Dealing with missing data files<br>**
+* Test case: The data folder does not have the file `addressbook.json`. Open TAB.<br>
+  Expected: TAB creates the `addressbook.json` file with sample data.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+**Dealing with corrupted data files<br>**
+Prerequisites: `addressbook.json` has an initial list of students.
+* Test case: 
+  1. Edit `addressbook.json` such that the name of a student is empty, e.g. `name: ""`
+  2. Open TAB.<br>
+  Expected: TAB shows no students. Person list has been reset to empty.
+      
+* Test case:
+  1. Edit `addressbook.json` such that the two students have the same name.
+  2. Open TAB.<br>
+  Expected: TAB shows no students. Person list has been reset to empty.
 
 ## **Appendix D: Efforts**
 
