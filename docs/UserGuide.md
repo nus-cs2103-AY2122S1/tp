@@ -538,7 +538,7 @@ for an appointment.
 * [`TIME`](#time)
 * [`VENUE`](#venue)
 
-![Appointment](images/UG-Screenshots/AppointmentUGScreenshot.PNG)
+![Appointment](images/addappointment.png)
 
 <div markdown="span" class="alert alert-primary">:warning:
 The `DATE` of the appointment must at least be specified.
@@ -617,7 +617,7 @@ This CANNOT be undone!
 You can mark the appointment with your client as completed.
 This also allows you to keep track of the number of completed appointments with your client.
 
-![markAppointment](images/UG-Screenshots/MarkAppointmentUGScreenshot.PNG)
+![markAppointment](images/markappointment.png)
 
 **Format**: `ma INDEX`
 * Update the completed appointment count with the client at the specified `INDEX` if the appointment exist.
