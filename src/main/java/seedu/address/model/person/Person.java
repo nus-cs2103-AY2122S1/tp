@@ -402,7 +402,6 @@ public class Person implements HasUniqueId, Attendee,
 
     @Override
     public String toString() {
-        // TODO: Add individual exams in exams list to string representation!
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
                 .append("; Phone: ")

@@ -54,11 +54,35 @@ Let us
 
 ### Managing Students
 
-// to be added
+Since the goal is to manage students, let's start by adding a new student to the address book.
+Let's try adding a student with the following details:
+* Name: David
+* Phone Number: 90001111
+* Email: david@gmail.com
+* Address: Singapore
 
-3. Type `student -v 5` in the Command Panel and hit `Enter`
+1. Type the command `student -a n/David p/90001111 e/david@gmail.com a/Singapore` and hit `Enter`.
+   * This adds a student with the details specified.
+   * You will now be able to see __David__ at the entry in the person panel on the left,
+   as shown in the image below.
+
+<br> <-- insert image here --> Just added David.
+
+2. Now lets try editing his address. Note the index number beside his name in the person panel, in this case it is 5.<br>
+   Type the following command `student -e 5 a/Kent Ridge` and hit `Enter`.
+   * This updates the address of David, who is at index __5__ to "Kent Ridge".
+   * Note that the other details are unchanged, you can choose which fields you want to edit.
+    
+
+3. You can add a lesson to David. Let's assign a __Math__ lesson from __10:00__ to __12:00__ on __Friday__. <br>
+   Type the following command `student -al 5 s/Math st/10:00 et/12:00 d/Fri` and hit `Enter`.
+   * This adds a lesson to David with the given details.
+   * You can view your schedule for the week by entering `schedule`, try it!
+
+
+4. If you wish to view more details of a student, you can use the student view command.<br>
+   Type `student -v 5` in the Command Panel and hit `Enter`.
     * Displays the student at `INDEX` 5 in the "Viewing Panel"
-      ![View David](images/imagesInUG/student-viewDavid.png)
 
 ### Managing Groups
 
@@ -579,6 +603,10 @@ Examples:
 --------------------------------------------------------------------------------------------------------------------
 ### Others
 
+#### Viewing schedule : `schedule`
+
+Views the current lesson schedule for the week.
+
 #### Viewing help : `help`
 
 Views a info page for a list of commands and examples
@@ -654,6 +682,7 @@ Action | Format, Examples
 **Unassign a task from a group** | `task -unag GROUPINDEX TASKINDEX` <br> e.g., `task -unag 2 4`
 **Mark task as done by student** | `task -do STUDENTINDEX TASKINDEX` <br> e.g., `task -do 2 4`
 **Mark task as not done by student** | `task -undo STUDENTINDEX TASKINDEX` <br> e.g., `task -undo 2 4`
+**Schedule** | `schedule`
 **Help** | `help`
 **Clear all entries** | `clear`
 **Exit** | `exit`
