@@ -1,15 +1,9 @@
-package seedu.address.model.tuiton;
+package seedu.address.model.tuition;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
-
-import seedu.address.model.tuition.ClassLimit;
-import seedu.address.model.tuition.ClassName;
-import seedu.address.model.tuition.Timeslot;
-import seedu.address.model.tuition.TuitionClass;
-
 
 
 public class TuitionClassTest {
