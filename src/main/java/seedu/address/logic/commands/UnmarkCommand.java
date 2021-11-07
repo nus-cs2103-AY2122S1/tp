@@ -12,7 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Marks an applicant as "Not Done" identified using it's displayed index from the address book.
+ * Unmarks an applicant to "Not Done" identified using it's displayed index from the address book.
  */
 public class UnmarkCommand extends MarkingCommand {
 
@@ -29,6 +29,11 @@ public class UnmarkCommand extends MarkingCommand {
 
     private final Index[] targetIndexes;
 
+    /**
+     * Constructor for UnmarkCommand.
+     *
+     * @param targetIndexes Array of indexes corresponding to the applicants to unmark.
+     */
     public UnmarkCommand(Index[] targetIndexes) {
         this.targetIndexes = targetIndexes;
     }
@@ -40,14 +45,14 @@ public class UnmarkCommand extends MarkingCommand {
 
         StringBuilder result = new StringBuilder();
 
-        boolean unmarkingUnmarkedPerson;
+        boolean hasBeenUnmark;
         for (Index checkIndex : targetIndexes) {
             if (checkIndex.getZeroBased() >= lastShownList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
             Person personToCheck = lastShownList.get(checkIndex.getZeroBased());
-            unmarkingUnmarkedPerson = model.checkForUnmarkedPerson(personToCheck);
-            if (unmarkingUnmarkedPerson) {
+            hasBeenUnmark = model.checkForUnmarkedPerson(personToCheck);
+            if (hasBeenUnmark) {
                 throw new CommandException(MESSAGE_UNMARKING_UNMARKED_PERSON);
             }
         }

@@ -29,6 +29,11 @@ public class MarkCommand extends MarkingCommand {
 
     private final Index[] targetIndexes;
 
+    /**
+     * Constructor for MarkCommand.
+     *
+     * @param targetIndexes Array of indexes corresponding to the applicants to mark.
+     */
     public MarkCommand(Index[] targetIndexes) {
         this.targetIndexes = targetIndexes;
     }
@@ -40,14 +45,14 @@ public class MarkCommand extends MarkingCommand {
 
         StringBuilder result = new StringBuilder();
 
-        boolean markingMarkedPerson;
+        boolean hasBeenMark;
         for (Index checkIndex : targetIndexes) {
             if (checkIndex.getZeroBased() >= lastShownList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
             Person personToCheck = lastShownList.get(checkIndex.getZeroBased());
-            markingMarkedPerson = model.checkForMarkedPerson(personToCheck);
-            if (markingMarkedPerson) {
+            hasBeenMark = model.checkForMarkedPerson(personToCheck);
+            if (hasBeenMark) {
                 throw new CommandException(MESSAGE_MARKING_MARKED_PERSON);
             }
         }
