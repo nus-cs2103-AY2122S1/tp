@@ -305,7 +305,6 @@ note of it so that you can provide him with extra practice. To do so, you can ea
 Now, the next time you open TutorAid, you will be able to see Alex's latest progress note at a glance!
 
 > :bulb: You will be able to add up to **10** such progress notes for each student. When you attempt to add an 11th note, your very first note will be automatically deleted, and your new note will be added in. <br>
-> We support up to just 10 notes to ensure that the progress notes for each student are easy to view and manage.
 
 ### 4.5: Deleting a student
 {:.no_toc}
@@ -431,6 +430,9 @@ Format: `add -p STUDENT_INDEX PROGRESS`
 * Adds `PROGRESS` for the student at the specified `STUDENT_INDEX`.
 * The index refers to the index number shown in the Student Panel.
 * The index **must be a positive integer** 1, 2, 3, …​
+* Up to 10 progress notes can be added for each student. If a 11th progress note is added, the oldest note will be deleted before adding the new note to the student.
+
+> :bulb: We support up to just 10 notes to ensure that the progress notes for each student are easy to view and manage.
 
 Examples:
 * `list` followed by `add -p 2 completed homework` adds `completed homework` to the 2nd student displayed in the Student Panel.
