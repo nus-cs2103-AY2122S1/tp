@@ -1247,7 +1247,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding a position to MrTechRecruiter
    1. Prerequisites: -
-   2. Test case: `add-position tit/tester desc/test codes`<br>
+   2. Test case: `add-position tit/tester des/test codes`<br>
       Expected: The position `tester` is added to MTR. The detailed information is shown in the status message.
    3. Test case (followed by the previous test case): `add-position tit/tester desc/testing`<br>
       Expected: An error message will show, indicating that the position `tester` already exists in MTR.
@@ -1255,7 +1255,7 @@ testers are expected to do more *exploratory* testing.
 ### Editing a position
 1. Editing a position in MrTechRecruiter. 
    1. Prerequisites: There is at least one position in MTR. Assume there are two positions, `software engineer` at index `1` and `tester` at index `2`
-   2. Test case: `edit-position 1 tit/data engineer desc/create data pipeline`<br>
+   2. Test case: `edit-position 1 tit/data engineer des/create data pipeline`<br>
       Expected: The title of the position is changed to `data engineer`, and the description is also changed. 
    3. Test case: `edit-position 1 tit/tester`<br>
       Expected: An error message will show, indicating that the position `tester` already exists in MTR.
