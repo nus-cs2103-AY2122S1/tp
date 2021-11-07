@@ -175,6 +175,8 @@ Format: `help`
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 ### Toggling between tabs: `toggle` <a name="toggle"/>
 
 Toggles between `Patients` and `Doctors` tab.<br>
@@ -218,7 +220,7 @@ More information about the `toggle` command [here](#toggle).
 
 <img src="images/patientTab.png" width="600">
 
-
+<div style="page-break-after: always;"></div>
 
 ### Adding a patient: `add` <a name="add-patient"/>
 
