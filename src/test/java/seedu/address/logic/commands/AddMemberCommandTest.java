@@ -175,6 +175,16 @@ public class AddMemberCommandTest {
         }
 
         @Override
+        public boolean hasMemberWithSamePhoneNumber(Member member) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasMemberWithSameName(Member member) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasFacility(Facility facility) {
             throw new AssertionError("This method should not be called.");
         }
@@ -241,6 +251,16 @@ public class AddMemberCommandTest {
 
         @Override
         public ObservableList<Facility> getFilteredFacilityList() {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public ObservableList<Member> getInternalMemberList() {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public ObservableList<Facility> getInternalFacilityList() {
             throw new AssertionError("This method should not be called");
         }
 

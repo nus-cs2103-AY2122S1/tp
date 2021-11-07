@@ -62,9 +62,11 @@ public class EditFacilityCommandTest {
         Facility editedFacility = facilityInList.withFacilityName(VALID_FACILITY_NAME_COURT)
                 .withLocation(VALID_LOCATION_COURT).build();
 
-        EditFacilityDescriptor descriptor =
-                new EditFacilityDescriptorBuilder().withFacilityName(VALID_FACILITY_NAME_COURT)
-                        .withLocation(VALID_LOCATION_COURT).build();
+        // Name and location fields specified
+        EditFacilityDescriptor descriptor = new EditFacilityDescriptorBuilder()
+                .withFacilityName(VALID_FACILITY_NAME_COURT)
+                .withLocation(VALID_LOCATION_COURT).build();
+
         EditFacilityCommand command = new EditFacilityCommand(indexLastFacility, descriptor);
 
         String expectedMessage = String.format(EditFacilityCommand.MESSAGE_EDIT_FACILITY_SUCCESS, editedFacility);
@@ -106,8 +108,12 @@ public class EditFacilityCommandTest {
     }
 
     @Test
-    public void execute_unfilteredListCapacityBelowNumberOfAllocations_clearsAllocation() {
+    public void execute_capacityBelowNumberOfAllocationsUnfilteredList_clearsAllocation() {
         Model model = new ModelManager(new SportsPa(), new UserPrefs());
+        model.addMember(AMY);
+        model.addMember(BOB);
+
+        // Allocate two members to facility
         Facility facility = new FacilityBuilder(TAMPINES_HUB_FIELD_SECTION_B).build();
         facility.addMemberToFacilityOnDay(AMY, DayOfWeek.MONDAY);
         facility.addMemberToFacilityOnDay(BOB, DayOfWeek.MONDAY);
@@ -116,9 +122,6 @@ public class EditFacilityCommandTest {
                 .withCapacity("1").build();
         editedFacility.removeMemberFromFacilityOnDay(AMY, DayOfWeek.MONDAY);
         editedFacility.removeMemberFromFacilityOnDay(BOB, DayOfWeek.MONDAY);
-
-        model.addMember(AMY);
-        model.addMember(BOB);
 
         Model expectedModel = new ModelManager(model.getSportsPa(), new UserPrefs());
         expectedModel.addFacility(editedFacility);
@@ -233,5 +236,14 @@ public class EditFacilityCommandTest {
 
         // different descriptor -> returns false
         assertFalse(standardCommand.equals(new EditFacilityCommand(INDEX_FIRST, desc2)));
+    }
+
+    @Test
+    public void execute_emptyFacilityList_failure() {
+        Facility editedFacility = new FacilityBuilder().build();
+        EditFacilityDescriptor descriptor = new EditFacilityDescriptorBuilder(editedFacility).build();
+        model.updateFilteredFacilityList(Model.PREDICATE_SHOW_NO_FACILITIES);
+        EditFacilityCommand command = new EditFacilityCommand(INDEX_FIRST, descriptor);
+        assertCommandFailure(command, model, String.format(Messages.MESSAGE_EMPTY_LIST, Messages.MESSAGE_FACILITY));
     }
 }

@@ -23,7 +23,7 @@ Given below are my contributions to the project.
 Updating tests was also more complicated as many of the commands already relied on the existing implementation of CommandResult, thus had to consider an alternative method (i.e. utility methods) to update tests.
   * Pull Request [\#145](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/145)
 
-* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/#breakdown=true&search=yoyociti)
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=W12-1&sort=groupTitle&sortWithin=title&since=2021-09-17&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=YoYoCiti&tabRepo=AY2122S1-CS2103T-W12-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
 
 * **Team Tasks**:
     * Designed initial mockup for SportsPA v1.1

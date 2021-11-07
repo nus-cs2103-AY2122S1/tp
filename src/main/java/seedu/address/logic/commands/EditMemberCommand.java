@@ -67,7 +67,9 @@ public class EditMemberCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Member> lastShownList = model.getFilteredMemberList();
-
+        if (lastShownList.isEmpty()) {
+            throw new CommandException(String.format(Messages.MESSAGE_EMPTY_LIST, Messages.MESSAGE_MEMBER));
+        }
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_MEMBER_DISPLAYED_INDEX);
         }
@@ -75,7 +77,8 @@ public class EditMemberCommand extends Command {
         Member memberToEdit = lastShownList.get(index.getZeroBased());
         Member editedMember = createEditedMember(memberToEdit, editMemberDescriptor);
 
-        if (!memberToEdit.isSameMember(editedMember) && model.hasMember(editedMember)) {
+        if ((!(memberToEdit.hasSamePhoneNumber(editedMember)) && model.hasMemberWithSamePhoneNumber(editedMember))
+                || (!(memberToEdit.hasSameName(editedMember)) && model.hasMemberWithSameName(editedMember))) {
             throw new CommandException(MESSAGE_DUPLICATE_MEMBER);
         }
 

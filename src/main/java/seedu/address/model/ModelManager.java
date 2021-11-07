@@ -123,6 +123,18 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasMemberWithSameName(Member member) {
+        requireNonNull(member);
+        return sportsPa.hasMemberWithSameName(member);
+    }
+
+    @Override
+    public boolean hasMemberWithSamePhoneNumber(Member member) {
+        requireNonNull(member);
+        return sportsPa.hasMemberWithSamePhoneNumber(member);
+    }
+
+    @Override
     public boolean hasFacility(Facility facility) {
         requireNonNull(facility);
         return sportsPa.hasFacility(facility);
@@ -285,6 +297,9 @@ public class ModelManager implements Model {
         return filteredMembers;
     }
 
+    public ObservableList<Member> getInternalMemberList() {
+        return sportsPa.getMemberList();
+    }
     @Override
     public void updateFilteredMemberList(Predicate<Member> predicate) {
         requireNonNull(predicate);
@@ -316,6 +331,11 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Facility> getFilteredFacilityList() {
         return filteredFacilities;
+    }
+
+    @Override
+    public ObservableList<Facility> getInternalFacilityList() {
+        return sportsPa.getFacilityList();
     }
 
     @Override

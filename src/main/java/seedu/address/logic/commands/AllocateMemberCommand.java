@@ -1,6 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_EMPTY_LIST;
+import static seedu.address.commons.core.Messages.MESSAGE_FACILITY;
+import static seedu.address.commons.core.Messages.MESSAGE_MEMBER;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.DayOfWeek;
@@ -49,6 +52,12 @@ public class AllocateMemberCommand extends Command {
         requireNonNull(model);
         List<Member> lastShownMemberList = model.getFilteredMemberList();
         List<Facility> lastShownFacilityList = model.getFilteredFacilityList();
+        if (lastShownMemberList.isEmpty()) {
+            throw new CommandException(String.format(MESSAGE_EMPTY_LIST, MESSAGE_MEMBER));
+        }
+        if (lastShownFacilityList.isEmpty()) {
+            throw new CommandException(String.format(MESSAGE_EMPTY_LIST, MESSAGE_FACILITY));
+        }
         if (memberIndex.getOneBased() > lastShownMemberList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_MEMBER_DISPLAYED_INDEX);
         }
@@ -76,7 +85,7 @@ public class AllocateMemberCommand extends Command {
 
         String dayName = day.getDisplayName(TextStyle.FULL, Locale.getDefault());
         return new CommandResult(String.format(MESSAGE_SUCCESS, toBeAllocated.getName(),
-                toAllocate.getName(), dayName));
+                toAllocate.getName(), dayName), false, true, false);
     }
 
     @Override

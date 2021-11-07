@@ -80,42 +80,42 @@ public class SportsPaParserTest {
     }
 
     @Test
-    public void parseCommand_clear() throws Exception {
+    public void parseCommand_clearMembers() throws Exception {
         assertTrue(parser.parseCommand(ClearMembersCommand.COMMAND_WORD, aliases) instanceof ClearMembersCommand);
         assertTrue(parser.parseCommand(ClearMembersCommand.COMMAND_WORD + " 3", aliases)
                 instanceof ClearMembersCommand);
     }
 
     @Test
-    public void parseCommand_cleara() throws ParseException {
+    public void parseCommand_clearAttendance() throws ParseException {
         assertTrue(parser.parseCommand(ClearAttendanceCommand.COMMAND_WORD, aliases) instanceof ClearAttendanceCommand);
         assertTrue(parser.parseCommand(ClearAttendanceCommand.COMMAND_WORD
                 + " 1", aliases) instanceof ClearAttendanceCommand);
     }
 
     @Test
-    public void parseCommand_clearf() throws Exception {
+    public void parseCommand_clearFacilities() throws Exception {
         assertTrue(parser.parseCommand(ClearFacilitiesCommand.COMMAND_WORD, aliases) instanceof ClearFacilitiesCommand);
         assertTrue(parser.parseCommand(ClearFacilitiesCommand.COMMAND_WORD + " 3", aliases)
                 instanceof ClearFacilitiesCommand);
     }
 
     @Test
-    public void parseCommand_delete() throws Exception {
+    public void parseCommand_deleteMember() throws Exception {
         DeleteMemberCommand command = (DeleteMemberCommand) parser.parseCommand(
                 DeleteMemberCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased(), aliases);
         assertEquals(new DeleteMemberCommand(INDEX_FIRST), command);
     }
 
     @Test
-    public void parseCommand_deletef() throws Exception {
+    public void parseCommand_deleteFacility() throws Exception {
         DeleteFacilityCommand command = (DeleteFacilityCommand) parser.parseCommand(
                 DeleteFacilityCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased(), aliases);
         assertEquals(new DeleteFacilityCommand(INDEX_FIRST), command);
     }
 
     @Test
-    public void parseCommand_edit() throws Exception {
+    public void parseCommand_editMember() throws Exception {
         Member member = new MemberBuilder().build();
         EditMemberCommand.EditMemberDescriptor descriptor = new EditMemberDescriptorBuilder(member).build();
         EditMemberCommand command = (EditMemberCommand) parser.parseCommand(EditMemberCommand.COMMAND_WORD + " "
@@ -124,7 +124,7 @@ public class SportsPaParserTest {
     }
 
     @Test
-    public void parseCommand_editf() throws Exception {
+    public void parseCommand_editFacility() throws Exception {
         Facility facility = new FacilityBuilder().build();
         EditFacilityCommand.EditFacilityDescriptor descriptor = new EditFacilityDescriptorBuilder(facility).build();
         EditFacilityCommand command = (EditFacilityCommand) parser.parseCommand(
@@ -166,13 +166,13 @@ public class SportsPaParserTest {
     }
 
     @Test
-    public void parseCommand_listm() throws Exception {
+    public void parseCommand_listMembers() throws Exception {
         assertTrue(parser.parseCommand(ListMemberCommand.COMMAND_WORD, aliases) instanceof ListMemberCommand);
         assertTrue(parser.parseCommand(ListMemberCommand.COMMAND_WORD + " 3", aliases) instanceof ListMemberCommand);
     }
 
     @Test
-    public void parseCommand_listf() throws Exception {
+    public void parseCommand_listFaclities() throws Exception {
         assertTrue(parser.parseCommand(ListFacilityCommand.COMMAND_WORD, aliases) instanceof ListFacilityCommand);
         assertTrue(parser.parseCommand(
                 ListFacilityCommand.COMMAND_WORD + " 3", aliases) instanceof ListFacilityCommand);
@@ -189,30 +189,6 @@ public class SportsPaParserTest {
         AddAliasCommand command = (AddAliasCommand) parser
                 .parseCommand(AddAliasCommand.COMMAND_WORD + " s/lf cw/listf", aliases);
         assertEquals(new AddAliasCommand(new Alias(new Shortcut("lf"), new CommandWord("listf"))), command);
-    }
-
-    @Test
-    public void parseCommand_listfInputIsAnAlias_success() throws Exception {
-        String alias = "lf";
-        AliasMap aliases = new AliasMap();
-        aliases.add(new Alias(new Shortcut(alias), new CommandWord("listf")));
-        ListFacilityCommand command = (ListFacilityCommand) parser.parseCommand(alias, aliases);
-        assertTrue(command instanceof ListFacilityCommand);
-    }
-
-    @Test
-    public void parseCommand_addmInputIsAnAlias_success() throws Exception {
-        String alias = "af";
-        AliasMap aliases = new AliasMap();
-        aliases.add(new Alias(new Shortcut(alias), new CommandWord("addf")));
-        Facility facility = new FacilityBuilder()
-                .withFacilityName("Court 1")
-                .withLocation("University Sports Hall")
-                .withCapacity("5")
-                .withTime("1130").build();
-        AddFacilityCommand command = (AddFacilityCommand) parser.parseCommand("af "
-                + "n/Court 1 l/University Sports Hall t/1130 c/5", aliases);
-        assertEquals(new AddFacilityCommand(facility), command);
     }
 
     @Test
@@ -244,9 +220,32 @@ public class SportsPaParserTest {
     }
 
     @Test
-    public void parseCommand_sortm() throws Exception {
+    public void parseCommand_sortMembers() throws Exception {
         assertTrue(parser.parseCommand(SortMemberCommand.COMMAND_WORD + " by/name", aliases)
                 instanceof SortMemberCommand);
+    }
+
+    @Test
+    public void parseCommand_listfInputIsAnAlias_success() throws Exception {
+        String shortcut = "lf";
+        AliasMap aliases = new AliasMap();
+        aliases.add(new Alias(new Shortcut(shortcut), new CommandWord("listf")));
+        assertTrue(parser.parseCommand(shortcut, aliases) instanceof ListFacilityCommand);
+    }
+
+    @Test
+    public void parseCommand_addmInputIsAnAlias_success() throws Exception {
+        String alias = "af";
+        AliasMap aliases = new AliasMap();
+        aliases.add(new Alias(new Shortcut(alias), new CommandWord("addf")));
+        Facility facility = new FacilityBuilder()
+                .withFacilityName("Court 1")
+                .withLocation("University Sports Hall")
+                .withCapacity("5")
+                .withTime("1130").build();
+        AddFacilityCommand command = (AddFacilityCommand) parser.parseCommand("af "
+                + "n/Court 1 l/University Sports Hall t/1130 c/5", aliases);
+        assertEquals(new AddFacilityCommand(facility), command);
     }
 
     @Test

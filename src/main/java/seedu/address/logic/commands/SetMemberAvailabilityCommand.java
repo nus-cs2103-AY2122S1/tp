@@ -2,7 +2,9 @@ package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -46,13 +48,17 @@ public class SetMemberAvailabilityCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         List<Member> lastShownList = model.getFilteredMemberList();
-        StringBuilder names = new StringBuilder();
+        if (lastShownList.isEmpty()) {
+            throw new CommandException(String.format(Messages.MESSAGE_EMPTY_LIST, Messages.MESSAGE_MEMBER));
+        }
 
         for (Index i : indices) {
             if (i.getZeroBased() >= lastShownList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_MEMBER_DISPLAYED_INDICES);
             }
         }
+
+        List<Member> membersToEdit = new ArrayList<>();
 
         for (Index i : indices) {
             Member memberToEdit = lastShownList.get(i.getZeroBased());
@@ -61,11 +67,13 @@ public class SetMemberAvailabilityCommand extends Command {
                     memberToEdit.getTotalAttendance(), memberToEdit.getTags());
 
             model.setMember(memberToEdit, editedMember);
-            names.append(lastShownList.get(i.getZeroBased()).getName());
-            names.append(", ");
+            membersToEdit.add(lastShownList.get(i.getZeroBased()));
             model.removeMemberFromAllocations(memberToEdit);
         }
         model.updateFilteredMemberList(Model.PREDICATE_SHOW_ALL_MEMBERS);
+
+        String names = membersToEdit.stream().map(member -> member.getName().toString())
+                .collect(Collectors.joining(", "));
 
         return new CommandResult(String.format(MESSAGE_SET_AVAILABILITY_SUCCESS, names, availability),
                 false, false, true);

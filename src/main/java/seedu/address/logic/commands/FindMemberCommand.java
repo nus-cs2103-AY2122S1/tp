@@ -1,10 +1,13 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_EMPTY_LIST;
+import static seedu.address.commons.core.Messages.MESSAGE_MEMBER;
 
 import java.util.function.Predicate;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.member.Member;
 
@@ -30,8 +33,11 @@ public class FindMemberCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        if (model.getInternalMemberList().isEmpty()) {
+            throw new CommandException(String.format(MESSAGE_EMPTY_LIST, MESSAGE_MEMBER));
+        }
         model.updateFilteredMemberList(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_MEMBERS_LISTED_OVERVIEW, model.getFilteredMemberList().size()),
