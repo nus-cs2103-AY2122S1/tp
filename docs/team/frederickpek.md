@@ -18,14 +18,18 @@ Given below are my contributions to the project.
 
 
 * **Enhancements Implemented**
-  * Enhancements to the GUI of Track2Gather for `v1.2` - `v1.4` milestones. [#68](https://github.com/AY2122S1-CS2103-W14-2/tp/pull/68), [#132](https://github.com/AY2122S1-CS2103-W14-2/tp/pull/132), [#206](https://github.com/AY2122S1-CS2103-W14-2/tp/pull/206), [#259](https://github.com/AY2122S1-CS2103-W14-2/tp/pull/259)
-    * Notable changes made: Improved `PersonCard` in the ui to dynamically show/hide optional person fields when they are present/empty.
-    * Sample image: <div align="center"><img src="https://user-images.githubusercontent.com/66522537/140643414-7745355d-feae-444e-ad54-9d6b5576fa87.png" width="350"/><br><em>Alexander has no optional fields, headers hidden. Bernice has all optional fields.</em></div>
-    * Justification: Track2Gather is able to save numerous contact details, many of them are optional. By dynamically hiding and displaying these fields only when necessary, we can declutter the ui during usage.
-    * Credits: The initial ui mockup image was created by [Lutfi](https://github.com/luffingluffy) with Figma.
   * Improved edit command to allow for editing newly implemented fields added in `v1.3` milestone. [#85](https://github.com/AY2122S1-CS2103-W14-2/tp/pull/85)
     * Justification: A quality of life improvement for our contact tracing personnels for when they want to edit a field without having to re-enter a person's details.
     * Credits: Code was based on the original AB3 edit command, but significantly modified after to cater for optional used by Track2Gather.
+{::nomarkdown}<div style="page-break-after: always;"></div>{:/}
+
+
+* **Enhancements Implemented Cont.**
+  * Enhancements to the GUI of Track2Gather for `v1.2` - `v1.4` milestones. [#68](https://github.com/AY2122S1-CS2103-W14-2/tp/pull/68), [#132](https://github.com/AY2122S1-CS2103-W14-2/tp/pull/132), [#206](https://github.com/AY2122S1-CS2103-W14-2/tp/pull/206), [#259](https://github.com/AY2122S1-CS2103-W14-2/tp/pull/259)
+    * Notable changes made: Improved `PersonCard` in the ui to dynamically show/hide optional person fields when they are present/empty.
+    * Sample image: {::nomarkdown}<div align="center"><img src="https://user-images.githubusercontent.com/66522537/140643414-7745355d-feae-444e-ad54-9d6b5576fa87.png" width="350"/><br><em>Alexander has no optional fields, headers hidden. Bernice has all optional fields.</em></div>{:/}
+    * Justification: Track2Gather is able to save numerous contact details, many of them are optional. By dynamically hiding and displaying these fields only when necessary, we can declutter the ui during usage.
+    * Credits: The initial ui mockup image was created by [Lutfi](https://github.com/luffingluffy) with Figma.
 
 
 * **Contributions to Team-Based Tasks**
