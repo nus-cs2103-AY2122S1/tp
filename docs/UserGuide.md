@@ -31,9 +31,10 @@ Welcome to LeadsForce's User Guide! Find answers and step-by-step instructions t
     * [5.8 Locating clients by keywords: search](#58-locating-clients-by-keywords--search)
     * [5.9 Filter current list: filter](#59-filter-current-list-by-keywords--filter)
     * [5.10 Clearing all entries: clear](#510-clearing-all-entries--clear)
-    * [5.11 Exiting the program: exit](#511-exiting-the-program--exit)
-    * [5.12 Saving data](#512-saving-the-data)
-    * [5.13 Edit data file](#513-edit-data-file)
+    * [5.11 Getting help](#511-getting-help--help)
+    * [5.12 Exiting the program: exit](#512-exiting-the-program--exit)
+    * [5.13 Saving data](#513-saving-the-data)
+    * [5.14 Edit data file](#514-edit-data-file)
 * [**6. Multiple Address Books Features**](#6-multiple-address-books-feature)
     * [6.1 Create new address book: ab create](#61-create-new-address-book--ab-create)
     * [6.2 Delete existing address book: ab delete](#62-delete-existing-address-book-ab-delete--ab-delete)
@@ -96,7 +97,7 @@ When reading our User Guide, here are some important information to take note of
 
     * **`exit`** : Exits the app.
 
-6. Refer to the [Features](#4-features) below for details of each command.
+6. Refer to the [Features](#5-features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -104,7 +105,7 @@ When reading our User Guide, here are some important information to take note of
 
 This section details the client information that financial advisors can keep track of with LeadsForce. Every client that
 is registered in LeadsForce have the following attributes that has the corresponding type and attribute prefix. The
-attribute prefixs specified here will be used in the commands of several [features](#4-features).
+attribute prefixes specified here will be used in the commands of several [features](#5-features).
 
 Client Attribute | Type of Attribute | Attribute prefix
 -----------------|-----------------|-----------------
@@ -146,7 +147,7 @@ A NextMeeting needs to be inputted in the following format:
 where
 
 * *date* is in the format `dd-MM-yyyy`, where day, month and year are numerical values
-* *startTime* and *endTime* are in `hh:mm` (24 hour format)
+* *startTime* and *endTime* are in `hh:mm` (24-hour format)
 * *location* is a non-empty string
 
 | Example | `m/25-12-2021 (00:00~23:59), Santa's Workshop`|
@@ -180,7 +181,7 @@ application. An overview of LeadsForce's interface is shown below.
 <br> 
 The command view is where you will be able to input commands into LeadsForce. The command view consist of the following components: <br> 
 
-1. **Toolsbar** <br>
+1. **Toolbar** <br>
    • help bar that directs users to LeadsForce's user guide <br>
    • File bar where users can exit the app <br>
    • Address Book bar which allows users to switch between address books <br>
@@ -230,11 +231,9 @@ used in the management of client information and client meetings.
 <div markdown="block" class="alert alert-info">
  <p><img src="images/info_icon.png" width="30"/><b>Notes about the command format:</b></p>
 
-* When `<attribute>` is given, it means that the any *attribute prefix* can be used, with the exception of *client id*
-  in some cases
-* In the format for the commands provided, words which are in `UPPERCASE` refers to the `input` that the user must key
-  in
-* If the inputs are wrapped in curly brackets `{}`, they are inputs that are related to the preceeding attribute prefix
+* When `<attribute>` is given, it means that the any *attribute prefix* can be used, except for *client id* in some cases
+* In the format for the commands provided, words which are in `UPPERCASE` refers to the `input` that the user must key in
+* If the inputs are wrapped in curly brackets `{}`, they are inputs that are related to the preceding attribute prefix
 
 * Inputs in square brackets are optional input:<br>
   e.g. `KEYWORD [OTHER_KEYWORD]` can be in the form of `firstName` or `firstName lastName`
@@ -383,12 +382,13 @@ save manually.
 LeadsForce's data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to
 update data directly by editing that data file.
 
-| <img src="images/warn_icon.png" width="50"/> | If your changes to the data file makes its format invalid, LeadsForce will discard all data and start with an empty data file at the next run.  |
-| --- | --- |
+<div markdown="block" class="alert alert-warning">
+ <p><img src="images/warn_icon.png" width="30"/><b>If your changes to the data file makes its format invalid, LeadsForce will discard all data and start with an empty data file at the next run.:</b></p>
+</div>
 
 ## 6. Multiple Address Books Feature
 
-This section details the multiple address book feature in LeadsForce. Seperate your clients into different address books
+This section details the multiple address book feature in LeadsForce. Separate your clients into different address books
 to better manage your clients!
 
 ### 6.1 Create new address book : `ab create`
@@ -424,6 +424,8 @@ List all the name of all the existing address books
 
 | Format | `ab list` |
 | --- | --- |
+| <img src="images/info_icon.png" width="50"/> | • As long as the first two word in the command is `ab list`, the command will still work regardless of the additional inputs. <br> eg. the command `ab list asdknkjsaf` will still work |
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -443,7 +445,7 @@ vulnerabilities.
 **Q**: Will LeadsForce be consistently updated? <br>
 **A**: Yes, our team is consistently updating LeadsForce to better meet the needs of our user.
 
-**Q**: Can i use LeadsForce on a mobile device? <br>
+**Q**: Can I use LeadsForce on a mobile device? <br>
 **A**: Unfortunately, LeadsForce is only available for use on computers. The team is thinking of implementing a mobile
 version of LeadsForce in the near future so do tuned in to our updates. 🙂
 

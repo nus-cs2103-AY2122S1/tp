@@ -788,9 +788,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Graphical User Interface (GUI)**: A visual way of interacting with a device using a variety of items
 * **Leads**: refers to contact with a potential customer, also known as a “prospect”
 * **Risk Appetite**: level of risk that a lead is prepared to accept in pursuit of his/her objectives, before action is deemed necessary to reduce the risk
-* **Disposable Income**: total cliental income minus cliental current taxes
+* **Disposable Income**: total clientele income minus clientele current taxes
 * **Client list**: the list of clients that is displayed in the GUI
 * **Address Book**: the list of clients where all clients inserted are kept
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## 7. Appendix: Instructions for manual testing
