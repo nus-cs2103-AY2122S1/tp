@@ -168,6 +168,13 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void updateFilteredPersonList() {
+        @SuppressWarnings("unchecked")
+        Predicate<Person> predicate = (Predicate<Person>) onlyFilteredPersons.getPredicate();
+        onlyFilteredPersons.setPredicate(PREDICATE_SHOW_ALL_PERSONS);
+        onlyFilteredPersons.setPredicate(predicate);
+    }
+
     public ObservableList<Person> getViewAllTaskListPersons() {
         return viewAllTaskListPersons;
     }
