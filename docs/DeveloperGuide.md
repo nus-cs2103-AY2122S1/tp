@@ -154,8 +154,8 @@ This section explains the mechanism behind ```DownloadCommand``` used to downloa
 
 The command requires no parameters. ```DownloadCommand``` implements ```DownloadCommand#execute```, that calls
 the relevant methods in ```Model``` to obtain the various statistics. The method ```DownloadCommand#stringListBuilderForTxt```
-is then invoked, to convert the statistics information as a list of strings. The list of strings is then written to 
-the file via ```DownloadCommand#writeToTxt```. 
+is then invoked, to convert the statistics information as a list of strings. The list of strings is then written to
+the file via ```DownloadCommand#writeToTxt```.
 
 This is the sequence diagram of the interactions between ```Logic``` and ```Model``` component for the command.
 
@@ -164,11 +164,11 @@ This is the sequence diagram of the interactions between ```Logic``` and ```Mode
 ### Warning
 
 This section explains the use of ```Warning```, a class which encapsulates a warning that a ```Command``` can give. Specifically,
-it displays a warning dialog to the user, and returns the user's decision to proceed as a boolean value. The ```Command``` triggering 
+it displays a warning dialog to the user, and returns the user's decision to proceed as a boolean value. The ```Command``` triggering
 the ```Warning```  can then decide what to do with the user's decision.
 
-```Warning``` has a static method ```Warning#isUserConfirmingCommand``` that requires a description of the warning as a 
-String, and returns the decision of the user's decision. When ```Warning#isUserConfirmingCommand``` is invoked, it calls 
+```Warning``` has a static method ```Warning#isUserConfirmingCommand``` that requires a description of the warning as a
+String, and returns the decision of the user's decision. When ```Warning#isUserConfirmingCommand``` is invoked, it calls
 ```MainWindow#showWarning```, that will create a new ```WarningWindow``` to display. ```WarningWindow``` has the
 command ```WarningWindow#isUserConfirmingCommand``` that will return the user's decision.
 
@@ -183,8 +183,8 @@ The activity diagram below summarizes how a ```Warning``` should be used within 
 
 #### Design Considerations
 
-Typically, displaying the UI involves executing the command text in ```MainWindow#executeCommand``` and then interpreting the 
-```CommandResult``` to decide what UI changes to make. 
+Typically, displaying the UI involves executing the command text in ```MainWindow#executeCommand``` and then interpreting the
+```CommandResult``` to decide what UI changes to make.
 
 However for the implementation of ```Warning```, the user input in ```UI``` component has to be sent back to the ```Logic```
 component, so that the ```Command``` can decide whether to execute or abort. Displaying ```Warning``` in ```MainWindow#executeCommand```
@@ -193,12 +193,11 @@ will then be too late.
 ##### Aspect: How to obtain User Response from a UI WarningWindow Component
 
 **Alternative 1 (current choice):** create a static method ```MainWindow#showWarning``` to handle ```WarningWindow```
-operations. 
+operations.
 - Pros:
     - Maintains the UI structure of ```MainWindow``` controlling all the smaller UI parts.
 - Cons:
     - A more complex implementation to control ```WanringWindow```
-      
 **Alternative 2:** Have the ```Command``` call a method in ```WarningWindow``` directly.
 - Pros:
     - A more straightforward implementation.
