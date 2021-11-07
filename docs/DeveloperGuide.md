@@ -1127,7 +1127,7 @@ as it will be used in the invoice generation test case.
     1. Test case: `filter guest n/Ale`, filters all guest that name starts with "Ale"
        Expected: Message saying `X guest listed`
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:**Name field is case sensitive
+<div markdown="span" class="alert alert-info">:information_source: **Note:** Name field is case sensitive
 
 </div>
 
