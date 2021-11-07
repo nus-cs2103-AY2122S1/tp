@@ -43,7 +43,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                 throw new ParseException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
             return new FindCommand(ParserUtil
-                    .parseIndex(argMultimap.getValue(PREFIX_DASH_INDEX).get()).getZeroBased());
+                    .parseIndex(argMultimap.getValue(PREFIX_DASH_INDEX).get()).getZeroBased(), predicate);
         }
         if (argMultimap.getValue(PREFIX_DASH_NAME).isPresent()) {
             String[] nameKeywords = argMultimap.getValue(PREFIX_DASH_NAME).get()
