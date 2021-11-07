@@ -1356,19 +1356,6 @@ testers are expected to do more *exploratory* testing.
     * Other incorrect delete commands to try: `delete`, `delete x`, `delete y` (where x is larger than the list size, and y is a negative integer)<br>
       Expected: Similar to previous.
 
-#### Listing all students and lessons
-
-1. Listing all students and lessons when a filtered list of students is shown
-
-    * Prerequisites: A filtered list of students is shown
-
-    * Test case: `list`<br>
-      Exptected: Status message will state that all students and lessons are listed. The student and lesson list will refresh and show all students and lessons.
-
-2. Listing all students and lessons when all students and lessons are shown 
-
-   * Test case: `list`<br>
-      Exptected: Status message will state that all students and lessons are listed. The student and lesson list will refresh and show all students and lessons.
 
 #### Editing a student
 
@@ -1635,7 +1622,7 @@ follow the command format by using `LESSON_INDEX`.
 
 1. Filtering by subject
 
-    * Note: We will be using the `English` subject to conduct manual testing for positive tests.
+    * Note: We will be using the "English" subject to conduct manual testing for positive tests. An english lesson is already provided in the sample data.
 
     * Test case: `filter s/English`<br>
       Expected: Only lessons with subject matching `English` are shown in the lesson list. No lessons shown if none have matching subject. No change to student list. An update message showing the number of lessons found will also be shown in the message box.
@@ -1655,6 +1642,22 @@ follow the command format by using `LESSON_INDEX`.
       
     * Test case: `filter english S1`<br>
       Expected: No filter is applied, and no change to both lists. The message box displays a message alerting the user that the command format inputted is invalid, along with a description of what the filter command does, its parameters, and an example usage.
+      
+
+#### Listing all students and lessons
+
+1. Listing all students and lessons when a filtered list of students is shown
+
+    * Prerequisites: A filtered list of students is shown (refer to [filtering](#filtering) to get a filtered list).
+
+    * Test case: `list`<br>
+      Exptected: Status message will state that all students and lessons are listed. The student and lesson list will refresh and show all students and lessons.
+
+2. Listing all students and lessons when all students and lessons are shown 
+
+   * Test case: `list`<br>
+      Exptected: Status message will state that all students and lessons are listed. The student and lesson list will refresh and show all students and lessons.
+
 
 #### Help
 
