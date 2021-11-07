@@ -341,7 +341,7 @@ Step 2: The user deletes TutorialClass G08 using the `deletec` command. The `del
 of TutorialClass `G08` to `G00`.
 
 ### Tutorial Group Management Features
-This feature is split into two parts. 
+This feature is split into two parts.
 * Adding/removing tutorial group to tutorial class (Contributed by Ngu Yi Yang)
 * Adding/removing student to tutorial group. (Contributed by Zhou Yirui)
 
@@ -355,25 +355,25 @@ ClassMATE allows the user to manage information relevant to the TutorialGroup. A
 #### Current Implementation (Adding/removing tutorial group to tutorial class)
 
 The class `Classmate` facilitates all operations related to tutorial groups. It maintains a
-`UniqueTutorialClassList` containing all tutorial classes, where each class maintains a `UniqueTutorialGroupList` containing its tutorial classes. 
+`UniqueTutorialClassList` containing all tutorial classes, where each class maintains a `UniqueTutorialGroupList` containing its tutorial groups.
 Tutorial groups are identical only if all its attributes, `GroupName`, `ClassCode` and `GroupType` are the same.
-The `Classmate` contains a summary of all the logic of the interaction between tutorial group and tutorial class
-adding tutorial groups to tutorial classes (e.g. `AddGroupCommand`)  executed on the `UniqueTutorialGroupList`, and adding students to tutorial groups.
+`Classmate` contains a summary of all the logic of the interaction between tutorial group and tutorial class such as
+adding tutorial groups to tutorial classes (e.g. `AddGroupCommand`)  executed on the `UniqueTutorialGroupList`.
 
 The following operations are implemented:
 * `Classmate#hasTutorialGroup(TutorialGroup tutorialGroup)` - Checks if tutorial group is in ClassMATE
 * `Classmate#addTutorialGroup(TutorialGroup tutorialGroup)` - Adds tutorial group to ClassMATE
 * `Classmate#removeTutorialGroup(TutorialGroup tutorialGroup)` - Deletes existing tutorial group from ClassMATE
-*  `UniqueTutorialClassList#contains(TutorialGroup toCheck)`  - Checks if tutorial group is in any of the tutorial classes
-*  `UniqueTutorialClassList#add(TutorialGroup toAdd)`  - Adds tutorial group to its respective class
-*  `TutorialClass#getTutorialGroups()`  - Retrieves the list of tutorial groups within the TutorialClass
-*  `TutorialClass#createTestTutorialClass(ClassCode classCode)`  - Creates a dummy tutorial class from the class code of the tutorial group for checking
+* `UniqueTutorialClassList#contains(TutorialGroup toCheck)`  - Checks if tutorial group is in any of the tutorial classes
+* `UniqueTutorialClassList#add(TutorialGroup toAdd)`  - Adds tutorial group to its respective class
+* `TutorialClass#getTutorialGroups()`  - Retrieves the list of tutorial groups within the TutorialClass
+* `TutorialClass#createTestTutorialClass(ClassCode classCode)`  - Creates a dummy tutorial class from the class code of the tutorial group for checking
 
 Given below is an example of how the tutorial group features can be used:
 
 Step 1. The user executes an `addcg gn/1 c/G06 type/OP1` command. The `addcg` command calls `Model#hasTutorialClass()`,
-and the model component checks if the TutorialClass specified by the class code exists, then checks whether the tutorial group already exists
-using `Model#hasTutorialGroup()`and calls `Model#addTutorialGroup()` if it does not.
+and the model component checks if the TutorialClass specified by the class code exists and throws an exception if it does not.
+It then checks whether the tutorial group already exists using `Model#hasTutorialGroup()`and calls `Model#addTutorialGroup()` if it does not.
 
 The checking of whether the tutorial class and tutorial group already exists is done as such:
 `Classmate` calls the `contains` method of its `UniqueTutorialClassList`. This method is overloaded to accept
@@ -383,8 +383,8 @@ to retrieve the tutorial class of the tutorial group it is being added to, so th
 within the `UniqueTutorialClassList` and get its `UniqueTutorialGroupList` using the method `TutorialClass#getTutorialGroups()`
 and from there check whether the tutorial group already exists or not.
 
-Adding of tutorial groups is similar to the checking part in that a tutorial class is created for checking and
-retrieve that tutorial class from the `UniqueTutorialClassList` to add that tutorial group into its `UniqueTutorialGroupList`.
+Adding of tutorial groups is similar; It again finds the tutorial class in the `UniqueTutorialClassList` using its class code
+After retrieving the respective tutorial class, it can then add the tutorial group using `UniqueTutorialClassList#add(TutorialGroup toAdd)`.
 
 This modifies and saves the state of ClassMATE.
 
@@ -398,19 +398,28 @@ During the parsing, a new TutorialGroup instance is created. This `TutorialGroup
 The *Sequence Diagram* below summarizes the aforementioned steps.
 
 ![AddGroupSequenceDiagram](images/AddGroupSequenceDiagram.png)
+![GetTutorialGroupsDiagram](images/GetTutorialGroupsDiagram.png)
 
 #### Design Considerations
 
 #### Aspect: Storing Tutorial Groups as lists
 * Alternative 1 (current choice): Storing tutorial groups in their respective tutorial classes
-    * Pros: Faster when performing find functions and groups are better organised.
+    * Pros: Faster when performing find functions such as finding tutorial groups in a particular class. Tutorials groups are also better organised.
     * Cons: Splitting groups based on a category makes it harder to extend to support filtering groups with a different category from what is implemented.
 
 * Alternative 2: Use a single list to store all tutorial groups.
-    * Pros: Simpler to implement, without the use of multiple lists to store tutorial groups of different types ("OP1" or "OP2").
+    * Pros: Simpler to implement, easier to add or remove tutorial groups.
       Storing tutorial groups as arrays in JSON is less complicated.
     * Cons: Searching or filtering the list of tutorial groups by group types may take a longer time.
-    
+
+### Recommended workflow for setting up ClassMATE
+
+The *Activity Diagram* below provides an example of how users should set up their tutorial classes, tutorial groups and students
+in ClassMATE.
+
+![SetUpActivityDiagram](images/SetUpActivityDiagram.png)
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -452,7 +461,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * `   | user                                       | add a class schedule           | plan my week in advance                                                |
 | `* * *`  | user                                       | view a class' details          | easily check the details of a particular class                         |
 | `* * *`  | user                                       | delete a student               | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | delete a class                 | remove classes that I no longer need                                                                 |
+| `* * *`  | user                                       | delete a class                 | remove classes that I no longer need
 | `* * *`  | user                                       | find a student by name          | locate details of students without having to go through the entire list |
 | `* * *`  | user                                       | find a class by code           | locate details of a class without having to go through the entire list |
 | `* * *`  | user                                       | view all classes               | see which classes I'm taking                                           |
@@ -489,6 +498,35 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. ClassMATE shows an error message.
 
       Use case resumes at step 2.
+
+**Use case: Edit a student**
+
+**MSS**
+
+1.  User requests to list students
+2.  ClassMATE shows a list of students
+3.  User requests to edit a specific student in the list with some parameters
+4.  ClassMATE edits the student
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. ClassMATE shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The given parameter to edit is a Class Code.
+
+    * 3b1. ClassMATE removes all existing tutorial groups of the student.
+
+      Use case resumes at step 4.
 
 **Use case: List students**
 
@@ -551,6 +589,72 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: Add a tutorial group**
+
+**MSS**
+
+1.  User requests to add a tutorial group with the given parameters, Group number, Group type and Class code.
+2.  ClassMATE adds the tutorial class.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. ClassMATE detects an invalid parameter.
+    *  1a1. ClassMATE shows a message informing the user.
+
+  Use case ends.
+
+
+* 1b. The tutorial class that the tutorial group is being added to does not exists.
+    *  1b1. ClassMATE shows a message informing the user.
+
+  Use case ends.
+
+
+* 1c. The tutorial group already exists.
+    *  1c1. ClassMATE shows a message informing the user.
+
+  Use case ends.
+
+**Use case: Add a Student to a Tutorial Group**
+
+**MSS**
+
+1. User lists all the students with `liststu`
+
+2. ClassMATE shows a list of students
+
+3. User requests to add a Student to a Tutorial Group using the parameters INDEX of the Student, Group Number, ClassCode, and Group Type
+
+4. ClassMATE adds the Student to the Tutorial Group
+
+**Extensions**
+
+* 2a. The list is empty.
+  
+  Use case ends.
+
+* 3a. The given Index is invalid.
+  * 3a1. ClassMATE shows an error message.
+    
+  Use case resumes at step 2. 
+
+* 3b. Tutorial Group does not exist.
+  * 3b1. ClassMATE shows an error message.
+    
+  Use case ends.
+
+* 3c. A parameter is invalid.
+  * 3c1. ClassMATE shows an error message.
+    
+  Use case resumes at step 2.
+
+* 3d. Student already belongs to a group of Group Type (i.e. OP1 or OP2).
+  * 3d1. ClassMATE shows an error message.
+
+  Use case resumes at step 2. 
+
 **Use case: Delete Latest Mark from Student**
 
 **MSS**
@@ -603,8 +707,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Private student detail**: A student detail that is not meant to be shared with others
 * **Tutorial class**: A CS2101 tutorial class. Each student can only have up to one tutorial class
 * **Student**: An NUS student taking the CS2101(T) module
-* **Group**: A group is a subsection of the class and contains a few students for the purpose of small activities or group project
-* **Group name**: The name of a group in the CS2101 class, which is specified by a number.
+* **Tutorial group**: A tutorial group is a subsection of the class and contains a few students for the purpose of small activities or group project.
+* **Group number**: The number of a group in the CS2101 class, which is specified by a number.
 * **Class code**: The name of a typical class in for the CS2101 module. E.g. G06.
 * **Group type**: The type of a group in the CS2101 class, which is either OP1 or OP2.
 

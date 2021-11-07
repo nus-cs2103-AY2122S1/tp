@@ -22,8 +22,10 @@ public class GroupTypeTest {
 
     @Test
     public void parseGroupType() {
-        assertEquals(1, GroupType.parseGroupType("OP1"));
-        assertEquals(2, GroupType.parseGroupType("OP2"));
+        String validGroupTypeOne = "OP1";
+        String validGroupTypeTwo = "OP2";
+        assertEquals(1, new GroupType(validGroupTypeOne).parseGroupType());
+        assertEquals(2, new GroupType(validGroupTypeTwo).parseGroupType());
     }
 
     @Test

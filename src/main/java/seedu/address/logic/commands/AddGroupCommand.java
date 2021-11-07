@@ -11,6 +11,9 @@ import seedu.address.model.Model;
 import seedu.address.model.tutorialclass.TutorialClass;
 import seedu.address.model.tutorialgroup.TutorialGroup;
 
+/**
+ * Adds a tutorial group to an existing tutorial class in ClassMATE.
+ */
 public class AddGroupCommand extends Command {
     public static final String COMMAND_WORD = "addcg";
 
@@ -31,7 +34,7 @@ public class AddGroupCommand extends Command {
     private final TutorialClass toAddTutorialClass;
 
     /**
-     * Creates an AddClassCommand to add the specified {@code TutorialGroup}
+     * Creates an AddGroupCommand to add the specified {@code TutorialGroup}
      */
     public AddGroupCommand(TutorialGroup tutorialGroup) {
         requireNonNull(tutorialGroup);
@@ -45,11 +48,11 @@ public class AddGroupCommand extends Command {
         requireNonNull(model);
 
         // check if tutorial class already exists in ClassMATE
-
         if (!model.hasTutorialClass(toAddTutorialClass)) {
             throw new CommandException(MESSAGE_CLASS_DOES_NOT_EXIST);
         }
 
+        // check if tutorial group already exists in ClassMATE
         if (model.hasTutorialGroup(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_GROUP);
         }

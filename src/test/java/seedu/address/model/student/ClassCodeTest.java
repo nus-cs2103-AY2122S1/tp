@@ -48,11 +48,11 @@ public class ClassCodeTest {
         // invalid ClassCode
         assertFalse(ClassCode.isValidClassCode("Today")); // must start with G, followed by 2 digits
         assertFalse(ClassCode.isValidClassCode("12")); // only numbers
-        assertFalse(ClassCode.isValidClassCode("T99")); // first character is G/g
-        assertFalse(ClassCode.isValidClassCode("g001")); // must have 3 digits
+        assertFalse(ClassCode.isValidClassCode("T99")); // first character is G
+        assertFalse(ClassCode.isValidClassCode("g001")); // must have 2 digits
+        assertFalse(ClassCode.isValidClassCode("g99")); // Lower-case G
 
         // valid ClassCode
-        assertTrue(ClassCode.isValidClassCode("G00")); // Upper-case G
-        assertTrue(ClassCode.isValidClassCode("g99")); // Lower-case G
+        assertTrue(ClassCode.isValidClassCode("G04")); // Upper-case G
     }
 }

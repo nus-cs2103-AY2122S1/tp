@@ -1,0 +1,9 @@
+@startuml
+start
+:Add tutorial class;
+:Create student and add to tutorial class;
+:Create and add tutorial group to tutorial class;
+:Add student to tutorial group;
+
+stop
+@enduml

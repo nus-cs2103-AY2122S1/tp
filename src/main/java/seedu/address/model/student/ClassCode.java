@@ -12,12 +12,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 public class ClassCode implements Comparable<ClassCode> {
 
-    public static final String MESSAGE_CONSTRAINTS = "ClassCode must start with G/g, "
+    public static final String MESSAGE_CONSTRAINTS = "ClassCode must start with G, "
             + "followed by a 2-digit non-zero number and it should not be blank";
 
     public static final String MESSAGE_EMPTY_CLASS = "The classcode is invalid. Choose a classcode between G01 and G99";
 
-    public static final String VALIDATION_REGEX = "[G|g]\\d{2}";
+    public static final String VALIDATION_REGEX = "[G]\\d{2}";
 
     public final String value;
 

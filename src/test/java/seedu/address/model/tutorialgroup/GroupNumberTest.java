@@ -6,7 +6,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-
 public class GroupNumberTest {
 
     @Test
@@ -21,7 +20,7 @@ public class GroupNumberTest {
     }
 
     @Test
-    public void isValidName() {
+    public void isValidGroupNumber() {
         // null group name
         assertThrows(NullPointerException.class, () -> GroupNumber.isValidGroupNumber(null));
 

@@ -4,22 +4,26 @@ import static java.lang.Integer.parseInt;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a TutorialGroup's number in the ClassMATE.
+ */
 public class GroupNumber implements Comparable<GroupNumber> {
-    public static final String MESSAGE_CONSTRAINTS = "GroupNumber must be a single digit, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Group number must be a single digit between 1 and 4, "
+            + "and it should not be blank";
 
-    private static final String GROUPNUMBER_REGEX = "\\d";
+    private static final String GROUP_NUMBER_REGEX = "[1-4]";
 
     public final String value;
 
     /**
-     * Constructs an {@code GroupName}.
+     * Constructs an {@code GroupNumber}.
      *
-     * @param groupName A valid groupName.
+     * @param groupNumber A valid groupNumber.
      */
-    public GroupNumber(String groupName) {
-        requireNonNull(groupName);
-        checkArgument(isValidGroupNumber(groupName), MESSAGE_CONSTRAINTS);
-        value = groupName;
+    public GroupNumber(String groupNumber) {
+        requireNonNull(groupNumber);
+        checkArgument(isValidGroupNumber(groupNumber), MESSAGE_CONSTRAINTS);
+        value = groupNumber;
     }
 
     /**
@@ -29,11 +33,16 @@ public class GroupNumber implements Comparable<GroupNumber> {
      * @return Validity of input GroupNumber string.
      */
     public static boolean isValidGroupNumber(String test) {
-        return test.matches(GROUPNUMBER_REGEX);
+        return test.matches(GROUP_NUMBER_REGEX);
     }
 
-    private Integer parseGroupName(String groupName) {
-        return parseInt(groupName);
+    /**
+     * Transforms the group number from a string to its numerical value.
+     *
+     * @return Integer that represents the group.
+     */
+    public Integer parseGroupNumber() {
+        return parseInt(value);
     }
 
     @Override
@@ -55,7 +64,7 @@ public class GroupNumber implements Comparable<GroupNumber> {
 
     @Override
     public int compareTo(GroupNumber groupNumber) {
-        return parseGroupName(this.value).compareTo(parseGroupName(groupNumber.value));
+        return parseGroupNumber().compareTo(groupNumber.parseGroupNumber());
     }
 
 }
