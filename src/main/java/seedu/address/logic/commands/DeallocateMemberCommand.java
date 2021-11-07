@@ -14,7 +14,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.facility.AllocationMap;
 import seedu.address.model.facility.Facility;
-import seedu.address.model.person.Person;
+import seedu.address.model.member.Member;
 
 /**
  * Deallocates a member available on a particular day from a Facility.
@@ -47,22 +47,22 @@ public class DeallocateMemberCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownPersonList = model.getFilteredPersonList();
+        List<Member> lastShownMemberList = model.getFilteredMemberList();
         List<Facility> lastShownFacilityList = model.getFilteredFacilityList();
-        if (memberIndex.getOneBased() > lastShownPersonList.size()) {
+        if (memberIndex.getOneBased() > lastShownMemberList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_MEMBER_DISPLAYED_INDEX);
         }
         if (facilityIndex.getOneBased() > lastShownFacilityList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_FACILITY_DISPLAYED_INDEX);
         }
-        Person toBeDeallocated = lastShownPersonList.get(memberIndex.getZeroBased());
+        Member toBeDeallocated = lastShownMemberList.get(memberIndex.getZeroBased());
         Facility toDeallocate = lastShownFacilityList.get(facilityIndex.getZeroBased());
 
-        if (!toDeallocate.isPersonAllocatedOnDay(toBeDeallocated, day)) {
+        if (!toDeallocate.isMemberAllocatedOnDay(toBeDeallocated, day)) {
             throw new CommandException(Messages.MESSAGE_MEMBER_NOT_ALLOCATED);
         } else {
             AllocationMap updatedAllocationMap = toDeallocate.getAllocationMap();
-            updatedAllocationMap.removePersonOnDay(toBeDeallocated, day);
+            updatedAllocationMap.removeMemberOnDay(toBeDeallocated, day);
             Facility afterDeallocated = new Facility(
                     toDeallocate.getName(), toDeallocate.getLocation(), toDeallocate.getTime(),
                     toDeallocate.getCapacity(), updatedAllocationMap);

@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalSportsPa.getTypicalSportsPa;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,9 +19,9 @@ public class ShowAliasesCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalSportsPa(), new UserPrefs());
         model.addAlias(new Alias(new Shortcut("lf"), new CommandWord("listf")));
-        expectedModel = new ModelManager(model.getAddressBook(), model.getUserPrefs());
+        expectedModel = new ModelManager(model.getSportsPa(), model.getUserPrefs());
     }
 
     @Test

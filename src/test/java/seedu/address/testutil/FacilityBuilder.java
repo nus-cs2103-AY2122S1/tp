@@ -12,7 +12,7 @@ import seedu.address.model.facility.Facility;
 import seedu.address.model.facility.FacilityName;
 import seedu.address.model.facility.Location;
 import seedu.address.model.facility.Time;
-import seedu.address.model.person.Person;
+import seedu.address.model.member.Member;
 
 /**
  * A utility class to help with building Facility objects.
@@ -23,7 +23,7 @@ public class FacilityBuilder {
     public static final String DEFAULT_LOCATION = "Tampines Hub Badminton Hall";
     public static final String DEFAULT_TIME = "1700";
     public static final String DEFAULT_CAPACITY = "5";
-    private Map<DayOfWeek, List<Person>> defaultAllocations = new EnumMap<>(DayOfWeek.class);
+    private Map<DayOfWeek, List<Member>> defaultAllocations = new EnumMap<>(DayOfWeek.class);
 
     private FacilityName facilityName;
     private Location location;
@@ -91,7 +91,7 @@ public class FacilityBuilder {
     /**
      * Sets the {@code AllocationMap} of the {@code Facility} that we are building.
      */
-    public FacilityBuilder withAllocationMap(Map<DayOfWeek, List<Person>> allocationMap) {
+    public FacilityBuilder withAllocationMap(Map<DayOfWeek, List<Member>> allocationMap) {
         this.allocationMap = new AllocationMap(allocationMap);
         return this;
     }

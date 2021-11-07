@@ -3,35 +3,35 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":SportsPaParser" as SportsPaParser LOGIC_COLOR
 participant ":FindMemberCommandParser" as FindMemberCommandParser LOGIC_COLOR
 participant "f:FindMemberCommand" as FindMemberCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
-participant "p:PersonMatchesKeywordsPredicate" as Predicate MODEL_COLOR
+participant "p:MemberMatchesKeywordsPredicate" as Predicate MODEL_COLOR
 participant ":Model" as Model MODEL_COLOR
 end box
 
 box ObservableList UI_COLOR_T2
-participant ":FilteredPersonList" as FilteredList UI_COLOR_T3
+participant ":FilteredMemberList" as FilteredList UI_COLOR_T3
 endbox
 
 [-> LogicManager : execute("findm t/exco)
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("findm t/exco")
-activate AddressBookParser
+LogicManager -> SportsPaParser : parseCommand("findm t/exco")
+activate SportsPaParser
 
 create FindMemberCommandParser
-AddressBookParser -> FindMemberCommandParser
+SportsPaParser -> FindMemberCommandParser
 activate FindMemberCommandParser
 
-FindMemberCommandParser --> AddressBookParser
+FindMemberCommandParser --> SportsPaParser
 deactivate FindMemberCommandParser
 
-AddressBookParser -> FindMemberCommandParser : parse("t/exco")
+SportsPaParser -> FindMemberCommandParser : parse("t/exco")
 activate FindMemberCommandParser
 
 create Predicate
@@ -48,18 +48,18 @@ activate FindMemberCommand
 FindMemberCommand --> FindMemberCommandParser : f
 deactivate FindMemberCommand
 
-FindMemberCommandParser --> AddressBookParser : f
+FindMemberCommandParser --> SportsPaParser : f
 deactivate FindMemberCommandParser
-FindMemberCommandParser -[hidden]-> AddressBookParser : f
+FindMemberCommandParser -[hidden]-> SportsPaParser : f
 destroy FindMemberCommandParser
 
-AddressBookParser --> LogicManager : f
-deactivate AddressBookParser
+SportsPaParser --> LogicManager : f
+deactivate SportsPaParser
 
 LogicManager -> FindMemberCommand : execute(model)
 activate FindMemberCommand
 
-FindMemberCommand -> Model : updateFilteredPersonList(p)
+FindMemberCommand -> Model : updateFilteredMemberList(p)
 activate Model
 Model -> FilteredList : setPredicate(p)
 

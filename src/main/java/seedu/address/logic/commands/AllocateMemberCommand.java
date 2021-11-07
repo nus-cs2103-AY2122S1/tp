@@ -14,7 +14,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.facility.AllocationMap;
 import seedu.address.model.facility.Facility;
-import seedu.address.model.person.Person;
+import seedu.address.model.member.Member;
 
 /**
  * Allocates a member available on a particular day to a Facility.
@@ -47,18 +47,18 @@ public class AllocateMemberCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownPersonList = model.getFilteredPersonList();
+        List<Member> lastShownMemberList = model.getFilteredMemberList();
         List<Facility> lastShownFacilityList = model.getFilteredFacilityList();
-        if (memberIndex.getOneBased() > lastShownPersonList.size()) {
+        if (memberIndex.getOneBased() > lastShownMemberList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_MEMBER_DISPLAYED_INDEX);
         }
         if (facilityIndex.getOneBased() > lastShownFacilityList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_FACILITY_DISPLAYED_INDEX);
         }
-        Person toBeAllocated = lastShownPersonList.get(memberIndex.getZeroBased());
+        Member toBeAllocated = lastShownMemberList.get(memberIndex.getZeroBased());
         Facility toAllocate = lastShownFacilityList.get(facilityIndex.getZeroBased());
 
-        if (toAllocate.isPersonAllocatedOnDay(toBeAllocated, day)) {
+        if (toAllocate.isMemberAllocatedOnDay(toBeAllocated, day)) {
             throw new CommandException(Messages.MESSAGE_MEMBER_ALREADY_ALLOCATED);
         } else if (toAllocate.isMaxCapacityOnDay(day)) {
             throw new CommandException(Messages.MESSAGE_FACILITY_AT_MAX_CAPACITY);
@@ -66,7 +66,7 @@ public class AllocateMemberCommand extends Command {
             throw new CommandException(Messages.MESSAGE_MEMBER_NOT_AVAILABLE);
         } else {
             AllocationMap updatedAllocationMap = toAllocate.getAllocationMap();
-            updatedAllocationMap.addPersonOnDay(toBeAllocated, day);
+            updatedAllocationMap.addMemberOnDay(toBeAllocated, day);
             Facility afterAllocated = new Facility(
                     toAllocate.getName(), toAllocate.getLocation(), toAllocate.getTime(), toAllocate.getCapacity(),
                     updatedAllocationMap);

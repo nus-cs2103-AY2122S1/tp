@@ -4,39 +4,40 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.EditMemberCommand.EditPersonDescriptor;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.logic.commands.EditMemberCommand;
+import seedu.address.logic.commands.EditMemberCommand.EditMemberDescriptor;
+import seedu.address.model.member.Member;
+import seedu.address.model.member.Name;
+import seedu.address.model.member.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
- * A utility class to help with building EditPersonDescriptor objects.
+ * A utility class to help with building EditMemberDescriptor objects.
  */
 public class EditMemberDescriptorBuilder {
 
-    private EditPersonDescriptor descriptor;
+    private EditMemberCommand.EditMemberDescriptor descriptor;
 
     public EditMemberDescriptorBuilder() {
-        descriptor = new EditPersonDescriptor();
+        descriptor = new EditMemberDescriptor();
     }
 
-    public EditMemberDescriptorBuilder(EditPersonDescriptor descriptor) {
-        this.descriptor = new EditPersonDescriptor(descriptor);
+    public EditMemberDescriptorBuilder(EditMemberDescriptor descriptor) {
+        this.descriptor = new EditMemberDescriptor(descriptor);
     }
 
     /**
-     * Returns an {@code EditPersonDescriptor} with fields containing {@code person}'s details
+     * Returns an {@code EditMemberDescriptor} with fields containing {@code member}'s details
      */
-    public EditMemberDescriptorBuilder(Person person) {
-        descriptor = new EditPersonDescriptor();
-        descriptor.setName(person.getName());
-        descriptor.setPhone(person.getPhone());
-        descriptor.setTags(person.getTags());
+    public EditMemberDescriptorBuilder(Member member) {
+        descriptor = new EditMemberCommand.EditMemberDescriptor();
+        descriptor.setName(member.getName());
+        descriptor.setPhone(member.getPhone());
+        descriptor.setTags(member.getTags());
     }
 
     /**
-     * Sets the {@code Name} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Name} of the {@code EditMemberDescriptor} that we are building.
      */
     public EditMemberDescriptorBuilder withName(String name) {
         descriptor.setName(new Name(name));
@@ -44,7 +45,7 @@ public class EditMemberDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Phone} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Phone} of the {@code EditMemberDescriptor} that we are building.
      */
     public EditMemberDescriptorBuilder withPhone(String phone) {
         descriptor.setPhone(new Phone(phone));
@@ -52,7 +53,7 @@ public class EditMemberDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditMemberDescriptor}
      * that we are building.
      */
     public EditMemberDescriptorBuilder withTags(String... tags) {
@@ -61,7 +62,7 @@ public class EditMemberDescriptorBuilder {
         return this;
     }
 
-    public EditPersonDescriptor build() {
+    public EditMemberCommand.EditMemberDescriptor build() {
         return descriptor;
     }
 }

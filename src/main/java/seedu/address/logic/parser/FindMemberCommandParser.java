@@ -7,7 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TODAY_ATTENDANCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TOTAL_ATTENDANCE;
-import static seedu.address.model.person.PersonMatchesKeywordsPredicate.Builder;
+import static seedu.address.model.member.MemberMatchesKeywordsPredicate.Builder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,17 +19,17 @@ import java.util.function.Predicate;
 
 import seedu.address.logic.commands.FindMemberCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Availability;
-import seedu.address.model.person.AvailabilityContainsKeywordsPredicate;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.PhoneContainsKeywordsPredicate;
-import seedu.address.model.person.TodayAttendance;
-import seedu.address.model.person.TodayAttendanceContainsKeywordsPredicate;
-import seedu.address.model.person.TotalAttendance;
-import seedu.address.model.person.TotalAttendanceContainsKeywordsPredicate;
+import seedu.address.model.member.Availability;
+import seedu.address.model.member.AvailabilityContainsKeywordsPredicate;
+import seedu.address.model.member.Member;
+import seedu.address.model.member.Name;
+import seedu.address.model.member.NameContainsKeywordsPredicate;
+import seedu.address.model.member.Phone;
+import seedu.address.model.member.PhoneContainsKeywordsPredicate;
+import seedu.address.model.member.TodayAttendance;
+import seedu.address.model.member.TodayAttendanceContainsKeywordsPredicate;
+import seedu.address.model.member.TotalAttendance;
+import seedu.address.model.member.TotalAttendanceContainsKeywordsPredicate;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagsContainKeywordsPredicate;
 
@@ -56,83 +56,71 @@ public class FindMemberCommandParser implements Parser<FindMemberCommand> {
      * Generates the final predicate to be used for FindMemberCommand
      * @throws ParseException if the user input does not conform the expected format.
      */
-    private Predicate<Person> generatePredicate(String args) throws ParseException {
+    private Predicate<Member> generatePredicate(String args) throws ParseException {
         Builder builder = new Builder();
-        Predicate<Person> predicate = x -> true;
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE,
                 PREFIX_AVAILABILITY, PREFIX_TAG, PREFIX_TODAY_ATTENDANCE, PREFIX_TOTAL_ATTENDANCE);
         if (!argMultimap.getPreamble().trim().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindMemberCommand.MESSAGE_USAGE));
         }
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            predicate = generateNamePredicate(ParserUtil.parseName(argMultimap
-                    .getValue(PREFIX_NAME).get()), builder, predicate);
+            generateNamePredicate(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()), builder);
         }
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            predicate = generatePhonePredicate(ParserUtil.parsePhone(argMultimap
-                    .getValue(PREFIX_PHONE).get()), builder, predicate);
+            generatePhonePredicate(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()), builder);
         }
         if (argMultimap.getValue(PREFIX_AVAILABILITY).isPresent()) {
-            predicate = generateAvailabilityPredicate(ParserUtil.parseAvailability(argMultimap
-                    .getValue(PREFIX_AVAILABILITY).get()), builder, predicate);
+            generateAvailabilityPredicate(ParserUtil.parseAvailability(argMultimap
+                    .getValue(PREFIX_AVAILABILITY).get()), builder);
         }
         if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
-            predicate = generateTagPredicate(parseTags(argMultimap.getAllValues(PREFIX_TAG)).get(), builder, predicate);
+            generateTagPredicate(parseTags(argMultimap.getAllValues(PREFIX_TAG)).get(), builder);
         }
         if (argMultimap.getValue(PREFIX_TODAY_ATTENDANCE).isPresent()) {
-            predicate = generateTodayAttendancePredicate(ParserUtil.parseTodayAttendance(argMultimap
-            .getValue(PREFIX_TODAY_ATTENDANCE).get()), builder, predicate);
+            generateTodayAttendancePredicate(ParserUtil.parseTodayAttendance(argMultimap
+                    .getValue(PREFIX_TODAY_ATTENDANCE).get()), builder);
         }
         if (argMultimap.getValue(PREFIX_TOTAL_ATTENDANCE).isPresent()) {
-            predicate = generateTotalAttendancePredicate(ParserUtil.parseTotalAttendance(argMultimap
-            .getValue(PREFIX_TOTAL_ATTENDANCE).get()), builder, predicate);
+            generateTotalAttendancePredicate(ParserUtil.parseTotalAttendance(argMultimap
+                    .getValue(PREFIX_TOTAL_ATTENDANCE).get()), builder);
         }
-        return builder.setPredicate(predicate).build();
+        return builder.build();
     }
 
-    private Predicate<Person> generateNamePredicate(Name name, Builder builder, Predicate<Person> predicate) {
+    private void generateNamePredicate(Name name, Builder builder) {
         String nameWithNoSpaces = name.toString().toLowerCase().replace("\\s+", "");
         List<String> nameList = new ArrayList<>(Arrays.asList(nameWithNoSpaces));
-        predicate = predicate.and(new NameContainsKeywordsPredicate(nameList));
-        builder.setName(name);
-        return predicate;
+        builder.withName(name);
+        builder.withPredicate(new NameContainsKeywordsPredicate(nameList));
     }
 
-    private Predicate<Person> generatePhonePredicate(Phone phone, Builder builder, Predicate<Person> predicate) {
+    private void generatePhonePredicate(Phone phone, Builder builder) {
         List<Phone> phoneList = new ArrayList<>(Arrays.asList(phone));
-        predicate = predicate.and(new PhoneContainsKeywordsPredicate(phoneList));
-        builder.setPhone(phone);
-        return predicate;
+        builder.withPhone(phone);
+        builder.withPredicate(new PhoneContainsKeywordsPredicate(phoneList));
     }
 
-    private Predicate<Person> generateTagPredicate(List<Tag> tags, Builder builder, Predicate<Person> predicate) {
-        predicate = predicate.and(new TagsContainKeywordsPredicate(tags));
-        builder.setTags(tags);
-        return predicate;
+    private void generateTagPredicate(List<Tag> tags, Builder builder) {
+        builder.withTags(tags);
+        builder.withPredicate(new TagsContainKeywordsPredicate(tags));
     }
 
-    private Predicate<Person> generateAvailabilityPredicate(Availability availability,
-                                                            Builder builder, Predicate<Person> predicate) {
+    private void generateAvailabilityPredicate(Availability availability, Builder builder) {
         List<Availability> availabilityList = new ArrayList<>(Arrays.asList(availability));
-        predicate = predicate.and(new AvailabilityContainsKeywordsPredicate(availabilityList));
-        builder.setAvailability(availability);
-        return predicate;
+        builder.withAvailability(availability);
+        builder.withPredicate(new AvailabilityContainsKeywordsPredicate(availabilityList));
     }
 
-    private Predicate<Person> generateTodayAttendancePredicate(TodayAttendance todayAttendance,
-                                                               Builder builder, Predicate<Person> predicate) {
+    private void generateTodayAttendancePredicate(TodayAttendance todayAttendance, Builder builder) {
         List<TodayAttendance> todayAttendanceList = new ArrayList<>(Arrays.asList(todayAttendance));
-        predicate = predicate.and(new TodayAttendanceContainsKeywordsPredicate(todayAttendanceList));
-        builder.setTodayAttendance(todayAttendance);
-        return predicate;
+        builder.withTodayAttendance(todayAttendance);
+        builder.withPredicate(new TodayAttendanceContainsKeywordsPredicate(todayAttendanceList));
     }
 
-    private Predicate<Person> generateTotalAttendancePredicate(TotalAttendance totalAttendance,
-                                                               Builder builder, Predicate<Person> predicate) {
+    private void generateTotalAttendancePredicate(TotalAttendance totalAttendance, Builder builder) {
         List<TotalAttendance> totalAttendanceList = new ArrayList<>(Arrays.asList(totalAttendance));
-        predicate = predicate.and(new TotalAttendanceContainsKeywordsPredicate(totalAttendanceList));
-        builder.setTotalAttendance(totalAttendance);
-        return predicate;
+        builder.withTotalAttendance(totalAttendance);
+        builder.withPredicate(new TotalAttendanceContainsKeywordsPredicate(totalAttendanceList));
     }
 
     /**

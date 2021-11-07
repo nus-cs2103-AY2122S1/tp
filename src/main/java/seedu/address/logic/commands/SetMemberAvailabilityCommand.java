@@ -8,8 +8,8 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Availability;
-import seedu.address.model.person.Person;
+import seedu.address.model.member.Availability;
+import seedu.address.model.member.Member;
 
 /**
  * Sets the availability of an existing member in the member list.
@@ -33,8 +33,8 @@ public class SetMemberAvailabilityCommand extends Command {
     private final Availability availability;
 
     /**
-     * @param indices of the person in the filtered person list to edit the availability
-     * @param availability of the person to be updated to
+     * @param indices of the member in the filtered member list to edit the availability
+     * @param availability of the member to be updated to
      */
     public SetMemberAvailabilityCommand(List<Index> indices, Availability availability) {
         requireAllNonNull(indices, availability);
@@ -45,7 +45,7 @@ public class SetMemberAvailabilityCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Member> lastShownList = model.getFilteredMemberList();
         StringBuilder names = new StringBuilder();
 
         for (Index i : indices) {
@@ -55,17 +55,17 @@ public class SetMemberAvailabilityCommand extends Command {
         }
 
         for (Index i : indices) {
-            Person personToEdit = lastShownList.get(i.getZeroBased());
-            Person editedPerson = new Person(
-                    personToEdit.getName(), personToEdit.getPhone(), availability, personToEdit.getTodayAttendance(),
-                    personToEdit.getTotalAttendance(), personToEdit.getTags());
+            Member memberToEdit = lastShownList.get(i.getZeroBased());
+            Member editedMember = new Member(
+                    memberToEdit.getName(), memberToEdit.getPhone(), availability, memberToEdit.getTodayAttendance(),
+                    memberToEdit.getTotalAttendance(), memberToEdit.getTags());
 
-            model.setPerson(personToEdit, editedPerson);
+            model.setMember(memberToEdit, editedMember);
             names.append(lastShownList.get(i.getZeroBased()).getName());
             names.append(", ");
-            model.removePersonFromAllocations(personToEdit);
+            model.removeMemberFromAllocations(memberToEdit);
         }
-        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredMemberList(Model.PREDICATE_SHOW_ALL_MEMBERS);
 
         return new CommandResult(String.format(MESSAGE_SET_AVAILABILITY_SUCCESS, names, availability),
                 false, false, true);

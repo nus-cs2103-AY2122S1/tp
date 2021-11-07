@@ -11,6 +11,11 @@ if () then ([command word is an alias])
     actual command word;
 else ([else])
 endif
-:Execute command;
+:Parse command arguments;
+if () then ([command is valid])
+    :Execute command;
+else ([else])
+: Throw ParseException;
+endif
 stop
 @enduml

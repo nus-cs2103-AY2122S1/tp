@@ -1,7 +1,7 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
+import static seedu.address.storage.JsonAdaptedMember.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalFacilities.FIELD;
 import static seedu.address.testutil.TypicalFacilities.KENT_RIDGE_SPORT_HALL_5_COURT_1;
@@ -30,7 +30,7 @@ public class JsonAdaptedFacilityTest {
     private static final String VALID_LOCATION = KENT_RIDGE_SPORT_HALL_5_COURT_1.getLocation().toString();
     private static final String VALID_TIME = KENT_RIDGE_SPORT_HALL_5_COURT_1.getTime().time;
     private static final String VALID_CAPACITY = KENT_RIDGE_SPORT_HALL_5_COURT_1.getCapacity().toString();
-    private static final Map<DayOfWeek, List<JsonAdaptedPerson>> EMPTY_ALLOCATION_MAP = new EnumMap<>(
+    private static final Map<DayOfWeek, List<JsonAdaptedMember>> EMPTY_ALLOCATION_MAP = new EnumMap<>(
             Map.ofEntries(Map.entry(DayOfWeek.MONDAY, new ArrayList<>()),
                     Map.entry(DayOfWeek.TUESDAY, new ArrayList<>()),
                     Map.entry(DayOfWeek.WEDNESDAY, new ArrayList<>()),

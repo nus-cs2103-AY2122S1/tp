@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.member.Member;
 
 /**
  * Finds and lists all members in SportsPA whose name contains any of the argument keywords.
@@ -18,13 +18,13 @@ public class FindMemberCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all members who matches any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE KEYWORDS]...\n"
+            + "Parameters: [n/NAME] [p/PHONE] [d/DAY(S)] [tda/TODAY_ATTENDANCE] [tta/TOTAL_ATTENDANCE] [t/TAG]...\n"
             + "Example: " + COMMAND_WORD + " n/alice t/exco d/1";
 
-    private final Predicate<Person> predicate;
+    private final Predicate<Member> predicate;
 
     /** Creates a {@code FindMemberCommand} object **/
-    public FindMemberCommand(Predicate<Person> predicate) {
+    public FindMemberCommand(Predicate<Member> predicate) {
         requireNonNull(predicate);
         this.predicate = predicate;
     }
@@ -32,9 +32,9 @@ public class FindMemberCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
+        model.updateFilteredMemberList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_MEMBERS_LISTED_OVERVIEW, model.getFilteredPersonList().size()),
+                String.format(Messages.MESSAGE_MEMBERS_LISTED_OVERVIEW, model.getFilteredMemberList().size()),
                 false, false, true);
     }
 

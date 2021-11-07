@@ -12,7 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.model.facility.exceptions.DuplicateFacilityException;
 import seedu.address.model.facility.exceptions.FacilityNotFoundException;
-import seedu.address.model.person.Person;
+import seedu.address.model.member.Member;
 
 /**
  * Represents a list of facilities.
@@ -136,7 +136,7 @@ public class UniqueFacilityList implements Iterable<Facility> {
      * @param members Members to be allocated.
      * @param dayNumber Day on which to allocate the members.
      */
-    public void allocateMembersToFacilitiesOnDay(FilteredList<Person> members, int dayNumber) {
+    public void allocateMembersToFacilitiesOnDay(FilteredList<Member> members, int dayNumber) {
         DayOfWeek day = DayOfWeek.of(dayNumber);
         int index = 0;
         for (Facility facility : facilityList) {
@@ -144,7 +144,7 @@ public class UniqueFacilityList implements Iterable<Facility> {
             toEdit.clearAllocationMapOnDay(day);
 
             while (!toEdit.isMaxCapacityOnDay(day) && !(index > members.size() - 1)) {
-                toEdit.addPersonToFacilityOnDay(members.get(index), day);
+                toEdit.addMemberToFacilityOnDay(members.get(index), day);
                 index++;
             }
             this.setFacility(facility, toEdit);
@@ -187,14 +187,14 @@ public class UniqueFacilityList implements Iterable<Facility> {
     }
 
     /**
-     * Removes a person from all allocations from all facilities.
+     * Removes a member from all allocations from all facilities.
      *
      * @param key Person to be removed from allocations.
      */
-    public void removePersonFromAllocations(Person key) {
+    public void removePersonFromAllocations(Member key) {
         for (Facility facility: facilityList) {
             Facility toEdit = facility;
-            toEdit.removePersonFromFacilityOnAllDays(key);
+            toEdit.removeMemberFromFacilityOnAllDays(key);
             this.setFacility(facility, toEdit);
         }
     }

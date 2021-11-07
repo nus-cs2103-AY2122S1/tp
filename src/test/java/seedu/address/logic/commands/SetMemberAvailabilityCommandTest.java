@@ -7,8 +7,8 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
-import static seedu.address.testutil.TypicalPersons.AMY;
-import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalMembers.AMY;
+import static seedu.address.testutil.TypicalMembers.BOB;
 
 import java.time.DayOfWeek;
 import java.util.ArrayList;
@@ -23,8 +23,8 @@ import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.person.Availability;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.member.Availability;
+import seedu.address.testutil.MemberBuilder;
 
 public class SetMemberAvailabilityCommandTest {
     @Test
@@ -35,12 +35,12 @@ public class SetMemberAvailabilityCommandTest {
     @Test
     public void execute_validIndicesProvided_success() {
         Model model = new ModelManager();
-        model.addPerson(AMY);
-        model.addPerson(BOB);
+        model.addMember(AMY);
+        model.addMember(BOB);
 
         Model expectedModel = new ModelManager();
-        expectedModel.addPerson(new PersonBuilder(AMY).withAvailability("6 7").build());
-        expectedModel.addPerson(new PersonBuilder(BOB).withAvailability("6 7").build());
+        expectedModel.addMember(new MemberBuilder(AMY).withAvailability("6 7").build());
+        expectedModel.addMember(new MemberBuilder(BOB).withAvailability("6 7").build());
         Availability expectedAvailability = new Availability(List.of(DayOfWeek.of(6), DayOfWeek.of(7)));
         SetMemberAvailabilityCommand command = new SetMemberAvailabilityCommand(List.of(INDEX_FIRST, INDEX_SECOND),
                 expectedAvailability);
@@ -53,7 +53,7 @@ public class SetMemberAvailabilityCommandTest {
     @Test
     public void execute_validIndicesAndInvalidIndicesProvided_failure() {
         Model model = new ModelManager();
-        model.addPerson(AMY);
+        model.addMember(AMY);
 
         Availability expectedAvailability = new Availability(List.of(DayOfWeek.of(6), DayOfWeek.of(7)));
         SetMemberAvailabilityCommand command = new SetMemberAvailabilityCommand(List.of(INDEX_FIRST, INDEX_SECOND),

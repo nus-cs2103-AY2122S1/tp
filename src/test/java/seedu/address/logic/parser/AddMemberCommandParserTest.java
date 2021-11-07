@@ -19,51 +19,51 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_EXCO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_Y2;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalPersons.AMY;
-import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalMembers.AMY;
+import static seedu.address.testutil.TypicalMembers.BOB;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddMemberCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.member.Member;
+import seedu.address.model.member.Name;
+import seedu.address.model.member.Phone;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.MemberBuilder;
 
 public class AddMemberCommandParserTest {
     private AddMemberCommandParser parser = new AddMemberCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() throws ParseException {
-        Person expectedPerson = new PersonBuilder(BOB).withTags(VALID_TAG_Y2).build();
+        Member expectedMember = new MemberBuilder(BOB).withTags(VALID_TAG_Y2).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + AVAILABILITY_DESC_BOB
-                        + TAG_DESC_Y2, new AddMemberCommand(expectedPerson));
+                        + TAG_DESC_Y2, new AddMemberCommand(expectedMember));
 
         // multiple names - last name accepted
         assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB + AVAILABILITY_DESC_BOB
-                        + TAG_DESC_Y2, new AddMemberCommand(expectedPerson));
+                        + TAG_DESC_Y2, new AddMemberCommand(expectedMember));
 
         // multiple phones - last phone accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB + AVAILABILITY_DESC_BOB
-                + TAG_DESC_Y2, new AddMemberCommand(expectedPerson));
+                + TAG_DESC_Y2, new AddMemberCommand(expectedMember));
 
         // multiple tags - all accepted
-        Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_EXCO, VALID_TAG_Y2)
+        Member expectedMemberMultipleTags = new MemberBuilder(BOB).withTags(VALID_TAG_EXCO, VALID_TAG_Y2)
                 .build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + AVAILABILITY_DESC_BOB + TAG_DESC_EXCO + TAG_DESC_Y2,
-                new AddMemberCommand(expectedPersonMultipleTags));
+                new AddMemberCommand(expectedMemberMultipleTags));
     }
 
     @Test
     public void parse_optionalTagMissing_success() {
         // zero tags
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+        Member expectedMember = new MemberBuilder(AMY).withTags().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + AVAILABILITY_DESC_AMY,
-                new AddMemberCommand(expectedPerson));
+                new AddMemberCommand(expectedMember));
     }
 
     @Test

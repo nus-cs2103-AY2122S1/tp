@@ -10,7 +10,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_EXCO;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.EditMemberCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditMemberCommand.EditMemberDescriptor;
 import seedu.address.testutil.EditMemberDescriptorBuilder;
 
 public class EditMemberDescriptorTest {
@@ -18,7 +18,7 @@ public class EditMemberDescriptorTest {
     @Test
     public void equals() {
         // same values -> returns true
-        EditPersonDescriptor descriptorWithSameValues = new EditPersonDescriptor(DESC_AMY);
+        EditMemberDescriptor descriptorWithSameValues = new EditMemberDescriptor(DESC_AMY);
         assertTrue(DESC_AMY.equals(descriptorWithSameValues));
 
         // same object -> returns true
@@ -34,7 +34,7 @@ public class EditMemberDescriptorTest {
         assertFalse(DESC_AMY.equals(DESC_BOB));
 
         // different name -> returns false
-        EditPersonDescriptor editedAmy = new EditMemberDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
+        EditMemberDescriptor editedAmy = new EditMemberDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different phone -> returns false

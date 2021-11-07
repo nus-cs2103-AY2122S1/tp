@@ -3,7 +3,7 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":SportsPaParser" as SportsPaParser LOGIC_COLOR
 participant ":ListMembersCommand" as ListMembersCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
@@ -16,28 +16,28 @@ end box
 [-> LogicManager : execute("l")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("l")
-activate AddressBookParser
+LogicManager -> SportsPaParser : parseCommand("l")
+activate SportsPaParser
 
-AddressBookParser -> AliasMap : convertAliasIfPresent()
+SportsPaParser -> AliasMap : convertAliasIfPresent()
 activate AliasMap
-AliasMap --> AddressBookParser
+AliasMap --> SportsPaParser : "listm"
 deactivate AliasMap
 
 create ListMembersCommand
-AddressBookParser -> ListMembersCommand
+SportsPaParser -> ListMembersCommand
 activate ListMembersCommand
 
-ListMembersCommand --> AddressBookParser
+ListMembersCommand --> SportsPaParser
 deactivate ListMembersCommand
 
-AddressBookParser --> LogicManager
-deactivate AddressBookParser
+SportsPaParser --> LogicManager
+deactivate SportsPaParser
 
 LogicManager -> ListMembersCommand : execute()
 activate ListMembersCommand
 
-ListMembersCommand -> Model : List members
+ListMembersCommand -> Model : updateFilteredMemberList(SHOW_ALL)
 activate Model
 
 Model --> ListMembersCommand

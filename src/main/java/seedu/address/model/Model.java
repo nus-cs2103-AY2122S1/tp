@@ -12,7 +12,7 @@ import seedu.address.model.alias.AliasMap;
 import seedu.address.model.alias.CommandWord;
 import seedu.address.model.alias.Shortcut;
 import seedu.address.model.facility.Facility;
-import seedu.address.model.person.Person;
+import seedu.address.model.member.Member;
 import seedu.address.model.sort.SortOrder;
 
 
@@ -21,7 +21,7 @@ import seedu.address.model.sort.SortOrder;
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Member> PREDICATE_SHOW_ALL_MEMBERS = unused -> true;
 
     /** {@code Predicate} that always evaluates to true */
     Predicate<Facility> PREDICATE_SHOW_ALL_FACILITIES = unused -> true;
@@ -49,12 +49,12 @@ public interface Model {
     /**
      * Returns the user prefs' address book file path.
      */
-    Path getAddressBookFilePath();
+    Path getSportsPaFilePath();
 
     /**
      * Sets the user prefs' address book file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setSportsPaFilePath(Path sportsPaFilePath);
 
     /**
      * Returns the user pref's aliases.
@@ -75,17 +75,17 @@ public interface Model {
     CommandWord removeAlias(Shortcut shortcut);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces SportsPA's data with the data in {@code sportsPa}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setSportsPa(ReadOnlySportsPa sportsPa);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the SportsPa */
+    ReadOnlySportsPa getSportsPa();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a member with the same identity as {@code member} exists in SportsPA.
      */
-    boolean hasPerson(Person person);
+    boolean hasMember(Member member);
 
     /**
      * Returns true if a facility with the same parameters as {@code facility} exists in SportsPA.
@@ -105,7 +105,7 @@ public interface Model {
     /**
      * Marks attendance of specified {@code member} as present.
      */
-    void markOneMemberAttendance(Person member);
+    void markOneMemberAttendance(Member member);
 
     /**
      * Unmarks attendance of members at specified {@code indices} as absent.
@@ -115,7 +115,7 @@ public interface Model {
     /**
      * Unmarks attendance of specified {@code member} as absent.
      */
-    void unmarkOneMemberAttendance(Person member);
+    void unmarkOneMemberAttendance(Member member);
 
     /**
      * Resets today's attendance for all members.
@@ -123,16 +123,16 @@ public interface Model {
     void resetTodayAttendance();
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Deletes the given member.
+     * The member must exist in the address book.
      */
-    void deletePerson(Person target);
+    void deleteMember(Member target);
 
     /**
-     * Removes the given person from all allocations without deleting them.
-     * The person must exist in the address book.
+     * Removes the given member from all allocations without deleting them.
+     * The member must exist in the address book.
      */
-    void removePersonFromAllocations(Person target);
+    void removeMemberFromAllocations(Member target);
 
     /**
      * Deletes the given facility.
@@ -141,10 +141,10 @@ public interface Model {
     void deleteFacility(Facility target);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Adds the given member.
+     * {@code member} must not already exist in SportsPA.
      */
-    void addPerson(Person person);
+    void addMember(Member member);
 
     /**
      * Adds the given facility.
@@ -160,14 +160,14 @@ public interface Model {
      * @param dayNumber the day on which to allocate the members.
      * @return number of members left unallocated, -1 if zero members to allocate.
      */
-    int split(Predicate<Person> predicate, int dayNumber);
+    int split(Predicate<Member> predicate, int dayNumber);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * Replaces the given member {@code target} with {@code editedPerson}.
+     * {@code target} must exist in SportsPA.
+     * The member identity of {@code editedMember} must not be the same as another existing member in SportsPA.
      */
-    void setPerson(Person target, Person editedPerson);
+    void setMember(Member target, Member editedMember);
 
     /**
      * Replaces the given facility {@code target} with {@code editedFacility}.
@@ -176,8 +176,8 @@ public interface Model {
      */
     void setFacility(Facility facility, Facility editedFacility);
 
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered member list */
+    ObservableList<Member> getFilteredMemberList();
 
     /**
      * Returns a view of the filtered facility list.
@@ -187,13 +187,22 @@ public interface Model {
     ObservableList<Facility> getFilteredFacilityList();
 
     /**
-     * Returns a person from the address book that has the same name as the given {@code person}.
+     * Returns a member from SportsPA that has the same name as the given {@code member}.
      *
-     * @param person the given person
-     * @return a person that has the same name.
+     * @param member the given member
+     * @return a member that has the same name.
      */
-    Person getSamePerson(Person person);
+    Member getSameMember(Member member);
 
+    /**
+     * Checks if the member being imported has the same name as an existing member
+     * and same phone number as another existing member at the same time.
+     * If the such a situation occurs, the member being imported is deemed invalid.
+     *
+     * @param toCheck the member being imported
+     * @return true if only one or no other members with the same name or phone is found, false otherwise.
+     */
+    boolean isValidImport(Member toCheck);
     /**
      * Sorts the member list in the specified order.
      */
@@ -210,10 +219,10 @@ public interface Model {
     void resetFacilityList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered member list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredMemberList(Predicate<Member> predicate);
 
     /**
      * Updates the filter of the filtered facility list to filter by the given {@code predicate}.

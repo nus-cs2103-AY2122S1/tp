@@ -16,20 +16,20 @@ import seedu.address.model.facility.Facility;
 import seedu.address.model.facility.FacilityName;
 import seedu.address.model.facility.Location;
 import seedu.address.model.facility.Time;
-import seedu.address.model.person.Person;
+import seedu.address.model.member.Member;
 
 /**
  * Jackson-friendly version of {@link Facility}.
  */
 public class JsonAdaptedFacility {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Member's %s field is missing!";
 
     private final String name;
     private final String location;
     private final String time;
     private final String capacity;
-    private final Map<DayOfWeek, List<JsonAdaptedPerson>> allocationMap;
+    private final Map<DayOfWeek, List<JsonAdaptedMember>> allocationMap;
 
     /**
      * Constructs a {@code JsonAdaptedFacility} with the given facility details.
@@ -37,7 +37,7 @@ public class JsonAdaptedFacility {
     @JsonCreator
     public JsonAdaptedFacility(@JsonProperty("name") String name, @JsonProperty("location") String location,
                                @JsonProperty("time") String time, @JsonProperty("capacity") String capacity,
-                               @JsonProperty("allocationMap") Map<DayOfWeek, List<JsonAdaptedPerson>> allocationMap) {
+                               @JsonProperty("allocationMap") Map<DayOfWeek, List<JsonAdaptedMember>> allocationMap) {
         this.name = name;
         this.location = location;
         this.time = time;
@@ -54,11 +54,11 @@ public class JsonAdaptedFacility {
         time = source.getTime().time;
         capacity = source.getCapacity().capacity;
 
-        Map<DayOfWeek, List<JsonAdaptedPerson>> map = new EnumMap<>(DayOfWeek.class);
+        Map<DayOfWeek, List<JsonAdaptedMember>> map = new EnumMap<>(DayOfWeek.class);
         for (DayOfWeek day : DayOfWeek.values()) {
             map.put(day, new ArrayList<>());
-            for (Person person : source.getAllocationMap().getPersonsAllocatedMap().get(day)) {
-                JsonAdaptedPerson adaptedPerson = new JsonAdaptedPerson(person);
+            for (Member member : source.getAllocationMap().getMembersAllocatedMap().get(day)) {
+                JsonAdaptedMember adaptedPerson = new JsonAdaptedMember(member);
                 map.get(day).add(adaptedPerson);
             }
         }
@@ -66,17 +66,17 @@ public class JsonAdaptedFacility {
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Facility} object.
+     * Converts this Jackson-friendly adapted facility object into the model's {@code Facility} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted facility.
      */
     public Facility toModelType() throws IllegalValueException {
-        Map<DayOfWeek, List<Person>> personsAllocatedMap = new EnumMap<>(DayOfWeek.class);
+        Map<DayOfWeek, List<Member>> membersAllocatedMap = new EnumMap<>(DayOfWeek.class);
         for (DayOfWeek day : DayOfWeek.values()) {
-            personsAllocatedMap.put(day, new ArrayList<>());
-            for (JsonAdaptedPerson adaptedPerson : allocationMap.get(day)) {
-                Person allocatedPerson = adaptedPerson.toModelType();
-                personsAllocatedMap.get(day).add(allocatedPerson);
+            membersAllocatedMap.put(day, new ArrayList<>());
+            for (JsonAdaptedMember adaptedMember : allocationMap.get(day)) {
+                Member allocatedMember = adaptedMember.toModelType();
+                membersAllocatedMap.get(day).add(allocatedMember);
             }
         }
 
@@ -125,7 +125,7 @@ public class JsonAdaptedFacility {
                     Capacity.class.getSimpleName()));
         }
 
-        final AllocationMap modelAllocationMap = new AllocationMap(personsAllocatedMap);
+        final AllocationMap modelAllocationMap = new AllocationMap(membersAllocatedMap);
 
         Facility convertedFacility = new Facility(modelFacilityName, modelLocation,
                 modelTime, modelCapacity, modelAllocationMap);

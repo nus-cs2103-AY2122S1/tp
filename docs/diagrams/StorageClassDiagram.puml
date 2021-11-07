@@ -14,11 +14,12 @@ Class JsonUserPrefsStorage
 Interface Storage <<Interface>>
 Class StorageManager
 
-package "AddressBook Storage" #F4F6F6{
-Interface AddressBookStorage <<Interface>>
-Class JsonAddressBookStorage
-Class JsonSerializableAddressBook
-Class JsonAdaptedPerson
+package "SportsPA Storage" #F4F6F6{
+Interface SportsPaStorage <<Interface>>
+Class SportsPaStorage
+Class JsonSportsPaStorage
+Class JsonSerializableSportsPa
+Class JsonAdaptedMember
 Class JsonAdaptedFacility
 Class JsonAdaptedTag
 }
@@ -30,17 +31,17 @@ HiddenOutside ..> Storage
 
 StorageManager .up.|> Storage
 StorageManager -up-> "1" UserPrefsStorage
-StorageManager -up-> "1" AddressBookStorage
+StorageManager -up-> "1" SportsPaStorage
 
 Storage -left-|> UserPrefsStorage
-Storage -right-|> AddressBookStorage
+Storage -right-|> SportsPaStorage
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
-JsonAddressBookStorage .up.|> AddressBookStorage
-JsonAddressBookStorage ..> JsonSerializableAddressBook
-JsonSerializableAddressBook --> "*" JsonAdaptedPerson
-JsonSerializableAddressBook -> "*" JsonAdaptedFacility
-JsonAdaptedFacility --> "*" JsonAdaptedPerson
-JsonAdaptedPerson --> "*" JsonAdaptedTag
+JsonSportsPaStorage .up.|> SportsPaStorage
+JsonSportsPaStorage ..> JsonSerializableSportsPa
+JsonSerializableSportsPa --> "*" JsonAdaptedMember
+JsonSerializableSportsPa -> "*" JsonAdaptedFacility
+JsonAdaptedFacility --> "*" JsonAdaptedMember
+JsonAdaptedMember --> "*" JsonAdaptedTag
 
 @enduml

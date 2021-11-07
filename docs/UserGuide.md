@@ -7,13 +7,13 @@ title: User Guide
 Welcome to the SportsPA User Guide!
 </span>
 
-SportsPA is a desktop application targeted for use among NUS sports CCA Leaders. It is used to manage membership and
+SportsPA is a desktop application targeted for use among NUS sports CCA Leaders. It manages membership and
 training sessions for NUS sports CCAs. SportsPA allows you to keep track of details of your members as well as
 facilities to hold training sessions at. With SportsPA, you will be able to quickly organise training sessions as we
 help you allocate available members into the various facilities according to their specified capacity.
 
-As SportsPA mainly uses a CLI (Command Line Interface), you simply have to type in commands to use it. This user
-guide provides an in-depth documentation on the all the commands available. If this is your first time using SportsPA,
+SportsPA mainly uses a CLI (Command Line Interface), meaning that you simply have to type in commands to use it. This user
+guide provides an in-depth documentation on all the commands available. If this is your first time using SportsPA,
 we also provide a [quick start guide](#quick-start) that demonstrates the end-to-end setup process to get you started.
 
 _____________________________________________________________________________________________________________
@@ -26,10 +26,10 @@ Table of Contents
 _____________________________________________________________________________________________________________
 ## How to use the User Guide
 
-You can click on the links in the [Table of Contents](#table-of-contents) to quickly navigate to the desired location in
-this User Guide. A link to return to the [Table of Contents](#table-of-contents) is provided at the end of every section.
+You can click on the links in the [Table of Contents](#table-of-contents) to quickly navigate to your desired location in
+this User Guide. A link to return to the [Table of Contents](#table-of-contents) is also provided at the end of every section.
 <br>
-The table below summarizes the meaning of the icons and text styles used in this User Guide.
+The table below summarizes the meaning of the icons and text styles used throughout this User Guide.
 <br>
 
 Icon / Text Style | Description
@@ -37,11 +37,11 @@ Icon / Text Style | Description
 **bold**        | Highlights important information such as components of SportsPA or constraints of command parameters
 `inline code`          | Represents commands in the format that you should follow when typing them
 UPPER_CASE     | Represents parameters to be supplied by you for commands
-[link](#table-of-contents) | Represents links that can be clicked on to be navigate to a different section of the User Guide or a different site
+[link](#table-of-contents) | Represents links that can be clicked on to navigate to a relevant section of the User Guide or a different website
 **:information_source: Notes:** | Represents important information regarding commands such as their format and constraints
 **:exclamation: Caution:**| Represents warnings for actions that can result in the unintentional and irreversible removal of data or affect the result of a previously executed command
 **:bulb: Tip:**| Represents useful tips that we would like to share
-:camera:| Signifies that a screenshot of the outcome of the command is provided below
+:camera: | Signifies that a screenshot of the outcome of the command is provided below
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -50,15 +50,15 @@ ________________________________________________________________________________
 
 1. Ensure you have Java `11` or above installed on your Computer. If you are unsure of how to do so, refer to the [FAQ](#faq).
 
-2. Download the latest `SportsPA.jar` from [here](https://github.com/AY2122S1-CS2103T-W12-1/tp/releases/tag/v1.2.1).
+2. Download the latest `SportsPA.jar` from [here](https://github.com/AY2122S1-CS2103T-W12-1/tp/releases/tag/v1.3.1).
 
 3. Copy the file to the folder you want to use as the _home folder_ for SportsPA.
 
-4. Double-click the file to start the app. The GUI similar to the image below should appear in a few seconds. The app
+4. Double-click the file to start the app. You should see a graphical interface similar to the image below appear in a few seconds. SportsPA
    provides some sample data for you to play around with and familiarize yourself with the commands.
 
 <p align="center">
-   <img src="images/FirstLook.png" height="400" align="center"/>
+   <img src="images/FirstLook.png" height="500" align="center"/>
 </p>
 
 [Back to Table of Contents](#table-of-contents)
@@ -68,12 +68,12 @@ ________________________________________________________________________________
 ## Using SportsPA's Interface
 
 While SportsPA has a GUI (Graphical User Interface) to display data and messages, you interact with it mainly
-by typing. The figure below provides an overview on the key components of our interface. <br><br>
+by typing. The figure below provides an overview of the key components in our interface. <br><br>
 ![Gui](images/Gui.png)
 
 Typically, to execute a command, this is how you interact with the interface:
 
-1. Type the relevant command into the **Command Window** and press **Enter** on your keyboard.
+1. Type the desired command into the **Command Window** and press **Enter** on your keyboard.
 2. The results of the command (or any warning messages generated) are displayed in the **Result Window**.
 3. Any changes made to the data will be reflected accordingly in the **List Window**.
 
@@ -151,11 +151,10 @@ Adds a member to your members list.
 
 Format: `addm n/NAME p/PHONE_NUMBER [d/DAY(S)] [t/TAG]...`
 
-* `DAY(S)` is an optional field indicating a list of days for which the member is available for that week
-* `DAY(S)` should be provided as numerical index, where `1` represents Monday, `2` represents Tuesday … and `7` represents
-  Sunday
+* `DAY(S)` specifies the days when the member is available for that week
+* `DAY(S)` should be provided as a numerical index, where `1` represents Monday, `2` represents Tuesday … and `7` represents
+  Sunday and **must be separated by a single space** e.g. `d/1 2 3`
 * Members added without `DAY(S)` will have no available days by default
-* `TAG` is an optional field indicating the tags associated with the member
 
 <div markdown="block" class="alert alert-info">
 
@@ -171,7 +170,7 @@ Examples:
 * `addm n/Harry Li p/91234567 d/1 t/exco t/y2` adds Harry Li to the member list, indicates his availability on Monday and tags him as 'exco' and 'y2' :camera:
 
 <p align="center">
-   <img src="images/addmExample.png" height="400" align="center"/>
+   <img src="images/addmExample.png" height="500" align="center"/>
 </p>
 
 [Back to Table of Contents](#table-of-contents)
@@ -186,12 +185,12 @@ Format: `listm`
 
 #### Deleting a member: `deletem`
 
-Deletes a member from your member list
+Deletes a member from your member list.
 
 Format: `deletem INDEX`
 
-* Deletes the member at the specified `INDEX`.
-* The index refers to the index number shown in the displayed member list.
+* Deletes the member at the specified `INDEX`
+* The index refers to the index number shown in the displayed member list
 * The index **must be a positive integer** 1, 2, 3, …​
 
 <div markdown="block" class="alert alert-info">
@@ -218,32 +217,20 @@ Format: `editm INDEX [n/NAME] [p/PHONE_NUMBER] [t/TAG]...`
 * At least one of the optional fields must be provided
 * Existing values will be updated to the input values
 
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Note:** You will not be able to edit the member if it has the same `NAME` as another existing
-member as they are considered duplicates.
-</div>
-
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-Editing any fields of a member will automatically remove them from any facilities they were allocated to. 
-This action is **irreversible**.
+Editing any fields of a member will automatically remove them from any facilities they were allocated to. If necessary, you can manually allocate the edited member
+back to the facility (see [Allocating a member to a facility](#allocating-a-member-to-a-facility-allocate)) or perform the `split` command again (see [Splitting members into facilities](#splitting-members-into-facilities-split))
 </div>
 
 <div markdown="span" class="alert alert-primary">
 
 **:bulb: Tip 1:** Didn't tag a member when you added them? It's not too late, just tag them using this command!
-Similarly, use `t/` (nothing supplied) to remove a tag from a member.
+Similarly, use `t/` (nothing supplied) to remove all tags from a member.
 </div>
 
 <div markdown="span" class="alert alert-primary">
 
-**:bulb: Tip 2:** If you are looking to edit a member's availability, look at [Setting member availability](#setting-member-availability-setm).
-</div>
-
-<div markdown="span" class="alert alert-primary">
-
-**:bulb: Tip 3:** Remember to allocate an edited member back to a facility if necessary by manually [allocating the member to a facility](#allocating-a-member-to-a-facility-allocate)
-or [splitting members into facilities](#splitting-members-into-facilities-split)
+**:bulb: Tip 2:** If you are looking to edit a member's availability, see [Setting member availability](#setting-member-availability-setm).
 </div>
 
 Examples:
@@ -254,49 +241,56 @@ Examples:
 * `editm 2 t/exco t/y1` edits the 2nd member to have tags `exco` and `y1` :camera:
 
 <p align="center">
-   <img src="images/editmExample.png" height="400" align="center"/>
+   <img src="images/editmExample.png" height="500" align="center"/>
 </p>
 
 [Back to Table of Contents](#table-of-contents)
 
 #### Finding a member: `findm`
-If you are looking for specific members,`findm` lets you find and filter members based on any of the
+If you are looking for specific members, `findm` lets you find and filter members based on any of the
 specified field keywords.
 
 Format: `findm [n/NAME] [p/PHONE] [d/DAY(S)] [tda/TODAY_ATTENDANCE] [tta/TOTAL_ATTENDANCE] [t/TAG]...`
 
+* At least one of the optional fields must be provided
 * `findm` is case-insensitive. e.g. `n/john` will match `John`
-* Other than `[t/TAG]...`, only the last argument supplied is searched. <br> e.g. `findm n/John n/Amy tta/0 tta/2` will list the member `Amy` with a total attendance of `2`
-* For `[t/TAG]`... , all arguments supplied will be used to find members, members with at least one matching tag will be listed. <br> e.g. `findm t/exco t/y2` will list members with tags `exco` `y2`, and also members with only one matching tag `y2` or `exco`.
-* Only full words will be matched e.g. `n/Johnny` will not match `John`, and `n/John Doe` will not match `John Lim`.
-* `TODAY_ATTENDANCE` must be either `true` or `false`, true being present and false being absent.
-* `TOTAL_ATTENDANCE` must be a **non-negative integer** 0, 1, 2, 3...
-* At least one of the optional fields **must** be supplied.
-* If multiple fields are supplied, only members that match all of the given field keywords will be listed. <br>
-e.g. `findm n/Amy t/exco` will match `Amy` with the tag `exco` but not `John` with the tag `exco`.
+* Only full words will be matched e.g. `n/Johnny` will not match `John`
+* `TODAY_ATTENDANCE` refers to a member's attendance for today and must be either `true` or `false`, true being present and false being absent
+* `TOTAL_ATTENDANCE` refers to a member's attendance in total and must be a **non-negative integer** 0, 1, 2, 3...
+* For `[t/TAG]...`, members matching at least one tag will be listed (i.e. OR search) 
+<br> e.g. `findm t/exco t/y2` will list members with tags `exco` `y2`, and also members with only one matching tag `y2` or `exco`
+* If multiple field keywords are supplied, only members that match all the given field keywords will be listed (i.e. AND search) 
+<br> e.g. `findm n/Amy t/exco` will match `Amy` with the tag `exco` but not `John` with the tag `exco`
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:** For the parameter `d/DAY(S)`, if the member is not available on any one of the specified days,
+they will not be shown in the filtered list (i.e members have to be available on all specified days in order for them to be 
+shown in the list).
+</div>
 
 Examples:
 
-* `findm n/Bob` returns `bob`
-* `findm t/exco t/y2` returns members with either tags `exco` `y2`, or both.
+* `findm n/John` returns `john` and `John Doe`
+* `findm t/exco t/y2` returns members with either tags `exco` `y2`, or both :camera:
 
 <p align="center">
-   <img src="images/findmExample.png" height="400" align="center"/>
+   <img src="images/findmExample.png" height="500" align="center"/>
 </p>
 
 [Back to Table of Contents](#table-of-contents)
 
 #### Sorting member list: `sortm`
 
-Shows a list of all members, sorted in your specified order.
+Shows a list of all members, sorted alphabetically by either their names or their tags.
 
 Format: `sortm by/SORT_ORDER`
-* `SORT_ORDER` is a compulsory field and must be a valid `SORT_ORDER`
-* Valid `SORT_ORDER`: `name`, `tag`
+* `SORT_ORDER` must either be `name` or `tag`
+* When sorting by tags, members with more tags are displayed first
 
 Examples:
-* `sortm by/name` returns a member list sorted alphabetically by their names.
-* `sortm by/tag` returns a member list sorted by tag. <br> Members with more tags are displayed first.
+* `sortm by/name` returns a member list sorted alphabetically by their names
+* `sortm by/tag` returns a member list sorted alphabetically by their tags
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -308,62 +302,61 @@ The availability of your members can change frequently. Thus, instead of having 
 Format: `setm INDEX [MORE_INDICES]... d/DAY(S)`
 
 * Sets the availability of the member(s) at the specified `INDEX` and `MORE_INDICES` to be the specified `DAY(S)`
-* Availability is defined as days of the week when member is free
-* `DAY` **must be a positive integer from 1 to 7**, whereby 1 represents Monday and 7 represents Sunday.
-* `DAYS` **must be separated by a single space** 1 2 3 …​
+* `DAY(s)` **must be a positive integer from 1 to 7**, whereby 1 represents Monday and 7 represents Sunday.
+* `DAY(s)` **must be separated by a single space** e.g. `d/1 2 3`
 * `INDEX` and `MORE_INDICES` refer to the index number(s) shown in the displayed member list
 * `INDEX` and `MORE_INDICES` **must be positive integers** 1, 2, 3, …​
-* `MORE_INDICES` **must be separated by a single space** 1 2 3 …​
-
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Note:** All member indices provided must be in the range of the displayed member list. Otherwise,
-the command will be considered invalid and no member availability will be set.
-</div>
+* `MORE_INDICES` **must be separated by a single space** e.g. `1 2 3`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 Setting the availability of a member will automatically remove them from any facilities they were allocated to. 
 This action is **irreversible**.
 </div>
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:** All indices provided must be in the range of the displayed member list. Otherwise,
+the command will be considered invalid and none of the member's availability will be set.
+</div>
+
 Examples:
 
-* `findm n/John` followed by `setm 2 d/1` sets the availability of the person at index 2 in the results of the `findm`
+* `findm n/John` followed by `setm 2 d/1` sets the availability of the member at index 2 in the results of the `findm`
   command to be Monday
-* `listm` followed by `setm 5 d/1 2` sets the availability of the person at index 5 in the member list to be Monday and
+* `listm` followed by `setm 5 d/1 2` sets the availability of the member at index 5 in the member list to be Monday and
   Tuesday
-* `listm` followed by `setm 1 2 3 d/3 4` sets the availability of the first three members in the member list to be Tuesday and Thursday :camera:
+* `listm` followed by `setm 1 2 3 d/3 4` sets the availability of the first three members in the member list to be Wednesday and Thursday :camera:
 
 <p align="center">
-   <img src="images/setmExample.png" height="400" align="center"/>
+   <img src="images/setmExample.png" height="500" align="center"/>
 </p>
 
 [Back to Table of Contents](#table-of-contents)
 
 #### Marking attendance of members: `mark`
 
-Marks attendance of members listed as present, represented by a tick.
+During a training session, you can mark the attendance of members present (represented by a tick) with this command.
 
 Format: `mark INDEX [MORE_INDICES]...`
 
 * Marks the member(s) at the specified `INDEX` and `MORE_INDICES` in the members list as present
 * `INDEX` and `MORE_INDICES` refers to the index number of the member in the displayed members list
 * `INDEX` and `MORE_INDICES` **must be positive integers** 1, 2, 3 …​
-* `MORE_INDICES` **must be separated only by whitespaces** 1 2 3 …​
+* `MORE_INDICES` **must be separated by a single space** e.g. `1 2 3`
 
-<div markdown="block" class="alert alert-info">
+<div markdown="span" class="alert alert-primary">
 
-**:information_source: Note:** 
-After you have marked attendance for today, use the cleara command to clear today's attendance and save
-the total attendance so that you can use the mark command again to take attendance for another day.
+**:bulb: Tip:** After you have marked attendance for today, use the `cleara` command 
+(see [Clearing all attendance for today](#clearing-all-attendance-for-today-cleara)) to reset everyone's attendance today and save
+their total attendance so that you can use the mark command again to take attendance for another day.
 </div>
 
 Examples:
 
-* `mark 1 2` marks the attendance of the members at indices 1 and 2 in the displayed list a present :camera:
+* `mark 1 2` marks the attendance of the members at indices 1 and 2 in the displayed list as present :camera:
 
 <p align="center">
-   <img src="images/markExample.png" height="400" align="center"/>
+   <img src="images/markExample.png" height="500" align="center"/>
 </p>
 
 [Back to Table of Contents](#table-of-contents)
@@ -377,7 +370,7 @@ Format `unmark INDEX [MORE_INDICES]...`
 * Unmarks the member(s) at the specified `INDEX` and `MORE_INDICES` in the members list as not present
 * `INDEX` and `MORE_INDICES` refers to the index number of the member in the displayed members list
 * `INDEX` and `MORE_INDICES` **must be positive integers** 1, 2, 3 …​
-* `MORE_INDICES` **must be separated only by whitespaces** 1 2 3 …​
+* `MORE_INDICES` **must be separated by a single space** e.g. `1 2 3`
 
 Examples:
 * `unmark 1 2` unmarks the attendance of members at indices 1 and 2 as not present
@@ -386,20 +379,21 @@ Examples:
 
 #### Clearing all attendance for today: `cleara`
 
-Unmarks all member's attendance for and finalises their total attendance up till today.
+At the end of a training session, you can use this command to finalise and update the member's attendance records, then unmark all member's attendance to prepare for the next training session.
 
 Format: `cleara`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-All attendance data will be removed immediately after this command is executed. This action is **irreversible**.
+All attendance data will be unmarked immediately and total attendance of those who were present will be incremented after this command is executed. This action is **irreversible**.
 </div>
 
 [Back to Table of Contents](#table-of-contents)
 
 #### Importing multiple members using a CSV file: `import`
 
-When you want to add or update the details of multiple members at once, you can import data from a comma-separated values
-file using `import`.
+When you want to add or update the details of multiple members in one go, you can import data from
+a CSV (comma-separated values) file using `import`.
+
 
 Format: `import CSV_FILE_PATH`
 
@@ -408,12 +402,14 @@ Format: `import CSV_FILE_PATH`
   2. Phone number
   3. Availability
   4. Tags
-* In the CSV file, parameters' formats follows that of [addm](#adding-a-member-addm)
+* In the CSV file, parameters' formats follows that of the `addm` command 
+(see [Adding a Member](#adding-a-member-addm))
 * `CSV_FILE_PATH` should be relative to the JAR file location
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If there is a duplicate members(same name) being imported using the
-CSV file, the details from the CSV file will overwrite the existing details, except for the attendance data. This action is **irreversible**.
+If there are duplicate members (i.e. members with the same name or same phone number) being imported using the CSV file, 
+the details from the CSV file will overwrite the existing details, except for the attendance data. 
+This action is **irreversible**.
 </div>
 
 Examples:
@@ -438,24 +434,14 @@ All member data will be removed immediately after this command is executed. This
 
 ### Facility-Specific Features
 
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Note:** 
-* All facilities are assumed to be available on every day of the week.
-* Each facility is assumed to have the same capacity on every day of the week.
-* `NAME` specifies the name of the facility.
-* `LOCATION` specifies the general location of the facility.
-* `NAME` and `LOCATION` each accept **up to 50 alphanumeric characters (including spaces)**.
-* Facilities with the same `NAME` and `LOCATION` are considered duplicates.
-* `TIME` specifies the start time of the training session at the facility and **must be in the 24-hour format** `HHmm`.
-* `CAPACITY` specifies the maximum number of people allowed at the facility and **must be a positive integer from 1 to 50**.
-</div>
-
 #### Adding a facility: `addf`
 
 Adds a facility to your facility list.
 
 Format: `addf n/NAME l/LOCATION t/TIME c/CAPACITY`
+
+* `TIME` specifies the start time of the training session at the facility and **must be in the 24-hour format** `HHmm`
+* `CAPACITY` specifies the maximum number of people allowed at the facility and **must be a positive integer from 1 to 50**
 
 <div markdown="block" class="alert alert-info">
 
@@ -513,7 +499,7 @@ Format: `editf INDEX [n/NAME] [l/LOCATION] [t/TIME] [c/CAPACITY]`
 * Existing values will be updated to the input values
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-Any members allocated to the facility will be unallocated if you edit its `CAPACITY` to be below the number of allocated
+All members allocated to the facility will be unallocated if you edit its `CAPACITY` to be below the number of allocated
 members. This action is **irreversible**.
 </div>
 
@@ -533,7 +519,7 @@ Examples:
 
 #### Finding a facility: `findf`
 
-If you want to see specific facilities you are looking for, `findf` lets you find and filter facilities whose location contains
+If you are looking for specific facilities, `findf` lets you find and filter facilities whose location contains
 any of the given keywords.
 
 Format: `findf KEYWORD [MORE_KEYWORDS]...`
@@ -547,7 +533,6 @@ Format: `findf KEYWORD [MORE_KEYWORDS]...`
 Examples:
 
 * `findf redhill` returns `Redhill Sports Complex` and `Redhill Field`
-* `findf utown redhill` returns `Utown Field`, `Redhill Sports Complex` and `Redhill Field`
 * `findf opp tampines` returns `Opp University Hall` and `Tampines Hub Badminton Hall` :camera:
 
 <p align="center">
@@ -563,29 +548,34 @@ members' availability using `split`.
 
 Format: `split DAY`
 
-* Allocate members available at the specified `DAY` to each facility
-* `DAY` **must be a positive integer from 1 to 7**, whereby 1 represents Monday and 7 represents Sunday.
+* Allocate members available on the specified `DAY` to each facility
+* `DAY` **must be a positive integer from 1 to 7**, whereby 1 represents Monday and 7 represents Sunday
+* All facilities are assumed to be available and have the same capacity on every day of the week
+
+<div markdown="span" class="alert alert-warning">
+:exclamation: **Caution:**
+Executing this command will overwrite all existing allocations you have made for the given day. This action is **irreversible**.
+You can use the `export` command 
+(see [Exporting facility details and member allocation](#exporting-facility-details-and-member-allocations-export))
+to save your previous allocations before using the `split` command again.
+</div>
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Note:** SportsPA will warn you when there are no members available on the specified day or insufficient facilities
 to accommodate all available members and the allocation will not be executed.
-</div>
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If you execute the split command, it will **overwrite** all existing allocations you have made for the given day. 
-This action is **irreversible**.
 </div>
 
 Examples:
-* `split 1` splits members into groups for training on Monday of that week and displays the list of allocations to the
-  user :camera:
+* `split 1` splits members into groups for training on Monday of that week and displays the list of allocations to the user :camera:
 
 <p align="center">
    <img src="images/splitExample.png" height="500" align="center"/>
 </p>
 
 [Back to Table of Contents](#table-of-contents)
+
 
 #### Deallocating a member from a facility: `deallocate`
 
@@ -594,21 +584,21 @@ previously allocated to on a specified day, using `deallocate`.
 
 Format: `deallocate MEMBER_INDEX FACILITY_INDEX DAY`
 
-* `MEMBER_INDEX` refers to the index shown in the displayed member list.
-* `FACILITY_INDEX` refers to the index shown in the displayed facility list.
+* `MEMBER_INDEX` refers to the index shown in the displayed member list
+* `FACILITY_INDEX` refers to the index shown in the displayed facility list
 * Both `MEMBER_INDEX` and `FACILITY_INDEX` **must be positive integers** 1, 2, 3…
-* `DAY` **must be a positive integer from 1 to 7**, whereby 1 represents Monday and 7 represents Sunday.
+* `DAY` **must be a positive integer from 1 to 7**, whereby 1 represents Monday and 7 represents Sunday
 
 Examples:
 * `deallocate 2 4 5` removes the member at index 2 in the displayed member list from the allocation list of the facility
-  at index 4 in the displayed facility list on Friday.
+  at index 4 in the displayed facility list on Friday
 
 [Back to Table of Contents](#table-of-contents)
 
 #### Allocating a member to a facility: `allocate`
 
 If the allocations of the `split` command are undesirable, you can manually allocate a member to a facility
-using `allocate`.
+using `allocate`
 
 Format: `allocate MEMBER_INDEX FACILITY_INDEX DAY`
 
@@ -619,34 +609,36 @@ Format: `allocate MEMBER_INDEX FACILITY_INDEX DAY`
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Note:** 
-* Members you choose to allocate must be available on the specified day 
-* You cannot allocate members to facilities which are at maximum capacity.
+**:information_source: Note:**
+Members you choose to allocate must be available on the specified day and cannot be allocated to facilities which are at maximum capacity.
 </div>
 
 Examples:
-* `allocate 1 2 1` adds the member at index 1 in the displayed member list to the allocation list <br> of the facility
-  at index 2 in the displayed facility list on Monday :camera:
+* `allocate 1 2 5` adds the member at index 1 in the displayed member list to the allocation list <br> of the facility
+  at index 2 in the displayed facility list on Friday :camera:
 
-![allocateExample](images/allocateExample.png)
+<p align="center">
+   <img src="images/allocateExample.png" height="500" align="center"/>
+</p>
 
 [Back to Table of Contents](#table-of-contents)
 
-#### Exporting facility details and member allocation: `export`
+#### Exporting facility details and member allocations: `export`
 
-Exports facility details, and it's member allocation to a CSV file that you can share with
-your CCA members.
+Export all facilities’ details and their allocation list to a CSV (comma-separated values) file so that
+you can share them with your members.
 
 Format: `export`
 
 * The exported CSV file will be created in `[JAR file location]/data/exportedData.csv`
 * The CSV file will contain 5 headers: Facility Name, Location, Time, Capacity and Member Allocation
 
-<div markdown="block" class="alert alert-info">
-**:information_source: Note:** If exportedData.csv already exists and the export command is ran,
+<div markdown="span" class="alert alert-info">
+
+**:information_source: Note:** If exportedData.csv already exists before this command is executed,
 the existing CSV file will be overwritten. So, make sure to change the file name of the existing
 CSV file before running the export command if you want to save it.
-</div> <br>
+</div>
 
 #### Clearing all entries in facility list: `clearf`
 
@@ -681,7 +673,7 @@ Format: `alias s/SHORTCUT cw/COMMAND_WORD`
 * `SHORTCUT` **must be one word and not an existing command**
 * `COMMAND_WORD` **must be an existing command**
 
-<div markdown="block" class="alert alert-info">
+<div markdown="span" class="alert alert-info">
 
 **:information_source: Note:** If you create an alias whose given `SHORTCUT` already exists, the newly created alias
 will replace that existing one.
@@ -725,7 +717,7 @@ JSON file `[JAR file location]/data/sportspa.json`. Though **not recommended**, 
 directly change the contents, *e.g a member's name*, in the data file, which will be reflected in SportsPA.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If changes made to the data file makes its format invalid, SportsPA will discard all data and start with an empty data file at the next run.
+If changes made to the data file makes its format invalid, SportsPA will start with an empty data file at the next run.
 </div>
 
 [Back to Table of Contents](#table-of-contents)

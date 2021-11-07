@@ -3,12 +3,12 @@ package seedu.address.model.tag;
 import java.util.List;
 import java.util.function.Predicate;
 
-import seedu.address.model.person.Person;
+import seedu.address.model.member.Member;
 
 /**
  * Tests that a {@code Person}'s {@code Tag} matches any of the tag keywords given.
  */
-public class TagsContainKeywordsPredicate implements Predicate<Person> {
+public class TagsContainKeywordsPredicate implements Predicate<Member> {
     private final List<Tag> tags;
 
     public TagsContainKeywordsPredicate(List<Tag> tags) {
@@ -16,9 +16,9 @@ public class TagsContainKeywordsPredicate implements Predicate<Person> {
     }
 
     @Override
-    public boolean test(Person person) {
+    public boolean test(Member member) {
         return tags.stream()
-                .anyMatch(tags -> person.getTags().contains(tags));
+                .anyMatch(tags -> member.getTags().contains(tags));
     }
 
     @Override

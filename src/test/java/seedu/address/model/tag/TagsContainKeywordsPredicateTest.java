@@ -11,7 +11,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.MemberBuilder;
 
 public class TagsContainKeywordsPredicateTest {
     private final List<Tag> firstPredicateKeywordList = Arrays.asList(new Tag(VALID_TAG_EXCO), new Tag(VALID_TAG_Y2));
@@ -35,7 +35,7 @@ public class TagsContainKeywordsPredicateTest {
         // null -> returns false
         assertFalse(firstPredicate.equals(null));
 
-        // different person -> returns false
+        // different member -> returns false
         assertFalse(firstPredicate.equals(secondPredicate));
     }
 
@@ -43,29 +43,29 @@ public class TagsContainKeywordsPredicateTest {
     public void test_tagsContainKeywords_returnsTrue() {
         // one keyword
         TagsContainKeywordsPredicate predicate = new TagsContainKeywordsPredicate(secondPredicateKeywordList);
-        assertTrue(predicate.test(new PersonBuilder().withTags(VALID_TAG_EXCO).build()));
+        assertTrue(predicate.test(new MemberBuilder().withTags(VALID_TAG_EXCO).build()));
 
         // only one matching keyword
         predicate = new TagsContainKeywordsPredicate(firstPredicateKeywordList);
-        assertTrue(predicate.test(new PersonBuilder().withTags(VALID_TAG_EXCO).build()));
+        assertTrue(predicate.test(new MemberBuilder().withTags(VALID_TAG_EXCO).build()));
 
         // multiple keywords
         predicate = new TagsContainKeywordsPredicate(firstPredicateKeywordList);
-        assertTrue(predicate.test(new PersonBuilder().withTags(VALID_TAG_EXCO, VALID_TAG_Y2).build()));
+        assertTrue(predicate.test(new MemberBuilder().withTags(VALID_TAG_EXCO, VALID_TAG_Y2).build()));
 
         // mixed-case keywords
         predicate = new TagsContainKeywordsPredicate(Collections.singletonList(new Tag("exCo")));
-        assertTrue(predicate.test(new PersonBuilder().withTags(VALID_TAG_EXCO).build()));
+        assertTrue(predicate.test(new MemberBuilder().withTags(VALID_TAG_EXCO).build()));
     }
 
     @Test
     public void test_tagsDoesNotContainKeywords_returnsFalse() {
         // zero keywords
         TagsContainKeywordsPredicate predicate = new TagsContainKeywordsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new PersonBuilder().withTags(VALID_TAG_EXCO).build()));
+        assertFalse(predicate.test(new MemberBuilder().withTags(VALID_TAG_EXCO).build()));
 
         // non-matching keywords
         predicate = new TagsContainKeywordsPredicate(secondPredicateKeywordList);
-        assertFalse(predicate.test(new PersonBuilder().withTags(VALID_TAG_Y2).build()));
+        assertFalse(predicate.test(new MemberBuilder().withTags(VALID_TAG_Y2).build()));
     }
 }
