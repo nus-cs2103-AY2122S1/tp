@@ -583,6 +583,8 @@ These are some use cases to familiarise with the flow of our application:
 
 Same as UC01P but references to patient is replaced with doctor instead.
 
+<div style="page-break-after: always;"></div>
+
 **Use case: UC02P Listing all patient**
 
 **MSS**
@@ -617,6 +619,8 @@ Same as UC02P but references to patient is replaced with doctor instead.
 **Use case: UC03D Finding doctors** <br>
 
 Same as UC03P but references to patient is replaced with doctor instead.
+
+<div style="page-break-after: always;"></div>
 
 **Use case: UC04P Deleting a patient** <br>
 
@@ -857,6 +861,8 @@ Same as UC08P but with the following changes:
     * 1a1. A message is shown informing the user that there are no appointments for the current day.
 
       Use case ends.
+
+<div style="page-break-after: always;"></div>
     
 **Use case: UC11 Filtering appointments**
 
