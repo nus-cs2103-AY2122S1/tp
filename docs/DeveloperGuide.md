@@ -21,9 +21,10 @@ title: Developer Guide
         4.3 <a href="#43-edit-clientproduct-feature">Edit Client/Product Feature</a><br>
         4.4 <a href="#44-find-clientproduct-feature">Find Client/Product Feature</a><br>
         4.5 <a href="#45-view-clientproduct-feature">View Client/Product Feature</a><br>
-        4.6 <a href="#46-command-history-feature">Command History Feature</a><br>
-        4.7 <a href="#47-proposed-undoredo-feature">[Proposed] Undo/Redo Feature</a><br>
-        4.8 <a href="#48-proposed-data-archiving">[Proposed] Data Archiving</a><br>
+        4.6 <a href="#46-stat-feature">Stats Feature</a><br>
+        4.7 <a href="#47-command-history-feature">Command History Feature</a><br>
+        4.8 <a href="#48-proposed-undoredo-feature">[Proposed] Undo/Redo Feature</a><br>
+        4.9 <a href="#49-proposed-data-archiving">[Proposed] Data Archiving</a><br>
    </details>
 1. [Documentation, logging, testing, configuration, dev-ops](#5-documentation-logging-testing-configuration-dev-ops)
 1. <details><summary><a href="#6-appendix-requirements">Appendix: Requirements</a></summary>
@@ -374,8 +375,31 @@ the inputs and returning a `ViewClientCommand`. The command will then be execute
 * **Alternative 2** : User can view multiple clients or products
     * Pros : Easier comparisons between clients or products
     * Cons : More complex code which would lead to higher amount of error
+### 4.6 Stats Feature
 
-### 4.6 Command History Feature
+This feature presents the statistics of the current inventory based on the orders of the `Clients`. The `Orders` are 
+a `HashSet<Order>`. Each `Order` in the set is a `Product` that may or may not exist in the inventory, tagged 
+with `Name`, `Quantity` and `Time`. `Name` refers to name of the `Product`, `Quantity` refers to the number of 
+`Product` ordered and `Time` is refers to the date of `Order`. Input is first handled and retrieved by `MainWindow` 
+in the UI component.
+
+First, `LogicManager` will call `AddressBookParser`, which will pass the inputs to `StatCommand`. The command will 
+then be executed in `LogicManager`, returning a `CommandResult` which will be returned to the user.
+
+![Interactions Inside the Logic Component for the `stat` Command](images/StatCommandDiagram.png)
+
+#### Design Considerations
+
+**Aspect : How `stat` may be executed**
+
+* **Alternative 1 (current choice)** : User can view the number of products sold so far
+    * Pros : Provides a quick overview of the products that have been sold
+    * Cons : Includes products that are no longer in the inventory
+* **Alternative 2** : User can view different type of statistics like profits
+    * Pros : More information providing better business clarity
+    * Cons : More complex code which would lead to higher amount of error
+
+### 4.7 Command History Feature
 
 This feature allows navigation to previous commands using `↑` and `↓` keys.
 
@@ -423,7 +447,7 @@ stored into `ArrayList` and `Index` will be shifted to the newly input command.
 
 ![CommandHistoryState1](images/CommandHistoryState6.png)
 
-### 4.7 \[Proposed\] Undo/Redo Feature
+### 4.8 \[Proposed\] Undo/Redo Feature
 
 #### Proposed Implementation
 
@@ -531,7 +555,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### 4.8 \[Proposed\] Data archiving
+### 4.9 \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
 
