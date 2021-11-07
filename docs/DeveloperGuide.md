@@ -52,9 +52,11 @@ This product will make recruiters’ lives easier through categorisation and fil
   * [Glossary](#glossary)
 - [**Appendix: Instructions for manual testing**](#appendix-instructions-for-manual-testing--)
   * [Launch and shutdown](#launch-and-shutdown)
-  * [Adding a person](#adding-a-person)
+  * [Listing all applicants](#listing-all-applicants)
+  * [Adding an applicant](#adding-an-applicant)
   * [Editing an applicant](#editing-an-applicant)
-  * [Deleting a person](#deleting-a-person)
+  * [Deleting an applicant](#deleting-an-applicant)
+  * [Finding an applicant](#finding-an-applicant)
   * [Marking an applicant](#marking-an-applicant)
   * [Unmarking an applicant](#unmarking-an-applicant)
   * [Deleting marked applicants](#deleting-marked-applicants)
@@ -368,9 +370,9 @@ should not exceed the destroy marker X. This is a known limitation of PlantUML.<
 * **Alternative 1 (current choice):** Implement different finding conditions for different prefixes. 
   * For example: 
     * ***Role***: An applicant can be matched by `role` if all parameters after `r/` are present in his `role`. 
-    * ***Employment*** Type:  An applicant can be matched by `employment type` if his `employment type` starts with any of the 
-    `employment type` parameters and the parameter matches with an existing stored `employment type`.
-    * ***Years of Experience***: An applicant can be matched by `years of experience` if he has a `years of experience` not lesser than the `year of experience` parameter.
+    * ***Employment Type***:  An applicant can be matched by `employment_type` if his `employment_type` starts with any of the 
+    `employment_type` parameters, and the parameter matches with an existing stored `employment_type`.
+    * ***Years of Experience***: An applicant can be matched by `years_of_experience` if he has a `years_of_experience` not lesser than the `year_of_experience` parameter.
     * For detailed explanations of find parameters of each prefix, please visit the section of our [User Guide - Find Parameters](https://ay2122s1-cs2103t-f11-2.github.io/tp/UserGuide.html#find-parameters).
   * Pros: 
     Conditions to check for a match in parameters are differentiated for each prefix to allow better usability of the `find` command.
@@ -1054,6 +1056,13 @@ testers are expected to do more *exploratory* testing.
     1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
+### Listing all applicants
+
+1. Test case: `list`<br>
+   Expected: All applicants listed without omission.
+   Command success message shown in the status message.
+
+
 ### Adding an applicant 
 
 1. Adding an applicant while all applicants are being shown 
@@ -1088,18 +1097,7 @@ testers are expected to do more *exploratory* testing.
     1. Test case: Ensure that you have completed the first test case under this section, then input the command `edit 2 n/Alice p/87654321`<br>
        Expected: No applicants are edited. Error details shown in the result display stating that the new edited applicant Alice shares either
        the same phone number or same email as Alexander.
-
-    1. Test case: Ensure that you have completed the first test case under this section, then input the command `edit 2 n/Alice e/alexander@gmail.com`<br>
-       Expected: No applicants are edited. Error details shown in the result display stating that the new edited applicant Alice shares either
-       the same phone number or same email as Alexander.
-
-    1. Test case: `edit 2 n/&a#lly`<br>
-       Expected: No applicants are edited. Error details shown in the result display stating that names should only contain alphanumeric characters and spaces.
-
-    1. Other incorrect edit commands to try: `edit`, `edit Alexander`, `edit 1`, `edit 1 n/`
-       (where incomplete or invalid details are given for the applicant being edited)<br>
-       Expected: Error messages displaying the cause of error is shown in the result display.
-     
+       
 ### Deleting an applicant
 
 1. Deleting an applicant while all applicants are being shown
@@ -1127,6 +1125,44 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `delete 1 2` <br>
        Expected: First and second applicants of the shown filtered list are deleted. Details of the deleted applicant shown in the result display.
+
+### Finding an applicant
+1. Finding an applicant by a specific prefix with non-empty parameters
+   
+    1. Prerequisites: For sample data to be utilised, delete the database storage `addressbook.json` from folder `/data` and re-run the application.  
+    
+    1. Test case:`find n/Alex` <br>
+       Expected: Applicants with 'Alex' in the name are listed. Command success message shown in result display.
+    
+    1. Test case: `find i/oct` <br> 
+       Expected: Applicants with interviews in October are listed. Command success message shown in result display.
+       (Using sample data, there should be 3 applicants listed.)
+
+    1. Test case: `find s/4000` <br>
+       Expected: Applicants with expected salary ranging from `3500` to `4500` are listed. Command success message shown in result display.
+       (Using sample data, Alex with salary `4500` and Roy with salary `3600` are listed.)
+       
+    1. Test case: `find y/-1` (invalid search terms) <br> 
+       Expected: No change to applicant listed. Error details shown on result display.
+       
+1. Finding an applicant by a specific prefix with empty parameters
+    
+    1. Test case: `find n/` <br>
+       Expected: All applicants stored are listed. Command success message shown in result display.
+       
+1. Finding an applicant by multiple prefixes
+
+    1. Prerequisite: For sample data to be utilised, delete the database storage `addressbook.json` from folder `/data` and re-run the application.
+  
+    1. Test case: `find s/4000 i/oct` <br>
+       Expected: Applicant with expected salary ranging from `3500` to `4500` **and** interview in October are listed. Command success message shown in result display.
+       (Using sample data, only Alex is listed.)
+       
+1. Finding an applicant without prefixes
+
+    1. Test case: `find` <br>
+       Expected: No change to applicant listed. Invalid command format error and usage message for `find` shown in result display.
+  
        
 ### Marking an applicant
 
