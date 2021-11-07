@@ -1,13 +1,17 @@
 {
   "tasks": [ {
-    "name": "Valid Task",
-    "phone": "9482424",
-    "email": "hans@example.com",
-    "address": "4th street"
+    "name" : "Valid Task",
+    "time" : "14:00",
+    "date" : "2021-01-06",
+    "state" : "TODO",
+    "priority" : "HIGH",
+    "tagged" : [ "CS2100" ]
   }, {
-    "name": "Task With Invalid Phone Field",
-    "phone": "948asdf2424",
-    "email": "hans@example.com",
-    "address": "4th street"
+    "name" : "Task with invalid date",
+    "time" : "14:00",
+    "date" : "2021-01-32",
+    "state" : "TODO",
+    "priority" : "HIGH",
+    "tagged" : [ "CS2100" ]
   } ]
 }

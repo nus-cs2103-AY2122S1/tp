@@ -1,14 +1,16 @@
 {
   "tasks": [ {
-    "name": "Alice Pauline",
-    "time": "12:45",
-    "email": "alice@example.com",
-    "date": "2021-12-11",
-    "tagged": [ "friends" ]
+    "name": "Assignment 3",
+    "time" : "12:00",
+    "date" : "2021-01-07",
+    "state" : "TODO",
+    "priority" : "MEDIUM",
+    "tagged": [ "CS1234" ]
   }, {
-    "name": "Alice Pauline",
-    "time": "12:45",
-    "email": "pauline@example.com",
-    "date": "2022-02-01"
+    "name": "Assignment 3",
+    "time" : "12:00",
+    "date" : "2021-01-07",
+    "state" : "TODO",
+    "priority" : "MEDIUM"
   } ]
 }

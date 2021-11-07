@@ -1,8 +1,10 @@
 {
   "tasks": [ {
-    "name": "Hans Muster",
-    "phone": "9482424",
-    "email": "invalid@email!3e",
-    "date": "2021-12-33"
+    "name": "Assignment 3",
+    "time" : "25:00",
+    "date" : "2021-01-07",
+    "state" : "WRONG",
+    "priority" : "WORK",
+    "tagged": [ "CS1234" ]
   } ]
 }
