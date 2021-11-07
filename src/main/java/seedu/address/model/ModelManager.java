@@ -123,6 +123,18 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasMemberWithSameName(Member member) {
+        requireNonNull(member);
+        return sportsPa.hasMemberWithSameName(member);
+    }
+
+    @Override
+    public boolean hasMemberWithSamePhoneNumber(Member member) {
+        requireNonNull(member);
+        return sportsPa.hasMemberWithSamePhoneNumber(member);
+    }
+
+    @Override
     public boolean hasFacility(Facility facility) {
         requireNonNull(facility);
         return sportsPa.hasFacility(facility);

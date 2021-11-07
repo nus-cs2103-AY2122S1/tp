@@ -42,6 +42,22 @@ public class UniqueMemberList implements Iterable<Member> {
     }
 
     /**
+     * Returns true if the list contains a member with the same name the given argument.
+     */
+    public boolean containsMemberWithSameName(Member toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::hasSameName);
+    }
+
+    /**
+     * Returns true if the list contains a member with the same phone number the given argument.
+     */
+    public boolean containsMemberWithSamePhoneNumber(Member toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::hasSamePhoneNumber);
+    }
+
+    /**
      * Adds a member to the list.
      * The member must not already exist in the list.
      */

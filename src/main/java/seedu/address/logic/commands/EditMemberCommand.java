@@ -77,7 +77,8 @@ public class EditMemberCommand extends Command {
         Member memberToEdit = lastShownList.get(index.getZeroBased());
         Member editedMember = createEditedMember(memberToEdit, editMemberDescriptor);
 
-        if (!memberToEdit.isSameMember(editedMember) && model.hasMember(editedMember)) {
+        if ((!(memberToEdit.hasSamePhoneNumber(editedMember)) && model.hasMemberWithSamePhoneNumber(editedMember))
+                || (!(memberToEdit.hasSameName(editedMember)) && model.hasMemberWithSameName(editedMember))) {
             throw new CommandException(MESSAGE_DUPLICATE_MEMBER);
         }
 

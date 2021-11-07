@@ -329,7 +329,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseShortcut_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseShortcut((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseShortcut(null));
     }
 
     @Test
@@ -352,7 +352,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseCommandWord_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseCommandWord((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseCommandWord(null));
     }
 
     @Test
