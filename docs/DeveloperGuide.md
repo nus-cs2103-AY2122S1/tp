@@ -467,16 +467,19 @@ the `execute("tag 1 a/friends r/family")` API call.
 
 #### Implementation
 
-The class `WelcomeWindow` is responsible for displaying the welcome window at the
-start when the application is launched. It is facilitated by the `WelcomeWindow.fxml` file, which is
-responsible for how various components inside this window are arranged.
+The class `WelcomeWindow` is responsible for displaying the welcome window at 
+the start when the application is launched. It is facilitated by the 
+`WelcomeWindow.fxml` and `WelcomeWindow.css`.  The `.fxml` file is responsible 
+for the layout of the various components in this window, and the `.css` file 
+adds a style and enhances the overall UI.
 
 The `WelcomeWindow` class extends `UiPart<Stage>`.
 
 When the app is launched, an instance of this class is created, and the
-`WelcomeWindow#start` is invoked to display the window. Various methods, including 
-`fadeTransition` and `displayAnimatedText`, are used within this
-class to achieve the fading image and character typing effect, respectively.
+`WelcomeWindow#start()` is invoked to display the window. Various methods, including 
+`fadeTransition()` and `displayAnimatedText(String textToDisplay, double delayTime)`
+, are used within this class to achieve the fading image and character typing 
+effect, respectively.
 
 ![WelcomeWindowSequenceDiagram](images/WelcomeWindowSequenceDiagram.png)
 
@@ -584,8 +587,8 @@ is called upon to request focus.
 
 The class `HelpWindow` is responsible for displaying the Help
 Window. It is shown when the user either uses the keyboard shortcut,
-`F1`, or clicks on `Help` located on the top left in
-the Menu Bar. It is facilitated by `HelpWindow.fxml`
+`F1`, or clicks on `Help` located on the top left in the Menu Bar, or types 
+in `help` in the command box. It is facilitated by `HelpWindow.fxml`
 and `HelpWindow.css`. The `.fxml` file is responsible for the layout of the
 various components in this window, and the `.css` file adds a style and enhances the
 overall UI.
@@ -846,7 +849,45 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `CohortConnect` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use Case 1: Add user**
+**Use Case 1: Setting Up User Profile**
+
+MSS
+
+1. User enters their Name.
+2. User enters their Telegram Handle.
+3. User enters their GitHub Username.
+4. User clicks on the submit button.
+5. CohortConnect shows the Main Window, signifying that the User Profile was set up.
+   Use case ends.
+
+Extensions
+
+* 4a. CohortConnect detects an error in the entered Name (Invalid Name).
+   * 4a1. CohortConnect shows an error message.
+   * 4a2. CohortConnect requests for a valid Name.
+   * 4a3. User enters new Name.
+   * 4a1-4a3 are repeated until the Name entered is valid.
+   * Use case resumes from step 5.
+
+* 4b. CohortConnect detects an error in the entered Telegram Handle (Invalid Telegram Handle).
+   * 4b1. CohortConnect shows an error message.
+   * 4b2. CohortConnect requests for a valid Telegram Handle.
+   * 4b3. User enters new Telegram Handle.
+   * 4b1-4b3 are repeated until the Telegram Handle entered is valid.
+   * Use case resumes from step 5.
+
+* 4c. CohortConnect detects an error in the entered GitHub Username (Invalid GitHub Username).
+   * 4c1. CohortConnect shows an error message.
+   * 4c2. CohortConnect requests for a valid GitHub Username.
+   * 4c3. User enters new GitHub Username.
+   * 4c1-4c3 are repeated until the GitHub Username entered is valid.
+   * Use case resumes from step 5.
+
+* *a. At any time, the User chooses to close the app.
+   * *a1. CohortConnect closes.
+     Use case ends.
+   
+**Use Case 2: Add user**
 
 MSS
 
@@ -870,7 +911,7 @@ Extensions
   * Steps 1b1-1b3 are repeated until the data entered are valid.
   * Use case resumes from step 2.
 
-**Use Case 2: Edit user**
+**Use Case 3: Edit user**
 
 MSS
 
@@ -1029,6 +1070,20 @@ Extensions
   * 1a2. CohortConnect prompts for new filename.
   * 1a3. User enters new filename.
   * Steps 1a1-1a3 are repeated until the filename received is valid.
+
+**Use Case 23: Opening the Help Window**
+
+MSS
+
+1. User uses the keyboard shortcut, or types in the command, or clicks on help in the Menu Bar.
+2. CohortConnect shows the Help Window.
+   Use case ends.
+
+Extensions
+
+* *a. At any time, the User chooses to close the app.
+   * *a1. CohortConnect closes.
+     Use case ends.
 
 ### Non-Functional Requirements
 
