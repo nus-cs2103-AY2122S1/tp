@@ -10,13 +10,12 @@ public class State {
 
     public enum ObjectState {
         TODO,
-        DONE,
-        OVERDUE
+        DONE
     }
 
-    public static final String MESSAGE_CONSTRAINTS = "State should be TODO, DONE or OVERDUE";
+    public static final String MESSAGE_CONSTRAINTS = "State should be TODO or DONE";
 
-    private ObjectState value;
+    private final ObjectState value;
 
     /**
      * Constructs a {@code State}.
@@ -53,51 +52,11 @@ public class State {
     }
 
     /**
-     * Mark object as todo.
-     *
-     */
-    public void markAsTodo() {
-        value = ObjectState.TODO;
-    }
-
-    /**
-     * Mark object as done.
-     *
-     */
-    public void markAsDone() {
-        value = ObjectState.DONE;
-    }
-
-    /**
-     * Mark object as overdue.
-     *
-     */
-    public void markAsOverdue() {
-        value = ObjectState.OVERDUE;
-    }
-
-    /**
-     * Returns true if the object is marked as todo.
-     *
-     */
-    public Boolean isMarkedTodo() {
-        return value == ObjectState.TODO;
-    }
-
-    /**
      * Returns true if the object is marked as done.
      *
      */
     public Boolean isMarkedDone() {
         return value == ObjectState.DONE;
-    }
-
-    /**
-     * Returns true if the object is marked as overdue.
-     *
-     */
-    public Boolean isMarkedOverdue() {
-        return value == ObjectState.OVERDUE;
     }
 
     /**
