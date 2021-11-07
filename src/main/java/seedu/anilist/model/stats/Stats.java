@@ -94,7 +94,6 @@ public class Stats {
         }
 
         Stats otherStats = (Stats) other;
-        assert otherStats != null;
         return this.watchingCount == otherStats.watchingCount
                 && this.toWatchCount == otherStats.toWatchCount
                 && this.finishedCount == otherStats.finishedCount

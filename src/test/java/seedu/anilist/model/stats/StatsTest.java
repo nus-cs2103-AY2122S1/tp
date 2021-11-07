@@ -139,7 +139,7 @@ public class StatsTest {
         assertTrue(stats1.equals(stats1));
         //different Stats object
         assertTrue(stats1.equals(stats2));
-        //different status counts and genres
+        //different Stats objects with the same status count values and genre sets
         assertFalse(stats1.equals(stats3));
     }
 }
