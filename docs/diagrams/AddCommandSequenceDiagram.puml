@@ -1,56 +1,30 @@
 @startuml
 !include style.puml
 
-Actor User UI_COLOR
-Participant ":CommandBox" as CommandBox UI_COLOR
-Participant ":Logic" as Logic LOGIC_COLOR
-Participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+Participant ":InsurancePalParser" as InsurancePalParser LOGIC_COLOR
 Participant AddCommandParser LOGIC_COLOR
-Participant "addCommand:AddCommand" as AddCommand LOGIC_COLOR
-Participant "commandResult:CommandResult" as CommandResult LOGIC_COLOR
+Participant "aCom:AddCommand" as AddCommand LOGIC_COLOR
 Participant "person:Person" as Person MODEL_COLOR
-Participant "model:Model" as Model MODEL_COLOR
-Participant AddressBook MODEL_COLOR
-Participant UniquePersonsList MODEL_COLOR
 
-
-User -> CommandBox : "add ..."
-activate CommandBox UI_COLOR
-CommandBox -> Logic : execute("add ...")
-activate Logic LOGIC_COLOR
-Logic -> AddressBookParser : parseCommand("add ...")
-activate AddressBookParser LOGIC_COLOR
+ -> InsurancePalParser : parseCommand("add ...")
+activate InsurancePalParser LOGIC_COLOR
 create AddCommandParser
-AddressBookParser -> AddCommandParser
-AddressBookParser -> AddCommandParser : parse("add ...")
+InsurancePalParser -> AddCommandParser
+activate AddCommandParser LOGIC_COLOR
+return
+InsurancePalParser -> AddCommandParser : parse("add ...")
 activate AddCommandParser LOGIC_COLOR
 create Person
 AddCommandParser -> Person
+activate Person MODEL_COLOR
+return
 create AddCommand
-AddCommandParser -> AddCommand : new(person)
+AddCommandParser -> AddCommand : AddCommand(person)
+activate AddCommand LOGIC_COLOR
+return addCommand
 return addCommand
 deactivate AddCommandParser
-Logic <- AddressBookParser : addCommand
-deactivate AddressBookParser
+<- InsurancePalParser : addCommand
+deactivate InsurancePalParser
 
-Logic -> AddCommand: execute(model)
-activate AddCommand LOGIC_COLOR
-AddCommand -> Model : addPerson(person)
-activate Model MODEL_COLOR
-Model -> AddressBook : addPerson(person)
-activate AddressBook MODEL_COLOR
-AddressBook -> UniquePersonsList : add(person)
-activate UniquePersonsList MODEL_COLOR
-return
-return
-return
-create CommandResult
-AddCommand -> CommandResult : successMessage
-activate CommandResult LOGIC_COLOR
-return
-return commandResult
-Logic --> CommandBox : commandResult
-deactivate Logic
-CommandBox --> User
-deactivate CommandBox
 @enduml
