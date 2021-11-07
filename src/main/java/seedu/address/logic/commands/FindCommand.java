@@ -20,9 +20,6 @@ import seedu.address.model.person.predicates.StaffHasCorrectIndexPredicate;
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
-    private static final int NAME_AND_FIELD_PREDICATE = -1;
-    private static final int FIELD_PREDICATE_ONLY = -2;
-
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
             + "the specified keywords (case-insensitive) along with fields or the index specified and "
             + "displays them as a list with index numbers.\n\n"
@@ -41,6 +38,8 @@ public class FindCommand extends Command {
     public static final String NO_ONE_SATISFIES_QUERY = "Search conditions indicated is not"
         + " satisfied by anyone in staff'd";
 
+    private static final int NAME_AND_FIELD_PREDICATE = -1;
+    private static final int FIELD_PREDICATE_ONLY = -2;
     private final NameContainsKeywordsPredicate namePredicate;
     private final PersonContainsFieldsPredicate predicate;
     private final int index;
