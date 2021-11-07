@@ -218,6 +218,8 @@ Format: `addassessment -a <assessment_name>`
 * The assessment should not already exist in database.
 * Assessment name can be any number of alphanumeric words.
 
+<div style="page-break-after: always;"></div>
+
 Examples:
 * `addassessment -a P01`
   * creates a new assessment `P01`.
@@ -324,13 +326,13 @@ Examples:
   * displays line chart of group `T02A`'s performance in their assessments. <br>
     ![showGroupExample](images/UGExamples/showgrp.png)
 
-    <br>
 * `show -a Midterm Examination`
   * displays histogram of the distribution of scores in the `Midterm Examination` assessment.<br>
     ![showAssessmentExample](images/UGExamples/showasses.png)
 
 [Return to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 
 ### Editing a student : `edit`
 
@@ -364,6 +366,8 @@ Format: `delete <index>`
 
 * Deletes the student at the specified `<index>`.
 * The `<index>` refers to the index number shown in the displayed student list. The `<index>` **must be a positive integer** 1, 2, 3, …
+
+<div style="page-break-after: always;"></div>
 
 Examples:
 * `list` followed by `delete 2`
@@ -401,6 +405,8 @@ The similar applies for `<number_of_tag_columns>`.
 * If the student does not have a grade for some assessment, you should leave the corresponding assessment column blank.
 
 </div>
+
+<div style="page-break-after: always;"></div>
 
 An example of how the CSV should be formatted is shown below:
 
@@ -519,6 +525,7 @@ Examples:
 
 [Return to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 
 ### Editing the data file
 
