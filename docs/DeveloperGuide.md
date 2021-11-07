@@ -47,7 +47,7 @@ Take note of some syntax we will frequently use throughout the Developer Guide:
         - [Launch and shutdown](#launch-and-shutdown)
         - [Adding a patient](#add-patient-manual-testing)
         - [Listing all patients](#list-patients-manual-testing)
-        - [Finding a patient](#find-patient-manual-testing)
+        - [Finding patients](#find-patient-manual-testing)
         - [Deleting a patient](#delete-patient-manual-testing)
         - [Editing a patient](#edit-patient-manual-testing)
         - [Editing a patient's remark](#remark-patient-manual-testing)
@@ -55,7 +55,7 @@ Take note of some syntax we will frequently use throughout the Developer Guide:
         - [Deleting a tag of a patient](#delete-tag-patient-manual-testing)
         - [Adding a doctor](#add-doctor-manual-testing)
         - [Listing all doctors](#list-doctors-manual-testing)
-        - [Finding a doctor](#find-doctor-manual-testing)
+        - [Finding doctors](#find-doctor-manual-testing)
         - [Deleting a doctor](#delete-doctor-manual-testing)
         - [Editing a doctor](#edit-doctor-manual-testing)
         - [Editing a doctor's remark](#remark-patient-manual-testing)
@@ -969,19 +969,19 @@ testers are expected to do more *exploratory* testing.
       `toggle` to the `Patients` tab.
 
    2. Test case: `find Aaron`<br>
-      Expected: Patient list shows only one patient "Aaron Yeoh". Status message shown says "1 patients listed!".
+      Expected: Patient list shows only one patient "Aaron Yeoh". Status message shows that 1 patient is listed.
 
    3. Test case: `find aaron`<br>
-      Expected: `find` command is case-insensitive. Patient list shows only one patient "Aaron Yeoh". Status message shown says "1 patients listed!".
+      Expected: `find` command is case-insensitive. Patient list shows only one patient "Aaron Yeoh". Status message shows that 1 patient is listed.
 
    4. Test case: `find aaron Bobby`<br>
-      Expected: `find` command is able to search multiple patients using multiple keywords. Patient list shows two patients "Aaron Yeoh" and "Bobby Yu". Status message shown says "2 patients listed!".
+      Expected: `find` command is able to search multiple patients using multiple keywords. Patient list shows two patients "Aaron Yeoh" and "Bobby Yu". Status message shows that 2 patients are listed.
 
    5. Test case: `find aar`<br>
-      Expected: Patient list shows "No patients found". Status message shown says "0 patients listed!".
+      Expected: Patient list shows that no patients are found. Status message shows that 0 patients are listed.
 
    6. Test case: `find Alex`<br>
-      Expected: Patient list shows "No patients found". Status message shown says "0 patients listed!".
+      Expected: Patient list shows that no patients are found. Status message shows that 0 patients are listed.
 
 
 ### Deleting a patient  <a name="delete-patient-manual-testing"/>
@@ -1172,19 +1172,19 @@ testers are expected to do more *exploratory* testing.
       `toggle` to the `Patients` tab.
 
    2. Test case: `find Alex`<br>
-      Expected: Doctor list shows only one doctor "Alex Yeoh". Status message shown says "1 doctors listed!".
+      Expected: Doctor list shows only one doctor "Alex Yeoh". Status message shows that 1 doctor is listed.
 
    3. Test case: `find alex`<br>
-      Expected: `find` command is case-insensitive. Doctor list shows only one doctor "Alex Yeoh". Status message shown says "1 doctors listed!".
+      Expected: `find` command is case-insensitive. Doctor list shows only one doctor "Alex Yeoh". Status message shows that 1 doctor is listed.
 
    4. Test case: `find alex bernice`<br>
-      Expected: `find` command is able to search multiple doctors using multiple keywords. Doctor list shows two doctors "Alex Yeoh" and "Bernice Yu". Status message shown says "2 doctors listed!".
+      Expected: `find` command is able to search multiple doctors using multiple keywords. Doctor list shows two doctors "Alex Yeoh" and "Bernice Yu". Status message shows that 2 doctors are listed.
 
    5. Test case: `find ale`<br>
-      Expected: Doctor list shows "No doctors found". Status message shown says "0 doctors listed!".
+      Expected: Doctor list shows that no doctors are found. Status message shows that 0 doctors are listed.
 
    6. Test case: `find Aaron`<br>
-      Expected: Doctor list shows "No doctors found". Status message shown says "0 doctors listed!".
+      Expected: Doctor list shows that no doctors are found. Status message shows that 0 doctors are listed.
    
 ### Deleting a doctor  <a name="delete-doctor-manual-testing"/>
 1. Deleting a doctor while all doctors are being shown
