@@ -1051,92 +1051,92 @@ testers are expected to do more *exploratory* testing.
 
 ### Marking an applicant
 
-1. Marking a person while all persons are being shown
+1. Marking applicants while all applicants are being shown
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list all currently `Not Done`.
+    1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list all currently `Not Done`.
 
     2. Test case: `mark 1`<br>
-       Expected: First contact is marked to `Done`. Details of the marked contact shown in the status message.
+       Expected: First applicant is marked to `Done`. Details of the marked applicant shown in the result display.
 
     3. Test case: `mark 0`<br>
-       Expected: No person is marked. Error details shown in the status message.
+       Expected: No applicant is marked. Error details shown in the result display stating that the index is invalid.
 
     4. Test case: `mark 2`, then `mark 2` again<br>
-       Expected: Second contact is marked to `Done` with the first `mark 2`. Details of the marked contact shown in the status message.
-                 For the second `mark 2`, no new person is marked. Error details shown in the status message.
+       Expected: Second applicant is marked to `Done` with the first `mark 2`. Details of the marked applicant shown in the result display.
+                 For the second `mark 2`, no new applicant is marked. Error details shown in the result display stating that an applicant that is `Done` cannot be marked.
 
     5. Test case: `mark 3 3`<br>
-       Expected: No person is marked. Error details shown in the status message.
+       Expected: No applicant is marked. Error details shown in the result display stating that there should not be duplicate indexes.
 
     6. Other incorrect mark commands to try: `mark`, `mark x` (where x is larger than the list size), `mark y` (where y is any non-positive integer)<br>
-       Expected: No person is marked. Error details shown in the status message.
+       Expected: No applicant is marked. Error messages displaying the cause of error is shown in the results display.
 
     7. Test case: `mark 4 5`<br>
-       Expected: Fourth and fifth contact are marked to `Done`. Details of the marked contacts shown in the status message.
+       Expected: Fourth and fifth applicant are marked to `Done`. Details of the marked applicants shown in the result display.
 
 
-2. Marking a person while a filtered list of persons are being shown
+2. Marking applicants while a filtered list of applicants are being shown
 
-    1. Prerequisites: Find a valid group of persons using the `find` command with appropriate inputs. Multiple persons in the filtered list all currently `Not Done`.
+    1. Prerequisites: Find a valid group of applicants using the `find` command with appropriate inputs. Multiple applicants in the filtered list all currently `Not Done`.
     
-    2. Test case: Utilise the same test cases in Section 1 of Marking a person<br>
-       Expected: Same results as the corresponding expected test case results in Section 1 of Marking a person, while still in the filtered list.
+    2. Test case: Utilise the same test cases in Section 1 of Marking an applicant<br>
+       Expected: Same results as the corresponding expected test case results in Section 1 of Marking an applicant, while still in the filtered list.
 
     3. Test case: `mark 6`, then `list`<br>
-       Expected: For `mark 6`, the sixth contact is marked to `Done` and details of the marked contact shown in the status message.
-                 After `list`, locate the marked person in the list and the person should still be `Done`.
+       Expected: For `mark 6`, the sixth applicant is marked to `Done` and details of the marked applicant shown in the result display.
+                 After `list`, locate the marked applicant in the list and the applicant should still be `Done`.
 
 ### Unmarking an applicant
 
-1. Unmarking a person while all persons are being shown
+1. Unmarking applicants while all applicants are being shown
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list all currently `Done`.
+    1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list all currently `Done`.
 
     2. Test case: `unmark 1`<br>
-       Expected: First contact is unmarked to `Not Done`. Details of the unmarked contact shown in the status message.
+       Expected: First applicant is unmarked to `Not Done`. Details of the unmarked applicant shown in the result display.
 
     3. Test case: `unmark 0`<br>
-       Expected: No person is unmarked. Error details shown in the status message.
+       Expected: No applicant is unmarked. Error details shown in the result display stating that the index is invalid.
 
     4. Test case: `unmark 2`, then `unmark 2` again<br>
-       Expected: Second contact is unmarked to `Not Done` with the first `unmark 2`. Details of the unmarked contact shown in the status message.
-                 For the second `unmark 2`, no new person is unmarked. Error details shown in the status message.
+       Expected: Second applicant is unmarked to `Not Done` with the first `unmark 2`. Details of the unmarked applicant shown in the result display.
+                 For the second `unmark 2`, no new applicant is unmarked. Error details shown in the result display stating that an applicant that is `Not Done` cannot be unmarked.
 
     5. Test case: `unmark 3 3`<br>
-       Expected: No person is unmarked. Error details shown in the status message.
+       Expected: No applicant is unmarked. Error details shown in the result display stating that there should not be duplicate indexes.
 
     6. Other incorrect unmark commands to try: `unmark`, `unmark x` (where x is larger than the list size), `unmark y` (where y is any negative integer)<br>
-       Expected: No person is unmarked. Error details shown in the status message.
+       Expected: No applicant is unmarked. Error messages displaying the cause of error is shown in the results display.
 
     7. Test case: `unmark 4 5`<br>
-       Expected: Fourth and fifth contact are unmarked to `Not Done`. Details of the unmarked contacts shown in the status message.
+       Expected: Fourth and fifth applicant are unmarked to `Not Done`. Details of the unmarked applicant shown in the result display.
 
-2. Marking a person while a filtered list of persons are being shown
+2. Marking applicants while a filtered list of applicants are being shown
 
-    1. Prerequisites: Find a valid group of persons using the `find` command with appropriate inputs. Multiple persons in the filtered list all currently `Done`.
+    1. Prerequisites: Find a valid group of applicants using the `find` command with appropriate inputs. Multiple applicants in the filtered list all currently `Done`.
 
-    2. Test case: Utilise the same test cases in Section 1 of Unmarking a person<br>
-       Expected: Same results as the corresponding expected test case results in Section 1 of Unmarking a person, while still in the filtered list.
+    2. Test case: Utilise the same test cases in Section 1 of Unmarking an applicant<br>
+       Expected: Same results as the corresponding expected test case results in Section 1 of Unmarking an applicant, while still in the filtered list.
 
     3. Test case: `unmark 6`, then `list`<br>
-       Expected: For `unmark 6`, the sixth contact is unmarked to `Not Done` and details of the unmarked contact shown in the status message.
-                 After `list`, locate the unmarked person in the list and the person should still be `Not Done`.
+       Expected: For `unmark 6`, the sixth applicant is unmarked to `Not Done` and details of the unmarked applicant shown in the result display.
+                 After `list`, locate the unmarked applicant in the list and the applicant should still be `Not Done`.
     
 ### Deleting marked applicants
 
-1. Deleting marked applicants while all persons are being shown
+1. Deleting marked applicants while all applicants are being shown
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. Some persons are currently `Done`.
-
-    2. Test case: `delete_marked`<br>
-       Expected: All the persons with `Done` are deleted from the list. Details of the deleted contacts shown in the status message.
-
-2. Deleting marked applicants while a filtered list of persons are being shown
-
-    1. Prerequisites: Find a valid group of persons using the `find` command with appropriate inputs. Multiple persons in the filtered list. Some persons are currently `Done`.
+    1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list. Some applicants are currently `Done`.
 
     2. Test case: `delete_marked`<br>
-       Expected: All the persons with `Done` are deleted from the list, not just those found in the filtered list. Details of the deleted contacts shown in the status message.
+       Expected: All the applicants with `Done` are deleted from the list. Details of the deleted applicants shown in the result display.
+
+2. Deleting marked applicants while a filtered list of applicants are being shown
+
+    1. Prerequisites: Find a valid group of applicants using the `find` command with appropriate inputs. Multiple applicants in the filtered list. Some applicants are currently `Done`.
+
+    2. Test case: `delete_marked`<br>
+       Expected: All the applicants with `Done` are deleted from the list, not just those found in the filtered list. Details of the deleted applicants shown in the result display.
 
 ### Saving data
 
