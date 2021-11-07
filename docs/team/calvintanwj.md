@@ -10,6 +10,7 @@ title: Calvin Tan's Project Portfolio Page
 
 Given below are my contributions to the project.
 
+
 * **New Feature**: Added the ability to filter through your checked in guests.
     * What it does: Allows the user to filter your guest list via any of their fields.
     * Justification: At any given time, there could potentially be hundreds of guests currently checked in. Being able
@@ -22,6 +23,7 @@ Given below are my contributions to the project.
       floor level they are on. Hence, this decision would make it easier for the receptionist to view all checked in
       guests on any specified floor. You may read more about this in the [user guide](../UserGuide.md)
 
+
 * **New Feature**: Added the ability to filter all cooperating vendors.
     * What it does: Allows the user to filter your vendor list via any of their fields.
     * Justification: Similar to filtering of guests, where the receptionist can quickly find vendors that suit to their
@@ -29,17 +31,21 @@ Given below are my contributions to the project.
     * Highlights: Same as filtering for guests, where each field was tailored to be filtered in a way that would benefit
       the receptionist the most. You may read more about this in the [user guide](../UserGuide.md)
 
+
 * **New Feature**: Added the ability to toggle between the guest and vendor list via the GUI.
     * What it does: Pressing the Guests and Vendors tab will help you to toggle between the lists.
     * Justification: Although a CLI app, you may execute this toggling with the list commands. However, we felt it may
       be intuitive for the user to allow them to also toggle between the two via the GUI.
 
+
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=calvintanwj)
+
 
 * **Project management**:
     * Assisted in managing all `v1.1` - `v1.4` milestones and releases on GitHub
     * Enabled assertions for Gradle
     * Helped in setting up project issues, assigned them relevant issue tags and delegated them.
+
 
 * **Enhancements to existing features**:
     * Adapted model code from Address Book 3 to suit the context of Pocket Hotel (Pull
@@ -53,6 +59,7 @@ Given below are my contributions to the project.
     * Wrote additional tests for existing features (Pull
       request [\#261](https://github.com/AY2122S1-CS2103T-W12-3/tp/pull/261))
 
+
 * **Documentation**:
     * User Guide:
         * Added documentation for the features `filterguest`, `filtervendor`, `listguest` and `listvendor` (Pull
@@ -65,6 +72,7 @@ Given below are my contributions to the project.
           request [\#288](https://github.com/AY2122S1-CS2103T-W12-3/tp/pull/288))
         * Added implementation details for the various books that make up the `Model`, toggling between lists, and wrote
           use cases(Pull request [\#284](https://github.com/AY2122S1-CS2103T-W12-3/tp/pull/284))
+
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments): (Pull
