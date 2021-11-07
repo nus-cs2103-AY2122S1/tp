@@ -14,11 +14,9 @@ import tutoraid.model.lesson.LessonName;
 import tutoraid.model.lesson.Price;
 import tutoraid.model.lesson.Timing;
 import tutoraid.model.student.InitialStudent;
-import tutoraid.model.student.Lessons;
 import tutoraid.model.student.ParentName;
 import tutoraid.model.student.Phone;
 import tutoraid.model.student.ProgressList;
-import tutoraid.model.student.Student;
 import tutoraid.model.student.StudentName;
 
 /**
