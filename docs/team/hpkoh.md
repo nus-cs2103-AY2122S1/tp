@@ -38,10 +38,11 @@ Given below are my contributions to the project.
   * Added implementation detail for remark command ([#208](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/208))
   * Added implementation details for statefulness ([#114](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/114), [#208](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/208))
   * Added use cases for remark command ([#250](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/250))
-  * Added manual testing instructions for remark command ([#232](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/232))
-  * Added manual testing instructions for tag command ([#232](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/232))
+  * Added manual testing instructions for remark command ([#232](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/232), [#268](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/268))
+  * Added manual testing instructions for tag command ([#232](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/232), [#268](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/268))
   * Standardize use cases ([#250](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/250))
   * Added doctor use cases ([#250](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/250))
+  * Standardize manual testing format ([#250](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/250), [#65](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/265))
 
 * **Contributions to team-based tasks**:
   * Check code coverage and testability of implementations
