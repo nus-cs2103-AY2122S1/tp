@@ -12,7 +12,7 @@ title: Developer Guide
 
 RecruitIn is a desktop app for recruiters in Singapore to keep track of the plethora of clients with different skill sets, availability and experience.
 
-It is optimised for quick text-based inputs via a Command Line Interface (CLI) while still having the ease of use of a Graphical User Interface (GUI).
+It is optimized for quick text-based inputs via a Command Line Interface (CLI) while still having the ease of use of a Graphical User Interface (GUI).
 
 This product will make recruiters’ lives easier through categorisation and filter features to easily access candidates they have in mind.
 
@@ -683,7 +683,7 @@ A recruiter that
 * is reasonably comfortable using CLI apps
 * has a need to manage a significant number of applications
 * works for a company that gets applications for variety of roles
-* has a need to filter and categorise applicants by different fields
+* has a need to filter and categorize applicants by different fields
 
 
 **Value proposition**:
@@ -1169,7 +1169,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Finding an applicant by a specific prefix with non-empty parameters
    
-    1. Prerequisites: For sample data to be utilised, delete the database storage `addressbook.json` from folder `/data` and re-run the application.  
+    1. Prerequisites: For sample data to be utilized, delete the database storage `addressbook.json` from folder `/data` and re-run the application.  
     
     1. Test case:`find n/Alex` <br>
        Expected: Applicants with 'Alex' in the name are listed. Command success message shown in result display.
@@ -1192,7 +1192,7 @@ testers are expected to do more *exploratory* testing.
        
 1. Finding an applicant by multiple prefixes
 
-    1. Prerequisite: For sample data to be utilised, delete the database storage `addressbook.json` from folder `/data` and re-run the application.
+    1. Prerequisite: For sample data to be utilized, delete the database storage `addressbook.json` from folder `/data` and re-run the application.
   
     1. Test case: `find s/4000 i/oct` <br>
        Expected: Applicant with expected salary ranging from `3500` to `4500` **and** interview in October are listed. Command success message shown in result display.
@@ -1276,7 +1276,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: Find a valid group of applicants using the `find` command with appropriate inputs. Multiple applicants in the filtered list all currently `Not Done`.
     
-    2. Test case: Utilise the same test cases in Section 1 of Marking an applicant<br>
+    2. Test case: Utilize the same test cases in Section 1 of Marking an applicant<br>
        Expected: Same results as the corresponding expected test case results in Section 1 of Marking an applicant, while still in the filtered list.
 
     3. Test case: `mark 6`, then `list`<br>
@@ -1313,7 +1313,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: Find a valid group of applicants using the `find` command with appropriate inputs. Multiple applicants in the filtered list all currently `Done`.
 
-    2. Test case: Utilise the same test cases in Section 1 of Unmarking an applicant<br>
+    2. Test case: Utilize the same test cases in Section 1 of Unmarking an applicant<br>
        Expected: Same results as the corresponding expected test case results in Section 1 of Unmarking an applicant, while still in the filtered list.
 
     3. Test case: `unmark 6`, then `list`<br>
