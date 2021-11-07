@@ -619,6 +619,12 @@ Action | Format | Examples
 
 * **GUI**: Graphical User Interface
 
+* **Json**: Javascript object notation file. This is used to store your preferences and data.
+
+* **Command**: The user inputs that run the specific features of the app.
+
+* **Parameter**: A specific detail required for a command to run.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **FAQ**
