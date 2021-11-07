@@ -1105,7 +1105,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
 
    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
@@ -1270,7 +1270,7 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `sum 2`<br>
        Expected: Error details shown in the status message, with instructions on how to use the `sum` command. No summary is displayed.
 
-2. Modifying WhereTourGo with commands that involve summary.
+2. Modifying WhereTourGo with commands that involve summary
 
 * Prerequisites: List all contacts using the `list` command. First contact does not have a 'fnb' category code. Multiple contacts in the list.<br><br>
 
@@ -1315,25 +1315,25 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `view 0`<br>
        Expected: No contact is displayed. Error details shown in the status message. Display Pane remains unchanged.
 
-    4. Other incorrect delete commands to try: view, view x (where x is larger than the list size, or negative), view 00001, view 1 n/, view n/INVALID_NAME(invalid name that does not exist in the addressBook)<br>
-       Expected: Similar to previous
+    4. Other incorrect delete commands to try: `view`, `view x` (where x is larger than the list size, or negative), `view 00001`, `view 1 n/`, `view n/INVALID_NAME` (invalid name that does not exist in the addressBook)<br>
+       Expected: Similar to previous.
 
 ### Navigating input history
 1. Navigating input history using the up arrow key
 
    1. Test case: Pressing up arrow key (When there are no previously saved commands)<br>
-      Expected: Resets the current command in the command box to its previous value
+      Expected: Resets the current command in the command box to its previous value.
 
    2. Test case Pressing up arrow key (When there are previously saved commands)<br>
-      Expected: Changes the current command in the command box to the previous command
+      Expected: Changes the current command in the command box to the previous command.
 
 1. Navigating input history using the down arrow key
 
    1. Test case: Pressing down arrow key (When there are no next saved commands)<br>
-      Expected: Clears the current command in the command box
+      Expected: Clears the current command in the command box.
 
    2. Test case: Pressing down arrow key (When there are next saved commands)<br>
-      Expected: Changes the current command in the command box to the next saved value
+      Expected: Changes the current command in the command box to the next saved value.
 
 ### Clicking on contacts
 1. Clicking on contacts shown in the contact list
@@ -1415,7 +1415,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. Test case: Go to `data/addressbook.json` (the default address book file) and under the first josn-formatted contact, add an alphabet to the `phone` field. Start the app.<br>
+   1. Test case: Go to `data/addressbook.json` (the default address book file) and under the first json-formatted contact, add an alphabet to the `phone` field. Start the app.<br>
       Expected: WhereTourGo will start with an empty address book. The Contact Pane will display no contacts.
 
 ### Exiting the program
