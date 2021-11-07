@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_VENUE;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,9 +77,7 @@ public class AddTaskCommand extends Command {
                 personToEdit.getAddress(), personToEdit.getTags(), tasks, personToEdit.getDescription(),
                 personToEdit.isImportant()
         );
-
         model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         CommandResult commandResult = new CommandResult(generateSuccessMessage(editedPerson));
         commandResult.setWriteCommand();

@@ -322,6 +322,80 @@ The following activity diagram summarises what happens when a user executes a `f
 
         - Keywords provided must be exact, so even if the user is missing one letter, it will not display the expected person
 
+### Mark Tasks as done/not done feature
+
+Marks the task specified by the user as done or not done. Tasks that are marked as done are coloured green in the `tasklistpanel`. Tasks marked as done will not show up as overdue or soon to be due.
+
+Given below is an example usage scenario:
+
+Step 1: The user launches the ContactSH application.  Data will be loaded from the storage to the application memory. The `PersonListPanel` will be populated with a `PersonCard` for every person from memory.
+
+Step 2: The user executes `donetask 2 -ti3` to mark the 3rd task of the second person in the list as done.
+
+Step 3: If the specified person and their corresponding tasks exists, the tasks will be marked as done. Else, an error message will be displayed indicating that the parameters are wrong.
+If the tasks are already marked as done, it will not be marked again. A message will then be displayed showing how many tasks are marked as done, and how many are already marked as done.
+
+The following sequence diagram shows how the mark task as done operation works:
+
+![MarkTaskAsDoneSequenceDiagram](images/DoneTaskSequenceDiagram.png)
+
+The following activity diagram summarizes what happens when a user executes `donetask 2 -ti3`:
+
+![MarkTaskAsDoneActivityDiagram](images/DoneTaskActivityDiagram.png)
+
+The `undotask` command does the opposite - it marks the specified tasks as not done. Tasks that were previously marked as done have their colour in the `tasklistpanel` changed from green to orange, red or gray, depending if they are soon to be due, overdue, or neither, respectively.
+
+#### Design consideration:
+
+##### Aspect: How to mark tasks as done or not done
+
+- **Alternative 1 (current choice):** Have separate commands for marking a task as done or not done.
+  - Pros: Easy to implement, commands have singular purpose.
+  - Cons: Users need to be use another command to mark task as done.
+- **Alternative 2:** Add another flag to `edit` command to edit if a task is done or not done.
+  - Pros: Tasks can be marked as done and edited at the same time.
+  - Cons: Harder to implement, more flags to take note of in the edit command.
+
+### Add new task with the same command word as add new person feature
+
+Adds a new task to an existing person using the `add` command word, similar to adding a new person.
+
+Given below is an example usage scenario:
+
+Step 1: The user launches the ContactSH application.  Data will be loaded from the storage to the application memory. The `PersonListPanel` will be populated with a `PersonCard` for every person from memory.
+
+Step 2: The user executes `add 1 -tn Task` to add a new task named "Task" to the first person in the list.
+
+Step 3: If the specified person exists, a new task named "Task" will be added to the person's task list. Else, an error message will be displayed indicating that either the person index is invalid or the parameters given are wrong.
+
+The following sequence diagram shows how the add task operation works:
+
+![AddSequenceDiagram](images/AddSequenceDiagram.png)
+
+The `rm` command follows a similar operation sequence. Users are able to delete either a person or a task using the same `rm` command word.
+
+The following activity diagram summarizes what happens when a user executes `add 1 -tn Task`:
+
+![AddActivityDiagram](images/AddActivityDiagram.png)
+
+#### Design consideration:
+
+##### Aspect: How to either add a new person or task using the same `add` command word
+
+- **Alternative 1 (current choice):** If the command is to add a new task, invoke `AddTaskCommandParser` from `AddCommandParser`, returning a `AddTaskCommand`. Else if the command is to add a new person, return a `AddCommand` directly from `AddCommandParser`.
+    - Pros: 
+        - Commands encapsulate the exact command to execute.
+        - Easier to debug if either command demonstrates erroneous behaviour.
+    - Cons:
+        - More testing needed to ensure correct integration.
+        - More coding to be done.
+- **Alternative 2:** Handle all commands to add either a new person or task in the same `AddCommandParser` and `AddCommand`.
+    - Pros:
+        - Simple implementation.
+        - Less effort needed.
+    - Cons: 
+        - Increased avenue for bugs.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -549,7 +623,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to list contacts
 2.  ContactSH shows a list of contacts
-3.  User requests to delete a specific contact in the list
+3.  User requests to delete contacts in the list
 4.  ContactSH deletes the contact
 
     Use case ends.
@@ -565,6 +639,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. ContactSH shows an error message.
 
       Use case resumes at step 2.
+
+* 3b. User requests to delete all contacts in the list.
+
+    * 3b1. ContactSH deletes all contacts in the list.
+
+      Use case ends.
 
 **Use case: Find contact(s) by a criterion**
 
@@ -625,6 +705,41 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. ContactSH returns a reverse sorted list of contacts.
 
     Use case ends.
+
+**Use case: Edit a task**
+
+**MSS**
+
+1. User requests for a list of contacts.
+2. ContactSh returns a list a contacts.
+3. User requests for a list of tasks of a contact.
+4. ContactSH returns a list of tasks of that contact.
+5. User provides parameters to edit tasks.
+6. ContactSH edits tasks.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+* 3a. User requests for list of tasks of all users.
+
+    * 3a1. ContactSH returns list of tasks of all users.
+
+      Use case resumes at step 5.
+
+* 3b. The list is empty.
+
+  Use case ends.
+
+* 5a. The given edit information is invalid.
+
+    * 5a1. ContactSH shows an error message.
+
+      Use case resumes at step 5.
 
 *{More to be added}*
 

@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -56,7 +55,7 @@ public class ReminderCommand extends Command {
                 throw new CommandException(Messages.MESSAGE_INVALID_REMINDER_DAY_VALUE);
             }
             Task.setDaysPriorToTaskDate(daysPriorToTaskDate);
-            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            model.updateFilteredPersonList();
             return new CommandResult(String.format(MESSAGE_SET_REMINDER_SUCCESS, daysPriorToTaskDate));
         } else {
             return new CommandResult(String.format(MESSAGE_SHOW_REMINDER_SUCCESS, daysPriorToTaskDate));

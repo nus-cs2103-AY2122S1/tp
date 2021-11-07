@@ -168,6 +168,13 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void updateFilteredPersonList() {
+        @SuppressWarnings("unchecked")
+        Predicate<Person> predicate = (Predicate<Person>) onlyFilteredPersons.getPredicate();
+        onlyFilteredPersons.setPredicate(PREDICATE_SHOW_ALL_PERSONS);
+        onlyFilteredPersons.setPredicate(predicate);
+    }
+
     public ObservableList<Person> getViewAllTaskListPersons() {
         return viewAllTaskListPersons;
     }
@@ -180,7 +187,6 @@ public class ModelManager implements Model {
 
     @Override
     public void updateViewAllTaskListPersons() {
-        setIsViewAllTasks(true);
         List<Person> personList = new ArrayList<>();
         for (Person person : addressBook.getPersonList()) {
             Person personClone = person.makeClone();
@@ -190,7 +196,7 @@ public class ModelManager implements Model {
         }
 
         viewAllTaskListPersons = FXCollections.observableArrayList(personList);
-        viewAllTaskListPersons = viewAllTaskListPersons.filtered(person -> !person.getTasks().isEmpty());
+        //viewAllTaskListPersons = viewAllTaskListPersons.filtered(person -> !person.getTasks().isEmpty());
     }
 
     @Override
@@ -236,13 +242,11 @@ public class ModelManager implements Model {
 
     @Override
     public void displayPersonTaskList(Person person) {
-        setIsViewAllTasks(false);
         taskListManager.setToDisplayTaskList(person.getName(), false);
     }
 
     @Override
     public void displayFilteredPersonTaskList(Person person, Predicate<Task> predicate) {
-        setIsViewAllTasks(false);
         taskListManager.setFilteredTasksPredicate(predicate);
         taskListManager.setToDisplayTaskList(person.getName(), true);
     }
@@ -250,6 +254,10 @@ public class ModelManager implements Model {
     @Override
     public void displayFilteredTaskList(Predicate<Task> predicate) {
         taskListManager.setFilteredTasksPredicate(predicate);
+        taskListManager.setNameOfChosenPerson(null);
+        taskListManager.setIsPersonSelected(false);
+        viewAllTaskListPersons = FXCollections.emptyObservableList();
+        setIsViewAllTasks(false);
     }
 
     @Override

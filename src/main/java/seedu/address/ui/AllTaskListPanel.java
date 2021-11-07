@@ -94,7 +94,6 @@ public class AllTaskListPanel extends UiPart<Region> {
         }
         // To clear trailing childNodes.
         childNodes.remove(i, childNodes.size());
-        indexChildNodes();
     }
 
     /**
@@ -160,21 +159,6 @@ public class AllTaskListPanel extends UiPart<Region> {
     }
 
     /**
-     * Gives an index number to each child node.
-     */
-    private void indexChildNodes() {
-        ObservableList<TreeItem<Tuple>> childNodes = allTaskListView.getRoot().getChildren();
-        int idx = 0;
-        for (TreeItem<Tuple> childNode : childNodes) {
-            if (childNode.getChildren().isEmpty()) {
-                childNode.getValue().setIndex(0);
-                continue;
-            }
-            childNode.getValue().setIndex(++idx);
-        }
-    }
-
-    /**
      * Custom {@code TreeCell} that displays the graphics of a {@code Task} using a {@code TaskCard}
      * or a {@code Name}.
      */
@@ -190,7 +174,7 @@ public class AllTaskListPanel extends UiPart<Region> {
                 boolean isNameHeader = tuple.isNameHeader();
 
                 if (isNameHeader) {
-                    String nameHeader = tuple.getIndex() + ". " + tuple.getName().toString();
+                    String nameHeader = tuple.getName().toString();
                     Label label = new Label(nameHeader);
                     label.setStyle("-fx-text-fill: cornsilk; -fx-font-weight: bold;");
                     setGraphic(label);

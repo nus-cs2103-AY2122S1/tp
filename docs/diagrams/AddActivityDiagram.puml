@@ -1,0 +1,22 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User enters add 1 -tn Task command;
+if () then ([Valid command format])
+    :Retrieve the last shown Person list;
+  if () then ([Valid Person Index])
+    :Retrieve the task list of the Person at INDEX;
+    :Make a new copy of the task list;
+    :Add new task to the copy of task list;
+    :Update the task list of the Person with the copy;
+  else ([else])
+    :Show invalid INDEX error message;
+  endif
+else ([else])
+  :Show invalid format error message;
+endif
+
+stop
+
+@enduml
