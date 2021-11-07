@@ -152,10 +152,10 @@ Scroll down to the bottom and click on `recruitIn.jar`.
    6. Fast forward the time. Your company informs you that `John Doe` has
       passed his interview and is hired.<br><br>
       Type in **`find`**`n/John Doe p/98765432` to find `John Doe`.<br>
-      Type in **`mark`**`1` to mark `John Doe` as done.<br><br>
+      Type in **`mark`**`1` to mark `John Doe` as Done.<br><br>
       ![After mark](./images/SampleWorkflow4.png)<br><br>
    7. Type in **`list`** to go back to your list of applicants.<br><br>
-      Type in **`delete_marked`** to remove all applicants marked as done, such as `John Doe`.<br><br>
+      Type in **`delete_marked`** to remove all applicants marked as Done, such as `John Doe`.<br><br>
       Now `John Doe` is removed from your list of applicants.<br><br>
 
 6. Aside from the commands shown in the sample workflow above, you may also find these useful:
@@ -464,65 +464,65 @@ Suppose the applicants list includes 3 applicants with name and role `John, Soft
 ### Marking an applicant : `mark`
 [Table of contents](#table-of-contents)
 
-Every applicant in RecruitIn will have a status of either "Done" or "Not Done".
-A "Done" status means that you are done handling the applicant and no longer need to keep their details.
-The `mark` command marks the specified applicant(s) in RecruitIn by changing their status to "Done".
+Every applicant in RecruitIn will have a status of either `Done` or `Not Done`.
+A `Done` status means that you are done handling the applicant and no longer need to keep their details.
+The `mark` command marks the specified applicant(s) in RecruitIn by changing their status to `Done`.
 
 Format: `mark INDEX…​`
 
-* RecruitIn marks the applicant at the specified `INDEX`es as "Done".
+* RecruitIn marks the applicant at the specified `INDEX`es as `Done`.
 * `INDEX` refers to the number shown in RecruitIn's displayed applicants list.
 * `INDEX` **must be a positive whole number**, i.e. 1, 2, 3, …​
 * `INDEX` should not exceed the total number of applicants in RecruitIn's displayed applicants list.
 * `INDEX` in RecruitIn **starts from one**.
 * You must give at least one `INDEX`. (i.e. `mark ` is not a valid command)
 * You cannot give duplicate `INDEX`es. (i.e. `mark 2 2` is not a valid command)
-* You cannot mark an applicant that has status "Done".
+* You cannot mark an applicant that has status `Done`.
 
 Examples:
-* After using the command `list`, `mark 1` marks the 1st applicant listed in RecruitIn as "Done".
+* After using the command `list`, `mark 1` marks the 1st applicant listed in RecruitIn as `Done`.
 
 Before: ![images](images/MarkBefore.png)
 
 After: ![images](images/MarkAfter.png)
 
-* After using the command `list`, `mark 2 4 6` marks the 2nd, 4th and 6th applicant listed in RecruitIn as "Done".
-* After using the command `find n/John`, `mark 1` marks the 1st applicant listed in RecruitIn's results of the `find` command.
+* After using the command `list`, `mark 2 4 6` marks the 2nd, 4th and 6th applicant listed in RecruitIn as `Done`.
+* After using the command `find n/John`, `mark 1` marks the 1st applicant listed in RecruitIn's results of the `find` command as `Done`.
 
 
 ### Unmarking an applicant : `unmark`
 [Table of contents](#table-of-contents)
 
-Every applicant in RecruitIn will have a status of either "Done" or "Not Done".
-A "Not Done" status means that you are still handling the applicant and still need to keep their details.
-The `unmark` command unmarks the specified applicant(s) in RecruitIn by changing their status to "Not Done".
+Every applicant in RecruitIn will have a status of either `Done` or `Not Done`.
+A `Not Done` status means that you are still handling the applicant and still need to keep their details.
+The `unmark` command unmarks the specified applicant(s) in RecruitIn by changing their status to `Not Done`.
 
 Format: `unmark INDEX…​`
 
-* RecruitIn unmarks the applicant at the specified `INDEX`es to "Not Done".
+* RecruitIn unmarks the applicant at the specified `INDEX`es to `Not Done`.
 * `INDEX` refers to the number shown in RecruitIn's displayed applicants list.
 * `INDEX` **must be a positive whole number**, i.e. 1, 2, 3, …​
 * `INDEX` should not exceed the total number of applicants in RecruitIn's displayed applicants list.
 * `INDEX` in RecruitIn **starts from one**.
 * You must give at least one `INDEX`. (i.e. `unmark ` is not a valid command)
 * You cannot give duplicate `INDEX`es. (i.e. `delete 2 2` is not a valid command)
-* You cannot unmark an applicant that has status "Not Done".
+* You cannot unmark an applicant that has status `Not Done`.
 
 Examples:
-* After using the command `list`, `ummark 1` unmarks the 1st applicant listed in RecruitIn to "Not Done".
+* After using the command `list`, `ummark 1` unmarks the 1st applicant listed in RecruitIn to `Not Done`.
 
 Before: ![images](images/UnmarkBefore.png)
 
 After: ![images](images/UnmarkAfter.png)
 
-* After using the command `list`, `unmark 2 4 6` unmarks the 2nd, 4th and 6th applicant listed in RecruitIn to "Not Done".
-* After using the command `find n/John`, `unmark 1` unmarks the 1st applicant listed in RecruitIn's results of the `find` command.
+* After using the command `list`, `unmark 2 4 6` unmarks the 2nd, 4th and 6th applicant listed in RecruitIn to `Not Done`.
+* After using the command `find n/John`, `unmark 1` unmarks the 1st applicant listed in RecruitIn's results of the `find` command to `Not Done`.
 
 
 ### Deleting marked applicants : `delete_marked`
 [Table of contents](#table-of-contents)
 
-The `delete_marked` command deletes all applicants that are currently marked as done.
+The `delete_marked` command deletes all applicants that are currently marked as `Done`.
 This provides an easy way for you to delete the data of all applicants you no longer need.
 
 Format: `delete_marked`
@@ -537,7 +537,7 @@ After: ![images](images/DeleteMarkedAfter.png)
 ### Clearing all data : `clear`
 [Table of contents](#table-of-contents)
 
-Deletes all applicants in RecruitIn.
+The `clear` command deletes all applicants in RecruitIn.
 
 Format: `clear`
 
@@ -548,7 +548,8 @@ The `exit` command causes RecruitIn to close and exit.
 
 Format: `exit`
 
-You can also exit RecruitIn by clicking on the 'X' button found on the top right side of the app. 
+You can also exit RecruitIn by clicking on the 'X' button found on the top right side of the app.
+Alternatively, you can also click on the 'File' button on the upper left of the app, before clicking the pop-up 'Exit' button. 
 
 
 ### Saving the data
@@ -587,9 +588,9 @@ Example of the format of how data is saved for an applicant:
 ```
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes the data format invalid, RecruitIn will remove all saved data and start with an empty data file the next time you open the app.
+It is advised that you be careful when handling the data file directly!
 </div>
 
-<p align="center"><a href="#table-of-contents">Click here to see the table of contents</a></p>
 
 --------------------------------------------------------------------------------------------------------------------
 
