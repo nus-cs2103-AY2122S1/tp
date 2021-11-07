@@ -1056,6 +1056,43 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+### Finding an applicant
+1. Finding an applicant by a specific prefix with non-empty parameters
+   
+    1. Prerequisites: For sample data to be utilised, delete the database storage `addressbook.json` from folder `/data` and re-run the application.  
+    
+    1. Test case:`find n/Alex` <br>
+       Expected: Applicants with 'Alex' in the name are listed. Command success message shown in result display.
+    
+    1. Test case: `find i/oct` <br> 
+       Expected: Applicants with interviews in October are listed. Command success message shown in result display.
+       (Using sample data, there should be 3 applicants listed.)
+
+    1. Test case: `find s/4000` <br>
+       Expected: Applicants with expected salary ranging from `3500` to `4500` are listed. Command success message shown in result display.
+       (Using sample data, Alex with salary `4500` and Roy with salary `3600` are listed.)
+       
+    1. Test case: `find y/-1` (invalid search terms) <br> 
+       Expected: No applicant is listed. Error details shown on result display.
+       
+1. Finding an applicant by a specific prefix with empty parameters
+    
+    1. Test case: `find n/` <br>
+       Expected: All applicants stored are listed. Command success message shown in result display.
+       
+1. Finding an applicant by multiple prefixes
+
+    1. Prerequisite: For sample data to be utilised, delete the database storage `addressbook.json` from folder `/data` and re-run the application.
+  
+    1. Test case: `find s/4000 i/oct` <br>
+       Expected: Applicant with expected salary ranging from `3500` to `4500` **and** interview in October are listed. Command success message shown in result display.
+       (Using sample data, only Alex is listed.)
+       
+1. Finding an applicant without prefixes
+
+    1. Test case: `find` <br>
+       Expected: No applicant is listed. Invalid command format error and usage message for `find` shown in result display.
+  
 
 
 
