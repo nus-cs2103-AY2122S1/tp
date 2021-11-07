@@ -51,7 +51,8 @@ public class GraphCreator extends Creator {
         return list.stream().filter(num -> num >= 0).collect(Collectors.toList());
     }
 
-    private LinkedHashMap<String, List<Integer>> cleanAssessmentResults(LinkedHashMap<String, List<Integer>> assessmentResults) {
+    private LinkedHashMap<String, List<Integer>> cleanAssessmentResults(
+            LinkedHashMap<String, List<Integer>> assessmentResults) {
         return assessmentResults
             .entrySet()
             .stream()
