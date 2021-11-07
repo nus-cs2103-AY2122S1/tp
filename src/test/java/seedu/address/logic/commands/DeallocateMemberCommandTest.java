@@ -1,10 +1,13 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalFacilities.TAMPINES_HUB_FIELD_SECTION_B;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.address.testutil.TypicalMembers.AMY;
 import static seedu.address.testutil.TypicalSportsPa.getTypicalSportsPa;
 
@@ -66,6 +69,28 @@ public class DeallocateMemberCommandTest {
     }
 
     @Test
+    public void execute_memberIndexOutsideRange_failure() {
+        Model model = new ModelManager(new SportsPa(), new UserPrefs());
+        model.addMember(AMY);
+        Facility facility = new FacilityBuilder(TAMPINES_HUB_FIELD_SECTION_B).build();
+        model.addFacility(facility);
+
+        DeallocateMemberCommand command = new DeallocateMemberCommand(INDEX_SECOND, INDEX_FIRST, DayOfWeek.MONDAY);
+        assertCommandFailure(command, model, Messages.MESSAGE_INVALID_MEMBER_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_facilityIndexOutsideRange_failure() {
+        Model model = new ModelManager(new SportsPa(), new UserPrefs());
+        model.addMember(AMY);
+        Facility facility = new FacilityBuilder(TAMPINES_HUB_FIELD_SECTION_B).build();
+        model.addFacility(facility);
+
+        DeallocateMemberCommand command = new DeallocateMemberCommand(INDEX_FIRST, INDEX_SECOND, DayOfWeek.MONDAY);
+        assertCommandFailure(command, model, Messages.MESSAGE_INVALID_FACILITY_DISPLAYED_INDEX);
+    }
+
+    @Test
     public void execute_emptyMemberList_failure() {
         Model model = new ModelManager(getTypicalSportsPa(), new UserPrefs());
         model.updateFilteredMemberList(Model.PREDICATE_SHOW_NO_MEMBERS);
@@ -81,5 +106,33 @@ public class DeallocateMemberCommandTest {
 
         DeallocateMemberCommand command = new DeallocateMemberCommand(INDEX_FIRST, INDEX_FIRST, DayOfWeek.SUNDAY);
         assertCommandFailure(command, model, String.format(Messages.MESSAGE_EMPTY_LIST, Messages.MESSAGE_FACILITY));
+    }
+
+    @Test
+    public void equal() {
+        DeallocateMemberCommand dealloc = new DeallocateMemberCommand(INDEX_FIRST, INDEX_FIRST, DayOfWeek.MONDAY);
+
+        //same object -> returns true
+        assertTrue(dealloc.equals(dealloc));
+
+        //same values, different object -> returns true
+        DeallocateMemberCommand deallocSameValues = new DeallocateMemberCommand(INDEX_FIRST, INDEX_FIRST,
+                DayOfWeek.MONDAY);
+        assertTrue(dealloc.equals(deallocSameValues));
+
+        //null -> returns false
+        assertFalse(dealloc.equals(null));
+
+        //different command -> returns false
+        assertFalse(dealloc.equals(new ExportCommand()));
+
+        //different member index -> return false
+        assertFalse(dealloc.equals(new DeallocateMemberCommand(INDEX_SECOND, INDEX_FIRST, DayOfWeek.MONDAY)));
+
+        //different facility index -> return false
+        assertFalse(dealloc.equals(new DeallocateMemberCommand(INDEX_FIRST, INDEX_SECOND, DayOfWeek.MONDAY)));
+
+        //different day of week -> return false
+        assertFalse(dealloc.equals(new DeallocateMemberCommand(INDEX_FIRST, INDEX_FIRST, DayOfWeek.TUESDAY)));
     }
 }
