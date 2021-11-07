@@ -1,0 +1,23 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR_T2
+skinparam classBackgroundColor MODEL_COLOR
+
+Interface StandardFieldLength <<Interface>>
+Interface ShorterFieldLength <<Interface>>
+Interface LongerFieldLength <<Interface>>
+
+ShorterFieldLength -right-|> StandardFieldLength
+LongerFieldLength -left-|> StandardFieldLength
+
+Name .up.|> StandardFieldLength
+Email .up.|> LongerFieldLength
+Address .up.|> LongerFieldLength
+Phone .up.|> StandardFieldLength
+CurrentPlan .up.|> LongerFieldLength
+DisposableIncome .up.|> ShorterFieldLength
+LastMet .up.|> StandardFieldLength
+NextMeeting .up.|> LongerFieldLength
+
+@enduml
