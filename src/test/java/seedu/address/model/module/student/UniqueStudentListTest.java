@@ -1,4 +1,4 @@
-package seedu.address.model.student;
+package seedu.address.model.module.student;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -14,8 +14,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.module.student.Student;
-import seedu.address.model.module.student.UniqueStudentList;
 import seedu.address.model.module.student.exceptions.DuplicateStudentException;
 import seedu.address.model.module.student.exceptions.StudentNotFoundException;
 import seedu.address.testutil.StudentBuilder;
