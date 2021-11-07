@@ -489,7 +489,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user with many contacts in the address book                                     | search for contacts in my contacts list whose name matches my input         |  navigate to the person I am looking for quickly |
 | `* * *`  | user                                     | delete clients from my contact list         | remove a client from my contact list I no longer need to keep in contact with|
 | `* * *`  | user                                    | use programs on Windows and Mac         | use it on all my laptops |
-| `* * *`  | user                                    | exit the program safely        | free up resources on his computer |
+| `* * *`  | user                                    | exit the program safely        | free up resources on my computer |
 | `* * *`  | new user                                     |  install the application        | I can use it |
 | `* * *`  | insurance agent                                     | keep track of clients' claim status         | update the client about it |
 | `* * *`  | insurance agent                                     | keep track of clients' claim status         | update the client about it |
