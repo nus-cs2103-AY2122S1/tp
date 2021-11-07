@@ -210,7 +210,7 @@ public class EditCommandTest {
 
 
     /**
-     * A Model stub that contains a single student.
+     * A Model stub that contains students
      */
     private class ModelStubWithStudents extends ModelStub {
         protected final ObservableList<Student> students;
