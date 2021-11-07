@@ -14,8 +14,12 @@ import static seedu.siasa.testutil.TypicalIndexes.INDEX_FIRST_CONTACT;
 import static seedu.siasa.testutil.TypicalIndexes.INDEX_SECOND_CONTACT;
 import static seedu.siasa.testutil.TypicalSiasa.getTypicalSiasa;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
+import javafx.util.Pair;
 import seedu.siasa.commons.core.Messages;
 import seedu.siasa.commons.core.index.Index;
 import seedu.siasa.logic.commands.ClearCommand;
@@ -25,6 +29,8 @@ import seedu.siasa.model.ModelManager;
 import seedu.siasa.model.Siasa;
 import seedu.siasa.model.UserPrefs;
 import seedu.siasa.model.contact.Contact;
+import seedu.siasa.model.policy.Policy;
+import seedu.siasa.model.policy.PolicyIsOwnedByPredicate;
 import seedu.siasa.testutil.ContactBuilder;
 import seedu.siasa.testutil.EditContactDescriptorBuilder;
 
@@ -35,6 +41,30 @@ public class EditContactCommandTest {
 
     private Model model = new ModelManager(getTypicalSiasa(), new UserPrefs());
 
+    private static Policy newPolicyWithNewOwner(Policy policy, Contact owner) {
+        return new Policy(
+                policy.getTitle(),
+                policy.getPaymentStructure(),
+                policy.getCoverageExpiryDate().orElse(null),
+                policy.getCommission(),
+                owner,
+                policy.getTags()
+        );
+    }
+
+    private static void updateModelAfterContactUpdate(Model model, Contact contactToEdit, Contact editedContact) {
+        model.updateFilteredPolicyList(new PolicyIsOwnedByPredicate(contactToEdit));
+        List<Policy> policyList = model.getFilteredPolicyList();
+        ArrayList<Pair<Policy, Policy>> policiesToBeUpdated = new ArrayList<>();
+        for (Policy p : policyList) {
+            policiesToBeUpdated.add(new Pair<>(p, newPolicyWithNewOwner(p, editedContact)));
+        }
+        for (Pair<Policy, Policy> pair : policiesToBeUpdated) {
+            model.setPolicy(pair.getKey(), pair.getValue());
+        }
+        model.updateFilteredPolicyList(new PolicyIsOwnedByPredicate(editedContact));
+    }
+
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Contact editedContact = new ContactBuilder().build();
@@ -44,6 +74,9 @@ public class EditContactCommandTest {
         String expectedMessage = String.format(EditContactCommand.MESSAGE_EDIT_CONTACT_SUCCESS, editedContact);
 
         Model expectedModel = new ModelManager(new Siasa(model.getSiasa()), new UserPrefs());
+
+        updateModelAfterContactUpdate(expectedModel, model.getFilteredContactList().get(0), editedContact);
+
         expectedModel.setContact(model.getFilteredContactList().get(0), editedContact);
 
         assertCommandSuccess(editContactCommand, model, expectedMessage, expectedModel);
@@ -65,6 +98,9 @@ public class EditContactCommandTest {
         String expectedMessage = String.format(EditContactCommand.MESSAGE_EDIT_CONTACT_SUCCESS, editedContact);
 
         Model expectedModel = new ModelManager(new Siasa(model.getSiasa()), new UserPrefs());
+
+        updateModelAfterContactUpdate(expectedModel, lastContact, editedContact);
+
         expectedModel.setContact(lastContact, editedContact);
 
         assertCommandSuccess(editContactCommand, model, expectedMessage, expectedModel);
@@ -95,6 +131,9 @@ public class EditContactCommandTest {
         String expectedMessage = String.format(EditContactCommand.MESSAGE_EDIT_CONTACT_SUCCESS, editedContact);
 
         Model expectedModel = new ModelManager(new Siasa(model.getSiasa()), new UserPrefs());
+
+        updateModelAfterContactUpdate(expectedModel, contactInFilteredList, editedContact);
+
         expectedModel.setContact(model.getFilteredContactList().get(0), editedContact);
 
         assertCommandSuccess(editContactCommand, model, expectedMessage, expectedModel);

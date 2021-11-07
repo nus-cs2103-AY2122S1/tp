@@ -8,12 +8,14 @@ import static seedu.siasa.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.siasa.model.Model.PREDICATE_SHOW_ALL_CONTACTS;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import javafx.util.Pair;
 import seedu.siasa.commons.core.Messages;
 import seedu.siasa.commons.core.index.Index;
 import seedu.siasa.commons.util.CollectionUtil;
@@ -26,6 +28,8 @@ import seedu.siasa.model.contact.Contact;
 import seedu.siasa.model.contact.Email;
 import seedu.siasa.model.contact.Name;
 import seedu.siasa.model.contact.Phone;
+import seedu.siasa.model.policy.Policy;
+import seedu.siasa.model.policy.PolicyIsOwnedByPredicate;
 import seedu.siasa.model.tag.Tag;
 
 /**
@@ -83,9 +87,33 @@ public class EditContactCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_CONTACT);
         }
 
+        ArrayList<Pair<Policy, Policy>> policiesToBeUpdated = new ArrayList<>();
+        model.updateFilteredPolicyList(new PolicyIsOwnedByPredicate(contactToEdit));
+        List<Policy> contactPolicies = model.getFilteredPolicyList();
+
+        for (Policy p : contactPolicies) {
+            policiesToBeUpdated.add(new Pair(p, newPolicyWithNewOwner(p, editedContact)));
+        }
+
+        for (Pair<Policy, Policy> pair : policiesToBeUpdated) {
+            model.setPolicy(pair.getKey(), pair.getValue());
+        }
+
         model.setContact(contactToEdit, editedContact);
         model.updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
+        model.updateFilteredPolicyList(new PolicyIsOwnedByPredicate(editedContact));
         return new CommandResult(String.format(MESSAGE_EDIT_CONTACT_SUCCESS, editedContact));
+    }
+
+    private static Policy newPolicyWithNewOwner(Policy policy, Contact owner) {
+        return new Policy(
+                policy.getTitle(),
+                policy.getPaymentStructure(),
+                policy.getCoverageExpiryDate().orElse(null),
+                policy.getCommission(),
+                owner,
+                policy.getTags()
+        );
     }
 
     /**
