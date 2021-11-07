@@ -27,7 +27,8 @@ public class HealthCondition {
     }
 
     /**
-     * Returns true if a given string is a valid tag name.
+     * Returns true if a given string {@param test} is a valid tag name.
+     *
      */
     public static boolean isValidHealthCondition(String test) {
         return test.matches(VALIDATION_REGEX) && test.length() <= 50;

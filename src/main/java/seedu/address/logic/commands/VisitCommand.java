@@ -53,6 +53,8 @@ public class VisitCommand extends Command {
     /**
      * @param index of the person in the filtered person list to edit the visit
      * @param visit of the person to be updated to
+     * @param frequency of the recurring visit
+     * @param occurrence of a recurring visit
      */
     public VisitCommand(Index index, Optional<Visit> visit,
                         Optional<Frequency> frequency, Optional<Occurrence> occurrence) {

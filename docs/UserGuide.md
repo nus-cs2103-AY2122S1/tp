@@ -127,9 +127,14 @@ Quarterly | Every 90 days
 * If a parameter is expected but two consecutive flags are given (i.e. no spaces between two flags), only the first parameter will be taken.<br>
   e.g. if you specify `sort v/lv/`, only `v/` will be taken.
 
+</div>
+
+<div markdown="block" class="alert alert-info">
+:exclamation: Extra texts in a command? Take note!
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+* Commands only check values associated to valid flags but not additional input other than valid flags.
 </div>
 
 ### Add elderly details : `add`
