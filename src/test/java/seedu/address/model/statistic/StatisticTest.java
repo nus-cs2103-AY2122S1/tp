@@ -14,6 +14,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Person;
 
 /**
@@ -24,6 +25,9 @@ public class StatisticTest {
 
     private final List<Person> personList = Arrays.asList(ALICE, BOB, BENSON, CARL, ELLE);
     private final Statistic statistic = new Statistic(personList);
+
+    public StatisticTest() throws CommandException {
+    }
 
     @Test
     public void constructor_null_throwsNullPointerException() {
@@ -39,7 +43,7 @@ public class StatisticTest {
     }
 
     @Test
-    public void computeNationalityStatistic() {
+    public void computeNationalityStatistic() throws CommandException {
         NationalityStatistic nationalityStatistic = statistic.computeNationalityStatistic();
 
         HashMap<String, Integer> nationalitiesCount = new HashMap<String, Integer>();

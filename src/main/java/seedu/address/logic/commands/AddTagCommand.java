@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
@@ -31,18 +32,26 @@ public class AddTagCommand extends Command {
 
     public static final String COMMAND_WORD = "addt";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": "
-            + "'addt all t/TAG' adds tags for everyone. "
-            + "'addt INDEX t/TAG' adds tags for selected person."
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add tags to people.\n"
+            + " - 'addt all t/TAG' adds tags for everyone.\n"
+            + " - 'addt INDEX t/TAG' adds tags for the person identified by the index number used in the displayed "
+            + "person list.\n"
             + "Parameters: "
-            + "INDEX (must be a positive integer or the word 'all')"
-            + "" + PREFIX_TAG + "TAG...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_TAG + "CS2103 Group Mate ";
+            + "INDEX (must be a positive integer or the word 'all') "
+            + PREFIX_TAG + "TAG...\n"
+            + "Note:\n"
+            + " - Tags must be alphanumeric.\n"
+            + "Example: "
+            + COMMAND_WORD + " 1 "
+            + PREFIX_TAG + "CS2103Teammate";
 
     public static final String MESSAGE_ADD_TAG_SUCCESS = "Added Tag: %1$s";
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_TAG_NOT_ADDED = "There are no tags to add.";
+    public static final String MESSAGE_INVALID_COMMAND_FORMAT_INVALID_INDEX = String.format(
+            MESSAGE_INVALID_COMMAND_FORMAT, "A valid index was not entered. \n%1$s");
+    public static final String MESSAGE_INVALID_COMMAND_FORMAT_TAGS_ABSENT = String.format(
+            MESSAGE_INVALID_COMMAND_FORMAT, "No tag was entered. \n%1$s");
 
     private final Index index;
     private final Set<Tag> tag;

@@ -16,7 +16,8 @@ import java.util.Objects;
  */
 public class SocialHandle {
 
-    public static final String MESSAGE_CONSTRAINTS = "Social handle should be in PLATFORM:USERNAME format.\n"
+    public static final String MESSAGE_CONSTRAINTS = "Social handle should be in PLATFORM:USERID format.\n"
+            + "USERID should be tied to a specific account of the PLATFORM. \n"
             + "Supported PLATFORM: "
             + "Instagram (ig), "
             + "Telegram (tg), "
@@ -27,7 +28,8 @@ public class SocialHandle {
             + "Github (gh), "
             + "Discord (dc)"
             + "\n"
-            + "(e.g. tg:tanjj3298)\n";
+            + "(e.g. tg:tanjj3298)\n"
+            + "Leaving it blank will remove all the Social Handles.";
 
     public static final String PLATFORM_CONSTRAINTS = "Only the following platforms are supported: "
             + "Instagram (ig), "
@@ -39,10 +41,15 @@ public class SocialHandle {
             + "Github (gh), "
             + "Discord (dc)";
 
-    public static final String USERNAME_CONSTRAINTS = "USERNAME should not contain whitespaces.";
+    public static final String USERID_CONSTRAINTS = "USERID should not contain whitespaces.";
+
+    public static final String USERID_LENGTH_CONSTRAINTS = "USERID is too long. "
+            + "Please check if you have input correctly";
 
     public static final String CLEAR_CONSTRAINTS = "Unable to clear social handles if there are"
             + " multiple social handle fields.";
+
+    public static final int MAXIMUM_USERID_LENGTH = 255;
 
     /*
      * The value should not contain whitespace,
@@ -77,7 +84,7 @@ public class SocialHandle {
         checkArgument(isValidPlatform(platform), PLATFORM_CONSTRAINTS);
         String value = s[1].strip();
         checkArgument(isValidValue(value), "Invalid social handle: " + socialHandle
-                + "\n" + USERNAME_CONSTRAINTS);
+                + "\n" + USERID_CONSTRAINTS);
         this.platform = platform;
         this.value = value;
     }
@@ -141,6 +148,9 @@ public class SocialHandle {
      * Returns true if a given {@code value} is valid.
      */
     public static boolean isValidValue(String value) {
+        if (value.length() > MAXIMUM_USERID_LENGTH) {
+            return false;
+        }
         return value.matches(VALIDATION_REGEX);
     }
 

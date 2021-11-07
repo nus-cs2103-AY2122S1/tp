@@ -1,9 +1,12 @@
-package seedu.address.storage;
+package seedu.address.commons.util;
 
 import javafx.scene.image.Image;
 import seedu.address.MainApp;
 
-public class ImageStorage {
+/**
+ * Retrieves Image file
+ */
+public class ImageUtil {
 
     private static final String IMAGE_RESOURCE_PATH = "/images/";
 
@@ -70,6 +73,9 @@ public class ImageStorage {
             break;
         case "F":
             imageFile = "female.png";
+            break;
+        case "O":
+            imageFile = "other.png";
             break;
         default:
             return null;

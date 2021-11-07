@@ -1,12 +1,14 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.AliasCommand.MESSAGE_INVALID_COMMAND_FORMAT_ALIAS_ABSENT;
+import static seedu.address.logic.commands.AliasCommand.MESSAGE_INVALID_COMMAND_FORMAT_COMMAND_ABSENT;
 import static seedu.address.logic.commands.CommandTestUtil.ADD_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.ALIAS;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.STATISTICS_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.UNKNOWN_LONG_COMMAND_INPUT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ALIAS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIAL_GROUP_AMY;
@@ -48,21 +50,25 @@ public class AliasCommandParserTest {
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AliasCommand.MESSAGE_USAGE);
 
         // missing alias prefix
-        assertParseFailure(parser, PREAMBLE_WHITESPACE + ADD_COMMAND, expectedMessage);
+        assertParseFailure(parser, PREAMBLE_WHITESPACE + ADD_COMMAND, String.format(
+                MESSAGE_INVALID_COMMAND_FORMAT_ALIAS_ABSENT, AliasCommand.MESSAGE_USAGE));
 
         // missing command prefix
-        assertParseFailure(parser, PREAMBLE_WHITESPACE + ALIAS, expectedMessage);
+        assertParseFailure(parser, PREAMBLE_WHITESPACE + ALIAS, String.format(
+                MESSAGE_INVALID_COMMAND_FORMAT_COMMAND_ABSENT, AliasCommand.MESSAGE_USAGE));
 
         // all prefixes missing
-        assertParseFailure(parser, PREAMBLE_WHITESPACE, expectedMessage);
+        assertParseFailure(parser, PREAMBLE_WHITESPACE, String.format(
+                MESSAGE_INVALID_COMMAND_FORMAT_ALIAS_ABSENT, AliasCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidValue_failure() {
         // unknown command
-        assertParseFailure(parser, PREAMBLE_WHITESPACE + ALIAS + UNKNOWN_COMMAND, MESSAGE_UNKNOWN_COMMAND);
+        String unknownCommand = PREAMBLE_WHITESPACE + ALIAS + UNKNOWN_COMMAND;
+        assertParseFailure(parser, unknownCommand, String.format("%s: %s.\n%s",
+                MESSAGE_UNKNOWN_COMMAND, UNKNOWN_LONG_COMMAND_INPUT, ""));
     }
 }

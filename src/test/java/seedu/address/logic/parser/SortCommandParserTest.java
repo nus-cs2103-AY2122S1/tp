@@ -1,6 +1,6 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.SortCommand.MESSAGE_INVALID_COMMAND_FORMAT_PREFIX_ABSENT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -15,7 +15,8 @@ public class SortCommandParserTest {
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT_PREFIX_ABSENT,
+                SortCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -30,20 +31,18 @@ public class SortCommandParserTest {
 
     @Test
     public void parse_invalidArgs_failure() {
+        String errorMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT_PREFIX_ABSENT, SortCommand.MESSAGE_USAGE);
+
         // more than one comparator
-        assertParseFailure(parser, " n/ t/ ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " n/ t/ ", errorMessage);
 
         // repeated comparator
-        assertParseFailure(parser, " n/ n/ ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " n/ n/ ", errorMessage);
 
         // correct first comparator followed by wrong comparator
-        assertParseFailure(parser, " n/   ab/ ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " n/   ab/ ", errorMessage);
 
         // wrong first comparator followed by correct comparator
-        assertParseFailure(parser, " ab/  t/ ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " ab/  t/ ", errorMessage);
     }
 }

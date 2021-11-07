@@ -50,6 +50,8 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane statusbarPlaceholder;
 
+    //Colour scheme of MainWindow and its contents adapted from https://github.com/AY2122S1-CS2103T-F12-3/tp
+
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
@@ -184,11 +186,11 @@ public class MainWindow extends UiPart<Stage> {
      * @see seedu.address.logic.Logic#execute(String)
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
+        resultDisplay.clearDisplay();
+
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
-
-            resultDisplay.clearCharts();
 
             if (commandResult.isShowFeedback()) {
                 resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());

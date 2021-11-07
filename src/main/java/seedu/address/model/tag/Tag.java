@@ -3,6 +3,9 @@ package seedu.address.model.tag;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.awt.Color;
+import java.lang.reflect.Field;
+
 /**
  * Represents a Tag in the address book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
@@ -10,12 +13,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Tag {
 
     public static final String MESSAGE_CONSTRAINTS = "Tag names should be alphanumeric";
-    public static final String MESSAGE_CONSTRAINTS_COLOURS = "Tag Colour should follow the Colour Code format."
-            + " E.g. Blue = #0000FF";
+    public static final String MESSAGE_CONSTRAINTS_COLOURS = "Tag Colour should follow the Colour Code format.\n"
+            + "E.g. Blue = #0000FF,\n"
+            + "or generic colours such as yellow, red, green etc.";
     public static final String DEFAULT_COLOUR_CODE = "#3e7b91";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
     public static final String COLOUR_VALIDATION_REGEX = "^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$";
-
 
     public final String tagName;
     public final String tagColour;
@@ -60,8 +63,45 @@ public class Tag {
      * Returns true if a given string is a valid tag colour.
      */
     public static boolean isValidTagColour(String test) {
-        return test.matches(COLOUR_VALIDATION_REGEX);
+        if (isValidColourCode(test) && test.matches(COLOUR_VALIDATION_REGEX)) {
+            return true;
+        } else if (isValidColourField(test)) {
+            return true;
+        }
+        return false;
     }
+
+    /**
+     * Returns true if a given string is a valid Colour Code
+     *
+     * @param test
+     * @return
+     */
+    public static boolean isValidColourCode(String test) {
+        try {
+            Color.decode(test);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Returns true if a given string is a valid Colour Field
+     *
+     * @param test
+     * @return
+     */
+    public static boolean isValidColourField(String test) {
+        try {
+            final Field f = Color.class.getField(test);
+            f.get(null);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
 
     @Override
     public boolean equals(Object other) {

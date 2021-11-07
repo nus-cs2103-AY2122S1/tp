@@ -1,0 +1,46 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant "d:DeleteMultipleCommand" as DeleteMultipleCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+[-> LogicManager : execute("deletem t/friends g/m")
+activate LogicManager
+
+ref over LogicManager,DeleteMultipleCommand : Parse Delete Multiple Command
+
+LogicManager -> DeleteMultipleCommand : execute()
+activate DeleteMultipleCommand
+
+DeleteMultipleCommand -> Model : updateFilteredPersonList(pred)
+activate Model
+return
+
+DeleteMultipleCommand -> Model : getFilteredPersonList()
+activate Model
+
+Model --> DeleteMultipleCommand : lastShownList
+deactivate Model
+
+loop over each person in lastShownList
+DeleteMultipleCommand -> Model : deletePerson(personToDelete)
+activate Model
+
+return
+
+end
+
+DeleteMultipleCommand -> LogicManager
+deactivate DeleteMultipleCommand
+
+DeleteMultipleCommand -[hidden]-> LogicManager
+destroy DeleteMultipleCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

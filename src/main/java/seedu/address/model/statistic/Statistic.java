@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import seedu.address.logic.commands.StatisticsCommand;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Person;
 
@@ -16,15 +18,20 @@ import seedu.address.model.person.Person;
 public class Statistic {
 
     public final List<Person> list;
+    private final NationalityStatistic nationalityStatistic;
+    private final GenderStatistic genderStatistic;
 
     /**
      * Constructs a {@code Statistic}.
      *
      * @param list A valid filtered persons list.
      */
-    public Statistic(List<Person> list) {
+    public Statistic(List<Person> list) throws CommandException {
         requireNonNull(list);
         this.list = list;
+
+        nationalityStatistic = computeNationalityStatistic();
+        genderStatistic = computeGenderStatistic();
     }
 
     GenderStatistic computeGenderStatistic() {
@@ -47,12 +54,18 @@ public class Statistic {
         return new GenderStatistic(numberOfMales, numberOfFemales, numberOfOthers);
     }
 
-    NationalityStatistic computeNationalityStatistic() {
+    NationalityStatistic computeNationalityStatistic() throws CommandException {
         HashMap<String, Integer> nationalitiesCount = new HashMap<String, Integer>();
 
         for (Person p: list) {
             String nationality = p.getNationality().toString();
-            nationality = nationality.substring(0, 1).toUpperCase() + nationality.substring(1);
+
+            try {
+                nationality = nationality.substring(0, 1).toUpperCase() + nationality.substring(1);
+            } catch (StringIndexOutOfBoundsException e) {
+                throw new CommandException(String.format(StatisticsCommand.MESSAGE_TG_FIELD_MISSING, "Nationalities"));
+            }
+
             int currCount = nationalitiesCount.getOrDefault(nationality, 0);
 
             nationalitiesCount.put(nationality, currCount + 1);
@@ -67,10 +80,10 @@ public class Statistic {
      *
      * @return a map of map of statistics
      */
-    public Map<String, Map<String, Integer>> getRawData() {
+    public Map<String, Map<String, Integer>> getRawData() throws CommandException {
         Map<String, Map<String, Integer>> rawData = new HashMap<>();
-        Map<String, Integer> nationalitiesCount = computeNationalityStatistic().getNationalitiesCount();
-        Map<String, Integer> gendersCount = computeGenderStatistic().getGenderCount();
+        Map<String, Integer> nationalitiesCount = nationalityStatistic.getNationalitiesCount();;
+        Map<String, Integer> gendersCount = genderStatistic.getGenderCount();;
 
         rawData.put("Nationality Statistics", nationalitiesCount);
         rawData.put("Gender Statistics", gendersCount);
@@ -101,7 +114,7 @@ public class Statistic {
      * Format statistics as text for viewing.
      */
     public String toString() {
-        return String.format("%s\n\n%s", computeGenderStatistic(), computeNationalityStatistic());
+        return String.format("%s\n\n%s", genderStatistic, nationalityStatistic);
     }
 
 }

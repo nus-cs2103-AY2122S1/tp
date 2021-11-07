@@ -10,12 +10,13 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Gender {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Gender should only be M (for male), F (for female) and O (for others), and it should not be blank";
+            "Gender should only be 'M' for male, 'F' for female and 'O' for others.\n"
+                    + "Leaving it blank will remove the Gender field.";
 
     /*
      * The gender must be one of the following character: F, M or O.
      */
-    public static final String VALIDATION_REGEX = "[FMO]";
+    public static final String VALIDATION_REGEX = "[FMOfmo]";
 
     public final String gender;
 
@@ -27,7 +28,7 @@ public class Gender {
     public Gender(String gender) {
         requireNonNull(gender);
         checkArgument(isValidGender(gender), MESSAGE_CONSTRAINTS);
-        this.gender = gender;
+        this.gender = gender.toUpperCase();
     }
 
     /**

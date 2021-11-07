@@ -1,0 +1,20 @@
+@startuml
+scale max 500 height
+
+start
+
+:User executes sort command;
+:AddressBook parses the user input;
+if () then ([input is valid])
+    :Create comparator based on
+    specified field;
+    :Sort the model in ascending order
+    using the comparator;
+    :Command result is passed to UI;
+else ([else])
+    :Throw CommandException;
+    :UI catches CommandException;
+endif
+    :UI displays full person list to User;
+stop
+@enduml

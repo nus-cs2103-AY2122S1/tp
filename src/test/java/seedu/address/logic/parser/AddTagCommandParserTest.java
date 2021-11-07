@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.AddTagCommand.MESSAGE_INVALID_COMMAND_FORMAT_INVALID_INDEX;
+import static seedu.address.logic.commands.AddTagCommand.MESSAGE_INVALID_COMMAND_FORMAT_TAGS_ABSENT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
@@ -26,16 +27,18 @@ public class AddTagCommandParserTest {
 
     private static final String TAG_EMPTY = " " + PREFIX_TAG;
 
-    private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_USAGE);
+    private static final String MESSAGE_INVALID_INDEX_FORMAT = String.format(
+            MESSAGE_INVALID_COMMAND_FORMAT_INVALID_INDEX, AddTagCommand.MESSAGE_USAGE);
+    private static final String MESSAGE_INVALID_TAG_FORMAT = String.format(
+            MESSAGE_INVALID_COMMAND_FORMAT_TAGS_ABSENT, AddTagCommand.MESSAGE_USAGE);
 
     private AddTagCommandParser parser = new AddTagCommandParser();
 
     @Test
     public void parse_invalidValue_failure() {
 
-        assertParseFailure(parser, "0" + TAG_DESC_FRIEND, MESSAGE_INVALID_FORMAT); // invalid index
-        assertParseFailure(parser, "-1" + TAG_DESC_FRIEND, MESSAGE_INVALID_FORMAT); // negative index
+        assertParseFailure(parser, "0" + TAG_DESC_FRIEND, MESSAGE_INVALID_INDEX_FORMAT); // invalid index
+        assertParseFailure(parser, "-1" + TAG_DESC_FRIEND, MESSAGE_INVALID_INDEX_FORMAT); // negative index
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Person} being edited,
@@ -48,7 +51,7 @@ public class AddTagCommandParserTest {
                 parser, "1" + TAG_EMPTY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
-        assertParseFailure(parser, "0" + TAG_EMPTY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "0" + TAG_EMPTY, MESSAGE_INVALID_INDEX_FORMAT);
     }
 
     @Test
@@ -67,7 +70,8 @@ public class AddTagCommandParserTest {
         Index targetIndex = INDEX_SECOND_PERSON;
         Set<Tag> validTag = null;
 
-        assertParseFailure(parser, String.valueOf(targetIndex.getOneBased()), MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, String.valueOf(targetIndex.getOneBased()),
+                String.format(MESSAGE_INVALID_TAG_FORMAT, AddTagCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -86,7 +90,8 @@ public class AddTagCommandParserTest {
         Index targetIndex = null;
         Set<Tag> validTag = null;
 
-        assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "", String.format(
+                MESSAGE_INVALID_COMMAND_FORMAT_INVALID_INDEX, AddTagCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -103,9 +108,9 @@ public class AddTagCommandParserTest {
     public void parse_multipleIndices_failure() {
         String userInput = INDEX_FIRST_PERSON.getOneBased() + " "
                 + INDEX_SECOND_PERSON.getOneBased() + TAG_DESC_FRIEND;
-        String expectedMessage = MESSAGE_INVALID_FORMAT + AddTagCommand.MESSAGE_USAGE;
-        assertParseFailure(parser, userInput,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_USAGE));
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT_INVALID_INDEX,
+                AddTagCommand.MESSAGE_USAGE);
+        assertParseFailure(parser, userInput, expectedMessage);
     }
 
     @Test
@@ -124,6 +129,6 @@ public class AddTagCommandParserTest {
         String userInput = targetIndex.getOneBased() + TAG_EMPTY;
 
         assertParseFailure(parser, userInput,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT_TAGS_ABSENT, AddTagCommand.MESSAGE_USAGE));
     }
 }

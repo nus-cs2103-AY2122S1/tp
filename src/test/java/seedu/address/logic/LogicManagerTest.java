@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.AddCommand.MESSAGE_INVALID_COMMAND_FORMAT_NAME_ABSENT;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
@@ -12,6 +13,8 @@ import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.REMARK_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.SOCIAL_HANDLE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.TUTORIAL_GROUP_DESC_AMY;
+import static seedu.address.logic.commands.DeleteCommand.MESSAGE_INVALID_COMMAND_FORMAT_INVALID_INDEX;
+import static seedu.address.logic.commands.FindCommand.MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_PREDICATE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.AMY;
 
@@ -70,33 +73,36 @@ public class LogicManagerTest {
 
     @Test
     public void execute_nonEnglish_throwsParseException() {
-        String emptyCommand = "한글你好";
-        assertParseException(emptyCommand, MESSAGE_UNKNOWN_COMMAND);
+        String nonEnglishCommand = "한글你好";
+        String errorMessage = String.format("%s: %s.\n%s", MESSAGE_UNKNOWN_COMMAND, nonEnglishCommand, "");
+        assertParseException(nonEnglishCommand, errorMessage);
     }
 
     @Test
     public void execute_emoji_throwsParseException() {
-        String emptyCommand = "\uD83D\uDE3E";
-        assertParseException(emptyCommand, MESSAGE_UNKNOWN_COMMAND);
+        String emojiCommand = "\uD83D\uDE3E";
+        String errorMessage = String.format("%s: %s.\n%s", MESSAGE_UNKNOWN_COMMAND, emojiCommand, "");
+        assertParseException(emojiCommand, errorMessage);
     }
 
     @Test
     public void execute_specialChars_throwsParseException() {
-        String emptyCommand = "\\/!@#$%^&()_+{}:<>?";
-        assertParseException(emptyCommand, MESSAGE_UNKNOWN_COMMAND);
+        String specialCommand = "\\/!@#$%^&()_+{}:<>?";
+        String errorMessage = String.format("%s: %s.\n%s", MESSAGE_UNKNOWN_COMMAND, specialCommand, "");
+        assertParseException(specialCommand, errorMessage);
     }
-
 
     @Test
     public void execute_invalidCommandFormat_throwsParseException() {
         String invalidCommand = "uicfhmowqewca";
-        assertParseException(invalidCommand, MESSAGE_UNKNOWN_COMMAND);
+        String errorMessage = String.format("%s: %s.\n%s", MESSAGE_UNKNOWN_COMMAND, invalidCommand, "");
+        assertParseException(invalidCommand, errorMessage);
     }
 
     @Test
     public void execute_addCommand_throwsParseException() {
         String addCommand = AddCommand.COMMAND_WORD;
-        String addMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+        String addMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT_NAME_ABSENT, AddCommand.MESSAGE_USAGE);
         assertParseException(addCommand, addMessage);
     }
 
@@ -109,14 +115,14 @@ public class LogicManagerTest {
     @Test
     public void execute_deleteCommand_throwsParseException() {
         String deleteCommand = DeleteCommand.COMMAND_WORD;
-        String deleteMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE);
+        String deleteMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT_INVALID_INDEX, DeleteCommand.MESSAGE_USAGE);
         assertParseException(deleteCommand, deleteMessage);
     }
 
     @Test
     public void execute_editCommand_throwsParseException() {
         String editCommand = EditCommand.COMMAND_WORD;
-        String editMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
+        String editMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT_INVALID_INDEX, EditCommand.MESSAGE_USAGE);
         assertParseException(editCommand, editMessage);
     }
 
@@ -129,7 +135,7 @@ public class LogicManagerTest {
     @Test
     public void execute_findCommand_throwsParseException() {
         String findCommand = FindCommand.COMMAND_WORD;
-        String findMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);
+        String findMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_PREDICATE, FindCommand.MESSAGE_USAGE);
         assertParseException(findCommand, findMessage);
     }
 

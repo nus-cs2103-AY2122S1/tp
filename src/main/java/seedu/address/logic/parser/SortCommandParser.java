@@ -1,15 +1,13 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.SortCommand.MESSAGE_INVALID_COMMAND_FORMAT_PREFIX_ABSENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NATIONALITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SOCIAL_HANDLE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP;
 
 import seedu.address.logic.commands.SortCommand;
@@ -20,8 +18,6 @@ import seedu.address.model.comparator.NameComparator;
 import seedu.address.model.comparator.NationalityComparator;
 import seedu.address.model.comparator.PhoneComparator;
 import seedu.address.model.comparator.RemarkComparator;
-import seedu.address.model.comparator.SocialHandleComparator;
-import seedu.address.model.comparator.TagComparator;
 import seedu.address.model.comparator.TutorialGroupComparator;
 
 /**
@@ -55,19 +51,14 @@ public class SortCommandParser implements Parser<SortCommand> {
         if (PREFIX_TUTORIAL_GROUP.getPrefix().equals(trimmedArgs)) {
             return new SortCommand(new TutorialGroupComparator());
         }
-        if (PREFIX_SOCIAL_HANDLE.getPrefix().equals(trimmedArgs)) {
-            return new SortCommand(new SocialHandleComparator());
-        }
         if (PREFIX_GENDER.getPrefix().equals(trimmedArgs)) {
             return new SortCommand(new GenderComparator());
         }
         if (PREFIX_REMARK.getPrefix().equals(trimmedArgs)) {
             return new SortCommand(new RemarkComparator());
         }
-        if (PREFIX_TAG.getPrefix().equals(trimmedArgs)) {
-            return new SortCommand(new TagComparator());
-        }
 
-        throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+        throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT_PREFIX_ABSENT,
+                SortCommand.MESSAGE_USAGE));
     }
 }
