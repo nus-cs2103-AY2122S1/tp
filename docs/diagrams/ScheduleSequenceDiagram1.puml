@@ -1,5 +1,6 @@
 @startuml
 !include style.puml
+skinparam defaultFontSize 30
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
@@ -7,11 +8,6 @@ participant ":MainParser" as MainParser LOGIC_COLOR
 participant ":FriendCommandParser" as FriendCommandParser LOGIC_COLOR
 participant ":ScheduleFriendCommandParser" as ScheduleFriendCommandParser LOGIC_COLOR
 participant "c:ScheduleFriendCommand" as ScheduleFriendCommand LOGIC_COLOR
-participant ":CommandResult" as CommandResult LOGIC_COLOR
-end box
-
-box Model MODEL_COLOR_T1
-participant ":Model" as Model MODEL_COLOR
 end box
 
 [-> LogicManager : execute("friend --schedule draco -p 2 4 1 -f 1")

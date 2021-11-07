@@ -135,14 +135,14 @@ public class UniqueFriendsList implements Iterable<Friend> {
      * Unlinks a Friend {@code friendToUnlink} with game {@code gameToUnlink}.
      * The friend must exist in the list.
      */
-    public void unlink(Friend friendToUnlink, Game gameToUnlink) {
-        requireAllNonNull(friendToUnlink, gameToUnlink);
+    public void unlink(Friend friendToUnlink, Game game) {
+        requireAllNonNull(friendToUnlink, game);
 
         Map<GameId, GameFriendLink> currentLinks = new HashMap<>(friendToUnlink.getGameFriendLinks());
-        Friend editedFriend = new Friend(friendToUnlink.getFriendId(), friendToUnlink.getFriendName(),
+        Friend friendToEdit = new Friend(friendToUnlink.getFriendId(), friendToUnlink.getFriendName(),
                 currentLinks, friendToUnlink.getSchedule());
-        editedFriend.unlink(gameToUnlink);
-        this.setFriend(friendToUnlink, editedFriend);
+        friendToEdit.unlink(game);
+        this.setFriend(friendToUnlink, friendToEdit);
     }
 
     public void setFriends(UniqueFriendsList replacement) {

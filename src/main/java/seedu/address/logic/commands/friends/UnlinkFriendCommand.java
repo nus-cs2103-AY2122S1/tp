@@ -49,12 +49,12 @@ public class UnlinkFriendCommand extends Command {
 
         // Obtain a Friend object from the model that matches friendId
         Friend friendToUnlink = model.getFriend(friendId);
-        Game gameToUnlink = model.getGame(gameId);
-        if (!friendToUnlink.hasGameAssociation(gameToUnlink)) {
+        Game game = model.getGame(gameId);
+        if (!friendToUnlink.hasGameAssociation(game)) {
             throw new CommandException(Messages.MESSAGE_GAME_NOT_ASSOCIATED);
         }
 
-        model.unlinkFriend(friendToUnlink, gameToUnlink);
+        model.unlinkFriend(friendToUnlink, game);
         model.updateFilteredAndSortedFriendsList(Model.PREDICATE_SHOW_ALL_FRIENDS);
 
         return new CommandResult(generateSuccessMessage(friendToUnlink), CommandType.FRIEND_UNLINK);
