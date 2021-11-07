@@ -55,7 +55,7 @@ public class SortOrdering {
 
     @Override
     public String toString() {
-        return value.name();
+        return value.name().toLowerCase() + " order.";
     }
 
     @Override

@@ -12,10 +12,13 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.ModelStub;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.order.Order;
 import seedu.address.testutil.OrderBuilder;
 
 public class AddOrderCommandTest {
+    private final Order testOrder = new OrderBuilder().build();
+
     @Test
     public void constructor_nullOrder_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddOrderCommand(null));
@@ -24,12 +27,16 @@ public class AddOrderCommandTest {
     @Test
     public void execute_orderAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingOrderAdded modelStub = new ModelStubAcceptingOrderAdded();
-        Order validOrder = new OrderBuilder().build();
+        CommandResult commandResult = new AddOrderCommand(testOrder).execute(modelStub);
 
-        CommandResult commandResult = new AddOrderCommand(validOrder).execute(modelStub);
+        assertEquals(String.format(AddOrderCommand.MESSAGE_SUCCESS, testOrder), commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(testOrder), modelStub.ordersAdded);
+    }
 
-        assertEquals(String.format(AddOrderCommand.MESSAGE_SUCCESS, validOrder), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validOrder), modelStub.ordersAdded);
+    @Test
+    public void execute_orderNotAcceptedByModel_throwsException() {
+        ModelStubNotAcceptingOrder modelStub = new ModelStubNotAcceptingOrder();
+        assertThrows(CommandException.class, () -> new AddOrderCommand(testOrder).execute(modelStub));
     }
 
     @Test
@@ -61,17 +68,47 @@ public class AddOrderCommandTest {
      */
     private class ModelStubAcceptingOrderAdded extends ModelStub {
         private final ArrayList<Order> ordersAdded = new ArrayList<Order>();
+        private final String name = testOrder.getCustomer().getName();
+
+        @Override
+        public boolean hasOrder(Order order) {
+            return ordersAdded.contains(order);
+        }
+
+        @Override
+        public boolean hasPersonWithName(String name) {
+            return this.name.equals(name);
+        }
 
         @Override
         public void addOrder(Order order) {
             requireNonNull(order);
             ordersAdded.add(order);
         }
+    }
+
+    /**
+     * A model stub for testing failure to add order, due to customer name not existing in list.
+     */
+    private class ModelStubNotAcceptingOrder extends ModelStub {
+        private final ArrayList<Order> ordersAdded = new ArrayList<Order>();
+        private final String name = "";
 
         @Override
         public boolean hasOrder(Order order) {
             requireNonNull(order);
-            return this.ordersAdded.contains(order);
+            return ordersAdded.contains(order);
+        }
+
+        @Override
+        public boolean hasPersonWithName(String name) {
+            return this.name.equals(name);
+        }
+
+        @Override
+        public void addOrder(Order order) {
+            requireNonNull(order);
+            ordersAdded.add(order);
         }
 
     }

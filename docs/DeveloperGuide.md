@@ -169,13 +169,17 @@ The `Model` component,
 
 <img src="images/StorageClassDiagram.png" width="600" />
 
-The `Storage` component,
-* can save address book data, task book data, sales order book data
+How the Storage component works:
+* Saves address book data, task book data, sales order book data
   and user preference data in json format, and read them back into corresponding objects.
-* inherits from all of `AddressBookStorage`, `TaskBookStorage`, `OrderBookStorage`,
+* The main storage class inherits from all of `AddressBookStorage`, `TaskBookStorage`, `OrderBookStorage`,
   and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
-
+* Each Book Storage component (`AddressBookStorage`, `TaskBookStorage`, `OrderBookStorage`) has a `JsonSerializable` class which is in charge of converting the model's data into correct json file and retrieving the data from 
+  the json file to convert it to a model data.
+* Each `JsonSerializable` class implements its own `JsonAdapted` class which specifies methods to convert model Object
+  (i.e `Person`, `Task`, `Order`) into json object and vise versa. 
+* The `JsonSerializable` class and `JsonAdapted` class also checks the correctness of the json files format, and in the 
+  case when any of the format is wrong, it will then throw a `DataConversionException` and  `IllegalValueException`
 ### Common classes
 
 Classes used by multiple components are in the `seedu.address.commons` package.
@@ -273,18 +277,95 @@ The sequence diagram below shows the interaction within the Logic component for 
 #### Result
 The changes in person objects are updated in their order and task objects.
 
-### Sort orders by amount feature
+### Sort Order Feature
 
-The feature sorts all the orders in the addressbook by their amount in descending order. 
+#### Implementation
 
-To ensure that the orders can be sorted, both `Order` and its attribute `Amount` implement the `Comparable` interface. 
-Order uses its `id` field to produce the default ordering of the `OrderList`. 
+By default, orders are sorted in ascending order of their `id`. 
+This arrangement is also followed when SalesNote starts up or the `listorders` command is executed.
 
-{to be completed}
+The `sortorders` command sorts the orders in the `OrderBook` based on a field and an ordering specified by the user.
 
+The field is represented using the `SortFieldType` enumeration which is encapsulated as a `SortField` object.
+Currently, SalesNote supports sorting by the following fields, which have been adapted to implement the `Comparable` interface:
+1. `Amount` - Represented by `SortFieldType.AMOUNT`
+2. `Date` - Represented by `SortFieldType.DATE`
+
+The ordering is represented using the `SortOrderingType` enumeration which is encapsulated as a `SortOrderingType` object. SalesNote supports sorting in: 
+1. Ascending order - Represented by `SortOrderingType.ASCENDING`
+2. Descending - Represented by `SortOrderingType.DESCENDING`
+
+
+The class structure of the feature is shown in the diagram below:
+
+![SortOrdersCommandClassDiagram](images/SortOrdersCommandClassDiagram.png)
+
+Orders are sorted using the `SortDescriptor`, which implements the `Comparator<Order>` interface.
+Its `compare` method uses the `SortField` and `SortOrdering` to compare orders based on the user specified arrangement.
+
+#### Usage
+
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `parseCommand("sortorder f/a o/asc")` API call. 
+Details about tokenizing the user input to retrieve the field and ordering have been omitted.
+
+![SortOrdersParserSequenceDiagram](images/SortOrdersParserSequenceDiagram.png)
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `SortOrdersCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+
+When the `SortOrderCommand` is executed, the following interactions take place in the `Logic` and the `Model` components.
+
+![SortOrdersModelSequenceDiagram](images/SortOrdersModelSequenceDiagram.png)
+
+After the `ObservableList<Order>` has been sorted, 
+
+Step 1.  the `SortCommand` obtains the relevant success message by invoking `sortDescriptor.generateSuccessMessage()`. 
+
+Step 2.  a `CommandResult` object is then instantiated using the message, and returned to `LogicManager`.
+
+Step 3.  the UI proceeds to display the sorted list of orders.
+
+#### Design choices
+
+* **Alternative 1:**  Mutating the `OrderList`.
+    * Pros: Allows the sorting functionality to be less coupled with the `FilteredList` of orders.
+      * This allows the user the flexibility to combine various filtering and sorting commands.
+      * For instance, executing `incompleteorders` followed by `sortorders f/d o/desc` would list the incomplete orders sorted by their date in descending order.
+    * Cons: Commands that mutate the list might disrupt the ordering of the sorted list. 
+      * For instance, adding an `Order` to an `OrderBook` simply appends it
+        at the end of the `OrderList`. Thus, the `OrderBook` needs be reverted to its default arrangement by calling `ModelManager.resetOrderView()` whenever an order is added.
+      * Note that this is not a concern for the `markorder` and `deleteorder` commands since they do not disrupt the ordering of the list.
+* **Alternative 2:** Wrapping the `FilteredList` around the `SortedList`. 
+    * Pros: 
+      * Maintains the immutability of the order list. 
+      * Ensures that the sorting arrangement is always preserved, even another command e.g. `addorder` mutates the underlying list.
+    * Cons: More difficult to implement since it entails more coupling with the `FilteredList` of orders.
+    
 ### Display client's total orders feature
 
-The feature displays the total orders for each client in a new window. Its mechanism is a mix of the mechanisms for `MainWindow` and `HelpWindow`.
+The feature displays the total orders for all clients except those without orders in a new window. 
+Its mechanism is a mix of the mechanisms for `MainWindow` and `HelpWindow`.
+
+Similar to `help` and `exit`, `CommandResult` has a dedicated `boolean` field to indicate whether the command is a 
+`totalorders` command. There is also a dedicated method to handle `totalorders` command in `MainWindow` class.
+By calling this method, the data of total orders is reloaded similar to loading other data (`Client/Task/Order`) in the Main Window, i.e. 
+through the `Logic` component. After reloading data, that method shows or focuses the total orders window similar to that of the 
+help window.
+
+#### Execution
+
+The sequence diagram below shows the interaction within the `UI` component when a `totalorders` command is executed.
+
+![Interactions Inside the UI Component for the `totalorders` Command](images/TotalOrdersSequenceDiagram0.png)
+
+The sequence diagram below shows the interaction within the `Logic` component when the `UI` component calls 
+`execute("totalorders")`. Note that there is no need to have a `TotalOrdersCommandParser`. This is because the 
+`SalesNoteParser` can directly create and return a `TotalOrdersCommand`, similar to that of `help` and `exit` commands.  
+
+![Interactions Inside the Logic Component for the `totalorders` Command](images/TotalOrdersSequenceDiagram1.png)
+
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -356,34 +437,124 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
+For the use cases that are very similar, only the differences between them have been highlighted.
+
 (For all use cases below, the **System** is the `SalesNote` and the **Actor** is the `user`, unless specified otherwise)
 
 #### Use case: Add a client
 
 **MSS**
 
-1. User requests to add a specific client to the list
-2. SalesNote adds the client
+1. User requests to add a specific client to the client list.
+2. SalesNote adds the client to the list.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The format of the request is invalid.
+* 1a. The format / details of the request are invalid.
 
-    * 1a1. SalesNote shows an error message.
-    
-      Use case ends.
+  * 1a1. SalesNote shows an error message. 
+  * 1a2. User enters a new request. 
+  * Steps 1a1-1a2 are repeated until the request is valid.
+  
+    Use case resumes from step 2.
+  
+* 2a. The client already exists in the client list
 
+  * 2a1. SalesNote shows an error message
+
+    Use case resumes from step 1.
+
+#### Use case: Add a task
+
+Analogous to the use case for [adding a client](#use-case-add-a-client).
+
+**Extensions**
+
+* 2b. The specified tag for the task does not correspond to an existing sales order.
+
+  * 2b1. SalesNote shows an error message.
+
+    Use case resumes from step 1.
+
+#### Use case: Add an order
+
+Analogous to the use case for [adding a client](#use-case-add-a-client).
+
+**Extensions**
+
+* 2b. The specified customer for the task does not correspond to an existing client.
+
+    * 2b1. SalesNote shows an error message.
+
+      Use case resumes from step 1.
 
 #### Use case: Delete a client
 
 **MSS**
 
-1.  User requests to list clients
-2.  SalesNote shows a list of clients
-3.  User requests to delete a specific client in the list
-4.  SalesNote deletes the client
+1. User requests to list clients.
+2. SalesNote shows a list of clients.
+3. User requests to delete a specific client in the list.
+4. SalesNote deletes the client.
+5. SalesNote deletes the orders related to that client.
+6. SalesNote deletes the tasks related to those orders.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+    Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. SalesNote shows an error message.
+
+      Use case resumes at step 2.
+  
+* 5a. No related orders found.
+
+    Use case ends.
+
+* 6a. No related tasks found.
+
+    Use case ends.
+    
+#### Use case: Delete a task
+
+**MSS**
+
+1. User requests to list tasks.
+2. SalesNote shows a list of tasks.
+3. User requests to delete a specific task in the list.
+4. SalesNote deletes the task.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. SalesNote shows an error message.
+
+      Use case resumes at step 2.
+
+#### Use case: Delete an order
+
+**MSS**
+
+1. User requests to list orders.
+2. SalesNote shows a list of orders.
+3. User requests to delete a specific order in the list.
+4. SalesNote deletes the order.
+5. SalesNote deletes the tasks related to the order.
 
     Use case ends.
 
@@ -399,34 +570,99 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
     
-#### Use case: Add a task
+* 5a. No related tasks found.
+
+  Use case ends.
+
+#### Use case: Edit a task
 
 **MSS**
 
-1. User requests to add a specific task to the list
-2. SalesNote adds the task
+1. User requests to list tasks.
+2. SalesNote shows a list of tasks.
+3. User requests to edit the details of a specific task in the list.
+4. SalesNote edits the details of the task.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The format of the request is invalid.
+* 2a. The list is empty.
 
-    * 1a1. SalesNote shows an error message.
+  Use case ends.
+
+* 3a. The format / details of the request are invalid.
+
+    * 3a1. SalesNote shows an error message.
+    * 3a2. User enters a new request.
+    * Steps 3a1-3a2 are repeated until the request is valid.
+
+      Use case resumes from step 4.
+
+* 4a. The user has not made any changes to the task details.
+
+    Use case resumes at step 3.
+
+* 4b. A task with the edited details already exists in the task list.
+
+    * 2b1. SalesNote shows an error message.
+
+      Use case resumes from step 3.
+
+
+#### Use case: Edit a client
+
+Analogous to the use case for [editing a task](#use-case-edit-a-task).
+
+**Extensions**
+
+* 4c. The user edits the name of the client.
+
+    * 4d1. SalesNote updates all orders linked to the client with the new client name.
 
       Use case ends.
 
+* 4d. The user updates the gender of a client without updating their dimensions.
 
-#### Use case: Delete a task
+    * 4d1. SalesNote shows an error message.
+
+      Use case resumes from step 3.
+
+#### Use case: Find a client
 
 **MSS**
 
-1.  User requests to list tasks
-2.  SalesNote shows a list of tasks
-3.  User requests to delete a specific task in the list
-4.  SalesNote deletes the task
+1. User requests to find clients by a given keyword.
+2. SalesNote shows a list of clients whose details match at least 1 keyword.
 
-    Use case ends.
+   Use case ends.
+
+**Extensions**
+
+* 2a. None of the clients match the keyword.
+
+    * 2a1. SalesNote displays an empty client list.
+
+      Use case ends.
+
+#### Use case: Find a task
+
+Analogous to the use case for [finding a client](#use-case-find-a-client).
+
+#### Use case: Find an order
+
+Analogous to the use case for [finding a client](#use-case-find-a-client).
+
+#### Use case: Mark a task as done
+
+**MSS**
+
+1. User requests to list incomplete tasks.
+2. SalesNote shows a list of incomplete tasks.
+3. User requests to mark a specific task in the list as done.
+4. SalesNote marks the task as done.
+
+   Use case ends.
 
 **Extensions**
 
@@ -440,45 +676,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-#### Use case: Add an order
+#### Use case: Mark an order as complete
+
+Analogous to the use case for [marking a task as done](#use-case-mark-a-task-as-done).
+
+#### Use case: Sort orders
 
 **MSS**
 
-1. User requests to add a specific order to the list
-2. SalesNote adds the order
+1. User requests to list orders.
+2. SalesNote shows a list of orders.
+3. User requests to sort the orders by either the date or amount field in ascending or descending order.  
+4. SalesNote displays the sorted list of orders.
 
    Use case ends.
 
-**Extensions**
+**Extension**
 
-* 1a. The format of the request is invalid.
-
-    * 1a1. SalesNote shows an error message.
-
-      Use case ends.
-
-#### Use case: Delete an order
-
-**MSS**
-
-1.  User requests to list orders
-2.  SalesNote shows a list of orders
-3.  User requests to delete a specific order in the list
-4.  SalesNote deletes the order
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
+- 2a. The list is empty.
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 3a. The format / details of the request are invalid
 
     * 3a1. SalesNote shows an error message.
+    * 3a2. User enters a new request.
+    * Steps 3a1-3a2 are repeated until the request is valid.
 
-      Use case resumes at step 2.
+      Use case resumes from step 3.
 
 
 *{More to be added}*
@@ -514,40 +739,77 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file.<br>
+      Expected: Shows the GUI with sample clients, tasks and orders. The window size may not be optimum.
 
 1. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
    1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+      Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+1. Shutdown
+
+   1. Shut down the app using the `exit` command.<br>
+      Expected: The app shuts down.
 
 ### Deleting a client
 
 1. Deleting a client while all clients are being shown
 
-   1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
+   1. Prerequisites: List all clients using the `listclients` command. Multiple clients in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   1. Test case: `deleteclient 1`<br>
+      Expected: First client is deleted from the list. Details of the deleted client shown in the status message.
 
-   1. Test case: `delete 0`<br>
+   1. Test case: `deleteclient 0`<br>
       Expected: No client is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   1. Other incorrect delete client commands to try: `deleteclient`, `deleteclient x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+1. Deleting a client while no clients are being shown
+
+   1. Prerequisite: Use `findclients keyword` command (where keyword matches none of the clients) to display an empty list of clients.<br>
+
+   1. Test case: `deleteclient 1`<br>
+      Expected: No client is deleted. Error details shown in the status message. Status bar remains the same.
+
+   1. Other delete client commands to try: `deleteclient`, `deleteclient x`, `...` (where x is anything)<br>
+      Expected: Similar to previous. Note that there is no valid command because the client list is empty.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Prerequisite: The folder containing the jar file contains a `data` folder.
 
-1. _{ more test cases …​ }_
+   1. Delete the `data` folder then launch the app by double-clicking the jar file.<br>
+      Expected: Shows the GUI with sample clients, tasks and orders. The window size may not be optimum.
+
+1. Dealing with corrupted data files
+
+   1. Prerequisites: The folder containing the jar file contains a `data` folder, which contains `addressBook.json`,  
+      `taskBook.json` and `salesBook.json`.
+
+   1. Test case: Corrupt the `addressBook.json` file by deleting a closing curly bracket (`}`) or any other brackets.<br>
+
+      1. Scenario: There exists at least one order, or there is at least one task tagged with an order ID.<br>
+         Expected: Shows the GUI without any data.
+
+      1. Scenario: There are no orders, and all tasks have the `General` tag.<br>
+         Expected: Shows the GUI without any clients or orders, but with previously saved tasks. 
+
+   1. Test case: Corrupt the `taskBook.json` file by deleting a closing curly bracket (`}`) or any other brackets.<br>
+      Expected: Shows the GUI without any tasks, but with previously saved clients and orders.
+
+   1. Test case: Corrupt the `salesBook.json` file by deleting a closing curly bracket (`}`) or any other brackets.
+
+      1. Scenario: All tasks have the 'General' tag.<br>
+         Expected: Shows the GUI with previously saved clients and tasks.
+
+      1. Scenario: There exists at least one task tagged with an order ID.<br>
+         Expected: Shows the GUI without any data.

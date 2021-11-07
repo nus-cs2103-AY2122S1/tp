@@ -6,8 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_ORDERING;
 
 import seedu.address.model.Model;
 import seedu.address.model.sort.SortDescriptor;
-import seedu.address.model.sort.SortField;
-import seedu.address.model.sort.SortOrdering;
 
 /**
  * Sorts orders in the address book based in either ascending or descending order based on the specified field.
@@ -27,24 +25,22 @@ public class SortOrdersCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Sorted all orders";
 
-    private final SortField sortField;
-    private final SortOrdering sortOrdering;
+    private final SortDescriptor sortDescriptor;
 
     /**
-     * Creates an SortOrdersCommand to sort the orders by a specified {@code SortField} and {@code SortOrdering}
+     * Creates an SortOrdersCommand to sort the orders by a specified {@code SortDescriptor}.
      */
-    public SortOrdersCommand(SortField sortField, SortOrdering sortOrdering) {
-        this.sortField = requireNonNull(sortField);
-        this.sortOrdering = requireNonNull(sortOrdering);
+    public SortOrdersCommand(SortDescriptor sortDescriptor) {
+        this.sortDescriptor = requireNonNull(sortDescriptor);
     }
 
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        SortDescriptor sortDescriptor = new SortDescriptor(sortField, sortOrdering);
         model.sortOrderList(sortDescriptor);
-        return new CommandResult(MESSAGE_SUCCESS, CommandResult.DisplayState.ORDER);
+        String successMessage = sortDescriptor.generateSuccessMessage();
+        return new CommandResult(successMessage, CommandResult.DisplayState.ORDER);
     }
 
     @Override
@@ -62,7 +58,7 @@ public class SortOrdersCommand extends Command {
         // state check
         SortOrdersCommand e = (SortOrdersCommand) other;
 
-        return sortField.equals(e.sortField) && sortOrdering.equals(e.sortOrdering);
+        return sortDescriptor.equals(e.sortDescriptor);
     }
 }
 

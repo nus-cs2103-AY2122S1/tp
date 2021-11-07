@@ -16,10 +16,12 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.StringUtil;
 import seedu.address.model.order.Customer;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Person;
-import seedu.address.model.sort.SortDescriptor;
 import seedu.address.model.task.Task;
 
 /**
@@ -111,6 +113,12 @@ public class ModelManager implements Model {
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return addressBook.hasPerson(person);
+    }
+
+    @Override
+    public boolean hasPersonWithName(String name) {
+        requireNonNull(name);
+        return addressBook.hasPersonWithName(name);
     }
 
     @Override
@@ -262,7 +270,7 @@ public class ModelManager implements Model {
      */
     public void addOrder(Order toAdd) {
         orderBook.addOrder(toAdd);
-        updateFilteredOrderList(PREDICATE_SHOW_ALL_ORDERS);
+        resetOrderView();
     }
 
     /**
@@ -284,17 +292,33 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void sortOrderList(SortDescriptor sortDescriptor) {
-        Comparator<Order> comparator = sortDescriptor.generateComparator();
-        orderBook.sortOrders(comparator);
-        filteredOrders.setPredicate(PREDICATE_SHOW_ALL_ORDERS);
+    public void sortOrderList(Comparator<Order> sortDescriptor) {
+        orderBook.sortOrders(sortDescriptor);
     }
 
     /**
      * Marks an order as completed
      */
+    @Override
     public boolean markOrder(Order order) {
         return orderBook.markOrder(order);
+    }
+
+    /**
+     * Delete tasks related to a given Order
+     */
+    @Override
+    public void deleteRelatedTasks(Order order) {
+        String keyword = Order.ID_PREFIX + String.valueOf(order.getId());
+        this.deleteTaskIf(task -> StringUtil.containsWordIgnoreCase(task.getTaskTag().tagName, keyword));
+    }
+
+    /**
+     * Deletes all tasks matching predicate from taskBook.
+     */
+    @Override
+    public void deleteOrderIf(Predicate<Order> pred) {
+        orderBook.deleteOrderIf(pred);
     }
 
     /**
@@ -377,6 +401,44 @@ public class ModelManager implements Model {
         Comparator<Order> defaultComparator = Order::compareTo;
         orderBook.sortOrders(defaultComparator);
         updateFilteredOrderList(PREDICATE_SHOW_ALL_ORDERS);
+    }
+
+    //=========== AddressBook & OrderBook Relation Check =======================================================
+
+    /**
+     * Checks if any order tagged to persons that don't exist.
+     */
+    public void checkClientAndOrderRelation() throws DataConversionException {
+        ObservableList<Order> orders = this.orderBook.getOrderList();
+        for (Order eachOrder : orders) {
+            String nameOfPerson = eachOrder.getCustomer().getName();
+            if (!this.addressBook.hasPersonWithName(nameOfPerson)) {
+                throw new DataConversionException(
+                        new IllegalValueException("Given customer name does not exist in the Address Book"));
+            }
+        }
+    }
+
+    //=========== AddressBook & OrderBook Relation Check =======================================================
+
+    /**
+     * Checks if any tasks tagged to order that don't exist.
+     */
+    public void checkTaskAndOrderRelation() throws DataConversionException {
+        ObservableList<Task> tasks = this.taskBook.getTaskList();
+        for (Task eachTask : tasks) {
+            long tagId = eachTask.getTagId();
+            if (tagId != -1 && !this.orderBook.hasOrder(tagId)) {
+                throw new DataConversionException(
+                        new IllegalValueException("Given Sales ID does not exist in the Order Book"));
+            }
+        }
+    }
+
+    //=========== AddressBook & OrderBook Relation Check =======================================================
+
+    public ModelManager resetModelManager() {
+        return new ModelManager(new AddressBook(), new TaskBook(), new OrderBook(), this.userPrefs);
     }
 
 }

@@ -47,6 +47,7 @@ import seedu.address.model.order.Order;
 import seedu.address.model.order.OrderContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.sort.SortDescriptor;
 import seedu.address.model.sort.SortField;
 import seedu.address.model.sort.SortOrdering;
 import seedu.address.model.task.Task;
@@ -222,10 +223,13 @@ public class SalesNoteParserTest {
     public void parseCommand_sortOrders() throws Exception {
         String sortField = "amount";
         String sortOrdering = "desc";
+        SortDescriptor descriptor =
+                new SortDescriptor(new SortField(sortField), new SortOrdering(sortOrdering));
+        SortOrdersCommand expectedSortOrdersCommand = new SortOrdersCommand(descriptor);
+
         SortOrdersCommand command = (SortOrdersCommand) parser.parseCommand(
                 SortOrdersCommand.COMMAND_WORD + " " + OrderUtil.getSortOrdersDetails(sortField, sortOrdering));
-        assertEquals(new SortOrdersCommand(new SortField(sortField),
-                new SortOrdering(sortOrdering)), command);
+        assertEquals(expectedSortOrdersCommand, command);
     }
 
     @Test

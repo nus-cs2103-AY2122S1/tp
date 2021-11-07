@@ -20,6 +20,7 @@ import seedu.address.model.order.Order;
 class JsonSerializableOrderBook {
 
     public static final String MESSAGE_DUPLICATE_ORDER = "salesBook contains duplicate order(s).";
+    public static final String MESSAGE_DUPLICATE_ORDER_ID = "salesBook contains duplicate order id(s).";
 
     private final List<JsonAdaptedOrder> orders = new ArrayList<>();
 
@@ -48,20 +49,23 @@ class JsonSerializableOrderBook {
     public OrderBook toModelType() throws IllegalValueException {
         OrderBook orderBook = new OrderBook();
         long localCount = 0;
-        ArrayList<Long> idList = new ArrayList<>();
 
         for (JsonAdaptedOrder jsonAdaptedOrder : orders) {
             Order order = jsonAdaptedOrder.toModelType();
-            orderBook.addOrder(order);
+
             if (localCount < order.getId()) {
                 localCount = order.getId();
             }
-            if (idList.contains(order.getId())) {
-                throw new IllegalValueException("Order Id can not be duplicated");
-            } else {
-                idList.add(order.getId());
+            if (orderBook.hasOrder(order)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_ORDER);
             }
+
+            if (orderBook.hasOrder(order.getId())) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_ORDER_ID);
+            }
+            orderBook.addOrder(order);
         }
+
         Order.setCount(localCount + 1);
         return orderBook;
     }

@@ -1,13 +1,14 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Person;
-import seedu.address.model.sort.SortDescriptor;
 import seedu.address.model.task.Task;
 
 /**
@@ -64,6 +65,11 @@ public interface Model {
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
     boolean hasPerson(Person person);
+
+    /**
+     * Returns true if a person with name ignoring case exists in the address book.
+     */
+    boolean hasPersonWithName(String name);
 
     /**
      * Deletes the given person.
@@ -200,11 +206,24 @@ public interface Model {
 
     boolean markOrder(Order order);
 
-    void sortOrderList(SortDescriptor sortDescriptor);
+    void sortOrderList(Comparator<Order> comparator);
 
     /** Resets the order list to its regular ordering based on id */
     void resetOrderView();
 
     /** Returns an unmodifiable view of the list of ClientTotalOrders */
     ObservableList<ClientTotalOrder> getClientTotalOrders();
+
+    void deleteRelatedTasks(Order orderToDelete);
+
+    void deleteOrderIf(Predicate<Order> toDelete);
+
+    /** Checks if any order tagged to persons that don't exist */
+    void checkClientAndOrderRelation() throws DataConversionException;
+
+    /** Checks if any tasks tagged to order that don't exist */
+    void checkTaskAndOrderRelation() throws DataConversionException;
+
+
+
 }

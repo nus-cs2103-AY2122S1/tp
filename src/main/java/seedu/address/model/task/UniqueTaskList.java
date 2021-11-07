@@ -101,6 +101,7 @@ public class UniqueTaskList implements Iterable<Task> {
         internalList.set(index, toMark);
         return hasChanged;
     }
+
     public void setTasks(UniqueTaskList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);

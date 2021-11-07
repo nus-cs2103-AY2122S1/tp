@@ -7,6 +7,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Predicate;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,30 +18,38 @@ import seedu.address.model.order.exceptions.OrderNotFoundException;
  * A list of orders supporting minimal list operations for v1.3.
  * Basic version does not support editing SalesOrders.
  */
-public class OrderList implements Iterable<Order> {
+public class UniqueOrderList implements Iterable<Order> {
 
     private final ObservableList<Order> internalList = FXCollections.observableArrayList();
     private final ObservableList<Order> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Adds an order to the OrderList.
+     * Returns true if order is in the UniqueOrderList
+     */
+    public boolean hasOrder(Order order) {
+        requireNonNull(order);
+        return internalList.stream().anyMatch(order::isSameOrder);
+    }
+
+    /**
+     * Returns true if an order in the UniqueOrderList have the id
+     */
+    public boolean hasOrder(long id) {
+        System.out.println(id);
+        return internalList.stream().anyMatch(order -> order.getId() == id);
+    }
+
+    /**
+     * Adds an order to the UniqueOrderList.
      * @param toAdd order to add
      */
     public void add(Order toAdd) {
         requireNonNull(toAdd);
-        internalList.add(toAdd);
-    }
-
-    /**
-     * Removes an order from the OrderList.
-     * @param toRemove order to remove
-     */
-    public void remove(Order toRemove) {
-        requireNonNull(toRemove);
-        if (!internalList.remove(toRemove)) {
-            throw new OrderNotFoundException();
+        if (hasOrder(toAdd)) {
+            throw new DuplicateOrderException();
         }
+        internalList.add(toAdd);
     }
 
     /**
@@ -63,7 +72,6 @@ public class OrderList implements Iterable<Order> {
         internalList.set(index, editedOrder);
     }
 
-
     public void setOrders(List<Order> orders) {
         requireAllNonNull(orders);
         if (!(ordersAreUnique(orders))) {
@@ -73,23 +81,26 @@ public class OrderList implements Iterable<Order> {
     }
 
     /**
-     * Returns true if order is in the OrderList
+     * Removes an order from the UniqueOrderList.
+     * @param toRemove order to remove
      */
-    public boolean hasOrder(Order order) {
-        requireNonNull(order);
-        return internalList.stream().anyMatch(order::isSameOrder);
+    public void remove(Order toRemove) {
+        requireNonNull(toRemove);
+        if (!internalList.remove(toRemove)) {
+            throw new OrderNotFoundException();
+        }
     }
 
     /**
-     * Returns true if an order in the OrderList have the id
+     * Removes all orders matching predicate from the list.
      */
-    public boolean hasOrder(long id) {
-        System.out.println(id);
-        return internalList.stream().anyMatch(order -> order.getId() == id);
+    public void removeIf(Predicate<Order> pred) {
+        requireNonNull(pred);
+        internalList.removeIf(pred);
     }
 
     /**
-     * Marks an order as complete, if it exists in the OrderList. Returns a boolean indicating
+     * Marks an order as complete, if it exists in the UniqueOrderList. Returns a boolean indicating
      * whether or not an actual change has been made.
      * @param toMark
      */
@@ -116,8 +127,8 @@ public class OrderList implements Iterable<Order> {
     @Override
     public boolean equals(Object other) {
         return other == this
-                || (other instanceof OrderList
-                && internalList.equals(((OrderList) other).internalList));
+                || (other instanceof UniqueOrderList
+                && internalList.equals(((UniqueOrderList) other).internalList));
     }
 
     @Override
@@ -130,7 +141,7 @@ public class OrderList implements Iterable<Order> {
     }
 
     /**
-     * Returns true if {@code orders} contains only unique tasks.
+     * Returns true if {@code orders} contains only unique orders.
      */
     private boolean ordersAreUnique(List<Order> orders) {
         for (int i = 0; i < orders.size() - 1; i++) {
