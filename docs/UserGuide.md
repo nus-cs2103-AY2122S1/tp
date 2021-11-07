@@ -285,9 +285,11 @@ Format: `addR NUMBER_OF_PEOPLE p/PHONE at/DATE_TIME [r/REMARK] [t/TAG]…`
 * `REMARK` and `TAG` are optional fields that can be omitted.
 
 Examples:
-* `addR 2 p/98765432 at/2021-12-24 2000 r/birthday party t/10 Percent Off t/Free cake` adds a new reservation of 2 pax for customer with
+* `addR 2 p/98765432 at/2021-12-24 2000 r/birthday party t/10 Percent Off t/Free cake` adds a new reservation of 2 pax
+  for the customer with phone number `98765432` with all the respective details
 
-* `addR 5 p/12345668 at/2021-02-14 1200`
+* `addR 5 p/12345668 at/2021-02-14 1200` adds a new reservation of 5 pax for the customer with phone number `12345668`
+  with all the respective details
 
 <div markdown="block" class="alert alert-warning">
 
@@ -299,7 +301,7 @@ Examples:
 
 * `PHONE` has to be a valid phone number from a customer in the database
 
-* Time has to be formatted on the hour (i.e. minutes of the time is **00**). Refer [here](#date-time-formatting) for a list of acceptable formats when entering date time.
+* Time has to be formatted on the hour (i.e. minutes of the time is **00**). Refer [here](#date-time-formatting) for a list of acceptable formats when entering date time, remember that only time with the minutes of **0** is accepted.
 
 </div>
 
