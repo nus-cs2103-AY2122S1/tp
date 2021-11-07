@@ -24,7 +24,7 @@ This section provides instructions to begin using Siasa.
 2. Download the latest release [here](https://github.com/AY2122S1-CS2103-F10-4/tp/releases) and move it to the folder you wish to use as the home folder for Siasa.
 3. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
    
-![First Startup UI Image](images/AppImage.png)
+![First Startup UI Image](images/Ui.png)
 
 4. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.
    Some example commands you can try:

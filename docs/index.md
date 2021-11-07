@@ -5,7 +5,7 @@ title: Siasa
 [![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
 [![codecov](https://codecov.io/gh/AY2122S1-CS2103-F10-4/tp/branch/master/graph/badge.svg?token=8HQN3ALV7M)](https://codecov.io/gh/AY2122S1-CS2103-F10-4/tp)
 
-![Ui](images/AppImage.png)
+![Ui](images/Ui.png)
 
 **Siasa is a desktop application for managing your contact and policy details for student financial advisors.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 
