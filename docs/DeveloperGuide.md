@@ -31,6 +31,7 @@ _text_ | A _technical_ word with definitions provided in the [Glossary](#appendi
 List of sources of all reused/adapted ideas, code, documentation, and third-party libraries:
 
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+* UndoRedoStack implementation referenced: [SE-EDU AddressBook 4](https://github.com/nus-cs2103-AY1718S2/addressbook-level4/blob/master/src/main/java/seedu/address/logic/UndoRedoStack.java).
 * Libraries used: [CalendarFX](https://dlsc.com/products/calendarfx/), [Jackson](https://github.com/FasterXML/jackson), [JavaFX](https://openjfx.io/), [JUnit5](https://github.com/junit-team/junit5)
 * The [`SchedulePanel#createTimeThread()`](https://github.com/AY2122S1-CS2103T-F13-3/tp/blob/master/src/main/java/seedu/address/ui/SchedulePanel.java#L114) method was reused with minimal changes from the CalendarFX [developer manual](http://dlsc.com/wp-content/html/calendarfx/manual.html#_quick_start).
 * Initialising the `CalendarView` in the `[SchedulePanel](https://github.com/AY2122S1-CS2103T-F13-3/tp/blob/master/src/main/java/seedu/address/ui/SchedulePanel.java#L32)` was done with reference to the CalendarFX [_API_](https://dlsc.com/wp-content/html/calendarfx/apidocs/index.html).
@@ -174,6 +175,7 @@ The `Model` component
 * stores the tuition address book data, i.e., all `Person`, calendar `Entry`, and `Tag` objects (which are contained in the `UniquePersonList`, `CalendarEntryList`, and `UniqueTagList` objects respectively).
 * stores the currently 'filtered' `Person` objects (e.g., results of a search query) as a separate filtered list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed', e.g., the `Ui` component can be bound to this list so that it automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+* stores a `LocalDateTime` object of the date and time the `AddressBook` was last updated.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
 
 The _Sequence Diagram_ below illustrates the interactions when a person, p, is removed from the model.
@@ -232,7 +234,7 @@ This section describes some noteworthy details on how certain features are imple
 Weekly recurring or one-off (makeup) lessons are classified as `Lesson` objects. These lessons can be added to any particular
 student in TAB. Added lessons can also be edited and deleted.<br>
 
-A `Lesson` is represented in the application as shown in the figure below. It contains a start `Date`, an end `Date`, a `TimeRange` for the
+A `Lesson` is represented in the application as shown in the figure below. It contains a start `Date`, an end `Date`, a `CancelledDates` set,  a `TimeRange` for the
 `Lesson`, a `Subject`, a `LessonRates` and `Homework` fields. There are 2 types of `Lesson` – `RecurringLesson` and `MakeUpLesson`. `RecurringLesson`
 represents a **weekly** recurring lesson. `MakeUpLesson` represents a one-off lesson outside the regular schedule.<br>
 
@@ -305,7 +307,14 @@ The `executeUndoableCommand()` method of the `LessonEditCommand` uses this `edit
 The new lesson is stored in TAB in place of the old lesson. The student's list of lessons will be updated to reflect
 the changes made to the specified lesson.<br>
 
+#### Cancelling and Uncancelling Lessons
+
+Cancelling and uncancelling of lessons is done using the `LessonEditCommand`, which allows the user to specify multiple dates to be cancelled and uncancelled.
+
+Cancelled dates of a lesson are stored as a field, `CancelledDates` in the lesson object. When a user specifies a valid lesson date to be cancelled, the date is added into the `CancelledDates` set. When a user specifies a valid lesson date to be uncancelled, the date is removed from `CancelledDates`.
+
 #### Deleting lessons
+
 The `LessonDeleteCommand` deletes the lesson specified by its lesson index in the displayed list of lessons with respect to the
 student with this lesson.
 
@@ -381,18 +390,7 @@ Some knowledge of the CalendarFX `Entry` _API_ (provided [here](https://dlsc.com
 is necessary to understand the conversion that happens in [`CalendarEntryList#convertRecurringLessonToEntries(Person, Lesson)`](https://github.com/AY2122S1-CS2103T-F13-3/tp/blob/master/src/main/java/seedu/address/model/lesson/CalendarEntryList.java#L331)
 and [`CalendarEntryList#convertToMakeupEntry(Person, Lesson)`](https://github.com/AY2122S1-CS2103T-F13-3/tp/blob/master/src/main/java/seedu/address/model/lesson/CalendarEntryList.java#L384).
 
-It is important to understand the limitations of CalendarFX `Entry`. In particular, it does not support recurrence exceptions. 
-This means that we cannot modify properties of specific occurrences of a recurring `Entry`. 
-For example, suppose we have a lesson entry that recurs weekly starting from 1st Jan till 31st Dec. There is no in-built way to change the details of a single date, 
-such as cancelling a lesson only on 15th Jan. However, cancelling lessons for a particular week is a valid and common
-behaviour of a 1-to-1 private home tutor. 
-
-To circumvent this problem, [`CalendarEntryList#convertRecurringLessonToEntries(Person, Lesson)`](https://github.com/AY2122S1-CS2103T-F13-3/tp/blob/master/src/main/java/seedu/address/model/lesson/CalendarEntryList.java#L331)
-maps `RecurringLesson`s to a `List` of `Entry`s. The aforementioned example lesson would thus be converted to:
-1. A first calendar `Entry` that recurs weekly, from 1st Jan to 8th Jan (inclusive);
-2. A second calendar `Entry` that recurs weekly, from 22nd Jan to 31st Dec (inclusive).
-
-This effectively "cancels" the lesson that occurs on 15th Jan in the calendar interface.
+It is important to understand the limitations of CalendarFX `Entry`. In particular, it does not support recurrence exceptions. See [Displaying of recurring lessons with cancelled dates](#displaying-of-recurring-lessons-with-cancelled-dates) for more details.
 
 #### Design considerations
 
@@ -419,6 +417,28 @@ We chose alternative 2 and integrated CalendarFX into our app as the possibility
   * Cons: Much harder to implement, no more fancy transitions or inbuilt buttons, and GUI improvements seem marginal at best.
 
 Alternative 1 is our preferred choice as its pros and cons seem much better than alternative 2, especially due to its ease of implementation. The main difficulty of alternative 1 becoming familiar with the CalendarFX _API_, but this difficulty is also present in alternative 2.
+
+#### Displaying of recurring lessons with cancelled dates
+
+Entries of recurring lessons are displayed with the help of recurrence rules in CalendarFX. However, CalendarFX does not support the exclusion of specific dates in the recurrence. For example, suppose we have a lesson entry that recurs weekly starting from 1st Jan till 31st Dec. There is no in-built way to change the details of a single date, such as cancelling a lesson only on 15th Jan. However, cancelling lessons for a particular week is a valid and common behaviour of a 1-to-1 private home tutor.
+
+As a work around, we create multiple `Entry`s to represent a single `RecurringLesson` with the method [`CalendarEntryList#convertRecurringLessonToEntries(Person, Lesson)`](https://github.com/AY2122S1-CS2103T-F13-3/tp/blob/master/src/main/java/seedu/address/model/lesson/CalendarEntryList.java#L331).
+
+Example:
+* A recurring lesson has a start date of `1 Sep 2021` with no end date.
+* The user cancels the lesson on `22 Sep 2021` and `13 Oct 2021`.
+
+To represent this recurring lesson, 3 calendar entries are created:
+1. Recurring entry 1 with start date of `1 Sep 2021`, and end date of `15 Sep 2021`
+2. Recurring entry 2 with start date of `29 Sep 2021` and end date of `6 Oct 2021`
+3. Recurring entry 3 with start date of `20 Oct 2021` and no end date.
+
+This effectively "cancels" the lesson that occurs on `22 Sep 2021` and `13 Oct 2021` in the calendar interface.
+
+The figure below shows the recurring lesson displayed on the yearly calendar, where the lesson occurs on the dates marked green.
+
+![Recurring Calendar Entries](images/RecurringCalendarEntries.png)
+*Figure I.1.2: Recurring lesson displayed on the yearly calendar*
 
 ### Upcoming lesson reminders
 The reminder feature allows users to view a list of upcoming lessons that ends in the next 48 hours.
@@ -569,7 +589,7 @@ With `UndoableCommand`, the commands that are undoable are implemented similarly
         public CommandResult execute() {
             return executeUndoableCommand();
         }
-        protected abstract void undo;
+        protected abstract Person undo;
     }
     
     public class DeleteCommand extends UndoableCommand {
@@ -578,7 +598,7 @@ With `UndoableCommand`, the commands that are undoable are implemented similarly
             //...delete logic
         }
         @Override
-        protected void undo {
+        protected Person undo {
             //...undo logic
         }
     }
@@ -586,7 +606,7 @@ With `UndoableCommand`, the commands that are undoable are implemented similarly
 Step 1. Suppose that a user has just launched our application. The `undoRedoStack` will be empty at the beginning.
 
 Step 2. The user then executes an `UndoableCommand` which modifies the existing `Model` as per the definition of an `UndoableCommand`. 
-The specific `UndoableCommand` called will process the command during the method call `UndoableCommand#executeUndoableCommand` so that it can undo itself.
+The specific `UndoableCommand` called will process the command during the method call `UndoableCommand#executeUndoableCommand()` so that it can undo itself.
 
 For instance, the executed command is `delete 5`, to delete the 5th person in the `AddressBook` that resides in the `Model`. 
 The deleted Person, referred to in the Figure I3 as `p5` is stored in the `deletedPerson` field in `DeleteCommand`. 
@@ -614,7 +634,7 @@ Upon executing `add` command, `add` command that has been processed such that it
 Step 4. The user now decides that adding the person was a mistake, and decides to undo that action using `undo`.
 
 `UndoRedoStack` will pop the most recent command out of the `undoStack` and push it to the `redoStack`. For instance, the popped command in this example would be `add`,
-`add` would the call its own `AddCommand#undo` to undo itself.
+`add` would the call its own `AddCommand#undo()` to undo itself.
 
 ![UndoRedoStackAfterUndo](images/UndoRedoStack1UndoDiagram.png) 
 
@@ -639,6 +659,44 @@ The redo does the exact opposite (pops from `redoStack`, push to `undoStack`, an
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the `redoStack` is empty, then there are no other commands left to be redone, and an `Exception` will be thrown when popping the `redoStack`.<br></div>
 
+There are 2 cases for redoing commands - `UndoableCommand` v.s. non-`UndoableCommand`. The `UndoRedoStack` reacts differently depending on the type of the command.
+
+**Case 1: `UndoableCommand` called before `redo`**
+
+Continuing from the previous example, suppose that after the user undoes the `AddCommand`, the user now decides to add another student with the same name `John Doe`.
+The user executes a new command, `add`. Figure I.2.6 below shows the change in `UndoRedoStack` after executing the `add` command. Note that the `AddCommand` before and after are 2 different commands.
+The one before is named `a1` and the one after is named `a2` for better readability.
+
+![UndoRedoStackClearRedoStack](images/UndoRedoStackClearRedoStack.png)
+
+*Figure I.2.6: UndoRedoStack before and after executing Add Command.*
+
+In Figure I.2.6, `add` will be pushed into the `undoStack` since `add` is an `UndoableCommand`. At the same time, the `redoStack` is cleared.
+Its contents are cleared as we no longer makes sense be able to redo `add n/John Doe ...` as it would result in duplicate students 
+(this is the behaviour that most modern desktop applications follow).
+
+**Case 2: Commands that does not modify any data called before `redo`**
+
+Continuing from the previous example, suppose that after the user undoes the `AddCommand`, the user now decides to view the calendar.
+The user executes a new command, `day`. Figure I.2.7 below shows the change in `UndoRedoStack` after executing the `day` command.
+
+![UndoRedoStackAfterNonUndoableCommand](images/UndoRedoStackNonUndoableCommand.png)
+
+*Figure I.2.7: UndoRedoStack before and after executing Day Command.*
+
+In Figure I.2.7, `day` will not be pushed into the `undoStack` since `day` is not an `UndoableCommand`. Unlike for the `add` command in Case 1,
+the `redoStack` is not cleared as there were no changes to the data after undoing `AddCommand`, executing `redo` would not result in any errors.
+Hence, the `UndoRedoStack` remains identical.
+
+The following activity diagram in Figure I.2.8 summarizes what happens inside the `UndoRedoStack` when a user executes a new command:
+
+![UndoRedoStackActivityDiagram](images/UndoRedoStackActivityDiagram.png)
+
+*Figure I.2.8: Activity Diagram after a `Command` is executed.*
+
+In Figure I.2.8, after execution, any `Command` that is **not** an `UndoableCommand` will not change the `UndoRedoStack`.
+If the `Command` is an `UndoableCommand`, it will be pushed to the `undoStack` before the control is returned to the user eventually.
+
 #### Design considerations
 
 **Aspect: How undo & redo executes:**
@@ -654,26 +712,27 @@ The redo does the exact opposite (pops from `redoStack`, push to `undoStack`, an
 
 ### Finding students
 
-The `FindCommand` allows users to find students based on person fields.
+The `FindCommand` allows users to find students based on person fields and lesson fields.
 
-**Current Implementation**
+Finding students is facilitated by the `PersonMatchesKeywordsPredicate`.
+* `PersonMatchesKeywordsPredicate` stores a list of keywords for each field that is being searched for.
+* It also stores a `FindCondition` which takes on one of the values `ALL`, `ANY`, or `NONE`, and defaults to `ALL`. It determines whether all, any or none of the fields specified are required to match with a given person, for the person to be returned.
+
+Given below is an example usage scenario and how the Find Command is executed:
+* **Step 1:** The user enters the `find` command with name keyword `John` and tag keyword `unpaid`.
+* **Step 2:** The `FindCommandParser` parses this command and creates a `PersonMatchesKeywordsPredicate` that stores the respective keywords for name and tag.
+* **Step 3:** This predicate is passed into the method `Model#updateFilteredPersonList`.
+* **Step 4:** When the `PersonMatchesKeywordsPredicate#test(person)` method is called, a predicate is created for each searched field, name and tag, which tests if the given person's fields contain all the specified keywords.
+* **Step 5:** All searched field predicates are composed into a single predicate, depending on the find condition. This composed predicate is then applied on the person to determine whether there is a match.
 
 ![Find Command](images/FindSequenceDiagram.png)
 
 *Figure I.5.1: Sequence Diagram of Find Command*
 
-The user can specify multiple fields to search for and each field takes in multiple keywords.
-An exception is the tag field which only accepts a single keyword. Instead, users can specify multiple tag fields.
+![Find Command Continued](images/FindUpdateFilteredListLogicSequenceDiagram.png)
+*Figure I.5.2: Continued Sequence Diagram of Find Command*
 
-The `PersonMatchesKeywordsPredicate` is used to test whether a person matches the specified keywords.
-For each searchable field, a predicate is created which tests if a given person's field contains all specified keywords.
-
-Additionally, a `FindCondition` can be specified by the user which determines whether `all`, `any` or `none` of the fields specified are required to match with a given person, for the person to be returned. The default is `all`.
-
-The `PersonMatchesKeywordsPredicate#test()` method will compose all searched field predicates into a single predicate, depending on the find condition.
-The predicate is then used to filter the list of person.
-
-#### Design considerations
+#### Design considerations:
 
 **Aspect: Data structure of predicates**
 * **Alternative 1 (current choice):** Use a single `PersonMatchesKeywordsPredicate` class to represent all fields' predicates.
@@ -682,7 +741,85 @@ The predicate is then used to filter the list of person.
 * **Alternative 2:** Use multiple `{field}MatchesKeywordsPredicate` classes to represent each field's predicate.
     * Pros: It offers greater flexibility for each field predicate to have its own matching behavior.
     * Cons: There is greater probability of bugs introduced if a new field to search is to be added, or if the matching behaviour of all predicates are required to be changed.
+    
+### Fees Management
 
+TAB automates the updating of individual lesson fees after the lesson has ended. The Fees Calculation is facilitated by:
+* `FeesCalculator` implements the `Calculator` interface. It is responsible for calculating the amount to update for each specific lesson. 
+* `LastUpdatedDate` stores a `LocalDateTime` of when the `AddressBook` was last updated. `LastUpdatedDate` is stored in `AddressBook`.
+* `Money` and its subclass facilitates the payment mechanism. Each `Lesson` contains a `LessonRates` field and a `OutstandingFees` field. Both of which extend `Money`.
+
+When the user launches TAB, in `MainApp#initModelManager()`, the `FeesCalculator` would update all the outstanding lesson fees in the model. Figure I.6.1 is a sequence diagram after the user launches TAB.
+
+![UpdateFeesSequenceDiagram](images/UpdateFeesSequenceDiagram.png)
+
+*Figure I.6.1: Sequence diagram of Update Fees.*
+
+In `initModelManager()`, after the `model` has been built from storage, `FeesCalculator#UpdateAllLessonOutstanding()` is called to update the lesson fees. For each person in `addressBook`, a new `updatedPerson` would be created.
+When creating the new `updatedPerson`, for each lesson that the person has, `updateLessonOutstandingFeesField()` will update all the outstanding fees fields using `lastUpdatedDate` and the current local date time.  
+
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** 
+FeesCalculator does not update the outstanding fees immediately after a lesson ends when TAB is open. Users need to relaunch TAB to see the updated outstanding fees. </div>
+
+
+The following is the logic of `FeesCalculator` to decide whether to update the specific lesson:
+* To construct a `FeesCalculator` object, the `lastUpdatedDate` and `currentDateTime`, which is simply the `LocalDateTime.now()`, are required. 
+* `FeesCalculator` would count the number of lessons that have ended between `lastUpdatedDate` and `currentDateTime` at the time of initialization.
+  * **For Makeup Lessons:** 
+    * Use `Date#getLocalDate()` to get the date of the lesson and `TimeRange#getEnd()` to get the end time of the lesson. Then check for these conditions:
+      * Lesson end date and time is after `lastUpdatedDate`.
+      * Lesson end date and time is before `currentDateTime`.
+      
+    If both conditions are true, update the fees by adding the cost of the lesson (as calculated by multiplying the hourly rates and the duration of the lesson) to the current outstanding fees.
+  * **For Recurring Lessons:** 
+    * Find the `laterStart` by comparing `startDate` of lesson and `lastUpdatedDate`. This is to handle cases where lesson starts after the last time TAB was launched.
+    * Find the `earlierEnd` by comparing `endDate` of lesson and `currentDateTime`. This is to handle cases where lesson ends before the current launching of TAB.
+    * Calculate the number of lessons that have passed between the `laterStart` and `earlierEnd`.
+    * Check if any of the cancelled dates falls between `laterStart` and `earlierEnd`. If true, deduct the number of lessons accordingly.
+    * Check for the cases in which the day of `lastUpdatedDate` and `currentDateTime` falls on the day of the lesson and deduct accordingly.
+* Multiply the number of lessons calculated with the cost per lesson to get the amount to be added to `OutstandingFees` field.
+
+The following activity diagram starts from the creation of the updated lesson. Firstly, copy all lesson details to the new lesson object for defensive coding. 
+Then, the following depicts the logic of how to calculate the amount to be added to `OutstandingFees`.
+
+![UpdateFeesActivityDiagram](images/UpdateFeesActivityDiagram.png)
+
+*Figure I.6.2: Activity Diagram of Update Fees from creation of a new Lesson object onwards.*
+
+This means that once the outstanding fees have been updated, any changes to fields that would affect outstanding fees (e.g. start date, end date, cancelling and uncancelling lessons in the past, change in lesson rates) will not be accounted for.
+
+The `Fees` field in person is the sum of all the person's lesson's outstanding fees. Users are not allowed to directly edit `Fees` field, instead they should edit individual lesson's `OutstandingFeesField` should the fees be incorrect.
+
+#### Payment
+
+Payment of outstanding fees is facilitated by `Money` and its subclasses as well as `FeesCalculator`.
+
+![MoneyInheritanceDiagram](images/MoneyInheritanceDiagram.png)
+
+*Figure I.6.3: Class diagram of Money and related classes.*
+
+`OutstandingFees` and `LessonRates` extends `Money` whereas `Fees` field in `Person` is composed of `OutstandingFees` as it is the sum of `OutstandingFees`. Money uses `BigDecimal` for all calculations.
+
+The user can record payment of the lesson using the `PaidCommand`. Payment made must be greater than 0 and lesser than or equals to the current outstanding fees.
+The `OutstandingFees` field would then be deducted by the paid amount. `PaidCommand` extends `UndoableCommand`. The following is the sequence diagram of the `PaidCommand`.
+
+![PaidCommandSequenceDiagram](images/PaidCommandSequenceDiagram.png)
+
+*Figure I.6.4: Sequence diagram of executing paid command.*
+
+
+
+#### Design Consideration
+
+**Aspect: How to keep track of last updated date time**
+* **Alternative 1 (current choice):** Keep track of when the fees were last added.
+  * Pros: Simple implementation. Less information to store as all lessons share the same last added date and time.
+  * Cons: Less flexibility for edited lesson fields such that the past calculations are affected.
+* **Alternative 2:** Keep track of when the fees were last paid for each student.
+  * Pros: It offers greater flexibility for TAB to automate changes if lesson fields edited affect the past calculations.
+  * Cons: Complex implementation. Need to keep track of each lesson's last paid separately, more information to store.
+  
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -1390,6 +1527,43 @@ Incorrect `remind` command to try:
 
 Expected: Error details will be shown in the status message.
 
+### Fees Calculator
+
+<div markdown="span" class="alert alert-info">:information_source: <b>Note:</b> The test cases below are designed separately and independent of each other. i.e. Test the different test cases separately.</div>
+
+1. Add the recurring lessons and makeup lessons to a student, following the test cases. <br>
+   Prerequisites: The lessons do not clash with each other and other existing lessons. If there were clashes, delete the clashing lesson(s). The student to which the lesson is to be added has no other lessons.
+2. Close TAB and open the json file `./data/addressbook.json`. 
+3. At the bottom of the json file there is `lastUpdated` field with a `DateTime` object. Edit the `DateTime` object according to the test cases.
+
+<div markdown="span" class="alert alert-info">:information_source: <b>Note:</b> Please vary the date and time accordingly (adding or subtracting by an equivalent amount of day(s) and time), 
+depending on the date and time when you are testing.</div>
+
+Suppose the date today is 6 Nov 2021 and current time is 1800 hours,
+* Test case: 
+  1. `ladd 1 recurring/ date/30 Oct 2021 time/1400-1500 rates/25 subject/math`
+  2. Set the `DateTime` in `./data/addressbook.json` to `2021-10-31T12:00`
+  Expected: Outstanding lesson fees for the first lesson of the first student is `$25`. The lesson that has passed is:
+    * 6 Nov 2021 1400-1500
+
+* Test case:
+  1. `ladd 1 recurring/ date/30 Oct 2021 time/1400-1500 rates/25 subject/math`
+  2. Set the `DateTime` in `./data/addressbook.json` to `2021-10-30T12:00`
+  Expected: Outstanding lesson fees for the first lesson of the first student is `$50`. The lessons that have passed are:
+     * 30 Oct 2021 1400-1500
+     * 6 Nov 2021 1400-1500
+
+* Test case:
+  1. `ladd 1 recurring/ date/3 Nov 2021 time/1400-1500 rates/25 subject/math` 
+  2. Set the `DateTime` in `./data/addressbook.json` to `2021-10-20T00:00`
+  Expected: Outstanding lesson fees for the first lesson of the first student is `$25`. The lesson that have passed is:
+     * 3 Nov 2021 1400-1500
+
+* Test case:
+  1. `ladd 1 date/6 Nov 2021 time/2000-2130 rates/25 subject/math`
+  2. Set the `DateTime` in `./data/addressbook.json` to `2021-11-06T18:00`
+  Expected: Outstanding lesson fees for the first lesson of the first student is `$0`. No lessons have passed.
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files
@@ -1409,16 +1583,53 @@ A lot of effort was required to make this feature work as there was very a steep
 Integrating the interface into our app with JavaFX was also extremely difficult, as the learning curve was just as steep with JavaFX and FXML elements.
 It took two weeks (from v1.1 to v1.2b) of learning and trial-and-error to achieve a working prototype of a weekly calendar and the CenterPanel which houses it.
 Furthermore, additional complex calendar logic had to be added to customise behaviours to fit our target audience, such as allowing recurrence exceptions.
-Implementation of these features took ~4k Loc.
+Implementation of these features took ~4k LOC.
 
 **Undo/Redo feature**
 
+The implementation of `UndoableCommand` and `UndoRedoStack` was a solution adapted from [SE-EDU AddressBook 4](https://github.com/nus-cs2103-AY1718S2/addressbook-level4/blob/master/src/main/java/seedu/address/logic/UndoRedoStack.java).
+However, we have modified the implementations such that each command knows how to undo itself, while more tedious, allows us to control which panels to display e.g. student, tags, calendar etc.
+Furthermore, the implementation of `undo` command such that if `undo` was executed in a `filteredPersonsList`, after the execution of `undo`, the display panel would remain on the `filteredPersonsList` if the `undo` command affects a student that is already in the `filteredPersonsList` else it would return to the list with all the students,
+was unexpectedly tedious with the need to check through each command and ensuring that the referenced indexes are universal. Similar challenges were faced for `redo` as well.
+
+Arguably, one of the most challenging aspects of implementing `undo` and `redo` feature was to handle all the regression errors. With our approach of making each command know how to undo itself and also our many types of display,
+the debugging of regression error to make undo compatible with all the new commands was a tedious process.
+
 **Finding students**
+
+The finding students feature required much consideration in designing the find constraints to ensure it is flexible and usable for users. It was challenging to implement a data structure to allow searching by multiple fields concurrently, which may each accept multiple keywords, and may have different search behaviours. In addition to student fields, lesson fields were also used in the find feature, increasing its complexity. The find feature also allows users to optionally customise the matching condition, which required more effort to implement. The large number of parameters and variations also meant that it was more susceptible to bugs, and it required intensive and careful testing. 
 
 **Lessons**
 
+Adding lesson required changes to the current model. AB3's implementation only involves a single entity `Person`, whereas TAB deals with an additional entity, `Lesson`. Handling interactions between the two different entities becomes more complicated due to their differing behaviours and interactions with the model. The difficulty came in ensuring the addition of `Lesson` can interact with the `Model` to produce the desired behaviour. For the fields in `Lesson`, we had to ensure the validity checks are accurate to prevent the application from misbehaving. This required in-depth analysis to how the commands should be parsed and is not trivial.
+
+Furthermore, we also factored in many considerations when implementing the GUI to allow users to visualise both lessons and students at the same time, conveniently. The final implementation involved a grid layout, where the list of lessons are displayed side-by-side the student's list. The displayed list of lessons are isolated to the specific student selected. Users can select a student to view the list of lessons of that student.
+
 **Clashing Lessons**
+
+Arguably, one of the toughest part about lessons was implementing the checks for lessons with overlapping timings. Clashing lessons mean that at one point of time, one of the lessons will be happening concurrently with another lesson or lessons.<br>
+
+There were many factors we had to take into consideration:
+
+* Makeup lesson vs recurring: Do the timings overlap? Does the makeup lesson fall on the same day of week as the recurring lesson? If so, is the date of the makeup lesson before the recurring lesson's start date? Is either of the lessons cancelled on the overlapping date?
+  
+* Recurring lesson vs recurring lesson: Do the date ranges overlap? Do the timings overlap? Do they fall on the same day of week? For the overlapping regions, are the overlapping dates cancelled for the lessons in a way that there are no clashes?
+
+Implementation of the `Lesson` features took ~6-7k LOC, including tests.
 
 **Fee Calculator**
 
+We have undergone many lengthy discussions on how to implement the automated Fees Update as we needed to decide all the different cases of when fees should be automatically update. 
+The implementation of Fees Calculation was also extremely tedious with many new fields to add to `lesson` as well as a new `lastUpdatedDate` field to be added to `AddressBook`. Along with all these new fields, we needed to design the implementation of these fields as well 
+e.g. Initially we used `float` to implement Monetary fields and realised it was not optimal due to the rounding off errors and changed it to `BigDecimal`. There were many such instances during the implementation of the many fields to facilitate `FeesCalculator` hence the long and tedious implementation.
 
+While the groundwork for `FeesCalculator` was tedious, the implementation of the algorithm to get the number of lessons was extremely challenging. There were many edge cases to account for, and we have cycled through multiple versions of the algorithm.
+The current method `FeesCalculator#getNumOfLessonsSinceLastUpdated()` was mainly contributed by [Eliana](http://github.com/eeliana) with earlier versions contributed by various members of the team as well ([Lingshan](http://github.com/lingshanng) and [Koon Hwee](http://github.com/angkoonhwee)). 
+The test scripts were written by multiple team members to ensure a bug-free implementation of `FeesCalculator`. The implementation of the automated fees update feature was thoroughly tested and reviewed by all members of the team due to its complexity.
+
+**Viewing tags feature**
+
+There are multiple ways of implementing this enhancement. The simplest way would be to just create a method in `Addressbook` to add `Tag` objects from each `Person` in `UniquePersonList` whenever users request to view the list of tags.
+However, to abide by the Separation of Concerns (SoC) principle, the `UniqueTagList` class is created for adding distinct tags from `Person` into the tag list. 
+One of the alternative implementations is to keep a list of `Person` objects with the same `Tag` in the `Tag` object to keep track of the number of students labeled with that `Tag`. However, this could introduce circular dependencies.
+The implementation of `UniqueTagList` involved multifaceted considerations and multiple changes to ensure a balance between ease of implementation, efficiency as well as space allocation. The implementation of this feature took ~1k LOC including test cases.

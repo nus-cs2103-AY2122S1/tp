@@ -22,6 +22,7 @@ Class JsonAdaptedPerson
 Class JsonAdaptedTag
 Class JsonAdaptedLesson
 Class JsonAdaptedHomework
+Class JsonAdaptedLastUpdated
 }
 
 }
@@ -40,6 +41,7 @@ JsonUserPrefsStorage .up.|> UserPrefsStorage
 JsonAddressBookStorage .up.|> AddressBookStorage
 JsonAddressBookStorage ..> JsonSerializableAddressBook
 JsonSerializableAddressBook --> "*" JsonAdaptedPerson
+JsonSerializableAddressBook --> "*" JsonAdaptedLastUpdated
 JsonAdaptedPerson --> "*" JsonAdaptedTag
 JsonAdaptedPerson --> "*" JsonAdaptedLesson
 JsonAdaptedLesson --> "*" JsonAdaptedHomework
