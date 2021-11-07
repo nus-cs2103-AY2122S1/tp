@@ -28,7 +28,7 @@ class JsonSerializableAddressBook {
     private final JsonAdaptedLastUpdated lastUpdated;
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons.
+     * Constructs a {@code JsonSerializableAddressBook} with the given persons and lastUpdated date time.
      */
     @JsonCreator
     public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,

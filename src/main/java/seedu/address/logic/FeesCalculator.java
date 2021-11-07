@@ -57,6 +57,12 @@ public class FeesCalculator implements Calculator {
         this.currentDateTime = currentDateTime.truncatedTo(ChronoUnit.MINUTES);
     }
 
+    /**
+     * Updates all lessons in model to the updated outstanding fees.
+     *
+     * @param model Model to be updated.
+     * @return Updated model with correct outstanding fees.
+     */
     @Override
     public Model updateAllLessonOutstandingFees(Model model) {
         List<Person> personList = model.getFilteredPersonList();
@@ -167,6 +173,16 @@ public class FeesCalculator implements Calculator {
         return durationInHour.multiply(lessonRates.getMonetaryValue());
     }
 
+    /**
+     * Calculates the number of lessons that have passed since last updated date and time.
+     *
+     * @param updateDay The day of the week which the lesson falls on.
+     * @param startDate The start date of the lesson.
+     * @param endDate The end date of the lesson.
+     * @param endTime The end time of the lesson.
+     * @param cancelledDates The set of cancelled dates.
+     * @return The number of lessons since that have passed since last update.
+     */
     public int getNumOfLessonsSinceLastUpdate(DayOfWeek updateDay, LocalDate startDate,
                                                LocalDate endDate, LocalTime endTime, Set<Date> cancelledDates) {
         int lastUpdatedDay = lastUpdated.getLastUpdatedLocalDate().getDayOfWeek().getValue();

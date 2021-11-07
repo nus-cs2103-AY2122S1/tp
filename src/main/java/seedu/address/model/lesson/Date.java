@@ -108,6 +108,7 @@ public class Date implements Comparable<Date> {
     /**
      * Returns the latest date on the given day of week before or equal to the date.
      *
+     * @param dayOfWeek The day of week to check.
      * @return prevDate The latest passed date on the given day on the week.
      */
     public Date getPreviousDate(DayOfWeek dayOfWeek) {
@@ -138,12 +139,19 @@ public class Date implements Comparable<Date> {
     /**
      * Checks if this date is after the specified date.
      *
+     * @param other The date to compare to.
      * @return True if this date is after the specified date, false if same date or before.
      */
     public boolean isAfter(Date other) {
         return localDate.isAfter(other.localDate);
     }
 
+    /**
+     * Checks if this date is before the specified date.
+     *
+     * @param other The date to compare to.
+     * @return True if this date is before the specified date, false if same date or after.
+     */
     public boolean isBefore(Date other) {
         return localDate.isBefore(other.localDate);
     }
@@ -151,6 +159,7 @@ public class Date implements Comparable<Date> {
     /**
      * Checks if this date is on the same day of the week as the specified date.
      *
+     * @param other The date to compare to.
      * @return True if this date is is on the same day of the week as the specified date, false otherwise.
      */
     public boolean isSameDayOfWeek(Date other) {
@@ -161,6 +170,7 @@ public class Date implements Comparable<Date> {
      * Checks if this date occurs on a weekly recurring date.
      *
      * @param recurringStartDate The start date of the weekly recurrence.
+     * @param recurringEndDate The end date of the weekly recurrence.
      * @return True if this date is on a recurring date, false otherwise.
      */
     public boolean isOnRecurringDate(Date recurringStartDate, Date recurringEndDate) {

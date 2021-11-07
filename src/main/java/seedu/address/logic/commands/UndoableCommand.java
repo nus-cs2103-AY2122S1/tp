@@ -11,7 +11,7 @@ import seedu.address.model.person.Person;
 // address/logic/commands/UndoableCommand.java
 
 /**
- * A command that can be undone or redone
+ * Represents a command that modifies existing data in {@code model#addressBook}.
  */
 public abstract class UndoableCommand extends Command {
     public static final String MESSAGE_FAILURE = "The command has been successfully executed previously; "
@@ -32,6 +32,12 @@ public abstract class UndoableCommand extends Command {
     protected abstract Person undo() throws AssertionError;
     protected abstract Person redo() throws AssertionError;
 
+    /**
+     * Gets the Index of the person to undo in the UniquePersonsList.
+     *
+     * @param personToUndo Person the undo command should execute on.
+     * @return The index of the person on the UniquePersonsList.
+     */
     protected Index setToDefinitiveIndex(Person personToUndo) {
         ObservableList<Person> mainList = model.getUnfilteredPersonList();
         Index definitiveIndex = Index.fromZeroBased(mainList.indexOf(personToUndo));
