@@ -249,7 +249,12 @@ The following activity diagram summarises what happens when a user executes the 
 The following sequence diagram summarises what happens when the user inputs an `addalloc` command together with a group and a student, specified by name, to be allocated.
 
 ![AddAllocSequenceDiagram](images/AddAllocSequenceDiagram.png)
+<center>
+
 ![AddAllocToModelSequenceDiagram](images/AddAllocToModelSequenceDiagram.png)
+
+</center>
+
 
 ### Adding a score
 
