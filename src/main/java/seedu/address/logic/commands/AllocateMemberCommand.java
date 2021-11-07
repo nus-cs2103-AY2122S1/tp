@@ -76,7 +76,7 @@ public class AllocateMemberCommand extends Command {
 
         String dayName = day.getDisplayName(TextStyle.FULL, Locale.getDefault());
         return new CommandResult(String.format(MESSAGE_SUCCESS, toBeAllocated.getName(),
-                toAllocate.getName(), dayName));
+                toAllocate.getName(), dayName), false, true, false);
     }
 
     @Override

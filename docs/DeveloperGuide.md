@@ -201,7 +201,7 @@ is represented as `Alias`. The class diagram for `AliasMap` is shown below.
 
 ![AliasClassDiagram](images/AliasClassDiagram.png)
 
-AliasMap` implements the following operations:
+`AliasMap` implements the following operations:
 
 * `AliasMap#add(Alias)` — Adds an alias to the mapping.
 * `AliasMap#remove(Shortcut)` — Removes an alias from the mapping.
@@ -276,38 +276,52 @@ likely to be repeated, we decided that it was sufficient to allow users to creat
 The split mechanism is facilitated by `ModelManager` and `SportsPa`. <br>`ModelManager` stores a list of
 filtered members as `filteredMembers`. Each `Member` in the list has an `Availability`, which is implemented internally as a `List<DayOfWeek>`.
 <br>
-`Address Book`stores a list of all facilities as `facilities`. Each `Facility` in the list has an `AllocationMap`, which is implemented internally as an `EnumMap<DayOfWeek, List<Member>>`. This `EnumMap` is initialized
+`SportsPa` stores a list of all facilities in `UniqueFacilityList` as `facilities`. Each `Facility` in the list has an `AllocationMap`, which is implemented internally as an `EnumMap<DayOfWeek, List<Member>>`. This `EnumMap` is initialized
 with 7 key-value pairs, of which the keys are all the enums of the
 `java.time.DayOfWeek` (`{MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY}`) and the values are all initialized
-as an empty `ArrayList`. This is based on the assumption that facilities are available on every day of the week.
+as an empty `ArrayList` to hold the members allocated. This is based on the assumption that facilities are available on every day of the week.
 <br>
-When the `split` command is executed with a given `DAY` parameter, all members available on that `DAY` are filtered and the `List<Member>` of all facilities for that `DAY` is cleared.
-The available members are then added to the `List<Member>` of the corresponding `DayOfWeek` in the `EnumMap` of the facilities using a Greedy algorithm. <br>
-i.e. The filtered members list and facility list are iterated and each Member is allocated to the first facility which is not at max capacity. After
-a facility is at max capacity, any remaining members are allocated to the next available facility and so on.
+When the `split` command is executed with a given `DAY` parameter, all members available on that `DAY` are filtered and the `ArrayList<Member>` of all facilities for that `DAY` is cleared.
+The available members are then added to the `List<Member>` of the corresponding `DayOfWeek` in the `EnumMap` of the facilities using a greedy algorithm. 
+<br>
+i.e. The filtered members list and facility list are iterated and each `Member` is allocated to the first `Facility` which is not at max capacity. After
+a `Facility` is at max capacity, any remaining `Member`s are allocated to the next available `Facility` and so on.
 
-`ModelManager` implements the following operations:
-* `split(Predicate<Member> predicate, int dayNumber)` —  Filters the list of all members according to the given `predicate`.
-When the `split` command is executed, `MemberAvailableOnDayPredicate` is passed to `predicate`, allowing a filtered list of members available
-on the given `dayNumber` to be created and passed to the `split` method of `SportsPa`.
+`ModelManager` implements the following operation:
+* `ModelManager#split(Predicate<Member>, int)` —  Filters the list of all members according to the given `predicate`.
 
-`SportsPa` implements the following operations:
-* `split(FilteredList<Member> membersFilteredList, int dayNumber)` — Splits the members in the given filtered member list into facilities on the given day.
-Returns -1 if no members are available, the number of members that exceed the total capacity if the number of members is
-more than the total capacity on the given day and 0 if members can be split successfully.
+`SportsPa` implements the following operation:
+* `SportsPa#split(FilteredList<Member>, int)` — Splits the members in the given filtered member list into facilities on the given day.
 
-Additionally, `UniqueFacilityList` implements the following operations:
-* `allocateMembersToFacilitiesOnDay(FilteredList<Member> members, int dayNumber)` — Clears the `AllocationMap` of each `Facility`
+Additionally, <br>
+`UniqueFacilityList` implements the following operation:
+* `UniqueFacilityList#allocateMembersToFacilitiesOnDay(FilteredList<Member>, int)` — Clears the `AllocationMap` of each `Facility`
 and allocates the members in the given filtered member list to facilities greedily.
+* 
+`Facility` implements the following operation:
+* `Facility#addMemberToFacilityOnDay(Member, DayOfWeek)` — Adds the given member to `AllocationMap` on the given day.
 
 Given below is an example usage scenario and how the split feature behaves at each step.
 
-Step 1.
+Step 1. The user launches the application for the first time. The user then adds 5 members into an empty SportsPA
+by executing the `addm` command 5 times with the parameter `d/1` (all required parameters are provided as well but not specified here).
+Each `Member` in the `filteredMembers` list will have an availability of Monday.
+The user then adds 1 facility into SportsPA by executing the `addf` command with the parameter `c/5`
+(all required parameters are provided as well but not specified here). The `Facility` in the `facilities` list will 
+have a capacity of 5 and an `AllocationMap` with all the values initialized as an empty `ArrayList`.
+
+Step2. The user executes `split 1` command to split the 5 members in the filtered list to facilities on Monday. The `split` command
+creates a `MemberAvailableOnDayPredicate` with the given day and passes it and the given day to `ModelManager#split(Predicate<Member>, int)`.
+`ModelManager` then creates a filtered list of members who are available on Monday. It then calls `SportsPa#split(FilteredList<Member>, int)`, passing to it
+the filtered list and the given day. `SportsPA` then iterates through the 5 members in the filtered member list and the 1 facility in its `UniqueFacilityList`, calling
+`Facility#addMemberToFacilityOnDay(Member, DayOfWeek)`. This adds the 5 members to the `ArrayList` of the `AllocationMap` of the `Facility` for Monday.
 
 The following sequence diagram shows how the split mechanism works.
 
+![SplitSequenceDiagram](images/SplitSequenceDiagram.png)
+
 <div markdown="span" class="alert alert-info">:information_source: **Note:** 
-The lifeline for `SplitCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+The lifelines should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 #### Design considerations:
