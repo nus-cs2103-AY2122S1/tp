@@ -106,7 +106,7 @@ public class MainApp extends Application {
 
             initialData = guestBookOptional.orElseGet(() -> SampleDataUtil.getSampleGuestBook());
 
-            ReadOnlyGuestBook verifiedGuestBook = new GuestBook();
+            GuestBook verifiedGuestBook = new GuestBook();
 
             for (Guest guest : initialData.getGuestList()) {
                 boolean containPassportNumber = false;
@@ -116,7 +116,7 @@ public class MainApp extends Application {
                     }
                 }
                 if (!containPassportNumber) {
-                    verifiedGuestBook.getGuestList().add(guest);
+                    verifiedGuestBook.addGuest(guest);
                 }
             }
 
