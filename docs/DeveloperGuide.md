@@ -559,7 +559,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 1a. User also inputs last visited and visit date.
 
-  - 1a1. SeniorLoves shows a new entry for the elderly added, with the optional details as well.
+  - 1a1. SeniorLove shows a new entry for the elderly added, with the optional details as well.
 
     Use case ends.
 
@@ -634,7 +634,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to list elderly
 2. SeniorLove shows a list of elderly
 3. User requests to mark a specific visit as done
-4. SeniorLove mark a specific visit as done
+4. SeniorLove marks a specific visit as done
 
    Use case ends.
 
