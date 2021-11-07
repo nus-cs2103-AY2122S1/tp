@@ -25,10 +25,10 @@ Given below are my contributions to the project.
   * Updated sample data that informs and guides first-time users on the functionalities of the application, for example, adding module, student, tasks with completion status and deadline.
    ([\#139](https://github.com/AY2122S1-CS2103-F09-1/tp/pull/139))
 
-* **Testing**
+* **Testing**:
   * Wrote test cases for `delete module` feature that increased test coverage by 11.70%. ([\#99](https://github.com/AY2122S1-CS2103-F09-1/tp/pull/99))
   
-* **Team-based contributions**
+* **Team-based contributions**:
   * Created object builders used for team-wide testing purposes. ([\#99](https://github.com/AY2122S1-CS2103-F09-1/tp/pull/99))
   * Updated CI build status badge and Jekyll site-settings. ([\#23](https://github.com/AY2122S1-CS2103-F09-1/tp/pull/23))
   
@@ -52,7 +52,7 @@ Given below are my contributions to the project.
     * Added application-wide design details, including Architecture, UI, Logic, Model and Storage, each with detailed UML diagrams. ([\#212](https://github.com/AY2122S1-CS2103-F09-1/tp/pull/212), [\#225](https://github.com/AY2122S1-CS2103-F09-1/tp/pull/225))
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#98](https://github.com/AY2122S1-CS2103-F09-1/tp/pull/98), [\#102](https://github.com/AY2122S1-CS2103-F09-1/tp/pull/102), [\#129](https://github.com/AY2122S1-CS2103-F09-1/tp/pull/129), [\#207](https://github.com/AY2122S1-CS2103-F09-1/tp/pull/207)
+  * PRs reviewed (with non-trivial review comments): [\#98](https://github.com/AY2122S1-CS2103-F09-1/tp/pull/98), [\#102](https://github.com/AY2122S1-CS2103-F09-1/tp/pull/102), [\#129](https://github.com/AY2122S1-CS2103-F09-1/tp/pull/129), [\#207](https://github.com/AY2122S1-CS2103-F09-1/tp/pull/207), [\#219](https://github.com/AY2122S1-CS2103-F09-1/tp/pull/219)
   * Contributed to forum discussions (examples: [1](https://github.com/nus-cs2103-AY2122S1/forum/issues/369), [2](https://github.com/nus-cs2103-AY2122S1/forum/issues/179), [3](https://github.com/nus-cs2103-AY2122S1/forum/issues/17))
   * Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/Ruofan1023/ped/issues/2), [2](https://github.com/Ruofan1023/ped/issues/3), [3](https://github.com/Ruofan1023/ped/issues/4))
 
