@@ -47,7 +47,7 @@ Take note of some syntax we will frequently use throughout the Developer Guide:
         - [Launch and shutdown](#launch-and-shutdown)
         - [Adding a patient](#add-patient-manual-testing)
         - [Listing all patients](#list-patients-manual-testing)
-        - [Finding a patient](#find-patient-manual-testing)
+        - [Finding patients](#find-patient-manual-testing)
         - [Deleting a patient](#delete-patient-manual-testing)
         - [Editing a patient](#edit-patient-manual-testing)
         - [Editing a patient's remark](#remark-patient-manual-testing)
@@ -55,7 +55,7 @@ Take note of some syntax we will frequently use throughout the Developer Guide:
         - [Deleting a tag of a patient](#delete-tag-patient-manual-testing)
         - [Adding a doctor](#add-doctor-manual-testing)
         - [Listing all doctors](#list-doctors-manual-testing)
-        - [Finding a doctor](#find-doctor-manual-testing)
+        - [Finding doctors](#find-doctor-manual-testing)
         - [Deleting a doctor](#delete-doctor-manual-testing)
         - [Editing a doctor](#edit-doctor-manual-testing)
         - [Editing a doctor's remark](#remark-patient-manual-testing)
@@ -942,10 +942,12 @@ testers are expected to do more *exploratory* testing.
         Expected: Patient named Bob Doe is added successfully. Details of the added patient are shown in the status message.
 
     3. Test case: `add n/John Doe hp/98765432 eml/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/vaccinated risk/LOW`
-       <br>Expected: No Patient is added. Error details are shown in the status message that the patient already exists.
+
+      <br>Expected: No Patient is added. Error details are shown in the status message that the patient already exists.
 
     4. Test case: `add n/John Doe hp/98765432 eml/johnd@example.com a/311, Kent Ridge Ave 2, #02-25 dob/25/12/0000 t/vaccinated risk/LOW`
        <br>Expected: No Patient is added. Error details are shown in the status message that the patient already exists.
+
 
     5. Other incorrect add commands to try: `add`, `add n/Bob hp/`, `add n/` (not all fields, except tags and risk, are filled)<br>
        Expected: No Patient is added. Error details are shown in the status message.
@@ -969,19 +971,19 @@ testers are expected to do more *exploratory* testing.
       `toggle` to the `Patients` tab.
 
    2. Test case: `find Aaron`<br>
-      Expected: Patient list shows only one patient "Aaron Yeoh". Status message shown says "1 patients listed!".
+      Expected: Patient list shows only one patient "Aaron Yeoh". Status message shows that 1 patient is listed.
 
    3. Test case: `find aaron`<br>
-      Expected: `find` command is case-insensitive. Patient list shows only one patient "Aaron Yeoh". Status message shown says "1 patients listed!".
+      Expected: `find` command is case-insensitive. Patient list shows only one patient "Aaron Yeoh". Status message shows that 1 patient is listed.
 
    4. Test case: `find aaron Bobby`<br>
-      Expected: `find` command is able to search multiple patients using multiple keywords. Patient list shows two patients "Aaron Yeoh" and "Bobby Yu". Status message shown says "2 patients listed!".
+      Expected: `find` command is able to search multiple patients using multiple keywords. Patient list shows two patients "Aaron Yeoh" and "Bobby Yu". Status message shows that 2 patients are listed.
 
    5. Test case: `find aar`<br>
-      Expected: Patient list shows "No patients found". Status message shown says "0 patients listed!".
+      Expected: Patient list shows that no patients are found. Status message shows that 0 patients are listed.
 
    6. Test case: `find Alex`<br>
-      Expected: Patient list shows "No patients found". Status message shown says "0 patients listed!".
+      Expected: Patient list shows that no patients are found. Status message shows that 0 patients are listed.
 
 
 ### Deleting a patient  <a name="delete-patient-manual-testing"/>
@@ -1017,10 +1019,10 @@ testers are expected to do more *exploratory* testing.
        Expected: First patient's phone and email are edited to `91234567` and `johndoe@example.com` respectively. Details of the edited patient are shown in the status message.
 
     4. Test case: `edit 1 hp/abc`<br>
-       Expected: No patient is edited. Error details are shown in the status message: "Phone numbers should only contain numbers...".
+       Expected: No patient is edited. Error details are shown in the status message.
 
     5. Test case: `edit 1 eml/xyz`<br>
-       Expected: No patient is edited. Error details are shown in the status message: "Emails should be of the format local-part@domain...".
+       Expected: No patient is edited. Error details are shown in the status message.
 
     6. Test case: `edit 1 a/Blk 50, Clementi Ave 2`<br>
        Expected: First patient's address is edited to `Blk 50, Clementi Ave 2`. Details of the edited doctor are shown in the status message.
@@ -1029,7 +1031,7 @@ testers are expected to do more *exploratory* testing.
        Expected: First patient's date of birth is edited to `1960-12-20`. Details of the edited patient are shown in the status message.
 
     8. Test case: `edit 1 dob/20/14/1960`<br>
-       Expected: No patient is edited. Error details are shown in the status message: "Birth dates should be of the format DD/MM/YYYY and adhere to the following constraints...".
+       Expected: No patient is edited. Error details are shown in the status message.
 
     9. Test case: `edit 1 t/covid`<br>
        Expected: First patient's tag is edited to `covid`. Details of the edited patient are shown in the status message.
@@ -1041,10 +1043,10 @@ testers are expected to do more *exploratory* testing.
         Expected: First patient's risk is edited to `HIGH`. Details of the edited patient are shown in the status message.
 
     12. Test case: `edit 1 risk/ABC`<br>
-        Expected: No patient is edited. Error details are shown in the status message: "Risks should only be either HIGH, MEDIUM OR LOW".
+        Expected: No patient is edited. Error details are shown in the status message.
 
     13. Test case: `edit 0 hp/91234567`<br>
-        Expected: No patient is edited. Error details are shown in the status message: "Invalid command format...".
+        Expected: No patient is edited. Error details are shown in the status message.
 
     14. Other incorrect edit commands to try: `edit`, `edit x`, `...` (where x is larger than the list size)<br>
         Expected: No patient is edited. Error details are shown in the status message.
@@ -1063,15 +1065,15 @@ testers are expected to do more *exploratory* testing.
 
     2. Test case: `remark 1 r/Prefers Dr. Mok`<br>
         1. If the first patient had no remarks initially,
-           Expected: A new remark field displaying `Prefers Dr. Mok` is added to the first patient's fields. Details of the edited contact are shown in the status message.
+           Expected: A new remark field displaying `Prefers Dr. Mok` is added to the first patient's fields. Details of the edited patient are shown in the status message.
         2. If the first patient had remarks initially,
-           Expected: First patient's remarks are edited to `Prefers Dr. Mok`. Details of the edited contact are shown in the status message.
+           Expected: First patient's remarks are edited to `Prefers Dr. Mok`. Details of the edited patient are shown in the status message.
 
     3. Test case: `remark 1 r/`<br>
-       Expected: First patient's remarks are deleted and the remark field is no longer displayed for the patient. Details of the edited contact are shown in the status message.
+       Expected: First patient's remarks are deleted and the remark field is no longer displayed for the patient. Details of the edited patient are shown in the status message.
 
     4. Test case: `remark 0 r/Prefers Dr. Mok`<br>
-       Expected: No patient's remarks are edited. Response box displays error message: "Invalid command format! ..."
+       Expected: No patient's remarks are edited. Error details are shown in the status message.
 
     5. Other incorrect edit commands to try: `remark`, `remark x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous test case.
@@ -1089,15 +1091,15 @@ testers are expected to do more *exploratory* testing.
 
     2. Test case: `tag -a 1 t/Immunocompromised`<br>
        1. If the patient does not have a `Immunocompromised` tag
-          Expected: A new tag `Immunocompromised` is added to the first patient. Details of the edited contact are shown in the status message.
+          Expected: A new tag `Immunocompromised` is added to the first patient. Details of the edited patient are shown in the status message.
        2. If the patient has a `Immunocompromised` tag
-          Expected: No tag is added to the patient. Response box displays error message: "The tag already exists."
+          Expected: No tag is added to the patient. Error details are shown in the status message.
        
     3. Test case: `tag -a 1 t/`<br>
-       Expected: No tag is added to the patient. Response box displays error message: "A tag must be provided."
+       Expected: No tag is added to the patient. Error details are shown in the status message.
 
     4. Test case: `tag -a 0 t/Immunocompromised`<br>
-       Expected: No tag is added to any patient. Response box displays error message: "Invalid command format! ..."
+       Expected: No tag is added to any patient. Error details are shown in the status message.
 
     5. Other incorrect tag commands to try: `tag`, `tag -a t/`, `tag -a x t/`, `tag -e`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous test case.
@@ -1115,16 +1117,16 @@ testers are expected to do more *exploratory* testing.
        First patient has `Immunocompromised` tag. Tag can be added using the following command: `tag -a 1 t/Immunocompromised`.
 
     2. Test case: `tag -d 1 t/Immunocompromised`<br>
-       Expected: First patient's `Immunocompromised` tag is deleted. Details of the edited contact are shown in the status message.
+       Expected: First patient's `Immunocompromised` tag is deleted. Details of the edited patient are shown in the status message.
    
     3. Test case: `tag -d 1 t/Osteopath`<br>
-       Expected: No tag is deleted from the patient. Response box displays error message: "The tag does not exist."
+       Expected: No tag is deleted from the patient. Error details are shown in the status message.
 
     4. Test case: `tag -d 1 t/`<br>
-       Expected: No tag is deleted from the patient. Response box displays error message: "A tag must be provided."
+       Expected: No tag is deleted from the patient. Error details are shown in the status message.
 
     5. Test case: `tag -d 0 t/Immunocompromised`<br>
-       Expected: No tag is deleted from any patient. Response box displays error message: "Invalid command format! ..."
+       Expected: No tag is deleted from any patient. Error details are shown in the status message.
 
     6. Other incorrect tag commands to try: `tag`, `tag -d t/`, `tag -d x t/`, `tag -e`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous test case.
@@ -1145,10 +1147,12 @@ testers are expected to do more *exploratory* testing.
        <br> Expected: Doctor named Bob Doe is added successfully. Details of the added doctor are shown in the status message.
        
     3. Test case: `add n/John Doe hp/98765432 eml/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/experienced`
+
        <br> Expected: No doctor is added. Error details are shown in the status message that the doctor already exists.
        
     4. Test case: `add n/John Doe hp/98765432 eml/johnd@example.com a/311, Kent Ridge Ave 2, #02-25 dob/25/12/0000 t/experienced`
        <br> Expected: No doctor is added. Error details are shown in the status message that the doctor already exists.
+
 
     5. Other incorrect add commands to try: `add`, `add n/Bob hp/`, `add n/` (not all fields, except tags, are filled)<br>
         Expected: No doctor is added. Error details are shown in the status message.
@@ -1172,19 +1176,19 @@ testers are expected to do more *exploratory* testing.
       `toggle` to the `Patients` tab.
 
    2. Test case: `find Alex`<br>
-      Expected: Doctor list shows only one doctor "Alex Yeoh". Status message shown says "1 doctors listed!".
+      Expected: Doctor list shows only one doctor "Alex Yeoh". Status message shows that 1 doctor is listed.
 
    3. Test case: `find alex`<br>
-      Expected: `find` command is case-insensitive. Doctor list shows only one doctor "Alex Yeoh". Status message shown says "1 doctors listed!".
+      Expected: `find` command is case-insensitive. Doctor list shows only one doctor "Alex Yeoh". Status message shows that 1 doctor is listed.
 
    4. Test case: `find alex bernice`<br>
-      Expected: `find` command is able to search multiple doctors using multiple keywords. Doctor list shows two doctors "Alex Yeoh" and "Bernice Yu". Status message shown says "2 doctors listed!".
+      Expected: `find` command is able to search multiple doctors using multiple keywords. Doctor list shows two doctors "Alex Yeoh" and "Bernice Yu". Status message shows that 2 doctors are listed.
 
    5. Test case: `find ale`<br>
-      Expected: Doctor list shows "No doctors found". Status message shown says "0 doctors listed!".
+      Expected: Doctor list shows that no doctors are found. Status message shows that 0 doctors are listed.
 
    6. Test case: `find Aaron`<br>
-      Expected: Doctor list shows "No doctors found". Status message shown says "0 doctors listed!".
+      Expected: Doctor list shows that no doctors are found. Status message shows that 0 doctors are listed.
    
 ### Deleting a doctor  <a name="delete-doctor-manual-testing"/>
 1. Deleting a doctor while all doctors are being shown
@@ -1218,10 +1222,10 @@ testers are expected to do more *exploratory* testing.
        Expected: First doctor's phone and email are edited to `91234567` and `johndoe@example.com` respectively. Details of the edited doctor are shown in the status message.
 
     4. Test case: `edit 1 hp/abc`<br>
-       Expected: No doctor is edited. Error details are shown in the status message: "Phone numbers should only contain numbers...".
+       Expected: No doctor is edited. Error details are shown in the status message.
 
     5. Test case: `edit 1 eml/xyz`<br>
-       Expected: No doctor is edited. Error details are shown in the status message: "Emails should be of the format local-part@domain...".
+       Expected: No doctor is edited. Error details are shown in the status message.
 
     6. Test case: `edit 1 a/Blk 30, Clementi Ave 2`<br>
        Expected: First doctor's address is edited to `Blk 30, Clementi Ave 2`. Details of the edited doctor are shown in the status message.
@@ -1230,7 +1234,7 @@ testers are expected to do more *exploratory* testing.
        Expected: First doctor's date of birth is edited to `1960-12-20`. Details of the edited doctor are shown in the status message.
 
     8. Test case: `edit 1 dob/20/14/1960`<br>
-       Expected: No doctor is edited. Error details are shown in the status message: "Birth dates should be of the format DD/MM/YYYY and adhere to the following constraints...".
+       Expected: No doctor is edited. Error details are shown in the status message.
 
     9. Test case: `edit 1 t/experienced`<br>
        Expected: First doctor's tag is edited to `experienced`. Details of the edited doctor are shown in the status message.
@@ -1239,7 +1243,7 @@ testers are expected to do more *exploratory* testing.
         Expected: First doctor's tags are deleted. Details of the edited doctor are shown in the status message.
 
     11. Test case: `edit 0 hp/91234567`<br>
-        Expected: No doctor is edited. Error details are shown in the status message: "Invalid command format...".
+        Expected: No doctor is edited. Error details are shown in the status message.
 
     12. Other incorrect edit commands to try: `edit`, `edit x`, `...` (where x is larger than the list size)<br>
         Expected: No doctor is edited. Error details are shown in the status message.
@@ -1257,13 +1261,13 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: `toggle` to the `Doctors` tab. There must be existing doctors. List all doctors using the `list` command.
 
     2. Test case: `remark 1 r/Comes at 8am`<br>
-       Expected: First doctor's remarks are edited to `Orthopedic`. Details of the edited contact are shown in the status message.
+       Expected: First doctor's remarks are edited to `Orthopedic`. Details of the edited patient are shown in the status message.
    
     3. Test case: `remark 1 r/`<br>
-       Expected: First doctor's remarks are deleted. Details of the edited contact are shown in the status message.
+       Expected: First doctor's remarks are deleted. Details of the edited patient are shown in the status message.
 
     4. Test case: `remark 0 r/Comes at 8am`<br>
-       Expected: No doctor's remarks are edited. Response box displays error message: "Invalid command format! ..."
+       Expected: No doctor's remarks are edited. Error details are shown in the status message.
 
     5. Other incorrect remark commands to try: `remark`, `remark x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous test case.
@@ -1281,15 +1285,15 @@ testers are expected to do more *exploratory* testing.
 
     2. Test case: `tag -a 1 t/Pediatrician`<br>
         1. If the first doctor does not have a `Pediatrician` tag
-           Expected: A new tag `Pediatrician` is added to the first doctor. Details of the edited contact are shown in the status message.
+           Expected: A new tag `Pediatrician` is added to the first doctor. Details of the edited patient are shown in the status message.
         2. If the first doctor has a `Pediatrician` tag
-           Expected: No tag is added to the doctor. Response box displays error message: "The tag already exists."
+           Expected: No tag is added to the doctor. Error details are shown in the status message.
 
     3. Test case: `tag -a 1 t/`<br>
-       Expected: No tag is added to the doctor. Response box displays error message: "A tag must be provided."
+       Expected: No tag is added to the doctor. Error details are shown in the status message.
 
     4. Test case: `tag -a 0 t/Pediatrician`<br>
-       Expected: No tag is added to any doctor. Response box displays error message: "Invalid command format! ..."
+       Expected: No tag is added to any doctor. Error details are shown in the status message.
 
     5. Other incorrect tag commands to try: `tag`, `tag -a t/`, `tag -a x t/`, `tag -e`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous test case.
@@ -1307,16 +1311,16 @@ testers are expected to do more *exploratory* testing.
        First doctor has `Pediatrician` tag. Tag can be added using the following command: `tag -a 1 t/Pediatrician`.
 
     2. Test case: `tag -d 1 t/Pediatrician`<br>
-       Expected: First doctor's `Pediatrician` tag is deleted. Details of the edited contact are shown in the status message.
+       Expected: First doctor's `Pediatrician` tag is deleted. Details of the edited patient are shown in the status message.
    
     3. Test case: `tag -d 1 t/Osteopath`<br>
-       Expected: No tag is deleted from the doctor. Response box displays error message: "The tag does not exist."
+       Expected: No tag is deleted from the doctor. Error details are shown in the status message.
 
     4. Test case: `tag -d 1 t/`<br>
-       Expected: No tag is deleted from the doctor. Response box displays error message: "A tag must be provided."
+       Expected: No tag is deleted from the doctor. Error details are shown in the status message.
 
     5. Test case: `tag -d 0 t/Pediatrician`<br>
-       Expected: No tag is deleted from any doctor. Response box displays error message: "Invalid command format! ..."
+       Expected: No tag is deleted from any doctor. Error details are shown in the status message.
 
     6. Other incorrect tag commands to try: `tag`, `tag -d t/`, `tag -d x t/`, `tag -e`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous test case.
@@ -1349,6 +1353,7 @@ testers are expected to do more *exploratory* testing.
        Expected: An appointment is added. Details of the appointment is shown in the status message. The appointment shows up in the appointment list.
        
     1. Test case: `appt -a`<br>
+
        Expected: No appointment is added. Error details are shown in the status message that the format is invalid.
 
     1. Test case: `appt -a p/1 d/1 s/30/02/2021 dur/5 r/Patient wants a blood test`<br>
@@ -1380,7 +1385,9 @@ testers are expected to do more *exploratory* testing.
        Expected: First appointment is deleted from the list. Details of the deleted appointment shown in the status message.
 
     3. Test case: `appt -d 0`<br>
+
        Expected: No appointment is deleted. Errors details are shown in the status message that the format is invalid
+
 
     4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the appointment list size)<br>
        Expected: No appointment is deleted. Errors details are shown in the status message.
@@ -1404,22 +1411,22 @@ testers are expected to do more *exploratory* testing.
        Expected: First appointment's doctor is edited to the first doctor in the filtered doctor list. The remark is edited to `blood test`. Details of the edited appointment are shown in the status message.
 
     4. Test case: `appt -e 1 s/31/12/2021`<br>
-       Expected: No appointment is edited. Error details are shown in the status message: "Start date/time should be of the format DD/MM/YYYY HH:MM...".
+       Expected: No appointment is edited. Error details are shown in the status message.
 
     5. Test case: `appt -e 1 s/10:00`<br>
-       Expected: No appointment is edited. Error details are shown in the status message: "Start date/time should be of the format DD/MM/YYYY HH:MM...".
+       Expected: No appointment is edited. Error details are shown in the status message.
 
     6. Test case: `appt -e 1 dur/1000`<br>
-       Expected: No appointment is edited. Error details are shown in the status message: "The duration should be an integer between 1-120 minutes".
+       Expected: No appointment is edited. Error details are shown in the status message.
 
     7. Test case: `appt -e 0 dur/30`<br>
-       Expected: No appointment is edited. Error details are shown in the status message: "Invalid command format...".
+       Expected: No appointment is edited. Error details are shown in the status message.
 
     8. Other incorrect edit appointment commands to try: `appt -e`, `appt -e x`, `...` (where x is larger than the list size)<br>
        Expected: No appointment is edited. Error details are shown in the status message.
 
     9. Test case: Edit a patient/doctor's appointment to clash with their existing appointments (edit the date and time to be the same or overlapping with an existing appointment).<br>
-        Expected: No appointment is edited. Error details are shown in the status message: "This appointment clashes with an existing appointment".
+        Expected: No appointment is edited. Error details are shown in the status message.
 
 2. Editing an appointment while some appointments are being shown
 
@@ -1458,10 +1465,10 @@ testers are expected to do more *exploratory* testing.
         Expected: Searches for appointments that has a patient with a name that contains the keyword `Aaron` in it, a doctor with a name that contains the keyword `Irfan` in it and has a starting date after `01/11/2021` [inclusive] and before `30/11/2021` [inclusive]. The search results are then displayed in the appointment list.
        
     10. Test case: `appt -f s/01/14/2021`<br>
-        Expected: Displays an error message telling the user that the date entered has to be valid.
+        Expected: Displayed appointments are not changed. Error details are shown in the status message.
         
     11. Test case: `appt -f d/`<br>
-        Expected: Displays an error message telling the user that a specified parameter cannot be empty.
+        Expected: Displayed appointments are not changed. Error details are shown in the status message.
 
 
 ### Filtering upcoming appointments <a name="filter-upcoming-appointments"/>
@@ -1486,19 +1493,20 @@ testers are expected to do more *exploratory* testing.
       Expected: Searches for appointments that has a doctor with a name that contains the keyword `Irfan` **or** `Ibrahim` in it and displays the results in the appointment list.
       
     7. Test case: `appt -u d/Aaron s/21/10/2021`<br>
-        Expected: An error is displayed telling the user that a `FilterUpcomingAppointmentCommand` should not have any date parameters in it.
+        Expected: Displayed appointments are not changed. Error details are shown in the status message.
 
     8. Test case: `appt -u d/`<br>
-       Expected: Displays an error message telling the user that a specified parameter cannot be empty.
+       Expected: Displayed appointments are not changed. Error details are shown in the status message.
 
 ### Listing all appointments for today <a name="list-all-manual-testing"/>
 
 1. List all appointments for the current day in the appointment list.
    
-    1. Test case: `appt -l` when there are no appointments for the current day (when `appt -f` does not show any appointment for the current day)<br>
+    1. Test case: `appt -l` 
+       1. If there are no appointments for the current day (when `appt -f` does not show any appointment for the current day)<br>
         Expected: No appointments are displayed in the appointment list.
-       
-    2. Test case: `appt -l` when there are appointments for the current day<br>
+          
+       2. If there are appointments for the current day<br>
         Expected: All of today's appointments are displayed in the appointment list
 
 ### Saving data  <a name="saving-data"/>
