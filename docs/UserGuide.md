@@ -32,7 +32,7 @@ Whether you're using Windows or macOS, the steps for installation are the same.
 1. Ensure you have Java `11` or above installed in your Computer. 
    [Not sure what Java is? Click here!](https://java.com/en/download/help/download_options.html)
 
-2. Download the latest `dash.jar` from [this website](https://github.com/AY2122S1-CS2103T-W15-2/tp/releases/tag/v1.3.1).
+2. Download the latest `dash.jar` from [this website](https://github.com/AY2122S1-CS2103T-W15-2/tp/releases/tag/v1.4).
 
 3. Copy the file to the folder you want to use as the _home folder_ for Dash, which is where your data is stored.
    -  _We suggest creating a folder called "Dash" and putting the `dash.jar` file inside it. You can place this folder 
@@ -394,14 +394,13 @@ task list:
 
 :scroll: Notes:
 
-* An explanation of how Date and Time formats work can be found 
-  [here](#date-time-info).
 * If you want to assign people to the task, the people to be assigned to the task (assignees) are specified with
   `PERSON_INDEX`.  
   * You can assign multiple people to the same task at once.
   * The `PERSON_INDEX` refers to the position of the person in the
     [Contacts panel](#tasks-info) as indicated by the number next to their name.
   * Any specified `PERSON_INDEX` must be a positive integer (1, 2, 3,...).
+* An explanation of how Date and Time formats work can be found [here](#date-time-info).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -425,13 +424,12 @@ task list:
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the contact will be removed i.e. adding of tags is not cumulative.
   * To add tags without removing existing tags, refer to the Tag command in the [next section](#tagging-a-task-tag).
-* An explanation of how Date and Time formats work can be found 
-  [here](#date-time-info).
 * If you want to modify the assignees of the task, new assignees are specified with `PERSON_INDEX`.
   * You can assign multiple people to the same task at once.
-  * The `PERSON_INDEX` refers to the position of the person in the 
-    [Contacts panel](#contacts-panel-info) as indicated by the number next to their name.
+  * The `PERSON_INDEX` refers to the position of the person in the [Contacts panel](#contacts-panel-info) as indicated 
+    by the number next to their name.
   * Any specified `PERSON_INDEX` must be a positive integer (1, 2, 3,...).
+* An explanation of how Date and Time formats work can be found [here](#date-time-info).
 
 <div markdown="block" class="alert alert-info">
 
@@ -549,6 +547,7 @@ you can use the _Find_ command.
     It will not return `Math Assignment` or `GEQ Quiz`.
   * e.g. `find dt/1900 t/homework` will return only tasks which have both the time `1900` AND the tag `homework`.
   It will not return tasks with different times, even if they both have the tag `homework`.
+* An explanation of how Date and Time formats work can be found [here](#date-time-info).
 
 <div markdown="block" class="alert alert-info">
 
@@ -576,8 +575,6 @@ Date/Time. In this example, it was 25 October 2021, 09:16 PM.
 
 * Filters your task list so that upcoming tasks will be listed in chronological order.
 * The current Date/Time is determined locally by your system clock.
-* An explanation of how Date and Time formats work can be found 
-  [here](#date-time-info).
 
 <div markdown="block" class="alert alert-info">
 
@@ -633,18 +630,19 @@ A task can optionally have a Date, or both a Date and a Time.
 
 `add [dt/DATE] [dt/TIME] [dt/DATE, TIME]`
 
-* When only Date is specified in the `add` command, a task will only have the specified Date.
-* When only Time is specified in the `add` command, a task will have today's Date and the specified Time.
-* When both Date and Time are specified in the `add` command, a task will have both of the specified Date and Time.
+* When only Date is specified in the _Add_ command, a task will only have the specified Date.
+* When only Time is specified in the _Add_ command, a task will have today's Date and the specified Time.
+* When both Date and Time are specified in the _Add_ command, a task will have both of the specified Date and Time.
 
 `edit [dt/DATE] [dt/TIME] [dt/DATE, TIME]`
 
-* When only Date is specified in the `edit` command, a task will only have its Date changed to the specified Date.
-* When only Time is specified in the `edit` command, a task will only have its Time changed to the specified Time.
-* When both Date and Time are specified in the `edit` command, a task will have both of its Date and Time changed to the specified Date and Time.
+* When only Date is specified in the _Edit_ command, a task will only have its Date changed to the specified Date.
+* When only Time is specified in the _Edit_ command, a task will only have its Time changed to the specified Time.
+* When both Date and Time are specified in the _Edit_ command, a task will have both of its Date and Time changed to the specified Date and Time.
 
-**:warning: Multiple Date and Time parameters:**<br>
-If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
+**:warning: Multiple Date/Time parameters:**<br>
+All commands that accept Date/Time parameters (_Add_, _Edit_, _Find_ commands) expect only one Date/Time parameter. 
+If you specify multiple Date/Time parameters, only the last Date/Time parameter will be taken.<br>
 e.g. if you specify `dt/12/02/2021 dt/1900`, only `dt/1900` will be taken.
 
 **Date Formats**
@@ -705,7 +703,7 @@ Action | Format
 **Assign** | `assign INDEX p/PERSON_INDEX...`
 **Complete** | `complete INDEX`
 **Delete** | `delete INDEX`
-**Find** | `find [d/DESCRIPTION] [dt/DATE] [dt/TIME] [dt/DATE, TIME] [p/PERSON_INDEX]... [t/TAG]...`
+**Find** | `find [d/DESCRIPTION] [dt/DATE] [dt/TIME] [dt/DATE, TIME] [c/COMPLETION_STATUS] [p/PERSON_INDEX]... [t/TAG]...`
 **Upcoming** | `upcoming`
 **List** | `list`
 **Clear Done** | `cleardone`
