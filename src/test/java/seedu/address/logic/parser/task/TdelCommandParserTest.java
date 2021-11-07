@@ -1,4 +1,4 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.task;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TASK_INDEX_DESC;
@@ -12,7 +12,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.task.TdelCommand;
-import seedu.address.logic.parser.task.TdelCommandParser;
 
 class TdelCommandParserTest {
     private TdelCommandParser parser = new TdelCommandParser();
@@ -35,7 +34,7 @@ class TdelCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        //invalid task name (blank)
+        //invalid task id
         assertParseFailure(parser, INVALID_TASK_INDEX_DESC, MESSAGE_INVALID_INDEX);
     }
 }

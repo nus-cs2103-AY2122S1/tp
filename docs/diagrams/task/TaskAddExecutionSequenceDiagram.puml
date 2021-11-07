@@ -21,7 +21,7 @@ activate Model
 Model --> TaddCommand : filteredMemberList
 deactivate Model
 
-loop number of target members times
+loop for each member to be assigned the task
 TaddCommand -> Model : addTask(targetMember, taskToAdd)
 activate Model
 

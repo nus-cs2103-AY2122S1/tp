@@ -1,4 +1,4 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.member;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -9,7 +9,6 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.member.MfindCommand;
-import seedu.address.logic.parser.member.MfindCommandParser;
 import seedu.address.model.module.NameContainsKeywordsPredicate;
 import seedu.address.model.module.member.Member;
 
