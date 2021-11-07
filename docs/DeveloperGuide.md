@@ -1045,7 +1045,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User enters a command to retrieve information
-2. Academy Directory obtain the queried information from the students.
+2. Academy Directory obtains the queried information from the students.
 3. Academy Directory displays the list of information queried.
 
    Use case ends.

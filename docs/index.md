@@ -6,7 +6,7 @@ title: AcademyDirectory
 [![CI Status](https://github.com/AY2122S1-CS2103T-T15-3/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2122S1-CS2103T-T15-3/tp/actions)
 [![codecov](https://codecov.io/gh/AY2122S1-CS2103T-T15-3/tp/branch/master/graph/badge.svg?token=998G82RFLB)](https://codecov.io/gh/AY2122S1-CS2103T-T15-3/tp)
 
-![Ui](images/Ui.png)
+![Ui](images/ui-visualized.png)
 
 **Academy Directory is a desktop app for CS1101S tutors to manage their students.** Its main features are as follows:
 - Manage students’ personal details
