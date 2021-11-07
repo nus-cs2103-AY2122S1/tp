@@ -524,7 +524,7 @@ After: ![images](images/DeleteMarkedAfter.png)
 ### Clearing all data : `clear`
 [Table of contents](#table-of-contents)
 
-Deletes all applicants in RecruitIn.
+The `clear` command deletes all applicants in RecruitIn.
 
 Format: `clear`
 
