@@ -14,13 +14,17 @@ Class JsonUserPrefsStorage
 Interface Storage <<Interface>>
 Class StorageManager
 
-package "AddressBook Storage" #F4F6F6{
-Interface AddressBookStorage <<Interface>>
-Class JsonAddressBookStorage
-Class JsonSerializableAddressBook
-Class JsonAdaptedPerson
+package "ModuleTracker Storage" #F4F6F6{
+Interface ModuleTrackerStorage <<Interface>>
+Class JsonModuleTrackerStorage
+Class JsonSerializableModuleTracker
+Class JsonAdaptedModule
 Class JsonAdaptedTag
 }
+
+package "UserInfo Storage" #F4F6F6{
+Interface UserInfoStorage <<Interface>>
+Class JsonUserInfoStorage
 
 }
 
@@ -28,16 +32,19 @@ Class HiddenOutside #FFFFFF
 HiddenOutside ..> Storage
 
 StorageManager .up.|> Storage
-StorageManager -up-> "1" UserPrefsStorage
-StorageManager -up-> "1" AddressBookStorage
+StorageManager o-up-> "1" UserPrefsStorage
+StorageManager o-up-> "1" ModuleTrackerStorage
+StorageManager o-down-> "1" UserInfoStorage
 
-Storage -left-|> UserPrefsStorage
-Storage -right-|> AddressBookStorage
+Storage -down-|> UserPrefsStorage
+Storage -down-|> UserInfoStorage
+Storage -down-|> ModuleTrackerStorage
 
+JsonUserInfoStorage .up.|> UserInfoStorage
 JsonUserPrefsStorage .up.|> UserPrefsStorage
-JsonAddressBookStorage .up.|> AddressBookStorage
-JsonAddressBookStorage ..> JsonSerializableAddressBook
-JsonSerializableAddressBook --> "*" JsonAdaptedPerson
-JsonAdaptedPerson --> "*" JsonAdaptedTag
+JsonModuleTrackerStorage .up.|> ModuleTrackerStorage
+JsonModuleTrackerStorage ..> JsonSerializableModuleTracker
+JsonSerializableModuleTracker --> "*" JsonAdaptedModule
+JsonAdaptedModule --> "*" JsonAdaptedTag
 
 @enduml

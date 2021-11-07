@@ -114,39 +114,38 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-W17-2/tp/tree/master/src/main/java/seedu/tracker/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
+* stores a `UserPrefs` object that represents the user's preferences.
+* stores the `ModuleTracker` data, which contains data of modules, user's information and Mc progress.
+* exposes various `ObservableList`s that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list changes.
+* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
+<br><br>
+  
+A `Module` stores a `Title`, `Code`, `Description`, `Mc`, `AcademicCalendar` and zero or more `Tag`s.
+<br><br>
+A `UserInfo` stores a `Mc` as Mc goal and a `AcademicCalendar` as current semester.
 
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-W17-2/tp/tree/master/src/main/java/seedu/tracker/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save module tracker data, user's information and user preference data in JSON format, and read them back into corresponding objects.
+* inherits from `ModuleTrackerStorage`, `UserInfoStorage` and `UserPrefStorage`, which means it can be treated as any one of the three (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.moduletracker.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -161,21 +160,48 @@ This section describes some noteworthy details on how certain features are imple
 The `take` command is implemented via the `TakeCommand` and `TakeCommandParser` classes.
 
 The `TakeCommandParser` class implements the `Parser` interface and is responsible for parsing the user input to retrieve the index and `AcademicYear` object which represents the year and semester. <br>
-The `TakeCommandParser#parse()` method does this, and returns a `TakeCommand` object with the index and the `AcademicYear` object as arguments.
+The `TakeCommandParser#parse()` method does this, and returns a `TakeCommand` object containing the index and the `AcademicYear` object.
 
 The `TakeCommand` class extends the `Command` class and implements the `TakeCommand#execute()` method which handles the main logic of the class. <br>
 It contains non-null `index` and `academicCalendar` fields. <br>
 When the `TakeCommand#execute()` method is called,
 
 - The `Module` object corresponding to the `index` is found from the `Model`.
-- A copy of the `Module` object is made with the value of `academicCalendar`, which is stored in its corresponding field in the copy.
-- The `Module` object in the Model is then replaced by this copy.
+- A copy of the `Module` object containing the value of `academicCalendar` is created. The value of `academicCalendar` is stored in a corresponding field in this copy.
+- The `Module` object in the `Model` is then replaced by this copy.
 
-Note:
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:**
 
 - When a new `Module` object is added to the module tracker, its `academicCalendar` field is unassigned by default.
 - Removing a schedule from a module is not supported in the `take` command, this functionality is instead moved to a separate `untake` command.
 - If the module is already scheduled, its current `academicCalendar` field will be overridden by a new `AcademicCalendar` object.
+</div>
+
+Below is a sequence diagram, and an explanation of how `TakeCommand` is executed.
+
+![Interactions Inside the Logic Component for the `take 2 y/1 s/2` Command](images/TakeSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `TakeCommand` and `TakeCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+**Step 1.** The user enters the command "take 2 y/1 s/2".
+
+**Step 2.** ModuleTrackerParser takes in the user's input, and calls `TakeCommandParser#parse` to create a TakeCommand object containing the data parsed from the user input.
+* In this case, the TakeCommand object contains the specified module index (`2`), and the academic year the specified module is scheduled for (`y/1 s/2`)
+
+**Step 3.** The `TakeCommand` is then executed by calling its `execute` method.
+
+**Step 4.** The module at the specified index (`2`) in the list is obtained from the `Model`.
+
+**Step 5.** A copy of this module containing the specified academic calendar (`y/1 s/2`) is created. This copy is the scheduled module.
+
+**Step 6.** The specified module in the `Model` is then replaced by the scheduled copy. The `Model` is also updated to reflect this change in the Mod Tracker.
+
+Certain details have been omitted from the sequence diagram for simplicity, including:
+* Details of how the specified module (`moduleToSchedule`) is obtained from the `Model`.
+* Details of how the `Model` is updated to reflect the changes in the Mod Tracker.
 
 #### Design considerations:
 
