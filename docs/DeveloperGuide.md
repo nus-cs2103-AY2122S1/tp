@@ -823,7 +823,7 @@ Use case ends.
 
 **UC03 - Delete a Contact**
 
-***Preconditions: User has <u>listed all contacts UC02 etc.</u>***
+***Preconditions: User has <u>listed all contacts UC04 etc.</u>***
 
 **MSS**
 
@@ -883,7 +883,7 @@ Use case ends.
 
 **Extensions**
 
-* 2a. The keywords cannot be found. AddressBook displays no contacts.
+* 2a. The keywords cannot be found. WhereTourGo displays no contacts.
 
     Use case ends.
 
@@ -899,6 +899,30 @@ Use case ends.
 
 **UC06 - Filter for Contacts**
 
+**MSS**
+
+1. User requests to filter contacts.
+
+2. User enters the filter command with specific filter criteria.
+
+3. WhereTourGo displays a list of all contacts which fulfills the criteria.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The command format is wrong (e.g. `filter att`).
+
+  * 2a1. WhereTourGo shows an error message, and instructions on how to use the command.
+
+    Use case ends.
+
+* 3a. No contacts fulfill the filter criteria.
+
+  * 3a1. WhereTourGo will not display any contacts.
+
+    Use case ends.
+  
 
 **UC07 - Sort all Contacts**
 
@@ -950,6 +974,37 @@ Use case ends.
 
 **UC09 - View a Contact**
 
+***Preconditions: User has <u>listed all contacts UC04 etc.</u>***
+
+**MSS**
+
+1. User requests to view a specific contact in the list.
+
+2. WhereTourGo displays the contact details in the Display Pane.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The given index is invalid.
+
+  * 1a1. WhereTourGo shows an error message, and instructions on how to use the command.
+
+    Use case ends.
+
+* 1b. The given name is invalid.
+
+  * 1b1. WhereTourGo shows an error message, and instructions on how to use the command.
+
+    Use case ends.
+
+* 1c. The command format is invalid.
+
+  * 1c1. WhereTourGo shows an error message, and instructions on how to use the command.
+
+    Use case ends.
+
+
 **UC10 - Navigate Input History**
 
 **MSS**
@@ -969,11 +1024,43 @@ Use case ends.
 
 **UC11 - Undo an Operation**
 
+**MSS**
+
+1. User requests to undo an operation.
+
+2. WhereTourGo restores the previous Address Book state.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. There are no operations to undo.
+
+  * 2a1. WhereTourGo shows an error message.
+
+    Use case ends.
+  
 **UC12 - Redo an Operation**
+
+**MSS**
+
+1. User requests to redo an operation.
+
+2. WhereTourGo redoes the last undone operation.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. There are no operations to redo.
+
+  * 2a1. WhereTourGo shows an error message.
+
+    Use case ends.
 
 **UC13 - Export a Contact by Index**
 
-***Preconditions: User has <u>listed all contacts UC02</u>.***
+***Preconditions: User has <u>listed all contacts UC04</u>.***
 
 **MSS**
 
@@ -1179,8 +1266,6 @@ testers are expected to do more *exploratory* testing.
     2. Other incorrect list commands to try: `list abc`, `list 2`, `...` <br>
         Expected: All contacts will not be listed in Contact Pane, remains in its previous state. Error details shown in the status message.
 
-### Locating contacts
-
 ### Finding contacts
 
 1. Finding contacts by keywords
@@ -1228,6 +1313,41 @@ testers are expected to do more *exploratory* testing.
 
 ### Filtering contacts
 
+1. Filtering contacts by one parameter (category code)
+
+* Prerequisites: WhereTourGo has at least 1 contact with category code `ATT` and no contacts with the category code `FNB`.<br><br>
+
+  1. Test case: `filter c/att`<br>
+     Expected: Only contacts with the category code `ATT` are shown in Contacts Pane.
+     Success message is shown in Results Pane.
+
+  2. Test case: `filter c/fnb`<br>
+     Expected: No contacts shown in Contacts Pane.
+     Success message is shown in Results Pane.
+
+  3. Test case: `filter c/att c/tpt`<br>
+     Expected: Only contacts with the category code `ATT` or `TPT` are shown in Contacts Pane.
+     Success message is shown in Results Pane.
+
+  4. Other incorrect sort commands to try: `filter`, `filter c`, `filter c/`, `filter c/att c/x`, `filter c/x` (where x is not a valid category code)<br>
+     Expected: No changes to Contacts Pane. Error details shown in Results Pane.
+
+2. Filtering contacts by multiple parameters
+
+* Prerequisites: WhereTourGo has multiple contacts with at least 1 contact with category code `ATT`, rating of 5 stars, and tagged as `fun`.<br><br>
+
+  1. Test case: `filter c/att ra/5 t/fun`<br>
+     Expected: All contacts with category code `ATT`, a rating of 5 stars, and a tag `fun` are shown in Contacts Pane.
+     Success message is shown in Results Pane.
+
+  2. Test case: `filter ra/5 t/fun t/outdoor`<br>
+     Expected: All contacts tagged `fun` and `outdoor` with a rating of 5 stars are shown in Contacts Pane.
+     Success message is shown in Results Pane.
+
+  3. Test case: `filter c/att c/tpt c/com ra/4`<br>
+     Expected: All Attraction, Transport, and Commerce contacts with a rating of 4 stars are shown in Contacts Pane.
+     Success message is shown in Results Pane.
+  
 ### Sorting contacts
 
 1. Sorting contacts by name
@@ -1386,7 +1506,7 @@ testers are expected to do more *exploratory* testing.
     3. Other incorrect export commands to try: `export abc`, `export x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-1. Exporting all contacts in filtered list
+2. Exporting all contacts in filtered list
 
 * Prerequisites: List all contacts using the command such as `list`, `filter` etc. Multiple contacts in the list.<br><br>
 
