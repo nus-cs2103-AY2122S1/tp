@@ -47,8 +47,6 @@ A screenshot of Socius is shown below:
 
 I served as developer for the project, and my responsibilities include:
 1. Developing features for the program
-2. 
-3. 
 
 My team responsibilities include:
 1. Creating minutes for team meeting
@@ -72,7 +70,7 @@ The following describes the enhancements and new features that I added to the pr
 #### 2.1.3 Add icons for both gender and social handles (Feature)
 * What it does: displays the gender and social handle platform as icons instead of text
 * Justification: This feature improves the user experience of the product as user can see the gender and social handle platform more easily.
-* Highlights: This enhancement required knowledge how the GUI works. 
+* Highlights: This enhancement required knowledge how the GUI works.
 
 #### 2.2 Code contributed
 
