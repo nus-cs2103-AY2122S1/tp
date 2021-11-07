@@ -54,6 +54,9 @@ This product will make recruiters’ lives easier through categorisation and fil
   * [Adding a person](#adding-a-person)
   * [Editing an applicant](#editing-an-applicant)
   * [Deleting a person](#deleting-a-person)
+  * [Marking an applicant](#marking-an-applicant)
+  * [Unmarking an applicant](#unmarking-an-applicant)
+  * [Deleting marked applicants](#deleting-marked-applicants)
   * [Saving data](#saving-data)
 
 
@@ -166,9 +169,10 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
+
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="600" />
 
 
 The `Model` component,
@@ -180,7 +184,7 @@ The `Model` component,
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+<img src="images/BetterModelClassDiagram.png" width="600" />
 
 </div>
 
@@ -286,19 +290,40 @@ The following sequence diagram shows how the edit operation works.
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `EditCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
-#### Design considerations:
+### Delete feature
 
-**Aspect: User command to use in deleting marked applicants:**
+The ```delete``` command is facilitated by creating a ```DeleteCommand``` depending on the given input.
+This command then updates the ```model``` accordingly.
 
-* **Alternative 1 (current choice):** Separate command for deleting marked applicants
-    * Pros: Command has single responsibility of deleting marked applicants based.
-    * Pros: Easy to use for user, does not take any additional input.
-    * Cons: User might be confused between `delete` command for general deletion and `delete_marked` command.
+The following activity diagram summarizes what happens when a user executes an ```delete``` command:
+![images](images/DeleteActivityDiagram.png)
 
-* **Alternative 2:** Part of `delete` command functionality
-    * Pros: Intuitive for user to use `delete` command for all deletion purposes
-    * Cons: Breaks the single responsibility principle as deleting marked applicants does not delete applicants at specific indices
-    like the rest of the `delete` command, but rather a certain group of applicants at once. 
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** There should only be one arrowhead at the end of every line 
+in the Activity Diagram. This is a known limitation of PlantUML.</div>
+
+Given below is an example usage scenario illustrated by a sequence diagram for ```delete``` command.
+
+Step 1. A valid command `delete 1` is given as user input. This invokes `LogicManager#execute()`, which calls
+`AddressBookParser#parseCommand()` to parse `delete 1` into command word `delete` and command argument ``` 1```.
+
+Step 2. `DeleteCommandParser` is initialized based on the parse results and `DeleteCommandParser#parse()` is called
+to identify the indices present in ``` 1```. `DeleteCommandParser#parse()` then initializes a
+`DeleteCommand` with the indices present as arguments.
+
+Step 3. `DeleteCommand#execute()` is then called, which will check the validity of the given indices. 
+If there is no exception thrown, `Model#deletePerson()` is called to delete the applicants corresponding to the 
+given indices.
+
+Step 4. `CommandResult` is initialized with `String` containing the details of the deleted applicant.
+This `CommandResult` is then returned.
+
+The following sequence diagram shows how the delete operation works.
+![images](images/DeleteSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** The lifeline for `DeleteCommandParser`
+should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
 ### Find feature
 
@@ -411,41 +436,6 @@ should not exceed the destroy marker X. This is a known limitation of PlantUML.<
   * Pros: Intuitive for user to use `find` command to find certain types of interviews (past or future)
   * Cons: Breaks the single responsibility principle as it does not find a specific input for a prefix, but rather
     types of inputs.
-    
-### Delete feature
-
-The ```delete``` command is facilitated by creating a ```DeleteCommand``` depending on the given input.
-This command then updates the ```model``` accordingly.
-
-The following activity diagram summarizes what happens when a user executes an ```delete``` command:
-![images](images/DeleteActivityDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source:
- **Note:** There should only be one arrowhead at the end of every line 
-in the Activity Diagram. This is a known limitation of PlantUML.</div>
-
-Given below is an example usage scenario illustrated by a sequence diagram for ```delete``` command.
-
-Step 1. A valid command `delete 1` is given as user input. This invokes `LogicManager#execute()`, which calls
-`AddressBookParser#parseCommand()` to parse `delete 1` into command word `delete` and command argument ``` 1```.
-
-Step 2. `DeleteCommandParser` is initialized based on the parse results and `DeleteCommandParser#parse()` is called
-to identify the indices present in ``` 1```. `DeleteCommandParser#parse()` then initializes a
-`DeleteCommand` with the indices present as arguments.
-
-Step 3. `DeleteCommand#execute()` is then called, which will check the validity of the given indices. 
-If there is no exception thrown, `Model#deletePerson()` is called to delete the applicants corresponding to the 
-given indices.
-
-Step 4. `CommandResult` is initialized with `String` containing the details of the deleted applicant.
-This `CommandResult` is then returned.
-
-The following sequence diagram shows how the delete operation works.
-![images](images/DeleteSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source:
- **Note:** The lifeline for `DeleteCommandParser`
-should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
 ### Show feature
 
@@ -569,6 +559,18 @@ The following sequence diagram shows how the unmark operation works.
  **Note:** The lifeline for `MarkingCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
+#### Design considerations:
+
+**Aspect: User command to use in marking and unmarking applicants:**
+
+* **Alternative 1 (current choice):** Separate command for `mark` and `unmark`
+  * Pros: Command has single responsibility of marking or unmarking applicants.
+  * Pros: Easy and intuitive to use for user, does not take any additional input to differentiate the two commands from each other.
+  * Cons: Certain amount of repeat in code for both mark and unmark commands.
+
+* **Alternative 2:** Implement both `mark` and `unmark` as one singular command
+  * Pros: Reduces code duplication in implementation.
+  * Cons: Breaks the single responsibility principle as marking does a relatively different task from unmarking.
 
 ### Delete marked feature
 
@@ -595,6 +597,20 @@ and returned.
 
 The following sequence diagram shows how the delete marked operation works.
 ![images](images/DeleteMarkedCommandSequenceDiagram.png)
+
+#### Design considerations:
+
+**Aspect: User command to use in deleting marked applicants:**
+
+* **Alternative 1 (current choice):** Separate command for deleting marked applicants
+  * Pros: Command has single responsibility of deleting marked applicants based.
+  * Pros: Easy to use for user, does not take any additional input.
+  * Cons: User might be confused between `delete` command for general deletion and `delete_marked` command.
+
+* **Alternative 2:** Part of `delete` command functionality
+  * Pros: Intuitive for user to use `delete` command for all deletion purposes
+  * Cons: Breaks the single responsibility principle as deleting marked applicants does not delete applicants at specific indices
+    like the rest of the `delete` command, but rather a certain group of applicants at once.
 
 ### Datetime for interview 
 
@@ -1106,7 +1122,100 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect delete commands to try: `delete`, `delete x`(where x is larger than the list size), `delete y`(where y is a negative integer), `delete Alexander`<br>
        Expected: Similar to previous test cases.
 
+<<<<<<< HEAD
 1. Deleting a person from a filtered list of applicants being shown
+=======
+2. _{ more test cases …​ }_
+
+### Marking an applicant
+
+1. Marking applicants while all applicants are being shown
+
+    1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list all currently `Not Done`.
+
+    2. Test case: `mark 1`<br>
+       Expected: First applicant is marked to `Done`. Details of the marked applicant shown in the result display.
+
+    3. Test case: `mark 0`<br>
+       Expected: No applicant is marked. Error details shown in the result display stating that the index is invalid.
+
+    4. Test case: `mark 2`, then `mark 2` again<br>
+       Expected: Second applicant is marked to `Done` with the first `mark 2`. Details of the marked applicant shown in the result display.
+                 For the second `mark 2`, no new applicant is marked. Error details shown in the result display stating that an applicant that is `Done` cannot be marked.
+
+    5. Test case: `mark 3 3`<br>
+       Expected: No applicant is marked. Error details shown in the result display stating that there should not be duplicate indexes.
+
+    6. Other incorrect mark commands to try: `mark`, `mark x` (where x is larger than the list size), `mark y` (where y is any non-positive integer)<br>
+       Expected: No applicant is marked. Error messages displaying the cause of error is shown in the results display.
+
+    7. Test case: `mark 4 5`<br>
+       Expected: Fourth and fifth applicant are marked to `Done`. Details of the marked applicants shown in the result display.
+
+
+2. Marking applicants while a filtered list of applicants are being shown
+
+    1. Prerequisites: Find a valid group of applicants using the `find` command with appropriate inputs. Multiple applicants in the filtered list all currently `Not Done`.
+    
+    2. Test case: Utilise the same test cases in Section 1 of Marking an applicant<br>
+       Expected: Same results as the corresponding expected test case results in Section 1 of Marking an applicant, while still in the filtered list.
+
+    3. Test case: `mark 6`, then `list`<br>
+       Expected: For `mark 6`, the sixth applicant is marked to `Done` and details of the marked applicant shown in the result display.
+                 After `list`, locate the marked applicant in the list and the applicant should still be `Done`.
+
+### Unmarking an applicant
+
+1. Unmarking applicants while all applicants are being shown
+
+    1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list all currently `Done`.
+
+    2. Test case: `unmark 1`<br>
+       Expected: First applicant is unmarked to `Not Done`. Details of the unmarked applicant shown in the result display.
+
+    3. Test case: `unmark 0`<br>
+       Expected: No applicant is unmarked. Error details shown in the result display stating that the index is invalid.
+
+    4. Test case: `unmark 2`, then `unmark 2` again<br>
+       Expected: Second applicant is unmarked to `Not Done` with the first `unmark 2`. Details of the unmarked applicant shown in the result display.
+                 For the second `unmark 2`, no new applicant is unmarked. Error details shown in the result display stating that an applicant that is `Not Done` cannot be unmarked.
+
+    5. Test case: `unmark 3 3`<br>
+       Expected: No applicant is unmarked. Error details shown in the result display stating that there should not be duplicate indexes.
+
+    6. Other incorrect unmark commands to try: `unmark`, `unmark x` (where x is larger than the list size), `unmark y` (where y is any negative integer)<br>
+       Expected: No applicant is unmarked. Error messages displaying the cause of error is shown in the results display.
+
+    7. Test case: `unmark 4 5`<br>
+       Expected: Fourth and fifth applicant are unmarked to `Not Done`. Details of the unmarked applicant shown in the result display.
+
+2. Marking applicants while a filtered list of applicants are being shown
+
+    1. Prerequisites: Find a valid group of applicants using the `find` command with appropriate inputs. Multiple applicants in the filtered list all currently `Done`.
+
+    2. Test case: Utilise the same test cases in Section 1 of Unmarking an applicant<br>
+       Expected: Same results as the corresponding expected test case results in Section 1 of Unmarking an applicant, while still in the filtered list.
+
+    3. Test case: `unmark 6`, then `list`<br>
+       Expected: For `unmark 6`, the sixth applicant is unmarked to `Not Done` and details of the unmarked applicant shown in the result display.
+                 After `list`, locate the unmarked applicant in the list and the applicant should still be `Not Done`.
+    
+### Deleting marked applicants
+
+1. Deleting marked applicants while all applicants are being shown
+
+    1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list. Some applicants are currently `Done`.
+
+    2. Test case: `delete_marked`<br>
+       Expected: All the applicants with `Done` are deleted from the list. Details of the deleted applicants shown in the result display.
+
+2. Deleting marked applicants while a filtered list of applicants are being shown
+
+    1. Prerequisites: Find a valid group of applicants using the `find` command with appropriate inputs. Multiple applicants in the filtered list. Some applicants are currently `Done`.
+
+    2. Test case: `delete_marked`<br>
+       Expected: All the applicants with `Done` are deleted from the list, not just those found in the filtered list. Details of the deleted applicants shown in the result display.
+>>>>>>> 538fc3ff6bf079d560ee9467095978a523f77506
 
     1. Prerequisites: Find a valid group of applicants using the `find` command with appropriate inputs. Multiple applicants in the filtered list.
 

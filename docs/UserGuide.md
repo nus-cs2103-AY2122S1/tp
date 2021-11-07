@@ -83,7 +83,7 @@ This guide aims to help users get familiar with using RecruitIn's features.
 Before moving on with this user guide, listed below are some **important** text formatting that you should take
 note of so that you may better understand our feature descriptions.
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+* Words in `UPPER_CASE` are the parameters to be supplied by you, the user.<br>
   e.g. in add n/NAME, NAME is a parameter which can be used as add n/John Doe.
 * Words that are ***bold & italicized*** refers to a stored applicant detail for a certain prefix.<br>
   e.g. ***Name*** could refer to the value `John` stored as a name in the application.
@@ -128,9 +128,8 @@ Scroll down to the bottom and click on `recruitIn.jar`.
     </div>
 
    1. Use **`clear`** command to clear the existing sample data.<br><br>
-   2. Suppose you have an applicant named `John Doe` that you have scouted from online sources and want to add him to
-      your list of applicants. `John Doe` has kindly provided you his phone number, `98765432` and email `JohnDoe@gmail.com`. He has also
-      stated that he is applying for the role of a `Teacher` and plans to work `Full time` with an expected salary of `3000`. His highest level of
+   2. Suppose you have an applicant named `John Doe` and you want to add him to
+      your list of applicants. `John Doe` has kindly provided you his phone number, `98765432` and email `JohnDoe@gmail.com`. He is applying for the role of a `Teacher` and plans to work `Full time` with an expected salary of `3000`. His highest level of
       education is `Bachelors` and has `4` years of experience as a teacher. <br><br>
       Type in **`add`**`n/John Doe p/98765432 e/JohnDoe@gmail.com r/Teacher et/Full time s/3000 l/Bachelors y/4` to add `John Doe` to your
       list of applicants.<br><br>
@@ -227,38 +226,45 @@ Scroll down to the bottom and click on `recruitIn.jar`.
 ### Viewing help : `help`
 [Table of contents](#table-of-contents)
 
-Shows a message explaining how to access the help page.
+The `help` command shows a message explaining how to access the help page.
+Alternatively, you can click on the Help button to access the help page as well.
 
 ![help message](images/helpMessage.png)
 
 Format: `help`
 
-
 ### Adding an applicant: `add`
 [Table of contents](#table-of-contents)
 
-Adds an applicant to RecruitIn.
+The `add` command adds an applicant to RecruitIn.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL_ADDRESS r/ROLE et/EMPLOYMENT_TYPE s/EXPECTED_SALARY l/LEVEL_OF_EDUCATION y/YEARS_OF_EXPERIENCE [t/TAG] [i/INTERVIEW] [nt/NOTES]​`
 
 * To add multiple tags, multiple `t/` prefixes should be used.
+
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-Providing multiple tag values in a single `t/` prefix will lead to an error. (i.e. `add n/John p/90909090 e/john@gmail.com r/Software Tester et/Full time s/4500 l/High School y/3 t/smart helpful` will lead to an error)
+Providing multiple tag values in a single `t/` prefix will lead to an error.
+
+(i.e. `add n/John p/90909090 e/john@gmail.com r/Software Tester et/Full time s/4500 l/High School y/3 t/smart helpful` will lead to an error)
 </div>
-* Inputs for each prefix is taken as a single value. (i.e. `r/software engineer` has the value `software engineer`)
+* Parameters for each prefix is taken as a single value. (i.e. `r/software engineer` has the value `software engineer`)
 
 Examples:
 * `add n/Bob p/87654321 e/bob@gmail.com r/Software Engineering et/Full time s/4000 l/High School y/2 i/2021-10-21, 20:00 nt/This applicant has the credentials needed for this job.`
 * `add n/John p/90909090 e/john@gmail.com r/Software Tester et/Full time s/4500 l/High School y/3 t/smart t/helpful` to add a person named `John` with two tags `smart` and `helpful`
 
+Before: ![images](images/AddBefore.png)
+
+After: ![images](images/AddAfter.png)
+
 <div markdown="block" class="alert alert-secondary">
-**:information_source: Prefix inputs for `add` command must follow the following input specifications:**<br>
+**:information_source: Prefix parameters for `add` command must follow the following parameter specifications:**<br>
 
 * You may
-    * refer to [**Add Parameter Specifications**](#add-parameters) for detailed input specifications.
-    * refer to add input specifications for specific prefixes by clicking on relevant links in the table below.
+    * refer to [**Add Parameter Specifications**](#add-parameters) for detailed parameter specifications.
+    * refer to add parameter specifications for specific prefixes by clicking on relevant links in the table below.
 
-| Input | Prefix | Specifications |
+| Parameter | Prefix | Specifications |
 | :---: | :---: | :---: |
 | NAME | `n/` | [**name**](#name-n) |
 | PHONE_NUMBER | `p/` | [**phone_number**](#phonenumber-p) |
@@ -277,33 +283,40 @@ Examples:
 ### Editing an applicant : `edit`
 [Table of contents](#table-of-contents)
 
-Edits an applicant's with specified index in RecruitIn.
+The `edit` command edits an applicant's with specified index in RecruitIn.
 
 Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMPLOYMENT_TYPE]
  [s/EXPECTED_SALARY] [l/LEVEL_OF_EDUCATION] [y/YEARS_OF_EXPERIENCE] [t/TAG] [i/INTERVIEW] [nt/NOTES]`
  
- * Edit command must take at least 1 prefix input.
+ * Edit command must take at least 1 prefix parameter.
  * The `INDEX` refers to the index number shown in the displayed applicants list.
  * For `t/` prefix in particular, if **only** a single tag prefix is provided like so `t/` with no values, it will erase
 remove tags from the applicant.
+
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-Giving more than 1 tag prefix input with 1 or more having no value will instead lead to an error. (i.e. `edit 1 t/ t/smart` leads to an error)
+Giving more than 1 tag prefix parameter with 1 or more having no value will instead lead to an error.
+
+(i.e. `edit 1 t/ t/smart` leads to an error)
 </div>
- * Inputs for each prefix is taken as a single value. (i.e. `r/software engineer` has the value `software engineer`)
+ * Parameters for each prefix is taken as a single value. (i.e. `r/software engineer` has the value `software engineer`)
 
 Examples:
-* `edit 1 r/Software Engineer` will change the ***role*** of the applicant with the index number 1
-* `edit 1 t/` will remove all ***tags***s from the applicant with index number 1
+* `edit 1 t/` will remove all ***tag***s from the applicant with index number 1
 * `edit 1 n/John t/` will change the name of the applicant with index number 1 to `John` and remove all the applicant's ***tag***s
+* `edit 1 r/Software Engineer` will change the ***role*** of the applicant with the index number 1
+
+Before: ![images](images/EditBefore.png)
+
+After: ![images](images/EditAfter.png)
 
 <div markdown="block" class="alert alert-secondary">
-**:information_source: Prefix inputs for `edit` command must follow the same input specifications as `add` command:**<br>
+**:information_source: Prefix parameters for `edit` command must follow the same parameter specifications as `add` command:**<br>
 
 * You may 
-  * refer to [**Add Parameter Specifications**](#add-parameters) for detailed input specifications.
-  * refer to add input specifications for specific prefixes by clicking on relevant links in the table below.
+  * refer to [**Add Parameter Specifications**](#add-parameters) for detailed parameter specifications.
+  * refer to add parameter specifications for specific prefixes by clicking on relevant links in the table below.
 
-| Input | Prefix | Specifications |
+| Parameter | Prefix | Specifications |
 | :---: | :---: | :---: |
 | NAME | `n/` | [**name**](#name-n) |
 | PHONE_NUMBER | `p/` | [**phone_number**](#phonenumber-p) |
@@ -322,7 +335,7 @@ Examples:
 ### Listing all applicants : `list`
 [Table of contents](#table-of-contents)
 
-Shows a list of all applicants in RecruitIn.
+The `list` command shows a list of all applicants in RecruitIn.
 
 Format: `list`
 
