@@ -2,6 +2,21 @@
 layout: page
 title: Developer Guide
 ---
+
+### About RecruitIn
+
+
+<p align="center">
+    <img align="center" alt="RecruitIn Icon" src="images/RecruitIn.png"/>
+</p>
+
+RecruitIn is a desktop app for recruiters in Singapore to keep track of the plethora of clients with different skill sets, availability and experience.
+
+It is optimised for quick text-based inputs via a Command Line Interface (CLI) while still having the ease of use of a Graphical User Interface (GUI).
+
+This product will make recruiters’ lives easier through categorisation and filter features to easily access candidates they have in mind.
+
+
 ### Table of Contents
 - [**Acknowledgements**](#acknowledgements)
 - [**Setting up, getting started**](#setting-up-getting-started)
@@ -222,47 +237,6 @@ The following sequence diagram shows how the add operation works.
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
-### Delete marked feature
-
-The ```delete_marked``` command is facilitated by creating an ```DeleteMarkedCommand```.
-This command then updates the ```model``` accordingly.
-
-The following activity diagram summarizes what happens when a user executes a ```delete_marked``` command:
-![images](images/DeleteMarkedCommandActivityDiagram.png)
-
-Given below is an example usage scenario illustrated by a sequence diagram for ```delete_marked``` command.
-
-Step 1. A valid command `delete_marked` is given as user input. This invokes `LogicManager#execute()`, which calls
-`AddressBookParser#parseCommand()` to parse `delete_marked`.
-
-Step 2. `AddreddBookParser#parseCommand()` initializes a `DeleteMarkedCommand`.
-
-Step 3. `DeleteMarkedCommand#execute()` is then called, which will in turn call `Model#updateFilteredList()` (not shown) to 
-update list for applicants marked then `Model#getFilteredList()` is then called to retrieve this list. 
-
-Step 4. `Model#deletePerson()` is called on applicants in the list to delete them.
-
-Step 5. Once the string of all applicant names that are marked is formed, `CommandResult` is initialized with this string as argument
-and returned.
-
-The following sequence diagram shows how the delete marked operation works.
-![images](images/DeleteMarkedCommandSequenceDiagram.png)
-
-#### Design considerations:
-
-**Aspect: User command to use in deleting marked applicants:**
-
-* **Alternative 1 (current choice):** Separate command for deleting marked applicants
-    * Pros: Command has single responsibility of deleting marked applicants based.
-    * Pros: Easy to use for user, does not take any additional input.
-    * Cons: User might be confused between `delete` command for general deletion and `delete_marked` command.
-
-* **Alternative 2:** Part of `delete` command functionality
-    * Pros: Intuitive for user to use `delete` command for all deletion purposes
-    * Cons: Breaks the single responsibility principle as deleting marked applicants does not delete applicants at specific indices
-    like the rest of the `delete` command, but rather a certain group of applicants at once. 
-
-
 ### Edit feature
 
 The ```edit``` command is facilitated by creating an ```EditCommand``` depending on the given input.
@@ -281,7 +255,7 @@ Step 1. A valid command `edit 1 n/Ali` is given as user input. This invokes `Log
 `AddressBookParser#parseCommand()` to parse `edit 1 n/Ali` into command word `edit` and command argument ``` 1 n/Ali```.
 
 Step 2. `EditCommandParser` is initialized based on the parse results and `EditCommandParser#parse()` is called.
-`EditCommandParser#parse()` then calls `ArgumentTokenizer#tokenize()` to identify the `Index` of the person to be 
+`EditCommandParser#parse()` then calls `ArgumentTokenizer#tokenize()` to identify the `Index` of the person to be
 edited from the preamble of the input (i.e. `1` in this case), as well as obtain an `ArgumentMultimap` of prefixes
 to their respective arguments (i.e. mapping `n/` to `Ali`).
 
@@ -304,6 +278,21 @@ The following sequence diagram shows how the edit operation works.
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `EditCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
+#### Design considerations:
+
+**Aspect: User command to use in deleting marked applicants:**
+
+* **Alternative 1 (current choice):** Separate command for deleting marked applicants
+    * Pros: Command has single responsibility of deleting marked applicants based.
+    * Pros: Easy to use for user, does not take any additional input.
+    * Cons: User might be confused between `delete` command for general deletion and `delete_marked` command.
+
+* **Alternative 2:** Part of `delete` command functionality
+    * Pros: Intuitive for user to use `delete` command for all deletion purposes
+    * Cons: Breaks the single responsibility principle as deleting marked applicants does not delete applicants at specific indices
+    like the rest of the `delete` command, but rather a certain group of applicants at once. 
+
+      
 ### Delete feature
 
 The ```delete``` command is facilitated by creating a ```DeleteCommand``` depending on the given input.
@@ -338,6 +327,118 @@ The following sequence diagram shows how the delete operation works.
 <div markdown="span" class="alert alert-info">:information_source:
  **Note:** The lifeline for `DeleteCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
+
+### Find feature
+
+The ```find``` command is facilitated by creating a ```FindCommand``` depending on the given
+input. This command then updates the ```model``` accordingly.
+
+The following activity diagram summarizes what happens when a user executes a ```find``` command:
+
+![images](images/FindCommandActivityDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** There should only be one arrowhead at the end of every line 
+in the Activity Diagram. This is a known limitation of PlantUML.</div>
+
+Given below is an example usage scenario illustrated by a sequence diagram for ```find``` command.
+
+Step 1. A valid command `find n/Alex y/0` is given as user input. This invokes `LogicManager#execute()`, which calls
+`AddressBookParser#parseCommand()` to parse `find n/Alex y/0` into command word `find` and command argument ``` n/Alex y/0```.
+
+Step 2. `FindCommandParser` is initialized based on the parse results and `FindCommandParser#parse()` is called
+to identify the predicates present in ` n/Alex y/0`. `FindCommandParser#parse()` then initializes a
+`FindCommand` with the predicates as argument.
+
+Step 3. `FindCommand#execute()` is then called, which will in turn call `Model#updateFilteredPersonList()`
+and filters for applicants that have `Alex` in their names and `0` year of experience.
+
+Step 4. Once the string of all applicant names is formed, `CommandResult` is initialized with this string as argument
+and returned.
+
+The following sequence diagram shows how the find operation works.
+![images](images/FindCommandSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** The lifeline for `FindCommandParser`
+should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
+
+#### Design considerations:
+
+**Aspect: Finding by each prefix:**
+
+* **Alternative 1 (current choice):** Implement different finding conditions for different prefixes. 
+  * For example: 
+    * ***Role***: An applicant can be matched by `role` if all parameters after `r/` are present in his `role`. 
+    * ***Employment*** Type:  An applicant can be matched by `employment type` if his `employment type` starts with any of the 
+    `employment type` parameters and the parameter matches with an existing stored `employment type`.
+    * ***Years of Experience***: An applicant can be matched by `years of experience` if he has a `years of experience` not lesser than the `year of experience` parameter.
+    * For detailed explanations of find parameters of each prefix, please visit the section of our [User Guide - Find Parameters](https://ay2122s1-cs2103t-f11-2.github.io/tp/UserGuide.html#find-parameters).
+  * Pros: 
+    Conditions to check for a match in parameters are differentiated for each prefix to allow better usability of the `find` command.
+    For example, it might be more intuitive to search for a specific expected salary within a range, rather than the exact number.
+  * Cons: 
+    May be hard for users to remember the specifications.
+* **Alternative 2 :** Use the same finding conditions for different prefixes.
+  * Pros: Users do not need to remember the differences. Easier to use and not likely to cause confusions.
+  * Cons: If users could not remember the stored data, they might want to search vaguely.
+
+
+### Filter interview feature
+
+The ```filter_interview``` command is facilitated by extending an abstract ```FilterInterviewCommand``` class, and executing the appropriate
+subclass depending on the given input. This command then updates the ```model``` accordingly.
+
+The following activity diagram summarizes what happens when a user executes a ```filter_interview``` command:
+![images](images/FilterInterviewCommandActivityDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** There should only be one arrowhead at the end of every line 
+in the Activity Diagram. This is a known limitation of PlantUML.</div>
+
+Given below is an example usage scenario and how the filter interview operation behaves at each step.
+
+Step 1. A valid command `filter_interview past` is given as user input. This invokes `LogicManager#execute()`, which calls
+`AddressBookParser#parseCommand()` to parse `filter_interview past` into command word `filter_interview` and command argument ``` past```.
+
+Step 2. `FilterInterviewCommandParser` is initialized based on the parse results and `FilterInterviewCommandParser#parse()` is called
+to identify the user input ``` past```.
+
+Step 3. Upon identifying the user input ``` past```, `FilterInterviewCommandParser#parse` will then call methods of the
+`ValidFilterInterviewArgs` class from the enum type `ValidFilterInterviewArgs.PAST` instead of `ValidFilterInterviewArgs.FUTURE`.
+The details of this step are omitted from the sequence diagram below for brevity.
+
+Step 4. `FilterInterviewCommandParser#parse` calls the method `ValidFilterInterviewArgs#getFilterInterviewCommand()` to obtain
+an object of the appropriate subclass of `FilterInterviewCommand`, which in this case is an instance of `FilterInterviewPastCommand`.
+This instance is returned and propagated back to `LogicManager`.
+
+Step 5. `FilterInterviewPastCommand#execute()` is then called by `LogicManager`, which will in turn call `Model#updateFilteredPersonList()`
+and filters for applicants that have interviews that have already passed.
+
+Step 6. Once the list has been filtered, `CommandResult` is initialized with `String` indicating how many applicants
+have interviews that have passed. This `CommandResult` is then returned.
+
+The following sequence diagram shows how the filter interview operation works.
+![images](images/FilterInterviewCommandSequenceDiagram.png)
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** The lifeline for `FilterInterviewCommandParser`
+should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
+
+#### Design considerations:
+
+**Aspect: User command to use in filtering interviews:**
+
+* **Alternative 1 (current choice):** Separate command for filtering interviews
+  * Pros: Command has single responsibility of filtering interviews based on whether they haved passed or are upcoming.
+  * Pros: Easy to use for user, only has two inputs it can take.
+  * Cons: Harder to implement than adding to `find` command.
+  * Cons: User might be confused between `find` command for interviews and `filter_interview` command.
+
+* **Alternative 2:** Part of `find` command functionality
+  * Pros: Easy to implement
+  * Pros: Intuitive for user to use `find` command to find certain types of interviews (past or future)
+  * Cons: Breaks the single responsibility principle as it does not find a specific input for a prefix, but rather
+    types of inputs.
 
 ### Show feature
 
@@ -392,96 +493,6 @@ should not exceed the destroy marker X. This is a known limitation of PlantUML.<
     * Cons: There is no general guarantee on the ordering of elements obtained by iterating over a set. This leads to lower
     testability as it is difficult to create test cases if the result of the method is difficult to determine.
 
-### Find feature
-
-The ```find``` command is facilitated by creating a ```FindCommand``` depending on the given
-input. This command then updates the ```model``` accordingly.
-
-The following activity diagram summarizes what happens when a user executes a ```find``` command:
-
-![images](images/FindCommandActivityDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source:
- **Note:** There should only be one arrowhead at the end of every line 
-in the Activity Diagram. This is a known limitation of PlantUML.</div>
-
-Given below is an example usage scenario illustrated by a sequence diagram for ```find``` command.
-
-Step 1. A valid command `find n/Alex y/0` is given as user input. This invokes `LogicManager#execute()`, which calls
-`AddressBookParser#parseCommand()` to parse `find n/Alex y/0` into command word `find` and command argument ``` n/Alex y/0```.
-
-Step 2. `FindCommandParser` is initialized based on the parse results and `FindCommandParser#parse()` is called
-to identify the predicates present in ``` n/Alex y/0```. `FindCommandParser#parse()` then initializes a
-`FindCommand` with the predicates as argument.
-
-Step 3. `FindCommand#execute()` is then called, which will in turn call `Model#updateFilteredPersonList()`
-and filters for applicants that have `Alex` in their names and `0` year of experience.
-
-Step 4. Once the string of all applicant names is formed, `CommandResult` is initialized with this string as argument
-and returned.
-
-The following sequence diagram shows how the find operation works.
-![images](images/FindCommandSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source:
- **Note:** The lifeline for `FindCommandParser`
-should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
-
-### Filter interview feature
-
-The ```filter_interview``` command is facilitated by extending an abstract ```FilterInterviewCommand``` class, and executing the appropriate 
-subclass depending on the given input. This command then updates the ```model``` accordingly. 
-
-The following activity diagram summarizes what happens when a user executes a ```filter_interview``` command:
-![images](images/FilterInterviewCommandActivityDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source:
- **Note:** There should only be one arrowhead at the end of every line 
-in the Activity Diagram. This is a known limitation of PlantUML.</div>
-
-Given below is an example usage scenario and how the filter interview operation behaves at each step.
-
-Step 1. A valid command `filter_interview past` is given as user input. This invokes `LogicManager#execute()`, which calls
-`AddressBookParser#parseCommand()` to parse `filter_interview past` into command word `filter_interview` and command argument ``` past```.
-
-Step 2. `FilterInterviewCommandParser` is initialized based on the parse results and `FilterInterviewCommandParser#parse()` is called
-to identify the user input ``` past```.
-
-Step 3. Upon identifying the user input ``` past```, `FilterInterviewCommandParser#parse` will then call methods of the
-`ValidFilterInterviewArgs` class from the enum type `ValidFilterInterviewArgs.PAST` instead of `ValidFilterInterviewArgs.FUTURE`.
-The details of this step are omitted from the sequence diagram below for brevity.
-
-Step 4. `FilterInterviewCommandParser#parse` calls the method `ValidFilterInterviewArgs#getFilterInterviewCommand()` to obtain
-an object of the appropriate subclass of `FilterInterviewCommand`, which in this case is an instance of `FilterInterviewPastCommand`. 
-This instance is returned and propagated back to `LogicManager`. 
-
-Step 5. `FilterInterviewPastCommand#execute()` is then called by `LogicManager`, which will in turn call `Model#updateFilteredPersonList()`
-and filters for applicants that have interviews that have already passed. 
- 
-Step 6. Once the list has been filtered, `CommandResult` is initialized with `String` indicating how many applicants
-have interviews that have passed. This `CommandResult` is then returned.
-
-The following sequence diagram shows how the filter interview operation works.
-![images](images/FilterInterviewCommandSequenceDiagram.png)
-<div markdown="span" class="alert alert-info">:information_source:
- **Note:** The lifeline for `FilterInterviewCommandParser`
-should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
-
-#### Design considerations:
-
-**Aspect: User command to use in filtering interviews:**
-
-* **Alternative 1 (current choice):** Separate command for filtering interviews
-    * Pros: Command has single responsibility of filtering interviews based on whether they haved passed or are upcoming.
-    * Pros: Easy to use for user, only has two inputs it can take.
-    * Cons: Harder to implement than adding to `find` command.
-    * Cons: User might be confused between `find` command for interviews and `filter_interview` command.
-
-* **Alternative 2:** Part of `find` command functionality
-    * Pros: Easy to implement
-    * Pros: Intuitive for user to use `find` command to find certain types of interviews (past or future)
-    * Cons: Breaks the single responsibility principle as it does not find a specific input for a prefix, but rather
-    types of inputs.
 
 ### Mark feature
 The ```mark``` command is facilitated by creating a ```MarkCommand```, which is a subclass of ```MarkingCommand```.
@@ -550,6 +561,33 @@ The following sequence diagram shows how the unmark operation works.
 <div markdown="span" class="alert alert-info">:information_source:
  **Note:** The lifeline for `MarkingCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
+
+
+### Delete marked feature
+
+The ```delete_marked``` command is facilitated by creating an ```DeleteMarkedCommand```.
+This command then updates the ```model``` accordingly.
+
+The following activity diagram summarizes what happens when a user executes a ```delete_marked``` command:
+![images](images/DeleteMarkedCommandActivityDiagram.png)
+
+Given below is an example usage scenario illustrated by a sequence diagram for ```delete_marked``` command.
+
+Step 1. A valid command `delete_marked` is given as user input. This invokes `LogicManager#execute()`, which calls
+`AddressBookParser#parseCommand()` to parse `delete_marked`.
+
+Step 2. `AddreddBookParser#parseCommand()` initializes a `DeleteMarkedCommand`.
+
+Step 3. `DeleteMarkedCommand#execute()` is then called, which will in turn call `Model#updateFilteredList()` (not shown) to
+update list for applicants marked then `Model#getFilteredList()` is then called to retrieve this list.
+
+Step 4. `Model#deletePerson()` is called on applicants in the list to delete them.
+
+Step 5. Once the string of all applicant names that are marked is formed, `CommandResult` is initialized with this string as argument
+and returned.
+
+The following sequence diagram shows how the delete marked operation works.
+![images](images/DeleteMarkedCommandSequenceDiagram.png)
 
 ### Datetime for interview 
 
