@@ -91,7 +91,6 @@ public class StaffIndividualStatisticsCommand extends Command {
 
     }
 
-
     private CommandResult executeIndex(Model model) throws CommandException {
         if (index >= model.getFilteredPersonList().size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -107,11 +106,12 @@ public class StaffIndividualStatisticsCommand extends Command {
 
     private String result(List<Person> staffs) {
         StringBuilder sb = new StringBuilder();
+        sb.append("\n");
         for (Person staff : staffs) {
             sb.append(staffSummary(staff));
             sb.append("\n");
         }
-        return sb.toString().trim();
+        return sb.toString();
 
     }
 
