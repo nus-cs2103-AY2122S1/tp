@@ -35,7 +35,7 @@ title: Developer Guide
       - [Implementation Rationale](#implementation-rationale-2)
       - [Design Considerations](#design-considerations-2)
         - [Aspect: Method of finding a participant](#aspect-method-of-finding-a-participant)
-    - [Add/Remove Participant to/from Event - enroll/expel](#addremove-participant-tofrom-event---enrollexpel)
+    - [Add/Remove Participant to/from Event feature - enroll/expel](#addremove-participant-tofrom-event-feature---enrollexpel)
       - [Implementation Details](#implementation-details-4)
       - [Implementation Rationale](#implementation-rationale-3)
     - [View Event Details feature - showDetails](#view-event-details-feature---showdetails)
@@ -45,7 +45,7 @@ title: Developer Guide
         - [Aspect: Similar event names](#aspect-similar-event-names)
     - [\[Proposed\] Undone Event feature](#proposed-undone-event-feature)
       - [Proposed Implementation](#proposed-implementation)
-    - [\[Proposed\] Enroll and Expel multiple Participants from multiple Events](#proposed-enroll-and-expel-multiple-participants-from-multiple-events)
+    - [\[Proposed\] Enroll and Expel multiple Participants from multiple Events feature](#proposed-enroll-and-expel-multiple-participants-from-multiple-events-feature)
       - [Proposed Implementation](#proposed-implementation-1)
 - [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
 - [**Appendix: Requirements**](#appendix-requirements)
@@ -470,7 +470,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ![ViewCommandActivityDiagram](images/DG-images/ViewCommandActivityDiagram.png)
 
-### Add/Remove Participant to/from Event - enroll/expel
+### Add/Remove Participant to/from Event feature - enroll/expel
 
 This feature allows Managera users to quickly add/remove a participant to/from an event according to the current 
 filtered list of events and participants visible to the user.
@@ -603,7 +603,7 @@ the event in the event list. The `UndoneEventCommand` created by `UndoneEventCom
 of the event in the displayed event list to be undone. When the command is executed, the `model` will retrieve the 
 `Event` at the specified `Index` and change the completion status of the `Event`.
 
-### \[Proposed\] Enroll and Expel multiple Participants from multiple Events
+### \[Proposed\] Enroll and Expel multiple Participants from multiple Events feature
 
 #### Proposed Implementation
 
