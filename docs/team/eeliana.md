@@ -61,7 +61,7 @@ Minor contributions:<br>
 The following contributions listed are made with the help of my teammates and their valuable contributions.
 
 Major contributions:<br>
-* Majority of the [Lesson Management](../DeveloperGuide.md#lesson-management-features) section
+* Majority of the [Lesson management features](../DeveloperGuide.md#lesson-management-features) section
 * [Manual Testing - Adding a lesson](../DeveloperGuide.md#adding-a-lesson)
 * [Manual Testing - Editing a lesson of a student](../DeveloperGuide.md#editing-a-lesson-of-a-student)
 * [Manual Testing - Deleting a lesson from a student](../DeveloperGuide.md#deleting-a-lesson-from-a-student)
