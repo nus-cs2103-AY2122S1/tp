@@ -80,7 +80,8 @@ Given below are my contributions to the project.
     1. Added the value proposition for gitGud.
     2. Added use case for `add friend`.
     3. Discovery of bugs related to Use Case Extension numbering.  
-    3. Added documentation for Storage component (e.g. UML diagram, description etc). 
+    4. Added documentation for Storage component (e.g. UML diagram, description etc). 
+    5. Added implementation details for Recommend command. 
   * README:
     1. Updated Github Actions build status badge to reflect status of gitGud team repository.
     2. Updated description and organised layout of README.
