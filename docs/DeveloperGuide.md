@@ -1315,7 +1315,7 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `view 0`<br>
        Expected: No contact is displayed. Error details shown in the status message. Display Pane remains unchanged.
 
-    4. Other incorrect delete commands to try: view, view x (where x is larger than the list size, or negative), view 00001, view 1 n/, view n/INVALID_NAME(invalid name that does not exist in the addressBook)<br>
+    4. Other incorrect delete commands to try: `view`, `view x` (where x is larger than the list size, or negative), `view 00001`, `view 1 n/`, `view n/INVALID_NAME` (invalid name that does not exist in the addressBook)<br>
        Expected: Similar to previous
 
 ### Navigating input history
