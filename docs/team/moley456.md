@@ -35,7 +35,8 @@ Given below are my contributions to the project.
 * **Enhancements to existing features**:
   * Added support for saving and loading facility data to and from the json data file.
   * Updated the GUI to accommodate another tab for the facility list and also increased result window height to 
-  accommodate for longer error messages(Pull requests [\#117](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/117), [\#223](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/223))
+  accommodate for longer error messages (Pull requests [\#117](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/117), [\#223](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/223))
+  * Wrote additional test cases for additional features to increase coverage from 76% to 78% (Pull request [\#273](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/273))
 
 * **Documentation**:
   * User Guide:
