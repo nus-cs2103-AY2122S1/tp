@@ -25,7 +25,6 @@ import seedu.address.logic.commands.member.MeditCommand;
 import seedu.address.logic.commands.member.MfindCommand;
 import seedu.address.logic.commands.member.MlistCommand;
 import seedu.address.logic.commands.member.MtfindCommand;
-import seedu.address.logic.commands.member.PfindCommand;
 import seedu.address.logic.commands.task.TaddCommand;
 import seedu.address.logic.commands.task.TdelCommand;
 import seedu.address.logic.commands.task.TdoneCommand;
@@ -49,7 +48,6 @@ import seedu.address.logic.parser.member.MeditCommandParser;
 import seedu.address.logic.parser.member.MfindCommandParser;
 import seedu.address.logic.parser.member.MlistCommandParser;
 import seedu.address.logic.parser.member.MtfindCommandParser;
-import seedu.address.logic.parser.member.PfindCommandParser;
 import seedu.address.logic.parser.task.TaddCommandParser;
 import seedu.address.logic.parser.task.TdelCommandParser;
 import seedu.address.logic.parser.task.TdoneCommandParser;
@@ -102,9 +100,6 @@ public class AddressBookParser {
 
         case MtfindCommand.COMMAND_WORD:
             return new MtfindCommandParser().parse(arguments);
-
-        case PfindCommand.COMMAND_WORD:
-            return new PfindCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

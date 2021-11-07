@@ -170,34 +170,44 @@ However, this design has some issues in storage,
 In our implementation, the unique identifier is `Name` and `TaskDeadline`, which are actually the main part of a `Task`.
 * At the same time, json format member need to store the completion status of each referencing task.
 * In all, implementing the storage of this member-task relation by using json file is likely to incur redundancy and error-prone,
-so we desided to use a easier implementation, which is the current one.
+so we decided to use an easier implementation, which is the current one.
 
 A better implementation of the alternative design may involve using database management system like PostgreSQL,
-a proposed entity relationship model diagram for the member-task relation is given [here](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/docs/images/ER.png)
+a proposed entity relationship model diagram for the member-task relation is given here:[ER_diagram](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/docs/images/ER.png)
 
+
+[comment]: <> (<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative &#40;arguably,) 
+
+[comment]: <> (a more OOP&#41; model is given below. It has a `Position` list in the `AddressBook`, which `Member` references. This allows `AddressBook` to only require one `Position` object per unique POSITION, instead of each `Member` needing their own set of `Position` objects.<br>)
+
+
+[comment]: <> (<img src="images/BetterModelClassDiagram.png" width="450" />)
+
+[comment]: <> (</div>)
 
 ### Storage component
 
+[comment]: <> (TODO: SAMUEL)
 **API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
+The `Storage` component converts data from Ailurus to `json` format and back. It utilizes the `Jackson` library for this purpose.
+Address book data is both saved and read from `./data/ailurus.json` while user preference data is from `./preferences.json`.
+If the files and directories do not exist, they are created with sample data when the Ailurus application is launched.
+
 The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+* can save both address book data and user preference data in `json` format, and read them back into corresponding objects.
+* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (only one) depending on which functionality is needed.
+* depends on some classes such as `Member`, `Event` and `Task` in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model` thus depends on them to convert data to json format).
 
-[comment]: <> (TODO: SAMUEL)
-#### Current Implementation
+From the name of the classes(beginning with JsonAdapted), we can tell which class they are storing in `json` format. All of these data are stored
+in the `JsonSerializableAddressBook`.
 
-`JsonAdaptedTask` allows `Task` to be stored in a json format and `JsonAdaptedMember` allows `Member` to store an array of `Task`
+For Example,
+* `JsonAdaptedTask` stores `Task` in `json` format.
+* `JsonAdaptedEvent` stores `Event` in `json` format. 
 
-`JsonAdaptedEvent` allows `Event` to be stored in Json format. Ailurus can now store `Event`, enabling the saving and 
-loading of files with `Event` objects. The Map of participants of the `Event` are saved into Json format by splitting them into two separate lists of `JsonAdaptedMember` and `Boolean` respectively.
-
-#### Future Plans
-
-Storing `Position` in a unique list would reduce the amount of `Position` objects needed.
 
 ### Common classes
 
@@ -485,7 +495,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | user                                       | load members from other files | access and manage different sets of data |
-| `* * *`  | user                                       | write my data to a file as save data | access them and resume at a later date |
+| `*`  | user                                       | write my data to a file as save data | access them and resume at a later date |
 
 
 #### Event Functions
@@ -501,7 +511,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
 | `* * *`  | user                                       | find a member by name          | locate details of members without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
+| `*`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
 | `*`      | user with many members in the address book | sort members by name           | locate a member easily                                                 |
 
 
@@ -774,22 +784,153 @@ testers are expected to do more *exploratory* testing.
 
 ### Event tests
 
+#### Listing an event
+
+1. List all events
+
+    1. Test case: `elist`<br>
+       Expected: All events are shown in the event list. Success message shown.
+       
 #### Adding an event
 
+1. Adding an event with zero or more members while all members are being shown
+
+    1. Prerequisites: List all members using the `mlist` command. At least 3 members in the list.
+
+    2. Test case: `eadd /n Music Concert /d 11/09/2022`<br>
+       Expected: A new event will be added to the event list. Name and date of the added event is shown in the status message.
+
+    3. Test case: `eadd /n Music Concert /d 11/09/2022 /m 2 /m 3`<br>
+       Expected: A new event will be added to the event list with second and third member of the member list. Name and date of the added event is shown in the status message.
+       In the event list, in the card for the event added, two red labels representing the second and third members are present.
+       
+    4. Test case: `eadd /n boat trip /d 11/09/1800 /m 2 /m 3`<br>
+       Expected: No event is added due to wrong input for date out of range. Error details shown in the status message.
+       
 #### Deleting event
 
+1. Deleting an event while all events are being shown
+
+    1. Prerequisites: List all events using the `elist` command. Multiple events in the list.
+
+    2. Test case: `edel /e 1`<br>
+       Expected: First event is deleted from the event list. Name and date of the deleted event shown in the status message.
+
+    3. Test case: `edel /e 0`<br>
+       Expected: No event is deleted. Error details shown in the status message. Status bar remains the same.
+
+    4. Other incorrect delete commands to try: `edel`, `edel /e x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+       
 #### Editing an event
 
+1. Editing an existing event while all members and events are being shown
+
+    1. Prerequisites: List all members using the `mlist` command.
+       List all events using the `elist` command. Multiple members and events in member and event list respectively.
+       At least two events in event list and three members in member list.
+
+    2. Test case: `eedit /e 1 /n Freshman Orientation Project Discussion /d 22/11/2021`<br>
+       Expected: First event has new name and date displayed on its card in the event list.
+       New name and date of the edited event shown in the status message.
+
+    3. Test case: `eedit /e 2 /m 1 /m 2 /m 3`<br>
+       Expected: Second event now only has first, second and third member. Displayed in its own event card.
+
+    4. Test case: `eedit /e 2 /m`<br>
+       Expected: Second event now has no members. Displayed in its own event card with no labels for member present.
+       
 #### Adding a member to an event
 
+1. Adds existing members to an existing event while all members and events are being shown
+
+    1. Prerequisites: List all members using the `mlist` command.
+       List all events using the `elist` command. Multiple members and events in member and event list respectively.
+       At least two events in event list and three members in member list.
+
+    2. Test case: `emadd /e 1 /m 2 /m 3`<br>
+       Expected: First event now also has second and third members displayed on its card in the event list.
+
+    3. Test case: `emadd /e 2 /m 0`<br>
+       Expected: No member is added to the second event. Error details shown in the status message.
+
+    4. Test case: `emadd /e 2 /m 1`<br>
+       Expected: Second event now also has the first member displayed on its card in the event list.
+       
 #### Deleting a member from an event
 
+1. Deletes existing members from an existing event while all members and events are being shown
+
+    1. Prerequisites: List all members using the `mlist` command.
+       List all events using the `elist` command. Multiple members and events in member and event list respectively.
+       At least one event in event list and three members in member list.
+
+    2. Test case: `emdel /e 1 /m 2 /m 3`<br>
+       Expected: First event no longer has the second and third members displayed on its card in the event list.
+
+    3. Test case: `emdel /e 1 /m 0`<br>
+       Expected: No member is deleted from the first event. Error details shown in the status message.
+
+    4. Test case: `emdel /e 1 /m 1`<br>
+       Expected: First event no longer has the first member displayed on its card in the event list.
+       
 #### Mark all members of event as attended
 
+1. Marks all members of an event.
+
+    1. Prerequisites: List all events using the `elist` command. 
+       At least one event in the list with at least two members. If not use `eadd` and/or `emadd` to obtain this event.
+
+    2. Test case: `emarkall /e 1`<br>
+       Expected: First event has all its members marked as attended. The member labels on its card are all green
+       and no red. 
+       
 #### Mark specific members of event as attended
 
+1. Marks members of an event.
+
+    1. Prerequisites: List all members attending the first event using `mlist /e 1`.
+       At least one event in the list with at least two members. If not use `eadd` and/or `emadd` to obtain this event.
+
+    2. Test case: `emark /e 1 /m 1`<br>
+       Expected: First event has the first member marked as attended. The member label on its card for the first
+       member is green.
+       
+    2. Test case: `emark /e 1 /m 1 /m 2`<br>
+       Expected: First event has the first member and second member marked as attended.
+       The member label on its card for the first and second members are green.   
+       
+       
 #### Unmark specific members of event
 
+1. Unmarks members of an event.
+
+    1. Prerequisites: List all members attending the first event using `mlist /e 1`.
+       At least one event in the list with at least two members. If not use `eadd` and/or `emadd` to obtain this event.
+
+    2. Test case: `eunmark /e 1 /m 1`<br>
+       Expected: First event has the first member marked as absent. The member label on its card for the first
+       member is red.
+
+    2. Test case: `emark /e 1 /m 1 /m 2`<br>
+       Expected: First event has the first member and second member marked as absent.
+       The member label on its card for the first and second members are red.
+
+#### Finding an event
+
+1. Finds and list all events with names containing any of the given keywords. Matching is not strict. Case-insensitive
+search for name.
+
+    1. Prerequisites: Have an event with the name cat, and an event with the name DOG.
+
+    2. Test case: `efind ca`<br>
+       Expected: Event list has the event with the name cat in it. All other events with 'ca' as part of its name is
+       in the event list. 
+
+    3. Test case: `efind c dog`<br>
+       Expected: Event list has both the events with the name cat and dog in it. All other events with 'c' 
+       and/or 'dog 'as part of its name is in the event list.
+      
 ### Task tests
 
 #### Adding a task
