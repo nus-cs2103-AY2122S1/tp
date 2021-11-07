@@ -632,28 +632,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. The list is empty.
-  
+
   Use case ends.
 
 * 3a. The given Index is invalid.
   * 3a1. ClassMATE shows an error message.
-    
-  Use case resumes at step 2. 
+
+  Use case resumes at step 2.
 
 * 3b. Tutorial Group does not exist.
   * 3b1. ClassMATE shows an error message.
-    
+
   Use case ends.
 
 * 3c. A parameter is invalid.
   * 3c1. ClassMATE shows an error message.
-    
+
   Use case resumes at step 2.
 
 * 3d. Student already belongs to a group of Group Type (i.e. OP1 or OP2).
   * 3d1. ClassMATE shows an error message.
 
-  Use case resumes at step 2. 
+  Use case resumes at step 2.
 
 **Use case: Delete Latest Mark from Student**
 

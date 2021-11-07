@@ -12,14 +12,14 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/)
 
 * Enhancements implemented:
-  * New feature: Added the ability to find classes: 
+  * New feature: Added the ability to find classes:
     * PR [\#130]()
     * Allows the user to find a specific tutorial class among all the tutorial classes, so they can use other features of ClassMATE with the desired tutorial class.
     * This implementation was a bit tough as it was my first feature implementation, which involved configuring several edits to the existing code, including the creation of `FindClassCommand` and `FindClassCommandParser`, which define the find class command. I also modified several files to integrate the `FindClassCommand` into ClassMATE, including `ClassmateParser`.
   * New feature: Added the ability to view students in a group:
     * PR [\#151]()
     * Allows the user to only see students who are in a specific tutorial group. The student list is filtered to show only students who are in the desired tutorial group, for easy access to perform other features of ClassMATE with students in the tutorial group.
-    * This implementation required an understanding of the `TutorialGroup` feature (contributed by Yirui and Yiyang) and required the creation of more `Predicate` classes to filter students in the student list, including `GroupMemberPredicate` and `TutorialGroupContainsKeywordPredicate`. 
+    * This implementation required an understanding of the `TutorialGroup` feature (contributed by Yirui and Yiyang) and required the creation of more `Predicate` classes to filter students in the student list, including `GroupMemberPredicate` and `TutorialGroupContainsKeywordPredicate`.
 
 * **Documentation**:
     * Edited various documents to repurpose AddressBook into ClassMATE [\#78]()
