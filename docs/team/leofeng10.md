@@ -45,10 +45,8 @@ Access my [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?s
     * Justification:  As users need to check their tuiton classes they have created, the class information need to be stored. We choose to store
       the data into json file because it is easy to export and import.
     
-  * **Testing**: Create tests for the `ClassLimit`, `Timeslot`, `ClassName`, `UniqueTuitionList` to increase coverage. (Pull request)
-    
-    
-<div style="page-break-after: always;"></div>
+  * **Testing**: Create tests for the `ClassLimit`, `Timeslot`, `ClassName`, `UniqueTuitionList` to increase coverage. (Pull request [\#83](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/83))
+  
 
 * Contributions to the User Guide
   * Added documentation for the features `addclass` and `today` (Pull Request [\#109](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/109))
