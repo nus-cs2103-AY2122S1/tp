@@ -1,0 +1,15 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User executes add command with Name, Student ID, Class ID, Email;
+if () then ([Valid inputs])
+  :Display error message in result;
+else ([Invalid inputs])
+    : Creates a new Student object with the user inputs;
+endif
+
+stop
+
+@enduml
+
