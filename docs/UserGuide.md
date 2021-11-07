@@ -324,30 +324,6 @@ Shows a list of all applicants in RecruitIn.
 
 Format: `list`
 
-
-### Deleting an applicant : `delete`
-
-Deletes applicants by their index from the applicants list in RecruitIn.
-
-Format: `delete INDEX...`
-
-***Note:*** *As mentioned in [Basic Command Format](#basic-command-format), you can delete multiple applicants by including one or more indexes here.*
-
-* The `INDEX` refers to the index number shown in the displayed applicants list.
-* `INDEX` **must be a positive integer** such as 1, 2, 3, …​
-* `INDEX` uses **1-based indexing**, which means the first applicant in the list has the `INDEX`  1.
-*  You should type at least one `INDEX`. (i.e. `delete ` is not a valid command)
-*  You should not type duplicate `INDEX`s. (i.e. `delete 2 2` is not a valid command)
-* You should not type`INDEX` which exceeds the total number of applicants in the displayed applicants list.
-
-Examples:
-* After you execute the command `list`, `delete 1` deletes the 1st applicant listed in RecruitIn.
-* After you execute the command `find n/John`, `delete 1` deletes the 1st applicant in the results of the `find` command.
-* After you execute the command `list`, `delete 2 4 7` deletes the 2nd, 4th and 7th applicants listed in RecruitIn.
-
-<p align="center"><a href="#table-of-contents">Click here to see the table of contents</a></p>
-
-
 ### Finding an applicant : `find`
 
 Finds applicants by specific prefixes.
@@ -363,8 +339,8 @@ Format: `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMPLOYMEN
 
 <div markdown="block" class="alert alert-warning">
 
-* You can search for tags using multiple keywords by providing your keywords separated by whitespace in a `t/` prefix. (i.e. `find t/smart kind`)
-    * This is different from `add` and `edit` commands which require tag inputs to be provided separately. (i.e. `edit 1 t/smart t/kind`)
+* You can search for tags using multiple keywords by providing your parameters separated by whitespace in a `t/` prefix. (i.e. `find t/smart kind`)
+    * This is different from `add` and `edit` commands which require tag parameters to be provided separately. (i.e. `edit 1 t/smart t/kind`)
 
 </div>
 
@@ -378,7 +354,7 @@ Examples:
 * `find n/Bob p/87654321 e/bob@gmail.com r/Software Engineering et/Full time s/4000 l/High School y/2 nt/has the credentials d/Not Done`
 
 <div markdown="block" class="alert alert-success">
-**:information_source: Prefix parameters for `find` command must follow the following input specifications:**<br>
+**:information_source: Prefix parameters for `find` command must follow the following parameter specifications:**<br>
 
 * You may
     * refer to [**Find Parameter Specifications**](#find-parameters) for detailed parameter specifications, or
@@ -412,7 +388,7 @@ Format: `filter_interview past` or `filter_interview future`
 
 * `filter_interview past` shows you applicants with interviews that were in the past (compared to the current date and time).
 * `filter_interview future` shows you applicants with interviews that are coming up in the future (compared to the current date and time).
-* You should give either `past` or `future` as an input after `filter_interview`, but not both.
+* You should give either `past` or `future` as a parameter after `filter_interview`, but not both.
 * You can type in either UPPER CASE or small case for `past` and `future`.
   
 ![FindInput](./images/features/FilterInterviewPast.png)
@@ -427,6 +403,32 @@ Examples:
 
 <p align="center"><a href="#table-of-contents">Click here to see the table of contents</a></p>
 
+
+
+### Deleting an applicant : `delete`
+
+Deletes applicants by their index from the applicants list in RecruitIn.
+
+Format: `delete INDEX...`
+
+***Note:*** *As mentioned in [Basic Command Format](#basic-command-format), you can delete multiple applicants by including one or more indexes here.*
+
+* The `INDEX` refers to the index number shown in the displayed applicants list.
+* `INDEX` **must be a positive integer** such as 1, 2, 3, …​
+* `INDEX` in RecruitIn **starts from one**.
+*  You should type at least one `INDEX`. (i.e. `delete ` is not a valid command)
+*  You should not type duplicate `INDEX`s. (i.e. `delete 2 2` is not a valid command)
+* You should not type`INDEX` which exceeds the total number of applicants in the displayed applicants list.
+
+Examples:
+* After you execute the command `list`, `delete 1` deletes the 1st applicant listed in RecruitIn.
+* After you execute the command `find n/John`, `delete 1` deletes the 1st applicant in the results of the `find` command.
+* After you execute the command `list`, `delete 2 4 7` deletes the 2nd, 4th and 7th applicants listed in RecruitIn.
+
+<p align="center"><a href="#table-of-contents">Click here to see the table of contents</a></p>
+
+
+
 ### Showing search terms : `show`
 
 Shows you unique search terms which you can use for a specific prefix.
@@ -436,7 +438,7 @@ Format: `show [n/] [p/] [e/] [r/] [et/] [s/] [l/] [y/] [t/]`
 ***Note:*** *As mentioned in [Basic Command Format](#basic-command-format), you can include any one of the prefixes in square brackets  here.*
 
 * You should type **only 1** prefix that you want the program to show.
-    * If you type multiple prefixes after `show`, the program will only show you the unique search terms found for the **first** prefix input.
+    * If you type multiple prefixes after `show`, the program will only show you the unique search terms found for the **first** prefix parameter.
       ![FindInput](./images/features/Show.png)
 
 Examples:
