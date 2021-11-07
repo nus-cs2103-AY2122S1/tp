@@ -3,9 +3,11 @@ layout: page
 title: Lim Boon Kee's Project Portfolio Page
 ---
 
-### Project: AddressBook Level 3
+### Project: Socius
 
-AddressBook - Level 3 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+Socius is a contact management desktop application used for CS2103T module takers. Socius is a platform to help students
+find potential project group mates for CS2103T. The user interacts with it using a CLI, and it has a GUI created with
+JavaFX. Socius is written in Java, and has about 12 kLoC.
 
 Given below are my contributions to the project.
 

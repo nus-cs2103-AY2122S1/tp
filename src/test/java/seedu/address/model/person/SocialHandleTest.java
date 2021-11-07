@@ -20,19 +20,19 @@ public class SocialHandleTest {
 
         // invalid socialHandle
         assertFalse(SocialHandle.isValidSocialHandle(" ")); // spaces only
-        assertFalse(SocialHandle.isValidSocialHandle("ife:hello")); // platform is more than 2 char
-        assertFalse(SocialHandle.isValidSocialHandle("i:hello")); // platform is less than 2 char
+        assertFalse(SocialHandle.isValidSocialHandle(":")); // no platform and userid
+        assertFalse(SocialHandle.isValidSocialHandle("ife:hello")); // invalid platform
         assertFalse(SocialHandle.isValidSocialHandle("ig:fewf fewfef")); // contains space in handle
-        assertFalse(SocialHandle.isValidSocialHandle("fewfef")); // no platform
+        assertFalse(SocialHandle.isValidSocialHandle("fewfef")); // no platform given
         assertFalse(SocialHandle.isValidSocialHandle("ig:")); // no value specified
         assertFalse(SocialHandle.isValidSocialHandle("")); //no social handle
 
         // invalid platform
         assertFalse(SocialHandle.isValidPlatform("t"));
-        assertFalse(SocialHandle.isValidPlatform("instagram")); // for instagram
+        assertFalse(SocialHandle.isValidPlatform("instagram"));
         assertFalse(SocialHandle.isValidPlatform("telegram"));
 
-        // invalid value
+        // invalid userid
         assertFalse(SocialHandle.isValidValue("efefe ewfefe"));
 
         // valid socialHandle
@@ -44,22 +44,22 @@ public class SocialHandleTest {
         assertTrue(SocialHandle.isValidSocialHandle("dc:dsdswd"));
 
         // valid platform
-        assertTrue(SocialHandle.isValidPlatform("ig")); // for instagram
-        assertTrue(SocialHandle.isValidPlatform("tg")); // for telegram
-        assertTrue(SocialHandle.isValidPlatform("fb"));
-        assertTrue(SocialHandle.isValidPlatform("gh"));
-        assertTrue(SocialHandle.isValidPlatform("tw"));
-        assertTrue(SocialHandle.isValidPlatform("in"));
-        assertTrue(SocialHandle.isValidPlatform("dc"));
-        assertTrue(SocialHandle.isValidPlatform("sc"));
+        assertTrue(SocialHandle.isValidPlatform("ig")); // for Instagram
+        assertTrue(SocialHandle.isValidPlatform("tg")); // for Telegram
+        assertTrue(SocialHandle.isValidPlatform("fb")); // for Facebook
+        assertTrue(SocialHandle.isValidPlatform("gh")); // for Github
+        assertTrue(SocialHandle.isValidPlatform("tw")); // for Twitter
+        assertTrue(SocialHandle.isValidPlatform("in")); // for Linkedin
+        assertTrue(SocialHandle.isValidPlatform("dc")); // for Discord
+        assertTrue(SocialHandle.isValidPlatform("sc")); // for Snapchat
 
-        // valid platform
+        // valid userid
         assertTrue(SocialHandle.isValidValue("t"));
         assertTrue(SocialHandle.isValidValue("deweffi"));
 
         // parse platform
-        assertTrue(SocialHandle.isValidPlatform(SocialHandle.parsePlatform("instagram"))); // for instagram
-        assertTrue(SocialHandle.isValidPlatform(SocialHandle.parsePlatform("telegram"))); // for telegram
+        assertTrue(SocialHandle.isValidPlatform(SocialHandle.parsePlatform("instagram")));
+        assertTrue(SocialHandle.isValidPlatform(SocialHandle.parsePlatform("telegram")));
 
     }
 
