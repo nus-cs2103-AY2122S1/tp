@@ -38,8 +38,12 @@ title: Developer Guide
         7.1 <a href="#71-launch-and-shutdown">Launch and Shutdown</a><br>
         7.2 <a href="#72-viewing-help">Viewing Help</a><br>
         7.3 <a href="#73-deleting-a-clientproduct">Deleting a Client/Product</a><br>
-        7.4 <a href="#74-editing-a-clientproduct">Editing a Client/Product</a><br>
-        7.5 <a href="#75-saving-data">Saving Data</a><br>
+        7.4 <a href="#74-adding-a-clientproduct">Adding a Client/Product</a><br>
+        7.5 <a href="#75-editing-a-clientproduct">Editing a Client/Product</a><br>
+        7.6 <a href="#76-listing-clientproduct">Listing Clients/Products</a><br>
+        7.7 <a href="#77-finding-a-clientproduct">Finding a Client/Product</a><br>
+        7.8 <a href="#78-viewing-a-clientproduct">Viewing a Client/Product</a><br>
+        7.9 <a href="#79-saving-data">Saving Data</a><br>
    </details>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -983,8 +987,27 @@ expected to do more *exploratory* testing.
        or `Macbook` will be shown (case insensitive).
        If there are no matches, an empty list will be shown.
 
+### 7.8 Viewing a Client/Product
 
-### 7.8 Saving Data
+1. Viewing a client
+    1. Prerequisites:<br>
+       List all clients using the `list -c` command. At least one client in the list.
+        1. If the client list is empty, refer to <u>7.4, 1</u> to add a client.
+        2. The index has to be no greater than the last index on the client list.
+       
+    1. Test case: `view -c 1`<br>
+       Expected: Client at index `1` on the client list will be viewed in detail on the panel on the right.
+
+2. Finding a product
+    1. Prerequisites:<br>
+       List all products using the `list -p` command. At least one product in the list.
+        1. If the product list is empty, refer to <u>7.4, 2</u> to add a product.
+        2. The index has to be no greater than the last index on the product list.
+
+   1. Test case: `view -p 1`<br>
+      Expected: Product at index `1` on the product list will be viewed in detail on the panel on the right.
+
+### 7.9 Saving Data
 
 1. Dealing with missing/corrupted data files
 
