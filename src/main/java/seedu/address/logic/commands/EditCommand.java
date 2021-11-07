@@ -96,6 +96,27 @@ public class EditCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
+        // An existing person that is not the person being edited is a disallowed duplicate if it is a duplicate of
+        // the person being edited.
+        checkDisallowedDuplicates(model, personToEdit, editedPerson);
+
+        model.setPerson(personToEdit, editedPerson);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+    }
+
+    /**
+     * Checks if {@code editedPerson} is a duplicate of any existing Persons in {@code model} other than the
+     * {@code personToEdit} and throws an exception if true.
+     *
+     * @param model Model object to be checked for duplicate Persons
+     * @param personToEdit Person being edited
+     * @param editedPerson Person with edits made
+     * @throws CommandException if {@code editedPerson} is a duplicate of any existing Persons in {@code model}
+     * other than the {@code personToEdit}
+     */
+    private void checkDisallowedDuplicates(Model model, Person personToEdit, Person editedPerson)
+            throws CommandException {
         // check if editing this person will lead to duplicates in the addressbook
         if (model.hasPerson(editedPerson)) {
             List<Person> duplicates = model.getDuplicate(editedPerson);
@@ -112,10 +133,6 @@ public class EditCommand extends Command {
                 throw new CommandException(createDuplicateMessage(disallowedDuplicates, editedPerson));
             }
         }
-
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
     }
 
     /**
