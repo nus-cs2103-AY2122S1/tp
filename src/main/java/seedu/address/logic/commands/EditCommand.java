@@ -90,7 +90,6 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_CLIENT);
         }
 
-
         model.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
 
         String clientsString = joinListToString(editedClients, CLIENT_DELIMITER);
