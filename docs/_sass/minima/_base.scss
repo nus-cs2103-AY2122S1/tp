@@ -199,7 +199,7 @@ pre {
  */
 .wrapper {
 //   max-width: calc(#{$content-width} - (#{$spacing-unit}));
-//   max-width: calc(#{$content-width} + (#{$spacing-unit}));
+  max-width: 1000px;
   margin-right: auto;
   margin-left: auto;
   padding-right: $spacing-unit / 2;
@@ -208,7 +208,7 @@ pre {
 
   @media screen and (min-width: $on-large) {
 //     max-width: calc(#{$content-width} - (#{$spacing-unit} * 2));
-//     max-width: calc(#{$content-width} + (#{$spacing-unit} * 2));
+    max-width: 1000px;
     padding-right: $spacing-unit;
     padding-left: $spacing-unit;
   }
