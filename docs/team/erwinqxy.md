@@ -14,7 +14,7 @@ project. ([View Reposense](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?s
 ### Features
 
 1. **New Feature**: Automatic sorting of the student list.
-    * What it does: it helps to ensure that the student list is always sorted whenever an add or edit command is executed - sorts the students based on their Class ID than by Name.
+    * What it does: it helps to ensure that the student list is always sorted whenever an add or edit command is executed.
     * Justification: This feature improves the product significantly as it helps to simulate a real-life nominal roll
       where the students will always be sorted by class and name, giving the user an organized set of student data.
     * Highlights: This enhancement provides the user with a more convenient and accessible experience in finding his /
@@ -30,7 +30,7 @@ project. ([View Reposense](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?s
     * Justification: This feature improves the testability of the product where it allows first-time users to explore
       and learn the various features provided by the product.
 4. **New Feature**: Implemented a feature to help generate random lab scores.
-    * What it does: it helps to populate the students in the sample data with randomized lab scores.
+    * What it does: add randomized lab scores to the students in the sample data.
     * Justification This feature improves the testability of the product, providing, randomized lab scores to the user.
     * Highlight: This feature requires getting the total lab score of a particular lab as an upper bound for the
       randomization to work to avoid generating an invalid score.
