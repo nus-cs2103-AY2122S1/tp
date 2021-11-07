@@ -131,7 +131,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create an `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103-F09-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
@@ -376,7 +376,7 @@ The list of birthdays is generated in the `ModelManager`, which implements the f
 
 Given below is an example usage scenario and how the birthday reminders mechanism behaves at each step.
 
-Step 1. On app startup sort contacts with a birthday by birth month and day only. Contacts with birthdays that fall on the present day are coloured green while birthdays that are within one week are coloured blue. Additionally, a customised message with each contact's phone number and age will be displayed in the birthday reminder list.
+Step 1. On app startup, contacts with a birthday are sorted by birth month and day. Contacts with birthdays that fall on the present day are coloured green while birthdays that are within one week are coloured blue. Additionally, a customised message with each contact's phone number and age will be displayed in the birthday reminder list.
 
 Step 2. The `BirthdayReminderListPanel` in CONNECTIONS' `UI` displays birthday reminders in sorted order, starting with the earliest upcoming birthday to the latest upcoming birthday for the year, after which displays birthdays that have passed for the current year in sorted order.
 
@@ -410,7 +410,7 @@ Step 2. The `FilteredList` in `Model` is updated.
 Step 3. The UI is updated to reflect this new state.  
 Step 4. The user provides a series of prefixes to `mailingList` to pick the fields. If no arguments are provided, default selectors are used.  
 Step 5. These `Prefix` arguments are stored in `Model`.  
-Step 6. The user is prompted to pick the name and the download location of their generated CSV file.  
+Step 6. The user is prompted to pick a name and the download location for their generated CSV file.  
 Step 7. The `FilteredList`, `Prefixes` and `Path` are passed to `CsvUtil#modelToCsv`, which will serialize and write the CSV file.   
 ![MailingListSequenceDiagram](images/MailingListSequenceDiagram.png)  
 Step 8. The header row is created based on `Prefix` arguments stored in `Model`, based on a mapping in `CsvUtil`.  
@@ -422,7 +422,7 @@ Step 10. The headers and rows are written to the CSV file that is specified by t
 
 #### Design considerations:
 * Arguments for the command should follow the standard used in other parts of the software.
-* Balancing between the simplicity of use when no arguments are provided, and flexibility for users who might want additional information.
+* Balancing between simplicity of use when no arguments are provided, and flexibility for users who might want additional information.
 
 ### [Proposed] Partial data recovery feature
 Allows the user to recover partial data if the data file becomes corrupted. 
@@ -447,7 +447,7 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 
 #### Design considerations:
 * Arguments for the command should follow the standard used in other parts of the software.
-* Balancing between the simplicity of use when no arguments are provided, and customisability for users who might want additional information.
+* Balancing between simplicity of use when no arguments are provided, and customisability for users who might want additional information.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -519,7 +519,7 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 
 1.  User chooses to add a contact.
 2.  User provides the contact's details.
-3.  CONNECTIONS create a contact for that contact's details
+3.  CONNECTIONS create a contact entry for that contact's details
 
     Use case ends.
 
@@ -916,7 +916,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy it into an empty folder.
 
-   1. Launch the jar file using the `java -jar connections.jar` in powershell for Windows users and terminal for Linux users. Double-click the jar file as last resort.<br>
+   1. Launch the jar file using the `java -jar connections.jar` in powershell for Windows users and terminal for macOS and Linux users. Double-click the jar file as last resort.<br>
       Expected: Shows the GUI with a set of sample contacts. The birthday reminder list shows a birthday reminder message for each contact with a non-empty birthday field. 
       The window size may not be optimum.
 

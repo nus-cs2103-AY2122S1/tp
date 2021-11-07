@@ -121,7 +121,7 @@ Adds a contact to CONNECTIONS.
 <div markdown="span" class="alert alert-primary">
 
 :bulb: **Tip:**
-A contact can have a non-negative number of tags (including 0).
+A contact can have any number of tags (including 0).
 </div>
 
 <div markdown="span" class="alert alert-primary">
@@ -249,7 +249,7 @@ Notes:
 * The order of the keywords does not matter. e.g. `findAny n/Hans t/football` will return the same result as `findAny t/football n/Hans`.
 * Only full words will be matched for names and tags.
   * `findAny n/an` will not return `Hans`, but will return `Jing An`.
-* Only contacts that matched at least one of the keywords provided will be returned as search results (i.e., `OR` search)
+* Only contacts that match at least one of the keywords provided will be returned as search results (i.e., `OR` search)
   e.g. `findAny n/Hans t/Friend` will return all contacts with names containing the word `Hans` or are tagged with `Friend`.
 
 
