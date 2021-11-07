@@ -444,6 +444,26 @@ Notes:
 5. Inputting `viewShift` alone also outputs the staff currently working.
 
 --------------------------------------------------------------------------------------------------------------------
+## **Proposed future features** ##
+
+### Operating a command on a group of people together ###
+
+Currently, most of the commands of Staff'd are targeting on a single person, which means user need to specify
+the staff's index, name to identify that single staff. In future iterations, we can expand some commands to work on
+a group of staff at the same time.
+
+### Make marking absent by time ###
+
+Currently, `mark` functionality can only mark from a start date to an end date, but in reality, it's common that
+a staff is only absent a few hours in a day. In future iterations, we can expand the `mark` command to make it available
+to make marking absent by time.
+
+### Track salary changes ###
+
+Currently, Staff'd supports calculating a staff's current month salary. In future iterations, we can expand the
+functionality to let it track the changes on a staff's salary, store the salary history of a staff.
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
