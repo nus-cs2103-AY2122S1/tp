@@ -8,7 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_Y2;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.AMY;
+import static seedu.address.testutil.TypicalMembers.AMY;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -24,13 +24,13 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlySportsPa;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
-import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.model.member.Member;
+import seedu.address.storage.JsonSportsPaStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.MemberBuilder;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");
@@ -43,8 +43,8 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonAddressBookStorage addressBookStorage =
-                new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonSportsPaStorage addressBookStorage =
+                new JsonSportsPaStorage(temporaryFolder.resolve("sportsPa.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
@@ -70,9 +70,9 @@ public class LogicManagerTest {
 
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
-        // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
-        JsonAddressBookStorage addressBookStorage =
-                new JsonAddressBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
+        // Setup LogicManager with JsonSportsPaIoExceptionThrowingStub
+        JsonSportsPaStorage addressBookStorage =
+                new JsonSportsPaIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
@@ -81,16 +81,16 @@ public class LogicManagerTest {
         // Execute add command
         String addMemberCommandWord =
                 AddMemberCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + AVAILABILITY_DESC_AMY + TAG_DESC_Y2;
-        Person expectedPerson = new PersonBuilder(AMY).build();
+        Member expectedMember = new MemberBuilder(AMY).build();
         ModelManager expectedModel = new ModelManager();
-        expectedModel.addPerson(expectedPerson);
+        expectedModel.addMember(expectedMember);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
         assertCommandFailure(addMemberCommandWord, CommandException.class, expectedMessage, expectedModel);
     }
 
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredMemberList().remove(0));
     }
 
     @Test
@@ -134,7 +134,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getSportsPa(), new UserPrefs());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -154,13 +154,13 @@ public class LogicManagerTest {
     /**
      * A stub class to throw an {@code IOException} when the save method is called.
      */
-    private static class JsonAddressBookIoExceptionThrowingStub extends JsonAddressBookStorage {
-        private JsonAddressBookIoExceptionThrowingStub(Path filePath) {
+    private static class JsonSportsPaIoExceptionThrowingStub extends JsonSportsPaStorage {
+        private JsonSportsPaIoExceptionThrowingStub(Path filePath) {
             super(filePath);
         }
 
         @Override
-        public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+        public void saveSportsPa(ReadOnlySportsPa sportsPa, Path filePath) throws IOException {
             throw DUMMY_IO_EXCEPTION;
         }
     }

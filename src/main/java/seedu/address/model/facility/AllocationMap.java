@@ -7,87 +7,87 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import seedu.address.model.person.Person;
+import seedu.address.model.member.Member;
 
 /**
  * Represents the mapping of member allocations to the day of the week in a Facility.
  */
 public class AllocationMap {
-    private Map<DayOfWeek, List<Person>> personsAllocatedMap;
+    private Map<DayOfWeek, List<Member>> membersAllocatedMap;
 
     /**
      * Creates an AllocationMap object with a specified allocation map.
      *
-     * @param personsAllocatedMap A valid allocation map.
+     * @param membersAllocatedMap A valid allocation map.
      */
-    public AllocationMap(Map<DayOfWeek, List<Person>> personsAllocatedMap) {
-        this.personsAllocatedMap = personsAllocatedMap;
+    public AllocationMap(Map<DayOfWeek, List<Member>> membersAllocatedMap) {
+        this.membersAllocatedMap = membersAllocatedMap;
     }
 
-    public Map<DayOfWeek, List<Person>> getPersonsAllocatedMap() {
-        return personsAllocatedMap;
+    public Map<DayOfWeek, List<Member>> getMembersAllocatedMap() {
+        return membersAllocatedMap;
     }
 
     public int getCapacityOnDay(DayOfWeek day) {
-        return personsAllocatedMap.get(day).size();
+        return membersAllocatedMap.get(day).size();
     }
 
     public void clearAllocationOnDay(DayOfWeek day) {
-        personsAllocatedMap.get(day).clear();
+        membersAllocatedMap.get(day).clear();
     }
 
-    public boolean isPersonAllocatedOnDay(Person person, DayOfWeek day) {
-        return personsAllocatedMap.get(day).contains(person);
+    public boolean isMemberAllocatedOnDay(Member member, DayOfWeek day) {
+        return membersAllocatedMap.get(day).contains(member);
     }
 
-    public void addPersonOnDay(Person person, DayOfWeek day) {
-        personsAllocatedMap.get(day).add(person);
+    public void addMemberOnDay(Member member, DayOfWeek day) {
+        membersAllocatedMap.get(day).add(member);
     }
 
-    public void removePersonOnDay(Person person, DayOfWeek day) {
-        personsAllocatedMap.get(day).remove(person);
+    public void removeMemberOnDay(Member member, DayOfWeek day) {
+        membersAllocatedMap.get(day).remove(member);
     }
 
     /**
-     * Removes a person from the allocation for all days.
+     * Removes a member from the allocation for all days.
      *
-     * @param person Person to be removed from allocations on all days.
+     * @param member Member to be removed from allocations on all days.
      */
-    public void removePersonOnAllDays(Person person) {
+    public void removeMemberOnAllDays(Member member) {
         for (DayOfWeek day : DayOfWeek.values()) {
-            personsAllocatedMap.get(day).remove(person);
+            membersAllocatedMap.get(day).remove(member);
         }
     }
 
     /**
-     * Returns the string representation of the given list of persons.
+     * Returns the string representation of the given list of members.
      *
-     * @param personList The list of persons to get the string representation of.
-     * @return String representation of all persons in the list of persons.
+     * @param memberList The list of members to get the string representation of.
+     * @return String representation of all members in the list of persons.
      */
-    public String getPersonsAsString(List<Person> personList) {
-        return personList.stream().map(person -> person.getName().toString()).collect(Collectors.joining(", "));
+    public String getMembersAsString(List<Member> memberList) {
+        return memberList.stream().map(member -> member.getName().toString()).collect(Collectors.joining(", "));
     }
 
-    public List<Person> getPersonsAllocatedOnDay(DayOfWeek day) {
-        return personsAllocatedMap.get(day);
+    public List<Member> getMembersAllocatedOnDay(DayOfWeek day) {
+        return membersAllocatedMap.get(day);
     }
 
     @Override
     public boolean equals(Object obj) {
         return (obj == this)
                 || (obj instanceof AllocationMap
-                && personsAllocatedMap.equals(((AllocationMap) obj).personsAllocatedMap));
+                && membersAllocatedMap.equals(((AllocationMap) obj).membersAllocatedMap));
     }
 
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
 
-        for (DayOfWeek day : personsAllocatedMap.keySet()) {
+        for (DayOfWeek day : membersAllocatedMap.keySet()) {
             builder.append(day.getDisplayName(TextStyle.SHORT, Locale.getDefault()));
             builder.append(": ");
-            builder.append(getPersonsAsString(personsAllocatedMap.get(day)));
+            builder.append(getMembersAsString(membersAllocatedMap.get(day)));
             builder.append("\n");
         }
 

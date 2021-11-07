@@ -3,8 +3,8 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalAddressBook.getUnsortedNameAddressBook;
-import static seedu.address.testutil.TypicalAddressBook.getUnsortedTagAddressBook;
+import static seedu.address.testutil.TypicalSportsPa.getUnsortedNameSportsPa;
+import static seedu.address.testutil.TypicalSportsPa.getUnsortedTagSportsPa;
 
 import org.junit.jupiter.api.Test;
 
@@ -45,22 +45,22 @@ public class SortMemberCommandTest {
 
     @Test
     public void execute_unsortedListIsNotFiltered_isSortedByName() {
-        Model model = new ModelManager(getUnsortedNameAddressBook(), new UserPrefs());
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model model = new ModelManager(getUnsortedNameSportsPa(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getSportsPa(), new UserPrefs());
         SortMemberCommand command = new SortMemberCommand(byName);
         expectedModel.sortMemberList(byName);
-        expectedModel.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        expectedModel.updateFilteredMemberList(Model.PREDICATE_SHOW_ALL_MEMBERS);
         String expectedMessage = String.format(SortMemberCommand.MESSAGE_SUCCESS, byName);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_unsortedListIsNotFiltered_isSortedByTag() {
-        Model model = new ModelManager(getUnsortedTagAddressBook(), new UserPrefs());
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model model = new ModelManager(getUnsortedTagSportsPa(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getSportsPa(), new UserPrefs());
         SortMemberCommand command = new SortMemberCommand(byTag);
         expectedModel.sortMemberList(byTag);
-        expectedModel.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        expectedModel.updateFilteredMemberList(Model.PREDICATE_SHOW_ALL_MEMBERS);
         String expectedMessage = String.format(SortMemberCommand.MESSAGE_SUCCESS, byTag);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }

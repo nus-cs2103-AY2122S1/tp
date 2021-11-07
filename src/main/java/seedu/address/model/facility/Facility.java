@@ -8,7 +8,7 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
-import seedu.address.model.person.Person;
+import seedu.address.model.member.Member;
 
 /**
  * Represents a Facility in SportsPA.
@@ -75,11 +75,11 @@ public class Facility {
      * Makes a deep copy of the allocation map.
      */
     public AllocationMap getAllocationMapClone() {
-        Map<DayOfWeek, List<Person>> map = new EnumMap<>(DayOfWeek.class);
+        Map<DayOfWeek, List<Member>> map = new EnumMap<>(DayOfWeek.class);
         for (DayOfWeek day : DayOfWeek.values()) {
             map.put(day, new ArrayList<>());
-            for (Person person : allocationMap.getPersonsAllocatedOnDay(day)) {
-                map.get(day).add(person);
+            for (Member member : allocationMap.getMembersAllocatedOnDay(day)) {
+                map.get(day).add(member);
             }
         }
         return new AllocationMap(map);
@@ -93,20 +93,20 @@ public class Facility {
         allocationMap.clearAllocationOnDay(day);
     }
 
-    public boolean isPersonAllocatedOnDay(Person person, DayOfWeek day) {
-        return allocationMap.isPersonAllocatedOnDay(person, day);
+    public boolean isMemberAllocatedOnDay(Member member, DayOfWeek day) {
+        return allocationMap.isMemberAllocatedOnDay(member, day);
     }
 
-    public void addPersonToFacilityOnDay(Person person, DayOfWeek day) {
-        allocationMap.addPersonOnDay(person, day);
+    public void addMemberToFacilityOnDay(Member member, DayOfWeek day) {
+        allocationMap.addMemberOnDay(member, day);
     }
 
-    public void removePersonFromFacilityOnDay(Person person, DayOfWeek day) {
-        allocationMap.removePersonOnDay(person, day);
+    public void removeMemberFromFacilityOnDay(Member member, DayOfWeek day) {
+        allocationMap.removeMemberOnDay(member, day);
     }
 
-    public void removePersonFromFacilityOnAllDays(Person person) {
-        allocationMap.removePersonOnAllDays(person);
+    public void removeMemberFromFacilityOnAllDays(Member member) {
+        allocationMap.removeMemberOnAllDays(member);
     }
 
     /**

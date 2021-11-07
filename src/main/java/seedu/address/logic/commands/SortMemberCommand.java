@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_ORDER;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_MEMBERS;
 
 import seedu.address.model.Model;
 import seedu.address.model.sort.SortOrder;
@@ -32,7 +32,7 @@ public class SortMemberCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.sortMemberList(sortOrder);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredMemberList(PREDICATE_SHOW_ALL_MEMBERS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, sortOrder), false, false, true);
     }
 

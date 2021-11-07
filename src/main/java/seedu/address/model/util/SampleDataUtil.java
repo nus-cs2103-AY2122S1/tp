@@ -9,51 +9,51 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlySportsPa;
+import seedu.address.model.SportsPa;
 import seedu.address.model.facility.AllocationMap;
 import seedu.address.model.facility.Capacity;
 import seedu.address.model.facility.Facility;
 import seedu.address.model.facility.FacilityName;
 import seedu.address.model.facility.Location;
 import seedu.address.model.facility.Time;
-import seedu.address.model.person.Availability;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.member.Availability;
+import seedu.address.model.member.Member;
+import seedu.address.model.member.Name;
+import seedu.address.model.member.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code SportsPa} with sample data.
  */
 public class SampleDataUtil {
 
     public static final List<DayOfWeek> SAMPLE_AVAILABILITY =
             Arrays.asList(DayOfWeek.MONDAY, DayOfWeek.WEDNESDAY, DayOfWeek.FRIDAY);
 
-    public static Person[] getSamplePersons() {
-        return new Person[] {
-            new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Availability(SAMPLE_AVAILABILITY),
+    public static Member[] getSamplePersons() {
+        return new Member[] {
+            new Member(new Name("Alex Yeoh"), new Phone("87438807"), new Availability(SAMPLE_AVAILABILITY),
                     getTagSet("exco")),
-            new Person(new Name("Bernice Yu"), new Phone("99272758"), new Availability(SAMPLE_AVAILABILITY),
+            new Member(new Name("Bernice Yu"), new Phone("99272758"), new Availability(SAMPLE_AVAILABILITY),
                     getTagSet("y1")),
-            new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Availability(SAMPLE_AVAILABILITY),
+            new Member(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Availability(SAMPLE_AVAILABILITY),
                     getTagSet("exco", "y2")),
-            new Person(new Name("David Li"), new Phone("91031282"), new Availability(SAMPLE_AVAILABILITY),
+            new Member(new Name("David Li"), new Phone("91031282"), new Availability(SAMPLE_AVAILABILITY),
                     getTagSet("y3")),
-            new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Availability(SAMPLE_AVAILABILITY),
+            new Member(new Name("Irfan Ibrahim"), new Phone("92492021"), new Availability(SAMPLE_AVAILABILITY),
                     getTagSet("coach")),
-            new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Availability(SAMPLE_AVAILABILITY),
+            new Member(new Name("Roy Balakrishnan"), new Phone("92624417"), new Availability(SAMPLE_AVAILABILITY),
                     getTagSet("y3"))
         };
     }
 
     public static Facility[] getSampleFacilities() {
         // to initialize separate maps for each sample facility
-        Map<DayOfWeek, List<Person>> emptyAllocationMap1 = new EnumMap<>(DayOfWeek.class);
-        Map<DayOfWeek, List<Person>> emptyAllocationMap2 = new EnumMap<>(DayOfWeek.class);
-        Map<DayOfWeek, List<Person>> emptyAllocationMap3 = new EnumMap<>(DayOfWeek.class);
-        Map<DayOfWeek, List<Person>> emptyAllocationMap4 = new EnumMap<>(DayOfWeek.class);
+        Map<DayOfWeek, List<Member>> emptyAllocationMap1 = new EnumMap<>(DayOfWeek.class);
+        Map<DayOfWeek, List<Member>> emptyAllocationMap2 = new EnumMap<>(DayOfWeek.class);
+        Map<DayOfWeek, List<Member>> emptyAllocationMap3 = new EnumMap<>(DayOfWeek.class);
+        Map<DayOfWeek, List<Member>> emptyAllocationMap4 = new EnumMap<>(DayOfWeek.class);
 
         for (DayOfWeek day : DayOfWeek.values()) {
             emptyAllocationMap1.put(day, new ArrayList<>());
@@ -74,10 +74,10 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
-        for (Person samplePerson : getSamplePersons()) {
-            sampleAb.addPerson(samplePerson);
+    public static ReadOnlySportsPa getSampleAddressBook() {
+        SportsPa sampleAb = new SportsPa();
+        for (Member sampleMember : getSamplePersons()) {
+            sampleAb.addMember(sampleMember);
         }
 
         for (Facility sampleFacility : getSampleFacilities()) {

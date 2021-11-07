@@ -24,7 +24,7 @@ public class AddAliasCommandTest {
     @Test
     public void execute_addAlias_success() {
         ModelManager model = new ModelManager();
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getSportsPa(), new UserPrefs());
         Alias alias = new Alias(new Shortcut("lf"), new CommandWord("listf"));
         expectedModel.addAlias(alias);
         String expectedMessage = String.format(AddAliasCommand.MESSAGE_SUCCESS, "listf", "lf");

@@ -18,9 +18,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.model.facility.exceptions.DuplicateFacilityException;
 import seedu.address.model.facility.exceptions.FacilityNotFoundException;
-import seedu.address.model.person.Person;
+import seedu.address.model.member.Member;
 import seedu.address.testutil.FacilityBuilder;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.MemberBuilder;
 
 public class UniqueFacilityListTest {
     public final UniqueFacilityList uniqueFacilityList = new UniqueFacilityList();
@@ -57,21 +57,21 @@ public class UniqueFacilityListTest {
         uniqueFacilityList.add(new FacilityBuilder(KENT_RIDGE_OUTDOOR_TENNIS_COURTS_COURT_1).build());
         uniqueFacilityList.add(new FacilityBuilder(TAMPINES_HUB_FIELD_SECTION_B).build());
 
-        ObservableList<Person> members = FXCollections.observableArrayList();
-        Person firstMember = new PersonBuilder().withAvailability(Arrays.asList(DayOfWeek.MONDAY,
+        ObservableList<Member> members = FXCollections.observableArrayList();
+        Member firstMember = new MemberBuilder().withAvailability(Arrays.asList(DayOfWeek.MONDAY,
                 DayOfWeek.FRIDAY)).build();
-        Person secondMember = new PersonBuilder().withAvailability(Arrays.asList(DayOfWeek.MONDAY,
+        Member secondMember = new MemberBuilder().withAvailability(Arrays.asList(DayOfWeek.MONDAY,
                 DayOfWeek.THURSDAY)).build();
         members.add(firstMember);
         members.add(secondMember);
 
         Facility updatedFacility = new FacilityBuilder(KENT_RIDGE_OUTDOOR_TENNIS_COURTS_COURT_1).build();
-        updatedFacility.addPersonToFacilityOnDay(firstMember, DayOfWeek.of(1));
-        updatedFacility.addPersonToFacilityOnDay(secondMember, DayOfWeek.of(1));
+        updatedFacility.addMemberToFacilityOnDay(firstMember, DayOfWeek.of(1));
+        updatedFacility.addMemberToFacilityOnDay(secondMember, DayOfWeek.of(1));
         UniqueFacilityList expected = new UniqueFacilityList();
         expected.setFacilities(Arrays.asList(updatedFacility, TAMPINES_HUB_FIELD_SECTION_B));
 
-        FilteredList<Person> toAllocate = new FilteredList<>(members);
+        FilteredList<Member> toAllocate = new FilteredList<>(members);
         uniqueFacilityList.allocateMembersToFacilitiesOnDay(toAllocate, 1);
         assertEquals(expected, uniqueFacilityList);
     }

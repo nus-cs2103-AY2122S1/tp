@@ -11,10 +11,10 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddMemberCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Availability;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.member.Availability;
+import seedu.address.model.member.Member;
+import seedu.address.model.member.Name;
+import seedu.address.model.member.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -41,9 +41,9 @@ public class AddMemberCommandParser implements Parser<AddMemberCommand> {
         Availability availability = ParserUtil.parseAvailability(argMultimap.getValue(PREFIX_AVAILABILITY).orElse(""));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, availability, tagList);
+        Member member = new Member(name, phone, availability, tagList);
 
-        return new AddMemberCommand(person);
+        return new AddMemberCommand(member);
     }
 
     /**

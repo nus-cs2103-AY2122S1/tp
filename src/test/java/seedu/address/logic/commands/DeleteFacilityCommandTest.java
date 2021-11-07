@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showFacilityAtIndex;
-import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
+import static seedu.address.testutil.TypicalSportsPa.getTypicalSportsPa;
 
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +23,7 @@ import seedu.address.model.facility.Facility;
  */
 public class DeleteFacilityCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalSportsPa(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -32,7 +32,7 @@ public class DeleteFacilityCommandTest {
 
         String expectedMessage = String.format(DeleteFacilityCommand.MESSAGE_DELETE_FACILITY_SUCCESS, facilityToDelete);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getSportsPa(), new UserPrefs());
         expectedModel.deleteFacility(facilityToDelete);
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -55,7 +55,7 @@ public class DeleteFacilityCommandTest {
 
         String expectedMessage = String.format(DeleteFacilityCommand.MESSAGE_DELETE_FACILITY_SUCCESS, facilityToDelete);
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getSportsPa(), new UserPrefs());
         expectedModel.deleteFacility(facilityToDelete);
         showNoFacility(expectedModel);
 
@@ -69,7 +69,7 @@ public class DeleteFacilityCommandTest {
 
         Index outOfBoundIndex = INDEX_SECOND;
         // ensures that outOfBoundIndex still in bounds of SportsPA facility list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getFacilityList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getSportsPa().getFacilityList().size());
 
         DeleteFacilityCommand command = new DeleteFacilityCommand(outOfBoundIndex);
 
@@ -94,7 +94,7 @@ public class DeleteFacilityCommandTest {
         // null -> returns false
         assertFalse(deleteFacilFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different member -> returns false
         assertFalse(deleteFacilFirstCommand.equals(deleteFacilSecondCommand));
     }
 

@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalSportsPa.getTypicalSportsPa;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,8 +10,8 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.member.Member;
+import seedu.address.testutil.MemberBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddMemberCommand}.
@@ -22,24 +22,24 @@ public class AddMemberCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalSportsPa(), new UserPrefs());
     }
 
     @Test
-    public void execute_newPerson_success() {
-        Person validPerson = new PersonBuilder().build();
+    public void execute_newMember_success() {
+        Member validMember = new MemberBuilder().build();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.addPerson(validPerson);
+        Model expectedModel = new ModelManager(model.getSportsPa(), new UserPrefs());
+        expectedModel.addMember(validMember);
 
-        assertCommandSuccess(new AddMemberCommand(validPerson), model,
-                String.format(AddMemberCommand.MESSAGE_SUCCESS, validPerson), expectedModel);
+        assertCommandSuccess(new AddMemberCommand(validMember), model,
+                String.format(AddMemberCommand.MESSAGE_SUCCESS, validMember), expectedModel);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Person personInList = model.getAddressBook().getPersonList().get(0);
-        assertCommandFailure(new AddMemberCommand(personInList), model, AddMemberCommand.MESSAGE_DUPLICATE_MEMBER);
+    public void execute_duplicateMember_throwsCommandException() {
+        Member memberInList = model.getSportsPa().getMemberList().get(0);
+        assertCommandFailure(new AddMemberCommand(memberInList), model, AddMemberCommand.MESSAGE_DUPLICATE_MEMBER);
     }
 
 }

@@ -17,24 +17,23 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.member.Member;
+import seedu.address.testutil.MemberBuilder;
 
 class UnmarkAttendanceCommandTest {
     private Model model = new ModelManager();
 
     @Test
     void execute_validIndices_success() {
-        Person firstPerson = new PersonBuilder().withName("John").build();
-        Person secondPerson = new PersonBuilder().withName("Mat").build();
-        model.addPerson(firstPerson);
-        model.addPerson(secondPerson);
+        Member firstMember = new MemberBuilder().withName("John").withPhone("83452732").build();
+        Member secondMember = new MemberBuilder().withName("Mat").build();
+        model.addMember(firstMember);
+        model.addMember(secondMember);
 
         UnmarkAttendanceCommand command = new UnmarkAttendanceCommand(Arrays.asList(INDEX_FIRST, INDEX_SECOND));
-
         String expectedMessage = UnmarkAttendanceCommand.MESSAGE_SUCCESS;
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getSportsPa(), new UserPrefs());
         expectedModel.unmarkMembersAttendance(Arrays.asList(INDEX_FIRST, INDEX_SECOND));
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -42,7 +41,7 @@ class UnmarkAttendanceCommandTest {
 
     @Test
     public void execute_invalidIndices_throwsCommandException() {
-        Index outOfBoundsIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index outOfBoundsIndex = Index.fromOneBased(model.getFilteredMemberList().size() + 1);
         UnmarkAttendanceCommand command = new UnmarkAttendanceCommand(Arrays.asList(outOfBoundsIndex));
 
         assertCommandFailure(command, model, Messages.MESSAGE_INVALID_MEMBER_DISPLAYED_INDEX);
@@ -53,16 +52,21 @@ class UnmarkAttendanceCommandTest {
         UnmarkAttendanceCommand firstCommand = new UnmarkAttendanceCommand(Arrays.asList(INDEX_FIRST, INDEX_SECOND));
         UnmarkAttendanceCommand secondCommand = new UnmarkAttendanceCommand(Arrays.asList(INDEX_THIRD));
 
+        //same object -> returns true
         assertTrue(firstCommand.equals(firstCommand));
 
+        //same value -> returns true
         UnmarkAttendanceCommand firstCommandCopy = new UnmarkAttendanceCommand(Arrays.asList(INDEX_FIRST,
                 INDEX_SECOND));
         assertTrue(firstCommand.equals(firstCommandCopy));
 
+        //different values -> returns false
         assertFalse(firstCommand.equals(secondCommand));
 
+        //null -> returns false
         assertFalse(firstCommand.equals(null));
 
+        //different types -> returns false
         assertFalse(firstCommand.equals("1"));
     }
 }

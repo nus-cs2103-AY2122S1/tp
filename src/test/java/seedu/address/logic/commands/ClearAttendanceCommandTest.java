@@ -1,29 +1,28 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalSportsPa.getTypicalSportsPa;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.SportsPa;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.member.Member;
+import seedu.address.testutil.MemberBuilder;
 
 
 class ClearAttendanceCommandTest {
-    private Model model = new ModelManager(new AddressBook(getTypicalAddressBook()), new UserPrefs());
 
     @Test
     public void execute_someMembersPresent_success() {
-        Person person = new PersonBuilder().build();
-        person.setPresent();
-        model.addPerson(person);
+        Model model = new ModelManager(new SportsPa(getTypicalSportsPa()), new UserPrefs());
+        Member member = new MemberBuilder().withTodayAttendance(true).build();
+        model.addMember(member);
 
         ClearAttendanceCommand command = new ClearAttendanceCommand();
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getSportsPa(), new UserPrefs());
         expectedModel.resetTodayAttendance();
 
         assertCommandSuccess(command, model, ClearAttendanceCommand.MESSAGE_SUCCESS, expectedModel);
@@ -31,10 +30,10 @@ class ClearAttendanceCommandTest {
 
     @Test
     public void execute_allMembersAbsent_success() {
-        Model model = new ModelManager(new AddressBook(getTypicalAddressBook()), new UserPrefs());
+        Model model = new ModelManager(new SportsPa(getTypicalSportsPa()), new UserPrefs());
 
         ClearAttendanceCommand command = new ClearAttendanceCommand();
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getSportsPa(), new UserPrefs());
         expectedModel.resetTodayAttendance();
 
         assertCommandSuccess(command, model, ClearAttendanceCommand.MESSAGE_SUCCESS, expectedModel);

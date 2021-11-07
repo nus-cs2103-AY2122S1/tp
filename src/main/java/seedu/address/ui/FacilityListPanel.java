@@ -29,7 +29,7 @@ public class FacilityListPanel extends UiPart<Region> {
 
     /**
      * Represents a custom ListCell that displays graphics of Facility
-     * using a FacilityListCard.
+     * using a FacilityCard.
      */
     class FacilityListViewCell extends ListCell<Facility> {
         @Override
@@ -40,7 +40,7 @@ public class FacilityListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new FacilityListCard(facility, getIndex() + 1).getRoot());
+                setGraphic(new FacilityCard(facility, getIndex() + 1).getRoot());
             }
 
         }

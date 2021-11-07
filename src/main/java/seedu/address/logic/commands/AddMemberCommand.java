@@ -8,10 +8,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.member.Member;
 
 /**
- * Adds a person to the address book.
+ * Adds a member to SportsPA.
  */
 public class AddMemberCommand extends Command {
 
@@ -30,28 +30,29 @@ public class AddMemberCommand extends Command {
             + PREFIX_TAG + "exco "
             + PREFIX_TAG + "y2";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_MEMBER = "This member already exists in the member list";
+    public static final String MESSAGE_SUCCESS = "New member added: %1$s";
+    public static final String MESSAGE_DUPLICATE_MEMBER = "A member with the same name or phone number "
+            + "already exists in SportsPA";
 
-    private final Person toAdd;
+    private final Member toAdd;
 
     /**
-     * Creates an AddMemberCommand to add the specified {@code Person}
+     * Creates an AddMemberCommand to add the specified {@code Member}
      */
-    public AddMemberCommand(Person person) {
-        requireNonNull(person);
-        toAdd = person;
+    public AddMemberCommand(Member member) {
+        requireNonNull(member);
+        toAdd = member;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
+        if (model.hasMember(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_MEMBER);
         }
 
-        model.addPerson(toAdd);
+        model.addMember(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd),
                 false, false, true);
     }

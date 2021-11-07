@@ -16,9 +16,9 @@ import java.util.EnumMap;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.person.Person;
+import seedu.address.model.member.Member;
 import seedu.address.testutil.FacilityBuilder;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.MemberBuilder;
 
 public class FacilityTest {
 
@@ -43,11 +43,11 @@ public class FacilityTest {
 
     @Test
     public void clearAllocationMapOnDay_emptiesPersonListOnDay() {
-        Person person = new PersonBuilder().build();
-        Person secondPerson = new PersonBuilder().withName("Matt").build();
+        Member member = new MemberBuilder().build();
+        Member secondMember = new MemberBuilder().withName("Matt").build();
         Facility facility = new FacilityBuilder().build();
-        facility.addPersonToFacilityOnDay(person, DayOfWeek.of(1));
-        facility.addPersonToFacilityOnDay(secondPerson, DayOfWeek.of(1));
+        facility.addMemberToFacilityOnDay(member, DayOfWeek.of(1));
+        facility.addMemberToFacilityOnDay(secondMember, DayOfWeek.of(1));
         facility.clearAllocationMapOnDay(DayOfWeek.of(1));
         Facility expectedFacility = new FacilityBuilder().build();
         assertEquals(expectedFacility, facility);

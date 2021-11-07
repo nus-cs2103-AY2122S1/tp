@@ -15,7 +15,7 @@ public class DeleteFacilityCommand extends Command {
     public static final String COMMAND_WORD = "deletef";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the facility identified by the index number used in the displayed person list.\n"
+            + ": Deletes the facility identified by the index number used in the displayed facility list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
