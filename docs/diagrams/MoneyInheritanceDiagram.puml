@@ -1,0 +1,23 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #FFFFFF
+skinparam ClassBorderColor #000000
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR_T4
+skinparam classBackgroundColor MODEL_COLOR
+
+title Inheritance for Money-related fields
+
+package Model {
+    Class Money
+    Class OutstandingFees
+    Class LessonRates
+    Class Fees
+}
+
+LessonRates .up.|> Money
+OutstandingFees .up.|> Money
+Fees *-- OutstandingFees
+
+
+@enduml

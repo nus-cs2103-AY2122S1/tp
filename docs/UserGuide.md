@@ -12,8 +12,7 @@ title: User Guide
 
 **Tuition Address Book (TAB)** is an all-in-one desktop application that helps private 1-to-1 home tutors like you keep track of the large number of students and your respective lesson information, and empower you to provide the best quality home tuition service.
 
-TAB is a Command Line Interface (CLI) application which allows you to interact with it with just text inputs. On top of that, TAB also 
-comes with a clean and aesthetic Graphical User Interface (GUI), allowing you to view your data easily.
+TAB is a Command Line Interface (CLI) application which allows you to interact with it with just text inputs. On top of that, TAB also comes with a clean and aesthetic Graphical User Interface (GUI), allowing you to view your data easily.
 
 With TAB, you can effortlessly manage your students' contact details faster than a typical mouse/GUI driven app.
 
@@ -21,13 +20,19 @@ With TAB, you can effortlessly manage your students' contact details faster than
 
 ## About This Guide
 
-This user guide is intended for any user of TAB. It provides installation instructions to help get you started with using TAB, and describes in detail the features available in TAB.
+This user guide aims to help new users become familiar with TAB. If this is your first time using TAB, we recommend reading this User Guide in order.
+
+It provides [installation instructions](#quick-start) to help get you started with using TAB, and describes in detail the [features](#features) available in TAB. 
+
+If there are any terms used in this user guide which you are unfamiliar with, their definitions may be found in the [Glossary](#glossary).
 
 **Navigation**
 
-In the [Table of Contents](#toc), each item listed is a link which you can click on to go directly to that section in the guide.
+In the [Table of Contents](#toc), each item listed is a link which you can click on to go directly to that section in the guide. At the end of every section, there will be a link which says [back to table of contents](#toc) which you can click on to return to the Table of Contents.
 
 **Conventions Used**
+
+As you read this user guide, you may also encounter these syntax and symbols. 
 
 Syntax | Meaning
 --------|------------------
@@ -1082,7 +1087,9 @@ Format: `undo`
 #### Redoing undone commands: `redo`
 
 Redo the previous command that has been undone. 
-The undone command can only be redone if `redo` was executed immediately after `undo` or after the `undo` command, only commands that do not modify any data are executed.<br>
+The undone command can only be redone if
+1. `redo` is executed immediately after `undo`
+2. Between the execution of `undo` and `redo`, only commands that do not modify any data were executed.<br>
 e.g. `view`, `day`, `calendar`, `tags` etc.
 
 Format: `redo`

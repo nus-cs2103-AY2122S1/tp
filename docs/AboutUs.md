@@ -20,7 +20,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 <img src="images/eeliana.png" width="200px">
 
-[[github](http://github.com/eeliana)]
+[[github](http://github.com/eeliana)] [[Portfolio](./team/eeliana.md)]
 
 * Role: Developer
 
@@ -28,7 +28,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 <img src="images/lingshanng.png" width="200px">
 
-[[github](http://github.com/lingshanng)]
+[[github](http://github.com/lingshanng)] [[Portfolio](team/lingshanng.md)]
 
 * Role: Developer
 * Responsibility: Code Quality
@@ -46,6 +46,6 @@ We are a team based in the [School of Computing, National University of Singapor
 
 <img src="images/angkoonhwee.png" width="200px">
 
-[[github](http://github.com/angkoonhwee)]
+[[github](http://github.com/angkoonhwee)] [[Portfolio](team/angkoonhwee.md)]
 
 * Role: Developer

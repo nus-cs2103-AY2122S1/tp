@@ -1,0 +1,15 @@
+@startuml
+
+start
+:User executes a command;
+
+if () then ([command is an UndoableCommand])
+    :redoStack is cleared;
+    :command is added to UndoStack;
+else ([else])
+
+endif
+
+stop
+
+@enduml

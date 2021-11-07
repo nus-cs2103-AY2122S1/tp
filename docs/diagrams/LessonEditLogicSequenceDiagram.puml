@@ -17,7 +17,7 @@ end box
 [-> LogicManager : ...
 activate LogicManager
 
-LogicManager -> LessonEditCommand : execute()
+LogicManager -> LessonEditCommand : executeUndoableCommand()
 activate LessonEditCommand
 
 LessonEditCommand -> Model : getPerson(personList, index)
