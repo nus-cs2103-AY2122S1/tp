@@ -198,8 +198,8 @@ pre {
  * Wrapper
  */
 .wrapper {
-//   max-width: calc(#{$content-width} + 200 - (#{$spacing-unit}));
-  max-width: calc(#{$content-width});
+//   max-width: calc(#{$content-width} - (#{$spacing-unit}));
+  max-width: calc(#{$content-width} + 50);
   margin-right: auto;
   margin-left: auto;
   padding-right: $spacing-unit / 2;
@@ -207,8 +207,8 @@ pre {
   @extend %clearfix;
 
   @media screen and (min-width: $on-large) {
-//     max-width: calc(#{$content-width} + 200 - (#{$spacing-unit} * 2));
-    max-width: calc(#{$content-width});
+//     max-width: calc(#{$content-width} - (#{$spacing-unit} * 2));
+    max-width: calc(#{$content-width} + 50);
     padding-right: $spacing-unit;
     padding-left: $spacing-unit;
   }
