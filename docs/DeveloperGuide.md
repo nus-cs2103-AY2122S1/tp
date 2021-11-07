@@ -3,7 +3,7 @@ layout: page
 title: Developer Guide
 ---
 ## Table of Contents
-- [Table of Contents](#table-of-contents)
+- [**Table of Contents**](#table-of-contents)
 - [**Acknowledgements**](#acknowledgements)
 - [**Introduction**](#introduction)
 - [**What this developer guide is for**](#what-this-developer-guide-is-for)
