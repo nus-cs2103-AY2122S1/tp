@@ -39,23 +39,25 @@ public class TagCommandParser implements Parser<TagCommand> {
 
         try {
             if (argMultimap.getValue(PREFIX_ADD_TAG).isPresent()) {
-                for (String str: argMultimap.getAllValues(PREFIX_ADD_TAG)) {
-                    checkIfSpecialTag(str);
-                    addTags.add(Tag.createTag(str));
-                }
+                checkAndAddNonSpecialTags(argMultimap, addTags, PREFIX_ADD_TAG);
             }
 
             if (argMultimap.getValue(PREFIX_DELETE_TAG).isPresent()) {
-                for (String str: argMultimap.getAllValues(PREFIX_DELETE_TAG)) {
-                    checkIfSpecialTag(str);
-                    deleteTags.add(Tag.createTag(str));
-                }
+                checkAndAddNonSpecialTags(argMultimap, deleteTags, PREFIX_DELETE_TAG);
             }
         } catch (IllegalArgumentException e) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
 
         return new TagCommand(index, addTags, deleteTags);
+    }
+
+    private void checkAndAddNonSpecialTags(ArgumentMultimap argMultimap, Set<Tag> addTags,
+                                        Prefix prefixAddTag) throws ParseException {
+        for (String str : argMultimap.getAllValues(prefixAddTag)) {
+            checkIfSpecialTag(str);
+            addTags.add(Tag.createTag(str));
+        }
     }
 
     private static void checkIfSpecialTag(String tagName) throws ParseException {

@@ -1,0 +1,20 @@
+@startuml
+skinparam arrowThickness 1.1skinparam arrowColor #000000skinparam classBackgroundColor MODEL_COLORskinparam classAttributeIconSize 0show fields
+interface    Predicate
+class    NameContainsQueriesPredicate implements Predicate
+class    PriorityPredicate implements Predicate
+class    TagMatchesKeywordPredicate implements Predicate
+class    RemarkContainsKeywordPredicate implements Predicate
+class    Person
+class    FindCommand
+FindCommand : Predicate<Person> predicate
+NameContainsQueriesPredicate ..> Person
+PriorityPredicate ..> Person
+TagMatchesKeywordPredicate ..> Person
+RemarkContainsKeywordPredicate ..> Person
+NameContainsQueriesPredicate : test(person: Person)
+PriorityPredicate : test(person: Person)
+TagMatchesKeywordPredicate : test(person: Person)
+RemarkContainsKeywordPredicate : test(person: Person)
+FindCommand --> "1" Predicate
+@enduml

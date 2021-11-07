@@ -1,0 +1,24 @@
+@startuml
+actor user
+participant LogicManager #lightblue
+user --> LogicManager : execute("find john")
+activate LogicManager
+LogicManager --> FastParser : parseCommand("find john")
+activate FastParser
+FastParser --> FindCommandParser : parse("john")
+activate FindCommandParser
+
+create FindCommand
+
+FindCommandParser --> FindCommand : FindCommand(new NameContainsQueriesPredicate(Arrays.asList(["john"])))
+activate FindCommand
+FindCommand --> FindCommandParser
+deactivate FindCommand
+
+FindCommandParser --> FastParser : FindCommand
+deactivate FindCommandParser
+FastParser --> LogicManager : command:FindCommand
+deactivate FastParser
+LogicManager --> FindCommand : execute(model)
+activate FindCommand
+@enduml
