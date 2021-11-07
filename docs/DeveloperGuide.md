@@ -576,10 +576,10 @@ testers are expected to do more *exploratory* testing.
 
 1. Prerequisites: The lesson must exist in contHACKS and could be access via a valid index.
 
-2. Test case: `editc 1 d/3`
+2. Test case: `editc 1 d/3`<br>
    Expected: The day of the first lesson shown in contHACKS will be changed to `Wednesday`
 
-3. Test case: `editc -1 d/3`
+3. Test case: `editc -1 d/3`<br>
    Expected: An error message will be shown in the result display, showing that the index provided is invalid. The words in the command box will turn red.
 
 ### Deleting a person
