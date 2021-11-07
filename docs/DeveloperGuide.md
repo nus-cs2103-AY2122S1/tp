@@ -166,17 +166,17 @@ There is a need to associate `LessonCode` with `ModuleCode` as we need to be abl
 </div>
 
 #### Implementation
-There are some distinction between a `Person` and `ModuleLesson`. A `Person` can have many `ModuleCode`, with each `ModuleCode` having multiple `LessonCode` while a `ModuleLesson` lesson can only have one `ModuleCode`, with that `ModuleCode` having one `LessonCode`.
+There are some distinctions between a `Person` and `ModuleLesson`. A `Person` can have many `ModuleCode`, with each `ModuleCode` having multiple `LessonCode` while a `ModuleLesson` lesson can only have one `ModuleCode`, with that `ModuleCode` having one `LessonCode`.
 
 ##### Implementation for adding `Person`
-Since a `Person` can have many `ModuleCode`, an input like this: `add ... m/CS2100 T19 B04 m/CS2103T T09` is valid. The following sequence diagram show how parsing the input `add ... m/CS2100 T19 B04 m/CS2103T T09` works successfully to return a `AddPersonCommand`:
+Since a `Person` can have many `ModuleCode`, an input like: `add ... m/CS2100 T19 B04 m/CS2103T T09` is valid. The following sequence diagram shows how parsing the input `add ... m/CS2100 T19 B04 m/CS2103T T09` works successfully to return a `AddPersonCommand`:
 
 ![Sequence diagram for parsing Person](images/ParseAddPersonSequenceDiagram.png)
 
 Notice that the `AddPersonCommandParser` uses the method `parseModuleCodes()` to get a collection of `ModuleCode`.
 
 ##### Implementation for adding `ModuleLesson`
-Since a `ModuleLesson` can only have one `ModuleCode` and one `LessonCode`, we need a way to enforce `lessonCodes.size() == 1` in `ModuleCode`. To achieve this, we only take the first `LessonCode` as the desired one. For example, the input `addc ... m/CS2100 T19 B09` would take `T19` as the `LessonCode` and ignore `B09`. On a similar note, to enforce having only one `ModuleCode`. We only consider the last occurrence of the parameter `m/`. For example, the input `addc ... m/CS2103T B04 m/CS2100 T19` would only consider `m/CS2100 T19` and ignore `m/CS2103T B04`. The following sequence diagram show how parsing the input `addc ... m/CS2103T B04 m/CS2100 T19 B09` works successfully to return a `AddModuleLessonCommand` despite the extra `ModuleCode` and `LessonCode`:
+Since a `ModuleLesson` can only have one `ModuleCode` and one `LessonCode`, we need a way to enforce `lessonCodes.size() == 1` in `ModuleCode`. To achieve this, we only take the first `LessonCode` as the desired one. For example, the input `addc ... m/CS2100 T19 B09` would take `T19` as the `LessonCode` and ignore `B09`. On a similar note, to enforce having only one `ModuleCode`, we only consider the last occurrence of the parameter `m/`. For example, the input `addc ... m/CS2103T B04 m/CS2100 T19` would only consider `m/CS2100 T19` and ignore `m/CS2103T B04`. The following sequence diagram shows how parsing the input `addc ... m/CS2103T B04 m/CS2100 T19 B09` works successfully to return a `AddModuleLessonCommand` despite the extra `ModuleCode` and `LessonCode`:
 
 ![Sequence diagram for parsing ModuleLesson](images/ParseAddModuleLessonSequenceDiagram.png)
 
