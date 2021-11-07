@@ -68,7 +68,7 @@ public class UniqueTutorialClassList implements Iterable<TutorialClass> {
     }
 
     /**
-     * Adds a tutorial group to the a tutorial class in the tutorial class list.
+     * Adds a tutorial group to the tutorial class in the tutorial class list.
      * The tutorial group must not already exist in the list.
      */
     public void add(TutorialGroup toAdd) {
