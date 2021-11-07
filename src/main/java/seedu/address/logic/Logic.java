@@ -38,7 +38,7 @@ public interface Logic {
     ObservableList<Module> getFilteredModuleList();
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' assistantbuddy file path.
      */
     Path getTeachingAssistantBuddyFilePath();
 

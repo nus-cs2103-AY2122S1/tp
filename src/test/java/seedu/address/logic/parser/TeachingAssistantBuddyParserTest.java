@@ -127,14 +127,14 @@ public class TeachingAssistantBuddyParserTest {
     @Test
     public void parseCommand_editStudent() throws Exception {
         ModuleName moduleName = new ModuleName(MODULE_NAME_0);
-        EditStudentCommand.EditStudentDescriptor editedPerson = new EditStudentCommand.EditStudentDescriptor();
-        editedPerson.setStudentId(new StudentId(VALID_STUDENT_ID_AMY));
-        editedPerson.setName(new Name(VALID_NAME_AMY));
-        editedPerson.setTeleHandle(new TeleHandle(VALID_TELE_HANDLE_AMY));
-        editedPerson.setEmail(new Email(VALID_EMAIL_AMY));
+        EditStudentCommand.EditStudentDescriptor editedStudent = new EditStudentCommand.EditStudentDescriptor();
+        editedStudent.setStudentId(new StudentId(VALID_STUDENT_ID_AMY));
+        editedStudent.setName(new Name(VALID_NAME_AMY));
+        editedStudent.setTeleHandle(new TeleHandle(VALID_TELE_HANDLE_AMY));
+        editedStudent.setEmail(new Email(VALID_EMAIL_AMY));
         EditStudentCommand command = (EditStudentCommand) parser.parseCommand(EditStudentCommand.COMMAND_WORD
                 + MODULE_NAME_DESC_0 + STUDENT_ID_DESC_AMY + NAME_DESC_AMY + TELE_HANDLE_DESC_AMY + EMAIL_DESC_AMY);
-        assertEquals(new EditStudentCommand(moduleName, editedPerson), command);
+        assertEquals(new EditStudentCommand(moduleName, editedStudent), command);
     }
 
     @Test

@@ -176,7 +176,7 @@ public class ModelManager implements Model {
         teachingAssistantBuddy.setModule(target, editedModule);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the filtered student list.

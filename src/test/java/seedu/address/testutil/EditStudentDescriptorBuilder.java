@@ -8,7 +8,7 @@ import seedu.address.model.module.student.StudentId;
 import seedu.address.model.module.student.TeleHandle;
 
 /**
- * A utility class to help with building EditPersonDescriptor objects.
+ * A utility class to help with building EditStudentDescriptor objects.
  */
 public class EditStudentDescriptorBuilder {
 
