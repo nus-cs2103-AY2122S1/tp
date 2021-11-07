@@ -23,7 +23,6 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   * User Guide:
-    * Documentation for the features `list` and `clear`
     * Modifying introduction to include target audience and make it user-centric
     * Add an overview of main features
     * Documentation for adding and removing tutorial group from tutorial class commands
