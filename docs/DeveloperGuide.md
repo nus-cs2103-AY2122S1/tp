@@ -107,7 +107,9 @@ At a high level, the `MainWindow` component interacts with 3 other main componen
 Note that the components under `MainWindow` have been omitted for simplicity and will be shown in greater detail in the next diagram.
 
 ![Structure of the UI Component](images/ui/UiClassDiagramOverview.png)
-<em align="center">Figure 5.1: Overview of Ui components</em>
+<div style="text-align: center">
+    <em>Figure 5.1: Overview of Ui components</em>
+</div>
 
 1. Firstly, `MainWindow` interacts with the `Logic` component to determine which data to display to the user.
 2. Secondly, `MainWindow` conducts file operations on the Ui through a `FileManager`.
@@ -124,7 +126,9 @@ Now taking a closer look at the `MainWindow` component, it consists of a number 
 the commonalities between classes that represent parts of the visible GUI. The following is a summary of the parts of the `MainWindow`.
 
 ![Structure of the UI Component](images/ui/UiClassDiagramMainComponents.png)
-<em align="center">Figure 5.2: MainWindow Ui components</em>
+<div style="text-align: center">
+    <em>Figure 5.2: MainWindow Ui components</em>
+</div>
 
 Note that the `UI` component uses the JavaFx UI framework.
 
