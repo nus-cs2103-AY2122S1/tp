@@ -111,9 +111,12 @@ Notes:
 
 #### Sample Usage:
 * Up Arrow
-  * Shows the previous command called in the command box, or the earliest command called if there are no earlier commands.
+  * Shows the previous command called in the command box.
+  * If there are no previous commands, an empty command box is shown.
+  * If the earliest command is shown, earliest command will continue to be shown.
 * Down Arrow
-  * Shows the next command called in the command box, or an empty command box if there are no later commands.
+  * Shows the next command called in the command box.
+  * If there are no later commands, an empty command box is shown.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -190,7 +193,6 @@ Edits an existing contact in CONNECTIONS.
 Notes:
 * Edits the contact at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. The index **must be a positive integer** 1, 2, 3, …​
 * There must be at least one of the optional fields provided alongside the edit command.
-
 * Existing values will be updated to the input values.
 * The existing set of tags that belongs to a contact will be updated to the new set of tags inputted. i.e. The edits made to a set of tags are not cumulative.
 * You can remove all tags of a particular contact using `edit INDEX t/` (without providing anything after `t/`).
@@ -198,9 +200,9 @@ Notes:
 
 **Sample Usage:**
 * `edit 1 p/91234567 e/johndoe@example.com`
-  * Edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com`, respectively.
+  * Edits the phone number and email address of the 1st contact in the displayed contact list to be `91234567` and `johndoe@example.com`, respectively.
 * `edit 2 n/Betsy Crower t/`
-  * Edits the name of the 2nd contact to be `Betsy Crower` and clears all existing tags.
+  * Edits the name of the 2nd contact in the displayed contact list to be `Betsy Crower` and clears all existing tags.
 
 ### Adding Tags : `tag`
 
@@ -235,7 +237,7 @@ Notes:
 * `untag 2 t/friend t/NUS`
     * Removes the tags `friend` and `NUS` from the 2nd contact.
 
-### Locating contacts by name and tag(s): `find`
+### Locating contacts by name(s) and tag(s): `find`
 
 Finds all contacts who match **ALL** name and tag keywords provided.
 
@@ -265,7 +267,7 @@ Notes:
   * returns `Shin`, who is tagged with `FRIENDS`.
     ![result for `find c/ t/FRIENDS`](images/findcFRIENDSResult.png)
 
-### Locating contacts by name or tag(s): `findAny`
+### Locating contacts by name(s) or tag(s): `findAny`
 
 Finds all contacts who match **ANY** name and tag keywords provided.
 
@@ -298,6 +300,8 @@ Notes:
 
 ### Pinning a contact : `pin`
 
+Pins a contact to the top of the contact list. 
+
 #### Format: 
 * `pin INDEX`
   
@@ -313,6 +317,8 @@ Notes:
   * pins the 1st contact in the results of the `find` command.
 
 ### Unpinning a contact : `unpin`
+
+Unpins a contact.
 
 #### Format:
 * `unpin INDEX`
@@ -361,9 +367,9 @@ Notes:
 
 **Sample Usage:**
 * `list` followed by `deletem 2 - 3`
-  * deletes the 2nd and 3rd contact in the CONNECTIONS.
+  * deletes the 2nd and 3rd contacts in the CONNECTIONS.
 * `find n/Betsy` followed by `deletem 1 - 5`
-  * deletes the 1st to 5th contact in the results of the `find` command.
+  * deletes the 1st to 5th contacts in the results of the `find` command.
 
 ### Exporting a mailing list of contacts : `mailingList`
 
@@ -424,7 +430,7 @@ If your changes to the data file makes its format invalid, CONNECTIONS will disc
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous CONNECTIONS home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -435,7 +441,7 @@ Action | Summary | Format, Examples
 **Help** | Displays help information | `help [COMMAND]`<br> e.g., `help`, `help add`, `help more`
 **Add** | Adds a contact | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [b/BIRTHDAY] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 b/23062001 t/friend t/colleague`
 **List** | Lists all contacts | `list`
-**Edit** | Edits a contact | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com b/30012000`
+**Edit** | Edits a contact | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com b/30012000` <br> At least one argument must be present
 **Tag** | Tags a contact | `tag INDEX t/TAG [t/MORE_TAGS]…​`<br> e.g., `tag 2 t/friend t/NUS`
 **Untag** | Untags a contact | `untag INDEX t/TAG [t/MORE_TAGS]…​`<br> e.g., `untag 2 t/colleague`
 **Find** | Locates contacts by name and tags (Results fulfill all search terms)| `find [c/] [n/NAME]... [t/TAG]...` <br> e.g., `find n/James t/friends` <br> At least one argument must be present
