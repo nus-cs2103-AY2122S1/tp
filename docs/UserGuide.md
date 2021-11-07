@@ -12,26 +12,26 @@ classes. If you are familiar with Unix commands, this is definitely for you!
 
 - [Quick Start](#quick-start)
 - [Features](#features)
-    1. [General Features](#general-features)
+  1. [General Features](#general-features)
         1. [View Help: `help`](#view-help)
         2. [View Dashboard `dashboard`](#view-dashboard)
         3. [Exit: `exit`](#exit)
-    2. [Data Features](#data-features)
-        1. [Fill Sample Data: `fill`](#fill-sample-data)
-        2. [Purge All Data: `purge`](#purge-all-data)
-        3. [Download Data: `download`](#download-data)
-        4. [Upload Data: `upload`](#upload-data)
-    3. [Student Features](#student-features)
-        1. [Add Student: `add`](#add-student)
-        2. [Edit Student Details: `edit`](#edit-student)
-        3. [Delete Student: `delete`](#delete-student)
-        4. [Filter Students: `filter`](#filter-student)
-        5. [Show Student Details: `show`](#show-student)
-        6. [List All Students: `list`](#list-students)
-    4. [Lab Features](#lab-features)
-        1. [Add Lab: `addlab`](#add-lab)
-        2. [Edit Lab: `editlab`](#edit-lab)
-        3. [Delete Lab: `dellab`](#delete-lab)
+  2. [Data Features](#data-features)
+      1. [Fill Sample Data: `fill`](#fill-sample-data)
+      2. [Purge All Data: `purge`](#purge-all-data)
+      3. [Download Data: `download`](#download-data)
+      4. [Upload Data: `upload`](#upload-data)
+  3. [Student Features](#student-features)
+      1. [Add Student: `add`](#add-student)
+      2. [Edit Student Details: `edit`](#edit-student)
+      3. [Delete Student: `delete`](#delete-student)
+      4. [Filter Students: `filter`](#filter-student)
+      5. [Show Student Details: `show`](#show-student)
+      6. [List All Students: `list`](#list-students)
+  4. [Lab Features](#lab-features)
+      1. [Add Lab: `addlab`](#add-lab)
+      2. [Edit Lab: `editlab`](#edit-lab)
+      3. [Delete Lab: `dellab`](#delete-lab)
 - [Command Summary](#command-summary)
 
 ## <a name="quick-start"></a>Quick Start
@@ -52,8 +52,8 @@ classes. If you are familiar with Unix commands, this is definitely for you!
     * `delete 1`: Deletes the student at index 1 of the displayed list (1-indexed)
     * `filter -sid A1234567X`: Filters the list of students to display the student(s) whose student ID contains `
       A1234567X' (case-insensitive)
-6. Refer to the [Features](#features) below for details on all available commands. Take note that command parameters
-   wrapped with `[` `]` listed in this guide signifies that the parameter is optional.
+6. Refer to the [Features](#features) below for details on all available commands.
+Take note that command parameters wrapped with `[` `]` listed in this guide signifies that the parameter is optional.
 
 ## <a name="features"></a>Features
 
@@ -160,7 +160,9 @@ Adds a student to ProgrammerError with their student ID and class ID. Both the s
 
 Format: `add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`
 
-<div markdown="block" class="alert alert-success">💡 **Example:**
+<div markdown="block" class="alert alert-success">
+
+**Example:**
 
 - `add -n Sherwin -sid A1234567X -cid B01 -email e0542421@u.nus.edu`: Adds the student called Sherwin with student ID
   A1234567X and class ID B01 and email e0542421@u.nus.edu to ProgrammerError.
@@ -169,16 +171,21 @@ Format: `add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`
 
 ### <a name="edit-student"></a>3.2 Edit Student's Details or Grade : `edit`
 
-Edits the details or grade of an existing student's in the PE. Both the student ID and class ID must be unique.
-1-indexing is used here as according to the displayed list. Any combination of the optional arguments can be provided.
-Take note that the parameters `-ln` and `-s` needs to be specified together.
+Edits the details or grade of an existing student's in the PE.
+* Both the student ID and class ID must be unique.
+* 1-indexing is used here as according to the displayed list. 
+* Any combination of the optional arguments can be provided.
+* At least one of the optional argument must be provided.
+* Take note that the parameters `-ln` and `-s` needs to be specified together.
 
 Format:`edit <INDEX_IN_LIST> [-n <NAME>] [-sid <STUDENT_ID>] [-cid <CLASS_ID>] [-email <EMAIL>] [-ln <LAB_NUMBER> -s <ACTUAL_SCORE>]`
 
 - Updates the student with at the given `INDEX_IN_LIST' with the arguments provided.
 - Existing values will be updated to the input flag arguments.
 
-<div markdown="block" class="alert alert-success">💡 **Examples:**
+<div markdown="block" class="alert alert-success">
+
+**Examples:**
 
 - `edit 1 -n Elon Musk` Updates the name of the student at index 1 (1-indexed) to 'Elon Musk'.
 - `edit 1 -ln 4 -s 29` Updates the lab 4 result of the student at index 1 (1-indexed) to 29.5.
@@ -189,11 +196,13 @@ Format:`edit <INDEX_IN_LIST> [-n <NAME>] [-sid <STUDENT_ID>] [-cid <CLASS_ID>] [
 
 Deletes the specified student from the PE.
 
-Format: `delete <STUDENT_INDEX>`
+Format: `delete <INDEX_IN_LIST>`
 
-- Deletes the student at `<STUDENT_INDEX>`. (1-indexed)
+- Deletes the student at `<INDEX_IN_LIST>`. (1-indexed)
 
-<div markdown="block" class="alert alert-success">💡 **Example:**
+<div markdown="block" class="alert alert-success">
+
+**Example:**
 
 - `delete 23` Deletes the data of the student at index 23
 
@@ -201,10 +210,12 @@ Format: `delete <STUDENT_INDEX>`
 
 ### <a name="filter-student"></a>3.4 Filter Students: `filter`
 
-Filter the students in ProgrammerError based on the specified arguments provided (name, student ID, class ID and email).
-Of the four arguments, at least one has to be provided. Arguments can be provided in any order and are
-**case-insensitive**. ProgrammerError will display the filtered list of students whose details matches all the specified
-arguments. The arguments are matched to the corresponding details as long as the details of the students contains the
+Filter the students in ProgrammerError based on the specified arguments provided (name, student ID, class ID and email). 
+* Any combination of the optional arguments can be provided.
+* At least one of the optional argument must be provided.
+* Arguments can be provided in any order and are **case-insensitive**. 
+* ProgrammerError will display the filtered list of students whose details matches all the specified arguments. 
+* The arguments are matched to the corresponding details as long as the details of the students contains the
 sequence of characters provided in the argument string.
 
 Format: `filter [-n <NAME>] [-sid <STUDENT_ID>] [-cid <CLASS_ID>] [-email <EMAIL>]`
@@ -212,7 +223,9 @@ Format: `filter [-n <NAME>] [-sid <STUDENT_ID>] [-cid <CLASS_ID>] [-email <EMAIL
 ![filter](images/commands/FilterCommand/filter.png)
 
 
-<div markdown="block" class="alert alert-success">💡 **Examples:**
+<div markdown="block" class="alert alert-success">
+
+**Examples:**
 
 - `filter -sid A1234567X` Lists all students whose student ID contains `A1234567X`.
 - `filter -n abc` Lists all students whose name contains `abc`.
@@ -233,9 +246,11 @@ Format: `show <INDEX_IN_LIST>`
 
 ![show](images/commands/ShowCommand/show.png)
 
-<div markdown="block" class="alert alert-success">💡 **Example:**
+<div markdown="block" class="alert alert-success">
 
-- `show 1`: Shows the student particular and lab results of the student at index 1.
+**Example:**
+
+- `show 1`: Shows the student particular and lab results of the student at index 1 as displayed in the list.
 
 </div>
 
@@ -246,7 +261,7 @@ Displays a list of all students in the left panel. This list is ordered first by
 ## <a name="lab-features"></a>4. Lab Features
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Note:**
-As the following commands are mass operations, they might take slighty longer than usual.
+As the following commands are mass operations, they might take slightly longer than usual.
 </div>
 
 ### <a name="add-lab"></a>4.1 Add Lab: `addlab`
@@ -256,7 +271,9 @@ Adds a lab to every student with the lab number and total score.
 Format: `addlab -ln <LAB_NUM> -ts <TOTAL_SCORE>`
 
 
-<div markdown="block" class="alert alert-success">💡 **Examples:**
+<div markdown="block" class="alert alert-success">
+
+**Examples:**
 
 - `addlab -ln 1 -ts 20`: Adds a lab with number 1 and total score 20 for all students.
 - `addlab -ln 2 -ts 30`: Adds a lab with number 2 and total score 30 for all students.
@@ -266,14 +283,19 @@ Format: `addlab -ln <LAB_NUM> -ts <TOTAL_SCORE>`
 ### <a name="edit-lab"></a>4.2 Edit Lab: `editlab`
 
 Edits the details of an existing lab for every student.
+* Any combination of the optional arguments can be provided.
+* At least one of the optional argument must be provided.
 
-Format: `editlab -ln <LAB_NUM> -nln <NEW_LAB_NUM> -ts <NEW_LAB_SCORE>`
+Format: `editlab -ln <LAB_NUM> [-nln <NEW_LAB_NUM>] [-ts <NEW_LAB_SCORE>]`
 
 
-<div markdown="block" class="alert alert-success">💡 **Examples:**
+<div markdown="block" class="alert alert-success">
+
+**Examples:**
 
 - `editlab -ln 1 -ts 30`: Changes the total score of lab 1 to 30 for all students.
 - `editlab -ln 1 -nln 2`: Changes the number of an existing lab from 1 to 2 for all students.
+- `editlab -ln 1 -nln 2 -ts 30`: Changes the number of an existing lab from 1 to 2 and the total score of the same lab to 30 for all students.
 
 </div>
 
@@ -283,7 +305,9 @@ Deletes an existing lab from every student in ProgrammerError.
 
 Format: `dellab -ln <LAB_NUM>`
 
-<div markdown="block" class="alert alert-success">💡 **Example:**
+<div markdown="block" class="alert alert-success">
+
+**Example:**
 
 - `dellab -ln 1`: Deletes lab 1 for all students if it exists.
 
@@ -299,12 +323,11 @@ Command | Format & Examples
 **Dashboard** | `dashboard`
 **Delete Lab** | `dellab -ln <LAB_NUM>`
 **Download** | `download`
-**
-Edit** | Format 1:<br/> `edit <INDEX_IN_LIST> -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>` <br/> Format 2:<br/>`edit <INDEX_IN_LIST> -ln <LAB_NUMBER> -s <ACTUAL_SCORE>`
-**Edit Lab** | `editlab -ln <LAB_NUM> -nln <NEW_LAB_NUM> -ts <NEW_LAB_SCORE>`
+**Edit** | Format 1:<br/> `edit <INDEX_IN_LIST> [-n <NAME>] [-sid <STUDENT_ID>] [-cid <CLASS_ID>] [-email <EMAIL>] [-ln <LAB_NUMBER> -s <ACTUAL_SCORE>]`
+**Edit Lab** | `editlab -ln <LAB_NUM> [-nln <NEW_LAB_NUM>] [-ts <NEW_LAB_SCORE>]`
 **Exit** | `exit`
 **Fill** | `fill`
-**Filter** | `filter -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`
+**Filter** | `filter [-n <NAME>] [-sid <STUDENT_ID>] [-cid <CLASS_ID>] [-email <EMAIL>]`
 **Help** | `help`
 **Purge** | `purge`
 **Show** | `show <INDEX_IN_LIST>`
