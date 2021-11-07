@@ -129,7 +129,7 @@ The `UI` component,
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<img src="images/LogicClassDiagram.png" width="550"/>
+![Logic Class Diagram](images/LogicClassDiagram.png)
 
 How the `Logic` component works:
 
@@ -143,14 +143,14 @@ How the `Logic` component works:
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API
 call.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/commands/DeleteCommand/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete 1` Command](images/commands/DeleteCommand/DeleteCommandSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-<img src="images/ParserClasses.png" width="600"/>
+![Parser Class](images/ParserClasses.png)
 
 How the parsing works:
 
@@ -338,8 +338,13 @@ in the `resultDisplay`, informing the user that the add operation is valid.
 
 The following sequence diagram shows how the add command works: 
 
+Note: `CommandText` in the sequence diagram will represent "add -n erwin -sid A0212121H -cid B18 -email e0528551@u.nus.edu"
+![AddCommandActivityDiagram](images/commands/AddCommand/AddCommandSequenceDiagram.png)
 
-The following activity diagram summarizes what happens when a CS2100 TA executes a new command: 
+
+The following activity diagram summarizes what happens when a CS2100 TA executes a new command:
+![AddCommandActivityDiagram](images/commands/AddCommand/AddCommandActivityDiagram.png)
+
 
 
 #### Design considerations: 
