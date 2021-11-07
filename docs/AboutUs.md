@@ -14,7 +14,7 @@ You can reach us at our [github issues](https://github.com/AY2122S1-CS2103T-T10-
 <img src="images/moretriangles.png" width="200px">
 
 [[github](https://github.com/moreTriangles)]
-[[portfolio](https://github.com/AY2122S1-CS2103T-T10-1/tp/blob/master/docs/team/moretriangles.md)]
+[[portfolio](https://ay2122s1-cs2103t-t10-1.github.io/tp/team/moretriangles.html)]
 
 * Role: Team Lead
 * Responsibilities: Data & Storage
@@ -24,7 +24,7 @@ You can reach us at our [github issues](https://github.com/AY2122S1-CS2103T-T10-
 <img src="images/aishh12.png" width="200px">
 
 [[github](http://github.com/aishh12)]
-[[portfolio](https://github.com/AY2122S1-CS2103T-T10-1/tp/blob/master/docs/team/aishh12.md)]
+[[portfolio](https://ay2122s1-cs2103t-t10-1.github.io/tp/team/aishh12.html)]
 
 
 * Role: Code Quality
@@ -35,7 +35,7 @@ You can reach us at our [github issues](https://github.com/AY2122S1-CS2103T-T10-
 <img src="images/crypto-code.png" width="200px">
 
 [[github](http://github.com/crypto-code)]
-[[portfolio](https://github.com/AY2122S1-CS2103T-T10-1/tp/blob/master/docs/team/crypto-code.md)]
+[[portfolio](https://ay2122s1-cs2103t-t10-1.github.io/tp/team/crypto-code.html)]
 
 * Role: Integration
 * Responsibilities: AI Model and Commands
@@ -45,7 +45,7 @@ You can reach us at our [github issues](https://github.com/AY2122S1-CS2103T-T10-
 <img src="images/cheongyeeming.png" width="200px">
 
 [[github](http://github.com/CheongYeeMing)]
-[[portfolio](https://github.com/AY2122S1-CS2103T-T10-1/tp/blob/master/docs/team/cheongyeeming.md)]
+[[portfolio](https://ay2122s1-cs2103t-t10-1.github.io/tp/team/cheongyeeming.html)]
 
 
 * Role: Testing
@@ -57,7 +57,7 @@ You can reach us at our [github issues](https://github.com/AY2122S1-CS2103T-T10-
 <img src="images/jai2501.png" width="200px">
 
 [[github](http://github.com/jai2501)]
-[[portfolio](https://github.com/AY2122S1-CS2103T-T10-1/tp/blob/master/docs/team/jai2501.md)]
+[[portfolio](https://ay2122s1-cs2103t-t10-1.github.io/tp/team/jai2501.html)]
 
 * Role: Deliverables and Deadlines
 * Responsibilities: UI
