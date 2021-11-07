@@ -5,7 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.commons.core.Messages.MESSAGE_ITEMS_LISTED_OVERVIEW;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.FindCommand.MESSAGE_INVENTORY_NOT_DISPLAYED;
 import static seedu.address.model.display.DisplayMode.DISPLAY_INVENTORY;
 import static seedu.address.testutil.TypicalItems.APPLE_PIE;
 import static seedu.address.testutil.TypicalItems.BANANA_MUFFIN;
@@ -22,6 +24,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.TransactionList;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.display.DisplayMode;
 import seedu.address.model.item.IdContainsNumberPredicate;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.NameContainsKeywordsPredicate;
@@ -125,6 +128,15 @@ public class FindCommandTest {
 
         expectedModel.updateFilteredItemList(DISPLAY_INVENTORY, pieIdPredicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_notInDisplayInventory_itemFound() {
+        FindCommand findCommand = new FindCommand(List.of(pieIdPredicate, muffinNamePredicate));
+        model.updateFilteredDisplayList(DisplayMode.DISPLAY_TRANSACTION_LIST, Model.PREDICATE_SHOW_ALL_ITEMS);
+        String expectedMessage = MESSAGE_INVENTORY_NOT_DISPLAYED;
+        expectedModel.updateFilteredDisplayList(DisplayMode.DISPLAY_TRANSACTION_LIST, Model.PREDICATE_SHOW_ALL_ITEMS);
+        assertCommandFailure(findCommand, model, expectedModel, expectedMessage);
     }
 
 

@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.StartOrderCommand.MESSAGE_HAS_UNCLOSED_ORDER;
 
 import java.util.Optional;
 
@@ -20,6 +22,8 @@ public class StartOrderCommandTest {
         command.execute(modelStub);
 
         assertTrue(modelStub.hasUnclosedOrder());
+
+        assertCommandSuccess(command, modelStub, MESSAGE_HAS_UNCLOSED_ORDER, modelStub);
     }
 
 

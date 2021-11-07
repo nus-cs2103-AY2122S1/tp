@@ -2,13 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_BAGEL;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_DONUT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_DONUT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DONUT;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showItemAtIndex;
+import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 import static seedu.address.model.display.DisplayMode.DISPLAY_OPEN_ORDER;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
@@ -154,6 +148,16 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_editCount_failure() {
+        Item firstItem = model.getInventory().getItemList().get(INDEX_FIRST_ITEM.getZeroBased());
+        ItemDescriptor descriptor = new ItemDescriptorBuilder()
+                .withCount(firstItem.getCount() + 1).build();
+        EditCommand editCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_ITEM, descriptor);
+
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_COUNT_CNT_BE_EDITED);
     }
 
     /**

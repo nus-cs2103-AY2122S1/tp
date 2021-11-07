@@ -1,0 +1,45 @@
+{
+  "items" : [ {
+    "name" : "Oatmeal Cookie",
+    "id" : 140121,
+    "count" : 8,
+    "costPrice" : 1.0,
+    "salesPrice" : 3.0,
+    "tagged" : [ "baked" ]
+  }, {
+    "name" : "Banana Muffin",
+    "id" : 201928,
+    "count" : 5,
+    "costPrice" : 2.0,
+    "salesPrice" : 4.0,
+    "tagged" : [ "baked" ]
+  }, {
+    "name" : "Pecan Pie",
+    "id" : 178522,
+    "count" : 7,
+    "costPrice" : 3.0,
+    "salesPrice" : 5.0,
+    "tagged" : [ "baked" ]
+  }, {
+    "name" : "Oreo Cheesecake",
+    "id" : 109128,
+    "count" : 1,
+    "costPrice" : 4.0,
+    "salesPrice" : 5.0,
+    "tagged" : [ "desert" ]
+  }, {
+    "name" : "Strawberry Shortcake",
+    "id" : 199127,
+    "count" : 2,
+    "costPrice" : 2.1,
+    "salesPrice" : 3.2,
+    "tagged" : [ "desert" ]
+  }, {
+    "name" : "Cold Brew Coffee",
+    "id" : 121858,
+    "count" : 5,
+    "costPrice" : 3.2,
+    "salesPrice" : 4.4,
+    "tagged" : [ "beverage" ]
+  } ]
+}

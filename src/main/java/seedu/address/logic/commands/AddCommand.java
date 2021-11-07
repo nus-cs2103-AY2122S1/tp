@@ -116,22 +116,6 @@ public class AddCommand extends Command {
                 throw new CommandException(MESSAGE_NAME_NOT_FOUND);
             }
         }
-        if (toAddDescriptor.getName().equals(Optional.empty())) {
-            toAddDescriptor.setName(new Name("sample"));
-            nameEmpty = true;
-            if (!model.hasId(toAddDescriptor.buildItem())) {
-                throw new CommandException(MESSAGE_ID_NOT_FOUND);
-            }
-            toAddDescriptor.setName(null);
-        }
-        if (toAddDescriptor.getId().equals(Optional.empty())) {
-            toAddDescriptor.setId(1);
-            idEmpty = true;
-            if (!model.hasName(toAddDescriptor.buildItem())) {
-                throw new CommandException(MESSAGE_NAME_NOT_FOUND);
-            }
-            toAddDescriptor.setId(null);
-        }
 
         Item target = matchingItems.get(0);
         int amount = toAddDescriptor.getCount().get();
