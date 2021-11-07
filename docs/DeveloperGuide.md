@@ -1362,7 +1362,7 @@ testers are expected to do more *exploratory* testing.
    4. Other incorrect delete commands to try: `deleteS`, `deleteC x`, `delete 1` (where x is larger than the customer 
       list size) <br>
       Expected: Nobody is deleted. Error details shown in the results display. Entering the first 2 commands will 
-      produce the same error message as test case 1.3 while entering `delete 1` will produce the result message 
+      produce the same error message as test case 1.3 while entering `delete 1` will produce the error message 
       `Unknown command`
       
 2. Deleting a customer/employee/supplier/reservation while customer list is filtered.
