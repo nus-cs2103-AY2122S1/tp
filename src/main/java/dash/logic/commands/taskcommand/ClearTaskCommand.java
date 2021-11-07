@@ -11,7 +11,7 @@ import dash.model.task.TaskList;
 public class ClearTaskCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
-    public static final String MESSAGE_SUCCESS = "Task List has been cleared!";
+    public static final String MESSAGE_SUCCESS = "Task list has been cleared!";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {

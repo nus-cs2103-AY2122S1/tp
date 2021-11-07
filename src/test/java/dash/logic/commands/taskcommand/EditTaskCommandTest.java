@@ -31,7 +31,7 @@ public class EditTaskCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Task editedTask = new TaskBuilder().build();
+        Task editedTask = new TaskBuilder().withTaskDate("07/11/2021, 1900").build();
         EditTaskCommand.EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder(editedTask).build();
         EditTaskCommand editTaskCommand = new EditTaskCommand(TypicalIndexes.INDEX_FIRST, descriptor);
 

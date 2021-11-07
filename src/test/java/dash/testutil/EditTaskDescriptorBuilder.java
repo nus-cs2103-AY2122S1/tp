@@ -27,7 +27,10 @@ public class EditTaskDescriptorBuilder {
     public EditTaskDescriptorBuilder(Task task) {
         descriptor = new EditTaskCommand.EditTaskDescriptor();
         descriptor.setTaskDescription(task.getTaskDescription());
+        descriptor.setCompletionStatus(task.getCompletionStatus());
         descriptor.setTags(task.getTags());
+        descriptor.setPeople(task.getPeople());
+        descriptor.setTaskDate(task.getTaskDate());
     }
 
     /**

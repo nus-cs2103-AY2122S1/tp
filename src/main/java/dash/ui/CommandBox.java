@@ -23,15 +23,18 @@ public class CommandBox extends UiPart<Region> {
     private final CommandExecutor commandExecutor;
 
     /**
-     * A list of valid user inputs ordered from most recent to oldest.
+     * A list of Strings to set in commandTextField.
+     * The list is padded with an empty String at index 0.
+     * For the rest of the list, the String at index n is the nth most recent user input.
+     * e.g. String at index 3 is the 3rd most recent user input.
      */
-    private final ArrayList<String> userInputList;
+    private final ArrayList<String> paddedUserInputList;
 
     /**
      * The position of the current text set in the command box in the user input list.
      * When this is negative, then no input is set.
      */
-    private int currentUserInputIndex = -1;
+    private int currentUserInputIndex = 0;
 
     @FXML
     private TextField commandTextField;
@@ -43,7 +46,8 @@ public class CommandBox extends UiPart<Region> {
     public CommandBox(CommandExecutor commandExecutor, ArrayList<String> userInputList) {
         super(FXML);
         this.commandExecutor = commandExecutor;
-        this.userInputList = userInputList;
+        userInputList.add(0, "");
+        this.paddedUserInputList = userInputList;
 
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
@@ -56,6 +60,8 @@ public class CommandBox extends UiPart<Region> {
      */
     @FXML
     private void handleCommandEntered() {
+        currentUserInputIndex = 0;
+
         String commandText = commandTextField.getText();
         if (commandText.equals("")) {
             return;
@@ -64,7 +70,6 @@ public class CommandBox extends UiPart<Region> {
         try {
             commandExecutor.execute(commandText);
             commandTextField.setText("");
-            currentUserInputIndex = -1;
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
         }
@@ -75,19 +80,22 @@ public class CommandBox extends UiPart<Region> {
      */
     @FXML
     public void handleUpOrDownArrowKeyPressed(KeyCode keyCode) {
-        if (keyCode == KeyCode.DOWN && currentUserInputIndex >= 0) {
+        if (keyCode == KeyCode.DOWN) {
             if (currentUserInputIndex == 0) {
-                currentUserInputIndex--;
-                commandTextField.setText("");
                 return;
             }
             currentUserInputIndex--;
-            commandTextField.setText(userInputList.get(currentUserInputIndex));
+            commandTextField.setText(paddedUserInputList.get(currentUserInputIndex));
             commandTextField.end();
         }
-        if (keyCode == KeyCode.UP && currentUserInputIndex < userInputList.size() - 1) {
+
+        if (keyCode == KeyCode.UP) {
+            if (currentUserInputIndex == paddedUserInputList.size() - 1) {
+                commandTextField.end();
+                return;
+            }
             currentUserInputIndex++;
-            commandTextField.setText(userInputList.get(currentUserInputIndex));
+            commandTextField.setText(paddedUserInputList.get(currentUserInputIndex));
             commandTextField.end();
         }
     }

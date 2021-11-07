@@ -104,11 +104,9 @@ public class TaskList implements Iterable<Task> {
             if (t1.getCompletionStatus().get()) {
                 return -1;
             }
-
             if (t2.getCompletionStatus().get()) {
                 return 1;
             }
-
             if (!t1.getTaskDate().hasDate()) {
                 return -1;
             }

@@ -65,7 +65,7 @@ public class TaskBuilder {
      * Sets the {@code TaskDate} of the {@code Task} that we are building.
      */
     public TaskBuilder withTaskDate(String taskDate) {
-        this.taskDate = new TaskDate(taskDate);
+        this.taskDate = new TaskDate(taskDate, false);
         return this;
     }
 

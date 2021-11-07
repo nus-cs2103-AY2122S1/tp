@@ -22,11 +22,9 @@ public class TagPersonCommand extends Command {
 
     public static final String COMMAND_WORD = "tag";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": tags the person identified "
-            + "by the index number used in the displayed person list. "
-            + "Existing tags will not be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+    public static final String MESSAGE_USAGE = "Format: " + COMMAND_WORD
+            + " INDEX "
+            + " " + PREFIX_TAG + "TAG...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_TAG + "friend "
             + PREFIX_TAG + "roommate ";
@@ -81,5 +79,23 @@ public class TagPersonCommand extends Command {
 
         return new Person(personToEdit.getName(), personToEdit.getPhone(),
                 personToEdit.getEmail(), personToEdit.getAddress(), Collections.unmodifiableSet(updatedTags));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof TagPersonCommand)) {
+            return false;
+        }
+
+        // state check
+        TagPersonCommand e = (TagPersonCommand) other;
+        return index.equals(e.index)
+                && editPersonDescriptor.equals(e.editPersonDescriptor);
     }
 }

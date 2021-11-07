@@ -210,7 +210,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Implemented\] Tabs System (Aaron)
+### \[Implemented\] Tabs System
 
 #### Implementation
 The tab system is implemented using the JavaFX `javafx.scene.control.Tab` class. It is
@@ -276,7 +276,7 @@ user choice.
     * Cons: Not very scalable in case more tabs are needed in the future, hard to implement multiple segments
             within a tab.
 
-### \[Implemented\] Assigning People to Tasks (Zen)
+### \[Implemented\] Assigning People to Tasks
 
 We integrated the existing address book system of storing contacts with our new task list system by adding the ability
 to assign people from your address book to tasks in your task list.   
@@ -319,7 +319,7 @@ the possibility of multiple people with the same first name, etc. The side panel
 this problem
 
 
-### \[Implemented\] Adding Date/Time to Tasks (Myat)
+### \[Implemented\] Adding Date/Time to Tasks
 
 To add onto our new task list system, just like how the address book allows storing of additional information like
 phone number and email, the user can now add in a task's date with an optional time information. The addition of
@@ -336,8 +336,12 @@ The `TaskDate.java` class is created to represent a date/time object of a task, 
 upon creating a `Task` through an `add` command. Inside `TaskDate.java` class, date and time are represented by Java 
 class objects `LocalDate` and `LocalTime`. As the user can choose to either omit both date and time or have time as optional
 information, both of these objects are wrapped in Java `Optional` objects as `Optional<LocalDate>` and `Optional<LocalTime>`.
-This makes handling of a `TaskDate` object safer as the date and time objects do not exist in a `Task` which the user adds
-in without stating date/time information. 
+This makes handling of a `TaskDate` object safer as the date and time objects do not exist in a `TaskDate` of a `Task` which
+the user adds in without stating date/time information. 
+
+When the user states the time of a task only, this will be detected in the constructor of `TaskDate` and the current date will
+be stored instead through the use of `LocalDate#now`. When the user states the date of a task only, this will also be detected 
+in the constructor and time will be left as empty.
 
 The user is also required to follow a specific date and time format which the validity is checked by `DateTask#isValidTaskDate`.
 Java `LocalDate#parse` and `LocalTime#parse` are used to help verify validity of the format keyed in by the user.
@@ -348,8 +352,11 @@ Example usage of `add` command to add date/time is as follows:
 - `add d/Event dt/25/10/2021, 10:00 AM` - Adds a task "Event" that starts at the given date and time.
 
 A sequence diagram is provided below that shows how TaskDate class works when the command "add d/Homework dt/21/11/2021"
-is entered:
+is entered. The details of the **create Task** interactions have been omitted from the diagram for clarity:
 ![AddDateSequenceDiagram](images/AddDateSequenceDiagram.png)
+
+The omitted details are shown below in a separate sequence diagram:
+![AddDateSequenceDiagramRef](images/AddDateSequenceDiagramRef.png)
 
 The following activity diagram summarises what happens when a user executes an add command with date and/or time:
 ![AddDateActivityDiagram](images/AddDateActivityDiagram.png)
@@ -368,7 +375,37 @@ The following activity diagram summarises what happens when a user executes an a
             comparison methods between two `LocalDateTime` objects.
     * Cons: Less flexibility and more tedious to check different combinations of DateTime formats.
 
-### \[Implemented\] Listing Upcoming Tasks (Hanif)
+#### Challenges
+
+`TaskDate` class was initially implemented with only `add` command in mind but there were some changes that had to be made
+when `edit` command was implemented to allow editing of date and time. There are several cases to consider when a task has
+to be edited.
+
+- Case 1: A task has no date and no time.
+- Case 2: A task has date only.
+- Case 3: A task has date and time.
+
+Keep in mind the special condition that a task cannot have a time without a date. Editing a task's date/time also has 3 cases,
+where a user can input date only, time only, or both at once. 
+
+In the first case, no problem is encountered as all the 3 possible types of inputs result in successful outcomes when editing
+a task with no date or time. When only date is input in the `edit` command, the edited task will now have the input date. When
+only time is input, the edited task will now have the input time and current date. When both are input, the edited task will now have
+both of the input date and time.
+
+In the second case however, a problem is encountered when only time is input in the `edit` command. With the initial implementation of
+the constructor of `TaskDate`, this will result in the edited task having the current date and the input time. This is an undesirable side
+effect where the current date overwrites the existing date of the task to be edited. There are no issues with other two possible input types.
+
+In the third case, there is also a problem encountered when only time is input in the `edit` command. Similar to the second case, this will
+result in the current date overwriting the existing date of the task to be edited.
+
+To differentiate between an `edit` command and `add` command involving `TaskDate`, a new boolean argument was added to `ParserUtil#parseTaskDate`.
+This boolean is propagated down as another additional argument of `TaskDate` constructor and using that, a new `TaskDate` will be created without
+using `LocalDate#now` if it is used for editing purposes. 
+
+
+### \[Implemented\] Viewing all Upcoming Tasks
 
 With the implementation of `TaskDate.java`, we can easily look up upcoming tasks by comparing dates and times.
 
@@ -380,9 +417,10 @@ and time via `LocalDateTime.now()`, and the current date via `LocalDate.now()`. 
 a date, then if it has a date but no time, and finally whether it has both date and time.
 
 When `UpcomingTaskCommand.execute(Model model)` is called by `LogicManager`, 
-`Model#sortTaskList()` is called which sorts the task list chronologically. `UpcomingTaskCommand` then passes 
-`TaskDateAfterCurrentDatePredicate` to `Model#updateFilteredTaskList(Predicate<Task> predicate)`, which filters out the
-upcoming tasks and updates the viewable `ObservableList<Task>`. 
+`Model#sortTaskList()` is called which sorts the task list chronologically, with the use of a `Comparator` to define 
+an ordering between tasks by comparing `TaskDates`. `UpcomingTaskCommand` then calls
+`Model#updateFilteredTaskList(Predicate<Task> predicate)`, which filters out the upcoming tasks and updates the viewable
+`ObservableList<Task>`. 
 
 The user is then able to view their upcoming tasks, in chronological order.
 
@@ -402,7 +440,7 @@ A sequence diagram is provided below:
     which they would be able to operate. This would go against Dash's primary design goal of prioritizing speed.
     
 
-### \[Implemented\] Using the Up/Down Arrow Keys to Select Previous User Inputs (Joshua)
+### \[Implemented\] Using the Up/Down Arrow Keys to Select Previous User Inputs
 
 An implemented improvement to the text-based input method is to allow users to easily reenter previously inputted 
 commands by retrieving their past inputs to the CLI using the up and down arrow keys. We feel that this is a subtle 
@@ -490,9 +528,10 @@ be changed.
 
 **Target user profile**:
 
-* A student,
-  * Students generally have different types of tasks they need to organize and deadlines to keep track of.
-  * Students have many contacts from various places such as modules, CCAs, etc, that they would like to organize better.
+* A university student,
+  * University students generally have different types of tasks they need to organize and deadlines to keep track of
+  * University students have many contacts from various places such as modules, CCAs, etc, that they would like to 
+    organize better
 
 * On his laptop/computer very often,
   * Typing is mainly an advantage with a physical keyboard
@@ -500,8 +539,10 @@ be changed.
 
 * A person who prefers/is more skilled at typing,
   * Typing is only faster with experience
-  * Tasks and deadlines are easier to be specified with typing, instead of clicking through multiple options with a laptop trackpad
-  * Students may encounter situations where they need to type information/deadlines very quickly (e.g. during a lecture)
+  * Tasks and deadlines are easier to be specified with typing, instead of clicking through multiple options with a 
+    laptop trackpad
+  * Students may encounter situations where they need to take down tasks or contacts very quickly (e.g. during a 
+    lecture or tutorial)
 
 **Value proposition**:
  * Manage contacts and tasks faster than a typical mouse/GUI driven app.
@@ -510,198 +551,410 @@ be changed.
 
 | Priority | As a(n) ...                                | I want to ...                                 | So that I can ...                                               |
 |----------|--------------------------------------------|-----------------------------------------------|-----------------------------------------------------------------|
-| * * *    | user                                       | create tasks                                  | record the tasks I need to do                                   |
-| * * *    | user                                       | delete tasks                                  | clear my list of tasks if it gets too cluttered                 |
-| * * *    | user                                       | view all tasks                                | see all the tasks I have at the moment                          |
-| * * *    | user                                       | edit tasks                                    | keep track of changing requirements                             |
+| * * *    | user who prefers typing                    | use a CLI over a GUI                          | be faster and efficient in using the app                        |
 | * * *    | user                                       | add contacts                                  | store them for later reference                                  |
 | * * *    | user                                       | delete contacts                               | remove contacts when I want to                                  |
 | * * *    | user                                       | view all contacts                             | keep track of all my contacts                                   |
 | * * *    | user                                       | edit contacts                                 | change them later when my contacts update their contact details |
-| * * *    | first-time user                            | view a list of available commands             | refer to them easily                                            |
-| * * *    | user who prefers typing                    | use a CLI over a GUI                          | be faster and efficient in using the app                        |
-| * *      | experienced user                           | write notes on the main page of the app       | see miscellaneous reminders at a glance                         |
-| * *      | forgetful student                          | add short notes to each task as a reminder    | Remember what the task is about                                 |
-| * *      | stressed student with many tasks to handle | set priorities of tasks                       | decide what to do next                                          |
-| * *      | lazy student                               | go back to previously used full command lines | be even faster without needing to type                          |
-| * *      | student with many contacts                 | group contacts according to tags              | organise my contacts better                                     |
+| * * *    | user                                       | tag contacts                                  | keep track of who they are                                      |
+| * * *    | new user                                   | view a list of available commands             | refer to them easily                                            |
+| * * *    | user                                       | add tasks                                     | record the tasks I need to do                                   |
+| * * *    | user                                       | delete tasks                                  | clear my list of tasks if it gets too cluttered                 |
+| * * *    | user                                       | view all tasks                                | see all the tasks I have at the moment                          |
+| * * *    | user                                       | edit tasks                                    | keep track of changing real-life requirements                   |
+| * * *    | user                                       | mark a task as completed                      | keep track of which tasks I have completed                      |
+| * *      | stressed student with many tasks to handle | view all upcoming tasks                       | see which tasks are most urgent                                 |
+| * *      | lazy student                               | go back to previously used full command lines | waste less time typing the lines all over again                 |
+| * *      | student with many contacts                 | assign contacts to tasks                      | keep track of who is involved with which tasks                  |
 | * *      | student with many CCAs                     | tag tasks with CCA tags                       | easily identify what I need to do for a particular CCA          |
 | * *      | student taking many modules                | tag tasks with module tags                    | easily identify what I need to do for a particular module       |
+| * *      | organized student                          | clear all completed tasks                     | declutter and focus on the tasks I have yet to complete         |
 
 ### Use cases
 
+(The System is Dash and the Actor is the user for all Use Cases, unless specified otherwise.)
+
 #### Use case 01: Add a task
+
+Preconditions: Dash is launched and user is on tasks tab
 
 <u>MSS:</u>
 
-1. User switches to the task tab
-2. Dash shows the list of tasks
-3. User requests to add a task, specifying task info
-4. Dash adds task to the list
+1. User requests to add a task, specifying task information
+2. Dash adds task to the list and shows the updated task list
 
 Use case ends.
 
 <u>Extensions:</u>
 
-3. There is no task description specified
-    * a. Dash shows an error message
+* 1a. Incorrect syntax is used
+  * 1a1. Dash shows an error message
 
-Use case resumes at step 2.
+Use case resumes at step 1.
+
+* 1b. User inputs an invalid person index
+  * 1b1. Dash shows an error message
+
+Use case resumes at step 1.  
 
 #### Use case 02: Delete a task
 
+Preconditions: Dash is launched and user is on tasks tab
+
 <u>MSS:</u>
 
-1. User switches to the task tab
-2. Dash shows the list of tasks
-3. User requests to delete a task, specifying the index to be deleted
-4. Dash deletes the task
+1. User requests to delete a task, specifying the index to be deleted
+2. Dash deletes the task and shows the updated task list
 
 Use case ends.
 
-<u>Extension:</u>
+<u>Extensions:</u>
 
-3. The list is empty
+* 1a. The given index is invalid
+  * 1a1. Dash shows an error message
 
-Use case ends.
+Use case resumes at step 1.
 
-3. The given index is invalid
-    * a. Dash shows an error message
-
-Use case resumes at step 2.
+* 1b. Incorrect syntax is used
+  * 1b1. Dash shows an error message
+    
+Use case resumes at step 1.
 
 #### Use case 03: Edit a task
 
+Preconditions: Dash is launched and user is on tasks tab
+
 <u>MSS:</u>
 
-1. User switches to the task tab
-2. Dash shows the list of tasks
-3. User inputs the task index to be edited, specifying updated info for the task
-4. Dash edits the task
+1. User inputs the task index to be edited, specifying updated information for the task
+2. Dash edits the task with the provided information and shows the updated task list
 
 Use case ends.
 
-<u>Extension:</u>
+<u>Extensions:</u>
 
-3.  The task list is empty
+* 1a. The given index is invalid
+   * 1a1. Dash shows an error message
 
-Use case ends
+Use case resumes at step 1.
 
-3. The given index is invalid
-   * a. Dash shows an error message
+* 1b. Incorrect syntax is used
+    * 1b1. Dash shows an error message
 
-Use case resumes at step 3
+Use case resumes at step 1.
+
+* 1c. User did not provide at least 1 field to be edited
+    * 1c1. Dash shows an error message
+
+Use case resumes at step 1.
 
 #### Use case 04: View all tasks
 
+Precondition: Dash is launched and user is on tasks tab
+
 <u>MSS:</u>
 
-1. User switches to the task tab
-2. Dash shows the list of tasks
-
-Use case ends.
-
-<u>Extension:</u>
-
-2. The task list is empty
+1. User requests to show all tasks
+2. Dash shows a list of all tasks
 
 Use case ends.
 
 #### Use case 05: Add a contact
 
+Preconditions: Dash is launched and user is on contacts tab
+
 <u>MSS:</u>
 
-1. User switches to the contacts tab
-2. Dash shows a list of contacts
-3. User requests to add a contact, specifying contact info
-4. Dash adds contact to the list
+1. User requests to add a contact, specifying contact information
+2. Dash adds contact to the list and shows the updated contact list
 
 Use case ends.
 
-<u>Extension:</u>
+<u>Extensions:</u>
 
-3. The contact info is invalid
-    * a. Dash shows an error message
+* 1a. Incorrect syntax is used
+    * 1a1. Dash shows an error message
 
-Use case resumes at step 2.
+Use case resumes at step 1.
+
+* 1b. User tries to add a contact with the same name as an existing contact in the contact list
+  * 1b1. Dash shows an error message
+    
+Use case resumes at step 1.
 
 #### Use case 06: Delete a contact
 
+Preconditions: Dash is launched and user is on contacts tab
+
 <u>MSS:</u>
 
-1. User switches to the contacts tab
-2. Dash shows the list of contacts
-3. User requests to delete a contact, specifying the index to be deleted
-4. Dash deletes the contact
+1. User requests to delete a contact, specifying the index to be deleted
+2. Dash deletes the contact and shows the updated contact list
 
 Use case ends.
 
-<u>Extension:</u>
+<u>Extensions:</u>
 
-3. The contacts list is empty
+* 1a. The given index is invalid
+    * 1a1. Dash shows an error message
 
-Use case ends.
+Use case resumes at step 1.
 
-3. The given index is invalid
-    * a. Dash shows an error message
+* 1b. Incorrect syntax is used
+    * 1b1. Dash shows an error message
 
-Use case resumes at step 2.
+Use case resumes at step 1.
 
 #### Use case 07: Edit a contact
 
-<u>MSS:</u>
-
-1. User switches to contacts tab
-2. Dash shows the list of contacts
-3. User inputs the contact index to be edited, specifying the updated info for the contact
-4. Dash edits the contact
-
-Use case ends.
-
-<u>Extension:</u>
-
-3. The contact list is empty
-
-Use case ends.
-
-3. The given index is invalid
-   * Dash shows an error message
-
-Use case resumes at step 2.
-
-#### Use case 08: View all contact
+Preconditions: Dash is launched and user is on contacts tab
 
 <u>MSS:</u>
 
-1. User switches to the contacts tab
-2. Dash shows the list of contacts
+1. User inputs the contact index to be edited, specifying the updated information for the contact
+2. Dash edits the contact with the provided information and shows the updated contact list
 
 Use case ends.
 
-<u>Extension:</u>
+<u>Extensions:</u>
 
-2a. The task list is empty
+* 1a. The given index is invalid
+    * 1a1. Dash shows an error message
 
-Use case ends.
+Use case resumes at step 1.
 
-#### Use case 09: View a list of available commands
+* 1b. Incorrect syntax is used
+    * 1b1. Dash shows an error message
+
+Use case resumes at step 1.
+
+* 1c. User did not provide at least 1 field to be edited
+    * 1c1. Dash shows an error message
+
+Use case resumes at step 1.   
+
+* 1d. User tries to edit the contact's name to be the same as an existing contact's name in the contact list
+    * 1d1. Dash shows an error message
+
+Use case resumes at step 1.
+
+#### Use case 08: View all contacts
+
+Precondition: Dash is launched and user is on contacts tab
 
 <u>MSS:</u>
 
-1. User requests to view all available commands
+1. User requests to show all contacts
+2. Dash shows a list of all contacts
+
+Use case ends.
+
+#### Use case 09: Tagging a contact
+
+Precondition: Dash is launched and user is on contacts tab
+
+<u>MSS:</u>
+
+1. User requests to tag a contact by specifying the contact index and tag(s) for the contact
+2. The contact that the user specifies is updated by Dash to show the newly added tag(s)
+
+Use case ends.
+
+<u>Extensions:</u>
+
+* 1a. The given index is invalid
+    * 1a1. Dash shows an error message
+
+Use case resumes at step 1.
+
+* 1b. Incorrect syntax is used
+    * 1b1. Dash shows an error message
+
+Use case resumes at step 1.
+
+* 1c. User did not provide at least 1 tag to be added
+    * 1c1. Dash shows an error message
+
+Use case resumes at step 1.
+
+#### Use case 10: Tagging a task
+
+Precondition: Dash is launched and user is on tasks tab
+
+<u>MSS:</u>
+
+1. User requests to tag a task by specifying the task index and tag(s) for the task
+2. The task that the user specifies is updated by Dash to show the newly added tag(s)
+
+Use case ends.
+
+<u>Extensions:</u>
+
+* 1a. The given index is invalid
+    * 1a1. Dash shows an error message
+
+Use case resumes at step 1.
+
+* 1b. Incorrect syntax is used
+    * 1b1. Dash shows an error message
+
+Use case resumes at step 1.
+
+* 1c. User did not provide at least 1 tag to be added
+    * 1c1. Dash shows an error message
+
+Use case resumes at step 1.
+
+#### Use case 11: View a list of available commands
+
+Precondition: Dash is launched and user is not on the help tab
+
+<u>MSS:</u>
+
+1. User switches to the help tab
 2. Dash shows a list of all available commands
+
+Use case ends.
+
+#### Use case 12: Finding for a task
+
+Precondition: Dash is launched and user is on the tasks tab
+
+<u>MSS:</u>
+1. User requests to find a task and inputs the search term(s)
+2. Dash shows a list of tasks that match all the search term(s)
+
+Use case ends.
+
+<u>Extensions:</u>
+
+* 1a. Incorrect syntax is used
+    * 1a1. Dash shows an error message
+
+Use case resumes at step 1.
+
+#### Use case 13: Finding for a contact
+
+Precondition: Dash is launched and user is on the contacts tab
+
+<u>MSS:</u>
+1. User requests to find a contact and inputs the search term(s)
+2. Dash shows a list of contacts that match all the search term(s)
+
+Use case ends.
+
+<u>Extensions:</u>
+
+* 1a. Incorrect syntax is used
+    * 1a1. Dash shows an error message
+
+Use case resumes at step 1.
+
+#### Use case 14: Assigning contacts to tasks
+
+Precondition: Dash is launched and user is on the tasks tab
+
+<u>MSS:</u>
+1. User requests to assign contacts to a task by specifying the task index, and a person index for each person to be 
+   assigned
+2. The task that the user specifies is updated by Dash to show the newly assigned contacts  
+
+Use case ends.
+
+<u>Extensions:</u>
+
+* 1a. Incorrect syntax is used
+  * 1a1. Dash shows an error message
+
+Use case resumes at step 1.
+
+* 1b. The given task index is invalid
+  * 1b1. Dash shows an error message
+
+Use case resumes at step 1.
+
+* 1c. A given person index is invalid
+  * 1c1. Dash shows an error message
+
+* 1d. User did not specify at least 1 person to be assigned
+  * 1d1. Dash shows an error message
+
+Use case resumes at step 1.
+
+#### Use case 15: Completing a task
+
+Precondition: Dash is launched and user is on the tasks tab
+
+<u>MSS:</u>
+1. User requests to complete a task by specifying a task index
+2. The task that the user specifies is updated by Dash to show that it is completed
+
+Use case ends.
+
+<u>Extensions:</u>
+
+* 1a. Incorrect syntax is used
+  * 1a1. Dash shows an error message
+
+Use case resumes at step 1.
+
+* 1b. The given index is invalid
+  * 1b1. Dash shows an error message
+
+Use case resumes at step 1.
+
+#### Use case 16: Listing all upcoming tasks
+
+Precondition: Dash is launched and user is on the tasks tab
+
+<u>MSS:</u>
+1. User requests to view all upcoming tasks, which are incomplete tasks after the current date and time
+2. Dash shows a list of all upcoming tasks, sorted in chronological order
+
+Use case ends.
+
+#### Use case 17: Clearing all tasks
+
+Precondition: Dash is launched and user is on the tasks tab
+
+<u>MSS:</u>
+1. User requests to clear all tasks
+2. Dash shows an empty task list
+
+Use case ends.
+
+#### Use case 18: Clearing completed tasks
+
+Precondition: Dash is launched and user is on the tasks tab
+
+<u>MSS:</u>
+1. User requests to clear completed tasks
+2. Dash clears completed tasks and shows a task list that contains only incomplete tasks
+
+Use case ends.
+
+#### Use case 19: Clearing all contacts
+
+Precondition: Dash is launched and user is on the contacts tab
+
+<u>MSS:</u>
+1. User requests to clear all contacts
+2. Dash shows an empty contact list
 
 Use case ends.
 
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+2. Should be able to hold up to 250 persons and tasks without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) 
+   should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. Should be lightweight.
 5. Should run smoothly even on low-end systems.
-
-*{More to be added}*
+6. Contact and task data should be stored locally.
+7. Contact and task data should persist between instances (unless the data files are deleted).
+8. New users should be easily able to adjust to the CLI.
+9. Should be fully functional without an internet connection.
 
 ### Glossary
 
@@ -713,8 +966,10 @@ Use case ends.
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
-testers are expected to do more *exploratory* testing.
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** These instructions only provide a starting
+point for testers to work on; testers are expected to do more *exploratory* testing.
 
 </div>
 
@@ -954,7 +1209,7 @@ testers are expected to do more *exploratory* testing.
        Expected: Tasks tagged with "homework" shown as tasks in the list. None shown if no matching tag. Number of task listed shown in status message.
 
     3. Test case: `find t/homework t/assignment`<br>
-       Expected: <to be edited>
+       Expected: Tasks tagged with both "homework" and "assignment" show as tasks in the list. None shown if no matching tag. Number of task listed shown in status message.
 
 ### Find all upcoming tasks:
 

@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import dash.commons.exceptions.IllegalValueException;
+import dash.logic.parser.exceptions.ParseException;
 import dash.model.person.Person;
 import dash.model.tag.Tag;
 import dash.model.task.CompletionStatus;
@@ -101,10 +102,11 @@ class JsonAdaptedTask {
         if (taskDate == "") {
             modelTaskDate = new TaskDate();
         } else {
-            if (!TaskDate.isValidTaskDate(taskDate)) {
-                throw new IllegalValueException(TaskDate.MESSAGE_CONSTRAINTS);
+            try {
+                modelTaskDate = new TaskDate(taskDate, false);
+            } catch (IllegalArgumentException e) {
+                throw new ParseException(TaskDate.MESSAGE_CONSTRAINTS);
             }
-            modelTaskDate = new TaskDate(taskDate);
         }
 
         final TaskDescription modelTaskDescription = new TaskDescription(description);

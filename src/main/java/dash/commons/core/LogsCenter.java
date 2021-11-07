@@ -29,6 +29,8 @@ public class LogsCenter {
      * Loggers obtained *AFTER* this initialization will have their logging level changed<br>
      * Logging levels for existing loggers will only be updated if the logger with the same name
      * is requested again from the LogsCenter.
+     *
+     * @param config The given Config object.
      */
     public static void init(Config config) {
         currentLogLevel = config.getLogLevel();
@@ -37,6 +39,9 @@ public class LogsCenter {
 
     /**
      * Creates a logger with the given name.
+     *
+     * @param name The given name.
+     * @return A Logger object with the given name.
      */
     public static Logger getLogger(String name) {
         Logger logger = Logger.getLogger(name);
@@ -51,6 +56,9 @@ public class LogsCenter {
 
     /**
      * Creates a Logger for the given class name.
+     *
+     * @param clazz The given class name.
+     * @return A Logger for the given class name.
      */
     public static <T> Logger getLogger(Class<T> clazz) {
         if (clazz == null) {

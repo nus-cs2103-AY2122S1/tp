@@ -10,13 +10,13 @@ import dash.model.Model;
 public class ClearDoneTaskCommand extends Command {
 
     public static final String COMMAND_WORD = "cleardone";
+
     public static final String MESSAGE_SUCCESS = "Task List has been cleared of all completed tasks!";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.deleteDoneTasks();
-
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
