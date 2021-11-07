@@ -7,10 +7,19 @@ title: Developer Guide
     {:toc}
 
 ---
+## **Developer Guide Information**
 
-## **Acknowledgements**
+### **Purpose**
 
--   {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+This developer guide aims to provide information regarding the design and implementation of Siasa, including the design considerations when implementing each feature.
+
+### **Target Audience**
+
+This developer guide is made for Java developers who are or were formerly **student financial advisors**, the target audience of Siasa. Thus, it is assumed that readers have basic background knowledge on Java and is familiar with common terms used in insurance policies.
+
+### **Acknowledgements**
+
+-   This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 ---
 
@@ -286,16 +295,17 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ---
 
-## **Appendix: Requirements**
+## **Appendix A: Requirements**
 
 ### Product scope
 
 **Target user profile**:
 
--   student financial advisors
+Our target audience is a student who,
+-   is working as a financial advisor
 -   has a need to quickly and easily keep track of their:
 
-    1. clients/contacts
+    1. contacts
     2. financial policies sold
 
 -   prefer desktop apps over other types
@@ -303,7 +313,13 @@ _{Explain here how the data archiving feature will be implemented}_
 -   prefers typing to mouse interactions
 -   is reasonably comfortable using CLI apps
 
-**Value proposition**: enables student financial advisors to quickly and easily keep track of their contacts (potential clients and existing clients) and financial plans sold to aid their operations.
+**Value proposition**: 
+
+Currently, there are no good contact applications on desktop that allow student financial advisors, that do not have time to use complex contact book applications, to easily keep track of their contacts and policies.
+
+Siasa enables student financial advisors to quickly and easily keep track of their contacts (both potential clients and existing clients) and financial plans sold to aid their operations. The different payment structures also provide better customisation for student financial advisors, allowing them to better record any policies they may have sold.
+
+Siasa also provides valuable data and statistics in a `.txt` file for a quick summary and analysis of all the current policies, allowing such students to get the necessary information and data in a fast and efficient manner.
 
 ### User stories
 
@@ -318,24 +334,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 |  `* *`   | new user                          | experiment with sample contacts                                                             | familiarise myself with the application                                                                              |
 |  `* *`   | user ready to start using the app | purge all current data                                                                      | get rid of sample/experimental data I used for exploring the app                                                     |
 |  `* *`   | user ready to start using the app | learn from tips and tricks recommended by the app                                           | learn more ways to use the app more efficiently and more functions the app offers                                    |
-|  `* *`   | user ready to start using the app | import my contacts from my phonebook into the app                                           | easily add all the relevant contacts and be able to use the app immediately                                          |
-| `* * *`  | user ready to start using the app | easily create a contact and provide relevant details                                        | save the contact and relevant information for each contact                                                            |
+| `* * *`  | user ready to start using the app | easily create a contact and provide relevant details                                        | save the contact and relevant information for each contact                                                           |
 | `* * *`  | expert user                       | interact with the application through CLI                                                   | save time for repetitive tasks by allowing me to automate them using scripts                                         |
-|  `* *`   | expert user                       | have a statistics page                                                                      | analyse the data from past contacts and policies                                                                     |
-|  `* *`   | expert user                       | have common standardised shortcuts similar to other applications                            | do not have to relearn shortcuts specific to SIASA                                                                   |
+|  `* *`   | expert user                       | have some statistics                                                                        | analyse the data from past contacts and policies                                                                     |
 |  `* *`   | expert user                       | view the history of policies my clients have signed                                         | keep track of past policies                                                                                          |
 |  `* *`   | expert user                       | be able to export my saved data                                                             | transfer my data to other installation/computers                                                                     |
-|  `* *`   | busy user                         | be able to execute common actions using shortcuts                                           | save time and allow for increased productivity                                                                       |
 | `* * *`  | busy user                         | quick add a contact                                                                         | easily save any new contacts i receive without much hassle                                                           |
-|  `* *`   | busy user                         | view my most popular clients at a glance                                                    | target them with new policies                                                                                        |
-|  `* *`   | busy user                         | have important events sorted by date                                                        | be on top of the most urgent tasks                                                                                   |
+|  `* *`   | busy user                         | view my expiring policies at a glance                                                       | quickly find out what policies to renew                                                                              |
 | `* * *`  | busy user                         | list the current contacts with policies                                                     | save time going through every single contact                                                                         |
-|  `* *`   | new financial advisor             | quickly filter for my non-client contacts                                                   | expand my client base through contacting them                                                                        |
+|  `* *`   | busy user                         | quickly find a contact                                                                      | find a specific contact easily without wasting much time                                                             |
 |  `* *`   | new financial advisor             | label non-client contacts based on their potential/interest                                 | identify who to contact and who not to contact in future for a follow-up to save time while expanding my client base |
 |  `* *`   | experienced financial advisor     | mass save the policy details of the many customers I have                                   | save time importing all my data and keep track of all my customers policies                                          |
 |  `* *`   | experienced financial advisor     | sort through the contacts                                                                   | sort the contacts I have based on a certain field easily                                                             |
-|  `* *`   | experienced financial advisor     | search through the many contacts I have                                                     | find the relevant contact quickly                                                                                    |
-|  `* *`   | generic user                      | customise my SIASA background                                                               | personalise my address book                                                                                          |
+|  `* *`   | experienced financial advisor     | search through the many policies I have                                                     | find the relevant policy quickly                                                                                     |
 | `* * *`  | generic user                      | view the policies associated with each client                                               | have a good understanding of the products purchased by each client                                                   |
 |  `* *`   | generic user                      | label a contact as a client or non-client                                                   | differentiate between my contacts                                                                                    |
 |  `* *`   | generic user                      | update a contact that I have added                                                          | keep up-to-date information on all my contacts                                                                       |
@@ -349,16 +360,86 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `SIASA` and the **Actor** is the `client`, unless specified otherwise)
+(For all use cases below, the **System** is the `SIASA` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: List a client's policy**
+#### **UC1: Displaying Help**
+<details>
+  <summary>Click to expand!</summary>
 
 **MSS**
 
-1. User requests to list clients
-2. SIASA shows a list of clients
-3. User requests to list a specific client's policy
-4. SIASA shows the list of policies belonging to the client
+1. User opens help page.
+2. SIASA displays a help page showing basic commands.
+
+   Use case ends.
+
+</details>
+
+#### **UC2: Add a Contact/Policy**
+
+<details>
+  <summary>Click to expand!</summary>
+
+**MSS**
+
+1. User requests to add a contact/policy.
+2. SIASA adds the contact/policy.
+
+   Use case ends.
+
+**Extensions**
+
+-   1a. The given argument(s) is/are invalid.
+
+    -   1a1. SIASA shows an error message.
+
+        Use case resumes at step 1.
+
+-   *a. User can request to view help at any time [(UC1)](#uc1-displaying-help).
+
+</details>
+
+#### **UC3: Edit a Contact/Policy**
+
+<details>
+  <summary>Click to expand!</summary>
+
+**MSS**
+
+1. User requests to list contacts/policies.
+2. SIASA shows a list of contacts/policies.
+3. User requests to edit information of contact/policy.
+4. SIASA updates information of contact/policy.
+
+   Use case ends.
+
+**Extensions**
+
+-   2a. The list is empty.
+
+    Use case ends.
+
+-   3a. The given arguments are invalid.
+
+    -   3a1. SIASA shows an error message.
+
+        Use case resumes at step 3.
+
+-   *a. User can request to view help at any time [(UC1)](#uc1-displaying-help).
+
+</details>
+
+#### **UC4: Delete a Contact/Policy**
+
+<details>
+  <summary>Click to expand!</summary>
+
+**MSS**
+
+1.  User requests to list contacts/policies.
+2.  SIASA shows a list of contacts/policies.
+3.  User requests to delete a specific contact/policy in the list.
+4.  SIASA deletes the contact/policy.
 
     Use case ends.
 
@@ -372,16 +453,53 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     -   3a1. SIASA shows an error message.
 
-        Use case resumes at step 2.
+        Use case resumes at step 3.
 
-**Use case: Clear a client's policies**
+-   *a. User can request to view help at any time [(UC1)](#uc1-displaying-help).
+
+</details>
+
+#### **UC5: List a Contact's Policies**
+
+<details>
+  <summary>Click to expand!</summary>
 
 **MSS**
 
-1.  User requests to list clients
-2.  SIASA shows a list of clients
-3.  User requests to clear all policies belonging to a specific client
-4.  SIASA clears all policies belonging to the client
+1. User requests to list contacts.
+2. SIASA shows a list of contacts.
+3. User requests to list a specific contact's policy.
+4. SIASA shows the list of policies belonging to the contacts.
+
+   Use case ends.
+
+**Extensions**
+
+-   2a. The list is empty.
+
+    Use case ends.
+
+-   3a. The given index is invalid.
+
+    -   3a1. SIASA shows an error message.
+
+        Use case resumes at step 3.
+
+-   *a. User can request to view help at any time [(UC1)](#uc1-displaying-help).
+
+</details>
+
+#### **UC6: Clear a Contact's Policies**
+
+<details>
+  <summary>Click to expand!</summary>
+
+**MSS**
+
+1.  User requests to list contacts.
+2.  SIASA shows a list of contacts.
+3.  User requests to clear all policies belonging to a specific contact.
+4.  SIASA clears all policies belonging to the contact.
 
     Use case ends.
 
@@ -395,22 +513,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     -   3a1. SIASA shows an error message.
 
-        Use case resumes at step 2.
+        Use case resumes at step 3.
 
--   3b. The given index is to a client with no policies
+-   *a. User can request to view help at any time [(UC1)](#uc1-displaying-help).
 
-    -   3b1. SIASA shows an error message.
+</details>
 
-        Use case resumes at step 2.
+#### **UC7: Sort Contact/Policy List**
 
-**Use case: Delete a client**
+<details>
+  <summary>Click to expand!</summary>
 
 **MSS**
 
-1.  User requests to list clients
-2.  SIASA shows a list of clients
-3.  User requests to delete a specific client in the list
-4.  SIASA deletes the client
+1.  User requests to list contacts/policies.
+2.  SIASA shows a list of contacts/policies.
+3.  User requests to sort list of contacts/policies.
+4.  SIASA sorted list of contacts/policies.
 
     Use case ends.
 
@@ -420,18 +539,49 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
--   3a. The given index is invalid.
+-   3a. The given sorter is invalid.
 
     -   3a1. SIASA shows an error message.
 
-        Use case resumes at step 2.
+        Use case resumes at step 3.
+
+-   *a. User can request to view help at any time [(UC1)](#uc1-displaying-help).
+
+</details>
+
+#### **UC8: Download Statistics**
+
+<details>
+  <summary>Click to expand!</summary>
+
+**MSS**
+
+1.  User requests to download statistics.
+2.  SIASA generates the statistics file in data.
+
+    Use case ends.
+
+**Extensions**
+
+-   *a. User can request to view help at any time [(UC1)](#uc1-displaying-help).
+
+</details>
 
 ### Non-Functional Requirements
-
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 contacts without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  The application should be easily picked up by a new user with no prior experience with a similar application.
+*   Technical requirements:
+    1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+    1.  Should work on any OS with `32-bit` or `64-bit` architectures.
+    1.  User data should be in human editable file and stored locally.
+    1.  Should not require internet for any of its features.
+    
+*   Performance requirements:
+    1.  Should be able to hold up to 1000 entries(contacts/policies) without a noticeable sluggishness in performance for typical usage.
+    1.  The response to any commands should be less than 1 second.
+    
+*   Quality requirements:
+    1.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+    1.  The application should be easily picked up by a new user with no prior experience with a similar application.
+    1.  A user familiar with CLI tools should find the commands intuitive and easy to remember.
 
 ### Glossary
 
@@ -442,7 +592,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-## **Appendix: Instructions for manual testing**
+## **Appendix B: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 
@@ -453,42 +603,119 @@ testers are expected to do more *exploratory* testing.
 
 ### Launch and shutdown
 
-1. Initial launch
+1.  Initial launch
 
-    1. Download the jar file and copy into an empty folder
+    1.  Download the jar file and copy into an empty folder
+    1.  Double-click the jar file Expected: Shows the GUI with a set of sample contacts and policies. The window size may not be optimum.
 
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+1.  Saving window preferences
 
-1. Saving window preferences
+    1.  Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1.  Re-launch the app by double-clicking the jar file.<br>
+        Expected: The most recent window size and location is retained.
 
-    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+### Adding a contact
 
-    1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+1.  Adding a contact while all contacts are being shown
 
-1. _{ more test cases …​ }_
+    1.  Prerequisites: List all contacts using the `allcontact` command. Multiple contacts in the list.
+    1.  Test case: `addcontact n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`<br>
+        Expected: A contact with the details provided will be added into the contact list. Details of the added contact shown in the status message. Timestamp in the status bar is updated.
+    1.  Test case: `addcontact n/!nvalidN@me p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` <br>
+        Expected: No contact is added. Error details shown in the status message. Status bar remains the same.
+       
+1. Adding a contact while not all contacts are being shown
+   
+    1.  Prerequisites: Filter the contact list using `findcontact KEYWORD` so that not all the contacts are shown.
+    1.  Test case: `addcontact n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`<br>
+        Expected: A contact with the details provided will be added into the contact list. The complete contact list will be shown. Details of the added contact shown in the status message. Timestamp in the status bar is updated.
+    1.  Test case: `addcontact n/!nvalidN@me p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` <br>
+        Expected: No contact is added. Error details shown in the status message. Status bar remains the same.
+
+### Editing a contact
+
+1.  Editing a contact while all contacts are being shown
+
+    1.  Prerequisites: List all contacts using the `allcontact` command. Multiple contacts in the list.
+    1.  Test case: `editcontact 2 n/James Lee e/jameslee@example.com`<br>
+        Expected: The contact details of the contact with index 2 is updated to the provided information. Contact list is reloaded to display the edited contact at its new index. Details of the edited contact shown in the status message. Timestamp in the status bar is updated.
+    1.  Test case: `editcontact 2 n/!nv@lidN@m3 e/jameslee@example.com` <br>
+        Expected: No contact is edited. Error details shown in the status message. Status bar remains the same.
+    1.  Test case: `editcontact x n/James Lee e/jameslee@example.com` (where x is larger than the list size)<br>
+        Expected: No contact is edited. Error details shown in the status message. Status bar remains the same.
 
 ### Deleting a contact
 
-1. Deleting a contact while all contacts are being shown
+1.  Deleting a contact while all contacts are being shown
 
-    1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
-
-    1. Test case: `delete 1`<br>
+    1.  Prerequisites: List all contacts using the `allcontact` command. Multiple contacts in the list.
+    1.  Test case: `deletecontact 1`<br>
        Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-
-    1. Test case: `delete 0`<br>
+    1.  Test case: `deletecontact 0`<br>
        Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
+    1.  Other incorrect delete commands to try: `deletecontact`, `deletecontact x`, `...` (where x is larger than the list size)<br>
+        Expected: Similar to previous.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+### Adding a policy
 
-1. _{ more test cases …​ }_
+1.  Adding a policy while all policies are being shown
+    
+    1.  Prerequisites: List all contacts using the `allpolicy` command. Multiple policies and contacts in the list.
+    1.  Test case: `addpolicy n/Life Policy p/1000 12 120 c/20 12 cl/1 e/2100-06-13 t/AIA`<br>
+        Expected: A policy with the details provided will be added into the policy list. Details of the added policy shown in the status message. Timestamp in the status bar is updated.
+    1.  Test case: `addpolicy n/!nv@lidN@m3 p/1000 12 120 c/20 12 cl/1 e/2021-06-13 t/AIA` <br>
+        Expected: No policy is added. Error details shown in the status message. Status bar remains the same.
+    1.  Test case: `addpolicy n/Life Policy p/1000 12 120 c/20 12 cl/1 e/1990-06-13 t/AIA`<br>
+        Expected: A warning will pop-up. Pressing `confirm` will create a policy. A policy with the details provided will be added into the policy list. Details of the added policy shown in the status message. Timestamp in the status bar is updated. Pressing `cancel` or closing will not create a policy. Error details shown in the status message. Status bar remains the same.
+
+1. Adding a policy while not all policies are being shown
+   
+    1.  Prerequisites: Filter the policy list using `contactpolicy CONTACT_INDEX` so that not all the policies are shown. All contacts are still shown.
+    1.  Test case: `addpolicy n/Life Policy p/1000 12 120 c/20 12 cl/1 e/2100-06-13 t/AIA`<br>
+        Expected: A policy with the details provided will be added into the policy list. The complete policy list will be shown. Details of the added policy shown in the status message. Timestamp in the status bar is updated.
+    1.  Test case: `addpolicy n/!nv@lidN@m3 p/1000 12 120 c/20 12 cl/1 e/2021-06-13 t/AIA` <br>
+        Expected: No policy is added. Error details shown in the status message. Status bar remains the same.
+
+
+### Editing a policy
+
+1.  Editing a policy while all policies are being shown
+
+    1.  Prerequisites: List all policies using the `allpolicy` command. Multiple policies in the list.
+    1.  Test case: `editpolicy 2 n/Full Life e/2025-06-13`<br>
+        Expected: The policy details of the policy with index 2 is updated to the provided information. Policy list is reloaded to display the edited policy. Details of the edited policy shown in the status message. Timestamp in the status bar is updated.
+    1.  Test case: `editpolicy 2 n/!nv@lidN@m3 e/2025-06-13` <br>
+        Expected: No policy is edited. Error details shown in the status message. Status bar remains the same.
+    1.  Test case: `editpolicy x n/Full Life e/2025-06-13` (where x is larger than the list size)<br>
+        Expected: No policy is edited. Error details shown in the status message. Status bar remains the same.
+    1.  Test case: `editpolicy 2 n/Full Life e/1990-06-13`<br>
+        Expected: A warning will pop-up. Pressing `confirm` will update a policy. The policy details of the policy with index 2 is updated to the provided information. Policy list is reloaded to display the edited policy. Details of the edited policy shown in the status message. Timestamp in the status bar is updated. Pressing `cancel` or closing will not edit the policy. Error details shown in the status message. Status bar remains the same.
+
+
+### Deleting a policy
+
+1.  Deleting a policy while all policies are being shown
+    
+    1.  Prerequisites: List all contacts using the `allpolicy` command. Multiple policies in the list.
+    1.  Test case: `deletepolicy 1`<br>
+        Expected: First policy is deleted from the list. Details of the deleted policy shown in the status message. Timestamp in the status bar is updated.
+    1.  Test case: `deletepolicy 0`<br>
+        Expected: No policy is deleted. Error details shown in the status message. Status bar remains the same.
+    1.  Other incorrect delete commands to try: `deletepolicy`, `deletepolicy x`, `...` (where x is larger than the list size)<br>
+        Expected: Similar to previous.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1.  Dealing with missing data files
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1.  Prerequisites: There must a `./data/siasa.json` file. Your application must be closed.
+    1.  Delete the `./data/siasa.json` file.
+    1.  Launch the application again.
+        Expected: The GUI should pop up with the default contacts and policies entries.
 
-1. _{ more test cases …​ }_
+1.  Dealing with corrupted data files
+
+    1.  Prerequisites: There must a `./data/siasa.json` file. Your application must be closed.
+    1.  Open the `./data/siasa.json` file with any text editor and remove any `{`.
+    1.  Launch the application again.
+        Expected: The GUI should pop up with no entry.
