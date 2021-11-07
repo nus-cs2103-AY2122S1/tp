@@ -7,6 +7,8 @@ title: User Guide
 
 contHACKS is a **desktop app to help Teaching Assistants (TAs) in managing contacts. It is optimized for use via a Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). contHACKS **streamlines the creation, reading, updating and deleting operations of contacts** to make it fast and efficient for TAs, easing your workload to focus on the more important task - teaching.
 
+<div style="page-break-after: always;"></div>
+
 ## Table of Contents <a name="table-of-contents"></a>
 * [Quick start](#quick-start)
 
@@ -38,7 +40,7 @@ contHACKS is a **desktop app to help Teaching Assistants (TAs) in managing conta
 
 * [Command Summary](#summary)
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Quick start <a name="quick-start"></a>
 
@@ -54,7 +56,8 @@ contHACKS is a **desktop app to help Teaching Assistants (TAs) in managing conta
 
 <img src="images/MainApp.png" width="800px">
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 ## How to use this User Guide <a name="how-to-use"></a>
 
 This section provides tips on reading this document, as well as how to navigate it.
@@ -134,7 +137,7 @@ Some example commands you can try:
 
    * `exit` : Exits the app
 
-***
+<div style="page-break-after: always;"></div>
 
 ## Features <a name="features"></a>
 
@@ -290,7 +293,7 @@ Command aliases: `clr` `c`
 
 <img src="images/ClearCommand.png" width="800px">
 
-***
+<div style="page-break-after: always;"></div>
 
 ### Managing lessons <a name="managing-lessons"></a>
 
@@ -440,7 +443,7 @@ Advanced users are welcome to update data directly by editing that data file.
 If your changes to the data file makes its format invalid, contHACKS will discard all data and start with an empty data file on the next start up.
 </div>
 
-***
+<div style="page-break-after: always;"></div>
 
 ## Command Summary <a name="summary"></a>
 
