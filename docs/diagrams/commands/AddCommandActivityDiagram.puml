@@ -1,4 +1,4 @@
-@startuml
+AddCommandActivityDiagram.puml@startuml
 'https://plantuml.com/activity-diagram-beta
 
 start

@@ -230,6 +230,7 @@ sequence of characters provided in the argument string.
 
 Format: `filter [-n <NAME>] [-sid <STUDENT_ID>] [-cid <CLASS_ID>] [-email <EMAIL>]`
 
+Below shows an example when `filter -cid B01` is executed with 4 students from class B01 filtered out.
 ![filter](images/commands/FilterCommand/filter.png)
 
 

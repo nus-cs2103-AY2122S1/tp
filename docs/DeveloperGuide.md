@@ -189,7 +189,7 @@ How the parsing works:
 
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103-F09-3/tp/blob/master/src/main/java/seedu/programmer/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+![Model Component](images/ModelClassDiagram.png)
 
 
 The `Model` component,
@@ -251,7 +251,6 @@ These operations are exposed in the `Model` interface as `Model#commitProgrammer
 and `Model#redoProgrammerError()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
 
 Step 1. The user launches the application for the first time. The `VersionedProgrammerError` will be initialized with the
 initial ProgrammerErrorstate, and the `currentStatePointer` pointing to that single ProgrammerError state.
@@ -373,8 +372,6 @@ The following (partial) sequence diagram shows how the add command works:
 The following activity diagram summarizes what happens when a CS2100 TA executes a new command:
 ![AddCommandActivityDiagram](images/commands/AddCommand/AddCommandActivityDiagram.png)
 
-
-
 #### Design considerations: 
 
 #### Aspect: Only unique Student ID and email is accepted: 
@@ -389,7 +386,7 @@ The following activity diagram summarizes what happens when a CS2100 TA executes
     causing the command to fail, even though it should be valid. As such, it makes it hard to implement, as we have to 
     ensure that it works with `EditCommand` as well.
 
-### Student List Filtering
+### Filter Student List
 
 #### Implementation
 
@@ -405,35 +402,42 @@ the `QueryStudentDescriptor`.
 
 These operations are exposed in the `Model` interface as `Model#updateFilteredStudentList(Predicate<Student>)`.
 
-Given below is an example usage scenario and how the list filtering mechanism behaves at each step.
+Given below is an example usage scenario and how the list filtering mechanism behaves.
 
 Step 1. The CS2100 TA launches the application.
 
 Step 2. The CS2100 TA executes `filter -cid B01` to display all the students whose Class ID matches `B01`.
 
-The following UML sequence diagram shows how the filter command works.
+The following UML sequence diagrams shows how the filter command works:
 
-![FilterSequenceDiagram](images/commands/FilterCommand/FilterSequenceDiagram.png)
+1. In the following sequence diagram, the focus is on modelling the interactions between components to create the `FilterCommand` object.
+   
+![FilterSequenceDiagramParse](images/commands/FilterCommand/FilterSequenceDiagramParse.png)
+
+2. In the next sequence diagram, the focus is on the interactions between components when the `FilterCommand` is being executed.
+
+![FilterSequenceDiagramExecute](images/commands/FilterCommand/FilterSequenceDiagramExecute.png)
+
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `StudentDetailContainsPredicate`
 , `QueryStudentDescriptor` and `FilterCommand` should end at the destroy marker (X) but due to a limitation of PlantUML,
-the lifeline reaches the end of diagram.>
-
+the lifeline reaches the end of diagram.
 </div>
 
 The following UML activity diagram summarizes what happens when a CS2100 TA executes a new filter command.
+
+![FilterActivityDiagrm](images/commands/FilterCommand/FilterActivityDiagram.png)
 
 #### Design Consideration
 
 **Aspect: How filter command executes**
 
-* **Alternative 1 (current choice):** Filter commands can take in any combination of query parameters (`-n`, `-cid`
-  , `-sid`)
+* **Alternative 1 (current choice):** Filter commands can take in any combination of query parameters (`-n`, `-cid`, `-sid` and `-email`)
     * Pros: Allow for flexibility in the way the CS2100 TA wants to filter the list.
     * Cons: More difficult to implement and proper handling of the combinations of query parameters is needed.
 
 * **Alternative 2:** A different type of filter command to filter by each of the student's attribute.
     * Pros: Implementation does not need to consider the combination of query parameters.
-    * Cons: Multiple commands may be required to filter by more than one query dimension.
+    * Cons: Multiple commands have to be executed to filter the list in more than one query dimension.
 
 **Aspect: How to handle combination of query parameters**
 
@@ -441,7 +445,7 @@ The following UML activity diagram summarizes what happens when a CS2100 TA exec
   query parameters.
     * Pros: Need not explicitly handle the different argument combinations at the higher-level abstractions
       (e.g. `FilterCommandParser` class). Code is more maintainable.
-    * Cons: Was more difficult to implement.
+    * Cons: Was more difficult to implement which required time to design the interactions among the components.
 
 * **Alternative 2:** Handle the different argument combinations in the `FilterCommandParser` class.
     * Pros: Easier to handle empty argument cases with explicit conditional checking.
@@ -455,7 +459,7 @@ The following UML activity diagram summarizes what happens when a CS2100 TA exec
     * Cons: From the user experience perspective, it is slightly longer than type than other alternative.
 
 * **Alternative 2:** Calling it `view`.
-    * Pros: It is shorter to type and less refactoring required from the code that this project morphed from.
+    * Pros: It is shorter to type and less refactoring required from the code that this project evolved from.
     * Cons: `view` is not as intuitive as other alternatives.
 
 * **Alternative 3 (future consideration):** Providing a shortcut command for `filter`.
@@ -603,11 +607,11 @@ This sequence diagram shows how the `purge` command works:
 
 **Target user profile**:
 
-CS2100 TAs who
+CS2100 Lab TAs who
 
 * have to manage a number of students across different classes
 * keep track of the students' lab results
-* keep track of the students' details (eg. studentId, email)
+* keep track of the students' details (eg. Student ID, email)
 * prefer and comfortable with CLI tools
 * can type fast
 * are proficient with Unix commands
@@ -615,7 +619,7 @@ CS2100 TAs who
 
 **Value proposition**:
 
-CS2100 TAs who use ProgrammerError enjoys greater productivity and efficiency when managing their classes of students.
+CS2100 Lab TAs who use ProgrammerError enjoys greater productivity and efficiency when managing their classes of students.
 
 ## <a name="User Stories"></a> **13. User Stories**
 
