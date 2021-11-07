@@ -98,7 +98,7 @@ The contacts tab comprises `PersonListPanel`.
 The tasks tab comprises `TaskListPanel` and `PersonListPanelMinimal`.
 The help tab comprises `HelpPanel`.
 All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities 
-between classes that represent parts of the visible GUI.
+between classes that represent parts of the visible _GUI_.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files 
 that are in the `src/main/resources/view` folder. For example, the layout of the 
@@ -443,7 +443,7 @@ A sequence diagram is provided below:
 ### \[Implemented\] Using the Up/Down Arrow Keys to Select Previous User Inputs
 
 An implemented improvement to the text-based input method is to allow users to easily reenter previously inputted 
-commands by retrieving their past inputs to the CLI using the up and down arrow keys. We feel that this is a subtle 
+commands by retrieving their past inputs to the _CLI_ using the up and down arrow keys. We feel that this is a subtle 
 feature which greatly improves the speed and usability of the app.
 
 Suppose the user is on the Tasks tab. The following activity diagram illustrates a possible workflow for a user 
@@ -545,34 +545,36 @@ be changed.
     lecture or tutorial)
 
 **Value proposition**:
- * Manage contacts and tasks faster than a typical mouse/GUI driven app.
+ * Dash manages contacts and tasks on a single system faster than a typical mouse/GUI driven app.
+ * It is PC-based, so it is less likely to distract users with pop-up notifications compared to a mobile-based app.
+ * Dash does not link with any other external programs and is only used for recording information. 
 
 ### User stories
 
 | Priority | As a(n) ...                                | I want to ...                                 | So that I can ...                                               |
 |----------|--------------------------------------------|-----------------------------------------------|-----------------------------------------------------------------|
-| * * *    | user who prefers typing                    | use a CLI over a GUI                          | be faster and efficient in using the app                        |
-| * * *    | user                                       | add contacts                                  | store them for later reference                                  |
-| * * *    | user                                       | delete contacts                               | remove contacts when I want to                                  |
-| * * *    | user                                       | view all contacts                             | keep track of all my contacts                                   |
-| * * *    | user                                       | edit contacts                                 | change them later when my contacts update their contact details |
-| * * *    | user                                       | tag contacts                                  | keep track of who they are                                      |
+| * * *    | university student who prefers typing      | use a CLI over a GUI                          | manage tasks and contacts more efficiently                      |
+| * * *    | student                                    | add contacts of people I know                 | store them for later reference                                  |
+| * * *    | senior student                             | delete contacts                               | remove my groupmates' contacts when I have completed the module |
+| * * *    | student                                    | view all contacts                             | keep track of all my contacts                                   |
+| * * *    | careless student                           | edit contacts                                 | amend my mistakes                                               |
+| * * *    | student with many acquaintances            | tag contacts                                  | keep track of who they are                                      |
 | * * *    | new user                                   | view a list of available commands             | refer to them easily                                            |
-| * * *    | user                                       | add tasks                                     | record the tasks I need to do                                   |
-| * * *    | user                                       | delete tasks                                  | clear my list of tasks if it gets too cluttered                 |
-| * * *    | user                                       | view all tasks                                | see all the tasks I have at the moment                          |
-| * * *    | user                                       | edit tasks                                    | keep track of changing real-life requirements                   |
-| * * *    | user                                       | mark a task as completed                      | keep track of which tasks I have completed                      |
+| * * *    | busy student                               | add tasks                                     | record the tasks I need to do                                   |
+| * * *    | student                                    | delete tasks                                  | remove tasks that I no longer have to get done                  |
+| * * *    | student                                    | view all tasks                                | see all the tasks I have at the moment                          |
+| * * *    | attentive student                          | edit tasks                                    | keep track of changing real-life requirements                   |
+| * * *    | productive student                         | mark a task as completed                      | keep track of which tasks I have completed                      |
 | * *      | stressed student with many tasks to handle | view all upcoming tasks                       | see which tasks are most urgent                                 |
-| * *      | lazy student                               | go back to previously used full command lines | waste less time typing the lines all over again                 |
-| * *      | student with many contacts                 | assign contacts to tasks                      | keep track of who is involved with which tasks                  |
+| * *      | student who values efficiency              | go back to previously used full command lines | waste less time typing the lines all over again                 |
+| * *      | student with many group projects           | assign contacts to tasks                      | keep track of who is involved with which projects               |
 | * *      | student with many CCAs                     | tag tasks with CCA tags                       | easily identify what I need to do for a particular CCA          |
 | * *      | student taking many modules                | tag tasks with module tags                    | easily identify what I need to do for a particular module       |
-| * *      | organized student                          | clear all completed tasks                     | declutter and focus on the tasks I have yet to complete         |
+| * *      | organized student                          | clear all completed tasks                     | focus on the tasks I have yet to complete                       |
 
 ### Use cases
 
-(The System is Dash and the Actor is the user for all Use Cases, unless specified otherwise.)
+(The System is Dash and the Actor is the user for all Use Cases, unless specified otherwise.)         
 
 #### Use case 01: Add a task
 
@@ -955,12 +957,14 @@ Use case ends.
 5. Should run smoothly even on low-end systems.
 6. Contact and task data should be stored locally.
 7. Contact and task data should persist between instances (unless the data files are deleted).
-8. New users should be easily able to adjust to the CLI.
-9. Should be fully functional without an internet connection.
+8. Should be fully functional without an internet connection.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
+* **Command Line Interface (CLI)**: A user interface whereby users interact with the program with lines of text.
+* **Graphical User Interface (GUI)**: A user interface that allows users to interact with the program with graphical 
+  components, like clickable menus.
 
 --------------------------------------------------------------------------------------------------------------------
 
