@@ -62,6 +62,8 @@ Given below are my contributions to the project.
       [\#215](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/215)
     * Added documentation for the `Notes` category: 
       [\#204](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/204)
+    * Update Table of Contents:
+      [\#386](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/386)
   * Developer Guide:
     * Added implementation details of the `delete` and `mark` features: 
       [\#322](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/322)
@@ -80,6 +82,8 @@ Given below are my contributions to the project.
       [\#63](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/63)
       [\#71](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/71)
       [\#180](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/180)
+    * Update Table of Contents:
+      [\#386](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/386)
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): 
@@ -88,7 +92,9 @@ Given below are my contributions to the project.
     [\#185](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/185), 
     [\#295](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/295),
     [\#305](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/305),
-    [\#348](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/348)
+    [\#348](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/348),
+    [\#360](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/360),
+    [\#372](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/372)
   * Reported bugs for other team during PE Dry Run: 
     [\#105](https://github.com/AY2122S1-CS2103T-W15-4/tp/issues/105),
     [\#118](https://github.com/AY2122S1-CS2103T-W15-4/tp/issues/118), 
