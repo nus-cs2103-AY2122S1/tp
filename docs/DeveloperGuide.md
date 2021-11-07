@@ -34,7 +34,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div class="code-example bg-grey-lt-000">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in
+:bulb: The `.puml` files used to create diagrams in this document can be found in
 the [diagrams](https://github.com/AY2122S1-CS2103-F10-2/tp/blob/master/docs/diagrams) folder. Refer to the [_PlantUML
 Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit
 diagrams.
@@ -293,7 +293,7 @@ SortCommand#execute() -> Model#sortItem() -> Inventory#sortItems() -> UniqueItem
 ### Controlling the Display Panel in UI
 
 The main panel of displayed items in the UI is managed by `DisplayListPanel` in the UI component. 
-This panel is dependent on changes made by command logic and should be able to be toggled to display different items 
+This panel is dependent on changes made by command logic and should be able to be toggled to display different lists. 
 (e.g. inventory items, items in current order, list of transactions, etc.).
 
 To minimise coupling between the logic and UI component, `DisplayListPanel` adopts an **observer pattern**.
@@ -304,25 +304,25 @@ To minimise coupling between the logic and UI component, `DisplayListPanel` adop
 This way, any changes to model can be propagated to the ui without having to explicitly have knowledge about the ui component.
 
 `DisplayList` is composed of 3 lists.
-1. `DisplayList#filtered` A filtered list that is observed by `DisplayListPanel`.
-2. `DisplayList#displayed` An observable list that acts as the base for `DisplayList#filtered`. 
+1. `DisplayList#filtered` —  A filtered list that is observed by `DisplayListPanel`.
+2. `DisplayList#displayed` —  An observable list that acts as the base for `DisplayList#filtered`. 
 Observes the current `DisplayList#source`.
-3. `DisplayList#source` An observable list that acts as the base for `DisplayList#displayed`.
+3. `DisplayList#source` —  An observable list that acts as the base for `DisplayList#displayed`.
 
 To propagate any changes to the filtered list, to be reflected to the ui, `DisplayList` can:
 
-1. **Set a predicate**. 
+1. **Filter the displayed list**. 
 
 Set a predicate on the filtered list. This is done when items to be displayed already exists in `DisplayList#source`.
 
-2. **Edit the source**.
+2. **Mutate the displayed list**.
 
 When the source is edited outside `DisplayList`, it will notify `DisplayList#displayed`, which will then copy and reflect all changes.
 This, resultantly updates the `DisplayList#filtered` and the display panel.
 
 3. **Update the source**.
 
-Call `DisplayList#setItems` which takes in an observable list of items. 
+Call `DisplayList#setItems` which takes in an observable list of items as a new source. 
 `DisplayList` removes the listener from the previous source and adds a new listener to the new source.
 It also updates `DisplayList#displayed` to reflect the new source.
 This is done when we want to switch between lists to display. (e.g. displaying transactions instead of inventory)
@@ -353,6 +353,65 @@ However, if BogoBogo is to be scaled up in the future, there might be a need for
 Proposed upgrade: 
 Instead of relying on JavaFX's `ObservableList`, we can create a customised observable list that can reference multiple sources.
 From there, we should be able to toggle which source we want to be displaying on the `filteredlist`. This way, copying is no longer required.
+
+### [Proposed Feature] Autocompleting commands
+
+BogoBogo is optimised for users that prefer the speed of CLI-based applications. 
+The application will be more attractive to typists if there is an autocompleting feature.
+With the feature, the user doesn't need to type entire command keywords or product names.
+
+```
+System: BogoBogo
+Sugggested Use Case —  Autocompleting a command
+Actor: User
+MSS:
+  1. User types half a command.
+  2. User requests for BogoBogo to autocomplete the command.
+  3. BogoBogo suggests to the user a complete command.
+     Step 2 - 3 is repeated until User finds the intended command.
+  4. User submits the autocompleted command.
+  5. BogoBogo processes the command.
+
+Extensions:
+  2a. BogoBogo cannot guess the user's command.
+    2a1. BogoBogo notifies the user it cannot autocomplete the command.
+    2a2. User enters the entire command.
+         Use case resumes from step 5.
+```
+
+*Lower level details*{: .text-purple-000 }
+
+Autocompletion can be facilitated by a `Wordbank` class which contains:
+* A trie for command keywords
+* A trie for existing item names.
+
+A `CompleteCommand` can then query `Wordbank` to complete either a command keyword or item name. 
+`Wordbank` also has to be updated when the user adds or removes a unique item name.
+
+![WordbankUML](images/WordbankUML.png)
+
+*Higher level details*{: .text-purple-000 }
+
+BogoBogo will have 2 different ways to react to a command.
+
+![AutocompleteActivityDiagram](images/AutocompleteActivityDiagram.png)
+
+1. The user hits the `enter` key: the command is processed normally.
+2. The user hits the `tab` key: the command is autocompleted.
+
+For the ui to distinguish the 2, we will need to implement a `CommandSuggestion` class that extends `CommandResult`.
+Should `CommandBox` detect a `CommandSuggestion` class when executing a command, it will adopt the suggestion stored in the result.
+
+Here's an example of how BogoBogo can react to the command text "add noo" followed by the user hitting the `tab` character.
+![AutocompleteSequenceDiagram](images/AutocompleteSequenceDiagram.png)
+
+### Design considerations
+
+BogoBogo adopts an [MVC pattern](https://nus-cs2103-ay2021s1.github.io/website/se-book-adapted/chapters/designPatterns.html#model-view-controller-mvc-pattern). 
+By utilising a `CommandSuggestion` class to store the autocompleted command, the partition between view and controller is retained.
+
+Alternatively, `CommandBox` can give `Logic` a callback to edit its text field. 
+However, implementing auxiliary methods to support the callback pattern will likely require more effort.
 
 --------------------------------------------------------------------------------------------------------------------
 
