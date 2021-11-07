@@ -11,6 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,12 +48,14 @@ public class MarkCommand extends Command {
             + COMMAND_WORD + " " + PREFIX_DASH_NAME + "Jace "
             + PREFIX_DATE + "2021-11-11" + " " + PREFIX_DATE + "2021-11-13";
 
-    public static final String DEFAULT_EXECUTION = "For the period: \n%2$s\n\n%1$d staff have been marked:\n"
+    public static final String DEFAULT_EXECUTION = "For the period: \n%2$s\n\n%1$d staff(s) have been marked:\n"
             + "%3$s";
+
     public static final String NOTHING_CHANGED = "For the input duration: "
-            + "\n%1$s\n\nThe staff \"%2$s\" has already been marked.";
+            + "\n%1$s\n\nThe staff(s) have already been marked, no change has been done:\n%2$s";
     public static final String NO_ONE_SATISFIES_QUERY = "The field(s) indicated is/are not "
             + "satisfied by any staff in Staff'd";
+
     private final Period period;
     private final PersonContainsFieldsPredicate predicate;
     private final int index;
@@ -91,11 +94,14 @@ public class MarkCommand extends Command {
         if (total == 0) {
             throw new CommandException(NO_STAFF_SATISFIES_QUERY);
         }
-
+        List<String> conflicts = new ArrayList<>();
         for (Person p : toModify) {
             if (p.mark(period).equals(p)) {
-                throw new CommandException(String.format(NOTHING_CHANGED, period, p.getName()));
+                conflicts.add(p.getName().toString());
             }
+        }
+        if (conflicts.size() != 0) {
+            throw new CommandException(String.format(NOTHING_CHANGED, period, listToString(conflicts)));
         }
         for (Person p : toModify) {
             model.setPerson(p, p.mark(period));
