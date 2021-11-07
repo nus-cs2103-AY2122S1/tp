@@ -30,6 +30,13 @@ public class StudentListPanel extends UiPart<Region> {
     }
 
     /**
+     * Returns the student list region.
+     */
+    public Region getRegion() {
+        return studentListView;
+    }
+
+    /**
      * Custom {@code ListCell} that displays the graphics of a {@code Student} using a {@code StudentCard}.
      */
     static class StudentListViewCell extends ListCell<Student> {

@@ -171,7 +171,7 @@ public class ModelManager implements Model {
         requireAllNonNull(target, week);
         Student newStudent = target.clone();
         newStudent.toggleAttendance(week);
-        updateGroup(target, newStudent);
+        setStudent(target, newStudent);
     }
 
     @Override
@@ -185,7 +185,7 @@ public class ModelManager implements Model {
         requireAllNonNull(target, week);
         Student newStudent = target.clone();
         newStudent.toggleParticipation(week);
-        updateGroup(target, newStudent);
+        setStudent(target, newStudent);
     }
 
     @Override

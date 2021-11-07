@@ -30,9 +30,16 @@ public class GroupListPanel extends UiPart<Region> {
     }
 
     /**
+     * Returns the group list region.
+     */
+    public Region getRegion() {
+        return groupListView;
+    }
+
+    /**
      * Custom {@code ListCell} that displays the graphics of a {@code Group} using a {@code GroupCard}.
      */
-    class GroupListViewCell extends ListCell<Group> {
+    static class GroupListViewCell extends ListCell<Group> {
         @Override
         protected void updateItem(Group group, boolean empty) {
             super.updateItem(group, empty);

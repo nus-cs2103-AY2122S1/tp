@@ -40,9 +40,9 @@ public class MainWindow extends UiPart<Stage> {
     private final Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private StudentListPanel studentListPanel;
-    private TaskListPanel taskListPanel;
-    private GroupListPanel groupListPanel;
+    private final StudentListPanel studentListPanel;
+    private final TaskListPanel taskListPanel;
+    private final GroupListPanel groupListPanel;
     private Model.DisplayType currentDisplay;
     private final HelpWindow helpWindow;
 
@@ -62,7 +62,7 @@ public class MainWindow extends UiPart<Stage> {
     private VBox terminalContainer;
 
     @FXML
-    private StackPane statusbarPlaceholder;
+    private StackPane statusBarPlaceholder;
 
     @FXML
     private Label listName;
@@ -83,6 +83,12 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        studentListPanel = new StudentListPanel(logic.getFilteredStudentList());
+        groupListPanel = new GroupListPanel(logic.getFilteredGroupList());
+        taskListPanel = new TaskListPanel(logic.getFilteredTaskList());
+        listPanelPlaceholder.getChildren().add(groupListPanel.getRegion());
+        listPanelPlaceholder.getChildren().add(taskListPanel.getRegion());
+        listPanelPlaceholder.getChildren().add(studentListPanel.getRegion());
     }
 
     public Stage getPrimaryStage() {
@@ -127,14 +133,12 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        studentListPanel = new StudentListPanel(logic.getFilteredStudentList());
-        listPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
         currentDisplay = STUDENTS;
 
         listName.setText(STUDENTS_LIST_NAME);
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
-        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
+        statusBarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
@@ -148,19 +152,19 @@ public class MainWindow extends UiPart<Stage> {
         if (currentDisplay != type) {
             switch (type) {
                 case STUDENTS:
-                    studentListPanel = new StudentListPanel(logic.getFilteredStudentList());
-                    listPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
+                    listPanelPlaceholder.getChildren().remove(studentListPanel.getRegion());
+                    listPanelPlaceholder.getChildren().add(studentListPanel.getRegion());
                     listName.setText(STUDENTS_LIST_NAME);
                     break;
-                case TASKS:
-                    taskListPanel = new TaskListPanel(logic.getFilteredTaskList());
-                    listPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
-                    listName.setText(TASKS_LIST_NAME);
-                    break;
                 case GROUPS:
-                    groupListPanel = new GroupListPanel(logic.getFilteredGroupList());
-                    listPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
+                    listPanelPlaceholder.getChildren().remove(groupListPanel.getRegion());
+                    listPanelPlaceholder.getChildren().add(groupListPanel.getRegion());
                     listName.setText(GROUPS_LIST_NAME);
+                    break;
+                case TASKS:
+                    listPanelPlaceholder.getChildren().remove(taskListPanel.getRegion());
+                    listPanelPlaceholder.getChildren().add(taskListPanel.getRegion());
+                    listName.setText(TASKS_LIST_NAME);
                     break;
             }
             currentDisplay = type;
