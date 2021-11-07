@@ -741,27 +741,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is `WhereTourGo` and the **Actor** is the `User`, unless specified otherwise)
-
-**UC01 - Add a Contact**
-**UC02 - Edit a Contact**
-**UC03 - Delete a Contact**
-**UC04 - List all Contacts**
-**UC05 - Find a Contact**
-**UC06 - Filter for Contacts**
-**UC07 - Sort all Contacts**
-**UC08 - Summarize all Contacts**
-**UC09 - View a Contact**
-**UC10 - Navigate Input History**
-**UC11 - Undo an Operation**
-**UC12 - Redo an Operation**
-**UC13 - Export a Contact by Index**
-**UC14 - Export all Contacts in Filtered List**
-**UC15 - Clear all Contacts**
-**UC16 - Exit the App**
-**UC17 - View Help Page**
-**UC18 - Display Commands**
-
+(For all use cases below, the **System** is `WhereTourGo` and the **Actor** is the `User`, unless specified otherwise.)
 
 **UC01 - Add a Contact**
 
@@ -918,7 +898,7 @@ Use case ends.
 
   Use case ends.
 
-**UC08 - Summarising Contacts**
+**UC08 - Summarize all Contacts**
 
 **MSS**
 
@@ -1170,8 +1150,8 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `list`<br>
        Expected: All contacts are listed in the Contact Pane. Success message shown in the status message. Summary will be shown in the Display Pane.
 
-    1. Other incorrect list commands to try: `list abc`, `list 2`, `...` <br>
-       Expected: All contacts will not be listed in Contact Pane, remains in its previous state. Error details shown in the status message.
+    2. Other incorrect list commands to try: `list abc`, `list 2`, `...` <br>
+        Expected: All contacts will not be listed in Contact Pane, remains in its previous state. Error details shown in the status message.
 
 ### Locating contacts
 
@@ -1313,7 +1293,7 @@ testers are expected to do more *exploratory* testing.
    1. Test case: Pressing up arrow key (When there are no previously saved commands)<br>
       Expected: Resets the current command in the command box to its previous value
 
-   1. Test case Pressing up arrow key (When there are previously saved commands)<br>
+   2. Test case Pressing up arrow key (When there are previously saved commands)<br>
       Expected: Changes the current command in the command box to the previous command
 
 1. Navigating input history using the down arrow key
@@ -1321,7 +1301,7 @@ testers are expected to do more *exploratory* testing.
    1. Test case: Pressing down arrow key (When there are no next saved commands)<br>
       Expected: Clears the current command in the command box
 
-   1. Test case: Pressing down arrow key (When there are next saved commands)<br>
+   2. Test case: Pressing down arrow key (When there are next saved commands)<br>
       Expected: Changes the current command in the command box to the next saved value
 
 ### Clicking on contacts
@@ -1334,23 +1314,23 @@ testers are expected to do more *exploratory* testing.
 ### Undoing operations
 1. Undoing changes consecutively
 
-* Prerequisites: Multiple contacts in the list, contact with name ‘Marina Bay Sands’ exists. Address book history set up by executing the following commands in order :
-       1. `delete n/Marina Bay Sands`
-       1. `add c/att n/Singapore Flyers p/92345678 e/123@example.com a/30 Raffles Ave, Singapore 039803 ra/4`<br><br>
+* Prerequisites: Multiple contacts in the list, contact with name ‘Marina Bay Sands’ exists. Address book history set up by executing the following commands in order:<br>
+       1. `delete n/Marina Bay Sands`<br>
+       2. `add c/att n/Singapore Flyers p/92345678 e/123@example.com a/30 Raffles Ave, Singapore 039803 ra/4`<br><br>
 
     1. Test case: `undo`<br>
        Expected: Previously added contact, `Singapore Flyers` is removed from address book. Undo success message shown in the status message.
 
-    1. Test case: `undo`<br>
-      Expected: Previously deleted contact, `Marina Bay Sands` is added back to address book. Undo success message shown in the status message.
+    2. Test case: `undo`<br>
+        Expected: Previously deleted contact, `Marina Bay Sands` is added back to address book. Undo success message shown in the status message.
 
-    1. Test case: `undo`<br>
+    3. Test case: `undo`<br>
        Expected: No changes to address book or contact list. Error details shown in the status message.
 
 ### Redoing operations
 1. Redoing changes consecutively
 
-* Prerequisites: Multiple contacts in the list, contact with name ‘Marina Bay Sands’ and 'Singapore Flyer' exists, `Singapore Flyer` is the first contact in the list. Address book history set up by executing the following commands in order :<br>
+* Prerequisites: Multiple contacts in the list, contact with name ‘Marina Bay Sands’ and 'Singapore Flyer' exists, `Singapore Flyer` is the first contact in the list. Address book history set up by executing the following commands in order:<br>
         1. `delete n/Marina Bay Sands`<br>
         2. `edit 1 e/123@example.com`<br>
         3. `undo`<br>
@@ -1359,10 +1339,10 @@ testers are expected to do more *exploratory* testing.
   1. Test case: `redo`<br>
     Expected: Previously restored contact, `Marina Bay Sands` is deleted from address book. Redo success message shown in the status message.
 
-  1. Test case: `redo`<br>
+  2. Test case: `redo`<br>
        Expected: Previous edits made to `Singapore Flyers` is restored, email of `Singapore Flyers` changed back to `123@example.com`. Redo success message shown in the status message.
 
-  1. Test case: `redo`<br>
+  3. Test case: `redo`<br>
        Expected: No changes to address book or contact list. Error details shown in the status message.
 
 ### Exporting data
@@ -1394,10 +1374,10 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `clear`<br>
        Expected: All contacts are cleared from WhereTourGo. Success message shown in the status message. Contact Pane will be empty.
 
-    1. Test case: `clear`<br> and repeat `clear` again<br>
-       Expected: Cannot be cleared twice. Error message shown in the status message. Contact Pane will remain empty.
+    2. Test case: `clear`<br> and repeat `clear` again<br>
+        Expected: Cannot be cleared twice. Error message shown in the status message. Contact Pane will remain empty.
 
-    1. Other incorrect clear commands to try: `clear abc`, `clear 2`, `...` <br>
+    3. Other incorrect clear commands to try: `clear abc`, `clear 2`, `...` <br>
        Expected: No contacts are cleared. Error details shown in the status message.
 
 ### Saving data
@@ -1414,7 +1394,7 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `exit`<br>
        Expected: WhereTourGo application window closes.
 
-    1. Other incorrect exit commands to try: `exit abc`, `exit 2`, `...` <br>
+    2. Other incorrect exit commands to try: `exit abc`, `exit 2`, `...` <br>
        Expected: WhereTourGo is not exited. Error details shown in the status message.
 
 ### Viewing help
@@ -1424,7 +1404,7 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `help`<br>
       Expected: User Guide is opened in the User's default browser.
 
-   1. Other incorrect exit commands to try: `help abc`, `help 2`, `...` <br>
+   2. Other incorrect exit commands to try: `help abc`, `help 2`, `...` <br>
       Expected: WhereTourGo does not open User Guide. Error details shown in the status message.
 
 ### Displaying commands
@@ -1434,7 +1414,7 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `cmd` <br>
       Expected: Command summary is opened in the User's default browser.
 
-   1. Other incorrect exit commands to try: `cmd abc`, `cmd 2`, `...` <br>
+   2. Other incorrect exit commands to try: `cmd abc`, `cmd 2`, `...` <br>
       Expected: WhereTourGo does not open command summary. Error details shown in the status message.
 
 ## **Appendix: Effort**
