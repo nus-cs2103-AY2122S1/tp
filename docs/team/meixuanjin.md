@@ -38,8 +38,8 @@ Given below are my contributions to the project.
         * Updated file to reflect changes to application, and a quick start guide: [\#96](https://github.com/AY2122S1-CS2103-T16-2/tp/pull/96)
 
 * **Community**:
-    * PRs reviewed (with non-trivial review comments): [\#89](https://github.com/AY2122S1-CS2103-T16-2/tp/pull/89), 
-  [\#80](https://github.com/AY2122S1-CS2103-T16-2/tp/pull/80), [\#188](https://github.com/AY2122S1-CS2103-T16-2/tp/pull/188), 
+    * PRs reviewed (with non-trivial review comments): [\#89](https://github.com/AY2122S1-CS2103-T16-2/tp/pull/89),
+  [\#80](https://github.com/AY2122S1-CS2103-T16-2/tp/pull/80), [\#188](https://github.com/AY2122S1-CS2103-T16-2/tp/pull/188),
   [\#187](https://github.com/AY2122S1-CS2103-T16-2/tp/pull/187)
     * Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/AY2122S1-CS2103T-W16-2/tp/issues/198),
   [2](https://github.com/AY2122S1-CS2103T-W16-2/tp/issues/197))
