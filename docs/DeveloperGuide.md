@@ -1221,6 +1221,7 @@ testers are expected to do more *exploratory* testing.
    2. The test cases mirror `Test 1`, with he student being viewed in the result display still being viewed in the same 
    state after execution of the command regardless if the execution of the command is successful or not.
    To view the changes in `Tag` for the student being viewed in the result display, use `view 1` after the tag command.
+
 ***
 
 #### Get Personal Detail
