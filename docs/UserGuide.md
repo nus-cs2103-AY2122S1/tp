@@ -248,11 +248,11 @@ Command aliases: `del` `rm` `d`
 
 Finds a contact by specifying either the name/module code(s).
 
-Format: `find n/NAME`/`find m/MODULE_CODE(S)`
-* Can only search by name or module code(s), but not both at once <br> i.e. You cannot perform `find n/Ben m/CS2040S`
+Format: `find n/NAME(S)`/`find m/MODULE_CODE(S)`
+* Can only search by name(s) or module code(s), but not both at once <br> i.e. You cannot perform `find n/Ben m/CS2040S`
 * The search is case-insensitive <br> e.g `ben` will match `Ben`
 * The order of the keywords does not matter <br> e.g. `Ben Tan` will match `Tan Ben`
-* Partial words will also be matched, for both name and module code searches. <br> e.g. `Ben` will match `Benjamin`
+* Partial words will also be matched, for both name and module code searches. <br> e.g. `Ben` will match `Benjamin`, `S123` will match `CS1231`
 
 <div markdown="span" class="alert alert-primary">:exclamation: **Important:**
 If multiple words are specified for the name search, only results matching all the words specified will be returned <br>
@@ -262,9 +262,9 @@ e.g. `find m/CS2030S CS2040S` will only return contacts that have both `CS2030S`
 </div>
 
 Examples:
-* `find n/Ben`: Search contacts for names containing `Ben`
-* `find n/Ben Bernice Mary`: Search contacts with names containing either `Ben`, `Bernice` or `Mary`
-* `find m/CS2103T CS2100`: Search contacts with the inputted module code
+* `find n/Ben`: Search contacts that have names that contain `Ben`
+* `find n/Ben Bernice Mary`: Search contacts with names containing all of `Ben`, `Bernice` and `Mary`
+* `find m/CS2103T CS2100`: Search contacts that has both module codes `CS2103T` and `CS2100`
 
 Command alias: `f`
 
