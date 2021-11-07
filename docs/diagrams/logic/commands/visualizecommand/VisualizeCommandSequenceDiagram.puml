@@ -24,9 +24,9 @@ loop all students in studentList
     return
 end
 
-vc -> mm ++ :setAdditionalViewType(VISUALIZE)
+vc -> mm ++ :setAdditionalViewType(AdditionalViewType.VISUALIZE)
 deactivate
-vc -> mm ++ :setAdditionalInfo(classAssessmentResults)
+vc -> mm ++ :setAdditionalInfo(AdditionalInfo.of(orderedAssessmentResults))
 deactivate
 
 create result
