@@ -667,12 +667,10 @@ Use case ends.
 4.  The user should have basic knowledge of the Command Line Interface to operate the application smoothly.
 5.  Should be able to hold more than 100 contacts with no noticeable drop in performance.
 
-*{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Tag**: A categorisation given to a contact
 
 
 --------------------------------------------------------------------------------------------------------------------
