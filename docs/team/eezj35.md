@@ -17,7 +17,7 @@ Given below are my contributions to the project.
 * **New Feature**: Added the ability to add on remarks to students, and to delete individual remarks.
   * What it does: Allows the user to tag additional remarks to students on top of existing ones, and to also delete specific remarks that they do not need anymore.
   * Justification: The previous implementation needed users to re-type existing remarks if they wanted to keep existing remarks and add new ones. It also did not allow users to delete individual remarks. This feature saves the user time if they want to add or delete remarks, and makes it more convenient for them.
-  * Highlights: This required editing existing classes and methods to check for remarks to delete and add. It required analysing what the target user would most likely do with the remarks feature in the app, and re-designing the feature to better suit their needs. It required considering various new checks on the inputs as well.
+  * Highlights: This required editing existing classes and methods to check for remarks to delete and add. It required analysing the target user and re-designing the feature to better suit their needs. It required considering various new checks on the inputs as well.
 
 * **New Feature**: Added feature where student list is sorted by student names, and lesson list is sorted by grade.
   * What it does: Student list is now displayed in sorted ascending order by student names, and lesson list is sorted by grade, from 'P1' to 'S5'.
