@@ -56,6 +56,7 @@ You can reach us at the email `e0559779@u.nus.edu`
 <img src="images/tanjiaxian99.png" width="200px">
 
 [[github](https://github.com/tanjiaxian99)]
+[[portfolio](team/tanjiaxian99.md)]
 
 * Role: Developer
 * Responsibilities: Code Quality
