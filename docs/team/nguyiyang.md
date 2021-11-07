@@ -11,11 +11,43 @@ Given below are my contributions to the project.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/)
 
+* **Enhancements implemented**:
+  * Viewing student functionality
+    * Command for viewing a student
+    * Creating a pop up window to display student information
+  * Tutorial Group implementation
+    * Creating TutorialGroup and its fields, GroupNumber and GroupType
+    * Creating UniqueTutorialGroupList
+    * Saving tutorial groups in JSON file under each tutorial class
+    * Commands for adding and removing tutorial groups
+
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features `list` and `clear`
+    * Documentation for the features `list` and `clear`
+    * Modifying introduction to include target audience and make it user-centric
+    * Add an overview of main features
+    * Documentation for adding and removing tutorial group from tutorial class commands
   * Developer Guide:
-    * Added documentation for Target Users, user
+    * Documentation for adding and removing tutorial group from tutorial class
+    * Documentation for Non-functional Requirements
+    * Updated class diagram for Model component to include tutorial groups
+    * Created sequence diagram for `AddGroupCommand`
+    * Activity diagram for recommended workflow for ClassMATE
+    * Use cases for adding tutorial group
+    * User stories for adding and removing tutorial group
 
-* **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#57](), [\#59]()
+* **Team-based tasks**:
+  * Updated the link of the GitHub Actions build status badge
+  * Tested features and reported bugs between project iterations [\#123](https://github.com/AY2122S1-CS2103T-W15-1/tp/issues/123)
+  * Bug fixing [\#237](https://github.com/AY2122S1-CS2103T-W15-1/tp/pull/236), [\#200](https://github.com/AY2122S1-CS2103T-W15-1/tp/pull/200)
+    Some bugs include:
+    * Tutorial group of student not removed after tutorial class of a student is changed [\#224](https://github.com/AY2122S1-CS2103T-W15-1/tp/issues/224)
+    * Tutorial groups of a student not removed after deleting a tutorial class [\#237](https://github.com/AY2122S1-CS2103T-W15-1/tp/issues/237)
+    * Adding students to a group in non-existent class [\#228](https://github.com/AY2122S1-CS2103T-W15-1/tp/issues/228)
+
+* **Review/mentoring contributions**:
+  * PRs reviewed: Suggested an alternative implementation to reduce code repetition [\#198](https://github.com/AY2122S1-CS2103T-W15-1/tp/pull/198)
+
+* **Contributions beyond the project team**:
+  * Reporting bugs in other team's products. Some examples include: [1](https://github.com/AY2122S1-CS2103T-T15-4/tp/issues/222), [2](https://github.com/AY2122S1-CS2103T-T15-4/tp/issues/221)
+  * Reviewing the User Guides and Developer Guides of two peer teams
