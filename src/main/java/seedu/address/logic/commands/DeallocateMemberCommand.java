@@ -74,6 +74,12 @@ public class DeallocateMemberCommand extends Command {
                 toDeallocateFrom.getName(), dayName));
     }
 
+    /**
+     * Handles the allocation of the member to the facility.
+     * @param toBeDeallocated Member to be deallocated from the facility.
+     * @param toDeallocateFrom Facility to deallocate the member from.
+     * @throws CommandException if deallocation of the member from the facility is not feasible.
+     */
     private void handleDeallocation(Member toBeDeallocated, Facility toDeallocateFrom, Model model) throws CommandException {
         if (!toDeallocateFrom.isMemberAllocatedOnDay(toBeDeallocated, day)) {
             throw new CommandException(Messages.MESSAGE_MEMBER_NOT_ALLOCATED);

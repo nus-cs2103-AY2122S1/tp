@@ -74,10 +74,10 @@ public class AllocateMemberCommand extends Command {
     }
 
     /**
-     * Handles the allocation of the member to the facility
-     * @param toBeAllocated Member to be allocated
-     * @param toAllocateTo Facility to allocate member to
-     * @throws CommandException if allocation of the member to the facility is not feasible
+     * Handles the allocation of the member to the facility.
+     * @param toBeAllocated Member to be allocated.
+     * @param toAllocateTo Facility to allocate member to.
+     * @throws CommandException if allocation of the member to the facility is not feasible.
      */
     private void handleAllocation(Member toBeAllocated, Facility toAllocateTo, Model model) throws CommandException {
         if (toAllocateTo.isMemberAllocatedOnDay(toBeAllocated, day)) {
