@@ -46,6 +46,13 @@ public class LastMet implements OptionalNonStringBasedField, StandardFieldLength
     }
 
     /**
+     * Returns true if last met does not hold any dates.
+     */
+    public boolean isEmpty() {
+        return this.value == null;
+    }
+
+    /**
      * Returns if a given string is a valid LastMet string representation.
      */
     public static boolean isValidLastMet(String test) {
