@@ -60,7 +60,9 @@ TAB empowers tutors to provide the best quality home tuition service by making a
   * Accelerators and menu buttons for easy navigation ([#202](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/202)).
   * Selecting a student in the list displays their lessons in the lesson panel, allowing easy browsing ([#190](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/190)).
   * CommandBox automatically focuses when user starts typing a command, greatly increasing speed and productivity drastically improving UX ([#202](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/202)).
-  
+
+<div style="page-break-after: always;"></div>
+
 #### Contributions to the User Guide
 
 * [Managing Your Schedule](../UserGuide.md#managing-your-schedule) section
