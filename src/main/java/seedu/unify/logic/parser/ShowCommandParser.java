@@ -32,11 +32,20 @@ public class ShowCommandParser implements Parser<ShowCommand> {
             return new ShowCommand(supplied, 2);
         } else {
             trimmedArgs = args.trim();
-            if (trimmedArgs.isEmpty()) {
+            if (trimmedArgs.isEmpty() || !isParsable(trimmedArgs)) {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, ShowCommand.MESSAGE_USAGE));
             }
             return new ShowCommand(Integer.parseInt(trimmedArgs), 1);
+        }
+    }
+
+    public static boolean isParsable(String input) {
+        try {
+            Integer.parseInt(input);
+            return true;
+        } catch (final NumberFormatException e) {
+            return false;
         }
     }
 

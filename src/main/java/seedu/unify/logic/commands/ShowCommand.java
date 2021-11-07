@@ -34,7 +34,7 @@ public class ShowCommand extends Command {
             + WEEKS;
     public static final String MESSAGE_SUCCESS_1 = "Week %d is shown";
     public static final String MESSAGE_SUCCESS_2 = "Week %d is shown. \n"
-            + "On this week date %s falls on a %s";
+            + "On this week, the given date(%s) falls on a %s";
     public static final String MESSAGE_DUPLICATE_COMMAND = "Week %d is already being shown";
 
     private String suppliedDate = null;
