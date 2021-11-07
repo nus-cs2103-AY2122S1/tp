@@ -351,7 +351,8 @@ The diagram below illustrates the flow of adding an appointment:
 
 ### Deleting an appointment <a name="deleting-an-appointment"/>
 Deleting an appointment requires the user to input a valid index of the desired appointment in the appointment list.
-The diagram below illustrates the flow of deleting an appointment:
+The diagram below illustrates the flow of deleting an appointment:<br>
+
 ![DeleteAppointment](images/DeleteAppointmentActivityDiagram.png)
 
 ![DeleteAppointment](images/DeleteAppointmentSequenceDiagram.png)
