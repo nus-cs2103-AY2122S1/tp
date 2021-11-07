@@ -85,7 +85,9 @@ public class CommandTestUtil {
     public static final String INVALID_TIMESLOT_MINUTE = " " + PREFIX_TIMESLOT + "Mon 11:90-12:00";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
-    public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
+    public static final String PREAMBLE_NON_EMPTY = " NonEmptyPreamble ";
+    public static final String PREAMBLE_INTEGER = " 1 ";
+    public static final String PREAMBLE_SYMBOL = " $$ ";
 
     public static final EditCommand.EditStudentDescriptor DESC_AMY;
     public static final EditCommand.EditStudentDescriptor DESC_BOB;
