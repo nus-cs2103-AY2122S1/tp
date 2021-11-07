@@ -81,14 +81,14 @@ Format: `help`
 
 Attribute | Prefix | Format
 ------|---|---------------------------------------------------------
-**Name** | `n/` | Names should only contain alphanumeric characters and spaces, and it should not be blank | `add n/NAME S/STUDENT_ID N/NUSNet_ID g/GITHUB_ID T/TUTORIAL_ID {r/student \| r/tutor} [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]...` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Phone** | `p/` | Phone numbers should only contain numbers, and it should be at least 3 digits long
-**Email** | `e/` | Emails should be of the format `"NUS Network ID"@u.nus.edu`
-**Address** | `a/` | Addresses can take any values, and it should not be blank
-**Tag** | `t/` | Tags names should be alphanumeric
+**NAME** | `n/` | Names should only contain alphanumeric characters and spaces, and it should not be blank | `add n/NAME S/STUDENT_ID N/NUSNet_ID g/GITHUB_ID T/TUTORIAL_ID {r/student \| r/tutor} [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]...` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**PHONE** | `p/` | Phone numbers should only contain numbers, and it should be at least 3 digits long
+**EMAIL** | `e/` | Emails should be of the format `"NUS Network ID"@u.nus.edu`
+**ADDRESS** | `a/` | Addresses can take any values, and it should not be blank
+**TAG** | `t/` | Tags names should be alphanumeric
 **GITHUB_ID** | `g/` | GitHub ID must be valid ie alphanumeric separated by single dash and it should not start or end with a dash, and it should not be blank
-**NUSNet_ID** | `N/` | NUS Network ID must be valid ie starting with e or E followed by 7 digits, and it should not be blank
-**Type** | `r/` | Type must be valid ie `student` or `tutor`, and it should not be blank
+**NUSNET_ID** | `N/` | NUS Network ID must be valid ie starting with e or E followed by 7 digits, and it should not be blank
+**TYPE** | `r/` | Type must be valid ie `student` or `tutor`, and it should not be blank
 **STUDENT_ID** | `S/` | Student ID must be valid ie starting with a or A followed by 7 digits and a single alphabet, and it should not be blank
 **TUTORIAL_ID** | `T/ `| Tutorial ID must be valid ie a 2 digits, and it should not be blank
 
