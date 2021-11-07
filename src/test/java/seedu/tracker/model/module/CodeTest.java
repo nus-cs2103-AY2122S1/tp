@@ -30,10 +30,13 @@ public class CodeTest {
         assertFalse(Code.isValidCode("^")); // only non-alphanumeric characters
         assertFalse(Code.isValidCode("C1101S")); // only 1 starting letter
         assertFalse(Code.isValidCode("CS110S")); // only 3 digits
+        assertFalse(Code.isValidCode("CS1100SSS")); // 3 ending letters
+
 
         // valid code
         assertTrue(Code.isValidCode("CS1101"));
         assertTrue(Code.isValidCode("CS1101S"));
         assertTrue(Code.isValidCode("CSI1101S"));
+        assertTrue(Code.isValidCode("CSI1101SS"));
     }
 }
