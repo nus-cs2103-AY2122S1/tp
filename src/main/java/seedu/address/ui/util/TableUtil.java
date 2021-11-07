@@ -16,7 +16,7 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 
 /**
- * @author Roland09 - reused
+ * @@author Roland09 - reused
  * Reused from: https://gist.github.com/Roland09/6fb31781a64d9cb62179#file-tableutils-java
  * with modifications
  */
