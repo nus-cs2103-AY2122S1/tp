@@ -518,15 +518,15 @@ Format: `appt -a p/INDEX_OF_PATIENT d/INDEX_OF_DOCTOR s/DATE_AND_TIME [dur/DURAT
 * `DATE_AND_TIME` accepts the format `DD/MM/YYYY HH:MM` e.g. `12/11/2021 20:00`.
 * If you did not include the duration, it will be automatically be set to **10** minutes.
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">
+:bulb: **Tip:**
 You can find the PATIENT_INDEX or DOCTOR_INDEX by toggling to the patient/doctor tab using the `toggle` command.
-</div>
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+:bulb: **Tip:**
 You can add appointments that have happened already! This is especially useful if you just started using PlannerMD
 and would like to store your past appointments!
-</div>
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-After adding an appointment, the appointment list is updated to show all appointments on the date of the added appointment. To go back to the default appointment view which shows appointments for the current day, enter `appt -l`
+:bulb: **Tip:**
+After adding an appointment, the appointment list is updated to show all appointments on the date of the added appointment. 
+To go back to the default appointment view which shows appointments for the current day, enter `appt -l`
 </div>
 
 Examples: `appt -a p/1 d/2 s/12/11/2021 20:00 dur/20 r/Patient wants a blood test` creates an appointment with the
