@@ -773,7 +773,45 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `CohortConnect` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use Case 1: Add user**
+**Use Case 1: Setting Up User Profile**
+
+MSS
+
+1. User enters their Name.
+2. User enters their Telegram Handle.
+3. User enters their GitHub Username.
+4. User clicks on the submit button.
+5. CohortConnect shows the Main Window, signifying that the User Profile was set up.
+   Use case ends.
+
+Extensions
+
+* 4a. CohortConnect detects an error in the entered Name (Invalid Name).
+   * 4a1. CohortConnect shows an error message.
+   * 4a2. CohortConnect requests for a valid Name.
+   * 4a3. User enters new Name.
+   * 4a1-4a3 are repeated until the Name entered is valid.
+   * Use case resumes from step 5.
+
+* 4b. CohortConnect detects an error in the entered Telegram Handle (Invalid Telegram Handle).
+   * 4b1. CohortConnect shows an error message.
+   * 4b2. CohortConnect requests for a valid Telegram Handle.
+   * 4b3. User enters new Telegram Handle.
+   * 4b1-4b3 are repeated until the Telegram Handle entered is valid.
+   * Use case resumes from step 5.
+
+* 4c. CohortConnect detects an error in the entered GitHub Username (Invalid GitHub Username).
+   * 4c1. CohortConnect shows an error message.
+   * 4c2. CohortConnect requests for a valid GitHub Username.
+   * 4c3. User enters new GitHub Username.
+   * 4c1-4c3 are repeated until the GitHub Username entered is valid.
+   * Use case resumes from step 5.
+
+* *a. At any time, the User chooses to close the app.
+   * *a1. CohortConnect closes.
+     Use case ends.
+   
+**Use Case 2: Add user**
 
 MSS
 
@@ -797,7 +835,7 @@ Extensions
   * Steps 1b1-1b3 are repeated until the data entered are valid.
   * Use case resumes from step 2.
 
-**Use Case 2: Edit user**
+**Use Case 3: Edit user**
 
 MSS
 
