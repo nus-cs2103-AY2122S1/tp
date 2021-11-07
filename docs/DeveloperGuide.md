@@ -394,7 +394,7 @@ This command deletes a `Student` from `AcademyDirectory`.
 
 #### Implementation
 `DeleteCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
-The `DeleteCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands)
+The `DeleteCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands).
 
 `DeleteCommand` deletes `Student` based on the relative `INDEX` in the `ObservableList` which is the list of `Student` viewed by the `Avenger`. To do this, `DeleteCommand` makes a call to `VersionedModel#deleteStudent()`.
 
@@ -402,11 +402,20 @@ The specifics are shown in the sequence diagram below:
 ![DeleteCommandSequenceDiagram](images/dg/logic/commands/deletecommand/DeleteCommandSequenceDiagram.png)
 
 ### TagCommand
-{Add description}
+This command assigns tags to a `Student`.
 
 #### Implementation
-The `TagCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands)
-{Add implementation}
+`TagCommand` will extend the `Command` class and consequently `@Override` the `Command#execute()` method
+to serve the aforementioned purpose. The `TagCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands).
+
+`TagCommand` tags a `Student` based on the relative `INDEX` in the `ObservableList`. The `Tag` is implemented with a HashSet
+that stores the `Tag`. When `TagCommand` is executed, the `Student`'s `Tag` attribute will be replaced by a new HashSet
+containing the input `Tag` object(s). In the event the input `Tag` is empty, the `Student`'s `Tag` attribute will be replaced by an
+empty HashSet.
+
+The following sequence diagram describes what happens when `TagCommand` is executed:
+
+![TagCommandSequenceDiagram](images/dg/logic/commands/tagcommand/TagCommandSequenceDiagram.png)
 
 ### GetCommand
 This command serves to retrieve a specific `PersonalDetail` of students or a student.
@@ -425,6 +434,7 @@ list of keywords is not empty, then the pattern-matching behavior for name in `G
 of the [`FilterCommnd`](#filtercommand).
 
 The specifics are shown in the sequence diagram below:
+
 ![GetCommandSequenceDiagram](images/dg/logic/commands/getcommand/GetCommandSequenceDiagram.png)
 
 Because the output of `GetCommand` can be long, for readability reasons the result is displayed
@@ -556,13 +566,18 @@ The following sequence diagram describes what happens when `VisualizeCommand` is
 
 ### FilterCommand
 
-This command filters the `ObservableList` by `NAME` or `TAG`.  
+This command filters the `ObservableList` by `Name` or `Tag`.  
 
 #### Implementation
 
 `FilterCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
 
-{Improve on explanation and add a possible UML Diagram}
+The `FilterCommand` searches the `AcademyDirectory` for students with `Name` or `Tag` matching the keyword and displays
+the student list with the filtered students.
+
+The following sequence diagram describes what happens when `FilterCommand` is executed:
+
+![FilterCommandSequenceDiagram](images/dg/logic/commands/filtercommand/FilterCommandSequenceDiagram.png)
 
 ### SortCommand
 
@@ -954,9 +969,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
     
-* 1b. The input grade is not a positive integer.
+* 1b. The input grade is not a non-negative integer.
 
-    * 1b1. Academy Directory requests for user to enter a positive integer.
+    * 1b1. Academy Directory requests for user to enter a non-negative integer.
 
       Use case resumes at step 1.
 
@@ -1136,11 +1151,28 @@ testers are expected to do more *exploratory* testing.
 
 #### Tag Student
 
-1. Tag a student while all students are being shown
-2. Tag a student while only one student is being shown, with there being more than one student in the list 
+1. Tag a student while all students are being shown, and no student is being viewed.
+   1. Prerequisites: List all students using `list` command. List must contain at least 1 student.
+   2. Test case: `tag 1 t/test` <br>
+      Expected: First student's tag(s) is/are now replaced by "test".
+   3. Test case: `tag 1 t/tag1 t/tag2` <br>
+      Expected: First student's tag(s) is/are now replaced by "tag1" and "tag2".
+   4. Test case: `tag 1 t/` <br>
+      Expected: First student's tag(s) is/are now removed.
+   5. Test case: `tag 1 t/!!!!` <br>
+      Expected: First student's tag(s) remain unchanged. Error details shown in the status message. Result display remain the same.
+   6. Other incorrect tag commands to try:
+      1. `tag t/test` (Missing `INDEX`)
+      2. `tag -1 t/test` (`INDEX` out of bound)
+      3. `tag 1 t/test t/` (Multiple tag entries cannot contain empty tags)
+      4. `tag 1 t/test tag1` (Tags can only contain one word)
 
-1. _{ more test cases to come …​ }_
 
+2. Tag a student while all students are being shown, with a student being viewed.
+   1. Prerequisites: List all students using `list` command. List must contain at least 1 student. View a student using `view 1` command.
+   2. The test cases mirror `Test 1`, with he student being viewed in the result display still being viewed in the same 
+   state after execution of the command regardless if the execution of the command is successful or not.
+   To view the changes in `Tag` for the student being viewed in the result display, use `view 1` after the tag command.
 ***
 
 #### Get Personal Detail
@@ -1178,7 +1210,9 @@ Below are a few test cases which checks for the above. The test cases are by no 
       of all students.
       6. `get e/ p/ te/` <br>
       Expected: Phone number of all students are shown in the result display, followed by email address
-      and then by telegram handle. 
+      and then by telegram handle.
+
+
 2. Retrieving personal detail of all students. At least one student has no phone number and
 at least one student has a phone number.
    1. Prerequisites:
@@ -1189,6 +1223,8 @@ at least one student has a phone number.
    2. Test Cases: Same as point 1 <br>
       Expected: Same as point 1, but only students who have phone numbers will have their phone numbers displayed.
       No change in email address results and/or telegram handle results
+
+
 3. Retrieving personal detail of all students. No student has a phone number. 
    1. Prerequisites:
        - No student has a phone number.
@@ -1201,6 +1237,8 @@ at least one student has a phone number.
          test cases.
          2. For test cases with tags `e/` and/or `te/`, result display will still show email addresses and/or telegram handles
          3. For test cases without the above tags, result display will show "Nothing to show..."
+
+
 4. Retrieving personal detail of all students. No students are present in AcademyDirectory
    1. Prerequisites: Use `clear` command before beginning testing to make sure no students are present in AcademyDirectory 
    2. Test Cases: Same as point 1 <br>
@@ -1208,6 +1246,8 @@ at least one student has a phone number.
          1. Feedback box will always say "Failed to receive one or more personal details. Showing what I can..." for all 
             test cases.
          2. Result display will always show "Nothing to show..."
+   
+
 5. Retrieving personal detail of a student by keyword. At least one student whose name
 matches the given keyword is present in AcademyDirectory. Said student has a phone number.
    1. Prerequisites:
@@ -1237,6 +1277,7 @@ matches the given keyword is present in AcademyDirectory. Said student has a pho
       Expected: Phone number of all students whose name matches `alex` are shown in the result display, followed by email address
       and then by telegram handle.
 
+
 6. Retrieving personal detail of a student by keyword. At least one student whose name matches the given keyword 
 is present in AcademyDirectory. Said student/s have no phone numbers.
    1. Prerequisites:
@@ -1252,6 +1293,7 @@ is present in AcademyDirectory. Said student/s have no phone numbers.
         test cases.
        2. For test cases with tags `e/` and/or `te/`, result display will still show email addresses and/or telegram handles
        3. For test cases without the above tags, result display will show "Nothing to show..."
+
 
 7. Retrieving personal detail of a student by keyword. No student whose name matches the given keyword is present in AcademyDirectory. 
    1. Prerequisites:
@@ -1275,9 +1317,33 @@ is present in AcademyDirectory. Said student/s have no phone numbers.
 ***
 
 #### Add Grade
+After every positive test case, use the command `view 1` or simply click on the first student panel, 
+and open the "View Test Score" tab to view the changes in the grade.
 
-1. _{ more test cases to come …​ }_
+1. Record the grade of a single student's assessment, while all students are being shown in the list and no student is being viewed.
+   1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+   2. Test case: `grade 1 as/ra1 g/15` <br>
+      Expected: First student's RA1 score is now updated to 15.
+   3. Test case: `grade 1 as/readingassessment1 g/15` <br>
+      Expected: No student's grade is modified. Error details are shown in the status message indicating invalid assessment. Result display remains the same.
+   4. Test case: `grade 1 as/ra1 g/101` <br>
+      Expected: No student's grade is modified. Error details are shown in the status message indicating invalid grade. Result display remains the same.
+   5. Other incorrect grade commands to try:
+      1. `grade` (Missing index, assessment and grade)
+      2. `grade 1` (Missing assessment and grade)
+      3. `grade 1 as/ra1` (Missing grade)
+      4. `grade 1 g/15` (Missing assessment)
+      5. `grade -1 as/ra1 g/15` (Index out of bound)
 
+
+2. Record the grade of a single student's assessment, while all students are being shown in the list and a single student is being viewed with no tabs open.
+   1. Prerequisites: List all students using `list` command. Multiple students in the list. View a single student using `view 1`.
+   2. The test cases mirror `Test 1`, with the student being viewed in the result display still being viewed in the same state with no tabs open after execution of the command regardless if the execution of the command is successful or not.
+
+
+3. Record the grade of a single student's assessment, while all students are shown in list and a student is being viewed with the "View Test Score" open 
+   1. Prerequisites: List all students using the list command. Multiple students in the list. View a single student using view 1. Click on "View Participation" in the result display. 
+   2. The test cases mirror Test 1, with the student being viewed in the result display in the state with no tabs open after successful execution of the command. If the execution of the command fails, the result display still shows the student with the "View Test Score" tab open.
 ***
 
 #### Edit Attendance
@@ -1360,35 +1426,74 @@ is present in AcademyDirectory. Said student/s have no phone numbers.
 #### View student information
 
 1. View all related information of a student
-  1. Prerequisite: List all student using the `list` command. Multiple students are shown in the list. **List should have exactly 6 students** (can using sample data provided as default)
-  2. Test case: `view 1`
-     Expected: All related information of the first student is shown on the result display visualizer on the right side. This includes: Student name, current tags, all academic-related information (assessment score, studio participation, studio attendance), and personal contact information (phone, email, telegram)
-     Expected: No information is modified, Academy Directory runs as normal
-     Expected: Status message is that users are viewing student at position 1 of the list
-  3. Test case: `view 6`
-     Expected: All related information of the last student is shown on the result display visualizer on the right side. This includes: Student name, current tags, all academic-related information (assessment score, studio participation, studio attendance), and personal contact information (phone, email, telegram)
-     Expected: No information is modified, Academy Directory runs as normal
-     Expected: Status message is that users are viewing student at position 6 of the list
-  4. Test case: `view 7`
-     Expected: No view is shown on the result display. An error message is shown stating that index number is invalid
-  5. Test case: `view 0`, `view add`, `view myself in front of the mirror as a failure of society`
-     Expected: No view is shown on the result display. An error message is shown stating that index number is invalid (in a sense that it must be a positive integer)
+   1. Prerequisite: List all student using the `list` command. Multiple students are shown in the list. **List should have exactly 6 students** (can using sample data provided as default)
+   2. Test case: `view 1`
+      Expected: All related information of the first student is shown on the result display visualizer on the right side. This includes: Student name, current tags, all academic-related information (assessment score, studio participation, studio attendance), and personal contact information (phone, email, telegram)
+      Expected: No information is modified, Academy Directory runs as normal
+      Expected: Status message is that users are viewing student at position 1 of the list
+   3. Test case: `view 6`
+      Expected: All related information of the last student is shown on the result display visualizer on the right side. This includes: Student name, current tags, all academic-related information (assessment score, studio participation, studio attendance), and personal contact information (phone, email, telegram)
+      Expected: No information is modified, Academy Directory runs as normal
+      Expected: Status message is that users are viewing student at position 6 of the list
+   4. Test case: `view 7`
+      Expected: No view is shown on the result display. An error message is shown stating that index number is invalid
+   5. Test case: `view 0`, `view add`, `view myself in front of the mirror as a failure of society`
+      Expected: No view is shown on the result display. An error message is shown stating that index number is invalid (in a sense that it must be a positive integer)
 
-2. View students when list is altered
-  1. Prerequisite: Using filter to reduce the list view to 1 only. List should only have one student filtered.
-  2. Test case: `view 1`
-     Expected: All related information are shown about the student
-     Expected: Status message is that users are viewing student at position 1 of the list
-  3. Test case: `view 2`
-     Expected: No view is shown on the result display. An error message is shown stating that index number is invalid
-     Significance: View works for the current index number shown on the student list only.
+   6. View students when list is altered
+   7. Prerequisite: Using filter to reduce the list view to 1 only. List should only have one student filtered.
+   8. Test case: `view 1`
+      Expected: All related information are shown about the student
+      Expected: Status message is that users are viewing student at position 1 of the list
+   9. Test case: `view 2`
+      Expected: No view is shown on the result display. An error message is shown stating that index number is invalid
+      Significance: View works for the current index number shown on the student list only.
     
 ***
 
 #### Show Grade
 
-1. _{ more test cases to come …​ }_
+1. Shows the collated scores of all the students in Academy Directory along with the average score, while grades for "RA1" not recorded for all students.
+   1. Prerequisites:
+      1. Clear the Academy Directory using the `clear` command.
+      2. Add three students: <br>
+         `add n/Alex e/alex@email.com te/@alex` <br>
+         `add n/Bob e/bob@email.com te/@bob` <br>
+         `add n/Carol e/carol@email.com te/@carol` <br>
+   2. Test case: `show ra1`
+   3. Expected: Scores displayed for all students should be "NA", the number of students recorded should be "0", and the
+   average should be "NaN".
 
+
+2. Shows the collated scores of all the students in Academy Directory along with the average score, while grades for "RA1" recorded for some students.
+   1. Prerequisites:
+      1. Clear the Academy Directory using the `clear` command.
+      2. Add three students: <br>
+         `add n/Alex e/alex@email.com te/@alex` <br>
+         `add n/Bob e/bob@email.com te/@bob` <br>
+         `add n/Carol e/carol@email.com te/@carol` <br>
+      3. Add grades for all students <br>
+         `grade 1 as/ra1 g/15` <br>
+         `grade 2 as/ra1 g/16` <br>
+   2. Test case: `show ra1`
+   3. Expected: Scores displayed for the students should match the input grades, the number of students recorded should be "2", and the
+      average should be "15.50".
+
+
+3. Shows the collated scores of all the students in Academy Directory along with the average score, while grades for "RA1" recorded for all students.
+  1. Prerequisites:
+    1. Clear the Academy Directory using the `clear` command.
+    2. Add three students: <br>
+       `add n/Alex e/alex@email.com te/@alex` <br>
+       `add n/Bob e/bob@email.com te/@bob` <br>
+       `add n/Carol e/carol@email.com te/@carol` <br>
+    3. Add grades for all students <br>
+       `grade 1 as/ra1 g/15` <br>
+       `grade 2 as/ra1 g/16` <br>
+       `grade 3 as/ra1 g/17` <br>
+  2. Test case: `show ra1`
+  3. Expected: Scores displayed for the students should match the input grades, the number of students recorded should be "3", and the
+     average should be "16".
 ***
 
 #### Visualize all Grades
@@ -1399,7 +1504,26 @@ is present in AcademyDirectory. Said student/s have no phone numbers.
 
 #### Filter Academy Directory
 
-1. _{ more test cases to come …​ }_
+1. Filters the student list while all students are being shown in the list.
+   1. Prerequisites:
+      1. Create students with the following commands: <br> 
+         `add n/Student 1 e/test1@email.com te/@test1 t/tag1`
+         `add n/Student 2 e/test2@email.com te/@test2 t/tag2`
+      2. List all the students using the `list` command. After every test case, use `list` to display all the students.
+   2. Test case: `filter student` <br>
+      Expected: Student list should be filtered to show Student 1 and Student 2.
+   3. Test case: `filter student 1`
+      Expected: Student list should be filtered to show Student 1 and Student 2.
+   4. Test case: `filter 1`
+      Expected: Student list should be filtered to show Student 1 only.
+   5. Test case: `filter tag1`
+      Expected: Student list should be filtered to show Student 1 only.
+   6. Test case: `filter Student1`
+      Expected: Student list should not show Student 1 and/or Student 2.
+   7. Test case: `filter tag`
+      Expected: Student list should not show Student 1 and/or Student 2.
+   8. Test case: `filter`
+      Expected: Student list should remain unchanged. Error details are shown in the status message indicating invalid command format. Result display remains the same.
 
 ***
 
