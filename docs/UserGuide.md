@@ -30,13 +30,13 @@ With BogoBogo, business owners can:
 
 ## Getting started
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1 . Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `BogoBogo.jar` from [here](https://github.com/AY2122S1-CS2103-F10-2/tp/releases).
+2 . Download the latest `BogoBogo.jar` from [here](https://github.com/AY2122S1-CS2103-F10-2/tp/releases).
 
-3. Move the file to the folder you want to use as the _home folder_ for the application.
+3 . Move the file to the folder you want to use as the _home folder_ for the application.
 
-4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app
+4 . Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app
    contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -44,19 +44,19 @@ With BogoBogo, business owners can:
 You might have to give your device permission to open BogoBogo.
 </div>
 
-5. Let's try adding a new item! Enter the command in the command box.<br>
+5 . Let's try adding a new item! Enter the command in the command box.<br>
 
     - **`add`** `Apple id/139827 c/3 cp/1.3 sp/2.4` : Adds an apple with id 139827, cost price $1.3, and sales price $2.4,
       into the inventory.
 
-6. Congrats on setting up BogoBogo! Read our [features](#managing-inventory) to learn about the different commands you can
+6 . Congrats on setting up BogoBogo! Read our [features](#managing-inventory) to learn about the different commands you can
    do with the application.
 
 <div class="code-example bg-grey-lt-000">:bulb:
 Ready to jump right into recording your inventory? Use <code>clear</code> to clear the sample data!
 </div>
 
-7. To close BogoBogo, simply enter `exit` into the command box.
+7 . To close BogoBogo, simply enter `exit` into the command box.
 
 --------------------------------------------------------------------------------------------------------------------
 
