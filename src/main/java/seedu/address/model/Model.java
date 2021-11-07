@@ -70,6 +70,10 @@ public interface Model {
     boolean hasModuleLesson(ModuleLesson moduleLesson);
 
     /**
+     * Return true if a module lesson that clashes with {@code moduleLesson} exists in contHACKS.
+     */
+    boolean hasModuleLessonClashingWith(ModuleLesson moduleLesson);
+    /**
      * Deletes the given person.
      * The person must exist in contHACKS.
      */

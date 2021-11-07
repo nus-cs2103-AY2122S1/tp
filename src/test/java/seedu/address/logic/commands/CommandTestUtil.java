@@ -28,6 +28,8 @@ import seedu.address.model.modulelesson.LessonDay;
 import seedu.address.model.modulelesson.LessonTime;
 import seedu.address.model.modulelesson.ModuleCodeContainsKeywordsPredicate;
 import seedu.address.model.modulelesson.ModuleLesson;
+import seedu.address.model.person.ModuleCode;
+import seedu.address.model.person.ModuleCodesContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditLessonDescriptorBuilder;
@@ -182,21 +184,15 @@ public class CommandTestUtil {
     }
 
     /**
-     * Updates {@code model}'s filtered person list to show only the persons at the given {@code targetIndex1} and
-     * {@code targetIndex2} in the {@code model}'s address book.
+     * Updates {@code model}'s filtered person list to show only the persons that have the {@moduleCode} in the
+     * {@code model}'s address book.
      */
-    public static void showPersonAtMultipleIndex(Model model, Index targetIndex1, Index targetIndex2) {
-        assertTrue(targetIndex1.getZeroBased() < model.getFilteredPersonList().size());
-        assertTrue(targetIndex2.getZeroBased() < model.getFilteredPersonList().size());
+    public static void showPersonsWithModuleCode(Model model, ModuleCode moduleCode) {
+        List<String> moduleCodeToShow = new ArrayList<>();
+        moduleCodeToShow.add(moduleCode.getModuleCodeName());
+        ModuleCodesContainsKeywordsPredicate predicate = new ModuleCodesContainsKeywordsPredicate(moduleCodeToShow);
 
-        Person person1 = model.getFilteredPersonList().get(targetIndex1.getZeroBased());
-        Person person2 = model.getFilteredPersonList().get(targetIndex2.getZeroBased());
-        final String[] splitName1 = person1.getName().fullName.split("\\s+");
-        final String[] splitName2 = person2.getName().fullName.split("\\s+");
-
-        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName1[0], splitName2[0])));
-
-        assertEquals(2, model.getFilteredPersonList().size());
+        model.updateFilteredPersonList(predicate);
     }
 
     /**

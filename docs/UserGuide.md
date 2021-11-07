@@ -61,7 +61,7 @@ This section provides tips on reading this document, as well as how to navigate 
 
 This User Guide is structured so that it is easy for you to find what you need. If this is your first time using contHACKS, we recommend reading the User Guide in order, starting from this section. If you are ever lost, head over to [table of contents](#table-of-contents) to orientate yourself.
 
-Here are some of the things you will need to know before you get started! 
+Here are some of the things you will need to know before you get started!
 
 ### Meaning of icons <a name="meaning-of-icons"></a>
 
@@ -83,7 +83,7 @@ These are the key terms defined for usage of the commands:
 
 - **Index**: Refers to the number displayed next to the name in the displayed contact list. <br> e.g. 1, 2, 3...
 
-- **Alias**: These are alternative words that you can use to perform the same command 
+- **Alias**: These are alternative words that you can use to perform the same command
 
 Refer to the image below for more information on the different components of ContHACKS!
 
@@ -120,7 +120,7 @@ Notes about the command format:<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help` 
+  e.g. if the command specifies `help 123`, it will be interpreted as `help`
 
 Some example commands you can try:
 
@@ -164,7 +164,7 @@ Command aliases: `quit` `q`
 
 #### Adding a contact: `add` <a name="add"></a>
 
-Adds a contact to contHACKS. 
+Adds a contact to contHACKS.
 
 Format: `add n/NAME e/EMAIL m/MODULE_CODE [LESSON_CODE(S)] [p/PHONE] [h/TELEGRAM_HANDLE] [r/REMARK]`
 
@@ -251,7 +251,7 @@ Format: `find n/NAME`/`find m/MODULE_CODE(S)`
 <div markdown="span" class="alert alert-primary">:exclamation: **Important:**
 If multiple words are specified for the name search, only results matching all the words specified will be returned <br>
 e.g `find n/Bernice Yu` will only return contacts that have both words `Bernice` and `Yu`<br>
-Similarly, if multiple module codes are specified, only results matching all the module codes specified will be returned <br> 
+Similarly, if multiple module codes are specified, only results matching all the module codes specified will be returned <br>
 e.g. `find m/CS2030S CS2040S` will only return contacts that have both `CS2030S` and `CS2040S` module codes
 </div>
 
@@ -278,11 +278,11 @@ Command alias: `ls`
 
 #### Clearing all contacts: `clear` <a name="clear"></a>
 
-Purges **all** existing contacts from contHACKS. 
+Purges **all** existing contacts from contHACKS.
 
-<div markdown="span" class="alert alert-warning">:warning: **Warning:** 
+<div markdown="span" class="alert alert-warning">:warning: **Warning:**
 This action cannot be undone. Use with caution!
-</div> 
+</div>
 
 Format: `clear`
 
@@ -408,11 +408,11 @@ Command alias: `lc`
 
 #### Clearing all lessons: `clearc` <a name="clearc"></a>
 
-Purges **all** existing lessons from contHACKS. 
+Purges **all** existing lessons from contHACKS.
 
 <div markdown="span" class="alert alert-warning">:warning: **Warning:**
 This action cannot be undone. Use with caution!
-</div> 
+</div>
 
 Format: `clearc`
 
@@ -430,7 +430,7 @@ Contact data are saved in the hard disk automatically after any command that cha
 
 #### Editing the data file <a name="editing-data"></a>
 
-contHACKS data are saved as a JSON file `[JAR file location]/data/conthacks.json`. 
+contHACKS data are saved as a JSON file `[JAR file location]/data/conthacks.json`.
 
 <div markdown="span" class="alert alert-primary">:information_source: **Note:**
 Advanced users are welcome to update data directly by editing that data file.
@@ -444,7 +444,7 @@ If your changes to the data file makes its format invalid, contHACKS will discar
 
 ## Command Summary <a name="summary"></a>
 
-<table> 
+<table>
 
 <tr>
     <th> Category</th>

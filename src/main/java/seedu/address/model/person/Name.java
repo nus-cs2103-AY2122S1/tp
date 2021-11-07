@@ -12,10 +12,6 @@ public class Name {
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain alphabets and spaces, and it should not be blank";
 
-    /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
     public static final String VALIDATION_REGEX = "[\\p{Alpha}][\\p{Alpha} ]*";
 
     public final String fullName;

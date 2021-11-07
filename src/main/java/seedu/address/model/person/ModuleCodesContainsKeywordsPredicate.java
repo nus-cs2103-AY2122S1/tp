@@ -20,7 +20,7 @@ public class ModuleCodesContainsKeywordsPredicate implements Predicate<Person> {
         return keywords.stream()
                 .allMatch(keyword -> person.getModuleCodes()
                         .stream().anyMatch(moduleCode ->
-                                StringUtil.containsWordIgnoreCase(keyword, moduleCode.value)
+                                StringUtil.containsWordIgnoreCase(moduleCode.value, keyword)
                         )
                 );
     }

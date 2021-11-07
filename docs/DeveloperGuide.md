@@ -205,15 +205,15 @@ Notice that the `AddModuleLessonCommandParser` uses the method `parseModuleCodeF
 ### Find feature 
 
 #### Implementation
-The find command returns contacts that matches the input keywords. Initially, it only returns contacts that fully matches the keywords. 
-Given the following example contact book: 
+The find command returns contacts that matches the input keywords. Initially, it only returns contacts that fully matches the keywords.
+Given the following example contact book:
 * Contact #1: Jason
-* Contact #2: Jasmine 
+* Contact #2: Jasmine
 * Contact #3: Bob
 
 A search with the command `find n/Jas` would return nothing, as `Jas` is not a complete match with any of the names of the three contacts.
 
-To better fit our target user, someone who wishes to work fast, we have decided to allow partial matches for the find command. 
+To better fit our target user, someone who wishes to work fast, we have decided to allow partial matches for the find command.
 This is done by altering the condition in the search predicate, from accepting full word matches to accepting even partial word matches:
 
 `return Arrays.stream(wordsInPreppedSentence).anyMatch(preppedWord::equalsIgnoreCase);`
@@ -422,7 +422,7 @@ Use case ends
 * 1b. User input details in a wrong format
     * 1b1. contHACKS shows an error message<br />
     Use case ends
-    
+
 
 **Use case: Adding remark to a contact**
 
