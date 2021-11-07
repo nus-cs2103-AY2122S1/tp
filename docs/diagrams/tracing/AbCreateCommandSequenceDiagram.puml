@@ -1,50 +1,40 @@
 @startuml
 !include ../style.puml
 
-box "Storage" #FFFFFF
-Participant ":StorageManager" as sm STORAGE_COLOR
-Participant ":JsonAddressBookStorage" as jsabs STORAGE_COLOR
-end box
 box "Logic" #FFFFFF
 Participant ":LogicManager" as logic LOGIC_COLOR
-Participant ":AddressBookParser" as abp LOGIC_COLOR
-Participant ":AbCreateCommandParser" as abccp LOGIC_COLOR
 Participant "result:CommandResult" as cr LOGIC_COLOR
+Participant ":AbCreateCommandParser" as abccp LOGIC_COLOR
 Participant "command:AbCreateCommand" as abc LOGIC_COLOR
 end box
+box "Storage" #FFFFFF
+Participant ":StorageManager" as sm STORAGE_COLOR
+end box
 box "Model" #FFFFFF
-Participant ":AddressBook" as ab MODEL_COLOR
 Participant "model:Model" as model MODEL_COLOR
 end box
 
 skinparam sequenceBoxBorderColor #black
 [-> logic : execute
 activate logic LOGIC_COLOR
-logic -> abp ++ LOGIC_COLOR: parseCommand(commandText)
 create abccp
-abp -> abccp
-abp -> abccp ++ LOGIC_COLOR: parse(arguments)
+logic -> abccp ++ LOGIC_COLOR: parseCommand(commandText)
 create abc
 abccp -> abc ++ LOGIC_COLOR: filePath
 abc --> abccp --: command
-abccp --> abp --: command
-abp --> logic --: command
+abccp --> logic --: command
 logic -> abc ++ LOGIC_COLOR: execute(model)
 abc -> model ++ MODEL_COLOR: setAddressBookFilePath(filePath)
 model --> abc --:
 create cr
-abc -> cr ++ LOGIC_COLOR: CREATE_ADDRESSBOOK
+abc -> cr ++ LOGIC_COLOR:
 cr --> abc --: commandResult
 abc --> logic --: commandResult
-create jsabs
-logic -> jsabs ++ STORAGE_COLOR: filePath
-jsabs --> logic --: storage
-logic -> sm ++ STORAGE_COLOR : switchAddressBook(storage)
+logic -->[ --: commandResult
+[-> logic ++ LOGIC_COLOR: createAddressBook()
+logic -> sm ++ STORAGE_COLOR : switchAddressBookStorage(new JsonAddressBookStorage(filePath))
 sm --> logic --:
-create ab
-logic -> ab ++ MODEL_COLOR
-ab --> logic --: addressBook
-logic -> model ++ MODEL_COLOR: setAddressBook(addressBook)
+logic -> model ++ MODEL_COLOR: setAddressBook(new AddressBook())
 model --> logic --:
 logic -->[ --:
 

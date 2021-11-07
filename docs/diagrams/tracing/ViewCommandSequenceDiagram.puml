@@ -1,8 +1,5 @@
 @startuml
-!include style.puml
-
-Actor User as user USER_COLOR
-Participant ":UI" as ui UI_COLOR
+!include ../style.puml
 
 box "Logic" #00000000
 Participant ":LogicManager" as logic LOGIC_COLOR
@@ -18,10 +15,7 @@ box "Model" #00000000
 Participant "model:Model" as model MODEL_COLOR
 end box
 
-user -[USER_COLOR]> ui : "view 1"
-activate ui UI_COLOR
-
-ui --> logic : execute("delete 1")
+[-> logic : execute
 activate logic LOGIC_COLOR
 
 logic -> abp ++: parseCommand(commandText)
@@ -76,10 +70,7 @@ deactivate cr
 fc --> logic --
 deactivate fc
 
-logic --> ui
+[<--logic
 deactivate logic
-
-ui--> user: shows Client Info
-deactivate ui
 
 @enduml
