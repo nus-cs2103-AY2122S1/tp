@@ -120,8 +120,8 @@ public class Module {
     }
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
+     * Returns an unmodifiable view of the list of {@code Student} backed by the internal list of
+     * {@code TeachingAssistantBuddy}
      */
     public ObservableList<Student> getFilteredStudentList() {
         return filteredStudents;
