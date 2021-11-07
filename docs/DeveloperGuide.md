@@ -40,14 +40,14 @@ Given below is a quick overview of main components and how they interact with ea
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
-[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+[**`Commons`**](#36-common-classes) represents a collection of classes used by multiple other components.
 
 The rest of gitGud consists of four components.
 
-* [**`UI`**](#ui-component): The UI of the gitGud.
-* [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds application data for gitGud in memory.
-* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+* [**`UI`**](#32-ui-component): The UI of the gitGud.
+* [**`Logic`**](#33-logic-component): The command executor.
+* [**`Model`**](#34-model-component): Holds application data for gitGud in memory.
+* [**`Storage`**](#35-storage-component): Reads data from, and writes data to, the hard disk.
 
 
 **How the architecture components interact with each other**
@@ -187,11 +187,11 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 ## **4. Implementation**
 
-* [Delete Feature](#4.1-delete-feature)
-* [Link feature](#4.2-link-feature)
-* [Unlink feature](#4.3-unlink-feature)
-* [Schedule Feature](#4.4-schedule-feature)
-* [Get Feature](#4.5-get-feature)
+* [Delete Feature](#41-delete-feature)
+* [Link feature](#42-link-feature)
+* [Unlink feature](#43-unlink-feature)
+* [Schedule Feature](#44-schedule-feature)
+* [Get Feature](#45-get-feature)
 
 ### 4.1 Delete Feature
 
@@ -298,7 +298,7 @@ The implementation of `Model#unlinkFriend()` is as follows:
         * the `DayOfWeek`, which day of the week the `Day` is.
 
 * Schedule has the command format of `friend --schedule FRIEND_ID -p START_HOUR END_HOUR DAY -f IS_FREE`, and as in
-  [Logic component](#logic-component), it will follow a similar flow of other commands, with `LogicManager#execute()` 
+  [Logic component](#33-logic-component), it will follow a similar flow of other commands, with `LogicManager#execute()` 
   calling `MainParser#parseCommand()`, who in turn calls `FriendCommandParser#parse()` as it is a `friend` command, 
   which returns a `ScheduleFriendCommand` after determining the `commandType` is `ScheduleFriendCommand.COMMAND_WORD`.
 

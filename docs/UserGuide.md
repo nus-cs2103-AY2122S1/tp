@@ -31,19 +31,19 @@ just a single command.
 ### 2.1 How to use this guide?
 
 If you're new to gitGud, don't worry!
-This guide will walk you through the [basic setup](#quick-start) necessary to get you ready to use gitGud
+This guide will walk you through the [basic setup](#3-quick-start) necessary to get you ready to use gitGud
 for the first time quickly.
 
 Additionally, this guide provides you with in-depth information on the functionality gitGud provides, which will turn
-you into a gitGud pro in the [features](#features) section.
+you into a gitGud pro in the [features](#5-features) section.
 
-For experienced users of gitGud, this guide also provides a [command summary](#command-summary) for your reference, so
+For experienced users of gitGud, this guide also provides a [command summary](#9-command-summary) for your reference, so
 you can quickly look up all of gitGud's core commands at a glance.
 
 ### 2.2 Reading this document
 
 This guide utilizes symbols and syntax to highlight specific points made throughout the guide and to enhance your 
-overall reading experience. The section below on the meanings of [symbols and syntax used](#general-symbols-used) 
+overall reading experience. The section below on the meanings of [symbols and syntax used](#221-general-symbols-used) 
 provides more details for your reference. 
 
 #### 2.2.1 General symbols used
@@ -85,7 +85,7 @@ e.g. typing **`help`** and pressing `Enter` will open the help window.<br>
    * **`exit`** : Exits the app.
    
 Congratulations! You have successfully set up gitGud.
-For more in-depth details of each command, refer to the [features](#features) section below.
+For more in-depth details of each command, refer to the [features](#5-features) section below.
 
 --------------------------------------------------------------------------------------------------------------------
 ## **4. gitGud User Interface** 
