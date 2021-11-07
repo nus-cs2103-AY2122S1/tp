@@ -10,7 +10,8 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+This project is based on the [AddressBook-Level3](https://github.com/nus-cs2103-AY2122S1/tp) ([UG](https://se-education.org/addressbook-level3/UserGuide.html), 
+[DG](https://se-education.org/addressbook-level3/DeveloperGuide.html)) project created by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -323,16 +324,17 @@ Step 2. `LogicManager` passes the command to `AddressBookParser` to parse the co
 with `addShift`, a new `AddShiftCommandParser` is created to parse the command further.
 
 Step 3. `AddShiftCommandParser` uses `ArgumentMultimap` to tokenize the prefixes part the command. After extracting the
-information the target staff and the shift, A new
+information the target staff, the shift, and the date, A new
 `AddShiftCommand` is created with the information. In this case, the name of the target staff is "Steve", and the
-proposed shift is on Monday morning.
+proposed shift is on Monday morning, and the period is seven days starting from the current date when the user runs the
+command.
 
 Step 4. `AddShiftCommand` passes the given name to `ModelManager#findPersonByName()`. After finding the specific
-staff, `AddShiftCommand` passes the staff,
-`DayOfWeek`, and the `Slot` of the shift to `ModelManager#addShift()`.
+staff, `AddShiftCommand` passes the `targetStaff`
+`dayOfWeek`, `slot` and `startDate`, `endDate` of the shift to `ModelManager#addShift()`.
 
-Step 5. `Modelmanager#addShift()` updates the schedule of the target staff with a new `Shift` created with the
-given `DayOfWeek` and `Slot`.
+Step 5. `Modelmanager#addShift()` updates the schedule of the `targetStaff` with a new `Shift` created with the given
+`dayOfWeek`, `slot` and `startDate`, `endDate`.
 
 The sequence diagram of this `addShift` command is shown below:
 
@@ -463,6 +465,26 @@ Notes:
 3. Note that the `dayofweek` is not case-sensitive, and that time must be inputted in a `HH:mm` format.
 4. The viewShift Command operates on the overall staff list and not just the displayed list.
 5. Inputting `viewShift` alone also outputs the staff currently working.
+
+--------------------------------------------------------------------------------------------------------------------
+## **Proposed future features** ##
+
+### Operating a command on a group of people together ###
+
+Currently, most of the commands of Staff'd are targeting on a single person, which means user need to specify
+the staff's index, name to identify that single staff. In future iterations, we can expand some commands to work on
+a group of staff at the same time.
+
+### Make marking absent by time ###
+
+Currently, `mark` functionality can only mark from a start date to an end date, but in reality, it's common that
+a staff is only absent a few hours in a day. In future iterations, we can expand the `mark` command to make it available
+to make marking absent by time.
+
+### Track salary changes ###
+
+Currently, Staff'd supports calculating a staff's current month salary. In future iterations, we can expand the
+functionality to let it track the changes on a staff's salary, store the salary history of a staff.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -669,6 +691,27 @@ testers are expected to do more *exploratory* testing.
     2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
+
+
+
+### Adding a person
+1. Adding a person to the address book
+
+    1. Test case: `add n/John Doe p/98765432 e/johnd@example.com $/100` <br>
+       Expected: If there is already a person called `John Doe` in the address book, then an error message will appear
+       at the left output box. Otherwise, a new staff will be added to the list in the right output box, with name `John Doe`,
+       phone number `98765432`, email `johnd@example.com`, and salary `100`.
+       
+    1. Test case: `add n/John Doe p/98765432`<br>
+       Expected: No person is added. Error details shown in the status message. 
+       Status bar remains the same.
+       
+    1. Other incorrect `add` commands to try: `add p/98765432 e/johnd@example.com $/100`,
+       `add n/John Doe p/98765432 e/johnd@example.com`, `...` (where one or more attributes
+       are missing in the command)
+       Expected: A wrong message of `Invalid command format` will be shown in the status message.
+       
+
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
@@ -682,10 +725,34 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `delete -i 0`<br>
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+    1. Other incorrect `delete` commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 
+### Adding a shift to a person's schedule
+1. Adding a shift to an existing person's schedule, given the target person's index in the list.
+    
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    
+    1. Test case: `addShift -i 1 d/Monday-0`
+       Expected: A shift on next Monday morning will be added to the first staff's schedule in the list, 
+       if that slot does not have a shift yet. Otherwise, no shift is added and error details will be shown
+       in the status message. 
+       
+    1. Test case: `addShift -i 1 d/Monday-0 da/2021-11-07`
+       Expected: A new shift will be added to the first person in the list schedule. In this case, 
+       the date of that shift will be `2021-11-08`, and the slot is `morning`.
+       Otherwise, no shift is added and error details will be shown in the status message.
+       
+    1. Test case: `addShift -i 1 d/Monday-0 da/2021-11-06 da/2021-12-06` 
+       Expected: New shifts will be added to the first person in the list schedule. In this case,
+       the date of shifts will be `2021-11-08`, `2021-11-15`, `2021-11-22`, `2021-11-29`, `2021-12-06`
+       and the slot is `morning`. Otherwise, no shift is added and error details will be shown in the status message.
+       
+    1. Other incorrect `addShift` commands to try: `addShift -i 0 d/Monday-0`, `addShift -i x d/Monday-0`, (where 
+       x is larger than the list size) `addShift -i 0 d/mon-0`, `...`.
+       Expected: A wrong details will be shown in the status message.
+       
 ### Saving data
 
 1. Getting the default save file.

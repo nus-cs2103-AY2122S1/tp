@@ -96,7 +96,6 @@ public class Shift {
                 .filter(p -> p.getDayOfWeek().equals(dayOfWeek))
                 .collect(Collectors.toList());
         long numOfRecurrences = recurrences.stream()
-                .filter(p -> period.isWithin(p))
                 .filter(p -> dates.stream().filter(date -> p.contains(date)).count() != 0)
                 .filter(p -> p.isWithinSlotPeriod(time))
                 .count();

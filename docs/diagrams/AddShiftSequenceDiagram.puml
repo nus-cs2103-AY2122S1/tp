@@ -52,7 +52,9 @@ AddShiftCommand -> Model : findPersonByName()
 activate Model
 
 Model --> AddShiftCommand : staff
+
 AddShiftCommand -> Model : addShift()
+
 Model --> AddShiftCommand
 deactivate Model
 
