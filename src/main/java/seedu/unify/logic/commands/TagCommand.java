@@ -59,7 +59,7 @@ public class TagCommand extends Command {
         requireNonNull(model);
         List<Task> lastShownList = model.getFilteredTaskList();
 
-        if (index.getZeroBased() >= lastShownList.size() || index.getZeroBased() < 0) {
+        if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
