@@ -126,7 +126,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-W13-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="600" />
 
 
 The `Model` component is made up of the following subpackages,
@@ -189,6 +189,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 This section describes some noteworthy details on how certain features are implemented.
 
 * [Delete Feature](#delete-feature)
+* [Get Feature](#get-feature)
 * [Schedule Feature](#schedule-feature)
 
 ### Delete Feature
@@ -230,6 +231,10 @@ illustrates the description for deleting **games**:
 
 The games of each friend is stored inside a `Map<GameId, GameFriendLinks>`. Before deleting a game, the links a 
 friend has to a game has to be removed, before deleting the game from the list of games.  
+
+### Get Feature
+
+#### Implementation
 
 ### Schedule Feature
 

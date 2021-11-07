@@ -28,12 +28,12 @@ type fast enough, gitGud can get you contact management tasks done faster than t
        - Update and standardize a validation regex for data classes
     5. Update command usage messages `Refactor - Enhancement`
        - Update and standardize the command usage messages for various commands and subcommands.
-
+<br>
 * **Testing**
     1. Wrote unit/integration tests for Game, GameFriendLink and related classes.
     2. Wrote unit/integration tests for `friend --get` and `game --get` commands.
     3. Update unit/integration tests for `model` component to reach 100% class coverage, 100% method coverage, and 99% line coverage.
-
+<br>
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=YeluriKetan&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&zFR=false&tabAuthor=YeluriKetan&tabRepo=AY2122S1-CS2103T-W13-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=&authorshipIsBinaryFileTypeChecked=false)
 
 * **Project management**:
@@ -41,7 +41,7 @@ type fast enough, gitGud can get you contact management tasks done faster than t
 * **Enhancements to existing features**:
     1. Refactor `Friend` to keep track of the `GameFriendLink`s in the form of a Map instead of the traditional Set used in AB3.
     2. Purge `find` command from the codebase. Replace with `--list` subcommand.
-
+<br>
 * **Documentation**:
     * User Guide:
         * Added the Introduction, Quick start, FAQ and Command Summary to complement the rest of the documentation.
@@ -52,7 +52,7 @@ type fast enough, gitGud can get you contact management tasks done faster than t
         * Update the `Model` component
     * README:
         * Created and added the product logo.
-
+<br>
 * **Community**:
 
 * **Tools**:
