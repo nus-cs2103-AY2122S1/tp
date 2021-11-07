@@ -40,8 +40,8 @@ public class ListTransactionCommandTest {
         String revenue = String.format("%.2f", model.getBookKeeping().getRevenue());
         String profit = String.format("%.2f", model.getBookKeeping().getProfit());
 
-        String addMessage = "Total costs: " + cost + ", total revenue: "
-                + revenue + ", total profit: " + profit;
+        String addMessage = "Total costs: " + cost + ", Total revenue: "
+                + revenue + ", Total profit: " + profit;
 
         assertCommandSuccess(new ListTransactionCommand(""), model,
                 ListTransactionCommand.MESSAGE_SUCCESS_ALL + "\n" + addMessage, expectedModel);
@@ -60,8 +60,8 @@ public class ListTransactionCommandTest {
         String revenue = String.format("%.2f", model.getBookKeeping().getRevenue());
         String profit = String.format("%.2f", model.getBookKeeping().getProfit());
 
-        String addMessage = "Total costs: " + cost + ", total revenue: "
-                + revenue + ", total profit: " + profit;
+        String addMessage = "Total costs: " + cost + ", Total revenue: "
+                + revenue + ", Total profit: " + profit;
 
         assertCommandSuccess(new ListTransactionCommand(""), model,
                 ListTransactionCommand.MESSAGE_SUCCESS_ALL + "\n" + addMessage, expectedModel);
