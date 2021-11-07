@@ -94,14 +94,14 @@ class VersionControlControllerTest {
         // internal head tracker should be shifted
         assertNotEquals(prevHeadCommit, versionControlController.getHeadCommit());
 
+        int initialNumFile = Objects.requireNonNull(tempPath.toFile().listFiles()).length;
         StageAreaStorage stageAreaStorage = new StageAreaStorage(tempPath);
         assertDoesNotThrow(() -> stageAreaStorage.saveStageArea(versionControlController.getStageArea()));
 
-        // saveStageArea should add 5 new files: OLD, commit, tree, HEAD, CURRENT
-        assertEquals(Objects.requireNonNull(COMMIT_DIR.toFile().listFiles()).length + 5,
+        // saveStageArea should add 3 new files: commit, tree, blob
+        assertEquals(initialNumFile + 2,
                 Objects.requireNonNull(tempPath.toFile().listFiles()).length);
 
-        assertTrue(FileUtil.isFileExists(tempPath.resolve(VersionControlController.OLD_LABEL_STRING)));
         assertTrue(FileUtil.isFileExists(tempPath.resolve(VersionControlController.CURRENT_LABEL_STRING)));
         assertTrue(FileUtil.isFileExists(tempPath.resolve(VersionControlController.HEAD_LABEL_STRING)));
 
@@ -118,10 +118,6 @@ class VersionControlControllerTest {
         Commit fetchedCurrentCommit = versionControlController.fetchCommitByLabel(
                 VersionControlController.CURRENT_LABEL_STRING);
         assertEquals(fetchedHeadCommit, fetchedCurrentCommit);
-
-        Commit fetchedOldCommit = versionControlController.fetchCommitByLabel(
-                VersionControlController.OLD_LABEL_STRING);
-        assertEquals(prevHeadCommit, fetchedOldCommit);
 
         // Check committed tree
         Tree blobTree = fetchedHeadCommit.getTreeSupplier().get();
@@ -152,15 +148,15 @@ class VersionControlControllerTest {
         assertNotEquals(prevHeadCommit, versionControlController.getHeadCommit());
 
         // Tree.NULL -> unable to write tree
+        int initialNumFile = Objects.requireNonNull(tempPath.toFile().listFiles()).length;
         StageAreaStorage stageAreaStorage = new StageAreaStorage(tempPath);
         assertDoesNotThrow(() -> stageAreaStorage.saveStageArea(versionControlController.getStageArea()));
 
-        // saveStageArea should add 2 new files only: OLD, commit
-        assertEquals(Objects.requireNonNull(COMMIT_DIR.toFile().listFiles()).length + 2,
+        // saveStageArea should add 1 new file: commit
+        assertEquals(initialNumFile + 1,
                 Objects.requireNonNull(tempPath.toFile().listFiles()).length);
 
         // Everything else should still be correct
-        assertTrue(FileUtil.isFileExists(tempPath.resolve(VersionControlController.OLD_LABEL_STRING)));
         assertTrue(FileUtil.isFileExists(tempPath.resolve(VersionControlController.CURRENT_LABEL_STRING)));
         assertTrue(FileUtil.isFileExists(tempPath.resolve(VersionControlController.HEAD_LABEL_STRING)));
 
@@ -176,10 +172,6 @@ class VersionControlControllerTest {
         Commit fetchedCurrentCommit = versionControlController.fetchCommitByLabel(
                 VersionControlController.CURRENT_LABEL_STRING);
         assertEquals(fetchedHeadCommit, fetchedCurrentCommit);
-
-        Commit fetchedOldCommit = versionControlController.fetchCommitByLabel(
-                VersionControlController.OLD_LABEL_STRING);
-        assertEquals(prevHeadCommit, fetchedOldCommit);
 
         // Tree is Null
         Tree blobTree = fetchedHeadCommit.getTreeSupplier().get();
