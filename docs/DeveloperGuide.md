@@ -1276,6 +1276,8 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **JAR**: An executable java file for you to open the app
+* **Json**: Javascript object notation file. This is used to store your preferences and data.
 * **CSO**: Customer Service Officer
 * **GUI**: Graphical User Interface
 
