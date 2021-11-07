@@ -15,7 +15,7 @@ typists. SalesNote aims to help tailors simplify their administrative tasks, wit
 
 
 #### Code Contributed
-* Link to code contributed: https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=AY2122S1-CS2103T-W08-3%2Ftp&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=lwlshawn&tabRepo=AY2122S1-CS2103T-W08-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false
+* [Reposense Link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=AY2122S1-CS2103T-W08-3%2Ftp&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=lwlshawn&tabRepo=AY2122S1-CS2103T-W08-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
 
 #### Enhancements Implemented
 * A fair amount of bugfixes. After the PE-D, I took care of about 16 surfaced issues, though many were admittedly small issues that were quickly resolved.
@@ -43,7 +43,7 @@ to the relevant PR, instead of trying to copy and paste snippets: https://github
 
 #### Contributions to the DG
 * I wrote up a few sections of the "Implementation" portion of the developer guide, to explain various design decisions
-made for the project.
+made for the project. Examples are given below.
 
 #### Contributions to team-based tasks
 * Testcases is probably the thing I contributed the most to, as far as team-based tasks go. Although many of the test-cases
