@@ -1,17 +1,19 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalSportsPa.getTypicalSportsPa;
+import static seedu.address.testutil.TypicalSportsPa.getTypicalSportsPaEmptyMemberList;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.SportsPa;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.member.Member;
 import seedu.address.testutil.MemberBuilder;
-
 
 class ClearAttendanceCommandTest {
 
@@ -37,5 +39,13 @@ class ClearAttendanceCommandTest {
         expectedModel.resetTodayAttendance();
 
         assertCommandSuccess(command, model, ClearAttendanceCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void execute_emptyMemberList_failure() {
+        Model model = new ModelManager(getTypicalSportsPaEmptyMemberList(), new UserPrefs());
+
+        ClearAttendanceCommand command = new ClearAttendanceCommand();
+        assertCommandFailure(command, model, String.format(Messages.MESSAGE_EMPTY_LIST, Messages.MESSAGE_MEMBER));
     }
 }
