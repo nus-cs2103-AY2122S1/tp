@@ -14,18 +14,18 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class DeleteClassCommandParser implements Parser<DeleteClassCommand> {
     /**
-     * Parses {@code userInput} into a command and returns it.
+     * Parses {@code userInput} into a DeleteClassCcommand and returns it.
      *
-     * @param userInput
+     * @param userInput The indices input by user.
      * @throws ParseException if {@code userInput} does not conform the expected format
      */
     @Override
     public DeleteClassCommand parse(String userInput) throws ParseException {
         try {
-            List argList = new ArrayList<String>();
+            List<String> argList = new ArrayList<>();
             argList.add(userInput.trim());
-            List<Index> students = ParserUtil.parseStudentIndexes(argList);
-            return new DeleteClassCommand(students);
+            List<Index> classes = ParserUtil.parseIndices(argList);
+            return new DeleteClassCommand(classes);
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteClassCommand.MESSAGE_USAGE), pe);

@@ -47,8 +47,8 @@ public class RemoveStudentCommand extends Command {
     public RemoveStudentCommand(List<Index> studentIndexes, Index classIndex) {
         this.studentIndexes = studentIndexes;
         this.classIndex = classIndex;
-        studentsNotInClass = new ArrayList<>();
-        studentsRemoved = new ArrayList<>();
+        this.studentsNotInClass = new ArrayList<>();
+        this.studentsRemoved = new ArrayList<>();
     }
 
     /**
@@ -61,7 +61,6 @@ public class RemoveStudentCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
         TuitionClass tuitionClass = model.getTuitionClass(classIndex);
         if (tuitionClass == null) {
             throw new CommandException(String.format(Messages.MESSAGE_CLASS_NOT_FOUND));

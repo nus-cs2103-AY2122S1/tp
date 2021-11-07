@@ -2,6 +2,7 @@ package seedu.address.model.student;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -87,6 +88,10 @@ public class Student implements Nameable {
         return classes;
     }
 
+    public ArrayList<Integer> getClassesArray() {
+        return classes.getClasses();
+    }
+
     public String getNameString() {
         return name.fullName;
     }
@@ -154,22 +159,19 @@ public class Student implements Nameable {
     }
 
     /**
-     * Updates the class tag with new name and timeslot.
+     * Updates the name and timeslot of the class tag.
      *
-     * @param name The name of the original tuition class.
-     * @param slot The timeslot of the original tuition class.
-     * @param name1  The name of the edited tuition class.
-     * @param slot1  The timeslot of the edited tuition class.
-     * @return Copy of the student after changing the tuition class tag.
+     * @param tuitionClass The original tuition class.
+     * @param updatedClass The updated tuition class.
+     * @return The student after updating the class.
      */
-    public Student updateTag(ClassName name, Timeslot slot, ClassName name1, Timeslot slot1) {
-        Set<Tag> updatedTags = new HashSet<Tag>();
-        Tag tag = new Tag(String.format("%s | %s", name.getName(), slot));
+    public Student updateTag(TuitionClass tuitionClass, TuitionClass updatedClass) {
+        Tag tag = new Tag(String.format("%s | %s", tuitionClass.getNameString(), tuitionClass.getTimeslot()));
         tags.remove(tag);
-        tags.add(new Tag(String.format("%s | %s", name1.getName(), slot1)));
-        //updatedTags.addAll(tags);
+        tags.add(new Tag(String.format("%s | %s", updatedClass.getNameString(), updatedClass.getTimeslot())));
+        Set<Tag> updatedTags = new HashSet<Tag>(tags);
 
-        return this; //new Student(this.name, phone, email, address, remark, updatedTags, classes);
+        return new Student(this.name, phone, email, address, remark, updatedTags, classes);
     }
     /**
      * Returns true if both students have the same name.
@@ -245,11 +247,6 @@ public class Student implements Nameable {
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");
             tags.forEach(builder::append);
-        }
-
-        if (classes.getNumofClass() != 0) {
-            builder.append("; Classes: ");
-            classes.getClasses().forEach(builder::append);
         }
         return builder.toString();
     }
