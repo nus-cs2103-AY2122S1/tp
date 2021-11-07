@@ -82,6 +82,8 @@ implementation of a component), as illustrated in the (partial) class diagram be
 
 The sections below give more details of each component.
 
+<div style="page-break-after: always;"></div>
+
 ### UI component
 
 The **API** of this component is specified in 
@@ -163,6 +165,8 @@ Here are the remaining classes in logic, mainly utility classes:
 
 ![Parser Utility Classes](diagrams/ParserUtilityClasses.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Model component
 
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-W15-2/tp/blob/master/src/main/java/dash/model/Model.java)
@@ -201,7 +205,7 @@ The `Storage` component:
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `dash.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
