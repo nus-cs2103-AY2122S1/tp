@@ -17,7 +17,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Member;
+import seedu.address.model.member.Member;
 import seedu.address.testutil.MemberBuilder;
 
 public class MarkAttendanceCommandTest {
@@ -25,8 +25,9 @@ public class MarkAttendanceCommandTest {
 
     @Test
     public void execute_validIndices_success() {
+
         //add 2 members with index 1 and 2 respectively in the list
-        Member firstMember = new MemberBuilder().withName("John").build();
+        Member firstMember = new MemberBuilder().withName("John").withPhone("83452732").build();
         Member secondMember = new MemberBuilder().withName("Mat").build();
         model.addMember(firstMember);
         model.addMember(secondMember);

@@ -407,7 +407,7 @@ Format: `import CSV_FILE_PATH`
 * `CSV_FILE_PATH` should be relative to the JAR file location
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If there are duplicate members (i.e. members with the same name) being imported using the CSV file, 
+If there are duplicate members (i.e. members with the same name or same phone number) being imported using the CSV file, 
 the details from the CSV file will overwrite the existing details, except for the attendance data. 
 This action is **irreversible**.
 </div>
