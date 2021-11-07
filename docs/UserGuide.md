@@ -267,9 +267,9 @@ Examples:
 
 ![find](images/screenshots/find_item.png)
 
-### Clearing items: `clear`
+### Clearing items and all other data: `clear`
 
-Clears the entire inventory.
+Clears the entire inventory and all other data, i.e. bookkeeping and transaction record.
 
 Format: `clear`
 
