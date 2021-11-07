@@ -1,8 +1,9 @@
 ---
 layout: page
 title: User Guide
+nav-text: User Guide
 ---
-
+![](images/sportsPA_logo.png)
 <span style = "font-size: 32px; color: #e46c0a">
 Welcome to the SportsPA User Guide!
 </span>
@@ -35,7 +36,7 @@ The table below summarizes the meaning of the icons and text styles used through
 Icon / Text Style | Description
 ----------------- | ------------------
 **bold**        | Highlights important information such as components of SportsPA or constraints of command parameters
-`inline code`          | Represents commands in the format that you should follow when typing them
+`keyboard`          | Represents commands in the format that you should follow when typing them
 UPPER_CASE     | Represents parameters to be supplied by you for commands
 [link](#table-of-contents) | Represents links that can be clicked on to navigate to a relevant section of the User Guide or a different website
 **:information_source: Notes:** | Represents important information regarding commands such as their format and constraints
@@ -44,6 +45,8 @@ UPPER_CASE     | Represents parameters to be supplied by you for commands
 :camera: | Signifies that a screenshot of the outcome of the command is provided below
 
 [Back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 _____________________________________________________________________________________________________________
 ## Quick Start
@@ -60,6 +63,73 @@ ________________________________________________________________________________
 <p align="center">
    <img src="images/FirstLook.png" height="500" align="center"/>
 </p>
+
+
+<div markdown="span" class="alert alert-primary">
+
+**:bulb: Tip for Mac users:**
+
+  <p align="center">
+     <img src="images/mac_error.png"/>
+  </p>
+
+If you are on MacOS and encounter this issue when launching SportsPA, follow [this](https://support.apple.com/en-sg/guide/mac-help/mh40616/mac).
+
+</div>
+
+[Back to Table of Contents](#table-of-contents)
+____________________________________________________________________________________________________________
+
+## Command Format
+Before we start, let's take a look at what a typical command in SportsPA comprises of.
+
+Component | Description
+----------------- | ------------------
+Command Word   | The keyword that represents a command in SportsPA
+Preamble        | The keyword that represents an `INDEX` / `DAY`
+Prefix    | The keyword preceding the parameter(s)
+Parameter | The argument proceeding the prefix
+
+To illustrate the above, we will use the edit member command:<br>
+`editm 1 n/John Doe p/92315540 d/2 3 t/exco`<br>
+ `editm` is the command word and `1` is the preamble representing the index of the member to edit.`n/` `p/` `d/` `t/` are the prefixes and 
+`John Doe`, `92315540`, `2 3`, `exco` are the parameters.<br>
+The add member command also follows a similar format, but without the preamble:<br>
+`addm n/John Doe p/92315540 t/exco`
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:** There are 2 main 'objects' in SportsPA, Member and Facility.
+</div>
+
+For your easy reference, we have prepared a summary of prefixes and their required parameters below:
+
+Member-specific prefixes:
+
+Prefix        | Parameter                    | Requirements
+----------------- | ------------------|------------------
+`p/ `             | `PHONE`             | Maximum of 15 digits
+`d/`              | `DAY(S)`              | Integer, 1-7 only
+`t/`              | `TAG(S)`            | Alphanumeric characters and spaces
+`tda/` | `TODAY_ATTENDANCE`       | `true` for present or `false` for absent
+`tta/`| `TOTAL_ATTENDANCE`          | Integer, non-negative only
+`by` | `SORT_ORDER` | `name` or `tag` only 
+
+Facility-specific prefixes:
+
+Prefix | Parameter | Requirements
+-------- | --------- | ----------------
+`l/` | `LOCATION` | Maximum of 50 alphanumeric characters and spaces
+`c/` | `CAPACITY`| Integer, 1-50 only
+`t/`  | `TIME` | 24-hour format e.g., 1400
+
+General prefixes:
+
+Prefix | Parameter | Requirements
+-------- | --------- | ----------------
+`n/` | `NAME` | Maximum of 50 alphanumeric characters and spaces
+`s/` | `SHORTCUT` | Not an existing command word in SportsPA, 1 word only
+`cw/` | `COMMAND_WORD` | Existing command words in SportsPA
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -97,7 +167,6 @@ Here are some example commands you can try:
 [Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
-
 ## Features
 
 This section documents all the commands available in SportsPA, guiding you through its function, format, example usages
@@ -124,7 +193,7 @@ documentation.
 
 * Items with `...` after them can be used multiple times including zero times, by repeating the character with slash symbol,
   if present, and the parameter.<br>
-  e.g. `[t/TAG]...` can be used as ` `(i.e. 0 times), `t/exco`, `t/exco t/y2`etc.
+  e.g. `[t/TAG]...` can be used as ` ` (i.e. 0 times), `t/exco`, or `t/exco t/y2`, etc.
 
 * Parameters with `(S)` at the end, can be supplied one or more times without repeating the characters with slash
   symbols.<br>
@@ -133,9 +202,12 @@ documentation.
 * Parameters with the slash symbols can be in any order.<br>
   e.g. if the command specifies `n/NAME l/LOCATION`, `l/LOCATION n/NAME` is also acceptable.
 
-* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of
+* If parameters following slash symbols are expected only once in the command but you specified it multiple times, only the last occurrence of
   the parameter wll be taken.<br>
-  e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
+  e.g. for `p/PHONE`, if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
+
+* Parameters without slash symbols can only be specified once, and must follow the order of the command format.<br>
+  e.g. for `INDEX`, if you specify `1 1`, it is invalid.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `listf`, `clearm` and `exit`) will
   be ignored.<br>
@@ -187,10 +259,10 @@ Format: `listm`
 
 Deletes a member from your member list.
 
-Format: `deletem INDEX`
+Format: `deletem MEMBER_INDEX`
 
-* Deletes the member at the specified `INDEX`
-* The index refers to the index number shown in the displayed member list
+* Deletes the member at the specified `MEMBER_INDEX`
+* The index refers to the index number shown in the **currently** displayed member list
 * The index **must be a positive integer** 1, 2, 3, …​
 
 <div markdown="block" class="alert alert-info">
@@ -201,7 +273,7 @@ Format: `deletem INDEX`
 Examples:
 
 * `listm` followed by `deletem 2` deletes the member at index 2 of the member list
-* `findm n/John` followed by `deletem 1` deletes the 1st member in the results of the `findm` command
+* `findm n/John` followed by `deletem 1` deletes the first member in the results of the `findm` command
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -209,11 +281,11 @@ Examples:
 
 Edits an existing member from your member list.
 
-Format: `editm INDEX [n/NAME] [p/PHONE_NUMBER] [t/TAG]...`
+Format: `editm MEMBER_INDEX [n/NAME] [p/PHONE_NUMBER] [t/TAG]...`
 
-* Edits the member at the specified `INDEX`
-* `INDEX` refers to the index number shown in the displayed member list
-* `INDEX` **must be a positive integer** 1, 2, 3…
+* Edits the member at the specified `MEMBER_INDEX`
+* `MEMBER_INDEX` refers to the index number shown in the displayed member list
+* `MEMBER_INDEX` **must be a positive integer** 1, 2, 3…
 * At least one of the optional fields must be provided
 * Existing values will be updated to the input values
 
@@ -252,14 +324,14 @@ specified field keywords.
 
 Format: `findm [n/NAME] [p/PHONE] [d/DAY(S)] [tda/TODAY_ATTENDANCE] [tta/TOTAL_ATTENDANCE] [t/TAG]...`
 
-* At least one of the optional fields must be provided
-* `findm` is case-insensitive. e.g. `n/john` will match `John`
-* Only full words will be matched e.g. `n/Johnny` will not match `John`
-* `TODAY_ATTENDANCE` refers to a member's attendance for today and must be either `true` or `false`, true being present and false being absent
-* `TOTAL_ATTENDANCE` refers to a member's attendance in total and must be a **non-negative integer** 0, 1, 2, 3...
-* For `[t/TAG]...`, members matching at least one tag will be listed (i.e. OR search) 
+* **At least one** of the optional fields **must** be provided
+* `findm` is **case-insensitive**. e.g. `n/john` will match `John`
+* Only **full words** will be matched e.g. `n/Johnny` will not match `John`
+* `TODAY_ATTENDANCE` refers to a member's attendance for today and **must be either `true` or `false`**, `true` being present and `false` being absent
+* `TOTAL_ATTENDANCE` refers to a member's attendance in total and **must be a non-negative integer** 0, 1, 2, 3...
+* For `[t/TAG]...`, members matching **at least one tag** will be listed (i.e. OR search) 
 <br> e.g. `findm t/exco t/y2` will list members with tags `exco` `y2`, and also members with only one matching tag `y2` or `exco`
-* If multiple field keywords are supplied, only members that match all the given field keywords will be listed (i.e. AND search) 
+* If multiple field keywords are supplied, only members that match **all** the given field keywords will be listed (i.e. AND search) 
 <br> e.g. `findm n/Amy t/exco` will match `Amy` with the tag `exco` but not `John` with the tag `exco`
 
 <div markdown="block" class="alert alert-info">
@@ -267,6 +339,11 @@ Format: `findm [n/NAME] [p/PHONE] [d/DAY(S)] [tda/TODAY_ATTENDANCE] [tta/TOTAL_A
 **:information_source: Note:** For the parameter `d/DAY(S)`, if the member is not available on any one of the specified days,
 they will not be shown in the filtered list (i.e members have to be available on all specified days in order for them to be 
 shown in the list).
+</div>
+
+<div markdown="span" class="alert alert-primary">
+
+**:bulb: Tip:** Member list is too large? Simply use this command to narrow down the members you are looking for!
 </div>
 
 Examples:
@@ -285,7 +362,7 @@ Examples:
 Shows a list of all members, sorted alphabetically by either their names or their tags.
 
 Format: `sortm by/SORT_ORDER`
-* `SORT_ORDER` must either be `name` or `tag`
+* `SORT_ORDER` **must either be `name` or `tag`**
 * When sorting by tags, members with more tags are displayed first
 
 Examples:
@@ -299,13 +376,13 @@ Examples:
 The availability of your members can change frequently. Thus, instead of having to individually edit your members' availability, use
 `setm` to set the availability of given member(s) at one go.
 
-Format: `setm INDEX [MORE_INDICES]... d/DAY(S)`
+Format: `setm MEMBER_INDEX [MORE_INDICES]... d/DAY(S)`
 
-* Sets the availability of the member(s) at the specified `INDEX` and `MORE_INDICES` to be the specified `DAY(S)`
+* Sets the availability of the member(s) at the specified `MEMBER_INDEX` and `MORE_INDICES` to be the specified `DAY(S)`
 * `DAY(s)` **must be a positive integer from 1 to 7**, whereby 1 represents Monday and 7 represents Sunday.
 * `DAY(s)` **must be separated by a single space** e.g. `d/1 2 3`
-* `INDEX` and `MORE_INDICES` refer to the index number(s) shown in the displayed member list
-* `INDEX` and `MORE_INDICES` **must be positive integers** 1, 2, 3, …​
+* `MEMBER_INDEX` and `MORE_INDICES` refer to the index number(s) shown in the displayed member list
+* `MEMBER_INDEX` and `MORE_INDICES` **must be positive integers** 1, 2, 3, …​
 * `MORE_INDICES` **must be separated by a single space** e.g. `1 2 3`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
@@ -337,11 +414,11 @@ Examples:
 
 During a training session, you can mark the attendance of members present (represented by a tick) with this command.
 
-Format: `mark INDEX [MORE_INDICES]...`
+Format: `mark MEMBER_INDEX [MORE_INDICES]...`
 
-* Marks the member(s) at the specified `INDEX` and `MORE_INDICES` in the members list as present
-* `INDEX` and `MORE_INDICES` refers to the index number of the member in the displayed members list
-* `INDEX` and `MORE_INDICES` **must be positive integers** 1, 2, 3 …​
+* Marks the member(s) at the specified `MEMBER_INDEX` and `MORE_INDICES` in the current displayed member list as present
+* `MEMBER_INDEX` and `MORE_INDICES` refers to the index number of the member in the displayed members list
+* `MEMBER_INDEX` and `MORE_INDICES` **must be positive integers** 1, 2, 3 …​
 * `MORE_INDICES` **must be separated by a single space** e.g. `1 2 3`
 
 <div markdown="span" class="alert alert-primary">
@@ -353,7 +430,7 @@ their total attendance so that you can use the mark command again to take attend
 
 Examples:
 
-* `mark 1 2` marks the attendance of the members at indices 1 and 2 in the displayed list as present :camera:
+* `mark 1 2` marks the attendance of the members at indices 1 and 2 in the currently displayed list as present :camera:
 
 <p align="center">
    <img src="images/markExample.png" height="500" align="center"/>
@@ -365,11 +442,11 @@ Examples:
 
 Unmarks attendance of members marked as present, represented by a cross.
 
-Format `unmark INDEX [MORE_INDICES]...`
+Format `unmark MEMBER_INDEX [MORE_INDICES]...`
 
-* Unmarks the member(s) at the specified `INDEX` and `MORE_INDICES` in the members list as not present
-* `INDEX` and `MORE_INDICES` refers to the index number of the member in the displayed members list
-* `INDEX` and `MORE_INDICES` **must be positive integers** 1, 2, 3 …​
+* Unmarks the member(s) at the specified `MEMBER_INDEX` and `MORE_INDICES` in the members list as not present
+* `MEMBER_INDEX` and `MORE_INDICES` refers to the index number of the member in the displayed members list
+* `MEMBER_INDEX` and `MORE_INDICES` **must be positive integers** 1, 2, 3 …​
 * `MORE_INDICES` **must be separated by a single space** e.g. `1 2 3`
 
 Examples:
@@ -524,10 +601,10 @@ any of the given keywords.
 
 Format: `findf KEYWORD [MORE_KEYWORDS]...`
 
-* `KEYWORD` and `MORE_KEYWORDS` are case-insensitive. e.g. `Utown` will match `utown`
+* `KEYWORD` and `MORE_KEYWORDS` are **case-insensitive**. e.g. `Utown` will match `utown`
 * Only the location is searched
-* Only full words will be matched e.g. `Utown` will not match `town`
-* Facilities matching at least one keyword will be returned (i.e. OR search) e.g `Utown Redhill` will
+* Only **full words** will be matched e.g. `Utown` will not match `town`
+* Facilities matching **at least one** keyword will be returned (i.e. OR search) e.g `Utown Redhill` will
   return `Utown Field` and `Redhill Sports Complex`
 
 Examples:
@@ -584,8 +661,8 @@ previously allocated to on a specified day, using `deallocate`.
 
 Format: `deallocate MEMBER_INDEX FACILITY_INDEX DAY`
 
-* `MEMBER_INDEX` refers to the index shown in the displayed member list
-* `FACILITY_INDEX` refers to the index shown in the displayed facility list
+* `MEMBER_INDEX` refers to the index shown in the currently displayed member list
+* `FACILITY_INDEX` refers to the index shown in the currently displayed facility list
 * Both `MEMBER_INDEX` and `FACILITY_INDEX` **must be positive integers** 1, 2, 3…
 * `DAY` **must be a positive integer from 1 to 7**, whereby 1 represents Monday and 7 represents Sunday
 
@@ -602,8 +679,8 @@ using `allocate`
 
 Format: `allocate MEMBER_INDEX FACILITY_INDEX DAY`
 
-* `MEMBER_INDEX` refers to the index shown in the displayed member list
-* `FACILITY_INDEX` refers to the index shown in the displayed facility list
+* `MEMBER_INDEX` refers to the index shown in the currently displayed member list
+* `FACILITY_INDEX` refers to the index shown in the currently displayed facility list
 * Both `MEMBER_INDEX` and `FACILITY_INDEX` **must be positive integers** 1, 2, 3…
 * `DAY` **must be a positive integer from 1 to 7**, whereby 1 represents Monday and 7 represents Sunday
 
@@ -767,7 +844,7 @@ Action | Format, Examples
 **Unmark member attendance**| `unmark INDEX [MORE_INDICES]...` <br> e.g. `unmark 1 2`
 **Clear membber attendance**| `cleara`
 **Import multiple members**| `import CSV_FILE_PATH` <br> e.g.`import myFile.csv`
-**Clear member**| `clearm`
+**Clear members**| `clearm`
 
 [Back to Table of Contents](#table-of-contents)
 
