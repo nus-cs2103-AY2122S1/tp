@@ -1,7 +1,6 @@
 package seedu.address.testutil;
 
 import seedu.address.logic.commands.EditCommand.EditStudentDescriptor;
-import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
@@ -30,7 +29,6 @@ public class EditStudentDescriptorBuilder {
         descriptor.setName(student.getName());
         descriptor.setTelegramHandle(student.getTelegramHandle());
         descriptor.setEmail(student.getEmail());
-        descriptor.setGroupName(student.getGroupName());
     }
 
     /**
@@ -54,14 +52,6 @@ public class EditStudentDescriptorBuilder {
      */
     public EditStudentDescriptorBuilder withEmail(String email) {
         descriptor.setEmail(new Email(email));
-        return this;
-    }
-
-    /**
-     * Sets the {@code GroupName} of the {@code EditStudentDescriptor} that we are building.
-     */
-    public EditStudentDescriptorBuilder withGroupName(String groupName) {
-        descriptor.setGroupName(new GroupName(groupName));
         return this;
     }
 

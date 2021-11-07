@@ -10,9 +10,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_HANDLE
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_HANDLE_BOB;
 import static seedu.address.testutil.TypicalAssessments.MIDTERMS;
 import static seedu.address.testutil.TypicalAssessments.QUIZ1;
-import static seedu.address.testutil.TypicalGroups.TYPICAL_GROUP_CS2101;
-import static seedu.address.testutil.TypicalGroups.TYPICAL_GROUP_CS2103T;
 import static seedu.address.testutil.TypicalGroups.TYPICAL_GROUP_CS2103T_NAME;
+import static seedu.address.testutil.TypicalGroups.getTypicalGroups;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,10 +78,13 @@ public class TypicalStudents {
     }
 
     public static List<Student> getTypicalStudents() {
-        return new ArrayList<>(List.of(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
-    }
-
-    public static List<Group> getTypicalGroups() {
-        return new ArrayList<>(List.of(TYPICAL_GROUP_CS2103T, TYPICAL_GROUP_CS2101));
+        return new ArrayList<>(List.of(
+                new StudentBuilder(ALICE).build(),
+                new StudentBuilder(BENSON).build(),
+                new StudentBuilder(CARL).build(),
+                new StudentBuilder(DANIEL).build(),
+                new StudentBuilder(ELLE).build(),
+                new StudentBuilder(FIONA).build(),
+                new StudentBuilder(GEORGE).build()));
     }
 }
