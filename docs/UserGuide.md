@@ -65,7 +65,7 @@ ________________________________________________________________________________
 
 5. If you are on MacOS and encounter this issue when launching SportsPA, follow [this](https://support.apple.com/en-sg/guide/mac-help/mh40616/mac).
 <p align="center">
-   <img src="images/mac_error" height="300" align="center"/>
+   <img src="images/mac_error.png" height="300" align="center"/>
 </p>
 
 
@@ -74,7 +74,8 @@ ________________________________________________________________________________
 
 
 [Back to Table of Contents](#table-of-contents)
-____________________________________________________________________________________________________________
+
+_____________________________________________________________________________________________________________
 
 ## Command Format
 Before we start, let's take a look at what a typical command in SportsPA comprises of.

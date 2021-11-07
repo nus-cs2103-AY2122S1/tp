@@ -3,6 +3,7 @@ layout: page
 title: Developer Guide
 nav-text: Developer Guide
 ---
+
 ![](images/sportsPA_logo.png)
 
 <span style = "font-size: 32px; color: #e46c0a">
@@ -11,10 +12,6 @@ Welcome to the SportsPA Developer Guide!
 
 <div style="page-break-after: always;"></div>
 
-<a name="table-of-contents"></a>
-<span style = "font-size: 32px; color: #e46c0a">
-Table of Contents
-</span>
 * Table of Contents
   {:toc}
 
