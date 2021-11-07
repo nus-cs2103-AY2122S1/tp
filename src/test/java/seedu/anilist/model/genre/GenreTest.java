@@ -7,8 +7,6 @@ import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_GENRE_ALPHA;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_GENRE_NON_ALPHANUMERIC;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_GENRE_NUMERIC;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_STRING_EMPTY;
-import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_STRING_NON_ASCII;
-import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_STRING_SPACE;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_ACTION;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_SCIENCE_FICTION_UPPER_CASE;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_SUPERNATURAL_MIXED_CASE;
@@ -25,12 +23,10 @@ public class GenreTest {
 
     @Test
     public void constructor_invalidGenreName_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> new Genre(INVALID_STRING_SPACE));
+        // Genre that is not in genrelist
         assertThrows(IllegalArgumentException.class, () -> new Genre(INVALID_STRING_EMPTY));
-        assertThrows(IllegalArgumentException.class, () -> new Genre(INVALID_STRING_NON_ASCII));
-        assertThrows(IllegalArgumentException.class, () -> new Genre(INVALID_GENRE_ALPHA));
         assertThrows(IllegalArgumentException.class, () -> new Genre(INVALID_GENRE_NUMERIC));
-        assertThrows(IllegalArgumentException.class, () -> new Genre(INVALID_GENRE_NON_ALPHANUMERIC));
+
     }
 
     @Test
@@ -38,17 +34,17 @@ public class GenreTest {
         // null genre name
         assertThrows(NullPointerException.class, () -> Genre.isValidGenreName(null));
 
-        // invalid genres
-        assertFalse(Genre.isValidGenreName(INVALID_STRING_SPACE));
-        assertFalse(Genre.isValidGenreName(INVALID_STRING_EMPTY));
-        assertFalse(Genre.isValidGenreName(INVALID_STRING_NON_ASCII));
+        // Genre that is not in genrelist
         assertFalse(Genre.isValidGenreName(INVALID_GENRE_ALPHA));
-        assertFalse(Genre.isValidGenreName(INVALID_GENRE_NUMERIC));
         assertFalse(Genre.isValidGenreName(INVALID_GENRE_NON_ALPHANUMERIC));
 
-        // valid genres
+        // valid genre lower case
         assertTrue(Genre.isValidGenreName(VALID_GENRE_ACTION));
+
+        // valid genre upper case
         assertTrue(Genre.isValidGenreName(VALID_GENRE_SCIENCE_FICTION_UPPER_CASE));
+
+        // valid genre mixed case
         assertTrue(Genre.isValidGenreName(VALID_GENRE_SUPERNATURAL_MIXED_CASE));
     }
 

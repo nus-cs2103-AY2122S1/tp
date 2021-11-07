@@ -62,9 +62,9 @@ public class GenreListTest {
         String[] listOfGenresCopy = Arrays.stream(listOfGenres).toArray(String[]::new);
         Arrays.sort(listOfGenresCopy);
         String result = "";
-        for (int i = 0; i < listOfGenresCopy.length; i++) {
+        for (String genre : listOfGenresCopy) {
             result += "    - ";
-            result += listOfGenresCopy[i];
+            result += genre;
             result += "\n";
         }
         result = result.substring(0, result.length() - 1);
