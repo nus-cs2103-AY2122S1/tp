@@ -90,6 +90,9 @@ public class RemoveMarkCommand extends Command {
             throw new CommandException(NO_STAFF_SATISFIES_QUERY);
         }
         for (Person p : toEdit) {
+            checkPerson(p);
+        }
+        for (Person p : toEdit) {
             model.setPerson(p, checkPerson(p));
         }
         List<String> toPrint = toEdit.stream()
