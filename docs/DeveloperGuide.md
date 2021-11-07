@@ -354,183 +354,305 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *` | potential user | be able to download the app | use it to keep track of my contacts |
-| `* * *` | potential user | be able to start the app | see how the app would look like |
+| `* * *` | user | have access to a help page | know how to navigate the app |
 | `* * *` | user | be able to create a new contact in contHACKS | save a contact |
-| `* * *` | user | be able to retrieve an existing contact in contHACKS | retrieve more details about the contact |
+| `* * *` | user | be able to find an existing contact in contHACKS | retrieve details about the contact |
 | `* * *` | user | be able to update an existing contact in contHACKS | change information about my student if I made a mistake when adding them |
-| `* * *` | user | be able to delete an old contact in contHACKS | delete contacts whom I am not in contact with anymore |
-| `* * *` | user | be able to see their contact details | copy the contact details to contact them |
-| `* * *` | new user | be able to find out what kind of commands are available | use the app as intended |
-| `* * *` | user | be able to close the app | stop using it |
+| `* * *` | user | be able to delete an unwanted contact in contHACKS | delete contacts whom I am not in contact with anymore |
+| `* * *` | user | be able to see their contact details | refer the contact details to contact them |
 | `* *` | user | be able to purge all current data | get rid of sample/experimental data I used for exploring the app |
 | `* *` | user | be able to view my contacts in alphabetical order | see the contacts in more intuitive way |
 | `* *` | user | be able to delete by module | delete all contacts linked to that module |
 | `* *` | user | be able to delete contacts by groups | delete many contacts in one go |
-| `* *` | user | be able to see the group a contact belongs to | recall how I know the particular person |
+| `* *` | user | be able to see the group a contact belongs to | know which lesson this person belongs to |
 | `* *` | user | be able to search for contacts | save time have to scroll the entire contact list |
 | `* *` | user | be able to retrieve data fast | get the contact in the fastest time possible |
 | `* *` | user | be able to search by categories | ignore unrelated contacts |
 | `* *` | user | be able to add a description about a contact | add more details about the contact |
-| `* *` | user | have access to a help page | know how to navigate the app |
 | `* *` | user | be able to create a class card | see my current classes |
 | `* *` | user | be able to see class details | recall the specifics of the class |
 | `* *` | user | be able to update class details | ensure my class details are correct |
 | `* *` | user | be able to delete a class | remove the classes that are irrelevant |
-| `* *` | potential user exploring the app | be able to see the app populated with sample data | easily see how the app works |
-| `*` | forgetful user | be able to have reminders about upcoming classes | conduct classes punctually |
-| `*` | user | be able to set up profile picture for the contact | recognise the person |
-| `*` | user | be able to set up profile picture for myself | add a personal touch to the application |
-| `*` | Expert user | be able to set up shortcuts | do things faster |
+| `*` | expert user | be able to set up my own aliases | use the alias that I am more comfortable with |
 
 
 ### Use cases
 
 (For all use cases below, the **System** is `contHACKS` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Creating a contact**
+**Use case `UC01`: Adding a contact**
 
 **MSS**
 
 1. User requests to create a contact and inputs contact details
-2. contHACKS creates the contact and displays the newly added contact
+2. contHACKS creates the contact and displays information of the newly added contact
 
-Use case ends
+Use case ends.
 
 **Extensions**
-* 1a. User fails to provide compulsory field
-    * 1a1. contHACKS shows an error message<br />
-    Use case ends
+* 1a. User fails to provide any of the compulsory fields
+    * 1a1. contHACKS shows an error message <br/>
+    Use case ends.
 
 
-* 1b. User input details in a wrong format
-    * 1b1. contHACKS shows an error message<br />
-    Use case ends
+* 1b. User inputs details in a wrong format
+    * 1b1. contHACKS shows an error message <br/>
+    * 1b2. User enters new input <br>
+    Steps 1b1 - 1b2 are repeated until the input is in a correct format. <br>
+    Use case resumes from step 2. <br>
+    Use case ends.
 
 
-**Use case: Finding a contact**
+* 1c. User inputs details with the same email/phone number/telegram handle as another existing contact in contHACKS.
+  * 1c1. contHACKS disallow this operation and shows an error message <br>
+  * 1c2. User enters new input <br>
+  Steps 1c1 - 1c2 are repeated until the email/phone number/telegram handle is unique in the list of contacts. <br>
+  Use case ends.
+
+
+**Use case `UC02`: Finding a contact**
 
 **MSS**
 
 1. User requests to find a contact based on input details
-2. contHACKS shows a list of contacts that match input details
+2. contHACKS shows a list of contacts that matches the input details
 
-Use case ends
+Use case ends.
 
 **Extensions**
 * 1a. There are no contacts that matches the input details
-    * 1a1. contHACKS displays an empty list<br />
-    Use case ends
+    * 1a1. contHACKS displays an empty list <br/>
+    Use case ends.
 
 
 * 1b. User finds by name
-    * 1b1. contHACKS displays a list of contacts with names that match the input<br />
-    Use case ends
+    * 1b1. contHACKS displays a list of contacts with names that match the input <br/>
+    Use case ends.
 
 
 * 1c. User finds by module code
-    * 1c1. contHACKS displays a list of contacts that are tagged with the module code<br />
-    Use case ends
+    * 1c1. contHACKS displays a list of contacts that are tagged with the module code <br/>
+    Use case ends.
 
 
-* 1d. User input details in a wrong format
-    * 1d1. contHACKS shows an error message<br />
-    Use case ends
+* 1d. User inputs details in a wrong format
+    * 1d1. contHACKS shows an error message <br/>
+    * 1d2. User enters new input <br>
+    Steps 1d1 - 1d2 are repeated until the input is in a correct format. <br>
+    Use case resumes from step 2. <br>
+    Use case ends.
 
 
-**Use case: Updating a contact**
+**Use case `UC03`: Editing a contact**
 
 **MSS**
 
 1. User requests to update a specific contact and inputs the new contact details
-2. contHACKS updates the contact with the inputted details and displays the updated contact
+2. contHACKS updates the contact with the input details and displays the updated contact
 
 Use case ends
 
 **Extensions**
 * 1a. Contact does not exist
-    * 1a1. contHACKS shows an error message<br />
-    Use case ends
+    * 1a1. contHACKS shows an error message <br/>
+    Use case ends.
 
 
-* 1b. User input details in a wrong format
-    * 1b1. contHACKS shows an error message<br />
-    Use case ends
+* 1b. User inputs details in a wrong format
+    * 1b1. contHACKS shows an error message <br>
+    * 1b2. User enters new input <br>
+    Steps 1b1 - 1b2 are repeated until the input is in a correct format. <br>
+    Use case resumes from step 2. <br>
+    Use case ends.
 
 
-**Use case: Adding remark to a contact**
+* 1c. User inputs email/phone/number/telegram handle as another existing contact in contHACKS
+  * 1c1. contHACKS disallows this operation and shows an error message <br>
+  Use case ends.
+
+**Use case `UC04`: Deleting contact(s)**
 
 **MSS**
 
-1. User requests to add a remark to a specific contact
-2. contHACKS updates the contact with the inputted remark and displays the updated contact
+1. User requests to list all contacts (`UC05`) or find contacts (`UC02`) 
+2. User requests to delete specific contact(s) in the shown list
+3. contHACKS deletes the contact(s) and displays the updated contact list
 
-Use case ends
+Use case ends.
 
 **Extensions**
 * 1a. Contact does not exist
-    * 1a1. contHACKS shows an error message<br />
-      Use case ends
+    * 1a1. contHACKS shows an error message <br/>
+      Use case ends.
+* 1b. The index provided is invalid
+  * 1b1. contHACKS displays an invalid index error message. <br>
+  Use case ends.
 
 
-* 1b. User input the remark in a wrong format
-    * 1b1. contHACKS shows an error message<br />
-      Use case ends
-
-
-**Use case: Deleting a contact**
+**Use case `UC05`: Listing the contact list**
 
 **MSS**
 
-1. User requests to delete a specific contact
-2. contHACKS deletes the contact and displays the updated contact list
-
-Use case ends
-
-**Extensions**
-* 1a. Contact does not exist
-    * 1a1. contHACKS shows an error message.<br />
-      Use case ends
-
-
-**Use case: Listing the contact list**
-
-**MSS**
-
-1. User requests to for the whole contact list
+1. User requests to list the whole contact list
 2. contHACKS displays the whole contact list
 
-Use case ends
+Use case ends.
 
 
-**Use case: Clear all contacts**
+**Use case `UC06`: Clearing all contacts**
 
 **MSS**
 
 1. User requests to clear all contacts
-2. contHACKS delete all the contacts and displays an empty contact list
+2. contHACKS deletes all the contacts and displays an empty contact list
 
-Use case ends
+Use case ends.
 
-
-**Use case: Getting help manual**
+**Use case `UC06`: Adding a lesson**
 
 **MSS**
 
-1. User requests to for a help manual
-2. contHACKS displays the help manual
+1. User requests to create a lesson and inputs lesson details
+2. contHACKS creates the lesson and displays information of the newly added lesson
+
+Use case ends.
+
+**Extensions**
+* 1a. User fails to provide any of the compulsory fields
+    * 1a1. contHACKS shows an error message <br/>
+      Use case ends.
+
+
+* 1b. User inputs details in a wrong format
+    * 1b1. contHACKS shows an error message <br/>
+    * 1b2. User enters new input <br>
+      Steps 1b1 - 1b2 are repeated until the input is in a correct format. <br>
+      Use case resumes from step 2. <br>
+      Use case ends.
+
+
+* 1c. User inputs details with the same module code and lesson code as another existing lesson in contHACKS.
+    * 1c1. contHACKS disallow this operation and shows an error message <br>
+    * 1c2. User enters new input <br>
+      Steps 1c1 - 1c2 are repeated until module code/lesson code is unique in the list of lessons. <br>
+      Use case ends.
+
+
+**Use case `UC07`: Finding a lesson**
+
+**MSS**
+
+1. User requests to find a lesson based on input details
+2. contHACKS shows a list of lessons that matches the input details
+
+Use case ends.
+
+**Extensions**
+* 1a. There are no lessons that matches the input details
+    * 1a1. contHACKS displays an empty list <br/>
+      Use case ends.
+
+
+* 1b. User finds by module code
+    * 1b1. contHACKS displays a list of lessons that are tagged with the module code <br/>
+      Use case ends.
+
+* 1c. User finds by day 
+  * 1c1. contHACKS displays a list of lessons that are on this day
+
+
+* 1d. User inputs details in a wrong format
+    * 1d1. contHACKS shows an error message <br/>
+    * 1d2. User enters new input <br>
+      Steps 1d1 - 1d2 are repeated until the input is in a correct format. <br>
+      Use case resumes from step 2. <br>
+      Use case ends.
+
+
+**Use case `UC08`: Editing a lesson**
+
+**MSS**
+
+1. User requests to update a specific lesson and inputs the new lesson details
+2. contHACKS updates the lesson with the input details and displays the updated lesson
+
+Use case ends.
+
+**Extensions**
+* 1a. Lesson does not exist
+    * 1a1. contHACKS shows an error message <br/>
+      Use case ends.
+
+
+* 1b. User inputs details in a wrong format
+    * 1b1. contHACKS shows an error message <br>
+    * 1b2. User enters new input
+      Steps 1b1 - 1b2 are repeated until the input is in a correct format. <br>
+      Use case resumes from step 2.
+      Use case ends.
+
+
+* 1c. User inputs module code and lesson code that is the same as another existing lesson in contHACKS
+    * 1c1. contHACKS disallows this operation and shows an error message <br>
+      Use case ends.
+
+**Use case `UC09`: Deleting lesson(s)**
+
+**MSS**
+
+1. User requests to list all lessons (`UC10`) or find lessons (`UC07`)
+2. User requests to delete specific lesson(s) in the shown list
+3. contHACKS deletes the lesson(s) and displays the updated lesson list
 
 Use case ends
 
+**Extensions**
+* 1a. Lesson does not exist
+    * 1a1. contHACKS shows an error message <br/>
+      Use case ends.
+  
+* 1b. The index provided is invalid
+  * 1b1. contHACKS displays an invalid index error message. <br>
+    Use case ends.
 
-**Use case: Exiting the application**
+
+**Use case `UC10`: Listing the lesson list**
+
+**MSS**
+
+1. User requests to list the whole lesson list
+2. contHACKS displays the whole lesson list
+
+Use case ends.
+
+
+**Use case `UC11`: Clearing all lessons**
+
+**MSS**
+
+1. User requests to clear all lessons
+2. contHACKS deletes all the lessons and displays an empty lesson list
+
+Use case ends.
+
+
+**Use case `UC12`: Accessing help manual**
+
+**MSS**
+
+1. User requests for a help manual
+2. contHACKS displays the help manual
+
+Use case ends.
+
+**Use case `UC13`: Exiting the application**
 
 **MSS**
 
 1. User requests to exit the application
 2. contHACKS closes
 
-Use case ends
+Use case ends.
 
 
 ### Non-Functional Requirements
