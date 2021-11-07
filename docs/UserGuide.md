@@ -274,7 +274,7 @@ Example:
 
 ### Find elderly by attribute : `find`
 
-Finds elderly whose names contain any of the given keywords. All elderly attributes are searched using the giving [format](#structure-of-an-elderly-contact).
+Finds elderly whose names contain any of the given keywords. All elderly attributes are searched using the given [format](#structure-of-an-elderly-contact).
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
