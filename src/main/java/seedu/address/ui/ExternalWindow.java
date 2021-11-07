@@ -5,6 +5,9 @@ import java.util.logging.Logger;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 
+/**
+ * Represents an external window that is to be opened in addition to the Main Window.
+ */
 public class ExternalWindow extends UiPart<Stage> {
     private static final Logger logger = LogsCenter.getLogger(ExternalWindow.class);
 
