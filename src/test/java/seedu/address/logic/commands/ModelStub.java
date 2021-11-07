@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.memento.Memento;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyApplicantBook;
 import seedu.address.model.ReadOnlyPositionBook;
@@ -189,6 +190,11 @@ public class ModelStub implements Model {
 
     @Override
     public String recoverHistory() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public String resetData(Memento memento) {
         throw new AssertionError("This method should not be called.");
     }
 }

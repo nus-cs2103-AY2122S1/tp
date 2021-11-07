@@ -166,11 +166,11 @@ This section describes some noteworthy details on how certain features are imple
 
 **:information_source: Note:** <br>
 
-* All commands that modify the `ApplicantBook` or `PositionBook` will keep track of the state of the model before the modification using `Memento` class. 
-* The `Memento` class captures the existing model and success message from a command and stands by in the event of an `undo` scenario.
+* All commands that modify the `ApplicantBook` or `PositionBook` will keep track of the state of the model before the modification using `memento`. 
+* The `memento` captures the existing model and success message from a command and stands by in the event of an `undo` scenario.
 * All such commands will have a :heavy_check_mark: symbol beside it. Others will have no symbol displayed beside it.
 
-* Such commands include add-applicant, add-position, delete-applicant & delete-position.
+* Such commands include `add-applicant`, `add-position`, `delete-applicant`, `delete-position`, `edit-applicant`, `edit-position`, and `mark`.
 
 </div>
 
@@ -183,7 +183,7 @@ Title of Position Applying to, GithubLink), parsed straight from the user input.
 
 The `AddApplicantCommand#execute(Model model)` method will use guard clauses to check whether there is a duplicate
 applicant, and whether the position (that this applicant is applying to) input by the user actually exists in
-`positionBook`. If all parameters are valid, the `ApplicantParticulars` will then be passed to Model to add to
+`positionBook`. If all parameters are valid, the `ApplicantParticulars` will then be passed to `Model` to add to
 `applicantBook`, using the `Model#addApplicantWithParticulars` method.
 
 Given below is an example usage scenario and how the add applicant feature behaves at each step.
@@ -196,7 +196,7 @@ block 123, #01-01 pos/software engineer github/https://github.com/johndoe`. The 
 
 The following sequence diagram shows the method invocation in this step.
 ![AddApplicantSequenceDiagram1](images/add-applicant/AddApplicantSequenceDiagram1.png)
-[** this diagram also lacks the memento part. **]
+
 
 Step 2. LogicManager will execute this `AddApplicantCommand` instance. This will invoke the
 `Model#addApplicantWithParticulars` method.
@@ -247,18 +247,8 @@ Step 2: LogicManager executes this `DeleteApplicantCommand` instance, invoking t
 
 Step 3: This then calls the internal method for `ApplicantBook`, `ApplicantBook#removeApplicant()`, which then removes the applicant thereafter.
 
-The following activity diagram summarizes the actions taken when LogicManager executes the DeleteApplicantCommand:
-[to be added]
 
-#### Design considerations:
 
-**Aspect: How to access and delete an applicant**
-
-* **Alternative 1 (current choice):** Let ModelManager handle the deletion but keep the ApplicantBook's methods separate from the ModelManager [to be added]
-    * Pros: More accessible since ModelManager already contains the applicantBook, and reduces complication of code.
-    * Cons: Higher coupling for ModelManager since it handles more commands.
-
-* **Alternative 2:** [to be added]
 
 ### Edit applicant feature :heavy_check_mark:
 
@@ -267,7 +257,7 @@ The implementation of the edit applicant feature uses the `EditApplicantCommand`
 class is that the user can simply edit any number of fields or attributes to a particular applicant, with at least 1 field being changed.
 
 The `EditApplicantCommand` method takes in an index and description of the target applicant with the help of the `EditApplicantDescriptor` class.
-It then checks if the input index is valid by comparing it to the size of the current applicant list in MTR, as well as ensuring it is a non-negative integer.
+It then checks if the input index is valid by comparing it to the size of the current applicant list in MTR, as well as ensuring it is a positive integer.
 It also has guard clauses verifying that the description has a valid `Title` which is a valid position title in the current `positionBook`. A final check is done to check that the applicant
 with the new description is not already existing in MTR. Once these criteria are met, the model then updates the target applicant with the new description via the
 `Model#setApplicant` and `Model#updateFilteredApplicantList` methods. <br>
@@ -283,19 +273,8 @@ Step 2. LogicManager executes this `EditApplicantCommand` instance, invoking the
 Step 3. The model then replace the existing applicant with the new one in the `applicantBook` via `Model#setApplicant` and reflect the updated list in the UI.
 
 The following activity diagram summarizes the actions taken when LogicManager executes the EditApplicantCommand:
-[to be added]
+![EditApplicantActivityDiagram](images/EditApplicantActivityDiagram.png)
 
-#### Design considerations:
-
-**Aspect: How to access and change an applicant**
-
-* **Alternative 1 (current choice):** Have a separate class handle changing details of an applicant. [to be added]
-    * Pros: Lowers coupling and makes logic of ModelManager simpler.
-    * Cons: If a change is needed for the EditApplicantCommand, more classes need to be changed, making it more troublesome.
-
-* **Alternative 2:** Create a separate ModelManager to handle applicant-related commands.
-    * Pros: Better dissection of code and easier to read and test later on since it is separate from the ModelManager.
-    * Cons: May result in a lot more code and work in order to achieve the same level of logic.
     
 
 ### Filter applicants feature
@@ -324,9 +303,6 @@ Step 2. Model executes `FilterApplicantCommand#applicantMatchesFilter` method my
 
 Step 3. Results of this new filtered list is then passed to the model and is reflected onto the UI.
 
-The following activity diagram summarizes the actions taken when LogicManager executes the FilterApplicantCommand:
-[to be added]
-
 
 #### Rationale for implementation
 
@@ -339,15 +315,8 @@ Hence, the pattern is implemented here in `FilterApplicantDescriptor`, which is 
 It is also used to in the validation of the filtering criteria.
 
 
+
 #### Design considerations:
-
-**Aspect: Accessing a list**
-
-* **Alternative 1 (current choice):** Use of the Java Streams API to filter the applicants using chained calls to `Stream#filter`.
-    * Pros: [to be added]
-    * Cons: Does not make good use of the in-built functionality of `FilteredList`.
-
-* **Alternative 2:** [to be added]
 
 **Aspect: Filtering the inputs**
 
@@ -385,9 +354,6 @@ Step 2. Model executes `FindApplicantCommand#execute` method, invoking the `Mode
 
 Step 3. Results of this new filtered list is then passed to the model and is reflected onto the UI.
 
-The following activity diagram summarizes the actions taken when LogicManager executes the FindApplicantCommand:
-[to be added]
-
 
 #### Design considerations:
 
@@ -423,8 +389,6 @@ Step 2. LogicManager executes this `MarkApplicantStatusCommand` instance, invoki
 
 Step 3. UI-wise, the applicant should now appear with the updated application status.
 
-The following activity diagram summarizes the actions taken when LogicManager executes the MarkApplicantStatusCommand:
-[to be added]
 
 #### Design considerations:
 
@@ -437,6 +401,7 @@ The following activity diagram summarizes the actions taken when LogicManager ex
 * **Alternative 2:** Have application status in a separate class with enumerations inside it.
     * Pros: Separates code logic from Application, easier to digest and manipulate.
     * Cons: Increases complexity of code. Separate class has little usage.
+
 
 
 ### List applicants feature
@@ -456,10 +421,7 @@ Step 1. User inputs `list-applicant`.
 Step 2. LogicManager executes this `ListApplicantCommand` instance, invoking the `Model#updateFilteredApplicantList`.
 
 Step 3. The UI is updated to show the current list of applicants.
-[display picture of current applicants here]
 
-The following activity diagram summarizes the actions taken when LogicManager executes the ListApplicantCommand:
-[to be added]
 
 #### Design considerations:
 
@@ -495,8 +457,7 @@ Step 2. LogicManager executes this `AddPositionCommand` instance, invoking the `
 
 Step 3. The UI for `positionBook` will now contain the new position added.
 
-The following sequence diagram shows the method invocation in this step.
-[to be added]
+
 
 #### Design considerations:
 
@@ -515,12 +476,13 @@ The following sequence diagram shows the method invocation in this step.
 
 #### Implementation
 
-The delete-position feature is achieved by the `DeletePositionCommand` class, in similar flavour to the `DeleteApplicantCommand`. 
+The delete position feature is achieved by the `DeletePositionCommand` class, in similar flavour to the `DeleteApplicantCommand`.
 The only parameter it takes in is the index position of the position in the `positionBook`.
 
 The `DeletePositionCommand#execute(Model model)` method will use the `Model#getFilteredPositionList()` to indirectly
 check whether the position exists by checking the size of the list against the index provided. The position to be deleted is then
 obtained from the list via the standard `List#get()` and is removed from the model via `Model#deletePosition()`.
+When a position is deleted, the applicants applying to the position are also deleted. 
 
 Given below is an example usage scenario and how the delete position feature behaves at each step.
 Preconditions: The app is already launched and there is a position existing in MTR.
@@ -529,22 +491,9 @@ Step 1: The user inputs the command `delete-position 1`. The app parser simply p
 
 Step 2: LogicManager executes this `DeletePositionCommand` instance, invoking the `Model#deletePosition()` method.
 
-Step 3: This then calls the internal method for `PositionBook`, `PositionBook#removeApplicant()`, which then removes the position thereafter.
+Step 3: This then calls the internal method for `PositionBook`, `PositionBook#removeApplicant()` and `ApplicantBook#removeApplicantsUnderPosition()`, 
+which then removes the position and related applicants.
 
-The following activity diagram summarizes the actions taken when LogicManager executes the DeletePositionCommand:
-[to be added]
-
-#### Design considerations:
-
-**Aspect: How to access and delete a position**
-
-* **Alternative 1 (current choice):** Let ModelManager handle the deletion but keep the PositionBook's methods separate from the ModelManager
-    * Pros: More accessible since ModelManager already contains the positionBook, and reduces complication of code.
-    * Cons: Higher coupling for ModelManager since it handles more commands.
-
-* **Alternative 2:** Create a separate ModelManager to handle position-related commands.
-    * Pros: Better dissection of code and easier to read and test later on since it is separate from the ModelManager.
-    * Cons: May result in a lot more code and work in order to achieve the same level of logic.
 
 
 ### Edit position feature :heavy_check_mark:
@@ -554,10 +503,10 @@ The implementation of the edit position feature uses the `EditPositionCommand` c
 class is that the user can simply edit any number of fields or attributes to a particular applicant, with at least 1 field being changed.
 
 The `EditPositionCommand` method takes in an index and description (including `title`) of the target position with the help of the `EditPositionDescriptor` class.
-It then checks if the input index is valid by comparing it to the size of the current applicant list in MTR, as well as ensuring it is a non-negative integer.
+It then checks if the input index is valid by comparing it to the size of the current applicant list in MTR, as well as ensuring it is a positive integer.
 It also has guard clauses verifying that the description is valid and different from the one in the MTR. Once these criteria are met, 
-the model then updates the target position with the new description via the `Model#setPosition` and `Model#updateFilteredPositionList` methods.
-It also ensures all applicant's positions are updated using the `Model#updateApplicantsWithPosition`.
+the model then updates the target position with the new description via the `Model#setPosition()` and `Model#updateFilteredPositionList()` methods.
+It also ensures all applicant's positions are updated using the `Model#updateApplicantsWithPosition()`.
 
 Given below is an example usage scenario and how the edit position feature behaves at each step. <br>
 Preconditions: The app is already launched, the target position exists.
@@ -565,25 +514,15 @@ Preconditions: The app is already launched, the target position exists.
 Step 1. User inputs command `edit-position 1 tit/Algorithm Engineer des/embed algorithms into the facial recognition application `.  The app parser will store
 all the user-input parameters into an `EditPositionDescriptor` object.
 
-Step 2. LogicManager executes this `EditPositionCommand` instance, invoking the `EditPositionDescriptor#createEditedPosition` method to create a new `Position` to replace the original one.
+Step 2. LogicManager executes this `EditPositionCommand` instance, invoking the `EditPositionDescriptor#createEditedPosition()` method to create a new `Position` to replace the original one.
 
-Step 3. The model then replaces the existing position with the new one in the `positionBook` via `Model#setPosition` and reflect the updated list in the UI.
+Step 3. The model then replaces the existing position with the new one in the `positionBook` via `Model#setPosition()` and reflects the updated list in the UI.
 
 The following activity diagram summarizes the actions taken when LogicManager executes the EditPositionCommand:
-[to be added]
+![EditPositionActivityDiagram](images/EditPositionActivityDiagram.png)
 
 
-#### Design considerations:
 
-**Aspect: How to access and change a position**
-
-* **Alternative 1 (current choice):** Have a separate class handle changing details of a position. [to be added]
-    * Pros: Lowers coupling and makes logic of ModelManager simpler.
-    * Cons: If a change is needed for the EditPositionCommand, more classes need to be changed, making it more troublesome.
-
-* **Alternative 2:** Create a separate ModelManager to handle position-related commands.
-    * Pros: Better dissection of code and easier to read and test later on since it is separate from the ModelManager.
-    * Cons: May result in a lot more code and work in order to achieve the same level of logic.
     
 
 ### List positions feature
@@ -603,10 +542,7 @@ Step 1. User inputs `list-position`.
 Step 2. LogicManager executes this `ListPositionCommand` instance, invoking the `Model#updateFilteredPositionList`.
 
 Step 3. The UI is updated to show the current list of positions.
-[display picture of current positions here]
 
-The following activity diagram summarizes the actions taken when LogicManager executes the ListPositionCommand:
-[to be added]
 
 #### Design considerations:
 
@@ -631,7 +567,7 @@ Implements the following functions:
 * `ModelManager#hasPositionWithTitle()`  — Checks if a position with a given title exists in the MTR.
 * `Calculator#calculateRejectionRate()`  — Calculates the rejection rate of a position based on the number of total applicants and number of rejected applicants for that position.
 
-These operations are exposed in the `Model` interface as `Model#hasPositionWithTitle()` and `Model#calculateRejectionRate` respectively.
+These operations are exposed in the `Model` interface as `Model#hasPositionWithTitle()` and `Model#calculateRejectionRate()` respectively.
 
 Given below is an example usage scenario and how the rejection rate mechanism works at every step. <br>
 Preconditions: Position exists in MTR and there is at least 1 applicant for this position (regardless of status).
@@ -639,11 +575,11 @@ Preconditions: Position exists in MTR and there is at least 1 applicant for this
 Step 1. The user launches the application which is assumed to have some positions and corresponding applicants applying for them in the MTR.
 
 Step 2. The user executes `rate pos/software engineer` command to calculate the rejection rate of Software Engineer in the PositionBook.
-The `rate` command calls `Model#hasPositionWithTitle`, causing the model to check whether `Software Engineer` exists in the database as a Position.
+The `rate` command calls `Model#hasPositionWithTitle()`, causing the model to check whether `Software Engineer` exists in the database as a Position.
 
 Step 3. If the position exists, it will access the ApplicantBook via `Model#calculateRejectionRate()`, beginning a count of the number of applicants for the position as well as the number of rejected applicants of the same position.
 
-Step 4. After these numbers have been obtained, the `Calculator` class is called and calculates via `Calculator#calculateRejectionRate`. This resulting floating point number is then the rejection rate of the position.
+Step 4. After these numbers have been obtained, the `Calculator` class is called and calculates via `Calculator#calculateRejectionRate()`. This resulting floating point number is then the rejection rate of the position.
 
 The following sequence diagram shows the method invocation in this step.
 ![SeqDiagram](images/rejection-rates/SeqDiagram.png)
@@ -781,6 +717,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | general user                               | update applicants' application statuses directly | quickly update and see positions' competitiveness. |
 | `* * *`  | general user                               | see the current list of applicants | have a quick overview of applicants that have applied to the various positions. |
 | `* * *`  | general user                               | view the average rejection rates of all job positions | gauge how competitive a position might be.          |
+| `* * *`  | general user                               | visualize the number of applicants in job positions | gauge how popular a position might be.          |
 | `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App.              |
 | `* *  `  | user                                       | hide private applicant details   | ensure confidentiality of applicants' information. |
 | `* *  `  | user                                       | undo my last command/action | retract mistakes or changes made in the command. |
