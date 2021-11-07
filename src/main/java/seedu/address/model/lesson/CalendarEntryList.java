@@ -355,7 +355,7 @@ public class CalendarEntryList {
 
         return entryList;
     }
-
+    //@@author Chesterwongz
     /**
      * Converts a {@code Lesson} to a calendar {@code Entry} for CalendarFX.
      * Adapted from CalendarFX API example: https://dlsc.com/wp-content/html/calendarfx/apidocs/index.html
@@ -375,7 +375,7 @@ public class CalendarEntryList {
         entry.setTitle(entryTitle.toString());
         return entry;
     }
-
+    //@@author
     /**
      * Converts a {@code Lesson} to a calendar {@code Entry} for CalendarFX.
      *

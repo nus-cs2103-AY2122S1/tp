@@ -94,6 +94,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         return entries.hasClashes(lesson);
     }
 
+    //@@author Chesterwongz
     /**
      * Returns true if a person that has clashing lesson with {@code person} exists in the address book.
      */
@@ -109,7 +110,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireAllNonNull(lessons);
         return entries.hasClashes(lessons);
     }
-
+    //@@author
     /**
      * Returns {@code Set<String>} of existing lessons in the address book that are clashing with the lesson.
      */

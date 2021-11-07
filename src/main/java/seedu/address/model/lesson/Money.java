@@ -5,12 +5,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.math.BigDecimal;
 
+//@@author Chesterwongz
 /**
  * Represents the amount of money and money-related fields in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidMonetaryField(String)} (String)}
  */
 public class Money {
-
     public static final String MESSAGE_FORMAT_CONSTRAINTS =
             "Money-related fields should be formatted with a decimal point '.' "
                     + "as a separator between the dollars and cents, "
