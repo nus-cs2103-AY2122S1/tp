@@ -69,6 +69,7 @@ Here are some of the things you will need to know before you get started!
 |:information_source:| This icon indicates that some extra information is provided.|
 |:exclamation:| This icon indicates that the information provided is **important**. |
 |:warning:| This icon indicates proceed with caution. |
+
 ### Key terms <a name="key-terms"></a>
 
 These are the key terms defined for the usage of the commands:
