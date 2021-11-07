@@ -29,14 +29,8 @@ public class AliasCommandParser implements Parser<AliasCommand> {
         String aliasWord = argMultimap.getValue(PREFIX_ALIAS).get().strip();
         String commandWord = argMultimap.getValue(PREFIX_COMMAND).get().strip();
 
-        if (!Alias.isValidAlias(aliasWord)) {
-            throw new ParseException(Alias.MESSAGE_CONSTRAINTS);
-        }
-
-        // prevents trying to alias a default command
-        if (isValidCommandWord(aliasWord) && parser.getAlias(aliasWord).isEmpty()) {
-            throw new ParseException(AliasCommand.MESSAGE_OVERWRITE_DEFAULT);
-        }
+        checkAliasWord(aliasWord, parser);
+        checkCommandWord(commandWord, parser);
 
         // short circuit if removing existing alias
         if (aliasWord.equals(commandWord)) {
@@ -44,24 +38,17 @@ public class AliasCommandParser implements Parser<AliasCommand> {
             return new AliasCommand(newAlias, parser);
         }
 
-        Optional<Alias> existingAlias = parser.getAlias(commandWord);
-        // prevents chaining of aliases
-        // e.g. if there exists an existing alias "bye" for "exit", and "bye" is specified as the commandWord
-        commandWord = existingAlias.map(Alias::getCommandWord).orElse(commandWord);
-
-        if (!isValidCommandWord(commandWord)) {
-            throw new ParseException(AliasCommand.MESSAGE_UNKNOWN_OLD_COMMAND);
-        }
+        commandWord = flattenCommandWord(commandWord, parser);
 
         Alias newAlias = new Alias(aliasWord, commandWord);
         return new AliasCommand(newAlias, parser);
     }
 
     /**
-     * Checks if the provided commandWord is a valid commandWord.
+     * Checks if the provided commandWord is a single word, and that the parser recognises it as a command word.
      */
-    private boolean isValidCommandWord(String commandWord) {
-        if (commandWord.equals("") || commandWord.contains(" ")) {
+    private static boolean isValidCommandWord(String commandWord, AddressBookParser parser) {
+        if (commandWord.isEmpty() || commandWord.contains(" ")) {
             return false;
         }
 
@@ -74,5 +61,38 @@ public class AliasCommandParser implements Parser<AliasCommand> {
         }
 
         return true;
+    }
+
+    /**
+     * Verifies if the alias word can make a valid alias for the provided parser.
+     * Checks that the alias is a single alphanumeric word, and that it is not a default command.
+     */
+    public static void checkAliasWord(String aliasWord, AddressBookParser parser) throws ParseException {
+        if (!Alias.isValidAlias(aliasWord)) {
+            throw new ParseException(Alias.MESSAGE_CONSTRAINTS);
+        }
+
+        // prevents trying to alias a default command
+        if (isValidCommandWord(aliasWord, parser) && parser.getAlias(aliasWord).isEmpty()) {
+            throw new ParseException(AliasCommand.MESSAGE_OVERWRITE_DEFAULT);
+        }
+    }
+
+    /**
+     * Verifies if the command word can be parsed by the
+     */
+    public static void checkCommandWord(String commandWord, AddressBookParser parser) throws ParseException {
+        if (!isValidCommandWord(commandWord, parser)) {
+            throw new ParseException(AliasCommand.MESSAGE_UNKNOWN_OLD_COMMAND);
+        }
+    }
+
+    /**
+     * Prevents the chaining of aliases.
+     * If there is an existing alias "bye" for "exit", and "bye" is the command word, it will be flattened to "exit".
+     */
+    public static String flattenCommandWord(String commandWord, AddressBookParser parser) {
+        Optional<Alias> existingAlias = parser.getAlias(commandWord);
+        return existingAlias.map(Alias::getCommandWord).orElse(commandWord);
     }
 }

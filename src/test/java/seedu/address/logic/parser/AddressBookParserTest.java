@@ -28,9 +28,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
@@ -229,18 +227,6 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
-    }
-
-    @Test
-    public void addAliases() throws Exception {
-        AddressBookParser parser = new AddressBookParser();
-        Map<String, String> aliases = new HashMap<>();
-        aliases.put("bye", ExitCommand.COMMAND_WORD);
-        aliases.put("purge", ClearCommand.COMMAND_WORD);
-        parser.addAliases(aliases);
-
-        assertTrue(parser.parseCommand("bye") instanceof ExitCommand);
-        assertTrue(parser.parseCommand("purge") instanceof ClearCommand);
     }
 
     @Test

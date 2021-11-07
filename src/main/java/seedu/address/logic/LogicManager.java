@@ -2,6 +2,7 @@ package seedu.address.logic;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -11,6 +12,8 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
+import seedu.address.logic.parser.Alias;
+import seedu.address.logic.parser.AliasCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -35,7 +38,7 @@ public class LogicManager implements Logic {
         this.model = model;
         this.storage = storage;
         addressBookParser = new AddressBookParser();
-        addressBookParser.addAliases(model.getAliases());
+        loadAliases();
     }
 
     @Override
@@ -78,5 +81,29 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    /**
+     * Loads the aliases from UserPrefs into the parser.
+     */
+    public void loadAliases() {
+        Map<String, String> aliases = model.getAliases();
+
+        // Verify that all imported aliases are valid. If any are not valid, remove the alias from the UserPrefs
+        for (String aliasWord : aliases.keySet()) {
+            try {
+                AliasCommandParser.checkAliasWord(aliasWord, addressBookParser);
+                AliasCommandParser.checkCommandWord(aliases.get(aliasWord), addressBookParser);
+            } catch (ParseException e) {
+                logger.info("Invalid alias removed: " + aliasWord);
+                aliases.remove(aliasWord);
+            }
+        }
+
+        model.setAliases(aliases);
+
+        for (Map.Entry<String, String> alias: aliases.entrySet()) {
+            addressBookParser.addAlias(new Alias(alias.getKey(), alias.getValue()));
+        }
     }
 }
