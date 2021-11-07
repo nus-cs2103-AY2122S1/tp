@@ -3,24 +3,24 @@
 !include style.puml
 
 box Logic LOGIC_COLOR_T1
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":SalesNoteParser" as SalesNoteParser LOGIC_COLOR
 participant ":SortOrdersCommandParser" as SortOrdersCommandParser LOGIC_COLOR
 participant ":SortDescriptor" as SortDescriptor LOGIC_COLOR
 participant "<<class>>\nParserUtil" as ParserUtil LOGIC_COLOR
 participant "d:SortOrdersCommand" as SortOrderCommand LOGIC_COLOR
 end box
 
--> AddressBookParser : parseCommand("sortorders f/a o/asc")
-activate AddressBookParser
+-> SalesNoteParser : parseCommand("sortorders f/a o/asc")
+activate SalesNoteParser
 
 create SortOrdersCommandParser
-AddressBookParser -> SortOrdersCommandParser
+SalesNoteParser -> SortOrdersCommandParser
 activate SortOrdersCommandParser
 
-SortOrdersCommandParser --> AddressBookParser
+SortOrdersCommandParser --> SalesNoteParser
 deactivate SortOrdersCommandParser
 
-AddressBookParser -> SortOrdersCommandParser : parse("f/a o/asc")
+SalesNoteParser -> SortOrdersCommandParser : parse("f/a o/asc")
 activate SortOrdersCommandParser
 
 SortOrdersCommandParser -> ParserUtil  : parseSortField("a")
@@ -49,15 +49,15 @@ activate SortOrderCommand
 SortOrderCommand --> SortOrdersCommandParser : sortOrdersCommand
 deactivate SortOrderCommand
 
-SortOrdersCommandParser --> AddressBookParser : sortOrdersCommand
+SortOrdersCommandParser --> SalesNoteParser : sortOrdersCommand
 deactivate SortOrdersCommandParser
 
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-SortOrdersCommandParser -[hidden]-> AddressBookParser
+SortOrdersCommandParser -[hidden]-> SalesNoteParser
 destroy SortOrdersCommandParser
 
-<-- AddressBookParser : sortOrdersCommand
-deactivate SortOrderCommand
+<-- SalesNoteParser : sortOrdersCommand
+deactivate SalesNoteParser
 
 @enduml
 
