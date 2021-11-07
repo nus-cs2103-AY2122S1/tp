@@ -29,7 +29,7 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=pbthang&sort=groupTitle&sortWithin=title&since=2021-09-17&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=pbthang&tabRepo=AY2122S1-CS2103T-T17-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
 
 * **Project Management**: 
-  * Reviewed 8 pull requests on GitHub
+  * Reviewed 11 pull requests on GitHub
   
 * **Enhancements to existing features**:
   * Added `Remark` and `Tag` list as optional fields to `Reservation` (Pull request [#119](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/119))
@@ -41,7 +41,10 @@ Given below are my contributions to the project.
     * Updated the section for add/edit/delete/list reservations and get corresponding customer commands (Pull request [#140](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/140))
     * Fixed some styling errors and section ordering, as well as some documentation bugs (Pull request [#144](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/144))
   * Developer Guide:
-    * Added use case for adding reservation (Pull request [#44](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/44))
+    * Added use case for adding/editing reservation (Pull request [#247](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/247))
+    * Added UML Diagrams for add reservation command (Pull request [#210](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/210))
+    * Updated Model Class Diagram and added UML Diagrams for `GetCustomerReservingCommand` (Pull request [#227](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/227))
+    * Updated manual test cases for add reservation and get customer reserving commands (Pull request [#241](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/241))
   
 * **Community**:
   * Spotted 5 bugs for team CS2103T-W08-3 (Refer to [`pbthang/ped` repo issues](https://github.com/pbthang/ped/issues))
