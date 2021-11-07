@@ -56,7 +56,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/bingcheng45)]
 [[portfolio](team/bingcheng45.md)]
 
-* Role:
-* Responsibilities:
+* Role: Developer
+* Responsibilities: Code Quality and Storage
 
 
