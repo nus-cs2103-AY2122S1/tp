@@ -35,14 +35,18 @@ public class ParserUtil {
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
+        System.out.println("empty" + trimmedIndex.isEmpty());
         if (trimmedIndex.isEmpty()) {
             throw new ParseException(MESSAGE_MISSING_INDEX);
-        } else if (trimmedIndex.contains("/")) {
-            throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
-        } else if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
         } else {
-            return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+            String[] indexWords = trimmedIndex.split(" ");
+            if (indexWords.length > 1) {
+                throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
+            } else if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+                throw new ParseException(MESSAGE_INVALID_INDEX);
+            } else {
+                return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+            }
         }
     }
 

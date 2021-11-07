@@ -70,13 +70,15 @@ public class EditCommandParser implements Parser<EditCommand> {
         Index index = ParserUtil.parseIndex("1");
         boolean isProfile = false;
         try {
+            System.out.println("arg" + argMultimap.getPreamble() + "/");
+            System.out.println(argMultimap.getPreamble().equals(""));
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             if (argMultimap.getPreamble().equals("profile")) {
                 isProfile = true;
                 checkEditProfileInputFormat(args, argMultimap);
             } else {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+                throw new ParseException(pe.getMessage() + "\n" + EditCommand.MESSAGE_USAGE);
             }
         }
 
