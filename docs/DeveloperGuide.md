@@ -7,6 +7,8 @@ title: Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Acknowledgements**
 
 * This project is evolved from the [AddressBook Level 3 (AB3)](https://se-education.org/addressbook-level3/UserGuide.html), a desktop app for managing contacts, optimized for use via a Command Line Interface (CLI).
@@ -25,6 +27,8 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S1-CS2103-F09-1/tp/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ### Architecture
 
@@ -61,11 +65,15 @@ Each of the four main components (also shown in the diagram above),
 * defines its *API* in an `interface` with the same name as the Component.
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
 
+<div style="page-break-after: always;"></div>
+
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
 <img src="images/ComponentManagers.png" width="300" />
 
 The sections below give more details of each component.
+
+<div style="page-break-after: always;"></div>
 
 ### UI component
 
@@ -83,6 +91,8 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Module` object residing in the `Model`.
+
+<div style="page-break-after: always;"></div>
 
 ### Logic component
 
@@ -114,6 +124,8 @@ How the parsing works:
 * When called upon to parse a user command, the `TeachingAssistantBuddyParser` class creates an `XYZTypeCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `Add`, `Edit`. `Type` is a placeholer for the type of object to be operated on e.g., `Module`, `Student` or `Task`) which uses the other classes shown above to parse the user command and create a `XYZTypeCommand` object (e.g., `AddModuleCommand`) which the `TeachingAssistantBuddyParser` returns back as a `Command` object.
 * All `XYZTypeCommandParser` classes (e.g., `AddModuleCommandParser`, `DeleteModuleCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<div style="page-break-after: always;"></div>
+
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103-F09-1/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
@@ -127,6 +139,7 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 
@@ -162,6 +175,8 @@ This section describes some noteworthy details on how certain features are imple
 8. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
    ![How the command `add module m/CS2103` is executed](images/AddModuleSequenceDiagram2.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Edit Module
 
 1. When the `Logic` is called upon to execute `edit module m/CS2103 mn/CS2105`, it uses the `TeachingAssistantBuddyParser` class to parse the user command.
@@ -175,6 +190,8 @@ This section describes some noteworthy details on how certain features are imple
 8. The `Model` will then cahnge the old module to the newly edited module.
 9. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
    ![How the command `edit module m/CS2103 mn/CS2105` is executed](images/EditModuleSequenceDiagram2.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Add Student
 
@@ -190,6 +207,8 @@ This section describes some noteworthy details on how certain features are imple
 9. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
 ![How the `AddStudentCommand` is executed](images/AddStudentSequenceDiagram2.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Delete Student
 
 1. When the `Logic` is called upon to execute `delete student m/CS2103 i/A1234567A`, it uses the `TeachingAssistantBuddyParser` class to parse the user command.
@@ -203,6 +222,8 @@ This section describes some noteworthy details on how certain features are imple
 8. The `Module` with the specified `ModuleName` will then look for the student with the specified `StudentId` and delete the student.
 9. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
 ![How the `DeleteStudentCommand` is executed](images/DeleteStudentSequenceDiagram2.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Edit Student
 
@@ -222,6 +243,8 @@ This section describes some noteworthy details on how certain features are imple
 8. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
 ![How the `EditStudentCommand` is executed](images/EditStudentSequenceDiagram2.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Find Student
 
 1. When the `Logic` is called upon to execute `find m/CS2103 i/A1234567A`, it uses the `TeachingAssistantBuddyParser` class to parse the user command.
@@ -234,6 +257,8 @@ This section describes some noteworthy details on how certain features are imple
 7. The `Module` with the specified `ModuleName` will then look for the `Student` with the specified `StudentId` and update the module's filtered student's list to only contain this specific student.
 8. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
 ![How the `FindStudentCommand` is executed](images/FindStudentSequenceDiagram2.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Add Task
 
@@ -252,6 +277,8 @@ This section describes some noteworthy details on how certain features are imple
    added to all the `Student`s under the specified `Module`.
 8. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
    ![How the command `add task m/CS2103 ti/T1 a/assignment1 d/2021-10-20` is executed](images/AddTaskSequenceDiagram2.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Edit Task
 
@@ -275,6 +302,7 @@ This section describes some noteworthy details on how certain features are imple
     
 ![How the command `edit task m/CS2103 ti/T1 a/final exam` is executed](images/EditTaskSequenceDiagram2.png)
 
+<div style="page-break-after: always;"></div>
 
 ### Delete Task
 
@@ -293,6 +321,7 @@ This section describes some noteworthy details on how certain features are imple
 ![How the command `delete task m/CS2103 ti/T1` is executed](images/DeleteTaskSequenceDiagram2.png)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -303,6 +332,8 @@ This section describes some noteworthy details on how certain features are imple
 * [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Requirements**
 
@@ -339,7 +370,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | new user                                   | mark a task as done            | track my students' progress                                            |
 | `* * *`  | new user                                   | mark a task as undone          | track my students' progress                                            |
 
-*{More to be added}*
+
+<div style="page-break-after: always;"></div>
 
 ### Use cases
 
@@ -430,6 +462,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+<div style="page-break-after: always;"></div>
 
 **Use case: Create a new module**
 
@@ -479,6 +512,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. System shows an error message.
 
       Use case ends.
+
+<div style="page-break-after: always;"></div>
 
 **Use case: Add task to a module**
 
@@ -569,6 +604,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+<div style="page-break-after: always;"></div>
+
 **Use case: Edit a task's information**
 
 **MSS**
@@ -590,6 +627,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+<div style="page-break-after: always;"></div>
+    
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -597,7 +636,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. Should be able to handle up to 100 students without significant lag in response time.
 
-*{More to be added}*
 
 ### Glossary
 
@@ -606,6 +644,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Module**: An academic module or subject that is frequently found in universities and institutes of higher learning
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Instructions for manual testing**
 

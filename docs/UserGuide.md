@@ -11,6 +11,7 @@ tasks done faster than traditional GUI apps.
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Quick start
 
@@ -68,7 +69,7 @@ tasks done faster than traditional GUI apps.
 
 </div>
 
-
+<div style="page-break-after: always;"></div>
 ### Add a new module: `add module`
 
 Add a new module to TAB.<br>
@@ -84,6 +85,8 @@ Examples:
 
 ![AddModule](images/AddModule.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Edit a module's name: `edit module`
 
 Edit the name of the module.<br>
@@ -97,6 +100,8 @@ Examples:
   * Edit the module name of module "CS2103" to "CS2105"
 
 ![EditModule](images/EditModule.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Delete a module from TAB: `delete module`
 
@@ -112,6 +117,8 @@ Examples:
   * Delete module CS2100 from TAB
 
 ![DeleteModule](images/DeleteModule.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Add a student to a specific module: `add student`
 
@@ -135,6 +142,8 @@ Examples:
 
 ![AddStudent](images/AddStudent.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Edit a student's information: `edit student`
 
 Edit a student's information.<br>
@@ -156,6 +165,8 @@ Examples:
 
 ![EditStudent](images/EditStudent.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Delete a student from a specific module: `delete student`
 
 Delete the specified student from the specified module by providing the module name and the student id.
@@ -169,6 +180,8 @@ Examples:
   * Delete student with id A7654321A from module CS2100’s list of students
 
 ![DeleteStudent](images/DeleteStudent.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Add a new task to a module: `add task`
 
@@ -190,6 +203,8 @@ Examples:
   * Add the task lab1 with deadline 'Wed, Oct 13 2021 04:00 pm' to module CS2100
 
 ![AddTask](images/AddTask.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Edit a task's information: `edit task`
 
@@ -213,6 +228,9 @@ Examples:
 
 ![EditTask](images/EditTask.png)
 
+
+<div style="page-break-after: always;"></div>
+
 ### Delete a task from a module: `delete task`
 
 Delete the specified task from the specified module by providing the module name and the task id.<br>
@@ -228,6 +246,8 @@ Examples:
 
 ![DeleteTask](images/DeleteTask.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Mark a task as done: `mark done`
 
 Mark the specified task from the specified module under the specified student as done.<br>
@@ -241,6 +261,8 @@ Examples:
   * This means that student A1234567A has completed task T1 of module CS2103.
 
 ![MarkDone](images/MarkDone.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Mark a task as undone: `mark undone`
 
@@ -257,6 +279,8 @@ Examples:
 
 ![MarkUndone](images/MarkUndone.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Find a student: `find`
 
 Find the student in the module specified along with the student's information.
@@ -269,6 +293,8 @@ Examples:
 
 ![Find](images/Find.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Go to homepage: `home`
 
 Return to the homepage which shows the complete list of modules and students along with their tasks.
@@ -276,6 +302,8 @@ Return to the homepage which shows the complete list of modules and students alo
 Format: `home`
 
 ![Home](images/Home.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Clear all information: `clear`
 
@@ -298,6 +326,8 @@ Format: `exit`
 
 TAB data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
+<div style="page-break-after: always;"></div>
+
 ### Editing the data file (JSON)
 
 TAB data are saved as a JSON file `[JAR file location]/data/assistantbuddy.json`. Advanced users are welcome to update data directly by editing that data file.
@@ -305,6 +335,8 @@ TAB data are saved as a JSON file `[JAR file location]/data/assistantbuddy.json`
 <div markdown="span" class="alert alert-warning">:warning: **Caution:**
 If your changes to the data file makes its format invalid, TAB will discard all data and start with an empty data file at the next run.
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ## FAQ
 
@@ -329,6 +361,7 @@ If your changes to the data file makes its format invalid, TAB will discard all 
 **TAB**: Teaching Assistant's Buddy.<br>
 **Tele handle**: A telegram user handle that must start with @, and followed by 5-32 characters containing only alphanumeric characters and the underscore '_'.
 
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 ## Command summary
@@ -358,6 +391,7 @@ Action | Format, Examples
 ## Parameter summary with prefix included
 
 Parameter with prefix | Permitted characters
+--------|------------------
 `m/<module name>` <br> `m/<old module name>` <br> `mn/<new module name>` | Module name must be an NUS module code, which consists of 2-4 capital letters, followed by 4 numbers, followed by 0-4 capital letters.
 `i/<student id>` | Student id must be a valid NUS student id, which starts with the capital letter 'A', followed by 7 numbers and ends with a capital letter.
 `n/<student name>` <br> `n/<edited student name>` | Student name should only contain alphanumeric characters and spaces, and it should not be blank. 
