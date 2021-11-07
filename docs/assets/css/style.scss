@@ -33,6 +33,10 @@ kbd {
   margin-bottom: 14px;
 }
 
-table {
+#student-param-table {
+  table-layout: fixed;
+}
+
+#lesson-param-table {
   table-layout: fixed;
 }
