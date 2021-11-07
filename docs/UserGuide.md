@@ -306,10 +306,10 @@ contains the data of your previous ProfBook home folder.
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME S/STUDENT_ID N/NUSNet_ID g/GITHUB_ID T/TUTORIAL_ID {r/student \| r/tutor} [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]...` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Delete** | `delete {INDEX \| -a \| -f}`  <br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [s/STUDENT_ID] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find {n/|s/|N/|g/|T/|r/|p/|a/|t/full/|t/partial/}KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/Alex`
+**Add** | <code>add n/NAME S/STUDENT_ID N/NUSNet_ID g/GITHUB_ID T/TUTORIAL_ID {r/student &#124; r/tutor} [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]...</code> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Delete** | <code>delete {INDEX &#124; -a &#124; -f}</code> e.g., `delete 3`
+**Edit** | <code> edit INDEX [n/NAME] [g/GITHUB_ID] [N/NUS_NETWORK_ID] [{r/student &#124; r/tutor}] [s/STUDENT_ID] [T/TUTORIAL_ID] [p/PHONE] [a/ADDRESS] [t/TAG]…​ </code> e.g.,`edit 2 n/James Lee`
+**Find** | <code> find {n/ &#124; s/ &#124; N/ &#124; g/ &#124; T/ &#124; r/ &#124; p/ &#124; a/ &#124; t/full/ &#124; t/partial/} KEYWORD [MORE_KEYWORDS]</code> e.g., `find n/Alex`
 **List** | `list`
 **Import** | `import FILENAME` <br> e.g., `import tutors.json`
 **Export** | `export FILENAME` <br> e.g., `export t01students.json`
