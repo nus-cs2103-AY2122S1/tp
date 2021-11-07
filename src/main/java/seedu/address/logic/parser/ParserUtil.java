@@ -8,6 +8,7 @@ import java.time.DateTimeException;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
@@ -36,6 +37,7 @@ import seedu.address.model.tuition.Timeslot;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    private static String[] days = new String[] {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -268,6 +270,10 @@ public class ParserUtil {
         String[] times = arr.length == 2 ? arr[1].split("-", 2) : null;
 
         if (arr.length < 2 || arr[0].length() != 3 || times == null || times.length < 2) {
+            throw new ParseException(Messages.MESSAGE_TIMESLOT_FORMAT);
+        }
+        boolean validDay = Arrays.stream(days).anyMatch(arr[0]::equals);
+        if (!validDay) {
             throw new ParseException(Messages.MESSAGE_TIMESLOT_FORMAT);
         }
         DateFormat dayFormat = new SimpleDateFormat("EEE");

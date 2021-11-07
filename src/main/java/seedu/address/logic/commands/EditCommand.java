@@ -70,14 +70,16 @@ public class EditCommand extends Command {
         Student studentToEdit = model.getStudent(index);
         Student editedStudent = createEditedStudent(studentToEdit, editStudentDescriptor);
 
-        //checks if name is unchanged or name is changed to that of a student who exists in database
-        if (studentToEdit.isSameStudent(editedStudent) || model.hasStudent(editedStudent)) {
-            throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
-        }
         //stronger check for all fields - name address phone email
         if (studentToEdit.equals(editedStudent)) {
             throw new CommandException(MESSAGE_NO_STUDENT_CHANGES);
         }
+
+        //checks if name is unchanged or name is changed to that of a student who exists in database
+        if (studentToEdit.isSameStudent(editedStudent) || model.hasStudent(editedStudent)) {
+            throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
+        }
+
         //if the name is changed, the student list of all classes the student is enrolled in has to be updated
         if (!studentToEdit.isSameStudent(editedStudent)) {
             List<TuitionClass> enrolledClasses = editedStudent
