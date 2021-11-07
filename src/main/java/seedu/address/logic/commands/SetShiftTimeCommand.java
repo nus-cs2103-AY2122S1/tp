@@ -36,8 +36,8 @@ public class SetShiftTimeCommand extends Command {
             + "Parameters:\n"
             + PREFIX_DASH_INDEX + " INDEX or "
             + PREFIX_DASH_NAME + " NAME "
-            + PREFIX_DAY_SHIFT + "DAY_AND_SLOT"
-            + PREFIX_SHIFT_TIME + "START_TIME:END_TIME"
+            + PREFIX_DAY_SHIFT + "DAY_AND_SLOT "
+            + PREFIX_SHIFT_TIME + "START_TIME:END_TIME "
             + DATE_RANGE_INPUT
             + "\n\n"
             + "Example:\n" + COMMAND_WORD + " "
