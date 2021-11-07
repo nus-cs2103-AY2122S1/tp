@@ -942,13 +942,13 @@ testers are expected to do more *exploratory* testing.
         Expected: Patient named Bob Doe is added successfully. Details of the added patient are shown in the status message.
 
     3. Test case: `add n/John Doe hp/98765432 eml/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/vaccinated risk/LOW`
-       <br>Expected: No Patient is added. Error message is shown in the response box: "This patient already exists in PlannerMD"
+       <br>Expected: No Patient is added. Error message is shown in the status message that the patient already exists.
 
     4. Test case: `add n/John Doe hp/98765432 eml/johnd@example.com a/311, Kent Ridge Ave 2, #02-25 dob/25/12/0000 t/vaccinated risk/LOW`
-       <br>Expected: No Patient is added. Error message is shown in the response box: "This patient already exists in PlannerMD"
+       <br>Expected: No Patient is added. Error message is shown in the status message that the patient already exists.
 
     5. Other incorrect add commands to try: `add`, `add n/Bob hp/`, `add n/` (not all fields, except tags and risk, are filled)<br>
-       Expected: No Patient is added. Error message is shown in the response box: "Invalid command format!..."
+       Expected: No Patient is added. Error message is shown in the status message.
 
 ### Listing all patients <a name="list-patients-manual-testing"/>
 
@@ -993,10 +993,10 @@ testers are expected to do more *exploratory* testing.
        Expected: First patient is deleted from the patients list. Details of the deleted patient are shown in the status message.
 
     3. Test case: `delete 0`<br>
-       Expected: No patient is deleted. Error details are shown in the response box.
+       Expected: No patient is deleted. Error details are shown in the status message.
 
     4. Other incorrect delete commands to try: `delete`, `delete x`, `delete abcd` (where x is larger than the list size, and abcd are any alphabets)<br>
-       Expected: No patient deleted. Error message is shown in the response box: "Invalid command format!..."
+       Expected: No patient deleted. Error details are shown in the status message.
 
 
 2. Delete a patient while some patients are being shown
@@ -1145,13 +1145,13 @@ testers are expected to do more *exploratory* testing.
        <br> Expected: Doctor named Bob Doe is added successfully. Details of the added doctor are shown in the status message.
        
     3. Test case: `add n/John Doe hp/98765432 eml/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/experienced`
-       <br> Expected: No doctor is added. Error message is shown in the response box: "This doctor already exists in PlannerMD"
+       <br> Expected: No doctor is added. Error message is shown in the status message that the doctor already exists.
        
     4. Test case: `add n/John Doe hp/98765432 eml/johnd@example.com a/311, Kent Ridge Ave 2, #02-25 dob/25/12/0000 t/experienced`
-       <br> Expected: No doctor is added. Error message is shown in the response box: "This doctor already exists in PlannerMD"
+       <br> Expected: No doctor is added. Error message is shown in the status message that the doctor already exists.
 
     5. Other incorrect add commands to try: `add`, `add n/Bob hp/`, `add n/` (not all fields, except tags, are filled)<br>
-        Expected: No doctor is added. Error message is shown in the response box: "Invalid command format!..."
+        Expected: No doctor is added. Error details is shown in the status message.
 
 ### Listing all doctors <a name="list-doctors-manual-testing"/>
 
@@ -1194,7 +1194,7 @@ testers are expected to do more *exploratory* testing.
        Expected: First doctor is deleted from the doctors list. Details of the deleted doctor are shown in the status message.
 
     3. Test case: `delete 0`<br>
-       Expected: No doctor is deleted. Error details are shown in the response box.
+       Expected: No doctor is deleted. Error details are shown in the status message.
 
     4. Other incorrect delete commands to try: `delete`, `delete x`, `delete abcd` (where x is larger than the list size, and abcd are any alphabets)<br>
        Expected: Similar to previous.
