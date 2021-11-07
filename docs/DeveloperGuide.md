@@ -406,18 +406,184 @@ the `execute("find te/alex_1")` API call.
 
 #### Implementation
 
-The class `WelcomeWindow` is responsible displaying the welcome window at the
-start, when the application is launched. It is facilitated by `WelcomeWindow.fxml` file
-which is responsible for how various components inside this window are arranged.
+The class `WelcomeWindow` is responsible for displaying the welcome window at the
+start when the application is launched. It is facilitated by the `WelcomeWindow.fxml` file, which is
+responsible for how various components inside this window are arranged.
 
 The `WelcomeWindow` class extends `UiPart<Stage>`.
 
-When the app is launched, an instance of this class is created, and the 
-`WelcomeWindow#start` is invoked to display the window. Various methods
-including `fadeTransition` and `displayAnimatedText` are used within this
-class to achieve the fading image and character typing effect respectively.
+When the app is launched, an instance of this class is created, and the
+`WelcomeWindow#start` is invoked to display the window. Various methods, including 
+`fadeTransition` and `displayAnimatedText`, are used within this
+class to achieve the fading image and character typing effect, respectively.
 
 ![WelcomeWindowSequenceDiagram](images/WelcomeWindowSequenceDiagram.png)
+
+### Profile SetUp Window
+
+#### Implementation
+
+The class `ProfileSetUpWindow` is responsible for displaying the Profile SetUp Window. 
+It is only shown once when the User launches the app for the first time and has input 
+their credentials as required. It is facilitated by `ProfileSetUpWindow.fxml` and 
+`ProfileSetUpWindow.css`. The `.fxml` file is responsible for the layout of the 
+various components in this window, and the `.css` file adds a style and enhances 
+the overall UI.
+
+The `ProfileSetUpWindow` class extends `UiPart<Stage>`.
+
+This window would only be visible after the Welcome Window Splash Screen. 
+`WelcomeWindow` hands over the control to `MainWindow` after execution, which 
+then sets up the `ProfileSetUpWindow`. On Initializing and calling `start()` 
+method of the `ProfileSetUpWindow`, the `ProfileSetUpWindow` with the help of 
+a `Logic` object (which is obtained during initialization) checks, if a 
+User Profile is present. If it is present, it 
+again hands over the control to the `MainWindow` by calling the `start()` method 
+of the `MainWindow` Object. Else, It displays the Profile SetUp Window and 
+waits for a response from the User.
+
+After the User has input their credentials in the text fields, they are expected to 
+click the `Submit` button. When that button is clicked upon, the `submit()` method is 
+invoked. This method calls the `areUserCredentialsValid()` method to verify if the
+entered credentials are valid or not. If they are valid, the User Profile is deemed 
+complete and is set up with the help of the `Logic` object obtained during
+the object's initialization. If the credentials are not valid, an error message
+is shown in the Window, highlighting which credential is invalid. The User cannot proceed
+forward without entering all valid Credentials.
+
+The `areUserCredentialsValid()` class checks if the entered Name, Telegram Handle,
+and the GitHub Username are valid. 
+
+1. Class level method `isValidName()`, of `Name` class 
+   verifies the Name entered.
+2. Class level method `isValidTelegram()`, of `Telegram` class
+   verifies the Telegram Handle entered.
+3. Class level method `isValidGithub()`, of `Github` class
+   verifies the GitHub Username entered.
+
+This method is also responsible for displaying the appropriate error message
+in the Window.
+
+![ProfileSetUpWindowSequenceDiagram](images/ProfileSetUpWindowSequenceDiagram.png)
+
+### User Profile Window
+
+#### Implementation
+
+The class `UserProfileWindow` is responsible for displaying the User Profile
+Window. It is shown when the user either uses the keyboard shortcut, 
+`Command/Control + P`, or clicks on the User Profile located in the top right in
+the Menu Bar. It is facilitated by `UserProfileWindow.fxml`
+and `UserProfileWindow.css`. The `.fxml` file is responsible for the layout of the
+various components in this window, and the `.css` file adds a style and enhances the
+overall UI.
+
+The `UserProfileWindow` class extends `UiPart<Stage>`.
+
+This window can only be viewed when the app has successfully started up and 
+has valid User Credentials.
+
+This window is initialized when the `MainWindow` is initialized. It is
+initialized in the `MainWindow` constructor. This window, to be seen, has to be 
+triggered as an event by the user. The `MainWindow` class has a method 
+`handleUserProfileWindow()`, which is responsible for displaying this window.
+
+The `handleUserProfileWindow()` when called, calls the method `isShowing()` via 
+the object initialized earlier. If it is not showing, the `show()` method of the
+`UserProfileWindow` class is called upon. Else, if it is already showing, the
+`focus()` method is called upon. Along with that, in case the window had been
+minimized by the User, `UserProfileWindow#getRoot()#toFront()` is called to
+bring the window to the maximized state.
+
+The `UserProfileWindow#show()`, first calls the `UserProfileWindow#initializeFields()`,
+to initialize all the fields with the latest User Profile Credentials. This would, in turn
+also call `UserProfileWindow#setFields()`, to set them up in the UI. After all the setting
+up is done, the User Profile Window is shown.
+
+The `UserProfileWindow#focus()`, calls the `getRoot()` method to obtain the root object.
+On that root object, `requestFocus()` is called upon to request focus.
+
+![UserProfileWindowSequenceDiagram](images/UserProfileWindowSequenceDiagram.png)
+
+### Help Window
+
+#### Implementation
+
+The class `HelpWindow` is responsible for displaying the Help
+Window. It is shown when the user either uses the keyboard shortcut,
+`F1`, or clicks on `Help` located on the top left in
+the Menu Bar. It is facilitated by `HelpWindow.fxml`
+and `HelpWindow.css`. The `.fxml` file is responsible for the layout of the
+various components in this window, and the `.css` file adds a style and enhances the
+overall UI.
+
+The `HelpWindow` class extends `UiPart<Stage>`.
+
+This window can only be viewed when the app has successfully started up and 
+has valid User Credentials.
+
+This window is initialized when the `MainWindow` is initialized. It is
+initialized in the `MainWindow` constructor. This window, to be seen, has to be
+triggered as an event by the user. The `MainWindow` class has a method
+`handleHelpWindow()`, which is responsible for displaying this window.
+
+On initializing the `HelpWindow` class, `HelpWindow#setUpCommandDetails()` and
+`HelpWindow#setUpHelpTableView()` are called.
+
+`setUpCommandDetails()` creates multiple objects of `CommandDetails`, all of them
+representing a unique command that the app supports. Those are then added to an
+`ObservableList<CommandDetails>`, which is linked to the `TableView` in the UI.
+
+`setUpHelpTableView()` sets and places various restrictions on the table.
+It restricts any events or scrolling on the table. Also, It adjusts the height
+of the table according to the number of `CommandDetails` present in it.
+
+The `handleHelpWindow()` when called, calls the method `isShowing()` via
+the object initialized earlier. If it is not showing, the `show()` method of the
+`HelpWindow` class is called upon. Else, if it is already showing, the
+`focus()` method is called upon. Along with that, in case the window had been
+minimized by the User, `HelpWindow#getRoot()#toFront()` is called to
+bring the window to the maximized state.
+
+![HelpWindowSequenceDiagram](images/HelpWindowSequenceDiagram.png)
+
+### User Profile in Menu Bar
+
+#### Implementation
+
+The class `UserProfileInMenuBar` is responsible for displaying the User
+Profile in the Menu Bar. It is shown in the Main Window, in the top right
+of the Menu Bar beside the Bell icon. It is facilitated by `UserProfileInMenuBar.fxml`.
+The `.fxml` file is responsible for the layout of the various components inside
+this Region.
+
+The `UserProfileInMenuBar` class extends `UiPart<Region>` and implements
+`UserProfileWatcher`.
+
+This Region can only be viewed when the app has successfully started up and
+has valid User Credentials.
+
+This Region is initialized when the `MainWindow#start()` is called. On 
+initializing the `UserProfileInMenuBar` class, `UserProfileInMenuBar#setUserProfileOnMenuBar()` 
+and `UserProfileInMenuBar#addToUserProfileWatcherList()` are called.
+
+`setUserProfileOnMenuBar()` is responsible for retrieving the User Credentials with
+the help of the `Logic` object obtained during initialization and setting up the 
+`ImageView` and `Label` with the User Credentials retrieved.
+
+`addToUserProfileWatcherList()` is responsible for adding `this` (UserProfileWatcher)
+to a watchers list, such that, in the scenario, the User updates their profile
+credentials, the changes are reflected immediately. As the User is able to 
+edit their Credentials via the `EditCommand`, the profile watchers list is present there.
+A static method in `EditCommand`, `addUserProfileWatcher(this)` is called upon, by
+passing `this` (UserProfileWatcher) as an argument, to add it to the profile watchers list.
+
+Whenever there is a change in the User Credentials, the `updateUserProfile()` is
+called upon in the `UserProfileInMenuBar`, which in turn calls the 
+`setUserProfileOnMenuBar()`. This method then retrieves the new User Credentials
+and sets them up.
+
+![UserProfileInMenuBarSequenceDiagram](images/UserProfileInMenuBarSequenceDiagram.png)
 
 ### Show command
 
