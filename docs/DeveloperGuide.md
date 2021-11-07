@@ -385,6 +385,9 @@ service CS1101S Avengers. In the CS110S module each _Studio_ has at most 10 `Stu
 does not have unnecessary duplicate personal detail (e.g same `PHONE`) is left to the Avenger.
 </div>
 
+The specifics are shown in the sequence diagram below:
+![AddCommandSequenceDiagram](images/dg/logic/commands/addcommand/AddCommandSequenceDiagram.png)
+
 ### DeleteCommand
 
 This command deletes a `Student` from `AcademyDirectory`.
@@ -394,6 +397,9 @@ This command deletes a `Student` from `AcademyDirectory`.
 The `DeleteCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands)
 
 `DeleteCommand` deletes `Student` based on the relative `INDEX` in the `ObservableList` which is the list of `Student` viewed by the `Avenger`. To do this, `DeleteCommand` makes a call to `VersionedModel#deleteStudent()`.
+
+The specifics are shown in the sequence diagram below:
+![DeleteCommandSequenceDiagram](images/dg/logic/commands/deletecommand/DeleteCommandSequenceDiagram.png)
 
 ### TagCommand
 {Add description}
