@@ -246,6 +246,60 @@ StandardFieldLength | 30
 ShorterFieldLength | 15
 LongerFieldLength | 100
 
+### 3.8 Comparable Client Attribute
+
+All the clients attribute which the sort command support implements the IgnoreNullComparable interface to help
+determine an ordering for the attributes.
+
+#### 3.8.1 IgnoreNullComparable
+
+The IgnoreNullComparable interface implements the Comparable interface and has the method compareWithDirection(T, SortDirection).
+The compareWithDirection is similar to the compareTo in Comparable but has the following additional properties:
+1) null or the null-equivalent of the attribute will be ordered last.
+2) the ordering will also be determined by the SortDirection pass into it.
+
+<img src="images/IgnoreNullComparable.png" />
+
+#### 3.8.2 StringComparable
+
+StringComparable is an abstract class which implements the IgnoreNullComparable interface which determine the ordering
+of an attributes based on the lexicographical ordering of the string representation of the attribute.
+
+#### 3.8.3 NumberComparable
+
+NumberComparable is an abstract class which implements the IgnoreNullComparable interface which determine the ordering
+of an attributes based on the numerical ordering of the number representation of the string representation of the
+attribute.
+
+#### 3.8.4 Attribute's Comparable Interface Summary
+
+Attribute | Comparable Interface
+--- | ---
+Client Id | NumberComparable
+Name | StringComparable
+Email | StringComparable
+Phone | NumberComparable
+Address | StringComparable
+Risk Appetite | NumberComparable
+Disposable Income | Number Comparable
+Last Meeting | IgnoreNullComparable
+Next Meeting | IgnoreNullComparable
+
+### 3.9 Prefix Mapper
+
+The PrefixMapper is a utility class which provides a mapping of a prefix to the relevant methods for the attribute of that prefix.
+This class help to simplify segments of code which require operations that are dependent on the prefix and its corresponding attribute.
+The PrefixMapper contains a HashMap which map a prefix to their respective PrefixMapperElement.
+A PrefixMapperElement contains getter & setter method and values that are relevant to an attribute.
+
+PrefixMapperElement contains the following:
+* Name of the Attribute
+* Default value of the Attribute
+* Client Attribute getter Function 
+* EditClientDescriptor Attribute setter BiConsumer 
+* EditClientDescriptor Attribute getter Function 
+* Attribute Parser Function
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **4. Implementation**
@@ -440,6 +494,10 @@ The following sequence diagram shows how the ab create operation works:
 7. The `LogicManger` then call setAddressBook method of `ModelManager` with the `AddressBook` which will reset the current `AddressBook` to that.
 8. The `LogicManger` will also call switchAddressBook method of `StorageManager` with the new `AddressBookStorage`.
 
+The following sequence diagram shows how the sort operation works:
+
+<img src="images\AbSwitchCommandSequenceDiagram.png" />
+
 ### 4.6.3 Delete Address Book
 
 1. The `AbDeleteCommandParser` parse the name of the address book that is to be deleted to into a `Path` to that address book.
@@ -448,12 +506,20 @@ The following sequence diagram shows how the ab create operation works:
 4. The `AbDeleteCommand` will then attempt to delete the address book specified by the `Path`
 5. The `AbDeleteCommand` will finally create a new `CommandResult` which will be returned to `LogicManger`.
 
+The following sequence diagram shows how the sort operation works:
+
+<img src="images\AbDeleteCommandSequenceDiagram.png" />
+
 ### 4.6.4 List Address Book
 
 1. The `AbListCommand` will call getAddressBookListString method of `ModelManager`.
 2. The `ModelManager` will then subsequently call toString method of `AddressBookList`
 3. The `AddressBookList` will append the name of all the addressbook in its list together and return it back to `AblistCommand`
 4. The `AblistCommand` will finally then create a `CommandResult` with that String and return it to `LogicManager`.
+
+The following sequence diagram shows how the sort operation works:
+
+<img src="images\AbListCommandSequenceDiagram.png" />
 
 ### 4.7 Undo/redo feature
 

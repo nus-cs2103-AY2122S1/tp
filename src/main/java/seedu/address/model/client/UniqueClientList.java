@@ -2,8 +2,8 @@ package seedu.address.model.client;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.commands.EditCommand.createEditedClient;
-import static seedu.address.logic.commands.EditCommand.createEditedMeetingOverClient;
+import static seedu.address.model.client.Client.EditClientDescriptor.createEditedClient;
+import static seedu.address.model.client.Client.EditClientDescriptor.createEditedMeetingOverClient;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.logic.commands.EditCommand.EditClientDescriptor;
+import seedu.address.model.client.Client.EditClientDescriptor;
 import seedu.address.model.client.exceptions.ClientNotFoundException;
 import seedu.address.model.client.exceptions.DuplicateClientException;
 
@@ -150,18 +150,6 @@ public class UniqueClientList implements Iterable<Client> {
 
         clientFound.forEach(this::remove);
         return clientFound;
-    }
-
-    public List<Name> getClientNames(List<ClientId> clientIds) {
-        requireNonNull(clientIds);
-        List<Name> clientNames = FXCollections.observableArrayList();
-        clientIds.stream().forEach(clientId -> {
-            if (this.hasClientId(clientId)) {
-                Client tempClient = this.getClient(clientId);
-                clientNames.add(tempClient.getName());
-            }
-        });
-        return clientNames;
     }
 
     /**

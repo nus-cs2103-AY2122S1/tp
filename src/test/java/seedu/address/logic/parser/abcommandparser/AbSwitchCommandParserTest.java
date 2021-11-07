@@ -1,6 +1,7 @@
 package seedu.address.logic.parser.abcommandparser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.abcommand.AbCommand.MESSAGE_ADDRESSBOOK_NOT_VALID;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -18,6 +19,12 @@ public class AbSwitchCommandParserTest {
     public void parse_emptyArg_throwsParseException() {
         assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 AbSwitchCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_invalidFileName_throwsParseException() {
+        String invalidFileName = "ddd<>\0ddd";
+        assertParseFailure(parser, invalidFileName, String.format(MESSAGE_ADDRESSBOOK_NOT_VALID, invalidFileName));
     }
 
     @Test

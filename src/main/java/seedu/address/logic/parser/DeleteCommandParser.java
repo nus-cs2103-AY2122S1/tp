@@ -24,7 +24,6 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      * and returns a DeleteCommand object for execution.
      *
      * @throws ParseException if the user input does not conform the expected format
-     * @return
      */
     @Override
     public DeleteCommand parse(String args, Model model) throws ParseException {

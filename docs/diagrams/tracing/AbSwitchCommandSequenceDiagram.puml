@@ -1,0 +1,43 @@
+@startuml
+!include ../style.puml
+
+box "Logic" #FFFFFF
+Participant ":LogicManager" as logic LOGIC_COLOR
+Participant "result:CommandResult" as cr LOGIC_COLOR
+Participant ":AbSwitchCommandParser" as abscp LOGIC_COLOR
+Participant "command:AbSwitchCommand" as abs LOGIC_COLOR
+end box
+box "Storage" #FFFFFF
+Participant ":StorageManager" as sm STORAGE_COLOR
+end box
+box "Model" #FFFFFF
+Participant "model:Model" as model MODEL_COLOR
+end box
+
+skinparam sequenceBoxBorderColor #black
+[-> logic : execute
+activate logic LOGIC_COLOR
+create abscp
+logic -> abscp ++ LOGIC_COLOR: parseCommand(commandText)
+create abs
+abscp -> abs ++ LOGIC_COLOR: filePath
+abs --> abscp --: command
+abscp --> logic --: command
+logic -> abs ++ LOGIC_COLOR: execute(model)
+abs -> model ++ MODEL_COLOR: setAddressBookFilePath(filePath)
+model --> abs --:
+create cr
+abs -> cr ++ LOGIC_COLOR:
+cr --> abs --: commandResult
+abs --> logic --: commandResult
+logic -->[ --: commandResult
+[-> logic ++ LOGIC_COLOR: switchAddressBook()
+logic -> sm ++ STORAGE_COLOR: readAddressBook(filePath)
+sm --> logic --: addressbook
+logic -> sm ++ STORAGE_COLOR : switchAddressBookStorage(new JsonAddressBookStorage(filePath))
+sm --> logic --:
+logic -> model ++ MODEL_COLOR: setAddressBook(addressBook)
+model --> logic --:
+logic -->[ --:
+
+@enduml
