@@ -9,8 +9,9 @@ import static seedu.unify.commons.util.AppUtil.checkArgument;
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
+    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric and has at most 15 characters";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final int MAX_LENGTH = 15;
 
     public final String tagTaskName;
 
@@ -29,7 +30,10 @@ public class Tag {
      * Returns true if a given string is a valid tag task name.
      */
     public static boolean isValidTagTaskName(String test) {
-        return test.matches(VALIDATION_REGEX);
+        boolean isAlphaNumber = test.matches(VALIDATION_REGEX);
+        boolean isLessThanMaxCharacters = test.length() <= MAX_LENGTH;
+
+        return isAlphaNumber && isLessThanMaxCharacters;
     }
 
     @Override

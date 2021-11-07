@@ -64,7 +64,7 @@ This table below illustrates what each formatting means.
 | `mark-up`      | Words in light-blue highlight, also known as a mark-up| A command that can be typed into Uni-Fy|`help`|
 | <code><i>italic</i></code> | Words in <i>italic</i> | A parameter to be supplied by the user |<code><i>n/task_name</i></code>|
 | `(brackets)` | Words in round brackets| Optional parameter |<code><i>(d/date)</i></code> or <br> <code><i>(task_id)</i></code> |
-| <code>multiple...</code> | Words with `…` after them| Parameters that can be used multiple times including 0 times|`keywords...`|
+| <code>multiple...</code> | Words with `…` after them| Parameters that can be used multiple times including 0 times|`tg/tag...`|
 | [<ins>**Blue underline**</ins>](#2.2-formatting)| Bold blue words that show underline on mouse-over| A clickable hyperlink, to either an external webpage or other parts of this User Guide|[**1. Introduction**](#1-introduction)|
 
 ### 2.3 Icons
@@ -133,12 +133,13 @@ This section highlights all the commands that Uni-Fy supports. These include det
      * The priority level can be `LOW`, `MEDIUM` or `HIGH` (**Note**: needs to be uppercase)
    * Date is represented in YYYY-MM-DD format
    * Time is represented in HH:MM format
+   * Tag must be alphanumeric and contain at most 15 characters
 </div>
 
 
 ### 4.1 Adding a task: `add`
 
-Add a task to the task list. The tags for the command can be input in any order.
+Adds a task to the task list. The parameters for the command can be input in any order.
 
 <div markdown="block" class="alert alert-primary">
 **:clipboard: Format:**<br>
@@ -175,13 +176,22 @@ After running the add command the task gets added to the task list as shown belo
 
 ### 4.2 Tagging Tasks: `tag`
 
-Set a task's priority.
+Adds tags to a task.
 
 <div markdown="block" class="alert alert-primary">
 
 **:clipboard: Format:**<br>
-- <code> tag  <i>task_id tg/tag (tg/tag) </i> </code>
+- <code> tag  <i>task_id tg/tag (tg/tag...) </i> </code>
 </div>
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Interpretation:**<br>
+* Adds <code><i>tg/tag</i></code> tag to the task having index <code><i>task_id</i></code>
+* Adds multiple tags if more than one <code><i>tg/tag</i></code> used
+</div>
+
+
 
 <div markdown="block" class="alert alert-success">
 
