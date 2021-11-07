@@ -366,6 +366,34 @@ The sequence diagram for the first step is similar to the Export Command. The fo
 In both scenarios, a new `JsonAddressBookStorage` or `CsvAddressBookStorage` is created. The `AddressBookStorage` method `readAddressBook()` then reads the respective file using `JsonUtil#readJsonFile()` or `CsvUtil#readCsvFile()`. In both cases, the files are read using Jackson's `ObjectMapper` or `CsvMapper` classes respectively.
 
 
+### Edit Profile command
+
+#### Implementation
+
+Edits the user's profile linked to the Address Book.
+
+The user's profile contains details such as their name, Telegram Handle and GitHub username, which need to be kept up to date.
+This is especially important as the user's GitHub username is crucial for the Find a Buddy feature which matches them
+with a potential teammate using the GitHub metadata.
+
+The edit profile feature allows edit to change their name, Telegram handle and GitHub username.
+
+The implementation for editing the user profile is similar to that of editing a student contact. 
+It is facilitated by the `EditCommandParser` class, which implements `Parser<EditCommand>`.
+It implements the `parse()` method, which determines whether what's being edited is a contact or the user profile, checks for 
+the validity of user input (through the `checkEditProfileInputFormat()` method) and returns an `EditCommand`, to be executed in
+`LogicManager`.
+
+The `EditCommand` class extends `Command`. Its instance is created by providing an `index` (since a contact isn't being edited here, 
+the index passed is 1 by default and will not affect the process), and an `editPersonDescriptor` (which represents the updated user profile).
+Its implementation of `Command#execute()` calls the `executeEditProfile()` method which edits the user profile as necessary.
+
+The Sequence Diagram below illustrates the interactions within the `Logic` and `Model` components for
+the `execute("edit profile te/john_doe g/john-codes")` API call.
+
+![EditProfileSequenceDiagram](images/EditProfileSequenceDiagram.png)
+
+
 ### Find command
 
 #### Implementation
@@ -386,24 +414,72 @@ the `FilteredPersonList` that contains the contact(s) matching the find paramete
 `Command#execute()` is where the updation of the `FilteredPersonList` to reflect the search performed on the contacts in the address book.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` and `Model` components for
+the `execute("find Bob Joe")` API call.
+
+![FindNameSequenceDiagram](images/FindNameSequenceDiagram.png)
+
+The Sequence Diagram below illustrates the interactions within the `Logic` and `Model` components for
+the `execute("find t/friends teammates")` API call.
+
+![FindTagsSequenceDiagram](images/FindTagsSequenceDiagram.png)
+
+The Sequence Diagram below illustrates the interactions within the `Logic` and `Model` components for
 the `execute("find te/alex_1")` API call.
 
-![FindSequenceDiagram](images/FindSequenceDiagram.png)
+![FindTelegramSequenceDiagram](images/FindSequenceDiagram.png)
+
+The Sequence Diagram below illustrates the interactions within the `Logic` and `Model` components for
+the `execute("find g/alex-coder")` API call.
+
+![FindGithubSequenceDiagram](images/FindGithubSequenceDiagram.png)
+
+### Tag command
+
+#### Implementation
+
+The Tag command allows users to directly add or remove tags from a specific contact. This command was introduced to 
+overcome the following limitations:
+1. Editing a contact's tag field using `edit <INDEX> t/<TAG>` will replace the existing tag with the specified one 
+instead of adding on to it.
+2. No way to remove tags from a contact directly.
+
+It is facilitated by the `TagCommandParser` class, which implements `Parser<TagCommand>`.
+It implements the `parse()` method, which parses the index of the contact to which tags are to be added or from which 
+tags are to be removed. Moreover, checking the validity of the user input (i.e. ensuring the presence of arguments for the `Tag` command like tags to add where the prefix `a/` is present and the
+presence of tags to remove where the prefix `r/` is present) is handled by the `checkInputFormat` method. Once the input is confirmed to be valid, `parse()` returns a `TagCommand`, to be executed in
+`LogicManager`. 
+
+The `TagCommand` class extends `Command`. Its instance is created by providing the `targetIndex` of the contact to which 
+tags are to be added or from which tags are to be removed (of type `Index`), an ArrayList containing the tags to be 
+added (`toAdd`) and an ArrayList containing the tags to be removed (`toRemove`). Its implementation of `Command#execute()` is where the updation of the `FilteredPersonList` to reflect the search performed on the contacts in the address book.
+
+The Sequence Diagram below illustrates the interactions within the `Logic` and `Model` components for
+the `execute("tag 1 a/friends")` API call.
+
+![TagSequenceDiagramForAdd](images/TagSequenceDiagramForAdd.png)
+
+The Sequence Diagram below illustrates the interactions within the `Logic` and `Model` components for
+the `execute("tag 1 a/friends r/family")` API call.
+
+![TagSequenceDiagramForAddAndRemove](images/TagSequenceDiagramForAddAndRemove.png)
 
 ### Welcome Window
 
 #### Implementation
 
-The class `WelcomeWindow` is responsible for displaying the welcome window at the
-start when the application is launched. It is facilitated by the `WelcomeWindow.fxml` file, which is
-responsible for how various components inside this window are arranged.
+The class `WelcomeWindow` is responsible for displaying the welcome window at 
+the start when the application is launched. It is facilitated by the 
+`WelcomeWindow.fxml` and `WelcomeWindow.css`.  The `.fxml` file is responsible 
+for the layout of the various components in this window, and the `.css` file 
+adds a style and enhances the overall UI.
 
 The `WelcomeWindow` class extends `UiPart<Stage>`.
 
 When the app is launched, an instance of this class is created, and the
-`WelcomeWindow#start` is invoked to display the window. Various methods, including 
-`fadeTransition` and `displayAnimatedText`, are used within this
-class to achieve the fading image and character typing effect, respectively.
+`WelcomeWindow#start()` is invoked to display the window. Various methods, including 
+`fadeTransition()` and `displayAnimatedText(String textToDisplay, double delayTime)`
+, are used within this class to achieve the fading image and character typing 
+effect, respectively.
 
 ![WelcomeWindowSequenceDiagram](images/WelcomeWindowSequenceDiagram.png)
 
@@ -511,8 +587,8 @@ is called upon to request focus.
 
 The class `HelpWindow` is responsible for displaying the Help
 Window. It is shown when the user either uses the keyboard shortcut,
-`F1`, or clicks on `Help` located on the top left in
-the Menu Bar. It is facilitated by `HelpWindow.fxml`
+`F1`, or clicks on `Help` located on the top left in the Menu Bar, or types 
+in `help` in the command box. It is facilitated by `HelpWindow.fxml`
 and `HelpWindow.css`. The `.fxml` file is responsible for the layout of the
 various components in this window, and the `.css` file adds a style and enhances the
 overall UI.
@@ -769,14 +845,15 @@ The similarity is calculated using the following formula:
 
 **Target user profile**:
 
-* Students, Professors and Teaching Assistants
-* has a need to manage a significant number of contacts
+* Computer Science students
+* needs to manage a significant number of contacts
+* needs help finding teammates
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: Helps to improve connectivity among students and teaching staff
+**Value proposition**: Facilitates networking among Computer Science students.
 
 
 ### User stories
@@ -791,28 +868,74 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user                                       | search for contact(s) by tag(s)| contact them based on their grouping                                   |
 | `* *`    | user                                       | search for contact(s) by Telegram handles(s)| contact them conveniently                                 |
 | `* *`    | user                                       | search for contact(s) by GitHub username(s)| contact them conveniently                                 |
-| `* * *`  | Prof                                       | be able to export a set of contacts | let other professors, TAs and students get a set of contacts quickly |
+| `* * *`  | professor                                  | be able to export a set of contacts | let other professors, TAs and students get a set of contacts quickly |
 | `* * *`  | new user                                   | be able to import a set of contacts          | have some to begin with                                  |
 | `* * *`  | new user                                   | have an introduction splash screen           | utilise the app and its feature well                     |
 | `* * *`  | CLI user                                   | avoid using my mouse as much as possible     | -                                                        |
 | `* * *`  | user                                       | group/tag people into teammates, classmates, TA's and Profs | easily manage my contacts                 |
 | `* * *`  | user                                       | connect with seniors who have taken the same module         | have more guidance                        |
-| `* * *`  | TA                                         | be able to get in touch with the students in my class through Telegram handles | -                          |
+| `* * *`  | Teaching assistant                         | be able to get in touch with the students in my class through Telegram handles | -                          |
 | `* * *`  | new user                                   | know all the different commands                             | fully utilise the tools available         |
 | `* * *`  | new user                                   | learn the command formats                                   | perform tasks quickly and efficiently     |
-| `* * *`  | new user                                   | save contacts                                               | contact these people in the future        |
 | `* * *`  | user                                       | be able to store my contact omitting certain fields         | save contact without having to include email or address |
 | `* *`    | user                                       | have a clean and uncluttered GUI                           | navigate easily between different functions in the application |
-| `* *`    | user                                       | retrieve previous and next commands with up and down arrow key | browse my command history to retype misspelled commands |
-| `* * *`  | CS student                                 | sync my data with GitHub account | identify my colleagues by their profiles and connect with other users |
-| `* * *`  | CS student                                 | view the profiles of my contacts | learn more about them and connect with them |
-| `* *`    | user                                       | navigate to a contact's Telegram or GitHub in a single click | easily contact and interact with them |
+| `*`      | user                                       | retrieve previous and next commands with up and down arrow key | browse my command history to retype misspelled commands |
+| `* * *`  | user                                       | sync my data with GitHub account | identify my colleagues by their profiles and connect with other users |
+| `* * *`  | user                                       | view the profiles of my contacts | learn more about them and connect with them |
+| `* * *`  | user                                       | navigate to a contact's Telegram or GitHub in a single click | easily contact and interact with them |
+| `* * *`  | professor                                  | import and export contacts using CSV files | easily create list of contacts using Excel, for my students to import |
+| `* * *`  | user                                       | favorite and unfavorite my contacts | easily identify important people |
+| `* * *`  | user                                       | enter my details | make use of the Find A Buddy feature |  
+| `* * *`  | user                                       | find a buddy | work with them for group projects or as a study buddy |
+| `* *`    | user                                       | switch between tabs using keyboard shortcuts | navigate between tabs quickly |
+| `* *`    | user                                       | edit my profile | modify my details is they are misspelled during set up |
+| `* *`    | user                                       | see my profile | verify that my details are correct |
+| `* * *`  | user                                       | open a contact's Github or Telegram with a single command | easily browse their Github page or reach them on Telegram |
+
 
 ### Use cases
 
 (For all use cases below, the **System** is the `CohortConnect` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use Case 1: Add user**
+**Use Case 1: Setting Up User Profile**
+
+MSS
+
+1. User enters their Name.
+2. User enters their Telegram Handle.
+3. User enters their GitHub Username.
+4. User clicks on the submit button.
+5. CohortConnect shows the Main Window, signifying that the User Profile was set up.
+   Use case ends.
+
+Extensions
+
+* 4a. CohortConnect detects an error in the entered Name (Invalid Name).
+   * 4a1. CohortConnect shows an error message.
+   * 4a2. CohortConnect requests for a valid Name.
+   * 4a3. User enters new Name.
+   * 4a1-4a3 are repeated until the Name entered is valid.
+   * Use case resumes from step 5.
+
+* 4b. CohortConnect detects an error in the entered Telegram Handle (Invalid Telegram Handle).
+   * 4b1. CohortConnect shows an error message.
+   * 4b2. CohortConnect requests for a valid Telegram Handle.
+   * 4b3. User enters new Telegram Handle.
+   * 4b1-4b3 are repeated until the Telegram Handle entered is valid.
+   * Use case resumes from step 5.
+
+* 4c. CohortConnect detects an error in the entered GitHub Username (Invalid GitHub Username).
+   * 4c1. CohortConnect shows an error message.
+   * 4c2. CohortConnect requests for a valid GitHub Username.
+   * 4c3. User enters new GitHub Username.
+   * 4c1-4c3 are repeated until the GitHub Username entered is valid.
+   * Use case resumes from step 5.
+
+* *a. At any time, the User chooses to close the app.
+   * *a1. CohortConnect closes.
+     Use case ends.
+   
+**Use Case 2: Add user**
 
 MSS
 
@@ -836,7 +959,7 @@ Extensions
   * Steps 1b1-1b3 are repeated until the data entered are valid.
   * Use case resumes from step 2.
 
-**Use Case 2: Edit user**
+**Use Case 3: Edit user**
 
 MSS
 
@@ -1008,34 +1131,37 @@ Extensions
   * 3b2. Displays list of users with telegram ids containing the keyword.
   * Use case resumes at step 3.
 
-
-**Use Case 18: Import contacts from JSON file**
+**Use Case 18: Import contacts from JSON or CSV file**
 
 MSS
 
-1. User enters command to import from a JSON file.
-2. CohortConnect shows a list of persons to be imported.
-3. User confirms the import.
-4. CohortConnect shows the updated list of contacts.
+1. User enters command to import from a JSON or CSV file.
+2. CohortConnect shows the updated list of contacts.
    
    Use case ends.
 
 Extensions
 
-* 1a. CohortConnect cannot find the JSON file.
+* 1a. CohortConnect cannot find the JSON or CSV file.
   * 1a1. CohortConnect shows an error message.
-  * 1a2. CohortConnect prompts for new filename.
-  * 1a3. User enters new filename.
-  * Steps 1a1-1a3 are repeated until the filename received is valid.
+  * 1a2. User enters new filename.
+  * Steps 1a1-1a2 are repeated until the filename received is valid.
 
-* 2a. User decides to cancel the import.
-  * Use case ends.
+* 1b. Filename entered does not end with `.json` or `.csv`
+    * 1b1. CohortConnect shows an error message.
+    * 1b3. User enters new filename.
+    * Steps 1b1-1b2 are repeated until the filename received is valid.
 
-**Use Case 19: Export contacts to JSON file**
+* 1c. The JSON or CSV file is formatted wrongly. 
+    * 1c1. CohortConnect shows an error message.
+    
+    Use case ends.
+
+**Use Case 19: Export contacts to JSON or CSV file**
 
 MSS
 
-1. User enters command to export contacts to a named JSON file.
+1. User enters command to export contacts to a named JSON or CSV file.
 2. CohortConnect shows a success message.
    
    Use case ends.
@@ -1048,15 +1174,66 @@ Extensions
   * 1a3. User enters new filename.
   * Steps 1a1-1a3 are repeated until the filename received is valid.
 
+**Use Case 20: Opening a contact's GitHub**
 
+MSS
+
+1. User navigates to the contact using Find (UC8-11) and / or Show command (UC12-15).
+2. User clicks on the contact's GitHub username, or enters the command to open GitHub page.
+3. The contact's GitHub profile is shown in a new browser.
+
+   Use case ends.
+
+Extensions
+
+* 2a. The contact list is empty and the user enters the GitHub command.
+  * 2a1. CohortConnect shows an error message prompting the user to select a user.
+  
+  Use case ends.
+
+* 2b. The contact list is empty and the user tries to click the GitHub username.
+  * 2b1. The contact details will be empty and there will be nothing for the user to click.
+  
+  Use case ends.
+
+* 2c. The contact has an invalid GitHub username.
+  * 2c1. The browser shows GitHub's 404 page.
+  
+  Use case ends. 
+
+**Use Case 21: Opening a contact's Telegram**
+
+MSS
+
+1. User navigates to the contact using Find (UC8-11) and / or Show command (UC12-15).
+2. User clicks on the contact's Telegram username, or enters the command to open Telegram.
+3. The contact's Telegram profile is shown in a browser window, and redirected to the Telegram app if it is installed.
+
+   Use case ends.
+
+Extensions
+
+* 2a. The contact list is empty and the user enters the Telegram command.
+    * 2a1. CohortConnect shows an error message prompting the user to select a user.
+    
+      Use case ends.
+
+* 2b. The contact list is empty and the user tries to click the Telegram username.
+    * 2b1. The contact details will be empty and there will be nothing for the user to click.
+    
+      Use case ends.
+
+* 2c. The contact has an invalid Telegram username.
+    * 2c1. The invalid Telegram profile is shown in the browser window, and Telegram shows an error message when opening the profile in the Telegram application.
+    
+      Use case ends.
+      
 **Use Case 22: Using the Find A Buddy Feature**
 
 MSS
 
 1. User switches to the Find A Buddy Tab
 2. CohortConnect gives the top 5 matches to your data
-   
-   Use case ends.
 
 Extensions
 
@@ -1064,6 +1241,19 @@ Extensions
   * 1a1. CohortConnect shows a loading screen while gathering data in the background.
   * 1a2. Once loaded, Use case resumes at Step 2
 
+**Use Case 23: Opening the Help Window**
+
+MSS
+
+1. User uses the keyboard shortcut, or types in the command, or clicks on help in the Menu Bar.
+2. CohortConnect shows the Help Window.
+     Use case ends.
+
+Extensions
+
+* 1a. At any time, the User chooses to close the app.
+   * 1a1. CohortConnect closes.
+     Use case ends.
 
 ### Non-Functional Requirements
 
