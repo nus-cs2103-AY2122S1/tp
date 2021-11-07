@@ -10,8 +10,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_POSITION_HUSBAN
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showMemberAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MEMBER;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_MEMBER;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.address.testutil.TypicalMembers.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -39,7 +39,7 @@ public class MeditCommandTest {
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Member editedMember = new MemberBuilder().withTaskList(TypicalTasks.getTypicalTasks()).build();
         EditMemberDescriptor descriptor = new EditMemberDescriptorBuilder(editedMember).build();
-        MeditCommand meditCommand = new MeditCommand(INDEX_FIRST_MEMBER, descriptor);
+        MeditCommand meditCommand = new MeditCommand(INDEX_FIRST, descriptor);
 
         String expectedMessage = String.format(MeditCommand.MESSAGE_EDIT_MEMBER_SUCCESS, editedMember);
 
@@ -72,8 +72,8 @@ public class MeditCommandTest {
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
-        MeditCommand meditCommand = new MeditCommand(INDEX_FIRST_MEMBER, new EditMemberDescriptor());
-        Member editedMember = model.getFilteredMemberList().get(INDEX_FIRST_MEMBER.getZeroBased());
+        MeditCommand meditCommand = new MeditCommand(INDEX_FIRST, new EditMemberDescriptor());
+        Member editedMember = model.getFilteredMemberList().get(INDEX_FIRST.getZeroBased());
 
         String expectedMessage = String.format(MeditCommand.MESSAGE_EDIT_MEMBER_SUCCESS, editedMember);
 
@@ -84,11 +84,11 @@ public class MeditCommandTest {
 
     @Test
     public void execute_filteredList_success() {
-        showMemberAtIndex(model, INDEX_FIRST_MEMBER);
+        showMemberAtIndex(model, INDEX_FIRST);
 
-        Member memberInFilteredList = model.getFilteredMemberList().get(INDEX_FIRST_MEMBER.getZeroBased());
+        Member memberInFilteredList = model.getFilteredMemberList().get(INDEX_FIRST.getZeroBased());
         Member editedMember = new MemberBuilder(memberInFilteredList).withName(VALID_NAME_BOB).build();
-        MeditCommand meditCommand = new MeditCommand(INDEX_FIRST_MEMBER,
+        MeditCommand meditCommand = new MeditCommand(INDEX_FIRST,
                 new EditMemberDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         String expectedMessage = String.format(MeditCommand.MESSAGE_EDIT_MEMBER_SUCCESS, editedMember);
@@ -101,20 +101,20 @@ public class MeditCommandTest {
 
     @Test
     public void execute_duplicateMemberUnfilteredList_failure() {
-        Member firstMember = model.getFilteredMemberList().get(INDEX_FIRST_MEMBER.getZeroBased());
+        Member firstMember = model.getFilteredMemberList().get(INDEX_FIRST.getZeroBased());
         EditMemberDescriptor descriptor = new EditMemberDescriptorBuilder(firstMember).build();
-        MeditCommand meditCommand = new MeditCommand(INDEX_SECOND_MEMBER, descriptor);
+        MeditCommand meditCommand = new MeditCommand(INDEX_SECOND, descriptor);
 
         assertCommandFailure(meditCommand, model, MeditCommand.MESSAGE_DUPLICATE_MEMBER);
     }
 
     @Test
     public void execute_duplicateMemberFilteredList_failure() {
-        showMemberAtIndex(model, INDEX_FIRST_MEMBER);
+        showMemberAtIndex(model, INDEX_FIRST);
 
         // edit member in filtered list into a duplicate in address book
-        Member memberInList = model.getAddressBook().getMemberList().get(INDEX_SECOND_MEMBER.getZeroBased());
-        MeditCommand meditCommand = new MeditCommand(INDEX_FIRST_MEMBER,
+        Member memberInList = model.getAddressBook().getMemberList().get(INDEX_SECOND.getZeroBased());
+        MeditCommand meditCommand = new MeditCommand(INDEX_FIRST,
                 new EditMemberDescriptorBuilder(memberInList).build());
 
         assertCommandFailure(meditCommand, model, MeditCommand.MESSAGE_DUPLICATE_MEMBER);
@@ -135,8 +135,8 @@ public class MeditCommandTest {
      */
     @Test
     public void execute_invalidMemberIndexFilteredList_failure() {
-        showMemberAtIndex(model, INDEX_FIRST_MEMBER);
-        Index outOfBoundIndex = INDEX_SECOND_MEMBER;
+        showMemberAtIndex(model, INDEX_FIRST);
+        Index outOfBoundIndex = INDEX_SECOND;
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getMemberList().size());
 
@@ -148,11 +148,11 @@ public class MeditCommandTest {
 
     @Test
     public void equals() {
-        final MeditCommand standardCommand = new MeditCommand(INDEX_FIRST_MEMBER, DESC_AMY);
+        final MeditCommand standardCommand = new MeditCommand(INDEX_FIRST, DESC_AMY);
 
         // same values -> returns true
         EditMemberDescriptor copyDescriptor = new EditMemberDescriptor(DESC_AMY);
-        MeditCommand commandWithSameValues = new MeditCommand(INDEX_FIRST_MEMBER, copyDescriptor);
+        MeditCommand commandWithSameValues = new MeditCommand(INDEX_FIRST, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -165,10 +165,10 @@ public class MeditCommandTest {
         assertFalse(standardCommand.equals(new MlistCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new MeditCommand(INDEX_SECOND_MEMBER, DESC_AMY)));
+        assertFalse(standardCommand.equals(new MeditCommand(INDEX_SECOND, DESC_AMY)));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new MeditCommand(INDEX_FIRST_MEMBER, DESC_BOB)));
+        assertFalse(standardCommand.equals(new MeditCommand(INDEX_FIRST, DESC_BOB)));
     }
 
 }

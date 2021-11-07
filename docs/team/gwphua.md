@@ -23,16 +23,16 @@ Given below are my contributions to the project.
 #### Enhancements to existing features
 1. Automatically updated tags when fields in the cards are changed.
     * Previous GUI implementation does not update the cards immediately after edits to the tags are being done.
-    * [\#143](https://github.com/AY2122S1-CS2103T-T15-2/tp/pull/143)
+    * Related PR's : [\#143](https://github.com/AY2122S1-CS2103T-T15-2/tp/pull/143)
 2. Changing colours of the tags in GUI.
     * Colour of the tags now represent the attendance of a member, or the status of task completion for a member.
-    * [\#153](https://github.com/AY2122S1-CS2103T-T15-2/tp/pull/153)
+    * Related PR's : [\#153](https://github.com/AY2122S1-CS2103T-T15-2/tp/pull/153)
 3. Wrote additional tests for existing features to increase code coverage.
 
 #### Documentation
 1. Changing occurrences of Address Book to 'Ailurus' on the display side.
-    * [\#238](https://github.com/AY2122S1-CS2103T-T15-2/tp/pull/238)
+    * Related PR's : [\#238](https://github.com/AY2122S1-CS2103T-T15-2/tp/pull/238)
 2. User Guide write-up
     * Standardise format and order of commands
     * Fix grammatical errors
-    * [\#145](https://github.com/AY2122S1-CS2103T-T15-2/tp/pull/145), [\#147](https://github.com/AY2122S1-CS2103T-T15-2/tp/pull/147)
+    * Related PR's : [\#145](https://github.com/AY2122S1-CS2103T-T15-2/tp/pull/145), [\#147](https://github.com/AY2122S1-CS2103T-T15-2/tp/pull/147)
