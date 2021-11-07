@@ -42,3 +42,4 @@ Given below are my contributions to the project.
         * Proofread and edited our user guide for grammatical/technical errors and tone.
     * Developer Guide:
         * Added use cases (UC1 - UC4) and edited use cases (UC5 - UC6)
+        * Added test cases for Manual Testing.

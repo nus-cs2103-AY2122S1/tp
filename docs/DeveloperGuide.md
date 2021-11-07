@@ -17,8 +17,8 @@ title: ModuLink - Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
-
+* [Favourite Star Icon](https://imgbin.com/png/X9hfA1CP/five-pointed-star-yellow-png)
+* [Profile Icon](http://www.stickpng.com/img/icons-logos-emojis/users/simple-user-icon)
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -31,7 +31,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S1-CS2103T-W12-4/tp/tree/master/docs/diagrams) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
 ### Architecture
@@ -83,7 +83,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103T-W12-4/tp/blob/master/src/main/java/seedu/modulink/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-W12-4/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -129,7 +129,7 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores ModuLink data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
@@ -148,7 +148,7 @@ The `Model` component,
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
+* can save both ModuLink data and user preference data in json format, and read them back into corresponding objects.
 * inherits from both `ModuLinkStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
@@ -302,11 +302,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *  `  | potential user exploring the app           | view those taking similar mods | easily find potential groupmates                                       |
 | `* * *`  | user                                       | list the modules I am taking   | allow other users to view me as a potential groupmate                  |
 | `* *`    | user who formed a group                    | update group status for my modules | let other users know I have a group for a module                   |
-| `* *`    | proficient user                            | filter profiles by mods        | save time browsing profiles                                            |
 | `* *`    | proficient user                            | filter profiles by module      | save time browsing profiles                                            |
 | `* *`    | long time user                             | update the modules I am taking | find new favourites and groupmates for new modules that I am taking    |
 | `*`    | user searching for groupmates              | view potential groupmates' github| browse their work to decide if we would work well together           |
-| `*`    | user searching for groupmates              | view other profiles in more detail | find out more about the other user and potential groupmates          |
 | `*`    | user looking for a specific profile         | find a profile by student ID      | quickly view their profile                                             |
 
 
@@ -546,7 +544,8 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file 
+      Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -561,8 +560,13 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+   1. Open up ModuLink and run a few commands.
+   2. Exit out of ModuLink and a `.json` file will appear under the `data` folder.
+   3. You can now edit the `.json` file to have invalid data (e.g. having 2 profiles with the same ID, having invalid emails etc.)
+   4. Re-launch the app by double-clicking the jar file.<br>
+        Expected: ModuLink will now appear with no data.
+   
+   1. To fix this, delete the `.json` file and re-launch the app.
+        Expected: ModuLink will work as normal now, with all changes the user previously made reverted.
 
 [Back to top](#modulink-developer-guide)

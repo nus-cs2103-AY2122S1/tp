@@ -165,13 +165,11 @@ public class Person {
                 .append("; GitHub username: ")
                 .append(getGithubUsername())
                 .append("; Telegram handle: ")
-                .append(getTelegramHandle())
-                .append("; isFavourite: ")
-                .append(getIsFavourite());
+                .append(getTelegramHandle());
 
         Set<Mod> mods = getMods();
         if (!mods.isEmpty()) {
-            builder.append("; Tags: ");
+            builder.append("; Modules: ");
             mods.forEach(builder::append);
         }
         return builder.toString();
