@@ -77,7 +77,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                 isProfile = true;
                 checkEditProfileInputFormat(args, argMultimap);
             } else {
-                throw new ParseException(pe.getMessage() + "\n" + EditCommand.MESSAGE_USAGE);
+                throw new ParseException(pe.getMessage() + " \n" + EditCommand.MESSAGE_USAGE);
             }
         }
 
