@@ -696,9 +696,9 @@ A lesson can be identified by the index number shown in the lesson list of the s
             <td>Homework</td>
             <td><code>hw/</code></td>
             <td><ul>
-                <li>To add multiple homework to a lesson, you need to add <code>hw/</code> before every homework</li>
-                <li>Identical homework for the same lesson will be considered as one homework</li>
                 <li>Case sensitive</li>
+                <li>Add multiple homework with <code>hw/</code> before each homework</li>
+                <li>Identical homework for the same lesson will be considered as one homework</li>
                 <li>Maximum of 50 characters</li>
             </ul></td>
             <td><ul>
