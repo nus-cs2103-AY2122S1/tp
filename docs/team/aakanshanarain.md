@@ -24,7 +24,7 @@ Given below are my contributions to the project.
     * Highlights: All three fields follow the conventions required by the actual organization (i.e. The required Student ID is in the format of the actual NUS-prescribed format of the Matriculation number, the required GitHub username and Telegram handle follow most of the actual constraints of GitHub usernames and Telegram handles respectively. In total, implementing these 3 fields took about 1k LoC.
 
 * **Other Code Enhancements**:
-    * Wrote additional tests for features to increase coverage.
+    * Wrote additional tests for features to increase coverage. (Continually, and also specifically Pull Request: [\#190](https://github.com/AY2122S1-CS2103T-W12-4/tp/pull/190))
     * Added more specific and situation-appropriate error messages for better UX.
   
 * **Code contributed**: [RepoSense link - aakanshanarain](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=aakanshanarain&sort=groupTitle&sortWithin=title&since=2021-09-17&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false)
@@ -38,5 +38,5 @@ Given below are my contributions to the project.
     * Edited documentation for all new features. (Pull Requests: [\#100](https://github.com/AY2122S1-CS2103T-W12-4/tp/pull/100), [\#103](https://github.com/AY2122S1-CS2103T-W12-4/tp/pull/103), [\#105](https://github.com/AY2122S1-CS2103T-W12-4/tp/pull/105), [\#107](https://github.com/AY2122S1-CS2103T-W12-4/tp/pull/107), [\#109](https://github.com/AY2122S1-CS2103T-W12-4/tp/pull/109))
     * Added the Introduction and made other cosmetic changes throughout the document. (Pull Requests: [\#111](https://github.com/AY2122S1-CS2103T-W12-4/tp/pull/111), [\#184](https://github.com/AY2122S1-CS2103T-W12-4/tp/pull/184))
   * Developer Guide:
-    * Added use cases (UC5 - UC10).
-    * Added details + sequence diagram for editGroupStatus command.
+    * Added use cases (UC5 - UC10). (Pull Requests: [\#52](https://github.com/AY2122S1-CS2103T-W12-4/tp/pull/52))
+    * Added details + sequence diagram for editGroupStatus command. (Pull Requests: [\#96](https://github.com/AY2122S1-CS2103T-W12-4/tp/pull/96), [\#196](https://github.com/AY2122S1-CS2103T-W12-4/tp/pull/196))
