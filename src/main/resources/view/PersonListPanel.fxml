@@ -17,7 +17,7 @@
             <ColumnConstraints hgrow="NEVER" prefWidth="180.0" />
             <ColumnConstraints hgrow="NEVER" prefWidth="90.0" />
             <ColumnConstraints hgrow="NEVER" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" prefWidth="50.0" />
+            <ColumnConstraints hgrow="SOMETIMES" prefWidth="55.0" />
             <ColumnConstraints hgrow="NEVER" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" prefWidth="100.0" />
          </columnConstraints>
