@@ -243,12 +243,14 @@ its execution and `ParseException` will be thrown.</div>
 Below is the sequence diagram that depicts the parsing of the `add -p` command:
 ![ParseAddProgress](images/ParseAddProgressSequenceDiagram.png)
 
+{:start="5"}
 5. `LogicManager#execute()` then calls upon `AddProgressCommand#execute()`. It communicates with the `Model` to get the
    index-specified `Student` instance.
 
 Below is the sequence diagram that depicts how `AddProgressCommand` gets the student to edit:
 ![GetStudentToAddProgress](images/GetStudentToAddProgressSequenceDiagram.png)
 
+{:start="6"}
 6. `AddProgressCommand` calls the `Student#addProgress()` to add the new progress to the specified student.
 
 7. `AddProgressCommand` then calls the `Model#updateFilteredStudentList()` to update the data in the system with
@@ -307,12 +309,14 @@ At this point, if `AddStudentCommandParser#parse()` detects that no student name
 its execution and `ParseException` will be thrown.
 </div>
 
+{:start="4"}
 4. For optional parameters, which are all parameters other the student's name, if the argument is not supplied by the
    user, a default argument (`""`) is instead supplied by the `AddStudentCommandParser#parse()`.
 
 Below is the sequence diagram that depicts the parsing of the `add -s` command:
 ![ParseAddStudentCommand](images/ParseAddStudentCommandSequenceDiagram.png)
 
+{:start="5"}
 5. The individual arguments for the student contact are then passed into `Model#Student()` to create a `Student` object. 
 
 6. The `AddStudentCommand#execute()` is then called upon to add the student into TutorAid. This in turn calls on 
@@ -444,6 +448,7 @@ At this point, if `AddLessonCommandParser#parse()` detects that no lesson name h
 its execution and `ParseException` will be thrown.
 </div>
 
+{:start="3"}
 3. The original arguments (Maths 1 and 15) are used for the parameters `lessonName` and `capacity` respectively. Since the optional parameters (`price` and `timing`) are not provided in the command, a default argument (`""`)  is supplied for these parameters. These parameters are then used to create `LessonName`, `Price`, `Capacity` and `Timing` instances.
 
 4. These individual instances, along with a `Students` object containing an empty `ArrayList<Student>`,  are then used to create a `Lesson` object. This `Lesson` instance is used to create a `AddLessonCommand` object.
@@ -452,12 +457,14 @@ Below is the sequence diagram that depicts the parsing of the command `add -l n/
 
 <img src="images/ParseAddLessonCommandSequenceDiagram.png" height="250"/>
 
+{:start="5"}
 5. `AddLessonCommand#execute()` is then called to add the lesson to TutorAid. 
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** 
 At this point, if the newly created lesson has the same lesson name as an existing lesson in TutorAid, the lesson will not be added into TutorAid, and the user will be alerted of this.
 </div>
 
+{:start="6"}
 6. This in turn calls on `ModelManager#addLesson()` and `LessonBook#addLesson()` to store the details of the new lesson in memory. 
 
 7. A `CommandResult` object is then created and returned to notify the user that the lesson, with the specified details, has been successfully added to TutorAid.
