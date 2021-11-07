@@ -63,7 +63,6 @@ public class EditCommand extends Command {
     private final Index index;
     private final EditStudentDescriptor editStudentDescriptor;
 
-
     /**
      * @param index of the student in the filtered student list to edit
      * @param editStudentDescriptor details to edit the student with
@@ -71,6 +70,7 @@ public class EditCommand extends Command {
     public EditCommand(Index index, EditStudentDescriptor editStudentDescriptor) {
         requireNonNull(index);
         requireNonNull(editStudentDescriptor);
+        assert(index.getOneBased() >= 1);
 
         this.index = index;
         this.editStudentDescriptor = new EditStudentDescriptor(editStudentDescriptor);
@@ -86,8 +86,9 @@ public class EditCommand extends Command {
         }
 
         Student studentToEdit = lastShownList.get(index.getZeroBased());
-        //Instead of editing the student, create a copy of it and edit the copy
-        //This is to allow the original student to remain unchanged, so that comparison of fields can be carried out.
+
+        //Duplicate a copy of the student specified at the index to be edited.
+        //This allows for the original student to remain unchanged, so that comparison of fields can be carried out.
         Student studentToEditCopy = studentToEdit.copy();
         Student editedStudent = createEditedStudent(studentToEditCopy, editStudentDescriptor);
 
@@ -96,6 +97,7 @@ public class EditCommand extends Command {
         if (studentToEdit.isIdenticalStudent(editedStudent)) {
             throw new CommandException(MESSAGE_NO_NEW_FIELDS);
         }
+
 
         if (model.hasOtherStudent(studentToEdit, editedStudent)) {
             if (model.hasOtherSameStudentId(studentToEdit, editedStudent)) {
