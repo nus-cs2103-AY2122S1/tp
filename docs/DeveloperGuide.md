@@ -796,8 +796,13 @@ testers are expected to do more *exploratory* testing.
       `taskBook.json` and `salesBook.json`.
 
    1. Test case: Corrupt the `addressBook.json` file by deleting a closing curly bracket (`}`) or any other brackets.<br>
-      Expected: Shows the GUI without any data.
-      
+
+      1. Scenario: There exists at least one order, or there is at least one task tagged with an order ID.<br>
+         Expected: Shows the GUI without any data.
+
+      1. Scenario: There are no orders, and all tasks have the `General` tag.<br>
+         Expected: Shows the GUI without any clients or orders, but with previously saved tasks. 
+
    1. Test case: Corrupt the `taskBook.json` file by deleting a closing curly bracket (`}`) or any other brackets.<br>
       Expected: Shows the GUI without any tasks, but with previously saved clients and orders.
 
