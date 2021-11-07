@@ -81,6 +81,8 @@ public class ParserUtil {
      * Parses a {@code String name} into a {@code Name}.
      * Leading and trailing whitespaces will be trimmed.
      *
+     * @param name {@code String} to be parsed into a {@code Name}
+     * @return {@code Name}
      * @throws ParseException if the given {@code name} is invalid.
      */
     public static Name parseName(String name) throws ParseException {
@@ -96,6 +98,8 @@ public class ParserUtil {
      * Parses a {@code String phone} into a {@code Phone}.
      * Leading and trailing whitespaces will be trimmed.
      *
+     * @param phone {@code String} to be parsed into a {@code Phone}
+     * @return {@code Phone}
      * @throws ParseException if the given {@code phone} is invalid.
      */
     public static Phone parsePhone(String phone) throws ParseException {
@@ -111,6 +115,8 @@ public class ParserUtil {
      * Parses a {@code String email} into an {@code Email}.
      * Leading and trailing whitespaces will be trimmed.
      *
+     * @param email {@code String} to be parsed into an {@code Email}
+     * @return {@code Email}
      * @throws ParseException if the given {@code email} is invalid.
      */
     public static Email parseEmail(String email) throws ParseException {
@@ -125,9 +131,9 @@ public class ParserUtil {
     /** Parses a {@code String role} into an {@code Role}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @param role String to be parsed into a Role object.
-     * @return Role object
-     * @throws ParseException if the given {@code Role} is invalid.
+     * @param role {@code String} to be parsed into a {@code Role}
+     * @return {@code Role}
+     * @throws ParseException if the given {@code Role} is invalid
      */
     public static Role parseRole(String role) throws ParseException {
         requireNonNull(role);
@@ -142,9 +148,9 @@ public class ParserUtil {
      * Parses a {@code String employmentType} into an {@code EmploymentType}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @param employmentType String to be parsed into an EmploymentType object.
-     * @return EmploymentType object
-     * @throws ParseException if the given {@code EmploymentType} is invalid.
+     * @param employmentType String to be parsed into an EmploymentType object
+     * @return {@code EmploymentType}
+     * @throws ParseException if the given {@code EmploymentType} is invalid
      */
     public static EmploymentType parseEmploymentType(String employmentType) throws ParseException {
         requireNonNull(employmentType);
@@ -159,9 +165,9 @@ public class ParserUtil {
      * Parses a {@code String expectedSalary} into an {@code ExpectedSalary}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @param expectedSalary String to be parsed into an ExpectedSalary object.
-     * @return ExpectedSalary object
-     * @throws ParseException if the given {@code expectedSalary} is invalid.
+     * @param expectedSalary String to be parsed into an ExpectedSalary object
+     * @return {@code ExpectedSalary}
+     * @throws ParseException if the given {@code expectedSalary} is invalid
      */
     public static ExpectedSalary parseExpectedSalary(String expectedSalary) throws ParseException {
         requireNonNull(expectedSalary);
@@ -176,9 +182,9 @@ public class ParserUtil {
      * Parses a {@code String levelOfEducation} into a {@code LevelOfEducation}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @param levelOfEducation String to be parsed into a LevelOfEducation object.
-     * @return LevelOfEducation object
-     * @throws ParseException if the given {@code LevelOfEducation} is invalid.
+     * @param levelOfEducation String to be parsed into a LevelOfEducation object
+     * @return {@code LevelOfEducation}
+     * @throws ParseException if the given {@code LevelOfEducation} is invalid
      */
     public static LevelOfEducation parseLevelOfEducation(String levelOfEducation) throws ParseException {
         requireNonNull(levelOfEducation);
@@ -192,9 +198,9 @@ public class ParserUtil {
     /**
      * Parses a {@code Integer experience} into an {@code Experience}.
      *
-     * @param experience String to be parsed into an Experience object.
-     * @return Experience object
-     * @throws ParseException if the given {@code experience} is invalid.
+     * @param experience {@code String} to be parsed into an {@code Experience}
+     * @return {@code Experience}
+     * @throws ParseException if the given {@code experience} is invalid
      */
     public static Experience parseExperience(String experience) throws ParseException {
         requireNonNull(experience);
@@ -209,7 +215,9 @@ public class ParserUtil {
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @param tag {@code String} to be parsed into a {@code Tag}
+     * @return {@code Tag}
+     * @throws ParseException if the given {@code tag} is invalid
      */
     public static Tag parseTag(String tag) throws ParseException {
         requireNonNull(tag);
@@ -222,6 +230,10 @@ public class ParserUtil {
 
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     *
+     * @param tags {@code Collection<String>} to be parsed
+     * @return {@code Set<Tag>}
+     * @throws ParseException if any {@code String} in {@code Collection<String>} cannot be parsed into {@code Tag}
      */
     public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
@@ -236,7 +248,9 @@ public class ParserUtil {
      * Parses a {@code String interview} into a {@code Interview}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code interview} is invalid.
+     * @param interview {@code String} to be parsed into a {@code Interview}
+     * @return {@code Optional<Interview>}
+     * @throws ParseException if the given {@code interview} is invalid
      */
     public static Optional<Interview> parseInterview(String interview) throws ParseException {
         requireNonNull(interview);
@@ -254,6 +268,9 @@ public class ParserUtil {
     /**
      * Parses a {@code String notes} into a {@code Notes}.
      * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param notes {@code String} to be parsed into a {@code Notes}
+     * @return {@code Optional<Notes>}
      */
     public static Optional<Notes> parseNotes(String notes) throws ParseException {
         requireNonNull(notes);
