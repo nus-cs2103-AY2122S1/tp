@@ -344,7 +344,7 @@ Executing any of the commands in this section will bring you to the students int
               <li>Must be alphanumeric characters.</li>
               <li>Case-insensitive</li>
               <li>To add multiple tags to a student, you need to add <code>t/</code> before every tag name.</li>
-              <li>Duplicate tags for the same student will be detected as one tag.</li>
+              <li>Duplicate tags for the same student will be treated as one tag.</li>
             </ul></td>
             <td><ul>
               <li><code>t/unpaid</code> is valid.</li>
