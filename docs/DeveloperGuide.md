@@ -805,3 +805,8 @@ The following features were scrapped due to the high difficulty or error-prone n
     * Initially, `addstudent` was `add student` (the same goes for other similar commands in the `add` family). This required some minor tweaking of the parser which was relatively straightforward.
     * However, when it came to implementing aliases, we realised that it was difficult to ensure that the aliases don't overlap with the multiworded commands without drastically changing the parser.
     * Thankfully, the simple solution was to just enforce everything to be one word long.
+
+3. Allowing non-alphanumeric characters in student names
+    * As Source Control stores the official names of students, we had to consider that these names could contain non-alphanumeric characters, such as "Mary-Ann Tan". This is in contrast with AB3, where names of contacts do not need to be official names and these non-alphanumeric characters can be left out.
+    * However, allowing non-alphanumeric characters in student names would lead to problems such as not being able to identify invalid names like "@@@". It also leads to complications with parsing, for example when "-g" is meant to be part of the student name but would be parsed as an argument.
+    * As such, given the time constraint, we decided to maintain the original functionality of AB3, and only allow alphanumeric characters.
