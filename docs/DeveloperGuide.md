@@ -467,7 +467,7 @@ The following activity diagram summarizes what happens when a user enters and ex
 
 ### Import members feature
 
-####Implementation
+#### Implementation
 
 The import member mechanism is facilitated by `ModelManager` and `SportsPa`. `ModelManager` has access to SportsPA's
 data from the `SportsPa` object, from which member data will be read from when the `import` command is requested by the user.
@@ -815,6 +815,12 @@ This use case is similar to that of <span style="text-decoration: underline">mar
 * 1b. The content of CSV file is not in the valid format
 
     * 1b1. SportsPA shows an error message
+
+      Use case ends.
+
+* 1c. There are some imported members that have the same name or same phone
+
+    * 1c1. SportsPA updates the details of those members using data from the CSV file
 
       Use case ends.
     
