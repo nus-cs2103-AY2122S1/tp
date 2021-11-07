@@ -15,7 +15,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/el0hime)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/el0hime.md)]
 
 * Role: Project Advisor
 
@@ -24,7 +24,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/luozhijie-tom.png" width="200px">
 
 [[github](http://github.com/luozhijie-tom)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/luozhijie-tom.md)]
 
 * Role: Team Lead
 * Responsibilities: UI
