@@ -5,7 +5,9 @@ title: Cui Langyuan's Project Portfolio Page
 
 ### Project: AniList
 
-AniList is a desktop app for managing anime that the user have watched. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about XXX kLoC.
+AniList is a desktop Command Line Interface app for managing animes that the user have watched. AniList is written in Java and the GUI is created with JavaFX.
+
+AniList was created based of AddressBook - Level 3, an address book application used for teaching Software Engineering Principles.
 
 Given below are my contributions to the project.
 
@@ -24,7 +26,7 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=t10&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=clyveycui&tabRepo=AY2122S1-CS2103T-T10-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
 
 * **Project management**:
-  * Managed releases `v1.2` - `v1.4` (4 releases) on GitHub
+  * Managed releases `v1.2` - `v1.4` (3 releases) on GitHub
 
 * **Team tasks contributions**:
   * Fixed various functionality bugs (examples: [\#166](https://github.com/AY2122S1-CS2103T-T10-4/tp/issues/166), [\#111](https://github.com/AY2122S1-CS2103T-T10-4/tp/issues/111))
@@ -42,6 +44,7 @@ Given below are my contributions to the project.
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#57](https://github.com/AY2122S1-CS2103T-T10-4/tp/pull/57), [\#59](https://github.com/AY2122S1-CS2103T-T10-4/tp/pull/59), [\#99](https://github.com/AY2122S1-CS2103T-T10-4/tp/pull/99), [\#194](https://github.com/AY2122S1-CS2103T-T10-4/tp/pull/194)
+  * Reported 11 bugs for other teams during Mock PE.
 
 * **Other Contributions**:
   * AniList was very much a team effort. While we all did have our individual components to make, the team was constantly checking on one another and asking for implementations ideas and correctness. I mainly helped with brainstorming the implementation of various other features, find command in particular, as it was one of the most complicated features that we ended up implementing due to the various behaviours we wanted it to have.
