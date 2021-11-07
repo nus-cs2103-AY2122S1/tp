@@ -9,7 +9,7 @@ title: Developer Guide
 2. [Setting up, getting started](#Setting up)
 3. [Design](#Design)
 4. [Architecture](#Architecture)
-5. [UI component](#UI component)
+5. [UI components](#UI component)
 6. [Logic component](#Logic component)
 7. [Storage component](#Storage component)
 8. [Implementations](#Implementations)
