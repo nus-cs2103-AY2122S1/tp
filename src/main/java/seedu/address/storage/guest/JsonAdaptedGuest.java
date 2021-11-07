@@ -87,10 +87,9 @@ class JsonAdaptedGuest {
     public List<JsonAdaptedChargeable> getChargeablesUsed() {
         return chargeablesUsed;
     }
-    
+
     private static boolean isStringUpperCase(String str) {
         char[] charArray = str.toCharArray();
-        
         for (int i = 0; i < charArray.length; i++) {
             if (Character.isLetter(charArray[i])) {
                 if (!Character.isUpperCase(charArray[i])) {
@@ -150,7 +149,7 @@ class JsonAdaptedGuest {
         if (!PassportNumber.isValidPassportNumber(passportNumber) || !isStringUpperCase(passportNumber)) {
             throw new IllegalValueException(PassportNumber.MESSAGE_CONSTRAINTS);
         }
-        
+
         final PassportNumber modelPassportNumber = new PassportNumber(passportNumber);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
