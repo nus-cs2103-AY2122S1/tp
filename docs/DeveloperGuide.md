@@ -462,7 +462,7 @@ On initializing the `HelpWindow` class, `HelpWindow#setUpCommandDetails()` and
 
 `setUpCommandDetails()` creates multiple objects of `CommandDetails`, all of them
 representing a unique command that the app supports. Those are then added to an
-`ObservableList`, which is linked to the `TableView` in the UI.
+`ObservableList<CommandDetails>`, which is linked to the `TableView` in the UI.
 
 `setUpHelpTableView()` sets and places various restrictions on the table.
 It restricts any events or scrolling on the table. Also, It adjusts the height
