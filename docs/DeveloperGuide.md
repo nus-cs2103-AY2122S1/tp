@@ -425,9 +425,9 @@ Use case ends
 
 * 1b. User inputs details in a wrong format
     * 1b1. contHACKS shows an error message <br>
-    * 1b2. User enters new input
+    * 1b2. User enters new input <br>
     Steps 1b1 - 1b2 are repeated until the input is in a correct format. <br>
-    Use case resumes from step 2.
+    Use case resumes from step 2. <br>
     Use case ends.
 
 
@@ -435,19 +435,23 @@ Use case ends
   * 1c1. contHACKS disallows this operation and shows an error message <br>
   Use case ends.
 
-**Use case `UC04`: Deleting a contact**
+**Use case `UC04`: Deleting contact(s)**
 
 **MSS**
 
-1. User requests to delete specific contact(s)
-2. contHACKS deletes the contact and displays the updated contact list
+1. User requests to list all contacts (`UC05`) or find contacts (`UC02`) 
+2. User requests to delete specific contact(s) in the shown list
+3. contHACKS deletes the contact(s) and displays the updated contact list
 
-Use case ends
+Use case ends.
 
 **Extensions**
 * 1a. Contact does not exist
     * 1a1. contHACKS shows an error message <br/>
       Use case ends.
+* 1b. The index provided is invalid
+  * 1b1. contHACKS displays an invalid index error message. <br>
+  Use case ends.
 
 
 **Use case `UC05`: Listing the contact list**
@@ -504,7 +508,7 @@ Use case ends.
 **MSS**
 
 1. User requests to find a lesson based on inputs details
-2. contHACKS shows a list of contacts that matches input details
+2. contHACKS shows a list of lessons that matches input details
 
 Use case ends.
 
@@ -535,7 +539,7 @@ Use case ends.
 **MSS**
 
 1. User requests to update a specific lesson and inputs the new lesson details
-2. contHACKS updates the contact with the input details and displays the updated lesson
+2. contHACKS updates the lesson with the input details and displays the updated lesson
 
 Use case ends.
 
@@ -557,12 +561,13 @@ Use case ends.
     * 1c1. contHACKS disallows this operation and shows an error message <br>
       Use case ends.
 
-**Use case `UC09`: Deleting a lesson**
+**Use case `UC09`: Deleting lesson(s)**
 
 **MSS**
 
-1. User requests to delete specific lesson(s).
-2. contHACKS deletes the contact and displays the updated lesson list
+1. User requests to list all lessons (`UC10`) or find lessons (`UC07`)
+2. User requests to delete specific lesson(s) in the shown list
+3. contHACKS deletes the lesson(s) and displays the updated lesson list
 
 Use case ends
 
@@ -570,6 +575,10 @@ Use case ends
 * 1a. Lesson does not exist
     * 1a1. contHACKS shows an error message <br/>
       Use case ends.
+  
+* 1b. The index provided is invalid
+  * 1b1. contHACKS displays an invalid index error message. <br>
+    Use case ends.
 
 
 **Use case `UC10`: Listing the lesson list**
