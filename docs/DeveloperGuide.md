@@ -458,7 +458,7 @@ related to the UI. In addition, the following classes are utilised:
 In the `Logic` components, the `download` command works in a similar fashion to the `show` command, except that it does not require its own parser. 
 
 
-This sequence diagram shows how the `download` command works at a lever lower:
+This sequence diagram shows how the `download` command works at a lower level:
 
 ![DownloadSequenceDiagram](images/commands/DownloadCommand/DownloadSequenceDiagram.png)
 
