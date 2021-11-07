@@ -491,7 +491,7 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `friend --add MrFeely`<br>
        Expected: Friend with `FRIEND_ID` MrFeely is added. gitGud states that `FRIEND_ID` is added.
 
-    4. Other incorrect add commands to try: `friend --name Marcus`, `friend --add`, `friend --name`, ...`
+    4. Other incorrect add commands to try: `friend --name Marcus`, `friend --add`, `friend --name`
        Expected: No friend is added. Error details shown in the status message. Status bar remains the same.
 
 ### Adding a game
