@@ -558,8 +558,7 @@ testers are expected to do more *exploratory* testing.
        Expected: No contact is listed. No error is shown.
 
     4. Incorrect find commands to try: `find`, `find alex`, `find n/`<br>
-       Expected: No contact is listed. Error details shown in the status message. Status bar remains the same.
-
+       Expected: No contact is listed. Error details shown in the result display. Text in the command box turns red.
 
 ### Finding a lesson
 
@@ -574,8 +573,8 @@ testers are expected to do more *exploratory* testing.
        Expected: No lesson is listed. No error is shown.
 
     4. Incorrect find commands to try: `findc`, `findc cs1231`, `findc m/`<br>
-       Expected: No contact is listed. Error details shown in the status message. Status bar remains the same.
-
+       Expected: No contact is listed. Error details shown in the result display. Text in the command box turns red.
+       
 ### Editing a person
 
 ### Editing a lesson
