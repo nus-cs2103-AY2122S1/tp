@@ -12,9 +12,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.contact.CategoryCode;
-import seedu.address.model.contact.Contact;
-import seedu.address.model.contact.Rating;
 import seedu.address.testutil.ContactBuilder;
 
 
