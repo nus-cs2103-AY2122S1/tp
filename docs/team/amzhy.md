@@ -57,7 +57,7 @@ repeating similar commands multiple times.
 #### Contributions to the Developer Guide
 * Added the implementation details of `EditClassCommand` (Pull Request [\#135](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/135))
 * Added UML diagrams for `RemoveStudent` , `DeleteClassCommand` features (Pull Request [\#209](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/209))
-* Added implementation details of `EditCommand` (Pull Request [\#217](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/217))
+* Added implementation details of `EditCommand`, `DeleteCommand` (Pull Request [\#217](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/217))
 * Added use cases for TutAssistor
 
 <div style="page-break-after: always;"></div>
