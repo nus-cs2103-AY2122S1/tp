@@ -85,7 +85,7 @@ public class ShowCommand extends Command {
             uniqueInputs = getUniqueNameInputs(ol);
             break;
         case PREFIX_PHONE_SYNTAX:
-            userText = "contact numbers";
+            userText = "phone numbers";
             uniqueInputs = getUniquePhoneInputs(ol);
             break;
         case PREFIX_EMAIL_SYNTAX:
