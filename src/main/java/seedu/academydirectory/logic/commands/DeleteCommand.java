@@ -18,7 +18,7 @@ public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
-    public static final String HELP_MESSAGE = "### Deleting a student: `delete`\n"
+    public static final String HELP_MESSAGE = "#### Deleting a student: `delete`\n"
             + "\n"
             + "Avengers can delete a student from Academy Directory.\n"
             + "\n"

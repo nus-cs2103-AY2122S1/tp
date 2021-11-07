@@ -14,7 +14,7 @@ public class FilterCommand extends Command {
 
     public static final String COMMAND_WORD = "filter";
 
-    public static final String HELP_MESSAGE = "### Locating students by name: `filter`\n"
+    public static final String HELP_MESSAGE = "#### Locating students by name: `filter`\n"
             + "\n"
             + "Filters and displays students whose names or tags contain any of the given keywords.\n"
             + "\n"

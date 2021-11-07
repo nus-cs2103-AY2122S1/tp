@@ -135,8 +135,8 @@ public class AcademyDirectoryParserTest {
 
     @Test
     public void parseCommand_attendance() throws Exception {
-        assertTrue(parser.parseCommand(AttendanceCommand.COMMAND_WORD + " 1 ses/1 att/1") instanceof
-                AttendanceCommand);
+        assertTrue(parser.parseCommand(AttendanceCommand.COMMAND_WORD + " 1 ses/1 att/1")
+                instanceof AttendanceCommand);
         assertThrows(ParseException.class, () -> parser.parseCommand(
                 AttendanceCommand.COMMAND_WORD + "1 att/attended"));
     }

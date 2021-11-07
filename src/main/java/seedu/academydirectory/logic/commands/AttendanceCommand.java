@@ -26,14 +26,14 @@ public class AttendanceCommand extends Command {
             + "displayed student list. The index **must be a positive integer** 1, 2, 3, …\u200B\n"
             + "* Multiple `INDEX` can be parsed in at once as long as they are all valid.\n"
             + "* The `STUDIO_SESSION` field is a positive integer from 1 to 12 inclusive which"
-            +  " refers to the Studio Session to be modified.\n"
+            + " refers to the Studio Session to be modified.\n"
             + "* The `ATTENDANCE_STATUS` field can only be a 1 or 0 to indicate whether the student attended "
             + "the session or not where 1 marks a student as having attended while 0 marks a student as unattended.\n"
             + "* Existing values will be updated to the input values.\n\nExamples:\n\n"
             + "* `attendance 1 ses/1 att/1` Marks the student with index number `1` as present for studio session 1\n"
             + "* `attendance 1, 2, 3 ses/12 att/0` Marks students with "
             + "index numbers `1`, `2`, and `3` as absent for studio session 12\n"
-            +  "* `attendance 1, 2, 3 ses/7 att/1` Marks students with index numbers "
+            + "* `attendance 1, 2, 3 ses/7 att/1` Marks students with index numbers "
             + "`1`, `2`, and `3` as present for studio session 7\n";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD

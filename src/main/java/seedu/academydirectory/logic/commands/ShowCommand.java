@@ -15,7 +15,7 @@ public class ShowCommand extends Command {
 
     public static final String COMMAND_WORD = "show";
 
-    public static final String HELP_MESSAGE = "### Show grades for an assessment:  `show`\n"
+    public static final String HELP_MESSAGE = "#### Show grades for an assessment:  `show`\n"
             + "Avengers will be able to view all students' grades for a particular assessment.\n"
             + "\n"
             + "Format: `show ASSESSMENT`\n"

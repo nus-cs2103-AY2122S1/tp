@@ -18,7 +18,7 @@ import seedu.academydirectory.versioncontrol.objects.Commit;
 public class RevertCommand extends Command {
     public static final String COMMAND_WORD = "revert";
 
-    public static final String HELP_MESSAGE = "### Revert to a history : `revert`\n"
+    public static final String HELP_MESSAGE = "#### Revert to a history : `revert`\n"
             + "\n"
             + "Reverts storage to an old history in the Academy Directory.\n"
             + "\n"

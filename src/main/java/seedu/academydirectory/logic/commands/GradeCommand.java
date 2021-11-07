@@ -22,7 +22,7 @@ public class GradeCommand extends Command {
 
     public static final String COMMAND_WORD = "grade";
 
-    public static final String HELP_MESSAGE = "### Adding grades for an assessment:  `grade`\n"
+    public static final String HELP_MESSAGE = "#### Adding grades for an assessment:  `grade`\n"
             + "Avengers will be able to add a student’s grade for a particular assessment.\n"
             + "\n"
             + "Format: `grade INDEX as/ASSESSMENT g/GRADE`\n"

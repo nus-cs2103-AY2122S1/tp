@@ -27,7 +27,7 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String HELP_MESSAGE = "### Editing a student : `edit`\n"
+    public static final String HELP_MESSAGE = "#### Editing a student : `edit`\n"
             + "\n"
             + "Tutors will be able to edit their tutees.\n"
             + "\n"

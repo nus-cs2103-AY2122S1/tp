@@ -26,7 +26,7 @@ import seedu.academydirectory.versioncontrol.objects.Commit;
 public class HistoryCommand extends Command {
     public static final String COMMAND_WORD = "history";
     public static final String MESSAGE_SUCCESS = "Commit history shown";
-    public static final String HELP_MESSAGE = "#### [For Advanced Users] Viewing Commit History: `history`\n"
+    public static final String HELP_MESSAGE = "#### [For Advanced Users]: Viewing Commit History: `history`\n"
             + "Shows local commit history.\n"
             + "\n"
             + "Format: `history`\n"

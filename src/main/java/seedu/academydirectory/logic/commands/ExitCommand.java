@@ -9,7 +9,7 @@ public class ExitCommand extends Command {
 
     public static final String COMMAND_WORD = "exit";
 
-    public static final String HELP_MESSAGE = "### Exiting the program : `exit`\n"
+    public static final String HELP_MESSAGE = "#### Exiting the program : `exit`\n"
             + "\n"
             + "Exits the program.\n"
             + "\n"

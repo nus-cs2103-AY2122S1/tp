@@ -18,7 +18,7 @@ public class ParticipationCommand extends Command {
 
     public static final String COMMAND_WORD = "participation";
 
-    public static final String HELP_MESSAGE = "### Editing a student’s Studio participation: `participation`\n"
+    public static final String HELP_MESSAGE = "#### Editing a student’s Studio participation: `participation`\n"
             + "Avengers will be able to track the participation of their students during the relevant studios. "
             + "\n"
             + "We will be keeping track of Studio participation with a counter system which starts at 0 by default.\n"
