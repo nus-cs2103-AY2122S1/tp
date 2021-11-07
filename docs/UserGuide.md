@@ -212,9 +212,9 @@ Format: `findcontact KEYWORD`
 Example:
 * `findcontact john` returns a list with all the contacts containing the name john.
 
-#### Show Expiring Policies: `expiringpolicy`
+#### Show Expired/Expiring Policies: `expiringpolicy`
 
-Show policies that are expiring in a month.
+Show policies that are expired or expiring in a month.
 
 Format: `expiringpolicy`
 
@@ -225,8 +225,8 @@ Sorts the contact list alphabetically by the order specified. Case-insensitive.
 Format: `sortcontact SORTER`
 
 These are the current sorters implemented:
-* `asc`: Sorts the contacts in ascending order alphabetically based on the saved name
-* `dsc`: Sorts the contacts in descending order alphabetically based on the saved name
+* `asc`: Sorts the contacts in ascending order alphabetically based on the saved name.
+* `dsc`: Sorts the contacts in descending order alphabetically based on the saved name.
 
 #### Sorting policies: `sortpolicy`
 
@@ -306,7 +306,7 @@ Action | Format, Examples
 **List Policies** | `allpolicy`
 **List Contact's Policies** | `contactpolicy CONTACT_INDEX`
 **Clear Contact's Policies** | `clearpolicy CONTACT_INDEX`
-**Show Expiring Policies** | `expiringpolicy`
+**Show Expired/Expiring Policies** | `expiringpolicy`
 **Sort Policies** | `sortpolicy SORTER`
 **Sort Contacts** | `sortcontact SORTER`
 **Clear All** | `clear`
