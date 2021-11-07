@@ -28,10 +28,8 @@ Given below are my contributions to the project.
 
 * **Project management**:
   * Managed release `v1.4` on GitHub
-  * Scheduled team meetings
-  * Created agenda for team meetings
-  * Created issues on Github
-  * Created tags and milestones on Github
+  * Scheduled and created team meetings
+  * Created issues, tags and milestones on Github
 
 * **Enhancements to existing features**:
   * Enhanced edit feature by allowing editing of student's grade. This required ensuring different components interacted with each other correctly depending on what field was to be edited, and required modifying existing classes (Pull requests [\#148](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/148), [\#137](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/137))
