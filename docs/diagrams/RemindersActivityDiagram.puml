@@ -1,0 +1,20 @@
+@startuml
+start
+:User starts MM;
+fork
+    :Start Main Thread;
+fork again
+    :Start Time Thread;
+    :Start TimeManager;
+    :Enter Alert State;
+    while () is (MM running)
+    :Check tasks for reminders;
+    if() then(Tasks Due)
+    :Show Pop-out Reminder;
+    else(No Tasks Due)
+    endif
+    endwhile (MM not running)
+end fork
+:End all threads;
+stop
+@enduml

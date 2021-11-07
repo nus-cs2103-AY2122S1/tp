@@ -14,7 +14,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/markuslim24.png" width="200px">
 
 [[github](https://github.com/markuslim24)]
-[[portfolio](team/markus.md)]
+[[portfolio](team/markuslim24.md)]
 
 * Role: Team Lead
 * Responsibilities: Host meeting
@@ -24,7 +24,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/tianqi-zhu.png" width="200px">
 
 [[github](http://github.com/Tianqi-Zhu)]
-[[portfolio](team/Tianqi-Zhu.md)]
+[[portfolio](team/tianqi-zhu.md)]
 
 * Role: Developer
 * Responsibilities: Deliverable and deadlines, Scheduling and tracking, Github master
@@ -34,7 +34,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/jinxinzhao315.png" width="200px">
 
 [[github](http://github.com/JinxinZhao315)]
-[[portfolio](team/jinxinzhao.md)]
+[[portfolio](team/jinxinzhao315.md)]
 
 * Role: Developer
 * Responsibilities: Documentation
@@ -53,7 +53,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/zhangchengchuan.png" width="200px">
 
 [[github](http://github.com/zhangchengchuan)]
-[[portfolio](team/chengchuan.md)]
+[[portfolio](team/zhangchengchuan.md)]
 
 * Role: Developer
 * Responsibilities: In charge of integration

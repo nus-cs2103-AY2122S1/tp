@@ -20,6 +20,7 @@ Class JsonManageMeStorage
 Class JsonSerializableManageMe
 Class JsonAdaptedTask
 Class JsonAdaptedModule
+Class JsonAdaptedLink
 }
 
 }
@@ -38,6 +39,7 @@ JsonUserPrefsStorage .up.|> UserPrefsStorage
 JsonManageMeStorage .up.|> ManageMeStorage
 JsonManageMeStorage ..> JsonSerializableManageMe
 JsonSerializableManageMe ---> "*" JsonAdaptedTask
-JsonSerializableManageMe --> "*" JsonAdaptedModule
+JsonSerializableManageMe ---> "*" JsonAdaptedModule
+JsonSerializableManageMe --> "*" JsonAdaptedLink
 
 @enduml
