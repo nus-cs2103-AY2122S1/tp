@@ -1675,7 +1675,7 @@ follow the command format by using `LESSON_INDEX`.
 
     * Prerequisite: TuitiONE is the active window on your computer. If you are unsure, click on the TuitiONE application to make it the active window.
 
-    * Test case: Press the F1 key on your keyboard.
+    * Test case: Press the F1 key on your keyboard.<br>
       Expected: A help window that displays all the commands of TuitiONE will appear.
 
 #### Clearing data
