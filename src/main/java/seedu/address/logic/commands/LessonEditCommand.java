@@ -12,6 +12,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNCANCEL;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -117,7 +118,7 @@ public class LessonEditCommand extends UndoableCommand {
 
         personBeforeLessonEdit = CommandUtil.getPerson(lastShownList, index);
 
-        List<Lesson> lessonList = personBeforeLessonEdit.getLessons().stream().sorted().collect(Collectors.toList());
+        List<Lesson> lessonList = new ArrayList<>(personBeforeLessonEdit.getLessons());
         Lesson lessonToEdit = CommandUtil.getLesson(lessonList, lessonIndex);
         Lesson editedLesson = createEditedLesson(lessonToEdit, editLessonDescriptor);
 
@@ -154,10 +155,7 @@ public class LessonEditCommand extends UndoableCommand {
         Set<Homework> updatedHomeworkSet = editLessonDescriptor.getHomeworkSet().orElse(lessonToEdit.getHomework());
         LessonRates updatedRate = editLessonDescriptor.getRate().orElse(lessonToEdit.getLessonRates());
 
-        // error if end date is earlier than start date
-        if (updatedEndDate.isBefore(updatedDate)) {
-            throw new CommandException(MESSAGE_INVALID_DATE_RANGE);
-        }
+        validateStartEndDates(updatedDate, updatedEndDate);
 
         OutstandingFees updatedOutstandingFees = editLessonDescriptor.getOutstandingFees()
                 .orElse(lessonToEdit.getOutstandingFees());
@@ -193,7 +191,7 @@ public class LessonEditCommand extends UndoableCommand {
      * @return A set of updated cancelled dates.
      * @throws CommandException If any of the dates to cancel is invalid.
      */
-    private static Set<Date> createUpdatedCancelledDates(Lesson lesson, Set<Date> datesToCancel,
+    private Set<Date> createUpdatedCancelledDates(Lesson lesson, Set<Date> datesToCancel,
                                                          Set<Date> datesToUncancel) throws CommandException {
         assert lesson != null;
         Set<Date> updatedCancelledDates = new HashSet<>(lesson.getCancelledDates());
@@ -220,7 +218,7 @@ public class LessonEditCommand extends UndoableCommand {
      * @param datesToCancel A set of dates to cancel.
      * @throws CommandException If the date to cancel is invalid.
      */
-    private static void validateCancelDates(Lesson lesson, Set<Date> datesToCancel) throws CommandException {
+    private void validateCancelDates(Lesson lesson, Set<Date> datesToCancel) throws CommandException {
         assert lesson != null;
         for (Date date : datesToCancel) {
             // check if date is a lesson date
@@ -237,7 +235,7 @@ public class LessonEditCommand extends UndoableCommand {
      * @param datesToUncancel A set of dates to remove from cancelled dates.
      * @throws CommandException If the date to uncancel is invalid.
      */
-    private static void validateUncancelDates(Set<Date> cancelledDates, Set<Date> datesToUncancel)
+    private void validateUncancelDates(Set<Date> cancelledDates, Set<Date> datesToUncancel)
             throws CommandException {
         for (Date date : datesToUncancel) {
             // check if date is a cancelled date
@@ -247,6 +245,13 @@ public class LessonEditCommand extends UndoableCommand {
         }
     }
 
+
+    private void validateStartEndDates(Date startDate, Date endDate) throws CommandException {
+        // error if end date is earlier than start date
+        if (endDate.isBefore(startDate)) {
+            throw new CommandException(MESSAGE_INVALID_DATE_RANGE);
+        }
+    }
     /**
      * Replaces lesson {@code toEdit} with lesson {@code edited} in {@code lessonList}.
      *

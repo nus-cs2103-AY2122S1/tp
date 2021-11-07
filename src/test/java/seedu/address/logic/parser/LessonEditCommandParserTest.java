@@ -283,4 +283,18 @@ class LessonEditCommandParserTest {
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
+
+    @Test
+    public void parse_homeworkIgnoreEmpty() {
+        Index targetIndex = INDEX_THIRD_PERSON;
+        Index lessonTargetIndex = INDEX_FIRST_LESSON;
+        String userInput = targetIndex.getOneBased() + " " + lessonTargetIndex.getOneBased()
+                + HOMEWORK_EMPTY + HOMEWORK_DESC_TEXTBOOK;
+
+        EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder()
+                .withHomeworkSet(VALID_HOMEWORK_TEXTBOOK).build();
+        LessonEditCommand expectedCommand = new LessonEditCommand(targetIndex, lessonTargetIndex, descriptor);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
 }
