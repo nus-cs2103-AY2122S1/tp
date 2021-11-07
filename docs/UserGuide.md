@@ -549,7 +549,7 @@ The `DATE` of the appointment must at least be specified.
 * `aa 1 d/2022-03-27` adds an appointment with date `27 Mar 2022` to the first client in FAST.
 ![result for `aa 1 d/2022-03-27`](images/appointment.png)
 * `aa 3 d/2022-03-27 t/18:00` adds an appointment with date `27 Mar 2022` and time `1800hrs` to the third client in FAST.
-* `find Matthew John` followed by `aa 3 d/2022-03-27 t/18:00 v/Velocity` adds an appointment with date `27 Mar 2022`, 
+* `find Stuart Brown` followed by `aa 3 d/2022-03-27 t/18:00 v/Velocity` adds an appointment with date `27 Mar 2022`, 
   time `1800hrs` and venue `Velocity` to the third client in the results of the `find` command.
    <div markdown="block" class="alert alert-info">
    :information_source: This command will not work if the client has already been assigned an appointment. You will have to
