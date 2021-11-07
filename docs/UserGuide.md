@@ -246,7 +246,7 @@ Format: `find n/NAME`/`find m/MODULE_CODE(S)`
 * Can only search by name or module code(s), but not both at once <br> i.e. You cannot perform `find n/Ben m/CS2040S`
 * The search is case-insensitive <br> e.g `ben` will match `Ben`
 * The order of the keywords does not matter <br> e.g. `Ben Tan` will match `Tan Ben`
-* Partial words will also be matched <br> e.g. `Ben` will match `Benjamin`
+* Partial words will also be matched, for both name and module code searches. <br> e.g. `Ben` will match `Benjamin`
 
 <div markdown="span" class="alert alert-primary">:exclamation: **Important:**
 If multiple words are specified for the name search, only results matching all the words specified will be returned <br>
@@ -375,6 +375,7 @@ Finds a contact by specifying the module code(s)/day(s)/start time(s).
 Format: `findc m/MODULE_CODE(S)`/`findc d/DAY(S)`/`findc t/START_TIME(S)`
 * Can only search using one prefix at a time <br> i.e. You cannot perform `findc m/CS2040S d/2`
 * The search is case-insensitive <br> e.g `cs2040` will match `CS2040`
+* Only for module codes, partial word matches will also be matched. <br> e.g. `S123` will match `CS1231`
 * Day input is only accepted in integer form <br> e.g. `1` for Monday, `7` for Sunday
 * Start time input is only accepted in the `HH:mm` format <br> e.g. `15:00` `09:00`
 
