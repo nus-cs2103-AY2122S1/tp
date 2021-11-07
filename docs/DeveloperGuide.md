@@ -1479,10 +1479,11 @@ Prerequisites: The tests for finding doctors uses the sample data from `SampleDa
 
 1. Displays all appointments for the current day in the appointment list.
    
-    1. Test case: `appt -l` when there are no appointments for the current day (when `appt -f` does not show any appointment for the current day)<br>
+    1. Test case: `appt -l` 
+       1. If there are no appointments for the current day (when `appt -f` does not show any appointment for the current day)<br>
         Expected: No appointments are displayed in the appointment list.
-       
-    2. Test case: `appt -l` when there are appointments for the current day<br>
+          
+       2. If there are appointments for the current day<br>
         Expected: All of today's appointments are displayed in the appointment list
 
 ### Saving data  <a name="saving-data"/>
