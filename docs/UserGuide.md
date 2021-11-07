@@ -326,7 +326,7 @@ Format: `editc INDEX [m/MODULE_CODE LESSON_CODE] [d/DAY] [t/START_TIME END_TIME]
 
 * At least one of the parameters must be provided.
 * Existing values of the parameters specified will be erased and updated to the input values
-* You will not be able to edit a lesson into a given module and lesson code if it already exists in contHACKS
+* Edited lesson should not contain the same module and lesson code as another existing lesson in contHACKS
 
 <div markdown="span" class="alert alert-primary">:information_source: **Note:**
 To remove a remark from a lesson, simply input `r/`.
