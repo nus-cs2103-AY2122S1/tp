@@ -40,16 +40,14 @@ title: Developer Guide
     * [HelpCommand](#helpcommand)
 * [Guides](#guides)
 * [Appendix](#appendix)
-  * [Requirement](#appendix-a-requirements)
+  * [A: Requirements](#appendix-a-requirements)
     * [Product Scope](#product-scope)
     * [User Stories](#user-stories)
     * [Use cases](#use-cases)
     * [Non-Functional Requirements](#non-functional-requirements)
     * [Glossary](#glossary)
-  * [Manual Testing](#appendix-b-instructions-for-manual-testing)
-    * [Feature Testing](#feature-testing)
-    * [GUI Testing](#graphical-user-interface-gui-testing)
-  * [Version Controlled Commands](#appendix-c-version-controlled-commands)
+  * [B: Manual Testing](#appendix-b-instructions-for-manual-testing)
+  * [C: Version Controlled Commands](#appendix-c-version-controlled-commands)
     
 --------------------------------------------------------------------------------------------------------------------
 ## Information about this Developer Guide
