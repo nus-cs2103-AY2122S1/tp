@@ -954,7 +954,33 @@ testers are expected to do more *exploratory* testing.
 
     1. Other incorrect add commands to try: `add n/James! <other valid params>`, `add <one invalid param amongst other valid params>`, `...`.<br>
        Expected: Similar to previous.
-       
+
+### Find a contact
+1. Find a contact by name
+
+    1. Prerequisites: Multiple contacts in the list with at least one contact named Roy.
+
+    1. Test case: `find n/Roy`<br>
+       Expected: Display contacts with name Roy. Number of contacts found shown in the status message.
+    1. Test case: `find n/roy!`<br>
+       Expected: No changes made. Error details shown in the status message.
+
+    1. Other incorrect untag commands to try: `find`, `find n/<non existent name>`, `...`.<br>
+       Expected: Similar to previous.
+
+1. Find a contact by tag
+    1. Prerequisites: Multiple contacts in the list with one contact having tag name colleagues and one with tag name Colleagues.
+
+    1. Test case: `find t/Colleagues`<br>
+       Expected: Display contacts with tag colleagues. Number of contacts found shown in the status message.
+    1. Test case: `find c/ t/Colleagues`<br>
+       Expected: Display contacts with tag Colleagues (case-sensitive). Number of contacts found shown in the status message.
+    1. Test case: `find t/123!`<br>
+       Expected: No changes made. Error details shown in the status message.
+
+    1. Other incorrect untag commands to try: `find`, `find t/<non existent tag>`, `find t/<non existent tag> c/`, `...`.<br>
+       Expected: Similar to previous.
+
 ### Deleting a contact
 
 1. Deleting a contact while all contacts are being shown
@@ -1065,6 +1091,15 @@ testers are expected to do more *exploratory* testing.
        
     1. Other incorrect untag commands to try: `untag`, `untag -1 t/<valid tag name>`, `...`.<br>
        Expected: Similar to previous.
+
+### Export Mailing List Command
+1.  Export list with default attributes   
+    1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
+    1. Test case: `mailingList`<br>
+       Expected: Generate CSV file with name phone and email of all contacts displayed in the list.
+    1. Test case: `mailingList b/ a/`<br>
+       Expected: Generate CSV file with name, phone, email, birthday and address of all contacts displayed in the list.
+
        
 ### Saving data
 
