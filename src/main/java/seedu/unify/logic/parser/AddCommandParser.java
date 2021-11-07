@@ -8,8 +8,10 @@ import static seedu.unify.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.unify.logic.parser.CliSyntax.PREFIX_TIME;
 
 import java.util.Set;
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 
+import seedu.unify.commons.core.LogsCenter;
 import seedu.unify.logic.commands.AddCommand;
 import seedu.unify.logic.parser.exceptions.ParseException;
 import seedu.unify.model.tag.Tag;
@@ -24,9 +26,10 @@ import seedu.unify.model.task.Time;
  * Parses input arguments and creates a new AddCommand object
  */
 public class AddCommandParser implements Parser<AddCommand> {
-
     public static final String DEFAULT_TIME = "23:59";
     public static final String DEFAULT_PRIORITY = "LOW";
+
+    private final Logger logger = LogsCenter.getLogger(AddCommandParser.class);
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
@@ -40,6 +43,7 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DATE)
                 || !argMultimap.getPreamble().isEmpty()) {
+            logger.info("Invalid format: missing compulsory parameters");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
