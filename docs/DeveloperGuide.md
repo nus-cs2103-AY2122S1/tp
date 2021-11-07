@@ -577,7 +577,7 @@ Others:
 
 **Extensions**
 
-* 2a. The csv file has badly formatted input.
+* 2a. User enters an incorrectly formatted csv file.
 
     * 2a1. Source Control shows an error message displaying the bad input.
 
@@ -589,21 +589,101 @@ Others:
 
 **MSS**
 
-1.  User requests to create a new group and enters the group name and students' names or Student IDs.
+1.  User requests to create a new group and enters the group name and optionally the students' names or student IDs.
 2.  Source Control creates the group with the specified students.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. There is an existing group with the same group name.
+* 1a. User enters a group name which coincides with that of an existing group.
 
     * 1a1. Source Control shows an error message.
 
       Use case resumes at step 1.
-* 1b. There are multiple students that match any of the specified student names.
+    
+    
+* 1b. User specifies student names which match with multiple students in the Source Control database.
 
-    * 1b1. Source Control shows an error message with the different Student IDs.
+    * 1b1. Source Control shows the list of students with matching names, and prompts the user to resolve the conflict by specifying the student ID instead.
+      
+      Use case resumes at step 1.
+
+
+**Use case: Showing a student's performance**
+
+**MSS**
+
+1.  User requests to view the performance of a specified student by providing the index of the student in the list, or the student's name or student ID.
+2.  Source Control displays a line chart showing the specified student's performance against the cohort performance for each assessment.
+    Use case ends.
+
+**Extensions**
+
+* 1a. User enters a student name or ID that does not match with any student stored in Source Control.
+
+    * 1a1. Source Control shows an error message.
+
+      Use case resumes at step 1.
+    
+
+* 1b. User enters an invalid index.
+
+    * 1b1. Source Control shows an error message.
+
+      Use case resumes at step 1.
+    
+**Use case: Showing a group's performance**
+
+**MSS**
+
+1. User requests to view the performance of a specified group by providing the group name.
+2. Source Control displays a line chart showing the specified student's performance against the cohort performance for each assessment.
+   Use case ends.
+   
+**Extensions**
+
+* 1a. User enters a group name that does not match any existing group in Source Control.
+
+    * 1a1. Source Control shows an error message.
+
+      Use case resumes at step 1.
+
+**Use case: Showing cohort performance for an assessment**
+
+**MSS**
+
+1. User requests to view the cohort performance for a specified assessment.
+2. Source Control displays a histogram showing the specified student's performance against the cohort performance for each assessment.
+   Use case ends.
+
+**Extensions**
+
+* 1a. User enters an assessment that does not match any existing assessment in Source Control.
+
+    * 1a1. Source Control shows an error message.
+
+      Use case resumes at step 1.
+
+**Use case: Creating an alias for an existing command**
+
+**MSS**
+
+1. User requests to create an alias for a specified existing command.
+2. Source Control accepts the user-created alias. 
+
+**Extensions**
+
+* 1a. User enters a command that does not exist to create an alias for.
+
+    * 1a1. Source Control shows an error message.
+
+      Use case resumes at step 1.
+
+
+* 1b. User tries to create an alias using a pre-existing default command.
+
+    * 1b1. Source Control shows an error message.
 
       Use case resumes at step 1.
 
