@@ -209,6 +209,9 @@ public class ModelManager implements Model {
 
     //=========== Last Updated Accessors =============================================================
 
+    /**
+     * @return An immutable {@code LastUpdatedDate}.
+     */
     @Override
     public LastUpdatedDate getLastUpdatedDate() {
         return addressBook.getLastUpdatedDate();

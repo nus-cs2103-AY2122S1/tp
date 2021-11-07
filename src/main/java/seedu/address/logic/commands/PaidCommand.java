@@ -62,6 +62,8 @@ public class PaidCommand extends UndoableCommand {
     private Person personAfterLessonPaid;
 
     /**
+     * Creates a PaidCommand to pay for a specified {@code Lesson}.
+     *
      * @param index of the person in the filtered person list to pay.
      * @param indexToEdit to edit.
      * @param payment amount to the lesson.
@@ -111,7 +113,7 @@ public class PaidCommand extends UndoableCommand {
 
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * edited using {@code editedLesson}.
      */
     private static Person createEditedPerson(Person personToEdit, Lesson toEdit, Lesson editedLesson) {
         assert personToEdit != null;
@@ -125,7 +127,7 @@ public class PaidCommand extends UndoableCommand {
 
     /**
      * Creates and returns a {@code Lesson} with the details of {@code lessonToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * paid with {@code payment}.
      */
     private static Lesson createEditedLesson(Lesson lessonToEdit, Money payment) throws CommandException {
         assert lessonToEdit != null;

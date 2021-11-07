@@ -17,12 +17,6 @@ public class RedoCommand extends Command {
     public static final String MESSAGE_SUCCESS = "%1$s command for %2$s has been redone.";
     public static final String MESSAGE_FAILURE = "No commands to redo!";
 
-    /**
-     *
-     *
-     * @return Command Result with message of which command type was redone.
-     * @throws CommandException If there are no more commands to redo.
-     */
     @Override
     public CommandResult execute() throws CommandException {
         requireNonNull(undoRedoStack);

@@ -10,7 +10,7 @@ import java.util.Objects;
 
 /**
  * The last time all lesson's outstanding fees were updated and checked.
- * Similar to System update date.
+ * Similar to System update date and time.
  */
 public class LastUpdatedDate {
     public static final String MESSAGE_CONSTRAINTS = "Dates should be of the format uuuu-MM-dd "
@@ -25,7 +25,7 @@ public class LastUpdatedDate {
     public final LocalDateTime dateTime;
 
     /**
-     * The constructor to update the LastUpdatedDate.
+     * Creates a LastUpdatedDate object that stores the date and time in which the {@code model} was last updated.
      */
     public LastUpdatedDate() {
         dateTime = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES);
@@ -41,7 +41,7 @@ public class LastUpdatedDate {
     }
 
     /**
-     * Returns immutable LastUpdatedDate.
+     * @return An immutable LastUpdatedDate.
      */
     public LastUpdatedDate getLastUpdatedDate() {
         return new LastUpdatedDate(value);
@@ -61,7 +61,6 @@ public class LastUpdatedDate {
      * @param test The string to be tested.
      */
     public static boolean isValidLastUpdatedDateTime(String test) {
-        boolean isValid = true;
         LocalDateTime testDate = null;
         try {
             testDate = LocalDateTime.parse(test, FORMATTER);
