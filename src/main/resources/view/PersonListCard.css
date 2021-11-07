@@ -5,27 +5,19 @@
 #address {
     -fx-wrap-text: true;
     -fx-padding: 2 2 2 2;
-    -fx-border-width: 1;
-    -fx-border-color: lime green;
 }
 
 #phone {
     -fx-wrap-text: true;
     -fx-padding: 2 2 2 2;
-    -fx-border-width: 1;
-    -fx-border-color: lime green;
 }
 
 #email {
     -fx-wrap-text: true;
     -fx-padding: 2 2 2 2;
-    -fx-border-width: 1;
-    -fx-border-color: lime green;
 }
 
 #description {
     -fx-wrap-text: true;
     -fx-padding: 2 2 2 2;
-    -fx-border-width: 1;
-    -fx-border-color: lime green;
 }
