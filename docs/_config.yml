@@ -1,6 +1,8 @@
 title: "PH"
 theme: minima
 
+classes: wide
+
 header_pages:
   - UserGuide.md
   - DeveloperGuide.md
