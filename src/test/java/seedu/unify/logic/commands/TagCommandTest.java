@@ -1,7 +1,6 @@
 package seedu.unify.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static seedu.unify.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.unify.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.unify.testutil.TypicalIndexes.INDEX_FIRST_TASK;
@@ -60,6 +59,16 @@ public class TagCommandTest {
 
         assertCommandFailure(tagCommand, model, Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
+
+    @Test
+    public void execute_invalidTagLength_throwsIllegalArgumentException() {
+        Set<Tag> newTags = new HashSet<>();
+
+        assertThrows(IllegalArgumentException.class, ()-> newTags.add(new Tag("A123456789123456")));
+
+    }
+
+
 
 
     @Test
