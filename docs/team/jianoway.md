@@ -3,7 +3,7 @@ layout: page
 title: Jian Wei's Project Portfolio Page
 ---
 
-## Project: Academy Directory
+## **Project: Academy Directory**
 
 Academy Directory is a desktop address book application used for CS1101S tutors to keep track of information related to their students. The user interacts with it using a CLI and mouse, and it has a GUI created with JavaFX. It is written in Java, and has about 14 kLoC.
 
