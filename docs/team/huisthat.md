@@ -31,7 +31,8 @@ Given below are my contributions to the project.
         * Update example commands for the different commands [\#142](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/142)
     * Developer Guide:
         * Added implementation details of the `add` and `visit` feature. [\#104](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/104)
-
+        * Added use cases for `visit`, `delete` visit and `sort` commands. [\#209](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/209)
+        
 * **Community**:
     * PRs reviewed (with non-trivial review comments): [\#102](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/102)
     * Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/huisthat/ped/issues/4), [2](https://github.com/huisthat/ped/issues/5), [3](https://github.com/huisthat/ped/issues/7))
