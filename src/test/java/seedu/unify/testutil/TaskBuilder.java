@@ -20,7 +20,7 @@ public class TaskBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_TIME = "16:40";
     public static final String DEFAULT_DATE = "2021-12-11";
-    public static final String DEFAULT_TAG = "Important";
+    public static final String DEFAULT_TAG = "CS2103";
     public static final String DEFAULT_STATE = "TODO";
     public static final String DEFAULT_PRIORITY = "LOW";
 
@@ -39,6 +39,7 @@ public class TaskBuilder {
         time = new Time(DEFAULT_TIME);
         date = new Date(DEFAULT_DATE);
         tags = new HashSet<>();
+        tags.add(new Tag(DEFAULT_TAG));
         state = new State(DEFAULT_STATE);
         priority = new Priority(DEFAULT_PRIORITY);
     }
