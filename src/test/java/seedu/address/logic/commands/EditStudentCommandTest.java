@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.AddStudentCommand.MESSAGE_DUPLICATE_EMAIL;
+import static seedu.address.logic.commands.AddStudentCommand.MESSAGE_DUPLICATE_TELE_HANDLE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
@@ -42,17 +44,17 @@ public class EditStudentCommandTest {
     @Test
     public void execute_allFieldsSpecified_success() {
         Student editedAmy = new StudentBuilder().withName(VALID_NAME_AMY).withStudentId(VALID_STUDENT_ID_AMY)
-                .withEmail(VALID_EMAIL_BOB).withTeleHandle(VALID_TELE_HANDLE_BOB).build();
+                .withEmail("edited@example.com").withTeleHandle("@edited").build();
         ModuleName moduleName = new ModuleName(MODULE_NAME_0);
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(editedAmy).build();
         EditStudentCommand editCommand = new EditStudentCommand(moduleName, descriptor);
 
         String expectedMessage = String.format(Messages.MESSAGE_EDIT_STUDENT_SUCCESS, VALID_STUDENT_ID_AMY);
 
-        Model expectedModel = new ModelManager(new TeachingAssistantBuddy(model.getBuddy()), new UserPrefs());
+        Model expectedModel = new ModelManager(new TeachingAssistantBuddy(TypicalModules.getTypicalBuddy()),
+                new UserPrefs());
         Module expectedModule = expectedModel.getFilteredModuleList().get(0);
         expectedModule.setStudent(expectedModule.getFilteredStudentList().get(0), editedAmy);
-
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
@@ -107,6 +109,24 @@ public class EditStudentCommandTest {
 
         assertCommandFailure(editCommand, model, String.format(Messages.MESSAGE_MODULE_NAME_NOT_FOUND,
                 DIFFERENT_MODULE_NAME));
+    }
+
+    @Test
+    public void execute_duplicateTeleHandle_failure() {
+        ModuleName moduleName = new ModuleName(MODULE_NAME_0);
+        EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withStudentId(VALID_STUDENT_ID_AMY)
+                .withTeleHandle(VALID_TELE_HANDLE_BOB).build();
+        EditStudentCommand editStudentCommand = new EditStudentCommand(moduleName, descriptor);
+        assertCommandFailure(editStudentCommand, model, MESSAGE_DUPLICATE_TELE_HANDLE);
+    }
+
+    @Test
+    public void execute_duplicateEmail_failure() {
+        ModuleName moduleName = new ModuleName(MODULE_NAME_0);
+        EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withStudentId(VALID_STUDENT_ID_AMY)
+                .withEmail(VALID_EMAIL_BOB).build();
+        EditStudentCommand editStudentCommand = new EditStudentCommand(moduleName, descriptor);
+        assertCommandFailure(editStudentCommand, model, MESSAGE_DUPLICATE_EMAIL);
     }
 
     @Test

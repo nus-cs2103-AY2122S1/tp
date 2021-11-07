@@ -1,6 +1,10 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.commands.AddStudentCommand.MESSAGE_DUPLICATE_EMAIL;
+import static seedu.address.logic.commands.AddStudentCommand.MESSAGE_DUPLICATE_TELE_HANDLE;
+import static seedu.address.logic.commands.AddStudentCommand.isDuplicateEmailInModule;
+import static seedu.address.logic.commands.AddStudentCommand.isDuplicateTeleHandleInModule;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -92,6 +96,19 @@ public class EditStudentCommand extends EditCommand {
         List<Student> studentList = module.getFilteredStudentList();
         for (Student student : studentList) {
             if (student.getStudentId().equals(editStudentDescriptor.studentId)) {
+
+                if (editStudentDescriptor.getTeleHandle().isPresent()
+                        && isDuplicateTeleHandleInModule(editStudentDescriptor.getTeleHandle()
+                        .orElse(new TeleHandle("@notUsed")), module)) {
+                    throw new CommandException(MESSAGE_DUPLICATE_TELE_HANDLE);
+                }
+
+                if (editStudentDescriptor.getEmail().isPresent()
+                        && isDuplicateEmailInModule(editStudentDescriptor.getEmail()
+                        .orElse(new Email("notUsed@example.com")), module)) {
+                    throw new CommandException(MESSAGE_DUPLICATE_EMAIL);
+                }
+
                 editStudentDescriptor.setUniqueTaskList(student.getTaskList());
                 Student editedStudent = createEditedStudent(student, editStudentDescriptor);
                 logger.log(Level.INFO, "editing student: " + student.getName()
