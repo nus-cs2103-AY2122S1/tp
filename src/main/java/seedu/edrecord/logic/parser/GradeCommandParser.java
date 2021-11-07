@@ -37,7 +37,6 @@ public class GradeCommandParser implements Parser<GradeCommand> {
         }
 
         Index index;
-
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
@@ -46,6 +45,8 @@ public class GradeCommandParser implements Parser<GradeCommand> {
 
         Index id = ParserUtil.parseId(argMultimap.getValue(PREFIX_ID).get());
 
+        GradeStatus status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
+
         Optional<Score> score;
         if (argMultimap.getValue(PREFIX_SCORE).isPresent()) {
             score = Optional.of(ParserUtil.parseScore(argMultimap.getValue(PREFIX_SCORE).get()));
@@ -53,7 +54,6 @@ public class GradeCommandParser implements Parser<GradeCommand> {
             score = Optional.empty();
         }
 
-        GradeStatus status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
         Grade grade = new Grade(score, status);
         return new GradeCommand(index, id, grade);
     }
