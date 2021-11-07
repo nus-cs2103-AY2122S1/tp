@@ -240,7 +240,7 @@ before the correct `Predicate` is instantiated and used for finding the contact.
     * Pros: Faster searches with just partial keywords.
     * Cons: Contacts you did not mean to retrieve are also displayed.
 
-### Delete by batch feature
+### Delete contact by batch feature
 
 Users are able to execute a command to delete an existing module code in contHACKS. Upon successful deletion of the module code,
 the module code will not exist in contHACKS thus all lesson codes, if any, under the module code will be deleted (module and lesson have a composition relationship).
@@ -283,6 +283,9 @@ The following sequence diagrams show how the delete by module code feature works
     * Pros: Faster deletion while still supporting deletion by one index.
     * Cons: Not able to undo the deletion if the user deletes the wrong batch, it would take a long time to key all the information back in.
 
+<div markdown="span" class="alert alert-primary">:information_source: **Note:**
+The above information is also applicable for the delete lesson by batch feature.
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
