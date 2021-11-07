@@ -33,7 +33,7 @@ We hope that TutorAid will be helpful in adding more organisation to your tutori
 
 ***
 
-Just downloaded TutorAid? Check out the [About](#2-about) and [Quick Start](#3-quick-start) sections to see how you can get the app up and running!
+Just downloaded TutorAid? Check out the [About](#2-about) and [Quick Start](#3-quick-start) sections to see how you can get started!
 
 ***
 
@@ -171,22 +171,27 @@ add -sl s/STUDENT_INDEX... n/LESSON_INDEX...
 
 1. Ensure that you have Java `11` or above installed in your computer.
 
-2. Download the latest `tutoraid.jar` from [here](https://github.com/AY2122S1-CS2103T-W16-3/tp/releases).
+1. Download the latest `tutoraid.jar` from [here](https://github.com/AY2122S1-CS2103T-W16-3/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your TutorAid.
+1. Copy the file to the folder you want to use as the _home folder_ for your TutorAid.
 
-4. You can then launch TutorAid on your computer in 2 different ways:
+1. You can then launch TutorAid on your computer in 2 different ways:
 
-* Launch by doing a double-click: Double-click the `tutoraid.jar` to start the app. An application window similar to the one below should appear in a few seconds. Note how the app contains some sample data as shown in the image below:
+* Launch by doing a double-click: 
+  
+  * Double-click the `tutoraid.jar` to start the app. An application window similar to the one below should appear in a few seconds. Note how the app contains some sample data.
   
 * Launch using Terminal:
-1. Find the _Terminal_ application in your computer and open it.
-1. In the terminal, first navigate to the _home folder_ that contains `tutoraid.jar`. 
-   e.g. If you had added `tutoraid.jar` to a folder labeled _TutorAid_ in your _Desktop_, you can use the command `cd Desktop/TutorAid` to navigate to the folder. You can then use the `ls` command and check if `tutoraid.jar` appears in the list, to confirm that you are in the right folder.
-1. Lastly, key in the following command to launch `tutoraid.jar`: `java -jar tutoraid.jar`. An application window similar to the one below should appear in a few seconds. Note how the app contains some sample data as shown in the image below: <br><br>
-   ![Ui](images/Ui.png)
+  
+  * Find the _Terminal_ application in your computer and open it. 
+    
+  * In the terminal, first navigate to the _home folder_ that contains `tutoraid.jar`. 
+    For example, if you had added `tutoraid.jar` to a folder labeled _TutorAid_ in your _Desktop_ folder, you can use the command `cd Desktop/TutorAid` to navigate to the folder. After navigating, you can key in the `ls` command into the terminal. If you are in the right folder, the `tutoraid.jar` file will appear in the list.
 
-> :bulb: If you are using the second approach, it is recommended to store `tutoraid.jar` in a folder in your _Desktop_ so that it is easier to navigate to it every time you need to launch TutorAid!
+  * Lastly, key in the following command to launch `tutoraid.jar`: `java -jar tutoraid.jar`. An application window similar to the one below should appear in a few seconds. Note how the app contains some sample data. <br><br>
+![Ui](images/Ui.png)
+
+> :bulb: If you are using the second approach, it is recommended to store `tutoraid.jar` in a folder in your _Desktop_ so that it is easier to navigate to it the next time you need to launch TutorAid!
    
 5. If this is your first time using TutorAid, we highly encourage you to check out our [Beginner's Tutorial](#4-beginners-tutorial) so that you can practise using some of the commands and familiarise yourself with the app!
 
@@ -200,76 +205,114 @@ Welcome to TutorAid's beginner's tutorial! Here, you will learn how you can use 
 
 If this is your first time launching TutorAid, you will be able to see that some sample data has been provided to you. For this tutorial, let's assume that you tutor the student(s) shown in the Student Panel and that you offer the lesson(s) shown in the Lesson Panel. 
 
-### 4.1: Adding a student
+  > :bulb: As you follow the tutorial, we also encourage you to further experiment with the various commands on your own to understand the ways in which TutorAid can help you!
+
+### 4.1: Adding a student and editing a student's details
 {:.no_toc}
-First, imagine a new student, John Yeo, has just approached you for your tutoring services, and you wish to record down his students details in TutorAid so that you can keep track of his details and refer to them when needed. Furthermore, John Yeo has also given you the following details:
+Imagine that a new student, John Yeo, has just approached you for your tutoring services. He has also provided you with the following contact details for your own reference:
 * John's phone number: 98765432
 * John's parent's name: Mary Yeo
 * John's parent's phone number: 81234567
 
 You can then easily add his data to TutorAid by following the steps below:
-1. Key in `add -s sn/John Yeo sp/98765432 pn/Mary Yeo pp/81234567` into the command box. 
-> :bulb: If John did not provide you with his phone number, parent's name and parent's phone number, you can still add his student details to TutorAid by keying in `add -s sn/John Yeo` into the command box, since those are optional details for you to include in the command.
-2. Upon pressing enter, all specified details belonging to John Yeo will be added and stored in TutorAid.
 
-Now, the Student Panel will be updated accordingly with John's details. If you do not see John's details on your screen, you can either scroll down the Student Panel to find his details, or enter the command `find -s John Yeo` to display only his details in the Student Panel.
+1. Key in `add -s sn/John Yeo sp/98765432 pn/Mary Yeo pp/81234567` into the Command Box and press ENTER.
+   
+    > :bulb: You can also add John into TutorAid by keying in `add -s sn/John Yeo` into the Command Box. This is because all details other than the student's name are optional for you to note down.
+   > For more information, you can refer to the detailed documentation of the [Add a Student](#adding-a-student-add--s) command.
+   
+1. Upon pressing ENTER, notice how the Student Panel will be updated accordingly with John's details. If you do not see John's details on your screen, you can either scroll down the Student Panel to find his details, or enter the command `find -s John Yeo` to display only his details in the Student Panel.
 
-### 4.2: Adding a lesson
+Now, John has just informed you that he has changed his contact number to 84632975. You can update his contact details on TutorAid by completing the steps below:
+
+1. Type `edit -s 7 sp/84632975` and press ENTER.
+
+    > :bulb: The `7` in the command above refers to the index number of John Yeo in the Student Panel. For more information, you can refer to the detailed documentation for [editing a student's details](#editing-a-student-edit--s).
+
+1. You will now be able to see that John Yeo's phone number has been successfully changed to 84632975.
+
+### 4.2: Adding a lesson and editing a lesson's details
 {:.no_toc}
-Now that you've added your first student (and perhaps a few others too), let's add some Lessons to TutorAid. In this tutorial, we will be adding a lesson named History 1 into TutorAid by performing the steps below:
+Now that you have added your first student (and perhaps a few others too), let us add some lessons to TutorAid. We will start by adding a lesson named _History 1_ into TutorAid with the following details:
+* Lesson timing: 10AM - 11AM on Mondays
+* Lesson capacity: 10 students
 
-1. Type `add -l n/History 1` into the command box and press enter.
+You can quickly add this information to TutorAid by performing the steps below:
 
-![](images/tutorialAddLesson1.png)
+1. Type `add -l n/History c/10 t/10AM - 11AM on Mondays ` into the Command Box and press ENTER.
 
-2. Observe how History 1 appears in the Lesson Panel.
-3. We've added the lesson successfully, but we can continue by adding more details, such as its timing (10AM - 11AM on Mondays), price ($125.90) and capacity (10). Assuming that History 1 is the only lesson in your Lesson Panel, type the command `edit -l 1 t/10AM - 11AM on Mondays c/10`. Press Enter on your keyboard.
-4. Observe how the capacity and timing now show what you have requested.
-> :bulb: If you know what details you wish to add from the beginning, you can type `add -l n/History 1 c/10 t/10 AM - 11AM on Mondays p/125.90` to enter these details in a single command.
-5. That's it, you've added your first lesson. If you need more information, you can check out the detailed documentation of the [add lesson](#adding-a-lesson-add--l) and [edit lesson](#editing-a-lesson-edit--l) commands.
+    ![](images/tutorialAddLesson1.png)
+
+1. Observe how all the details of _History 1_ is reflected in the Lesson Panel.
+
+    > :bulb: All details other than the lesson name are optional for you to key in as well. You can check out the detailed documentation of the [Add a Lesson](#adding-a-lesson-add--l) command for more information.
+   
+Next, let us assume that you have decided to charge your students $125.90 per month for the lesson _History 1_. We can add this detail into TutorAid by doing the following steps:
+
+1. Type the command `edit -l 2 t/10AM - 11AM on Mondays c/10` and press ENTER.
+
+    > :bulb: The `2` in the command above refers to the index number of _History 1_ in the Lesson Panel. For more information, you can refer to the detailed documentation for [editing a lesson's details](#editing-a-lesson-edit--l).
+
+1. You will now be able to see how the lesson pricing has been updated to what you have requested.
+
+### 4.3: Adding a student to a lesson
+Now that you have set up the lesson _History 1_, let us add one of your existing students who wishes to enrol in the class, Alex Yeoh. You can do this in TutorAid by following the steps below:
+
+1. Key in `add -sl s/1 l/2` into the Command Box and press ENTER.
+
+    > :bulb: The numbers `1` and `2` in the command above refer to the indices of Alex Yeoh and _History 1_ in the Student and Lesson Panels respectively. For more information, you can refer to the detailed documentation for [adding a student to a lesson](#adding-students-to-lessons-add--sl).
+
+1. You should now be able to see that in the Student Panel, the lesson _History 1_ has been added to the list of lessons taken by Alex Yeoh's. Similarly, in the Lesson Panel, you will be able to see that Alex Yeoh has been added to the list of students attending _History 1_. 
 
 ### 4.4: Adding a progress note for a student
 {:.no_toc}
 Now, imagine you have ended your 'Maths 1' lesson. You realised that one of your students, Alex Yeoh, seems to struggle with the topic 'Vectors', and you wish to take 
 note of it so that you can provide him extra practice. To do so, you can easily add a progress note for Alex on TutorAid by following the steps below: 
-1. Key in `find -s Alex Yeoh` into the command box. This would result in only Alex's details being displayed in the student panel.
-2. Key in `add -p 1 Weak in Vectors and requires extra practice` into the command box. Alex's details will then be updated to display the progress note you just added. 
 
-Alternatively, you can also do this:
-1. Key in `list` in the command box to see list of all your students in the student panel.
-2. Locate `Alex Yeoh` in the student panel and take note of his index. In this case, it would be `1`.
-3. Key in `add -p 1 Weak in Vectors and requires extra practice` into the command box. Alex's details will then be updated to display the progress note you just added.
+1. Key in `add -p 1 Weak in Vectors and requires extra practice` into the Command Box and press ENTER. 
 
-Now, the next time you open TutorAid, you will be able to see Alex's progress note at a glance! 
+    > :bulb: The `1` in the command above refers to the index number of Alex Yeoh in the Student Panel. For more information, you can refer to the detailed documentation for the [Add a Progress to a Student](#adding-progress-for-a-student-add--p) command.
+   
+1. Notice that Alex's details, reflected in the Student Panel, will then be updated to display the progress note you just added.
 
-You will be able to add up to **10** such progress notes for each student. When you attempt to add an 11th note, your very first note will be automatically deleted, and your new note will be added in.
+Now, the next time you open TutorAid, you will be able to see Alex's progress note at a glance!
 
-> :bulb: We support up to just 10 notes to ensure that the progress notes for each student are easy to view and manage.
+> :bulb: You will be able to add up to **10** such progress notes for each student. When you attempt to add an 11th note, your very first note will be automatically deleted, and your new note will be added in. <br>
+> We support up to just 10 notes to ensure that the progress notes for each student are easy to view and manage.
 
 ### 4.5: Deleting a student
 {:.no_toc}
-Lastly, imagine one of your students `Roy Balakrishnan` has graduated from secondary school and no longer requires your tutoring services. You wish to remove his student details
-since he is no longer your student. To do so, you can easily delete his data from TutorAid by following the steps below:
-1. Type `list` in the command box to see the list of all your students in the Student Panel.
-2. Locate `Roy Balakrishnan` in the Student Panel and take note of his index. In this case, it would be `6`.
-3. Type `del -s 6` into the command box. Upon pressing enter, all details belonging to `Roy Balakrishnan` will be removed.
-
-Now, the Student and Lesson Panels will be updated accordingly without any data of `Roy Balakrishnan`.
+Lastly, imagine that your student, Alex Yeoh, has graduated from secondary school and wishes to discontinue his lessons. Thus, would like to remove his student details since he is no longer your student. 
+You can easily delete his data from TutorAid by following the steps below:
+   
+1. Type `del -s 1` into the command box. 
+   
+    > :bulb: The `1` in the command above refers to the index number of Alex in the Student Panel. For more information, you can refer to the detailed documentation for the [Delete a Student](#deleting-a-student-del--s) command.
+   
+1. Upon pressing ENTER, all of Alex's details will be removed from TutorAid. Observe how Alex's details are not found in the Student Panel and that his name has been removed from the student list for the _Maths 1_ in the Lesson Panel.
 
 ### End
 {:.no_toc}
 Congratulations on successfully completing TutorAid's beginner's tutorial :tada: <br>
-But why quit now? Since you have completed the tutorial, you can go ahead and key in `clear` in the command box to remove all the sample data and to add in some of your own students and lessons. 
-You can also experiment with some of the other TutorAid commands that are listed below in [Features](#5-features). Happy Learning! 
+
+But why quit now? Since you have completed the tutorial, you can go ahead and key in `clear` in the Command Box to remove all the sample data and to add in some of your own students and lessons.<br>
+
+You can also learn and experiment with some of the other TutorAid commands that we have not covered in the tutorial.<br> 
+You may find the following commands particularly handy:
+* [Deleting a student from a lesson](#deleting-students-from-lessons-del--sl)
+* [Deleting a progress note from a student](#deleting-progress-from-a-student-del--p)
+* [Finding a student](#finding-students-by-name-find--s)
+* [Finding a lesson](#finding-lessons-by-name-find--l)
+
+All the commands available in TutorAid are listed below in [Features](#5-features) section for your reference. Happy Learning! :smile:
 
 ***
 
 # 5. Features
 
-If you are new to TutorAid, we hope that you have gone through the [Beginner's Tutorial](#4-beginners-tutorial) to gain a better understanding on how TutorAid can help to 
-ease your tutoring tasks! This section lists all the available commands in TutorAid. 
+If you are new to TutorAid, we hope that you have gone through the [Beginner's Tutorial](#4-beginners-tutorial) to gain a better understanding on how TutorAid can help to ease your tutoring tasks! This section lists all the available commands in TutorAid for your reference. 
 
-The commands can be split into 3 main categories: _Student_ commands, _Lesson_ commands, _Student and Lesson_ commands and _Other_ commands. This section will also be split into these 4 sub-sections for easier navigation.
+The commands can be split into 4 main categories: _Student_ commands, _Lesson_ commands, _Student and Lesson_ commands and _Other_ commands. This section will also be split into these 4 sub-sections for easier navigation.
 
 For more information about how to interpret any of the commands, you check out the [Command Format](#23-command-format) and [Command Syntax](#231-command-syntax-in-this-guide) sections.
 
@@ -360,7 +403,7 @@ Format: `add -p STUDENT_INDEX PROGRESS`
 Examples:
 * `list` followed by `add -p 2 completed homework` adds `completed homework` to the 2nd student displayed in the Student Panel.
 
-> :bulb: Using this command will update the student panel to only display the edited student.
+> :bulb: Using this command will update the Student Panel to only display the edited student.
 
 
 ### Deleting progress from a student: `del -p`
@@ -376,7 +419,7 @@ Format: `del -p STUDENT_INDEX`
 Examples:
 * `list` followed by `del -p 2` deletes the progress of the 2nd student displayed in the Student Panel.
 
-> :bulb: Using this command will update the student panel to only display the edited student.
+> :bulb: Using this command will update the Student Panel to only display the edited student.
 
 ## 5.2 Lesson Commands
 
@@ -539,8 +582,8 @@ TutorAid data are saved as a JSON file `[JAR file location]/data/tutoraid.json`.
 
 # 6. Glossary
 
-**CLI**:
-**GUI**:
+**CLI**: CLI (also known as a _Command Line Interface_) refers to a form of interface that processes a user's input in the form of text.
+**GUI**: GUI (also known as a _Graphical User Interface_) refers to a form of user interface that allows user to interact with the application through graphical icons, such as buttons.
 **Progress**: Refers to any remark you may want to add for a specific student, such as their performance in class and their homework progression.
 
 ***
