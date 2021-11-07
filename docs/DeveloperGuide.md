@@ -608,13 +608,19 @@ Analogous to the use case for [adding a client](#use-case-add-a-client).
 
 #### Use case: Edit a client
 
-Analogous to the use case for [editing a task](#use-case-edit-a-client).
+Analogous to the use case for [editing a task](#use-case-edit-a-task).
 
 **Extensions**
 
-* 4c. The user updates the gender of a client without updating their dimensions.
+* 4c. The user edits the name of the client.
 
-    * 4c1. SalesNote shows an error message.
+    * 4d1. SalesNote updates all orders linked to the client with the new client name.
+
+      Use case ends.
+
+* 4d. The user updates the gender of a client without updating their dimensions.
+
+    * 4d1. SalesNote shows an error message.
 
       Use case resumes from step 3.
 
