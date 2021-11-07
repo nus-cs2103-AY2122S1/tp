@@ -33,6 +33,8 @@ public class EditCommandParser implements Parser<EditCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
+     *
+     * @param args {@code String} of arguments to be parsed
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditCommand parse(String args) throws ParseException {
@@ -53,6 +55,7 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
+        // Parses prefix arguments if any and sets it in editPersonDescriptor
         parseNameIfAny(argMultimap, editPersonDescriptor);
 
         parsePhoneIfAny(argMultimap, editPersonDescriptor);
@@ -162,6 +165,8 @@ public class EditCommandParser implements Parser<EditCommand> {
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>} if {@code tags} is non-empty.
      * If {@code tags} contain only one element which is an empty string, it will be parsed into a
      * {@code Set<Tag>} containing zero tags.
+     *
+     * @param tags {@code Collection<String> tags} to be parsed
      */
     private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
         assert tags != null;

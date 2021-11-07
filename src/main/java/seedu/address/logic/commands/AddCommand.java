@@ -61,7 +61,7 @@ public class AddCommand extends Command {
     /**
      * Creates an AddCommand to add the specified {@code Person}
      *
-     * @param person Person to be added
+     * @param person {@code Person} to be added
      */
     public AddCommand(Person person) {
         requireNonNull(person);
@@ -84,12 +84,12 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Creates a UI message informing user of existing duplicate applicants.
-     * {@code duplicates} provided must contain at least 1 applicant.
+     * Creates a UI message informing user of existing duplicate persons.
+     * {@code duplicates} provided must contain at least 1 person.
      *
-     * @param duplicates List of applicants who share the same phone number and email with {@code editedPerson}
-     * @param toCheck applicant to be checked for duplicates with
-     * @return String accumulation of all duplicate applicants
+     * @param duplicates List of persons who share the same phone number and email with {@code editedPerson}
+     * @param toCheck person to be checked for duplicates with
+     * @return String accumulation of all duplicate persons
      */
     private String createDuplicateMessage(List<Person> duplicates, Person toCheck) {
         assert toCheck != null;

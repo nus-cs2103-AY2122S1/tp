@@ -75,8 +75,8 @@ public class EditCommand extends Command {
     /**
      * Constructor for EditCommand.
      *
-     * @param index of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param index Index of the person in the filtered person list to edit
+     * @param editPersonDescriptor Details to edit the person with
      */
     public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(index);
@@ -110,10 +110,13 @@ public class EditCommand extends Command {
     /**
      * Checks if {@code editedPerson} is a duplicate of any existing Persons in {@code model} other than the
      * {@code personToEdit} and throws an exception if true.
+     * <p>
+     * An existing person that is not the person being edited is a disallowed duplicate if it is a duplicate of
+     * the person being edited.
      *
      * @param model Model object to be checked for duplicate Persons
-     * @param personToEdit Person being edited
-     * @param editedPerson Person with edits made
+     * @param personToEdit {@code Person} being edited
+     * @param editedPerson {@code Person} with edits made
      * @throws CommandException if {@code editedPerson} is a duplicate of any existing Persons in {@code model}
      * other than the {@code personToEdit}
      */
@@ -141,7 +144,7 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      *
-     * @param personToEdit Person to be edited
+     * @param personToEdit {@code Person} to be edited
      * @param editPersonDescriptor EditPersonDescriptor describing how {@code personToEdit} should be edited
      * @return Person edited based on {@code editPersonDescriptor}
      */
@@ -170,12 +173,12 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Creates a UI message informing user of existing duplicate applicants.
-     * {@code duplicates} provided must contain at least 1 applicant.
+     * Creates a UI message informing user of existing duplicate persons.
+     * {@code duplicates} provided must contain at least 1 person.
      *
-     * @param duplicates List of applicants who share the same phone number and email with {@code editedPerson}
-     * @param toCheck applicant to be checked for duplicates with
-     * @return String accumulation of all duplicate applicants
+     * @param duplicates List of persons who share the same phone number and email with {@code editedPerson}
+     * @param toCheck person to be checked for duplicates with
+     * @return String accumulation of all duplicate persons
      */
     private String createDuplicateMessage(List<Person> duplicates, Person toCheck) {
         assert toCheck != null;
@@ -323,7 +326,7 @@ public class EditCommand extends Command {
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
          *
-         * @param tags Tags to be set
+         * @param tags {@code Set<Tag>} to be set
          */
         public void setTags(Set<Tag> tags) {
             this.tags = (tags != null) ? new HashSet<>(tags) : null;
