@@ -1063,7 +1063,7 @@ testers are expected to do more *exploratory* testing.
 
     2. Test case: `remark 1 r/Prefers Dr. Mok`<br>
         1. If the first patient had no remarks initially,
-           Expected: A new remark field displaying `Prefers Dr. Mok` is added to the first patient's fields. Details of the edited patient are shown in the status message.
+           Expected: A new remarks field displaying `Prefers Dr. Mok` is added to the first patient's fields. Details of the edited patient are shown in the status message.
         2. If the first patient had remarks initially,
            Expected: First patient's remarks are edited to `Prefers Dr. Mok`. Details of the edited patient are shown in the status message.
 
@@ -1094,7 +1094,7 @@ testers are expected to do more *exploratory* testing.
           Expected: No tag is added to the patient. Error details are shown in the status message.
        
     3. Test case: `tag -a 1 t/`<br>
-       Expected: No tag is added to the patient. Error details are shown in the status message.
+       Expected: No tag is added to the first patient. Error details are shown in the status message.
 
     4. Test case: `tag -a 0 t/Immunocompromised`<br>
        Expected: No tag is added to any patient. Error details are shown in the status message.
@@ -1118,10 +1118,10 @@ testers are expected to do more *exploratory* testing.
        Expected: First patient's `Immunocompromised` tag is deleted. Details of the edited patient are shown in the status message.
    
     3. Test case: `tag -d 1 t/Osteopath`<br>
-       Expected: No tag is deleted from the patient. Error details are shown in the status message.
+       Expected: No tag is deleted from the first patient. Error details are shown in the status message.
 
     4. Test case: `tag -d 1 t/`<br>
-       Expected: No tag is deleted from the patient. Error details are shown in the status message.
+       Expected: No tag is deleted from the first patient. Error details are shown in the status message.
 
     5. Test case: `tag -d 0 t/Immunocompromised`<br>
        Expected: No tag is deleted from any patient. Error details are shown in the status message.
@@ -1257,10 +1257,13 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: `toggle` to the `Doctors` tab. There must be existing doctors. List all doctors using the `list` command.
 
     2. Test case: `remark 1 r/Comes at 8am`<br>
-       Expected: First doctor's remarks are edited to `Orthopedic`. Details of the edited patient are shown in the status message.
+       1. If the first doctor had no remarks initially,
+          Expected: A new remark field displaying `r/Comes at 8am` is added to the first doctor's fields. Details of the edited doctor are shown in the status message.
+       2. If the first doctor had remarks initially,
+          Expected: First doctor's remarks are edited to `r/Comes at 8am`. Details of the edited doctor are shown in the status message.
    
     3. Test case: `remark 1 r/`<br>
-       Expected: First doctor's remarks are deleted. Details of the edited patient are shown in the status message.
+       Expected: First doctor's remarks are deleted. Details of the edited doctor are shown in the status message.
 
     4. Test case: `remark 0 r/Comes at 8am`<br>
        Expected: No doctor's remarks are edited. Error details are shown in the status message.
@@ -1281,7 +1284,7 @@ testers are expected to do more *exploratory* testing.
 
     2. Test case: `tag -a 1 t/Pediatrician`<br>
         1. If the first doctor does not have a `Pediatrician` tag
-           Expected: A new tag `Pediatrician` is added to the first doctor. Details of the edited patient are shown in the status message.
+           Expected: A new tag `Pediatrician` is added to the first doctor. Details of the edited doctor are shown in the status message.
         2. If the first doctor has a `Pediatrician` tag
            Expected: No tag is added to the doctor. Error details are shown in the status message.
 
@@ -1307,13 +1310,13 @@ testers are expected to do more *exploratory* testing.
        First doctor has `Pediatrician` tag. Tag can be added using the following command: `tag -a 1 t/Pediatrician`.
 
     2. Test case: `tag -d 1 t/Pediatrician`<br>
-       Expected: First doctor's `Pediatrician` tag is deleted. Details of the edited patient are shown in the status message.
+       Expected: First doctor's `Pediatrician` tag is deleted. Details of the edited doctor are shown in the status message.
    
     3. Test case: `tag -d 1 t/Osteopath`<br>
-       Expected: No tag is deleted from the doctor. Error details are shown in the status message.
+       Expected: No tag is deleted from the first doctor. Error details are shown in the status message.
 
     4. Test case: `tag -d 1 t/`<br>
-       Expected: No tag is deleted from the doctor. Error details are shown in the status message.
+       Expected: No tag is deleted from the first doctor. Error details are shown in the status message.
 
     5. Test case: `tag -d 0 t/Pediatrician`<br>
        Expected: No tag is deleted from any doctor. Error details are shown in the status message.
