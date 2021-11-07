@@ -168,6 +168,7 @@ Format: `add n/NAME e/EMAIL m/MODULE_CODE [LESSON_CODE(S)] [p/PHONE] [h/TELEGRAM
 * Name, email and module code are **compulsory**
 * Lesson code, phone number, telegram handle and remarks are **optional**
 * You can add multiple module codes, and can have multiple lesson codes for a single module code
+* You will not be able to add a person with the same email/phone number/telegram handle
 
 <div markdown="span" class="alert alert-primary">:information_source: **Note:**
 Module code and lesson code are separated by white spaces.
@@ -193,6 +194,7 @@ Format: `edit INDEX [n/NAME] [e/EMAIL] [m/MODULE_CODE LESSON_CODE(S)] [p/PHONE] 
 * At least one of the parameters must be provided
 * Existing values of the parameters specified will be erased and updated to the input values
 * You can input multiple module codes, and can have multiple lesson codes for a single module code
+* You will not be able to edit a person into a given email/phone number/telegram handle if it already exists in contHACKS
 
 <div markdown="span" class="alert alert-primary">:information_source: **Note:**
 To remove an existing phone number/telegram handle/remark from a contact, simply input `p/``h/``r/` respectively.
@@ -298,6 +300,7 @@ Format: `addc m/MODULE_CODE LESSON_CODE d/DAY t/START_TIME END_TIME [r/REMARK]`
 * All the parameters are **compulsory** except for remark
 * Day input is only accepted in integer form <br> e.g. `1` for Monday, `7` for Sunday
 * Start and end time input is only accepted in the `HH:mm` format <br> e.g. `09:00`
+* You will not be able to add a lesson with the same module and lesson code
 
 <div markdown="span" class="alert alert-primary">:information_source: **Note:**
 Module code and lesson code are separated by white spaces. Lesson start time and end time are separated by white spaces as well.
@@ -321,6 +324,7 @@ Format: `editc INDEX [m/MODULE_CODE LESSON_CODE] [d/DAY] [t/START_TIME END_TIME]
 
 * At least one of the parameters must be provided.
 * Existing values of the parameters specified will be erased and updated to the input values
+* You will not be able to edit a lesson into a given module and lesson code if it already exists in contHACKS
 
 <div markdown="span" class="alert alert-primary">:information_source: **Note:**
 To remove a remark from a lesson, simply input `r/`.
