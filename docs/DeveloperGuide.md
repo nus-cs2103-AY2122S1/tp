@@ -132,6 +132,7 @@ How the `Logic` component works:
    which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+1. If a command execution is successful, the user input corresponding to the command is added to the `Model`.
 
 The sequence diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API 
 call while on the contacts tab.
@@ -179,6 +180,8 @@ The `Model` component:
   change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a 
   `ReadOnlyUserPref` objects.
+* stores a `UserInputList` object that represents the user's past 10 valid inputs (i.e. resulted in successful command 
+  execution).
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they 
   should make sense on their own without depending on other components)
 
