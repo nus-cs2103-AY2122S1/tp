@@ -66,18 +66,21 @@ This product will make recruiters’ lives easier through categorisation and fil
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
+[Table of contents](#table-of-contents)
 
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
+[Table of contents](#table-of-contents)
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Design**
+[Table of contents](#table-of-contents)
 
 <div markdown="span" class="alert alert-primary">
 
@@ -85,6 +88,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 </div>
 
 ### Architecture
+[Table of contents](#table-of-contents)
 
 <img src="images/ArchitectureDiagram.png" width="280" />
 
@@ -126,6 +130,7 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 The sections below give more details of each component.
 
 ### UI component
+[Table of contents](#table-of-contents)
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
@@ -143,6 +148,7 @@ The `UI` component,
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
 ### Logic component
+[Table of contents](#table-of-contents)
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
@@ -172,6 +178,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
+[Table of contents](#table-of-contents)
 
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
@@ -193,6 +200,7 @@ The `Model` component,
 
 
 ### Storage component
+[Table of contents](#table-of-contents)
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
@@ -204,6 +212,7 @@ The `Storage` component,
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
+[Table of contents](#table-of-contents)
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
@@ -213,7 +222,8 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Add feature 
+### Add feature
+[Table of contents](#table-of-contents)
 
 The `add` command is facilitated by creating an `AddCommand` depending on the given input.
 This command then updates the `model` accordingly.
@@ -253,6 +263,7 @@ The following sequence diagram shows how the add operation works.
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
 ### Edit feature
+[Table of contents](#table-of-contents)
 
 The ```edit``` command is facilitated by creating an ```EditCommand``` depending on the given input.
 This command then updates the ```model``` accordingly.
@@ -294,6 +305,7 @@ The following sequence diagram shows how the edit operation works.
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
 ### Delete feature
+[Table of contents](#table-of-contents)
 
 The ```delete``` command is facilitated by creating a ```DeleteCommand``` depending on the given input.
 This command then updates the ```model``` accordingly.
@@ -329,6 +341,7 @@ The following sequence diagram shows how the delete operation works.
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
 ### Find feature
+[Table of contents](#table-of-contents)
 
 The ```find``` command is facilitated by creating a ```FindCommand``` depending on the given
 input. This command then updates the ```model``` accordingly.
@@ -364,6 +377,7 @@ The following sequence diagram shows how the find operation works.
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
 #### Design considerations for find:
+[Table of contents](#table-of-contents)
 
 **Aspect: Finding by each prefix:**
 
@@ -385,6 +399,7 @@ should not exceed the destroy marker X. This is a known limitation of PlantUML.<
 
 
 ### Filter interview feature
+[Table of contents](#table-of-contents)
 
 The ```filter_interview``` command is facilitated by extending an abstract ```FilterInterviewCommand``` class, and executing the appropriate
 subclass depending on the given input. This command then updates the ```model``` accordingly.
@@ -425,6 +440,7 @@ The following sequence diagram shows how the filter interview operation works.
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
 #### Design considerations for filter interview:
+[Table of contents](#table-of-contents)
 
 **Aspect: User command to use in filtering interviews:**
 
@@ -441,6 +457,7 @@ should not exceed the destroy marker X. This is a known limitation of PlantUML.<
     types of inputs.
 
 ### Show feature
+[Table of contents](#table-of-contents)
 
 The ```show``` command is facilitated by creating an ```ObservableList``` of ```Person``` objects from the
 ```AddressBook```. A ```List``` of unique ```String``` objects is created, with ```String``` content depending on
@@ -475,6 +492,7 @@ The following sequence diagram shows how the show operation works.
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
 #### Design considerations for show:
+[Table of contents](#table-of-contents)
 
 **Aspect: Finding search terms:**
 
@@ -495,6 +513,8 @@ should not exceed the destroy marker X. This is a known limitation of PlantUML.<
 
 
 ### Mark feature
+[Table of contents](#table-of-contents)
+
 The ```mark``` command is facilitated by creating a ```MarkCommand```, which is a subclass of ```MarkingCommand```.
 This command then updates the ```model``` accordingly, depending on the given input.
 
@@ -529,6 +549,7 @@ The following sequence diagram shows how the mark operation works.
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
 ### Unmark feature
+[Table of contents](#table-of-contents)
 
 The ```unmark``` command is facilitated by creating a ```UnmarkCommand```, which is a subclass of 
 ```MarkingCommand```. This command then updates the ```model``` accordingly, depending on the given input.
@@ -563,6 +584,7 @@ The following sequence diagram shows how the unmark operation works.
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
 #### Design considerations for mark and unmark:
+[Table of contents](#table-of-contents)
 
 **Aspect: User command to use in marking and unmarking applicants:**
 
@@ -576,6 +598,7 @@ should not exceed the destroy marker X. This is a known limitation of PlantUML.<
   * Cons: Breaks the single responsibility principle as marking does a relatively different task from unmarking.
 
 ### Delete marked feature
+[Table of contents](#table-of-contents)
 
 The ```delete_marked``` command is facilitated by creating an ```DeleteMarkedCommand```.
 This command then updates the ```model``` accordingly.
@@ -602,6 +625,7 @@ The following sequence diagram shows how the delete marked operation works.
 ![images](images/DeleteMarkedCommandSequenceDiagram.png)
 
 #### Design considerations for delete marked:
+[Table of contents](#table-of-contents)
 
 **Aspect: User command to use in deleting marked applicants:**
 
@@ -615,7 +639,8 @@ The following sequence diagram shows how the delete marked operation works.
   * Cons: Breaks the single responsibility principle as deleting marked applicants does not delete applicants at specific indices
     like the rest of the `delete` command, but rather a certain group of applicants at once.
 
-### Datetime for interview 
+### Datetime for interview
+[Table of contents](#table-of-contents)
 
 The `Interview` class accepts `yyyy-M-d, H:m` as parsed time format and provides `MMM dd yyyy , HH:mm` as display format.
 - `yyyy` : year-of-era in 4 digits, e.g. `2021`
@@ -634,6 +659,7 @@ For example, the add command `add n/John ... i/2021-01-01, 10:30` will add a per
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
+[Table of contents](#table-of-contents)
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -644,8 +670,10 @@ For example, the add command `add n/John ... i/2021-01-01, 10:30` will add a per
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Requirements**
+[Table of contents](#table-of-contents)
 
 ### Product scope
+[Table of contents](#table-of-contents)
 
 **Target user profile**:
 A recruiter that
@@ -668,6 +696,7 @@ they have in mind. Recruiters can manage contacts faster than a typical mouse/GU
 
 
 ### User stories
+[Table of contents](#table-of-contents)
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
@@ -709,6 +738,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user                                       | find applicants with interviews that are upcoming | so that I can easily see and keep track of the applicants with upcoming interviews |
 
 ### Use cases
+[Table of contents](#table-of-contents)
 
 (For all use cases below, the **System** is `RecruitIn` and the **Actor** is the `user`, unless specified otherwise)
 
@@ -1012,12 +1042,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 ### Non-Functional Requirements
+[Table of contents](#table-of-contents)
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 ### Glossary
+[Table of contents](#table-of-contents)
 
 * **Applicant**: Represents a person that is searching for a job
 * **Applied Role**: Represents the job a person is applying for
@@ -1033,6 +1065,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
+[Table of contents](#table-of-contents)
 
 Given below are instructions to test the app manually.
 
@@ -1042,6 +1075,7 @@ testers are expected to do more *exploratory* testing.
 </div>
 
 ### Launch and shutdown
+[Table of contents](#table-of-contents)
 
 1. Initial launch
 
@@ -1057,13 +1091,15 @@ testers are expected to do more *exploratory* testing.
        Expected: The most recent window size and location is retained.
 
 ### Listing all applicants
+[Table of contents](#table-of-contents)
 
 1. Test case: `list`<br>
    Expected: All applicants listed without omission.
    Command success message shown in the status message.
 
 
-### Adding an applicant 
+### Adding an applicant
+[Table of contents](#table-of-contents)
 
 1. Adding an applicant while all applicants are being shown 
 
@@ -1084,6 +1120,7 @@ testers are expected to do more *exploratory* testing.
     Expected: Error messages displaying the cause of error is shown in the result display.  
 
 ### Editing an applicant
+[Table of contents](#table-of-contents)
 
 1. Editing an applicant while all applicants are being shown
 
@@ -1099,6 +1136,7 @@ testers are expected to do more *exploratory* testing.
        the same phone number or same email as Alexander.
        
 ### Deleting an applicant
+[Table of contents](#table-of-contents)
 
 1. Deleting an applicant while all applicants are being shown
 
@@ -1127,6 +1165,8 @@ testers are expected to do more *exploratory* testing.
        Expected: First and second applicants of the shown filtered list are deleted. Details of the deleted applicant shown in the result display.
 
 ### Finding an applicant
+[Table of contents](#table-of-contents)
+
 1. Finding an applicant by a specific prefix with non-empty parameters
    
     1. Prerequisites: For sample data to be utilised, delete the database storage `addressbook.json` from folder `/data` and re-run the application.  
@@ -1164,6 +1204,7 @@ testers are expected to do more *exploratory* testing.
        Expected: No change to applicant listed. Invalid command format error and usage message for `find` shown in result display.
 
 ### Showing search terms
+[Table of contents](#table-of-contents)
 
 1. Showing unique applicant names when multiple applicants exist in the list
 
@@ -1205,6 +1246,7 @@ testers are expected to do more *exploratory* testing.
 
 
 ### Marking an applicant
+[Table of contents](#table-of-contents)
 
 1. Marking applicants while all applicants are being shown
 
@@ -1242,6 +1284,7 @@ testers are expected to do more *exploratory* testing.
                  After `list`, locate the marked applicant in the list and the applicant should still be `Done`.
 
 ### Unmarking an applicant
+[Table of contents](#table-of-contents)
 
 1. Unmarking applicants while all applicants are being shown
 
@@ -1278,6 +1321,7 @@ testers are expected to do more *exploratory* testing.
                  After `list`, locate the unmarked applicant in the list and the applicant should still be `Not Done`.
     
 ### Deleting marked applicants
+[Table of contents](#table-of-contents)
 
 1. Deleting marked applicants while all applicants are being shown
 
@@ -1294,6 +1338,7 @@ testers are expected to do more *exploratory* testing.
        Expected: All the applicants with `Done` are deleted from the list, not just those found in the filtered list. Details of the deleted applicants shown in the result display.
   
 ### Saving data
+[Table of contents](#table-of-contents)
 
 1. Dealing with missing/corrupted data files
 
