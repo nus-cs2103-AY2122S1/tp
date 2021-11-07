@@ -173,13 +173,14 @@ The user can also use the hotkeys `CTRL-S` and `CTRL-D` to cycle between tabs.
 
 **Aspect: Determining which tab to switch to after updating the list:**
 
-* **Alternative 1 (current choice):** AniList will switch back to `all` tab after the list is updated.
-    * Pros: Allows users to view all animes after the list is updated. Easy to implement.
-    * Cons: If the user wants to remain at his previous tab, he will have to manually switch his tab back by using the list command or the tab switching hotkeys.
+* **Alternative 1 (current choice):** AniList will remain at current tab after the list is updated
+    * Pros: User will not have to input a command or use hotkeys to switch back to his previous tab. This is the more intuitive and logical solution.
+    * Cons: Harder to implement as there is a need to compound predicates to maintain a properly filtered list. Prone to more bugs.
 
-* **Alternative 2:** AniList will remain at current tab after the list is updated
-    * Pros: User will not have to input a command or use hotkeys to switch back to his previous tab.
-    * Cons: Hard to implement and test.
+* **Alternative 2:** AniList will switch back to `all` tab after the list is updated.
+    * Pros: Allows users to view all animes after the list is updated. Easy to implement.
+    * Cons: If the user wants to remain at his previous tab, he will have to manually switch his tab back by using the list command or the tab switching hotkeys. Not very intuitive.
+
 
 **Aspect: Determining whether there should be a list maintained per tab or all tabs take reference from a single list**
 * **Alternative 1 (current choice):** All the tabs will take reference to the same `ObservableList`.
@@ -196,7 +197,7 @@ for tab switching.
 
 #### Implementation
 
-The proposed clear mechanism is facilitated by 3 `Command`s, namely `ClearCommand`,
+The current clear mechanism is facilitated by 3 `Command`s, namely `ClearCommand`,
 `AbortClearCommand` and `ConfirmClearCommand`. This results in a confirmation message to be displayed
 to the user when the user executes `clear`, after which it can either be confirmed (by entering `clear` again) or
 aborted (by entering any other input).
@@ -230,21 +231,38 @@ as a confirmation message instead.
 #### Implementation
 
 The proposed find mechanism is implemented through the use of 2 `Predicate<Anime>`, one for the tab options and one for
-regular filter.
+the regular search filter. For multiple categories, the `and` method from `Predicate<Anime>` is used to create a conjunctive search. For multiple keywords within categories, a
 
-{To be added later}
+![Interactions Inside the Logic Component for the `findCommand`](images/FindSequenceDiagram.png)
 
 #### Design considerations:
 
-**Aspect: How find executes:**
+**Aspect: Executing find:**
 
-* **Alternative 1 (current choice):** Search the keywords with the prefixes `/g` and `/n`. Does not reset tab and resets after each search.
-    * Pros: Allow for search with multiple spaces in between, allow for searching within tabs.
+* **Alternative 1 (current choice):** Search the keywords with the prefixes `g/` and `n/`. Does not reset tab and resets after each search.
+    * Pros: Allows for search with multiple spaces in between, searching within tabs and a more granular search.
     * Cons: Complicated to implement.
 
-* **Alternative 2:** Search each keyword split by whitespace. Resets tab after each search.
+* **Alternative 2:** Search the keywords with the prefixes `g/` and `n/`. Does not reset tab and does
+not reset after each search.
+    * Pros: Provides all of the benefits of the current implementation and an even more granular search.
+    * Cons: Added complexity of having a command to remove previous searches or reset searches, less optimized for CLI
+    as it requires an additional command.
+
+* **Alternative 3:** Search each keyword split by whitespace. Resets tab after each search.
     * Pros: Less complicated and less coupling.
     * Cons: Does not allow for searches with specific criteria nor keywords with whitespaces in between, does not allow searching within tabs.
+
+**Aspect: Handling search terms:**
+
+* **Alternative 1 (current choice):** Parses it into a valid object before searching.
+    * Pros: Ensures that the search term is a valid term for the particular category before searching.
+    * Cons: Less efficient search as an additional parsing is required.
+
+* **Alternative 2:** Handles it as a string without parsing.
+    * Pros: More efficient search as no additional parsing is not required.
+    * Cons: Allows for invalid search terms, which are somewhat problematic for `genres` as it has
+    a fixed list of terms.
 
 ### Themes Feature
 
@@ -264,7 +282,7 @@ the background image.
 * Cons: There is a limited choice of color blocking. The bulk of the theming is made from a specified color shading.
 
 
-### [/Proposed] Theme adding feature
+### [Proposed] Theme adding feature
 #### Current Implementation
 
 Currently, users are allowed to switch between pre-defined and pre-made themes that are provided by the application. However, we 
@@ -298,7 +316,7 @@ Given below is an MSS of an example usage scenario of a user creating their own 
 
 
 
-### [/Proposed] Genre adding feature
+### [Proposed] Genre adding feature
 
 #### Current Implementation
 
@@ -308,10 +326,6 @@ The user can only add or delete a `Genre` from an `Anime` if the `Genre` is in t
 
 * Pros: Easy to implement, and easy to manage as we don't have to worry about syncing the `Genres` in multiple lists
 * Cons: Inconvenient for the user, as user can only use a `Genre` if it is in the `GenreList`.
-
-The Sequence Diagram below illustrates the interactions within the Logic component for the execute("genre 1 c/add g/action g/fantasy") API call.
-
-![Interactions Inside the Logic Component for the `genre 1 c/add g/action g/fantasy` Command](images/AddGenreSequenceDiagram.png)
 
 #### Proposed Implementation
 
@@ -801,38 +815,50 @@ testers are expected to do more *exploratory* testing.
 
     1. Download the jar file and copy into an empty folder
 
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    2. Double-click the jar file Expected: Shows the GUI with a set of sample animes. The window size may not be optimum.
 
 2. Saving window preferences
 
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-    1. Re-launch the app by double-clicking the jar file.<br>
+    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
+       
 
-3. _{ more test cases …​ }_
-
-### Deleting an anime
+### Basic functionality
 
 1. Deleting an anime while all animes are being shown
 
-    1. Prerequisites: List all animes using the `list` command. Multiple animes in the list.
+    1. List all animes using the `list` command. Multiple animes in the list.
 
-    1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    2. Test case 1: `delete 1`<br>
+       Expected: First anime is deleted from the list. Details of the deleted anime shown in the status message. Timestamp in the status bar is updated.
 
-    1. Test case: `delete 0`<br>
+    3. Test case 2: `delete 0`<br>
        Expected: No anime is deleted. Error details shown in the status message. Status bar remains the same.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+    4. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size), `delete n/attack on titan`<br>
        Expected: Similar to previous.
+        
+2. Deleting an anime while not all animes are being shown
 
-1. _{ more test cases …​ }_
+   1. Use `list s/watching` to list out only the animes with a `watching` status
+
+   2. Use `delete 1` to delete the first anime<br>
+      Expected: First anime is deleted from the list. Details of the deleted anime shown in the status message. Timestamp in the status bar is updated.
+      
+   3. Use `list` to list out all animes, make sure that the deleted anime is not shown here
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-2. _{ more test cases …​ }_
+    1. Close all Anilist windows
+       
+    2. Open data/anilist.json
+       
+    3. Remove the first opening brace `{`
+       
+    4. Open Anilist again
+       
+    5. Now that the data file is corrupted, the app should start out without any anime in the list

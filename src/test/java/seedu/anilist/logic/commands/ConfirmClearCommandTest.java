@@ -15,6 +15,8 @@ import seedu.anilist.model.ModelManager;
 import seedu.anilist.model.UserPrefs;
 import seedu.anilist.model.anime.Anime;
 import seedu.anilist.model.anime.NameContainsKeywordsPredicate;
+import seedu.anilist.model.anime.Status;
+import seedu.anilist.model.anime.StatusEqualsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code ConfirmClearCommand}.
@@ -47,6 +49,29 @@ public class ConfirmClearCommandTest {
     public void execute_nonEmptyUnfilteredAnimeList_success() {
         Model model = new ModelManager(getTypicalAnimeList(), new UserPrefs());
         Model expectedModel = new ModelManager();
+
+        assertCommandSuccess(new ConfirmClearCommand(), model, ConfirmClearCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void execute_nonEmptyFilteredByStatusAnimeList_success() {
+        //Constructs a model containing TypicalAnimes and a filtered list containing
+        //the animes of status 'watching'
+        Status watchingStatus = new Status("watching");
+        StatusEqualsPredicate predicate =
+                new StatusEqualsPredicate(watchingStatus);
+        Model model = new ModelManager(getTypicalAnimeList(), new UserPrefs());
+        model.updateFilteredAnimeList(predicate);
+
+        //Constructs the expected model containing TypicalAnimes\animes matching 'watching'
+        //status and a filtered list containing no anime
+        Model expectedModel = new ModelManager();
+        for (Anime anime: getTypicalAnime()) {
+            if (!predicate.test(anime)) {
+                expectedModel.addAnime(anime);
+            }
+        }
+        expectedModel.updateFilteredAnimeList(predicateShowNoAnime);
 
         assertCommandSuccess(new ConfirmClearCommand(), model, ConfirmClearCommand.MESSAGE_SUCCESS, expectedModel);
     }

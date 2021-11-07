@@ -6,7 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_ACTION;
 import static seedu.anilist.testutil.Assert.assertThrows;
 import static seedu.anilist.testutil.TypicalAnimes.AOT;
+import static seedu.anilist.testutil.TypicalAnimes.getTypicalAnime;
 import static seedu.anilist.testutil.TypicalAnimes.getTypicalAnimeList;
+import static seedu.anilist.testutil.TypicalAnimes.getTypicalAnimeStats;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -89,6 +91,14 @@ public class AnimeListTest {
     }
 
     @Test
+    public void removeAnime_nonEmptyAnimeList_returnsTrue() {
+        animeList.addAnime(AOT);
+        animeList.removeAnime(AOT);
+        AnimeList expectedAnimeList = new AnimeList();
+        assertEquals(expectedAnimeList, animeList);
+    }
+
+    @Test
     public void fetchStats_emptyAnimeList_returnsTrue() {
         HashMap<Genre, Integer> expectedGenreCountHashmap = new HashMap<>();
         Stats expectedStats = new Stats(0, 0, 0, expectedGenreCountHashmap);
@@ -107,6 +117,23 @@ public class AnimeListTest {
         assertEquals(expectedStats, animeList.fetchUserStats());
     }
 
+    @Test
+    public void fetchStats_multipleAnimesInAnimeList_returnsTrue() {
+        animeList.setAnimeList(getTypicalAnime());
+        Stats expectedStats = getTypicalAnimeStats();
+        assertEquals(expectedStats, animeList.fetchUserStats());
+    }
+
+    @Test
+    public void equals() {
+        assertTrue(animeList.equals(new AnimeList()));
+
+        animeList.setAnimeList(getTypicalAnime());
+        AnimeList expectedAnimeList = new AnimeList();
+        expectedAnimeList.setAnimeList(getTypicalAnime());
+
+        assertTrue(animeList.equals(expectedAnimeList));
+    }
     /**
      * A stub ReadOnlyAnimeList whose animes list can violate interface constraints.
      */

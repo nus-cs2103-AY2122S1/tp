@@ -16,6 +16,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import seedu.anilist.commons.core.GuiSettings;
 import seedu.anilist.commons.core.Messages;
 import seedu.anilist.logic.commands.AddCommand;
 import seedu.anilist.logic.commands.CommandResult;
@@ -82,6 +83,7 @@ public class LogicManagerTest {
         Model modelWithAnime = new ModelManager(getTypicalAnimeList(), new UserPrefs());
         logic = new LogicManager(modelWithAnime, storage);
 
+        //command 'clear' entered twice
         String cmd = "clear";
         logic.execute(cmd);
         CommandResult finalResult = logic.execute(cmd);
@@ -109,8 +111,32 @@ public class LogicManagerTest {
     }
 
     @Test
+    public void getAnimeList_nonNull_getsNonNullAnimeList() {
+        assertNotNull(logic.getAnimeList());
+    }
+
+    @Test
     public void getFilteredAnimeList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredAnimeList().remove(0));
+    }
+
+    @Test
+    public void getAnimeListFilePath_nonNull_getsNonNullFilePath() {
+        assertNotNull(logic.getAnimeListFilePath());
+    }
+
+    @Test
+    public void getGuiSettings_nonNull_getsGuiSettings() {
+        assertNotNull(logic.getGuiSettings());
+    }
+
+    @Test
+    public void setGuiSettings_newSettings_setsGuiSettings() {
+        int windowWidth = 400;
+        int windowHeight = 500;
+        GuiSettings guiSettings = new GuiSettings(windowWidth, windowHeight, 0, 0);
+        logic.setGuiSettings(guiSettings);
+        assertEquals(guiSettings, logic.getGuiSettings());
     }
 
     @Test
@@ -122,6 +148,23 @@ public class LogicManagerTest {
     @Test
     public void getCurrentTab_nonNull_getsNonNullTab() {
         assertNotNull(logic.getCurrentTab());
+    }
+
+    @Test
+    public void getStats_nonNull_getsNonNullStats() {
+        assertNotNull(logic.getStats());
+    }
+
+    @Test
+    public void setThemeCss_darkTheme_setsThemeCss() {
+        String themeCss = "DarkTheme.css";
+        logic.setThemeCss(themeCss);
+        assertEquals(themeCss, logic.getThemeCss());
+    }
+
+    @Test
+    public void getThemeCss_nonNull_getNonNullCss() {
+        assertNotNull(logic.getThemeCss());
     }
 
     /**

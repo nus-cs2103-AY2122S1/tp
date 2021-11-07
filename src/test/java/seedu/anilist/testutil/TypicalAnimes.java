@@ -7,16 +7,21 @@ import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_BNHA;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 import seedu.anilist.model.AnimeList;
 import seedu.anilist.model.anime.Anime;
+import seedu.anilist.model.genre.Genre;
+import seedu.anilist.model.stats.Stats;
 
 /**
  * A utility class containing a list of {@code Anime} objects to be used in tests.
  */
 public class TypicalAnimes {
     public static final String FIRST_ANIME_GENRE = "fantasy";
+    public static final String SECOND_ANIME_GENRE = "action";
+
     public static final Anime AOT = new AnimeBuilder()
             .withName("Attack on Titan: The Final Season")
             .withEpisode("2")
@@ -26,7 +31,7 @@ public class TypicalAnimes {
             .withName("Black Rock Shooter")
             .withEpisode("12")
             .withStatus("F")
-            .withGenres("fantasy", "action")
+            .withGenres(FIRST_ANIME_GENRE, SECOND_ANIME_GENRE)
             .build();
     public static final Anime CSM = new AnimeBuilder()
             .withName("Chainsaw Man")
@@ -35,7 +40,7 @@ public class TypicalAnimes {
     public static final Anime DBZ = new AnimeBuilder()
             .withName("Dragon Ball Z")
             .withStatus("T")
-            .withGenres("action")
+            .withGenres(SECOND_ANIME_GENRE)
             .build();
     public static final Anime ELF = new AnimeBuilder()
             .withName("Elfen Lied")
@@ -61,7 +66,19 @@ public class TypicalAnimes {
     public static final Anime BNHA = new AnimeBuilder().withName(VALID_NAME_BNHA)
             .withGenres(VALID_GENRE_ACTION, VALID_GENRE_SCIENCE_FICTION_UPPER_CASE).build();
 
-    private TypicalAnimes() {} // prevents instantiation
+    public static final String KEYWORD_MATCHING_HUNTER = "Hunter"; // A keyword that matches HUNTER
+
+    private static int watchingCount = 2;
+    private static int toWatchCount = 3;
+    private static int finishedCount = 2;
+    private static HashMap<Genre, Integer> userGenres = new HashMap<>() {{
+            put(new Genre(FIRST_ANIME_GENRE), 2);
+            put(new Genre(SECOND_ANIME_GENRE), 2);
+        }};
+
+    private TypicalAnimes() {
+        // prevents instantiation
+    }
 
     /**
      * Returns an {@code AnimeList} with all the typical anime.
@@ -76,5 +93,9 @@ public class TypicalAnimes {
 
     public static List<Anime> getTypicalAnime() {
         return new ArrayList<>(Arrays.asList(AOT, BRS, CSM, DBZ, ELF, FSN, GS));
+    }
+
+    public static Stats getTypicalAnimeStats() {
+        return new Stats(watchingCount, toWatchCount, finishedCount, userGenres);
     }
 }
