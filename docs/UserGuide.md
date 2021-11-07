@@ -451,10 +451,9 @@ Tells TutorAid that a student attends a particular lesson.
 
 Format: `add -sl s/STUDENT_INDEX... l/LESSON_INDEX...`
 
-* Adds the student at the specified student index to the lesson at the specified lesson index.
+* Adds the students at the specified student indexes to the lessons at the specified lesson indexes.
 * The index refers to the index number shown in the displayed student list and lesson list.
 * The index must be a **positive integer** 1, 2, 3, ...
-* Multiple indexes are allowed for both students and lessons if you would like to add multiple students to multiple lessons at one go.
 
 Examples:
 * `add -sl s/1 2 3 l/2` adds the students with indexes 1, 2 and 3 into the lesson with index 2.
@@ -467,7 +466,7 @@ Tells TutorAid that a student no longer attends a particular lesson.
 
 Format: `del -sl s/STUDENT_INDEX... l/LESSON_INDEX...`
 
-* Deletes the student at the specified student index from the lesson at the specified lesson index.
+* Deletes the students at the specified student indexes from the lessons at the specified lesson indexes.
 * The index refers to the index number shown in the displayed student list and lesson list.
 * The index must be a **positive integer** 1, 2, 3, ...
 * Multiple indexes are allowed for both students and lessons if you would like to remove multiple students from multiple lessons at one go.
