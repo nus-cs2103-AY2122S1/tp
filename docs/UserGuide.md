@@ -558,6 +558,8 @@ You can find the PATIENT_INDEX or DOCTOR_INDEX by toggling to the patient/doctor
 Examples:
 * `appt -e 1 p/2 r/Blood test` edits the patient and remark of the 1st appointment to be the **second patient** in the patient list and **Blood test** respectively.
 
+<div style="page-break-after: always;"></div>
+
 ### Filtering all appointments: `appt -f` <a name="find-appointments"/>
 Searches and lists all appointments in the appointment records that match the given filter conditions.
 
