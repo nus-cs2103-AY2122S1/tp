@@ -204,7 +204,7 @@ Format: `edit INDEX [n/NAME] [e/EMAIL] [m/MODULE_CODE LESSON_CODE(S)] [p/PHONE] 
 * If you provide multiple module codes that are the same, only the first one would be considered
 
 <div markdown="span" class="alert alert-primary">:information_source: **Note:**
-To remove an existing phone number/telegram handle/remark from a contact, simply input `p/``h/``r/` respectively.
+To remove an existing phone number/telegram handle/remark from a contact, simply input `p/`,`h/`,`r/` respectively.
 </div>
 
 Examples:
