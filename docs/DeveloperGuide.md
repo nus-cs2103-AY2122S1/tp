@@ -823,7 +823,7 @@ Use case ends.
 
 **UC03 - Delete a Contact**
 
-***Preconditions: User has <u>listed all contacts UC02 etc.</u>***
+***Preconditions: User has <u>listed all contacts UC04 etc.</u>***
 
 **MSS**
 
@@ -974,7 +974,7 @@ Use case ends.
 
 **UC09 - View a Contact**
 
-***Preconditions: User has <u>listed all contacts UC02 etc.</u>***
+***Preconditions: User has <u>listed all contacts UC04 etc.</u>***
 
 **MSS**
 
@@ -1060,7 +1060,7 @@ Use case ends.
 
 **UC13 - Export a Contact by Index**
 
-***Preconditions: User has <u>listed all contacts UC02</u>.***
+***Preconditions: User has <u>listed all contacts UC04</u>.***
 
 **MSS**
 
