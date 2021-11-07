@@ -413,13 +413,13 @@ User may exit the stats window by either clicking on the `X` button on the top r
 
 Format: `stats`
 
-Stats Window           | 
+Stats Window           |
 :-------------------------:|
-![](images/UG-images/stats2.png)  | 
+![](images/UG-images/stats2.png)  |
 
-Main Window when the Stats Window is on display |  
+Main Window when the Stats Window is on display |
 :-------------------------:|
-![](images/UG-images/stats1.JPG)  |  
+![](images/UG-images/stats1.JPG)  |
 1. A success message showing that the user statistics have been displayed is shown on the Command Results Panel.
 2. The [command input box](#gui-breakdown) is disabled.
 ___

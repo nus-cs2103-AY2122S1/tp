@@ -296,7 +296,7 @@ The proposed Stats feature is facilitated mainly by the following classes:
     * Cons: Hard to implement and test. In addition, we do not expect users to use the `stats` command as much as
       commands which alters the anime list. This may mean an excessive amount of computation for updating the user
       statistics in the background when the `Stats` window is not up.
-      
+
 ### Themes Feature
 
 #### Implementation
@@ -856,7 +856,6 @@ testers are expected to do more *exploratory* testing.
 
     2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
-       
 
 ### Basic functionality
 
@@ -872,27 +871,27 @@ testers are expected to do more *exploratory* testing.
 
     4. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size), `delete n/attack on titan`<br>
        Expected: Similar to previous.
-        
+ 
 2. Deleting an anime while not all animes are being shown
 
    1. Use `list s/watching` to list out only the animes with a `watching` status
 
    2. Use `delete 1` to delete the first anime<br>
       Expected: First anime is deleted from the list. Details of the deleted anime shown in the status message. Timestamp in the status bar is updated.
-      
+
    3. Use `list` to list out all animes, make sure that the deleted anime is not shown here
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
     1. Close all Anilist windows
-       
+
     2. Open data/anilist.json
-       
+
     3. Remove the first opening brace `{`
-       
+
     4. Open Anilist again
-       
+
     5. Now that the data file is corrupted, the app should start out without any anime in the list
 
 ### Clearing all data
