@@ -69,9 +69,9 @@ When reading our User Guide, here are some important information to take note of
 
 **Icon** | **Meaning of icons**
 :---: | :---
-<img src="images/info_icon.png" width="50"/> | Notes are specific conditions or behaviours of a feature.
-<img src="images/tip_icon.png" width="50"/> | tips are suggestions that can help LeadsForce run faster.
-<img src="images/warn_icon.png" width="50"/> | warnings are important information to take note of when using LeadsForce. When these warnings are not followed, this can result in LeadsForce crashing or have corrupted data files.
+<img src="images/info_icon.png" width="50"/> | Notes: specific conditions or behaviours of a feature.
+<img src="images/tip_icon.png" width="50"/> | Tips: suggestions that can help LeadsForce run faster.
+<img src="images/warn_icon.png" width="50"/> | Warnings: important information to take note of when using LeadsForce. When these warnings are not followed, this can result in LeadsForce crashing or have corrupted data files.
 
 ## 2. Quick start
 
@@ -110,7 +110,7 @@ attribute prefixes specified here will be used in the commands of several [featu
 
 Attribute | Prefix | Value
 -----------------|-----------------|-----------------
-Client ID (**Unique**) | i/ | `CLIENT_ID`: A non-negative integer `e.g. 0, 1, 2, 3, …​`
+ID (**Unique**) | i/ | `CLIENT_ID`: A non-negative integer `e.g. 0, 1, 2, 3, …​`
 Name | n/ | `NAME`: Name should only contains alphanumeric characters and spaces, and it should not be blank (Character limit: 30) `e.g. John Doe`
 Email | e/ | `EMAIL`: Email should be of the format `local-part@domain` `e.g. johnd@example.com`
 Address | a/ | `ADDRESS`: Address can take any values, and it can be blank (Character limit: 100) `e.g. John street, block 123, #01-01`
@@ -225,11 +225,13 @@ used in the management of client information and client meetings.
 
 * In the format for the commands provided, words which are in `UPPERCASE` refers to the `input` that the user must key
   in
-* Inputs in square brackets are optional input:<br>
-  e.g. `KEYWORD [OTHER_KEYWORD]` can be in the form of `firstName` or `firstName lastName`
-* Inputs with `...` at the end refers to commands that can accept multiple attribute inputs
-  <br>
-  e.g. `[<attribute>/VALUE]...` can be in the form of `e/ex@gmail.com` or `e/ex@gmail.com r/5`
+* Items in square brackets are optional.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+* Items with `...` after them can be used multiple times including zero times.
+e.g. `[t/TAG]...` can be used as ` `(i.e. 0 times), `t/friend`, `t/friend t/family`, etc.
+* Items with `...*` after them can be used multiple times excluding zero times. (i.e. at least one time)
+e.g. `edit CLIENT_ID...*` can be used as `edit 1`, `edit 1 2`, `edit 1 2 3`, etc.
+* `<attribute>` refers to an arbitrary attribute prefix. (i.e. any attribute can be substituted unless otherwise stated) For a comprehensive list of client's attributes available, please refer to this [section](#3-client-information). 
 
 </div>
 
@@ -240,7 +242,7 @@ Adds a new client to the address book.
 | Format | `add n/CLIENT_NAME e/EMAIL [<attribute>/VALUE]...`|
 | :---: | --- |
 | **Example** | • `add n/Benedict Chua e/benchua@hotmail.com` <br> • `add n/Keith e/keithtan@ymail.com p/12345678 d/10000 r/4`|
-| <img src="images/info_icon.png" width="50"/> | • A client must have minimally the name and email prefix filled during creation <br> • Any other prefixes are optional, except for Client ID as client ID cannot be given to the client.  <br> • Prefixes that can be added are as seen in the client information in the Client Info Section |
+| <img src="images/info_icon.png" width="50"/> | • A client must have minimally the name and email prefix filled during creation <br> • Any other prefixes are optional, except for Client ID as Client ID cannot be given to the client.  <br> • Prefixes that can be added are as seen in the client information in the Client Info Section |
 
 ### 5.2 Retrieve Particular Contact : `view`
 
@@ -251,7 +253,7 @@ View client's information in detail.
 | **Example** | • `view 1` would be used to view client 1's information|
 
 **Expected Outcome:** <br>
-For instance, if `Alex Yeoh` is the client with client ID 1, the following will be shown in the client info view of
+For instance, if `Alex Yeoh` is the client with Client ID 1, the following will be shown in the client info view of
 LeadsForce. <br>
 
 <p align="center">
