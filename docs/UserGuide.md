@@ -179,7 +179,7 @@ Prefixes for editable attributes:
 
 Examples:
 * `edit p/123321432 e/changedemail@example.com`
-* `edit github/alex_tan`  
+* `edit github/alexatan`  
     <br>
   <br>
 ![result for 'edit p/99881234'](images/screenshots/editProfile.png)
