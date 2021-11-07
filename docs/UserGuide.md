@@ -42,7 +42,7 @@ contHACKS is a **desktop app to help Teaching Assistants (TAs) in managing conta
 <div style="page-break-after: always;"></div>
 ## Quick start <a name="quick-start"></a>
 
-1. Ensure you have Java `11` or above installed in your computer
+1. Ensure you have Java `11` or above installed on your computer
 
 2. Download the latest `contHACKS.jar` from [here](https://github.com/AY2122S1-CS2103T-T09-2/tp/releases)
 
@@ -73,7 +73,7 @@ Here are some of the things you will need to know before you get started!
 
 ### Key terms <a name="key-terms"></a>
 
-These are the key terms defined for usage of the commands:
+These are the key terms defined for the usage of the commands:
 
 - **Module Code**: Refers to the module code of a NUS module <br> e.g. CS2103, GEQ1000, ST2334
 
@@ -109,7 +109,7 @@ Notes about the command format:<br>
   e.g. `add`,`Add` and `ADD` can all be used to perform the same command
 
 * Words in `UPPER_CASE` are the parameters to be supplied by you<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`
+  e.g. in `add n/NAME`, `NAME` is a parameter that can be used as `add n/John Doe`
 
 * Items in square brackets are optional<br>
   e.g `n/NAME [h/TELEGRAM_HANDLE]` can be used as `n/John Doe h/@johndoe` or as `n/John Doe`
@@ -129,11 +129,20 @@ Some example commands you can try:
 
    * `add n/Ben p/91234567 e/ben123@gmail.com m/CS2103T` : Adds a contact named `Ben`
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list
+   * `addc m/CS2103T G09 d/4 t/09:00 10:00` Adds a class with CS2103T module code and G09 lesson code, that falls on a Thursday from 9am - 10am
+
+   * `delete 3` : Deletes the 3rd contact shown in the current contact list
+
+   * `deletec 2` : Deletes the 2nd lesson shown in the current lesson list
 
    * `clear` : Deletes all contacts
 
    * `exit` : Exits the app
+
+Some additional notes: 
+   * The contact list panel and the lesson list panel are **independent of each other**. This means that adding a contact with module and lesson code `CS2103T G09` will not create that lesson in the lesson panel list. 
+   * Contacts and lessons are sorted alphabetically after every command by name and module code name respectively.  
+
 
 <div style="page-break-after: always;"></div>
 ## Features <a name="features"></a>
@@ -226,7 +235,7 @@ Format: `delete INDEX`/ `delete INDEX_START-INDEX_END`
 Format: `delete m/MODULE_CODE`/`delete m/MODULE_CODE LESSON_CODE`
 
 * Delete all contacts associated with a module code using `m/MODULE_CODE`.
-* Delete all contact associated with a lesson code under the module using `m/MODULE_CODE LESSON_CODE`.
+* Delete all contacts associated with a lesson code under the module using `m/MODULE_CODE LESSON_CODE`.
 
 Examples:
 * `delete 2`: Deletes the 2nd contact in the displayed list.
@@ -257,7 +266,7 @@ e.g. `find m/CS2030S CS2040S` will only return contacts that have both `CS2030S`
 </div>
 
 Examples:
-* `find n/Ben`: Search contacts with name containing `Ben`
+* `find n/Ben`: Search contacts for names containing `Ben`
 * `find n/Ben Bernice Mary`: Search contacts with names containing either `Ben`, `Bernice` or `Mary`
 * `find m/CS2103T CS2100`: Search contacts with the inputted module code
 
@@ -388,8 +397,8 @@ e.g. `findc t/10:00 15:00` will return lessons that start at either timings `10:
 
 Examples:
 * `findc m/CS2030 CS2040`: Search lessons of modules `CS2030` or `CS2040`
-* `findc d/2`: Search lessons that falls on Tuesdays
-* `findc t/14:00`: Search lessons that starts at `14:00`
+* `findc d/2`: Search lessons that fall on Tuesdays
+* `findc t/14:00`: Search lessons that start at `14:00`
 
 Command alias: `fc`
 
@@ -437,7 +446,7 @@ Advanced users are welcome to update data directly by editing that data file.
 </div>
 
 <div markdown="span" class="alert alert-warning">:warning: **Warning:**
-If your changes to the data file makes its format invalid, contHACKS will discard all data and start with an empty data file on the next start up.
+If your changes to the data file make its format invalid, contHACKS will discard all data and start with an empty data file on the next start up.
 </div>
 
 <div style="page-break-after: always;"></div>
