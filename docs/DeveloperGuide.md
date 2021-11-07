@@ -76,7 +76,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ContactListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103-F10-4/tp/blob/2d1b8809aa8b78086507f8e2a5d48bc05a385e01/src/main/java/seedu/siasa/MainApp.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103-F10-4/tp/blob/2d1b8809aa8b78086507f8e2a5d48bc05a385e01/src/main/resources/view/MainWindow.fxml)
 
@@ -84,8 +84,9 @@ The `UI` component,
 
 -   executes user commands using the `Logic` component.
 -   listens for changes to `Model` data so that the UI can be updated with the modified data.
+-   depends on some classes in the `Model` component, as it displays `Contact` and `Policy` object residing in the `Model`.
 -   keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
--   depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+-   is referenced by the `Logic` component, because the `Warning` class in `Logic` relies on `MainWindow` for the user input in the dialog box. 
 
 ### Logic component
 
@@ -119,14 +120,18 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103-F10-4/tp/blob/2d1b8809aa8b78086507f8e2a5d48bc05a385e01/src/main/java/seedu/siasa/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+![Model Component Class Diagram](images/ModelClassDiagram.png)
 
 The `Model` component,
 
--   stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
--   stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Contact>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
--   stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
--   does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+- stores the SIASA data i.e., all `Contact` and `Policy` objects (which are contained in a `UniqueContactList` and
+  `UniquePolicyList `object respectively).
+- stores the currently 'selected' `Contact` and `Policy` objects (e.g., results of a search query) in a separate filtered_list each
+  which is exposed to outsiders as an unmodifiable `ObservableList<Contact>` that can be 'observed'
+  e.g. the UI can be bound to this list so that the UI automatically updates when the data in the lists change.
+- stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+- does not depend on any of the other three components
+  (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 ### Storage component
 
@@ -136,7 +141,7 @@ The `Model` component,
 
 The `Storage` component,
 
--   can save both SIASA data and user preference data in json format, and read them back into corresponding objects.
+-   can save both SIASA data (contacts and policies) and user preference data in json format, and read them back into corresponding objects.
 -   inherits from both `SiasaStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 -   depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
@@ -149,6 +154,91 @@ Classes used by multiple components are in the `seedu.siasa.commons` package.
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Creating Policies
+
+This section explains the process of adding a `Policy` to the `Policy` list that belongs to an owner which is a `Contact`.
+This is similar to how a `Contact` is created as well with some highlighted differences.
+
+The `AddPolicyCommand` will create a new `Policy` with the specified details and add it to the application. This command requires
+the `Policy`'s details and the `Contact`'s `Index` to specify which `Contact` the policy belongs to.
+
+The `AddPolicyCommand` implements the `AddPolicyCommand#execute` method, which obtains the `Contact` object, the owner,
+from the `Model` using the `Index`, creates the policy with the details and the owner, checks for similar policies and
+if none, updates the `Model`'s `Policy` list.
+
+The sequence diagram below illustrates how the `AddPolicyCommand` is executed.
+![](images/AddPolicyParserSequenceDiagram.png)
+
+**Step 1.** The user enters the command `addpolicy n/critical illness p/30000 4 120 c/10 30 cl/2`
+
+**Step 2.** User input is passed to `SiasaParser` which creates and calls `AddPolicyCommandParser#parse` with the arguments.
+This creates a new AddPolicyCommand by passing in the `Policy`'s details and owner `Contact`'s `Index`.
+
+![](images/AddPolicyCommandExecuteSequenceDiagram.png)
+
+**Step 3.** The `AddPolicyCommand` is executed by `LogicManager` by calling the `execute` method.
+
+**Step 4.** As the model is passed into the `execute` method, the list of `Contact`s save in the model can be obtained
+by calling `Model#getFilteredContactList`. The owner `Contact` is obtained from the list using the `Index`.
+
+**Step 5.** The policy to be added is created by passing in the details and the owner `Contact`.
+
+**Step 6.** The policy is added to the model by calling `Model#addPolicy`.
+
+#### Notable differences with creating contact
+1. The Contact to be added is created within `AddContactCommandParser#parse` and not in `AddContactCommand#execute`.
+2. No Contact details are passed into `AddContactCommand`
+
+
+#### Design considerations:
+#### How to create the `Policy` to be added.
+* **Alternative 1 (chosen)**: `Policy` details and Contact Index are passed into `AddPolicyCommand`, when executed, owner
+  `Contact` is obtained from the `Model` and `Policy` to be added is created.
+    * Advantage over alt. 2:
+        * Less coupling since the parser does not need a reference to `Model`.
+        * Cleaner implementation of `SiasaParser#parse` since all `CommandParser`s do not need a reference to `Model`.
+* **Alternative 2**: `Model` reference is passed into `AddPolicyCommandParser#parse`, `Contact` is obtained from the `Model`
+  and `Policy` to be added is created within parse and the created `Policy` is passed into AddPolicyCommand.
+    * Advantage over alt. 1:
+        * Greater abstraction since `Policy` components are not revealed and stored within the `AddPolicyCommand`
+        * Consistent with the implementation of `AddContactCommand`.
+
+### Editing Contact
+`EditContactCommand` requires an `EditContactDescriptor` which encapsulates the intended changes to the `Contact` and
+the `Index` of the `Contact` to be edited.
+
+Due to the immutable nature of both `Contact` and `Policy`, editing a `Contact`'s details would require creating a new `Contact`
+object. In addition, as `Policy` has an owner field, all `Policies` that belong to the edited `Contact` need to be edited and a
+new `Policy` object would need to be created for each of them with the edited new `Contact` object as the owner.
+
+The sequence diagram below illustrates how the `EditContactCommand` is executed.
+![](images/EditContactCommandExecuteSequenceDiagram.png)
+
+**Step 1**: `EditContactCommand#execute` is called which gets the `contactToEdit` from the `Model` using the `Index` provided, 
+similar to the process in `AddPolicyCommand`.
+
+**Step 2**: Using the `EditContactDescriptor` object and the `contactToEdit`, a new `editedContact` is created by calling 
+`EditContactCommand#createEditedContact`.
+
+**Step 3**: Policies belonging to the `contactToEdit` is obtained from the `Model`.
+
+**Step 4**: For each of the policies, a new `Policy` object is created with identical fields but with `editedContact` as the owner and 
+the `Model` is updated with these new policies.
+
+**Step 5** The `contactToEdit` is replaced by the `editedContact` by calling `Model#setContact`.
+#### Design considerations:
+#### Immutability of Contact and Policy
+* **Alternative 1 (chosen)**: Both `Contact` and `Policy` are immutable. Therefore, any edit to `Policy` or `Contact` requires new objects
+  to be created.
+    * Advantage over 2:
+        * With the invariant that an object will not be changed once created, it is easier to design,
+          implement and use the application as code complexity increases.
+        * Thread safety
+* **Alternative 2**: Both `Contact` and `Policy` are mutable. Any changes to `Policy` or `Contact` can be done simply by modifying the fields.
+    * Advantage over 1:
+        * Less objects need to be created, arguably better performance as number of entries increase.
+* **Reason for choice**: Despite performance concerns, application meets performance requirements and expectations from testing.
 
 ### Sorting and Filtering
 
@@ -193,91 +283,70 @@ Given below is an example usage scenario and how the mechanism behaves at each s
 - `contactpolicy` applies a `PolicyIsOwnedBy` predicate that takes in a `Contact`. It will return `true` if the `owner` field of the `Policy` is equals to the `Contact` taken in.
 - `expiringpolicy` applies a predicate that returns true if the `ExpiryDate` of a `Policy` is within the next month.
 
-### \[Proposed\] Undo/redo feature
+### Download Command
 
-#### Proposed Implementation
+This section explains the mechanism behind ```DownloadCommand``` used to download a TXT file containing useful statistics. These include:
+- total commission
+- commission earned per contact
+- number of policies per contact,
+- the average number of policies per contact
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The command requires no parameters. ```DownloadCommand``` implements ```DownloadCommand#execute```, that calls
+the relevant methods in ```Model``` to obtain the various statistics. The method ```DownloadCommand#stringListBuilderForTxt```
+is then invoked, to convert the statistics information as a list of strings. The list of strings is then written to
+the file via ```DownloadCommand#writeToTxt```.
 
--   `VersionedAddressBook#commit()` — Saves the current address book state in its history.
--   `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
--   `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+This is the sequence diagram of the interactions between ```Logic``` and ```Model``` component for the command.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+![DownloadSequenceDiagram](images/DownloadSequenceDiagram.png)
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+### Warning
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+This section explains the use of ```Warning```, a class which encapsulates a warning that a ```Command``` can give. Specifically,
+it displays a warning dialog to the user, and returns the user's decision to proceed as a boolean value. The ```Command``` triggering
+the ```Warning```  can then decide what to do with the user's decision.
 
-![UndoRedoState0](images/UndoRedoState0.png)
+```Warning``` has a static method ```Warning#isUserConfirmingCommand``` that requires a description of the warning as a
+String, and returns the decision of the user's decision. When ```Warning#isUserConfirmingCommand``` is invoked, it calls
+```MainWindow#showWarning```, that will create a new ```WarningWindow``` to display. ```WarningWindow``` has the
+command ```WarningWindow#isUserConfirmingCommand``` that will return the user's decision.
 
-Step 2. The user executes `delete 5` command to delete the 5th contact in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+This is the sequence diagram of how a ```Command ``` might call a ```Warning```, and the interactions between the ```Logic```
+and ```UI``` components.
 
-![UndoRedoState1](images/UndoRedoState1.png)
+![WarningSequenceDiagram](images/WarningSequenceDiagram.png)
 
-Step 3. The user executes `add n/David …​` to add a new contact. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+The activity diagram below summarizes how a ```Warning``` should be used within execution of a ```Command```.
 
-![UndoRedoState2](images/UndoRedoState2.png)
+![WarningActivityDiagram](images/WarningActivityDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+#### Design Considerations
 
-</div>
+Typically, displaying the UI involves executing the command text in ```MainWindow#executeCommand``` and then interpreting the
+```CommandResult``` to decide what UI changes to make.
 
-Step 4. The user now decides that adding the contact was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+However for the implementation of ```Warning```, the user input in ```UI``` component has to be sent back to the ```Logic```
+component, so that the ```Command``` can decide whether to execute or abort. Displaying ```Warning``` in ```MainWindow#executeCommand```
+will then be too late.
 
-![UndoRedoState3](images/UndoRedoState3.png)
+##### Aspect: How to obtain User Response from a UI WarningWindow Component
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+**Alternative 1 (current choice):** create a static method ```MainWindow#showWarning``` to handle ```WarningWindow```
+operations.
+- Pros:
+    - Maintains the UI structure of ```MainWindow``` controlling all the smaller UI parts.
+- Cons:
+    - A more complex implementation to control ```WanringWindow```
+**Alternative 2:** Have the ```Command``` call a method in ```WarningWindow``` directly.
+- Pros:
+    - A more straightforward implementation.
+- Cons:
+    - Violates the structure of ```MainWindow``` being the controller of other UI parts.
 
-</div>
 
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
--   **Alternative 1 (current choice):** Saves the entire address book.
-
-    -   Pros: Easy to implement.
-    -   Cons: May have performance issues in terms of memory usage.
-
--   **Alternative 2:** Individual command knows how to undo/redo by
-    itself.
-    -   Pros: Will use less memory (e.g. for `delete`, just save the contact being deleted).
-    -   Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
+Therefore, we decided on a static ```MainWindow#showWarning``` to allow for a return value that can be used by methods
+in ```Logic``` component. While it may have been simpler for ```Logic``` to interact directly with ```WarningWindow```,
+it breaks the structure of ```MainWindow``` being the main UI components to manage smaller components.
 ---
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -358,8 +427,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 (For all use cases below, the **System** is the `SIASA` and the **Actor** is the `user`, unless specified otherwise)
 
 #### **UC1: Displaying Help**
-<details>
-  <summary>Click to expand!</summary>
 
 **MSS**
 
@@ -368,12 +435,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-</details>
-
 #### **UC2: Add a Contact/Policy**
-
-<details>
-  <summary>Click to expand!</summary>
 
 **MSS**
 
@@ -392,12 +454,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 -   *a. User can request to view help at any time [(UC1)](#uc1-displaying-help).
 
-</details>
-
 #### **UC3: Edit a Contact/Policy**
-
-<details>
-  <summary>Click to expand!</summary>
 
 **MSS**
 
@@ -422,12 +479,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 -   *a. User can request to view help at any time [(UC1)](#uc1-displaying-help).
 
-</details>
-
 #### **UC4: Delete a Contact/Policy**
-
-<details>
-  <summary>Click to expand!</summary>
 
 **MSS**
 
@@ -452,12 +504,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 -   *a. User can request to view help at any time [(UC1)](#uc1-displaying-help).
 
-</details>
-
 #### **UC5: List a Contact's Policies**
-
-<details>
-  <summary>Click to expand!</summary>
 
 **MSS**
 
@@ -482,12 +529,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 -   *a. User can request to view help at any time [(UC1)](#uc1-displaying-help).
 
-</details>
-
 #### **UC6: Clear a Contact's Policies**
-
-<details>
-  <summary>Click to expand!</summary>
 
 **MSS**
 
@@ -512,12 +554,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 -   *a. User can request to view help at any time [(UC1)](#uc1-displaying-help).
 
-</details>
-
 #### **UC7: Sort Contact/Policy List**
-
-<details>
-  <summary>Click to expand!</summary>
 
 **MSS**
 
@@ -542,12 +579,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 -   *a. User can request to view help at any time [(UC1)](#uc1-displaying-help).
 
-</details>
-
 #### **UC8: Download Statistics**
-
-<details>
-  <summary>Click to expand!</summary>
 
 **MSS**
 
@@ -559,8 +591,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 -   *a. User can request to view help at any time [(UC1)](#uc1-displaying-help).
-
-</details>
 
 ### Non-Functional Requirements
 *   Technical requirements:

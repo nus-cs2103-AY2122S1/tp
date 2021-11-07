@@ -24,7 +24,7 @@ This section provides instructions to begin using Siasa.
 2. Download the latest release [here](https://github.com/AY2122S1-CS2103-F10-4/tp/releases) and move it to the folder you wish to use as the home folder for Siasa.
 3. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
    
-![First Startup UI Image](images/AppImage.png)
+![First Startup UI Image](images/Ui.png)
 
 4. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.
    Some example commands you can try:
@@ -176,7 +176,7 @@ Format: `editpolicy INDEX [n/POLICY_NAME] [p/PMT_AMOUNT_CENTS [PMTS_PER_YR] [NUM
 Careful changing the number of commissions or payments. A policy should not have less payments than the number of commissions.
 </div>
 
-* Edits the policy at the specified `INDEX`. The index refers to the index number shown in the displayed policy list. 
+* Edits the policy at the specified `INDEX`. The index refers to the index number shown in the displayed policy list.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the policy will be removed i.e adding of tags is not cumulative.
@@ -262,15 +262,13 @@ These are the current sorters implemented:
 
 ### Statistics
 
-#### Download useful statistics as CSV : `download`
+#### Download useful statistics as TXT : `download`
 
-Download a CSV file containing useful statistics for the user. This includes
-- Most valuable contacts + total commission from each of them
+Download CSV files containing useful statistics for the user. This includes
+- Most valuable contacts + total commission from each of contact
 - Number of policies for each contact
-- Average number of policies per contact
-- Total commission
 
-The file is stored in '/data' folder
+The files are stored in '/data' folder
 
 Format: `download`
 

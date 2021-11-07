@@ -209,7 +209,6 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
-
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);

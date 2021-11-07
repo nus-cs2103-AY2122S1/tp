@@ -1,0 +1,44 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":Command" as Command LOGIC_COLOR
+participant ":Warning" as Warning LOGIC_COLOR
+end box
+
+box UI MODEL_COLOR_T1
+participant ":MainWindow" as MainWindow MODEL_COLOR
+participant "w:WarningWindow" as WarningWindow MODEL_COLOR
+end box
+
+activate Command
+
+Command -> Warning : isUserConfirmingCommand()
+activate Warning
+
+Warning -> MainWindow : showWarning()
+activate MainWindow
+
+create WarningWindow
+MainWindow -> WarningWindow
+activate WarningWindow
+WarningWindow --> MainWindow : w
+deactivate WarningWindow
+
+MainWindow -> WarningWindow : display()
+activate WarningWindow
+WarningWindow --> MainWindow
+deactivate WarningWindow
+
+MainWindow -> WarningWindow : isUserConfirmingCommand()
+activate WarningWindow
+WarningWindow --> MainWindow : user response
+deactivate WarningWindow
+
+MainWindow --> Warning : user response
+deactivate MainWindow
+
+Warning --> Command : user response
+deactivate Warning
+
+@enduml
