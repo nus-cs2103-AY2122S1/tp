@@ -13,7 +13,7 @@ Source Control can also give you both a quick overview and a closer look of how 
 This application **provides in-depth data analysis** of the performance of your students in each assessment,
 giving you timely feedback on the pace and difficulty level of the module.
 
-Source Control is **optimised for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
+Source Control is **optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 If you can type fast, Source Control can help you track your students' performance faster than traditional GUI apps!
 
 This guide takes you through all the _latest features_ of Source Control. If you are a new user, this guide provides you
@@ -56,7 +56,7 @@ feel free to skip to the [command summary](#command-summary) and experiment with
     * [Viewing help : `help`](#viewing-help--help)
     * [Accessing command history](#accessing-command-history)
   * Advanced Features
-    * [Setting customised aliases for commands: `alias`](#setting-customised-aliases-for-commands--alias)
+    * [Setting customized aliases for commands: `alias`](#setting-customized-aliases-for-commands--alias)
     * [Editing the data file](#editing-the-data-file)
 * [**FAQ**](#faq)
 * [**Glossary**](#glossary)
@@ -489,7 +489,7 @@ Retrieves past command lines input.
 [Return to Table of Contents](#table-of-contents)
 
 
-### Setting customised aliases for commands : `alias`
+### Setting customized aliases for commands : `alias`
 
 Sets up an alias that can be used instead of a command.
 
@@ -521,7 +521,7 @@ Examples:
 * `alias -c example -as example2`
   * adds the alias `example2` to the command that `example` currently maps to, i.e. `example2` functions as `addgroup`.
 * `alias -c example -as example`
-  * removes the alias `example`. `example` will no longer be recognised as a command.
+  * removes the alias `example`. `example` will no longer be recognized as a command.
 
 [Return to Table of Contents](#table-of-contents)
 
@@ -629,7 +629,7 @@ Below is a table explaining some terms used in this document.
 
 Word | Meaning
 -------|--------
-Alphanumeric | A character that is either an alphabet (capitalised and non-capitalised) or a numerical number.
+Alphanumeric | A character that is either an alphabet (capitalized and non-capitalized) or a numerical number.
 Command | Instruction entered by the user e.g. `list`, `exit`.
 Command Line Interface (CLI) | A text-based interface that is used to operate software, allowing the user to respond to visual prompts via typing commands.
 Graphic User Interface (GUI) | A system of interactive visual components for computer software, which allows users to interact via many visual components.
