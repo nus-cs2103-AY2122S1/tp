@@ -31,7 +31,7 @@ public class EditStudentCommand extends EditCommand {
     public static final String MESSAGE_USAGE = String.format("%1$s %2$s: Edits the details of the student."
                     + "Existing values will be overwritten by the input values."
                     + "\nParameters:"
-                    + "\nSTUDENT INDEX (must be a positive integer)"
+                    + "\nINDEX (must be a positive integer)"
                     + "  %3$s[STUDENT NAME]"
                     + "  [%4$sSTUDENT PHONE]"
                     + "  [%5$sPARENT NAME]"
