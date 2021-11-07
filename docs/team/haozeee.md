@@ -29,6 +29,8 @@ Given below are my contributions to the project.
     * Added tag patient and tag doctor documentation ([#116](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/116))
     * Reviewed, raised and fixed issues throughout the UG
   
+<div style="page-break-after: always;"></div>
+
 * **Contributions to the DG**:
     * Updated UI component and UI class diagram ([#111](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/111), [#192](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/192))
     * Added implementation for filtering appointments ([#192](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/192))
