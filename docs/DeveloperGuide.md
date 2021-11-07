@@ -1343,10 +1343,10 @@ testers are expected to do more *exploratory* testing.
       Expected: An appointment is added. Details of the appointment shown in the status message. The appointment shows up in the appointment list.
 
     1. Test case: `appt -a p/1 d/1 s/31/12/2050 14:00`<br>
-       Expected: An appointment is added. Details of the appointment is shown in the status message. The appointment shows up in the appointment list.
+       Expected: An appointment is added. Details of the appointment shown in the status message. The appointment shows up in the appointment list.
 
     1. Test case: `appt -a p/1 d/1 s/DATE_AND_TIME dur/5 r/Patient wants a blood test,` where `DATE_AND_TIME` is today's date and any time<br>
-       Expected: An appointment is added. Details of the appointment is shown in the status message. The appointment shows up in the appointment list.
+       Expected: An appointment is added. Details of the appointment shown in the status message. The appointment shows up in the appointment list.
        
     1. Test case: `appt -a`<br>
        Expected: No appointment is added. Error details are shown in the status message that the format is invalid.
