@@ -44,7 +44,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/itsraveen.png" width="200px">
 
 [[github](http://github.com/itsraveen)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/itsraveen.md)]
 
 * Role: Developer
 * Responsibilities: Looks after code quality, ensures adherence to coding standards, etc.
