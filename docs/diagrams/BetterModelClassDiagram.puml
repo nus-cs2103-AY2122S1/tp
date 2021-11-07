@@ -14,15 +14,16 @@ UniquePersonList -right-> Person
 
 Person -up-> "*" Tag
 
-Person *--> Name
-Person *--> Phone
-Person *--> Email
+Person *-> Name
+Person *-> Phone
+Person *-> Email
 Person *--> Role
-Person *--> EmploymentType
-Person *--> ExpectedSalary
-Person *--> LevelOfEducation
-Person *--> Experience
-Person *--> "*" Interview
-Person *--> "*" Notes
+Person *---> EmploymentType
+Person *----> ExpectedSalary
+Person *----> LevelOfEducation
+Person *----> Experience
+Person *---> "*" Interview
+Person *---> "*" Notes
 Person *--> Done
+
 @enduml
