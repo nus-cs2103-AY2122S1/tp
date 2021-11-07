@@ -82,7 +82,7 @@ AniList currently supports some hotkeys to allow for ease of use for CLI users.
 
 Charlotte Theme            |  Dark Theme
 :-------------------------:|:-------------------------:
-![](images/UG-images/charlottetheme.JPG)  |  ![](images/UG-images/darktheme.jpg)
+![](images/UG-images/charlottetheme.JPG)  |  ![](images/UG-images/darktheme.JPG)
 
 Squid Girl Theme           |  Wonder Egg Priority Theme
 :-------------------------:|:-------------------------:
@@ -95,11 +95,11 @@ ___
 
 All Tab  |  Watching Tab
 :-------------------------:|:-------------------------:
-![](images/UG-images/all.JPG)  |  ![](images/UG-images/watching.jpg)
+![](images/UG-images/all.JPG)  |  ![](images/UG-images/watching.JPG)
 
 To Watch Tab           |  Finished Tab
 :-------------------------:|:-------------------------:
-![](images/UG-images/towatch.JPG)  |  ![](images/UG-images/finished.jpg)
+![](images/UG-images/towatch.JPG)  |  ![](images/UG-images/finished.JPG)
 
 
 ___
