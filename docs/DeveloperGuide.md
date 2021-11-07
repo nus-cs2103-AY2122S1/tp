@@ -190,17 +190,15 @@ It then retrieves the characters that follow each prefix and allocates them to t
 
 In the case where the compulsory prefixes `-n` and `-i` are not present, a `ParseException` is thrown, prompting the user that the wrong command format has been used.
 
-The following activity diagram summarises what happens when the user inputs an add student command:
+The following activity diagram summarises what happens when a user executes the `addstudent` command to add a new student. In the case where the student is not added, an error message will be displayed with the reason.
 
 ![AddStudentActivityDiagram](images/AddStudentActivityDiagram.png)
 
-
-The following sequence diagram shows how the add student operation works:
+The following sequence diagram summarises what happens when the user inputs an `addstudent` command together with the name and NUSNET ID of the student to be added.
 
 ![AddStudentSequenceDiagram](images/AddStudentSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
 </div>
 
 ### Creating a new group
@@ -218,12 +216,12 @@ The `addgroup` feature allows users to create new groups, as well as specify stu
 <div markdown="span" class="alert alert-info">:information_source: **Note:** In the case where there are more than one students matched because they share the same name, an error message will be displayed to the user. The user will then have to specify the student to be added using his/her student ID.
 </div>
 
-The following activity diagrams summarises what happens when a user executes a command to add a new group. In the case where the group is not added, an error message will be displayed with the reason.
+The following activity diagrams summarises what happens when a user executes the `addgroup` command to add a new group. In the case where the group is not added, an error message will be displayed with the reason.
 
 ![AddGroupActivityDiagram](images/AddGroupActivityDiagram.png)
 ![AddStudentToGroupActivityDiagram](images/AddStudentsToGroupActivityDiagram.png)
 
-The following sequence diagram summarises what happens when the user inputs an add group command together with a student to be added:
+The following sequence diagram summarises what happens when the user inputs an `addgroup` command together with a student to be added.
 
 ![AddGroupSequenceDiagram](images/AddGroupSequenceDiagram.png)
 
@@ -243,7 +241,7 @@ The `addalloc` feature allows users to allocate a student into a group.
 <div markdown="span" class="alert alert-info">:information_source: **Note:** In the case where there are more than one students matched because they share the same name, an error message will be displayed to the user. The user will then have to specify the student to be added using his/her student ID.
 </div>
 
-The following activity diagram summarises what happens when a user executes the `addalloc` command to allocate a student into a group. In the case where the allocation is not made successfully, an error message will be displayed with the reason.
+The following activity diagram summarises what happens when a user executes the `addalloc` command to allocate a student into a group. In the case where the student is not added into the group, an error message will be displayed with the reason.
 
 ![AddAllocActivityDiagram](images/AddAllocActivityDiagram.png)
 
@@ -268,7 +266,7 @@ The `addscore` feature allows users to add score for an assessment of a student.
 <div markdown="span" class="alert alert-info">:information_source: **Note:** In the case where there are more than one students matched because they share the same name, an error message will be displayed to the user. The user will then have to specify the student to be added using his/her student ID.
 </div>
 
-The following activity diagram summarises what happens when a user executes the `addscore` command to add score for an assessment of a student. In the case where the update is not made successfully, an error message will be displayed with the reason.
+The following activity diagram summarises what happens when a user executes the `addscore` command to add score for an assessment of a student. In the case where the score is not added/updated, an error message will be displayed with the reason.
 
 ![AddScoreActivityDiagram](images/AddScoreActivityDiagram.png)
 
@@ -283,7 +281,7 @@ The `search` feature allows user to filter student list by name, NUSNET ID, grou
 
 #### How the `search` command works
 
-The following diagram shows the search operation after user input `search -n Alex Yu`.
+The following sequence diagram summarises what happens when the user inputs an `search` command together with a name to be searched for.
 
 ![SearchSequenceDiagram](images/SearchSequenceDiagram.png)
 
@@ -304,7 +302,7 @@ each with different implementation of the `test(Student student)` function.
 * `TagContainsKeywordsPredicate`: checks if the tag of student contains any word in the given keywords.
   Partial search is supported. e.g. `beginner` will match `beginners`.
 
-The following diagram summarises what happens after user input search command:
+The following activity diagrams summarises what happens when a user executes the `search` command to search for students with different filters.
 
 ![SearchActivityDiagram](images/SearchActivityDiagram.png)
 
@@ -326,13 +324,17 @@ if the command input is valid. The command is invalid if the user input is empty
 
 ### Importing data
 
-The following activity diagram summarises what happens when the user inputs an import command:
+The `import` feature allows users to load data as specified in the provided CSV file.
+
+#### How the `import` command works
+
+The following activity diagram summarises what happens when a user executes the `import` command to import a CSV data file. In the case where the file is not imported, an error message will be displayed with the reason.
 
 ![ImportCommandActivityDiagram](images/ImportActivityDiagram.png)
 
 There are several important details left out of the activity diagram for the sake of clarity:
 
-1. The import feature is reliant on having a correctly formatted csv file (which is to be exported from sites like lumiNUS and Source Academy, and modified to fit the format).
+1. The import feature is reliant on having a correctly formatted csv file (which is to be exported from sites like LumiNUS and Source Academy, and modified to fit the format).
    The user needs to provide the number of `Groups`, `Assessments`, and `Tags` since we can't detect this automatically from the format of the file. The proper format of the file can be found in the user guide.
 
 1. A `CommandException` will be thrown if any input does not follow the formatting specified in the respective classes such as `Name`, `ID`, and `Score`.
@@ -376,6 +378,8 @@ The `alias` feature allows users to define their own aliases for commands. This 
 
 An alias is basically just a mapping of a user-provided string to a command word. It works by directly replacing the first word in the user's input command with the alias word, then parsing again.
 An alias contains two strings: An `aliasWord` which is the new user-defined word, and a `commandWord` which is the command word of an existing default command (e.g. `addstudent`, `clear`, `exit`).
+
+#### How the `alias` command works
 
 Parsing of an alias command follows the following steps:
 1. The alias word is checked to ensure that it is one word long.
