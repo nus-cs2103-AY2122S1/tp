@@ -59,6 +59,7 @@ public class EditCommand extends Command {
             + "Please use `view` to see the new details";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the Academy Directory.";
+    public static final String COMMIT_MESSAGE = "Edited Student: %1$s";
 
     private final Index index;
     private final EditStudentDescriptor editStudentDescriptor;
@@ -93,7 +94,7 @@ public class EditCommand extends Command {
         model.setStudent(studentToEdit, editedStudent);
 
         return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent),
-                Optional.of(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent.getName())));
+                Optional.of(String.format(COMMIT_MESSAGE, editedStudent.getName())));
     }
 
     /**

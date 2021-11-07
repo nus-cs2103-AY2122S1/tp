@@ -38,7 +38,7 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
-        this.commitMessage = commitMessage;
+        this.commitMessage = commitMessage.map(x -> x.replace(System.lineSeparator(), "").trim());
     }
 
     /**
