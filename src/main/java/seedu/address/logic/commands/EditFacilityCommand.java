@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CAPACITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -52,8 +53,7 @@ public class EditFacilityCommand extends Command {
      * @param editFacilityDescriptor details to edit the facility with.
      */
     public EditFacilityCommand(Index index, EditFacilityDescriptor editFacilityDescriptor) {
-        requireNonNull(index);
-        requireNonNull(editFacilityDescriptor);
+        requireAllNonNull(index, editFacilityDescriptor);
 
         this.index = index;
         this.editFacilityDescriptor = new EditFacilityDescriptor(editFacilityDescriptor);
@@ -90,6 +90,10 @@ public class EditFacilityCommand extends Command {
     /**
      * Creates and returns a {@code Facility} with the details of {@code facilityToEdit}
      * edited with {@code editFacilityDescriptor}.
+     *
+     * @param editFacilityDescriptor details to edit the facility with.
+     * @param facilityToEdit the facility to edit.
+     * @return the facility with the edited details.
      */
     private static Facility createEditedFacility(Facility facilityToEdit,
                                                  EditFacilityDescriptor editFacilityDescriptor) {
@@ -99,8 +103,7 @@ public class EditFacilityCommand extends Command {
         Location updatedLocation = editFacilityDescriptor.getLocation().orElse(facilityToEdit.getLocation());
         Time updatedTime = editFacilityDescriptor.getTime().orElse(facilityToEdit.getTime());
         Capacity updatedCapacity = editFacilityDescriptor.getCapacity().orElse(facilityToEdit.getCapacity());
-
-        // edit command does not allow editing allocations
+        // edit command does not allow editing of allocations
         AllocationMap allocationMap = facilityToEdit.getAllocationMap();
 
         return new Facility(updatedName, updatedLocation, updatedTime, updatedCapacity, allocationMap);
@@ -115,7 +118,7 @@ public class EditFacilityCommand extends Command {
     }
 
     /**
-     * Stores the detials to edit the facility with. Each non-empty field will replace the
+     * Stores the details to edit the facility with. Each non-empty field will replace the
      * corresponding field value of the facility.
      */
     public static class EditFacilityDescriptor {

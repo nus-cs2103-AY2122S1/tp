@@ -39,7 +39,7 @@ public class DeleteFacilityCommandTest {
     }
 
     @Test
-    public void execute_validIndexUnfilteredList_throwsCommandException() {
+    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredFacilityList().size() + 1);
         DeleteFacilityCommand command = new DeleteFacilityCommand(outOfBoundIndex);
 
@@ -78,24 +78,24 @@ public class DeleteFacilityCommandTest {
 
     @Test
     public void equals() {
-        DeleteFacilityCommand deleteFacilFirstCommand = new DeleteFacilityCommand(INDEX_FIRST);
-        DeleteFacilityCommand deleteFacilSecondCommand = new DeleteFacilityCommand(INDEX_SECOND);
+        DeleteFacilityCommand deleteFacilityFirstCommand = new DeleteFacilityCommand(INDEX_FIRST);
+        DeleteFacilityCommand deleteFacilitySecondCommand = new DeleteFacilityCommand(INDEX_SECOND);
 
         // same object -> returns true
-        assertTrue(deleteFacilFirstCommand.equals(deleteFacilFirstCommand));
+        assertTrue(deleteFacilityFirstCommand.equals(deleteFacilityFirstCommand));
 
         // same values -> returns true
-        DeleteFacilityCommand deleteFacilFirstCommandCopy = new DeleteFacilityCommand(INDEX_FIRST);
-        assertTrue(deleteFacilFirstCommand.equals(deleteFacilFirstCommandCopy));
+        DeleteFacilityCommand deleteFacilityFirstCommandCopy = new DeleteFacilityCommand(INDEX_FIRST);
+        assertTrue(deleteFacilityFirstCommand.equals(deleteFacilityFirstCommandCopy));
 
         // different types -> returns false
-        assertFalse(deleteFacilFirstCommand.equals(1));
+        assertFalse(deleteFacilityFirstCommand.equals(1));
 
         // null -> returns false
-        assertFalse(deleteFacilFirstCommand.equals(null));
+        assertFalse(deleteFacilityFirstCommand.equals(null));
 
         // different person -> returns false
-        assertFalse(deleteFacilFirstCommand.equals(deleteFacilSecondCommand));
+        assertFalse(deleteFacilityFirstCommand.equals(deleteFacilitySecondCommand));
     }
 
     /**
@@ -103,7 +103,6 @@ public class DeleteFacilityCommandTest {
      */
     private void showNoFacility(Model model) {
         model.updateFilteredFacilityList(f -> false);
-
         assertTrue(model.getFilteredFacilityList().isEmpty());
     }
 }

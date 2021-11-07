@@ -22,9 +22,9 @@ public class EditFacilityCommandParser implements Parser<EditFacilityCommand> {
      */
     public EditFacilityCommand parse(String args) throws ParseException {
         requireNonNull(args);
+
         ArgumentMultimap argMultiMap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_LOCATION, PREFIX_TIME, PREFIX_CAPACITY);
-
         Index index;
 
         try {
@@ -34,7 +34,25 @@ public class EditFacilityCommandParser implements Parser<EditFacilityCommand> {
                     EditFacilityCommand.MESSAGE_USAGE), pe);
         }
 
-        EditFacilityCommand.EditFacilityDescriptor editFacilityDescriptor = new EditFacilityDescriptor();
+        EditFacilityDescriptor editFacilityDescriptor = generateDescriptor(argMultiMap);
+
+        if (!editFacilityDescriptor.isAnyFieldEdited()) {
+            throw new ParseException(EditFacilityCommand.MESSAGE_NOT_EDITED);
+        }
+
+        return new EditFacilityCommand(index, editFacilityDescriptor);
+    }
+
+    /**
+     * Parses input arguments and constructs the relevant {@code EditFacilityDescriptor}.
+     *
+     * @param argMultiMap the input arguments to parse.
+     * @return EditFacilityDescriptor consisting of the fields to edit.
+     * @throws ParseException if any of the input arguments are invalid.
+     */
+    private EditFacilityDescriptor generateDescriptor(ArgumentMultimap argMultiMap) throws ParseException {
+        EditFacilityDescriptor editFacilityDescriptor = new EditFacilityDescriptor();
+
         if (argMultiMap.getValue(PREFIX_NAME).isPresent()) {
             editFacilityDescriptor.setFacilityName(
                     ParserUtil.parseFacilityName(argMultiMap.getValue(PREFIX_NAME).get()));
@@ -51,10 +69,7 @@ public class EditFacilityCommandParser implements Parser<EditFacilityCommand> {
             editFacilityDescriptor.setCapacity(
                     ParserUtil.parseCapacity(argMultiMap.getValue(PREFIX_CAPACITY).get()));
         }
-        if (!editFacilityDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditFacilityCommand.MESSAGE_NOT_EDITED);
-        }
 
-        return new EditFacilityCommand(index, editFacilityDescriptor);
+        return editFacilityDescriptor;
     }
 }
