@@ -13,7 +13,7 @@ Given below are my contributions to the project.
 * **New Feature**: Added ability to edit events.
     * What it does: Allow users to edit event details (name, date and time).
     * Justification: Sometimes when users type too fast, they might have typos. Having to delete the event and re-add might reduce their productivity.
-      Moreover, in the real world, sometimes events get postponed too. Hence, this feature caters to these scenarios.
+      Moreover, in the real world, events may sometimes get postponed too. Hence, this feature caters to these scenarios.
     * Highlights: This feature affects the choice of data structure our team uses. We had plans to use priority queue to store events so the event list are automatically
       sorted in chronological order. However, with edit events made possible, we find that it complicates the implementation to re-order it after each edit. Our team then decided to
       provide another feature to provide the option for users to choose whether they want to sort the events or leave it as it is.
