@@ -687,7 +687,7 @@ Action | Format, Examples
 **Edit participant** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [d/BIRTHDATE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find participant** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List participants** | `list`
-**View participant details** | `view INDEX` <br> e.g., `view 1`
+**View a participant's details** | `view INDEX` <br> e.g., `view 1`
 **Add NOK to participant** | `addNok INDEX n/NAME p/PHONE_NUMBER tag/TAG` <br> e.g., `addNok 1 n/Jannette Yeo p/88734323 tag/Spouse`
 **Delete NOK of participant** | `deleteNOK NOK_INDEX PARTICIPANT_INDEX` <br> e.g., `deleteNok 2 1`
 **Add event** | `addEvent n/NAME d/DATE [t/TIME]` <br> e.g., `addEvent n/CS2100 Finals d/2021-11-20 t/0900`
@@ -698,10 +698,10 @@ Action | Format, Examples
 **Filter events** | `filterEvents d/DATE [t/TIME]` <br> e.g., `filterEvents d/2021-09-18`
 **Sort events** | `sortEvents`
 **List events** | `listEvents`
-**Show event Details** | `showDetails INDEX` <br> e.g., `showDetails 1`
+**Show an event's details** | `showDetails INDEX` <br> e.g., `showDetails 1`
 **Add participant to event** | `enroll PARTICIPANT_INDEX EVENT_INDEX` <br> e.g., `enroll 1 2`
 **Remove participant from event** | `expel PARTICIPANT_INDEX EVENT_INDEX` <br> e.g., `expel 3 1`
-**Show event participants** | `showParticipants INDEX` <br> e.g., `showParticipants 3`
+**Show an event's participants** | `showParticipants INDEX` <br> e.g., `showParticipants 3`
 **Help** | `help`
 **Clear** | `clear`
 **Exit** | `exit`

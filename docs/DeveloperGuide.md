@@ -714,24 +714,24 @@ Preconditions: At least one event and one participant have been added to Manager
 
 * 1b. Managera cannot find the participant.
 
-    * 1b1. Managera shows an error message stating that the given ID does not correspond to an existing participant.
+    * 1b1. Managera shows an error message stating that the participant was not found.
 
       Use case resumes at step 1.
 
 * 1c. Managera could not find the event.
 
-    * 1c1. Managera shows an error message stating that the given name does not correspond to an existing event.
+    * 1c1. Managera shows an error message stating that the event was not found.
 
       Use case resumes at step 1.
 
-**Use case: UC03 - Remove an event**
+**Use case: UC03 - Delete an event**
 
 Preconditions: At least one event has been added to Managera.
 
 **MSS**
 
-1.  Event Organiser requests to remove an event.
-2.  Managera removes the event from its event list.
+1.  Event Organiser requests to delete an event.
+2.  Managera deletes the event from its event list.
 
     Use case ends.
 
@@ -739,12 +739,12 @@ Preconditions: At least one event has been added to Managera.
 
 * 1a. Managera could not find the specified event.
 
-    * 1a1. Managera shows an error message.
+    * 1a1. Managera shows an error message stating that the event was not found.
 
       Use case resumes at step 1.
 
 
-**Use case: UC04 - Remove participant from event**
+**Use case: UC04 - Remove participant from an event**
 
 Preconditions: At least one event and one participant have been added to Managera. 
 
@@ -759,13 +759,13 @@ Preconditions: At least one event and one participant have been added to Manager
 
 * 1a. Managera could not find the participant.
 
-    * 1a1. Managera shows an error message stating that the participant does not exist.
+    * 1a1. Managera shows an error message stating that the participant was not found.
 
       Use case resumes at step 1.
 
 * 1b. Managera could not find the event.
 
-    * 1b1. Managera shows an error message stating that the given name does not correspond to an existing event.
+    * 1b1. Managera shows an error message stating that the event was not found.
 
       Use case resumes at step 1.
 
@@ -796,7 +796,7 @@ Preconditions: At least one event has been added to Managera.
 
 * 1b. Managera could not find the event.
 
-    * 1b1. Managera shows an error message stating that the given name does not correspond to an existing event.
+    * 1b1. Managera shows an error message stating that the event was not found.
 
       Use case resumes at step 1.
 
@@ -819,7 +819,7 @@ Preconditions: At least one event has been added to Managera.
 **MSS**
 
 1. Event Organiser requests for the participant's details.
-2. Managera displays the details of all participants with the given name.
+2. Managera displays the details of the specified participant.
 
     Use case ends.
 
@@ -833,7 +833,7 @@ Preconditions: At least one event has been added to Managera.
 
 * 1b. Managera could not find the participant.
 
-    * 1b1. Managera shows an error message stating that the participant does not exist.
+    * 1b1. Managera shows an error message stating that the participant was not found.
 
       Use case resumes at step 1.
 
@@ -843,27 +843,27 @@ Preconditions: At least one event has been added to Managera.
 
 **MSS**
 
-1.  Event Organiser requests to filter events from the current list of events that take place on a specified date.
+1.  Event Organiser requests to filter out the events that take place on a specified date.
 2.  Managera finds the events that take place on the given date and displays them in a list.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. Event Organiser omits date parameter required for filtering events.
+* 1a. Event Organiser does not give a valid date for the filtering.
 
     * 1a1. Managera shows an error message citing missing parameter.
 
       Use case resumes at step 1.
 
-**Use case: UC09 - Show event details**
+**Use case: UC09 - Show an event's details**
 
 Preconditions: At least one event has been added to Managera.
 
 **MSS**
 
-1.  Event Organiser requests for an event's details, specifying an event name.
-2.  Managera displays the details of the event with the given name.
+1.  Event Organiser requests for an event's details.
+2.  Managera displays the details of the specified event.
 
     Use case ends.
 
@@ -877,11 +877,11 @@ Preconditions: At least one event has been added to Managera.
 
 * 1b. Managera could not find the event.
 
-    * 1b1. Managera shows an error message stating that the given name does not correspond to an existing event.
+    * 1b1. Managera shows an error message stating that the event was not found.
 
       Use case resumes at step 1.
 
-**Use case: UC10 - Show event participants**
+**Use case: UC10 - Show an event's participants**
 
 Preconditions: At least one event has been added to Managera.
 
@@ -902,7 +902,7 @@ Preconditions: At least one event has been added to Managera.
 
 * 1b. Managera could not find the event.
 
-    * 1b1. Managera shows an error message stating that the given name does not correspond to an existing event.
+    * 1b1. Managera shows an error message stating that the event was not found.
 
       Use case resumes at step 1.
 
