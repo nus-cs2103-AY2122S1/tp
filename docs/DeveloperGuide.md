@@ -315,6 +315,7 @@ For example, the user input this command: `aa 1 d/2022-10-11 t/10:00 v/NUS`
 The initial state of the `Appointment` object present in the specified client `Person` object before the command is executed is shown below:
 
 ![Appointment_Initial_State](images/AppointmentDefaultState.png)
+<br> *Figure 10: Default State of Appointment (Object Diagram) of FAST*
 
 **2**) `LogicManager::execute()` will be called which will in turn calls `FastParser::parseCommand()` to parse the given input.
 `FastParser::parseCommand()` will determine that it is an add appointment command which will then call `AppointmentCommandParser::parse()`.
@@ -326,6 +327,7 @@ The initial state of the `Appointment` object present in the specified client `P
 * A new `Appointment` object with the input `date`, `time` and `venue` will be created as shown in the diagram below.
 
     ![Appointment_Added_State](images/AppointmentAddedState.png)
+    <br> *Figure 11: Added State of Appointment (Object Diagram) of FAST*
 
 **4**) `AppointmentCommandParser::parse()` will return a new `AppointmentCommand` object that contains the index of the
 specified client and the new `Appointment` object.
@@ -341,6 +343,7 @@ after verifying that no appointments had been created for the specified contact 
 The sequence diagram below illustrates step 2 to step 6.
 
 ![Appointment_Sequence_Diagram](images/AppointmentSequenceDiagram.png)
+<br> *Figure 12: Appointment Sequence Diagram of FAST*
 
 **7**) Suppose that the user makes a mistake in the `date` of the appointment, and he wants to change it.
 Example: `ea 1 d/2022-05-15`
@@ -349,6 +352,7 @@ Example: `ea 1 d/2022-05-15`
 The diagram below shows the updated object diagram after the `ea` command is executed.
 
 ![Appointment_Added_State_2](images/AppointmentAddedState2.png)
+<br> *Figure 13: Edited State of Appointment (Object Diagram) of FAST*
 
 **9a**) Suppose that the user cancels the appointment and wants to delete it using the command `da 1`.
 Similar course of actions mentioned to step 2 to step 6 will occur except that this time it involves the `DeleteAppointmentCommand` class and `DeleteAppointmentCommandParser` class instead.
@@ -359,6 +363,7 @@ A similar course of action mentioned to step 2 to step 6 will occur, except that
 The diagram below shows the updated object diagram.
 
 ![Appointment_Added_State_3](images/AppointmentAddedState3.png)
+<br> *Figure 14: Marked State of Appointment (Object Diagram) of FAST*
 
 **10**) Finally, suppose that the user marks the appointment (in step 9b) by accident and wants to unmark it using `ua 1`.
 Similar course of actions mentioned to step 2 to step 6 will occur except that this time it involves the `UnmarkAppointmentCommand` class and `UnmarkAppointmentCommandParser` class instead.
@@ -367,6 +372,7 @@ The update object diagram will reflect the changes in the `AppointmentCount` obj
 Given below is Activity Diagram for FAST Appointment procedure. It includes scenarios that are not mentioned in step 1 to step 10 above.
 
 ![Appointment_Activity_Diagram](images/AppointmentActivityDiagram.png)
+<br> *Figure 15: Appointment Activity Diagram of FAST*
 
 <br> 
 
@@ -414,6 +420,7 @@ There are currently 4 custom predicates implemented in FAST:
 Each `Predicate` has a `test` method which will be called on every `Person` in the list to see if they fit the search.
 If the `test` method returns `true`, that `Person` will be displayed in the search results.
 ![Find_Command_Class_Diagram](images/findcommandpredicates.png)
+<br> *Figure 16: Find Command Class Diagram of FAST*
 
 #### Usage Scenario
 
@@ -436,6 +443,7 @@ of the search.
 <br>
 
 ![Find_Command_Sequence_Diagram](images/findcommandsequencediagram.png)
+<br> *Figure 17: Find Command Sequence Diagram of FAST*
 
 #### Design Considerations
 
@@ -484,6 +492,7 @@ As for format 1, the indexes are extracted from the user input by breaking up th
 
 The activity diagram below shows the flow of a multiple delete command.
 ![Multiple_Delete_Activity_Diagram](images/MultipleDeleteActivityDiagram.png)
+<br> *Figure 18: Multiple Delete Activity Diagram of FAST*
 
 #### Usage Scenario
 
@@ -512,6 +521,7 @@ The activity diagram below shows the flow of a multiple delete command.
 
 The sequence diagram below shows step 1 to step 6 mentioned above.
 ![Multiple_Delete_Sequence_Diagram](images/MultipleDeleteSequenceDiagram.png)
+<br> *Figure 19: Multiple Delete Sequence Diagram of FAST*
 
 
 #### Design Consideration
@@ -572,6 +582,7 @@ to sort the list of persons by their name.
 The sequence diagram below illustrates the execution of `sort name`.
 
 ![Sort_Sequence_Diagram](images/SortSequenceDiagram.png)
+<br> *Figure 20: Sort Sequence Diagram of FAST*
 
 
 #### Design Considerations
@@ -636,6 +647,7 @@ window will open to allow users to view help regardless. For reference, the curr
 The activity diagram below shows the many ways a user can utilise the help command
 
 ![Help Command Activity Diagram](images/HelpCommandActivityDiagram.png)
+<br> *Figure 21: Help Command Activity Diagram of FAST*
 
 The way the help command is parsed is slightly different from the other commands. This is due to the help command not
 interacting with the `model` and `storage` components like other commands. Instead, the parsing of the help command
@@ -644,6 +656,7 @@ parameter is done by `ParserUtil` and verification of the parameter is done in `
 diagram as shown below.
 
 ![Help Command Sequence Diagram](images/HelpCommandParsingSequenceDiagram.png)
+<br> *Figure 22: Help Command Sequence Diagram of FAST*
 
 
 To access the different commands' help page from within the help window, there is a dropdown selector which will
@@ -709,6 +722,7 @@ passed to `StatsWindow` to populate the pie chart with the data and generate the
 as shown below.
 
 ![Stats Window Sequence Diagram](images/StatsWindowSequenceDiagram.png).
+<br> *Figure 23: Stats Window Sequence Diagram of FAST*
 
 The implementation for Investment Plan Tag statistics is identical, except instead of a `PriorityData`, the data is encapsulated
 into a `InvestmentPlanData`, and uses the methods `populateInvestmentPieChart()`, `getInvestmentPlanData()` and 
@@ -770,6 +784,7 @@ This command has a relatively straightforward implementation:
 The activity diagram below shows the flow of a typical tag command.
 
 ![TagActivityDiagram](images/TagActivityDiagram.png)
+<br> *Figure 24: Tag Activity Diagram of FAST*
 
 #### Usage Scenario 
 
@@ -786,6 +801,7 @@ return a `TagCommand` that contains a Set of tags to delete and another Set of t
 object diagram below shows the state of the `Person` object and the `Tag` associated with it.
 
 ![TagCommandState1](images/TagCommandState1.png)
+<br> *Figure 25: Before Command Executed Object Diagram of FAST*
 
 **5**) `LogicManager` then calls the method `TagCommand::execute`, which will attempt to add and delete the specified 
 tags, while ensuring that certain conditions are met.
@@ -796,9 +812,11 @@ tag `friend` will be deleted. The object diagram below shows the final state of 
 and the `Tag` associated with it.
 
 ![TagCommandState2](images/TagCommandState2.png)
+<br> *Figure 26: After Command Executed Object Diagram of FAST*
    
 The sequence diagram below shows the process for the usage scenario as described above.
 ![TagSequenceDiagram](images/TagSequenceDiagram.png)
+<br> *Figure 27: Tag Sequence Diagram of FAST*
    
 #### Design Considerations
 
