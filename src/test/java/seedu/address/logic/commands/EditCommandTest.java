@@ -31,8 +31,9 @@ import seedu.address.testutil.ParticipantBuilder;
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model anotherModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private UserPrefs standardUserPrefs = new UserPrefs();
+    private Model model = new ModelManager(getTypicalAddressBook(), standardUserPrefs);
+    private Model anotherModel = new ModelManager(getTypicalAddressBook(), standardUserPrefs);
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -42,7 +43,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PARTICIPANT_SUCCESS, editedParticipant);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), standardUserPrefs);
         expectedModel.setParticipant(model.getFilteredParticipantList().get(0), editedParticipant);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -62,7 +63,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PARTICIPANT_SUCCESS, editedParticipant);
 
-        Model expectedModel = new ModelManager(new AddressBook(anotherModel.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(anotherModel.getAddressBook()), standardUserPrefs);
         expectedModel.setParticipant(lastParticipant, editedParticipant);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -75,7 +76,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PARTICIPANT_SUCCESS, editedParticipant);
 
-        Model expectedModel = new ModelManager(new AddressBook(anotherModel.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(anotherModel.getAddressBook()), standardUserPrefs);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -93,7 +94,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PARTICIPANT_SUCCESS, editedParticipant);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), standardUserPrefs);
         showParticipantAtIndex(expectedModel, INDEX_FIRST_PARTICIPANT);
         expectedModel.setParticipant(model.getFilteredParticipantList().get(0), editedParticipant);
 
