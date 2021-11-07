@@ -861,6 +861,7 @@ Priorities: High, Low
 * 1a. User keys in invalid format
     * 1a1. System displays an error, and the recommended format for editing a reservation.
 
+
       Use case ends
 * 1b. User keys in command without prefix
     * 1b1. System displays an error that says that at least 1 field must be provided.
