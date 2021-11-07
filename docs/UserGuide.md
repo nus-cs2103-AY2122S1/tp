@@ -264,13 +264,11 @@ These are the current sorters implemented:
 
 #### Download useful statistics as TXT : `download`
 
-Download a .txt file containing useful statistics for the user. This includes
-- Most valuable contacts + total commission from each of them
+Download CSV files containing useful statistics for the user. This includes
+- Most valuable contacts + total commission from each of contact
 - Number of policies for each contact
-- Average number of policies per contact
-- Total commission
 
-The file is stored in '/data' folder
+The files are stored in '/data' folder
 
 Format: `download`
 
