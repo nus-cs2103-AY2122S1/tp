@@ -34,7 +34,7 @@ Given below are my contributions to the project.
       * What it does: Display a done Task with a green border and description, and display an undone Task with a red border and description
       * Justification: This feature enhancement makes it easier for the user to quickly determine whether a Task is done or
         undone, reducing the time required to track and update students' progress.
-    * Standardize format of Command Result returned upon executing a Command. (Pull request [\#220](https://github.com/AY2122S1-CS2103-F09-1/tp/pull/220))
+    * Standardized the format of Command Result returned upon executing a Command. (Pull request [\#220](https://github.com/AY2122S1-CS2103-F09-1/tp/pull/220))
       * What it does: Reduce the amount of horizontal scrolling a user needs to perform to check out the Command Result message.
       * Justification: This feature enhancement standardized the format of the Command Result received when the user executes a Command.
         The new format is easier to read and makes it easier for new users to learn more about TAB's commands.
