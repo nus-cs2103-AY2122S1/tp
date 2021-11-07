@@ -147,8 +147,8 @@ An example of a command in TAB:
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-* Items in square brackets are optional.<br>
-  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+* Items in square brackets are optional. They can be left out, or left empty (e.g. `t/`)<br>
+  e.g. `n/NAME [t/TAG]` : `n/John Doe t/` is equivalent to `n/John Doe`.
 
 * Items in curly brackets separated by the pipe character `|` indicates that you must select exactly one parameter from the list of choices.<br>
   e.g. `cond/{all | any | none}` can be used as `cond/all` or `cond/any` or `cond/none`.
@@ -276,7 +276,7 @@ Executing any of the commands in this section will bring you to the students int
         <tr>
             <td id="email-field">Email</td>
             <td><code>e/</code></td>
-            <td>Must be of the format <em>xxx@yyy</em>.</td>
+            <td>Refer to <a href="#email-format">Email Format</a> for more details.</td>
             <td><ul>
               <li><code>e/jane@gmail.com</code></li>
               <li><code>e/</code> set the email field to empty.</li>
@@ -285,7 +285,7 @@ Executing any of the commands in this section will bring you to the students int
         <tr>
             <td>Parent Phone</td>
             <td><code>pp/</code></td>
-            <td>Refer to the constraints for <a href="#phone-field">Phone</a> above.</td>
+            <td>Minimum 3 numeric characters.</td>
             <td><ul>
               <li><code>pp/81234567</code></li>
               <li><code>pp/</code> sets the parent phone field to empty.</li>
@@ -294,7 +294,7 @@ Executing any of the commands in this section will bring you to the students int
         <tr>
             <td>Parent Email</td>
             <td><code>pe/</code></td>
-            <td>Refer to the constraints for <a href="#email-field">Email</a> above.</td>
+            <td>Refer to <a href="#email-format">Email Format</a> for more details.</td>
             <td><ul>
               <li><code>pe/john@gmail.com</code></li>
               <li><code>pe/</code> sets the parent email field to empty.</li>
@@ -322,9 +322,7 @@ Executing any of the commands in this section will bring you to the students int
         <tr>
             <td>Academic Level</td>
             <td><code>lvl/</code></td>
-            <td><ul>
-              <li>Maximum 15 characters, including space(s).</li>
-            </ul></td>
+            <td>Maximum 15 characters, including space(s).</td>
             <td><ul>
               <li><code>lvl/J1</code></li>
               <li><code>lvl/</code> sets the academic level field to empty.</li>
@@ -346,11 +344,13 @@ Executing any of the commands in this section will bring you to the students int
               <li>Must be alphanumeric characters.</li>
               <li>Case-insensitive</li>
               <li>To add multiple tags to a student, you need to add <code>t/</code> before every tag name.</li>
+              <li>Duplicate tags for the same student will be considered as one tag.</li>
             </ul></td>
             <td><ul>
               <li><code>t/unpaid</code> is valid.</li>
               <li><code>t/unpaid retained</code> is invalid.</li>
               <li><code>t/unpaid t/</code> replaces existing tags with the <code>unpaid</code> tag.</li>
+              <li><code>t/new t/new</code> is equivalent to <code>t/new</code>.</li>
               <li><code>t/</code> clears <strong>all</strong> tags.</li>
             </ul></td>
         </tr>
@@ -369,6 +369,20 @@ Executing any of the commands in this section will bring you to the students int
         </tr>
     </tbody>
 </table>
+
+<div markdown="block" class="alert alert-info" id="email-format">**:information_source: Email Format:**<br>
+
+Emails should be of the format **local-part@domain** and adhere to the following constraints:
+
+1. The local-part should only contain alphanumeric characters and these special characters, **+_.-**. The local-part may not start or end with any special characters.
+2. This is followed by a **@** and then a domain name. 
+3. The domain name is made up of domain labels separated by periods. 
+4. The domain name must:
+    - end with a domain label at least 2 characters long
+    - have each domain label start and end with alphanumeric characters
+    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1188,7 +1202,6 @@ Mainstream OS | Windows, Linux, Unix, OS-X.
 Parameter | User input required to specify the data to be saved into the application.
 Recurring lesson | A lesson that will occur more than once in patterned intervals.
 UI | User Interface - the means by which the user and the app interact.
-UTC+8 | The UTC offset used by Singapore Standard Time (SST), 8 hours ahead of UTC. Historically also referred to as GMT+8. UTC, or Coordinated Universal Time, is the primary time standard by which the world regulates clocks and time.
 UX | User Experience - The experience a user has when using the app.
 
 <br />
