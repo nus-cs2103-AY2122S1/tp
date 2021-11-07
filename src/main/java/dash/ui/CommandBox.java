@@ -24,17 +24,16 @@ public class CommandBox extends UiPart<Region> {
 
     /**
      * A list of Strings to set in commandTextField.
-     * The list is padded with an empty String at index 0.
-     * For the rest of the list, the String at index n is the nth most recent user input.
-     * e.g. String at index 3 is the 3rd most recent user input.
+     * The String at index n is the (n+1)th most recent user input.
+     * e.g. String at index 3 is the 4th most recent user input.
      */
-    private final ArrayList<String> paddedUserInputList;
+    private final ArrayList<String> userInputList;
 
     /**
      * The position of the current text set in the command box in the user input list.
      * When this is negative, then no input is set.
      */
-    private int currentUserInputIndex = 0;
+    private int currentUserInputIndex = -1;
 
     @FXML
     private TextField commandTextField;
@@ -46,8 +45,7 @@ public class CommandBox extends UiPart<Region> {
     public CommandBox(CommandExecutor commandExecutor, ArrayList<String> userInputList) {
         super(FXML);
         this.commandExecutor = commandExecutor;
-        userInputList.add(0, "");
-        this.paddedUserInputList = userInputList;
+        this.userInputList = userInputList;
 
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
@@ -60,7 +58,7 @@ public class CommandBox extends UiPart<Region> {
      */
     @FXML
     private void handleCommandEntered() {
-        currentUserInputIndex = 0;
+        currentUserInputIndex = -1; // Reset index to -1
 
         String commandText = commandTextField.getText();
         if (commandText.equals("")) {
@@ -80,22 +78,18 @@ public class CommandBox extends UiPart<Region> {
      */
     @FXML
     public void handleUpOrDownArrowKeyPressed(KeyCode keyCode) {
-        if (keyCode == KeyCode.DOWN) {
-            if (currentUserInputIndex == 0) {
+        if (keyCode == KeyCode.DOWN && currentUserInputIndex >= 0) {
+            currentUserInputIndex--;
+            if (currentUserInputIndex == -1) {
+                commandTextField.setText(""); // Index is -1, command box set to empty string
                 return;
             }
-            currentUserInputIndex--;
-            commandTextField.setText(paddedUserInputList.get(currentUserInputIndex));
+            commandTextField.setText(userInputList.get(currentUserInputIndex));
             commandTextField.end();
         }
-
-        if (keyCode == KeyCode.UP) {
-            if (currentUserInputIndex == paddedUserInputList.size() - 1) {
-                commandTextField.end();
-                return;
-            }
+        if (keyCode == KeyCode.UP && currentUserInputIndex < userInputList.size() - 1) {
             currentUserInputIndex++;
-            commandTextField.setText(paddedUserInputList.get(currentUserInputIndex));
+            commandTextField.setText(userInputList.get(currentUserInputIndex));
             commandTextField.end();
         }
     }
