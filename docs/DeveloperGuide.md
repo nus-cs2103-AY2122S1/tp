@@ -17,32 +17,32 @@ title: Developer Guide
   - [Storage component](#storage-component)
   - [Common classes](#common-classes)
 - [**Implementation**](#implementation)
-    - [Add Event feature](#add-event-feature)
+    - [Add Event feature - addevent](#add-event-feature---addevent)
        - [Implementation Details](#implementation-details)
        - [Implementation Rationale](#implementation-rationale)
-    - [Remove Event feature](#remove-event-feature)
+    - [Delete Event feature - deleteEvent](#delete-event-feature---deleteevent)
        - [Implementation Details](#implementation-details-1)
        - [Design Considerations](#design-considerations)
-          - [Aspect: Specifying Event to be Removed](#aspect-specifying-event-to-be-removed)
+          - [Aspect: Specifying event to be deleted](#aspect-specifying-event-to-be-deleted)
     - [Filter Event feature](#filter-event-feature)
       - [Implementation Details](#implementation-details-2)
       - [Implementation Rationale](#implementation-rationale-1)
       - [Design Considerations](#design-considerations-1)
         - [Aspect: Criteria to filter by](#aspect-criteria-to-filter-by)
         - [Aspect: With or without prefix](#aspect-with-or-without-prefix)
-    - [View Participant's Details feature](#view-participants-details-feature)
+    - [View Participant's Details feature - view](#view-participants-details-feature---view)
       - [Implementation Details](#implementation-details-3)
       - [Implementation Rationale](#implementation-rationale-2)
       - [Design Considerations](#design-considerations-2)
-        - [Aspect: Similar participant IDs](#aspect-similar-participant-ids)
+        - [Aspect: Method of finding a participant](#aspect-method-of-finding-a-participant)
     - [Add/Remove Participant to/from event - enroll/expel](#addremove-participant-tofrom-event---enrollexpel)
       - [Implementation Details](#implementation-details-4)
       - [Implementation Rationale](#implementation-rationale-3)
-    - [View Event Details feature](#view-event-details-feature)
+    - [View Event Details feature - showDetails](#view-event-details-feature---showdetails)
       - [Implementation Details](#implementation-details-5)
       - [Implementation Rationale](#implementation-rationale-4)
       - [Design Considerations](#design-considerations-3)
-        - [Aspect: Similar Event names](#aspect-similar-event-names)
+        - [Aspect: Similar event names](#aspect-similar-event-names)
     - [\[Proposed\] Undone Event feature](#proposed-undone-event-feature)
       - [Proposed Implementation](#proposed-implementation)
     - [\[Proposed\] Enroll and Expel multiple Participants from multiple events](#proposed-enroll-and-expel-multiple-participants-from-multiple-events)
@@ -155,16 +155,21 @@ The rest of the App consists of four components.
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues 
+the command `delete 1`.
 
 <img src="images/DG-images/ArchitectureSequenceDiagram.png" width="574" />
 
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API 
+  `interface` mentioned in the previous point.
 
-For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
+For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using 
+the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component 
+through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the 
+implementation of a component), as illustrated in the (partial) class diagram below.
 
 <img src="images/DG-images/ComponentManagers.png" width="300" />
 
@@ -176,16 +181,23 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 ![Structure of the UI Component](images/DG-images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ParticipantListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ParticipantListPanel`, 
+`StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures 
+the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files 
+that are in the `src/main/resources/view` folder. For example, the layout of the 
+[`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) 
+is specified in 
+[`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Participant` or `Event` objects residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Participant` or `Event` objects residing in the 
+  `Model`.
 
 ### Logic component
 
@@ -197,15 +209,18 @@ Here's a (partial) class diagram of the `Logic` component:
 
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is 
+   executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
-The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` 
+API call.
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/UG-screenshots/DeleteSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` 
+should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
@@ -213,8 +228,12 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/DG-images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a 
+  placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to 
+  parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns 
+  back as a `Command` object.
+* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` 
+  interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
@@ -224,10 +243,16 @@ How the parsing works:
 
 The `Model` component,
 
-* stores Managera's data i.e., all `Participant` and `Event` objects (which are contained in `UniqueParticipantList` and `UniqueEventList` objects respectively).
-* stores the currently 'selected' `Participant` and `Event` objects (e.g., results of a search query) as separate _filtered_ lists which is exposed to outsiders as unmodifiable `ObservableList<Participant>` and `ObservableList<Event>` that can be 'observed' e.g. the UI can be bound to these lists so that the UI automatically updates when the data in the lists change.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+* stores Managera's data i.e., all `Participant` and `Event` objects (which are contained in `UniqueParticipantList` 
+  and `UniqueEventList` objects respectively).
+* stores the currently 'selected' `Participant` and `Event` objects (e.g., results of a search query) as 
+  separate _filtered_ lists which is exposed to outsiders as unmodifiable `ObservableList<Participant>` and 
+  `ObservableList<Event>` that can be 'observed' e.g. the UI can be bound to these lists so that the UI automatically 
+  updates when the data in the lists change.
+* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a 
+  `ReadOnlyUserPref` objects.
+* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they 
+  should make sense on their own without depending on other components)
 
 
 ### Storage component
@@ -238,8 +263,10 @@ The `Model` component,
 
 The `Storage` component,
 * can save both Managera data and user preference data in json format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only 
+  the functionality of only one is needed).
+* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects 
+  that belong to the `Model`)
 
 ### Common classes
 
@@ -251,7 +278,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Add Event feature
+### Add Event feature - addEvent
 
 This feature allows Managera users to create an event at the specified date and time.
 
@@ -264,45 +291,49 @@ The `AddEventCommandParser` reads the user's input and passes it to `ParserUtil`
 date and time are valid. Then, an Event is created with the returned `EventName`, `EventDate` and `EventTime` objects. 
 This event will be supplied to the `addEventCommand` to be executed.
 
-Since Managera employs a UniqueEventList, it should not have more than one Event with the same name and date. The `addressBook` 
-will check if the given event already exists. If not, it will be successfully added to the `addressBook` through the model. 
+Since Managera employs a UniqueEventList, it should not have more than one Event with the same name and date. The 
+`addressBook` 
+will check if the given event already exists. If not, it will be successfully added to the `addressBook` through 
+the model. 
 Otherwise, an exception will be thrown, and an error message will be displayed to the user.
 
 #### Implementation Rationale
 
-As events may span a full day, we decided to implement time as an optional attribute of the Event. If a time is not 
+As events may span a full day, we decided to implement time as an optional attribute of the event. If a time is not 
 specified for an event, Managera will assume it as a full-day event. To accommodate the addition of events to Managera, 
-new classes such as EventName, EventDate and EventTime were also implemented. These classes function as abstractions 
-for the name, date and time of an Event object respectively. These abstractions are helpful in ensuring reliability of 
+new classes such as `EventName`, `EventDate` and `EventTime` were also implemented. These classes function as abstractions 
+for the name, date and time of an `Event` respectively. These abstractions are helpful in ensuring reliability of 
 the program by hiding the underlying details.
 
-### Delete Event feature
+### Delete Event feature - deleteEvent
 
-This feature allows Managera users to delete an existing event at a particular index of the displayed list.
+This feature allows Managera users to delete an existing event at a particular index of the displayed event list.
 
 #### Implementation Details
 
 Since the `AddressBookParser` is responsible for determining the type of `Command` to be created from user input,
 we can simply add a new `commandType` case for `DeleteEventCommand` in `AddressBookParser`.
 
-The `DeleteEventCommandParser` reads the user's input and passes it to `ParserUtil` which returns an `Index`. This 
-`Index` will be supplied to the `DeleteEventCommand` to be executed. 
+The `DeleteEventCommandParser` reads the user's input and passes it to `ParserUtil` which returns an `Index`.
+If the index given by the user is not a zero-based index, a `ParseException` will be thrown before
+the parser creates the command to prevent any further error. If the index is valid, a `DeleteEventCommand` 
+will be created by the parser with the created `Index`.
 
 When the command is executed, there is a check to ensure the index is within the range of the displayed list. If the 
-index is out of range, then an exception is thrown, and an error message is displayed to the user. Otherwise, the 
+index is out of range, a `CommandException` is thrown, and an error message is displayed to the user. Otherwise, the 
 execution will continue, and the respective Event at the index is deleted.
 
 #### Design Considerations:
-##### Aspect: Specifying Event to be Deleted: 
+##### Aspect: Specifying event to be deleted: 
 
-* **Alternative 1 (Current Choice)**: Delete by Index:
+* **Alternative 1 (Current Choice)**: Delete by index:
     * Pros:
         1. The index of the event in the currently displayed list can be directly used.
         2. Faster and more intuitive for users.
     * Cons:
         1. The index is independent of the Event, which may lead to an inconsistent user experience.
          
-* **Alternative 2**: Delete by Event Name:
+* **Alternative 2**: Delete by event name:
     * Pros:
         1. User can be more sure of the event they are removing, since it is referencing the Event name.
     * Cons:
@@ -336,8 +367,9 @@ event list. When the command is executed, the `model` will filter the `FilteredL
 #### Implementation Rationale
 
 With considerations to how the `Event` class is implemented, some events do not have time associated with them.
-We feel that since all `Event` objects have a date associated through the `EventDate` class, filtering should be done primarily 
-through date i.e. `EventDate`. However, understanding that users might want to filter by time too, it is included as an 
+We feel that since all `Event` objects have a date associated through the `EventDate` class, filtering should be done 
+primarily through date i.e. `EventDate`. However, understanding that users might want to filter by time too, it is 
+included as an 
 optional criteria for filtering.
 
 #### Design Considerations:
@@ -381,47 +413,54 @@ The following is the sequence diagram for how a `FilterEventCommand` works inter
 
 ![FilterEventSequenceDiagram](images/DG-images/FilterEventSequenceDiagram.png)
 
-### View Participant's Details feature
+### View Participant's Details feature - view
 
-This feature allows Managera users to look for a specific Participant and view their details. The search is done using
-the Participant's index in the displayed Participant list.
+This feature allows Managera users to look for a specific participant and view their details. The search is done using
+the participant's index in the displayed participant list.
 
 #### Implementation Details
 
-The `AddressBookParser` is responsible for determining the type of `Command` to be created from user input,
+Since the `AddressBookParser` is responsible for determining the type of `Command` to be created from user input,
 we can simply add a new `commandType` case for `ViewCommand` in `AddressBookParser`.
 
-A `ViewCommandParser` parses the user's input and creates an `Index` object which the `ViewCommand` will use to search 
-for the Participant. The `ViewCommand` created by `ViewCommandParser` will then contain the `Index` to filter the
-Participant list. When the command is executed, the `model` obtains the Participant by getting the `Participant` with 
-the given `Index` from the `FilteredList<Participant>` and displays its details.
+The `ViewCommandParser` reads the user's input and passes it to `ParserUtil` which returns an `Index`. If the index 
+given by the user is not a zero-based index, a `ParseException` will be thrown before the parser creates the command 
+to prevent any further error. If the index is valid, a `ViewCommand` will be created by the parser with the 
+created `Index`.
+
+When the command is executed, there is a check to ensure the index is within the range of the displayed list. If the
+index is out of range, a `CommandException` is thrown, and an error message is displayed to the user. Otherwise, the
+execution will continue, and `model` will obtain the participant by getting the `Participant` with the given `Index` 
+from the `FilteredList<Participant>` before displaying the participant's details to the user.
 
 #### Implementation Rationale
 
-Since each Participant has a unique index in the displayed Participant list, it provides a convenient way for the user 
-to look for a specific Participant if index is used as the criterion. The `find` command provides similar functionality,
-but returns a list of Participants instead because it uses names, which are more imprecise. Hence, a separate command 
-was decidedly implemented to allow users the ability to sieve out a single Participant for a more detailed view.
+Since each participant has a unique index in the displayed participant list, it provides a convenient way for the user 
+to look for a specific participant if index is used as the criterion. The `find` command provides similar functionality,
+but returns a list of participants instead because it uses names, which are more imprecise. Hence, a separate command 
+was decidedly implemented to allow users the ability to sieve out a single participant for a more detailed view.
 
 #### Design Considerations:
-##### Aspect: Similar participant IDs:
+##### Aspect: Method of finding a participant:
 
 * **Alternative 1 (Current Choice)**: Find by index:
     * Pros:
-        1. The details of the specific Participant are returned immediately, provided that the user's input is a valid 
-           index in the displayed Participant list.
+        1. The details of the specific participant are returned immediately, provided that the user's input is a valid 
+           index in the displayed participant list.
         2. Simple implementation.
     * Cons:
-        1. The user has to know the index of the Participant, which can be troublesome with a long list of Participants.
+        1. The user has to know the index of the participant, which can be troublesome with a long list of participants.
            However, the user can use the `find` function to filter their search, making this process slightly easier.
 
 * **Alternative 2**: Find by Participant ID:
     * Pros:
-        1. The details of the specific Participant are returned immediately, provided that the user's input is an exact
+        1. The details of the specific participant are returned immediately, provided that the user's input is an exact
            match of the Participant's ID.
     * Cons:
-        1. The current implementation does not provide the Participant ID to the user, and providing more details may 
-           come across to the user as more cluttered.
+        1. The current implementation does not provide the Participant ID to the user, and providing more details in 
+           the UI might make it too cluttered.
+        2. The user needs to know the exact Participant ID of the participant they want to view, which is not a 
+           trivial task.
 
 The following is the sequence diagram for how a `ViewCommand` works internally.
 
@@ -433,100 +472,112 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ### Add/Remove Participant to/from event - enroll/expel
 
-This feature allows Managera users to quickly add/remove Participant to/from event according to the current filtered
- list of events and Participant visible to user.
+This feature allows Managera users to quickly add/remove a participant to/from an event according to the current 
+filtered list of events and participants visible to the user.
 
 #### Implementation Details
 
-The `AddressBookParser` is responsible for determining the type of `Command` to be created from user input, 
-hence we add new `commandType` cases for `AddParticipantToEventCommand` and `RemoveParticipantFromEventCommand` in `AddressBookParser`
+Since the `AddressBookParser` is responsible for determining the type of `Command` to be created from user input, 
+we can simply add new `commandType` cases for `AddParticipantToEventCommand` and `RemoveParticipantFromEventCommand` 
+in `AddressBookParser`
 
-A `AddParticipantToEventParser` parses the user's input and obtain indexes for Participant and Event respectively. 
-If the indexes given by the user are not zero-based indexes, a `ParseException` will be thrown before `AddParticipantToEventParser` creates the command itself to prevent any further error. 
-If all indexes are valid, a `AddParticipantToEventCommand` will be created by the parser.
+A `AddParticipantToEventParser` parses the user's input and obtain indexes for the participant and event respectively. 
+If the indexes given by the user are not zero-based indexes, a `ParseException` will be thrown before the parser 
+creates the command itself to prevent any further error. If all indexes are valid, an `AddParticipantToEventCommand` 
+will be created by the parser.
 
 The `AddParticipantToEventCommand` created by `AddParticipantToEventParser` contains 2 zero-based indexes. 
 The first one is used to identify the `Participant` while the second is used to identify the `Event`. 
-When the command is executed, the `model` first tries to obtain Participant at specified index (if unsuccessful, a `CommandException` will be thrown accordingly) and then event will be retrieved in the same manner (if unsuccessful, a `CommmandException` will be thrown accordingly). If the Event does not already contain the `Participant` object, the Participant will be added to the event accordingly.
- Otherwise, a `CommandException` will be thrown.
+When the command is executed, the `model` first tries to obtain the `Participant` at specified index (if unsuccessful, 
+a `CommandException` will be thrown accordingly) and then the `Event` will be retrieved in the same manner 
+(if unsuccessful, a `CommmandException` will be thrown accordingly). If the `Event` does not already contain the 
+`Participant`, the `Participant` will be added to the `Event` accordingly. Otherwise, a `CommandException` will 
+be thrown.
 
-A `RemoveParticipantFromEventParser` parses the user's input and obtain indexes for Participant and Event respectively. 
-The workflow is nearly identical to `AddParticipantToEvent`. It is only that instead of throwing `CommandException` if `Participant` object already exists in the event,
-the `CommandException` will be thrown when `Participant` *doesn't* exist in the event. After all of that, the `Participant` object will be removed from the `Event`. 
+A `RemoveParticipantFromEventParser` parses the user's input and obtain indexes for the participant and event 
+respectively. The workflow is nearly identical to `AddParticipantToEvent` with one difference: instead of throwing 
+`CommandException` if `Participant` already exists in the event, the `CommandException` will be thrown when 
+`Participant` *does not* exist in the event. Otherwise, the participant will be removed from the event. 
 
 
 #### Implementation Rationale
 
-Since the command implies that the index of Participant should come before event, there is no need for prefixes to be used as that would incur extra typing for the user and slow down the process.
+Since the command implies that the index of the participant should come before the index of the event, there is no 
+need for prefixes to be used as that would incur extra typing for the user and slow down the process of adding/removing
+participants to/from events.
 
 The following activity diagrams summarise what happens when a user executes a new command in each case:
 
-`AddParticipantToEvent` - `enroll`
+`AddParticipantToEvent` command:
 
 ![AddParticipantToEventActivityDiagram](images/DG-images/AddParticipantToEventByIndexActivityDiagram.png)
 
-`RemoveParticipantFromEvent` - `expel`
+`RemoveParticipantFromEvent` command:
 
 ![RemoveParticipantFromEventActivityDiagram](images/DG-images/RemoveParticipantByIndexActivityDiagram.png)
 
-The command keywords to add/remove participant to/from events are `enroll` and `expel`
-respectively as many have found `addParticipant` and `removeParticipant` to be too long for the commands that are used 
-regularly and the main core of the application.
+The command keywords to add/remove participant to/from events are `enroll` and `expel` respectively as many users 
+found `addParticipant` and `removeParticipant` to be too long. This problem becomes apparent since these commands are 
+used regularly and are core features of Managera.
 
-### View Event Details feature
+### View Event Details feature - showDetails
 
-This feature allows Managera users to find an Event by name and view its details. The search is done using the Event's 
-index in the displayed Event list.
+This feature allows Managera users to find an event by name and view its details. The search is done using the Event's 
+index in the displayed event list.
 
 #### Implementation Details
 
-The `AddressBookParser` is responsible for determining the type of `Command` to be created from user input, hence we 
-simply added a new `commandType` case for `ShowEventDetailsCommand` in `AddressBookParser`.
+Since the `AddressBookParser` is responsible for determining the type of `Command` to be created from user input, we 
+can simply add a new `commandType` case for `ShowEventDetailsCommand` in `AddressBookParser`.
 
-A `ShowEventDetailsCommandParser` parses the user's input and creates an `Index` object which the
-`ShowEventDetailsCommand` uses to search for the Event. The `ShowEventDetailsCommand` created by 
-`ShowEventDetailsParser` will then contain the `Index` used to filter the Event list. When the command is executed, the 
-`model` obtains the Event by getting the `Event` with the given `Index` from the `FilteredList<Event>` and displays its 
-details.
+The `ShowEventDetailsCommandParser` reads the user's input and passes it to `ParserUtil` which returns an `Index`. 
+If the index given by the user is not a zero-based index, a `ParseException` will be thrown before the parser 
+creates the command to prevent any further error. If the index is valid, a `ShowEventDetailsCommand` will be created 
+by the parser with the created `Index`.
+
+When the command is executed, there is a check to ensure the index is within the range of the displayed list. If the
+index is out of range, a `CommandException` is thrown, and an error message is displayed to the user. Otherwise, the
+execution will continue, and `model` will obtain the event by getting the `Event` with the given `Index`
+from the `FilteredList<Event>` before displaying the event's details to the user.
 
 #### Implementation Rationale
 
-Since each Event has a unique index in the displayed Event list, it provides a convenient way for the user to look for a
-specific Event if index is used as the criterion. 
+Since each event has a unique index in the displayed event list, it provides a convenient way for the user to look for a
+specific event if index is used as the criterion. 
 
-Another command similar in function is `findEvent`, where the model will filter the existing Event list and display the 
-Events with names that contain a given keyword. However, this implementation is meant for returning a list of possibly 
-multiple Events. Since we are only looking for one particular Event, we decided that instead of filtering the Event list 
-to display just the one Event, we leave the Event list untouched and simply return the Event details to the results 
-display.
+Another command similar in function is `findEvent`, where the model will filter the existing event list and display the 
+events with names that contain a given keyword. However, this implementation is meant for returning a list of possibly 
+multiple events. Since we are only looking for one particular event, we decided that instead of filtering the event 
+list to display just the one event, we leave the event list untouched and simply return the event details to the 
+results display.
 
 #### Design Considerations:
-##### Aspect: Similar Event names:
+##### Aspect: Similar event names:
 
 * **Alternative 1 (Current Choice)**: Find by index:
     * Pros:
-        1. The details of the specific Event are returned immediately, provided that the user's input is a valid Event
-           index in the displayed Event list.
+        1. The details of the specific event are returned immediately, provided that the user's input is a valid index 
+           in the displayed event list.
         2. Simple implementation.
     * Cons:
-        1. The user has to know the index of the Event, which can be troublesome with a long list of Events. However,
+        1. The user has to know the index of the event, which can be troublesome with a long list of events. However,
            the user can use the `findEvent` function to filter their search, making this process slightly easier.
 
 * **Alternative 2**: Find by exact name:
     * Pros:
-        1. The details of the specific Event are returned immediately, provided that the user's input is an exact
-           match of the Event's name.
+        1. The details of the specific event are returned immediately, provided that the user's input is an exact
+           match of the event's name.
         2. Relatively simple implementation.
     * Cons:
-        1. The user has to know the exact name of the Event, otherwise no Event, or the wrong Event, may be found.
-        2. If the Event name is long, typographical errors are likely, resulting in the desired Event not being found.
+        1. The user has to know the exact name of the event, otherwise no events, or the wrong event, may be found.
+        2. If the event name is long, typographical errors are likely, resulting in the desired event not being found.
 
 
 * **Alternative 3**: Find by similar names or a given keyword:
     * Pros:
-        1. A list of Events with names that contain the user's input are returned, offering greater flexibility
-           if the user does not fully recall the entire name of the Event they are looking for. The search can be
-           further refined by subsequent user input to narrow it down to the specific Event.
+        1. A list of events with names that contain the user's input are returned, offering greater flexibility
+           if the user does not fully recall the entire name of the event they are looking for. The search can be
+           further refined by subsequent user input to narrow it down to the specific event.
     * Cons:
         1. Relatively harder implementation.
         2. Might be more troublesome and time-consuming to have to refine the search multiple times.
@@ -545,29 +596,29 @@ The following activity diagram summarises what happens when a user executes a ne
 
 The proposed undone event feature is an add-on command to the current implementation of Managera. Since
 the `AddressBookParser` is responsible for determining the type of `Command` to be created from user input,
-a new `commandType` case for `UndoneEventCommand` is required in `AddressBookParser`.
+a new `commandType` for `UndoneEventCommand` needs to be added to `AddressBookParser`.
 
 An `UndoneEventCommandParser` is needed to parse the user's input and creates an `Index` representing the position of
-the event in the Event list. The `UndoneEventCommand` created by `UndoneEventCommandParser` will contain the `Index`
-of the event in the displayed Event list to be undone. When the command is executed, the `model` will retrieve the event at the specified
-`Index` and change the completion status of the Event object.
+the event in the event list. The `UndoneEventCommand` created by `UndoneEventCommandParser` will contain the `Index`
+of the event in the displayed event list to be undone. When the command is executed, the `model` will retrieve the 
+`Event` at the specified `Index` and change the completion status of the `Event`.
 
 ### \[Proposed\] Enroll and Expel multiple Participants from multiple events
 
 #### Proposed Implementation
 
 The current implementation of `AddParticipantToEventCommand`(enroll) and `RemoveParticipantFromEventCommand`(expel)
-only allows the enrolling/expelling of a single Participant to/from a single Event. To extend this feature to:
+only allows the enrolling/expelling of a single participant to/from a single event. To extend this feature to:
 
-1. Enroll/Expel a Participant to/from multiple Events.
-2. Enroll/Expel multiple Participants to/from an Event.
-3. Enroll/Expel multiple Participants to/from multiple Events.
+1. Enroll/Expel a participant to/from multiple events.
+2. Enroll/Expel multiple participants to/from an event.
+3. Enroll/Expel multiple participants to/from multiple events.
 
 It is recommended to incorporate the use of the `Prefix` class in these commands. Instead of the current syntax of
 `enroll PARTICIPANT_INDEX EVENT_INDEX` and `expel PARTICPANT_INDEX EVENT_INDEX`. A change to 
 `enroll pid/PARTICIPANT_INDEXES... eid/EVENT_INDEXES...` and `expel pid/PARTICIPANT_INDEXES... eid/EVENT_INDEXES...`
-allows these cases to be possible. The `model` will then remove each of the specified Participants from each of the
-specified Events.
+allows these cases to be possible. The `model` will then add/remove each of the specified participants to/from each 
+of the specified events.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -593,14 +644,13 @@ specified Events.
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage events and event Participants faster than a typical mouse/GUI driven app
-
+**Value proposition**: manage events and event participants faster than a typical mouse/GUI driven app
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                          |
+| Priority | As an …​                                    | I want to …​                     | So that I can…​                                                          |
 | -------- | ------------------------------------------- | ---------------------------------- | ------------------------------------------------------------------------------ |
 | `* * *`  | Event organiser                             | add an upcoming event to my list   | keep track of the details of all events I will be organising                   |
 | `* * *`  | Event organiser                             | add a Participant to an event      | keep track of the participants for an event                                    |
