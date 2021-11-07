@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
@@ -9,7 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_STATUS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY_SHIFT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,19 +35,17 @@ public class RemoveMarkCommand extends Command {
             + "[" + PREFIX_DASH_NAME + " NAME] "
             + "[" + PREFIX_DASH_PHONE + " PHONE] "
             + "[" + PREFIX_DASH_EMAIL + " EMAIL] "
-            + "[" + PREFIX_DASH_ADDRESS + " ADDRESS] "
             + "[" + PREFIX_DASH_SALARY + " SALARY] "
             + "[" + PREFIX_DASH_STATUS + " STATUS] "
             + "[" + PREFIX_DASH_ROLE + " ROLE]... "
-            + Messages.DATE_RANGE_INPUT
-            + "[" + PREFIX_DAY_SHIFT + "END DATE]\n\n"
+            + Messages.DATE_RANGE_INPUT + "\n\n"
             + "Example:\n"
             + COMMAND_WORD + " " + PREFIX_DASH_INDEX + "1"
-            + " " + PREFIX_DAY_SHIFT + "2021-11-18\n"
+            + " " + PREFIX_DATE + "2021-11-18\n"
             + COMMAND_WORD + " " + PREFIX_DASH_NAME + "Jace "
-            + PREFIX_DAY_SHIFT + "2021-11-11" + " " + PREFIX_DAY_SHIFT + "2021-11-13";
+            + PREFIX_DATE + "2021-11-11" + " " + PREFIX_DATE + "2021-11-13";
 
-    public static final String NO_STAFF_SATISFIES_QUERY = "No one satisfies the conditions specified";
+    public static final String NO_STAFF_SATISFIES_QUERY = "No one satisfies the conditions specified.";
     public static final String STAFF_UNMARKED = "Staff unmarked:\n%1$s";
 
     private final PersonContainsFieldsPredicate predicate;

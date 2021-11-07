@@ -163,31 +163,6 @@ See Also:
 
 [Clear Command](#clearing-all-entries--clear)
 
-#### Setting Default Shift Timings : `setDefaultShiftTimings `
-
-Set the default timings for the morning and afternoon shift. Please note:
-* All 4 timings must be present
-* Timings must be provided in an `HH:mm` format, using the 24-hour clock. (Example: `22:00`)
-* The duration of the shift must not be zero (i.e. the shift cannot start and end at the same time)
-* The shifts do not overlap, but can have the same start and end times
-* The morning shift must start at noon or before noon. Similarly, the afternoon shift must start at noon or after noon.
-* The default morning shift timings are 10:00 - 16:00, and the default afternoon shift timing is 16:00 - 22:00.
-* The Clear Command will also reset the shift timings to the aforementioned defaults.
-
-Format:
-
-`setDefaultShiftTimings MORNING_START_TIME MORNING_END_TIME AFTERNOON_START_TIME AFTERNOON_END_TIME`
-
-Examples:
-
-`setDefaultShiftTimings 10:00 16:00 17:00 22:00`\
-`setDefaultShiftTimings 09:00 15:00 18:00 23:00`
-
-
-See Also:
-
-[Clear Command](#clearing-all-entries--clear)
-
 
 #### Listing all persons : `list`
 
@@ -423,17 +398,6 @@ Examples:
 `change da/2021-12-28`  
 
 
-#### Viewing schedule of staff(s): `viewSchedule`
-
-Views the schedule of staff(s) that satisfy the query conditions.
-
-
-Formats:  
-`viewSchedule [-n NAME] [-i INDEX] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [-t TAG]...`
-
-Examples:  
-`viewSchedule -n Candice`  
-`viewSchedule -i 123`
 
 The output will look like the following.
 
@@ -572,7 +536,6 @@ Action | Format, Examples
 **Edit** | `edit -n NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [$/SALARY] [s/STATUS] [r/ROLE]... [t/TAG]...` <br> `edit -i INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [$/SALARY] [s/STATUS] [r/ROLE]... [t/TAG]...`
 **Find** | `find -n KEYWORD [MORE_KEYWORDS] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]`<br> `find -i [INDEX]` <br> e.g., `find -n James Jake`
 **View staff(s) statistics** | `istaff [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]...`
-**View staff schedule** | `viewSchedule [-n NAME] [-i INDEX] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [-t TAG]... [da/START_DATE] [da/END_DATE]`
 **Add staff to shift** | `addShift -n NAME d/DAYOFWEEK-SHIFTNUMBER [da/START_DATE] [da/END_DATE]` <br> `addShift -i INDEX d/DAYOFWEEK-SHIFTNUMBER [da/START_DATE] [da/END_DATE]`
 **Swap shifts** | `swapShift -n NAME -n NAME d/day-shift_number d/day-shift_number [da/START_DATE] [da/END_DATE]` <br> `swapShift -n NAME d/day-shift_number -n NAME d/day-shift_number [da/START_DATE] [da/END_DATE]`
 **Set shift time** | `setShiftTime -n NAME d/DAYOFWEEK-SHIFTNUMBER st/hh:mm-hh:mm [da/START_DATE] [da/END_DATE]` <br> `setShiftTime -i INDEX d/DAYOFWEEK-SHIFTNUMBER st/hh:mm-hh:mm [da/START_DATE] [da/END_DATE]`

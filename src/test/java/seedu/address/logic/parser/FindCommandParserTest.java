@@ -1,12 +1,12 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 
 import java.util.Arrays;
 
@@ -58,7 +58,7 @@ public class FindCommandParserTest {
         assertParseSuccess(parser, " " + PREFIX_DASH_INDEX + " 1", expectedFindCommand);
 
         //EP:1
-        assertParseFailure(parser, " " + PREFIX_DASH_INDEX + " 0", MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, " " + PREFIX_DASH_INDEX + " 0", MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
     }
 

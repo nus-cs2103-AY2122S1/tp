@@ -120,7 +120,7 @@ public class FindCommand extends Command {
         ObservableList<Person> staffs = model.getFilteredPersonList();
         int counter = 1;
         for (Person p : staffs) {
-            successMessage.append(counter).append(". ").append(p.getName()).append("\n");
+            successMessage.append(counter).append(". ").append(p.toString()).append("\n\n");
             counter++;
         }
         return new CommandResult(
@@ -133,13 +133,14 @@ public class FindCommand extends Command {
         ObservableList<Person> staffs = model.getFilteredPersonList();
         int counter = 1;
         for (Person p : staffs) {
-            successMessage.append(counter).append(". ").append(p.getName()).append("\n");
+            successMessage.append(counter).append(". ").append(p.toString()).append("\n\n");
             counter++;
         }
 
         return new CommandResult(
                 String.format(successMessage.toString(), model.getFilteredPersonList().size()));
     }
+
 
     private void checkModel(Model model, Predicate<Person> predicate) throws CommandException {
         ObservableList<Person> staffs = model.getUnFilteredPersonList();
@@ -164,7 +165,7 @@ public class FindCommand extends Command {
         ObservableList<Person> staffs = model.getFilteredPersonList();
         int counter = 1;
         for (Person p : staffs) {
-            successMessage.append(counter).append(". ").append(p.getName()).append("\n");
+            successMessage.append(counter).append(". ").append(p.toString()).append("\n\n");
             counter++;
         }
         return new CommandResult(
