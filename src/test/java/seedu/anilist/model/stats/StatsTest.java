@@ -1,6 +1,8 @@
 package seedu.anilist.model.stats;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.HashMap;
 
@@ -31,6 +33,10 @@ public class StatsTest {
         int expectedTotalAnimes = 0;
         int expectedNumUniqueGenres = 0;
         HashMap<Genre, Integer> expectedTopGenres = new HashMap<>();
+
+        assertEquals(stats.getWatchingCount(), watchingCount);
+        assertEquals(stats.getToWatchCount(), toWatchCount);
+        assertEquals(stats.getFinishedCount(), finishedCount);
 
         assertEquals(stats.getTotalAnimesCount(), expectedTotalAnimes);
         assertEquals(stats.getNumUniqueGenres(), expectedNumUniqueGenres);
@@ -111,5 +117,29 @@ public class StatsTest {
         assertEquals(stats.getTotalAnimesCount(), expectedTotalAnimes);
         assertEquals(stats.getNumUniqueGenres(), expectedNumUniqueGenres);
         assertEquals(stats.getTopGenres(), expectedTopGenres);
+    }
+
+    @Test
+    public void equals() {
+        Genre firstGenre = new Genre(GenreList.getListOfGenres()[0]);
+        Genre secondGenre = new Genre(GenreList.getListOfGenres()[1]);
+        HashMap<Genre, Integer> genres1 = new HashMap<>() {{
+                put(firstGenre, 2);
+                put(secondGenre, 3);
+            }};
+        HashMap<Genre, Integer> genres2 = new HashMap<>() {{
+                put(secondGenre, 3);
+                put(firstGenre, 2);
+            }};
+        Stats stats1 = new Stats(1, 2, 3, genres1);
+        Stats stats2 = new Stats(1, 2, 3, genres2);
+        Stats stats3 = new Stats(0, 0, 0, new HashMap<>());
+
+        //same Stats object
+        assertTrue(stats1.equals(stats1));
+        //different Stats object
+        assertTrue(stats1.equals(stats2));
+        //different Stats objects with the same status count values and genre sets
+        assertFalse(stats1.equals(stats3));
     }
 }

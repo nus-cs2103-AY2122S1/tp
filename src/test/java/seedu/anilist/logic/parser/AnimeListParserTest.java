@@ -8,7 +8,10 @@ import static seedu.anilist.logic.commands.CommandTestUtil.ACTION_DESC_ADD;
 import static seedu.anilist.logic.commands.CommandTestUtil.ACTION_DESC_DELETE;
 import static seedu.anilist.logic.commands.CommandTestUtil.GENRE_DESC_SCIENCE_FICTION;
 import static seedu.anilist.logic.commands.CommandTestUtil.STATUS_DESC_WATCHING;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_EPISODE_ONE;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_SCIENCE_FICTION;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_AKIRA;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_STATUS_WATCHING;
 import static seedu.anilist.testutil.Assert.assertThrows;
 import static seedu.anilist.testutil.TypicalIndexes.INDEX_FIRST_ANIME;
 
@@ -24,13 +27,21 @@ import seedu.anilist.logic.commands.FindCommand;
 import seedu.anilist.logic.commands.GenreAddCommand;
 import seedu.anilist.logic.commands.GenreCommand;
 import seedu.anilist.logic.commands.GenreDeleteCommand;
+import seedu.anilist.logic.commands.GenreListCommand;
 import seedu.anilist.logic.commands.HelpCommand;
 import seedu.anilist.logic.commands.ListCommand;
+import seedu.anilist.logic.commands.RenameCommand;
+import seedu.anilist.logic.commands.StatsCommand;
+import seedu.anilist.logic.commands.UpdateEpisodeCommand;
+import seedu.anilist.logic.commands.UpdateStatusCommand;
 import seedu.anilist.logic.parser.exceptions.ParseException;
 import seedu.anilist.model.anime.Anime;
 import seedu.anilist.testutil.AnimeBuilder;
 import seedu.anilist.testutil.AnimeUtil;
+import seedu.anilist.testutil.EpisodeDescriptorBuilder;
 import seedu.anilist.testutil.GenresDescriptorBuilder;
+import seedu.anilist.testutil.NameDescriptorBuilder;
+import seedu.anilist.testutil.StatusDescriptorBuilder;
 
 public class AnimeListParserTest {
 
@@ -93,6 +104,12 @@ public class AnimeListParserTest {
     }
 
     @Test
+    public void parseCommand_genrelist() throws Exception {
+        assertTrue(parser.parseCommand(GenreListCommand.COMMAND_WORD) instanceof GenreListCommand);
+        assertTrue(parser.parseCommand(GenreListCommand.COMMAND_WORD + " 3") instanceof GenreListCommand);
+    }
+
+    @Test
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
@@ -105,7 +122,41 @@ public class AnimeListParserTest {
     }
 
     @Test
-    public void parseConfirmationCommand_abortClear() throws Exception {
+    public void parseCommand_rename() throws Exception {
+        RenameCommand.NameDescriptor descriptor =
+                new NameDescriptorBuilder().withName(VALID_NAME_AKIRA).build();
+        String input = RenameCommand.COMMAND_WORD + " " + INDEX_FIRST_ANIME.getOneBased() + " n/ " + VALID_NAME_AKIRA;
+        assertEquals(new RenameCommand(INDEX_FIRST_ANIME, descriptor), parser.parseCommand(input));
+    }
+
+    @Test
+    public void parseCommand_updateEpisode() throws Exception {
+        UpdateEpisodeCommand.EpisodeDescriptor descriptor =
+                new EpisodeDescriptorBuilder().withEpisode(VALID_EPISODE_ONE).build();
+        UpdateEpisodeCommand command = (UpdateEpisodeCommand) parser.parseCommand(
+                UpdateEpisodeCommand.COMMAND_WORD + " " + INDEX_FIRST_ANIME.getOneBased() + " e/ "
+                        + VALID_EPISODE_ONE);
+        assertEquals(new UpdateEpisodeCommand(INDEX_FIRST_ANIME, descriptor), command);
+    }
+
+    @Test
+    public void parseCommand_updateStatus() throws Exception {
+        UpdateStatusCommand.StatusDescriptor descriptor =
+                new StatusDescriptorBuilder().withStatus(VALID_STATUS_WATCHING).build();
+        UpdateStatusCommand command = (UpdateStatusCommand) parser.parseCommand(
+                UpdateStatusCommand.COMMAND_WORD + " " + INDEX_FIRST_ANIME.getOneBased() + " s/ "
+                        + VALID_STATUS_WATCHING);
+        assertEquals(new UpdateStatusCommand(INDEX_FIRST_ANIME, descriptor), command);
+    }
+
+    @Test
+    public void parseCommand_stats() throws Exception {
+        assertTrue(parser.parseCommand(StatsCommand.COMMAND_WORD) instanceof StatsCommand);
+        assertTrue(parser.parseCommand(StatsCommand.COMMAND_WORD + " 4") instanceof StatsCommand);
+    }
+
+    @Test
+    public void parseConfirmationCommand_abortClear() {
         assertTrue(parser.parseConfirmationCommand("n") instanceof AbortClearCommand);
         assertTrue(parser.parseConfirmationCommand("X") instanceof AbortClearCommand);
         assertTrue(parser.parseConfirmationCommand("  ") instanceof AbortClearCommand);
@@ -117,7 +168,7 @@ public class AnimeListParserTest {
     }
 
     @Test
-    public void parseConfirmationCommand_confirmClear() throws Exception {
+    public void parseConfirmationCommand_confirmClear() {
         assertTrue(parser.parseConfirmationCommand("clear") instanceof ConfirmClearCommand);
         //trailing whitespace
         assertTrue(parser.parseConfirmationCommand("clear  ") instanceof ConfirmClearCommand);

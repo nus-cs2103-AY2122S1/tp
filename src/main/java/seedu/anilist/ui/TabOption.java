@@ -3,8 +3,6 @@ package seedu.anilist.ui;
 import static java.util.Objects.requireNonNull;
 import static seedu.anilist.commons.util.AppUtil.checkArgument;
 
-import seedu.anilist.model.anime.Status;
-
 /**
  * This class keeps track of which tab is the current active tab.
  * The current active tab will be the currentTab value.
@@ -69,7 +67,7 @@ public class TabOption {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Status // instanceof handles nulls
+                || (other instanceof TabOption // instanceof handles nulls
                 && currentTab == ((TabOption) other).getCurrentTab()); // state check
     }
 
