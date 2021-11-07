@@ -14,15 +14,8 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.unify.logic.commands.AddCommand;
-import seedu.unify.logic.commands.ClearCommand;
-import seedu.unify.logic.commands.DeleteCommand;
-import seedu.unify.logic.commands.EditCommand;
+import seedu.unify.logic.commands.*;
 import seedu.unify.logic.commands.EditCommand.EditTaskDescriptor;
-import seedu.unify.logic.commands.ExitCommand;
-import seedu.unify.logic.commands.FindCommand;
-import seedu.unify.logic.commands.HelpCommand;
-import seedu.unify.logic.commands.ListCommand;
 import seedu.unify.logic.parser.exceptions.ParseException;
 import seedu.unify.model.task.NameContainsKeywordsPredicate;
 import seedu.unify.model.task.Task;
@@ -52,6 +45,20 @@ public class UniFyParserTest {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_TASK.getOneBased());
         assertEquals(new DeleteCommand(INDEX_LIST_FIRST_TASK), command);
+    }
+
+    @Test
+    public void parseCommand_done() throws Exception {
+        DoneCommand command = (DoneCommand) parser.parseCommand(
+                DoneCommand.COMMAND_WORD + " " + INDEX_FIRST_TASK.getOneBased());
+        assertEquals(new DoneCommand(INDEX_FIRST_TASK), command);
+    }
+
+    @Test
+    public void parseCommand_undone() throws Exception {
+        UndoneCommand command = (UndoneCommand) parser.parseCommand(
+                UndoneCommand.COMMAND_WORD + " " + INDEX_FIRST_TASK.getOneBased());
+        assertEquals(new UndoneCommand(INDEX_FIRST_TASK), command);
     }
 
     @Test
