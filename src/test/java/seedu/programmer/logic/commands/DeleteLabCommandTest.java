@@ -39,7 +39,7 @@ public class DeleteLabCommandTest {
         Lab labToDelete = LAB_6;
         DeleteLabCommand deleteLabCommand = new DeleteLabCommand(labToDelete);
 
-        String expectedMessage = String.format(DeleteLabCommand.MESSAGE_LAB_DOES_NOT_EXIST, labToDelete);
+        String expectedMessage = String.format(Lab.MESSAGE_LAB_NOT_EXISTS, labToDelete);
 
         assertCommandFailure(deleteLabCommand, model, expectedMessage);
     }

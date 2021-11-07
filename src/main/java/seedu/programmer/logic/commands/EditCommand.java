@@ -49,18 +49,19 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_NO_NEW_FIELDS = "There is no fields to be edited. Student's information are "
+            + "already the same as what you have asked to be edited to.";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the ProgrammerError.";
-    public static final String MESSAGE_INVALID_LAB_NUMBER = "The lab does not exist!";
-    public static final String MESSAGE_DUPLICATE_STUDENT_ID = "This student with the same Student Id "
+    public static final String MESSAGE_DUPLICATE_STUDENT_ID = "This student with the same Student ID "
             + "already exists in the ProgrammerError";
     public static final String MESSAGE_DUPLICATE_STUDENT_EMAIL = "This student with the same Email "
             + "already exists in the ProgrammerError";
-    public static final String MESSAGE_EDIT_LAB_SUCCESS = "Lab %1$s updated!\n";
+    public static final String MESSAGE_EDIT_LAB_SUCCESS = "Lab %1$s score has been updated!\n";
+    public static final String MESSAGE_NO_LAB_EDITED = "No labs has been updated.";
 
     private static LabNum labNum2;
     private final Index index;
     private final EditStudentDescriptor editStudentDescriptor;
-
 
     /**
      * @param index of the student in the filtered student list to edit
@@ -69,6 +70,7 @@ public class EditCommand extends Command {
     public EditCommand(Index index, EditStudentDescriptor editStudentDescriptor) {
         requireNonNull(index);
         requireNonNull(editStudentDescriptor);
+        assert(index.getOneBased() >= 1);
 
         this.index = index;
         this.editStudentDescriptor = new EditStudentDescriptor(editStudentDescriptor);
@@ -84,17 +86,18 @@ public class EditCommand extends Command {
         }
 
         Student studentToEdit = lastShownList.get(index.getZeroBased());
-        //Instead of editing the student, create a copy of it and edit the copy
-        //This is to allow the original student to remain unchanged, so that comparison of fields can be carried out.
+
+        //Duplicate a copy of the student specified at the index to be edited.
+        //This allows for the original student to remain unchanged, so that comparison of fields can be carried out.
         Student studentToEditCopy = studentToEdit.copy();
         Student editedStudent = createEditedStudent(studentToEditCopy, editStudentDescriptor);
 
-        //Check if the user edits any field.
-        //Different from the one in EditCommandParser: at this stage user can enter an input
-        //that is identical to the existing field.
+        //Check if the user edited any fields.
+        //Throws CommandException if no fields are changed.
         if (studentToEdit.isIdenticalStudent(editedStudent)) {
-            throw new CommandException(MESSAGE_NOT_EDITED);
+            throw new CommandException(MESSAGE_NO_NEW_FIELDS);
         }
+
 
         if (model.hasOtherStudent(studentToEdit, editedStudent)) {
             if (model.hasOtherSameStudentId(studentToEdit, editedStudent)) {
@@ -108,10 +111,12 @@ public class EditCommand extends Command {
         model.setSelectedStudent(editedStudent);
         model.setSelectedLabs(editedStudent.getLabList());
         if (labNum2 != null) {
-            return new CommandResult(String.format(MESSAGE_EDIT_LAB_SUCCESS, labNum2)
-                                    + String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent));
+            return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent)
+                    + "\n" + String.format(MESSAGE_EDIT_LAB_SUCCESS, labNum2));
         }
-        return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent));
+
+        return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent)
+                + "\n" + MESSAGE_NO_LAB_EDITED);
     }
 
     /**
@@ -137,7 +142,7 @@ public class EditCommand extends Command {
             try {
                 currTotalScore = studentToEdit.getLab(labNum).getLabTotal();
             } catch (NullPointerException e) { //when getLab does not find anything
-                throw new CommandException(MESSAGE_INVALID_LAB_NUMBER);
+                throw new CommandException(Lab.MESSAGE_LAB_NOT_EXISTS);
             }
             labNum2 = labNum;
             updatedLab.updateTotal(currTotalScore);

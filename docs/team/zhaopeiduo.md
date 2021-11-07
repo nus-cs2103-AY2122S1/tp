@@ -1,12 +1,12 @@
----
-layout: page 
+layout: page
 title: Zhao Peiduo's Project Portfolio Page
 ---
 
 ### Project: ProgrammerError
 
-[ProgrammerError](https://github.com/AY2122S1-CS2103-F09-3/tp) (P|E) is a desktop application which helps CS2100 tutors manage their students’ lab results in a simple and
-efficient manner, allowing them to spend less time on administrative processes and more time teaching students.
+[ProgrammerError](https://github.com/AY2122S1-CS2103-F09-3/tp) (P|E) is a desktop application which helps CS2100 tutors
+manage their students’ lab results in a simple and efficient manner, allowing them to spend less time on administrative
+processes and more time teaching students.
 
 Given below are my contributions to the project. My contribution to the project code base is also shown in the
 [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17)
@@ -70,4 +70,5 @@ Given below are my contributions to the project. My contribution to the project 
 
 * PRs reviewed (with non-trivial review comments): [\#194](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/194).
 * Contributed to forum discussions: [\#290](https://github.com/nus-cs2103-AY2122S1/forum/issues/290).
-* Reported bugs and suggestions for other teams in the class: [\#3](https://github.com/ZhaoPeiduo/ped/issues/3), [\#5](https://github.com/ZhaoPeiduo/ped/issues/5) from PE-D
+* Reported bugs and suggestions for other teams in the class: [\#3](https://github.com/ZhaoPeiduo/ped/issues/3)
+  , [\#5](https://github.com/ZhaoPeiduo/ped/issues/5) from PE-D

@@ -23,7 +23,7 @@ public class FillCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        if (checkEmpty(model)) {
+        if (isLastShownListEmpty(model)) {
             model.setProgrammerError(SampleDataUtil.getSampleProgrammerError());
             return new CommandResult(MESSAGE_SUCCESS);
         }
@@ -33,12 +33,12 @@ public class FillCommand extends Command {
     }
 
     /**
-     * Parse the ProgrammerError and check if its empty.
+     * Parses the ProgrammerError and check if its empty.
      * @param model Input the model/data.
      * @return Whether the list is empty or not.
      */
-    public Boolean checkEmpty(Model model) {
-        List<Student> lastShownList = model.getFilteredStudentList();
+    public boolean isLastShownListEmpty(Model model) {
+        List<Student> lastShownList = model.getAllStudents();
         return lastShownList.size() == 0;
     }
 }

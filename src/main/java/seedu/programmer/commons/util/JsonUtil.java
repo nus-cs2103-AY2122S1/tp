@@ -160,11 +160,17 @@ public class JsonUtil {
      */
     public static void writeJsonToCsv(JSONArray jsonData, File destinationFile) {
         // If there were no data, we should not even be trying to write anything
-        assert (jsonData.length() > 0);
+        if (jsonData.length() <= 0) {
+            return;
+        }
+
         try {
-            String csv = CDL.toString(jsonData);
-            FileUtils.writeStringToFile(destinationFile, csv, Charset.defaultCharset());
-            logger.info("The following data was written:\n" + csv);
+            String rawJsonDataString = CDL.toString(jsonData);
+
+            // Store unmarked lab scores as 0 instead of -1 for ease of upload to grade book
+            String parsedJsonData = rawJsonDataString.replace("-1", "0");
+            FileUtils.writeStringToFile(destinationFile, parsedJsonData, Charset.defaultCharset());
+            logger.info("The following data was written:\n" + parsedJsonData);
         } catch (IOException | JSONException e) {
             logger.severe("Unexpected error: " + e);
         }

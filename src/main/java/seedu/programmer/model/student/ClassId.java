@@ -9,8 +9,8 @@ import static seedu.programmer.commons.util.AppUtil.checkArgument;
  */
 public class ClassId {
     public static final String MESSAGE_CONSTRAINTS =
-            "Class ID should only contain 3 alphanumeric characters that begins with B followed by class number "
-                    + "(eg. B01 or B11), and it should not be blank";
+            "Class ID should only contain 3 alphanumeric characters that begins with B followed by 2 digits "
+            + "from 0 to 9 (eg. B01 or B11), and it should not be blank";
 
     // A class ID must start with an alphabet followed by two numbers.
     private static final String VALIDATION_REGEX = "[B][0-9]{2}";
