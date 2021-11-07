@@ -79,10 +79,19 @@ public class TypicalStudents {
     }
 
     public static List<Student> getTypicalStudents() {
-        return new ArrayList<>(List.of(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(List.of(
+                new StudentBuilder(ALICE).build(),
+                new StudentBuilder(BENSON).build(),
+                new StudentBuilder(CARL).build(),
+                new StudentBuilder(DANIEL).build(),
+                new StudentBuilder(ELLE).build(),
+                new StudentBuilder(FIONA).build(),
+                new StudentBuilder(GEORGE).build()));
     }
 
     public static List<Group> getTypicalGroups() {
-        return new ArrayList<>(List.of(TYPICAL_GROUP_CS2103T, TYPICAL_GROUP_CS2101));
+        return new ArrayList<>(List.of(
+                new GroupBuilder(TYPICAL_GROUP_CS2103T).build(),
+                new GroupBuilder(TYPICAL_GROUP_CS2101).build()));
     }
 }
