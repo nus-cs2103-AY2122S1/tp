@@ -1021,17 +1021,23 @@ testers are expected to do more *exploratory* testing.
 ### Charging a guest for services
 
 1. Charges a guest a service
+
    1. Test case: `chargeguest pn/S123 vid/001`<br>
       Expected: Service from vendor with vid `001` has been billed to guest with passport number `S123`.
+
    2. Test case: `chargeguest`<br>
       Expected: No transaction occurs and invalid command format will be shown in the result display.
+
    3. Test case: `chargeguest pn/S123`<br>
       Expected: No transaction occurs and invalid command format will be shown in the result display.
+
    4. Test case: `chargeguest vid/001`<br>
       Expected: No transaction occurs and invalid command format will be shown in the result display.
+
    5. Test case: `chargeguest pn/A999 vid/001` which passport number does not exist<br>
       Expected: No transaction occurs and `Guest with this passport number does not exist` will be shown in the result 
    display.
+
    6. Test case: `chargeguest pn/S123 vid/99999` which vendor id does not exist<br>
       Expected: No transaction occurs and `Vendor with this vendorId does not exist` will be shown in the result display.
 
