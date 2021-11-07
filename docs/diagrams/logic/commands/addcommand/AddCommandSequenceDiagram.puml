@@ -8,12 +8,18 @@ end box
 
 box VersionedModel MODEL_COLOR_T1
 Participant ":VersionedModel" as mm MODEL_COLOR
+Participant ":AcademyDirectory" as ad MODEL_COLOR
 end box
 
 -> ac ++ :execute
 ac -> mm ++ :hasStudent(student)
+mm -> ad ++ :hasStudent(student)
 return
-ac -> mm :addStudent(student)
+return
+ac -> mm ++ :addStudent(student)
+mm -> ad :addStudent(student)
+mm -> mm : updateFilteredStudentList(predicate)
+deactivate
 
 create result
 ac -> result ++ :CommandResult(MESSAGE_SUCCESS, student)
