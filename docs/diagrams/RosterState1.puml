@@ -3,7 +3,7 @@
 
 title After command "roster 1"
 
-package Tuitione <<rectangle>> {
+package TuitiONE <<rectangle>> {
 
     package filteredLessonList <<rectangle>> {
         object "<u>l1:Lesson" as Lesson1 {

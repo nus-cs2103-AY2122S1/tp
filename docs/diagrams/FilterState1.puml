@@ -3,7 +3,7 @@
 
 title After command "filter g/S2 s/English"
 
-package Tuitione <<rectangle>> {
+package TuitiONE <<rectangle>> {
     package filteredLessonList <<rectangle>> {
         object "<u>l1:Lesson" as Lesson1 {
         subject = "English"

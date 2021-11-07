@@ -14,7 +14,7 @@ Class JsonUserPrefsStorage
 Interface Storage <<Interface>>
 Class StorageManager
 
-package "Tuitione Storage" #F4F6F6{
+package "TuitiONE Storage" #F4F6F6{
 Interface TuitioneStorage <<Interface>>
 Class JsonTuitioneStorage
 Class JsonSerializableTuitione

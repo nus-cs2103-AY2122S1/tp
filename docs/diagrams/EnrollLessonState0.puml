@@ -2,7 +2,7 @@
 
 title Initial state
 
-package Tuitione <<rectangle>> {
+package TuitiONE <<rectangle>> {
     package Lessons <<rectangle>> {
         object "<u>l1:Lesson" as Lesson {
         lessonCode = Math-P2-Wed-1800
