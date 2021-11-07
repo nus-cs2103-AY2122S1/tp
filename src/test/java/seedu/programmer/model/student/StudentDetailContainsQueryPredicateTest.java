@@ -10,8 +10,16 @@ import org.junit.jupiter.api.Test;
 import seedu.programmer.testutil.StudentBuilder;
 
 class StudentDetailContainsQueryPredicateTest {
+
+    private static final Student defaultStudent = new StudentBuilder()
+            .withName("Alice Bob")
+            .withStudentId("A0123456X")
+            .withClassId("B01")
+            .withEmail("e1234567@u.nus.edu")
+            .build();
+
     @Test
-    void equals() {
+    public void equals() {
         QueryStudentDescriptor firstDescriptor = new QueryStudentDescriptor(
                 "One", "A1234567X", "B01", "e1234567@u.nus.edu");
         QueryStudentDescriptor secondDescriptor = new QueryStudentDescriptor(
@@ -42,66 +50,31 @@ class StudentDetailContainsQueryPredicateTest {
     public void test_detailsContainsQueryWords_returnsTrue() {
         // query words in predicate matches name
         StudentDetailContainsQueryPredicate predicate = buildPredicate("Alice Bob", null, null, null);
-        assertTrue(predicate.test(new StudentBuilder()
-                .withName("Alice Bob")
-                .withStudentId("A0123456X")
-                .withClassId("B01")
-                .withEmail("e1234567@u.nus.edu")
-                .build()));
+        assertTrue(predicate.test(defaultStudent));
 
         // query words in predicate matches student id
         predicate = buildPredicate(null, "A0123456X", null, null);
-        assertTrue(predicate.test(new StudentBuilder()
-                .withName("Alice Bob")
-                .withStudentId("A0123456X")
-                .withClassId("B01")
-                .withEmail("e1234567@u.nus.edu")
-                .build()));
+        assertTrue(predicate.test(defaultStudent));
 
         // query words in predicate matches class id
         predicate = buildPredicate(null, null, "B01", null);
-        assertTrue(predicate.test(new StudentBuilder()
-                .withName("Alice Bob")
-                .withStudentId("A0123456X")
-                .withClassId("B01")
-                .withEmail("e1234567@u.nus.edu")
-                .build()));
+        assertTrue(predicate.test(defaultStudent));
 
         // query words in predicate matches email
         predicate = buildPredicate(null, null, null, "e1234567@u.nus.edu");
-        assertTrue(predicate.test(new StudentBuilder()
-                .withName("Alice Bob")
-                .withStudentId("A0123456X")
-                .withClassId("B01")
-                .withEmail("e1234567@u.nus.edu")
-                .build()));
+        assertTrue(predicate.test(defaultStudent));
 
         // query words in predicate matches multiple fields
         predicate = buildPredicate("Alice Bob", "A0123456X", "B01", "e1234567@u.nus.edu");
-        assertTrue(predicate.test(new StudentBuilder()
-                .withName("Alice Bob")
-                .withStudentId("A0123456X")
-                .withClassId("B01")
-                .withEmail("e1234567@u.nus.edu")
-                .build()));
+        assertTrue(predicate.test(defaultStudent));
 
         // query words in predicate matches name partially
         predicate = buildPredicate("Alice", null, null, null);
-        assertTrue(predicate.test(new StudentBuilder()
-                .withName("Alice Bob")
-                .withStudentId("A0123456X")
-                .withClassId("B01")
-                .withEmail("e1234567@u.nus.edu")
-                .build()));
+        assertTrue(predicate.test(defaultStudent));
 
         // query words in predicate matches cid and sid in mixed-case and partially
         predicate = buildPredicate(null, "a0123", "b01", null);
-        assertTrue(predicate.test(new StudentBuilder()
-                .withName("Alice Bob")
-                .withStudentId("A0123456X")
-                .withClassId("B01")
-                .withEmail("e1234567@u.nus.edu")
-                .build()));
+        assertTrue(predicate.test(defaultStudent));
     }
 
     @Test

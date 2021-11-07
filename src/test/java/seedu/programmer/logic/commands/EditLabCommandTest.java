@@ -55,7 +55,7 @@ public class EditLabCommandTest {
         Lab labToEdit = new Lab(new LabNum(120));
         EditLabCommand editLabCommand = new EditLabCommand(labToEdit, newLabNum);
 
-        String expectedMessage = String.format(EditLabCommand.MESSAGE_LAB_NOT_EXISTS, labToEdit);
+        String expectedMessage = String.format(Lab.MESSAGE_LAB_NOT_EXISTS, labToEdit);
 
         assertCommandFailure(editLabCommand, model, expectedMessage);
     }
@@ -65,7 +65,7 @@ public class EditLabCommandTest {
         Lab labToEdit = getTypicalLabList().get(NUMBER_FIRST_LAB);
         EditLabCommand editLabCommand = new EditLabCommand(labToEdit, new LabNum(1));
 
-        String expectedMessage = String.format(EditLabCommand.MESSAGE_LAB_ALREADY_EXISTS, labToEdit);
+        String expectedMessage = String.format(Lab.MESSAGE_LAB_ALREADY_EXISTS, labToEdit);
 
         assertCommandFailure(editLabCommand, model, expectedMessage);
     }

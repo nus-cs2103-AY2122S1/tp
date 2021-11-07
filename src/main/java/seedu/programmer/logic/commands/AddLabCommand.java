@@ -28,9 +28,7 @@ public class AddLabCommand extends Command {
 
     public static final String MESSAGE_ADD_LAB_SUCCESS = "Lab Added: %1$s";
 
-    public static final String MESSAGE_LAB_ALREADY_EXISTS = "Lab Already Exists: %1$s";
 
-    public static final String LAB_SCORE_MESSAGE_CONSTRAINTS = "The lab total score should be a positive value.";
 
     public static final String NO_STUDENT_CONSTRAINTS = "There are no students to add the lab to.";
 
@@ -55,14 +53,14 @@ public class AddLabCommand extends Command {
         }
 
         if (result.getLabTotal().getLabTotalScore() < 0) {
-            throw new CommandException(LAB_SCORE_MESSAGE_CONSTRAINTS);
+            throw new CommandException(Lab.MESSAGE_LAB_TOTAL_SCORE_CONSTRAINT);
         }
 
         for (Student std: studentList) {
             Student target = std;
             Lab newLab = this.result.copy();
             if (!target.addLab(newLab)) {
-                throw new CommandException(String.format(MESSAGE_LAB_ALREADY_EXISTS, result));
+                throw new CommandException(String.format(Lab.MESSAGE_LAB_ALREADY_EXISTS, result));
             }
             model.setStudent(target, std);
         }
