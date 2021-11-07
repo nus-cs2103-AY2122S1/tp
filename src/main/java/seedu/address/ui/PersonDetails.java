@@ -42,6 +42,7 @@ public class PersonDetails extends UiPart<Region> {
      */
 
     private Person person;
+    private boolean isFab;
 
     @FXML
     private VBox cardPane;
@@ -85,6 +86,7 @@ public class PersonDetails extends UiPart<Region> {
 
     public void setPerson(Person person, boolean showSimilarity) {
         this.person = person;
+        this.isFab = showSimilarity;
         if (person == null) {
             cardPane.setVisible(false);
             return;
@@ -166,6 +168,10 @@ public class PersonDetails extends UiPart<Region> {
             similarityOptional.setVisible(false);
             similarityOptional.getChildren().parallelStream().forEach(n -> n.setVisible(false));
         }
+    }
+
+    public void setPerson(Person person) {
+        setPerson(person, isFab);
     }
 
     /**

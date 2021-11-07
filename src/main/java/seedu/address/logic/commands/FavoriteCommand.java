@@ -45,6 +45,7 @@ public class FavoriteCommand extends Command {
         }
         model.favoritePerson(personToFavorite);
         if (model.getPersonListControl() != null) {
+            model.setSelectedIndex(model.getFilteredPersonList().indexOf(personToFavorite));
             model.getPersonListControl().refreshPersonListUI();
         }
         String successMessage = personToFavorite.getName().toString()

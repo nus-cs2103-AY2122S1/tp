@@ -46,9 +46,8 @@ public class UnfavoriteCommand extends Command {
         }
         model.unfavoritePerson(personToUnfavorite);
         if (model.getPersonListControl() != null) {
+            model.setSelectedIndex(model.getFilteredPersonList().indexOf(personToUnfavorite));
             model.getPersonListControl().refreshPersonListUI();
-            model.getPersonListControl().setTabIndex(0);
-            model.getPersonListControl().setTabIndex(1);
         }
         String successMessage = personToUnfavorite.getName().toString()
                 + MESSAGE_UNFAVORITE_PERSON_SUCCESS;

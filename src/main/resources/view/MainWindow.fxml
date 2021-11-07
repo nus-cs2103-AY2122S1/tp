@@ -88,7 +88,7 @@
                    <StackPane fx:id="personListPanelPlaceholder" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #121212#121212;" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" />
                      </children>
                   </GridPane>
-                  <StackPane id="personCardPlaceholder" fx:id="personCardPlaceholder" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="400.0" style="-fx-background-color: #121212;">
+                  <StackPane id="personCardPlaceholder" fx:id="personCardPlaceholder" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="420.0" style="-fx-background-color: #121212;">
                      <HBox.margin>
                         <Insets bottom="10.0" left="5.0" right="10.0" top="10.0" />
                      </HBox.margin>
