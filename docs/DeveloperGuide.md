@@ -899,9 +899,9 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: `toggle` to the `Patients` tab. The following patient must already exists:
        John Doe; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Date of Birth: 20/7/1964; Tags: vaccinated; Risk: LOW
        
-    2. Test case: `add n/John Doe hp/98765432 eml/johndoeeeee@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/vaccinated risk/LOW`
+    2. Test case: `add n/Bob Doe hp/99999999 eml/bobdoe@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/vaccinated risk/LOW`
        <br>
-        Expected: Patient named John Doe is added successfully. Details of the added patient are shown in the status message.
+        Expected: Patient named Bob Doe is added successfully. Details of the added patient are shown in the status message.
 
     3. Test case: `add n/John Doe hp/98765432 eml/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/vaccinated risk/LOW`
        <br>Expected: No Patient is added. Error message is shown in the response box: "This patient already exists in PlannerMD"
@@ -1111,7 +1111,7 @@ Prerequisites: The tests for finding patients uses the sample data from `SampleD
     1. Prerequisites: `toggle` to the `Doctors` tab. The following doctor must already exists:
        John Doe; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Date of Birth: 20/7/1964; Tags: experienced
     
-    2. Test case: `add n/Bob Doe hp/98765432 eml/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/experienced`
+    2. Test case: `add n/Bob Doe hp/99999999 eml/bobd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/experienced`
        <br> Expected: Doctor named Bob Doe is added successfully. Details of the added doctor are shown in the status message.
        
     3. Test case: `add n/John Doe hp/98765432 eml/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/experienced`
