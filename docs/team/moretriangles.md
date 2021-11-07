@@ -7,7 +7,7 @@ title: Adam Oh Zhi Hong's Project Portfolio Page
 
 CohortConnect is an advanced desktop address book which facilitates networking among Computer Science (CS) students, in a university setting. It contains advanced features for managing multiple contacts and finding teammates from GitHub data. It is optimised for a CLI, but also has a GUI built using JavaFX. It is written in Java 11 and has about 17k lines of code.
 
-### Features Implemented
+**Features Implemented**
 
 My code contributions can be found in the [tP Code Dashboard](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=moreTriangles&sort=groupTitle&sortWithin=title&since=2021-09-17&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=moreTriangles&tabRepo=AY2122S1-CS2103T-T10-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false).
 
@@ -38,7 +38,8 @@ My code contributions can be found in the [tP Code Dashboard](https://nus-cs2103
 
 Credits: [jackson-dataformat-csv](https://github.com/FasterXML/jackson-dataformats-text/tree/2.14/csv) for reading and writing to CSV files.
 
-### Documentation
+**Documentation**
+
 * User Guide:
   * Added a labelled user interface diagram for easy familiarization with the UI.
   * Added usage details for Import, Export, Command History, Switching Between Tabs and GitHub and Telegram Commands.
@@ -46,13 +47,16 @@ Credits: [jackson-dataformat-csv](https://github.com/FasterXML/jackson-dataforma
   * Updated requirements as they evolved.
   * Added implementation, diagrams and use cases for Import, Export, Command History, Switching Between Tabs and GitHub and Telegram Commands.
 
-### Team-Based Tasks
+**Team-Based Tasks**
+
 * Managed all releases from `v1.1` to `v1.4`.
 * Ensured project deliverables were done correctly and on time.
 * Studied [Material Design's Dark Theme Guide](https://material.io/design/color/dark-theme.html) and created the UI mockup on Figma to kick-start the GUI re-work.
 
-### Review Contributions
+**Review Contributions**
+
 * Reviewed numerous PRs of my peers and provided non-trivial feedback regarding code quality. Examples: [#24](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/24), [#65](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/65), [#125](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/125), [#224](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/224), 
 
-### Contributions Beyond Project Team
+**Contributions Beyond Project Team**
+
 * Asked questions and shared useful information to answer queries in the forum with great feedback, for example [this answer](https://github.com/nus-cs2103-AY2122S1/forum/issues/142) about fast-forwarding in Git and [this discussion question](https://github.com/nus-cs2103-AY2122S1/forum/issues/188).
