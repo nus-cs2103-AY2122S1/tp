@@ -42,10 +42,6 @@ public class JsonStudentBookStorageTest {
                 : null;
     }
 
-    @Test
-    public void read_missingFile_emptyResult() throws Exception {
-        assertFalse(readStudentBook("NonExistentFile.json").isPresent());
-    }
 
     @Test
     public void read_notJsonFormat_exceptionThrown() {
