@@ -792,7 +792,8 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with corrupted data files
 
-   1. Prerequisite: The folder containing the jar file contains a `data` folder, which contains `addressBook.json`, `taskBook.json` and `salesBook.json`. 
+   1. Prerequisites: The folder containing the jar file contains a `data` folder, which contains `addressBook.json`,  
+      `taskBook.json` and `salesBook.json`.
 
    1. Test case: Corrupt the `addressBook.json` file by deleting a closing curly bracket (`}`) or any other brackets.<br>
       Expected: Shows the GUI without any data.
@@ -800,5 +801,10 @@ testers are expected to do more *exploratory* testing.
    1. Test case: Corrupt the `taskBook.json` file by deleting a closing curly bracket (`}`) or any other brackets.<br>
       Expected: Shows the GUI without any tasks, but with previously saved clients and orders.
 
-   1. Test case: Corrupt the `salesBook.json` file by deleting a closing curly bracket (`}`) or any other brackets.<br>
-      Expected: Shows the GUI without any data.
+   1. Test case: Corrupt the `salesBook.json` file by deleting a closing curly bracket (`}`) or any other brackets.
+
+      1. Scenario: All tasks have the 'General' tag.<br>
+         Expected: Shows the GUI with previously saved clients and tasks.
+
+      1. Scenario: There exists at least one task tagged with an order ID.<br>
+         Expected: Shows the GUI without any data.
