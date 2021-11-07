@@ -16,7 +16,8 @@ title: Developer Guide
 * Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 * Original project: [AddressBook Level-3](https://se-education.org/addressbook-level3) project created as part of the [SE-EDU](https://se-education.org) initiative
 * Application logo: Inspired by [Source Academy](https://sourceacademy.nus.edu.sg/)
-* [This](https://stackoverflow.com/questions/320542/how-to-get-the-path-of-a-running-jar-file) StackOverflow post on how to get the folder the JAR file is in
+* Code snippet for getting jar file directory: Taken from [this post](https://stackoverflow.com/questions/320542/how-to-get-the-path-of-a-running-jar-file)
+
 
 <br>
 
@@ -746,8 +747,68 @@ testers are expected to do more *exploratory* testing.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing data file
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Prerequisites: `./data/sourceControl.json` (or the file path specified in `preferences.json`) has been deleted.
+    
+    1. Test case: Run the application. <br> Expected: Application is populated with sample data. `./data/sourceControl.json` will be created after exiting the application.
 
-1. _{ more test cases …​ }_
+1. Dealing with corrupted data file
+
+    1. Prerequisites: Deleted the data file at `./data/sourceControl.json`, then launched the jar file to populate the data file with sample data.
+    
+    1. Test case: Add an `*` to the `name` of the first person in the data file and launch the jar file. <br> Expected: No data will be loaded into the application. The data file will lose all its data when the app exits.
+    
+    1. Test case: Add the group `new group` into the `groups` array of the first person and launch the jar file.  <br> Expected: The new group is not added to the first person. The data file will no longer contain the new group when the app exits.
+    
+    1. Test case: Add the assessment `new assessment` into the `assessments` array of the first person and launch the jar file. <br> Expected: The new assessment is not added to the first person. The data file will no longer contain the new assessment when the app exits.
+    
+    1. Test case: Add an extra `{` as the first character of the data file. <br> Expected: No data will be loaded into the application. The data file will lose all its data when the app exits.
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Effort**
+
+In general, we believe that we have put in a lot of effort for this project. We managed to implement the target features we originally set out to do, plus a few extra nice-to-have features.
+
+We also managed to keep the code coverage reasonably high at 76%, and there was only a small set of unique bugs found in the PE-D.
+
+### Challenges faced
+
+The following features were relatively hard to implement:
+1. JavaFX Charts are a part of the JavaFX library which we had to learn how to use from scratch. However, it was an essential part of our goals for the application.
+    * It was not easy to customise the chart styles (such as the colour scheme) to fit with the overall design of the application.
+    * Many things about the format of the charts were difficult to customise, such as the direction and layout of axis labels.
+
+1. Aliases were deceptively hard to implement, and took more time than expected.
+    * Even though Jonas implemented an alias feature for his iP, the implementation had to be completely different since the parser was using a completely different design.
+    * Many aspects had to be considered and carefully weighed. You can read more about it in the [alias section of this guide](#alias-feature).
+    
+1. Adapting the AB3 code to fit into the context of Source Control.
+    * While adding and removing classes wasn't too bad, adapting the tests was on a whole new level.
+    * There were a lot of tests that we didn't want to delete, and instead chose to adapt them as well. 
+      This proved to be highly time-consuming, since you had to read through the test code and completely understand what it was doing in order to properly adapt it.
+    * Our application has three different classes (`Student`, `Assessment`, `Group`) that are highly coupled to each other. AB3 did not have such problems as it only contained one `Person` class. 
+      It was difficult to ensure that our objects are sharing information with each other properly, while trying to keep the level of coupling as low as possible. This coupling also proved to be the source of several hard-to-find bugs. 
+
+
+### Features scrapped
+
+The following features were scrapped due to the high difficulty or error-prone nature of their implementations.
+1. Allowing the user to specify their file path to export data or graphs
+    * From the feedback received from the PE-D, we realised how easy it was to exploit the ability to specify your file path through user input.
+    * One problem was how different OSes handled file paths. Some paths were valid only on some OSes, and checking the user input was non-trivial.
+    * Java's `Path` and `File` felt insufficient to properly check all possible user inputs for validity. Through testing, it seemed like some invalid file names were still leaking through any checks we had implemented.
+    * These problems were discovered too late to settle with a good, bug-free solution. As such, we decided to drop the ability for users to specify files to write to.
+    * While one solution was to use the `FileChooser` class from JavaFX, that would violate the requirements of the application being CLI-based. 
+    
+2. Commands longer than one word in length
+    * Initially, `addstudent` was `add student` (the same goes for other similar commands in the `add` family). This required some minor tweaking of the parser which was relatively straightforward.
+    * However, when it came to implementing aliases, we realised that it was difficult to ensure that the aliases don't overlap with the multiworded commands without drastically changing the parser.
+    * Thankfully, the simple solution was to just enforce everything to be one word long.
+
+3. Allowing non-alphanumeric characters in student names
+    * As Source Control stores the official names of students, we had to consider that these names could contain non-alphanumeric characters, such as "Mary-Ann Tan". This is in contrast with AB3, where names of contacts do not need to be official names and these non-alphanumeric characters can be left out.
+    * However, allowing non-alphanumeric characters in student names would lead to problems such as not being able to identify invalid names like "@@@". It also leads to complications with parsing, for example when "-g" is meant to be part of the student name but would be parsed as an argument.
+    * As such, given the time constraint, we decided to maintain the original functionality of AB3, and only allow alphanumeric characters.
