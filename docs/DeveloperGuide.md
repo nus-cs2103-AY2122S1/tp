@@ -1143,7 +1143,7 @@ testers are expected to do more *exploratory* testing.
        (Using sample data, Alex with salary `4500` and Roy with salary `3600` are listed.)
        
     1. Test case: `find y/-1` (invalid search terms) <br> 
-       Expected: No applicant is listed. Error details shown on result display.
+       Expected: No change to applicant listed. Error details shown on result display.
        
 1. Finding an applicant by a specific prefix with empty parameters
     
@@ -1161,7 +1161,7 @@ testers are expected to do more *exploratory* testing.
 1. Finding an applicant without prefixes
 
     1. Test case: `find` <br>
-       Expected: No applicant is listed. Invalid command format error and usage message for `find` shown in result display.
+       Expected: No change to applicant listed. Invalid command format error and usage message for `find` shown in result display.
   
        
 ### Marking an applicant
