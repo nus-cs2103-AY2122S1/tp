@@ -218,10 +218,10 @@ You can then easily add his data to TutorAid by following the steps below:
 
 1. Key in `add -s sn/John Yeo sp/98765432 pn/Mary Yeo pp/81234567` into the Command Box and press ENTER.
    
-    > :bulb: You can also add John into TutorAid by keying in `add -s sn/John Yeo` into the Command Box. This is because all details other than the student's name are optional for you to note down.
+   > :bulb: You can also add John into TutorAid by keying in `add -s sn/John Yeo` into the Command Box. This is because all details other than the student's name are optional for you to note down.
    > For more information, you can refer to the detailed documentation of the [Add a Student](#adding-a-student-add--s) command.
-   
-1. Upon pressing ENTER, notice how the Student Panel will be updated accordingly with John's details. If you do not see John's details on your screen, you can either scroll down the Student Panel to find his details, or enter the command `find -s John Yeo` to display only his details in the Student Panel.
+
+1. Upon pressing ENTER, notice how the Student Panel will be updated accordingly with John's details. If you do not see John's details on your screen, you can scroll down the Student Panel to find his details.
 
 Now, John has just informed you that he has changed his contact number to 84632975. You can update his contact details on TutorAid by completing the steps below:
 
@@ -231,6 +231,8 @@ Now, John has just informed you that he has changed his contact number to 846329
 
 1. You will now be able to see that John Yeo's phone number has been successfully changed to 84632975.
 
+   > :bulb: For more information on changing the viewing modes in TutorAid, you can refer to the detailed documentation for [List](#listing-all-students-and-lessons-list) commands.
+
 ### 4.2: Adding a lesson and editing a lesson's details
 {:.no_toc}
 Now that you have added your first student (and perhaps a few others too), let us add some lessons to TutorAid. We will start by adding a lesson named _History 1_ into TutorAid with the following details:
@@ -239,7 +241,7 @@ Now that you have added your first student (and perhaps a few others too), let u
 
 You can quickly add this information to TutorAid by performing the steps below:
 
-1. Type `add -l n/History c/10 t/10AM - 11AM on Mondays ` into the Command Box and press ENTER.
+1. Type `add -l n/History 1 c/10 t/10AM - 11AM on Mondays` into the Command Box and press ENTER.
 
     ![](images/tutorialAddLesson1.png)
 
@@ -253,7 +255,10 @@ Next, let us assume that you have decided to charge your students $125.90 per mo
 
     > :bulb: The `2` in the command above refers to the index number of _History 1_ in the Lesson Panel. For more information, you can refer to the detailed documentation for [editing a lesson's details](#editing-a-lesson-edit--l).
 
-1. You will now be able to see how the lesson pricing has been updated to what you have requested.
+1. You will now be able to see how the lesson pricing has been updated to what you have requested. You can then key in the `list -a` into the Command Box and press ENTER to return back to your original view.
+
+   > :bulb: For more information on changing the viewing modes in TutorAid, you can refer to the detailed documentation for [List](#listing-all-students-and-lessons-list) commands.
+
 
 ### 4.3: Adding a student to a lesson
 Now that you have set up the lesson _History 1_, let us add one of your existing students who wishes to enrol in the class, Roy Balakrishnan. You can do this in TutorAid by following the steps below:
@@ -269,13 +274,15 @@ Now that you have set up the lesson _History 1_, let us add one of your existing
 Now, imagine you have ended your 'Maths 1' lesson. You realised that one of your students, Alex Yeoh, seems to struggle with the topic 'Vectors', and you wish to take 
 note of it so that you can provide him extra practice. To do so, you can easily add a progress note for Alex on TutorAid by following the steps below: 
 
-1. Key in `add -p 1 Weak in Vectors and requires extra practice` into the Command Box and press ENTER. 
+1. Key in `add -p 1 Requires extra practice for Vectors` into the Command Box and press ENTER. 
 
     > :bulb: The `1` in the command above refers to the index number of Alex Yeoh in the Student Panel. For more information, you can refer to the detailed documentation for the [Add a Progress to a Student](#adding-progress-for-a-student-add--p) command.
    
-1. Notice that Alex's details, reflected in the Student Panel, will then be updated to display the progress note you just added.
+1. Notice that Alex's details, reflected in the Student Panel, will then be updated to display the progress note you just added. You can then key in the `list -a` into the Command Box and hit ENTER to return back to your original view.
 
-Now, the next time you open TutorAid, you will be able to see Alex's progress note at a glance!
+   > :bulb: For more information on changing the viewing modes in TutorAid, you can refer to the detailed documentation for [List](#listing-all-students-and-lessons-list) commands.
+
+Now, the next time you open TutorAid, you will be able to see Alex's latest progress note at a glance!
 
 > :bulb: You will be able to add up to **10** such progress notes for each student. When you attempt to add an 11th note, your very first note will be automatically deleted, and your new note will be added in. <br>
 > We support up to just 10 notes to ensure that the progress notes for each student are easy to view and manage.
