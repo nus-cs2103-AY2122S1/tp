@@ -1099,7 +1099,7 @@ testers are expected to do more *exploratory* testing.
        Expected: No applicant is deleted. Error details shown in the result display where there should not be any duplicate indexes.
 
     1. Test case: `delete 1 2`<br>
-       Expected: First and second applicants are deleted. Details of the deleted contact shown in the status message
+       Expected: First and second applicants are deleted. Details of the deleted contact shown in the result display.
       
     1. Other incorrect delete commands to try: `delete`, `delete x`(where x is larger than the list size), `delete y`(where y is a negative integer), `delete Alexander`<br>
        Expected: Similar to previous test cases.
