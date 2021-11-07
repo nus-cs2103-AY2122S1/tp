@@ -1,0 +1,39 @@
+@startuml
+!include style.puml
+
+skinparam ArrowFontSize 20
+skinparam ParticipantFontSize 20
+skinparam ActorFontSize 20
+skinparam maxMessageSize 10
+
+Actor User as user USER_COLOR
+Participant ":UI" as ui UI_COLOR
+Participant ":Logic" as logic LOGIC_COLOR
+Participant ":Model" as model MODEL_COLOR
+Participant ":contacts" as contacts MODEL_COLOR_T1
+
+user -[USER_COLOR]> ui: "sortpolicy titledsc"
+activate ui UI_COLOR
+
+ui -[UI_COLOR]> logic: "execute(sortpolicy titledsc)"
+activate logic LOGIC_COLOR
+
+logic -[LOGIC_COLOR]> model: "updateFilteredPolicyList(\nPOLICY_SORT_BY_TITLE_DSC)"
+activate model MODEL_COLOR
+
+model -[MODEL_COLOR]> contacts: "setPredicate(\nPOLICY_SORT_BY_TITLE_DSC)"
+activate contacts MODEL_COLOR_T1
+
+contacts -[MODEL_COLOR_T1]> model
+deactivate contacts
+
+model -[MODEL_COLOR]> logic
+deactivate model
+
+logic -[LOGIC_COLOR]> ui
+deactivate logic
+
+ui -[UI_COLOR]> user
+deactivate ui
+
+@enduml

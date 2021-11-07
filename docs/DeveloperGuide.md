@@ -176,6 +176,8 @@ The respective parsers would construct the commands with the correct `Predicate`
 
 Given below is an example usage scenario and how the mechanism behaves at each step.
 
+![Sequence diagram when the user executes `sortpolcy dsc`](images/SortPolicyDscSequenceDiagram.png)
+
 **Step 1.** The user executes the command `sortpolicy titledsc`.
 
 **Step 2.** User input is passed to the `SiasaParser` and `SiasaParser` will call `SortPolicyCommandParser#parse`, which creates a new `SortPolicyCommand` with the `SORT_POLICY_BY_TITLE_DSC` Comparator.
