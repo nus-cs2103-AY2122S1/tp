@@ -11,6 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY_SHIFT;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,6 +50,8 @@ public class RemoveMarkCommand extends Command {
             + PREFIX_DAY_SHIFT + "2021-11-11" + " " + PREFIX_DAY_SHIFT + "2021-11-13";
 
     public static final String NO_STAFF_SATISFIES_QUERY = "No one satisfies the conditions specified";
+    public static final String STAFF_NOT_MARKED = "The following staff is not marked for the period specified,"
+            + " no change has been done: \n%1$s";
     public static final String STAFF_UNMARKED = "Staff unmarked:\n%1$s";
 
     private final PersonContainsFieldsPredicate predicate;
@@ -89,8 +92,14 @@ public class RemoveMarkCommand extends Command {
         if (toEdit.size() == 0) {
             throw new CommandException(NO_STAFF_SATISFIES_QUERY);
         }
+        List<String> conflicts = new ArrayList<>();
         for (Person p : toEdit) {
-            checkPerson(p);
+            if (p.unMark(period).equals(p)) {
+                conflicts.add(p.getName().toString());
+            }
+        }
+        if (conflicts.size() != 0) {
+            throw new CommandException(String.format(STAFF_NOT_MARKED, listToString(conflicts)));
         }
         for (Person p : toEdit) {
             model.setPerson(p, checkPerson(p));
@@ -145,7 +154,7 @@ public class RemoveMarkCommand extends Command {
         Person result = toTest.unMark(period);
         //when nothing has changed
         if (result.equals(toTest)) {
-            throw new CommandException(NO_STAFF_SATISFIES_QUERY);
+            throw new CommandException(String.format(STAFF_NOT_MARKED, toTest.getName()));
         }
         return result;
 

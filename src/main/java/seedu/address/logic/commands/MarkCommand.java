@@ -12,6 +12,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -51,7 +52,7 @@ public class MarkCommand extends Command {
 
     public static final String DEFAULT_EXECUTION = "%1$d number of staff have been marked for the period %2$s\n"
             + "%3$s";
-    public static final String NOTHING_CHANGED = "Staff has already been marked for the input duration: %1$s";
+    public static final String NOTHING_CHANGED = "Staff has already been marked for the input duration:\n %1$s";
     public static final String NO_ONE_SATISFIES_QUERY = "Fields indicated is not satisfied by anyone in staff'd";
     private final Period period;
     private final PersonContainsFieldsPredicate predicate;
@@ -92,11 +93,14 @@ public class MarkCommand extends Command {
         if (total == 0) {
             throw new CommandException(NO_STAFF_SATISFIES_QUERY);
         }
-
+        List<String> conflicts = new ArrayList<>();
         for (Person p : toModify) {
             if (p.mark(period).equals(p)) {
-                throw new CommandException(String.format(NOTHING_CHANGED, p));
+                conflicts.add(p.getName().toString());
             }
+        }
+        if (conflicts.size() != 0) {
+            throw new CommandException(String.format(NOTHING_CHANGED, listToString(conflicts)));
         }
         for (Person p : toModify) {
             model.setPerson(p, p.mark(period));
@@ -117,7 +121,7 @@ public class MarkCommand extends Command {
         }
         Person changedStaff = staffToModify.mark(period);
         if (staffToModify.equals(changedStaff)) {
-            throw new CommandException(String.format(NOTHING_CHANGED, staffToModify));
+            throw new CommandException(String.format(NOTHING_CHANGED, staffToModify.getName()));
         }
         model.setPerson(staffToModify, changedStaff);
         return new CommandResult(String.format(DEFAULT_EXECUTION, 1, period, changedStaff.getName()));

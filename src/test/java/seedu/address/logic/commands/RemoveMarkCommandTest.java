@@ -63,7 +63,7 @@ public class RemoveMarkCommandTest {
     public void execute_command_failure() {
         //testing for incorrect period
 
-        assertCommandFailure(WRONG_PERIOD, model, RemoveMarkCommand.NO_STAFF_SATISFIES_QUERY);
+        assertCommandFailure(WRONG_PERIOD, model, String.format(RemoveMarkCommand.STAFF_NOT_MARKED, ALICE.getName()));
 
         //test for when the target does not exist
         model.deletePerson(DEFAULT_TEST_PERSON);
