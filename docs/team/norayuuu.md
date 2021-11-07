@@ -54,7 +54,7 @@ Given below are my contributions to the project.
   * Updated user guide Table of Content and added annotation for screenshot. [#206](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/206)
   * Updated sample data of TutAssistor. [\#55](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/55), [\#57](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/57)
 * **Review/mentoring contributions**
-  * Helped teammate debug GUI. [\#35](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/35)
+  * Helped teammate debug non-refreshing GUI. [\#35](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/35)
   * PRs reviewed (with non-trivial review comments): [\#103](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/103).
   * Helped teammate to install PlantUML on Mac.
 * **Community**
