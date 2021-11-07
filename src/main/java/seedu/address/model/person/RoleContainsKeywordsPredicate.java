@@ -7,7 +7,7 @@ import seedu.address.commons.util.StringUtil;
 
 /**
  * Tests that a {@code Person}'s {@code Role} matches all the keywords given.
- *
+ * <p>
  * If no keywords are provided, then there is no match.
  */
 public class RoleContainsKeywordsPredicate implements Predicate<Person> {
