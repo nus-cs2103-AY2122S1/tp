@@ -1,6 +1,8 @@
 @startuml
 !include ../style.puml
 
+actor User
+
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":ProgrammerErrorParser" as ProgrammerErrorParser LOGIC_COLOR
@@ -9,7 +11,7 @@ end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
-participant ":VersionedAddressBook" as VersionedAddressBook MODEL_COLOR
+participant ":VersionedProgrammerError" as VersionedProgrammerError MODEL_COLOR
 end box
 [-> LogicManager : execute(undo)
 activate LogicManager
@@ -30,15 +32,15 @@ deactivate ProgrammerErrorParser
 LogicManager -> UndoCommand : execute()
 activate UndoCommand
 
-UndoCommand -> Model : undoAddressBook()
+UndoCommand -> Model : undoProgrammerError()
 activate Model
 
-Model -> VersionedAddressBook : undo()
-activate VersionedAddressBook
+Model -> VersionedProgrammerError : undo()
+activate VersionedProgrammerError
 
-VersionedAddressBook -> VersionedAddressBook :resetData(ReadOnlyAddressBook)
-VersionedAddressBook --> Model :
-deactivate VersionedAddressBook
+VersionedProgrammerError -> VersionedProgrammerError :resetData(ReadOnlyProgrammerError)
+VersionedProgrammerError --> Model :
+deactivate VersionedProgrammerError
 
 Model --> UndoCommand
 deactivate Model

@@ -1,5 +1,5 @@
 ---
-layout: page 
+layout: page
 title: Zhao Peiduo's Project Portfolio Page
 ---
 
