@@ -660,6 +660,8 @@ The following activity diagram summarizes what happens when a user executes the 
 Ultimately we chose option 1 as we felt that there are already many existing commands, and just having one filter command
 handle multiple scenarios would be less daunting to use.
 
+### Roster feature
+
 #### Implementation
 
 The roster operation is facilitated by `RosterCommand` and `RosterCommandParser`. `RosterCommandParser` first parses 
