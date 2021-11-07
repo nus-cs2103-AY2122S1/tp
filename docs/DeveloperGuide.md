@@ -319,7 +319,7 @@ The following diagram summarizes what happens after user input search command:
 ![SearchActivityDiagram](images/SearchActivityDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** SearchCommandParser checks
-if command is valid. Command is invalid if user input is empty, or if user entered more or less than one flag.
+if command input is valid. Command is invalid if user input is empty, or if user entered more or less than one flag.
 </div>
 
 #### Design considerations
