@@ -82,7 +82,7 @@ public class SampleDataUtil {
      */
     public static Set<Role> getRoleSet(String... strings) {
         return Arrays.stream(strings)
-                .map(Role::translateStringToRole)
+                .map(Role::translateStringToRoleWithNoRole)
                 .collect(Collectors.toSet());
     }
 }
