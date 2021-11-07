@@ -41,6 +41,7 @@ public class GradeCommand extends Command {
             + "Type in `help grade` for more details\n";
 
     public static final String MESSAGE_SUCCESS = "%1$s's %2$s grade updated!";
+    public static final String COMMIT_MESSAGE = "%1$s's %2$s grade updated!";
 
     private final Index index;
     private final String assessment;
@@ -77,7 +78,7 @@ public class GradeCommand extends Command {
                 assessmentToEdit, studentToEdit.getTags());
         model.setStudent(studentToEdit, editedStudent);
         return new CommandResult(String.format(MESSAGE_SUCCESS, editedStudent.getName(), assessment),
-                Optional.of(String.format(MESSAGE_SUCCESS, editedStudent.getName(), assessment)));
+                Optional.of(String.format(COMMIT_MESSAGE, editedStudent.getName(), assessment)));
 
     }
 

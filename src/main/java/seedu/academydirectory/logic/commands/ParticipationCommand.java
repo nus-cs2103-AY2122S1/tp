@@ -50,6 +50,7 @@ public class ParticipationCommand extends Command {
             + "Type in `help participation` for more details";
 
     public static final String MESSAGE_UPDATE_PARTICIPATION_SUCCESS = "Participation updated!";
+    public static final String COMMIT_MESSAGE = "Participation updated!";
 
     private final ArrayList<Index> indexArrayList;
     private final Integer studioSession;
@@ -104,7 +105,7 @@ public class ParticipationCommand extends Command {
         }
 
         return new CommandResult(MESSAGE_UPDATE_PARTICIPATION_SUCCESS,
-                Optional.of(MESSAGE_UPDATE_PARTICIPATION_SUCCESS));
+                Optional.of(COMMIT_MESSAGE));
 
     }
 

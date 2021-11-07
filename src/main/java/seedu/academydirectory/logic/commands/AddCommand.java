@@ -54,6 +54,7 @@ public class AddCommand extends Command {
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Type in `help add` for more details.\n";
 
+    public static final String COMMIT_MESSAGE = "New student added: %1$s";
     public static final String MESSAGE_SUCCESS = "New student added: %1$s\nPlease use `view` for more details";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the Academy Directory";
 
@@ -78,7 +79,7 @@ public class AddCommand extends Command {
         model.addStudent(toAdd);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd),
-                Optional.of(String.format(MESSAGE_SUCCESS, toAdd.getName())));
+                Optional.of(String.format(COMMIT_MESSAGE, toAdd.getName())));
     }
 
     @Override

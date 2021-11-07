@@ -18,6 +18,8 @@ public class ClearCommand extends Command {
             + "Clears all entries from the academy directory.\n"
             + "\n"
             + "Format: `clear`";
+
+    public static final String COMMIT_MESSAGE = "Academy Directory has been cleared!";
     public static final String MESSAGE_SUCCESS = "Academy Directory has been cleared!";
 
 
@@ -25,7 +27,7 @@ public class ClearCommand extends Command {
     public CommandResult execute(VersionedModel model) {
         requireNonNull(model);
         model.setAcademyDirectory(new AcademyDirectory());
-        return new CommandResult(MESSAGE_SUCCESS, Optional.of(MESSAGE_SUCCESS));
+        return new CommandResult(MESSAGE_SUCCESS, Optional.of(COMMIT_MESSAGE));
     }
 
     @Override

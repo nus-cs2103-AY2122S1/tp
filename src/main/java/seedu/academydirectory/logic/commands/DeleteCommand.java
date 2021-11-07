@@ -38,6 +38,7 @@ public class DeleteCommand extends Command {
             + "Type in `help delete` for more details\n";
 
     public static final String MESSAGE_DELETE_STUDENT_SUCCESS = "Deleted Student: %1$s";
+    public static final String COMMIT_MESSAGE = "Deleted Student: %1$s";
 
     private final Index targetIndex;
 
@@ -57,7 +58,7 @@ public class DeleteCommand extends Command {
         Student studentToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteStudent(studentToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, studentToDelete),
-                Optional.of(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, studentToDelete.getName())));
+                Optional.of(String.format(COMMIT_MESSAGE, studentToDelete.getName())));
     }
 
     @Override

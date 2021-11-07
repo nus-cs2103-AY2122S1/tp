@@ -43,6 +43,7 @@ public class AttendanceCommand extends Command {
             + "att/ ATTENDANCE_STATUS (0 or 1)\n"
             + "Type in `help attendance` for more details\n";
 
+    public static final String COMMIT_MESSAGE = "Attendance updated!";
     public static final String MESSAGE_UPDATE_ATTENDANCE_SUCCESS = "Attendance updated!";
 
     private final ArrayList<Index> indexArrayList;
@@ -82,7 +83,7 @@ public class AttendanceCommand extends Command {
             model.setStudent(studentToEdit, editedStudent);
         }
 
-        return new CommandResult(MESSAGE_UPDATE_ATTENDANCE_SUCCESS, Optional.of(MESSAGE_UPDATE_ATTENDANCE_SUCCESS));
+        return new CommandResult(MESSAGE_UPDATE_ATTENDANCE_SUCCESS, Optional.of(COMMIT_MESSAGE));
 
     }
 
