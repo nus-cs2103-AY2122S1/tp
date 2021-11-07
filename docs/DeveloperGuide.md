@@ -1416,35 +1416,74 @@ and open the "View Test Score" tab to view the changes in the grade.
 #### View student information
 
 1. View all related information of a student
-  1. Prerequisite: List all student using the `list` command. Multiple students are shown in the list. **List should have exactly 6 students** (can using sample data provided as default)
-  2. Test case: `view 1`
-     Expected: All related information of the first student is shown on the result display visualizer on the right side. This includes: Student name, current tags, all academic-related information (assessment score, studio participation, studio attendance), and personal contact information (phone, email, telegram)
-     Expected: No information is modified, Academy Directory runs as normal
-     Expected: Status message is that users are viewing student at position 1 of the list
-  3. Test case: `view 6`
-     Expected: All related information of the last student is shown on the result display visualizer on the right side. This includes: Student name, current tags, all academic-related information (assessment score, studio participation, studio attendance), and personal contact information (phone, email, telegram)
-     Expected: No information is modified, Academy Directory runs as normal
-     Expected: Status message is that users are viewing student at position 6 of the list
-  4. Test case: `view 7`
-     Expected: No view is shown on the result display. An error message is shown stating that index number is invalid
-  5. Test case: `view 0`, `view add`, `view myself in front of the mirror as a failure of society`
-     Expected: No view is shown on the result display. An error message is shown stating that index number is invalid (in a sense that it must be a positive integer)
+   1. Prerequisite: List all student using the `list` command. Multiple students are shown in the list. **List should have exactly 6 students** (can using sample data provided as default)
+   2. Test case: `view 1`
+      Expected: All related information of the first student is shown on the result display visualizer on the right side. This includes: Student name, current tags, all academic-related information (assessment score, studio participation, studio attendance), and personal contact information (phone, email, telegram)
+      Expected: No information is modified, Academy Directory runs as normal
+      Expected: Status message is that users are viewing student at position 1 of the list
+   3. Test case: `view 6`
+      Expected: All related information of the last student is shown on the result display visualizer on the right side. This includes: Student name, current tags, all academic-related information (assessment score, studio participation, studio attendance), and personal contact information (phone, email, telegram)
+      Expected: No information is modified, Academy Directory runs as normal
+      Expected: Status message is that users are viewing student at position 6 of the list
+   4. Test case: `view 7`
+      Expected: No view is shown on the result display. An error message is shown stating that index number is invalid
+   5. Test case: `view 0`, `view add`, `view myself in front of the mirror as a failure of society`
+      Expected: No view is shown on the result display. An error message is shown stating that index number is invalid (in a sense that it must be a positive integer)
 
-2. View students when list is altered
-  1. Prerequisite: Using filter to reduce the list view to 1 only. List should only have one student filtered.
-  2. Test case: `view 1`
-     Expected: All related information are shown about the student
-     Expected: Status message is that users are viewing student at position 1 of the list
-  3. Test case: `view 2`
-     Expected: No view is shown on the result display. An error message is shown stating that index number is invalid
-     Significance: View works for the current index number shown on the student list only.
+   6. View students when list is altered
+   7. Prerequisite: Using filter to reduce the list view to 1 only. List should only have one student filtered.
+   8. Test case: `view 1`
+      Expected: All related information are shown about the student
+      Expected: Status message is that users are viewing student at position 1 of the list
+   9. Test case: `view 2`
+      Expected: No view is shown on the result display. An error message is shown stating that index number is invalid
+      Significance: View works for the current index number shown on the student list only.
     
 ***
 
 #### Show Grade
 
-1. _{ more test cases to come …​ }_
+1. Shows the collated scores of all the students in Academy Directory along with the average score, while grades for "RA1" not recorded for all students.
+   1. Prerequisites:
+      1. Clear the Academy Directory using the `clear` command.
+      2. Add three students: <br>
+         `add n/Alex e/alex@email.com te/@alex` <br>
+         `add n/Bob e/bob@email.com te/@bob` <br>
+         `add n/Carol e/carol@email.com te/@carol` <br>
+   2. Test case: `show ra1`
+   3. Expected: Scores displayed for all students should be "NA", the number of students recorded should be "0", and the
+   average should be "NaN".
 
+
+2. Shows the collated scores of all the students in Academy Directory along with the average score, while grades for "RA1" recorded for some students.
+   1. Prerequisites:
+      1. Clear the Academy Directory using the `clear` command.
+      2. Add three students: <br>
+         `add n/Alex e/alex@email.com te/@alex` <br>
+         `add n/Bob e/bob@email.com te/@bob` <br>
+         `add n/Carol e/carol@email.com te/@carol` <br>
+      3. Add grades for all students <br>
+         `grade 1 as/ra1 g/15` <br>
+         `grade 2 as/ra1 g/16` <br>
+   2. Test case: `show ra1`
+   3. Expected: Scores displayed for the students should match the input grades, the number of students recorded should be "2", and the
+      average should be "15.50".
+
+
+3. Shows the collated scores of all the students in Academy Directory along with the average score, while grades for "RA1" recorded for all students.
+  1. Prerequisites:
+    1. Clear the Academy Directory using the `clear` command.
+    2. Add three students: <br>
+       `add n/Alex e/alex@email.com te/@alex` <br>
+       `add n/Bob e/bob@email.com te/@bob` <br>
+       `add n/Carol e/carol@email.com te/@carol` <br>
+    3. Add grades for all students <br>
+       `grade 1 as/ra1 g/15` <br>
+       `grade 2 as/ra1 g/16` <br>
+       `grade 3 as/ra1 g/17` <br>
+  2. Test case: `show ra1`
+  3. Expected: Scores displayed for the students should match the input grades, the number of students recorded should be "3", and the
+     average should be "16".
 ***
 
 #### Visualize all Grades
