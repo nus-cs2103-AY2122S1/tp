@@ -22,12 +22,13 @@ Given below are my contributions to the project.
 
 * **Documentation**:
     * User Guide:
-        * Added documentation for the storage related features (i.e. `exit` and `clear`) [\#139]()
+        * Added documentation for the storage related features (i.e. `exit` and `clear`) [\#139](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/139)
   
     * Developer Guide:
-        * Added implementation details of the `storage` component.[\#135]()
-        * Added the all the user stories   [\#35]()
+        * Added implementation details of the `storage` component.[\#135](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/135)
+        * Added the all the user stories   [\#35](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/35)
 
 * **Community**:
-    * PRs reviewed (with non-trivial review comments): [\#119](), [\#120](), [\#51](), [\#50]()
+    * PRs reviewed (with non-trivial review comments): [\#289](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/289), 
+    [\#270](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/270), [\#79](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/79)
 
