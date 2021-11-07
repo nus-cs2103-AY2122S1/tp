@@ -4,41 +4,36 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<HBox id="dayPanel" fx:id="cardPane" prefHeight="105.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+<HBox id="dayPanel" fx:id="cardPane" prefHeight="105.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <VBox alignment="CENTER_LEFT" minHeight="6.0" prefHeight="105.0" prefWidth="841.0" HBox.hgrow="ALWAYS">
         <padding>
-            <Insets bottom="5" left="15" right="5" top="5" />
+            <Insets bottom="5" left="5" right="5" top="5" />
         </padding>
         <GridPane alignment="CENTER" prefHeight="195.0" prefWidth="370.0" HBox.hgrow="ALWAYS">
             <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="ALWAYS" minWidth="15.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="ALWAYS" minWidth="15.0" prefWidth="150.0" />
-                <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="90.0" />
-                <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="7.0" prefWidth="50.0" />
-                <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints />
+                <ColumnConstraints hgrow="SOMETIMES" prefWidth="50.0" />
+                <ColumnConstraints hgrow="ALWAYS" prefWidth="100.0" />
+                <ColumnConstraints hgrow="NEVER" prefWidth="100.0" />
+                <ColumnConstraints hgrow="NEVER" prefWidth="180.0" />
+                <ColumnConstraints hgrow="NEVER" prefWidth="90.0" />
+                <ColumnConstraints hgrow="NEVER" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" prefWidth="55.0" />
+                <ColumnConstraints hgrow="NEVER" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" prefWidth="100.0" />
             </columnConstraints>
             <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <Label fx:id="index" alignment="CENTER" styleClass="cell_big_label" text="i" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                <Label fx:id="name" alignment="CENTER" contentDisplay="CENTER" styleClass="cell_big_label_centered" text="name" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                <Label fx:id="phone" alignment="CENTER" contentDisplay="CENTER" styleClass="cell_small_label_centered" text="phone" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                <Label fx:id="email" alignment="CENTER" contentDisplay="CENTER" styleClass="cell_small_label_centered" text="email" wrapText="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="4">
-               <children>
-                  <Label text="Absent Dates" />
-<!--                  <ListView fx:id="periodsList" VBox.vgrow="ALWAYS" />-->
-               </children>
-            </VBox>
-                <Label fx:id="status" alignment="CENTER" contentDisplay="CENTER" styleClass="cell_small_label_centered" text="status" wrapText="true" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                <Label fx:id="salary" alignment="CENTER" contentDisplay="CENTER" styleClass="cell_small_label_centered" text="salary" wrapText="true" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                <FlowPane fx:id="tags" alignment="CENTER" columnHalignment="CENTER" orientation="VERTICAL" prefHeight="90.0" prefWidth="63.0" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                <Label fx:id="index" alignment="CENTER" contentDisplay="CENTER" styleClass="cell_big_label_centered" text="Index" wrapText="true" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                <Label fx:id="name" alignment="CENTER" contentDisplay="CENTER" styleClass="cell_big_label_centered" text="\$name" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                <Label fx:id="phone" alignment="CENTER" contentDisplay="CENTER" styleClass="cell_small_label_centered" text="\$phone" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                <ListView fx:id="periodListView" GridPane.columnIndex="3"/>
+                <Label fx:id="email" alignment="CENTER" contentDisplay="CENTER" styleClass="cell_small_label_centered" text="\$email" wrapText="true" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                <FlowPane fx:id="roles" alignment="CENTER" columnHalignment="CENTER" orientation="VERTICAL" prefHeight="94.0" prefWidth="64.0" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                <Label fx:id="status" alignment="CENTER" contentDisplay="CENTER" styleClass="cell_small_label_centered" text="\$status" wrapText="true" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                <Label fx:id="salary" alignment="CENTER" contentDisplay="CENTER" styleClass="cell_small_label_centered" text="\$salary" wrapText="true" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                <ListView fx:id="tagsListView" GridPane.columnIndex="8" />
             </children>
         </GridPane>
     </VBox>

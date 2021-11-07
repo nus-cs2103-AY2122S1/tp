@@ -311,4 +311,11 @@ public class Period {
                 && ((Period) o).endDate.equals(endDate);
 
     }
+
+    /**
+     * Returns string representation of this period in a more readable format.
+     */
+    public String toDisplayString() {
+        return ("[" + startDate + "] ~ [" + endDate + "]" );
+    }
 }
