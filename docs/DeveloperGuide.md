@@ -185,7 +185,7 @@ The user can also use the hotkeys `CTRL-S` and `CTRL-D` to cycle between tabs.
 **Aspect: Determining whether there should be a list maintained per tab or all tabs take reference from a single list**
 * **Alternative 1 (current choice):** All the tabs will take reference to the same `ObservableList`.
   * Pros: Minimal complications to rendering lifecycle. Easy updating of list as there is no need to sync between lists as there is only one list.
-  * Cons: The ObservableList needs to be filtered with every tab switch. This may pose as a performance issue as tab switching is expected 
+  * Cons: The ObservableList needs to be filtered with every tab switch. This may pose as a performance issue as tab switching is expected
 to be instantaneous. With a large list of animes, filtering can take a significant amount of time.
 
 * **Alternative 2:** Each tab will have its own `ObservableList`.
@@ -285,9 +285,9 @@ the background image.
 ### [Proposed] Theme adding feature
 #### Current Implementation
 
-Currently, users are allowed to switch between pre-defined and pre-made themes that are provided by the application. However, we 
-currently only support a limited number of themes which may not fit the user's preferences. Users are currently not allowed to 
-create their own themes even if they create their own CSS files. The only way to define their own theme would be to overwrite 
+Currently, users are allowed to switch between pre-defined and pre-made themes that are provided by the application. However, we
+currently only support a limited number of themes which may not fit the user's preferences. Users are currently not allowed to
+create their own themes even if they create their own CSS files. The only way to define their own theme would be to overwrite
 current CSS files and replace the theme completely.
 
 #### Proposed Implementation
@@ -296,7 +296,7 @@ for easy creation of new themes.
 <br/><br/>
 User only needs to provide the following:
 * Theme Name
-* Background image 
+* Background image
 * Primary color
 * Secondary color
 * Tertiary color
@@ -852,7 +852,6 @@ testers are expected to do more *exploratory* testing.
 ### Saving data
 
 1. Dealing with missing/corrupted data files
-
     1. Close all Anilist windows
        
     2. Open data/anilist.json
@@ -862,3 +861,34 @@ testers are expected to do more *exploratory* testing.
     4. Open Anilist again
        
     5. Now that the data file is corrupted, the app should start out without any anime in the list
+
+### Clearing all data
+
+1. Clearing all data in AniList
+   1. Prerequisites: List all animes using the `list` command. There are animes in the list.
+   2. Test case: Clear all animes in the application. Run `list`, `clear`, `clear` one after the other. <br/>
+   Expected: First command will switch the current tab to the `all tab`. Second command will result in the application prompting the user for confirmation.
+   Third command will be the confirmation and **ALL** animes will be deleted from the application.
+   3. Test case: Cancelled clear. Run `clear`, `ANYTHING_BUT_CLEAR` one after the other. <br/>
+            Expected: The user will be prompted for confirmation after the first `clear` command. On running any other string besides `clear`, the `clear` command will be cancelled. If the string was a command, the command will not be executed.
+2. Clearing animes from a specific tab
+   1. Prerequisites: List all anime in the chosen tab using the `list s/CHOSEN_TAB` command.
+   2. Test case: Clear animes in a specific tab. Run `list s/f`, `clear`, `clear` one after the other. <br/>
+         Expected: All animes in the `finished` tab will be deleted. All animes in `towatch` and `watching` tab should still remain.
+
+### Listing animes
+
+1. List all animes in AniList
+   1. Test case: `list` <br/>
+   Expected: The current tab will switch to `all tab` and all animes will be listed.
+   2. Test case: `LisT`<br/>
+   Expected: Error stating unknown command. AniList commands are case sensitive.
+2. List animes based on their watch status
+   1. Test case: `list s/w`, `list s/watching`<br/>
+   Expected: The current tab will switch to `watching tab` and all animes with watch status `watching` will be listed.
+   2. Test case: `list s/t`, `list s/towatch`<br/>
+      Expected: The current tab will switch to `towatch tab` and all animes with watch status `towatch` will be listed.
+   3. Test case: `list s/w`, `list s/finished`<br/>
+      Expected: The current tab will switch to `finished tab` and all animes with watch status `finished` will be listed.
+   4. Test case: `list s/tw` <br/>
+      Expected: Error message stating that an invalid status was provided.
