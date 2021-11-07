@@ -49,6 +49,7 @@ public class EventDate implements Comparable<EventDate> {
         }
         return true;
     }
+    //@@author
 
     public static boolean checkDateComponents(String date) {
         return date.split("-").length == 3;
