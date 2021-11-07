@@ -13,7 +13,7 @@ public class Episode {
 
     public static final int MAX_EPISODE = 99999;
     public static final String MESSAGE_CONSTRAINTS =
-        "Episodes should be a non-negative integer less than " + MAX_EPISODE;
+        "Episodes should be a non-negative integer less than or equals to " + MAX_EPISODE;
     public static final String VALIDATION_REGEX = "\\d+";
     public static final String DEFAULT_EPISODE = "0";
     public final int episodeNumber;

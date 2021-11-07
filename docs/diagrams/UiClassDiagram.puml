@@ -34,7 +34,7 @@ MainWindow *-down->  "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
 MainWindow *-down-> "1" AnimeListPanel
 MainWindow *-down-> "1" StatusBarFooter
-MainWindow --> "0..1" StatsDisplay
+MainWindow --> "1" StatsDisplay
 
 AnimeListPanel -down-> "*" AnimeCard
 
