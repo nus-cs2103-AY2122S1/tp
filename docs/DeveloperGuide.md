@@ -915,7 +915,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder.
 
-   1. Launch the jar file using the `java -jar connections.jar` in powershell for windows users and termnial for linux user. Double-click the jar file as last resort.<br>
+   1. Launch the jar file using the `java -jar connections.jar` in powershell for Windows users and terminal for Linux user. Double-click the jar file as last resort.<br>
       Expected: Shows the GUI with a set of sample contacts. The birthday reminder list shows a birthday reminder message for each contact with non-empty birthday field. 
       The window size may not be optimum.
 
@@ -933,10 +933,10 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: No existing contact with phone number 98989898 and existing contact with phone number 32323232.
 
     1. Test case: `add n/James p/98989898 e/james@gmail.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney b/04071999`<br>
-       Expected: Contact with correct details added to contact list. Contact's birthday reminder message added to birthday reminder list in correct position. Details of the added contact shown in the status message.
+       Expected: Contact with correct details added to contact list. Contact's birthday added to birthday reminder list in correct position. Details of the added contact shown in the status message.
 
     1. Test case: `add n/James p/32323232 e/james@gmail.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney b/04071999`<br>
-       Expected: No contact is added since duplicate phone number. Error details shown in the status message.
+       Expected: No contact is added due to duplicated phone number. Error details shown in the status message.
 
     1. Other incorrect add commands to try: `add <other valid params> b/<future date>`, `add <other valid params> p/hp:1200123`, `...`.
 
@@ -947,7 +947,7 @@ testers are expected to do more *exploratory* testing.
        Expected: Contact with correct details added to contact list. Birthday reminder list unchanged. Details of the added contact shown in the status message.
 
     1. Test case: `add n/James p/98989898 e/jamesgmail.com a/311, Clementi Ave 2, #02-25`<br>
-       Expected: No contact is added, invalid email format. Error details shown in the status message.
+       Expected: No contact is added due to invalid email format. Error details shown in the status message.
 
     1. Other incorrect add commands to try: `add n/James! <other valid params>`, `add <one invalid param amongst other valid params>`, `...`.<br>
        Expected: Similar to previous.
@@ -959,7 +959,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. If deleted contact has birthday, it's birthday reminder message is deleted from the birthday reminder list. Details of the deleted contact shown in the status message.
+      Expected: First contact is deleted from the list. If deleted contact has a birthday, it's birthday reminder message is deleted from the birthday reminder list. Details of the deleted contact are shown in the status message.
 
    1. Test case: `delete 0`<br>
       Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
@@ -994,7 +994,7 @@ testers are expected to do more *exploratory* testing.
        Expected: Similar to previous.
 
 1. Deleting a contact while some contacts are being shown
-    1. Prerequisites: Viewing only some contacts using the `find` or `findAny` command. Multiple contacts in the list.
+    1. Prerequisites: Viewing only some contacts using the `find` or `findAny` command. At least 10 contacts in the list displayed.
     
     1. Test case: `deletem 8 - 10`<br>
        Expected: Eighth, ninth and tenth contact deleted from the list. If deleted contact has birthday, it's birthday reminder message is deleted from the birthday reminder list. Details of the deleted contact shown in the status message.
@@ -1038,7 +1038,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Tag a contact with multiple tags
 
-    1. Prerequisites: Contact at index 1 no tag and contact at index 2 has tag.
+    1. Prerequisites: Contact at index 1 no tag and contact at index 2 has no tag.
 
     1. Test case: `tag 1 t/johnBirthday t/party`<br>
        Expected: Tags added to contact at index 1. Details of the tags added to contact shown in the status message.
@@ -1052,7 +1052,7 @@ testers are expected to do more *exploratory* testing.
 ### Untag a contact
 1. Untag a contact
 
-    1. Prerequisites: Contact at index 1 has tags johnBirthday and party and contact at index 2 no tags.
+    1. Prerequisites: Contact at index 1 has tags johnBirthday and party and contact at index 2 has no tags.
 
     1. Test case: `untag 1 t/johnBirthday t/party`<br>
        Expected: Remove specified tags from contact at index 1. Details of the removed tags shown in the status message.
