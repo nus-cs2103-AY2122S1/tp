@@ -56,7 +56,8 @@ public class EditCommand extends Command {
             + "already exists in the ProgrammerError";
     public static final String MESSAGE_DUPLICATE_STUDENT_EMAIL = "This student with the same Email "
             + "already exists in the ProgrammerError";
-    public static final String MESSAGE_EDIT_LAB_SUCCESS = "Lab %1$s updated!\n";
+    public static final String MESSAGE_EDIT_LAB_SUCCESS = "Lab %1$s score has been updated!\n";
+    public static final String MESSAGE_NO_LAB_EDITED = "No labs has been updated.";
 
     private static LabNum labNum2;
     private final Index index;
@@ -110,10 +111,12 @@ public class EditCommand extends Command {
         model.setSelectedStudent(editedStudent);
         model.setSelectedLabs(editedStudent.getLabList());
         if (labNum2 != null) {
-            return new CommandResult(String.format(MESSAGE_EDIT_LAB_SUCCESS, labNum2)
-                                    + String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent));
+            return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent)
+                    + "\n" + String.format(MESSAGE_EDIT_LAB_SUCCESS, labNum2));
         }
-        return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent));
+
+        return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent)
+                + "\n" + MESSAGE_NO_LAB_EDITED);
     }
 
     /**
