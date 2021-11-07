@@ -27,6 +27,8 @@ Here are some features of Tutor Master.
   - **List** all tasks
   - **Assign** a task to a student
   - **Assign** a task to a group
+  - **Unassign** a task from a student
+  - **Unassign** a task from a group
 
 ## Get Started
 
