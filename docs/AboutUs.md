@@ -48,6 +48,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[github](http://github.com/nataniayp)]
 
+[[portfolio](team/nataniayp.md)]
+
 * Role: Developer
 * Responsibilities: Testing, Parser, Scheduling & Tracking, README
 
