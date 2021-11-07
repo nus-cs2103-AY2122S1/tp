@@ -27,6 +27,7 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   * Added Insurance feature to UG and DG
+  * Added Add Command feature to DG (missing in AB3)
   * Added Glossary
 
 * **Community**:
