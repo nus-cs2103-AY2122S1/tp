@@ -4,9 +4,7 @@ import static tutoraid.ui.DetailLevel.HIGH;
 import static tutoraid.ui.DetailLevel.LOW;
 import static tutoraid.ui.DetailLevel.MED;
 
-import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 import java.util.logging.Logger;
 
@@ -20,7 +18,6 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import tutoraid.commons.core.GuiSettings;
 import tutoraid.commons.core.LogsCenter;
-import tutoraid.commons.core.Messages;
 import tutoraid.logic.Logic;
 import tutoraid.logic.commands.CommandResult;
 import tutoraid.logic.commands.exceptions.CommandException;
@@ -232,6 +229,12 @@ public class MainWindow extends UiPart<Stage> {
         return lessonListPanel;
     }
 
+    /**
+     * Prints a message to the Console if the UI part has been initialised, otherwise it adds to a queue which will
+     * be polled when Console gets initialised.
+     *
+     * @param message The message to be displayed
+     */
     public void printMessage(String message) {
         if (resultDisplay != null) {
             resultDisplay.setFeedbackToUser(message);

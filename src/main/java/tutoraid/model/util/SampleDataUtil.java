@@ -1,5 +1,6 @@
 package tutoraid.model.util;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import tutoraid.model.lesson.Lesson;
 import tutoraid.model.lesson.LessonName;
 import tutoraid.model.lesson.Price;
 import tutoraid.model.lesson.Timing;
+import tutoraid.model.student.InitialStudent;
 import tutoraid.model.student.Lessons;
 import tutoraid.model.student.ParentName;
 import tutoraid.model.student.Phone;
@@ -24,40 +26,44 @@ import tutoraid.model.student.StudentName;
  */
 public class SampleDataUtil {
 
-    public static Student[] getSampleStudents(ReadOnlyLessonBook lessonBook) {
-        return new Student[] {
+    public static InitialStudent[] getSampleStudents(ReadOnlyLessonBook lessonBook) {
+        return new InitialStudent[] {
             // All details available
-            new Student(new StudentName("Alex Yeoh"), new Phone("87438807"),
+            new InitialStudent(new StudentName("Alex Yeoh"), new Phone("87438807"),
                     new ParentName("Mr Yeoh"), new Phone("93726483"),
-                    new ProgressList(), new Lessons()),
-            new Student(new StudentName("Bernice Yu"), new Phone("99272758"),
+                    new ProgressList(), new ArrayList<>(List.of("Maths 1"))),
+            new InitialStudent(new StudentName("Bernice Yu"), new Phone("99272758"),
                     new ParentName("Mrs Yu"), new Phone("83548274"),
-                    new ProgressList(), new Lessons()),
+                    new ProgressList(), new ArrayList<>()),
             // Parent's details unavailable
-            new Student(new StudentName("Charlotte Oliveiro"), new Phone("93210283"),
+            new InitialStudent(new StudentName("Charlotte Oliveiro"), new Phone("93210283"),
                     new ParentName(""), new Phone(""),
-                    new ProgressList(), new Lessons()),
+                    new ProgressList(), new ArrayList<>()),
             // Phone details unavailable
-            new Student(new StudentName("David Li"), new Phone(""),
+            new InitialStudent(new StudentName("David Li"), new Phone(""),
                     new ParentName("Mr Li"), new Phone(""),
-                    new ProgressList(), new Lessons()),
+                    new ProgressList(), new ArrayList<>()),
             // Phone and parent's details unavailable
-            new Student(new StudentName("Irfan Ibrahim"), new Phone(""),
+            new InitialStudent(new StudentName("Irfan Ibrahim"), new Phone(""),
                     new ParentName(""), new Phone(""),
-                    new ProgressList(), new Lessons()),
+                    new ProgressList(), new ArrayList<>()),
             // Student phone unavailable
-            new Student(new StudentName("Roy Balakrishnan"), new Phone(""),
+            new InitialStudent(new StudentName("Roy Balakrishnan"), new Phone(""),
                     new ParentName("Mrs Balakrishnan"), new Phone("93628676"),
-                    new ProgressList(), new Lessons())
+                    new ProgressList(), new ArrayList<>())
         };
     }
 
     public static ReadOnlyStudentBook getSampleStudentBook(ReadOnlyLessonBook lessonBook) {
         StudentBook sampleSb = new StudentBook();
-        for (Student sampleStudent : getSampleStudents(lessonBook)) {
-            sampleSb.addStudent(sampleStudent);
+        try {
+            for (InitialStudent sampleStudent : getSampleStudents(lessonBook)) {
+                sampleSb.addStudent(sampleStudent.toStudent(lessonBook.getLessonList()));
+            }
+            return sampleSb;
+        } catch (IOException e) {
+            throw new RuntimeException("Could not create sample student book.");
         }
-        return sampleSb;
     }
 
     public static Lesson[] getSampleLessons() {

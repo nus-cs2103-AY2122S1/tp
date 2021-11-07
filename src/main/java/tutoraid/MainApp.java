@@ -123,8 +123,9 @@ public class MainApp extends Application {
                 logger.info("Data file not found. Will be starting with a sample StudentBook");
                 message += String.format("\n%s", Messages.MESSAGE_NO_STUDENT_DATA);
             }
+            ReadOnlyLessonBook finalLessonsInitialData = lessonsInitialData;
             studentsInitialData = studentBookOptional.orElseGet(() -> SampleDataUtil.getSampleStudentBook(
-                    SampleDataUtil.getSampleLessonBook()));
+                    finalLessonsInitialData));
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty StudentBook");
             message += String.format("\n%s", Messages.MESSAGE_JSON_INTEGRITY_STUDENT_ERROR);
