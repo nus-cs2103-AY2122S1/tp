@@ -1,16 +1,25 @@
 package seedu.address.logic.parser.task;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TASK_DEADLINE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TASK_INDEX_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TASK_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.TASK_DEADLINE_DESC_POEM;
+import static seedu.address.logic.commands.CommandTestUtil.TASK_INDEX_DESC_ONE;
+import static seedu.address.logic.commands.CommandTestUtil.TASK_NAME_DESC_POEM;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_POEM_TASK_DEADLINE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_POEM_TASK_NAME;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_INDEX;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.task.TeditCommand;
 import seedu.address.model.module.Name;
 import seedu.address.model.module.task.TaskDeadline;
-
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.*;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 
 class TeditCommandParserTest {
     private TeditCommandParser parser = new TeditCommandParser();
@@ -44,13 +53,16 @@ class TeditCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         //invalid task id
-        assertParseFailure(parser, INVALID_TASK_INDEX_DESC + TASK_DEADLINE_DESC_POEM + TASK_DEADLINE_DESC_POEM, MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, INVALID_TASK_INDEX_DESC + TASK_DEADLINE_DESC_POEM
+                + TASK_DEADLINE_DESC_POEM, MESSAGE_INVALID_INDEX);
 
         //invalid task name
-        assertParseFailure(parser, TASK_INDEX_DESC_ONE + INVALID_TASK_NAME_DESC + TASK_DEADLINE_DESC_POEM, Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, TASK_INDEX_DESC_ONE + INVALID_TASK_NAME_DESC
+                + TASK_DEADLINE_DESC_POEM, Name.MESSAGE_CONSTRAINTS);
 
         //invalid task deadline
-        assertParseFailure(parser, TASK_INDEX_DESC_ONE + TASK_NAME_DESC_POEM + INVALID_TASK_DEADLINE_DESC, TaskDeadline.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, TASK_INDEX_DESC_ONE + TASK_NAME_DESC_POEM
+                + INVALID_TASK_DEADLINE_DESC, TaskDeadline.MESSAGE_CONSTRAINTS);
 
     }
 }

@@ -1,8 +1,19 @@
 package seedu.address.logic.commands.task;
 
+import static java.util.Objects.requireNonNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.testutil.Assert.assertThrows;
+
+import java.nio.file.Path;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
+import java.util.function.Predicate;
+
+import org.junit.jupiter.api.Test;
+
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.CommandResult;
@@ -19,16 +30,6 @@ import seedu.address.model.module.task.TaskList;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.MemberBuilder;
 import seedu.address.testutil.TaskBuilder;
-
-import java.nio.file.Path;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
-import java.util.function.Predicate;
-
-import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.testutil.Assert.assertThrows;
 
 class TeditCommandTest {
 
@@ -49,7 +50,8 @@ class TeditCommandTest {
         Member validMember = new MemberBuilder().build();
         AddressBook addressBook = new AddressBookBuilder().withMember(validMember).build();
         TaddCommand tAddCommand = new TaddCommand(validMemberIdList, validTask);
-        ModelStubThatAcceptsEditingOneTask modelStub = new ModelStubThatAcceptsEditingOneTask(addressBook, validTask, validMemberIdList);
+        ModelStubThatAcceptsEditingOneTask modelStub =
+                new ModelStubThatAcceptsEditingOneTask(addressBook, validTask, validMemberIdList);
         tAddCommand.execute(modelStub);
         Name editedTaskName = new Name("test1");
         TeditCommand.EditTaskDescriptor descriptor = new TeditCommand.EditTaskDescriptor();
@@ -71,7 +73,8 @@ class TeditCommandTest {
         Member validMember = new MemberBuilder().build();
         AddressBook addressBook = new AddressBookBuilder().withMember(validMember).build();
         Task validTask = new TaskBuilder().build();
-        ModelStubThatAcceptsEditingOneTask modelStub = new ModelStubThatAcceptsEditingOneTask(addressBook, validTask, validMemberIdList);
+        ModelStubThatAcceptsEditingOneTask modelStub =
+                new ModelStubThatAcceptsEditingOneTask(addressBook, validTask, validMemberIdList);
         Name editedTaskName = new Name("test1");
         TeditCommand.EditTaskDescriptor descriptor = new TeditCommand.EditTaskDescriptor();
         descriptor.setName(editedTaskName);

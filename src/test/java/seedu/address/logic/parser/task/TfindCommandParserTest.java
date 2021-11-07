@@ -1,16 +1,16 @@
 package seedu.address.logic.parser.task;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.logic.commands.task.TfindCommand;
-import seedu.address.model.module.NameContainsKeywordsPredicate;
-import seedu.address.model.module.task.Task;
-
-import java.util.Arrays;
-
-import static org.junit.jupiter.api.Assertions.*;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+
+import java.util.Arrays;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.commands.task.TfindCommand;
+import seedu.address.model.module.NameContainsKeywordsPredicate;
+import seedu.address.model.module.task.Task;
 
 class TfindCommandParserTest {
     private TfindCommandParser parser = new TfindCommandParser();

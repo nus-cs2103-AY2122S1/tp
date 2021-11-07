@@ -24,6 +24,10 @@ public class TfindCommand extends Command {
 
     private final NameContainsKeywordsPredicate<Task> predicate;
 
+    /**
+     * Creates an TfindCommand to display the specified {@code Tasks}
+     * belonging to the current member with the specified keywords {@code predicate}.
+     */
     public TfindCommand(NameContainsKeywordsPredicate<Task> predicate) {
         requireNonNull(predicate);
         this.predicate = predicate;

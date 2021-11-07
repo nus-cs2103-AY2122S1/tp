@@ -1,8 +1,19 @@
 package seedu.address.logic.commands.task;
 
+import static java.util.Objects.requireNonNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.testutil.Assert.assertThrows;
+
+import java.nio.file.Path;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
+import java.util.function.Predicate;
+
+import org.junit.jupiter.api.Test;
+
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.CommandResult;
@@ -18,16 +29,6 @@ import seedu.address.model.module.task.TaskList;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.MemberBuilder;
 import seedu.address.testutil.TaskBuilder;
-
-import java.nio.file.Path;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
-import java.util.function.Predicate;
-
-import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.testutil.Assert.assertThrows;
 
 class TundoneCommandTest {
     @Test
@@ -48,7 +49,7 @@ class TundoneCommandTest {
         AddressBook addressBook = new AddressBookBuilder().withMember(validMember).build();
         TaddCommand tAddCommand = new TaddCommand(validMemberIdList, validTask);
         TlistCommand tlistCommand = new TlistCommand(validMemberId);
-        TdoneCommand tdoneCommand =  new TdoneCommand(validTaskIdList);
+        TdoneCommand tdoneCommand = new TdoneCommand(validTaskIdList);
         ModelStubAcceptingWithOneTask modelStub =
                 new ModelStubAcceptingWithOneTask(addressBook, validTask, validMemberIdList);
         tAddCommand.execute(modelStub);
@@ -81,7 +82,7 @@ class TundoneCommandTest {
         TaddCommand tAddCommand2 = new TaddCommand(validMemberIdList, validTask2);
         TaddCommand tAddCommand3 = new TaddCommand(validMemberIdList, validTask3);
         TlistCommand tlistCommand = new TlistCommand(validMemberId);
-        TdoneCommand tdoneCommand =  new TdoneCommand(validTaskIdList);
+        TdoneCommand tdoneCommand = new TdoneCommand(validTaskIdList);
         ModelStubAcceptingWithOneTask modelStub =
                 new ModelStubAcceptingWithOneTask(addressBook, validTask, validMemberIdList);
         tAddCommand.execute(modelStub);
