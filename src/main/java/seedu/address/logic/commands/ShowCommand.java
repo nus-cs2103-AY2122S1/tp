@@ -117,7 +117,7 @@ public class ShowCommand extends Command {
             uniqueInputs = getUniqueTagInputs(ol);
             break;
         case PREFIX_INTERVIEW_SYNTAX:
-            userText = "interview";
+            userText = "interviews";
             uniqueInputs = getUniqueInterviewInputs(ol);
             break;
         default:

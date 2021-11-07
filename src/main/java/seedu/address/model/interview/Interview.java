@@ -79,8 +79,11 @@ public class Interview implements Comparable<Interview> {
             DateFormat parseFormat = new SimpleDateFormat(PARSE_FORMAT);
             Date thisInterview = parseFormat.parse(this.parseTime);
             Date givenInterview = parseFormat.parse(interview.parseTime);
-            result = thisInterview.before(givenInterview) ? -1
-                    : givenInterview.before(thisInterview) ? 1 : 0;
+            result = thisInterview.before(givenInterview)
+                    ? -1
+                    : givenInterview.before(thisInterview)
+                        ? 1
+                        : 0;
         } catch (ParseException e) {
             e.printStackTrace();
         }
