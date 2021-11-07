@@ -16,7 +16,7 @@ It is optimised for quick text-based inputs via a Command Line Interface (CLI) w
 
 This product will make recruiters’ lives easier through categorisation and filter features to easily access candidates they have in mind.
 
-![Ui](images/Ui.png)
+![Ui](images/ug-features/Ui.png)
 
 ### Table of Contents
 * [About RecruitIn](#about-recruitin)
@@ -114,10 +114,10 @@ Scroll down to the bottom and click on `recruitIn.jar`.
 3. Copy the file to the folder you want to use as the _home folder_.
 
 4. Double-click the file to start the app. The GUI should be similar to the below image. Note how the app contains some sample data.<br>
-   ![Ui](images/description.png)
+   ![Ui](images/ug-features/description.png)
    
    Applicant data are displayed as a list in the **Applicant Panel**.
-   ![Applicant Diagram](images/ApplicantDiagram.png)
+   ![Applicant Diagram](images/dg-diagrams/ApplicantDiagram.png)
 
 5. Now that your app is set up and running, lets run through a quick sample workflow on managing an applicant:<br><br>
 
@@ -138,22 +138,22 @@ Scroll down to the bottom and click on `recruitIn.jar`.
       and has `0` years of experience as a `Software Engineer`. <br><br>
       Type in **`add`**`n/Mary Sue p/91131513 e/MarySue@gmail.com r/Software Engineer et/Internship s/3000 l/High School y/0`.<br><br>
       Your application should look like this:
-      ![After Adding](./images/SampleWorkflow1.png)<br><br>
+      ![After Adding](images/ug-features/SampleWorkflow1.png)<br><br>
    4. As an experienced recruiter, you notice that `Mary Sue` may not have the qualifications for the job as a `Software Engineer` and want to add
       a note to remind yourself.<br><br>
       Type in **`edit`**`2 nt/She might not have the qualifications for the job` to add the note to `Mary Sue`.<br><br>
       Your application should look like this:
-      ![After Note](./images/SampleWorkflow2.png)<br><br>
+      ![After Note](images/ug-features/SampleWorkflow2.png)<br><br>
    5. Your company then informs you that they would like to interview `John Doe` on December 11th 2021 at 10 am `2021-12-11, 10:00` and you want to remind
       yourself that an interview has been arranged for `John Doe`.<br><br>
       Type in **`edit`**`1 i/2021-12-11, 10:00` to add this interview slot to `John Doe`.<br><br>
       Your application should look like this:
-      ![After Interview](./images/SampleWorkflow3.png)<br><br>
+      ![After Interview](images/ug-features/SampleWorkflow3.png)<br><br>
    6. Fast forward the time. Your company informs you that `John Doe` has
       passed his interview and is hired.<br><br>
       Type in **`find`**`n/John Doe p/98765432` to find `John Doe`.<br>
       Type in **`mark`**`1` to mark `John Doe` as Done.<br><br>
-      ![After mark](./images/SampleWorkflow4.png)<br><br>
+      ![After mark](images/ug-features/SampleWorkflow4.png)<br><br>
    7. Type in **`list`** to go back to your list of applicants.<br><br>
       Type in **`delete_marked`** to remove all applicants marked as Done, such as `John Doe`.<br><br>
       Now `John Doe` is removed from your list of applicants.<br><br>
@@ -229,7 +229,7 @@ Scroll down to the bottom and click on `recruitIn.jar`.
 The `help` command shows a message explaining how to access the help page.
 Alternatively, you can click on the Help button to access the help page as well.
 
-![help message](images/helpMessage.png)
+![help message](images/ug-features/helpMessage.png)
 
 Format: `help`
 
@@ -253,9 +253,9 @@ Examples:
 * `add n/Bob p/87654321 e/bob@gmail.com r/Software Engineering et/Full time s/4000 l/High School y/2 i/2021-10-21, 20:00 nt/This applicant has the credentials needed for this job.`
 * `add n/John p/90909090 e/john@gmail.com r/Software Tester et/Full time s/4500 l/High School y/3 t/smart t/helpful` to add a person named `John` with two tags `smart` and `helpful`
 
-Before: ![images](images/AddBefore.png)
+Before: ![images](images/ug-features/AddBefore.png)
 
-After: ![images](images/AddAfter.png)
+After: ![images](images/ug-features/AddAfter.png)
 
 <div markdown="block" class="alert alert-secondary">
 **:information_source: Prefix parameters for `add` command must follow the following parameter specifications:**<br>
@@ -305,9 +305,9 @@ Examples:
 * `edit 1 n/John t/` will change the name of the applicant with index number 1 to `John` and remove all the applicant's ***tag***s
 * `edit 1 r/Software Engineer` will change the ***role*** of the applicant with the index number 1
 
-Before: ![images](images/EditBefore.png)
+Before: ![images](images/ug-features/EditBefore.png)
 
-After: ![images](images/EditAfter.png)
+After: ![images](images/ug-features/EditAfter.png)
 
 <div markdown="block" class="alert alert-secondary">
 **:information_source: Prefix parameters for `edit` command must follow the same parameter specifications as `add` command:**<br>
@@ -361,8 +361,8 @@ Examples:
 * After you execute the command `find n/John`, `delete 1` deletes the 1st applicant in the results of the `find` command.
 * After you execute the command `list`, `delete 1 2` deletes the 1st and 2nd applicants listed in RecruitIn.
 
-Before: ![DeleteBefore](images/features/DeleteBefore.png)
-After: ![DeleteAfter](images/features/DeleteAfter.png)
+Before: ![DeleteBefore](images/ug-features/DeleteBefore.png)
+After: ![DeleteAfter](images/ug-features/DeleteAfter.png)
 
 
 ### Finding an applicant : `find`
@@ -390,8 +390,8 @@ Format: `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMPLOYMEN
 Examples:
 * `find n/alex n/bernice` finds you all applicants with only `bernice` as values for name prefix.
   
-Before: ![FindBefore](images/features/FindBefore.png)
-After: ![FindAfter](images/features/FindAfter.png)
+Before: ![FindBefore](images/ug-features/FindBefore.png)
+After: ![FindAfter](images/ug-features/FindAfter.png)
 
 
 * `find n/John Mary` finds you all applicants with either `John` or `Mary` as values for name prefix.
@@ -435,8 +435,8 @@ Format: `filter_interview past` or `filter_interview future`
 * `filter_interview past` shows you applicants with interviews that were in the past (compared to the current date and time).
 * `filter_interview future` shows you applicants with interviews that are coming up in the future (compared to the current date and time).
 
-Before: ![FilterInterviewBefore](images/features/FilterInterviewBefore.png)
-After: ![FilterInterviewAfter](images/features/FilterInterviewAfter.png)
+Before: ![FilterInterviewBefore](images/ug-features/FilterInterviewBefore.png)
+After: ![FilterInterviewAfter](images/ug-features/FilterInterviewAfter.png)
 
 * You should give either `past` or `future` as a parameter after `filter_interview`, but not both.
 * You can type in either UPPER CASE or small case for `past` and `future`.
@@ -467,8 +467,8 @@ Examples:
 * `show i/` will display a list consisting of all interview timings.
 * `show n/ i/` will display a list consisting of all names.
     
-Before: ![ShowBefore](images/features/ShowBefore.png)
-After: ![ShowAfter](images/features/ShowAfter.png)
+Before: ![ShowBefore](images/ug-features/ShowBefore.png)
+After: ![ShowAfter](images/ug-features/ShowAfter.png)
 
 
 
@@ -493,9 +493,9 @@ Format: `mark INDEX…​`
 Examples:
 * After using the command `list`, `mark 1` marks the 1st applicant listed in RecruitIn as `Done`.
 
-Before: ![images](images/MarkBefore.png)
+Before: ![images](images/ug-features/MarkBefore.png)
 
-After: ![images](images/MarkAfter.png)
+After: ![images](images/ug-features/MarkAfter.png)
 
 * After using the command `list`, `mark 2 4 6` marks the 2nd, 4th and 6th applicant listed in RecruitIn as `Done`.
 * After using the command `find n/John`, `mark 1` marks the 1st applicant listed in RecruitIn's results of the `find` command as `Done`.
@@ -522,9 +522,9 @@ Format: `unmark INDEX…​`
 Examples:
 * After using the command `list`, `ummark 1` unmarks the 1st applicant listed in RecruitIn to `Not Done`.
 
-Before: ![images](images/UnmarkBefore.png)
+Before: ![images](images/ug-features/UnmarkBefore.png)
 
-After: ![images](images/UnmarkAfter.png)
+After: ![images](images/ug-features/UnmarkAfter.png)
 
 * After using the command `list`, `unmark 2 4 6` unmarks the 2nd, 4th and 6th applicant listed in RecruitIn to `Not Done`.
 * After using the command `find n/John`, `unmark 1` unmarks the 1st applicant listed in RecruitIn's results of the `find` command to `Not Done`.
@@ -540,9 +540,9 @@ Format: `delete_marked`
 
 Example:
 
-Before: ![images](images/DeleteMarkedBefore.png)
+Before: ![images](images/ug-features/DeleteMarkedBefore.png)
 
-After: ![images](images/DeleteMarkedAfter.png)
+After: ![images](images/ug-features/DeleteMarkedAfter.png)
 
 
 ### Clearing all data : `clear`
@@ -785,7 +785,7 @@ For example, if your input is `find n/Alex Bernice`, `Alex` and `Bernice` are yo
 * ##### INTERVIEW `i/`
     * An INTERVIEW parameter matches with an existing stored ***Interview*** only if the keyword is a whole word (i.e. separated by space) contained in the ***Interview***.
     * All the keywords that you provide in your INTERVIEW parameter must comply with the displayed format (e.g. 20 Mar 2021, 10:30).
-      ![InterviewDisplayFormat](images/features/InterviewDisplay.png)
+      ![InterviewDisplayFormat](images/ug-features/InterviewDisplay.png)
     * For example:
         * A `2021` parameter can match with applicants that have their ***Interview***s in the year 2021.
         * A `20:21` parameter can match with applicants that have their ***Interview***s at the time 20:21 on any date.
