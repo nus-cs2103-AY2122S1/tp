@@ -310,19 +310,20 @@ execution will continue, and the respective Event at the index is deleted.
 
 ### Filter Event feature
 
-This feature allows Managera users to filter the event list by date of event and by time.
+This feature allows Managera users to filter the event list by date and time. Only the events that fall on the 
+specified date and time will be left in the filtered list.
 
 #### Implementation Details
 
-The `AddressBookParser` is responsible for determining the type of `Command` to be created from user input, 
+Since the `AddressBookParser` is responsible for determining the type of `Command` to be created from user input, 
 we can simply add a new `commandType` case for `FilterEventCommand` in `AddressBookParser`. 
 
 Since this feature requires Managera to take in user input and determine if the filter is by:
 
 1. Date only, or
-2. Date and Time
+2. Date and Time,
 
-A `FilterEventCommandParser` is made to be responsible for this purpose. The `FilterEventCommandParser` parses user's 
+a `FilterEventCommandParser` is made to be responsible for this purpose. The `FilterEventCommandParser` parses user's 
 input and creates the `EventDateTimePredicate` which the `FilterEventCommand` will use to execute the filtering.
 `EventDateTimePredicate` implements `Predicate<Event>` which can be passed to a `FilteredList<Event>` to filter the 
 event list. 
@@ -332,14 +333,12 @@ event list. When the command is executed, the `model` will filter the `FilteredL
 `EventDateTimePredicate` and display only events that fulfils the `EventDateTimePredicate` contained in 
 `FilterEventCommand`.
 
-
 #### Implementation Rationale
 
 With considerations to how the `Event` class is implemented, some events do not have time associated with them.
 We feel that since all `Event` objects have a date associated through the `EventDate` class, filtering should be done primarily 
 through date i.e. `EventDate`. However, understanding that users might want to filter by time too, it is included as an 
 optional criteria for filtering.
-
 
 #### Design Considerations:
 ##### Aspect: Criteria to filter by:
@@ -367,7 +366,7 @@ optional criteria for filtering.
     2. Clear to user which field is being keyed in.
     3. Easy to implement with support of existing classes.
   * Cons:
-    1. This adds up to the number of prefixes already present in Managera which may be hard for users to remember.
+    1. This increases the number of prefixes already present in Managera which may be hard for users to remember.
 
 
 * **Alternative 2**: Without prefix:
