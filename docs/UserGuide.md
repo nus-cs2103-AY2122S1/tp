@@ -143,7 +143,7 @@ Examples:
 
 Finds persons with the given search criteria and value.
 
-Format: `find {n/|s/|N/|g/|T/|r/|p/|a/|t/full/|t/partial/}KEYWORD [MORE_KEYWORDS]`
+Format: `find {n/|s/|N/|g/|T/|r/|p/|a/|t/full/|t/}KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g friend will also match Friend or FrIend or FRIEND.
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
