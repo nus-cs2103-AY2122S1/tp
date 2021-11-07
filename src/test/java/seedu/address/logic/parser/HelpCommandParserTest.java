@@ -4,20 +4,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.AddToOrderCommand;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EndAndTransactOrderCommand;
-import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListInventoryCommand;
-import seedu.address.logic.commands.ListTransactionCommand;
-import seedu.address.logic.commands.RemoveFromOrderCommand;
-import seedu.address.logic.commands.SortCommand;
-import seedu.address.logic.commands.StartOrderCommand;
+import seedu.address.logic.commands.*;
 
 public class HelpCommandParserTest {
 
@@ -143,6 +130,13 @@ public class HelpCommandParserTest {
         assertParseSuccess(parser, "", expectedHelpCommand);
     }
 
+    @Test
+    public void parse_validRemoveArgs_returnsHelpCommand() {
+        // asking help for edit command
+        final String message = RemoveCommand.MESSAGE_USAGE;
+        HelpCommand expectedHelpCommand = new HelpCommand(message);
+        assertParseSuccess(parser, "remove", expectedHelpCommand);
+    }
 
 
 }

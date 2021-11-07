@@ -2,23 +2,7 @@ package seedu.address.logic.parser;
 
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.COUNT_DESC_BAGEL;
-import static seedu.address.logic.commands.CommandTestUtil.COUNT_DESC_DONUT;
-import static seedu.address.logic.commands.CommandTestUtil.ID_DESC_BAGEL;
-import static seedu.address.logic.commands.CommandTestUtil.ID_DESC_DONUT;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_COUNT_LETTER;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_COUNT_NEGATIVE_VALUE;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_COUNT_ZERO;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_ID_LETTER;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_ID_NEGATIVE_NUMBER;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_ID_SEVEN_DIGITS;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_ID_SPECIAL_CHAR;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_SPECIAL_CHAR;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_BAKED;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_POPULAR;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_COUNT_BAGEL;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BAGEL;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BAGEL;
+import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -71,20 +55,26 @@ public class AddToOrderCommandParserTest {
                 .withName(VALID_NAME_BAGEL)
                 .withId(VALID_ID_BAGEL)
                 .withCount(VALID_COUNT_BAGEL)
+                .withCostPrice(VALID_COSTPRICE_BAGEL)
+                .withSalesPrice(VALID_SALESPRICE_BAGEL)
+                .withTags(VALID_TAG_POPULAR)
                 .build();
 
         // All fields
-        assertParseSuccess(parser, VALID_NAME_BAGEL + ID_DESC_BAGEL + COUNT_DESC_BAGEL,
+        assertParseSuccess(parser, VALID_NAME_BAGEL + ID_DESC_BAGEL + COUNT_DESC_BAGEL + COSTPRICE_DESC_BAGEL
+                + SALESPRICE_DESC_BAGEL + TAG_DESC_POPULAR,
                 new AddToOrderCommand(expectedDescriptor));
 
         // multiple id - last id accepted
         assertParseSuccess(parser,
-                VALID_NAME_BAGEL + ID_DESC_DONUT + ID_DESC_BAGEL + COUNT_DESC_BAGEL,
+                VALID_NAME_BAGEL + ID_DESC_DONUT + ID_DESC_BAGEL + COUNT_DESC_BAGEL + COSTPRICE_DESC_BAGEL
+                        + SALESPRICE_DESC_BAGEL + TAG_DESC_POPULAR,
                 new AddToOrderCommand(expectedDescriptor));
 
         // multiple count - last count accepted
         assertParseSuccess(parser,
-                VALID_NAME_BAGEL + ID_DESC_BAGEL + COUNT_DESC_DONUT + COUNT_DESC_BAGEL,
+                VALID_NAME_BAGEL + ID_DESC_BAGEL + COUNT_DESC_DONUT + COUNT_DESC_BAGEL + COSTPRICE_DESC_BAGEL
+                        + SALESPRICE_DESC_BAGEL + TAG_DESC_POPULAR,
                 new AddToOrderCommand(expectedDescriptor));
     }
 
