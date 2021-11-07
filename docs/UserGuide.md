@@ -445,7 +445,7 @@ by 23:59".
 <div markdown="block" class="alert alert-info">
 
 **:warning: Tag Limitations:**<br>
-Tag names are only limited to 20 characters!
+Tags should be no longer than 15 characters.
 
 </div>
 
@@ -552,18 +552,27 @@ without the prefix `d/`.
 :orange_book: If you want to view all of your upcoming tasks, you can use the _Upcoming_ command. Upcoming tasks are
 incomplete tasks whose Date/Time are after the current Date/Time.
 
-:camera: The above screenshot shows how the _Upcoming_ command is used to view all incomplete tasks after the current Date/Time.
-In this example, it was 25 October 2021, 09:16 PM.
+:camera: The above screenshot shows how the _Upcoming_ command is used to view all incomplete tasks after the current 
+Date/Time. In this example, it was 25 October 2021, 09:16 PM.
 
 
 :page_with_curl: Format: `upcoming`
 
 :scroll: Notes:
 
-* Upcoming tasks will be listed in chronological order.
+* Filters your task list so that upcoming tasks will be listed in chronological order.
 * The current Date/Time is determined locally by your system clock.
 * An explanation of how Date and Time formats work can be found 
   [here](#date-time-info).
+
+<div markdown="block" class="alert alert-info">
+
+:bulb: This command will reorder your task list, even after you remove the filter with 
+[the _List_ command](#listing-all-tasks-list).
+Completed tasks will appear first, so it's convenient to use 
+[the _Cleardone_ command](#clearing-completed-tasks-cleardone) next!
+
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
