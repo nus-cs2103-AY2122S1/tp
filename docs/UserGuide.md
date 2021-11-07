@@ -9,9 +9,9 @@ title: User Guide
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
-## Introduction
+## **1. Introduction**
 
-### What is gitGud? 
+### 1.1 What is gitGud? 
 
 gitGud is a **desktop application for storing and managing your friends' gaming information and schedules**. 
 It is dedicated to gamers like you and provides a gamer-themed experience with a focus on increasing your efficiency through
@@ -26,9 +26,9 @@ just a single command.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## About this User Guide
+## **2. About this User Guide**
 
-### How to use this guide?
+### 2.1 How to use this guide?
 
 If you're new to gitGud, don't worry!
 This guide will walk you through the [basic setup](#quick-start) necessary to get you ready to use gitGud
@@ -40,13 +40,13 @@ you into a gitGud pro in the [features](#features) section.
 For experienced users of gitGud, this guide also provides a [command summary](#command-summary) for your reference, so
 you can quickly look up all of gitGud's core commands at a glance.
 
-### Reading this document
+### 2.2 Reading this document
 
 This guide utilizes symbols and syntax to highlight specific points made throughout the guide and to enhance your 
 overall reading experience. The section below on the meanings of [symbols and syntax used](#general-symbols-used) 
 provides more details for your reference. 
 
-#### General symbols used
+#### 2.2.1 General symbols used
 
 This table describes the main symbols used in the user guide and their respective meanings. 
 
@@ -57,7 +57,7 @@ This table describes the main symbols used in the user guide and their respectiv
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## **3. Quick start**
 
 1. Ensure you have Java `11` installed on your computer. 
    1. To check if Java `11` is currently installed, you may follow this short [guide](https://www.baeldung.com/java-check-is-installed).
@@ -88,7 +88,7 @@ Congratulations! You have successfully set up gitGud.
 For more in-depth details of each command, refer to the [features](#features) section below.
 
 --------------------------------------------------------------------------------------------------------------------
-## gitGud User Interface 
+## **4. gitGud User Interface** 
 
 Before we jump into the commands, let us take a moment to familiarise ourselves with the user interface. 
 
@@ -107,7 +107,7 @@ gitGud provides a gamer-themed user interface as shown in the image below with 6
 | 6 | Games list | This section displays the games list and may be filtered to display specific games based on the previously executed commands. | 
 
 --------------------------------------------------------------------------------------------------------------------
-## Features
+## **5. Features**
 
 <div markdown="block" class="alert alert-info">
 
@@ -121,12 +121,12 @@ gitGud provides a gamer-themed user interface as shown in the image below with 6
 
 </div>
 
-### Friend commands  
+### 5.1 Friend commands  
 
 This section includes commands that help you manage information regarding the friends you play with, such as 
 adding, editing, deleting or viewing of friends in your gitGud friend list.
 
-#### Adding a friend: `friend --add`
+#### 5.1.1 Adding a friend: `friend --add`
 
 Adds a new friend to gitGud friend’s list with an associated **unique** friend identifier.
 
@@ -171,7 +171,7 @@ Screenshot:
 ![Friend add Screenshot](images/ui-screenshots/friend-add.png)
 <br><center><ins>Image: Command feedback box after adding a friend `Draco`</ins></center>
 
-#### Editing a friend: `friend --edit` 
+#### 5.1.2 Editing a friend: `friend --edit` 
 
 Updates the friend's name to a new name for an existing friend with the given `FRIEND_ID`. 
 
@@ -188,7 +188,7 @@ Screenshot:
 ![Friend edit Screenshot](images/ui-screenshots/friend-edit.png)
 <br><center><ins>Image: Command feedback box after editing an existing friend `kevcool`'s name to `Kevin Foong`</ins></center>
 
-#### Deleting a friend: `friend --delete`
+#### 5.1.3 Deleting a friend: `friend --delete`
 
 Deletes a friend from gitGud’s friends list with the given `FRIEND_ID`.
 
@@ -205,7 +205,7 @@ Screenshot:
 ![Friend delete Screenshot](images/ui-screenshots/friend-delete.png)
 <br><center><ins>Image: Command feedback box after deleting a friend `Draco`</ins></center>
 
-#### Link a game to a friend: `friend --link`
+#### 5.1.4 Link a game to a friend: `friend --link`
 
 Links a game and the associated in-game username for the game to a friend with the provided `FRIEND_ID`.
 A link between a particular friend and game shows that the friend plays the game. 
@@ -245,7 +245,7 @@ Screenshot:
 <br><center><ins>Image: gitGud after running `friend --get marcustxk`, after linking a friend `marcustxk` 
 to a game `RocketLeague`</ins></center>
 
-#### Unlinking a game from a friend: `friend --unlink`
+#### 5.1.5 Unlinking a game from a friend: `friend --unlink`
 
 Removes the link between a friend and a game.
 This may be used if for example, a friend no longer plays a previously linked game. 
@@ -270,7 +270,7 @@ Screenshot:
 friend 
 `marcustxk`</ins></center>
 
-#### Assigning a skill value for a linked game : `friend --skill`
+#### 5.1.6 Assigning a skill value for a linked game : `friend --skill`
 
 Assigns the provided skill value to the friend with the given `FRIEND_ID` for the linked game with the given `GAME_ID`.
 This command allows you to record your personal gauge of a friend's skill at a particular game.
@@ -297,7 +297,7 @@ friend `Draco`</ins></center>
 <br><center><ins>Image: gitGud after running `friend --get Draco`, after adding a skill value `7` for a 
 friend `Draco` for a game `Valorant`</ins></center>
 
-#### Scheduling a friend: `friend --schedule`
+#### 5.1.7 Scheduling a friend: `friend --schedule`
 
 Schedules an existing friend by updating their schedule to indicate the time periods they are free or busy.
 * gitGud stores a weekly schedule for each friend, from Monday to Sunday, with each day having 24 blocks of hours that can be marked as free or busy.
@@ -338,7 +338,7 @@ Screenshot:
 <br><center><ins>Image: gitGud after running `friend --get Draco`, after scheduling a friend's `Draco` 
 availability</ins></center>
 
-#### Recommending friends available to play with - `recommend`
+#### 5.1.8 Recommending friends available to play with - `recommend`
 
 Lists all friends who both play the given game with `GAME_ID` and are available to play
 with at the specified time each week based on their stored schedules.
@@ -360,7 +360,7 @@ Screenshot:
 ![Friend recommend screenshot](images/ui-screenshots/recommend.png)
 <br><center><ins>Image: Friends available on Saturday 1000 recommended in friends list</ins></center>
 
-#### Getting a single friend's complete data: `friend --get`
+#### 5.1.9 Getting a single friend's complete data: `friend --get`
 
 Displays a particular friend's complete data with gitGud’s **unique** friend identifier `FRIEND_ID`.
 
@@ -382,7 +382,7 @@ Screenshot:
 ![Friend get screenshot](images/ui-screenshots/friend-get.png)
 <br><center><ins>Image: gitGud displaying friend `Draco` after the `get` command</ins></center>
 
-#### Listing/Filtering multiple friends data: `friend --list`
+#### 5.1.10 Listing/Filtering multiple friends data: `friend --list`
 
 Lists all friends stored in gitGud whose friend id contains any of the given keywords.
 
@@ -402,12 +402,12 @@ Screenshot:
 ![Ui](images/ui-screenshots/friend-list.png)
 <br><center><ins>Image: gitGud after listing all friends that have `t` in their `FRIEND_ID`</ins></center>
 
-### Game commands
+### 5.2 Game commands
 
 This section includes commands that help you manage the games you and your friends play, such as adding, deleting or 
 viewing of games in your gitGud game list.
 
-#### Adding a game: `game --add`
+#### 5.2.1 Adding a game: `game --add`
 
 Adds a game with the given **unique** `GAME_ID` into the gitGud game list.
 
@@ -441,7 +441,7 @@ Screenshot:
 ![Ui](images/ui-screenshots/game-add.png)
 <br><center><ins>Image: Command feedback box after adding a game `RocketLeague`</ins></center>
 
-#### Deleting a game: `game --delete`
+#### 5.2.2 Deleting a game: `game --delete`
 
 Deletes a game from the gitGud game list.
 
@@ -465,7 +465,7 @@ Screenshot:
 ![Ui](images/ui-screenshots/game-delete.png)
 <br><center><ins>Image: gitGud after deleting the game `Valorant`</ins></center>
 
-#### Getting a single game's complete data: `game --get`
+#### 5.2.3 Getting a single game's complete data: `game --get`
 
 Displays a particular game's complete data with gitGud’s **unique** game identifier `GAME_ID`.
 
@@ -486,7 +486,7 @@ Screenshot:
 ![Game get screenshot](images/ui-screenshots/game-get.png)
 <br><center><ins>Image: gitGud after getting the game `CSGO`</ins></center>
 
-#### Listing/Filtering multiple games data: `game --list`
+#### 5.2.4 Listing/Filtering multiple games data: `game --list`
 
 Lists all games stored in gitGud whose `GAME_ID` contains any of the given keywords.
 
@@ -506,11 +506,11 @@ Screenshot:
 ![Ui](images/ui-screenshots/game-list.png)
 <br><center><ins>Image: gitGud after listing games with the keyword `Valo`.</ins></center>
 
-### Other commands
+### 5.3 Other commands
 
 This section contains miscellaneous commands that may help improve your experience with gitGud.
 
-#### Viewing help: `help`
+#### 5.3.1 Viewing help: `help`
 
 Shows a message providing a link to the User Guide page.
 
@@ -521,7 +521,7 @@ Screenshot:
 ![Ui](images/ui-screenshots/help.png)
 <br><center><ins>Image: gitGud after running help command</ins></center>
 
-#### Clearing the friends and games lists : `clear`
+#### 5.3.2 Clearing the friends and games lists : `clear`
 
 Clears all friends and games from gitGud.
 
@@ -533,7 +533,7 @@ Format: `clear`
 Only use this command if you are absolutely sure you would like to restart gitGud from a clean slate.
 </div>
 
-#### Exiting the program : `exit`
+#### 5.3.3 Exiting the program : `exit`
 
 Terminates and exits gitGud.
 
@@ -541,15 +541,15 @@ Format: `exit`
 
 ___
 
-## Managing data
+## **6. Managing data**
 Your friends and games application data is stored in the files within the `data` folder relative to the where the `gitGud.jar` file
 is running on your computer `[JAR file location]/data/gamesList.json` and `[JAR file location]/data/friendsList.json`.
 
-### Saving of application data 
+### 6.1 Saving of application data 
 Application data is saved in the hard disk automatically after any command that changes the data. 
 There is no need to save manually.
 
-### Editing data files externally
+### 6.2 Editing data files externally
 For advanced users, you are able to change the values stored in the data files directly. 
 However, this is **not recommended** and may cause your files to be corrupted - hence, we will not be covering the in-depth
 details in our guide. 
@@ -564,7 +564,7 @@ This may cause **loss of data** and hence should be avoided unless you are absol
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+## **7. FAQ**
 
 **Q**: How do I **_transfer_** my friends and games list data to another Computer running gitGud?<br>
 **A**: Copy over the data folder (containing friendsList.json and gamesList.json) generated by gitGud on your current computer into the folder containing the 
@@ -577,7 +577,7 @@ for all distributions.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Glossary
+## **8. Glossary**
 
 Terminology used | What it means
 --------|------------------
@@ -588,7 +588,7 @@ Game Identifier | An identifier you assign to a game to refer to that specific g
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## **9. Command summary**
 
 Action | Format, Examples
 --------|------------------

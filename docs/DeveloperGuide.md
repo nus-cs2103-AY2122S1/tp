@@ -7,26 +7,26 @@ title: Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Acknowledgements**
+## **1. Acknowledgements**
 
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+## **2. Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Design**
+## **3. Design**
 
 <div markdown="span" class="alert alert-primary">
 
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S1-CS2103T-W13-4/tp/tree/master/docs/diagrams) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
-### Architecture
+### 3.1 Architecture
 
 <img src="images/ArchitectureDiagram.png" width="280" />
 
@@ -68,7 +68,7 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
-### UI component
+### 3.2 UI component
 
 **API** : [`Ui.java`](https://github.com/AY2122S1-CS2103T-W13-4/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
@@ -94,7 +94,7 @@ The `UI` component,
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-### Logic component
+### 3.3 Logic component
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
@@ -124,7 +124,7 @@ How the parsing works:
     * Note: For user commands with `friend` or `game` as the first arguments will go through an additional `FriendCommandParser` or `GameCommandParser` respectively for parsing, which will then create the respective `XYZFriendCommandParser` or `XYZGameCommandParser`
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
-### Model component
+### 3.4 Model component
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-W13-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="600" />
@@ -153,7 +153,7 @@ The `Model` component also,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` object.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-### Storage component
+### 3.5 Storage component
 
 **API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-W13-4/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
              
@@ -179,13 +179,13 @@ and `UserPrefs`, each stored in separate json files.
 The Storage component inherits from `FriendsListStorage`, `GamesListStorage` and 
 `UserPrefStorage`, which means it can be treated as any one of the three.
 
-### Common classes
+### 3.6 Common classes
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Implementation**
+## **4. Implementation**
 
 * [Delete Feature](#delete-feature)
 * [Link feature](#link-feature)
@@ -193,9 +193,9 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 * [Schedule Feature](#schedule-feature)
 * [Get Feature](#get-feature)
 
-### Delete Feature
+### 4.1 Delete Feature
 
-#### Implementation
+#### 4.1.1 Implementation
 The `MainWindow#executeCommand()` calls `LogicManager#execute()` method, which proceeds 
 to call `MainParser#parseCommand()` method, which then calls either `FriendCommandParser#parse()` or 
 `GameCommandParser#parse()`, and returns a `Command` object.
@@ -228,14 +228,14 @@ illustrates the description for deleting **games**:
 
 <img src="images/DeleteGameSequenceDiagram.png" width="1000" />
 
-#### Special considerations:
+#### 4.1.2 Special considerations:
 
 The games of each friend is stored inside a `Map<GameId, GameFriendLinks>`. Before deleting a game, the links a 
 friend has to a game has to be removed, before deleting the game from the list of games.
 
-### Link Feature
+### 4.2 Link Feature
 
-#### Implementation
+#### 4.2.1 Implementation
 
 The parsing of a link command is handled by the following classes:
 
@@ -257,15 +257,15 @@ The implementation of `Model#linkFriend()` is as follows:
 
 ![Implementation of link command in model](images/LinkSequenceDiagram.png)
 
-#### Special considerations:
+#### 4.2.2 Special considerations:
 
 - A separate `GameFriendLink` class was created to represent the association between a friend and a game.
 - Each `Friend` object has a `Map<GameId, GameFriendLink>`, which represents the links to the games it is associated with. However, each `Game` object does not
   have a corresponding data structure to the friends it is linked to. This reduces coupling between the two components such the implementation of the link feature does not require modification whenever the `Game` class is changed.
 
-### Unlink Feature
+### 4.3 Unlink Feature
 
-#### Implementation
+#### 4.3.1 Implementation
 
 The parsing of the unlink command is handled by the following classes:
 
@@ -287,9 +287,9 @@ The implementation of `Model#unlinkFriend()` is as follows:
 
 ![Implementation of unlink command in model](images/UnlinkSequenceDiagram.png)
 
-### Schedule Feature
+### 4.4 Schedule Feature
 
-#### Implementation
+#### 4.4.1 Implementation
 * To enable storing the schedule of a friend, two new fields had to be added: `Schedule` and `Day`
     * `Schedule` contains a list of 7 `Day`s.
     * `Day` contains:
@@ -313,7 +313,7 @@ The implementation of `Model#unlinkFriend()` is as follows:
 
 <img src="images/ScheduleSequenceDiagram2.png" width="1000" />
 
-#### Design considerations:
+#### 4.4.2 Design considerations:
 * `Schedule` and `Day` were their own classes instead of storing them directly as an `ArrayList` or `boolean[]` as this
   would set a layer of abstraction, allowing us to change the data structure utilised to store the `Schedule` or `Day`.
   * Among other reasons, this also allows us to create custom methods, such as:
@@ -326,9 +326,9 @@ The implementation of `Model#unlinkFriend()` is as follows:
 * A `Friend` is initialised with all busy timeslots in `Day` as our targer user profile is busy and would more often be 
   busy than free, so it would be easier for the user to just set when their friend is free.
 
-### Get Feature
+### 4.5 Get Feature
 
-#### Implementation
+#### 4.5.1 Implementation
 
 When called by the `MainWindow#executeCommand`, the `LogicManager#execute` method proceeds to call the `MainParser#parseCommand` method, which returns a `Command` object based on the workflow shown in the activity diagram below.
 
@@ -365,7 +365,7 @@ An example execution of a `GetFriendCommand` is shown in the sequence diagram be
 
 `GetGameCommand` is executed similarly, but it deals with games and game lists.
 
-#### Special Consideration:
+#### 4.5.2 Special Consideration:
 
 Once a `CommandResult` is created with the correct `Friend` or `Game`, its passed on to the `Ui`, which then in turn takes care of filtering and displaying the right information of the object in focus.
 * `CommandResult` with a `Friend` object
@@ -376,7 +376,7 @@ Once a `CommandResult` is created with the correct `Friend` or `Game`, its passe
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## **5. Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -386,9 +386,9 @@ Once a `CommandResult` is created with the correct `Friend` or `Game`, its passe
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
+## **6. Appendix: Requirements**
 
-### Product scope
+### 6.1 Product scope
 
 **Target user profile**:
 * Gamer who plays competitive games
@@ -402,20 +402,20 @@ online competitive multiplayer games together.
 
 
 **Value proposition**:
-#### Problem:
+#### 6.1.1 Problem:
 For busy university student gamers who love playing multiplayer competitive games with their friends, it can
 often be challenging scheduling times to play games with friends out of a packed schedule.
 Additionally, it can be challenging to make the most out of the limited time available by choosing
 the right friends to play with - those you have the most fun playing with or have great performance at the game.
 
-#### How gitGud solves the problem and make users' lives easier:
+#### 6.1.2 How gitGud solves the problem and make users' lives easier:
 gitGud allows users to store your friends' available timeslots and find matching times to play multiplayer
 competitive games together - allowing users to identify and coordinate gaming sessions with friends.
 It also allows users to keep track of each friend's competitive gaming performance and rate how much fun they had gaming with a friend
 after each gaming session. These factors are used for gitGud to recommend and help users to decide which friends to play with
 for future multiplayer competitive gaming sessions.
 
-### User stories
+### 6.2 User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
@@ -433,7 +433,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
-### Use cases
+### 6.3 Use cases
 
 (For all use cases below, the **System** is the `gitGud` and the **Actor** is the `user`, unless specified otherwise)
 
@@ -569,7 +569,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
-### Non-Functional Requirements
+### 6.4 Non-Functional Requirements
 
 1. Should work on any mainstream OS as long as it has Java 11 or above installed.
 2. Should be able to hold up to 100 friends or games without a noticeable sluggishness in performance for typical usage.
@@ -577,7 +577,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4. Does not require internet connection.
 5. The code should be open source.
 
-### Glossary
+### 6.5 Glossary
 
 * **Competitive Game/s**: Multiplayer games with a ranking system
 * **Busy**: Maximum of 7hrs/week to play games
@@ -585,7 +585,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **7. Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 
@@ -594,7 +594,7 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-### Launch and shutdown
+### 7.1 Launch and shutdown
 
 1. Initial launch
 
@@ -602,7 +602,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Double-click the jar file Expected: gitGud GUI launches.
 
-### Adding a friend
+### 7.2 Adding a friend
 1. Adding a friend to gitGud
 
     1. Prerequisites: There should not be a friend with `FRIEND_ID` Draco or a friend with `FRIEND_ID` MrFeely already stored in gitGud. 
@@ -616,7 +616,7 @@ testers are expected to do more *exploratory* testing.
     4. Other incorrect add commands to try: `friend --name Marcus`, `friend --add`, `friend --name`
        Expected: No friend is added. Error details shown in the status message. Status bar remains the same.
 
-### Adding a game
+### 7.3 Adding a game
 1. Adding a game to gitGud
 
     1. Prerequisites: List all games using the `game --list` command. There should not be a game with `GAME_NAME` 
@@ -628,7 +628,7 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `game --add`<br>
        Expected: No game is added. Error details shown in the status message. Status bar remains the same.
 
-### Linking a friend to a game
+### 7.4 Linking a friend to a game
 1. Linking a friend to a game in gitGud.
 
     1. Prerequisites: There exists a friend with `FRIEND_ID` Draco, and there exists a game with `GAME_NAME` Valorant.
@@ -647,7 +647,7 @@ testers are expected to do more *exploratory* testing.
        Draconian`, `link --friend`
        Expected: Similar to previous.
 
-### Deleting a friend
+### 7.5 Deleting a friend
 
 1. Deleting a friend from gitGud
 
@@ -662,7 +662,7 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `friend --delete`
       Expected: Similar to previous.
 
-### Deleting a game
+### 7.6 Deleting a game
 
 1. Deleting a game from gitGud
 
@@ -677,7 +677,7 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect delete commands to try: `game --delete`
        Expected: Similar to previous.
 
-### Filtering friends in friends' list using a keyword
+### 7.7 Filtering friends in friends' list using a keyword
 
 1. Filtering friends' list using a keyword
 
@@ -695,7 +695,7 @@ testers are expected to do more *exploratory* testing.
     5. Test case: `friend --list co`<br>
        Expected: The friend Draco is listed, as his `FRIEND_ID` contains the keyword `co`.
 
-### Filtering friends in games' list using a keyword
+### 7.8 Filtering friends in games' list using a keyword
 
 1. Filtering games' list using a keyword
 
@@ -713,7 +713,7 @@ testers are expected to do more *exploratory* testing.
     4. Test case: `game --list ant`<br>
        Expected: The game Valorant is listed, as its `GAME_ID` contains the keyword `ant`.
 
-### Viewing a friend's full data
+### 7.9 Viewing a friend's full data
 
 1. View a friend's full game information, including their in-game usernames
 
@@ -731,7 +731,7 @@ testers are expected to do more *exploratory* testing.
     5. Other incorrect get commands to try: `friend --get`
        Expected: Similar to previous.
    
-### Viewing a game's full data
+### 7.10 Viewing a game's full data
 
 1. View a game's full information, including the friends which play that game.
 
