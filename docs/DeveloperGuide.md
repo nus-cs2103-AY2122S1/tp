@@ -725,6 +725,8 @@ Given below is an example usage scenario and how the Find Command is executed:
 * **Step 4:** When the `PersonMatchesKeywordsPredicate#test(person)` method is called, a predicate is created for each searched field, name and tag, which tests if the given person's fields contain all the specified keywords.
 * **Step 5:** All searched field predicates are composed into a single predicate, depending on the find condition. This composed predicate is then applied on the person to determine whether there is a match.
 
+The Sequence Diagrams below is an example of how the components interact with each other for the scenario where the user issues the command `find n/Jo t/paid`.
+
 ![Find Command](images/FindSequenceDiagram.png)
 
 *Figure I.5.1: Sequence Diagram of Find Command*
