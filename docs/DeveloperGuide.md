@@ -66,8 +66,8 @@ To do this effectively, the following details can be found:
 The current version of Academy Directory is specifically designed for
 **CS1101S Avengers**. Therefore, the main Target Audience of this developer guide are Java developers who 
 are or formerly were CS1101S Avengers. As such, the following assumptions are made regarding the Target Audience:
-- Is familiar with the common terms relating to Computer Science.
-- Is familiar with CS1101S module structure and teaching pedagogy.
+- Is familiar with the common terms relating to Computer Science
+- Is familiar with CS1101S module structure and teaching pedagogy
 
 Technical background is assumed. We also provide the definitions for
 certain technical terms commonly used in this developer guide [here](#glossary).
@@ -76,8 +76,8 @@ certain technical terms commonly used in this developer guide [here](#glossary).
 - This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org/).
 - The formatting and content of the User Guide and Developer Guide is referenced from [AY2122S1-CS2103T-w17-1/tp](https://ay2122s1-cs2103t-w17-1.github.io/tp/).
 - Design of the internal version control system is heavily inspired by [Git](https://github.com/git/git).
-- Certain code implementations may have been inspired by [Baeldung tutorials](https://www.baeldung.com/) or [StackOverflow answers](https://stackoverflow.com)
-- Application logo were designed with the assistance of [Tailor Brand](https://studio.tailorbrands.com/brands/6276554147/downloads) and [Adobe Spark](https://spark.adobe.com/express-apps/logo-maker/preview)
+- Certain code implementations may have been inspired by [Baeldung tutorials](https://www.baeldung.com/) or [StackOverflow answers](https://stackoverflow.com).
+- Application logo were designed with the assistance of [Tailor Brand](https://studio.tailorbrands.com/brands/6276554147/downloads) and [Adobe Spark](https://spark.adobe.com/express-apps/logo-maker/preview).
 - Libraries used:
   - [JavaFX](https://openjfx.io/) for the amazing GUI
   - [Jackson](https://github.com/FasterXML/jackson) to save your data
@@ -128,7 +128,7 @@ The rest of the App consists of four main components.
 
 On top of the above four main components, there is also an additional [`VersionControl`](#versioncontrol-component) which 
 provides common API for `VersionedModel` and `Storage` to implement version control. Because of this, the `VersionControl` component is usually left out in the diagrams in this 
-developer guide. For more information regarding the `VersionControl` component, read [here](#versioncontrol-component)
+developer guide. For more information regarding the `VersionControl` component, read [here](#versioncontrol-component).
 
 **How the architecture components interact with each other**
 
@@ -232,7 +232,7 @@ The `VersionedModel` component,
 * stores the academy directory data i.e., all `Student` objects (which are contained in a `UniqueStudentList` object).
 * stores the currently 'selected' `Student` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Student>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `VersionedModel` represents data entities of the domain, they should make sense on their own without depending on other components)
+* does not depend on any of the other three components (as the `VersionedModel` represents data entities of the domain, they should make sense on their own without depending on other components).
 * interfaces with `VersionControl` via the `VersionControlController`, which implements the `Version` API
 and thus gives the `VersionedModel` component the ability to interface with version control entities such as `Commit`.
 * stores a `AddtionalViewModel` that stores additional information required by the UI's `VisualizerDisplay` such as number statistic for the `Visualize` command.
@@ -257,8 +257,8 @@ For more information regarding `VersionControl`, read [here](#versioncontrol-com
 The `Storage` component,
 * can save both academy directory data and user preference data in json format, and read them back into corresponding objects.
 * inherits from both `AcademyDirectoryStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* depends on some classes in the `VersionedModel` component (because the `Storage` component's job is to save/retrieve objects that belong to the `VersionedModel`)
-* can write version control objects to disk
+* depends on some classes in the `VersionedModel` component (because the `Storage` component's job is to save/retrieve objects that belong to the `VersionedModel`).
+* can write version control objects to disk.
 
 ### Common classes
 
@@ -398,7 +398,7 @@ This command adds a new `Student` to `AcademyDirectory`.
 
 #### Implementation
 `AddCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose. 
-The `AddCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands)
+The `AddCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands).
 
 `AddCommand` adds students to the `AcademyDirectory`. This command prevents addition of duplicate students by ensuring that each `Student` has a unique `NAME`. 
 The `NAME` field is a sufficiently unique field to identify a unique instance of a student because `AcademyDirectory` is scoped to 
@@ -813,7 +813,7 @@ The following links to guides on: Documentation, Logging, Testing, Configuration
 --------------------------------------------------------------------------------------------------------------------
 ## **Appendix**
 
-## Appendix A: Requirements
+## **Appendix A: Requirements**
 
 ### Product scope
 
@@ -1145,9 +1145,7 @@ The details of the testing procedure can be found here: [Manual Testing](ManualT
 testers are encouraged to do more *exploratory* testing.
 </div>
 
-
 In the future, we aim to expand testing to be done by external testers to improve the testing rigour.
-</div>
 
 ## **Appendix C: Version Controlled Commands**
 The following list is a list of commands that are version controlled i.e. they can be undone and

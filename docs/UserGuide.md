@@ -433,7 +433,7 @@ Example:
 
 ![undoCommandBefore](images/ug/undoCommandBefore.PNG)
 
-3. `undo` command executed to obtain the original Academy Directory
+2. `undo` command executed to obtain the original Academy Directory
 
 ![undoCommandAfter](images/ug/undoCommandAfter.PNG)
 
@@ -489,8 +489,10 @@ Examples:
 * `help`
 * `help add`: Displays the exact same content as what is shown on this User Guide for the `add` command
   or [here](https://github.com/nus-cs2103-AY2122S1/tp/blob/master/docs/UserGuide.md#adding-a-student-add).
-  
-**Includes an interactive GUI version where Avengers can click on the menu to view help. Only available for general help**
+
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+Includes an interactive GUI version where Avengers can click on the menu to view help. Only available for general help.
+</div>
 
 #### Exiting the program : `exit`
 
@@ -524,7 +526,9 @@ The following image shows the output of `history`. Note that some commits are la
 to indicate current state.
 ![historyCommand1](images/ug/historyCommand1.PNG)
 
-**Includes an interactive GUI version where Avengers can click on the menu to see usage history as well.**
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+Includes an interactive GUI version where Avengers can click on the menu to see usage history as well.
+</div>
 
 #### [For Advanced Users] Reverting Commit: `revert`
 Reverts state of Academy Directory to a previous commit

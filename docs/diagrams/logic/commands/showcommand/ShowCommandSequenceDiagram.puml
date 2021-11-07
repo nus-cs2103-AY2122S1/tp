@@ -28,6 +28,9 @@ loop student in student list
 end
 deactivate ShowCommand
 
+ShowCommand ->ModelManager : setAdditionalViewType(AdditionalViewType.TEXT)
+ShowCommand -> ModelManager : setAdditionalInfo(AdditionalInfo.of(result)
+
 [<-- ShowCommand -- : command result
 
 @enduml
