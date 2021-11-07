@@ -606,7 +606,7 @@ Others:
     
 * 1b. User specifies student names which match with multiple students in the Source Control database.
 
-    * 1b1. Source Control shows the list of students with matching names, and prompts the user to resolve the conflict by specifying the student ID instead.
+    * 1b1. Source Control shows the list of students with matching names, and prompts the user to resolve the conflict by specifying the NUSNET ID instead.
       
       Use case resumes at step 1.
 
@@ -615,7 +615,7 @@ Others:
 
 **MSS**
 
-1.  User requests to view the performance of a specified student by providing the index of the student in the list, or the student's name or student ID.
+1.  User requests to view the performance of a specified student by providing the index of the student in the list, or the student's name or NUSNET ID.
 2.  Source Control displays a line chart showing the specified student's performance against the cohort performance for each assessment.
     Use case ends.
 
