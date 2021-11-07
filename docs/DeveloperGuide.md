@@ -594,13 +594,13 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
     * 3a.1. ProgrammerError shows an error message.
 
-      Use case resumes at step 3.
+    Use case resumes at step 3.
 
 * 3b. The student email or ID given are not unique.
 
     * 3a.1. ProgrammerError shows an error message.
 
-      Use case resumes at step 3.
+    Use case resumes at step 3.
 
 **Use case: UC3 View a student record**
 
@@ -623,7 +623,7 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
     * 3a1. ProgrammerError shows an error message.
 
-      Use case resumes at step 2.
+    Use case resumes at step 2.
 
 **Use case: UC4 Delete a student record**
 
@@ -646,7 +646,7 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
     * 3a1. ProgrammerError shows an error message.
 
-      Use case resumes at step 2.
+    Use case resumes at step 2.
 
 **Use case: UC5 Update a student record**
 
@@ -669,13 +669,13 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
     * 3a.1. ProgrammerError shows an error message.
 
-      Use case resumes at step 2.
+    Use case resumes at step 2.
 
 * 3b. The given email or student id is not unique
 
     * 3b.1. ProgrammerError shows an error message.
 
-        Use case resumes at step 2.
+    Use case resumes at step 2.
 
 **Use case: UC6 Download student records**
 
@@ -705,7 +705,7 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
   * 3a.1 ProgrammerError shows an error message.
   Use case resumes at 2
 
-Use case ends.
+  Use case ends.
 
 **Use case: UC8 Edit a lab record**
 
@@ -716,7 +716,7 @@ Use case ends.
 3. CS2100 TA specifies lab number and actual score or total score
 4. ProgrammerError updates the student's record
 
-Use case ends.
+  Use case ends.
 
 **Extensions**
 
@@ -724,10 +724,8 @@ Use case ends.
     * 3a.1 ProgrammerError shows an error message.
 * Use case resumes at 2
 
-Use case ends.
+  Use case ends.
 
-
-{More to be added}
 
 ## <a name="Non-Functional Requirements"></a> Non-Functional Requirements
 
