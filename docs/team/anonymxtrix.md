@@ -19,16 +19,22 @@ Given below are my contributions to the project.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=Anonymxtrix&tabRepo=AY2122S1-CS2103T-W13-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
 
+* **Project management**:
+    * Responsible for monitoring and keeping up the team's coding standards.
+    
+* **Enhancements to existing features**:
+    * Added truncation for tag display in person [#256](https://github.com/AY2122S1-CS2103T-W13-2/tp/pull/256)
+
 * **Documentation**:
     * User Guide:
-        * Added user controls section. [\#122](https://github.com/AY2122S1-CS2103T-W13-2/tp/pull/122)
-        * Did cosmetic tweaks to user guide. [\#122](https://github.com/AY2122S1-CS2103T-W13-2/tp/pull/122)
-        * Adjusted guide for better navigation and usability. [\#122](https://github.com/AY2122S1-CS2103T-W13-2/tp/pull/122)
+        * Added user controls section [\#122](https://github.com/AY2122S1-CS2103T-W13-2/tp/pull/122)
+        * Did cosmetic tweaks to user guide [\#122](https://github.com/AY2122S1-CS2103T-W13-2/tp/pull/122)
+        * Adjusted guide for better navigation and usability [\#122](https://github.com/AY2122S1-CS2103T-W13-2/tp/pull/122)
     * Developer Guide:
-        * Added implementation details of the history. [\#99](https://github.com/AY2122S1-CS2103T-W13-2/tp/pull/99)
+        * Added implementation details of the command input history feature [\#99](https://github.com/AY2122S1-CS2103T-W13-2/tp/pull/99)
 
 * **Community**:
     * PR reviewed (with non-trivial review comments): [#50](https://github.com/AY2122S1-CS2103T-W13-2/tp/pull/50)
 
 * **Tools**:
-    * Added bootstrap stylesheets to the project. [\#122](https://github.com/AY2122S1-CS2103T-W13-2/tp/pull/122)
+    * Added [bootstrap](https://getbootstrap.com/) stylesheets to the project. [\#122](https://github.com/AY2122S1-CS2103T-W13-2/tp/pull/122)
