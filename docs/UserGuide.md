@@ -297,7 +297,7 @@ Examples:
 
 Updates the time for the next visit to the elderly with the given index of the elderly in the address book.
 
-Format: `visit INDEX  at/VISIT [f/FREQUENCY o/OCCURRENCE]`
+Format: `visit INDEX at/VISIT [f/FREQUENCY o/OCCURRENCE]`
 
 * `INDEX` corresponds to the elderly’s index in the address book. It is a **strictly positive integer, and must be included.**
 * The `VISIT` is in the format of `yyyy-mm-dd HH:mm`, and it must be included.
