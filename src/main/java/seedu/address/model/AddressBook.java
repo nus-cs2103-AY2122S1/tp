@@ -4,7 +4,9 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -228,7 +230,15 @@ public class AddressBook implements ReadOnlyAddressBook {
                 .map(this::getGroupWithDetails)
                 .collect(Collectors.toSet());
         Set<Task> tasksPersonHas = tasks.getFromUniqueIds(person.getAssignedTaskIds());
-        return new PersonWithDetails(person, groupsPersonIsIn, tasksPersonHas);
+        Map<Task, Boolean> tasksCompletion = new HashMap<>();
+        Map<UniqueId, Boolean> tasksCompletionId = person.getTasksCompletion();
+        tasksPersonHas.forEach(task -> {
+            UniqueId taskId = task.getId();
+            Boolean isDone = tasksCompletionId.get(taskId);
+            assert !isDone.equals(null);
+            tasksCompletion.put(task, isDone);
+        });
+        return new PersonWithDetails(person, groupsPersonIsIn, tasksPersonHas, tasksCompletion);
     }
 
     public GroupWithDetails getGroupWithDetails(Group group) {
@@ -241,10 +251,9 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons"
-                + tasks.asUnmodifiableObservableList().size() + " tasks"
+        return persons.asUnmodifiableObservableList().size() + " persons, "
+                + tasks.asUnmodifiableObservableList().size() + " tasks, "
                 + groups.asUnmodifiableObservableList().size() + " groups";
-        // TODO: refine later
     }
 
     @Override
