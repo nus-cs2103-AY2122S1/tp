@@ -265,7 +265,7 @@ Now that you have set up the lesson _History 1_, let us add one of your existing
 
 1. Key in `add -sl s/6 l/2` into the Command Box and press ENTER.
 
-    > :bulb: The numbers `6` and `2` in the command above refer to the indices of Roy and _History 1_ in the Student and Lesson Panels respectively. For more information, you can refer to the detailed documentation for [adding a student to a lesson](#adding-students-to-lessons-add--sl).
+    > :bulb: The numbers `6` and `2` in the command above refer to the indexes of Roy and _History 1_ in the Student and Lesson Panels respectively. For more information, you can refer to the detailed documentation for [adding a student to a lesson](#adding-students-to-lessons-add--sl).
 
 1. You should now be able to see that in the Student Panel, the lesson _History 1_ has been added to the list of lessons taken by Roy. Similarly, in the Lesson Panel, you will be able to see that Roy has been added to the list of students attending _History 1_. 
 
