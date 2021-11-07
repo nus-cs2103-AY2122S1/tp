@@ -44,4 +44,4 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/bernarduskrishna)]
 
 * Role: Developer
-* Responsibilities: Code Quality, Model, Logic
+* Responsibilities: Model, Logic
