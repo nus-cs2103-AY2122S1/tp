@@ -53,19 +53,19 @@ public class JsonTeachingAssistantBuddyStorageTest {
     }
 
     @Test
-    public void readAddressBook_invalidAssistantBuddy_throwDataConversionException() { //need to change to module
+    public void readAssistantBuddy_invalidAssistantBuddy_throwDataConversionException() {
         assertThrows(DataConversionException.class, () ->
                 readTeachingAssistantBuddy("invalidAssistantBuddy.json"));
     }
 
     @Test
-    public void readAddressBook_invalidAndValidModulesAssistantBuddy_throwDataConversionException() {
+    public void readAssistantBuddy_invalidAndValidModulesAssistantBuddy_throwDataConversionException() {
         assertThrows(DataConversionException.class, () ->
                 readTeachingAssistantBuddy("invalidAndValidModulesAssistantBuddy.json"));
     }
 
     @Test
-    public void readAndSaveAddressBook_allInOrder_success() throws Exception {
+    public void readAndSaveAssistantBuddy_allInOrder_success() throws Exception {
         Path filePath = testFolder.resolve("TempAsisstantBuddy.json");
         TeachingAssistantBuddy original = TypicalModules.getTypicalBuddy();
         JsonTeachingAssistantBuddyStorage jsonTeachingAssistantBuddyStorage =
@@ -92,7 +92,7 @@ public class JsonTeachingAssistantBuddyStorageTest {
     }
 
     @Test
-    public void saveAddressBook_nullAddressBook_throwsNullPointerException() {
+    public void saveAssistantBuddy_nullAssistantBuddy_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> saveAssistantBuddy(null, "SomeFile.json"));
     }
 
@@ -109,7 +109,7 @@ public class JsonTeachingAssistantBuddyStorageTest {
     }
 
     @Test
-    public void saveAddressBook_nullFilePath_throwsNullPointerException() {
+    public void saveAssistantBuddy_nullFilePath_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () ->
                 saveAssistantBuddy(new TeachingAssistantBuddy(), null));
     }
