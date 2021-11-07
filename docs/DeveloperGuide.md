@@ -43,6 +43,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 <center>
     <img src="images/ArchitectureDiagram.png" />
 </center>
+<br>
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
@@ -71,6 +72,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 <center>
     <img src="images/ArchitectureSequenceDiagram.png" />
 </center>
+<br>
 
 Each of the four main components (also shown in the diagram above),
 
@@ -82,6 +84,7 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 <center>
     <img src="images/ComponentManagers.png" />
 </center>
+<br>
 
 The sections below give more details of each component.
 
@@ -92,6 +95,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 <center>
     <img src="images/UiClassDiagram.png" />
 </center>
+<br>
 
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `StudentListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
@@ -114,6 +118,7 @@ Here's a (partial) class diagram of the `Logic` component:
 <center>
     <img src="images/LogicClassDiagram.png" />
 </center>
+<br>
 
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `SourceControlParser` class to parse the user command.
@@ -126,12 +131,14 @@ The Activity Diagram below illustrates how user input is parsed by the `Logic` c
 <center>
     <img src="images/ParseActivityDiagram.png" />
 </center>
+<br>
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
 <center>
     <img src="images/DeleteSequenceDiagram.png" />
 </center>
+<br>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -141,6 +148,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <center>
     <img src="images/ParserClasses.png" />
 </center>
+<br>
 
 How the parsing works:
 * When called upon to parse a user command, the `SourceControlParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `SourceControlParser` returns back as a `Command` object.
@@ -155,6 +163,7 @@ How the parsing works:
 <center>
     <img src="images/ModelClassDiagram.png" />
 </center>
+<br>
 
 
 The `Model` component,
@@ -179,6 +188,7 @@ The `Model` component,
 <center>
     <img src="images/StorageClassDiagram.png" />
 </center>
+<br>
 
 The `Storage` component,
 * can save both application data and user preference data in json format, and read them back into corresponding objects.
@@ -216,12 +226,14 @@ The following activity diagram summarises what happens when a user executes the 
 <center>
     <img src="images/AddStudentActivityDiagram.png" />
 </center>
+<br>
 
 The following sequence diagram summarises what happens when the user inputs an `addstudent` command together with the name and NUSNET ID of the student to be added.
 
 <center>
     <img src="images/AddStudentSequenceDiagram.png" />
 </center>
+<br>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -255,6 +267,7 @@ The following sequence diagram summarises what happens when the user inputs an `
 <center>
     <img src="images/AddGroupSequenceDiagram.png" />
 </center>
+<br>
 <center>
     <img src="images/AddGroupToModelSequenceDiagram.png" />
 </center>
@@ -280,12 +293,14 @@ The following activity diagram summarises what happens when a user executes the 
 <center>
     <img src="images/AddAllocActivityDiagram.png" />
 </center>
+<br>
 
 The following sequence diagram summarises what happens when the user inputs an `addalloc` command together with a group and a student, specified by name, to be allocated.
 
 <center>
     <img src="images/AddAllocSequenceDiagram.png" />
 </center>
+<br>
 
 <center>
   <img src="images/AddAllocToModelSequenceDiagram.png" />
@@ -314,12 +329,14 @@ The following activity diagram summarises what happens when a user executes the 
 <center>
     <img src="images/AddScoreActivityDiagram.png" />
 </center>
+<br>
 
 The following sequence diagram summarises what happens when the user inputs an `addscore` command together with an assessment, a student, specified by name, and a score to be added.
 
 <center>
     <img src="images/AddScoreSequenceDiagram.png" />
 </center>
+<br>
 <center>
     <img src="images/AddScoreToModelSequenceDiagram.png" />
 </center>
@@ -335,6 +352,7 @@ The following sequence diagram summarises what happens when the user inputs an `
 <center>
     <img src="images/SearchSequenceDiagram.png" />
 </center>
+<br>
 
 A `Predicate<Student>` object will be created for each search command.
 It contains `test(Student student)` function which checks if the given student matches the list of keywords given.
@@ -358,6 +376,7 @@ The following activity diagrams summarises what happens when a user executes the
 <center>
     <img src="images/SearchActivityDiagram.png" />
 </center>
+<br>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** SearchCommandParser checks
 if the command input is valid. The command is invalid if the user input is empty, or if the user entered more or less than one flag.
@@ -386,6 +405,7 @@ The following activity diagram summarises what happens when a user executes the 
 <center>
     <img src="images/ImportActivityDiagram.png" />
 </center>
+<br>
 
 There are several important details left out of the activity diagram for the sake of clarity:
 
@@ -427,12 +447,14 @@ The following activity diagrams summarise what happens when a user executes the 
 <center>
     <img src="images/ShowStudentsActivityDiagram.png" />
 </center>
+<br>
 
 The following sequence diagram summarises what happens when the user inputs an `show` command together with a student specified by name.
 
 <center>
     <img src="images/ShowSequenceDiagram.png" />
 </center>
+<br>
 <center>
     <img src="images/ShowStatsFromModelSequenceDiagram.png" />
 </center>
