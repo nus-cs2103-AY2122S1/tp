@@ -149,6 +149,8 @@ all the details!<br>
 
 </div>
 
+## General <a name="general"/>
+
 ### Viewing help : `help` <a name="help"/>
 
 Shows a message explaining how to access the help page.
