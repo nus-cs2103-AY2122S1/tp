@@ -1,7 +1,5 @@
 package seedu.address.model.person;
 
-import static java.util.Objects.requireNonNull;
-
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -98,7 +96,6 @@ public class Shift {
                 .filter(p -> p.getDayOfWeek().equals(dayOfWeek))
                 .collect(Collectors.toList());
         long numOfRecurrences = recurrences.stream()
-                .filter(p -> period.isWithin(p))
                 .filter(p -> dates.stream().filter(date -> p.contains(date)).count() != 0)
                 .filter(p -> p.isWithinSlotPeriod(time))
                 .count();
@@ -179,7 +176,6 @@ public class Shift {
                 .flatMap(p -> p.complementWithInformation(period).stream())
                 .collect(Collectors.toList());
     }
-
 
 
     /**
@@ -291,36 +287,6 @@ public class Shift {
                 && DateTimeUtil.isValidTime(endTimeString);
     }
 
-    /**
-     * Returns the recurrences that occur during {@code Period period}.
-     *
-     */
-    public String toRecurrenceString(Period period) {
-        requireNonNull(period);
-        if (!isWorking(period)) {
-            return "";
-        }
-        List<LocalDate> dates = period.toList() //get the dates that are within the period of this day.
-                .stream()
-                .filter(p -> p.getDayOfWeek().equals(dayOfWeek))
-                .collect(Collectors.toList());
-
-        List<RecurrencePeriod> result = recurrences.stream()
-                .filter(p ->
-                        0 != dates.stream()
-                                .filter(date -> p.contains(date)) //find any date within the period
-                                .count() //that is in recurrence
-                ).collect(Collectors.toList());
-        return toShiftString() + "\n" + getRecurrenceString(result);
-    }
-
-    /**
-     * Returns a string displaying the day of week and slot the shift is at.
-     */
-    private String toShiftString() {
-        return String.format(DEFAULT_SHIFT_DISPLAY_STRING, dayOfWeek, slot);
-
-    }
 
     /**
      * Takes in a {@code Collection<RecurrencePeriod> periods} and formats it to a string for the

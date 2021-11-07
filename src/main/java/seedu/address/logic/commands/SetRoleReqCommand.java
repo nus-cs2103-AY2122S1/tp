@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.FILE_NOT_FOUND;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE_REQUIREMENTS;
 
 import java.io.IOException;
 import java.util.Set;
@@ -16,13 +16,13 @@ import seedu.address.storage.RoleReqStorage;
 public class SetRoleReqCommand extends Command {
     public static final String COMMAND_WORD = "setRoleReq";
     public static final String SUCCESS_MESSAGE = "Role requirements successfully updated:\n\n";
-    private static final String HELP_MESSAGE = COMMAND_WORD + "Sets the minimum number of staff required for "
+    private static final String HELP_MESSAGE = COMMAND_WORD + " Sets the minimum number of staff required for "
             + "the specified role.\n\n"
             + "Parameters:\n"
-            + PREFIX_ROLE + "ROLE-NUMBER\n\n"
+            + PREFIX_ROLE_REQUIREMENTS + "ROLE-NUMBER\n\n"
             + "Examples:\n"
-            + COMMAND_WORD + " " + PREFIX_ROLE + "kitchen-1 " + PREFIX_ROLE + "bartender-1\n"
-            + COMMAND_WORD + " " + PREFIX_ROLE + "floor-3\n\n"
+            + COMMAND_WORD + " " + PREFIX_ROLE_REQUIREMENTS + "kitchen-1 " + PREFIX_ROLE_REQUIREMENTS + "bartender-1\n"
+            + COMMAND_WORD + " " + PREFIX_ROLE_REQUIREMENTS + "floor-3\n\n"
             + "Currently, the role requirements per shift are:\n"
             + "%s";
 

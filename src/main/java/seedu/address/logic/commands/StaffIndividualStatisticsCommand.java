@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
@@ -27,7 +26,7 @@ import seedu.address.model.person.predicates.PersonContainsFieldsPredicate;
 public class StaffIndividualStatisticsCommand extends Command {
 
     public static final String COMMAND_WORD = "istaff";
-    public static final String DEFAULT_EXECUTION = "Staff to show:\n%1$s";
+    public static final String DEFAULT_EXECUTION = "Staff to show for the period of %2$s:\n%1$s";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ":"
             + "Command to obtain salary statistics of staff\n"
             + "Used by looking up the staff to display by field.\n"
@@ -37,7 +36,6 @@ public class StaffIndividualStatisticsCommand extends Command {
             + "[" + PREFIX_DASH_INDEX + "INDEX] "
             + "[" + PREFIX_DASH_PHONE + "PHONE] "
             + "[" + PREFIX_DASH_EMAIL + "EMAIL] "
-            + "[" + PREFIX_DASH_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_DASH_SALARY + "SALARY] "
             + "[" + PREFIX_DASH_STATUS + "STATUS] "
             + "[" + PREFIX_DASH_ROLE + "ROLE]... "
@@ -89,7 +87,7 @@ public class StaffIndividualStatisticsCommand extends Command {
         if (staffs.size() == 0) {
             throw new CommandException(NO_STAFF_SATISFIES_QUERY);
         }
-        return new CommandResult(String.format(DEFAULT_EXECUTION, result(staffs)));
+        return new CommandResult(String.format(DEFAULT_EXECUTION, result(staffs), period));
 
     }
 
@@ -103,7 +101,7 @@ public class StaffIndividualStatisticsCommand extends Command {
         if (!predicate.test(staff)) {
             throw new CommandException(NO_STAFF_SATISFIES_QUERY);
         }
-        return new CommandResult(staffSummary(staff));
+        return new CommandResult(String.format(DEFAULT_EXECUTION, result(List.of(staff)), period));
     }
 
 

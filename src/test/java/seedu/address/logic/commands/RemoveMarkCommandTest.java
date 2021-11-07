@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -52,18 +53,20 @@ public class RemoveMarkCommandTest {
         //set the expected person in the output
         expectedModel.setPerson(toRemoveMark, toRemoveMark.unMark(DEFAULT_TEST_PERIOD));
         assertCommandSuccess(DEFAULT, model, String.format(RemoveMarkCommand.STAFF_UNMARKED,
-                toRemoveMark.getName()), expectedModel);
+                toRemoveMark.getName(), DEFAULT_TEST_PERIOD), expectedModel);
 
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         assertCommandSuccess(REMOVE_MARK_BY_NAME, model,
-                String.format(RemoveMarkCommand.STAFF_UNMARKED, toRemoveMark.getName()), expectedModel);
+                String.format(RemoveMarkCommand.STAFF_UNMARKED, toRemoveMark.getName(), DEFAULT_TEST_PERIOD),
+                expectedModel);
     }
 
     @Test
     public void execute_command_failure() {
         //testing for incorrect period
 
-        assertCommandFailure(WRONG_PERIOD, model, String.format(RemoveMarkCommand.STAFF_NOT_MARKED, ALICE.getName()));
+        assertCommandFailure(WRONG_PERIOD, model, String.format(RemoveMarkCommand.STAFF_NOT_MARKED,
+                RemoveMarkCommand.listToString(List.of(ALICE.getName().toString())), INCORRECT_TEST_PERIOD));
 
         //test for when the target does not exist
         model.deletePerson(DEFAULT_TEST_PERSON);

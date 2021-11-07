@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
 
+import java.util.function.Predicate;
+
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -20,9 +22,6 @@ import seedu.address.model.person.predicates.StaffHasCorrectIndexPredicate;
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
-    private static final int NAME_AND_FIELD_PREDICATE = -1;
-    private static final int FIELD_PREDICATE_ONLY = -2;
-
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
             + "the specified keywords (case-insensitive) along with fields or the index specified and "
             + "displays them as a list with index numbers.\n\n"
@@ -38,8 +37,11 @@ public class FindCommand extends Command {
             + "Only the index is expected. No other field is needed.\n"
             + "Examples:\n"
             + COMMAND_WORD + " " + PREFIX_DASH_INDEX + " 2";
+    public static final String NO_ONE_SATISFIES_QUERY = "Search conditions indicated is not"
+        + " satisfied by anyone in staff'd";
 
-
+    private static final int NAME_AND_FIELD_PREDICATE = -1;
+    private static final int FIELD_PREDICATE_ONLY = -2;
     private final NameContainsKeywordsPredicate namePredicate;
     private final PersonContainsFieldsPredicate predicate;
     private final int index;
@@ -62,11 +64,11 @@ public class FindCommand extends Command {
      *
      * @param index The index that the user searched for.
      */
-    public FindCommand(int index) {
+    public FindCommand(int index, PersonContainsFieldsPredicate predicate) {
         assert index >= 0;
         this.namePredicate = NameContainsKeywordsPredicate.EMPTY;
         this.index = index;
-        this.predicate = new PersonContainsFieldsPredicate();
+        this.predicate = predicate;
     }
 
     /**
@@ -110,29 +112,42 @@ public class FindCommand extends Command {
      * @param model The model which contains the list to be searched on.
      * @return a CommandResult to be displayed.
      */
-    private CommandResult executeNameAndFieldSearch(Model model) {
+    private CommandResult executeNameAndFieldSearch(Model model) throws CommandException {
+        checkModel(model, person -> namePredicate.test(person)
+                && predicate.test(person));
         model.updateFilteredPersonList(person -> namePredicate.test(person)
                 && predicate.test(person));
         ObservableList<Person> staffs = model.getFilteredPersonList();
         int counter = 1;
         for (Person p : staffs) {
-            successMessage.append(counter).append(". ").append(p.getName()).append("\n");
+            successMessage.append(counter).append(". ").append(p.toString()).append("\n\n");
             counter++;
         }
         return new CommandResult(
                 String.format(successMessage.toString(), model.getFilteredPersonList().size()));
     }
 
-    private CommandResult executeFieldSearch(Model model) {
-        model.updateFilteredPersonList(person -> predicate.test(person));
+    private CommandResult executeFieldSearch(Model model) throws CommandException {
+        checkModel(model, predicate);
+        model.updateFilteredPersonList(predicate);
         ObservableList<Person> staffs = model.getFilteredPersonList();
         int counter = 1;
         for (Person p : staffs) {
-            successMessage.append(counter).append(". ").append(p.getName()).append("\n");
+            successMessage.append(counter).append(". ").append(p.toString()).append("\n\n");
             counter++;
         }
+
         return new CommandResult(
                 String.format(successMessage.toString(), model.getFilteredPersonList().size()));
+    }
+
+
+    private void checkModel(Model model, Predicate<Person> predicate) throws CommandException {
+        ObservableList<Person> staffs = model.getUnFilteredPersonList();
+        if (staffs.filtered(predicate).size() == 0) {
+            throw new CommandException(NO_ONE_SATISFIES_QUERY);
+        }
+
     }
 
 
@@ -144,12 +159,13 @@ public class FindCommand extends Command {
      * @param model The model which contains the list to be searched on.
      * @return a CommandResult to be displayed.
      */
-    private CommandResult executeIndexSearch(Model model) {
-        model.updateFilteredPersonList(indexPredicate);
+    private CommandResult executeIndexSearch(Model model) throws CommandException {
+        checkModel(model, p -> indexPredicate.test(p) && predicate.test(p));
+        model.updateFilteredPersonList(p -> indexPredicate.test(p) && predicate.test(p));
         ObservableList<Person> staffs = model.getFilteredPersonList();
         int counter = 1;
         for (Person p : staffs) {
-            successMessage.append(counter).append(". ").append(p.getName()).append("\n");
+            successMessage.append(counter).append(". ").append(p.toString()).append("\n\n");
             counter++;
         }
         return new CommandResult(

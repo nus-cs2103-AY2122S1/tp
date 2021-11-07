@@ -163,31 +163,6 @@ See Also:
 
 [Clear Command](#clearing-all-entries--clear)
 
-#### Setting Default Shift Timings : `setDefaultShiftTimings `
-
-Set the default timings for the morning and afternoon shift. Please note:
-* All 4 timings must be present
-* Timings must be provided in an `HH:mm` format, using the 24-hour clock. (Example: `22:00`)
-* The duration of the shift must not be zero (i.e. the shift cannot start and end at the same time)
-* The shifts do not overlap, but can have the same start and end times
-* The morning shift must start at noon or before noon. Similarly, the afternoon shift must start at noon or after noon.
-* The default morning shift timings are 10:00 - 16:00, and the default afternoon shift timing is 16:00 - 22:00.
-* The Clear Command will also reset the shift timings to the aforementioned defaults.
-
-Format:
-
-`setDefaultShiftTimings MORNING_START_TIME MORNING_END_TIME AFTERNOON_START_TIME AFTERNOON_END_TIME`
-
-Examples:
-
-`setDefaultShiftTimings 10:00 16:00 17:00 22:00`\
-`setDefaultShiftTimings 09:00 15:00 18:00 23:00`
-
-
-See Also:
-
-[Clear Command](#clearing-all-entries--clear)
-
 
 #### Listing all persons : `list`
 
@@ -343,6 +318,7 @@ Examples:
 Finds staff whose names contain any of the given keywords, or by their index in the staff list.
 Can attach [fields](#fields-of-a-staff) for additional restrictions or find by fields alone. 
 If index search is performed, no other input is expected.
+The filtered result is displayed on both staff view and schedule.
 
 Name Search:
 
@@ -423,17 +399,6 @@ Examples:
 `change da/2021-12-28`  
 
 
-#### Viewing schedule of staff(s): `viewSchedule`
-
-Views the schedule of staff(s) that satisfy the query conditions.
-
-
-Formats:  
-`viewSchedule [-n NAME] [-i INDEX] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [-t TAG]...`
-
-Examples:  
-`viewSchedule -n Candice`  
-`viewSchedule -i 123`
 
 The output will look like the following.
 
@@ -445,15 +410,19 @@ The output will look like the following.
 #### Viewing all the staff(s) working a shift : `viewShift`
 
 Finds all the staff working at a particular shift. The shift can be specified either by detailing the day of the week and the time, or the day of the week and slot number.
+The result also filters the schedule GUI.
 
 * When using the -ti flag, it is in 24-hour format. Example, for 4.pm on wednesday, we use <br> `wednesday-16:00`.
 * The DAY entry is not case-sensitive.
-* If no date input is provided, the next occurrence of the provided shift is displayed.
+* If no DATE input is provided, the next occurrence of the provided shift is displayed.
+* If DATE is provided, the shift that will be looked at is the next date which satisfies the DAY entry.
 * Similarly, if only one date input is provided, the next occurrence of the provided shift *after the provided date* is displayed.
+* If no input is provided, displays output for the shift occurring now. (The current date and time)
 
 Formats:  
-`viewShift -d DAY-shift_number [da/START_DATE] [da/END_DATE]`  
-`viewShift -ti DAY-HH:mm [da/START_DATE] [da/END_DATE]`
+`viewShift -d DAYOFWEEK-SLOT_NUMBER [da/DATE]`  
+`viewShift -ti DAYOFWEEK-HH:mm [da/DATE]`
+`viewShift`
 
 Note that day refers to the day of the week, and it is case-insensitive. However, it should be spelt in full (e.g. MONDAY instead of Mon).
 
@@ -462,6 +431,7 @@ Examples:
 `viewShift -d TUESDAY-0`  
 `viewShift -ti wednesday-12:00`  
 `viewShift -ti THURSDAY-16:30`
+`viewShift`
 
 Demonstration:  
 ![Example of ViewShiftCommand](images/viewShiftCommand/viewShift.jpg)
@@ -529,8 +499,8 @@ Updates the start time and end time of a specific shift of a specific staff.
 * Start date must be earlier than the end date.
 
 Formats:  
-`setShiftTime -n NAME d/DAYOFWEEK-SHIFTNUMBER st/hh:mm-hh:mm [da/START_DATE] [da/END_DATE]`  
-`setShiftTime -i INDEX d/DAYOFWEEK-SHIFTNUMBER st/hh:mm-hh:mm [da/START_DATE] [da/END_DATE]`  
+`setShiftTime -n NAME d/DAYOFWEEK-SHIFTNUMBER st/HH:mm-HH:mm [da/START_DATE] [da/END_DATE]`  
+`setShiftTime -i INDEX d/DAYOFWEEK-SHIFTNUMBER st/HH:mm-HH:mm [da/START_DATE] [da/END_DATE]`  
 
 Examples:   
 `setShiftTime -i 12 d/tuesday-1 st/17:00-21:30`
@@ -572,12 +542,11 @@ Action | Format, Examples
 **Edit** | `edit -n NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [$/SALARY] [s/STATUS] [r/ROLE]... [t/TAG]...` <br> `edit -i INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [$/SALARY] [s/STATUS] [r/ROLE]... [t/TAG]...`
 **Find** | `find -n KEYWORD [MORE_KEYWORDS] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]`<br> `find -i [INDEX]` <br> e.g., `find -n James Jake`
 **View staff(s) statistics** | `istaff [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]...`
-**View staff schedule** | `viewSchedule [-n NAME] [-i INDEX] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [-t TAG]... [da/START_DATE] [da/END_DATE]`
 **Add staff to shift** | `addShift -n NAME d/DAYOFWEEK-SHIFTNUMBER [da/START_DATE] [da/END_DATE]` <br> `addShift -i INDEX d/DAYOFWEEK-SHIFTNUMBER [da/START_DATE] [da/END_DATE]`
 **Swap shifts** | `swapShift -n NAME -n NAME d/day-shift_number d/day-shift_number [da/START_DATE] [da/END_DATE]` <br> `swapShift -n NAME d/day-shift_number -n NAME d/day-shift_number [da/START_DATE] [da/END_DATE]`
-**Set shift time** | `setShiftTime -n NAME d/DAYOFWEEK-SHIFTNUMBER st/hh:mm-hh:mm [da/START_DATE] [da/END_DATE]` <br> `setShiftTime -i INDEX d/DAYOFWEEK-SHIFTNUMBER st/hh:mm-hh:mm [da/START_DATE] [da/END_DATE]`
+**Set shift time** | `setShiftTime -n NAME d/DAYOFWEEK-SHIFTNUMBER st/HH:mm-HH:mm [da/START_DATE] [da/END_DATE]` <br> `setShiftTime -i INDEX d/DAYOFWEEK-SHIFTNUMBER st/HH:mm-HH:mm [da/START_DATE] [da/END_DATE]`
 **Delete staff shift** | `deleteShift -n NAME d/DAY-SHIFTNUMBER [da/START_DATE] [da/END_DATE]` <br> `deleteShift -i INDEX d/DAY-SHIFTNUMBER [da/START_DATE] [da/END_DATE]`
-**View shift** | `viewShift -d DAY-SHIFTNUMBER [da/START_DATE] [da/END_DATE]` <br> `viewShift -ti DAY-HH:mm [da/START_DATE] [da/END_DATE]`
+**View shift** | `viewShift -d DAYOFWEEK-SLOT_NUMBER [da/DATE]` <br> `viewShift -ti DAYOFWEEK-HH:mm [da/DATE]` <br> `viewShift`
 **Mark absent** | `mark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [da/START_DATE] [da/END_DATE]`
 **Remove mark** | `unmark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [da/START_DATE] [da/END_DATE]`
 **Change schedule** | `change da/START_DATE`

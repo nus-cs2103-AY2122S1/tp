@@ -3,9 +3,8 @@
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "alice@example.com",
-    "address": "123, Jurong West Ave 6, #08-111",
     "role": [ "floor" ],
-    "salary": "900000",
+    "salary": "900",
     "status": "fulltime",
     "tagged": [ "friends" ],
     "schedule": {
@@ -15,9 +14,8 @@
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",
-    "address": "4th street",
     "role": [ "bartender" ],
-    "salary": "850000",
+    "salary": "850",
     "status": "fulltime",
     "schedule": {
       "shifts" : [ [ null, null ], [ null, null ], [ null, null ], [ null, null ], [ null, null ], [ null, null ], [ null, null ] ]

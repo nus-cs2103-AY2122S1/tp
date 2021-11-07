@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
@@ -9,7 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_STATUS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY_SHIFT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,22 +36,22 @@ public class RemoveMarkCommand extends Command {
             + "[" + PREFIX_DASH_NAME + " NAME] "
             + "[" + PREFIX_DASH_PHONE + " PHONE] "
             + "[" + PREFIX_DASH_EMAIL + " EMAIL] "
-            + "[" + PREFIX_DASH_ADDRESS + " ADDRESS] "
             + "[" + PREFIX_DASH_SALARY + " SALARY] "
             + "[" + PREFIX_DASH_STATUS + " STATUS] "
             + "[" + PREFIX_DASH_ROLE + " ROLE]... "
-            + Messages.DATE_RANGE_INPUT
-            + "[" + PREFIX_DAY_SHIFT + "END DATE]\n\n"
+            + Messages.DATE_RANGE_INPUT + "\n\n"
             + "Example:\n"
             + COMMAND_WORD + " " + PREFIX_DASH_INDEX + "1"
-            + " " + PREFIX_DAY_SHIFT + "2021-11-18\n"
+            + " " + PREFIX_DATE + "2021-11-18\n"
             + COMMAND_WORD + " " + PREFIX_DASH_NAME + "Jace "
-            + PREFIX_DAY_SHIFT + "2021-11-11" + " " + PREFIX_DAY_SHIFT + "2021-11-13";
+            + PREFIX_DATE + "2021-11-11" + " " + PREFIX_DATE + "2021-11-13";
+
 
     public static final String NO_STAFF_SATISFIES_QUERY = "No one satisfies the conditions specified";
-    public static final String STAFF_NOT_MARKED = "The following staff is not marked for the period specified,"
+    public static final String STAFF_NOT_MARKED = "The following staff is not marked for the period specified (%2$s),"
             + " no change has been done: \n%1$s";
-    public static final String STAFF_UNMARKED = "Staff unmarked:\n%1$s";
+
+    public static final String STAFF_UNMARKED = "Staff unmarked for period %2$s:\n%1$s";
 
     private final PersonContainsFieldsPredicate predicate;
     private final int index;
@@ -99,7 +98,7 @@ public class RemoveMarkCommand extends Command {
             }
         }
         if (conflicts.size() != 0) {
-            throw new CommandException(String.format(STAFF_NOT_MARKED, listToString(conflicts)));
+            throw new CommandException(String.format(STAFF_NOT_MARKED, listToString(conflicts), period));
         }
         for (Person p : toEdit) {
             model.setPerson(p, checkPerson(p));
@@ -108,7 +107,7 @@ public class RemoveMarkCommand extends Command {
                 .map(Person::getName)
                 .map(Object::toString)
                 .collect(Collectors.toList());
-        return new CommandResult(String.format(STAFF_UNMARKED, listToString(toPrint)));
+        return new CommandResult(String.format(STAFF_UNMARKED, listToString(toPrint), period));
     }
 
 
@@ -119,7 +118,7 @@ public class RemoveMarkCommand extends Command {
         }
         Person toTest = model.getFilteredPersonList().get(index);
         model.setPerson(toTest, checkPerson(toTest));
-        return new CommandResult(String.format(STAFF_UNMARKED, toTest.getName()));
+        return new CommandResult(String.format(STAFF_UNMARKED, toTest.getName(), period));
     }
 
     /**
@@ -154,7 +153,7 @@ public class RemoveMarkCommand extends Command {
         Person result = toTest.unMark(period);
         //when nothing has changed
         if (result.equals(toTest)) {
-            throw new CommandException(String.format(STAFF_NOT_MARKED, toTest.getName()));
+            throw new CommandException(String.format(STAFF_NOT_MARKED, toTest.getName(), period));
         }
         return result;
 
