@@ -11,8 +11,11 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.model.Classmate;
 import seedu.address.model.ReadOnlyClassmate;
+import seedu.address.model.student.Student;
 import seedu.address.model.tutorialclass.TutorialClass;
 import seedu.address.model.tutorialgroup.TutorialGroup;
 import seedu.address.testutil.ModelStub;
@@ -33,7 +36,7 @@ class DeleteGroupCommandTest {
 
         CommandResult commandResult = new DeleteGroupCommand(validGroup).execute(modelStub);
 
-        assertEquals(String.format(DeleteGroupCommand.MESSAGE_DELETE_CLASS_SUCCESS, validGroup),
+        assertEquals(String.format(DeleteGroupCommand.MESSAGE_DELETE_GROUP_SUCCESS, validGroup),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(), modelStub.tutorialGroupsResult);
     }
@@ -116,6 +119,11 @@ class DeleteGroupCommandTest {
         @Override
         public void sortTutorialGroups() {
             // this does not test whether tutorial groups are sorted, and so it is empty.
+        }
+
+        @Override
+        public ObservableList<Student> getUnfilteredStudentList() {
+            return FXCollections.observableArrayList();
         }
 
         @Override

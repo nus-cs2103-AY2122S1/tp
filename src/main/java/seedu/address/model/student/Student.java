@@ -119,6 +119,21 @@ public class Student {
     }
 
     /**
+     * Returns true if student belongs to the tutorial gorup.
+     *
+     * @param tutorialGroup The given tutorial group to check.
+     * @return whether {@code Student} is already in the tutorial group
+     */
+    public boolean isBelongTutorialGroup(TutorialGroup tutorialGroup) {
+        for (TutorialGroup group : tutorialGroups) {
+            if (group.isSameTutorialGroup(tutorialGroup)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Returns true if both students have the same identity and data fields.
      * This defines a stronger notion of equality between two students.
      */

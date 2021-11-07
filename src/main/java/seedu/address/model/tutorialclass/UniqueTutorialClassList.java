@@ -46,6 +46,8 @@ public class UniqueTutorialClassList implements Iterable<TutorialClass> {
      */
     public boolean contains(TutorialGroup toCheck) {
         requireNonNull(toCheck);
+
+        // finds the tutorial class that the tutorial group belongs to
         TutorialClass toCheckTutorialClass = TutorialClass.createTestTutorialClass(toCheck.getClassCode());
         Optional<TutorialClass> result = internalList.stream()
                 .filter(toCheckTutorialClass::isSameTutorialClass).findFirst();
@@ -65,24 +67,26 @@ public class UniqueTutorialClassList implements Iterable<TutorialClass> {
     }
 
     /**
-     * Adds a tutorial group to the a class in the class list.
-     * The tutorial class must not already exist in the list.
+     * Adds a tutorial group to the a tutorial class in the tutorial class list.
+     * The tutorial group must not already exist in the list.
      */
     public void add(TutorialGroup toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
             throw new DuplicateTutorialGroupException();
         }
-        // creates a class with the same class code to get that class from the class list as result
+
+        // finds the tutorial class that the tutorial group belongs to
         TutorialClass toCheckTutorialClass = TutorialClass.createTestTutorialClass(toAdd.getClassCode());
         Optional<TutorialClass> result = internalList.stream()
                 .filter(toCheckTutorialClass::isSameTutorialClass).findFirst();
+
+        // add the tutorial group to the tutorial class found
         result.get().addTutorialGroup(toAdd);
     }
 
     /**
-     * Adds a tutorial class to the list.
-     * The tutorial class must not already exist in the list.
+     * Sorts the tutorial groups within each tutorial class list.
      */
     public void sort() {
         internalList.stream().forEach(x-> x.sortTutorialGroups());
@@ -126,10 +130,13 @@ public class UniqueTutorialClassList implements Iterable<TutorialClass> {
      */
     public void remove(TutorialGroup toRemove) {
         requireNonNull(toRemove);
-        // creates a class with the same class code to get that class from the class list as result
+
+        // finds the tutorial class that the tutorial group belongs to
         TutorialClass toCheckTutorialClass = TutorialClass.createTestTutorialClass(toRemove.getClassCode());
         Optional<TutorialClass> result = internalList.stream()
                 .filter(toCheckTutorialClass::isSameTutorialClass).findFirst();
+
+        // removes the tutorial group frmo the tutorial class found
         result.get().removeTutorialGroup(toRemove);
     }
 

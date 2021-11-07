@@ -8,7 +8,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Schedule {
     public static final String MESSAGE_CONSTRAINTS =
-            "Schedules should follow the format 'day-of-the-week starttime to endtime', "
+            "Schedules should follow the format 'day-of-the-week starttime[(hh:mm)am/pm] to endtime[(hh:mm)am/pm]', "
                     + "and different days must be separated by commas. \n"
                     + "Schedule must contain exactly two days\n"
                     + "e.g. Tues 12:00pm to 2:00pm, Friday 12:00pm to 2:00pm";

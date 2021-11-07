@@ -11,7 +11,7 @@ import seedu.address.model.Model;
 import seedu.address.model.student.Student;
 
 /**
- * Views a student identified using it's displayed index from the ClassMATE.
+ * Views a student identified using it's displayed index from the ClassMATE by showing a popup window.
  */
 public class ViewStudentCommand extends Command {
 
@@ -19,7 +19,7 @@ public class ViewStudentCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Views the student identified by the index number used in the displayed student list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Parameters: INDEX (MUST be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_VIEW_STUDENT_SUCCESS = "Viewed Student: %1$s";

@@ -1,130 +1,47 @@
 @startuml
 !include style.puml
 
-box Logic LOGIC_COLOR_T1
-participant AddGroupCommand as AddGroupCommand LOGIC_COLOR
-participant "**r:CommandResult**" as CommandResult LOGIC_COLOR
-end box
-
 box Model MODEL_COLOR_T1
-participant "**model:ModelManager**" as ModelManager MODEL_COLOR
-participant "**classmate:Classmate**" as Classmate MODEL_COLOR
-participant "**tutorialClasses:UniqueTutorialClassList**" as UniqueTutorialClassList MODEL_COLOR
-participant TutorialClass as TutorialClass MODEL_COLOR
-participant UniqueTutorialGroupList as UniqueTutorialGroupList MODEL_COLOR
+participant "**:UniqueTutorialClassList**" as UniqueTutorialClassList MODEL_COLOR
+participant "<<class>>\n**TutorialClass**" as StaticTutorialClass MODEL_COLOR
+participant ":**TutorialClass**" as TutorialClass MODEL_COLOR
+participant ":**UniqueTutorialGroupList**" as UniqueTutorialGroupList MODEL_COLOR
 end box
 
-[-> AddGroupCommand : ""execute(m)""
-activate AddGroupCommand
 
-AddGroupCommand -> ModelManager : ""hasTutorialClass(tc)""
-activate ModelManager
-
-ModelManager -> Classmate : ""hasTutorialClass(tc)""
-activate Classmate
-
-Classmate -> UniqueTutorialClassList : ""contains(tc)""
-activate UniqueTutorialClassList
-
-UniqueTutorialClassList -> TutorialClass : ""check through tutorial class list""
-activate TutorialClass
-
+[-> UniqueTutorialClassList : ""contains(tc)""
 
 note right
 ""tc"" is the TutorialClass
-that is to be added
-to ClassMate
+that the TutorialGroup
+being added to ClassMate
+belongs to
 end note
 
-TutorialClass --> UniqueTutorialClassList
-deactivate TutorialClass
-
-UniqueTutorialClassList --> Classmate
-deactivate UniqueTutorialClassList
-
-Classmate --> ModelManager
-deactivate Classmate
-
-ModelManager --> AddGroupCommand
-deactivate
-
-AddGroupCommand -> ModelManager : ""hasTutorialGroup(tg)""
-activate ModelManager
-
-ModelManager -> Classmate : ""hasTutorialGroup(tg)""
-activate Classmate
-
-Classmate -> UniqueTutorialClassList : ""contains(tg)""
-activate UniqueTutorialClassList
-
-UniqueTutorialClassList -> TutorialClass : ""getClassCode(tg)""
-activate TutorialClass
-UniqueTutorialClassList -> TutorialClass : ""createTestTutorialClass(tc)""
 UniqueTutorialClassList -> TutorialClass : ""check for matching tutorial class""
-UniqueTutorialClassList -> TutorialClass : ""getTutorialGroups()""
 
-TutorialClass --> UniqueTutorialClassList
-deactivate TutorialClass
+[-> UniqueTutorialClassList : ""contains(tg)""
 
-UniqueTutorialClassList -> UniqueTutorialGroupList : ""check if tutorial group exists""
+ref over UniqueTutorialClassList, StaticTutorialClass, TutorialClass
+get tutorial groups
+end ref
+
+UniqueTutorialClassList -> UniqueTutorialGroupList : ""contains(tg)""
 activate UniqueTutorialGroupList
 
 UniqueTutorialGroupList --> UniqueTutorialClassList
 deactivate UniqueTutorialGroupList
 
-UniqueTutorialClassList --> Classmate
-deactivate UniqueTutorialClassList
+[-> UniqueTutorialClassList : ""add(tg)""
 
-Classmate --> ModelManager
-deactivate Classmate
+ref over UniqueTutorialClassList, StaticTutorialClass, TutorialClass
+get tutorial groups
+end ref
 
-ModelManager --> AddGroupCommand
-deactivate
-
-AddGroupCommand -> ModelManager : ""addTutorialGroup(tc)""
-activate ModelManager
-
-ModelManager -> Classmate : ""addTutorialGroup(tc)""
-activate Classmate
-
-Classmate -> UniqueTutorialClassList : ""add(tg)""
-activate UniqueTutorialClassList
-
-UniqueTutorialClassList -> TutorialClass : ""getClassCode(tg)""
-activate TutorialClass
-UniqueTutorialClassList -> TutorialClass : ""createTestTutorialClass(tc)""
-UniqueTutorialClassList -> TutorialClass : ""check for matching tutorial class""
-UniqueTutorialClassList -> TutorialClass : ""getTutorialGroups()""
-
-TutorialClass --> UniqueTutorialClassList
-deactivate TutorialClass
-
-UniqueTutorialClassList -> UniqueTutorialGroupList : ""add tutorial group""
+UniqueTutorialClassList -> UniqueTutorialGroupList : ""add(tg))""
 activate UniqueTutorialGroupList
 
 UniqueTutorialGroupList --> UniqueTutorialClassList
 deactivate UniqueTutorialGroupList
-
-UniqueTutorialClassList --> Classmate
-deactivate UniqueTutorialClassList
-
-Classmate --> ModelManager
-deactivate Classmate
-
-ModelManager --> AddGroupCommand
-deactivate
-
-create CommandResult
-AddGroupCommand -> CommandResult
-activate CommandResult
-
-CommandResult --> AddGroupCommand : ""r""
-deactivate CommandResult
-
-[<-- AddGroupCommand : ""r""
-deactivate AddGroupCommand
-
-AddGroupCommand -[hidden]> CommandResult
-destroy AddGroupCommand
 
 @enduml

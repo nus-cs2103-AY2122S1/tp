@@ -19,6 +19,9 @@ Interface ClassmateStorage <<Interface>>
 Class JsonClassmateStorage
 Class JsonSerializableStudent
 Class JsonAdaptedStudent
+Class JsonAdaptedTutorialClass
+Class JsonAdaptedTutorialGroup
+Class JsonAdaptedMark
 Class JsonAdaptedTag
 }
 
@@ -38,6 +41,11 @@ JsonUserPrefsStorage .up.|> UserPrefsStorage
 JsonClassmateStorage .up.|> ClassmateStorage
 JsonClassmateStorage ..> JsonSerializableStudent
 JsonSerializableStudent --> "*" JsonAdaptedStudent
+JsonSerializableStudent --> "*" JsonAdaptedTutorialClass
+JsonAdaptedTutorialClass --> "*" JsonAdaptedTutorialGroup
+JsonAdaptedTutorialClass --> "*" JsonAdaptedTag
 JsonAdaptedStudent --> "*" JsonAdaptedTag
+JsonAdaptedStudent --> "*" JsonAdaptedTutorialGroup
+JsonAdaptedStudent --> "*" JsonAdaptedMark
 
 @enduml

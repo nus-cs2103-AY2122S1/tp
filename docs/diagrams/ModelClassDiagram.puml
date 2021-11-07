@@ -24,6 +24,7 @@ Class TutorialClass
 Class TutorialGroup
 Class Address
 Class Email
+Class StudentMark
 Class Name
 Class Phone
 Class Tag
@@ -58,6 +59,7 @@ Student *--> Email
 Student *--> Address
 Student *--> ClassCode
 Student *--> "*" Tag
+Student *--> "*" StudentMark
 TutorialClass *--> ClassCode
 TutorialClass *--> "*" Tag
 TutorialClass *--> Schedule

@@ -1,10 +1,12 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_CLASS_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ViewClassCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+
 
 /**
  * Parses input arguments and creates a new ViewClassCommand object
@@ -22,7 +24,8 @@ public class ViewClassCommandParser implements Parser<ViewClassCommand> {
             return new ViewClassCommand(index);
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewClassCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_CLASS_DISPLAYED_INDEX + MESSAGE_INVALID_COMMAND_FORMAT,
+                            ViewClassCommand.MESSAGE_USAGE), pe);
         }
     }
 }

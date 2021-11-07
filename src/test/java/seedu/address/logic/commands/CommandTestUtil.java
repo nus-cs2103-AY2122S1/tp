@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSCODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUPNUMBER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
@@ -60,7 +61,8 @@ public class CommandTestUtil {
     public static final String VALID_SCHEDULE_G01 = "Monday 10:00am to 12:00pm, Thursday 10:00am to 12:00pm";
     public static final String VALID_SCHEDULE_G02 = "Tuesday 10:00am to 12:00pm, Friday 10:00am to 12:00pm";
     public static final String VALID_SCHEDULE_G06 = "Tues 12:00pm to 2:00pm, Fri 12:00pm to 2:00pm";
-    public static final String VALID_MARK = "GOOD";
+    public static final String VALID_MARK = " " + PREFIX_MARK + "GOOD";
+    public static final String VALID_MARK_2 = " " + PREFIX_MARK + "POOR";
     public static final TutorialGroup VALID_GROUP_G01_OP1 = new TutorialGroup(new GroupNumber("1"),
             new ClassCode("G01"), new GroupType("OP1"));
     public static final TutorialGroup VALID_GROUP_G06_OP1 = new TutorialGroup(new GroupNumber("3"),
@@ -100,7 +102,7 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_SCHEDULE = " " + PREFIX_SCHEDULE + " ";
-    public static final String INVALID_MARK = " " + "BAD"; //BAD is not a valid mark
+    public static final String INVALID_MARK = " " + PREFIX_MARK + "BAD"; //BAD is not a valid mark
 
 
     //Verification not yet implemented

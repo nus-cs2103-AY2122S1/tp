@@ -154,86 +154,6 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedClassmate`. It extends `Classmate` with an undo/redo history, stored internally as an `classmateStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedClassmate#commit()` — Saves the current ClassMATE state in its history.
-* `VersionedClassmate#undo()` — Restores the previous ClassMATE state from its history.
-* `VersionedClassmate#redo()` — Restores a previously undone ClassMATE state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitClassmate()`, `Model#undoClassmate()` and `Model#redoClassmate()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedClassmate` will be initialized with the initial ClassMATE state, and the `currentStatePointer` pointing to that single ClassMATE state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `deletestu 5` command to delete the 5th student in the student list. The `deletestu` command calls `Model#commitClassmate()`, causing the modified state of ClassMATE after the `deletestu 5` command executes to be saved in the `classmateStateList`, and the `currentStatePointer` is shifted to the newly inserted ClassMATE state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `addstu n/David …​` to add a new student. The `addstu` command also calls `Model#commitClassmate()`, causing another modified ClassMATE state to be saved into the `classmateStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitClassmate()`, so the ClassMATE state will not be saved into the `classmateStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the student was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoClassmate()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous ClassMATE state, and restores ClassMATE to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial ClassMATE state, then there are no previous ClassMATE states to restore. The `undo` command uses `Model#canUndoClassmate()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoClassmate()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the ClassMATE to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `classmateStateList.size() - 1`, pointing to the latest ClassMATE state, then there are no undone ClassMATE states to restore. The `redo` command uses `Model#canRedoClassmate()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `liststu`. Commands that do not modify ClassMATE, such as `liststu`, will usually not call `Model#commitClassmate()`, `Model#undoClassmate()` or `Model#redoClassmate()`. Thus, the `classmateStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitClassmate()`. Since the `currentStatePointer` is not pointing at the end of the `classmateStateList`, all ClassMATE states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire ClassMATE.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `deletestu`, just save the student being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
 ### Tutorial Class Management Features
 (Contributed by Rushil Ramesh and Vishnu Sundaresan)
 
@@ -421,7 +341,7 @@ Step 2: The user deletes TutorialClass G08 using the `deletec` command. The `del
 of TutorialClass `G08` to `G00`.
 
 ### Tutorial Group Management Features
-This feature is split into two parts. 
+This feature is split into two parts.
 * Adding/removing tutorial group to tutorial class (Contributed by Ngu Yi Yang)
 * Adding/removing student to tutorial group. (Contributed by Zhou Yirui)
 
@@ -435,25 +355,25 @@ ClassMATE allows the user to manage information relevant to the TutorialGroup. A
 #### Current Implementation (Adding/removing tutorial group to tutorial class)
 
 The class `Classmate` facilitates all operations related to tutorial groups. It maintains a
-`UniqueTutorialClassList` containing all tutorial classes, where each class maintains a `UniqueTutorialGroupList` containing its tutorial classes. 
+`UniqueTutorialClassList` containing all tutorial classes, where each class maintains a `UniqueTutorialGroupList` containing its tutorial groups.
 Tutorial groups are identical only if all its attributes, `GroupName`, `ClassCode` and `GroupType` are the same.
-The `Classmate` contains a summary of all the logic of the interaction between tutorial group and tutorial class
-adding tutorial groups to tutorial classes (e.g. `AddGroupCommand`)  executed on the `UniqueTutorialGroupList`, and adding students to tutorial groups.
+`Classmate` contains a summary of all the logic of the interaction between tutorial group and tutorial class such as
+adding tutorial groups to tutorial classes (e.g. `AddGroupCommand`)  executed on the `UniqueTutorialGroupList`.
 
 The following operations are implemented:
 * `Classmate#hasTutorialGroup(TutorialGroup tutorialGroup)` - Checks if tutorial group is in ClassMATE
 * `Classmate#addTutorialGroup(TutorialGroup tutorialGroup)` - Adds tutorial group to ClassMATE
 * `Classmate#removeTutorialGroup(TutorialGroup tutorialGroup)` - Deletes existing tutorial group from ClassMATE
-*  `UniqueTutorialClassList#contains(TutorialGroup toCheck)`  - Checks if tutorial group is in any of the tutorial classes
-*  `UniqueTutorialClassList#add(TutorialGroup toAdd)`  - Adds tutorial group to its respective class
-*  `TutorialClass#getTutorialGroups()`  - Retrieves the list of tutorial groups within the TutorialClass
-*  `TutorialClass#createTestTutorialClass(ClassCode classCode)`  - Creates a dummy tutorial class from the class code of the tutorial group for checking
+* `UniqueTutorialClassList#contains(TutorialGroup toCheck)`  - Checks if tutorial group is in any of the tutorial classes
+* `UniqueTutorialClassList#add(TutorialGroup toAdd)`  - Adds tutorial group to its respective class
+* `TutorialClass#getTutorialGroups()`  - Retrieves the list of tutorial groups within the TutorialClass
+* `TutorialClass#createTestTutorialClass(ClassCode classCode)`  - Creates a dummy tutorial class from the class code of the tutorial group for checking
 
 Given below is an example of how the tutorial group features can be used:
 
 Step 1. The user executes an `addcg gn/1 c/G06 type/OP1` command. The `addcg` command calls `Model#hasTutorialClass()`,
-and the model component checks if the TutorialClass specified by the class code exists, then checks whether the tutorial group already exists
-using `Model#hasTutorialGroup()`and calls `Model#addTutorialGroup()` if it does not.
+and the model component checks if the TutorialClass specified by the class code exists and throws an exception if it does not.
+It then checks whether the tutorial group already exists using `Model#hasTutorialGroup()`and calls `Model#addTutorialGroup()` if it does not.
 
 The checking of whether the tutorial class and tutorial group already exists is done as such:
 `Classmate` calls the `contains` method of its `UniqueTutorialClassList`. This method is overloaded to accept
@@ -463,8 +383,8 @@ to retrieve the tutorial class of the tutorial group it is being added to, so th
 within the `UniqueTutorialClassList` and get its `UniqueTutorialGroupList` using the method `TutorialClass#getTutorialGroups()`
 and from there check whether the tutorial group already exists or not.
 
-Adding of tutorial groups is similar to the checking part in that a tutorial class is created for checking and
-retrieve that tutorial class from the `UniqueTutorialClassList` to add that tutorial group into its `UniqueTutorialGroupList`.
+Adding of tutorial groups is similar; It again finds the tutorial class in the `UniqueTutorialClassList` using its class code
+After retrieving the respective tutorial class, it can then add the tutorial group using `UniqueTutorialClassList#add(TutorialGroup toAdd)`.
 
 This modifies and saves the state of ClassMATE.
 
@@ -478,19 +398,28 @@ During the parsing, a new TutorialGroup instance is created. This `TutorialGroup
 The *Sequence Diagram* below summarizes the aforementioned steps.
 
 ![AddGroupSequenceDiagram](images/AddGroupSequenceDiagram.png)
+![GetTutorialGroupsDiagram](images/GetTutorialGroupsDiagram.png)
 
 #### Design Considerations
 
 #### Aspect: Storing Tutorial Groups as lists
 * Alternative 1 (current choice): Storing tutorial groups in their respective tutorial classes
-    * Pros: Faster when performing find functions and groups are better organised.
+    * Pros: Faster when performing find functions such as finding tutorial groups in a particular class. Tutorials groups are also better organised.
     * Cons: Splitting groups based on a category makes it harder to extend to support filtering groups with a different category from what is implemented.
 
 * Alternative 2: Use a single list to store all tutorial groups.
-    * Pros: Simpler to implement, without the use of multiple lists to store tutorial groups of different types ("OP1" or "OP2").
+    * Pros: Simpler to implement, easier to add or remove tutorial groups.
       Storing tutorial groups as arrays in JSON is less complicated.
     * Cons: Searching or filtering the list of tutorial groups by group types may take a longer time.
-    
+
+### Recommended workflow for setting up ClassMATE
+
+The *Activity Diagram* below provides an example of how users should set up their tutorial classes, tutorial groups and students
+in ClassMATE.
+
+![SetUpActivityDiagram](images/SetUpActivityDiagram.png)
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -524,7 +453,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
+| `* * *`  | new user                                   | see help      | refer to instructions when I forget how to use the App                 |
 | `* *`  | new user                                       | view sample data              | see what the app looks like when in use                               |
 | `* * *`  | user                                       | add a new student              |                                                                        |
 | `* * *`  | user                                       | view a student's details       | easily check the details and progress of the students                  |
@@ -532,17 +461,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * `   | user                                       | add a class schedule           | plan my week in advance                                                |
 | `* * *`  | user                                       | view a class' details          | easily check the details of a particular class                         |
 | `* * *`  | user                                       | delete a student               | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | delete a class                 | remove classes that I no longer need                                                                 |
+| `* * *`  | user                                       | delete a class                 | remove classes that I no longer need
 | `* * *`  | user                                       | find a student by name          | locate details of students without having to go through the entire list |
 | `* * *`  | user                                       | find a class by code           | locate details of a class without having to go through the entire list |
 | `* * *`  | user                                       | view all classes               | see which classes I'm taking                                           |
 | `* * *`  | user                                       | view all students in a class   | see the students enrolled in a particular class                                         |
 | `* *`    | experienced user                           | add class participation details to a student | track the paricipation of each student                   |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many students in ClassMATE | sort students by name           | locate a student easily                                                 |
-| `*`      | user with many classes in ClassMATE | sort classes by name           | locate a class easily                                                 |
-
-*{More to be added}*
+| `* *` | experienced user | add groups within tutorial classes | to organise my class groups |
+| `* *` | experienced user | add students to specific sub-groups | to organise students in groups based on examination (e.g. OP1) |
+| `* *` | experienced user | delete students from specific sub-groups | remove students from the group as required |
+| `*` | user | add different types of marks to students | to mark students for various assessments |
 
 ### Use cases
 
@@ -570,6 +498,35 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. ClassMATE shows an error message.
 
       Use case resumes at step 2.
+
+**Use case: Edit a student**
+
+**MSS**
+
+1.  User requests to list students
+2.  ClassMATE shows a list of students
+3.  User requests to edit a specific student in the list with some parameters
+4.  ClassMATE edits the student
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. ClassMATE shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The given parameter to edit is a Class Code.
+
+    * 3b1. ClassMATE removes all existing tutorial groups of the student.
+
+      Use case resumes at step 4.
 
 **Use case: List students**
 
@@ -632,6 +589,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: Add a tutorial group**
+
+**MSS**
+
+1.  User requests to add a tutorial group with the given parameters, Group number, Group type and Class code.
+2.  ClassMATE adds the tutorial class.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. ClassMATE detects an invalid parameter.
+    *  1a1. ClassMATE shows a message informing the user.
+
+  Use case ends.
+
+
+* 1b. The tutorial class that the tutorial group is being added to does not exists.
+    *  1b1. ClassMATE shows a message informing the user.
+
+  Use case ends.
+
+
+* 1c. The tutorial group already exists.
+    *  1c1. ClassMATE shows a message informing the user.
+
+  Use case ends.
+
 **Use case: Delete Latest Mark from Student**
 
 **MSS**
@@ -667,11 +652,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2. Should be able to hold at least 1000 students, 400 groups and 100 classes without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold at least 1000 students, 400 groups and 99 classes without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. Readable font, at least size 12.
 5. Should not cause noticeable lag for other applications when running.
-6. Light Mode.
+6. Dark Mode.
 7. Able to function in the background.
 8. Able to respond to user actions within three seconds.
 9. A tutorial class should be able to hold up to 20 students.
@@ -684,8 +669,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Private student detail**: A student detail that is not meant to be shared with others
 * **Tutorial class**: A CS2101 tutorial class. Each student can only have up to one tutorial class
 * **Student**: An NUS student taking the CS2101(T) module
-* **Group**: A group is a subsection of the class and contains a few students for the purpose of small activities or group project
-* **Group name**: The name of a group in the CS2101 class, which is specified by a number.
+* **Tutorial group**: A tutorial group is a subsection of the class and contains a few students for the purpose of small activities or group project.
+* **Group number**: The number of a group in the CS2101 class, which is specified by a number.
 * **Class code**: The name of a typical class in for the CS2101 module. E.g. G06.
 * **Group type**: The type of a group in the CS2101 class, which is either OP1 or OP2.
 
@@ -731,13 +716,24 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+1. Deleting a student that at a negative index.
+   1. Prerequisites: List all students using the `liststu` command. Multiple students in the list.
+   1. Test case: `deletestu -5`<br>
+      Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
+   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Prerequisites: None
 
-1. _{ more test cases …​ }_
+   2. Test case: JSON file missing.<br>
+
+      Expected: ClassMATE gives warning about missing storage, and creates a new storage file populated with sample data.
+
+   3. Test case: JSON file corrupted
+
+      Expected: ClassMATE gives warning about corrupted data, and creates a new storage file populated with sample data.
