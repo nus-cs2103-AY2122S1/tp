@@ -45,6 +45,13 @@ public class Tag {
     }
 
     /**
+     * Format tag name for showing.
+     */
+    public String toShowString() {
+        return tagName;
+    }
+
+    /**
      * Format state as text for viewing.
      */
     public String toString() {

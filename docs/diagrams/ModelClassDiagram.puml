@@ -50,18 +50,23 @@ UniquePersonList --> "~* all" Person
 Person *--> Name
 Person *--> Phone
 Person *--> Email
-Person *--> Role
-Person *--> EmploymentType
-Person *--> ExpectedSalary
-Person *--> LevelOfEducation
-Person *--> Experience
-Person *--> "*" Tag
+Person *----> Role
+Person *---> EmploymentType
+Person *----> ExpectedSalary
+Person *----> LevelOfEducation
+Person *---> Experience
+Person *---> "*" Tag
 Person *--> "*" Interview
 Person *--> "*" Notes
 Person *--> Done
 
 Name -[hidden]right-> Phone
-Phone -[hidden]right-> Email
+Role -[hidden]up-> Email
+EmploymentType -[hidden]left-> Role
+LevelOfEducation -[hidden]left-> EmploymentType
+ExpectedSalary -[hidden]left-> LevelOfEducation
+Experience -[hidden]left-> ExpectedSalary
+Interview -[hidden]left-> Experience
 
 ModelManager -->"~* filtered" Person
 @enduml

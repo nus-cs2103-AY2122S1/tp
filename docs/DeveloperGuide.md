@@ -29,13 +29,20 @@ This product will make recruiters’ lives easier through categorisation and fil
   * [Common classes](#common-classes)
 - [**Implementation**](#implementation)
   * [Add feature](#add-feature)
-  * [Datetime for interview](#datetime-for-interview)
   * [Edit feature](#edit-feature)
-  * [Filter interview feature](#filter-interview-feature)
-    + [Design considerations:](#design-considerations)
+  * [Delete feature](#delete-feature)
   * [Find feature](#find-feature)
+    + [Design considerations for find:](#design-considerations-for-find)
+  * [Filter interview feature](#filter-interview-feature)
+    + [Design considerations for filter interview:](#design-considerations-for-filter-interview)
   * [Show feature](#show-feature)
+    + [Design considerations for show:](#design-considerations-for-show)
+  * [Mark feature](#mark-feature)
   * [Unmark feature](#unmark-feature)
+    + [Design considerations for mark and unmark:](#design-considerations-for-mark-and-unmark)
+  * [Delete marked feature](#delete-marked-feature)
+    + [Design considerations for delete marked:](#design-considerations-for-delete-marked)
+  * [Datetime for interview](#datetime-for-interview)
 - [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
 - [**Appendix: Requirements**](#appendix-requirements)
   * [Product scope](#product-scope)
@@ -43,9 +50,14 @@ This product will make recruiters’ lives easier through categorisation and fil
   * [Use cases](#use-cases)
   * [Non-Functional Requirements](#non-functional-requirements)
   * [Glossary](#glossary)
-- [**Appendix: Instructions for manual testing**](#appendix-instructions-for-manual-testing)
+- [**Appendix: Instructions for manual testing**](#appendix-instructions-for-manual-testing--)
   * [Launch and shutdown](#launch-and-shutdown)
+  * [Adding a person](#adding-a-person)
+  * [Editing an applicant](#editing-an-applicant)
   * [Deleting a person](#deleting-a-person)
+  * [Marking an applicant](#marking-an-applicant)
+  * [Unmarking an applicant](#unmarking-an-applicant)
+  * [Deleting marked applicants](#deleting-marked-applicants)
   * [Saving data](#saving-data)
 
 
@@ -158,9 +170,10 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
+
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="600" />
 
 
 The `Model` component,
@@ -172,7 +185,7 @@ The `Model` component,
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+<img src="images/BetterModelClassDiagram.png" width="600" />
 
 </div>
 
@@ -278,21 +291,6 @@ The following sequence diagram shows how the edit operation works.
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `EditCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
-#### Design considerations:
-
-**Aspect: User command to use in deleting marked applicants:**
-
-* **Alternative 1 (current choice):** Separate command for deleting marked applicants
-    * Pros: Command has single responsibility of deleting marked applicants based.
-    * Pros: Easy to use for user, does not take any additional input.
-    * Cons: User might be confused between `delete` command for general deletion and `delete_marked` command.
-
-* **Alternative 2:** Part of `delete` command functionality
-    * Pros: Intuitive for user to use `delete` command for all deletion purposes
-    * Cons: Breaks the single responsibility principle as deleting marked applicants does not delete applicants at specific indices
-    like the rest of the `delete` command, but rather a certain group of applicants at once. 
-
-      
 ### Delete feature
 
 The ```delete``` command is facilitated by creating a ```DeleteCommand``` depending on the given input.
@@ -363,7 +361,7 @@ The following sequence diagram shows how the find operation works.
  **Note:** The lifeline for `FindCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
-#### Design considerations:
+#### Design considerations for find:
 
 **Aspect: Finding by each prefix:**
 
@@ -424,7 +422,7 @@ The following sequence diagram shows how the filter interview operation works.
  **Note:** The lifeline for `FilterInterviewCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
-#### Design considerations:
+#### Design considerations for filter interview:
 
 **Aspect: User command to use in filtering interviews:**
 
@@ -474,7 +472,7 @@ The following sequence diagram shows how the show operation works.
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ShowCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
-#### Design considerations:
+#### Design considerations for show:
 
 **Aspect: Finding search terms:**
 
@@ -562,6 +560,18 @@ The following sequence diagram shows how the unmark operation works.
  **Note:** The lifeline for `MarkingCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
+#### Design considerations for mark and unmark:
+
+**Aspect: User command to use in marking and unmarking applicants:**
+
+* **Alternative 1 (current choice):** Separate command for `mark` and `unmark`
+  * Pros: Command has single responsibility of marking or unmarking applicants.
+  * Pros: Easy and intuitive to use for user, does not take any additional input to differentiate the two commands from each other.
+  * Cons: Certain amount of repeat in code for both mark and unmark commands.
+
+* **Alternative 2:** Implement both `mark` and `unmark` as one singular command
+  * Pros: Reduces code duplication in implementation.
+  * Cons: Breaks the single responsibility principle as marking does a relatively different task from unmarking.
 
 ### Delete marked feature
 
@@ -588,6 +598,20 @@ and returned.
 
 The following sequence diagram shows how the delete marked operation works.
 ![images](images/DeleteMarkedCommandSequenceDiagram.png)
+
+#### Design considerations for delete marked:
+
+**Aspect: User command to use in deleting marked applicants:**
+
+* **Alternative 1 (current choice):** Separate command for deleting marked applicants
+  * Pros: Command has single responsibility of deleting marked applicants based.
+  * Pros: Easy to use for user, does not take any additional input.
+  * Cons: User might be confused between `delete` command for general deletion and `delete_marked` command.
+
+* **Alternative 2:** Part of `delete` command functionality
+  * Pros: Intuitive for user to use `delete` command for all deletion purposes
+  * Cons: Breaks the single responsibility principle as deleting marked applicants does not delete applicants at specific indices
+    like the rest of the `delete` command, but rather a certain group of applicants at once.
 
 ### Datetime for interview 
 
@@ -1030,29 +1054,181 @@ testers are expected to do more *exploratory* testing.
     1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Adding an applicant 
 
-### Deleting a person
+1. Adding an applicant while all applicants are being shown 
 
-1. Deleting a person while all persons are being shown
+    1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list. 
+    
+    1. Test case: `add n/John Doe p/98765432 e/JohnDoe@gmail.com r/Teacher et/Full time s/3000 l/Bachelors y/4`<br>
+       Expected: A new applicant named John Doe with all of the above details is added to the list. Details of the added contact shown in 
+       result display. 
+       
+    1. Test case: Ensure that you have completed the first test case under this section, then input the command `add Bob p/98765432 e/bob@gmail.com r/Lawyer et/Full time s/7000 l/Bachelors y/4`<br>
+       Expected: No new applicant is added. Error details shown in the result display stating that Bob shares the same phone number as John Doe. 
+    
+    1. Test case: Ensure that you have completed the first test case under this section, then input the command `add Jack Smith p/97865321 e/JohnDoe@gmail.com r/Doctor et/Full time s/9000 l/Bachelors y/4`<br>
+       Expected: No new applicant is added. Error details shown in the result display stating that Bob shares the same email as John Doe.
+       
+    1. Other incorrect add commands to try: `add`, `add John`, `add n/John p/98765432 e/JohnDoe@gmail.com r/Teacher`
+    (where incomplete details are given for the applicant being added).
+    Expected: Error messages displaying the cause of error is shown in the result display.  
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+### Editing an applicant
+
+1. Editing an applicant while all applicants are being shown
+
+    1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list. 
+       There is no applicant with the phone number 87654321 and email alexander@gmail.com
+
+    1. Test case: `edit 1 n/Alexander p/87654321 e/alexander@gmail.com`<br>
+       Expected: First applicant is edited such that his new name is Alexander with the phone number 87654321 and email alexander@gmail.com.
+       Details of the edited applicant shown in the result display.
+
+    1. Test case: Ensure that you have completed the first test case under this section, then input the command `edit 2 n/Alice p/87654321`<br>
+       Expected: No applicants are edited. Error details shown in the result display stating that the new edited applicant Alice shares either
+       the same phone number or same email as Alexander.
+
+    1. Test case: Ensure that you have completed the first test case under this section, then input the command `edit 2 n/Alice e/alexander@gmail.com`<br>
+       Expected: No applicants are edited. Error details shown in the result display stating that the new edited applicant Alice shares either
+       the same phone number or same email as Alexander.
+
+    1. Test case: `edit 2 n/&a#lly`<br>
+       Expected: No applicants are edited. Error details shown in the result display stating that names should only contain alphanumeric characters and spaces.
+
+    1. Other incorrect edit commands to try: `edit`, `edit Alexander`, `edit 1`, `edit 1 n/`
+       (where incomplete or invalid details are given for the applicant being edited)<br>
+       Expected: Error messages displaying the cause of error is shown in the result display.
+     
+### Deleting an applicant
+
+1. Deleting an applicant while all applicants are being shown
+
+    1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list.
 
     1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+       Expected: First applicant is deleted from the list. Details of the deleted applicant shown in the result display. 
 
     1. Test case: `delete 0`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+       Expected: No applicant is deleted. Error details shown in the result display where indexes should be non-zero unsigned integers.
+       
+    1. Test case: `delete 1 1`<br>
+       Expected: No applicant is deleted. Error details shown in the result display where there should not be any duplicate indexes.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+    1. Test case: `delete 1 2`<br>
+       Expected: First and second applicants are deleted. Details of the deleted contact shown in the result display.
+      
+    1. Other incorrect delete commands to try: `delete`, `delete x`(where x is larger than the list size), `delete y`(where y is a negative integer), `delete Alexander`<br>
+       Expected: Similar to previous test cases.
 
-1. _{ more test cases …​ }_
+1. Deleting a person from a filtered list of applicants being shown
 
+    1. Prerequisites: Find a valid group of applicants using the `find` command with appropriate inputs. Multiple applicants in the filtered list.
+
+    1. Test case: `delete 1 2` <br>
+       Expected: First and second applicants of the shown filtered list are deleted. Details of the deleted applicant shown in the result display.
+       
+### Marking an applicant
+
+1. Marking applicants while all applicants are being shown
+
+    1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list all currently `Not Done`.
+
+    2. Test case: `mark 1`<br>
+       Expected: First applicant is marked to `Done`. Details of the marked applicant shown in the result display.
+
+    3. Test case: `mark 0`<br>
+       Expected: No applicant is marked. Error details shown in the result display stating that the index is invalid.
+
+    4. Test case: `mark 2`, then `mark 2` again<br>
+       Expected: Second applicant is marked to `Done` with the first `mark 2`. Details of the marked applicant shown in the result display.
+                 For the second `mark 2`, no new applicant is marked. Error details shown in the result display stating that an applicant that is `Done` cannot be marked.
+
+    5. Test case: `mark 3 3`<br>
+       Expected: No applicant is marked. Error details shown in the result display stating that there should not be duplicate indexes.
+
+    6. Other incorrect mark commands to try: `mark`, `mark x` (where x is larger than the list size), `mark y` (where y is any non-positive integer)<br>
+       Expected: No applicant is marked. Error messages displaying the cause of error is shown in the results display.
+
+    7. Test case: `mark 4 5`<br>
+       Expected: Fourth and fifth applicant are marked to `Done`. Details of the marked applicants shown in the result display.
+
+
+2. Marking applicants while a filtered list of applicants are being shown
+
+    1. Prerequisites: Find a valid group of applicants using the `find` command with appropriate inputs. Multiple applicants in the filtered list all currently `Not Done`.
+    
+    2. Test case: Utilise the same test cases in Section 1 of Marking an applicant<br>
+       Expected: Same results as the corresponding expected test case results in Section 1 of Marking an applicant, while still in the filtered list.
+
+    3. Test case: `mark 6`, then `list`<br>
+       Expected: For `mark 6`, the sixth applicant is marked to `Done` and details of the marked applicant shown in the result display.
+                 After `list`, locate the marked applicant in the list and the applicant should still be `Done`.
+
+### Unmarking an applicant
+
+1. Unmarking applicants while all applicants are being shown
+
+    1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list all currently `Done`.
+
+    2. Test case: `unmark 1`<br>
+       Expected: First applicant is unmarked to `Not Done`. Details of the unmarked applicant shown in the result display.
+
+    3. Test case: `unmark 0`<br>
+       Expected: No applicant is unmarked. Error details shown in the result display stating that the index is invalid.
+
+    4. Test case: `unmark 2`, then `unmark 2` again<br>
+       Expected: Second applicant is unmarked to `Not Done` with the first `unmark 2`. Details of the unmarked applicant shown in the result display.
+                 For the second `unmark 2`, no new applicant is unmarked. Error details shown in the result display stating that an applicant that is `Not Done` cannot be unmarked.
+
+    5. Test case: `unmark 3 3`<br>
+       Expected: No applicant is unmarked. Error details shown in the result display stating that there should not be duplicate indexes.
+
+    6. Other incorrect unmark commands to try: `unmark`, `unmark x` (where x is larger than the list size), `unmark y` (where y is any negative integer)<br>
+       Expected: No applicant is unmarked. Error messages displaying the cause of error is shown in the results display.
+
+    7. Test case: `unmark 4 5`<br>
+       Expected: Fourth and fifth applicant are unmarked to `Not Done`. Details of the unmarked applicant shown in the result display.
+
+2. Marking applicants while a filtered list of applicants are being shown
+
+    1. Prerequisites: Find a valid group of applicants using the `find` command with appropriate inputs. Multiple applicants in the filtered list all currently `Done`.
+
+    2. Test case: Utilise the same test cases in Section 1 of Unmarking an applicant<br>
+       Expected: Same results as the corresponding expected test case results in Section 1 of Unmarking an applicant, while still in the filtered list.
+
+    3. Test case: `unmark 6`, then `list`<br>
+       Expected: For `unmark 6`, the sixth applicant is unmarked to `Not Done` and details of the unmarked applicant shown in the result display.
+                 After `list`, locate the unmarked applicant in the list and the applicant should still be `Not Done`.
+    
+### Deleting marked applicants
+
+1. Deleting marked applicants while all applicants are being shown
+
+    1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list. Some applicants are currently `Done`.
+
+    2. Test case: `delete_marked`<br>
+       Expected: All the applicants with `Done` are deleted from the list. Details of the deleted applicants shown in the result display.
+
+2. Deleting marked applicants while a filtered list of applicants are being shown
+
+    1. Prerequisites: Find a valid group of applicants using the `find` command with appropriate inputs. Multiple applicants in the filtered list. Some applicants are currently `Done`.
+
+    2. Test case: `delete_marked`<br>
+       Expected: All the applicants with `Done` are deleted from the list, not just those found in the filtered list. Details of the deleted applicants shown in the result display.
+  
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Prerequisites: There is already an existing saved `addressbook.json` file located in the data file of your home RecruitIn directory.
+  
+    1. Test case: Ensure RecruitIn is closed. Corrupt the `addressbook.json` file by typing random letters into it before running RecruitIn.<br>
+       Expected: RecruitIn will run normally, but with an empty list of applicants.
 
-1. _{ more test cases …​ }_
+    1. Test case: Ensure RecruitIn is closed. Delete the `addressbook.json` file before running RecruitIn.<br>
+       Expected: RecruitIn will run normally, but with the sample list applicants displayed.
+
+    1. Other incorrect test cases to try: The above two test cases can be tried without closing RecruitIn beforehand.<br>
+      Expected: RecruitIn will run normally without any side-effects.
+
