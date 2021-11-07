@@ -29,7 +29,7 @@ and TAs contacts within teams and tutorial groups. It is optimized for CLI users
 
    * **`list`** : Lists all contacts.
 
-   * **`add`**`add n/John Doe e/e0123456@u.nus.edu g/john-doe N/e0123456 r/student s/A0123456X T/11 p/98765432 a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney` : Adds a Person with the given details.
+   * **`add`**`n/John Doe p/98765432 a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney g/john-doe N/e0123456 r/student s/A0123456X T/11 ` : Adds a Person with the given details.
 
    * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
@@ -96,7 +96,7 @@ Attribute | Prefix | Format
 
 Adds a person to the address book.
 
-Format: `add n/NAME s/STUDENT_ID N/NUSNet_ID g/GITHUB_ID T/TUTORIAL_ID {r/student|r/tutor} p/PHONE_NUMBER a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME g/GITHUB_ID N/NUS_NETWORK_ID {r/student|r/tutor} s/STUDENT_ID T/TUTORIAL_ID p/PHONE a/ADDRESS [t/TAG]…​`
 
 * A person cannot be added if he or she already exists in ProfBook, i.e. they are the same person.
 * 2 persons are considered similar if they share the exact same name, e.g. if John Doe already exists in ProfBook, `add n/John Doe s/A0222530X N/E0560062 g/meixuanjin T/01 p/98159386 a/John Street, block 456, #01-01` would not add a new John Doe to ProfBook.
@@ -126,7 +126,7 @@ Format: `stat`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [s/STUDENT_ID] [N/NUSNet_ID] [g/GITHUB_ID] [T/TUTORIAL_ID] [{r/student|r/tutor}] [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [g/GITHUB_ID] [N/NUS_NETWORK_ID] [{r/student|r/tutor}] [s/STUDENT_ID] [T/TUTORIAL_ID] [p/PHONE] [a/ADDRESS] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
