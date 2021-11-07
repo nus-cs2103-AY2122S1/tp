@@ -163,6 +163,11 @@ public class UniqueContactListTest {
     }
 
     @Test
+    public void sortList_nullArgument_throwsNullException() {
+        assertThrows(NullPointerException.class, () -> uniqueContactList.sortList(null));
+    }
+
+    @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
             -> uniqueContactList.asUnmodifiableObservableList().remove(0));

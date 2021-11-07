@@ -105,6 +105,7 @@ public class UniqueContactList implements Iterable<Contact> {
      * If {@code sortBy} is "rating", it sorts by rating in descending order.
      */
     public void sortList(String sortBy) {
+        requireNonNull(sortBy);
         Comparator<Contact> compare = null;
         if (sortBy == "name") {
             compare = Comparator.comparing(Contact::getName);
