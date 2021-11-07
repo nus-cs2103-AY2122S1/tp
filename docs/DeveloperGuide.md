@@ -1299,7 +1299,7 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `view 0`<br>
        Expected: No contact is displayed. Error details shown in the status message. Display Pane remains unchanged.
 
-    4. Other incorrect delete commands to try: view, view x (where x is larger than the list size, or negative), view 00001, view 1 n/, view n/INVALID_NAME(invalid name that does not exist in the addressBook)
+    4. Other incorrect delete commands to try: view, view x (where x is larger than the list size, or negative), view 00001, view 1 n/, view n/INVALID_NAME(invalid name that does not exist in the addressBook)<br>
        Expected: Similar to previous
 
 ### Navigating input history
@@ -1389,7 +1389,7 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `clear`<br>
        Expected: All contacts are cleared from WhereTourGo. Success message shown in the status message. Contact Pane will be empty.
  
-    1. Test case: `clear`<br> and repeat `clear` again
+    1. Test case: `clear`<br> and repeat `clear` again<br>
        Expected: Cannot be cleared twice. Error message shown in the status message. Contact Pane will remain empty.
 
     1. Other incorrect clear commands to try: `clear abc`, `clear 2`, `...` <br>
@@ -1433,15 +1433,31 @@ testers are expected to do more *exploratory* testing.
       Expected: WhereTourGo does not open command summary. Error details shown in the status message.
 
 ## **Appendix: Effort**
-We highly recommend adding an appendix named Effort that evaluators can use to estimate the total project effort.
-Keep it brief (~1 page)
-Explain the difficulty level, challenges faced, effort required, and achievements of the project.
-If a significant part (e.g., more than 5%) of the effort was saved through reuse, mention what you reused and how it affected the effort e.g., the feature X is implemented using library Foo -- our work on adapting Foo to our product is contained in class FooAdapter.java.
-Use AB3 as a reference point e.g., you can explain that while AB3 deals with only one entity type, your project was harder because it deals with multiple entity types.
 
-20% more effort than AB3
+Overall, we estimate putting in 20% more effort than the original AB3 implementation in developing WhereTourGo. This is because we more or less doubled the number of features in WhereTourGo, and also augmented several of the current features. Additionally, the features we implemented were not novel and required modifications of the internals in AB3. Throughout the process of our development, we were not able to find and use any libraries to cut down on our effort either.
 
-commands that are not novel,
+Some difficulties encountered in our project are elaborated upon below:
 
-introducing new features that took time
+* `filter`: Implementation logic was complex as we had many cases to consider due to the many parameters (e.g. one category code and multiple tags, multiple category codes and rating provided).
 
+
+* `sum`: Summary required interfacing with all the different components (especially commands) in the app in order to summarise the data. Additionally, it needed to sync with the UI and refresh whenever there were updates.
+
+
+* `view`: Displaying different types of info in the display pane proved to be a challenge, it involved hiding the summary when displaying person and vice versa.
+
+
+* `sort`: Implementation required a rather different approach from Filter and Find, which only dealt with the read-only and filterable contact list. Our implementation involves making changes to the actual list saved and adapting to the current codebase instead of simply editing the GUI logic. This is so that the Sort command, as a new command, complements the other modification-based commands (e.g. Edit and Delete), and users are able to modify contacts based on the displayed list.
+
+
+* `undo`/`redo`: Required a significant change to the Model as we had to add a List<ReadOnlyAddressBook> to store the states of the address book and a current index to keep track of the current address book. Additionally, we had to make sure that the Undo/Redo implementation supports all commands.
+
+
+* `export`: Required creating a new class in Storage which had to be initialised and called carefully from the right classes to prevent breaking OOP barriers.
+
+
+* `Rating` field: Making this field optional posed a problem in terms of initialising the empty rating for contacts without this field, as well as displaying this in the UI. More crucially, this implementation also needed to be suited for evaluation of the rating value, which affected other methods like `filter` and `sort`.
+
+
+* Input history navigation: Design pattern had to be carefully considered as it was crucial in ensuring that there were no duplicates in the object that was managing the saved commands. Our implementation was based on the Singleton pattern whereby only a single instance of the class is present during the execution of our program.
+  Extensive testing also had to be done due to the potential to have many off-by-one errors to ensure that the feature was functioning according to plan.
