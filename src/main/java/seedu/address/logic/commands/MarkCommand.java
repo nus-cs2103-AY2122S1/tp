@@ -83,7 +83,6 @@ public class MarkCommand extends Command {
 
         if (index != -1) {
             return executeIndex(model);
-
         }
         FilteredList<Person> toModify = model.getFilteredPersonList().filtered(predicate);
 
@@ -104,9 +103,6 @@ public class MarkCommand extends Command {
                 .map(staff -> staff.getName().toString())
                 .collect(Collectors.toList());
         return new CommandResult(String.format(DEFAULT_EXECUTION, total, period, listToString(names)));
-
-
-
     }
 
     private CommandResult executeIndex(Model model) throws CommandException {
@@ -133,7 +129,5 @@ public class MarkCommand extends Command {
                 && ((MarkCommand) other).period.equals(period)
                 && ((MarkCommand) other).index == index
                 && ((MarkCommand) other).predicate.equals(predicate);
-
     }
-
 }

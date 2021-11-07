@@ -41,7 +41,6 @@ public class SampleDataUtil {
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                     getRoleSet("floor"), new Salary("7"), Status.PART_TIME,
                     getTagSet("colleagues"), getPeriodSet())
-
         };
     }
 
