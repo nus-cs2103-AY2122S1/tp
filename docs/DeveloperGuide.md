@@ -295,9 +295,9 @@ Users can choose to use their most preferred alias to perform the command they w
 
 How the alias work is as such:
 
-1. When `Logic` is called upon to execute a command, it uses the `ConthacksParser` class to parse the user command.
-2. During the parsing of the user command in `ConthackParser`, `ConthacksParser` separates out the `commandWord` string from the rest of the arguments inside the user command string.
-3. ConthacksParser will pass this `commandWord` string into `CommandWord` enum which contains all the aliases for the different commands, and `CommandWord` class will check if the `commandWord` string is an alias for any of our implemented commands.
+1. When `Logic` is called upon to execute a command, it calls the `ConthacksParser` class to parse the user command.
+2. As `ConthackParser` parses the user command, `ConthacksParser` separates the `commandWord` string from the rest of the arguments inside the user command string.
+3. `ConthacksParser` will pass this `commandWord` string into `CommandWord` enum class which contains all the aliases for the different commands. Then, `CommandWord` will check if the `commandWord` string is an alias for any of our implemented commands.
 4. If the alias is a legitimate alias for any of the `XYZCommand`, `CommandWord` class will return the respective `CommandWord` enum back to ConthacksParser, and ConthacksParser will use this enum to call the respective `XYZCommandParser` to call and creates the respective `XYZCommand` object.
 
 The following sequence diagram show how the parsing of alias works, using the example `ec 1 m/CS2100 T19` 
