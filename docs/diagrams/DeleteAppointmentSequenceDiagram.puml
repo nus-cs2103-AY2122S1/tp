@@ -35,14 +35,26 @@ activate AppointmentCommandParser
 AppointmentCommandParser --> PlannerMdParser
 deactivate AppointmentCommandParser
 
+PlannerMdParser -> AppointmentCommandParser : parseAppointmentCommand("-d 1")
+activate AppointmentCommandParser
+
+
 create DeleteAppointmentCommandParser
+AppointmentCommandParser -> DeleteAppointmentCommandParser
+activate DeleteAppointmentCommandParser
+DeleteAppointmentCommandParser --> AppointmentCommandParser
+deactivate
+
 AppointmentCommandParser -> DeleteAppointmentCommandParser : parse("1")
 activate DeleteAppointmentCommandParser
+
+
+AppointmentCommandParser --> PlannerMdParser
+deactivate AppointmentCommandParser
 
 create DeleteAppointmentCommand
 DeleteAppointmentCommandParser -> DeleteAppointmentCommand : "1"
 activate DeleteAppointmentCommand
-
 
 DeleteAppointmentCommandParser<--DeleteAppointmentCommand : d
 deactivate DeleteAppointmentCommand
