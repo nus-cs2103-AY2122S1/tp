@@ -334,8 +334,8 @@ The recommend feature provides the user a with a command to enter into the gitGu
 only friends who are available during a specified time for a specified game and ordered by the highest skill value at the 
 specified game. 
 
-This command allows the user to easily find preferred friends to coordinate gaming sessions with by displaying a 
-recommendations friends list. 
+This command allows the user to easily find the highest-skilled available friends who play the specified game to coordinate 
+gaming sessions with from the recommendations friends list displayed after the command is executed. 
 
 #### Implementation: 
 
