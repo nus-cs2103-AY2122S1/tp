@@ -712,6 +712,33 @@ The CommandResult returned indicates whether it is triggered by a GitHub or Tele
 
 In `MainWindow`, if the command result `isGithub()` or `isTelegram()`, the GitHub and Telegram links in `PersonDetails` will be triggered using `PersonDetails#openTelegram()` and `PersonDetails#openGithub()`. 
 
+### Find A Buddy Feature
+
+<p align="center">
+<img src="https://github.com/AY2122S1-CS2103T-T10-1/tp/blob/master/docs/images/Find%20A%20Buddy.png?raw=true"\>
+</p>
+
+By switching to the Find A Buddy tab, the user can retrieve the top 5 matches to the user based on the GitHub data gathered.
+
+#### Implementation
+
+For the feature, the data gathered includes
+- Number of Repositories
+- Percentage of Contributions by Language
+
+A similarity score is calculated based on the following three metrics:
+- Euclidean Distance
+  <img width=400 src="https://miro.medium.com/max/1400/1*9pSSh4QM7whgtJUD6X2vsQ.png"\>
+- Manhattan Distance
+  <img width=400 src="https://miro.medium.com/max/1400/1*SU-KZ_Ui8FVbQ7ZKjkiQZg.png"\>
+- Cosine Distance
+  <img width=400 src="https://miro.medium.com/max/1174/1*gDCDATwjt2hAjd72O8HvbA.png"\>
+
+
+The similarity is calculated using the following formula:
+`Similarity Score = (Euclidean Distance + Manhattan Distance + Cosine Distance) / 3.0`
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Documentation, logging, testing, configuration, dev-ops
