@@ -11,7 +11,6 @@ import tutoraid.commons.core.Messages;
 import tutoraid.logic.commands.FindCommand;
 import tutoraid.logic.commands.FindLessonCommand;
 import tutoraid.logic.commands.FindStudentCommand;
-import tutoraid.logic.commands.HelpCommand;
 import tutoraid.logic.parser.exceptions.ParseException;
 import tutoraid.model.lesson.LessonNameContainsSubstringsPredicate;
 import tutoraid.model.student.NameContainsSubstringsPredicate;
@@ -29,6 +28,7 @@ public class FindCommandParser implements Parser<FindCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the FindStudentCommand
      * and returns a FindStudentCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindCommand parse(String userInput) throws ParseException {
