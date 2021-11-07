@@ -41,7 +41,7 @@ It does not handle communication between the event organiser and the participant
   * **New model**: `ParticipantId`
     * Used for identifying each unique participant in the participant list
     * This is particularly useful when dealing with JSON file and encoding it
-    * By the end of the project, we have decided to not have holistic usage of this as we decide to revert to using index instead. This is because at first 
+    * By the end of the project, we have decided to not have holistic usage of this as we decide to revert to using index instead. This is because at first `addParticipant - enroll` and `removeParticipant - expel` were utilising `ParticipantId`  by using tag `/id` to specify the participant
     * As a result, many features are also scraped because of this.
   * **New Model**: `Participant`
     * As explained in _Shift from Person Class to Participant Class_
