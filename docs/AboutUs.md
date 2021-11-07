@@ -14,7 +14,7 @@ You can reach us at the email `AniList@nus.edu.sg`
 <img src="images/clyveycui.png" width="200px">
 
 [[github](https://github.com/clyveycui)]
-[[portfolio](team/profile-picture/clyveycui.md)]
+[[portfolio](team/clyveycui.md)]
 
 * Role: Team Lead
 * Responsibilities: Overall project coordination
