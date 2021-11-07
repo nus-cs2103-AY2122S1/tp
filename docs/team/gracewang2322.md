@@ -73,7 +73,7 @@ Given below are my contributions to the project.
   * Developer Guide:
     * Add implementation features for Mutating Inventory
       [\#164](https://github.com/AY2122S1-CS2103-F10-2/tp/issues/164)
-    * Add manutal testing under appendix
+    * Add manual testing under appendix
       [\#207](https://github.com/AY2122S1-CS2103-F10-2/tp/issues/207)
     * Update use cases for commands
       [\#181](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/181)
