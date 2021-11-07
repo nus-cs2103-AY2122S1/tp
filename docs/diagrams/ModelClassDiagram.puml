@@ -22,6 +22,7 @@ Class Student
 Class StudentId
 Class ClassId
 Class Email
+Class Lab
 
 }
 
@@ -44,6 +45,7 @@ Student *--> Name
 Student *--> StudentId
 Student *--> ClassId
 Student *--> Email
+Student *--> Lab
 
 Name -[hidden]right-> StudentId
 StudentId -[hidden]right-> ClassId

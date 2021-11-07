@@ -1,0 +1,17 @@
+FilterCommandActivityDiagram.puml
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User executes filter command with specified arguments;
+if () then ([Valid arguments])
+    :Displays a filtered list of students whose
+    details matches the corresponding arguments;
+else ([Invalid arguments])
+    :Displays error message;
+endif
+
+stop
+
+@enduml
+
