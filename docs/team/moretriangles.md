@@ -19,7 +19,7 @@ My code contributions can be found in the [tP Code Dashboard](https://nus-cs2103
 * Import Command
   * Description: Allows users to import a list of contacts from a JSON or CSV file, populating their address books without entering contacts manually.
   * Highlight: Support for CSV was added as it is a more commonly used file format. Professors will have an easier time populating CSV files in Excel.
-  * Difficulty: Intermediate. With experience implementing Export, I was able to code faster.
+  * Difficulty: Intermediate. After implementing Export, I was able to code faster.
 
 * Command History
   * Description: Allows users to recall previous commands using Up and Down arrow keys. Users can retype misspelled commands, repeat previous commands quickly, or just to browse through previous commands.
@@ -55,8 +55,8 @@ Credits: [jackson-dataformat-csv](https://github.com/FasterXML/jackson-dataforma
 
 **Review Contributions**
 
-* Reviewed numerous PRs of my peers and provided non-trivial feedback regarding code quality. Examples: [#24](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/24), [#65](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/65), [#125](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/125), [#224](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/224), 
+* Reviewed numerous PRs of my peers and provided non-trivial feedback regarding code quality. Examples: [#24](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/24), [#65](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/65), [#125](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/125), [#224](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/224)
 
 **Contributions Beyond Project Team**
 
-* Asked questions and shared useful information to answer queries in the forum with great feedback, for example [this answer](https://github.com/nus-cs2103-AY2122S1/forum/issues/142) about fast-forwarding in Git and [this discussion question](https://github.com/nus-cs2103-AY2122S1/forum/issues/188).
+* Asked questions and shared useful information to answer queries in the forum with great feedback, for example [this answer](https://github.com/nus-cs2103-AY2122S1/forum/issues/142#issuecomment-908982793) about fast-forwarding in Git and [this discussion question](https://github.com/nus-cs2103-AY2122S1/forum/issues/188).
