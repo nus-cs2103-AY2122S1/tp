@@ -87,6 +87,19 @@ class JsonAdaptedGuest {
     public List<JsonAdaptedChargeable> getChargeablesUsed() {
         return chargeablesUsed;
     }
+    
+    private static boolean isStringUpperCase(String str) {
+        char[] charArray = str.toCharArray();
+        
+        for (int i = 0; i < charArray.length; i++) {
+            if (Character.isLetter(charArray[i])) {
+                if (!Character.isUpperCase(charArray[i])) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 
     /**
      * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
@@ -134,9 +147,10 @@ class JsonAdaptedGuest {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, PassportNumber.class.getSimpleName()));
         }
-        if (!PassportNumber.isValidPassportNumber(passportNumber)) {
+        if (!PassportNumber.isValidPassportNumber(passportNumber) || !isStringUpperCase(passportNumber)) {
             throw new IllegalValueException(PassportNumber.MESSAGE_CONSTRAINTS);
         }
+        
         final PassportNumber modelPassportNumber = new PassportNumber(passportNumber);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);

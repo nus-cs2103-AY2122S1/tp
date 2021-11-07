@@ -150,7 +150,7 @@ public class ParserUtil {
         if (!PassportNumber.isValidPassportNumber(trimmedPassportNumber)) {
             throw new ParseException(PassportNumber.MESSAGE_CONSTRAINTS);
         }
-        return new PassportNumber(trimmedPassportNumber);
+        return new PassportNumber(trimmedPassportNumber.toUpperCase());
     }
 
     /**
