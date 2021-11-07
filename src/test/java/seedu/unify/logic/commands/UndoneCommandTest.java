@@ -1,11 +1,11 @@
 package seedu.unify.logic.commands;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.unify.testutil.TypicalIndexes.INDEX_FIRST_TASK;
 import static seedu.unify.testutil.TypicalIndexes.INDEX_SECOND_TASK;
+
+import org.junit.jupiter.api.Test;
 
 public class UndoneCommandTest {
 
