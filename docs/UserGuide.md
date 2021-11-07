@@ -468,27 +468,42 @@ If your changes to the data file makes its format invalid, ClassMATE will discar
 
 ## Command Summary
 
+### Tutorial Class Commands
+
 Action | Format, Examples
 --------|------------------
-**Help** | `help`
-**Add student** | `addstu n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLASS_CODE [t/TAG]…​`<br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 c/G01 atd/1 t/attentive`
-**Edit student** | `editstu INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS_CODE] [t/TAG]…​`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com`
+**Add class** | `addc c/CLASS_CODE s/SCHEDULE [t/TAG]…​`<br> e.g., `addc c/G06 s/Tuesday 2:00pm to 4:00pm, Friday 2:00pm to 4:00pm`
+**Delete class** | `deletec INDEX`<br> e.g., `listc` followed by `deletec 2`
+**View class** | `viewc INDEX`<br> e.g., `listc` followed by `viewc 3`
+**List all classes** | `listc`
+**Find class** | `findc KEYWORD [MORE_KEYWORDS]`<br> e.g., `findc G02`
+
+### Student Commands
+
+Action | Format, Examples
+--------|------------------
+**Add student** | `addstu n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLASS_CODE [t/TAG]…​`<br> e.g., `addstu n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 c/G01 t/attentive`
+**Edit student** | `editstu INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS_CODE] [t/TAG]…​`<br> e.g., `editstu 2 n/James Lee e/jameslee@example.com`
 **View student** | `viewstu INDEX`<br> e.g., `liststu` followed by `viewstu 2`
 **Find student** | `findstu KEYWORD [MORE_KEYWORDS]`<br> e.g., `findstu John`
 **Delete student** | `deletestu INDEX`<br> e.g., `liststu` followed by `deletestu 3`
 **List students** | `liststu [c/CLASS_CODE]`<br> e.g., `liststu c/G06`
-**Add class** | `addc c/CLASS_CODE s/SCHEDULE [t/TAG]…​`<br> e.g., `addc c/G06 s/Tuesday 2 to 4pm, Friday 2 to 4pm`
-**Delete class** | `deletec INDEX`<br> e.g., `listc` followed by `deletec 2`
-**View class** | `viewc INDEX`<br> e.g., `listc` followed by `viewc 3`
-**List all classes** | `listc`
-**Find class** | `findc KEYWORD [MORE_KEYWORDS]`<br> e.g., `findc A02`
+
+
+### Tutorial Group Commands
+Action | Format, Examples
+--------|------------------
 **Add Tutorial Group** | `addcg gn/GROUP_NUMBER c/CLASS_CODE type/TYPE` <br> e.g.,`addcg gn/1 c/G11 type/OP1`
 **Delete Tutorial Group** | `deletecg INDEX` <br> e.g., `deletecg 2`
 **List Tutorial Group** | `listg`
-**Add Student to Group** | `addsg INDEX g/GROUP_NUMBER c/CLASSCODE type/TYPE` <br> e.g., `addsg  1 gn/1 c/G01 type/OP1`
-**Delete Student from Group** | `deletesg INDEX g/GROUP_NUMBER c/CLASSCODE type/TYPE` <br> e.g., `deletesg  1 gn/1 c/G01 type/OP1`
+**Add Student to Group** | `addsg INDEX g/GROUP_NUMBER c/CLASSCODE type/TYPE` <br> e.g., `addsg 1 gn/1 c/G01 type/OP1`
+**Delete Student from Group** | `deletesg INDEX gn/GROUP_NAME c/CLASS_CODE type/GROUP_TYPE` <br> e.g., `deletesg  1 gn/1 c/G01 type/OP1`
+**View Students from Group** | `viewg gn/GROUP_NUMBER c/CLASS_CODE type/GROUP_TYPE` <br> e.g., `viewg gn/1 c/G01 type/OP1`
+**Help** | `help`
 **Clear all students** | `clear`
 **Exit ClassMATE** | `exit`
+
+
 
 ## Glossary
 
