@@ -5,55 +5,53 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
-### John Doe
+### Ng Yong Xiang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/yongxiangng.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/yongxiangng)]
+[[portfolio](team/yongxiangng.md)]
 
-* Role: Project Advisor
+- Role: Developer
+- Responsibilities: Deliverables and deadlines
 
-### Jane Doe
+### Nguyen Quang Vinh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/icewizard4902.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/IceWizard4902)]
+[[portfolio](team/icewizard4902.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+- Role: Developer
+- Responsibilities: Testing
 
-### Johnny Doe
+### Ng Zi Xuan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/nzixuan.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/nzixuan)] [[portfolio](team/nzixuan.md)]
 
-* Role: Developer
-* Responsibilities: Data
+- Role: Developer
+- Responsibilities: Data
 
-### Jean Doe
+### Ryan Ong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ryanongra.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/ryanongra)]
+[[portfolio](team/ryanongra.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+- Role: Developer
+- Responsibilities: Code Quality
 
-### James Doe
+### Tay Jun Yang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/dannytayjy.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/dannytayjy)]
+[[portfolio](team/dannytayjy.md)]
 
-* Role: Developer
-* Responsibilities: UI
+- Role: Developer
+- Responsibilities: UI

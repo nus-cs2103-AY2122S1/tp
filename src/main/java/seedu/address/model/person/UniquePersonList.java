@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Predicate;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -34,6 +35,13 @@ public class UniquePersonList implements Iterable<Person> {
     public boolean contains(Person toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSamePerson);
+    }
+
+    /**
+     * Returns the number of people in the UniquePersonList.
+     */
+    public int size() {
+        return internalList.size();
     }
 
     /**
@@ -79,6 +87,13 @@ public class UniquePersonList implements Iterable<Person> {
         }
     }
 
+    /**
+     * Clears every person from the list.
+     */
+    public void clearAllPerson() {
+        internalList.clear();
+    }
+
     public void setPersons(UniquePersonList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
@@ -102,6 +117,25 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public ObservableList<Person> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
+    }
+
+    /**
+     * Returns a list of persons matching the predicate passed.
+     *
+     * @param personPredicate The predicate to be used to get the list of persons.
+     * @return The list of persons retrieved.
+     */
+    public List<Person> getPersons(Predicate<Person> personPredicate) {
+        return internalUnmodifiableList.filtered(personPredicate);
+    }
+
+    /**
+     * Returns true if the list is empty.
+     *
+     * @return true if list is empty.
+     */
+    public boolean isEmpty() {
+        return internalUnmodifiableList.size() == 0;
     }
 
     @Override

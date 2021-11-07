@@ -1,0 +1,53 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "chain:ChainCommand" as ChainCommand LOGIC_COLOR
+participant "left:Command" as LeftCommand LOGIC_COLOR
+participant "right:Command" as RightCommand LOGIC_COLOR
+
+end box
+[-> LogicManager : execute
+activate LogicManager
+
+LogicManager-> AddressBookParser : parseCommand(leftCommandInput \n        && rightCommandInput)
+activate AddressBookParser
+
+AddressBookParser -> AddressBookParser ++ : parseCommand(leftCommandInput)
+create LeftCommand
+AddressBookParser -> LeftCommand ++
+LeftCommand --> AddressBookParser --
+return left
+
+AddressBookParser -> AddressBookParser : parseCommand(rightCommandInput)
+activate AddressBookParser
+create RightCommand
+AddressBookParser -> RightCommand ++
+RightCommand --> AddressBookParser --
+return right
+
+create ChainCommand
+AddressBookParser -> ChainCommand ++ : left, right
+ChainCommand --> AddressBookParser --
+return chain
+
+LogicManager -> ChainCommand : execute
+activate ChainCommand
+
+ChainCommand -> LeftCommand : execute
+activate LeftCommand
+
+return leftResult
+
+ChainCommand -> RightCommand : execute
+activate RightCommand
+
+return rightResult
+
+return result
+
+return
+
+@enduml

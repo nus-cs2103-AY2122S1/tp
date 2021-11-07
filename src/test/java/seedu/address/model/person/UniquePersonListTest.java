@@ -3,8 +3,8 @@ package seedu.address.model.person;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
@@ -42,7 +42,7 @@ public class UniquePersonListTest {
     @Test
     public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
         uniquePersonList.add(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Person editedAlice = new PersonBuilder(ALICE).withTelegram(VALID_TELEGRAM_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(uniquePersonList.contains(editedAlice));
     }
@@ -85,7 +85,7 @@ public class UniquePersonListTest {
     @Test
     public void setPerson_editedPersonHasSameIdentity_success() {
         uniquePersonList.add(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Person editedAlice = new PersonBuilder(ALICE).withTelegram(VALID_TELEGRAM_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         uniquePersonList.setPerson(ALICE, editedAlice);
         UniquePersonList expectedUniquePersonList = new UniquePersonList();
@@ -166,5 +166,53 @@ public class UniquePersonListTest {
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
             -> uniquePersonList.asUnmodifiableObservableList().remove(0));
+    }
+
+    @Test
+    public void getPersons() {
+        uniquePersonList.add(ALICE);
+        assertEquals(uniquePersonList.getPersons(new NameEqualKeywordPredicate(ALICE.getName())),
+                Collections.singletonList(ALICE));
+
+        assertEquals(uniquePersonList.getPersons(new NameEqualKeywordPredicate(BOB.getName())),
+                Collections.EMPTY_LIST);
+    }
+
+    @Test
+    public void size() {
+        // empty list
+        assertEquals(0, uniquePersonList.size());
+
+        // 1 person list
+        uniquePersonList.add(ALICE);
+        assertEquals(1, uniquePersonList.size());
+
+        // 2 persons list
+        uniquePersonList.add(BOB);
+        assertEquals(2, uniquePersonList.size());
+
+        // remove 1 person
+        uniquePersonList.remove(ALICE);
+        assertEquals(1, uniquePersonList.size());
+    }
+
+    @Test
+    public void isEmpty() {
+        // empty list
+        assertTrue(uniquePersonList.isEmpty());
+
+        // 1 person list
+        uniquePersonList.add(ALICE);
+        assertFalse(uniquePersonList.isEmpty());
+
+        // empty list
+        uniquePersonList.remove(ALICE);
+        assertTrue(uniquePersonList.isEmpty());
+
+        // add 2 persons and remove 1
+        uniquePersonList.add(ALICE);
+        uniquePersonList.add(BOB);
+        uniquePersonList.remove(ALICE);
+        assertFalse(uniquePersonList.isEmpty());
     }
 }

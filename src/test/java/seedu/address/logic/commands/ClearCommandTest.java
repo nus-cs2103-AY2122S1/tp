@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -17,7 +19,8 @@ public class ClearCommandTest {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
 
-        assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ClearCommand(0, 0, null, null),
+                model, ClearCommand.MESSAGE_CLEAR_PERSON_SUCCESS, expectedModel);
     }
 
     @Test
@@ -26,7 +29,24 @@ public class ClearCommandTest {
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel.setAddressBook(new AddressBook());
 
-        assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ClearCommand(0, 0, null, null),
+                model, ClearCommand.MESSAGE_CLEAR_PERSON_SUCCESS, expectedModel);
     }
 
+    @Test
+    public void equals() {
+        ClearCommand clearCommand = new ClearCommand(0, 0, null, null);
+        // same object -> returns true
+        assertTrue(clearCommand.equals(clearCommand));
+
+        // same values -> returns true
+        ClearCommand clearCommandcopy = new ClearCommand(0, 0, null, null);
+        assertTrue(clearCommand.equals(clearCommandcopy));
+
+        // different types -> returns false
+        assertFalse(clearCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(clearCommand.equals(null));
+    }
 }
