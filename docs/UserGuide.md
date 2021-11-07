@@ -22,6 +22,8 @@ feel free to skip to the [command summary](#command-summary) and experiment with
 
 <br>
 
+<div style="page-break-after: always;"></div>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Table of Contents**
@@ -62,6 +64,8 @@ feel free to skip to the [command summary](#command-summary) and experiment with
 
 <br>
 
+<div style="page-break-after: always;"></div>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Quick Start**
@@ -93,6 +97,8 @@ feel free to skip to the [command summary](#command-summary) and experiment with
 [Return to Table of Contents](#table-of-contents)
 
 <br>
+
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -131,6 +137,7 @@ feel free to skip to the [command summary](#command-summary) and experiment with
 
 [Return to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 
 ### Adding a student : `addstudent`
 
@@ -304,12 +311,15 @@ Examples:
 * `show -n Hong Fai`
   * displays the following line chart of `Hong Fai`'s performance in all his assessments. <br>
     ![showStudentExample](images/UGExamples/showstu.png)
+    <br>
 * `show -n Hong Fai -f`
   * exports the following line chart of `Hong Fai`'s performance in all his assessments. <br>
     ![showExportExample](images/UGExamples/showexport.png)
+    <br>
 * `show -g T02A`
   * displays line chart of group `T02A`'s performance in their assessments. <br>
     ![showGroupExample](images/UGExamples/showgrp.png)
+    <br>
 * `show -a Midterm Examination`
   * displays histogram of the distribution of scores in the `Midterm Examination` assessment.<br>
     ![showAssessmentExample](images/UGExamples/showasses.png)
@@ -519,6 +529,8 @@ If your changes to the data file makes its format invalid, Source Control will d
 
 <br>
 
+<div style="page-break-after: always;"></div>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **FAQ**
@@ -552,6 +564,8 @@ as well as you alias preferences.
 
 <br>
 
+<div style="page-break-after: always;"></div>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Glossary**
@@ -581,6 +595,7 @@ Import command description.
 [Return to Table of Contents](#table-of-contents)
 
 <br>
+<div style="page-break-after: always;"></div>
 
 Below is a table of the restrictions of data fields used in our application.
 
@@ -616,6 +631,7 @@ Path | A string of characters to uniquely identify the location in the computer.
 [Return to Table of Contents](#table-of-contents)
 
 <br>
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
