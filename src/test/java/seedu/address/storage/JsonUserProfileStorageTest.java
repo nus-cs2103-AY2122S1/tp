@@ -5,8 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -91,6 +93,7 @@ public class JsonUserProfileStorageTest {
                     JsonSerializableUserProfile.class);
             try {
                 userProfileStorage.saveUserProfile(userProfile.get());
+                Files.write(profileFilePath, System.lineSeparator().getBytes(), StandardOpenOption.APPEND);
             } catch (IOException e) {
                 assertNotEquals(e, null);
             }
