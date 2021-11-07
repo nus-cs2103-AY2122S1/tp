@@ -250,7 +250,7 @@ Certain details have been omitted from the sequence diagram for simplicity, incl
         - More steps involved for the user to take a module.
 - **Alternative 2:** User indicates the year and semester when adding the module to the tracker.
     - Pros:
-        - Easier for the user to take a module as there are less steps involved.
+        - Easier for the user to take a module as there are fewer steps involved.
     - Cons:
         - The `add` command will contain many arguments, which might make it difficult for users to remember.
 
@@ -321,7 +321,7 @@ Below is a sequence diagram, and an explanation of how `FindCommand` is executed
     - Pros:
         - Easier for the user to use as there is no need to memorise all the optional parameters.
     - Cons:
-        - More error prone (such as users typing `find c` and the application returns all the modules, which has the same effect as using the list command.
+        - More error-prone (such as users typing `find c` and the application returns all the modules, which has the same effect as using the list command.
 
 **Aspect: Format of user input**
 
@@ -336,7 +336,7 @@ Below is a sequence diagram, and an explanation of how `FindCommand` is executed
         - Greater flexibility for the user and more intuitive for the user.
     - Cons:
         - Difficult for the application to differentiate between keywords and words for specifying a certain component.
-        - Might be error prone (such as when the user wants to search the entire module with the keyword `title` but the program interprets it as searching inside the module title).
+        - Might be error-prone (such as when the user wants to search the entire module with the keyword `title` but the program interprets it as searching inside the module title).
         - Is inconsistent with the format of other commands.
 - **Alternative 3:** Users specify what value to search for in each prefix ie `y/3`, `s/2`.
     - Pros:
@@ -344,7 +344,7 @@ Below is a sequence diagram, and an explanation of how `FindCommand` is executed
     - Cons:
         - Might be tedious for user to manually specify each field to search for.
         - Requires the user to know what to search for, which might be hard for users who do not have the specific details of the module.
-
+        
 ### Clear modules feature
 
 #### Implementation
@@ -382,16 +382,16 @@ Below is a sequence diagram, and an explanation of how `ClearCommand` is execute
 
 **Aspect: How should clear command work**
 
-- **Alternative 1(current choice)**: When a clear command is called, all modules in a specific semester will be untaked.
+- **Alternative 1 (current choice)**: When a clear command is called, all modules in a specific semester will be untaked.
     - Pros:
       - Allow users to untake multiple modules conveniently.
-      - User can replan the specific semester using clear command.
+      - User can plan the specific semester from scratch using clear command.
     - Cons:
       - The command name might be confusing
 - **Alternative 2:** When a clear command is called, all modules in a specific semester will be deleted.
     - Pros:
       - Allow users to delete multiple modules conveniently.
-      - User can replan the specific semester using clear command.
+      - User can plan the specific semester from scratch using clear command.
     - Cons:
       - User need to add all the modules again, if they want to use it later
 - **Alternative 3:** When a clear command is called, all modules in the module tracker list will be deleted.
@@ -399,45 +399,13 @@ Below is a sequence diagram, and an explanation of how `ClearCommand` is execute
       - Allow users to delete everything and restart conveniently
     - Cons:
       - All modules stored in the storage in advance will be deleted as well
-      - User need to add all the modules again, once the clear command is called
-      - It will be expensive, if the user accidentally use clear command
+      - User will need to add all the modules again, once the clear command is called
+      - It will be expensive, if the user accidentally uses the clear command
 
-### Edit Module feature
-
-####Implementation
-
-The `edit` command is implemented via the `EditCommand`, `EditCommandParser` and `EditModuleDescriptor` classes.
-
-The `EditCommandParser` class implements the `Parser` interface.
-The `EditCommandParser#parse()` method is responsible for parsing the user input to retrieve the index of the module, fields user want to edit and its new value. The method will return an `EditCommand` object with parsed user input as its argument.
-
-The `EditModuleDescriptor` is responsible for storing the details to edit the module with and replacing each non-empty field value to corresponding field value of the module.
-
-The `EditCommand` class extends the `Command` class and implements the `EditCommand#execute()` method which handles the main logic of the class.
-It contains non-null `index` and `editModuleDescriptor` fields.
-When the `EditCommand#execute()` method is called,
-- The `Module` object corresponding to the `index` is found from the `Model`.
-- Create an edited copy of the module, and replace the original module.
-- A `CommandResult` is returned with the updated `Model`.
-
-Below is an example sequence diagram and an explanation on how `EditCommand` is executed.
-![EditCommand](images/EditCommandSequenceDiagram.png)
-
-**Step 1.** The user enters the command "edit 1 c/2101".
-
-**Step 2.** ModuleTrackerParser takes in the user's input, and calls `EditCommandParser#parse` to create an `EditCommand` object containing the data parsed from the user input.
-
-**Step 3.** The `EditCommand` is then executed by calling its `execute` method.
-
-**Step 4.** The module at the specified index (`2`) in the list is obtained from the `Model`.
-
-**Step 5.** A copy of this module after substituting the edited fields with new values is created.
-
-**Step 6.** The specified module in the `Model` is then replaced by the edited copy. The `Model` is updated to reflect this change in the Mod Tracker.
 
 ### Delete Module feature
 
-####Implementation
+#### Implementation
 
 This section explains the mechanism used to delete a `Module` from the `ModuleTracker`.
 
@@ -463,18 +431,6 @@ Below is a sequence diagram and explanation of how the `DeleteCommand` is execut
 
 **Step 6.** The `Module` will be removed by calling the `deleteModule` method in `Model`.
 
-
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
 
 ### Set current semester and MC goal feature
 
@@ -517,19 +473,19 @@ Below are the sequence diagrams and explanation of how `SetCommand` is executed.
 
 **Aspect: How can the user set current semester**
 
-- **Alternative 1(current choice)**: User set current semester through command line.
+- **Alternative 1 (current choice)**: User sets the current semester through the command line.
     - Pros:
         - For a user who is familiar with the app and CLI, they don't need to use mouse to change current semester.
     - Cons:
         - The command is less intuitive than drop-down list, the user might need to memorize the `set` command format.
-- **Alternative 2:** There is a button in the GUI that when clicked, will show drop-down lists of year and semester for user to choose.
+- **Alternative 2:** A button in the GUI that when clicked, will show drop-down lists of year and semester for user to choose.
     - Pros:
         - It is very straight forward and intuitive.
         - For beginners, and users who are not familiar with CLI, they can change current semester easily.
     - Cons:
         - For users who are familiar with CLI, picking academic year and semester using mouse may slow down their working efficiency.
 
-**Aspect: How can the user set Mc goal and current semester**
+**Aspect: How the user can set a Mc goal and current semester**
 
 - **Alternative 1(current choice)**: The user can use a single `set` command to perform both set Mc goal and change current semester functionalities.
     - Pros:
@@ -560,7 +516,7 @@ When the `ViewCommand#execute()` method is called,
 
 #### Implementation
 Below is a sequence diagram and explanation of how the `view` command works.
-![Sequence diagram of executing `view` command](images/viewSequenceDiagram.png)
+![Sequence diagram of executing `view` command](images/ViewSequenceDiagram.png)
 
 **Step 1.** The user executes the command `view y/2 s/1` and the user input is passed to `LogicManager`.
 
@@ -585,7 +541,7 @@ Below is a sequence diagram and explanation of how the `view` command works.
         - For beginners and users who are not familiar with CLI, they can view modules taken in different semesters by simply clicking buttons without needing to remember the commands.
     - Cons:
         - If the specific semester is very far away from the current semester, users need to click the button many times.
-        - For a user comfortable with using command line, the need to use mouse may lower their working efficiency.
+        - For a user who is comfortable using the command line, the need to use mouse may lower their working efficiency.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -607,7 +563,7 @@ Below is a sequence diagram and explanation of how the `view` command works.
 **Target user profile**:
 
 * NUS CS students
-* has a need to manage their Modular Credits(MCs)
+* has a need to manage their Modular Credits (MCs)
 * has a need to track the compulsory modules they are required to take
 * can type fast
 * prefers typing to mouse interactions
@@ -657,8 +613,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*    `  | forgetful CS student                                         | get notified when exam dates are approaching            | be aware of important assessments
 
 
-
-*{More to be added}*
 
 ### Use cases
 
