@@ -514,7 +514,6 @@ Step 6. The user executes `clear`, which calls `Model#commit()`. Since `current`
 The following activity diagram summarizes what happens when a user executes a command that changes the data stored in the address book:
 
 ![img.png](images/CommitActivityDiagram.png)
-<img src="images/CommitActivityDiagram.png" width="250" />
 
 #### Design considerations
 
