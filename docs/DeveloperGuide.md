@@ -9,15 +9,15 @@ title: Developer Guide
 ---
 ## **Developer Guide Information**
 
-### **Purpose**
+### Purpose
 
 This developer guide aims to provide information regarding the design and implementation of Siasa, including the design considerations when implementing each feature.
 
-### **Target Audience**
+### Target Audience
 
 This developer guide is made for Java developers who are or were formerly **student financial advisors**, the target audience of Siasa. Thus, it is assumed that readers have basic background knowledge on Java and is familiar with common terms used in insurance policies.
 
-### **Acknowledgements**
+### Acknowledgements
 
 -   This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
@@ -426,7 +426,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `SIASA` and the **Actor** is the `user`, unless specified otherwise)
 
-#### **UC1: Displaying Help**
+#### UC1: Displaying Help
 
 **MSS**
 
@@ -435,7 +435,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-#### **UC2: Add a Contact/Policy**
+#### UC2: Add a Contact/Policy
 
 **MSS**
 
@@ -454,7 +454,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 -   *a. User can request to view help at any time [(UC1)](#uc1-displaying-help).
 
-#### **UC3: Edit a Contact/Policy**
+#### UC3: Edit a Contact/Policy
 
 **MSS**
 
@@ -479,7 +479,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 -   *a. User can request to view help at any time [(UC1)](#uc1-displaying-help).
 
-#### **UC4: Delete a Contact/Policy**
+#### UC4: Delete a Contact/Policy
 
 **MSS**
 
@@ -504,7 +504,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 -   *a. User can request to view help at any time [(UC1)](#uc1-displaying-help).
 
-#### **UC5: List a Contact's Policies**
+#### UC5: List a Contact's Policies
 
 **MSS**
 
@@ -529,7 +529,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 -   *a. User can request to view help at any time [(UC1)](#uc1-displaying-help).
 
-#### **UC6: Clear a Contact's Policies**
+#### UC6: Clear a Contact's Policies
 
 **MSS**
 
@@ -554,7 +554,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 -   *a. User can request to view help at any time [(UC1)](#uc1-displaying-help).
 
-#### **UC7: Sort Contact/Policy List**
+#### UC7: Sort Contact/Policy List
 
 **MSS**
 
@@ -579,7 +579,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 -   *a. User can request to view help at any time [(UC1)](#uc1-displaying-help).
 
-#### **UC8: Download Statistics**
+#### UC8: Download Statistics
 
 **MSS**
 
