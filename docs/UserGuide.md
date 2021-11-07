@@ -78,6 +78,8 @@ Take note of some syntax we will frequently use throughout the User Guide:
 4. Double-click the file to start the app. The GUI similar to the image displayed below should appear in a few seconds. Note how the app contains some sample data.<br>
 
    <img src="images/Ui.png" width="600">
+
+<div style="page-break-after: always;"></div>
  
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -99,6 +101,9 @@ Take note of some syntax we will frequently use throughout the User Guide:
 6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
 ## What is Command-line Interface (CLI?) <a name="what-is-cli"></a>
 A Command-line interface helps process commands that you enter through text. Instead of clicking buttons, to execute a certain command,
 you would type the command in text in the command box, and the programme will execute your command, and reflect its response in the response box.
@@ -148,6 +153,8 @@ all the details!<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ## General <a name="general"/>
 
