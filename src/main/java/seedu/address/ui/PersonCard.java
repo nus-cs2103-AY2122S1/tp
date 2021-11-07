@@ -56,7 +56,7 @@ public class PersonCard extends UiPart<Region> {
         person.getModuleCodes().stream()
                         .sorted(Comparator.comparing(moduleCode -> moduleCode.value))
                                 .forEach(moduleCode -> moduleCodes.getChildren().add(
-                                new Label(moduleCode.value + " " + moduleCode.lessonCodes.toString())));
+                                new Label(moduleCode.formattedToString())));
         phone.setText(person.getPhone().value);
         teleHandle.setText(person.getTeleHandle().value);
     }
