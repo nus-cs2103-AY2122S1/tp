@@ -340,8 +340,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 (For all use cases below, the **System** is the `SIASA` and the **Actor** is the `user`, unless specified otherwise)
 
 #### **UC1: Displaying Help**
-<details>
-  <summary>Click to expand!</summary>
 
 **MSS**
 
@@ -350,12 +348,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-</details>
-
 #### **UC2: Add a Contact/Policy**
-
-<details>
-  <summary>Click to expand!</summary>
 
 **MSS**
 
@@ -374,12 +367,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 -   *a. User can request to view help at any time [(UC1)](#uc1-displaying-help).
 
-</details>
-
 #### **UC3: Edit a Contact/Policy**
-
-<details>
-  <summary>Click to expand!</summary>
 
 **MSS**
 
@@ -404,12 +392,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 -   *a. User can request to view help at any time [(UC1)](#uc1-displaying-help).
 
-</details>
-
 #### **UC4: Delete a Contact/Policy**
-
-<details>
-  <summary>Click to expand!</summary>
 
 **MSS**
 
@@ -434,12 +417,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 -   *a. User can request to view help at any time [(UC1)](#uc1-displaying-help).
 
-</details>
-
 #### **UC5: List a Contact's Policies**
-
-<details>
-  <summary>Click to expand!</summary>
 
 **MSS**
 
@@ -464,12 +442,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 -   *a. User can request to view help at any time [(UC1)](#uc1-displaying-help).
 
-</details>
-
 #### **UC6: Clear a Contact's Policies**
-
-<details>
-  <summary>Click to expand!</summary>
 
 **MSS**
 
@@ -494,12 +467,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 -   *a. User can request to view help at any time [(UC1)](#uc1-displaying-help).
 
-</details>
-
 #### **UC7: Sort Contact/Policy List**
-
-<details>
-  <summary>Click to expand!</summary>
 
 **MSS**
 
@@ -524,12 +492,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 -   *a. User can request to view help at any time [(UC1)](#uc1-displaying-help).
 
-</details>
-
 #### **UC8: Download Statistics**
-
-<details>
-  <summary>Click to expand!</summary>
 
 **MSS**
 
@@ -541,8 +504,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 -   *a. User can request to view help at any time [(UC1)](#uc1-displaying-help).
-
-</details>
 
 ### Non-Functional Requirements
 *   Technical requirements:
