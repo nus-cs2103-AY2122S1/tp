@@ -127,7 +127,7 @@ public class ModelManager implements Model {
 
             if (personFound.isEmpty()) {
                 throw new CommandException("No resident with this information '" + information + "' could be found");
-            } else {
+            } else if (!personList.contains(personFound.get())) {
                 personList.add(personFound.get());
             }
         }
