@@ -261,8 +261,9 @@ Below is the sequence diagram that depicts the parsing of the `add -p` command:
 3. `AddCommandParser#parse()` extracts the command flag `-p` at the start of its argument, which denotes the addition
    of a progress. Thus, the remaining (`2 Did Homework​`) is then passed into `AddProgressCommandParser#parse()`.
 
-4. The remaining (`2 Did Homework​`) is then parsed into the targetIndex `2` and the progress with the description 
-   `Did Homework`, which are then used to construct an `AddProgressCommand` object. 
+4. The remaining (`2 Did Homework​`) is then parsed into targetIndex `2` and progress with the description 
+   `Did Homework`, which are then used to construct an `AddProgressCommand` object that will be returned to
+   `LogicManager`. 
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** 
 At this point, if `AddProgressCommandParser#parse()` detects that invalid input has been supplied, the command will fail 
@@ -277,8 +278,7 @@ to the student:
 
 6. `AddProgressCommand` calls the `Student#addProgress()` to add the new progress to the specified student.
 
-7. `AddProgressCommand` then calls the `Model#updateFilteredStudentList()` to update the data in the system with
-   regard to this change.
+7. `AddProgressCommand` then calls the `Model#viewStudent()` to signal `Model` to view this student's details.
 
 8. The result of the `AddProgressCommand` execution is then encapsulated as a `CommandResult` object, which is
    returned to `LogicManager`.
