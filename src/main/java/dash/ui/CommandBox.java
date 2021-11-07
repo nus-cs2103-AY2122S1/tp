@@ -58,7 +58,7 @@ public class CommandBox extends UiPart<Region> {
      */
     @FXML
     private void handleCommandEntered() {
-        currentUserInputIndex = -1;
+        currentUserInputIndex = -1; // Reset index to -1
 
         String commandText = commandTextField.getText();
         if (commandText.equals("")) {
@@ -79,12 +79,11 @@ public class CommandBox extends UiPart<Region> {
     @FXML
     public void handleUpOrDownArrowKeyPressed(KeyCode keyCode) {
         if (keyCode == KeyCode.DOWN && currentUserInputIndex >= 0) {
-            if (currentUserInputIndex == 0) {
-                currentUserInputIndex--;
-                commandTextField.setText("");
+            currentUserInputIndex--;
+            if (currentUserInputIndex == -1) {
+                commandTextField.setText(""); // Index is -1, command box set to empty string
                 return;
             }
-            currentUserInputIndex--;
             commandTextField.setText(userInputList.get(currentUserInputIndex));
             commandTextField.end();
         }
