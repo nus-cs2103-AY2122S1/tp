@@ -140,6 +140,7 @@ Examples:
 ### Add a new task to a module: `add task`
 
 Add a new task to the specified module by providing the module name, task id, task name, and the task deadline.<br>
+The new task will be added to all students in the module, as well as for future students who are not yet added.
 Tasks can be added to modules without students, but will only become visible after student(s) have been added to the module.<br>
 Task id must begin with a capital letter 'T', followed by a positive integer.<br>
 Task name must only contain alphanumeric characters and spaces, and it must not be blank.<br>
@@ -160,6 +161,7 @@ Examples:
 ### Edit a task's information: `edit task`
 
 Edit a task's information.<br>
+The task's information will be edited for all students in the module, as well as for future students who are not yet added.
 The identity parameters (module name/task id) must be provided.<br>
 At least one optional parameter (name/deadline) must be provided, and only provided parameters will be changed.<br>
 If the optional parameters contain the same information as is already present, the edit command will still be executed successfully.<br>
