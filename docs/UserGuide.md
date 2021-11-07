@@ -458,9 +458,9 @@ Format: `add -sl s/STUDENT_INDEX... l/LESSON_INDEX...`
 Examples:
 * `add -sl s/1 2 3 l/1 2` add students with index 1, 2, 3 into lessons with index 1, 2.
 
-> :bulb: Lessons have capacities - and the command won't work if any of the lessons cannot accommodate all the students.
+> :bulb: Some lessons have capacities - and the command won't work if any of the lessons cannot accommodate all the students. (Lessons without capacity information will have no restriction on their capacity.)
 
-### Deleting students from lessons: `del -sl`
+### Deleting student(s) from lesson(s): `del -sl`
 {:.no_toc}
 Deletes students from lessons.
 
@@ -557,7 +557,7 @@ Action | Format and Examples
 --------|------------------
 **[List](#listing-all-students-and-lessons-list)** | `list [-a]`<br>e.g., `list`, `list -a`
 **[Add student(s) to lesson(s)](#adding-students-to-lessons-add--sl)** | `add -sl s/STUDENT_INDEX... l/LESSON_INDEX...`<br>e.g.,`add -sl s/1 2 3 l/1 2`
-**[Delete students from lessons](#deleting-students-from-lessons-del--sl)** | `del -sl s/STUDENT_INDEX... l/LESSON_INDEX...`<br>e.g.,`del -sl s/2 3 l/1 2 3`
+**[Delete student(s) from lesson(s)](#deleting-students-from-lessons-del--sl)** | `del -sl s/STUDENT_INDEX... l/LESSON_INDEX...`<br>e.g.,`del -sl s/2 3 l/1 2 3`
 
 ### 8.4 Other commands
 
