@@ -714,13 +714,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2. Should be able to hold up to 1000 clients without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4. New users should be able to easily see where to find information on how to use the application.
+4. New users should be able to see where to find information on how to use the application within 2 actions upon launching the application.
 5. Should inform user of the necessary amendments to make to their input when receiving a bad input.
 6. Data should be transferable between different devices that are both running InsurancePal.
 7. Each command should be successfully executed within 1 second.
-8. Should not exit unexpectedly as a result of software implementation regardless of user input.
+8. Should not exit or crash without explicit permission or instruction by the user.
 9. Should not modify information stored without explicit permission or instruction by the user.
-10. Should not allow duplicate entries.
+10. Should not allow duplicate entries of clients.
 
 ### Glossary
 
@@ -755,8 +755,6 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 ### Deleting a client
 
 1. Deleting a client while all clients are being shown
@@ -772,12 +770,8 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
-
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
