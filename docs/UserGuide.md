@@ -123,7 +123,7 @@ Have you installed Academy Directory successfully? Let us now walk you through y
 Components of UI | Functionality
 --- | ---
 Menu bar | Provides an immediate mean to execute commands relating to student academic data or usage history. There are 4 menus to choose from.
-Student list | Shows the current list of students in your class, along with their tags and contact number. You can scroll through the list to see more students.
+Student list | Shows the current list of students in your class, along with their tags and contact number. You can scroll through the list to see more students. Each student will be shown only their name, phone number (if have), email address, and tags (if have)
 Command box | This is where you will enter your command and press Enter to use Academy Directory Command Line Interface
 Status message display | This is where Academy Directory will inform you of what is happening after the commands you entered
 Result visualizer display | This is where Academy Directory will visualize your data or results, on your request.
