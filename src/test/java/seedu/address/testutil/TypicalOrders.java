@@ -22,9 +22,9 @@ public class TypicalOrders {
             .withDate("2021-09-19").withAmount("20").withIsComplete(true).withLabel("testorder2").build();
     public static final Order SALESORDER3 = new OrderBuilder().withCustomer("Clark")
             .withDate("2021-09-20").withAmount("15").withIsComplete(true).withLabel("testorder3").build();
-    public static final Order SALESORDER4 = new OrderBuilder().withCustomer("Justin")
+    public static final Order SALESORDER4 = new OrderBuilder().withCustomer("Justin").withLabel("testorder4")
             .withDate("2021-09-20").withAmount("20").build();
-    public static final Order SALESORDER5 = new OrderBuilder().withCustomer("Stuart")
+    public static final Order SALESORDER5 = new OrderBuilder().withCustomer("Stuart").withLabel("testorder5")
             .withDate("2021-09-20").withAmount("5").withIsComplete(false).build();
 
     // Manually added - Order's details found in {@code CommandTestUtil}

@@ -22,7 +22,6 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.model.order.Customer;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Person;
-import seedu.address.model.sort.SortDescriptor;
 import seedu.address.model.task.Task;
 
 /**
@@ -293,9 +292,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void sortOrderList(SortDescriptor sortDescriptor) {
-        Comparator<Order> comparator = sortDescriptor.generateComparator();
-        orderBook.sortOrders(comparator);
+    public void sortOrderList(Comparator<Order> sortDescriptor) {
+        orderBook.sortOrders(sortDescriptor);
     }
 
     /**

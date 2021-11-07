@@ -13,9 +13,9 @@ import seedu.address.model.order.Order;
 /**
  * Encapsulates the sortField and sortOrdering that are used to sort the orderList.
  */
-public class SortDescriptor {
-    private SortField sortField;
-    private SortOrdering sortOrdering;
+public class SortDescriptor implements Comparator<Order> {
+    private final SortField sortField;
+    private final SortOrdering sortOrdering;
 
     /**
      * Constructs a {@code SortDescriptor} with the given SortField and sortOrdering.
@@ -23,31 +23,6 @@ public class SortDescriptor {
     public SortDescriptor(SortField sortField, SortOrdering sortOrdering) {
         this.sortField = sortField;
         this.sortOrdering = sortOrdering;
-    }
-
-    /**
-     * Generates a comparator using the sortField and sortOrdering.
-     */
-    public Comparator<Order> generateComparator() {
-        SortFieldType fieldType = sortField.getValue();
-        SortOrderingType orderingType = sortOrdering.getValue();
-
-        Comparator<Order> comparator = null;
-
-        if (fieldType.equals(DATE)) {
-            comparator = Comparator.comparing(Order::getDate);
-        } else if (fieldType.equals(AMOUNT)) {
-            comparator = Comparator.comparing(Order::getAmount);
-        }
-
-        assert(comparator != null);
-
-        if (orderingType.equals(ASCENDING)) {
-            return comparator;
-        } else {
-            assert(orderingType.equals(DESCENDING));
-            return comparator.reversed();
-        }
     }
 
     /**
@@ -65,6 +40,31 @@ public class SortDescriptor {
         return sortOrdering;
     }
 
+    /**
+     * Compares the orders {@code o1} and {@code o2} based on the {@code SortField} and {@code sortOrdering}.
+     */
+    @Override
+    public int compare(Order o1, Order o2) {
+        SortFieldType fieldType = sortField.getValue();
+        SortOrderingType orderingType = sortOrdering.getValue();
+
+        int result = 0;
+
+        if (fieldType.equals(DATE)) {
+            result = o1.getDate().compareTo(o2.getDate());
+        } else {
+            assert(fieldType.equals(AMOUNT));
+            result = o1.getAmount().compareTo(o2.getAmount());
+        }
+
+        if (orderingType.equals(ASCENDING)) {
+            return result;
+        } else {
+            assert(orderingType.equals(DESCENDING));
+            return result * -1;
+        }
+
+    }
 
     @Override
     public boolean equals(Object other) {
