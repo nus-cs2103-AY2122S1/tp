@@ -24,7 +24,7 @@ Given below are my contributions to the project.
 
 * **Enhancements to existing features**:
     * Updated the GUI to highlight elderly with overdued visits (Pull request [\#134](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/134))
-    * Implemented warnings for inappropriate command usage. (Pull requests [\#192](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/192), [\#96](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/96))
+    * Implemented warnings for inappropriate command usage. (Pull requests [\#96](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/96), [\#192](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/192))
     * Improve Date to Datetime for all time-related fields. (Pull request [\#71](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/71))
   
 
@@ -33,7 +33,8 @@ Given below are my contributions to the project.
         * Added documentation for the features `done`, `list` and `datetime`. [\#33](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/33), [\#123](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/123)
         * Checked for consistency of terms used. [\#188](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/188)
     * Developer Guide:
-        * Added implementation details of the `done` and `datetime` feature. [\#103](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/103)
+        * Added implementation details for the features `datetime`, `done` and `list`. [\#103](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/103), [\#213](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/213)
+        * Added use cases for `add`, `delete`, `done` and `list` commands [\#34](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/34), [\#211](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/211)
 
 
 * **Community**:
