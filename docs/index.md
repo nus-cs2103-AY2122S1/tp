@@ -17,8 +17,9 @@ title: Track2Gather
 
 * In addition, Track2Gather offers features for the enforcement of Stay-Home-Notices by contact tracing personnel.
 
-* If you are interested in using Track2Gather, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.md#quick-start).
-* If you are interested about developing Track2Gather, the [**Developer Guide**](DeveloperGuide.md) is a good place to start.
+* For the detailed documentation of this project, see the [Track2Gather Website](https://ay2122s1-cs2103-w14-2.github.io/tp/).
+* If you are interested in using Track2Gather, head over to the [_Quick Start_ section of the **User Guide**](https://ay2122s1-cs2103-w14-2.github.io/tp/UserGuide.html#quick-start).
+* If you are interested about developing Track2Gather, the [**Developer Guide**](https://ay2122s1-cs2103-w14-2.github.io/tp/DeveloperGuide.html) is a good place to start.
 
 
 **Acknowledgements**
