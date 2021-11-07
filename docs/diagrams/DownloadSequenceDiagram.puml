@@ -73,4 +73,5 @@ deactivate DownloadCommand
 
 [<--LogicManager
 deactivate LogicManager
+
 @enduml
