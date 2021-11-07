@@ -18,8 +18,8 @@ public class ShowExpiringPolicySummaryCommand extends Command {
 
     public static final String COMMAND_WORD = "expiringpolicysummary";
 
-    private static final String pattern = "There {0} expired or expiring.\nUse the "
-            + ShowExpiringPolicyCommand.COMMAND_WORD + " command to see more.";
+    private static final String pattern = "There {0} expired or expiring\nUse the "
+            + ShowExpiringPolicyCommand.COMMAND_WORD + " command to see more";
     private static final double[] policyLimits = {0, 1, 2};
     private static final String[] policyStrings = {
         "are no policies that are",
