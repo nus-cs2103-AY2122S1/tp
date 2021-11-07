@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.EditCommand.MESSAGE_EDIT_PROFILE_GITHUB_CANNOT_BE_EMPTY;
 import static seedu.address.logic.commands.EditCommand.MESSAGE_EDIT_PROFILE_NAME_CANNOT_BE_EMPTY;
 import static seedu.address.logic.commands.EditCommand.MESSAGE_EDIT_PROFILE_PARAMETERS_CANNOT_BE_EMPTY;
@@ -76,7 +75,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                 isProfile = true;
                 checkEditProfileInputFormat(args, argMultimap);
             } else {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+                throw new ParseException(pe.getMessage() + " \n" + EditCommand.MESSAGE_USAGE);
             }
         }
 
