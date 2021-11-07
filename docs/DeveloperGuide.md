@@ -394,16 +394,19 @@ the `execute("find te/alex_1")` API call.
 
 #### Implementation
 
-The class `WelcomeWindow` is responsible for displaying the welcome window at the
-start when the application is launched. It is facilitated by the `WelcomeWindow.fxml` file, which is
-responsible for how various components inside this window are arranged.
+The class `WelcomeWindow` is responsible for displaying the welcome window at 
+the start when the application is launched. It is facilitated by the 
+`WelcomeWindow.fxml` and `WelcomeWindow.css`.  The `.fxml` file is responsible 
+for the layout of the various components in this window, and the `.css` file 
+adds a style and enhances the overall UI.
 
 The `WelcomeWindow` class extends `UiPart<Stage>`.
 
 When the app is launched, an instance of this class is created, and the
-`WelcomeWindow#start` is invoked to display the window. Various methods, including 
-`fadeTransition` and `displayAnimatedText`, are used within this
-class to achieve the fading image and character typing effect, respectively.
+`WelcomeWindow#start()` is invoked to display the window. Various methods, including 
+`fadeTransition()` and `displayAnimatedText(String textToDisplay, double delayTime)`
+, are used within this class to achieve the fading image and character typing 
+effect, respectively.
 
 ![WelcomeWindowSequenceDiagram](images/WelcomeWindowSequenceDiagram.png)
 
