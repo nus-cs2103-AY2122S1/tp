@@ -1007,10 +1007,7 @@ point for testers to work on; testers are expected to do more *exploratory* test
 
    3. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message.
-
-   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
-
+   
 2. Deleting a person while no person is being shown
 
    1. Prerequisites: List all persons using the `list` command. No person in the list.
@@ -1018,9 +1015,6 @@ point for testers to work on; testers are expected to do more *exploratory* test
    2. Test case: `delete 1`<br>
       Expected: No person is deleted. Error details shown in status message. 
 
-   3. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
-   
 ### Adding a task
 
 1. Adding a task with correct format
@@ -1044,10 +1038,10 @@ point for testers to work on; testers are expected to do more *exploratory* test
        Expected: No task is added. Error details stating how Date/Time format works is shown.
    
     5. Test case: `add d/Test Task p/0`<br>
-       Expected: No task is added. Error details stating 'Index is not a non-zero unsigned integer' is shown.
+       Expected: No task is added. Error details stating 'The person index provided is invalid.' is shown.
     
     6. Test case: `add d/Test Task t/an extremely long tag`<br>
-       Expected: No task is added. Error details stating how Tag names should be alphanumeric and limited to 15 characters is shown.
+       Expected: No task is added. Error details stating how Tag names should be one word, alphanumeric and limited to 15 characters is shown.
 
 ### Editing a task
 
@@ -1059,7 +1053,7 @@ point for testers to work on; testers are expected to do more *exploratory* test
        Expected: First task has description changed to the stated description. Details of the new edited task shown in the status message.
 
     3. Test case: `edit 0 d/Changed Description`<br>
-       Expected: No task has been edited. Error details stating 'Invalid command format!' is shown.
+       Expected: No task has been edited. Error details stating 'The task index provided is invalid.' is shown.
 
 2. Editing a task's date/time
 
@@ -1103,7 +1097,7 @@ point for testers to work on; testers are expected to do more *exploratory* test
        Details of the task with added tag shown in the status message for both cases.
 
     3. Test case: `tag 0 t/Important` <br>
-        Expected: No task has been added a tag. Error details stating 'invalid command format!' is shown with a description of how to use tag command with proper format.
+        Expected: No task has been added a tag. Error details stating 'The task index provided is invalid.' is shown with a description of how to use tag command with proper format.
 
     4. Test case: `tag 1 t/` <br>
        Expected: No task has been added a tag. Error details stating 'Arguments cannot be empty' is shown.
@@ -1130,7 +1124,7 @@ point for testers to work on; testers are expected to do more *exploratory* test
        Details of the task with assigned person shown in the status message for both cases.
 
     3. Test case: `assign 0 p/1` <br>
-       Expected: No task has been assigned a person. Error details stating 'invalid command format!' is shown with a description of how to use assign command with proper format.
+       Expected: No task has been assigned a person. Error details stating 'The task index provided is invalid.' is shown with a description of how to use assign command with proper format.
 
 2. Assigning multiple people to a task
 
@@ -1150,13 +1144,13 @@ point for testers to work on; testers are expected to do more *exploratory* test
        Expected: First task has been marked as completed. Details of task that is just marked completed shown in the status message.
 
     3. Test case: `complete 0` <br>
-       Expected: No task has been marked as completed. Error details stating 'invalid command format!' is shown with a description of how to use complete command with proper format.
+       Expected: No task has been marked as completed. Error details stating 'The task index provided is invalid.' is shown with a description of how to use complete command with proper format.
 
-    4. Test case: `complete 3` <br>
+    4. Test case: `complete 2` <br>
        Expected: Third task has been marked as completed. Details of task that is just marked completed shown in the status message.
 
        
-### Finding tasks through task description
+### Finding tasks of sample data through task description
 
 1. Finding a task containing the stated one word
 
@@ -1178,7 +1172,7 @@ point for testers to work on; testers are expected to do more *exploratory* test
     3. Test case: `find with catch` <br>
        Expected: Task with description "Catch up with ST lectures" shown as the only task in the list. Number of task listed shown in status message.
     
-### Finding task through searching a specific field
+### Finding task through searching one or more specific fields
 
 1. Finding a task containing a date/time
 
