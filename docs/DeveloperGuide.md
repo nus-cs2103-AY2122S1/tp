@@ -194,8 +194,6 @@ Given below is an example usage scenario and how the mechanism behaves at each s
 - `contactpolicy` applies a `PolicyIsOwnedBy` predicate that takes in a `Contact`. It will return `true` if the `owner` field of the `Policy` is equals to the `Contact` taken in.
 - `expiringpolicy` applies a predicate that returns true if the `ExpiryDate` of a `Policy` is within the next month.
 
-### \[Proposed\] Undo/redo feature
-
 ### Download Command
 
 This section explains the mechanism behind ```DownloadCommand``` used to download a TXT file containing useful statistics. These include:
@@ -340,8 +338,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 (For all use cases below, the **System** is the `SIASA` and the **Actor** is the `user`, unless specified otherwise)
 
 #### **UC1: Displaying Help**
-<details>
-  <summary>Click to expand!</summary>
 
 **MSS**
 
@@ -350,12 +346,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-</details>
-
 #### **UC2: Add a Contact/Policy**
-
-<details>
-  <summary>Click to expand!</summary>
 
 **MSS**
 
@@ -374,12 +365,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 -   *a. User can request to view help at any time [(UC1)](#uc1-displaying-help).
 
-</details>
-
 #### **UC3: Edit a Contact/Policy**
-
-<details>
-  <summary>Click to expand!</summary>
 
 **MSS**
 
@@ -404,12 +390,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 -   *a. User can request to view help at any time [(UC1)](#uc1-displaying-help).
 
-</details>
-
 #### **UC4: Delete a Contact/Policy**
-
-<details>
-  <summary>Click to expand!</summary>
 
 **MSS**
 
@@ -434,12 +415,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 -   *a. User can request to view help at any time [(UC1)](#uc1-displaying-help).
 
-</details>
-
 #### **UC5: List a Contact's Policies**
-
-<details>
-  <summary>Click to expand!</summary>
 
 **MSS**
 
@@ -464,12 +440,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 -   *a. User can request to view help at any time [(UC1)](#uc1-displaying-help).
 
-</details>
-
 #### **UC6: Clear a Contact's Policies**
-
-<details>
-  <summary>Click to expand!</summary>
 
 **MSS**
 
@@ -494,12 +465,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 -   *a. User can request to view help at any time [(UC1)](#uc1-displaying-help).
 
-</details>
-
 #### **UC7: Sort Contact/Policy List**
-
-<details>
-  <summary>Click to expand!</summary>
 
 **MSS**
 
@@ -524,12 +490,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 -   *a. User can request to view help at any time [(UC1)](#uc1-displaying-help).
 
-</details>
-
 #### **UC8: Download Statistics**
-
-<details>
-  <summary>Click to expand!</summary>
 
 **MSS**
 
@@ -541,8 +502,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 -   *a. User can request to view help at any time [(UC1)](#uc1-displaying-help).
-
-</details>
 
 ### Non-Functional Requirements
 *   Technical requirements:
