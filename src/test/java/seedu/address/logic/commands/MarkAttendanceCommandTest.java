@@ -49,7 +49,7 @@ public class MarkAttendanceCommandTest {
         Index outOfBoundsIndex = Index.fromOneBased(model.getFilteredMemberList().size() + 1);
         MarkAttendanceCommand command = new MarkAttendanceCommand(Arrays.asList(outOfBoundsIndex));
 
-        assertCommandFailure(command, model, Messages.MESSAGE_INVALID_MEMBER_DISPLAYED_INDEX);
+        assertCommandFailure(command, model, Messages.MESSAGE_INVALID_MEMBER_DISPLAYED_INDICES);
     }
 
     @Test

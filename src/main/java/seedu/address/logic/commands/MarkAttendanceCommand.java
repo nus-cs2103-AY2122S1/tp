@@ -42,7 +42,7 @@ public class MarkAttendanceCommand extends Command {
             throw new CommandException(String.format(Messages.MESSAGE_EMPTY_LIST, Messages.MESSAGE_MEMBER));
         }
         if (!model.isWithinListIndex(indices)) {
-            throw new CommandException(Messages.MESSAGE_INVALID_MEMBER_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_MEMBER_DISPLAYED_INDICES);
         }
 
         assert indices != null : "indices should be initialised";
