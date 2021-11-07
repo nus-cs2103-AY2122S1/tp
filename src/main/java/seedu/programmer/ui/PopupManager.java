@@ -39,7 +39,7 @@ public class PopupManager {
      * @param message The text to display to the user
      */
     private void configurePopup(String message) {
-        popup.setAutoFix(true);
+        popup.setAutoFix(false); // Prevent unwanted corrections in edge cases
         popup.setHideOnEscape(true);
         Label label = createLabelForPopup(message);
         popup.getContent().clear();
