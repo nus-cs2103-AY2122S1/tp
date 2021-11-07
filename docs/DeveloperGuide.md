@@ -120,14 +120,19 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103-F10-4/tp/blob/2d1b8809aa8b78086507f8e2a5d48bc05a385e01/src/main/java/seedu/siasa/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+![Model Component Class Diagram](images/ModelClassDiagram.png)
 
 The `Model` component,
 
--   stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
--   stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
--   stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
--   does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+- stores the SIASA data i.e., all `Contact` and `Policy` objects (which are contained in a `UniqueContactList` and
+  `UniquePolicyList `object respectively).
+- stores the currently 'selected' `Contact` and `Policy` objects (e.g., results of a search query) in a separate filtered_list each
+  which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed'
+  e.g. the UI can be bound to this list so that the UI automatically updates when the data in the lists change.
+- stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+- does not depend on any of the other three components
+  (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+
 
 ### Storage component
 
@@ -150,6 +155,91 @@ Classes used by multiple components are in the `seedu.siasa.commons` package.
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Creating Policies
+
+This section explains the process of adding a `Policy` to the `Policy` list that belongs to an owner which is a `Contact`.
+This is similar to how a `Contact` is created as well with some highlighted differences.
+
+The `AddPolicyCommand` will create a new `Policy` with the specified details and add it to the application. This command requires
+the `Policy`'s details and the `Contact`'s `Index` to specify which `Contact` the policy belongs to.
+
+The `AddPolicyCommand` implements the `AddPolicyCommand#execute` method, which obtains the `Contact` object, the owner,
+from the `Model` using the `Index`, creates the policy with the details and the owner, checks for similar policies and
+if none, updates the `Model`'s `Policy` list.
+
+The sequence diagram below illustrates how the `AddPolicyCommand` is executed.
+![](images/AddPolicyParserSequenceDiagram.png)
+
+**Step 1.** The user enters the command `addpolicy n/critical illness p/30000 4 120 c/10 30 cl/2`
+
+**Step 2.** User input is passed to `SiasaParser` which creates and calls `AddPolicyCommandParser#parse` with the arguments.
+This creates a new AddPolicyCommand by passing in the `Policy`'s details and owner `Contact`'s `Index`.
+
+![](images/AddPolicyCommandExecuteSequenceDiagram.png)
+
+**Step 3.** The `AddPolicyCommand` is executed by `LogicManager` by calling the `execute` method.
+
+**Step 4.** As the model is passed into the `execute` method, the list of `Contact`s save in the model can be obtained
+by calling `Model#getFilteredContactList`. The owner `Contact` is obtained from the list using the `Index`.
+
+**Step 5.** The policy to be added is created by passing in the details and the owner `Contact`.
+
+**Step 6.** The policy is added to the model by calling `Model#addPolicy`.
+
+#### Notable differences with creating contact
+1. The Contact to be added is created within `AddContactCommandParser#parse` and not in `AddContactCommand#execute`.
+2. No Contact details are passed into `AddContactCommand`
+
+
+#### Design considerations:
+#### How to create the `Policy` to be added.
+* **Alternative 1 (chosen)**: `Policy` details and Contact Index are passed into `AddPolicyCommand`, when executed, owner
+  `Contact` is obtained from the `Model` and `Policy` to be added is created.
+    * Advantage over alt. 2:
+        * Less coupling since the parser does not need a reference to `Model`.
+        * Cleaner implementation of `SiasaParser#parse` since all `CommandParser`s do not need a reference to `Model`.
+* **Alternative 2**: `Model` reference is passed into `AddPolicyCommandParser#parse`, `Contact` is obtained from the `Model`
+  and `Policy` to be added is created within parse and the created `Policy` is passed into AddPolicyCommand.
+    * Advantage over alt. 1:
+        * Greater abstraction since `Policy` components are not revealed and stored within the `AddPolicyCommand`
+        * Consistent with the implementation of `AddContactCommand`.
+
+### Editing Contact
+`EditContactCommand` requires an `EditContactDescriptor` which encapsulates the intended changes to the `Contact` and
+the `Index` of the `Contact` to be edited.
+
+Due to the immutable nature of both `Contact` and `Policy`, editing a `Contact`'s details would require creating a new `Contact`
+object. In addition, as `Policy` has an owner field, all `Policies` that belong to the edited `Contact` need to be edited and a
+new `Policy` object would need to be created for each of them with the edited new `Contact` object as the owner.
+
+The sequence diagram below illustrates how the `EditContactCommand` is executed.
+![](images/EditContactCommandExecuteSequenceDiagram.png)
+
+**Step 1**: `EditContactCommand#execute` is called which gets the `contactToEdit` from the `Model` using the `Index` provided, 
+similar to the process in `AddPolicyCommand`.
+
+**Step 2**: Using the `EditContactDescriptor` object and the `contactToEdit`, a new `editedContact` is created by calling 
+`EditContactCommand#createEditedContact`.
+
+**Step 3**: Policies belonging to the `contactToEdit` is obtained from the `Model`.
+
+**Step 4**: For each of the policies, a new `Policy` object is created with identical fields but with `editedContact` as the owner and 
+the `Model` is updated with these new policies.
+
+**Step 5** The `contactToEdit` is replaced by the `editedContact` by calling `Model#setContact`.
+#### Design considerations:
+#### Immutability of Contact and Policy
+* **Alternative 1 (chosen)**: Both `Contact` and `Policy` are immutable. Therefore, any edit to `Policy` or `Contact` requires new objects
+  to be created.
+    * Advantage over 2:
+        * With the invariant that an object will not be changed once created, it is easier to design,
+          implement and use the application as code complexity increases.
+        * Thread safety
+* **Alternative 2**: Both `Contact` and `Policy` are mutable. Any changes to `Policy` or `Contact` can be done simply by modifying the fields.
+    * Advantage over 1:
+        * Less objects need to be created, arguably better performance as number of entries increase.
+* **Reason for choice**: Despite performance concerns, application meets performance requirements and expectations from testing.
 
 ### Sorting and Filtering
 

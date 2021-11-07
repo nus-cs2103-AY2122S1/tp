@@ -1,0 +1,72 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+
+
+participant "c:EditContactCommand" as EditContactCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+
+participant "toEdit:Contact" as ToEdit MODEL_COLOR
+participant "edited:Contact" as Edited MODEL_COLOR
+
+end box
+
+[-> EditContactCommand : execute()
+
+activate EditContactCommand
+
+EditContactCommand -> Model : get contact to edit
+activate Model
+
+Model -> ToEdit
+activate ToEdit
+ToEdit -> Model: contactToEdit
+deactivate ToEdit
+
+Model --> EditContactCommand : contactToEdit
+deactivate Model
+
+EditContactCommand -> EditContactCommand : createEditedContact(contactToEdit)
+activate EditContactCommand
+
+create Edited
+EditContactCommand -> Edited
+activate Edited
+Edited --> EditContactCommand : editedContact
+deactivate Edited
+deactivate EditContactCommand
+
+EditContactCommand -> Model : getPoliciesBelongingTo(contactToEdit)
+
+activate Model
+Model -> EditContactCommand : policiesToEdit
+deactivate Model
+
+EditContactCommand -> EditContactCommand: create new policies belonging to editedContact
+
+EditContactCommand -> Model : replace policiesToEdit with new policies
+
+activate Model
+Model --> EditContactCommand
+deactivate Model
+
+
+EditContactCommand -> Model : setContact(editedContact)
+
+activate Model
+Model --> EditContactCommand
+deactivate Model
+
+EditContactCommand -[hidden]-> ToEdit
+destroy ToEdit
+
+[<-- EditContactCommand
+deactivate EditContactCommand
+Model -[hidden]-> EditContactCommand
+
+destroy EditContactCommand
+@enduml

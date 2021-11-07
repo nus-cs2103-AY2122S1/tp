@@ -5,11 +5,11 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Model <<Rectangle>>{
-Interface ReadOnlyAddressBook <<Interface>>
+Interface ReadOnlySiasa <<Interface>>
 Interface ReadOnlyUserPrefs <<Interface>>
 Interface Model <<Interface>>
-Class AddressBook
-Class ReadOnlyAddressBook
+Class Siasa
+Class ReadOnlySiasa
 Class Model
 Class ModelManager
 Class UserPrefs
@@ -36,16 +36,16 @@ Class CoverageExpiryDate
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
+Siasa .up.|> ReadOnlySiasa
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
+Model .left.> ReadOnlySiasa
+ModelManager -left-> "1" Siasa
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
+Siasa *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
 Person *--> Name
 Person *--> Phone
@@ -53,7 +53,7 @@ Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
 
-AddressBook *--> "1" UniquePolicyList
+Siasa *--> "1" UniquePolicyList
 UniquePolicyList --> "~* all" Policy
 UniquePolicyList ..> Person
 Policy *--> PaymentStructure
