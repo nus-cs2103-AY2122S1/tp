@@ -18,14 +18,18 @@ title: Developer Guide
 10. [User Stories](#User Stories)
 11. [Use case](#Use Cases)
 12. [Non-Functional Requirements](#Non-Functional Requirements)
-13. [Glossary](#Glossary) 
+13. [Glossary](#Glossary)
 14. [Appendix: Instructions for manual testing](#Appendix)
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## <a name="Acknowledgements"></a> **Acknowledgements**
+
 ProgrammerError makes use of the following third-party libraries:
-* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JSON In Java](https://mvnrepository.com/artifact/org.json/json), [opencsv](http://opencsv.sourceforge.net/), [JUnit5](https://github.com/junit-team/junit5)
+
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson)
+  , [JSON In Java](https://mvnrepository.com/artifact/org.json/json), [opencsv](http://opencsv.sourceforge.net/)
+  , [JUnit5](https://github.com/junit-team/junit5)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -103,16 +107,17 @@ The main UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`
 , `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures
 the commonalities between classes that represent parts of the visible GUI.
 
-In addition, there are two additional windows that the UI can display: `HelpWindow` and `DashboardWindow`. 
-They inherit from the abstract class `PopupWindow`, 
-which captures the commonalities between classes that represent popup information to be displayed to the user.
+In addition, there are two additional windows that the UI can display: `HelpWindow` and `DashboardWindow`. They inherit
+from the abstract class `PopupWindow`, which captures the commonalities between classes that represent popup information
+to be displayed to the user.
 
-The `UI` component uses the JavaFx UI framework. 
-- The layout of these UI parts are defined in matching `.fxml` files that
-are in the `src/main/resources/view` folder. For example, the layout of
-the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java)
-is specified
-in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework.
+
+- The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder.
+  For example, the layout of
+  the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java)
+  is specified
+  in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 - The styling of the UI components are defined in the `src/main/resources/view/css` folder.
 
 The `UI` component,
@@ -124,7 +129,8 @@ The `UI` component,
 
 ## <a name="Logic component"></a> Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**
+API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -162,7 +168,8 @@ How the parsing works:
 
 ## <a name="Model component"></a> Model component
 
-**API** : [`Model.java`](https://github.com/AY2122S1-CS2103-F09-3/tp/blob/master/src/main/java/seedu/programmer/model/Model.java)
+**
+API** : [`Model.java`](https://github.com/AY2122S1-CS2103-F09-3/tp/blob/master/src/main/java/seedu/programmer/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -186,7 +193,8 @@ The `Model` component,
 
 ## <a name="Storage component"></a> Storage component
 
-**API** : [`Storage.java`](https://github.com/AY2122S1-CS2103-F09-3/tp/blob/master/src/main/java/seedu/programmer/storage/Storage.java)
+**
+API** : [`Storage.java`](https://github.com/AY2122S1-CS2103-F09-3/tp/blob/master/src/main/java/seedu/programmer/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -213,9 +221,9 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedProgrammerError`. It extends `ProgrammerError` with an undo/redo
-history, stored internally as an `programmerErrorStateList` and `currentStatePointer`. Additionally, it implements the
-following operations:
+The proposed undo/redo mechanism is facilitated by `VersionedProgrammerError`. It extends `ProgrammerError` with an
+undo/redo history, stored internally as an `programmerErrorStateList` and `currentStatePointer`. Additionally, it
+implements the following operations:
 
 * `VersionedProgrammerError#commit()` — Saves the current address book state in its history.
 * `VersionedProgrammerError#undo()` — Restores the previous address book state from its history.
@@ -227,15 +235,15 @@ and `Model#redoProgrammerError()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedProgrammerError` will be initialized with the
-initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `VersionedProgrammerError` will be initialized with
+the initial address book state, and the `currentStatePointer` pointing to that single address book state.
 
 ![UndoRedoState0](images/commands/UndoCommand/UndoRedoState0.png)
 
 Step 2. The user executes `delete 5` command to delete the 5th student in the address book. The `delete` command
-calls `Model#commitProgrammerError()`, causing the modified state of the address book after the `delete 5` command executes
-to be saved in the `programmerErrorStateList`, and the `currentStatePointer` is shifted to the newly inserted address book
-state.
+calls `Model#commitProgrammerError()`, causing the modified state of the address book after the `delete 5` command
+executes to be saved in the `programmerErrorStateList`, and the `currentStatePointer` is shifted to the newly inserted
+address book state.
 
 ![UndoRedoState1](images/commands/UndoCommand/UndoRedoState1.png)
 
@@ -250,7 +258,8 @@ the `programmerErrorStateList`.
 </div>
 
 Step 4. The user now decides that adding the student was a mistake, and decides to undo that action by executing
-the `undo` command. The `undo` command will call `Model#undoProgrammerError()`, which will shift the `currentStatePointer`
+the `undo` command. The `undo` command will call `Model#undoProgrammerError()`, which will shift
+the `currentStatePointer`
 once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 ![UndoRedoState3](images/commands/UndoCommand/UndoRedoState3.png)
@@ -268,22 +277,22 @@ The following sequence diagram shows how the undo operation works:
 
 </div>
 
-The `redo` command does the opposite — it calls `Model#redoProgrammerError()`, which shifts the `currentStatePointer` once
-to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redoProgrammerError()`, which shifts the `currentStatePointer`
+once to the right, pointing to the previously undone state, and restores the address book to that state.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the CS2100 TA rather than attempting to perform the redo.
 
 </div>
 
 Step 5. The CS2100 TA then decides to execute the command `list`. Commands that do not modify the address book, such
-as `list`, will usually not call `Model#commitProgrammerError()`, `Model#undoProgrammerError()` or `Model#redoProgrammerError()`.
-Thus, the `programmerErrorStateList` remains unchanged.
+as `list`, will usually not call `Model#commitProgrammerError()`, `Model#undoProgrammerError()`
+or `Model#redoProgrammerError()`. Thus, the `programmerErrorStateList` remains unchanged.
 
 ![UndoRedoState4](images/commands/UndoCommand/UndoRedoState4.png)
 
-Step 6. The CS2100 TA executes `purge`, which calls `Model#commitProgrammerError()`. Since the `currentStatePointer` is not
-pointing at the end of the `programmerErrorStateList`, all address book states after the `currentStatePointer` will be
-purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern
+Step 6. The CS2100 TA executes `purge`, which calls `Model#commitProgrammerError()`. Since the `currentStatePointer` is
+not pointing at the end of the `programmerErrorStateList`, all address book states after the `currentStatePointer` will
+be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern
 desktop applications follow.
 
 ![UndoRedoState5](images/commands/UndoCommand/UndoRedoState5.png)
@@ -381,8 +390,8 @@ The following UML activity diagram summarizes what happens when a CS2100 TA exec
 
 #### Implementation
 
-The show lab results feature allows the CS2100 TA to view the lab result list of a particular student. Its implementation
-introduces the following classes:
+The show lab results feature allows the CS2100 TA to view the lab result list of a particular student. Its
+implementation introduces the following classes:
 
 * `ShowCommand`that extends `Command`
 * `ShowCommandParser` that implements `Parser<ShowCommand>`
@@ -393,10 +402,11 @@ results of student at index 1 of the current list.
 
 Given below is a possible usage scenario:
 
-[Pre-Condition] There are 2 students in ProgrammerError, and the CS2100 TA has created some lab results for each of them.
+[Pre-Condition] There are 2 students in ProgrammerError, and the CS2100 TA has created some lab results for each of
+them.
 
-Step 1. The CS2100 TA keys in the command `show 1`: The information of the student at index 1 as well as his/her lab results
-are displayed on the side panel.
+Step 1. The CS2100 TA keys in the command `show 1`: The information of the student at index 1 as well as his/her lab
+results are displayed on the side panel.
 
 The mechanism is as described below:
 
@@ -410,11 +420,11 @@ The mechanism is as described below:
 
 * `MainWindow` receives the `ShowCommandResult` and displays the information and lab results of the identified student.
 
-Step 2. The CS2100 TA keys in `show 2`: The side panel is updated with the information and lab results of the student at index
-2
+Step 2. The CS2100 TA keys in `show 2`: The side panel is updated with the information and lab results of the student at
+index 2
 
-Step 3. The CS2100 TA key in `show 3`: ProgrammerError will show an error message in the `resultDisplay`, warning the user
-that the index is invalid. This is triggered by `CommandException`, which is thrown by `ShowCommand`.
+Step 3. The CS2100 TA key in `show 3`: ProgrammerError will show an error message in the `resultDisplay`, warning the
+user that the index is invalid. This is triggered by `CommandException`, which is thrown by `ShowCommand`.
 
 The following sequence diagram shows how the show command works:
 
@@ -455,8 +465,8 @@ related to the UI. In addition, the following classes are utilised:
 - `MainWindow.fxml`: for the addition of a 'Download' button on the MainWindow
 - `Popup.css`: for the customisation of styles for pop-up messages
 
-In the `Logic` components, the `download` command works in a similar fashion to the `show` command, except that it does not require its own parser. 
-
+In the `Logic` components, the `download` command works in a similar fashion to the `show` command, except that it does
+not require its own parser.
 
 This sequence diagram shows how the `download` command works at a lever lower:
 
@@ -469,7 +479,8 @@ The following activity diagram summarizes what happens when a CS2100 TA executes
 #### Design Considerations
 
 One of the main considerations was to deal with reading and writing files only when necessary. This meant checking if
-there is any data to begin with. Only if there exists any data will the CS2100 TA be prompted to select a folder destination.
+there is any data to begin with. Only if there exists any data will the CS2100 TA be prompted to select a folder
+destination.
 
 Additionally, a pop-up message was chosen to be displayed for two reasons. First, it provides the user a clear visual
 indicator of the result of their command, as compared to the typical textual output they would see. Second, we would
@@ -480,13 +491,13 @@ success.
 ### Alternatives
 
 1. One alternative could be to not use a third-party package (`org.json`), and instead manually parse the json file and
-   write the corresponding values to a CSV file which ProgrammerError would create. We chose not to go down this route as it is much more tedious with little reward in terms of code management and code
-   quality.
+   write the corresponding values to a CSV file which ProgrammerError would create. We chose not to go down this route
+   as it is much more tedious with little reward in terms of code management and code quality.
 
-2. Another alternative with respect to the CS2100 TA experience could be to disallow the user from selecting a folder to save
-   their data to. Instead, a default location could be chosen so as to save the CS2100 TA some time in getting their data
-   downloaded quickly. However, since we wanted to make ProgrammerError more flexible and adaptable to different users, we opted to include the 
-   functionality of allowing the CS2100 TA to select a folder destination.
+2. Another alternative with respect to the CS2100 TA experience could be to disallow the user from selecting a folder to
+   save their data to. Instead, a default location could be chosen so as to save the CS2100 TA some time in getting
+   their data downloaded quickly. However, since we wanted to make ProgrammerError more flexible and adaptable to
+   different users, we opted to include the functionality of allowing the CS2100 TA to select a folder destination.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -509,7 +520,7 @@ success.
 CS2100 TAs who
 
 * have to manage a number of students across different classes
-* keep track of the students' lab results 
+* keep track of the students' lab results
 * keep track of the students' details (eg. studentId, email)
 * prefer and comfortable with CLI tools
 * can type fast
@@ -589,12 +600,12 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
   Use case ends.
 
-* 3a. The student details given are incomplete. 
+* 3a. The student details given are incomplete.
 
     * 3a.1. ProgrammerError shows an error message.
 
       Use case resumes at step 3.
-  
+
 * 3b. The student email or ID given are not unique.
 
     * 3a.1. ProgrammerError shows an error message.
@@ -670,17 +681,18 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
       Use case resumes at step 2.
 
-* 3b. The given email or student id is not unique 
+* 3b. The given email or student id is not unique
 
-    * 3b.1. ProgrammerError shows an error message. 
-  
-        Use case resumes at step 2.
+    * 3b.1. ProgrammerError shows an error message.
+
+      Use case resumes at step 2.
 
 **Use case: UC6 Download student records**
 
 **MSS**
 
-1. CS2100 TA <ins>creates (UC2) </ins> /  <ins>views (UC3) </ins> /  <ins>delete (UC4) </ins> /  <ins>update (UC5) </ins> a student record
+1. CS2100 TA <ins>creates (UC2) </ins> /  <ins>views (UC3) </ins> /  <ins>delete (UC4) </ins> /  <ins>update (
+   UC5) </ins> a student record
 2. ProgrammerError automatically save the changed student records to hard disk
 3. CS2100 TA restarts the application
 4. ProgrammerError shows the saved data
@@ -692,7 +704,7 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 **MSS**
 
 1. CS2100 TA requests to create a new lab record
-2. ProgrammerError requests for lab details 
+2. ProgrammerError requests for lab details
 3. CS2100 TA specifies the lab name and total score
 4. ProgrammerError creates a lab record for every student
 
@@ -701,8 +713,7 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 **Extensions**
 
 * 3a. The given lab name is not unique or lab score < 0
-  * 3a.1 ProgrammerError shows an error message. 
-  Use case resumes at 2
+    * 3a.1 ProgrammerError shows an error message. Use case resumes at 2
 
 Use case ends.
 
@@ -719,12 +730,11 @@ Use case ends.
 
 **Extensions**
 
-* 3a. The given lab score < 0 or actual score > total score 
-    * 3a.1 ProgrammerError shows an error message. 
+* 3a. The given lab score < 0 or actual score > total score
+    * 3a.1 ProgrammerError shows an error message.
 * Use case resumes at 2
 
 Use case ends.
-
 
 {More to be added}
 
@@ -809,7 +819,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Dashboard
 
-1. Enter dashboard as a command or press F5 to view the dashboard.  
-    
-    1. CS2100 TA will be able to view the number of students, number of classes, number of labs. 
+1. Enter dashboard as a command or press F5 to view the dashboard.
+
+    1. CS2100 TA will be able to view the number of students, number of classes, number of labs.
     2. CS2100 TA will also be able to see the number of labs left to mark. 
