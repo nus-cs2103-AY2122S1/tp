@@ -16,14 +16,14 @@ title: Developer Guide
 * Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 * Original project: [AddressBook Level-3](https://se-education.org/addressbook-level3) project created as part of the [SE-EDU](https://se-education.org) initiative
 * Application logo: Inspired by [Source Academy](https://sourceacademy.nus.edu.sg/)
-* [This](https://stackoverflow.com/questions/320542/how-to-get-the-path-of-a-running-jar-file) StackOverflow post on how to get the folder the JAR file is in.
+* Code snippet for getting jar file directory: Taken from [this post](https://stackoverflow.com/questions/320542/how-to-get-the-path-of-a-running-jar-file)
 
 
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+## **Setting Up and Getting Started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
@@ -49,7 +49,7 @@ Given below is a quick overview of main components and how they interact with ea
 **Main components of the architecture**
 
 **`Main`** has two classes called [`Main`](https://github.com/AY2122S1-CS2103T-W08-2/tp/tree/master/src/main/java/seedu/sourcecontrol/Main.java) and [`MainApp`](https://github.com/AY2122S1-CS2103T-W08-2/tp/tree/master/src/main/java/seedu/sourcecontrol/MainApp.java). It is responsible for,
-* At app launch: Initializes the components in the correct sequence, and connects them up with each other.
+* At app launch: Initialises the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
@@ -79,7 +79,7 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
-### UI Component
+### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103T-W08-2/tp/tree/master/src/main/java/seedu/sourcecontrol/ui/Ui.java)
 
@@ -96,7 +96,7 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Student` object residing in the `Model`.
 
-### Logic Component
+### Logic component
 
 **API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-W08-2/tp/tree/master/src/main/java/seedu/sourcecontrol/logic/Logic.java)
 
@@ -151,7 +151,7 @@ The `Model` component,
 
 </div>
 
-### Storage Component
+### Storage component
 
 **API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-W08-2/tp/tree/master/src/main/java/seedu/sourcecontrol/storage/Storage.java)
 
@@ -162,7 +162,7 @@ The `Storage` component,
 * inherits from both `SourceControlStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
-### Common Classes
+### Common classes
 
 Classes used by multiple components are in the `seedu.sourcecontrol.commons` package.
 
@@ -174,26 +174,7 @@ Classes used by multiple components are in the `seedu.sourcecontrol.commons` pac
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Import : `import`
-
-The following activity diagram summarizes what happens when the user inputs an import command:
-
-![ImportCommandActivityDiagram](images/ImportCommandActivityDiagram.png)
-
-There are several important details left out of the activity diagram for the sake of clarity:
-
-1. The import feature is reliant on having a correctly formatted csv file (which is to be exported from sites like lumiNUS and Source Academy, and modified to fit the format).
-The user needs to provide the number of `Groups`, `Assessments`, and `Tags` since we can't detect this automatically from the format of the file. The proper format of the file can be found in the user guide.
-
-1. A `CommandException` will be thrown if any input does not follow the formatting specified in the respective classes such as `Name`, `ID`, and `Score`.
-
-1. When reading a student's groups, the command will try to use an existing `Group` if possible, to ensure that the `Group` holds a reference to all `Students` in the group. A new `Group` will only be created in the case where the group hasn't already been created.
-
-1. When reading a student's scores, the command will add the score to the `Student`, as well as the `Assessment` created from reading the first row.
-
-1. Columns can be empty, except for the assessment name columns in the header row, and the name and ID columns of each student. Empty columns are assumed to be missing data.
-
-### Add Student : `addstudent`
+### Adding a student
 
 The add student feature adds a student with the provided name and NUSNET ID into the database. If the student comes with optionally specified groups and tags, these fields will be added accordingly.
 
@@ -210,24 +191,23 @@ It then retrieves the characters that follow each prefix and allocates them to t
 
 In the case where the compulsory prefixes `-n` and `-i` are not present, a `ParseException` is thrown, prompting the user that the wrong command format has been used.
 
-The following activity diagram summarizes what happens when the user inputs an add student command:
+The following activity diagram summarises what happens when a user executes the `addstudent` command to add a new student. In the case where the student is not added, an error message will be displayed with the reason.
 
 ![AddStudentActivityDiagram](images/AddStudentActivityDiagram.png)
 
-
-The following sequence diagram shows how the add student operation works:
+The following sequence diagram summarises what happens when the user inputs an `addstudent` command together with the name and NUSNET ID of the student to be added.
 
 ![AddStudentSequenceDiagram](images/AddStudentSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
 </div>
 
-### Add Group : `addgroup`
+### Creating a new group
 
 The `addgroup` feature allows users to create new groups, as well as specify students to be added to the group to be created.
 
-#### How the `AddGroupCommand` works:
+#### How the `addgroup` command works
+
 1. The user specifies the group name, as well as a list of names and/or IDs of the students to be added into the group.
 2. For each of the names and IDs, an `AllocDescriptor` is created.
 3. For each of the `AllocDescriptors`, a search is done against the current `StudentList` to find students that match the descriptors.
@@ -237,17 +217,17 @@ The `addgroup` feature allows users to create new groups, as well as specify stu
 <div markdown="span" class="alert alert-info">:information_source: **Note:** In the case where there are more than one students matched because they share the same name, an error message will be displayed to the user. The user will then have to specify the student to be added using his/her NUSNET ID.
 </div>
 
-The following activity diagrams summarizes what happens when a user executes a command to add a new group. In the case where the group is not added, an error message will be displayed with the reason.
+The following activity diagrams summarises what happens when a user executes the `addgroup` command to add a new group. In the case where the group is not added, an error message will be displayed with the reason.
 
 ![AddGroupActivityDiagram](images/AddGroupActivityDiagram.png)
 ![AddStudentToGroupActivityDiagram](images/AddStudentsToGroupActivityDiagram.png)
 
-The following sequence diagram summarizes what happens when the user inputs an add group command together with a student to be added:
+The following sequence diagram summarises what happens when the user inputs an `addgroup` command together with a student to be added.
 
 ![AddGroupSequenceDiagram](images/AddGroupSequenceDiagram.png)
 ![AddGroupToModelSequenceDiagram](images/AddGroupToModelSequenceDiagram.png)
 
-### Add Allocation : `addalloc`
+### Adding a student into a group
 
 The `addalloc` feature allows users to allocate a student into a group.
 
@@ -263,15 +243,16 @@ The `addalloc` feature allows users to allocate a student into a group.
 <div markdown="span" class="alert alert-info">:information_source: **Note:** In the case where there are more than one students matched because they share the same name, an error message will be displayed to the user. The user will then have to specify the student to be added using his/her NUSNET ID.
 </div>
 
-The following activity diagram summarises what happens when a user executes the `addalloc` command to allocate a student into a group. In the case where the allocation is not made successfully, an error message will be displayed with the reason.
+The following activity diagram summarises what happens when a user executes the `addalloc` command to allocate a student into a group. In the case where the student is not added into the group, an error message will be displayed with the reason.
 
 ![AddAllocActivityDiagram](images/AddAllocActivityDiagram.png)
 
 The following sequence diagram summarises what happens when the user inputs an `addalloc` command together with a group and a student, specified by name, to be allocated.
 
-![AddGroupSequenceDiagram](images/AddAllocSequenceDiagram.png)
+![AddAllocSequenceDiagram](images/AddAllocSequenceDiagram.png)
+![AddAllocToModelSequenceDiagram](images/AddAllocToModelSequenceDiagram.png)
 
-### Add Score : `addscore`
+### Adding a score
 
 The `addscore` feature allows users to add score for an assessment of a student.
 
@@ -287,21 +268,22 @@ The `addscore` feature allows users to add score for an assessment of a student.
 <div markdown="span" class="alert alert-info">:information_source: **Note:** In the case where there are more than one students matched because they share the same name, an error message will be displayed to the user. The user will then have to specify the student to be added using his/her NUSNET ID.
 </div>
 
-The following activity diagram summarises what happens when a user executes the `addscore` command to add score for an assessment of a student. In the case where the update is not made successfully, an error message will be displayed with the reason.
+The following activity diagram summarises what happens when a user executes the `addscore` command to add score for an assessment of a student. In the case where the score is not added/updated, an error message will be displayed with the reason.
 
 ![AddScoreActivityDiagram](images/AddScoreActivityDiagram.png)
 
 The following sequence diagram summarises what happens when the user inputs an `addscore` command together with an assessment, a student, specified by name, and a score to be added.
 
-![AddGroupSequenceDiagram](images/AddScoreSequenceDiagram.png)
+![AddScoreSequenceDiagram](images/AddScoreSequenceDiagram.png)
+![AddScoreToModelSequenceDiagram](images/AddScoreToModelSequenceDiagram.png)
 
-### Search : `search`
+### Searching for students
 
 The `search` feature allows user to filter student list by name, NUSNET ID, groups, or tags.
 
 #### How the `search` command works
 
-The following diagram shows the search operation after user input `search -n Alex Yu`.
+The following sequence diagram summarises what happens when the user inputs an `search` command together with a name to be searched for.
 
 ![SearchSequenceDiagram](images/SearchSequenceDiagram.png)
 
@@ -322,17 +304,17 @@ each with different implementation of the `test(Student student)` function.
 * `TagContainsKeywordsPredicate`: checks if the tag of student contains any word in the given keywords.
   Partial search is supported. e.g. `beginner` will match `beginners`.
 
-The following diagram summarizes what happens after user input search command:
+The following activity diagrams summarises what happens when a user executes the `search` command to search for students with different filters.
 
 ![SearchActivityDiagram](images/SearchActivityDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** SearchCommandParser checks
-if command is valid. Command is invalid if user input is empty, or if user entered more or less than one flag.
+if the command input is valid. The command is invalid if the user input is empty, or if the user entered more or less than one flag.
 </div>
 
 #### Design considerations
 
-**Aspect: How search executes:**
+**Aspect: How search executes**
 
 * **Alternative 1:** Multiple search commands to search using different identifiers.
     * Pros: Easy to implement.
@@ -342,8 +324,30 @@ if command is valid. Command is invalid if user input is empty, or if user enter
     * Pros: More straightforward and convenient for users.
     * Cons: We need to identify the type of input given.
 
+### Importing data
 
-### Show : `show`
+The `import` feature allows users to load data as specified in the provided CSV file.
+
+#### How the `import` command works
+
+The following activity diagram summarises what happens when a user executes the `import` command to import a CSV data file. In the case where the file is not imported, an error message will be displayed with the reason.
+
+![ImportCommandActivityDiagram](images/ImportActivityDiagram.png)
+
+There are several important details left out of the activity diagram for the sake of clarity:
+
+1. The import feature is reliant on having a correctly formatted csv file (which is to be exported from sites like LumiNUS and Source Academy, and modified to fit the format).
+   The user needs to provide the number of `Groups`, `Assessments`, and `Tags` since we can't detect this automatically from the format of the file. The proper format of the file can be found in the user guide.
+
+1. A `CommandException` will be thrown if any input does not follow the formatting specified in the respective classes such as `Name`, `ID`, and `Score`.
+
+1. When reading a student's groups, the command will try to use an existing `Group` if possible, to ensure that the `Group` holds a reference to all `Students` in the group. A new `Group` will only be created in the case where the group hasn't already been created.
+
+1. When reading a student's scores, the command will add the score to the `Student`, as well as the `Assessment` created from reading the first row.
+
+1. Columns can be empty, except for the assessment name columns in the header row, and the name and ID columns of each student. Empty columns are assumed to be missing data.
+
+### Showing assessment result analysis
 
 The `show` feature allows users to show the performance analysis of a student, a group or the cohort in an assessment.
 
@@ -368,16 +372,16 @@ The following activity diagrams summarise what happens when a user executes the 
 The following sequence diagram summarises what happens when the user inputs an `show` command together with a student specified by name.
 
 ![ShowSequenceDiagram](images/ShowSequenceDiagram.png)
+![ShowStatsFromModelSequenceDiagram](images/ShowStatsFromModelSequenceDiagram.png)
 
-<br>
-
-
-### Alias feature
+### Setting customised aliases for commands
 
 The `alias` feature allows users to define their own aliases for commands. This is useful to shorten the input for commands that the user uses often. 
 
 An alias is basically just a mapping of a user-provided string to a command word. It works by directly replacing the first word in the user's input command with the alias word, then parsing again.
 An alias contains two strings: An `aliasWord` which is the new user-defined word, and a `commandWord` which is the command word of an existing default command (e.g. `addstudent`, `clear`, `exit`).
+
+#### How the `alias` command works
 
 Parsing of an alias command follows the following steps:
 1. The alias word is checked to ensure that it is one word long.
@@ -392,7 +396,7 @@ Parsing of an alias command follows the following steps:
 If the command word of any future user input matches the alias, the first word of the user input will be replaced by the command word of the alias.
 The activity diagram of how a command is parsed can be found in the [Logic section of this guide](#logic-component).
 
-#### Design Considerations
+#### Design considerations
 
 **Aspect 1: How aliases are stored and parsed**
 
@@ -410,7 +414,6 @@ There were two ideas on how this could be done:
         * Have to be careful with the implementation to prevent any edge cases where the user can define aliases to create an infinite loop.
     
 We decided to go with the easier implementation of storing each alias as two strings. However, there were still more aspects to be considered.
-
 
 **Aspect 2: How to handle aliases of aliases**
 
@@ -439,7 +442,6 @@ That is, what happens when the user does `alias -c <existing_alias> -as <new_ali
     
 We decided to go with implementation 2 due to its ability to naturally handle infinite loops and better performance. Our target audience is also Computer Science professors, who should be very familiar with this style of referencing, since that is exactly how names refer to primitive values in programming.
 
-
 **Aspect 3: Removing aliases**
 
 We believe that there needs to be a way to remove aliases. Otherwise, there will eventually be a very large amount of aliases, and some typo might lead to executing a command you didn't intend to execute. Hopefully, that command isn't `clear`.
@@ -463,16 +465,17 @@ We ended up going with the second approach since the alias functionality was a v
 
 Furthermore, removing aliases is likely a very rare use case, and dedicating a whole command to it does feel like a bit of a waste.
 
+<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, Testing, Logging, Configuration, Dev-Ops**
 
-* [Documentation Guide](Documentation.md)
-* [Testing Guide](Testing.md)
-* [Logging Guide](Logging.md)
-* [Configuration Guide](Configuration.md)
-* [DevOps Guide](DevOps.md)
+* [Documentation guide](Documentation.md)
+* [Testing guide](Testing.md)
+* [Logging guide](Logging.md)
+* [Configuration guide](Configuration.md)
+* [DevOps guide](DevOps.md)
 
 <br>
 
@@ -482,7 +485,7 @@ Furthermore, removing aliases is likely a very rare use case, and dedicating a w
 
 ### Product scope
 
-**Target user profile**:
+**Target user profile:**
 
 Targets professors of CS1101S who:
 * has a need to manage a significant number of students
@@ -492,7 +495,7 @@ Targets professors of CS1101S who:
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: This app will help CS1101S professors keep track of students' performance after each assessment,
+**Value proposition:** This app will help CS1101S professors keep track of students' performance after each assessment,
 doing so faster than a typical mouse/GUI driven app.
 It can analyse results of individual students, tutorial groups, or the whole cohort in each assessment,
 in order to identify students who may require additional help.
@@ -575,7 +578,7 @@ Others:
 
 **Extensions**
 
-* 2a. The csv file has badly formatted input.
+* 2a. User enters an incorrectly formatted csv file.
 
     * 2a1. Source Control shows an error message displaying the bad input.
 
@@ -587,25 +590,105 @@ Others:
 
 **MSS**
 
-1.  User requests to create a new group and enters the group name and students' names or NUSNET IDs.
+1.  User requests to create a new group and enters the group name and optionally the students' names or NUSNET IDs.
 2.  Source Control creates the group with the specified students.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. There is an existing group with the same group name.
+* 1a. User enters a group name which coincides with that of an existing group.
 
     * 1a1. Source Control shows an error message.
 
       Use case resumes at step 1.
-* 1b. There are multiple students that match any of the specified student names.
+    
+    
+* 1b. User specifies student names which match with multiple students in the Source Control database.
 
-    * 1b1. Source Control shows an error message with the different NUSNET IDs.
+    * 1b1. Source Control shows the list of students with matching names, and prompts the user to resolve the conflict by specifying the student ID instead.
+      
+      Use case resumes at step 1.
+
+
+**Use case: Showing a student's performance**
+
+**MSS**
+
+1.  User requests to view the performance of a specified student by providing the index of the student in the list, or the student's name or student ID.
+2.  Source Control displays a line chart showing the specified student's performance against the cohort performance for each assessment.
+    Use case ends.
+
+**Extensions**
+
+* 1a. User enters a student name or ID that does not match with any student stored in Source Control.
+
+    * 1a1. Source Control shows an error message.
+
+      Use case resumes at step 1.
+    
+
+* 1b. User enters an invalid index.
+
+    * 1b1. Source Control shows an error message.
+
+      Use case resumes at step 1.
+    
+**Use case: Showing a group's performance**
+
+**MSS**
+
+1. User requests to view the performance of a specified group by providing the group name.
+2. Source Control displays a line chart showing the specified student's performance against the cohort performance for each assessment.
+   Use case ends.
+   
+**Extensions**
+
+* 1a. User enters a group name that does not match any existing group in Source Control.
+
+    * 1a1. Source Control shows an error message.
 
       Use case resumes at step 1.
 
-### Non-Functional Requirements
+**Use case: Showing cohort performance for an assessment**
+
+**MSS**
+
+1. User requests to view the cohort performance for a specified assessment.
+2. Source Control displays a histogram showing the specified student's performance against the cohort performance for each assessment.
+   Use case ends.
+
+**Extensions**
+
+* 1a. User enters an assessment that does not match any existing assessment in Source Control.
+
+    * 1a1. Source Control shows an error message.
+
+      Use case resumes at step 1.
+
+**Use case: Creating an alias for an existing command**
+
+**MSS**
+
+1. User requests to create an alias for a specified existing command.
+2. Source Control accepts the user-created alias. 
+
+**Extensions**
+
+* 1a. User enters a command that does not exist to create an alias for.
+
+    * 1a1. Source Control shows an error message.
+
+      Use case resumes at step 1.
+
+
+* 1b. User tries to create an alias using a pre-existing default command.
+
+    * 1b1. Source Control shows an error message.
+
+      Use case resumes at step 1.
+
+### Non-functional requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2. Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
@@ -616,19 +699,19 @@ Others:
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X.
-* **Student**: A student in the database, identified by their name and NUSNET ID. Each student can be in multiple groups, and can have scores for multiple assessments.
-* **Group**: A group of students, identified by the group name.
-* **Assessment**: An assessment is identified by the assessment name.
-* **Score**: The score that a student has attained for an assessment, stored in percentage and can be recorded up to 2 decimal places. Each student can only have 1 score per assessment.
-* **Student list**: The list of students displayed on the right panel of Source Control. Student list can be filtered to display selected students only.
-* **Flag**: Arguments flags are used to indicate different types of user inputs e.g. `-n` for student name, and `-g` for group. More about flags can be found [here](https://ay2122s1-cs2103t-w08-2.github.io/tp/UserGuide.html#glossary).
+* **Mainstream OS:** Windows, Linux, Unix, OS-X.
+* **Student:** A student in the database, identified by their name and NUSNET ID. Each student can be in multiple groups, and can have scores for multiple assessments.
+* **Group:** A group of students, identified by the group name.
+* **Assessment:** An assessment is identified by the assessment name.
+* **Score:** The score that a student has attained for an assessment, stored in percentage and can be recorded up to 2 decimal places. Each student can only have 1 score per assessment.
+* **Student list:** The list of students displayed on the right panel of Source Control. Student list can be filtered to display selected students only.
+* **Flag:** Arguments flags are used to indicate different types of user inputs e.g. `-n` for student name, and `-g` for group. More about flags can be found [here](https://ay2122s1-cs2103t-w08-2.github.io/tp/UserGuide.html#glossary).
 
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **Appendix: Instructions for Manual Testing**
 
 Given below are instructions to test the app manually.
 
@@ -637,7 +720,7 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-### Launch and Shutdown
+### Launch and shutdown
 
 1. Initial launch
 
@@ -654,8 +737,7 @@ testers are expected to do more *exploratory* testing.
 
 3. Shutdown
 
-   1. Test case: `exit`<br>Expected: Source Control exits and shut down automatically. 
-
+   1. Test case: `exit`<br>Expected: Source Control exits and shut down automatically.
 
 ### Adding a group
 
@@ -693,7 +775,6 @@ testers are expected to do more *exploratory* testing.
    
    2. Test case: `addgroup -g T01A -n Hong Fai`<br> Expected: The group will not be created. Error detail shown in the status message to inform user that the student `Hong Fai` cannot be found in the database.
 
-
 ### Deleting a Student
 
 1. Deleting a student while a list of all students are being shown.
@@ -719,6 +800,7 @@ testers are expected to do more *exploratory* testing.
        Expected: Similar to previous.
 
 ### Adding an alias
+
 1. Adding an alias successfully.
 
    1. Test case: `alias -c addstudent -as example`<br> Expected: A new alias `example` is added for `addstudent`. <br>`example -n Zhiying -i E1234567` will add student `Zhiying` to the database.
@@ -744,10 +826,70 @@ testers are expected to do more *exploratory* testing.
    
    2. Test case: `alias -c addstudent -as add student `<br> Expected: No alias will be created. Error detail shown in the status message to inform user that alias can only be one alphanumeric word.
 
-### Saving Data
+### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing data file
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Prerequisites: `./data/sourceControl.json` (or the file path specified in `preferences.json`) has been deleted.
+    
+    1. Test case: Run the application. <br> Expected: Application is populated with sample data. `./data/sourceControl.json` will be created after exiting the application.
 
-1. _{ more test cases …​ }_
+1. Dealing with corrupted data file
+
+    1. Prerequisites: Deleted the data file at `./data/sourceControl.json`, then launched the jar file to populate the data file with sample data.
+    
+    1. Test case: Add an `*` to the `name` of the first person in the data file and launch the jar file. <br> Expected: No data will be loaded into the application. The data file will lose all its data when the app exits.
+    
+    1. Test case: Add the group `new group` into the `groups` array of the first person and launch the jar file.  <br> Expected: The new group is not added to the first person. The data file will no longer contain the new group when the app exits.
+    
+    1. Test case: Add the assessment `new assessment` into the `assessments` array of the first person and launch the jar file. <br> Expected: The new assessment is not added to the first person. The data file will no longer contain the new assessment when the app exits.
+    
+    1. Test case: Add an extra `{` as the first character of the data file. <br> Expected: No data will be loaded into the application. The data file will lose all its data when the app exits.
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Effort**
+
+In general, we believe that we have put in a lot of effort for this project. We managed to implement the target features we originally set out to do, plus a few extra nice-to-have features.
+
+We also managed to keep the code coverage reasonably high at 76%, and there was only a small set of unique bugs found in the PE-D.
+
+### Challenges faced
+
+The following features were relatively hard to implement:
+1. JavaFX Charts are a part of the JavaFX library which we had to learn how to use from scratch. However, it was an essential part of our goals for the application.
+    * It was not easy to customise the chart styles (such as the colour scheme) to fit with the overall design of the application.
+    * Many things about the format of the charts were difficult to customise, such as the direction and layout of axis labels.
+
+1. Aliases were deceptively hard to implement, and took more time than expected.
+    * Even though Jonas implemented an alias feature for his iP, the implementation had to be completely different since the parser was using a completely different design.
+    * Many aspects had to be considered and carefully weighed. You can read more about it in the [alias section of this guide](#alias-feature).
+    
+1. Adapting the AB3 code to fit into the context of Source Control.
+    * While adding and removing classes wasn't too bad, adapting the tests was on a whole new level.
+    * There were a lot of tests that we didn't want to delete, and instead chose to adapt them as well. 
+      This proved to be highly time-consuming, since you had to read through the test code and completely understand what it was doing in order to properly adapt it.
+    * Our application has three different classes (`Student`, `Assessment`, `Group`) that are highly coupled to each other. AB3 did not have such problems as it only contained one `Person` class. 
+      It was difficult to ensure that our objects are sharing information with each other properly, while trying to keep the level of coupling as low as possible. This coupling also proved to be the source of several hard-to-find bugs. 
+
+
+### Features scrapped
+
+The following features were scrapped due to the high difficulty or error-prone nature of their implementations.
+1. Allowing the user to specify their file path to export data or graphs
+    * From the feedback received from the PE-D, we realised how easy it was to exploit the ability to specify your file path through user input.
+    * One problem was how different OSes handled file paths. Some paths were valid only on some OSes, and checking the user input was non-trivial.
+    * Java's `Path` and `File` felt insufficient to properly check all possible user inputs for validity. Through testing, it seemed like some invalid file names were still leaking through any checks we had implemented.
+    * These problems were discovered too late to settle with a good, bug-free solution. As such, we decided to drop the ability for users to specify files to write to.
+    * While one solution was to use the `FileChooser` class from JavaFX, that would violate the requirements of the application being CLI-based. 
+    
+2. Commands longer than one word in length
+    * Initially, `addstudent` was `add student` (the same goes for other similar commands in the `add` family). This required some minor tweaking of the parser which was relatively straightforward.
+    * However, when it came to implementing aliases, we realised that it was difficult to ensure that the aliases don't overlap with the multiworded commands without drastically changing the parser.
+    * Thankfully, the simple solution was to just enforce everything to be one word long.
+
+3. Allowing non-alphanumeric characters in student names
+    * As Source Control stores the official names of students, we had to consider that these names could contain non-alphanumeric characters, such as "Mary-Ann Tan". This is in contrast with AB3, where names of contacts do not need to be official names and these non-alphanumeric characters can be left out.
+    * However, allowing non-alphanumeric characters in student names would lead to problems such as not being able to identify invalid names like "@@@". It also leads to complications with parsing, for example when "-g" is meant to be part of the student name but would be parsed as an argument.
+    * As such, given the time constraint, we decided to maintain the original functionality of AB3, and only allow alphanumeric characters.
