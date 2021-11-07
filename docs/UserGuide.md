@@ -134,7 +134,7 @@ The user's progress is displayed in the form of:
 
 ![requirements MCs Display](images/CourseRequirementsDisplay.png)
 * Shows the total number of MCs taken for that requirement, over the number of MCs needed to satisfy the requirement.
-* The total number of MCs taken is calculated from modules taken before the current semester, which have been tagged with the specific tags.
+* The total number of MCs taken for a requirement is calculated from modules taken before the current semester, which have been tagged with the specific tags.
     * For example: MCs for modules taken which are tagged with "ge" (`tag/ge`) will be counted into the total number of MCs taken for the GE requirement.
 * Modules with the following tags will be used in calculating the MCs completed for the corresponding requirement:
 
@@ -230,7 +230,7 @@ Tip: Do take a good look at this section to understand the common terminologies 
 #### `academic plan`
 * Refers to modules that you have assigned with a specific semester and year.
 * Contributes to the calculation of the MC requirements.<br>
-  ![requirements MCs Display](images/CourseRequirementsDisplay.png)
+  ![requirements MCs Display](images/McProgressDisplayFilled.png)
 
 #### `INDEX`
 * The `INDEX` refers to the index number of a module shown in the [database](#database).
@@ -241,12 +241,13 @@ Tip: Do take a good look at this section to understand the common terminologies 
 #### `CODE`
 * Represents the `module`'s code component.
 * `CODE` must follow the NUSMods module code format.
-* `CODE` should start with 2-3 capital letters, followed by 4 numerical digits, and end with an optional capital letter.
-* Valid Examples: CJ1101K, CH1001, NMB1234
-* Invalid Examples: CA300M, GEY10005, G1234M
+  * `CODE` should start with 2-3 capital letters, followed by 4 numerical digits, and end with 1-2 optional capital letters.
+  * Valid Examples: CJ1101K, CH1001, NMB1234, UIS3911EL
+  * Invalid Examples: CA300M, GEY10005, G1234M, GA1000MLC
 
 #### `TITLE`
 * Represents the `module`'s title component.
+* Titles should not be more than 60 characters.
 
 #### `DESCRIPTION`
 * Represents the `module`'s description component.

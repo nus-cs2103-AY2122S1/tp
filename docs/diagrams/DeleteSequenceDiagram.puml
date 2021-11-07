@@ -11,9 +11,6 @@ end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
-participant "l:List<Module>" as lastShownList MODEL_COLOR
-participant ":Module" as Module MODEL_COLOR
-participant ":ModuleTracker" as ModuleTracker MODEL_COLOR
 end box
 
 [-> LogicManager : execute("delete 1")
@@ -54,40 +51,17 @@ activate DeleteCommand
 DeleteCommand -> Model : getFilteredModuleList()
 activate Model
 
-create lastShownList
-Model -> lastShownList
-activate lastShownList
-
-lastShownList --> Model : l
-deactivate lastShownList
-
-Model --> DeleteCommand : l
+Model --> DeleteCommand : filteredList
 deactivate Model
 
-DeleteCommand -> lastShownList : get(index)
-activate lastShownList
+DeleteCommand -> Model : get(1)
+activate Model
 
-lastShownList -> Module
-activate Module
-
-Module --> lastShownList : m
-deactivate Module
-
-lastShownList --> DeleteCommand : m
-deactivate lastShownList
-
-lastShownList -[hidden]-> DeleteCommand
-destroy lastShownList
+Model --> DeleteCommand : m
+deactivate Model
 
 DeleteCommand -> Model : deleteModule(m)
 activate Model
-
-Model -> ModuleTracker : removeModule(m)
-activate ModuleTracker
-
-ModuleTracker -> ModuleTracker : internally deleting Module
-ModuleTracker --> Model
-deactivate ModuleTracker
 
 Model --> DeleteCommand
 deactivate Model
@@ -101,8 +75,6 @@ deactivate CommandResult
 
 DeleteCommand --> LogicManager : commandResult
 deactivate DeleteCommand
-DeleteCommand -[hidden]-> DeleteCommandParser
-destroy DeleteCommand
 
 [<--LogicManager
 deactivate LogicManager

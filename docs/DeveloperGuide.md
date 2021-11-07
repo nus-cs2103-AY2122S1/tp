@@ -161,7 +161,7 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Edit Module feature
 
-####Implementation
+#### Implementation
 
 The `edit` command is implemented via the `EditCommand`, `EditCommandParser` and `EditModuleDescriptor` classes.
 
@@ -209,15 +209,13 @@ When the `TakeCommand#execute()` method is called,
 - A copy of the `Module` object containing the value of `academicCalendar` is created. The value of `academicCalendar` is stored in a corresponding field in this copy.
 - The `Module` object in the `Model` is then replaced by this copy.
 
-<div markdown="span" class="alert alert-info">
-:information_source: **Note:**
-
+Note: 
 - When a new `Module` object is added to the module tracker, its `academicCalendar` field is unassigned by default.
 - Removing a schedule from a module is not supported in the `take` command, this functionality is instead moved to a separate `untake` command.
 - If the module is already scheduled, its current `academicCalendar` field will be overridden by a new `AcademicCalendar` object.
-</div>
 
-Below is a sequence diagram, and an explanation of how `TakeCommand` is executed.
+
+Below is a sequence diagram, and an example to explain how `TakeCommand` is executed.
 
 ![Interactions Inside the Logic Component for the `take 2 y/1 s/2` Command](images/TakeSequenceDiagram.png)
 
@@ -459,11 +457,11 @@ Below is a sequence diagram and explanation of how the `DeleteCommand` is execut
 
 **Step 3.** The `DeleteCommand` is then executed by calling its `execute` method.
 
-**Step 4.** Since the `Model` is passed to `DeleteCommand#execute`, it is able to call a method `Model#getFilteredModuleList` to get the last module list shown.
+**Step 4.** Since the `Model` is passed to `DeleteCommand#execute`, it is able to call a method `Model#getFilteredModuleList` to get the filtered list.
 
 **Step 5.** From this module list, we can find the correct `Module` to be deleted by calling `get` function with the specified `index`.
 
-**Step 6.** The `Module` will be removed from the `ModulTracker` by calling the `deleteModule` method in `Model` and the `removeModule` method in `ModuleTracker` one after another.
+**Step 6.** The `Module` will be removed by calling the `deleteModule` method in `Model`.
 
 
 ### \[Proposed\] Undo/redo feature
@@ -929,49 +927,145 @@ testers are expected to do more *exploratory* testing.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
+      
+### Adding a module to the database
 
+1. Test case: `add c/ST2131 t/Probability d/The objective of this module is to give an elementary introduction to probability theory m/4 tag/UE`
+   Expected: A new module is added to the bottom of the list. Details of the added module are shown in the status message.
+
+2. Test case: `add c/ t/software engineering d/introduces software engineering m/4`
+   Expected: No module is added. Error details are shown in the status message.
+
+3. Other incorrect add commands to try: `add `,`add c/ST21312132 t/abcd d/efgh m/4`, `...`
+   Expected: Similar to previous.
+   
 ### Deleting a module
 
 1. Deleting a module while all modules are being shown
 
    1. Prerequisites: List all modules using the `list` command. Multiple modules in the list.
 
-   1. Test case: `delete 1`<br>
+   2. Test case: `delete 1`<br>
       Expected: First module is deleted from the list. Details of the deleted module are shown in the status message.
 
-   1. Test case: `delete 0`<br>
+   3. Test case: `delete 0`<br>
       Expected: No module is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
-      
-### Adding a module
 
-1. Test case: `add c/ST2131 t/Probability d/The objective of this module is to give an elementary introduction to probability theory m/4 tag/UE`
-Expected: A new module is added to the bottom of the list. Details of the added module are shown in the status message.
+### Editing a module
+
+1. Editing a module while all modules are being shown
+    1. Test case: `edit 1 c/MA1100`<br>
+       Expected: The first module's code is changed to `MA1100`. Details of the edited module are shown in the status message.
+
+    2. Test case: `edit 1`<br>
+       Expected: No module is edited. Error details shown in the status message. Status bar remains the same.
+
+    3. Other incorrect delete commands to try: `edit`, `edit -1 c/MA1100`, `edit x c/MA1100`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+       
+### Listing all modules
+
+1. Listing all modules in NUS Mod Tracker.
+
+    1. Test case: `list`<br>
+       Expected: All modules are shown.
+
+    2. Test case: `list 1111`<br>
+       Expected: Similar to the previous.
+
+### Finding modules
+
+1. Finding all modules with the specified keywords.
+
+    1. Test case: `find CS2103T`<br>
+       Expected: The modules that have `CS2103T` string in module code, module title, description, and tags are found.
+
+### Adding a module to the academic plan
+
+1. Test case: `take 1 y/2 s/1`<br>
+       Expected: A yellow label with the string "year2 sem1" is added to the first module.
+
+2. Test case: `take 1`<br>
+        Expected: The module is not taken. Error details shown in the status message.
+
+### Removing a module from the academic plan
+
+1. Prerequisites: The specified module has been taken.
+       
+2. Test case: `untake 1`<br>
+       Expected: The first module is removed from the academic plan. The color of this module is changed to grey.
+
+### Changing settings of MC goal and current semester 
+
+1. Resetting MC goal.
+
+    1. Test case: `set m/200`<br>
+       Expected: The MC goal is set to 200. It is reflected in the footer.
+       
+2. Resetting current semester.
+
+    1. Test case: `set y/2 s/1`<br>
+        Expected: The current semester is set to year 2, semester 1. The new current semester information is reflected in the footer.
+
+### Viewing modules scheduled in a specific semester
+    
+1. Test case: `view y/2 s/1`<br>
+       Expected: Modules scheduled in year 2, semester 1 are shown.
+
+2. Test case: `view y/10 s/2`<br>
+        Expected: Error message is shown.
+
+### Unscheduling all modules in a specific semester
+
+1. Prerequisite: Some modules are scheduled in the specified semester
    
-2. Test case: `add c/ t/software engineering d/introduces software engineering m/4`
-Expected: No module is added. Error details are shown in the status message.
-   
-3. Other incorrect add commands to try: `add `,`add c/ST21312132 t/abcd d/efgh m/4`, `...`
-Expected: Similar to previous.
+2. Test case: `clear y/2 s/1`<br>
+   Expected: All modules taken in year 2, semester 1 are unscheduled and the color of the module is changed to grey.
+
+### Viewing help
+
+1. Test case: `help`<br>
+   Expected: A help window with a link to the user guide and command formats are shown.
+
+### Exit
+
+1. Test case: `exit`<br>
+   Expected: The application is terminated.
+
 
 
 ## **Appendix C: Effort**
 
-If the effort required to create AB3 is 100, we would place the effort required to implement the current version of NUS Mod Tracker at 120. We currently has over 10,000 lines of code contributed and over 300 automated tests. Below, we list some changes that need a significant amount of effort to implement.
+If the effort required to create AB3 is 100, we would place the effort required to implement the current version of NUS Mod Tracker at 120. Our team has contributed over 10,000 lines of code contributed and over 300 automated tests. Below are some changes in particular, that required a larger amount of effort to implement.
 
 1. Modifying all AB3 components
 
-   We need to modify the entire AB3 in order to support operations on modules.
-   In `Model` component, we need to delete all models in the `person` folder and create a new folder that contains the model for module and all other attributes related to module(`Code`, `Title`, `Description`, `Mc`, ). All other classes in `model` folder need to be modified accordingly. 
-   In `Logic` component, we need to modify all command parsers in order to parser modules. All commands also need to be modified to support the operation on modules.
-   In `storage` component, we also need to modify all classes in order to store modules.
-   The `UI` component also need to be modified. 
-   All test cases need to be changed accordingly.
+   We needed to modify the entire AB3 in order to support operations on modules.
+
+   In the `Model` component, we needed to update all models in the `person` folder with a new folder that contains the model for module, as well as all other attributes related to a module (`Code`, `Title`, `Description`, `Mc`, ).
    
-2. Mc progress list
-    
-3. User Information
+   All other classes in `model` folder had to be modified accordingly.
+
+   In the `Logic` component, we need to modify all command parsers in order to parse modules. All commands also needed to be modified to support the operations on modules.
    
+   In the `Storage` component, we also needed to modify all classes in order to store modules.
+
+   The `UI` component also needed to be modified to display all the attributes of a module clearly, 
+   and the test cases changed accordingly.
    
+
+2. Mc progress panel
+
+    In order to allow the user to easily track their course progress, our team had to add a component that allows the user to view the number of MCs completed in total, as well as for each course requirement.
+
+    This involved creating a brand-new UI component from scratch that would display this information to the user.
+
+    Firstly, we altered the application's UI to accommodate the new Mc progress panel.
+
+    As many commands can cause the user's MC progress to change (i.e. setting MC goal, setting the current semester, taking new modules), we had to create a new model 
+for a `McProgress`, as well as a `McProgressList`. These components are then updated accordingly after execution of a command.
+
+    We then link the `McProgressList` to the UI component so that any changes to the `McProgress` will be detected by the UI, and will allow the UI to update accordingly. 

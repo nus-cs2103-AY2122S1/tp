@@ -1,8 +1,12 @@
-# Zhijie's Project Portfolio Page
+---
+layout: page
+title: Luo Zhijie's Project Portfolio Page
+---
 
 ### Project: NUS Mod Tracker
 
-NUS Mod Tracker is a desktop app designed for NUS Computer Science (CS) students who are enrolled in the Academic Year 2021/2022 and onward to create their own academic plan, as well as to keep track of their Modular Credits(MC) and modules taken. It is optimized for use via a Command Line Interface (CLI), while still having the benefits of a Graphical User Interface (GUI).
+NUS Mod Tracker is a desktop application designed for NUS Computer Science (CS) students who are enrolled in the Academic Year 2021/2022 and onward to create their own academic plan,
+as well as to keep track of their Modular Credits(MC) and modules taken. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
 
 Given below are my contributions to the project.
 
@@ -41,6 +45,7 @@ Given below are my contributions to the project.
       * Added the implementation details and UML sequence diagram for `view` and `set` features.
       * Added the use cases for set MC goal, set current semester and view modules in a specific semester.
       * Updated NFR, Glossary and instructions for manual testing.
+      * Added instructions for manual testing.
   
 * **Community**:
   * Reported bugs and suggestions for other teams in the class (examples [1](https://catcher-org.github.io/CATcher/phaseBugReporting/issues/3), [2](https://github.com/LuoZhijie-tom/ped/issues/2), [3](https://github.com/LuoZhijie-tom/ped/issues/8))

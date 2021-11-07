@@ -30,7 +30,7 @@ public class HelpWindow extends UiPart<Stage> {
             + "find [c/] [t/] [d/] [m/] [tag/] [y/] [s/] KEYWORDS";
     public static final String HELP_COMMAND = "Viewing help:\n     help";
     public static final String USERGUIDE_URL =
-            "https://github.com/AY2122S1-CS2103T-W17-2/tp/blob/master/docs/UserGuide.md";
+            "https://ay2122s1-cs2103t-w17-2.github.io/tp/UserGuide";
     public static final String HELP_MESSAGE = "Refer to the user guide for more information: " + USERGUIDE_URL;
     public static final String LIST_COMMAND = "Listing all modules in the module bank:\n     list";
     public static final String SET_COMMAND = "Setting user's MC goal or current semester:\n     "
