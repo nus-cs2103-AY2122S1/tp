@@ -2,14 +2,11 @@
 !include style.puml
 
 start
-while () is ([has remaining student(s) to add])
-	if() then ([student does not\n    already exist])
-	  :Add student\nto database;
-	else ([student already exists])
-	  :Display an\nerror message;
-	  stop
-	endif
-endwhile ([else])
+if() then ([student does not\n    already exist])
+  :Add student\nto database;
+else ([student already exists])
+  :Display an\nerror message;
+endif
 stop
 
 @enduml
