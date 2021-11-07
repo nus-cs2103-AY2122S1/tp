@@ -176,15 +176,15 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Adding a student
 
-The `addstudent` feature adds a student with the provided name and ID into the database. If the student comes with optionally specified groups and tags, these fields will be added accordingly.
+The `addstudent` feature adds a student with the provided name and NUSNET ID into the database. If the student comes with optionally specified groups and tags, these fields will be added accordingly.
 ### How the `addstudent` feature works
-1. The user specifies the student name, ID, and if applicable, the groups and tags the student has too.
-2. If the name or ID is not provided, the user will be prompted to enter them via an error message.
+1. The user specifies the student name, NUSNET ID, and if applicable, the groups and tags the student has too.
+2. If the name or NUSNET ID is not provided, the user will be prompted to enter them via an error message.
 3. The ID is cross-referenced with the current students in the database, and an error is thrown if the student to add has the same ID as a pre-existing student.
-4. If the student to add has a unique ID, the groups, if provided, will be parsed individually.
+4. If the student to add has a unique NUSNET ID, the groups, if provided, will be parsed individually.
     * If the provided group exists, the student will be added into that group.
     * If the provided group does not exist, a new group will be added, and the student will be added into that group subsequently.
-5. A new `Student` object is created with the given name, ID, groups, and tags.
+5. A new `Student` object is created with the given name, NUSNET ID, groups, and tags.
 The following activity diagram summarises what happens when a user executes the `addstudent` command to add a new student. In the case where the student is not added, an error message will be displayed with the reason.
 
 ![AddStudentActivityDiagram](images/AddStudentActivityDiagram.png)
