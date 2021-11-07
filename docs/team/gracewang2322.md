@@ -28,8 +28,7 @@ Given below are my contributions to the project.
   * Justification: This feature repurposes the parsing requirements to be customised for Bogobogo. 
   * Highlights: This enhancement required considerations of all edge cases on user inputs as the restriction on the fields are vastly different from the requirements of AB3.
   * Links to PRs: [\#78](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/78), [\#52](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/52), [\#27](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/27)
-    
-
+  
 * **New Feature**: Find Command
   * What it does: Allows the user to find items that matches the id or tag given and allows finding of multiple ids, names and tags as well.
   * Justification: AB3 only supports finding by name. However, as an inventory tracker, BogoBogo would need to allow users 
@@ -43,7 +42,6 @@ Given below are my contributions to the project.
   * query of specific commands and displaying each of their message usages. 
   * Links to PRs: [\#47](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/47), [\#174](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/174)
   
-
 * **Testing**: 
   * System Testing:
     * Did internal testing of Bogobogo and fixed bugs on commands found.
@@ -58,11 +56,9 @@ Given below are my contributions to the project.
     * Links to PR:
       [\#203](https://github.com/AY2122S1-CS2103-F10-2/tp/issues/203),
       [\#186](https://github.com/AY2122S1-CS2103-F10-2/tp/issues/186)
-      
 
 * **Code
   contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=gracewang&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=GraceWang2322&tabRepo=AY2122S1-CS2103-F10-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
-
 
 * **Documentation**:
   * User Guide:
@@ -81,7 +77,6 @@ Given below are my contributions to the project.
     * Proofread and Fix inconsistency, ambiguity, and errors.
       [\#186](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/186)
     
-
 * **Community**:
 * PRs reviewed:
      [\#44](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/44)
