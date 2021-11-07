@@ -590,8 +590,6 @@ Example of the format of how data is saved for an applicant:
 If your changes to the data file makes the data format invalid, RecruitIn will remove all saved data and start with an empty data file the next time you open the app.
 </div>
 
-<p align="center"><a href="#table-of-contents">Click here to see the table of contents</a></p>
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## Prefix Parameter Specifications ***{Advanced}***
