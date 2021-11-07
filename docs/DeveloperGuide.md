@@ -511,8 +511,8 @@ is called upon to request focus.
 
 The class `HelpWindow` is responsible for displaying the Help
 Window. It is shown when the user either uses the keyboard shortcut,
-`F1`, or clicks on `Help` located on the top left in
-the Menu Bar. It is facilitated by `HelpWindow.fxml`
+`F1`, or clicks on `Help` located on the top left in the Menu Bar, or types 
+in `help` in the command box. It is facilitated by `HelpWindow.fxml`
 and `HelpWindow.css`. The `.fxml` file is responsible for the layout of the
 various components in this window, and the `.css` file adds a style and enhances the
 overall UI.
@@ -994,6 +994,20 @@ Extensions
   * 1a2. CohortConnect prompts for new filename.
   * 1a3. User enters new filename.
   * Steps 1a1-1a3 are repeated until the filename received is valid.
+
+**Use Case 23: Opening the Help Window**
+
+MSS
+
+1. User uses the keyboard shortcut, or types in the command, or clicks on help in the Menu Bar.
+2. CohortConnect shows the Help Window.
+   Use case ends.
+
+Extensions
+
+* *a. At any time, the User chooses to close the app.
+   * *a1. CohortConnect closes.
+     Use case ends.
 
 ### Non-Functional Requirements
 
