@@ -290,6 +290,7 @@ Examples:
 
 [Return to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 
 ### Showing assessment result analysis : `show`
 
@@ -308,17 +309,17 @@ Format: `show (<index> | -n <student_name> | -i <student_id> | -g <group_name> |
 * Keywords are case-sensitive and only allows exact match. E.g. `T01` does not match `T01A`, `jonas` will not match `Jonas`.
 * Entering `-f` exports the graph produced from the command to a `.png` file in the same directory as your JAR file.
 
+<div style="page-break-after: always;"></div>
+
 Examples:
 * `show -n Hong Fai`
   * displays the following line chart of `Hong Fai`'s performance in all his assessments. <br>
     ![showStudentExample](images/UGExamples/showstu.png)
-
-    <br>
+  
 * `show -n Hong Fai -f`
   * exports the following line chart of `Hong Fai`'s performance in all his assessments. <br>
     ![showExportExample](images/UGExamples/showexport.png)
-
-    <br>
+  
 * `show -g T02A`
   * displays line chart of group `T02A`'s performance in their assessments. <br>
     ![showGroupExample](images/UGExamples/showgrp.png)
