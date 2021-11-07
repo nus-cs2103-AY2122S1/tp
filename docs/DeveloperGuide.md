@@ -313,12 +313,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS:**
 
-1. User chooses to list persons.
-2. Track2Gather shows a list of persons.
-3. User identifies specific person(s) to delete from the list.
-4. Track2Gather deletes the person(s) and shows the details of the deleted person(s).
+1.  User chooses to list persons.
+2.  Track2Gather shows a list of persons.
+3.  User identifies specific person(s) to delete from the list.
+4.  Track2Gather deletes the person(s) and shows the details of the deleted person(s).
 
-   Use case ends.
+    Use case ends.
 
 **Extensions**
 
@@ -339,20 +339,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS:**
 
-1. User chooses to list persons.
-2. Track2Gather shows a list of persons.
-3. User chooses to edit a person.
-4. Track2Gather requests for details of the person to be edited.
-5. User enters the requested details.
-6. Track2Gather edits the person.
+1.  User chooses to list persons.
+2.  Track2Gather shows a list of persons.
+3.  User chooses to edit a person.
+4.  Track2Gather requests for details of the person to be edited.
+5.  User enters the requested details.
+6.  Track2Gather edits the person.
 
-    Use case ends.
+     Use case ends.
 
 **Extensions**
 
 * 2a. The list is empty.
 
-    Use case ends.
+  Use case ends.
 * 3a. The given index is invalid.
   * 3a1. Track2Gather shows an error message.
 
@@ -366,14 +366,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS:**
 
-1. User chooses to list persons.
-2. Track2Gather shows a list of persons.
-3. User chooses to update the SHN end dates of all persons.
-4. Track2Gather requests for the number of days to shift the SHN end dates.
-5. User enters the number of days.
-6. Track2Gather updates all persons' SHN end dates.
+1.  User chooses to list persons.
+2.  Track2Gather shows a list of persons.
+3.  User chooses to update the SHN end dates of all persons.
+4.  Track2Gather requests for the number of days to shift the SHN end dates.
+5.  User enters the number of days.
+6.  Track2Gather updates all persons' SHN end dates.
 
-   Use case ends.
+    Use case ends.
 
 **Extensions**
 
@@ -389,12 +389,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS:**
 
-1. User chooses to list persons.
-2. Track2Gather shows a list of persons.
-3. User chooses to clear persons.
-4. Track2Gather clears all persons with completed SHN periods.
+1.  User chooses to list persons.
+2.  Track2Gather shows a list of persons.
+3.  User chooses to clear persons.
+4.  Track2Gather clears all persons with completed SHN periods.
 
-   Use case ends.
+    Use case ends.
 
 **Extensions**
 
@@ -409,12 +409,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS:**
 
-1. User chooses to list persons.
-2. Track2Gather shows a list of persons.
-3. User chooses to find person(s).
-4. Track2Gather requests for the search keyword(s).
-5. User enters the search keyword(s).
-6. Track2Gather shows the person(s) containing keyword(s) in the field.
+1.  User chooses to list persons.
+2.  Track2Gather shows a list of persons.
+3.  User chooses to find person(s).
+4.  Track2Gather requests for the search keyword(s).
+5.  User enters the search keyword(s).
+6.  Track2Gather shows the person(s) containing keyword(s) in the field.
 
     Use case ends.
 
@@ -422,7 +422,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The list is empty.
 
-    Use case ends.
+  Use case ends.
 * 5a. The format of the given details is invalid.
   * 5a1. Track2Gather shows the correct format for input.
 
@@ -436,14 +436,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS:**
 
-1. User chooses to list persons.
-2. Track2Gather shows a list of persons.
-3. User chooses to sort person(s).
-4. Track2Gather requests for the sorting fields.
-5. User enters the fields to be sorted and their respective sort orders.
-6. Track2Gather displays the list of sorted person(s).
+1.  User chooses to list persons.
+2.  Track2Gather shows a list of persons.
+3.  User chooses to sort person(s).
+4.  Track2Gather requests for the sorting fields.
+5.  User enters the fields to be sorted and their respective sort orders.
+6.  Track2Gather displays the list of sorted person(s).
 
-   Use case ends.
+    Use case ends.
 
 **Extensions**
 
