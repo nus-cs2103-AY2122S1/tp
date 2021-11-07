@@ -5,10 +5,7 @@ title: Aishwarya Nair's Project Portfolio Page
 
 ### Project: CohortConnect
 
-CohortConnect - CohortConnect is an advanced desktop address book which facilitates networking among Computer Science (CS) students. It is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
-With advanced features for managing large groups of contacts, CohortConnect is intended for use in a university setting. At the start of the semester, professors will distribute csv or json files containing a list of students. Instantly load them into CohortConnect with a single Import command. With data collected from students before the semester, our Find A Buddy feature helps you find potential groupmates by leveraging GitHub’s metadata using a proprietary algorithm. In the Events tab, you can identify events and hackathons that your peers will be attending.
-
-It is written in Java, and has about 15 kLoC.
+CohortConnect is an advanced desktop address book which facilitates networking among Computer Science (CS) students. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 15 kLoC.
 
 Given below are my contributions to the project.
 
@@ -34,14 +31,6 @@ Given below are my contributions to the project.
     * Justification: Editing a contact's tags using the edit command causes the new tags to replace the old ones instead of adding onto them and there was no direct way to remove tags from a specified contact.
     Hence, the Tag command allows users to  add or remove tags from a specific contact with ease.
     * Highlights: This feature overcomes the limitation of using the Edit command to edit the tags for a specified contact and enhances user experience.
-  
-  * **Tag types** 
-    * Pull request [\#95](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/95) 
-    * What it does: Identifies the type of tag associated with a certain contact (i.e. General, Event, Module)
-    * Justification: Was necessary to make a distinction between the different kinds of tags in order to implement functionalities specific to them.
-    * Highlights: Any contact with an event tag type would indicate that they'd be attending a certain event, and this information would be used to add them to the list of contacts under the Events tab to serve 
-    as an event dashboard for the user. This could possibly open up opportunities for the user to connect with them via Telegram in case they're interested in attending the same event as those contacts. 
-    Besides this, from a UI perspective, different colour codes are associated with the different tag types, making it easier for the user to easily distinguish between them.
     
   * **Clickable GitHub Username and Telegram Handle**
     * Pull requests [\#86](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/86) and [\#96](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/96)
@@ -51,6 +40,7 @@ Given below are my contributions to the project.
 
 * **Enhancements to existing features**:
     * Find feature : implemented find by tag, Telegram handle and GitHub username (Pull requests [\#41](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/41), [\#64](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/64), [\#97](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/97))
+    * Tag type : identifies whether the tag is a General, Event or Module tag (Pull request [\#95](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/95) )
 
 
 * **Testing**:
