@@ -398,9 +398,24 @@ the `FilteredPersonList` that contains the contact(s) matching the find paramete
 `Command#execute()` is where the updation of the `FilteredPersonList` to reflect the search performed on the contacts in the address book.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` and `Model` components for
+the `execute("find Bob Joe")` API call.
+
+![FindNameSequenceDiagram](images/FindNameSequenceDiagram.png)
+
+The Sequence Diagram below illustrates the interactions within the `Logic` and `Model` components for
+the `execute("find t/friends teammates")` API call.
+
+![FindTagsSequenceDiagram](images/FindTagsSequenceDiagram.png)
+
+The Sequence Diagram below illustrates the interactions within the `Logic` and `Model` components for
 the `execute("find te/alex_1")` API call.
 
-![FindSequenceDiagram](images/FindSequenceDiagram.png)
+![FindTelegramSequenceDiagram](images/FindSequenceDiagram.png)
+
+The Sequence Diagram below illustrates the interactions within the `Logic` and `Model` components for
+the `execute("find g/alex-coder")` API call.
+
+![FindGithubSequenceDiagram](images/FindGithubSequenceDiagram.png)
 
 ### Tag command
 
