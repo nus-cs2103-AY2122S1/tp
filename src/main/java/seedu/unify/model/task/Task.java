@@ -86,7 +86,7 @@ public class Task {
         }
 
         return otherTask != null
-                && otherTask.getName().equals(getName());
+            && otherTask.getName().equals(getName());
     }
 
     /**
@@ -105,9 +105,9 @@ public class Task {
 
         Task otherTask = (Task) other;
         return otherTask.getName().equals(getName())
-                && otherTask.getTime().equals(getTime())
-                && otherTask.getDate().equals(getDate())
-                && otherTask.getTags().equals(getTags());
+            && otherTask.getTime().equals(getTime())
+            && otherTask.getDate().equals(getDate())
+            && otherTask.getTags().equals(getTags());
     }
 
     @Override
@@ -120,14 +120,14 @@ public class Task {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append("; Time: ")
-                .append(getTime())
-                .append("; Date: ")
-                .append(getDate())
-                .append("; State: ")
-                .append(getState())
-                .append("; Priority: ")
-                .append(getPriority());
+            .append("; Time: ")
+            .append(getTime())
+            .append("; Date: ")
+            .append(getDate())
+            .append("; State: ")
+            .append(getState())
+            .append("; Priority: ")
+            .append(getPriority());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
@@ -138,4 +138,17 @@ public class Task {
         return builder.toString();
     }
 
+    public long getTimeRepresentation() {
+        long year = date.getLocalDate().getYear();
+        long month = date.getLocalDate().getMonthValue();
+        long day = date.getLocalDate().getDayOfMonth();
+
+        long minutes = getTime().getTimeInMinutesFromStartOfDay();
+        long timeRepresentation = year;
+        timeRepresentation = timeRepresentation * 100 + month;
+        timeRepresentation = timeRepresentation * 100 + day;
+        timeRepresentation = timeRepresentation * 1000 + minutes;
+
+        return timeRepresentation;
+    }
 }
