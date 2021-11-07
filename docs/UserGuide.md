@@ -230,7 +230,7 @@ Examples:
 
 Shows a list of all or selected elderly and their associated details in SeniorLove address book in alphabetical order of their name.
 
-Format: `list [CRITERION_FOR_LISTING]`
+Format: `list CRITERION_FOR_LISTING`
 
 * `list all/` displays all the elderly in the alphabetical order of their names.
 * `list w/` displays all the elderly with an incoming visit in the next week.
