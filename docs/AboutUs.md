@@ -51,7 +51,7 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/felissaf.png" width="200px">
 
 [[github](http://github.com/felissaf)]
-[[portfolio](team/felissa.md)]
+[[portfolio](team/felissaf.md)]
 
 * Role: Developer
-* Responsibilities: Module
+* Responsibilities: Student
