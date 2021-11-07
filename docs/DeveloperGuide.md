@@ -306,6 +306,56 @@ The following activity diagram summarizes what happens when a CS2100 TA executes
     * Pros: Will use less memory (e.g. for `delete`, just save the student being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
 
+### Add Student 
+#### Implementation 
+
+The add student feature allows the CS2100 to add a new student into the student list. Its implementation 
+introduces the following classes: 
+
+- `AddCommand` that extends `Command`
+- `AddCommandParser` that implements `Parser<AddCommand>`
+- Student information: `Student`, `Name`, `StudentId`, `ClassId`, `Email`, `UniqueStudentList` 
+
+The syntax of this command is `add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`. For instance,
+`add -n Erwin -sid A0234596H -cid B02 -email e0543221@u.nus.edu` will create a student with the given name, student id, 
+class id and email. 
+
+Given below is a possible usage scenario:
+
+The CS2100 TA keys in the command `add -n Erwin -sid A0234596H -cid B02 -email e0543221@u.nus.edu`. 
+
+The mechanism is as described below: 
+- Upon detecting `add` as the command word. `ProgrammerErrorParser` will create a `AddCommandParser` with the input 
+name, student id, class id and email. 
+- `AddCommandParser` parses the name, student id, class id and email and creates a `Student` object. It will then 
+create a `AddCommand` with the new `Student` object. 
+- `AddCommand` receives the new `Student` object and checks if any student in `UniqueStudentList` shares the same `studentId` and `email`
+with the newly created student. 
+- If the new `Student` is unique it will be added to the `UniqueStudentList`. 
+- ProgrammerError will show a success message for adding the student. For example, `New student added: Erwin; Student ID: A0234596H; Class ID: B02; Email: e0543221@u.nus.edu`
+in the `resultDisplay`, informing the user that the add operation is valid. 
+
+
+The following sequence diagram shows how the add command works: 
+
+
+The following activity diagram summarizes what happens when a CS2100 TA executes a new command: 
+
+
+#### Design considerations: 
+
+#### Aspect: Only unique Student ID and email is accepted: 
+- Each student object should have unique Student ID and email. 
+  - Pros: 
+    - Ensures that each student is unique and easily identifiable with the key attributes.
+    - Ensures that there are no duplicates and redundant data. 
+  - Cons: 
+    - The strict checks on the `UniqueStudentList` will affect `EditCommand` when the user tries to edit an existing student. 
+    This will happen when the user only wants to edit one of the attribute. (For example, studentId.)
+    This newly edited student will have an old copy of the email. This side effect will casue the newly created `student` to clash with its old instance in `UniqueStudentList`, 
+    causing the command to fail, even though it should be valid. As such, it makes it hard to implement, as we have to 
+    ensure that it works with `EditCommand` as well.
+
 ### Student List Filtering
 
 #### Proposed Implementation
