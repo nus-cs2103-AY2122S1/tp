@@ -222,7 +222,7 @@ After being parsed, the implementation for deleting friends and games is similar
 called, resulting in the deletion of a friend or a game.The following sequence diagram 
 illustrates the description for deleting **games**:
 
-<img src="images/DeleteGameSequenceDiagram.png" width="574" />
+<img src="images/DeleteGameSequenceDiagram.png" width="1000" />
 
 #### Special considerations:
 
@@ -244,7 +244,7 @@ friend has to a game has to be removed, before deleting the game from the list o
   calling `MainParser#parseCommand()`, who in turn calls `FriendCommandParser#parse()` as it is a `friend` command, 
   which returns a `ScheduleFriendCommand` after determining the `commandType` is `ScheduleFriendCommand.COMMAND_WORD`.
 
-<img src="images/ScheduleSequenceDiagram1.png" width="574" />
+<img src="images/ScheduleSequenceDiagram1.png" width="1000" />
   
 * `LogicManager` will then call `Command#execute()`. In `ScheduleFriendCommand`, the friend to be updated will be 
   retrieved with `Model:getfriend()`, and a new friend will be created with `createScheduledFriend()`, with the schedule
@@ -253,7 +253,7 @@ friend has to a game has to be removed, before deleting the game from the list o
 * Upon success, the `CommandResult` is created with the success message to display on the UI and the `CommandType` of
   `FRIEND_SCHEDULE`, before being returned.
 
-<img src="images/ScheduleSequenceDiagram2.png" width="574" />
+<img src="images/ScheduleSequenceDiagram2.png" width="1000" />
 
 #### Design considerations:
 * `Schedule` and `Day` were their own classes instead of storing them directly as an `ArrayList` or `boolean[]` as this
@@ -476,25 +476,14 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample friends. The window size may not be 
-      optimum.
-
-1. Saving window preferences
-
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
-
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
-
-1. _{ more test cases … }_
+   1. Double-click the jar file Expected: gitGud GUI launches.
 
 ### Adding a friend
 1. Adding a friend to gitGud
 
-    1. Prerequisites: List all friends using the `friend --list` command. There should not be a friend with 
-       `FRIEND_ID` Draco as well as friend with `FRIEND_ID` MrFeely already stored in gitGud. 
+    1. Prerequisites: There should not be a friend with `FRIEND_ID` Draco or a friend with `FRIEND_ID` MrFeely already stored in gitGud. 
 
     2. Test case: `friend --add Draco --name Marcus`<br>
        Expected: Friend with `FRIEND_ID` Draco is added. gitGud states that `FRIEND_ID` is added.
@@ -502,10 +491,8 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `friend --add MrFeely`<br>
        Expected: Friend with `FRIEND_ID` MrFeely is added. gitGud states that `FRIEND_ID` is added.
 
-    4. Other incorrect add commands to try: `friend --name Marcus`, `friend --add`, `friend --name`, ...`
+    4. Other incorrect add commands to try: `friend --name Marcus`, `friend --add`, `friend --name`
        Expected: No friend is added. Error details shown in the status message. Status bar remains the same.
-
-2. _{ more test cases … }_
 
 ### Adding a game
 1. Adding a game to gitGud
@@ -518,8 +505,6 @@ testers are expected to do more *exploratory* testing.
 
     3. Test case: `game --add`<br>
        Expected: No game is added. Error details shown in the status message. Status bar remains the same.
-
-2. _{ more test cases … }_
 
 ### Linking a friend to a game
 1. Linking a friend to a game in gitGud.
@@ -537,10 +522,8 @@ testers are expected to do more *exploratory* testing.
        Expected: No link is added. Error details shown in the status message. Status bar remains the same.
 
     4. Other incorrect link commands to try: `link --friend Draco --user Draconian`, `link --game Valorant --user 
-       Draconian`, `link --friend`, ...
+       Draconian`, `link --friend`
        Expected: Similar to previous.
-
-2. _{ more test cases … }_
 
 ### Deleting a friend
 
@@ -554,10 +537,8 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `friend --delete MrFeely`<br>
       Expected: No friend is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `friend --delete`, `...` 
+   1. Other incorrect delete commands to try: `friend --delete`
       Expected: Similar to previous.
-
-2. _{ more test cases … }_
 
 ### Deleting a game
 
@@ -571,10 +552,8 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `game --delete CSGO`<br>
        Expected: No game is deleted. Error details shown in the status message. Status bar remains the same.
 
-    1. Other incorrect delete commands to try: `game --delete`, `...`
+    1. Other incorrect delete commands to try: `game --delete`
        Expected: Similar to previous.
-
-1. _{ more test cases … }_
 
 ### Filtering friends in friends' list using a keyword
 
@@ -627,10 +606,10 @@ testers are expected to do more *exploratory* testing.
     4. Test case: `friend --get co`<br>
        Expected: No friend is found. Error details shown in the status message. Status bar remains the same.
 
-    5. \Other incorrect delete commands to try: `friend --get`, `...`
+    5. Other incorrect get commands to try: `friend --get`
        Expected: Similar to previous.
    
-2. ### Viewing a game's full data
+### Viewing a game's full data
 
 1. View a game's full information, including the friends which play that game.
 
@@ -645,13 +624,5 @@ testers are expected to do more *exploratory* testing.
     4. Test case: `game --get rant`<br>
        Expected: No game is found. Error details shown in the status message. Status bar remains the same.
 
-    5. \Other incorrect delete commands to try: `game --get`, `...`
+    5. Other incorrect get commands to try: `game --get`
        Expected: Similar to previous.
-
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases … }_
