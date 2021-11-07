@@ -942,13 +942,13 @@ testers are expected to do more *exploratory* testing.
         Expected: Patient named Bob Doe is added successfully. Details of the added patient are shown in the status message.
 
     3. Test case: `add n/John Doe hp/98765432 eml/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/vaccinated risk/LOW`
-       <br>Expected: No Patient is added. Error message is shown in the status message that the patient already exists.
+       <br>Expected: No Patient is added. Error details are shown in the status message that the patient already exists.
 
     4. Test case: `add n/John Doe hp/98765432 eml/johnd@example.com a/311, Kent Ridge Ave 2, #02-25 dob/25/12/0000 t/vaccinated risk/LOW`
-       <br>Expected: No Patient is added. Error message is shown in the status message that the patient already exists.
+       <br>Expected: No Patient is added. Error details are shown in the status message that the patient already exists.
 
     5. Other incorrect add commands to try: `add`, `add n/Bob hp/`, `add n/` (not all fields, except tags and risk, are filled)<br>
-       Expected: No Patient is added. Error message is shown in the status message.
+       Expected: No Patient is added. Error details are shown in the status message.
 
 ### Listing all patients <a name="list-patients-manual-testing"/>
 
@@ -1145,13 +1145,13 @@ testers are expected to do more *exploratory* testing.
        <br> Expected: Doctor named Bob Doe is added successfully. Details of the added doctor are shown in the status message.
        
     3. Test case: `add n/John Doe hp/98765432 eml/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/experienced`
-       <br> Expected: No doctor is added. Error message is shown in the status message that the doctor already exists.
+       <br> Expected: No doctor is added. Error details are shown in the status message that the doctor already exists.
        
     4. Test case: `add n/John Doe hp/98765432 eml/johnd@example.com a/311, Kent Ridge Ave 2, #02-25 dob/25/12/0000 t/experienced`
-       <br> Expected: No doctor is added. Error message is shown in the status message that the doctor already exists.
+       <br> Expected: No doctor is added. Error details are shown in the status message that the doctor already exists.
 
     5. Other incorrect add commands to try: `add`, `add n/Bob hp/`, `add n/` (not all fields, except tags, are filled)<br>
-        Expected: No doctor is added. Error details is shown in the status message.
+        Expected: No doctor is added. Error details are shown in the status message.
 
 ### Listing all doctors <a name="list-doctors-manual-testing"/>
 
@@ -1334,40 +1334,40 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: There must be existing patients and doctors in the patient and doctor lists. There are less than 100 patients and doctors. 
        
     1. Test case: `appt -a p/1 d/1 s/31/12/2050 12:00 dur/5 r/Patient wants a blood test`<br>
-      Expected: An appointment is added. Details of the appointment shown in the response box. The appointment shows up in the appointment list.
+      Expected: An appointment is added. Details of the appointment shown in the status message. The appointment shows up in the appointment list.
 
     1. Test case: `appt -a p/1 d/1 s/31/12/2050 12:05 r/Patient wants a blood test`<br>
-      Expected: An appointment is added. Details of the appointment shown in the response box. The appointment shows up in the appointment list.
+      Expected: An appointment is added. Details of the appointment shown in the status message. The appointment shows up in the appointment list.
 
     1. Test case: `appt -a p/1 d/1 s/31/12/2050 12:30 dur/50`<br>
-      Expected: An appointment is added. Details of the appointment shown in the response box. The appointment shows up in the appointment list.
+      Expected: An appointment is added. Details of the appointment shown in the status message. The appointment shows up in the appointment list.
 
     1. Test case: `appt -a p/1 d/1 s/31/12/2050 14:00`<br>
-       Expected: An appointment is added. Details of the appointment is shown in the response box. The appointment shows up in the appointment list.
+       Expected: An appointment is added. Details of the appointment is shown in the status message. The appointment shows up in the appointment list.
 
     1. Test case: `appt -a p/1 d/1 s/DATE_AND_TIME dur/5 r/Patient wants a blood test,` where `DATE_AND_TIME` is today's date and any time<br>
-       Expected: An appointment is added. Details of the appointment is shown in the response box. The appointment shows up in the appointment list.
+       Expected: An appointment is added. Details of the appointment is shown in the status message. The appointment shows up in the appointment list.
        
     1. Test case: `appt -a`<br>
-       Expected: No appointment is added. Response box displays error message: `Invalid command format! ...`
+       Expected: No appointment is added. Error details are shown in the status message that the format is invalid.
 
     1. Test case: `appt -a p/1 d/1 s/30/02/2021 dur/5 r/Patient wants a blood test`<br>
-       Expected: No appointment is added. Response box displays error message: `Sessions should be of the format DD/MM/YYYY HH:MM and adhere to the following constraints:...`
+       Expected: No appointment is added. Error details are shown in the status message that the format of the date and time is invalid.
 
     1. Test case: `appt -a p/100 d/1 s/30/02/2021 dur/5 r/Patient wants a blood test`<br>
-      Expected: No appointment is added. Response box displays error message: `The patient index provided is invalid`
+      Expected: No appointment is added. Errors details are shown in the status message that the patient does not exist.
     
     1. Test case: `appt -a p/1 d/100 s/30/02/2021 dur/5 r/Patient wants a blood test`<br>
-       Expected: No appointment is added. Response box displays error message: `The doctor index provided is invalid`
+       Expected: No appointment is added. Errors details are shown in the status message that the doctor does not exist.
 
     1. Test case: `appt -a p/1 d/1 s/30/02/2021 dur/xxx r/Patient wants a blood test`<br>
-      Expected: No appointment is added. Response box displays error message: `The duration should be an integer between 1-120 minutes.`
+      Expected: No appointment is added. Errors details are shown in the status message that the format of the duration is incorrect.
 
    1. Test case: `appt -a p/1 d/1 s/30/02/2021 dur/121 r/Patient wants a blood test`<br>
-      Expected: No appointment is added. Response box displays error message: `The duration should be an integer between 1-120 minutes.`
+      Expected: No appointment is added. Errors details are shown in the status message that the format of the duration exceeds the limit.
 
    1. Test case: `appt -a p/1 d/1 s/30/02/2021 dur/0 r/Patient wants a blood test`<br>
-      Expected: No appointment is added. Response box displays error message: `The duration should be an integer between 1-120 minutes.`
+      Expected: No appointment is added. Errors details are shown in the status message that the format of the duration exceeds the limit.
 
 
 ### Deleting an appointment  <a name="deleting-appointment-manual-testing"/>
@@ -1377,13 +1377,13 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all appointments using `appt -f`. There must be existing appointments in the list.
 
     2. Test case: `appt -d 1`<br>
-       Expected: First appointment is deleted from the list. Details of the deleted appointment shown in the response box.
+       Expected: First appointment is deleted from the list. Details of the deleted appointment shown in the status message.
 
     3. Test case: `appt -d 0`<br>
-       Expected: No appointment is deleted. Error details shown in the response box: `Invalid command format!...`.
+       Expected: No appointment is deleted. Errors details are shown in the status message that the format is invalid
 
     4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the appointment list size)<br>
-       Expected: Similar to previous.
+       Expected: No appointment is deleted. Errors details are shown in the status message.
 
     5. Delete an appointment while some appointments are being shown
 
