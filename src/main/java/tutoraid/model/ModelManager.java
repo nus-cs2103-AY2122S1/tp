@@ -151,18 +151,12 @@ public class ModelManager implements Model {
         filteredStudents.setPredicate(student -> student.equals(targetStudent));
         filteredLessons.setPredicate(lesson ->
                 targetStudent.getLessons().getAllLessonNamesAsStringArrayList().contains(lesson.nameAsString()));
-        UiManager.showFullDetails();
+        UiManager.showDetails(HIGH);
     }
 
     @Override
     public void viewList(DetailLevel detailLevel) {
-        if (detailLevel == HIGH) {
-            UiManager.showFullDetails();
-        } else if (detailLevel == MED) {
-            UiManager.showMediumDetails();
-        } else {
-            UiManager.showMinimalDetails();
-        }
+        UiManager.showDetails(detailLevel);
     }
 
     @Override
@@ -216,7 +210,7 @@ public class ModelManager implements Model {
         filteredLessons.setPredicate(lesson -> lesson.equals(targetLesson));
         filteredStudents.setPredicate(student ->
                 targetLesson.getStudents().hasStudent(student));
-        UiManager.showMediumDetails();
+        UiManager.showDetails(MED);
     }
 
     @Override

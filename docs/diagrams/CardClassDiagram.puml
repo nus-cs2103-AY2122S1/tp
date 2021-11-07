@@ -5,12 +5,14 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 class Card
+class FullStudentCard
 class StudentCard
 class MinimalStudentCard
 class LessonCard
 class MinimalLessonCard
 
 UiPart <|-- Card
+Card <|-- FullStudentCard
 Card <|-- StudentCard
 Card <|-- MinimalStudentCard
 Card <|-- LessonCard
