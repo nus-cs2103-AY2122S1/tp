@@ -73,7 +73,7 @@ public class CommandTestUtil {
     public static final String VALID_VENUE_BASKETBALL = "basketball court";
     public static final String VALID_VENUE_FOOTBALL_TRAINING = "Field";
     public static final String VALID_VENUE_SWIM_TRAINING = "Pool";
-    public static final String VALID_CAPACITY_BASKETBALL = "5";
+    public static final String VALID_CAPACITY_BASKETBALL = "1";
     public static final String VALID_CAPACITY_FOOTBALL_TRAINING = "20";
     public static final String VALID_CAPACITY_SWIM_TRAINING = "15";
     public static final String VALID_TIME_BASKETBALL = "0830";
