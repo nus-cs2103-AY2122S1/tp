@@ -1141,13 +1141,28 @@ testers are expected to do more *exploratory* testing.
 
 #### Tag Student
 
-1. Tag a student while all students are being shown
-   1. Prerequisites: List all students using `list` command. Multiple students in the list.
+1. Tag a student while all students are being shown, and no student is being viewed.
+   1. Prerequisites: List all students using `list` command. List must contain at least 1 student.
    2. Test case: `tag 1 t/test` <br>
       Expected: First student's tag(s) is/are now replaced by "test".
+   3. Test case: `tag 1 t/tag1 t/tag2` <br>
+      Expected: First student's tag(s) is/are now replaced by "tag1" and "tag2".
+   4. Test case: `tag 1 t/` <br>
+      Expected: First student's tag(s) is/are now removed.
+   5. Test case: `tag 1 t/!!!!` <br>
+      Expected: First student's tag(s) remain unchanged. Error details shown in the status message. Result display remain the same.
+   6. Other incorrect tag commands to try:
+      1. `tag t/test` (Missing `INDEX`)
+      2. `tag -1 t/test` (`INDEX` out of bound)
+      3. `tag 1 t/test t/` (Multiple tag entries cannot contain empty tags)
+      4. `tag 1 t/test tag1` (Tags can only contain one word)
 
-2. _{ more test cases to come …​ }_
 
+2. Tag a student while all students are being shown, with a student being viewed.
+   1. Prerequisites: List all students using `list` command. List must contain at least 1 student. View a student using `view 1` command.
+   2. The test cases mirror `Test 1`, with he student being viewed in the result display still being viewed in the same 
+   state after execution of the command regardless if the execution of the command is successful or not.
+   To view the changes in `Tag` for the student being viewed in the result display, use `view 1` after the tag command.
 ***
 
 #### Get Personal Detail
@@ -1185,7 +1200,9 @@ Below are a few test cases which checks for the above. The test cases are by no 
       of all students.
       6. `get e/ p/ te/` <br>
       Expected: Phone number of all students are shown in the result display, followed by email address
-      and then by telegram handle. 
+      and then by telegram handle.
+
+
 2. Retrieving personal detail of all students. At least one student has no phone number and
 at least one student has a phone number.
    1. Prerequisites:
@@ -1196,6 +1213,8 @@ at least one student has a phone number.
    2. Test Cases: Same as point 1 <br>
       Expected: Same as point 1, but only students who have phone numbers will have their phone numbers displayed.
       No change in email address results and/or telegram handle results
+
+
 3. Retrieving personal detail of all students. No student has a phone number. 
    1. Prerequisites:
        - No student has a phone number.
@@ -1208,6 +1227,8 @@ at least one student has a phone number.
          test cases.
          2. For test cases with tags `e/` and/or `te/`, result display will still show email addresses and/or telegram handles
          3. For test cases without the above tags, result display will show "Nothing to show..."
+
+
 4. Retrieving personal detail of all students. No students are present in AcademyDirectory
    1. Prerequisites: Use `clear` command before beginning testing to make sure no students are present in AcademyDirectory 
    2. Test Cases: Same as point 1 <br>
@@ -1215,6 +1236,8 @@ at least one student has a phone number.
          1. Feedback box will always say "Failed to receive one or more personal details. Showing what I can..." for all 
             test cases.
          2. Result display will always show "Nothing to show..."
+   
+
 5. Retrieving personal detail of a student by keyword. At least one student whose name
 matches the given keyword is present in AcademyDirectory. Said student has a phone number.
    1. Prerequisites:
@@ -1244,6 +1267,7 @@ matches the given keyword is present in AcademyDirectory. Said student has a pho
       Expected: Phone number of all students whose name matches `alex` are shown in the result display, followed by email address
       and then by telegram handle.
 
+
 6. Retrieving personal detail of a student by keyword. At least one student whose name matches the given keyword 
 is present in AcademyDirectory. Said student/s have no phone numbers.
    1. Prerequisites:
@@ -1259,6 +1283,7 @@ is present in AcademyDirectory. Said student/s have no phone numbers.
         test cases.
        2. For test cases with tags `e/` and/or `te/`, result display will still show email addresses and/or telegram handles
        3. For test cases without the above tags, result display will show "Nothing to show..."
+
 
 7. Retrieving personal detail of a student by keyword. No student whose name matches the given keyword is present in AcademyDirectory. 
    1. Prerequisites:
@@ -1282,9 +1307,33 @@ is present in AcademyDirectory. Said student/s have no phone numbers.
 ***
 
 #### Add Grade
+After every positive test case, use the command `view 1` or simply click on the first student panel, 
+and open the "View Test Score" tab to view the changes in the grade.
 
-1. _{ more test cases to come …​ }_
+1. Record the grade of a single student's assessment, while all students are being shown in the list and no student is being viewed.
+   1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+   2. Test case: `grade 1 as/ra1 g/15` <br>
+      Expected: First student's RA1 score is now updated to 15.
+   3. Test case: `grade 1 as/readingassessment1 g/15` <br>
+      Expected: No student's grade is modified. Error details are shown in the status message indicating invalid assessment. Result display remains the same.
+   4. Test case: `grade 1 as/ra1 g/101` <br>
+      Expected: No student's grade is modified. Error details are shown in the status message indicating invalid grade. Result display remains the same.
+   5. Other incorrect grade commands to try:
+      1. `grade` (Missing index, assessment and grade)
+      2. `grade 1` (Missing assessment and grade)
+      3. `grade 1 as/ra1` (Missing grade)
+      4. `grade 1 g/15` (Missing assessment)
+      5. `grade -1 as/ra1 g/15` (Index out of bound)
 
+
+2. Record the grade of a single student's assessment, while all students are being shown in the list and a single student is being viewed with no tabs open.
+   1. Prerequisites: List all students using `list` command. Multiple students in the list. View a single student using `view 1`.
+   2. The test cases mirror `Test 1`, with the student being viewed in the result display still being viewed in the same state with no tabs open after execution of the command regardless if the execution of the command is successful or not.
+
+
+3. Record the grade of a single student's assessment, while all students are shown in list and a student is being viewed with the "View Test Score" open 
+   1. Prerequisites: List all students using the list command. Multiple students in the list. View a single student using view 1. Click on "View Participation" in the result display. 
+   2. The test cases mirror Test 1, with the student being viewed in the result display in the state with no tabs open after successful execution of the command. If the execution of the command fails, the result display still shows the student with the "View Test Score" tab open.
 ***
 
 #### Edit Attendance
@@ -1406,7 +1455,26 @@ is present in AcademyDirectory. Said student/s have no phone numbers.
 
 #### Filter Academy Directory
 
-1. _{ more test cases to come …​ }_
+1. Filters the student list while all students are being shown in the list.
+   1. Prerequisites:
+      1. Create students with the following commands: <br> 
+         `add n/Student 1 e/test1@email.com te/@test1 t/tag1`
+         `add n/Student 2 e/test2@email.com te/@test2 t/tag2`
+      2. List all the students using the `list` command. After every test case, use `list` to display all the students.
+   2. Test case: `filter student` <br>
+      Expected: Student list should be filtered to show Student 1 and Student 2.
+   3. Test case: `filter student 1`
+      Expected: Student list should be filtered to show Student 1 and Student 2.
+   4. Test case: `filter 1`
+      Expected: Student list should be filtered to show Student 1 only.
+   5. Test case: `filter tag1`
+      Expected: Student list should be filtered to show Student 1 only.
+   6. Test case: `filter Student1`
+      Expected: Student list should not show Student 1 and/or Student 2.
+   7. Test case: `filter tag`
+      Expected: Student list should not show Student 1 and/or Student 2.
+   8. Test case: `filter`
+      Expected: Student list should remain unchanged. Error details are shown in the status message indicating invalid command format. Result display remains the same.
 
 ***
 
