@@ -386,8 +386,8 @@ An alias contains two strings: An `aliasWord` which is the new user-defined word
 Parsing of an alias command follows the following steps:
 1. The alias word is checked to ensure that it is one word long.
 1. The alias word is also checked to ensure that it does not overlap with any default command word. This is to prevent the re-mapping of any default command words and potentially losing the functionality of the application.
-1. If the command word is an alias, it is replaced with the command word that the alias maps to.
 1. The command word is checked for validity by attempting to parse the command word. If the parser does not recognise the command word, it is not valid.
+1. If the command word is an alias, it is replaced with the command word that the alias maps to.
 1. The new `Alias` and `AliasCommand` is created, and executed.
 1. The alias is added to both the parser, and the model (so that it can be saved in the `UserPrefs`)
     * If the alias word is already present in the parser, the command word it is mapped to is replaced with the new command word instead.
