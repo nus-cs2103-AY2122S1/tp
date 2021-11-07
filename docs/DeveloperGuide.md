@@ -291,7 +291,8 @@ desktop applications follow.
 
 The following activity diagram summarizes what happens when a CS2100 TA executes a new command:
 
-<img src="images/CommitActivityDiagram.png" width="250" />
+![CommitActivityDiagram](images/CommitActivityDiagram.png)
+
 
 #### Design considerations:
 
