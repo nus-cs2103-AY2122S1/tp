@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.member.MdelCommand;
 import seedu.address.logic.parser.CliSyntax;
-import seedu.address.logic.parser.member.MdelCommandParser;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations

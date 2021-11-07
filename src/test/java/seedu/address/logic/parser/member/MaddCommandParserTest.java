@@ -32,7 +32,6 @@ import static seedu.address.testutil.TypicalMembers.BOB;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.member.MaddCommand;
-import seedu.address.logic.parser.member.MaddCommandParser;
 import seedu.address.model.module.Name;
 import seedu.address.model.module.member.Address;
 import seedu.address.model.module.member.Email;

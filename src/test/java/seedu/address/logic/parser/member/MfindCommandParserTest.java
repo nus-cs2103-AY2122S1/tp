@@ -9,7 +9,6 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.member.MfindCommand;
-import seedu.address.logic.parser.member.MfindCommandParser;
 import seedu.address.model.module.NameContainsKeywordsPredicate;
 import seedu.address.model.module.member.Member;
 

@@ -23,7 +23,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.event.EeditCommand;
 import seedu.address.logic.parser.CliSyntax;
-import seedu.address.logic.parser.event.EeditCommandParser;
 import seedu.address.model.module.Name;
 import seedu.address.model.module.event.EventDate;
 import seedu.address.testutil.EditEventDescriptorBuilder;

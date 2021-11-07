@@ -1,17 +1,5 @@
 package seedu.address.logic.parser.event;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.event.EaddCommand;
-import seedu.address.model.module.Name;
-import seedu.address.model.module.event.Event;
-import seedu.address.model.module.event.EventDate;
-import seedu.address.testutil.EventBuilder;
-
-import java.util.HashSet;
-import java.util.Set;
-
-import static org.junit.jupiter.api.Assertions.*;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.EVENT_DATE_DESC_CHESS;
 import static seedu.address.logic.commands.CommandTestUtil.EVENT_NAME_DESC_CHESS;
@@ -21,6 +9,18 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EVENT_DATE_CHES
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EVENT_NAME_CHESS;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.event.EaddCommand;
+import seedu.address.model.module.Name;
+import seedu.address.model.module.event.Event;
+import seedu.address.model.module.event.EventDate;
+import seedu.address.testutil.EventBuilder;
 
 class EaddCommandParserTest {
     private EaddCommandParser parser = new EaddCommandParser();

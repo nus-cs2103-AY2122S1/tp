@@ -37,7 +37,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.member.MeditCommand;
 import seedu.address.logic.commands.member.MeditCommand.EditMemberDescriptor;
 import seedu.address.logic.parser.CliSyntax;
-import seedu.address.logic.parser.member.MeditCommandParser;
 import seedu.address.model.module.Name;
 import seedu.address.model.module.member.Address;
 import seedu.address.model.module.member.Email;

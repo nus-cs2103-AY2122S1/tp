@@ -12,7 +12,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.task.TdelCommand;
-import seedu.address.logic.parser.task.TdelCommandParser;
 
 class TdelCommandParserTest {
     private TdelCommandParser parser = new TdelCommandParser();
