@@ -15,18 +15,19 @@
     <Scene>
       <stylesheets>
         <URL value="@../css/Fonts.css" />
+        <URL value="@../css/DarkTheme.css" />
         <URL value="@../css/HelpWindow.css" />
       </stylesheets>
       <VBox>
         <children>
-               <Label fx:id="description" text="Label" />
-               <TableView fx:id="featureTable" editable="true" prefHeight="378.0" prefWidth="470.0" />
-               <HBox alignment="CENTER">
-                  <children>
-              <Label fx:id="helpMessage" alignment="CENTER" contentDisplay="CENTER" prefHeight="78.0" prefWidth="394.0" text="Label" textOverrun="CLIP" wrapText="true" />
-              <Button fx:id="copyButton" alignment="BOTTOM_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#copyUrl" prefHeight="25.0" prefWidth="75.0" text="Copy URL" textAlignment="JUSTIFY" wrapText="true" />
-                  </children>
-               </HBox>
+           <Label fx:id="description" text="Label" />
+           <TableView fx:id="featureTable" editable="true" prefHeight="378.0" prefWidth="470.0" />
+           <HBox alignment="CENTER">
+              <children>
+                  <Label fx:id="helpMessage" alignment="CENTER" contentDisplay="CENTER" text="Label" textOverrun="CLIP" wrapText="true" />
+                  <Button fx:id="copyButton" alignment="BOTTOM_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#copyUrl" text="Copy URL" textAlignment="JUSTIFY" wrapText="true" />
+              </children>
+           </HBox>
         </children>
       </VBox>
     </Scene>
