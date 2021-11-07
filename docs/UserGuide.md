@@ -302,7 +302,7 @@ Format: `addc m/MODULE_CODE LESSON_CODE d/DAY t/START_TIME END_TIME [r/REMARK]`
 * All the parameters are **compulsory** except for remark
 * Day input is only accepted in integer form <br> e.g. `1` for Monday, `7` for Sunday
 * Start and end time input is only accepted in the `HH:mm` format <br> e.g. `09:00`
-* You will not be able to add a lesson with the same module and lesson code
+* You will not be able to add a lesson with the same module and lesson code as another existing lesson in contHACKS
 
 <div markdown="span" class="alert alert-primary">:information_source: **Note:**
 Module code and lesson code are separated by white spaces. Lesson start time and end time are separated by white spaces as well.
