@@ -12,7 +12,6 @@ import java.util.logging.Logger;
 import java.util.stream.Stream;
 
 import seedu.unify.commons.core.LogsCenter;
-import seedu.unify.logic.LogicManager;
 import seedu.unify.logic.commands.AddCommand;
 import seedu.unify.logic.parser.exceptions.ParseException;
 import seedu.unify.model.tag.Tag;
@@ -27,10 +26,10 @@ import seedu.unify.model.task.Time;
  * Parses input arguments and creates a new AddCommand object
  */
 public class AddCommandParser implements Parser<AddCommand> {
-    private final Logger logger = LogsCenter.getLogger(AddCommandParser.class);
-
     public static final String DEFAULT_TIME = "23:59";
     public static final String DEFAULT_PRIORITY = "LOW";
+
+    private final Logger logger = LogsCenter.getLogger(AddCommandParser.class);
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
