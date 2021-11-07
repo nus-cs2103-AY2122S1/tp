@@ -1,5 +1,5 @@
 ---
-layout: page 
+layout: page
 title: User Guide
 ---
 
@@ -53,8 +53,8 @@ classes. If you are familiar with Unix commands, this is definitely for you!
     * `delete 1`: Deletes the student at index 1 of the displayed list (1-indexed)
     * `filter -sid A1234567X`: Filters the list of students to display the student(s) whose student ID contains `
       A1234567X' (case-insensitive)
-6. Refer to the [Features](#features) below for details on all available commands.
-Take note that command parameters wrapped with `[` `]` listed in this guide signifies that the parameter is optional.
+6. Refer to the [Features](#features) below for details on all available commands. Take note that command parameters
+   wrapped with `[` `]` listed in this guide signifies that the parameter is optional.
 
 ## <a name="features"></a>Features
 
@@ -164,7 +164,7 @@ In summary:
 
 ### <a name="add-student"></a>3.1 Add Student: `add`
 
-Adds a student to ProgrammerError with their student ID and class ID. Both the student ID and class ID must be unique. 
+Adds a student to ProgrammerError with their student ID and class ID. Both the student ID and class ID must be unique.
 
 Format: `add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`
 
