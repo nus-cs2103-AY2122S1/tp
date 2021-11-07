@@ -189,7 +189,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 * [Link Feature](#link-feature)
 * [Unlink Feature](#unlink-feature)
 * [Schedule Feature](#schedule-feature)
-* [Recommendation Feature](#recommend-feature)
+* [Recommend Feature](#recommend-feature)
 
 --- 
 
@@ -326,7 +326,7 @@ The implementation of `Model#unlinkFriend()` is as follows:
 * A `Friend` is initialised with all busy timeslots in `Day` as our targer user profile is busy and would more often be 
   busy than free, so it would be easier for the user to just set when their friend is free.
 
-### Recommendation feature:
+### Recommend feature:
 
 #### Description: 
 
@@ -337,7 +337,7 @@ specified game.
 This command allows the user to easily find preferred friends to coordinate gaming sessions with by displaying a 
 recommendations friends list. 
 
-### Implementation: 
+#### Implementation: 
 
 To understand how the recommendation functionality is implemented, the activity diagram below summarises the actions 
 gitGud requires to display the recommendations friends list to the user: 
@@ -355,7 +355,7 @@ which`RecommendCommand#execute(model)` method will then be invoked by the `Logic
 The sequence diagram below illustrates the interactions made in detail used to produce the desired recommendations friends list:
 
 <img src="images/RecommendCommandSequenceDiagram1.png" width="1000" /><br> 
-<img src="images/RecommendCommandSequenceDiagram1.png" width="1000" />
+<img src="images/RecommendCommandSequenceDiagram2.png" width="1000" />
 
 Hence, the recommend feature execution makes use of a `FriendRecommendFilterPredicate` which returns true if the friend plays the specified game and 
 schedule is free during specified timing and a `Comparator` which can be used to sort friends in order of highest skill value 
