@@ -3,45 +3,29 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":TaskCommandsParser" as TaskCommandsParser LOGIC_COLOR
-participant ":EditTaskCommandParser" as EditTaskCommandParser LOGIC_COLOR
 participant ":EditTaskCommand" as EditTaskCommand LOGIC_COLOR
-participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
-participant ":Model" as Model MODEL_COLOR
+participant ":ModelManager" as Model MODEL_COLOR
 end box
 
 [-> LogicManager : execute("task -e 3 n/Report 4")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("task -e 3 n/Report 4")
-activate AddressBookParser
-
-AddressBookParser -> TaskCommandsParser : parseCommand("-e 3 n/Report 4")
+LogicManager -> TaskCommandsParser : parseCommand("task -e 3 n/Report 4")
 activate TaskCommandsParser
 
-create EditTaskCommandParser
-TaskCommandsParser -> EditTaskCommandParser : parseCommand("3 n/Report 4")
-activate EditTaskCommandParser
-
 create EditTaskCommand
-EditTaskCommandParser --> EditTaskCommand
+TaskCommandsParser -> EditTaskCommand : parseCommand("3 n/Report 4")
 activate EditTaskCommand
 
-EditTaskCommand --> EditTaskCommandParser
+EditTaskCommand --> TaskCommandsParser
 deactivate EditTaskCommand
 
-EditTaskCommandParser --> TaskCommandsParser
-deactivate EditTaskCommandParser
-
-TaskCommandsParser --> AddressBookParser
+TaskCommandsParser --> LogicManager : command
 deactivate TaskCommandsParser
-
-AddressBookParser --> LogicManager : command
-deactivate AddressBookParser
 
 LogicManager -> EditTaskCommand : execute()
 activate EditTaskCommand
@@ -52,14 +36,13 @@ activate Model
 Model --> EditTaskCommand
 deactivate Model
 
-create CommandResult
-EditTaskCommand -> CommandResult
-activate CommandResult
+EditTaskCommand -> Model : updateFilteredTaskList(true)
+activate Model
 
-CommandResult --> EditTaskCommand
-deactivate CommandResult
+Model --> EditTaskCommand
+deactivate Model
 
-EditTaskCommand --> LogicManager : result
+EditTaskCommand --> LogicManager : CommandResult
 deactivate EditTaskCommand
 
 [<--LogicManager
