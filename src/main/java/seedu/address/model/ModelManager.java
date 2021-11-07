@@ -79,14 +79,14 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
-        requireNonNull(userPrefs);
-        this.userPrefs.resetData(userPrefs);
+    public ReadOnlyUserPrefs getUserPrefs() {
+        return userPrefs;
     }
 
     @Override
-    public ReadOnlyUserPrefs getUserPrefs() {
-        return userPrefs;
+    public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
+        requireNonNull(userPrefs);
+        this.userPrefs.resetData(userPrefs);
     }
 
     @Override
@@ -114,16 +114,6 @@ public class ModelManager implements Model {
     //=========== FriendsBook ================================================================================
 
     /**
-     * Sets the {@Code friendsList} to the {@Code readOnlyFriendsList that is passed}.
-     *
-     * @param readOnlyFriendsList The data to set the {@Code friendsList}.
-     */
-    @Override
-    public void setFriendsList(ReadOnlyFriendsList readOnlyFriendsList) {
-        this.friendsList.resetData(readOnlyFriendsList);
-    }
-
-    /**
      * Returns the current {@Code friendsList} of the {@Code ModelManager} object.
      *
      * @return The {@Code friendsList} of the {@Code ModelManager}.
@@ -131,6 +121,16 @@ public class ModelManager implements Model {
     @Override
     public ReadOnlyFriendsList getFriendsList() {
         return friendsList;
+    }
+
+    /**
+     * Sets the {@Code friendsList} to the {@Code readOnlyFriendsList that is passed}.
+     *
+     * @param readOnlyFriendsList The data to set the {@Code friendsList}.
+     */
+    @Override
+    public void setFriendsList(ReadOnlyFriendsList readOnlyFriendsList) {
+        this.friendsList.resetData(readOnlyFriendsList);
     }
 
     /**
@@ -157,17 +157,6 @@ public class ModelManager implements Model {
     public boolean hasFriendWithId(FriendId friendId) {
         requireNonNull(friendId);
         return friendsList.hasFriendWithId(friendId);
-    }
-
-    /**
-     * Returns a {@Code Friend} which has the {@Code FriendId} that is passed in.
-     *
-     * @param friendId The {@Code FriendId} of the {@Code Friend} to return.
-     * @return The {@Code Friend} with the specified {@Code FriendId}.
-     */
-    @Override
-    public Friend getFriend(FriendId friendId) {
-        return friendsList.getFriend(friendId);
     }
 
     /**
@@ -199,6 +188,17 @@ public class ModelManager implements Model {
     }
 
     /**
+     * Returns a {@Code Friend} which has the {@Code FriendId} that is passed in.
+     *
+     * @param friendId The {@Code FriendId} of the {@Code Friend} to return.
+     * @return The {@Code Friend} with the specified {@Code FriendId}.
+     */
+    @Override
+    public Friend getFriend(FriendId friendId) {
+        return friendsList.getFriend(friendId);
+    }
+
+    /**
      * Sets the target {@Code Friend} to the editedFriend object, to edit the current {@Code Friend}.
      *
      * @param target       The {@Code Friend} to be changed.
@@ -211,40 +211,6 @@ public class ModelManager implements Model {
         logger.info("ModelManager:setFriend - " + editedFriend);
         friendsList.setFriend(target, editedFriend);
     }
-
-    /**
-     * Links a {@Code Friend} object to a game by adding a {@Code GameFriendLink} object to the friend.
-     *
-     * @param toLink         The {@Code Friend} to link.
-     * @param gameFriendLink The {@Code GameFriendLink} to be added to the friend.
-     */
-    @Override
-    public void linkFriend(Friend friendToLink, GameFriendLink gameFriendLink) {
-        friendsList.linkFriend(friendToLink, gameFriendLink);
-    }
-
-    /**
-     * Removes all {@Code GameFriendLink} objects which contains a specific {@Code Game} from all friends.
-     *
-     * @param game The {@Code Game} used to find the {@Code GameFriendLink} objects to be deleted from all friends.
-     */
-    @Override
-    public void removeLinkAllFriends(Game game) {
-        friendsList.removeLinkAllFriends(game);
-    }
-
-    /**
-     * Unlink a specific {@Code Friend} from a {@Code Game} by removing the {@Code GameFriendLink} object from the
-     * friend.
-     *
-     * @param toUnlink The {@Code Friend} to be unlinked form the {@Code Game}.
-     * @param game     The {@Code Game} to be unlinked from the {@Code Friend}
-     */
-    @Override
-    public void unlinkFriend(Friend friendToUnlink, Game game) {
-        friendsList.unlinkFriend(friendToUnlink, game);
-    }
-
     //=========== Filtered Friend List Accessors =============================================================
 
     /**
@@ -284,16 +250,45 @@ public class ModelManager implements Model {
         filteredAndSortedFriends.setComparator(comparator);
     }
 
-    //=========== Games List ==================================================================================
+    //=========== Filtered Friend List Accessors =============================================================
 
+    /**
+     * Links a {@Code Friend} object to a game by adding a {@Code GameFriendLink} object to the friend.
+     */
     @Override
-    public void setGamesList(ReadOnlyGamesList readOnlyGamesList) {
-        this.gamesList.resetData(readOnlyGamesList);
+    public void linkFriend(Friend toLink, GameFriendLink gameFriendLink) {
+        friendsList.linkFriend(toLink, gameFriendLink);
     }
+
+    /**
+     * Removes all {@Code GameFriendLink} objects which contains a specific {@Code Game} from all friends.
+     *
+     * @param game The {@Code Game} used to find the {@Code GameFriendLink} objects to be deleted from all friends.
+     */
+    @Override
+    public void removeLinkAllFriends(Game game) {
+        friendsList.removeLinkAllFriends(game);
+    }
+
+    /**
+     * Unlink a specific {@Code Friend} from a {@Code Game} by removing the {@Code GameFriendLink} object from the
+     * friend.
+     */
+    @Override
+    public void unlinkFriend(Friend toUnlink, Game game) {
+        friendsList.unlinkFriend(toUnlink, game);
+    }
+
+    //=========== Games List ==================================================================================
 
     @Override
     public ReadOnlyGamesList getGamesList() {
         return gamesList;
+    }
+
+    @Override
+    public void setGamesList(ReadOnlyGamesList readOnlyGamesList) {
+        this.gamesList.resetData(readOnlyGamesList);
     }
 
     @Override
@@ -337,7 +332,6 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredGames.setPredicate(predicate);
     }
-
 
 
 }
