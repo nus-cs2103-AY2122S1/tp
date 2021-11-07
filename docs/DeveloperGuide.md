@@ -26,7 +26,7 @@ LeadsForce's developer Guide is written for developers who wish to contribute to
 | 💡 | This icon denotes useful tips to note of during development. |
 | ❗️ | This icon denotes important details to take note of during development. |
 
-This user guide is also colour coded according to the component. <br> 
+This user guide is also colour coded according to the component. <br>
 <img src="images/Legends.png" width="300"/>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -87,7 +87,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 <p align="center">
 <img src="images/UiClassDiagram.png" alt="Structure of UI component" width="800" />
-</p> 
+</p>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ClientListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
@@ -295,9 +295,9 @@ A PrefixMapperElement contains getter & setter method and values that are releva
 PrefixMapperElement contains the following:
 * Name of the Attribute
 * Default value of the Attribute
-* Client Attribute getter Function 
-* EditClientDescriptor Attribute setter BiConsumer 
-* EditClientDescriptor Attribute getter Function 
+* Client Attribute getter Function
+* EditClientDescriptor Attribute setter BiConsumer
+* EditClientDescriptor Attribute getter Function
 * Attribute Parser Function
 
 --------------------------------------------------------------------------------------------------------------------
@@ -340,7 +340,7 @@ The following sequence diagram shows how the view operation works:
 
 #### Description
 
-LeadsForce allows users to edit client info. 
+LeadsForce allows users to edit client info.
 
 #### Implementation
 
@@ -348,13 +348,13 @@ LeadsForce allows users to edit client info.
 2. The `AddressBookParser` invoke the respective `Parser` based on the first word of the input text.
 3. The remaining input text will be passed to the `EditCommandParser` to parse.
 4. The `EditCommandParser` will tokenize the remaining input text using the `ArgumentTokenizer` into an `ArgumentMultiMap`.
-5. The `EditCommandParser` will then create a new `clientId` which contains the list of client Ids. 
+5. The `EditCommandParser` will then create a new `clientId` which contains the list of client Ids.
 6. The `EditCommandParser` will then create a new `EditClientDescriptor` which contains the fields that the user is intending on editing.
-7. The `EditCommandParser` will create a `EditCommand` containing both the list of client Ids and the `EditClientDescriptor`.  
+7. The `EditCommandParser` will create a `EditCommand` containing both the list of client Ids and the `EditClientDescriptor`.
 8. The `LogicManger` will call the `execute` method of the aforementioned `EditCommand`.
-9. The `EditCommand` will then call the `setAllClients` method of the provided `Model` with the `EditClientDescriptor` and the list of clients. 
-10. The `EditCommand` will then call the `updateFilteredClientList` method of the provided `Model` with a predicate to show all clients in the client list. 
-12. The `EditCommand` will finally create a new `CommandResult` which will be returned to `LogicManager` and the client's information will be edited as according to the command input. 
+9. The `EditCommand` will then call the `setAllClients` method of the provided `Model` with the `EditClientDescriptor` and the list of clients.
+10. The `EditCommand` will then call the `updateFilteredClientList` method of the provided `Model` with a predicate to show all clients in the client list.
+12. The `EditCommand` will finally create a new `CommandResult` which will be returned to `LogicManager` and the client's information will be edited as according to the command input.
 
 The following sequence diagram shows how the view operation works:
 
@@ -362,9 +362,9 @@ The following sequence diagram shows how the view operation works:
 <img src="images/tracing/EditCommandSequenceDiagram.png" />
 </p>
 
-#### Implementation of EditClientDescriptor 
+#### Implementation of EditClientDescriptor
 
-The `EditClientDescriptor` keeps tracks of all the attributes that the user intends on updating, and does so by using the `set{ATTRIBUTE}` command for all the attributes of `Client`(such as setName, setPhone, etc.). 
+The `EditClientDescriptor` keeps tracks of all the attributes that the user intends on updating, and does so by using the `set{ATTRIBUTE}` command for all the attributes of `Client`(such as setName, setPhone, etc.).
 
 ### 4.3 Search Clients
 
@@ -459,7 +459,7 @@ The following sequence diagram shows how the sort operation works:
 
 LeadsForce allow the user to create and switch between multiple addressbook.
 
-### Description 
+### Description
 LeadsForce allow the user to create and switch between multiple addressbook.
 
 ### Implementation
@@ -496,7 +496,9 @@ The following sequence diagram shows how the ab create operation works:
 
 The following sequence diagram shows how the sort operation works:
 
-<img src="images\AbSwitchCommandSequenceDiagram.png" />
+<p align="center">
+<img src="images/AbSwitchCommandSequenceDiagram.png" />
+</p>
 
 ### 4.6.3 Delete Address Book
 
@@ -508,7 +510,9 @@ The following sequence diagram shows how the sort operation works:
 
 The following sequence diagram shows how the sort operation works:
 
-<img src="images\AbDeleteCommandSequenceDiagram.png" />
+<p align="center">
+<img src="images/AbDeleteCommandSequenceDiagram.png" />
+</p>
 
 ### 4.6.4 List Address Book
 
@@ -519,7 +523,9 @@ The following sequence diagram shows how the sort operation works:
 
 The following sequence diagram shows how the sort operation works:
 
-<img src="images\AbListCommandSequenceDiagram.png" />
+<p align="center">
+<img src="images/AbListCommandSequenceDiagram.png" />
+</p>
 
 ### 4.7 Undo/redo feature
 
@@ -651,14 +657,14 @@ The following activity diagram summarizes what happens when a user executes an d
 
 ### 5.1 Extensions and customisations
 In LeadsForce, we put a strong emphasis on ensuring not only the quality but also the extensibility and customizability of our product.
-If you are wondering about how you can easily customise or add extensions to LeadsForce without worrying about the underlying implementations, 
+If you are wondering about how you can easily customise or add extensions to LeadsForce without worrying about the underlying implementations,
 you are at the right place.
-This section details the workflows and features that we have developed that can help you to tweak certain features 
+This section details the workflows and features that we have developed that can help you to tweak certain features
 in LeadsForce without the need for you to delve too deeply into the codebase.
 
 #### 5.1.1 Change the look of an existing theme
 Let's say you dislike the look of our current `BookTheme`: you want the background to be dark brown instead of the current light brown.
-Here's what you should do: 
+Here's what you should do:
 1. cd to `tp/src/main/resources/view`.
 2. Open `BookTheme.css`.
 3. On the top of the css file, you will see that all the [css variables](https://www.w3schools.com/css/css3_variables.asp) are nicely organised and defined for you.
@@ -666,12 +672,12 @@ Here's the css snippet (The comment briefly describes what each of the variables
 ````
 * {
     -fx-base1: #cb997e; // base color 1 (preferably the darkest tone) (the main background color of LeadsForce)
-    -fx-base2: #eddcd2; // base color 2 
+    -fx-base2: #eddcd2; // base color 2
     -fx-base3: #fff1e6; // base color 3
     -fx-base4: #f0efeb; // base color 4
     -fx-base5: #ddbea9; // base color 5 (preferably the lightest tone)
     -fx-font-color: derive(-fx-base1, -30%); // the color of a generic font in LeadsForce
-    -fx-font-color-bright: #ffffff; // the color of `bright` font in LeadsForce (for fonts that overlay component of base color 1) 
+    -fx-font-color-bright: #ffffff; // the color of `bright` font in LeadsForce (for fonts that overlay component of base color 1)
     -fx-menu-color: #263238; // color of the menu
     -fx-menu-color-highlighted: #455a64; // color of the menu when highlighted
     -fx-menu-font-color: #ffffff; // color of the font
@@ -685,11 +691,11 @@ Here's the css snippet (The comment briefly describes what each of the variables
 </p>
 
 #### 5.1.2 Give LeadsForce a new theme
-If you want to add more themes on top of our existing themes, here's what you should do: 
+If you want to add more themes on top of our existing themes, here's what you should do:
 1. cd to `tp/src/main/resources/view`.
 2. Create a copy of `BookTheme.css`.
 3. Rename the file to you preferred theme name and open it. e.g. `RainbowTheme.css`.
-4. Similar to 5.1.1, tweak the css variables to suit your needs. 
+4. Similar to 5.1.1, tweak the css variables to suit your needs.
 5. Save the file and cd to `tp/src/main/java/seedu/address/storage/ThemeList.java`.
 6. Add `RainbowTheme.css` to the static variable `THEMES` like so:<br>
 ````
@@ -711,7 +717,7 @@ private static final List<String> THEMES = List.of("BookTheme", "TwilightTheme",
 **Target user profile**:
 
 * Studying in university currently
-* Prefers using desktop applications, over others 
+* Prefers using desktop applications, over others
 * Would much prefer to type, and can type fast
 * Manages a significant number of contacts
 * Short on time as they have to juggle both school and work at the same time
@@ -761,15 +767,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a.  Missing parameters - name and email
 
-    * 1a1. LeadsForce shows an invalid command error message. 
-      Use case ends. 
+    * 1a1. LeadsForce shows an invalid command error message.
+      Use case ends.
 
 #### 6.3.2 UC02 View a client's information
 
 **MSS**
 
-1. User requests to view the client's information 
-2. LeadsForce shows the detailed view of the client's information 
+1. User requests to view the client's information
+2. LeadsForce shows the detailed view of the client's information
 
 **Extensions**
 
@@ -781,14 +787,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User request to edit multiple attributes of a client 
+1. User request to edit multiple attributes of a client
 2. LeadsForce updates the client's information.
-3. User __UC02 Views a client's information__ to see that the information of the client have been changed. 
+3. User __UC02 Views a client's information__ to see that the information of the client have been changed.
 
 **Extensions**
 
 * 1a.  User inputs invalid attributes
-    * 1a1. LeadsForce shows an error to user, and informs the user of the valid attribute format. 
+    * 1a1. LeadsForce shows an error to user, and informs the user of the valid attribute format.
       Use case ends.
 
 #### 6.3.4 UC04 Delete a client
@@ -797,7 +803,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to list clients
 2.  LeadsForce shows a list of clients
-3.  User requests to delete a specific client by their Client ID. 
+3.  User requests to delete a specific client by their Client ID.
 4.  LeadsForce deletes the client
 
     Use case ends.
@@ -815,7 +821,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User request to view the full list of clients 
+1. User request to view the full list of clients
 2. LeadsForce showcases the client's information.
 
 #### 6.3.6 UC06 Search for a client
@@ -830,7 +836,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a.  LeadsForce returns an empty list since there is no clients in the list. 
+* 2a.  LeadsForce returns an empty list since there is no clients in the list.
   Use case ends.
 
 * 3a. LeadsForce returns an empty list since there is no client who fits the inputted keyword
@@ -847,10 +853,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a.  User inputs invalid commands
-    * 1a1. LeadsForce shows an error to user, and informs the user of the valid command format. 
+    * 1a1. LeadsForce shows an error to user, and informs the user of the valid command format.
       Use case ends.
 
-#### 6.3.8 UC08 showing schedule for the day
+#### 6.3.8 UC08 Showing schedule for the day
 
 **MSS**
 
@@ -871,18 +877,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to clear the client list.
-2. LeadsForce asks for the user's validation (asking if the user is very sure in deleting clients' information) 
+2. LeadsForce asks for the user's validation (asking if the user is very sure in deleting clients' information)
 3. User validates the request
 4. LeadsForce shows address book with no clients
 
 **Extensions**
 
 * 3a.  User does not validate the request
-    * 3a1. LeadsForce does not clear the client list. 
+    * 3a1. LeadsForce does not clear the client list.
       Use case ends.
-      
+
 * 3b.  User inputs invalid commands
-    * 3b1. LeadsForce shows an error to user, and informs the user of the valid commands. 
+    * 3b1. LeadsForce shows an error to user, and informs the user of the valid commands.
       Use case resumes at step 3.
 
 #### 6.3.10 UC10 Create a new address book
@@ -898,25 +904,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. LeadsForce shows an error to user, and informs the user that an address book with the same name already exists.
       Use case ends.
 
-#### 6.3.11 UC11 clear an address book of clients
+#### 6.3.11 UC11 Clear an address book of clients
 
 **MSS**
 
 1. User requests to clear the address book.
-2. LeadsForce asks for the user's validation (asking if the user is very sure in deleting clients' information) 
+2. LeadsForce asks for the user's validation (asking if the user is very sure in deleting clients' information)
 3. User validates the request
 4. LeadsForce shows address book with no clients
 
 **Extensions**
 
 * 3a.  User does not validate the request
-    * 3a1. LeadsForce does not clear the address book. 
+    * 3a1. LeadsForce does not clear the address book.
       Use case ends.
-      
+
 * 3a.  User inputs invalid commands
-    * 3b1. LeadsForce shows an error to user, and informs the user of the valid commands. 
-      Use case resumes at step 3. 
-     
+    * 3b1. LeadsForce shows an error to user, and informs the user of the valid commands.
+      Use case resumes at step 3.
+
 ### 6.4 Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -926,7 +932,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5. Should work without requiring an installer.
 6. Should work on a 64-bit environment.
 7. Should be usable by a student who has little to no experience in using computers.
-8. The client information should be stored locally. 
+8. The client information should be stored locally.
 9. Students who are inexperienced in using computers should be able to easily use LeadsForce.
 
 ### 6.5 Glossary
@@ -967,10 +973,10 @@ testers are expected to do more *exploratory* testing.
     1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. shut down the application by using the `exit` command. 
+1. shut down the application by using the `exit` command.
 
 ### 7.2 Commands for manual testing (Client Management Features)
-In this section, you can test general commands in LeadsForce. Below is a summary of every client management feature in LeadsForce. 
+In this section, you can test general commands in LeadsForce. Below is a summary of every client management feature in LeadsForce.
 
 Action | Format | Examples
 --------|---------|---------
@@ -987,30 +993,30 @@ Action | Format | Examples
 
 #### 7.2.1 Adding a client
 
-1. Adding a client to the client list 
+1. Adding a client to the client list
 
-    1. Prerequisites: in using the `add` command, the user must input the client's email and name. 
+    1. Prerequisites: in using the `add` command, the user must input the client's email and name.
 
     1. Test case: `add n/Dominic e/dominicLovesCS@gmail.com`<br>
        Expected: A new client named `Dominic` with the email address `dominicLovesCS@gmail.com` is added to the client list
 
     1. Test case: `add n/Dominic p/97263912`<br>
-       Expected: No client is added to the client list since email is not included. Invalid command error is shown to the user in the status message. 
+       Expected: No client is added to the client list since email is not included. Invalid command error is shown to the user in the status message.
 
-    1. Other incorrect delete commands to try: `add n/Dominic i/6` (user is not allowed to give clients a Client ID) 
+    1. Other incorrect delete commands to try: `add n/Dominic i/6` (user is not allowed to give clients a Client ID)
        Expected: Similar to previous.
 
 #### 7.2.2 View a client
 
-1. View the client's information in the side panel's client view panel. 
+1. View the client's information in the side panel's client view panel.
 
     1. Prerequisites: a client with the corresponding Client ID must exist in the client list
 
     1. Test case: `view 1` (supposing there is a client with client id 1) <br>
-       Expected: Client with Client ID `1` is shown in the client view panel. Details of the command is shown in the status message. 
+       Expected: Client with Client ID `1` is shown in the client view panel. Details of the command is shown in the status message.
 
     1. Test case: `view `<br>
-       Expected: No client is being selected to be viewed. Invalid command error is shown to the user in the status message. 
+       Expected: No client is being selected to be viewed. Invalid command error is shown to the user in the status message.
 
     1. Other incorrect delete commands to try: `view 999`(when the client id 999 does not exist)  <br>
        Expected: Similar to previous.
@@ -1023,7 +1029,7 @@ Action | Format | Examples
     1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
 
     1. Test case: `delete 0`<br>
-       Expected: Client with Client ID `0` is deleted from the client list. Details of the deleted contact shown in the status message. 
+       Expected: Client with Client ID `0` is deleted from the client list. Details of the deleted contact shown in the status message.
 
     1. Test case: `delete 999` <br>
        Expected: No client is deleted since there is no client with client id `999`. Error details shown in the status message. Status bar remains the same.
@@ -1034,58 +1040,58 @@ Action | Format | Examples
 #### 7.2.4 Edit clients information
 1. Editing a client's information
 
-    1. Prerequisites: Users are not allowed to change the client id of the client. 
+    1. Prerequisites: Users are not allowed to change the client id of the client.
 
     1. Test case: `edit 1 n/Benedict` <br>
-       Expected: Client with Client ID `1` has the name changed to `Benedict`. Details of this change is shown in the status message. 
+       Expected: Client with Client ID `1` has the name changed to `Benedict`. Details of this change is shown in the status message.
 
     1. Test case: `edit 1 2 3 4 5 n/Benedict` <br>
-       Expected: Client with Client ID `1`, `2`,`3`,`4` have their name changed to `Benedict`. Details of this change is shown in the status message. 
+       Expected: Client with Client ID `1`, `2`,`3`,`4` have their name changed to `Benedict`. Details of this change is shown in the status message.
 
     1. Test case: `edit 1 n/Benedict e/rebeccalovescs@gmail.com` <br>
-       Expected: Client with Client ID `1` has the name changed to `Benedict`, and the email changed to `rebeccalovescs@gmail.com`. Details of this change is shown in the status message. 
+       Expected: Client with Client ID `1` has the name changed to `Benedict`, and the email changed to `rebeccalovescs@gmail.com`. Details of this change is shown in the status message.
 
     1. Test case: `edit 1 2 3 4 m/23-11-2021 (09:00~10:00), NUS SOC COM1` <br>
-       Expected: Client with Client ID  `1`, `2`,`3`,`4` have their next meeting changed to the `23rd November 2021` from `9am to 10am` at `NUS SOC COM1`. Details of this change is shown in the status message. 
-       
+       Expected: Client with Client ID  `1`, `2`,`3`,`4` have their next meeting changed to the `23rd November 2021` from `9am to 10am` at `NUS SOC COM1`. Details of this change is shown in the status message.
+
     1. Test case: `edit 1 i/9`<br>
-       Expected: The client's id will not be changed and error details are shown in the status message. Client list remains the same. 
+       Expected: The client's id will not be changed and error details are shown in the status message. Client list remains the same.
 
     1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
-       
-#### 7.2.5 Sort clients 
+
+#### 7.2.5 Sort clients
 
 1. Sorts the lists of clients
 
     1. Prerequisites: the client list is not empty when the command is used
 
     1. Test case: `sort r/asc`<br>
-       Expected: Sort the current based on their risk appetite in ascending order. Details of the sort is shown in the status message. 
+       Expected: Sort the current based on their risk appetite in ascending order. Details of the sort is shown in the status message.
 
     1. Test case: `sort r/dsc d/asc`<br>
        Expected: sorts clients by their risk appetite in descending order, then sorts the clients by their disposable income in ascending order for those who have the same risk appetite. Details of the sort is shown in the status message.
 
     1. Test case: `sort r/descending`<br>
        Expected: The client list will not be sorted and error details are shown in the status message. Details of the command will be shown in the status message.
-       
-    1. Other incorrect delete commands to try: `sort`, `sort r8` <br> 
+
+    1. Other incorrect delete commands to try: `sort`, `sort r8` <br>
        Expected: Similar to previous.
 
-#### 7.2.6 Finding meeting schedule on day 
+#### 7.2.6 Finding meeting schedule on day
 
 1. Find meetings that are scheduled on a specified day
 
     1. Prerequisites: User must have meetings on the day which is specified in the command.
 
     1. Test case: `schedule 25-11-2021`<br>
-       Expected: Meetings that are schedule on the `25th November 2021` are shown in the meeting schedule panel.  Details of the command is shown in the status message. 
-       
+       Expected: Meetings that are schedule on the `25th November 2021` are shown in the meeting schedule panel.  Details of the command is shown in the status message.
+
     1. Test case: `schedule`<br>
-       Expected: Returns the full list of meetings that are scheduled. Details of the command is shown in the status message. 
-       
+       Expected: Returns the full list of meetings that are scheduled. Details of the command is shown in the status message.
+
     1. Test case: `schedule 2021-30-21`<br>
-       Expected: Meeting schedule remains unchanged. Error details shown in the status message and informs user that the format is incorrect. 
+       Expected: Meeting schedule remains unchanged. Error details shown in the status message and informs user that the format is incorrect.
 
     1. Other incorrect delete commands to try: `schedule 31-13-2021`, `schedule 32-12-2021`<br>
        Expected: Similar to previous.
@@ -1093,75 +1099,75 @@ Action | Format | Examples
 
 #### 7.2.7 Filter Client List
 
-1. Filter client list based on a given attribute 
+1. Filter client list based on a given attribute
 
     1. Prerequisites: there must be clients in the current client list.
 
     1. Test case: `filter Dominic`<br>
-       Expected: Clients with the word `Dominic` in any of the client's attributes will be shown in the client list. Details of the command is shown in the status message. 
+       Expected: Clients with the word `Dominic` in any of the client's attributes will be shown in the client list. Details of the command is shown in the status message.
 
     1. Test case: `filter r/1`<br>
-       Expected: Clients with the risk appetite `1` will be shown in the client list. Details of the command is shown in the status message. 
-       
-    1. Test case: `filter Dominic r/1` <br> 
-       Expected: Clients with `Dominic` in any of its attributes and risk appetite of `1` will be shown on the client list. Details of the command is shown in the status message. 
+       Expected: Clients with the risk appetite `1` will be shown in the client list. Details of the command is shown in the status message.
+
+    1. Test case: `filter Dominic r/1` <br>
+       Expected: Clients with `Dominic` in any of its attributes and risk appetite of `1` will be shown on the client list. Details of the command is shown in the status message.
 
     1. Test case: `filter`<br>
-       Expected: The client list remains unchanged. Error details shown in the status message and informs user of the correct format. 
+       Expected: The client list remains unchanged. Error details shown in the status message and informs user of the correct format.
 
 
-#### 7.2.8 Searching for clients 
+#### 7.2.8 Searching for clients
 
 1. Search for a client based on a given attribute
 
-    1. Prerequisites: there must be clients in your address book. 
+    1. Prerequisites: there must be clients in your address book.
 
     1. Test case: `search Dominic`<br>
-       Expected: Clients with the word `Dominic` in any of the client's attributes will be shown in the client list, regardless if the user was on the client list initially. Details of the command is shown in the status message. 
+       Expected: Clients with the word `Dominic` in any of the client's attributes will be shown in the client list, regardless if the user was on the client list initially. Details of the command is shown in the status message.
 
     1. Test case: `search r/1`<br>
-       Expected: Clients with the risk appetite `1` will be shown in the client list, regardless if the user was on the client list initially. Details of the command is shown in the status message. 
-         
-    1. Test case: `search Dominic r/1` <br> 
-       Expected: Clients with `Dominic` in any of its attributes and risk appetite of `1` will be shown on the client list, regardless if the user was on the client list initially. Details of the command is shown in the status message. 
+       Expected: Clients with the risk appetite `1` will be shown in the client list, regardless if the user was on the client list initially. Details of the command is shown in the status message.
+
+    1. Test case: `search Dominic r/1` <br>
+       Expected: Clients with `Dominic` in any of its attributes and risk appetite of `1` will be shown on the client list, regardless if the user was on the client list initially. Details of the command is shown in the status message.
 
     1. Test case: `search`<br>
-       Expected: The client list remains unchanged. Error details shown in the status message and informs user of the correct format. 
-       
-#### 7.2.9 Show all clients 
+       Expected: The client list remains unchanged. Error details shown in the status message and informs user of the correct format.
 
- 1. List all clients 
+#### 7.2.9 Show all clients
+
+ 1. List all clients
     1. Test case: `list`<br>
-       Expected: Client list will contain all clients in the address book. Details of the command is shown in the status message. 
+       Expected: Client list will contain all clients in the address book. Details of the command is shown in the status message.
 
-#### 7.2.10 Clear address book 
+#### 7.2.10 Clear address book
 
  1. Clear all clients in address book
     1. Test case: `clear`, and then `yes` when prompted by *Are you sure that you wish to clear the Address Book*
-       Expected: Clients in the client list will be cleared and the client list and address book will be empty. Details of the command is shown in the status message. 
-       
+       Expected: Clients in the client list will be cleared and the client list and address book will be empty. Details of the command is shown in the status message.
+
     1. Test case: `clear`, and then `no` when prompted by *Are you sure that you wish to clear the Address Book*
-       Expected: Clients in the client list will not be cleared and the client list and address book will remain the same. Details of the command is shown in the status message. 
-    
-#### 7.2.11 General commands 
+       Expected: Clients in the client list will not be cleared and the client list and address book will remain the same. Details of the command is shown in the status message.
+
+#### 7.2.11 General commands
 
 Action | Format
 --- | ---
 **Help** | `help`
-**Exit** | `exit` 
+**Exit** | `exit`
 
-**Help command** 
- 1. Getting help information 
+**Help command**
+ 1. Getting help information
     1. Test case: `help` <br>
        Expected: A window with a link to LeadsForce's user guide
-       
-**Exit command** 
+
+**Exit command**
  1. Exit the application
-    1. Test case: `exit` <br> 
+    1. Test case: `exit` <br>
        Expected: the application closes
 
 ### 7.3 Commands for manual testing (Multiple address book feature)
-In this section, you can test multiple address book features in LeadsForce. Below is a summary of all multiple address book features in LeadsForce. 
+In this section, you can test multiple address book features in LeadsForce. Below is a summary of all multiple address book features in LeadsForce.
 
 Action | Format | Examples
 --------|---------|---------
@@ -1170,7 +1176,7 @@ Action | Format | Examples
 **Switch Address Book** | `ab switch ADDRESSBOOK_NAME` | ab switch another
 **List Address Book** | `ab list` | -
 
-#### 7.3.1 Create Address Book 
+#### 7.3.1 Create Address Book
 
 1. Create Address Book
 
@@ -1178,15 +1184,15 @@ Action | Format | Examples
 
     1. Test case: `ab create Young Adult`<br>
        Expected: Creates a new address book with the name `young adult`. Details of the command is shown in the status message.
-       
+
     1. Test case: `ab create Addressbook`<br>
        Expected: Does not create a new address book and error details are shown in the status message, informing the user that the address book name already exists.
-       
+
     1. Test case: `ab create`<br>
        Expected: Does not create a new address book and error details are shown in the status message, informing the user of a valid command format.
-       
 
-#### 7.3.2 Delete Address Book 
+
+#### 7.3.2 Delete Address Book
 
 1. Delete Address Book
 
@@ -1194,12 +1200,12 @@ Action | Format | Examples
 
     1. Test case: `ab delete Young Adult`<br>
        Expected: Deletes an address book with the name `young adult`. Details of the command is shown in the status message.
-       
+
     1. Test case: `ab delete`<br>
        Expected: Does not delete a new address book and error details are shown in the status message, informing the user of a valid command format.
-       
 
-#### 7.3.3 Switch Address Book 
+
+#### 7.3.3 Switch Address Book
 
 1. Switch between Address Book
 
@@ -1207,9 +1213,9 @@ Action | Format | Examples
 
     1. Test case: `ab switch Young Adult`<br>
        Expected: Switch to the `Young Adult` address book. Details of the command is shown in the status message.
-       
 
-#### 7.3.4 List Address Books 
+
+#### 7.3.4 List Address Books
 
 1. List the names of all address books
 

@@ -6,7 +6,7 @@ title: User Guide
 <h1 align="center"> LeadsForce User Guide </h1>
 <p align="center">
 
-<img src="images/LeadsForceLogo.jpg" alt="logo" width="125" /> 
+<img src="images/LeadsForceLogo.jpg" alt="logo" width="125" />
 
 </p>
 <p align="center">
@@ -111,7 +111,7 @@ When reading our User Guide, here are some important information to take note of
 ## 3. Client Information
 
 This section details the client information that financial advisors can keep track of with LeadsForce. Every client that
-is registered in LeadsForce have the following attributes that has the corresponding attribute prefix and value(s). 
+is registered in LeadsForce have the following attributes that has the corresponding attribute prefix and value(s).
 The attribute prefix and value specified here constitute the parameter format to be used in the commands of several [features](#5-features).
 
 
@@ -170,7 +170,7 @@ The `Tag` attribute refers to the tags associated with the client. A client can 
 | Parameter Format | `[t/TAG]...` |
 :---: | ---
 | Example | `t/family t/friends` |
-| <img src="images/info_icon.png" width="50"/> | • `TAG`: should be alphanumeric.<br>• For operation against multiple tags, you can specify the parameter multiple times in the command. For example, to assign multiple tags to an existing client of ID `100`, you can do `edit 100 t/friends t/family`.<br>• To clear all the tags associated to a client, you can do `edit CLIENT_ID t/`.<br>• Note that all commands that modify the tags of a client in any ways, will overwrite all existing tags of the client. For example, if a client previously had the tags: `family` and `friends`, doing the command `edit CLIENT_ID t/rejected` will wipe out all previous tags and the client now has only the `rejected` tag. | 
+| <img src="images/info_icon.png" width="50"/> | • `TAG`: should be alphanumeric.<br>• For operation against multiple tags, you can specify the parameter multiple times in the command. For example, to assign multiple tags to an existing client of ID `100`, you can do `edit 100 t/friends t/family`.<br>• To clear all the tags associated to a client, you can do `edit CLIENT_ID t/`.<br>• Note that all commands that modify the tags of a client in any ways, will overwrite all existing tags of the client. For example, if a client previously had the tags: `family` and `friends`, doing the command `edit CLIENT_ID t/rejected` will wipe out all previous tags and the client now has only the `rejected` tag. |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -189,8 +189,8 @@ application. An overview of LeadsForce's interface is shown below.
 <p align="center">
 <img src="images/CommandViewInterface.png" width="500"/>
 </p>
-<br> 
-The command view is where you will be able to input commands into LeadsForce. The command view consist of the following components: <br> 
+<br>
+The command view is where you will be able to input commands into LeadsForce. The command view consist of the following components: <br>
 
 
 1. **Toolbar** <br>
@@ -198,7 +198,7 @@ The command view is where you will be able to input commands into LeadsForce. Th
    • File bar where users can exit the app <br>
    • Address Book bar which allows users to switch between address books <br>
    • Themes bar which allows users to switch between different themes <br>
-   
+
 2. **Command Box** <br>
    • This is where users can input their commands into LeadsForce <br>
 
@@ -213,7 +213,7 @@ The command view is where you will be able to input commands into LeadsForce. Th
 ### 4.2 Client List View
 
 <p align="center">
-<img src="images/ClientListView.png" width="500"/>
+<img src="images/ClientListView.png" width="700"/>
 </p>
 The client list view consist of the list of clients from the user's address book,and provides an overview of their clients' information.
 
@@ -276,11 +276,11 @@ Adds a new client to the address book.
 | <img src="images/info_icon.png" width="50"/> | • A client must have minimally the name and email prefix filled during creation <br> • Any other prefixes are optional, except for Client ID as Client ID cannot be given to the client.  <br> • Prefixes that can be added are as seen in the client information in the Client Info Section |
 
 **Expected Outcome:** <br>
-For instance, if the command `add n/Keith e/keithtan@ymail.com p/12345678 r/4` was used, a new client will be recorded in the client list view with the corresponding attributes. <br> 
+For instance, if the command `add n/Keith e/keithtan@ymail.com p/12345678 r/4` was used, a new client will be recorded in the client list view with the corresponding attributes. <br>
 <p align="center" >
 <img src="images/ExpectedAddCommand.png" width="400"/>
-</p> 
-   
+</p>
+
 ### 5.2 Retrieve Particular Contact : `view`
 
 View client's information in detail.
@@ -306,7 +306,7 @@ Update the attributes of existing users using the prefix of the client’s attri
 * Multiple clients can be edited at the same time with the provided attributes by indicating their ids separated by a
   space.
 
-| Format | `edit CLIENT_ID... [<attribute>/CHANGED_VALUE]...`|
+| Format | `edit CLIENT_ID... <attribute>/CHANGED_VALUE...`|
 | :---: | :--- |
 | **Example** | • `edit 3 p/12345678 r/5` command changes client 3's contact number to “12345678” and the risk appetite to 5. <br> • `edit 15 13 r/3` command changes the risk appetite of client 13 & 15 to “3”. <br> • `edit 3 4 5 m/21-09-2021 (09:00~10:00), McDonald's` sets a meeting for clients 3, 4 and 5 to be on 21st September 2021 from 9am to 10 am at McDonald's |
 | <img src="images/info_icon.png" width="50"/> | • Client ID cannot be changed. |
@@ -316,7 +316,7 @@ Update the attributes of existing users using the prefix of the client’s attri
 The corresponding information will be changed to the attributes specified by the client. This change can be seen in the client list view. For instance, the command `edit 3 p/12345678 r/5` will change client's 3 information as such. <br>
 <p align="center" >
 <img src="images/ExpectedEditCommand.png" width="500"/>
-</p> 
+</p>
 
 ### 5.4 Delete particular contact : `delete`
 
@@ -341,23 +341,23 @@ Shows the full list of all clients in the address book.
 | <img src="images/info_icon.png" width="50"/> | • As long as the first word in the command is `list`, the command will still work regardless of the additional inputs. <br> eg. the command `list asdknkjsaf` will still work |
 
 **Expected Outcome:** <br>
-All clients in an address book would be shown in the client view list. 
+All clients in an address book would be shown in the client view list.
 
 ### 5.6 Sort Contacts : `sort`
 
 Sorts clients in order based on the inputted attribute. Clients can be sorted in ascending or descending order, and is
 based on the given `SORT DIRECTION`.
 
-| Format | `sort [<attribute>/SORT_DIRECTION]...` <br> <br> • `SORT DIRECTION` can take on the values `asc` or `dsc`, and will sort the clients based on the given attribute in an ascending and descending order respectively. |
+| Format | `sort <attribute>/SORT_DIRECTION...` <br> <br> • `SORT DIRECTION` can take on the values `asc` or `dsc`, and will sort the clients based on the given attribute in an ascending and descending order respectively. |
 | :---: | :--- |
 | **Examples** | • `sort r/ASC` will sort the list by ascending risk-appetite <br> • `sort i/dsc` will sort the list by descending client id |
 | <img src="images/info_icon.png" width="50"/> | • If multiple attributes are provided, then the clients will be sorted by the attributes sequentially. <br> e.g. `sort d/asc m/dsc`, this will sort the clients by disposable income in ascending order first, then for those clients whose disposable income are the same, they will be sorted by next meeting in descending order. <br> • Sorting by the attribute Tag (t/) is not supported. <br> • The tags are case-insensitive. (ASC and asc are both okay.) |
 
 
 **Expected Outcome:** <br>
-For instance, if you were to sort clients by risk appetite. 
+For instance, if you were to sort clients by risk appetite.
 
-| `sort r/asc`| `sort r/dsc` |  
+| `sort r/asc`| `sort r/dsc` |
 | :---: | :--- |
 | <img src="images/ExpectedSortCommand.png" width="400"/> | <img src="images/ExpectedSortCommand_DSC.png" width="400"/> |
 
@@ -389,7 +389,7 @@ Finds clients whose contacts match with the given keywords.
 
 **Expected Outcome:** <br>
 For instance, using `search Alex` will produce the following result. <br>
-   
+
 | Before | After |
 | --- | --- |
 | <img src="images/ExpectedSearchCommand.png" width="400"/> | <img src="images/ExpectedSearchCommand_AFTER.png" width="400"/> |
@@ -421,7 +421,10 @@ Clears all entries from the address book.
 | <img src="images/warn_icon.png" width="50"/> | • This action is irreversible. Once you have clear all client information from the current address book, this information will be removed from the storage file and will not be retrievable.|
 
 **Expected Outcome:** <br>
+
+<p align="center">
 <img src="images/ExpectedClearCommand.png" width="600"/>
+</p>
 
 ### 5.11 Getting help : `help`
 
@@ -470,7 +473,10 @@ Create a new address book by the name provided and switches to it.
 
 **Expected Outcome:** <br>
 The command `ab create newAddressBook` creates a new address book as shown.
+
+<p align="center">
 <img src="images/ExpectedCreateAddressBook.png" width="600"/>
+</p>
 
 
 ### 6.2 Delete existing address book: ab delete : `ab delete`
@@ -503,7 +509,7 @@ For instance, using `ab switch youngadults` when on the `newAddressBook` address
 
 ### 6.4 List all address book : `ab list`
 
-List all the name of all the existing address books. 
+List all the name of all the existing address books.
 
 | Format | `ab list` |
 | --- | --- |
@@ -511,7 +517,7 @@ List all the name of all the existing address books.
 
 **Expected Outcome:** <br>
 If you have 2 address books named `newAddressBook` and `YoungAdults`, here's the output from the command result view.
-<p align="center"> 
+<p align="center">
 <img src="images/ExpectedAbListCommand.png" width="500"/>
 </p><br>
 
@@ -597,13 +603,13 @@ Action | Format | Examples
 --------|---------|---------
 **Create** | `add n/CLIENT_NAME e/EMAIL [<attribute>/VALUE]...`| add n/benedict e/benedict@gmail.com p/90909898 r/3
 **View** | `view CLIENT_ID` | view 123
-**Edit** | `edit CLIENT_ID... [<attribute>/CHANGED_VALUE]...` | edit 12 n/Dominic p/12345678
+**Edit** | `edit CLIENT_ID... <attribute>/CHANGED_VALUE...` | edit 12 n/Dominic p/12345678
 **Delete** | `delete CLIENT_ID...` | delete 4
 **List** | `list` | -
-**Sort** | `sort [<attribute>/SORT_DIRECTION]...` | sort r/asc
+**Sort** | `sort <attribute>/SORT_DIRECTION...` | sort r/asc
 **Schedule** | `schedule [DATE]` | schedule 25-12-2021
-**Search** | `search KEYWORD... [<attribute>/KEYWORD]...` | search e/doe@gmail.com r/5
-**Filter** | `filter KEYWORD... [<attribute>/VALUE]...` | filter e/doe@gmail.com p/9
+**Search** | `search KEYWORD... [<attribute>/ATTRIBUTE_KEYWORD]...` | search e/doe@gmail.com r/5
+**Filter** | `filter KEYWORD... [<attribute>/ATTRIBUTE_KEYWORD]...` | filter e/doe@gmail.com p/9
 **Clear** | `clear` | -
 **Help** | `help` | -
 **Exit** | `exit` | -

@@ -16,7 +16,7 @@ public class SortCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts leads according to "
             + "the specified attribute and in either an ascending or descending order\n"
-            + "Parameters: <attribute>/{ASC/DESC}...\n"
+            + "Parameters: <attribute>/SORT_DIRECTION...\n"
             + "Example: " + COMMAND_WORD + " r/asc";
 
     public static final String MESSAGE_INVALID_PREFIX = "Sorting based on %s is not supported";

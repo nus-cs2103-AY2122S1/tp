@@ -238,6 +238,10 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     @Override
     public String getClientCounter() {
+        if (this.clientCounter == null) {
+            this.clientCounter = "0";
+        }
+
         return this.clientCounter;
     }
 
