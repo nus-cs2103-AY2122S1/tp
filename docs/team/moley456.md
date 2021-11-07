@@ -15,8 +15,9 @@ Given below are my contributions to the project.
   * Justification: This feature improves user experience of the product because instead of repeatedly typing the command word and related fields with their prefixes into the CLI, 
   a user will be able to reduce the amount he/she types by simply preparing a CSV file and importing the member details from the CSV file.
   * Highlights: The implementation was challenging as it required a way to get the details of existing members without
-  a reference to the member objects such as an index like most of the other commands.
-  * Pull request: [\#137](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/137)
+  a reference to the member objects such as an index like most of the other commands. Also, behaviour and design choices had to be made to provide
+  a better user experience.
+  * Pull request: [\#137](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/137) [\#257](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/257)
 
 * **New Feature**: Added the ability to export facility details and member allocations to a CSV file.
   * What it does: Allows the user to convert the facility details and member allocations into a readable format.
@@ -35,7 +36,6 @@ Given below are my contributions to the project.
   * Added support for saving and loading facility data to and from the json data file.
   * Updated the GUI to accommodate another tab for the facility list and also increased result window height to 
   accommodate for longer error messages(Pull requests [\#117](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/117), [\#223](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/223))
-  * Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests [\#36](), [\#38]())
 
 * **Documentation**:
   * User Guide:
@@ -43,7 +43,8 @@ Given below are my contributions to the project.
     * Did cosmetic tweaks to the table of content and introduction headers: [\#155](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/155)
   * Developer Guide:
     * Added use cases for new features from v1.3 [\#250](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/250)
-    * Added instructions for manual testing [\#249](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/249) 
+    * Added instructions for manual testing [\#249](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/249)
+    * Added Implementation of `import`, including multiple UML diagrams.
     * Updated Developer Guide to include Facilities.
 
 * **Community**:
