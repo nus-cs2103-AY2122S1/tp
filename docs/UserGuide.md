@@ -120,13 +120,13 @@ Adds a person to ContactSH.
 
 Format: `add -nNAME -pPHONE_NUMBER -eEMAIL -aADDRESS [-dDescription] [-lLABEL]... [-imptIMPORTANCE]`
 
-* Person in ContactSH are considered the same person if they have the same name. Duplicate person are not allowed in ContactSH.
-
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of labels (including 0)
 </div>
 
 Notes:
+
+* Person in ContactSH are considered the same person if they have the same name. Duplicate person are not allowed in ContactSH.
 
 * `IMPORTANCE` is either "true" or "false" (Case insensitive)
 
