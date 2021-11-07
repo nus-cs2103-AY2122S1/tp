@@ -58,6 +58,15 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_PROFILE_SUCCESS = "Successfully edited profile!";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_EDIT_PROFILE_DESCRIPTION_CANNOT_BE_EMPTY = "Edit profile description "
+            + "cannot be empty!";
+    public static final String MESSAGE_EDIT_PROFILE_PARAMETERS_CANNOT_BE_EMPTY = "Name, Telegram and GitHub "
+            + "parameters cannot be empty!";
+    public static final String MESSAGE_EDIT_PROFILE_NAME_CANNOT_BE_EMPTY = "Name to be edited cannot be empty!";
+    public static final String MESSAGE_EDIT_PROFILE_TELEGRAM_CANNOT_BE_EMPTY = "Telegram handle to be edited "
+            + "cannot be empty!";
+    public static final String MESSAGE_EDIT_PROFILE_GITHUB_CANNOT_BE_EMPTY = "GitHub username to be edited "
+            + "cannot be empty!";
 
     private static List<UserProfileWatcher> userProfileWatchers = new ArrayList<>();
 
@@ -132,6 +141,10 @@ public class EditCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        if (model.getPersonListControl() != null) {
+            model.setSelectedIndex(model.getFilteredPersonList().indexOf(editedPerson));
+            model.getPersonListControl().refreshPersonListUI();
+        }
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
     }
     @Override

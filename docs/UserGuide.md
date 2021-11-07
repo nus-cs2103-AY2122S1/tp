@@ -61,22 +61,22 @@ This User Guide is intended for basic to advanced users of CohortConnect. It pro
 <br/>
 
 1. Telegram Handle Conventions:  
-• Handles can use a-z, 0-9 and underscores.
+• Can only contain the letters a-z or A-Z, digits 0-9 and underscores.
 <br/>
-• Handles are case-insensitive.
+• Is case-insensitive.
 <br/>
-• Handles must be at least five characters long, and maximum is 39 characters.
+• Must be 5 to 32 characters long.
 <br/>
 <br/>  
 2. GitHub Username Conventions:
 <br/>
-• GitHub username may only contain alphanumeric characters or hyphens.
+• Can only contain alphanumeric characters or hyphens.
 <br/>
-• GitHub username cannot have multiple consecutive hyphens. 
+• Cannot have multiple consecutive hyphens. 
 <br/>
-• GitHub username cannot begin or end with a hyphen. 
+• Cannot begin or end with a hyphen. 
 <br/>
-• Maximum is 39 characters.
+• Can have a maximum of 39 characters.
 <br/>
 
 </div>
@@ -180,16 +180,48 @@ edit 1 n/John te/john_123 t/TA
 
 Edits the Profile linked to the Address Book.
 
+
 Format:
 
 ```
 edit profile [n/<NAME>] [te/<TELEGRAM>] [g/<GITHUB>]
 ```
 
-Example:
-```
-edit profile te/bob_osum
-```
+:bulb: TIP:
+<br/>
+
+1. Name Conventions:  
+   • Should only contain alphabetical characters.
+   <br/>
+2. Telegram Handle Conventions:
+   <br/>
+   • Can contain the letters a-z or A-Z, digits 0-9 and underscores.
+   <br/>
+   • Must be 5 to 32 characters long.
+   <br/>
+3. GitHub Username Conventions:
+   <br/>
+   • May only contain alphanumeric characters or hyphens.
+   <br/>
+   • Cannot have multiple consecutive hyphens.
+   <br/>
+   • Cannot begin or end with a hyphen.
+   <br/>
+   • Can have a maximum of 39 characters.
+   <br/>
+
+* Edits name, Telegram and GitHub fields of user's profile.
+* If the prefix of the field to be edited is mentioned, then its parameters cannot be left empty.
+E.g. `edit profile te/` and `edit profile n/Bob te/` would result in an error because the updated Telegram handle 
+has not been specified. 
+* If multiple prefixes are missing parameters, then the user is notified of the first missing parameter.
+E.g. `edit profile n/ te/ ` would result in an error saying that the name to be edited is missing.
+
+Examples:
+* `edit profile te/bob_osum`
+* `edit profile n/Bob g/bob-codes`
+* `edit profile n/Alex te/alex_1 g/alex123`
+
 
 ### Find a Student - `find`
 
@@ -486,6 +518,8 @@ Examples:
 
 Displays the Help Window, which consists of a list of possible Commands, and a link to this UserGuide.
 
+When the `Visit URL` button is clicked, the UserGuide is opened in the system's default web browser.
+
 Format:
 
 ```
@@ -579,6 +613,8 @@ A: Please **strictly** follow the command format to avoid such issues.
 | Find a Student (by Telegram Handle) | `find te/<TELEGRAM>` |
 | Import Student Contacts | `import <FILENAME>.json` <br> `import <FILENAME>.csv` |
 | List all the Student Contacts Present | `list` |
+| Open Current Student's GitHub Profile in the Web Browser | `g` |
+| Open Current Student's Telegram Link in the Web Browser | `te` |
 | Show the Help Window | `help` |
 | Show a Student Contact (by Name)| `show <NAME>` |
 | Show a Student Contact (by Index) | `show <INDEX>` |

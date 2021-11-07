@@ -197,7 +197,7 @@ This section describes noteworthy details on how certain features are implemente
 
 #### Implementation
 
-The telegram handle field is facilitated by the `Telegram` class. It is stored interally as a `String` in the data file `addressbook.json` and is then initialized as a `Telegram` object. 
+The telegram handle field is facilitated by the `Telegram` class. It is stored internally as a `String` in the data file `addressbook.json` and is then initialized as a `Telegram` object. 
 
 The `Telegram` class implements the following operation:
 
@@ -366,6 +366,34 @@ The sequence diagram for the first step is similar to the Export Command. The fo
 In both scenarios, a new `JsonAddressBookStorage` or `CsvAddressBookStorage` is created. The `AddressBookStorage` method `readAddressBook()` then reads the respective file using `JsonUtil#readJsonFile()` or `CsvUtil#readCsvFile()`. In both cases, the files are read using Jackson's `ObjectMapper` or `CsvMapper` classes respectively.
 
 
+### Edit Profile command
+
+#### Implementation
+
+Edits the user's profile linked to the Address Book.
+
+The user's profile contains details such as their name, Telegram Handle and GitHub username, which need to be kept up to date.
+This is especially important as the user's GitHub username is crucial for the Find a Buddy feature which matches them
+with a potential teammate using the GitHub metadata.
+
+The edit profile feature allows edit to change their name, Telegram handle and GitHub username.
+
+The implementation for editing the user profile is similar to that of editing a student contact. 
+It is facilitated by the `EditCommandParser` class, which implements `Parser<EditCommand>`.
+It implements the `parse()` method, which determines whether what's being edited is a contact or the user profile, checks for 
+the validity of user input (through the `checkEditProfileInputFormat()` method) and returns an `EditCommand`, to be executed in
+`LogicManager`.
+
+The `EditCommand` class extends `Command`. Its instance is created by providing an `index` (since a contact isn't being edited here, 
+the index passed is 1 by default and will not affect the process), and an `editPersonDescriptor` (which represents the updated user profile).
+Its implementation of `Command#execute()` calls the `executeEditProfile()` method which edits the user profile as necessary.
+
+The Sequence Diagram below illustrates the interactions within the `Logic` and `Model` components for
+the `execute("edit profile te/john_doe g/john-codes")` API call.
+
+![EditProfileSequenceDiagram](images/EditProfileSequenceDiagram.png)
+
+
 ### Find command
 
 #### Implementation
@@ -386,26 +414,260 @@ the `FilteredPersonList` that contains the contact(s) matching the find paramete
 `Command#execute()` is where the updation of the `FilteredPersonList` to reflect the search performed on the contacts in the address book.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` and `Model` components for
+the `execute("find Bob Joe")` API call.
+
+![FindNameSequenceDiagram](images/FindNameSequenceDiagram.png)
+
+The Sequence Diagram below illustrates the interactions within the `Logic` and `Model` components for
+the `execute("find t/friends teammates")` API call.
+
+![FindTagsSequenceDiagram](images/FindTagsSequenceDiagram.png)
+
+The Sequence Diagram below illustrates the interactions within the `Logic` and `Model` components for
 the `execute("find te/alex_1")` API call.
 
-![FindSequenceDiagram](images/FindSequenceDiagram.png)
+![FindTelegramSequenceDiagram](images/FindSequenceDiagram.png)
+
+The Sequence Diagram below illustrates the interactions within the `Logic` and `Model` components for
+the `execute("find g/alex-coder")` API call.
+
+![FindGithubSequenceDiagram](images/FindGithubSequenceDiagram.png)
+
+### Tag command
+
+#### Implementation
+
+The Tag command allows users to directly add or remove tags from a specific contact. This command was introduced to 
+overcome the following limitations:
+1. Editing a contact's tag field using `edit <INDEX> t/<TAG>` will replace the existing tag with the specified one 
+instead of adding on to it.
+2. No way to remove tags from a contact directly.
+
+It is facilitated by the `TagCommandParser` class, which implements `Parser<TagCommand>`.
+It implements the `parse()` method, which parses the index of the contact to which tags are to be added or from which 
+tags are to be removed. Moreover, checking the validity of the user input (i.e. ensuring the presence of arguments for the `Tag` command like tags to add where the prefix `a/` is present and the
+presence of tags to remove where the prefix `r/` is present) is handled by the `checkInputFormat` method. Once the input is confirmed to be valid, `parse()` returns a `TagCommand`, to be executed in
+`LogicManager`. 
+
+The `TagCommand` class extends `Command`. Its instance is created by providing the `targetIndex` of the contact to which 
+tags are to be added or from which tags are to be removed (of type `Index`), an ArrayList containing the tags to be 
+added (`toAdd`) and an ArrayList containing the tags to be removed (`toRemove`). Its implementation of `Command#execute()` is where the updation of the `FilteredPersonList` to reflect the search performed on the contacts in the address book.
+
+The Sequence Diagram below illustrates the interactions within the `Logic` and `Model` components for
+the `execute("tag 1 a/friends")` API call.
+
+![TagSequenceDiagramForAdd](images/TagSequenceDiagramForAdd.png)
+
+The Sequence Diagram below illustrates the interactions within the `Logic` and `Model` components for
+the `execute("tag 1 a/friends r/family")` API call.
+
+![TagSequenceDiagramForAddAndRemove](images/TagSequenceDiagramForAddAndRemove.png)
 
 ### Welcome Window
 
 #### Implementation
 
-The class `WelcomeWindow` is responsible displaying the welcome window at the
-start, when the application is launched. It is facilitated by `WelcomeWindow.fxml` file
-which is responsible for how various components inside this window are arranged.
+The class `WelcomeWindow` is responsible for displaying the welcome window at 
+the start when the application is launched. It is facilitated by the 
+`WelcomeWindow.fxml` and `WelcomeWindow.css`.  The `.fxml` file is responsible 
+for the layout of the various components in this window, and the `.css` file 
+adds a style and enhances the overall UI.
 
 The `WelcomeWindow` class extends `UiPart<Stage>`.
 
-When the app is launched, an instance of this class is created, and the 
-`WelcomeWindow#start` is invoked to display the window. Various methods
-including `fadeTransition` and `displayAnimatedText` are used within this
-class to achieve the fading image and character typing effect respectively.
+When the app is launched, an instance of this class is created, and the
+`WelcomeWindow#start()` is invoked to display the window. Various methods, including 
+`fadeTransition()` and `displayAnimatedText(String textToDisplay, double delayTime)`
+, are used within this class to achieve the fading image and character typing 
+effect, respectively.
 
 ![WelcomeWindowSequenceDiagram](images/WelcomeWindowSequenceDiagram.png)
+
+### Profile SetUp Window
+
+#### Implementation
+
+The class `ProfileSetUpWindow` is responsible for displaying the Profile SetUp Window. 
+It is only shown once when the User launches the app for the first time, and their 
+credentials are not present. They have to input their valid credentials here.
+It is facilitated by `ProfileSetUpWindow.fxml` and 
+`ProfileSetUpWindow.css`. The `.fxml` file is responsible for the layout of the 
+various components in this window, and the `.css` file adds a style and enhances 
+the overall UI.
+
+The `ProfileSetUpWindow` class extends `UiPart<Stage>`.
+
+This window would only be visible after the Welcome Window Splash Screen. 
+`WelcomeWindow` hands over the control to `MainWindow` after execution, which 
+then sets up the `ProfileSetUpWindow`. On Initializing and calling `start()` 
+method of the `ProfileSetUpWindow`, the `ProfileSetUpWindow` with the help of 
+a `Logic` object (which is obtained during initialization) checks, if a 
+User Profile is present. If it is present, it 
+again hands over the control to the `MainWindow` by calling the `start()` method 
+of the `MainWindow`. Else, It displays the Profile SetUp Window and 
+waits for a response from the User.
+
+After the User has input their credentials in the text fields, they are expected to 
+click the `Submit` button. When that button is clicked upon, the `submit()` method is 
+invoked. This method calls the `areUserCredentialsValid()` method to verify if the
+entered credentials are valid or not. If they are valid, the User Profile is deemed 
+complete and is set up with the help of the `Logic` object obtained during
+the initialization. If the credentials are not valid, an error message
+is shown in the Window, highlighting which credential is invalid. The User cannot proceed
+forward without entering all valid Credentials.
+
+The `areUserCredentialsValid()` class checks if the entered Name, Telegram Handle,
+and the GitHub Username are valid. 
+
+1. Class level method `isValidName()`, of `Name` class 
+   verifies the Name entered.
+2. Class level method `isValidTelegram()`, of `Telegram` class
+   verifies the Telegram Handle entered.
+3. Class level method `isValidGithub()`, of `Github` class
+   verifies the GitHub Username entered.
+
+If either of the credentials is not valid, the `setErrorMessageText(MESSAGE)` is
+called with the appropriate error message. This method is responsible for displaying 
+this error message in the Window.
+
+> A Typical Scenario Would be like:
+
+![ProfileSetUpWindowTypicalScenarioSequenceDiagram](images/ProfileSetUpWindowTypicalScenarioSequenceDiagram.png)
+
+> If The User Enters an Invalid Telegram Credential:
+
+![ProfileSetUpWindowInvalidCredentialsSequenceDiagram](images/ProfileSetUpWindowInvalidCredentialsSequenceDiagram.png)
+
+> The Big Picture (High Level Diagram):
+
+![ProfileSetUpWindowSequenceDiagram](images/ProfileSetUpWindowSequenceDiagram.png)
+
+### User Profile Window
+
+#### Implementation
+
+The class `UserProfileWindow` is responsible for displaying the User Profile
+Window. It is shown when the user either uses the keyboard shortcut, 
+`Command/Control + P`, or clicks on the User Profile located in the top right in
+the Menu Bar. It is facilitated by `UserProfileWindow.fxml`
+and `UserProfileWindow.css`. The `.fxml` file is responsible for the layout of the
+various components in this window, and the `.css` file adds a style and enhances the
+overall UI.
+
+The `UserProfileWindow` class extends `UiPart<Stage>`.
+
+This window can only be viewed when the app has successfully started up and 
+has valid User Credentials.
+
+This window is initialized when the `MainWindow` is initialized. It is
+initialized in the `MainWindow` constructor. This window, to be seen, has to be 
+triggered as an event by the user. The `MainWindow` class has a method 
+`handleUserProfileWindow()`, which is responsible for displaying this window.
+
+The `handleUserProfileWindow()` when called, calls the method `isShowing()` via 
+the object initialized earlier. If it is not showing, the `show()` method of the
+`UserProfileWindow` class is called upon. Else, if it is already showing, the
+`focus()` method is called upon. Along with that, in case the window had been
+minimized by the User, `UserProfileWindow#getRoot()#toFront()` is called to
+bring the window to the maximized state.
+
+The `UserProfileWindow#show()`, first calls the `UserProfileWindow#initializeFields()`,
+to initialize all the fields with the latest User Profile Credentials. This would, in turn
+also call `UserProfileWindow#setFields()`, to set them up in the UI. After all the setting
+up is done, the User Profile Window is shown.
+
+The `UserProfileWindow#focus()`, calls the `getRoot()` method and on that `requestFocus()` 
+is called upon to request focus.
+
+![UserProfileWindowSequenceDiagram](images/UserProfileWindowSequenceDiagram.png)
+
+### Help Window
+
+#### Implementation
+
+The class `HelpWindow` is responsible for displaying the Help
+Window. It is shown when the user either uses the keyboard shortcut,
+`F1`, or clicks on `Help` located on the top left in the Menu Bar, or types 
+in `help` in the command box. It is facilitated by `HelpWindow.fxml`
+and `HelpWindow.css`. The `.fxml` file is responsible for the layout of the
+various components in this window, and the `.css` file adds a style and enhances the
+overall UI.
+
+The `HelpWindow` class extends `UiPart<Stage>`.
+
+This window can only be viewed when the app has successfully started up and 
+has valid User Credentials.
+
+This window is initialized when the `MainWindow` is initialized. It is
+initialized in the `MainWindow` constructor. This window, to be seen, has to be
+triggered as an event by the user. The `MainWindow` class has a method
+`handleHelpWindow()`, which is responsible for displaying this window.
+
+On initializing the `HelpWindow` class, `HelpWindow#setUpCommandDetails()` and
+`HelpWindow#setUpHelpTableView()` are called.
+
+`setUpCommandDetails()` creates multiple objects of `CommandDetails`, all of them
+representing a unique command that the app supports. Those are then added to an
+`ObservableList<CommandDetails>`, which is linked to the `TableView` in the UI.
+
+`setUpHelpTableView()` sets and places various restrictions on the table.
+It restricts any events or scrolling on the table. Also, It adjusts the height
+of the table according to the number of `CommandDetails` present in it.
+
+The `handleHelpWindow()` when called, calls the method `isShowing()` via
+the object initialized earlier. If it is not showing, the `show()` method of the
+`HelpWindow` class is called upon. Else, if it is already showing, the
+`focus()` method is called upon. Along with that, in case the window had been
+minimized by the User, `HelpWindow#getRoot()#toFront()` is called to
+bring the window to the maximized state.
+
+There is also a button present in the window, `Visit URL`, which upon 
+clicking, takes the User to the UserGuide. It opens the UserGuide in the
+Users systems default browser.
+
+![HelpWindowVisitURLButton](images/HelpWindowVisitURLButton.png)
+
+![HelpWindowSequenceDiagram](images/HelpWindowSequenceDiagram.png)
+
+### User Profile in Menu Bar
+
+#### Implementation
+
+The class `UserProfileInMenuBar` is responsible for displaying the User
+Profile in the Menu Bar. It is shown in the Main Window, in the top right
+of the Menu Bar beside the Bell icon. It is facilitated by `UserProfileInMenuBar.fxml`.
+The `.fxml` file is responsible for the layout of the various components inside
+this Region. On clicking this, the `UserProfileWindow` is shown.
+
+![UserProfileInMenuBarPictureHighlight](images/UserProfileInMenuBarPictureHighlight.png)
+
+The `UserProfileInMenuBar` class extends `UiPart<Region>` and implements
+`UserProfileWatcher`.
+
+This Region can only be viewed when the app has successfully started up and
+has valid User Credentials.
+
+This Region is initialized when the `MainWindow#start()` is called. On 
+initializing the `UserProfileInMenuBar` class, `UserProfileInMenuBar#setUserProfileOnMenuBar()` 
+and `UserProfileInMenuBar#addToUserProfileWatcherList()` are called.
+
+`setUserProfileOnMenuBar()` is responsible for retrieving the User Credentials with
+the help of the `Logic` object obtained during initialization and setting up the 
+`ImageView` and `Label` with the User Credentials retrieved.
+
+`addToUserProfileWatcherList()` is responsible for adding `this` (UserProfileWatcher)
+to a watchers list, such that, in the scenario, the User updates their profile
+credentials, the changes are reflected immediately. As the User is able to 
+edit their Credentials via the `EditCommand`, the profile watchers list is present there.
+A static method in `EditCommand`, `addUserProfileWatcher(this)` is called upon, by
+passing `this` (UserProfileWatcher) as an argument, to add it to the profile watchers list.
+
+Whenever there is a change in the User Credentials, the `updateUserProfile()` is
+called upon in the `UserProfileInMenuBar`, which in turn calls the 
+`setUserProfileOnMenuBar()`. This method then retrieves the new User Credentials
+and sets them up.
+
+![UserProfileInMenuBarSequenceDiagram](images/UserProfileInMenuBarSequenceDiagram.png)
 
 ### Show command
 
@@ -596,7 +858,45 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `CohortConnect` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use Case 1: Add user**
+**Use Case 1: Setting Up User Profile**
+
+MSS
+
+1. User enters their Name.
+2. User enters their Telegram Handle.
+3. User enters their GitHub Username.
+4. User clicks on the submit button.
+5. CohortConnect shows the Main Window, signifying that the User Profile was set up.
+   Use case ends.
+
+Extensions
+
+* 4a. CohortConnect detects an error in the entered Name (Invalid Name).
+   * 4a1. CohortConnect shows an error message.
+   * 4a2. CohortConnect requests for a valid Name.
+   * 4a3. User enters new Name.
+   * 4a1-4a3 are repeated until the Name entered is valid.
+   * Use case resumes from step 5.
+
+* 4b. CohortConnect detects an error in the entered Telegram Handle (Invalid Telegram Handle).
+   * 4b1. CohortConnect shows an error message.
+   * 4b2. CohortConnect requests for a valid Telegram Handle.
+   * 4b3. User enters new Telegram Handle.
+   * 4b1-4b3 are repeated until the Telegram Handle entered is valid.
+   * Use case resumes from step 5.
+
+* 4c. CohortConnect detects an error in the entered GitHub Username (Invalid GitHub Username).
+   * 4c1. CohortConnect shows an error message.
+   * 4c2. CohortConnect requests for a valid GitHub Username.
+   * 4c3. User enters new GitHub Username.
+   * 4c1-4c3 are repeated until the GitHub Username entered is valid.
+   * Use case resumes from step 5.
+
+* *a. At any time, the User chooses to close the app.
+   * *a1. CohortConnect closes.
+     Use case ends.
+   
+**Use Case 2: Add user**
 
 MSS
 
@@ -620,7 +920,7 @@ Extensions
   * Steps 1b1-1b3 are repeated until the data entered are valid.
   * Use case resumes from step 2.
 
-**Use Case 2: Edit user**
+**Use Case 3: Edit user**
 
 MSS
 
@@ -764,6 +1064,7 @@ Extensions
 
 * 1c. The JSON or CSV file is formatted wrongly. 
     * 1c1. CohortConnect shows an error message.
+    
     Use case ends.
 
 **Use Case 19: Export contacts to JSON or CSV file**
@@ -797,14 +1098,17 @@ Extensions
 
 * 2a. The contact list is empty and the user enters the GitHub command.
   * 2a1. CohortConnect shows an error message prompting the user to select a user.
+  
   Use case ends.
 
 * 2b. The contact list is empty and the user tries to click the GitHub username.
   * 2b1. The contact details will be empty and there will be nothing for the user to click.
+  
   Use case ends.
 
 * 2c. The contact has an invalid GitHub username.
   * 2c1. The browser shows GitHub's 404 page.
+  
   Use case ends. 
 
 **Use Case 21: Opening a contact's Telegram**
@@ -821,16 +1125,31 @@ Extensions
 
 * 2a. The contact list is empty and the user enters the Telegram command.
     * 2a1. CohortConnect shows an error message prompting the user to select a user.
+    
       Use case ends.
 
 * 2b. The contact list is empty and the user tries to click the Telegram username.
     * 2b1. The contact details will be empty and there will be nothing for the user to click.
+    
       Use case ends.
 
 * 2c. The contact has an invalid Telegram username.
     * 2c1. The invalid Telegram profile is shown in the browser window, and Telegram shows an error message when opening the profile in the Telegram application.
+    
       Use case ends.
 
+
+**Use Case 23: Opening the Help Window**
+
+MSS
+
+1. User uses the keyboard shortcut, or types in the command, or clicks on help in the Menu Bar.
+2. CohortConnect shows the Help Window.
+
+* 1a. At any time, the User chooses to close the app.
+   * 1a1. CohortConnect closes.
+   
+     Use case ends.
 
 ### Non-Functional Requirements
 

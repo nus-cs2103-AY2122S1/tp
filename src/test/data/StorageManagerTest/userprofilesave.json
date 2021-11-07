@@ -7,7 +7,7 @@
     "email" : "",
     "address" : "",
     "tagged" : [ ],
-    "isFavourite" : false,
+    "isFavorite" : false,
     "gitStats" : {
       "Java" : 0.9663333333333334,
       "CSS" : 0.014666666666666666,

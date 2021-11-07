@@ -9,12 +9,11 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 
-public class TagCommandParser implements Parser<Command> {
+public class TagCommandParser implements Parser<TagCommand> {
 
     private void checkInputFormat(String args, ArgumentMultimap argMultimap) throws ParseException {
         assert(!args.isEmpty());
