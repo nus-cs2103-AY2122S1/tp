@@ -4,7 +4,21 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.*;
+import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddToOrderCommand;
+import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EndAndTransactOrderCommand;
+import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListInventoryCommand;
+import seedu.address.logic.commands.ListTransactionCommand;
+import seedu.address.logic.commands.RemoveCommand;
+import seedu.address.logic.commands.RemoveFromOrderCommand;
+import seedu.address.logic.commands.SortCommand;
+import seedu.address.logic.commands.StartOrderCommand;
 
 public class HelpCommandParserTest {
 
