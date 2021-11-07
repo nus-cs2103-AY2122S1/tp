@@ -46,7 +46,7 @@ Given below are my contributions to the project.
   * Developer Guide:
     * Updated target user profile, value proposition and user stories [\#34](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/34)
     * Added implementation details of the `search` feature. [\#152](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/152)
-    * Updated Appendix sections. [\#276](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/276), [\#268](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/268)
+    * Updated Appendix sections. [\#276](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/276), [\#268](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/268), [\#292](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/292)
   * Others: 
     * Update README and index.md. [\#196](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/196)
     

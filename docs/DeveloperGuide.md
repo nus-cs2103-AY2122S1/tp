@@ -565,7 +565,7 @@ Others:
 
 (For all use cases below, the **System** is `Source Control` and the **Actor** is the `user`, unless specified otherwise)
 
-#### **Use case: Import student roster**
+#### Use case: Import student roster
 
 **MSS**
 
@@ -582,7 +582,7 @@ Others:
       Use case resumes at step 2.
 
       
-#### **Use case: Create a new group**
+#### Use case: Create a new group
 
 **MSS**
 
@@ -596,20 +596,23 @@ Others:
   * 1a1. Source Control shows an error message.
     Use case resumes at step 1.
 
+
 * 1b. User enters a group name which coincides with an existing group in the database.
     * 1b1. Source Control shows an error message.
       Use case resumes at step 1.
     
+
 * 1c. User enters a student name which match with multiple students in the Source Control database.
     * 1c1. Source Control shows the list of students with matching names, and prompts the user to resolve the conflict by specifying the target student's NUSNET ID instead.
       Use case resumes at step 1.
+
 
 * 1d. User enters a list of student name contains duplicated students.
     * 1d1. Source Control shows an error message to inform user of the duplicates.
       Use case resumes at step 1.
 
 
-#### **Use case: Showing a student's performance**
+#### Use case: Showing a student's performance
 
 **MSS**
 
@@ -628,7 +631,7 @@ Others:
       Use case resumes at step 1.
 
 
-#### **Use case: Showing a group's performance**
+#### Use case: Showing a group's performance
 
 **MSS**
 
@@ -643,7 +646,7 @@ Others:
       Use case resumes at step 1.
 
 
-#### **Use case: Showing cohort performance for an assessment**
+#### Use case: Showing cohort performance for an assessment
 
 **MSS**
 
@@ -658,7 +661,7 @@ Others:
       Use case resumes at step 1.
 
 
-#### **Use case: Creating an alias for an existing command**
+#### Use case: Creating an alias for an existing command
 
 **MSS**
 
@@ -671,9 +674,11 @@ Others:
     * 1a1. Source Control shows an error message.
       Use case resumes at step 1.
     
+
 * 1b. User tries to create an alias using a default command.
     * 1b1. Source Control shows an error message.
       Use case resumes at step 1.
+
 
 * 1c. User enters an invalid alias name. 
   * 1c1. Source Control shows an error message.
