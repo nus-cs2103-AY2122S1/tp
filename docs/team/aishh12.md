@@ -12,7 +12,7 @@ It is written in Java, and has about 15 kLoC.
 
 Given below are my contributions to the project.
 
-* ###New Features
+* **New Features**
   * **Add User Profile**:
     * Pull request [\#128](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/128)
     * What it does: Allows user to create a CohortConnect profile by providing their name, Telegram handle and GitHub username.
@@ -49,25 +49,25 @@ Given below are my contributions to the project.
     * Justification: Makes navigating to contacts' GitHub profiles and reaching out to them over Telegram very convenient for the user.
   
 
-* ###**Enhancements to existing features**:
+* **Enhancements to existing features**:
     * Find feature : implemented find by tag, Telegram handle and GitHub username (Pull requests [\#41](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/41), [\#64](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/64), [\#97](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/97))
 
 
-* ###**Testing**:
+* **Testing**:
   * Added test cases for the following classes :
     * EditCommandTest (Pull requests [\#274](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/274) )
     * FindCommandTest and FindCommandParserTest (Pull requests [\#64](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/64), [\#97](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/97))
     * TagCommandTest and TagCommandParserTest (Pull requests [\#264](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/264) )
 
 
-* ###**Documentation**:
+* **Documentation**:
     * User Guide:
         * Added documentation for the features `find`, `edit profile` and `tag` (Pull requests [\#237](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/237), [\#283](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/283), [\#268](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/268))
     * Developer Guide:
         * Added implementation details of the `find`, `edit profile` and `tag` features (Pull requests [\#108](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/108), [\#304](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/304))
 
 
-* ###**Community**:
+* **Community**:
     * Reported bugs and suggestions for my teammates code (examples: [1](https://github.com/AY2122S1-CS2103T-T10-1/tp/issues/158), [2](https://github.com/AY2122S1-CS2103T-T10-1/tp/issues/159), [3](https://github.com/AY2122S1-CS2103T-T10-1/tp/issues/286))
   
 
