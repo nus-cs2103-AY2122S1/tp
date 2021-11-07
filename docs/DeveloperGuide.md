@@ -348,7 +348,7 @@ gitGud undergoes to display the recommendations friends list to the user:
 
 Similar to [delete](#delete-feature) and [link](#link-feature) features above, the parse and execute actions shown in the activity 
 diagrams are implemented via invoking`RecommendCommandParser#parse(String)`, which will construct a `RecommendCommand` instance 
-which`RecommendCommand#execute(model)` method will then be invoked by the `LogicManager` class. 
+of which its `RecommendCommand#execute(model)` method will then be invoked by an instance of the `LogicManager` class. 
 
 <ins>Step 2: Filtering and sorting the friends list to get recommendations friends list</ins><br> 
 
@@ -358,14 +358,15 @@ The sequence diagram below illustrates the interactions made in detail used to p
 <img src="images/RecommendCommandSequenceDiagram2.png" width="1000" />
 
 Hence, the recommend feature execution makes use of a `FriendRecommendFilterPredicate` which returns true if the friend plays the specified game and 
-schedule is free during specified timing and a `Comparator` which can be used to sort friends in order of highest skill value 
+schedule is available during the specified timing and a `Comparator` which can be used to sort friends in order of the highest skill value 
 for the specified game. 
 
 <ins>Step 3: Displaying the recommended friends</ins> 
+
 Finally, the UI is updated to display the filtered and sorted recommendations friends list whenever the 
 `FilteredList#setPredicate(Predicate)` or `SortedList#setComparator(Comparator)` methods are invoked. This is achieved due
-to the use of JavaFX's `FilteredList` and `SortedList`, which listens for specific changes to be tracked and 
-which then is used to trigger updates to the user interface display.
+to the use of JavaFX's `FilteredList` and `SortedList`, which listens for and tracks the above-mentioned changes 
+which is then used to trigger updates to the displayed friends list.
 
 #### Design considerations:
 
