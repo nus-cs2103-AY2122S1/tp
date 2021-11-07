@@ -111,6 +111,7 @@ public class AddStudentCommand extends AddCommand {
      * Checks if a TeleHandle is a duplicate of an existing one in TAB.
      *
      * @param teleHandle The TeleHandle to be verified.
+     * @param module The module in which the given TeleHandle is to be checked.
      * @return True is the TeleHandle is a duplicate. False otherwise.
      */
     public static boolean isDuplicateTeleHandleInModule(TeleHandle teleHandle, Module module) {
@@ -128,6 +129,7 @@ public class AddStudentCommand extends AddCommand {
      * Checks if an Email is a duplicate of an existing one in TAB.
      *
      * @param email The Email to be verified.
+     * @param module The module in which the given Email is to be checked.
      * @return True is the Email is a duplicate. False otherwise.
      */
     public static boolean isDuplicateEmailInModule(Email email, Module module) {
