@@ -705,6 +705,10 @@ testers are expected to do more *exploratory* testing.
     1. Incorrect delete commands to try: `rmdir`, `rmdir X` where the folder `X` does not exist<br>
        Expected: Similar to previous.
 
+1. Deleting a folder while there is a filter in place for folders
+    1. Prerequisites: Run a search using the `find -folders` command. Multiple folders in the filtered list.
+    1. Similar to point 1 but folder that is being deleted must be present in the filtered list
+
 #### Clearing all folders: `rm -folders`
 
 1. Clearing all folders
