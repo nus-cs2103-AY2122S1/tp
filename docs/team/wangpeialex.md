@@ -57,7 +57,7 @@ Given below are my contributions to the project.
         * Refined and updated class diagrams to make them more and clean and
           readable [\#178](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/178/files?authenticity_token=cnwcniV%2B3SlxviaiSsFhbzbBAYOnwhmeY2huI3o3cGoSb8zemdrQDT4cW%2B9c4lGKPdVT4ZxW%2BANMgfyP%2FE269A%3D%3D&file-filters%5B%5D=.png)
         * Drew object diagrams for Observer pattern. [\#184](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/184)
-
+        * Drafted the Effort appendix.
 * **Manual Testing**:
    * System Testing:
         * Tested all commands with positive and negative EP cases.
