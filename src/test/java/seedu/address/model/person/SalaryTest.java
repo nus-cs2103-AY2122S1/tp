@@ -25,7 +25,8 @@ public class SalaryTest {
         assertEquals(new Salary("0").toString(), "0.00");
         assertEquals(new Salary("1.99").toString(), "1.99");
         assertEquals(new Salary("1.9").toString(), "1.90");
-        assertEquals(new Salary("1.999").toString(), "1.99");
+        // Removed because Salary can now only cents up to two digits
+        // assertEquals(new Salary("1.999").toString(), "1.99");
     }
 
     @Test
@@ -57,7 +58,8 @@ public class SalaryTest {
 
         // valid cents
         assertTrue(Salary.isValidCents("1")); // 1 decimal place
-        assertTrue(Salary.isValidCents("00001")); // multiple decimal places (> 2)
+        // Removed because Salary can now only cents up to two digits
+        //assertTrue(Salary.isValidCents("00001")); // multiple decimal places (> 2)
         assertTrue(Salary.isValidCents("01"));
     }
 
@@ -78,7 +80,8 @@ public class SalaryTest {
 
         // valid salary
         assertTrue(Salary.isValidSalary("1.99"));
-        assertTrue(Salary.isValidSalary("1.999")); // decimal places > 2
+        // Removed because Salary can now only cents up to two digits
+        // assertTrue(Salary.isValidSalary("1.999")); // decimal places > 2
         assertTrue(Salary.isValidSalary("1.9")); // 1 decimal place
         assertTrue(Salary.isValidSalary("0"));
     }

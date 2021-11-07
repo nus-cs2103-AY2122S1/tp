@@ -107,7 +107,7 @@ public class ModelManagerTest {
     @Test
     public void getPersonTest() {
         Person alice = new PersonBuilder().withName("Alice Pauline")
-                .withEmail("alice@example.com").withPhone("94351253").withRoles("floor").withSalary("1000000")
+                .withEmail("alice@example.com").withPhone("94351253").withRoles("floor").withSalary("1000")
                 .withStatus("fulltime").withTags("friends").build();
 
         modelManager.addPerson(alice);
@@ -118,7 +118,7 @@ public class ModelManagerTest {
     @Test
     public void addShift_throwsDuplicateShiftException() {
         Person alice = new PersonBuilder().withName("Alice Pauline")
-                .withEmail("alice@example.com").withPhone("94351253").withRoles("floor").withSalary("1000000")
+                .withEmail("alice@example.com").withPhone("94351253").withRoles("floor").withSalary("1000")
                 .withStatus("fulltime").withTags("friends").build();
         modelManager.addPerson(alice);
         modelManager.addShift(alice, DayOfWeek.MONDAY, Slot.AFTERNOON, START_DATE, END_DATE);
@@ -129,7 +129,7 @@ public class ModelManagerTest {
     @Test
     public void addShift_success() {
         Person alice = new PersonBuilder().withName("Alice Pauline")
-                .withEmail("alice@example.com").withPhone("94351253").withRoles("floor").withSalary("1000000")
+                .withEmail("alice@example.com").withPhone("94351253").withRoles("floor").withSalary("1000")
                 .withStatus("fulltime").withTags("friends").build();
         modelManager.addPerson(alice);
         modelManager.addShift(alice, DayOfWeek.MONDAY, Slot.AFTERNOON, START_DATE, END_DATE);
@@ -141,7 +141,7 @@ public class ModelManagerTest {
     public void deleteShift_success() {
         LocalDate testDate = END_DATE.plusDays(7);
         Person alice = new PersonBuilder().withName("Alice Pauline")
-                .withEmail("alice@example.com").withPhone("94351253").withRoles("floor").withSalary("1000000")
+                .withEmail("alice@example.com").withPhone("94351253").withRoles("floor").withSalary("1000")
                 .withStatus("fulltime").withTags("friends").build();
         modelManager.addPerson(alice);
         modelManager.addShift(alice, DayOfWeek.MONDAY, Slot.AFTERNOON, START_DATE, END_DATE);

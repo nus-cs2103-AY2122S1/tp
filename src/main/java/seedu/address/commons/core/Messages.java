@@ -16,7 +16,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_SHIFT_TIME = "The shift time provided is invalid, expected: HH:MM-HH:MM";
     public static final String MESSAGE_INVALID_TIME = "The format or range of input time is invalid";
     public static final String WRONG_NUMBER_OF_DATES = "Expects 0, 1 or 2 dates as input, received $d";
-    public static final String DATES_IN_WRONG_ORDER = "End date keyed in is after startDate.";
+    public static final String DATES_IN_WRONG_ORDER = "The inputted end date must be after the start date.";
     public static final String FILE_NOT_FOUND = "The following file could not be accessed: ";
     public static final String SHIFT_PERIOD_PARSING_DEFAULT = "When date input is provided, it should be in "
             + "chronological order. If "

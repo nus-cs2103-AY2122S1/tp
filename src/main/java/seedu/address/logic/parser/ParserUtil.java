@@ -47,7 +47,6 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
 
-
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -459,4 +458,25 @@ public class ParserUtil {
         return new Period(dates[0], dates[1]);
     }
 
+    /**
+     * Returns if a string contains a valid integer.
+     *
+     * @param test The string to be tested.
+     * @return Whether a string contains a valid integer.
+     */
+    public static boolean isValidInt(String test) {
+        test = test.trim();
+        if (!test.matches("\\d+") || test.equals("")) {
+            return false;
+        }
+
+        try {
+            Integer.parseInt(test);
+            // This exception will be caught if the integer exceeds max integer
+        } catch (NumberFormatException e) {
+            return false;
+        }
+
+        return Integer.parseInt(test) > 0;
+    }
 }
