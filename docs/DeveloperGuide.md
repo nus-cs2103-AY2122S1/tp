@@ -480,13 +480,6 @@ testers are expected to do more *exploratory* testing.
 
    1. Double-click the jar file Expected: gitGud GUI launches.
 
-1. Saving window preferences
-
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
-
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
-
 ### Adding a friend
 1. Adding a friend to gitGud
 
@@ -513,8 +506,6 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `game --add`<br>
        Expected: No game is added. Error details shown in the status message. Status bar remains the same.
 
-2. _{ more test cases … }_
-
 ### Linking a friend to a game
 1. Linking a friend to a game in gitGud.
 
@@ -531,7 +522,7 @@ testers are expected to do more *exploratory* testing.
        Expected: No link is added. Error details shown in the status message. Status bar remains the same.
 
     4. Other incorrect link commands to try: `link --friend Draco --user Draconian`, `link --game Valorant --user 
-       Draconian`, `link --friend`, ...
+       Draconian`, `link --friend`
        Expected: Similar to previous.
 
 ### Deleting a friend
@@ -546,7 +537,7 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `friend --delete MrFeely`<br>
       Expected: No friend is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `friend --delete`, `...` 
+   1. Other incorrect delete commands to try: `friend --delete`
       Expected: Similar to previous.
 
 ### Deleting a game
@@ -561,7 +552,7 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `game --delete CSGO`<br>
        Expected: No game is deleted. Error details shown in the status message. Status bar remains the same.
 
-    1. Other incorrect delete commands to try: `game --delete`, `...`
+    1. Other incorrect delete commands to try: `game --delete`
        Expected: Similar to previous.
 
 ### Filtering friends in friends' list using a keyword
@@ -615,7 +606,7 @@ testers are expected to do more *exploratory* testing.
     4. Test case: `friend --get co`<br>
        Expected: No friend is found. Error details shown in the status message. Status bar remains the same.
 
-    5. Other incorrect delete commands to try: `friend --get`, `...`
+    5. Other incorrect delete commands to try: `friend --get`
        Expected: Similar to previous.
    
 ### Viewing a game's full data
@@ -633,5 +624,5 @@ testers are expected to do more *exploratory* testing.
     4. Test case: `game --get rant`<br>
        Expected: No game is found. Error details shown in the status message. Status bar remains the same.
 
-    5. Other incorrect delete commands to try: `game --get`, `...`
+    5. Other incorrect delete commands to try: `game --get`
        Expected: Similar to previous.
