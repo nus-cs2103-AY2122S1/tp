@@ -147,8 +147,8 @@ An example of a command in TAB:
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-* Items in square brackets are optional.<br>
-  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+* Items in square brackets are optional. They can be left out, or left empty (e.g. `t/`)<br>
+  e.g. `n/NAME [t/TAG]` can be substituted as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items in curly brackets separated by the pipe character `|` indicates that you must select exactly one parameter from the list of choices.<br>
   e.g. `cond/{all | any | none}` can be used as `cond/all` or `cond/any` or `cond/none`.
