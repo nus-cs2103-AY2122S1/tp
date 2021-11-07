@@ -374,16 +374,25 @@ This command deletes a `Student` from `AcademyDirectory`.
 
 #### Implementation
 `DeleteCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
-The `DeleteCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands)
+The `DeleteCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands).
 
 `DeleteCommand` deletes `Student` based on the relative `INDEX` in the `ObservableList` which is the list of `Student` viewed by the `Avenger`. To do this, `DeleteCommand` makes a call to `VersionedModel#deleteStudent()`.
 
 ### TagCommand
-{Add description}
+This command assigns tags to a `Student`.
 
 #### Implementation
-The `TagCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands)
-{Add implementation}
+`TagCommand` will extend the `Command` class and consequently `@Override` the `Command#execute()` method
+to serve the aforementioned purpose. The `TagCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands).
+
+`TagCommand` tags a `Student` based on the relative `INDEX` in the `ObservableList`. The `Tag` is implemented with a HashSet
+that stores the `Tag`. When `TagCommand` is executed, the `Student`'s `Tag` attribute will be replaced by a new HashSet
+containing the input `Tag` object(s). In the event the input `Tag` is empty, the `Student`'s `Tag` attribute will be replaced by an
+empty HashSet.
+
+The following sequence diagram describes what happens when `TagCommand` is executed:
+
+![TagCommandSequenceDiagram](images/dg/logic/commands/tagcommand/TagCommandSequenceDiagram.png)
 
 ### GetCommand
 This command serves to retrieve a specific `PersonalDetail` of students or a student.
@@ -402,6 +411,7 @@ list of keywords is not empty, then the pattern-matching behavior for name in `G
 of the [`FilterCommnd`](#filtercommand).
 
 The specifics are shown in the sequence diagram below:
+
 ![GetCommandSequenceDiagram](images/dg/logic/commands/getcommand/GetCommandSequenceDiagram.png)
 
 Because the output of `GetCommand` can be long, for readability reasons the result is displayed
@@ -529,13 +539,18 @@ The following sequence diagram describes what happens when `VisualizeCommand` is
 
 ### FilterCommand
 
-This command filters the `ObservableList` by `NAME` or `TAG`.  
+This command filters the `ObservableList` by `Name` or `Tag`.  
 
 #### Implementation
 
 `FilterCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
 
-{Improve on explanation and add a possible UML Diagram}
+The `FilterCommand` searches the `AcademyDirectory` for students with `Name` or `Tag` matching the keyword and displays
+the student list with the filtered students.
+
+The following sequence diagram describes what happens when `FilterCommand` is executed:
+
+![FilterCommandSequenceDiagram](images/dg/logic/commands/filtercommand/FilterCommandSequenceDiagram.png)
 
 ### SortCommand
 
@@ -924,9 +939,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
     
-* 1b. The input grade is not a positive integer.
+* 1b. The input grade is not a non-negative integer.
 
-    * 1b1. Academy Directory requests for user to enter a positive integer.
+    * 1b1. Academy Directory requests for user to enter a non-negative integer.
 
       Use case resumes at step 1.
 
@@ -1090,9 +1105,11 @@ testers are expected to do more *exploratory* testing.
 #### Tag Student
 
 1. Tag a student while all students are being shown
-2. Tag a student while only one student is being shown, with there being more than one student in the list 
+   1. Prerequisites: List all students using `list` command. Multiple students in the list.
+   2. Test case: `tag 1 t/test` <br>
+      Expected: First student's tag(s) is/are now replaced by "test".
 
-1. _{ more test cases to come …​ }_
+2. _{ more test cases to come …​ }_
 
 ***
 
