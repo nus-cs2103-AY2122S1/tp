@@ -1,6 +1,7 @@
 package seedu.programmer.model.student;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.programmer.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a student's name in the ProgrammerError.
@@ -9,6 +10,7 @@ public class LabResult {
     private static final Integer UNMARKED_ACTUAL_SCORE_PLACEHOLDER = -1;
     private final Integer labResult;
 
+
     /**
      * Constructs a {@code Name}.
      *
@@ -16,11 +18,19 @@ public class LabResult {
      */
     public LabResult(Integer labResult) {
         requireNonNull(labResult);
+        checkArgument(isValidLabResult(labResult), Lab.MESSAGE_LAB_SCORE_CONSTRAINT);
         if (labResult == -1) {
             this.labResult = UNMARKED_ACTUAL_SCORE_PLACEHOLDER;
         } else {
             this.labResult = labResult;
         }
+    }
+
+    /**
+     * Returns true if a given string is a valid labNum.
+     */
+    public static boolean isValidLabResult (Integer test) {
+        return test.compareTo(-1) >= 0;
     }
 
     public Integer getLabResult() {

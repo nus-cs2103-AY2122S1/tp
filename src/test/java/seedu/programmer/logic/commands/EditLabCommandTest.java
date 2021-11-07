@@ -24,8 +24,8 @@ public class EditLabCommandTest {
     private static Lab validLab;
     private static Lab sampleLabA;
     private static Lab sampleLabB;
-    private static LabNum newLabNum = new LabNum(15);
-    private static LabNum newLabNum1 = new LabNum(14);
+    private static LabNum newLabNum = new LabNum(11);
+    private static LabNum newLabNum1 = new LabNum(12);
     private static LabNum newLabNum2 = new LabNum(13);
     private static LabTotal newLabTotal = new LabTotal(40);
     private static EditLabCommand sampleCommandA;
@@ -52,7 +52,7 @@ public class EditLabCommandTest {
 
     @Test
     public void execute_labTitleDoesNotExist_throwsCommandException() {
-        Lab labToEdit = new Lab(new LabNum(120));
+        Lab labToEdit = new Lab(new LabNum(12));
         EditLabCommand editLabCommand = new EditLabCommand(labToEdit, newLabNum);
 
         String expectedMessage = String.format(Lab.MESSAGE_LAB_NOT_EXISTS, labToEdit);
