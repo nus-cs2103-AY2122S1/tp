@@ -122,7 +122,7 @@ public class ShowCommand extends Command {
         case PREFIX_TAG_SYNTAX:
             return new Pair<>("tags", getUniqueTagInputs(ol));
         case PREFIX_INTERVIEW_SYNTAX:
-            return new Pair<>("interview", getUniqueInterviewInputs(ol));
+            return new Pair<>("interviews", getUniqueInterviewInputs(ol));
         default:
             return new Pair<>(null, null);
         }
@@ -174,7 +174,8 @@ public class ShowCommand extends Command {
 
     private List<String> getUniqueInterviewInputs(ObservableList<Person> ol) {
         return ol.stream()
-                .map(x -> x.getInterview().orElse(Interview.EMPTY_INTERVIEW).toString()).distinct().sorted()
+                .map(x -> x.getInterview().orElse(Interview.EMPTY_INTERVIEW)).distinct().sorted(Interview::compareTo)
+                .map(Interview::toString)
                 .collect(Collectors.toList());
     }
 

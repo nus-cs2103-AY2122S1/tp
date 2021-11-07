@@ -15,6 +15,7 @@ import seedu.address.logic.parser.CliSyntax;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.interview.Interview;
 import seedu.address.model.tag.Tag;
 
 public class ShowCommandTest {
@@ -182,6 +183,26 @@ public class ShowCommandTest {
 
         String expectedMessage = expectedMessageSB.toString();
         ShowCommand command = new ShowCommand(CliSyntax.PREFIX_TAG);
+        assertCommandSuccess(command, model, expectedMessage, model);
+
+    }
+
+    @Test
+    public void execute_interviewPrefix_interviewListed() {
+
+        StringBuilder expectedMessageSB = new StringBuilder("Here are all the interviews present:\n");
+        List<String> interviews = getTypicalPersons().stream()
+                .map(x -> x.getInterview().orElse(Interview.EMPTY_INTERVIEW)).distinct().sorted(Interview::compareTo)
+                .map(Interview::toString)
+                .collect(Collectors.toList());
+        for (String interview: interviews) {
+            expectedMessageSB.append(interview);
+            expectedMessageSB.append("\n");
+        }
+
+
+        String expectedMessage = expectedMessageSB.toString();
+        ShowCommand command = new ShowCommand(CliSyntax.PREFIX_INTERVIEW);
         assertCommandSuccess(command, model, expectedMessage, model);
 
     }
