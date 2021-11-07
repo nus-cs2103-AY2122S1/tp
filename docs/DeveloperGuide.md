@@ -1007,5 +1007,6 @@ expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-    1. A default set of data will be in place for you
+    1. Corrupted data file : there will be no data presented.
+    2. Missing data file : default data will be presented.
     
