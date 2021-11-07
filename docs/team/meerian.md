@@ -32,7 +32,7 @@ Given below are my contributions to the project.
 
 * **Documentation**:
     * User Guide:
-        * Added documentation for the features `expiringpolicy`, `sortcontact` and `sortpolicy` [\#72]()
+        * Added documentation for the features `expiringpolicy`, `sortcontact` and `sortpolicy`
         * Updated the Quick Start section
         * Updated all the old command formats to contain the new refactored command formats
         * Organised the commands under `Features` and `Command Summary` for better readability
