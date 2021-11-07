@@ -40,7 +40,7 @@ You may reach us through the following email addresses:
 <img src="images/trash-bin99.png" width="200px">
 
 [[github](https://github.com/trash-bin99)]
-[[portfolio](team/wangbin.md)]
+[[portfolio](team/trash-bin99.md)]
 
 * Role: Developer, in charge of Testing
 * Responsibilities: Parser
@@ -60,7 +60,7 @@ You may reach us through the following email addresses:
 <img src="images/cyn7hius.png" width="200px">
 
 [[github](https://github.com/Cyn7hius)]
-[[portfolio](team/calvin.md)]
+[[portfolio](team/cyn7hius.md)]
 
 * Role: Developer, in charge of Documentation
 * Responsibilities: UI

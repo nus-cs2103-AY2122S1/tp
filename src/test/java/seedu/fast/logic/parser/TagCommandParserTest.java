@@ -4,6 +4,7 @@ import static seedu.fast.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.fast.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.fast.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.fast.model.tag.Tag.MESSAGE_CONSTRAINTS;
+import static seedu.fast.model.tag.Tag.MESSAGE_SPECIAL_TAG_ENTERED;
 import static seedu.fast.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Collections;
@@ -21,6 +22,7 @@ public class TagCommandParserTest {
     private final String invalidModifier = "k/";
     private final String validTagNameNormal = "fat ";
     private final String invalidTagName = "idolM@STER";
+    private final String invalidPriorityTagName = "lowpriority";
     private final String validTagNamePriority = "pr/low ";
     private final String validTagNameInvestmentPlan = "ip/life ";
     private final String validIndex = "1 ";
@@ -45,9 +47,11 @@ public class TagCommandParserTest {
         //invalid components
         String invalidIndexInput = invalidIndex + addTagModifier + validTagNameNormal;
         String invalidTagNameInput = validIndex + addTagModifier + invalidTagName;
+        String invalidPriorityTagNameInput = validIndex + addTagModifier + invalidPriorityTagName;
         String invalidModifierInput = validIndex + invalidModifier + validTagNameNormal;
         assertParseFailure(parser, invalidIndexInput, errorMessage);
         assertParseFailure(parser, invalidTagNameInput, MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, invalidPriorityTagNameInput, MESSAGE_SPECIAL_TAG_ENTERED);
         assertParseFailure(parser, invalidModifierInput, errorMessage);
     }
 

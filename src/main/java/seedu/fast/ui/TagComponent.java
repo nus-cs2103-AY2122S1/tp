@@ -53,11 +53,7 @@ public class TagComponent extends HBox {
     public Label colorSelector(String tagName) {
         Label temp = new Label(tagName);
 
-        switch (tagName.toUpperCase()) { //Todo: add more color tags & abstract out case names
-
-        case TagUtil.FRIENDS:
-            temp.setStyle(Colors.BLUE);
-            break;
+        switch (tagName.toUpperCase()) {
 
         case TagUtil.HIGH_PRIORITY:
             temp.setStyle(Colors.RED);
@@ -76,7 +72,7 @@ public class TagComponent extends HBox {
             break;
 
         case TagUtil.LIFE_INSURANCE:
-            temp.setStyle(Colors.LIME);
+            temp.setStyle(Colors.DARK_GREEN);
             break;
 
         case TagUtil.MOTOR_INSURANCE:
@@ -92,7 +88,7 @@ public class TagComponent extends HBox {
             break;
 
         case TagUtil.INVESTMENT:
-            temp.setStyle(Colors.TEAL);
+            temp.setStyle(Colors.GREY_PURPLE);
             break;
 
         case TagUtil.SAVINGS:
