@@ -98,11 +98,14 @@ Here is a table of commonly used terms in this document along with their meaning
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `Uni-Fy.jar` from [**here**](https://github.com/AY2122S1-CS2103T-W17-4/tp/releases).
+1. Download the latest `unify.jar` from [**here**](https://github.com/AY2122S1-CS2103T-W17-4/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your app.
+1. Copy the file to the folder you want to use as the _home folder_ for Uni-Fy. 
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+1. Double-click the file to start the app. If double-click does not 
+   get the app to start in your device, please refer to the FAQ section. 
+   The GUI shown in the image below should appear in a few seconds.
+   Note how the app contains some sample data.<br>
    ![Ui](images/UIUpdated.png)
 
 1. Type the command in the command box and press Enter to execute it.
@@ -329,8 +332,38 @@ Sorts the tasks in the task list of Uni-Fy.
 * `sort x/priority o/desc` sorts the tasks in the descending order of priority i.e. from `HIGH` to `LOW`
 </div>
 
+### 4.9 Editing tasks : `edit`
 
-### 4.9 Deleting tasks : `delete`
+Edits the existing details of a task. The parameters for the command can be input in any order.
+
+<div markdown="block" class="alert alert-primary">
+**:clipboard: Format:**<br>
+- <code> edit <i> task_id (n/task_name) (t/time) (d/date) (tg/tag) (p/level) </i> </code>
+</div>
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Interpretation:**<br>
+* The <code><i>task_id</i></code> refers to the index number shown in the displayed task list. 
+* Edits task with the name <code><i>n/task_name</i></code>
+* Edits task with the time <code><i>t/time</i></code>
+  * The format should be as follows <code><i>t/hh:mm</i></code>
+* Edits task with the date <code><i>d/date</i></code>
+  * The format should be as follows <code><i>d/yyyy-mm-dd</i></code>
+* Edits task with the tag <code><i>tg/tag</i></code>
+* Edits task with the priority level <code><i>p/level</i></code>
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values. 
+</div>
+
+<div markdown="block" class="alert alert-success">
+
+:green_book: **Examples:**
+* `edit 2 n/Task4 p/MEDIUM` edits the task at index `2` by setting the name of the task as `Task4` and the priority of the task as `MEDIUM`.
+</div>
+
+
+### 4.10 Deleting tasks : `delete`
 
 Removes a specific task that has been added to your app.
 
@@ -375,7 +408,7 @@ After running the delete command, the task at that particular index gets deleted
 ![delete_command_after](images/userguide/deleteCommandAfter.png)
 
 
-### 4.10 Deleting all tasks : `clear`
+### 4.11 Deleting all tasks : `clear`
 
 Clears all entries from the Uni-Fy app.
 
@@ -394,7 +427,7 @@ When you run the clear command, all the tasks in the task list of Uni-Fy get del
 ![clear_command_after](images/clearCommandAfter.jpeg)
 
 
-### 4.11 Retrieving past commands
+### 4.12 Retrieving past commands
 
 Shows the previous commands run on **Uni-Fy**. The user can either type the command or use the up arrow key to go through all the pass commands.
 
@@ -411,7 +444,7 @@ Your history is erased when you close and reopen the app. Do not close the app i
 </div>
 
 
-### 4.12 Viewing help : `help`
+### 4.13 Viewing help : `help`
 
 Shows a message explaining how to access the help page.
 
@@ -420,12 +453,12 @@ Shows a message explaining how to access the help page.
 Format: `help`
 
 
-### 4.13 Saving the data
+### 4.14 Saving the data
 
 **Uni-Fy** data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 
-### 4.14 Editing the data file
+### 4.15 Editing the data file
 
 **Uni-Fy** data are saved as a JSON file `[JAR file location]/data/unify.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -434,7 +467,7 @@ If your changes to the data file makes its format invalid, Uni-Fy will discard a
 </div>
 
 
-### 4.15 Archiving data files `[coming in v2.0]`
+### 4.16 Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
 
@@ -442,6 +475,13 @@ _Details coming soon ..._
 --------------------------------------------------------------------------------------------------------------------
 
 ## 5. FAQ
+
+**Q**: What can you do if double-click is not opening the app?<br>
+**A**: Open your Command Prompt (Windows) or your Terminal (MacOS, Linux) and navigate to the folder your JAR file resides in.
+
+Run the JAR file by using the command `java -jar unify.jar`.
+
+On an OS based off of Linux, it might be necessary to run `chmod +x unify.jar` on Terminal to allow opening of the application via double-clicking.
 
 **Q**: What are the minimum system requirements for this application?<br>
 **A**: If your computer runs any of the Operating Systems found [here](https://www.oracle.com/java/technologies/javase/products-doc-jdk11certconfig.html), you will be able to run **Uni-Fy**.
@@ -472,7 +512,7 @@ Action | Format, Examples
 **Find** | <code>find <i>keyword (more_keywords)... (d/date) (tg/tag)...</i></code> <br> e.g. `find quiz` <br> e.g. `find quiz d/2021-12-12` <br> e.g. `find quiz tg/GEQ1000` <br> e.g. `find quiz d/2021-12-12 tg/GEQ1000`
 **List** | <code>list</code>
 **Show** | <code>show <i>week_number</i></code> <br>e.g `show 13`
-**Sort** | <code>sort <i>x/SortBy o/SortOrder</i></code> <br>e.g `sort x/time o/asc` <br>e.g `sort x/priority o/desc`
+**Sort** | <code>sort <i>x/sort_by o/sort_order</i></code> <br>e.g `sort x/time o/asc` <br>e.g `sort x/priority o/desc`
 **Delete** | <code>delete <i>task_id (task_id)</i></code> <br> e.g. <code>delete 1 3 4 </code>
 **Clear** | <code>clear</code> <br>
 **Command History** | <code>/prev</code> or <code>&#8593;</code><br>
