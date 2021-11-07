@@ -359,7 +359,7 @@ data to produce a list of friend recommendations to the user.
 
 <ins>Step 2: Filtering and sorting the friends list to get recommendations friends list</ins><br> 
 
-The sequence diagram below illustrates the interactions made in detail used to produce the desired list of friend recommendations:
+The sequence diagram below illustrates what happens during the `RecommendCommand#execute(model)` method to produce the desired list of friend recommendations:
 
 <img src="images/RecommendCommandSequenceDiagram1.png" width="1000" /><br> 
 
@@ -369,8 +369,8 @@ It also constructs an instance of `Comparator` which is used to sort friends in 
 
 Next, the continuation to the sequence diagram below shows the `ModelManager#updateFilteredAndSortedFriendsList(Predicate, Comparator)`
 setting the predicate of `FilteredList` and comparator of `SortedList` instances managed by the `ModelManager` with 
-the new `FriendRecommendFilterPredicate` and `Comparator` instances, cuaisng filtering and sorting of the list to produce the 
-list of friend recommendations. 
+the new `FriendRecommendFilterPredicate` and `Comparator` instances, which causes filtering and sorting of the list and 
+produces the list of friend recommendations. 
 
 <img src="images/RecommendCommandSequenceDiagram2.png" width="1000" />
 
@@ -381,7 +381,7 @@ Due to the use of JavaFX's `FilteredList` and `SortedList`, which listens for an
 updated to display the filtered and sorted friends list based on the produced list of friend recommendations in step 2. 
 
 Hence, the user sees the displayed list of friend recommendations and this completes the implementation of the 
-recommendations feature.  
+recommend feature.  
 
 #### Design considerations:
 
