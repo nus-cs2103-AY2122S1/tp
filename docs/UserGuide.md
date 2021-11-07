@@ -143,15 +143,16 @@ Examples:
 
 Finds persons with the given search criteria and value.
 
-Format: `find {n/|s/|N/|g/|T/|r/|p/|a/|t/} KEYWORD [MORE_KEYWORDS]`
+Format: `find {n/|s/|N/|g/|T/|r/|p/|a/|t/full/|t/}KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g friend will also match Friend or FrIend or FRIEND.
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 * All attributes can be searched, by specifying the prefix before the keyword.
 * Partial matching can be done for all attributes except Tutorial ID and Role e.g. for name, Han will match Hans.
 * Partial matching is performed from the first letter of each value, i.e. `find n/o` will return Charlotte Oliveiro since Oliveiro starts with 'o', but will not return Alex Yeoh or Roy Balakrishnan since they do not contain values starting with the specified key.
+* Tags can be searched either using full or partial matching, using `t/full/` for full keyword matching and `t/` for partial matching. The first key to be searched should appear right after the prefix, e.g. `find t/full/friends`.
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+ e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
 * `find n/Hans Bo` will return `Hans Gruber`, and `Bo Yang`
