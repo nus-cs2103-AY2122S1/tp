@@ -764,7 +764,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Notes**: A short paragraph that is written for a person to remind the user about details of that person
 * **Client**: A person the user is selling or trying to sell insurance to
-
+* **Appointment**: A meeting the user will be having with a client
+* **Revenue**: The total profit the user has made off a client
 
 --------------------------------------------------------------------------------------------------------------------
 
