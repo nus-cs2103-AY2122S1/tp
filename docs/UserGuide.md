@@ -199,7 +199,7 @@ Action | Format, Examples
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `resetC`, `resetE`, `resetS`, `listC`, `listE`, `listS`, `listR`, `exit` and `clear`) will be ignored.<br>
  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
   
-* Users can use all customer/employee/supplier/reservation commands apart from  `listC`, `listE`, `listS`, and `listR` to switch to the customer/employee/supplier list respectively
+* Users can use all customer/employee/supplier/reservation commands including from  `listC`, `listE`, `listS`, and `listR` to switch to the customer/employee/supplier list respectively
  <br> e.g. If a user is currently viewing the customer list, using `addE`, `editE`, `sortE` etc. while the customer list is active will execute the respective employee command and switch to the employee list automatically
 
 </div>
@@ -264,7 +264,7 @@ Examples:
 * `addS n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 10 st/Alcohol dd/2021-11-19 15:00 t/Regular` 
   adds a supplier with the respective fields.
 
-* `addS n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 10 st/Alcohol dd/08:00 24-12-2021` adds a 
+* `addS n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 10 st/Alcohol dd/0800 24-12-2021` adds a 
   supplier without any optional fields.
 
 <div markdown="block" class="alert alert-warning">
@@ -285,7 +285,7 @@ Format: `addR NUMBER_OF_PEOPLE p/PHONE at/DATE_TIME [r/REMARK] [t/TAG]…`
 * `REMARK` and `TAG` are optional fields that can be omitted.
 
 Examples:
-* `addR 2 p/98765432 at/2021-12-24 2000 r/birthday party t/10 Percent Off t/Free cake` adds a new reservation of 2 pax for customer with
+* `addR 2 p/98765432 at/2021-12-24 20:00 r/birthday party t/10 Percent Off t/Free cake` adds a new reservation of 2 pax for customer with
 
 * `addR 5 p/12345668 at/2021-02-14 1200`
 
@@ -299,7 +299,7 @@ Examples:
 
 * `PHONE` has to be a valid phone number from a customer in the database
 
-* Time has to be formatted on the hour (i.e. minutes of the time is **00**). Refer [here](#date-time-formatting) for a list of acceptable formats when entering date time.
+* Note that the date time used when adding a reservation is slightly different from the acceptable formats mentioned [here](#date-time-formatting). Everything in the [above section](#date-time-formatting) applies except that `Time` has to be formatted on the hour (i.e. time is in `hh:00` or `hh00` format).
 
 </div>
 

@@ -41,6 +41,8 @@ This includes neatly storing employees, suppliers, loyal customers information a
 
 * Released JAR file on GitHub team repo for [v1.2](https://github.com/AY2122S1-CS2103T-T17-1/tp/releases/tag/v1.2)
 
+* Released JAR file on GitHub team repo for [v1.4](https://github.com/AY2122S1-CS2103T-T17-1/tp/releases/tag/v1.4)
+
 #### Review and Mentoring contributions
 
 * Reviewed 16 pull requests on GitHub
