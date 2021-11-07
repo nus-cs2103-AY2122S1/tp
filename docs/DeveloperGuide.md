@@ -9,7 +9,7 @@ title: Developer Guide
 2. [Setting up, getting started](#Setting up)
 3. [Design](#Design)
 4. [Architecture](#Architecture)
-5. [UI](#UI component)
+5. [UI component](#UI component)
 6. [Logic component](#Logic component)
 7. [Storage component](#Storage component)
 8. [Implementations](#Implementations)
@@ -195,8 +195,7 @@ The `Model` component,
 
 ## <a name="Storage component"></a> Storage component
 
-**
-API** : [`Storage.java`](https://github.com/AY2122S1-CS2103-F09-3/tp/blob/master/src/main/java/seedu/programmer/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S1-CS2103-F09-3/tp/blob/master/src/main/java/seedu/programmer/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -319,9 +318,9 @@ The following activity diagram summarizes what happens when a CS2100 TA executes
 
 ### Student List Filtering
 
-#### Proposed Implementation
+#### Implementation
 
-The proposed filter mechanism is facilitated by the `QueryStudentDescriptor` and the
+The filter mechanism is facilitated by the `QueryStudentDescriptor` and the
 `StudentDetailContainsQueryPredicate`. The `StudentDetailContainsQueryPredicate` extends `Predicate<Student>` and
 contains a private field of type
 `QueryStudentDescriptor` that will be used to test if a given student to the predicate matches all the query fields in
@@ -401,7 +400,7 @@ implementation introduces the following classes:
 * `ShowCommandParser` that implements `Parser<ShowCommand>`
 * `ShowCommandResult` that extends `CommandResult`
 
-The syntax of this command is `show <INDEX_ON_LIST>`. For instance,`show 1` asks ProgrammerError to display the lab
+The syntax of this command is `show <INDEX_IN_LIST>`. For instance,`show 1` asks ProgrammerError to display the lab
 results of student at index 1 of the current list.
 
 Given below is a possible usage scenario:
