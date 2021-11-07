@@ -75,18 +75,27 @@ public class Interview implements Comparable<Interview> {
     @Override
     public int compareTo(Interview interview) {
         int result = 0;
+
         try {
-            DateFormat parseFormat = new SimpleDateFormat(PARSE_FORMAT);
-            Date thisInterview = parseFormat.parse(this.parseTime);
-            Date givenInterview = parseFormat.parse(interview.parseTime);
-            result = thisInterview.before(givenInterview)
-                    ? -1
-                    : givenInterview.before(thisInterview)
+            if (this.isEmptyInterview()) {
+                result = -1;
+            } else if (interview.isEmptyInterview()) {
+                result = 1;
+            } else {
+                DateFormat parseFormat = new SimpleDateFormat(PARSE_FORMAT);
+                Date thisInterview = parseFormat.parse(this.parseTime);
+                Date givenInterview = parseFormat.parse(interview.parseTime);
+                result = thisInterview.before(givenInterview)
+                        ? -1
+                        : givenInterview.before(thisInterview)
                         ? 1
                         : 0;
+            }
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
+        assert result != 0;
         return result;
     }
 
