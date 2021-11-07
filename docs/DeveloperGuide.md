@@ -159,7 +159,26 @@ Within the `Model` component,
 * `Member` has its original fields from AB3 and an additional field of a `TaskList` to store all tasks assigned to the member.
 * `Task` has a `Name` field, `TaskDeadline` field, and a `Boolean` field to represent the completion status of the task.
 
-[comment]: <> (<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative &#40;arguably, a more OOP&#41; model is given below. It has a `Position` list in the `AddressBook`, which `Member` references. This allows `AddressBook` to only require one `Position` object per unique POSITION, instead of each `Member` needing their own set of `Position` objects.<br>)
+An alternative (arguably, a more OOP) model design is given below,
+
+<img src="images/AlternativeModelClassDiagram.png" width="600" />
+
+* `AddressBook` also stores all `Task` objects (which are contained in a `UniqueTaskList` object).
+* Each `Member` object references `Task` object in the `UniqueTaskList`, instead of needing its own list of tasks.
+However, this design has some issues in storage,
+* Since Ailurus uses json files to store user data, json format members should at least store the unique identifier of each task the member had.
+In our implementation, the unique identifier is `Name` and `TaskDeadline`, which are actually the main part of a `Task`.
+* At the same time, json format member need to store the completion status of each referencing task.
+* In all, implementing the storage of this member-task relation by using json file is likely to incur redundancy and error-prone,
+so we desided to use a easier implementation, which is the current one.
+
+A better implementation of the alternative design may involve using database management system like PostgreSQL,
+a proposed entity relationship model diagram for the member-task relation is given below:
+
+<img src="images/ER.png" width="600"/>
+
+[comment]: <> (<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative &#40;arguably, 
+a more OOP&#41; model is given below. It has a `Position` list in the `AddressBook`, which `Member` references. This allows `AddressBook` to only require one `Position` object per unique POSITION, instead of each `Member` needing their own set of `Position` objects.<br>)
 
 
 [comment]: <> (<img src="images/BetterModelClassDiagram.png" width="450" />)
@@ -739,6 +758,8 @@ testers are expected to do more *exploratory* testing.
 ### Task tests
 
 #### Adding a task
+
+
 
 #### Deleting a task
 
