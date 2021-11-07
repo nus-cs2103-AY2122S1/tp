@@ -234,8 +234,7 @@ Command aliases: `del` `rm` `d`
 
 <img src="images/DeleteCommand.png" width="800px">
 
-***
-
+<div style="page-break-after: always;"></div>
 #### Finding contacts by name / module code: `find` <a name="find"></a>
 
 Finds a contact by specifying either the name/module code(s).
@@ -414,8 +413,6 @@ Format: `clearc`
 Command aliases: `clrc` `cc`
 
 <img src="images/ClearLessonCommand.png" width="800px">
-
-***
 
 ### Managing Data <a name="managing-data"></a>
 
