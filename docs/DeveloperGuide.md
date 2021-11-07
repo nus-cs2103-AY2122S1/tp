@@ -1069,10 +1069,20 @@ testers are expected to do more *exploratory* testing.
        
     1. Test case: `delete 1 1`<br>
        Expected: No applicant is deleted. Error details shown in the result display where there should not be any duplicate indexes.
-       
-    1. Other incorrect delete commands to try: `delete`, `delete x`(where x is larger than the list size), `delete Alexander`<br>
-       Expected: Similar to previous two test cases.
 
+    1. Test case: `delete 1 2`<br>
+       Expected: First and second applicants are deleted. Details of the deleted contact shown in the status message
+      
+    1. Other incorrect delete commands to try: `delete`, `delete x`(where x is larger than the list size), `delete y`(where y is a negative integer), `delete Alexander`<br>
+       Expected: Similar to previous test cases.
+
+1. Deleting a person from a filtered list of applicants being shown
+
+    1. Prerequisites: Find a valid group of applicants using the `find` command with appropriate inputs. Multiple applicants in the filtered list.
+
+    1. Test case: `delete 1 2` <br>
+       Expected: First and second applicants of the shown filtered list are deleted. Details of the deleted applicant shown in the status message.
+  
 ### Saving data
 
 1. Dealing with missing/corrupted data files
