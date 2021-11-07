@@ -219,8 +219,8 @@ public class ModelManager implements Model {
      * @param gameFriendLink The {@Code GameFriendLink} to be added to the friend.
      */
     @Override
-    public void linkFriend(Friend toLink, GameFriendLink gameFriendLink) {
-        friendsList.linkFriend(toLink, gameFriendLink);
+    public void linkFriend(Friend friendToLink, GameFriendLink gameFriendLink) {
+        friendsList.linkFriend(friendToLink, gameFriendLink);
     }
 
     /**
@@ -241,8 +241,8 @@ public class ModelManager implements Model {
      * @param game     The {@Code Game} to be unlinked from the {@Code Friend}
      */
     @Override
-    public void unlinkFriend(Friend toUnlink, Game game) {
-        friendsList.unlinkFriend(toUnlink, game);
+    public void unlinkFriend(Friend friendToUnlink, Game game) {
+        friendsList.unlinkFriend(friendToUnlink, game);
     }
 
     //=========== Filtered Friend List Accessors =============================================================
