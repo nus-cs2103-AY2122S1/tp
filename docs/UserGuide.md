@@ -12,8 +12,7 @@ title: User Guide
 
 **Tuition Address Book (TAB)** is an all-in-one desktop application that helps private 1-to-1 home tutors like you keep track of the large number of students and your respective lesson information, and empower you to provide the best quality home tuition service.
 
-TAB is a Command Line Interface (CLI) application which allows you to interact with it with just text inputs. On top of that, TAB also 
-comes with a clean and aesthetic Graphical User Interface (GUI), allowing you to view your data easily.
+TAB is a Command Line Interface (CLI) application which allows you to interact with it with just text inputs. On top of that, TAB also comes with a clean and aesthetic Graphical User Interface (GUI), allowing you to view your data easily.
 
 With TAB, you can effortlessly manage your students' contact details faster than a typical mouse/GUI driven app.
 
@@ -21,13 +20,19 @@ With TAB, you can effortlessly manage your students' contact details faster than
 
 ## About This Guide
 
-This user guide is intended for any user of TAB. It provides installation instructions to help get you started with using TAB, and describes in detail the features available in TAB.
+This user guide aims to help new users become familiar with TAB. If this is your first time using TAB, we recommend reading this User Guide in order.
+
+It provides [installation instructions](#quick-start) to help get you started with using TAB, and describes in detail the [features](#features) available in TAB. 
+
+If there are any terms used in this user guide which you are unfamiliar with, their definitions may be found in the [Glossary](#glossary).
 
 **Navigation**
 
-In the [Table of Contents](#toc), each item listed is a link which you can click on to go directly to that section in the guide.
+In the [Table of Contents](#toc), each item listed is a link which you can click on to go directly to that section in the guide. At the end of every section, there will be a link which says [back to table of contents](#toc) which you can click on to return to the Table of Contents.
 
 **Conventions Used**
+
+As you read this user guide, you may also encounter these syntax and symbols. 
 
 Syntax | Meaning
 --------|------------------
@@ -70,8 +75,6 @@ _text_ | Caption for images.
 
 --------------------------------------------------------------------------------------------------------------------
 
-<div style="page-break-after: always;"></div>
-
 ## Overview of the Graphical User Interface (GUI)
 
 This section briefly explains the various section of TAB's GUI.
@@ -84,14 +87,13 @@ Section | Representation
 Menu Bar | The area where you can click to navigate and view some of TAB's features (e.g. help, reminder and calendar). See [Menu Bar Shortcuts](#menu-bar-shortcuts) for more details.
 Menu Item | A button that you can click to view the stated feature, or to quit TAB (for <kbd>Exit</kbd>).
 Command Box | The text field where you key in commands that are meant to be processed by TAB. TAB will execute the command after you press <kbd>Enter</kbd>.
-Result Display | The area that shows the result of the execution of the command. If the command entered has been executed successfully, it will display the relevant success message. Otherwise, it will show an error message indicating the cause of the error.
+Result Display | The area that shows the result of the execution of commands typed in the Command Box. If the command entered has been executed successfully, it will display the relevant success message. Otherwise, it will show an error message indicating the cause of the error.
 Student List | The panel that shows the list of students you have in TAB.
 Student Card | The area that shows the details of a student. See [Managing Students](#managing-students) for more details.
 Lesson List | The panel that shows the name of the student you have selected together with a list of lessons that the student has.
 Lesson Card | The area that shows the details of a lesson. See [Managing Lessons](#managing-lessons) for more details.
 Center Panel | The region that displays the lists of students and lessons, calendar or the list of tags depending on the command you have entered. See [Features](#features) for more details.
 Footer | The area which shows where TAB saves your student details to. <br> e.g. **./data/addressbook.json** means that TAB saves your data to the sub-folder **data** in the home folder (where TAB located in) with file name **addressbook.json** as shown in the following screenshot: <br> ![fileStorage](images/annotatedFileStorage.png)
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -143,14 +145,16 @@ An example of a command in TAB:
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-* Items in square brackets are optional.<br>
-  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+* Items in square brackets are optional. They can be left out, or left empty (e.g. `t/`)<br>
+  e.g. `n/NAME [t/TAG]` : `n/John Doe t/` is equivalent to `n/John Doe`.
 
 * Items in curly brackets separated by the pipe character `|` indicates that you must select exactly one parameter from the list of choices.<br>
   e.g. `cond/{all | any | none}` can be used as `cond/all` or `cond/any` or `cond/none`.
 
 * Items with `…` after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+
+<div style="page-break-after: always;"></div>
 
 #### Notes about parameters
 
@@ -175,9 +179,8 @@ An example of a command in TAB:
 
 [back to table of contents](#toc)
 
-<div style="page-break-after: always;"></div>
-
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### Getting Help 
 This section tells you what to do if you require help while using TAB.
@@ -194,13 +197,16 @@ Format: `help`
 - You can click <kbd>Copy URL</kbd> button to copy the link to this user guide.
 - You can click the right end to each column to sort the rows alphabetically.
 
-![help](images/help.png)
+<div align="center">
+  <img src="images/help.png" width="650" />
+</div>
 <div class="caption">Help window interface.</div>
 
 <br />
 
 [back to table of contents](#toc)
 
+--------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
 ### Managing Students
@@ -224,6 +230,8 @@ Executing any of the commands in this section will bring you to the students int
     <li>Fields that are empty will not be displayed.</li>
   </ul>
 </div>
+
+<div style="page-break-after: always;"></div>
 
 #### Student parameters
 
@@ -271,7 +279,7 @@ Executing any of the commands in this section will bring you to the students int
         <tr>
             <td id="email-field">Email</td>
             <td><code>e/</code></td>
-            <td>Must be of the format <em>xxx@yyy</em>.</td>
+            <td>Refer to <a href="#email-format">Email Format</a> for more details.</td>
             <td><ul>
               <li><code>e/jane@gmail.com</code></li>
               <li><code>e/</code> set the email field to empty.</li>
@@ -280,7 +288,7 @@ Executing any of the commands in this section will bring you to the students int
         <tr>
             <td>Parent Phone</td>
             <td><code>pp/</code></td>
-            <td>Refer to the constraints for <a href="#phone-field">Phone</a> above.</td>
+            <td>Minimum 3 numeric characters.</td>
             <td><ul>
               <li><code>pp/81234567</code></li>
               <li><code>pp/</code> sets the parent phone field to empty.</li>
@@ -289,7 +297,7 @@ Executing any of the commands in this section will bring you to the students int
         <tr>
             <td>Parent Email</td>
             <td><code>pe/</code></td>
-            <td>Refer to the constraints for <a href="#email-field">Email</a> above.</td>
+            <td>Refer to <a href="#email-format">Email Format</a> for more details.</td>
             <td><ul>
               <li><code>pe/john@gmail.com</code></li>
               <li><code>pe/</code> sets the parent email field to empty.</li>
@@ -317,9 +325,7 @@ Executing any of the commands in this section will bring you to the students int
         <tr>
             <td>Academic Level</td>
             <td><code>lvl/</code></td>
-            <td><ul>
-              <li>Maximum 15 characters, including space(s).</li>
-            </ul></td>
+            <td>Maximum 15 characters, including space(s).</td>
             <td><ul>
               <li><code>lvl/J1</code></li>
               <li><code>lvl/</code> sets the academic level field to empty.</li>
@@ -341,11 +347,13 @@ Executing any of the commands in this section will bring you to the students int
               <li>Must be alphanumeric characters.</li>
               <li>Case-insensitive</li>
               <li>To add multiple tags to a student, you need to add <code>t/</code> before every tag name.</li>
+              <li>Duplicate tags for the same student will be considered as one tag.</li>
             </ul></td>
             <td><ul>
               <li><code>t/unpaid</code> is valid.</li>
               <li><code>t/unpaid retained</code> is invalid.</li>
               <li><code>t/unpaid t/</code> replaces existing tags with the <code>unpaid</code> tag.</li>
+              <li><code>t/new t/new</code> is equivalent to <code>t/new</code>.</li>
               <li><code>t/</code> clears <strong>all</strong> tags.</li>
             </ul></td>
         </tr>
@@ -365,7 +373,19 @@ Executing any of the commands in this section will bring you to the students int
     </tbody>
 </table>
 
+<div markdown="block" class="alert alert-info" id="email-format">**:information_source: Email Format:**<br>
 
+Emails should be of the format **local-part@domain** and adhere to the following constraints:
+
+1. The local-part should only contain alphanumeric characters and these special characters, **+_.-**. The local-part may not start or end with any special characters.
+2. This is followed by a **@** and then a domain name. 
+3. The domain name is made up of domain labels separated by periods. 
+4. The domain name must:
+    - end with a domain label at least 2 characters long
+    - have each domain label start and end with alphanumeric characters
+    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -438,6 +458,7 @@ Format: `list`
 
 [back to table of contents](#toc)
 
+--------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
 ### Finding Students
@@ -540,6 +561,8 @@ Example:
 Example:
 * `find date/12 Oct 2021 time/1200-1400 subject/Math` will match a student with lesson on `12 OCT 2021`, at `1130-1230`, with the subject `Mathematics`.
 
+<div style="page-break-after: always;"></div>
+
 ##### Search with match condition
 
 * You can specify an optional match condition which indicates the type of matching to be applied. 
@@ -551,7 +574,6 @@ Examples:
   * `find n/John t/zoom cond/any` returns students with only the name `John`, or only the tag `zoom`, or both.
   * `find n/John t/zoom cond/none` returns students without the name `John` and the tag `zoom`.
 
-<br>
 **Example of finding by different types of fields**
 
 To find students with the tag `new` or with lessons between `1100-1300`, you may type the command `find cond/any t/new time/1100-1300`. The figure below shows the list after this find command is executed.
@@ -564,6 +586,7 @@ To find students with the tag `new` or with lessons between `1100-1300`, you may
 
 [back to table of contents](#toc)
 
+--------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
 ### Managing Lessons
@@ -646,7 +669,7 @@ A lesson can be identified by the index number shown in the lesson list of the s
             <td><ul>
               <li>Fee of the lesson per hour</li>
               <li>Used in the calculation of fees due after each lesson</li>
-              <li>Refer to <a href="#monetary-fields">Monetary fields</a> for more details.</li>
+              <li>Refer to <a href="#monetary-fields">Monetary fields</a> for more details</li>
             </ul></td>
             <td><code>rates/50</code></td>
         </tr>
@@ -672,7 +695,12 @@ A lesson can be identified by the index number shown in the lesson list of the s
         <tr>
             <td>Homework</td>
             <td><code>hw/</code></td>
-            <td>Maximum of 50 characters</td>
+            <td><ul>
+                <li>Case-sensitive</li>
+                <li>Add multiple pieces of homework with <code>hw/</code> before each piece</li>
+                <li>Identical homework for the same lesson will be considered as one homework</li>
+                <li>Maximum of 50 characters</li>
+            </ul></td>
             <td><ul>
               <li><code>hw/Test 2</code> is valid</li>
               <li><code>hw/</code> clears <strong>all</strong> existing pieces of homework.</li>
@@ -700,6 +728,7 @@ Additionally, we will allow you to toggle these checks on and off, just in case 
 Do look forward to these features!
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 #### Adding a lesson: `ladd`
 
@@ -732,7 +761,7 @@ Edits the specified lesson of the specified student in TAB with the indicated ch
 
 Format: `ledit INDEX LESSON_INDEX [recurring/END_DATE] [date/START_DATE] [time/TIME_RANGE] [subject/SUBJECT] [rates/LESSON_RATES] [f/OUTSTANDING_FEES] [hw/HOMEWORK]… [cancel/CANCEL_DATE]… [uncancel/UNCANCEL_DATE]…​`
 
-Additional fields to the ones in [Lesson parameters](#lesson-parameters) are listed below.
+Additional fields to the ones in [Lesson parameters](#lesson-parameters) are listed below.<br>
 
 Field | Prefix | Constraints | Examples |
 ------------------|-------|-----------| --------|
@@ -745,6 +774,8 @@ Uncancelled Date |`uncancel/` | Follows the <a href="#lesson-date">Date</a> form
   e.g. `ledit 2 1 hw/As2` will erase the lesson's original pieces of homework and replace it with the new homework `As2`.
 
 * You cannot change the lesson's type (i.e. recurring and makeup).
+
+<div style="page-break-after: always;"></div>
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 
@@ -774,6 +805,8 @@ Examples:
 
 * `find n/Betsy` followed by `ldelete 1 1` deletes the 1st lesson for the 1st student in the results of the `find` command.
 
+<div style="page-break-after: always;"></div>
+
 #### Viewing a student's lessons: `view`
 
 Views all the lessons for the specified student in TAB.
@@ -783,12 +816,14 @@ Format: `view INDEX`
 * Views the list of lessons belonging to the student of the specified `INDEX`.
 
 Examples:
-
 * `view 1` displays the list of lessons for the 1st student in the displayed student list.
-  ![viewLessons](images/viewLessons.png)
-  <div class="caption">A list of lessons for the 1st student is shown on the lesson panel.</div>
+  
+![viewLessons](images/viewLessons.png)
+<div class="caption">A list of lessons for the 1st student is shown on the lesson panel.</div>
 
 * `find n/Betsy` followed by `view 1` displays the list of lessons for the 1st student in the results of the `find` command.
+
+<div style="page-break-after: always;"></div>
 
 #### Viewing upcoming lessons: `remind`
 
@@ -830,7 +865,7 @@ Example: Suppose the date today is 1 Nov 2021 and current time is 1500h,
 
 [back to table of contents](#toc)
 
-<div style="page-break-after: always;"></div>
+--------------------------------------------------------------------------------------------------------------------
 
 ### Managing Lesson Fees
 
@@ -872,10 +907,10 @@ Edits the outstanding fees to specific lesson. Uses the Lesson Edit command as s
 In the event that you disagree with the outcomes of the Fees Calculator, you can edit outstanding fees using `ledit` command.
 Refer to [Behaviour of the Fees Calculator](#behaviour-of-the-fees-calculator) for cases the Fees Calculator will not account for.
 
-Format: `ledit INDEX LESSON_INDEX OTHER_FIElDS_TO_EDIT f/OUTSTANDING_AMOUNT`
+Format: `ledit INDEX LESSON_INDEX OTHER_FIELDS_TO_EDIT f/OUTSTANDING_AMOUNT`
 
 Examples:
-* `ledit 2 1 f/250` Edits the outstanding fees to `$100.00`.
+* `ledit 2 1 f/250` Edits the outstanding fees to `$250.00`.
 * `ledit 1 1 time/1100-1200 f/100` Edits the time range to `1100-1200` and outstanding fees to `$100.00`.
 * `ledit 1 1 rates/50 f/0` Edits the rates to be `$50.00` and outstanding fees to be `$0.00`.
 
@@ -890,6 +925,8 @@ Format: `paid INDEX LESSON_INDEX amt/AMOUNT_PAID`
 Examples:
 * `paid 1 1 amt/70` The 1st student has paid `$70.00` for his or her 1st lesson.
 * `paid 3 2 amt/480.50` The 3rd student has paid `$480.50` for his or her 2nd lesson.
+
+<div style="page-break-after: always;"></div>
 
 #### Behaviour of the Fees Calculator
 
@@ -915,6 +952,7 @@ This value would be used to calculate and flag out which lesson's fees are due b
 
 [back to table of contents](#toc)
 
+--------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
 ### Managing Your Schedule
@@ -946,9 +984,11 @@ All the other commands in this [Managing Your Schedule](#managing-your-schedule)
 For example, the `day` command below opens the calendar, **and** goes to the day page. You can skip typing `calendar`! 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 #### Viewing your daily calendar: `day`
 
-Displays the daily calendar, which shows your scheduled lessons for the day.
+Displays the daily calendar.
 
 Format: `day`
 
@@ -956,9 +996,11 @@ Format: `day`
 
 <div class="caption">Day view for calendar interface.</div>
 
+<div style="page-break-after: always;"></div>
+
 #### Viewing your weekly calendar: `week`
 
-Shows the weekly calendar for you to see all the lessons you have for the week
+Shows the weekly calendar.
 
 Format: `week`
 
@@ -966,9 +1008,11 @@ Format: `week`
 
 <div class="caption">Week view for calendar interface.</div>
 
+<div style="page-break-after: always;"></div>
+
 #### Viewing your monthly calendar: `month`
 
-Displays the monthly calendar, allowing you to visualise your lessons for the month.
+Displays the monthly calendar.
 
 Format: `month`
 
@@ -976,9 +1020,11 @@ Format: `month`
 
 <div class="caption">Month view for calendar interface.</div>
 
+<div style="page-break-after: always;"></div>
+
 #### Viewing your yearly calendar: `year`
 
-Shows the yearly calendar. You can see which days of the year you have lessons in this view.
+Shows the yearly calendar.
 
 Format: `year`
 
@@ -1008,25 +1054,19 @@ Format: `today`
 
 [back to table of contents](#toc)
 
-<div style="page-break-after: always;"></div>
+--------------------------------------------------------------------------------------------------------------------
 
 ### Miscellaneous Commands
 
 This section describes the other miscellaneous commands available in TAB.
 
-1. [Clearing all entries: `clear`](#clearing-all-entries-clear)
-2. [Viewing all tags: `tag`](#viewing-all-tags-tag)
+1. [Viewing all tags: `tag`](#viewing-all-tags-tag)
+2. [Clearing all entries: `clear`](#clearing-all-entries-clear)
 3. [Undoing previous commands: `undo`](#undoing-previous-commands-undo)
 4. [Redoing undone commands: `redo`](#redoing-undone-commands-redo)
 5. [Exiting the program: `exit`](#exiting-the-program-exit)
 
 --------------------------------------------------------------------------------------------------------------------
-
-#### Clearing all entries: `clear`
-
-Clears all entries from TAB.
-
-Format: `clear`
 
 #### Viewing all tags: `tag`
 
@@ -1038,7 +1078,11 @@ Format: `tag`
 
 <div class="caption">The text on the left shows the tag names created and the number on the right indicates the number of students labelled with each tag.</div>
 
-<div style="page-break-after: always;"></div>
+#### Clearing all entries: `clear`
+
+Clears all entries from TAB.
+
+Format: `clear`
 
 #### Undoing previous commands: `undo`
 
@@ -1049,7 +1093,9 @@ Format: `undo`
 #### Redoing undone commands: `redo`
 
 Redo the previous command that has been undone. 
-The undone command can only be redone if `redo` was executed immediately after `undo` or after the `undo` command, only commands that do not modify any data are executed.<br>
+The undone command can only be redone if
+1. `redo` is executed immediately after `undo`
+2. Between the execution of `undo` and `redo`, only commands that do not modify any data were executed.<br>
 e.g. `view`, `day`, `calendar`, `tags` etc.
 
 Format: `redo`
@@ -1066,7 +1112,8 @@ Example:
    2. `undo` undoes the modification. Name of first student returns to original name before `edit` command.
    3. `ledit 2 1 date/3 Nov 2021` modifies the start date of the first lesson of the second student. This command **modifies data**.
    4. `redo` is invalid. TAB shows that there are no commands to be redone.
-   
+    
+<div style="page-break-after: always;"></div>
 
 #### Exiting the program: `exit`
 
@@ -1078,7 +1125,7 @@ Format: `exit`
 
 [back to table of contents](#toc)
 
-<div style="page-break-after: always;"></div>
+--------------------------------------------------------------------------------------------------------------------
 
 ### Managing Data
 
@@ -1105,6 +1152,8 @@ If your changes to the data file makes its format invalid, TAB will discard all 
 
 [back to table of contents](#toc)
 
+--------------------------------------------------------------------------------------------------------------------
+
 <div style="page-break-after: always;"></div>
 
 ### Menu Bar Shortcuts
@@ -1114,15 +1163,15 @@ TAB has a menu bar which you can click to easily navigate between its various vi
 Menu Item | Shortcut | Action | Description
 ----------|--------|---------|---------
 <kbd>Help</kbd> | <kbd>F1</kbd> | View Help | Opens the help window.
-<kbd>View</kbd> → <kbd>Students</kbd> | <kbd>F2</kbd> | <span id="view-students">View Students </span> | Brings you to the last displayed list of students. <br> e.g. if you used `find` to filter the list of students, and then switched to the calendar view, clicking <kbd>View</kbd> → <kbd>Students</kbd> or pressing <kbd>F2</kbd> brings you back to the filtered list.
+<kbd>View</kbd> → <kbd>Students</kbd> | <kbd>F2</kbd> | <span id="view-students">View Students </span> | Brings you to the last displayed list of students. <br> e.g. if you used `find` to filter the list of students, and then switched to the calendar view, clicking <kbd>View</kbd> → <kbd>Students</kbd> or pressing <kbd>F2</kbd> brings you back to the filtered list (and refreshes the student lessons).
 <kbd>View</kbd> → <kbd>Calendar</kbd> | <kbd>F3</kbd> | View Calendar | Brings you to the calendar interface.
 <kbd>View</kbd> → <kbd>Tags</kbd> | <kbd>F4</kbd> | View Tags | Brings you to your list of tags.
 <kbd>Reminder</kbd> | <kbd>F5</kbd> | View Reminder | Opens or updates the reminder window with the list of upcoming lessons that ends within the next 48 hours.
 <kbd>File</kbd> → <kbd>Exit</kbd> | N.A. | Exit | Quits TAB.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-You can immediately go back to typing commands from anywhere in TAB even if your cursor is not in the Command Box.
-This means that after clicking any button in the GUI, you do not have to click in the Command Box again to continue. Just type away!
+The Command Box intelligently recognises when you're typing a command even if your cursor is somewhere else in the main window.
+This means that after clicking any button in the main window, you do not have to click in the Command Box again to continue. Just type away!
 </div>
 
 <br />
@@ -1130,7 +1179,6 @@ This means that after clicking any button in the GUI, you do not have to click i
 [back to table of contents](#toc)
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
 
 ## FAQ
 
@@ -1142,7 +1190,9 @@ This section records frequently asked questions from users of TAB.
 **Q**: I am using a Mac and when I tried to open **TAB.jar**, Mac shows “TAB.jar cannot be opened because it is from an unidentified developer". How do I resolve this issue? <br>
 **A**: Go to <kbd>System Preferences</kbd> → <kbd>Security & Privacy</kbd> → <kbd>General</kbd> and click <kbd>Open Anyway</kbd> at the bottom as shown in the following screenshot.
 
-![macSecurity](images/macSecurity.png)
+<div align="center">
+  <img src="images/macSecurity.png" width="600" />
+</div>
 <div style="text-align:center"><i>The arrow indicates where you should click to open the app.</i></div>
 
 <br />
@@ -1168,7 +1218,6 @@ Mainstream OS | Windows, Linux, Unix, OS-X.
 Parameter | User input required to specify the data to be saved into the application.
 Recurring lesson | A lesson that will occur more than once in patterned intervals.
 UI | User Interface - the means by which the user and the app interact.
-UTC+8 | The UTC offset used by Singapore Standard Time (SST), 8 hours ahead of UTC. Historically also referred to as GMT+8. UTC, or Coordinated Universal Time, is the primary time standard by which the world regulates clocks and time.
 UX | User Experience - The experience a user has when using the app.
 
 <br />
@@ -1176,8 +1225,6 @@ UX | User Experience - The experience a user has when using the app.
 [back to table of contents](#toc)
 
 --------------------------------------------------------------------------------------------------------------------
-
-<div style="page-break-after: always;"></div>
 
 ## Command Summary
 This section lists all the available commands in TAB, along with examples on how you can use them.
@@ -1203,9 +1250,10 @@ Action | Format & Examples
 Action | Format & Examples
 --------|------------------
 [**Add Lesson**](#adding-a-lesson-ladd) | `ladd INDEX [recurring/[END_DATE]] date/dd MMM yyyy time/HHmm-HHmm subject/SUBJECT rates/LESSON_RATES [f/OUTSTANDING_FEES] [hw/HOMEWORK]…​`<br><br> e.g. `ladd 1 recurring/ date/10 Nov 2021 time/1000-1200 subject/Math rates/50`
-[**Edit Lesson**](#editing-a-lesson-ledit) | `ledit INDEX LESSON_INDEX [recurring/[END_DATE]] [date/dd MMM yyyy] [time/HHmm-HHmm] [subject/SUBJECT] [rates/LESSON_RATES] [f/OUTSTANDING_FEES] [hw/HOMEWORK]… [cancel/CANCEL_DATE]… [uncancel/UNCANCEL_DATE]…​`
+[**Edit Lesson**](#editing-a-lesson-ledit) | `ledit INDEX LESSON_INDEX [recurring/[END_DATE]] [date/dd MMM yyyy] [time/HHmm-HHmm] [subject/SUBJECT] [rates/LESSON_RATES] [f/OUTSTANDING_FEES] [hw/HOMEWORK]… [cancel/CANCEL_DATE]… [uncancel/UNCANCEL_DATE]…​`<br><br> e.g. `ledit 2 1 cancel/10 Nov 2021`
 [**Delete Lesson**](#deleting-a-lesson-ldelete) | `ldelete INDEX LESSON_INDEX`<br><br> e.g.`ldelete 2 1`
-[**Pay Lesson**](#paying-a-lessons-outstanding-fees-paid) | `paid INDEX LESSON_INDEX amt/AMOUNT_PAID`
+[**Pay Lesson**](#paying-a-lessons-outstanding-fees-paid) | `paid INDEX LESSON_INDEX amt/AMOUNT_PAID`<br><br> e.g. `paid 2 1 amt/10`
+[**View Lessons**](#viewing-a-students-lessons-view) | `view INDEX`<br><br> e.g. `view 1`
 
 ### Navigating the UI
 
@@ -1223,6 +1271,8 @@ Action | Format
 [**Navigate Backward in Calendar**](#navigating-backwards-in-the-calendar-back) | `back`
 [**View Reminders**](#viewing-upcoming-lessons-remind) | `remind`
 
+<div style="page-break-after: always;"></div>
+
 ### General
 
 Action | Format
@@ -1236,4 +1286,6 @@ Action | Format
 <br />
 
 [back to table of contents](#toc)
+
+--------------------------------------------------------------------------------------------------------------------
 

@@ -12,7 +12,7 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/chesterwongz.png" width="200px">
 
 [[github](https://github.com/Chesterwongz)]
-[[portfolio](https://www.linkedin.com/in/zhi-chester-wong-46a6b41b5?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BS8WG6LsATxiSCaqmdnTWtA%3D%3D)]
+[[portfolio](team/chesterwongz.md)]
 
 * Role: Developer
 
@@ -20,7 +20,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 <img src="images/eeliana.png" width="200px">
 
-[[github](http://github.com/eeliana)]
+[[github](http://github.com/eeliana)] [[Portfolio](./team/eeliana.md)]
 
 * Role: Developer
 
@@ -28,7 +28,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 <img src="images/lingshanng.png" width="200px">
 
-[[github](http://github.com/lingshanng)]
+[[github](http://github.com/lingshanng)] [[Portfolio](team/lingshanng.md)]
 
 * Role: Developer
 * Responsibility: Code Quality
@@ -46,6 +46,6 @@ We are a team based in the [School of Computing, National University of Singapor
 
 <img src="images/angkoonhwee.png" width="200px">
 
-[[github](http://github.com/angkoonhwee)]
+[[github](http://github.com/angkoonhwee)] [[Portfolio](team/angkoonhwee.md)]
 
 * Role: Developer

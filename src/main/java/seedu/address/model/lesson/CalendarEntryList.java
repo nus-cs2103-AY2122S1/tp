@@ -69,8 +69,9 @@ public class CalendarEntryList {
      */
     private void addUpcomingLesson(Entry<Lesson> calendarEntry) {
         Lesson lesson = calendarEntry.getUserObject();
-        if (isUpcoming(lesson)
-                && upcomingLessons.stream().noneMatch(entry -> entry.getUserObject().equals(lesson))) {
+        boolean isNotInUpcomingLessons =
+                upcomingLessons.stream().noneMatch(entry -> entry.getUserObject().equals(lesson));
+        if (isUpcoming(lesson) && isNotInUpcomingLessons) {
             upcomingLessons.add(calendarEntry);
             sortUpcomingLessons();
         }
@@ -411,7 +412,7 @@ public class CalendarEntryList {
      * @param lesson The lesson associated with this entry.
      * @param entryInterval The interval of this entry.
      * @param endDate The end date of the recurrence.
-     * @return Then calendar entry of the lesson.
+     * @return Lesson entry to be added to the calendar.
      */
     private Entry<Lesson> convertToRecurringEntryWithEnd(Person owner, Lesson lesson, Interval entryInterval,
             LocalDate endDate) {

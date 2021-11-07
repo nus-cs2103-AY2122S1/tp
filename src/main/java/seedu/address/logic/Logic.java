@@ -46,8 +46,10 @@ public interface Logic {
     /** Returns an unmodifiable view of the tag counter. */
     ObservableMap<Tag, Integer> getTagCounter();
 
+    /** Returns an unmodifiable view of the observable list of lessons belonging to the student. */
     ObservableList<Lesson> getLessonList(Person student);
 
+    /** Returns an unmodifiable view of an empty observable list of lessons. */
     ObservableList<Lesson> getEmptyLessonList();
 
     /** Returns the CalendarFX calendar */

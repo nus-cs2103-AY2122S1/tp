@@ -17,7 +17,7 @@ end box
 [-> LogicManager : ...
 activate LogicManager
 
-LogicManager -> LessonAddCommand : execute()
+LogicManager -> LessonAddCommand : executeUndoableCommand()
 activate LessonAddCommand
 
 LessonAddCommand -> Model : getPerson(personList, index)
@@ -40,10 +40,10 @@ Model --> LessonAddCommand
 deactivate Model
 
 create Person
-LessonAddCommand -> Person : createEditedPerson(personToEdit, updatedLessons)
+LessonAddCommand -> Person : createEditedPerson(person,\n updatedLessons)
 activate Person
 
-Person --> LessonAddCommand : person
+Person --> LessonAddCommand : editedPerson
 deactivate Person
 
 LessonAddCommand -> Model : setPerson(person, editedPerson)

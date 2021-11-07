@@ -4,7 +4,7 @@ skinparam arrowThickness 1.1
 skinparam arrowColor UI_COLOR_T4
 skinparam classBackgroundColor UI_COLOR
 
-package UI <<Rectangle>>{
+package UI <<Rectangle>> {
 Interface Ui <<Interface>>
 Class "{abstract}\nUiPart" as UiPart
 Class UiManager
@@ -42,8 +42,8 @@ shown in another diagram.
 end note
 
 MainWindow *-down-> "1" StatusBarFooter
-MainWindow -down-> "0..1" HelpWindow
-MainWindow -down-> "0..1" ReminderWindow
+MainWindow -down--> "0..1" HelpWindow
+MainWindow -down--> "0..1" ReminderWindow
 
 
 ReminderWindow -down-> "*" ReminderLessonCard
@@ -63,8 +63,7 @@ UiManager -right-> Logic
 MainWindow -left-> Logic
 
 CenterPanel ..> Model
-CenterPanel -[hidden]left- HelpWindow
-HelpWindow -[hidden]left- CommandBox
+CenterPanel -[hidden]left CommandBox
 CommandBox -[hidden]left- ResultDisplay
 ResultDisplay -[hidden]left- StatusBarFooter
 ReminderLessonCard -[hidden]left- ExternalWindow
