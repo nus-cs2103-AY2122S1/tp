@@ -249,7 +249,7 @@ You can quickly add this information to TutorAid by performing the steps below:
    
 Next, let us assume that you have decided to charge your students $125.90 per month for the lesson _History 1_. We can add this detail into TutorAid by doing the following steps:
 
-1. Type the command `edit -l 2 t/10AM - 11AM on Mondays c/10` and press ENTER.
+1. Type the command `edit -l 2 p/125.90` and press ENTER.
 
     > :bulb: The `2` in the command above refers to the index number of _History 1_ in the Lesson Panel. For more information, you can refer to the detailed documentation for [editing a lesson's details](#editing-a-lesson-edit--l).
 
