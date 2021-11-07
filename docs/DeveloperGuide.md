@@ -132,7 +132,6 @@ The `Model` component,
 * exposes various `ObservableList`s that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list changes.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
 <br><br>
-  
 A `Module` stores a `Title`, `Code`, `Description`, `Mc`, `AcademicCalendar` and zero or more `Tag`s.
 <br><br>
 A `UserInfo` stores a `Mc` as Mc goal and a `AcademicCalendar` as current semester.
@@ -209,7 +208,7 @@ When the `TakeCommand#execute()` method is called,
 - A copy of the `Module` object containing the value of `academicCalendar` is created. The value of `academicCalendar` is stored in a corresponding field in this copy.
 - The `Module` object in the `Model` is then replaced by this copy.
 
-Note: 
+Note:
 - When a new `Module` object is added to the module tracker, its `academicCalendar` field is unassigned by default.
 - Removing a schedule from a module is not supported in the `take` command, this functionality is instead moved to a separate `untake` command.
 - If the module is already scheduled, its current `academicCalendar` field will be overridden by a new `AcademicCalendar` object.
@@ -317,6 +316,7 @@ Below is a sequence diagram, and an explanation of how `FindCommand` is executed
     - Cons:
         - User might want to view a general set of modules.
         - Might be troublesome for the user to memorise all the optional parameters.
+
 - **Alternative 2:** User uses a separate command (`find`) to take a module, without the use of additional optional parameters.
     - Pros:
         - Easier for the user to use as there is no need to memorise all the optional parameters.
@@ -417,7 +417,7 @@ The `EditCommand` class extends the `Command` class and implements the `EditComm
 It contains non-null `index` and `editModuleDescriptor` fields.
 When the `EditCommand#execute()` method is called,
 - The `Module` object corresponding to the `index` is found from the `Model`.
-- Create an edited copy of the module, and replace the original module.  
+- Create an edited copy of the module, and replace the original module.
 - A `CommandResult` is returned with the updated `Model`.
 
 Below is an example sequence diagram and an explanation on how `EditCommand` is executed.
@@ -431,7 +431,7 @@ Below is an example sequence diagram and an explanation on how `EditCommand` is 
 
 **Step 4.** The module at the specified index (`2`) in the list is obtained from the `Model`.
 
-**Step 5.** A copy of this module after substituting the edited fields with new values is created. 
+**Step 5.** A copy of this module after substituting the edited fields with new values is created.
 
 **Step 6.** The specified module in the `Model` is then replaced by the edited copy. The `Model` is updated to reflect this change in the Mod Tracker.
 
@@ -439,7 +439,7 @@ Below is an example sequence diagram and an explanation on how `EditCommand` is 
 
 ####Implementation
 
-This section explains the mechanism used to delete a `Module` from the `ModuleTracker`. 
+This section explains the mechanism used to delete a `Module` from the `ModuleTracker`.
 
 The `DeleteCommand` results in the specified module being deleted from the application. This command requires a compulsory field Module Index to specify which module will be deleted.
 
@@ -522,7 +522,6 @@ Below are the sequence diagrams and explanation of how `SetCommand` is executed.
         - For a user who is familiar with the app and CLI, they don't need to use mouse to change current semester.
     - Cons:
         - The command is less intuitive than drop-down list, the user might need to memorize the `set` command format.
-    
 - **Alternative 2:** There is a button in the GUI that when clicked, will show drop-down lists of year and semester for user to choose.
     - Pros:
         - It is very straight forward and intuitive.
@@ -537,7 +536,6 @@ Below are the sequence diagrams and explanation of how `SetCommand` is executed.
         - The command is short, as a user that is familiar with the app, they can execute the command quickly and are less likely to make mistakes.
     - Cons:
         - For beginners, the `set` command might be a bit confusing since the word "set" shows little hints on what the command does.
-    
 - **Alternative 2:** The user can use `setMcGoal` and `setCurrentSemester` command to perform the two functionalities respectively.
     - Pros:
         - The command is very clear. For beginners, they can understand the command quickly.
@@ -546,7 +544,6 @@ Below are the sequence diagrams and explanation of how `SetCommand` is executed.
         - The command is very long, which takes more time to type in. For a user who is familiar with the app, they might not be able to use it efficiently.
         - The command consist of capital letters and lower-case letters and is long. Thus, it might be more prone to errors.
 
-    
 ### View modules taken in specific semester feature
 The `view` command results in modules taken in a specific semester being shown.
 
@@ -582,14 +579,13 @@ Below is a sequence diagram and explanation of how the `view` command works.
 #### Design Considerations:
 
 **Aspect: How can the user view modules in specific semester**
-- **Alternative 1:** Set 2 buttons in GUI that when clicked, allows user to navigate to the previous semester or next semester and see the modules taken in that semester.  
+- **Alternative 1:** Set 2 buttons in GUI that when clicked, allows user to navigate to the previous semester or next semester and see the modules taken in that semester.
     - Pros:
         - It is very straight forward and intuitive.
         - For beginners and users who are not familiar with CLI, they can view modules taken in different semesters by simply clicking buttons without needing to remember the commands.
     - Cons:
         - If the specific semester is very far away from the current semester, users need to click the button many times.
         - For a user comfortable with using command line, the need to use mouse may lower their working efficiency.
-    
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -726,15 +722,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The given module index or arguments are invalid.
     * 1a1. NUS Mod Tracker shows an error message.
-    
+
     Use case resumes at step 1.
 * 1b. The user failed to provide any mandatory details to be edited.
     * 1b1. NUS Mod Tracker shows an error message.
-    
+
     Use case resumes at step 1.
 * 1c. The new value that is given to the code field is already exists in the database.
     * 1c1. NUS Mod Tracker shows an error message.
-    
+
     Use case resumes at step 1.
 
 **UC5: Find a module**
@@ -768,7 +764,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 * 1a. The given module index or arguments are invalid.
   * 1a1. NUS Mod Tracker shows an error message.
-  
+
     Use case resumes at step 1.
 
 **UC7: Remove a Module from the Academic Plan**
@@ -787,30 +783,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case resumes at step 1.
 * 1b. The specified module is not in the academic plan.
   * 1b1. NUS Mod Tracker shows an error message.
-    
+
     Use case resumes at step 1.
-    
+
 **UC8: Change current semester**
 
 **MSS**
 
 1.  User requests to change current semester.
 2.  Module tracker change the current semester.
-    
+
     Use case ends.
 
 **Extensions**
 * 1a. User does not specify academic year or semester in the request.
     * 1a1. Module Tracker shows an error message.
-      
+
     Use case resumes at step 1.
 
 
 * 1b. The academic year and semester user request to change to is invalid.
     * 1b1. Module Tracker shows an error message.
-    
+
     Use case resumes at step 1.
-      
+
 * a. At any time, User requests to view help(UCxx)
 
 
@@ -866,7 +862,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The given semester is invalid.
     * 1a1. NUS Mod Tracker shows an error message.
-    
+
     Use case resumes at step 1.
 
 **UC12: Viewing help**
@@ -891,14 +887,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
   * New users can have a grasp of the core features quickly with the help of user guide(link).
 * Constraints
-  * The product is not required to handle the module timetable planning and module bidding process. 
+  * The product is not required to handle the module timetable planning and module bidding process.
+
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **GUI**: Graphical user interface
 * **ClI**: Command line interface
-* **Common screen resolutions**: minimum _1024x786_, maximum _3840x2160_ 
+* **Common screen resolutions**: minimum _1024x786_, maximum _3840x2160_
 * **MSS**: Main Success Scenario
 * **Academic Calendar**: A generalization of academic year and semester
 
@@ -928,7 +925,16 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Adding a module to the database
+
+1. Test case: `add c/ST2131 t/Probability d/The objective of this module is to give an elementary introduction to probability theory m/4 tag/UE`
+   Expected: A new module is added to the bottom of the list. Details of the added module are shown in the status message.
+
+2. Test case: `add c/ t/software engineering d/introduces software engineering m/4`
+   Expected: No module is added. Error details are shown in the status message.
+
+3. Other incorrect add commands to try: `add `,`add c/ST21312132 t/abcd d/efgh m/4`, `...`
+   Expected: Similar to previous.
 
 ### Deleting a module
 
@@ -936,25 +942,96 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all modules using the `list` command. Multiple modules in the list.
 
-   1. Test case: `delete 1`<br>
+   2. Test case: `delete 1`<br>
       Expected: First module is deleted from the list. Details of the deleted module are shown in the status message.
 
-   1. Test case: `delete 0`<br>
+   3. Test case: `delete 0`<br>
       Expected: No module is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
-      
-### Adding a module
 
-1. Test case: `add c/ST2131 t/Probability d/The objective of this module is to give an elementary introduction to probability theory m/4 tag/UE`
-Expected: A new module is added to the bottom of the list. Details of the added module are shown in the status message.
-   
-2. Test case: `add c/ t/software engineering d/introduces software engineering m/4`
-Expected: No module is added. Error details are shown in the status message.
-   
-3. Other incorrect add commands to try: `add `,`add c/ST21312132 t/abcd d/efgh m/4`, `...`
-Expected: Similar to previous.
+### Editing a module
+
+1. Editing a module while all modules are being shown
+    1. Test case: `edit 1 c/MA1100`<br>
+       Expected: The first module's code is changed to `MA1100`. Details of the edited module are shown in the status message.
+
+    2. Test case: `edit 1`<br>
+       Expected: No module is edited. Error details shown in the status message. Status bar remains the same.
+
+    3. Other incorrect delete commands to try: `edit`, `edit -1 c/MA1100`, `edit x c/MA1100`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+### Listing all modules
+
+1. Listing all modules in NUS Mod Tracker.
+
+    1. Test case: `list`<br>
+       Expected: All modules are shown.
+
+    2. Test case: `list 1111`<br>
+       Expected: Similar to the previous.
+
+### Finding modules
+
+1. Finding all modules with the specified keywords.
+
+    1. Test case: `find CS2103T`<br>
+       Expected: The modules that have `CS2103T` string in module code, module title, description, and tags are found.
+
+### Adding a module to the academic plan
+
+1. Test case: `take 1 y/2 s/1`<br>
+       Expected: A yellow label with the string "year2 sem1" is added to the first module.
+
+2. Test case: `take 1`<br>
+        Expected: The module is not taken. Error details shown in the status message.
+
+### Removing a module from the academic plan
+N
+1. Prerequisites: The specified module has been taken.
+
+2. Test case: `untake 1`<br>
+       Expected: The first module is removed from the academic plan. The color of this module is changed to grey.
+
+### Changing settings of MC goal and current semester
+
+1. Resetting MC goal.
+
+    1. Test case: `set m/200`<br>
+       Expected: The MC goal is set to 200. It is reflected in the footer.
+
+2. Resetting current semester.
+
+    1. Test case: `set y/2 s/1`<br>
+        Expected: The current semester is set to year 2, semester 1. The new current semester information is reflected in the footer.
+
+### Viewing modules scheduled in a specific semester
+
+1. Test case: `view y/2 s/1`<br>
+       Expected: Modules scheduled in year 2, semester 1 are shown.
+
+2. Test case: `view y/10 s/2`<br>
+        Expected: Error message is shown.
+
+### Unscheduling all modules in a specific semester
+
+1. Prerequisite: Some modules are scheduled in the specified semester
+
+2. Test case: `clear y/2 s/1`<br>
+   Expected: All modules taken in year 2, semester 1 are unscheduled and the color of the module is changed to grey.
+
+### Viewing help
+
+1. Test case: `help`<br>
+   Expected: A help window with a link to the user guide and command formats are shown.
+
+### Exit
+
+1. Test case: `exit`<br>
+   Expected: The application is terminated.
+
 
 
 ## **Appendix C: Effort**
@@ -966,16 +1043,16 @@ If the effort required to create AB3 is 100, we would place the effort required 
    We needed to modify the entire AB3 in order to support operations on modules.
 
    In the `Model` component, we needed to update all models in the `person` folder with a new folder that contains the model for module, as well as all other attributes related to a module (`Code`, `Title`, `Description`, `Mc`, ).
-   
+
    All other classes in `model` folder had to be modified accordingly.
 
    In the `Logic` component, we need to modify all command parsers in order to parse modules. All commands also needed to be modified to support the operations on modules.
-   
+
    In the `Storage` component, we also needed to modify all classes in order to store modules.
 
-   The `UI` component also needed to be modified to display all the attributes of a module clearly, 
+   The `UI` component also needed to be modified to display all the attributes of a module clearly,
    and the test cases changed accordingly.
-   
+
 
 2. Mc progress panel
 
@@ -985,7 +1062,6 @@ If the effort required to create AB3 is 100, we would place the effort required 
 
     Firstly, we altered the application's UI to accommodate the new Mc progress panel.
 
-    As many commands can cause the user's MC progress to change (i.e. setting MC goal, setting the current semester, taking new modules), we had to create a new model 
-for a `McProgress`, as well as a `McProgressList`. These components are then updated accordingly after execution of a command.
+    As many commands can cause the user's MC progress to change (i.e. setting MC goal, setting the current semester, taking new modules), we had to create a new model for a `McProgress`, as well as a `McProgressList`. These components are then updated accordingly after execution of a command.
 
-    We then link the `McProgressList` to the UI component so that any changes to the `McProgress` will be detected by the UI, and will allow the UI to update accordingly. 
+    We then link the `McProgressList` to the UI component so that any changes to the `McProgress` will be detected by the UI, and will allow the UI to update accordingly.

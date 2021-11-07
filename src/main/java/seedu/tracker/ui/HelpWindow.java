@@ -29,12 +29,11 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String FIND_COMMAND = "Finding a module:\n     "
             + "find [c/] [t/] [d/] [m/] [tag/] [y/] [s/] KEYWORDS";
     public static final String HELP_COMMAND = "Viewing help:\n     help";
-    public static final String INFO_COMMAND = "Viewing user information:\n     info";
     public static final String USERGUIDE_URL =
-            "https://github.com/AY2122S1-CS2103T-W17-2/tp/blob/master/docs/UserGuide.md";
+            "https://ay2122s1-cs2103t-w17-2.github.io/tp/UserGuide";
     public static final String HELP_MESSAGE = "Refer to the user guide for more information: " + USERGUIDE_URL;
     public static final String LIST_COMMAND = "Listing all modules in the module bank:\n     list";
-    public static final String SET_COMMAND = "Setting user's Mc goal OR current semester:\n     "
+    public static final String SET_COMMAND = "Setting user's MC goal or current semester:\n     "
             + "set m/MC or set y/YEAR s/SEMESTER";
     public static final String TAKE_COMMAND = "Taking a module:\n     take INDEX y/YEAR s/SEMESTER";
     public static final String UNTAKE_COMMAND = "Removing(\"untake\") a module:\n     untake INDEX";
@@ -45,7 +44,7 @@ public class HelpWindow extends UiPart<Stage> {
 
     private static final List<String> commandList = Collections.unmodifiableList(Arrays.asList(ADD_COMMAND,
             DELETE_COMMAND, EDIT_COMMAND, LIST_COMMAND, FIND_COMMAND,
-            TAKE_COMMAND, UNTAKE_COMMAND, VIEW_COMMAND, CLEAR_COMMAND, SET_COMMAND, INFO_COMMAND, HELP_COMMAND));
+            TAKE_COMMAND, UNTAKE_COMMAND, VIEW_COMMAND, CLEAR_COMMAND, SET_COMMAND, HELP_COMMAND));
 
 
     @FXML
