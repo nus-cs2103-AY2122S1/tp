@@ -1,4 +1,4 @@
-package seedu.address.model.student;
+package seedu.address.model.module.student;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -15,7 +15,6 @@ import static seedu.address.testutil.TypicalStudents.BOB;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.module.student.Student;
 import seedu.address.testutil.StudentBuilder;
 
 public class StudentTest {
