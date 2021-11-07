@@ -1,4 +1,4 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.event;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.EVENT_DATE_DESC_BADMINTON;
@@ -22,6 +22,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.event.EeditCommand;
+import seedu.address.logic.parser.CliSyntax;
 import seedu.address.logic.parser.event.EeditCommandParser;
 import seedu.address.model.module.Name;
 import seedu.address.model.module.event.EventDate;
