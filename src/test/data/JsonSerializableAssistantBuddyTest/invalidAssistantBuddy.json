@@ -1,0 +1,50 @@
+{
+  "modules" : [ {
+    "moduleName" : "1000",
+    "studentList" : [ {
+      "name" : "&",
+      "teleHandle" : "johndoe",
+      "email" : "johndexample.com",
+      "studentId" : "1234567A",
+      "studentTaskList" : [ {
+        "moduleName" : "1000",
+        "taskId" : "1",
+        "taskName" : "a&",
+        "taskDeadline" : "1&",
+        "isComplete" : false
+      } ]
+    } ],
+    "taskList" : [ {
+      "moduleName" : "2103",
+      "taskId" : "1",
+      "taskName" : "a&",
+      "taskDeadline" : "1&",
+      "isComplete" : false
+    } ]
+  } ]
+,
+
+  "modules" : [ {
+    "moduleName" : "CS2105",
+    "studentList" : [ {
+      "name" : "John Doe",
+      "teleHandle" : "@johndoe",
+      "email" : "johnd@example.com",
+      "studentId" : "A1234567A",
+      "studentTaskList" : [ {
+        "moduleName" : "CS2105",
+        "taskId" : "T1",
+        "taskName" : "a",
+        "taskDeadline" : "1",
+        "isComplete" : false
+      } ]
+    } ],
+    "taskList" : [ {
+      "moduleName" : "CS2105",
+      "taskId" : "T1",
+      "taskName" : "a",
+      "taskDeadline" : "1",
+      "isComplete" : false
+    } ]
+  } ]
+}
