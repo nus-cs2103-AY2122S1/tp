@@ -57,11 +57,17 @@ Alternatively, if you prefer, you could also check the version via the GUI for b
    ModuLink will not run on older versions of Java! If you do not have Java 11 installed, please install it by following the instructions in the official [guide](https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html).
    </div>
    <br/>
-2. Download the latest **modulink.jar** from our website [here](https://github.com/AY2122S1-CS2103T-W12-4/tp/releases).
+2. Download the latest **ModuLink.jar** from our website [here](https://github.com/AY2122S1-CS2103T-W12-4/tp/releases).
 3. Move the file to the folder you want to use as the home folder for ModuLink on your computer.
 
 ### Section 2.2 Working with ModuLink
-To run the app, simply double click the file. You should see a GUI similar to the one shown below in a few seconds. The app will already contain data. Here’s a quick look at the different elements in the app.
+To run the app, simply double click the file. 
+
+Alternatively, you can open the app via the **Terminal** app for Mac users, or the **Command Prompt** app for Windows users. To do this,
+1. `cd` into the directory you saved ModuLink in.
+2. Type and enter `java -jar ModuLink.jar`.
+
+You should see a GUI similar to the one shown below in a few seconds. The app will already contain data. Here’s a quick look at the different elements in the app.
 
 ![Ui](images/screenshots/Ui2.png)
 
