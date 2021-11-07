@@ -12,7 +12,7 @@ Given below are my contributions to the project.
 #### Major Contribution:
 
 * **New Feature**: Add the ability to view general and specific help relating to each command
-  * What it does: Allows user to view a general help page or a specific help page relating to each command.
+  * What it does: Allows user to view a general or specific help page relating to each command.
   * Justification: To allow new users and existing users a shortcut way of viewing usage instruction for better insights into using Academy Directory.
   * Highlights: This features allow users to view a table (in Markdown) that summarizes command format and usage for quick referencing, or view general help of each command.
   * Credits: I have used MDFX, a library that parses Markdown input and rendering it to the JavaFX GUI.
