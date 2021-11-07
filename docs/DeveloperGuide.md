@@ -1243,7 +1243,7 @@ Use case ends.
 
 <br/>
 
-**Use case: UC12 - Redo an undone modification**
+**Use case: UC12 - Redo an undo command**
 
 **MSS**
 
@@ -1294,9 +1294,48 @@ Use case ends.
 
   Use case ends.
 
+**Use case: UC15 - Fees Update**
+
+**MSS**
+
+1. User launches TAB.
+2. TAB displays updated outstanding fees.
+
+Use case ends.
+
+**Extension**
+
+* 1a. There was an error in saving address book.
+  * 1a1. TAB displays the outstanding fees from the last session without being updated.
+  
+  Use case ends.
+
+**Use case: UC16 - Payment**
+
+**MSS**
+
+1. User requests to view lessons of a particular student.
+2. TAB displays list of lessons for the student.
+3. User requests to pay for a specific lesson.
+4. TAB updates and displays the updated outstanding fees after payment for that lesson.
+
+Use case ends.
+
+**Extension**
+
+* 3a. The user specifies an invalid index. 
+  * 3a1. TAB displays an error message 
+  
+  Use case resumes at step 3.
+
+* 3b. The user specifies an invalid amount for payment.
+  * 3ab. TAB displays an error message
+
+  Use case resumes at step 3.
+
 <br/>
 
-**Use case: UC15 – View calendar**
+**Use case: UC17 – View calendar**
 
 **MSS**
 
@@ -1307,7 +1346,7 @@ Use case ends.
 
 <br/>
 
-**Use case: UC16 – Navigate forward in the calendar**
+**Use case: UC18 – Navigate forward in the calendar**
 
 **MSS**
 
@@ -1324,7 +1363,7 @@ Use case ends.
 
   Use case resumes at step 2.
 
-**Use case: UC17 – Navigate backwards in the calendar**
+**Use case: UC19 – Navigate backwards in the calendar**
 
 **MSS**
 
@@ -1341,7 +1380,7 @@ Use case ends.
 
   Use case resumes at step 2.
 
-**Use case: UC18 – Navigate to today in the calendar**
+**Use case: UC20 – Navigate to today in the calendar**
 
 **MSS**
 
@@ -1360,7 +1399,7 @@ Use case ends.
 
 <br/>
 
-**Use case: UC16 – Clear all data**
+**Use case: UC21 – Clear all data**
 
 **MSS**
 
@@ -1417,7 +1456,7 @@ testers are expected to do more *exploratory* testing.
 
 **Initial launch**
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
 
    2. Double-click the jar file Expected: Shows the _GUI_ with a set of sample contacts. The window size may not be optimum.
 
@@ -1426,24 +1465,87 @@ testers are expected to do more *exploratory* testing.
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
    2. Re-launch the app by double-clicking the jar file.<br>
-          Expected: The most recent window size and location is retained.
-   
-### Deleting a person
+      Expected: The most recent window size and location is retained.
 
-**Deleting a person while all persons are being shown<br>**
-Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+3. Closing all windows
+   
+   1. Open TAB, then open the help window and reminder window.
+  
+   2. Close the TAB window.<br>
+      Expected: All windows should close.
+
+### Deleting a student
+
+**Deleting a student while all persons are being shown<br>**
+Prerequisites: List all students using the `list` command. Multiple students in the list.
 
    * Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First student is deleted from the list. Details of the deleted student shown in the status message.
 
    * Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-   
+      Expected: No student is deleted. Error details shown in the status message.
+
+**Deleting a student after a find command is executed<br>**
+Prerequisites: Filter students with the command `find t/new`. Multiple students in the filtered list.
+
+  * Test case: `delete 1 1`<br>
+    Expected: The first student is removed from the filtered list and the list remains filtered. Details of the deleted contact shown in the status message.
+
 Incorrect delete commands to try: `delete...`
-1. `delete x` where x is larger than the list size<br>
+1. `delete x` where x is larger than the list size
 2. `delete`
 
 Expected: Error details shown in the status message.
+
+### Editing a student
+
+**Editing a student while all students are being shown<br>**
+Prerequisites: List all students using the `list` command. Multiple students in the list.
+   
+  * Test case: `edit 1 n/Alex`<br>
+    Expected: First student is edited to have the name `Alex`. Details of the edited contact shown in the status message.
+    
+  * Test case: `edit 1`<br>
+    Expected: No student is edited. Error details shown in the status message.
+      
+Incorrect edit commands to try: `edit...`
+1. `edit x` where x is larger than the list size
+2. `edit`
+3. `edit 1 2 n/Alex`
+
+### Finding a student
+
+**Finding a student by tag<br>**
+Prerequisites: List all students using the `list` command. Multiple students in the list.
+
+  * Test case: `find t/new t/unpaid cond/any`<br>
+    Expected: All students with either the `NEW` tag or the `UNPAID` tag are shown.
+    
+  * Test case: `find t/new unpaid`<br>
+    Expected: The list is not filtered. Error details shown in the status message.
+
+**Finding a student by student fields<br>**
+Prerequisites: List all students using the `list` command. Multiple students in the list.
+
+  * Test case: `find a/serangoon cond/none`<br>
+    Expected: All students without the address `serangoon` are shown.
+    
+  * Test case: `find n/`<br>
+    Expected: The list is not filtered. Error details shown in the status message.
+
+**Finding a student by lesson fields<br>**
+Prerequisites: List all students using the `list` command. Multiple students in the list with lessons.
+
+  * Test case: `find time/1400-1900`<br>
+    Expected: All students with at least one lesson overlapping with the time range `1400-1900` will be shown.
+    
+  * Test case: `find date/20 oct 2021 12 nov 2021`<br>
+    Expected: The list is not filtered. Error details shown in the status message.
+
+Incorrect find commands to try: `find...`
+1. `find cond/every`
+2. `find`
+3. `find time/1200-1000`
 
 ### Adding a lesson
 
@@ -1695,11 +1797,21 @@ Suppose the date today is 6 Nov 2021 and current time is 1800 hours,
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+**Dealing with missing data files<br>**
+* Test case: The data folder does not have the file `addressbook.json`. Open TAB.<br>
+  Expected: TAB creates the `addressbook.json` file with sample data.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+**Dealing with corrupted data files<br>**
+Prerequisites: `addressbook.json` has an initial list of students.
+* Test case: 
+  1. Edit `addressbook.json` such that the name of a student is empty, e.g. `name: ""`
+  2. Open TAB.<br>
+  Expected: TAB shows no students. Person list has been reset to empty.
+      
+* Test case:
+  1. Edit `addressbook.json` such that the two students have the same name.
+  2. Open TAB.<br>
+  Expected: TAB shows no students. Person list has been reset to empty.
 
 ## **Appendix D: Efforts**
 
