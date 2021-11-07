@@ -20,7 +20,7 @@ if () then ([Visit date is in correct format])
 
     else ([else])
         if() then ([Neither frequency
- nor occurrence presents])
+ nor occurrence present])
             :Execute VisitCommand;
         else ([else])
             :Throw ParseException;

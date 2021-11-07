@@ -497,7 +497,7 @@ Given below is an example usage scenario:
 **Target user profile**:
 
 - social worker who has a need to manage a significant number of elderly contacts with limited or no family support, and contact them regularly to check on their well-being
-- prefer desktop apps over other types
+- prefers desktop apps over other types
 - can type fast
 - prefers typing to mouse interactions
 - is reasonably comfortable using CLI apps
@@ -511,7 +511,7 @@ Since social workers need to contact many elderly every day, we created this app
 | ----------------- | -------------------------------------------------------------------------------------------------------------------------- |
 | **User**          | Refers to Social Worker, a community worker using the app to manage multiple elderly.                                      |
 | **Social Worker** | Workers at community centres to provide supports for needy elderly. They manage multiple elderly and visit them regularly. |
-| **Elderly**       | The elderly who need social support due to limited family support. They are managed by social workers.                     |
+| **Elderly**       | The elderly who needs social support due to limited family support. They are managed by social workers.                     |
 | **Visit**         | A visit to an elderly's home scheduled by the user.                                                                        |
 | **Attribute**     | Data that is assigned to an elderly                                                                                        |
 | **Mainstream OS** | Windows, Linux, Unix, OS-X.                                                                                                |
