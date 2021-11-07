@@ -46,6 +46,9 @@ This product will make recruiters’ lives easier through categorisation and fil
 - [**Appendix: Instructions for manual testing**](#appendix-instructions-for-manual-testing)
   * [Launch and shutdown](#launch-and-shutdown)
   * [Deleting a person](#deleting-a-person)
+  * [Marking an applicant](#marking-an-applicant)
+  * [Unmarking an applicant](#unmarking-an-applicant)
+  * [Deleting marked applicants](#deleting-marked-applicants)
   * [Saving data](#saving-data)
 
 
