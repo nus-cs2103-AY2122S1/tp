@@ -178,6 +178,7 @@ The `Storage` component,
 
 Classes used by multiple components are in the `seedu.address.commons` package.
 
+--------------------------------------------------------------------------------------------------------------------
 ### 3.7 Client Fields
 
 As client attributes often share a few similarities in their constraints, some with their own differences, we provide interfaces for developers to customise the constraints of client attributes.
