@@ -16,6 +16,7 @@ import seedu.edrecord.logic.commands.exceptions.CommandException;
 import seedu.edrecord.model.Model;
 import seedu.edrecord.model.assignment.Assignment;
 import seedu.edrecord.model.assignment.Grade;
+import seedu.edrecord.model.assignment.Grade.GradeStatus;
 import seedu.edrecord.model.assignment.Score;
 import seedu.edrecord.model.module.ModuleSet;
 import seedu.edrecord.model.name.Name;
@@ -49,6 +50,8 @@ public class GradeCommand extends Command {
     public static final String MESSAGE_NO_SUCH_ASSIGNMENT = "There is no assignment with this name";
     public static final String MESSAGE_SCORE_GREATER_THAN_MAX = "Student's score is greater than the "
             + "maximum score for this assignment";
+    public static final String MESSAGE_STATUS_SCORE_MISMATCH = "Assignment has not been graded and should not "
+            + "have a score.";
 
     private final Index index;
     private final Name name;
@@ -88,12 +91,16 @@ public class GradeCommand extends Command {
         Assignment assignment = model.searchAssignment(name)
                 .orElseThrow(() -> new CommandException(MESSAGE_NO_SUCH_ASSIGNMENT));
 
-        // Check if score is more than the assignment's maximum score.
+        // Check if ungraded assignment has score or score is more than the assignment's maximum score.
         if (grade.getScore().isPresent()) {
-            Score thisScore = grade.getScore().get();
-            Score maxScore = assignment.getMaxScore();
-            if (thisScore.compareTo(maxScore) > 0) {
-                throw new CommandException(MESSAGE_SCORE_GREATER_THAN_MAX);
+            if (grade.getStatus() == GradeStatus.GRADED) {
+                Score thisScore = grade.getScore().get();
+                Score maxScore = assignment.getMaxScore();
+                if (thisScore.compareTo(maxScore) > 0) {
+                    throw new CommandException(MESSAGE_SCORE_GREATER_THAN_MAX);
+                }
+            } else {
+                throw new CommandException(MESSAGE_STATUS_SCORE_MISMATCH);
             }
         }
 
