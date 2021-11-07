@@ -8,18 +8,19 @@ import tutoraid.model.lesson.LessonNameContainsSubstringsPredicate;
 
 /**
  * Finds and lists all lessons in address book whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Keyword matching is case-insensitive.
  */
 public class FindLessonCommand extends FindCommand {
 
     public static final String COMMAND_FLAG = "-l";
 
-    public static final String MESSAGE_USAGE = FindCommand.COMMAND_WORD
-            + COMMAND_FLAG
-            + ": Finds all lessons whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + FindCommand.COMMAND_WORD + COMMAND_FLAG + " alice bob charlie";
+    public static final String MESSAGE_USAGE = String.format("%1$s %2$s: Finds all lessons whose names contain any of "
+                    + "the specified keywords (case-insensitive) and displays them as a list with index numbers."
+                    + "\nParameters:"
+                    + "\nKEYWORD [MORE KEYWORDS]"
+                    + "\nExample:"
+                    + "\n%1$s %2$s eng math sci",
+            COMMAND_WORD, COMMAND_FLAG);
 
     private final LessonNameContainsSubstringsPredicate predicate;
 

@@ -44,7 +44,8 @@ public class AddLessonCommandTest {
 
         CommandResult commandResult = new AddLessonCommand(validLesson).execute(modelStub);
 
-        assertEquals(String.format(AddLessonCommand.MESSAGE_SUCCESS, validLesson), commandResult.getFeedbackToUser());
+        assertEquals(String.format(AddLessonCommand.MESSAGE_SUCCESS, validLesson.toNameString()),
+                commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validLesson), modelStub.lessonsAdded);
     }
 

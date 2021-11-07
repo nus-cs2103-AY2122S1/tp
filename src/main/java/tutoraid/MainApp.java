@@ -61,9 +61,19 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        TutorAidStudentStorage tutorAidStudentStorage =
-                new JsonTutorAidStudentStorage(userPrefs.getStudentBookFilePath());
         TutorAidLessonStorage tutorAidLessonStorage = new JsonTutorAidLessonStorage(userPrefs.getLessonBookFilePath());
+        TutorAidStudentStorage tutorAidStudentStorage;
+        try {
+            tutorAidLessonStorage.readLessonBook(userPrefs.getLessonBookFilePath());
+            tutorAidStudentStorage =
+                    new JsonTutorAidStudentStorage(userPrefs.getStudentBookFilePath(),
+                         tutorAidLessonStorage.readLessonBook().orElseGet(SampleDataUtil::getSampleLessonBook));
+        } catch (DataConversionException e) {
+            tutorAidStudentStorage = new JsonTutorAidStudentStorage(
+                    userPrefs.getStudentBookFilePath(),
+                    new LessonBook());
+        }
+
         storage = new StorageManager(tutorAidStudentStorage, tutorAidLessonStorage, userPrefsStorage);
 
         initLogging(config);
@@ -85,27 +95,11 @@ public class MainApp extends Application {
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         Optional<ReadOnlyStudentBook> studentBookOptional;
         ReadOnlyStudentBook studentsInitialData;
-
-        try {
-            studentBookOptional = storage.readStudentBook();
-            if (!studentBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample StudentBook");
-            }
-            studentsInitialData = studentBookOptional.orElseGet(SampleDataUtil::getSampleStudentBook);
-        } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty StudentBook");
-            studentsInitialData = new StudentBook();
-        } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty StudentBook");
-            studentsInitialData = new StudentBook();
-        }
-
         Optional<ReadOnlyLessonBook> lessonBookOptional;
         ReadOnlyLessonBook lessonsInitialData;
-
         try {
             lessonBookOptional = storage.readLessonBook();
-            if (!lessonBookOptional.isPresent()) {
+            if (lessonBookOptional.isEmpty()) {
                 logger.info("Data file not found. Will be starting with a sample LessonBook");
             }
             lessonsInitialData = lessonBookOptional.orElseGet(SampleDataUtil::getSampleLessonBook);
@@ -116,6 +110,25 @@ public class MainApp extends Application {
             logger.warning("Problem while reading from the file. Will be starting with an empty LessonBook");
             lessonsInitialData = new LessonBook();
         }
+
+        try {
+            studentBookOptional = storage.readStudentBook(lessonsInitialData);
+            if (studentBookOptional.isEmpty()) {
+                logger.info("Data file not found. Will be starting with a sample StudentBook");
+            }
+            studentsInitialData = studentBookOptional.orElseGet(() -> SampleDataUtil.getSampleStudentBook(
+                    SampleDataUtil.getSampleLessonBook()));
+        } catch (DataConversionException e) {
+            logger.warning("Data file not in the correct format. Will be starting with an empty StudentBook");
+            studentsInitialData = new StudentBook();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty StudentBook");
+            studentsInitialData = new StudentBook();
+        }
+
+
+
+
 
         return new ModelManager(studentsInitialData, lessonsInitialData, userPrefs);
     }

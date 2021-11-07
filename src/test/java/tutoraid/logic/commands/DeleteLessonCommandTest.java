@@ -29,7 +29,8 @@ public class DeleteLessonCommandTest {
         Lesson lessonToDelete = model.getFilteredLessonList().get(TypicalIndexes.INDEX_FIRST_ITEM.getZeroBased());
         DeleteLessonCommand deleteLessonCommand = new DeleteLessonCommand(TypicalIndexes.INDEX_FIRST_ITEM);
 
-        String expectedMessage = String.format(DeleteLessonCommand.MESSAGE_DELETE_LESSON_SUCCESS, lessonToDelete);
+        String expectedMessage = String.format(DeleteLessonCommand.MESSAGE_DELETE_LESSON_SUCCESS,
+                lessonToDelete.toNameString());
 
         ModelManager expectedModel = new ModelManager(model.getStudentBook(), model.getLessonBook(), new UserPrefs());
         expectedModel.deleteLesson(lessonToDelete);
@@ -53,7 +54,8 @@ public class DeleteLessonCommandTest {
         Lesson lessonToDelete = model.getFilteredLessonList().get(TypicalIndexes.INDEX_FIRST_ITEM.getZeroBased());
         DeleteLessonCommand deleteLessonCommand = new DeleteLessonCommand(TypicalIndexes.INDEX_FIRST_ITEM);
 
-        String expectedMessage = String.format(DeleteLessonCommand.MESSAGE_DELETE_LESSON_SUCCESS, lessonToDelete);
+        String expectedMessage = String.format(DeleteLessonCommand.MESSAGE_DELETE_LESSON_SUCCESS,
+                lessonToDelete.toNameString());
 
         Model expectedModel = new ModelManager(model.getStudentBook(), model.getLessonBook(), new UserPrefs());
         expectedModel.deleteLesson(lessonToDelete);

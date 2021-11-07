@@ -17,12 +17,15 @@ public class ViewStudentCommand extends ViewCommand {
 
     public static final String COMMAND_FLAG = "-s";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + COMMAND_FLAG
-            + ": Shows the student identified by the index number used in the displayed student list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " " + COMMAND_FLAG + " 1";
+    public static final String MESSAGE_USAGE = String.format("%1$s %2$s: Shows the student identified by the index "
+                    + "number as shown in the Student Panel."
+                    + "\nParameters:"
+                    + "\nINDEX (must be a positive integer)"
+                    + "\nExample:"
+                    + "\n%1$s %2$s 1",
+            COMMAND_WORD, COMMAND_FLAG);
 
-    public static final String MESSAGE_VIEW_STUDENT_SUCCESS = "Viewing requested student";
+    public static final String MESSAGE_VIEW_STUDENT_SUCCESS = "Showing %s and his/her lessons.";
 
     private final Index targetIndex;
 
@@ -41,7 +44,7 @@ public class ViewStudentCommand extends ViewCommand {
 
         Student studentToView = lastShownList.get(targetIndex.getZeroBased());
         model.viewStudent(studentToView);
-        return new CommandResult(MESSAGE_VIEW_STUDENT_SUCCESS);
+        return new CommandResult(String.format(MESSAGE_VIEW_STUDENT_SUCCESS, studentToView.toNameString()));
     }
 
     @Override

@@ -26,9 +26,9 @@ public class JsonAdaptedStudentTest {
             TypicalStudents.BENSON.getLessons().getAllLessonNamesAsStringArrayList();
 
     @Test
-    public void toModelType_validStudentDetails_returnsStudent() throws Exception {
+    public void toModelType_validStudentDetails_returnsInitialStudent() throws Exception {
         JsonAdaptedStudent student = new JsonAdaptedStudent(TypicalStudents.BENSON);
-        assertEquals(TypicalStudents.BENSON, student.toModelType());
+        assertEquals(TypicalStudents.INITIAL_BENSON, student.toModelType());
     }
 
     @Test
