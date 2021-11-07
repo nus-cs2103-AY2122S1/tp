@@ -385,6 +385,9 @@ service CS1101S Avengers. In the CS110S module each _Studio_ has at most 10 `Stu
 does not have unnecessary duplicate personal detail (e.g same `PHONE`) is left to the Avenger.
 </div>
 
+The specifics are shown in the sequence diagram below:
+![GetCommandSequenceDiagram](images/dg/logic/commands/addcommand/AddCommandSequenceDiagram.png)
+
 ### DeleteCommand
 
 This command deletes a `Student` from `AcademyDirectory`.
