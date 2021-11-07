@@ -36,6 +36,8 @@ public class TypicalStudents {
      * @return A list of students
      */
     public static List<Student> getTypicalStudents() {
-        return new ArrayList<>(Arrays.asList(AMY, BOB));
+        Student newAmy = new StudentBuilder(AMY).build();
+        Student newBob = new StudentBuilder(BOB).build();
+        return new ArrayList<>(Arrays.asList(newAmy, newBob));
     }
 }
