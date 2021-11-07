@@ -25,6 +25,6 @@ class LastUpdatedDateTest {
 
         //valid date
         assertTrue(LastUpdatedDate.isValidLastUpdatedDateTime("2020-02-29T00:00")); // leap year
-        assertTrue(LastUpdatedDate.isValidLastUpdatedDateTime("2021-10-23T00:00"));;
+        assertTrue(LastUpdatedDate.isValidLastUpdatedDateTime("2021-10-23T00:00"));
     }
 }

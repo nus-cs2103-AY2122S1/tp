@@ -187,7 +187,7 @@ public class PaidCommand extends UndoableCommand {
         // state check
         PaidCommand e = (PaidCommand) other;
         return index.equals(e.index)
-                && indexToEdit.equals(indexToEdit)
+                && indexToEdit.equals(e.indexToEdit)
                 && payment.equals(e.payment);
     }
 }
