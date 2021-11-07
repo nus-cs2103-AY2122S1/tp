@@ -449,14 +449,15 @@ Examples:
 {:.no_toc}
 Tells TutorAid that a student attends a particular lesson.
 
-Format: `add -sl s/STUDENT_INDEX l/LESSON_INDEX`
+Format: `add -sl s/STUDENT_INDEX... l/LESSON_INDEX...`
 
 * Adds the student at the specified student index to the lesson at the specified lesson index.
 * The index refers to the index number shown in the displayed student list and lesson list.
 * The index must be a **positive integer** 1, 2, 3, ...
+* Multiple indexes are allowed for both students and lessons if you would like to add multiple students to multiple lessons at one go.
 
 Examples:
-* `add -sl s/1 l/2` adds the student with index 1 into the lesson with index 2.
+* `add -sl s/1 2 3 l/2` adds the students with indexes 1, 2 and 3 into the lesson with index 2.
 
 > :bulb: Some lessons have capacities - and the command won't work if any of the lessons cannot accommodate all the students. (Lessons without capacity information will have no restriction on their capacity.)
 
@@ -464,16 +465,15 @@ Examples:
 {:.no_toc}
 Tells TutorAid that a student no longer attends a particular lesson.
 
-Format: `del -sl s/STUDENT_INDEX l/LESSON_INDEX`
+Format: `del -sl s/STUDENT_INDEX... l/LESSON_INDEX...`
 
 * Deletes the student at the specified student index from the lesson at the specified lesson index.
 * The index refers to the index number shown in the displayed student list and lesson list.
 * The index must be a **positive integer** 1, 2, 3, ...
+* Multiple indexes are allowed for both students and lessons if you would like to remove multiple students from multiple lessons at one go.
 
 Examples:
-* `del -sl s/2 l/1` deletes the student with index 2 from the lesson with index 1.
-
-> :exclamation: The student must be attending the lesson provided for this command to work.
+* `del -sl s/1 2 3 l/1` deletes the students with indexes 1, 2 and 3 from the lesson with index 1.
 
 ## 5.4 Other Commands
 

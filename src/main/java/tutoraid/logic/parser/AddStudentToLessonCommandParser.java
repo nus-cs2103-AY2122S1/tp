@@ -17,8 +17,8 @@ import tutoraid.logic.parser.exceptions.ParseException;
 public class AddStudentToLessonCommandParser implements Parser<AddStudentToLessonCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of AddStudentsToLessonsCommand
-     * and returns an AddStudentsToLessonsCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of AddStudentToLessonCommand
+     * and returns an AddStudentToLessonCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddStudentToLessonCommand parse(String args) throws ParseException {
