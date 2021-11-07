@@ -42,8 +42,11 @@ public class EditModuleLessonCommand extends Command {
             + PREFIX_LESSON_DAY + "2 "
             + PREFIX_LESSON_TIME + "10:00 12:00";
 
-    public static final String MESSAGE_EDIT_LESSON_SUCCESS = "Edited Lesson: %1$s";
-    public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists in contHACKS.";
+    public static final String MESSAGE_EDIT_LESSON_SUCCESS = "Edited lesson: %1$s";
+    public static final String MESSAGE_DUPLICATE_LESSON = "Unable to add: A lesson with the same module code and"
+            + " lesson code already exists in contHACKS";
+    public static final String MESSAGE_OVERLAPPING_LESSON = "Warning: Another lesson with overlapping timings exists.\n"
+            + "Edited lesson: %1$s";
     public static final String MESSAGE_NO_FIELD_PROVIDED = "At least one field to edit must be provided.";
     public static final String MESSAGE_NO_LESSON_CODE_PROVIDED = "Lesson code is compulsory.";
     public static final String MESSAGE_MORE_THAN_ONE_LESSON_CODE = "One Lesson should only have one Lesson Code.";
@@ -79,9 +82,19 @@ public class EditModuleLessonCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_LESSON);
         }
 
-        model.setModuleLesson(lessonToEdit, editedModuleLesson);
+        CommandResult result;
+
+        // delete  such that it won't be checking against itself
+        model.deleteLesson(lessonToEdit);
+        if (model.hasModuleLessonClashingWith(editedModuleLesson)) {
+            result = new CommandResult(String.format(MESSAGE_OVERLAPPING_LESSON, editedModuleLesson));
+        } else {
+            result = new CommandResult(String.format(MESSAGE_EDIT_LESSON_SUCCESS, editedModuleLesson));
+        }
+
+        model.addLesson(editedModuleLesson);
         model.updateFilteredModuleLessonList(PREDICATE_SHOW_ALL_LESSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_LESSON_SUCCESS, editedModuleLesson));
+        return result;
     }
 
     /**
