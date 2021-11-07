@@ -25,8 +25,8 @@ Given below are my contributions to the project.
   * What it does: allows the user to bind a particular keyword to a command.
   * Justification: This feature improves the product significantly because it allows user to save the time and effort of typing long commands.
 
-* **New Enhancement**: Added an input suggestion enhancement that suggests potential keyword(s) when a user types in something wrongly. 
-  * What it does: Provides word suggestions when there is a typo by the user, similar to the "Did You Mean" feature in Google. 
+* **New Enhancement**: Added an input suggestion enhancement that suggests potential keyword(s) when a user types in something wrongly.
+  * What it does: Provides word suggestions when there is a typo by the user, similar to the "Did You Mean" feature in Google.
   * Justification: This feature improves the user experience quite significantly especially as new users might not yet be accustomed to our command keywords.
   * Highlights: Implemented using a dynamic programming algorithm called `Wagner-Fischer algorithm`, which computes the `Levenshtein distance` of any two words.
   The dynamic programming algorithm used is significantly faster (quadratic time) than the more straightforward but slower recursive algorithm which takes exponential time.
@@ -48,4 +48,3 @@ Given below are my contributions to the project.
 
 * **Tools**:
   * Integrated Codecov into the team repo
-  
