@@ -9,7 +9,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import seedu.siasa.MainApp;
 import seedu.siasa.commons.core.LogsCenter;
 
 public class GuideWindow extends UiPart<Stage> {
@@ -31,7 +30,7 @@ public class GuideWindow extends UiPart<Stage> {
             "deletecontact: Removes a contact from your SIASA based on the index provided.\n"
                 + "Format: deletecontact INDEX\n"
                 + "Example: deletecontact 2",
-            "/images/guide/page_three.png"),
+                new Image("file:src/main/resources/images/guide/page_three.png")),
         FOUR("User Guide - Contacts",
             "editcontact: Edit a contact from your SIASA based on the index provided. "
                 + "At least one of the optional fields should be filled.\n"
@@ -48,7 +47,7 @@ public class GuideWindow extends UiPart<Stage> {
             "deletepolicy: Removes a policy from your SIASA based on the index provided.\n"
                 + "deletepolicy INDEX\n"
                 + "Example: deletepolicy 2",
-            "/images/guide/page_six.png"),
+                new Image("file:src/main/resources/images/guide/page_six.png")),
         SEVEN("User Guide - Policies",
                 "editpolicy: Edits a policy from your SIASA based on the index provided. "
                 + "At least one of the optional fields should be filled.\n"
@@ -60,7 +59,7 @@ public class GuideWindow extends UiPart<Stage> {
             "contactpolicy: List the policies belonging to the contact based on the index provided.\n"
                 + "contactpolicy INDEX\n"
                 + "Example: contactpolicy 1",
-            "/images/guide/page_eight.png"),
+                new Image("file:src/main/resources/images/guide/page_eight.png")),
         NINE("User Guide - Policies",
             "allpolicy: List all policies in your SIASA.\n"
                 + "allpolicy\n"
@@ -69,9 +68,9 @@ public class GuideWindow extends UiPart<Stage> {
 
         private final String title;
         private final String description;
-        private final String screenshot;
+        private final Image screenshot;
 
-        Page(String title, String description, String screenshot) {
+        Page(String title, String description, Image screenshot) {
             this.title = title;
             this.description = description;
             this.screenshot = screenshot;
@@ -152,8 +151,7 @@ public class GuideWindow extends UiPart<Stage> {
     private void showPage() {
         title.setText(currentPage.title);
         textBox.setText(currentPage.description);
-        Image demoImage = new Image(MainApp.class.getResourceAsStream(currentPage.screenshot));
-        screenshot.setImage(demoImage);
+        screenshot.setImage(currentPage.screenshot);
     }
 
     /**

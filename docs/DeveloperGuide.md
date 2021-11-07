@@ -144,6 +144,50 @@ Classes used by multiple components are in the `seedu.siasa.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Download Command
+
+This section explains the mechanism behind ```DownloadCommand``` used to download a TXT file containing useful statistics. These include:
+- total commission
+- commission earned per contact
+- number of policies per contact,
+- the average number of policies per contact
+
+The command requires no parameters. ```DownloadCommand``` implements ```DownloadCommand#execute```, that calls
+the relevant methods in ```Model``` to obtain the various statistics. The method ```DownloadCommand#stringListBuilderForTxt```
+is then invoked, to convert the statistics information as a list of strings. The list of strings is then written to 
+the file via ```DownloadCommand#writeToTxt```. 
+
+This is the sequence diagram of the interactions between ```Logic``` and ```Model``` component for the command.
+
+![DownloadSequenceDiagram](images/DownloadSequenceDiagram.png)
+
+### Warning
+
+This section explains the use of ```Warning```, a class which encapsulates a warning that a ```Command``` can give. Specifically,
+it displays a warning dialog to the user, and returns the user's decision to proceed as a boolean value. The ```Command``` triggering 
+the ```Warning```  can then decide what to do with the user's decision.
+
+```Warning``` has a static method ```Warning#isUserConfirmingCommand``` that requires a description of the warning as a 
+String, and returns the decision of the user's decision. When ```Warning#isUserConfirmingCommand``` is invoked, it calls 
+```MainWindow#showWarning```, that will create a new ```WarningWindow``` to display. ```WarningWindow``` has the
+command ```WarningWindow#isUserConfirmingCommand``` that will return the user's decision.
+
+This is the sequence diagram of how a ```Command ``` might call a ```Warning```, and the interactions between the ```Logic```
+and ```UI``` components.
+
+![WarningSequenceDiagram](images/WarningSequenceDiagram.png)
+
+#### Design Considerations
+
+Typically, displaying the UI involves executing the command text in ```MainWindow``` and then interpreting the 
+```CommandResult``` to decide what UI changes to make. As this is a one-way flow of information to the UI, it makes
+the implementation of ```Warning``` challenging because in warnings, the user input has to be sent back to the ```Logic```
+component. 
+
+Therefore, we decided on a static ```MainWindow#showWarning``` to allow for a return value that can be used by methods
+in ```Logic``` component. While it may have been simpler for ```Logic``` to interact directly with ```WarningWindow```,
+it breaks the structure of ```MainWindow``` being the main UI components to manage smaller components.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
