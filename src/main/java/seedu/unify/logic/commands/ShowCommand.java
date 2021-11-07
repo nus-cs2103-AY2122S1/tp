@@ -25,8 +25,8 @@ public class ShowCommand extends Command {
             + "OR "
             + "date \n"
             + "Example: " + COMMAND_WORD + " "
-            + "1"
-            + "OR"
+            + "1 "
+            + "OR "
             + PREFIX_DATE + "2021-04-01";
 
     public static final String MESSAGE_FLOW_ERROR = "%d is an invalid week number input! \n"
