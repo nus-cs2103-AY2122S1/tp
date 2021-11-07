@@ -113,7 +113,7 @@ Quarterly | Every 90 days
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [h/HEALTH_CONDITION]` can be used as `n/John Doe h/dementia` or as `n/John Doe`.
+  e.g. `n/NAME [h/HEALTH_CONDITION]` can be used as `n/John Doe h/dementia` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[h/HEALTH_CONDITION]…​` can be used as ` ` (i.e. 0 times), `h/dementia`, `h/dementia h/diabetes` etc.
@@ -121,15 +121,22 @@ Quarterly | Every 90 days
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
+</div>
+
+<div markdown="block" class="alert alert-info">
+
+**:exclamation: Extra input in a command? Take note!**<br>
+
+* If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
 * If a parameter is expected but two consecutive flags are given (i.e. no spaces between two flags), only the first parameter will be taken.<br>
   e.g. if you specify `sort v/lv/`, only `v/` will be taken.
-
+* 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+* Commands only check values associated to valid flags but not additional input other than valid flags.
 </div>
 
 ### Add elderly details : `add`
@@ -220,7 +227,7 @@ Examples:
 
 ### List all or selected elderly : `list`
 
-Shows a list of all or selecteded elderly and their associated details in SeniorLove address book in alphabetical order of their name.
+Shows a list of all or selected elderly and their associated details in SeniorLove address book in alphabetical order of their name.
 
 Format: `list [CRITERION_FOR_LISTING]`
 
