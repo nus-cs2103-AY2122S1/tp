@@ -12,7 +12,7 @@ import java.util.Date;
  * Represents an interview in the address book.
  * Guarantees: immutable; time input is valid as declared in {@link #isValidInterviewTime(String)}
  */
-public class Interview {
+public class Interview implements Comparable<Interview> {
     public static final Interview EMPTY_INTERVIEW = new Interview("");
     public static final String PARSE_FORMAT = "yyyy-M-d, H:m"; //e.g. 2022-09-21, 9:30
     public static final String DISPLAY_FORMAT = "MMM dd yyyy , HH:mm"; //e.g. Sep 21 2022, 09:30
@@ -70,6 +70,21 @@ public class Interview {
             e.printStackTrace();
         }
         return false;
+    }
+
+    @Override
+    public int compareTo(Interview interview) {
+        int result = 0;
+        try {
+            DateFormat parseFormat = new SimpleDateFormat(PARSE_FORMAT);
+            Date thisInterview = parseFormat.parse(this.parseTime);
+            Date givenInterview = parseFormat.parse(interview.parseTime);
+            result = thisInterview.before(givenInterview) ? -1
+                    : givenInterview.before(thisInterview) ? 1 : 0;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
     /**

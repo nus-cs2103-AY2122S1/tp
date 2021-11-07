@@ -182,7 +182,8 @@ public class ShowCommand extends Command {
 
     private List<String> getUniqueInterviewInputs(ObservableList<Person> ol) {
         return ol.stream()
-                .map(x -> x.getInterview().orElse(Interview.EMPTY_INTERVIEW).toString()).distinct().sorted()
+                .map(x -> x.getInterview().orElse(Interview.EMPTY_INTERVIEW)).distinct().sorted(Interview::compareTo)
+                .map(Interview::toString)
                 .collect(Collectors.toList());
     }
 
