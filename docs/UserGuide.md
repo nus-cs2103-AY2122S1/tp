@@ -199,7 +199,7 @@ Action | Format, Examples
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `resetC`, `resetE`, `resetS`, `listC`, `listE`, `listS`, `listR`, `exit` and `clear`) will be ignored.<br>
  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
   
-* Users can use all customer/employee/supplier/reservation commands apart from  `listC`, `listE`, `listS`, and `listR` to switch to the customer/employee/supplier list respectively
+* Users can use all customer/employee/supplier/reservation commands including from  `listC`, `listE`, `listS`, and `listR` to switch to the customer/employee/supplier list respectively
  <br> e.g. If a user is currently viewing the customer list, using `addE`, `editE`, `sortE` etc. while the customer list is active will execute the respective employee command and switch to the employee list automatically
 
 </div>
