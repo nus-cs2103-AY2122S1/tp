@@ -40,5 +40,6 @@ public class ListFavCommandTest {
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ALICE, BENSON, CARL), model.getFilteredPersonList());
+
     }
 }
