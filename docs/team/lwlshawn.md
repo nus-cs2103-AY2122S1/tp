@@ -43,7 +43,7 @@ to the [relevant PR](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/287)
 
 #### Contributions to the DG
 * I wrote up a few sections of the "Implementation" portion of the developer guide, to explain various design decisions
-made for the project. Examples are given below.
+made for the project.
 
 #### Contributions to team-based tasks
 * Testcases is probably the thing I contributed the most to, as far as team-based tasks go. Although many of the test-cases
