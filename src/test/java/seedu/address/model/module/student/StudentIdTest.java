@@ -1,12 +1,10 @@
-package seedu.address.model.student;
+package seedu.address.model.module.student;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
-
-import seedu.address.model.module.student.StudentId;
 
 public class StudentIdTest {
     public static final StudentId VALID_STUDENT_ID_1 = new StudentId("A1234567A");
