@@ -26,6 +26,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.order.Order;
 import seedu.address.model.sort.SortDescriptor;
 import seedu.address.testutil.SortDescriptorBuilder;
+import seedu.address.testutil.TaskBuilder;
 
 public class SortOrdersCommandTest {
     public static final SortDescriptor DATE_ASC = new SortDescriptorBuilder().onDateField().inAscOrder().build();
@@ -103,6 +104,25 @@ public class SortOrdersCommandTest {
 
         // different ordering -> returns false
         assertFalse(SORT_BY_DATE_ASC.equals(SORT_BY_AMOUNT_DESC));
+    }
 
+    @Test
+    public void sortDescriptorEquals() {
+        final SortDescriptor dateDescCopy = new SortDescriptorBuilder().onDateField().inDescOrder().build();;
+
+        // same object is equal
+        assertTrue(DATE_DESC.equals(DATE_DESC));
+
+        // same fields is equal
+        assertTrue(DATE_DESC.equals(dateDescCopy));
+
+        // not same fields is not equal
+        assertFalse(DATE_DESC.equals(AMOUNT_ASC));
+
+        // null is not equal
+        assertFalse(DATE_DESC.equals(null));
+
+        // other objects are not equal
+        assertFalse(DATE_DESC.equals(new TaskBuilder().build()));
     }
 }
