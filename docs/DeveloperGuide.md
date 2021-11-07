@@ -445,16 +445,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given index is invalid. 
+* 3a. The given index is invalid.
   * 3a1. AddressBook shows an error message.
 
   Use case resumes at step 2.
 
 * 3b. The attribute to be edited does not exist.
-  * 3b1. AddressBook shows an error message. 
+  * 3b1. AddressBook shows an error message.
   Use case ends
 
-* 3c. If the attribute edited is the name and results in a similar person i.e. same name as another person 
+* 3c. If the attribute edited is the name and results in a similar person i.e. same name as another person
   * 3c1. AddressBook shows an error message.
 
       Use case ends
