@@ -113,7 +113,6 @@ public class PersonDetails extends UiPart<Region> {
             address.setText("-");
         } else {
             address.setText(person.getAddress().value);
-            address.prefWidthProperty().bind(detailOptional.widthProperty());
             address.setWrapText(true);
         }
         if (person.getEmail().value.isBlank()) {
