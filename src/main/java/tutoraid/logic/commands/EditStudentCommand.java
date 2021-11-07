@@ -32,7 +32,7 @@ public class EditStudentCommand extends EditCommand {
                     + "Existing values will be overwritten by the input values."
                     + "\nParameters:"
                     + "\nSTUDENT INDEX (must be a positive integer)"
-                    + "  %3$s[STUDENT NAME]"
+                    + "  [%3$sSTUDENT NAME]"
                     + "  [%4$sSTUDENT PHONE]"
                     + "  [%5$sPARENT NAME]"
                     + "  [%6$sPARENT PHONE]"
