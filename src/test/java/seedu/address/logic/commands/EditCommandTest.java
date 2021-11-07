@@ -263,7 +263,8 @@ public class EditCommandTest {
         model.displayPersonTaskList(personToEdit);
 
         List<Task> tasks = new ArrayList<>(personToEdit.getTasks());
-        Task newTask = new Task(new TaskName("walk"), new TaskDate("2022-12-12"), new TaskTime("23:59"), new Venue("Park"));
+        Task newTask = new Task(new TaskName("walk"), new TaskDate("2022-12-12"),
+                new TaskTime("23:59"), new Venue("Park"));
         editTaskDescriptor.setTaskName(new TaskName("walk"));
         editTaskDescriptor.setTaskDate(new TaskDate("2022-12-12"));
         editTaskDescriptor.setTaskTime(new TaskTime("23:59"));
