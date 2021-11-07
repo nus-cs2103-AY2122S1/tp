@@ -10,8 +10,9 @@ title: User Guide
 - [Glossary](#glossary)
   - [Terminology used](#terminology-used)
   - [Structure of an elderly contact](#structure-of-an-elderly-contact)
+  - [Definition of Date Range](#definition-of-date-range)
 - [Features](#features)
-  - [Add elderly details](#add-elderly-details--add)
+  - [Add elderly with contact details](#add-elderly-with-contact-details--add)
   - [Delete an elderly or corresponding visit](#delete-an-elderly-or-corresponding-visit--delete)
   - [Edit an elderly](#edit-an-elderly--edit)
   - [List all or selected elderly](#list-all-or-selected-elderly--list)
@@ -50,7 +51,7 @@ title: User Guide
 
    * `list n/` : Lists all elderly.
 
-   * `find Hans` : Find all elderly whose attributes start with Hans.(Case insensitive)
+   * `find Hans` : Find all elderly whose attributes contain Hans.(Case insensitive)
 
    * `clear` : Deletes all elderly.
 
@@ -139,7 +140,7 @@ Quarterly | Every 90 days
 * Commands only check values associated to valid flags but not additional input other than valid flags.
 </div>
 
-### Add elderly details : `add`
+### Add elderly with contact details : `add`
 
 Adds an elderly and all relevant details into SeniorLove.
 
