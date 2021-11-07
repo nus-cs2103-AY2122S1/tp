@@ -44,13 +44,13 @@ This product will make recruiters’ lives easier through categorisation and fil
     + [Design considerations for delete marked:](#design-considerations-for-delete-marked)
   * [Datetime for interview](#datetime-for-interview)
 - [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
-- [**Appendix: Requirements**](#appendix-requirements)
+- [**Appendix A: Requirements**](#appendix-a-requirements)
   * [Product scope](#product-scope)
   * [User stories](#user-stories)
   * [Use cases](#use-cases)
   * [Non-Functional Requirements](#non-functional-requirements)
   * [Glossary](#glossary)
-- [**Appendix: Instructions for manual testing**](#appendix-instructions-for-manual-testing--)
+- [**Appendix B: Instructions for manual testing**](#appendix-b-instructions-for-manual-testing)
   * [Launch and shutdown](#launch-and-shutdown)
   * [Listing all applicants](#listing-all-applicants)
   * [Adding an applicant](#adding-an-applicant)
@@ -61,6 +61,10 @@ This product will make recruiters’ lives easier through categorisation and fil
   * [Unmarking an applicant](#unmarking-an-applicant)
   * [Deleting marked applicants](#deleting-marked-applicants)
   * [Saving data](#saving-data)
+- [**Appendix C: Effort**](#appendix-c-effort)
+  * [Addition of categories](#addition-of-categories)
+  * [Integration of categories](#integration-of-categories)
+  * [Implementation of new features](#implementation-of-new-features)
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -676,7 +680,7 @@ For example, the add command `add n/John ... i/2021-01-01, 10:30` will add a per
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
+## **Appendix A: Requirements**
 [Table of contents](#table-of-contents)
 
 ### Product scope
@@ -1071,7 +1075,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **Appendix B: Instructions for manual testing**
 [Table of contents](#table-of-contents)
 
 Given below are instructions to test the app manually.
@@ -1359,4 +1363,37 @@ testers are expected to do more *exploratory* testing.
 
     1. Other incorrect test cases to try: The above two test cases can be tried without closing RecruitIn beforehand.<br>
       Expected: RecruitIn will run normally without any side-effects.
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix C: Effort**
+[Table of contents](#table-of-contents)
+
+The effort required to evolve `AB3` to `RecruitIn` could be estimated to be approximately the effort required to create AB3.
+Our team have contributed roughly 13000 lines of functional code, automated unit and integration testing, and documentation.
+Listed below are some features and enhancements, and an explanation of the difficulty or effort required to implement them:
+
+  1. ### **Addition of categories**
+      * `AB3` initially had the `Name`, `Phone Number`, `Email`, `Address`, and `Tag` categories.
+      * `RecruitIn` removed the `Address` category, and introduced the `Applied Role`, `Employment Type`, `Expected Salary`,
+        `Level of Education`, `Years of Experience`, `Interview`, and `Notes` categories, as well as a `Done` status.
+      * The addition of the categories itself was relatively low effort as we were already reusing most of `AB3`'s existing categories.
+      * Furthermore, we did not have to make any additional design decisions and could follow the existing architecture in order to add the new categories.
+    
+  2. ### **Integration of categories**
+      * This includes integration of the new categories into the existing `add`, `edit` and `find` command.
+      * The integration of the new categories into the `add` command was done without much relative difficulty.
+      * The integration of the new categories into the `edit` command did involve a refactoring of the entire edit command parser, and thus required relatively more effort.
+      * The integration of the new categories into the `find` command was very high effort, because of the following 3 reasons:
+          1. Each category was filtered by the `find` command differently, and thus involved multiple differing implementations of how to filter each category.
+          2. The `find` command was improved to allow for searching of multiple categories at the same time.
+          2. The `find` command was modified to validate parameters for each category.
+  
+  3. ### **Implementation of new features**
+      * This includes the implementation of the `show`, `mark`, `unmark`, `delete_marked`, and `filter_interview` commands.
+          * The implementation of new features was generally high effort due to having to create each command from scratch.
+          * Difficulties arose mostly from having to make our own design decisions, while at the same time having to following important software engineering principles and practices.
+      * Additionally, the `delete` command was improved to allow for deletion of multiple indexes at the same time.
+          * The modification of the existing `delete` command was generally low effort and only required additions of a few lines of functional code.
 
