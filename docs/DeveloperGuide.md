@@ -170,14 +170,15 @@ However, this design has some issues in storage,
 In our implementation, the unique identifier is `Name` and `TaskDeadline`, which are actually the main part of a `Task`.
 * At the same time, json format member need to store the completion status of each referencing task.
 * In all, implementing the storage of this member-task relation by using json file is likely to incur redundancy and error-prone,
-so we desided to use a easier implementation, which is the current one.
+so we decided to use an easier implementation, which is the current one.
 
 A better implementation of the alternative design may involve using database management system like PostgreSQL,
 a proposed entity relationship model diagram for the member-task relation is given here:[ER_diagram](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/docs/images/ER.png)
 
 
-[comment]: <> (<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative &#40;arguably, 
-a more OOP&#41; model is given below. It has a `Position` list in the `AddressBook`, which `Member` references. This allows `AddressBook` to only require one `Position` object per unique POSITION, instead of each `Member` needing their own set of `Position` objects.<br>)
+[comment]: <> (<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative &#40;arguably,) 
+
+[comment]: <> (a more OOP&#41; model is given below. It has a `Position` list in the `AddressBook`, which `Member` references. This allows `AddressBook` to only require one `Position` object per unique POSITION, instead of each `Member` needing their own set of `Position` objects.<br>)
 
 
 [comment]: <> (<img src="images/BetterModelClassDiagram.png" width="450" />)
@@ -186,26 +187,27 @@ a more OOP&#41; model is given below. It has a `Position` list in the `AddressBo
 
 ### Storage component
 
+[comment]: <> (TODO: SAMUEL)
 **API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
+The `Storage` component converts data from Ailurus to `json` format and back. It utilizes the `Jackson` library for this purpose.
+Address book data is both saved and read from `./data/ailurus.json` while user preference data is from `./preferences.json`.
+If the files and directories do not exist, they are created with sample data when the Ailurus application is launched.
+
 The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+* can save both address book data and user preference data in `json` format, and read them back into corresponding objects.
+* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (only one) depending on which functionality is needed.
+* depends on some classes such as `Member`, `Event` and `Task` in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model` thus depends on them to convert data to json format).
 
-[comment]: <> (TODO: SAMUEL)
-#### Current Implementation
+From the name of the classes(beginning with JsonAdapted), we can tell which class they are storing in `json` format. All of these data are stored
+in the `JsonSerializableAddressBook`.
 
-`JsonAdaptedTask` allows `Task` to be stored in a json format and `JsonAdaptedMember` allows `Member` to store an array of `Task`
+For Example,
+* `JsonAdaptedTask` stores `Task` in `json` format.
+* `JsonAdaptedEvent` stores `Event` in `json` format. 
 
-`JsonAdaptedEvent` allows `Event` to be stored in Json format. Ailurus can now store `Event`, enabling the saving and 
-loading of files with `Event` objects. The Map of participants of the `Event` are saved into Json format by splitting them into two separate lists of `JsonAdaptedMember` and `Boolean` respectively.
-
-#### Future Plans
-
-Storing `Position` in a unique list would reduce the amount of `Position` objects needed.
 
 ### Common classes
 
