@@ -635,14 +635,14 @@ The following activity diagram summarizes what happens when a user executes an a
 The following activity diagram summarizes what happens when a user executes an edit command:
 
 <p align="center">
-<img src="images/EditUserTagActivityDiagram.png" width="250" />
+<img src="images/EditUserTagActivityDiagram.png" width="280" />
 </p>
 
 ##### 4.9.1.1 Delete a client
 The following activity diagram summarizes what happens when a user executes an delete command:
 
 <p align="center">
-<img src="images/DeleteUserTagActivityDiagram.png" width="250" />
+<img src="images/DeleteUserTagActivityDiagram.png" width="280" />
 </p>
 
 --------------------------------------------------------------------------------------------------------------------
