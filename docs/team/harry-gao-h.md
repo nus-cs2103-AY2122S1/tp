@@ -46,24 +46,24 @@ Given below are my contributions to the project.
   [\#195](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/195)
 
 
-* **Documentation**:
-    * User Guide:
-        * Added documentation for the features `add-position` and `delete-position`: [\#16](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/16)
-        * Did cosmetic tweaks to existing documentation of features `find-applicant`, `add-applicant` and created navigation table: [\#196](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/196/files)
-    * Developer Guide:
-        * Added use cases details of the `add-position` and `delete-position` feature: [\#17](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/17)
-        * Did overall check for existing contents: [\#199](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/199)
-        * Added the instructions for manual testing for the features `add-position`, `edit-position`, etc.: [\#201](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/201)
-        * Updated and improved the implementation section, and drew sequence and activity diagrams: [\#205](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/205)
+#### **Documentation**:
+* User Guide:
+    * Added documentation for the features `add-position` and `delete-position`: [\#16](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/16)
+    * Did cosmetic tweaks to existing documentation of features `find-applicant`, `add-applicant` and created navigation table: [\#196](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/196/files)
+* Developer Guide:
+    * Added use cases details of the `add-position` and `delete-position` feature: [\#17](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/17)
+    * Did overall check for existing contents: [\#199](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/199)
+    * Added the instructions for manual testing for the features `add-position`, `edit-position`, etc.: [\#201](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/201)
+    * Updated and improved the implementation section, and drew sequence and activity diagrams: [\#205](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/205)
 
-* **Contributions to team-based tasks**
-    * Wrote tests for features written by me and teammates: [\#195](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/195)
-    * Removed dependency on AB3: [\#173](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/173)
+#### **Contributions to team-based tasks**
+* Wrote tests for features written by me and teammates: [\#195](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/195)
+* Removed dependency on AB3: [\#173](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/173)
 
-* **Community**:
-    * PRs reviewed (with non-trivial review comments): [\#77](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/77), [\#24](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/24), [\#81](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/81)
-    * Contributed to forum discussions (examples: [1](https://github.com/nus-cs2103-AY2122S1/forum/issues/25), [2](https://github.com/nus-cs2103-AY2122S1/forum/issues/49))
-    * Reported bugs and suggestions for other teams in the class in the mock PE.
-    
+#### **Community**:
+* PRs reviewed (with non-trivial review comments): [\#77](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/77), [\#24](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/24), [\#81](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/81)
+* Contributed to forum discussions (examples: [1](https://github.com/nus-cs2103-AY2122S1/forum/issues/25), [2](https://github.com/nus-cs2103-AY2122S1/forum/issues/49))
+* Reported bugs and suggestions for other teams in the class in the mock PE.
+  
 
   
