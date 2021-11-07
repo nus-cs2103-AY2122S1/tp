@@ -188,7 +188,7 @@ public class ShowCommand extends Command {
 
     private List<String> getUniqueTagInputs(ObservableList<Person> ol) {
         return ol.stream()
-                .flatMap(person -> person.getTags().stream().map(Tag::toString))
+                .flatMap(person -> person.getTags().stream().map(Tag::toShowString))
                 .distinct().sorted().collect(Collectors.toList());
     }
 
