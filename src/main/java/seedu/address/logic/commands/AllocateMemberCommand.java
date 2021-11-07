@@ -36,8 +36,8 @@ public class AllocateMemberCommand extends Command {
     private final DayOfWeek day;
 
     /**
-     * @param memberIndex of the member to be allocated to a facility.
-     * @param facilityIndex of the facility to allocate the member to.
+     * @param memberIndex Index of the member to be allocated to a facility.
+     * @param facilityIndex Index of the facility to allocate the member to.
      * @param day to allocate the member to the facility.
      */
     public AllocateMemberCommand(Index memberIndex, Index facilityIndex, DayOfWeek day) {
@@ -65,27 +65,35 @@ public class AllocateMemberCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_FACILITY_DISPLAYED_INDEX);
         }
         Member toBeAllocated = lastShownMemberList.get(memberIndex.getZeroBased());
-        Facility toAllocate = lastShownFacilityList.get(facilityIndex.getZeroBased());
+        Facility toAllocateTo = lastShownFacilityList.get(facilityIndex.getZeroBased());
 
-        if (toAllocate.isMemberAllocatedOnDay(toBeAllocated, day)) {
+        handleAllocation(toBeAllocated, toAllocateTo, model);
+
+        String dayName = day.getDisplayName(TextStyle.FULL, Locale.getDefault());
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toBeAllocated.getName(), toAllocateTo.getName(), dayName));
+    }
+
+    /**
+     * Handles the allocation of the member to the facility
+     * @param toBeAllocated Member to be allocated
+     * @param toAllocateTo Facility to allocate member to
+     * @throws CommandException if allocation of the member to the facility is not feasible
+     */
+    private void handleAllocation(Member toBeAllocated, Facility toAllocateTo, Model model) throws CommandException {
+        if (toAllocateTo.isMemberAllocatedOnDay(toBeAllocated, day)) {
             throw new CommandException(Messages.MESSAGE_MEMBER_ALREADY_ALLOCATED);
-        } else if (toAllocate.isMaxCapacityOnDay(day)) {
+        } else if (toAllocateTo.isMaxCapacityOnDay(day)) {
             throw new CommandException(Messages.MESSAGE_FACILITY_AT_MAX_CAPACITY);
         } else if (!toBeAllocated.isAvailableOnDay(day.getValue())) {
             throw new CommandException(Messages.MESSAGE_MEMBER_NOT_AVAILABLE);
-        } else {
-            AllocationMap updatedAllocationMap = toAllocate.getAllocationMap();
-            updatedAllocationMap.addMemberOnDay(toBeAllocated, day);
-            Facility afterAllocated = new Facility(
-                    toAllocate.getName(), toAllocate.getLocation(), toAllocate.getTime(), toAllocate.getCapacity(),
-                    updatedAllocationMap);
-            model.setFacility(toAllocate, afterAllocated);
-            model.updateFilteredFacilityList(Model.PREDICATE_SHOW_ALL_FACILITIES);
         }
-
-        String dayName = day.getDisplayName(TextStyle.FULL, Locale.getDefault());
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toBeAllocated.getName(),
-                toAllocate.getName(), dayName));
+        AllocationMap updatedAllocationMap = toAllocateTo.getAllocationMap();
+        updatedAllocationMap.addMemberOnDay(toBeAllocated, day);
+        Facility afterAllocated = new Facility(
+                toAllocateTo.getName(), toAllocateTo.getLocation(), toAllocateTo.getTime(), toAllocateTo.getCapacity(),
+                updatedAllocationMap);
+        model.setFacility(toAllocateTo, afterAllocated);
+        model.updateFilteredFacilityList(Model.PREDICATE_SHOW_ALL_FACILITIES);
     }
 
     @Override

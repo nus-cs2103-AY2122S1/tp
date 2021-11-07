@@ -65,25 +65,29 @@ public class DeallocateMemberCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_FACILITY_DISPLAYED_INDEX);
         }
         Member toBeDeallocated = lastShownMemberList.get(memberIndex.getZeroBased());
-        Facility toDeallocate = lastShownFacilityList.get(facilityIndex.getZeroBased());
+        Facility toDeallocateFrom = lastShownFacilityList.get(facilityIndex.getZeroBased());
 
-        if (!toDeallocate.isMemberAllocatedOnDay(toBeDeallocated, day)) {
-            throw new CommandException(Messages.MESSAGE_MEMBER_NOT_ALLOCATED);
-        } else {
-            AllocationMap updatedAllocationMap = toDeallocate.getAllocationMap();
-            updatedAllocationMap.removeMemberOnDay(toBeDeallocated, day);
-            Facility afterDeallocated = new Facility(
-                    toDeallocate.getName(), toDeallocate.getLocation(), toDeallocate.getTime(),
-                    toDeallocate.getCapacity(), updatedAllocationMap);
-            model.setFacility(toDeallocate, afterDeallocated);
-            model.updateFilteredFacilityList(Model.PREDICATE_SHOW_ALL_FACILITIES);
-        }
+        handleDeallocation(toBeDeallocated, toDeallocateFrom, model);
 
         String dayName = day.getDisplayName(TextStyle.FULL, Locale.getDefault());
         return new CommandResult(String.format(MESSAGE_SUCCESS, toBeDeallocated.getName(),
-                toDeallocate.getName(), dayName));
+                toDeallocateFrom.getName(), dayName));
     }
 
+    private void handleDeallocation(Member toBeDeallocated, Facility toDeallocateFrom, Model model) throws CommandException {
+        if (!toDeallocateFrom.isMemberAllocatedOnDay(toBeDeallocated, day)) {
+            throw new CommandException(Messages.MESSAGE_MEMBER_NOT_ALLOCATED);
+        } else {
+            AllocationMap updatedAllocationMap = toDeallocateFrom.getAllocationMap();
+            updatedAllocationMap.removeMemberOnDay(toBeDeallocated, day);
+            Facility afterDeallocated = new Facility(
+                    toDeallocateFrom.getName(), toDeallocateFrom.getLocation(), toDeallocateFrom.getTime(),
+                    toDeallocateFrom.getCapacity(), updatedAllocationMap);
+            model.setFacility(toDeallocateFrom, afterDeallocated);
+            model.updateFilteredFacilityList(Model.PREDICATE_SHOW_ALL_FACILITIES);
+        }
+
+    }
     @Override
     public boolean equals(Object other) {
         if (other == this) {
