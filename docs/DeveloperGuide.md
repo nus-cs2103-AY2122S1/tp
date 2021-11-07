@@ -90,14 +90,14 @@ The `UI` component,
 
 ### 2.3 Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-W17-4/tp/blob/master/src/main/java/seedu/unify/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
 How the `Logic` component works:
-1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
+1. When `Logic` is called upon to execute a command, it uses the `UniFyParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a task).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
@@ -114,38 +114,31 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `UniFyParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `UniFyParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### 2.4 Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-W17-4/tp/blob/master/src/main/java/seedu/unify/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
 
 The `Model` component,
 
-* stores the address book data i.e., all `Task` objects (which are contained in a `UniqueTaskList` object).
+* stores Uni-Fy data i.e., all `Task` objects (which are contained in a `UniqueTaskList` object).
 * stores the currently 'selected' `Task` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Task>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Task` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Task` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
-
-
 ### 2.5 Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-W17-4/tp/blob/master/src/main/java/seedu/unify/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save both Uni-Fy data and user preference data in json format, and read them back into corresponding objects.
+* inherits from both `UniFyStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### 2.6 Common classes
@@ -178,9 +171,25 @@ The `DeleteCommandParser` class implements the `Parser<DeleteCommand` interface.
 The `parse` method in `DeleteCommandParser` first converts the argument provided into a `List<Index>`. It then returns a `DeleteCommand` back to `UniFyParser`, initialized with the `List<Index>`.
 
 ##### Usage Scenario
-TODO
 
+The following demonstrates a usage scenario where the user wants to delete the first, second and third item in her/his task list.
+
+1. The method `execute("delete 1 2 3")` inside LogicManager calls the `parseCommand` method of `UniFyParser`.
+2. `parseCommand` in `UniFyParser` takes in the String "delete 1 2 3" as its parameter and initializes a `DeleteCommandParser` object.
+3. It then calls the `parse` method in `DeleteCommandParser` to parse the string `"1 2 3"`.
+4. A `DeleteCommand` object will be initialized, taking in the list of parsed indexes `List<Index>`, in this case containing three `Index` `1`, `2` and `3`.
+5. The method call then returns to `LogicManager`, which calls the `execute` method of `DeleteCommand`.
+6. By using a `Set`, the `DeleteCommand` checks for duplicate indexes in its `execute` method.
+7. If no errors are found, the `deleteTask` method under `Model` is called three times, one for each index.
+    * Note that the tasks are deleted from the last `Index` to prevent future deletes operating on wrong tasks.
+8. A `CommandResult` object is created with the appropriate messages and returned to `LogicManager`.
+
+
+The sequence diagram below illustrates the interactions within `LogicManager` for the usage scenario.
 ![DeleteMultipleSequenceDiagram](images/DeleteMultipleSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 
 #### 3.2.2 Design Consideration
 
@@ -258,8 +267,7 @@ The following activity diagram summarizes what happens when the user inputs a fi
 * **Alternative 2:** Users can only enter name
     * Pros: Easy to implement, and only one predicate is required.
     * Cons: Inconvenient for users if they have recurring task on different dates.
-
-_{more aspects and alternatives to be added}_
+    
 
 ### 3.5 Tag task feature
 
@@ -267,37 +275,37 @@ _{more aspects and alternatives to be added}_
 
 #### 3.6.1 Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The proposed undo/redo mechanism is facilitated by `VersionedUniFy`. It extends `UniFy` with an undo/redo history, stored internally as an `uniFyStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+* `VersionedUniFy#commit()` — Saves the current Uni-Fy state in its history.
+* `VersionedUniFy#undo()` — Restores the previous Uni-Fy state from its history.
+* `VersionedUniFy#redo()` — Restores a previously undone Uni-Fy state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+These operations are exposed in the `Model` interface as `Model#commitUniFy()`, `Model#undoUniFy()` and `Model#redoUniFy()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `VersionedUniFy` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single Uni-Fy state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th task in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th task in Uni-Fy. The `delete` command calls `Model#commitUniFy()`, causing the modified state of Uni-Fy after the `delete 5` command executes to be saved in the `uniFyStateList`, and the `currentStatePointer` is shifted to the newly inserted Uni-Fy state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new task. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new task. The `add` command also calls `Model#commitUniFy()`, causing another modified Uni-Fy state to be saved into the `uniFyStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitUniFy()`, so the Uni-Fy state will not be saved into the `uniFyStateList`.
 
 </div>
 
-Step 4. The user now decides that adding the task was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the task was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoUniFy()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous Uni-Fy state, and restores Uni-Fy to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial Uni-Fy state, then there are no previous Uni-Fy states to restore. The `undo` command uses `Model#canUndoUniFy()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
 </div>
@@ -310,17 +318,17 @@ The following sequence diagram shows how the undo operation works:
 
 </div>
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redoUniFy()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores Uni-Fy to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `uniFyStateList.size() - 1`, pointing to the latest Uni-Fy state, then there are no undone Uni-Fy states to restore. The `redo` command uses `Model#canRedoUniFy()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify Uni-Fy, such as `list`, will usually not call `Model#commitUniFy()`, `Model#undoUniFy()` or `Model#redoUniFy()`. Thus, the `uniFyStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitUniFy()`. Since the `currentStatePointer` is not pointing at the end of the `uniFyStateList`, all Uni-Fy states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
@@ -332,7 +340,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Aspect: How undo & redo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Alternative 1 (current choice):** Saves the entire Uni-Fy.
     * Pros: Easy to implement.
     * Cons: May have performance issues in terms of memory usage.
 
@@ -341,19 +349,11 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: Will use less memory (e.g. for `delete`, just save the task being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
-
-### 3.7 \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## 4. Documentation, logging, testing, configuration, dev-ops
 
-(TODO: maybe separate this into individual sections)
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
 * [Logging guide](Logging.md)
@@ -372,7 +372,10 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage academic tasks to allow students to have more control over their time
+**Value proposition**: 
+* manage academic tasks to allow students to have more control over their time
+* provides a weekly progress bar for students to track their progress while having a sense of achievement on completing tasks
+* provides a weekly overview for students to get a good idea of what needs to be done, and by when
 
 
 ## Appendix B: User Stories
@@ -381,21 +384,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                   | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   |                                | refer to instructions when I forget how to use the App                 |
+| `* * *`  | new user                                   | get help                       | refer to instructions when I forget how to use the App                 |
 | `* * *`  | user                                       | add tasks                      |                                                                        |
 | `* * *`  | user                                       | delete tasks                   | remove tasks that I no longer need to track                            |
 | `* * *`  | user                                       | find tasks                     | locate details of a task without having to go through the entire list  |
 | `* *`    | user                                       | show tasks                     | show the tasks that I have for the week or according to the date       |
 | `* *`    | user                                       | tag tasks                      | set a tasks priority                                                   |
-| `*`      | user with many tasks in the address book |                                | locate a task easily                                                 |
+| `*`      | user with many tasks in the address book   | search for tasks               | locate a task easily                                                 |
 
-*{More to be added}*
 
 ## Appendix C: Use cases
 
 (For all use cases below, the **System** is `Uni-Fy` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Add a task**
+**Use case: UC01 - Add a task**
 
 **MSS**
 
@@ -415,12 +417,62 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 1.
 
-**Use case: Delete a task**
+
+**Use case: UC02 - Tag a task**
 
 **MSS**
 
-1.  User requests to show tasks for a specific week
-2.  Uni-Fy displays the list of tasks for that week
+1.  User requests to tag tasks that contains some keywords
+2.  Uni-Fy sets priority for that particular task(s) with the matching keywords
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User requests to tag tasks that contains some keywords with a due date.
+    * 1a1. Uni-Fy sets priority for the particular task(s) with matching keywords with that due date.
+      Use case ends.
+
+
+**Use case: UC03 - Show tasks**
+
+**MSS**
+
+1.  User requests to show tasks based on a given date or week number
+2.  Uni-Fy displays the list of tasks occurring in that week or on the given date.
+
+**Extensions**
+
+* 1a. The list is empty.
+  Use case ends.
+
+* 2a. The given index is invalid.
+    * 3a1. Uni-Fy shows an error message.
+      Use case reverts to step 1.
+
+      
+**Use case: UC04 - Find a task**
+
+**MSS**
+
+1.  User requests to find tasks that contains some keywords
+2.  Uni-Fy displays the list of tasks with matching keywords
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User requests to find tasks that contains some keywords with a due date.
+    * 1a1. Uni-Fy displays the list of tasks with matching keywords with that due date.
+      Use case ends.
+
+
+**Use case: UC05 - Delete a task**
+
+**MSS**
+
+1.  User requests for all their tasks to be listed
+2.  Uni-Fy displays user's list of tasks
 3.  User requests to delete a specific task based on its index
 4.  Uni-Fy deletes the specified task
 
@@ -438,64 +490,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-* 3b. User requests to delete a specific task based on its task name
-  * 3b1. Uni-Fy deletes the specified task
-
-    Use case ends.
-
-**Use case: Find a task**
-
-**MSS**
-
-1.  User requests to find tasks that contains some keywords
-2.  Uni-Fy displays the list of tasks with matching keywords
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. User requests to find tasks that contains some keywords with a due date.
-    * 1a1. Uni-Fy displays the list of tasks with matching keywords with that due date.
   Use case ends.
 
-**Use case: Show tasks**
-
-**MSS**
-
-1.  User requests to show tasks based on a given date or week number
-2.  Uni-Fy displays the list of tasks occurring in that week or on the given date.
-
-**Extensions**
-
-* 1a. The list is empty.
-  Use case ends.
-
-* 2a. The given index is invalid.
-    * 3a1. Uni-Fy shows an error message.
-      Use case reverts to step 1.
-
-**Use case: Tag a task**
-
-**MSS**
-
-1.  User requests to tag tasks that contains some keywords
-2.  Uni-Fy sets priority for that particular task(s) with the matching keywords
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. User requests to tag tasks that contains some keywords with a due date.
-    * 1a1. Uni-Fy sets priority for the particular task(s) with matching keywords with that due date.
-      Use case ends.
-
-*{More to be added}*
 
 ## Appendix D: Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  Should should be able to run without the need for internet connection.
+5.  Should be easily picked up by new users without much difficulty. 
 
 *{More to be added}*
 
@@ -535,18 +539,29 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a task while all tasks are being shown
 
-   1. Prerequisites: List all tasks using the `list` command. Multiple tasks in the list.
+   1. Prerequisites: List all tasks using the `list` command. At least one task in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   2. Test case: `delete 1`<br>
+      Expected: First task is deleted from the list. Details of the deleted task shown in the status message.
 
-   1. Test case: `delete 0`<br>
-      Expected: No task is deleted. Error details shown in the status message. Status bar remains the same.
+   3. Test case: `delete 0`<br>
+      Expected: No task is deleted. Error details for invalid command shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+2. Deleting a task after a search
+   1. Prerequisites: List searched tasks using the `search` command. At least one task in the list.
+   
+   2. Test case: `delete 1`<br>
+      Expected: First task from the searched list is deleted. Details of the deleted task shown in the status message.
+   
+   3. Test case: `delete 0`<br>
+   Expected: No task is deleted. Error details for invalid command shown in the status message. Status bar remains the same.
+
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+
 
 ### Saving data
 
