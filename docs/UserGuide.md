@@ -193,7 +193,13 @@ edit profile [n/<NAME>] [te/<TELEGRAM>] [g/<GITHUB>]
 1. Name Conventions:  
    • Should only contain alphabetical characters.
    <br/>
-2. GitHub Username Conventions:
+2. Telegram Handle Conventions:
+   <br/>
+   • Can contain the letters a-z or A-Z, digits 0-9 and underscores.
+   <br/>
+   • Must be 5 to 32 characters long.
+   <br/>
+3. GitHub Username Conventions:
    <br/>
    • May only contain alphanumeric characters or hyphens.
    <br/>
@@ -201,14 +207,9 @@ edit profile [n/<NAME>] [te/<TELEGRAM>] [g/<GITHUB>]
    <br/>
    • Cannot begin or end with a hyphen.
    <br/>
-   • Must be 5 to 32 characters long
+   • Can have a maximum of 39 characters.
    <br/>
-3. Telegram Handle Conventions:
-   <br/>
-   • Can contain the letters a-z or A-Z, digits 0-9 and underscores.
-   <br/>
-   • Must be 5 to 32 characters long.
-   <br/>
+
 * Edits name, Telegram and GitHub fields of user's profile.
 * If the prefix of the field to be edited is mentioned, then its parameters cannot be left empty.
 E.g. `edit profile te/` and `edit profile n/Bob te/` would result in an error because the updated Telegram handle 
