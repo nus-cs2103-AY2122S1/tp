@@ -8,6 +8,24 @@ title: Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
+## **Introduction**
+
+Staff’d helps food & beverage managers manage details and schedules of their staff. It is optimized for CLI users so 
+that frequent tasks can be done faster by typing in commands. It is optimized for restaurants with two active shifts. 
+Please refer to the [_User Guide_](https://ay2122s1-cs2103t-w11-2.github.io/tp/UserGuide.html) for more information 
+about Staff'd.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Overview**
+
+This guide is intended for future developers, current contributors and users. This guide mainly aims to explain the 
+implementation of Staff'd to future developers and deepen their knowledge in software development. By the end of this 
+guide, you can expect to get an overview of the design architecture of Staff'd and comprehensive details of some of its 
+core features, backed up by UML diagrams.
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## **Acknowledgements**
 
 This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
@@ -620,7 +638,7 @@ Project scope:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **Appendix A: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 
@@ -671,4 +689,27 @@ testers are expected to do more *exploratory* testing.
 
     1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix B: Effort**
+
+During the V1.2 iteration, we had set out to revamp the entire codebase to accommodate F&B staff and their details as 
+compared to regular people. This task was moderately difficult as on one hand, we only had to refactor any instances of 
+`person` to `staff` but on the other hand, we had to spend a lot of time implementing and adding fields such as `salary`, 
+`schedule`, `role` and `status`. The implementation of `schedule` alone warranted a 4-hour meeting as there was a debate 
+on how staff shifts should be stored and how many shifts we would have or even whether we should allow users to choose 
+how many shifts they would want in a day and the timing of each shift. This iteration was also the time when we just 
+started adding code to the existing codebase and as such, we faced the difficulty of understanding it. Not only did we 
+have to understand the code, we had to also understand the abstraction behind the code and adhere to it when adding new 
+`person` fields and functions. For all of us, this was the portion that required the most of our effort.
+
+V1.3 was the most difficult and time-consuming iteration. The GUI was one of the hardest parts of this project. Due to 
+our unfamiliarity with JavaFX (the library that we used for our GUI), we spent a significant amount of our effort
+changing the GUI to fit the staff details, showing the staff schedule and putting it on another tab. From having almost 
+zero knowledge about JavaFX to changing the whole GUI was a huge achievement for our team as a whole. Besides that, this 
+was the last iteration where we could add new features, so we ramped up the number of commands that we added such as 
+`mark`, `swapShift` and `setShiftTime` just to name a few. However, this also led to some unfortunate circumstances. 
+By the end of this iteration and subsequent iterations, this led to numerous bugs. A majority of our time was spent on 
+fixing these bugs and add comprehensive tests for them.
