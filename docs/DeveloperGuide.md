@@ -194,8 +194,6 @@ Given below is an example usage scenario and how the mechanism behaves at each s
 - `contactpolicy` applies a `PolicyIsOwnedBy` predicate that takes in a `Contact`. It will return `true` if the `owner` field of the `Policy` is equals to the `Contact` taken in.
 - `expiringpolicy` applies a predicate that returns true if the `ExpiryDate` of a `Policy` is within the next month.
 
-### \[Proposed\] Undo/redo feature
-
 ### Download Command
 
 This section explains the mechanism behind ```DownloadCommand``` used to download a TXT file containing useful statistics. These include:
