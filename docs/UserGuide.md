@@ -181,7 +181,7 @@ Command constraints:
 * The `FRIEND_ID` used must currently exist in the friends list.
 
 Examples: 
-* `friend --edit Draco -n Kevin` Sets the name of existing friend with the `FRIEND_ID` "Draco" to "Kevin".
+* `friend --edit Draco -n Kevin` Sets the name of existing friend with the `FRIEND_ID` 'Draco' to 'Kevin'.
 
 Screenshot: 
 
@@ -281,11 +281,11 @@ Command constraints:
 * A friend with the given `FRIEND_ID` provided must exist in the friends list.
 * The friend has to be previously linked to the game with the given `GAME_ID`.
 * The skill value assigned must be integers within the range 0 to 10 (inclusive). e.g. 0, 8 and 10 are valid skill values,
-  whereas -1, 11, 1.2, and "one" are invalid skill values.
+  whereas -1, 11, 1.2, and 'one' are invalid skill values.
  
 Examples: 
-* `friend --skill Draco -g Valorant -v 7` Sets the skill value for friend "Draco" for the linked game
-"Valorant" to 7.
+* `friend --skill Draco -g Valorant -v 7` Sets the skill value for friend 'Draco' for the linked game
+'Valorant' to 7.
   
 Screenshot:
 
@@ -326,8 +326,8 @@ Command constraints:
 * `IS_FREE` is used to mark the period as a free or busy period, and can only be the values `1` meaning free or `0` meaning busy.
 
 Examples:
-* `friend --schedule Draco -p 18 22 2 -f 1` Schedules "Draco" as free from 18th to 22nd hour, 1800 - 2200 on Tuesday.
-* `friend --schedule Draco -p 12 24 7 -f 0` Schedules "Draco" as busy from 12th to 24th hour, 1200 - 2400 (midnight) on Sunday.
+* `friend --schedule Draco -p 18 22 2 -f 1` Schedules 'Draco' as free from 18th to 22nd hour, 1800 - 2200 on Tuesday.
+* `friend --schedule Draco -p 12 24 7 -f 0` Schedules 'Draco' as busy from 12th to 24th hour, 1200 - 2400 (midnight) on Sunday.
 
 Screenshot:
 
@@ -375,7 +375,7 @@ Command constraints:
 * The `FRIEND_ID` must currently exist in the friends list.
 
 Examples:
-* `friend --get Draco` Gets the complete data for friend "Draco".
+* `friend --get Draco` Gets the complete data for friend 'Draco'.
 
 Screenshot:
 
@@ -400,7 +400,7 @@ Examples:
 Screenshot:
 
 ![Ui](images/ui-screenshots/friend-list.png)
-<br><center><ins>Image: gitGud after listing all friends that have `t` in their `FRIEND_ID`</ins>
+<br><center><ins>Image: gitGud after listing all friends that have `t` in their `FRIEND_ID`</ins></center>
 
 ### Game commands
 
@@ -479,7 +479,7 @@ Command constraints:
 * The `GAME_ID` must currently exist in the database.
 
 Examples:
-* `game --get CSGO` Gets all the relevant information for the game "CSGO".
+* `game --get CSGO` Gets all the relevant information for the game 'CSGO''.
 
 Screenshot:
 
