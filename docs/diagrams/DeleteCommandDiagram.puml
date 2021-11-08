@@ -49,20 +49,20 @@ DeleteCommand -> Model : deletePerson(person)
 activate Model
 
 
-Model --> AddCommand
+Model --> DeleteCommand
 deactivate Model
 
 create CommandResult
-AddCommand -> CommandResult
+DeleteCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> AddCommand
+CommandResult --> DeleteCommand
 deactivate CommandResult
 
 
-AddCommand --> LogicManager : result
-deactivate AddCommand
-AddCommand -[hidden]-> LogicManager : result
+DeleteCommand --> LogicManager : result
+deactivate DeleteCommand
+DeleteCommand -[hidden]-> LogicManager : result
 
 [<--LogicManager
 deactivate LogicManager
