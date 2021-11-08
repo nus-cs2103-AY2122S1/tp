@@ -297,7 +297,7 @@ The following is an activity diagram showcasing a simplified view of the activit
 The `unmark` command does the opposite — it calls `Person#unmark()`, which replaces the
 `Period` that are contained in the `Person` with the `Period` objects representing
 the initial `Period` without the input `Period`. This command is facilitated by the
-`Period#complement()` method which is called on all the stored `Period`.
+`Period#complement()` method which is called on all the stored `Period` objects.
 
 
 
