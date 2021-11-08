@@ -933,28 +933,28 @@ The activity diagram below illustrates what happens when a user presses the DOWN
 
 1. Accelerators for the 4 Menu Items are set during initialization of `MainWindow.java`.
 
-```
-private void setAccelerators() {
-    setAccelerator(contactsMenuItem, KeyCombination.valueOf("Shortcut+1"));
-    setAccelerator(favoritesMenuItem, KeyCombination.valueOf("Shortcut+2"));
-    setAccelerator(eventsMenuItem, KeyCombination.valueOf("Shortcut+3"));
-    setAccelerator(findABuddyMenuItem, KeyCombination.valueOf("Shortcut+4"));
-    ...
-}
-```
+    ```
+    private void setAccelerators() {
+        setAccelerator(contactsMenuItem, KeyCombination.valueOf("Shortcut+1"));
+        setAccelerator(favoritesMenuItem, KeyCombination.valueOf("Shortcut+2"));
+        setAccelerator(eventsMenuItem, KeyCombination.valueOf("Shortcut+3"));
+        setAccelerator(findABuddyMenuItem, KeyCombination.valueOf("Shortcut+4"));
+        ...
+    }
+    ```
 
-<div markdown="span" class="alert alert-primary">
-:bulb: **Note:** When detecting KeyCombination, Javafx automatically switches its interpretation of "Shortcut" as "Ctrl" for Windows and "Cmd" for macOS. The symbols in the MenuItem (shown above) change as well.
-</div>
+    <div markdown="span" class="alert alert-primary">
+    :bulb: **Note:** When detecting KeyCombination, Javafx automatically switches its interpretation of "Shortcut" as "Ctrl" for Windows and "Cmd" for macOS. The symbols in the MenuItem (shown above) change as well.
+    </div>
 
 2. When their respective key combinations are detected, the MenuItem's onAction methods are called. For example, the following method is called when Cmd/Ctrl + 4 is detected.
 
-```
-@FXML
-public void handleFindABuddy() {
-    tabPaneHeader.activateFindABuddy(logic);
-}
-```
+    ```
+    @FXML
+    public void handleFindABuddy() {
+        tabPaneHeader.activateFindABuddy(logic);
+    }
+    ```
 
 3. `TabPaneHeader` then switches to the Find A Buddy tab using `tabPane.getSelectionModel().select(3)`.
 
