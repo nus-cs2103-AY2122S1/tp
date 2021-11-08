@@ -6,10 +6,17 @@ title: John Doe's Project Portfolio Page
 My name is Tan Hua Kun and I am one of the developers of Tutor Master. My role is a full stack developer, and I am mostly in
 charge of lessons, exams and the viewing panel.
 
-View my code contribution here: [RepoSense](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=tanhuakun&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=tanhuakun&tabRepo=AY2122S1-CS2103T-W16-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
+### Project Tutor Master
 
-What I have contributed:
-* Features
+Tutor Master is a desktop application aimed to help Tutors manage and organise their many students and lessons.
+
+It is CLI oriented and is made for those who are good with typing.
+
+### What I have contributed:
+
+View my code contribution here: [RepoSense](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=tanhuakun&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=tanhuakun&tabRepo=AY2122S1-CS2103T-W16-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
+ 
+* #### Features
     * Logic
         * Created Parsers and Commands to deal with lessons and exams.
         * Created Parser and Command for adding people to a group.
@@ -33,24 +40,40 @@ What I have contributed:
     * UI
         * Viewing Panel
             * Created [ViewingPanel](https://github.com/AY2122S1-CS2103T-W16-4/tp/blob/master/src/main/java/seedu/address/ui/ViewingPanel.java) and the logic behind it to view different things.
-            * Created [PersonViewCard](https://github.com/AY2122S1-CS2103T-W16-4/tp/blob/master/src/main/java/seedu/address/ui/PersonViewCard.java) to support viewing a single person.
+            * Created [PersonViewCard](https://github.com/AY2122S1-CS2103T-W16-4/tp/blob/master/src/main/java/seedu/address/ui/PersonViewCard.java) to support viewing a single person. __Note__: Task completion was not done by me.
             * Created [LessonScheduleCard](https://github.com/AY2122S1-CS2103T-W16-4/tp/blob/master/src/main/java/seedu/address/ui/LessonScheduleCard.java)
               and [LessonSchedulePanel](https://github.com/AY2122S1-CS2103T-W16-4/tp/blob/master/src/main/java/seedu/address/ui/LessonSchedulePanel.java) for viewing schedule.
             * Modified other UI components, css and FXML files to enable the viewing panel.
-* Documentation
+* #### Documentation
     * User Guide
         * Student lesson and exam commands
         * Schedule Command
-        * Added spoiler tag for many student commands
+        * [Quick start: Managing Students](https://ay2122s1-cs2103t-w16-4.github.io/tp/UserGuide.html#managing-students)
     * Developer Guide
         * Wrote some user stories
-        * Add implementation details for **Changing View Panel** and **Lessons**
-* Testing
+        * Add implementation details for [Changing View Panel](https://ay2122s1-cs2103t-w16-4.github.io/tp/DeveloperGuide.html#changing-view-panel);
+        * Add implementation details for [Lessons](https://ay2122s1-cs2103t-w16-4.github.io/tp/DeveloperGuide.html#lessons)
+        * Add some instructions for manual testing and an adding lesson use case.
+* #### Testing
+    * [Tests for lesson](https://github.com/AY2122S1-CS2103T-W16-4/tp/tree/master/src/test/java/seedu/address/model/lesson)
+    * Logic.Parser
+        * [Add exams parser](https://github.com/AY2122S1-CS2103T-W16-4/tp/blob/master/src/test/java/seedu/address/logic/parser/persons/PersonAddExamParserTest.java) and [remove exam parser](https://github.com/AY2122S1-CS2103T-W16-4/tp/blob/master/src/test/java/seedu/address/logic/parser/persons/PersonRemoveExamParserTest.java)
+        * [Add lesson parser](https://github.com/AY2122S1-CS2103T-W16-4/tp/blob/master/src/test/java/seedu/address/logic/parser/persons/PersonAddLessonParserTest.java) and [remove lesson parser](https://github.com/AY2122S1-CS2103T-W16-4/tp/blob/master/src/test/java/seedu/address/logic/parser/persons/PersonRemoveLessonParserTest.java)
+        * [Add group parser](https://github.com/AY2122S1-CS2103T-W16-4/tp/blob/master/src/test/java/seedu/address/logic/parser/groups/AddGroupCommandParserTest.java).
+    * Logic.Commands
+        * [Add group command](https://github.com/AY2122S1-CS2103T-W16-4/tp/blob/master/src/test/java/seedu/address/logic/commands/groups/AddGroupCommandIntegrationTest.java).
+    * Storage
+        * JsonAdaptedLessonTest and JsonAdaptedTimeslotTest
+    * Modified existing test cases such as JsonAdaptedPerson and Person when implementing features.
+    
 
-Other contributions:
-* Team Tasks:
-  * Refactor Student
-  * Update each command to refresh view
-  * Closed duplicate issues from PED
-  * Update all commands to check number of indexes in preamble properly
-* Reviewing PRs
+### Other contributions:
+* #### Team Tasks:
+    * [Refactor commands](https://github.com/AY2122S1-CS2103T-W16-4/tp/pull/45) to be split into subsections. Original AB3 used "add, delete, edit" but refactored it to use
+    "student -a, student -d, student -e" respectively.
+    * [Update almost every command](https://github.com/AY2122S1-CS2103T-W16-4/tp/pull/206)
+    to refresh viewing panel accordingly. This is so that details in the viewing panel are up to date when a command affects the Model.
+    * Closed duplicate issues from PED before team members start working on it. For example [here](https://github.com/AY2122S1-CS2103T-W16-4/tp/issues/143) and [here](https://github.com/AY2122S1-CS2103T-W16-4/tp/issues/148) and many more.
+    * [Update all commands](https://github.com/AY2122S1-CS2103T-W16-4/tp/pull/197) to validate indexes in the preamble properly. An issue highlighted in PED.
+* #### Reviewing PRs
+    * Provided some comments, such as [here](https://github.com/AY2122S1-CS2103T-W16-4/tp/pull/127) and [here](https://github.com/AY2122S1-CS2103T-W16-4/tp/pull/135).
