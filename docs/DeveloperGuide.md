@@ -327,12 +327,12 @@ After the `OrderBook` has been sorted by the amount field in ascending order,
       * For instance, executing `incompleteorders` followed by `sortorders f/d o/desc` would list the incomplete orders sorted by their date in descending order.
     * Cons: Commands that mutate the list might disrupt the ordering of the sorted list. 
       * For instance, adding an `Order` to an `OrderBook` simply appends it
-        at the end of the `OrderList`. Thus, the `OrderBook` needs be reverted to its default arrangement by calling `ModelManager.resetOrderView()` whenever an order is added.
+        at the end of the `OrderList`. Thus, the `OrderBook` needs to be reverted to its default arrangement by calling `ModelManager.resetOrderView()` whenever an order is added.
       * Note that this is not a concern for the `markorder` and `deleteorder` commands since they do not disrupt the ordering of the list.
 * **Alternative 2:** Wrapping the `FilteredList` around the `SortedList`. 
     * Pros: 
       * Maintains the immutability of the order list. 
-      * Ensures that the sorting arrangement is always preserved, even another command e.g. `addorder` mutates the underlying list.
+      * Ensures that the sorting arrangement is always preserved, even when another command e.g. `addorder` mutates the underlying list.
     * Cons: More difficult to implement since it entails more coupling with the `FilteredList` of orders.
     
 ### Display client's total orders feature
