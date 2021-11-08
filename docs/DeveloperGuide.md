@@ -362,7 +362,7 @@ gitGud undergoes to display the recommendations friends list to the user:
 
 <ins>Step 1: Parsing and triggering recommend command execution</ins><br>
 
-Similar to [delete](#delete-feature) and [link](#link-feature) features above, the parse and execute actions shown in the activity 
+Similar to [delete](#41-delete-feature) and [link](#42-link-feature) features above, the parse and execute actions shown in the activity 
 diagram are implemented via invoking`RecommendCommandParser#parse(String)`, which extracts a specified game and timing from the 
 user input and constructs a `RecommendCommand` instance with the extracted data. 
 
@@ -408,7 +408,7 @@ Below are the options we could allow the user to filter by: <br>
 <ins>Decision</ins>
 
 We decided to limit the filtering to by **hour and day** for 3 main reasons: 
-1. to be consistent with the [schedule](#schedule-feature) feature which stores schedules based on hours 
+1. to be consistent with the [schedule](#44-schedule-feature) feature which stores schedules based on hours 
 2. we found that accuracy to the exact minute is not necessary as our target users (students) usually have weekly schedules based on hourly blocks. 
 3. we avoided the use of the 24-hour clock as a time filter as it can also represent minutes and could potentially mislead users, since `1059` 
 seems to be a valid input but is not supported by our application which only supports schedules in hour blocks(rationale in point #2). 
