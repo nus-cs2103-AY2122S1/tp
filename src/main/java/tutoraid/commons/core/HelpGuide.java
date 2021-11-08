@@ -44,7 +44,7 @@ public class HelpGuide {
     public static final String ADD_L_DESC = "Adds a new lesson to TutorAid.";
     public static final String ADD_L_COMMAND = "add -l n/LESSON_NAME [c/LESSON_CAPACITY] [p/LESSON_PRICE] "
             + "[t/LESSON_TIMING]";
-    public static final String ADD_L_EXAMPLE = "add -l s/Maths 1 c/50 p/100 t/Mon 1000-1200";
+    public static final String ADD_L_EXAMPLE = "add -l n/Maths 1 c/50 p/100 t/Mon 1000-1200";
 
     public static final String LIST_TITLE = "Listing all students and lessons";
     public static final String LIST_DESC = "Shows a list of all students and lessons in TutorAid in the order that "
