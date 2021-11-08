@@ -296,6 +296,7 @@ Examples:
 * `interaction 2 int/We chat. on/1990-01-20` <br/>
 > Adds an interaction with description 'We chat.' and date '1990-01-20' to the Person at index 2 of the displayed list.
 
+![result for 'interaction 2 int/We chat. on/1990-01-20'](images/interactionscreenshot.png)
 
 <div markdown="block" class="alert alert-info">
 :information_source: Do not specify duplicate delimiters!
