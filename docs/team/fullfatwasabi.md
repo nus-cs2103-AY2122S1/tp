@@ -1,3 +1,7 @@
+---
+layout: page
+title: Jonathan's Project Portfolio Page
+---
 
 ### Project: Staff'd
 
