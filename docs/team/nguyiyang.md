@@ -17,7 +17,6 @@ Given below are my contributions to the project.
     * Creating a pop-up window to display student information
   * Tutorial Group implementation
     * Creating TutorialGroup and its fields, GroupNumber and GroupType
-    * Creating UniqueTutorialGroupList
     * Saving tutorial groups in JSON file under each tutorial class
     * Commands for adding and removing tutorial groups
 
@@ -33,7 +32,6 @@ Given below are my contributions to the project.
     * Created sequence diagram for `AddGroupCommand`
     * Activity diagram for recommended workflow for ClassMATE
     * Use cases for adding tutorial group
-    * User stories for adding and removing tutorial group
 
 * **Team-based tasks**:
   * Updated the link of the GitHub Actions build status badge

@@ -22,6 +22,8 @@ public class TypicalTutorialGroups {
             .withGroupNumber(VALID_GROUPNUMBER_1).withGroupType(VALID_GROUPTYPE_OP1).build();
     public static final TutorialGroup TUT_02 = new TutorialGroupBuilder().withClassCode(VALID_CLASSCODE_G02)
             .withGroupNumber(VALID_GROUPNUMBER_2).withGroupType(VALID_GROUPTYPE_OP2).build();
+    public static final TutorialGroup TUT_03 = new TutorialGroupBuilder().withClassCode(VALID_CLASSCODE_G01)
+            .withGroupNumber(VALID_GROUPNUMBER_2).withGroupType(VALID_GROUPTYPE_OP1).build();
 
     // Prevent instantiation
     private TypicalTutorialGroups() {}

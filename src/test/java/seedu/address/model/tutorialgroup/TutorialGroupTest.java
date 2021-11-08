@@ -28,7 +28,7 @@ class TutorialGroupTest {
                 .withGroupType(VALID_GROUPTYPE_OP2).build();
         assertFalse(TUT_01.isSameTutorialGroup(editedTut01));
 
-        // same group name, all other attributes different -> returns false
+        // same group number, all other attributes different -> returns false
         editedTut01 = new TutorialGroupBuilder(TUT_01).withClassCode(VALID_CLASSCODE_G01)
                 .withGroupType(VALID_GROUPTYPE_OP2).build();
         assertFalse(TUT_01.isSameTutorialGroup(editedTut01));
@@ -42,7 +42,7 @@ class TutorialGroupTest {
         editedTut01 = new TutorialGroupBuilder(TUT_01).withClassCode(VALID_CLASSCODE_G02).build();
         assertFalse(TUT_01.isSameTutorialGroup(editedTut01));
 
-        // different group name, all other attributes same -> returns false
+        // different group number, all other attributes same -> returns false
         editedTut01 = new TutorialGroupBuilder(TUT_01).withGroupNumber(VALID_GROUPNUMBER_2).build();
         assertFalse(TUT_01.isSameTutorialGroup(editedTut01));
 
@@ -73,11 +73,11 @@ class TutorialGroupTest {
         TutorialGroup editedTut01 = new TutorialGroupBuilder(TUT_01).withClassCode(VALID_CLASSCODE_G02).build();
         assertFalse(TUT_01.equals(editedTut01));
 
-        // different group name -> returns false
+        // different group number -> returns false
         editedTut01 = new TutorialGroupBuilder(TUT_01).withGroupNumber(VALID_GROUPNUMBER_2).build();
         assertFalse(TUT_01.equals(editedTut01));
 
-        // different email -> returns false
+        // different group type -> returns false
         editedTut01 = new TutorialGroupBuilder(TUT_01).withGroupType(VALID_GROUPTYPE_OP2).build();
         assertFalse(TUT_01.equals(editedTut01));
     }

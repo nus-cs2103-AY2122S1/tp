@@ -116,7 +116,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-W15-1/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" height= "600" width="800" />
 
 
 The `Model` component,
@@ -399,26 +399,26 @@ Execution of the `AddMarkCommand`
 ### ClassCode Features
 (Contributed by Zhou Yirui)
 
-ClassMATE allows user to assign student to a tutorial class using a ClassCode. A user is able to:
+ClassMATE allows user to assign a Student or a Tutorial Group to a Tutorial Class using a ClassCode. A user is able to:
 
 1. Add ClassCode to a student
 2. Edit ClassCode of a student
+3. Create Tutorial Group using ClassCode
+4. Create Tutorial Classes using ClassCode
 
 #### Current Implementation
 The class `ClassCode` facilitates all operations related to classCode. `ClassCode` is implemented such that a
 Tutorial Class with the corresponding ClassCode must exist before the ClassCode can be added. Tutorial Class `G00` is a
-default class that do not need to be created.
+default class that do not need to be created and is an empty ClassCode. It is assigned to a Student whose Tutorial Class has been deleted. 
 
 Given below is an example of how classCode can be used.
 
 Step 1: After launching the application for the first time, user executes `addstu n/Abigail p/91199119 e/ab@gmail.com a/Downling Park #15-20 c/G08`.
 The `addstu` command calls `Model#hasTutorialClass()`, and the model component checks if the TutorialClass specified by the
-class code exists. If it exists, the student is added successfully, else, an error message is given.
+class code exists. If it exists, the student is added successfully with the classCode parameter `G08`, else, an error message is given.
 
-
-#### Proposed Implementation
-Step 2: The user deletes TutorialClass G08 using the `deletec` command. The `deletec` command changes the ClassCode of all students
-of TutorialClass `G08` to `G00`, which is reflected as `No class`.
+Step 2: The user deletes TutorialClass G08 using the `deletec c/G08` command. The `deletec` command changes the ClassCode of all students
+of TutorialClass `G08` to `G00`. On ClassMATE, the UI reflects the Student to have no Tutorial Class, i.e. `No class`.
 
 ### Tutorial Group Management Features
 This feature is split into two parts.
@@ -435,50 +435,60 @@ ClassMATE allows the user to manage information relevant to the TutorialGroup. A
 #### Current Implementation (Adding/removing tutorial group to tutorial class)
 
 The class `Classmate` facilitates all operations related to tutorial groups. It maintains a
-`UniqueTutorialClassList` containing all tutorial classes, where each class maintains a `UniqueTutorialGroupList` containing its tutorial groups.
-Tutorial groups are identical only if all its attributes, `GroupName`, `ClassCode` and `GroupType` are the same.
+`UniqueTutorialClassList` containing all tutorial classes, where each `TutorialClass` maintains a `UniqueTutorialGroupList` containing its tutorial groups.
 `Classmate` contains a summary of all the logic of the interaction between tutorial group and tutorial class such as
 adding tutorial groups to tutorial classes (e.g. `AddGroupCommand`)  executed on the `UniqueTutorialGroupList`.
 
-The following operations are implemented:
-* `Classmate#hasTutorialGroup(TutorialGroup tutorialGroup)` - Checks if tutorial group is in ClassMATE
-* `Classmate#addTutorialGroup(TutorialGroup tutorialGroup)` - Adds tutorial group to ClassMATE
-* `Classmate#removeTutorialGroup(TutorialGroup tutorialGroup)` - Deletes existing tutorial group from ClassMATE
+The following operations are implemented which highlight the interactions between subcomponents within `Model`
+related to adding a tutorial group to a class:
+* `UniqueTutorialClassList#contains(TutorialClass toCheck)`  - Checks if tutorial class exists
 * `UniqueTutorialClassList#contains(TutorialGroup toCheck)`  - Checks if tutorial group is in any of the tutorial classes
-* `UniqueTutorialClassList#add(TutorialGroup toAdd)`  - Adds tutorial group to its respective class
+* `TutorialClass#isSameTutorialClass(TutorialClass tutorialClass)`  - Checks if two tutorial classes are the same. They are the same if their Class codes are the same.  
+* `TutorialGroup#isSameTutorialGroup(TutorialClass tutorialGroup)`  - Checks if two tutorial groups are the same. They are the same if their Class codes, Group number and Group type are the same.
+* `UniqueTutorialClassList#add(TutorialGroup toAdd)`  - Finds the tutorial group list of the tutorial class to add the tutorial group to
+* `UniqueTutorialGroupList#add(TutorialGroup toAdd)`  - Adds tutorial group to the tutorial group list of a class
 * `TutorialClass#getTutorialGroups()`  - Retrieves the list of tutorial groups within the TutorialClass
-* `TutorialClass#createTestTutorialClass(ClassCode classCode)`  - Creates a dummy tutorial class from the class code of the tutorial group for checking
+* `TutorialClass#createTestTutorialClass(ClassCode classCode)`  - Creates a dummy tutorial class with the class code of the tutorial group for checking
 
 Given below is an example of how the tutorial group features can be used:
 
 Step 1. The user executes an `addcg gn/1 c/G06 type/OP1` command. The `addcg` command calls `Model#hasTutorialClass()`,
-and the model component checks if the TutorialClass specified by the class code exists and throws an exception if it does not.
+and the model component checks if the tutorial class specified by the class code exists and throws an exception if it does not.
 It then checks whether the tutorial group already exists using `Model#hasTutorialGroup()`and calls `Model#addTutorialGroup()` if it does not.
 
-The checking of whether the tutorial class and tutorial group already exists is done as such:
+The checking of whether the tutorial class and tutorial group already exists is implemented as such:
 `Classmate` calls the `contains` method of its `UniqueTutorialClassList`. This method is overloaded to accept
 either a `TutorialClass` or `TutorialGroup`. The difference between the implementation of these two is that for the former,
-it simply checks through its list of tutorial classes. For the latter, it uses `TutorialClass#createTestTutorialClass(ClassCode classCode)`
-to retrieve the tutorial class of the tutorial group it is being added to, so that it can then find that tutorial class
-within the `UniqueTutorialClassList` and get its `UniqueTutorialGroupList` using the method `TutorialClass#getTutorialGroups()`
-and from there check whether the tutorial group already exists or not.
+it checks through its list of tutorial classes by utilising streams and the `TutorialClass#isSameTutorialClass()` method.
 
-Adding of tutorial groups is similar; It again finds the tutorial class in the `UniqueTutorialClassList` using its class code
-After retrieving the respective tutorial class, it can then add the tutorial group using `UniqueTutorialClassList#add(TutorialGroup toAdd)`.
+For the latter, it uses `TutorialClass#createTestTutorialClass(ClassCode classCode)`
+to create the tutorial class representing the one that the tutorial group is being added to so that it can then retrieve that tutorial class
+within the `UniqueTutorialClassList`. Since the checking of whether the tutorial class exists is done beforehand,
+the tutorial class is guaranteed to exist and is retrieved. From the tutorial class, its `UniqueTutorialGroupList` is retrieved using the method `TutorialClass#getTutorialGroups()`.
+It then checks whether tutorial group already exists by utilising streams and the `TutorialGroup#isSameTutorialGroup()` method.
+
+Adding of tutorial groups is similar; `UniqueTutorialClassList#add(TutorialGroup toAdd)` retrieves the tutorial class from the `UniqueTutorialClassList` and its `UniqueTutorialGroupList`,
+in order to add the tutorial group using `UniqueTutorialGroupList#add(TutorialGroup toAdd)`.
 
 This modifies and saves the state of ClassMATE.
 
 Step 2. The user executes a `deletecg c/G06 gn/1 type/OP1` command. The `deletecg` command works in the same way as the `addcg`
-command, except it removes that tutorial group from ClassMATE after checking if it exists.
+command, except it removes that tutorial group from ClassMATE after checking if it exists. It also removes all students
+in that tutorial group.
 
 Using the example of the `AddGroupCommand`,
 when the user enters the `addcg` command to add a tutorial group, the user input command undergoes the same command parsing as described in [Section 3.3, “Logic component”](#logic-component).
 During the parsing, a new TutorialGroup instance is created. This `TutorialGroup` instance will be received by the `AddGroupCommand` when it is created.
 
-The *Sequence Diagram* below summarizes the aforementioned steps.
+The *Sequence Diagram* below summarizes how tutorial groups are added to a tutorial class.
 
 ![AddGroupSequenceDiagram](images/AddGroupSequenceDiagram.png)
-![GetTutorialGroupDiagram](images/GetTutorialGroupDiagrams.png)
+
+The *Sequence Diagram* below shows how `UniqueTutorialClassList` retrieves the
+`UniqueTutorialGroupList` from the specified TutorialClass for checking or adding of a given tutorial group.
+
+![GetTutorialGroupsDiagram](images/GetTutorialGroupsDiagram.png)
+
 
 #### Design Considerations
 
@@ -491,6 +501,38 @@ The *Sequence Diagram* below summarizes the aforementioned steps.
     * Pros: Simpler to implement, easier to add or remove tutorial groups.
       Storing tutorial groups as arrays in JSON is less complicated.
     * Cons: Searching or filtering the list of tutorial groups by group types may take a longer time.
+
+#### Current Implementation (Adding/Removing Student from Tutorial Group)
+
+Each Student contains a `Set` of `TutorialGroup` they belong to. Tutorial Groups are stored internally as a `HashSet`. The `HashSet` of
+`TutorialGroup` is implemented such that there are no duplicate `TutorialGroup`, and each Student belongs to at most 1 `Tutorial Group` of 
+each Group Type. 
+
+ClassMATE will then support the following command classes:
+
+* `AddStudentToGroupCommand(Index index, TutorialGroup tutorialGroup)`
+* `DeleteStudentFromGroupCommand(Index index, TutorialGroup tutorialGroup)`
+
+Given below is an example of how the Add and Delete Student from Tutorial Groups features can be used:
+
+Step 1. The user launches the application for the first time. The existing set of `tutorialGroups` for each Student would be retrieved from the initial
+ClassMATE state, and would be displayed with the details the Student. 
+
+Step 2. The user enters `liststu` to list all the existing Students in ClassMATE
+
+Step 3. The user executes `addsg 1 gn/1 c/G06 type/OP1`. After the Command has been parsed, the `addsg` command calls `AddStudentToGroup#addTutorialGroup()`. 
+Subsequently, `Model#setStudent` and `Classmate#setStudent` are called consecutively to update the `tutorialGroups` of the Student.
+During the execution of `AddStudentToGroupCommand`, a new `Student` instance with the edited set of `TutorialGroup` is created.
+
+#### Design Considerations
+#### Aspect: Student parameters in the Command
+* Alternative 1 (current choice): Identifying the Student using Index. 
+    * Pros: Easier to implement. Less ambiguity arising from Students with the same names. 
+    * Cons: Adding/Deleting a Student from a Tutorial Group takes a longer time. Filtering the Student list may be necessary.
+    
+* Alternative 2: Identifying the Student using a Student ID. 
+    * Pros: Faster to perform the action of adding/deleting a Student from Tutorial Group. 
+    * Cons: Utility of Student ID is low as it is not used by other Commands. Also more difficult to implement.
 
 ### Class and Tutorial Group Filters Features
 
@@ -528,7 +570,7 @@ Step 2. The user executes a `viewg c/G01 type/OP1 gn/1` command. After parsing t
 * Alternative 2 (current choice): Find tutorial classes by their exact class code
   * Pros: Higher Accuracy in search, and since class codes are only three characters long, it does not cause users to take significantly more time.
   * Cons: Keywords used in searches can only match specific classes instead of finding multiple classes at once.
-
+ 
 ### Recommended workflow for setting up ClassMATE
 
 The *Activity Diagram* below provides an example of how users should set up their tutorial classes, tutorial groups and students
