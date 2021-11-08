@@ -186,6 +186,7 @@ public class JsonUtil {
      *
      * @param filePath Path of file to get JSON data from.
      * @return JSONArray of student's data.
+     * @throws IllegalValueException If the filePath is invalid.
      */
     public static JSONArray getJsonData(String filePath) throws IllegalValueException {
         try {
