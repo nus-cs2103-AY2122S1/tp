@@ -20,6 +20,8 @@ title: Developer Guide
     * [Help feature](#help-feature)
     * [Birthday Reminder feature](#birthday-reminder-feature)
     * [Mailing List feature](#mailing-list-feature)
+    * [Command History feature](#command-history-feature)
+    * [Command Assistant feature](#command-assistant-feature)
 
 * [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 * [Appendix: Requirements](#appendix-requirements)
@@ -134,6 +136,10 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` and `DeleteCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
+
+The Activity Diagram below accompanies the `DeleteCommand`.
+
+![Activity Diagram of Delete Command](images/DeleteActivityDiagram.png)
 
 <div style="page-break-before: always;"></div>
 
@@ -263,11 +269,14 @@ Step 8. Contact's `Pin` attribute will change to indicate that the contact is no
 
 Step 9. CONNECTIONS UI will update to show the contact behind other pinned contacts using a `PersonCard`. 
 
-The following sequence diagram shows how the pin operation works:
+The following sequence diagram shows how the `pin` operation works:
 
 ![PinSequenceDiagram](images/PinSequenceDiagram.png)
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `PinCommandParser` and `PinCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
+
+The following activity diagram shows possible user interactions with a `pin` command.
+![PinActivityDiagram](images/PinActivityDiagram.png)
 
 <div style="page-break-before: always;"></div>
 
@@ -318,6 +327,12 @@ Step 4. This`FindPredicate` is passed into `ModelManager#updateFilteredPersonLis
 Step 5. CONNECTIONS' `UI` observes the filtered list and displays the updated filtered list in `PersonListPanel`. Only contacts whose name contains `David` **while also having** `friend` **and**
 `football` tagged to them will be displayed.
 
+The following sequence diagram shows how the Find operation works:
+
+![FindSequenceDiagram](images/FindSequenceDiagram.png)
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FindCommandParser`, `FindPredicate` and `FindCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
 #### Design considerations:
 
 **Aspect: How Find executes:**
@@ -354,6 +369,12 @@ Step 4. This`FindAnyPredicate` is passed into `ModelManager#updateFilteredPerson
 
 Step 5. CONNECTIONS' `UI` observes the filtered list is updated and displayed the updated filtered list in `PersonListPanel`.
 
+The following sequence diagram shows how the FindAny operation works:
+
+![FindAnySequenceDiagram](images/FindAnySequenceDiagram.png)
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FindAnyCommandParser`, `FindAnyPredicate` and `FindAnyCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
 #### Design considerations:
 
 **Aspect: How FindAny executes:**
@@ -388,6 +409,8 @@ Step 4. The user decides to view the usage of `add` to learn to add a contact, a
 
 Step 5. CONNECTIONS will display a detailed help message on the usage of the `add` command in `ResultDisplay`.
 
+![HelpSequenceDiagram](images/HelpCommandDiagram.png)
+
 
 ### Birthday Reminder feature
 
@@ -407,7 +430,11 @@ Step 2. The `BirthdayReminderListPanel` in CONNECTIONS' `UI` displays birthday r
 
 Step 3. The user executes `add n/person3 b/01012000 …​` to add a new contact. 
 
-Step 4. CONNECTIONS will store the new contact. The `ObservableList<Person> birthdayReminders` for `BirthdayReminderPanelList` will include the new contact and place it in the right slot, ensuring the birthday reminder list remains sorted. 
+Step 4. CONNECTIONS will store the new contact. The `ObservableList<Person> birthdayReminders` for `BirthdayReminderPanelList` will be updated to include the new contact, ensuring the birthday reminder list remains sorted as shown below. 
+
+![BirthdayReminderSequenceDiagram](images/BirthdayReminderSequenceDiagram.png)
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 
 Step 5. CONNECTIONS `UI` will observe for changes in the `ObservableList<Person> birthdayReminders` and update `BirthdayReminderPanelList`, displaying the new contact. 
 
@@ -431,25 +458,111 @@ Users can use arguments to specify which fields to include in their download.
 Given below is an example usage scenario and how the Mailing List mechanism behaves at each step.
 
 Step 1. The user filters the contacts using other commands, eg. `find`.  
+
 Step 2. The `FilteredList` in `Model` is updated.  
+
 Step 3. The UI is updated to reflect this new state.  
+
 Step 4. The user provides a series of prefixes to `mailingList` to pick the fields. If no arguments are provided, default selectors are used.  
-Step 5. These `Prefix` arguments are stored in `Model`.  
-Step 6. The user is prompted to pick a name and the download location for their generated CSV file.  
-Step 7. The `FilteredList`, `Prefixes` and `Path` are passed to `CsvUtil#modelToCsv`, which will serialize and write the CSV file.   
+
+Step 5. These `Prefix` arguments are stored in `Model`.
 ![MailingListSequenceDiagram](images/MailingListSequenceDiagram.png)
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `MailingListCommandParser` and `MailingListCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
+Step 6. The user is prompted to pick a name and the download location for their generated CSV file.   
+
+Step 7. The `FilteredList`, `Prefixes` and `Path` are passed to `CsvUtil#modelToCsv`, which will serialize and write the CSV file.  
+
+![MainWindowMailingListActivityDiagram.](images/MainWindowMailingListActivityDiagram.png)  
+
 Step 8. The header row is created based on `Prefix` arguments stored in `Model`, based on a mapping in `CsvUtil`.  
+
 Step 9. Individual rows are generated based on the `Prefix` arguments stored in `Model` and the `FilteredPerson` in `ModelManager`, based on a mapping in `CsvUtil`.  
+
 Step 10. The headers and rows are written to the CSV file that is specified by the user.  
 
-#### Design considerations:
+#### Front end design considerations:
 * Arguments for the command should follow the standard used in other parts of the software.
 * Balancing between simplicity of use when no arguments are provided, and flexibility for users who might want additional information.
 
-<div style="page-break-before: always;"></div>
+#### Back end design considerations:
+* **Option 1 (current choice):** Store serialized CSV data in CommandResult and pass it directly to CsvUtil
+    * Pros: Straightforward.
+    * Cons: Requires large changes to the attributes and purpose of CommandResult. 
+
+* **Option 2 (current choice):** Store data in model and access using logic
+    * Pros: Minimal changes to CommandResult structure are necessary.
+    * Cons: Additional calls to logic and model are needed to get the required information.
+
+
+### Command History feature
+
+#### Implementation
+
+The operation is exposed in `CommandBox` and `CommandHistory`.
+
+The user keystroke will be read in `CommandBox#handleKeyStroke`, which will call the appropriate method in `CommandHistory` to retrieve the previous and next commands. The retrieved commands are passed into `CommandBox#commandTextField` to be displayed.
+
+Given below is an example usage scenario and how the Command History mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. All contacts are displayed by default.
+
+Step 2. The user executes `find n/David t/friend t/football` to search for a matching contact.
+
+Step 3. User wants to retrieve previous command and presses the `UP` key.
+
+Step 4. `CommandBox#handleKeyStroke` reads the `UP` keystroke and calls `CommandHistory#getPreviousCommand`.
+
+Step 5. `CommandHistory` retrieves the previous command and returns it.
+
+Step 6. `CommandBox` displays the previous command in the Command Box.
+
+![CommandHistoryActivityDiagram](images/CommandHistoryActivityDiagram.png)
+
+#### Design considerations:
+
+**Aspect: Implementation of Command History:**
+
+* **Option 1 (current choice):** Generate `CommandHistory` as a Singleton class.
+    * Pros: Ensures that there is only one set of history that is tracked.
+    * Cons: Complicates testing as different versions of history cannot be created.
+
+* **Option 2:** Generate `CommandHistory` as a normal class.
+    * Pros: Makes testing easier as multiple `CommandHistory` objects can be created with different history to test different conditions.
+    * Cons: Possible conflicting history if `CommandHistory` is not updated properly.
+
+### Command Assistant feature
+
+#### Implementation
+
+The operation is exposed in `SystemCommand`, specifically in `SystemCommand#execute`.
+
+The user keystroke will be read in `CommandBox#handleKeyStroke`. The user input will be evaluated by `SystemCommand#execute` to determine the appropriate help message to display.
+
+Given below is an example usage scenario and how the Command Assistant mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. All contacts are displayed by default.
+
+Step 2. The user enters `find ` to search for a matching contact.
+
+Step 3. `CommandBox#handleKeyStroke` reads `find ` input string and calls `SystemCommand#execute`.
+
+Step 4. `SystemCommand` evaluates the user input and returns the appropriate help message.
+
+Step 5. CONNECTIONS will display a help message in `ResultDisplay`.
+
+#### Design considerations:
+
+**Aspect: Implementation of Command Assistant:**
+
+* **Option 1:** Create a `AssistantCommand` class which extends from `Command` to handle the features of `Command Assistant`.
+    * Pros: Simplifies implementation as only an additional subclass needs to be created.
+    * Cons: Creates an additional command that users may be able to utilise, which they are not supposed to.
+
+* **Option 2 (current choice):** Create a new type of command called `SystemCommand` that does not extend from `Command`.
+    * Pros: Prevents potential issues such as users using an additional command which they are not supposed to use.
+    * Cons: Requires additional code to interface with `Logic`, 'MainWindow` and `CommandBox`.
 
 ### [Proposed] Partial data recovery feature
 Allows the user to recover partial data if the data file becomes corrupted. 
