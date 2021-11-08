@@ -36,7 +36,7 @@ public class ExpectedSalary {
     }
 
     /**
-     * Returns true if a given string represents a valid name.
+     * Returns true if a given string is a valid name.
      */
     public static boolean isValidExpectedSalary(String test) {
         try {
