@@ -376,19 +376,42 @@ Imports resident information from the specified csv file which is to be located 
 
 Format: `import CSV_NAME`
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:**<br>
+
 * 8 comma separated values for each row with values in order; <br>
-      `name`, `room`, `phone`, `email`, `vaccStatus`, `faculty`, `lastFetDate`, `lastCollectionDate`
+  `name`, `room`, `phone`, `email`, `vaccStatus`, `faculty`, `lastFetDate`, `lastCollectionDate`
 * The first row will be discarded as column headings
 * `lastFetDate`, `lastCollectionDate` are optional (can be left as empty space)
-* The file format (`.csv`) is not to be included in the `CSV_NAME`
-* Resident lists of all events will be wiped
+* The file format (`.csv`) is not to be included in `CSV_NAME`
+</div>
+
+<div markdown="block" class="alert alert-danger">
+
+**:exclamation: Caution:**<br>
+
+Resident lists of all events will be cleared
+
+</div>
+
+Here's a step by step guide:<br>
+
+1. Create your csv file in the correct format (shown below).
+
+![CSV](images/logic/commands/importcommand/csvFormat.png)
+
+2. Place your csv file in the `data/` folder.
+
+![FileStructure](images/logic/commands/importcommand/filefolder.png)
+
+3. Run `import CSV_NAME`.
+
+![NewResidents](images/logic/commands/importcommand/newresidents.png)
 
 Examples:
 * `import` followed by `safeforhall` attempts to read the file `safeforhall.csv` within the `data/` folder.
 
-Example csv:
-
-![CSV](images/csvFormat.png)
 
 #### Exporting residents' emails : `export`
 
