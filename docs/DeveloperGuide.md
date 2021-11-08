@@ -792,6 +792,27 @@ Within `PrintReportCommandParser#parse`,
 
 [![Sequence diagram of print report](images/report/PrintReportSequenceDiagram.png)](https://ay2122s1-cs2103-t14-3.github.io/tp/images/report/PrintReportSequenceDiagram.png)
 
+### Exporting a monthly job report
+
+#### Implementation
+
+The **Exporting a monthly job report** mechanism is facilitated by `MyCRM`. This job report is generated based of the information from
+<u>jobs completed in this month</u> and <u> received in this month</u> from `UniqueJobList` inside `MyCRM` object. Then `MyCRM` will export
+the job report by printer or as PDF format.
+
+#### Usage
+
+The activity diagram below illustrates how the events of `printReport` command behave when executed by user:
+
+[![Activity diagram of export report](images/report/ExportReportActivityDiagram.png)](https://ay2122s1-cs2103-t14-3.github.io/tp/images/report/ExportReportActivityDiagram.png)
+
+Given below is an example usage scenario and how the mechanism behaves at each step.
+
+[![Sequence diagram of export report parser](images/report/ExportReportParserSequenceDiagram.png)](https://ay2122s1-cs2103-t14-3.github.io/tp/images/report/ExportReportParserSequenceDiagram.png)
+
+[![Sequence diagram of export report](images/report/ExportReportSequenceDiagram.png)](https://ay2122s1-cs2103-t14-3.github.io/tp/images/report/ExportReportSequenceDiagram.png)
+
+The implementation detail of `fillInnerParts` method call  is similar to `printReport`.
 
 --------------------------------------------------------------------------------------------------------------------
 
