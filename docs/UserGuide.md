@@ -578,7 +578,7 @@ With this feature, you will be able to store information about tutors into **Tui
 With this feature, you will be able to import existing files, such as csv and Excel files, into **TuitiONE**, and **TuitiONE** will automatically format them for you in its **GUI**.
 You will also be able to export current data in **TuitiONE** as other file types for compatibility with other applications.
 
-#### Data Analytics
+#### Data analytics
 
 With this feature, you will be able to view statistics on the performance of students, popular lessons, times, and tutors. This allows you to gain better business insights about your centre.
 
