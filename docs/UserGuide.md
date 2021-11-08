@@ -137,8 +137,8 @@ cl/CONTACT_INDEX [e/COVERAGE_EXPIRY_DATE] [t/TAG]…​`
 **:grey_exclamation:**
 A policy should not have less number of payments than the number of commissions, since every commission is tied to one payment!
 </div>
-**Name**:
-* `POLICY_NAME`: Should be unique
+
+**Name** `n/POLICY_NAME`: Should be unique
 
 **Payment structure** `p/`:
 * `PMT_AMOUNT_CENTS`: Payment amount in cents for each payment
