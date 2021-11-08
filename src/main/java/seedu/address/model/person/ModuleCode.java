@@ -53,6 +53,17 @@ public class ModuleCode {
         return Collections.unmodifiableSet(lessonCodes);
     }
 
+    /**
+     * Returns formatted String for use in UI.
+     */
+    public String formattedToString() {
+        if (lessonCodes.isEmpty()) {
+            return value;
+        }
+        return value + " " + lessonCodes.toString();
+
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("[");

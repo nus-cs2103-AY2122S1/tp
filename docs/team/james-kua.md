@@ -5,7 +5,7 @@ title: James' Project Portfolio Page
 
 ### Project: ContHACKS
 
-contHACKS is a desktop app for Teaching Assistants (TAs) to manage contacts and lessons. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+contHACKS is a desktop app for Teaching Assistants (TAs) to manage contacts and lessons. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 12 kLoC.
 
 Given below are my contributions to the project.
 
@@ -24,17 +24,19 @@ Given below are my contributions to the project.
 
 * **Testing**:
   * Wrote tests for all new and enhanced features:
-    ([\#77](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/77),
-     [\#45](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/45))
+    ([\#45](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/45),
+    [\#77](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/77))
+
 
 * **Documentation**:
     * User Guide:
         * Added a table of content with anchor tags for easier navigability to the sections ([\#9](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/9))
         * Added a walk-through section to guide the user on how to use the guide ([\#136](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/136), [\#156](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/156))
-        * Added screenshots for all the commands used in the guide ([\#151](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/151), [\#155](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/155))
+        * Added screenshots for all the commands used in the guide ([\#232](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/232))
         * Did cosmetic tweaks to existing documentation of features `edit`, `editc`, `find`, `findc` to make it more readable ([\#204](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/204))
     * Developer Guide:
-        * Updated UML diagram and documentation details of the UI component ([\#100](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/100)).
+        * Updated UML diagram and documentation details of the UI component ([\#100](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/100))
+        * Update user stories and use cases ([\#247](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/247))
 
 * **Team-Based Tasks**:
   * Refactored AB3 to Conthacks: [\#143](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/143)
