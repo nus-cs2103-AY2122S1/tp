@@ -37,10 +37,7 @@ Given below are my contributions to the project.
 
 **Testing**:
   * Wrote tests for all new and enhanced features:
-    * [#52](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/52)
-    * [#122](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/122)
-    * [#123](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/123)
-    * [#137](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/137)
+    * [#52](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/52), [#122](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/122), [#123](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/123), [#137](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/137)
 
 **Documentation**:
   * User Guide:
