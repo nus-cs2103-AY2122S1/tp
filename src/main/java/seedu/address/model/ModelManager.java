@@ -216,6 +216,10 @@ public class ModelManager implements Model {
         return addressBook.getLastUpdatedDate();
     }
 
+    /**
+     * Sets the lastUpdatedDate field in {@code AddressBook} to the local date time when
+     * the application was initially launched.
+     */
     @Override
     public void setLastUpdatedDate() {
         addressBook.setLastUpdatedDate(new LastUpdatedDate());
