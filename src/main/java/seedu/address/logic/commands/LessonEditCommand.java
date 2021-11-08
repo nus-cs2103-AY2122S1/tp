@@ -248,9 +248,14 @@ public class LessonEditCommand extends UndoableCommand {
         }
     }
 
-
+    /**
+     * Checks if {@code endDate} is not before {@code startDate}.
+     *
+     * @param startDate The start date of the lesson.
+     * @param endDate The end date of the lesson.
+     * @throws CommandException If the end date is before start date.
+     */
     private void validateStartEndDates(Date startDate, Date endDate) throws CommandException {
-        // error if end date is earlier than start date
         if (endDate.isBefore(startDate)) {
             throw new CommandException(MESSAGE_INVALID_DATE_RANGE);
         }
