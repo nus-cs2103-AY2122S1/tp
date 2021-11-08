@@ -263,17 +263,51 @@ The following sequence diagram visually describes the steps above:
 ![InteractionSequenceDiagram](images/InteractionSequenceDiagram.png)
 
 
+###  View feature
+
+#### Implementation
+The view mechanism utilizes the same concept as other commands 
+like `add` and `edit`, but has a few distinct changes.
+
+Given below is an example usage scenario and how the view mechanism
+behaves at each step.
+
+Step 1. The user inputs the command `view 2`
+
+Step 2. The command passes through the `LogicManager`. 
+`LogicManager` creates a `AddressBookParser` which would help to 
+parse and tokenize the command.
+
+Step 3. `AddressBookParser` sees that it's a view command and creates a
+`ViewCommandParser` object.
+
+Step 4. `ViewCommandParser` helps to extract out the tokens and 
+generate a `ViewCommand`.
+
+Step 5. `ViewCommand` helps to call the updateViewedPerson method,
+so that the GUI shows the correct Person.
+
+
+The following sequence diagram visually describes the steps above:
+
+![ViewSequenceDiagram](images/ViewSequenceDiagram.png)
+
+
+
 #### Design considerations:
 
-**Aspect: How interactions is stored:**
+**Aspect: How viewedPerson is stored:**
 
-* **Alternative 1 (current choice):** As a list of interactions in the Person object.
-  * Pros: Easy to implement, intuitive design and navigatability
-  * Cons: Heavy coupling with the person class
+* **Alternative 1 (current choice):** As a FilteredList in the ModelManager.
+  * Pros: Easy to implement, similar logic to filteredPersons, making it easy
+    to understand. Easy to implement future versions in case there is a need
+    to add functionality to view multiple contacts at once.
+  * Cons: Not necessarily a good usage of a FilteredList since there should
+    only be a single contact viewed at once for the current version.
 
-* **Alternative 2:** As a list by itself, containing a reference to the Person it is attached to.
-  * Pros: More isolated from the Person class, so less changes to overall code
-  * Cons: Navigatability is reduced significantly
+* **Alternative 2:** As a single Person instance in the ModelManager.
+  * Pros: More intuitive as there is only a single contact viewed at once currently.
+  * Cons: More rigid and harder to improve upon for future versions.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -458,6 +492,23 @@ Use case ends.
 **Extensions**
 
 * 1a. The input tag formats are incorrect.
+    * 1a1. ComputingConnection shows an error message.
+
+  Use case ends.
+
+**Use case: View a specific contact**
+
+**MSS**
+
+1.  User requests to view a contact
+2.  ComputingConnection shows the contact's details in the app,
+    with details like remarks and interactions.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The input index is invalid.
     * 1a1. ComputingConnection shows an error message.
 
   Use case ends.
