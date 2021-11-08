@@ -26,6 +26,8 @@ import seedu.academydirectory.versioncontrol.objects.Commit;
 public class HistoryCommand extends Command {
     public static final String COMMAND_WORD = "history";
     public static final String MESSAGE_SUCCESS = "Commit history shown";
+    public static final String MESSAGE_FAILED = "Unable to show history. Folder read/write access permission enabled?"
+            + " Corrupted files?";
     public static final String HELP_MESSAGE = "#### [For Advanced Users]: Viewing Commit History: `history`\n"
             + "Shows local commit history.\n"
             + "\n"
@@ -63,10 +65,14 @@ public class HistoryCommand extends Command {
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
-    private List<String> retrieveHistory(VersionedModel model) {
+    private List<String> retrieveHistory(VersionedModel model) throws CommandException {
         Commit headCommit = model.getHeadCommit();
         Commit currLatestCommit = model.fetchCommitByLabel(VersionControlController.CURRENT_LABEL_STRING);
         Commit oldLatestCommit = model.fetchCommitByLabel(VersionControlController.OLD_LABEL_STRING);
+
+        if (currLatestCommit.isEmpty() && oldLatestCommit.isEmpty()) {
+            throw new CommandException(MESSAGE_FAILED);
+        }
 
         Commit lca = currLatestCommit.findLca(oldLatestCommit);
 

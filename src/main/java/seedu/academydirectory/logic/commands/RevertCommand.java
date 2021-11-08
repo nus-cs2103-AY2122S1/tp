@@ -31,7 +31,8 @@ public class RevertCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Successfully reverted Academy"
             + " Directory as requested!";
 
-    public static final String REVERT_REQUEST_REJECTED = "Unable to revert Academy Directory as requested ...";
+    public static final String REVERT_REQUEST_REJECTED = "Unable to revert Academy Directory. Correct hash given? "
+            + "Read/write permissions granted to folder? Corrupted files?";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Reverts Academy Directory to the stage given by "
             + "the five character hash\n"
@@ -49,7 +50,7 @@ public class RevertCommand extends Command {
         try {
             Commit relevantCommit = model.revert(this.fiveDigitHash);
             if (relevantCommit.isEmpty()) {
-                throw new CommandException(REVERT_REQUEST_REJECTED + "Hash value correct (and not current state) ?");
+                throw new CommandException(REVERT_REQUEST_REJECTED);
             }
         } catch (NullPointerException | IOException e) {
             throw new CommandException(REVERT_REQUEST_REJECTED, e);
