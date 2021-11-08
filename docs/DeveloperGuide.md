@@ -199,8 +199,8 @@ The features mentioned are:
    2. [Adding tags to people](#adding-tags-to-people-addt) [diag]
    3. [Adding a remark to a person](#adding-a-remark-to-a-person-remark) [done]
    4. [Editing a person](#editing-a-person-edit) [diag]
-   5. Deleting a person
-   6. [Deleting multiple person](#delete-multiple-persons)
+   5. [Deleting a person](#deleting-a-person-delete) [diag]
+   6. [Deleting multiple person](#delete-multiple-persons) 
    7. Deleting tags from people
    8. Clearing all contacts
 3. Viewing contacts
@@ -349,6 +349,33 @@ The following sequence diagram shows how the EditCommand mechanism works:
 * **Alternative 2:** Edit the original `Person` directly.
     * Pros: It uses less memory and thus may run faster.
     * Cons: If the execution is stopped halfway, then the newly updated person will contain wrong information. It will also be difficult to debug.
+
+### Deleting a person `delete`
+
+#### Implementation
+
+The delete mechanism is facilitated by DeleteCommand and DeleteCommandParser. It allows users to delete a person
+in their contact list by the index number shown in their displayed contact list.
+
+#### Usage
+
+Given below is an example usage scenario of how the DeleteCommand mechanism behaves at each step.
+
+Step 1. The user executes `delete 1` command to delete the first person in the displayed contact list from the displayed contact list.
+
+Step 2. `DeleteCommandParser#parse` will then parse the index provided. A new `DeleteCommand` object will be created after parsing.
+
+Step 4. The command communicates with the `Model` to delete the person from the existing AddressBook.
+
+Step 5. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
+
+The following sequence diagram shows how the DeleteCommand function works:
+
+![UpdatedAddCommandSeqDiagram](images/AddCommandDiagram.png)
+
+The following activity diagram summarizes what happens when a user executes an DeleteCommand:
+
+![UpdatedAddCommand](images/UpdatedAddCommand.png)
 
 ### Adding a remark to people `remark`
 
