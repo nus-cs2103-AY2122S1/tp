@@ -1,0 +1,43 @@
+@startuml
+!include style.puml
+
+Participant ":InsurancePalParser" as InsurancePalParser LOGIC_COLOR
+Participant ":AddCommandParser" as AddCommandParser LOGIC_COLOR
+Participant "<<class>>\nParserUtil" as ParserUtil LOGIC_COLOR
+Participant "aCom:AddCommand" as AddCommand LOGIC_COLOR
+Participant "person:Person" as Person MODEL_COLOR
+
+ -> InsurancePalParser : parseCommand("add ...")
+activate InsurancePalParser LOGIC_COLOR
+create AddCommandParser
+InsurancePalParser -> AddCommandParser
+activate AddCommandParser LOGIC_COLOR
+return
+InsurancePalParser -> AddCommandParser : parse("add ...")
+activate AddCommandParser LOGIC_COLOR
+AddCommandParser -> ParserUtil : parseXYZ(...)
+note right
+XYZ = Name, Phone,
+Email, etc.
+end note
+activate ParserUtil LOGIC_COLOR
+return XYZ
+opt note is present
+    AddCommandParser -> ParserUtil : parseNote(...)
+    activate ParserUtil LOGIC_COLOR
+    return note
+end opt
+create Person
+AddCommandParser -> Person : Person(args)
+activate Person MODEL_COLOR
+return person
+create AddCommand
+AddCommandParser -> AddCommand : AddCommand(person)
+activate AddCommand LOGIC_COLOR
+return aCom
+return aCom
+deactivate AddCommandParser
+<- InsurancePalParser : aCom
+deactivate InsurancePalParser
+
+@enduml

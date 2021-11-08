@@ -1,0 +1,26 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+package Logic {
+class RevenueCommand
+}
+
+
+package Model {
+class Revenue
+class Index
+class Revenue
+}
+
+package Commons {
+class Money
+}
+
+RevenueCommand --> "1" Index
+RevenueCommand --> "1" Revenue
+Revenue --> "1" Money
+
+@enduml

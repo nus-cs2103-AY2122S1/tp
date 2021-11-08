@@ -1,0 +1,10 @@
+@startuml
+!include style.puml
+start
+if () then ([Other client with same name\nalready in InsurancePal])
+    :Reject the addition;
+else ([else])
+    :Add client to InsurnacePal;
+endif
+stop
+@enduml

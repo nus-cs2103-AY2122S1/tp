@@ -5,11 +5,11 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Model <<Rectangle>>{
-Interface ReadOnlyAddressBook <<Interface>>
+Interface ReadOnlyInsurancePal <<Interface>>
 Interface ReadOnlyUserPrefs <<Interface>>
 Interface Model <<Interface>>
-Class AddressBook
-Class ReadOnlyAddressBook
+Class InsurancePal
+Class ReadOnlyInsurancePal
 Class Model
 Class ModelManager
 Class UserPrefs
@@ -18,33 +18,42 @@ Class ReadOnlyUserPrefs
 
 Class UniquePersonList
 Class Person
-Class Address
-Class Email
 Class Name
 Class Phone
+Class Email
+Class Address
+Class Appointment
+Class Revenue
+Class Note
+Class Insurance
 Class Tag
-
+Class Claim
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
+InsurancePal .up.|> ReadOnlyInsurancePal
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
+Model .left.> ReadOnlyInsurancePal
+ModelManager -left-> "1" InsurancePal
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
+InsurancePal *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
 Person *--> Name
 Person *--> Phone
 Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+Person *---> Address
+Person *---> Appointment
+Person *----> Revenue
+Person *----> Note
+Person *-----> "*" Insurance
+Person *-----> "*" Tag
+Person *-----> "*" Claim
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address

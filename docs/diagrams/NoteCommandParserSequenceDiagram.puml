@@ -1,0 +1,45 @@
+@startuml
+!include style.puml
+
+Participant ":InsurancePalParser" as insurancePalParser LOGIC_COLOR_T2
+Participant ":NoteCommandParser" as NoteCommandParser LOGIC_COLOR
+Participant "<<class>>\nParserUtil" as util MODEL_COLOR
+Participant ":Note" as note MODEL_COLOR
+Participant ":NoteCommand" as command LOGIC_COLOR_T4
+
+insurancePalParser -[LOGIC_COLOR_T2]> NoteCommandParser :"1 Has asthma"
+activate insurancePalParser LOGIC_COLOR_T2
+activate NoteCommandParser LOGIC_COLOR
+
+NoteCommandParser -[LOGIC_COLOR]> util :parseIndex;
+activate util MODEL_COLOR
+
+util -[MODEL_COLOR]-> NoteCommandParser :index
+deactivate util
+
+NoteCommandParser -[LOGIC_COLOR]> util :parseNote;
+activate util LOGIC_COLOR_T3
+
+create note
+util -[LOGIC_COLOR_T3]-> note: Note(value)
+activate note MODEL_COLOR
+
+note -[MODEL_COLOR]-> util :newNote
+deactivate note
+
+util -[LOGIC_COLOR_T3]-> NoteCommandParser :newNote
+deactivate util
+
+create command
+NoteCommandParser -[LOGIC_COLOR]> command :NoteCommand(index, newNote)
+activate command LOGIC_COLOR_T4
+
+command -[LOGIC_COLOR_T4]-> NoteCommandParser :NoteCommand
+deactivate command
+
+NoteCommandParser -[LOGIC_COLOR]-> insurancePalParser :NoteCommand
+deactivate NoteCommandParser
+
+deactivate insurancePalParser
+
+@enduml

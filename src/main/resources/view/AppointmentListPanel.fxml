@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+    <Label fx:id="listPanelHeader" styleClass="panel-header" text="Upcoming Appointments" />
+    <ListView fx:id="personListView" VBox.vgrow="ALWAYS" minWidth="150" />
+</VBox>

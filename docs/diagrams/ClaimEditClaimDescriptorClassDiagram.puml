@@ -1,0 +1,20 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR_T4
+skinparam classBackgroundColor LOGIC_COLOR
+
+class Claim
+class EditClaimDescriptor
+class Title
+class Status
+class Description
+
+Claim --> "1" Title
+Claim ---> "1" Description
+Claim ---> "1" Status
+
+EditClaimDescriptor --> "1" Title
+EditClaimDescriptor ---> "0..1" Description
+EditClaimDescriptor ---> "0..1" Status
+@enduml

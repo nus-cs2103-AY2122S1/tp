@@ -1,0 +1,13 @@
+@startuml
+start
+:User enters input;
+:"claim" keyword identified;
+
+:Parse arguments of command;
+:Create ClaimCommand;
+
+:Execute command;
+
+:Save updated model to storage;
+stop
+@enduml

@@ -1,0 +1,50 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+Participant ":InsurancePalParser" as insurancePalParser LOGIC_COLOR
+Participant ":ScheduleCommandParser" as scheduleCommandParser LOGIC_COLOR
+Participant "<<class>>\nParserUtil" as util LOGIC_COLOR
+Participant "s:ScheduleCommand" as command LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+Participant "a:Appointment" as appointment MODEL_COLOR
+end box
+
+insurancePalParser -[LOGIC_COLOR]> scheduleCommandParser :"1 m/04-Aug-2022 17:00"
+activate insurancePalParser LOGIC_COLOR
+activate scheduleCommandParser LOGIC_COLOR
+
+scheduleCommandParser -[LOGIC_COLOR]> util :parseIndex
+activate util LOGIC_COLOR
+
+util -[LOGIC_COLOR]-> scheduleCommandParser :index
+deactivate util
+
+scheduleCommandParser -[LOGIC_COLOR]> util :parseAppointment
+activate util LOGIC_COLOR
+
+create appointment
+util -[LOGIC_COLOR]-> appointment:
+activate appointment MODEL_COLOR
+
+appointment -[MODEL_COLOR]-> util :a
+deactivate appointment
+
+util -[LOGIC_COLOR]-> scheduleCommandParser :a
+deactivate util
+
+create command
+scheduleCommandParser -[LOGIC_COLOR]> command :ScheduleCommand(index, a)
+activate command LOGIC_COLOR
+
+command -[LOGIC_COLOR]-> scheduleCommandParser :s
+deactivate command
+
+scheduleCommandParser -[LOGIC_COLOR]-> insurancePalParser :s
+deactivate scheduleCommandParser
+
+deactivate insurancePalParser
+
+@enduml

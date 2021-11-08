@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+     <VBox fx:id="cardBox" alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="105" minWidth="-Infinity" prefWidth="200.0" HBox.hgrow="ALWAYS">
+         <padding>
+             <Insets bottom="5" left="15" right="5" top="5" />
+         </padding>
+      <HBox>
+         <children>
+            <Pane prefHeight="0.0" prefWidth="0.0" HBox.hgrow="ALWAYS">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Pane>
+            <Label fx:id="status" alignment="CENTER_RIGHT" styleClass="claim-big-label" text="\$status" textAlignment="RIGHT" />
+         </children>
+      </HBox>
+      <Label fx:id="title" styleClass="cell-big-label" text="\$title" wrapText="true" />
+         <Label fx:id="nameToDisplay" styleClass="cell_small_label" text="\$name" wrapText="true" />
+      <Label fx:id="description" styleClass="cell_small_label" text="\$description" wrapText="true" />
+     </VBox>
+</HBox>

@@ -1,0 +1,50 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+Participant ":InsurancePalParser" as insurancePalParser LOGIC_COLOR
+Participant ":RevenueCommandParser" as revenueCommandParser LOGIC_COLOR
+Participant "<<class>>\nParserUtil" as util LOGIC_COLOR
+Participant ":RevenueCommand" as command LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+Participant "revenue:Revenue" as revenue MODEL_COLOR
+end box
+
+insurancePalParser -[LOGIC_COLOR]> revenueCommandParser :"1 r/100.21"
+activate insurancePalParser LOGIC_COLOR
+activate revenueCommandParser LOGIC_COLOR
+
+revenueCommandParser -[LOGIC_COLOR]> util :parseIndex
+activate util LOGIC_COLOR
+
+util -[LOGIC_COLOR]-> revenueCommandParser :index
+deactivate util
+
+revenueCommandParser -[LOGIC_COLOR]> util :parseRevenue
+activate util LOGIC_COLOR
+
+create revenue
+util -[LOGIC_COLOR]-> revenue: Revenue(new Money("100.21"))
+activate revenue MODEL_COLOR
+
+revenue -[MODEL_COLOR]-> util :revenue
+deactivate revenue
+
+util -[LOGIC_COLOR]-> revenueCommandParser :revenue
+deactivate util
+
+create command
+revenueCommandParser -[LOGIC_COLOR]> command :RevenueCommand(index, revenue)
+activate command LOGIC_COLOR
+
+command -[LOGIC_COLOR]-> revenueCommandParser : RevenueCommand
+deactivate command
+
+revenueCommandParser -[LOGIC_COLOR]-> insurancePalParser : RevenueCommand
+deactivate revenueCommandParser
+
+deactivate insurancePalParser
+
+@enduml

@@ -1,0 +1,22 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+package Logic {
+class ScheduleCommand
+}
+
+
+package Model {
+class Appointment
+class Index
+class LocalDateTime
+}
+
+ScheduleCommand --> "1" Index
+ScheduleCommand --> "1" Appointment
+Appointment --> "0..1" LocalDateTime
+
+@enduml
