@@ -38,12 +38,12 @@ Manual Testing was focused mainly on Testing Features and the Graphical User Int
   * [Visual Design](#visual-design)
   * [User Interface Functionality](#user-interface-functionality)
 * [Performance Testing](#performance-testing)
-  * [Visualization with large Academy Directory](#visualization-with-large-academy-directory-)
-  * [Limit test Academy Directory capacity](#limit-test-academy-directory-capacity-)
+  * [Visualization with large Academy Directory](#visualization-with-large-academy-directory-coming-soon)
+  * [Limit test Academy Directory capacity](#limit-test-academy-directory-capacity-coming-soon)
 * [Compatibility Testing](#compatibility-testing)
-  * [Cross-OS Compatibility](#cross-os-compatibility-)
+  * [Cross-OS Compatibility](#cross-os-compatibility-coming-soon)
 * [Portability Testing](#portability-testing)
-  * [Transfer of Academy Directory](#transfer-of-academy-directory-)
+  * [Transfer of Academy Directory](#transfer-of-academy-directory-coming-soon)
 
 
 
@@ -297,7 +297,7 @@ Below are a few test cases which checks for the above. The test cases are by no 
     2. Test cases:
         1. `edit 1 te/@charles`<br>
            Expected: The first student in the list will have their telegram changed to `@charles`. Details of the added student shown in the status message. Result display remains the same. Changes in that student can be viewed immediately in Student Panel List on the left.
-        2. `delete 0 te/@charles`<br>
+        2. `edit 0 te/@charles`<br>
            Expected: No student is edited. Error details shown in the status message. Result display remains the same.
         3. `edit 1 as/@charles`<br>
            Expected: Edit command only works with personal details such as `NAME`(`n/`), `PHONE`(`p/`), `EMAIL`(`e/`) and `TELEGRAM`(`te/`). Assessment (`as/`) can not be edited by this edit command. No student will be edited. Error `Invalid command format!` will be shown alongside with a proper usage of command. Result display remains the same.
