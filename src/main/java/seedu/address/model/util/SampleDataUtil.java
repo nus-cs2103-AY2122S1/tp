@@ -188,7 +188,7 @@ public class SampleDataUtil {
                 getTagSet(),
                 Optional.of(new Interview("2021-07-30, 17:20")),
                 Optional.of(new Notes("She is extremely qualified but just lacks the experience."
-                        + "She could be an asset to the company with under the right guidance."))),
+                        + "She could be an asset to the company under the right guidance."))),
             new Person(new Name("Raze Balakrishnan"), new Phone("82452617"),
                 new Email("raze_b00m_b00m@botmail.com"),
                 new Role("Demolition Expert"),
