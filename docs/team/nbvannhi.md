@@ -47,5 +47,5 @@ Given below are my contributions to the project.
 * **Community**:
     * PRs reviewed (with non-trivial review comments) (PR [\#203](https://git.io/JPAgO), [\#174](https://git.io/JPAg2))
     * Resolved merge conflicts by choice (PR [\#183](https://git.io/JPAgE))
-    * Wrote stub classes and typical data used commonly as test utilities (PR [\#117](https://git.io/JPAgf), [\#130](https://git.io/JPAgI))
+    * Added stub classes and typical data used commonly as test utilities (PR [\#117](https://git.io/JPAgf), [\#130](https://git.io/JPAgI))
     * Reported bugs and suggestions for other teams in the class (see [\#325](https://git.io/JPAgC), [\#327](https://git.io/JPAgn), [\#307](https://git.io/JPAgs))
