@@ -43,13 +43,22 @@ public class AddCommand extends Command {
     private final Person toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an {@code AddCommand} to add the specified {@code Person}.
+     *
+     * @param person Person to be added.
      */
     public AddCommand(Person person) {
         requireNonNull(person);
         toAdd = person;
     }
 
+    /**
+     * Executes the {@code AddCommand} which adds the {@code Person}.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return {@code CommandResult} regarding the status of the {@code AddCommand}.
+     * @throws CommandException If person is already within the contact list.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -62,6 +71,12 @@ public class AddCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
+    /**
+     * Checks if {@code other} is equal to {@code this}.
+     *
+     * @param other the object to check if it is equal to {@code this}.
+     * @return {@code boolean} indicating if it is equal.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

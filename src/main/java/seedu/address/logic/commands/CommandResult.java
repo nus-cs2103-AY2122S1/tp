@@ -23,6 +23,9 @@ public class CommandResult {
 
     /**
      * Constructs a {@code CommandResult} with the specified specialType.
+     *
+     * @param feedbackToUser Message that is shown to user.
+     * @param specialType The type of message.
      */
     public CommandResult (String feedbackToUser, ResultType specialType) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
@@ -31,6 +34,11 @@ public class CommandResult {
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
+     * 
+     * @param feedbackToUser Message that is shown to user.
+     * @param showHelp boolean indicating if user indicated for help.
+     * @param exit boolean indicating if user indicated an exit.
+     * @param exportCsv boolean indicating if user indicating to export contacts to Csv.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean exportCsv) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
@@ -65,18 +73,39 @@ public class CommandResult {
         return feedbackToUser;
     }
 
+    /**
+     * Checks if {@code this} is a {@code ResultType.SHOW_HELP}.
+     *
+     * @return if {@code this} is a {@code ResultType.SHOW_HELP}
+     */
     public boolean isShowHelp() {
         return resultType.equals(ResultType.SHOW_HELP);
     }
 
+    /**
+     * Checks if {@code this} is a {@code ResultType.EXIT}.
+     *
+     * @return if {@code this} is a {@code ResultType.EXIT}
+     */
     public boolean isExit() {
         return resultType.equals(ResultType.EXIT);
     }
 
+    /**
+     * Checks if {@code this} is a {@code ResultType.EXPORT_CSV}.
+     *
+     * @return if {@code this} is a {@code ResultType.EXPORT_CSV}
+     */
     public boolean isChooseFile() {
         return resultType.equals(ResultType.EXPORT_CSV);
     }
 
+    /**
+     * Checks if {@code other} is equal to {@code this}.
+     *
+     * @param other the object to check if it is equal to {@code this}.
+     * @return {@code boolean} indicating if it is equal.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {

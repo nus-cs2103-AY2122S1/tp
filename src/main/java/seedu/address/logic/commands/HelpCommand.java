@@ -46,10 +46,21 @@ public class HelpCommand extends Command {
 
     private final String commandWord;
 
+    /**
+     * Creates a {@code HelpCommand} which returns help for the command provided.
+     *
+     * @param commandWord the command for which help is requested.
+     */
     public HelpCommand(String commandWord) {
         this.commandWord = commandWord;
     }
 
+    /**
+     * Executes the {@code HelpCommand} which provides help messages to user.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return {@code CommandResult} regarding the status of the {@code HelpCommand}.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
 
@@ -112,6 +123,12 @@ public class HelpCommand extends Command {
         }
     }
 
+    /**
+     * Checks if {@code other} is equal to {@code this}.
+     *
+     * @param other the object to check if it is equal to {@code this}.
+     * @return {@code boolean} indicating if it is equal.
+     */
     @Override
     public boolean equals(Object other) {
         // short circuit if same object

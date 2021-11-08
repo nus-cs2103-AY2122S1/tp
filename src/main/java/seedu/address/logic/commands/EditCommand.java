@@ -59,7 +59,7 @@ public class EditCommand extends Command {
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
+     * @param index of the contact in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
     public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
@@ -78,6 +78,14 @@ public class EditCommand extends Command {
         return editPersonDescriptor;
     }
 
+    /**
+     * Executes the {@code EditCommand} which edits the contact at the {@code index}.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return {@code CommandResult} regarding the status of the {@code EditCommand}.
+     * @throws CommandException If invalid indexes are provided,
+     *  if there are duplicate contacts or if there are no changes.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -122,6 +130,12 @@ public class EditCommand extends Command {
                 updatedTags, updatedBirthday, updatedPin);
     }
 
+    /**
+     * Checks if {@code other} is equal to {@code this}.
+     *
+     * @param other the object to check if it is equal to {@code this}.
+     * @return {@code boolean} indicating if it is equal.
+     */
     @Override
     public boolean equals(Object other) {
         // short circuit if same object

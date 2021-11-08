@@ -33,7 +33,7 @@ public class FindAnyPredicate implements Predicate<Person> {
         Tag[] arrayTags = new Tag[person.getTags().toArray().length];
         if (!nameList.isEmpty()) {
             return nameList.stream()
-                    .anyMatch(name -> StringUtil.containsWordIgnoreCase(person.getName().fullName, name.fullName))
+                    .anyMatch(name -> StringUtil.isContainsWordIgnoreCase(person.getName().fullName, name.fullName))
                             || tagList.stream()
                             .anyMatch(tag -> Arrays.stream(person.getTags().toArray(arrayTags))
                                     .anyMatch(personTag -> personTag.compareTag(tag, isCaseSensitive)));

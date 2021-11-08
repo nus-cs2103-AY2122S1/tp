@@ -3,10 +3,10 @@ package seedu.address.logic.commands;
 public class SystemCommand {
 
     /**
-     * Executes help message when user is typing
+     * Executes help message when user is typing.
      *
-     * @param userInput
-     * @return feedback message of the operation result for display
+     * @param userInput input of user.
+     * @return feedback message of the operation result for display.
      */
     public static CommandResult execute(String userInput) {
         String[] parsedInput = userInput.split(" ");

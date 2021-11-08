@@ -33,7 +33,7 @@ public class FindPredicate implements Predicate<Person> {
     public boolean test(Person person) {
         Tag[] arrayTags = new Tag[person.getTags().toArray().length];
         return nameList.stream()
-                .allMatch(name -> StringUtil.containsWordIgnoreCase(person.getName().fullName, name.fullName))
+                .allMatch(name -> StringUtil.isContainsWordIgnoreCase(person.getName().fullName, name.fullName))
                 && tagList.stream()
                 .allMatch(tag -> Arrays.stream(person.getTags().toArray(arrayTags))
                         .anyMatch(personTag-> personTag.compareTag(tag, isCaseSensitive)));
