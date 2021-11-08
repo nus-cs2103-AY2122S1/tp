@@ -51,7 +51,7 @@
                 <Region fx:constant="USE_PREF_SIZE" />
               </minWidth>
             </Label>
-            <StackPane fx:id="studentListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+            <StackPane fx:id="listPanelPlaceholder" VBox.vgrow="ALWAYS"/>
           </VBox>
 
           <VBox VBox.vgrow="ALWAYS" style="-fx-background-color: #303030" spacing="10" prefHeight="100">
@@ -70,7 +70,7 @@
             </StackPane>
           </VBox>
         </SplitPane>
-        <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
+        <StackPane fx:id="statusBarPlaceholder" VBox.vgrow="NEVER" />
       </VBox>
     </Scene>
   </scene>

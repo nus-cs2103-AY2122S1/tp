@@ -33,9 +33,16 @@ public class TaskListPanel extends UiPart<Region> {
     }
 
     /**
+     * Returns the task list region.
+     */
+    public Region getRegion() {
+        return taskListView;
+    }
+
+    /**
      * Custom {@code ListCell} that displays the graphics of a {@code Student} using a {@code StudentCard}.
      */
-    class TaskListViewCell extends ListCell<Task> {
+    static class TaskListViewCell extends ListCell<Task> {
         @Override
         protected void updateItem(Task task, boolean empty) {
             super.updateItem(task, empty);

@@ -2,7 +2,6 @@ package seedu.address.ui;
 
 import java.util.Comparator;
 
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -12,7 +11,7 @@ import javafx.scene.layout.StackPane;
 import seedu.address.model.group.Group;
 
 /**
- * An UI component that displays information of a {@code Group}.
+ * A UI component that displays information of a {@code Group}.
  */
 public class GroupCard extends UiPart<Region> {
 
@@ -51,8 +50,7 @@ public class GroupCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(group.getName().name);
         link.setText("Github: " + group.getGroupGithubLink());
-        memberListPanel = new MemberListPanel(
-                FXCollections.observableArrayList(group.getMembers().studentList));
+        memberListPanel = new MemberListPanel(group.getMembers().studentList);
 
         memberListPanelPlaceholder.getChildren().add(memberListPanel.getRoot());
 

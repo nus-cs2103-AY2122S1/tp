@@ -122,7 +122,7 @@ public class UniqueGroupList implements Iterable<Group> {
             throw new GroupNotFoundException();
         }
 
-        Group updatedGroup = group;
+        Group updatedGroup = group.clone();
         updatedGroup.removeMember(student);
 
         if (!group.isSameGroup(updatedGroup) && contains(updatedGroup)) {

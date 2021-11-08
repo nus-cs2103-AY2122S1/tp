@@ -1,8 +1,6 @@
 package seedu.address.ui;
 
-import static seedu.address.model.Model.DisplayType.GROUPS;
 import static seedu.address.model.Model.DisplayType.STUDENTS;
-import static seedu.address.model.Model.DisplayType.TASKS;
 
 import java.util.logging.Logger;
 
@@ -23,6 +21,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Model;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -41,9 +40,10 @@ public class MainWindow extends UiPart<Stage> {
     private final Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private StudentListPanel studentListPanel;
-    private TaskListPanel taskListPanel;
-    private GroupListPanel groupListPanel;
+    private final StudentListPanel studentListPanel;
+    private final TaskListPanel taskListPanel;
+    private final GroupListPanel groupListPanel;
+    private Model.DisplayType currentDisplay;
     private final HelpWindow helpWindow;
 
     @FXML
@@ -53,7 +53,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane studentListPanelPlaceholder;
+    private StackPane listPanelPlaceholder;
 
     @FXML
     private ScrollPane terminalScrollPane;
@@ -62,7 +62,7 @@ public class MainWindow extends UiPart<Stage> {
     private VBox terminalContainer;
 
     @FXML
-    private StackPane statusbarPlaceholder;
+    private StackPane statusBarPlaceholder;
 
     @FXML
     private Label listName;
@@ -83,6 +83,12 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        studentListPanel = new StudentListPanel(logic.getFilteredStudentList());
+        groupListPanel = new GroupListPanel(logic.getFilteredGroupList());
+        taskListPanel = new TaskListPanel(logic.getFilteredTaskList());
+        listPanelPlaceholder.getChildren().add(groupListPanel.getRegion());
+        listPanelPlaceholder.getChildren().add(taskListPanel.getRegion());
+        listPanelPlaceholder.getChildren().add(studentListPanel.getRegion());
     }
 
     public Stage getPrimaryStage() {
@@ -127,31 +133,43 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        studentListPanel = new StudentListPanel(logic.getFilteredStudentList());
-        studentListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
+        currentDisplay = STUDENTS;
 
         listName.setText(STUDENTS_LIST_NAME);
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
-        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
+        statusBarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
+    /**
+     * Update the data lists.
+     */
     void updateInnerParts() {
-        if (logic.getDisplayType().equals(STUDENTS)) {
-            studentListPanel = new StudentListPanel(logic.getFilteredStudentList());
-            studentListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
-            listName.setText(STUDENTS_LIST_NAME);
-        } else if (logic.getDisplayType().equals(TASKS)) {
-            taskListPanel = new TaskListPanel(logic.getFilteredTaskList());
-            studentListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
-            listName.setText(TASKS_LIST_NAME);
-        } else if (logic.getDisplayType().equals(GROUPS)) {
-            groupListPanel = new GroupListPanel(logic.getFilteredGroupList());
-            studentListPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
-            listName.setText(GROUPS_LIST_NAME);
+        Model.DisplayType type = logic.getDisplayType();
+        if (currentDisplay != type) {
+            switch (type) {
+            case STUDENTS:
+                listPanelPlaceholder.getChildren().remove(studentListPanel.getRegion());
+                listPanelPlaceholder.getChildren().add(studentListPanel.getRegion());
+                listName.setText(STUDENTS_LIST_NAME);
+                break;
+            case GROUPS:
+                listPanelPlaceholder.getChildren().remove(groupListPanel.getRegion());
+                listPanelPlaceholder.getChildren().add(groupListPanel.getRegion());
+                listName.setText(GROUPS_LIST_NAME);
+                break;
+            case TASKS:
+                listPanelPlaceholder.getChildren().remove(taskListPanel.getRegion());
+                listPanelPlaceholder.getChildren().add(taskListPanel.getRegion());
+                listName.setText(TASKS_LIST_NAME);
+                break;
+            default:
+                break;
+            }
+            currentDisplay = type;
         }
     }
 
@@ -212,13 +230,12 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
-            }
-
-            if (commandResult.isExit()) {
+            } else if (commandResult.isExit()) {
                 handleExit();
+            } else {
+                updateInnerParts();
             }
 
-            updateInnerParts();
             terminalContainer.getChildren().add(
                     new TerminalBox(commandText, commandResult.getFeedbackToUser()));
             return commandResult;

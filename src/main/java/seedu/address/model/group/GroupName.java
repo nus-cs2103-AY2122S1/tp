@@ -37,7 +37,7 @@ public class GroupName {
     }
 
     public boolean isNull () {
-        return name == null ? true : false;
+        return name == null;
     }
 
     /**

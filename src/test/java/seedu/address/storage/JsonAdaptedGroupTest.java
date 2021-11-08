@@ -32,7 +32,7 @@ public class JsonAdaptedGroupTest {
     private static final List<JsonAdaptedTag> VALID_TAGS = VALID_TAGS_SET.stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
-    private static final ArrayList<Student> VALID_MEMBER_ARRAY = GROUP1.getMembers().studentList;
+    private static final ArrayList<Student> VALID_MEMBER_ARRAY = new ArrayList<>(GROUP1.getMembers().studentList);
     private static final ArrayList<JsonAdaptedStudent> VALID_MEMBERS = new ArrayList<>(VALID_MEMBER_ARRAY.stream()
             .map(JsonAdaptedStudent::new)
             .collect(Collectors.toList()));

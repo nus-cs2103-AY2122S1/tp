@@ -5,7 +5,7 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Task <<Rectangle>> {
-abstract Class Task
+abstract Class "{abstract}\nTask" as Task
 Class TaskName
 Class Description
 Class TaskDate

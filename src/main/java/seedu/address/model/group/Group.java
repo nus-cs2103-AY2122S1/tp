@@ -35,22 +35,9 @@ public class Group {
     public Group(GroupName name, Members members, LinkYear year, RepoName repoName, Set<Tag> tags) {
         requireNonNull(name);
         this.name = name;
-        if (members != null) {
-            this.members = members;
-        } else {
-            this.members = new Members();
-        }
-        if (year != null) {
-            this.year = year;
-        } else {
-            this.year = new LinkYear();
-        }
-        if (repoName != null) {
-            this.repoName = repoName;
-        } else {
-            this.repoName = new RepoName();
-        }
-
+        this.members = Objects.requireNonNullElseGet(members, Members::new);
+        this.year = Objects.requireNonNullElseGet(year, LinkYear::new);
+        this.repoName = Objects.requireNonNullElseGet(repoName, RepoName::new);
         this.tags.addAll(tags);
     }
 
@@ -58,12 +45,7 @@ public class Group {
      * Constructor for a new Group object given only name and tags
      */
     public Group(GroupName name, Set<Tag> tags) {
-        requireAllNonNull(name);
-        this.name = name;
-        this.members = new Members();
-        this.tags.addAll(tags);
-        this.year = new LinkYear();
-        this.repoName = new RepoName();
+        this(name, new Members(), new LinkYear(), new RepoName(), tags);
     }
 
     public GroupName getName() {
@@ -113,7 +95,7 @@ public class Group {
     }
 
     /**
-     * Returns the formatted Github link
+     * Returns the formatted GitHub link
      */
     public String getGroupGithubLink() {
         if (!year.isNull() && !repoName.isNull()) {
@@ -122,20 +104,6 @@ public class Group {
             return "-";
         }
     }
-
-    /**
-     * Returns the formatted Github link with given inputs
-     * @param year A valid year to parse
-     * @param repoName A valid repoName to parse
-     */
-    public String getGroupGithubLink(LinkYear year, RepoName repoName) {
-        if (!year.isNull() && !repoName.isNull()) {
-            return String.format(new GroupGithub(year, repoName).toString(), getName());
-        } else {
-            return "-";
-        }
-    }
-
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -192,7 +160,7 @@ public class Group {
                 .append("; Members: ")
                 .append(getMembers())
                 .append("; Github: ")
-                .append(getGroupGithubLink());;
+                .append(getGroupGithubLink());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
@@ -201,6 +169,15 @@ public class Group {
         }
 
         return builder.toString();
+    }
+
+    /**
+     * Makes a shallow copy of a group.
+     *
+     * @return a cloned Group with the exact same data fields as the original.
+     */
+    public Group clone() {
+        return new Group(name, new Members(getMembersList()), year, repoName, new HashSet<>(tags));
     }
 
     /**
