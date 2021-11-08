@@ -20,7 +20,6 @@ import tutoraid.model.lesson.Lesson;
 import tutoraid.model.lesson.exceptions.DuplicateStudentInLessonException;
 import tutoraid.model.student.InitialStudent;
 import tutoraid.model.student.Student;
-import tutoraid.model.student.exceptions.DuplicateStudentException;
 
 /**
  * An Immutable StudentBook that is serializable to JSON format.
