@@ -28,9 +28,15 @@ public class FindStudentCommandParser implements Parser<FindStudentCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindStudentCommand.MESSAGE_USAGE));
         }
 
-        String[] nameKeywords = trimmedArgs.split("\\s+");
+        String[] nameKeywords = trimmedArgs.split("\\s+");;
+        String[] filteredKeywords = Arrays.stream(nameKeywords).filter(x -> !x.isBlank()).toArray(String[]::new);
 
-        return new FindStudentCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        if (filteredKeywords.length == 0) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindStudentCommand.MESSAGE_USAGE));
+        }
+
+        return new FindStudentCommand(new NameContainsKeywordsPredicate(Arrays.asList(filteredKeywords)));
     }
 
 }
