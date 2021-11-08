@@ -347,7 +347,7 @@ Examples:
 
 #### Sorting residents : `sort`
 
-<div markdown="span" class="alert alert-danger"> :warning: **Warning:** The `sort` command cannot be undone!
+<div markdown="span" class="alert alert-primary"> :bulb: **Tip:** To undo the `sort` command, simply run `view`.
 </div>
 
 Sorts the residents according to specified fields in ascending or descending order
@@ -608,7 +608,7 @@ Examples:
 
 #### Sorting events : `sort`
 
-<div markdown="span" class="alert alert-danger"> :warning: **Warning:** The `sort` command cannot be undone!
+<div markdown="span" class="alert alert-primary"> :bulb: **Tip:** To undo the `sort` command, simply run `view`.
 </div>
 
 Sorts the events according to specified fields in ascending or descending order.
