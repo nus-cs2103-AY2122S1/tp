@@ -1,6 +1,13 @@
 package dash.logic.commands;
 
-import static dash.logic.parser.CliSyntax.*;
+import static dash.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static dash.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static dash.logic.parser.CliSyntax.PREFIX_NAME;
+import static dash.logic.parser.CliSyntax.PREFIX_PERSON;
+import static dash.logic.parser.CliSyntax.PREFIX_PHONE;
+import static dash.logic.parser.CliSyntax.PREFIX_TAG;
+import static dash.logic.parser.CliSyntax.PREFIX_TASK_DATE;
+import static dash.logic.parser.CliSyntax.PREFIX_TASK_DESCRIPTION;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

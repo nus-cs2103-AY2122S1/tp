@@ -97,7 +97,7 @@ public class TaskListTest {
         taskList.add(uncompletedTask);
         taskList.add(completedTask);
 
-        assertNotEquals(sortedTask.getObservableTaskList(),taskList.getObservableTaskList());
+        assertNotEquals(sortedTask.getObservableTaskList(), taskList.getObservableTaskList());
     }
 
     @Test
@@ -127,16 +127,20 @@ public class TaskListTest {
         taskList.add(taskWithDate);
         taskList.add(taskWithoutDate);
 
-        assertNotEquals(sortedTask.getObservableTaskList(),taskList.getObservableTaskList());
+        assertNotEquals(sortedTask.getObservableTaskList(), taskList.getObservableTaskList());
 
     }
 
     @Test
     public void sort_differentDateTimeTasks_returnsTrue() {
-        Task taskFirstPosition = new TaskBuilder().withTaskDescription("Task").withTaskDate("21/10/2020, 1900").build();
-        Task taskSecondPosition = new TaskBuilder().withTaskDescription("Task").withTaskDate("23/10/2020, 2000").build();
-        Task taskThirdPosition = new TaskBuilder().withTaskDescription("Task").withTaskDate("24/10/2020, 1000").build();
-        Task taskFourthPosition = new TaskBuilder().withTaskDescription("Task").withTaskDate("30/11/2020, 1000").build();
+        Task taskFirstPosition = new TaskBuilder().withTaskDescription("Task")
+                .withTaskDate("21/10/2020, 1900").build();
+        Task taskSecondPosition = new TaskBuilder().withTaskDescription("Task")
+                .withTaskDate("23/10/2020, 2000").build();
+        Task taskThirdPosition = new TaskBuilder().withTaskDescription("Task")
+                .withTaskDate("24/10/2020, 1000").build();
+        Task taskFourthPosition = new TaskBuilder().withTaskDescription("Task")
+                .withTaskDate("30/11/2020, 1000").build();
 
         TaskList sortedTask = new TaskList();
         sortedTask.add(taskFirstPosition);
@@ -155,10 +159,14 @@ public class TaskListTest {
 
     @Test
     public void sort_differentDateTimeTasks_returnsFalse() {
-        Task taskFirstPosition = new TaskBuilder().withTaskDescription("Task").withTaskDate("21/10/2020, 1900").build();
-        Task taskSecondPosition = new TaskBuilder().withTaskDescription("Task").withTaskDate("23/10/2020, 2000").build();
-        Task taskThirdPosition = new TaskBuilder().withTaskDescription("Task").withTaskDate("24/10/2020, 1000").build();
-        Task taskFourthPosition = new TaskBuilder().withTaskDescription("Task").withTaskDate("30/11/2020, 1000").build();
+        Task taskFirstPosition = new TaskBuilder().withTaskDescription("Task")
+                .withTaskDate("21/10/2020, 1900").build();
+        Task taskSecondPosition = new TaskBuilder().withTaskDescription("Task")
+                .withTaskDate("23/10/2020, 2000").build();
+        Task taskThirdPosition = new TaskBuilder().withTaskDescription("Task")
+                .withTaskDate("24/10/2020, 1000").build();
+        Task taskFourthPosition = new TaskBuilder().withTaskDescription("Task")
+                .withTaskDate("30/11/2020, 1000").build();
 
         TaskList sortedTask = new TaskList();
         sortedTask.add(taskFirstPosition);
@@ -171,11 +179,11 @@ public class TaskListTest {
         taskList.add(taskSecondPosition);
         taskList.add(taskFirstPosition);
 
-        assertNotEquals(sortedTask.getObservableTaskList(),taskList.getObservableTaskList());
+        assertNotEquals(sortedTask.getObservableTaskList(), taskList.getObservableTaskList());
     }
 
     @Test
-    public void delete_CompletedTasks_returnsTrue() {
+    public void delete_completedTasks_returnsTrue() {
         Task completedTask = new TaskBuilder().withTaskDescription("Task").withCompletionStatus(true).build();
         TaskList copyTaskList = new TaskList();
         copyTaskList.add(completedTask);
@@ -186,24 +194,32 @@ public class TaskListTest {
 
     @Test
     public void getIndexToEdit_returnsTrue() {
-        Task taskFirstPosition = new TaskBuilder().withTaskDescription("Task").withTaskDate("21/10/2020, 1900").build();
-        Task taskSecondPosition = new TaskBuilder().withTaskDescription("Task").withTaskDate("23/10/2020, 2000").build();
-        Task taskThirdPosition = new TaskBuilder().withTaskDescription("Task").withTaskDate("24/10/2020, 1000").build();
-        Task taskFourthPosition = new TaskBuilder().withTaskDescription("Task").withTaskDate("30/11/2020, 1000").build();
+        Task taskFirstPosition = new TaskBuilder().withTaskDescription("Task")
+                .withTaskDate("21/10/2020, 1900").build();
+        Task taskSecondPosition = new TaskBuilder().withTaskDescription("Task")
+                .withTaskDate("23/10/2020, 2000").build();
+        Task taskThirdPosition = new TaskBuilder().withTaskDescription("Task")
+                .withTaskDate("24/10/2020, 1000").build();
+        Task taskFourthPosition = new TaskBuilder().withTaskDescription("Task")
+                .withTaskDate("30/11/2020, 1000").build();
         taskList.add(taskFourthPosition);
         taskList.add(taskThirdPosition);
         taskList.add(taskThirdPosition);
         taskList.add(taskSecondPosition);
         taskList.add(taskFirstPosition);
 
-        assertEquals(4, taskList.getIndexToEdit(3, taskThirdPosition, taskList.getObservableTaskList()));
-        assertEquals(2, taskList.getIndexToEdit(2, taskThirdPosition, taskList.getObservableTaskList()));
+        assertEquals(4, taskList.getIndexToEdit(3, taskThirdPosition,
+                taskList.getObservableTaskList()));
+        assertEquals(2, taskList.getIndexToEdit(2, taskThirdPosition,
+                taskList.getObservableTaskList()));
     }
 
     @Test
     public void replace_personToBeReplaced_returnsTrue() {
-        Task taskWithAlice = new TaskBuilder().withTaskDescription("Task").withPeople(TypicalPersons.ALICE).build();
-        Task taskWithAmy = new TaskBuilder().withTaskDescription("Task").withPeople(TypicalPersons.AMY).build();
+        Task taskWithAlice = new TaskBuilder().withTaskDescription("Task")
+                .withPeople(TypicalPersons.ALICE).build();
+        Task taskWithAmy = new TaskBuilder().withTaskDescription("Task")
+                .withPeople(TypicalPersons.AMY).build();
         TaskList taskListWithAlice = new TaskList();
         taskListWithAlice.add(taskWithAlice);
         taskList.add(taskWithAmy);
@@ -214,7 +230,8 @@ public class TaskListTest {
 
     @Test
     public void delete_personToBeDeleted_returnsTrue() {
-        Task taskWithAlice = new TaskBuilder().withTaskDescription("Task").withPeople(TypicalPersons.ALICE).build();
+        Task taskWithAlice = new TaskBuilder().withTaskDescription("Task")
+                .withPeople(TypicalPersons.ALICE).build();
         Task taskWithoutAlice = new TaskBuilder().withTaskDescription("Task").build();
         TaskList taskListWithoutAlice = new TaskList();
         taskListWithoutAlice.add(taskWithoutAlice);

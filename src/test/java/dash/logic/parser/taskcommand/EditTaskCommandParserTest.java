@@ -14,7 +14,6 @@ import dash.model.person.Person;
 import dash.model.tag.Tag;
 import dash.model.task.TaskDescription;
 import dash.testutil.EditTaskDescriptorBuilder;
-import dash.testutil.PersonBuilder;
 import dash.testutil.TypicalIndexes;
 import dash.testutil.TypicalPersons;
 import javafx.collections.FXCollections;

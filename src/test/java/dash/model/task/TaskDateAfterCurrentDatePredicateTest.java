@@ -12,10 +12,10 @@ import dash.testutil.TaskBuilder;
 
 public class TaskDateAfterCurrentDatePredicateTest {
 
-    TaskDateAfterCurrentDatePredicate predicate = new TaskDateAfterCurrentDatePredicate();
+    private final TaskDateAfterCurrentDatePredicate predicate = new TaskDateAfterCurrentDatePredicate();
 
     @Test
-    public void test_TaskDateAfterCurrentDatePredicate_returnsTrue() {
+    public void test_taskDateAfterCurrentDatePredicate_returnsTrue() {
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate nextDay = LocalDate.now().plusDays(1);
 
@@ -27,7 +27,7 @@ public class TaskDateAfterCurrentDatePredicateTest {
     }
 
     @Test
-    public void test_TaskDateAfterCurrentDatePredicate_returnsFalse() {
+    public void test_taskDateAfterCurrentDatePredicate_returnsFalse() {
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate nextDay = LocalDate.now().plusDays(-1);
 
