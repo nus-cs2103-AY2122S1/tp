@@ -74,14 +74,14 @@ public class MainApp extends Application {
      * or an empty SportsPA will be used instead if errors occur when reading {@code storage}'s SportsPA.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlySportsPa> addressBookOptional;
+        Optional<ReadOnlySportsPa> sportsPaOptional;
         ReadOnlySportsPa initialData;
         try {
-            addressBookOptional = storage.readSportsPa();
-            if (!addressBookOptional.isPresent()) {
+            sportsPaOptional = storage.readSportsPa();
+            if (!sportsPaOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample SportsPA");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = sportsPaOptional.orElseGet(SampleDataUtil::getSampleSportsPa);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty SportsPA");
             initialData = new SportsPa();
@@ -173,7 +173,7 @@ public class MainApp extends Application {
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Address Book ] =============================");
+        logger.info("============================ [ Stopping SportsPA ] =============================");
         try {
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {

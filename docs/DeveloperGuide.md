@@ -78,7 +78,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 <div markdown="span" class="alert alert-primary">
 
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in
-the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML
+the [diagrams](https://github.com/AY2122S1-CS2103T-W12-1/tp/tree/master/docs/diagrams) folder. Refer to the [_PlantUML
 Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit
 diagrams.
 </div>
@@ -240,7 +240,7 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -330,7 +330,7 @@ likely to be repeated, we decided that it was sufficient to allow users to creat
 The split feature splits members into the facilities based on its capacity and members' availabilities. The <kbd>split</kbd> command only accepts **numbers 1-7** as a preamble e.g., <kbd>split 6</kbd> is valid and splits members on Saturday.
 #### Implementation
 
-The split mechanism is facilitated by `ModelManager` and `SportsPa`. <br>`ModelManager` stores a list of
+The split mechanism is facilitated by `ModelManager` and `SportsPa`. <br><br>`ModelManager` stores a list of
 filtered members as `filteredMembers`. Each `Member` in the list has an `Availability`, which is implemented internally as a `List<DayOfWeek>`.
 <br>
 `SportsPa` stores a list of all facilities in `UniqueFacilityList` as `facilities`. Each `Facility` in the list has an `AllocationMap`, which is implemented internally as an `EnumMap<DayOfWeek, List<Member>>`. This `EnumMap` is initialized
@@ -413,7 +413,7 @@ The unmark attendance feature unmarks the attendance of the members at the speci
 
 #### Implementation
 
-The proposed mark/unmark attendance mechanism is facilitated by `ModelManager`. The `ModelManager` stores a list of filtered members
+The mark/unmark attendance mechanism is facilitated by `ModelManager`. The `ModelManager` stores a list of filtered members
 as `filteredMembers`. Each `Member` in the list internally stores `totalAttendance` and `todayAttendance`
 which will be updated accordingly when the attendance of that `Member` is marked or unmarked.
 
@@ -423,6 +423,7 @@ which will be updated accordingly when the attendance of that `Member` is marked
 as absent.
 * `ModelManager#markOneMemberAttendance(Member)` — Marks attendance of specified member.
 * `ModelManager#unmarkMembersAttendance(Member)` — Unmarks attendance of specified member.
+* `ModelManager#isWithinListIndex(List<Index>)` — Checks if given indices are valid.
   
 Additionally, `Member` implements the following operations:
 * `Member#setPresent()` — Sets `todayAttendance` as present and increments `totalAttendance`
@@ -437,10 +438,10 @@ by executing the `addm` command. Each `Member` in the `filteredMembers` list wil
 ![MarkObjectDiagram](images/MarkObjectDiagram_InitialState.png)
 
 
-Step 2. The user executes <kbd>mark 1 2</kbd> command to mark the members at index 1 and 2 in the filtered list as present. The <kbd>mark</kbd> command
-calls `ModelManager#markMembersAttendance(List<Index>)`. This then calls `ModelManager#markOneMemberAttendance(Member)` to increment `todayAttendance`
-and `totalAttendance` of the `Member` at the 1st and 2nd index in the list by calling `Member#setPresent()` for each `Member`. The newly edited 
-newly edited`Member`s with the updated attendance are now referenced by `ModelManager`.
+Step 2. The user executes <kbd>mark 1 2</kbd> command to mark the members at index 1 and 2 in the filtered list as present. The <kbd>mark</kbd> command 
+first checks if the given indices 1 and 2 are within the displayed list of members via the `ModelManager#isWithinListIndex(List<Index>)`. Then
+if all indices are valid,`ModelManager#markMembersAttendance(List<Index>)` is then called. This then calls `ModelManager#markOneMemberAttendance(Member)` to increment `todayAttendance`
+and `totalAttendance` of the `Member` at the 1st and 2nd index in the list by calling `Member#setPresent()` for each `Member`. The newly edited`Member`s with the updated attendance are now referenced by `ModelManager`.
 
 ![MarkObjectDiagramModified](images/MarkObjectDiagramModified_FinalState.png)
 
@@ -451,6 +452,10 @@ The following sequence diagram shows how the mark attendance operation works.
 <div markdown="span" class="alert alert-info">:information_source: **Note:** 
 The lifeline for `MarkCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
+
+The following activity diagram summarizes what happens when a user executes the `import` command:
+
+<img src="images/SplitActivityDiagram.png" width="250" />
 
 The unmark command does the opposite — it calls the `ModelManager#unmarkMembersAttendance(List<Index>)`, which then
 calls the `ModelManager#unmarkMembersAttendance(Member)` which decrements the `totalAttendance` and `todayAttendance` of the `Member` 
@@ -520,9 +525,80 @@ The following activity diagram summarizes what happens when a user enters and ex
 * **Alternative 1 (current choice):** The find member command can search for members with multiple attributes.
     * Pros: Allows users to find members in a more precise manner e.g. Users can find members who are available on Monday and are EXCO members.
     * Cons: More complex implementation due to parsing multiple prefixes and chaining predicates, thus this alternative is more prone to bugs.
-* ** Alternative 2: The find member command can search for members with only one attribute.
+* **Alternative 2**: The find member command can search for members with only one attribute.
     * Pros: Simpler to parse a single prefix and thus less prone to bugs
     * Cons: Compromising user experience as finding a member with only one attribute may generate a large list if there are many matching members.
+
+### Import members feature
+
+#### Implementation
+
+The import member mechanism is facilitated by `ModelManager` and `SportsPa`. `ModelManager` has access to SportsPA's
+data from the `SportsPa` object, from which member data will be read from when the `import` command is requested by the user.
+
+**Before going further, here are some terms used that you should take note of:**
+* "invalid import" in this context refers to an imported member having the same name as an 
+existing member AND the same phone number as another existing member.
+* "valid import" in this context refers to an imported member not having the same name as an
+  existing member AND the same phone number as another existing member.
+
+`ModelManager` implements the following relevant operations:
+* `ModelManager#isValidImport(Member)` — Checks if the member being imported is a valid import.
+* `ModelManager#hasMember(Member)` — Returns true if a member with the same name or phone as the given member exists in SportsPA.
+* `ModelManager#setMember(Member target, Member editedMember)` — Replaces the target member in the list with an edited member.
+
+Given below is an example usage scenario and how the import mechanism behaves.
+
+Step 1. The user launches the application for the first time. The user then executes the command `addm n/Bob p/12345678`,
+which adds a member called Bob with a phone number 12345678 into the member list.
+
+![ImportStep1ObjectDiagram](images/ImportStep1ObjectDiagram.png)
+
+Step 2. The user then realises he has many more members to add and wants to use the `import` command. He prepares a CSV file
+called `myFile.csv` to import the members from. 
+
+![CSVFileScreenShot](images/ImportImplementationCsv.png)
+
+Step 3. The user executes the command `import myFile.csv` to import the members from the CSV file. The `import` command first 
+parses the CSV file using a private method `ImportCommand#parseCsv()`, which returns a list of `Member` objects to be imported.
+
+After which, the command iterates through the list of `Member` objects. Each iteration goes as such:
+
+I. A check is done to see if each `Member` is a valid import by calling `ModelManager#isValidImport(Member)`. If it is a
+valid import, go to the next step. Else, the current iteration is skipped and a list of skipped members is kept and will be
+shown to the user via the GUI.<br>
+
+In this case, both `Member` objects are valid imports and can be imported.
+
+II. Then, `ModelManager#hasMember(Member)` is called to check if there are any members in SportsPA with the same name 
+or phone as the member being imported. If there is such a member in SportsPA, Then the existing member details in SportsPA
+will be updated by the imported member details by calling `ModelManager#setMember(Member target, Member editedMember)`. 
+Else, the imported member is simply added into SportsPA.<br>
+    
+In this case, there is 1 member being imported named Bob while there already exists a member called Bob in SportsPA.
+So, the existing member, Bob's details will be updated to the details from the CSV file.
+As for Amy, the details would be added into SportsPA.
+
+![ImportStep3ObjectDiagram](images/ImportStep3ObjectDiagram.png)
+
+The following sequence diagram shows how the import command works.
+
+![ImportSequenceDiagram](images/ImportSequenceDiagram.png)
+
+The following activity diagram summarizes what happens when a user executes the `import` command:
+
+<img src="images/ImportActivityDiagram.png" width="250" />
+
+#### Design Considerations:
+
+**Aspect: how to deal with invalid imports:**
+* **Alternative 1 (current choice):** Skip the invalid imports and notify the user of the invalid imports.
+  * Pros: Easy to implement and users will be able to know which imports they need to rectify.
+  * Cons: Might not be the desired interaction users want.
+
+* **Alternative 2:** Treat the command as an invalid command.
+  * Pros: Easy to implement
+  * Cons: User might want to import the valid imports and the invalid imports might just be an error on their part.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -838,6 +914,12 @@ This use case is similar to that of <span style="text-decoration: underline">mar
     * 1b1. SportsPA shows an error message
 
       Use case ends.
+
+* 1c. There are some imported members that have the same name or same phone
+
+    * 1c1. SportsPA updates the details of those members using data from the CSV file
+
+      Use case ends.
     
 **Use case: UC12 - Clear all entries in member list**
 
@@ -1111,7 +1193,7 @@ This use case is similar to that of <span style="text-decoration: underline">mar
 
 ### Non-Functional Requirements
 
-1. Should work on any mainstream OS as long as it has Java 11 or above installed
+1. Should work on any *mainstream OS* as long as it has Java 11 or above installed
 2. Should be able to hold up to 1000 entries (members and facilities) without a noticeable sluggishness in performance
    for typical usage
 3. Should be able to process and execute user commands within 3 seconds
@@ -1124,11 +1206,11 @@ This use case is similar to that of <span style="text-decoration: underline">mar
 * **Graphical User Interface (GUI)**: A user interface that includes graphical representation like buttons and icons for
   users to interact with
 * **Command Line Interface (CLI)**: A text-based user interface that the user interacts with by typing in commands
-* **JSON** : JSON (JavaScript Object Notation) is a lightweight data-interchange format.
+* **JSON** : JSON (JavaScript Object Notation) is a lightweight data-interchange format
 * **Group size regulations**: Maximum allowable group size for sporting activities as specified by Covid-19 regulations
 * **Fast typists**: Types faster than 40wpm (words per minute)
 * **Alias**: A shortcut name for any command in SportsPA
-* **CCA**: In Singapore, a co-curricular activity (CCA), is a non-academic activity that all students must undertake as part of their education
+* **CCA**: In Singapore, a co-curricular activity (CCA), is a non-academic activity that students take part in.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1147,7 +1229,8 @@ testers are expected to do more *exploratory* testing.
 
     1. Download the jar file and copy into an empty folder
 
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be
+    1. Double-click the jar file 
+       Expected: Shows the GUI with a set of sample contacts. The window size may not be
        optimum.
 
 2. Saving window preferences

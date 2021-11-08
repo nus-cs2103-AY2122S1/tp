@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -25,7 +27,7 @@ public class ImportCommandTest {
     private final Model model = new ModelManager(getTypicalSportsPa(), new UserPrefs());
 
     @Test
-    public void execute_personNotInSportsPa_listOfPersonAddedWithNoReplacementNoSkip() {
+    public void execute_memberNotInSportsPa_listOfMemberAddedWithNoReplacementNoSkip() {
         String testFilePath = "src/test/data/ImportCommandTest/SameMemberNotInSportsPa.csv";
         Model expectedModel = new ModelManager(model.getSportsPa(), new UserPrefs());
         expectedModel.addMember(HOON);
@@ -35,8 +37,8 @@ public class ImportCommandTest {
     }
 
     @Test
-    public void execute_personWithSameNameInSportsPa_listOfPersonAddedWithReplacementNoSkip() {
-        String testFilePath = "src/test/data/ImportCommandTest/PersonWithSameNameInSportsPa.csv";
+    public void execute_memberWithSameNameInSportsPa_listOfMemberAddedWithReplacementNoSkip() {
+        String testFilePath = "src/test/data/ImportCommandTest/MemberWithSameNameInSportsPa.csv";
         Model expectedModel = new ModelManager(model.getSportsPa(), new UserPrefs());
         expectedModel.addMember(HOON);
         expectedModel.setMember(ALICE, ALICE_DIFFERENT_PHONE);
@@ -45,8 +47,8 @@ public class ImportCommandTest {
     }
 
     @Test
-    public void execute_personWithSamePhoneInSportsPa_listOfPersonAddedWithReplacementNoSkip() {
-        String testFilePath = "src/test/data/ImportCommandTest/PersonWithSamePhoneInSportsPa.csv";
+    public void execute_memberWithSamePhoneInSportsPa_listOfMemberAddedWithReplacementNoSkip() {
+        String testFilePath = "src/test/data/ImportCommandTest/MemberWithSamePhoneInSportsPa.csv";
         Model expectedModel = new ModelManager(model.getSportsPa(), new UserPrefs());
         expectedModel.addMember(HOON);
         expectedModel.setMember(ALICE, ALICE_DIFFERENT_NAME);
@@ -57,7 +59,7 @@ public class ImportCommandTest {
     @Test
     //When a member being imported has the same name as an existing member in the list AND same name as another
     //existing member in the list.
-    public void execute_invalidMemberImport_listOfPersonAddedWithReplacementWithSkip() {
+    public void execute_invalidMemberImport_listOfMemberAddedWithReplacementWithSkip() {
         String testFilePath = "src/test/data/ImportCommandTest/InvalidMemberImport.csv";
         String skippedMembers = "[Alice Pauline; Phone: 95352563]";
         Model expectedModel = new ModelManager(model.getSportsPa(), new UserPrefs());
@@ -113,5 +115,24 @@ public class ImportCommandTest {
         ImportCommand importCommand = new ImportCommand(testFilePath);
         assertThrows(CommandException.class,
                 String.format(ImportCommand.MESSAGE_FILE_NOT_FOUND, testFilePath), () -> importCommand.execute(model));
+    }
+
+    @Test
+    public void equals() {
+        String standardFilePath = "test.csv";
+        ImportCommand standardCommand = new ImportCommand(standardFilePath);
+
+        //same object -> return true
+        assertTrue(standardCommand.equals(standardCommand));
+
+        //same value, different object -> return true
+        assertTrue(standardCommand.equals(new ImportCommand("test.csv")));
+
+        //different command -> return false
+        assertFalse(standardCommand.equals(new ExportCommand()));
+
+        //different value -> return false
+        String differentFilePath = "abc.csv";
+        assertFalse(standardCommand.equals(new ImportCommand(differentFilePath)));
     }
 }

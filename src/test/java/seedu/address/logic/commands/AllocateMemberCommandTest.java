@@ -1,10 +1,11 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showFacilityAtIndex;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.CommandTestUtil.showMemberAtIndex;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalFacilities.TAMPINES_HUB_FIELD_SECTION_B;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
@@ -108,7 +109,7 @@ public class AllocateMemberCommandTest {
     @Test
     public void execute_invalidMemberIndex_failure() {
         Model model = new ModelManager(getTypicalSportsPa(), new UserPrefs());
-        showPersonAtIndex(model, INDEX_FIRST);
+        showMemberAtIndex(model, INDEX_FIRST);
 
         Index outOfBoundIndex = INDEX_SECOND;
         // ensures that outOfBoundIndex is still in bounds of address book list
@@ -149,5 +150,33 @@ public class AllocateMemberCommandTest {
 
         AllocateMemberCommand command = new AllocateMemberCommand(INDEX_FIRST, INDEX_FIRST, DayOfWeek.SUNDAY);
         assertCommandFailure(command, model, String.format(Messages.MESSAGE_EMPTY_LIST, Messages.MESSAGE_FACILITY));
+    }
+
+    @Test
+    public void equal() {
+        AllocateMemberCommand alloc = new AllocateMemberCommand(INDEX_FIRST, INDEX_FIRST, DayOfWeek.MONDAY);
+
+        //same object -> returns true
+        assertTrue(alloc.equals(alloc));
+
+        //same values, different object -> returns true
+        AllocateMemberCommand allocSameValues = new AllocateMemberCommand(INDEX_FIRST, INDEX_FIRST,
+                DayOfWeek.MONDAY);
+        assertTrue(alloc.equals(allocSameValues));
+
+        //null -> returns false
+        assertFalse(alloc.equals(null));
+
+        //different command -> returns false
+        assertFalse(alloc.equals(new ExportCommand()));
+
+        //different member index -> return false
+        assertFalse(alloc.equals(new AllocateMemberCommand(INDEX_SECOND, INDEX_FIRST, DayOfWeek.MONDAY)));
+
+        //different facility index -> return false
+        assertFalse(alloc.equals(new AllocateMemberCommand(INDEX_FIRST, INDEX_SECOND, DayOfWeek.MONDAY)));
+
+        //different day of week -> return false
+        assertFalse(alloc.equals(new AllocateMemberCommand(INDEX_FIRST, INDEX_FIRST, DayOfWeek.TUESDAY)));
     }
 }

@@ -72,7 +72,9 @@ public class Facility {
     }
 
     /**
-     * Makes a deep copy of the allocation map.
+     * Makes a deep copy of the facility's allocation map.
+     *
+     * @return A deep copy of the facility's allocation map.
      */
     public AllocationMap getAllocationMapClone() {
         Map<DayOfWeek, List<Member>> map = new EnumMap<>(DayOfWeek.class);
@@ -85,26 +87,61 @@ public class Facility {
         return new AllocationMap(map);
     }
 
+    /**
+     * Checks whether a facility is at max capacity on the given day.
+     *
+     * @param day The day to check the capacity on.
+     * @return true if and only if the capacity is at max capacity on the given day.
+     */
     public boolean isMaxCapacityOnDay(DayOfWeek day) {
         return capacity.isMaxCapacity(allocationMap.getCapacityOnDay(day));
     }
 
+    /**
+     * Clears the allocation map on the given day.
+     *
+     * @param day The day to clear the allocation map.
+     */
     public void clearAllocationMapOnDay(DayOfWeek day) {
         allocationMap.clearAllocationOnDay(day);
     }
 
+    /**
+     * Checks whether the given member is allocated on the given day.
+     *
+     * @param member The member to check.
+     * @param day The day to check.
+     * @return true if and only if the given member is allocated on the given day.
+     */
     public boolean isMemberAllocatedOnDay(Member member, DayOfWeek day) {
         return allocationMap.isMemberAllocatedOnDay(member, day);
     }
 
+    /**
+     * Adds the given member to the allocation map on the given day.
+     *
+     * @param member The member to be added.
+     * @param day The day to add the member.
+     */
     public void addMemberToFacilityOnDay(Member member, DayOfWeek day) {
         allocationMap.addMemberOnDay(member, day);
     }
 
+    /**
+     * Removes the given member from the allocation map on the given day.
+     *
+     * @param member The member to be removed.
+     * @param day The day to remove the member.
+     */
     public void removeMemberFromFacilityOnDay(Member member, DayOfWeek day) {
         allocationMap.removeMemberOnDay(member, day);
     }
 
+    /**
+     * Removes the given member from the allocation map on all days.
+     *
+     * @param member The member to be removed.
+     */
     public void removeMemberFromFacilityOnAllDays(Member member) {
         allocationMap.removeMemberOnAllDays(member);
     }
