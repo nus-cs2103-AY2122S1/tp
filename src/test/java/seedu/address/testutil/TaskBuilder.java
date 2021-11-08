@@ -3,7 +3,6 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Contact;
 import seedu.address.model.task.Task;
@@ -31,12 +30,7 @@ public class TaskBuilder {
     public TaskBuilder() {
         this.title = DEFAULT_TITLE;
         this.description = DEFAULT_DESCRIPTION;
-        try {
-            this.timestamp = Timestamp.of("2021-10-27");
-        } catch (ParseException pe) {
-            //Never occurs
-            this.timestamp = null;
-        }
+        this.timestamp = Timestamp.tryParse("27-07-2021");
         this.tags = DEFAULT_TAGS;
         this.isDone = DEFAULT_IS_DONE;
         this.contacts = DEFAULT_CONTACTS;
