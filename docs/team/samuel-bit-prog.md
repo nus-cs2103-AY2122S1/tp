@@ -60,4 +60,4 @@ Given below are my contributions to the project.
 
 #### Community
 1. Reviewed PRs of fellow teammates. (Some with non-trivial review comments, E.g. ([PR#253](https://github.com/AY2122S1-CS2103T-T15-2/tp/pull/253), [PR#140](https://github.com/AY2122S1-CS2103T-T15-2/tp/pull/140)))
-2. Reported bugs and suggestions for other teams during [PE-D].(https://github.com/Samuel-bit-prog/ped/issues)
+2. Reported bugs and suggestions for other teams during [PE-D](https://github.com/Samuel-bit-prog/ped/issues)
