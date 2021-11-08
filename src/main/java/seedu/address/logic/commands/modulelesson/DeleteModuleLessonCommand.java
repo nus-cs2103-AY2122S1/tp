@@ -20,7 +20,9 @@ public class DeleteModuleLessonCommand extends Command {
     public static final String MESSAGE_USAGE = "deletec: "
             + "Deletes the Lesson identified by the index number used in the displayed Lesson list "
             + "or by module code \n"
-            + "Ensure that INDEX is a positive integer and exists in ContHACKS.\n"
+            + "Parameters: INDEX (positive integer and exists in contHACKS)\n"
+            + "START_INDEX, END_INDEX (START_INDEX more than or equal to END_INDEX)\n"
+            + "m/MODULE_CODE\n"
             + "Example: deletec 1, deletec 1-3, deletec m/CS2040\n"
             + "Click on the Help button at the top for more detailed information";
 
