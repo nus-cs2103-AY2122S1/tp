@@ -3,7 +3,6 @@
 actor User
 
 box UI UI_COLOR_T1
-participant "MainWindow" as MainWindow UI_COLOR
 participant "CommandBox" as CommandBox UI_COLOR
 end box
 
@@ -14,16 +13,6 @@ participant ":ShowCommandParser" as ShowCommandParser LOGIC_COLOR
 participant "s:ShowCommand" as ShowCommand LOGIC_COLOR
 participant ":ShowCommandResult" as ShowCommandResult LOGIC_COLOR
 end box
-
-[-> MainWindow : fillInnerParts()
-activate MainWindow
-create CommandBox
-MainWindow -> CommandBox
-activate CommandBox
-CommandBox --> MainWindow
-deactivate CommandBox
-[<-- MainWindow
-deactivate MainWindow
 
 User -> CommandBox : "show 1"
 activate CommandBox
@@ -79,10 +68,7 @@ deactivate ShowCommand
 LogicManager --> CommandBox : showCommandResult(feedback, studentToShow)
 deactivate LogicManager
 activate CommandBox
-CommandBox -> MainWindow : handleShow(studentToShow)
-deactivate CommandBox
-activate MainWindow
-[<-- MainWindow
-deactivate MainWindow
+CommandBox -> User
+
 
 @enduml
