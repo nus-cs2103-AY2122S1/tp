@@ -38,6 +38,7 @@ Given below are my contributions to the project.
     * User Guide:
         * Added documentations for the features `addsg`,`deleteg` and `viewg` [\#66](https://github.com/AY2122S1-CS2103T-W15-1/tp/pull/66)
         * Added and updated documentations for the features `addsg` and `deletesg` [\#154](https://github.com/AY2122S1-CS2103T-W15-1/tp/pull/154)
+        * Added an overview of the structure of User Guide to introduction.
     * README:
         * Added a mockup for classMATE [\#70](https://github.com/AY2122S1-CS2103T-W15-1/tp/pull/70)
         * Added details of the project and Continuous Integration badge
