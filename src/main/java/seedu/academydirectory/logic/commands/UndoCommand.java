@@ -40,8 +40,8 @@ public class UndoCommand extends Command {
             throw new CommandException(CORRUPTED_FILES);
         }
 
-        new RevertCommand(prevCommit.getHash()).execute(model);
-        return new CommandResult(MESSAGE_SUCCESS);
+        CommandResult commandResult = new RevertCommand(prevCommit.getHash()).execute(model);
+        return new CommandResult(MESSAGE_SUCCESS, commandResult.getCommitMessage());
     }
 
     @Override

@@ -72,6 +72,6 @@ public class RevertCommand extends Command {
         }
 
         model.setAcademyDirectory(initialData);
-        return new CommandResult(MESSAGE_SUCCESS, false, false);
+        return new CommandResult(MESSAGE_SUCCESS, Optional.of(COMMAND_WORD));
     }
 }

@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import seedu.academydirectory.commons.util.FileUtil;
+import seedu.academydirectory.logic.commands.RevertCommand;
 import seedu.academydirectory.versioncontrol.objects.Commit;
 import seedu.academydirectory.versioncontrol.objects.Label;
 import seedu.academydirectory.versioncontrol.objects.Tree;
@@ -55,6 +56,15 @@ public class VersionControlController implements Version {
      */
     public void commit(String message) {
         requireNonNull(message);
+        if (message.equals(RevertCommand.COMMAND_WORD)) {
+            Label moveHead = versionControlReader.createNewLabel(HEAD_LABEL_STRING, this.getHeadCommit());
+            stageArea.resetStage();
+            if (!moveHead.isEmpty()) {
+                stageArea.stage(moveHead);
+            }
+            return;
+        }
+
         Commit parentCommit = this.headCommit;
 
         // Fetching current memory state
