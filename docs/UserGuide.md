@@ -247,7 +247,7 @@ Tip: Do take a good look at this section to understand the common terminologies 
 
 #### `TITLE`
 * Represents the `module`'s title component.
-* Titles should not be more than 60 characters.
+* A `TITLE` should not be more than 60 characters.
 
 #### `DESCRIPTION`
 * Represents the `module`'s description component.
@@ -259,7 +259,7 @@ Tip: Do take a good look at this section to understand the common terminologies 
 
 #### `TAG`
 * Represents the `module`'s tag component.
-* Tags names should not be more than 30 characters.
+* A `TAG` should not be more than 30 characters.
 
 #### `YEAR`
 * Represents one of the following:
