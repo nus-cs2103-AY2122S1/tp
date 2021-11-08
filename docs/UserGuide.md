@@ -339,7 +339,6 @@ Example:
 
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
 
 ### Groups
 
@@ -415,8 +414,6 @@ Format: `group -al INDEX s/SUBJECT st/START_TIME et/END_TIME d/DAY`
 Example:
 * `group -al 1 s/Biology st/08:00 et/09:00 d/Mon` adds a lesson with the subject name biology
   starting at 8am and ending at 9am on Mondays.
-
-<div style="page-break-after: always;"></div>
 
 #### Deleting a lesson from a group: `group -dl`
 
