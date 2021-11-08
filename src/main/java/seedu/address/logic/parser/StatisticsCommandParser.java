@@ -15,7 +15,11 @@ public class StatisticsCommandParser implements Parser<StatisticsCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public StatisticsCommand parse(String args) throws ParseException {
-        if (args.trim().isEmpty() || !args.trim().matches(TutorialGroup.VALIDATION_REGEX)) {
+        if (args.trim().isEmpty()) {
+            throw new ParseException(StatisticsCommand.MESSAGE_EMPTY_TUTORIAL_GROUP);
+        }
+
+        if (!args.trim().matches(TutorialGroup.VALIDATION_REGEX)) {
             throw new ParseException(TutorialGroup.MESSAGE_CONSTRAINTS);
         }
 
