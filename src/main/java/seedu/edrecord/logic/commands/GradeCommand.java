@@ -87,9 +87,6 @@ public class GradeCommand extends Command {
             throw new CommandException(MESSAGE_NO_MODULE_SELECTED);
         }
 
-        // Get assignment
-        List<Assignment> assignmentList = model.getAssignmentList();
-
         if (id.getOneBased() >= model.getAssignmentCounter()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ASSIGNMENT_DISPLAYED_INDEX);
         }

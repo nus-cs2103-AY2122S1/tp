@@ -70,8 +70,6 @@ public class DeleteGradeCommand extends Command {
             throw new CommandException(MESSAGE_NO_MODULE_SELECTED);
         }
 
-        List<Assignment> assignmentList = model.getAssignmentList();
-
         if (assignmentId.getOneBased() >= model.getAssignmentCounter()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ASSIGNMENT_DISPLAYED_INDEX);
         }
