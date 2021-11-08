@@ -25,6 +25,7 @@ public class StatCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
         + ": Finds and count the number of each tag in last searched list\n"
         + "Example: " + COMMAND_WORD;
+    private static final String EMPTY_FILTERED_LIST_ERROR = "The Filtered Person List is Empty";
 
 
     @Override
@@ -32,6 +33,9 @@ public class StatCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
+        if (lastShownList.size() == 0) {
+            throw new CommandException(EMPTY_FILTERED_LIST_ERROR);
+        }
         return new CommandResult(getStatistics(lastShownList)
             );
     }

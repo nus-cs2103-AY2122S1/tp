@@ -169,6 +169,12 @@ The following sequence diagram shows how the edit operation works.
 
 ![EditSequenceDiagram](images/EditSequenceDiagram.png)
 
+#### Bulk Tag feature
+
+The bulk tag feature is facilitated by `BulkTagCommand`. It extends `Command` with a Tag as a parameter. The addition of the Tag relies on `ModelManager#setPerson()` to edit the Person in the `personList` in `ModelManager` by specifically adding the given Tag to the person.
+One important consideration for the command is that the bulk tag command does not affect the existing tags and thus functions differently as compared to the edit command.
+
+
 #### Import feature
 
 The import feature is facilitated by `ImportCommand`. It extends `Command` with a file path where the targeted import file is stored, stored internally as a `filePath`. It also overwrites the `execute` function to import the json file from the file path stored.
@@ -308,15 +314,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​                                    | I want to …​                            | So that I can…​                                                                  |
 | -------- | ------------------------------------------ | ------------------------------                | ----------------------------------------------------------------------              |
 | `* * *`  | potential user                             | find a user guide for the app                 | have an idea of the features provided by the app                                    |
-| `* * *`  | Professor                                  | add a new person                              | keep track of all my students and TAs                                               |
+| `* * *`  | beginner user                              | add a new person                              | keep track of all my students and TAs                                               |
+| `* * *`  | beginner user                              | edit a person                                 | change any incorrect data and remove specific tags when needed                      |
 | `* * *`  | Professor                                  | tag contacts                                  | keep track of Lecture/Tutorial groups that different contacts belong to             |
 | `* * *`  | beginner user                              | see all the contacts I have at once           | easily tell who I have added and who I have not                                     |
-| `* * *`  | impatient user                             | import my existing contacts from a json file  | start using ProfBook without manually inputting every piece of information              |
+| `* * *`  | impatient user                             | import my existing contacts from a json file  | start using ProfBook without manually inputting every piece of information          |
 | `* * *`  | cautious user                              | export my existing contacts to a json file    | move my address book or keep a backup                                               |
 | `* * *`  | beginner user                              | save the data to a json document              | update it manually and have the option to close the program and open it again later |
 | `* * *`  | organised user                             | delete a specific contact with a specific detail | remove entries that I no longer need                                             |
 | `* * *`  | beginner user                              | exit the program when I am done               | I don't have to keep it running all the time                                        |
 | `* * *`  | intermediate user                          | search a person with any specific detail      | locate details of persons without having to go through the entire list              |
+| `* * *`  | intermediate user                          | search a person with any specific partial detail | locate details of persons even if I do not remember their full details           |
 | `* * *`  | intermediate user                          | search a person with the given tag            | view all the contacts with the given tag                                            |
 | `* *`    | beginner user                              | find the user guide for the app on the app    | have an idea of the features of the app without having to leave the app             |
 | `* *`    | beginner user                              | export search the set of contacts with the given tag | locate a person easily                                                       |
@@ -325,19 +333,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | Professor                                  | bulk tag contacts                             | I can quickly tag TAs and Students according to their groups
 
 
-
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `ProfBook` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: Delete a person**
 
 **MSS**
 
 1.  User requests to list/search persons
-2.  AddressBook shows a list of persons
+2.  ProfBook shows a list of persons
 3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+4.  ProfBook deletes the person
 
     Use case ends.
 
@@ -349,7 +356,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. ProfBook shows an error message.
 
       Use case resumes at step 2.
 
@@ -359,28 +366,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to add a person
-2. AddressBook checks if input is valid
-3. AddressBook adds the persons
+2. ProfBook checks if input is valid
+3. ProfBook adds the persons
 
     Use case ends.
 
 **Extensions**
 
 * 2a. Arguments that should be there is not there
-  * 2a1. Address Book rejects the command and shows an error message.
+  * 2a1. ProfBook rejects the command and shows an error message.
 
     Use case ends.
 
+* 2b. Arguments that are added results in a person that already exists in the ProfBook.
+    * 2b1. ProfBook rejects the command and shows an error message.
 
-
+      Use case ends.
+    
 **Use case: Edit a contact**
 
 **MSS**
 
 1.  User requests to list/search persons
-2.  AddressBook shows a list of persons
+2.  ProfBook shows a list of persons
 3.  User requests to edit a specific person in the list
-4.  AddressBook edits the person
+4.  ProfBook edits the person
 
     Use case ends.
 
@@ -390,29 +400,61 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
+
 * 3a. The given index is invalid.
-  * 3a1. AddressBook shows an error message.
+  * 3a1. ProfBook rejects the command and shows an error message.
 
   Use case resumes at step 2.
 
 * 3b. The attribute to be edited does not exist.
-  * 3b1. AddressBook shows an error message.
+  * 3b1. ProfBook rejects the command and shows an error message.
   Use case ends
 
 * 3c. If the attribute edited is the name and results in a similar person i.e. same name as another person
-  * 3c1. AddressBook shows an error message.
+  * 3c1. ProfBook rejects the command and shows an error message.
 
       Use case ends
 
+**Use case: Find a contact**
+
+**MSS**
+
+1. User requests to search persons
+2. ProfBook checks if the input is valid.
+3. ProfBook shows the list of persons that match the searched key and attribute.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given attribute type is invalid.
+
+    * 3a1. AddressBook shows an error message.
+
+    Use case ends.
+
+* 3b. The command format is invalid.
+    * 3b1. AddressBook shows an error message.
+
+  Use case ends
+
+* 3d. If the attribute edited is in the invalid format
+    * 3d1. ProfBook rejects the command and shows an error message.
+
+      Use case ends
 
 **Use case: Export contacts**
 
 **MSS**
 
 1.  User requests to list/search persons
-2.  AddressBook shows a list of persons
+2.  ProfBook shows a list of persons
 3.  User requests to export the list
-4.  AddressBook exports list to JSON file
+4.  ProfBook exports list to JSON file
 
     Use case ends.
 
@@ -420,7 +462,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The file directory is invalid
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. ProfBook shows an error message.
 
       Use case resumes at step 2.
 
@@ -430,9 +472,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list/search persons
-2.  AddressBook shows a list of persons
+2.  ProfBook shows a list of persons
 3.  User requests to export the emails of the list
-4.  AddressBook exports list of emails to JSON file
+4.  ProfBook exports list of emails to JSON file
 
     Use case ends.
 
@@ -440,7 +482,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The file directory is invalid
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. ProfBook shows an error message.
 
       Use case resumes at step 2.
 
@@ -449,11 +491,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to import existing contacts from JSON file.
-2. AddressBook checks if file is valid format
-3. AddressBook shows a list of persons
-4. User decides to import (or not)
-5. AddressBook imports if user selects yes
+1. User requests to import contacts from JSON file.
+2. ProfBook checks if file is valid format
+3. ProfBook merges the existing contacts with contacts from JSON file
 
     Use case ends.
 
@@ -465,9 +505,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The file is in invalid format/does not exist
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. ProfBook rejects the command and shows an error message.
 
       Use case ends.
+
+
+**Use case: Undo last command**
 
 **MSS**
 
@@ -475,7 +518,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. AddressBook checks if there are commands to undo
 3. AddressBook reverses the last command
 
-   Use case ends.
+    Use case ends.
 
 **Extensions**
 
@@ -485,6 +528,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+**Use case: Redo last command**
 
 **MSS**
 
@@ -502,6 +546,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+**Use case: Bulk Tag a person**
+
+**MSS**
+
+1. User requests to bulk tag the filtered person list
+2. ProfBook checks if input is valid
+3. ProfBook adds the tag to all the persons in the filtered person list
+
+Use case ends.
+
+**Extensions**
+
+* 2a. Tag to be added is invalid
+    * 2a1. ProfBook rejects the command and shows an error message.
+
+      Use case ends.
+
+* 2b. The filtered list is empty
+    * 2b1. ProfBook rejects the command and shows an error message.
+
+      Use case ends.
+    
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -545,7 +611,7 @@ testers are expected to do more *exploratory* testing.
        Expected: The most recent window size and location is retained.
 
 
-### Deleting a person
+### Delete test
 
 1. Deleting a person while all persons are being shown
 
@@ -560,16 +626,78 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
+### Find test
+
+1. Finding a person
+
+    1. Prerequisites: Multiple persons in the list.
+
+    2. Test case: `find n/alex`<br>
+       Expected: List shows contacts with name matching or partially matching 'alex'.
+
+    3. Test case: `find n/ alex`<br>
+       Expected: Invalid command format!
+   
+    4. Test case: `find n/`<br>
+       Expected: Invalid command format!
+   
+    5. Test case: `find l/`<br>
+       Expected: Invalid command format!
+
+    6. Other incorrect find commands to try: `find`, `find a`, `...` (where attribute type does not exist)<br>
+       Expected: Similar to previous.
+
 ### Sort Test
 1. Test case: `sort`<br>
    Expected: List is sorted by name.
+   
 2. Test case: `sort -r`<br>
    Expected: List is sorted by name in reverse.
-3. Test case: `sort \T`<br>
+   
+3. Test case: `sort T/`<br>
    Expected: List is sorted by TutorialID
-4. Test case: `sort \a`<br>
+   
+4. Test case: `sort a/`<br>
    Expected: No change to list. Error details shown in status message.
 
+### Add Test
+1. Add a person to the ProfBook
+   1. Test case: `add n/John Doe p/98765432 a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney g/john-doe N/e0123456 r/student s/A0123456X T/11 `
+   <br> Expected: Adds the person to the ProfBook. 
+   <br> Now progressively remove or edit each attribute in the add command and view the outputs
+
+   2. Test case: Calling the same command `add n/John Doe p/98765432 a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney g/john-doe N/e0123456 r/student s/A0123456X T/11 `
+   <br> Expected: This person already exists in the  ProfBook.
+
+   3. Test case: On changing name to lower case we can add the person `add n/john doe p/98765432 a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney g/john-doe N/e0123456 r/student s/A0123456X T/11 `
+   <br> Expected: Adds the person to the ProfBook.
+
+   4. Test case: `add n/John Doe a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney g/john-doe N/e0123456 r/student s/A0123456X T/11 `
+   <br> Expected: Invalid command format!
+
+### Edit Test
+1. Edit a person in the ProfBook
+   1. Test case: `edit 1 n/John Doe`
+   <br>Expected: Edits the person at index 1 and changes name to John Doe.
+
+   2. Test case: On changing index to 2 and running the command `edit 2 n/John Doe`
+   <br> Expected: This person already exists in the ProfBook.
+   <br>Now progressively replace or add more attribute in the edit command and view the outputs
+
+   3. Test case: `edit 1 N/e0000000`
+   <br> Expected: Edits the person at index 1 and changes NUSNET_ID to E0000000 and Email to e0000000@u.nus.edu.
+
+### Bulk Tag Test
+1. Bulk Tag the filtered person list of the ProfBook
+   1. Test case: `bulk_tag t/friends`
+      <br>Expected: Added the Tags [friends] to the Persons
+   
+   2. Test case: `bulk_tag t/friends`
+      <br> Expected: Added the Tags [friends] to the Persons. No change since all persons have the tag `friends`
+   
+   3. Test case: `bulk_tag t/friends t/passed`
+      <br> Expected: Added the Tags [passed] [friends] to the Persons. Now tag `passed` is added to all the person and `friends` already existed for all the persons
+   
 ### Import and Export
 
 1. Exporting then importing back original list of contacts
@@ -632,12 +760,12 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `stat`<br>
        Expected: Tag, Type and Tutorial count of the last searched list of contacts are shown in the display
-
-
-### Saving data
+    
+### Loading/Saving data
 
 1. Dealing with missing/corrupted data files
 
+<<<<<<< HEAD
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
     
 ### Undo and Redo
@@ -661,3 +789,28 @@ The challenges we faced were largely from figuring out the original implementati
 For example, when implementing the `sort` feature, there were many different list representations of the contacts used throughout the application, some of which were immutable. It required time and effort to walk through the code, and sufficiently test modifications to ensure that the `sort` feature modifies the correct mutable list, and that there were no unintended side effects from directly manipulating the list.
 
 Another feature which required much effort was the `undo` and `redo` commands. In order to implement them with minimal changes to existing code, we had to investigate how all data changes are propagated following the execution of their calling command. Then, we had to write an implementation which allowed us to decouple any new classes required from those that already existed. In the end, we settled on using functional interfaces and Java lambdas to offer an intuitive syntax and to follow software engineering principles. The only required changes to old code were to wrap existing methods in `ModelManager` in a lambda function which is passed to a new `OperationManager` class as `Runnable`, from which `OperationManager` handles all states changes, transparent to other developers. 
+=======
+   1. Remove a `{` from data/profBook.json
+      Expected: ProfBook will be empty on load.
+
+      1. Test case: `exit`
+         Expected: profBook.json will be overwritten and no longer corrupted.
+   
+   2. Delete data/profBook.json
+      Expected: ProfBook will be populated with dummy data on load.
+      
+      1. Test case: `exit`
+         Expected: profBook.json will be recreated in the data directory
+   
+
+## Effort
+The difficulty level for our project is at a relatively moderate level. 
+We did not make large changes to the AB3 but instead chose to enhance the existing features. <br>
+Most of the challenges faced were from figuring out what could be changed in the AB3 functions and what could not. 
+For example, when implementing the sort feature, there were so many lists in AB3 and some of them were immutable. <br>
+So we had to do alot of testing to figure out which lists were mutable and the effects of mutating these lists on the app.
+In comparison to AB3, ProfBook was a harder project due to the large amounts of information attached to each contact. <br>
+Managing all that information and making sure that each of our features work with the information in an intuitive way was one of the bigger achievements of ProfBook. <br>
+Another big achievement of the project was how we integrated import and export features to ProfBook so that the information in ProfBook is portable and can be transferred between users easily. 
+Since the output/input file is a JSON file, it can be used in conjunction with other apps as well.
+>>>>>>> master

@@ -42,11 +42,11 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. \n"
+            + "by the index number used in the displayed \nperson list. \n"
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_GITHUB_ID + "GITHUB_ID] "
+            + "[" + PREFIX_GITHUB_ID + "GITHUB_ID] \n"
             + "[" + PREFIX_NUS_NETWORK_ID + "NUS_NETWORK_ID] "
             + "[{" + PREFIX_TYPE + "student|" + PREFIX_TYPE + "tutor}] "
             + "[" + PREFIX_STUDENT_ID + "STUDENT_ID] "
