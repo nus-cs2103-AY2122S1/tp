@@ -278,11 +278,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Optional<Assignment> searchAssignment(Name name) {
-        return selectedModule.get().searchAssignment(name);
-    }
-
-    @Override
     public void addAssignment(Assignment assignment) {
         selectedModule.get().addAssignment(assignment);
         setSearchFilter(PREDICATE_SHOW_ALL_PERSONS);

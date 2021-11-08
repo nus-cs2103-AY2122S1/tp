@@ -180,13 +180,6 @@ public class Module {
     }
 
     /**
-     * Returns an {@code Optional} containing the assignment with the given name, if it exists.
-     */
-    public Optional<Assignment> searchAssignment(Name name) {
-        return assignmentList.searchAssignment(name);
-    }
-
-    /**
      * Returns true if adding the assignment {@code toAdd} will bring
      * the total weightage of all assignments to above 100%.
      */

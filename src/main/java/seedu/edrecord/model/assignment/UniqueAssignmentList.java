@@ -115,20 +115,6 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
     }
 
     /**
-     * Returns an {@code Optional} containing the assignment with the given name, if it exists.
-     */
-    public Optional<Assignment> searchAssignment(Name name) {
-        // Create dummy assignment to search by name
-        Assignment a = new Assignment(name, new Weightage("0"), new Score("0"), 0);
-        int index = internalUnmodifiableList.indexOf(a);
-        if (index == -1) {
-            return Optional.empty();
-        } else {
-            return Optional.of(internalUnmodifiableList.get(index));
-        }
-    }
-
-    /**
      * Returns true if there is another assignment with the same name in the list.
      */
     public boolean hasSameName(Assignment assignment) {

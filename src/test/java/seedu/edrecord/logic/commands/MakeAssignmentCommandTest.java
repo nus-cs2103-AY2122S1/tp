@@ -11,7 +11,6 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -27,7 +26,6 @@ import seedu.edrecord.model.assignment.Assignment;
 import seedu.edrecord.model.module.Module;
 import seedu.edrecord.model.module.ModuleSet;
 import seedu.edrecord.model.module.ReadOnlyModuleSystem;
-import seedu.edrecord.model.name.Name;
 import seedu.edrecord.model.person.PartOfModulePredicate;
 import seedu.edrecord.model.person.Person;
 import seedu.edrecord.testutil.AssignmentBuilder;
@@ -267,11 +265,6 @@ public class MakeAssignmentCommandTest {
 
         @Override
         public List<Assignment> getAssignmentList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public Optional<Assignment> searchAssignment(Name name) {
             throw new AssertionError("This method should not be called.");
         }
 

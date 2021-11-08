@@ -181,11 +181,6 @@ public interface Model {
     List<Assignment> getAssignmentList();
 
     /**
-     * Returns the assignment that matches the given name.
-     */
-    Optional<Assignment> searchAssignment(Name name);
-
-    /**
      * Adds the given assignment to the currently selected module.
      * {@code assignment} must not already exist under the currently selected module.
      */
