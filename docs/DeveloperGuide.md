@@ -1035,6 +1035,7 @@ as well as the number of labs unmarked for each class.
 - **Email**: An NUS student email (eXXXXXXX@u.nus.edu)
 - **TA**: A CS2100 teaching assistant
 - **PE**: ProgrammerError
+- **CSV**: Comma-separated values
 
 --------------------------------------------------------------------------------------------------------------------
 
