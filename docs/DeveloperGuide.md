@@ -9,19 +9,62 @@ title: Developer Guide
 2. [Setting up, getting started](#Setting up)
 3. [Design](#Design)
 4. [Architecture](#Architecture)
-5. [UI components](#UI component)
-6. [Logic component](#Logic component)
-7. [Storage component](#Storage component)
-8. [Implementations](#Implementations)
-9. [Documentation, logging, testing, configuration, dev-ops](#Documentation)
-10. [Appendix: Requirements](#Appendix Requirements)
-11. [Common classes](#Common classes)
-12. [User Stories](#User Stories)
-13. [Use cases](#Use Cases)
-14. [Non-Functional Requirements](#Non-Functional Requirements)
-15. [Glossary](#Glossary)
-16. [Appendix: Instructions for manual testing](#Appendix)
+5. [UI Components](#UI component)
+6. [Logic Component](#Logic component)
+7. [Model Component](#Model component)
+8. [Storage component](#Storage component)
+9. [Common Classes](#Common Classes)
+10. [Implementations](#Implementations)
+    1. [[Proposed] `Undo`/`Redo` Feature](#undoredo)
+    2. `Add` Student Feature
+    3. `Filter` Student List Feature
+    4. `Show` lab results Feature
+    5. `Download` Data Feature
+    6. `Purge` Feature
+11. [Documentation, logging, testing, configuration, dev-ops](#Documentation)
+12. [Appendix: Requirements](#Appendix Requirements)
+    1. Product Scope
+13. [User Stories](#User Stories)
+14. [Use cases](#Use Cases)
+15. [Non-Functional Requirements](#Non-Functional Requirements)
+16. [Glossary](#Glossary)
+17. [Appendix: Instructions for Manual Testing](#Appendix Testing)
+    1. Launch and Shutdown 
+    2. Deleting a Student 
+    3. Show a Student's Lab Result 
+    4. Download Data 
+    5. Dashboard
+18. [Appendix: Effort](#Appendix Effort)
+    1. Challenges Faced and Achievements Made 
+       1. Rewriting the Command Syntax 
+       2. Designing New UI Components 
+       3. Working with Third-Party Libraries 
+       4. Implementing Dynamic Features 
 
+- [Quick Start](#quick-start)
+- [Features](#features)
+    1. [Parameter Summary](#parameter-summary)
+    2. [General Features](#general-features)
+        1. [View Help: `help`](#view-help)
+        2. [View Dashboard `dashboard`](#view-dashboard)
+        3. [Exit: `exit`](#exit)
+    3. [Data Features](#data-features)
+        1. [Fill Sample Data: `fill`](#fill-sample-data)
+        2. [Purge All Data: `purge`](#purge-all-data)
+        3. [Download Data: `download`](#download-data)
+        4. [Upload Data: `upload`](#upload-data)
+    4. [Student Features](#student-features)
+        1. [Add Student: `add`](#add-student)
+        2. [Edit Student Details: `edit`](#edit-student)
+        3. [Delete Student: `delete`](#delete-student)
+        4. [Filter Students: `filter`](#filter-student)
+        5. [Show Student Details: `show`](#show-student)
+        6. [List All Students: `list`](#list-students)
+    5. [Lab Features](#lab-features)
+        1. [Add Lab: `addlab`](#add-lab)
+        2. [Edit Lab: `editlab`](#edit-lab)
+        3. [Delete Lab: `dellab`](#delete-lab)
+- [Command Summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 
