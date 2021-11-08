@@ -13,6 +13,8 @@ You can use *ComputingConnection* to efficiently record information such as facu
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 ## 2. About (using this user guide)
 In this section, you will learn how to use the *ComputingConnection* user guide efficiently and effectively.
 
@@ -36,6 +38,7 @@ Syntax          | Interpretation
 Orange text     | Headings and subheadings of various size
 ------          | Dividers for section breaks
 
+<div style="page-break-after: always;"></div>
 
 ### 2.3 Meaning of icons and symbols
 :information_source: : Additional information <br/>
@@ -51,6 +54,7 @@ Orange text     | Headings and subheadings of various size
 > Quotes are used to explain examples of commands and features!
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 3. Quick start
 
@@ -85,6 +89,7 @@ Orange text     | Headings and subheadings of various size
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 4. Understanding the 'Features' section
 In this section, you will learn how to utilise the features and commands available in *ComputingConnection*, as seen in the [Features](#5-features) section. 
@@ -129,6 +134,8 @@ Category        | Specific fields | Valid items | Requirement
 ----------------|-----------------|-----------------|-----------------
 Organisation data fields  | 1. `n/`: Name <br><br> 2. `e/`: Email |1. Alphanumeric <br><br> 2. Email Regex | Compulsory
 
+<div style="page-break-after: always;"></div>
+
 ### 4.4 ComputingConnection command formats
 <div markdown="block" class="alert alert-info">
 
@@ -157,6 +164,7 @@ Organisation data fields  | 1. `n/`: Name <br><br> 2. `e/`: Email |1. Alphanumer
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 5. Features
 Features and commands are categorised based on 
@@ -178,14 +186,18 @@ Shows a list of all contacts in the address book. <br/>
 
 Format: `list`
 
+<div style="page-break-after: always;"></div>
+
 ##### Sorting contacts : `sort`
 Sorts all contacts permanently and shows the list in alphabetical order. <br/>
 
 Format: `sort`
 ![result for 'sort'](images/SortCommand.png)
 
+<div style="page-break-after: always;"></div>
+
 ##### Filtering contacts : `filter`
-Filters the contacts by data fields of the person including faculty, major, skill, framework, language and tag.
+Filters the contacts by data fields of the contact including faculty, major, skill, framework, language and tag.
 
 Format: `filter [f/FACULTY]…​ [m/MAJOR]…​ [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​`
 
@@ -201,6 +213,7 @@ Examples:
 *  You can add multiple fields in one command to see all filters together.
 </div>
 
+<div style="page-break-after: always;"></div>
 
 ##### Clearing all entries : `clear`
 Clears all contacts from ComputingConnection.
@@ -211,6 +224,8 @@ Format: `clear`
 :exclamation: Be **careful**
 * The confirmation for clearing data will be implemented in future releases. 
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ### 5.2 Contact-specific commands
 Commands that are related to a specific contact.
@@ -223,9 +238,9 @@ Format: `add n/NAME e/EMAIL f/FACULTY m/MAJOR [compat/COMPATIBILITY] [s/SKILL]�
 Examples: 
 
 * `add n/Timothy Wong e/timothy@nus.edu.sg f/computing m/computer science` 
-  > Adds a person named 'Timothy Wong', with an email of 'timothy@nus.edu.sg', faculty of 'computing', and major of 'computer science'. 
+  > Adds a contact named 'Timothy Wong', with an email of 'timothy@nus.edu.sg', faculty of 'computing', and major of 'computer science'. 
 * `add n/Timothy Wong e/timothy@nus.edu.sg f/computing m/computer science compat/80 s/frontend l/javascript r/interest in web development`
-  > Adds a person named 'Timothy Wong', with an email of 'timothy@nus.edu.sg', faculty of 'computing', and major of 'computer science', with a compatibility of 80/100, with skills 'frontend', languages 'javascript', and a remark of 'interest in web development'.
+  > Adds a contact named 'Timothy Wong', with an email of 'timothy@nus.edu.sg', faculty of 'computing', and major of 'computer science', with a compatibility of 80/100, with skills 'frontend', languages 'javascript', and a remark of 'interest in web development'.
 ![result for 'add'](images/AddCommand.png)
 
 <div markdown="block" class="alert alert-info">
@@ -257,6 +272,8 @@ Example:
   specifying any tags after it.
 * However, you can't do this for compulsory data fields!
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ##### Appending items to data fields : `append`
 Appends a new item to an optional data field of the existing contact at the specified `INDEX`.
@@ -302,10 +319,10 @@ Format: `interaction INDEX int/DESCRIPTION on/DATE`
 
 Examples: 
 * `interaction 1 int/We talked. on/1990-01-20` <br/>
-> Adds an interaction with description 'We talked.' and date '1990-01-20' to the Person at index 1 of the displayed list.
+> Adds an interaction with description 'We talked.' and date '1990-01-20' to the contact at index 1 of the displayed list.
   
 * `interaction 2 int/We chat. on/1990-01-20` <br/>
-> Adds an interaction with description 'We chat.' and date '1990-01-20' to the Person at index 2 of the displayed list.
+> Adds an interaction with description 'We chat.' and date '1990-01-20' to the contact at index 2 of the displayed list.
 ![result for 'interaction 2 int/We chat. on/1990-01-20'](images/interactionscreenshot.png)
 
 <div markdown="block" class="alert alert-info">
@@ -315,6 +332,8 @@ Examples:
 * The program will save `1990-01-20` as the date.
 * Date must be in the format of `YYYY-MM-DD`
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ##### Viewing a specific contact in detail : `view`
 Displays a detailed view of a existing contact at a specified `INDEX`.
@@ -334,6 +353,8 @@ Examples:
 * Details of specific contact shown on right side of screen.
 * Index is based on current list displayed on left side of screen. 
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ##### Locating contacts by name : `find`
 Finds contacts whose names contain any of the given keywords.
@@ -363,6 +384,8 @@ Examples:
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ##### Deleting a contact : `delete`
 Deletes a contact at the specified `INDEX`.
 
@@ -383,6 +406,8 @@ Examples:
 * The confirmation for deleting a contact will be implemented in future releases.
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ### 5.3 Organisation-specific commands
 Commands that are related to organisations.
 
@@ -397,10 +422,10 @@ Examples:
 ![result for 'addorg'](images/addorgscreenshot.png)
 
 <div markdown="block" class="alert alert-info">
-:bulb: Persons and organisations
+:bulb: Contacts and organisations
 * Use organisations to help you link contact together!
-* An organisation can have any number of persons within it (including 0). However, an organisation must have a name and email.
-* Remember to add the member persons separately before adding them.
+* An organisation can have any number of contacts within it (including 0). However, an organisation must have a name and email.
+* Remember to add the member contacts separately before adding them.
 * Organisation names must be unique, emails can be repeated.
 </div>
 
@@ -420,36 +445,42 @@ Examples:
 * `deleteorg 3`
 > Deletes the 3rd organisation from the organisation list.
 ![result for 'deleteorg'](images/deleteorgscreenshot.png)
+> 
+<div style="page-break-after: always;"></div>
 
-##### Adding person to an organisation: `addtoorg`
-Adds the person at the specified index in the displayed list to an organisation with the specified name.
+##### Adding contacts to an organisation: `addtoorg`
+Adds the contact at the specified index in the displayed list to an organisation with the specified name.
 
 Format: `addtoorg INDEX n/NAME`
 
 Examples:
 * `addtoorg 1 n/NUS`
-> Adds the 1st person in the displayed list to the NUS organisation.
+> Adds the 1st contact in the displayed list to the NUS organisation.
 ![result for 'addtoorg'](images/addtoorgscreenshot.png)
 
 <div markdown="block" class="alert alert-info">
-:information_source: Add a person to an organisation one at a time! 
-* A person can belong to more than one Organisation.
+:information_source: Add a contact to an organisation one at a time! 
+* A contact can belong to more than one Organisation.
 * Multiple addition will be implemented in future versions.
 </div>
 
-##### Removing person from an organisation: `deletefromorg`
-Deletes the person at the specified index in the person list of an organisation with the specified name.
+<div style="page-break-after: always;"></div>
+
+##### Removing contact from an organisation: `deletefromorg`
+Deletes the contact at the specified index in the contact list of an organisation with the specified name.
 
 Format: `deletefromorg INDEX NAME`
 
 Examples:
 * `deletefromorg 1 n/NUS`
-> Deletes the 1st person in the person list of the NUS organisation.
+> Deletes the 1st contact in the contact list of the NUS organisation.
 ![result for 'deletefromorg'](images/deletefromorgscreenshot.png)
 
 <div markdown="block" class="alert alert-info">
-:information_source: The person and organisation will not be deleted, just the relation.
+:information_source: The contact and organisation will not be deleted, just the relation.
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ### 5.4 Future commands
 Commands to be implemented in future versions.
@@ -469,6 +500,7 @@ _Details coming soon ..._
 _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 6. FAQ
 
@@ -479,6 +511,7 @@ _Details coming soon ..._
 **A**: Compatibility field as the name suggests records down how compatible you think you are with the contact of interest. This information can be used in a versatile way. A common use case is to filter by compatibility when one is looking for a suitable partner for a project.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 7. Command summary
 
