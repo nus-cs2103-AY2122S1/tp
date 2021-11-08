@@ -232,7 +232,7 @@ The `Model` component,
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in `ProgrammerError`, which `Student` references. This allows `ProgrammerError` to only require one `Tag` object per unique tag, instead of each `Student` needing their own `Tag` objects.<br>
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+![Better Model Class Diagram](images/BetterModelClassDiagram.png)
 
 </div>
 
