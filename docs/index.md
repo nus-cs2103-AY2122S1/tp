@@ -16,4 +16,5 @@ title: RecruitIn
 
 **Acknowledgements**
 
-* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
+* Libraries and tools used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5), 
+[Gradle](https://github.com/gradle/gradle), [Gradle Shadow](https://github.com/johnrengelman/shadow), [CheckStyle](https://github.com/checkstyle/checkstyle), [CodeCov](https://github.com/codecov)
