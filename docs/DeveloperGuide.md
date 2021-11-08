@@ -3,6 +3,8 @@ layout: page
 title: Developer Guide
 ---
 
+## Table of Contents
+
 * Table of Contents 
 {:toc}
 
@@ -44,7 +46,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 <div markdown="span" class="alert alert-primary">
 
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in
-the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML
+the [diagrams](https://github.com/AY2122S1-CS2103T-W11-2/tp/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML
 Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit
 diagrams.
 </div>
@@ -60,8 +62,8 @@ Given below is a quick overview of main components and how they interact with ea
 **Main components of the architecture**
 
 **`Main`** has two classes
-called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java)
-and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It
+called [`Main`](https://github.com/AY2122S1-CS2103T-W11-2/tp/tree/master/src/main/java/seedu/address/Main.java)
+and [`MainApp`](https://github.com/AY2122S1-CS2103T-W11-2/tp/tree/master/src/main/java/seedu/address/MainApp.java). It
 is responsible for,
 
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
@@ -101,7 +103,7 @@ The sections below give more details of each component.
 ### UI component
 
 The **API** of this component is specified
-in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+in [`Ui.java`](https://github.com/AY2122S1-CS2103T-W11-2/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
@@ -111,9 +113,9 @@ the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that
 are in the `src/main/resources/view` folder. For example, the layout of
-the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java)
+the [`MainWindow`](https://github.com/AY2122S1-CS2103T-W11-2/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java)
 is specified
-in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-W11-2/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -124,14 +126,14 @@ The `UI` component,
 
 <img src="images/WeekShiftsPaneClassDiagram.png" width="300" />
 
-The `Schedule view` subcomponent of the `UI` component,
+The `Schedule view` subcomponent of the `UI` component meant to facilitate the display of the [schedule view](UserGuide.md#schedule-display),
 
 * displays 2 `SlotCard` for each `DayCard`
 * listens to changes in `Model` data to be updated with the modified data
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-W11-2/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -168,7 +170,7 @@ How the parsing works:
 
 ### Model component
 
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-W11-2/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" />
 
@@ -198,7 +200,7 @@ The `Person` subcomponent,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-W11-2/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -211,7 +213,7 @@ The `Storage` component,
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
   that belong to the `Model`)
 
-<img src="images/StoragePersonDiagram.png" width="550" />
+<img src="images/StoragePersonDiagram.png" />
 
 The storage of `Person`,
 
@@ -235,7 +237,7 @@ This section describes some noteworthy details on how certain features are imple
 #### Implementation
 
 The mark/unmark feature is facillated by `Person`. It uses the following
-operations of `Person`.
+operations of `Person`. The marked periods are stored as `Set<Period>` objects.
 
  * `Person#mark()` — Adds the input time period to the person to be marked as absent. 
  * `Person#unmark()` — Removes the input time period from the person.
@@ -248,7 +250,7 @@ Given below is an example usage scenario and how the mark/unmark command
 changes the information stored.
 
 Step 1. The user launches the application for the first time. The staff all
-the staff information is read from the save file `addressbook.json`.
+the staff information is read from the save file `staffd.json`.
 The initial information of the staff that we are looking at 
 will look something like this. The `Period` object that we are using can be taken to
 represent 1/1/2001 to 2/1/2001
@@ -277,9 +279,29 @@ The following sequence diagram shows how the mark command works.
 
 ![seq](images/MarkSequenceDiagram.png)
 
-The `unmark` command does the opposite — it calls `Person#mark()`, which replaces the
+
+
+The following is an activity diagram showing the general activity of the mark command.
+
+![activity](images/MarkActivityDiagram.png)
+
+The merging of the periods in `mark` command is facilitated by `Period#union()`, which takes
+in a collection of Period and performs a mathematical union on the collection, treating the 
+collection as a set of dates.
+The code is found [here](https://github.com/AY2122S1-CS2103T-W11-2/tp/tree/master/src/main/java/seedu/address/model/person/Period.java).
+
+The following is an activity diagram showcasing a simplified view of the activity of the union method.
+
+![activity](images/PeriodUnionActivityDiagram.png)
+
+The `unmark` command does the opposite — it calls `Person#unmark()`, which replaces the
 `Period` that are contained in the `Person` with the `Period` objects representing
-the initial `Period` without the input `Period`.
+the initial `Period` without the input `Period`. This command is facilitated by the
+`Period#complement()` method which is called on all the stored `Period` objects.
+
+
+
+
 
 
 #### Design considerations
@@ -465,12 +487,12 @@ Step 1. The user executes command `viewShift -ti monday-17:00`.
 passes the string to `LogicManager` to manipulate the command.
 
 Step 2. `LogicManager` passes the command to `AddressBookParser` to parse the command. Since the command starts
-with `viewShift`, a new `viewShiftCommand` object is created to parse the command further.
+with `viewShift`, a new `ViewShiftCommand` object is created to parse the command further.
 
 Step 3. `ViewShiftCommandParser` determines that the search is by time, due to the `-t` tag. 
 Hence, `viewShift` is created with the information. In this case, the day of the week is `MONDAY` and the time is `17:00`.
 
-Step 4. `viewShiftCommand` creates a PersonIsWorkingPredicate object which is then used as a parameter in `ModelManager#updateFilteredPersonList` to filter the list
+Step 4. `ViewShiftCommand` creates a PersonIsWorkingPredicate object which is then used as a parameter in `ModelManager#updateFilteredPersonList` to filter the list
 for staff who are working at that particular timing.
 
 Step 5. Following this, the displayed staff list will display the updated filtered list, and the names of those working will
@@ -484,6 +506,7 @@ The sequence diagram of this `viewShift` command is shown below:
 Notes:
 
 1. The process is similar for a search by slot number.
+
 2. A command is considered as a valid `viewShift` command if it follows these formats:
 - `viewShift -d dayofweek-slotnumber`
 - `viewShift -ti dayofweek-time`
@@ -512,6 +535,11 @@ to make marking absent by time.
 Currently, Staff'd supports calculating a staff's current month salary. In future iterations, we can expand the
 functionality to let it track the changes on a staff's salary, store the salary history of a staff.
 
+### Storing both hourly and monthly salary
+
+Currently, Staff'd supports use of hourly salary only. In future iterations, we can expand this functionality
+to let it track both hourly and monthly salary. Can be done with the tracking of salary changes.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -524,7 +552,7 @@ functionality to let it track the changes on a staff's salary, store the salary 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
+## **Appendix A: Requirements**
 
 ### Product scope
 
@@ -561,8 +589,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | new user                                   | understand why my command fails| be guided towards using the App correctly                              |
 | `* * *`  | user with many new staff                   | add multiple staff             | add several new staff quickly                                          |
 | `* * *`  | user with many retiring staff              | delete multiple staff          | remove multiple entries that I no longer need                          |
+| `* * *`  | user in charge of salary calculation       | use Staff'd to calculate the salaries  | Manage salary payments accurately and quickly                  |
+| `* *`    | user in charge of tracking staff attendance| use Staff'd to mark absentees  | calculate working hours accurately    
 | `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `* *`    | user in charge of salary calculation       | use Staff'd to calculate the salaries  | Manage salary payments accurately and quickly                  |
 | `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
 
 
@@ -597,21 +626,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User chooses to edit the staff details.
 1. User inputs relevant details.
-1. Staff’d requests for confirmation.
-1. User confirms.
 1. Staff’d updates the new staff details.
 
    Use case ends.
 
 **Extensions**
 
-* 3a. Staff'd detects an error in the entered data.
+* 2a. Staff'd detects an error in the entered data.
 
-    * 3a1. Staff'd displays an error message.
-    * 3a2. User enters new data.
-    * 3a2. Steps 3a1-3a2 are repeated until the data entered are correct.
+    * 2a1. Staff'd displays an error message.
+    * 2a2. User enters new data.
+    * 2a3. Steps 3a1-3a2 are repeated until the data entered are correct.
 
-      Use case resumes at step 4.
+      Use case resumes at step 3.
 
 **Use case: UC03 - Edit staff schedule**
 
@@ -619,25 +646,38 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User chooses to edit a staff's schedule.
 1. User inputs relevant details.
-1. Staff’d requests for confirmation.
-1. User confirms.
 1. Staff’d updates the new staff schedule.
 
    Use case ends.
 
 **Extensions**
 
-* 3a. Staff'd detects an error in the entered data.
+* 2a. Staff'd detects an error in the entered data.
 
-    * 3a1. Staff'd displays an error message.
-    * 3a2. User enters new data.
-    * 3a2. Steps 3a1-3a2 are repeated until the data entered are correct.
+    * 2a1. Staff'd displays an error message.
+    * 2a2. User enters new data.
+    * 2a3. Steps 2a1-2a2 are repeated until the data entered are correct.
 
-      Use case resumes at step 4.
+      Use case resumes at step 3.
     
 
+**Use case: UC03 - use Staff'd to calculate the salary**
 
-*{More to be added}*
+1. User chooses to calculate a staff's salary.
+1. User inputs relevant details.
+1. Staff'd displays the salary of staff related to details.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. Staff'd detects an error in the entered details.
+    * 2a1. Staff'd displays an error message.
+    * 2a2. User enters new data.
+    * 2a3. Steps 2a1-2a2 are repeated until data entered are correct.
+      
+        Use case resumes at step 3.
+
 
 ### Non-Functional Requirements
 
@@ -715,7 +755,7 @@ Project scope:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix A: Instructions for manual testing**
+## **Appendix B: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 
@@ -824,7 +864,7 @@ testers are expected to do more *exploratory* testing.
     
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix B: Effort**
+## **Appendix C: Effort**
 
 During the V1.2 iteration, we had set out to revamp the entire codebase to accommodate F&B staff and their details as 
 compared to regular people. This task was moderately difficult as on one hand, we only had to refactor any instances of 

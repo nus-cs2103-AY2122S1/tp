@@ -72,6 +72,7 @@ Model --> MarkCommand
 deactivate Model
 MarkCommand -> Person : mark()
 
+note right : Details of the union \n method are provided below
 activate Person
 Person -> Period : union()
 activate Period
