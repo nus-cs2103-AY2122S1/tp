@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_INDEX;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_INDEX_DEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
@@ -52,7 +51,6 @@ public class CommandTestUtil {
     public static final int VALID_EVENT_INDEX = 1;
     public static final int VALID_TASK_INDEX = 1;
     public static final int VALID_MEMBER_INDEX = 1;
-    public static final int VALID_MEMBER_INDEX_DEL = 1;
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -68,7 +66,6 @@ public class CommandTestUtil {
     public static final String TASK_DEADLINE_DESC_POEM = " " + PREFIX_DATE + VALID_POEM_TASK_DEADLINE;
     public static final String TASK_INDEX_DESC_ONE = " " + PREFIX_TASK_INDEX + VALID_TASK_INDEX;
     public static final String MEMBER_INDEX_DESC_ONE = " " + PREFIX_MEMBER_INDEX + VALID_MEMBER_INDEX;
-    public static final String MEMBER_INDEX_DEL_DESC_ONE = " " + PREFIX_MEMBER_INDEX_DEL + VALID_MEMBER_INDEX;
     public static final String EVENT_NAME_DESC_CHESS = " " + PREFIX_NAME + VALID_EVENT_NAME_CHESS;
     public static final String EVENT_NAME_DESC_BADMINTON = " " + PREFIX_NAME + VALID_EVENT_NAME_BADMINTON;
     public static final String EVENT_DATE_DESC_CHESS = " " + PREFIX_DATE + VALID_EVENT_DATE_CHESS;
@@ -90,8 +87,6 @@ public class CommandTestUtil {
             " " + PREFIX_MEMBER_INDEX + "abs"; // 'abs' not allowed in id
     public static final String INVALID_EVENT_INDEX_DESC =
             " " + PREFIX_EVENT_INDEX + "abs"; // 'abs' not allowed in id
-    public static final String INVALID_MEMBER_INDEX_DEL_DESC =
-            " " + PREFIX_MEMBER_INDEX_DEL + "abs"; // 'abs' not allowed in id
     public static final String INVALID_EVENT_NAME_DESC = " " + PREFIX_NAME + "B@DMINTON";
     public static final String INVALID_EVENT_DATE_DESC = " " + PREFIX_DATE + "20/13/2021"; // There is no 13th month.
 

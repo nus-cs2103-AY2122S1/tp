@@ -150,10 +150,10 @@ The `Model` component,
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 Within the `Model` component,
-* `Module` is the superclass of `Member`, `Event` and `Task`. `Module` has a `Name` field as the common attribute of its subclasses.
-* `Event` has a `Name` field, `EventDate` field, and a field of a `HashMap<Member, Boolean>` to serve as a participant list with attendance.
+* `Module` is the superclass of `Member`, `Event` and `Task`. `Module` has a `name` field as the common attribute of its subclasses.
+* `Event` has a `name` field, `eventDate` field, and a `particpants` field consisting of a map of members to their attendance to serve as a participant list with attendance.
 * `Member` has its original fields from AB3 and an additional field of a `TaskList` to store all tasks assigned to the member.
-* `Task` has a `Name` field, `TaskDeadline` field, and a `Boolean` field to represent the completion status of the task.
+* `Task` has a `name` field, `taskDeadline` field, and a `isDone` field to represent the completion status of the task.
 
 An alternative (arguably, a more OOP) model design is given below,
 
@@ -161,6 +161,7 @@ An alternative (arguably, a more OOP) model design is given below,
 
 * `AddressBook` also stores all `Task` objects (which are contained in a `UniqueTaskList` object).
 * Each `Member` object references `Task` object in the `UniqueTaskList`, instead of needing its own list of tasks.
+
 However, this design has some issues in storage,
 * Since Ailurus uses JSON files to store user data, JSON format members should at least store the unique identifier of each task the member had.
 In our implementation, the unique identifier is `Name` and `TaskDeadline`, which are actually the main part of a `Task`.
@@ -168,6 +169,7 @@ In our implementation, the unique identifier is `Name` and `TaskDeadline`, which
 * In all, implementing the storage of this member-task relation by using JSON file is likely to incur redundancy and error-prone, so we decided to use an easier implementation, which is the current one.
 
 A better implementation of the alternative design may involve using Database Management System (DBMS) like PostgreSQL, a proposed entity relationship model diagram for the member-task relation is given here: [ER_diagram](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/docs/images/ER.png)
+
 
 ### Storage component
 
