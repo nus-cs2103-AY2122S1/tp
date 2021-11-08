@@ -50,7 +50,14 @@ public class ExportCommand extends Command {
         Path outputFilePath;
 
         try {
-            outputFilePath = Paths.get(FileUtil.getCurrentPath(), "..", "data", outputFileName).normalize();
+            String os = System.getProperty("os.name");
+
+            if (os.equals("Windows")) {
+                outputFilePath = Paths.get("data", outputFileName);
+            } else {
+                outputFilePath = Paths.get(FileUtil.getCurrentPath(), "..", "data", outputFileName).normalize();
+            }
+
 
             FileUtil.createIfMissing(outputFilePath);
             JsonUtil.saveJsonFile(new JsonSerializableAddressBook(model.getAddressBook()), outputFilePath);

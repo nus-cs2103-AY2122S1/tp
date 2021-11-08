@@ -60,8 +60,14 @@ public class ImportCommand extends Command {
         int contactsAdded;
 
         try {
-            importedFilePath = Paths.get(FileUtil.getCurrentPath(), "..", "data", importedFileName)
-                    .toAbsolutePath().normalize();
+            String os = System.getProperty("os.name");
+
+            if (os.equals("Windows")) {
+                importedFilePath = Paths.get("data", importedFileName);
+            } else {
+                importedFilePath = Paths.get(FileUtil.getCurrentPath(), "..", "data", importedFileName)
+                        .toAbsolutePath().normalize();
+            }
 
             UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(new Config().getUserPrefsFilePath());
             AddressBookStorage importedAddressBookStorage = new JsonAddressBookStorage(importedFilePath);
