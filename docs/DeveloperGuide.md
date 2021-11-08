@@ -192,6 +192,10 @@ API** : [`Trie.java`](https://github.com/AY2122S1-CS2103T-W08-1/tp/blob/master/s
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Execution of person command
+The diagram below shows how a person command is executed.
+![/PersonCommandActivityDiagram](images/PersonCommandActivityDiagram.png)
+
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
@@ -225,11 +229,11 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### User stories
 
-Priorities:<p>
+Priorities:
 
-* High - must have<p>
-* Medium - nice to have<p>
-* Low - unlikely to have<p>
+* High - must have
+* Medium - nice to have
+* Low - unlikely to have
 * Default - already implemented)
 
 |As a …                                                                                      |I want to …                                                                                                   |So that I can …                                            |Priority    |Status     |When?         |
@@ -562,13 +566,13 @@ Prerequisites: Be in a list of groups. They can be subgroups or supergroups. Mus
 
 ### Adding person to a group
 
-1. Prerequisites: List all persons using the `person /list` command. Multiple persons in the list. Only the group Orbital is created.
+1. Prerequisites: List all persons using the `person /list` command. Multiple persons in the list. Group Orbital is created.
 
     1. Test case: `person 1 /add g:Orbital`<br>
        Expected: Person is added to the group. Person is updated with a new group in the UI.
 
     1. Test case: `person 0 /add g:Orbital`<br>
-       Expected: Nothing happened. Error details shown in the status message.
+       Expected: No person is added to a group. Error details shown in the status message.
 
     1. Other incorrect delete commands to try: `person /add`, `person 1 /add g:NonExistent`, `...`
        (where x is larger than the list size)<br>
@@ -581,7 +585,7 @@ Prerequisites: Be in a list of groups. They can be subgroups or supergroups. Mus
            Expected: Person is removed to the group. Person is updated with group removed in the UI.
 
     1. Test case: `person 0 /remove g:Orbital`<br>
-       Expected: No person is removed. Error details shown in the status message.
+       Expected: No person is removed from group. Error details shown in the status message.
 
     1. Other incorrect delete commands to try: `person /remove`, `person 1 /remove g:NonExistent`, `...`
        (where x is larger than the list size)<br>
