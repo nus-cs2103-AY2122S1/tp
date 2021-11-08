@@ -21,28 +21,29 @@ public interface ApplicantBookStorage {
     /**
      * Returns ApplicantBook data as a {@link ReadOnlyApplicantBook}.
      *   Returns {@code Optional.empty()} if storage file is not found.
-     * @throws DataConversionException if the data in storage is not in the expected format.
-     * @throws IOException if there was any problem when reading from the storage.
+     *
+     * @throws DataConversionException If the data in storage is not in the expected format.
+     * @throws IOException If there was any problem when reading from the storage.
      */
     Optional<ReadOnlyApplicantBook> readApplicantBook(ReadOnlyPositionBook positionBook) throws
             DataConversionException, IOException;
 
     /**
-     * @see #getApplicantBookFilePath()
+     * @see #getApplicantBookFilePath().
      */
     Optional<ReadOnlyApplicantBook> readApplicantBook(Path filePath, ReadOnlyPositionBook positionBook) throws
             DataConversionException, IOException;
 
     /**
      * Saves the given {@link ReadOnlyApplicantBook} to the storage.
-     * @param applicantBook cannot be null.
-     * @throws IOException if there was any problem writing to the file.
+     *
+     * @param applicantBook The applicant book to be saved. Cannot be null.
+     * @throws IOException If there was any problem writing to the file.
      */
     void saveApplicantBook(ReadOnlyApplicantBook applicantBook) throws IOException;
 
     /**
-     * @see #saveApplicantBook(ReadOnlyApplicantBook)
+     * @see #saveApplicantBook(ReadOnlyApplicantBook).
      */
     void saveApplicantBook(ReadOnlyApplicantBook applicantBook, Path filePath) throws IOException;
-
 }

@@ -19,27 +19,27 @@ public interface PositionBookStorage {
 
     /**
      * Returns PositionBook data as a {@link ReadOnlyPositionBook}.
-     *   Returns {@code Optional.empty()} if storage file is not found.
-     * @throws DataConversionException if the data in storage is not in the expected format.
-     * @throws IOException if there was any problem when reading from the storage.
+     * Returns {@code Optional.empty()} if storage file is not found.
+     *
+     * @throws DataConversionException If the data in storage is not in the expected format.
+     * @throws IOException If there was any problem when reading from the storage.
      */
     Optional<ReadOnlyPositionBook> readPositionBook() throws DataConversionException, IOException;
 
     /**
-     * @see #getPositionBookFilePath()
+     * @see #getPositionBookFilePath().
      */
     Optional<ReadOnlyPositionBook> readPositionBook(Path filePath) throws DataConversionException, IOException;
 
     /**
      * Saves the given {@link ReadOnlyPositionBook} to the storage.
-     * @param positionBook cannot be null.
-     * @throws IOException if there was any problem writing to the file.
+     * @param positionBook The position book to be saved. Cannot be null.
+     * @throws IOException If there was any problem writing to the file.
      */
     void savePositionBook(ReadOnlyPositionBook positionBook) throws IOException;
 
     /**
-     * @see #savePositionBook(ReadOnlyPositionBook)
+     * @see #savePositionBook(ReadOnlyPositionBook).
      */
     void savePositionBook(ReadOnlyPositionBook positionBook, Path filePath) throws IOException;
-
 }

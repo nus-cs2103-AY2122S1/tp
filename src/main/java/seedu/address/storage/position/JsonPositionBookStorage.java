@@ -39,8 +39,8 @@ public class JsonPositionBookStorage implements PositionBookStorage {
     /**
      * Similar to {@link #readPositionBook()}.
      *
-     * @param filePath location of the position data. Cannot be null.
-     * @throws DataConversionException if the file is not in the correct format.
+     * @param filePath File path of the position data. Cannot be null.
+     * @throws DataConversionException If the file is not in the correct format.
      */
     public Optional<ReadOnlyPositionBook> readPositionBook(Path filePath) throws DataConversionException {
         requireNonNull(filePath);
@@ -67,7 +67,7 @@ public class JsonPositionBookStorage implements PositionBookStorage {
     /**
      * Similar to {@link #savePositionBook(ReadOnlyPositionBook)}.
      *
-     * @param filePath location of the position data. Cannot be null.
+     * @param filePath File path of the position data. Cannot be null.
      */
     public void savePositionBook(ReadOnlyPositionBook positionBook, Path filePath) throws IOException {
         requireNonNull(positionBook);
@@ -76,5 +76,4 @@ public class JsonPositionBookStorage implements PositionBookStorage {
         FileUtil.createIfMissing(filePath);
         JsonUtil.saveJsonFile(new JsonSerializablePositionBook(positionBook), filePath);
     }
-
 }

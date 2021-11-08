@@ -34,7 +34,8 @@ class JsonSerializablePositionBook {
     /**
      * Converts a given {@code ReadOnlyPositionBook} into this class for Jackson use.
      *
-     * @param source future changes to this will not affect the created {@code JsonSerializablePositionBook}.
+     * @param source The actual position book in read-only mode.
+     *               Future changes to this will not affect the created {@code JsonSerializablePositionBook}.
      */
     public JsonSerializablePositionBook(ReadOnlyPositionBook source) {
         positions.addAll(source.getPositionList().stream().map(JsonAdaptedPosition::new).collect(Collectors.toList()));
@@ -43,7 +44,7 @@ class JsonSerializablePositionBook {
     /**
      * Converts this position book into the model's {@code AddressBook} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated.
+     * @throws IllegalValueException If there were any data constraints violated.
      */
     public PositionBook toModelType() throws IllegalValueException {
         PositionBook positionBook = new PositionBook();
@@ -56,5 +57,4 @@ class JsonSerializablePositionBook {
         }
         return positionBook;
     }
-
 }
