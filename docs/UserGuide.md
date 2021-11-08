@@ -275,7 +275,6 @@ Notes:
 * `find c/ t/FRIENDS`
   * returns `Shin`, who is tagged with `FRIENDS`.
 
-<div style="page-break-after: always;"></div>
 ### Locating contacts by name(s) or tag(s): `findAny`
 
 Finds all contacts who match **ANY** name and tag keywords provided.
