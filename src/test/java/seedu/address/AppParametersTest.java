@@ -57,6 +57,9 @@ public class AppParametersTest {
         // same config file
         another.setConfigPath(Paths.get("config.json"));
         assertTrue(expected.equals(another));
+
+        // hash code
+        assertTrue(expected.hashCode() == another.hashCode());
     }
 
     private static class ParametersStub extends Application.Parameters {
