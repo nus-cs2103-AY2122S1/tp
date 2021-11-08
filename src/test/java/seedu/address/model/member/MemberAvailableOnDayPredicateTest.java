@@ -14,7 +14,7 @@ import seedu.address.testutil.MemberBuilder;
 public class MemberAvailableOnDayPredicateTest {
 
     @Test
-    public void test_personAvailableOnDay_returnsTrue() {
+    public void test_memberAvailableOnDay_returnsTrue() {
         List<DayOfWeek> availability = Arrays.asList(DayOfWeek.MONDAY, DayOfWeek.FRIDAY);
         Member member = new MemberBuilder().withAvailability(availability).build();
         MemberAvailableOnDayPredicate predicate = new MemberAvailableOnDayPredicate(1);
@@ -22,7 +22,7 @@ public class MemberAvailableOnDayPredicateTest {
     }
 
     @Test
-    public void test_personNotAvailableOnDay_returnsFalse() {
+    public void test_memberNotAvailableOnDay_returnsFalse() {
         List<DayOfWeek> availability = Arrays.asList(DayOfWeek.MONDAY, DayOfWeek.FRIDAY);
         Member member = new MemberBuilder().withAvailability(availability).build();
         MemberAvailableOnDayPredicate predicate = new MemberAvailableOnDayPredicate(3);

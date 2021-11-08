@@ -48,8 +48,8 @@ public class SportsPaTest {
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
-        // Two persons with the same identity fields
+    public void resetData_withDuplicateMembers_throwsDuplicateMemberException() {
+        // Two members with the same identity fields
         Member editedAlice = new MemberBuilder(ALICE).build();
         List<Member> newMembers = Arrays.asList(ALICE, editedAlice);
         SportsPaStub newData = new SportsPaStub(newMembers);
@@ -58,44 +58,44 @@ public class SportsPaTest {
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
+    public void hasMember_nullMember_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> sportsPa.hasMember(null));
     }
 
     @Test
-    public void hasPerson_personNotInSportsPa_returnsFalse() {
+    public void hasMember_memberNotInSportsPa_returnsFalse() {
         assertFalse(sportsPa.hasMember(ALICE));
     }
 
     @Test
-    public void hasPerson_personInSportsPa_returnsTrue() {
+    public void hasMember_memberInSportsPa_returnsTrue() {
         sportsPa.addMember(ALICE);
         assertTrue(sportsPa.hasMember(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInSportsPa_returnsTrue() {
+    public void hasMember_memberWithSameIdentityFieldsInSportsPa_returnsTrue() {
         sportsPa.addMember(ALICE);
         Member editedAlice = new MemberBuilder(ALICE).build();
         assertTrue(sportsPa.hasMember(editedAlice));
     }
 
     @Test
-    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getMemberList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> sportsPa.getMemberList().remove(0));
     }
 
     @Test
-    public void split_noPersonsInFilteredList_noChangesToFacilities() {
-        ObservableList<Member> emptyPersonsList = FXCollections.emptyObservableList();
-        FilteredList<Member> emptyList = new FilteredList<>(emptyPersonsList);
+    public void split_noMembersInFilteredList_noChangesToFacilities() {
+        ObservableList<Member> emptyMembersList = FXCollections.emptyObservableList();
+        FilteredList<Member> emptyList = new FilteredList<>(emptyMembersList);
         ObservableList<Facility> facilities = sportsPa.getFacilityList();
         sportsPa.split(emptyList, 1);
         assertEquals(facilities, sportsPa.getFacilityList());
     }
 
     @Test
-    public void split_personPresentInFilteredList_facilitiesUpdate() {
+    public void split_memberPresentInFilteredList_facilitiesUpdate() {
         SportsPa newData = new SportsPa(getTypicalSportsPaEmptyFacilityList());
         Facility firstFacility = new FacilityBuilder(FIELD).build();
         newData.addFacility(firstFacility);
@@ -114,7 +114,7 @@ public class SportsPaTest {
     }
 
     /**
-     * A stub ReadOnlySportsPa whose persons list can violate interface constraints.
+     * A stub ReadOnlySportsPa whose members list can violate interface constraints.
      */
     private static class SportsPaStub implements ReadOnlySportsPa {
         private final ObservableList<Member> members = FXCollections.observableArrayList();
