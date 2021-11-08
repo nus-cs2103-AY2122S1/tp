@@ -614,6 +614,7 @@ Action | Format, Examples
 **[Delete student](#deleting-a-student--deletestu)** | `deletestu INDEX`<br> e.g., `liststu` followed by `deletestu 3`
 
 ### Student Marks
+
 Action | Format, Examples
 --------|------------------
 **[Add latest mark](#adding-the-latest-mark-addlm)** | `addlm INDEX m/MARK`<br> e.g., `liststu` followed by `addlm 1 m/excellent`
@@ -621,6 +622,7 @@ Action | Format, Examples
 **[Delete all marks](#deleting-all-marks-deleteam)** | `deleteam INDEX`<br> e.g., `liststu` followed by `deleteam 3`
 
 ### Tutorial Groups
+
 Action | Format, Examples
 --------|------------------
 **[Add tutorial group](#adding-a-tutorial-group-addcg)** | `addcg gn/GROUP_NUMBER c/CLASS_CODE type/TYPE` <br> e.g.,`addcg gn/1 c/G11 type/OP1`
@@ -630,6 +632,7 @@ Action | Format, Examples
 **[Delete student from group](#deleting-student-from-a-group-deletesg)** | `deletesg INDEX gn/GROUP_NUMBER c/CLASS_CODE type/GROUP_TYPE` <br> e.g., `deletesg  1 gn/1 c/G01 type/OP1`
 
 ### Other Commands
+
 Action | Format, Examples
 --------|------------------
 **[Help](#viewing-help--help)** | `help`
