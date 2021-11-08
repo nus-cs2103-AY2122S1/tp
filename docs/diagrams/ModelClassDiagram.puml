@@ -23,6 +23,7 @@ Class Email
 Class Name
 Class Phone
 Class Tag
+Class AssignmentGradeMap
 
 Package "ModuleSystem Model" {
 Interface ReadOnlyModuleSystem <<Interface>>
@@ -51,12 +52,13 @@ ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 EdRecord *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
+UniquePersonList --> "~*all" Person
 Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Info
 Person *--> "*" Tag
+Person *--> AssignmentGradeMap
 Person *--> ModuleSet
 
 Name -[hidden]right-> Phone
@@ -67,5 +69,5 @@ ModuleSystem *--> "1" UniqueModuleList
 UniqueModuleList --> "*" Module
 ModuleSet *--> "*" Module
 
-ModelManager -->"~* filtered" Person
+ModelManager -->"~*filtered" Person
 @enduml

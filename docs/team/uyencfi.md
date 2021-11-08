@@ -44,12 +44,12 @@ EdRecord is a **desktop student management app, for teaching assistants to manag
 ### Documentation
 
 * **User Guide**:
-  * Completed documentation for assignments features: [\#??]()
-  * Proofreading and formatting: [\#??]()
+  * Completed documentation for assignments features: [\#205](https://github.com/AY2122S1-CS2103-W14-3/tp/pull/205)
+  * Reorganizing and formatting: [\#205](https://github.com/AY2122S1-CS2103-W14-3/tp/pull/205)
 * **Developer Guide**:
   * Added all use cases: [\#65](https://github.com/AY2122S1-CS2103-W14-3/tp/pull/65) and [\#76](https://github.com/AY2122S1-CS2103-W14-3/tp/pull/76)
-  * Added implementation details of all assignments features: [\#??]()
-  * Added diagrams: [\#??]()
+  * Added implementation details and diagrams of Assignments features: [\#224](https://github.com/AY2122S1-CS2103-W14-3/tp/pull/224)
+  * Updated diagrams: [\#227](https://github.com/AY2122S1-CS2103-W14-3/tp/pull/227)
 
 ### Community
 
