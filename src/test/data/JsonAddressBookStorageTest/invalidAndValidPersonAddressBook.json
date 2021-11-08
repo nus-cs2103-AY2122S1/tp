@@ -1,13 +1,14 @@
 {
   "persons": [ {
     "name": "Valid Person",
-    "phone": "9482424",
     "email": "hans@example.com",
-    "address": "4th street"
+    "faculty": "computing",
+    "major": "computer science"
   }, {
-    "name": "Person With Invalid Phone Field",
-    "phone": "948asdf2424",
+    "name": "Person With Invalid Faculty Field",
     "email": "hans@example.com",
-    "address": "4th street"
-  } ]
+    "faculty": "invalid_faculty",
+    "major": "computer science"
+  } ],
+  "organisations" : []
 }

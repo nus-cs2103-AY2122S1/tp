@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -33,13 +34,21 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
-    @FXML
-    private Label address;
-    @FXML
     private Label email;
     @FXML
+    private Label faculty;
+    @FXML
+    private Label major;
+    @FXML
+    private FlowPane skills;
+    @FXML
+    private FlowPane languages;
+    @FXML
+    private FlowPane frameworks;
+
+    @FXML
     private FlowPane tags;
+
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -49,12 +58,42 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
+        faculty.setText(person.getFaculty().value);
+        major.setText(person.getMajor().value);
+        AtomicInteger index = new AtomicInteger(1);
+
+        person.getSkills().stream()
+                .sorted(Comparator.comparing(skill -> skill.skillName))
+                .forEach(skill -> {
+                    skills.getChildren().add(new Label(index + ". " + skill.skillName));
+                    index.addAndGet(1);
+                });
+        index.set(1);
+
+        person.getLanguages().stream()
+                .sorted(Comparator.comparing(language -> language.languageName))
+                .forEach(language -> {
+                    languages.getChildren().add(new Label(index + ". " + language.languageName));
+                    index.addAndGet(1);
+                });
+        index.set(1);
+
+        person.getFrameworks().stream()
+                .sorted(Comparator.comparing(framework -> framework.frameworkName))
+                .forEach(framework -> {
+                    frameworks.getChildren().add(new Label(index + ". " + framework.frameworkName));
+                    index.addAndGet(1);
+                });
+        index.set(1);
+
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .forEach(tag -> {
+                    tags.getChildren().add(new Label(index + ". " + tag.tagName));
+                    index.addAndGet(1);
+                });
+        index.set(1);
+
     }
 
     @Override

@@ -18,11 +18,17 @@ Class ReadOnlyUserPrefs
 
 Class UniquePersonList
 Class Person
-Class Address
 Class Email
+Class Faculty
+Class Major
 Class Name
-Class Phone
 Class Tag
+Class Skill
+Class Language
+Class Framework
+Class Remark
+Class Interaction
+Class Compatibility
 
 }
 
@@ -40,15 +46,18 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
+Person *--> "1" Name
+Person *--> "1" Email
+Person *--> "1" Faculty
+Person *--> "1" Major
+Person *--> "*" Skill
+Person *--> "*" Language
+Person *--> "*" Framework
 Person *--> "*" Tag
+Person *--> "*" Remark
+Person *--> "*" Interaction
+Person *--> "1" Compatibility
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
 
 ModelManager -->"~* filtered" Person
 @enduml

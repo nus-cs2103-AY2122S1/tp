@@ -4,15 +4,21 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
+import seedu.address.model.person.Compatibility;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Faculty;
+import seedu.address.model.person.Major;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.remark.Remark;
+import seedu.address.model.skill.Framework;
+import seedu.address.model.skill.Language;
+import seedu.address.model.skill.Skill;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -50,35 +56,6 @@ public class ParserUtil {
         return new Name(trimmedName);
     }
 
-    /**
-     * Parses a {@code String phone} into a {@code Phone}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code phone} is invalid.
-     */
-    public static Phone parsePhone(String phone) throws ParseException {
-        requireNonNull(phone);
-        String trimmedPhone = phone.trim();
-        if (!Phone.isValidPhone(trimmedPhone)) {
-            throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
-        }
-        return new Phone(trimmedPhone);
-    }
-
-    /**
-     * Parses a {@code String address} into an {@code Address}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code address} is invalid.
-     */
-    public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
-        }
-        return new Address(trimmedAddress);
-    }
 
     /**
      * Parses a {@code String email} into an {@code Email}.
@@ -93,6 +70,104 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String faculty} into an {@code Faculty}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code faculty} is invalid.
+     */
+    public static Faculty parseFaculty(String faculty) throws ParseException {
+        requireNonNull(faculty);
+        String trimmedFaculty = faculty.trim();
+        if (!Faculty.isValidFaculty(trimmedFaculty)) {
+            throw new ParseException((Faculty.MESSAGE_CONSTRAINTS));
+        }
+        return new Faculty(trimmedFaculty);
+    }
+
+    /**
+     * Parses a {@code String major} into an {@code Major}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code major} is invalid.
+     */
+    public static Major parseMajor(String major) throws ParseException {
+        requireNonNull(major);
+        String trimmedMajor = major.trim();
+        if (!Major.isValidMajor(trimmedMajor)) {
+            throw new ParseException((Major.MESSAGE_CONSTRAINTS));
+        }
+        return new Major(trimmedMajor);
+    }
+
+    /**
+     * Parses a {@code String compatibility} into an {@code Compatibility}.
+     * string will be converted to a integer type
+     *
+     * @throws ParseException if the given {@code major} is invalid.
+     */
+    public static Compatibility parseCompatibility(Optional<String> compatibility) throws ParseException {
+        if (compatibility.isEmpty()) {
+            return new Compatibility(null);
+        }
+        String stringValue = compatibility.get();
+        Integer compatibilityRating;
+        try {
+            compatibilityRating = Integer.parseInt(stringValue);
+        } catch (NumberFormatException e) {
+            if (stringValue.length() == 0) {
+                return new Compatibility(null);
+            }
+            throw new ParseException((Compatibility.MESSAGE_CONSTRAINTS));
+        }
+        return new Compatibility(compatibilityRating);
+    }
+
+    /**
+     * Parses a {@code String skill} into a {@code Skill}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code skill} is invalid.
+     */
+    public static Skill parseSkill(String skill) throws ParseException {
+        requireNonNull(skill);
+        String trimmedSkill = skill.trim();
+        if (!Skill.isValidSkillName(trimmedSkill)) {
+            throw new ParseException(Skill.MESSAGE_CONSTRAINTS);
+        }
+        return new Skill(trimmedSkill);
+    }
+
+    /**
+     * Parses a {@code String language} into a {@code Language}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code language} is invalid.
+     */
+    public static Language parseLanguage(String language) throws ParseException {
+        requireNonNull(language);
+        String trimmedLanguage = language.trim();
+        if (!Language.isValidLanguageName(trimmedLanguage)) {
+            throw new ParseException(Language.MESSAGE_CONSTRAINTS);
+        }
+        return new Language(trimmedLanguage);
+    }
+
+    /**
+     * Parses a {@code String framework} into a {@code Framework}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code framework} is invalid.
+     */
+    public static Framework parseFramework(String framework) throws ParseException {
+        requireNonNull(framework);
+        String trimmedFramework = framework.trim();
+        if (!Framework.isValidFrameworkName(trimmedFramework)) {
+            throw new ParseException(Framework.MESSAGE_CONSTRAINTS);
+        }
+        return new Framework(trimmedFramework);
     }
 
     /**
@@ -111,6 +186,55 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String remark} into a {@code Remark}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code remark} is invalid.
+     */
+    public static Remark parseRemark(String remark) {
+        requireNonNull(remark);
+        String trimmedRemark = remark.trim();
+        return new Remark(trimmedRemark);
+    }
+
+
+    /**
+     * Parses {@code Collection<String> skills} into a {@code Set<Skill>}.
+     */
+    public static Set<Skill> parseSkills(Collection<String> skills) throws ParseException {
+        requireNonNull(skills);
+        final Set<Skill> skillSet = new HashSet<>();
+        for (String skillName : skills) {
+            skillSet.add(parseSkill(skillName));
+        }
+        return skillSet;
+    }
+
+    /**
+     * Parses {@code Collection<String> languages} into a {@code Set<Language>}.
+     */
+    public static Set<Language> parseLanguages(Collection<String> languages) throws ParseException {
+        requireNonNull(languages);
+        final Set<Language> languageSet = new HashSet<>();
+        for (String languageName : languages) {
+            languageSet.add(parseLanguage(languageName));
+        }
+        return languageSet;
+    }
+
+    /**
+     * Parses {@code Collection<String> frameworks} into a {@code Set<Framework>}.
+     */
+    public static Set<Framework> parseFrameworks(Collection<String> frameworks) throws ParseException {
+        requireNonNull(frameworks);
+        final Set<Framework> frameworkSet = new HashSet<>();
+        for (String frameworkName : frameworks) {
+            frameworkSet.add(parseFramework(frameworkName));
+        }
+        return frameworkSet;
+    }
+
+    /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
      */
     public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
@@ -121,4 +245,29 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Parses {@code Collection<String> indexes} into a {@code Set<Index>}.
+     */
+    public static Set<Index> parseIndexes(Collection<String> indexes) throws ParseException {
+        requireNonNull(indexes);
+        final Set<Index> indexSet = new HashSet<>();
+        for (String index : indexes) {
+            indexSet.add(parseIndex(index));
+        }
+        return indexSet;
+    }
+
+    /**
+     * Parses {@code Collection<String> remarks} into a {@code Set<Remark>}.
+     */
+    public static Set<Remark> parseRemarks(Collection<String> remarks) throws ParseException {
+        requireNonNull(remarks);
+        final Set<Remark> remarkSet = new HashSet<>();
+        for (String remarkDetails : remarks) {
+            remarkSet.add(parseRemark(remarkDetails));
+        }
+        return remarkSet;
+    }
+
 }

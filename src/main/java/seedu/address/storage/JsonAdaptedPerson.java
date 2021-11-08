@@ -10,11 +10,17 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
+import seedu.address.model.interaction.Interaction;
+import seedu.address.model.person.Compatibility;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Faculty;
+import seedu.address.model.person.Major;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.remark.Remark;
+import seedu.address.model.skill.Framework;
+import seedu.address.model.skill.Language;
+import seedu.address.model.skill.Skill;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -25,24 +31,60 @@ class JsonAdaptedPerson {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
     private final String name;
-    private final String phone;
     private final String email;
-    private final String address;
+    private final String faculty;
+    private final String major;
+    private final Integer compatibility;
+
+    private final List<JsonAdaptedSkill> skills = new ArrayList<>();
+    private final List<JsonAdaptedLanguage> languages = new ArrayList<>();
+    private final List<JsonAdaptedFramework> frameworks = new ArrayList<>();
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final List<JsonAdaptedRemark> remarks = new ArrayList<>();
+    private final List<JsonAdaptedInteractions> interactions = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("email") String email,
+                             @JsonProperty("faculty") String faculty,
+                             @JsonProperty("major") String major,
+                             @JsonProperty("compatibility") Integer compatibility,
+                             @JsonProperty("skills") List<JsonAdaptedSkill> skills,
+                             @JsonProperty("languages") List<JsonAdaptedLanguage> languages,
+                             @JsonProperty("frameworks") List<JsonAdaptedFramework> frameworks,
+                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+                             @JsonProperty("remarks") List<JsonAdaptedRemark> remarks,
+                             @JsonProperty("interactions") List<JsonAdaptedInteractions> interactions) {
         this.name = name;
-        this.phone = phone;
         this.email = email;
-        this.address = address;
+        this.faculty = faculty;
+        this.major = major;
+        this.compatibility = compatibility;
+
+        if (skills != null) {
+            this.skills.addAll(skills);
+        }
+
+        if (languages != null) {
+            this.languages.addAll(languages);
+        }
+
+        if (frameworks != null) {
+            this.frameworks.addAll(frameworks);
+        }
+
         if (tagged != null) {
             this.tagged.addAll(tagged);
+        }
+
+        if (remarks != null) {
+            this.remarks.addAll(remarks);
+        }
+
+        if (interactions != null) {
+            this.interactions.addAll(interactions);
         }
     }
 
@@ -51,11 +93,33 @@ class JsonAdaptedPerson {
      */
     public JsonAdaptedPerson(Person source) {
         name = source.getName().fullName;
-        phone = source.getPhone().value;
         email = source.getEmail().value;
-        address = source.getAddress().value;
+        faculty = source.getFaculty().value;
+        major = source.getMajor().value;
+        compatibility = source.getCompatibility().compatibilityRating.orElse(null);
+
+        skills.addAll(source.getSkills().stream()
+                .map(JsonAdaptedSkill::new)
+                .collect(Collectors.toList()));
+
+        languages.addAll(source.getLanguages().stream()
+                .map(JsonAdaptedLanguage::new)
+                .collect(Collectors.toList()));
+
+        frameworks.addAll(source.getFrameworks().stream()
+                .map(JsonAdaptedFramework::new)
+                .collect(Collectors.toList()));
+
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
+                .collect(Collectors.toList()));
+
+        remarks.addAll(source.getRemarks().stream()
+                .map(JsonAdaptedRemark::new)
+                .collect(Collectors.toList()));
+
+        interactions.addAll(source.getInteractions().stream()
+                .map(JsonAdaptedInteractions::new)
                 .collect(Collectors.toList()));
     }
 
@@ -65,9 +129,34 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
+        final List<Skill> personSkills = new ArrayList<>();
+        for (JsonAdaptedSkill skill : skills) {
+            personSkills.add(skill.toModelType());
+        }
+
+        final List<Language> personLanguages = new ArrayList<>();
+        for (JsonAdaptedLanguage language : languages) {
+            personLanguages.add(language.toModelType());
+        }
+
+        final List<Framework> personFrameworks = new ArrayList<>();
+        for (JsonAdaptedFramework framework : frameworks) {
+            personFrameworks.add(framework.toModelType());
+        }
+
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
+        }
+
+        final List<Interaction> personInteractions = new ArrayList<>();
+        for (JsonAdaptedInteractions interaction : interactions) {
+            personInteractions.add(interaction.toModelType());
+        }
+
+        final List<Remark> personRemarks = new ArrayList<>();
+        for (JsonAdaptedRemark remark : remarks) {
+            personRemarks.add(remark.toModelType());
         }
 
         if (name == null) {
@@ -78,14 +167,6 @@ class JsonAdaptedPerson {
         }
         final Name modelName = new Name(name);
 
-        if (phone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
-        }
-        if (!Phone.isValidPhone(phone)) {
-            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
-        }
-        final Phone modelPhone = new Phone(phone);
-
         if (email == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
         }
@@ -94,16 +175,32 @@ class JsonAdaptedPerson {
         }
         final Email modelEmail = new Email(email);
 
-        if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+        if (faculty == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Faculty.class.getSimpleName()));
         }
-        if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+        if (!Faculty.isValidFaculty(faculty)) {
+            throw new IllegalValueException(Faculty.MESSAGE_CONSTRAINTS);
         }
-        final Address modelAddress = new Address(address);
+        final Faculty modelFaculty = new Faculty(faculty);
 
+        if (major == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Major.class.getSimpleName()));
+        }
+        if (!Major.isValidMajor(major)) {
+            throw new IllegalValueException(Major.MESSAGE_CONSTRAINTS);
+        }
+        final Major modelMajor = new Major(major);
+        final Compatibility modelCompatibility = new Compatibility(compatibility);
+        final Set<Skill> modelSkills = new HashSet<>(personSkills);
+        final Set<Language> modelLanguages = new HashSet<>(personLanguages);
+        final Set<Framework> modelFrameworks = new HashSet<>(personFrameworks);
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        final Set<Remark> modelRemarks = new HashSet<>(personRemarks);
+        final Set<Interaction> modelInteractions = new HashSet<>(personInteractions);
+
+        return new Person(modelName, modelEmail, modelFaculty, modelMajor,
+                modelCompatibility, modelSkills, modelLanguages, modelFrameworks,
+                modelTags, modelRemarks, modelInteractions);
     }
 
 }

@@ -1,11 +1,17 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPATIBILITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FACULTY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FRAMEWORK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LANGUAGE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MAJOR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ORGANISATIONS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -13,21 +19,29 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Predicate;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
+import seedu.address.model.organisation.Organisation;
+import seedu.address.model.person.Compatibility;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Faculty;
+import seedu.address.model.person.Major;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.remark.Remark;
+import seedu.address.model.skill.Framework;
+import seedu.address.model.skill.Language;
+import seedu.address.model.skill.Skill;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing person in ComputingConnection.
  */
 public class EditCommand extends Command {
 
@@ -38,12 +52,16 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_FACULTY + "FACULTY] "
+            + "[" + PREFIX_MAJOR + "MAJOR] "
+            + "[" + PREFIX_COMPATIBILITY + "COMPATIBILITY] "
+            + "[" + PREFIX_SKILL + "SKILL] "
+            + "[" + PREFIX_LANGUAGE + "LANGUAGE] "
+            + "[" + PREFIX_FRAMEWORK + "FRAMEWORK] "
+            + "[" + PREFIX_TAG + "TAG] "
+            + "[" + PREFIX_REMARKS + "REMARK]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
@@ -69,20 +87,45 @@ public class EditCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> lastViewedPerson = model.getViewedPerson();
+        boolean updateViewed = false;
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
+        if (!lastViewedPerson.isEmpty() && lastViewedPerson.get(0).equals(personToEdit)) {
+            updateViewed = true;
+        }
+
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+        List<Organisation> organisationList = model.getFilteredOrganisationList();
+        for (Organisation organisation: organisationList) {
+            UniquePersonList persons = organisation.getPersons();
+            if (persons.contains(personToEdit)) {
+                persons.setPerson(personToEdit, editedPerson);
+            }
+        }
+
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredOrganisationList(PREDICATE_SHOW_ALL_ORGANISATIONS);
+
+        if (updateViewed) {
+            model.updateViewedPerson(new Predicate<Person>() {
+                @Override
+                public boolean test(Person person) {
+                    return person.equals(editedPerson);
+                }
+            });
+        }
+
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
     }
 
@@ -92,14 +135,21 @@ public class EditCommand extends Command {
      */
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
-
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        Faculty updatedFaculty = editPersonDescriptor.getFaculty().orElse(personToEdit.getFaculty());
+        Major updatedMajor = editPersonDescriptor.getMajor().orElse(personToEdit.getMajor());
+        Compatibility updatedCompatibility = editPersonDescriptor.getCompatibility()
+                                                .orElse(personToEdit.getCompatibility());
+        Set<Skill> updatedSkills = editPersonDescriptor.getSkills().orElse(personToEdit.getSkills());
+        Set<Language> updatedLanguages = editPersonDescriptor.getLanguages().orElse(personToEdit.getLanguages());
+        Set<Framework> updatedFrameworks = editPersonDescriptor.getFrameworks().orElse(personToEdit.getFrameworks());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Set<Remark> updatedRemarks = editPersonDescriptor.getRemarks().orElse(personToEdit.getRemarks());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedEmail, updatedFaculty, updatedMajor,
+                updatedCompatibility, updatedSkills, updatedLanguages, updatedFrameworks,
+                updatedTags, updatedRemarks, personToEdit.getInteractions());
     }
 
     @Override
@@ -126,10 +176,15 @@ public class EditCommand extends Command {
      */
     public static class EditPersonDescriptor {
         private Name name;
-        private Phone phone;
         private Email email;
-        private Address address;
+        private Faculty faculty;
+        private Major major;
+        private Compatibility compatibility;
+        private Set<Skill> skills;
+        private Set<Language> languages;
+        private Set<Framework> frameworks;
         private Set<Tag> tags;
+        private Set<Remark> remarks;
 
         public EditPersonDescriptor() {}
 
@@ -139,17 +194,23 @@ public class EditCommand extends Command {
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
-            setPhone(toCopy.phone);
             setEmail(toCopy.email);
-            setAddress(toCopy.address);
+            setFaculty(toCopy.faculty);
+            setMajor(toCopy.major);
+            setCompatibility(toCopy.compatibility);
+            setSkills(toCopy.skills);
+            setLanguages(toCopy.languages);
+            setFrameworks(toCopy.frameworks);
             setTags(toCopy.tags);
+            setRemarks(toCopy.remarks);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, email, faculty, major, compatibility,
+                                            skills, languages, frameworks, tags, remarks);
         }
 
         public void setName(Name name) {
@@ -160,14 +221,6 @@ public class EditCommand extends Command {
             return Optional.ofNullable(name);
         }
 
-        public void setPhone(Phone phone) {
-            this.phone = phone;
-        }
-
-        public Optional<Phone> getPhone() {
-            return Optional.ofNullable(phone);
-        }
-
         public void setEmail(Email email) {
             this.email = email;
         }
@@ -176,12 +229,81 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
-        public void setAddress(Address address) {
-            this.address = address;
+        public void setFaculty(Faculty faculty) {
+            this.faculty = faculty;
         }
 
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
+        public Optional<Faculty> getFaculty() {
+            return Optional.ofNullable(faculty);
+        }
+
+        public void setMajor(Major major) {
+            this.major = major;
+        }
+
+        public Optional<Major> getMajor() {
+            return Optional.ofNullable(major);
+        }
+
+        public void setCompatibility(Compatibility compatibility) {
+            this.compatibility = compatibility;
+        }
+
+        public Optional<Compatibility> getCompatibility() {
+            return Optional.ofNullable(compatibility);
+        }
+
+        /**
+         * Sets {@code skill} to this object's {@code skills}.
+         * A defensive copy of {@code skills} is used internally.
+         */
+        public void setSkills(Set<Skill> skills) {
+            this.skills = (skills != null) ? new HashSet<>(skills) : null;
+        }
+
+        /**
+         * Returns an unmodifiable skill set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code skills} is null.
+         */
+        public Optional<Set<Skill>> getSkills() {
+            return (skills != null) ? Optional.ofNullable(Collections.unmodifiableSet(skills)) : Optional.empty();
+        }
+
+        /**
+         * Sets {@code language} to this object's {@code languages}.
+         * A defensive copy of {@code languages} is used internally.
+         */
+        public void setLanguages(Set<Language> languages) {
+            this.languages = (languages != null) ? new HashSet<>(languages) : null;
+        }
+
+        /**
+         * Returns an unmodifiable language set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code languages} is null.
+         */
+        public Optional<Set<Language>> getLanguages() {
+            return (languages != null) ? Optional.ofNullable(Collections.unmodifiableSet(languages)) : Optional.empty();
+        }
+
+        /**
+         * Sets {@code framework} to this object's {@code frameworks}.
+         * A defensive copy of {@code frameworks} is used internally.
+         */
+        public void setFrameworks(Set<Framework> frameworks) {
+            this.frameworks = (frameworks != null) ? new HashSet<>(frameworks) : null;
+        }
+
+        /**
+         * Returns an unmodifiable framework set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code frameworks} is null.
+         */
+        public Optional<Set<Framework>> getFrameworks() {
+            return (frameworks != null)
+                        ? Optional.ofNullable(Collections.unmodifiableSet(frameworks))
+                        : Optional.empty();
         }
 
         /**
@@ -198,7 +320,24 @@ public class EditCommand extends Command {
          * Returns {@code Optional#empty()} if {@code tags} is null.
          */
         public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+            return (tags != null) ? Optional.ofNullable(Collections.unmodifiableSet(tags)) : Optional.empty();
+        }
+
+        /**
+         * Sets {@code tags} to this object's {@code tags}.
+         * A defensive copy of {@code tags} is used internally.
+         */
+        public void setRemarks(Set<Remark> remarks) {
+            this.remarks = (remarks != null) ? new HashSet<>(remarks) : null;
+        }
+
+        /**
+         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code tags} is null.
+         */
+        public Optional<Set<Remark>> getRemarks() {
+            return (remarks != null) ? Optional.ofNullable(Collections.unmodifiableSet(remarks)) : Optional.empty();
         }
 
         @Override
@@ -217,10 +356,15 @@ public class EditCommand extends Command {
             EditPersonDescriptor e = (EditPersonDescriptor) other;
 
             return getName().equals(e.getName())
-                    && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
-                    && getAddress().equals(e.getAddress())
-                    && getTags().equals(e.getTags());
+                    && getFaculty().equals(e.getFaculty())
+                    && getMajor().equals(e.getMajor())
+                    && getCompatibility().equals(e.getCompatibility())
+                    && getSkills().equals(e.getSkills())
+                    && getLanguages().equals(e.getLanguages())
+                    && getFrameworks().equals(e.getFrameworks())
+                    && getTags().equals(e.getTags())
+                    && getRemarks().equals(e.getRemarks());
         }
     }
 }

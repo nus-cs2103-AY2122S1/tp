@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.control.TableRow?>
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS">
     <columnConstraints>
@@ -28,9 +29,16 @@
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
       </HBox>
       <FlowPane fx:id="tags" />
-      <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-      <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
-      <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+      <Label fx:id="faculty" styleClass="cell_small_label" text="\$faculty" />
+      <Label fx:id="major" styleClass="cell_small_label" text="\$major" />
+      <Label styleClass="cell_small_label" text = ""> </Label>
+      <Label styleClass="cell_small_label" text = "Skills: "> </Label>
+      <FlowPane fx:id="skills" />
+      <Label styleClass="cell_small_label" text = "Programming Languages: "> </Label>
+      <FlowPane fx:id="languages" />
+      <Label styleClass="cell_small_label" text = "Frameworks: "> </Label>
+      <FlowPane fx:id="frameworks" />
+      <FlowPane fx:id="remarks" />
     </VBox>
   </GridPane>
 </HBox>

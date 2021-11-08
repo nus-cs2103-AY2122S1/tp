@@ -2,45 +2,55 @@
   "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
   "persons" : [ {
     "name" : "Alice Pauline",
-    "phone" : "94351253",
     "email" : "alice@example.com",
-    "address" : "123, Jurong West Ave 6, #08-111",
+    "faculty": "computing",
+    "major": "computer science",
+    "skills": [ "frontend" ],
+    "languages": ["javascript", "html", "css"],
+    "frameworks": [ "reactJS" ],
     "tagged" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
-    "phone" : "98765432",
     "email" : "johnd@example.com",
-    "address" : "311, Clementi Ave 2, #02-25",
+    "faculty": "computing",
+    "major": "business analytics",
+    "skills": [ "backend" ],
+    "languages": ["sql"],
+    "frameworks": [ "psql" ],
     "tagged" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
-    "phone" : "95352563",
     "email" : "heinz@example.com",
-    "address" : "wall street",
+    "faculty": "computing",
+    "major": "business analytics",
+    "skills": [ "UIUX" ],
     "tagged" : [ ]
   }, {
     "name" : "Daniel Meier",
-    "phone" : "87652533",
     "email" : "cornelia@example.com",
-    "address" : "10th street",
+    "faculty": "computing",
+    "major": "computer science",
     "tagged" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
-    "phone" : "9482224",
     "email" : "werner@example.com",
-    "address" : "michegan ave",
+    "faculty": "computing",
+    "major": "business analytics",
     "tagged" : [ ]
   }, {
     "name" : "Fiona Kunz",
-    "phone" : "9482427",
     "email" : "lydia@example.com",
-    "address" : "little tokyo",
+    "faculty": "fass",
+    "major": "economics",
+    "skills": [ "marketing" ],
     "tagged" : [ ]
   }, {
     "name" : "George Best",
-    "phone" : "9482442",
     "email" : "anna@example.com",
-    "address" : "4th street",
+    "faculty": "computing",
+    "major": "business analytics",
+    "languages": [ "python" ],
     "tagged" : [ ]
-  } ]
+  } ],
+  "organisations" : []
 }

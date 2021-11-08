@@ -1,0 +1,17 @@
+@startuml
+start
+:User executes append command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([valid inputs])
+    : Append the new data fields to existing
+    data fields of the existing contact;
+    : Display updated contact;
+
+else ([invalid inputs])
+    : Display error message;
+endif
+stop
+@enduml

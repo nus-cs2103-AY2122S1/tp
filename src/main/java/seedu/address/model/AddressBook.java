@@ -5,6 +5,9 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.organisation.Organisation;
+import seedu.address.model.organisation.UniqueOrganisationList;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -15,6 +18,7 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final UniqueOrganisationList organisations;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -25,6 +29,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        organisations = new UniqueOrganisationList();
     }
 
     public AddressBook() {}
@@ -46,6 +51,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setPersons(List<Person> persons) {
         this.persons.setPersons(persons);
     }
+    public void setOrganisations(List<Organisation> organisations) {
+        this.organisations.setOrganisations(organisations);
+    }
 
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
@@ -54,6 +62,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setOrganisations(newData.getOrganisationList());
     }
 
     //// person-level operations
@@ -67,11 +76,51 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if a organisation with the same identity as {@code organisation} exists in the address book.
+     */
+    public boolean hasOrganisation(Organisation organisation) {
+        requireNonNull(organisation);
+        return organisations.contains(organisation);
+    }
+
+    /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */
     public void addPerson(Person p) {
         persons.add(p);
+    }
+
+    /**
+     * Adds an organisation to the address book.
+     * The organisation must not already exist in the address book.
+     */
+    public void addOrganisation(Organisation o) {
+        organisations.add(o);
+    }
+
+    /**
+     * Deletes an organisation from the address book.
+     * The organisation must exist in the address book.
+     */
+    public void deleteOrganisation(Organisation organisation) {
+        organisations.remove(organisation);
+    }
+
+    /**
+     * Gets organisation by name.
+     * The organisation must exist in the organisation list.
+     */
+    public Organisation getOrganisationByName(Name name) {
+        Organisation organisation = organisations.getByName(name);
+        return organisation;
+    }
+
+    /**
+     * Sort address book alphabetically.
+     */
+    public void sortPersons() {
+        persons.sortPersons();
     }
 
     /**
@@ -86,6 +135,18 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the given organisation {@code target} with {@code editedOrganisation}.
+     * {@code target} must exist in the address book.
+     * The organisation identity of {@code editedOrganisation} must not be the same as another
+     * existing organisation in the address book.
+     */
+    public void setOrganisation(Organisation target, Organisation editedOrganisation) {
+        requireNonNull(editedOrganisation);
+
+        organisations.setOrganisation(target, editedOrganisation);
+    }
+
+    /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
@@ -97,7 +158,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons";
+        return persons.asUnmodifiableObservableList().size() + " persons "
+                + organisations.asUnmodifiableObservableList().size() + " organisations.";
         // TODO: refine later
     }
 
@@ -105,16 +167,21 @@ public class AddressBook implements ReadOnlyAddressBook {
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
     }
+    @Override
+    public ObservableList<Organisation> getOrganisationList() {
+        return organisations.asUnmodifiableObservableList();
+    }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
-                && persons.equals(((AddressBook) other).persons));
+                && persons.equals(((AddressBook) other).persons)
+                && organisations.equals(((AddressBook) other).organisations));
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return persons.hashCode() + organisations.hashCode();
     }
 }
