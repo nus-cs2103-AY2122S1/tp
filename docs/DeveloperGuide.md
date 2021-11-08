@@ -283,6 +283,11 @@ of client. `edit` command sets the `revenue` of client.
   * Cons: It will be difficult to give proper error messages since we are not sure
   of the user's intentions
 
+### Add command
+
+A user can use the add command to add a clients. A sequence diagram of this action is as shown:
+
+![AddCommandSequenceDiagram](images/AddCommandSequenceDiagram.png)
 
 ###  Note feature
 
@@ -687,8 +692,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-* 3b. The given revenue is of an invalid format
+* 3b. The given revenue is of an invalid format.
     * 3b1. InsurancePal shows an error message.
+
+      Use case resumes at step 2.
+
+* 3c. The given revenue when added to the current revenue becomes negative.
+  * 3c1. InsurancePal shows an error message.
+
+      Use case resumes at step 2.
+  
+* 3d. The given revenue when added to the current revenue becomes larger than 20,000,000.
+  * 3d1. InsurancePal shows an error message.
 
       Use case resumes at step 2.
 

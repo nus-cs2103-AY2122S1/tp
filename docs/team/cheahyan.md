@@ -31,8 +31,8 @@ Given below are my contributions to the project.
 **Minor Enhancement**: Added the ability for month input in `schedule` feature to accomodate for any 3 letter
 input (eg. feb, fEB, FEB) ([#110](https://github.com/AY2122S1-CS2103T-T17-4/tp/pull/110))
 
-**Contributionas to User Guide** 
-* Wrote documentation for `revenue` feature ([#44](https://github.com/AY2122S1-CS2103T-T17-4/tp/pull/44), [#113](https://github.com/AY2122S1-CS2103T-T17-4/tp/pull/113))
+**Contributions to User Guide** 
+* Wrote documentation for `revenue` feature ([#44](https://github.com/AY2122S1-CS2103T-T17-4/tp/pull/44), [#113](https://github.com/AY2122S1-CS2103T-T17-4/tp/pull/113), [#210](https://github.com/AY2122S1-CS2103T-T17-4/tp/pull/210))
 
 **Contributions to Developer Guide**
 * Added target user profile, value proposition and user stories to the developer guide ([#45](https://github.com/AY2122S1-CS2103T-T17-4/tp/pull/45))
