@@ -89,7 +89,7 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103-F10-1/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
-![Structure of the UI Component](images/UiClassDiagram.png)
+<img src="images/UiClassDiagram.png" width="1000"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ApplicantListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
@@ -121,8 +121,8 @@ How the `Logic` component works:
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete-position 1")` API call.
 
-**Interactions Inside the Logic Component for the `delete-position 1` Command**<br>
-<img src="images/DeleteSequenceDiagram.png" width="2000"/>
+**Interactions inside the Logic component for the `delete-position 1` command**<br>
+<img src="images/DeleteSequenceDiagram.png" width="1000"/>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -139,7 +139,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103-F10-1/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="1000" />
 
 
 The `Model` component,
@@ -194,7 +194,7 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -207,7 +207,7 @@ This section describes some noteworthy details on how certain features are imple
 **:information_source: Note:** <br>
 
 * All commands that modify the `ApplicantBook` or `PositionBook` will keep track of the state of the model before the modification using `memento`. 
-* The `memento` captures the existing model and success message from a command and stands by in the event of an `undo` scenario.
+* `Memento` captures the existing model and success message from a command and stands by in the event of an `undo` scenario.
 * All such commands will have a :heavy_check_mark: symbol beside it. Others will have no symbol displayed beside it.
 
 * Such commands include `add-applicant`, `add-position`, `delete-applicant`, `delete-position`, `edit-applicant`, `edit-position`, and `mark`.
@@ -238,7 +238,7 @@ block 123, #01-01 pos/software engineer github/https://github.com/johndoe`. The 
 
 The following sequence diagram shows the method invocation in this step:
 
-![AddApplicantSequenceDiagram1](images/add-applicant/AddApplicantSequenceDiagram1.png)
+<img src="images/add-applicant/AddApplicantSequenceDiagram1.png" width="850" />
 
 Step 2. LogicManager will execute this `AddApplicantCommand` instance. This will invoke the
 `Model#addApplicantWithParticulars()` method.
@@ -267,7 +267,6 @@ The following activity diagram summarizes the actions taken when LogicManager ex
 * **Alternative 2:** Each user input parameter (e.g. Name, Address, Title etc.) are passed to multiple method calls.
     * Pros: Will reduce the usage of a new class, thereby reducing coupling.
     * Cons: This could lead to longer method signatures, longer code, and possibly a less OOP approach.
-    
 
 
 ### Delete applicant feature :heavy_check_mark:
@@ -289,7 +288,6 @@ Step 1: The user inputs the command `delete-applicant 1`. The app parser simply 
 Step 2: LogicManager executes this `DeleteApplicantCommand` instance, invoking the `Model#deleteApplicant()` method.
 
 Step 3: This then calls the internal method for `ApplicantBook`, `ApplicantBook#removeApplicant()`, which then removes the applicant thereafter.
-
 
 
 ### Edit applicant feature :heavy_check_mark:
@@ -317,7 +315,6 @@ Step 3. The model then replace the existing applicant with the new one in the `a
 The following activity diagram summarizes the actions taken when LogicManager executes the EditApplicantCommand:
 
 ![EditApplicantActivityDiagram](images/EditApplicantActivityDiagram.png)
-
 
 
 ### Mark/update applicant's status feature :heavy_check_mark:
@@ -360,7 +357,6 @@ The following activity diagram summarizes the actions taken when LogicManager ex
     * Cons: More troublesome to quickly update applicant statuses.
 
 
-
 ### Filter applicants feature
 
 #### Implementation
@@ -369,6 +365,7 @@ The filter feature is achieved using the functionality of the `FilteredList` cla
 This `Predicate` is constructed from the filters specified by the user whenever the `filter-applicant` command is called.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** This command is used for filtering applicants by `Position` and `ApplicationStatus` only, not to be confused with `FindApplicantCommand`, which searches by 'Name', and has slightly different matching criteria.
+
 </div>
 
 #### Design considerations:
@@ -376,7 +373,7 @@ This `Predicate` is constructed from the filters specified by the user whenever 
 Given below is a trace of the command's execution. In particular, we first examine the parsing of user input into a `FilterApplicantCommand` object.
 The process is described by the following sequence diagram:
 
-<img src="images/FilterApplicantSequenceDiagram0.png" width="950" />
+<img src="images/FilterApplicantSequenceDiagram0.png" width="1100" />
 
 The role of the `FilterApplicantDescriptor` class is to store the details of the parsed filters for the `Model` component's use, when the `FilterApplicantCommand` is subsequently executed.
 
@@ -427,7 +424,6 @@ The filter feature fits such a description, as the user should be able to specif
 
 
 
-
 ### Find applicants feature
 
 #### Implementation
@@ -436,9 +432,10 @@ The find feature is achieved using the functionality of the `FilteredList` class
 which finds all applicants based on a specified name. This name is constructed via the `NameContainsKeywordsPredicate` class whenever the `find-applicant` command is called.
 
 The `FindApplicantCommand#execute()` method does not have guard clauses to check that the given name is valid. It simply maps via the `FindApplicantCommand#applicantMatchesFilter()`
-method to find all applicants matching the given name. A new filtered list is now displayed on the MTR UI. Hence an empty list may be displayed on the UI. <br>
+method to find all applicants matching the given name. A new filtered list is now displayed on the MTR UI. Hence, an empty list may be displayed on the UI. <br>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** This command is used for finding applicants by their `Name` only, not to be confused with `FilterApplicantCommand`.
+
 </div>
 
 Given below is an example usage scenario of the find applicant feature. <br>
@@ -703,7 +700,7 @@ Step 5. Any command the user executes next simply refreshes the current state to
 
 The following activity diagram summarizes the actions taken when LogicManager executes the RejectionRateCommand:
 
-![ActivityDiagram](images/rejection-rates/ActivityDiagram.png)
+<img src="images/rejection-rates/ActivityDiagram.png" width="450" />
 
 
 
@@ -786,7 +783,7 @@ The following sequence diagram shows how the undo operation works:
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<img src="images/CommitActivityDiagram.png" width="250" />
+<img src="images/CommitActivityDiagram.png" width="300" />
 
 #### Design considerations:
 
@@ -800,9 +797,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 * **Alternative 2:** Individual command knows how to undo by
   itself.
     * Pros: Will use less memory (e.g. for `delete-position`, just save the position and applicants being deleted).
-    * Cons: It is time-consuming to ensure that the implementation of each individual command are correct. Since there are many interactions between `Position` and `Applicant`, the undo logic could become complicated. 
-
-
+    * Cons: It is time-consuming to ensure that the implementation of each individual command are correct. Since there are many interactions between `Position` and `Applicant`, the undo logic could become complicated.
 
 --------------------------------------------------------------------------------------------------------------------
 
