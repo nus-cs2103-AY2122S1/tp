@@ -28,10 +28,21 @@ public class FindAnyCommand extends Command {
 
     private final FindAnyPredicate findAnyPredicate;
 
+    /**
+     * Creates a {@code FindAnyCommand} which searches for contacts that fulfill the {@findAnyPredicate}.
+     *
+     * @param findAnyPredicate the predicate that tests if contacts fulfill the criteria.
+     */
     public FindAnyCommand(FindAnyPredicate findAnyPredicate) {
         this.findAnyPredicate = findAnyPredicate;
     }
 
+    /**
+     * Executes the {@code FindAnyCommand} which searches for contacts that fulfill the {@findAnyPredicate}.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return {@code CommandResult} regarding the status of the {@code FindAnyCommand}.
+     */
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
@@ -40,6 +51,12 @@ public class FindAnyCommand extends Command {
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
 
+    /**
+     * Checks if {@code other} is equal to {@code this}.
+     *
+     * @param other the object to check if it is equal to {@code this}.
+     * @return {@code boolean} indicating if it is equal.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

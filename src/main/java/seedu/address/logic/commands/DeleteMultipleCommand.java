@@ -44,7 +44,15 @@ public class DeleteMultipleCommand extends Command {
         this.endIndex = endIndex;
     }
 
+    /**
+     * Checks if {@code startIndex} and {@endIndex} are valid indexes.
+     *
+     * @param startIndex The index of the first person to delete.
+     * @param endIndex The index of the last person to delete.
+     * @return if {@code startIndex} and {@endIndex} are valid indexes.
+     */
     public static boolean areValidIndexes(Index startIndex, Index endIndex) {
+        requireAllNonNull(startIndex, endIndex);
         return startIndex.getZeroBased() <= endIndex.getZeroBased();
     }
 
@@ -53,6 +61,13 @@ public class DeleteMultipleCommand extends Command {
                 && endIndex.equals(other.endIndex);
     }
 
+    /**
+     * Executes {@code DeleteMultipleCommand} which deletes the contacts from {@code startIndex} to {@code endIndex}.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return {@code CommandResult} regarding the status of the {@code DeleteMultipleCommand}.
+     * @throws CommandException If invalid indexes are provided.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -72,6 +87,12 @@ public class DeleteMultipleCommand extends Command {
         return new CommandResult(result.toString());
     }
 
+    /**
+     * Checks if {@code other} is equal to {@code this}.
+     *
+     * @param other the object to check if it is equal to {@code this}.
+     * @return {@code boolean} indicating if it is equal.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

@@ -13,7 +13,7 @@ public class Address {
 
     /*
      * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+     * otherwize " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[^\\s].*";
 
@@ -31,7 +31,10 @@ public class Address {
     }
 
     /**
-     * Returns true if a given string is a valid email.
+     * Checks if input is valid address.
+     *
+     * @param test input that is to be checked if it is a valid address.
+     * @return if a given string is a valid address.
      */
     public static boolean isValidAddress(String test) {
         return test.matches(VALIDATION_REGEX);
@@ -42,6 +45,12 @@ public class Address {
         return value;
     }
 
+    /**
+     * Checks if {@code other} is equal to {@code this}.
+     *
+     * @param other the object to check if it is equal to {@code this}.
+     * @return {@code boolean} indicating if it is equal.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

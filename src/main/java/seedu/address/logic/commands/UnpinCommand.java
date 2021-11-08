@@ -19,7 +19,7 @@ import seedu.address.model.person.Pin;
 import seedu.address.model.tag.Tag;
 
 /**
- * Unpins a contact identified using it's displayed index from the address book.
+ * Unpins a contact identified using it's displayed index from the contact list.
  */
 public class UnpinCommand extends Command {
 
@@ -39,10 +39,23 @@ public class UnpinCommand extends Command {
 
     private final Index targetIndex;
 
+    /**
+     * Creates a {@code UnpinCommand} that unpins contact at {@code targetIndex}.
+     *
+     * @param targetIndex the index of the contact that is to be unpinned.
+     */
     public UnpinCommand(Index targetIndex) {
+        requireNonNull(targetIndex);
         this.targetIndex = targetIndex;
     }
 
+    /**
+     * Executes the {@code UnpinCommand} which unpins the contact at the {@code targetIndex}.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return {@code CommandResult} regarding the status of the {@code UnpinCommand}.
+     * @throws CommandException If index is invalid or contact is not pinned.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -56,11 +69,18 @@ public class UnpinCommand extends Command {
         if (!personToPin.isPinned()) {
             throw new CommandException(MESSAGE_PERSON_NOT_PINNED_FAILURE);
         }
+
         Person pinnedPerson = createUnpinnedPerson(personToPin);
         model.setPerson(personToPin, pinnedPerson);
         return new CommandResult(String.format(MESSAGE_UNPINNED_PERSON_SUCCESS, personToPin));
     }
 
+    /**
+     * Checks if {@code other} is equal to {@code this}.
+     *
+     * @param other the object to check if it is equal to {@code this}.
+     * @return {@code boolean} indicating if it is equal.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
@@ -70,14 +90,16 @@ public class UnpinCommand extends Command {
 
     private Person createUnpinnedPerson(Person personToPin) {
         assert personToPin != null;
+        assert personToPin.isPinned() : "Person is not pinned!";
+
         Name updatedName = personToPin.getName();
         Phone updatedPhone = personToPin.getPhone();
         Email updatedEmail = personToPin.getEmail();
         Address updatedAddress = personToPin.getAddress();
         Set<Tag> updatedTags = personToPin.getTags();
         Birthday updatedBirthday = personToPin.getBirthday().orElse(null);
-        assert personToPin.isPinned() : "Person is not pinned!";
         Pin updatedPin = personToPin.getPin().togglePin();
+
         return new Person(updatedName, updatedPhone, updatedEmail,
                 updatedAddress, updatedTags, updatedBirthday, updatedPin);
     }

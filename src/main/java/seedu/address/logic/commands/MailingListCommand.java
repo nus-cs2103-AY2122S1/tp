@@ -35,13 +35,22 @@ public class MailingListCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Exporting current view as a CSV file";
     private final Set<Prefix> prefixToWrite;
 
+
     /**
-     * @param prefixToWrite Set of Prefixes to write into the csv file
+     * Creates a {@code MailingListCommand} which generates a csv file of contacts.
+     *
+     * @param prefixToWrite Set of Prefixes to write into the csv file.
      */
     public MailingListCommand(Set<Prefix> prefixToWrite) {
         this.prefixToWrite = Collections.unmodifiableSet(prefixToWrite);
     }
 
+    /**
+     * Executes the {@code MailingListCommand} which generates a csv file of contacts.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return {@code CommandResult} regarding the status of the {@code MailingListCommand}.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -52,6 +61,12 @@ public class MailingListCommand extends Command {
         return new CommandResult(MESSAGE_SUCCESS, false, false, true);
     }
 
+    /**
+     * Checks if {@code other} is equal to {@code this}.
+     *
+     * @param other the object to check if it is equal to {@code this}.
+     * @return {@code boolean} indicating if it is equal.
+     */
     @Override
     public boolean equals(Object other) {
         // short circuit if same object

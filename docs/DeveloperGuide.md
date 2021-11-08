@@ -218,7 +218,7 @@ Step 7. CONNECTIONS updates and removes the tag `student` from the contact.
   * Pros: Easy to implement and doesn't allow for duplicates. 
   * Cons: Searching for contacts by tags may be slow, especially if there are many contacts, with each contact having multiple tags.
   
-* **Option 2: Utilise a separate `HashMap` data structure to map contacts to tags.**
+* **Option 2: Utilize a separate `HashMap` data structure to map contacts to tags.**
   * Pros: Fast retrieval of tagged contacts.
   * Cons: Difficult to maintain a separate data structure.
 
@@ -322,7 +322,7 @@ Step 5. CONNECTIONS' `UI` observes the filtered list and displays the updated fi
 
 **Aspect: How Find executes:**
 
-* **Option 1:** Utilise two predicates, one to check if contact's Name contains the keywords and one to check if contact's Tag(s) contains the keywords.
+* **Option 1:** Utilize two predicates, one to check if contact's Name contains the keywords and one to check if contact's Tag(s) contains the keywords.
     * Pros: Straightforward.
     * Cons: Introduces additional and unnecessary complexities to ModelManager.
 
@@ -358,7 +358,7 @@ Step 5. CONNECTIONS' `UI` observes the filtered list is updated and displayed th
 
 **Aspect: How FindAny executes:**
 
-* **Option 1:** Utilise two predicates, one to check if contact's Name contains the keywords and one to check if contact's Tag(s) contains the keywords.
+* **Option 1:** Utilize two predicates, one to check if contact's Name contains the keywords and one to check if contact's Tag(s) contains the keywords.
     * Pros: Straightforward.
     * Cons: Introduces additional and unnecessary complexities to ModelManager.
 
@@ -399,7 +399,7 @@ The list of birthdays is generated in the `ModelManager`, which implements the f
 
 Given below is an example usage scenario and how the birthday reminders mechanism behaves at each step.
 
-Step 1. On app startup, contacts with a birthday are sorted by birth month and day. Contacts with birthdays that fall on the present day are coloured green while birthdays that are within one week are coloured blue. Additionally, a customised message with each contact's phone number and age will be displayed in the birthday reminder list.
+Step 1. On app startup, contacts with a birthday are sorted by birth month and day. Contacts with birthdays that fall on the present day are colored green while birthdays that are within one week are colored blue. Additionally, a customized message with each contact's phone number and age will be displayed in the birthday reminder list.
 
 <div style="page-break-before: always;"></div>
 
@@ -499,7 +499,7 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 
 * has a need to manage a significant number of contacts
 * sociable and has multiple different friend groups that can partially overlap
-* regularly organises birthday parties for these contacts
+* regularly organizes birthday parties for these contacts
 * regularly invites other contacts to these parties
 * is forgetful 
 * needs to keep track of different groups who are invited to different parties
@@ -523,13 +523,13 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 |---|---|---|
 | Person who loves birthdays    | Track birthdays                       | Easily check the birthday of friends
 | Person who loves birthdays and is forgetful    | Have birthday reminders            | Avoid missing any of my friends’ birthdays
-| Party Organiser       | Look for contact details for all my friends      | Send out invites
-| Party Organiser       | Generate csv file of my invitees                  | Take attendance or make external notes
-| Party Organiser               | Tag contacts with a party           | Easily keep track of those coming for parties
-| Party Organiser               | Untag contacts from a party         | Easily remove those who are not coming for parties
-| Party Organiser               | Search contacts by party      | Generate invite list
-| Party Organiser               | Search contacts by parties      | View who is coming for these parties
-| Party Organiser               | Delete multiple contacts at once      | Quickly delete contacts that I no longer need
+| Party Organizer       | Look for contact details for all my friends      | Send out invites
+| Party Organizer       | Generate csv file of my invitees                  | Take attendance or make external notes
+| Party Organizer               | Tag contacts with a party           | Easily keep track of those coming for parties
+| Party Organizer               | Untag contacts from a party         | Easily remove those who are not coming for parties
+| Party Organizer               | Search contacts by party      | Generate invite list
+| Party Organizer               | Search contacts by parties      | View who is coming for these parties
+| Party Organizer               | Delete multiple contacts at once      | Quickly delete contacts that I no longer need
 | Sociable person               | Pin frequent contacts           | Easily access contacts that I contact often
 | Sociable person               | Save up to 100 contacts | Keep all my friends' contacts
 | Sociable person               | Search for contacts within a reasonable timing | Avoid waiting too long for search results
@@ -537,7 +537,7 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 | Beginner              | View helpful prompts                              | See what can be done with the app
 | Beginner                 | View feedback on wrong commands       | Format commands better
 | Beginner     | Get help on specific commands                                 | Learn how to use the app
-| Fast typer                    | Use sentences to interact with the app | Utilise the functions of the app quicker without using a mouse
+| Fast typer                    | Use sentences to interact with the app | Utilize the functions of the app quicker without using a mouse
 | User                          | Can modify contact details            | Update my contacts' details
 | Experienced user      | Retrieve previously run commands          | Avoid typing the commands I use frequently again and again
 

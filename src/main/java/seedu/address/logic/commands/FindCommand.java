@@ -29,10 +29,21 @@ public class FindCommand extends Command {
 
     private final FindPredicate findPredicate;
 
+    /**
+     * Creates a {@code FindCommand} which searches for contacts that fulfill the {@findPredicate}.
+     *
+     * @param findPredicate the predicate that tests if contacts fulfill the criteria.
+     */
     public FindCommand(FindPredicate findPredicate) {
         this.findPredicate = findPredicate;
     }
 
+    /**
+     * Executes the {@code FindCommand} which searches for contacts that fulfill the {@findPredicate}.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return {@code CommandResult} regarding the status of the {@code FindCommand}.
+     */
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
@@ -41,6 +52,12 @@ public class FindCommand extends Command {
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
 
+    /**
+     * Checks if {@code other} is equal to {@code this}.
+     *
+     * @param other the object to check if it is equal to {@code this}.
+     * @return {@code boolean} indicating if it is equal.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

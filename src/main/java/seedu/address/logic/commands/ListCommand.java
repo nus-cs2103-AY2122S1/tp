@@ -19,6 +19,13 @@ public class ListCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": " + COMMAND_DESCRIPTION + COMMAND_EXAMPLE;
 
+
+    /**
+     * Executes the {@code ListCommand} which lists all contacts.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return {@code CommandResult} regarding the status of the {@code ListCommand}.
+     */
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);

@@ -7,14 +7,17 @@ import seedu.address.logic.commands.PinCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new PinCommand object
+ * Parses input arguments and creates a new {@code PinCommand} object.
  */
 public class PinCommandParser implements Parser<PinCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the PinCommand
-     * and returns a PinCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     * Parses the given {@code String} of arguments in the context of the {@code PinCommand}
+     * and returns a {@code PinCommand} object for execution.
+     *
+     * @param args user input.
+     * @return {@code PinCommand} which pins a contact at the specific index.
+     * @throws ParseException if the user input does not conform the expected format.
      */
     public PinCommand parse(String args) throws ParseException {
         try {

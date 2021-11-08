@@ -18,10 +18,10 @@ public class FindPredicate implements Predicate<Person> {
     private final boolean isCaseSensitive;
 
     /**
-     * Creates a FindPredicate
+     * Creates a FindPredicate.
      *
-     * @param nameList refers to the list of Names to be searched for
-     * @param tagList refers to the list of Tags to be searched for
+     * @param nameList refers to the list of Names to be searched for.
+     * @param tagList refers to the list of Tags to be searched for.
      */
     public FindPredicate(List<Name> nameList, List<Tag> tagList, boolean isCaseSensitive) {
         this.nameList = nameList;
@@ -29,16 +29,28 @@ public class FindPredicate implements Predicate<Person> {
         this.isCaseSensitive = isCaseSensitive;
     }
 
+    /**
+     * Tests if {@code person} fulfills the criteria.
+     *
+     * @param person person that is to be test.
+     * @return if person fulfills the criteria.
+     */
     @Override
     public boolean test(Person person) {
         Tag[] arrayTags = new Tag[person.getTags().toArray().length];
         return nameList.stream()
-                .allMatch(name -> StringUtil.containsWordIgnoreCase(person.getName().fullName, name.fullName))
+                .allMatch(name -> StringUtil.isContainsWordIgnoreCase(person.getName().fullName, name.fullName))
                 && tagList.stream()
                 .allMatch(tag -> Arrays.stream(person.getTags().toArray(arrayTags))
                         .anyMatch(personTag-> personTag.compareTag(tag, isCaseSensitive)));
     }
 
+    /**
+     * Checks if {@code other} is equal to {@code this}.
+     *
+     * @param other the object to check if it is equal to {@code this}.
+     * @return {@code boolean} indicating if it is equal.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

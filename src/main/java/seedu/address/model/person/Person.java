@@ -28,6 +28,7 @@ public class Person implements Comparable<Person> {
     private final Pin pin;
 
     /**
+     * Creates a person.
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address,
@@ -89,6 +90,9 @@ public class Person implements Comparable<Person> {
     /**
      * Returns true if both persons have the same phone number.
      * This defines a weaker notion of equality between two persons.
+     *
+     * @param otherPerson the person to be tested against.
+     * @return if {@code otherPerson} is the same as {@code this}.
      */
     public boolean isSamePerson(Person otherPerson) {
         if (otherPerson == this) {

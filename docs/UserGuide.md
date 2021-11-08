@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-CONNECTIONS is a **desktop app for managing contacts, optimized for use via a Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you can type fast, CONNECTIONS can get your contact management tasks done faster than traditional GUI apps.
+CONNECTIONS is a **desktop app for managing contacts and keeping tracks of birthdays, optimized for use via a Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you can type fast, CONNECTIONS can get your contact management tasks done faster than traditional GUI apps.
 
 * [Quick Start](#quick-start)
 * [Features](#features)
@@ -85,9 +85,9 @@ CONNECTIONS is a **desktop app for managing contacts, optimized for use via a Co
 The vertical tab provides upcoming birthdays at a glance.  
 It sorts all birthdays amongst all contacts in CONNECTIONS **chronologically**, with the **nearest** upcoming birthday at the **top**.
 
-* Contacts colour-coded in **GREEN** are celebrating their birthdays **today**.
-* Contacts colour-coded in **BLUE** will be celebrating their birthdays in **a week or less**.
-* The rest of the entries will not be colour-coded.  
+* Contacts color-coded in **GREEN** are celebrating their birthdays **today**.
+* Contacts color-coded in **BLUE** will be celebrating their birthdays in **a week or less**.
+* The rest of the entries will not be color-coded.  
   ![BirthdayColors](images/BirthdayColors.png)  
 
 <div style="page-break-after: always;"></div>

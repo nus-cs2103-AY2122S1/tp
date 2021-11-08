@@ -16,13 +16,17 @@ import seedu.address.model.person.Name;
 import seedu.address.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new FindCommand object
+ * Parses input arguments and creates a new {@code FindAnyCommand} object.
  */
 public class FindAnyCommandParser implements Parser<FindAnyCommand> {
 
+
     /**
-     * Parses the given {@code String} of arguments in the context of the FindAnyCommand
-     * and returns a FindAnyCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the {@code FindAnyCommand}
+     * and returns a {@code FindAnyCommand} object for execution.
+     *
+     * @param args user input.
+     * @return {@code FindAnyCommand} which searches for contacts that fulfill the criteria.
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindAnyCommand parse(String args) throws ParseException {

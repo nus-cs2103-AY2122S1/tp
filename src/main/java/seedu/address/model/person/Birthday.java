@@ -37,7 +37,10 @@ public class Birthday {
     }
 
     /**
-     * Returns if a given string is a date in the future.
+     * Checks if given string is a date in the future.
+     *
+     * @param birthday input that is to be checked if it is a future date.
+     * @return if a given string is a date in the future.
      */
     public static boolean isFutureDate(String birthday) {
         LocalDate givenDate = LocalDate.parse(birthday, BIRTHDATE_FORMATTER);
@@ -45,14 +48,20 @@ public class Birthday {
     }
 
     /**
-     * Returns if a given string is in valid birthday format.
+     * Checks if given string is in valid birthday format.
+     *
+     * @param birthday input that is to be checked if it is a valid birthday format.
+     * @return if a given string is a valid birthday format.
      */
     public static boolean isValidFormat(String birthday) {
         return birthday.matches(VALIDATION_REGEX);
     }
 
     /**
-     * Returns if a given string is a valid date.
+     * Checks if given string is in valid date.
+     *
+     * @param birthday input that is to be checked if it is a valid date.
+     * @return if a given string is a valid date.
      */
     public static boolean isValidDate(String birthday) {
         try {
@@ -64,7 +73,10 @@ public class Birthday {
     }
 
     /**
-     * Returns if a given string is in year 0000 (which does not exist).
+     * Checks if given string is in year 0000 (which does not exist).
+     *
+     * @param birthday input that is to be checked if it is year 0000.
+     * @return if a given string is in year 0000.
      */
     public static boolean isYear0000(String birthday) {
         String yearString = birthday.substring(birthday.length() - 4);
@@ -76,6 +88,12 @@ public class Birthday {
         return BIRTHDATE_FORMATTER.format(this.birthdate);
     }
 
+    /**
+     * Checks if {@code other} is equal to {@code this}.
+     *
+     * @param other the object to check if it is equal to {@code this}.
+     * @return {@code boolean} indicating if it is equal.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
@@ -84,8 +102,9 @@ public class Birthday {
     }
 
     /**
+     * Returns string for Ui display.
      *
-     * @return format for UI display as dd MMM yyyy
+     * @return format for Ui display as dd MMM yyyy.
      */
     public String display() {
         return DateTimeFormatter.ofPattern("dd MMM yyyy").format(this.birthdate);

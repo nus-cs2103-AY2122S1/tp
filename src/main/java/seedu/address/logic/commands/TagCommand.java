@@ -45,8 +45,10 @@ public class TagCommand extends Command {
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param index of the {@code Person} in the filtered person list to edit
-     * @param editPersonDescriptor details the tags to add to the {@code Person}
+     * Creates a {@code TagCommand} which tags the contact at the index.
+     *
+     * @param index of the {@code Person} in the filtered person list to edit.
+     * @param editPersonDescriptor details the tags to add to the {@code Person}.
      */
     public TagCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(index);
@@ -56,6 +58,12 @@ public class TagCommand extends Command {
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
 
+    /**
+     * Executes the {@code TagCommand} which tags the contact at the index.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return {@code CommandResult} regarding the status of the {@code TagCommand}.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -111,6 +119,12 @@ public class TagCommand extends Command {
                 unchangedBirthday, unchangedPin);
     }
 
+    /**
+     * Checks if {@code other} is equal to {@code this}.
+     *
+     * @param other the object to check if it is equal to {@code this}.
+     * @return {@code boolean} indicating if it is equal.
+     */
     @Override
     public boolean equals(Object other) {
         // short circuit if same object
