@@ -13,7 +13,7 @@ import seedu.edrecord.model.assignment.Score;
 /**
  * Jackson-friendly version of {@link Grade}.
  */
-public class JsonAdaptedGrade {
+public class JsonAdaptedIdGradePair {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Grade %s field is missing!";
 
@@ -25,9 +25,9 @@ public class JsonAdaptedGrade {
      * Constructs a {@code JsonAdaptedGrade} with the given details.
      */
     @JsonCreator
-    public JsonAdaptedGrade(@JsonProperty("status") String status,
-                            @JsonProperty("score") String score,
-                            @JsonProperty("id") Integer id) {
+    public JsonAdaptedIdGradePair(@JsonProperty("status") String status,
+                                  @JsonProperty("score") String score,
+                                  @JsonProperty("id") Integer id) {
         this.status = status;
         this.score = score;
         this.id = id;
@@ -36,7 +36,7 @@ public class JsonAdaptedGrade {
     /**
      * Converts a given {@code ID} and {@code Grade} into this class for Jackson use.
      */
-    public JsonAdaptedGrade(int id, Grade source) {
+    public JsonAdaptedIdGradePair(int id, Grade source) {
         this.id = id;
         this.status = String.valueOf(source.getStatus());
         this.score = String.valueOf(source.getScore().orElse(null));
