@@ -198,7 +198,7 @@ The features mentioned are:
    1. [Adding a person](#adding-a-person-add) [done]
    2. [Adding tags to people](#adding-tags-to-people-addt) [diag]
    3. [Adding a remark to a person](#adding-a-remark-to-a-person-remark) [done]
-   4. Editing a person
+   4. [Editing a person](#editing-a-person-edit) [diag]
    5. Deleting a person
    6. [Deleting multiple person](#delete-multiple-persons)
    7. Deleting tags from people
@@ -302,6 +302,53 @@ The following sequence diagram shows how the AddTagCommand mechanism works:
     * Pros: Will result in fewer unexpected bugs since the logic is more straightforward to the developer.
     * Cons: Less user-friendly as multiple commands have very similar functionalities.
 
+### Editing a person `edit`
+
+#### Implementation
+
+The edit mechanism is facilitated by EditCommand and EditCommandParser. It allows users to edit any contact details of a person
+in their contact list by the index number shown in their displayed contact list.
+
+The following activity diagram summarizes what happens when a user executes a edit command on a specified person:
+
+![EditActivityDiagram](images/RemarkActivityDiagram.png)
+
+The edit mechanism will edit any contact details of the person specified by a given index. If the edited person already exists, the edit command will throw an error.
+
+During `EditCommand#execute`, a new `Person` object will be created. The values will remain the same for all of a person contact details (e.g. `Name`) except for those which are specified for change.
+
+#### Usage
+
+Given below is an example usage scenario and how the edit mechanism behaves at each step.
+
+Step 1. The user executes `edit 1 n/Alice` command to edit the name of first person in the displayed contact list to 'Alice'.
+
+Step 2. `EditCommandParser#parse` will then parse the arguments provided. A new `EditCommand` object will be created after parsing.
+
+The following sequence diagram briefly shows how the EditCommandParser operation works:
+
+![RemarkParserSequenceDiagram](images/RemarkParserSequenceDiagram.png)
+
+Step 3. The `EditCommand` will then create a new `Person` using information from input arguments. All other information will be taken from the original `Person`.
+
+Step 4. `EditCommand#execute` will then replace the original `Person` in the `model` with the new `Person`.
+
+The following sequence diagram shows how the EditCommand mechanism works:
+
+![RemarkSequenceDiagram](images/RemarkSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not be saved in Socius, so the person's contact details in Socius will not be updated.
+</div>
+
+#### Design Considerations
+
+* **Alternative 1 (current choice):** Create a new `Person` with their contact details replaced and the other contact details same as the original `Person`.
+    * Pros: Maintains immutability.
+    * Cons: It may have performance issues in terms of memory usage as a new `Person` object is created.
+
+* **Alternative 2:** Edit the original `Person` directly.
+    * Pros: It uses less memory and thus may run faster.
+    * Cons: If the execution is stopped halfway, then the newly updated person will contain wrong information. It will also be difficult to debug.
 
 ### Adding a remark to people `remark`
 
