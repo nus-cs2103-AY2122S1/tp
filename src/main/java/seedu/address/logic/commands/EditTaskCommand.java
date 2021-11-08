@@ -36,12 +36,12 @@ public class EditTaskCommand extends Command {
             + "Parameters: INDEX (must be a positive integer less than or equal to " + Integer.MAX_VALUE + ")\n"
             + PREFIX_TASK_INDEX + " TASK_INDEX (must be a positive integer less than or equal to "
             + Integer.MAX_VALUE + ")\n"
-            + "[" + PREFIX_TASK_DESCRIPTION + " TASK_NAME] "
-            + "[" + PREFIX_TASK_DATE + " TASK_DATE] "
-            + "[" + PREFIX_TASK_TIME + " TASK_TIME] "
-            + "[" + PREFIX_TASK_VENUE + " TASK_ADDRESS] \n"
+            + "[" + PREFIX_TASK_DESCRIPTION + "TASK_NAME] "
+            + "[" + PREFIX_TASK_DATE + "TASK_DATE] "
+            + "[" + PREFIX_TASK_TIME + "TASK_TIME] "
+            + "[" + PREFIX_TASK_VENUE + "TASK_ADDRESS] \n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_TASK_INDEX + " 2 "
+            + PREFIX_TASK_INDEX + "2 "
             + PREFIX_TASK_DESCRIPTION + "Assignment Discussion"
             + PREFIX_IMPORTANCE + "false";
 

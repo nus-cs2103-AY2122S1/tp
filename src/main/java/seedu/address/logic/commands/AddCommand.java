@@ -8,6 +8,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_IMPORTANCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_VENUE;
 
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -21,9 +26,12 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String DESCRIPTION = "Adds a person to the address book or add a task to the specified person.";
+    public static final String ADD_PERSON = "Adds a person to the address book.";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": " + DESCRIPTION
+    public static final String ADD_TASK = "Adds tasks to a person in the address book.";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": \n"
+            + "Usage 1: " + ADD_PERSON
             + "\n" + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -40,7 +48,21 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney "
             + PREFIX_DESCRIPTION + "Really likes melons "
-            + PREFIX_IMPORTANCE + "true";
+            + PREFIX_IMPORTANCE + "true"
+            + "\n\n" + "Usage 2: " + ADD_TASK + "\n"
+            + "Parameters: " + "INDEX "
+            + PREFIX_TASK_INDEX + " TASK_INDEX (must be a positive integer less than or equal to "
+            + Integer.MAX_VALUE + ") "
+            + PREFIX_TASK_DESCRIPTION + "TASK_NAME "
+            + "[" + PREFIX_TASK_DATE + "TASK_DATE] "
+            + "[" + PREFIX_TASK_TIME + "TASK_TIME] "
+            + "[" + PREFIX_TASK_VENUE + "TASK_ADDRESS]... \n"
+            + "Example: " + COMMAND_WORD + " 1 "
+            + PREFIX_TASK_INDEX + "2 "
+            + PREFIX_TASK_DESCRIPTION + "Assignment Discussion"
+            + PREFIX_TASK_INDEX + "1 "
+            + PREFIX_TASK_DESCRIPTION + "Run"
+            + PREFIX_TASK_TIME + "18:00";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s with %2$d %3$s attached";
 
@@ -96,6 +118,6 @@ public class AddCommand extends Command {
     }
 
     public String getDescription() {
-        return DESCRIPTION;
+        return ADD_PERSON;
     }
 }

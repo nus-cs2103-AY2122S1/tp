@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_INDEX;
 
 import java.util.List;
 
@@ -22,10 +23,19 @@ public class DeleteCommand extends Command {
             + "delete a task.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
+            + ": " + "Usage 1: Deletes the person identified by the index number used in the displayed person list.\n"
             + "Parameters: "
             + "INDEX (must be a positive integer less than or equal to " + Integer.MAX_VALUE + ")\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Example: " + COMMAND_WORD + " 1\n"
+            + "Usage 2: Deletes the specified tasks of the person "
+            + "identified by the index number used in the displayed person list.\n"
+            + "Parameters: "
+            + "INDEX (must be a positive integer less than or equal to " + Integer.MAX_VALUE + ") "
+            + PREFIX_TASK_INDEX + "TASKINDEX (must be a positive integer less than or equal to "
+            + Integer.MAX_VALUE + ")\n"
+            + "Example: " + COMMAND_WORD + " 1" + PREFIX_TASK_INDEX + "2\n"
+            + "Usage 3: Deletes all contacts in ContactSH. \n"
+            + "Example: rm -A\n";
 
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";

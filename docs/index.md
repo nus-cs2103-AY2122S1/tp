@@ -11,7 +11,7 @@ title: ContactSh
 **ContactSh is a desktop application for managing your contact details.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 
 * If you are interested in using ContactSh, head over to the [_Quick Start_ section of the **User Guide**](https://ay2122s1-cs2103t-w10-1.github.io/tp/UserGuide.html#quick-start).
-* If you are interested about developing AddressBook, the [**Developer Guide**](https://ay2122s1-cs2103t-w10-1.github.io/tp/DeveloperGuide.html.html) is a good place to start.
+* If you are interested about developing AddressBook, the [**Developer Guide**](https://ay2122s1-cs2103t-w10-1.github.io/tp/DeveloperGuide.html) is a good place to start.
 
 **Acknowledgements**
 
