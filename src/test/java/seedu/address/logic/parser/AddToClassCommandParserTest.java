@@ -26,7 +26,9 @@ import seedu.address.logic.commands.AddToClassCommand;
 import seedu.address.model.student.Name;
 import seedu.address.model.tuition.StudentList;
 
-
+/**
+ * Test class for AddToClassParser.
+ */
 class AddToClassCommandParserTest {
     private static final String INVALID_PREFIX = "x/";
     private static final String SPACE = " ";
@@ -174,11 +176,22 @@ class AddToClassCommandParserTest {
     }
 
 
-
+    /**
+     * Returns an AddToClassCommand.
+     * @param students students to be added in the command.
+     * @param tuitionClass tuition class to be added to in the command.
+     * @return a new AddToClassCommand to add students to tuition class.
+     */
     private AddToClassCommand getCommand(ArrayList<String> students, Index tuitionClass) {
         return new AddToClassCommand(new StudentList(students), tuitionClass);
     }
 
+    /**
+     * Returns an AddToClassCommand.
+     * @param students student indices to be added in the command.
+     * @param tuitionClass tuition class to be added to in the command.
+     * @return a new AddToClassCommand to add students to tuition class.
+     */
     private AddToClassCommand getCommand(List<Index> students, Index tuitionClass) {
         return new AddToClassCommand(students, tuitionClass);
     }

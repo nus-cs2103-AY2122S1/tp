@@ -17,7 +17,9 @@ import seedu.address.model.UserPrefs;
 import seedu.address.ui.ResultDisplay;
 import seedu.address.ui.infopage.TimetableInfoPage;
 
-
+/**
+ * Test class for Timetable class.
+ */
 class TimetableTest {
     private static Model model = new ModelManager(addTypicalClassesToAddressBook(getAddressBookWithTypicalStudents()),
             new UserPrefs());
@@ -80,6 +82,9 @@ class TimetableTest {
         assertEquals(8, timetable.getFontSize(9));
     }
 
+    /**
+     * Stub for Timetable class.
+     */
     static class TimetableStub extends Timetable {
 
         /**
@@ -94,6 +99,11 @@ class TimetableTest {
             super(tuitionClasses, resultDisplay, timetableInfoPage);
         }
 
+        /**
+         * Returns null when a Label is needed as tests run in headless mode.
+         * @param message message to shown on the label.
+         * @return null.
+         */
         @Override
         public Label produceLabel(String message) {
             return null;

@@ -15,6 +15,9 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.tuition.UniqueTuitionList;
 
+/**
+ * Test class for TimetableCommand.
+ */
 class TimetableCommandTest {
     private static Model model = new ModelManager(addTypicalClassesToAddressBook(getAddressBookWithTypicalStudents()),
             new UserPrefs());
