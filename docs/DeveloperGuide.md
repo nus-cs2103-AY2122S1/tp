@@ -820,7 +820,27 @@ Use case resumes from step 2.
 Steps 1d1 - 1d2 are repeated until there is a reservation slot available. <br>
 Use case resumes from step 2.
 
-**Use case (UC05): Edit a Customer**
+**Use case (UC05): List all customers/employees/suppliers/reservations**
+
+{:no_toc}
+
+**MSS**
+
+1. User enters the command to list all customers/employees/suppliers/reservations.
+2. List of all customers/employees/suppliers/reservations is displayed in view.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. System detects invalid command format.
+    * 1a1. System displays an error, showing unknown command.
+    * 1a2. User enters command again.
+
+Steps 1a1 - 1a2 are repeated until the command is correctly formatted. <br>
+Use case resumes from step 2.
+
+**Use case (UC06): Edit a Customer**
 
 {:no_toc}
 
@@ -863,7 +883,7 @@ Use case resumes from step 2.
 Steps 1d1 - 1d2 are repeated until the employee to be added is unique. <br>
 Use case resumes from step 2.
 
-**Use case (UC06): Edit an Employee**
+**Use case (UC07): Edit an Employee**
 
 {:no_toc}
 
@@ -906,7 +926,7 @@ Use case resumes from step 2.
 Steps 1d1 - 1d2 are repeated until the employee to be added is unique. <br>
 Use case resumes from step 2.
 
-**Use case (UC07): Edit a Supplier**
+**Use case (UC08): Edit a Supplier**
 
 {:no_toc}
 
@@ -949,7 +969,7 @@ Use case resumes from step 2.
 Steps 1d1 - 1d2 are repeated until the supplier to be added is unique. <br>
 Use case resumes from step 2.
 
-**Use case (UC08): Edit a reservation**
+**Use case (UC09): Edit a reservation**
 
 **MSS**
 
@@ -971,7 +991,7 @@ Use case resumes from step 2.
 
       Use case ends.
 
-**Use case (UC09): Delete a Customer**
+**Use case (UC10): Delete a Customer**
 
 **MSS**
 
@@ -1005,7 +1025,7 @@ Use case resumes from step 2.
 Steps 1c1 - 1c2 are repeated until the customer to delete exists in RHRH. <br>
 Use case resumes from step 2.
 
-**Use case (UC10): Delete an Employee**
+**Use case (UC11): Delete an Employee**
 
 **MSS**
 
@@ -1040,7 +1060,7 @@ Steps 1c1 - 1c2 are repeated until the employee to delete exists in RHRH. <br>
 Use case resumes from step 2.
 
 
-**Use case (UC11): Delete a Supplier**
+**Use case (UC12): Delete a Supplier**
 
 **MSS**
 
@@ -1074,7 +1094,7 @@ Use case resumes from step 2.
 Steps 1c1 - 1c2 are repeated until the supplier to delete exists in RHRH. <br>
 Use case resumes from step 2.
 
-**Use case (UC12): Find Customers in RHRH**
+**Use case (UC13): Find Customers in RHRH**
 
 **MSS**
 
@@ -1101,7 +1121,7 @@ Use case resumes from step 2.
 Steps 1b1 - 1b2 are repeated until all command arguments are valid. <br>
 Use case resumes from step 2.
 
-**Use case (UC13): Find Employees in RHRH**
+**Use case (UC14): Find Employees in RHRH**
 
 **MSS**
 
@@ -1128,7 +1148,7 @@ Use case resumes from step 2.
 Steps 1b1 - 1b2 are repeated until all command arguments are valid. <br>
 Use case resumes from step 2.
 
-**Use case (UC14): Find Suppliers in RHRH**
+**Use case (UC15): Find Suppliers in RHRH**
 
 1. User enters the command to find the suppliers in RHRH based on a sequence of keywords.
 2. The supplier list is filtered in RHRH based on matching of keywords.
@@ -1153,7 +1173,7 @@ Use case resumes from step 2.
 Steps 1b1 - 1b2 are repeated until all command arguments are valid. <br>
 Use case resumes from step 2.
 
-**Use case (UC15): Set the tables of the restaurant inside the app**
+**Use case (UC16): Set the tables of the restaurant inside the app**
 
 **MSS**
 
@@ -1172,7 +1192,7 @@ Steps 1a1 - 1a2 are repeated until the command is correctly formatted. <br>
 Use case resumes from step 2.
 
 
-**Use case (UC16): Sort Customers in RHRH*
+**Use case (UC17): Sort Customers in RHRH*
 
 **MSS**
 
@@ -1204,7 +1224,7 @@ Use case resumes from step 2.
     
     Use case ends.
 
-**Use case (UC17): Sort Employees in RHRH**
+**Use case (UC18): Sort Employees in RHRH**
 
 **MSS**
 
@@ -1236,7 +1256,7 @@ Use case resumes from step 2.
 
   Use case ends.
 
-**Use case (UC18): Sort Suppliers in RHRH**
+**Use case (UC19): Sort Suppliers in RHRH**
 
 **MSS**
 
@@ -1269,7 +1289,7 @@ Use case resumes from step 2.
   Use case ends.
 
 
-**Use case (UC19): Check for reservations made for a date and time**
+**Use case (UC20): Check for reservations made for a date and time**
 
 **MSS**
 
@@ -1293,7 +1313,7 @@ Use case resumes from step 2.
 
       Use case ends
 
-**Use case (UC20): Check for reservations made for a date**
+**Use case (UC21): Check for reservations made for a date**
 
 **MSS**
 
@@ -1317,7 +1337,7 @@ Use case resumes from step 2.
 
       Use case ends
 
-**Use case (UC21): Check for reservations made for a time on the current date**
+**Use case (UC22): Check for reservations made for a time on the current date**
 
 **MSS**
 
@@ -1340,7 +1360,26 @@ Use case resumes from step 2.
     * 1b1. No reservations are displayed
 
       Use case ends
+    
+**Use case (UC23): List all customers/employees/suppliers in default sorting order(by `name`)**
 
+{:no_toc}
+
+**MSS**
+
+1. User enters the command to list all customers/employees/suppliers in default sorting order.
+2. List of all customers/employees/suppliers in default sorting order is displayed in view.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. System detects invalid command format.
+    * 1a1. System displays an error, showing unknown command.
+    * 1a2. User enters command again.
+
+Steps 1a1 - 1a2 are repeated until the command is correctly formatted. <br>
+Use case resumes from step 2.
 
 ### Non-Functional Requirements
 
