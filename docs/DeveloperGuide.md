@@ -597,8 +597,15 @@ Let's say you dislike the look of our current `BookTheme`: you want the backgrou
 Here's what you should do:
 1. cd to `tp/src/main/resources/view`.
 2. Open `BookTheme.css`.
-3. On the top of the css file, you will see that all the [css variables](https://www.w3schools.com/css/css3_variables.asp) are nicely organised and defined for you.
-The following table describes what each of the css variables does:
+3. On the top of the css file, you will see that all the [css variables](#5111-summary-of-the-functions-of-css-variables) are nicely organised and defined for you. 
+4. Let's change the value of `-fx-base-1` to `#5C4033` instead (the color code for dark brown).
+5. Save the file and boot up LeadsForce. You will see that the change in the background color of `BookTheme` is reflected immediately.
+
+<p align="center">
+<img src="images/BookThemeModified.png" width="500" />
+</p>
+
+##### 5.1.1.1 Summary of the functions of CSS variables:
 
 CSS Variable | Description | Default (in BookTheme)
 --------|---------|---------
@@ -613,12 +620,6 @@ CSS Variable | Description | Default (in BookTheme)
 -fx-menu-color-highlighted | Color of the menu when highlighted | #455a64
 -fx-menu-font-color | Color of the menu font | #ffffff
 -fx-menu-font-color-highlighted | Color of the menu font when highlighted | #ffffff
-
-4. Let's change the value of `-fx-base-1` to `#5C4033` instead (the color code for dark brown).
-5. Save the file and boot up LeadsForce. You will see that the change in the background color of `BookTheme` is reflected immediately.
-<p align="center">
-<img src="images/BookThemeModified.png" width="500" />
-</p>
 
 #### 5.1.2 Give LeadsForce a new theme
 If you want to add more themes on top of our existing themes, here's what you should do:
