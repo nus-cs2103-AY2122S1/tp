@@ -65,7 +65,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ### Architecture
 
-<img src="images/ArchitectureDiagram.png" width="280" />
+<img src="images/ArchitectureDiagram.png" width="300" />
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
@@ -91,7 +91,7 @@ The rest of the App consists of four components.
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `deletetask 1`.
 
-<img src="images/ArchitectureSequenceDiagram.png" width="574" />
+<img src="images/ArchitectureSequenceDiagram.png" width="600" />
 
 Each of the four main components (also shown in the diagram above),
 
@@ -108,7 +108,7 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103T-W08-3/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
-![Structure of the UI Component](images/UiClassDiagram.png)
+<img src="images/UiClassDiagram.png" width="800"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
@@ -127,7 +127,7 @@ The `UI` component,
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<img src="images/LogicClassDiagram.png" width="550"/>
+<img src="images/LogicClassDiagram.png" width="800"/>
 
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `SalesNoteParser` class to parse the user command.
@@ -154,7 +154,7 @@ How the parsing works:
 
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-W08-3/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="550" />
+<img src="images/ModelClassDiagram.png" width="800" />
 
 Class Diagram of the `Person`'s entity:
 
@@ -182,7 +182,7 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-W08-3/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="600" />
+<img src="images/StorageClassDiagram.png" width="800" />
 
 How the Storage component works:
 * Saves address book, task book, sales order book and user preference data in json format, and read them back into corresponding objects.
@@ -274,7 +274,8 @@ a mistake and should be avoided).
 As mentioned above, to add an `Order`, the `Person` the `Order` is addressed to should already be in `SalesNote`. The
 following is a sequence diagram showing the execution of the command:
 
-![AddOrderSequenceDiagram](images/AddOrderSequenceDiagram.png)
+<img src="images/AddOrderSequenceDiagram.png" width="800"/>
+
 Focusing on after `AddOrderCommand:execute` is called,
 
 1. First the application calls `model:hasOrder(toAdd)` to check if `toAdd` is already in the model.
@@ -286,7 +287,7 @@ Note that in the diagram above, the "else" clause for the `alt` boxes have been 
 an exception is thrown and an error is displayed back to the user. 
 
 Here is an activity diagram to more clearly illustrate the logic of the application:
-![AddOrderActivityDiagram](images/AddOrderActivityDiagram.png)
+<img src="images/AddOrderActivityDiagram.png" width="300"/>
 
 #### Result
 An Order can only be added to SalesNote if the `Person` it is addressed to is already in SalesNote, and the `Order`
