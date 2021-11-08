@@ -552,7 +552,18 @@ Format: `delete INDEX…`
 * The indexes **must be positive integers** 1, 2, 3, …​
 * Delete multiple events in a single command by inputting multiple indexes, each separated by a space.
 
-Examples:
+Example:<br>
+Suppose Football Training is cancelled due to a tightening of COVID-19 measures. To keep the addressbook updated, you might want to remove the event from the list of events.
+
+You can easily do this a single `delete` command.<br>
+
+1. Note that the event "Football Training" has an index of 2 in the current event list. To remove it from the list of events, simply enter `delete 2`.
+   ![Step1](images/logic/commands/deletecommand/event/step1.png)
+
+2. The result box will notify you of the deleted event. The event will also be removed from the event list.
+   ![Step2](images/logic/commands/deletecommand/event/step2.png)
+   
+More Examples:
 * `view` followed by `delete 1 2 3` deletes the first 3 events in the address book.
 * `find n/Football Training` followed by `delete 1` deletes the 1st event named Football Training in the results of the `find` command.
 
