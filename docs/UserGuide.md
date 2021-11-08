@@ -20,7 +20,7 @@ Take note of some syntax we will frequently use throughout the User Guide:
 | `markdown` | Commands or examples |
 | Format: | the format to write the commands in the application|
 
-
+<div style="page-break-after: always;"></div>
 
 ## Table Of Contents <a name="toc"></a>
 * [Quick start](#quick-start)
@@ -77,7 +77,9 @@ Take note of some syntax we will frequently use throughout the User Guide:
 
 4. Double-click the file to start the app. The GUI similar to the image displayed below should appear in a few seconds. Note how the app contains some sample data.<br>
 
-   ![Ui](images/Ui.png) 
+   <img src="images/Ui.png" width="600">
+
+    <div style="page-break-after: always;"></div>
  
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -99,6 +101,9 @@ Take note of some syntax we will frequently use throughout the User Guide:
 6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
 ## What is Command-line Interface (CLI?) <a name="what-is-cli"></a>
 A Command-line interface helps process commands that you enter through text. Instead of clicking buttons, to execute a certain command,
 you would type the command in text in the command box, and the programme will execute your command, and reflect its response in the response box.
@@ -119,7 +124,6 @@ all the details!<br>
 </div>
 
 ![get format](images/user-guide/tipGetFormat.png)
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -150,6 +154,10 @@ all the details!<br>
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
+## General <a name="general"/>
+
 ### Viewing help : `help` <a name="help"/>
 
 Shows a message explaining how to access the help page.
@@ -159,11 +167,15 @@ Shows a message explaining how to access the help page.
 Alternatively, you can click on the help button in the top left
 corner.
 
-![help button](images/user-guide/helpButton.png)
+<img src="images/user-guide/helpButton.png" width="600">
+
+
 
 Format: `help`
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 ### Toggling between tabs: `toggle` <a name="toggle"/>
 
@@ -173,7 +185,9 @@ Commands enters only applies on the currently displayed tab. (eg. If the current
 Format: `toggle`
 * toggles to the other tab (eg. if the currently displayed tab is the patient tab, `toggle` switches the displayed tab to the doctor tab)
 
-![toggleTabs](images/toggleTabs.png)
+<img src="images/toggleTabs.png" width="600">
+
+<div style="page-break-after: always;"></div>
 
 ### Clearing all entries : `IWANTTOCLEAREVERYTHING` <a name="clear"/>
 
@@ -197,10 +211,17 @@ Format: `exit`
 
 ---
 
-## Managing Patients <a name="managing-patients"/>
-To use commands for managing patients, toggle the displayed list to the patient list using the [toggle](#toggle) command. <br>
+<div style="page-break-after: always;"></div>
 
-![patient tab'](images/patientTab.png)
+## Managing Patients <a name="managing-patients"/>
+<div markdown="span" class="alert alert-info">:information_source: **Note:**
+To use commands for managing patients, toggle the displayed list to the patient list using the toggle command.
+</div>
+More information about the `toggle` command [here](#toggle).
+
+<img src="images/patientTab.png" width="600">
+
+<div style="page-break-after: always;"></div>
 
 ### Adding a patient: `add` <a name="add-patient"/>
 
@@ -229,6 +250,8 @@ Shows a list of all patients in the patient records.
 
 Format: `list`
 
+<div style="page-break-after: always;"></div>
+
 ### Editing a patient's information : `edit` <a name="edit-patient"/>
 
 Edits an existing patient in the patient records.
@@ -248,6 +271,8 @@ Examples:
 *  `edit 1 hp/91234567 eml/johndoe@example.com` Edits the phone number and email address of the 1st patient to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower dob/20/07/1964 risk/ t/` Edits the name and date of birth of the 2nd patient to be `Betsy Crower` and `20/07/1964` respectively, and clears all existing tags and risk.
 
+<div style="page-break-after: always;"></div>
+
 ### Adding a remark to a patient's information : `remark` <a name="remark-patient"/>
 
 Adds a remark to an existing patient in the patient records.
@@ -259,8 +284,10 @@ Format: `remark INDEX r/REMARK`
 * Existing remark will be updated to the input remark.
 
 Examples:
-*  `remark 1 r/` Edits the remark of the 1st patient to be blank.
-*  `remark 2 r/Chronic diabetic, monthly insulin pick up` Edits the remark of the 2nd patient to be `Chronic diabetic, monthly insulin pick up`.
+*  `remark 1 r/` edits the remark of the 1st patient to be blank.
+*  `remark 2 r/Chronic diabetic, monthly insulin pick up` edits the remark of the 2nd patient to be `Chronic diabetic, monthly insulin pick up`.
+
+<div style="page-break-after: always;"></div>
 
 ### Locating patients by name: `find` <a name="find-patient"/>
 
@@ -279,7 +306,9 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+  <img src="images/findAlexDavidResult.png" width="600">
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting a patient : `delete` <a name="delete-patient"/>
 
@@ -294,6 +323,8 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd patient in the patient records.
 * `find Betsy` followed by `delete 1` deletes the 1st patient in the results of the `find` command.
+
+<div style="page-break-after: always;"></div>
 
 ### Managing Tags `tag` <a name="managing-patient-tag"/>
 
@@ -325,14 +356,20 @@ Format: `tag -d INDEX t/TAG`
 
 Examples:
 * `tag -d 1 t/Covid` deletes the *Covid* tag from first patient.
-![deletePatientTag](images/deletePatientTag.png)
+
+  <img src="images/deletePatientTag.png" width="600">  
 
 ---
 
 ## Managing Doctors <a name="managing-doctors"/>
-To use commands for managing doctors, toggle the displayed list to the doctor list using the [toggle](#toggle) command.
+<div markdown="span" class="alert alert-info">:information_source: **Note:**
+To use commands for managing doctors, toggle the displayed list to the doctor list using the toggle command.
+</div>
+More information about the `toggle` command [here](#toggle).
 
-![doctor tab'](images/doctorTab.png)
+<img src="images/doctorTab.png" width="600">
+
+<div style="page-break-after: always;"></div>
 
 ### Adding a doctor: `add` <a name="add-doctor"/>
 
@@ -358,6 +395,8 @@ Shows a list of all doctors in the doctor records.
 
 Format: `list`
 
+<div style="page-break-after: always;"></div>
+
 ### Editing a doctor's information : `edit` <a name="edit-doctor"/>
 
 Edits an existing doctor in the doctor records.
@@ -376,7 +415,10 @@ Examples:
 * `edit 1 hp/91234567 eml/johndoe@example.com` Edits the phone number and email address of the 1st doctor to be `91234567` and `johndoe@example.com` respectively.
 * `edit 2 n/Betsy Crower dob/20/07/1964 t/` Edits the name and date of birth of the 2nd doctor to be `Betsy Crower` and `20/07/1964` respectively, and clears all existing tags.
 * After executing `edit 2 n/Betsy Crower dob/20/07/1964 t/`:
-![editDoctor](images/editDoctor.png)
+
+<img src="images/editDoctor.png" width="600">
+
+<div style="page-break-after: always;"></div>
 
 ### Adding a remark to a doctor's information : `remark` <a name="remark-doctor"/>
 
@@ -410,6 +452,8 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting a doctor : `delete` <a name="delete-doctor"/>
 
 Deletes a doctor record from the list.
@@ -423,6 +467,8 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd doctor in the doctor records.
 * `find Betsy` followed by `delete 1` deletes the 1st doctor in the results of the `find` command.
+
+<div style="page-break-after: always;"></div>
 
 ### Managing Tags `tag` <a name="managing-doctor-tag"/>
 
@@ -456,36 +502,40 @@ Examples:
 `tag -d 1 t/Pediatrician` deletes the *Pediatrician* tag from the first doctor.
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## Managing Appointments `appt` <a name="managing-appointments"/>
 
 ### Adding an appointment: `appt -a` <a name="add-appointment"/>
-Creates an appointment. 
+Creates an appointment and adds it to the appointment list. 
 
 Format: `appt -a p/INDEX_OF_PATIENT d/INDEX_OF_DOCTOR s/DATE_AND_TIME [dur/DURATION]
  [r/REMARK]`
 
-Examples: `appt -a p/1 d/2 s/12/11/2021 20:00 dur/20 r/Patient wants a blood test`
 
 * Both patient's and doctor's index **must be a positive integer** 1, 2, 3, …
 * Duration has to be an integer between 1 and 120 (minutes).
 * `DATE_AND_TIME` accepts the format `DD/MM/YYYY HH:MM` e.g. `12/11/2021 20:00`.
 * If you did not include the duration, it will be automatically be set to **10** minutes.
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">
+:bulb: **Tip:**
 You can find the PATIENT_INDEX or DOCTOR_INDEX by toggling to the patient/doctor tab using the `toggle` command.
-</div>
 <br>
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-You can also add appointments that have happened already! This is especially useful if you just started using PlannerMD
-and would like to store your entire history of appointments!
-</div>
+:bulb: **Tip:**
+You can add appointments that have happened already! This is especially useful if you just started using PlannerMD
+and would like to store your past appointments!
 <br>
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-After adding an appointment, the appointment list is updated to show all appointments on the date of the added appointment. To go back to the default appointment view which shows appointments for the current day, enter `appt -l`
+:bulb: **Tip:**
+After adding an appointment, the appointment list is updated to show all appointments on the date of the added appointment. 
+To go back to the default appointment view which shows appointments for the current day, enter `appt -l`
 </div>
+
+Examples: `appt -a p/1 d/2 s/12/11/2021 20:00 dur/20 r/Patient wants a blood test` creates an appointment with the
+**first patient** in the patient list, and the **second doctor** in the doctor list, at 12 November 2021, 8pm, with the remark that the patient
+wants a blood test
+
+<img src="images/user-guide/addAppointment.png" width="600">
 
 ### Editing an appointment: `appt -e` <a name="edit-appointment"/>
 
@@ -506,9 +556,9 @@ You can find the PATIENT_INDEX or DOCTOR_INDEX by toggling to the patient/doctor
 </div>
 
 Examples:
-* `appt -e 1 p/2 r/Blood test` Edits the patient and remark of the 1st appointment to be the `second patient` in the patient list and `Blood test` respectively.
+* `appt -e 1 p/2 r/Blood test` edits the patient and remark of the 1st appointment to be the **second patient** in the patient list and **Blood test** respectively.
 
-![editAppointment](images/editAppointment.png)
+<div style="page-break-after: always;"></div>
 
 ### Filtering all appointments: `appt -f` <a name="find-appointments"/>
 Searches and lists all appointments in the appointment records that match the given filter conditions.
@@ -525,6 +575,8 @@ Examples:
 * `appt -f` will list all appointments in the appointment records
 * `appt -f s/24/08/2021 e/24/09/2021` will list all appointments in the appointment records that has a starting date between 24 Aug 2021(inclusive) and 24 Sep 2021(inclusive).
 * `appt -f s/24/08/2021 e/24/09/2021 p/Alice d/Carl` will list all appointments in the appointment records which contains patients with the name `Alice`, doctors with the name `Carl` and has a starting date between 24 Aug 2021(inclusive) and 24 Sep 2021(inclusive).
+
+<div style="page-break-after: always;"></div>
 
 ### Filtering upcoming appointments: `appt -u` <a name="upcoming-appointments"/>
 
@@ -547,6 +599,8 @@ Show all of today's appointments.
 
 Format: `appt -l`
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting an appointment: `appt -d` <a name="delete-appointment"/>
 Deletes an appointment from the list.
 
@@ -561,6 +615,8 @@ Examples:
 * `appt -f p/Betsy` followed by `appt -d 1` deletes the 1st appointment in the results of the filter command.
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 ### Saving the data <a name="save-data"/>
 
@@ -579,9 +635,11 @@ If your changes to the data file makes its format invalid, PlannerMD will discar
 ## FAQ <a name="faq"/>
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous PlannerMD home folder.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Command summary <a name="command-summary"/>
 

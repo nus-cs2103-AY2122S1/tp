@@ -14,7 +14,7 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("appt -e 2 p/1 dur/30")
+[-> LogicManager : execute("appt -e 2\np/1 dur/30")
 activate LogicManager
 
 LogicManager -> Model : getState()
@@ -23,7 +23,7 @@ activate Model
 Model --> LogicManager : state
 deactivate Model
 
-LogicManager -> PlannerMdParser : parseCommand("appt -e 2 p/1 dur/30", State.PATIENT)
+LogicManager -> PlannerMdParser : parseCommand("appt -e 2\np/1 dur/30", State.PATIENT)
 activate PlannerMdParser
 
 create AppointmentCommandParser
@@ -33,7 +33,7 @@ activate AppointmentCommandParser
 AppointmentCommandParser --> PlannerMdParser
 deactivate AppointmentCommandParser
 
-PlannerMdParser -> AppointmentCommandParser : parseAppointmentCommand("-e 2 p/1 dur/30")
+PlannerMdParser -> AppointmentCommandParser : parseAppointmentCommand("-e 2\np/1 dur/30")
 activate AppointmentCommandParser
 
 create EditAppointmentCommandParser

@@ -54,7 +54,7 @@ deactivate PlannerMdParser
 LogicManager -> DeletePatientCommand : execute()
 activate DeletePatientCommand
 
-DeletePatientCommand -> Model : deletePatient(1)
+DeletePatientCommand -> Model : deletePatient(patientToDelete)
 activate Model
 
 Model --> DeletePatientCommand

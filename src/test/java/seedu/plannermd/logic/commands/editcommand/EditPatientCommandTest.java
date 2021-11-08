@@ -100,6 +100,7 @@ public class EditPatientCommandTest {
         String expectedMessage = String.format(EditPatientCommand.MESSAGE_EDIT_PATIENT_SUCCESS, editedPatient);
 
         Model expectedModel = new ModelManager(new PlannerMd(model.getPlannerMd()), new UserPrefs());
+        showPatientAtIndex(expectedModel, INDEX_FIRST_PERSON);
         expectedModel.setPatient(model.getFilteredPatientList().get(0), editedPatient);
         expectedModel.editAppointmentsWithPerson(model.getFilteredPatientList().get(0), editedPatient);
 
