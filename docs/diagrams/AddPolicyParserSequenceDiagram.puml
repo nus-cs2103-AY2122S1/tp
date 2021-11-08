@@ -48,6 +48,6 @@ deactivate APC
 [-[hidden]-> APC : execute("addpolicy ...")
 destroy APC
 
-[<-- LM
+[<-- LM : commandResult
 @enduml
 
