@@ -364,7 +364,7 @@ public class ParserUtil {
         PersonContainsFieldsPredicate predicate = new PersonContainsFieldsPredicate();
         predicate.addFieldToTest(argMultimap.getValue(PREFIX_DASH_PHONE), ParserUtil::parsePhone);
         predicate.addFieldToTest(argMultimap.getValue(PREFIX_DASH_EMAIL), ParserUtil::parseEmail);
-        predicate.addFieldToTest(argMultimap.getValue(PREFIX_DASH_TAG), ParserUtil::parseTag);
+        predicate.addFieldToTest(argMultimap.getAllValues(PREFIX_DASH_TAG), ParserUtil::parseTag);
         try {
             predicate.addFieldToTest(argMultimap.getAllValues(PREFIX_DASH_ROLE),
                     Role::translateStringToRoleWithNoRole);
