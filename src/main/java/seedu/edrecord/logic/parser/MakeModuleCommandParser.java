@@ -3,7 +3,6 @@ package seedu.edrecord.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.edrecord.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import seedu.edrecord.logic.commands.MakeGroupCommand;
 import seedu.edrecord.logic.commands.MakeModuleCommand;
 import seedu.edrecord.logic.parser.exceptions.ParseException;
 import seedu.edrecord.model.module.Module;
