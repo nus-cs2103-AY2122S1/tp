@@ -32,7 +32,7 @@ public class DeleteModuleLessonCommandParser implements Parser<DeleteModuleLesso
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(userInput, PREFIX_MODULE_CODE);
         List<String> moduleCodes = argMultimap.getAllValues(PREFIX_MODULE_CODE);
         if (!moduleCodes.isEmpty()) {
-            if (userInput.indexOf("m/") != 1) {
+            if (userInput.indexOf(String.valueOf(PREFIX_MODULE_CODE)) != 1) {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteModuleLessonCommand.MESSAGE_USAGE));
             }
