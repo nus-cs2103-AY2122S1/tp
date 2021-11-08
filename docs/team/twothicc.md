@@ -78,7 +78,6 @@ Given below are my contributions to the project.
     [\#104](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/104),
     [\#320](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/320)
     * Added and updated documentation for `show` command:
-    [\#166](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/166),
     [\#166](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/166)
     * Added documentation for `add` command input specifications for `Name`, `Email`, `Phone` and `Role` prefixes:
     [\#173](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/173),
