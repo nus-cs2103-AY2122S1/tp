@@ -37,7 +37,7 @@ For any inquiries, please reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/tau-bar.md)]
 
 * Role: Scheduling
-* Responsibilities: In charge of `delete` feature
+* Responsibilities: In charge of `delete` feature and UI.
 
 ### Lim Yu Zher
 
