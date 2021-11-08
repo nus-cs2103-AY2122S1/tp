@@ -467,8 +467,6 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Cons: Difficult to implement, and could potentially add confusion with an increase in syntax required to 
       differentiate various functions for delete.
 
-_{more aspects and alternatives to be added}_
-
 ### Report feature (status)
 
 #### Implementation
@@ -524,8 +522,6 @@ Step 4. After that, a command result indicating that the report window is opened
 * **Alternative 2:** Produces graphical representation of report
     * Pros: Enables user to better visualise status of different tags
     * Cons: Could be difficult to interpret graph if user uses a large range of tags with various statuses.
-
-_{more aspects and alternatives to be added}_
 
 ### Undo feature
 
@@ -625,8 +621,6 @@ The following activity diagram summarizes what happens when a user tries to undo
 * **Alternative 3:** Store various states of the AddressBook.
   * Pros: Easy to retrieve.
   * Cons: Memory issues, when to delete an old (no longer useful) state.
-    
-_{more aspects and alternatives to be added}_
 
 ### Report on Group feature
 #### Implementation
@@ -657,7 +651,6 @@ Group command has low error tolerance. If the an invalid name is inputted in the
   * Pros: User experience improve the amount of commands needed to input decrease
   * Cons: Potential bugs due to increase complexity. User experience may not increase as much as the user may have difficulty trying to get the required filter list using only the commands.
 
-_{more aspects and alternatives to be added}_
 ### Report on tag information feature
 #### Implementation
 The tagInfo mechanism is facilitated by `TagInfoCommand`. It implements a feature that allows the user to obtain a report for the total number of contacts under each command.
@@ -695,8 +688,6 @@ step 2. WebFast will create a `reportwindow` will contains a report with the `to
 * **Alternative 2:** Create a global attribute hashtable in the model that is consistently updated based on each command
   * Pros: Reduce running time for tagInfo command
   * Cons: Increase complexity of the entire app. Very difficult to implement as each command will have to link to an additional global variable. High potential for bugs.
-
-_{more aspects and alternatives to be added}_
 
 
 ### \[Proposed\] Data archiving
