@@ -539,7 +539,7 @@ to let it track both hourly and monthly salary. Can be done with the tracking of
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
+## **Appendix A: Requirements**
 
 ### Product scope
 
@@ -720,7 +720,7 @@ Project scope:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix A: Instructions for manual testing**
+## **Appendix B: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 
@@ -829,7 +829,7 @@ testers are expected to do more *exploratory* testing.
     
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix B: Effort**
+## **Appendix C: Effort**
 
 During the V1.2 iteration, we had set out to revamp the entire codebase to accommodate F&B staff and their details as 
 compared to regular people. This task was moderately difficult as on one hand, we only had to refactor any instances of 
