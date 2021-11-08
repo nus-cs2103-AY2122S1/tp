@@ -19,8 +19,8 @@ Given below are my contributions to the project.
   * What it does: allows the user to undo all previous commands one at a time. 
   * Sample pull request: [\#102](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/102)
   * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-  * Highlights: This enhancement affects existing commands and commands to be added in future and requires an analysis of design alternatives. The implementation was also challenging as it required changes to existing commands .
-  * Credits: The design of undo feature is adapted from [here](https://stackoverflow.com/questions/11530276/how-do-i-implement-a-simple-undo-redo-for-actions-in-java.)
+  * Highlights: This enhancement affects existing commands and commands to be added in future and requires an analysis of design alternatives. The implementation was also challenging as it required changes to existing commands.
+  * Credits: The design of undo feature is adapted from [here](https://stackoverflow.com/questions/11530276/how-do-i-implement-a-simple-undo-redo-for-actions-in-java.).
 
 
 
