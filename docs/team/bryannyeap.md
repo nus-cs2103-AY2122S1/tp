@@ -44,17 +44,23 @@ Given below are my contributions to the project.
   * Wrote tests for `Interview`:
     [\#227](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/227)
 
-  * Disallow duplicate indexes for `delete`, `mark`, and `unmark` command:
+  * Disallowed duplicate indexes for `delete`, `mark`, and `unmark` command:
     [#\295](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/295)
     
-  * Fix unintended `mark` and `unmark` command behaviour by instantly detecting out-of-range indexes:
+  * Fixed unintended `mark` and `unmark` command behaviour by instantly detecting out-of-range indexes:
     [\#305](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/305)
     
-  * Disallow incorrect `find` command inputs for the `Name`, `Phone`, `Email`, `Role`, `ExpectedSalary`, and `Tags` category, and wrote tests for it:
+  * Disallowed incorrect `find` command inputs for the `Name`, `Phone`, `Email`, `Role`, `ExpectedSalary`, and `Tags` category, and wrote tests for it:
     [\#122](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/122)
     
-  * Update Sample Data in RecruitIn:
+  * Modified `show` command to sort user inputs for `Interview` category in chronological order, and wrote tests for it:
+    [\#388](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/388)
+    
+  * Updated Sample Data in RecruitIn:
     [\#230](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/230)
+    
+  * Added Javadocs:
+    [\#414](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/414)
 
 * **Documentation**:
   * User Guide:
@@ -78,6 +84,9 @@ Given below are my contributions to the project.
       [\#308](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/308)
     * Added manual test cases for `edit`, `delete` and `missing / corrupted save files`:
       [\#372](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/372)
+      [\#393](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/393)
+    * Added Appendix C (Effort):
+      [\#416](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/416)
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments):
@@ -90,7 +99,8 @@ Given below are my contributions to the project.
     [\#301](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/301),
     [\#309](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/309),
     [\#322](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/322),
-    [\#362](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/362)
+    [\#362](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/362),
+    [\#381](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/381)
     
   * Reported bugs for other team during PE Dry Run:
     [\#199](https://github.com/AY2122S1-CS2103T-W12-3/tp/issues/199),
