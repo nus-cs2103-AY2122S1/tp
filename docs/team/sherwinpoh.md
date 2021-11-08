@@ -33,7 +33,6 @@ Given below are my contributions to the project.
       * What it does: Enables users to have multiple tags on policies.
       * Justification: Users can now classify, and distinguish visually different policies.
 * Contributions to the UG
-    * Added common Policy details section. [PR #187](https://github.com/AY2122S1-CS2103-F10-4/tp/pull/187)
     * Added the documentation for addpolicy, editpolicy commands. [PR #69](https://github.com/AY2122S1-CS2103-F10-4/tp/pull/69)
     * Reorganised UG by grouping features according to their functionality. [PR #147](https://github.com/AY2122S1-CS2103-F10-4/tp/pull/147)
 * Contributions to the DG
