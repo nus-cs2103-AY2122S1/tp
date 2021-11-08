@@ -219,7 +219,7 @@ Command Format: `filter [g/GRADE] [s/SUBJECT]`
 
 * `GRADE` refers to the educational level of the student. It can be specified in lower- or upper- case (i.e. `P5` and `p5` represents the same grade).
 
-* `SUBJECT` can be specified in lower- or upper- cases (i.e. `MATH` and `math` represents the same subject which is `Math`). See [`add-l` (add lesson)](#adding-a-lesson-add-l) command for more information.
+* `SUBJECT` can be specified in lower- or upper- cases (i.e. `MATH` and `math` represents the same subject which is `Math`). See the [`add-l`](#adding-a-lesson-add-l) command for more information.
 
 Example(s):
 
@@ -249,7 +249,7 @@ Command Format: `add n/NAME p/PARENT_CONTACT e/EMAIL a/ADDRESS g/GRADE [r/REMARK
 * `PARENT_CONTACT` can only be 8 digits long and start with `6`, `8` or `9` (as this application is currently based for Singapore use).
 
 * `EMAIL` can only have a maximum of **100** characters and have the conventional `@` as well as a domain name.
-  * As there can be a variety of possible email address namings and domains, the application will not run a through check on your input. If you happen to input the wrong email address, you can use the `edit` command [here](#editing-a-student--edit).
+  * As there can be a variety of possible email address namings and domains, the application will not run a through check on your input. If you happen to input the wrong email address, you can use the [`edit`](#editing-a-student--edit) command.
 
 * `ADDRESS` can only have a maximum of **150** characters.
 
@@ -381,11 +381,11 @@ Command Format: `enroll STUDENT_INDEX l/LESSON_INDEX`
 * Enroll the student identified by `STUDENT_INDEX` in the displayed student list to the specific lesson identified by `LESSON_INDEX` in the displayed lesson list.
 
 * Enrolling a student is only possible if the student:
-  1. has the same `GRADE` as the lesson,
+  * has the same `GRADE` as the lesson
 
-  2. is not enrolled to the lesson and,
+  * is not enrolled to the lesson
 
-  3. has no other lessons with conflicting timing.
+  * has no other lessons with conflicting timing
 
 * `STUDENT_INDEX` refers to the index number shown in the displayed student list.
 
@@ -625,47 +625,47 @@ Action | Format | Examples
 
 1. Where can I view the list of commands?
 
-    > You can type `help` or you can click on the 'Help' tab on the top left of the app window. (see [Help](#viewing-help-help) for more)
+    > You can type `help` or you can click on the 'Help' tab on the top left of the app window (see [`help`](#viewing-help-help) for more).
 
 1. Why are some unusual email address inputs valid, such as 'jd@gmail.com.this.that.this'?
 
-    > There are many possible email addresses and domains such as school email address and personal domains, hence **TuitiONE** will not provide a thorough checking in this current version. If there is any scenario where you have inputted the wrong email address and would like to change it, refer to the the `edit` command [here](#editing-a-student--edit).
+    > There are many possible email addresses and domains such as school email address and personal domains, hence **TuitiONE** will not provide a thorough checking in this current version. If there is any scenario where you have inputted the wrong email address and would like to change it, refer to the the [`edit`](#editing-a-student--edit) command.
 
 1. Why am I unable to add a student with the same name as another student?
 
-    > Currently our system identifies uniqueness of students by their name, hence you are unable to add students with the same name. We are working on an update to identify uniqueness through the combination of the name and phone number, allowing for multiple students of the same name to be in our **TuitiONE**
+    > Currently our system identifies uniqueness of students by their name, hence you are unable to add students with the same name. We are working on an update to identify uniqueness through the combination of the name and phone number, allowing for multiple students of the same name to be in our **TuitiONE**.
 
 1. How do I edit a lesson?
 
-    > In the current version of **TuitiONE**, you will need to use `delete-l` and `add-l` to make your edits, then re-enroll the students. In the upcoming updates, there will be an `edit-l` command that will allow for the editing of lessons.
+    > In the current version of **TuitiONE**, you will need to use [`delete-l`](#deleting-a-lesson-delete-l) and [`add-l`](#adding-a-lesson-add-l) to make your edits, then re-enroll the students. In the upcoming updates, there will be an `edit-l` command that will allow for the editing of lessons.
 
 1. How do I edit a remark of a Student?
 
-    > To edit a student's remark, you will need to use the `dr/` and `r/` prefixes in the `edit` command to make any changes (see [Editing a student](#editing-a-student--edit) for more).
+    > To edit a student's remark, you will need to use the `dr/` and `r/` prefixes in the [`edit`](#editing-a-student--edit) command to make any changes.
 
 1. Am I able to add or edit remarks to have spacings within them?
 
-    > No. The number of characters each remark can have is capped at **25**, and must be single words (see [Adding a student](#adding-a-student-add) for more).
+    > No. The number of characters each remark can have is capped at **25**, and must be single words (see [`add`](#adding-a-student-add) for more).
 
 1. Am I able to use "4PM" instead of "1600" for my timings when creating a new lesson?
 
-    > No. **TuitiONE** only accepts timings that follow the **24** hours format. Additionally, timings must also be in intervals of 30 minutes For instance, `1400` and `1430` are valid inputs, while `1415` is an invalid input (see [Adding a lesson](#adding-a-lesson-add-l) for more).
+    > No. **TuitiONE** only accepts timings that follow the **24** hours format. Additionally, timings must also be in intervals of 30 minutes For instance, `1400` and `1430` are valid inputs, while `1415` is an invalid input (see [`add-l`](#adding-a-lesson-add-l) for more).
 
 1. How long can a name be when I add/edit a student?
 
-    > We have imposed a **150** character limit for the respective names of students. Students with names longer than **150** characters should be represented with their initials instead (see [Adding a student](#adding-a-student-add) for more).
+    > We have imposed a **150** character limit for the respective names of students. Students with names longer than **150** characters should be represented with their initials instead (see [`add`](#adding-a-student-add) for more).
 
 1. Can lessons of the same subject and grade start at the same time?
 
-    > No. **TuitiONE** would consider a lesson of the same `SUBJECT` and `GRADE` that start at the same time on the same day as a conflict (see [Adding a lesson](#adding-a-lesson-add-l) for more).
+    > No. **TuitiONE** would consider a lesson of the same `SUBJECT` and `GRADE` that start at the same time on the same day as a conflict (see [`add-l`](#adding-a-lesson-add-l) for more).
 
 1. How many lessons can a student be enrolled in?
 
-    > A student can be enrolled in a maximum of **10** lessons at any time. **TuitiONE** will not allow a student to be enrolled in more than **10** lessons (see [Enrolling a student from lesson](#enrolling-a-student-from-lesson-enroll) for more).
+    > A student can be enrolled in a maximum of **10** lessons at any time. **TuitiONE** will not allow a student to be enrolled in more than **10** lessons (see [`enroll`](#enrolling-a-student-from-lesson-enroll) for more).
 
 1. How many students can a lesson contain?
 
-    > A lesson can have up to **15** students enrolled in at any time. **TuitiONE** will not allow a lesson to have more than **15** students enrolled at any time (see [Enrolling a student from lesson](#enrolling-a-student-from-lesson-enroll) for more).
+    > A lesson can have up to **15** students enrolled in at any time. **TuitiONE** will not allow a lesson to have more than **15** students enrolled at any time (see [`enroll`](#enrolling-a-student-from-lesson-enroll) for more).
 
 1. Why are there some unusual files present in my folder after I run **TuitiONE**?
 
