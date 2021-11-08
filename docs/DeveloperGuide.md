@@ -95,7 +95,7 @@ Here's a (partial) class diagram of the `Logic` component:
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
+1. The command can communicate with the `Model` when it is executed (e.g. to add a contact).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
@@ -255,7 +255,7 @@ The following sequence diagram visually describes the steps above:
   
   * **Alternative 1 (current choice):** As a list of interactions in the Person object.
   * Pros: Easy to implement, intuitive design and navigatability
-  * Cons: Heavy coupling with the person class
+  * Cons: Heavy coupling with the Person class
   
   * **Alternative 2:** As a list by itself, containing a reference to the Person it is attached to.
   * Pros: More isolated from the Person class, so less changes to overall code
@@ -353,14 +353,14 @@ The following sequence diagram visually describes the steps above:
 
 #### 4.5.2 Design considerations:
 
-**Aspect: How persons in organisations are stored:**
+**Aspect: How contacts in organisations are stored:**
 
-* **Alternative 1 (current choice):** As a list of persons in each organisation in the Address Book.
+* **Alternative 1 (current choice):** As a list of contacts in each organisation in the Address Book.
     * Pros: Easy to implement, intuitive design
-    * Cons: Any updates to a person in Address Book have to be checked and updated in each organisation
+    * Cons: Any updates to a contact in Address Book have to be checked and updated in each organisation
 
-* **Alternative 2:** List of persons in each organisation stores the references to the persons
-    * Pros: Any updates to a person in Address Book is synchronised with the organisations the person is in
+* **Alternative 2:** List of contacts in each organisation stores the references to the contacts
+    * Pros: Any updates to a contact in Address Book is synchronised with the organisations the contact is in
     * Cons: Harder to implement
 
 ### 4.6 \[Proposed\] Undo/redo feature
@@ -381,11 +381,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th contact in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new contact. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
@@ -393,7 +393,7 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the contact was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
@@ -438,7 +438,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Pros: Will use less memory (e.g. for `delete`, just save the contact being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -480,32 +480,32 @@ User stories are listed based on the chronological use of a user.
 | `*`      | user ready to start using the app          | view a list of basic commands  | refer to instructions when I forget how to use the App                 |
 | `*`      | user ready to start using the app          | purge all current data         | get rid of sample/experiment data I used for exploring the App         |
 | `*`      | user ready to start using the app          | confirm to purge the existing data         | not accidentally execute a ‘clear’ command               |
-| `*`      | new user                                   | view valid faculty and major data fields to assign to a contact            | begin adding new contacts in a valid manner                  |
 | `* * *`  | new user                                   | add a new contact              | record basic contact information of a contact                  |
+| `*`      | new user                                   | view valid faculty and major data fields to assign to a contact            | begin adding new contacts in a valid manner                  |
 | `*`  | new user                                   | view valid skills and misc data fields to assign to a contact              | begin adding new contacts in a valid manner                  |
 | `* * *`  | beginner user                              | list all current contacts      | have an overview of my populated contacts                              |
 | `* * *`  | beginner user                              | assign tags or categories to users | categorise contacts by groups                                      |
 | `* * *`  | beginner user                              | append data fields to a contact | add on new data fields to existing ones                          |
 | `* * *`  | beginner user                              | remove specific data fields | precisely remove incorrect data fields of a contact                       |
+| `* * *`    | slightly familiar user                                       | edit information pertaining to a specific contact   | stay updated with the new details of all my contacts               |
 | `* * *`  | slightly familiar user                 | delete a contact                | can remove clutter or errors                                   |
 | `* * *`  | slightly familiar user                 | remove appended data fields          | remove outdated or incorrect data fields                                   |
+| `* * *`  | slightly familiar user                 | view a contact in detail                | view the miscellaneous data fields such as remarks and interactions                            |
+| `* * *`  | slightly familiar user                                       | search for a specific contact          | can narrow down my contact book to the specific contact I am looking for |
 | `* * *`  | slightly familiar user                 | list all my organisations               | have an overview of my populated organisations                                  |
 | `* * *`  | slightly familiar user                 | add a new organisation                | record basic information of the organisation and the people related to it                                   |
 | `* * *`  | slightly familiar user                 | delete an organisation                | remove any organisations that are irrelevant or errors                                   |
 | `* * *`  | slightly familiar user                 | add a contact to an organisation                | record a contact's link to an organsiation                                   |
 | `* * *`  | slightly familiar user                 | delete a contact from an organisation                | remove a contact's link to an organisation or errors                                   |
-| `* *`  | slightly familiar user                 | edit information pertaining to a specific organisation               | stay updated with the new details of all my organisations and contacts within                                  |
-| `* * *`  | slightly familiar user                 | view a contact in detail                | view the miscellaneous data fields such as remarks and interactions                            |
-| `* *`  | slightly familiar user                 | view the details of a specific organisation                | reconnect with the organisation or the person related to it                             |
 | `* * `  | slightly familiar user                 | list all my interactions               | have an overview of my interactions with a particular contact                                  |
-| `* * *`  | slightly familiar user                                       | search for a specific contact          | can narrow down my contact book to the specific contact I am looking for |
+| `* *`  | slightly familiar user                 | edit information pertaining to a specific organisation               | stay updated with the new details of all my organisations and contacts within                                  |
+| `* *`  | slightly familiar user                 | view the details of a specific organisation                | reconnect with the organisation or the contact related to it                             |
 | `*`  | slightly familiar user                                       | confirm deletion of a contact         | not accidentally execute a ‘delete’ command |
 | `*`  | slightly familiar user                                       | confirm deletion of a data field         | not accidentally execute a ‘delete’ command |
-| `* * *`    | slightly familiar user                                       | edit information pertaining to a specific contact   | stay updated with the new details of all my contacts               |
-| `*`      | user with many persons in the address book | sort contacts by name           | locate a contact easily                                                 |
+| `*`      | user with many contacts in the address book | sort contacts by name           | locate a contact easily                                                 |
+| `* * *`  | expert user                 | filter my list of contacts                | view a list of contacts based on a list of tags attached to them                                   |
 | `*`      | expert user                                | sort contacts by faculty           | consult them should i need help for a project                       |
 | `*`      | expert user                                | mass delete information that is not required anymore          | get rid of redundant info                      |
-| `* * *`  | expert user                 | filter my list of contacts                | view a list of contacts based on a list of tags attached to them                                   |
 | `*`  | expert user                 | filter my organisation list                | view a list of organisations based on the specific tag attached to them                                  |
 
 ### 6.3 Use cases
@@ -717,38 +717,38 @@ User stories are listed based on the chronological use of a user.
 
   Use case ends.
 
-#### Use case: UC12 Add a person to an organisation
+#### Use case: UC12 Add a contact to an organisation
 
 **MSS**
 
-1.  User requests to add a person to an organisation
-2.  ComputingConnection adds the person to the organisation
+1.  User requests to add a contact to an organisation
+2.  ComputingConnection adds the contact to the organisation
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The person index provided is invalid.
+* 1a. The contact index provided is invalid.
     * 1a1. ComputingConnection shows an error message.
 * 2a. The organisation name provided is invalid.
     * 2a1. ComputingConnection shows an error message.
-* 3a. The person already exists in the organisation.
+* 3a. The contact already exists in the organisation.
     * 3a1. ComputingConnection shows an error message.
     
   Use case ends.
 
-#### Use case: UC13 Removing a person from an organisation
+#### Use case: UC13 Removing a contact from an organisation
 
 **MSS**
 
-1.  User requests to remove a person from an organisation
-2.  ComputingConnection removes the person from the organisation
+1.  User requests to remove a contact from an organisation
+2.  ComputingConnection removes the contact from the organisation
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The person index provided is invalid.
+* 1a. The contact index provided is invalid.
     * 1a1. ComputingConnection shows an error message.
 * 2a. The organisation name provided is invalid.
     * 2a1. ComputingConnection shows an error message.
@@ -808,7 +808,7 @@ testers are expected to do more *exploratory* testing.
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
