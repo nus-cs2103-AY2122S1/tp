@@ -30,7 +30,7 @@ Class Phone
 Class Tag
 Class ClassCode
 Class Schedule
-Class GroupName
+Class GroupNumber
 Class GroupType
 
 }
@@ -63,7 +63,7 @@ Student *--> "*" StudentMark
 TutorialClass *--> ClassCode
 TutorialClass *--> "*" Tag
 TutorialClass *--> Schedule
-TutorialGroup *--> GroupName
+TutorialGroup *--> GroupNumber
 TutorialGroup *--> ClassCode
 TutorialGroup *--> GroupType
 

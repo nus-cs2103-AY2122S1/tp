@@ -17,7 +17,7 @@ UniqueStudentList -right-> Student
 UniqueTutorialGroupList -right-> TutorialGroup
 
 TutorialClass *-right-> "1" UniqueTutorialGroupList
-TutorialGroup *-down-> GroupName
+TutorialGroup *-down-> GroupNumber
 TutorialGroup *-down-> ClassCode
 TutorialGroup *-down-> GroupType
 TutorialClass *-down-> ClassCode
