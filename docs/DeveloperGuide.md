@@ -275,8 +275,14 @@ The following sequence diagram shows how the `pin` operation works:
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `PinCommandParser` and `PinCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
+
 The following activity diagram shows possible user interactions with a `pin` command.
 ![PinActivityDiagram](images/PinActivityDiagram.png)
+
+
+The following activity diagram shows possible user interactions with a `unpin` command.
+![UnpinActivityDiagram](images/UnpinActivityDiagram.png)
+
 
 <div style="page-break-before: always;"></div>
 
@@ -409,8 +415,12 @@ Step 4. The user decides to view the usage of `add` to learn to add a contact, a
 
 Step 5. CONNECTIONS will display a detailed help message on the usage of the `add` command in `ResultDisplay`.
 
+The following sequence diagram shows how the Help operation works:
+
 ![HelpSequenceDiagram](images/HelpCommandDiagram.png)
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `HelpCommandParser` and `HelpCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 
 ### Birthday Reminder feature
 
@@ -517,6 +527,8 @@ Step 4. `CommandBox#handleKeyStroke` reads the `UP` keystroke and calls `Command
 Step 5. `CommandHistory` retrieves the previous command and returns it.
 
 Step 6. `CommandBox` displays the previous command in the Command Box.
+
+The following activity diagram shows possible user interactions with the command history feature.
 
 ![CommandHistoryActivityDiagram](images/CommandHistoryActivityDiagram.png)
 
