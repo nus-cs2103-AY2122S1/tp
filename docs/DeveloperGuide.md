@@ -888,7 +888,9 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
     * 1b1. CONNECTIONS displays an error message.
 
       Use case ends.
-    
+
+<div style="page-break-before: always;"></div>
+
 * 1c. User inputs start index that is bigger then end index.
     * 1c1. CONNECTIONS displays an error message.
 
