@@ -167,7 +167,7 @@ class FeesCalculatorTest {
     @Test
     public void startBeforeUpdate_endAfterToday() {
         feesCalculator = new FeesCalculator(new LastUpdatedDate("2021-10-06T12:00"),
-            LocalDateTime.parse("2021-10-28T12:00"));
+                LocalDateTime.parse("2021-10-28T12:00"));
 
         Lesson lesson = new LessonBuilder()
                 .withDate("28 SEP 2021")
