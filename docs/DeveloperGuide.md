@@ -76,7 +76,8 @@ The sections below give more details of each component.
 
 The `UI` component is responsible for managing the user interface of the application so that it responds correctly to any command to user inputs.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFX UI framework. The layout of these UI parts are defined in matching `.fxml` files 
+that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
 **Functionality** :
 
@@ -85,14 +86,20 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Friend` and `Game` objects residing in the `Model`.
 
 **Component Structure**
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 ![Inheritance from UiPart](images/UiClassDiagramUiPart.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `FriendListPanel`, 
+`GameListPanel`. These parts are always being shown in `MainWindow`.
+
+Depending on the state of the application, certain parts of the UI are shown and hidden in the `MainWindow`, e.g. 
+`FriendMainCardTable`,`FriendSchedulePanel`, `GameMainCardTable`.
+
+etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 ### 3.3 Logic component
 
@@ -105,7 +112,7 @@ Here's a (partial) class diagram of the `Logic` component:
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `MainParser` class to parse the user command.  
 2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `HelpCommand`) which is executed by the `LogicManager`.
-3. The command can communicate with the `Model` when it is executed (e.g. to add a person).
+3. The command can communicate with the `Model` when it is executed (e.g. to add a friend).
 4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("friend --delete draco")` API call.
@@ -232,7 +239,11 @@ illustrates the description for deleting **games**:
 #### 4.1.2 Design Considerations
 
 The games of each friend is stored inside a `Map<GameId, GameFriendLinks>`. Before deleting a game, the links a 
-friend has to a game has to be removed, before deleting the game from the list of games.
+friend has to the game has to be removed, by calling `Model#removeLinkAllFriends(Game)`, before deleting the game by 
+calling `Model#deleteGame(Game)`. The game is then deleted from the list of games. This process is illustrated in the 
+sequence diagram below:
+
+<img src="images/DeleteGameSequenceDiagram2.png" width="1000" />
 
 ### 4.2 Link Feature
 
@@ -377,9 +388,11 @@ produces the list of friend recommendations.
 
 <ins>Step 3: Displaying the recommended friends</ins> 
 
-Due to the use of JavaFX's `FilteredList` and `SortedList`, which listens for and tracks for changes whenever the
-`FilteredList#setPredicate(Predicate)` or `SortedList#setComparator(Comparator)` methods are invoked, the user interface is
-notified and updated to display the filtered and sorted friends list based on the produced list of friend recommendations in step 2. 
+In Java, the implementation of JavaFX's `FilteredList` and `SortedList` in Java are just `ObservableList` wrapped 
+with a wrapper that filters and sorts the content respectively. Therefore, JavaFX's `FilteredList` and 
+`SortedList` listens for and tracks changes just like an `ObservableList` whenever the`FilteredList#setPredicate(Predicate)` or 
+`SortedList#setComparator(Comparator)` methods are invoked. The user 
+interface is notified and updated to display the filtered and sorted friends list based on the produced list of friend recommendations in step 2. 
 
 Hence, the user sees the displayed list of friend recommendations and this completes the implementation of the 
 recommend feature.  
@@ -490,19 +503,26 @@ for future multiplayer competitive gaming sessions.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a (describes user) | I want to (functionality)                                          | So that I can (rationale)                                 |
+| Priority | As a (describes user) | I want to be able to (functionality)                               | So that I can (rationale)                                 |
 |----------|-----------------------|--------------------------------------------------------------------|-----------------------------------------------------------|
-| ***      | user                  | be able to easily add my friends personal info/data (name, userid) | store a list of friends who I can possibly play with      |
-| ***      | user                  | be able to link my friends to the games they play                  | associate my friends with a particular game and store their usernames for each game               |
-| ***      | user                  | be able to view a list of my friends information                   | see who my friends are                                    |
-| ***      | user                  | be able to delete a friend from the contact list                   | remove friends that were mistakenly added                 |
-| ***      | user                  | be able to see full information of a friend from the contact list  | get any information I want about the friend               |
-| ***      | user                  | be able to easily add games that I want to play with my friends    | store the games that I plan to play with my friends       |
-| ***      | user                  | be able to view a list of my game information                      | see which of my friends play certain games                |
-| ***      | user                  | be able to delete a game from the games list                       | remove games that were mistakenly added or due to typos   |
-| ***      | user                  | be able to see full information of a game from the games list      | see information about which friends play the game and their in-game usernames   |
-
-*{More to be added}*
+| ***      | user                  | easily add my friends personal info/data (name, id)     | store a list of friends who I can possibly play with      |
+| ***      | user                  | link my friends to the games they play                  | associate my friends with a particular game and store their usernames for each game               |
+| ***      | user                  | view a list of my friends information                   | see who my friends are                                    |
+| ***      | user                  | delete a friend from the contact list                   | remove friends that were mistakenly added                 |
+| ***      | user                  | see full information of a friend from the contact list  | get any information I want about the friend               |
+| ***      | user                  | easily add games that I want to play with my friends    | store the games that I plan to play with my friends       |
+| ***      | user                  | view a list of my game information                      | see which of my friends play certain games                |
+| ***      | user                  | delete a game from the games list                       | remove games that were mistakenly added or due to typos   |
+| ***      | user                  | see full information of a game from the games list      | see information about which friends play the game and their in-game usernames    |
+| **       | user                  | unlink a game from a friend                             | remove the association between a friend and a certain game                       |
+| **       | user                  | add my friends' availabilities to my friends' schedules | store what time they are free during the week             |
+| **       | user                  | view my friends' availabilities in their schedules      | see what time they are free during the week to play with me                      |
+| **       | user                  | update my friends' availabilities                       | update their availabilities should their availabilities change                   |
+| **       | user                  | add my friends' skill levels for each game              | store their relative skill levels for each game that they play                   |
+| **       | user                  | update my friends' skill levels for each game           | update their skill levels over time                                              |
+| **       | user                  | view a recommended list of friends for a game and at a certain time             | find friends to play a game with me at a certain timing  |
+| *       | user                   | store friends' skill levels for a category of game             | store friends' skill levels for categories of games  |
+| *       | user                   | view friends' skill levels for a category of game             | see which friends are good at certain categories of games  |
 
 ### 6.3 Use cases
 
@@ -560,12 +580,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 
-**Use case: UC04 - List games whose `GAME_NAME` contains a keyword**
+**Use case: UC04 - List games whose `GAME_ID` contains a keyword**
 
 **MSS**
 
 1. User requests to list games in gitGud using a keyword filter.
-2. gitGud shows a filtered list of games whose `GAME_NAME` contains the keyword.
+2. gitGud shows a filtered list of games whose `GAME_ID` contains the keyword.
 
    Use case ends.
 
@@ -582,7 +602,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User links a friend (using `FRIEND_ID`) with a particular game (using `GAME_NAME`) and the username for that game 
+1. User links a friend (using `FRIEND_ID`) with a particular game (using `GAME_ID`) and the username for that game 
    (using `USERNAME`).
 2. gitGud associates the friend with the game provided.
 
@@ -598,7 +618,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 1.
 
 
-* 2b. The given `GAME_NAME` is invalid.
+* 2b. The given `GAME_ID` is invalid.
 
     * 2b1. gitGud shows an error message.
     * 2b2. User can list games currently in gitGud or add new games.
@@ -660,162 +680,167 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:**<br>
+
+These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
 
 </div>
 
 ### 7.1 Launch and shutdown
 
-1. Initial launch
-
+* Launching:
    1. Download the jar file and copy into an empty folder.
-
-   1. Double-click the jar file Expected: gitGud GUI launches.
-
+   2. Double-click the jar file<br>Expected: gitGud GUI launches.
+  
+* Shutdown:
+  1. Run the `exit` command in gitGud. The application should exit and shut down. 
+  
 ### 7.2 Adding a friend
-1. Adding a friend to gitGud
 
-    1. Prerequisites: There should not be a friend with `FRIEND_ID` Draco or a friend with `FRIEND_ID` MrFeely already stored in gitGud. 
+* Prerequisites: There should not be a friend with `FRIEND_ID` 'Draco' or a friend with `FRIEND_ID` 'MrFeely' already 
+stored in gitGud. 
 
-    2. Test case: `friend --add Draco --name Marcus`<br>
-       Expected: Friend with `FRIEND_ID` Draco is added. gitGud states that `FRIEND_ID` is added.
-       
-    3. Test case: `friend --add MrFeely`<br>
-       Expected: Friend with `FRIEND_ID` MrFeely is added. gitGud states that `FRIEND_ID` is added.
+* Test case: `friend --add Draco --name Marcus`<br>
+   Expected: Friend with `FRIEND_ID` 'Draco' and `NAME` 'Marcus' is added. gitGud states that `FRIEND_ID` is added.
 
-    4. Other incorrect add commands to try: `friend --name Marcus`, `friend --add`, `friend --name`
-       Expected: No friend is added. Error details shown in the status message. Status bar remains the same.
+* Test case: `friend --add MrFeely`<br>
+   Expected: Friend with `FRIEND_ID` 'MrFeely' and no `NAME` is added. gitGud states that `FRIEND_ID` is added. 
+
+* Other incorrect add commands to try: `friend --name Marcus`, `friend --add`, `friend --name`
+   Expected: No friend is added. Error details shown in the status message. Status bar remains the same.
+
 
 ### 7.3 Adding a game
-1. Adding a game to gitGud
 
-    1. Prerequisites: List all games using the `game --list` command. There should not be a game with `GAME_NAME` 
-       Valorant already stored in gitGud.
+* Prerequisites: List all games using the `game --list` command. There should not be a game with `GAME_ID` 
+   'Valorant' already stored in gitGud.
 
-    2. Test case: `game --add Valorant`<br>
-       Expected: Game with `GAME_NAME` Valorant is added. gitGud states that `GAME_NAME` is added.
+* Test case: `game --add Valorant`<br>
+   Expected: Game with `GAME_ID` 'Valorant' is added. gitGud states that `GAME_ID` is added.
 
-    3. Test case: `game --add`<br>
-       Expected: No game is added. Error details shown in the status message. Status bar remains the same.
+* Test case: `game --add`<br>
+   Expected: No game is added. Error details shown in the status message. Status bar remains the same.
+
 
 ### 7.4 Linking a friend to a game
-1. Linking a friend to a game in gitGud.
 
-    1. Prerequisites: There exists a friend with `FRIEND_ID` Draco, and there exists a game with `GAME_NAME` Valorant.
+* Prerequisites: There exists a friend with `FRIEND_ID` 'Draco', and there exists a game with `GAME_ID` 'Valorant'.
 
-    2. Test case: `link --friend Draco --game Valorant --user Draconian`<br>
-       Expected: A link between Draco and Valorant is created and Draco's username for Valorant, Draconian, is 
-       stored in the link.
+* Test case: `link --friend Draco --game Valorant --user Draconian`<br>
+   Expected: A link between 'Draco' and 'Valorant' is created and the in-game username 'Draconian', is 
+   stored in this link.
 
-    3. Test case: `link --game Valorant --name Draco --user Draconian`<br>
-       Expected: No link is added. Error details shown in the status message. Status bar remains the same.
+* Test case: `link --game Valorant --name Draco --user Draconian`<br>
+   Expected: No link is added. Error details shown in the status message. Status bar remains the same.
 
-    3. Test case: `link --friend Draco --game Valorant`<br>
-       Expected: No link is added. Error details shown in the status message. Status bar remains the same.
+* Test case: `link --friend Draco --game Valorant`<br>
+   Expected: No link is added. Error details shown in the status message. Status bar remains the same.
 
-    4. Other incorrect link commands to try: `link --friend Draco --user Draconian`, `link --game Valorant --user 
-       Draconian`, `link --friend`
+* Other incorrect link commands to try: `link --friend Draco --user Draconian`, `link --game Valorant --user 
+   Draconian`, `link --friend`
        Expected: Similar to previous.
 
 ### 7.5 Deleting a friend
 
-1. Deleting a friend from gitGud
+* Prerequisites: Only one friend with `FRIEND_ID` 'Draco' exists in gitGud. 
 
-   1. Prerequisites: Only one friend with `FRIEND_ID` Draco exists in gitGud.
+* Test case: `friend --delete Draco`<br>
+   Expected: Friend with `FRIEND_ID` 'Draco' is deleted. gitGud states that `FRIEND_ID` is deleted. 
 
-   1. Test case: `friend --delete Draco`<br>
-      Expected: Friend with `FRIEND_ID` Draco is deleted. gitGud states that `FRIEND_ID` is deleted.
+* Test case: `friend --delete MrFeely`<br>
+   Expected: No friend is deleted. Error details shown in the status message. Status bar remains the same. 
 
-   1. Test case: `friend --delete MrFeely`<br>
-      Expected: No friend is deleted. Error details shown in the status message. Status bar remains the same.
-
-   1. Other incorrect delete commands to try: `friend --delete`
-      Expected: Similar to previous.
+* Other incorrect delete commands to try: `friend --delete`
+   Expected: Similar to previous.
 
 ### 7.6 Deleting a game
 
-1. Deleting a game from gitGud
+* Prerequisites: Only one game with `GAME_ID` 'Valorant' exists. 
 
-    1. Prerequisites: Only one game with `GAME_NAME` Valorant exists.
+* Test case: `game --delete Valorant`<br>
+   Expected: Game with `GAME_ID` 'Valorant' is deleted. gitGud states that `GAME_ID` is deleted.
 
-    1. Test case: `game --delete Valorant`<br>
-       Expected: Game with `GAME_NAME` Valorant is deleted. gitGud states that `GAME_NAME` is deleted.
+* Test case: `game --delete CSGO`<br>
+   Expected: No game is deleted. Error details shown in the status message. Status bar remains the same.
 
-    1. Test case: `game --delete CSGO`<br>
-       Expected: No game is deleted. Error details shown in the status message. Status bar remains the same.
+* Other incorrect delete commands to try: `game --delete`
+   Expected: Similar to previous.
 
-    1. Other incorrect delete commands to try: `game --delete`
-       Expected: Similar to previous.
 
-### 7.7 Filtering friends in friends' list using a keyword
+### 7.7 Listing all friends / Filtering friends in friends' list using a keyword
 
-1. Filtering friends' list using a keyword
+* Prerequisites: There exists more than one friend in gitGud, one of which has the `FRIEND_ID` Draco.
 
-    1. Prerequisites: There exists more than one friend in gitGud, one of which has the `FRIEND_ID` Draco.
+* Test case: `friend --list Draco`<br>
+       Expected: The friend 'Draco' is listed, as his `FRIEND_ID` contains the keyword `Draco`. Other friends with 
+       the keyword `Draco` inside their `FRIEND_ID` are also listed.
 
-    2. Test case: `friend --list`<br>
-       Expected: All friends are listed.
+* Test case: `friend --list Dra`<br>
+       Expected: The friend 'Draco' is listed, as his `FRIEND_ID` contains the keyword `Dra`. Other friends with the 
+       keyword `Dra` inside their `FRIEND_ID` are also listed.
 
-    3. Test case: `friend --list Draco`<br>
-       Expected: The friend Draco is listed, as his `FRIEND_ID` contains the keyword Draco.
+* Test case: `friend --list co`<br>
+       Expected: The friend 'Draco' is listed, as his `FRIEND_ID` contains the keyword `co`. Other friends with the 
+       keyword `co` inside their `FRIEND_ID` are also listed.
 
-    4. Test case: `friend --list Dra`<br>
-       Expected: The friend Draco is listed, as his `FRIEND_ID` contains the keyword `Dra`.
+### 7.8 Listing all games / Filtering games in games' list using a keyword
 
-    5. Test case: `friend --list co`<br>
-       Expected: The friend Draco is listed, as his `FRIEND_ID` contains the keyword `co`.
+* Prerequisites: There exists more than one game in gitGud, one of which has the `GAME_ID` 'Valorant'. 
 
-### 7.8 Filtering friends in games' list using a keyword
+* Test case: `game --list`<br>
+   Expected: All games are listed.
 
-1. Filtering games' list using a keyword
+* Test case: `game --list Valorant`<br>
+   Expected: The game 'Valorant' is listed, as its `GAME_ID` contains the keyword `Valorant`. Other games with the
+   keyword `Valorant` inside their `GAME_ID` are also listed.
 
-    1. Prerequisites: There exists more than one game in gitGud, one of which has the `GAME_NAME` Valorant.
+* Test case: `game --list Valo`<br>
+   Expected: The game 'Valorant' is listed, as its `GAME_ID` contains the keyword `Valo`. Other games with the
+   keyword `Valo` inside their `GAME_ID` are also listed.
 
-    2. Test case: `game --list`<br>
-       Expected: All games are listed.
-
-    3. Test case: `game --list Valorant`<br>
-       Expected: The game Valorant is listed, as its `GAME_ID` contains the keyword `Valorant`.
-
-    4. Test case: `game --list Valo`<br>
-       Expected: The game Valorant is listed, as its `GAME_ID` contains the keyword `Valo`.
-
-    4. Test case: `game --list ant`<br>
-       Expected: The game Valorant is listed, as its `GAME_ID` contains the keyword `ant`.
+* Test case: `game --list ant`<br>
+   Expected: The game 'Valorant' is listed, as its `GAME_ID` contains the keyword `ant`. Other games with the
+   keyword `ant` inside their `GAME_ID` are also listed.
 
 ### 7.9 Viewing a friend's full data
 
-1. View a friend's full game information, including their in-game usernames
+* Prerequisites: A friend with `FRIEND_ID` 'Draco' exists in gitGud. There is no friend with `FRIEND_ID` 
+   'Dra' or `FRIEND_ID` 'co'.
 
-    1. Prerequisites: A friend with `FRIEND_ID` Draco exists in gitGud.
+* Test case: `friend --get Draco`<br>
+   Expected: The full information about friend with `FRIEND_ID` 'Draco' is listed.
 
-    2. Test case: `friend --get Draco`<br>
-       Expected: The full information about friend with `FRIEND_ID` Draco is listed.
+* Test case: `friend --get Dra`<br>
+    Expected: No friend is found, as there are no friends with the `FRIEND_ID` 'Dra'. Error details shown in the 
+   status 
+   message. 
+   Status bar remains the same.
 
-    3. Test case: `friend --get Dra`<br>
-        Expected: No friend is found. Error details shown in the status message. Status bar remains the same.
+* Test case: `friend --get co`<br>
+   Expected: No friend is found, as there are no friends with the `FRIEND_ID` 'co'. Error details shown in the 
+   status message. Status bar remains the same.
 
-    4. Test case: `friend --get co`<br>
-       Expected: No friend is found. Error details shown in the status message. Status bar remains the same.
-
-    5. Other incorrect get commands to try: `friend --get`
-       Expected: Similar to previous.
+* Other incorrect get commands to try: `friend --get`
+   Expected: Similar to previous.
    
 ### 7.10 Viewing a game's full data
 
-1. View a game's full information, including the friends which play that game.
+* Prerequisites: A game with `GAME_ID` 'Valorant' exists in gitGud. There is no game with `GAME_ID`
+   'Valo' or `GAME_ID` 'rant'.
 
-    1. Prerequisites: A game with `GAME_NAME` Valorant exists in gitGud.
+* Test case: `game --get Valorant`<br>
+   Expected: The full information about game with `GAME_ID` 'Valorant' is listed.
 
-    2. Test case: `game --get Valorant`<br>
-       Expected: The full information about game with `GAME_NAME` Valorant is listed.
+* Test case: `game --get Valo`<br>
+   Expected: No game is found, as there are no games with the `GAME_ID` 'Valo'. Error details shown in the status 
+   message. Status bar remains the same.
 
-    3. Test case: `game --get Valo`<br>
-       Expected: No game is found. Error details shown in the status message. Status bar remains the same.
+* Test case: `game --get rant`<br>
+   Expected: No game is found, as there are no games with the `GAME_ID` 'rant'. Error details shown in the status 
+   message. Status bar remains the same.
 
-    4. Test case: `game --get rant`<br>
-       Expected: No game is found. Error details shown in the status message. Status bar remains the same.
-
-    5. Other incorrect get commands to try: `game --get`
-       Expected: Similar to previous.
+* Other incorrect get commands to try: `game --get`
+   Expected: Similar to previous.
