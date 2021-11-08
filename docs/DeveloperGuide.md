@@ -83,6 +83,7 @@ certain technical terms commonly used in this developer guide [here](#glossary).
   - [Jackson](https://github.com/FasterXML/jackson) to save your data
   - [JUnit5](https://github.com/junit-team/junit5) so that we can deliver to you bug-free!
   - [MDFX](https://github.com/JPro-one/markdown-javafx-renderer) so that you can see User Guide in help without internet
+  - [JFreeChart](https://www.jfree.org/jfreechart/) for powerful graphing and visualization APIs
 - Background and icons used:
   - Source Academy classroom front page, taken from the [Asset page in Source Academy front-end](https://github.com/source-academy/frontend/tree/master/src/assets)
     License for reuse and distribution [here](https://github.com/source-academy/frontend/blob/master/LICENSE)
