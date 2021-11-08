@@ -1,0 +1,54 @@
+{
+  "_comment": "SafeFor(H)all save file which contains the same Event values as in TypicalEvents#getTypicalAddressBook()",
+  "persons" : [],
+  "events": [ {
+    "eventName" : "basketball",
+    "eventDate" : "10-10-2021",
+    "eventTime" : "0830",
+    "venue" : "basketball court",
+    "capacity" : "1",
+    "residents" : "None"
+  }, {
+    "eventName" : "volleyball",
+    "eventDate" : "12-10-2021",
+    "eventTime" : "0800",
+    "venue" : "volleyball court",
+    "capacity" : "6",
+    "residents" : "Daniel Meier; Room: A103; Phone: 87652533; Email: cornelia@example.com; Vaccinated: T; Faculty: SoC; Last Fet Date: 12-10-2021; Last Collection Date: 13-10-2021"
+  }, {
+    "eventName" : "powerlifting",
+    "eventDate" : "15-10-2021",
+    "eventTime" : "0830",
+    "venue" : "gym",
+    "capacity" : "7",
+    "residents" : "Elle Meyer; Room: A104; Phone: 9482224; Email: werner@example.com; Vaccinated: F; Faculty: SoC; Last Fet Date: 05-10-2021; Last Collection Date: 16-10-2021, Fiona Kunz; Room: A105; Phone: 9482427; Email: lydia@example.com; Vaccinated: T; Faculty: SoC; Last Fet Date: 20-10-2021; Last Collection Date: 04-10-2021, George Best; Room: A106; Phone: 9482442; Email: anna@example.com; Vaccinated: F; Faculty: SoC; Last Fet Date: 15-10-2021; Last Collection Date: 01-10-2021"
+  }, {
+    "eventName" : "swim",
+    "eventDate" : "10-09-2021",
+    "eventTime" : "0800",
+    "venue" : "swimming pool",
+    "capacity" : "8",
+    "residents" : "George Best; Room: A106; Phone: 9482442; Email: anna@example.com; Vaccinated: F; Faculty: SoC; Last Fet Date: 15-10-2021; Last Collection Date: 01-10-2021"
+  }, {
+    "eventName" : "band",
+    "eventDate" : "10-11-2021",
+    "eventTime" : "0830",
+    "venue" : "band room",
+    "capacity" : "9",
+    "residents" : "Carl Kurz; Room: A102; Phone: 95352563; Email: heinz@example.com; Vaccinated: F; Faculty: SoC; Last Fet Date: 10-10-2021; Last Collection Date: 03-10-2021, Benson Meier; Room: A101; Phone: 98765432; Email: johnd@example.com; Vaccinated: T; Faculty: SoC; Last Fet Date: 12-10-2021; Last Collection Date: 13-10-2021"
+  }, {
+    "eventName" : "road relay",
+    "eventDate" : "12-12-2021",
+    "eventTime" : "1830",
+    "venue" : "track",
+    "capacity" : "10",
+    "residents" : "George Best; Room: A106; Phone: 9482442; Email: anna@example.com; Vaccinated: F; Faculty: SoC; Last Fet Date: 15-10-2021; Last Collection Date: 01-10-2021"
+  }, {
+    "eventName" : "dance",
+    "eventDate" : "01-10-2021",
+    "eventTime" : "1230",
+    "venue" : "studio",
+    "capacity" : "11",
+    "residents" : "George Best; Room: A106; Phone: 9482442; Email: anna@example.com; Vaccinated: F; Faculty: SoC; Last Fet Date: 15-10-2021; Last Collection Date: 01-10-2021, Carl Kurz; Room: A102; Phone: 95352563; Email: heinz@example.com; Vaccinated: F; Faculty: SoC; Last Fet Date: 10-10-2021; Last Collection Date: 03-10-2021, Benson Meier; Room: A101; Phone: 98765432; Email: johnd@example.com; Vaccinated: T; Faculty: SoC; Last Fet Date: 12-10-2021; Last Collection Date: 13-10-2021"
+  } ]
+}

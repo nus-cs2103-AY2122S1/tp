@@ -1,0 +1,26 @@
+@startuml
+start
+:App executes add command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([Residents tab])
+    :Creates new Person object;
+    if () then ([duplicate person])
+        :App shows error message;
+    else ([else])
+        :Adds Person to AddressBook;
+        :App shows success message;
+    endif
+else([Events tab])
+    :Creates new Event object;
+    if () then ([duplicate event])
+        :App shows error message;
+    else ([else])
+        :Adds Event to AddressBook;
+        :App shows success message;
+endif
+endif
+stop
+@enduml

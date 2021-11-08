@@ -15,14 +15,28 @@ Class ModelManager
 Class UserPrefs
 Class ReadOnlyUserPrefs
 
-
+Package Person <<Rectangle>>{
 Class UniquePersonList
 Class Person
-Class Address
-Class Email
 Class Name
+Class Room
 Class Phone
-Class Tag
+Class Email
+Class Faculty
+Class VaccStatus
+Class LastDate
+}
+
+Package Event <<Rectangle>>{
+Class UniqueEventList
+Class Event
+Class EventName
+Class EventTime
+Class EventDate
+Class Venue
+Class Capacity
+Class ResidentList
+}
 
 }
 
@@ -39,16 +53,40 @@ ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
+UniquePersonList -->"~*all" Person
 Person *--> Name
 Person *--> Phone
 Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+Person *--> Room
+Person *--> Faculty
+Person *--> VaccStatus
+Person *--> "0..2"LastDate
 
+AddressBook *--> "1" UniqueEventList
+UniqueEventList -->"~*all" Event
+Event *--> EventName
+Event *--> EventDate
+Event *--> EventTime
+Event *--> Venue
+Event *--> Capacity
+Event *--> ResidentList
+
+Event -[hidden]right-> Person
 Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+Phone -[hidden]right-> Room
+Room -[hidden]down-> Email
+Email -[hidden]right-> Faculty
+Faculty -[hidden]right-> VaccStatus
+VaccStatus -[hidden]right-> LastDate
 
-ModelManager -->"~* filtered" Person
+EventName -[hidden]right-> EventDate
+EventDate -[hidden]right-> Venue
+Venue -[hidden]right-> Capacity
+Capacity -[hidden]down-> ResidentList
+
+
+ModelManager -->"~*filtered" Person
+ModelManager -->"~*filtered" Event
+
+ResidentList ->"~*" Person
 @enduml

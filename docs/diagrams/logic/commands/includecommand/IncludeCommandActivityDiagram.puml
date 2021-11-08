@@ -1,0 +1,16 @@
+@startuml
+start
+:User executes command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([there are valid residents to add])
+    :Create display and storage Strings of current and toAdd Residents;
+    :Create a new edited Event;
+    :Save editedEvent to addressBook;
+    :Update filteredEventList;
+else ([no resident to add])
+endif
+stop
+@enduml

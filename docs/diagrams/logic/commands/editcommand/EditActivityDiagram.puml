@@ -1,0 +1,23 @@
+@startuml
+start
+:App executes EditPerson command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+:Parse user input;
+    if () then ([invalid index])
+        :App shows error message;
+    elseif () then ([empty description])
+        :App shows error message;
+    else ([else])
+        :User input parsed successfully;
+if () then ([duplicate person])
+    :App shows error message;
+else ([else])
+    :Resident details are updated;
+    :App shows success message;
+endif
+endif
+stop
+@enduml

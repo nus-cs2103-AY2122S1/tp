@@ -1,0 +1,63 @@
+@startuml
+!include ../../../style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+
+participant "i:IncludeCommand" as IncludeCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant "current:Event" as currEvent MODEL_COLOR
+end box
+
+activate LogicManager
+LogicManager -> IncludeCommand : execute()
+activate IncludeCommand
+
+IncludeCommand -> Model : getFilteredEventList()
+activate Model
+
+Model --> IncludeCommand : eventList
+deactivate Model
+
+IncludeCommand -> Model : toPersonList()
+activate Model
+
+Model --> IncludeCommand : toAdd
+deactivate Model
+
+IncludeCommand --> IncludeCommand : createEditedEvent(current, toAdd)
+activate IncludeCommand
+
+IncludeCommand -> currEvent : getCombinedDisplayString(toAdd)
+activate currEvent
+return displayString
+
+IncludeCommand -> currEvent : getCombinedStorageString(toAdd)
+activate currEvent
+return storageString
+
+return editedEvent
+
+IncludeCommand -> Model : setEvent(current, editedEvent)
+activate Model
+
+Model --> IncludeCommand
+deactivate Model
+
+IncludeCommand -> Model : updateFilteredEventList()
+activate Model
+
+Model --> IncludeCommand
+deactivate Model
+
+IncludeCommand --> LogicManager : result
+deactivate IncludeCommand
+IncludeCommand -[hidden]-> LogicManager : result
+destroy IncludeCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
