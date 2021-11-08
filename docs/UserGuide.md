@@ -842,7 +842,7 @@ In the help window, you can view all the command usages built-in right into FAST
 **Format**: `help [HELP_TOPIC]`
 
 **Parameters**:
-* [`HELP_TOPIC`](#help-topics)
+* [`HELP_TOPIC`](#help_topic)
 
 **Examples**:
 * `help` will just open the default help window
