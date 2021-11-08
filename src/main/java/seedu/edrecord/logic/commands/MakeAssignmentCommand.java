@@ -2,6 +2,7 @@ package seedu.edrecord.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.edrecord.commons.core.Messages.MESSAGE_NO_MODULE_SELECTED;
+import static seedu.edrecord.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_SCORE;
 import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_WEIGHTAGE;
@@ -9,6 +10,9 @@ import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_WEIGHTAGE;
 import seedu.edrecord.logic.commands.exceptions.CommandException;
 import seedu.edrecord.model.Model;
 import seedu.edrecord.model.assignment.Assignment;
+import seedu.edrecord.model.assignment.Score;
+import seedu.edrecord.model.assignment.Weightage;
+import seedu.edrecord.model.name.Name;
 
 public class MakeAssignmentCommand extends Command {
 
@@ -29,23 +33,29 @@ public class MakeAssignmentCommand extends Command {
     public static final String MESSAGE_TOTAL_WEIGHTAGE_EXCEEDS_100 =
             "Adding this assignment brings the total module weightage above 100%";
 
-    private final Assignment toAdd;
+    private final Name name;
+    private final Weightage weightage;
+    private final Score maxScore;
 
     /**
      * Creates an MakeAssignmentCommand to add the specified {@code Assignment}
      */
-    public MakeAssignmentCommand(Assignment assignment) {
-        requireNonNull(assignment);
-        toAdd = assignment;
+    public MakeAssignmentCommand(Name name, Weightage weightage, Score maxScore) {
+        requireAllNonNull(name, weightage, maxScore);
+        this.name = name;
+        this.weightage = weightage;
+        this.maxScore = maxScore;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        int id = model.getAssignmentCounter();
+        Assignment toAdd = new Assignment(name, weightage, maxScore, id);
         if (!model.hasSelectedModule()) {
             throw new CommandException(MESSAGE_NO_MODULE_SELECTED);
         }
-        if (model.hasAssignmentInCurrentModule(toAdd)) {
+        if (model.hasSameNameInCurrentModule(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_ASSIGNMENT);
         }
         if (model.isTotalWeightageExceeded(toAdd)) {
@@ -59,6 +69,8 @@ public class MakeAssignmentCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof MakeAssignmentCommand // instanceof handles nulls
-                && toAdd.equals(((MakeAssignmentCommand) other).toAdd));
+                && name.equals(((MakeAssignmentCommand) other).name)
+                && weightage.equals(((MakeAssignmentCommand) other).weightage)
+                && maxScore.equals(((MakeAssignmentCommand) other).maxScore));
     }
 }

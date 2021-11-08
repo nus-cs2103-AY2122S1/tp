@@ -12,7 +12,6 @@ import seedu.edrecord.model.assignment.Assignment;
 import seedu.edrecord.model.module.Module;
 import seedu.edrecord.model.module.ModuleSet;
 import seedu.edrecord.model.module.ReadOnlyModuleSystem;
-import seedu.edrecord.model.name.Name;
 import seedu.edrecord.model.person.PartOfModulePredicate;
 import seedu.edrecord.model.person.Person;
 import seedu.edrecord.ui.PersonListPanel;
@@ -61,7 +60,9 @@ public interface Model {
      */
     void setEdRecord(ReadOnlyEdRecord edRecord);
 
-    /** Returns EdRecord */
+    /**
+     * Returns EdRecord
+     */
     ReadOnlyEdRecord getEdRecord();
 
     /**
@@ -143,6 +144,7 @@ public interface Model {
 
     /**
      * Updates the module filter of the filtered person list to filter by the given {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void setModuleFilter(PartOfModulePredicate predicate);
@@ -160,7 +162,7 @@ public interface Model {
     /**
      * Returns true if the currently selected module contains the given assignment.
      */
-    boolean hasAssignmentInCurrentModule(Assignment assignment);
+    boolean hasSameNameInCurrentModule(Assignment assignment);
 
     /**
      * Returns true if adding the assignment {@code toAdd} will bring the total weightage
@@ -181,9 +183,9 @@ public interface Model {
     List<Assignment> getAssignmentList();
 
     /**
-     * Returns the assignment that matches the given name.
+     * Returns the assignment with the given ID.
      */
-    Optional<Assignment> searchAssignment(Name name);
+    Optional<Assignment> getAssignment(int id);
 
     /**
      * Adds the given assignment to the currently selected module.
@@ -205,7 +207,18 @@ public interface Model {
     void setAssignment(Assignment target, Assignment editedAssignment);
 
     /**
+     * Returns the counter for this module's assignment ID.
+     */
+    int getAssignmentCounter();
+
+    /**
+     * Sets the counter for this module's assignment ID to the given value.
+     */
+    void setAssignmentCounter(int i);
+
+    /**
      * Updates the search filter of the filtered person list to filter by the given {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void setSearchFilter(Predicate<Person> predicate);
@@ -217,6 +230,7 @@ public interface Model {
 
     /**
      * Updates the currently selected view to the specified value.
+     *
      * @param newView The new view
      */
     void setSelectedView(PersonListPanel.View newView);

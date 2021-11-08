@@ -389,6 +389,13 @@ Clears all entries, both contacts and modules/groups, from EdRecord.
 
 Format: `clear`
 
+### Go through command history : Up or Down arrow key
+
+Cycles through your previously entered commands.
+
+- Up Arrow: go back one command
+- Down Arrow: go forward one command
+
 ### Exiting the program : `exit`
 
 Exits EdRecord.

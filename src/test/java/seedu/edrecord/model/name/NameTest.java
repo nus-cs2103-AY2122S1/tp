@@ -37,4 +37,16 @@ public class NameTest {
         assertTrue(Name.isValidName("Capital Tan")); // with capital letters
         assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
     }
+
+    @Test
+    public void equalsIgnoreCase() {
+        Name lowerCase = new Name("abcd");
+        Name upperCase = new Name("ABCD");
+        Name mixedCase = new Name("aBcD");
+        Name other = new Name("abce");
+
+        assertTrue(lowerCase.equalsIgnoreCase(upperCase));
+        assertTrue(lowerCase.equalsIgnoreCase(mixedCase));
+        assertFalse(lowerCase.equalsIgnoreCase(other));
+    }
 }

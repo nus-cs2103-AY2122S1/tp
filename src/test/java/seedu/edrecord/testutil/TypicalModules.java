@@ -23,17 +23,17 @@ import seedu.edrecord.model.module.ModuleSystem;
 public class TypicalModules {
 
     public static final Module CS2103 = new ModuleBuilder("CS2103")
-            .withAssignment(IP).withAssignment(TP)
+            .withAssignment(IP).withAssignment(TP).withCounter(9)
             .withGroup(T03).withGroup(T07).build();
     public static final Module CS2103T = new ModuleBuilder("CS2103T")
-            .withAssignment(PE)
+            .withAssignment(PE).withCounter(9)
             .withGroup(T03).withGroup(T07).build();
     public static final Module CS3230 = new ModuleBuilder("CS3230")
             .withGroup(T03).withGroup(T07).build();
     public static final Module CS2100 = new ModuleBuilder("CS2100")
-            .withAssignment(QUIZ).withAssignment(MIDTERM).withAssignment(FINAL).build();
+            .withAssignment(QUIZ).withAssignment(MIDTERM).withAssignment(FINAL).withCounter(9).build();
     public static final Module CS2102 = new ModuleBuilder("CS2102")
-            .withAssignment(TUTORIAL).build();
+            .withAssignment(TUTORIAL).withCounter(9).build();
 
     // withGroups()
     // public static final Module CS2103 = new Module("CS2103", getTypicalGroupSystem());

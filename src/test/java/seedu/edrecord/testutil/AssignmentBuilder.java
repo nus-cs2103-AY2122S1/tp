@@ -13,10 +13,12 @@ public class AssignmentBuilder {
     public static final String DEFAULT_NAME = "Assignment 1";
     public static final String DEFAULT_WEIGHTAGE = "2.5";
     public static final String DEFAULT_MAX_SCORE = "20";
+    public static final int DEFAULT_ID = 0;
 
     private Name name;
     private Weightage weightage;
     private Score score;
+    private int id;
 
     /**
      * Creates an {@code AssignmentBuilder} with the default details.
@@ -25,6 +27,7 @@ public class AssignmentBuilder {
         name = new Name(DEFAULT_NAME);
         weightage = new Weightage(DEFAULT_WEIGHTAGE);
         score = new Score(DEFAULT_MAX_SCORE);
+        id = DEFAULT_ID;
     }
 
     /**
@@ -34,6 +37,7 @@ public class AssignmentBuilder {
         name = toCopy.getName();
         weightage = toCopy.getWeightage();
         score = toCopy.getMaxScore();
+        id = toCopy.getId();
     }
 
     /**
@@ -61,9 +65,17 @@ public class AssignmentBuilder {
     }
 
     /**
+     * Sets the {@code ID} of the {@code Assignment} that we are building.
+     */
+    public AssignmentBuilder withId(int id) {
+        this.id = id;
+        return this;
+    }
+
+    /**
      * Builds and returns the Assignment.
      */
     public Assignment build() {
-        return new Assignment(name, weightage, score);
+        return new Assignment(name, weightage, score, id);
     }
 }

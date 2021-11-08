@@ -60,6 +60,14 @@ public class PersonListPanel extends UiPart<Region> {
     }
 
     /**
+     * Forces a refresh of the list views.
+     */
+    public void refresh() {
+        personListView.refresh();
+        assignmentListView.refresh();
+    }
+
+    /**
      * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
      */
     class PersonListViewCell extends ListCell<Person> {

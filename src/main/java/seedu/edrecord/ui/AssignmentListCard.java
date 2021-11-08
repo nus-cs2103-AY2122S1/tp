@@ -38,11 +38,12 @@ public class AssignmentListCard extends UiPart<Region> {
     private static final int TABLE_HEADER_SIZE = 3; // in number of normal rows
 
     private static final double WIDTH_PADDING = 0.02;
+    private static final double WIDTH_ID_COL = 0.05;
     private static final double WIDTH_STATUS_COL = 0.2;
     private static final double WIDTH_NAME_COL = 0.4;
-    private static final double WIDTH_WEIGHTAGE_COL = 0.2;
+    private static final double WIDTH_WEIGHTAGE_COL = 0.15;
     private static final double WIDTH_SCORE_COL =
-            1 - WIDTH_STATUS_COL - WIDTH_NAME_COL - WIDTH_WEIGHTAGE_COL - WIDTH_PADDING;
+            1 - WIDTH_ID_COL - WIDTH_STATUS_COL - WIDTH_NAME_COL - WIDTH_WEIGHTAGE_COL - WIDTH_PADDING;
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -64,7 +65,7 @@ public class AssignmentListCard extends UiPart<Region> {
     private TableView<Map.Entry<Assignment, Grade>> assignmentsTable;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates an {@code AssignmentListCard} with the given {@code Person}, index and {@code module} to display.
      */
     public AssignmentListCard(Person person, int displayedIndex, ObservableValue<Module> module) {
         super(FXML);
@@ -83,6 +84,12 @@ public class AssignmentListCard extends UiPart<Region> {
                 }
             }
         }
+
+        TableColumn<Map.Entry<Assignment, Grade>, String> idCol = new TableColumn<>("ID");
+        idCol.setCellValueFactory(c -> {
+            Assignment a = c.getValue().getKey();
+            return new SimpleStringProperty(a.getId().toString());
+        });
 
         TableColumn<Map.Entry<Assignment, Grade>, String> statusCol = new TableColumn<>("Status");
         statusCol.setCellValueFactory(c -> {
@@ -114,8 +121,8 @@ public class AssignmentListCard extends UiPart<Region> {
         assignmentsTable.setItems(items);
 
         List<TableColumn<Map.Entry<Assignment, Grade>, String>> cols =
-                List.of(statusCol, nameCol, weightageCol, scoreCol);
-        double[] weights = {WIDTH_STATUS_COL, WIDTH_NAME_COL, WIDTH_WEIGHTAGE_COL, WIDTH_SCORE_COL};
+                List.of(idCol, statusCol, nameCol, weightageCol, scoreCol);
+        double[] weights = {WIDTH_ID_COL, WIDTH_STATUS_COL, WIDTH_NAME_COL, WIDTH_WEIGHTAGE_COL, WIDTH_SCORE_COL};
         assignmentsTable.getColumns().setAll(cols);
 
         int i = 0;
