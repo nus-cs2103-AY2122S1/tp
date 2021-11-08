@@ -26,9 +26,9 @@ public class ImportCommand extends Command {
 
     public static final String COMMAND_WORD = "import";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Imports the contacts list from a file identified by the given filename.\n"
-            + "Parameters: FILENAME\n"
+    public static final String MESSAGE_USAGE = "\n" + COMMAND_WORD
+            + ": Imports the contacts list from a file identified by the given filename.\n\n"
+            + "Parameters: FILENAME\n\n"
             + "Example: " + COMMAND_WORD + " t35.json";
 
     public static final String MESSAGE_SUCCESS = "File successfully imported. %1$d new contacts added";

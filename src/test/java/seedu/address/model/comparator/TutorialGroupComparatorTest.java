@@ -42,8 +42,8 @@ public class TutorialGroupComparatorTest {
         Person p6 = new PersonBuilder().withTutorialGroup("").build();
 
         // If either person has null TutorialGroup
-        assertTrue(comparator.compare(p1, p6) > 0);
-        assertTrue(comparator.compare(p6, p1) < 0);
+        assertTrue(comparator.compare(p1, p6) < 0);
+        assertTrue(comparator.compare(p6, p1) > 0);
 
         // If both have TutorialGroup, sorted alphabetically
         assertTrue(comparator.compare(p1, p3) < 0);

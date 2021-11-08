@@ -42,8 +42,8 @@ public class RemarkComparatorTest {
         Person p6 = new PersonBuilder().withRemark("").build();
 
         // If either person has null Remark
-        assertTrue(comparator.compare(p1, p6) > 0);
-        assertTrue(comparator.compare(p6, p1) < 0);
+        assertTrue(comparator.compare(p1, p6) < 0);
+        assertTrue(comparator.compare(p6, p1) > 0);
 
         // If both have Remark, sorted alphabetically
         assertTrue(comparator.compare(p1, p3) < 0);
