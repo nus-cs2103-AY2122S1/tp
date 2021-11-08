@@ -916,7 +916,7 @@ The app is initially populated with some sample data, based on real life animes.
     3. Test case 2: `rename 0 n/Black Clover`<br>
        Expected: No anime is renamed. Error details shown in the Command Result Panel
 
-    4. Other incorrect delete commands to try: `rename`, `rename x n/Black Clover` (where x is larger than the displayed list size), `rename 1 e/Black Clover`<br>
+    4. Other incorrect rename commands to try: `rename`, `rename x n/Black Clover` (where x is larger than the displayed list size), `rename 1 e/Black Clover`<br>
        Expected: Similar to previous
 
 2. Rename an anime while not all animes are being shown
@@ -940,7 +940,7 @@ The app is initially populated with some sample data, based on real life animes.
     3. Test case 2: `update 0 e/100`<br>
        Expected: The episode of the anime is not updated. Error details shown in the Command Result Panel
 
-    4. Other incorrect delete commands to try: `update`, `update x e/1` (where x is larger than the list displayed size), `update 1 n/attack on titan`<br>
+    4. Other incorrect update commands to try: `update`, `update x e/1` (where x is larger than the list displayed size), `update 1 n/attack on titan`<br>
        Expected: Similar to previous
 
 2. Updating the episode of an anime while not all animes are being shown
@@ -964,7 +964,7 @@ The app is initially populated with some sample data, based on real life animes.
     3. Test case 2: `status 0 s/finished`<br>
        Expected: The status of the anime is not updated. Error details shown in the Command Result Panel
 
-    4. Other incorrect delete commands to try: `status`, `status x s/t` (where x is larger than the displayed list size), `status 1 n/attack on titan`<br>
+    4. Other incorrect status commands to try: `status`, `status x s/t` (where x is larger than the displayed list size), `status 1 n/attack on titan`<br>
        Expected: Similar to previous
 
 2. Updating the status of an anime while not all animes are being shown
