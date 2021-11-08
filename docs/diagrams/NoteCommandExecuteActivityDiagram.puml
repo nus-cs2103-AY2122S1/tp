@@ -2,9 +2,15 @@
 !include style.puml
 
 start
+:Get filtered list of clients;
 :Get client at index;
-:Set client's Note to the new Note;
-
+:Update client with user given note;
+if () then ([note is not empty])
+    :Generate Add note success message;
+else ([else])
+    :Generate Delete note success message;
+endif
+:CommandResult;
 stop
 
 @enduml

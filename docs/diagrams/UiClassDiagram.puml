@@ -59,11 +59,11 @@ AppointmentCard --|> UiPart
 ClaimListPanel --|> UiPart
 ClaimCard --|> UiPart
 
-PersonCard ..> Model
+PersonCard ...> Model
 AppointmentCard ..> Model
 ClaimCard ..> Model
 
-UiManager -right-> Logic
+UiManager -up-> Logic
 MainWindow -left-> Logic
 
 PersonListPanel -[hidden]left- HelpWindow

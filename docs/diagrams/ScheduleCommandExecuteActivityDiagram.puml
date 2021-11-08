@@ -3,7 +3,19 @@
 
 start
 :Get client at index;
-:Set client's appointment to the new appointment;
+if () then ([command contains\nempty appointment])
+    if () then ([client has existing\nappointment])
+        :Remove existing\nappointment;
+    else ([else])
+        :Do nothing;
+    endif
+else ([else])
+    if () then ([client has existing\nappointment])
+        :Replace existing\nappointment;
+    else ([else])
+        :Assign new\nappointment;
+    endif
+endif
 
 stop
 

@@ -1,0 +1,12 @@
+@startuml
+!include style.puml
+start
+:Get client at index;
+:Create new client\nusing new parameters;
+if () then ([Other client with same name \nalready in InsurancePal])
+    :Reject the edit;
+else ([else])
+    :Replace the client\nwith the edited client;
+endif
+stop
+@enduml
