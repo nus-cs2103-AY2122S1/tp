@@ -26,10 +26,8 @@ You can reach us at the email `e0543894[at]u.nus.edu`
 [[github](http://github.com/dannylty)]
 [[portfolio](team/dannylty.md)]
 
-* Role: PLACEHOLDER
-* Responsibilities:
-  * PLACEHOLDER.
-  * PLACEHOLDER.
+* Role: Developer
+* Responsibilities: Commands
 
 ### Huang Ching
 
