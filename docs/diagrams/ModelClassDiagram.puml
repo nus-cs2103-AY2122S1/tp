@@ -8,6 +8,7 @@ Package Model <<Rectangle>>{
 Interface ReadOnlyAddressBook <<Interface>>
 Interface ReadOnlyUserPrefs <<Interface>>
 Interface Model <<Interface>>
+Interface ReadOnlyTaskList <<Interface>>
 Class AddressBook
 Class ReadOnlyAddressBook
 Class Model
@@ -24,18 +25,25 @@ Class Name
 Class Phone
 Class Tag
 
+Class TaskList
+Class Task
+Class Contact
+
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
 AddressBook .up.|> ReadOnlyAddressBook
+TaskList .up.|> ReadOnlyTaskList
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyAddressBook
+Model .> ReadOnlyTaskList
 ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
+ModelManager -> "1" TaskList
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
@@ -46,9 +54,15 @@ Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
 
+TaskList --> "~* all" Task
+Task *--> "*" Contact
+Task *--> "*" Tag
+Contact --> Name
+
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
 ModelManager -->"~* filtered" Person
+ModelManager -->"~* filtered" Task
 @enduml
