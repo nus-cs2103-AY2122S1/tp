@@ -145,7 +145,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses the total score of the lab assignment
+     * Parses the total score of the lab assignment.
      *
      * @param total the total score of the lab assignment.
      * @throws ParseException if the given {@code total} is invalid.

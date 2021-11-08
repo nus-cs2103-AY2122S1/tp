@@ -36,7 +36,7 @@ public class AddLabCommand extends Command {
      * Class constructor with a {@code Lab} object.
      *
      * @param result the lab result to be added.
-     * */
+     */
     public AddLabCommand(Lab result) {
         requireNonNull(result);
         this.result = result;

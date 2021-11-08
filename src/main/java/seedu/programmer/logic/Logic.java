@@ -42,7 +42,9 @@ public interface Logic {
      */
     ObservableList<Student> getFilteredStudentList();
 
-    /** Returns tan unmodifiable view of all students.  */
+    /**
+     * Returns an unmodifiable view of all students.
+     */
     ObservableList<Student> getAllStudents();
 
     /**
@@ -61,7 +63,7 @@ public interface Logic {
     GuiSettings getGuiSettings();
 
     /**
-     * Set the user prefs' GUI settings.
+     * Sets the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
 
@@ -76,22 +78,22 @@ public interface Logic {
     Storage getStorage();
 
     /**
-     * Update ProgrammerError to the specified one.
+     * Updates ProgrammerError to the specified one.
      */
     void updateProgrammerError(ProgrammerError pe);
 
     /**
-     * Update FilteredStudents to the specified one.
+     * Updates FilteredStudents to the specified one.
      */
     void updateFilteredStudents(Predicate<Student> predicate);
 
     /**
-     * Save ProgrammerError to the storage.
+     * Saves ProgrammerError to the storage.
      */
     void saveProgrammerError(ProgrammerError pe);
 
     /**
-     * Replace the existing student list with a new one.
+     * Replaces the existing student list with a new one.
      */
     void replaceExistingStudents(List<Student> stuList);
 }

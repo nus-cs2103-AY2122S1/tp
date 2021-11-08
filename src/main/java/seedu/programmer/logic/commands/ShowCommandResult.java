@@ -9,7 +9,9 @@ import seedu.programmer.model.student.Student;
  */
 public class ShowCommandResult extends CommandResult {
 
-    /** The application should show student's result. */
+    /**
+     * The application should show student's result.
+     */
     private final Student target;
 
     /**

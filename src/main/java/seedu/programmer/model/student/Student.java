@@ -253,7 +253,7 @@ public class Student implements DisplayableObject {
     }
 
     /**
-     * Check if two students have identical personal information and lab results.
+     * Checks if two students have identical personal information and lab results.
      *
      * @param otherStudent The other student to be checked against.
      * @return true if all the details of the students matches.
@@ -295,10 +295,10 @@ public class Student implements DisplayableObject {
     }
 
     /**
-     * Create a new Student Object with the same fields.
+     * Creates a new Student Object with the same fields.
      *
      * @return A copy of the Student.
-     * */
+     */
     public Student copy() {
         Student studentCopy = new Student(name, studentId, classId, email);
         studentCopy.setLabResultRecord(labList);
