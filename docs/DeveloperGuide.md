@@ -691,11 +691,6 @@ step 2. WebFast will create a `reportwindow` will contains a report with the `to
   * Pros: Reduce running time for tagInfo command
   * Cons: Increase complexity of the entire app. Very difficult to implement as each command will have to link to an additional global variable. High potential for bugs.
 
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -742,7 +737,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | expert user                                   | create shortcuts to access different features                     | utilise the app efficiently                                            |
 | `* * *`  | frugal user                                   | add price tags to contacts                                        | avoid exceeding my budget                                              |
 | `* * *`  | forgetful user                                | take note of important information for each contact               | avoid missing key details                                              |
-| `* * *`  | very organized user                           | group multiple contacts under the same category                   | manipulate the contacts easily                                         |
+| `* * *`  | very organized user                           | group multiple contacts under the same category                   | manage the contacts easily                                         |
 | `* *  `  | user who manages several contacts             | view the status of the people involved                            | check that my plan is consistent                                       |
 | `* *  `  | forgetful user                                | check the number of days left till my wedding                     | schedule tasks left to do well within time                             |
 | `* * *`  | disorganized user                             | see a summary of the expenses and status of my wedding            | better understand the current progress of my wedding                   |
