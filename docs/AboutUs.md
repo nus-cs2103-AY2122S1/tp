@@ -73,11 +73,11 @@ You can reach us at the email `e0559714@u.nus.edu`
 <img src="images/e0543978.png" width="200px">
 
 [[github](https://github.com/e0543978)]
-[[portfolio](team/nathanwonghungrui.md)]
+[[portfolio](team/e0543978.md)]
 
 * Role: Developer, Documenter, Tool Expert
 * Responsibilities:
   1. Project Documentation (UG & DG): Responsible for the quality of various project documents.
-  2. UI (JavaFX): In-charged of UI direction.
+  2. UI (JavaFX): In-charge of UI direction.
   3. Tool expert: e.g. Intellij expert, Git expert, etc. Helps other team members with matters related to the specific tool.
   4. UI package gatekeeper: In charge of merging any commits related UI package on main repo.
