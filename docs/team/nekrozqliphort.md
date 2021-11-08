@@ -15,13 +15,13 @@ Given below are my contributions to the project.
   * Justification: This feature is a basic feature of our application as it helps user to keep track of which Episode they are on.
   * Highlights: This feature was the first of the new features added with some edit capabilities hence it required some work.
   The Episode count is also limited to some number after as to not only combat integer overflow input, but also prevent
-  overflowing(shortened with ellipses) in the GUI.
+  overflowing (shortened with ellipses) in the GUI.
 
 * **New Feature**: Added the functionality to rename an Anime.
   * What it does: Allows the user to change the current name of an anime.
   * Justification: This feature is a basic feature of our application as it is part of the basic edit functionality.
   * Highlights: This required less work as it is similar to UpdateEpisode. However, to combat erroneous inputs that might
-  overflow(partially cut) in the GUI, the name is limited to 140 characters maximum.
+  overflow (partially cut) in the GUI, the name is limited to 140 characters maximum.
 
 * **New Feature**: Completely revamped the find feature.
   * What it does: Allows the user to find Anime using search terms.
@@ -38,7 +38,7 @@ Given below are my contributions to the project.
 
 * **Enhancements to existing features**:
   * Restrict input format for Name, Episode and Index to avoid erroneous inputs
-  (examples: [\#174](https://github.com/AY2122S1-CS2103T-T10-4/tp/issues/174), [\#175](https://github.com/AY2122S1-CS2103T-T10-4/tp/issues/175), PR [\#203](https://github.com/AY2122S1-CS2103T-T10-4/tp/pull/203))
+  ([\#174](https://github.com/AY2122S1-CS2103T-T10-4/tp/issues/174), [\#175](https://github.com/AY2122S1-CS2103T-T10-4/tp/issues/175), PR [\#203](https://github.com/AY2122S1-CS2103T-T10-4/tp/pull/203))
 
 * **Documentation**:
   * User Guide:
@@ -48,8 +48,9 @@ Given below are my contributions to the project.
     * Added the find functionality to DG (which includes feature explanation, design choices, possible alternatives) (PR [\#213](https://github.com/AY2122S1-CS2103T-T10-4/tp/pull/213))
 
 * **Team tasks contributions**:
-  * Fixed various functionality bugs (examples: [\#116](https://github.com/AY2122S1-CS2103T-T10-4/tp/issues/116), PR [\#113](https://github.com/AY2122S1-CS2103T-T10-4/tp/pull/113))
+  * Fixed various functionality bugs ([\#116](https://github.com/AY2122S1-CS2103T-T10-4/tp/issues/116), PR [\#113](https://github.com/AY2122S1-CS2103T-T10-4/tp/pull/113))
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): PR [\#57](https://github.com/AY2122S1-CS2103T-T10-4/tp/pull/57), PR [\#77](https://github.com/AY2122S1-CS2103T-T10-4/tp/pull/77), PR [\#196](https://github.com/AY2122S1-CS2103T-T10-4/tp/pull/196)
-  * Contributed to forum discussions (examples: [1](https://github.com/nus-cs2103-AY2122S1/forum/issues/31))
+  * PRs reviewed (with non-trivial review comments) (PR [\#57](https://github.com/AY2122S1-CS2103T-T10-4/tp/pull/57), PR [\#77](https://github.com/AY2122S1-CS2103T-T10-4/tp/pull/77), PR [\#196](https://github.com/AY2122S1-CS2103T-T10-4/tp/pull/196))
+  * Contributed to forum discussions ([1](https://github.com/nus-cs2103-AY2122S1/forum/issues/31))
+  * Reported 10 bugs for other teams during Mock PE
