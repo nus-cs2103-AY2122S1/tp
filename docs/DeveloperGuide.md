@@ -839,7 +839,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-    1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder where it has read and write permissions
 
     2. Double-click the jar file Expected: Shows the GUI with a set of sample animes. The window size may not be optimum
 
@@ -849,6 +849,38 @@ testers are expected to do more *exploratory* testing.
 
     2. Re-launch the app by double-clicking the jar file<br>
        Expected: The most recent window size and location is retained
+       
+### Populating anime list for testing
+
+The app is initially populated with some sample data, based on real life animes. You can test the app either using the sample data, or add some more entries.
+
+1. Removing all data
+
+    1. List all animes using the `list` command
+
+    2. Clear all animes using the `clear` command
+
+    3. Confirm the `clear` command
+    
+2. Reset data to initial sample data
+
+    1. Close all windows of the app
+
+    2. Delete the data/anilist.json file
+    
+    3. Open AniList again, the app should now be populated with sample data. Note that no data file will be created until at least one command has been executed
+    
+3. Adding additional animes for testing
+
+    1. Use the `add` command to add more entries, for more details on how to use the `add` command, refer to our user guide
+
+4. Editing the data file
+   
+    We strongly advise against this due to the possible complications.
+   
+    The data file is located at the specified location inside preferences.json, under the attribute `animeListFilePath`.
+    Note that if the file becomes corrupted due to incorrect formatting or invalid parameter values, no data will be loaded into the app.
+   
 
 ### Deleting an anime
 
@@ -904,7 +936,8 @@ testers are expected to do more *exploratory* testing.
 ### Saving data
 
 1. Dealing with missing/corrupted data files
-    1. Close all Anilist windows
+
+    1. Close all AniList windows
 
     2. Open data/anilist.json
 
@@ -917,30 +950,92 @@ testers are expected to do more *exploratory* testing.
 ### Clearing all data
 
 1. Clearing all data in AniList
+
    1. Prerequisites: List all animes using the `list` command. There are animes in the list
+
    2. Test case: Clear all animes in the application. Run `list`, `clear`, `clear` one after the other <br/>
    Expected: First command will switch the current tab to the `all tab`. Second command will result in the application prompting the user for confirmation
    Third command will be the confirmation and all animes will be deleted from the application
+
    3. Test case: Cancelled clear. Run `clear`, `ANYTHING_BUT_CLEAR` one after the other <br/>
             Expected: The user will be prompted for confirmation after the first `clear` command. On running any other string besides `clear`, the `clear` command will be cancelled. If the string was a command, the command will not be executed
+
 2. Clearing animes from a specific tab
+
    1. Prerequisites: List all anime in the chosen tab using the `list s/CHOSEN_TAB` command
+
    2. Test case: Clear animes in a specific tab. Run `list s/f`, `clear`, `clear` one after the other <br/>
          Expected: All animes in the `finished` tab will be deleted. All animes in `towatch` and `watching` tab should still remain
 
 ### Listing animes
 
 1. List all animes in AniList
+
    1. Test case: `list` <br/>
    Expected: The current tab will switch to `all tab` and all animes will be listed
+
    2. Test case: `LisT`<br/>
    Expected: Error stating unknown command. AniList commands are case sensitive
+
 2. List animes based on their watch status
+
    1. Test case: `list s/w`, `list s/watching`<br/>
    Expected: The current tab will switch to `watching tab` and all animes with watch status `watching` will be listed
+
    2. Test case: `list s/t`, `list s/towatch`<br/>
       Expected: The current tab will switch to `towatch tab` and all animes with watch status `towatch` will be listed
+
    3. Test case: `list s/w`, `list s/finished`<br/>
       Expected: The current tab will switch to `finished tab` and all animes with watch status `finished` will be listed
+
    4. Test case: `list s/tw` <br/>
       Expected: Error message stating that an invalid status was provided
+
+### Finding anime
+
+1. Find by name
+
+    1. List all animes using the `list` command. Multiple animes in the list
+
+    2. Use `find n/NAME_SEARCH_TERM ...` to find whatever anime that matches the search term <br/>
+        Expected: an anime is considered a match if it matches any of the name search terms.
+
+    3. All matched animes will be listed, as well as a success message
+    
+
+2. Find by genre
+
+    1. List all animes using the `list` command. Multiple animes in the list
+
+    2. Use `find g/GENRE_SEARCH_TERM ...` to find whatever anime that contains the specified genre <br/>
+       Expected: an anime is considered a match if it contains any of the specified genres
+
+    3. All matched animes will be listed, as well as a success message
+    
+3. Find by genre and name
+
+    1. List all animes using the `list` command. Multiple animes in the list
+
+    2. Use `find n/NAME_SEARCH_TERM ... g/GENRE_SEARCH_TERM ...` to find whatever anime that contains the specified genre and matches the name
+       Expected: an anime is considered a match if it matches at least one name search term and contains at least one of the specified genres
+
+    3. All matched animes will be listed, as well as a success message
+
+## **Appendix: Effort**
+
+If the effort taken to implement AB3 was 10, then the effort we put into AniList would be 15.
+
+While we did not change the design and architecture that was laid out by AB3 drastically, we ended up modifying the behaviour of most of its commands, as we felt that it wasn't what we wanted in AniList.
+This includes, but is not limited to:
+
+* Splitting the edit command into various different commands
+* Redesigning the tagging system
+* Redesigning the find feature
+* Adding an user statistics feature
+* Revamping the GUI
+* Adding theme switching feature
+* Adding various tabs to represent different lists
+* Various other minor changes to functionalites
+
+Amongst these changes, we had the hardest time designing the find feature, as we wished to integrate it with our other features such as genres and tabs.
+Due to our iterative approach, we had to redesign other features to fit the needs of a redesigned find command, which took quite a few iterations before we got it to a point where we felt comfortable with it.
