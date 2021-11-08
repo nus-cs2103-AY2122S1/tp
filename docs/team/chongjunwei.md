@@ -45,10 +45,11 @@ Given below are my contributions to the project.
     * User Guide:
         * Added documentation for the features `delete` and `find` [\#72](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/72))
         * Fixed bugs that were reported in the PE-D (Pull requests [\#237](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/237))
+        * Added an introduction on the app interface (Part of PR [\#261](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/261))
     * Developer Guide:
         * Added implementation details of the `view` and `delete` event features (Pull requests [\#106](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/106), [\#131](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/131))
         * Formatting (Pull requests [\#131](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/131))
-        * Update the glossary (Pull requests [\#43](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/4), [\#44](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/44))
+        * Update the glossary (Pull requests [\#43](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/43), [\#44](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/44))
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments): [\#85](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/85), [\#129](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/129)
