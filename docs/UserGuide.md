@@ -622,7 +622,7 @@ TutorAid data are saved in the hard disk automatically after any command that ch
 {:.no_toc}
 TutorAid student data are saved as a JSON file `[JAR file location]/data/tutorAidStudents.json`, while TutorAid lesson data are saved as a JSON file `[JAR file location]/data/tutorAidLessons.json`. Advanced users are welcome to update data directly by editing any of the two data files.
 
-> :exclamation: **If your changes to the data file makes its format invalid, TutorAid will discard all data and start with an empty data file at the next run.**
+> :exclamation: **If your changes to a data files makes its format invalid, TutorAid will discard all data and start with all empty data files in the next run.**
 
 ***
 
