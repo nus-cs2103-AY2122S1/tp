@@ -8,15 +8,15 @@ import seedu.address.logic.commands.RejectionRateCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.position.Title;
 
-
 /**
- * Parses input arguments and creates a new RejectionRateCommand object
+ * Parses input arguments and creates a new RejectionRateCommand object.
  */
 public class RejectionRateCommandParser implements Parser<RejectionRateCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the RejectionRateCommand
      * and returns a RejectionRateCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     *
+     * @throws ParseException If the user input does not conform the expected format.
      */
     public RejectionRateCommand parse(String args) throws ParseException {
         ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(args, PREFIX_POSITION);
@@ -30,5 +30,4 @@ public class RejectionRateCommandParser implements Parser<RejectionRateCommand> 
 
         return new RejectionRateCommand(positionTitle);
     }
-
 }

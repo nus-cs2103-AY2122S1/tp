@@ -11,16 +11,16 @@ import seedu.address.model.position.Description;
 import seedu.address.model.position.Position;
 import seedu.address.model.position.Title;
 
-
 /**
- * Parses input arguments and creates a new AddPositionCommand object
+ * Parses input arguments and creates a new AddPositionCommand object.
  */
 public class AddPositionCommandParser implements Parser<AddPositionCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddPositionCommand
      * and returns an AddPositionCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     *
+     * @throws ParseException If the user input does not conform the expected format.
      */
     public AddPositionCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
@@ -38,5 +38,4 @@ public class AddPositionCommandParser implements Parser<AddPositionCommand> {
 
         return new AddPositionCommand(position);
     }
-
 }

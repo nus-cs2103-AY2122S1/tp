@@ -30,7 +30,7 @@ public class RejectionRateCommand extends Command {
     private final Title positionTitle;
 
     /**
-     * Creates an RejectionRateCommand to get the specified rejection rate.
+     * Creates an RejectionRateCommand according to the specified {@code positionTitle}.
      */
     public RejectionRateCommand(Title positionTitle) {
         requireNonNull(positionTitle);

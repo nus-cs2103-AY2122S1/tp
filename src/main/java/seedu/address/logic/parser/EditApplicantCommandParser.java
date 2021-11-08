@@ -16,15 +16,16 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.applicant.ProfileUrl;
 import seedu.address.model.position.Title;
 
-
+/**
+ * Parses input arguments and creates a new EditApplicantCommand object.
+ */
 public class EditApplicantCommandParser implements Parser<EditApplicantCommand> {
-
     /**
      * Parses the given {@code String} of arguments in the context of the EditApplicantCommand
      * and returns an EditApplicantCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     *
+     * @throws ParseException If the user input does not conform the expected format.
      */
-
     public EditApplicantCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
@@ -71,5 +72,4 @@ public class EditApplicantCommandParser implements Parser<EditApplicantCommand> 
 
         return new EditApplicantCommand(index, editApplicantDescriptor);
     }
-
 }

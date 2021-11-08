@@ -21,6 +21,9 @@ public class FindApplicantCommand extends Command {
 
     private final NameContainsKeywordsPredicate predicate;
 
+    /**
+     * Creates a FindApplicantCommand according to the specified {@code predicate}.
+     */
     public FindApplicantCommand(NameContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
@@ -39,5 +42,4 @@ public class FindApplicantCommand extends Command {
                 || (other instanceof FindApplicantCommand // instanceof handles nulls
                 && predicate.equals(((FindApplicantCommand) other).predicate)); // state check
     }
-
 }

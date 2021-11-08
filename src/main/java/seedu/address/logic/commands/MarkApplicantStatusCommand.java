@@ -36,6 +36,9 @@ public class MarkApplicantStatusCommand extends Command {
 
     /**
      * Creates a MarkApplicantStatusCommand to update the status of the specified applicant.
+     *
+     * @param name Name of the applicant to be updated.
+     * @param applicationStatus The new status of the target applicant.
      */
     public MarkApplicantStatusCommand(Name name, ApplicationStatus applicationStatus) {
         requireAllNonNull(name, applicationStatus);
@@ -87,5 +90,4 @@ public class MarkApplicantStatusCommand extends Command {
         MarkApplicantStatusCommand o = (MarkApplicantStatusCommand) other;
         return name.equals(o.name) && applicationStatus.equals(o.applicationStatus);
     }
-
 }

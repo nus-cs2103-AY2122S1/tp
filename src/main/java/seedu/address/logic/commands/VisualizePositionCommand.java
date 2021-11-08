@@ -13,7 +13,7 @@ import seedu.address.model.position.exceptions.PositionNotFoundException;
 import seedu.address.ui.PieChartDisplayer;
 import seedu.address.ui.PositionPieChart;
 
-/*
+/**
  * Displays a pie chart for a position in MrTechRecruiter.
  */
 public class VisualizePositionCommand extends Command {
@@ -30,7 +30,7 @@ public class VisualizePositionCommand extends Command {
     private final Title toShowTitle;
 
     /**
-     * Creates a VisualizePositionCommand to visualize the specified {@code Position}
+     * Creates a VisualizePositionCommand to visualize the specified {@code Position}.
      */
     public VisualizePositionCommand(Title position) {
         requireNonNull(position);
