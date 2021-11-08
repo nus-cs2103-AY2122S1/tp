@@ -179,27 +179,27 @@ In addition, the following classes are utilised in the `Ui` component
 * `PersonCard` that extends UiPart<Region>
 * `PersonListCard.fxml` to display the labels
 
-Given below is an example usage scenario and how the `append` and `remove` mechanism behaves at each step.
+Given below is an example usage scenario and how the `append` and `remove` mechanism behaves at each step. <br>
 
 Step 1. The user launches the application with existing contacts from previous uses. 
 
 Step 2. The user executes `append 3 l/python` to append "python" to the list of programming languages of the contact at index 3. The command passes through `LogicManager`, `AddressBookParser`, and `AppendCommandParser` which creates an `AppendPersonDescriptor` object and subsequently an `AppendCommand` object to be executed.
 
+In this sequence diagram, the focus is on the `Logic` component and how an `AppendCommand` object is created once the user inputs `append 3 l/python`.
+   ![AppendSequenceDiagram](images/AppendSequenceDiagram.png)
+
 Step 3. After the `AppendCommand` is executed and the interaction with the `Model` component is complete and fed back to the `Ui` component, the item `python` is now seen under the 3rd contact's list of programming languages, with no change to the previous existing programming languages. Languages are then sorted alphanumerically in the display. 
 
-Step 4. If the user realises that a mistake in assigning the wrong language, i.e. should have been "java" instead of "python", the user executes the `rm 3 l/INDEX`, where index is the index of the "python" language in the display of the 3rd contact. Similar to the `AppendCommand`, the `RemoveCommand` deletes only the targeted language specified by the index, with no change to the other existing data fields.   
-
-The following sequence diagrams show how the `append` command works:
-
-1. In this sequence diagram, the focus is on the `Logic` component and how an `AppendCommand` object is created once the user inputs `append 3 l/python`.
-![AppendSequenceDiagram](images/AppendSequenceDiagram.png)
-
-2. In this next sequence diagram, the focus is on the interactions between the `Logic` and `Model` components when the `AppendCommand` is executed. 
-![AppendSequenceDiagram2](images/AppendSequenceDiagram2.png)
+In this next sequence diagram, the focus is on the interactions between the `Logic` and `Model` components when the `AppendCommand` is executed.
+   ![AppendSequenceDiagram2](images/AppendSequenceDiagram2.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AppendCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
+
+
+Step 4. If the user realises that a mistake in assigning the wrong language, i.e. should have been "java" instead of "python", the user executes the `rm 3 l/INDEX`, where index is the index of the "python" language in the display of the 3rd contact. Similar to the `AppendCommand`, the `RemoveCommand` deletes only the targeted language specified by the index, with no change to the other existing data fields.   
+
 
 The following activity diagram summarizes what happens when a user executes `append` command:
 ![AppendActivityDiagram](images/AppendActivityDiagram.png)
@@ -227,9 +227,145 @@ Finally, defensive coding techniques were used by making a copy of the `AppendPe
 * **Alternative 1 (current choice):** Similar to the `append` command, the `rm` command also uses HashSets to store indexes and existing data fields. Additionally, the ArrayList data structure was used to implement Java generics for better code quality.
 * **Alternative 2 (future implementation):** Similar to the `append` command, an alternative implementation would be to remove pointers in a list of existing pointers a `Person` has.
 
-### 4.2 \[Proposed\] Undo/redo feature
+### 4.2 Interactions feature
 
-#### 4.2.1 Proposed Implementation
+#### 4.2.1 Implementation
+The interaction mechanism utilizes the same concept as other commands like `add` and `edit` with some tweaks.
+
+Given below is an example usage scenario and how the interaction mechanism behaves at each step.
+
+Step 1. The user inputs the command `interaction int/we just met on/2020-02-02`
+
+Step 2. The command passes through the `LogicManager`. `LogicManager` creates a `AddressBookParser` which would help to parse and tokenize the command.
+
+Step 3. `AddressBookParser` sees that it's a interaction command and creates a `InteractionCommandParser` object.
+
+Step 4. `InteractionCommandParser` helps to extract out the tokens and generate a `InteractionCommand`. The input validation is mostly done at this stage.
+
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** Most input validation will be done at this stage.
+</div>
+
+The following sequence diagram visually describes the steps above:
+
+![InteractionSequenceDiagram](images/InteractionSequenceDiagram.png)
+
+  #### 4.2.2 Design considerations
+  **Aspect: How interactions is stored:**
+  
+  * **Alternative 1 (current choice):** As a list of interactions in the Person object.
+  * Pros: Easy to implement, intuitive design and navigatability
+  * Cons: Heavy coupling with the person class
+  
+  * **Alternative 2:** As a list by itself, containing a reference to the Person it is attached to.
+  * Pros: More isolated from the Person class, so less changes to overall code
+  * Cons: Navigatability is reduced significantly
+
+###  4.3 View feature
+
+#### 4.3.1 Implementation
+The view mechanism utilizes the same concept as other commands 
+like `add` and `edit`, but has a few distinct changes.
+
+Given below is an example usage scenario and how the view mechanism
+behaves at each step.
+
+Step 1. The user inputs the command `view 2`
+
+Step 2. The command passes through the `LogicManager`. 
+`LogicManager` creates a `AddressBookParser` which would help to 
+parse and tokenize the command.
+
+Step 3. `AddressBookParser` sees that it's a view command and creates a
+`ViewCommandParser` object.
+
+Step 4. `ViewCommandParser` helps to extract out the tokens and 
+generate a `ViewCommand`.
+
+Step 5. `ViewCommand` helps to call the updateViewedPerson method,
+so that the GUI shows the correct Person.
+
+The following sequence diagram visually describes the steps above:
+
+![ViewSequenceDiagram](images/ViewSequenceDiagram.png)
+
+#### 4.3.2 Design considerations:
+**Aspect: How viewedPerson is stored:**
+
+* **Alternative 1 (current choice):** As a FilteredList in the ModelManager.
+  * Pros: Easy to implement, similar logic to filteredPersons, making it easy
+    to understand. Easy to implement future versions in case there is a need
+    to add functionality to view multiple contacts at once.
+  * Cons: Not necessarily a good usage of a FilteredList since there should
+    only be a single contact viewed at once for the current version.
+
+* **Alternative 2:** As a single Person instance in the ModelManager.
+  * Pros: More intuitive as there is only a single contact viewed at once currently.
+  * Cons: More rigid and harder to improve upon for future versions.
+
+
+### 4.4 Filter feature
+
+#### 4.4.1 Implementation
+The filter mechanism utilizes the same concept as other commands like `find` with some tweaks.
+
+Given below is an example usage scenario and how the filter mechanism behaves at each step.
+
+Step 1. The user inputs the command `filter f/computing`
+
+Step 2. The command passes through the `LogicManager`. `LogicManager` creates a `AddressBookParser` which would help to parse and tokenize the command.
+
+Step 3. `AddressBookParser` sees that it's a filter command and creates an `FilterCommandParser` object.
+
+Step 4. `FilterCommandParser` helps to extract out the tokens and generate a `FilterCommand`. The input validation is mostly done at this stage.
+
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** Most input validation will be done at this stage.
+</div>
+
+The following sequence diagram visually describes the steps above:
+
+![InteractionSequenceDiagram](images/FilterCommandSequenceDiagram.png)
+
+### 4.5 Organisations feature
+
+#### 4.5.1 Implementation
+The Organisation commands utilize the same concept as other commands like `add` and `delete` with some tweaks.
+
+Given below is an example usage scenario and how the organisation commands behave at each step.
+
+Step 1. The user inputs the command `addorg n/Facebook e/hello@facebook.com`
+
+Step 2. The command passes through the `LogicManager`. `LogicManager` creates a `AddressBookParser` which would help to parse and tokenize the command.
+
+Step 3. `AddressBookParser` sees that it's an AddOrg command and creates a `AddOrgCommandParser` object.
+
+Step 4. `AddOrgCommandParser` helps to extract out the tokens and generate a `AddOrgCommand`. The input validation is mostly done at this stage.
+
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** Most input validation will be done at this stage.
+</div>
+
+The following sequence diagram visually describes the steps above:
+
+![OrganisationSequenceDiagram](images/OrganisationSequenceDiagram.png)
+
+
+#### 4.5.2 Design considerations:
+
+**Aspect: How persons in organisations are stored:**
+
+* **Alternative 1 (current choice):** As a list of persons in each organisation in the Address Book.
+    * Pros: Easy to implement, intuitive design
+    * Cons: Any updates to a person in Address Book have to be checked and updated in each organisation
+
+* **Alternative 2:** List of persons in each organisation stores the references to the persons
+    * Pros: Any updates to a person in Address Book is synchronised with the organisations the person is in
+    * Cons: Harder to implement
+
+### 4.6 \[Proposed\] Undo/redo feature
+
+#### 4.6.1 Proposed Implementation
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
@@ -292,157 +428,18 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <img src="images/CommitActivityDiagram.png" width="250" />
 
-#### 4.2.2 Design considerations:
+#### 4.6.2 Design considerations:
 
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### 4.3 Interactions feature
-
-#### 4.3.1 Implementation
-The interaction mechanism utilizes the same concept as other commands like `add` and `edit` with some tweaks.
-
-Given below is an example usage scenario and how the interaction mechanism behaves at each step.
-
-Step 1. The user inputs the command `interaction int/we just met on/2020-02-02`
-
-Step 2. The command passes through the `LogicManager`. `LogicManager` creates a `AddressBookParser` which would help to parse and tokenize the command.
-
-Step 3. `AddressBookParser` sees that it's a interaction command and creates a `InteractionCommandParser` object.
-
-Step 4. `InteractionCommandParser` helps to extract out the tokens and generate a `InteractionCommand`. The input validation is mostly done at this stage.
-
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** Most input validation will be done at this stage.
-</div>
-
-The following sequence diagram visually describes the steps above:
-
-![InteractionSequenceDiagram](images/InteractionSequenceDiagram.png)
-
-  #### 4.3.2 Design considerations
-  **Aspect: How interactions is stored:**
-  
-  * **Alternative 1 (current choice):** As a list of interactions in the Person object.
-  * Pros: Easy to implement, intuitive design and navigatability
-  * Cons: Heavy coupling with the person class
-  
-  * **Alternative 2:** As a list by itself, containing a reference to the Person it is attached to.
-  * Pros: More isolated from the Person class, so less changes to overall code
-  * Cons: Navigatability is reduced significantly
-
-###  View feature
-
-#### Implementation
-The view mechanism utilizes the same concept as other commands 
-like `add` and `edit`, but has a few distinct changes.
-
-Given below is an example usage scenario and how the view mechanism
-behaves at each step.
-
-Step 1. The user inputs the command `view 2`
-
-Step 2. The command passes through the `LogicManager`. 
-`LogicManager` creates a `AddressBookParser` which would help to 
-parse and tokenize the command.
-
-Step 3. `AddressBookParser` sees that it's a view command and creates a
-`ViewCommandParser` object.
-
-Step 4. `ViewCommandParser` helps to extract out the tokens and 
-generate a `ViewCommand`.
-
-Step 5. `ViewCommand` helps to call the updateViewedPerson method,
-so that the GUI shows the correct Person.
-
-The following sequence diagram visually describes the steps above:
-
-![ViewSequenceDiagram](images/ViewSequenceDiagram.png)
-
-#### Design considerations:
-**Aspect: How viewedPerson is stored:**
-
-* **Alternative 1 (current choice):** As a FilteredList in the ModelManager.
-  * Pros: Easy to implement, similar logic to filteredPersons, making it easy
-    to understand. Easy to implement future versions in case there is a need
-    to add functionality to view multiple contacts at once.
-  * Cons: Not necessarily a good usage of a FilteredList since there should
-    only be a single contact viewed at once for the current version.
-
-* **Alternative 2:** As a single Person instance in the ModelManager.
-  * Pros: More intuitive as there is only a single contact viewed at once currently.
-  * Cons: More rigid and harder to improve upon for future versions.
-
-
-###  Filter feature
-
-#### Implementation
-The filter mechanism utilizes the same concept as other commands like `find` with some tweaks.
-
-Given below is an example usage scenario and how the filter mechanism behaves at each step.
-
-Step 1. The user inputs the command `filter f/computing`
-
-Step 2. The command passes through the `LogicManager`. `LogicManager` creates a `AddressBookParser` which would help to parse and tokenize the command.
-
-Step 3. `AddressBookParser` sees that it's a filter command and creates an `FilterCommandParser` object.
-
-Step 4. `FilterCommandParser` helps to extract out the tokens and generate a `FilterCommand`. The input validation is mostly done at this stage.
-
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** Most input validation will be done at this stage.
-</div>
-
-The following sequence diagram visually describes the steps above:
-
-![InteractionSequenceDiagram](images/FilterCommandSequenceDiagram.png)
-
-###  Organisations feature
-
-#### Implementation
-The Organisation commands utilize the same concept as other commands like `add` and `delete` with some tweaks.
-
-Given below is an example usage scenario and how the organisation commands behave at each step.
-
-Step 1. The user inputs the command `addorg n/Facebook e/hello@facebook.com`
-
-Step 2. The command passes through the `LogicManager`. `LogicManager` creates a `AddressBookParser` which would help to parse and tokenize the command.
-
-Step 3. `AddressBookParser` sees that it's an AddOrg command and creates a `AddOrgCommandParser` object.
-
-Step 4. `AddOrgCommandParser` helps to extract out the tokens and generate a `AddOrgCommand`. The input validation is mostly done at this stage.
-
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** Most input validation will be done at this stage.
-</div>
-
-The following sequence diagram visually describes the steps above:
-
-![OrganisationSequenceDiagram](images/OrganisationSequenceDiagram.png)
-
-
-#### Design considerations:
-
-**Aspect: How persons in organisations are stored:**
-
-* **Alternative 1 (current choice):** As a list of persons in each organisation in the Address Book.
-    * Pros: Easy to implement, intuitive design
-    * Cons: Any updates to a person in Address Book have to be checked and updated in each organisation
-
-* **Alternative 2:** List of persons in each organisation stores the references to the persons
-    * Pros: Any updates to a person in Address Book is synchronised with the organisations the person is in
-    * Cons: Harder to implement
-
+    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -507,14 +504,138 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### 6.3 Use cases
 
-(For all use cases below, the **System** is the `ComputingConnection` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `ComputingConnection` and the **Actor** is the `entrepreneurial student in NUS Computing`, unless specified otherwise)
 
-**Use case: Add a contact**
+#### Use case: UC01 Add a contact
 
 **MSS**
 
-1.  User requests to add a contact
-2.  ComputingConnection adds the contact
+1.  Student enters a command to add a contact.
+2.  ComputingConnection adds the contact.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The input data field formats are incorrect.
+    * 1a1. ComputingConnection shows an error message to prompt the wrong data field.<br>
+    Use case resumes at step 1.
+* 1b. The student already exists.
+    * 1b1. ComputingConnection shows an error message about a duplicate contact. <br>
+    Use case resumes at step 1.
+
+#### Use case: UC02 Edit a contact
+
+**MSS**
+
+1.  Student enters a command to edit a contact.
+2.  ComputingConnection shows the current details of the contact with editable fields.
+3.  ComputingConnection updates the contact accordingly.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The student leaves a required field empty.
+    * 1a1. ComputingConnection shows an error message to prompt user to edit that field. <br>
+    Use case ends.
+
+#### Use case: UC03 Append to a contact
+
+**MSS**
+
+1. Student requests for a specific list of contacts.
+2. Student enters a command to append an element to a data field of a contact.
+3. ComputingConnection appends the data field to the specific contact. 
+4. ComputingConnection displays the new details of the contact.
+
+    Use case ends. 
+
+**Extensions**
+* 1a. The displayed list is empty. <br> 
+  
+  Step 1 is repeated until the desired contact is shown. <br>
+  Use case resumes from step 2.
+    
+* 2a. ComputingConnection detects an error in the entered data.
+    * 2a1. ComputingConnection shows an error message to prompt user of the correct format. 
+    * 2a2. Student enters valid data fields. <br>
+      
+      Steps 2a1-2a2 are repeated until the data entered is correct. <br>
+      Use case resumes from step 3.
+      
+#### Use case: UC04 Remove a specific item from a data field of a contact.
+**MSS**
+
+1. Student requests for a specific list of contacts.
+2. Student enters a command to remove an element from a data field of a contact.
+3. ComputingConnection removes the element in the specific data field of the contact. 
+4. ComputingConnection displays the new details of the contact.
+
+    Use case ends.
+
+**Extensions**
+* 1a. The displayed list is empty. <br>
+  
+  Step 1 is repeated until the desired contact is shown. <br>
+  Use case resumes from step 2.
+
+* 2a. ComputingConnection detects the given index of the contact or element is invalid. 
+    * 2a1. ComputingConnection shows an error message to prompt user of out of bounds error.
+    * 2a2. Student enters a valid index <br>
+      
+      Steps 2a1-2a2 are repeated until the index entered is correct. <br>
+      Use case resumes from step 3. <br>
+<br>
+* 2b. ComputingConnection detects the entered data field is invalid.
+    * 2b1. ComputingConnection shows an error message to prompt user of the correct format.
+    * 2b2. User enters valid data fields <br>
+      
+      Steps 3a1-3a2 are repeated until the data entered is correct. <br>
+      Use case resumes from step 3.
+
+
+#### Use case: UC05 Search for a specific contact
+
+**MSS**
+
+1. Student searches a contact by name.
+2. ComputingConnection shows the contact with the searched name.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. Searched contact is invalid.
+   * 2a1. ComputingConnection shows an error message.
+
+      Use case ends.
+
+#### Use case: UC06 Delete a specific contact
+
+**MSS**
+
+1. User searches a contact by name.
+2. ComputingConnection shows the contact with the searched name.
+3. User Requests to delete the contact.
+4. Computing connection deletes the contact.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. Searched contact is invalid.
+
+    * 2a1. ComputingConnection shows an error message.
+
+      Use case ends.
+
+#### Use case: UC07 Add interactions to a specific contact
+
+**MSS**
+
+1.  User requests to add an interaction to a contact
+2.  ComputingConnection adds the interaction to the specific contact
 
     Use case ends.
 
@@ -525,64 +646,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: Update a contact**
+#### Use case: UC08 View a specific contact
 
 **MSS**
 
-1.  User requests to update a contact
-2.  ComputingConnection shows the current details of the contact with editable fields
-3.  User edits the fields
-4.  ComputingConnection updates the contact accordingly
+1.  User requests to view a contact
+2.  ComputingConnection shows the contact's details in the app,
+    with details like remarks and interactions.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The user cancels the update.
-    * 2a1. ComputingConnection exits the update page.
+* 1a. The input index is invalid.
+    * 1a1. ComputingConnection shows an error message.
 
-      Use case ends.
+  Use case ends.
 
-* 3a. The user leaves a required field empty.
-
-    * 3a1. ComputingConnection shows an error message to prompt user to edit that field.
-
-      Use case ends.
-
-**Use case: Append to a contact**
-
-**MSS**
-
-1. User requests to append data fields to a contact
-2. ComputingConnection appends the data field to the specific contact and displays the new details of the contact.
-Use case ends. 
-
-**Extensions**
-* 1a. ComputingConnection detects an error in the entered data.
-    * 1a1. ComputingConnection shows an error message to prompt user of the correct format. 
-    * 1a2. User enters valid data fields
-    Steps 1a1-1a2 are repeated until the data entered is correct. 
-    Use case resumes from step 4.
-
-
-**Use case: Search for a specific contact**
-
-**MSS**
-
-1. User searches a contact by name
-2. ComputingConnection shows the contact with the searched name
-
-   Use case ends.
-
-**Extensions**
-
-* 2a. Searched contact is invalid.
-
-   * 2a1. ComputingConnection shows an error message.
-
-      Use case ends.
-
-**Use case: Add an organisation**
+#### Use case: UC09 Add an organisation
 
 **MSS**
 
@@ -598,7 +679,7 @@ Use case ends.
 
   Use case ends.
 
-**Use case: Delete an organisation**
+#### Use case: UC10 Delete an organisation
 
 **MSS**
 
@@ -614,7 +695,7 @@ Use case ends.
 
   Use case ends.
 
-**Use case: Add a person to an organisation**
+#### Use case: UC11 Add a person to an organisation
 
 **MSS**
 
@@ -634,7 +715,7 @@ Use case ends.
     
   Use case ends.
 
-**Use case: Removing a person to an organisation**
+#### Use case: UC12 Removing a person from an organisation
 
 **MSS**
 
@@ -652,72 +733,22 @@ Use case ends.
 
   Use case ends.
 
-**Use case: Delete a specific contact**
-
-**MSS**
-
-1. User searches a contact by name.
-2. ComputingConnection shows the contact with the searched name.
-3. User Requests to delete the contact.
-4. Computing connection deletes the contact.
-
-   Use case ends.
-
-**Extensions**
-
-* 2a. Searched contact is invalid.
-
-    * 2a1. ComputingConnection shows an error message.
-
-      Use case ends.
-
-**Use case: Add interactions to a specific contact**
-
-**MSS**
-
-1.  User requests to add an interaction to a contact
-2.  ComputingConnection adds the interaction to the specific contact
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. The input tag formats are incorrect.
-    * 1a1. ComputingConnection shows an error message.
-
-  Use case ends.
-
-**Use case: View a specific contact**
-
-**MSS**
-
-1.  User requests to view a contact
-2.  ComputingConnection shows the contact's details in the app,
-    with details like remarks and interactions.
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. The input index is invalid.
-    * 1a1. ComputingConnection shows an error message.
-
-  Use case ends.
-
-*{More to be added}*
-
 ### 6.4 Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 contacts without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. A student with above average typing speed should be able to accomplish most of the tasks faster using commands than using the mouse.
+3. Should be intuitive and simple to remember commands after several uses. 
+4. Should be able to hold up to 1000 contacts without a noticeable sluggishness in performance for typical usage.
+5. Data should be stored locally in a JSON format. 
+6. The GUI should work well for standard Full HD screen resolutions 1920x1080 (i.e. columns or sections should not be cut off))
+7. Each command request and GUI response time should be processed within 2 seconds.
 
 ### 6.5 Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Contact**: Represents a Person in *ComputingConnection*
+* **Data Field**: Categorised data that you can assign to a contact
+* **MSS**: Main Success Scenario (for use cases)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -736,7 +767,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size should be maximized to your computer screen.
 
 1. Saving window preferences
 
@@ -745,13 +776,11 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### 7.2 Deleting a contact
 
-### 7.2 Deleting a person
+1. Deleting a contact while all contacts are being shown
 
-1. Deleting a person while all persons are being shown
-
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
 
    1. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
@@ -761,13 +790,20 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+      
+### 7.3 Appending optional data fields to a contact
 
-1. _{ more test cases …​ }_
+1. Appending data fields to a contact
 
-### 7.3 Saving data
+    1. Prerequisites: At least one contact is shows in the displayed list
+    
+    1. Test case: `append 1 l/python s/frontend s/backend` <br>
+        Expected: "python" gets appended to "Programming Languages" of the first contact in the list. "frontend" and "backend" get appended to "Skills" of the same contact.
 
-1. Dealing with missing/corrupted data files
+    1. Test case: `append 1 l/python s/frontend s/backend random/failure` <br>
+        Expected: No contact gets appended to. Error details shown in the result display box.
+       
+    1. Other incorrect append commands to try: `append`, `append x` (where x is larger than the list size), `append 1 y/testing` (where y is a data field not equivalent to `s/`, `l/`, `fr/`, `t/` or `r/`).
+        Expected: Similar to previous.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
