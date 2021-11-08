@@ -11,8 +11,8 @@ import seedu.address.model.applicant.UniqueApplicantList;
 import seedu.address.model.position.Position;
 
 /**
- * Wraps all applicant data at ApplicantBook level
- * Duplicates are not allowed (by .isSameApplicant comparison)
+ * Wraps all applicant data at ApplicantBook level.
+ * Duplicates are not allowed (by .isSameApplicant comparison).
  */
 public class ApplicantBook implements ReadOnlyApplicantBook {
 
@@ -32,7 +32,7 @@ public class ApplicantBook implements ReadOnlyApplicantBook {
     public ApplicantBook() {}
 
     /**
-     * Creates an ApplicantBook using the Applicants in the {@code toBeCopied}
+     * Creates an ApplicantBook using the Applicants in the {@code toBeCopied}.
      */
     public ApplicantBook(ReadOnlyApplicantBook toBeCopied) {
         this();
@@ -40,6 +40,7 @@ public class ApplicantBook implements ReadOnlyApplicantBook {
     }
 
     //// list overwrite operations
+
     /**
      * Replaces the contents of the applicant list with {@code applicants}.
      * {@code applicants} must not contain duplicate applicants.
@@ -72,6 +73,22 @@ public class ApplicantBook implements ReadOnlyApplicantBook {
     public boolean hasApplicantWithName(Name applicantName) {
         requireNonNull(applicantName);
         return applicants.containsApplicantWithName(applicantName);
+    }
+
+    /**
+     * Returns true if there are applicants applying to {@code position} in the applicant book.
+     */
+    public boolean hasApplicantsApplyingTo(Position position) {
+        requireNonNull(position);
+        return applicants.hasApplicantsApplyingTo(position);
+    }
+
+    /**
+     * Returns the applicant with the specified name, if any.
+     */
+    public Applicant getApplicantWithName(Name applicantName) {
+        requireNonNull(applicantName);
+        return applicants.getApplicantWithName(applicantName);
     }
 
     /**
@@ -134,5 +151,4 @@ public class ApplicantBook implements ReadOnlyApplicantBook {
 
         return copiedApplicantBook;
     }
-
 }

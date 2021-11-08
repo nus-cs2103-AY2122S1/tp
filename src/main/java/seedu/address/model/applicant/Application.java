@@ -7,6 +7,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import seedu.address.commons.util.StringUtil;
 import seedu.address.model.position.Position;
 import seedu.address.model.position.Title;
 
@@ -21,6 +22,8 @@ public class Application {
     /**
      * Constructor for a job application.
      * Invoked whenever the add-applicant command is called.
+     *
+     * @param position The position for the application.
       */
     public Application(Position position) {
         this(position, ApplicationStatus.PENDING);
@@ -37,6 +40,9 @@ public class Application {
 
     /**
      * Returns a new Application with the status updated as specified.
+     *
+     * @param applicationStatus The new status for the application.
+     * @return Application with the updated status.
      */
     public Application markAs(ApplicationStatus applicationStatus) {
         return new Application(position, applicationStatus);
@@ -83,10 +89,10 @@ public class Application {
 
     @Override
     public String toString() {
-        return "Application: {"
-                + ", Position: " + position.getTitle()
+        return "{ "
+                + "Position: " + position.getTitle()
                 + ", Status: " + status
-                + "}";
+                + " }";
     }
 
     public Application getCopiedApplication() {
@@ -117,5 +123,11 @@ public class Application {
             return valueOf(inputString.toUpperCase());
         }
 
+        @Override
+        public String toString() {
+            return StringUtil.toProperCase(super.toString());
+        }
+
     }
+
 }

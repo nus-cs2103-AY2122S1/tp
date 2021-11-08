@@ -18,7 +18,9 @@ public class EditPositionDescriptor {
     public EditPositionDescriptor() {}
 
     /**
-     * Copy constructor.
+     * A constructor copying an existing EditPositionDescriptor.
+     *
+     * @param toCopy The EditPositionDescriptor to be copied from.
      */
     public EditPositionDescriptor(EditPositionDescriptor toCopy) {
         setTitle(toCopy.title);
@@ -51,6 +53,9 @@ public class EditPositionDescriptor {
     /**
      * Creates and returns a {@code Position} with the details of {@code positionToEdit}
      * edited with {@code editPositionDescriptor}.
+     *
+     * @param positionToEdit The position to be changed.
+     * @return The position with the changed details.
      */
     public Position createEditedPosition(Position positionToEdit) {
         assert positionToEdit != null;
@@ -59,7 +64,6 @@ public class EditPositionDescriptor {
         Description updatedDescription = getDescription().orElse(positionToEdit.getDescription());
         return new Position(updatedTitle, updatedDescription);
     }
-
 
     @Override
     public boolean equals(Object other) {
@@ -79,5 +83,4 @@ public class EditPositionDescriptor {
         return getTitle().equals(e.getTitle())
                 && getDescription().equals(e.getDescription());
     }
-
 }

@@ -23,6 +23,7 @@ public class Applicant {
     // Data fields
     private final Address address;
     private final Application application;
+    private ProfileUrl gitHubUrl;
 
     /**
      * Every field must be present and not null.
@@ -31,22 +32,8 @@ public class Applicant {
         this(name, phone, email, address, new Application(position));
     }
 
-
     /**
-     * Constructor for an applicant given the applicant's particulars.
-     */
-    public Applicant(ApplicantParticulars applicantParticulars, Position position) {
-        this(
-                applicantParticulars.getName(),
-                applicantParticulars.getPhone(),
-                applicantParticulars.getEmail(),
-                applicantParticulars.getAddress(),
-                new Application(position)
-        );
-    }
-
-    /**
-     * Internal constructor for a new Applicant object.
+     * Every field must be present and not null.
      */
     public Applicant(Name name, Phone phone, Email email, Address address, Application application) {
         requireAllNonNull(name, phone, email, address);
@@ -58,10 +45,52 @@ public class Applicant {
     }
 
     /**
+     * Every field must be present and not null.
+     */
+    public Applicant(Name name, Phone phone, Email email, Address address, Position position,
+                     ProfileUrl gitHubUrl) {
+        this(name, phone, email, address, new Application(position), gitHubUrl);
+    }
+
+    /**
+     * Constructor for an applicant given the applicant's particulars.
+     *
+     * @param applicantParticulars The applicant's particulars.
+     * @param position The position the applicant is applying to.
+     */
+    public Applicant(ApplicantParticulars applicantParticulars, Position position) {
+        this(
+                applicantParticulars.getName(),
+                applicantParticulars.getPhone(),
+                applicantParticulars.getEmail(),
+                applicantParticulars.getAddress(),
+                new Application(position),
+                applicantParticulars.getGitHubUrl()
+        );
+    }
+
+    /**
+     * Internal constructor for a new Applicant object.
+     */
+    public Applicant(Name name, Phone phone, Email email, Address address, Application application,
+                     ProfileUrl gitHubUrl) {
+        requireAllNonNull(name, phone, email, address);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.application = application;
+        this.gitHubUrl = gitHubUrl;
+    }
+
+    /**
      * Marks the application with the specified application status.
+     *
+     * @param applicationStatus The updated status for the application.
+     * @return The applicant with the updated status.
      */
     public Applicant markAs(ApplicationStatus applicationStatus) {
-        return new Applicant(name, phone, email, address, application.markAs(applicationStatus));
+        return new Applicant(name, phone, email, address, application.markAs(applicationStatus), gitHubUrl);
     }
 
     public Name getName() {
@@ -88,6 +117,14 @@ public class Applicant {
         return application.getTitle();
     }
 
+    public ProfileUrl getGitHubUrl() {
+        return gitHubUrl;
+    }
+
+    public boolean hasGitHubProfile() {
+        return gitHubUrl.hasProfile();
+    }
+
     /**
      * Returns true if this applicant is applying to the given position.
      */
@@ -102,6 +139,14 @@ public class Applicant {
     public boolean isApplyingToPositionWithTitle(Title positionTitle) {
         requireNonNull(positionTitle);
         return application.getPosition().getTitle().equals(positionTitle);
+    }
+
+    /**
+     * Returns true if this applicant has the specified name.
+     */
+    public boolean hasName(Name name) {
+        requireNonNull(name);
+        return this.name.equals(name);
     }
 
     /**
@@ -144,7 +189,8 @@ public class Applicant {
                 && phone.equals(otherApplicant.phone)
                 && email.equals(otherApplicant.email)
                 && address.equals(otherApplicant.address)
-                && application.equals(otherApplicant.application);
+                && application.equals(otherApplicant.application)
+                && gitHubUrl.equals(otherApplicant.gitHubUrl);
     }
 
     @Override
@@ -163,7 +209,9 @@ public class Applicant {
                 + "; Address: "
                 + address
                 + "; Application: "
-                + application;
+                + application
+                + "; GitHub Profile: "
+                + gitHubUrl;
     }
 
     public String getApplicationSummary() {
@@ -172,6 +220,6 @@ public class Applicant {
 
     public Applicant getCopiedApplicant() {
         return new Applicant(name.getCopiedName(), phone.getCopiedPhone(), email.getCopiedEmail(),
-                address.getCopiedAddress(), application.getCopiedApplication());
+                address.getCopiedAddress(), application.getCopiedApplication(), gitHubUrl.getCopiedProfileUrl());
     }
 }

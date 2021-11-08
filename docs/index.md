@@ -10,8 +10,8 @@ title: MrTechRecruiter
 
 **MrTechRecruiter is a desktop application for HR recruiters in tech companies to manage their applicants.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 
-* If you are interested in using MrTechRecruiter, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
-* If you are interested in developing MrTechRecruiter, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
+* If you are interested in using MrTechRecruiter, head over to the [_Quick Start_ section of the **User Guide**](https://github.com/AY2122S1-CS2103-F10-1/tp/blob/master/docs/UserGuide.md#quick-start).
+* If you are interested in developing MrTechRecruiter, the [**Developer Guide**](https://github.com/AY2122S1-CS2103-F10-1/tp/blob/master/docs/DeveloperGuide.md) is a good place to start.
 
 
 **Acknowledgements**

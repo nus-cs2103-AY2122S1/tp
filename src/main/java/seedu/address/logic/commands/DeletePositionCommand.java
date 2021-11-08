@@ -11,21 +11,24 @@ import seedu.address.model.Model;
 import seedu.address.model.position.Position;
 
 /**
- * Deletes a position identified using it's displayed index from the position book.
+ * Deletes a position identified using its displayed index from the position book.
  */
 public class DeletePositionCommand extends Command {
 
     public static final String COMMAND_WORD = "delete-position";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the position identified by the index number used in the displayed position list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
+            + ": Deletes the position identified by the index number used in the displayed position list." + "\n"
+            + "Parameters: INDEX (must be a positive integer)" + "\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_POSITION_SUCCESS = "Deleted Position: %1$s";
 
     private final Index targetIndex;
 
+    /**
+     * Creates a DeleteApplicantCommand according to the specified {@code targetIndex}.
+     */
     public DeletePositionCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }

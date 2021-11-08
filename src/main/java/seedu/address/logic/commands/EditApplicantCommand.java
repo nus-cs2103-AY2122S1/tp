@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GITHUB_PROFILE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
@@ -17,21 +18,23 @@ import seedu.address.logic.descriptors.EditApplicantDescriptor;
 import seedu.address.model.Model;
 import seedu.address.model.applicant.Applicant;
 
-
-
+/**
+ * Edits an existing applicant's particulars using its displayed index in the applicant book.
+ */
 public class EditApplicantCommand extends Command {
 
     public static final String COMMAND_WORD = "edit-applicant";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the applicant identified "
             + "by the index number used in the displayed applicant list. "
-            + "Existing values will be overwritten by the input values."
+            + "Existing values will be overwritten by the input values." + "\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_POSITION + "POSITION] "
+            + "[" + PREFIX_GITHUB_PROFILE + "GITHUB_PROFILE]" + "\n"
             + "Example: " + COMMAND_WORD + " 2 "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com ";
@@ -45,8 +48,10 @@ public class EditApplicantCommand extends Command {
     private final EditApplicantDescriptor editApplicantDescriptor;
 
     /**
-     * @param index of the applicant in the filtered applicant list to edit
-     * @param editApplicantDescriptor details to edit the applicant with
+     * Constructor of an EditApplicantCommand.
+     *
+     * @param index Index of the applicant in the filtered applicant list to edit.
+     * @param editApplicantDescriptor The details for the applicant to be edited.
      */
     public EditApplicantCommand(Index index, EditApplicantDescriptor editApplicantDescriptor) {
         requireNonNull(index);
@@ -74,9 +79,11 @@ public class EditApplicantCommand extends Command {
         Applicant applicantToEdit = lastShownList.get(index.getZeroBased());
         Applicant editedApplicant = editApplicantDescriptor.createEditedApplicant(applicantToEdit, model);
 
-
-
         if (!applicantToEdit.isSameApplicant(editedApplicant) && model.hasApplicant(editedApplicant)) {
+            throw new CommandException(MESSAGE_DUPLICATE_APPLICANT);
+        }
+
+        if (applicantToEdit.equals(editedApplicant)) {
             throw new CommandException(MESSAGE_DUPLICATE_APPLICANT);
         }
 
@@ -110,6 +117,4 @@ public class EditApplicantCommand extends Command {
         return index.equals(e.index)
                 && editApplicantDescriptor.equals(e.editApplicantDescriptor);
     }
-
-
 }

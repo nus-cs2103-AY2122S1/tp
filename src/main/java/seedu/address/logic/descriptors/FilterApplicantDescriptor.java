@@ -2,8 +2,6 @@ package seedu.address.logic.descriptors;
 
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.applicant.Application.ApplicationStatus;
@@ -20,7 +18,9 @@ public class FilterApplicantDescriptor {
     public FilterApplicantDescriptor() {}
 
     /**
-     * Copy constructor.
+     * A constructor copying an existing FilterApplicantDescriptor.
+     *
+     * @param toCopy The FilterApplicantDescriptor to be copied from.
      */
     public FilterApplicantDescriptor(FilterApplicantDescriptor toCopy) {
         setPositionTitle(toCopy.positionTitle);
@@ -76,9 +76,8 @@ public class FilterApplicantDescriptor {
 
     @Override
     public String toString() {
-        Stream<String> filterDescriptions = Stream.of(getPositionTitle(), getApplicationStatus())
-                .flatMap(Optional::stream)
-                .map(filter -> filter.getClass().getSimpleName() + ": " + filter);
-        return filterDescriptions.collect(Collectors.joining("; ", "", "."));
+        return String.join(", ",
+                getPositionTitle().map(title -> " Position: " + title).orElse("")
+                + getApplicationStatus().map(status -> " Status: " + status).orElse(""));
     }
 }

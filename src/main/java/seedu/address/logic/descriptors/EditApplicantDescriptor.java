@@ -12,11 +12,12 @@ import seedu.address.model.applicant.Application;
 import seedu.address.model.applicant.Email;
 import seedu.address.model.applicant.Name;
 import seedu.address.model.applicant.Phone;
+import seedu.address.model.applicant.ProfileUrl;
 import seedu.address.model.position.Position;
 import seedu.address.model.position.Title;
 
 /**
- * Stores the details to edit the applicant with. Each non-empty field value will replace the
+ * Stores the details to edit an applicant with. Each non-empty field value will replace the
  * corresponding field value of the position.
  */
 public class EditApplicantDescriptor {
@@ -27,12 +28,15 @@ public class EditApplicantDescriptor {
     private Address address;
     private Application application;
     private Title title;
+    private ProfileUrl gitHubUrl;
 
     public EditApplicantDescriptor() {}
 
     /**
      * Copy constructor.
      * A defensive copy of {@code tags} is used internally.
+     *
+     * @param toCopy The EditApplicantDescriptor to be copied from.
      */
     public EditApplicantDescriptor(EditApplicantDescriptor toCopy) {
         setName(toCopy.name);
@@ -41,13 +45,14 @@ public class EditApplicantDescriptor {
         setAddress(toCopy.address);
         setApplication(toCopy.application);
         setTitle(toCopy.title);
+        setGitHubProfile(toCopy.gitHubUrl);
     }
 
     /**
      * Returns true if at least one field is edited.
      */
     public boolean isAnyFieldEdited() {
-        return CollectionUtil.isAnyNonNull(name, phone, email, address, application, title);
+        return CollectionUtil.isAnyNonNull(name, phone, email, address, application, title, gitHubUrl);
     }
 
     public void setName(Name name) {
@@ -98,11 +103,27 @@ public class EditApplicantDescriptor {
         return Optional.ofNullable(title);
     }
 
+    public void setGitHubProfile(ProfileUrl gitHubUrl) {
+        this.gitHubUrl = gitHubUrl;
+    }
+
+    /**
+     * Returns the github url as an optional object. Since ProfileUrl already has its own null-handling, this will
+     * never be an empty optional.
+     *
+     * @return optional object containing a profile url.
+     */
+    public Optional<ProfileUrl> getGitHubUrl() {
+        return Optional.ofNullable(gitHubUrl);
+    }
 
     /**
      * Creates and returns a {@code Applicant} with the details of {@code applicantToEdit}
      * edited with {@code editApplicantDescriptor}.
      * This version has application information.
+     *
+     * @param applicantToEdit The applicant whose details will change.
+     * @return The applicant with changed details.
      */
     public Applicant createEditedApplicant(Applicant applicantToEdit) {
         requireNonNull(applicantToEdit);
@@ -111,18 +132,22 @@ public class EditApplicantDescriptor {
         Email updatedEmail = getEmail().orElse(applicantToEdit.getEmail());
         Address updatedAddress = getAddress().orElse(applicantToEdit.getAddress());
         Application updatedApplication = getApplication().orElse(applicantToEdit.getApplication());
+        ProfileUrl updatedGitHubUrl = getGitHubUrl().orElse(applicantToEdit.getGitHubUrl());
 
-        return new Applicant(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedApplication);
+        return new Applicant(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedApplication,
+                updatedGitHubUrl);
     }
 
     /**
      * Creates and returns a {@code Applicant} with the details of {@code applicantToEdit}
      * edited with {@code editApplicantDescriptor}.
      * This version has only title information.
+     *
+     * @param applicantToEdit The applicant whose details will change.
+     * @model model The current state of the model.
+     * @return The applicant with changed details.
      */
     public Applicant createEditedApplicant(Applicant applicantToEdit, Model model) {
-        assert getApplication().isEmpty() : "This method is used when there is no application information";
-
         requireNonNull(applicantToEdit);
         Name updatedName = getName().orElse(applicantToEdit.getName());
         Phone updatedPhone = getPhone().orElse(applicantToEdit.getPhone());
@@ -130,9 +155,11 @@ public class EditApplicantDescriptor {
         Address updatedAddress = getAddress().orElse(applicantToEdit.getAddress());
 
         Title title = getTitle().orElse(applicantToEdit.getTitle());
+        Position updatedPosition = model.getPositionWithTitle(title);
 
-        Position updatedPosition = model.getPositionByTitle(title);
-        return new Applicant(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedPosition);
+        ProfileUrl updatedGitHubUrl = getGitHubUrl().orElse(applicantToEdit.getGitHubUrl());
+        return new Applicant(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedPosition,
+                updatedGitHubUrl);
     }
 
     @Override
@@ -154,6 +181,7 @@ public class EditApplicantDescriptor {
                 && getPhone().equals(e.getPhone())
                 && getEmail().equals(e.getEmail())
                 && getAddress().equals(e.getAddress())
-                && getApplication().equals(e.getApplication());
+                && getApplication().equals(e.getApplication())
+                && getGitHubUrl().equals(e.getGitHubUrl());
     }
 }

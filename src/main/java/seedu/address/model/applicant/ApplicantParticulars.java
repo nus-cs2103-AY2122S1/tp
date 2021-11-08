@@ -11,16 +11,19 @@ public class ApplicantParticulars {
     private final Email email;
     private final Address address;
     private final Title positionTitle;
+    private ProfileUrl gitHubUrl;
 
     /**
      * Constructor for an ApplicantParticulars object.
      */
-    public ApplicantParticulars(Name name, Phone phone, Email email, Address address, Title positionTitle) {
+    public ApplicantParticulars(Name name, Phone phone, Email email, Address address, Title positionTitle,
+                                ProfileUrl gitHubUrl) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.positionTitle = positionTitle;
+        this.gitHubUrl = gitHubUrl;
     }
 
     public Name getName() {
@@ -41,5 +44,9 @@ public class ApplicantParticulars {
 
     public Title getPositionTitle() {
         return positionTitle;
+    }
+
+    public ProfileUrl getGitHubUrl() {
+        return gitHubUrl;
     }
 }

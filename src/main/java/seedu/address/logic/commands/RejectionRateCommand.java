@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.commands.AddApplicantCommand.MESSAGE_NO_SUCH_POSITION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -16,22 +17,20 @@ public class RejectionRateCommand extends Command {
     public static final String COMMAND_WORD = "rate";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Returns the rejection rate of position specified.\n"
+            + ": Returns the rejection rate of position specified." + "\n"
             + "Parameters: "
-            + PREFIX_POSITION + "POSITION \n"
+            + PREFIX_POSITION + "POSITION" + "\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_POSITION + "software engineer";
 
-    public static final String MESSAGE_SUCCESS = "Rejection rate for %1$s = %2$f%%";
-
-    public static final String MESSAGE_NO_SUCH_POSITION = "There is no such position in MrTechRecruiter";
+    public static final String MESSAGE_SUCCESS = "Rejection rate for %1$s = %2$.2f%%";
 
     public static final String MESSAGE_NO_CURRENT_APPLICANTS = "There are currently no applicants for this position.";
 
     private final Title positionTitle;
 
     /**
-     * Creates an RejectionRateCommand to get the specified rejection rate.
+     * Creates an RejectionRateCommand according to the specified {@code positionTitle}.
      */
     public RejectionRateCommand(Title positionTitle) {
         requireNonNull(positionTitle);

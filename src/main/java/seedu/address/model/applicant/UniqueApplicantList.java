@@ -3,9 +3,9 @@ package seedu.address.model.applicant;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.function.Predicate;
 
 import javafx.collections.FXCollections;
@@ -47,7 +47,28 @@ public class UniqueApplicantList implements Iterable<Applicant> {
      */
     public boolean containsApplicantWithName(Name toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(applicant -> applicant.getName().equals(toCheck));
+        return internalList.stream().anyMatch(applicant -> applicant.hasName(toCheck));
+    }
+
+    /**
+     * Returns true if the list contains applicants applying to {@code position}.
+     */
+    public boolean hasApplicantsApplyingTo(Position position) {
+        requireNonNull(position);
+        return internalList.stream().anyMatch(applicant -> applicant.isApplyingTo(position));
+    }
+
+    /**
+     * Returns the applicant in the list with the specified name, if any.
+     *
+     * @throws ApplicantNotFoundException If not found.
+     */
+    public Applicant getApplicantWithName(Name name) {
+        requireNonNull(name);
+        return internalList.stream()
+                .filter(applicant -> applicant.hasName(name))
+                .findFirst()
+                .orElseThrow(ApplicantNotFoundException::new);
     }
 
     /**
@@ -102,14 +123,13 @@ public class UniqueApplicantList implements Iterable<Applicant> {
     }
 
     /**
-     * Updates all applicants applying to {@code positionToEdit} with {@code editedPosition}
+     * Updates all applicants applying to {@code positionToEdit} with {@code editedPosition}.
      */
     public void updateApplicantsWithPosition(Position positionToEdit,
                                              Position editedPosition) {
-        ListIterator<Applicant> iterator = internalList.listIterator();
+        List<Applicant> copiedList = new ArrayList<>(internalList);
 
-        while (iterator.hasNext()) {
-            Applicant applicant = iterator.next();
+        for (Applicant applicant : copiedList) {
             if (!applicant.isApplyingTo(positionToEdit)) {
                 continue;
             }
@@ -126,7 +146,6 @@ public class UniqueApplicantList implements Iterable<Applicant> {
             add(updatedApplicant);
         }
 
-        //internalList.stream().filter(applicant -> isApplyingTo(positionToEdit))
     }
 
     public void setApplicants(UniqueApplicantList replacement) {

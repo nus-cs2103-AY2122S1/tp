@@ -10,8 +10,8 @@ import seedu.address.model.position.Title;
 import seedu.address.model.position.UniquePositionList;
 
 /**
- * Wraps all position data at the position-book level
- * Duplicates are not allowed (by .isSamePosition comparison)
+ * Wraps all position data at the position-book level.
+ * Duplicates are not allowed (by .isSamePosition comparison).
  */
 public class PositionBook implements ReadOnlyPositionBook {
 
@@ -30,7 +30,7 @@ public class PositionBook implements ReadOnlyPositionBook {
     public PositionBook() {}
 
     /**
-     * Creates an PositionBook using the Positions in the {@code toBeCopied}
+     * Creates an PositionBook using the Positions in the {@code toBeCopied}.
      */
     public PositionBook(ReadOnlyPositionBook toBeCopied) {
         this();
@@ -57,7 +57,6 @@ public class PositionBook implements ReadOnlyPositionBook {
     }
 
     //// position-level operations
-
     /**
      * Returns true if a position with the same identity as {@code position} exists in the position book.
      */
@@ -82,10 +81,9 @@ public class PositionBook implements ReadOnlyPositionBook {
         positions.add(p);
     }
 
-    @Override
-    public Position getPositionByTitle(Title title) {
+    public Position getPositionWithTitle(Title title) {
         requireNonNull(title);
-        return positions.getPositionByTitle(title);
+        return positions.getPositionWithTitle(title);
     }
 
     /**
@@ -110,7 +108,6 @@ public class PositionBook implements ReadOnlyPositionBook {
 
 
     //// util methods
-
     @Override
     public String toString() {
         return positions.asUnmodifiableObservableList().size() + " positions";

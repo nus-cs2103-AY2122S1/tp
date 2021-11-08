@@ -15,12 +15,15 @@ public class FindApplicantCommand extends Command {
     public static final String COMMAND_WORD = "find-applicant";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all applicants whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
+            + "the specified keywords (case-insensitive) and displays them as a list with index numbers." + "\n"
+            + "Parameters: KEYWORD [MORE_KEYWORDS]..." + "\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";
 
     private final NameContainsKeywordsPredicate predicate;
 
+    /**
+     * Creates a FindApplicantCommand according to the specified {@code predicate}.
+     */
     public FindApplicantCommand(NameContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
@@ -39,5 +42,4 @@ public class FindApplicantCommand extends Command {
                 || (other instanceof FindApplicantCommand // instanceof handles nulls
                 && predicate.equals(((FindApplicantCommand) other).predicate)); // state check
     }
-
 }

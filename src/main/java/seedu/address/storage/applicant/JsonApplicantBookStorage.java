@@ -41,8 +41,8 @@ public class JsonApplicantBookStorage implements ApplicantBookStorage {
     /**
      * Similar to {@link #readApplicantBook(ReadOnlyPositionBook positionBook)}.
      *
-     * @param filePath location of the applicant data. Cannot be null.
-     * @throws DataConversionException if the file is not in the correct format.
+     * @param filePath File path of the applicant data. Cannot be null.
+     * @throws DataConversionException If the file is not in the correct format.
      */
     public Optional<ReadOnlyApplicantBook> readApplicantBook(Path filePath, ReadOnlyPositionBook positionBook) throws
             DataConversionException {
@@ -71,7 +71,7 @@ public class JsonApplicantBookStorage implements ApplicantBookStorage {
     /**
      * Similar to {@link #saveApplicantBook(ReadOnlyApplicantBook)}.
      *
-     * @param filePath location of the applicant data. Cannot be null.
+     * @param filePath File path of the applicant data. Cannot be null.
      */
     public void saveApplicantBook(ReadOnlyApplicantBook applicantBook, Path filePath) throws IOException {
         requireNonNull(applicantBook);

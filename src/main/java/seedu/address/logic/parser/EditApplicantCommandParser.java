@@ -4,32 +4,33 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GITHUB_PROFILE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
-
-import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditApplicantCommand;
 import seedu.address.logic.descriptors.EditApplicantDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.applicant.ProfileUrl;
 import seedu.address.model.position.Title;
 
-
+/**
+ * Parses input arguments and creates a new EditApplicantCommand object.
+ */
 public class EditApplicantCommandParser implements Parser<EditApplicantCommand> {
-
     /**
      * Parses the given {@code String} of arguments in the context of the EditApplicantCommand
      * and returns an EditApplicantCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     *
+     * @throws ParseException If the user input does not conform the expected format.
      */
-
     public EditApplicantCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_POSITION);
+                        PREFIX_POSITION, PREFIX_GITHUB_PROFILE);
 
         Index index;
         Title positionTitle;
@@ -44,21 +45,25 @@ public class EditApplicantCommandParser implements Parser<EditApplicantCommand> 
         EditApplicantDescriptor editApplicantDescriptor = new EditApplicantDescriptor();
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editApplicantDescriptor.setName(ApplicantParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+            editApplicantDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            editApplicantDescriptor.setPhone(ApplicantParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
+            editApplicantDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
         }
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            editApplicantDescriptor.setEmail(ApplicantParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
+            editApplicantDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
         }
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            editApplicantDescriptor.setAddress(ApplicantParserUtil
+            editApplicantDescriptor.setAddress(ParserUtil
                     .parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
         if (argMultimap.getValue(PREFIX_POSITION).isPresent()) {
-            positionTitle = ApplicantParserUtil.parseTitle(argMultimap.getValue(PREFIX_POSITION).get());
+            positionTitle = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_POSITION).get());
             editApplicantDescriptor.setTitle(positionTitle);
+        }
+        if (argMultimap.getValue(PREFIX_GITHUB_PROFILE).isPresent()) {
+            ProfileUrl githubProfile = ParserUtil.parseUrl(argMultimap.getValue(PREFIX_GITHUB_PROFILE).get());
+            editApplicantDescriptor.setGitHubProfile(githubProfile);
         }
 
         if (!editApplicantDescriptor.isAnyFieldEdited()) {
@@ -66,14 +71,5 @@ public class EditApplicantCommandParser implements Parser<EditApplicantCommand> 
         }
 
         return new EditApplicantCommand(index, editApplicantDescriptor);
-
-    }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }
