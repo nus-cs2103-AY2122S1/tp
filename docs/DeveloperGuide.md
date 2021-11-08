@@ -296,7 +296,7 @@ Given below is an example of what happens when the user attempts to add a progre
 
 Below is the sequence diagram that depicts the parsing of the `add -p 2 Did Homework​` command:
 
-![ParseAddProgress](images/ParseAddProgressSequenceDiagram.png)
+![ParseAddProgress](images/ParseAddProgressCommandSequenceDiagram.png)
 
 1. `LogicManager#execute()` is executed, where the above user input is passed into `TutorAidParser#parseCommand()`.
 
@@ -311,8 +311,9 @@ Below is the sequence diagram that depicts the parsing of the `add -p 2 Did Home
 
 Below is the sequence diagram that depicts how `AddProgressCommand` gets the student to edit and then add the progress to the student:
 
-![GetStudentToAddProgress](images/GetStudentToAddProgressSequenceDiagram.png)
+![GetStudentToAddProgress](images/AddProgressToStudentSequenceDiagram.png)
 
+{:start="5"}
 5. `LogicManager#execute()` then calls upon `AddProgressCommand#execute()`. It communicates with the `Model` to get the index-specified `Student` instance.
 
 6. `AddProgressCommand` calls the `Student#addProgress()` to add the new progress to the specified student.
@@ -459,7 +460,7 @@ Below is the sequence diagram that depicts the adding of the newly created `Less
 
 #### Implementation
 
-The add student(s) to lesson(s) feature adds existing student(s) into existing lesson(s) in TutorAid. This feature allows the addition of multiple students into multiple lessons in a single command. For each student-lesson pair, if the student already attends the lesson, a warning will be given, otherwise a success message will be shown. This means that there can be simultaneously many warnings and success messages after one single add student to lesson command.
+This feature adds existing student(s) into existing lesson(s) in TutorAid. This feature allows the addition of multiple students into multiple lessons in a single command. For each student-lesson pair, if the student already attends the lesson, a warning will be given, otherwise a success message will be shown. This means that there can be simultaneously many warnings and success messages after one single `AddStudentToLessonCommand`.
 
 This feature implements the following operations:
 * `AddStudentToLessonCommand#execute()` —Adds some existing `Student` objects to some existing `Lessons` objects and vice versa.
@@ -476,7 +477,7 @@ Given below is an example of what happens when the user attempts to add some stu
 
 Below is the sequence diagram that depicts the parsing of the `add -sl` command:
 
-![ParseAddStudentToLesson](images/ParseAddStudentToLessonSequenceDiagram.png)
+![ParseAddStudentToLesson](images/ParseAddStudentToLessonCommandSequenceDiagram.png)
 
 1. `LogicManager#execute()` is executed, where the above user input is passed into `TutorAidParser#parseCommand()`.
 
@@ -493,6 +494,7 @@ Below is the sequence diagram that depicts how `AddStudentToLessonCommand` gets 
 
 ![AddStudentToLesson](images/AddStudentToLessonSequenceDiagram.png)
 
+{:start="5"}
 5. `LogicManager#execute()` then calls upon `AddStudentToLessonCommand#execute()`. It then loops through each studentIndex-lessonIndex pair and call another method of its own `AddStudentToLessonCommand#executeSingle()` to communicates with the `Model` to get the index-specified `Student` instance and `Lesson` instance.
 
 6. For each student-lesson pair, `AddStudentToLessonCommand#executeSingle()` calls the `Lesson#addStudent()` to add the student to the lesson and `Student#addLesson()` to add the lesson to the student if the student is not attending the lesson.
