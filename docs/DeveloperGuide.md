@@ -6,6 +6,7 @@ title: Developer Guide
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Acknowledgements**
 
@@ -18,6 +19,7 @@ title: Developer Guide
 Refer to the guide [_Setting up and Getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Design**
 
@@ -152,6 +154,7 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Implementation**
 
@@ -346,6 +349,7 @@ Add support for a custom recurrence of lessons. Right now it is guaranteed that 
 what many of our users require, but the ability to customise can be useful.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -374,6 +378,7 @@ what many of our users require, but the ability to customise can be useful.
 **Value proposition**: manage students' relevant details and tasks to be assigned faster than a typical mouse/GUI driven app.
 The app is purely offline, and does not include any online feature.
 
+<div style="page-break-after: always;"></div>
 
 ### User stories
 
