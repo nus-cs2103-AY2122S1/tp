@@ -5,6 +5,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import java.util.Arrays;
 
 import seedu.address.logic.commands.FindGroupCommand;
+import seedu.address.logic.commands.FindStudentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.group.GroupContainsKeywordsPredicate;
 
@@ -26,9 +27,15 @@ public class FindGroupCommandParser implements Parser<FindGroupCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindGroupCommand.MESSAGE_USAGE));
         }
 
-        String[] nameKeywords = trimmedArgs.split("\\s+");
+        String[] nameKeywords = trimmedArgs.split("\\s+");;
+        String[] filteredKeywords = Arrays.stream(nameKeywords).filter(x -> !x.isBlank()).toArray(String[]::new);
 
-        return new FindGroupCommand(new GroupContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        if (filteredKeywords.length == 0) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindStudentCommand.MESSAGE_USAGE));
+        }
+
+        return new FindGroupCommand(new GroupContainsKeywordsPredicate(Arrays.asList(filteredKeywords)));
     }
 
 }
