@@ -29,7 +29,7 @@ import donnafin.storage.StorageManager;
 import donnafin.testutil.Assert;
 import javafx.collections.ObservableList;
 
-public class UiManagerTest {
+public class UiManagerIntegrationTest {
 
     @TempDir
     public Path temporaryFolder;
