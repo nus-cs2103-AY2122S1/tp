@@ -469,7 +469,7 @@ The following activity diagram shows what happens when a user executes the `mark
 
 #### Design considerations:
 
-**Aspect: How mark & unmark executes:**
+**Aspect: How mark & unmark executes**
 
 * **Alternative 1 (current choice):** Uses index to mark attendance.
     * Pros: Easy to implement (e.g there will be no two members with the same index in list, so there will be no
@@ -534,11 +534,12 @@ The following activity diagram summarizes what happens when a user enters and ex
     * Cons: Compromising user experience as finding a member with only one attribute may generate a large list if there are many matching members.
 
 ### Import members feature
+The import feature allows users to add and update the details of multiple members without having to repeatedly do so individually. 
 
 #### Implementation
 
 The import member mechanism is facilitated by `ModelManager` and `SportsPa`. `ModelManager` has access to SportsPA's
-data from the `SportsPa` object, from which member data will be read from when the `import` command is requested by the user.
+data from the `SportsPa` object, from which member data will be read from when the <kbd>import</kbd> command is requested by the user.
 
 **Before going further, here are some terms used that you should take note of:**
 * "invalid import" in this context refers to an imported member having the same name as an 
@@ -553,17 +554,17 @@ existing member AND the same phone number as another existing member.
 
 Given below is an example usage scenario and how the import mechanism behaves.
 
-Step 1. The user launches the application for the first time. The user then executes the command `addm n/Bob p/12345678`,
+Step 1. The user launches the application for the first time. The user then executes the command <kbd>addm n/Bob p/12345678</kbd>,
 which adds a member called Bob with a phone number 12345678 into the member list.
 
 ![ImportStep1ObjectDiagram](images/ImportStep1ObjectDiagram.png)
 
-Step 2. The user then realises he has many more members to add and wants to use the `import` command. He prepares a CSV file
+Step 2. The user then realises he has many more members to add and wants to use the <kbd>import</kbd> command. He prepares a CSV file
 called `myFile.csv` to import the members from. 
 
 ![CSVFileScreenShot](images/ImportImplementationCsv.png)
 
-Step 3. The user executes the command `import myFile.csv` to import the members from the CSV file. The `import` command first 
+Step 3. The user executes the command <kbd>import myFile.csv</kbd> to import the members from the CSV file. The <kbd>import</kbd> command first 
 parses the CSV file using a private method `ImportCommand#parseCsv()`, which returns a list of `Member` objects to be imported.
 
 After which, the command iterates through the list of `Member` objects. Each iteration goes as such:
@@ -589,13 +590,13 @@ The following sequence diagram shows how the import command works.
 
 ![ImportSequenceDiagram](images/ImportSequenceDiagram.png)
 
-The following activity diagram summarizes what happens when a user executes the `import` command:
+The following activity diagram summarizes what happens when a user executes the <kbd>import</kbd> command:
 
 <img src="images/ImportActivityDiagram.png" width="250" />
 
 #### Design Considerations:
 
-**Aspect: how to deal with invalid imports:**
+**Aspect: how to deal with invalid imports**
 * **Alternative 1 (current choice):** Skip the invalid imports and notify the user of the invalid imports.
   * Pros: Easy to implement and users will be able to know which imports they need to rectify.
   * Cons: Might not be the desired interaction users want.
@@ -1355,7 +1356,7 @@ The test cases are similar to those of [Deleting a member](#deleting-a-member).
     1. Prerequisites: List all members using the <kbd>listf</kbd> command. One or more members are in the list and the list does
        not contain any members with the same names as those in the test cases below.
 
-    2. Test case: <kbd>editf 1 n/Court 3 t/1800`</kbd><br>
+    2. Test case: <kbd>editf 1 n/Court 3 t/1800</kbd><br>
        Expected: First facility's name is changed to Adam and time is changed to 6pm. 
        Details of the edited facility is shown in the status message.
 

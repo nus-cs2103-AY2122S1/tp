@@ -37,7 +37,7 @@ ________________________________________________________________________________
 
 You can click on the links in the [Table of Contents](#table-of-contents) to quickly navigate to your desired location in
 this User Guide. A link to return to the [Table of Contents](#table-of-contents) is also provided at the end of every section.
-<br>
+<br><br>
 The table below summarizes the meaning of the icons and text styles used throughout this User Guide.
 <br>
 
@@ -126,8 +126,11 @@ Parameter | The argument proceeding the prefix
 
 To illustrate the above, we will use the edit member command:<br>
 `editm 1 n/John Doe p/92315540 d/2 3 t/exco`<br>
-`editm` is the command word and `1` is the preamble representing the index of the member to edit.`n/` `p/` `d/` `t/` are the prefixes and
-`John Doe`, `92315540`, `2 3`, `exco` are the parameters.<br>
+* `editm` is the command word
+* `1` is the preamble representing the index of the member to edit
+* `n/` `p/` `d/` `t/` are the prefixes
+* `John Doe`, `92315540`, `2 3`, `exco` are the parameters <br>
+
 The add member command also follows a similar format, but without the preamble:<br>
 `addm n/John Doe p/92315540 t/exco`
 
@@ -137,7 +140,7 @@ Member-Specific prefixes:
 
 Prefix        | Parameter                    | Requirements
 ----------------- | ------------------|------------------
-`p/ `             | `PHONE`             | Maximum of 15 digits
+`p/`             | `PHONE`             | Minimum of 3 digits and maximum of 15 digits
 `d/`              | `DAY(S)`              | Integer, 1-7 only, 1 represents Monday, 2 represents Tuesday etc.
 `t/`              | `TAG`            | Maximum of 20 alphanumeric characters and spaces
 `tda/` | `TODAY_ATTENDANCE`       | `true` for present or `false` for absent
@@ -677,7 +680,7 @@ Examples:
 #### Allocating a member to a facility: `allocate`
 
 If the allocations of the `split` command are undesirable, you can manually allocate a member to a facility
-using `allocate`
+using `allocate`.
 
 Format: `allocate MEMBER_INDEX FACILITY_INDEX DAY`
 
