@@ -1,0 +1,33 @@
+@startuml
+!include style.puml
+skinparam defaultFontSize 20
+
+mainframe **sd** Updating of filtered and sorted friends list
+
+box Logic LOGIC_COLOR_T1
+Participant ":RecommendCommand" as RecommendCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+Participant ":Model" as Model MODEL_COLOR
+Participant ":SortedList" as SortedList MODEL_COLOR
+Participant ":FilteredList" as FilteredList MODEL_COLOR
+end box
+
+RecommendCommand -> Model: updateFilteredAndSortedFriendsList(predicate, friendSkillValueComparator)
+activate Model
+
+Model -> SortedList: setComparator(friendSkillValueComparator)
+activate SortedList
+Model <-- SortedList
+deactivate SortedList
+
+Model -> FilteredList: setPredicate(predicate)
+activate FilteredList
+Model <-- FilteredList
+deactivate FilteredList
+
+RecommendCommand <-- Model
+deactivate Model
+
+@enduml
