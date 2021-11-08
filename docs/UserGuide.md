@@ -349,7 +349,7 @@ Sorts the tasks in the task list of Uni-Fy.
 <div markdown="block" class="alert alert-primary">
 
 **:clipboard: Format:**<br>
-- `sort x/(time or priority) o/(asc or desc)`
+- `sort x/(sort_by) o/(sort_order)`
 </div>
 
 
