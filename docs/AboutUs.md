@@ -55,7 +55,7 @@ You can reach us at the email `vishnu04@comp.nus.edu.sg`
 <img src="images/juliussneezer04.png" width="200px">
 
 [[github](http://github.com/juliussneezer04)]
-[[portfolio](team/vishnusundaresan.md)]
+[[portfolio](team/juliussneezer04.md)]
 
 * Role: Developer
 * Responsibilities: Deliverables + Scheduling & Tracking
