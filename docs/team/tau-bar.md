@@ -78,7 +78,7 @@ Given below are my contributions to the project.
         * Updated UI screenshot for gitGud v1.4.
 
 #### Review/mentoring contributions (with non-trivial comments):
-1. [Discovery of hidden bug in the `friend --add` functionality](https://github.com/AY2122S1-CS2103T-W13-4/tp/pull/58)
+1. [Discovery of hidden bug in the `friend --add` functionality](https://github.com/AY2122S1-CS2103T-W13-4/tp/pull/61)
 2. [Extensive review of DG Use Cases PR](https://github.com/AY2122S1-CS2103T-W13-4/tp/pull/262)
 
 #### Contributions beyond project team:
