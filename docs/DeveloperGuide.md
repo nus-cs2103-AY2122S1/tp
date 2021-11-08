@@ -276,6 +276,30 @@ The following sequence diagram visually describes the steps above:
   * Cons: Navigatability is reduced significantly
 
 
+###  Filter feature
+
+#### Implementation
+The filter mechanism utilizes the same concept as other commands like `find` with some tweaks.
+
+Given below is an example usage scenario and how the filter mechanism behaves at each step.
+
+Step 1. The user inputs the command `filter f/computing`
+
+Step 2. The command passes through the `LogicManager`. `LogicManager` creates a `AddressBookParser` which would help to parse and tokenize the command.
+
+Step 3. `AddressBookParser` sees that it's a filter command and creates an `FilterCommandParser` object.
+
+Step 4. `FilterCommandParser` helps to extract out the tokens and generate a `FilterCommand`. The input validation is mostly done at this stage.
+
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** Most input validation will be done at this stage.
+</div>
+
+The following sequence diagram visually describes the steps above:
+
+![InteractionSequenceDiagram](images/FilterCommandSequenceDiagram.png)
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
