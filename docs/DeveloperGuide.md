@@ -627,7 +627,7 @@ success.
 
 
 This sequence diagram shows how the `purge` command works:
-![PurgeSequenceDiagram](images/commands/PurgeCommand/PurgeCommandSequenceDiagram.png)
+![PurgeSequenceDiagram](images/commands/PurgeCommand/PurgeSequenceDiagram.png)
 
 
 --------------------------------------------------------------------------------------------------------------------
