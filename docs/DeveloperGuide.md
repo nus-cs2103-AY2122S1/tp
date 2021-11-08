@@ -380,6 +380,10 @@ The following sequence diagram shows how the split mechanism works.
 The lifelines should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
+The following activity diagram summarizes what happens when a user executes the `split` command:
+
+<img src="images/SplitActivityDiagram.png" width="350" />
+
 #### Design considerations:
 
 **Aspect: Format of values in `Availability`**
@@ -453,14 +457,9 @@ The following sequence diagram shows how the mark attendance operation works.
 The lifeline for `MarkCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
-The following activity diagram summarizes what happens when a user executes the `import` command:
-
-<img src="images/SplitActivityDiagram.png" width="350" />
-
 The unmark command does the opposite — it calls the `ModelManager#unmarkMembersAttendance(List<Index>)`, which then
 calls the `ModelManager#unmarkMembersAttendance(Member)` which decrements the `totalAttendance` and `todayAttendance` of the `Member` 
 to be unmarked via the `Member#setNotPresent()` and `ModelManager` references the newly modified `Member`s.
-
 
 
 #### Design considerations:
