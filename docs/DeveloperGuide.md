@@ -388,7 +388,7 @@ produces the list of friend recommendations.
 
 <ins>Step 3: Displaying the recommended friends</ins> 
 
-The user interface is notified of the changes to the `FilteredList` and `SortedList` managed by the `ModelManager` made in Step 2 
+The user interface is then notified of the changes to the `FilteredList` and `SortedList` managed by the `ModelManager` made in Step 2 
 and is automatically updated to reflect the changes to the user (as explained in the [Model](#34-model-component) component).
 
 Hence, the user sees the displayed list of friend recommendations and this completes the implementation of the recommend feature.  
@@ -398,7 +398,7 @@ Hence, the user sees the displayed list of friend recommendations and this compl
 <ins>Aspect: How should the user be allowed to filter friends timing by?</ins>
 
 The user is able to retrieve an ordered list by skill for friends filtered by a specified game and timing. However, our first 
-design consideration is the format the user should use for specifying the filtered timing.
+design consideration is the format the user should use for specifying the timing to filter by.
 
 Below are the options we could allow the user to filter by: <br> 
 * Option #1: Filter by 24-hour clock and day (i.e. `1000` and `1` to represent `1000` on Monday)
@@ -408,16 +408,19 @@ Below are the options we could allow the user to filter by: <br>
 <ins>Decision</ins>
 
 We decided to limit the filtering to by **hour and day** for 3 main reasons: 
-1. to be consistent with the [schedule](#schedule-feature) feature which uses stores inputs based on hours 
+1. to be consistent with the [schedule](#schedule-feature) feature which stores schedules based on hours 
 2. we found that accuracy to the exact minute is not necessary as our target users (students) usually have weekly schedules based on hourly blocks. 
-3. we avoided the use of the 24-hour clock to be used as a time filter as it can also represent minutes and could potentially mislead users, since `1059` 
-seems to be a valid input but is not supported by our application which only supports schedules in hour blocks(explanation in point #2). 
+3. we avoided the use of the 24-hour clock as a time filter as it can also represent minutes and could potentially mislead users, since `1059` 
+seems to be a valid input but is not supported by our application which only supports schedules in hour blocks(rationale in point #2). 
+
 Hence, we specifically limited the timing filter to hour and day only. 
 
 <ins>Aspect: Implementation of sorting and filtering functionality</ins> 
 
+To implement sorting and filtering of the friends list to be displayed, we had 2 main options: 
 * Option #1: Implement specific sorting and filter methods at the ModelManager class, then invoke them with the specified game and timing as arguments.
-* Option #2: Implement a general `ModelManager#updateFilteredAndSortedFriendsList(Predicate, Comparator)` method and pass in `Predicate` and `Comparator` instances as arguments. 
+* Option #2: Implement a general `ModelManager#updateFilteredAndSortedFriendsList(Predicate, Comparator)` method and pass in 
+`FriendRecommendFilterPredicate` and `Comparator` instances as arguments. 
 
 <ins>Decision</ins>
 
