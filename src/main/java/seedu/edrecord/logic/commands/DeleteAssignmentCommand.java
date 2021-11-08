@@ -24,10 +24,10 @@ public class DeleteAssignmentCommand extends Command {
 
     public static final String MESSAGE_DELETE_ASSIGNMENT_SUCCESS = "Deleted assignment: %1$s";
 
-    private final Index targetIndex;
+    private final Index index;
 
-    public DeleteAssignmentCommand(Index targetIndex) {
-        this.targetIndex = targetIndex;
+    public DeleteAssignmentCommand(Index index) {
+        this.index = index;
     }
 
     @Override
@@ -39,19 +39,22 @@ public class DeleteAssignmentCommand extends Command {
         }
         List<Assignment> assignmentList = model.getAssignmentList();
 
-        if (targetIndex.getZeroBased() >= assignmentList.size()) {
+        if (index.getOneBased() >= model.getAssignmentCounter()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ASSIGNMENT_DISPLAYED_INDEX);
         }
 
-        Assignment assignmentToDelete = assignmentList.get(targetIndex.getZeroBased());
-        model.deleteAssignment(assignmentToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_ASSIGNMENT_SUCCESS, assignmentToDelete));
+        Assignment asgToDelete = assignmentList.stream()
+                .filter(asg -> asg.getId() == index.getOneBased())
+                .findFirst()
+                .orElseThrow(() -> new CommandException(Messages.MESSAGE_INVALID_ASSIGNMENT_DISPLAYED_INDEX));
+        model.deleteAssignment(asgToDelete);
+        return new CommandResult(String.format(MESSAGE_DELETE_ASSIGNMENT_SUCCESS, asgToDelete));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof DeleteAssignmentCommand // instanceof handles nulls
-                && targetIndex.equals(((DeleteAssignmentCommand) other).targetIndex)); // state check
+                && index.equals(((DeleteAssignmentCommand) other).index)); // state check
     }
 }

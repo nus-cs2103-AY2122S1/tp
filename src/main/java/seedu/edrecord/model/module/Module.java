@@ -10,7 +10,6 @@ import seedu.edrecord.model.assignment.UniqueAssignmentList;
 import seedu.edrecord.model.group.Group;
 import seedu.edrecord.model.group.GroupSystem;
 import seedu.edrecord.model.group.ReadOnlyGroupSystem;
-import seedu.edrecord.model.name.Name;
 
 /**
  * Represents a module in EdRecord.
@@ -60,30 +59,14 @@ public class Module {
         this.assignmentList = new UniqueAssignmentList();
     }
 
+    //=========== Module Operations ==========================================================================
+
     public String getCode() {
         return code;
     }
 
-    public GroupSystem getGroupSystem() {
-        return groupSystem;
-    }
-
     public boolean hasAnyGroup() {
         return groupSystem.hasAnyGroup();
-    }
-
-    /**
-     * Returns a view of this module's assignment list as an unmodifiable {@code ObservableList}.
-     */
-    public ObservableList<Assignment> getAssignmentList() {
-        return assignmentList.asUnmodifiableObservableList();
-    }
-
-    /**
-     * Returns a view of this module's class list as an unmodifiable {@code ObservableList}.
-     */
-    public ObservableList<Group> getGroupList() {
-        return groupSystem.getGroupList();
     }
 
     /**
@@ -113,8 +96,21 @@ public class Module {
         return code.equalsIgnoreCase(otherModule.getCode());
     }
 
+    //=========== Group Operations ===========================================================================
+
+    public GroupSystem getGroupSystem() {
+        return groupSystem;
+    }
+
     public void setGroupSystem(ReadOnlyGroupSystem groupSystem) {
         this.groupSystem.resetData(groupSystem);
+    }
+
+    /**
+     * Returns a view of this module's class list as an unmodifiable {@code ObservableList}.
+     */
+    public ObservableList<Group> getGroupList() {
+        return groupSystem.getGroupList();
     }
 
     /**
@@ -137,26 +133,13 @@ public class Module {
         return groupSystem.getGroup(groupCode);
     }
 
-    /**
-     * Returns true if the module contains an assignment that is equivalent to the given assignment.
-     */
-    public boolean hasAssignment(Assignment a) {
-        return assignmentList.contains(a);
-    }
+    //=========== Assignment Operations ======================================================================
 
     /**
-     * Returns true if adding the assignment {@code toAdd} will bring
-     * the total weightage of all assignments to above 100%.
+     * Returns a view of this module's assignment list as an unmodifiable {@code ObservableList}.
      */
-    public boolean isTotalWeightageExceeded(Assignment toAdd) {
-        return assignmentList.isTotalWeightageExceeded(toAdd);
-    }
-
-    /**
-     * Returns an {@code Optional} containing the assignment with the given name, if it exists.
-     */
-    public Optional<Assignment> searchAssignment(Name name) {
-        return assignmentList.searchAssignment(name);
+    public ObservableList<Assignment> getAssignmentList() {
+        return assignmentList.asUnmodifiableObservableList();
     }
 
     /**
@@ -182,6 +165,49 @@ public class Module {
      */
     public void setAssignment(Assignment target, Assignment editedAssignment) {
         assignmentList.setAssignment(target, editedAssignment);
+    }
+
+    /**
+     * Returns true if the module contains an assignment that has the same name as the given assignment.
+     */
+    public boolean hasSameNameAssignment(Assignment a) {
+        return assignmentList.hasSameName(a);
+    }
+
+    /**
+     * Returns true if the module contains an assignment that has the same ID as the given assignment.
+     */
+    public boolean hasSameIdAssignment(Assignment a) {
+        return assignmentList.hasSameId(a);
+    }
+
+    /**
+     * Gets the assignment with the given ID, if it exists.
+     */
+    public Optional<Assignment> getAssignment(int id) {
+        return getAssignmentList().stream().filter(asg -> asg.getId() == id).findFirst();
+    }
+
+    /**
+     * Returns true if adding the assignment {@code toAdd} will bring
+     * the total weightage of all assignments to above 100%.
+     */
+    public boolean isTotalWeightageExceeded(Assignment toAdd) {
+        return assignmentList.isTotalWeightageExceeded(toAdd);
+    }
+
+    /**
+     * Returns the current counter for this module's assignment ID.
+     */
+    public int getAssignmentCounter() {
+        return assignmentList.getAssignmentCounter();
+    }
+
+    /**
+     * Sets the counter for this module's assignment ID to the given value.
+     */
+    public void setAssignmentCounter(int i) {
+        assignmentList.setAssignmentCounter(i);
     }
 
     @Override

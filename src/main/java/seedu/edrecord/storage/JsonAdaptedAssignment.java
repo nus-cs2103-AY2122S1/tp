@@ -19,16 +19,18 @@ public class JsonAdaptedAssignment {
     private final String name;
     private final String weightage;
     private final String maxScore;
+    private final Integer id;
 
     /**
      * Constructs a {@code JsonAdaptedAssignment} with the given details.
      */
     @JsonCreator
     public JsonAdaptedAssignment(@JsonProperty("name") String name, @JsonProperty("weightage") String weightage,
-                                 @JsonProperty("maxScore") String maxScore) {
+                                 @JsonProperty("maxScore") String maxScore, @JsonProperty("id") Integer id) {
         this.name = name;
         this.weightage = weightage;
         this.maxScore = maxScore;
+        this.id = id;
     }
 
     /**
@@ -38,6 +40,7 @@ public class JsonAdaptedAssignment {
         name = source.getName().name;
         weightage = String.valueOf(source.getWeightage().weightage);
         maxScore = String.valueOf(source.getMaxScore().score);
+        id = source.getId();
     }
 
     /**
@@ -72,7 +75,12 @@ public class JsonAdaptedAssignment {
         }
         final Score modelScore = new Score(maxScore);
 
-        return new Assignment(modelName, modelWeightage, modelScore);
+        if (id == null) {
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, "ID"));
+        }
+
+        return new Assignment(modelName, modelWeightage, modelScore, id);
     }
 
 }
