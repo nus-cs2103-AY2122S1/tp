@@ -217,11 +217,11 @@ Finally, defensive coding techniques were used by making a copy of the `AppendPe
 #### 4.1.3 Alternatives
 **Aspect: How the new data fields are implemented:**
 * **Alternative 1 (current choice):** Each `Person` object references their own data field objects. I.e. multiple `Language` objects named "python" may exist, with each object related to a specific `Person`.
-* **Alternative 2 (future implementation):** An alternative implementation (arguably, more object oriented) would be to have a unique data field list for each **optional and mulitple data field**, i.e. skill, programming language, framework, tag, and remark, that `Person` references. This allows us to only require one data field object per unique element, instead of each `Person` needing their own data field objects. See [Model component alternative](#model-component) for more information. 
+* **Alternative 2 (future implementation):** An alternative implementation (arguably, more object oriented) would be to have a unique data field list for each **optional and mulitple data field**, i.e. skill, programming language, framework, tag, and remark, that `Person` references. This allows us to only require one data field object per unique element, instead of each `Person` needing their own data field objects. See [Model component alternative](#34-model-component) for more information. 
 
 **Aspect: How the append command executes:**
 * **Alternative 1 (current choice):** HashSets are currently used for the appending of unique data field objects. The first HashSet is used to store the new data fields to append (provided by input). The second HashSet stores the existing data fields of the specified contact. The third HashSet is used to combine the first and second, and is then set to the target contact's data field HashSet. 
-* **Alternative 2 (future implementation):** An alternative implementation, which uses one data field object per unique element (e.g.  [Model component alternative](#model-component)), would be to append new pointers to a list of existing pointers a `Person` has to various data field elements.
+* **Alternative 2 (future implementation):** An alternative implementation, which uses one data field object per unique element (e.g.  [Model component alternative](#34-model-component)), would be to append new pointers to a list of existing pointers a `Person` has to various data field elements.
 
 **Aspect: How the remove command executes:**
 * **Alternative 1 (current choice):** Similar to the `append` command, the `rm` command also uses HashSets to store indexes and existing data fields. Additionally, the ArrayList data structure was used to implement Java generics for better code quality.
