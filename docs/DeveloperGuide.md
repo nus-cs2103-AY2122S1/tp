@@ -1225,7 +1225,7 @@ Use case resumes from step 2.
     * 1a1. System displays an error, showing unknown command.
     * 1a2. User enters command again. 
       
-Steps 1a1 - 1a2 are repeated until the command is correctly formatted. 
+Steps 1a1 - 1a2 are repeated until the command is correctly formatted. <br>
 Use case resumes from step 2.
 
 * 1b. System detects that there are no reservations made for that date and time
@@ -1248,7 +1248,7 @@ Use case resumes from step 2.
     * 1a1. System displays an error, showing unknown command.
     * 1a2. User enters command again.
   
-Steps 1a1 - 1a2 are repeated until the command is correctly formatted. 
+Steps 1a1 - 1a2 are repeated until the command is correctly formatted. <br>
 Use case resumes from step 2.
 
 * 1b. System detects that there are no reservations made for that date
@@ -1271,7 +1271,7 @@ Use case resumes from step 2.
     * 1a1. System displays an error, showing unknown command.
     * 1a2. User enters command again.
   
-Steps 1a1 - 1a2 are repeated until the command is correctly formatted.
+Steps 1a1 - 1a2 are repeated until the command is correctly formatted. <br>
 Use case resumes from step 2.
 
 * 1b. System detects that there are no reservations made for that time on the current date
