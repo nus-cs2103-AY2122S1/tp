@@ -14,6 +14,8 @@ Given below are my contributions to the project.
    * What it does: Allows the user to also be able to view the doctor list and appointment list in the UI, in addition to the patient list.
    * Justification: This features is essential to our application as the users needs to be able to view the doctors and appointments information in order for the application to be useful.
 
+<div style="page-break-after: always;"></div>
+
 * **New Feature**: Added ability for users to filter appointments ([#115](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/115))
    * What it does: Allows the users to filter through the appointments in the appointment list using filter parameters such as patient name and start date. Users have the option to filter through either all appointments or only the upcoming appointments.
    * Justification: This feature is essential to our application as it allows users to easily and quickly search for the relevant appointments in the appointment list. For instance, users can use this feature to see what appointments are there on a particular day or look through all the appointments a doctor has in order to locate free appointment slots to schedule a new appointment.
@@ -23,9 +25,9 @@ Given below are my contributions to the project.
    * What it is: Allowed the users to quickly view all the appointments a clinic has for the current day.
    * Justification: This feature is essential for the daily operations of a clinic as the clinic receptionists needs to be able to quickly view all the appointmetns for the current day in order to manage the clinic well. 
 
-<div style="page-break-after: always;"></div>
-
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=Haozeee&tabRepo=AY2122S1-CS2103T-T11-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
+
+<div style="page-break-after: always;"></div>
 
 * **Project management**:
     * Created and managed project milestone on Github
