@@ -644,7 +644,7 @@ related to the UI. In addition, the following classes are utilized:
 - `MainWindow.fxml`: for the addition of a 'Download' button on the MainWindow
 - `Popup.css`: for the customisation of styles for pop-up messages
 
-The `download` command works in a similar fashion to the [`show` command](#show-command) in the `Logic` components, except that it does
+The `download` command works in a similar fashion to the [`show` command](#show lab) in the `Logic` components, except that it does
 not require its own parser.
 
 
