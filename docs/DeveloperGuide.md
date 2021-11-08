@@ -229,7 +229,7 @@ illustrates the description for deleting **games**:
 
 <img src="images/DeleteGameSequenceDiagram.png" width="1000" />
 
-#### 4.1.2 Design Considerations:
+#### 4.1.2 Design Considerations
 
 The games of each friend is stored inside a `Map<GameId, GameFriendLinks>`. Before deleting a game, the links a 
 friend has to a game has to be removed, before deleting the game from the list of games.
