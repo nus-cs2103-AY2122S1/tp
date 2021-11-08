@@ -54,7 +54,10 @@ public class ViewGroupCommand extends Command {
             throw new CommandException(Messages.MESSAGE_CLASS_DOES_NOT_EXIST);
         }
 
-
+        // check if tutorial group exists in ClassMATE
+        if (!model.hasTutorialGroup(toView)) {
+            throw new CommandException(Messages.MESSAGE_GROUP_DOES_NOT_EXIST);
+        }
 
         model.updateFilteredStudentList(new GroupMemberPredicate(toView));
         return new CommandResult(

@@ -53,7 +53,7 @@
                       <URL value="@DarkTheme.css" />
                   </stylesheets>
                  <content>
-                 <VBox fx:id="studentList" minWidth="360" prefWidth="520.0" prefHeight="700" styleClass="pane-with-border" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                 <VBox fx:id="studentList" minWidth="360" prefWidth="520.0" prefHeight="900" styleClass="pane-with-border" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                    <padding>
                      <Insets bottom="10" left="10" right="10" top="10" />
                    </padding>
@@ -63,7 +63,7 @@
               </TitledPane>
               <TitledPane collapsible="false" text="Classes" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                  <content>
-                    <VBox fx:id="classList" minWidth="360" prefWidth="520.0" prefHeight="700" styleClass="pane-with-border" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                    <VBox fx:id="classList" minWidth="360" prefWidth="520.0" prefHeight="900" styleClass="pane-with-border" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                       <padding>
                         <Insets bottom="10" left="10" right="10" top="10" />
                       </padding>

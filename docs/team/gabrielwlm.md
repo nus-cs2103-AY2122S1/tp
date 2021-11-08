@@ -47,6 +47,8 @@ Given below are my contributions to the project.
       * IsSameStudent bug [\#130]()
       * Findc bug [\#170]()
       * Viewg bug [\#179]()
+      * Non-existent class/group bug [\#241]()
+      * Documentation bugs [\#170](), [\#220]()
 
 * **Review Contributions**
     * PRs Reviewed with comments: [\#77](), [\#131](), [\#135](), [\#138](), [\#142](), [\#207]()
