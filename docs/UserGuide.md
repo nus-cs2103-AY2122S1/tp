@@ -191,11 +191,11 @@ Views a particular student's details in the Person Panel.
 
 Format: `student -v INDEX`
 
-* Views the student detail specified at `INDEX`. `INDEX` should be a positive number.
+* Views the student details specified at `INDEX`. `INDEX` should be a positive number.
 * `-v` refers to the view command.
 
 Examples:
-* `student -v 3` view the student detail at index 3.
+* `student -v 3` view the student details at index 3.
 
 ![studentview](images/imagesInUG/student-view.png)
 
@@ -203,18 +203,18 @@ Examples:
 
 #### Editing a student: `student -e`
 
-Edits the detail of a student in the Person Panel.
+Edits the details of a student in the Person Panel.
 
 Format: `student -e INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the detail of the student specified by the `INDEX`. `INDEX` should be a
+* Edits the details of the student specified by the `INDEX`. `INDEX` should be a
   positive number and refers to the index number of a student in the list of students.
 * `-e` refers to the edit command
 * It is a requirement that **at least one of the optional fields should be provided**.
 
 Example:
 
-* `student -e 3 p/88888888 e/johnny@mail.com` Edits the phone number and email
+* `student -e 3 p/88888888 e/johnny@mail.com` edits the phone number and email
   address of the third student in the student list to 88888888 and johnny@mail.com
   respectively.
 
@@ -231,7 +231,7 @@ Format: `student -d INDEX`
 
 Examples:
 
-* `student -d 3` deleted the third student in the persons list
+* `student -d 3` deletes the third student in the persons list
 
 #### Listing all students : `list`
 Shows a list of all students in the Person Panel.
@@ -275,7 +275,7 @@ Format: `student -al INDEX s/SUBJECT st/START_TIME et/END_TIME d/DAY`
 </div>
 
 Example:
-* `student -al 1 s/Biology st/08:00 et/09:00 d/Mon` Adds a lesson with the subject name biology
+* `student -al 1 s/Biology st/08:00 et/09:00 d/Mon` adds a lesson with the subject name biology
   starting at 8am and ending at 9am on Mondays.
 
 ![studentaddlesson](images/imagesInUG/student-addlesson.png)
@@ -311,7 +311,7 @@ Format: `student -ae INDEX s/SUBJECT d/DATE_TIME`
 * There are currently no restrictions on `DATE_TIME`, please ensure that the exam dates are correct.
 
 Example:
-* `student -ae 1 s/Math d/2021-12-20 14:00` Adds an exam with the subject name Math
+* `student -ae 1 s/Math d/2021-12-20 14:00` adds an exam with the subject name Math
   on 20th December 2021, 2pm.
 
 
@@ -320,11 +320,11 @@ Example:
 Deletes an exam from the specific student
 
 
-Format: `student -de PERSON_INDEX EXAM_INDEX`
+Format: `student -de STUDENT_INDEX EXAM_INDEX`
 
-* Specifies the student at `PERSON_INDEX`.
+* Specifies the student at `STUDENT_INDEX`.
 * Deletes the specified exam at `EXAM_INDEX` of the student specified.
-* Both `PERSON_INDEX` and `EXAM_INDEX` must be a positive number.
+* Both `STUDENT_INDEX` and `EXAM_INDEX` must be a positive number.
 * The `EXAM_INDEX` can be found by using the [student viewing command](#viewing-a-student-student--v), similarly to
 deleting lessons.
 
@@ -405,7 +405,7 @@ Format: `group -al INDEX s/SUBJECT st/START_TIME et/END_TIME d/DAY`
 </div>
 
 Example:
-* `group -al 1 s/Biology st/08:00 et/09:00 d/Mon` Adds a lesson with the subject name biology
+* `group -al 1 s/Biology st/08:00 et/09:00 d/Mon` adds a lesson with the subject name biology
   starting at 8am and ending at 9am on Mondays.
 
 #### Deleting a lesson from a group: `group -dl`
