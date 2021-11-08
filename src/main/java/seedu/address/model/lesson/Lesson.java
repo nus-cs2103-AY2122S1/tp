@@ -307,7 +307,7 @@ public abstract class Lesson implements Comparable<Lesson> {
          */
         int result = Comparator.comparing(Lesson::getDisplayDate)
                 .thenComparing(Lesson::getTimeRange)
-                .thenComparing(lesson -> lesson.isCancelled())
+                .thenComparing(Lesson::isCancelled)
                 .thenComparing(lesson -> !lesson.isRecurring())
                 .thenComparing(Lesson::getSubject)
                 .compare(this, other);

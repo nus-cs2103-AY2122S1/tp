@@ -158,10 +158,7 @@ public class LessonEditCommand extends UndoableCommand {
         Set<Homework> updatedHomeworkSet = editLessonDescriptor.getHomeworkSet().orElse(lessonToEdit.getHomework());
         LessonRates updatedRate = editLessonDescriptor.getRate().orElse(lessonToEdit.getLessonRates());
 
-        // error if end date is earlier than start date
-        if (updatedEndDate.isBefore(updatedDate)) {
-            throw new CommandException(MESSAGE_INVALID_DATE_RANGE);
-        }
+        validateStartEndDates(updatedDate, updatedEndDate);
 
         OutstandingFees updatedOutstandingFees = editLessonDescriptor.getOutstandingFees()
                 .orElse(lessonToEdit.getOutstandingFees());
@@ -197,7 +194,7 @@ public class LessonEditCommand extends UndoableCommand {
      * @return A set of updated cancelled dates.
      * @throws CommandException If any of the dates to cancel is invalid.
      */
-    private static Set<Date> createUpdatedCancelledDates(Lesson lesson, Set<Date> datesToCancel,
+    private Set<Date> createUpdatedCancelledDates(Lesson lesson, Set<Date> datesToCancel,
                                                          Set<Date> datesToUncancel) throws CommandException {
         assert lesson != null;
         Set<Date> updatedCancelledDates = new HashSet<>(lesson.getCancelledDates());
@@ -224,7 +221,7 @@ public class LessonEditCommand extends UndoableCommand {
      * @param datesToCancel A set of dates to cancel.
      * @throws CommandException If the date to cancel is invalid.
      */
-    private static void validateCancelDates(Lesson lesson, Set<Date> datesToCancel) throws CommandException {
+    private void validateCancelDates(Lesson lesson, Set<Date> datesToCancel) throws CommandException {
         assert lesson != null;
         for (Date date : datesToCancel) {
             // check if date is a lesson date
@@ -241,7 +238,7 @@ public class LessonEditCommand extends UndoableCommand {
      * @param datesToUncancel A set of dates to remove from cancelled dates.
      * @throws CommandException If the date to uncancel is invalid.
      */
-    private static void validateUncancelDates(Set<Date> cancelledDates, Set<Date> datesToUncancel)
+    private void validateUncancelDates(Set<Date> cancelledDates, Set<Date> datesToUncancel)
             throws CommandException {
         for (Date date : datesToUncancel) {
             // check if date is a cancelled date
@@ -251,6 +248,18 @@ public class LessonEditCommand extends UndoableCommand {
         }
     }
 
+    /**
+     * Checks if {@code endDate} is not before {@code startDate}.
+     *
+     * @param startDate The start date of the lesson.
+     * @param endDate The end date of the lesson.
+     * @throws CommandException If the end date is before start date.
+     */
+    private void validateStartEndDates(Date startDate, Date endDate) throws CommandException {
+        if (endDate.isBefore(startDate)) {
+            throw new CommandException(MESSAGE_INVALID_DATE_RANGE);
+        }
+    }
     /**
      * Replaces lesson {@code toEdit} with lesson {@code edited} in {@code lessonList}.
      *
@@ -392,8 +401,10 @@ public class LessonEditCommand extends UndoableCommand {
         }
 
         /**
-         * Sets {@code homeworkSet} to this object's {@code homeworkSet}.
-         * A defensive copy of {@code homeworkSet} is used internally.
+         * Returns an unmodifiable homework set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         *
+         * @return {@code Optional#empty()} if {@code homeworkSet} is null.
          */
         public Optional<Set<Homework>> getHomeworkSet() {
             return (homeworkSet != null)
@@ -402,9 +413,10 @@ public class LessonEditCommand extends UndoableCommand {
         }
 
         /**
-         * Returns an unmodifiable homework set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code homeworkSet} is null.
+         * Sets {@code homeworkSet} to this object's {@code homeworkSet}.
+         * A defensive copy of {@code homeworkSet} is used internally.
+         *
+         * @param homeworkSet A set of homework.
          */
         public void setHomeworkSet(Set<Homework> homeworkSet) {
             this.homeworkSet = (homeworkSet != null) ? new HashSet<>(homeworkSet) : null;
@@ -434,22 +446,46 @@ public class LessonEditCommand extends UndoableCommand {
             this.outstandingFees = outstandingFees;
         }
 
+        /**
+         * Returns an unmodifiable cancelled dates set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         *
+         * @return {@code Optional#empty()} if {@code cancelDates} is null.
+         */
         public Optional<Set<Date>> getCancelDates() {
             return (cancelDates != null)
                     ? Optional.of(Collections.unmodifiableSet(cancelDates))
                     : Optional.empty();
         }
 
+        /**
+         * Sets {@code cancelDates} to this object's {@code cancelDates}.
+         * A defensive copy of {@code cancelDates} is used internally.
+         *
+         * @param cancelDates A set of dates to cancel.
+         */
         public void setCancelDates(Set<Date> cancelDates) {
             this.cancelDates = (cancelDates != null) ? new HashSet<>(cancelDates) : null;
         }
 
+        /**
+         * Returns an unmodifiable uncancelled dates set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         *
+         * @return {@code Optional#empty()} if {@code uncancelDates} is null.
+         */
         public Optional<Set<Date>> getUncancelDates() {
             return (uncancelDates != null)
                     ? Optional.of(Collections.unmodifiableSet(uncancelDates))
                     : Optional.empty();
         }
 
+        /**
+         * Sets {@code uncancelDates} to this object's {@code uncancelDates}.
+         * A defensive copy of {@code uncancelDates} is used internally.
+         *
+         * @param uncancelDates A set of dates to cancel.
+         */
         public void setUncancelDates(Set<Date> uncancelDates) {
             this.uncancelDates = (uncancelDates != null) ? new HashSet<>(uncancelDates) : null;
         }
