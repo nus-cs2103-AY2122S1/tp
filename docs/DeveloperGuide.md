@@ -4,25 +4,65 @@ title: Developer Guide
 ---
 # Welcome to Socius Developer Guide!
 
-Welcome to Socius User Guide! Choose a section from the table of contents below to find the details on how Socius works!
+Welcome to Socius Developer Guide! Choose a section from the table of contents below to find the details on how Socius works!
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Table of Contents
 
-1. [Acknowledgements](#acknowledgements)
-2. [Setting up, getting started](#setting-up--getting-started)
-3. [Design](#design)
+1. [Introduction to Socius](#introduction-to-socius)
+2. [Using this guide](#using-this-guide)
+3. [Acknowledgements](#acknowledgements)
+4. [Setting up, getting started](#setting-up--getting-started)
+5. [Design](#design)
    1. [Architecture](#architecture)
    2. [UI component](#ui-component)
    3. [Logic component](#logic-component)
    4. [Model component](#model-component)
    5. [Storage component](#storage-component)
    6. [Common classes](#common-classes)
-   7. [Implementation](#implementation)
+   7. [Implementation](#implementation-of-features)
    8. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
    9. [Appendix: Requirements](#appendix-requirements)
    10. [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Introduction to Socius
+
+Socius is a desktop application that helps CS2103T Software Engineering students, to
+* manage classmates’ contacts,
+* make friends, and
+* find teammates!
+
+The Socius Developer Guide gets you learn how Socius works.
+This Developer Guide familarises you with the commands and functionality of Socius, enabling you to build on Socius.
+
+We hope that you will have a great time learning about Socius! :)
+
+Socius provides these main features:
+* Access details of students taking CS2103T.
+* Find any student with their name, tutorial group, nationality, tags, and more.
+* Pin suitable tags to categorize students.
+* View statistics on nationality.
+
+<div markdown="block" class="alert alert-info">
+Socius is optimized for use via a *Command Line Interface (CLI)* while still having the benefits of a *Graphical User Interface (GUI)*. If you can
+type fast, Socius can get your contact management tasks done faster than traditional *GUI* apps.
+</div>
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Using this guide
+
+Before exploring the features of Socius, you should be familiar with these symbols used in this user guide.
+
+| Symbol | Meaning |
+| :----: | ------- |
+| :information_source: | Important information |
+| :exclamation: | Warning or caution |
+| :bulb: | Additional information such as tips |
+| :wrench: | Help with common technical issues |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -188,36 +228,36 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Implementation**
+## **Implementation of Features**
 
 This section describes some noteworthy details on how certain features are implemented.
 
 The features mentioned are:
-1. Getting help
-2. Modifying Contacts
-   1. [Adding a person](#adding-a-person) [done]
-   2. Adding tags to people
-   3. [Adding a remark to a person](#adding-a-remark)
-   4. Editing a person
-   5. Deleting a person
-   6. [Deleting multiple person](#delete-multiple-persons)
-   7. Deleting tags from people
-   8. Clearing all contacts
-3. Viewing contacts
-   1. Listing all contacts
+1. [Modifying Contacts]((#adding-a-person-add))
+   1. [Adding a person](#adding-a-person-add)
+   2. [Adding tags to people](#adding-tags-to-people-addt)
+   3. [Adding a remark to a person](#adding-a-remark-to-a-person-remark)
+   4. [Editing a person](#editing-a-person-edit)
+      1. [Support for multiple social handles](#support-for-multiple-social-handles)
+   5. [Deleting a person](#deleting-a-person-delete)
+   6. [Deleting multiple person](#delete-multiple-persons-deletem)
+   7. [Deleting tags from people](#deleting-tags-from-people-deletet)
+   8. [Clearing all contacts](#clearing-all-contacts-clear)
+2. Viewing contacts
+   1. [Listing all contacts](#listing-all-contacts-list)
    2. [Finding people](#finding-persons)
    3. [Sorting people](#sorting-persons)
    4. [Viewing statistics](#viewing-statistics)
-4. Sharing contacts
+3. Sharing contacts
    1. [Importing contacts](#import-json-file)
    2. [Exporting contacts](#export-json-file)
-5. [Aliasing commands `alias`](#aliasing-commands-alias)
-6. [Exiting Socius `exit`](#exiting-socius-exit)
-7. [Saving contacts](#saving-the-data)
-8. [Accessing command history](#command-history)
-9. [Input Suggestion](#input-suggestion)
+4. [Aliasing commands `alias`](#aliasing-commands-alias)
+5. [Exiting Socius `exit`](#exiting-socius-exit)
+6. [Saving contacts](#saving-the-data)
+7. [Accessing command history](#command-history)
+8. [Input Suggestion](#input-suggestion)
 
-### Adding a person
+### Adding a person `add`
 
 #### Implementation
 
@@ -228,22 +268,22 @@ without the need to include other contact details.
 
 Given below is an example usage scenario of how the AddCommand mechanism behaves at each step.
 
-1. The user first launches Socius and adds a new contact by name, without any other contact details.
+Step 1. The user first launches Socius and adds a new contact by name, without any other contact details.
 
-2. The user executes the command "add n/[NAME]" to add a new person with no contact details.
+Step 2. The user executes the command "add n/[NAME]" to add a new person with no contact details.
 
-3. The `parse` function of AddCommandParser will parse the input and set the optional arguments as empty strings, before
+Step 3. The `parse` function of AddCommandParser will parse the input and set the optional arguments as empty strings, before
    instantiating a new `Person` object.
 
-4. The command communicates with the `Model` to add the person to the existing AddressBook.
+Step 4. The command communicates with the `Model` to add the person to the existing AddressBook.
 
-5. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+Step 5. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 The following sequence diagram shows how the AddCommand function works:
 
 ![UpdatedAddCommandSeqDiagram](images/AddCommandDiagram.png)
 
-The following activity diagram summarizes what happens when a user executes a new command:
+The following activity diagram summarizes what happens when a user executes an AddCommand:
 
 ![UpdatedAddCommand](images/UpdatedAddCommand.png)
 
@@ -260,101 +300,225 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: Will result in fewer unexpected bugs since input is expected to be optional.
     * Cons: Harder to implement.
 
-### Adding a remark
+### Adding tags to people `addt`
 
 #### Implementation
 
-The following activity diagram summarizes what happens when a user executes an add remark command on a specified person:
-
-![RemarkActivityDiagram](images/RemarkActivityDiagram.png)
-
-The add remark mechanism will add remark to a contact specified by a given index. If a remark already exists, the new remark will overwrite the old remark.
-
-During `RemarkCommand#execute`, a new `Person` object will be created. For all of its properties (e.g. `Name`) except for `Remark`, the values will remain the same as the original person's properties.
+The add tag mechanism is facilitated by AddTagCommand and AddTagCommandParser. It allows users to add tags to a person 
+in their contact list by specifying the person's index number and the tags to add.
 
 #### Usage
 
-Given below is an example usage scenario and how the add remark mechanism behaves at each step.
+Given below is an example usage scenario and how the remark mechanism behaves at each step.
 
-Step 1. The user executes `remark 1 r/She likes coding` command to add the remark field to the first person.
+Step 1. The user executes `addt 1 t/friend` command to add the 'friend' tag to the first person in the displayed contact list.
 
-Step 2. `RemarkCommandParser#parse` will then parse the arguments provided. In this example, a new `RemarkCommand` object will be created after parsing.
+Step 1.1. Alternatively, the user may execute `addt all t/friend` command to add the 'friend' tag to everybody in the displayed
+contact list.
 
-The following sequence diagram briefly shows how the parser operation works:
+Step 2. `AddTagCommandParser#parse` will then parse the arguments provided. A new `AddTagCommand` object will be created after parsing.
+
+The following sequence diagram briefly shows how the AddTagCommandParser operation works:
+
+![RemarkParserSequenceDiagram](images/RemarkParserSequenceDiagram.png)
+
+Step 3. The `AddTagCommand` will then create a new `Person` using information from input tag. All other information will be taken from the original `Person`.
+
+Step 4. `AddTagCommand#execute` will then replace the original `Person` in the `model` with the new `Person`.
+
+The following sequence diagram shows how the AddTagCommand mechanism works:
+
+![UpdatedAddTagCommandSeqDiagram](images/AddCommandDiagram.png)
+
+#### Design considerations:
+
+**Aspect: How to support adding tags for one person and for everyone within AddTagCommand:**
+
+* **Alternative 1 (current choice):** When the user enters 'addt all...', the parser will take Index as null.
+    * Pros: Easy to implement.
+    * Cons: May result in unexpected bugs.
+
+* **Alternative 2:** Create two different classes for each function.
+    * Pros: Will result in fewer unexpected bugs since the logic is more straightforward to the developer.
+    * Cons: Less user-friendly as multiple commands have very similar functionalities.
+
+### Editing a person `edit`
+
+#### Implementation
+
+The edit mechanism is facilitated by EditCommand and EditCommandParser. It allows users to edit any contact details of a person
+in their contact list by the index number shown in their displayed contact list.
+
+The following activity diagram summarizes what happens when a user executes a edit command on a specified person:
+
+![EditActivityDiagram](images/RemarkActivityDiagram.png)
+
+The edit mechanism will edit any contact details of the person specified by a given index. If the edited person already exists, the edit command will throw an exception.
+
+During `EditCommand#execute`, a new `Person` object will be created. The values will remain the same for all of a person contact details (e.g. `Name`) except for those which are specified for change.
+
+#### Usage
+
+Given below is an example usage scenario and how the edit mechanism behaves at each step.
+
+Step 1. The user executes `edit 1 n/Alice` command to edit the name of first person in the displayed contact list to 'Alice'.
+
+Step 2. `EditCommandParser#parse` will then parse the arguments provided. A new `EditCommand` object will be created after parsing.
+
+The following sequence diagram briefly shows how the EditCommandParser operation works:
+
+![RemarkParserSequenceDiagram](images/RemarkParserSequenceDiagram.png)
+
+Step 3. The `EditCommand` will then create a new `Person` using information from input arguments. All other information will be taken from the original `Person`.
+
+Step 4. `EditCommand#execute` will then replace the original `Person` in the `model` with the new `Person`.
+
+The following sequence diagram shows how the EditCommand mechanism works:
+
+![RemarkSequenceDiagram](images/RemarkSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not be saved in Socius, so the person's contact details in Socius will not be updated.
+</div>
+
+#### Design Considerations
+
+* **Alternative 1 (current choice):** Create a new `Person` with their contact details replaced and the other contact details same as the original `Person`.
+    * Pros: Maintains immutability.
+    * Cons: It may have performance issues in terms of memory usage as a new `Person` object is created.
+
+* **Alternative 2:** Edit the original `Person` directly.
+    * Pros: It uses less memory and thus may run faster.
+    * Cons: If the execution is stopped halfway, then the newly updated person will contain wrong information. It will also be difficult to debug.
+
+### Support for multiple social handles
+
+#### Implementation
+A social handle can store a social platform and a user ID tied to that platform.
+
+As a person may have multiple social handles for different social platforms, there is a need to support multiple social handles tied to a person.
+
+The approach to implementing multiple social handles is similar to the original AB3's approach to implementing multiple tags. A Java HashSet is used to store all the social handle objects of a person.
+
+The current implementation allows for each person to have only 1 social handle for each platform. Therefore, when parsing social handles, new user ID will overwrite old user ID of the same social platform. This is done by using a Java Hashtable to store all the original social platforms in a platform name to social handle object pair, then check if the social platform of new social handle is present in the hashtable, and then update accordingly. After all the updates, the values of the hashtable are converted into a set to be store under an attribute of a person.
+
+#### Usage
+Social handles can be introduced to a person via the 'add' or 'edit' command.
+
+Given a user wants to change the following entry:
+![SocialHandleBeforeAfterEdit](images/dg/SocialHandleBeforeAfter.png)
+
+Given below demonstrates how the social handle mechanism would behave at each step.
+
+Step 1: The user enters the command `edit 1 s/tg:alex777 s/ig:a_lex_123 s/tw:alexxx00`
+
+Step 2: `AddressBookParser#parseCommand` will be called to do the first round of parsing to find the type of command being used.
+
+Step 3: After finding the command used is Edit, `EditCommandParser#parse` will be called to further parse the command.
+
+Step 4: `EditCommandParser#parse` will call `ArgumentTokenizer#tokenize` to get an `ArgumentMultimap` object, which contains parsed values of all the prefixes.
+
+Step 5: `ArgumentMultimap#GetAllValues` is then called to get a list of values with social handle prefix `s/`.
+
+Step 6: `ParserUtil#parseSocialHandles` is then used to parse the string value of social handles into a set of `SocialHandle` objects.
+
+Step 7: `EditCommand` object is then created and updated with all the change needed to a person.
+
+Step 8: `LogicManager` will then execute the `EditCommand`
+
+Step 9: This will update the relevant person with the new data
+
+The following sequence diagram shows how the EditCommand function works for social handles:
+![EditCommandSeqDiagramForSocialHandle](images/dg/EditCommandDiagramForSocialHandle.png)
+
+#### Design considerations:
+**Aspect: How to store social handle**
+* **Alternative 1:** Store each social handle for each platform as an individual attribute of a person
+    * Pros: The logic will be easier to test.
+    * Cons: There will be many duplicated code as each social handles are similar.
+* **Alternative 2 (Current):** Store a person's social handles as a set.
+    * Pros: It will be neater and less time-consuming to implement. Supporting additional platforms will only requires little code change.
+    * Cons: It may be more complicated to test.
+    
+### Deleting a person `delete`
+
+#### Implementation
+
+The delete mechanism is facilitated by DeleteCommand and DeleteCommandParser. It allows users to delete a person
+in their contact list by the index number shown in their displayed contact list.
+
+#### Usage
+
+Given below is an example usage scenario of how the DeleteCommand mechanism behaves at each step.
+
+Step 1. The user executes `delete 1` command to delete the first person in the displayed contact list from the displayed contact list.
+
+Step 2. `DeleteCommandParser#parse` will then parse the index provided. A new `DeleteCommand` object will be created after parsing.
+
+Step 4. The command communicates with the `Model` to delete the person from the existing AddressBook.
+
+Step 5. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
+
+The following sequence diagram shows how the DeleteCommand function works:
+
+![UpdatedAddCommandSeqDiagram](images/AddCommandDiagram.png)
+
+The following activity diagram summarizes what happens when a user executes an DeleteCommand:
+
+![UpdatedAddCommand](images/UpdatedAddCommand.png)
+
+### Adding a remark to people `remark`
+
+#### Implementation
+
+The remark mechanism is facilitated by RemarkCommand and RemarkCommandParser. It allows users to add a remark to a person
+in their contact list by the index number shown in their displayed contact list.
+
+The following activity diagram summarizes what happens when a user executes a remark command on a specified person:
+
+![RemarkActivityDiagram](images/RemarkActivityDiagram.png)
+
+The remark mechanism will add a remark to a person specified by a given index. If a remark already exists, the new remark will overwrite the old remark.
+
+During `RemarkCommand#execute`, a new `Person` object will be created. The values will remain the same for all of a person contact details (e.g. `Name`) except for `Remark`.
+
+#### Usage
+
+Given below is an example usage scenario and how the remark mechanism behaves at each step.
+
+Step 1. The user executes `remark 1 r/She likes coding` command to add a remark to the first person in the displayed contact list.
+
+Step 2. `RemarkCommandParser#parse` will then parse the arguments provided. A new `RemarkCommand` object will be created after parsing.
+
+The following sequence diagram briefly shows how the RemarkCommandParser operation works:
 
 ![RemarkParserSequenceDiagram](images/RemarkParserSequenceDiagram.png)
 
 Step 3. The `RemarkCommand` will then create a new `Person` using information from input remark. All other information will be taken from the original `Person`.
 
-Step 4. `RemarkCommand#execute` will then replace the old `Person` in the `model` with the new `Person`.
+Step 4. `RemarkCommand#execute` will then replace the original `Person` in the `model` with the new `Person`.
 
-The following sequence diagram shows how the add remark mechanism works:
+The following sequence diagram shows how the RemarkCommand mechanism works:
 
 ![RemarkSequenceDiagram](images/RemarkSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not be saved in the AddressBook, so the person inside the AddressBook will not be updated.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not be saved in Socius, so the person's contact details in Socius will not be updated.
 </div>
 
 #### Design Considerations
 
-* **Alternative 1 (current choice):** Create a new person with the remark field replaced and the other fields same as the old person.
+* **Alternative 1 (current choice):** Create a new `Person` with their remark replaced and the other contact details same as the original `Person`.
     * Pros: Maintains immutability.
     * Cons: It may have performance issues in terms of memory usage as a new `Person` object is created.
 
-* **Alternative 2:** Edit the old person directly.
+* **Alternative 2:** Edit the original `Person` directly.
     * Pros: It uses less memory and thus may run faster.
     * Cons: If the execution is stopped halfway, then the newly updated person will contain wrong information. It will also be difficult to debug.
 
-### Finding Persons
+### Delete multiple people `deletem`
 
 #### Implementation
 
-The find mechanism is facilitated by FindCommand and FindCommandParser. It allows users to find contacts using any of their contact details.
-
-
-#### Usage
-
-Given below is an example usage scenario of how the findCommand mechanism behaves at each step.
-
-1. The user first launches Socius. The user can see the details of his/her contacts once Socius starts.
-
-2. The user finds a new contact by one or more contact details, for example, Name and Tag.
-
-3. The user executes the command "find n/[NAME] t/[TAG]" to find people with that Name and has that Tag.
-
-4. The `parse` function of FindCommandParse will parse the input and instantiate a new `Predicate` object for each
-   argument present. At the end, all `Predicate` objects are combined using the `MultiplePredicate` object.
-
-5. The command communicates with the `Model` to filter out the found person from the existing AddressBook.
-
-6. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
-
-The following sequence diagram shows how the FindCommand function works:
-
-![UpdatedAddCommandSeqDiagram](images/FindCommandDiagram.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-![UpdatedAddCommand](images/UpdatedFindCommand.png)#
-
-#### Design Considerations
-
-**Aspect: How contacts are saved with multiple arguments:**
-
-
-* **Alternative 1 (current choice):** Only include people who contain all the specified contact details
-    * Pros: Intuitive feature. Similar to a Filter function in popular apps today.
-    * Cons: Requires you to be familiar of the people in your contact list.
-
-* **Alternative 2:** Include people who contain at least one of the specified contact details.
-    * Pros: Good for users who want to broadly search for eligible friends
-    * Cons: Not very intuitive
-
-### Delete multiple persons
-
-#### Implementation
-
-The deleting multiple person mechanism will delete contacts specified by a given set of keywords. Any contacts containing **all** the specified keywords will be deleted.
+The delete multiple people mechanism will delete contacts specified by a given set of keywords. Any contacts containing **all** the specified keywords will be deleted.
 
 It works by filtering for the contacts in the `model` and deleting them one by one.
 
@@ -364,7 +528,7 @@ The following activity diagram briefly summarizes what happens when a user execu
 
 ![DeleteMultipleActivityDiagram](images/DeleteMultipleActivityDiagram.png)
 
-Given below is an exmaple usage scenario and how the deleting multiple person mechanism behaves at each step.
+Given below is an example usage scenario and how the deleting multiple person mechanism behaves at each step.
 
 Step 1. The user launches the application.
 
@@ -398,7 +562,141 @@ The following sequence diagram shows how the deleting multiple person mechanism 
     * Pros: Less overlapping and easier to debug. It also uses less memory and thus may run faster.
     * Cons: Reduced flexibility for users when deleting contacts as they can only input one single keyword.
 
-### Sorting persons
+### Delete tags from people `deletet`
+
+#### Implementation
+
+The delete tag mechanism is facilitated by DeleteTagCommand and DeleteTagCommandParser. It allows users to delete tags from a person
+in their contact list by specifying the person's index number and the tags to add.
+
+#### Usage
+
+Given below is an example usage scenario and how the delete tag mechanism behaves at each step.
+
+Step 1. The user executes `deletet 1 t/friend` command to delete the 'friend' tag from the first person in the displayed contact list.
+If the person does not has the 'friend' tag, the DeleteTagCommand throws an exception.
+
+Step 1.1. Alternatively, the user may execute `deletet all t/friend` command to delete the 'friend' tag from everyone in the displayed
+contact list. If no one has the 'friend' tag, the DeleteTagCommand throws an exception.
+
+Step 2. `DeleteTagCommandParser#parse` will then parse the arguments provided. A new `DeleteTagCommand` object will be created after parsing.
+
+The following sequence diagram briefly shows how the DeleteTagCommandParser operation works:
+
+![RemarkParserSequenceDiagram](images/RemarkParserSequenceDiagram.png)
+
+Step 3. The command communicates with the `Model` to delete the person from the existing AddressBook.
+
+Step 4. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
+
+The following sequence diagram shows how the DeleteTagCommand mechanism works:
+
+![UpdatedAddTagCommandSeqDiagram](images/AddCommandDiagram.png)
+
+#### Design considerations:
+
+**Aspect: How to support adding tags for one person and for everyone within AddTagCommand:**
+
+* **Alternative 1 (current choice):** The `deletet all` command should fail only if no one has the specified tag to delete.
+    * Pros: Intuitive.
+    * Cons: May result in unintentional deletion of tags for the careless user.
+
+* **Alternative 2:** The `deletet all` command should pass only if everyone has the specified tag to delete.
+    * Pros: Minimise unintentional deletion of tags.
+    * Cons: Less user-friendly, since the user have to make sure all users that are considered must carry that tag to delete.
+
+### Clearing all contacts `clear`
+
+#### Implementation
+
+The clearing all contacts mechanism will delete all contacts from Socius.
+
+#### Usage
+
+The following activity diagram briefly summarizes what happens when a user executes the `ClearCommand` to clear all contacts:
+
+![DeleteMultipleActivityDiagram](images/DeleteMultipleActivityDiagram.png)
+
+Given below is an example usage scenario and how the clear all contacts mechanism behaves at each step.
+
+Step 1. The user launches the application.
+
+Step 2. The user executes the `clear` command to clear all contacts.
+
+Step 3. `ClearCommand#execute` will replace the model with a blank contact list.
+
+The following sequence diagram shows how the clearing all contacts mechanism works:
+
+![DeleteMultipleSequenceDiagram](images/DeleteMultipleSequenceDiagram.png)
+
+### Listing all contacts `list`
+
+#### Implementation
+
+The listing all contacts mechanism will list all contacts in Socius.
+
+#### Usage
+
+The following activity diagram briefly summarizes what happens when a user executes the `ListCommand` to list all contacts:
+
+![DeleteMultipleActivityDiagram](images/DeleteMultipleActivityDiagram.png)
+
+Given below is an example usage scenario and how the listing all contacts mechanism behaves at each step.
+
+Step 1. The user launches the application.
+
+Step 2. The user executes the `list` command to list all contacts.
+
+Step 3. `ListCommand#execute` will update the model to show everyone in the contact list.
+
+The following sequence diagram shows how the listing all contacts mechanism works:
+
+![DeleteMultipleSequenceDiagram](images/DeleteMultipleSequenceDiagram.png)
+
+### Finding people `find`
+
+#### Implementation
+
+The find mechanism is facilitated by FindCommand and FindCommandParser. It allows users to find contacts using any of their contact details.
+
+#### Usage
+
+Given below is an example usage scenario of how the findCommand mechanism behaves at each step.
+
+1. The user first launches Socius. The user can see the details of his/her contacts once Socius starts.
+
+2. The user finds a new contact by one or more contact details, for example, Name and Tag.
+
+3. The user executes the command "find n/[NAME] t/[TAG]" to find people with that Name and has that Tag.
+
+4. The `parse` function of FindCommandParse will parse the input and instantiate a new `Predicate` object for each
+   argument present. At the end, all `Predicate` objects are combined using the `MultiplePredicate` object.
+
+5. The command communicates with the `Model` to filter out the found person from the existing AddressBook.
+
+6. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+
+The following sequence diagram shows how the FindCommand function works:
+
+![UpdatedAddCommandSeqDiagram](images/FindCommandDiagram.png)
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+![UpdatedAddCommand](images/UpdatedFindCommand.png)
+
+#### Design Considerations
+
+**Aspect: How contacts are saved with multiple arguments:**
+
+* **Alternative 1 (current choice):** Only include people who contain all the specified contact details
+    * Pros: Intuitive feature. Similar to a Filter function in popular apps today.
+    * Cons: Requires you to be familiar of the people in your contact list.
+
+* **Alternative 2:** Include people who contain at least one of the specified contact details.
+    * Pros: Good for users who want to broadly search for eligible friends.
+    * Cons: Not very intuitive.
+    
+### Sorting people `sort`
 
 #### Implementation
 
@@ -445,7 +743,7 @@ The following sequence diagram shows how the sort mechanism works:
     * Pros: Convenient if the contact list is very huge and users would like to sort based on multiple fields.
     * Cons: Difficult to implement.
     
-### Viewing Statistics
+### Viewing statistics `stat`
 
 #### Implementation
 
@@ -477,7 +775,7 @@ The following sequence diagram shows how the Statistic mechanism works:
 
 ![StatisticSequenceDiagram](images/StatisticSequenceDiagram.png)
 
-### Import JSON file
+### Importing contacts `import`
 
 #### Implementation
 
@@ -515,56 +813,7 @@ Step 7. Finally, it will return a `CommandResult` if the operation is successful
     * Pros: Gives user the flexibility to put the file wherever they want.
     * Cons: Different OSes have different file paths convention.
 
-### Support for multiple social handles
-
-#### Implementation
-A social handle can store a social platform and a user ID tied to that platform.
-
-As a person may have multiple social handles for different social platforms, there is a need to support multiple social handles tied to a person.
-
-The approach to implementing multiple social handles is similar to the original AB3's approach to implementing multiple tags. A Java HashSet is used to store all the social handle objects of a person. 
-
-The current implementation allows for each person to have only 1 social handle for each platform. Therefore, when parsing social handles, new user ID will overwrite old user ID of the same social platform. This is done by using a Java Hashtable to store all the original social platforms in a platform name to social handle object pair, then check if the social platform of new social handle is present in the hashtable, and then update accordingly. After all the updates, the values of the hashtable are converted into a set to be store under an attribute of a person.
-
-#### Usage
-Social handles can be introduced to a person via the 'add' or 'edit' command.
-
-Given a user wants to change the following entry:
-![SocialHandleBeforeAfterEdit](images/dg/SocialHandleBeforeAfter.png)
-
-Given below demonstrates how the social handle mechanism would behave at each step.
-
-Step 1: The user enters the command `edit 1 s/tg:alex777 s/ig:a_lex_123 s/tw:alexxx00`
-
-Step 2: `AddressBookParser#parseCommand` will be called to do the first round of parsing to find the type of command being used.
-
-Step 3: After finding the command used is Edit, `EditCommandParser#parse` will be called to further parse the command.
-
-Step 4: `EditCommandParser#parse` will call `ArgumentTokenizer#tokenize` to get an `ArgumentMultimap` object, which contains parsed values of all the prefixes.
-
-Step 5: `ArgumentMultimap#GetAllValues` is then called to get a list of values with social handle prefix `s/`.
-
-Step 6: `ParserUtil#parseSocialHandles` is then used to parse the string value of social handles into a set of `SocialHandle` objects.
-
-Step 7: `EditCommand` object is then created and updated with all the change needed to a person.
-
-Step 8: `LogicManager` will then execute the `EditCommand`
-
-Step 9: This will update the relevant person with the new data
-
-The following sequence diagram shows how the EditCommand function works for social handles:
-![EditCommandSeqDiagramForSocialHandle](images/dg/EditCommandDiagramForSocialHandle.png)
-
-#### Design considerations:
-**Aspect: How to store social handle**
-* **Alternative 1:** Store each social handle for each platform as an individual attribute of a person
-    * Pros: The logic will be easier to test.
-	* Cons: There will be many duplicated code as each social handles are similar.
-* **Alternative 2 (Current):** Store a person's social handles as a set.
-    * Pros: It will be neater and less time-consuming to implement. Supporting additional platforms will only requires little code change.
-    * Cons: It may be more complicated to test.
-
-### Export JSON file
+### Exporting contacts `export`
 
 #### Implementation
 
@@ -603,7 +852,7 @@ Step 7. Finally, it will return a `CommandResult` if the operation is successful
     * Pros: Gives user the flexibility to place the file wherever they want.
     * Cons: Different OSes have different file paths convention.
 
-### Aliasing Commands
+### Aliasing commands `alias`
 
 #### Implementation
 
@@ -641,6 +890,49 @@ The following sequence diagram shows how the alias command mechanism works:
 * **Alternative 2:** Non-Singleton
     * Pros: More commonly used in general and thus easier to understand.
     * Cons: A normal class can be instantiated multiple times, which does not suit the context of this implementation.
+
+### Exiting Socius `exit`
+
+#### Implementation
+
+The exiting Socius mechanism will exit Socius.
+
+#### Usage
+
+The following activity diagram briefly summarizes what happens when a user executes the `ExitCommand` to exit Socius:
+
+![DeleteMultipleActivityDiagram](images/DeleteMultipleActivityDiagram.png)
+
+Given below is an example usage scenario and how the exiting Socius mechanism behaves at each step.
+
+Step 1. The user launches the application.
+
+Step 2. The user executes the `exit` command to exit from Socius.
+
+Step 3. `ExitCommand#execute` returns a CommandResult with the `exit` boolean set to True.
+
+The following sequence diagram shows how the exiting from Socius mechanism works:
+
+![DeleteMultipleSequenceDiagram](images/DeleteMultipleSequenceDiagram.png)
+
+### Saving data
+
+#### Implementation
+
+After each command, the latest data is saved in a JSON file. This helps users who
+wish to seamlessly continue using Socius after exiting from Socius previously.
+
+#### Design considerations:
+
+**Aspect: How to safely save data from contact list to a JSON file:**
+
+* **Alternative 1 (current choice):** Data is saved after every command.
+    * Pros: Easy to implement.
+    * Cons: More prone to errors since the save file is accessed very frequently and sometimese unnecessarily.
+
+* **Alternative 2:** Data is saved after every command that modifies the contact list.
+    * Pros: Less prone to errors since the save file is accessed only when necessary.
+    * Cons: Tricky to implement.
 
 ### \[Proposed\] Undo/redo feature
 
@@ -786,9 +1078,7 @@ display the suggestions to the user.
     * Pros: Very straightforward to implement as it follows directly from its mathematical formula.
     * Cons: Very inefficient as there are three recursive calls at each step, resulting in exponential time complexity.
 
-
 _{more aspects and alternatives to be added}_
-
 
 
 ## **Documentation, logging, testing, configuration, dev-ops**
