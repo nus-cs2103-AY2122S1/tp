@@ -220,7 +220,7 @@ Examples:
 add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01
 ```
 ```
-a n/Tom Ng p/97865342 e/tomng@eg.com a/221B Baker Street r/Can only attend on even weeks
+a n/Tom Ng p/97865342 e/tomng@eg.com a/221B Baker St r/Can only attend on even weeks
 ```
 
 <div markdown="span" class="alert alert-primary">
