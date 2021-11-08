@@ -28,22 +28,22 @@ public class PhoneTest {
         // invalid phone numbers
         assertFalse(Phone.isValidPhone("")); // empty string
         assertFalse(Phone.isValidPhone(" ")); // spaces only
-        assertFalse(Phone.isValidPhone("91")); // less than 3 numbers
+        assertFalse(Phone.isValidPhone("91")); // less than 6 numbers
         assertFalse(Phone.isValidPhone("phone")); // non-numeric
         assertFalse(Phone.isValidPhone("9011p041")); // alphabets within digits
         assertFalse(Phone.isValidPhone("9312 1534")); // spaces within digits
 
         // valid phone numbers
-        assertTrue(Phone.isValidPhone("911")); // exactly 3 numbers
+        assertTrue(Phone.isValidPhone("911119")); // exactly 6 numbers
         assertTrue(Phone.isValidPhone("93121534"));
         assertTrue(Phone.isValidPhone("124293842033123")); // long phone numbers
     }
 
     @Test
     public void checkCompareTo() {
-        Phone p1 = new Phone("123");
-        Phone p2 = new Phone("234");
-        Phone p3 = new Phone("123");
+        Phone p1 = new Phone("123456");
+        Phone p2 = new Phone("234546");
+        Phone p3 = new Phone("123456");
 
         assertEquals(p1.compareTo(p2), -1);
         assertEquals(p2.compareTo(p1), 1);

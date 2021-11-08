@@ -59,7 +59,9 @@ public class PersonListPanel extends UiPart<Region> {
             try {
                 new ViewPersonCommand(
                         Index.fromZeroBased(personListView.getSelectionModel().getSelectedIndex()))
-                    .setSinglePerson(logic.getModel());
+                        .setSinglePerson(logic.getModel());
+            } catch (IndexOutOfBoundsException e) {
+                logger.info("Non card area selected");
             } catch (CommandException e) {
                 logger.info("Invalid card selected");
             }
