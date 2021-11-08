@@ -48,7 +48,7 @@ Given below are my contributions to the project.
 * Updated README file for the project ([#26](https://github.com/AY2122S1-CS2103T-T17-4/tp/pull/26))
 * Update config file for the project ([#21](https://github.com/AY2122S1-CS2103T-T17-4/tp/pull/21))
   
-**Contributions to User Guide**
+**Contributions to User Guide** 
 * Update user guide to include information about `claim` command ([#22](https://github.com/AY2122S1-CS2103T-T17-4/tp/pull/22))
 * Fixed all user guide related bugs from PE-D ([#174](https://github.com/AY2122S1-CS2103T-T17-4/tp/pull/174))
 * Added dropdowns for user constraints for every command ([#174](https://github.com/AY2122S1-CS2103T-T17-4/tp/pull/174))
