@@ -61,7 +61,7 @@ Academy Directory (AD) is a **desktop application for CS1101S tutors to manage t
 - [Track students' grades, Studio attendance, and participation](#tracking-students-grades-studio-attendance-and-participation)
 - [Visualize data in Academy Directory](#visualization-tools)
 
-![app logo](images/ui/app_logo.png)
+![app logo](images/ui/logo_size.jpg)
 
 Academy Directory is written in _Java_ and thus can be run on all major operating systems!
 It is optimized for use via a Command Line Interface (CLI), while still having the benefits of a Graphical User Interface (GUI).
