@@ -23,7 +23,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S1-CS2103T-T12-3/tp/tree/master/docs/diagrams) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
 ### Architecture
@@ -36,7 +36,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S1-CS2103T-T12-3/tp/blob/master/src/main/java/seedu/placebook/Main.java) and [`MainApp`](https://github.com/AY2122S1-CS2103T-T12-3/tp/blob/master/src/main/java/seedu/placebook/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -69,13 +69,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103T-T12-3/tp/blob/master/src/main/java/seedu/placebook/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103T-T12-3/tp/blob/master/src/main/java/seedu/placebook/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-T12-3/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -86,14 +86,14 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-T12-3/tp/blob/master/src/main/java/seedu/placebook/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
 How the `Logic` component works:
-1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
+1. When `Logic` is called upon to execute a command, it uses the `PlacebookParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
@@ -110,11 +110,11 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `PlacebookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `PlacebookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-T12-3/tp/blob/master/src/main/java/seedu/placebook/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -128,7 +128,7 @@ The `Model` component,
 * stores the schedule data i.e., all `Appointment` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `COntatcs`, which `Person` references. This allows `Contacts` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -137,13 +137,13 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-T12-3/tp/blob/master/src/main/java/seedu/placebook/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save address book data, schedule data and user preference data in json format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage`, `ScheduleStorage` and `UserPrefStorage`, which means it can be treated as any (if only the functionality of only one is needed).
+* can save contacts data, schedule data and user preference data in json format, and read them back into corresponding objects.
+* inherits from both `ContactsStorage`, `ScheduleStorage` and `UserPrefStorage`, which means it can be treated as any (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
@@ -183,7 +183,7 @@ we create a new `State` instance to record the status of PlaceBook after executi
 This `State` instance is like a snapshot of the PlaceBook at a certain moment.
 
 In order to manage the different states, we have a `HistoryStates` class which has a data structure inside to store all the `State`. Stack and linked list are
-ususlly used to store the history states. In PlaceBook, we use a linked list in `HistoryStates`.
+usually used to store the history states. In PlaceBook, we use a linked list in `HistoryStates`.
 After the execution of a normal command, a new `State` instance is created, and then we add this new `State` to the end of the linked list in `HistoryStates`.
 When an `undo` command is encountered, we simply remove the last node of the linked list, so the current state pointer points to the previous node.
 When there are no more nodes in the linked list except the initial state, the `undo` command cannot be executed and the `HistoryStates` will thrown a `NoHistoryStates` exception.
@@ -201,14 +201,14 @@ generated from the inputs entered by the user using the `AddAppCommand`
 Given below is an example usage scenario and how the addApp mechanism behaves at each step.
 
 Step 1. The user launches the application. Placebook will be initialized with a `LogicManager`, a `StorageManage`, a `UiManager`
-and a `ModelManager`. `StorageManager` contains an `AddressBookStorage` an a `ScheduleStorage` which manages
+and a `ModelManager`. `StorageManager` contains an `ContactsStorage` an a `ScheduleStorage` which manages
 the specific saved data. `StorageManager` will attempt to read data from a saved json file and loads the 
 data into `ModelManager` when the class is initialized
 
 ![AddAppStep1](images/AddAppStep1.png)
 
 Step 2. The user inputs the addApp command with `addApp id/1,2,3 a/Starbucks @ Raffles City start/01-01-2021 1400 end/01-01-2021 1500 ds/discuss marketing strategies`
-The `logicManager`, which has been initialized with an `AddressBookParser`, will use that class to create and return an `addAppCommand` with the appropriate inputs to be executed by `LogicManger`
+The `logicManager`, which has been initialized with an `PlacebookParser`, will use that class to create and return an `addAppCommand` with the appropriate inputs to be executed by `LogicManger`
 
 ![AddAppStep2](images/AddAppStep2.png)
 
@@ -218,18 +218,15 @@ appropriate client or clients retrieved from the list of persons according to th
 A new Appointment will then be created and added to the `ModelManager`. It is at this stage the input will
 be checked to ensure that there are no duplicates or clashes with other appointments.
 
-##INSERT UML HERE
 
 Step 4. After execution, the CommandResult is passed upwards to the UI so that it can return a status message
 and update the display to match the updated model
-
-##@Yanyu im not 100% sure how the UI interacts with the overall model, if you see any issues could you help me correct them?
 
 The following sequence diagram shows how the addAppCommand operation works:
 
 ![AddAppSequenceDiagram](images/AddAppSequenceDiagram.png)
 
-####Design considerations
+#### Design considerations
 * **Alternative 1 (current choice):** User selects `Person` in `Appointment` through indexes of the displayed list.
     * Pros: Easy to implement, every `Person` in the displayed list will have a unique index.
     * Cons: As the user filters the displayed list, the indexes may change and be re-ordered, causing some confusion to the user.
@@ -262,7 +259,7 @@ The delete feature deletes a person from the storage by specifying an index show
 
 
 
-####Design considerations
+#### Design considerations
 * This will likely be break the current data relations as those appointments that refer to this person will
 no longer be able to query information about this person.
 * Thus, we either:  
@@ -316,86 +313,7 @@ Upon finding such `Appointment` objects, PlaceBook will add the missing `Person`
 * **Alternative 2** Delete appointments with missing persons
     * Pros: This will ensure that the persons the user deleted from the JSON will remain deleted.
     * Cons: The user might not have noticed that those appointments have been deleted.
-
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
+    
 
 ### \[Proposed\] Data archiving
 
@@ -450,11 +368,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | marketeer                                  | add appointments with clients  |                                                                        |
 | `* * *`  | marketeer                                  | delete appointments            | remove cancelled/finished appointments                                 |
 | `* * *`  | new user                                   | view some example contacts     | have an idea of what contact info will look like                       |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| `*`      | user with many persons in the contacts     | sort persons by name           | locate a person easily                                                 |
 | `* *`   | marketeer		                            | list appointments with clients  | view and plan my week and meet clients in a timely manner             |
 | `* *`   | user		                                | view my list of contacts	      | see who is already inside and contact clients that are forgotten      |
+| `* *`   | user		                                | sort appointments by Description | locate an appointment easily                                         |
+| `* *`   | user		                                | find an appointment by name | locate details of an appointment without having to go through the list    |
 
-*{More to be added}*
 
 ### Use cases
 
@@ -722,18 +641,16 @@ Use case ends.
     * PB displays an empty list.
 
       Use case ends.
-		
-*{More to be added}*
+    
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 persons and appointments without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  The system is not required to handle sending emails to contacts.
 5.  Users can see previously written commands in the same session.
 
-*{More to be added}*
 
 ### Glossary
 
