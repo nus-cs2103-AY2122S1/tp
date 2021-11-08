@@ -272,6 +272,9 @@ Focusing on after `AddOrderCommand:execute` is called,
    is addressed to is already in the application
 4. If both checks pass, the application finally calls `model:addOrder(toAdd)` to add the `Order`.
 
+Note that in the diagram above, the "else" clause for the `alt` boxes have been omitted for brevity. If either check fails, 
+an exception is thrown and an error is displayed back to the user. 
+
 Here is an activity diagram to more clearly illustrate the logic of the application:
 ![AddOrderActivityDiagram](images/AddOrderActivityDiagram.png)
 
