@@ -484,7 +484,7 @@ Figure I.2.2 shows a sequence diagram of how viewing reminder's logic works.<br>
 Figure I.2.3 shows a sequence diagram of how the reminder window is displayed with the UI components.<br>
 <img src="images/ReminderSequenceDiagram.png" width="800" /> <br>
 
-*Figure I.2.3: View reminder sequence diagram.*
+*Figure I.2.3: View reminder sequence diagram with UI components.*
 
 #### Design considerations
 **Aspect: Date and time range of lessons to be considered as upcoming**
