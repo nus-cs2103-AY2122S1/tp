@@ -96,6 +96,7 @@ public class ImportCommand extends Command {
             model.setTabIndex(0);
         }
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        logger.info("Import success");
         return new CommandResult(String.format(MESSAGE_IMPORT_SUCCESS, fileName));
     }
 
