@@ -56,10 +56,6 @@ LogicManager -[hidden]-> LogicManager
 DeleteGameCommand -[hidden]-> DeleteGameCommand
 end
 
-'[-> DeleteGameCommand : command.execute()
-'activate DeleteGameCommand
-'[<--DeleteGameCommand : commandResult
-'deactivate DeleteGameCommand
 [<-[hidden]- DeleteGameCommand
 destroy DeleteGameCommand
 
