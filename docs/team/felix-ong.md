@@ -26,7 +26,7 @@ Given below are my contributions to the project.
     * Pull Request [\#160](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/160)
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/#breakdown=true&search=felix-ong)
-* 
+
 <div style="page-break-after: always;"></div>
 
 * **Team Tasks**:
