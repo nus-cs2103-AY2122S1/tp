@@ -1,0 +1,87 @@
+@startuml
+!include style.puml
+
+box UI UI_COLOR
+participant "UI" as UI UI_COLOR
+end box
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":MailingListCommandParser" as MailingListCommandParser LOGIC_COLOR
+participant "d:MailingListCommnad" as MailingListCommand LOGIC_COLOR
+participant ":CsvUtil" as CsvUtil LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+UI -> LogicManager : execute
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand
+activate AddressBookParser
+
+create MailingListCommandParser
+AddressBookParser -> MailingListCommandParser
+activate MailingListCommandParser
+
+MailingListCommandParser --> AddressBookParser
+deactivate MailingListCommandParser
+
+AddressBookParser -> MailingListCommandParser : parse
+activate MailingListCommandParser
+
+create MailingListCommand
+MailingListCommandParser -> MailingListCommand
+activate MailingListCommand
+
+MailingListCommand --> Model : SetPrefixes
+activate Model
+Model --> MailingListCommand
+deactivate Model
+
+MailingListCommand --> MailingListCommandParser : d
+deactivate MailingListCommand
+
+MailingListCommandParser --> AddressBookParser  : d
+deactivate MailingListCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+MailingListCommandParser -[hidden]-> AddressBookParser
+destroy MailingListCommandParser
+
+AddressBookParser --> LogicManager  : d
+deactivate AddressBookParser
+
+LogicManager -> MailingListCommand : execute()
+activate MailingListCommand
+
+
+MailingListCommand --> LogicManager : result
+deactivate MailingListCommand
+
+UI <--LogicManager: result
+deactivate LogicManager
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+MailingListCommand -[hidden]-> LogicManager
+destroy MailingListCommand
+
+UI --> Model : getFilteredPersonList()
+activate Model
+Model --> UI : filteredPersonList
+deactivate Model
+UI --> Model : getPrefixes()
+activate Model
+Model --> UI : prefixes
+deactivate Model
+
+UI --> CsvUtil : modelToCsv(filteredPersonList, path, prefixes)
+activate CsvUtil
+
+CsvUtil --> CsvUtil : modelToCsv
+activate CsvUtil
+CsvUtil --> UI
+deactivate CsvUtil
+deactivate CsvUtil
+@enduml
