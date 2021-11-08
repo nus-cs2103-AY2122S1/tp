@@ -2,7 +2,7 @@ package seedu.address.logic.commands.modulelesson;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_MODULE_LESSON_DISPLAYED_INDEX;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_CS2030S;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_CS2040S;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2030S_T12;
@@ -141,7 +141,8 @@ public class EditModuleLessonCommandTest {
                         .withModuleCode(parseModuleCode(VALID_MODULE_CODE_CS2030S_T12)).build();
         EditModuleLessonCommand command = new EditModuleLessonCommand(invalidIndex, descriptor);
 
-        assertCommandFailure(command, model, MESSAGE_INVALID_MODULE_LESSON_DISPLAYED_INDEX);
+        assertCommandFailure(command, model,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditModuleLessonCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -156,7 +157,8 @@ public class EditModuleLessonCommandTest {
                         .withModuleCode(parseModuleCode(VALID_MODULE_CODE_CS2030S_T12)).build();
         EditModuleLessonCommand command = new EditModuleLessonCommand(invalidIndex, descriptor);
 
-        assertCommandFailure(command, model, MESSAGE_INVALID_MODULE_LESSON_DISPLAYED_INDEX);
+        assertCommandFailure(command, model,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditModuleLessonCommand.MESSAGE_USAGE));
     }
 
     @Test

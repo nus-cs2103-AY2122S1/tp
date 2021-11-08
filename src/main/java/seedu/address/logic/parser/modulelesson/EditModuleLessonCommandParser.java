@@ -2,7 +2,6 @@ package seedu.address.logic.parser.modulelesson;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_MODULE_LESSON_DISPLAYED_INDEX;
 import static seedu.address.logic.commands.modulelesson.EditModuleLessonCommand.MESSAGE_MORE_THAN_ONE_LESSON_CODE;
 import static seedu.address.logic.commands.modulelesson.EditModuleLessonCommand.MESSAGE_NO_LESSON_CODE_PROVIDED;
 import static seedu.address.logic.commands.modulelesson.EditModuleLessonCommand.MESSAGE_USAGE;
