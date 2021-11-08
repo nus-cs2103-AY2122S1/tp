@@ -5,13 +5,18 @@ title: User Guide
 
 # Welcome to Socius User Guide!
 
-Welcome to Socius User Guide! Choose a section from the table of contents below to find step-by-step guides on how to use Socius!
+Welcome to Socius User Guide! 
+This User Guide familarises you with the commands and functionality of Socius, enabling you to get the most out of Socius.
+
+Choose a section from the table of contents below to find step-by-step guides on how to use Socius! If you are an experienced Socius user, a command summary table is available at the end of the user guide for your reference!
 
 The Socius User Guide gets you started with Socius.
 This User Guide familarises you with the commands and functionality of Socius, enabling you to get the most out of Socius.
 If you are an experienced Socius user, a command summary table is available at the end of the user guide for your reference!
 
 Are you a developer? Make sure to check out our Developer Guide too! You can find the Developer Guide [here](https://github.com/AY2122S1-CS2103T-W08-4/tp/blob/master/docs/DeveloperGuide.md).
+
+We hope that you will have a great time using Socius! :)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -609,7 +614,10 @@ If the format of your data file is invalid, Socius will discard all data and sta
 
 | Word | Meaning |
 |--------|-------|
-|        |         |
+| Command History | Previous commands that have been inputted by the user |
+| Command Line Interface | An interface that processes commands to a program in the form of lines of text |
+| Graphical User Interface | An interface that allows users to interact with the system through graphical elements such as buttons and icons |
+| Social Handle | Public username of a social media account |
 
 --------------------------------------------------------------------------------------------------------------------
 
