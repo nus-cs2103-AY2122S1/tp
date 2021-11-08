@@ -61,6 +61,8 @@ public class CommandTestUtil {
     public static final String VALID_LAST_DATE2_OCT = "15-10-2021";
     public static final String VALID_KEYWORD_F = "f";
     public static final String VALID_KEYWORD_C = "c";
+    public static final String VALID_KEYWORD_LF = "lf";
+    public static final String VALID_KEYWORD_LC = "lc";
 
     public static final String VALID_NAME_FOOTBALL_TRAINING = "Football Training";
     public static final String VALID_NAME_SWIM_TRAINING = "Swim Training";
@@ -71,7 +73,7 @@ public class CommandTestUtil {
     public static final String VALID_VENUE_BASKETBALL = "basketball court";
     public static final String VALID_VENUE_FOOTBALL_TRAINING = "Field";
     public static final String VALID_VENUE_SWIM_TRAINING = "Pool";
-    public static final String VALID_CAPACITY_BASKETBALL = "5";
+    public static final String VALID_CAPACITY_BASKETBALL = "1";
     public static final String VALID_CAPACITY_FOOTBALL_TRAINING = "20";
     public static final String VALID_CAPACITY_SWIM_TRAINING = "15";
     public static final String VALID_TIME_BASKETBALL = "0830";
@@ -98,6 +100,8 @@ public class CommandTestUtil {
     public static final String LAST_DATE2_DESC_OCT = " " + PREFIX_DATE2 + VALID_LAST_DATE2_OCT;
     public static final String KEYWORD_DESC_F = " " + PREFIX_KEYWORD + VALID_KEYWORD_F;
     public static final String KEYWORD_DESC_C = " " + PREFIX_KEYWORD + VALID_KEYWORD_C;
+    public static final String KEYWORD_DESC_LF = " " + PREFIX_KEYWORD + VALID_KEYWORD_LF;
+    public static final String KEYWORD_DESC_LC = " " + PREFIX_KEYWORD + VALID_KEYWORD_LC;
 
     public static final String NAME_DESC_FOOTBALL_TRAINING = " " + PREFIX_NAME + VALID_NAME_FOOTBALL_TRAINING;
     public static final String NAME_DESC_SWIM_TRAINING = " " + PREFIX_NAME + VALID_NAME_SWIM_TRAINING;
