@@ -37,6 +37,7 @@ public class FileUtil {
     /**
      * Returns true if {@code path} can be converted into a {@code Path} via {@link Paths#get(String)},
      * otherwise returns false.
+     *
      * @param path A string representing the file path. Cannot be null.
      */
     public static boolean isValidPath(String path) {
@@ -50,6 +51,8 @@ public class FileUtil {
 
     /**
      * Creates a file if it does not exist along with its missing parent directories.
+     *
+     * @param file File to create if it is missing.
      * @throws IOException if the file or directory cannot be created.
      */
     public static void createIfMissing(Path file) throws IOException {
@@ -60,6 +63,8 @@ public class FileUtil {
 
     /**
      * Creates a file if it does not exist along with its missing parent directories.
+     *
+     * @param file File to create.
      */
     public static void createFile(Path file) throws IOException {
         if (Files.exists(file)) {
@@ -73,6 +78,8 @@ public class FileUtil {
 
     /**
      * Creates parent directories of file if it has a parent directory
+     *
+     * @param file File to create parent directories of.
      */
     public static void createParentDirsOfFile(Path file) throws IOException {
         Path parentDir = file.getParent();
@@ -83,7 +90,7 @@ public class FileUtil {
     }
 
     /**
-     * Assumes file exists
+     * Assumes file exists.
      */
     public static String readFromFile(Path file) throws IOException {
         return new String(Files.readAllBytes(file), CHARSET);
@@ -92,6 +99,9 @@ public class FileUtil {
     /**
      * Writes given string to a file.
      * Will create the file if it does not exist yet.
+     *
+     * @param file File to write to.
+     * @param content String content to write to file.
      */
     public static void writeToFile(Path file, String content) throws IOException {
         Files.write(file, content.getBytes(CHARSET));
@@ -100,10 +110,10 @@ public class FileUtil {
     /**
      * Gets a List of Students from CSV file of student data.
      *
-     * @param chosenFile file chosen by user
-     * @return List of Students in the CSV file
-     * @throws IllegalArgumentException if CSV contains invalid input
-     * @throws IOException if error reading the file
+     * @param chosenFile File chosen by user.
+     * @return List of Students in the CSV file.
+     * @throws IllegalArgumentException If CSV contains invalid input.
+     * @throws IOException If error reading the file.
      */
     public static List<Student> getStudentsFromCsv(File chosenFile) throws IllegalArgumentException, IOException,
             IllegalValueException {
@@ -127,8 +137,8 @@ public class FileUtil {
     /**
      * Adds a Student to a List of Students.
      *
-     * @param stuList Student list to add to
-     * @param nextLine line in a CSV file of student data
+     * @param stuList Student list to add to.
+     * @param nextLine Line in a CSV file of student data.
      */
     private static void addStudentFromCsvLine(List<Student> stuList, String[] nextLine) {
         StudentId sid = new StudentId(nextLine[0].trim());

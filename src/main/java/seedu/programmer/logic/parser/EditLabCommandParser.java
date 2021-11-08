@@ -80,7 +80,7 @@ public class EditLabCommandParser implements Parser<EditLabCommand> {
             total = new LabTotal(ParserUtil.parseTotal(argMultimap.getValue(PREFIX_LAB_TOTAL).orElse(null)));
         }
 
-        // The user must have provided either new lab number or total score
+        // At least one of new lab number and total score must be provided.
         assert newLabNum != null || total != null;
         if (isNewLabNum && isTotal) {
             return new EditLabCommand(labResult, newLabNum, total);

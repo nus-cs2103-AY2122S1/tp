@@ -21,10 +21,11 @@ public class Lab implements DisplayableObject {
 
     /**
      * Constructs a marked Lab Object.
-     * @param labNum the labNum of the lab
-     * @param actualScore  the score obtained by the student
-     * @param totalScore the total score
-     * */
+     *
+     * @param labNum The labNum of the lab.
+     * @param actualScore The score obtained by the student.
+     * @param totalScore The total score.
+     */
     public Lab(LabNum labNum, LabResult actualScore, LabTotal totalScore) {
         requireNonNull(totalScore);
         this.labNum = labNum;
@@ -33,9 +34,11 @@ public class Lab implements DisplayableObject {
     }
 
     /**
-     * Constructs a unmarked Lab Object.
-     * @param labNum the labNum of the lab
-     * @param totalScore the total score */
+     * Constructs an unmarked Lab Object.
+     * .
+     * @param labNum The labNum of the lab.
+     * @param totalScore The total score.
+     */
     public Lab(LabNum labNum, LabTotal totalScore) {
         requireNonNull(totalScore);
         this.labNum = labNum;
@@ -44,8 +47,11 @@ public class Lab implements DisplayableObject {
     }
 
     /**
-     * @param labNum the labNum of the lab
-     * */
+     * Constructor for Lab.
+     *
+     * @param labNum The labNum of the lab.
+     *
+     */
     public Lab(LabNum labNum) {
         this.labNum = labNum;
     }
@@ -82,7 +88,8 @@ public class Lab implements DisplayableObject {
 
     /**
      * Updates the labNum of the lab
-     * @param newLabNum the new lab number
+     *
+     * @param newLabNum The new lab number.
      */
     public void updateLabNum(LabNum newLabNum) {
         if (newLabNum.getLabNum() > 0) {
@@ -91,8 +98,9 @@ public class Lab implements DisplayableObject {
     }
 
     /**
-     * Updates the totalScore of the lab
-     * @param total new total score
+     * Updates the totalScore of the lab.
+     *
+     * @param total New total score.
      */
     public void updateTotal(LabTotal total) {
         if (total != null) {
@@ -100,6 +108,11 @@ public class Lab implements DisplayableObject {
         }
     }
 
+    /**
+     * Returns whether a lab is marked.
+     *
+     * @return true if a lab is marked.
+     */
     public boolean isMarked() {
         return !(actualScore.getLabResult().equals(LabResult.getPlaceholder()));
     }
@@ -112,7 +125,7 @@ public class Lab implements DisplayableObject {
     }
 
     /**
-     * check if the labNum, labResult and labTotal are all identical.
+     * Check if the labNum, labResult and labTotal are all identical.
      */
     public boolean isIdenticalLab(Lab otherLab) {
         return labNum.equals(otherLab.getLabNum())
@@ -127,7 +140,8 @@ public class Lab implements DisplayableObject {
 
     /**
      * Make a copy of an existing Lab.
-     * @return a copy of the lab
+     *
+     * @return A copy of the lab.
      */
     public Lab copy() {
         return new Lab(labNum, actualScore, totalScore);

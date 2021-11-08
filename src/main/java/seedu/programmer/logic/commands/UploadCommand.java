@@ -17,8 +17,8 @@ public class UploadCommand extends Command {
     /**
      * Returns an UploadCommandResult with a message to indicate that the command was executed.
      *
-     * @param model {@code Model} which the command should operate on
-     * @return UploadCommandResult with a message
+     * @param model {@code Model} which the command should operate on.
+     * @return UploadCommandResult with a message.
      */
     @Override
     public UploadCommandResult execute(Model model) {

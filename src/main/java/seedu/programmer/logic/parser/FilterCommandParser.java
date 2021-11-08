@@ -16,14 +16,16 @@ import seedu.programmer.model.student.QueryStudentDescriptor;
 import seedu.programmer.model.student.StudentDetailContainsQueryPredicate;
 
 /**
- * Parses input arguments and creates a new FilterCommand object
+ * Parses input arguments and creates a new FilterCommand object.
  */
 public class FilterCommandParser implements Parser<FilterCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the FilterCommand
      * and returns a FilterCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     *
+     * @param args The command arguments.
+     * @throws ParseException If the user input does not conform the expected format.
      */
     public FilterCommand parse(String args) throws ParseException {
         requireNonNull(args);
@@ -55,10 +57,10 @@ public class FilterCommandParser implements Parser<FilterCommand> {
      * Retrieves the trimmed predicate argument from the argument Multimap.
      * If argument does not exist in argument Multimap, returns `null` instead.
      *
-     * @param argMultimap the map to get the argument from
-     * @param predicate the specified predicate
-     * @return the trimmed predicate argument
-     * @throws ParseException if the trimmed predicate argument is empty
+     * @param argMultimap The map to get the argument from.
+     * @param predicate The specified predicate.
+     * @return The trimmed predicate argument.
+     * @throws ParseException If the trimmed predicate argument is empty.
      */
     private String getTrimmedPredicateArg(ArgumentMultimap argMultimap, Prefix predicate) throws ParseException {
         String trimmedPredicateArg = null;
@@ -75,12 +77,12 @@ public class FilterCommandParser implements Parser<FilterCommand> {
     /**
      * Gets the query student descriptor based on the arguments specified.
      *
-     * @param nameArg the name argument
-     * @param sidArg the student id argument
-     * @param cidArg the class id argument
-     * @param emailArg the email argument
-     * @return the QueryStudentDescriptor
-     * @throws ParseException if no field is specified to be queried
+     * @param nameArg The name argument.
+     * @param sidArg The student id argument.
+     * @param cidArg The class id argument.
+     * @param emailArg The email argument.
+     * @return the QueryStudentDescriptor.
+     * @throws ParseException If no field is specified to be queried.
      */
     private QueryStudentDescriptor getQueryStudentDescriptor(
             String nameArg, String sidArg, String cidArg, String emailArg) throws ParseException {

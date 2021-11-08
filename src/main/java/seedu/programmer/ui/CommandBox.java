@@ -64,6 +64,7 @@ public class CommandBox extends UiPart<Region> {
 
     /**
      * Handles the Up and Down arrow keys pressed event.
+     *
      * @param event The input event trigger this method to be invoked.
      */
     @FXML
