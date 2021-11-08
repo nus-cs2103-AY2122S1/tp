@@ -39,6 +39,10 @@ public class FilterCommandParser implements Parser<FilterCommand> {
                     String.format(MESSAGE_UNKNOWN_ARGUMENT_FLAG, e.getMessage(), FilterCommand.MESSAGE_USAGE));
         }
 
+        if (!argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+        }
+
         // Initializing all the arguments at the beginning.
         String trimmedNameArg = getTrimmedPredicateArg(argMultimap, PREFIX_NAME);
         String trimmedSidArg = getTrimmedPredicateArg(argMultimap, PREFIX_STUDENT_ID);

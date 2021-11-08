@@ -1,5 +1,6 @@
 package seedu.programmer.logic.parser;
 
+import static seedu.programmer.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.programmer.commons.core.Messages.MESSAGE_MISSING_ARGUMENT;
 import static seedu.programmer.logic.commands.CommandTestUtil.LAB_NUM;
 import static seedu.programmer.logic.commands.CommandTestUtil.LAB_TOTAL;
@@ -30,15 +31,16 @@ public class AddLabCommandParserTest {
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_MISSING_ARGUMENT, AddLabCommand.MESSAGE_USAGE);
+        String expectedInvalidMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLabCommand.MESSAGE_USAGE);
+        String expectedMissingArgMessage = String.format(MESSAGE_MISSING_ARGUMENT, AddLabCommand.MESSAGE_USAGE);
 
         // missing labNum prefix
-        assertParseFailure(parser, VALID_LAB_NO + LAB_TOTAL, expectedMessage);
+        assertParseFailure(parser, VALID_LAB_NO + LAB_TOTAL, expectedInvalidMessage);
 
         // missing totalScore prefix
-        assertParseFailure(parser, LAB_NUM + VALID_TOTAL_SCORE, expectedMessage);
+        assertParseFailure(parser, LAB_NUM + VALID_TOTAL_SCORE, expectedMissingArgMessage);
 
         // all prefixes missing
-        assertParseFailure(parser, VALID_LAB_NO + VALID_TOTAL_SCORE.toString(), expectedMessage);
+        assertParseFailure(parser, VALID_LAB_NO + VALID_TOTAL_SCORE.toString(), expectedInvalidMessage);
     }
 }
