@@ -54,6 +54,10 @@ public class Lesson {
         return capacity;
     }
 
+    public int getCapacityValue() {
+        return capacity.getCapacity();
+    }
+
     public Price getPrice() {
         return price;
     }

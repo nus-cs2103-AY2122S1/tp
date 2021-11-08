@@ -29,7 +29,7 @@ public class EditLessonCommand extends EditCommand {
     public static final String MESSAGE_USAGE = String.format("%1$s %2$s: Edits the details of the lesson specified."
                     + "Existing values will be overwritten by the input values."
                     + "\nParameters: "
-                    + "\nLESSON INDEX (must be a positive integer)"
+                    + "\nINDEX (must be a positive integer)"
                     + "  [%3$sLESSON NAME]"
                     + "  [%4$sLESSON CAPACITY]"
                     + "  [%5$sLESSON PRICE]"

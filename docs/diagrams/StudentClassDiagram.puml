@@ -1,0 +1,27 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+package Student <<Rectangle>> {
+Class Student
+Class StudentName
+Class Phone
+Class ParentName
+Class Progress
+Class ProgressList
+Class Lessons
+Class Lesson
+}
+
+Student *--> "1"StudentName
+Student *--> "0..2" Phone
+Student *--> "1"ParentName
+Student *--> "1"ProgressList
+ProgressList *--> "0..10"Progress
+Student *-right-> "*"Lessons
+Lessons --> "*"Lesson
+
+
+@enduml

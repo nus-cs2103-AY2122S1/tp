@@ -25,7 +25,7 @@
 
 #quickStartTitle, #featuresTitle, #helpTitle, #addSTitle, #listTitle, #delSTitle, #editSTitle, #viewSTitle,
 #addPTitle, #delPTitle, #clearTitle, #exitTitle, #savingDataTitle, #editDataTitle,
-#findTitle, #addLTitle, #delLTitle, #editLTitle, #viewLTitle, #faqTitle {
+#findTitle, #addLTitle, #delLTitle, #editLTitle, #addSlTitle, #delSlTitle, #viewLTitle, #faqTitle {
     -fx-alignment: top-left;
     -fx-font-family: "Arial";
     -fx-font-size: 23;
@@ -41,7 +41,7 @@
 }
 
 #format, #format1, #format2, #format3, #format4, #format5, #format6, #format7, #format8, #format9,
-#format10, #format11, #format12, #format13, #format14, #format15, #format16 {
+#format10, #format11, #format12, #format13, #format14, #format15, #format16, #format17, #format18 {
     -fx-alignment: top-left;
     -fx-font-family: "Arial";
     -fx-font-size: 16;
@@ -49,7 +49,7 @@
 }
 
 #example, #example1, #example2, #example3, #example4, #example5, #example6, #example7, #example8, #example9,
-#example10, #example11, #example12, #example13 {
+#example10, #example11, #example12, #example13, #example14, #example15 {
     -fx-alignment: top-left;
     -fx-font-family: "Arial";
     -fx-font-size: 16;
@@ -63,8 +63,8 @@
 }
 
 #listDesc, #addSDesc, #delSDesc, #helpDesc, #editSDesc,#viewSDesc, #addPDesc, #delPDesc,
-#clearDesc, #exitDesc, #savingDataDesc, #editDataDesc1, #editDataDesc2, #findDesc1, #findDesc2, #findDesc3,
-#addLDesc, #delLDesc, #editLDesc, #viewLDesc {
+#clearDesc, #exitDesc, #savingDataDesc, #editDataDesc1, #editDataDesc2, #editDataDesc3, #findDesc1, #findDesc2,
+#findDesc3, #addLDesc, #delLDesc, #editLDesc, #addSlDesc, #delSlDesc, #viewLDesc {
     -fx-alignment: top-left;
     -fx-font-family: "Arial";
     -fx-font-size: 16;
@@ -73,7 +73,7 @@
 
 #delSExampleDesc, #listExampleDesc, #listAExampleDesc, #editSExampleDesc, #viewSExampleDesc, #addPExampleDesc,
 #delPExampleDesc, #findSExampleDesc, #findLExampleDesc, #delLExampleDesc,
-#editLExampleDesc, #viewLExampleDesc {
+#editLExampleDesc, #addSlExampleDesc, #delSlExampleDesc, #viewLExampleDesc {
     -fx-alignment: top-left;
     -fx-font-family: "Arial";
     -fx-font-size: 16;
@@ -95,9 +95,10 @@
 
 #helpCommand, #addSCommand, #addSExample, #delSCommand, #delSExample, #listGeneralCommand, #listExample,
 #listAExample, #editSCommand, #editSExample, #viewSCommand, #viewSExample, #addPCommand, #addPExample,
-#delPCommand, #delPExample, #clearCommand,
+#delPCommand, #delPExample, #clearCommand, #addSlCommand, #addSlExample, #delSlCommand, #delSlExample,
 #exitCommand, #findCommand, #findSExample, #findLExample, #addLCommand, #addLExample, #delLCommand, #delLExample,
-#viewLCommand, #viewLExample, #editLCommand, #editLExample, #editFilePath, #sFlag, #lFlag {
+#viewLCommand, #viewLExample, #editLCommand, #editLExample, #editStudentsFilePath, #editLessonsFilePath,
+#sFlag, #lFlag {
     -fx-alignment: top-left;
     -fx-background-color: lavender;
     -fx-font-family: "monospace";
