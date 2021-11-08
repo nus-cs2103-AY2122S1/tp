@@ -2,8 +2,16 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-{:toc}
+
+## Table of Contents
+* [Introduction](#introduction)
+* [Acknowledgements](#acknowledgements)
+* [Setting Up & Getting Started](#setting-up-getting-started) 
+* [Design](#design)
+* [Implementation](#implementation)
+* [Appendix: Requirements](#appendix-requirements)
+* [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+* [Appendix: Effort](#appendix-effort)
 
 --------------------------------------------------------------------------------------------------------------------
 ## **Introduction**
@@ -20,9 +28,9 @@ With the advent of technology and related jobs, MTR uses Command-Line Interface 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+## **Setting up, Getting Started**
 
-Refer to the guide [_Setting up and getting started_](SettingUp.md).
+Refer to the guide [Setting Up & Getting Started](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -76,6 +84,7 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103-F10-1/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
@@ -92,6 +101,7 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Applicant` and `Position` objects residing in the `Model`.
+
 
 ### Logic component
 
@@ -111,8 +121,8 @@ How the `Logic` component works:
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete-position 1")` API call.
 
-![Interactions Inside the Logic Component for the `delete-position 1` Command](images/DeleteSequenceDiagram.png)
-
+**Interactions Inside the Logic Component for the `delete-position 1` Command**
+<img src="images/DeleteSequenceDiagram.png" width="1080" height="500"/>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -124,6 +134,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 How the parsing works:
 * When called upon to parse a user command, the `MrTechRecruiterParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddPositionCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `MrTechRecruiterParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddPositionCommandParser`, `DeleteApplicantCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+
 
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103-F10-1/tp/blob/master/src/main/java/seedu/address/model/Model.java)
@@ -140,6 +151,7 @@ The `Model` component,
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** To avoid cluttering up the Model class diagram, classes like `ReadOnlyPositionBook`, `PositionBook` etc. are not added. However, they have similar relationships and structure as that of `ReadOnlyApplicantBook`, `ApplicantBook` etc.
 </div>
+
 
 ### Applicant and Position
 
@@ -202,6 +214,8 @@ This section describes some noteworthy details on how certain features are imple
 
 </div>
 
+
+
 ### Add applicant feature :heavy_check_mark:
 
 The implementation of the add applicant feature is achieved by the `AddApplicantCommand` class. Just like all other
@@ -225,7 +239,6 @@ block 123, #01-01 pos/software engineer github/https://github.com/johndoe`. The 
 The following sequence diagram shows the method invocation in this step:
 ![AddApplicantSequenceDiagram1](images/add-applicant/AddApplicantSequenceDiagram1.png)
 
-
 Step 2. LogicManager will execute this `AddApplicantCommand` instance. This will invoke the
 `Model#addApplicantWithParticulars()` method.
 
@@ -239,8 +252,7 @@ will not be created.
 
 </div>
 
-The following activity diagram summarizes the actions taken when LogicManager executes the `AddApplicantCommand`:
-
+The following activity diagram summarizes the actions taken when LogicManager executes the AddApplicantCommand: <br>
 ![AddApplicantActivityDiagram1](images/add-applicant/AddApplicantActivityDiagram1.png)
 
 #### Design considerations:
@@ -250,12 +262,15 @@ The following activity diagram summarizes the actions taken when LogicManager ex
 * **Alternative 1 (current choice):** Saves all the user input as an applicantParticulars object.
     * Pros: Avoids the unnecessary clutter of passing multiple parameters to multiple method calls.
     * Cons: May have lead to greater coupling among classes.
+  
 
 * **Alternative 2:** Each user input parameter (e.g. Name, Address, PositionTitle etc.) are passed to multiple method
   calls.
     * Pros: Will reduce the usage of a new class, thereby reducing coupling.
     * Cons: This could lead to longer method signatures, longer code, and possibly a less OOP approach.
     
+
+
 ### Delete applicant feature :heavy_check_mark:
 
 #### Implementation
@@ -275,7 +290,6 @@ Step 1: The user inputs the command `delete-applicant 1`. The app parser simply 
 Step 2: LogicManager executes this `DeleteApplicantCommand` instance, invoking the `Model#deleteApplicant()` method.
 
 Step 3: This then calls the internal method for `ApplicantBook`, `ApplicantBook#removeApplicant()`, which then removes the applicant thereafter.
-
 
 
 
@@ -306,7 +320,6 @@ The following activity diagram summarizes the actions taken when LogicManager ex
 
 
 
-
 ### Mark/update applicant's status feature :heavy_check_mark:
 
 #### Implementation
@@ -333,8 +346,6 @@ The following activity diagram summarizes the actions taken when LogicManager ex
 <img src="images/MarkApplicantActivityDiagram.png" width="750" />
 
 #### Design considerations:
-
-
 **Aspect: Integration or separation with the 'Edit Applicant' feature**
 
 * **Alternative 1 (current choice):** Separate updating of applicant statuses into its own command
@@ -342,9 +353,11 @@ The following activity diagram summarizes the actions taken when LogicManager ex
       * Our target user (Tech recruiters) are likely to update applicant statuses a with must higher frequency than information like e-mails, addresses etc. Hence, having a dedicated, shorter command streamlines the user workflow.
     * Cons: Additional command increases complexity, harder to maintain.
 
+
 * **Alternative 2:** Integrate updating of applicant statuses into 'Edit Applicant' command
     * Pros: Fewer commands for user to remember, also easier for developer to maintain.
     * Cons: More troublesome to quickly update applicant statuses.
+
 
 
 ### Filter applicants feature
@@ -354,9 +367,6 @@ The following activity diagram summarizes the actions taken when LogicManager ex
 The filter feature is achieved using the functionality of the `FilteredList` class built into JavaFX, which filters its contents based on a specified `Predicate`.  
 This `Predicate` is constructed from the filters specified by the user whenever the `filter-applicant` command is called. 
 
-
-
-#### Design considerations:
 <div markdown="block" class="alert alert-info"> 
 * This command is used for filtering applicants by `Position` and `ApplicationStatus` only, not to be confused with `FindApplicantCommand`, which searches by 'Name', and has slightly different matching criteria.
 </div>  
@@ -364,13 +374,13 @@ This `Predicate` is constructed from the filters specified by the user whenever 
 Given below is a trace of the command's execution. In particular, we first examine the parsing of user input into a `FilterApplicantCommand` object.
 The process is described by the following sequence diagram:
 
-<img src="images/filterapplicantsequencediagram0.png" width="950" />
+<img src="images/FilterApplicantSequenceDiagram0.png" width="950" />
 
 The role of the `FilterApplicantDescriptor` class is to store the details of the parsed filters for the `Model` component's use, when the `FilterApplicantCommand` is subsequently executed.
 
 The execution of the `FilterApplicantCommand` is shown below in a sequence diagram (as a continuation of the diagram above):
 
-<img src="images/filterapplicantsequencediagram1.png" width="1100" />
+<img src="images/FilterApplicantSequenceDiagram1.png" width="1100" />
 
 The `FilterApplicantDescriptorVerifier` class verifies the 
 original `FilterApplicantDescriptor` against the `Model`,
@@ -386,7 +396,6 @@ Note: The `FilterApplicantDescriptor` is not marked for deletion when the comman
 
 The `Descriptor` pattern (used similarly in features such as 'Edit Applicant') comes in handy whenever a command accepts a variable number of arguments & unspecified arguments are assumed to be ignored. For instance, the 'Edit Applicant' feature accepts a variable number of fields to be edited, and leaves all unspecified fields unedited.
 
-
 The filter feature fits such a description, as the user should be able to specify a variable number of filtering criteria, and unspecified criteria should be left out of the filter. Hence, the pattern is implemented here in `FilterApplicantDescriptor`, which is used to construct the `Predicate`. It is also used in `FilterApplicantDescriptorVerifier`, to verify a variable number of filters.
 
 #### Design considerations:
@@ -397,9 +406,11 @@ The filter feature fits such a description, as the user should be able to specif
     * Pros: Well-defined behaviour when working through the API
     * Cons: More complex filtering operations are harder to achieve, as we are restricted by the operations defined by the API.
 
+
 * **Alternative 2: Manually manipulating the ApplicantList (e.g. using the Java Stream API)** 
     * Pros: Greater flexibility; do not have to rely on constructing predicates and passing them to FilteredList.
     * Cons: Directly manipulating the internal list breaks the abstraction provided by the FilteredList API, which can cause bugs.
+
 
 **Aspect: Reusing 'Descriptor' pattern from AB3's 'EditPersonDescriptor'**
 
@@ -407,9 +418,12 @@ The filter feature fits such a description, as the user should be able to specif
     * Pros: Well-documented, pre-existing class that can be adapted to suit current usecase; time saved
     * Cons: Less customized solution (e.g a user might wish to specify multiple criteria for a particular filter, or switch to a logical `OR` filter instead, in which case the `Descriptor` pattern is insufficient to fulfill such functionality).
 
+
 * **Alternative 2: Delegate the responsibility of constructing Predicates to a new class**
     * Pros: Greater customizability in specifying different types of filters
     * Cons: The class needs to be written from the ground up - this will cause greater complexity & take more time. Tests will need to be written from the ground up as well to accommodate the  behaviour of the new class.
+
+
 
 ### Find applicants feature
 
@@ -443,6 +457,7 @@ Step 3. Results of this new filtered list is then passed to the model and is ref
 * **Alternative 1 (current choice):** Separating searching of name from positions and statuses.
     * Pros: Because of the way we implemented, it is much easier to search via name rather than positions or statuses. Also reduces coupling on the `FilterApplicantCommand` class and easier to test.
     * Cons: Might result in slight confusion for users due to 2 similarly-named commands.
+
 
 * **Alternative 2:** Use the existing `FindCommand` or created `FilterApplicantCommand` and improve the command from there to achieve this functionality.
     * Pros: A singular class to handle all finding/filtering-related commands, making it easier for users.
@@ -480,12 +495,12 @@ Step 3. UI-wise, the applicant should now appear with the updated application st
     * Pros: Simplifies code base since it is accessible via the `Application` class directly.
     * Cons: Higher coupling for `Application` class.
 
+
 * **Alternative 2:** Have application status in a separate class with enumerations inside it.
     * Pros: Separates code logic from Application, easier to digest and manipulate.
     * Cons: Increases complexity of code. Separate class has little usage.
 
-
-
+  
 
 ### List applicants feature
 
@@ -514,9 +529,11 @@ Step 3. The UI is updated to show the current list of applicants.
     * Pros: Better understanding of underlying code and how everything comes together.
     * Cons: More time-consuming.
 
+
 * **Alternative 2:** Use existing `list` command in AB3 and adapt for MTR.
     * Pros: Many functions already in place and little modification is required.
     * Cons: Although less code to be added, due to coupling, more things are needed to be changed intricately and carefully (i.e. prone to errors/bugs).
+
 
 
 ### Add position feature :heavy_check_mark:
@@ -541,7 +558,6 @@ Step 2. LogicManager executes this `AddPositionCommand` instance, invoking the `
 Step 3. The UI for `positionBook` will now contain the new position added.
 
 
-
 #### Design considerations:
 
 **Aspect: Adding positions**
@@ -550,9 +566,11 @@ Step 3. The UI for `positionBook` will now contain the new position added.
     * Pros: Simplifies coding and testing since everything is parked under 1 class.
     * Cons: Higher coupling for the `Position` class.
 
+
 * **Alternative 2:** Have a separate class which contains details of various positions like applicants.
     * Pros: Separates details from the actual class.
     * Cons: Unnecessary since positions have few fields and functions, additional class simply increases complexity. Defeats the purpose of the `Position` class.
+
 
 
 ### Delete position feature :heavy_check_mark:
@@ -606,7 +624,6 @@ The following activity diagram summarizes the actions taken when LogicManager ex
 
 
 
-    
 
 ### List positions feature
 
@@ -635,9 +652,11 @@ Step 3. The UI is updated to show the current list of positions.
     * Pros: Better understanding of underlying code and how everything comes together.
     * Cons: More time-consuming.
 
+
 * **Alternative 2:** Use existing `list` command in AB3 and adapt for MTR.
     * Pros: Many functions already in place and little modification is required.
     * Cons: Due to coupling, requires changing code intricately and carefully (i.e. prone to errors/bugs).
+
 
 
 ### Rejection Rate feature
@@ -669,6 +688,7 @@ The following sequence diagram shows the method invocation in this step.
 
 Step 5. Any command the user executes next simply refreshes the current state to its original state as shown in step 1.
 
+
 #### Design considerations:
 
 #### Aspect: How rejection rate executes:
@@ -676,6 +696,8 @@ Step 5. Any command the user executes next simply refreshes the current state to
 * **Alternative 1** (current choice): Calculate the rejection rate only when needed. No storing required.
     * Pros: Saves a significant amount of space and reduces immutability. Implementation is simple.
     * Cons: A user could want to calculate many rejection rates frequently and hence not storing these values might have performance issues in the long run.
+  
+
 * **Alternative 2**: Store all rejection rates with their respective positions in a dictionary.
     * Pros: Accessing the rejection rates of a certain position will only require access to the dictionary and nothing else - limited accessibility.
       Also, accessing a rejection rate will be much quicker.
@@ -684,6 +706,8 @@ Step 5. Any command the user executes next simply refreshes the current state to
 
 The following activity diagram summarizes the actions taken when LogicManager executes the RejectionRateCommand:
 ![ActivityDiagram](images/rejection-rates/ActivityDiagram.png)
+
+
 
 ### Visualize Positions feature
 
@@ -716,9 +740,12 @@ Note: The `PositionPieChart` is not marked for deletion when the command finishe
     * Pros: Quick and easy to use, reusable.
     * Cons: Lack of flexibility, limited choice in UI design.
 
+
 * **Alternative 2:** Full, `UiPart` class with FXML 
     * Pros: Greater customizability, styling options.
     * Cons: More complex, harder to maintain.
+
+
 
 ### Undo feature
 
@@ -727,7 +754,6 @@ Note: The `PositionPieChart` is not marked for deletion when the command finishe
 The [Memento Pattern](https://en.wikipedia.org/wiki/Memento_pattern) is used to implement undo feature. The undo functionality is facilitated by `Memento` and `History`. 
 Every command keeps a `memento` which stores the state of `model` before any modification is done by a command. 
 The `model` keeps track of the `history` which stores a stack of previous modification commands. 
-
 
 Given below is an example usage scenario and how the undo mechanism behaves at each step.
 
@@ -760,7 +786,6 @@ The following sequence diagram shows how the undo operation works:
 </div>
 
 
-
 The following activity diagram summarizes what happens when a user executes a new command:
 
 <img src="images/CommitActivityDiagram.png" width="250" />
@@ -772,6 +797,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 * **Alternative 1 (current choice):** Saves the entire model.
     * Pros: Easy to implement.
     * Cons: May have performance issues in terms of memory usage.
+
 
 * **Alternative 2:** Individual command knows how to undo by
   itself.
@@ -867,7 +893,7 @@ Guarantees: New position is saved with information displayed.
 * 1b. The position already exists in MTR.
     * 1b1. MrTechRecruiter shows an error message for duplicate position. <br>
       Use case ends.
-
+      
 
 **<u>Use Case: UC2 - Delete a position</u>** 
 
