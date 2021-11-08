@@ -17,8 +17,8 @@ CONNECTIONS is a **desktop app for managing contacts and keeping tracks of birth
     * [Editing a contact : `edit`](#editing-a-contact--edit)
     * [Adding Tags : `tag`](#adding-tags--tag)
     * [Removing Tags : `untag`](#removing-tags--untag)
-    * [Locating contacts by name and tag(s): `find`](#locating-contacts-by-name-and-tags-find)
-    * [Locating contacts by name or tag(s): `findAny`](#locating-contacts-by-name-or-tags-findany)
+    * [Locating contacts by name and tag(s): `find`](#locating-contacts-by-names-and-tags-find)
+    * [Locating contacts by name or tag(s): `findAny`](#locating-contacts-by-names-or-tags-findany)
     * [Pinning a contact: `pin`](#pinning-a-contact--pin)
     * [Unpinning a contact: `unpin`](#unpinning-a-contact--unpin)
     * [Deleting a contact : `delete`](#deleting-a-contact--delete)
@@ -31,6 +31,7 @@ CONNECTIONS is a **desktop app for managing contacts and keeping tracks of birth
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-before: always;"></div>
 ## Quick start
 
 1. Ensure you have Java `11` or above installed on your computer.
@@ -79,8 +80,9 @@ CONNECTIONS is a **desktop app for managing contacts and keeping tracks of birth
 
 </div>
 
+<div style="page-break-after: always;"></div>
 ### Upcoming Birthdays
-The vertical tab provides upcoming birthdays at a glance.  
+The vertical tab provides upcoming birthdays at a glance. Having this means that you will never miss a birthday.
 It sorts all birthdays amongst all contacts in CONNECTIONS **chronologically**, with the **nearest** upcoming birthday at the **top**.
 
 * Contacts color-coded in **GREEN** are celebrating their birthdays **today**.
@@ -88,9 +90,10 @@ It sorts all birthdays amongst all contacts in CONNECTIONS **chronologically**, 
 * The rest of the entries will not be color-coded.  
   ![BirthdayColors](images/BirthdayColors.png)  
 
+<div style="page-break-after: always;"></div>
 ### Command Assistant
 
-Shows command format and example as the command is entered.
+Shows command format and example as the command is entered for a smoother learning curve.
 
 #### Sample Usage:
 
@@ -104,7 +107,7 @@ Shows command format and example as the command is entered.
 
 ### Command History
 
-View and use previously called commands.
+View and use previously called commands to minimize typing of repeated commands.
 
 Notes:
 * Only commands that have been used in the current program run can be viewed. Commands used in previous runs are not stored.
@@ -120,11 +123,12 @@ Notes:
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
 ## Commands
 
 ### Viewing help : `help`
 
-Shows a help message that explains the purpose and method of usage for each command.
+Shows a help message that explains the purpose and method of usage for each command for a smoother learning curve.
 
 #### Format:
 * `help` - List out all available commands.
@@ -146,6 +150,7 @@ Notes:
   * Opens a link to the documentation.
   ![help link](images/helpLink.png)
 
+<div style="page-break-after: always;"></div>
 ### Adding a contact: `add`
 
 Adds a contact to CONNECTIONS.
@@ -183,6 +188,7 @@ Shows a list of all contacts in CONNECTIONS.
 #### Format:
 * `list`
 
+<div style="page-break-after: always;"></div>
 ### Editing a contact : `edit`
 
 Edits an existing contact in CONNECTIONS.
@@ -204,9 +210,10 @@ Notes:
 * `edit 2 n/Betsy Crower t/`
   * Edits the name of the 2nd contact in the displayed contact list to be `Betsy Crower` and clears all existing tags.
 
+<div style="page-break-after: always;"></div>
 ### Adding Tags : `tag`
 
-Adds one or more tags to an existing contact in CONNECTIONS.
+Adds one or more tags to an existing contact in CONNECTIONS. This facilitates the organization of contacts into groups.
 
 #### Format:
 * `tag INDEX t/TAG [t/MORE_TAGS]…​`
@@ -237,9 +244,15 @@ Notes:
 * `untag 2 t/friend t/NUS`
     * Removes the tags `friend` and `NUS` from the 2nd contact.
 
+<div style="page-break-after: always;"></div>
+
 ### Locating contacts by name(s) and tag(s): `find`
 
 Finds all contacts who match **ALL** name and tag keywords provided.
+This narrows your search so that you will be able to filter contacts with greater specificity.
+
+The commands `find` and `findAny` will filter the displayed contacts and only display the matching results.  
+![result for `find n/alex t/football t/classmate`](images/findAlexfootballclassmatesResult.png)
 
 #### Format:
 * `find [c/] [n/NAME] …​ [t/TAG] …​`
@@ -259,17 +272,15 @@ Notes:
 **Sample Usage:**
 * `find n/John`
   * returns `john` and `John Doe`.
-    ![result for `find n/john`](images/findjohnResult.png)
 * `find n/alex t/football t/classmate`
   * returns `Alex Yeoh`, who has both `football` and `classmates` tag.<br>
-    ![result for `find n/alex t/football t/classmate`](images/findAlexfootballclassmatesResult.png)
 * `find c/ t/FRIENDS`
   * returns `Shin`, who is tagged with `FRIENDS`.
-    ![result for `find c/ t/FRIENDS`](images/findcFRIENDSResult.png)
 
 ### Locating contacts by name(s) or tag(s): `findAny`
 
-Finds all contacts who match **ANY** name and tag keywords provided.
+Finds all contacts who match **ANY** name and tag keywords provided. 
+This broadens your search so that you will be able to filter contacts with greater flexibility.
 
 #### Format:
 * `findAny [c/] [n/NAME] …​ [t/TAG] …​`
@@ -290,18 +301,19 @@ Notes:
 **Sample Usage:**
 * `findAny n/John`
   * returns `john` and `John Doe`.
-    ![result for `findAny n/john`](images/findAnyjohnResult.png)
 * `findAny n/alex n/irfan t/chef`
   * returns `Alex Yeoh`, `Irfan Ibrahim`, `Carol` who is tagged with `chef`.<br>
-    ![result for `findAny alex david`](images/findAnyalexirfanchefResult.png)
 * `findAny c/ n/Shin t/FRIENDS t/chef`
   * returns `Shin` who is tagged with `FRIENDS`, as well as `Carol` who is tagged with `chef`.
-    ![result for `findAny c/ n/Shin t/FRIENDS t/chef`](images/findAnycShinFRIENDSchefResult.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Pinning a contact : `pin`
 
-Pins a contact to the top of the contact list. 
+Pins a contact to the top of the contact list. This makes it easier to refer to the details of frequent contacts.
 
+Pinned contacts will appear at the top of the unfiltered list  
+![two pinned contacts](images/pinUiDouble.jpg)  
 #### Format: 
 * `pin INDEX`
   
@@ -315,6 +327,8 @@ Notes:
   * pins the 2nd contact in CONNECTIONS.
 * `find n/Betsy` followed by `pin 1`
   * pins the 1st contact in the results of the `find` command.
+
+<div style="page-break-after: always;"></div>
 
 ### Unpinning a contact : `unpin`
 
@@ -333,6 +347,8 @@ Notes:
   * unpins the 2nd contact in CONNECTIONS.
 * `find n/Betsy` followed by `unpin 1`
   * unpins the 1st contact in the results of the `find` command.
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting a contact : `delete`
 
@@ -354,7 +370,7 @@ Notes:
 
 ### Deleting multiple contacts : `deletem`
 
-Deletes the contacts within the range from CONNECTIONS.
+Deletes the contacts within the range from CONNECTIONS. This makes the removal of multiple contacts easy.
 
 #### Format:
 * `deletem START_INDEX - END_INDEX`
@@ -373,7 +389,7 @@ Notes:
 
 ### Exporting a mailing list of contacts : `mailingList`
 
-Exports a CSV file of the current view containing specified fields.
+Exports a CSV file of the current view containing specified fields. This helps you to make external notes when organizing birthday parties.
 
 #### Format:
 * `mailingList [p/] [e/] [a/] [b/] [t/]`
@@ -404,6 +420,7 @@ Clears all entries from CONNECTIONS.
 #### Format:
 * `clear`
 
+<div style="page-break-after: always;"></div>
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -434,6 +451,7 @@ If your changes to the data file makes its format invalid, CONNECTIONS will disc
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
 ## Command Summary
 
 Action | Summary | Format, Examples

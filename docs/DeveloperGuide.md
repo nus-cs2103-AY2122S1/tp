@@ -60,6 +60,8 @@ Given below is a quick overview of the main components and how they interact wit
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
+<div style="page-break-before: always;"></div>
+
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
 The rest of the App consists of four components.
@@ -81,11 +83,15 @@ Each of the four main components (also shown in the diagram above),
 * defines its *API* in an `interface` with the same name as the Component.
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
 
+<div style="page-break-before: always;"></div>
+
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
 <img src="images/ComponentManagers.png" width="300" />
 
 The sections below give more details of each component.
+
+<div style="page-break-before: always;"></div>
 
 ### UI component
 
@@ -104,6 +110,8 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
+<div style="page-break-before: always;"></div>
+
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/AY2122S1-CS2103-F09-4/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
@@ -118,12 +126,16 @@ How the `Logic` component works:
 1. The command can communicate with the `Model` when it is executed (e.g. to add a contact).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
+<div style="page-break-before: always;"></div>
+
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` and `DeleteCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
+
+<div style="page-break-before: always;"></div>
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -133,26 +145,23 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and creates an `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<div style="page-break-before: always;"></div>
+
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103-F09-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
-
 
 The `Model` component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores and sorts the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change. The `Person` objects are sorted according to how they should be displayed.
 * stores and sorts the `Person` objects as a separate _sorted_ list according to their birthday which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* Stores a set of `Prefix` objects which is exposed to outsiders as an unmodifiable `Set<Prefix>` that can be 'observed' e.g. the UI can be bound to this set so that the UI can use this data.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` object.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
-
+<div style="page-break-before: always;"></div>
 
 ### Storage component
 
@@ -170,6 +179,8 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-before: always;"></div>
 
 ## **Implementation**
 
@@ -199,6 +210,8 @@ Step 6. The user decides to remove the tag `student` from a contact at index 3, 
 
 Step 7. CONNECTIONS updates and removes the tag `student` from the contact.
 
+<div style="page-break-before: always;"></div>
+
 #### Design considerations:
 
 * **Option 1 (Current choice): Tags are saved within a `Set<Tag>` within `Person`**
@@ -225,6 +238,8 @@ Given below is an example usage scenario and how the pin mechanism behaves at ea
 Step 1. The user launches the application. Current `UniquePersonList` will contain previously added contacts `person1` and `person2`.
 
 ![PinUniquePersonListState0](images/PinUniquePersonListState0.png)
+
+<div style="page-break-before: always;"></div>
 
 Step 2. The user executes `add n/person3 …​` to add a new contact. This contact is initially unpinned and will be added to the `UniquePersonList`. It will be added to the end of the `UniquePersonList`.
 
@@ -254,6 +269,8 @@ The following sequence diagram shows how the pin operation works:
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `PinCommandParser` and `PinCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
+<div style="page-break-before: always;"></div>
+
 #### Design considerations:
 
 **Aspect: How pin executes:**
@@ -275,6 +292,8 @@ The following sequence diagram shows how the pin operation works:
 * **Option 2:** Have one card that will add a pin if the contact is pinned.
     * Pros: Harder to implement.
     * Cons: Less code duplication.
+
+<div style="page-break-before: always;"></div>
 
 ### Find feature
 
@@ -311,6 +330,8 @@ Step 5. CONNECTIONS' `UI` observes the filtered list and displays the updated fi
     * Pros: Cleaner implementation. Only need to modify a method to modify the functionality of `FindCommand`.
     * Cons: More code.
 
+<div style="page-break-before: always;"></div>
+
 ### FindAny feature
 
 #### Implementation
@@ -345,6 +366,7 @@ Step 5. CONNECTIONS' `UI` observes the filtered list is updated and displayed th
     * Pros: Cleaner implementation. Only need to modify a method to modify the functionality of `FindAnyCommand`.
     * Cons: More code.
 
+<div style="page-break-before: always;"></div>
 
 ### Help feature
 
@@ -378,6 +400,8 @@ The list of birthdays is generated in the `ModelManager`, which implements the f
 Given below is an example usage scenario and how the birthday reminders mechanism behaves at each step.
 
 Step 1. On app startup, contacts with a birthday are sorted by birth month and day. Contacts with birthdays that fall on the present day are colored green while birthdays that are within one week are colored blue. Additionally, a customized message with each contact's phone number and age will be displayed in the birthday reminder list.
+
+<div style="page-break-before: always;"></div>
 
 Step 2. The `BirthdayReminderListPanel` in CONNECTIONS' `UI` displays birthday reminders in sorted order, starting with the earliest upcoming birthday to the latest upcoming birthday for the year, after which displays birthdays that have passed for the current year in sorted order.
 
@@ -421,12 +445,11 @@ Step 8. The header row is created based on `Prefix` arguments stored in `Model`,
 Step 9. Individual rows are generated based on the `Prefix` arguments stored in `Model` and the `FilteredPerson` in `ModelManager`, based on a mapping in `CsvUtil`.  
 Step 10. The headers and rows are written to the CSV file that is specified by the user.  
 
-
-
-
 #### Design considerations:
 * Arguments for the command should follow the standard used in other parts of the software.
 * Balancing between simplicity of use when no arguments are provided, and flexibility for users who might want additional information.
+
+<div style="page-break-before: always;"></div>
 
 ### [Proposed] Partial data recovery feature
 Allows the user to recover partial data if the data file becomes corrupted. 
@@ -455,6 +478,8 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-before: always;"></div>
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -489,6 +514,7 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 * keep track of upcoming birthdays
 * easy to use
 
+<div style="page-break-before: always;"></div>
 
 ### User stories
 
@@ -514,6 +540,8 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 | Fast typer                    | Use sentences to interact with the app | Utilize the functions of the app quicker without using a mouse
 | User                          | Can modify contact details            | Update my contacts' details
 | Experienced user      | Retrieve previously run commands          | Avoid typing the commands I use frequently again and again
+
+<div style="page-break-before: always;"></div>
 
 ### Use cases
 
@@ -562,6 +590,8 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 
     Use case ends.
 
+<div style="page-break-before: always;"></div>
+
 **Extensions**
 
 * 2a. The list is empty.
@@ -606,7 +636,7 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 
     Use case ends.
 
-**Extensions**
+<div style="page-break-before: always;"></div>
 
 **Use case: Find a contact**
 
@@ -656,9 +686,11 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 
       Use case ends.
 
-* 2a. No existing contacts match the tag provided.
+<div style="page-break-before: always;"></div>
 
-    * 2a1. CONNECTIONS displays a message to indicate no matching contacts.
+* 2b. No existing contacts match the tag provided.
+  
+    * 2b1. CONNECTIONS displays a message to indicate no matching contacts.
 
       Use case resumes at step 2.
 
@@ -752,6 +784,8 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
     * 3b1. CONNECTIONS displays an error message.
     
       Use case resumes at step 2.
+
+<div style="page-break-before: always;"></div>
 
 **Use case: Untag a contact**
 
@@ -907,6 +941,8 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-before: always;"></div>
+
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
@@ -932,6 +968,8 @@ testers are expected to do more *exploratory* testing.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
+
+<div style="page-break-before: always;"></div>
 
 ### Adding a contact
 
@@ -960,8 +998,11 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect add commands to try: `add n/James! <other valid params>`, `add <one invalid param amongst other valid params>`, `...`.<br>
        Expected: No contact is added. Error details are shown in the status message.
 
-### Find a contact (all search terms must be fulfilled)
-1. Find a contact by name
+
+<div style="page-break-before: always;"></div>
+
+### Finding a contact (all search terms must be fulfilled)
+1. Finding a contact by name
 
     1. Prerequisites: Multiple contacts in the list with at least one contact named Roy. No contact has the name George (case-insensitive).
 
@@ -975,10 +1016,11 @@ testers are expected to do more *exploratory* testing.
        Expected: No changes made. Error details are shown in the status message.
        
     1. Other incorrect untag commands to try: `find`, `find n/`, `...`.<br>
-       Expected: Similar to previous.
+        Expected: No changes made. Error details are shown in the status message.
 
-1. Find a contact by tag
-    1. Prerequisites: Multiple contacts in the list with one contact having tag name colleagues and one with tag name Colleagues. No contact has the tag owesMoney (case-insensitive).
+1. Finding a contact by tag
+    1. Prerequisites: Multiple contacts in the list with one contact having tag colleagues and one with tag Colleagues. No contact has the tag owesMoney (case-insensitive).
+
 
     1. Test case: `find t/Colleagues`<br>
        Expected: Displays contacts with tag colleagues. Number of contacts found shown in the status message.
@@ -993,7 +1035,7 @@ testers are expected to do more *exploratory* testing.
        Expected: No changes made. Error details are shown in the status message.
        
     1. Other incorrect untag commands to try: `find`, `find t/Colleagues c/`, `...`.<br>
-       Expected: Similar to previous.
+       Expected: No changes made. Error details are shown in the status message.
        
 1. Find a contact by tag and name
     1. Prerequisites: Multiple contacts in the list with one contact with name Roy having tag name colleagues and one with name Adam having tag name Colleagues.
@@ -1005,10 +1047,10 @@ testers are expected to do more *exploratory* testing.
        Expected: Displays contacts with tag Colleagues (case-sensitive) and whose name contains Roy. Number of contacts found shown in the status message. Neither Roy nor Adam is within the list.
        
     1. Test case: `find n/Roy t/123!`<br>
-       Expected: No changes made. Error details shown in the status message.
+       Expected: No changes made. Error details are shown in the status message.
        
     1. Other incorrect untag commands to try: `find`, `find t/<valid tag> n<valid name> c/`, `...`.<br>
-       Expected: Similar to previous. 
+       Expected: No changes made. Error details are shown in the status message.
 
 ### Find a contact (at least one search term must be fulfilled)
 1. Find a contact by name
@@ -1022,10 +1064,10 @@ testers are expected to do more *exploratory* testing.
        Expected: 0 contacts displayed. Status message indicates 0 contacts are found.
        
     1. Test case: `findAny n/roy!`<br>
-       Expected: No changes made. Error details shown in the status message.
+       Expected: No changes made. Error details are shown in the status message.
        
     1. Other incorrect untag commands to try: `findAny`, `findAny n/`, `...`.<br>
-       Expected: Similar to previous.
+       Expected: No changes made. Error details are shown in the status message.
 
 1. Find a contact by tag
     1. Prerequisites: Multiple contacts in the list with one contact having tag name colleagues and one with tag name Colleagues. None of the contacts has the tag owesMoney (case-insensitive).
@@ -1040,10 +1082,10 @@ testers are expected to do more *exploratory* testing.
        Expected: 0 contacts displayed. Status message indicates 0 contacts are found.
        
     1. Test case: `findAny t/123!`<br>
-       Expected: No changes made. Error details shown in the status message.
+       Expected: No changes made. Error details are shown in the status message.
 
     1. Other incorrect untag commands to try: `findAny`, `findAny t/<valid tag> c/`, `...`.<br>
-       Expected: Similar to previous.
+       Expected: No changes made. Error details are shown in the status message.
 
 1. Find a contact by tag and name
     1. Prerequisites: Multiple contacts in the list with one contact with name Roy having tag name colleagues and one with name Adam having tag name Colleagues.
@@ -1053,10 +1095,12 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `findAny c/ n/Roy t/Colleagues`<br>
        Expected: Displays contacts with tag Colleagues (case-sensitive) or whose name contains Roy. Number of contacts found shown in the status message. Both Adam and Roy are within the list.
     1. Test case: `findAny n/Roy t/123!`<br>
-       Expected: No changes made. Error details shown in the status message.
+       Expected: No changes made. Error details are shown in the status message.
 
     1. Other incorrect untag commands to try: `findAny`, `findAny t/<valid tag> n/<valid name> c/`, `...`.<br>
-       Expected: Similar to previous.
+       Expected: No changes made. Error details are shown in the status message.
+
+<div style="page-break-before: always;"></div>
 
 ### Deleting a contact
 
@@ -1085,6 +1129,8 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the size of the contacts that are currently being viewed).<br>
       Expected: No contact is deleted. Error details are shown in the status message.
 
+<div style="page-break-before: always;"></div>
+
 ### Deleting multiple contacts
 
 1. Deleting multiple contacts while all contacts are being shown
@@ -1111,9 +1157,11 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect delete commands to try: `deletem`, `deletem -2 - -1 `, `deletem x - y`, `...` (where x is not less than y, either of x or y is not a positive integer within the list size currently being viewed).<br>
        Expected: No changes made. Error details are shown in the status message.
 
+<div style="page-break-before: always;"></div>
+
 ### Pinning a contact
 
-1. Pin a contact
+1. Pinning a contact
 
     1. Prerequisites: Contact at index 1 pinned and index 2 not pinned.
 
@@ -1127,7 +1175,7 @@ testers are expected to do more *exploratory* testing.
        Expected: No changes made. Error details are shown in the status message.
 
 ### Unpinning a contact
-1. Unpin a contact
+1. Unpinning a contact
 
     1. Prerequisites: Contact at index 1 pinned and index 2 not pinned.
 
@@ -1140,9 +1188,11 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect unpin commands to try: `unpin`, `unpin -1`, `unpin x`, `...` (where x is larger than the size of the contacts that are currently being viewed).<br>
        Expected: No changes made. Error details are shown in the status message.
 
-### Tag a contact
+<div style="page-break-before: always;"></div>
 
-1. Tag a contact with multiple tags
+### Tagging a contact
+
+1. Tagging a contact with multiple tags
 
     1. Prerequisites: Contact at index 1 has no tags and contact at index 2 has tag of friends.
 
@@ -1155,11 +1205,16 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `tag 2 t/party t/friends`<br>
         Expected: New tag is added to the contact. Warning details are shown in the status message.
 
+<<<<<<< HEAD
     1. Other incorrect tag commands to try: `tag`, `tag -1 t/<valid tag name>`, `tag 1 t/<tag name longer than 60 characters>`, `...`.<br>
        Expected: No changes to contacts. Error details in status message.
+=======
+    1. Other incorrect tag commands to try: `tag`, `tag -1 t/<valid tag name>`, `tag <tag name longer than 60 characters>`, `...`.<br>
+       Expected: No changes to contacts. Error details are shown in the status message.
+>>>>>>> 6e2c614ac8ae81b9023570e64dc53d7ca80d2655
 
-### Untag a contact
-1. Untag a contact
+### Untagging a contact
+1. Untagging a contact
 
     1. Prerequisites: Contact at index 1 has tags johnBirthday and party and contact at index 2 has no tags.
 
@@ -1172,7 +1227,10 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect untag commands to try: `untag`, `untag -1 t/<valid tag name>`, `...`.<br>
        Expected: No changes made. Error details are shown in the status message.
 
+<div style="page-break-before: always;"></div>
+
 ### Export Mailing List Command
+
 1.  Export contact list 
     1. Prerequisites: List all contacts using the `list` command.
 
@@ -1184,6 +1242,13 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `mailingList k/`<br>
        Expected: No changes made. Error details are shown in the status message.
+
+1. Export Filtered contact list
+
+    1. Prerequisites: Filter contacts using the `find` command.
+
+    1. Test case: `mailingList` as above<br>
+        Expected: Same result as exporting full contact list, but with only the contacts in the filtered list
 
 ### Saving data
 

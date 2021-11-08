@@ -5,7 +5,9 @@ title: Lee Zhi Xuan's Project Portfolio Page
 
 ### Project: CONNECTIONS
 
-CONNECTIONS is a desktop address book application adapted from AB3. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java and has about 10 KLOC.
+CONNECTIONS is a desktop app adapted from [AddressBook - Level 3](https://se-education.org/addressbook-level3/) for managing contacts and keeping track of birthdays.
+It is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI) that is created with JavaFX.
+It is written in Java and has about 10 KLOC.
 
 Given below are my contributions to the project.
 
@@ -15,21 +17,21 @@ Given below are my contributions to the project.
   * Justification:
     * "OR" search retrieves records that include either terms searched for. Using OR broadens a search and thus returns more results.
       This way, users will be able to filter contacts with greater flexibility.
-      <br></br>
+      <br>
 * **New Attribute**: Birthday
   * What it does:
     * The birthday attribute records the date of birth of a contact.
   * Justification:
     * Our target audience is people who love celebrating birthdays. It is natural for them to want to keep a
       record of the birthdays of their contacts. This way, they will never miss a birthday.
-      <br></br>
+      <br>
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&zFR=false&tabAuthor=leezhixuan&tabRepo=AY2122S1-CS2103-F09-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
 
 * **Project management**:
   * Set up Github Pages
   * Created and assigned issues for milestone `v1.3`.
-  <br></br>
+  <br>
 
 * **Enhancements to existing features**:
   * Redefine equality amongst contacts.
@@ -46,7 +48,7 @@ Given below are my contributions to the project.
     * Increase coverage from 73.69% to 74.31% (+0.62%) (Pull request [\#86](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/86))
     * Increase coverage from 74.31% to 74.52% (+0.20%) (Pull request [\#101](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/101))
     * Increase coverage from 70.83% to 71.15% (+0.32%) (Pull request [\#201](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/201))
-      <br></br>
+      <br>
 
 * **Documentation**:
   * User Guide:
@@ -55,7 +57,7 @@ Given below are my contributions to the project.
     * Documented `Use Cases`, `Non-functional requirements` and `Glossary`. (Pull request [\#19](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/19))
     * Documented `find` and `findAny` (Pull request [\#101](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/101))
   * Polished User & Developer Guide (Pull request [\#205](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/205))
-  <br></br>
+  <br>
 
 * **Community**:
   * Reported 37 bugs and suggestions for other teams in class
