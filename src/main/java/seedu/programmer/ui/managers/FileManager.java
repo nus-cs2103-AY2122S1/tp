@@ -1,4 +1,4 @@
-package seedu.programmer.ui;
+package seedu.programmer.ui.managers;
 
 import java.io.File;
 
@@ -28,7 +28,7 @@ public class FileManager {
      *
      * @return File object with a file name appended to the chosen directory.
      */
-    File promptUserForFileDestination() {
+    public File promptUserForFileDestination() {
         DirectoryChooser dirChooser = new DirectoryChooser();
         File chosenDir = dirChooser.showDialog(primaryStage);
         return chosenDir == null ? null : new File(chosenDir, DEFAULT_DOWNLOAD_FILE_NAME);
@@ -39,7 +39,7 @@ public class FileManager {
      *
      * @return Chosen CSV file.
      */
-    File promptUserForCsvFile() {
+    public File promptUserForCsvFile() {
         FileChooser fileChooser = new FileChooser();
         configureFileChooser(fileChooser);
         return fileChooser.showOpenDialog(primaryStage);

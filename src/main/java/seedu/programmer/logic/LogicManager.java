@@ -37,7 +37,7 @@ public class LogicManager implements Logic {
     private final ProgrammerErrorParser programmerErrorParser;
 
     /**
-     * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
+     * Class constructor for {@code LogicManager} with the given {@code Model} and {@code Storage}.
      */
     public LogicManager(Model model, Storage storage) {
         this.model = model;

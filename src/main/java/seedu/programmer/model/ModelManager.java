@@ -28,7 +28,7 @@ public class ModelManager implements Model {
     private final FilteredList<Student> filteredStudents;
 
     /**
-     * Initializes a ModelManager with the given ProgrammerError and userPrefs.
+     * Class constructor for a ModelManager with the given ProgrammerError and userPrefs.
      */
     public ModelManager(ReadOnlyProgrammerError programmerError, ReadOnlyUserPrefs userPrefs) {
         super();

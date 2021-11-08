@@ -2,6 +2,8 @@ package seedu.programmer.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.stream.Stream;
+
 import seedu.programmer.commons.core.index.Index;
 import seedu.programmer.commons.util.StringUtil;
 import seedu.programmer.logic.parser.exceptions.ParseException;
@@ -23,6 +25,7 @@ public class ParserUtil {
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it.
      * Leading and trailing whitespaces will be trimmed.
      *
+     * @param oneBasedIndex The String to be parsed.
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -40,7 +43,7 @@ public class ParserUtil {
      * Parses a {@code String name} into a {@code Name}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @param name The input name.
+     * @param name The input name to be parsed.
      * @throws ParseException If the given {@code name} is invalid.
      */
     public static Name parseName(String name) throws ParseException {
@@ -56,7 +59,7 @@ public class ParserUtil {
      * Parses a {@code String studentId} into a {@code StudentId}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @param studentId The input studentId.
+     * @param studentId The input studentId to be parsed.
      * @throws ParseException If the given {@code name} is invalid.
      */
     public static StudentId parseStudentId(String studentId) throws ParseException {
@@ -72,7 +75,7 @@ public class ParserUtil {
      * Parses a {@code String classId} into an {@code ClassId}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @param classId The input classId.
+     * @param classId The input classId to be parsed.
      * @throws ParseException If the given {@code classId} is invalid.
      */
     public static ClassId parseClassId(String classId) throws ParseException {
@@ -88,7 +91,7 @@ public class ParserUtil {
      * Parses a {@code String email} into an {@code Email}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @param email the input email
+     * @param email the input email to be parsed.
      * @throws ParseException if the given {@code email} is invalid.
      */
     public static Email parseEmail(String email) throws ParseException {
@@ -103,8 +106,9 @@ public class ParserUtil {
     /**
      * Parses the title of the lab assignment.
      *
-     * @param labNum the lab number
-     * */
+     * @param labNum the lab number to be parsed.
+     * @throws ParseException if the given {@code labNum} is invalid.
+     */
     public static int parseLabNum(String labNum) throws ParseException {
         requireNonNull(labNum);
         try {
@@ -121,8 +125,9 @@ public class ParserUtil {
     /**
      * Parses the result of the lab assignment.
      *
-     * @param result the result of the lab assignment.
-     * */
+     * @param result the result of the lab assignment to be parsed.
+     * @throws ParseException if the given {@code result} is invalid.
+     */
     public static Integer parseResult (String result) throws ParseException {
         try {
             String trimmedResult = result.trim();
@@ -140,10 +145,11 @@ public class ParserUtil {
     }
 
     /**
-     * Parses the total score of the lab assignment
+     * Parses the total score of the lab assignment.
      *
      * @param total the total score of the lab assignment.
-     * */
+     * @throws ParseException if the given {@code total} is invalid.
+     */
     public static Integer parseTotal(String total) throws ParseException {
         requireNonNull(total);
         try {
@@ -159,5 +165,16 @@ public class ParserUtil {
         } catch (NumberFormatException e) {
             throw new ParseException(Lab.MESSAGE_LAB_TOTAL_SCORE_CONSTRAINT);
         }
+    }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values
+     * in the given {@code argumentMultimap}.
+     *
+     * @param argumentMultimap ArgumentMultimap object to be checked against.
+     * @param prefixes The prefixes to be checked if they exist in {@code argumentMultimap}.
+     */
+    public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }

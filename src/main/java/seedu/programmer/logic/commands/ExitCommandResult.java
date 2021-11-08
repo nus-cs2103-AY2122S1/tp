@@ -7,7 +7,7 @@ package seedu.programmer.logic.commands;
 public class ExitCommandResult extends CommandResult {
 
     /**
-     * Constructor for exit command result.
+     * Class constructor for {@code ExitCommandResult}.
      *
      * @param feedbackToUser Message to be displayed to the user.
      */
