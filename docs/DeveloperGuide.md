@@ -1453,9 +1453,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Difficulty: Medium to Hard
 
-Our project requires a fair amount of understanding of the code base. Although some commands implemented were based off of AB3, we introduced the interaction between `Position` and `Applicant`.
-The rule that the position each applicant applies to must exist in MrTechRecruiter cannot be violated after any commands, which is difficult to ensure.
-In addition to significant enhancements based on original features, some commands were freshly added in to be in tune with our product, which requires understanding of JavaFX and careful design. 
+Our project requires a fair amount of understanding of the code base. Although some commands implemented were based off of AB3, the interactions between the classes that we introduced, `Position` and `Applicant`, introduced additional complexity to our application that needs to be constantly managed. In addition to significant enhancements based on original features, some commands were freshly added in to be in tune with our product, which requires understanding of JavaFX and careful design.
 Therefore, we rate the difficulty level of our project as Medium to Hard. 
 
 #### Complexity of having two, interdependent entity types
