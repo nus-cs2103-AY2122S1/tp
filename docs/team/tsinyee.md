@@ -47,5 +47,5 @@ Given below are my contributions to the project.
         * Added preamble for features (Pull request [\#285](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/285))
 
 * **Community**:
-    * PRs reviewed (with non-trivial review comments): (Pull requests [\#105](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/105))
+    * PRs reviewed (with non-trivial review comments): (Pull request [\#105](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/105))
     * Reported bugs and suggestions for other teams through [PE-D](https://github.com/tsinyee/ped/issues)
