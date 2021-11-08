@@ -213,7 +213,7 @@ Notes:
 <div style="page-break-after: always;"></div>
 ### Adding Tags : `tag`
 
-Adds one or more tags to an existing contact in CONNECTIONS. Facilitates the organization of contacts into groups.
+Adds one or more tags to an existing contact in CONNECTIONS. This facilitates the organization of contacts into groups.
 
 #### Format:
 * `tag INDEX t/TAG [t/MORE_TAGS]…​`
@@ -310,7 +310,7 @@ Notes:
 
 ### Pinning a contact : `pin`
 
-Pins a contact to the top of the contact list. Easily refer to details of frequent contacts.
+Pins a contact to the top of the contact list. This makes it easier to refer to the details of frequent contacts.
 
 Pinned contacts will appear at the top of the unfiltered list  
 ![two pinned contacts](images/pinUiDouble.jpg)  
@@ -370,7 +370,7 @@ Notes:
 
 ### Deleting multiple contacts : `deletem`
 
-Deletes the contacts within the range from CONNECTIONS. Easily remove multiple contacts.
+Deletes the contacts within the range from CONNECTIONS. This makes the removal of multiple contacts easy.
 
 #### Format:
 * `deletem START_INDEX - END_INDEX`
@@ -389,7 +389,7 @@ Notes:
 
 ### Exporting a mailing list of contacts : `mailingList`
 
-Exports a CSV file of the current view containing specified fields. Allows you to make external notes when organizing birthday parties.
+Exports a CSV file of the current view containing specified fields. This helps you to make external notes when organizing birthday parties.
 
 #### Format:
 * `mailingList [p/] [e/] [a/] [b/] [t/]`
