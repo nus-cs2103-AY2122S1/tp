@@ -784,7 +784,16 @@ Must have at least one subgroup in the list.
    
 ### Tagging a person
 
-{Todo...}
+Prerequisites: Have persons in the list panel.
+
+1. Test case: `person 1 /tag t:tag1, tag2`<br>
+   Expected: Tags with those names are added to person 1, unless person 1 already has both tags, in which case an error message is displayed. If Person1 already has a tag, it is not added twice.
+
+2. Test case: `person 1 /untag t:tag1, tag2`<br>
+   Expected: Tags with those names are removed from person 1, unless person 1 has neither tag, in which case an error message is displayed
+3. Test case: `person 1 /ct t:tag1, tag2`<br>
+    Expected: Similar to **Clearing note of a person**, a warning window will be displayed. The extra parameters do nothing.
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files
