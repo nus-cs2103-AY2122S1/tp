@@ -21,13 +21,13 @@ public class MemberUtil {
      * Returns an add command string for adding the {@code member}.
      */
     public static String getAddMemberCommand(Member member) {
-        return AddMemberCommand.COMMAND_WORD + " " + getPersonDetails(member);
+        return AddMemberCommand.COMMAND_WORD + " " + getMemberDetails(member);
     }
 
     /**
      * Returns the part of command string for the given {@code member}'s details.
      */
-    public static String getPersonDetails(Member member) {
+    public static String getMemberDetails(Member member) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + member.getName().fullName + " ");
         sb.append(PREFIX_PHONE + member.getPhone().value + " ");
@@ -41,7 +41,7 @@ public class MemberUtil {
     /**
      * Returns the part of command string for the given {@code EditMemberDescriptor}'s details.
      */
-    public static String getEditPersonDescriptorDetails(EditMemberCommand.EditMemberDescriptor descriptor) {
+    public static String getEditMemberDescriptorDetails(EditMemberCommand.EditMemberDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));

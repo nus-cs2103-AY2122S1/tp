@@ -73,41 +73,41 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
+    public void setSportsPaFilePath_nullPath_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.setSportsPaFilePath(null));
     }
 
     @Test
-    public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
+    public void setSportsPaFilePath_validPath_setsSportsPaFilePath() {
         Path path = Paths.get("address/book/file/path");
         modelManager.setSportsPaFilePath(path);
         assertEquals(path, modelManager.getSportsPaFilePath());
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
+    public void hasMember_nullMember_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.hasMember(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasMember_memberNotInSportsPa_returnsFalse() {
         assertFalse(modelManager.hasMember(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasMember_memberInSportsPa_returnsTrue() {
         modelManager.addMember(ALICE);
         assertTrue(modelManager.hasMember(ALICE));
     }
 
     @Test
-    public void getSamePerson_personWithSameNameInAddressBook_returnsPersonWithSameName() {
+    public void getSameMember_memberWithSameNameInSportsPa_returnsMemberWithSameName() {
         modelManager.addMember(ALICE);
         assertEquals(modelManager.getSameMember(ALICE_DIFFERENT_PHONE), ALICE);
     }
 
     @Test
-    public void getSamePerson_personWithSameNameNotInAddressBook_returnsNull() {
+    public void getSameMember_memberWithSameNameNotInSportsPa_returnsNull() {
         assertNull(modelManager.getSameMember(BOB));
     }
 
@@ -133,7 +133,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getFilteredMemberList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredMemberList().remove(0));
     }
 

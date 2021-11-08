@@ -191,7 +191,7 @@ public class UniqueFacilityList implements Iterable<Facility> {
      *
      * @param key Person to be removed from allocations.
      */
-    public void removePersonFromAllocations(Member key) {
+    public void removeMemberFromAllocations(Member key) {
         for (Facility facility: facilityList) {
             Facility toEdit = facility;
             toEdit.removeMemberFromFacilityOnAllDays(key);

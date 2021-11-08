@@ -53,22 +53,22 @@ public class JsonSportsPaStorageTest {
     }
 
     @Test
-    public void readAddressBook_invalidMemberAddressBook_throwDataConversionException() {
+    public void readSportsPa_invalidMemberSportsPa_throwDataConversionException() {
         assertThrows(DataConversionException.class, () -> readSportsPa("invalidMemberSportsPa.json"));
     }
 
     @Test
-    public void readAddressBook_invalidAndValidMemberAddressBook_throwDataConversionException() {
+    public void readSportsPa_invalidAndValidMemberSportsPa_throwDataConversionException() {
         assertThrows(DataConversionException.class, () -> readSportsPa("invalidAndValidMemberSportsPa.json"));
     }
 
     @Test
-    public void readAddressBook_invalidFacilityAddressBook_throwDataConversionException() {
+    public void readSportsPa_invalidFacilitySportsPa_throwDataConversionException() {
         assertThrows(DataConversionException.class, () -> readSportsPa("invalidFacilitySportsPa.json"));
     }
 
     @Test
-    public void readAddressBook_invalidAndValidFacilityAddressBook_throwDataConversionException() {
+    public void readSportsPa_invalidAndValidFacilitySportsPa_throwDataConversionException() {
         assertThrows(DataConversionException.class, () -> readSportsPa("invalidAndValidFacilitySportsPa.json"));
     }
 
@@ -76,26 +76,26 @@ public class JsonSportsPaStorageTest {
     public void readAndSaveSportsPa_allInOrder_success() throws Exception {
         Path filePath = testFolder.resolve("TempSportsPa.json");
         SportsPa original = getTypicalSportsPa();
-        JsonSportsPaStorage jsonAddressBookStorage = new JsonSportsPaStorage(filePath);
+        JsonSportsPaStorage jsonSportsPaStorage = new JsonSportsPaStorage(filePath);
 
         // Save in new file and read back
-        jsonAddressBookStorage.saveSportsPa(original, filePath);
-        ReadOnlySportsPa readBack = jsonAddressBookStorage.readSportsPa(filePath).get();
+        jsonSportsPaStorage.saveSportsPa(original, filePath);
+        ReadOnlySportsPa readBack = jsonSportsPaStorage.readSportsPa(filePath).get();
         assertEquals(original, new SportsPa(readBack));
 
         // Modify data, overwrite exiting file, and read back
         original.addMember(HOON);
         original.addFacility(UNIVERSITY_TOWN_SPORTS_HALL_1_COURT_1);
-        original.removePerson(ALICE);
-        jsonAddressBookStorage.saveSportsPa(original, filePath);
-        readBack = jsonAddressBookStorage.readSportsPa(filePath).get();
+        original.removeMember(ALICE);
+        jsonSportsPaStorage.saveSportsPa(original, filePath);
+        readBack = jsonSportsPaStorage.readSportsPa(filePath).get();
         assertEquals(original, new SportsPa(readBack));
 
         // Save and read without specifying file path
         original.addMember(IDA);
         original.addFacility(UNIVERSITY_TOWN_SPORTS_HALL_1_COURT_2);
-        jsonAddressBookStorage.saveSportsPa(original); // file path not specified
-        readBack = jsonAddressBookStorage.readSportsPa().get(); // file path not specified
+        jsonSportsPaStorage.saveSportsPa(original); // file path not specified
+        readBack = jsonSportsPaStorage.readSportsPa().get(); // file path not specified
         assertEquals(original, new SportsPa(readBack));
 
     }
