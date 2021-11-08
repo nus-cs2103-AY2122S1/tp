@@ -229,7 +229,7 @@ illustrates the description for deleting **games**:
 
 <img src="images/DeleteGameSequenceDiagram.png" width="1000" />
 
-#### 4.1.2 Design considerations:
+#### 4.1.2 Design considerations
 
 The games of each friend is stored inside a `Map<GameId, GameFriendLinks>`. Before deleting a game, the links a 
 friend has to a game has to be removed, by calling `Model#removeLinkAllFriends()`, before deleting the game by 
@@ -262,7 +262,7 @@ The implementation of `Model#linkFriend()` is as follows:
 
 ![Implementation of link command in model](images/LinkSequenceDiagram.png)
 
-#### 4.2.2 Design considerations:
+#### 4.2.2 Design considerations
 
 - A separate `GameFriendLink` class was created to represent the association between a friend and a game.
 - Each `Friend` object has a `Map<GameId, GameFriendLink>`, which represents the links to the games it is associated with. However, each `Game` object does not
@@ -319,7 +319,7 @@ The implementation of `Model#unlinkFriend()` is as follows:
 
 <img src="images/ScheduleSequenceDiagram2.png" width="1000" />
 
-#### 4.4.2 Design considerations:
+#### 4.4.2 Design considerations
 
 * `Schedule` and `Day` were their own classes instead of storing them directly as an `ArrayList` or `boolean[]` as this
   would set a layer of abstraction, allowing us to change the data structure utilised to store the `Schedule` or `Day`.
@@ -390,7 +390,7 @@ interface is notified and updated to display the filtered and sorted friends lis
 Hence, the user sees the displayed list of friend recommendations and this completes the implementation of the 
 recommend feature.  
 
-#### 4.5.3 Design considerations:
+#### 4.5.3 Design considerations
 
 * The recommend command allows users to filter by hour and day instead of filtering by minute and day.
   * We decided to limit the filtering to a **chosen hour of a chosen day** in order to both be consistent with 
@@ -442,7 +442,7 @@ An example execution of a `GetFriendCommand` is shown in the sequence diagram be
 
 `GetGameCommand` is executed similarly, but it deals with games and game lists.
 
-#### 4.6.2 Design Consideration:
+#### 4.6.2 Design considerations
 
 Once a `CommandResult` is created with the correct `Friend` or `Game`, its passed on to the `Ui`, which then in turn takes care of filtering and displaying the right information of the object in focus.
 * `CommandResult` with a `Friend` object
