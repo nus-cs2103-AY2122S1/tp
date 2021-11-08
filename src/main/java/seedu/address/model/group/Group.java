@@ -172,6 +172,11 @@ public class Group {
         return builder.toString();
     }
 
+    /**
+     * Makes a shallow copy of a group.
+     *
+     * @return a cloned Group with the exact same data fields as the original.
+     */
     public Group clone() {
         return new Group(
                 new GroupName(name.name),
