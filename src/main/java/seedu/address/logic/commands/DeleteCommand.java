@@ -25,7 +25,7 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_DELETE_STUDENTS_SUCCESS = "Deleted Students: %1$s.\n";
     public static final String MESSAGE_DELETE_STUDENTS_FAILURE = "Students at index: %1$s are not found.";
-    private List<Index> studentIndices = new ArrayList<>();
+    private List<Index> classIndices = new ArrayList<>();
     private List<String> removed = new ArrayList<>();
     private List<Integer> invalidStudents = new ArrayList<>();
 
@@ -35,7 +35,7 @@ public class DeleteCommand extends Command {
      * @param studentIndices List of student indexes.
      */
     public DeleteCommand(List<Index> studentIndices) {
-        this.studentIndices = studentIndices;
+        this.classIndices = studentIndices;
         this.removed = new ArrayList<>();
         this.invalidStudents = new ArrayList<>();
     }
@@ -44,7 +44,7 @@ public class DeleteCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
-        for (Index studentIndex: studentIndices) {
+        for (Index studentIndex: classIndices) {
             Student studentToDelete = model.getStudent(studentIndex);
             if (studentToDelete == null) {
                 invalidStudents.add(studentIndex.getOneBased());
@@ -79,16 +79,12 @@ public class DeleteCommand extends Command {
             return false;
         }
         DeleteCommand e = (DeleteCommand) other;
-        List<Index> otherIndex = e.studentIndices;
-        if (studentIndices.size() != otherIndex.size()) {
+        List<Index> otherIndex = e.classIndices;
+        if (classIndices.size() != otherIndex.size()) {
             return false;
         }
-        for (int i = 0; i < studentIndices.size(); i++) {
-            if (!studentIndices.get(i).equals(otherIndex.get(i))) {
-                return false;
-            } else {
-                return true;
-            }
+        for (int i = 0; i < classIndices.size(); i++) {
+            return classIndices.get(i).equals(otherIndex.get(i));
         }
         return false;
     }

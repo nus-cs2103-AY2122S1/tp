@@ -1,13 +1,16 @@
 package seedu.address.model.tuition;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.DateTimeException;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+
+import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Represents the time slot that the tuition class occupies in the Timetable.
@@ -158,26 +161,13 @@ public class Timeslot {
      * @return
      */
     public static Timeslot parseString(String slot) {
-        String[] arr = slot.trim().split(" ", 2); //Splits day from time
-        String[] times = arr.length == 2 ? arr[1].split("-", 2) : null;
-
-        if (arr.length < 2 || times == null || times.length < 2) {
-            return null;
-        }
-        DateFormat dayFormat = new SimpleDateFormat("EEE");
-        DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm", Locale.ENGLISH);
+        Timeslot timeslot = null;
         try {
-            Date day = dayFormat.parse(arr[0]);
-            LocalTime start = LocalTime.parse(times[0], timeFormat);
-            LocalTime end = LocalTime.parse(times[1], timeFormat);
-
-            if (!start.isBefore(end)) {
-                return null;
-            }
-            return new Timeslot(day, start, end);
-        } catch (DateTimeException | java.text.ParseException de) {
-            return null;
+            timeslot = ParserUtil.parseTimeslot(slot);
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
+        return timeslot;
     }
 
     /**

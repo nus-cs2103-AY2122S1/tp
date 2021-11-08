@@ -205,6 +205,7 @@ public class ModelManager implements Model {
 
     @Override
     public void setTuition(TuitionClass target, TuitionClass editedTuition) {
+
         requireAllNonNull(target, editedTuition);
         addressBook.setTuition(target, editedTuition);
     }

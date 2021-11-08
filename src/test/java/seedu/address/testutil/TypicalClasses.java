@@ -22,8 +22,7 @@ public class TypicalClasses {
             .withId(4).build();
     public static final TuitionClass CHEMISTRY = new TuitionClassBuilder().withName("Chemistry")
             .withClassLimit(1).withTimeslot("Sat 11:00-14:00").withRemark("Acid")
-            .withId(1).build();
-
+            .withId(5).build();
 
     private TypicalClasses() {} // prevents instantiation
 

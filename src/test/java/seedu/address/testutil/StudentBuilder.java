@@ -77,6 +77,14 @@ public class StudentBuilder {
     }
 
     /**
+     * Sets the {@code tags} into the {@code Student} that we are building.
+     */
+    public StudentBuilder withTags(Tag tag) {
+        this.tags.add(tag);
+        return this;
+    }
+
+    /**
      * Sets the {@code Remark} of the {@code Student} that we are building.
      */
     public StudentBuilder withRemark(String remark) {

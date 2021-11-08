@@ -12,7 +12,7 @@ import seedu.address.model.tuition.TuitionClass;
 public class TuitionClassBuilder {
     public static final String DEFAULT_NAME = "CHEMISTRY";
     public static final int DEFAULT_LIMIT = 5;
-    public static final String DEFAULT_TIMESLOT = "Monday 14:00-15:00";
+    public static final String DEFAULT_TIMESLOT = "Mon 14:00-15:00";
     public static final String DEFAULT_REMARK = "$40 per hour";
     public static final int DEFAULT_ID = 1;
 
@@ -30,8 +30,8 @@ public class TuitionClassBuilder {
         name = new ClassName(DEFAULT_NAME);
         limit = new ClassLimit(DEFAULT_LIMIT);
         timeslot = Timeslot.parseString(DEFAULT_TIMESLOT);
-        studentList = new StudentList(new ArrayList<>());
         remark = new Remark(DEFAULT_REMARK);
+        studentList = new StudentList(new ArrayList<>());
         id = DEFAULT_ID;
     }
 
@@ -70,6 +70,14 @@ public class TuitionClassBuilder {
         this.timeslot = Timeslot.parseString(timeslot);
         return this;
     }
+    /**
+     * Sets the {@code Timeslot} of the {@code TuitionClass} that we are building.
+     */
+    public TuitionClassBuilder withTimeslot(Timeslot timeslot) {
+        this.timeslot = timeslot;
+        return this;
+    }
+
     /**
      * Sets the {@code StudentList} of the {@code TuitionClass} that we are building.
      */
