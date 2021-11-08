@@ -206,7 +206,7 @@ Adds tags to a task.
 
 ### 4.3 Mark your tasks as DONE : `done`
 
-Marks your task as DONE or finished
+Marks your task as DONE
 
 <div markdown="block" class="alert alert-primary">
 
@@ -214,6 +214,31 @@ Marks your task as DONE or finished
 - <code>done <i>task_id</i></code>
 
 </div>
+
+<div markdown="block" class="alert alert-success">
+
+**:green_book: Examples:**
+
+* `done 1` mark first task as done
+</div>
+
+**Demonstration:**
+
+
+<div style="page-break-after: always;"></div>
+
+
+![done_command](images/doneCommandBefore.png)
+
+
+After running the done command, the task at that particular index gets mark as done:
+
+![done_command_after](images/doneCommandAfter.png)
+
+
+When all tasks for the week is done, the progress bar will be full:
+
+![done_command_full](images/doneCommandFull.png)
 
 ### 4.4 Mark your tasks as TODO : `undone`
 
@@ -241,17 +266,21 @@ Find tasks with matching keywords and show them in the task list.
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Interpretation:**<br>
+
 * The search is case-insensitive.
 * The order of the keywords does not matter.
-* Only the name,date or tag of the task is searched.
+* Only the name,date and tag of the task is searched.
 * Incomplete keywords will be matched e.g. Qu will match Quiz
 * Only tasks containing all keywords will be shown
 
 </div>
 
 <div markdown="block" class="alert alert-success">
-:green_book: **Examples:**
+
+**:green_book: Examples:**
+
 * `find quiz` returns CS2103 Quiz, GEQ1000 Quiz 1, GEQ1000 Quiz 2
+
 </div>
 
 ![find_command](images/findCommand.png)
