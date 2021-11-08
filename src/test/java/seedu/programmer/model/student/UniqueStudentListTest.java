@@ -102,14 +102,6 @@ public class UniqueStudentListTest {
         assertEquals(expectedUniqueStudentList, uniqueStudentList);
     }
 
-    //todo
-    //    @Test
-    //    public void setStudentEditedStudentHasNonUniqueIdentity_throwsDuplicateStudentException() {
-    //        uniqueStudentList.add(ALICE);
-    //        uniqueStudentList.add(BOB);
-    //        assertThrows(DuplicateStudentException.class, () -> uniqueStudentList.setStudent(ALICE, BOB));
-    //    }
-
     @Test
     public void remove_nullStudent_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueStudentList.remove(null));

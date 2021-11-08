@@ -198,7 +198,6 @@ public class ProgrammerError implements ReadOnlyProgrammerError {
     @Override
     public String toString() {
         return students.asUnmodifiableObservableList().size() + " students";
-        // TODO: refine later
     }
 
     @Override
