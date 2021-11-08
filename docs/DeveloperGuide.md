@@ -278,8 +278,6 @@ The following activity diagram summarizes what happens when a user executes a se
     * Pros: User does not have to remember the full name (e.g. `delete n/Alex` will delete both person named *Alex Tan* and *Alex Yeoh*).
     * Cons: Might delete the wrong person.
 
-_{more aspects and alternatives to be added}_
-
 ### Countdown to the wedding day feature
 #### Implementation
 The countdown mechanism is facilitated by `Countdown`. It implements `ReadOnlyCountdown` with a wedding date, stored internally as `weddingDate`. Additionally, it implements the following operation:
@@ -337,8 +335,6 @@ The following activity diagram summarizes what happens when a user executes a de
 * **Alternative 2:** Allow setting past date as wedding date.
     * Pros: Can track how many days has passed since the wedding.
     * Cons: Does not fit for the purpose of the app: planning for future wedding.
-
-_{more aspects and alternatives to be added}_
 
 ### Cost sum checking feature
 #### Implementation
@@ -406,8 +402,6 @@ The following sequence diagram shows how the cost-sum-checking operation works:
 * **Alternative 2:** Calculate the cost for those who has not confirmed yet.
     * Pros: The total sum includes the potential expenses, i.e. cost for persons with `pending` status.
     * Cons: Does not give an exact number on those categories the user confirms to spend money on.
-
-_{more aspects and alternatives to be added}_
 
 ### Delete by tag feature
 
