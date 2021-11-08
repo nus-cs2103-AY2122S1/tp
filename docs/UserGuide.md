@@ -58,7 +58,9 @@ Academy Directory (AD) is a **desktop application for CS1101S tutors to manage t
 Academy Directory is written in _Java_ and thus can be run on all major operating systems!
 It is optimized for use via a Command Line Interface (CLI), while still having the benefits of a Graphical User Interface (GUI).
 Academy Directory is developed as an evolution of the Address Book 3 application, primarily for usage in teaching CS1101S - Programming Methodology I - at the National University of Singapore.
+
 ***
+
 ## Information about this User Guide
 ### Purpose
 This user guide aims to: 
