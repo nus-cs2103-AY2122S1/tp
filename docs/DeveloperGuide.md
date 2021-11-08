@@ -49,6 +49,8 @@ The ***Architecture Diagram*** given above explains the high-level design of Sou
 
 Given below is a quick overview of main components and how they interact with each other.
 
+<div style="page-break-after: always;"></div>
+
 **Main components of the architecture**
 
 **`Main`** has two classes called [`Main`](https://github.com/AY2122S1-CS2103T-W08-2/tp/tree/master/src/main/java/seedu/sourcecontrol/Main.java) and [`MainApp`](https://github.com/AY2122S1-CS2103T-W08-2/tp/tree/master/src/main/java/seedu/sourcecontrol/MainApp.java). It is responsible for,
@@ -79,6 +81,8 @@ Each of the four main components (also shown in the diagram above),
 * defines its *API* in an `interface` with the same name as the Component.
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
 
+<div style="page-break-after: always;"></div>
+
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
 <center>
@@ -87,6 +91,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 <br>
 
 The sections below give more details of each component.
+
+<div style="page-break-after: always;"></div>
 
 ### UI component
 
@@ -102,12 +108,16 @@ The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `Re
 
 The `UI` component uses the JavaFX UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103T-W08-2/tp/tree/master/src/main/java/seedu/sourcecontrol/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-W08-2/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
+<div style="page-break-after: always;"></div>
+
 The `UI` component,
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Student` object residing in the `Model`.
+
+<div style="page-break-after: always;"></div>
 
 ### Logic component
 
@@ -126,12 +136,16 @@ How the `Logic` component works:
 1. The command can communicate with the `Model` when it is executed (e.g. to add a student).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
+<div style="page-break-after: always;"></div>
+
 The Activity Diagram below illustrates how user input is parsed by the `Logic` component.
 
 <center>
     <img src="images/ParseActivityDiagram.png" />
 </center>
 <br>
+
+<div style="page-break-after: always;"></div>
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
@@ -142,6 +156,8 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
+
+<div style="page-break-after: always;"></div>
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -154,6 +170,7 @@ How the parsing works:
 * When called upon to parse a user command, the `SourceControlParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `SourceControlParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<div style="page-break-after: always;"></div>
 
 ### Model component
 
@@ -173,6 +190,8 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
+<div style="page-break-after: always;"></div>
+
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `SourceControl`, which `Student` references. This allows `SourceControl` to only require one `Tag` object per unique tag, instead of each `Student` needing their own `Tag` objects. Note that other classes such as `Group` and `Assessment` are omitted here for brevity.<br>
 
 <center>
@@ -180,6 +199,8 @@ The `Model` component,
 </center>
 
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 
@@ -195,6 +216,8 @@ The `Storage` component,
 * inherits from both `SourceControlStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
+<div style="page-break-after: always;"></div>
+
 ### Common classes
 
 Classes used by multiple components are in the `seedu.sourcecontrol.commons` package.
@@ -202,6 +225,8 @@ Classes used by multiple components are in the `seedu.sourcecontrol.commons` pac
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Implementation**
 
@@ -239,6 +264,8 @@ The following sequence diagram summarizes what happens when the user inputs an `
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram. This is also applicable to other sequence diagrams in this guide.
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ### Creating a new group
 
 The `addgroup` feature allows users to create new groups, as well as specify students to be added to the group to be created.
@@ -254,7 +281,11 @@ The `addgroup` feature allows users to create new groups, as well as specify stu
 <div markdown="span" class="alert alert-info">:information_source: **Note:** In the case where there are more than one students matched because they share the same name, an error message will be displayed to the user. The user will then have to specify the student to be added using his/her NUSNET ID.
 </div>
 
+
+<div style="page-break-after: always;"></div>
+
 The following activity diagrams summarizes what happens when a user executes the `addgroup` command to add a new group. In the case where the group is not added, an error message will be displayed with the reason.
+
 
 <center>
     <img src="images/AddGroupActivityDiagram.png" />
@@ -262,6 +293,9 @@ The following activity diagrams summarizes what happens when a user executes the
 <center>
     <img src="images/AddStudentsToGroupActivityDiagram.png" />
 </center>
+
+
+<div style="page-break-after: always;"></div>
 
 The following sequence diagram summarizes what happens when the user inputs an `addgroup` command together with a student to be added.
 
@@ -272,6 +306,8 @@ The following sequence diagram summarizes what happens when the user inputs an `
 <center>
     <img src="images/AddGroupToModelSequenceDiagram.png" />
 </center>
+
+<div style="page-break-after: always;"></div>
 
 ### Adding a student into a group
 
@@ -289,12 +325,16 @@ The `addalloc` feature allows users to allocate a student into a group.
 <div markdown="span" class="alert alert-info">:information_source: **Note:** In the case where there are more than one students matched because they share the same name, an error message will be displayed to the user. The user will then have to specify the student to be added using his/her NUSNET ID.
 </div>
 
+<div style="page-break-after: always;"></div>
+
 The following activity diagram summarizes what happens when a user executes the `addalloc` command to allocate a student into a group. In the case where the student is not added into the group, an error message will be displayed with the reason.
 
 <center>
     <img src="images/AddAllocActivityDiagram.png" />
 </center>
 <br>
+
+<div style="page-break-after: always;"></div>
 
 The following sequence diagram summarizes what happens when the user inputs an `addalloc` command together with a group and a student, specified by name, to be allocated.
 
@@ -307,7 +347,7 @@ The following sequence diagram summarizes what happens when the user inputs an `
   <img src="images/AddAllocToModelSequenceDiagram.png" />
 </center>
 
-
+<div style="page-break-after: always;"></div>
 
 ### Adding a score
 
@@ -325,12 +365,16 @@ The `addscore` feature allows users to add score for an assessment of a student.
 <div markdown="span" class="alert alert-info">:information_source: **Note:** In the case where there are more than one students matched because they share the same name, an error message will be displayed to the user. The user will then have to specify the student to be added using his/her NUSNET ID.
 </div>
 
+<div style="page-break-after: always;"></div>
+
 The following activity diagram summarizes what happens when a user executes the `addscore` command to add score for an assessment of a student. In the case where the score is not added/updated, an error message will be displayed with the reason.
 
 <center>
     <img src="images/AddScoreActivityDiagram.png" />
 </center>
 <br>
+
+<div style="page-break-after: always;"></div>
 
 The following sequence diagram summarizes what happens when the user inputs an `addscore` command together with an assessment, a student, specified by name, and a score to be added.
 
@@ -341,6 +385,8 @@ The following sequence diagram summarizes what happens when the user inputs an `
 <center>
     <img src="images/AddScoreToModelSequenceDiagram.png" />
 </center>
+
+<div style="page-break-after: always;"></div>
 
 ### Searching for students
 
@@ -383,17 +429,8 @@ The following activity diagrams summarizes what happens when a user executes the
 if the command input is valid. The command is invalid if the user input is empty, or if the user entered more or less than one flag.
 </div>
 
-#### Design considerations
 
-**Aspect: How search executes**
-
-* **Alternative 1:** Multiple search commands to search using different identifiers.
-    * Pros: Easy to implement.
-    * Cons: Inconvenient for user to remember different command words.
-
-* **Alternative 2 (current choice):** Single search command to perform search for multiple identifiers.
-    * Pros: More straightforward and convenient for users.
-    * Cons: We need to identify the type of input given.
+<div style="page-break-after: always;"></div>
 
 ### Importing data
 
@@ -408,6 +445,8 @@ The following activity diagram summarizes what happens when a user executes the 
 </center>
 <br>
 
+<div style="page-break-after: always;"></div>
+
 There are several important details left out of the activity diagram for the sake of clarity:
 
 1. The import feature is reliant on having a correctly formatted csv file (which is to be exported from sites like LumiNUS and Source Academy, and modified to fit the format).
@@ -420,6 +459,8 @@ There are several important details left out of the activity diagram for the sak
 1. When reading a student's scores, the command will add the score to the `Student`, as well as the `Assessment` created from reading the first row.
 
 1. Columns can be empty, except for the assessment name columns in the header row, and the name and ID columns of each student. Empty columns are assumed to be missing data.
+
+<div style="page-break-after: always;"></div>
 
 ### Showing assessment result analysis
 
@@ -437,6 +478,8 @@ The `show` feature allows users to show the performance analysis of a student, a
 <div markdown="span" class="alert alert-info">:information_source: **Note:** In the case where the performance analysis of a student is requested by identity and there are more than one students matched because they share the same name, an error message will be displayed to the user. The user will then have to specify the student to be added using his/her NUSNET ID.
 </div>
 
+<div style="page-break-after: always;"></div>
+
 The following activity diagrams summarize what happens when a user executes the `show` command to show the performance analysis of a student, a group or the cohort in an assessment. In the case where the display is not presented successfully, an error message will be displayed with the reason.
 
 <center>
@@ -450,6 +493,8 @@ The following activity diagrams summarize what happens when a user executes the 
 </center>
 <br>
 
+<div style="page-break-after: always;"></div>
+
 The following sequence diagram summarizes what happens when the user inputs an `show` command together with a student specified by name.
 
 <center>
@@ -459,6 +504,8 @@ The following sequence diagram summarizes what happens when the user inputs an `
 <center>
     <img src="images/ShowStatsFromModelSequenceDiagram.png" />
 </center>
+
+<div style="page-break-after: always;"></div>
 
 ### Setting customized aliases for commands
 
@@ -482,6 +529,8 @@ Parsing of an alias command follows the following steps:
 If the command word of any future user input matches the alias, the first word of the user input will be replaced by the command word of the alias.
 The activity diagram of how a command is parsed can be found in the [Logic section of this guide](#logic-component).
 
+<div style="page-break-after: always;"></div>
+
 #### Design considerations
 
 **Aspect 1: How aliases are stored and parsed**
@@ -500,6 +549,8 @@ There were two ideas on how this could be done:
         * Have to be careful with the implementation to prevent any edge cases where the user can define aliases to create an infinite loop.
     
 We decided to go with the easier implementation of storing each alias as two strings. However, there were still more aspects to be considered.
+
+<div style="page-break-after: always;"></div>
 
 **Aspect 2: How to handle aliases of aliases**
 
@@ -528,6 +579,8 @@ That is, what happens when the user does `alias -c <existing_alias> -as <new_ali
     
 We decided to go with implementation 2 due to its ability to naturally handle infinite loops and better performance. Our target audience is also Computer Science professors, who should be very familiar with this style of referencing, since that is exactly how names refer to primitive values in programming.
 
+<div style="page-break-after: always;"></div>
+
 **Aspect 3: Removing aliases**
 
 We believe that there needs to be a way to remove aliases. Otherwise, there will eventually be a very large amount of aliases, and some typo might lead to executing a command you didn't intend to execute. Hopefully, that command isn't `clear`.
@@ -554,6 +607,8 @@ Furthermore, removing aliases is likely a very rare use case, and dedicating a w
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Documentation, Testing, Logging, Configuration, Dev-Ops**
 
@@ -585,6 +640,8 @@ Targets professors of CS1101S who:
 doing so faster than a typical mouse/GUI driven app.
 It can analyse results of individual students, tutorial groups, or the whole cohort in each assessment,
 in order to identify students who may require additional help.
+
+<div style="page-break-after: always;"></div>
 
 ### User stories
 
@@ -623,6 +680,8 @@ Viewing and searching data:
 | `* * *`  | CS1101S Professor | Check a student’s grades | See individual performance |
 | `*`  | CS1101S Professor | Check attendance records for each student | Track if the student has been attending classes diligently |
 
+<div style="page-break-after: always;"></div>
+
 Analysing data:
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
@@ -636,6 +695,8 @@ Analysing data:
 | `*`  | CS1101S Professor | Compare between different batches of students | See if the module is too hard this semester as compared to previous semesters |
 | `*`  | CS1101S Professor | Check the overall performance of the tutors based on several indicators | Identify excellent tutors to be called back next semester |
 
+<div style="page-break-after: always;"></div>
+
 Others:
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
@@ -647,6 +708,8 @@ Others:
 | `*`  | Long-term user | Store meeting timings | Not miss any meetings that have been planned |
 | `*`  | Forgetful user | Have reminders about upcoming meetings | Avoid missing any important events |
 | `*`  | CS1101S Professor | Add TODO bug fixes accumulated throughout the semester | Fix them during CP3108 |
+
+<div style="page-break-after: always;"></div>
 
 ### Use cases
 
@@ -746,6 +809,7 @@ Others:
     * 1a1. Source Control shows an error message.
       Use case resumes at step 1.
 
+<div style="page-break-after: always;"></div>
 
 #### Use case: Creating an alias for an existing command
 
@@ -770,6 +834,7 @@ Others:
   * 1c1. Source Control shows an error message.
     Use case resumes at step 1.
 
+<div style="page-break-after: always;"></div>
 
 ### Non-functional requirements
 
@@ -793,6 +858,8 @@ Others:
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Instructions for Manual Testing**
 
@@ -821,6 +888,8 @@ testers are expected to do more *exploratory* testing.
 3. Shutdown
 
    1. Test case: `exit`<br>Expected: Source Control exits and shut down automatically.
+
+<div style="page-break-after: always;"></div>
 
 ### Adding a group
 
@@ -852,11 +921,14 @@ testers are expected to do more *exploratory* testing.
    
    2. Test case: `addgroup -g T01A -n Hong Fai -i E0123456`<br> Expected: The group will not be created. Error detail shown in the status message to inform user that the student `Hong Fai` has been specified more than once.
 
+<div style="page-break-after: always;"></div>
+
 5. Adding a group with non-existent students.
 
    1. Prerequisites: Database does not contain a student with name `Hong Fai`.
    
    2. Test case: `addgroup -g T01A -n Hong Fai`<br> Expected: The group will not be created. Error detail shown in the status message to inform user that the student `Hong Fai` cannot be found in the database.
+
 
 ### Deleting a Student
 
@@ -881,6 +953,8 @@ testers are expected to do more *exploratory* testing.
    
     3. Other incorrect delete commands to try: `delete`, `delete x` (where x is an invalid number)<br>
        Expected: Similar to previous.
+
+<div style="page-break-after: always;"></div>
 
 ### Adding an alias
 
@@ -909,6 +983,8 @@ testers are expected to do more *exploratory* testing.
    
    2. Test case: `alias -c addstudent -as add student `<br> Expected: No alias will be created. Error detail shown in the status message to inform user that alias can only be one alphanumeric word.
 
+<div style="page-break-after: always;"></div>
+
 ### Saving data
 
 1. Dealing with missing data file
@@ -931,6 +1007,8 @@ testers are expected to do more *exploratory* testing.
 
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Effort**
 
@@ -956,6 +1034,7 @@ The following features were relatively hard to implement:
     * Our application has three different classes (`Student`, `Assessment`, `Group`) that are highly coupled to each other. AB3 did not have such problems as it only contained one `Person` class. 
       It was difficult to ensure that our objects are sharing information with each other properly, while trying to keep the level of coupling as low as possible. This coupling also proved to be the source of several hard-to-find bugs. 
 
+<div style="page-break-after: always;"></div>
 
 ### Features scrapped
 
