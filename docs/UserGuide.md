@@ -3,7 +3,10 @@ layout: page
 title: User Guide
 nav-text: User Guide
 ---
-<img src = "images/sportsPA_logo.png" width="400"/> <br>
+
+<p align="center">
+<img src = "images/sportsPA_logo.png" width="600"/> <br>
+</p>
 
 <span style = "font-size: 32px; color: #e46c0a">
 Welcome to the SportsPA User Guide!
