@@ -49,17 +49,17 @@ public class VisualizeCommandTest {
     }
 
     private static List<Student> buildStudentListWithAssessment() {
-        Student Alice = new StudentBuilder(TypicalStudents.ALICE)
+        Student alice = new StudentBuilder(TypicalStudents.ALICE)
                 .withAssessment(getAssessment(1, 2, 3, 4, 5))
                 .build();
 
-        Student Bob = new StudentBuilder(TypicalStudents.BOB)
+        Student bob = new StudentBuilder(TypicalStudents.BOB)
                 .withAssessment(getAssessment(2, 3, 4, 5, 6))
                 .build();
 
         List<Student> studentList = new ArrayList<>();
-        studentList.add(Alice);
-        studentList.add(Bob);
+        studentList.add(alice);
+        studentList.add(bob);
 
         return studentList;
     }
