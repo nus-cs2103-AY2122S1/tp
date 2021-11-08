@@ -171,45 +171,14 @@ public class CommandBox extends UiPart<Region> {
     private String compareParts(StringBuilder stringBuilder, String[] suggestionParts, String[] parameterParts) {
         for (String suggestionPart : suggestionParts) {
             boolean isEntered = false;
+            SuggestionPredicate suggestionPredicate = new SuggestionPredicate(suggestionPart);
             for (String parameterPart : parameterParts) {
-                boolean isOneCharPrefix = parameterPart.length() > 1 && parameterPart.charAt(1) == '/'
-                        && suggestionPart.substring(0, 2).equals(parameterPart.substring(0, 2));
-                boolean isTwoCharPrefix = parameterPart.length() > 2 && parameterPart.charAt(2) == '/'
-                        && suggestionPart.substring(0, 3).equals(parameterPart.substring(0, 3));
-                boolean isIndex = (suggestionPart.equals("INDEXES") || suggestionPart.equals("INDEX")
-                        || suggestionPart.equals("[INDEXES]") || suggestionPart.equals("[INDEX]"))
-                        && parameterPart.matches("\\d+");
-                boolean isCsv = (suggestionPart.equals("CSV_NAME")) && parameterPart.matches("\\w+");
-                boolean isLateKeyword = parameterPart.contains("k/l") && suggestionPart.equals("d2/DATE");
-                boolean isOptionalOneCharPrefix = suggestionPart.charAt(0) == '['
-                        && parameterPart.length() > 1
-                        && parameterPart.charAt(1) == '/'
-                        && suggestionPart.substring(1, 3).equals(parameterPart.substring(0, 2));
-                boolean isOptionalTwoCharPrefix = suggestionPart.charAt(0) == '['
-                        && parameterPart.length() > 2
-                        && parameterPart.charAt(2) == '/'
-                        && suggestionPart.substring(1, 4).equals(parameterPart.substring(0, 3));
-
-                if (isOneCharPrefix) {
+                boolean isMatched = suggestionPredicate.test(parameterPart);
+                if (isMatched && !suggestionPredicate.isLateKeyword(parameterPart)) {
                     isEntered = true;
                     break;
-                } else if (isTwoCharPrefix) {
+                } else if (isMatched && suggestionPredicate.isLateKeyword(parameterPart)) {
                     isEntered = true;
-                    break;
-                } else if (isIndex) {
-                    isEntered = true;
-                    break;
-                } else if (isCsv) {
-                    isEntered = true;
-                    break;
-                } else if (isLateKeyword) {
-                    isEntered = true;
-                } else if (isOptionalOneCharPrefix) {
-                    isEntered = true;
-                    break;
-                } else if (isOptionalTwoCharPrefix) {
-                    isEntered = true;
-                    break;
                 }
             }
             if (!isEntered) {
@@ -233,73 +202,81 @@ public class CommandBox extends UiPart<Region> {
 
     private String mapSuggestion(String currentString, boolean isResidentTab) {
         if (isResidentTab) {
-            switch (currentString) {
-            case AddPersonCommand.COMMAND_WORD:
-                return AddPersonCommand.PARAMETERS;
-            case DeletePersonCommand.COMMAND_WORD:
-                return DeletePersonCommand.PARAMETERS;
-            case EditPersonCommand.COMMAND_WORD:
-                return EditPersonCommand.PARAMETERS;
-            case ViewPersonCommand.COMMAND_WORD:
-                return ViewPersonCommand.PARAMETERS;
-            case ClearCommand.COMMAND_WORD:
-                return ClearCommand.PARAMETERS;
-            case ExitCommand.COMMAND_WORD:
-                return ExitCommand.PARAMETERS;
-            case FindPersonCommand.COMMAND_WORD:
-                return FindPersonCommand.PARAMETERS;
-            case HelpCommand.COMMAND_WORD:
-                return HelpCommand.PARAMETERS;
-            case DeadlineCommand.COMMAND_WORD:
-                return DeadlineCommand.PARAMETERS;
-            case ImportCommand.COMMAND_WORD:
-                return ImportCommand.PARAMETERS;
-            case ExportCommand.COMMAND_WORD:
-                return ExportCommand.PARAMETERS;
-            case SwitchCommand.COMMAND_WORD:
-                return SwitchCommand.PARAMETERS;
-            case TraceCommand.COMMAND_WORD:
-                return TraceCommand.PARAMETERS;
-            case SortPersonCommand.COMMAND_WORD:
-                return SortPersonCommand.PARAMETERS;
-
-            default:
-                return "";
-            }
+            return getResidentTabSuggestion(currentString);
         } else {
-            switch (currentString) {
-            case AddEventCommand.COMMAND_WORD:
-                return AddEventCommand.PARAMETERS;
-            case DeleteEventCommand.COMMAND_WORD:
-                return DeleteEventCommand.PARAMETERS;
-            case EditEventCommand.COMMAND_WORD:
-                return EditEventCommand.PARAMETERS;
-            case ViewEventCommand.COMMAND_WORD:
-                return ViewEventCommand.PARAMETERS;
-            case ClearCommand.COMMAND_WORD:
-                return ClearCommand.PARAMETERS;
-            case ExitCommand.COMMAND_WORD:
-                return ExitCommand.PARAMETERS;
-            case FindEventCommand.COMMAND_WORD:
-                return FindEventCommand.PARAMETERS;
-            case HelpCommand.COMMAND_WORD:
-                return HelpCommand.PARAMETERS;
-            case IncludeCommand.COMMAND_WORD:
-                return IncludeCommand.PARAMETERS;
-            case ImportCommand.COMMAND_WORD:
-                return ImportCommand.PARAMETERS;
-            case ExportCommand.COMMAND_WORD:
-                return ExportCommand.PARAMETERS;
-            case SwitchCommand.COMMAND_WORD:
-                return SwitchCommand.PARAMETERS;
-            case ExcludeCommand.COMMAND_WORD:
-                return ExcludeCommand.PARAMETERS;
-            case SortEventCommand.COMMAND_WORD:
-                return SortEventCommand.PARAMETERS;
+            return getEventTabSuggestion(currentString);
+        }
+    }
 
-            default:
-                return "";
-            }
+    public String getResidentTabSuggestion(String currentString) {
+        switch (currentString) {
+        case AddPersonCommand.COMMAND_WORD:
+            return AddPersonCommand.PARAMETERS;
+        case DeletePersonCommand.COMMAND_WORD:
+            return DeletePersonCommand.PARAMETERS;
+        case EditPersonCommand.COMMAND_WORD:
+            return EditPersonCommand.PARAMETERS;
+        case ViewPersonCommand.COMMAND_WORD:
+            return ViewPersonCommand.PARAMETERS;
+        case ClearCommand.COMMAND_WORD:
+            return ClearCommand.PARAMETERS;
+        case ExitCommand.COMMAND_WORD:
+            return ExitCommand.PARAMETERS;
+        case FindPersonCommand.COMMAND_WORD:
+            return FindPersonCommand.PARAMETERS;
+        case HelpCommand.COMMAND_WORD:
+            return HelpCommand.PARAMETERS;
+        case DeadlineCommand.COMMAND_WORD:
+            return DeadlineCommand.PARAMETERS;
+        case ImportCommand.COMMAND_WORD:
+            return ImportCommand.PARAMETERS;
+        case ExportCommand.COMMAND_WORD:
+            return ExportCommand.PARAMETERS;
+        case SwitchCommand.COMMAND_WORD:
+            return SwitchCommand.PARAMETERS;
+        case TraceCommand.COMMAND_WORD:
+            return TraceCommand.PARAMETERS;
+        case SortPersonCommand.COMMAND_WORD:
+            return SortPersonCommand.PARAMETERS;
+
+        default:
+            return "";
+        }
+    }
+
+    public String getEventTabSuggestion(String currentString) {
+        switch (currentString) {
+        case AddEventCommand.COMMAND_WORD:
+            return AddEventCommand.PARAMETERS;
+        case DeleteEventCommand.COMMAND_WORD:
+            return DeleteEventCommand.PARAMETERS;
+        case EditEventCommand.COMMAND_WORD:
+            return EditEventCommand.PARAMETERS;
+        case ViewEventCommand.COMMAND_WORD:
+            return ViewEventCommand.PARAMETERS;
+        case ClearCommand.COMMAND_WORD:
+            return ClearCommand.PARAMETERS;
+        case ExitCommand.COMMAND_WORD:
+            return ExitCommand.PARAMETERS;
+        case FindEventCommand.COMMAND_WORD:
+            return FindEventCommand.PARAMETERS;
+        case HelpCommand.COMMAND_WORD:
+            return HelpCommand.PARAMETERS;
+        case IncludeCommand.COMMAND_WORD:
+            return IncludeCommand.PARAMETERS;
+        case ImportCommand.COMMAND_WORD:
+            return ImportCommand.PARAMETERS;
+        case ExportCommand.COMMAND_WORD:
+            return ExportCommand.PARAMETERS;
+        case SwitchCommand.COMMAND_WORD:
+            return SwitchCommand.PARAMETERS;
+        case ExcludeCommand.COMMAND_WORD:
+            return ExcludeCommand.PARAMETERS;
+        case SortEventCommand.COMMAND_WORD:
+            return SortEventCommand.PARAMETERS;
+
+        default:
+            return "";
         }
     }
 

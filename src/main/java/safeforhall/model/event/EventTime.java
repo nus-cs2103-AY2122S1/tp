@@ -38,10 +38,6 @@ public class EventTime implements Comparable<EventTime> {
         return true;
     }
 
-    public String getEventTime() {
-        return eventTime;
-    }
-
     /**
      * Converts the given {@code EventTime} to a {@code Localtime}.
      */

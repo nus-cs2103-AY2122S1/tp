@@ -18,6 +18,7 @@ public class DeadlineCommandParser implements Parser<DeadlineCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_KEYWORD, CliSyntax.PREFIX_DATE1,
                         CliSyntax.PREFIX_DATE2);
+
         if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_KEYWORD, CliSyntax.PREFIX_DATE1)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeadlineCommand.MESSAGE_USAGE));
@@ -26,6 +27,11 @@ public class DeadlineCommandParser implements Parser<DeadlineCommand> {
         String keyword = argMultimap.getValue(CliSyntax.PREFIX_KEYWORD).get();
         if (!isKeywordValid(argMultimap, keyword)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeadlineCommand.MESSAGE_USAGE_LATE));
+        }
+
+        if ((keyword.equals("c") || keyword.equals("f")) && !arePrefixesPresent(argMultimap, CliSyntax.PREFIX_DATE2)) {
+            System.out.println("here");
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeadlineCommand.MESSAGE_USAGE));
         }
 
         if (argMultimap.getValue(CliSyntax.PREFIX_DATE2).isEmpty()) {

@@ -117,36 +117,43 @@ public class ImportCommand extends Command {
             List<String[]> rows = reader.readAll();
             // Remove column headings row
             rows.remove(0);
-            for (String[] row: rows) {
-                Person personToAdd;
-                try {
-                    // Skip empty rows
-                    if (row.length == 1 && row[0].equals("")) {
-                        continue;
-                    }
-                    personToAdd = createPerson(row);
-                } catch (IllegalArgumentException e) {
-                    // Index + 2 to account for discarded first row and zero-indexing
-                    throw new CommandException(String.format(MESSAGE_ERROR_READING, rows.indexOf(row) + 2)
-                        + e.getMessage());
-                }
-                persons.add(personToAdd);
-            }
-
-            AddressBook importedData = new AddressBook();
-            for (Person singlePerson : persons) {
-                try {
-                    importedData.addPerson(singlePerson);
-                } catch (DuplicatePersonException e) {
-                    throw new CommandException(MESSAGE_DUPLICATE_RESIDENT + singlePerson.toString());
-                }
-            }
-            return importedData;
+            addPersons(persons, rows);
+            return createNewAddressBook(persons);
         } catch (IOException e) {
             throw new CommandException(MESSAGE_FILE_NOT_FOUND);
         } catch (CsvException e) {
             e.printStackTrace();
             throw new CommandException(MESSAGE_INCORRECT_CSV_FORMAT);
+        }
+    }
+
+    private AddressBook createNewAddressBook(ArrayList<Person> persons) throws CommandException {
+        AddressBook importedData = new AddressBook();
+        for (Person singlePerson : persons) {
+            try {
+                importedData.addPerson(singlePerson);
+            } catch (DuplicatePersonException e) {
+                throw new CommandException(MESSAGE_DUPLICATE_RESIDENT + singlePerson.toString());
+            }
+        }
+        return importedData;
+    }
+
+    private void addPersons(ArrayList<Person> persons, List<String[]> rows) throws CommandException {
+        for (String[] row: rows) {
+            Person personToAdd;
+            try {
+                // Skip empty rows
+                if (row.length == 1 && row[0].equals("")) {
+                    continue;
+                }
+                personToAdd = createPerson(row);
+            } catch (IllegalArgumentException e) {
+                // Index + 2 to account for discarded first row and zero-indexing
+                throw new CommandException(String.format(MESSAGE_ERROR_READING, rows.indexOf(row) + 2)
+                    + e.getMessage());
+            }
+            persons.add(personToAdd);
         }
     }
 
