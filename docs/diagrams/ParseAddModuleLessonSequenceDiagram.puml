@@ -28,7 +28,7 @@ activate AddPersonCommandParser
 AddPersonCommandParser -> ParserUtil : parseModuleCodeForModuleLesson()
 activate ParserUtil
 ParserUtil -> AddPersonCommandParser : moduleCode
-note right of AddPersonCommandParser : modulecode = [CS2100 T19]
+note right of AddPersonCommandParser : moduleCode = [CS2100 T19]
 
 deactivate ParserUtil
 
