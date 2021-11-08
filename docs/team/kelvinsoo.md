@@ -49,7 +49,7 @@ Given below are my contributions to the project.
     * Did cosmetic tweaks to existing documentation of features `help`: [\#284](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/284)
     * Improve introduction and command table : [\#184](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/184)
   * Developer Guide:
-    * Added implementation details of the `find` feature: [\#145](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/145), [\#159](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/159), [\#161](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/161)
+    * Added implementation details of the `find` feature: [\#145](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/145), [\#159](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/159), [\#161](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/161), [\#342](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/342)
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#66](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/66), [\#74](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/74), [\#121](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/121), [\#194](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/194), [\#285](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/285)
