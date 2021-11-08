@@ -32,7 +32,7 @@ public class SampleDataUtil {
 
     public static final Person ALEX = new Person(new Name(NAME_ALEX), new Room("E417"), new Phone("87438807"),
             new Email("alexyeoh@example.com"), new VaccStatus("T"),
-            new Faculty("SoC"), new LastDate("24-10-2021"), new LastDate("10-10-2021"));
+            new Faculty("SoC"), new LastDate("05-11-2021"), new LastDate("05-11-2021"));
     public static final Person BERNICE = new Person(new Name(NAME_BERNICE), new Room("A213"), new Phone("99272758"),
             new Email("berniceyu@example.com"), new VaccStatus("F"),
             new Faculty("FASS"), new LastDate("10-10-2021"), new LastDate("11-10-2021"));
@@ -44,7 +44,7 @@ public class SampleDataUtil {
             new Faculty("SDE"), new LastDate("27-10-2021"), new LastDate("01-10-2021"));
     public static final Person IRFAN = new Person(new Name(NAME_IRFAN), new Room("D422"), new Phone("92492021"),
             new Email("irfan@example.com"), new VaccStatus("T"),
-            new Faculty("FoE"), new LastDate("12-10-2021"), new LastDate("12-10-2021"));
+            new Faculty("FoE"), new LastDate("03-11-2021"), new LastDate("06-11-2021"));
     public static final Person ROY = new Person(new Name(NAME_ROY), new Room("A309"), new Phone("92624417"),
             new Email("royb@example.com"), new VaccStatus("T"),
             new Faculty("BIZ"), new LastDate("29-10-2021"), new LastDate("21-10-2021"));
@@ -59,21 +59,21 @@ public class SampleDataUtil {
             sampleAb.addPerson(samplePerson);
         }
 
-        sampleAb.addEvent(new Event(new EventName("Powerlifting"), new EventDate("25-10-2021"),
+        sampleAb.addEvent(new Event(new EventName("Powerlifting"), new EventDate("09-11-2021"),
                 new EventTime("0800"), new Venue("Gym"), new Capacity("5"), new ResidentList(
                 String.join(", ", NAME_DAVID, NAME_IRFAN), String.join(", ",
                 DAVID.toString(), IRFAN.toString()))));
 
-        sampleAb.addEvent(new Event(new EventName("Basketball"), new EventDate("22-10-2021"),
+        sampleAb.addEvent(new Event(new EventName("Basketball"), new EventDate("07-11-2021"),
                 new EventTime("0830"), new Venue("basketball court"), new Capacity("5"), new ResidentList(
                         ResidentList.DEFAULT_LIST, ResidentList.DEFAULT_LIST)));
 
-        sampleAb.addEvent(new Event(new EventName("Volleyball"), new EventDate("23-10-2021"),
+        sampleAb.addEvent(new Event(new EventName("Volleyball"), new EventDate("08-11-2021"),
                 new EventTime("0800"), new Venue("volleyball court"), new Capacity("6"), new ResidentList(
                 String.join(", ", NAME_ALEX, NAME_DAVID, NAME_CHARLOTTE), String.join(", ",
                 ALEX.toString(), DAVID.toString(), CHARLOTTE.toString()))));
 
-        sampleAb.addEvent(new Event(new EventName("Swimming"), new EventDate("15-10-2021"),
+        sampleAb.addEvent(new Event(new EventName("Swimming"), new EventDate("01-11-2021"),
                 new EventTime("0830"), new Venue("Pool"), new Capacity("7"), new ResidentList(
                 String.join(", ", NAME_BERNICE, NAME_DAVID, NAME_CHARLOTTE), String.join(", ",
                 BERNICE.toString(), DAVID.toString(), CHARLOTTE.toString()))));
