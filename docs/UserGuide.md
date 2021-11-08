@@ -285,11 +285,11 @@ Example:
 Deletes a lesson from the specific student
 
 
-Format: `student -dl PERSON_INDEX LESSON_INDEX`
+Format: `student -dl STUDENT_INDEX LESSON_INDEX`
 
-* Specifies the student at `PERSON_INDEX`.
+* Specifies the student at `STUDENT_INDEX`.
 * Deletes the specified lesson at `LESSON_INDEX` of the student specified.
-* Both `PERSON_INDEX` and `LESSON_INDEX` must be a positive number.
+* Both `STUDENT_INDEX` and `LESSON_INDEX` must be a positive number.
 * The `LESSON_INDEX` can be found by using the [student viewing command](#viewing-a-student-student--v) as shown below.
 
 ![studentLessonIndex](images/imagesInUG/student-findLesson.png)
