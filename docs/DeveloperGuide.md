@@ -3,8 +3,6 @@ layout: page
 title: Developer Guide
 ---
 
-## Table of Contents
-
 * Table of Contents
 {:toc}
 
@@ -146,8 +144,7 @@ call.
 
 ### Model component
 
-**
-API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -171,8 +168,7 @@ The `Model` component,
 
 ### Storage component
 
-**
-API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -196,7 +192,6 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 This section describes some noteworthy details on how certain features are implemented.
 
 The features mentioned are:
-
 1. Viewing help
 2. Modify
    1. Adding a person
@@ -221,7 +216,6 @@ The features mentioned are:
    1. [Input Suggestion](#input-suggestion)
 7. Exiting the program
 8. Saving the data
-
 
 ### Add contacts with optional arguments
 
@@ -493,6 +487,54 @@ Step 7. Finally, it will return a `CommandResult` if the operation is successful
     * Pros: Gives user the flexibility to put the file wherever they want.
     * Cons: Different OSes have different file paths convention.
 
+### Support for multiple social handles
+
+#### Implementation
+A social handle can store a social platform and a user ID tied to that platform.
+
+As a person may have multiple social handles for different social platforms, there is a need to support multiple social handles tied to a person.
+
+The approach to implementing multiple social handles is similar to the original AB3's approach to implementing multiple tags. A Java HashSet is used to store all the social handle objects of a person. 
+
+The current implementation allows for each person to have only 1 social handle for each platform. Therefore, when parsing social handles, new user ID will overwrite old user ID of the same social platform. This is done by using a Java Hashtable to store all the original social platforms in a platform name to social handle object pair, then check if the social platform of new social handle is present in the hashtable, and then update accordingly. After all the updates, the values of the hashtable are converted into a set to be store under an attribute of a person.
+
+#### Usage
+Social handles can be introduced to a person via the 'add' or 'edit' command.
+
+Given a user wants to change the following entry:
+![SocialHandleBeforeAfterEdit](images/dg/SocialHandleBeforeAfter.png)
+
+Given below demonstrates how the social handle mechanism would behave at each step.
+
+Step 1: The user enters the command `edit 1 s/tg:alex777 s/ig:a_lex_123 s/tw:alexxx00`
+
+Step 2: `AddressBookParser#parseCommand` will be called to do the first round of parsing to find the type of command being used.
+
+Step 3: After finding the command used is Edit, `EditCommandParser#parse` will be called to further parse the command.
+
+Step 4: `EditCommandParser#parse` will call `ArgumentTokenizer#tokenize` to get an `ArgumentMultimap` object, which contains parsed values of all the prefixes.
+
+Step 5: `ArgumentMultimap#GetAllValues` is then called to get a list of values with social handle prefix `s/`.
+
+Step 6: `ParserUtil#parseSocialHandles` is then used to parse the string value of social handles into a set of `SocialHandle` objects.
+
+Step 7: `EditCommand` object is then created and updated with all the change needed to a person.
+
+Step 8: `LogicManager` will then execute the `EditCommand`
+
+Step 9: This will update the relevant person with the new data
+
+The following sequence diagram shows how the EditCommand function works for social handles:
+![EditCommandSeqDiagramForSocialHandle](images/dg/EditCommandDiagramForSocialHandle.png)
+
+#### Design considerations:
+**Aspect: How to store social handle**
+* **Alternative 1:** Store each social handle for each platform as an individual attribute of a person
+    * Pros: The logic will be easier to test.
+	* Cons: There will be many duplicated code as each social handles are similar.
+* **Alternative 2 (Current):** Store a person's social handles as a set.
+    * Pros: It will be neater and less time-consuming to implement. Supporting additional platforms will only requires little code change.
+    * Cons: Will have many duplicated code as each social handles are similar.
 
 ### Export JSON file
 
@@ -571,7 +613,6 @@ The following sequence diagram shows how the alias command mechanism works:
 * **Alternative 2:** Non-Singleton
     * Pros: More commonly used in general and thus easier to understand.
     * Cons: A normal class can be instantiated multiple times, which does not suit the context of this implementation.
-
 
 ### \[Proposed\] Undo/redo feature
 
@@ -731,6 +772,7 @@ _{more aspects and alternatives to be added}_
 * [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Requirements**
 
