@@ -93,11 +93,11 @@ to quickly navigate to the command of your choice.
 * Parameters can be in any order.<br>
   e.g. if the command format is `-n NAME -p PHONE_NUMBER`, `-p PHONE_NUMBER -n NAME` is also acceptable.
 
-* If a parameter is expected only once in the command format but you specified it multiple times, only the last occurrence of the parameter will be accepted.<br>
-  e.g. if you specify `-p 12341234 -p 56785678`, only `-p 56785678` will be accepted.<br> There are a few exceptions to this such as the find command. In such cases, if a parameter is expected only once, an error message will appear.
+* If a parameter is expected only once in the command format, but you specified it multiple times, only the last occurrence of the parameter will be accepted.<br>
+  e.g. if you specify `-p 12341234 -p 56785678`, only `-p 56785678` will be accepted.<br> There are a few exceptions to this which are the find command and the cat command. In such cases, if a parameter is expected only once and there are more than one standalone flag, the words after the first flag will be taken as keywords.
 
 * Extraneous parameters for commands that do not take in parameters (such as `ls`, `exit` and `clear`) will be ignored.<br>
-  e.g. if you specifiy `ls 123`, the command will be interpreted as `ls`.
+  e.g. if you specify `ls 123`, the command will be interpreted as `ls`.
 
 </div>
 
@@ -204,6 +204,7 @@ Format: `find [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-d DESCRIPTION] [-l 
 * At least one of the optional fields is required.
 * Abbreviations will be matched e.g. Han will match Hans
 * Persons matching **ALL** the keywords will be returned. e.g. A Y will return Alex Yeoh, Alexandra Yee, but not Aileen
+* Only one flag is allowed per command. e.g. `find -n Alex` is fine, but `find -n Alex -n Bernice` will search with the keywords "Alex -n Bernice".
 
 Examples:
 
@@ -294,6 +295,7 @@ Format: `cat INDEX [-f KEYWORDS]`
    * Displays a filtered lists of tasks for a specific person according to the keywords provided.
    * Only tasks that matches the keywords will be shown. A task matches the keywords if the task name contains a word that starts with any of the `KEYWORDS`.
    * A space is **necessary** between the flag and the keywords.
+   * * Only one flag is allowed per command. e.g. `cat 1 -f work` is fine, but `cat 1 -f work -f nus` will search with the keywords "work -f nus".
 
    Examples:
 

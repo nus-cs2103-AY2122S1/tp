@@ -126,7 +126,7 @@ The `Model` component,
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores the previous user input into the `UserCommandCache`
-* stores a `TaskListManager` object which is responsible of managing task display operations. It maintains a `Name` object of the person whose tasks is currently displayed.  
+* stores a `TaskListManager` object which is responsible for managing task display operations. It maintains a `Name` object of the person whose tasks are currently displayed.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -212,7 +212,7 @@ The following activity diagram summarises what happens when a user executes a `c
 
   * Cons:
     * `list` has to be executed again if user wants to redirect back to the person list (extra overhead
-      which reduces efficiency).
+    which reduces efficiency).
     * Lesser view of information.
 
 ### Command Cache
@@ -304,7 +304,6 @@ The following sequence diagram show how the find operation works:
 The following activity diagram summarises what happens when a user executes a `find -n Alex` command:
 
 ![ViewTaskListActivityDiagram](images/FindActivityDiagram.png)
-
 #### Design consideration:
 
 ##### Aspect: How to find based on the keywords
@@ -384,7 +383,7 @@ The following activity diagram summarizes what happens when a user executes `add
 ##### Aspect: How to either add a new person or task using the same `add` command word
 
 - **Alternative 1 (current choice):** If the command is to add a new task, invoke `AddTaskCommandParser` from `AddCommandParser`, returning a `AddTaskCommand`. Else if the command is to add a new person, return a `AddCommand` directly from `AddCommandParser`.
-    - Pros: 
+    - Pros:
         - Commands encapsulate the exact command to execute.
         - Easier to debug if either command demonstrates erroneous behaviour.
     - Cons:
@@ -394,7 +393,7 @@ The following activity diagram summarizes what happens when a user executes `add
     - Pros:
         - Simple implementation.
         - Less effort needed.
-    - Cons: 
+    - Cons:
         - Increased avenue for bugs.
 
 ### \[Proposed\] Undo/redo feature
@@ -445,7 +444,6 @@ The following sequence diagram shows how the undo operation works:
 </div>
 
 The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>

@@ -12,7 +12,7 @@ tasks done faster than traditional GUI apps.
 Given below are my contributions to the project.
 
 * **New Feature**: Added the ability to view a list of commands.
-    * What it does: Allows the user to view a list of commands in a new window and see what each command does. 
+    * What it does: Allows the user to view a list of commands in a new window and see what each command does.
     * Justification: This feature improves the product significantly because a new user who is familiar with Linux CLI might not understand what commands are possible in this application. They can access the full list of commands quite easily by using the same "man" command in Linux CLI. A current user might also forget the commands from time to time, so it is convenient to have a list of commands readily available within the application and not make it necessary to visit the user guide everytime one forgets the commands.
     * Highlights: This enhancement is affected by existing commands and commands to be added in the future.
     * Credits: Inspired by and reused some parts from https://github.com/greyguy21/ip/ (version from 01/10/2021) with modifications
