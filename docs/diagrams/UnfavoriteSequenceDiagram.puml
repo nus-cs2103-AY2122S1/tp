@@ -11,6 +11,9 @@ end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
+participant ":AddressBook" as AddressBook MODEL_COLOR
+participant ":UniquePersonList" as UniquePersonList MODEL_COLOR
+participant ":Person" as Person MODEL_COLOR
 end box
 
 [-> LogicManager : execute("unfav 1")
@@ -47,11 +50,43 @@ activate UnfavoriteCommand
 
 UnfavoriteCommand -> UnfavoriteCommand : execute(model)
 activate UnfavoriteCommand
-UnfavoriteCommand --> UnfavoriteCommand :
+
+UnfavoriteCommand -> Model : getFilteredPersonList();
+activate Model
+
+Model -> UnfavoriteCommand : List<Person>
+deactivate Model
+
+UnfavoriteCommand -> UnfavoriteCommand : lastShownList.get(0)
+activate UnfavoriteCommand
+
+UnfavoriteCommand --> UnfavoriteCommand : target
 deactivate UnfavoriteCommand
 
-UnfavoriteCommand -> Model : model.unfavouritePerson()
+UnfavoriteCommand --> UnfavoriteCommand : CommandResult
+deactivate UnfavoriteCommand
+
+UnfavoriteCommand -> Model : model.unfavouritePerson(target)
 activate Model
+
+Model -> AddressBook
+activate AddressBook
+
+AddressBook -> UniquePersonList : unfavoritePerson(target)
+activate UniquePersonList
+
+UniquePersonList -> Person : setNotIsFavorite()
+activate Person
+
+Person -> UniquePersonList :
+deactivate Person
+
+UniquePersonList -> AddressBook :
+deactivate UniquePersonList
+
+AddressBook -> Model :
+deactivate AddressBook
+
 Model --> UnfavoriteCommand :
 deactivate Model
 
