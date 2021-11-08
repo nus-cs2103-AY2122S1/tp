@@ -1,0 +1,128 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":PlannerMdParser" as PlannerMdParser LOGIC_COLOR
+participant ":AppointmentCommandParser" as AppointmentCommandParser LOGIC_COLOR
+participant ":FilterAppointmentCommandParser" as FilterAppointmentCommandParser LOGIC_COLOR
+participant "filter:AppointmentFilters" as AppointmentFilters LOGIC_COLOR
+participant "f:FilterAppointmentCommand" as FilterAppointmentCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("appt -f \np/Alice s/19/10/2021")
+activate LogicManager
+
+LogicManager -> Model : getState()
+activate Model
+
+Model --> LogicManager : state
+deactivate Model
+
+LogicManager -> PlannerMdParser : parseCommand("appt -f \np/Alice s/19/10/2021", State.PATIENT)
+activate PlannerMdParser
+
+create AppointmentCommandParser
+PlannerMdParser -> AppointmentCommandParser
+activate AppointmentCommandParser
+
+'Hidden arrow to increase the length of the activation bar so that the diagram is taller and easier to see
+AppointmentCommandParser -[hidden]-> PlannerMdParser
+AppointmentCommandParser -[hidden]-> PlannerMdParser
+AppointmentCommandParser --> PlannerMdParser
+deactivate AppointmentCommandParser
+
+PlannerMdParser -> AppointmentCommandParser : parseAppointmentCommand("appt -f \np/Alice s/19/10/2021")
+activate AppointmentCommandParser
+
+create FilterAppointmentCommandParser
+AppointmentCommandParser -> FilterAppointmentCommandParser
+activate FilterAppointmentCommandParser
+
+'Hidden arrow to increase the length of the activation bar so that the diagram is taller and easier to see
+FilterAppointmentCommandParser -[hidden]-> PlannerMdParser
+FilterAppointmentCommand -[hidden]-> PlannerMdParser
+FilterAppointmentCommandParser --> AppointmentCommandParser
+deactivate FilterAppointmentCommandParser
+
+AppointmentCommandParser -> FilterAppointmentCommandParser : parse("p/Alice s/19/10/2021)
+activate FilterAppointmentCommandParser
+
+create AppointmentFilters
+FilterAppointmentCommandParser -> AppointmentFilters
+activate AppointmentFilters
+
+AppointmentFilters --> FilterAppointmentCommandParser : filter
+deactivate AppointmentFilters
+
+ref over FilterAppointmentCommandParser, AppointmentFilters
+configure appointment filters
+end ref
+
+create FilterAppointmentCommand
+FilterAppointmentCommandParser -> FilterAppointmentCommand : FilterAppointmentCommand(filter)
+activate FilterAppointmentCommand
+
+'Hidden arrow to increase the length of the activation bar so that the diagram is taller and easier to see
+FilterAppointmentCommand -[hidden]-> PlannerMdParser
+FilterAppointmentCommand -[hidden]-> PlannerMdParser
+FilterAppointmentCommand --> FilterAppointmentCommandParser : f
+deactivate FilterAppointmentCommand
+
+FilterAppointmentCommandParser --> AppointmentCommandParser : f
+deactivate FilterAppointmentCommandParser
+
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+FilterAppointmentCommandParser -[hidden]-> PlannerMdParser
+destroy FilterAppointmentCommandParser
+
+AppointmentCommandParser --> PlannerMdParser : f
+deactivate AppointmentCommandParser
+
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AppointmentCommandParser -[hidden]-> PlannerMdParser
+destroy AppointmentCommandParser
+
+PlannerMdParser --> LogicManager : f
+deactivate PlannerMdParser
+
+LogicManager -> FilterAppointmentCommand : execute()
+activate FilterAppointmentCommand
+
+FilterAppointmentCommand -> AppointmentFilters : collectAllFilters()
+activate AppointmentFilters
+
+AppointmentFilters --> FilterAppointmentCommand : predicate
+deactivate AppointmentFilters
+
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AppointmentFilters -[hidden]-> PlannerMdParser
+destroy AppointmentFilters
+
+FilterAppointmentCommand -> Model : updateFilteredAppointmentList(predicate)
+activate Model
+
+Model --> FilterAppointmentCommand
+deactivate Model
+
+create CommandResult
+FilterAppointmentCommand -> CommandResult
+activate CommandResult
+
+'Hidden arrow to increase the length of the activation bar so that the diagram is taller and easier to see
+CommandResult -[hidden]-> PlannerMdParser
+CommandResult -[hidden]-> PlannerMdParser
+CommandResult --> FilterAppointmentCommand : result
+deactivate CommandResult
+
+FilterAppointmentCommand --> LogicManager : result
+deactivate FilterAppointmentCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

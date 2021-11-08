@@ -1,0 +1,49 @@
+{
+  "patient": {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "alice@example.com",
+    "address": "123, Jurong West Ave 6, #08-111",
+    "birthDate": "12/12/1922",
+    "remark": "Awaiting PCR test result",
+    "tagged": [
+      "friends"
+    ],
+    "risk": "HIGH"
+  },
+  "doctor": {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "alice@example.com",
+    "address": "4th street",
+    "birthDate": "12/12/1921",
+    "remark": "PCR done",
+    "tagged": [ "colleagues" ]
+  },
+  "appointments": [ {
+    "_comments": "Missing session field",
+    "patient": {
+      "name": "Alice Pauline",
+      "phone": "94351253",
+      "email": "alice@example.com",
+      "address": "123, Jurong West Ave 6, #08-111",
+      "birthDate": "12/12/1922",
+      "remark": "Awaiting PCR test result",
+      "tagged": [
+        "friends"
+      ],
+      "risk": "HIGH"
+    },
+    "doctor": {
+      "name": "Alice Pauline",
+      "phone": "94351253",
+      "email": "alice@example.com",
+      "address": "4th street",
+      "birthDate": "12/12/1921",
+      "remark": "PCR done",
+      "tagged": [ "colleagues" ]
+    },
+    "date": "10/10/2022",
+    "remark": "Therapy Session"
+  }]
+}

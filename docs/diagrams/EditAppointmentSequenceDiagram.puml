@@ -1,0 +1,93 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":PlannerMdParser" as PlannerMdParser LOGIC_COLOR
+participant ":AppointmentCommandParser" as AppointmentCommandParser LOGIC_COLOR
+participant ":EditAppointmentCommandParser" as EditAppointmentCommandParser LOGIC_COLOR
+participant "e:EditAppointmentCommand" as EditAppointmentCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("appt -e 2\np/1 dur/30")
+activate LogicManager
+
+LogicManager -> Model : getState()
+activate Model
+
+Model --> LogicManager : state
+deactivate Model
+
+LogicManager -> PlannerMdParser : parseCommand("appt -e 2\np/1 dur/30", State.PATIENT)
+activate PlannerMdParser
+
+create AppointmentCommandParser
+PlannerMdParser -> AppointmentCommandParser
+activate AppointmentCommandParser
+
+AppointmentCommandParser --> PlannerMdParser
+deactivate AppointmentCommandParser
+
+PlannerMdParser -> AppointmentCommandParser : parseAppointmentCommand("-e 2\np/1 dur/30")
+activate AppointmentCommandParser
+
+create EditAppointmentCommandParser
+AppointmentCommandParser -> EditAppointmentCommandParser
+activate EditAppointmentCommandParser
+
+EditAppointmentCommandParser --> AppointmentCommandParser
+deactivate EditAppointmentCommandParser
+
+AppointmentCommandParser -> EditAppointmentCommandParser : parse("2 p/1 dur/30")
+activate EditAppointmentCommandParser
+
+create EditAppointmentCommand
+EditAppointmentCommandParser -> EditAppointmentCommand
+activate EditAppointmentCommand
+
+EditAppointmentCommand --> EditAppointmentCommandParser : e
+deactivate EditAppointmentCommand
+
+EditAppointmentCommandParser --> AppointmentCommandParser : e
+deactivate EditAppointmentCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+EditAppointmentCommandParser -[hidden]-> AppointmentCommandParser
+destroy EditAppointmentCommandParser
+
+AppointmentCommandParser --> PlannerMdParser : e
+deactivate AppointmentCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AppointmentCommandParser -[hidden]-> PlannerMdParser
+destroy AppointmentCommandParser
+
+PlannerMdParser --> LogicManager : e
+deactivate PlannerMdParser
+
+LogicManager -> EditAppointmentCommand : execute()
+activate EditAppointmentCommand
+
+EditAppointmentCommand -> Model : setAppointment()
+activate Model
+
+Model --> EditAppointmentCommand
+deactivate Model
+
+create CommandResult
+EditAppointmentCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> EditAppointmentCommand : result
+deactivate CommandResult
+
+EditAppointmentCommand --> LogicManager : result
+deactivate EditAppointmentCommand
+
+[<--LogicManager
+deactivate LogicManager
+
+@enduml

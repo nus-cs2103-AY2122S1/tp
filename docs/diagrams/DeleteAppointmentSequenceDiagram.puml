@@ -1,0 +1,90 @@
+@startuml
+!include style.puml
+
+box Model LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":PlannerMdParser" as PlannerMdParser LOGIC_COLOR
+participant ":AppointmentCommandParser" as AppointmentCommandParser LOGIC_COLOR
+participant ":DeleteAppointmentCommandParser" as DeleteAppointmentCommandParser LOGIC_COLOR
+participant "d:DeleteAppointmentCommand" as DeleteAppointmentCommand LOGIC_COLOR
+participant "commandResult:CommandResult" as CommandResult LOGIC_COLOR
+end box
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+create LogicManager
+[-> LogicManager : execute("appt -d\n 1")
+activate LogicManager
+
+LogicManager -> Model : getState()
+activate Model
+
+Model --> LogicManager : state
+deactivate Model
+
+LogicManager -> PlannerMdParser : parseCommand("appt -d 1, \n State.PATIENT")
+activate PlannerMdParser
+
+
+
+create AppointmentCommandParser
+PlannerMdParser -> AppointmentCommandParser
+activate AppointmentCommandParser
+
+AppointmentCommandParser --> PlannerMdParser
+deactivate AppointmentCommandParser
+
+PlannerMdParser -> AppointmentCommandParser : parseAppointmentCommand("-d 1")
+activate AppointmentCommandParser
+
+
+create DeleteAppointmentCommandParser
+AppointmentCommandParser -> DeleteAppointmentCommandParser
+activate DeleteAppointmentCommandParser
+DeleteAppointmentCommandParser --> AppointmentCommandParser
+deactivate
+
+AppointmentCommandParser -> DeleteAppointmentCommandParser : parse("1")
+activate DeleteAppointmentCommandParser
+
+
+AppointmentCommandParser --> PlannerMdParser
+deactivate AppointmentCommandParser
+
+create DeleteAppointmentCommand
+DeleteAppointmentCommandParser -> DeleteAppointmentCommand : "1"
+activate DeleteAppointmentCommand
+
+DeleteAppointmentCommandParser<--DeleteAppointmentCommand : d
+deactivate DeleteAppointmentCommand
+
+AppointmentCommandParser <--DeleteAppointmentCommandParser : d
+deactivate DeleteAppointmentCommandParser
+
+PlannerMdParser <--AppointmentCommandParser : d
+deactivate AppointmentCommandParser
+
+LogicManager <--PlannerMdParser : d
+deactivate PlannerMdParser
+
+LogicManager -> DeleteAppointmentCommand : execute()
+activate DeleteAppointmentCommand
+
+DeleteAppointmentCommand -> Model : deleteAppointment(appointmentToDelete)
+activate Model
+Model --> DeleteAppointmentCommand
+deactivate Model
+
+create CommandResult
+DeleteAppointmentCommand -> CommandResult : message
+activate CommandResult
+CommandResult --> DeleteAppointmentCommand : commandResult
+deactivate CommandResult
+
+DeleteAppointmentCommand --> LogicManager : commandResult
+
+[<--LogicManager
+deactivate LogicManager
+
+@enduml

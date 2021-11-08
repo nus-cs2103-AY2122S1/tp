@@ -1,0 +1,50 @@
+@startuml
+!include style.puml
+
+box Storage STORAGE_COLOR_T1
+participant ":JsonAdaptedAppointment" as JsonAdaptedAppointment STORAGE_COLOR
+participant "p:JsonAdaptedPatient" as JsonAdaptedPatient STORAGE_COLOR
+participant "d:JsonAdaptedDoctor" as JsonAdaptedDoctor STORAGE_COLOR
+participant "t:JsonAdaptedTag" as JsonAdaptedTag STORAGE_COLOR
+participant "s:JsonAdaptedSession" as JsonAdaptedSession STORAGE_COLOR
+end box
+
+create JsonAdaptedPatient
+JsonAdaptedAppointment -> JsonAdaptedPatient
+activate JsonAdaptedPatient
+
+loop number of tags for this patient
+    create JsonAdaptedTag
+    JsonAdaptedPatient -> JsonAdaptedTag
+    activate JsonAdaptedTag
+    JsonAdaptedTag --> JsonAdaptedPatient : t
+    deactivate JsonAdaptedTag
+end
+
+JsonAdaptedPatient --> JsonAdaptedAppointment : p
+deactivate JsonAdaptedPatient
+
+create JsonAdaptedDoctor
+JsonAdaptedAppointment -> JsonAdaptedDoctor
+activate JsonAdaptedDoctor
+
+loop number of tags for this doctor
+    create JsonAdaptedTag
+    JsonAdaptedDoctor -> JsonAdaptedTag
+    activate JsonAdaptedTag
+    JsonAdaptedTag --> JsonAdaptedDoctor : t
+    deactivate JsonAdaptedTag
+end
+
+JsonAdaptedDoctor --> JsonAdaptedAppointment : d
+deactivate JsonAdaptedDoctor
+
+
+create JsonAdaptedSession
+JsonAdaptedAppointment -> JsonAdaptedSession
+activate JsonAdaptedSession
+
+JsonAdaptedSession --> JsonAdaptedAppointment : s
+deactivate JsonAdaptedSession
+
+@enduml

@@ -1,0 +1,17 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+: User inputs toggle command;
+: Generate new ToggleCommand;
+: Execute ToggleCommand;
+if () then ([current displayed tab is Patient tab])
+: Toggle to Doctor tab;
+else ([current displayed tab is Doctor tab])
+: Toggle to Patient tab;
+endif
+: Generate successful toggle message;
+: Display result to user;
+stop
+
+@enduml

@@ -1,0 +1,29 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User enters delete appointment command with index;
+:Parse command;
+if () then ([required prefixes are present])
+  if () then ([prefix arguments are valid])
+      if () then ([patient index is valid])
+         if () then ([doctor index is valid])
+            : Create new AddAppointmentCommand;
+            : Execute AddAppointmentCommand;
+            : Generate success message;
+         else ([else])
+         : Generate Parse Exception\n describing invalid index for doctor;
+         endif
+      else ([else])
+      : Generate Parse Exception\n describing invalid index for patient;
+      endif
+  else ([else])
+  : Generate Parse Exception\n describing invalid prefix arguments;
+  endif
+else ([else])
+: Generate Parse Exception\n indicating missing prefixes;
+endif
+: Display result to user;
+stop
+
+@enduml

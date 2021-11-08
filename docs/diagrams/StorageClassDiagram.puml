@@ -14,12 +14,16 @@ Class JsonUserPrefsStorage
 Interface Storage <<Interface>>
 Class StorageManager
 
-package "AddressBook Storage" #F4F6F6{
-Interface AddressBookStorage <<Interface>>
-Class JsonAddressBookStorage
-Class JsonSerializableAddressBook
+package "PlannerMD Storage" #F4F6F6{
+Interface PlannerMdStorage <<Interface>>
+Class JsonPlannerMdStorage
+Class JsonSerializablePlannerMd
+class JsonAdaptedDoctor
+class JsonAdaptedPatient
 Class JsonAdaptedPerson
 Class JsonAdaptedTag
+class JsonAdaptedAppointment
+Class JsonAdaptedSession
 }
 
 }
@@ -29,15 +33,22 @@ HiddenOutside ..> Storage
 
 StorageManager .up.|> Storage
 StorageManager -up-> "1" UserPrefsStorage
-StorageManager -up-> "1" AddressBookStorage
+StorageManager -up-> "1" PlannerMdStorage
 
 Storage -left-|> UserPrefsStorage
-Storage -right-|> AddressBookStorage
+Storage -right-|> PlannerMdStorage
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
-JsonAddressBookStorage .up.|> AddressBookStorage
-JsonAddressBookStorage ..> JsonSerializableAddressBook
-JsonSerializableAddressBook --> "*" JsonAdaptedPerson
+JsonPlannerMdStorage .up.|> PlannerMdStorage
+JsonPlannerMdStorage ..> JsonSerializablePlannerMd
+JsonSerializablePlannerMd --> "*" JsonAdaptedDoctor
+JsonSerializablePlannerMd --> "*" JsonAdaptedPatient
+JsonSerializablePlannerMd --> "*" JsonAdaptedAppointment
+JsonAdaptedAppointment --> "1" JsonAdaptedPatient
+JsonAdaptedAppointment --> "1" JsonAdaptedDoctor
+JsonAdaptedAppointment --> "1" JsonAdaptedSession
+JsonAdaptedDoctor --|> JsonAdaptedPerson
+JsonAdaptedPatient --|> JsonAdaptedPerson
 JsonAdaptedPerson --> "*" JsonAdaptedTag
 
 @enduml

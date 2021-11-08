@@ -1,0 +1,85 @@
+@startuml
+!include style.puml
+
+box Model LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":PlannerMdParser" as PlannerMdParser LOGIC_COLOR
+participant ":AppointmentCommandParser" as AppointmentCommandParser LOGIC_COLOR
+participant ":AddAppointmentCommandParser" as AddAppointmentCommandParser LOGIC_COLOR
+participant "a:AddAppointmentCommand" as AddAppointmentCommand LOGIC_COLOR
+participant "commandResult:CommandResult" as CommandResult LOGIC_COLOR
+end box
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+create LogicManager
+[-> LogicManager : execute("appt -a\n p/1 d/1...")
+activate LogicManager
+
+LogicManager -> Model : getState()
+activate Model
+
+Model --> LogicManager : state
+deactivate Model
+
+LogicManager -> PlannerMdParser : parseCommand("appt -a \np/1 d/1..., \nState.PATIENT")
+activate PlannerMdParser
+
+create AppointmentCommandParser
+PlannerMdParser -> AppointmentCommandParser
+activate AppointmentCommandParser
+
+AppointmentCommandParser --> PlannerMdParser
+deactivate AppointmentCommandParser
+
+PlannerMdParser -> AppointmentCommandParser : parseAppointmentCommand("-a\n p/1 d/1 ...")
+activate AppointmentCommandParser
+
+create AddAppointmentCommandParser
+AppointmentCommandParser -> AddAppointmentCommandParser
+activate AddAppointmentCommandParser
+
+AddAppointmentCommandParser --> AppointmentCommandParser
+deactivate AddAppointmentCommandParser
+
+AppointmentCommandParser -> AddAppointmentCommandParser : parse("p/1 d/1 ...")
+activate AddAppointmentCommandParser
+
+create AddAppointmentCommand
+AddAppointmentCommandParser -> AddAppointmentCommand : Appointment Details
+activate AddAppointmentCommand
+
+
+AddAppointmentCommandParser<--AddAppointmentCommand : a
+deactivate AddAppointmentCommand
+
+AppointmentCommandParser <--AddAppointmentCommandParser : a
+deactivate AddAppointmentCommandParser
+
+PlannerMdParser <--AppointmentCommandParser : a
+deactivate AppointmentCommandParser
+
+LogicManager <--PlannerMdParser : a
+deactivate PlannerMdParser
+
+LogicManager -> AddAppointmentCommand : execute()
+activate AddAppointmentCommand
+
+AddAppointmentCommand -> Model : addAppointment(appointmentToAdd)
+activate Model
+Model --> AddAppointmentCommand
+deactivate Model
+
+create CommandResult
+AddAppointmentCommand -> CommandResult : message
+activate CommandResult
+CommandResult --> AddAppointmentCommand : commandResult
+deactivate CommandResult
+
+AddAppointmentCommand --> LogicManager : commandResult
+
+[<--LogicManager
+deactivate LogicManager
+
+@enduml

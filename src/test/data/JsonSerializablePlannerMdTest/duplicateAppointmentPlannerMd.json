@@ -1,0 +1,81 @@
+{
+  "patients": [
+    {
+      "name": "Alice Pauline",
+      "phone": "94351253",
+      "email": "alice@example.com",
+      "address": "123, Jurong West Ave 6, #08-111",
+      "birthDate": "12/12/1922",
+      "remark": "Awaiting PCR test result",
+      "tagged": [ "friends" ],
+      "risk": "LOW"
+    }
+  ],
+  "doctors": [
+    {
+      "name": "Alice Pauline",
+      "phone": "94351253",
+      "email": "alice@example.com",
+      "address": "4th street",
+      "birthDate": "12/12/1921",
+      "remark": "PCR done",
+      "tagged": [ "colleagues" ]
+    }
+  ],
+  "appointments": [
+    {
+      "patient": {
+        "name": "Alice Pauline",
+        "phone": "94351253",
+        "email": "alice@example.com",
+        "address": "123, Jurong West Ave 6, #08-111",
+        "birthDate": "12/12/1922",
+        "remark": "Awaiting PCR test result",
+        "tagged": [ "friends" ],
+        "risk": "LOW"
+      },
+      "doctor": {
+        "name": "Alice Pauline",
+        "phone": "94351253",
+        "email": "alice@example.com",
+        "address": "4th street",
+        "birthDate": "12/12/1921",
+        "remark": "PCR done",
+        "tagged": [ "colleagues" ]
+      },
+      "date": "2/2/2022",
+      "session": {
+        "start": "11:30",
+        "duration": 30
+      },
+      "remark": "X-ray"
+    },
+    {
+      "patient": {
+        "name": "Alice Pauline",
+        "phone": "94351253",
+        "email": "alice@example.com",
+        "address": "123, Jurong West Ave 6, #08-111",
+        "birthDate": "12/12/1922",
+        "remark": "Awaiting PCR test result",
+        "tagged": [ "friends" ],
+        "risk": "LOW"
+      },
+      "doctor": {
+        "name": "Alice Pauline",
+        "phone": "94351253",
+        "email": "alice@example.com",
+        "address": "4th street",
+        "birthDate": "12/12/1921",
+        "remark": "PCR done",
+        "tagged": [ "colleagues" ]
+      },
+      "date": "2/2/2022",
+      "session": {
+        "start": "11:30",
+        "duration": 30
+      },
+      "remark": "X-ray"
+    }
+  ]
+}
