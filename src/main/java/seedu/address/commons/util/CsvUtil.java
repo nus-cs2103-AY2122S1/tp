@@ -24,7 +24,9 @@ import seedu.address.storage.CsvAdaptedPerson;
 import seedu.address.storage.CsvSerializableAddressBook;
 
 /**
- * A class for reading from and writing between CSV Files and CsvSerializableAddressBook, using the Jackson library.
+ * A class for reading from and writing between CSV Files and CsvSerializableAddressBook,
+ * using the jackson-dataformat-csv library.
+ * Credits: https://github.com/FasterXML/jackson-dataformats-text/tree/master/csv
  */
 public class CsvUtil {
 

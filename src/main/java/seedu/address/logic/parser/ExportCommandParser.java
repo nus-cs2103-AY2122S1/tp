@@ -21,17 +21,21 @@ public class ExportCommandParser implements Parser<ExportCommand> {
      */
     public ExportCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
+
+        // Check if empty
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExportCommand.MESSAGE_USAGE));
         }
 
+        // Check if more than 1 argument
         String[] fileNameKeywords = trimmedArgs.split("\\s+");
         if (fileNameKeywords.length > 1) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExportCommand.MESSAGE_USAGE));
         }
 
+        // Check if extension is .json or .csv (case-insensitive)
         String fileName = fileNameKeywords[0];
         if (!(StringUtil.isJson(fileName) || StringUtil.isCsv(fileName))) {
             throw new ParseException(

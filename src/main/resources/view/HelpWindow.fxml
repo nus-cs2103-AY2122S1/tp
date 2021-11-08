@@ -28,7 +28,7 @@
         <URL value="@TableView.css" />
       </stylesheets>
 
-      <AnchorPane prefHeight="710" prefWidth="300">
+      <AnchorPane prefHeight="750" prefWidth="300">
         <children>
           <VBox>
             <TableView fx:id="helpTable" AnchorPane.topAnchor="1.0">
