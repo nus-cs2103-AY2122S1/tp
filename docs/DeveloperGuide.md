@@ -249,60 +249,51 @@ The show feature enables users to show tasks by specifying the given week or dat
 
 #### 3.3.1 Implementation
 
-The following are the changes made to achieve this feature:
+##### ShowCommand class
 
-* A `` class is added under the `model/task` package.
-* The `NameContainsKeywordsPredicate` class is modified to allow partial words.
-* `ShowCommand` class is modified to accept multiple predicate object.
-* `ShowCommandParser` class is modified to parser both task name and date.
+The `ShowCommand` class extends the `Command` class. It manages the showing of tasks specified by the user based on the week number or date provided. It contains a `String` representing its command word to be used by the parser, a `String` representing its usage to be displayed if used incorrectly, a `String` representing the successful deletion of a task, and a `List<Index>`, `targetIndexes`, which contains the indexes of all tasks to be deleted.
 
-Given below is a usage scenario of this feature using both name and date as inputs.
+The `execute` method in `DeleteCommand` overrides that in `Command`. In this implementation, it exemplifies defensive programming by ensuring the `model` provided is non-`null`. It then checks if the indexes provided by the user are valid for the current list shown, and continues only if they are all valid (between 1 and the total number of items in the task list). A `CommandException` is thrown in cases of invalid indexes. In the happy path, the tasks are deleted iteratively starting from the last index provided to the first, to prevent future deletions from operating on wrong indexes due to the task list updating itself in each iteration.
 
-Step 1. The user executes `add n/Math Quiz 5 d/2021-10-10 t/18:00 tg/Important` to add a task named Math Quiz 5 and with a deadline of 6pm, 10 October 2021.
+##### ShowCommandParser class
 
-Step 2. The user executes `add n/Math Assignment 2 d/2021-10-12 t/18:00 tg/Important` to add a task named Math Assignment 2 and with a deadline of 6pm, 12 October 2021.
+The `ShowCommandParser` class implements the `Parser<DeleteCommand>` interface. It manages the parsing of the arguments (index(es) in the case of a delete command) in the user input.
+The `parse` method in `ShowCommandParser` first converts the argument provided into a `List<Index>`. It then returns a `DeleteCommand` back to `UniFyParser`, initialized with the `List<Index>`.
 
-Step 3. The user executes `find Quiz` command to find all task with the name "Quiz".
+##### Usage Scenario
 
-Step 4. The user executes `find Math d/2021-10-10` command to find all Math task with a dateline of 10 October 2021.
+The following demonstrates a usage scenario where the user wants to delete the first, second and third item in her/his task list.
 
-Step 5. The user executes `list` command to view the full list of tasks.
+1. The method `execute("delete 1 2 3")` inside LogicManager calls the `parseCommand` method of `UniFyParser`.
+2. `parseCommand` in `UniFyParser` takes in the String "delete 1 2 3" as its parameter and initializes a `DeleteCommandParser` object.
+3. It then calls the `parse` method in `DeleteCommandParser` to parse the string `"1 2 3"`.
+4. A `DeleteCommand` object will be initialized, taking in the list of parsed indexes `List<Index>`, in this case containing three `Index` `1`, `2` and `3`.
+5. The method call then returns to `LogicManager`, which calls the `execute` method of `DeleteCommand`.
+6. By using a `Set`, the `DeleteCommand` checks for duplicate indexes in its `execute` method.
+7. If no errors are found, the `deleteTask` method under `Model` is called three times, one for each index.
+    * Note that the tasks are deleted from the last `Index` to prevent future deletes operating on wrong tasks.
+8. A `CommandResult` object is created with the appropriate messages and returned to `LogicManager`.
 
-The sequence diagram below illustrates the interaction between Logic and Model components when the user executes `find Math d/2021-10-10` command as in Step 4.
 
-![FindSequenceDiagram](images/FindSequenceDiagram.png)
+The sequence diagram below illustrates the interactions within `LogicManager` for the usage scenario.
+![DeleteMultipleSequenceDiagram](images/DeleteMultipleSequenceDiagram.png)
 
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Note on sequence diagram:**<br>
-
-* The lifeline for `findCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of the diagram.
-
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
-
-In the **Logic** Component, when user inputs `find Math d/2021-10-10`, these are the key methods invoked:
-* `LogicManager#execute("find Math d/2021-10-10")`: The `LogicManager` takes in the command text string ("find Math d/2021-10-10").
-* `UniFyParser#parseCommand("find")`: The `UniFyParser` parses the users' input and recognizes the command word, "find", and a `FindCommand` is created.
-* `FindCommand#execute(model)`: The `FindCommand` uses the `updateFilteredTaskList` method of `Model` to update the displayed patient list and returns a `CommandResult` object which represents the result of a
-  command execution.
-
-In the **Model** Component, This is the key method invoked:
-* `Model#updateFilteredTaskList(predicate)`: `Model` uses this method to update the displayed patients list.
-
-The following activity diagram summarizes what happens when the user inputs a find command.
-![FindActivityDiagram](images/FindActivityDiagram.png)
 
 #### 3.3.2 Design Consideration
 
-##### Aspect: What to use as reference to find the task?
+##### Aspect: Reference to use to delete tasks
 
-* **Alternative 1 (current choice):** Allow users to enter task name with date.
-    * Pros: Easier for users to find the task if they know the task name and what date the task in on.
-    * Cons: Harder to implement because multiple predicates have to be used.
+* **Alternative 1 (current choice):** Allow users to delete tasks using task id.
+    * Pros: Short and really quick for users to type
+    * Cons: If list is long, users might have to spend time scrolling to find task id before deletion
 
-* **Alternative 2:** Users can only enter name
-    * Pros: Easy to implement, and only one predicate is required.
-    * Cons: Inconvenient for users if they have recurring task on different dates.
+* **Alternative 2:** Allows users to delete tasks by task name
+    * Pros: Tasks sharing task name can be easily deleted together (e.g. user can delete every assignment in Uni-Fy by typing `delete assignment`)
+    * Cons: Might result in collateral deletion accidentally; Takes much longer to input
+
+Due to the repercussions of Alternative 2 and the efficiency of Alternative 1, we have decided to adopt Alternative 1 as our current implementation.
 
 ### 3.4 Find task feature
 

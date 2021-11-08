@@ -318,7 +318,7 @@ Shows a list of all tasks in the task list.
 
 After running the list command, the tasks in that given week are listed as shown below:
 
-![find_command_after](images/listCommand.png)
+![list_comman](images/listCommand.png)
 
 ### 4.7 Showing Tasks: `show`
 
@@ -355,7 +355,7 @@ Show all tasks that have been added to the app in a specific week.
 
 After running the show command, the tasks in that given week are shown in the display window as shown below:
 
-![find_command_after](images/showCommandAfter.png)
+![show_command_after](images/showCommandAfter.png)
 
 
 ### 4.8 Sorting the tasks : `sort`
