@@ -26,12 +26,7 @@
                 </Label>
                 <Label fx:id="lessonName" text="\$first" styleClass="cell_big_label" wrapText="true"/>
             </HBox>
-            <HBox spacing="5" alignment="CENTER_LEFT">
-                <padding>
-                    <Insets bottom="0" left="24" right="0" top="0" />
-                </padding>
-                <Label fx:id="timing" text="\$first" styleClass="cell_big_label" wrapText="true"/>
-            </HBox>
+            <Label fx:id="timing" text="\$first" styleClass="cell_big_label" wrapText="true"/>
         </VBox>
     </GridPane>
 </HBox>
