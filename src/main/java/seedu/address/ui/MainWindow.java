@@ -172,6 +172,11 @@ public class MainWindow extends UiPart<Stage> {
         initKeyPressEventHandler(commandBox);
     }
 
+    /**
+     * initialise {@code CommandBox} key press event handlers.
+     *
+     * @param commandBox The {@code MainWindow}'s {@code CommandBox}
+     */
     private void initKeyPressEventHandler(CommandBox commandBox) {
         // Add handler to request focus on commandBox when user wants to type
         getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
@@ -212,8 +217,10 @@ public class MainWindow extends UiPart<Stage> {
                 || isPunctuationKey(keyCode);
     }
 
+    /**
+     * Initialis {@code MainWindow} listeners
+     */
     private void initListeners() {
-        // Add listeners
         ListView<Person> personListView = centerPanel.getPersonListView();
         personListView.getSelectionModel().selectedItemProperty()
                 .addListener((obs, oldVal, newVal) -> {

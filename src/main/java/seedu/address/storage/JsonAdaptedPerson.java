@@ -104,7 +104,7 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        checkNullFields();
+        checkNullFields(); // This comes first always!
         checkContactFields();
 
         final List<Tag> personTags = new ArrayList<>();
@@ -180,12 +180,24 @@ class JsonAdaptedPerson {
         return new Phone(strippedPhone);
     }
 
+    /**
+     * Checks that at least once contact field is not blank.
+     * !!! You should check that these fields are not null first with {@code checkNullFields} !!!
+     *
+     * @throws IllegalValueException If all contact fields are blank.
+     */
     private void checkContactFields() throws IllegalValueException {
         if (phone.isBlank() && parentPhone.isBlank() && email.isBlank() && parentEmail.isBlank()) {
             throw new IllegalValueException(MESSAGE_MISSING_CONTACT);
         }
     }
 
+    /**
+     * Check if any person field is null, which means that the JSON isn't valid.
+     * !!! Make this check before doing anything else in {@code toModelType} !!!
+     *
+     * @throws IllegalValueException If any person field is null.
+     */
     private void checkNullFields() throws IllegalValueException {
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
