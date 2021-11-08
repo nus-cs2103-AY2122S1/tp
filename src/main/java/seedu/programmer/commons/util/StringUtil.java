@@ -20,8 +20,10 @@ public class StringUtil {
      *       containsPhraseIgnoreCase("ABc def", "AB") == true
      *       containsPhraseIgnoreCase("ABc def", "ABcdef") == false // not a full char sequence match
      *       </pre>
-     * @param sentence cannot be null
-     * @param phrase cannot be null, cannot be empty, need not be a single word
+     *
+     * @param sentence cannot be null.
+     * @param phrase cannot be null, cannot be empty, need not be a single word.
+     * @return true if the {@code phrase} is contained in the {@code sentence}.
      */
     public static boolean containsPhraseIgnoreCase(String sentence, String phrase) {
         requireNonNull(sentence);
@@ -46,10 +48,12 @@ public class StringUtil {
     }
 
     /**
-     * Returns true if {@code s} represents a non-zero unsigned integer
-     * e.g. 1, 2, 3, ..., {@code Integer.MAX_VALUE} <br>
-     * Will return false for any other non-null string input
-     * e.g. empty string, "-1", "0", "+1", and " 2 " (untrimmed), "3 0" (contains whitespace), "1 a" (contains letters)
+     * Returns true if {@code s} represents a non-zero unsigned integer.
+     * e.g. 1, 2, 3, ..., {@code Integer.MAX_VALUE}. <br>
+     * Will return false for any other non-null string input.
+     * e.g. empty string, "-1", "0", "+1", and " 2 " (untrimmed), "3 0" (contains whitespace), "1 a" (contains letters).
+     *
+     * @param s The String to be checked if it is a non-zero unsigned integer.
      * @throws NullPointerException if {@code s} is null.
      */
     public static boolean isNonZeroUnsignedInteger(String s) {

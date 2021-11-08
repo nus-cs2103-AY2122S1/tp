@@ -1,6 +1,5 @@
 @startuml
 !include ../style.puml
-actor User
 
 box UI UI_COLOR_T1
 participant "CommandBox" as CommandBox UI_COLOR
@@ -14,7 +13,7 @@ participant "s:ShowCommand" as ShowCommand LOGIC_COLOR
 participant ":ShowCommandResult" as ShowCommandResult LOGIC_COLOR
 end box
 
-User -> CommandBox : "show 1"
+[-> CommandBox : "show 1"
 activate CommandBox
 
 CommandBox -> LogicManager:execute("show 1")
@@ -62,13 +61,13 @@ activate ShowCommandResult
 ShowCommandResult --> ShowCommand
 deactivate ShowCommandResult
 
-ShowCommand --> LogicManager : showCommandResult(feedback, studentToShow)
+ShowCommand --> LogicManager : showCommandResult(feedback, std)
 deactivate ShowCommand
 
-LogicManager --> CommandBox : showCommandResult(feedback, studentToShow)
+LogicManager --> CommandBox : showCommandResult(feedback, std)
 deactivate LogicManager
 activate CommandBox
-CommandBox -> User
+[<--CommandBox
 
 
 @enduml

@@ -5,7 +5,7 @@ import static seedu.programmer.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Student's ID in the ProgrammerError.
- * Guarantees: immutable; is valid as declared in {@link #isValidStudentId(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidStudentId(String)}.
  */
 public class StudentId {
 
@@ -14,15 +14,15 @@ public class StudentId {
             + "and Y is the last alphabet of your student ID."
             + "\nFor example: A0212345T";
 
-    /*
-     * A student ID must start and end with an alphabet, and has exactly 7 numbers between the two letters
+    /**
+     * A student ID must start and end with an alphabet, and has exactly 7 numbers between the two letters.
      */
     private static final String VALIDATION_REGEX = "[A-Z][0-9]{7}[A-Z]";
 
     private final String studentId;
 
     /**
-     * Constructs a {@code StudentId}.
+     * Class constructor for a {@code StudentId}.
      *
      * @param studentId A valid studentId.
      */
@@ -34,6 +34,9 @@ public class StudentId {
 
     /**
      * Returns true if a given string is a valid StudentId.
+     *
+     * @param test The String to be tested against.
+     * @return true if the String is a valid student ID.
      */
     public static boolean isValidStudentId(String test) {
         return test.matches(VALIDATION_REGEX);

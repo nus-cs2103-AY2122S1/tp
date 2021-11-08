@@ -43,12 +43,12 @@ public class EditLabCommand extends Command {
     private final Lab original;
 
     /**
-     * Constructor for EditLabCommand with original, newLabNum and total parameters.
+     * Class constructor with the original lab, the new lab number and the new total score.
      *
      * @param original the lab to be edited.
      * @param newLabNum the new lab number.
      * @param total the total score to be added.
-     * */
+     */
     public EditLabCommand(Lab original, LabNum newLabNum, LabTotal total) {
         requireNonNull(original);
         this.original = original;
@@ -56,11 +56,11 @@ public class EditLabCommand extends Command {
         this.total = total;
     }
     /**
-     * Constructor for EditLabCommand with original and total parameters.
+     * Class constructor with the original lab and the new total score.
      *
      * @param original the lab to be edited.
      * @param total the total score to be added.
-     * */
+     */
     public EditLabCommand(Lab original, LabTotal total) {
         requireNonNull(original);
         this.original = original;
@@ -69,11 +69,11 @@ public class EditLabCommand extends Command {
     }
 
     /**
-     * Constructor for EditLabCommand with original and newLabNum parameters.
+     * Class constructor with the original lab and the new lab number.
      *
      * @param original the lab to be edited.
      * @param newLabNum the new lab number
-     * */
+     */
     public EditLabCommand(Lab original, LabNum newLabNum) {
         requireNonNull(original);
         this.original = original;

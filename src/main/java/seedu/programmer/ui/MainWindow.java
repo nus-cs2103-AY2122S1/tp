@@ -40,12 +40,12 @@ public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
     private static final String UPLOAD_SUCCESS_MESSAGE = "Upload success! All past students have been deleted. "
-                                                       + "You now have %s students.";
+            + "You now have %s students.";
     private static final String UPLOAD_FAIL_MESSAGE = "Upload failed: %s";
     private static final String DOWNLOAD_NO_DATA_MESSAGE = "No data to download!";
     private static final String DOWNLOAD_SUCCESS_MESSAGE = "Your data has been downloaded to %s !";
     private static final String UPLOAD_FAIL_NO_STUDENTS_MESSAGE = String.format(UPLOAD_FAIL_MESSAGE,
-                                                                                "No students found in your file!");
+            "No students found in your file!");
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
