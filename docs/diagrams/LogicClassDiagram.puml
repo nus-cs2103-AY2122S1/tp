@@ -47,4 +47,6 @@ Command .up.> CommandResult : produces >
 
 Command --> Memento
 History --> Command
+History -[hidden]left-> Memento
+History -[hidden]down-> XYZCommand
 @enduml

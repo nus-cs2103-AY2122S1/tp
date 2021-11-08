@@ -18,23 +18,24 @@ Class ReadOnlyUserPrefs
 
 Class UniqueApplicantList
 Class Applicant
-Class Address
 Class Email
 Class Name
 Class Phone
-Class Tag
+Class Address
+Class Application
+Class ProfileUrl
 
 }
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
 ApplicantBook .up.|> ReadOnlyApplicantBook
-
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyApplicantBook
 ModelManager -left-> "1" ApplicantBook
 ModelManager -right-> "1" UserPrefs
+
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 ApplicantBook *--> "1" UniqueApplicantList
@@ -43,7 +44,8 @@ Applicant *--> Name
 Applicant *--> Phone
 Applicant *--> Email
 Applicant *--> Address
-Applicant *--> "*" Tag
+Applicant *--> Application
+Applicant *--> ProfileUrl
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
