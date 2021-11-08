@@ -417,12 +417,16 @@ Suppose you had the following order list with four orders:
 <figcaption align = "center">In the figure above, SalesNote displays the Orders in the sequence they were added. So
 Order 1 was added first, and Order 4 was added last.</figcaption>
 
+<br>
+
 Executing `sortorders f/amount o/asc` sorts the list in ascending order, by their amounts, giving:
 
 ![sortorders2](images/sortorders2.png)
 
 <figcaption align = "center">Notice that Order 2 and Order 3 are tied with the same amount. Thus Order 2 is displayed
 first, since it was added earlier then Order 3.</figcaption>
+
+<br>
 
 The possible combinations give the following outcomes:
 * `sortorders f/date o/descending` sorts your orders in descending order of date (orders with later dates shown first).
