@@ -6,7 +6,7 @@ parent: The Team
 
 ### Project: BogoBogo
 
-BogoBogo is a desktop inventory management application developed for learning Software Engineering principles. The user
+BogoBogo is a desktop inventory management application developed for small business owners. The user
 interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
 
 Given below are my contributions to the project.
@@ -29,6 +29,7 @@ Given below are my contributions to the project.
       the order system interaction more complete and powerful.
 
 * **Functional Code**: Added commands to enable order related operations.
+    * Implemented `sorder`, `iorder`, `corder`, and `eorder` commands and their parsers.
     * What it does: allows the `Ui` component to parse user commands of order operations and activates the `Model`
       and `Storage` components to execute the operations and update the internal states.
 
@@ -57,7 +58,7 @@ Given below are my contributions to the project.
         * Refined and updated class diagrams to make them more and clean and
           readable [\#178](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/178/files?authenticity_token=cnwcniV%2B3SlxviaiSsFhbzbBAYOnwhmeY2huI3o3cGoSb8zemdrQDT4cW%2B9c4lGKPdVT4ZxW%2BANMgfyP%2FE269A%3D%3D&file-filters%5B%5D=.png)
         * Drew object diagrams for Observer pattern. [\#184](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/184)
-        * Drafted the Effort appendix.
+        * Drafted the Effort appendix. [\#212](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/212)
 * **Manual Testing**:
    * System Testing:
         * Tested all commands with positive and negative EP cases.
