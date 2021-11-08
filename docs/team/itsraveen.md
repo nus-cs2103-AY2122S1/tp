@@ -5,6 +5,8 @@ title: Raveen's Project Portfolio Page
 
 ### Project: tApp
 
+tApp is a desktop app for managing tutorial groups and personal tasks, optimized for use via a Command Line Interface (CLI). It has a GUI created with JavaFX. It is written in Java, and has about 15 kLoC.
+
 Given below are my contributions to the project.
 
 * **Code contributed:** [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=raveen)
