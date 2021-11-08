@@ -13,10 +13,10 @@ participant ":Model" as Model MODEL_COLOR
 end box
 
 [-> LogicManager : execute("download")
-activate LogicManager
+
 
 LogicManager -> SiasaParser : parseCommand("download")
-activate SiasaParser
+
 
 create DownloadCommand
 SiasaParser -> DownloadCommand
@@ -26,40 +26,23 @@ DownloadCommand --> SiasaParser : d
 deactivate DownloadCommand
 
 SiasaParser --> LogicManager : d
-deactivate SiasaParser
+
 
 LogicManager -> DownloadCommand : execute()
-activate DownloadCommand
 
-DownloadCommand -> Model : getTotalCommission()
-activate Model
-
-Model --> DownloadCommand : total commission
-deactivate Model
 
 DownloadCommand -> Model : getNumberPoliciesPerContact()
-activate Model
 
-Model --> DownloadCommand : numberPoliciesPerContact
-deactivate Model
 
 DownloadCommand -> Model : getCommissionPerContact()
-activate Model
 
-Model --> DownloadCommand : commissionPerContact
-deactivate Model
+DownloadCommand -> DownloadCommand : build string list for commission per contact
 
-DownloadCommand -> DownloadCommand : stringListBuilderForTxt(totalCommission, \n commissionPerContact, numberPoliciesPerContact)
-activate DownloadCommand
+DownloadCommand -> DownloadCommand : build string list for number \n of policies per contact
 
-DownloadCommand --> DownloadCommand : listStringForTxt
-deactivate DownloadCommand
+DownloadCommand -> DownloadCommand : write commission per contact to CSV
 
-DownloadCommand -> DownloadCommand : writeToTxt(listStringForTxt)
-activate DownloadCommand
-
-DownloadCommand --> DownloadCommand
-deactivate DownloadCommand
+DownloadCommand -> DownloadCommand : write number of policies per contact to CSV
 
 create CommandResult
 DownloadCommand -> CommandResult
@@ -68,9 +51,9 @@ activate CommandResult
 CommandResult --> DownloadCommand
 deactivate CommandResult
 
-DownloadCommand --> LogicManager : result
-deactivate DownloadCommand
+DownloadCommand --> LogicManager : command result
+
 
 [<--LogicManager
-deactivate LogicManager
+destroy DownloadCommand
 @enduml

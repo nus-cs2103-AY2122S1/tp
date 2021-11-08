@@ -285,16 +285,14 @@ Given below is an example usage scenario and how the mechanism behaves at each s
 
 ### Download Command
 
-This section explains the mechanism behind ```DownloadCommand``` used to download a TXT file containing useful statistics. These include:
-- total commission
+This section explains the mechanism behind ```DownloadCommand``` used to download CSV files containing useful statistics. These include:
 - commission earned per contact
 - number of policies per contact,
-- the average number of policies per contact
 
 The command requires no parameters. ```DownloadCommand``` implements ```DownloadCommand#execute```, that calls
-the relevant methods in ```Model``` to obtain the various statistics. The method ```DownloadCommand#stringListBuilderForTxt```
-is then invoked, to convert the statistics information as a list of strings. The list of strings is then written to
-the file via ```DownloadCommand#writeToTxt```.
+the relevant methods in ```Model``` to obtain the various statistics. The methods ```DownloadCommand#commissionStringListBuilder```
+and ```DownloadCommand#noPoliciesStringListBuilder``` are then invoked, to convert the statistics information as a list of strings. The list of strings is then written to
+the file via ```DownloadCommand#writeToCsv```.
 
 This is the sequence diagram of the interactions between ```Logic``` and ```Model``` component for the command.
 

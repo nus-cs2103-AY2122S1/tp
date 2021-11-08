@@ -38,8 +38,8 @@ public class DownloadCommand extends Command {
         List<String> listStringNoPolicies = noPoliciesStringListBuilder(numberPoliciesPerContact, NO_POLICIES_HEADER);
 
         try {
-            writeToTxt(listStringCommission, COMMISSION_FILEPATH);
-            writeToTxt(listStringNoPolicies, NO_POLICIES_FILEPATH);
+            writeToCsv(listStringCommission, COMMISSION_FILEPATH);
+            writeToCsv(listStringNoPolicies, NO_POLICIES_FILEPATH);
         } catch (IOException e) {
             throw new CommandException(MESSAGE_ERROR_WRITING_FILE);
         }
@@ -73,7 +73,7 @@ public class DownloadCommand extends Command {
         return stringList;
     }
 
-    private void writeToTxt(List<String> stringList, String filePath) throws IOException {
+    private void writeToCsv(List<String> stringList, String filePath) throws IOException {
         Path pathToFile = Paths.get(".", filePath);
         FileUtil.createIfMissing(pathToFile);
         StringBuilder stats = new StringBuilder();

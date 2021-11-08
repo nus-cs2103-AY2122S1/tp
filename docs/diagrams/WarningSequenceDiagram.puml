@@ -38,6 +38,7 @@ deactivate WarningWindow
 MainWindow --> Warning : user response
 deactivate MainWindow
 
+destroy WarningWindow
 Warning --> Command : user response
 deactivate Warning
 

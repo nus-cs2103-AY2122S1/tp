@@ -24,7 +24,7 @@ Given below are my contributions to the project.
     * Justification: This feature will be useful for busy student financial advisors, as it provides a summary of their clients and their sales performance. The CSV
       data is also convenient as it can be used in other applications like spreadsheets.
 
-* **Code contributed**: [RepoSense link]https://nus-cs2103-ay2122s1.github.io/tp-dashboard/#breakdown=true&search=zhuoyang125)
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=zhuoyang125&sort=groupTitle&sortWithin=title&since=2021-09-17&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=zhuoyang125&tabRepo=AY2122S1-CS2103-F10-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
 
 * **Project management**:
     * Managed releases `v1.2`, `v1.3` (2 releases) on GitHub
@@ -45,5 +45,5 @@ Given below are my contributions to the project.
           to explain how the feature works.
 
 * **Community**:
-    * PRs reviewed (with non-trivial review comments): PR [\#60](https://github.com/AY2122S1-CS2103-F10-4/tp/pull/60
+    * PRs reviewed (with non-trivial review comments): PR [\#60](https://github.com/AY2122S1-CS2103-F10-4/tp/pull/60)
     * Reported bugs and suggestions for other teams in the class, which can be found [here](https://github.com/zhuoyang125/ped/issues)
