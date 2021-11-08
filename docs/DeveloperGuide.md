@@ -1153,7 +1153,7 @@ testers are expected to do more *exploratory* testing.
 --------------------------------------------------------------------------------------------------------------------
   
 ## <a name="Appendix Effort"></a> **9. Appendix: Effort**
-The following is a non-exhaustive list of challenges we encountered during the development of ProgrammerError:
+  * The following is a non-exhaustive list of challenges we encountered during the development of ProgrammerError:
 
 ### <a name="Rewriting the Command Syntax"></a>9.1 Rewriting the Command Syntax
   * This was challenging as it required a nuanced understanding of how CLI syntax is constructed and following standard conventions. 
