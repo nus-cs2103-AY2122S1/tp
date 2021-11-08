@@ -33,7 +33,9 @@ public class DeleteCommand extends Command {
             + "INDEX (must be a positive integer less than or equal to " + Integer.MAX_VALUE + ") "
             + PREFIX_TASK_INDEX + "TASKINDEX (must be a positive integer less than or equal to "
             + Integer.MAX_VALUE + ")\n"
-            + "Example: " + COMMAND_WORD + " 1" + PREFIX_TASK_INDEX + "2\n";
+            + "Example: " + COMMAND_WORD + " 1" + PREFIX_TASK_INDEX + "2\n"
+            + "Usage 3: Deletes all contacts in ContactSH. \n"
+            + "Example: rm -A\n";
 
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";

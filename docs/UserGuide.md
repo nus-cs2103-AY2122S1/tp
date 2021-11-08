@@ -46,7 +46,7 @@ to quickly navigate to the command of your choice.
 * [Archiving data files `[coming in v2.0]`](#archiving-data-files-coming-in-v20)
 
 [FAQ](#faq)<br>
-[Command Summary](#command-summary)
+[Command Summary](#command-summary)<br>
 [Flag summary](#flag-summary)
 
 ---
@@ -55,14 +55,14 @@ to quickly navigate to the command of your choice.
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `ContactSH.jar` from [here](https://github.com/AY2122S1-CS2103T-W10-1/tp/releases).
+2. Download the latest `ContactSH.jar` from [here](https://github.com/AY2122S1-CS2103T-W10-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your ContactSH.
+3. Copy the file to the folder you want to use as the _home folder_ for your ContactSH.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`man`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`man`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * **`ls`** : Lists all contacts.
@@ -70,9 +70,9 @@ to quickly navigate to the command of your choice.
    * **`rm 3`** : Deletes the 3rd contact shown in the current list.
    * **`rm -A`** : Deletes all contacts.
 
+6. Refer to the [Features](#features) below for details of each command.
 
-1. Refer to the [Features](#features) below for details of each command.
-
+7. Refer to the [Flag Summary Table](#flag-summary) below for details on the flags used in the commands.
 ---
 
 ## Features
@@ -82,19 +82,19 @@ to quickly navigate to the command of your choice.
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by you.<br>
-  e.g. in `add -n NAME`, `NAME` is a parameter to be specified: `add -n John Doe`.
+  e.g. in `add -nNAME`, `NAME` is a parameter to be specified: `add -nJohn Doe`.
 
 * Items in square brackets are optional parameters.<br>
-  e.g `-n NAME [-l LABEL]` can be specified as `-n John Doe -l friend` or `-n John Doe`.
+  e.g `-nNAME [-lLABEL]` can be specified as `-nJohn Doe -lfriend` or `-nJohn Doe`.
 
 * Items with `…`​ after them can be specified multiple times including zero times.<br>
-  e.g. `[-l LABEL]…​` can be specified as `` (i.e. 0 times), `-l friend`, `-l friend -l family` etc.
+  e.g. `[-lLABEL]…​` can be specified as `` (i.e. 0 times), `-lfriend`, `-lfriend -lfamily` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command format is `-n NAME -p PHONE_NUMBER`, `-p PHONE_NUMBER -n NAME` is also acceptable.
+  e.g. if the command format is `-nNAME -pPHONE_NUMBER`, `-pPHONE_NUMBER -nNAME` is also acceptable.
 
 * If a parameter is expected only once in the command format, but you specified it multiple times, only the last occurrence of the parameter will be accepted.<br>
-  e.g. if you specify `-p 12341234 -p 56785678`, only `-p 56785678` will be accepted.<br> There are a few exceptions to this which are the find command and the cat command. In such cases, if a parameter is expected only once and there are more than one standalone flag, the words after the first flag will be taken as keywords.
+  e.g. if you specify `-p12341234 -p56785678`, only `-p56785678` will be accepted.<br> There are a few exceptions to this which are the find command and the cat command. In such cases, if a parameter is expected only once and there are more than one standalone flag, the words after the first flag will be taken as keywords.
 
 * Extraneous parameters for commands that do not take in parameters (such as `ls`, `exit` and `clear`) will be ignored.<br>
   e.g. if you specify `ls 123`, the command will be interpreted as `ls`.
@@ -109,9 +109,9 @@ Format: `man [COMMAND_NAME]`
 
 Notes:
 
-* If no `[COMMAND_NAME]` is entered, you will see a table of instructions, in a new window, that can be used to navigate the app.
+* If no `COMMAND_NAME` is entered, you will see a table of instructions, in a new window, that can be used to navigate the app.
 
-* If you enter a valid `[COMMAND_NAME]`, you will see the details of that command, which includes the format and taskName of the command.
+* If you enter a valid `COMMAND_NAME`, you will see the details of that command, which includes the format and taskName of the command.
 
 Examples:
 * `man sort` Shows the full details of `sort` command as below.
@@ -283,12 +283,6 @@ Examples:
 * `rm 2 -ti2` Deletes the 2nd task attached to the 2nd person listed.
 * `rm 1 -ti2 -ti3` Deletes the 2nd and 3rd task attached to the 1st person listed.
 
-### Viewing tasks: `cat`
-
-Displays a list of tasks that has been attached to a specific person.
-
-Format: `cat INDEX`
-
 ### Viewing list of tasks of a person: `cat`
 
 Shows you a list of tasks that has been attached to a specific person.
@@ -394,6 +388,7 @@ Examples:
    * `DAYS` refer to the number of days prior to a task's date.
      The day **must be a positive integer less than or equal to 2147483647:** 1, 2, 3, …​, 2147483647
    * All tasks share the same number of days before it is considered as due soon.
+   * A space is **necessary** between the flag and `DAYS`.
 
    Example:
 
@@ -458,7 +453,7 @@ Action | Format, Examples
 **List** | `ls`
 **Sort** | `sort [-r]`
 **Help** | `man`
-**Add Task** | `add INDEX -tnTASKNAME` <br> e.g., `add 2 -tnCelebrate $1 million revenue -tnContact Professor to get help`
+**Add Task** | `add INDEX -tnTASK_NAME [-tdTASK_DATE] [-ttTASK_TIME] [-taTASK_ADDRESS]` <br> e.g., `add 2 -tnCelebrate $1 million revenue -tnContact Professor to get help`
 **Delete Task** | `rm INDEX -tiTASK_INDEX` <br> e.g., `rm 2 -ti2 -ti3`
 **Edit Task** | `edit INDEX -tiTASK_INDEX [-tnTASK_NAME] [-tdTASK_DATE] [-ttTASK_TIME] [-taTASK_ADDRESS]` <br> e.g., `edit 1 -ti2 -tnInternship Interview -tt15:45`
 **Mark Task Done** | `donetask INDEX -tiTASK_INDEX…​` <br> e.g., `donetask 3 -ti2 -ti5`
