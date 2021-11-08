@@ -22,13 +22,16 @@ Given below are my contributions to the project.
   
 * **Enhancements to existing features**:
   * Added `Employment Type` category and integrated it for `add`, `edit` and `find`: 
-  [\#67](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/67)
+  [\#67](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/67),
+  [\#432](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/432)
   
   * Wrote tests for `EmploymentType` category:
   [\#67](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/67),
-  [\#83](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/83),
   [\#124](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/124),
-  [\#131](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/131)
+
+  * Wrote tests for `EmploymentTypeContainsKeywordPredicate`:
+   [\#83](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/83),
+   [\#131](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/131)
   
   * Wrote tests for `Phone` category for `find` command:
   [\#126](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/126)
@@ -44,8 +47,6 @@ Given below are my contributions to the project.
         [\#233](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/233)
         * Added documentation for notes for `find` feature:
         [\#214](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/214) 
-        * Added documentation for `filter_interview` feature:
-        [\#233](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/233)
         * Added documentation for employment type category:
         [\#125](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/125)
         * Updated documentation for `help`, `edit`, `add` and `list` features:
