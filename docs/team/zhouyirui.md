@@ -44,4 +44,5 @@ Given below are my contributions to the project.
     * Developers Guide:
         * Added documentations for the features `classCode`. PR: [\#134](https://github.com/AY2122S1-CS2103T-W15-1/tp/pull/134)
         * Added documentations for the features `addsg` and `deletesg`.
+        * Added Use case for Adding Student to Tutorial Group.
    
