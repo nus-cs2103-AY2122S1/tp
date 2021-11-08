@@ -1156,7 +1156,7 @@ testers are expected to do more *exploratory* testing.
       in the event and participant lists respectively. The participant should not be already enrolled in the event.
    2. Test case: `enroll 1 1`<br>
       Expected: First participant in the participant list is enrolled into the first event in the event list. Details of action
-      shown in the status message.
+      are shown in the status message.
 
 ### Removing a participant from an event
 
@@ -1165,8 +1165,8 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisite: All events and participants listed using `listEvents` and `list` commands respectively. At least one event and one participant
       in the event and participant lists respectively. The participant should be already enrolled in the event.
    2. Test case: `expel 1 1`<br>
-      Expected: First participant in the participant list is expelled from the first event in the event list. Details of action
-      shown in the status message.
+      Expected: The first participant in the participant list is expelled from the first event in the event list. Details of the action
+      are shown in the status message.
 
 ### Showing an event’s participants
 
@@ -1175,7 +1175,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisite: All events listed using the `listEvents` command. At least one event in the event list. There should be at least
       one participant enrolled in the event.
    2. Test case: `showParticipants 1`<br>
-      Expected: List of participants in the event is shown in the status message.
+      Expected: The list of participants in the event is shown in the status message.
 
 ### Saving data
 
