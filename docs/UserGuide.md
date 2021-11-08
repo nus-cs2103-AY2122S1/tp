@@ -132,7 +132,7 @@ Formatting Item|Description
 **Bold** | Emphasizes key points
 _Italics_ | Examples to complement descrptions
 [Blue Words]() | Links to relevant information
-`Code Block` | [Commands](#staffd-commands), Command [Parameters](#glossary), or Command Examples
+`Code Block` | [Commands](#staffd-commands), Command [Parameters](#glossary):mag:, or Command Examples
 :information_source: | Extra Information or Usage Examples
 :exclamation: | Important information
 :triangular_flag_on_post: | Links to [Flag Legend](#flag-legend):triangular_flag_on_post:
@@ -159,11 +159,11 @@ The following is an example of how a user can refer to the User Guide to **learn
 
 :information_source: Example User Guide Usage on **Adding a New Staff**
 <br>
-1. Let's say you want to learn more about how to use Staff'd, and thus you read the [Introduction](##introduction-to-staffd) and [Quick Start Guide](#quick-start) of the User Guide.
+1. Let's say you want to learn more about how to use Staff'd, and thus you read the [Introduction](#introduction-to-staffd) and [Quick Start Guide](#quick-start) of the User Guide.
 1. After opening the app, you want to know how to **add a staff member** into the Staff List. Hence, you refer to the [_**Add Staff Command**_](#adding-a-staff--add) section for more information.
 1. You now want to know how to **interpret the format of the command**, and thus you refer to the [**Staff'd Commands**](#staffd-commands) section for more information.
 1. You are  still unsure of what the **flags** in the command mean and refer to the [**Flag Legend**](#flag-legend):triangular_flag_on_post: for more information.
-1. After understanding the command and flags, you return to the [_Add Staff Command_](#adding-a-staff-add) section. You read through the description of the command and the extra important information on how to use the command.
+1. After understanding the command and flags, you return to the [_Add Staff Command_](#adding-a-staff--add) section. You read through the description of the command and the extra important information on how to use the command.
 1. For a clearer understanding on how to use the command, you can **read through the examples** provided.
 1. After fully understanding the command, you input the command into the command box of Staff'd, and check the result message in the output box.
   - If the command is successful, a success message will be displayed.
@@ -268,7 +268,7 @@ This **resets the displayed staff list** in both the staff view and schedule vie
 
 **Format:** `clear`
 
-**See Also:** [`setRoleReq` Command](#setting-role-requirements--setrolereq-)
+**See Also:** [`setRoleReq` Command](#setting-role-requirements--setrolereq)
 
 **Go to:**  
 [Table of Contents](#table-of-contents)
@@ -391,7 +391,7 @@ If your changes to the data file makes its format invalid, Staff'd will discard 
 
 **Deletes** all the specified staff from the Stafflist.
 
-* Requires exactly one of the following [fields](#fields-of-a-staff): `NAME`, `ROLE`, `STATUS`, `INDEX`.
+* Requires exactly one of the following [fields](#flag-legend):triangular_flag_on_post:: `NAME`, `ROLE`, `STATUS`, `INDEX`.
 * Deletes all the staff that have the provided field.
 
 **Formats:**  
@@ -418,7 +418,7 @@ If your changes to the data file makes its format invalid, Staff'd will discard 
 
 ### Finding staff : `find`
 
-**Searches for staff** by the input [fields](#fields-of-a-staff).
+**Searches for staff** by the input [fields](#flag-legend):triangular_flag_on_post:.
 
 Searches can be conducted by `Name`, `Index`, or other fields. The search also filters the [displayed Staff List](#glossary):mag: and schedule display to only display the staff that meet the requirements.
 
@@ -541,9 +541,9 @@ The format of the input date is in: `YYYY-MM-DD`.
 
 ### Adding a shift to a staff's schedule : `addShift`
 
-Adds a [shift](#flags-for-specific-fields) to a specified staff's schedule.
+Adds a [shift](#flag-legend):triangular_flag_on_post: to a specified staff's schedule.
 
-* Takes [0, 1, or 2 date inputs](#flags-for-specific-fields):triangular_flag_on_post:. Shifts would be added to all occurances in the period.
+* Takes [0, 1, or 2 date inputs](#flag-legend):triangular_flag_on_post:. Shifts would be added to all occurances in the period.
 * The start time and end time will be set to the [default shift timings](#glossary):mag:
 
 
@@ -572,10 +572,10 @@ Adds a [shift](#flags-for-specific-fields) to a specified staff's schedule.
 ### Swapping shifts : `swapShift`
 Swaps a shift between two staff.
 
-* The two staff are only identified using their [names](#flags-for-lookup). The name provided has to exactly match the name of the staff to swapped.
+* The two staff are only identified using their [names](#flag-legend). The name provided has to exactly match the name of the staff to swapped.
 * Takes [0, 1 or 2 date inputs](#flag-legend):triangular_flag: representing the period to swap.
 * The staff identified using the first name provided, is associated with the first shift. The staff identified using the second name provided, is associated with the second shift.
-* This command resets any changes in shift timing done using the [setShiftTime](#Updating-the-start-time-and-end-time-for-a-shift--setShiftTime) command.
+* This command resets any changes in shift timing done using the [setShiftTime](#updating-the-start-time-and-end-time-for-a-shift--setshifttime) command.
 
 **Formats:**  
 `swapShift -n NAME -n NAME d/DAYOFWEEK-SHIFT_NUMBER d/DAYOFWEEK-SHIFT_NUMBER [da/START_DATE] [da/END_DATE]`\
@@ -585,7 +585,7 @@ Swaps a shift between two staff.
 `swapShift -n Candice -n Bob d/monday-0 d/tuesday-1 da/2021-10-01`\
 `swapShift -n Candice d/monday-0 -n Bob d/tuesday-1`
 
-**See Also:** [`setShiftTime` Command](#updating-the-start-time-and-end-time-for-a-shift--setshiftTime)
+**See Also:** [`setShiftTime` Command](#updating-the-start-time-and-end-time-for-a-shift--setshifttime)
 
 **Go to:**  
 [Table of Contents](#table-of-contents)  
@@ -621,7 +621,7 @@ Deletes a shift from the staff's schedule.
 Finds all the staff working at a particular shift.
 
 * The shift can be specified by indicating the day of the week, and either the time or the slot number.
-* Takes [0, 1 or 2 date inputs](#flags-for-specific-fields):triangular_flag_on_post:. Only the first occurance of the shift in the period would be displayed.
+* Takes [0, 1 or 2 date inputs](#flag-legend):triangular_flag_on_post:. Only the first occurance of the shift in the period would be displayed.
 * If no date or day input is provided, the current shift is displayed along with a help message of the format of `viewShift`.
 * This command filters the [displayed Staff List](#glossary):mag: to only display the staff that are scheduled to work on the shift.
 * This command also filters the schedule display to show only the staff that have been assigned to work on the shift.
@@ -656,7 +656,7 @@ The change command changes the default period for shift-related commands, when n
 
 * This command also changes the days displayed in the [Schedule Display](#glossary):mag: in the schedule tab.
 * The default period is the next 7 days inclusive of today.
-* Takes only [1 date input](#flags-for-specific-fields):triangular_flag_on_post:, and displays the next 7 days, inclusive of the date provided.
+* Takes only [1 date input](#flag-legend):triangular_flag_on_post:, and displays the next 7 days, inclusive of the date provided.
 
 **Format:**  
 `change da/DATE`
@@ -675,7 +675,7 @@ The change command changes the default period for shift-related commands, when n
 Updates the start time and end time of a specific shift of a specific staff.
 
 * Time inputs should follow the requirements specified in the Flag Legend: [Shift Time](#flag-legend):triangular_flag_on_post:.
-* Takes [0, 1 or 2 date inputs](#flags-for-specific-fields):triangular_flag_on_post:. The specified shift times would be set for all occurances of the shift in the period would be displayed.
+* Takes [0, 1 or 2 date inputs](#flag-legend):triangular_flag_on_post:. The specified shift times would be set for all occurances of the shift in the period would be displayed.
 * If the shift does not exist in the staff's schedule, it will be added.
 
 **Formats:**  
@@ -731,7 +731,7 @@ Displays the staff statistics for all the staff: the total working hours and tot
 Action | Format, Examples
 --------|------------------
 [**Help**](#viewing-help--help) | `help`
-[**Tab**](#changing-tabs-tab) | `tab`
+[**Tab**](#changing-tabs--tab) | `tab`
 [**List**](#listing-all-staffs--list) | `list`
 [**Clear**](#clearing-all-entries--clear) | `clear`
 [**Set role requirements**](#setting-role-requirements--setrolereq) | `setRoleReq r/ROLE-NUMBER_REQUIRED...`
@@ -746,8 +746,8 @@ Action | Format, Examples
 [**Swap shifts**](#swapping-shifts--swapshift) | `swapShift -n NAME -n NAME d/day-shift_number d/day-shift_number [da/START_DATE] [da/END_DATE]` <br> `swapShift -n NAME d/day-shift_number -n NAME d/day-shift_number [da/START_DATE] [da/END_DATE]`
 [**Delete staff shift**](#deleting-a-shift-from-a-staff--deleteshift) | `deleteShift -n NAME d/DAY-SHIFTNUMBER [da/START_DATE] [da/END_DATE]` <br> `deleteShift -i INDEX d/DAY-SHIFTNUMBER [da/START_DATE] [da/END_DATE]`
 [**View shift**](#viewing-all-the-staff-working-a-shift--viewshift) | `viewShift -d DAY-SHIFTNUMBER [da/START_DATE] [da/END_DATE]` <br> `viewShift -ti DAY-HH:mm [da/START_DATE] [da/END_DATE]`
-[**Change schedule**](#viewing-schedule-for-the-week--change) | `change da/START_DATE`
-[**Set shift time**](#updating-the-start-time-and-end-time-for-a-shift--setshift-time) | `setShiftTime -n NAME d/DAYOFWEEK-SHIFTNUMBER st/hh:mm-hh:mm [da/START_DATE] [da/END_DATE]` <br> `setShiftTime -i INDEX d/DAYOFWEEK-SHIFTNUMBER st/hh:mm-hh:mm [da/START_DATE] [da/END_DATE]`
+[**Change schedule**](#viewing-schedule-for-the-week-change) | `change da/START_DATE`
+[**Set shift time**](#updating-the-start-time-and-end-time-for-a-shift--setshifttime) | `setShiftTime -n NAME d/DAYOFWEEK-SHIFTNUMBER st/hh:mm-hh:mm [da/START_DATE] [da/END_DATE]` <br> `setShiftTime -i INDEX d/DAYOFWEEK-SHIFTNUMBER st/hh:mm-hh:mm [da/START_DATE] [da/END_DATE]`
 [**Individual staff statistics**](#viewing-individual-staff-statistics--istaff) | `istaff [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-$ SALARY] [-s STATUS] [-r ROLE]...`
 [**Total staff statistics**](#viewing-overall-staff-statistics--stats) | `stats`
 
