@@ -250,7 +250,7 @@ Notes:
 Finds all contacts who match **ALL** name and tag keywords provided.  
 
 The commands `find` and `findAny` will filter the displayed contacts and only display the matching results.  
-![result for `find n/john`](images/findjohnResult.png)
+![result for `find n/alex t/football t/classmate`](images/findAlexfootballclassmatesResult.png)
 
 #### Format:
 * `find [c/] [n/NAME] …​ [t/TAG] …​`
