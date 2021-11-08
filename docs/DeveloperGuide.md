@@ -174,12 +174,12 @@ It then returns a `AddCommand` back to `UniFyParser`, initialized with the `Task
 
 ##### Usage Scenario
 
-The following demonstrates a usage scenario where the user wants to add a task with name CS2103, date 2021-10-10, time 23:59 (default time), priority level LOW(default priority level)) and tag test
+The following demonstrates a usage scenario where the user wants to add a task with name Test, date 2021-10-10, time 23:59 (default time), priority level LOW(default priority level)) and tag CS2103
 
-1. The method `execute("add n/CS2103 d/2021-10-10 tg/test")` inside LogicManager calls the `parseCommand` method of `UniFyParser`.
-2. `parseCommand` in `UniFyParser` takes in the String `"add n/CS2103 d/2021-10-10 tg/test"` as its parameter and initializes a `AddCommandParser` object.
-3. It then calls the `parse` method in `AddCommandParser` to parse the string `"n/CS2103 d/2021-10-10 tg/test"`.
-4. An `AddCommand` object will be initialized, taking in the `Task` with a `Name`, `Date`, `Time`, `Priority` and `Set<Tag>`, in this case containing `Name`: `CS2103`, `Date`: `2021-10-10`, `Time`: `23:59`, `Priority`: `LOW` and one tag in `Set<Tag>`: `test`.
+1. The method `execute("add n/Test d/2021-10-10 tg/CS2103")` inside LogicManager calls the `parseCommand` method of `UniFyParser`.
+2. `parseCommand` in `UniFyParser` takes in the String `"add n/Test d/2021-10-10 tg/CS2103"` as its parameter and initializes a `AddCommandParser` object.
+3. It then calls the `parse` method in `AddCommandParser` to parse the string `"n/Test d/2021-10-10 tg/CS2103"`.
+4. An `AddCommand` object will be initialized, taking in the `Task` with a `Name`, `Date`, `Time`, `Priority` and `Set<Tag>`, in this case containing `Name`: `Test`, `Date`: `2021-10-10`, `Time`: `23:59`, `Priority`: `LOW` and one tag in `Set<Tag>`: `CS2103`.
 5. The method call then returns to `LogicManager`, which calls the `execute` method of `AddCommand`.
 6. By using the `hasTask` method of the `Model` , the `AddCommand` checks for a duplicate task in its `execute` method.
 7. If no errors are found, the `addTask` method under `Model` is called.
@@ -571,14 +571,32 @@ testers are expected to do more *exploratory* testing.
 
    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+3. _{ more test cases …​ }_
+
+### Adding a task
+
+1. Deleting a task while all tasks are being shown
+
+    1. Prerequisites: List all tasks using the `list` command. At least one task in the list.
+
+    2. Test case: `add n/CS2103 d/2021-11-11 t/20:00 p/LOW tg/Important`<br>
+       Expected: Task is added to the list with the index being the length of the list. Details of the added task is shown in the status message.
+    3. Test case: `add n/CS2103 d/2021-11-11`<br>
+       Expected: Task is added with the default value of `23:59` for time and `LOW` for priority level and empty `Set<Tag>` for tags.Details of the added task is shown in the status message.
+
+    4. Test case: `add n/Task`<br>
+        Expected: No task is added. Error details for invalid command shown in the status message. Status bar remains the same.
+
+    5. Other incorrect delete commands to try: `add`, `add abcd`, `...`<br>
+        Expected: Similar to previous.
+
 
 ### Deleting a task
 
