@@ -29,7 +29,7 @@ activate e
 note over copy
 Defensive copy of desc created
 end note
-e -> copy ** : new EditTask\nDesciptor(desc)
+e -> copy ** : new EditTaskDescriptor(desc)
 activate copy
 return copy
 destroy ed
