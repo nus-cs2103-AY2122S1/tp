@@ -20,6 +20,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Description;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Importance;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -58,9 +59,9 @@ public class AddCommandParser implements Parser<Command> {
             List<Task> taskList = ParserUtil.parseTasks(argMultimap.getAllValues(PREFIX_TASK_DESCRIPTION));
             Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION)
                     .orElse(""));
-            Boolean isImportant = ParserUtil.parseImportance(argMultimap.getValue(PREFIX_IMPORTANCE)
+            Importance importance = ParserUtil.parseImportance(argMultimap.getValue(PREFIX_IMPORTANCE)
                     .orElse("false"));
-            Person person = new Person(name, phone, email, address, tagList, taskList, description, isImportant);
+            Person person = new Person(name, phone, email, address, tagList, taskList, description, importance);
 
             return new AddCommand(person);
         } else {

@@ -13,6 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Description;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Importance;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -142,7 +143,7 @@ class JsonAdaptedPerson {
             throw new IllegalValueException("isImportant should be boolean!");
         }
 
-        final Boolean modelImportance = Boolean.parseBoolean(isImportant);
+        final Importance modelImportance = new Importance(Boolean.parseBoolean(isImportant));
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelTasks, modelDescription,

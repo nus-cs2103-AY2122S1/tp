@@ -44,6 +44,7 @@ import seedu.address.logic.commands.ViewTaskListCommand;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Description;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Importance;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -185,7 +186,7 @@ public class HelpWindow extends AnchorPane {
     }
 
     // @@author kflim-reused
-    // Reused from https://github.com/greyguy21/ip/
+    // Reused from the 01/10/2021 version of https://github.com/greyguy21/ip/
     // with minor modifications
     private void setupColumns() {
         command.setCellValueFactory(
@@ -215,7 +216,7 @@ public class HelpWindow extends AnchorPane {
         Person samplePerson = new Person(
                 new Name("Amy Bee"), new Phone("123456789"), new Email("amy@gmail.com"),
                 new Address("123, Jurong West Ave 6, #08-111"), new HashSet<>(), new ArrayList<>(), new Description(""),
-                false
+                new Importance(false)
         );
         EditCommand.EditPersonDescriptor descriptor = new EditCommand.EditPersonDescriptor();
         descriptor.setName(samplePerson.getName());
@@ -223,7 +224,7 @@ public class HelpWindow extends AnchorPane {
         descriptor.setEmail(samplePerson.getEmail());
         descriptor.setAddress(samplePerson.getAddress());
         descriptor.setTags(samplePerson.getTags());
-        descriptor.setImportance(samplePerson.isImportant());
+        descriptor.setImportance(samplePerson.getImportance());
 
         EditTaskCommand.EditTaskDescriptor taskDescriptor = new EditTaskCommand.EditTaskDescriptor();
 

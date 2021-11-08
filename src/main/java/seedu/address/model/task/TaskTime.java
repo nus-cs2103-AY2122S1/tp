@@ -33,7 +33,8 @@ public class TaskTime {
      */
     public static boolean isValidTaskTime(String test) {
         try {
-            LocalTime.parse(test);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+            LocalTime.parse(test, formatter);
             return true;
         } catch (DateTimeParseException e) {
             return false;
@@ -43,7 +44,8 @@ public class TaskTime {
 
     @Override
     public String toString() {
-        return taskTime.format(DateTimeFormatter.ISO_LOCAL_TIME);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        return taskTime.format(formatter);
     }
 
     @Override

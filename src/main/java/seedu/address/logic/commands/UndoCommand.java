@@ -96,7 +96,7 @@ public class UndoCommand extends Command {
         return new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getTags(), tasks, personToEdit.getDescription(),
-                personToEdit.isImportant());
+                personToEdit.getImportance());
     }
 
     private int markTargetTasksAsNotDone(List<Task> tasks, List<Task> targetTasks) {
@@ -157,5 +157,4 @@ public class UndoCommand extends Command {
                 && targetPersonIndex.equals(((UndoCommand) other).targetPersonIndex)
                 && targetTaskIndexes.equals(((UndoCommand) other).targetTaskIndexes)); // state check
     }
-
 }

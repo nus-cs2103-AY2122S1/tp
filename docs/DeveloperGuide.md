@@ -245,11 +245,12 @@ As mentioned before, the caching feature utilises a different kind of command as
 explored in the design consideration section. Nonetheless, both command type are handled by the Logic unit almost
 exactly the same way.
 
-The diagram below shws the generation of the internal command in the GUI:
+The diagram below shows the generation of the internal command in the GUI:
 ![AccessingCacheSequenceDiagram](images/AccessingCacheSequenceDiagram.png)
 
 The cache, stored in the Model, is implemented using the Singleton design pattern as there should, at all times,
-be only one cache existing.
+be only one cache existing. A reset function is made for testing purposes. For this reason, cache is placed in it's own
+package to ensure that only the test class are able to reset it.
 
 #### Design Consideration
 ##### Aspect: Accessing cache
