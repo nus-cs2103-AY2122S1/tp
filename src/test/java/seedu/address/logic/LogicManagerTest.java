@@ -21,6 +21,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
@@ -35,6 +36,7 @@ import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
 import seedu.address.testutil.ClientBuilder;
+import seedu.address.ui.ThemeType;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");
@@ -95,6 +97,11 @@ public class LogicManagerTest {
     }
 
     @Test
+    public void getSortedClientList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getSortedNextMeetingList().remove(0));
+    }
+
+    @Test
     public void getFilteredClientList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredClientList().remove(0));
     }
@@ -102,6 +109,44 @@ public class LogicManagerTest {
     @Test
     public void getClientToView_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getClientToView().remove(0));
+    }
+
+    @Test
+    public void getFilteredTagList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredTagList().remove(0));
+    }
+
+    @Test
+    public void getThemeList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getThemeList().remove(0));
+    }
+
+    @Test
+    public void getGuiSettings_success() {
+        assertEquals(logic.getGuiSettings(), new ModelManager().getGuiSettings());
+    }
+
+    @Test
+    public void setGuiSettings_success() {
+        GuiSettings guiSettings = new GuiSettings();
+        logic.setGuiSettings(guiSettings);
+        ModelManager expectedModel = new ModelManager();
+        expectedModel.setGuiSettings(guiSettings);
+        assertEquals(logic.getGuiSettings(), expectedModel.getGuiSettings());
+    }
+
+    @Test
+    public void getTheme_success() {
+        assertEquals(logic.getTheme(), new ModelManager().getTheme());
+    }
+
+    @Test
+    public void setTheme_success() {
+        ThemeType theme = ThemeType.of("BookTheme").get();
+        logic.setTheme(theme);
+        ModelManager expectedModel = new ModelManager();
+        expectedModel.setTheme(theme);
+        assertEquals(logic.getTheme(), expectedModel.getTheme());
     }
 
     /**

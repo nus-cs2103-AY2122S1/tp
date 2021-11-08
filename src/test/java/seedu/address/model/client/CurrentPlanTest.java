@@ -1,5 +1,6 @@
 package seedu.address.model.client;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -35,5 +36,25 @@ public class CurrentPlanTest {
         assertTrue(CurrentPlan.isValidCurrentPlan("Prudential Proshield")); //Any string
         assertTrue(CurrentPlan.isValidCurrentPlan("-")); // one character
         assertTrue(CurrentPlan.isValidCurrentPlan("Prduential Long String Financial Plan")); // long string
+    }
+
+    @Test
+    public void equals() {
+        CurrentPlan john = new CurrentPlan("John St");
+        CurrentPlan otherJohn = new CurrentPlan("John St");
+        CurrentPlan jane = new CurrentPlan("Jane St");
+
+        // same object
+        assertTrue(john.equals(john));
+
+        // different object same plans
+        assertTrue(john.equals(otherJohn));
+        assertEquals(john.hashCode(), otherJohn.hashCode());
+
+        // different object different plans
+        assertFalse(john.equals(jane));
+
+        // different type
+        assertFalse(john.equals("john"));
     }
 }
