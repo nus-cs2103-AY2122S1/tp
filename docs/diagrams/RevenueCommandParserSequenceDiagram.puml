@@ -27,14 +27,14 @@ revenueCommandParser -[LOGIC_COLOR]> util :parseRevenue
 activate util LOGIC_COLOR
 
 create revenue
-util -[LOGIC_COLOR]-> revenue: Revenue(new Money(100.21))
+util -[LOGIC_COLOR]-> revenue: Revenue(new Money("100.21"))
 activate revenue MODEL_COLOR
 
 create money
-revenue -[LOGIC_COLOR]> money: Money(100.21)
+revenue -[LOGIC_COLOR]> money:
 activate money MODEL_COLOR
 
-money -[LOGIC_COLOR]-> revenue : Money
+money -[LOGIC_COLOR]-> revenue :
 deactivate money
 
 revenue -[MODEL_COLOR]-> util :revenue
