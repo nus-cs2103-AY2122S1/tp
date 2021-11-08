@@ -14,6 +14,9 @@ import safeforhall.logic.commands.exceptions.CommandException;
 import safeforhall.model.Model;
 import safeforhall.model.person.Person;
 
+/**
+ * Exports a list of email addresses of the last filtered list of residents as csv file
+ */
 public class ExportCommand extends Command {
 
     public static final String COMMAND_WORD = "export";
@@ -39,6 +42,15 @@ public class ExportCommand extends Command {
     }
 
     /**
+     * Constructs an ExportCommand for testing.
+     *
+     * @param filename filename of csv to be created.
+     */
+    public ExportCommand(String filepath, String filename) {
+        this.filename = filepath + filename + ".csv";
+    }
+
+    /**
      * Executes the command and returns the result message.
      *
      * @param model {@code Model} which the command should operate on.
@@ -54,6 +66,11 @@ public class ExportCommand extends Command {
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
+    /**
+     * Converts list of persons into arraylist of emails
+     * @param filteredList the list of persons
+     * @return arraylist of arrays each containing a email string
+     */
     public ArrayList<String[]> getEmailArr(List<Person> filteredList) {
         ArrayList<String[]> emailArray = new ArrayList<>();
         for (Person p : filteredList) {
